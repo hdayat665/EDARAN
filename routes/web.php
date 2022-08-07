@@ -2,6 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\Auth\LoginController;
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,6 +16,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+
+Route::controller(LoginController::class)->group(function () {
+    Route::get('/', 'loginView');
+    Route::get('/home', 'index');
+    Route::get('/loginView', 'loginView');
+    Route::get('/registerView', 'registerView');
+    Route::get('/verifiedView/{id}', 'verifiedView');
 });
