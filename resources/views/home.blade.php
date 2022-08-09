@@ -1,177 +1,386 @@
 @extends('layouts.master')
 
 @section('content')
-    <!-- Page header-->
-    <header class="masthead bg-dark">
-        <div class="container-xl px-5">
-            <div class="row justify-content-center gx-5">
-                <div class="col-md-8 col-lg-6">
-                    <div class="text-center py-10">
-                        <!-- Example brand image (inline SVG image)-->
-                        <svg class="mb-3" viewBox="0 0 527 527" style="enable-background: new 0 0 527 527; height: 2.5rem; width: 2.5rem" xml:space="preserve">
-                            <style type="text/css">
-                                .st0 {
-                                    fill: none;
-                                    stroke: currentColor;
-                                    stroke-width: 15;
-                                    stroke-miterlimit: 10;
-                                    enable-background: new;
-                                }
-                            </style>
-                            <rect class="st0" x="7.5" y="7.5" width="512" height="512"></rect>
-                            <g>
-                                <polygon class="st0" points="317.5,207.6 317.5,430.3 428.5,430.3 428.5,96.7"></polygon>
-                                <polygon class="st0" points="209.5,207.6 209.5,430.3 98.5,430.3 98.5,96.7"></polygon>
-                            </g>
-                        </svg>
-                        <!-- Masthead content-->
-                        <h1 class="masthead-heading mb-3 display-5">Build beautiful products, fast.</h1>
-                        <p>Build high-quality digital experiences with the world's most intuitive union between Bootstrap 5 and Material Design.</p>
-                        <a class="btn btn-masthead" href="#scrollTarget">Explore Demos</a>
-                    </div>
-                </div>
+<div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card ">
+          <div class="card-header card-header-success card-header-icon">
+            <div class="card-icon">
+              <i class="material-icons"></i>
             </div>
+            <h4 class="card-title">Global Sales by Top Locations</h4>
+          </div>
+          <div class="card-body ">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="table-responsive table-sales">
+                  <table class="table">
+                    <tbody>
+                      <tr>
+                        <td>
+                          <div class="flag">
+                            <img src="/public/img/flags/US.png" </div>
+                        </td>
+                        <td>USA</td>
+                        <td class="text-right">
+                          2.920
+                        </td>
+                        <td class="text-right">
+                          53.23%
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <div class="flag">
+                            <img src="/public/img/flags/DE.png" </div>
+                        </td>
+                        <td>Germany</td>
+                        <td class="text-right">
+                          1.300
+                        </td>
+                        <td class="text-right">
+                          20.43%
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <div class="flag">
+                            <img src="/public/img/flags/AU.png" </div>
+                        </td>
+                        <td>Australia</td>
+                        <td class="text-right">
+                          760
+                        </td>
+                        <td class="text-right">
+                          10.35%
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <div class="flag">
+                            <img src="/public/img/flags/GB.png" </div>
+                        </td>
+                        <td>United Kingdom</td>
+                        <td class="text-right">
+                          690
+                        </td>
+                        <td class="text-right">
+                          7.87%
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <div class="flag">
+                            <img src="/public/img/flags/RO.png" </div>
+                        </td>
+                        <td>Romania</td>
+                        <td class="text-right">
+                          600
+                        </td>
+                        <td class="text-right">
+                          5.94%
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <div class="flag">
+                            <img src="/public/img/flags/BR.png" </div>
+                        </td>
+                        <td>Brasil</td>
+                        <td class="text-right">
+                          550
+                        </td>
+                        <td class="text-right">
+                          4.34%
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="col-md-6 ml-auto mr-auto">
+                <div id="worldMap" style="height: 300px;"></div>
+              </div>
+            </div>
+          </div>
         </div>
-    </header>
-    <div class="container-xl p-5">
-        <div id="scrollTarget"></div>
-        <!-- Dashboard demos-->
-        <h2 class="display-6 mb-0">Dashboards</h2>
-        <p class="small text-muted">Six pre-built, customizable dashboard demos</p>
-        <hr class="mb-5 mt-0" />
-        <div class="row gx-5">
-            <div class="col-sm-6 col-lg-4 mb-5">
-                <a class="d-block ripple-gray rounded shadow-3 overflow-hidden mb-2" href="app-dashboard-default.html"><img class="img-fluid" src="https://assets.startbootstrap.com/img/screenshots-product-pages/material-admin-pro/dashboards/default.png" alt="..." /></a>
-                <div class="small font-monospace text-center">Default Dashboard</div>
-            </div>
-            <div class="col-sm-6 col-lg-4 mb-5">
-                <a class="d-block ripple-gray rounded shadow-3 overflow-hidden mb-2" href="app-dashboard-minimal.html"><img class="img-fluid" src="https://assets.startbootstrap.com/img/screenshots-product-pages/material-admin-pro/dashboards/minimal.png" alt="..." /></a>
-                <div class="small font-monospace text-center">Minimal Dashboard</div>
-            </div>
-            <div class="col-sm-6 col-lg-4 mb-5">
-                <a class="d-block ripple-gray rounded shadow-3 overflow-hidden mb-2" href="app-dashboard-analytics.html"><img class="img-fluid" src="https://assets.startbootstrap.com/img/screenshots-product-pages/material-admin-pro/dashboards/analytics.png" alt="..." /></a>
-                <div class="small font-monospace text-center">Analytics Dashboard</div>
-            </div>
-            <div class="col-sm-6 col-lg-4 mb-5">
-                <a class="d-block ripple-gray rounded shadow-3 overflow-hidden mb-2" href="app-dashboard-accounting.html"><img class="img-fluid" src="https://assets.startbootstrap.com/img/screenshots-product-pages/material-admin-pro/dashboards/accounting.png" alt="..." /></a>
-                <div class="small font-monospace text-center">Accounting Dashboard</div>
-            </div>
-            <div class="col-sm-6 col-lg-4 mb-5">
-                <a class="d-block ripple-gray rounded shadow-3 overflow-hidden mb-2" href="app-dashboard-orders.html"><img class="img-fluid" src="https://assets.startbootstrap.com/img/screenshots-product-pages/material-admin-pro/dashboards/orders.png" alt="..." /></a>
-                <div class="small font-monospace text-center">Orders Dashboard</div>
-            </div>
-            <div class="col-sm-6 col-lg-4 mb-5">
-                <a class="d-block ripple-gray rounded shadow-3 overflow-hidden mb-2" href="app-dashboard-projects.html"><img class="img-fluid" src="https://assets.startbootstrap.com/img/screenshots-product-pages/material-admin-pro/dashboards/projects.png" alt="..." /></a>
-                <div class="small font-monospace text-center">Projects Dashboard</div>
-            </div>
-        </div>
-        <!-- Page demos-->
-        <h2 class="display-6 mb-0 mt-5">Pages</h2>
-        <p class="small text-muted">Custom made, fully responsive pages to get you started</p>
-        <hr class="mb-5 mt-0" />
-        <div class="row gx-5">
-            <div class="col-sm-6 col-lg-3 mb-5">
-                <a class="d-block ripple-gray rounded shadow-3 overflow-hidden mb-2" href="app-auth-login-basic.html"><img class="img-fluid" src="https://assets.startbootstrap.com/img/screenshots-product-pages/material-admin-pro/pages/auth-login-1.png" alt="..." /></a>
-                <div class="small font-monospace text-center">Auth - Login 1</div>
-            </div>
-            <div class="col-sm-6 col-lg-3 mb-5">
-                <a class="d-block ripple-gray rounded shadow-3 overflow-hidden mb-2" href="app-auth-login-styled-1.html"><img class="img-fluid" src="https://assets.startbootstrap.com/img/screenshots-product-pages/material-admin-pro/pages/auth-login-2.png" alt="..." /></a>
-                <div class="small font-monospace text-center">Auth - Login 2</div>
-            </div>
-            <div class="col-sm-6 col-lg-3 mb-5">
-                <a class="d-block ripple-gray rounded shadow-3 overflow-hidden mb-2" href="app-auth-login-styled-2.html"><img class="img-fluid" src="https://assets.startbootstrap.com/img/screenshots-product-pages/material-admin-pro/pages/auth-login-3.png" alt="..." /></a>
-                <div class="small font-monospace text-center">Auth - Login 3</div>
-            </div>
-            <div class="col-sm-6 col-lg-3 mb-5">
-                <a class="d-block ripple-gray rounded shadow-3 overflow-hidden mb-2" href="app-auth-register-basic.html"><img class="img-fluid" src="https://assets.startbootstrap.com/img/screenshots-product-pages/material-admin-pro/pages/auth-register.png" alt="..." /></a>
-                <div class="small font-monospace text-center">Auth - Register</div>
-            </div>
-            <div class="col-sm-6 col-lg-3 mb-5">
-                <a class="d-block ripple-gray rounded shadow-3 overflow-hidden mb-2" href="app-auth-password-basic.html"><img class="img-fluid" src="https://assets.startbootstrap.com/img/screenshots-product-pages/material-admin-pro/pages/auth-password.png" alt="..." /></a>
-                <div class="small font-monospace text-center">Auth - Forgot Password</div>
-            </div>
-            <div class="col-sm-6 col-lg-3 mb-5">
-                <a class="d-block ripple-gray rounded shadow-3 overflow-hidden mb-2" href="app-account-billing.html"><img class="img-fluid" src="https://assets.startbootstrap.com/img/screenshots-product-pages/material-admin-pro/pages/account-billing.png" alt="..." /></a>
-                <div class="small font-monospace text-center">Account - Billing</div>
-            </div>
-            <div class="col-sm-6 col-lg-3 mb-5">
-                <a class="d-block ripple-gray rounded shadow-3 overflow-hidden mb-2" href="app-account-notifications.html"><img class="img-fluid" src="https://assets.startbootstrap.com/img/screenshots-product-pages/material-admin-pro/pages/account-notifications.png" alt="..." /></a>
-                <div class="small font-monospace text-center">Account - Notifications</div>
-            </div>
-            <div class="col-sm-6 col-lg-3 mb-5">
-                <a class="d-block ripple-gray rounded shadow-3 overflow-hidden mb-2" href="app-account-profile.html"><img class="img-fluid" src="https://assets.startbootstrap.com/img/screenshots-product-pages/material-admin-pro/pages/account-profile.png" alt="..." /></a>
-                <div class="small font-monospace text-center">Account - Profile</div>
-            </div>
-            <div class="col-sm-6 col-lg-3 mb-5">
-                <a class="d-block ripple-gray rounded shadow-3 overflow-hidden mb-2" href="app-account-security.html"><img class="img-fluid" src="https://assets.startbootstrap.com/img/screenshots-product-pages/material-admin-pro/pages/account-security.png" alt="..." /></a>
-                <div class="small font-monospace text-center">Account - Security</div>
-            </div>
-            <div class="col-sm-6 col-lg-3 mb-5">
-                <a class="d-block ripple-gray rounded shadow-3 overflow-hidden mb-2" href="app-invoice.html"><img class="img-fluid" src="https://assets.startbootstrap.com/img/screenshots-product-pages/material-admin-pro/pages/invoice.png" alt="..." /></a>
-                <div class="small font-monospace text-center">Invoice</div>
-            </div>
-            <div class="col-sm-6 col-lg-3 mb-5">
-                <a class="d-block ripple-gray rounded shadow-3 overflow-hidden mb-2" href="app-knowledgebase-home.html"><img class="img-fluid" src="https://assets.startbootstrap.com/img/screenshots-product-pages/material-admin-pro/pages/knowledgebase-home.png" alt="..." /></a>
-                <div class="small font-monospace text-center">Knowledgebase - Home</div>
-            </div>
-            <div class="col-sm-6 col-lg-3 mb-5">
-                <a class="d-block ripple-gray rounded shadow-3 overflow-hidden mb-2" href="app-knowledgebase-categories.html"><img class="img-fluid" src="https://assets.startbootstrap.com/img/screenshots-product-pages/material-admin-pro/pages/knowledgebase-categories.png" alt="..." /></a>
-                <div class="small font-monospace text-center">Knowledgebase - Categories</div>
-            </div>
-            <div class="col-sm-6 col-lg-3 mb-5">
-                <a class="d-block ripple-gray rounded shadow-3 overflow-hidden mb-2" href="app-knowledgebase-article.html"><img class="img-fluid" src="https://assets.startbootstrap.com/img/screenshots-product-pages/material-admin-pro/pages/knowledgebase-article.png" alt="..." /></a>
-                <div class="small font-monospace text-center">Knowledgebase - Article</div>
-            </div>
-            <div class="col-sm-6 col-lg-3 mb-5">
-                <a class="d-block ripple-gray rounded shadow-3 overflow-hidden mb-2" href="app-pricing.html"><img class="img-fluid" src="https://assets.startbootstrap.com/img/screenshots-product-pages/material-admin-pro/pages/pricing.png" alt="..." /></a>
-                <div class="small font-monospace text-center">Pricing</div>
-            </div>
-        </div>
-        <!-- Error page demos-->
-        <h2 class="display-6 mb-0 mt-5">Error Pages</h2>
-        <p class="small text-muted">Illustrated pages to cover common errors</p>
-        <hr class="mb-5 mt-0" />
-        <div class="row gx-5">
-            <div class="col-sm-6 col-lg-3 mb-5">
-                <div class="card card-raised ripple-gray">
-                    <div class="card-body text-center"><a class="stretched-link text-decoration-none font-monospace" href="app-error-400.html">400 Error</a></div>
-                </div>
-            </div>
-            <div class="col-sm-6 col-lg-3 mb-5">
-                <div class="card card-raised ripple-gray">
-                    <div class="card-body text-center"><a class="stretched-link text-decoration-none font-monospace" href="app-error-401.html">401 Error</a></div>
-                </div>
-            </div>
-            <div class="col-sm-6 col-lg-3 mb-5">
-                <div class="card card-raised ripple-gray">
-                    <div class="card-body text-center"><a class="stretched-link text-decoration-none font-monospace" href="app-error-403.html">403 Error</a></div>
-                </div>
-            </div>
-            <div class="col-sm-6 col-lg-3 mb-5">
-                <div class="card card-raised ripple-gray">
-                    <div class="card-body text-center"><a class="stretched-link text-decoration-none font-monospace" href="app-error-404.html">404 Error</a></div>
-                </div>
-            </div>
-            <div class="col-sm-6 col-lg-3 mb-5">
-                <div class="card card-raised ripple-gray">
-                    <div class="card-body text-center"><a class="stretched-link text-decoration-none font-monospace" href="app-error-429.html">429 Error</a></div>
-                </div>
-            </div>
-            <div class="col-sm-6 col-lg-3 mb-5">
-                <div class="card card-raised ripple-gray">
-                    <div class="card-body text-center"><a class="stretched-link text-decoration-none font-monospace" href="app-error-500.html">500 Error</a></div>
-                </div>
-            </div>
-            <div class="col-sm-6 col-lg-3 mb-5">
-                <div class="card card-raised ripple-gray">
-                    <div class="card-body text-center"><a class="stretched-link text-decoration-none font-monospace" href="app-error-503.html">503 Error</a></div>
-                </div>
-            </div>
-            <div class="col-sm-6 col-lg-3 mb-5">
-                <div class="card card-raised ripple-gray">
-                    <div class="card-body text-center"><a class="stretched-link text-decoration-none font-monospace" href="app-error-504.html">504 Error</a></div>
-                </div>
-            </div>
-        </div>
+      </div>
     </div>
+    <!-- <button type="button" class="btn btn-round btn-default dropdown-toggle btn-link" data-toggle="dropdown">
+7 days
+</button> -->
+    <div class="row">
+      <div class="col-md-4">
+        <div class="card card-chart">
+          <div class="card-header card-header-rose" data-header-animation="true">
+            <div class="ct-chart" id="websiteViewsChart"></div>
+          </div>
+          <div class="card-body">
+            <div class="card-actions">
+              <button type="button" class="btn btn-danger btn-link fix-broken-card">
+                <i class="material-icons">build</i> Fix Header!
+              </button>
+              <button type="button" class="btn btn-info btn-link" rel="tooltip" data-placement="bottom" title="Refresh">
+                <i class="material-icons">refresh</i>
+              </button>
+              <button type="button" class="btn btn-default btn-link" rel="tooltip" data-placement="bottom" title="Change Date">
+                <i class="material-icons">edit</i>
+              </button>
+            </div>
+            <h4 class="card-title">Website Views</h4>
+            <p class="card-category">Last Campaign Performance</p>
+          </div>
+          <div class="card-footer">
+            <div class="stats">
+              <i class="material-icons">access_time</i> campaign sent 2 days ago
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card card-chart">
+          <div class="card-header card-header-success" data-header-animation="true">
+            <div class="ct-chart" id="dailySalesChart"></div>
+          </div>
+          <div class="card-body">
+            <div class="card-actions">
+              <button type="button" class="btn btn-danger btn-link fix-broken-card">
+                <i class="material-icons">build</i> Fix Header!
+              </button>
+              <button type="button" class="btn btn-info btn-link" rel="tooltip" data-placement="bottom" title="Refresh">
+                <i class="material-icons">refresh</i>
+              </button>
+              <button type="button" class="btn btn-default btn-link" rel="tooltip" data-placement="bottom" title="Change Date">
+                <i class="material-icons">edit</i>
+              </button>
+            </div>
+            <h4 class="card-title">Daily Sales</h4>
+            <p class="card-category">
+              <span class="text-success"><i class="fa fa-long-arrow-up"></i> 55% </span> increase in today sales.</p>
+          </div>
+          <div class="card-footer">
+            <div class="stats">
+              <i class="material-icons">access_time</i> updated 4 minutes ago
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card card-chart">
+          <div class="card-header card-header-info" data-header-animation="true">
+            <div class="ct-chart" id="completedTasksChart"></div>
+          </div>
+          <div class="card-body">
+            <div class="card-actions">
+              <button type="button" class="btn btn-danger btn-link fix-broken-card">
+                <i class="material-icons">build</i> Fix Header!
+              </button>
+              <button type="button" class="btn btn-info btn-link" rel="tooltip" data-placement="bottom" title="Refresh">
+                <i class="material-icons">refresh</i>
+              </button>
+              <button type="button" class="btn btn-default btn-link" rel="tooltip" data-placement="bottom" title="Change Date">
+                <i class="material-icons">edit</i>
+              </button>
+            </div>
+            <h4 class="card-title">Completed Tasks</h4>
+            <p class="card-category">Last Campaign Performance</p>
+          </div>
+          <div class="card-footer">
+            <div class="stats">
+              <i class="material-icons">access_time</i> campaign sent 2 days ago
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-3 col-md-6 col-sm-6">
+        <div class="card card-stats">
+          <div class="card-header card-header-warning card-header-icon">
+            <div class="card-icon">
+              <i class="material-icons">weekend</i>
+            </div>
+            <p class="card-category">Bookings</p>
+            <h3 class="card-title">184</h3>
+          </div>
+          <div class="card-footer">
+            <div class="stats">
+              <i class="material-icons text-danger">warning</i>
+              <a href="#pablo">Get More Space...</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6 col-sm-6">
+        <div class="card card-stats">
+          <div class="card-header card-header-rose card-header-icon">
+            <div class="card-icon">
+              <i class="material-icons">equalizer</i>
+            </div>
+            <p class="card-category">Website Visits</p>
+            <h3 class="card-title">75.521</h3>
+          </div>
+          <div class="card-footer">
+            <div class="stats">
+              <i class="material-icons">local_offer</i> Tracked from Google Analytics
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6 col-sm-6">
+        <div class="card card-stats">
+          <div class="card-header card-header-success card-header-icon">
+            <div class="card-icon">
+              <i class="material-icons">store</i>
+            </div>
+            <p class="card-category">Revenue</p>
+            <h3 class="card-title">$34,245</h3>
+          </div>
+          <div class="card-footer">
+            <div class="stats">
+              <i class="material-icons">date_range</i> Last 24 Hours
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6 col-sm-6">
+        <div class="card card-stats">
+          <div class="card-header card-header-info card-header-icon">
+            <div class="card-icon">
+              <i class="fa fa-twitter"></i>
+            </div>
+            <p class="card-category">Followers</p>
+            <h3 class="card-title">+245</h3>
+          </div>
+          <div class="card-footer">
+            <div class="stats">
+              <i class="material-icons">update</i> Just Updated
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <h3>Manage Listings</h3>
+    <br>
+    <div class="row">
+      <div class="col-md-4">
+        <div class="card card-product">
+          <div class="card-header card-header-image" data-header-animation="true">
+            <a href="#pablo">
+              <img class="img" src="/public/img/card-2.jpg">
+            </a>
+          </div>
+          <div class="card-body">
+            <div class="card-actions text-center">
+              <button type="button" class="btn btn-danger btn-link fix-broken-card">
+                <i class="material-icons">build</i> Fix Header!
+              </button>
+              <button type="button" class="btn btn-default btn-link" rel="tooltip" data-placement="bottom" title="View">
+                <i class="material-icons">art_track</i>
+              </button>
+              <button type="button" class="btn btn-success btn-link" rel="tooltip" data-placement="bottom" title="Edit">
+                <i class="material-icons">edit</i>
+              </button>
+              <button type="button" class="btn btn-danger btn-link" rel="tooltip" data-placement="bottom" title="Remove">
+                <i class="material-icons">close</i>
+              </button>
+            </div>
+            <h4 class="card-title">
+              <a href="#pablo">Cozy 5 Stars Apartment</a>
+            </h4>
+            <div class="card-description">
+              The place is close to Barceloneta Beach and bus stop just 2 min by walk and near to "Naviglio" where you can enjoy the main night life in Barcelona.
+            </div>
+          </div>
+          <div class="card-footer">
+            <div class="price">
+              <h4>$899/night</h4>
+            </div>
+            <div class="stats">
+              <p class="card-category"><i class="material-icons">place</i> Barcelona, Spain</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card card-product">
+          <div class="card-header card-header-image" data-header-animation="true">
+            <a href="#pablo">
+              <img class="img" src="/public/img/card-3.jpg">
+            </a>
+          </div>
+          <div class="card-body">
+            <div class="card-actions text-center">
+              <button type="button" class="btn btn-danger btn-link fix-broken-card">
+                <i class="material-icons">build</i> Fix Header!
+              </button>
+              <button type="button" class="btn btn-default btn-link" rel="tooltip" data-placement="bottom" title="View">
+                <i class="material-icons">art_track</i>
+              </button>
+              <button type="button" class="btn btn-success btn-link" rel="tooltip" data-placement="bottom" title="Edit">
+                <i class="material-icons">edit</i>
+              </button>
+              <button type="button" class="btn btn-danger btn-link" rel="tooltip" data-placement="bottom" title="Remove">
+                <i class="material-icons">close</i>
+              </button>
+            </div>
+            <h4 class="card-title">
+              <a href="#pablo">Office Studio</a>
+            </h4>
+            <div class="card-description">
+              The place is close to Metro Station and bus stop just 2 min by walk and near to "Naviglio" where you can enjoy the night life in London, UK.
+            </div>
+          </div>
+          <div class="card-footer">
+            <div class="price">
+              <h4>$1.119/night</h4>
+            </div>
+            <div class="stats">
+              <p class="card-category"><i class="material-icons">place</i> London, UK</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card card-product">
+          <div class="card-header card-header-image" data-header-animation="true">
+            <a href="#pablo">
+              <img class="img" src="/public/img/card-1.jpg">
+            </a>
+          </div>
+          <div class="card-body">
+            <div class="card-actions text-center">
+              <button type="button" class="btn btn-danger btn-link fix-broken-card">
+                <i class="material-icons">build</i> Fix Header!
+              </button>
+              <button type="button" class="btn btn-default btn-link" rel="tooltip" data-placement="bottom" title="View">
+                <i class="material-icons">art_track</i>
+              </button>
+              <button type="button" class="btn btn-success btn-link" rel="tooltip" data-placement="bottom" title="Edit">
+                <i class="material-icons">edit</i>
+              </button>
+              <button type="button" class="btn btn-danger btn-link" rel="tooltip" data-placement="bottom" title="Remove">
+                <i class="material-icons">close</i>
+              </button>
+            </div>
+            <h4 class="card-title">
+              <a href="#pablo">Beautiful Castle</a>
+            </h4>
+            <div class="card-description">
+              The place is close to Metro Station and bus stop just 2 min by walk and near to "Naviglio" where you can enjoy the main night life in Milan.
+            </div>
+          </div>
+          <div class="card-footer">
+            <div class="price">
+              <h4>$459/night</h4>
+            </div>
+            <div class="stats">
+              <p class="card-category"><i class="material-icons">place</i> Milan, Italy</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 @endsection

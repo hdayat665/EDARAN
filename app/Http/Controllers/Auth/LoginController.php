@@ -15,8 +15,16 @@ class LoginController extends Controller
 
     public function loginView()
     {
-        return view('pages.auth.login');
+        $data['admin'] = 'active';
+        return view('pages.auth.login', $data);
     }
+
+    public function domainView()
+    {
+        $data['domain'] = 'active';
+        return view('pages.auth.domain', $data);
+    }
+
     public function about()
     {
         return view('about');
@@ -24,7 +32,10 @@ class LoginController extends Controller
 
     public function registerView()
     {
-        return view('pages.auth.register');
+        $data = [];
+        $data['countrys'] = getCountryRegisterDomain();
+        $data['register'] = 'active';
+        return view('pages.auth.register', $data);
     }
 
     public function verifiedView($id = '')
@@ -35,5 +46,10 @@ class LoginController extends Controller
         $ls->verifiedAcc($id);
 
         return view('pages.auth.verified');
+    }
+
+    public function forgotPassView()
+    {
+        return view('pages.auth.forgotPassword');
     }
 }

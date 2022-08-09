@@ -5,6 +5,8 @@ requirejs.config({
         'material': '/public/assets/js/material',
         'register': '/public/assets/js/register',
         'login': '/public/assets/js/login',
+        'domain': '/public/assets/js/domain',
+        'forgotPass': '/public/assets/js/forgotPass',
         'search-box': 'assets/frontend/js/search-box',
         'homepage': 'assets/frontend/js/homepage',
         'sweetAlert2': '/public/assets/sweetalert2/sweetalert2',
@@ -24,6 +26,14 @@ if ($('#register').length > 0) {
 
 if ($('#login').length > 0) {
     requirejs(['login']);
+}
+
+if ($('#domain').length > 0) {
+    requirejs(['domain']);
+}
+
+if ($('#forgotPass').length > 0) {
+    requirejs(['forgotPass']);
 }
 
 
