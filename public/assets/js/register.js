@@ -38,5 +38,13 @@ $(document).ready(function() {
         });
     })
 
+    $("#location").hide();
+    $("#checked").click(function() {
+        if ($(this).is(":checked")) {
+            $("#location").show();
+        } else {
+            $("#location").hide();
+        }
+    });
 
 })

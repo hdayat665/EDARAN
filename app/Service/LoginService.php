@@ -2,6 +2,7 @@
 
 namespace App\Service;
 
+use App\Models\Subscription;
 use App\Models\Users;
 use App\Models\UsersDetails;
 use Illuminate\Support\Facades\Hash;
@@ -41,6 +42,14 @@ class LoginService
         $user = Users::where([['username', '=', $params['email']]])
         ->first()->toArray();
 
+        $subsData = [];
+        $subsData['user_id'] = $user['id'];
+        $subsData['subcribe_type'] = $params['subscribe'];
+        $subsData['status'] = 'active';
+
+        // save subscription
+        Subscription::create($subsData);
+
         // remove confirm_password element
         unset($params['confirm_password']);
 
@@ -65,7 +74,7 @@ class LoginService
 
     public function checkLogin($input)
     {
-        $user = Users::where([['username', '=', $input['username']]])->first()->toArray();
+        $user = Users::where([['username', '=', $input['username']]])->first();
 
         if (!$user) {
             $data['title'] = 'Error!';
@@ -123,5 +132,25 @@ class LoginService
 
         return $data;
 
+    }
+
+    public function ajaxDomainLogin($input)
+    {
+        // check domain exist or not
+        $domain = UsersDetails::where('domain', $input['domain'])
+        ->first();
+
+        $data['title'] = 'Success!';
+        $data['type'] = 'success';
+        $data['msg'] = 'Success';
+
+        if(!$domain)
+        {
+            $data['title'] = 'Error!';
+            $data['type'] = 'error';
+            $data['msg'] = 'Domain does not exist';
+        }
+
+        return $data;
     }
 }

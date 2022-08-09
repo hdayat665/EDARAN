@@ -29,4 +29,15 @@ class AjaxController extends Controller
 
         echo json_encode($check);
     }
+
+    public function ajaxDomainLogin(Request $r)
+    {
+        $input = $r->input();
+
+        $ls = new LoginService();
+
+        $check = $ls->ajaxDomainLogin($input);
+
+        echo json_encode($check);
+    }
 }

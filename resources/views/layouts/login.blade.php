@@ -16,6 +16,8 @@
         <link href="https://fonts.googleapis.com/css?family=Roboto+Mono:400,500" rel="stylesheet" />
         <!-- Load main stylesheet-->
         <link href="/public/assets/css/styles.css" rel="stylesheet" />
+        <link rel="stylesheet" href="https://jqueryvalidation.org/files/demo/site-demos.css">
+
     </head>
     <body class="bg-primary">
         <!-- Layout wrapper-->

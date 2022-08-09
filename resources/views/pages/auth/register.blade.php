@@ -49,31 +49,43 @@
                         </div>
                         <div class="row">
                             <div class="col-sm-6 mb-4">
-                            <mwc-formfield label="Your data will be allocated in Malaysia" ><mwc-checkbox name="allocated_malaysia"></mwc-checkbox></mwc-formfield>
+                                <mwc-formfield label="Your data will be allocated in Malaysia"><input type="checkbox" name="allocated_malaysia" id="checked" ></mwc-formfield>
 
                             </div>
-                            <div class="col-sm-6 mb-4">
+                            <div class="col-sm-6 mb-4" id="location">
                                 <mwc-select outlined class="w-100" label="Location" name="location">
                                     <mwc-list-item></mwc-list-item>
-                                    <mwc-list-item value="0">Item 0</mwc-list-item>
-                                    <mwc-list-item value="1">Item 1</mwc-list-item>
-                                    <mwc-list-item value="2">Item 2</mwc-list-item>
-                                    <mwc-list-item value="3">Item 3</mwc-list-item>
-                                </mwc-select>
+                                    <?php foreach ($countrys as $key => $country) {?>
+                                        <mwc-list-item value="{{$country}}">{{$country}}</mwc-list-item>
+                                        <?php } ?>
+                                    </mwc-select>
+                                </div>
+                                {{-- <div class="col-sm-6 mb-4">
+                                    <mwc-select outlined class="w-100" label="Subscription" name="subscribe">
+                                        <mwc-list-item></mwc-list-item>
+                                        <mwc-list-item value="">Item 0</mwc-list-item>
+                                        <mwc-list-item value="free">Free Trial</mwc-list-item>
+                                        <mwc-list-item value="plan1">Plan 1</mwc-list-item>
+                                        <mwc-list-item value="plan2">Plan 2</mwc-list-item>
+                                    </mwc-select>
+                                </div> --}}
                             </div>
+                            <div class="d-flex align-items-center">
+                                <mwc-formfield label="I agree to the website terms and conditions"><input type="checkbox" name="terms"></mwc-formfield>
+                            </div>
+                            <div class="d-flex align-items-center" style="margin-top: 0.5rem">
+                                <span class="btn btn-primary" style="margin-right: 0.5rem"><a href="#" target="_blank"></a>Term of service</span>
+                                <span class="btn btn-primary"><a href="#" target="_blank"></a>Privacy Policy</span>
+                            </div>
+                        </form>
+                        <div class="form-group d-flex align-items-center justify-content-between mt-4 mb-0">
+                            <a class="small fw-500 text-decoration-none" href="app-auth-login-basic.html">Sign in instead</a>
+                            <span class="btn btn-primary" id="submit">Create Account</span>
                         </div>
-                        <div class="d-flex align-items-center">
-                            <mwc-formfield label="I agree to the website terms and conditions"><mwc-checkbox name="terms"></mwc-checkbox></mwc-formfield>
-                        </div>
-                    </form>
-                    <div class="form-group d-flex align-items-center justify-content-between mt-4 mb-0">
-                        <a class="small fw-500 text-decoration-none" href="app-auth-login-basic.html">Sign in instead</a>
-                        <span class="btn btn-primary" id="submit">Create Account</span>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-@endsection
+    @endsection
 
