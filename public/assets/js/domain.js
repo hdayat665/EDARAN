@@ -27,7 +27,7 @@ $(document).ready(function() {
                     if (data.type == 'error') {
 
                     } else {
-                        window.location.href = '/loginView'
+                        window.location.href = '/home'
 
                     }
 

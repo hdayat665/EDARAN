@@ -1,140 +1,71 @@
-<!-- Top app bar navigation menu-->
-<nav class="top-app-bar navbar navbar-expand navbar-dark bg-dark">
-    <div class="container-fluid px-4">
-        <!-- Drawer toggle button-->
-        <button class="btn btn-lg btn-icon order-1 order-lg-0" id="drawerToggle" href="javascript:void(0);"><i class="material-icons">menu</i></button>
-        <!-- Navbar brand-->
-        <a class="navbar-brand me-auto" href="index.html"><div class="text-uppercase font-monospace">Material Admin Pro</div></a>
-        <!-- Navbar items-->
-        <div class="d-flex align-items-center mx-3 me-lg-0">
-            <!-- Navbar-->
-            <ul class="navbar-nav d-none d-lg-flex">
-                <li class="nav-item"><a class="nav-link" href="index.html">Overview</a></li>
-                <li class="nav-item"><a class="nav-link" href="https://docs.startbootstrap.com/material-admin-pro" target="_blank">Documentation</a></li>
-            </ul>
-            <!-- Navbar buttons-->
-            <div class="d-flex">
-                <!-- Messages dropdown-->
-                <div class="dropdown dropdown-notifications d-none d-sm-block">
-                    <button class="btn btn-lg btn-icon dropdown-toggle me-3" id="dropdownMenuMessages" type="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="material-icons">mail_outline</i></button>
-                    <ul class="dropdown-menu dropdown-menu-end me-3 mt-3 py-0 overflow-hidden" aria-labelledby="dropdownMenuMessages">
-                        <li><h6 class="dropdown-header bg-primary text-white fw-500 py-3">Messages</h6></li>
-                        <li><hr class="dropdown-divider my-0" /></li>
-                        <li>
-                            <a class="dropdown-item unread" href="#!">
-                                <div class="dropdown-item-content">
-                                    <div class="dropdown-item-content-text"><div class="text-truncate d-inline-block" style="max-width: 18rem">Hi there, I had a question about something, is there any way you can help me out?</div></div>
-                                    <div class="dropdown-item-content-subtext">Mar 12, 2021 &middot; Juan Babin</div>
-                                </div>
-                            </a>
-                        </li>
-                        <li><hr class="dropdown-divider my-0" /></li>
-                        <li>
-                            <a class="dropdown-item" href="#!">
-                                <div class="dropdown-item-content">
-                                    <div class="dropdown-item-content-text"><div class="text-truncate d-inline-block" style="max-width: 18rem">Thanks for the assistance the other day, I wanted to follow up with you just to make sure everyting is settled.</div></div>
-                                    <div class="dropdown-item-content-subtext">Mar 10, 2021 &middot; Christine Hendersen</div>
-                                </div>
-                            </a>
-                        </li>
-                        <li><hr class="dropdown-divider my-0" /></li>
-                        <li>
-                            <a class="dropdown-item" href="#!">
-                                <div class="dropdown-item-content">
-                                    <div class="dropdown-item-content-text"><div class="text-truncate d-inline-block" style="max-width: 18rem">Welcome to our group! It's good to see new members and I know you will do great!</div></div>
-                                    <div class="dropdown-item-content-subtext">Mar 8, 2021 &middot; Celia J. Knight</div>
-                                </div>
-                            </a>
-                        </li>
-                        <li><hr class="dropdown-divider my-0" /></li>
-                        <li>
-                            <a class="dropdown-item py-3" href="#!">
-                                <div class="d-flex align-items-center w-100 justify-content-end text-primary">
-                                    <div class="fst-button small">View all</div>
-                                    <i class="material-icons icon-sm ms-1">chevron_right</i>
-                                </div>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-                <!-- Notifications and alerts dropdown-->
-                <div class="dropdown dropdown-notifications d-none d-sm-block">
-                    <button class="btn btn-lg btn-icon dropdown-toggle me-3" id="dropdownMenuNotifications" type="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="material-icons">notifications</i></button>
-                    <ul class="dropdown-menu dropdown-menu-end me-3 mt-3 py-0 overflow-hidden" aria-labelledby="dropdownMenuNotifications">
-                        <li><h6 class="dropdown-header bg-primary text-white fw-500 py-3">Alerts</h6></li>
-                        <li><hr class="dropdown-divider my-0" /></li>
-                        <li>
-                            <a class="dropdown-item unread" href="#!">
-                                <i class="material-icons leading-icon">assessment</i>
-                                <div class="dropdown-item-content me-2">
-                                    <div class="dropdown-item-content-text">Your March performance report is ready to view.</div>
-                                    <div class="dropdown-item-content-subtext">Mar 12, 2021 &middot; Performance</div>
-                                </div>
-                            </a>
-                        </li>
-                        <li><hr class="dropdown-divider my-0" /></li>
-                        <li>
-                            <a class="dropdown-item" href="#!">
-                                <i class="material-icons leading-icon">check_circle</i>
-                                <div class="dropdown-item-content me-2">
-                                    <div class="dropdown-item-content-text">Tracking codes successfully updated.</div>
-                                    <div class="dropdown-item-content-subtext">Mar 12, 2021 &middot; Coverage</div>
-                                </div>
-                            </a>
-                        </li>
-                        <li><hr class="dropdown-divider my-0" /></li>
-                        <li>
-                            <a class="dropdown-item" href="#!">
-                                <i class="material-icons leading-icon">warning</i>
-                                <div class="dropdown-item-content me-2">
-                                    <div class="dropdown-item-content-text">Tracking codes have changed and require manual action.</div>
-                                    <div class="dropdown-item-content-subtext">Mar 8, 2021 &middot; Coverage</div>
-                                </div>
-                            </a>
-                        </li>
-                        <li><hr class="dropdown-divider my-0" /></li>
-                        <li>
-                            <a class="dropdown-item py-3" href="#!">
-                                <div class="d-flex align-items-center w-100 justify-content-end text-primary">
-                                    <div class="fst-button small">View all</div>
-                                    <i class="material-icons icon-sm ms-1">chevron_right</i>
-                                </div>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-                <!-- User profile dropdown-->
-                <div class="dropdown">
-                    <button class="btn btn-lg btn-icon dropdown-toggle" id="dropdownMenuProfile" type="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="material-icons">person</i></button>
-                    <ul class="dropdown-menu dropdown-menu-end mt-3" aria-labelledby="dropdownMenuProfile">
-                        <li>
-                            <a class="dropdown-item" href="#!">
-                                <i class="material-icons leading-icon">person</i>
-                                <div class="me-3">Profile</div>
-                            </a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" href="#!">
-                                <i class="material-icons leading-icon">settings</i>
-                                <div class="me-3">Settings</div>
-                            </a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" href="#!">
-                                <i class="material-icons leading-icon">help</i>
-                                <div class="me-3">Help</div>
-                            </a>
-                        </li>
-                        <li><hr class="dropdown-divider" /></li>
-                        <li>
-                            <a class="dropdown-item" href="#!">
-                                <i class="material-icons leading-icon">logout</i>
-                                <div class="me-3">Logout</div>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
+
+<nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
+    <div class="container-fluid">
+      <div class="navbar-wrapper">
+        <div class="navbar-minimize">
+          <button id="minimizeSidebar" class="btn btn-just-icon btn-white btn-fab btn-round">
+            <i class="material-icons text_align-center visible-on-sidebar-regular">more_vert</i>
+            <i class="material-icons design_bullet-list-67 visible-on-sidebar-mini">view_list</i>
+          </button>
         </div>
+        <a class="navbar-brand" href="javascript:;">Dashboard</a>
+      </div>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="navbar-toggler-icon icon-bar"></span>
+        <span class="navbar-toggler-icon icon-bar"></span>
+        <span class="navbar-toggler-icon icon-bar"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end">
+        <form class="navbar-form">
+          <div class="input-group no-border">
+            <input type="text" value="" class="form-control" placeholder="Search...">
+            <button type="submit" class="btn btn-white btn-round btn-just-icon">
+              <i class="material-icons">search</i>
+              <div class="ripple-container"></div>
+            </button>
+          </div>
+        </form>
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="javascript:;">
+              <i class="material-icons">dashboard</i>
+              <p class="d-lg-none d-md-block">
+                Stats
+              </p>
+            </a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <i class="material-icons">notifications</i>
+              <span class="notification">5</span>
+              <p class="d-lg-none d-md-block">
+                Some Actions
+              </p>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+              <a class="dropdown-item" href="#">Mike John responded to your email</a>
+              <a class="dropdown-item" href="#">You have 5 new tasks</a>
+              <a class="dropdown-item" href="#">You're now friend with Andrew</a>
+              <a class="dropdown-item" href="#">Another Notification</a>
+              <a class="dropdown-item" href="#">Another One</a>
+            </div>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link" href="javascript:;" id="navbarDropdownProfile" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <i class="material-icons">person</i>
+              <p class="d-lg-none d-md-block">
+                Account
+              </p>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownProfile">
+              <a class="dropdown-item" href="#">Profile</a>
+              <a class="dropdown-item" href="#">Settings</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="#">Log out</a>
+            </div>
+          </li>
+        </ul>
+      </div>
     </div>
-</nav>
+  </nav>

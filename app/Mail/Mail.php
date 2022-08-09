@@ -16,9 +16,11 @@ class Mail extends Mailable
      *
      * @return void
      */
-    public function __construct()
+    public $data;
+
+    public function __construct($data)
     {
-        //
+        $this->data = $data;
     }
 
     /**

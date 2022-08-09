@@ -24,4 +24,5 @@ Route::controller(AjaxController::class)->group(function () {
     Route::post('/ajaxRegisterSave', 'ajaxRegisterSave');
     Route::post('/ajaxLogin', 'ajaxLogin');
     Route::post('/ajaxDomainLogin', 'ajaxDomainLogin');
+    Route::get('/sendEmailRegister', 'sendEmailRegister');
 });
