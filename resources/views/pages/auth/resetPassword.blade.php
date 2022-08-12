@@ -1,36 +1,38 @@
 @extends('layouts.login')
 
 @section('content')
-<div class="container" id="login">
+<div class="container" id="resetPass">
     <div class="row">
         <div class="col-lg-4 col-md-6 col-sm-8 ml-auto mr-auto">
             <form id="submitForm">
                 <div class="card card-login card-hidden">
                     <div class="card-header card-header-info text-center">
-                        <h4 class="card-title">Login Admin</h4>
+                        <h4 class="card-title">Reset Password</h4>
                         <div class="social-line">
                         </div>
                     </div>
                     <div class="card-body ">
-                        <p class="card-description text-center">Or Be Classical</p>
+                        <p class="card-description text-center">
+                        </p>
                         <span class="bmd-form-group">
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">
-                                        <i class="material-icons">email</i>
+                                        <i class="material-icons">key</i>
                                     </span>
                                 </div>
-                                <input type="email" class="form-control" name="username" placeholder="Email..." required>
+                                <input type="password" class="form-control" name="password" placeholder="Password..." required>
                             </div>
                         </span>
                         <span class="bmd-form-group">
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">
-                                        <i class="material-icons">lock_outline</i>
+                                        <i class="material-icons">key</i>
                                     </span>
                                 </div>
-                                <input type="password" class="form-control" name="password" placeholder="Password..." required>
+                                <input type="password" class="form-control" name="confirm_password" placeholder="Confirm Password..." required>
+                                <input type="hidden" class="form-control" name="user_id" value="{{$user_id}}" required>
                             </div>
                         </span>
                     </div>
@@ -40,11 +42,10 @@
             </form>
             <div class="card card-login card-hidden" style="margin-top: -3rem">
                 <div class="card-footer justify-content-center">
-                    <span id="submit" class="btn btn-info btn-link btn-lg">Login</span>
+                    <span id="submit" class="btn btn-info btn-link btn-lg">Submit</span>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
 @endsection

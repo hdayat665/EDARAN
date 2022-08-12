@@ -1,18 +1,18 @@
 @extends('layouts.login')
 
 @section('content')
-<div class="container" id="forgotPass">
+<div class="container" id="forgotDomain">
     <div class="row">
         <div class="col-lg-4 col-md-6 col-sm-8 ml-auto mr-auto">
             <form id="submitForm">
                 <div class="card card-login card-hidden">
                     <div class="card-header card-header-info text-center">
-                        <h4 class="card-title">Forgot Password?</h4>
+                        <h4 class="card-title">Forgot Domain?</h4>
                         <div class="social-line">
                         </div>
                     </div>
                     <div class="card-body ">
-                        <p class="card-description text-center">A password reset link will be sent to your email to reset your password. If you don't get an email within a few minutes, please re-try.
+                        <p class="card-description text-center">A domain name will be sent to your email. If you don't get an email within a few minutes, please re-try.
                         </p>
                         <span class="bmd-form-group">
                             <div class="input-group">
@@ -21,7 +21,7 @@
                                         <i class="material-icons">email</i>
                                     </span>
                                 </div>
-                                <input type="text" class="form-control" name="username" placeholder="Email..." required>
+                                <input type="email" class="form-control" name="email" placeholder="Email..." required>
                             </div>
                         </span>
                     </div>

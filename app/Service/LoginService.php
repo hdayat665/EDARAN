@@ -72,7 +72,7 @@ class LoginService
         return $data;
     }
 
-    public function checkLogin($input)
+    public function ajaxLoginDomain($input)
     {
         $user = Users::where([['username', '=', $input['username']]])->first();
 
@@ -134,8 +134,25 @@ class LoginService
 
     }
 
-    public function ajaxDomainLogin($input)
+    public function ajaxLoginTenant($input)
     {
+         // check tenant exist or not
+         $tenant = UsersDetails::where([['tenant','=', $input['tenant']]])
+         ->first();
+
+         $data['title'] = 'Success!';
+         $data['type'] = 'success';
+         $data['msg'] = 'Success';
+
+         if(!$tenant)
+         {
+             $data['title'] = 'Error!';
+             $data['type'] = 'error';
+             $data['msg'] = 'Tenant does not exist';
+
+             return $data;
+         }
+
         // check username n password
         $user = Users::where([['username', '=', $input['username']]])->first();
 
@@ -146,21 +163,6 @@ class LoginService
 
             return $data;
         }
-
-         // check domain exist or not
-         $domain = UsersDetails::where([['domain','=', $input['domain']],['user_id','=', $user['id']]])
-         ->first();
-
-         $data['title'] = 'Success!';
-         $data['type'] = 'success';
-         $data['msg'] = 'Success';
-
-         if(!$domain)
-         {
-             $data['title'] = 'Error!';
-             $data['type'] = 'error';
-             $data['msg'] = 'Domain does not exist';
-         }
 
         $password = Hash::check($input['password'], $user['password']);
         if (!$password) {
@@ -183,5 +185,55 @@ class LoginService
         }
 
         return $data;
+    }
+
+    public function checkEmail($email = '')
+    {
+        $checkEmail = UsersDetails::where('email', "'". $email ."'")->firstOrFail()->toArray();
+        $data['title'] = 'Success!';
+        $data['type'] = 'success';
+        $data['msg'] = 'You email have been send!';
+        $data['email'] = $checkEmail;
+
+        if(!$checkEmail)
+        {
+            $data['title'] = 'Error!';
+            $data['type'] = 'error';
+            $data['msg'] = 'You email does not exist!';
+        }
+
+        return $data;
+    }
+
+    public function resetPassword($input = [])
+    {
+        // check pass n confirm pass same
+        if ($input['password'] != $input['confirm_password']) {
+            $data['title'] = 'Error!';
+            $data['type'] = 'error';
+            $data['msg'] = 'password and confirm password not match';
+
+            return $data;
+        }
+
+        $password = Hash::make($input['password']);
+
+        $update = Users::where('id', $input['user_id'])
+                    ->update(['password' =>  $password ]);
+
+        if (!$update) {
+            $data['title'] = 'Error!';
+            $data['type'] = 'error';
+            $data['msg'] = 'Something Wrong!';
+
+            return $data;
+        }
+
+        $data['title'] = 'Success!';
+        $data['type'] = 'success';
+        $data['msg'] = 'Reset password Success';
+
+        return $data;
+
     }
 }

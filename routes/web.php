@@ -25,4 +25,6 @@ Route::controller(LoginController::class)->group(function () {
     Route::get('/registerView', 'registerView');
     Route::get('/verifiedView/{id}', 'verifiedView');
     Route::get('/forgotPassView', 'forgotPassView');
+    Route::get('/resetPassView/{id}', 'resetPassView');
+    Route::get('/resetDomainView', 'resetDomainView');
 });

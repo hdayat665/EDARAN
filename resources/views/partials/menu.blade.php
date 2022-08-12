@@ -5,13 +5,13 @@
     Tip 2: you can also add an image using data-image tag
      -->
   <div class="logo"><a href="http://www.creative-tim.com" class="simple-text logo-mini">
-      CT
+      HR
     </a>
     <a href="http://www.creative-tim.com" class="simple-text logo-normal">
-      Creative Tim
+      EDARAN
     </a></div>
   <div class="sidebar-wrapper">
-    <div class="user">
+    {{-- <div class="user">
       <div class="photo">
         <img src="/public/img/faces/avatar.jpg" />
       </div>
@@ -45,10 +45,10 @@
           </ul>
         </div>
       </div>
-    </div>
+    </div> --}}
     <ul class="nav">
       <li class="nav-item active ">
-        <a class="nav-link" href="../examples/dashboard.html">
+        <a class="nav-link" href="/home">
           <i class="material-icons">dashboard</i>
           <p> Dashboard </p>
         </a>
@@ -56,7 +56,7 @@
       <li class="nav-item ">
         <a class="nav-link" data-toggle="collapse" href="#pagesExamples">
           <i class="material-icons">image</i>
-          <p> Pages
+          <p> HRIS
             <b class="caret"></b>
           </p>
         </a>
@@ -64,50 +64,14 @@
           <ul class="nav">
             <li class="nav-item ">
               <a class="nav-link" href="../examples/pages/pricing.html">
-                <span class="sidebar-mini"> P </span>
-                <span class="sidebar-normal"> Pricing </span>
+                <span class="sidebar-mini"> MP </span>
+                <span class="sidebar-normal"> My Profile</span>
               </a>
             </li>
             <li class="nav-item ">
               <a class="nav-link" href="../examples/pages/rtl.html">
-                <span class="sidebar-mini"> RS </span>
-                <span class="sidebar-normal"> RTL Support </span>
-              </a>
-            </li>
-            <li class="nav-item ">
-              <a class="nav-link" href="../examples/pages/timeline.html">
-                <span class="sidebar-mini"> T </span>
-                <span class="sidebar-normal"> Timeline </span>
-              </a>
-            </li>
-            <li class="nav-item ">
-              <a class="nav-link" href="../examples/pages/login.html">
-                <span class="sidebar-mini"> LP </span>
-                <span class="sidebar-normal"> Login Page </span>
-              </a>
-            </li>
-            <li class="nav-item ">
-              <a class="nav-link" href="../examples/pages/register.html">
-                <span class="sidebar-mini"> RP </span>
-                <span class="sidebar-normal"> Register Page </span>
-              </a>
-            </li>
-            <li class="nav-item ">
-              <a class="nav-link" href="../examples/pages/lock.html">
-                <span class="sidebar-mini"> LSP </span>
-                <span class="sidebar-normal"> Lock Screen Page </span>
-              </a>
-            </li>
-            <li class="nav-item ">
-              <a class="nav-link" href="../examples/pages/user.html">
-                <span class="sidebar-mini"> UP </span>
-                <span class="sidebar-normal"> User Profile </span>
-              </a>
-            </li>
-            <li class="nav-item ">
-              <a class="nav-link" href="../examples/pages/error.html">
-                <span class="sidebar-mini"> E </span>
-                <span class="sidebar-normal"> Error Page </span>
+                <span class="sidebar-mini"> EI </span>
+                <span class="sidebar-normal">Employee Information</span>
               </a>
             </li>
           </ul>
@@ -116,7 +80,7 @@
       <li class="nav-item ">
         <a class="nav-link" data-toggle="collapse" href="#componentsExamples">
           <i class="material-icons">apps</i>
-          <p> Components
+          <p> Timesheet
             <b class="caret"></b>
           </p>
         </a>
@@ -124,62 +88,20 @@
           <ul class="nav">
             <li class="nav-item ">
               <a class="nav-link" data-toggle="collapse" href="#componentsCollapse">
-                <span class="sidebar-mini"> MLT </span>
-                <span class="sidebar-normal"> Multi Level Collapse
-                  <b class="caret"></b>
-                </span>
+                <span class="sidebar-mini"> MT </span>
+                <span class="sidebar-normal"> My Timesheet</span>
               </a>
-              <div class="collapse" id="componentsCollapse">
-                <ul class="nav">
-                  <li class="nav-item ">
-                    <a class="nav-link" href="#0">
-                      <span class="sidebar-mini"> E </span>
-                      <span class="sidebar-normal"> Example </span>
-                    </a>
-                  </li>
-                </ul>
-              </div>
+            </li>
+            <li class="nav-item ">
+                <a class="nav-link" href="#0">
+                    <span class="sidebar-mini"> TA </span>
+                    <span class="sidebar-normal"> Timesheets Approval</span>
+                </a>
             </li>
             <li class="nav-item ">
               <a class="nav-link" href="../examples/components/buttons.html">
-                <span class="sidebar-mini"> B </span>
-                <span class="sidebar-normal"> Buttons </span>
-              </a>
-            </li>
-            <li class="nav-item ">
-              <a class="nav-link" href="../examples/components/grid.html">
-                <span class="sidebar-mini"> GS </span>
-                <span class="sidebar-normal"> Grid System </span>
-              </a>
-            </li>
-            <li class="nav-item ">
-              <a class="nav-link" href="../examples/components/panels.html">
-                <span class="sidebar-mini"> P </span>
-                <span class="sidebar-normal"> Panels </span>
-              </a>
-            </li>
-            <li class="nav-item ">
-              <a class="nav-link" href="../examples/components/sweet-alert.html">
-                <span class="sidebar-mini"> SA </span>
-                <span class="sidebar-normal"> Sweet Alert </span>
-              </a>
-            </li>
-            <li class="nav-item ">
-              <a class="nav-link" href="../examples/components/notifications.html">
-                <span class="sidebar-mini"> N </span>
-                <span class="sidebar-normal"> Notifications </span>
-              </a>
-            </li>
-            <li class="nav-item ">
-              <a class="nav-link" href="../examples/components/icons.html">
-                <span class="sidebar-mini"> I </span>
-                <span class="sidebar-normal"> Icons </span>
-              </a>
-            </li>
-            <li class="nav-item ">
-              <a class="nav-link" href="../examples/components/typography.html">
-                <span class="sidebar-mini"> T </span>
-                <span class="sidebar-normal"> Typography </span>
+                <span class="sidebar-mini"> RA </span>
+                <span class="sidebar-normal"> Realtime Activity</span>
               </a>
             </li>
           </ul>
@@ -188,7 +110,7 @@
       <li class="nav-item ">
         <a class="nav-link" data-toggle="collapse" href="#formsExamples">
           <i class="material-icons">content_paste</i>
-          <p> Forms
+          <p> E-Attendance
             <b class="caret"></b>
           </p>
         </a>
@@ -196,26 +118,14 @@
           <ul class="nav">
             <li class="nav-item ">
               <a class="nav-link" href="../examples/forms/regular.html">
-                <span class="sidebar-mini"> RF </span>
-                <span class="sidebar-normal"> Regular Forms </span>
+                <span class="sidebar-mini"> MA </span>
+                <span class="sidebar-normal"> My Attendance                </span>
               </a>
             </li>
             <li class="nav-item ">
               <a class="nav-link" href="../examples/forms/extended.html">
-                <span class="sidebar-mini"> EF </span>
-                <span class="sidebar-normal"> Extended Forms </span>
-              </a>
-            </li>
-            <li class="nav-item ">
-              <a class="nav-link" href="../examples/forms/validation.html">
-                <span class="sidebar-mini"> VF </span>
-                <span class="sidebar-normal"> Validation Forms </span>
-              </a>
-            </li>
-            <li class="nav-item ">
-              <a class="nav-link" href="../examples/forms/wizard.html">
-                <span class="sidebar-mini"> W </span>
-                <span class="sidebar-normal"> Wizard </span>
+                <span class="sidebar-mini"> AI </span>
+                <span class="sidebar-normal"> Attendance Information                </span>
               </a>
             </li>
           </ul>
@@ -224,7 +134,7 @@
       <li class="nav-item ">
         <a class="nav-link" data-toggle="collapse" href="#tablesExamples">
           <i class="material-icons">grid_on</i>
-          <p> Tables
+          <p> E-Leave
             <b class="caret"></b>
           </p>
         </a>
@@ -232,20 +142,14 @@
           <ul class="nav">
             <li class="nav-item ">
               <a class="nav-link" href="../examples/tables/regular.html">
-                <span class="sidebar-mini"> RT </span>
-                <span class="sidebar-normal"> Regular Tables </span>
+                <span class="sidebar-mini"> ML </span>
+                <span class="sidebar-normal"> My Leave                </span>
               </a>
             </li>
             <li class="nav-item ">
               <a class="nav-link" href="../examples/tables/extended.html">
-                <span class="sidebar-mini"> ET </span>
-                <span class="sidebar-normal"> Extended Tables </span>
-              </a>
-            </li>
-            <li class="nav-item ">
-              <a class="nav-link" href="../examples/tables/datatables.net.html">
-                <span class="sidebar-mini"> DT </span>
-                <span class="sidebar-normal"> DataTables.net </span>
+                <span class="sidebar-mini"> LA </span>
+                <span class="sidebar-normal"> Leave Approval                </span>
               </a>
             </li>
           </ul>
@@ -254,7 +158,7 @@
       <li class="nav-item ">
         <a class="nav-link" data-toggle="collapse" href="#mapsExamples">
           <i class="material-icons">place</i>
-          <p> Maps
+          <p> Project
             <b class="caret"></b>
           </p>
         </a>
@@ -262,42 +166,144 @@
           <ul class="nav">
             <li class="nav-item ">
               <a class="nav-link" href="../examples/maps/google.html">
-                <span class="sidebar-mini"> GM </span>
-                <span class="sidebar-normal"> Google Maps </span>
+                <span   class="sidebar-mini"> C </span>
+                <span class="sidebar-normal"> Customers                </span>
               </a>
             </li>
             <li class="nav-item ">
               <a class="nav-link" href="../examples/maps/fullscreen.html">
-                <span class="sidebar-mini"> FSM </span>
-                <span class="sidebar-normal"> Full Screen Map </span>
+                <span class="sidebar-mini"> PI </span>
+                <span class="sidebar-normal"> Project Information                </span>
               </a>
             </li>
             <li class="nav-item ">
               <a class="nav-link" href="../examples/maps/vector.html">
-                <span class="sidebar-mini"> VM </span>
-                <span class="sidebar-normal"> Vector Map </span>
+                <span class="sidebar-mini"> MP </span>
+                <span class="sidebar-normal"> My Project                </span>
+              </a>
+            </li>
+            <li class="nav-item ">
+                <a class="nav-link" href="../examples/maps/vector.html">
+                  <span class="sidebar-mini"> PR </span>
+                  <span class="sidebar-normal"> Project Request                </span>
+                </a>
+              </li>
+          </ul>
+        </div>
+      </li>
+      <li class="nav-item ">
+        <a class="nav-link" data-toggle="collapse" href="#claim">
+          <i class="material-icons">money</i>
+          <p> Claim
+            <b class="caret"></b>
+          </p>
+        </a>
+        <div class="collapse" id="claim">
+          <ul class="nav">
+            <li class="nav-item ">
+              <a class="nav-link" href="../examples/maps/google.html">
+                <span   class="sidebar-mini"> MC </span>
+                <span class="sidebar-normal"> My Claim                </span>
+              </a>
+            </li>
+            <li class="nav-item ">
+              <a class="nav-link" href="../examples/maps/fullscreen.html">
+                <span class="sidebar-mini"> CA </span>
+                <span class="sidebar-normal"> Claim Approval                </span>
               </a>
             </li>
           </ul>
         </div>
       </li>
       <li class="nav-item ">
-        <a class="nav-link" href="../examples/widgets.html">
-          <i class="material-icons">widgets</i>
-          <p> Widgets </p>
+        <a class="nav-link" data-toggle="collapse" href="#ORG">
+          <i class="material-icons">groups</i>
+          <p> Organization
+            <b class="caret"></b>
+          </p>
         </a>
+        <div class="collapse" id="ORG">
+          <ul class="nav">
+            <li class="nav-item ">
+              <a class="nav-link" href="../examples/maps/google.html">
+                <span class="sidebar-mini"> PD </span>
+                <span class="sidebar-normal"> Phone Directory                </span>
+              </a>
+            </li>
+            <li class="nav-item ">
+              <a class="nav-link" href="../examples/maps/fullscreen.html">
+                <span class="sidebar-mini"> OC </span>
+                <span class="sidebar-normal"> Organisation Chart                </span>
+              </a>
+            </li>
+            <li class="nav-item ">
+                <a class="nav-link" href="../examples/maps/fullscreen.html">
+                  <span class="sidebar-mini"> DT </span>
+                  <span class="sidebar-normal"> Department Tree                </span>
+                </a>
+              </li>
+          </ul>
+        </div>
       </li>
       <li class="nav-item ">
-        <a class="nav-link" href="../examples/charts.html">
-          <i class="material-icons">timeline</i>
-          <p> Charts </p>
+        <a class="nav-link" data-toggle="collapse" href="#report">
+          <i class="material-icons">summarize</i>
+          <p> Reporting
+            <b class="caret"></b>
+          </p>
         </a>
+        <div class="collapse" id="report">
+          <ul class="nav">
+            <li class="nav-item ">
+              <a class="nav-link" href="../examples/maps/google.html">
+                <span class="sidebar-mini"> PD </span>
+                <span class="sidebar-normal"> Phone Directory                </span>
+              </a>
+            </li>
+            <li class="nav-item ">
+              <a class="nav-link" href="../examples/maps/fullscreen.html">
+                <span class="sidebar-mini"> OC </span>
+                <span class="sidebar-normal"> Organisation Chart                </span>
+              </a>
+            </li>
+            <li class="nav-item ">
+                <a class="nav-link" href="../examples/maps/fullscreen.html">
+                  <span class="sidebar-mini"> DT </span>
+                  <span class="sidebar-normal"> Department Tree                </span>
+                </a>
+              </li>
+          </ul>
+        </div>
       </li>
       <li class="nav-item ">
-        <a class="nav-link" href="../examples/calendar.html">
-          <i class="material-icons">date_range</i>
-          <p> Calendar </p>
+        <a class="nav-link" data-toggle="collapse" href="#setting">
+          <i class="material-icons">settings</i>
+          <p> Settings
+            <b class="caret"></b>
+          </p>
         </a>
+        <div class="collapse" id="setting">
+          <ul class="nav">
+            <li class="nav-item ">
+              <a class="nav-link" href="../examples/maps/google.html">
+                <span class="sidebar-mini"> PD </span>
+                <span class="sidebar-normal"> Phone Directory                </span>
+              </a>
+            </li>
+            <li class="nav-item ">
+              <a class="nav-link" href="../examples/maps/fullscreen.html">
+                <span class="sidebar-mini"> OC </span>
+                <span class="sidebar-normal"> Organisation Chart                </span>
+              </a>
+            </li>
+            <li class="nav-item ">
+                <a class="nav-link" href="../examples/maps/fullscreen.html">
+                  <span class="sidebar-mini"> DT </span>
+                  <span class="sidebar-normal"> Department Tree                </span>
+                </a>
+              </li>
+          </ul>
+        </div>
       </li>
     </ul>
   </div>

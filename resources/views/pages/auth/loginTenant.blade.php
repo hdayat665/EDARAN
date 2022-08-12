@@ -1,13 +1,13 @@
 @extends('layouts.login')
 
 @section('content')
-<div class="container" id="domain">
+<div class="container" id="loginTenant">
     <div class="row">
         <div class="col-lg-4 col-md-6 col-sm-8 ml-auto mr-auto">
             <form id="submitForm">
                 <div class="card card-login card-hidden">
                     <div class="card-header card-header-info text-center">
-                        <h4 class="card-title">Login Domain</h4>
+                        <h4 class="card-title">Login Tenant</h4>
                         <div class="social-line">
                         </div>
                     </div>
@@ -20,7 +20,7 @@
                                         <i class="material-icons">domain</i>
                                     </span>
                                 </div>
-                                <input type="text" class="form-control" name="domain" placeholder="Domain..." required>
+                                <input type="text" class="form-control" name="tenant" placeholder="Tenant..." required>
                             </div>
                         </span>
                         <span class="bmd-form-group">

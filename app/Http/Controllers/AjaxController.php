@@ -20,26 +20,101 @@ class AjaxController extends Controller
         echo json_encode($save);
     }
 
-    public function ajaxLogin(Request $r)
+    public function ajaxLoginDomain(Request $r)
     {
         $input = $r->input();
 
         $ls = new LoginService();
 
-        $check = $ls->checkLogin($input);
+        $check = $ls->ajaxLoginDomain($input);
 
         echo json_encode($check);
     }
 
-    public function ajaxDomainLogin(Request $r)
+    public function ajaxLoginTenant(Request $r)
     {
         $input = $r->input();
 
         $ls = new LoginService();
 
-        $check = $ls->ajaxDomainLogin($input);
+        $check = $ls->ajaxLoginTenant($input);
 
         echo json_encode($check);
+    }
+
+    public function ajaxForgotPass(Request $r)
+    {
+        $input = $r->input();
+
+        $email = $input['email'] ?? null;
+
+        $ls = new LoginService;
+
+        // check email exist
+        $checkEmail = $ls->checkEmail($email);
+
+        // send email
+        $data['typeEmail'] = 'forgotPass';
+        $data['title'] = 'Orbit Reset Password';
+        $data['content1'] = 'This email is sent you to reset your password.';
+        $data['domain'] = $checkEmail['email']['domain'];
+        $data['username'] = $checkEmail['email']['username'];
+        $data['content2'] = 'Please click the button below to reset your password:';
+        $data['resetPassLink'] = env('APP_URL').'/resetPassword/'.$checkEmail['email']['user_id'];
+        $data['from'] = env('MAIL_USERNAME');
+        $data['nameFrom'] = 'Claim';
+        $data['subject'] = 'Orbit Reset Password';
+        $data['typeAttachment'] = "application/pdf";
+       //  $data['file'] = \public_path()."/assets/frontend/docs/gambar.jpg";
+
+        // \Mail::to($receiver)->send(new Mail($data));
+
+        $result = [];
+        $result['msg'] = 'Your reset password link have been send';
+        $result['title'] = 'Reset Password!';
+        $result['type'] = 'success';
+
+        echo json_encode($result);
+    }
+
+    public function ajaxForgotDomain(Request $r)
+    {
+        $input = $r->input();
+
+        $email = $input['email'] ?? null;
+
+        $ls = new LoginService;
+
+        // check email exist
+        $checkEmail = $ls->checkEmail($email);
+
+        // send email
+        $data['typeEmail'] = 'forgotDomain';
+        $data['domain'] = $checkEmail['email']['domain'];
+        $data['from'] = env('MAIL_USERNAME');
+        $data['nameFrom'] = 'Claim';
+        $data['subject'] = 'Orbit Reset Password';
+        $data['typeAttachment'] = "application/pdf";
+       //  $data['file'] = \public_path()."/assets/frontend/docs/gambar.jpg";
+
+        // \Mail::to($receiver)->send(new Mail($data));
+
+        $result = [];
+        $result['msg'] = 'Your reset password link have been send';
+        $result['title'] = 'Reset Password!';
+        $result['type'] = 'success';
+
+        echo json_encode($result);
+    }
+
+    public function ajaxResetPass(Request $r)
+    {
+        $input = $r->input();
+
+        $ls = new LoginService;
+        $resetPass = $ls->resetPassword($input);
+
+        echo json_encode($resetPass);
     }
 
     public function sendEmailRegister()

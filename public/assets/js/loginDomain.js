@@ -1,5 +1,7 @@
 $(document).ready(function() {
     $('#submit').click(function() {
+
+        // alert('ss');
         if ($("#submitForm").valid()) {} else {
             return;
         }
@@ -10,7 +12,7 @@ $(document).ready(function() {
 
             $.ajax({
                 type: "POST",
-                url: "/api/ajaxDomainLogin",
+                url: "/api/ajaxLoginDomain",
                 data: data,
                 dataType: "json",
                 async: false,
@@ -34,6 +36,9 @@ $(document).ready(function() {
 
                 });
             });
-        })
+
+        });
     })
+
+
 })

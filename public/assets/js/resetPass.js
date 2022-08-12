@@ -1,6 +1,6 @@
 $(document).ready(function() {
     $('#submit').click(function() {
-        if ($("#submitForm").valid()) {} else {
+        if ($('#submitForm').valid()) {} else {
             return;
         }
 
@@ -10,7 +10,7 @@ $(document).ready(function() {
 
             $.ajax({
                 type: "POST",
-                url: "/api/ajaxLogin",
+                url: "/api/ajaxResetPass",
                 data: data,
                 dataType: "json",
                 async: false,
@@ -27,16 +27,13 @@ $(document).ready(function() {
                     if (data.type == 'error') {
 
                     } else {
-                        window.location.href = '/home'
+                        window.location.href = '/loginView'
 
                     }
 
 
                 });
             });
-
-        });
+        })
     })
-
-
 })

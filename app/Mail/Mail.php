@@ -34,6 +34,9 @@ class Mail extends Mailable
 
         if ($data['typeEmail'] == 'register') {
             $view = 'emails.register';
+        }else if($data['typeEmail'] == 'forgotPass')
+        {
+            $view = 'emails.forgotPass';
         }
         // $address = 'janeexampexample@example.com';
         // $subject = 'This is a demo!';
@@ -50,7 +53,7 @@ class Mail extends Mailable
             return $this->view($view)
             ->from($data['from'], $data['nameFrom'])
             ->subject($data['subject'])
-            ->cc($data['cc'])
+            ->cc($data['cc'] ?? null)
             ->with($data);
         }
 
