@@ -33,6 +33,18 @@
             </button>
             <div class="collapse navbar-collapse justify-content-end">
                 <ul class="navbar-nav">
+                    <li class="nav-item  {{$forgotPass ?? null}} ">
+                        <a href="/forgotPassView" class="nav-link">
+                            <i class="material-icons">key_off</i>
+                            Forgot Password?
+                        </a>
+                    </li>
+                    <li class="nav-item  {{$forgotDomain ?? null}} ">
+                        <a href="/forgotDomainView" class="nav-link">
+                            <i class="material-icons">domain</i>
+                            Forgot Domain?
+                        </a>
+                    </li>
                     <li class="nav-item {{$domain ?? null}}">
                         <a href="/domainView" class="nav-link">
                             <i class="material-icons">dashboard</i>
@@ -48,7 +60,7 @@
                     <li class="nav-item  {{$admin ?? null}} ">
                         <a href="/" class="nav-link">
                             <i class="material-icons">fingerprint</i>
-                            Login Admin
+                            Login Tenant
                         </a>
                     </li>
                 </ul>

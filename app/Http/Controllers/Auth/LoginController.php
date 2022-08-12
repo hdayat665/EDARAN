@@ -16,13 +16,13 @@ class LoginController extends Controller
     public function loginView()
     {
         $data['admin'] = 'active';
-        return view('pages.auth.login', $data);
+        return view('pages.auth.loginTenant', $data);
     }
 
     public function domainView()
     {
         $data['domain'] = 'active';
-        return view('pages.auth.domain', $data);
+        return view('pages.auth.loginDomain', $data);
     }
 
     public function about()
@@ -50,6 +50,23 @@ class LoginController extends Controller
 
     public function forgotPassView()
     {
-        return view('pages.auth.forgotPassword');
+        $data = [];
+        $data['forgotPass'] = 'active';
+        return view('pages.auth.forgotPassword', $data);
+    }
+
+    public function resetPassView($user_id = '')
+    {
+        $data = [];
+        $data['user_id'] = $user_id;
+
+        return view('pages.auth.resetPassword', $data);
+    }
+
+    public function forgotDomainView()
+    {
+        $data = [];
+
+        return view('pages.auth.forgotDomain', $data);
     }
 }

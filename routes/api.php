@@ -22,7 +22,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::controller(AjaxController::class)->group(function () {
     Route::post('/ajaxRegisterSave', 'ajaxRegisterSave');
-    Route::post('/ajaxLogin', 'ajaxLogin');
-    Route::post('/ajaxDomainLogin', 'ajaxDomainLogin');
-    Route::get('/sendEmailRegister', 'sendEmailRegister');
+    Route::post('/ajaxLoginDomain', 'ajaxLoginDomain');
+    Route::post('/ajaxLoginTenant', 'ajaxLoginTenant');
+    Route::post('/sendEmailRegister', 'sendEmailRegister');
+    Route::post('/ajaxResetPass', 'ajaxResetPass');
 });

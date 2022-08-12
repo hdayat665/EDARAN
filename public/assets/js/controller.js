@@ -4,8 +4,10 @@ requirejs.config({
         'scripts': '/public/assets/js/scripts',
         'material': '/public/assets/js/material',
         'register': '/public/assets/js/register',
-        'login': '/public/assets/js/login',
-        'domain': '/public/assets/js/domain',
+        'loginDomain': '/public/assets/js/loginDomain',
+        'loginTenant': '/public/assets/js/loginTenant',
+        'forgotDomain': '/public/assets/js/forgotDomain',
+        'resetPass': '/public/assets/js/resetPass',
         'forgotPass': '/public/assets/js/forgotPass',
         'search-box': 'assets/frontend/js/search-box',
         'homepage': 'assets/frontend/js/homepage',
@@ -24,16 +26,24 @@ if ($('#register').length > 0) {
     requirejs(['register']);
 }
 
-if ($('#login').length > 0) {
-    requirejs(['login']);
+if ($('#loginTenant').length > 0) {
+    requirejs(['loginTenant']);
 }
 
-if ($('#domain').length > 0) {
-    requirejs(['domain']);
+if ($('#loginDomain').length > 0) {
+    requirejs(['loginDomain']);
 }
 
 if ($('#forgotPass').length > 0) {
     requirejs(['forgotPass']);
+}
+
+if ($('#resetPass').length > 0) {
+    requirejs(['resetPass']);
+}
+
+if ($('#forgotDomain').length > 0) {
+    requirejs(['forgotDomain']);
 }
 
 

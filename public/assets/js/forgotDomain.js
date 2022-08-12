@@ -10,7 +10,7 @@ $(document).ready(function() {
 
             $.ajax({
                 type: "POST",
-                url: "/api/ajaxForgotPass",
+                url: "/api/ajaxForgotDomain",
                 data: data,
                 dataType: "json",
                 async: false,
