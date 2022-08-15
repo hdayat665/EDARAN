@@ -24,6 +24,10 @@ Route::controller(AjaxController::class)->group(function () {
     Route::post('/ajaxRegisterSave', 'ajaxRegisterSave');
     Route::post('/ajaxLoginDomain', 'ajaxLoginDomain');
     Route::post('/ajaxLoginTenant', 'ajaxLoginTenant');
+    Route::post('/ajaxLoginAdmin', 'ajaxLoginAdmin');
     Route::post('/sendEmailRegister', 'sendEmailRegister');
     Route::post('/ajaxResetPass', 'ajaxResetPass');
+    Route::get('/ajaxGetVehicle', 'ajaxGetVehicle');
+    Route::post('/ajaxForgotDomain', 'ajaxForgotDomain');
+    Route::post('/ajaxForgotPass', 'ajaxForgotPass');
 });

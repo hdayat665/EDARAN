@@ -6,6 +6,7 @@ use App\Models\Users;
 use Illuminate\Http\Request;
 use App\Service\LoginService;
 use App\Mail\Mail;
+use App\Models\Vehicle;
 
 class AjaxController extends Controller
 {
@@ -26,7 +27,7 @@ class AjaxController extends Controller
 
         $ls = new LoginService();
 
-        $check = $ls->ajaxLoginDomain($input);
+        $check = $ls->ajaxLogin($input, 'domain');
 
         echo json_encode($check);
     }
@@ -37,7 +38,18 @@ class AjaxController extends Controller
 
         $ls = new LoginService();
 
-        $check = $ls->ajaxLoginTenant($input);
+        $check = $ls->ajaxLogin($input,'tenant');
+
+        echo json_encode($check);
+    }
+
+    public function ajaxLoginAdmin(Request $r)
+    {
+        $input = $r->input();
+
+        $ls = new LoginService();
+
+        $check = $ls->ajaxLogin($input,'admin');
 
         echo json_encode($check);
     }
@@ -46,21 +58,25 @@ class AjaxController extends Controller
     {
         $input = $r->input();
 
-        $email = $input['email'] ?? null;
+        $email = $input['username'] ?? null;
 
         $ls = new LoginService;
 
         // check email exist
         $checkEmail = $ls->checkEmail($email);
 
+        if ($checkEmail['type'] == 'error') {
+            echo json_encode($checkEmail);die;
+        }
+
         // send email
         $data['typeEmail'] = 'forgotPass';
         $data['title'] = 'Orbit Reset Password';
         $data['content1'] = 'This email is sent you to reset your password.';
-        $data['domain'] = $checkEmail['email']['domain'];
-        $data['username'] = $checkEmail['email']['username'];
+        $data['domain'] = $checkEmail['domain'];
+        $data['username'] = $checkEmail['data']->username;
         $data['content2'] = 'Please click the button below to reset your password:';
-        $data['resetPassLink'] = env('APP_URL').'/resetPassword/'.$checkEmail['email']['user_id'];
+        $data['resetPassLink'] = env('APP_URL').'/resetPassword/'.$checkEmail['data']->user_id;
         $data['from'] = env('MAIL_USERNAME');
         $data['nameFrom'] = 'Claim';
         $data['subject'] = 'Orbit Reset Password';
@@ -88,9 +104,13 @@ class AjaxController extends Controller
         // check email exist
         $checkEmail = $ls->checkEmail($email);
 
+        if ($checkEmail['type'] == 'error') {
+            echo json_encode($checkEmail);die;
+        }
+
         // send email
         $data['typeEmail'] = 'forgotDomain';
-        $data['domain'] = $checkEmail['email']['domain'];
+        $data['domain'] = $checkEmail['domain'];
         $data['from'] = env('MAIL_USERNAME');
         $data['nameFrom'] = 'Claim';
         $data['subject'] = 'Orbit Reset Password';
@@ -137,5 +157,26 @@ class AjaxController extends Controller
         //  $data['file'] = \public_path()."/assets/frontend/docs/gambar.jpg";
 
          \Mail::to($receiver)->send(new Mail($data));
+    }
+
+    public function ajaxGetVehicle($user_id)
+    {
+        $data['data'] = [
+            [
+              "vehicle_type"=>"Tiger Nixon",
+              "plate_no"=>"System Architect",
+              "id"=>"Edinburgh",
+            ],
+            [
+                "vehicle_type"=>"Tiger Nixon",
+                "plate_no"=>"System Architect",
+                "id"=>"Edinburgh",
+            ],
+        ];
+
+        $data['data'] = Vehicle::where('user_id',$user_id)->get()->toArray();
+
+
+        echo json_encode($data);
     }
 }

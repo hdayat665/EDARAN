@@ -6,9 +6,11 @@ requirejs.config({
         'register': '/public/assets/js/register',
         'loginDomain': '/public/assets/js/loginDomain',
         'loginTenant': '/public/assets/js/loginTenant',
+        'loginAdmin': '/public/assets/js/loginAdmin',
         'forgotDomain': '/public/assets/js/forgotDomain',
         'resetPass': '/public/assets/js/resetPass',
         'forgotPass': '/public/assets/js/forgotPass',
+        'profile': '/public/assets/js/profile',
         'search-box': 'assets/frontend/js/search-box',
         'homepage': 'assets/frontend/js/homepage',
         'sweetAlert2': '/public/assets/sweetalert2/sweetalert2',
@@ -42,8 +44,16 @@ if ($('#resetPass').length > 0) {
     requirejs(['resetPass']);
 }
 
+if ($('#loginAdmin').length > 0) {
+    requirejs(['loginAdmin']);
+}
+
 if ($('#forgotDomain').length > 0) {
     requirejs(['forgotDomain']);
+}
+
+if ($('#profile').length > 0) {
+    requirejs(['profile']);
 }
 
 

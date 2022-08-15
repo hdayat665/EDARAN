@@ -15,7 +15,7 @@ class LoginController extends Controller
 
     public function loginView()
     {
-        $data['admin'] = 'active';
+        $data['tenant'] = 'active';
         return view('pages.auth.loginTenant', $data);
     }
 
@@ -68,5 +68,12 @@ class LoginController extends Controller
         $data = [];
 
         return view('pages.auth.forgotDomain', $data);
+    }
+
+    public function loginAdminView()
+    {
+        $data = [];
+
+        return view('pages.auth.loginAdmin', $data);
     }
 }
