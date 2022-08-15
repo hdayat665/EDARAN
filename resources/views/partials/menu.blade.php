@@ -63,7 +63,7 @@
         <div class="collapse" id="pagesExamples">
           <ul class="nav">
             <li class="nav-item ">
-              <a class="nav-link" href="../examples/pages/pricing.html">
+              <a class="nav-link" href="/profile">
                 <span class="sidebar-mini"> MP </span>
                 <span class="sidebar-normal"> My Profile</span>
               </a>
@@ -254,24 +254,130 @@
         </a>
         <div class="collapse" id="report">
           <ul class="nav">
-            <li class="nav-item ">
-              <a class="nav-link" href="../examples/maps/google.html">
-                <span class="sidebar-mini"> PD </span>
-                <span class="sidebar-normal"> Phone Directory                </span>
-              </a>
-            </li>
-            <li class="nav-item ">
-              <a class="nav-link" href="../examples/maps/fullscreen.html">
-                <span class="sidebar-mini"> OC </span>
-                <span class="sidebar-normal"> Organisation Chart                </span>
-              </a>
-            </li>
-            <li class="nav-item ">
-                <a class="nav-link" href="../examples/maps/fullscreen.html">
-                  <span class="sidebar-mini"> DT </span>
-                  <span class="sidebar-normal"> Department Tree                </span>
+            <li class="nav-item active ">
+                <a class="nav-link" data-toggle="collapse" href="#timesheet" aria-expanded="true">
+                  <span class="sidebar-mini"> T </span>
+                  <span class="sidebar-normal"> Timesheet
+                    <b class="caret"></b>
+                  </span>
                 </a>
-              </li>
+                <div class="collapse" id="timesheet">
+                  <ul class="nav">
+                    <li class="nav-item ">
+                      <a class="nav-link" href="#0">
+                        <span class="sidebar-mini"> SR </span>
+                        <span class="sidebar-normal"> Status Report                        </span>
+                      </a>
+                    </li>
+                  </ul>
+                  <ul class="nav">
+                    <li class="nav-item ">
+                      <a class="nav-link" href="#0">
+                        <span class="sidebar-mini"> ER </span>
+                        <span class="sidebar-normal"> Employee Report
+                        </span>
+                      </a>
+                    </li>
+                  </ul>
+                  <ul class="nav">
+                    <li class="nav-item ">
+                      <a class="nav-link" href="#0">
+                        <span class="sidebar-mini"> OR </span>
+                        <span class="sidebar-normal"> Overtime Report
+                        </span>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+            </li>
+            <li class="nav-item active ">
+                <a class="nav-link" data-toggle="collapse" href="#EA" aria-expanded="true">
+                  <span class="sidebar-mini"> EA </span>
+                  <span class="sidebar-normal"> E-Attendance
+                    <b class="caret"></b>
+                  </span>
+                </a>
+                <div class="collapse" id="EA">
+                  <ul class="nav">
+                    <li class="nav-item ">
+                      <a class="nav-link" href="#0">
+                        <span class="sidebar-mini"> DR </span>
+                        <span class="sidebar-normal"> Daily Report                        </span>
+                      </a>
+                    </li>
+                  </ul>
+                  <ul class="nav">
+                    <li class="nav-item ">
+                      <a class="nav-link" href="#0">
+                        <span class="sidebar-mini"> SR </span>
+                        <span class="sidebar-normal"> Status Report
+                        </span>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+            </li>
+            <li class="nav-item active ">
+                <a class="nav-link" aria-expanded="true">
+                  <span class="sidebar-mini"> EL </span>
+                  <span class="sidebar-normal"> E-Leave
+                  </span>
+                </a>
+            </li>
+            <li class="nav-item active ">
+                <a class="nav-link" data-toggle="collapse" href="#project" aria-expanded="true">
+                  <span class="sidebar-mini"> P </span>
+                  <span class="sidebar-normal"> Project
+                    <b class="caret"></b>
+                  </span>
+                </a>
+                <div class="collapse" id="project">
+                  <ul class="nav">
+                    <li class="nav-item ">
+                      <a class="nav-link" href="#0">
+                        <span class="sidebar-mini"> PL </span>
+                        <span class="sidebar-normal"> Project Listing                        </span>
+                      </a>
+                    </li>
+                  </ul>
+                  <ul class="nav">
+                    <li class="nav-item ">
+                      <a class="nav-link" href="#0">
+                        <span class="sidebar-mini"> PS </span>
+                        <span class="sidebar-normal"> Project Status
+                        </span>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+            </li>
+            <li class="nav-item active ">
+                <a class="nav-link" data-toggle="collapse" href="#claims" aria-expanded="true">
+                  <span class="sidebar-mini"> C </span>
+                  <span class="sidebar-normal"> Claim
+                    <b class="caret"></b>
+                  </span>
+                </a>
+                <div class="collapse" id="claims">
+                  <ul class="nav">
+                    <li class="nav-item ">
+                      <a class="nav-link" href="#0">
+                        <span class="sidebar-mini"> C </span>
+                        <span class="sidebar-normal"> Claim                        </span>
+                      </a>
+                    </li>
+                  </ul>
+                  <ul class="nav">
+                    <li class="nav-item ">
+                      <a class="nav-link" href="#0">
+                        <span class="sidebar-mini"> CA </span>
+                        <span class="sidebar-normal"> Cash Advance
+                        </span>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+            </li>
           </ul>
         </div>
       </li>
@@ -284,24 +390,182 @@
         </a>
         <div class="collapse" id="setting">
           <ul class="nav">
-            <li class="nav-item ">
-              <a class="nav-link" href="../examples/maps/google.html">
-                <span class="sidebar-mini"> PD </span>
-                <span class="sidebar-normal"> Phone Directory                </span>
-              </a>
-            </li>
-            <li class="nav-item ">
-              <a class="nav-link" href="../examples/maps/fullscreen.html">
-                <span class="sidebar-mini"> OC </span>
-                <span class="sidebar-normal"> Organisation Chart                </span>
-              </a>
-            </li>
-            <li class="nav-item ">
-                <a class="nav-link" href="../examples/maps/fullscreen.html">
-                  <span class="sidebar-mini"> DT </span>
-                  <span class="sidebar-normal"> Department Tree                </span>
+            <li class="nav-item active ">
+                <a class="nav-link" data-toggle="collapse" href="#gs" aria-expanded="true">
+                  <span class="sidebar-mini"> GS </span>
+                  <span class="sidebar-normal"> General Settings
+
+                    <b class="caret"></b>
+                  </span>
                 </a>
-              </li>
+                <div class="collapse" id="gs">
+                  <ul class="nav">
+                    <li class="nav-item ">
+                      <a class="nav-link" href="#0">
+                        <span class="sidebar-mini"> R </span>
+                        <span class="sidebar-normal"> Roles
+                        </span>
+                      </a>
+                    </li>
+                  </ul>
+                  <ul class="nav">
+                    <li class="nav-item ">
+                      <a class="nav-link" href="#0">
+                        <span class="sidebar-mini"> C </span>
+                        <span class="sidebar-normal"> Company
+                        </span>
+                      </a>
+                    </li>
+                  </ul>
+                  <ul class="nav">
+                    <li class="nav-item ">
+                      <a class="nav-link" href="#0">
+                        <span class="sidebar-mini"> D </span>
+                        <span class="sidebar-normal"> Department
+                        </span>
+                      </a>
+                    </li>
+                  </ul>
+                  <ul class="nav">
+                    <li class="nav-item ">
+                      <a class="nav-link" href="#0">
+                        <span class="sidebar-mini"> U </span>
+                        <span class="sidebar-normal"> Unit
+                        </span>
+                      </a>
+                    </li>
+                  </ul>
+                  <ul class="nav">
+                    <li class="nav-item ">
+                      <a class="nav-link" href="#0">
+                        <span class="sidebar-mini"> B </span>
+                        <span class="sidebar-normal"> Branch
+                        </span>
+                      </a>
+                    </li>
+                  </ul>
+                  <ul class="nav">
+                    <li class="nav-item ">
+                      <a class="nav-link" href="#0">
+                        <span class="sidebar-mini"> JG </span>
+                        <span class="sidebar-normal"> Job Grade
+                        </span>
+                      </a>
+                    </li>
+                  </ul>
+                  <ul class="nav">
+                    <li class="nav-item ">
+                      <a class="nav-link" href="#0">
+                        <span class="sidebar-mini"> D </span>
+                        <span class="sidebar-normal"> Designation
+                        </span>
+                      </a>
+                    </li>
+                  </ul>
+                  <ul class="nav">
+                    <li class="nav-item ">
+                      <a class="nav-link" href="#0">
+                        <span class="sidebar-mini"> ET </span>
+                        <span class="sidebar-normal"> Employment Type
+                        </span>
+                      </a>
+                    </li>
+                  </ul>
+                  <ul class="nav">
+                    <li class="nav-item ">
+                      <a class="nav-link" href="#0">
+                        <span class="sidebar-mini"> S </span>
+                        <span class="sidebar-normal"> SOPs
+                        </span>
+                      </a>
+                    </li>
+                  </ul>
+                  <ul class="nav">
+                    <li class="nav-item ">
+                      <a class="nav-link" href="#0">
+                        <span class="sidebar-mini"> N </span>
+                        <span class="sidebar-normal"> News
+                        </span>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+            </li>
+            <li class="nav-item active ">
+                <a class="nav-link" data-toggle="collapse" href="#ts" aria-expanded="true">
+                  <span class="sidebar-mini"> TS </span>
+                  <span class="sidebar-normal"> Timesheet Settings
+
+                    <b class="caret"></b>
+                  </span>
+                </a>
+                <div class="collapse" id="ts">
+                  <ul class="nav">
+                    <li class="nav-item ">
+                      <a class="nav-link" href="#0">
+                        <span class="sidebar-mini"> TP </span>
+                        <span class="sidebar-normal"> Timesheet Period
+                        </span>
+                      </a>
+                    </li>
+                  </ul>
+                  <ul class="nav">
+                    <li class="nav-item ">
+                      <a class="nav-link" href="#0">
+                        <span class="sidebar-mini"> L </span>
+                        <span class="sidebar-normal"> Type of Logs
+                        </span>
+                      </a>
+                    </li>
+                  </ul>
+                  <ul class="nav">
+                    <li class="nav-item ">
+                      <a class="nav-link" href="#0">
+                        <span class="sidebar-mini"> L </span>
+                        <span class="sidebar-normal"> Location
+                        </span>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+            </li>
+            <li class="nav-item active ">
+                <a class="nav-link" data-toggle="collapse" href="#leave" aria-expanded="true">
+                  <span class="sidebar-mini"> E </span>
+                  <span class="sidebar-normal"> E-Leave
+                    <b class="caret"></b>
+                  </span>
+                </a>
+                <div class="collapse" id="leave">
+                  <ul class="nav">
+                    <li class="nav-item ">
+                      <a class="nav-link" href="#0">
+                        <span class="sidebar-mini"> LE </span>
+                        <span class="sidebar-normal"> Leave Entitlement
+                        </span>
+                      </a>
+                    </li>
+                  </ul>
+                  <ul class="nav">
+                    <li class="nav-item ">
+                      <a class="nav-link" href="#0">
+                        <span class="sidebar-mini"> LT </span>
+                        <span class="sidebar-normal"> Leave Types
+                        </span>
+                      </a>
+                    </li>
+                  </ul>
+                  <ul class="nav">
+                    <li class="nav-item ">
+                      <a class="nav-link" href="#0">
+                        <span class="sidebar-mini"> H </span>
+                        <span class="sidebar-normal"> Holiday
+                        </span>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+            </li>
           </ul>
         </div>
       </li>

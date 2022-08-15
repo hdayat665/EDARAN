@@ -12,7 +12,7 @@ $(document).ready(function() {
 
             $.ajax({
                 type: "POST",
-                url: "/api/ajaxLoginDomain",
+                url: "/api/ajaxLoginAdmin",
                 data: data,
                 dataType: "json",
                 async: false,

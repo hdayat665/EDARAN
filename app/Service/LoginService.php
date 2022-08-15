@@ -6,6 +6,7 @@ use App\Models\Subscription;
 use App\Models\Users;
 use App\Models\UsersDetails;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
 
 class LoginService
 {
@@ -72,46 +73,6 @@ class LoginService
         return $data;
     }
 
-    public function ajaxLoginDomain($input)
-    {
-        $user = Users::where([['username', '=', $input['username']]])->first();
-
-        if (!$user) {
-            $data['title'] = 'Error!';
-            $data['type'] = 'error';
-            $data['msg'] = 'Username / Email not exist';
-
-            return $data;
-        }
-
-        if ($user['status'] == 'not verified') {
-            $data['title'] = 'Error!';
-            $data['type'] = 'error';
-            $data['msg'] = 'Please verified your account by clicking link in email we provided';
-
-            return $data;
-        }
-
-        $password = Hash::check($input['password'], $user['password']);
-        // var_dump($password);die;
-        if (!$password) {
-            $data['title'] = 'Error!';
-            $data['type'] = 'error';
-            $data['msg'] = 'password and Username not match';
-
-            return $data;
-        }
-
-        // $userDetails = UsersDetails::where([['user_id', '=', $user['id']]]);
-        $data['title'] = 'Success!';
-        $data['type'] = 'success';
-        $data['msg'] = 'Welcome ';
-
-        return $data;
-
-        // dd($password);
-    }
-
     public function verifiedAcc($id = '')
     {
         $user = Users::where('id', $id)
@@ -134,27 +95,24 @@ class LoginService
 
     }
 
-    public function ajaxLoginTenant($input)
+    public function ajaxLogin($input, $type = '')
     {
-         // check tenant exist or not
-         $tenant = UsersDetails::where([['tenant','=', $input['tenant']]])
-         ->first();
+        // check tenant exist or not
+        if ($type == 'tenant') {
+            $tenant = UsersDetails::where([['tenant', '=', $input['tenant']]])
+            ->first();
 
-         $data['title'] = 'Success!';
-         $data['type'] = 'success';
-         $data['msg'] = 'Success';
+            if (!$tenant) {
+                $data['title'] = 'Error!';
+                $data['type'] = 'error';
+                $data['msg'] = 'Tenant does not exist';
 
-         if(!$tenant)
-         {
-             $data['title'] = 'Error!';
-             $data['type'] = 'error';
-             $data['msg'] = 'Tenant does not exist';
-
-             return $data;
-         }
+                return $data;
+            }
+        }
 
         // check username n password
-        $user = Users::where([['username', '=', $input['username']]])->first();
+        $user = Users::where([['username', '=', $input['username']], ['type', '=', $type]])->first();
 
         if (!$user) {
             $data['title'] = 'Error!';
@@ -170,8 +128,34 @@ class LoginService
             $data['type'] = 'error';
             $data['msg'] = 'Password and Username not match';
 
-            return $data;
+            if ($type == 'admin') {
+                $count = 1;
+                if ($user->failLogin) {
 
+                    Users::where('username', $input['username'])
+                    ->update(['failLogin' =>  $user->failLogin+1 ]);
+                } else  {
+                    Users::where('username', $input['username'])
+                    ->update(['failLogin' =>  $count ]);
+                }
+
+                //   if more than 3 attemps lock acc
+                if($user->failLogin >= 3){
+                    Users::where('username', $input['username'])
+                    ->update(['status' =>  'lock' ]);
+
+                    // sending email
+
+                    $data['title'] = 'Error!';
+                    $data['type'] = 'error';
+                    $data['msg'] = 'Your account have been lock.';
+
+                    return $data;
+
+                }
+            }
+
+            return $data;
         }
 
         // verified acc
@@ -181,25 +165,43 @@ class LoginService
             $data['msg'] = 'Please verified your account by clicking link in email we provided';
 
             return $data;
-
         }
+
+        if ($user['status'] == 'lock') {
+            $data['title'] = 'Error!';
+            $data['type'] = 'error';
+            $data['msg'] = 'Your account have been lock.';
+
+            return $data;
+        }
+
+        Users::where('username', $input['username'])
+                    ->update(['failLogin' =>  0]);
+
+        $data['title'] = 'Success!';
+        $data['type'] = 'success';
+        $data['msg'] = 'Success';
 
         return $data;
     }
 
     public function checkEmail($email = '')
     {
-        $checkEmail = UsersDetails::where('email', "'". $email ."'")->firstOrFail()->toArray();
-        $data['title'] = 'Success!';
-        $data['type'] = 'success';
-        $data['msg'] = 'You email have been send!';
-        $data['email'] = $checkEmail;
+        $checkEmail = UsersDetails::where('email', $email)->first();
 
         if(!$checkEmail)
         {
             $data['title'] = 'Error!';
             $data['type'] = 'error';
             $data['msg'] = 'You email does not exist!';
+        }else {
+            $data['title'] = 'Success!';
+            $data['type'] = 'success';
+            $data['msg'] = 'You email have been send!';
+            $data['email'] = $checkEmail->email;
+            $data['domain'] = $checkEmail->domain;
+            $data['data'] = $checkEmail;
+
         }
 
         return $data;

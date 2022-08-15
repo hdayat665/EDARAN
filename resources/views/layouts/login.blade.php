@@ -57,10 +57,16 @@
                             Register Domain
                         </a>
                     </li>
-                    <li class="nav-item  {{$admin ?? null}} ">
+                    <li class="nav-item  {{$tenant ?? null}} ">
                         <a href="/" class="nav-link">
                             <i class="material-icons">fingerprint</i>
                             Login Tenant
+                        </a>
+                    </li>
+                    <li class="nav-item  {{$admin ?? null}} ">
+                        <a href="/loginAdmin" class="nav-link">
+                            <i class="material-icons">fingerprint</i>
+                            Login Admin
                         </a>
                     </li>
                 </ul>

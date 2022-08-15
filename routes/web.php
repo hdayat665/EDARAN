@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\HRIS\ProfileController;
 
 
 /*
@@ -22,9 +23,15 @@ Route::controller(LoginController::class)->group(function () {
     Route::get('/home', 'index');
     Route::get('/loginView', 'loginView');
     Route::get('/domainView', 'domainView');
+    Route::get('/loginAdmin', 'loginAdminView');
     Route::get('/registerView', 'registerView');
     Route::get('/verifiedView/{id}', 'verifiedView');
     Route::get('/forgotPassView', 'forgotPassView');
+    Route::get('/forgotDomainView', 'forgotDomainView');
     Route::get('/resetPassView/{id}', 'resetPassView');
     Route::get('/resetDomainView', 'resetDomainView');
+});
+
+Route::controller(ProfileController::class)->group(function () {
+    Route::get('/profile', 'profile');
 });
