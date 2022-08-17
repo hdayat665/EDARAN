@@ -6,6 +6,7 @@ use App\Models\Users;
 use Illuminate\Http\Request;
 use App\Service\LoginService;
 use App\Mail\Mail;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Vehicle;
 
 class AjaxController extends Controller
@@ -49,9 +50,20 @@ class AjaxController extends Controller
 
         $ls = new LoginService();
 
-        $check = $ls->ajaxLogin($input,'admin');
+        // $credentials = $r->only('username', 'password');
 
-        echo json_encode($check);
+        // if (Auth::attempt($credentials)) {
+        //     $check = $ls->ajaxLogin($input, 'admin');
+
+        //     echo json_encode($check);
+        // }
+
+        $check = $ls->ajaxLogin($input, 'admin');
+
+            echo json_encode($check);
+
+
+
     }
 
     public function ajaxForgotPass(Request $r)

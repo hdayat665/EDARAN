@@ -5,16 +5,21 @@ namespace App\Http\Controllers\Auth;
 use App\Service\LoginService;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
     public function index()
     {
+        // $user = Auth::check();
+        // dd($user);
         return view('home');
     }
 
     public function loginView()
     {
+
+// Get the currently authenticated user...
         $data['tenant'] = 'active';
         return view('pages.auth.loginTenant', $data);
     }
