@@ -21,7 +21,7 @@ use App\Http\Controllers\HRIS\ProfileController;
 Route::controller(LoginController::class)->group(function () {
     Route::get('/', 'loginView');
     Route::get('/home', 'index');
-    Route::get('/loginView', 'loginView');
+    Route::get('/loginView', 'loginView')->name('login');
     Route::get('/domainView', 'domainView');
     Route::get('/loginAdmin', 'loginAdminView');
     Route::get('/registerView', 'registerView');
@@ -33,5 +33,6 @@ Route::controller(LoginController::class)->group(function () {
 });
 
 Route::controller(ProfileController::class)->group(function () {
+    // Route::get('/profile', 'profile')->middleware('auth');
     Route::get('/profile', 'profile');
 });
