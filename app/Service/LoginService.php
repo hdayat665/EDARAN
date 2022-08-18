@@ -5,8 +5,10 @@ namespace App\Service;
 use App\Models\Subscription;
 use App\Models\Users;
 use App\Models\UsersDetails;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Http\Request;
 
 class LoginService
 {
@@ -70,7 +72,7 @@ class LoginService
             $data['msg'] = 'Error register';
         }
 
-        return $data;
+        return $this->response($saveUser);
     }
 
     public function verifiedAcc($id = '')
@@ -237,5 +239,43 @@ class LoginService
 
         return $data;
 
+    }
+
+    public function login($cred, $type = '')
+    {
+        $data['title'] = 'Success';
+        $data['type'] = 'success';
+        $data['msg'] = 'Authorized!';
+
+        if (!Auth::attempt($cred)) {
+            // $tenant = $data->tenant;
+            $data['title'] = 'Error';
+            $data['type'] = 'error';
+            $data['msg'] = 'Credential not match!';
+        }else{
+            $user_id = Auth::user()->id;
+
+            Users::where('id', $user_id)->update(['is_login'=> 'yes']);
+
+            if (!$type) {
+                $userDetail = Users::where([['id', $user_id], ['tenant', $cred['tenant']]])->first();
+
+                if (!$userDetail) {
+                    $data['title'] = 'Error';
+                    $data['type'] = 'error';
+                    $data['msg'] = 'Credential not match with tenant name!';
+                }
+            }
+
+        }
+
+        return $data;
+    }
+
+    public function checkTenantName($input)
+    {
+        $tenant = Users::where('tenant', $input['tenant'])->first();
+
+        return $tenant;
     }
 }

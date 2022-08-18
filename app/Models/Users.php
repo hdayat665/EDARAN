@@ -25,6 +25,8 @@ class Users extends Authenticatable
         'password',
         'type',
         'status',
+        'tenant',
+        'package',
     ];
 }
 
