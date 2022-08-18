@@ -4,7 +4,8 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\HRIS\ProfileController;
-
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\Auth\RegisterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,7 +22,8 @@ use App\Http\Controllers\HRIS\ProfileController;
 Route::controller(LoginController::class)->group(function () {
     Route::get('/', 'loginView');
     Route::get('/home', 'index');
-    Route::get('/loginView', 'loginView')->name('login');
+    Route::get('/loginTenant', 'loginView')->name('login');
+    Route::get('/loginHost', 'loginHostView');
     Route::get('/domainView', 'domainView');
     Route::get('/loginAdmin', 'loginAdminView');
     Route::get('/registerView', 'registerView');
@@ -30,9 +32,21 @@ Route::controller(LoginController::class)->group(function () {
     Route::get('/forgotDomainView', 'forgotDomainView');
     Route::get('/resetPassView/{id}', 'resetPassView');
     Route::get('/resetDomainView', 'resetDomainView');
+    Route::get('/logout/{type}', 'logoutTenant');
+    Route::get('/selectPackage', 'selectPackage');
 });
+Route::get('/registerTenant/{package}', [RegisterController::class,'registerTenant']);
 
 Route::controller(ProfileController::class)->group(function () {
     // Route::get('/profile', 'profile')->middleware('auth');
     Route::get('/profile', 'profile');
 });
+
+// Route::middleware(['auth:sanctum'])->group(function () {
+    Route::controller(DashboardController::class)->group(function () {
+        // Route::get('/profile', 'profile')->middleware('auth');
+        Route::get('/dashboardTenant', 'dashboardTenant')->name('dashboardTenant');
+        Route::get('/dashboardHost', 'dashboardHost')->name('dashboardHost');
+    });
+// });
+

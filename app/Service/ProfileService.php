@@ -14,6 +14,7 @@ use App\Models\Users;
 use App\Models\UsersDetails;
 use App\Models\UserSibling;
 use App\Models\Vehicle;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 
@@ -272,7 +273,10 @@ class ProfileService
 
     public function getSibling($user_id = '')
     {
-        $user_id = 10;
+        $user = response(Auth::user());
+
+        $user_id = $user['user_id'];
+
         $data['data'] = UserSibling::where('user_id', $user_id)->get();
         $data['msg'] = 'Success get sibling data';
 

@@ -191,4 +191,20 @@ class AjaxController extends Controller
 
         echo json_encode($data);
     }
+
+    public function ajaxCheckTenantName(Request $r)
+    {
+        $input = $r->input();
+
+        $ls = new LoginService;
+
+        $tenantName = $ls->checkTenantName($input);
+
+        return \response()->json([
+            'title'=>'success',
+            'type'=>'success',
+            'msg'=>'Tenant found!',
+            'data' => $tenantName
+        ], 200);
+    }
 }

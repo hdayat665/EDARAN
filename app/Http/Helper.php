@@ -33,3 +33,16 @@ function upload($request, $type = '')
       return $data;
     }
 }
+
+if (! function_exists('responseH')) {
+function responseH($user)
+    {
+        $token  = $user->createToken( str()->random(40) )->plainTextToken;
+
+        return response()->json([
+            // 'user'=>$user,
+            'token' => 'Bearer '.$token,
+            // 'token_type' => 'Bearer'
+        ]);
+    }
+}

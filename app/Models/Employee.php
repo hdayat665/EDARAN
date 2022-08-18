@@ -18,7 +18,7 @@ class Employee extends Authenticatable
      * @var array<int, string>
      */
 
-    protected $table ='employee';
+    protected $table ='employment';
 
     protected $fillable = [
         'user_id',
