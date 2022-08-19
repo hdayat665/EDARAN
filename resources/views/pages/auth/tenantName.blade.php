@@ -7,7 +7,7 @@
             </div>
             <div class="modal-body">
                 <form id="submitForm">
-
+                    @csrf
                     <div class="mb-3">
                         <label for="recipient-name" class="col-form-label">Tenancy name :</label>
                         <input type="text" class="form-control" name="tenant" id="recipient-name">

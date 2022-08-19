@@ -7,7 +7,9 @@ use Illuminate\Routing\Controller;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
-
+use App\Http\Requests\Auth\LoginRequest;
+use Illuminate\Support\Facades\Session;
+use Symfony\Component\Debug\ExceptionHandler;
 class LoginController extends Controller
 {
     public function index()
@@ -107,25 +109,40 @@ class LoginController extends Controller
         ], 200);
     }
 
-    public function loginHost(Request $r)
+    public function login(LoginRequest $r, $type = '')
     {
         $ls = new LoginService;
 
-        $cred = $r->validate([
-            'username'=>'required|email|exists:users',
-            'password'=>'required|min:3',
-            'type'=>'exists:users,type'
-        ]);
+        try {
+            $data = $ls->login($r,$type);
 
-        $login = $ls->login($cred,'host');
+            return \response()->json([
+                'title' => $data['title'],
+                'type' => $data['type'],
+                'msg' => $data['msg'],
+            ]);
 
-        return \response()->json([
-            'title'=>$login['title'],
-            'type'=>$login['type'],
-            'msg'=>$login['msg'],
-            // 'data' => $tenant ?? null
-        ], 200);
+        } catch (\Throwable $th) {
+            $data['msg'] = $th->getMessage();
+            $data['type'] = 'error';
+            $data['title'] = 'Error!';
+
+            return \response()->json([
+                'title' => $data['title'],
+                'type' => $data['type'],
+                'msg' => $data['msg'],
+            ]);
+        }
     }
+
+    // public function store(LoginRequest $request)
+    // {
+    //     $request->authenticate();
+
+    //     $request->session()->regenerate();
+
+    //     return redirect()->intended(RouteServiceProvider::HOME);
+    // }
 
     public function checkTenant(Request $r)
     {
@@ -156,9 +173,11 @@ class LoginController extends Controller
 
     public function logoutTenant($type = '')
     {
+        Auth::logout();
+        Session::flush();
         if ($type == 'tenant') {
             return view('pages.auth.loginTenant');
-        }else{
+        } else {
             return view('pages.auth.loginHost');
         }
     }
