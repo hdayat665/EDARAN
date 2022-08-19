@@ -3,6 +3,7 @@
 namespace App\Service;
 
 use App\Models\Employee;
+use App\Models\JobHistory;
 use App\Models\Subscription;
 use App\Models\UserAddress;
 use App\Models\UserChildren;
@@ -22,7 +23,9 @@ class ProfileService
 {
     public function getProfileData($user_id = '')
     {
-      $data = UsersDetails::where('user_id', $user_id)->get();
+        $user_id = Auth::user()->id;
+
+        $data = UsersDetails::where('user_id', $user_id)->get();
 
       return $data;
 
@@ -30,7 +33,7 @@ class ProfileService
 
     public function updateData($input)
     {
-        $user_id = $input['userId'] ?? 10;
+        $user_id = Auth::user()->id;
 
         $user = UsersDetails::where('user_id', $user_id)->first();
 
@@ -55,7 +58,7 @@ class ProfileService
 
     public function updateMyProfile($input)
     {
-        $user_id = $input['userId'] ?? 10;
+        $user_id = Auth::user()->id;
 
         $profile = UserProfile::where('user_id', $user_id)->first();
 
@@ -105,7 +108,7 @@ class ProfileService
 
     public function updateAddress($input)
     {
-        $user_id = $input['userId'] ?? 10;
+        $user_id = Auth::user()->id;
 
         $user = UserAddress::where('user_id', $user_id)->first();
 
@@ -138,9 +141,10 @@ class ProfileService
 
     public function updateEmergency($input)
     {
-        $user_id = $input['userId'] ?? 10;
+        $user_id = Auth::user()->id;
+        $id = $input['id'] ?? 1;
 
-        $user = UserEmergency::where('user_id', $user_id)->first();
+        $user = UserEmergency::where('id', $id)->first();
 
         if(!$user)
         {
@@ -153,7 +157,7 @@ class ProfileService
                 unset($input['address2']);
             }
 
-            UserEmergency::where('user_id', $user_id)->update($input);
+            UserEmergency::where('id', $id)->update($input);
 
             $data['status'] = 200;
             $data['msg'] = 'Success update Emergency Contact';
@@ -167,9 +171,10 @@ class ProfileService
     {
         $input = $r->input();
 
-        $user_id = $input['userId'] ?? 10;
+        $user_id = Auth::user()->id;
+        $id = $input['id'] ?? 1;
 
-        $user = UserCompanion::where('user_id', $user_id)->first();
+        $user = UserCompanion::where('id', $id)->first();
 
         if(!$user)
         {
@@ -227,7 +232,7 @@ class ProfileService
                 unset($input['address2E']);
             }
 
-            UserCompanion::where('user_id', $user_id)->update($input);
+            UserCompanion::where('id', $id)->update($input);
 
             $data['status'] = 404;
             $data['msg'] = 'Success update Companion';
@@ -241,9 +246,10 @@ class ProfileService
     {
         $input = $r->input();
 
-        $user_id = $input['userId'] ?? 10;
+        $user_id = Auth::user()->id;
+        $id = $input['id'] ?? 1;
 
-        $user = UserChildren::where('user_id', $user_id)->first();
+        $user = UserChildren::where('id', $id)->first();
 
         if(!$user)
         {
@@ -261,7 +267,7 @@ class ProfileService
                 }
             }
 
-            UserChildren::where('user_id', $user_id)->update($input);
+            UserChildren::where('id', $id)->update($input);
 
             $data['status'] = 200;
             $data['msg'] = 'Success update Children';
@@ -273,9 +279,7 @@ class ProfileService
 
     public function getSibling($user_id = '')
     {
-        $user = response(Auth::user());
-
-        $user_id = $user['user_id'];
+        $user_id = Auth::user()->id;
 
         $data['data'] = UserSibling::where('user_id', $user_id)->get();
         $data['msg'] = 'Success get sibling data';
@@ -285,7 +289,7 @@ class ProfileService
 
     public function getParent($user_id = '')
     {
-        $user_id = 10;
+        $user_id = Auth::user()->id;
         $data['data'] = UserParent::where('user_id', $user_id)->get();
         $data['msg'] = 'Success get parent data';
 
@@ -320,7 +324,7 @@ class ProfileService
     {
         $input = $r->input();
 
-        $user_id = $input['userId'] ?? 10;
+        $user_id = Auth::user()->id;
 
         $user = Employee::where('user_id', $user_id)->first();
 
@@ -394,6 +398,35 @@ class ProfileService
         return $data;
     }
 
+    public function getJobHistory()
+    {
+        $user_id = Auth::user()->id;
 
+        $data['data'] = JobHistory::where('user_id', $user_id)->get();
+        $data['msg'] = 'Success get parent data';
 
+        return $data;
+    }
+
+    public function addJobHistory($r)
+    {
+        $input = $r->input();
+
+        JobHistory::create($input);
+
+        $data['status'] = 200;
+        $data['msg'] = 'Success add job history';
+
+        return $data;
+    }
+
+    public function getVehicle()
+    {
+        $user_id = Auth::user()->id;
+
+        $data['data'] = Vehicle::where('user_id', $user_id)->get();
+        $data['msg'] = 'Success get vehicle data';
+
+        return $data;
+    }
 }

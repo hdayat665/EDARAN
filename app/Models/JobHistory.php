@@ -8,7 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
-class UserProfile extends Authenticatable
+class JobHistory extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
@@ -18,29 +18,26 @@ class UserProfile extends Authenticatable
      * @var array<int, string>
      */
 
-    protected $table ='userProfile';
+    protected $table ='jobHistory';
 
     protected $fillable = [
         'user_id',
-        'username',
-        'email',
-        'firstName',
-        'lastName',
-        'fullName',
-        'nonNetizen',
-        'idNo',
-        'passpord',
-        'expiryDate',
-        'issuingCountry',
-        'DOB',
-        'gender',
-        'maritialStatus',
-        'religion',
-        'race',
-        'phoneNo',
-        'homeNo',
-        'extensionNo',
-        'personalEmail',
+        'employmentDetail',
+        'effectiveDate',
+        'event',
+        'updatedBy',
+        'jobGrade',
+        'designation',
+        'employmentType',
+        'userRole',
+        'supervisor',
+        'joinedDate',
+        'COR',
+        'employeeId',
+        'employeeName',
+        'employeeEmail',
+        'effectiveFrom',
+        'event',
     ];
 }
 

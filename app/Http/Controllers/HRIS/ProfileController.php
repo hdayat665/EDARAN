@@ -94,11 +94,11 @@ class ProfileController extends Controller
         return response()->json($result['msg']);
     }
 
-    public function getSibling($user_id = '')
+    public function getSibling()
     {
         $ps = new ProfileService;
 
-        $result = $ps->getSibling($user_id);
+        $result = $ps->getSibling();
 
         return response()->json($result);
     }
@@ -175,5 +175,32 @@ class ProfileController extends Controller
         $result = $ps->deleteVehicle($id);
 
         return response()->json($result['msg']);
+    }
+
+    public function getJobHistory()
+    {
+        $ps = new ProfileService;
+
+        $result = $ps->getJobHistory();
+
+        return response()->json($result);
+    }
+
+    public function addJobHistory(Request $r)
+    {
+        $ps = new ProfileService;
+
+        $result = $ps->addJobHistory($r);
+
+        return response()->json($result['msg']);
+    }
+
+    public function getVehicle()
+    {
+        $ps = new ProfileService;
+
+        $result = $ps->getVehicle();
+
+        return response()->json($result);
     }
 }
