@@ -2,6 +2,7 @@
 
 namespace App\Service;
 
+use App\Exceptions\CustomException;
 use App\Models\Subscription;
 use App\Models\Users;
 use App\Models\UsersDetails;
@@ -241,32 +242,34 @@ class LoginService
 
     }
 
-    public function login($cred, $type = '')
+    public function login($r, $type = '')
     {
         $data['title'] = 'Success';
         $data['type'] = 'success';
         $data['msg'] = 'Authorized!';
 
-        if (!Auth::attempt($cred)) {
-            // $tenant = $data->tenant;
-            $data['title'] = 'Error';
-            $data['type'] = 'error';
-            $data['msg'] = 'Credential not match!';
-        }else{
-            $user_id = Auth::user()->id;
+        $user = $r->validate([
+            'username' => 'required|email',
+            'password' => 'required|min:3',
+        ]);
 
-            Users::where('id', $user_id)->update(['is_login'=> 'yes']);
+        $r->authenticate();
+        $r->session()->regenerate();
 
-            if (!$type) {
-                $userDetail = Users::where([['id', $user_id], ['tenant', $cred['tenant']]])->first();
+        Auth::attempt($user);
 
-                if (!$userDetail) {
-                    $data['title'] = 'Error';
-                    $data['type'] = 'error';
-                    $data['msg'] = 'Credential not match with tenant name!';
-                }
+        $user_id = Auth::user()->id;
+
+        Users::where('id', $user_id)->update(['is_login' => 'yes']);
+
+        if ($type == 'tenant') {
+            $userDetail = Users::where([['id', $user_id], ['tenant', $r->input()['tenant']]])->first();
+
+            if (!$userDetail) {
+                $data['msg'] = 'Credential not match with tenant name!';
+
+                throw new CustomException($data['msg']);
             }
-
         }
 
         return $data;

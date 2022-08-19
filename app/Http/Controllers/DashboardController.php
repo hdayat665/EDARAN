@@ -2,19 +2,25 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Users;
 use App\Service\LoginService;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Str;
-use Illuminate\Support\Facades\Auth;
+// use Illuminate\Support\Facades\Auth;
+use Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 
 class DashboardController extends Controller
 {
-    // function __construct()
-    // {
-    //     Users::
-    // }
+    public function __construct()
+    {
+        if (!Auth::check()) {
+            redirect('/login');
+        }
+    }
 
     public function dashboardTenant()
     {

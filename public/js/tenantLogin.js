@@ -8,7 +8,7 @@ $(document).ready(function() {
 
             $.ajax({
                 type: "POST",
-                url: "/api/checkTenant/",
+                url: "/checkTenant",
                 data: data,
                 dataType: "json",
                 async: false,
@@ -47,7 +47,7 @@ $(document).ready(function() {
 
             $.ajax({
                 type: "POST",
-                url: "/api/login/",
+                url: "/login/tenant",
                 data: data,
                 dataType: "json",
                 async: false,
@@ -84,7 +84,7 @@ $(document).ready(function() {
 
             $.ajax({
                 type: "POST",
-                url: "/api/loginHost/",
+                url: "/login/host",
                 data: data,
                 dataType: "json",
                 async: false,

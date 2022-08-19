@@ -24,12 +24,14 @@ use Illuminate\Support\Facades\Auth;
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('getSibling', [ProfileController::class, 'getSibling']);
 });
+// Route::group(['middleware' => ['web']], function () {
+//     Route::controller(LoginController::class)->group(function () {
+//         Route::post('/login', 'loginTenant');
+//         Route::post('/loginHost', 'loginHost');
+//         Route::post('/checkTenant', 'checkTenant');
+//     });
+// });
 
-Route::controller(LoginController::class)->group(function () {
-    Route::post('/login', 'loginTenant');
-    Route::post('/loginHost', 'loginHost');
-    Route::post('/checkTenant', 'checkTenant');
-});
 
 Route::controller(RegisterController::class)->group(function () {
     Route::post('/saveRegisterTenant', 'saveRegisterTenant');

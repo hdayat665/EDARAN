@@ -17,13 +17,19 @@ use App\Http\Controllers\Auth\RegisterController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/', function () {
+    return view('welcome');
+});
 
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
 
 Route::controller(LoginController::class)->group(function () {
     Route::get('/', 'loginView');
     Route::get('/home', 'index');
     Route::get('/loginTenant', 'loginView')->name('login');
-    Route::get('/loginHost', 'loginHostView');
+    Route::get('/loginHosts', 'loginHostView');
     Route::get('/domainView', 'domainView');
     Route::get('/loginAdmin', 'loginAdminView');
     Route::get('/registerView', 'registerView');
@@ -42,11 +48,35 @@ Route::controller(ProfileController::class)->group(function () {
     Route::get('/profile', 'profile');
 });
 
-// Route::middleware(['auth:sanctum'])->group(function () {
+
+Route::group(['middleware' => ['web']], function () {
+    Route::controller(LoginController::class)->group(function () {
+        Route::post('/login/{type}', 'login');
+        Route::post('/checkTenant', 'checkTenant');
+        Route::get('/', 'loginView');
+        Route::get('/home', 'index');
+        Route::get('/loginTenant', 'loginView')->name('loginView');
+        Route::get('/loginHostView', 'loginHostView');
+        Route::get('/domainView', 'domainView');
+        Route::get('/loginAdmin', 'loginAdminView');
+        Route::get('/registerView', 'registerView');
+        Route::get('/verifiedView/{id}', 'verifiedView');
+        Route::get('/forgotPassView', 'forgotPassView');
+        Route::get('/forgotDomainView', 'forgotDomainView');
+        Route::get('/resetPassView/{id}', 'resetPassView');
+        Route::get('/resetDomainView', 'resetDomainView');
+        Route::get('/logout/{type}', 'logoutTenant');
+        Route::get('/selectPackage', 'selectPackage');
+    });
+
     Route::controller(DashboardController::class)->group(function () {
         // Route::get('/profile', 'profile')->middleware('auth');
-        Route::get('/dashboardTenant', 'dashboardTenant')->name('dashboardTenant');
-        Route::get('/dashboardHost', 'dashboardHost')->name('dashboardHost');
+        Route::get('/dashboardTenant', 'dashboardTenant')->name('dashboardTenant')->middleware(['auth']);
+        Route::get('/dashboardHost', 'dashboardHost')->name('dashboardHost')->middleware(['auth']);
     });
+});
+// Route::group(['middleware' => ['auth']], function () {
+
 // });
 
+// require __DIR__.'/auth.php';
