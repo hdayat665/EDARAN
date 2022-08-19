@@ -7,19 +7,19 @@
     <meta content="" name="description" />
     <meta content="" name="author" />
 
-    <link rel="shortcut icon" href="/public/assets/img/logo/orbit-sm.png" >
+    <link rel="shortcut icon" href="{{env('ASSETS_URL')}}/img/logo/orbit-sm.png" >
     <!-- ================== BEGIN core-css ================== -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400&display=swap" rel="stylesheet">	<link href="/public/assets/css/vendor.min.css" rel="stylesheet" />
-    <link href="/public/assets/css/vendor.min.css" rel="stylesheet" />
-    <link href="/public/assets/css/default/app.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400&display=swap" rel="stylesheet">	<link href="{{env('ASSETS_URL')}}/css/vendor.min.css" rel="stylesheet" />
+    <link href="{{env('ASSETS_URL')}}/css/vendor.min.css" rel="stylesheet" />
+    <link href="{{env('ASSETS_URL')}}/css/default/app.min.css" rel="stylesheet" />
     <!-- ================== END core-css ================== -->
 
     <!-- ================== BEGIN page-css ================== -->
-    <link href="/public/assets/plugins/jvectormap-next/jquery-jvectormap.css" rel="stylesheet" />
-    <link href="/public/assets/plugins/bootstrap-datepicker/dist/css/bootstrap-datepicker.css" rel="stylesheet" />
-    <link href="/public/assets/plugins/gritter/css/jquery.gritter.css" rel="stylesheet" />
+    <link href="{{env('ASSETS_URL')}}/plugins/jvectormap-next/jquery-jvectormap.css" rel="stylesheet" />
+    <link href="{{env('ASSETS_URL')}}/plugins/bootstrap-datepicker/dist/css/bootstrap-datepicker.css" rel="stylesheet" />
+    <link href="{{env('ASSETS_URL')}}/plugins/gritter/css/jquery.gritter.css" rel="stylesheet" />
     <!-- ================== END page-css ================== -->
 </head>
 <body>
@@ -36,7 +36,7 @@
             <!-- BEGIN navbar-header -->
             <div class="navbar">
                 <a href=""><span class="navbar-logo">
-                    <img src="/public/assets/img/logo/orbit-logo-5.png" class="navbar-logo navbar-brand"  alt="...">
+                    <img src="{{env('ASSETS_URL')}}/img/logo/orbit-logo-5.png" class="navbar-logo navbar-brand"  alt="...">
 
                 </span></a>
                 <button type="button" class="navbar-mobile-toggler" data-toggle="app-sidebar-mobile">
@@ -67,7 +67,7 @@
                         </a>
                         <a href="javascript:;" class="dropdown-item media">
                             <div class="media-left">
-                                <img src="/public/assets/img/user/user-1.jpg" class="media-object" alt="" />
+                                <img src="{{env('ASSETS_URL')}}/img/user/user-1.jpg" class="media-object" alt="" />
                                 <i class="fab fa-facebook-messenger text-blue media-object-icon"></i>
                             </div>
                             <div class="media-body">
@@ -78,7 +78,7 @@
                         </a>
                         <a href="javascript:;" class="dropdown-item media">
                             <div class="media-left">
-                                <img src="/public/assets/img/user/user-2.jpg" class="media-object" alt="" />
+                                <img src="{{env('ASSETS_URL')}}/img/user/user-2.jpg" class="media-object" alt="" />
                                 <i class="fab fa-facebook-messenger text-blue media-object-icon"></i>
                             </div>
                             <div class="media-body">
@@ -114,7 +114,7 @@
 
                 <div class="navbar-item navbar-user dropdown">
                     <a href="#" class="navbar-link dropdown-toggle d-flex align-items-center" data-bs-toggle="dropdown">
-                        <img src="/public/assets/img/user/user-13.jpg" alt="" />
+                        <img src="{{env('ASSETS_URL')}}/img/user/user-13.jpg" alt="" />
                         <span>
                             <span class="d-none d-md-inline">Adam Schwartz</span>
                             <b class="caret"></b>
@@ -215,45 +215,45 @@
             <!-- END #app -->
 
             <!-- ================== BEGIN core-js ================== -->
-            <script src="/public/assets/js/vendor.min.js"></script>
-            <script src="/public/assets/js/app.min.js"></script>
+            <script src="{{env('ASSETS_URL')}}/js/vendor.min.js"></script>
+            <script src="{{env('ASSETS_URL')}}/js/app.min.js"></script>
             <!-- ================== END core-js ================== -->
 
             <!-- ================== BEGIN page-js ================== -->
-            <script src="/public/assets/plugins/gritter/js/jquery.gritter.js"></script>
-            <script src="/public/assets/plugins/flot/source/jquery.canvaswrapper.js"></script>
-            <script src="/public/assets/plugins/flot/source/jquery.colorhelpers.js"></script>
-            <script src="/public/assets/plugins/flot/source/jquery.flot.js"></script>
-            <script src="/public/assets/plugins/flot/source/jquery.flot.saturated.js"></script>
-            <script src="/public/assets/plugins/flot/source/jquery.flot.browser.js"></script>
-            <script src="/public/assets/plugins/flot/source/jquery.flot.drawSeries.js"></script>
-            <script src="/public/assets/plugins/flot/source/jquery.flot.uiConstants.js"></script>
-            <script src="/public/assets/plugins/flot/source/jquery.flot.time.js"></script>
-            <script src="/public/assets/plugins/flot/source/jquery.flot.resize.js"></script>
-            <script src="/public/assets/plugins/flot/source/jquery.flot.pie.js"></script>
-            <script src="/public/assets/plugins/flot/source/jquery.flot.crosshair.js"></script>
-            <script src="/public/assets/plugins/flot/source/jquery.flot.categories.js"></script>
-            <script src="/public/assets/plugins/flot/source/jquery.flot.navigate.js"></script>
-            <script src="/public/assets/plugins/flot/source/jquery.flot.touchNavigate.js"></script>
-            <script src="/public/assets/plugins/flot/source/jquery.flot.hover.js"></script>
-            <script src="/public/assets/plugins/flot/source/jquery.flot.touch.js"></script>
-            <script src="/public/assets/plugins/flot/source/jquery.flot.selection.js"></script>
-            <script src="/public/assets/plugins/flot/source/jquery.flot.symbol.js"></script>
-            <script src="/public/assets/plugins/flot/source/jquery.flot.legend.js"></script>
-            <script src="/public/assets/plugins/jquery-sparkline/jquery.sparkline.min.js"></script>
-            <script src="/public/assets/plugins/jvectormap-next/jquery-jvectormap.min.js"></script>
-            <script src="/public/assets/plugins/jvectormap-next/jquery-jvectormap-world-mill.js"></script>
-            <script src="/public/assets/plugins/bootstrap-datepicker/dist/js/bootstrap-datepicker.js"></script>
-            <script src="/public/assets/js/demo/dashboard.js"></script>
+            <script src="{{env('ASSETS_URL')}}/plugins/gritter/js/jquery.gritter.js"></script>
+            <script src="{{env('ASSETS_URL')}}/plugins/flot/source/jquery.canvaswrapper.js"></script>
+            <script src="{{env('ASSETS_URL')}}/plugins/flot/source/jquery.colorhelpers.js"></script>
+            <script src="{{env('ASSETS_URL')}}/plugins/flot/source/jquery.flot.js"></script>
+            <script src="{{env('ASSETS_URL')}}/plugins/flot/source/jquery.flot.saturated.js"></script>
+            <script src="{{env('ASSETS_URL')}}/plugins/flot/source/jquery.flot.browser.js"></script>
+            <script src="{{env('ASSETS_URL')}}/plugins/flot/source/jquery.flot.drawSeries.js"></script>
+            <script src="{{env('ASSETS_URL')}}/plugins/flot/source/jquery.flot.uiConstants.js"></script>
+            <script src="{{env('ASSETS_URL')}}/plugins/flot/source/jquery.flot.time.js"></script>
+            <script src="{{env('ASSETS_URL')}}/plugins/flot/source/jquery.flot.resize.js"></script>
+            <script src="{{env('ASSETS_URL')}}/plugins/flot/source/jquery.flot.pie.js"></script>
+            <script src="{{env('ASSETS_URL')}}/plugins/flot/source/jquery.flot.crosshair.js"></script>
+            <script src="{{env('ASSETS_URL')}}/plugins/flot/source/jquery.flot.categories.js"></script>
+            <script src="{{env('ASSETS_URL')}}/plugins/flot/source/jquery.flot.navigate.js"></script>
+            <script src="{{env('ASSETS_URL')}}/plugins/flot/source/jquery.flot.touchNavigate.js"></script>
+            <script src="{{env('ASSETS_URL')}}/plugins/flot/source/jquery.flot.hover.js"></script>
+            <script src="{{env('ASSETS_URL')}}/plugins/flot/source/jquery.flot.touch.js"></script>
+            <script src="{{env('ASSETS_URL')}}/plugins/flot/source/jquery.flot.selection.js"></script>
+            <script src="{{env('ASSETS_URL')}}/plugins/flot/source/jquery.flot.symbol.js"></script>
+            <script src="{{env('ASSETS_URL')}}/plugins/flot/source/jquery.flot.legend.js"></script>
+            <script src="{{env('ASSETS_URL')}}/plugins/jquery-sparkline/jquery.sparkline.min.js"></script>
+            <script src="{{env('ASSETS_URL')}}/plugins/jvectormap-next/jquery-jvectormap.min.js"></script>
+            <script src="{{env('ASSETS_URL')}}/plugins/jvectormap-next/jquery-jvectormap-world-mill.js"></script>
+            <script src="{{env('ASSETS_URL')}}/plugins/bootstrap-datepicker/dist/js/bootstrap-datepicker.js"></script>
+            <script src="{{env('ASSETS_URL')}}/js/demo/dashboard.js"></script>
             <!-- ================== END page-js ================== -->
 
             <script type="text/javascript">
                 var require = {
-                    baseUrl: "/public/js/",
+                    baseUrl: "{{env('ASSETS_URL')}}/js/",
                     waitSeconds: 15,
                     urlArgs: "bust=10"
                 };
             </script>
-            <script src="/public/js/require.js" data-main="controller"></script>
+            <script src="{{env('ASSETS_URL')}}/js/require.js" data-main="controller"></script>
         </body>
         </html>

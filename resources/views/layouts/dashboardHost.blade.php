@@ -7,19 +7,19 @@
     <meta content="" name="description" />
     <meta content="" name="author" />
 
-    <link rel="shortcut icon" href="/public/assets/img/logo/orbit-sm.png" >
+    <link rel="shortcut icon" href="{{env('ASSETS_URL')}}/img/logo/orbit-sm.png" >
     <!-- ================== BEGIN core-css ================== -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400&display=swap" rel="stylesheet">	<link href="/public/assets/css/vendor.min.css" rel="stylesheet" />	<link href="/public/assets/css/vendor.min.css" rel="stylesheet" />
-    <link href="/public/assets/css/default/app.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400&display=swap" rel="stylesheet">	<link href="{{env('ASSETS_URL')}}/css/vendor.min.css" rel="stylesheet" />	<link href="{{env('ASSETS_URL')}}/css/vendor.min.css" rel="stylesheet" />
+    <link href="{{env('ASSETS_URL')}}/css/default/app.min.css" rel="stylesheet" />
     <!-- ================== END core-css ================== -->
 
     <!-- ================== BEGIN page-css ================== -->
-    <link href="/public/assets/plugins/jvectormap-next/jquery-jvectormap.css" rel="stylesheet" />
-    <link href="/public/assets/plugins/gritter/css/jquery.gritter.css" rel="stylesheet" />
-    <link href="/public/assets/plugins/nvd3/build/nv.d3.css" rel="stylesheet" />
-    <link href="/public/assets/plugins/simple-calendar/dist/simple-calendar.css" rel="stylesheet" />
+    <link href="{{env('ASSETS_URL')}}/plugins/jvectormap-next/jquery-jvectormap.css" rel="stylesheet" />
+    <link href="{{env('ASSETS_URL')}}/plugins/gritter/css/jquery.gritter.css" rel="stylesheet" />
+    <link href="{{env('ASSETS_URL')}}/plugins/nvd3/build/nv.d3.css" rel="stylesheet" />
+    <link href="{{env('ASSETS_URL')}}/plugins/simple-calendar/dist/simple-calendar.css" rel="stylesheet" />
     <!-- ================== END page-css ================== -->
 </head>
 <body>
@@ -35,7 +35,7 @@
         <div id="header" class="app-header">
             <!-- BEGIN navbar-header -->
             <div class="navbar-header">
-                <img src="/public/assets/img/logo/orbit-logo-5.png" class="navbar-logo navbar-brand"  alt="...">
+                <img src="{{env('ASSETS_URL')}}/img/logo/orbit-logo-5.png" class="navbar-logo navbar-brand"  alt="...">
                 <button type="button" class="navbar-mobile-toggler" data-toggle="app-sidebar-mobile">
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
@@ -64,7 +64,7 @@
                         </a>
                         <a href="javascript:;" class="dropdown-item media">
                             <div class="media-left">
-                                <img src="/public/assets/img/user/user-1.jpg" class="media-object" alt="" />
+                                <img src="{{env('ASSETS_URL')}}/img/user/user-1.jpg" class="media-object" alt="" />
                                 <i class="fab fa-facebook-messenger text-blue media-object-icon"></i>
                             </div>
                             <div class="media-body">
@@ -75,7 +75,7 @@
                         </a>
                         <a href="javascript:;" class="dropdown-item media">
                             <div class="media-left">
-                                <img src="/public/assets/img/user/user-2.jpg" class="media-object" alt="" />
+                                <img src="{{env('ASSETS_URL')}}/img/user/user-2.jpg" class="media-object" alt="" />
                                 <i class="fab fa-facebook-messenger text-blue media-object-icon"></i>
                             </div>
                             <div class="media-body">
@@ -111,7 +111,7 @@
 
                 <div class="navbar-item navbar-user dropdown">
                     <a href="#" class="navbar-link dropdown-toggle d-flex align-items-center" data-bs-toggle="dropdown">
-                        <img src="/public/assets/img/user/user-13.jpg" alt="" />
+                        <img src="{{env('ASSETS_URL')}}/img/user/user-13.jpg" alt="" />
                         <span>
                             <span class="d-none d-md-inline">Adam Schwartz</span>
                             <b class="caret"></b>
@@ -469,32 +469,32 @@
                 <div class="theme-version">
                     <div class="theme-version-item">
                         <a href="../template_html/index_v2.html" class="theme-version-link active">
-                            <span style="background-image: url(/public/assets/img/theme/default.jpg);" class="theme-version-cover"></span>
+                            <span style="background-image: url({{env('ASSETS_URL')}}/img/theme/default.jpg);" class="theme-version-cover"></span>
                         </a>
                     </div>
                     <div class="theme-version-item">
                         <a href="../template_transparent/index_v2.html" class="theme-version-link">
-                            <span style="background-image: url(/public/assets/img/theme/transparent.jpg);" class="theme-version-cover"></span>
+                            <span style="background-image: url({{env('ASSETS_URL')}}/img/theme/transparent.jpg);" class="theme-version-cover"></span>
                         </a>
                     </div>
                     <div class="theme-version-item">
                         <a href="../template_apple/index_v2.html" class="theme-version-link">
-                            <span style="background-image: url(/public/assets/img/theme/apple.jpg);" class="theme-version-cover"></span>
+                            <span style="background-image: url({{env('ASSETS_URL')}}/img/theme/apple.jpg);" class="theme-version-cover"></span>
                         </a>
                     </div>
                     <div class="theme-version-item">
                         <a href="../template_material/index_v2.html" class="theme-version-link">
-                            <span style="background-image: url(/public/assets/img/theme/material.jpg);" class="theme-version-cover"></span>
+                            <span style="background-image: url({{env('ASSETS_URL')}}/img/theme/material.jpg);" class="theme-version-cover"></span>
                         </a>
                     </div>
                     <div class="theme-version-item">
                         <a href="../template_facebook/index_v2.html" class="theme-version-link">
-                            <span style="background-image: url(/public/assets/img/theme/facebook.jpg);" class="theme-version-cover"></span>
+                            <span style="background-image: url({{env('ASSETS_URL')}}/img/theme/facebook.jpg);" class="theme-version-cover"></span>
                         </a>
                     </div>
                     <div class="theme-version-item">
                         <a href="../template_google/index_v2.html" class="theme-version-link">
-                            <span style="background-image: url(/public/assets/img/theme/google.jpg);" class="theme-version-cover"></span>
+                            <span style="background-image: url({{env('ASSETS_URL')}}/img/theme/google.jpg);" class="theme-version-cover"></span>
                         </a>
                     </div>
                 </div>
@@ -507,42 +507,42 @@
                 <div class="theme-version">
                     <div class="theme-version-item">
                         <a href="../template_html/index.html" class="theme-version-link active">
-                            <span style="background-image: url(/public/assets/img/version/html.jpg);" class="theme-version-cover"></span>
+                            <span style="background-image: url({{env('ASSETS_URL')}}/img/version/html.jpg);" class="theme-version-cover"></span>
                         </a>
                     </div>
                     <div class="theme-version-item">
                         <a href="../template_ajax/index.html" class="theme-version-link">
-                            <span style="background-image: url(/public/assets/img/version/ajax.jpg);" class="theme-version-cover"></span>
+                            <span style="background-image: url({{env('ASSETS_URL')}}/img/version/ajax.jpg);" class="theme-version-cover"></span>
                         </a>
                     </div>
                     <div class="theme-version-item">
                         <a href="../template_angularjs/index.html" class="theme-version-link">
-                            <span style="background-image: url(/public/assets/img/version/angular1x.jpg);" class="theme-version-cover"></span>
+                            <span style="background-image: url({{env('ASSETS_URL')}}/img/version/angular1x.jpg);" class="theme-version-cover"></span>
                         </a>
                     </div>
                     <div class="theme-version-item">
                         <a href="../template_angularjs13/index.html" class="theme-version-link">
-                            <span style="background-image: url(/public/assets/img/version/angular10x.jpg);" class="theme-version-cover"></span>
+                            <span style="background-image: url({{env('ASSETS_URL')}}/img/version/angular10x.jpg);" class="theme-version-cover"></span>
                         </a>
                     </div>
                     <div class="theme-version-item">
                         <a href="javascript:alert('Laravel Version only available in downloaded version.');" class="theme-version-link">
-                            <span style="background-image: url(/public/assets/img/version/laravel.jpg);" class="theme-version-cover"></span>
+                            <span style="background-image: url({{env('ASSETS_URL')}}/img/version/laravel.jpg);" class="theme-version-cover"></span>
                         </a>
                     </div>
                     <div class="theme-version-item">
                         <a href="../template_vuejs/index.html" class="theme-version-link">
-                            <span style="background-image: url(/public/assets/img/version/vuejs.jpg);" class="theme-version-cover"></span>
+                            <span style="background-image: url({{env('ASSETS_URL')}}/img/version/vuejs.jpg);" class="theme-version-cover"></span>
                         </a>
                     </div>
                     <div class="theme-version-item">
                         <a href="../template_reactjs/index.html" class="theme-version-link">
-                            <span style="background-image: url(/public/assets/img/version/reactjs.jpg);" class="theme-version-cover"></span>
+                            <span style="background-image: url({{env('ASSETS_URL')}}/img/version/reactjs.jpg);" class="theme-version-cover"></span>
                         </a>
                     </div>
                     <div class="theme-version-item">
                         <a href="javascript:alert('.NET Core 3.1 MVC Version only available in downloaded version.');" class="theme-version-link">
-                            <span style="background-image: url(/public/assets/img/version/dotnet.jpg);" class="theme-version-cover"></span>
+                            <span style="background-image: url({{env('ASSETS_URL')}}/img/version/dotnet.jpg);" class="theme-version-cover"></span>
                         </a>
                     </div>
                 </div>
@@ -555,27 +555,27 @@
                 <div class="theme-version">
                     <div class="theme-version-item">
                         <a href="../../../frontend/template/template_one_page_parallax/index.html" class="theme-version-link">
-                            <span style="background-image: url(/public/assets/img/theme/one-page-parallax.jpg);" class="theme-version-cover"></span>
+                            <span style="background-image: url({{env('ASSETS_URL')}}/img/theme/one-page-parallax.jpg);" class="theme-version-cover"></span>
                         </a>
                     </div>
                     <div class="theme-version-item">
                         <a href="../../../frontend/template/template_e_commerce/index.html" class="theme-version-link">
-                            <span style="background-image: url(/public/assets/img/theme/e-commerce.jpg);" class="theme-version-cover"></span>
+                            <span style="background-image: url({{env('ASSETS_URL')}}/img/theme/e-commerce.jpg);" class="theme-version-cover"></span>
                         </a>
                     </div>
                     <div class="theme-version-item">
                         <a href="../../../frontend/template/template_blog/index.html" class="theme-version-link">
-                            <span style="background-image: url(/public/assets/img/theme/blog.jpg);" class="theme-version-cover"></span>
+                            <span style="background-image: url({{env('ASSETS_URL')}}/img/theme/blog.jpg);" class="theme-version-cover"></span>
                         </a>
                     </div>
                     <div class="theme-version-item">
                         <a href="../../../frontend/template/template_forum/index.html" class="theme-version-link">
-                            <span style="background-image: url(/public/assets/img/theme/forum.jpg);" class="theme-version-cover"></span>
+                            <span style="background-image: url({{env('ASSETS_URL')}}/img/theme/forum.jpg);" class="theme-version-cover"></span>
                         </a>
                     </div>
                     <div class="theme-version-item">
                         <a href="../../../frontend/template/template_corporate/index.html" class="theme-version-link">
-                            <span style="background-image: url(/public/assets/img/theme/corporate.jpg);" class="theme-version-cover"></span>
+                            <span style="background-image: url({{env('ASSETS_URL')}}/img/theme/corporate.jpg);" class="theme-version-cover"></span>
                         </a>
                     </div>
                 </div>
@@ -595,28 +595,28 @@
     <!-- END #app -->
 
     <!-- ================== BEGIN core-js ================== -->
-    <script src="/public/assets/js/vendor.min.js"></script>
-    <script src="/public/assets/js/app.min.js"></script>
+    <script src="{{env('ASSETS_URL')}}/js/vendor.min.js"></script>
+    <script src="{{env('ASSETS_URL')}}/js/app.min.js"></script>
     <!-- ================== END core-js ================== -->
 
     <!-- ================== BEGIN page-js ================== -->
-    <script src="/public/assets/plugins/d3/d3.min.js"></script>
-    <script src="/public/assets/plugins/nvd3/build/nv.d3.min.js"></script>
-    <script src="/public/assets/plugins/jvectormap-next/jquery-jvectormap.min.js"></script>
-    <script src="/public/assets/plugins/jvectormap-next/jquery-jvectormap-world-mill.js"></script>
-    <script src="/public/assets/plugins/simple-calendar/dist/jquery.simple-calendar.min.js"></script>
-    <script src="/public/assets/plugins/gritter/js/jquery.gritter.js"></script>
-    <script src="/public/assets/js/demo/dashboard-v2.js"></script>
+    <script src="{{env('ASSETS_URL')}}/plugins/d3/d3.min.js"></script>
+    <script src="{{env('ASSETS_URL')}}/plugins/nvd3/build/nv.d3.min.js"></script>
+    <script src="{{env('ASSETS_URL')}}/plugins/jvectormap-next/jquery-jvectormap.min.js"></script>
+    <script src="{{env('ASSETS_URL')}}/plugins/jvectormap-next/jquery-jvectormap-world-mill.js"></script>
+    <script src="{{env('ASSETS_URL')}}/plugins/simple-calendar/dist/jquery.simple-calendar.min.js"></script>
+    <script src="{{env('ASSETS_URL')}}/plugins/gritter/js/jquery.gritter.js"></script>
+    <script src="{{env('ASSETS_URL')}}/js/demo/dashboard-v2.js"></script>
     <!-- ================== END page-js ================== -->
 
     <script type="text/javascript">
         var require = {
-            baseUrl: "/public/assets/js/",
+            baseUrl: "{{env('ASSETS_URL')}}/js/",
             waitSeconds: 15,
             urlArgs: "bust=10"
         };
     </script>
-    <script src="/public/assets/js/require.js" data-main="controller"></script>
+    <script src="{{env('ASSETS_URL')}}/js/require.js" data-main="controller"></script>
 </body>
 </html>
 <script>

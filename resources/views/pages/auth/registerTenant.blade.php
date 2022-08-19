@@ -2,16 +2,16 @@
 
 @section('content')
 <div class="row bg-white " id="registerTenant" style="min-height:98vh ;">
-    <div class="col-sm-6" style="display: flex; justify-content: center; align-items: center; height: 100vh; background-image: url(/public/assets/img/orbit/bh.png);background-repeat: no-repeat; background-size: cover;">
+    <div class="col-sm-6" style="display: flex; justify-content: center; align-items: center; height: 100vh; background-image: url({{env('ASSETS_URL')}}/img/orbit/bh.png);background-repeat: no-repeat; background-size: cover;">
         <div class="mx-auto" style="width: 60rem;">
             <div class="text-center">
-                <img src="/public/assets/img/orbit/orbithrm-logo.png"  width="500rem" alt="Orbit" class="img-fluid">
+                <img src="{{env('ASSETS_URL')}}/img/orbit/orbithrm-logo.png"  width="500rem" alt="Orbit" class="img-fluid">
             </div>
             <h3 class="text-primary text-center">
                 Streamline and automate HR processes with OrbitHRM
             </h3>
             <div class="text-center">
-                <img src="/public/assets/img/orbit/meeting.png" width="500rem" alt="Orbit" class="img-fluid">
+                <img src="{{env('ASSETS_URL')}}/img/orbit/meeting.png" width="500rem" alt="Orbit" class="img-fluid">
             </div>
         </div>
     </div>

@@ -130,21 +130,21 @@
             </div>
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <img src="/public/assets/img/gallery/Majlis Edaran 1.jpg" class="d-block w-100" alt="...">
+                    <img src="{{env('ASSETS_URL')}}/img/gallery/Majlis Edaran 1.jpg" class="d-block w-100" alt="...">
                     <div class="carousel-caption d-none d-md-block">
                         <h5>Majlis Pelancaran MyVeteran Mall</h5>
                         <p>Some representative placeholder content for the first slide.</p>
                     </div>
                 </div>
                 <div class="carousel-item">
-                    <img src="/public/assets/img/gallery/Majlis Edaran 2.jpg" class="d-block w-100" alt="...">
+                    <img src="{{env('ASSETS_URL')}}/img/gallery/Majlis Edaran 2.jpg" class="d-block w-100" alt="...">
                     <div class="carousel-caption d-none d-md-block">
                         <h5>Majlis Pelancaran MyVeteran Mall</h5>
                         <p>Some representative placeholder content for the second slide.</p>
                     </div>
                 </div>
                 <div class="carousel-item">
-                    <img src="/public/assets/img/gallery/Majlis Edaran 3.jpg" class="d-block w-100" alt="...">
+                    <img src="{{env('ASSETS_URL')}}/img/gallery/Majlis Edaran 3.jpg" class="d-block w-100" alt="...">
                     <div class="carousel-caption d-none d-md-block">
                         <h5>Edaran Eyes TurnAround</h5>
                         <p>Some representative placeholder content for the third slide.</p>

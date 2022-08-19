@@ -3,7 +3,7 @@
 $@section('content')
 <div class="shadow p-3 mb-5 bg-body rounded" style="display: flex; justify-content: center;">
     <div class="card border-0 col-sm-3" style="width:600px; min-width:300px">
-        <img src="/public/assets/img/logo/orbit-logo-5.png" class="img-fluid" style="margin:9vh"  alt="Orbit Logo">
+        <img src="{{env('ASSETS_URL')}}/img/logo/orbit-logo-5.png" class="img-fluid" style="margin:9vh"  alt="Orbit Logo">
         <h1 class="text-center text-primary">Choose package : </h1>
         <div class="card border-0 shadow-sm p-3 mb-5" style="margin:2vh; padding:2vh">
             <i class="fas fa-box fa-7x text-center "></i>
