@@ -2,9 +2,15 @@
 
 namespace App\Service;
 
+use App\Models\Branch;
 use App\Models\Company;
 use App\Models\Department;
+use App\Models\Designation;
+use App\Models\JobGrade;
+use App\Models\PhoneDirectory;
+use App\Models\Policy;
 use App\Models\Role;
+use App\Models\SOP;
 use App\Models\Subscription;
 use App\Models\Unit;
 use App\Models\Users;
@@ -218,4 +224,319 @@ class SettingService
 
         return $data;
     }
+
+    public function getBranch()
+    {
+        $data = [];
+        $data['data'] = Branch::with('unit')->get();
+        $data['status'] = true;
+        $data['msg'] = 'Success get Branch';
+
+        return $data;
+    }
+
+    public function createBranch($r)
+    {
+        $input = $r->input();
+
+        Branch::create($input);
+
+        $data['status'] = true;
+        $data['msg'] = 'Success create Branch';
+
+        return $data;
+    }
+
+    public function updateBranch($r, $id)
+    {
+        $input = $r->input();
+
+        Branch::where('id', $id)->update($input);
+
+        $data['status'] = true;
+        $data['msg'] = 'Success update Branch';
+
+        return $data;
+    }
+
+    public function deleteBranch($id)
+    {
+        $Branch = Branch::find($id);
+
+        if (!$Branch) {
+            $data['status'] = 404;
+            $data['msg'] = 'Branch not found';
+        }else{
+            $Branch->delete();
+
+            $data['status'] = 200;
+            $data['msg'] = 'Success delete Branch';
+        }
+
+        return $data;
+    }
+
+    public function getJobGrade()
+    {
+        $data = [];
+        $data['data'] = JobGrade::all();
+        $data['status'] = true;
+        $data['msg'] = 'Success get Job Grade';
+
+        return $data;
+    }
+
+    public function createJobGrade($r)
+    {
+        $input = $r->input();
+
+        JobGrade::create($input);
+
+        $data['status'] = true;
+        $data['msg'] = 'Success create Job Grade';
+
+        return $data;
+    }
+
+    public function updateJobGrade($r, $id)
+    {
+        $input = $r->input();
+
+        JobGrade::where('id', $id)->update($input);
+
+        $data['status'] = true;
+        $data['msg'] = 'Success update Job Grade';
+
+        return $data;
+    }
+
+    public function deleteJobGrade($id)
+    {
+        $JobGrade = JobGrade::find($id);
+
+        if (!$JobGrade) {
+            $data['status'] = 404;
+            $data['msg'] = 'Job Grade not found';
+        }else{
+            $JobGrade->delete();
+
+            $data['status'] = 200;
+            $data['msg'] = 'Success delete Job Grade';
+        }
+
+        return $data;
+    }
+
+    public function getDesignation()
+    {
+        $data = [];
+        $data['data'] = Designation::all();
+        $data['status'] = true;
+        $data['msg'] = 'Success get Designation';
+
+        return $data;
+    }
+
+    public function createDesignation($r)
+    {
+        $input = $r->input();
+
+        Designation::create($input);
+
+        $data['status'] = true;
+        $data['msg'] = 'Success create Designation';
+
+        return $data;
+    }
+
+    public function updateDesignation($r, $id)
+    {
+        $input = $r->input();
+
+        Designation::where('id', $id)->update($input);
+
+        $data['status'] = true;
+        $data['msg'] = 'Success update Designation';
+
+        return $data;
+    }
+
+    public function deleteDesignation($id)
+    {
+        $Designation = Designation::find($id);
+
+        if (!$Designation) {
+            $data['status'] = 404;
+            $data['msg'] = 'Designation not found';
+        }else{
+            $Designation->delete();
+
+            $data['status'] = 200;
+            $data['msg'] = 'Success delete Designation';
+        }
+
+        return $data;
+    }
+
+    public function getSOP()
+    {
+        $data = [];
+        $data['data'] = SOP::all();
+        $data['status'] = true;
+        $data['msg'] = 'Success get SOP';
+
+        return $data;
+    }
+
+    public function createSOP($r)
+    {
+        $input = $r->input();
+
+        SOP::create($input);
+
+        $data['status'] = true;
+        $data['msg'] = 'Success create SOP';
+
+        return $data;
+    }
+
+    public function updateSOP($r, $id)
+    {
+        $input = $r->input();
+
+        SOP::where('id', $id)->update($input);
+
+        $data['status'] = true;
+        $data['msg'] = 'Success update SOP';
+
+        return $data;
+    }
+
+    public function deleteSOP($id)
+    {
+        $SOP = SOP::find($id);
+
+        if (!$SOP) {
+            $data['status'] = 404;
+            $data['msg'] = 'SOP not found';
+        }else{
+            $SOP->delete();
+
+            $data['status'] = 200;
+            $data['msg'] = 'Success delete SOP';
+        }
+
+        return $data;
+    }
+
+    public function getPolicy()
+    {
+        $data = [];
+        $data['data'] = Policy::all();
+        $data['status'] = true;
+        $data['msg'] = 'Success get Policy';
+
+        return $data;
+    }
+
+    public function createPolicy($r)
+    {
+        $input = $r->input();
+
+        Policy::create($input);
+
+        $data['status'] = true;
+        $data['msg'] = 'Success create Policy';
+
+        return $data;
+    }
+
+    public function updatePolicy($r, $id)
+    {
+        $input = $r->input();
+
+        Policy::where('id', $id)->update($input);
+
+        $data['status'] = true;
+        $data['msg'] = 'Success update Policy';
+
+        return $data;
+    }
+
+    public function deletePolicy($id)
+    {
+        $Policy = Policy::find($id);
+
+        if (!$Policy) {
+            $data['status'] = 404;
+            $data['msg'] = 'Policy not found';
+        }else{
+            $Policy->delete();
+
+            $data['status'] = 200;
+            $data['msg'] = 'Success delete Policy';
+        }
+
+        return $data;
+    }
+
+    public function getNews()
+    {
+        $data = [];
+        $data['data'] = News::all();
+        $data['status'] = true;
+        $data['msg'] = 'Success get News';
+
+        return $data;
+    }
+
+    public function createNews($r)
+    {
+        $input = $r->input();
+
+        if ($input['fileUpload']) {
+            $input['fileUpload'] = $input['fileUpload']['filename'];
+        }
+
+        News::create($input);
+
+        $data['status'] = true;
+        $data['msg'] = 'Success create News';
+
+        return $data;
+    }
+
+    public function updateNews($r, $id)
+    {
+        $input = $r->input();
+
+        if ($input['fileUpload']) {
+            $input['fileUpload'] = $input['fileUpload']['filename'];
+        }
+
+        News::where('id', $id)->update($input);
+
+        $data['status'] = true;
+        $data['msg'] = 'Success update News';
+
+        return $data;
+    }
+
+    public function deleteNews($id)
+    {
+        $News = News::find($id);
+
+        if (!$News) {
+            $data['status'] = 404;
+            $data['msg'] = 'News not found';
+        }else{
+            $News->delete();
+
+            $data['status'] = 200;
+            $data['msg'] = 'Success delete News';
+        }
+
+        return $data;
+    }
+
 }

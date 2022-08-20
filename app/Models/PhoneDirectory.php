@@ -8,7 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
-class Unit extends Authenticatable
+class PhoneDirectory extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
@@ -18,26 +18,18 @@ class Unit extends Authenticatable
      * @var array<int, string>
      */
 
-    protected $table ='unit';
+    protected $table ='phoneDirectory';
 
     protected $fillable = [
-        'departmentId',
-        'unitCode',
-        'unitName',
-        'addedBy',
-        'modifiedBy',
+        'image',
+        'fullName',
+        'email',
+        'phoneNo',
+        'extensionNo',
+        'designation',
+        'department',
     ];
 
-    public function department()
-    {
-        return $this->belongsTo(Department::class, 'id', 'departmentId');
-    }
-
-
-    public function branch()
-    {
-        return $this->hasMany(Branch::class, 'id', 'unitId');
-    }
 }
 
 

@@ -153,4 +153,224 @@ class SettingController extends Controller
         return response()->json($result);
     }
 
+    public function getBranch()
+    {
+        $ss = new SettingService;
+
+        $result = $ss->getBranch();
+
+        return response()->json($result);
+    }
+
+    public function createBranch(Request $r)
+    {
+        $ss = new SettingService;
+
+        $result = $ss->createBranch($r);
+
+        return response()->json($result);
+    }
+
+    public function updateBranch(Request $r, $id)
+    {
+        $ss = new SettingService;
+
+        $result = $ss->updateBranch($r, $id);
+
+        return response()->json($result);
+    }
+
+    public function deleteBranch($id)
+    {
+        $ss = new SettingService;
+
+        $result = $ss->deleteBranch($id);
+
+        return response()->json($result);
+    }
+
+    public function getJobGrade()
+    {
+        $ss = new SettingService;
+
+        $result = $ss->getJobGrade();
+
+        return response()->json($result);
+    }
+
+    public function createJobGrade(Request $r)
+    {
+        $ss = new SettingService;
+
+        $result = $ss->createJobGrade($r);
+
+        return response()->json($result);
+    }
+
+    public function updateJobGrade(Request $r, $id)
+    {
+        $ss = new SettingService;
+
+        $result = $ss->updateJobGrade($r, $id);
+
+        return response()->json($result);
+    }
+
+    public function deleteJobGrade($id)
+    {
+        $ss = new SettingService;
+
+        $result = $ss->deleteJobGrade($id);
+
+        return response()->json($result);
+    }
+
+    public function getDesignation()
+    {
+        $ss = new SettingService;
+
+        $result = $ss->getDesignation();
+
+        return response()->json($result);
+    }
+
+    public function createDesignation(Request $r)
+    {
+        $ss = new SettingService;
+
+        $result = $ss->createDesignation($r);
+
+        return response()->json($result);
+    }
+
+    public function updateDesignation(Request $r, $id)
+    {
+        $ss = new SettingService;
+
+        $result = $ss->updateDesignation($r, $id);
+
+        return response()->json($result);
+    }
+
+    public function deleteDesignation($id)
+    {
+        $ss = new SettingService;
+
+        $result = $ss->deleteDesignation($id);
+
+        return response()->json($result);
+    }
+
+    public function getSOP()
+    {
+        $ss = new SettingService;
+
+        $result = $ss->getSOP();
+
+        return response()->json($result);
+    }
+
+    public function createSOP(Request $r)
+    {
+        $ss = new SettingService;
+
+        $result = $ss->createSOP($r);
+
+        return response()->json($result);
+    }
+
+    public function updateSOP(Request $r, $id)
+    {
+        $ss = new SettingService;
+
+        $result = $ss->updateSOP($r, $id);
+
+        return response()->json($result);
+    }
+
+    public function deleteSOP($id)
+    {
+        $ss = new SettingService;
+
+        $result = $ss->deleteSOP($id);
+
+        return response()->json($result);
+    }
+
+    public function getPolicy()
+    {
+        $ss = new SettingService;
+
+        $result = $ss->getPolicy();
+
+        return response()->json($result);
+    }
+
+    public function createPolicy(Request $r)
+    {
+        $ss = new SettingService;
+
+        $result = $ss->createPolicy($r);
+
+        return response()->json($result);
+    }
+
+    public function updatePolicy(Request $r, $id)
+    {
+        $ss = new SettingService;
+
+        $result = $ss->updatePolicy($r, $id);
+
+        return response()->json($result);
+    }
+
+    public function deletePolicy($id)
+    {
+        $ss = new SettingService;
+
+        $result = $ss->deletePolicy($id);
+
+        return response()->json($result);
+    }
+
+    public function getNews()
+    {
+        $ss = new SettingService;
+
+        $result = $ss->getNews();
+
+        return response()->json($result);
+    }
+
+    public function createNews(Request $r)
+    {
+        $ss = new SettingService;
+
+        $input['fileUpload'] = upload($r,'fileUpload');
+
+        $result = $ss->createNews($r);
+
+        return response()->json($result);
+    }
+
+    public function updateNews(Request $r, $id)
+    {
+        $ss = new SettingService;
+
+        $input['fileUpload'] = upload($r,'fileUpload');
+
+        $result = $ss->updateNews($r, $id);
+
+        return response()->json($result);
+    }
+
+    public function deleteNews($id)
+    {
+        $ss = new SettingService;
+
+        $result = $ss->deleteNews($id);
+
+        return response()->json($result);
+    }
+
 }

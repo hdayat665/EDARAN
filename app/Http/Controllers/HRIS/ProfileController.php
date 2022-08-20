@@ -34,7 +34,7 @@ class ProfileController extends Controller
     {
         $input = $r->input();
 
-        $input['uploadFile'] = upload($r);
+        $input['uploadFile'] = upload($r, 'uploadFile');
 
         $ps = new ProfileService;
 

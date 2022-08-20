@@ -7,6 +7,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\HRIS\ProfileController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\SettingController;
+use App\Http\Controllers\OrganizationController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\HRIS\EmployeeController;
 
@@ -114,6 +115,33 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('/updateUnit/{id}', 'updateUnit');
             Route::post('/createUnit', 'createUnit');
             Route::delete('/deleteUnit/{id}', 'deleteUnit');
+            Route::get('/getJobGrade', 'getJobGrade');
+            Route::post('/updateJobGrade/{id}', 'updateJobGrade');
+            Route::post('/createJobGrade', 'createJobGrade');
+            Route::delete('/deleteJobGrade/{id}', 'deleteJobGrade');
+            Route::get('/getDesignation', 'getDesignation');
+            Route::post('/updateDesignation/{id}', 'updateDesignation');
+            Route::post('/createDesignation', 'createDesignation');
+            Route::delete('/deleteDesignation/{id}', 'deleteDesignation');
+            Route::get('/getSOP', 'getSOP');
+            Route::post('/updateSOP/{id}', 'updateSOP');
+            Route::post('/createSOP', 'createSOP');
+            Route::delete('/deleteSOP/{id}', 'deleteSOP');
+            Route::get('/getPolicy', 'getPolicy');
+            Route::post('/updatePolicy/{id}', 'updatePolicy');
+            Route::post('/createPolicy', 'createPolicy');
+            Route::delete('/deletePolicy/{id}', 'deletePolicy');
+            Route::get('/getNews', 'getNews');
+            Route::post('/updateNews/{id}', 'updateNews');
+            Route::post('/createNews', 'createNews');
+            Route::delete('/deleteNews/{id}', 'deleteNews');
+            Route::get('/getPhoneDirectory', 'getPhoneDirectory');
+
+        });
+        Route::controller(OrganizationController::class)->group(function () {
+            Route::get('/getPhoneDirectory', 'getPhoneDirectory');
+            Route::get('/getOrganizationChart', 'getOrganizationChart');
+            Route::get('/getDepartmentTree', 'getDepartmentTree');
 
         });
     });
