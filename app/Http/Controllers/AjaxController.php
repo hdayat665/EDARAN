@@ -146,7 +146,7 @@ class AjaxController extends Controller
         $ls = new LoginService;
         $resetPass = $ls->resetPassword($input);
 
-        echo json_encode($resetPass);
+        return response()->json($resetPass);
     }
 
     public function sendEmailRegister()
@@ -169,27 +169,6 @@ class AjaxController extends Controller
         //  $data['file'] = \public_path()."/assets/frontend/docs/gambar.jpg";
 
          \Mail::to($receiver)->send(new Mail($data));
-    }
-
-    public function ajaxGetVehicle($user_id)
-    {
-        $data['data'] = [
-            [
-              "vehicle_type"=>"Tiger Nixon",
-              "plate_no"=>"System Architect",
-              "id"=>"Edinburgh",
-            ],
-            [
-                "vehicle_type"=>"Tiger Nixon",
-                "plate_no"=>"System Architect",
-                "id"=>"Edinburgh",
-            ],
-        ];
-
-        $data['data'] = Vehicle::where('user_id',$user_id)->get()->toArray();
-
-
-        echo json_encode($data);
     }
 
     public function ajaxCheckTenantName(Request $r)

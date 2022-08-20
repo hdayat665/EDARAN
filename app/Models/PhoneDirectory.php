@@ -8,7 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
-class UserProfile extends Authenticatable
+class PhoneDirectory extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
@@ -18,30 +18,18 @@ class UserProfile extends Authenticatable
      * @var array<int, string>
      */
 
-    protected $table ='userProfile';
+    protected $table ='phoneDirectory';
 
     protected $fillable = [
-        'user_id',
-        'username',
-        'email',
-        'firstName',
-        'lastName',
+        'image',
         'fullName',
-        'nonNetizen',
-        'idNo',
-        'passpord',
-        'expiryDate',
-        'issuingCountry',
-        'DOB',
-        'gender',
-        'maritialStatus',
-        'religion',
-        'race',
+        'email',
         'phoneNo',
-        'homeNo',
         'extensionNo',
-        'personalEmail',
+        'designation',
+        'department',
     ];
+
 }
 
 
