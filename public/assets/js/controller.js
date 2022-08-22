@@ -6,6 +6,9 @@ requirejs.config({
         'vendor': assets + '/assets/js/vendor.min',
         'app': assets + '/assets/js/app.min',
         'registerTenant': assets + '/js/registerTenant',
+        'employeeInfo': assets + '/js/employeeInfo',
+        'registerEmployee': assets + '/js/registerEmployee',
+
         // 'main': 'assets/backend/js/main',
         'sweetAlert2': assets + '/assets/sweetalert2/sweetalert2',
     }
@@ -16,7 +19,11 @@ var sweetalertCss = assets + '/assets/sweetalert2/sweetalert2.css';
 // var dateTimePickerCss = '/plugins/bootstrap/css/bootstrap-datetimepicker.min.css';
 
 loadCss(sweetalertCss, sweetalertCss);
-requirejs(['app'], ['vendor']);
+requirejs();
+if ($('#loginVendorApp').length > 0) {
+    requirejs(['app'], ['vendor']);
+}
+
 if ($('#registerTenant').length > 0) {
     requirejs(['registerTenant']);
 }
@@ -24,6 +31,20 @@ if ($('#registerTenant').length > 0) {
 if ($('#tenantLogin').length > 0) {
     requirejs(['tenantLogin']);
 }
+
+if ($('#tenantLogin').length > 0) {
+    requirejs(['tenantLogin']);
+}
+
+if ($('#employeeInfo').length > 0) {
+    requirejs(['employeeInfo']);
+}
+
+if ($('#registerEmployee').length > 0) {
+    requirejs(['registerEmployee']);
+}
+
+
 
 // Global function
 function ajax(ajaxFunction, params, async = true) {

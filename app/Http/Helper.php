@@ -17,9 +17,8 @@ if (! function_exists('getCountryRegisterDomain')) {
 }
 
 if (! function_exists('upload')) {
-function upload($request, $type = '')
+function upload($uploadedFile, $type = '')
     {
-      $uploadedFile = $request->file($type);
       $filename = time().$uploadedFile->getClientOriginalName();
 
       Storage::disk('local')->putFileAs(

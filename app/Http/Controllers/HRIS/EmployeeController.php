@@ -52,4 +52,22 @@ class EmployeeController extends Controller
 
         return response()->json($result);
     }
+
+    public function employeeInfoView()
+    {
+        $ps = new EmployeeService;
+
+        $data['employeeInfos'] = $ps->getEmployeeInfo()['data'];
+
+        return view('pages.HRIS.employeeInfo',$data);
+    }
+
+    public function registerEmployeeView()
+    {
+        // $ps = new EmployeeService;
+
+        // $data['employeeInfos'] = $ps->getEmployeeInfo()['data'];
+
+        return view('pages.HRIS.registerEmployee');
+    }
 }

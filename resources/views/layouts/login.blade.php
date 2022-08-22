@@ -23,7 +23,11 @@
 
     @yield('content')
 
+    <!-- ================== BEGIN core-js ================== -->
+    {{-- <script src="{{env('ASSETS_URL')}}/js/app.min.js"></script>
+    <script src="{{env('ASSETS_URL')}}/js/vendor.min.js"></script> --}}
 
+    <!-- ================== END core-js ================== -->
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
@@ -40,12 +44,9 @@
         };
     </script>
     <script src="{{env('ASSETS_URL')}}/js/require.js" data-main="controller"></script>
-
+<div id="loginVendorApp"></div>
     <!-- END #app -->
 
-    <!-- ================== BEGIN core-js ================== -->
-    {{-- <script src="{{env('ASSETS_URL')}}/js/vendor.min.js"></script> --}}
-    {{-- <script src="{{env('ASSETS_URL')}}/js/app.min.js"></script> --}}
-    <!-- ================== END core-js ================== -->
+
 </body>
 </html>

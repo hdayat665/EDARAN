@@ -37,7 +37,7 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('/', 'loginView');
         Route::get('/home', 'index');
         Route::get('/loginTenant', 'loginView')->name('loginView');
-        Route::get('/loginHostView', 'loginHostView');
+        Route::get('/loginHost', 'loginHostView');
         Route::get('/domainView', 'domainView');
         Route::get('/loginAdmin', 'loginAdminView');
         Route::get('/registerView', 'registerView');
@@ -95,6 +95,8 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('/addEmployment', 'addEmployment');
             Route::get('/getEmployee', 'getEmployee');
             Route::post('/terminateEmployment', 'terminateEmployment');
+            Route::get('/employeeInfoView', 'employeeInfoView');
+            Route::get('/registerEmployee', 'registerEmployeeView');
 
         });
 
