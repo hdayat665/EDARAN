@@ -156,10 +156,12 @@
                 </div>
 
                 <div class="menu-item has-sub">
-                    <div class="menu-icon">
-                        <i class="fa fa-user-circle text-gray"></i>
-                    </div>
-                    <div class="menu-text text-gray">Tenants</div>
+                    <a href="#" class="menu-link">
+                        <div class="menu-icon">
+                            <i class="fa fa-user-circle text-gray"></i>
+                        </div>
+                        <div class="menu-text text-gray">Tenants</div>
+                    </a>
                 </div>
 
                 <!-- End Sidenav Content Orbit -->

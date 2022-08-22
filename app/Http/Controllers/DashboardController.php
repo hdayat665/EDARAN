@@ -15,12 +15,6 @@ use Illuminate\Support\Facades\Session;
 
 class DashboardController extends Controller
 {
-    public function __construct()
-    {
-        if (!Auth::check()) {
-            redirect('/login');
-        }
-    }
 
     public function dashboardTenant()
     {
