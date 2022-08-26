@@ -60,7 +60,7 @@ $(document).ready(function() {
         });
     });
 
-    $('#addressForm').click(function(e) {
+    $('#submitAddress').click(function(e) {
 
 
         requirejs(['sweetAlert2'], function(swal) {
@@ -100,7 +100,7 @@ $(document).ready(function() {
         });
     });
 
-    $('#employmentForm').click(function(e) {
+    $('#submitEmployment').click(function(e) {
         requirejs(['sweetAlert2'], function(swal) {
 
             var data = new FormData(document.getElementById("employmentForm"));

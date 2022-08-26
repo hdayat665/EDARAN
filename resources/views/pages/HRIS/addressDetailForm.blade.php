@@ -110,11 +110,13 @@
                 </select>
             </div>
         </div>
-        <p class="text-end mb-0">
-            <a href="javascript:;" class="btn btn-white me-5px">Previous</a>
-            <a href="javascript:;" class="btn btn-primary">Next</a>
-            <button type="submit" id="submitAddress" class="btn btn-success">Save</button>
-        </p>
+
     </form>
+
+    <p class="text-end mb-0">
+        <a href="javascript:;" class="btn btn-white me-5px">Previous</a>
+        <a href="javascript:;" class="btn btn-primary">Next</a>
+        <button id="submitAddress" class="btn btn-success">Save</button>
+    </p>
 
 </div>

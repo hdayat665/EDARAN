@@ -1,4 +1,4 @@
-var assets = '/public';
+var assets = '';
 requirejs.config({
     baseUrl: "/",
     paths: {
