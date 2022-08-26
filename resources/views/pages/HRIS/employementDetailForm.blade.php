@@ -129,10 +129,11 @@
             </div>
 
         </div>
-        <p class="text-end mb-0">
-            <a href="javascript:;" class="btn btn-white me-5px">Previous</a>
-            {{-- <a href="javascript:;" class="btn btn-primary">Save</a> --}}
-            <buttin type="submit" id="submitEmployment" class="btn btn-primary">Save</buttin>
-        </p>
+
     </form>
+    <p class="text-end mb-0">
+        <a href="javascript:;" class="btn btn-white me-5px">Previous</a>
+        {{-- <a href="javascript:;" class="btn btn-primary">Save</a> --}}
+        <buttin id="submitEmployment" class="btn btn-primary">Save</buttin>
+    </p>
 </div>
