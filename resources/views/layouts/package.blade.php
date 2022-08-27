@@ -17,14 +17,16 @@
 </head>
 <body class='pace-top bg-white'>
     <!-- BEGIN #loader -->
-    <div id="loader" class="app-loader">
+    {{-- <div id="loader" class="app-loader">
         <span class="spinner"></span>
-    </div>
+    </div> --}}
+
 
     @yield('content');
 
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/latest/js.cookie.min.js" integrity="sha512-iewyUmLNmAZBOOtFnG+GlGeGudYzwDjE1SX3l9SWpGUs0qJTzdeVgGFeBeU7/BIyOZdDy6DpILikEBBvixqO9Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/latest/js.cookie.js" integrity="sha512-Xs74m0wxSrwMFibw3X6ttPnIO4E+J311Tae0hXyi29lK4hNRNQ+ySm9iI5dt1zPcr7DxtWu8OuRTgFy6s9Eijw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>

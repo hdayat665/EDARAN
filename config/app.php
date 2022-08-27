@@ -194,4 +194,18 @@ return [
         // ...
     ])->toArray(),
 
+    'response' => [
+        'success' => [
+            'type' => 'success',
+            'title' => 'Success!',
+            'status' => true
+        ],
+        'error' => [
+            'type' => 'error',
+            'title' => 'Error!',
+            'status' => false
+        ],
+
+    ],
+
 ];

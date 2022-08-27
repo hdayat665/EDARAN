@@ -74,11 +74,14 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('/updateAddress', 'updateAddress');
             Route::post('/updateEmergency', 'updateEmergency');
             Route::post('/updateCompanion', 'updateCompanion');
+            Route::post('/addCompanion', 'addCompanion');
             Route::post('/updateChildren', 'updateChildren');
             Route::post('/addParent', 'addParent');
+            Route::post('/updateParent', 'updateParent');
             Route::post('/addSibling', 'addSibling');
-            Route::get('/getParent', 'getParent');
-            Route::get('/getSibling', 'getSibling');
+            Route::post('/addChildren', 'addChildren');
+            Route::get('/getParent/{id}', 'getParent');
+            Route::get('/getSibling/{id}', 'getSibling');
             Route::post('/updatePass', 'updatePass');
             Route::post('/addVehicle', 'addVehicle');
             Route::post('/updateVehicle', 'updateVehicle');
@@ -86,6 +89,13 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('/addJobHistory', 'addJobHistory');
             Route::get('/getJobHistory', 'getJobHistory');
             Route::get('/getVehicle', 'getVehicle');
+            Route::get('/getChildren/{id}', 'getChildren');
+            Route::get('/getSiblingById/{id}', 'getSiblingById');
+            Route::get('/getParentById/{id}', 'getParentById');
+            Route::get('/myProfile', 'myProfileView');
+            Route::delete('/deleteChildren/{id}', 'deleteChildren');
+            Route::delete('/deleteParent/{id}', 'deleteParent');
+
 
         });
 
@@ -138,12 +148,27 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('/createNews', 'createNews');
             Route::delete('/deleteNews/{id}', 'deleteNews');
             Route::get('/getPhoneDirectory', 'getPhoneDirectory');
+            Route::get('/setting', 'settingView');
+            Route::get('/branch', 'branchView');
+            Route::get('/company', 'companyView');
+            Route::get('/department', 'departmentView');
+            Route::get('/designation', 'designationView');
+            Route::get('/jobGrade', 'jobGradeView');
+            Route::get('/news', 'newsView');
+            Route::get('/role', 'roleView');
+            Route::get('/sop', 'sopView');
+            Route::get('/unit', 'unitView');
+
 
         });
         Route::controller(OrganizationController::class)->group(function () {
             Route::get('/getPhoneDirectory', 'getPhoneDirectory');
             Route::get('/getOrganizationChart', 'getOrganizationChart');
             Route::get('/getDepartmentTree', 'getDepartmentTree');
+            Route::get('/phoneDirectory', 'phoneDirectoryView');
+            Route::get('/organizationChart', 'chartView');
+            Route::get('/departmentTree', 'treeView');
+
 
         });
     });

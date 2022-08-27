@@ -8,6 +8,8 @@ requirejs.config({
         'registerTenant': assets + '/js/registerTenant',
         'employeeInfo': assets + '/js/employeeInfo',
         'registerEmployee': assets + '/js/registerEmployee',
+        'organization': assets + '/js/organization',
+        'myProfile': assets + '/js/myProfile',
 
         // 'main': 'assets/backend/js/main',
         'sweetAlert2': assets + '/assets/sweetalert2/sweetalert2',
@@ -22,6 +24,11 @@ loadCss(sweetalertCss, sweetalertCss);
 requirejs();
 if ($('#loginVendorApp').length > 0) {
     requirejs(['app'], ['vendor']);
+}
+
+requirejs();
+if ($('#organization').length > 0) {
+    requirejs(['organization']);
 }
 
 if ($('#registerTenant').length > 0) {
@@ -43,6 +50,11 @@ if ($('#employeeInfo').length > 0) {
 if ($('#registerEmployee').length > 0) {
     requirejs(['registerEmployee']);
 }
+
+if ($('#myProfile').length > 0) {
+    requirejs(['myProfile']);
+}
+
 
 
 

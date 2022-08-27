@@ -42,5 +42,20 @@ class OrganizationController extends Controller
         return response()->json($result);
     }
 
+    public function phoneDirectoryView()
+    {
+        return view('pages.org.phone');
+    }
+
+    public function chartView()
+    {
+        return view('pages.org.chart');
+    }
+
+    public function treeView()
+    {
+        return view('pages.org.departmentTree');
+    }
+
 
 }

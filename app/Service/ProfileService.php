@@ -64,7 +64,9 @@ class ProfileService
 
         if(!$profile)
         {
-            $data['status'] = 404;
+            $data['status'] = config('app.response.error.status');;
+            $data['title'] = config('app.response.error.title');
+            $data['type'] = config('app.response.error.type');
             $data['msg'] = 'Profile not found';
         }else{
             if(!$input['religion'])
@@ -96,9 +98,18 @@ class ProfileService
 
             }
 
+            if ($input['username']) {
+
+                $username['username'] = $input['username'];
+
+                Users::where('id', $user_id)->update($username);
+            }
+
             UserProfile::where('user_id', $user_id)->update($input);
 
-            $data['status'] = 200;
+            $data['status'] = config('app.response.success.status');
+            $data['title'] = config('app.response.success.title');
+            $data['type'] = config('app.response.success.type');
             $data['msg'] = 'Success update Profile';
         }
 
@@ -114,7 +125,9 @@ class ProfileService
 
         if(!$user)
         {
-            $data['status'] = 404;
+            $data['status'] = config('app.response.error.status');
+            $data['type'] = config('app.response.error.type');
+            $data['title'] = config('app.response.error.title');
             $data['msg'] = 'user not found';
         }else{
 
@@ -128,10 +141,23 @@ class ProfileService
                 unset($input['address2c']);
 
             }
+            $sameAsPermenant = $input['sameAsPermenant'] ?? '';
+
+            if ($sameAsPermenant) {
+                $input['address1c'] = $input['address1'];
+                $input['address2c'] = $input['address2'];
+                $input['postcodec'] = $input['postcode'];
+                $input['cityc'] = $input['city'];
+                $input['countryc'] = $input['country'];
+                $input['statec'] = $input['state'];
+            }
+            unset($input['sameAsPermenant']);
 
             UserAddress::where('user_id', $user_id)->update($input);
 
-            $data['status'] = 200;
+            $data['status'] = config('app.response.success.status');
+            $data['type'] = config('app.response.success.type');
+            $data['title'] = config('app.response.success.title');
             $data['msg'] = 'Success update Address';
 
         }
@@ -148,7 +174,9 @@ class ProfileService
 
         if(!$user)
         {
-            $data['status'] = 404;
+            $data['status'] = config('app.response.error.status');
+            $data['type'] = config('app.response.error.type');
+            $data['title'] = config('app.response.error.title');
             $data['msg'] = 'user not found';
         }else{
 
@@ -159,7 +187,9 @@ class ProfileService
 
             UserEmergency::where('id', $id)->update($input);
 
-            $data['status'] = 200;
+            $data['status'] = config('app.response.success.status');
+            $data['type'] = config('app.response.success.type');
+            $data['title'] = config('app.response.success.title');
             $data['msg'] = 'Success update Emergency Contact';
 
         }
@@ -171,20 +201,21 @@ class ProfileService
     {
         $input = $r->input();
 
-        $user_id = Auth::user()->id;
-        $id = $input['id'] ?? 1;
+        $id = Auth::user()->id;
 
-        $user = UserCompanion::where('id', $id)->first();
+        $user = UserCompanion::where('user_id', $id)->first();
 
         if(!$user)
         {
-            $data['status'] = 404;
+            $data['status'] = config('app.response.error.status');
+            $data['type'] = config('app.response.error.type');
+            $data['title'] = config('app.response.error.title');
             $data['msg'] = 'user not found';
         }else{
 
             if ($_FILES['payslip']['name'])
             {
-                $payslip = upload($r, 'payslip');
+                $payslip = upload($r->file('payslip'));
                 $input['payslip'] = $payslip['filename'];
 
                 if (!$input['payslip']) {
@@ -194,7 +225,7 @@ class ProfileService
 
             if ($_FILES['marrigeCert']['name'])
             {
-                $marrigeCert = upload($r, 'marrigeCert');
+                $marrigeCert = upload($r->file('marrigeCert'));
                 $input['marrigeCert'] = $marrigeCert['filename'];
 
                 if (!$input['marrigeCert']) {
@@ -232,14 +263,72 @@ class ProfileService
                 unset($input['address2E']);
             }
 
+            $input['dateJoined'] = "'".dateFormatInput($input['dateJoined'])."'";
+            $input['expiryDate'] = "'".dateFormatInput($input['expiryDate'])."'";
+            $input['DOM'] = "'".dateFormatInput($input['DOM'])."'";
+            $input['DOB'] = "'".dateFormatInput($input['DOB'])."'";
+
             UserCompanion::where('id', $id)->update($input);
 
-            $data['status'] = 404;
+            $data['status'] = config('app.response.success.status');
+            $data['type'] = config('app.response.success.type');
+            $data['title'] = config('app.response.success.title');
             $data['msg'] = 'Success update Companion';
         }
 
         return $data;
 
+    }
+
+    public function addCompanion($r)
+    {
+        $input = $r->input();
+
+        $id = Auth::user()->id;
+
+        $companion = UserCompanion::where('user_id', $id)->count();
+
+        if ($companion >= 4) {
+            $data['status'] = config('app.response.error.status');
+            $data['type'] = config('app.response.error.type');
+            $data['title'] = config('app.response.error.title');
+            $data['msg'] = 'Max Companion can add only 4';
+        }else{
+
+            if ($_FILES['payslip']['name'])
+            {
+                $payslip = upload($r->file('payslip'));
+                $input['payslip'] = $payslip['filename'];
+
+                if (!$input['payslip']) {
+                    unset($input['payslip']);
+                }
+            }
+
+            if ($_FILES['marrigeCert']['name'])
+            {
+                $marrigeCert = upload($r->file('marrigeCert'));
+                $input['marrigeCert'] = $marrigeCert['filename'];
+
+                if (!$input['marrigeCert']) {
+                    unset($input['marrigeCert']);
+                }
+            }
+
+            $input['user_id'] = $id;
+            $input['dateJoined'] = dateFormat($input['dateJoined']);
+            $input['expiryDate'] = dateFormat($input['expiryDate']);
+            $input['DOM'] = dateFormat($input['DOM']);
+            $input['DOB'] = dateFormat($input['DOB']);
+            UserCompanion::create($input);
+
+            $data['status'] = config('app.response.success.status');
+            $data['type'] = config('app.response.success.type');
+            $data['title'] = config('app.response.success.title');
+            $data['msg'] = 'Success add Companion';
+        }
+
+        return $data;
     }
 
     public function updateChildren($r)
@@ -253,7 +342,9 @@ class ProfileService
 
         if(!$user)
         {
-            $data['status'] = 404;
+            $data['status'] = config('app.response.error.status');
+            $data['type'] = config('app.response.error.type');
+            $data['title'] = config('app.response.error.title');
             $data['msg'] = 'user not found';
         }else{
 
@@ -269,7 +360,9 @@ class ProfileService
 
             UserChildren::where('id', $id)->update($input);
 
-            $data['status'] = 200;
+            $data['status'] = config('app.response.success.status');
+            $data['type'] = config('app.response.success.type');
+            $data['title'] = config('app.response.success.title');
             $data['msg'] = 'Success update Children';
         }
 
@@ -287,7 +380,7 @@ class ProfileService
         return $data;
     }
 
-    public function getParent($user_id = '')
+    public function getParentByUserId($user_id = '')
     {
         $user_id = Auth::user()->id;
         $data['data'] = UserParent::where('user_id', $user_id)->get();
@@ -311,13 +404,44 @@ class ProfileService
     public function addParent($r)
     {
         $input = $r->input();
-
+        unset($input['sameAddress']);
+        $input['user_id'] = Auth::user()->id;
         UserParent::create($input);
 
-        $data['status'] = 200;
+        $data['status'] = config('app.response.success.status');
+        $data['type'] = config('app.response.success.type');
+        $data['title'] = config('app.response.success.title');
         $data['msg'] = 'Success add Parent';
 
         return $data;
+    }
+
+    public function updateParent($r)
+    {
+        $input = $r->input();
+
+        $id = $input['id'] ?? 1;
+
+        $user = UserParent::where('id', $id)->first();
+
+        if(!$user)
+        {
+            $data['status'] = config('app.response.error.status');
+            $data['type'] = config('app.response.error.type');
+            $data['title'] = config('app.response.error.title');
+            $data['msg'] = 'user not found';
+        }else{
+            unset($input['sameAddress']);
+            UserParent::where('id', $id)->update($input);
+
+            $data['status'] = config('app.response.success.status');
+            $data['type'] = config('app.response.success.type');
+            $data['title'] = config('app.response.success.title');
+            $data['msg'] = 'Success update Parent';
+        }
+
+        return $data;
+
     }
 
     public function updateEmployee($r)
@@ -426,6 +550,138 @@ class ProfileService
 
         $data['data'] = Vehicle::where('user_id', $user_id)->get();
         $data['msg'] = 'Success get vehicle data';
+
+        return $data;
+    }
+
+    public function profileView()
+    {
+        $data['user_id'] = Auth::user()->id;
+
+        $data['profile'] = UserProfile::where('user_id', $data['user_id'])->first();
+        $data['address'] = UserAddress::where('user_id', $data['user_id'])->first();
+        $data['emergency'] = UserEmergency::where('user_id', $data['user_id'])->first();
+        $data['companions'] = UserCompanion::where('user_id', $data['user_id'])->get();
+        $data['childrens'] = UserChildren::where('user_id', $data['user_id'])->get();
+        $data['parents'] = UserParent::where('user_id', $data['user_id'])->get();
+        $data['siblings'] = UserSibling::where('user_id', $data['user_id'])->get();
+
+        foreach ($data['childrens'] as $child) {
+            $childId[] = $child->id;
+        }
+
+        foreach ($data['siblings'] as $sibling) {
+            $siblingId[] = $sibling->id;
+        }
+
+        foreach ($data['parents'] as $parent) {
+            $parentId[] = $parent->id;
+        }
+
+        $data['siblingId'] = implode(',', $siblingId);
+
+        $data['parentId'] = implode(',', $parentId);
+
+        $data['childId'] = implode(',', $childId);
+
+        $data['idRun'] = 1;
+
+        $data['username'] = Auth::user()->username;
+
+        $data['gender'] = gender();
+        $data['maritalStatus'] = getMaritalStatus();
+        $data['educationLevel'] = educationLevel();
+        $data['educationType'] = educationType();
+
+        return $data;
+    }
+
+    public function getChildren($id = '')
+    {
+        $data['data'] = UserChildren::where('id', $id)->first();
+        $data['msg'] = 'Success get children data';
+
+        return $data;
+    }
+
+    public function getParentById($id = '')
+    {
+        $data['data'] = UserParent::where('id', $id)->first();
+        $data['msg'] = 'Success get Parent data';
+
+        return $data;
+    }
+
+    public function getSiblingById($id = '')
+    {
+        $data['data'] = UserSibling::where('id', $id)->first();
+        $data['msg'] = 'Success get sibling data';
+
+        return $data;
+    }
+
+    public function addChildren($r)
+    {
+        $input = $r->input();
+
+        if ($_FILES['supportDoc']['name']) {
+            $payslip = upload($r->file('supportDoc'));
+            $input['supportDoc'] = $payslip['filename'];
+
+            if (!$input['supportDoc']) {
+                unset($input['supportDoc']);
+            }
+        }
+
+        $input['user_id'] = Auth::user()->id;
+        UserChildren::create($input);
+
+        $data['status'] = config('app.response.success.status');
+        $data['type'] = config('app.response.success.type');
+        $data['title'] = config('app.response.success.title');
+        $data['msg'] = 'Success add children';
+
+        return $data;
+    }
+
+    public function deleteChildren($id = '')
+    {
+        $child = UserChildren::where('id',$id)->first();
+
+        if(!$child)
+        {
+            $data['status'] = config('app.response.error.status');
+            $data['type'] = config('app.response.error.type');
+            $data['title'] = config('app.response.error.title');
+            $data['msg'] = 'Children not found';
+        }else{
+            UserChildren::where('id',$id)->delete();
+            $data['status'] = config('app.response.success.status');
+            $data['type'] = config('app.response.success.type');
+            $data['title'] = config('app.response.success.title');
+            $data['msg'] = 'Children deleted';
+        }
+
+        return $data;
+    }
+
+    public function deleteParent($id = '')
+    {
+        $child = UserParent::where('id',$id)->first();
+
+        if(!$child)
+        {
+            $data['status'] = config('app.response.error.status');
+            $data['type'] = config('app.response.error.type');
+            $data['title'] = config('app.response.error.title');
+            $data['msg'] = 'Parent not found';
+        }else{
+            UserParent::where('id',$id)->delete();
+            $data['status'] = config('app.response.success.status');
+            $data['type'] = config('app.response.success.type');
+            $data['title'] = config('app.response.success.title');
+            $data['msg'] = 'Parent deleted';
+        }
 
         return $data;
     }

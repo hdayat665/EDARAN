@@ -373,4 +373,54 @@ class SettingController extends Controller
         return response()->json($result);
     }
 
+    public function settingView()
+    {
+        return view('pages.setting.dashboard');
+    }
+
+    public function branchView()
+    {
+        return view('pages.setting.branch');
+    }
+
+    public function companyView()
+    {
+        return view('pages.setting.company');
+    }
+
+    public function departmentView()
+    {
+        return view('pages.setting.department');
+    }
+
+    public function designationView()
+    {
+        return view('pages.setting.designation');
+    }
+
+    public function jobGradeView()
+    {
+        return view('pages.setting.jobGrade');
+    }
+
+    public function newsView()
+    {
+        return view('pages.setting.news');
+    }
+
+    public function roleView()
+    {
+        return view('pages.setting.role');
+    }
+
+    public function sopView()
+    {
+        return view('pages.setting.sop');
+    }
+
+    public function unitView()
+    {
+        return view('pages.setting.unit');
+    }
+
 }
