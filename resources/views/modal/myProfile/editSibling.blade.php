@@ -1,4 +1,4 @@
-<div class="modal fade" id="add-sibling" tabindex="-1" aria-labelledby="add-sibling" aria-hidden="true">
+<div class="modal fade" id="edit-sibling" tabindex="-1" aria-labelledby="edit-sibling" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
@@ -6,28 +6,29 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form id="addSiblingForm">
+                <form id="editSiblingForm">
                     <div class="row p-2">
                         <div class="col-sm-6">
                             <label for="firstname" class="form-label">First Name*</label>
-                            <input type="text" id="" name="firstName" class="form-control" aria-describedby="firstname">
+                            <input type="text" id="firstNameS" name="firstName" class="form-control" aria-describedby="firstname">
+                            <input type="hidden" id="idSA" name="id" class="form-control" aria-describedby="firstname">
                         </div>
                         <div class="col-sm-6">
                             <label for="lastname" class="form-label">Last Name*</label>
-                            <input type="text" id="" name="lastName" class="form-control" aria-describedby="lastname">
+                            <input type="text" id="lastNameS" name="lastName" class="form-control" aria-describedby="lastname">
                         </div>
                     </div>
                     <div class="row p-2">
                         <div class="col-sm-6">
                             <label for="dob" class="form-label">Date of Birth</label>
-                            <input type="date" id="" name="DOB" class="form-control" aria-describedby="dob">
+                            <input type="date" id="DOBS" name="DOB" class="form-control" aria-describedby="dob">
                         </div>
                         <div class="col-sm-6">
                             <label for="gender" class="form-label">Gender</label>
-                            <select class="form-select" name="gender">
-                                <option value="0" label="Please Choose " ></option>
+                            <select class="form-select" id="genderS" name="gender">
+                                <option value="0" label="Please Choose "  ></option>
                                 @foreach ($gender as $key => $status)
-                                <option value="{{$key}}" >{{$status}}</option>
+                                <option value="{{$key}}"  >{{$status}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -35,14 +36,14 @@
                     <div class="row p-2">
                         <div class="col-sm-6">
                             <label for="lastname" class="form-label">Contact Number*</label>
-                            <input type="text" value="XXXXXXXXXX" name="contactNo" id="" class="form-control" aria-describedby="lastname">
+                            <input type="text" value="XXXXXXXXXX" name="contactNo" id="contactNo" class="form-control" aria-describedby="lastname">
                         </div>
                         <div class="col-sm-6">
                             <label for="lastname" class="form-label">Relationship</label>
-                            <select class="form-select" name="relationship">
-                                <option value="0" label="Please Choose "></option>
+                            <select class="form-select" name="relationship" id="relationshipS">
+                                <option value="0" label="Please Choose " ></option>
                                 @foreach ($relationships as $key => $relationship)
-                                <option value="{{$key}}" >{{$relationship}}</option>
+                                <option value="{{$key}}"  >{{$relationship}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -61,22 +62,22 @@
                     <div class="row p-2">
                         <div class="col-sm-6">
                             <label for="address-1" class="form-label">Address 1*</label>
-                            <input type="text" id="-1" class="form-control" name="address1" aria-describedby="address-1">
+                            <input type="text" id="address1S" class="form-control" name="address1" aria-describedby="address-1">
                         </div>
                         <div class="col-sm-6">
                             <label for="address-2" class="form-label">Address 2</label>
-                            <input type="text" id="-2" class="form-control" name="address2" aria-describedby="address-2">
+                            <input type="text" id="address2S" class="form-control" name="address2" aria-describedby="address-2">
                         </div>
                     </div>
                     <div class="row p-2">
                         <div class="col-sm-6">
                             <label for="postcode" class="form-label">Postcode*</label>
-                            <input type="text" id="" class="form-control" name="postcode" aria-describedby="postcode">
+                            <input type="text" id="postcodeS" class="form-control" name="postcode" aria-describedby="postcode">
                         </div>
                         <div class="col-sm-6">
                             <label for="city" class="form-label">City*</label>
-                            <select class="form-select" name="city">
-                                <option value="0" label="Please Choose " ></option>
+                            <select class="form-select" name="city" id="cityS">
+                                <option value="0" label="Please Choose "  ></option>
                                 @foreach ($citys as $key => $city)
                                 <option value="{{$key}}"  >{{$city}}</option>
                                 @endforeach
@@ -86,8 +87,8 @@
                     <div class="row p-2">
                         <div class="col-sm-6">
                             <label for="state" class="form-label">State*</label>
-                            <select class="form-select" name="state">
-                                <option value="0" label="Please Choose " ></option>
+                            <select class="form-select" name="state" id="stateSA">
+                                <option value="0" label="Please Choose "  ></option>
                                 @foreach ($states as $key => $state)
                                 <option value="{{$key}}"  >{{$state}}</option>
                                 @endforeach
@@ -95,8 +96,8 @@
                         </div>
                         <div class="col-sm-6">
                             <label for="country" class="form-label">Country</label>
-                            <select class="form-select" name="country">
-                                <option value="0" label="Please Choose " ></option>
+                            <select class="form-select" name="country" id="countrySA">
+                                <option value="0" label="Please Choose "  ></option>
                                 <optgroup id="country-optgroup-Americas" label="Americas">
                                     @foreach ($americass as $key => $america)
                                     <option value="{{$key}}"  >{{$america}}</option>
@@ -104,9 +105,10 @@
                                 </optgroup>
                                 <optgroup id="country-optgroup-Asia" label="Asia">
                                     @foreach ($asias as $key => $asia)
-                                    <option value="{{$key}}" >{{$asia}}</option>
+                                    <option value="{{$key}}"  >{{$asia}}</option>
                                     @endforeach
                                 </optgroup>
+
                             </select>
                         </div>
                     </div>
@@ -115,11 +117,8 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-primary" id="addSibling">Save</button>
+                <button type="button" class="btn btn-primary" id="editSibling">Save</button>
             </div>
         </div>
     </div>
 </div>
-
-@include('modal.myProfile.editSibling')
-@include('modal.myProfile.viewSibling')

@@ -20,6 +20,7 @@
     <link href="{{env('ASSETS_URL')}}/plugins/gritter/css/jquery.gritter.css" rel="stylesheet" />
     <link href="{{env('ASSETS_URL')}}/plugins/nvd3/build/nv.d3.css" rel="stylesheet" />
     <link href="{{env('ASSETS_URL')}}/plugins/simple-calendar/dist/simple-calendar.css" rel="stylesheet" />
+    <link href="{{env('ASSETS_URL')}}/plugins/jstree/dist/themes/default/style.min.css" rel="stylesheet" />
     <!-- ================== END page-css ================== -->
 </head>
 <body>
@@ -453,6 +454,7 @@
     <script src="{{env('ASSETS_URL')}}/plugins/blueimp-file-upload/js/jquery.fileupload-validate.js"></script>
     <script src="{{env('ASSETS_URL')}}/plugins/blueimp-file-upload/js/jquery.fileupload-ui.js"></script>
     <script src="{{env('ASSETS_URL')}}/js/demo/form-multiple-upload.demo.js"></script>
+	<script src="{{env('ASSETS_URL')}}/plugins/jstree/dist/jstree.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.js"></script>
     <script src="{{env('ASSETS_URL')}}/js/orgchart.js"></script>
 

@@ -14,7 +14,7 @@
 
     <!-- END breadcrumb -->
     <!-- BEGIN page-header -->
-    <h1 class="page-header">Settings <small>| Department </small></h1>
+    <h1 class="page-header" id="departmentJs">Settings <small>| Department </small></h1>
 
     <!-- END page-header -->
     <!-- BEGIN panel -->
@@ -24,7 +24,7 @@
 
         <div class="panel-heading">
             <div class="col-md-6">
-                <a href="javascript:;" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-primary">+ New Department</a>
+                <a href="javascript:;" data-bs-toggle="modal" id="addButton" class="btn btn-primary">+ New Department</a>
             </div>
 
             <h4 class="panel-title"></h4>
@@ -39,8 +39,8 @@
                     <tr>
                         <th width="1%">No.</th>
                         <th class="text-nowrap">Company Name</th>
+                        <th class="text-nowrap">Department Name</th>
                         <th class="text-nowrap">Department Code</th>
-                        <th class="text-nowrap">Company Code</th>
                         <th class="text-nowrap">Added By</th>
                         <th class="text-nowrap">Added Time</th>
                         <th class="text-nowrap">Modified By</th>
@@ -51,46 +51,22 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="odd gradeX">
-                        <td width="1%" class="fw-bold text-dark">1</td>
-                        <td>Edaran</td>
-                        <td>Edaran001</td>
-                        <td>Edaran IT service</td>
-                        <td> Farid </td>
-                        <td>2 Feb 2022 2.30 pm</td>
-                        <td>Elon Musk</td>
-                        <td>14 Feb 2021 4.30 pm</td>
-                        <td><a href="javascript:;" data-bs-toggle="modal" data-bs-target="#exampleModal2" class="btn btn-outline-green"><i class="fa fa-pencil-alt"></i></a> <a href="javascript:;" class="btn btn-outline-danger"><i class="fa fa-trash"></i></a></td>
-
-                    </tr>
-                    <tr class="even gradeC">
-                        <td width="1%" class="fw-bold text-dark">2</td>
-                        <td>MIDC</td>
-                        <td>MIDC001</td>
-                        <td>MIDC IT service</td>
-                        <td> Farid </td>
-                        <td>2 Feb 2022 2.30 pm</td>
-                        <td>Elon Musk</td>
-                        <td>14 Feb 2021 4.30 pm</td>
-                        <td><a href="javascript:;" class="btn btn-outline-green"><i class="fa fa-pencil-alt"></i></a> <a href="javascript:;" class="btn btn-outline-danger"><i class="fa fa-trash"></i></a></td>
-
-                    </tr>
-                    <tr class="even gradeC">
-                        <td width="1%" class="fw-bold text-dark">3</td>
-                        <td>Shinba</td>
-                        <td>Shinba002</td>
-                        <td>Shinba IT service</td>
-                        <td> Farid </td>
-                        <td>2 Feb 2022 2.30 pm</td>
-                        <td>Elon Musk</td>
-                        <td>14 Feb 2021 4.30 pm</td>
-                        <td><a href="javascript:;" class="btn btn-outline-green"><i class="fa fa-pencil-alt"></i></a> <a href="javascript:;" class="btn btn-outline-danger"><i class="fa fa-trash"></i></a></td>
-
-                    </tr>
-
-
-
-
+                    <?php $id = 0 ?>
+                    @if ($departments)
+                        @foreach ($departments as $department)
+                        <tr class="odd gradeX">
+                            <td width="1%" class="fw-bold text-dark">1</td>
+                            <td>{{$department->companyName}}</td>
+                            <td>{{$department->departmentName}}</td>
+                            <td>{{$department->departmentCode}}</td>
+                            <td> {{$department->addedBy}}</td>
+                            <td>{{$department->created_at}}</td>
+                            <td>{{$department->modifiedBy}}</td>
+                            <td>{{$department->updated_at}}</td>
+                            <td><a href="javascript:;" data-bs-toggle="modal" id="editButton" data-id="{{$department->id}}" class="btn btn-outline-green"><i class="fa fa-pencil-alt"></i></a> <a href="javascript:;" class="btn btn-outline-danger" id="deleteButton" data-id="{{$department->id}}"><i class="fa fa-trash"></i></a></td>
+                        </tr>
+                        @endforeach
+                    @endif
                 </tbody>
             </table>
         </div>
@@ -99,7 +75,7 @@
 
 <!-- END row -->
 <!-- BEGIN row -->
-<div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -107,36 +83,37 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form>
+                <form id="updateForm">
 
                     <div class="mb-3">
                         <label>Company Name* </label>
-                        <select class="form-select">
-                            <option value="0" label="Select Company " selected="selected">Select Company </option>
-                            <option value="1" label="Edaran IT">Edaran IT</option>
-                            <option value="2" label="Shiba IT">Shiba IT</option>
-                            <option value="3" label="Link IT">Link IT</option>
-
+                        <select class="form-select" name="companyId" id="companyId">
+                            <?php $companies = getCompany() ?>
+                            <option value="0" label="Select Company ">Select Company </option>
+                            @foreach ($companies as $company)
+                                <option value="{{$company->id}}" >{{$company->companyName}}</option>
+                            @endforeach
                         </select>
                     </div>
                     <div class="mb-3">
                         <label>Department Name* </label>
-                        <input type="text" class="form-control" id="recipient-name" placeholder="">
+                        <input type="text" class="form-control" id="departmentName" name="departmentName" placeholder="">
+                        <input type="hidden" class="form-control" id="idD" name="id" placeholder="">
                     </div>
                     <div class="mb-3">
-                        <label>Company code* </label>
-                        <input type="text" class="form-control" id="recipient-name" placeholder="">
+                        <label>Department code* </label>
+                        <input type="text" class="form-control" id="departmentCode" name="departmentCode" placeholder="">
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save</button>
+                <button type="button" class="btn btn-primary" id="updateButton">Save</button>
             </div>
         </div>
     </div>
 </div>
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -144,31 +121,31 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form>
+                <form id="addForm">
 
                     <div class="mb-3">
                         <label>Company Name* </label>
-                        <select class="form-select">
-                            <option value="0" label="Select Company " selected="selected">Select Company </option>
-                            <option value="1" label="Edaran IT">Edaran IT</option>
-                            <option value="2" label="Shiba IT">Shiba IT</option>
-                            <option value="3" label="Link IT">Link IT</option>
-
+                            <?php $companies = getCompany() ?>
+                            <select class="form-select" name="companyId">
+                            <option value="0" label="Select Company " >Select Company </option>
+                            @foreach ($companies as $company)
+                                <option value="{{$company->id}}">{{$company->companyName}}</option>
+                            @endforeach
                         </select>
                     </div>
                     <div class="mb-3">
                         <label>Department Name* </label>
-                        <input type="text" class="form-control" id="recipient-name" placeholder="">
+                        <input type="text" class="form-control" name="departmentName" placeholder="">
                     </div>
                     <div class="mb-3">
-                        <label>Company code* </label>
-                        <input type="text" class="form-control" id="recipient-name" placeholder="">
+                        <label>Department code* </label>
+                        <input type="text" class="form-control" name="departmentCode" placeholder="">
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save</button>
+                <button type="button" class="btn btn-primary" id="saveButton">Save</button>
             </div>
         </div>
     </div>

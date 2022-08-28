@@ -385,12 +385,20 @@ class SettingController extends Controller
 
     public function companyView()
     {
-        return view('pages.setting.company');
+        $ss = new SettingService;
+
+        $result = $ss->companyView();
+
+        return view('pages.setting.company', $result);
     }
 
     public function departmentView()
     {
-        return view('pages.setting.department');
+        $ss = new SettingService;
+
+        $result = $ss->departmentView();
+
+        return view('pages.setting.department', $result);
     }
 
     public function designationView()
@@ -410,7 +418,11 @@ class SettingController extends Controller
 
     public function roleView()
     {
-        return view('pages.setting.role');
+        $ss = new SettingService;
+
+        $result = $ss->roleView();
+
+        return view('pages.setting.role', $result);
     }
 
     public function sopView()
@@ -421,6 +433,33 @@ class SettingController extends Controller
     public function unitView()
     {
         return view('pages.setting.unit');
+    }
+
+    public function getRoleById($id = '')
+    {
+        $ss = new SettingService;
+
+        $result = $ss->getRoleById($id);
+
+        return $result;
+    }
+
+    public function getCompanyById($id = '')
+    {
+        $ss = new SettingService;
+
+        $result = $ss->getCompanyById($id);
+
+        return $result;
+    }
+
+    public function getDepartmentById($id = '')
+    {
+        $ss = new SettingService;
+
+        $result = $ss->getDepartmentById($id);
+
+        return $result;
     }
 
 }

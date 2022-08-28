@@ -10,6 +10,11 @@ requirejs.config({
         'registerEmployee': assets + '/js/registerEmployee',
         'organization': assets + '/js/organization',
         'myProfile': assets + '/js/myProfile',
+        'employmentJs': assets + '/js/employmentJs',
+        'vehicleJs': assets + '/js/vehicleJs',
+        'roleJs': assets + '/js/roleJs',
+        'companyJs': assets + '/js/companyJs',
+        'departmentJs': assets + '/js/departmentJs',
 
         // 'main': 'assets/backend/js/main',
         'sweetAlert2': assets + '/assets/sweetalert2/sweetalert2',
@@ -53,6 +58,26 @@ if ($('#registerEmployee').length > 0) {
 
 if ($('#myProfile').length > 0) {
     requirejs(['myProfile']);
+}
+
+if ($('#employmentJs').length > 0) {
+    requirejs(['employmentJs']);
+}
+
+if ($('#vehicleJs').length > 0) {
+    requirejs(['vehicleJs']);
+}
+
+if ($('#roleJs').length > 0) {
+    requirejs(['roleJs']);
+}
+
+if ($('#companyJs').length > 0) {
+    requirejs(['companyJs']);
+}
+
+if ($('#departmentJs').length > 0) {
+    requirejs(['departmentJs']);
 }
 
 

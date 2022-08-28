@@ -392,10 +392,13 @@ class ProfileService
     public function addSibling($r)
     {
         $input = $r->input();
+        $input['user_id'] = Auth::user()->id;
 
         UserSibling::create($input);
 
-        $data['status'] = 200;
+        $data['status'] = config('app.response.success.status');
+        $data['type'] = config('app.response.success.type');
+        $data['title'] = config('app.response.success.title');
         $data['msg'] = 'Success add Sibling';
 
         return $data;
@@ -404,7 +407,17 @@ class ProfileService
     public function addParent($r)
     {
         $input = $r->input();
-        unset($input['sameAddress']);
+        $sameAddress = $input['sameAddress'] ?? null;
+        if ($sameAddress) {
+            $userProfile = UserProfile::where('user_id', Auth::user()->id)->first();
+
+            $input['address1'] = $userProfile->address1;
+            $input['address2'] = $userProfile->address2;
+            $input['city'] = $userProfile->city;
+            $input['state'] = $userProfile->state;
+            $input['country'] = $userProfile->country;
+            unset($input['sameAddress']);
+        }
         $input['user_id'] = Auth::user()->id;
         UserParent::create($input);
 
@@ -472,19 +485,23 @@ class ProfileService
     {
         $input = $r->input();
 
-        $id = $input['id'] ?? 1;
+        $id = $input['id'];
 
         $user = Vehicle::where('id', $id)->first();
 
         if(!$user)
         {
-            $data['status'] = 404;
+            $data['status'] = config('app.response.error.status');
+            $data['type'] = config('app.response.error.type');
+            $data['title'] = config('app.response.error.title');
             $data['msg'] = 'user not found';
         }else{
 
             Vehicle::where('id', $id)->update($input);
 
-            $data['status'] = 200;
+            $data['status'] = config('app.response.success.status');
+            $data['type'] = config('app.response.success.type');
+            $data['title'] = config('app.response.success.title');
             $data['msg'] = 'Success update Vehicle';
         }
 
@@ -495,10 +512,12 @@ class ProfileService
     public function addVehicle($r)
     {
         $input = $r->input();
-
+        $input['user_id'] = Auth::user()->id;
         Vehicle::create($input);
 
-        $data['status'] = 200;
+        $data['status'] = config('app.response.success.status');
+        $data['type'] = config('app.response.success.type');
+        $data['title'] = config('app.response.success.title');
         $data['msg'] = 'Success add Vehicle';
 
         return $data;
@@ -510,12 +529,16 @@ class ProfileService
         $vehicle = Vehicle::find($id);
 
         if (!$vehicle) {
-            $data['status'] = 404;
+            $data['status'] = config('app.response.error.status');
+            $data['type'] = config('app.response.error.type');
+            $data['title'] = config('app.response.error.title');
             $data['msg'] = 'vehicle not found';
-        }else{
+        } else {
             $vehicle->delete();
 
-            $data['status'] = 200;
+            $data['status'] = config('app.response.success.status');
+            $data['type'] = config('app.response.success.type');
+            $data['title'] = config('app.response.success.title');
             $data['msg'] = 'Success delete Vehicle';
         }
 
@@ -565,6 +588,9 @@ class ProfileService
         $data['childrens'] = UserChildren::where('user_id', $data['user_id'])->get();
         $data['parents'] = UserParent::where('user_id', $data['user_id'])->get();
         $data['siblings'] = UserSibling::where('user_id', $data['user_id'])->get();
+        $data['employment'] = Employee::where('user_id', $data['user_id'])->first();
+        $data['jobHistorys'] = JobHistory::where('user_id', $data['user_id'])->first();
+        $data['vehicles'] = Vehicle::where('user_id', $data['user_id'])->get();
 
         foreach ($data['childrens'] as $child) {
             $childId[] = $child->id;
@@ -588,10 +614,17 @@ class ProfileService
 
         $data['username'] = Auth::user()->username;
 
+        $data['user_id'] = Auth::user()->id;
+
         $data['gender'] = gender();
         $data['maritalStatus'] = getMaritalStatus();
         $data['educationLevel'] = educationLevel();
         $data['educationType'] = educationType();
+        $data['states'] = state();
+        $data['relationships'] = relationship();
+        $data['citys'] = city();
+        $data['americass'] = americas();
+        $data['asias'] = asias();
 
         return $data;
     }
@@ -682,6 +715,74 @@ class ProfileService
             $data['title'] = config('app.response.success.title');
             $data['msg'] = 'Parent deleted';
         }
+
+        return $data;
+    }
+
+    public function deleteSibling($id = '')
+    {
+        $child = UserSibling::where('id',$id)->first();
+
+        if(!$child)
+        {
+            $data['status'] = config('app.response.error.status');
+            $data['type'] = config('app.response.error.type');
+            $data['title'] = config('app.response.error.title');
+            $data['msg'] = 'Sibling not found';
+        }else{
+            UserSibling::where('id',$id)->delete();
+            $data['status'] = config('app.response.success.status');
+            $data['type'] = config('app.response.success.type');
+            $data['title'] = config('app.response.success.title');
+            $data['msg'] = 'Sibling deleted';
+        }
+
+        return $data;
+    }
+
+    public function updateSibling($r)
+    {
+        $input = $r->input();
+
+        $id = $input['id'] ?? 1;
+
+        $user = UserSibling::where('id', $id)->first();
+
+        if(!$user)
+        {
+            $data['status'] = config('app.response.error.status');
+            $data['type'] = config('app.response.error.type');
+            $data['title'] = config('app.response.error.title');
+            $data['msg'] = 'user not found';
+        }else{
+            $sameAddress = $input['sameAddress'] ?? null;
+            if ($sameAddress) {
+                $userProfile = UserProfile::where('user_id', Auth::user()->id)->first();
+
+                $input['address1'] = $userProfile->address1;
+                $input['address2'] = $userProfile->address2;
+                $input['city'] = $userProfile->city;
+                $input['state'] = $userProfile->state;
+                $input['country'] = $userProfile->country;
+                unset($input['sameAddress']);
+            }
+
+            UserSibling::where('id', $id)->update($input);
+
+            $data['status'] = config('app.response.success.status');
+            $data['type'] = config('app.response.success.type');
+            $data['title'] = config('app.response.success.title');
+            $data['msg'] = 'Success update Sibling';
+        }
+
+        return $data;
+
+    }
+
+    public function getVehicleById($id = '')
+    {
+        $data['data'] = Vehicle::where('id', $id)->first();
+        $data['msg'] = 'Success get Vehicle data';
 
         return $data;
     }

@@ -63,7 +63,7 @@
                         <div class="dropdown-menu">
                             <a href="javascript:;" class="dropdown-item"id="siblingModalEdit{{$sibling->id}}" data-id="{{$sibling->id}}">Edit</a>
                             <div class="dropdown-divider"></div>
-                            <a href="javascript:;" class="dropdown-item"id="siblingModalEdit{{$sibling->id}}" data-id="{{$sibling->id}}">View</a>
+                            <a href="javascript:;" class="dropdown-item"id="siblingModalView{{$sibling->id}}" data-id="{{$sibling->id}}">View</a>
                             <div class="dropdown-divider"></div>
                             <a href="javascript:;" class="dropdown-item"id="deleteSibling{{$sibling->id}}" data-id="{{$sibling->id}}">Delete</a>
                         </div>

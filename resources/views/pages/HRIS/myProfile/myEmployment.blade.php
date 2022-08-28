@@ -1,7 +1,7 @@
 <div class="tab-pane fade" id="v-pills-employment" role="tabpanel" aria-labelledby="v-pills-employment-tab">
     <div class="row">
         <div class="col-sm-6">
-            <div class="card">
+            <div class="card" id="employmentJs">
                 <div class="card-header bg-white bg-gray-100">
                     <h4 class="fw-bold">
                         Employment Information
@@ -13,48 +13,76 @@
                 <div class="card-body">
                     <div class="row p-2">
                         <label for="firstname" class="form-label">Company*</label>
-                        <select class="form-select">
-                            <option value="0" label="Please Choose " selected="selected"></option>
+                        <select class="form-select" name="company">
+                            <?php $companys = getCompany() ?>
+                            <option value="0" label="Please Choose "></option>
+                            @foreach ($companys as $company)
+                                <option value="{{$company->id}}" label="{{$company->companyName}}" {{ ($employment->company == $company->id) ? "selected='selected'" : '' }}></option>
+                            @endforeach
                         </select>
                     </div>
                     <div class="row p-2">
                         <label for="firstname" class="form-label">Department*</label>
-                        <select class="form-select">
-                            <option value="0" label="Please Choose " selected="selected"></option>
+                        <select class="form-select" name="department">
+                            <?php $Departments = getDepartment() ?>
+                            <option value="0" label="Please Choose "></option>
+                            @foreach ($Departments as $Department)
+                                <option value="{{$Department->id ?? null}}" label="{{$Department->departmentName ?? null}}" {{ ($employment->department == $Department->id) ? "selected='selected'" : '' }}></option>
+                            @endforeach
                         </select>
                     </div>
                     <div class="row p-2">
                         <label for="firstname" class="form-label">Unit*</label>
-                        <select class="form-select">
-                            <option value="0" label="Please Choose " selected="selected"></option>
+                        <select class="form-select" name="unit">
+                            <?php $Units = getUnit() ?>
+                            <option value="0" label="Please Choose "></option>
+                            @foreach ($Units as $Unit)
+                                <option value="{{$Unit->id}}" label="{{$Unit->unitName}}" {{ ($employment->unit == $Unit->id) ? "selected='selected'" : '' }}></option>
+                            @endforeach
                         </select>
                     </div>
                     <div class="row p-2">
                         <label for="firstname" class="form-label">Branch*</label>
-                        <select class="form-select">
-                            <option value="0" label="Please Choose " selected="selected"></option>
+                        <select class="form-select" name="branch">
+                            <?php $Branchs = getBranch() ?>
+                            <option value="0" label="Please Choose "></option>
+                            @foreach ($Branchs as $Branch)
+                                <option value="{{$Branch->id}}" label="{{$Branch->branchName}}" {{ ($employment->branch == $Branch->id) ? "selected='selected'" : '' }}></option>
+                            @endforeach
                         </select>
                     </div>
                     <div class="row p-2">
                         <label for="firstname" class="form-label">Joined Date*</label>
-                        <input type="date" id="address-2" class="form-control" aria-describedby="address-2">
+                        <input type="date" name="joinedDate" id="datepicker-joindate" class="form-control" aria-describedby="address-2">
                     </div>
                     <div class="row p-2">
                         <label for="firstname" class="form-label">Job Grade*</label>
-                        <select class="form-select">
-                            <option value="0" label="Please Choose " selected="selected"></option>
+                        <select class="form-select" name="jobGrade">
+                            <?php $JobGrades = getJobGrade() ?>
+                            <option value="0" label="Please Choose "></option>
+                            @foreach ($JobGrades as $JobGrade)
+                                <option value="{{$JobGrade->id}}" label="{{$JobGrade->jobGradeName}}" {{ ($employment->jobGrade == $JobGrade->id) ? "selected='selected'" : '' }}></option>
+                            @endforeach
                         </select>
                     </div>
                     <div class="row p-2">
                         <label for="firstname" class="form-label">Designation*</label>
-                        <select class="form-select">
-                            <option value="0" label="Please Choose " selected="selected"></option>
+                        <select class="form-select" name="designation">
+                            <?php $Designations = getDesignation() ?>
+                            <option value="0" label="Please Choose "></option>
+                            @foreach ($Designations as $Designation)
+                                <option value="{{$Designation->id}}" label="{{$Designation->designationName}}" {{ ($employment->designation == $Designation->id) ? "selected='selected'" : '' }}></option>
+                            @endforeach
                         </select>
                     </div>
                     <div class="row p-2">
                         <label for="firstname" class="form-label">Employment Type*</label>
-                        <select class="form-select">
-                            <option value="0" label="Please Choose " selected="selected"></option>
+                        <select class="form-select" name="employmentType">
+                            <?php $EmploymentTypes = getEmploymentType() ?>
+                            <option value="0" label="Please Choose "></option>
+                            @foreach ($EmploymentTypes as $EmploymentType)
+                                {{-- <option value="{{$EmploymentType->id ?? null}}" label="{{$EmploymentType->employmentTypeName ?? null}}" {{ ($employment->EmploymentType == $EmploymentType->id) ? "selected='selected'" : '' }}></option> --}}
+                            @endforeach
                         </select>
                     </div>
                     <div class="row p-2">
@@ -62,7 +90,7 @@
                               User Role
                         </label>
                         <div class="form-check form-switch">
-                            <input class="form-check-input" type="checkbox" id="supervisor">
+                            <input class="form-check-input" {{ ($employment->supervisor) ? "checked" : '' }} name="supervisor" type="checkbox" id="supervisor">
                             <label class="form-check-label" for="supervisor">
                                   Supervisor
                             </label>
@@ -112,45 +140,23 @@
                 <div class="card-body">
                     <div class="container">
                         <ul class="timeline-with-icons">
+                            @if ($jobHistorys)
+                            @foreach ($jobHistorys as $jobHistory)
                             <li class="timeline-item mb-5 ">
-                              <span class="timeline-icon">
-                                <i class="fas fa-rocket text-primary fa-sm fa-fw"></i>
-                              </span>
+                                <span class="timeline-icon">
+                                  <i class="fas fa-rocket text-primary fa-sm fa-fw"></i>
+                                </span>
 
-                              <div class="card p-3 bg-white">
-                                  <p class="fw-bold">Designation has change from Customer Care to Administrator updated by Ahm Farid</p>
-                                  <p class="text-muted mb-2 fw-bold">11 March 2020</p>
-                                  <p class="text-muted">
-                                      Effective Date: 23 Sep 2021
-                                  </p>
-                              </div>
+                                <div class="card p-3 bg-white">
+                                    <p class="fw-bold">{{$jobHistory->employmentDetail}}</p>
+                                    <p class="text-muted mb-2 fw-bold">{{$jobHistory->effectiveDate}}</p>
+                                    <p class="text-muted">
+                                        Effective Date: {{$jobHistory->effectiveDate}}
+                                    </p>
+                                </div>
                             </li>
-                            <li class="timeline-item mb-5 ">
-                              <span class="timeline-icon">
-                                <i class="fas fa-rocket text-primary fa-sm fa-fw"></i>
-                              </span>
-
-                              <div class="card p-3 bg-white">
-                                  <p class="fw-bold">Designation has change from Customer Care to Administrator updated by Ahm Farid</p>
-                                  <p class="text-muted mb-2 fw-bold">11 March 2020</p>
-                                  <p class="text-muted">
-                                      Effective Date: 23 Sep 2021
-                                  </p>
-                              </div>
-                            </li>
-                            <li class="timeline-item mb-5 ">
-                              <span class="timeline-icon">
-                                <i class="fas fa-rocket text-primary fa-sm fa-fw"></i>
-                              </span>
-
-                              <div class="card p-3 bg-white">
-                                  <p class="fw-bold">Designation has change from Customer Care to Administrator updated by Ahm Farid</p>
-                                  <p class="text-muted mb-2 fw-bold">11 March 2020</p>
-                                  <p class="text-muted">
-                                      Effective Date: 23 Sep 2021
-                                  </p>
-                              </div>
-                            </li>
+                            @endforeach
+                            @endif
                         </ul>
                     </div>
 
@@ -169,16 +175,16 @@
                         <div class="row">
                             <div class="col-sm-6">
                                 <label for="employee-id" class="form-label">Employee ID</label>
-                                <input type="text" id="employee-id" class="form-control" aria-describedby="employee-id">
+                                <input type="text" id="employee-id" name="employeeID" class="form-control" aria-describedby="employee-id">
                             </div>
                             <div class="col-sm-6">
                                 <label for="employee-name" class="form-label">Employee Name</label>
-                                <input type="text" id="employee-name" class="form-control" aria-describedby="employee-name">
+                                <input type="text" id="employee-name" name="employeeName" class="form-control" aria-describedby="employee-name">
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <label for="employee-email" class="form-label">Employee Email</label>
-                            <input type="text" id="employee-email" class="form-control" aria-describedby="employee-email">
+                            <input type="text" id="employee-email" name="employeeEmail" class="form-control" aria-describedby="employee-email">
                         </div>
                         <hr>
 
@@ -186,12 +192,16 @@
                         <div class="row">
                             <div class="col-sm-6">
                                 <label for="effective-from" class="form-label">Effective From*</label>
-                                <input type="date" id="effective-from" class="form-control" aria-describedby="effective-from">
+                                <input type="date" id="effective-from" name="effectiveFrom" class="form-control" aria-describedby="effective-from">
                             </div>
                             <div class="col-sm-6">
                                 <label for="firstname" class="form-label">Event*</label>
-                                <select class="form-select">
-                                    <option value="0" label="Please Choose " selected="selected"></option>
+                                <select class="form-select" name="event">
+                                    <option value="0" label="Please Choose"></option>
+                                    <?php $events = getEvent(); ?>
+                                    @foreach ($events as $key => $event)
+                                        <option value="{{ $key }}">{{$event}}</option>
+                                    @endforeach
                                 </select>
                             </div>
                         </div>

@@ -390,7 +390,7 @@ $(document).ready(function() {
     });
 
     $('#siblingModalAdd').click(function(e) {
-        $('#add-Sibling').modal('show');
+        $('#add-sibling').modal('show');
     });
 
     $('#addSibling').click(function(e) {
@@ -472,66 +472,64 @@ $(document).ready(function() {
 
         const type = siblingIds[i];
         $('#siblingModalEdit' + type).click(function(e) {
-
             id = $(this).data('id');
             var SiblingData = getSibling(id);
 
             SiblingData.done(function(data) {
                 sibling = data.data;
-                $('#DOB1').val(sibling.DOB);
-                $('#age1').val(sibling.age);
-                $('#created_at1').val(sibling.created_at);
-                $("#educationLevel1").prop("selectedIndex", sibling.educationLevel);
-                $("#educationType1").prop("selectedIndex", sibling.educationType);
-                $('#expiryDate1').val(sibling.expiryDate);
-                $('#firstName1').val(sibling.firstName);
-                $('#fullName1').val(sibling.fullName);
-                $("#gender1").prop("selectedIndex", sibling.gender);
-                $('#id1').val(sibling.id);
-                $('#idNo1').val(sibling.idNo);
-                $('#instituition1').val(sibling.instituition);
-                $("#issuingCountry1").prop("selectedIndex", sibling.issuingCountry);
-                $('#lastName1').val(sibling.lastName);
-                $("#maritalStatus1").prop("selectedIndex", sibling.maritalStatus);
-                if (sibling.nonCitizen == 'on') {
-                    $('#nonCitizen1').prop('checked', true);
-                }
-                $('#passports1').val(sibling.passport);
-                $('#supportDoc1').val(sibling.supportDoc);
+                $('#firstNameS').val(sibling.firstName);
+                $('#idSA').val(sibling.id);
+                $('#lastNameS').val(sibling.lastName);
+                $('#DOBS').val(sibling.DOB);
+                $("#genderS").prop("selectedIndex", sibling.gender);
+                $('#contactNoS').val(sibling.contactNo);
+                $('#relationshipS').val(sibling.relationship);
+                $('#address2S').val(sibling.address2);
+                $('#address1S').val(sibling.address1);
+                $('#postcodeS').val(sibling.postcode);
+                $("#cityS").prop("selectedIndex", sibling.city);
+                $("#stateSA").prop("selectedIndex", sibling.state);
+                var select = document.getElementById('countrySA');
+
+                const options = Array.from(select.options);
+                options.forEach((option, i) => {
+                    if (option.value === sibling.country) select.selectedIndex = i;
+                });
+                // $('#countrySA').prop("selected", sibling.country);
             });
-            $('#edit-Sibling').modal('show');
+            $('#edit-sibling').modal('show');
         });
 
         $('#siblingModalView' + type).click(function(e) {
             id = $(this).data('id')
             var SiblingData = getSibling(id);
-
+            $('input').prop('disabled', true);
+            $('select').prop('disabled', true);
             SiblingData.done(function(data) {
+                console.log(data.data);
                 $('#viewSibling').hide();
                 sibling = data.data;
-                $('#DOB').val(sibling.DOB);
-                $('#age').val(sibling.age);
-                $('#created_at').val(sibling.created_at);
-                $("#educationLevel").prop("selectedIndex", sibling.educationLevel);
-                $("#educationType").prop("selectedIndex", sibling.educationType);
-                $('#expiryDate').val(sibling.expiryDate);
-                $('#firstName').val(sibling.firstName);
-                $('#fullName').val(sibling.fullName);
-                $("#gender").prop("selectedIndex", sibling.gender);
-                $('#id').val(sibling.id);
-                $('#idNo').val(sibling.idNo);
-                $('#instituition').val(sibling.instituition);
-                $("#issuingCountry").prop("selectedIndex", sibling.issuingCountry);
-                $('#lastName').val(sibling.lastName);
-                $("#maritalStatus").prop("selectedIndex", sibling.maritalStatus);
-                if (sibling.nonCitizen === 'on') {
-                    $('#nonCitizen').prop('checked', true);
-                }
-                $('#passports').val(sibling.passport);
-                $('#supportDoc').val(sibling.supportDoc);
+                $('#firstNameS1').val(sibling.firstName);
+                $('#lastNameS1').val(sibling.lastName);
+                $('#DOBS1').val(sibling.DOB);
+                $("#genderS1").prop("selectedIndex", sibling.gender);
+                $('#relationshipS1').val(sibling.relationship);
+                $('#contactNoS1').val(sibling.contactNo);
+                $('#address2S1').val(sibling.address2);
+                $('#address1S1').val(sibling.address1);
+                $('#postcodeS1').val(sibling.postcode);
+                $("#cityS1").prop("selectedIndex", sibling.city);
+                $("#stateS1").prop("selectedIndex", sibling.state);
+                $('#countryS1').prop("selectedIndex", sibling.country);
+                var select = document.getElementById('countryS1');
+
+                const options = Array.from(select.options);
+                options.forEach((option, i) => {
+                    if (option.value === sibling.country) select.selectedIndex = i;
+                });
             });
 
-            $('#view-Sibling').modal('show');
+            $('#view-sibling').modal('show');
         });
 
         $('#deleteSibling' + type).click(function(e) {
@@ -676,14 +674,14 @@ $(document).ready(function() {
                 console.log(data.data);
                 parent = data.data;
                 $('#DOBP1').val(parent.DOB);
-                $('#address1P1').val(parent.address1);
                 $('#idP').val(parent.id);
                 $('#address2P1').val(parent.address2);
+                $('#address1P1').val(parent.address1);
                 $("#cityP1").prop("selectedIndex", parent.city);
                 $("#stateP1").prop("selectedIndex", parent.state);
+                $('#countryP1').prop("selectedIndex", parent.country);
                 $('#contactNoP1').val(parent.contactNo);
                 $('#firstNames1').val(parent.firstName);
-                $('#countryP1').prop("selectedIndex", parent.country);
                 $("#postcodeP1").val(parent.postcode);
                 $('#lastNameP1').val(parent.lastName);
                 $("#relationshipP1").prop("selectedIndex", parent.relationship);
@@ -770,7 +768,33 @@ $(document).ready(function() {
     }
 
 
+    $("#changePassButton").click(function(e) {
+        var data = new FormData(document.getElementById("changePassForm"));
 
+        requirejs(["sweetAlert2"], function(swal) {
+            $.ajax({
+                type: "POST",
+                url: "/resetPassword",
+                data: data,
+                dataType: "json",
+                async: false,
+                processData: false,
+                contentType: false,
+            }).done(function(data) {
+                swal({
+                    title: data.title,
+                    text: data.msg,
+                    type: data.type,
+                    confirmButtonColor: "#3085d6",
+                    confirmButtonText: "OK",
+                }).then(function() {
+                    if (data.type == "error") {} else {
+                        location.reload();
+                    }
+                });
+            });
+        });
+    });
 
 
 })

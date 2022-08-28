@@ -79,6 +79,7 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('/addParent', 'addParent');
             Route::post('/updateParent', 'updateParent');
             Route::post('/addSibling', 'addSibling');
+            Route::post('/updateSibling', 'updateSibling');
             Route::post('/addChildren', 'addChildren');
             Route::get('/getParent/{id}', 'getParent');
             Route::get('/getSibling/{id}', 'getSibling');
@@ -92,9 +93,12 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('/getChildren/{id}', 'getChildren');
             Route::get('/getSiblingById/{id}', 'getSiblingById');
             Route::get('/getParentById/{id}', 'getParentById');
+            Route::get('/getVehicleById/{id}', 'getVehicleById');
             Route::get('/myProfile', 'myProfileView');
             Route::delete('/deleteChildren/{id}', 'deleteChildren');
             Route::delete('/deleteParent/{id}', 'deleteParent');
+            Route::delete('/deleteSibling/{id}', 'deleteSibling');
+            Route::post('/resetPassword', 'resetPassword');
 
 
         });
@@ -158,6 +162,9 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('/role', 'roleView');
             Route::get('/sop', 'sopView');
             Route::get('/unit', 'unitView');
+            Route::get('/getRoleById/{id}', 'getRoleById');
+            Route::get('/getCompanyById/{id}', 'getCompanyById');
+            Route::get('/getDepartmentById/{id}', 'getDepartmentById');
 
 
         });
