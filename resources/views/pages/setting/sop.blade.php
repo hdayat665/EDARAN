@@ -16,9 +16,9 @@
 
     <div class="row">
         <!-- BEGIN col-6 -->
-        <div class="col-xl-15">
+        <div class="col-xl-15" id="SOPJs">
             <!-- BEGIN nav-tabs -->
-            <ul class="nav nav-tabs">
+            <ul class="nav nav-tabs" id="SOPJs">
                 <li class="nav-item">
                     <a href="#default-tab-1" data-bs-toggle="tab" class="nav-link active">
                         <span class="d-sm-none">Tab 1</span>
@@ -40,7 +40,7 @@
                 <div class="tab-pane fade active show" id="default-tab-1">
                     <h3 class="mt-10px"></i> Policy's List </h3>
                     <div class="panel-heading-btn">
-                        <a href="javascript:;" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-primary">+ New Policy's</a>
+                        <a href="javascript:;" data-bs-toggle="modal" id="addButton1" class="btn btn-primary">+ New Policy's</a>
                     </div>
                     <div class="panel-body">
                         <table id="data-table-default" class="table table-striped table-bordered align-middle">
@@ -61,44 +61,21 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td><a href="javascript:;" data-bs-toggle="modal" data-bs-target="#exampleModal3" class="btn btn-outline-green"><i class="fa fa-pencil-alt"></i></a> <a href="javascript:;" class="btn btn-outline-danger"><i class="fa fa-trash"></i></a></td>
-                                    <td>Infra Policy</td>
-                                    <td>Policy on Infrastructure Policy</td>
-                                    <td>This policy</td>
-                                    <td>Infrapolicy.pdf</td>
-                                    <td>Zaid</td>
-                                    <td>14 Feb 2021 4.30 pm</td>
-                                    <td>Kamal</td>
-                                    <td>14 Feb 2021 4.30 pm</td>
-
-                                </tr>
-                                <td><a href="javascript:;" class="btn btn-outline-green"><i class="fa fa-pencil-alt"></i></a> <a href="javascript:;" class="btn btn-outline-danger"><i class="fa fa-trash"></i></a></td>
-                                <td>IT Policy</td>
-                                <td>Policy on IT Policy</td>
-                                <td>This policy</td>
-                                <td>ITpolicy.pdf</td>
-                                <td>Ifwat</td>
-                                <td>13 Feb 2021 4.30 pm</td>
-                                <td>Rika</td>
-                                <td>19 Feb 2021 4.30 pm</td>
-
-                            </tr>
-                            <tr>
-                                <td><a href="javascript:;" class="btn btn-outline-green"><i class="fa fa-pencil-alt"></i></a> <a href="javascript:;" class="btn btn-outline-danger"><i class="fa fa-trash"></i></a></td>
-                                <td>Standard Policy</td>
-                                <td>Policy on General Policy</td>
-                                <td>This policy govern</td>
-                                <td>generalpolicy.pdf</td>
-                                <td>Yusuf</td>
-                                <td>11 Feb 2021 4.30 pm</td>
-                                <td>Kamal</td>
-                                <td>18 Feb 2021 4.30 pm</td>
-
-                            </tr>
-
-
-
+                                @if ($policys)
+                                    @foreach ($policys as $policy)
+                                    <tr>
+                                        <td><a href="javascript:;" data-bs-toggle="modal" id="editButton1" data-id="{{$policy->id}}" class="btn btn-outline-green"><i class="fa fa-pencil-alt"></i></a> <a id="deleteButton1" data-id="{{$policy->id}}" class="btn btn-outline-danger"><i class="fa fa-trash"></i></a></td>
+                                        <td>{{$policy->policy}}</td>
+                                        <td>{{$policy->file}}</td>
+                                        <td>{{$policy->desc}}</td>
+                                        <td><a target="_blank" href="/storage/app/{{$policy->file}}">{{$policy->file}}</a></td>
+                                        <td>{{$policy->addedBy}}</td>
+                                        <td>{{$policy->created_at}}</td>
+                                        <td>{{$policy->modifiedBy}}</td>
+                                        <td>{{$policy->updated_at}}</td>
+                                    </tr>
+                                    @endforeach
+                                @endif
 
                         </tbody>
                     </table>
@@ -112,7 +89,7 @@
             <div class="tab-pane fade" id="default-tab-2">
                 <h3 class="mt-10px"></i> SOP's List </h3>
                 <div class="panel-heading-btn">
-                    <a href="javascript:;" data-bs-toggle="modal" data-bs-target="#exampleModal2" class="btn btn-primary">+ New SOP's</a>
+                    <a href="javascript:;" data-bs-toggle="modal" id="addButton2" class="btn btn-primary">+ New SOP's</a>
                 </div>
                 <div class="panel-body">
                     <table id="data-table-default2" class="table table-striped table-bordered align-middle">
@@ -133,43 +110,21 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td><a href="javascript:;" data-bs-toggle="modal" data-bs-target="#exampleModal4" class="btn btn-outline-green"><i class="fa fa-pencil-alt"></i></a> <a href="javascript:;" class="btn btn-outline-danger"><i class="fa fa-trash"></i></a></td>
-                                <td>Infra SOP</td>
-                                <td>SOP on Infrastructure SOP</td>
-                                <td>This SOP govern the following activities</td>
-                                <td>InfraSOP.pdf</td>
-                                <td>Zaid</td>
-                                <td>14 Feb 2021 4.30 pm</td>
-                                <td>Kamal</td>
-                                <td>14 Feb 2021 4.30 pm</td>
-
-                            </tr>
-                            <tr>
-                                <td><a href="javascript:;" class="btn btn-outline-green"><i class="fa fa-pencil-alt"></i></a> <a href="javascript:;" class="btn btn-outline-danger"><i class="fa fa-trash"></i></a></td>
-                                <td>IT SOP</td>
-                                <td>SOP on IT SOP</td>
-                                <td>This SOP govern the following activities</td>
-                                <td>ITSOP.pdf</td>
-                                <td>Ifwat</td>
-                                <td>13 Feb 2021 4.30 pm</td>
-                                <td>Rika</td>
-                                <td>19 Feb 2021 4.30 pm</td>
-
-                            </tr>
-                            <tr>
-                                <td><a href="javascript:;" class="btn btn-outline-green"><i class="fa fa-pencil-alt"></i></a> <a href="javascript:;" class="btn btn-outline-danger"><i class="fa fa-trash"></i></a></td>
-                                <td>Standard SOP</td>
-                                <td>SOP on General Policy</td>
-                                <td>This SOP govern the following activities</td>
-                                <td>generalSOP.pdf</td>
-                                <td>Yusuf</td>
-                                <td>11 Feb 2021 4.30 pm</td>
-                                <td>Kamal</td>
-                                <td>18 Feb 2021 4.30 pm</td>
-
-                            </tr>
-
+                            @if ($SOPs)
+                                @foreach ($SOPs as $SOP)
+                                <tr>
+                                    <td><a href="javascript:;" data-bs-toggle="modal" id="editButton2" data-id="{{$SOP->id}}" class="btn btn-outline-green"><i class="fa fa-pencil-alt"></i></a> <a id="deleteButton2" data-id="{{$SOP->id}}" class="btn btn-outline-danger"><i class="fa fa-trash"></i></a></td>
+                                    <td>{{$SOP->SOPName}}</td>
+                                    <td>{{$SOP->file}}</td>
+                                    <td>{{$SOP->desc}}</td>
+                                    <td>{{$SOP->file}}</td>
+                                    <td>{{$SOP->addedBy}}</td>
+                                    <td>{{$SOP->created_at}}</td>
+                                    <td>{{$SOP->modifiedBy}}</td>
+                                    <td>{{$SOP->updated_at}}</td>
+                                </tr>
+                                @endforeach
+                            @endif
                         </tbody>
                     </table>
                 </div>
@@ -181,7 +136,7 @@
     </div>
 </div>
 <!-- END #content -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="addModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -189,29 +144,29 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form>
+                <form id="addForm1">
 
                     <div class="mb-3">
                         <label>Policy's Code </label><br><br>
-                        <input type="text" class="form-control" id="recipient-name" placeholder="">
+                        <input type="text" class="form-control" name="code" placeholder="">
                     </div>
                     <div class="mb-3">
                         <label>Policy's Name </label><br><br>
-                        <input type="text" class="form-control" id="recipient-name" placeholder="">
+                        <input type="text" class="form-control" name="policy" placeholder="">
                     </div>
                     <div class="mb-3">
                         <label>Description </label><br><br>
-                        <textarea class="form-control" rows="3"></textarea>
+                        <textarea class="form-control" rows="3" name="desc"></textarea>
                     </div>
                     <div class="mb-3">
                         <label>File Upload </label><br><br>
-                        <input id="fileupload" type="file" multiple="multiple" ></input>
+                        <input id="fileupload" type="file" name="file" multiple="multiple" ></input>
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save</button>
+                <button type="button" class="btn btn-primary" id="saveButton1">Save</button>
             </div>
         </div>
     </div>
@@ -219,7 +174,7 @@
 <!--
 
 -->
-<div class="modal fade" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="editModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -227,35 +182,36 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form>
+                <form id="editForm1">
 
                     <div class="mb-3">
                         <label>Policy's Code </label><br><br>
-                        <input type="text" class="form-control" id="recipient-name" placeholder="">
+                        <input type="text" class="form-control" id="code" name="code" placeholder="">
+                        <input type="hidden" class="form-control" id="idP" name="id" placeholder="">
                     </div>
                     <div class="mb-3">
                         <label>Policy's Name </label><br><br>
-                        <input type="text" class="form-control" id="recipient-name" placeholder="">
+                        <input type="text" class="form-control" id="policy" name="policy" placeholder="">
                     </div>
                     <div class="mb-3">
                         <label>Description </label><br><br>
-                        <textarea class="form-control" rows="3"></textarea>
+                        <textarea class="form-control" rows="3" name="desc" id="desc"></textarea>
                     </div>
                     <div class="mb-3">
                         <label>File Upload </label><br><br>
-                        <input id="fileupload" type="file" multiple="multiple" ></input>
+                        <input id="fileupload" type="file" multiple="multiple" name="file"></input>
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save</button>
+                <button type="button" class="btn btn-primary" id="updateButton1">Save</button>
             </div>
         </div>
     </div>
 </div>
 <!--  -->
-<div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="addModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -263,19 +219,19 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form>
+                <form id="addForm2">
 
                     <div class="mb-3">
                         <label>SOP's Code </label><br><br>
-                        <input type="text" class="form-control" id="recipient-name" placeholder="">
+                        <input type="text" class="form-control" name="SOPCode" placeholder="">
                     </div>
                     <div class="mb-3">
                         <label>SOP's Name </label><br><br>
-                        <input type="text" class="form-control" id="recipient-name" placeholder="">
+                        <input type="text" class="form-control" name="SOPName" placeholder="">
                     </div>
                     <div class="mb-3">
                         <label>Description </label><br><br>
-                        <textarea class="form-control" rows="3"></textarea>
+                        <textarea class="form-control" rows="3" name="desc"></textarea>
                     </div>
                     <div class="mb-3">
                         <label>File Upload </label><br><br>
@@ -285,13 +241,13 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save</button>
+                <button type="button" class="btn btn-primary" id="saveButton2">Save</button>
             </div>
         </div>
     </div>
 </div>
 
-<div class="modal fade" id="exampleModal4" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="editModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -299,19 +255,20 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form>
+                <form id="editForm2">
 
                     <div class="mb-3">
                         <label>SOP's Code </label><br><br>
-                        <input type="text" class="form-control" id="recipient-name" placeholder="">
+                        <input type="text" class="form-control" name="SOPCode" id="SOPCode" placeholder="">
+                        <input type="hidden" class="form-control" name="id" id="idS" placeholder="">
                     </div>
                     <div class="mb-3">
                         <label>SOP's Name </label><br><br>
-                        <input type="text" class="form-control" id="recipient-name" placeholder="">
+                        <input type="text" class="form-control" name="SOPName" id="SOPName" placeholder="">
                     </div>
                     <div class="mb-3">
                         <label>Description </label><br><br>
-                        <textarea class="form-control" rows="3"></textarea>
+                        <textarea class="form-control" rows="3" name="desc" id="desc"></textarea>
                     </div>
                     <div class="mb-3">
                         <label>File Upload </label><br><br>
@@ -321,7 +278,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save</button>
+                <button type="button" class="btn btn-primary" id="updateButton">Save</button>
             </div>
         </div>
     </div>

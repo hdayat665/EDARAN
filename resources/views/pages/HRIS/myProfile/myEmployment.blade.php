@@ -10,14 +10,15 @@
                         Update your employment information
                     </p>
                  </div>
+
                 <div class="card-body">
                     <div class="row p-2">
                         <label for="firstname" class="form-label">Company*</label>
                         <select class="form-select" name="company">
-                            <?php $companys = getCompany() ?>
                             <option value="0" label="Please Choose "></option>
+                            <?php $companys = getCompany() ?>
                             @foreach ($companys as $company)
-                                <option value="{{$company->id}}" label="{{$company->companyName}}" {{ ($employment->company == $company->id) ? "selected='selected'" : '' }}></option>
+                                <option value="{{$company->id}}" label="{{$company->companyName}}"></option>
                             @endforeach
                         </select>
                     </div>
@@ -27,7 +28,7 @@
                             <?php $Departments = getDepartment() ?>
                             <option value="0" label="Please Choose "></option>
                             @foreach ($Departments as $Department)
-                                <option value="{{$Department->id ?? null}}" label="{{$Department->departmentName ?? null}}" {{ ($employment->department == $Department->id) ? "selected='selected'" : '' }}></option>
+                                <option value="{{$Department->id ?? null}}" label="{{$Department->departmentName}}" ></option>
                             @endforeach
                         </select>
                     </div>
@@ -37,7 +38,7 @@
                             <?php $Units = getUnit() ?>
                             <option value="0" label="Please Choose "></option>
                             @foreach ($Units as $Unit)
-                                <option value="{{$Unit->id}}" label="{{$Unit->unitName}}" {{ ($employment->unit == $Unit->id) ? "selected='selected'" : '' }}></option>
+                                <option value="{{$Unit->id}}" label="{{$Unit->unitName}}" ></option>
                             @endforeach
                         </select>
                     </div>
@@ -47,7 +48,7 @@
                             <?php $Branchs = getBranch() ?>
                             <option value="0" label="Please Choose "></option>
                             @foreach ($Branchs as $Branch)
-                                <option value="{{$Branch->id}}" label="{{$Branch->branchName}}" {{ ($employment->branch == $Branch->id) ? "selected='selected'" : '' }}></option>
+                                <option value="{{$Branch->id}}" label="{{$Branch->branchName}}" ></option>
                             @endforeach
                         </select>
                     </div>
@@ -61,7 +62,7 @@
                             <?php $JobGrades = getJobGrade() ?>
                             <option value="0" label="Please Choose "></option>
                             @foreach ($JobGrades as $JobGrade)
-                                <option value="{{$JobGrade->id}}" label="{{$JobGrade->jobGradeName}}" {{ ($employment->jobGrade == $JobGrade->id) ? "selected='selected'" : '' }}></option>
+                                <option value="{{$JobGrade->id}}" label="{{$JobGrade->jobGradeName}}" ></option>
                             @endforeach
                         </select>
                     </div>
@@ -71,7 +72,7 @@
                             <?php $Designations = getDesignation() ?>
                             <option value="0" label="Please Choose "></option>
                             @foreach ($Designations as $Designation)
-                                <option value="{{$Designation->id}}" label="{{$Designation->designationName}}" {{ ($employment->designation == $Designation->id) ? "selected='selected'" : '' }}></option>
+                                <option value="{{$Designation->id}}" label="{{$Designation->designationName}}" ></option>
                             @endforeach
                         </select>
                     </div>
@@ -90,7 +91,7 @@
                               User Role
                         </label>
                         <div class="form-check form-switch">
-                            <input class="form-check-input" {{ ($employment->supervisor) ? "checked" : '' }} name="supervisor" type="checkbox" id="supervisor">
+                            <input class="form-check-input" name="supervisor" type="checkbox" id="supervisor">
                             <label class="form-check-label" for="supervisor">
                                   Supervisor
                             </label>
@@ -148,10 +149,10 @@
                                 </span>
 
                                 <div class="card p-3 bg-white">
-                                    <p class="fw-bold">{{$jobHistory->employmentDetail}}</p>
-                                    <p class="text-muted mb-2 fw-bold">{{$jobHistory->effectiveDate}}</p>
+                                    <p class="fw-bold">{{$jobHistory->employmentDetail ?? ''}}</p>
+                                    <p class="text-muted mb-2 fw-bold">{{$jobHistory->effectiveDate ?? ''}}</p>
                                     <p class="text-muted">
-                                        Effective Date: {{$jobHistory->effectiveDate}}
+                                        Effective Date: {{$jobHistory->effectiveDate ?? ''}}
                                     </p>
                                 </div>
                             </li>

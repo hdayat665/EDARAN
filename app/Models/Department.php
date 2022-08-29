@@ -28,11 +28,6 @@ class Department extends Authenticatable
         'modifiedBy',
     ];
 
-    public function company()
-    {
-        return $this->belongsTo(Company::class, 'companyId', 'id');
-    }
-
     public function unit()
     {
         return $this->hasMany(Unit::class, 'departmentId', 'id');

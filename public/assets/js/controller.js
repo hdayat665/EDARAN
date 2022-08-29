@@ -15,6 +15,11 @@ requirejs.config({
         'roleJs': assets + '/js/roleJs',
         'companyJs': assets + '/js/companyJs',
         'departmentJs': assets + '/js/departmentJs',
+        'unitJs': assets + '/js/unitJs',
+        'branchJs': assets + '/js/branchJs',
+        'jobGradeJs': assets + '/js/jobGradeJs',
+        'designationJs': assets + '/js/designationJs',
+        'SOPJs': assets + '/js/SOPJs',
 
         // 'main': 'assets/backend/js/main',
         'sweetAlert2': assets + '/assets/sweetalert2/sweetalert2',
@@ -78,6 +83,26 @@ if ($('#companyJs').length > 0) {
 
 if ($('#departmentJs').length > 0) {
     requirejs(['departmentJs']);
+}
+
+if ($('#unitJs').length > 0) {
+    requirejs(['unitJs']);
+}
+
+if ($('#branchJs').length > 0) {
+    requirejs(['branchJs']);
+}
+
+if ($('#jobGradeJs').length > 0) {
+    requirejs(['jobGradeJs']);
+}
+
+if ($('#designationJs').length > 0) {
+    requirejs(['designationJs']);
+}
+
+if ($('#SOPJs').length > 0) {
+    requirejs(['SOPJs']);
 }
 
 

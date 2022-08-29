@@ -380,7 +380,11 @@ class SettingController extends Controller
 
     public function branchView()
     {
-        return view('pages.setting.branch');
+        $ss = new SettingService;
+
+        $result = $ss->branchView();
+
+        return view('pages.setting.branch', $result);
     }
 
     public function companyView()
@@ -403,12 +407,20 @@ class SettingController extends Controller
 
     public function designationView()
     {
-        return view('pages.setting.designation');
+        $ss = new SettingService;
+
+        $result = $ss->designationView();
+
+        return view('pages.setting.designation', $result);
     }
 
     public function jobGradeView()
     {
-        return view('pages.setting.jobGrade');
+        $ss = new SettingService;
+
+        $result = $ss->jobGradeView();
+
+        return view('pages.setting.jobGrade',$result);
     }
 
     public function newsView()
@@ -427,12 +439,20 @@ class SettingController extends Controller
 
     public function sopView()
     {
-        return view('pages.setting.sop');
+        $ss = new SettingService;
+
+        $result = $ss->sopView();
+
+        return view('pages.setting.sop', $result);
     }
 
     public function unitView()
     {
-        return view('pages.setting.unit');
+        $ss = new SettingService;
+
+        $result = $ss->UnitView();
+
+        return view('pages.setting.unit', $result);
     }
 
     public function getRoleById($id = '')
@@ -462,4 +482,57 @@ class SettingController extends Controller
         return $result;
     }
 
+    public function getUnitById($id = '')
+    {
+        $ss = new SettingService;
+
+        $result = $ss->getUnitById($id);
+
+        return $result;
+    }
+
+    public function getBranchById($id = '')
+    {
+        $ss = new SettingService;
+
+        $result = $ss->getBranchById($id);
+
+        return $result;
+    }
+
+    public function getJobGradeById($id = '')
+    {
+        $ss = new SettingService;
+
+        $result = $ss->getJobGradeById($id);
+
+        return $result;
+    }
+
+    public function getDesignationById($id = '')
+    {
+        $ss = new SettingService;
+
+        $result = $ss->getDesignationById($id);
+
+        return $result;
+    }
+
+    public function getPolicyById($id = '')
+    {
+        $ss = new SettingService;
+
+        $result = $ss->getPolicyById($id);
+
+        return $result;
+    }
+
+    public function getSOPById($id = '')
+    {
+        $ss = new SettingService;
+
+        $result = $ss->getSOPById($id);
+
+        return $result;
+    }
 }

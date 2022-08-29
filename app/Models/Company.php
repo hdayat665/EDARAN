@@ -27,10 +27,6 @@ class Company extends Authenticatable
         'modifiedBy',
     ];
 
-    public function department()
-    {
-        return $this->hasMany(Department::class, 'companyId', 'id');
-    }
 }
 
 
