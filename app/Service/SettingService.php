@@ -15,6 +15,8 @@ use App\Models\Subscription;
 use App\Models\Unit;
 use App\Models\Users;
 use App\Models\UsersDetails;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 
@@ -34,10 +36,15 @@ class SettingService
     public function createRole($r)
     {
         $input = $r->input();
+        $user = Auth::user();
 
+        $input['addedBy'] = $user->username;
+        $input['addedTime'] = date('Y-m-d h:m:s');
         Role::create($input);
 
-        $data['status'] = true;
+        $data['status'] = config('app.response.success.status');
+        $data['type'] = config('app.response.success.type');
+        $data['title'] = config('app.response.success.title');
         $data['msg'] = 'Success create role';
 
         return $data;
@@ -47,9 +54,17 @@ class SettingService
     {
         $input = $r->input();
 
+        $user = Auth::user();
+        unset($input['id']);
+
+        $input['modifiedBy'] =$user->username;
+        $input['modifiedTime'] =date('Y-m-d h:m:s');
+
         Role::where('id', $id)->update($input);
 
-        $data['status'] = true;
+        $data['status'] = config('app.response.success.status');
+        $data['type'] = config('app.response.success.type');
+        $data['title'] = config('app.response.success.title');
         $data['msg'] = 'Success update role';
 
         return $data;
@@ -60,12 +75,16 @@ class SettingService
         $role = Role::find($id);
 
         if (!$role) {
-            $data['status'] = 404;
+            $data['status'] = config('app.response.error.status');
+            $data['type'] = config('app.response.error.type');
+            $data['title'] = config('app.response.error.title');
             $data['msg'] = 'role not found';
-        }else{
+        } else {
             $role->delete();
 
-            $data['status'] = 200;
+            $data['status'] = config('app.response.success.status');
+            $data['type'] = config('app.response.success.type');
+            $data['title'] = config('app.response.success.title');
             $data['msg'] = 'Success delete Role';
         }
 
@@ -85,10 +104,14 @@ class SettingService
     public function createCompany($r)
     {
         $input = $r->input();
+        $user = Auth::user();
+        $input['addedBy'] = $user->username;
 
         Company::create($input);
 
-        $data['status'] = true;
+        $data['status'] = config('app.response.success.status');
+        $data['type'] = config('app.response.success.type');
+        $data['title'] = config('app.response.success.title');
         $data['msg'] = 'Success create role';
 
         return $data;
@@ -97,10 +120,14 @@ class SettingService
     public function updateCompany($r, $id)
     {
         $input = $r->input();
+        $user = Auth::user();
+        $input['modifiedBy'] = $user->username;
 
         Company::where('id', $id)->update($input);
 
-        $data['status'] = true;
+        $data['status'] = config('app.response.success.status');
+        $data['type'] = config('app.response.success.type');
+        $data['title'] = config('app.response.success.title');
         $data['msg'] = 'Success update role';
 
         return $data;
@@ -111,12 +138,16 @@ class SettingService
         $company = Company::find($id);
 
         if (!$company) {
-            $data['status'] = 404;
+            $data['status'] = config('app.response.error.status');
+            $data['type'] = config('app.response.error.type');
+            $data['title'] = config('app.response.error.title');
             $data['msg'] = 'company not found';
-        }else{
+        } else {
             $company->delete();
 
-            $data['status'] = 200;
+            $data['status'] = config('app.response.success.status');
+            $data['type'] = config('app.response.success.type');
+            $data['title'] = config('app.response.success.title');
             $data['msg'] = 'Success delete company';
         }
 
@@ -136,10 +167,14 @@ class SettingService
     public function createDepartment($r)
     {
         $input = $r->input();
+        $user = Auth::user();
+        $input['addedBy'] = $user->username;
 
         Department::create($input);
 
-        $data['status'] = true;
+        $data['status'] = config('app.response.success.status');
+        $data['type'] = config('app.response.success.type');
+        $data['title'] = config('app.response.success.title');
         $data['msg'] = 'Success create department';
 
         return $data;
@@ -148,10 +183,14 @@ class SettingService
     public function updateDepartment($r, $id)
     {
         $input = $r->input();
+        $user = Auth::user();
+        $input['modifiedBy'] = $user->username;
 
         Department::where('id', $id)->update($input);
 
-        $data['status'] = true;
+        $data['status'] = config('app.response.success.status');
+        $data['type'] = config('app.response.success.type');
+        $data['title'] = config('app.response.success.title');
         $data['msg'] = 'Success update department';
 
         return $data;
@@ -162,12 +201,16 @@ class SettingService
         $department = Department::find($id);
 
         if (!$department) {
-            $data['status'] = 404;
+            $data['status'] = config('app.response.error.status');
+            $data['type'] = config('app.response.error.type');
+            $data['title'] = config('app.response.error.title');
             $data['msg'] = 'department not found';
         }else{
             $department->delete();
 
-            $data['status'] = 200;
+            $data['status'] = config('app.response.success.status');
+            $data['type'] = config('app.response.success.type');
+            $data['title'] = config('app.response.success.title');
             $data['msg'] = 'Success delete department';
         }
 
@@ -535,6 +578,54 @@ class SettingService
             $data['status'] = 200;
             $data['msg'] = 'Success delete News';
         }
+
+        return $data;
+    }
+
+    public function roleView()
+    {
+        $data['roles'] = Role::all();
+
+        return $data;
+
+    }
+
+    public function companyView()
+    {
+        $data['companies'] = Company::all();
+
+        return $data;
+
+    }
+
+    public function departmentView()
+    {
+        $data['departments'] = DB::table('department as a')
+                                ->join('company as b', 'a.companyId', '=', 'b.id')
+                                ->select('a.*', 'b.companyName', 'b.companyCode')
+                                ->get();
+
+        return $data;
+
+    }
+
+    public function getRoleById($id)
+    {
+        $data = Role::find($id);
+
+        return $data;
+    }
+
+    public function getCompanyById($id)
+    {
+        $data = Company::find($id);
+
+        return $data;
+    }
+
+    public function getDepartmentById($id)
+    {
+        $data = Department::find($id);
 
         return $data;
     }

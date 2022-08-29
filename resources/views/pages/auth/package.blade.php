@@ -1,6 +1,7 @@
-@extends('layouts.package');
+@extends('layouts.package')
 
-$@section('content')
+@section('content')
+
 <div class="shadow p-3 mb-5 bg-body rounded" style="display: flex; justify-content: center;">
     <div class="card border-0 col-sm-3" style="width:600px; min-width:300px">
         <img src="{{env('ASSETS_URL')}}/img/logo/orbit-logo-5.png" class="img-fluid" style="margin:9vh"  alt="Orbit Logo">

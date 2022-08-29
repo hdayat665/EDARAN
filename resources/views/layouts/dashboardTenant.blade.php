@@ -20,6 +20,7 @@
     <link href="{{env('ASSETS_URL')}}/plugins/gritter/css/jquery.gritter.css" rel="stylesheet" />
     <link href="{{env('ASSETS_URL')}}/plugins/nvd3/build/nv.d3.css" rel="stylesheet" />
     <link href="{{env('ASSETS_URL')}}/plugins/simple-calendar/dist/simple-calendar.css" rel="stylesheet" />
+    <link href="{{env('ASSETS_URL')}}/plugins/jstree/dist/themes/default/style.min.css" rel="stylesheet" />
     <!-- ================== END page-css ================== -->
 </head>
 <body>
@@ -126,7 +127,7 @@
                         <a href="javascript:;" class="dropdown-item">Calendar</a>
                         <a href="javascript:;" class="dropdown-item">Setting</a>
                         <div class="dropdown-divider"></div>
-                        <a href="javascript:;" class="dropdown-item">Log Out</a>
+                        <a href="/logout/tenant" class="dropdown-item">Log Out</a>
                     </div>
                 </div>
             </div>
@@ -165,7 +166,7 @@
                         </a>
                         <div class="menu-submenu">
                             <div class="menu-item">
-                                <a href="#" class="menu-link">
+                                <a href="/myProfile" class="menu-link">
                                     <div class="menu-text text-gray">My Profile </div>
                                 </a>
                             </div>
@@ -306,8 +307,26 @@
                                 <i class="fa fa-user-group text-gray"></i>
                             </div>
                             <div class="menu-text text-gray">Organization</div>
-
+							<div class="menu-caret text-gray"></div>
                         </a>
+
+                            <div class="menu-submenu">
+                                <div class="menu-item">
+                                    <a href="/phoneDirectory" class="menu-link">
+                                        <div class="menu-text text-gray">Phone Directory</i></div>
+                                    </a>
+                                </div>
+                                <div class="menu-item">
+                                    <a href="/organizationChart" class="menu-link">
+                                        <div class="menu-text text-gray">Organization Chart</div>
+                                    </a>
+                                </div>
+                                <div class="menu-item">
+                                    <a href="/departmentTree" class="menu-link">
+                                        <div class="menu-text text-gray">Department Tree</div>
+                                    </a>
+                                </div>
+                            </div>
 
                     </div>
 
@@ -341,7 +360,7 @@
                     <!-- Sidenav Content Orbit -->
 
                     <div class="menu-item has-sub">
-                        <a href="#" class="menu-link">
+                        <a href="/setting" class="menu-link">
                             <div class="menu-icon">
                                 <i class="fa fa-gear text-gray"></i>
                             </div>
@@ -369,6 +388,7 @@
         <!-- END #sidebar -->
         @yield('content')
         <!-- BEGIN #content -->
+        <a href="javascript:;" class="btn btn-icon btn-circle btn-success btn-scroll-to-top" data-toggle="scroll-to-top"><i class="fa fa-angle-up"></i></a>
 
         <!-- END #app -->
 
@@ -434,7 +454,10 @@
     <script src="{{env('ASSETS_URL')}}/plugins/blueimp-file-upload/js/jquery.fileupload-validate.js"></script>
     <script src="{{env('ASSETS_URL')}}/plugins/blueimp-file-upload/js/jquery.fileupload-ui.js"></script>
     <script src="{{env('ASSETS_URL')}}/js/demo/form-multiple-upload.demo.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.js"></script>
+	<script src="{{env('ASSETS_URL')}}/plugins/jstree/dist/jstree.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.js"></script>
+    <script src="{{env('ASSETS_URL')}}/js/orgchart.js"></script>
+
 
 
     <script type="text/javascript">

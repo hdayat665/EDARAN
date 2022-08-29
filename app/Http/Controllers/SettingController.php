@@ -373,4 +373,93 @@ class SettingController extends Controller
         return response()->json($result);
     }
 
+    public function settingView()
+    {
+        return view('pages.setting.dashboard');
+    }
+
+    public function branchView()
+    {
+        return view('pages.setting.branch');
+    }
+
+    public function companyView()
+    {
+        $ss = new SettingService;
+
+        $result = $ss->companyView();
+
+        return view('pages.setting.company', $result);
+    }
+
+    public function departmentView()
+    {
+        $ss = new SettingService;
+
+        $result = $ss->departmentView();
+
+        return view('pages.setting.department', $result);
+    }
+
+    public function designationView()
+    {
+        return view('pages.setting.designation');
+    }
+
+    public function jobGradeView()
+    {
+        return view('pages.setting.jobGrade');
+    }
+
+    public function newsView()
+    {
+        return view('pages.setting.news');
+    }
+
+    public function roleView()
+    {
+        $ss = new SettingService;
+
+        $result = $ss->roleView();
+
+        return view('pages.setting.role', $result);
+    }
+
+    public function sopView()
+    {
+        return view('pages.setting.sop');
+    }
+
+    public function unitView()
+    {
+        return view('pages.setting.unit');
+    }
+
+    public function getRoleById($id = '')
+    {
+        $ss = new SettingService;
+
+        $result = $ss->getRoleById($id);
+
+        return $result;
+    }
+
+    public function getCompanyById($id = '')
+    {
+        $ss = new SettingService;
+
+        $result = $ss->getCompanyById($id);
+
+        return $result;
+    }
+
+    public function getDepartmentById($id = '')
+    {
+        $ss = new SettingService;
+
+        $result = $ss->getDepartmentById($id);
+
+        return $result;
+    }
+
 }
