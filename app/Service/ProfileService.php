@@ -592,16 +592,25 @@ class ProfileService
         $data['jobHistorys'] = JobHistory::where('user_id', $data['user_id'])->first();
         $data['vehicles'] = Vehicle::where('user_id', $data['user_id'])->get();
 
-        foreach ($data['childrens'] as $child) {
-            $childId[] = $child->id;
+        $childId[] = '';
+        if ($data['childrens']) {
+            foreach ($data['childrens'] as $child) {
+                $childId[] = $child->id ?? null;
+            }
         }
 
-        foreach ($data['siblings'] as $sibling) {
-            $siblingId[] = $sibling->id;
+        $siblingId[] = '';
+        if ($data['siblings']) {
+            foreach ($data['siblings'] as $sibling) {
+                $siblingId[] = $sibling->id ?? null;
+            }
         }
 
-        foreach ($data['parents'] as $parent) {
-            $parentId[] = $parent->id;
+        $parentId[] = '';
+        if ($data['parents']) {
+            foreach ($data['parents'] as $parent) {
+                $parentId[] = $parent->id ?? null;
+            }
         }
 
         $data['siblingId'] = implode(',', $siblingId);
