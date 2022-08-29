@@ -299,6 +299,11 @@ if (!function_exists('getCompany')) {
     {
         $data = Company::all();
 
+        if(!$data)
+        {
+            $data = [];
+        }
+
         return $data;
     }
 }
@@ -309,6 +314,11 @@ if (!function_exists('getDepartment')) {
     {
         $data = Department::all();
 
+        if(!$data)
+        {
+            $data = [];
+        }
+
         return $data;
     }
 }
@@ -317,6 +327,11 @@ if (!function_exists('getUnit')) {
     function getUnit()
     {
         $data = Unit::all();
+
+        if(!$data)
+        {
+            $data = [];
+        }
 
         return $data;
     }
@@ -327,6 +342,11 @@ if (!function_exists('getBranch')) {
     {
         $data = Branch::all();
 
+        if(!$data)
+        {
+            $data = [];
+        }
+
         return $data;
     }
 }
@@ -336,6 +356,11 @@ if (!function_exists('getJobGrade')) {
     {
         $data = JobGrade::all();
 
+        if(!$data)
+        {
+            $data = [];
+        }
+
         return $data;
     }
 }
@@ -344,6 +369,11 @@ if (!function_exists('getDesignation')) {
     function getDesignation()
     {
         $data = Designation::all();
+
+        if(!$data)
+        {
+            $data = [];
+        }
 
         return $data;
     }
