@@ -22,9 +22,9 @@
 
         <!-- BEGIN panel-heading -->
 
-        <div class="panel-heading">
+        <div class="panel-heading" id="branchJs">
             <div class="col-md-6">
-                <a href="javascript:;" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-primary">+ New Branch</a>
+                <a href="javascript:;" data-bs-toggle="modal" id="addButton" class="btn btn-primary">+ New Branch</a>
             </div>
 
             <h4 class="panel-title"></h4>
@@ -52,46 +52,23 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <?php $id = 0 ?>
+                    @if ($branchs)
+                    @foreach ($branchs as $branch)
+                    <?php $id++ ?>
                     <tr class="odd gradeX">
-                        <td width="1%" class="fw-bold text-dark">1</td>
-                        <td>Unit Name</td>
-                        <td>Branch Type</td>
-                        <td>Branch Name</td>
-                        <td> Putrajaya </td>
-                        <td>Farid</td>
-                        <td>Elon Musk</td>
-                        <td>14 Feb 2021 4.30 pm</td>
-                        <td><a href="javascript:;" data-toggle="modal" data-bs-toggle="modal" data-bs-target="#exampleModal2" class="btn btn-outline-green" ><i class="fa fa-pencil-alt"></i></a> <a href="javascript:;" class="btn btn-outline-danger"><i class="fa fa-trash"></i></a></td>
-
+                        <td width="1%" class="fw-bold text-dark">{{$id}}</td>
+                        <td>{{$branch->unitName}}</td>
+                        <td>{{$branch->branchType}}</td>
+                        <td>{{$branch->branchName}}</td>
+                        <td>{{$branch->state}}</td>
+                        <td>{{$branch->addedBy}}</td>
+                        <td>{{$branch->modifiedBy}}</td>
+                        <td>{{$branch->updated_at}}</td>
+                        <td><a href="javascript:;" data-toggle="modal" data-bs-toggle="modal" id="editButton" data-id="{{$branch->id}}" class="btn btn-outline-green" ><i class="fa fa-pencil-alt"></i></a> <a id="deleteButton" data-id="{{$branch->id}}" class="btn btn-outline-danger"><i class="fa fa-trash"></i></a></td>
                     </tr>
-                    <tr class="even gradeC">
-                        <td width="1%" class="fw-bold text-dark">2</td>
-                        <td>Unit Name</td>
-                        <td>Branch Type</td>
-                        <td>Branch Name</td>
-                        <td> Putrajaya </td>
-                        <td>Farid</td>
-                        <td>Elon Musk</td>
-                        <td>14 Feb 2021 4.30 pm</td>
-                        <td><a href="javascript:;" class="btn btn-outline-green"><i class="fa fa-pencil-alt"></i></a> <a href="javascript:;" class="btn btn-outline-danger"><i class="fa fa-trash"></i></a></td>
-
-                    </tr>
-                    <tr class="even gradeC">
-                        <td width="1%" class="fw-bold text-dark">3</td>
-                        <td>Unit Name</td>
-                        <td>Branch Type</td>
-                        <td>Branch Name</td>
-                        <td> Putrajaya </td>
-                        <td>Farid</td>
-                        <td>Elon Musk</td>
-                        <td>14 Feb 2021 4.30 pm</td>
-                        <td><a href="javascript:;" class="btn btn-outline-green"><i class="fa fa-pencil-alt"></i></a> <a href="javascript:;" class="btn btn-outline-danger"><i class="fa fa-trash"></i></a></td>
-
-                    </tr>
-
-
-
-
+                    @endforeach
+                    @endif
                 </tbody>
             </table>
         </div>
@@ -100,96 +77,7 @@
 
     <!-- END row -->
     <!-- BEGIN row -->
-    <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Update Branch</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form>
-
-                        <div class="mb-3">
-                            <label>Branch Code</label>
-                            <input type="text" class="form-control" id="recipient-name" placeholder="">
-                        </div>
-                        <div class="mb-3">
-                            <label>Branch Name</label>
-                            <input type="text" class="form-control" id="recipient-name" placeholder="">
-                        </div>
-                        <div class="mb-2">
-                            <label>Branch Type</label>
-                            <input type="text" class="form-control" id="recipient-name" placeholder="">
-                        </div>
-                        <div class="mb-2">
-                            <label>Unit Name</label>
-                            <select class="form-select">
-                                <option value="0" label="Select State " selected="selected">Select Unit </option>
-                                <option value="1" label="Application Unit">Application Unit</option>
-                                <option value="2" label="Maintenance Unit">Maintenance Unit</option>
-                                <option value="3" label="Offshore Unit">Offshore Unit</option>
-
-                            </select>
-                        </div>
-                        <div class="mb-2">
-                            <label>Address</label>
-                            <input type="text" class="form-control" id="recipient-name" placeholder="">
-                        </div>
-                        <div class="mb-2">
-                            <label>Address 2</label>
-                            <input type="text" class="form-control" id="recipient-name" placeholder="">
-                        </div>
-                        <div class="mb-2">
-                            <label>Postcode </label>
-                            <input type="text" class="form-control" id="recipient-name" placeholder="">
-                        </div>
-                        <div class="mb-2">
-                            <label>City</label>
-                            <input type="text" class="form-control" id="recipient-name" placeholder="">
-                        </div>
-                        <div class="mb-2">
-                            <label>State</label>
-                            <select class="form-select">
-                                <option value="0" label="Select State " selected="selected">Select State </option>
-                                <option value="Johor" label="Johor">Johor</option>
-                                <option value="Kedah" label="Kedah">Kedah</option>
-                                <option value="Kelantan" label="Kelantan">Kelantan</option>
-                                <option value="Negeri Sembilan" label="Negeri Sembilan">Negeri Sembilan</option>
-                                <option value="Pahang" label="Pahang">Pahang</option>
-                                <option value="Penang" label="Penang">Penang</option>
-                                <option value="Perak" label="Perak">Perak</option>
-                                <option value="Perlis" label="Perlis">Perlis</option>
-                                <option value="Sabah" label="Sabah">Sabah</option>
-                                <option value="Sarawak" label="Sarawak">Sarawak</option>
-                                <option value="Selangor" label="Selangor">Selangor</option>
-                                <option value="Terengganu" label="Terengganu">Terengganu</option>
-                                <option value="Kuala Lumpur" label="Kuala Lumpur">Kuala Lumpur</option>
-                                <option value="Labuan" label="Labuan">Labuan</option>
-                                <option value="Putrajaya" label="Putrajaya">Putrajaya</option>
-                            </select>
-                        </div>
-                        <div class="mb-2">
-                            <label>Country</label>
-                            <select class="form-select">
-                                <option value="0" label="Malaysia" selected="selected">Malaysia </option>
-                                <option value="1" label="Brunei">Brunei</option>
-                                <option value="2" label="Singapore">Singapore</option>
-
-                            </select>
-                        </div>
-                    </form>
-                </div>
-
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -197,23 +85,23 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form>
+                    <form id="addForm">
 
                         <div class="mb-3">
                             <label>Branch Code</label>
-                            <input type="text" class="form-control" id="recipient-name" placeholder="">
+                            <input type="text" class="form-control" name="branchCode" placeholder="">
                         </div>
                         <div class="mb-3">
                             <label>Branch Name</label>
-                            <input type="text" class="form-control" id="recipient-name" placeholder="">
+                            <input type="text" class="form-control" name="branchName" placeholder="">
                         </div>
                         <div class="mb-2">
                             <label>Branch Type</label>
-                            <input type="text" class="form-control" id="recipient-name" placeholder="">
+                            <input type="text" class="form-control" name="branchType" placeholder="">
                         </div>
                         <div class="mb-2">
                             <label>Unit Name</label>
-                            <select class="form-select">
+                            <select class="form-select" name="unitId">
                                 <option value="0" label="Select State " selected="selected">Select Unit </option>
                                 <option value="1" label="Application Unit">Application Unit</option>
                                 <option value="2" label="Maintenance Unit">Maintenance Unit</option>
@@ -223,23 +111,23 @@
                         </div>
                         <div class="mb-2">
                             <label>Address</label>
-                            <input type="text" class="form-control" id="recipient-name" placeholder="">
+                            <input type="text" class="form-control" name="address" placeholder="">
                         </div>
                         <div class="mb-2">
                             <label>Address 2</label>
-                            <input type="text" class="form-control" id="recipient-name" placeholder="">
+                            <input type="text" class="form-control" name="address2" placeholder="">
                         </div>
                         <div class="mb-2">
                             <label>Postcode </label>
-                            <input type="text" class="form-control" id="recipient-name" placeholder="">
+                            <input type="text" class="form-control" name="postcode" placeholder="">
                         </div>
                         <div class="mb-2">
                             <label>City</label>
-                            <input type="text" class="form-control" id="recipient-name" placeholder="">
+                            <input type="text" class="form-control" name="city" placeholder="">
                         </div>
                         <div class="mb-2">
                             <label>State</label>
-                            <select class="form-select">
+                            <select class="form-select" name="state">
                                 <option value="0" label="Select State " selected="selected">Select State </option>
                                 <option value="Johor" label="Johor">Johor</option>
                                 <option value="Kedah" label="Kedah">Kedah</option>
@@ -260,10 +148,100 @@
                         </div>
                         <div class="mb-2">
                             <label>Country</label>
-                            <select class="form-select">
+                            <select class="form-select" name="country">
                                 <option value="0" label="Malaysia" selected="selected">Malaysia </option>
                                 <option value="1" label="Brunei">Brunei</option>
                                 <option value="2" label="Singapore">Singapore</option>
+
+                            </select>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="saveButton">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Update Branch</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="editForm">
+
+                        <div class="mb-3">
+                            <label>Branch Code</label>
+                            <input type="text" class="form-control" name="branchCode" id="branchCode" placeholder="">
+                            <input type="hidden" class="form-control" name="id" id="idB" placeholder="">
+                        </div>
+                        <div class="mb-3">
+                            <label>Branch Name</label>
+                            <input type="text" class="form-control" name="branchName" id="branchName" placeholder="">
+                        </div>
+                        <div class="mb-2">
+                            <label>Branch Type</label>
+                            <input type="text" class="form-control" name="branchType" id="branchType" placeholder="">
+                        </div>
+                        <div class="mb-2">
+                            <label>Unit Name</label>
+                            <select class="form-select" name="unitId" id="unitId">
+                                <option value="0" label="Select State " selected="selected">Select Unit </option>
+                                <option value="1" label="Application Unit">Application Unit</option>
+                                <option value="2" label="Maintenance Unit">Maintenance Unit</option>
+                                <option value="3" label="Offshore Unit">Offshore Unit</option>
+
+                            </select>
+                        </div>
+                        <div class="mb-2">
+                            <label>Address</label>
+                            <input type="text" class="form-control" name="address" id="address"  placeholder="">
+                        </div>
+                        <div class="mb-2">
+                            <label>Address 2</label>
+                            <input type="text" class="form-control" name="address2" id="address2" placeholder="">
+                        </div>
+                        <div class="mb-2">
+                            <label>Postcode </label>
+                            <input type="text" class="form-control" name="postcode" id="postcode" placeholder="">
+                        </div>
+                        <div class="mb-2">
+                            <label>City</label>
+                            <input type="text" class="form-control" name="city" id="city" placeholder="">
+                        </div>
+                        <div class="mb-2">
+                            <label>State</label>
+                            <select class="form-select" name="state" id="state">
+                                <option value="0" label="Select State " selected="selected">Select State </option>
+                                <option value="Johor" label="Johor">Johor</option>
+                                <option value="Kedah" label="Kedah">Kedah</option>
+                                <option value="Kelantan" label="Kelantan">Kelantan</option>
+                                <option value="Negeri Sembilan" label="Negeri Sembilan">Negeri Sembilan</option>
+                                <option value="Pahang" label="Pahang">Pahang</option>
+                                <option value="Penang" label="Penang">Penang</option>
+                                <option value="Perak" label="Perak">Perak</option>
+                                <option value="Perlis" label="Perlis">Perlis</option>
+                                <option value="Sabah" label="Sabah">Sabah</option>
+                                <option value="Sarawak" label="Sarawak">Sarawak</option>
+                                <option value="Selangor" label="Selangor">Selangor</option>
+                                <option value="Terengganu" label="Terengganu">Terengganu</option>
+                                <option value="Kuala Lumpur" label="Kuala Lumpur">Kuala Lumpur</option>
+                                <option value="Labuan" label="Labuan">Labuan</option>
+                                <option value="Putrajaya" label="Putrajaya">Putrajaya</option>
+                            </select>
+                        </div>
+                        <div class="mb-2">
+                            <label>Country</label>
+                            <select class="form-select" name="country" id="country">
+                                <option value="1" label="Malaysia" selected="selected">Malaysia </option>
+                                <option value="2" label="Brunei">Brunei</option>
+                                <option value="3" label="Singapore">Singapore</option>
 
                             </select>
 
@@ -273,7 +251,7 @@
 
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save</button>
+                    <button type="button" class="btn btn-primary" id="updateButton">Save</button>
                 </div>
             </div>
         </div>

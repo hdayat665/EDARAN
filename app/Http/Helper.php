@@ -299,7 +299,7 @@ if (!function_exists('getCompany')) {
     {
         $data = Company::all();
 
-        if(!$data)
+        if(blank($data))
         {
             $data = [];
         }

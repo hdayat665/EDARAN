@@ -8,7 +8,7 @@ $(document).ready(function() {
 
             $.ajax({
                 type: "POST",
-                url: "/api/saveRegisterTenant/",
+                url: "/saveRegisterTenant",
                 data: data,
                 dataType: "json",
                 async: false,

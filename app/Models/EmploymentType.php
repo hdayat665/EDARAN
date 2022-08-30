@@ -8,7 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
-class Company extends Authenticatable
+class EmploymentType extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
@@ -18,15 +18,15 @@ class Company extends Authenticatable
      * @var array<int, string>
      */
 
-    protected $table ='company';
+    protected $table ='employmentType';
 
     protected $fillable = [
-        'companyCode',
-        'companyName',
+        'id',
+        'code',
+        'type',
         'addedBy',
         'modifiedBy',
     ];
-
 }
 
 

@@ -14,7 +14,7 @@
 
     <!-- END breadcrumb -->
     <!-- BEGIN page-header -->
-    <h1 class="page-header">Settings <small>| News</small></h1>
+    <h1 class="page-header" id="newsJs">Settings <small>| News</small></h1>
 
     <!-- END page-header -->
     <!-- BEGIN panel -->
@@ -24,7 +24,7 @@
 
         <div class="panel-heading">
             <div class="col-md-6">
-                <a href="javascript:;" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-primary">+ New News</a>
+                <a href="javascript:;" data-bs-toggle="modal" id="addButton" class="btn btn-primary">+ New News</a>
             </div>
 
             <h4 class="panel-title"></h4>
@@ -51,43 +51,20 @@
                     </tr>
                 </thead>
                 <tbody>
+                    @if ($news)
+                        @foreach ($news as $new)
                     <tr>
-                        <td><a href="javascript:;" data-bs-toggle="modal" data-bs-target="#exampleModal2" class="btn btn-outline-green"><i class="fa fa-pencil-alt"></i></a> <a href="javascript:;" class="btn btn-outline-danger"><i class="fa fa-trash"></i></a></td>
-                        <td>Training Calendar FY2020</td>
-                        <td>Training Calendar</td>
-                        <td>Trainingcal.pdf</td>
-                        <td>Zaid</td>
-                        <td>14 Feb 2021 4.30 pm</td>
-                        <td>Kamal</td>
-                        <td>14 Feb 2021 4.30 pm</td>
-
+                        <td><a href="javascript:;" data-bs-toggle="modal" id="editButton" data-id="{{$new->id}}" class="btn btn-outline-green"><i class="fa fa-pencil-alt"></i></a> <a id="deleteButton" data-id="{{$new->id}}" class="btn btn-outline-danger"><i class="fa fa-trash"></i></a></td>
+                        <td>{{$new->title}}</td>
+                        <td>{{$new->content}}</td>
+                        <td>{{$new->file}}</td>
+                        <td>{{$new->addedBy}}</td>
+                        <td>{{$new->created_at}}</td>
+                        <td>{{$new->modifiedBy}}</td>
+                        <td>{{$new->updated_at}}</td>
                     </tr>
-                    <tr>
-                        <td><a href="javascript:;" class="btn btn-outline-green"><i class="fa fa-pencil-alt"></i></a> <a href="javascript:;" class="btn btn-outline-danger"><i class="fa fa-trash"></i></a></td>
-                        <td>Program Doa Selamat</td>
-                        <td>Doa Selamat</td>
-                        <td>Doaselamat.pdf</td>
-                        <td>Ifwat</td>
-                        <td>13 Feb 2021 4.30 pm</td>
-                        <td>Rika</td>
-                        <td>19 Feb 2021 4.30 pm</td>
-
-                    </tr>
-                    <tr>
-                        <td><a href="javascript:;" class="btn btn-outline-green"><i class="fa fa-pencil-alt"></i></a> <a href="javascript:;" class="btn btn-outline-danger"><i class="fa fa-trash"></i></a></td>
-                        <td>Majlis Perkahwinan Aqil</td>
-                        <td>Majlis Perkahwinan Aqil</td>
-                        <td>weddingaqil.pdf</td>
-                        <td>Amad</td>
-                        <td>11 Feb 2021 4.30 pm</td>
-                        <td>Boi</td>
-                        <td>18 Feb 2021 4.30 pm</td>
-
-                    </tr>
-
-
-
-
+                    @endforeach
+                    @endif
                 </tbody>
             </table>
         </div>
@@ -97,7 +74,7 @@
 
 <!-- END row -->
 <!-- BEGIN row -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -105,35 +82,35 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form>
+                <form id="addForm">
 
                     <div class="mb-3">
                         <label>Title</label><br><br>
-                        <input type="text" class="form-control" id="recipient-name" placeholder="">
+                        <input type="text" class="form-control" name="title" placeholder="">
                     </div>
                     <div class="mb-3">
                         <label>Source URL</label><br><br>
-                        <input type="text" class="form-control" id="recipient-name" placeholder="">
+                        <input type="text" class="form-control" name="sourceURL" placeholder="">
                     </div>
                     <div class="mb-3">
                         <label>Content </label><br><br>
-                        <textarea class="form-control" rows="3"></textarea>
+                        <textarea class="form-control" rows="3" name="content"></textarea>
                     </div>
                     <div class="mb-3">
                         <label>File Upload </label><br><br>
-                        <input id="fileupload" type="file" multiple="multiple" ></input>
+                        <input id="fileupload" type="file" name="file" multiple="multiple" ></input>
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save</button>
+                <button type="button" class="btn btn-primary" id="saveButton">Save</button>
             </div>
         </div>
     </div>
 </div>
 
-<div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -141,29 +118,30 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form>
+                <form id="editForm">
 
                     <div class="mb-3">
                         <label>Title</label><br><br>
-                        <input type="text" class="form-control" id="recipient-name" placeholder="">
+                        <input type="text" class="form-control" name="title" id="title" placeholder="">
+                        <input type="hidden" class="form-control" name="id" id="idN" placeholder="">
                     </div>
                     <div class="mb-3">
                         <label>Source URL</label><br><br>
-                        <input type="text" class="form-control" id="recipient-name" placeholder="">
+                        <input type="text" class="form-control" name="sourceURL" id="sourceURL" placeholder="">
                     </div>
                     <div class="mb-3">
                         <label>Content </label><br><br>
-                        <textarea class="form-control" rows="3"></textarea>
+                        <textarea class="form-control" rows="3" name="content" id="contents"></textarea>
                     </div>
                     <div class="mb-3">
                         <label>File Upload </label><br><br>
-                        <input id="fileupload" type="file" multiple="multiple" ></input>
+                        <input id="fileupload" type="file" name="file" multiple="multiple" ></input>
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save</button>
+                <button type="button" class="btn btn-primary"  id="updateButton">Save</button>
             </div>
         </div>
     </div>

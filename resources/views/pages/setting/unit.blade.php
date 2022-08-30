@@ -22,9 +22,9 @@
 
         <!-- BEGIN panel-heading -->
 
-        <div class="panel-heading">
+        <div class="panel-heading" id="unitJs">
             <div class="col-md-6">
-                <a href="javascript:;" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-primary">+ New Unit</a>
+                <a href="javascript:;" data-bs-toggle="modal" id="addButton" class="btn btn-primary">+ New Unit</a>
             </div>
 
             <h4 class="panel-title"></h4>
@@ -52,46 +52,23 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <?php $id = 0 ?>
+                    @if ($units)
+                    @foreach ($units as $unit)
+                    <?php $id++ ?>
                     <tr class="odd gradeX">
-                        <td width="1%" class="fw-bold text-dark">1</td>
-                        <td>Edaran</td>
-                        <td>BUD</td>
-                        <td>Infrastructure Unit </td>
-                        <td>Elong musk</td>
-                        <td>2 Feb 2022 2.30 pm</td>
-                        <td>Elon Musk</td>
-                        <td>14 Feb 2021 4.30 pm</td>
-                        <td><a href="javascript:;" data-bs-toggle="modal" data-bs-target="#exampleModal2" class="btn btn-outline-green"><i class="fa fa-pencil-alt"></i></a> <a href="javascript:;" class="btn btn-outline-danger"><i class="fa fa-trash"></i></a></td>
-
+                        <td width="1%" class="fw-bold text-dark">{{$id}}</td>
+                        <td>{{$unit->departmentName}}</td>
+                        <td>{{$unit->unitCode}}</td>
+                        <td>{{$unit->unitName}}</td>
+                        <td>{{$unit->addedBy}}</td>
+                        <td>{{$unit->created_at}}</td>
+                        <td>{{$unit->modifiedBy}}</td>
+                        <td>{{$unit->updated_at}}</td>
+                        <td><a href="javascript:;" data-bs-toggle="modal" id="editButton" data-id="{{$unit->id}}" class="btn btn-outline-green"><i class="fa fa-pencil-alt"></i></a> <a href="javascript:;" id="deleteButton" data-id="{{$unit->id}}" class="btn btn-outline-danger"><i class="fa fa-trash"></i></a></td>
                     </tr>
-                    <tr class="even gradeC">
-                        <td width="1%" class="fw-bold text-dark">2</td>
-                        <td>Edaran Audit</td>
-                        <td>B05</td>
-                        <td>Group Internal Audit </td>
-                        <td>Elong musk</td>
-                        <td>2 Feb 2022 2.30 pm</td>
-                        <td>Elon Musk</td>
-                        <td>14 Feb 2021 4.30 pm</td>
-                        <td><a href="javascript:;" class="btn btn-outline-green"><i class="fa fa-pencil-alt"></i></a> <a href="javascript:;" class="btn btn-outline-danger"><i class="fa fa-trash"></i></a></td>
-
-                    </tr>
-                    <tr class="even gradeC">
-                        <td width="1%" class="fw-bold text-dark">3</td>
-                        <td>Edaran Unit</td>
-                        <td>APU</td>
-                        <td> Application Unit </td>
-                        <td>Elong musk</td>
-                        <td>2 Feb 2022 2.30 pm</td>
-                        <td>Elon Musk</td>
-                        <td>14 Feb 2021 4.30 pm</td>
-                        <td><a href="javascript:;" class="btn btn-outline-green"><i class="fa fa-pencil-alt"></i></a> <a href="javascript:;" class="btn btn-outline-danger"><i class="fa fa-trash"></i></a></td>
-
-                    </tr>
-
-
-
-
+                    @endforeach
+                    @endif
                 </tbody>
             </table>
         </div>
@@ -100,7 +77,7 @@
 
 <!-- END row -->
 <!-- BEGIN row -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -108,31 +85,31 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form>
+                <form id="addForm">
 
                     <div class="mb-3">
                         <label>Department Name* </label><br><br>
-                        <select class="form-select">
+                        <select class="form-select" name="departmentId">
                             <option value="0" label="Select Department Name " selected="selected">Select Department Name </option>
-                            <option value="1" label="BUD">BUD</option>
-                            <option value="2" label="ETH">ETH</option>
-                            <option value="3" label="BTC">BTC</option>
-
+                            <?php $departments = getDepartment() ?>
+                            @foreach ($departments as $department)
+                                <option value="{{$department->id}}" >{{$department->departmentName}}</option>
+                            @endforeach
                         </select>
                     </div>
                     <div class="mb-3">
                         <label>Unit Code* </label><br><br>
-                        <input type="text" class="form-control" id="recipient-name" placeholder="">
+                        <input type="text" class="form-control" name="unitCode" placeholder="">
                     </div>
                     <div class="mb-3">
                         <label>Unit Name* </label><br><br>
-                        <input type="text" class="form-control" id="recipient-name" placeholder="">
+                        <input type="text" class="form-control" name="unitName" placeholder="">
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save</button>
+                <button type="button" class="btn btn-primary" id="saveButton">Save</button>
             </div>
         </div>
     </div>
@@ -140,7 +117,7 @@
 
 
 
-<div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -148,31 +125,33 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form>
+                <form id="updateForm">
 
                     <div class="mb-3">
                         <label>Department Name* </label><br><br>
-                        <select class="form-select">
+                        <select class="form-select" name="departmentId" id="departmentId">
                             <option value="0" label="Select Department Name " selected="selected">Select Department Name </option>
-                            <option value="1" label="BUD">BUD</option>
-                            <option value="2" label="ETH">ETH</option>
-                            <option value="3" label="BTC">BTC</option>
+                            <?php $departments = getDepartment() ?>
+                            @foreach ($departments as $department)
+                                <option value="{{$department->id}}" >{{$department->departmentName}}</option>
+                            @endforeach
 
                         </select>
                     </div>
                     <div class="mb-3">
                         <label>Unit Code* </label><br><br>
-                        <input type="text" class="form-control" id="recipient-name" placeholder="">
+                        <input type="text" class="form-control" id="unitCode" name="unitCode" placeholder="">
+                        <input type="hidden" class="form-control" id="idU" name="id" placeholder="">
                     </div>
                     <div class="mb-3">
                         <label>Unit Name* </label><br><br>
-                        <input type="text" class="form-control" id="recipient-name" placeholder="">
+                        <input type="text" class="form-control" id="unitName" name="unitName" placeholder="">
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save</button>
+                <button type="button" class="btn btn-primary" id="updateButton">Save</button>
             </div>
         </div>
     </div>

@@ -38,6 +38,10 @@
                     <h5 class="mb-5px">Designation</h5>
                 </div>
                 <div class="col-lg-2">
+                    <a class="mb-10px" href="/employmentType"><i class="fa fa-address-book fa-4x text-blue"></i></a><br><br>
+                    <h5 class="mb-5px">Employment Type</h5>
+                </div>
+                <div class="col-lg-2">
                     <a class="mb-10px" href="/sop"><i class="fa fa-circle-info fa-4x text-blue"></i></a><br><br>
                     <h5 class="mb-5px">SOP's</h5>
                 </div>

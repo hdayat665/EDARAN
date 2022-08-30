@@ -1,7 +1,11 @@
 @extends('layouts.dashboardTenant')
 
 @section('content')
-
+<style>
+    #more {display: none;}
+    #more2 {display: none;}
+    #more3 {display: none;}
+    </style>
 <div id="content" class="app-content">
     <!-- BEGIN breadcrumb -->
     <!-- BEGIN breadcrumb -->
@@ -14,7 +18,7 @@
 
     <!-- END breadcrumb -->
     <!-- BEGIN page-header -->
-    <h1 class="page-header">Settings <small>| Designation </small></h1>
+    <h1 class="page-header" id="designationJs" >Settings <small>| Designation </small></h1>
 
     <!-- END page-header -->
     <!-- BEGIN panel -->
@@ -24,7 +28,7 @@
 
         <div class="panel-heading">
             <div class="col-md-6">
-                <a href="javascript:;" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-primary">+ New Designation</a>
+                <a href="javascript:;" data-bs-toggle="modal" id="addButton" class="btn btn-primary">+ New Designation</a>
             </div>
 
             <h4 class="panel-title"></h4>
@@ -34,13 +38,13 @@
         <!-- END panel-heading -->
         <!-- BEGIN panel-body -->
         <div class="panel-body">
-            <table id="data-table-default" class="table table-striped table-bordered align-middle">
+            <table id="table" class="table table-striped table-bordered align-middle">
                 <thead>
                     <tr>
                         <th width="1%">NO</th>
                         <th class="text-nowrap">Designation Code</th>
                         <th class="text-nowrap">Designation Name</th>
-                        <th class="text-nowrap">Job Description</th>
+                        <th class="text-nowrap" style="word-wrap: break-word;">Job Description</th>
                         <th class="text-nowrap">Added By</th>
                         <th class="text-nowrap">Added Time</th>
                         <th class="text-nowrap">Modified By</th>
@@ -52,45 +56,24 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <?php $id = 0; ?>
+                    @if ($designations)
+                    @foreach ($designations as $designation)
+                    <?php $id++; ?>
                     <tr class="odd gradeX">
-                        <td width="1%" class="fw-bold text-dark">1</td>
-                        <td>M001</td>
-                        <td>Manager</td>
-                        <td class="show-less">An Account Manager is responsible for making sure client and customer <span id="dots">...</span><span id="more"> needs are being met and understood by each department in the company. Their duties include handling any client complaints, working to find solutions to any client issues and managing other departments to ensure clients are experiencing a positive client-company relationship. </span></p> <button onclick="myFunction()" id="myBtn">Read more</button></td>
-                        <td>Faris</td>
-                        <td>14 Feb 2021 4.30 pm</td>
-                        <td>Elon Musk</td>
-                        <td>14 Feb 2021 4.30 pm</td>
-                        <td><a href="javascript:;" data-bs-toggle="modal" data-bs-target="#exampleModal2" class="btn btn-outline-green"><i class="fa fa-pencil-alt"></i></a> <a href="javascript:;" class="btn btn-outline-danger"><i class="fa fa-trash"></i></a></td>
+                            <td width="1%" class="fw-bold text-dark">{{$id}}</td>
+                            <td>{{$designation->designationCode}}</td>
+                            <td>{{$designation->designationName}}</td>
+                            <td class="show-less" style="word-wrap: break-word;">{{$designation->jobDesc}}</td>
+                            <td>{{$designation->addedBy}}</td>
+                            <td>{{$designation->created_at}}</td>
+                            <td>{{$designation->modifiedBy}}</td>
+                            <td>{{$designation->updated_at}}</td>
+                            <td><a href="javascript:;" data-bs-toggle="modal" id="editButton" data-id="{{$designation->id}}" class="btn btn-outline-green"><i class="fa fa-pencil-alt"></i></a> <a id="deleteButton" data-id="{{$designation->id}}" class="btn btn-outline-danger"><i class="fa fa-trash"></i></a></td>
 
-                    </tr>
-                    <tr class="even gradeC">
-                        <td width="1%" class="fw-bold text-dark">2</td>
-                        <td>M002</td>
-                        <td>Administrative</td>
-                        <td class="show-less">An Administrative Assistant, or Administrative Aide, is responsible<span id="dots2">...</span><span id="more2"> for supporting an administrative professional to help them stay organized and complete tasks that allow them to focus on more advanced responsibilities. Their duties organizing meetings for Administrators, greeting office visitors and composing documents on behalf of Administrators. </span></p> <button onclick="myFunction2()" id="myBtn2">Read more</button></td>
-                        <td>Faris</td>
-                        <td>14 Feb 2021 4.30 pm</td>
-                        <td>Elon Musk</td>
-                        <td>14 Feb 2021 4.30 pm</td>
-                        <td><a href="javascript:;" class="btn btn-outline-green"><i class="fa fa-pencil-alt"></i></a> <a href="javascript:;" class="btn btn-outline-danger"><i class="fa fa-trash"></i></a></td>
-
-                    </tr>
-                    <tr class="even gradeC">
-                        <td width="1%" class="fw-bold text-dark">3</td>
-                        <td>SD001</td>
-                        <td>Software Developer</td>
-                        <td class="show-less">A Software Developer, or Computer Software Developer, is responsible <span id="dots3">...</span><span id="more3"> for using their knowledge of programming languages to design software programs. Their duties include meeting with clients to determine their software needs, coding and testing software to ensure functionality and updating software programs to refine components like cybersecurity measures and data storage capacities. </span></p> <button onclick="myFunction3()" id="myBtn3">Read more</button></td>
-                        <td>Faris</td>
-                        <td>14 Feb 2021 4.30 pm</td>
-                        <td>Elon Musk</td>
-                        <td>14 Feb 2021 4.30 pm</td>
-                        <td><a href="javascript:;" class="btn btn-outline-green"><i class="fa fa-pencil-alt"></i></a> <a href="javascript:;" class="btn btn-outline-danger"><i class="fa fa-trash"></i></a></td>
-
-                    </tr>
-
-
-
+                        </tr>
+                    @endforeach
+                    @endif
 
                 </tbody>
             </table>
@@ -100,7 +83,7 @@
 
 <!-- END row -->
 <!-- BEGIN row -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -108,31 +91,31 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form>
+                <form id="addForm">
 
                     <div class="mb-3">
                         <label>Designation Code* </label><br><br>
-                        <input type="text" class="form-control" id="recipient-name" placeholder="">
+                        <input type="text" class="form-control" name="designationCode" placeholder="">
                     </div>
                     <div class="mb-3">
                         <label>Designation Name* </label><br><br>
-                        <input type="text" class="form-control" id="recipient-name" placeholder="">
+                        <input type="text" class="form-control" name="designationName" placeholder="">
                     </div>
                     <div class="mb-3">
                         <label>Job Description* </label><br><br>
-                        <textarea class="form-control" rows="5"></textarea>
+                        <textarea class="form-control" name="jobDesc" rows="5"></textarea>
                     </div>
 
                 </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save</button>
+                <button type="button" class="btn btn-primary" id="saveButton">Save</button>
             </div>
         </div>
     </div>
 </div>
-<div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -140,26 +123,27 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form>
+                <form id="editForm">
 
                     <div class="mb-3">
                         <label>Designation Code* </label><br><br>
-                        <input type="text" class="form-control" id="recipient-name" placeholder="">
+                        <input type="text" class="form-control" name="designationCode" id="designationCode" placeholder="">
+                        <input type="hidden" class="form-control" name="id" id="idD" placeholder="">
                     </div>
                     <div class="mb-3">
                         <label>Designation Name* </label><br><br>
-                        <input type="text" class="form-control" id="recipient-name" placeholder="">
+                        <input type="text" class="form-control" name="designationName" id="designationName" placeholder="">
                     </div>
                     <div class="mb-3">
                         <label>Job Description* </label><br><br>
-                        <textarea class="form-control" rows="5"></textarea>
+                        <textarea class="form-control" id="jobDesc" name="jobDesc" rows="5"></textarea>
                     </div>
 
                 </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save</button>
+                <button type="button" class="btn btn-primary" id="updateButton">Save</button>
             </div>
         </div>
     </div>

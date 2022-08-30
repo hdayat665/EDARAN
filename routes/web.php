@@ -23,6 +23,7 @@ use App\Http\Controllers\HRIS\EmployeeController;
 */
 
 Route::get('/registerTenant/{package}', [RegisterController::class,'registerTenant']);
+Route::post('/saveRegisterTenant', [RegisterController::class,'saveRegisterTenant']);
 
 Route::controller(ProfileController::class)->group(function () {
     // Route::get('/profile', 'profile')->middleware('auth');
@@ -151,6 +152,9 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('/updateNews/{id}', 'updateNews');
             Route::post('/createNews', 'createNews');
             Route::delete('/deleteNews/{id}', 'deleteNews');
+            Route::post('/updateBranch/{id}', 'updateBranch');
+            Route::post('/createBranch', 'createBranch');
+            Route::delete('/deleteBranch/{id}', 'deleteBranch');
             Route::get('/getPhoneDirectory', 'getPhoneDirectory');
             Route::get('/setting', 'settingView');
             Route::get('/branch', 'branchView');
@@ -165,6 +169,18 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('/getRoleById/{id}', 'getRoleById');
             Route::get('/getCompanyById/{id}', 'getCompanyById');
             Route::get('/getDepartmentById/{id}', 'getDepartmentById');
+            Route::get('/getUnitById/{id}', 'getUnitById');
+            Route::get('/getBranchById/{id}', 'getBranchById');
+            Route::get('/getJobGradeById/{id}', 'getJobGradeById');
+            Route::get('/getDesignationById/{id}', 'getDesignationById');
+            Route::get('/getPolicyById/{id}', 'getPolicyById');
+            Route::get('/getSOPById/{id}', 'getSOPById');
+            Route::get('/getNewsById/{id}', 'getNewsById');
+            Route::get('/getEmploymentTypeById/{id}', 'getEmploymentTypeById');
+            Route::get('/employmentType', 'employmentTypeView');
+            Route::post('/createEmploymentType', 'createEmploymentType');
+            Route::delete('/deleteEmploymentType/{id}', 'deleteEmploymentType');
+            Route::post('/updateEmploymentType/{id}', 'updateEmploymentType');
 
 
         });

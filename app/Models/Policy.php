@@ -23,6 +23,8 @@ class Policy extends Authenticatable
     protected $fillable = [
         'policy',
         'desc',
+        'code',
+        'file',
         'addedBy',
         'modifiedBy',
     ];

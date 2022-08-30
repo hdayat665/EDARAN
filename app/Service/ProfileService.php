@@ -589,7 +589,7 @@ class ProfileService
         $data['parents'] = UserParent::where('user_id', $data['user_id'])->get();
         $data['siblings'] = UserSibling::where('user_id', $data['user_id'])->get();
         $data['employment'] = Employee::where('user_id', $data['user_id'])->first();
-        $data['jobHistorys'] = JobHistory::where('user_id', $data['user_id'])->first();
+        $data['jobHistorys'] = compact(JobHistory::where('user_id', $data['user_id'])->first());
         $data['vehicles'] = Vehicle::where('user_id', $data['user_id'])->get();
 
         $childId[] = '';
