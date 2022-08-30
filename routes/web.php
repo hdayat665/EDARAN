@@ -23,6 +23,7 @@ use App\Http\Controllers\HRIS\EmployeeController;
 */
 
 Route::get('/registerTenant/{package}', [RegisterController::class,'registerTenant']);
+Route::post('/saveRegisterTenant', [RegisterController::class,'saveRegisterTenant']);
 
 Route::controller(ProfileController::class)->group(function () {
     // Route::get('/profile', 'profile')->middleware('auth');
@@ -174,6 +175,12 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('/getDesignationById/{id}', 'getDesignationById');
             Route::get('/getPolicyById/{id}', 'getPolicyById');
             Route::get('/getSOPById/{id}', 'getSOPById');
+            Route::get('/getNewsById/{id}', 'getNewsById');
+            Route::get('/getEmploymentTypeById/{id}', 'getEmploymentTypeById');
+            Route::get('/employmentType', 'employmentTypeView');
+            Route::post('/createEmploymentType', 'createEmploymentType');
+            Route::delete('/deleteEmploymentType/{id}', 'deleteEmploymentType');
+            Route::post('/updateEmploymentType/{id}', 'updateEmploymentType');
 
 
         });

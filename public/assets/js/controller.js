@@ -20,6 +20,8 @@ requirejs.config({
         'jobGradeJs': assets + '/js/jobGradeJs',
         'designationJs': assets + '/js/designationJs',
         'SOPJs': assets + '/js/SOPJs',
+        'newsJs': assets + '/js/newsJs',
+        'employmentTypeJs': assets + '/js/employmentTypeJs',
 
         // 'main': 'assets/backend/js/main',
         'sweetAlert2': assets + '/assets/sweetalert2/sweetalert2',
@@ -103,6 +105,14 @@ if ($('#designationJs').length > 0) {
 
 if ($('#SOPJs').length > 0) {
     requirejs(['SOPJs']);
+}
+
+if ($('#newsJs').length > 0) {
+    requirejs(['newsJs']);
+}
+
+if ($('#employmentTypeJs').length > 0) {
+    requirejs(['employmentTypeJs']);
 }
 
 

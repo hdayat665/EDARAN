@@ -333,6 +333,42 @@ class SettingController extends Controller
         return response()->json($result);
     }
 
+    public function getEmploymentType()
+    {
+        $ss = new SettingService;
+
+        $result = $ss->getEmploymentType();
+
+        return response()->json($result);
+    }
+
+    public function createEmploymentType(Request $r)
+    {
+        $ss = new SettingService;
+
+        $result = $ss->createEmploymentType($r);
+
+        return response()->json($result);
+    }
+
+    public function updateEmploymentType(Request $r, $id)
+    {
+        $ss = new SettingService;
+
+        $result = $ss->updateEmploymentType($r, $id);
+
+        return response()->json($result);
+    }
+
+    public function deleteEmploymentType($id)
+    {
+        $ss = new SettingService;
+
+        $result = $ss->deleteEmploymentType($id);
+
+        return response()->json($result);
+    }
+
     public function getNews()
     {
         $ss = new SettingService;
@@ -346,8 +382,6 @@ class SettingController extends Controller
     {
         $ss = new SettingService;
 
-        $input['fileUpload'] = upload($r,'fileUpload');
-
         $result = $ss->createNews($r);
 
         return response()->json($result);
@@ -356,8 +390,6 @@ class SettingController extends Controller
     public function updateNews(Request $r, $id)
     {
         $ss = new SettingService;
-
-        $input['fileUpload'] = upload($r,'fileUpload');
 
         $result = $ss->updateNews($r, $id);
 
@@ -385,6 +417,15 @@ class SettingController extends Controller
         $result = $ss->branchView();
 
         return view('pages.setting.branch', $result);
+    }
+
+    public function employmentTypeView()
+    {
+        $ss = new SettingService;
+
+        $result = $ss->employmentTypeView();
+
+        return view('pages.setting.employmentType', $result);
     }
 
     public function companyView()
@@ -425,7 +466,11 @@ class SettingController extends Controller
 
     public function newsView()
     {
-        return view('pages.setting.news');
+        $ss = new SettingService;
+
+        $result = $ss->newsView();
+
+        return view('pages.setting.news', $result);
     }
 
     public function roleView()
@@ -532,6 +577,24 @@ class SettingController extends Controller
         $ss = new SettingService;
 
         $result = $ss->getSOPById($id);
+
+        return $result;
+    }
+
+    public function getNewsById($id = '')
+    {
+        $ss = new SettingService;
+
+        $result = $ss->getNewsById($id);
+
+        return $result;
+    }
+
+    public function getEmploymentTypeById($id = '')
+    {
+        $ss = new SettingService;
+
+        $result = $ss->getEmploymentTypeById($id);
 
         return $result;
     }

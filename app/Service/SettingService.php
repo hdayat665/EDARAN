@@ -6,7 +6,9 @@ use App\Models\Branch;
 use App\Models\Company;
 use App\Models\Department;
 use App\Models\Designation;
+use App\Models\EmploymentType;
 use App\Models\JobGrade;
+use App\Models\News;
 use App\Models\PhoneDirectory;
 use App\Models\Policy;
 use App\Models\Role;
@@ -633,9 +635,17 @@ class SettingService
     {
         $input = $r->input();
 
-        if ($input['fileUpload']) {
-            $input['fileUpload'] = $input['fileUpload']['filename'];
+        if ($_FILES['file']['name']) {
+            $payslip = upload($r->file('file'));
+            $input['file'] = $payslip['filename'];
+
+            if (!$input['file']) {
+                unset($input['file']);
+            }
         }
+
+        $user = Auth::user();
+        $input['addedBy'] = $user->username;
 
         News::create($input);
 
@@ -651,9 +661,17 @@ class SettingService
     {
         $input = $r->input();
 
-        if ($input['fileUpload']) {
-            $input['fileUpload'] = $input['fileUpload']['filename'];
+        if ($_FILES['file']['name']) {
+            $payslip = upload($r->file('file'));
+            $input['file'] = $payslip['filename'];
+
+            if (!$input['file']) {
+                unset($input['file']);
+            }
         }
+
+        $user = Auth::user();
+        $input['modifiedBy'] = $user->username;
 
         News::where('id', $id)->update($input);
 
@@ -681,6 +699,73 @@ class SettingService
             $data['type'] = config('app.response.success.type');
             $data['title'] = config('app.response.success.title');
             $data['msg'] = 'Success delete News';
+        }
+
+        return $data;
+    }
+
+    public function getEmploymentType()
+    {
+        $data = [];
+        $data['data'] = EmploymentType::all();
+        $data['status'] = config('app.response.success.status');
+        $data['type'] = config('app.response.success.type');
+        $data['title'] = config('app.response.success.title');
+        $data['msg'] = 'Success get EmploymentType';
+
+        return $data;
+    }
+
+    public function createEmploymentType($r)
+    {
+        $input = $r->input();
+
+        $user = Auth::user();
+        $input['addedBy'] = $user->username;
+
+        EmploymentType::create($input);
+
+        $data['status'] = config('app.response.success.status');
+        $data['type'] = config('app.response.success.type');
+        $data['title'] = config('app.response.success.title');
+        $data['msg'] = 'Success create EmploymentType';
+
+        return $data;
+    }
+
+    public function updateEmploymentType($r, $id)
+    {
+        $input = $r->input();
+
+        $user = Auth::user();
+        $input['modifiedBy'] = $user->username;
+
+        EmploymentType::where('id', $id)->update($input);
+
+        $data['status'] = config('app.response.success.status');
+        $data['type'] = config('app.response.success.type');
+        $data['title'] = config('app.response.success.title');
+        $data['msg'] = 'Success update EmploymentType';
+
+        return $data;
+    }
+
+    public function deleteEmploymentType($id)
+    {
+        $EmploymentType = EmploymentType::find($id);
+
+        if (!$EmploymentType) {
+            $data['status'] = config('app.response.error.status');
+            $data['type'] = config('app.response.error.type');
+            $data['title'] = config('app.response.error.title');
+            $data['msg'] = 'EmploymentType not found';
+        } else {
+            $EmploymentType->delete();
+
+            $data['status'] = config('app.response.success.status');
+            $data['type'] = config('app.response.success.type');
+            $data['title'] = config('app.response.success.title');
+            $data['msg'] = 'Success delete EmploymentType';
         }
 
         return $data;
@@ -752,6 +837,20 @@ class SettingService
         return $data;
     }
 
+    public function newsView()
+    {
+        $data['news'] = News::all();
+
+        return $data;
+    }
+
+    public function employmentTypeView()
+    {
+        $data['employmentTypes'] = EmploymentType::all();
+
+        return $data;
+    }
+
     public function getRoleById($id)
     {
         $data = Role::find($id);
@@ -811,6 +910,20 @@ class SettingService
     public function getSOPById($id)
     {
         $data = SOP::find($id);
+
+        return $data;
+    }
+
+    public function getNewsById($id)
+    {
+        $data = News::find($id);
+
+        return $data;
+    }
+
+    public function getEmploymentTypeById($id)
+    {
+        $data = EmploymentType::find($id);
 
         return $data;
     }
