@@ -263,11 +263,11 @@ class ProfileService
                 unset($input['address2E']);
             }
 
-            $input['dateJoined'] = "'".dateFormatInput($input['dateJoined'])."'";
-            $input['expiryDate'] = "'".dateFormatInput($input['expiryDate'])."'";
-            $input['DOM'] = "'".dateFormatInput($input['DOM'])."'";
-            $input['DOB'] = "'".dateFormatInput($input['DOB'])."'";
-
+            // $input['dateJoined'] = "'".dateFormatInput($input['dateJoined'])."'";
+            // $input['expiryDate'] = "'".dateFormatInput($input['expiryDate'])."'";
+            // $input['DOM'] = "'".dateFormatInput($input['DOM'])."'";
+            // $input['DOB'] = "'".dateFormatInput($input['DOB'])."'";
+            $id = $input['id'];
             UserCompanion::where('id', $id)->update($input);
 
             $data['status'] = config('app.response.success.status');
@@ -589,9 +589,9 @@ class ProfileService
         $data['parents'] = UserParent::where('user_id', $data['user_id'])->get();
         $data['siblings'] = UserSibling::where('user_id', $data['user_id'])->get();
         $data['employment'] = Employee::where('user_id', $data['user_id'])->first();
-        $data['jobHistorys'] = compact(JobHistory::where('user_id', $data['user_id'])->first());
+        $data['jobHistorys'] = JobHistory::where('user_id', $data['user_id'])->get();
         $data['vehicles'] = Vehicle::where('user_id', $data['user_id'])->get();
-
+        // dd($data['jobHistorys']);
         $childId[] = '';
         if ($data['childrens']) {
             foreach ($data['childrens'] as $child) {

@@ -248,10 +248,7 @@ class LoginService
         $data['type'] = 'success';
         $data['msg'] = 'Authorized!';
 
-        $user = $r->validate([
-            'username' => 'required|email',
-            'password' => 'required|min:3',
-        ]);
+        $user = $r->input();
 
         $r->authenticate();
         $r->session()->regenerate();

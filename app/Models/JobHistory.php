@@ -22,22 +22,11 @@ class JobHistory extends Authenticatable
 
     protected $fillable = [
         'user_id',
+        'tenant_id',
         'employmentDetail',
         'effectiveDate',
         'event',
         'updatedBy',
-        'jobGrade',
-        'designation',
-        'employmentType',
-        'userRole',
-        'supervisor',
-        'joinedDate',
-        'COR',
-        'employeeId',
-        'employeeName',
-        'employeeEmail',
-        'effectiveFrom',
-        'event',
     ];
 }
 

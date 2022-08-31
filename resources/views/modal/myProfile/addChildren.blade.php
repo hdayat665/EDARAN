@@ -69,8 +69,16 @@
                         <div class="col-sm-6">
                             <label for="issuing-country" class="form-label">Issuing Country</label>
                             <select class="form-select" name="issuingCountry" id="">
-                                <option value="0" label="Please Choose "></option>
-
+                                <optgroup id="country-optgroup-Americas" label="Americas">
+                                    @foreach ($americass as $key => $america)
+                                    <option value="{{$key}}">{{$america}}</option>
+                                    @endforeach
+                                </optgroup>
+                                <optgroup id="country-optgroup-Asia" label="Asia">
+                                    @foreach ($asias as $key => $asia)
+                                    <option value="{{$key}}">{{$asia}}</option>
+                                    @endforeach
+                                </optgroup>
                             </select>
                         </div>
                     </div>
@@ -150,6 +158,7 @@
                         <div class="col-sm-6">
                             <label for="firstname" class="form-label">First Name*</label>
                             <input type="text" id="firstName1" name="firstName" value="" class="form-control" aria-describedby="firstname">
+                            <input type="text" name="user_id" value="{{$user_id}}">
                         </div>
                         <div class="col-sm-6">
                             <label for="lastname" class="form-label">Last Name*</label>
@@ -208,7 +217,16 @@
                         <div class="col-sm-6">
                             <label for="issuing-country" class="form-label">Issuing Country</label>
                             <select class="form-select" name="issuingCountry" id="issuingCountry1">
-                                <option value="0" label="Please Choose "></option>
+                                <optgroup id="country-optgroup-Americas" label="Americas">
+                                    @foreach ($americass as $key => $america)
+                                    <option value="{{$key}}">{{$america}}</option>
+                                    @endforeach
+                                </optgroup>
+                                <optgroup id="country-optgroup-Asia" label="Asia">
+                                    @foreach ($asias as $key => $asia)
+                                    <option value="{{$key}}">{{$asia}}</option>
+                                    @endforeach
+                                </optgroup>
 
                             </select>
                         </div>
@@ -347,8 +365,16 @@
                         <div class="col-sm-6">
                             <label for="issuing-country" class="form-label">Issuing Country</label>
                             <select class="form-select" name="issuingCountry" id="issuingCountry" disabled>
-                                <option value="0" label="Please Choose "></option>
-
+                                <optgroup id="country-optgroup-Americas" label="Americas">
+                                    @foreach ($americass as $key => $america)
+                                    <option value="{{$key}}">{{$america}}</option>
+                                    @endforeach
+                                </optgroup>
+                                <optgroup id="country-optgroup-Asia" label="Asia">
+                                    @foreach ($asias as $key => $asia)
+                                    <option value="{{$key}}">{{$asia}}</option>
+                                    @endforeach
+                                </optgroup>
                             </select>
                         </div>
                     </div>

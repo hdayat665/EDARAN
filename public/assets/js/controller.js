@@ -22,6 +22,7 @@ requirejs.config({
         'SOPJs': assets + '/js/SOPJs',
         'newsJs': assets + '/js/newsJs',
         'employmentTypeJs': assets + '/js/employmentTypeJs',
+        'editEmployeeJs': assets + '/js/editEmployeeJs',
 
         // 'main': 'assets/backend/js/main',
         'sweetAlert2': assets + '/assets/sweetalert2/sweetalert2',
@@ -115,6 +116,9 @@ if ($('#employmentTypeJs').length > 0) {
     requirejs(['employmentTypeJs']);
 }
 
+if ($('#editEmployeeJs').length > 0) {
+    requirejs(['editEmployeeJs']);
+}
 
 
 
