@@ -72,8 +72,8 @@
                             <i class="fab fa-facebook-messenger text-blue media-object-icon"></i>
                         </div>
                         <div class="media-body">
-                            <h6 class="media-heading">John Smith</h6>
-                            <p>Quisque pulvinar tellus sit amet sem scelerisque tincidunt.</p>
+                            <h6 class="media-heading">Elon Musk</h6>
+                            <p>I have send an email to you .</p>
                             <div class="text-muted fs-10px">25 minutes ago</div>
                         </div>
                     </a>
@@ -117,7 +117,7 @@
                 <a href="#" class="navbar-link dropdown-toggle d-flex align-items-center" data-bs-toggle="dropdown">
                     <img src="{{env('ASSETS_URL')}}/img/user/user-13.jpg" alt="" />
                     <span>
-                        <span class="d-none d-md-inline">Adam Schwartz</span>
+                        <span class="d-none d-md-inline">Admin</span>
                         <b class="caret"></b>
                     </span>
                 </a>
