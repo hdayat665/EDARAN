@@ -66,7 +66,16 @@
                             <div class="col-sm-6">
                                 <label for="issuing-country" class="form-label">Issuing Country</label>
                                 <select class="form-select" name="issuingCountry" value="{{ $companion->issuingCountry ?? '' }}">
-                                    <option value="0" label="Please Choose " selected="selected"></option>
+                                    <optgroup id="country-optgroup-Americas" label="Americas">
+                                        @foreach ($americass as $key => $america)
+                                        <option value="{{$key}}"  >{{$america}}</option>
+                                        @endforeach
+                                    </optgroup>
+                                    <optgroup id="country-optgroup-Asia" label="Asia">
+                                        @foreach ($asias as $key => $asia)
+                                        <option value="{{$key}}"  >{{$asia}}</option>
+                                        @endforeach
+                                    </optgroup>
                                 </select>
                             </div>
                         </div>
@@ -101,8 +110,12 @@
                                     </div>
                                     <div class="col-sm-6">
                                         <label for="marriage-status" class="form-label">Marriage Status</label>
-                                        <select class="form-select" name="marrigeStatus" value="{{ $companion->marriageStatus ?? '' }}">
-                                            <option value="0" label="Please Choose " selected="selected"></option>
+                                        <select class="form-select" name="marrigeStatus" >
+                                            <?php $maritialStatus = getMaritalStatus() ?>
+                                            <option value="0" label="Please Choose"  ></option>
+                                            @foreach ($maritialStatus as $key => $status)
+                                            <option value="{{$key}}" >{{$status}}</option>
+                                            @endforeach
                                         </select>
                                     </div>
                                 </div>
@@ -132,13 +145,26 @@
                             <div class="col-sm-6">
                                 <label for="state" class="form-label">State*</label>
                                 <select class="form-select" name="state" value="{{ $companion->state ?? '' }}">
-                                    <option value="0" label="Please Choose " selected="selected"></option>
+                                    <?php $state = state() ?>
+                                    <option value="0" label="Please Choose"  ></option>
+                                    @foreach ($state as $key => $status)
+                                    <option value="{{$key}}" >{{$status}}</option>
+                                    @endforeach
                                 </select>
                             </div>
                             <div class="col-sm-6">
                                 <label for="country" class="form-label">Country</label>
                                 <select class="form-select" name="country" value="{{ $companion->country ?? '' }}">
-                                    <option value="0" label="Please Choose " selected="selected"></option>
+                                    <optgroup id="country-optgroup-Americas" label="Americas">
+                                        @foreach ($americass as $key => $america)
+                                        <option value="{{$key}}"  >{{$america}}</option>
+                                        @endforeach
+                                    </optgroup>
+                                    <optgroup id="country-optgroup-Asia" label="Asia">
+                                        @foreach ($asias as $key => $asia)
+                                        <option value="{{$key}}"  >{{$asia}}</option>
+                                        @endforeach
+                                    </optgroup>
                                 </select>
                             </div>
                         </div>
@@ -204,13 +230,26 @@
                             <div class="col-sm-6">
                                 <label for="state" class="form-label">State*</label>
                                 <select class="form-select" name="stateE" value="{{ $companion->stateE ?? '' }}">
-                                    <option value="0" label="Please Choose " selected="selected"></option>
+                                    <?php $state = state() ?>
+                                    <option value="0" label="Please Choose"  ></option>
+                                    @foreach ($state as $key => $status)
+                                    <option value="{{$key}}" >{{$status}}</option>
+                                    @endforeach
                                 </select>
                             </div>
                             <div class="col-sm-6">
                                 <label for="country" class="form-label">Country</label>
                                 <select class="form-select" name="countryE" value="{{ $companion->countryE ?? '' }}">
-                                    <option value="0" label="Please Choose " selected="selected"></option>
+                                    <optgroup id="country-optgroup-Americas" label="Americas">
+                                        @foreach ($americass as $key => $america)
+                                        <option value="{{$key}}"  >{{$america}}</option>
+                                        @endforeach
+                                    </optgroup>
+                                    <optgroup id="country-optgroup-Asia" label="Asia">
+                                        @foreach ($asias as $key => $asia)
+                                        <option value="{{$key}}"  >{{$asia}}</option>
+                                        @endforeach
+                                    </optgroup>
                                 </select>
                             </div>
                         </div>
@@ -241,6 +280,7 @@
                                 <div class="form-check form-switch">
                                     <input class="form-check-input" {{ ($companion->mainCompanion ?? '') ? 'checked' : '' }} name="mainCompanion" value="{{ $companion->mainCompanion ?? '' }}" type="checkbox" role="switch" id="set-main" checked>
                                     <label class="form-check-label" for="set-main">Set as Main Companion</label>
+                                    <input type="hidden" name="id" value="{{$companion->id}}">
                                 </div>
                             </div>
                         </div>
@@ -290,7 +330,16 @@
                             <div class="col-sm-6">
                                 <label for="issuing-country" class="form-label">Issuing Country</label>
                                 <select class="form-select" name="issuingCountry" value="{{ $companion->issuingCountry ?? '' }}">
-                                    <option value="0" label="Please Choose " selected="selected"></option>
+                                    <optgroup id="country-optgroup-Americas" label="Americas">
+                                        @foreach ($americass as $key => $america)
+                                        <option value="{{$key}}" <?php echo ($key == $companion->issuingCountry) ? 'selected="selected"' : '' ?> >{{$america}}</option>
+                                        @endforeach
+                                    </optgroup>
+                                    <optgroup id="country-optgroup-Asia" label="Asia">
+                                        @foreach ($asias as $key => $asia)
+                                        <option value="{{$key}}" <?php echo ($key == $companion->issuingCountry) ? 'selected="selected"' : '' ?> >{{$asia}}</option>
+                                        @endforeach
+                                    </optgroup>
                                 </select>
                             </div>
                         </div>
@@ -328,8 +377,12 @@
                                     </div>
                                     <div class="col-sm-6">
                                         <label for="marriage-status" class="form-label">Marriage Status</label>
-                                        <select class="form-select" name="marrigeStatus" value="{{ $companion->marriageStatus ?? '' }}">
-                                            <option value="0" label="Please Choose " selected="selected"></option>
+                                        <select class="form-select" name="marrigeStatus" >
+                                            <?php $maritialStatus = getMaritalStatus() ?>
+                                            <option value="0" label="Please Choose"  ></option>
+                                            @foreach ($maritialStatus as $key => $status)
+                                            <option value="{{$key}}" <?php echo ($key == $companion->marrigeStatus) ? 'selected="selected"' : '' ?>>{{$status}}</option>
+                                            @endforeach
                                         </select>
                                     </div>
                                 </div>
@@ -359,13 +412,26 @@
                             <div class="col-sm-6">
                                 <label for="state" class="form-label">State*</label>
                                 <select class="form-select" name="state" value="{{ $companion->state ?? '' }}">
-                                    <option value="0" label="Please Choose " selected="selected"></option>
+                                    <?php $state = state() ?>
+                                    <option value="0" label="Please Choose"  ></option>
+                                    @foreach ($state as $key => $status)
+                                    <option value="{{$key}}"  <?php echo ($key == $companion->state) ? 'selected="selected"' : '' ?>>{{$status}}</option>
+                                    @endforeach
                                 </select>
                             </div>
                             <div class="col-sm-6">
                                 <label for="country" class="form-label">Country</label>
                                 <select class="form-select" name="country" value="{{ $companion->country ?? '' }}">
-                                    <option value="0" label="Please Choose " selected="selected"></option>
+                                    <optgroup id="country-optgroup-Americas" label="Americas">
+                                        @foreach ($americass as $key => $america)
+                                        <option value="{{$key}}" <?php echo ($key == $companion->country) ? 'selected="selected"' : '' ?> >{{$america}}</option>
+                                        @endforeach
+                                    </optgroup>
+                                    <optgroup id="country-optgroup-Asia" label="Asia">
+                                        @foreach ($asias as $key => $asia)
+                                        <option value="{{$key}}" <?php echo ($key == $companion->country) ? 'selected="selected"' : '' ?> >{{$asia}}</option>
+                                        @endforeach
+                                    </optgroup>
                                 </select>
                             </div>
                         </div>
@@ -434,13 +500,26 @@
                             <div class="col-sm-6">
                                 <label for="state" class="form-label">State*</label>
                                 <select class="form-select" name="stateE" value="{{ $companion->stateE ?? '' }}">
-                                    <option value="0" label="Please Choose " selected="selected"></option>
+                                    <?php $state = state() ?>
+                                    <option value="0" label="Please Choose"  ></option>
+                                    @foreach ($state as $key => $status)
+                                    <option value="{{$key}}"  <?php echo ($key == $companion->stateE) ? 'selected="selected"' : '' ?>>{{$status}}</option>
+                                    @endforeach
                                 </select>
                             </div>
                             <div class="col-sm-6">
                                 <label for="country" class="form-label">Country</label>
                                 <select class="form-select" name="countryE" value="{{ $companion->countryE ?? '' }}">
-                                    <option value="0" label="Please Choose " selected="selected"></option>
+                                    <optgroup id="country-optgroup-Americas" label="Americas">
+                                        @foreach ($americass as $key => $america)
+                                        <option value="{{$key}}" <?php echo ($key == $companion->countryE) ? 'selected="selected"' : '' ?> >{{$america}}</option>
+                                        @endforeach
+                                    </optgroup>
+                                    <optgroup id="country-optgroup-Asia" label="Asia">
+                                        @foreach ($asias as $key => $asia)
+                                        <option value="{{$key}}" <?php echo ($key == $companion->countryE) ? 'selected="selected"' : '' ?> >{{$asia}}</option>
+                                        @endforeach
+                                    </optgroup>
                                 </select>
                             </div>
                         </div>

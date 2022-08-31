@@ -101,9 +101,9 @@
                         </div>
                     </div>
                     <hr>
-                    <button type="button" class="btn btn-primary float-end" data-bs-toggle="modal" data-bs-target="#update-employment"">
+                    {{-- <button type="button" class="btn btn-primary float-end" data-bs-toggle="modal" data-bs-target="#update-employment"">
                         Update
-                    </button>
+                    </button> --}}
                 </div>
             </div>
         </div>

@@ -112,6 +112,22 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('/terminateEmployment', 'terminateEmployment');
             Route::get('/employeeInfoView', 'employeeInfoView');
             Route::get('/registerEmployee', 'registerEmployeeView');
+            Route::get('/editEmployee/{user_id}', 'editEmployeeView');
+            Route::post('/updateEmployeeProfile', 'updateEmployeeProfile');
+            Route::post('/updateEmployeeAddress', 'updateEmployeeAddress');
+            Route::post('/updateEmployeeEmergency', 'updateEmployeeEmergency');
+            Route::post('/addEmployeeCompanion', 'addEmployeeCompanion');
+            Route::post('/updateEmployeeCompanion', 'updateEmployeeCompanion');
+            Route::post('/updateEmployeeChildren', 'updateEmployeeChildren');
+            Route::post('/addEmployeeChildren', 'addEmployeeChildren');
+            Route::post('/addEmployeeSibling', 'addEmployeeSibling');
+            Route::post('/updateEmployeeSibling', 'updateEmployeeSibling');
+            Route::post('/addEmployeeParent', 'addEmployeeParent');
+            Route::post('/updateEmployeeParent', 'updateEmployeeParent');
+            Route::post('/updateEmployeeVehicle', 'updateVehicle');
+            Route::post('/addEmployeeVehicle', 'addVehicle');
+            Route::post('/addEmployment', 'addEmployment');
+            Route::post('/updateEmployee', 'updateEmployee');
 
         });
 

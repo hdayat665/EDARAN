@@ -40,7 +40,11 @@
                         <div class="col-sm-6">
                             <label for="expirydate" class="form-label">Relationship</label>
                             <select class="form-select" name="relationship" id="">
-                                <option value="0" label="Please Choose " selected="selected"></option>
+                                <?php $relationship = relationship() ?>
+                                <option value="0" label="Please Choose"  ></option>
+                                @foreach ($relationship as $key => $status)
+                                <option value="{{$key}}"> {{$status}}</option>
+                                @endforeach
                             </select>
                         </div>
                     </div>
@@ -72,22 +76,33 @@
                         </div>
                         <div class="col-sm-6">
                             <label for="city" class="form-label">City*</label>
-                            <select class="form-select" name="city" id="">
-                                <option value="0" label="Please Choose " selected="selected"></option>
-                            </select>
+                            <input type="text" class="form-select" name="city" id="">
                         </div>
                     </div>
                     <div class="row p-2">
                         <div class="col-sm-6">
                             <label for="state" class="form-label">State*</label>
                             <select class="form-select" id="" name="state">
-                                <option value="0" label="Please Choose " selected="selected"></option>
+                                <?php $state = state() ?>
+                                <option value="0" label="Please Choose"  ></option>
+                                @foreach ($state as $key => $status)
+                                <option value="{{$key}}"> {{$status}}</option>
+                                @endforeach
                             </select>
                         </div>
                         <div class="col-sm-6">
                             <label for="country" class="form-label">Country</label>
                             <select class="form-select" name="country" id="">
-                                <option value="0" label="Please Choose " selected="selected"></option>
+                                <optgroup id="country-optgroup-Americas" label="Americas">
+                                    @foreach ($americass as $key => $america)
+                                    <option value="{{$key}}" >{{$america}}</option>
+                                    @endforeach
+                                </optgroup>
+                                <optgroup id="country-optgroup-Asia" label="Asia">
+                                    @foreach ($asias as $key => $asia)
+                                    <option value="{{$key}}">{{$asia}}</option>
+                                    @endforeach
+                                </optgroup>
                             </select>
                         </div>
                     </div>

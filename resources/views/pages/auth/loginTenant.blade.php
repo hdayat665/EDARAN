@@ -32,14 +32,13 @@
                 </div>
 
                 <form id="loginForm" class="fs-13px">
-                    @csrf
                     <div class="form-floating mb-15px">
-                        <input type="text" name="username" class="form-control h-45px fs-13px" placeholder="Email Address" id="emailAddress" />
+                        <input type="text" name="username" class="form-control h-45px fs-13px" placeholder="Email Address" id="emailAddress" required/>
                         <input type="hidden" name="tenant" id="tenantInput" />
-                        <label for="emailAddress" class="d-flex align-items-center fs-13px text-gray-600">Email Address</label>
+                        <label for="email" class="d-flex align-items-center fs-13px text-gray-600">Email Address</label>
                     </div>
                     <div class="form-floating mb-15px">
-                        <input type="password" name="password" class="form-control h-45px fs-13px" placeholder="Password" id="password" />
+                        <input type="password" name="password" class="form-control h-45px fs-13px"  id="password" />
                         <label for="password" class="d-flex align-items-center fs-13px text-gray-600">Password</label>
                     </div>
                     <div class="form-check mb-30px">
@@ -48,10 +47,11 @@
                             Remember Me
                         </label>
                     </div>
+                    <div class="mb-15px">
+                        <button type="submit" id="login" class="btn btn-primary d-block h-45px w-100 btn-lg fs-14px">Log in</button>
+                    </div>
                 </form>
-                <div class="mb-15px">
-                    <button type="button" id="login" class="btn btn-primary d-block h-45px w-100 btn-lg fs-14px">Log in</button>
-                </div>
+
                 <div class="mb-40px pb-40px text-dark">
                     Not a member yet?
                     <br>

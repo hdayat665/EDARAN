@@ -26,6 +26,7 @@ $(document).ready(function() {
                     if (data.type == 'error') {
 
                     } else {
+                        location.reload();
                         // window.location.href = "/myProfile";
 
                     }
@@ -63,6 +64,7 @@ $(document).ready(function() {
                     if (data.type == 'error') {
 
                     } else {
+                        location.reload();
                         // window.location.href = "/dashboardTenant";
 
                     }
@@ -101,6 +103,7 @@ $(document).ready(function() {
 
                     } else {
                         // window.location.href = "/dashboardTenant";
+                        location.reload();
 
                     }
 
@@ -137,6 +140,7 @@ $(document).ready(function() {
                     if (data.type == 'error') {
 
                     } else {
+                        location.reload();
                         // window.location.href = "/dashboardTenant";
 
                     }
@@ -150,7 +154,7 @@ $(document).ready(function() {
 
     companion = ['1', '2', '3', '4'];
 
-    for (let i = 1; i < companion.length; i++) {
+    for (let i = 0; i < companion.length; i++) {
         const no = companion[i];
         $('#updateCompanion' + no).click(function(e) {
 
@@ -178,7 +182,7 @@ $(document).ready(function() {
                         if (data.type == 'error') {
 
                         } else {
-                            window.location.href = "/myProfile";
+                            location.reload();
 
                         }
 
@@ -295,7 +299,8 @@ $(document).ready(function() {
                 $('#id1').val(child.id);
                 $('#idNo1').val(child.idNo);
                 $('#instituition1').val(child.instituition);
-                $("#issuingCountry1").prop("selectedIndex", child.issuingCountry);
+                $("#issuingCountry1").val(child.issuingCountry);
+                // $("#issuingCountry1").prop("selectedIndex", child.issuingCountry);
                 $('#lastName1').val(child.lastName);
                 $("#maritalStatus1").prop("selectedIndex", child.maritalStatus);
                 if (child.nonCitizen == 'on') {
@@ -326,7 +331,8 @@ $(document).ready(function() {
                 $('#id').val(child.id);
                 $('#idNo').val(child.idNo);
                 $('#instituition').val(child.instituition);
-                $("#issuingCountry").prop("selectedIndex", child.issuingCountry);
+                $("#issuingCountry").val(child.issuingCountry);
+                // $("#issuingCountry").prop("selectedIndex", child.issuingCountry);
                 $('#lastName').val(child.lastName);
                 $("#maritalStatus").prop("selectedIndex", child.maritalStatus);
                 if (child.nonCitizen === 'on') {
@@ -390,6 +396,8 @@ $(document).ready(function() {
     });
 
     $('#siblingModalAdd').click(function(e) {
+        $('input').prop('disabled', false);
+        $('select').prop('disabled', false);
         $('#add-sibling').modal('show');
     });
 
@@ -473,6 +481,8 @@ $(document).ready(function() {
         const type = siblingIds[i];
         $('#siblingModalEdit' + type).click(function(e) {
             id = $(this).data('id');
+            $('input').prop('disabled', false);
+            $('select').prop('disabled', false);
             var SiblingData = getSibling(id);
 
             SiblingData.done(function(data) {
@@ -481,14 +491,17 @@ $(document).ready(function() {
                 $('#idSA').val(sibling.id);
                 $('#lastNameS').val(sibling.lastName);
                 $('#DOBS').val(sibling.DOB);
-                $("#genderS").prop("selectedIndex", sibling.gender);
+                $("#genderS").val(sibling.gender);
                 $('#contactNoS').val(sibling.contactNo);
                 $('#relationshipS').val(sibling.relationship);
                 $('#address2S').val(sibling.address2);
                 $('#address1S').val(sibling.address1);
                 $('#postcodeS').val(sibling.postcode);
-                $("#cityS").prop("selectedIndex", sibling.city);
-                $("#stateSA").prop("selectedIndex", sibling.state);
+                $("#cityS").val(sibling.city);
+                // $("#cityS").prop("selectedIndex", sibling.city);
+                $("#stateSA").val(sibling.state);
+                $('#countrySA').val(sibling.country);
+                // $("#stateSA").prop("selectedIndex", sibling.state);
                 var select = document.getElementById('countrySA');
 
                 const options = Array.from(select.options);
@@ -512,15 +525,18 @@ $(document).ready(function() {
                 $('#firstNameS1').val(sibling.firstName);
                 $('#lastNameS1').val(sibling.lastName);
                 $('#DOBS1').val(sibling.DOB);
-                $("#genderS1").prop("selectedIndex", sibling.gender);
+                $("#genderS1").val(sibling.gender);
                 $('#relationshipS1').val(sibling.relationship);
                 $('#contactNoS1').val(sibling.contactNo);
                 $('#address2S1').val(sibling.address2);
                 $('#address1S1').val(sibling.address1);
                 $('#postcodeS1').val(sibling.postcode);
-                $("#cityS1").prop("selectedIndex", sibling.city);
-                $("#stateS1").prop("selectedIndex", sibling.state);
-                $('#countryS1').prop("selectedIndex", sibling.country);
+                $("#cityS1").val(sibling.city);
+                // $("#cityS1").prop("selectedIndex", sibling.city);
+                $("#stateS1").val(sibling.state);
+                // $("#stateS1").prop("selectedIndex", sibling.state);
+                $('#countryS1').val(sibling.country);
+                // $('#countryS1').prop("selectedIndex", sibling.country);
                 var select = document.getElementById('countryS1');
 
                 const options = Array.from(select.options);
@@ -583,7 +599,8 @@ $(document).ready(function() {
     });
 
     $('#parentModalAdd').click(function(e) {
-        // alert('ss');
+        $('input').prop('disabled', false);
+        $('select').prop('disabled', false);
         $('#add-parent').modal('show');
     });
 
@@ -666,7 +683,8 @@ $(document).ready(function() {
 
         const type = parentIds[i];
         $('#parentModalEdit' + type).click(function(e) {
-
+            $('input').prop('disabled', false);
+            $('select').prop('disabled', false);
             id = $(this).data('id');
             var ParentData = getParent(id);
 
@@ -677,14 +695,15 @@ $(document).ready(function() {
                 $('#idP').val(parent.id);
                 $('#address2P1').val(parent.address2);
                 $('#address1P1').val(parent.address1);
-                $("#cityP1").prop("selectedIndex", parent.city);
-                $("#stateP1").prop("selectedIndex", parent.state);
-                $('#countryP1').prop("selectedIndex", parent.country);
+                $("#cityP1").val(parent.city);
+                $("#stateP1").val(parent.state);
+                $('#countryP1').val(parent.country);
                 $('#contactNoP1').val(parent.contactNo);
+                $('#genderP1').val(parent.gender);
                 $('#firstNames1').val(parent.firstName);
                 $("#postcodeP1").val(parent.postcode);
                 $('#lastNameP1').val(parent.lastName);
-                $("#relationshipP1").prop("selectedIndex", parent.relationship);
+                $("#relationshipP1").val(parent.relationship);
                 if (parent.nonCitizen == 'on') {
                     $('#nonCitizenP1').prop('checked', true);
                 }
@@ -705,14 +724,15 @@ $(document).ready(function() {
                 $('#DOBP').val(parent.DOB);
                 $('#address1P').val(parent.address1);
                 $('#address2P').val(parent.address2);
-                $("#cityP").prop("selectedIndex", parent.city);
-                $("#stateP").prop("selectedIndex", parent.state);
+                $("#cityP").val(parent.city);
+                $("#stateP").val(parent.state);
                 $('#contactNoP').val(parent.contactNo);
                 $('#firstNameP').val(parent.firstName);
-                $('#countryP').prop("selectedIndex", parent.country);
+                $('#genderP').val(parent.gender);
+                $('#countryP').val(parent.country);
                 $("#postcodeP").val(parent.postcode);
                 $('#lastNameP').val(parent.lastName);
-                $("#relationshipP").prop("selectedIndex", parent.relationship);
+                $("#relationshipP").val(parent.relationship);
                 if (parent.nonCitizen == 'on') {
                     $('#nonCitizenP').prop('checked', true);
                 }

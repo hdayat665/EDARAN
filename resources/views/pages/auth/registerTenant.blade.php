@@ -51,11 +51,11 @@
                         <input type="hidden" name="package" value="{{$package}}" />
                         <label for="password" class="d-flex align-items-center fs-13px text-gray-600">Confirm Password</label>
                     </div>
+                    <div class="mb-15px" style="display:flex;">
+                        <a href="/selectPackage" class="btn btn-info d-block h-45px w-100 btn-lg fs-14px m-2">Back</a>
+                        <button type="submit" id="register" class="btn btn-primary d-block h-45px w-100 btn-lg fs-14px m-2">Submit</button>
+                    </div>
                 </form>
-                <div class="mb-15px" style="display:flex;">
-                    <a href="/selectPackage" class="btn btn-info d-block h-45px w-100 btn-lg fs-14px m-2">Back</a>
-                    <a id="register" class="btn btn-primary d-block h-45px w-100 btn-lg fs-14px m-2">Submit</a>
-                </div>
 
                 <div class="text-gray-600 text-center  mb-0">
                     &copy; OrbitHRM

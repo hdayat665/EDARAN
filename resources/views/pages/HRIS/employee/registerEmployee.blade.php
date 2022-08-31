@@ -1,6 +1,6 @@
 @extends('layouts.dashboardTenant')
 
-$@section('content')
+@section('content')
 <div id="content" class="app-content">
     <!-- BEGIN breadcrumb -->
     <!-- BEGIN breadcrumb -->
@@ -37,13 +37,13 @@ $@section('content')
             <!-- BEGIN tab-content -->
             <div class="tab-content panel m-0 rounded-0 p-3">
                 <!-- BEGIN tab-pane -->
-                @include('pages.HRIS.employeeProfileForm')
+                @include('pages.HRIS.employee.employeeProfileForm')
                         <!-- END tab-pane -->
                         <!-- BEGIN tab-pane -->
-                @include('pages.HRIS.addressDetailForm')
+                @include('pages.HRIS.employee.addressDetailForm')
                         <!-- END tab-pane -->
                         <!-- BEGIN tab-pane -->
-                @include('pages.HRIS.employementDetailForm')
+                @include('pages.HRIS.employee.employementDetailForm')
             </div>
             <!-- END tab-pane -->
         </div>

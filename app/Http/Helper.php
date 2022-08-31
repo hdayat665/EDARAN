@@ -4,6 +4,7 @@ use App\Models\Branch;
 use App\Models\Company;
 use App\Models\Department;
 use App\Models\Designation;
+use App\Models\EmploymentType;
 use App\Models\JobGrade;
 use App\Models\Unit;
 
@@ -122,7 +123,7 @@ if (!function_exists('educationType')) {
         $data = [
             '1' => 'primary school (year 6-12)',
             '2' => 'lower secondary school (form 1-3)',
-            '3)' => 'upper secondary school (form 4 & 5)',
+            '3' => 'upper secondary school (form 4 & 5)',
             '4' => 'pre-university (STMP / STAM)',
             '5' => 'matriculation/foundation ',
             '6' => 'higher education Diploma/ Bachelor Degree/ Master Degree/ Doctoral Degree',
@@ -136,8 +137,8 @@ if (!function_exists('relationship')) {
     function relationship()
     {
         $data = [
-            '1' => 'r1',
-            '2' => 'r2',
+            '1' => 'Brother',
+            '2' => 'Sister',
         ];
 
         return $data;
@@ -156,8 +157,8 @@ if (!function_exists('city')) {
     }
 }
 
-if (!function_exists('state')) {
-    function state()
+if (!function_exists('state1')) {
+    function state1()
     {
         $data = [
             '1' => 'state1',
@@ -382,12 +383,7 @@ if (!function_exists('getDesignation')) {
 if (!function_exists('getEmploymentType')) {
     function getEmploymentType()
     {
-        // $data = EmploymentType::all();
-        $data = [
-            '1' => ['EmploymentTypeName'=>'type1', 'id'=>'1'],
-            '2' => ['EmploymentTypeName'=>'type1', 'id'=>'1'],
-        ];
-
+        $data = EmploymentType::all();
 
         return $data;
     }
@@ -412,6 +408,61 @@ if (!function_exists('getVehicle')) {
         $data = [
             '1' => 'Car',
             '2' => 'Motorcycle',
+        ];
+
+        return $data;
+    }
+}
+
+
+if (!function_exists('religion')) {
+    function religion()
+    {
+        $data = [
+            'Islam' => 'Islam',
+            'Buddhist' => 'Buddhist',
+            'Christian' => 'Christian',
+            'Hindu' => 'Hindu',
+            'Others' => 'Others',
+        ];
+
+        return $data;
+    }
+}
+
+if (!function_exists('race')) {
+    function race()
+    {
+        $data = [
+            'Malay' => 'Malay',
+            'Chinese' => 'Chinese',
+            'Indian' => 'Indian',
+            'Others' => 'Others',
+        ];
+
+        return $data;
+    }
+}
+
+if (!function_exists('state')) {
+    function state()
+    {
+        $data = [
+            'Johor' => 'Johor',
+            'Kedah' => 'Kedah',
+            'Kelantan' => 'Kelantan',
+            'Negeri Sembilan' => 'Negeri Sembilan',
+            'Pahang' => 'Pahang',
+            'Penang' => 'Penang',
+            'Perak' => 'Perak',
+            'Perlis' => 'Perlis',
+            'Sabah' => 'Sabah',
+            'Sarawak' => 'Sarawak',
+            'Selangor' => 'Selangor',
+            'Terengganu' => 'Terengganu',
+            'Kuala Lumpur' => 'Kuala Lumpur',
+            'Labuan' => 'Labuan',
+            'Putrajaya' => 'Putrajaya'
         ];
 
         return $data;

@@ -34,7 +34,7 @@
                         <td>
                             <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle"><i class="fa fa-cogs"></i> Actions <i class="fa fa-caret-down"></i></a>
                             <div class="dropdown-menu">
-                                <a href="javascript:;" class="dropdown-item">Edit Employee </a>
+                                <a href="/editEmployee/{{$employeeInfo->user_id}}" class="dropdown-item">Edit Employee </a>
                                 <div class="dropdown-divider"></div>
                                 <a href="register_v3.html" data-bs-toggle="modal" id="terminate" data-id="{{$employeeInfo->user_id}}" class="dropdown-item"> Terminate Employee</a>
                             </div>
@@ -52,6 +52,6 @@
                 </tbody>
             </table>
         </div>
-        @include('pages.HRIS.terminateEmployee')
+        @include('pages.HRIS.employee.terminateEmployee')
     </div>
 @endsection

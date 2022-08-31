@@ -3,6 +3,9 @@
 namespace App\Service;
 
 use App\Models\Subscription;
+use App\Models\UserAddress;
+use App\Models\UserEmergency;
+use App\Models\UserProfile;
 use App\Models\Users;
 use App\Models\UsersDetails;
 use Illuminate\Support\Facades\Hash;
@@ -48,6 +51,11 @@ class RegisterService
 
         $user = Users::where([['username', '=', $r['username']]])
         ->first()->toArray();
+
+        $userProfile['user_id'] = $user['id'];
+        UserProfile::create($userProfile);
+        UserAddress::create($userProfile);
+        UserEmergency::create($userProfile);
 
         // remove confirm_password element
         // unset($r['confirm_password']);
