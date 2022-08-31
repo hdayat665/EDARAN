@@ -103,10 +103,10 @@
                             <label>Unit Name</label>
                             <select class="form-select" name="unitId">
                                 <option value="0" label="Select State " selected="selected">Select Unit </option>
-                                <option value="1" label="Application Unit">Application Unit</option>
-                                <option value="2" label="Maintenance Unit">Maintenance Unit</option>
-                                <option value="3" label="Offshore Unit">Offshore Unit</option>
-
+                                <?php $units = getUnit() ?>
+                                @foreach ($units as $unit)
+                                <option value="{{$unit->id}}" >{{$unit->unitName}}</option>
+                                @endforeach
                             </select>
                         </div>
                         <div class="mb-2">
@@ -192,10 +192,11 @@
                         <div class="mb-2">
                             <label>Unit Name</label>
                             <select class="form-select" name="unitId" id="unitId">
-                                <option value="0" label="Select State " selected="selected">Select Unit </option>
-                                <option value="1" label="Application Unit">Application Unit</option>
-                                <option value="2" label="Maintenance Unit">Maintenance Unit</option>
-                                <option value="3" label="Offshore Unit">Offshore Unit</option>
+                                <option value="0" label="Select State ">Select Unit </option>
+                                <?php $units = getUnit() ?>
+                                @foreach ($units as $unit)
+                                <option value="{{$unit->id}}" >{{$unit->unitName}}</option>
+                                @endforeach
 
                             </select>
                         </div>
