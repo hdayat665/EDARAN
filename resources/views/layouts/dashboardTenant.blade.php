@@ -144,34 +144,41 @@
                     <!-- Sidenav Content Orbit -->
 
                     <div class="menu-item has-sub mt-3">
-                        <a href="javascript:;" class="menu-link">
+                        <a href="/dashboardTenant" class="menu-link">
                             <div class="menu-icon">
                                 <i class="fa fa-clipboard-list text-gray"></i>
                             </div>
                             <div class="menu-text text-gray">Dashboard</div>
-
-                        </div>
+                        </a>
+                    </div>
 
                         <!-- End Sidenav Content Orbit -->
 
                         <!-- Sidenav Content Orbit -->
 
                         <div class="menu-item has-sub">
-
+                        <a href="javascript:;" class="menu-link">
                             <div class="menu-icon">
                                 <i class="fa fa-commenting text-gray"></i>
                             </div>
                             <div class="menu-text text-gray">HRIS</div>
                             <div class="menu-caret text-gray"></div>
-                        </a>
+                        
+                        
                         <div class="menu-submenu">
                             <div class="menu-item">
                                 <a href="/myProfile" class="menu-link">
-                                    <div class="menu-text text-gray">My Profile </div>
+                                    <div class="menu-icon">
+										<i class="fa fa-address-card text-gray"></i>
+									</div>
+                                    <div class="menu-text text-gray"> My Profile </div>
                                 </a>
                             </div>
                             <div class="menu-item">
                                 <a href="/employeeInfoView" class="menu-link">
+                                    <div class="menu-icon">
+										<i class="fa fa-indent text-gray"></i>
+									</div>
                                     <div class="menu-text text-gray">Employee Information</div>
                                 </a>
                             </div>
@@ -193,16 +200,25 @@
                         <div class="menu-submenu">
                             <div class="menu-item">
                                 <a href="ui_general.html" class="menu-link">
+                                    <div class="menu-icon">
+										<i class="fa fa-calendar-check text-gray"></i>
+									</div>
                                     <div class="menu-text text-gray">My Timesheets</div>
                                 </a>
                             </div>
                             <div class="menu-item">
                                 <a href="#" class="menu-link">
+                                    <div class="menu-icon">
+										<i class="fa fa-receipt text-gray"></i>
+									</div>
                                     <div class="menu-text text-gray">Timesheets Report</div>
                                 </a>
                             </div>
                             <div class="menu-item">
                                 <a href="#" class="menu-link">
+                                    <div class="menu-icon">
+										<i class="fa fa-receipt text-gray"></i>
+									</div>
                                     <div class="menu-text text-gray">Realtime Activities</div>
                                 </a>
                             </div>
@@ -224,11 +240,17 @@
                         <div class="menu-submenu">
                             <div class="menu-item">
                                 <a href="#" class="menu-link">
+                                    <div class="menu-icon">
+										<i class="fa fa-bell text-gray"></i>
+									</div>
                                     <div class="menu-text text-gray">My Attendance</div>
                                 </a>
                             </div>
                             <div class="menu-item">
                                 <a href="#" class="menu-link">
+                                    <div class="menu-icon">
+										<i class="fa fa-list-check text-gray"></i>
+									</div>
                                     <div class="menu-text text-gray">Attendance Information</div>
                                 </a>
                             </div>
@@ -250,11 +272,17 @@
                         <div class="menu-submenu">
                             <div class="menu-item">
                                 <a href="#" class="menu-link">
+                                    <div class="menu-icon">
+										<i class="fa fa-clipboard text-gray"></i>
+									</div>
                                     <div class="menu-text text-gray">My Leave</div>
                                 </a>
                             </div>
                             <div class="menu-item">
                                 <a href="#" class="menu-link">
+                                    <div class="menu-icon">
+										<i class="fa fa-list-check text-gray"></i>
+									</div>
                                     <div class="menu-text text-gray">Leave Approval</div>
                                 </a>
                             </div>
@@ -276,27 +304,70 @@
                         <div class="menu-submenu">
                             <div class="menu-item">
                                 <a href="#" class="menu-link">
+                                <div class="menu-icon">
+								    <i class="fa fa-share-nodes text-gray"></i>
+							    </div>
                                     <div class="menu-text text-gray">Customer</i></div>
                                 </a>
                             </div>
                             <div class="menu-item">
                                 <a href="#" class="menu-link">
+                                <div class="menu-icon">
+								    <i class="fa fa-book text-gray"></i>
+							    </div>
                                     <div class="menu-text text-gray">Project Information</div>
                                 </a>
                             </div>
                             <div class="menu-item">
                                 <a href="#" class="menu-link">
+                                <div class="menu-icon">
+								    <i class="fa fa-clipboard-list text-gray"></i>
+							    </div>
                                     <div class="menu-text text-gray">My Project</div>
                                 </a>
                             </div>
                             <div class="menu-item">
                                 <a href="#" class="menu-link">
+                                <div class="menu-icon">
+								    <i class="fa fa-code-pull-request text-gray"></i>
+							    </div>
                                     <div class="menu-text text-gray">Project Request</div>
                                 </a>
                             </div>
 
                         </div>
                     </div>
+                    <!-- End Sidenav Content Orbit -->
+                    <!-- Sidenav Content Orbit -->
+
+                    <div class="menu-item has-sub">
+						<a href="#" class="menu-link">
+							<div class="menu-icon">
+								<i class="fa fa-file-lines text-gray"></i>
+							</div>
+							<div class="menu-text text-gray">E-Claim</div> 
+							<div class="menu-caret text-gray"></div>
+						</a>
+						<div class="menu-submenu">
+							<div class="menu-item">
+								<a href="#" class="menu-link">
+								<div class="menu-icon">
+										<i class="fa fa-envelope-open-text text-gray"></i>
+									</div>
+									<div class="menu-text text-gray">My Claim</div>
+								</a>
+							</div>
+							<div class="menu-item">
+								<a href="#" class="menu-link">
+								<div class="menu-icon">
+										<i class="fa fa-list-check text-gray"></i>
+									</div>
+									<div class="menu-text text-gray">Claim Approval</div>
+								</a>
+							</div>
+							
+						</div>
+					</div>
 
                     <!-- End Sidenav Content Orbit -->
                     <!-- Sidenav Content Orbit -->
@@ -313,16 +384,25 @@
                             <div class="menu-submenu">
                                 <div class="menu-item">
                                     <a href="/phoneDirectory" class="menu-link">
+                                    <div class="menu-icon">
+								        <i class="fa fa-rectangle-list text-gray"></i>
+							        </div>
                                         <div class="menu-text text-gray">Phone Directory</i></div>
                                     </a>
                                 </div>
                                 <div class="menu-item">
                                     <a href="/organizationChart" class="menu-link">
+                                    <div class="menu-icon">
+								        <i class="fa fa-rectangle-list text-gray"></i>
+							        </div>
                                         <div class="menu-text text-gray">Organization Chart</div>
                                     </a>
                                 </div>
                                 <div class="menu-item">
                                     <a href="/departmentTree" class="menu-link">
+                                    <div class="menu-icon">
+								        <i class="fa fa-folder-tree text-gray"></i>
+							        </div>
                                         <div class="menu-text text-gray">Department Tree</div>
                                     </a>
                                 </div>
@@ -344,15 +424,45 @@
                         <div class="menu-submenu">
                             <div class="menu-item">
                                 <a href="#" class="menu-link">
+                                <div class="menu-icon">
+							    	<i class="fa fa-file-signature text-gray"></i>
+							    </div>
                                     <div class="menu-text text-gray">Timesheet</i></div>
                                 </a>
                             </div>
                             <div class="menu-item">
                                 <a href="#" class="menu-link">
+                                <div class="menu-icon">
+								    <i class="fa fa-user-check text-gray"></i>
+							    </div>
                                     <div class="menu-text text-gray">E-Attendance</div>
                                 </a>
                             </div>
+                            <div class="menu-item">
+								<a href="#" class="menu-link">
+								<div class="menu-icon">
+								<i class="fa fa-user-minus text-gray"></i>
+							</div>
+									<div class="menu-text text-gray">E-Leave</div>
+								</a>
+							</div>
 
+                            <div class="menu-item">
+								<a href="#" class="menu-link">
+								<div class="menu-icon">
+								<i class="fa fa-keyboard text-gray"></i>
+							</div>
+									<div class="menu-text text-gray">Project</div>
+								</a>
+							</div>
+                            <div class="menu-item">
+								<a href="#" class="menu-link">
+								<div class="menu-icon">
+								<i class="fa fa-money-check text-gray"></i>
+							</div>
+									<div class="menu-text text-gray">Claim</div>
+								</a>
+							</div>
                         </div>
                     </div>
 
