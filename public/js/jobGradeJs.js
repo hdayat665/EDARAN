@@ -28,7 +28,7 @@ $(document).ready(function() {
 
     });
 
-    $('#deleteButton').click(function(e) {
+    $(document).on("click", "#deleteButton", function() {
         id = $(this).data('id');
         requirejs(['sweetAlert2'], function(swal) {
             swal({

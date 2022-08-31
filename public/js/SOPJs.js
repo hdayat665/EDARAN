@@ -30,7 +30,7 @@ $(document).ready(function() {
 
     });
 
-    $('#deleteButton1').click(function(e) {
+    $(document).on("click", "#deleteButton1", function() {
         id = $(this).data('id');
         requirejs(['sweetAlert2'], function(swal) {
             swal({
@@ -165,7 +165,7 @@ $(document).ready(function() {
 
     });
 
-    $('#deleteButton2').click(function(e) {
+    $(document).on("click", "#deleteButton2", function() {
         id = $(this).data('id');
         requirejs(['sweetAlert2'], function(swal) {
             swal({
