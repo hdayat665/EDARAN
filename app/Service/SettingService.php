@@ -788,7 +788,7 @@ class SettingService
     public function branchView()
     {
         $data['branchs'] = DB::table('branch as a')
-            ->join('unit as b', 'a.unitId', '=', 'b.id')
+            ->leftJoin('unit as b', 'a.unitId', '=', 'b.id')
             ->select('a.*', 'b.unitName')
             ->get();
 
@@ -798,7 +798,7 @@ class SettingService
     public function unitView()
     {
         $data['units'] = DB::table('unit as a')
-            ->join('department as b', 'a.departmentId', '=', 'b.id')
+            ->leftJoin('department as b', 'a.departmentId', '=', 'b.id')
             ->select('a.*', 'b.departmentCode', 'b.departmentName')
             ->get();
 
@@ -808,7 +808,7 @@ class SettingService
     public function departmentView()
     {
         $data['departments'] = DB::table('department as a')
-            ->join('company as b', 'a.companyId', '=', 'b.id')
+            ->leftJoin('company as b', 'a.companyId', '=', 'b.id')
             ->select('a.*', 'b.companyName', 'b.companyCode')
             ->get();
 
