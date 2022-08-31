@@ -76,12 +76,8 @@
                         </div>
                         <div class="col-sm-6">
                             <label for="city" class="form-label">City*</label>
-                            <select class="form-select" name="city" id="cityS">
-                                <option value="0" label="Please Choose "  ></option>
-                                @foreach ($citys as $key => $city)
-                                <option value="{{$key}}"  >{{$city}}</option>
-                                @endforeach
-                            </select>
+                            <input class="form-control" name="city" id="cityS">
+
                         </div>
                     </div>
                     <div class="row p-2">

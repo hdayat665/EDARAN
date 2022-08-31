@@ -40,6 +40,7 @@ class UserProfile extends Authenticatable
         'phoneNo',
         'homeNo',
         'extensionNo',
+        'tenant_id',
         'personalEmail',
     ];
 }

@@ -5,7 +5,7 @@
         <div class="row mb-15px">
             <label class="form-label col-form-label col-md-1">Employee ID*</label>
             <div class="col-md-5">
-                <input type="text" name="employee_id" class="form-control mb-10px" placeholder="Employee ID" required/>
+                <input type="text" name="employee_id" id="empId" class="form-control mb-10px" placeholder="Employee ID" required/>
 
             </div>
             <label class="form-label col-form-label col-md-1">Username*</label>
@@ -30,7 +30,7 @@
         <div class="row mb-5px">
             <label class="form-label col-form-label col-md-1">Full Name*</label>
             <div class="col-md-5">
-                <input type="text" name="fullName" class="form-control mb-10px" placeholder="Full Name" required/>
+                <input type="text" name="fullName" id="fullName" class="form-control mb-10px" placeholder="Full Name" required/>
 
             </div>
 
@@ -314,7 +314,7 @@
             </div>
             <label class="form-label col-form-label col-md-1">Personal Email*</label>
             <div class="col-md-5">
-                <input type="email" name="personalEmail" class="form-control mb-5px" placeholder="Personal Email" required/>
+                <input type="email" name="personalEmail" id="personalEmail" class="form-control mb-5px" placeholder="Personal Email" required/>
 
             </div>
         </div>

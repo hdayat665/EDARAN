@@ -27,7 +27,6 @@
                 </div>
 
                 <form id="loginHostForm" class="fs-13px">
-                    @csrf
                     <div class="form-floating mb-15px">
                         <input type="text" name="username" class="form-control h-45px fs-13px" placeholder="Email Address" id="emailAddress" />
                         <input type="hidden" name="type" value="host" />
@@ -43,11 +42,10 @@
                             Remember Me
                         </label>
                     </div>
+                    <div class="mb-15px">
+                        <button id="loginHost" type="submit" class="btn btn-primary d-block h-45px w-100 btn-lg fs-14px">Log in</button>
+                    </div>
                 </form>
-
-                <div class="mb-15px">
-                    <button id="loginHost" class="btn btn-primary d-block h-45px w-100 btn-lg fs-14px">Log in</button>
-                </div>
                 <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal2" class="text-primary"> Forgot Password</a>
 
                 <hr class="bg-gray-600 opacity-2" />

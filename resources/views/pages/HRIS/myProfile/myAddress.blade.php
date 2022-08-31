@@ -19,22 +19,37 @@
             </div>
             <div class="col-sm-6">
                 <label for="city" class="form-label">City*</label>
-                <select class="form-select" name="city" value="{{ $address->city ?? '' }}">
-                    <option value="0" label="Please Choose " selected="selected"></option>
-                </select>
+                <input type="text" class="form-control" name="city" value="{{ $address->city ?? '' }}">
             </div>
         </div>
         <div class="row p-2">
             <div class="col-sm-6">
                 <label for="state" class="form-label">State*</label>
                 <select class="form-select" name="state" value="{{ $address->state ?? '' }}">
-                    <option value="0" label="Please Choose " selected="selected"></option>
+                    <?php $state = state() ?>
+                    <option value="0" label="Please Choose"  ></option>
+                    @foreach ($state as $key => $status)
+                    <option value="{{$key}}"  <?php echo ($key == $address->state) ? 'selected="selected"' : '' ?>>{{$status}}</option>
+                    @endforeach
                 </select>
             </div>
             <div class="col-sm-6">
                 <label for="country" class="form-label">Country</label>
                 <select class="form-select" name="country" value="{{ $address->country ?? '' }}">
-                    <option value="0" label="Please Choose " selected="selected"></option>
+                    <?php
+                    $americass = americas();
+                    $asias = asias();
+                    ?>
+                    <optgroup id="country-optgroup-Americas" label="Americas">
+                        @foreach ($americass as $key => $america)
+                        <option value="{{$key}}" <?php echo ($key == $address->country) ? 'selected="selected"' : '' ?> >{{$america}}</option>
+                        @endforeach
+                    </optgroup>
+                    <optgroup id="country-optgroup-Asia" label="Asia">
+                        @foreach ($asias as $key => $asia)
+                        <option value="{{$key}}" <?php echo ($key == $address->country) ? 'selected="selected"' : '' ?> >{{$asia}}</option>
+                        @endforeach
+                    </optgroup>
                 </select>
             </div>
         </div>
@@ -67,22 +82,37 @@
             </div>
             <div class="col-sm-6">
                 <label for="city" class="form-label">City*</label>
-                <select class="form-select" name="cityc" value="{{ $address->cityc ?? '' }}">
-                    <option value="0" label="Please Choose " selected="selected"></option>
-                </select>
+                <input type="text" class="form-control" name="cityc" value="{{ $address->cityc ?? '' }}">
             </div>
         </div>
         <div class="row p-2">
             <div class="col-sm-6">
                 <label for="state" class="form-label">State*</label>
                 <select class="form-select" name="statec" value="{{ $address->statec ?? '' }}">
-                    <option value="0" label="Please Choose " selected="selected"></option>
+                    <?php $state = state() ?>
+                    <option value="0" label="Please Choose"  ></option>
+                    @foreach ($state as $key => $status)
+                    <option value="{{$key}}"  <?php echo ($key == $address->statec) ? 'selected="selected"' : '' ?>>{{$status}}</option>
+                    @endforeach
                 </select>
             </div>
             <div class="col-sm-6">
                 <label for="country" class="form-label">Country</label>
                 <select class="form-select" name="countryc" value="{{ $address->countryc ?? '' }}">
-                    <option value="0" label="Please Choose " selected="selected"></option>
+                    <?php
+                    $americass = americas();
+                    $asias = asias();
+                    ?>
+                    <optgroup id="country-optgroup-Americas" label="Americas">
+                        @foreach ($americass as $key => $america)
+                        <option value="{{$key}}" <?php echo ($key == $address->countryc) ? 'selected="selected"' : '' ?> >{{$america}}</option>
+                        @endforeach
+                    </optgroup>
+                    <optgroup id="country-optgroup-Asia" label="Asia">
+                        @foreach ($asias as $key => $asia)
+                        <option value="{{$key}}" <?php echo ($key == $address->countryc) ? 'selected="selected"' : '' ?> >{{$asia}}</option>
+                        @endforeach
+                    </optgroup>
                 </select>
             </div>
         </div>

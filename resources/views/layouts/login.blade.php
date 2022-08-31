@@ -13,6 +13,13 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400&display=swap" rel="stylesheet">	<link href="{{env('ASSETS_URL')}}/css/vendor.min.css" rel="stylesheet" />
     <link href="{{env('ASSETS_URL')}}/css/default/app.min.css" rel="stylesheet" />
+    <style>
+        .error{
+            /* margin-top:2.4rem !important; */
+            color: red !important;
+            text-align: left !important;
+        }
+    </style>
     <!-- ================== END core-css ================== -->
 </head>
 <body class='pace-top'>
@@ -35,6 +42,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/latest/js.cookie.js" integrity="sha512-Xs74m0wxSrwMFibw3X6ttPnIO4E+J311Tae0hXyi29lK4hNRNQ+ySm9iI5dt1zPcr7DxtWu8OuRTgFy6s9Eijw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.0/js/bootstrap.min.js" integrity="sha512-8Y8eGK92dzouwpROIppwr+0kPauu0qqtnzZZNEF8Pat5tuRNJxJXCkbQfJ0HlUG3y1HB3z18CSKmUo7i2zcPpg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js" integrity="sha512-rstIgDs0xPgmG6RX1Aba4KV5cWJbAMcvRCVmglpam9SoHZiUCyQVDdH2LPlxoHtrv17XWblE/V/PP+Tr04hbtA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script type="text/javascript">
 
         var require = {

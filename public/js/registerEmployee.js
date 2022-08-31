@@ -26,7 +26,9 @@ $(document).ready(function() {
         requirejs(['sweetAlert2'], function(swal) {
 
             var data = new FormData(document.getElementById("profileForm"));
-
+            var emplId = $("#empId").val()
+            var employeeName = $("#fullName").val()
+            var employeeEmail = $("#personalEmail").val()
             $.ajax({
                 type: "POST",
                 url: "/addProfile",
@@ -49,6 +51,9 @@ $(document).ready(function() {
                     } else {
                         // window.location.href = "/dashboardTenant";
                         $('#user_id').val(data.data.user_id);
+                        $('#employeeId').val(emplId);
+                        $('#employeeName').val(employeeName);
+                        $('#employeeEmail').val(employeeEmail);
                         $('#user_id1').val(data.data.user_id);
 
                     }
@@ -125,7 +130,7 @@ $(document).ready(function() {
                     if (data.type == 'error') {
 
                     } else {
-                        // window.location.href = "/dashboardTenant";
+                        window.location.href = "/employeeInfoView";
                         // $('#user_id').val(data.data.user_id);
                         // $('#user_id1').val(data.data.user_id);
 
