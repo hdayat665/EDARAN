@@ -13,7 +13,7 @@
     <div class="col-sm-6" style="display: flex; justify-content: center; align-items: center; height: 100vh;">
         <div class="mx-auto" style="width: 30rem;">
             <div class="text-center">
-                <img src="{{env('ASSETS_URL')}}/img/orbit/orbithrm-logo.png"  width="500rem" alt="Orbit" class="img-fluid">
+                <img src="{{env('ASSETS_URL')}}/img/orbit/orbithrm-logo1.png"  width="500rem" alt="Orbit" class="img-fluid">
             </div>
             <h5 class="text-primary text-center">
                 Streamline and automate HR processes with OrbitHRM
