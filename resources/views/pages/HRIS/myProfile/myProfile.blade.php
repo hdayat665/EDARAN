@@ -95,7 +95,7 @@
                                     </div>
                                     <div class="col-sm-6">
                                         <label for="lastname" class="form-label">Identification Number*</label>
-                                        <input type="text" value="{{$profile->idNo ?? ''}}" name="idNo" id="lastname" class="form-control" aria-describedby="lastname">
+                                        <input type="text" value="{{$profile->idNo ?? ''}}" name="idNo" id="lastname" class="form-control" aria-describedby="lastname" >
                                     </div>
                                 </div>
                             </div>
