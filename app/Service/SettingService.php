@@ -488,6 +488,16 @@ class SettingService
     {
         $input = $r->input();
         $user = Auth::user();
+
+        if ($_FILES['file']['name']) {
+            $payslip = upload($r->file('file'));
+            $input['file'] = $payslip['filename'];
+
+            if (!$input['file']) {
+                unset($input['file']);
+            }
+        }
+
         $input['addedBy'] = $user->username;
         SOP::create($input);
 
@@ -503,6 +513,16 @@ class SettingService
     {
         $input = $r->input();
         $user = Auth::user();
+
+        if ($_FILES['file']['name']) {
+            $payslip = upload($r->file('file'));
+            $input['file'] = $payslip['filename'];
+
+            if (!$input['file']) {
+                unset($input['file']);
+            }
+        }
+
         $input['modifiedBy'] = $user->username;
         SOP::where('id', $id)->update($input);
 

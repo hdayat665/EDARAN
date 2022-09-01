@@ -73,7 +73,7 @@ $(document).ready(function() {
     }
 
 
-    $('#saveButton1').click(function(e) {
+    $(document).on("click", "#saveButton1", function() {
         requirejs(['sweetAlert2'], function(swal) {
 
             var data = new FormData(document.getElementById("addForm1"));
@@ -108,7 +108,7 @@ $(document).ready(function() {
         });
     });
 
-    $('#updateButton1').click(function(e) {
+    $(document).on("click", "#updateButton1", function() {
         requirejs(['sweetAlert2'], function(swal) {
 
             var data = new FormData(document.getElementById("editForm1"));
@@ -156,8 +156,8 @@ $(document).ready(function() {
 
         vehicleData.done(function(data) {
             console.log(data);
-            $('#SOPName').val(data.SOPName);
-            $('#desc').val(data.desc);
+            $('#SOPCode').val(data.SOPCode);
+            $('#descr').val(data.desc);
             $('#SOPName').val(data.SOPName);
             $('#idS').val(data.id);
         })
@@ -243,7 +243,7 @@ $(document).ready(function() {
         });
     });
 
-    $('#updateButton2').click(function(e) {
+    $(document).on("click", "#updateButton2", function() {
         requirejs(['sweetAlert2'], function(swal) {
 
             var data = new FormData(document.getElementById("editForm2"));

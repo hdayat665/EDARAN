@@ -16,6 +16,7 @@ use App\Models\UsersDetails;
 use App\Models\UserSibling;
 use App\Models\Vehicle;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 
@@ -591,7 +592,12 @@ class ProfileService
         $data['employment'] = Employee::where('user_id', $data['user_id'])->first();
         $data['jobHistorys'] = JobHistory::where('user_id', $data['user_id'])->get();
         $data['vehicles'] = Vehicle::where('user_id', $data['user_id'])->get();
-        // dd($data['jobHistorys']);
+        $data['userDetails'] = DB::table('users_details as a')
+        ->leftjoin('designation as b', 'a.designation', '=', 'b.id')
+        ->select('a.*', 'b.designationName')
+        ->first();
+        // dd($data['employment']);
+
         $childId[] = '';
         if ($data['childrens']) {
             foreach ($data['childrens'] as $child) {
