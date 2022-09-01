@@ -1,11 +1,13 @@
 @extends('layouts.login')
 
 @section('content')
-<div class="row bg-white " id="registerTenant" style="min-height:98vh ;">
-    <div class="col-sm-6" style="display: flex; justify-content: center; align-items: center; height: 100vh; background-image: url({{env('ASSETS_URL')}}/img/orbit/bh.png);background-repeat: no-repeat; background-size: cover;">
-        <div class="mx-auto" style="width: 60rem;">
+
+<div class="row bg-white " id="registerTenant">
+
+    <div class="col-sm-6" style="display: flex; justify-content: center; align-items: center; background-image: url({{env('ASSETS_URL')}}/img/orbit/bh.png);background-repeat: no-repeat; background-size: cover;">
+        <div class="mx-auto" style="width: 55rem;">
             <div class="text-center">
-                <img src="{{env('ASSETS_URL')}}/img/orbit/orbithrm-logo.png"  width="500rem" alt="Orbit" class="img-fluid">
+                <img src="{{env('ASSETS_URL')}}/img/orbit/orbithrm-logo1.png"  width="500rem" alt="Orbit" class="img-fluid">
             </div>
             <h3 class="text-primary text-center">
                 Streamline and automate HR processes with OrbitHRM
@@ -15,32 +17,56 @@
             </div>
         </div>
     </div>
-    <div class="col-sm-6" style="display: flex; justify-content: center; align-items: center; height: 100vh;">
+    <div class="col-sm-6" style="display: flex; justify-content: center; align-items: center; height: 98vh;">
         <div class="mx-auto" style="width: 30rem;">
             <div class="card-body bg-white">
                 <div class="login-header mb-30px">
                     <div class="brand">
                     </div>
                     <div class="brand">
-                        <h1>Tenant SignUp</h1>
+                        <h1>Domain SignUp</h1>
                     </div>
                     <h4>Edition : <spna> {{$package}} </spna></h4>
                 </div>
 
                 <form id="form-register" class="fs-13px">
-                    <h4>Tenant Information</h4>
+                    <h4>Domain Information</h4><br>
                     <div class="form-floating mb-15px">
-                        <input type="text" name="tenant" class="form-control h-45px fs-13px" placeholder="Email Address" id="tenancyName" />
-                        <label for="tenancyName" class="d-flex align-items-center fs-13px text-gray-600">Tenant Name</label>
+                        <input type="text"class="form-control h-45px fs-13px" placeholder="firstname" id="firstname" />
+                        <label for="firstname" class="d-flex align-items-center fs-13px text-gray-600">First Name</label>
                     </div>
                     <div class="form-floating mb-15px">
-                        <input type="text" name="tenancy" class="form-control h-45px fs-13px" placeholder="Email Address" id="tenantName" />
-                        <label for="tenantName" class="d-flex align-items-center fs-13px text-gray-600">Tenancy Name</label>
+                        <input type="text"class="form-control h-45px fs-13px" placeholder="lastname" id="lastname" />
+                        <label for="lastname" class="d-flex align-items-center fs-13px text-gray-600">Last Name</label>
                     </div>
-                    <h4>Account settings</h4>
                     <div class="form-floating mb-15px">
                         <input type="text" name="username" class="form-control h-45px fs-13px" placeholder="Email Address" id="adminEmail" />
                         <label for="adminEmail" class="d-flex align-items-center fs-13px text-gray-600">Admin email</label>
+                    </div>
+
+                    <div class="form-floating mb-15px">
+                        <input type="text" name="tenant" class="form-control h-45px fs-13px" placeholder="Email Address" id="tenancyName" />
+                        <label for="tenancyName" class="d-flex align-items-center fs-13px text-gray-600">Domain Name</label>
+                    </div>
+                    <div class="form-floating mb-15px">
+                        <input type="text" name="tenancy" class="form-control h-45px fs-13px" placeholder="Email Address" id="tenantName" />
+                        <label for="tenantName" class="d-flex align-items-center fs-13px text-gray-600">Company Name</label>
+                    </div>
+                    <div class="form-floating mb-15px">
+                        <input type="text"class="form-control h-45px fs-13px" placeholder="phonenumber" id="phonenumber" />
+                        <label for="phonenumber" class="d-flex align-items-center fs-13px text-gray-600">Phone Number</label>
+                    </div>
+                    <div class="form-group form-check mb-15px">
+							<input type="checkbox" class="form-check-input" id="exampleCheck1">
+							<p  class="form-check-label" for="exampleCheck1">Your data will be allocated in Malaysia </a> </p>
+											
+					</div>
+                    <div class="mb-15px">
+											<select class="form-select">
+											<option value="Malaysia"  label="Malaysia" selected="selected">Malaysia </option>
+											<option value="Singapore" label="Singapore">Singapore</option>
+											<option value="Brunei" label="Brunei">Brunei</option>
+										</select>
                     </div>
                     <div class="form-floating mb-15px">
                         <input type="password" name="password" class="form-control h-45px fs-13px" placeholder="Password" id="password" />
@@ -51,6 +77,11 @@
                         <input type="hidden" name="package" value="{{$package}}" />
                         <label for="password" class="d-flex align-items-center fs-13px text-gray-600">Confirm Password</label>
                     </div>
+                    <div class="form-group form-check mb-15px">
+											<input type="checkbox" class="form-check-input" id="exampleCheck1">
+											<p  class="form-check-label" for="exampleCheck1">I agree to terms of <a href="#"> service & privacy policy </a> </p>
+											
+										</div>
                     <div class="mb-15px" style="display:flex;">
                         <a href="/selectPackage" class="btn btn-info d-block h-45px w-100 btn-lg fs-14px m-2">Back</a>
                         <button type="submit" id="register" class="btn btn-primary d-block h-45px w-100 btn-lg fs-14px m-2">Submit</button>

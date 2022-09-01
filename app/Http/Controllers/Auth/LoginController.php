@@ -153,7 +153,7 @@ class LoginController extends Controller
 
         $title = 'Error!';
         $type = 'error';
-        $msg = 'Tenant found!';
+        $msg = 'Tenant Not found!';
 
         if ($data) {
             $tenant = $data->tenant;

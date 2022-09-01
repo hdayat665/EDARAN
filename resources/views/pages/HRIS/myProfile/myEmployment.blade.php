@@ -14,7 +14,7 @@
                 <div class="card-body">
                     <div class="row p-2">
                         <label for="firstname" class="form-label">Company*</label>
-                        <select class="form-select" name="company">
+                        <select class="form-select" name="company" aria-label="Disabled select example" disabled >
                             <option value="0" label="Please Choose "></option>
                             <?php $companys = getCompany() ?>
                             @foreach ($companys as $company)
@@ -24,7 +24,7 @@
                     </div>
                     <div class="row p-2">
                         <label for="firstname" class="form-label">Department*</label>
-                        <select class="form-select" name="department">
+                        <select class="form-select" name="department"  aria-label="Disabled select example" disabled >>
                             <?php $Departments = getDepartment() ?>
                             <option value="0" label="Please Choose "></option>
                             @foreach ($Departments as $Department)
@@ -34,7 +34,7 @@
                     </div>
                     <div class="row p-2">
                         <label for="firstname" class="form-label">Unit*</label>
-                        <select class="form-select" name="unit">
+                        <select class="form-select" name="unit"  aria-label="Disabled select example" disabled >>
                             <?php $Units = getUnit() ?>
                             <option value="0" label="Please Choose "></option>
                             @foreach ($Units as $Unit)
@@ -44,7 +44,7 @@
                     </div>
                     <div class="row p-2">
                         <label for="firstname" class="form-label">Branch*</label>
-                        <select class="form-select" name="branch">
+                        <select class="form-select" name="branch"  aria-label="Disabled select example" disabled >>
                             <?php $Branchs = getBranch() ?>
                             <option value="0" label="Please Choose "></option>
                             @foreach ($Branchs as $Branch)
@@ -54,11 +54,11 @@
                     </div>
                     <div class="row p-2">
                         <label for="firstname" class="form-label">Joined Date*</label>
-                        <input type="date" name="joinedDate" id="datepicker-joindate" class="form-control" aria-describedby="address-2">
+                        <input type="date" name="joinedDate" id="datepicker-joindate" readonly class="form-control" aria-describedby="address-2">
                     </div>
                     <div class="row p-2">
                         <label for="firstname" class="form-label">Job Grade*</label>
-                        <select class="form-select" name="jobGrade">
+                        <select class="form-select" name="jobGrade"  aria-label="Disabled select example" disabled >>
                             <?php $JobGrades = getJobGrade() ?>
                             <option value="0" label="Please Choose "></option>
                             @foreach ($JobGrades as $JobGrade)
@@ -68,7 +68,7 @@
                     </div>
                     <div class="row p-2">
                         <label for="firstname" class="form-label">Designation*</label>
-                        <select class="form-select" name="designation">
+                        <select class="form-select" name="designation"  aria-label="Disabled select example" disabled >>
                             <?php $Designations = getDesignation() ?>
                             <option value="0" label="Please Choose "></option>
                             @foreach ($Designations as $Designation)
@@ -78,7 +78,7 @@
                     </div>
                     <div class="row p-2">
                         <label for="firstname" class="form-label">Employment Type*</label>
-                        <select class="form-select" name="employmentType">
+                        <select class="form-select" name="employmentType"  aria-label="Disabled select example" disabled >>
                             <?php $EmploymentTypes = getEmploymentType() ?>
                             <option value="0" label="Please Choose "></option>
                             @foreach ($EmploymentTypes as $EmploymentType)
