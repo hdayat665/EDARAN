@@ -23,6 +23,7 @@ class SOP extends Authenticatable
     protected $fillable = [
         'SOPName',
         'SOPCode',
+        'file',
         'desc',
         'addedBy',
         'modifiedBy',

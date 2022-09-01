@@ -9,12 +9,12 @@
                 <div class="card-body">
                     <div class="profile-pic m-3">
                         <img src="../assets/img/user/user-13.jpg" width="100px" class="rounded d-block" alt="Profile Picture">
-                        <h4 class="mt-3 mb-0 fw-bold">{{$profile->fullname ?? 'Admin Tenant'}}</h4>
-                        <p>0108</p>
+                        <h4 class="mt-3 mb-0 fw-bold">{{$profile->fullName ?? 'Admin Tenant'}}</h4>
+                        <p>{{$employment->employeeId ?? '-'}}</p>
                         <span class="badge bg-success d-block p-2">Active</span>
                         <div class="input-group mb-2 mt-2">
                             <span class="input-group-text" id="basic-addon1"><i class="fas fa-briefcase fa-fw me-2"></i></span>
-                            <input type="text" class="form-control bg-white" value="{{$username ?? '-'}}" aria-label="Username" aria-describedby="basic-addon1" readonly>
+                            <input type="text" class="form-control bg-white" value="{{$userDetails->designationName ?? '-'}}" aria-label="Username" aria-describedby="basic-addon1" readonly>
                         </div>
                         <div class="input-group mb-2 mt-2">
                             <span class="input-group-text fw-light" id="basic-addon1"><i class="fas fa-address-card fa-fw me-2"></i></span>

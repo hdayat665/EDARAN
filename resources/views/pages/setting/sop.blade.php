@@ -235,7 +235,7 @@
                     </div>
                     <div class="mb-3">
                         <label>File Upload </label><br><br>
-                        <input id="fileupload" type="file" multiple="multiple" ></input>
+                        <input id="fileupload" type="file" name="file" multiple="multiple" ></input>
                     </div>
                 </form>
             </div>
@@ -268,17 +268,17 @@
                     </div>
                     <div class="mb-3">
                         <label>Description </label><br><br>
-                        <textarea class="form-control" rows="3" name="desc" id="desc"></textarea>
+                        <textarea class="form-control" rows="3" name="desc" id="descr"></textarea>
                     </div>
                     <div class="mb-3">
                         <label>File Upload </label><br><br>
-                        <input id="fileupload" type="file" multiple="multiple" ></input>
+                        <input id="fileupload" type="file" name="file" multiple="multiple" ></input>
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" id="updateButton">Save</button>
+                <button type="button" class="btn btn-primary" id="updateButton2">Save</button>
             </div>
         </div>
     </div>
