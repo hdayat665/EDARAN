@@ -35,7 +35,7 @@
 
                 <form id="loginForm" class="fs-13px">
                     <div class="form-floating mb-15px">
-                        <input type="text" name="username" class="form-control h-45px fs-13px" placeholder="Email Address" id="emailAddress" required/>
+                        <input type="text" name="username" class="form-control h-45px fs-13px" id="emailAddress" required/>
                         <input type="hidden" name="tenant" id="tenantInput" />
                         <label for="email" class="d-flex align-items-center fs-13px text-gray-600">Email Address</label>
                     </div>

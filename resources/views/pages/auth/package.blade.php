@@ -110,7 +110,7 @@
 										<li>24/7 Email support</li>
 									</ul>
 									<div class="footer">
-                                    <a href="/registerTenant/premium"><button type="submit" class="btn btn-dark btn-theme btn-block">Buy Now</button></a>
+                                    <a href="#"><button type="submit" class="btn btn-dark btn-theme btn-block" disabled>Coming Soon</button></a>
 									</div>
 								</div>
 								<!-- end pricing-container -->
