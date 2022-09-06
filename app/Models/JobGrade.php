@@ -22,6 +22,7 @@ class JobGrade extends Authenticatable
 
     protected $fillable = [
         'jobGradeName',
+        'tenant_id',
         'jobGradeCode',
         'addedBy',
         'modifiedBy',

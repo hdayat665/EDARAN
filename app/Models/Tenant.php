@@ -8,7 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
-class Policy extends Authenticatable
+class Tenant extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
@@ -18,18 +18,14 @@ class Policy extends Authenticatable
      * @var array<int, string>
      */
 
-    protected $table ='policy';
+    protected $table ='tenant';
 
     protected $fillable = [
-        'policy',
-        'desc',
+        'tenant_name',
         'tenant_id',
-        'code',
-        'file',
-        'addedBy',
-        'modifiedBy',
+        'tenant_status',
+        'tenant_desc',
     ];
-
 }
 
 

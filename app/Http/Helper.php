@@ -7,6 +7,7 @@ use App\Models\Designation;
 use App\Models\EmploymentType;
 use App\Models\JobGrade;
 use App\Models\Unit;
+use Illuminate\Support\Facades\Auth;
 
 if (!function_exists('pr')) {
     function pr($data)
@@ -298,7 +299,7 @@ if (!function_exists('asias')) {
 if (!function_exists('getCompany')) {
     function getCompany()
     {
-        $data = Company::all();
+        $data = Company::where('tenant_id', Auth::user()->tenant_id)->get();
 
         if(blank($data))
         {
@@ -313,7 +314,7 @@ if (!function_exists('getCompany')) {
 if (!function_exists('getDepartment')) {
     function getDepartment()
     {
-        $data = Department::all();
+        $data = Department::where('tenant_id', Auth::user()->tenant_id)->get();
 
         if(!$data)
         {
@@ -327,7 +328,7 @@ if (!function_exists('getDepartment')) {
 if (!function_exists('getUnit')) {
     function getUnit()
     {
-        $data = Unit::all();
+        $data = Unit::where('tenant_id', Auth::user()->tenant_id)->get();
 
         if(!$data)
         {
@@ -341,7 +342,7 @@ if (!function_exists('getUnit')) {
 if (!function_exists('getBranch')) {
     function getBranch()
     {
-        $data = Branch::all();
+        $data = Branch::where('tenant_id', Auth::user()->tenant_id)->get();
 
         if(!$data)
         {
@@ -355,7 +356,7 @@ if (!function_exists('getBranch')) {
 if (!function_exists('getJobGrade')) {
     function getJobGrade()
     {
-        $data = JobGrade::all();
+        $data = JobGrade::where('tenant_id', Auth::user()->tenant_id)->get();
 
         if(!$data)
         {
@@ -369,7 +370,7 @@ if (!function_exists('getJobGrade')) {
 if (!function_exists('getDesignation')) {
     function getDesignation()
     {
-        $data = Designation::all();
+        $data = Designation::where('tenant_id', Auth::user()->tenant_id)->get();
 
         if(!$data)
         {
@@ -383,7 +384,7 @@ if (!function_exists('getDesignation')) {
 if (!function_exists('getEmploymentType')) {
     function getEmploymentType()
     {
-        $data = EmploymentType::all();
+        $data = EmploymentType::where('tenant_id', Auth::user()->tenant_id)->get();
 
         return $data;
     }

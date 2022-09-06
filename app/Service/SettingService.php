@@ -28,7 +28,7 @@ class SettingService
     public function getRole()
     {
         $data = [];
-        $data['data'] = Role::all();
+        $data['data'] = Role::where('tenant_id', Auth::user()->tenant_id)->get();
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
@@ -42,6 +42,7 @@ class SettingService
         $input = $r->input();
         $user = Auth::user();
 
+        $input['tenant_id'] = Auth::user()->tenant_id;
         $input['addedBy'] = $user->username;
         $input['addedTime'] = date('Y-m-d h:m:s');
         Role::create($input);
@@ -98,7 +99,7 @@ class SettingService
     public function getCompany()
     {
         $data = [];
-        $data['data'] = Company::all();
+        $data['data'] = Company::where('tenant_id', Auth::user()->tenant_id)->get();
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
@@ -112,6 +113,7 @@ class SettingService
         $input = $r->input();
         $user = Auth::user();
         $input['addedBy'] = $user->username;
+        $input['tenant_id'] = Auth::user()->tenant_id;
 
         Company::create($input);
 
@@ -176,6 +178,7 @@ class SettingService
     {
         $input = $r->input();
         $user = Auth::user();
+        $input['tenant_id'] = Auth::user()->tenant_id;
         $input['addedBy'] = $user->username;
 
         Department::create($input);
@@ -239,6 +242,7 @@ class SettingService
     {
         $input = $r->input();
         $user = Auth::user();
+        $input['tenant_id'] = Auth::user()->tenant_id;
         $input['addedBy'] = $user->username;
 
         Unit::create($input);
@@ -302,6 +306,7 @@ class SettingService
     {
         $input = $r->input();
         $user = Auth::user();
+        $input['tenant_id'] = Auth::user()->tenant_id;
         $input['addedBy'] = $user->username;
 
         Branch::create($input);
@@ -354,7 +359,7 @@ class SettingService
     public function getJobGrade()
     {
         $data = [];
-        $data['data'] = JobGrade::all();
+        $data['data'] = JobGrade::where('tenant_id', Auth::user()->tenant_id)->get();
         $data['status'] = true;
         $data['msg'] = 'Success get Job Grade';
 
@@ -365,6 +370,7 @@ class SettingService
     {
         $input = $r->input();
         $user = Auth::user();
+        $input['tenant_id'] = Auth::user()->tenant_id;
         $input['addedBy'] = $user->username;
         JobGrade::create($input);
 
@@ -415,7 +421,7 @@ class SettingService
     public function getDesignation()
     {
         $data = [];
-        $data['data'] = Designation::all();
+        $data['data'] = Designation::where('tenant_id', Auth::user()->tenant_id)->get();
         $data['status'] = true;
         $data['msg'] = 'Success get Designation';
 
@@ -427,6 +433,7 @@ class SettingService
         $input = $r->input();
         $user = Auth::user();
         $input['addedBy'] = $user->username;
+        $input['tenant_id'] = Auth::user()->tenant_id;
         Designation::create($input);
 
         $data['status'] = config('app.response.success.status');
@@ -477,7 +484,7 @@ class SettingService
     public function getSOP()
     {
         $data = [];
-        $data['data'] = SOP::all();
+        $data['data'] = SOP::where('tenant_id', Auth::user()->tenant_id)->get();
         $data['status'] = true;
         $data['msg'] = 'Success get SOP';
 
@@ -498,6 +505,7 @@ class SettingService
             }
         }
 
+        $input['tenant_id'] = Auth::user()->tenant_id;
         $input['addedBy'] = $user->username;
         SOP::create($input);
 
@@ -558,7 +566,7 @@ class SettingService
     public function getPolicy()
     {
         $data = [];
-        $data['data'] = Policy::all();
+        $data['data'] = Policy::where('tenant_id', Auth::user()->tenant_id)->get();
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
@@ -581,6 +589,7 @@ class SettingService
         }
         $user = Auth::user();
         $input['addedBy'] = $user->username;
+        $input['tenant_id'] = $user->tenant_id;
 
         Policy::create($input);
 
@@ -642,7 +651,7 @@ class SettingService
     public function getNews()
     {
         $data = [];
-        $data['data'] = News::all();
+        $data['data'] = News::where('tenant_id', Auth::user()->tenant_id)->get();
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
@@ -665,6 +674,7 @@ class SettingService
         }
 
         $user = Auth::user();
+        $input['tenant_id'] = $user->tenant_id;
         $input['addedBy'] = $user->username;
 
         News::create($input);
@@ -727,7 +737,7 @@ class SettingService
     public function getEmploymentType()
     {
         $data = [];
-        $data['data'] = EmploymentType::all();
+        $data['data'] = EmploymentType::where('tenant_id', Auth::user()->tenant_id)->get();
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
@@ -742,6 +752,7 @@ class SettingService
 
         $user = Auth::user();
         $input['addedBy'] = $user->username;
+        $input['tenant_id'] = $user->tenant_id;
 
         EmploymentType::create($input);
 
@@ -793,14 +804,14 @@ class SettingService
 
     public function roleView()
     {
-        $data['roles'] = Role::all();
+        $data['roles'] = Role::where('tenant_id', Auth::user()->tenant_id)->get();
 
         return $data;
     }
 
     public function companyView()
     {
-        $data['companies'] = Company::all();
+        $data['companies'] = Company::where('tenant_id', Auth::user()->tenant_id)->get();
 
         return $data;
     }
@@ -810,6 +821,7 @@ class SettingService
         $data['branchs'] = DB::table('branch as a')
             ->leftJoin('unit as b', 'a.unitId', '=', 'b.id')
             ->select('a.*', 'b.unitName')
+            ->where('a.tenant_id', Auth::user()->tenant_id)
             ->get();
 
         return $data;
@@ -820,6 +832,7 @@ class SettingService
         $data['units'] = DB::table('unit as a')
             ->leftJoin('department as b', 'a.departmentId', '=', 'b.id')
             ->select('a.*', 'b.departmentCode', 'b.departmentName')
+            ->where('a.tenant_id', Auth::user()->tenant_id)
             ->get();
 
         return $data;
@@ -830,6 +843,7 @@ class SettingService
         $data['departments'] = DB::table('department as a')
             ->leftJoin('company as b', 'a.companyId', '=', 'b.id')
             ->select('a.*', 'b.companyName', 'b.companyCode')
+            ->where('a.tenant_id', Auth::user()->tenant_id)
             ->get();
 
         return $data;
@@ -837,36 +851,36 @@ class SettingService
 
     public function sopView()
     {
-        $data['SOPs'] = SOP::all();
-        $data['policys'] = Policy::all();
+        $data['SOPs'] = SOP::where('tenant_id', Auth::user()->tenant_id)->get();
+        $data['policys'] = Policy::where('tenant_id', Auth::user()->tenant_id)->get();
 
         return $data;
     }
 
     public function jobGradeView()
     {
-        $data['jobGrades'] = JobGrade::all();
+        $data['jobGrades'] = JobGrade::where('tenant_id', Auth::user()->tenant_id)->get();
 
         return $data;
     }
 
     public function designationView()
     {
-        $data['designations'] = Designation::all();
+        $data['designations'] = Designation::where('tenant_id', Auth::user()->tenant_id)->get();
 
         return $data;
     }
 
     public function newsView()
     {
-        $data['news'] = News::all();
+        $data['news'] = News::where('tenant_id', Auth::user()->tenant_id)->get();
 
         return $data;
     }
 
     public function employmentTypeView()
     {
-        $data['employmentTypes'] = EmploymentType::all();
+        $data['employmentTypes'] = EmploymentType::where('tenant_id', Auth::user()->tenant_id)->get();
 
         return $data;
     }

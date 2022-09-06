@@ -22,6 +22,7 @@ class Branch extends Authenticatable
 
     protected $fillable = [
         'unitName',
+        'tenant_id',
         'unitId',
         'branchName',
         'branchType',

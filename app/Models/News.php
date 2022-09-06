@@ -21,6 +21,7 @@ class News extends Authenticatable
     protected $table ='news';
 
     protected $fillable = [
+        'tenant_id',
         'title',
         'substitle',
         'fileUpload',

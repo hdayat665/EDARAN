@@ -26,6 +26,7 @@ class Users extends Authenticatable
         'type',
         'status',
         'tenant',
+        'tenant_id',
         'package',
     ];
 }

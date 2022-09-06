@@ -22,6 +22,7 @@ class Role extends Authenticatable
 
     protected $fillable = [
         'roleName',
+        'tenant_id',
         'addedBy',
         'addedTime',
         'modifiedBy',
