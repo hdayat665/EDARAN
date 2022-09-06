@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Mail\Mail;
+use App\Models\Users;
+use Illuminate\Support\Facades\Mail as FacadesMail;
 use Illuminate\Support\Facades\Session;
 use Symfony\Component\Debug\ExceptionHandler;
 class LoginController extends Controller
@@ -188,9 +190,37 @@ class LoginController extends Controller
         return view('pages.auth.package');
     }
 
-    public function testEmail()
+    public function forgotPassEmail(Request $r)
     {
-        $data  = ['message' => 'This is a test!'];
-        \Mail::to('hdayat665@gmail.com')->send(new TestEmail($data));
+        $input = $r->input();
+
+        $ls = new LoginService;
+
+        $data = $ls->forgotPassEmail($input);
+
+        return response()->json($data);
+    }
+
+    public function activationEmail(Request $r)
+    {
+        $input = $r->input();
+
+        $ls = new LoginService;
+
+        $data = $ls->activationEmail($input);
+
+        return response()->json($data);
+    }
+
+    public function activationView($user_id = '')
+    {
+        $data = [];
+        $data['user_id'] = $user_id;
+
+        $ls = new LoginService;
+
+        $ls->activateLink($user_id);
+
+        return view('pages.auth.activationView', $data);
     }
 }

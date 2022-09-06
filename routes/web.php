@@ -49,7 +49,9 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('/resetDomainView', 'resetDomainView');
         Route::get('/logout/{type}', 'logoutTenant');
         Route::get('/selectPackage', 'selectPackage');
-        Route::get('/testEmail', 'testEmail');
+        Route::post('/forgotPassEmail', 'forgotPassEmail');
+        Route::post('/activationEmail', 'activationEmail');
+        Route::get('/activateView/{id}', 'activationView');
     });
 
     Route::controller(AjaxController::class)->group(function () {

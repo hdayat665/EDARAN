@@ -21,20 +21,7 @@
                 Streamline and automate HR processes with OrbitHRM
             </h5>
             <div class="card-body bg-white">
-                <form id="resetPassForm" class="fs-13px">
-                    <div class="form-floating mb-15px">
-                        <input type="password" name="password" class="form-control h-45px fs-13px"  id="password" />
-                        <input type="hidden" name="user_id" value="{{$user_id}}" class="form-control h-45px fs-13px" />
-                        <label for="password" class="d-flex align-items-center fs-13px text-gray-600">Password</label>
-                    </div>
-                    <div class="form-floating mb-15px">
-                        <input type="password" name="confirm_password" class="form-control h-45px fs-13px"  id="password" />
-                        <label for="password" class="d-flex align-items-center fs-13px text-gray-600">Confirm Password</label>
-                    </div>
-                    <div class="mb-15px">
-                        <button type="submit" id="resetPass" class="btn btn-primary d-block h-45px w-100 btn-lg fs-14px">Submit</button>
-                    </div>
-                </form>
+                Your Account have been activate. click <a href="/">here</a> to redirect to login page
             </div>
         </div>
     </div>

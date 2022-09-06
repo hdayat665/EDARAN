@@ -3,6 +3,7 @@
 namespace App\Service;
 
 use App\Exceptions\CustomException;
+use App\Mail\Mail as MailMail;
 use App\Models\Subscription;
 use App\Models\Users;
 use App\Models\UsersDetails;
@@ -10,6 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class LoginService
 {
@@ -267,6 +269,13 @@ class LoginService
 
                 throw new CustomException($data['msg']);
             }
+
+            if ($userDetail->status == 'not verified') {
+                $data['msg'] = 'Your account is not verified.';
+
+                throw new CustomException($data['msg']);
+            }
+
         }
 
         return $data;
@@ -277,5 +286,122 @@ class LoginService
         $tenant = Users::where('tenant', $input['tenant'])->first();
 
         return $tenant;
+    }
+
+    public function forgotPassEmail($input)
+    {
+        $user = Users::where('username', $input['username'])->first();
+
+        if (!$user) {
+            $data['status'] = config('app.response.error.status');
+            $data['type'] = config('app.response.error.type');
+            $data['title'] = config('app.response.error.title');
+            $data['msg'] = 'Email not found';
+        }else{
+            $receiver = 'hdayat665@gmail.com';
+            $response['typeEmail'] = 'forgotPass';
+            $response['title'] = 'Orbit Reset Password';
+            $response['content1'] = 'This email is sent you to reset your password.';
+            $response['domain'] = $user->tenant;
+            $response['username'] = $user->username;
+            $response['content2'] = 'Please click the button below to reset your password:';
+            $response['resetPassLink'] = env('APP_URL') . '/resetPassView/'.$user->id;
+            $response['from'] = env('MAIL_FROM_ADDRESS');
+            $response['nameFrom'] = 'Claim';
+            $response['subject'] = 'Orbit Reset Password';
+            // $response['typeAttachment'] = "application/pdf";
+            //  $response['file'] = \public_path()."/assets/frontend/docs/gambar.jpg";
+
+            Mail::to($receiver)->send(new MailMail($response));
+
+            $data['status'] = config('app.response.success.status');
+            $data['type'] = config('app.response.success.type');
+            $data['title'] = config('app.response.success.title');
+            $data['msg'] = 'Email have been send to your email';
+        }
+
+        return $data;
+
+    }
+
+    public function activationEmail($input)
+    {
+        $user = Users::where('username', $input['username'])->first();
+
+        if (!$user) {
+            $data['status'] = config('app.response.error.status');
+            $data['type'] = config('app.response.error.type');
+            $data['title'] = config('app.response.error.title');
+            $data['msg'] = 'Email not found';
+        } else {
+            $receiver = 'hdayat665@gmail.com';
+            $response['typeEmail'] = 'activateAcc';
+            $response['title'] = 'Orbit Activation Link';
+            $response['content1'] = 'This email is sent you to activate your account.';
+            $response['domain'] = $user->tenant;
+            $response['username'] = $user->username;
+            $response['content2'] = 'Please click the button below to activate your account:';
+            $response['resetPassLink'] = env('APP_URL') . '/activateView/' . $user->id;
+            $response['from'] = env('MAIL_FROM_ADDRESS');
+            $response['nameFrom'] = 'Claim';
+            $response['subject'] = 'Orbit Activation Link';
+            // $response['typeAttachment'] = "application/pdf";
+            //  $response['file'] = \public_path()."/assets/frontend/docs/gambar.jpg";
+
+            Mail::to($receiver)->send(new MailMail($response));
+
+            $data['status'] = config('app.response.success.status');
+            $data['type'] = config('app.response.success.type');
+            $data['title'] = config('app.response.success.title');
+            $data['msg'] = 'Email have been send to your email';
+        }
+
+        return $data;
+    }
+
+    public function temporaryPasswordEmail($input)
+    {
+        $user = Users::where('id', $input['user_id'])->first();
+
+        if (!$user) {
+            $data['status'] = config('app.response.error.status');
+            $data['type'] = config('app.response.error.type');
+            $data['title'] = config('app.response.error.title');
+            $data['msg'] = 'Email not found';
+        } else {
+            $receiver = 'hdayat665@gmail.com';
+            $response['typeEmail'] = 'tempPass';
+            $response['title'] = 'Orbit Temporary Password';
+            $response['content1'] = 'This email is sent you to show your temporary credential.';
+            $response['domain'] = $user->tenant;
+            $response['username'] = $user->username;
+            $response['password'] = 'password';
+            $response['content2'] = 'Your credential to login as above:';
+            $response['resetPassLink'] = env('APP_URL') . '/';
+            $response['from'] = env('MAIL_FROM_ADDRESS');
+            $response['nameFrom'] = 'Claim';
+            $response['subject'] = 'Orbit Temporary Password';
+            // $response['typeAttachment'] = "application/pdf";
+            //  $response['file'] = \public_path()."/assets/frontend/docs/gambar.jpg";
+
+            Mail::to($receiver)->send(new MailMail($response));
+
+            $data['status'] = config('app.response.success.status');
+            $data['type'] = config('app.response.success.type');
+            $data['title'] = config('app.response.success.title');
+            $data['msg'] = 'Email have been send to your email';
+        }
+
+        return $data;
+    }
+
+    public function activateLink($user_id = '')
+    {
+        Users::where('id', $user_id)->update(['status' => 'active']);
+        $data['status'] = config('app.response.success.status');
+        $data['type'] = config('app.response.success.type');
+        $data['title'] = config('app.response.success.title');
+        $data['msg'] = 'Your account have been activate';
+        return $data;
     }
 }
