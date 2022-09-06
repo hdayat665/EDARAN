@@ -39,6 +39,7 @@ class EmployeeService
             $user['type'] = 'employee';
             $user['status'] = 'not verified';
             $user['username'] = $r['username'];
+            $user['tenant_id'] = Auth::user()->tenant_id;
             $user['type'] = 'employee';
 
             Users::create($user);
@@ -48,7 +49,7 @@ class EmployeeService
             $input['user_id'] = $user->id;
             $input['DOB'] = date_format(date_create($input['DOB']),"Y/m/d H:i:s");
             $input['expiryDate'] = date_format(date_create($input['expiryDate']),"Y/m/d H:i:s");
-            $input['tenant_id'] = Auth::user()->id;
+            $input['tenant_id'] = Auth::user()->tenant_id;
 
             UserProfile::create($input);
 
@@ -138,8 +139,9 @@ class EmployeeService
         $data['status'] = true;
         $data['msg'] = 'Success get user employment';
         $data['data'] = DB::table('employment as a')
-        ->join('userProfile as b', 'a.user_id', '=', 'b.user_id')
-        ->select('a.employeeId', 'a.user_id', 'b.firstName', 'b.lastName', 'b.personalEmail as email', 'b.phoneNo', 'a.department', 'a.supervisor', 'a.status')
+        ->leftjoin('userProfile as b', 'a.user_id', '=', 'b.user_id')
+        ->leftjoin('department as c', 'a.department', '=', 'c.id')
+        ->select('a.employeeId', 'a.user_id', 'b.firstName', 'b.lastName', 'b.personalEmail as email', 'b.phoneNo', 'c.departmentName as department', 'a.supervisor', 'a.status')
         ->where('a.tenant_id', $userId)
         ->get();
 

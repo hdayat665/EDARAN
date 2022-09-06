@@ -8,6 +8,7 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Http\Requests\Auth\LoginRequest;
+use App\Mail\Mail;
 use Illuminate\Support\Facades\Session;
 use Symfony\Component\Debug\ExceptionHandler;
 class LoginController extends Controller
@@ -185,5 +186,11 @@ class LoginController extends Controller
     public function selectPackage()
     {
         return view('pages.auth.package');
+    }
+
+    public function testEmail()
+    {
+        $data  = ['message' => 'This is a test!'];
+        \Mail::to('hdayat665@gmail.com')->send(new TestEmail($data));
     }
 }

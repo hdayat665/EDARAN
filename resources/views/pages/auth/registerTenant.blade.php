@@ -32,41 +32,39 @@
                 <form id="form-register" class="fs-13px">
                     <h4>Domain Information</h4><br>
                     <div class="form-floating mb-15px">
-                        <input type="text"class="form-control h-45px fs-13px" placeholder="firstname" id="firstname" />
+                        <input type="text"class="form-control h-45px fs-13px" name="firstName" placeholder="firstname" id="firstname" />
                         <label for="firstname" class="d-flex align-items-center fs-13px text-gray-600">First Name</label>
                     </div>
                     <div class="form-floating mb-15px">
-                        <input type="text"class="form-control h-45px fs-13px" placeholder="lastname" id="lastname" />
+                        <input type="text"class="form-control h-45px fs-13px" name="lastName" placeholder="lastname" id="lastname" />
                         <label for="lastname" class="d-flex align-items-center fs-13px text-gray-600">Last Name</label>
                     </div>
                     <div class="form-floating mb-15px">
                         <input type="text" name="username" class="form-control h-45px fs-13px" placeholder="Email Address" id="adminEmail" />
                         <label for="adminEmail" class="d-flex align-items-center fs-13px text-gray-600">Admin email</label>
                     </div>
-
                     <div class="form-floating mb-15px">
-                        <input type="text" name="tenant" class="form-control h-45px fs-13px" placeholder="Email Address" id="tenancyName" />
+                        <input type="text" name="tenant" class="form-control h-45px fs-13px" placeholder="Tenant Name" id="tenancyName" />
                         <label for="tenancyName" class="d-flex align-items-center fs-13px text-gray-600">Domain Name</label>
                     </div>
                     <div class="form-floating mb-15px">
-                        <input type="text" name="tenancy" class="form-control h-45px fs-13px" placeholder="Email Address" id="tenantName" />
+                        <input type="text" name="tenancy" class="form-control h-45px fs-13px" placeholder="Tenancy Name" id="tenantName" />
                         <label for="tenantName" class="d-flex align-items-center fs-13px text-gray-600">Company Name</label>
                     </div>
                     <div class="form-floating mb-15px">
-                        <input type="text"class="form-control h-45px fs-13px" placeholder="phonenumber" id="phonenumber" />
+                        <input type="text"class="form-control h-45px fs-13px" name="phoneNo" placeholder="phonenumber" id="phonenumber" />
                         <label for="phonenumber" class="d-flex align-items-center fs-13px text-gray-600">Phone Number</label>
                     </div>
                     <div class="form-group form-check mb-15px">
 							<input type="checkbox" class="form-check-input" id="exampleCheck1">
 							<p  class="form-check-label" for="exampleCheck1">Your data will be allocated in Malaysia </a> </p>
-											
 					</div>
                     <div class="mb-15px">
-											<select class="form-select">
-											<option value="Malaysia"  label="Malaysia" selected="selected">Malaysia </option>
-											<option value="Singapore" label="Singapore">Singapore</option>
-											<option value="Brunei" label="Brunei">Brunei</option>
-										</select>
+                        <select class="form-select">
+                            <option value="Malaysia"  label="Malaysia" selected="selected">Malaysia </option>
+                            <option value="Singapore" label="Singapore">Singapore</option>
+                            <option value="Brunei" label="Brunei">Brunei</option>
+                        </select>
                     </div>
                     <div class="form-floating mb-15px">
                         <input type="password" name="password" class="form-control h-45px fs-13px" placeholder="Password" id="password" />
@@ -78,10 +76,9 @@
                         <label for="password" class="d-flex align-items-center fs-13px text-gray-600">Confirm Password</label>
                     </div>
                     <div class="form-group form-check mb-15px">
-											<input type="checkbox" class="form-check-input" id="exampleCheck1">
-											<p  class="form-check-label" for="exampleCheck1">I agree to terms of <a href="#"> service & privacy policy </a> </p>
-											
-										</div>
+                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                        <p  class="form-check-label" for="exampleCheck1">I agree to terms of <a href="#"> service & privacy policy </a> </p>
+                    </div>
                     <div class="mb-15px" style="display:flex;">
                         <a href="/selectPackage" class="btn btn-info d-block h-45px w-100 btn-lg fs-14px m-2">Back</a>
                         <button type="submit" id="register" class="btn btn-primary d-block h-45px w-100 btn-lg fs-14px m-2">Submit</button>

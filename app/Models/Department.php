@@ -22,6 +22,7 @@ class Department extends Authenticatable
 
     protected $fillable = [
         'companyId',
+        'tenant_id',
         'departmentCode',
         'departmentName',
         'addedBy',

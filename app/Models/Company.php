@@ -22,6 +22,7 @@ class Company extends Authenticatable
 
     protected $fillable = [
         'companyCode',
+        'tenant_id',
         'companyName',
         'addedBy',
         'modifiedBy',

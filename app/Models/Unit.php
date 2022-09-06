@@ -22,6 +22,7 @@ class Unit extends Authenticatable
 
     protected $fillable = [
         'departmentId',
+        'tenant_id',
         'unitCode',
         'unitName',
         'addedBy',

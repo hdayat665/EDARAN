@@ -22,6 +22,7 @@ class Designation extends Authenticatable
 
     protected $fillable = [
         'designationName',
+        'tenant_id',
         'designationCode',
         'jobDesc',
         'addedBy',

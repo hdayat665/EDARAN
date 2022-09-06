@@ -22,6 +22,7 @@ class EmploymentType extends Authenticatable
 
     protected $fillable = [
         'id',
+        'tenant_id',
         'code',
         'type',
         'addedBy',
