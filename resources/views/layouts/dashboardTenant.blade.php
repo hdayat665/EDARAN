@@ -173,8 +173,9 @@
                             <div class="menu-text text-gray">HRIS</div>
                             <div class="menu-caret text-gray"></div>
                         
-                        
+                        </a>
                         <div class="menu-submenu">
+
                             <div class="menu-item">
                                 <a href="/myProfile" class="menu-link">
                                     <div class="menu-icon">
@@ -183,6 +184,7 @@
                                     <div class="menu-text text-gray"> My Profile </div>
                                 </a>
                             </div>
+                            
                             <div class="menu-item">
                                 <a href="/employeeInfoView" class="menu-link">
                                     <div class="menu-icon">
@@ -220,7 +222,7 @@
                                     <div class="menu-icon">
 										<i class="fa fa-receipt text-gray"></i>
 									</div>
-                                    <div class="menu-text text-gray">Timesheets Report</div>
+                                    <div class="menu-text text-gray">Timesheets Approval</div>
                                 </a>
                             </div>
                             <div class="menu-item">
@@ -430,22 +432,71 @@
                             <div class="menu-text text-gray">Reporting</div>
                             <div class="menu-caret text-gray"></div>
                         </a>
-                        <div class="menu-submenu">
-                            <div class="menu-item">
+                             <div class="menu-submenu">
+                            <div class="menu-item has-sub">
+                                <a href="#" class="menu-link">
+                                    <div class="menu-icon">
+							    	    <i class="fa fa-file-signature text-gray"></i>
+							        </div>
+                                        <div class="menu-text text-gray">Timesheet</i></div>
+                                        <div class="menu-caret text-gray"></div>
+                                </a>
+                            <div class="menu-submenu">
+                                <div class="menu-item">
+                                    <a href="#" class="menu-link">
+                                        <div class="menu-icon">
+								             <i class="fa fa-address-card text-gray"></i>
+							            </div>
+                                        <div class="menu-text text-gray">Status Report</div>
+                                    </a>
+                                    </div>
+                                    <div class="menu-item">
                                 <a href="#" class="menu-link">
                                 <div class="menu-icon">
-							    	<i class="fa fa-file-signature text-gray"></i>
+								    <i class="fa fa-user-clock text-gray"></i>
 							    </div>
-                                    <div class="menu-text text-gray">Timesheet</i></div>
+                                    <div class="menu-text text-gray">Employee Report</div>
                                 </a>
                             </div>
                             <div class="menu-item">
                                 <a href="#" class="menu-link">
                                 <div class="menu-icon">
+								    <i class="fa fa-user-gear text-gray"></i>
+							    </div>
+                                    <div class="menu-text text-gray">Overtime Report</div>
+                                </a>
+                            </div>
+                                </div>
+                                
+                            </div>
+                            <div class="menu-item has-sub">
+                                <a href="#" class="menu-link">
+                                <div class="menu-icon">
 								    <i class="fa fa-user-check text-gray"></i>
 							    </div>
                                     <div class="menu-text text-gray">E-Attendance</div>
+                                    <div class="menu-caret text-gray"></div>
+                                </a><div class="menu-submenu">
+                                <div class="menu-item">
+                                    <a href="#" class="menu-link">
+                                        <div class="menu-icon">
+								             <i class="fa fa-user-pen text-gray"></i>
+							            </div>
+                                        <div class="menu-text text-gray">Daily Report</div>
+                                    </a>
+                                    </div>
+                                    <div class="menu-item">
+                                <a href="#" class="menu-link">
+                                <div class="menu-icon">
+								    <i class="fa fa-users-gear text-gray"></i>
+							    </div>
+                                    <div class="menu-text text-gray">Status Report</div>
                                 </a>
+                            </div>
+                            
+                        </div>
+                                
+                                
                             </div>
                             <div class="menu-item">
 								<a href="#" class="menu-link">
@@ -456,21 +507,61 @@
 								</a>
 							</div>
 
-                            <div class="menu-item">
+                            <div class="menu-item has-sub">
 								<a href="#" class="menu-link">
 								<div class="menu-icon">
 								<i class="fa fa-keyboard text-gray"></i>
 							</div>
 									<div class="menu-text text-gray">Project</div>
-								</a>
+                                    <div class="menu-caret text-gray"></div>
+								</a><div class="menu-submenu">
+                                <div class="menu-item">
+                                    <a href="#" class="menu-link">
+                                        <div class="menu-icon">
+								             <i class="fa fa-book text-gray"></i>
+							            </div>
+                                        <div class="menu-text text-gray">Project Listing</div>
+                                    </a>
+                                    </div>
+                                    <div class="menu-item">
+                                <a href="#" class="menu-link">
+                                <div class="menu-icon">
+								    <i class="fa fa-book-open text-gray"></i>
+							    </div>
+                                    <div class="menu-text text-gray">Project Status</div>
+                                </a>
+                            </div>
+                            
+                                </div>
+                                
 							</div>
-                            <div class="menu-item">
+                            <div class="menu-item has-sub">
 								<a href="#" class="menu-link">
 								<div class="menu-icon">
 								<i class="fa fa-money-check text-gray"></i>
 							</div>
 									<div class="menu-text text-gray">Claim</div>
+                                    <div class="menu-caret text-gray"></div>
 								</a>
+                                <div class="menu-submenu">
+                                <div class="menu-item">
+                                    <a href="#" class="menu-link">
+                                        <div class="menu-icon">
+								             <i class="fa fa-money-bill-wave text-gray"></i>
+							            </div>
+                                        <div class="menu-text text-gray">Claim</div>
+                                    </a>
+                                    </div>
+                                    <div class="menu-item">
+                                <a href="#" class="menu-link">
+                                <div class="menu-icon">
+								    <i class="fa fa-money-bill-1-wave text-gray"></i>
+							    </div>
+                                    <div class="menu-text text-gray">Cash Advance</div>
+                                </a>
+                            </div>
+                            
+                                </div>
 							</div>
                         </div>
                     </div>
