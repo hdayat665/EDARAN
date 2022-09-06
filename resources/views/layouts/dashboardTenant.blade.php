@@ -172,9 +172,7 @@
                             </div>
                             <div class="menu-text text-gray">HRIS</div>
                             <div class="menu-caret text-gray"></div>
-
                         </a>
-
                         <div class="menu-submenu">
 
                             <div class="menu-item">
