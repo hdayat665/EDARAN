@@ -30,6 +30,14 @@
     <link href="{{env('ASSETS_URL')}}/plugins/nvd3/build/nv.d3.css" rel="stylesheet" />
     <link href="{{env('ASSETS_URL')}}/plugins/simple-calendar/dist/simple-calendar.css" rel="stylesheet" />
     <link href="{{env('ASSETS_URL')}}/plugins/jstree/dist/themes/default/style.min.css" rel="stylesheet" />
+    <style>
+        .error{
+            /* margin-top:2.4rem !important; */
+            color: red !important;
+            text-align: left !important;
+            height: auto !important;
+        }
+    </style>
     <!-- ================== END page-css ================== -->
 </head>
 <body>
@@ -313,7 +321,7 @@
                         </a>
                         <div class="menu-submenu">
                             <div class="menu-item">
-                                <a href="#" class="menu-link">
+                                <a href="/customer" class="menu-link">
                                 <div class="menu-icon">
 								    <i class="fa fa-share-nodes text-gray"></i>
 							    </div>

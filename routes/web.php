@@ -10,6 +10,7 @@ use App\Http\Controllers\SettingController;
 use App\Http\Controllers\OrganizationController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\HRIS\EmployeeController;
+use App\Http\Controllers\Project\CustomerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -203,6 +204,7 @@ Route::group(['middleware' => ['web']], function () {
 
 
         });
+
         Route::controller(OrganizationController::class)->group(function () {
             Route::get('/getPhoneDirectory', 'getPhoneDirectory');
             Route::get('/getOrganizationChart', 'getOrganizationChart');
@@ -210,8 +212,15 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('/phoneDirectory', 'phoneDirectoryView');
             Route::get('/organizationChart', 'chartView');
             Route::get('/departmentTree', 'treeView');
+        });
 
-
+        Route::controller(CustomerController::class)->group(function () {
+            Route::get('/customer', 'customerView');
+            Route::post('/createCustomer', 'createCustomer');
+            Route::post('/updateCustomer/{id}', 'updateCustomer');
+            Route::get('/getCustomerById/{id}', 'getCustomerById');
+            Route::delete('/deleteCustomer/{id}', 'deleteCustomer');
+            Route::post('/updateStatus/{id}/{status}', 'updateStatus');
         });
     });
 });
