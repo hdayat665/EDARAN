@@ -6,20 +6,20 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal1" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form>
+                <form id="activationForm">
                     <div class="mb-3">
                         <label>A link will be sent to your email to activate your email address. If you don't get an email within a few minutes, please re-try.</label>
 
                     </div>
                     <div class="mb-3">
                         <label for="recipient-name" class="col-form-label">Email</label>
-                        <input type="text" class="form-control" id="recipient-name">
+                        <input type="text" class="form-control" name="username" id="recipient-name">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button  type="submit" id="activationButton" class="btn btn-primary">Submit</button>
                     </div>
                 </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Submit</button>
             </div>
         </div>
     </div>

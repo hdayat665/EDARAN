@@ -37,10 +37,12 @@ class EmployeeService
             $data['msg'] = 'email already exist';
         }else{
             $user['type'] = 'employee';
-            $user['status'] = 'not verified';
+            $user['status'] = 'active';
             $user['username'] = $r['username'];
             $user['tenant_id'] = Auth::user()->tenant_id;
+            $user['tenant'] = Auth::user()->tenant;
             $user['type'] = 'employee';
+            $user['password'] = Hash::make('password');
 
             Users::create($user);
 
@@ -722,7 +724,7 @@ class EmployeeService
     public function addEmployment($r)
     {
         $input= $r->input();
-        $input['tenant_id'] = Auth::user()->id;
+        $input['tenant_id'] = Auth::user()->tenant_id;
         $input['status'] = 'inactive';
         $input['joinedDate'] = date_format(date_create($input['joinedDate']), 'y-m-d');
         Employee::create($input);
@@ -730,10 +732,14 @@ class EmployeeService
         $ec['user_id'] = $input['user_id'];
         UserEmergency::create($ec);
         $jh['user_id'] = $input['user_id'];
-        $jh['tenant_id'] = Auth::user()->id;
+        $jh['tenant_id'] = Auth::user()->tenant_id;
         $jh['updatedBy'] = Auth::user()->username;
         $jh['effectiveDate'] = $input['joinedDate'];
         JobHistory::create($jh);
+
+        $ls = new LoginService;
+
+        $ls->temporaryPasswordEmail($input);
 
         $data['status'] = true;
         $data['title'] = 'Success';
@@ -807,4 +813,5 @@ class EmployeeService
 
         return $data;
     }
+
 }

@@ -37,6 +37,12 @@ class Mail extends Mailable
         }else if($data['typeEmail'] == 'forgotPass')
         {
             $view = 'emails.forgotPass';
+        }else if ($data['typeEmail'] == 'activateAcc') {
+            $view = 'emails.activationEmail';
+
+        }else if ($data['typeEmail'] == 'tempPass') {
+            $view = 'emails.temparoryPasswordEmail';
+
         }
         // $address = 'janeexampexample@example.com';
         // $subject = 'This is a demo!';

@@ -172,8 +172,8 @@
                             </div>
                             <div class="menu-text text-gray">HRIS</div>
                             <div class="menu-caret text-gray"></div>
-                        
-                        
+
+
                         <div class="menu-submenu">
                             <div class="menu-item">
                                 <a href="/myProfile" class="menu-link">
@@ -354,7 +354,7 @@
 							<div class="menu-icon">
 								<i class="fa fa-file-lines text-gray"></i>
 							</div>
-							<div class="menu-text text-gray">E-Claim</div> 
+							<div class="menu-text text-gray">E-Claim</div>
 							<div class="menu-caret text-gray"></div>
 						</a>
 						<div class="menu-submenu">
@@ -374,7 +374,7 @@
 									<div class="menu-text text-gray">Claim Approval</div>
 								</a>
 							</div>
-							
+
 						</div>
 					</div>
 
@@ -575,29 +575,29 @@
     <script src="{{env('ASSETS_URL')}}/js/demo/form-multiple-upload.demo.js"></script>
 	<script src="{{env('ASSETS_URL')}}/plugins/jstree/dist/jstree.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.js"></script>
-    <script src="{{env('ASSETS_URL')}}/js/orgchart.js"></script>
-    <link href="../assets/plugins/nvd3/build/nv.d3.css" rel="stylesheet" />
-<script src="../assets/plugins/d3/d3.min.js"></script>
-<script src="../assets/plugins/nvd3/build/nv.d3.min.js"></script>
-<script src="../assets/plugins/chart.js/dist/Chart.min.js"></script>
-    <script>
-    $('#data-table-default-announcement').DataTable({
-        responsive: true,
-        lengthMenu: [5, 10],
-    });
+    {{-- <script src="{{env('ASSETS_URL')}}/js/orgchart.js"></script> --}}
+    {{-- <link href="../assets/plugins/nvd3/build/nv.d3.css" rel="stylesheet" /> --}}
+    {{-- <script src="../assets/plugins/d3/d3.min.js"></script> --}}
+    {{-- <script src="../assets/plugins/nvd3/build/nv.d3.min.js"></script> --}}
+    {{-- <script src="../assets/plugins/chart.js/dist/Chart.min.js"></script> --}}
+    {{-- <script>
+        $('#data-table-default-announcement').DataTable({
+            responsive: true,
+            lengthMenu: [5, 10],
+        });
     </script>
     <script>
-    $('#data-table-default-events').DataTable({
-        responsive: true,
-        lengthMenu: [5, 10],
-    });
+        $('#data-table-default-events').DataTable({
+            responsive: true,
+            lengthMenu: [5, 10],
+        });
     </script>
     <script>
-    $('#data-table-default-clocks').DataTable({
-        responsive: true,
-        lengthMenu: [5, 10],
-    });
-    </script>
+        $('#data-table-default-clocks').DataTable({
+            responsive: true,
+            lengthMenu: [5, 10],
+        });
+    </script> --}}
     <script type="text/javascript">
         var require = {
             baseUrl: "{{env('ASSETS_URL')}}/js/",
@@ -605,73 +605,74 @@
             urlArgs: "bust=10"
         };
     </script>
-    <script>
-  Chart.defaults.color = 'rgba('+ app.color.componentColorRgb + ', .65)';
-  Chart.defaults.font.family = app.font.family;
-  Chart.defaults.font.weight = 500;
-  Chart.defaults.scale.grid.color = 'rgba('+ app.color.componentColorRgb + ', .15)';
-  Chart.defaults.scale.ticks.backdropColor = 'rgba('+ app.color.componentColorRgb + ', 0)';
-
-  var ctx5 = document.getElementById('pie-chart').getContext('2d');
-  
-        
-  window.myPie = new Chart(ctx5, {
-    type: 'pie',
-    data: {
-      labels: ['Annual Leave', 'Emergency Leave', 'Sick Leave', 'Unpaid Leave', 'Maternity Leave'],
-      datasets: [{
-        data: [300, 50, 100, 40, 120],
-        backgroundColor: ['rgba(52, 143, 226)','rgb(73, 182, 214)', 'rgba(255, 99, 71, 0.5)', 'rgb(255, 91, 87)', 'rgb(0, 172, 172)'],
-        borderColor: [app.color.red, app.color.orange, app.color.gray500, app.color.gray300, app.color.gray900],
-        borderWidth: 1,
-        label: 'My dataset'
-    }],
-  },
-  options: {
-    responsive: true
-  }
-});
-
-</script>
-
-
-
     <script src="{{env('ASSETS_URL')}}/js/require.js" data-main="controller"></script>
-    <script>
-  Chart.defaults.color = 'rgba('+ app.color.componentColorRgb + ', .65)';
-  Chart.defaults.font.family = app.font.family;
-  Chart.defaults.font.weight = 500;
-  Chart.defaults.scale.grid.color = 'rgba('+ app.color.componentColorRgb + ', .15)';
-  Chart.defaults.scale.ticks.backdropColor = 'rgba('+ app.color.componentColorRgb + ', 0)';
 
-  var randomScalingFactor = function() { 
-    return Math.round(Math.random()*100)
-  };
+    {{-- <script>
+        Chart.defaults.color = 'rgba('+ app.color.componentColorRgb + ', .65)';
+        Chart.defaults.font.family = app.font.family;
+        Chart.defaults.font.weight = 500;
+        Chart.defaults.scale.grid.color = 'rgba('+ app.color.componentColorRgb + ', .15)';
+        Chart.defaults.scale.ticks.backdropColor = 'rgba('+ app.color.componentColorRgb + ', 0)';
 
-  var ctx2 = document.getElementById('bar-chart').getContext('2d');
-  var barChart = new Chart(ctx2, {
-    type: 'bar',
-    data: {
-      labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-      datasets: [{
-        label: 'Check-In',
-        borderWidth: 1,
-        borderColor: 'rgb(64, 193, 193)',
-        backgroundColor: 'rgb(64, 193, 193)',
-        data: [12, 42, 42, 43, 35, 25, 42]
-      }, {
-        label: 'Check-Out',
-        borderWidth: 1,
-        borderColor: 'rgb(248, 181, 83)',
-        backgroundColor: 'rgb(248, 181, 83)',
-        data: [10, 12, 15, 13, 20, 22,21]
-      },{
-        label: 'Idle',
-        borderWidth: 1,
-        borderColor: 'rgb(194, 200, 206)',
-        backgroundColor: 'rgb(194, 200, 206)',
-        data: [2, 4, 5, 4, 7, 7, 7]
-      }]
-    }
-  });
-</script>
+        var ctx5 = document.getElementById('pie-chart').getContext('2d');
+
+
+        window.myPie = new Chart(ctx5, {
+            type: 'pie',
+            data: {
+                labels: ['Annual Leave', 'Emergency Leave', 'Sick Leave', 'Unpaid Leave', 'Maternity Leave'],
+                datasets: [{
+                    data: [300, 50, 100, 40, 120],
+                    backgroundColor: ['rgba(52, 143, 226)','rgb(73, 182, 214)', 'rgba(255, 99, 71, 0.5)', 'rgb(255, 91, 87)', 'rgb(0, 172, 172)'],
+                    borderColor: [app.color.red, app.color.orange, app.color.gray500, app.color.gray300, app.color.gray900],
+                    borderWidth: 1,
+                    label: 'My dataset'
+                }],
+            },
+            options: {
+                responsive: true
+            }
+        });
+
+    </script> --}}
+
+
+
+    {{-- <script>
+        Chart.defaults.color = 'rgba('+ app.color.componentColorRgb + ', .65)';
+        Chart.defaults.font.family = app.font.family;
+        Chart.defaults.font.weight = 500;
+        Chart.defaults.scale.grid.color = 'rgba('+ app.color.componentColorRgb + ', .15)';
+        Chart.defaults.scale.ticks.backdropColor = 'rgba('+ app.color.componentColorRgb + ', 0)';
+
+        var randomScalingFactor = function() {
+            return Math.round(Math.random()*100)
+        };
+
+        var ctx2 = document.getElementById('bar-chart').getContext('2d');
+        var barChart = new Chart(ctx2, {
+            type: 'bar',
+            data: {
+                labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+                datasets: [{
+                    label: 'Check-In',
+                    borderWidth: 1,
+                    borderColor: 'rgb(64, 193, 193)',
+                    backgroundColor: 'rgb(64, 193, 193)',
+                    data: [12, 42, 42, 43, 35, 25, 42]
+                }, {
+                    label: 'Check-Out',
+                    borderWidth: 1,
+                    borderColor: 'rgb(248, 181, 83)',
+                    backgroundColor: 'rgb(248, 181, 83)',
+                    data: [10, 12, 15, 13, 20, 22,21]
+                },{
+                    label: 'Idle',
+                    borderWidth: 1,
+                    borderColor: 'rgb(194, 200, 206)',
+                    backgroundColor: 'rgb(194, 200, 206)',
+                    data: [2, 4, 5, 4, 7, 7, 7]
+                }]
+            }
+        });
+    </script> --}}

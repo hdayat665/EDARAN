@@ -18,6 +18,7 @@
             /* margin-top:2.4rem !important; */
             color: red !important;
             text-align: left !important;
+            height: auto !important;
         }
     </style>
     <!-- ================== END core-css ================== -->
