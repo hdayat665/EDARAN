@@ -24,6 +24,7 @@ requirejs.config({
         'employmentTypeJs': assets + '/js/employmentTypeJs',
         'editEmployeeJs': assets + '/js/editEmployeeJs',
         'resetPassJs': assets + '/js/resetPassJs',
+        'customerJs': assets + '/js/customerJs',
 
         // 'main': 'assets/backend/js/main',
         'sweetAlert2': assets + '/assets/sweetalert2/sweetalert2',
@@ -123,6 +124,10 @@ if ($('#editEmployeeJs').length > 0) {
 
 if ($('#resetPassJs').length > 0) {
     requirejs(['resetPassJs']);
+}
+
+if ($('#customerJs').length > 0) {
+    requirejs(['customerJs']);
 }
 
 

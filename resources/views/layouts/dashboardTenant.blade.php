@@ -30,6 +30,14 @@
     <link href="{{env('ASSETS_URL')}}/plugins/nvd3/build/nv.d3.css" rel="stylesheet" />
     <link href="{{env('ASSETS_URL')}}/plugins/simple-calendar/dist/simple-calendar.css" rel="stylesheet" />
     <link href="{{env('ASSETS_URL')}}/plugins/jstree/dist/themes/default/style.min.css" rel="stylesheet" />
+    <style>
+        .error{
+            /* margin-top:2.4rem !important; */
+            color: red !important;
+            text-align: left !important;
+            height: auto !important;
+        }
+    </style>
     <!-- ================== END page-css ================== -->
 </head>
 <body>
@@ -183,7 +191,7 @@
                                     <div class="menu-text text-gray"> My Profile </div>
                                 </a>
                             </div>
-                            
+
                             <div class="menu-item">
                                 <a href="/employeeInfoView" class="menu-link">
                                     <div class="menu-icon">
@@ -313,7 +321,7 @@
                         </a>
                         <div class="menu-submenu">
                             <div class="menu-item">
-                                <a href="#" class="menu-link">
+                                <a href="/customer" class="menu-link">
                                 <div class="menu-icon">
 								    <i class="fa fa-share-nodes text-gray"></i>
 							    </div>
@@ -466,7 +474,7 @@
                                 </a>
                             </div>
                                 </div>
-                                
+
                             </div>
                             <div class="menu-item has-sub">
                                 <a href="#" class="menu-link">
@@ -492,10 +500,10 @@
                                     <div class="menu-text text-gray">Status Report</div>
                                 </a>
                             </div>
-                            
+
                         </div>
-                                
-                                
+
+
                             </div>
                             <div class="menu-item">
 								<a href="#" class="menu-link">
@@ -530,9 +538,9 @@
                                     <div class="menu-text text-gray">Project Status</div>
                                 </a>
                             </div>
-                            
+
                                 </div>
-                                
+
 							</div>
                             <div class="menu-item has-sub">
 								<a href="#" class="menu-link">
@@ -559,7 +567,7 @@
                                     <div class="menu-text text-gray">Cash Advance</div>
                                 </a>
                             </div>
-                            
+
                                 </div>
 							</div>
                         </div>
