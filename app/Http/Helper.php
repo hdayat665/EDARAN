@@ -2,6 +2,7 @@
 
 use App\Models\Branch;
 use App\Models\Company;
+use App\Models\Customer;
 use App\Models\Department;
 use App\Models\Designation;
 use App\Models\EmploymentType;
@@ -389,6 +390,58 @@ if (!function_exists('getEmploymentType')) {
         return $data;
     }
 }
+
+if (!function_exists('getCustomer')) {
+    function getCustomer()
+    {
+        $data = Customer::where('tenant_id', Auth::user()->tenant_id)->get();
+
+        return $data;
+    }
+}
+
+if (!function_exists('getStatusProject')) {
+    function getStatusProject()
+    {
+        $data = [
+            'Ongoing' => 'Ongoing',
+            'Warranty' => 'Warranty',
+            'Closed' => 'Closed',
+        ];
+
+        return $data;
+    }
+}
+
+if (!function_exists('getContractType')) {
+    function getContractType()
+    {
+        $data = [
+            'EXT' => 'EXT',
+            'ORI' => 'ORI',
+            'VO' => 'VO',
+        ];
+
+        return $data;
+    }
+}
+
+if (!function_exists('getFinancialYear')) {
+    function getFinancialYear()
+    {
+        $data = [
+            '2025' => '2025',
+            '2024' => '2024',
+            '2023' => '2023',
+            '2022' => '2022',
+            '2021' => '2021',
+            '2020' => '2020',
+        ];
+
+        return $data;
+    }
+}
+
 
 
 if (!function_exists('getEvent')) {

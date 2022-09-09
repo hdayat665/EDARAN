@@ -16,7 +16,7 @@ class CustomerController extends Controller
 
         $data['customers'] = $ps->customerView();
 
-        return view('pages.project.customer.customerTable', $data);
+        return view('pages.project.customerTable', $data);
     }
 
     public function createCustomer(Request $r)

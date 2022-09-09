@@ -5,7 +5,7 @@ namespace App\Service;
 use App\Models\Attachments;
 use App\Models\Employee;
 use App\Models\JobHistory;
-use App\Models\ProjectRegistration;
+use App\Models\Customer;
 use App\Models\Subscription;
 use App\Models\UserAddress;
 use App\Models\UserChildren;
@@ -28,7 +28,7 @@ class CustomerService
     public function customerView()
     {
         $tenant_id = Auth::user()->tenant_id;
-        $data = ProjectRegistration::where('tenant_id', $tenant_id)->get();
+        $data = Customer::where('tenant_id', $tenant_id)->get();
         if(!$data)
         {
             $data = [];
@@ -43,7 +43,7 @@ class CustomerService
         $input['tenant_id'] = Auth::user()->tenant_id;
         $input['addedBy'] = Auth::user()->username;
 
-        ProjectRegistration::create($input);
+        Customer::create($input);
 
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
@@ -57,7 +57,7 @@ class CustomerService
     {
         $input = $r->input();
 
-        ProjectRegistration::where('id', $id)->update($input);
+        Customer::where('id', $id)->update($input);
 
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
@@ -69,14 +69,14 @@ class CustomerService
 
     public function getCustomerById($id)
     {
-        $data = ProjectRegistration::find($id);
+        $data = Customer::find($id);
 
         return $data;
     }
 
     public function deleteCustomer($id)
     {
-        $data = ProjectRegistration::find($id);
+        $data = Customer::find($id);
 
         if (!$data) {
             $data['status'] = config('app.response.error.status');
@@ -98,7 +98,7 @@ class CustomerService
     public function updateStatus($id, $status)
     {
 
-        ProjectRegistration::where('id', $id)->update(['status' => $status]);
+        Customer::where('id', $id)->update(['status' => $status]);
 
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
