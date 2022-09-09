@@ -11,6 +11,7 @@ use App\Http\Controllers\OrganizationController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\HRIS\EmployeeController;
 use App\Http\Controllers\Project\CustomerController;
+use App\Http\Controllers\Project\ProjectController;
 
 /*
 |--------------------------------------------------------------------------
@@ -221,6 +222,17 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('/getCustomerById/{id}', 'getCustomerById');
             Route::delete('/deleteCustomer/{id}', 'deleteCustomer');
             Route::post('/updateStatus/{id}/{status}', 'updateStatus');
+        });
+
+        Route::controller(ProjectController::class)->group(function () {
+            Route::get('/projectInfo', 'projectInfoView');
+            Route::post('/createProject', 'createProject');
+            Route::get('/projectInfoEdit/{id}', 'projectInfoEditView');
+            Route::post('/updateProject/{id}', 'updateProject');
+            Route::post('/createProjectLocation', 'createProjectLocation');
+            Route::get('/getProjectLocationById/{id}', 'getProjectLocationById');
+            Route::post('/updateProjectLocation/{id}', 'updateProjectLocation');
+            Route::delete('/deleteProjectLocation/{id}', 'deleteProjectLocation');
         });
     });
 });

@@ -8,7 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
-class ProjectRegistration extends Authenticatable
+class ProjectManager extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
@@ -18,18 +18,17 @@ class ProjectRegistration extends Authenticatable
      * @var array<int, string>
      */
 
-    protected $table ='project_registration';
+    protected $table = 'project_manager';
 
     protected $fillable = [
-        'status',
-        'tenant_id',
-        'customer_name',
-        'address',
-        'email',
-        'phoneNo',
-        'addedBy',
+       'manager_name',
+       'project_id',
+       'customer_id',
+       'designation',
+       'department',
+       'branch',
+       'unit',
+       'joined_date',
+       'exit_date',
     ];
-
 }
-
-
