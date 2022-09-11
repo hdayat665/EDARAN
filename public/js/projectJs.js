@@ -252,6 +252,79 @@ $(document).ready(function() {
     });
 
 
+    $(document).on("click", "#approveButton", function() {
+        id = $(this).data('id');
+        requirejs(['sweetAlert2'], function(swal) {
+            swal({
+                title: "Are you sure!",
+                type: "error",
+                confirmButtonClass: "btn-danger",
+                confirmButtonText: "Yes!",
+                showCancelButton: true,
+            }).then(function() {
+                $.ajax({
+                    type: "POST",
+                    url: "/approveProjectMember/" + id,
+                    dataType: "json",
+                    async: false,
+                    processData: false,
+                    contentType: false,
+                }).done(function(data) {
+                    swal({
+                        title: data.title,
+                        text: data.msg,
+                        type: data.type,
+                        confirmButtonColor: '#3085d6',
+                        confirmButtonText: 'OK'
+                    }).then(function() {
+                        if (data.type == 'error') {
+
+                        } else {
+                            location.reload();
+                        }
+                    });
+                });
+            });
+        });
+    });
+
+    $(document).on("click", "#rejectButton", function() {
+        id = $(this).data('id');
+        requirejs(['sweetAlert2'], function(swal) {
+            swal({
+                title: "Are you sure!",
+                type: "error",
+                confirmButtonClass: "btn-danger",
+                confirmButtonText: "Yes!",
+                showCancelButton: true,
+            }).then(function() {
+                $.ajax({
+                    type: "POST",
+                    url: "/rejectProjectMember/" + id,
+                    dataType: "json",
+                    async: false,
+                    processData: false,
+                    contentType: false,
+                }).done(function(data) {
+                    swal({
+                        title: data.title,
+                        text: data.msg,
+                        type: data.type,
+                        confirmButtonColor: '#3085d6',
+                        confirmButtonText: 'OK'
+                    }).then(function() {
+                        if (data.type == 'error') {
+
+                        } else {
+                            location.reload();
+                        }
+                    });
+                });
+            });
+        });
+    });
+
+
     $("#datepicker-loa").datepicker({
         todayHighlight: true,
         autoclose: true

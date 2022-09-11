@@ -345,7 +345,7 @@
                                 </a>
                             </div>
                             <div class="menu-item">
-                                <a href="#" class="menu-link">
+                                <a href="/projectRequest" class="menu-link">
                                 <div class="menu-icon">
 								    <i class="fa fa-code-pull-request text-gray"></i>
 							    </div>

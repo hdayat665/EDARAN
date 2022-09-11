@@ -133,6 +133,7 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('/addEmployeeVehicle', 'addVehicle');
             Route::post('/addEmployment', 'addEmployment');
             Route::post('/updateEmployee', 'updateEmployee');
+            Route::get('/getEmployeeById/{id}', 'getEmployeeById');
 
         });
 
@@ -233,6 +234,16 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('/getProjectLocationById/{id}', 'getProjectLocationById');
             Route::post('/updateProjectLocation/{id}', 'updateProjectLocation');
             Route::delete('/deleteProjectLocation/{id}', 'deleteProjectLocation');
+            Route::post('/createProjectMember', 'createProjectMember');
+            Route::get('/getProjectMemberById/{id}', 'getProjectMemberById');
+            Route::post('/updateProjectMember/{id}', 'updateProjectMember');
+            Route::post('/assignProjectMember', 'assignProjectMember');
+            Route::get('/projectRequest', 'projectRequestView');
+            Route::get('/getRequestProjectById/{id}', 'getRequestProjectById');
+            Route::post('/addRequestProject/{id}', 'addRequestProject');
+            Route::post('/approveProjectMember/{id}', 'approveProjectMember');
+            Route::post('/rejectProjectMember/{id}', 'rejectProjectMember');
+
         });
     });
 });

@@ -23,13 +23,20 @@ class ProjectMember extends Authenticatable
     protected $fillable = [
         'project_id',
         'customer_id',
+        'tenant_id',
         'location_id',
         'employee_id',
         'member_name',
-        'desingation',
+        'designation',
         'department',
+        'location',
+        'exit_project',
+        'requested_date',
+        'exit_project_date',
         'branch',
         'unit',
+        'status',
+        'reason',
         'joined_date',
     ];
 }
