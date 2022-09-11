@@ -87,19 +87,22 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @if ($projectInfos)
-                                @foreach ($projectInfos as $projectInfo)
+                                @if ($projectApproval)
+                                @foreach ($projectApproval as $projectInfo)
                                 <tr class="odd gradeX">
-                                    <td width="7%"><a href="javascript:;" class="btn btn-outline-green">
-                                        <i class="fa fa-circle-check"></i></a> <a href="javascript:;" class="btn btn-outline-danger"><i class="fa fa-circle-xmark"></i></a>
+                                    <td width="7%">
+                                        <a href="javascript:;" id="approveButton" data-id="{{$projectInfo->id}}" class="btn btn-outline-green">
+                                            <i class="fa fa-circle-check"></i>
+                                        </a>
+                                        <a href="javascript:;" id="rejectButton" data-id="{{$projectInfo->id}}" class="btn btn-outline-danger"><i class="fa fa-circle-xmark"></i></a>
                                     </td>
-                                    <td>29/09/2020</td>
-                                    <td>Hani Kamarudin</td>
-                                    <td>Service Delivery Department</td>
-                                    <td>JABATAN PERDANA MENTERI</td>
-                                    <td>JPM1234</td>
-                                    <td>PC LEASING</td>
-                                    <td>To be part of the developer tea</td>
+                                    <td>{{$projectInfo->requested_date}}</td>
+                                    <td>{{$projectInfo->employeeName}}</td>
+                                    <td>{{$projectInfo->departmentName}}</td>
+                                    <td>{{$projectInfo->customer_name}}</td>
+                                    <td>{{$projectInfo->project_code}}</td>
+                                    <td>{{$projectInfo->project_name}}</td>
+                                    <td>{{$projectInfo->reason}}</td>
                                 </tr>
                                 @endforeach
                                 @endif

@@ -85,6 +85,10 @@ class RegisterService
 
         Tenant::create($userProfile);
 
+        $ls = new LoginService;
+        $email['username'] = $param['username'];
+        $ls->activationEmail($email);
+
 
         // remove confirm_password element
         // unset($r['confirm_password']);

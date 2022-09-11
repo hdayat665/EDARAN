@@ -1,4 +1,4 @@
-<div class="modal fade" id="viewassigned" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="viewAssignMemberPrevLocModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -9,7 +9,7 @@
                 <form>
                     <div class="row">
                         <div class="col-md-10">
-                            <label class="form-label col-form-label col-md-10">Project Member Name: Noraliya</label>
+                            <label class="form-label col-form-label col-md-10">Project Member Name: <span id="memberName"></span></label>
                         </div>
                     </div>
                     <div class="row">

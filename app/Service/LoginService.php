@@ -334,7 +334,7 @@ class LoginService
             $data['title'] = config('app.response.error.title');
             $data['msg'] = 'Email not found';
         } else {
-            $receiver = 'hdayat665@gmail.com';
+            $receiver = $input['username'];
             $response['typeEmail'] = 'activateAcc';
             $response['title'] = 'Orbit Activation Link';
             $response['content1'] = 'This email is sent you to activate your account.';

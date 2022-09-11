@@ -16,7 +16,8 @@ class ProjectController extends Controller
 
         $ps = new ProjectService;
 
-        $data = $ps->projectInfoView();
+        $data['projectInfos'] = $ps->projectInfoView();
+        $data['projectApproval'] = $ps->projectApprovalData();;
 
         return view('pages.project.projectInfo', $data);
     }
@@ -40,7 +41,10 @@ class ProjectController extends Controller
         $data['project'] = $ps->getProjectById($id);
         $data['projectLocations'] = $ps->getProjectLocation();
         $data['employeeInfos'] = $es->getEmployeeProject();
-        // pr($data['employeeInfos']);
+        $data['previousProjectMembers'] = $ps->getProjectMember('on');
+        $data['projectMembers'] = $ps->getProjectMember();
+
+        // pr($data);
 
         return view('pages.project.projectInfoEdit', $data);
     }
@@ -89,6 +93,92 @@ class ProjectController extends Controller
         $ps = new ProjectService;
 
         $result = $ps->deleteProjectLocation($id);
+
+        return response()->json($result);
+    }
+
+    public function createProjectMember(Request $r)
+    {
+        $ps = new ProjectService;
+
+        $result = $ps->createProjectMember($r);
+
+        return response()->json($result);
+    }
+
+    public function getProjectMemberById($id)
+    {
+        $data = [];
+
+        $ps = new ProjectService;
+
+        $data = $ps->getProjectMemberById($id);
+        // pr($data['project']);
+
+        return response()->json($data);
+    }
+
+    public function updateProjectMember(Request $r, $id)
+    {
+        $ss = new ProjectService;
+
+        $result = $ss->updateProjectMember($r, $id);
+
+        return response()->json($result);
+    }
+
+    public function assignProjectMember(Request $r)
+    {
+        $ss = new ProjectService;
+
+        $result = $ss->assignProjectMember($r);
+
+        return response()->json($result);
+    }
+
+    public function projectRequestView()
+    {
+        $data = [];
+
+        $ps = new ProjectService;
+
+        $data['projectInfos'] = $ps->projectRequestView();
+        // pr($data);
+        return view('pages.project.projectRequest', $data);
+    }
+
+    public function getRequestProjectById($id)
+    {
+        $ps = new ProjectService;
+        $data = $ps->getProjectById($id);
+
+        return response()->json($data);
+
+    }
+
+    public function addRequestProject(Request $r, $id)
+    {
+        $ss = new ProjectService;
+
+        $result = $ss->addRequestProject($r, $id);
+
+        return response()->json($result);
+    }
+
+    public function approveProjectMember(Request $r, $id)
+    {
+        $ss = new ProjectService;
+
+        $result = $ss->updateStatusProjectMember($r, $id, 'approve');
+
+        return response()->json($result);
+    }
+
+    public function rejectProjectMember(Request $r, $id)
+    {
+        $ss = new ProjectService;
+
+        $result = $ss->updateStatusProjectMember($r, $id, 'reject');
 
         return response()->json($result);
     }

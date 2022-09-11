@@ -27,6 +27,8 @@ requirejs.config({
         'customerJs': assets + '/js/customerJs',
         'projectJs': assets + '/js/projectJs',
         'editProjectJs': assets + '/js/editProjectJs',
+        'requestProjectJs': assets + '/js/requestProjectJs',
+
 
         // 'main': 'assets/backend/js/main',
         'sweetAlert2': assets + '/assets/sweetalert2/sweetalert2',
@@ -139,6 +141,11 @@ if ($('#projectJs').length > 0) {
 if ($('#editProjectJs').length > 0) {
     requirejs(['editProjectJs']);
 }
+
+if ($('#requestProjectJs').length > 0) {
+    requirejs(['requestProjectJs']);
+}
+
 
 
 // Global function

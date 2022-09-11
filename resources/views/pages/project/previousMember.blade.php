@@ -32,8 +32,8 @@
                 <div class="tab-pane fade active show" id="current-member">
                     <div class="panel-heading-btn">
                         <br>
-                        <a href="javascript:;" data-bs-toggle="modal" data-bs-target="#addprojectmember" class="btn btn-primary">+ Add Project Member</a>
-                        <a href="javascript:;" data-bs-toggle="modal" data-bs-target="#assignlocation" class="btn btn-primary">+ Assign Location</a>
+                        <a href="javascript:;" data-bs-toggle="modal" id="addProjectMemberButton" class="btn btn-primary">+ Add Project Member</a>
+                        <a href="javascript:;" data-bs-toggle="modal" id="assignProjectMemberButton" class="btn btn-primary">+ Assign Location</a>
                     </div>
                     <br>
                     <div class="panel-body">
@@ -51,16 +51,20 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td width="1%"><a data-bs-toggle="modal" data-bs-target="#updateprojectmember" class="btn btn-outline-green"><i class="fa fa-pencil-alt"></i></a></td>
-                                    <td>Noraliya</td>
-                                    <td>Business Analyst</td>
-                                    <td>Service Delivery Department</td>
-                                    <td>Headquaters</td>
-                                    <td>SOU Unit</td>
-                                    <td>01/09/2020</td>
-                                    <td><a href="#" data-bs-toggle="modal" data-bs-target="#viewassignedprevious">1</a></td>
-                                </tr>
+                                @if ($projectMembers)
+                                    @foreach ($projectMembers as $projectMember)
+                                        <tr>
+                                            <td width="1%"><a data-bs-toggle="modal" data-id="{{$projectMember->id}}" id="editProjectMemberButton" class="btn btn-outline-green"><i class="fa fa-pencil-alt"></i></a></td>
+                                            <td>{{$projectMember->employeeName}}</td>
+                                            <td>{{$projectMember->designation}}</td>
+                                            <td>{{$projectMember->department}}</td>
+                                            <td>{{$projectMember->branch}}</td>
+                                            <td>{{$projectMember->unit}}</td>
+                                            <td>{{$projectMember->joined_date}}</td>
+                                            <td><a href="#" data-bs-toggle="modal" data-id="{{$projectMember->id}}" id="viewAssignMemberPrevLoc">{{$projectMember->location}}</a></td>
+                                        </tr>
+                                    @endforeach
+                                @endif
                             </tbody>
                         </table>
                     </div>
@@ -87,18 +91,21 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td width="1%"><a data-bs-toggle="modal" data-bs-target="#updateprojectmember" class="btn btn-outline-green"><i class="fa fa-pencil-alt"></i></a></td>
-                                    <td>Noraliya</td>
-                                    <td>Business Analyst</td>
-                                    <td>Service Delivery Department</td>
-                                    <td>Headquaters</td>
-                                    <td>SOU Unit</td>
-                                    <td>01/09/2020</td>
-                                    <td>01/09/2020</td>
-                                    <td><a href="#" data-bs-toggle="modal" data-bs-target="#viewassigned">1</a></td>
-
-                                </tr>
+                                @if ($previousProjectMembers)
+                                @foreach ($previousProjectMembers as $projectMember)
+                                    <tr>
+                                        <td width="1%"><a data-bs-toggle="modal" data-id="{{$projectMember->id}}" id="editPreviousProjectMemberButton" class="btn btn-outline-green"><i class="fa fa-pencil-alt"></i></a></td>
+                                        <td>{{$projectMember->employeeName}}</td>
+                                        <td>{{$projectMember->designation}}</td>
+                                        <td>{{$projectMember->department}}</td>
+                                        <td>{{$projectMember->branch}}</td>
+                                        <td>{{$projectMember->unit}}</td>
+                                        <td>{{$projectMember->joined_date}}</td>
+                                        <td>{{$projectMember->exit_project_date}}</td>
+                                        <td><a href="#" data-bs-toggle="modal" data-id="{{$projectMember->id}}" id="viewAssignPreviousMemberPrevLoc">{{$projectMember->location}}</a></td>
+                                    </tr>
+                                @endforeach
+                            @endif
                             </tbody>
                         </table>
                     </div>

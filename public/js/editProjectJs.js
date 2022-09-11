@@ -1,6 +1,11 @@
 $(document).ready(function() {
 
-    $("#datepicker-joindate").datepicker({
+    $("#datepicker-joineddate").datepicker({
+        todayHighlight: true,
+        autoclose: true,
+    });
+
+    $("#datepicker-exitdate").datepicker({
         todayHighlight: true,
         autoclose: true,
     });
@@ -268,6 +273,270 @@ $(document).ready(function() {
         });
     }
     /////////////////////// END PROJECT LOCATION /////////////////////
+
+    /////////////////////// START PROJECT MEMBER /////////////////////
+    $('#saveProjectMember').click(function(e) {
+        $("#addProjectMemberForm").validate({
+            rules: {
+                joined_date: "required",
+                employee_id: "required",
+                designation: "required",
+                branch: "required",
+                unit: "required",
+                department: "required",
+                location_google: "required",
+            },
+
+            messages: {
+                joined_date: "",
+                employee_id: "",
+                postcode: "",
+                designation: "",
+                unit: "",
+                department: "",
+                location_google: "",
+            },
+            submitHandler: function(form) {
+                requirejs(['sweetAlert2'], function(swal) {
+
+                    var data = new FormData(document.getElementById("addProjectMemberForm"));
+                    // var data = $('#tree').jstree("get_selected");
+                    // var id = $('#idPC').val();
+
+                    $.ajax({
+                        type: "POST",
+                        url: "/createProjectMember",
+                        data: data,
+                        dataType: "json",
+                        async: false,
+                        processData: false,
+                        contentType: false,
+                    }).done(function(data) {
+                        swal({
+                            title: data.title,
+                            text: data.msg,
+                            type: data.type,
+                            confirmButtonColor: '#3085d6',
+                            confirmButtonText: 'OK'
+                        }).then(function() {
+                            if (data.type == 'error') {
+
+                            } else {
+                                location.reload();
+                            }
+
+
+                        });
+                    });
+
+                });
+            },
+        });
+    });
+
+    $(document).on("change", "#employee_id", function() {
+        var employee_id = $(this).val()
+        var employee = getEmployeeById(employee_id)
+
+        employee.done(function(data) {
+            console.log(data);
+            $("#unit").prop("selectedIndex", data.unit);
+            $("#designation").prop("selectedIndex", data.unit);
+            $("#department").prop("selectedIndex", data.department);
+            $("#branch").prop("selectedIndex", data.branch);
+        })
+    })
+
+    function getEmployeeById(id) {
+        return $.ajax({
+            url: "/getEmployeeById/" + id
+        });
+    }
+
+    $(document).on("click", "#addProjectMemberButton", function() {
+        $('#addProjectMemberModal').modal('show');
+
+    });
+
+    $(document).on("click", "#editProjectMemberButton", function() {
+        var id = $(this).data('id');
+        var vehicleData = getProjectMember(id);
+
+        vehicleData.done(function(data) {
+            console.log(data);
+            $("#joined_date").val(data.joined_date);
+            $("#employee_idE").prop("selectedIndex", data.employee_id);
+            $("#unitE").val(data.unit);
+            $("#designationE").val(data.designation);
+            $("#departmentE").val(data.department);
+            $("#branchE").val(data.branch);
+            $("#exit_project").prop('checked', data.exit_project);
+            $("#exit_project_date").val(data.exit_project_date);
+            $("#idPM").val(data.id);
+        })
+        $('#editProjectMemberModal').modal('show');
+
+    });
+
+    function getProjectMember(id) {
+        return $.ajax({
+            url: "/getProjectMemberById/" + id
+        });
+    }
+
+    $('#updateProjectMember').click(function(e) {
+        $("#editProjectMemberForm").validate({
+            rules: {
+                joined_date: "required",
+                employee_id: "required",
+                designation: "required",
+                branch: "required",
+                unit: "required",
+                department: "required",
+                location_google: "required",
+            },
+
+            messages: {
+                joined_date: "",
+                employee_id: "",
+                designation: "",
+                branch: "",
+                unit: "",
+                department: "",
+                location_google: "",
+            },
+            submitHandler: function(form) {
+                requirejs(['sweetAlert2'], function(swal) {
+
+                    var data = new FormData(document.getElementById("editProjectMemberForm"));
+                    // var data = $('#tree').jstree("get_selected");
+                    var id = $('#idPM').val();
+
+                    $.ajax({
+                        type: "POST",
+                        url: "/updateProjectMember/" + id,
+                        data: data,
+                        dataType: "json",
+                        async: false,
+                        processData: false,
+                        contentType: false,
+                    }).done(function(data) {
+                        swal({
+                            title: data.title,
+                            text: data.msg,
+                            type: data.type,
+                            confirmButtonColor: '#3085d6',
+                            confirmButtonText: 'OK'
+                        }).then(function() {
+                            if (data.type == 'error') {
+
+                            } else {
+                                location.reload();
+                            }
+
+
+                        });
+                    });
+
+                });
+            },
+        });
+    });
+
+    function getProjectLocation(id) {
+        return $.ajax({
+            url: "/getProjectMemberById/" + id
+        });
+    }
+
+    $(document).on("click", "#assignProjectMemberButton", function() {
+        $('#assignProjectMemberModal').modal('show');
+    });
+
+    $('#assignProjectMember').click(function(e) {
+        $("#assignProjectMemberForm").validate({
+            rules: {},
+
+            messages: {},
+            submitHandler: function(form) {
+                requirejs(['sweetAlert2'], function(swal) {
+
+                    var data = new FormData(document.getElementById("assignProjectMemberForm"));
+                    // var data = $('#tree').jstree("get_selected");
+                    // var id = $('#idPM').val();
+
+                    $.ajax({
+                        type: "POST",
+                        url: "/assignProjectMember",
+                        data: data,
+                        dataType: "json",
+                        async: false,
+                        processData: false,
+                        contentType: false,
+                    }).done(function(data) {
+                        swal({
+                            title: data.title,
+                            text: data.msg,
+                            type: data.type,
+                            confirmButtonColor: '#3085d6',
+                            confirmButtonText: 'OK'
+                        }).then(function() {
+                            if (data.type == 'error') {
+
+                            } else {
+                                location.reload();
+                            }
+
+
+                        });
+                    });
+
+                });
+            },
+        });
+    });
+
+    $(document).on("click", "#viewAssignMemberPrevLoc", function() {
+        var id = $(this).data('id');
+        var vehicleData = getProjectLocation(id);
+
+        vehicleData.done(function(data) {
+            console.log(data);
+            $("#memberName").val(data.mem);
+            $("#employee_idE").prop("selectedIndex", data.employee_id);
+            $("#unitE").val(data.unit);
+            $("#designationE").val(data.designation);
+            $("#departmentE").val(data.department);
+            $("#branchE").val(data.branch);
+            $("#exit_project").prop('checked', data.exit_project);
+            $("#exit_project_date").val(data.exit_project_date);
+            $("#idPM").val(data.id);
+        })
+        $('#viewAssignMemberPrevLocModal').modal('show');
+
+    });
+
+    $(document).on("click", "#editPreviousProjectMemberButton", function() {
+        var id = $(this).data('id');
+        var vehicleData = getProjectMember(id);
+
+        vehicleData.done(function(data) {
+            console.log(data);
+            $("#joined_date").val(data.joined_date);
+            $("#employee_idE").prop("selectedIndex", data.employee_id);
+            $("#unitE").val(data.unit);
+            $("#designationE").val(data.designation);
+            $("#departmentE").val(data.department);
+            $("#branchE").val(data.branch);
+            $("#exit_project").prop('checked', data.exit_project);
+            $("#exit_project_date").val(data.exit_project_date);
+            $("#idPM").val(data.id);
+        })
+        $('#editProjectMemberModal').modal('show');
+
+    });
+
+    /////////////////////// END PROJECT MEMBER /////////////////////
 
     $(document).on("click", "#viewButton", function() {
         var id = $(this).data('id');
