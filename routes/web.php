@@ -243,7 +243,7 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('/addRequestProject/{id}', 'addRequestProject');
             Route::post('/approveProjectMember/{id}', 'approveProjectMember');
             Route::post('/rejectProjectMember/{id}', 'rejectProjectMember');
-
+            Route::get('/myProject', 'myProjectView');
         });
     });
 });

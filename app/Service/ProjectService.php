@@ -188,8 +188,7 @@ class ProjectService
     {
         $input = $r->input();
         $input['joined_date'] = date_format(date_create($input['joined_date']), 'Y-m-d');
-        if($input['exit_project'] == 'on')
-        {
+        if ($input['exit_project'] == 'on') {
             $input['exit_project_date'] = date_format(date_create(), 'Y-m-d');
         }
         ProjectMember::create($input);
@@ -246,11 +245,10 @@ class ProjectService
         $input = $r->input();
         $input['joined_date'] = date_format(date_create($input['joined_date']), 'Y-m-d');
 
-        if(isset($input['exit_project']))
-        {
+        if (isset($input['exit_project'])) {
             $input['exit_project_date'] = date_format(date_create(), 'Y-m-d');
         }
-        $input['location'] = implode(',', $input['location'] );
+        $input['location'] = implode(',', $input['location']);
 
         ProjectMember::where('id', $id)->update($input);
 
@@ -268,7 +266,7 @@ class ProjectService
 
         foreach ($input['employee_id'] as $employee_id) {
             $id = $employee_id;
-            $update['location'] = implode(',', $input['location'] );
+            $update['location'] = implode(',', $input['location']);
             // pr($update);
             ProjectMember::where('id', $id)->update($update);
         }
@@ -287,19 +285,28 @@ class ProjectService
         $input['status_request'] = 'pending';
         $employee = Employee::where('user_id', Auth::user()->id)->first();
 
-        $input['employee_name'] = $employee->employeeName;
-        $input['employee_id'] = $employee->id;
-        $input['tenant_id'] = Auth::user()->tenant_id;
-        $input['project_id'] = $project_id;
-        $input['status'] = 'pending';
-        $input['requested_date'] = date_format(date_create(), 'Y-m-d');
+        $projectMember = ProjectMember::where([['project_id', '=', $project_id], ['employee_id', '=', $employee->id], ['status', '=', 'approve']])->first();
 
-        ProjectMember::create($input);
+        if ($projectMember) {
+            $data['status'] = config('app.response.error.status');
+            $data['type'] = config('app.response.error.type');
+            $data['title'] = config('app.response.error.title');
+            $data['msg'] = 'You are already in this project';
+        } else {
+            $input['employee_name'] = $employee->employeeName;
+            $input['employee_id'] = $employee->id;
+            $input['tenant_id'] = Auth::user()->tenant_id;
+            $input['project_id'] = $project_id;
+            $input['status'] = 'pending';
+            $input['requested_date'] = date_format(date_create(), 'Y-m-d');
 
-        $data['status'] = config('app.response.success.status');
-        $data['type'] = config('app.response.success.type');
-        $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success update Project Request';
+            ProjectMember::create($input);
+
+            $data['status'] = config('app.response.success.status');
+            $data['type'] = config('app.response.success.type');
+            $data['title'] = config('app.response.success.title');
+            $data['msg'] = 'Success update Project Request';
+        }
 
         return $data;
     }
@@ -345,13 +352,27 @@ class ProjectService
     public function projectRequestView()
     {
         $employee = Employee::where('user_id', Auth::user()->id)->first();
-        // $data = DB::where('employee_id', '!=', $employee->employee_id)->get();
+        // pr($employee->id);
+        $projectMember = ProjectMember::select('project_id')->where('employee_id', '=', $employee->id)->groupBy('project_id')->get();
 
-        $data = DB::table('project_member as a')
-            ->leftJoin('project as b', 'a.project_id', '=', 'b.id')
-            ->leftJoin('customer as c', 'b.customer_id', '=', 'c.id')
-            ->select('b.*', 'c.customer_name')
-            ->where('a.employee_id', '!=', $employee->employee_id)
+        foreach ($projectMember as $project) {
+            $projectId[] = $project->project_id;
+        }
+
+        // $projectIds = implode(',', $projectId);
+
+        // $data = DB::table('project_member as a')
+        //     ->leftJoin('project as b', 'a.project_id', '=', 'b.id')
+        //     ->leftJoin('customer as c', 'b.customer_id', '=', 'c.id')
+        //     ->select('b.*', 'c.customer_name')
+        //     ->where([['a.employee_id', '!=', $employee->id]])
+        //     ->groupBy('b.id')
+        //     ->get();
+
+        $data = DB::table('project as a')
+            ->leftJoin('customer as b', 'a.customer_id', '=', 'b.id')
+            ->select('a.*', 'b.customer_name')
+            ->whereNotIn('a.id', $projectId)
             ->get();
 
         if (!$data) {
@@ -361,5 +382,33 @@ class ProjectService
         return $data;
     }
 
+    public function myProjectView()
+    {
+        $employee = Employee::where('user_id', Auth::user()->id)->first();
+        // pr($employee->id);
+        $projectMember = ProjectMember::select('project_id')->where('employee_id', '=', $employee->id)->groupBy('project_id')->get();
 
+        foreach ($projectMember as $project) {
+            $projectId[] = $project->project_id;
+        }
+
+        $data = DB::table('project_member as a')
+            ->leftJoin('project as b', 'a.project_id', '=', 'b.id')
+            ->leftJoin('customer as c', 'b.customer_id', '=', 'c.id')
+            ->select('a.location', 'b.*', 'c.customer_name')
+            ->where([['a.employee_id', '=', $employee->id]])
+            ->get();
+
+        // $data = DB::table('project as a')
+        //     ->leftJoin('customer as b', 'a.customer_id', '=', 'b.id')
+        //     ->select('a.*', 'b.customer_name')
+        //     ->whereIn('a.id', $projectId)
+        //     ->get();
+
+        if (!$data) {
+            $data = [];
+        }
+
+        return $data;
+    }
 }

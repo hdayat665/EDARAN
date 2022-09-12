@@ -522,3 +522,17 @@ if (!function_exists('state')) {
         return $data;
     }
 }
+
+if (!function_exists('customer')) {
+    function customer()
+    {
+        $data = Customer::where('tenant_id', Auth::user()->tenant_id)->get();
+
+        if(!$data)
+        {
+            $data = [];
+        }
+
+        return $data;
+    }
+}
