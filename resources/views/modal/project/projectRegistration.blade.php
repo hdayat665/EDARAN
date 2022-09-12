@@ -16,7 +16,11 @@
                     <div class="row mb-15px">
                         <div class="col-md-4">
                             <select class="form-select" name="customer_id">
-                                <option value="0" label="Please Choose " selected="selected"></option>
+                                <option  label="Please Choose "></option>
+                                <?php $customers = customer() ?>
+                                @foreach ($customers as $customer)
+                                    <option value="{{$customer->id}}">{{$customer->customer_name}}</option>
+                                @endforeach
                             </select>
                         </div>
                         <div class="col-md-4">
@@ -51,21 +55,20 @@
                         </div>
                         <div class="col-md-4">
                             <select class="form-select" name="contract_type">
-                                <option value="0" label="Please Choose " selected="selected"></option>
-                                <option value="1" label="EXT">EXT</option>
-                                <option value="2" label="ORI">ORI</option>
-                                <option value="3" label="VO">VO</option>
+                                <option  label="Please Choose "></option>
+                                <?php $types = getContractType() ?>
+                                @foreach ($types as $key => $type)
+                                    <option value="{{$key}}">{{$type}}</option>
+                                @endforeach
                             </select>
                         </div>
                         <div class="col-md-4">
                             <select class="form-select" name="financial_year">
-                                <option value="0" label="Please Choose " selected="selected"></option>
-                                <option value="1" label="2025">2025</option>
-                                <option value="2" label="2024">2024</option>
-                                <option value="3" label="2023">2023</option>
-                                <option value="3" label="2023">2022</option>
-                                <option value="3" label="2023">2021</option>
-                                <option value="3" label="2023">2020</option>
+                                <option  label="Please Choose "></option>
+                                <?php $years = getFinancialYear() ?>
+                                @foreach ($years as $key => $type)
+                                    <option value="{{$key}}">{{$type}}</option>
+                                @endforeach
                             </select>
                         </div>
                     </div>

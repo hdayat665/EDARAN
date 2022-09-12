@@ -182,4 +182,15 @@ class ProjectController extends Controller
 
         return response()->json($result);
     }
+
+    public function myProjectView()
+    {
+        $data = [];
+
+        $ps = new ProjectService;
+
+        $data['myProjects'] = $ps->myProjectView();
+
+        return view('pages.project.myProject', $data);
+    }
 }
