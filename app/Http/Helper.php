@@ -7,6 +7,7 @@ use App\Models\Department;
 use App\Models\Designation;
 use App\Models\EmploymentType;
 use App\Models\JobGrade;
+use App\Models\ProjectLocation;
 use App\Models\Unit;
 use Illuminate\Support\Facades\Auth;
 
@@ -527,6 +528,20 @@ if (!function_exists('customer')) {
     function customer()
     {
         $data = Customer::where('tenant_id', Auth::user()->tenant_id)->get();
+
+        if(!$data)
+        {
+            $data = [];
+        }
+
+        return $data;
+    }
+}
+
+if (!function_exists('projectLocation')) {
+    function projectLocation()
+    {
+        $data = ProjectLocation::where('tenant_id', Auth::user()->tenant_id)->get();
 
         if(!$data)
         {

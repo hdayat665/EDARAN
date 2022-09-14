@@ -186,11 +186,16 @@ class ProjectService
 
     public function createProjectMember($r)
     {
+
         $input = $r->input();
         $input['joined_date'] = date_format(date_create($input['joined_date']), 'Y-m-d');
-        if ($input['exit_project'] == 'on') {
+        $exit = $input['exit_project'] ?? '';
+        $input['location'] = implode(',', $input['location']);
+
+        if ($exit == 'on') {
             $input['exit_project_date'] = date_format(date_create(), 'Y-m-d');
         }
+
         ProjectMember::create($input);
 
         $data['status'] = config('app.response.success.status');
@@ -355,24 +360,17 @@ class ProjectService
         // pr($employee->id);
         $projectMember = ProjectMember::select('project_id')->where('employee_id', '=', $employee->id)->groupBy('project_id')->get();
 
+        $projectId = [];
         foreach ($projectMember as $project) {
             $projectId[] = $project->project_id;
         }
 
-        // $projectIds = implode(',', $projectId);
-
-        // $data = DB::table('project_member as a')
-        //     ->leftJoin('project as b', 'a.project_id', '=', 'b.id')
-        //     ->leftJoin('customer as c', 'b.customer_id', '=', 'c.id')
-        //     ->select('b.*', 'c.customer_name')
-        //     ->where([['a.employee_id', '!=', $employee->id]])
-        //     ->groupBy('b.id')
-        //     ->get();
 
         $data = DB::table('project as a')
             ->leftJoin('customer as b', 'a.customer_id', '=', 'b.id')
             ->select('a.*', 'b.customer_name')
             ->whereNotIn('a.id', $projectId)
+            ->where('a.tenant_id', Auth::user()->tenant_id)
             ->get();
 
         if (!$data) {
@@ -385,7 +383,7 @@ class ProjectService
     public function myProjectView()
     {
         $employee = Employee::where('user_id', Auth::user()->id)->first();
-        // pr($employee->id);
+        // pr(Auth::user()->id);
         $projectMember = ProjectMember::select('project_id')->where('employee_id', '=', $employee->id)->groupBy('project_id')->get();
 
         foreach ($projectMember as $project) {
@@ -398,17 +396,55 @@ class ProjectService
             ->select('a.location', 'b.*', 'c.customer_name')
             ->where([['a.employee_id', '=', $employee->id]])
             ->get();
+        // pr($data);
+        if (!$data) {
+            $data = [];
+        }
 
-        // $data = DB::table('project as a')
-        //     ->leftJoin('customer as b', 'a.customer_id', '=', 'b.id')
-        //     ->select('a.*', 'b.customer_name')
-        //     ->whereIn('a.id', $projectId)
-        //     ->get();
+        return $data;
+    }
+
+    public function projectAssignView($id)
+    {
+        $data['projectMember'] = DB::table('project_member as a')
+        ->leftJoin('employment as b', 'a.employee_id', '=', 'b.id')
+        ->select('a.id', 'a.location', 'b.employeeName')
+        ->where([['a.id', '=', $id]])
+        ->first();
+
+        $data['locations'] = ProjectLocation::select('id', 'location_name')->whereIn('id', explode(',', $data['projectMember']->location))->get();
+
+        // foreach ($locations as $location) {
+        //     $data['location'][] = locationAssign($location);
+        // }
 
         if (!$data) {
             $data = [];
         }
 
         return $data;
+    }
+
+    public function deleteAssignLocation($id, $member_id)
+    {
+        $projectMember = ProjectMember::where('id', $member_id)->first();
+
+        $location = explode(',',$projectMember->location);
+
+        if (($key = array_search($id, $location)) !== false) {
+            unset($location[$key]);
+        }
+
+        $newLocation['location'] = implode(',', $location);
+
+        ProjectMember::where('id', $member_id)->update($newLocation);
+
+        $data['status'] = config('app.response.success.status');
+        $data['type'] = config('app.response.success.type');
+        $data['title'] = config('app.response.success.title');
+        $data['msg'] = 'Success delete Location Assign to Project Member';
+
+        return $data;
+
     }
 }

@@ -3,10 +3,10 @@
 @section('content')
 <div id="content" class="app-content">
     <h1 class="page-header">Project Registration <small>| My Project</small></h1>
-    <div class="panel panel">
+    <div class="panel panel" id="myProjectJs">
         <div class="panel-heading">
             <div class="panel-body">
-                <table id="data-table-default" class="table table-striped table-bordered align-middle">
+                <table id="myProjectTable" class="table table-striped table-bordered align-middle">
                     <thead>
                         <tr>
                             <th class="text-nowrap">Customer Name</th>

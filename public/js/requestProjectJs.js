@@ -10,7 +10,7 @@ $(document).ready(function() {
         autoclose: true,
     });
 
-    $("#projectTable").DataTable({
+    $("#data-table-projectrequest").DataTable({
         responsive: true,
     });
 

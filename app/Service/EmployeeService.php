@@ -136,7 +136,7 @@ class EmployeeService
 
     public function getEmployeeInfo()
     {
-        $userId = Auth::user()->id;
+        $userId = Auth::user()->tenant_id;
         $data = [];
         $data['status'] = true;
         $data['msg'] = 'Success get user employment';

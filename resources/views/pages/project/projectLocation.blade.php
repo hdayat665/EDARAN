@@ -6,7 +6,7 @@
     </div>
     <br>
     <div class="panel-body">
-        <table id="data-table-projectlocation" class="table table-striped table-bordered align-middle">
+        <table id="projectLocationTable" class="table table-striped table-bordered align-middle">
             <thead>
                 <tr>
                     <th width="6%" data-orderable="false" class="align-middle">Action</th>

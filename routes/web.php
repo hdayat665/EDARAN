@@ -12,6 +12,7 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\HRIS\EmployeeController;
 use App\Http\Controllers\Project\CustomerController;
 use App\Http\Controllers\Project\ProjectController;
+use App\Http\Controllers\Report\ProjectReportController;
 
 /*
 |--------------------------------------------------------------------------
@@ -244,6 +245,18 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('/approveProjectMember/{id}', 'approveProjectMember');
             Route::post('/rejectProjectMember/{id}', 'rejectProjectMember');
             Route::get('/myProject', 'myProjectView');
+            Route::get('/projectAssignView/{id}', 'projectAssignView');
+            Route::post('/deleteAssignLocation/{id}/{member_id}', 'deleteAssignLocation');
+        });
+
+        Route::controller(ProjectReportController::class)->group(function () {
+            Route::get('/projectListing', 'projectListingView');
+            Route::get('/projectDetail/{id}', 'projectDetail');
+            Route::post('/createCustomer', 'createCustomer');
+            Route::post('/updateCustomer/{id}', 'updateCustomer');
+            Route::get('/getCustomerById/{id}', 'getCustomerById');
+            Route::delete('/deleteCustomer/{id}', 'deleteCustomer');
+            Route::post('/updateStatus/{id}/{status}', 'updateStatus');
         });
     });
 });
