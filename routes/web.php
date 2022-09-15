@@ -135,6 +135,7 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('/addEmployment', 'addEmployment');
             Route::post('/updateEmployee', 'updateEmployee');
             Route::get('/getEmployeeById/{id}', 'getEmployeeById');
+            Route::get('/getEmployeeByDepartmentId/{id}', 'getEmployeeByDepartmentId');
 
         });
 
@@ -244,6 +245,7 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('/addRequestProject/{id}', 'addRequestProject');
             Route::post('/approveProjectMember/{id}', 'approveProjectMember');
             Route::post('/rejectProjectMember/{id}', 'rejectProjectMember');
+            Route::post('/cancelProjectMember/{id}', 'cancelProjectMember');
             Route::get('/myProject', 'myProjectView');
             Route::get('/projectAssignView/{id}', 'projectAssignView');
             Route::post('/deleteAssignLocation/{id}/{member_id}', 'deleteAssignLocation');
@@ -252,10 +254,9 @@ Route::group(['middleware' => ['web']], function () {
         Route::controller(ProjectReportController::class)->group(function () {
             Route::get('/projectListing', 'projectListingView');
             Route::get('/projectDetail/{id}', 'projectDetail');
-            Route::post('/createCustomer', 'createCustomer');
-            Route::post('/updateCustomer/{id}', 'updateCustomer');
-            Route::get('/getCustomerById/{id}', 'getCustomerById');
-            Route::delete('/deleteCustomer/{id}', 'deleteCustomer');
+            Route::get('/projectFilter', 'projectFilter');
+            Route::get('/getProjectByCustomerId/{customer_id}', 'getProjectByCustomerId');
+            Route::get('/searchReport', 'searchReport');
             Route::post('/updateStatus/{id}/{status}', 'updateStatus');
         });
     });

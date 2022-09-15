@@ -29,7 +29,7 @@
                         <td>{{$project->project_code}}</td>
                         <td>{{$project->project_name}}</td>
                         <td>{{$project->desc}}</td>
-                        <td>{{$project->project_manager}}</td>
+                        <td>{{$project->employeeName}}</td>
                         <td>{{$project->contract_start_date}}</td>
                         <td>{{$project->contract_end_date}}</td>
                         <td><a href="#" data-bs-toggle="modal" data-id="{{$project->id}}" id="viewProjectRequestButton" >{{$project->status}}</a></td>

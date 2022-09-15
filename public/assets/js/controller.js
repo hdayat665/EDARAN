@@ -31,6 +31,7 @@ requirejs.config({
         'viewAssignLocation': assets + '/js/viewAssignLocation',
         'myProjectJs': assets + '/js/myProjectJs',
         'projectReportListingJs': assets + '/js/projectReportListingJs',
+        'projectStatusJs': assets + '/js/projectStatusJs',
 
         // 'main': 'assets/backend/js/main',
         'sweetAlert2': assets + '/assets/sweetalert2/sweetalert2',
@@ -158,6 +159,10 @@ if ($('#myProjectJs').length > 0) {
 
 if ($('#projectReportListingJs').length > 0) {
     requirejs(['projectReportListingJs']);
+}
+
+if ($('#projectStatusJs').length > 0) {
+    requirejs(['projectStatusJs']);
 }
 
 

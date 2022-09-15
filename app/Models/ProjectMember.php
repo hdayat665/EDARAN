@@ -37,6 +37,7 @@ class ProjectMember extends Authenticatable
         'unit',
         'status',
         'reason',
+        'assign_as',
         'joined_date',
     ];
 }

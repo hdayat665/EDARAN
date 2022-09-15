@@ -41,6 +41,7 @@ class Project extends Authenticatable
         'warranty_start_date',
         'warranty_end_date',
         'bank_guarantee_acc',
+        'bank_guarantee_amount',
         'bank_guarantee_expiry_date',
         'status'
     ];

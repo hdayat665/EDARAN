@@ -842,18 +842,15 @@ class EmployeeService
         $data = Employee::where([['tenant_id', $tenant_id], ['id', $id]])->first();
 
         return $data;
-        // $data = DB::table('employment as a')
-        // ->leftjoin('userProfile as b', 'a.user_id', '=', 'b.user_id')
-        // ->leftjoin('department as c', 'a.department', '=', 'c.id')
-        // ->leftjoin('designation as c', 'a.designation', '=', 'c.id')
-        // ->leftjoin('unit as c', 'a.unit', '=', 'c.id')
-        // ->leftjoin('branch as c', 'a.branch', '=', 'c.id')
-        // ->select('a.*')
-        // ->where('a.tenant_id', $userId)
-        // ->get();
+    }
 
+    public function getEmployeeByDepartmentId($department_id)
+    {
+        $tenant_id = Auth::user()->tenant_id;
+        $data = [];
+        $data = Employee::where([['tenant_id', $tenant_id], ['department', $department_id]])->get();
 
-        // return $data;
+        return $data;
     }
 
 }

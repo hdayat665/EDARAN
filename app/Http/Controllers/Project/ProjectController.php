@@ -183,6 +183,15 @@ class ProjectController extends Controller
         return response()->json($result);
     }
 
+    public function cancelProjectMember(Request $r, $id)
+    {
+        $ss = new ProjectService;
+
+        $result = $ss->updateStatusProjectMember($r, $id, 'cancel');
+
+        return response()->json($result);
+    }
+
     public function myProjectView()
     {
         $data = [];

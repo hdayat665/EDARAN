@@ -259,5 +259,14 @@ class EmployeeController extends Controller
         return response()->json($result);
     }
 
+    public function getEmployeeByDepartmentId($department_id)
+    {
+        $ps = new EmployeeService;
+
+        $result = $ps->getEmployeeByDepartmentId($department_id);
+
+        return response()->json($result);
+    }
+
 
 }
