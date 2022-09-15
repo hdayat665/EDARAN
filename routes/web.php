@@ -12,6 +12,7 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\HRIS\EmployeeController;
 use App\Http\Controllers\Project\CustomerController;
 use App\Http\Controllers\Project\ProjectController;
+use App\Http\Controllers\Report\ProjectReportController;
 
 /*
 |--------------------------------------------------------------------------
@@ -134,6 +135,7 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('/addEmployment', 'addEmployment');
             Route::post('/updateEmployee', 'updateEmployee');
             Route::get('/getEmployeeById/{id}', 'getEmployeeById');
+            Route::get('/getEmployeeByDepartmentId/{id}', 'getEmployeeByDepartmentId');
 
         });
 
@@ -243,7 +245,19 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('/addRequestProject/{id}', 'addRequestProject');
             Route::post('/approveProjectMember/{id}', 'approveProjectMember');
             Route::post('/rejectProjectMember/{id}', 'rejectProjectMember');
+            Route::post('/cancelProjectMember/{id}', 'cancelProjectMember');
             Route::get('/myProject', 'myProjectView');
+            Route::get('/projectAssignView/{id}', 'projectAssignView');
+            Route::post('/deleteAssignLocation/{id}/{member_id}', 'deleteAssignLocation');
+        });
+
+        Route::controller(ProjectReportController::class)->group(function () {
+            Route::get('/projectListing', 'projectListingView');
+            Route::get('/projectDetail/{id}', 'projectDetail');
+            Route::get('/projectFilter', 'projectFilter');
+            Route::get('/getProjectByCustomerId/{customer_id}', 'getProjectByCustomerId');
+            Route::get('/searchReport', 'searchReport');
+            Route::post('/updateStatus/{id}/{status}', 'updateStatus');
         });
     });
 });

@@ -127,12 +127,11 @@
                     <div class="row mb-15px">
                         <div class="col-md-12">
                             <select class="selectpicker form-control" name="location[]" id="location-search" multiple >
-                                <option value="1">Kuala Lumpur</option>
-                                <option value="2">Selangor</option>
-                                <option value="3">Petaling Jaya</option>
-                                <option value="4">Cyberjaya</option>
-                                <option value="5">Dungun</option>
-                                <option value="6">Kerteh</option>
+                                <option label="Select State ">Select Location </option>
+                                <?php $locations = projectLocation() ?>
+                                @foreach ($locations as $location)
+                                <option value="{{$location->id}}" >{{$location->location_name}}</option>
+                                @endforeach
                             </select>
 
                         </div>

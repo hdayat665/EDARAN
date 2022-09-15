@@ -43,6 +43,15 @@ class Mail extends Mailable
         }else if ($data['typeEmail'] == 'tempPass') {
             $view = 'emails.temparoryPasswordEmail';
 
+        }else if ($data['typeEmail'] == 'projectReqEmail') {
+            $view = 'emails.projectRequestEmail';
+
+        }else if ($data['typeEmail'] == 'projectReqStatus') {
+            $view = 'emails.projectRequestStatusEmail';
+
+        }else if ($data['typeEmail'] == 'projectCancelReq') {
+            $view = 'emails.projectCancelRequestEmail';
+
         }
         // $address = 'janeexampexample@example.com';
         // $subject = 'This is a demo!';

@@ -5,10 +5,13 @@ use App\Models\Company;
 use App\Models\Customer;
 use App\Models\Department;
 use App\Models\Designation;
+use App\Models\Employee;
 use App\Models\EmploymentType;
 use App\Models\JobGrade;
+use App\Models\ProjectLocation;
 use App\Models\Unit;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 if (!function_exists('pr')) {
     function pr($data)
@@ -302,8 +305,7 @@ if (!function_exists('getCompany')) {
     {
         $data = Company::where('tenant_id', Auth::user()->tenant_id)->get();
 
-        if(blank($data))
-        {
+        if (blank($data)) {
             $data = [];
         }
 
@@ -317,8 +319,7 @@ if (!function_exists('getDepartment')) {
     {
         $data = Department::where('tenant_id', Auth::user()->tenant_id)->get();
 
-        if(!$data)
-        {
+        if (!$data) {
             $data = [];
         }
 
@@ -331,8 +332,7 @@ if (!function_exists('getUnit')) {
     {
         $data = Unit::where('tenant_id', Auth::user()->tenant_id)->get();
 
-        if(!$data)
-        {
+        if (!$data) {
             $data = [];
         }
 
@@ -345,8 +345,7 @@ if (!function_exists('getBranch')) {
     {
         $data = Branch::where('tenant_id', Auth::user()->tenant_id)->get();
 
-        if(!$data)
-        {
+        if (!$data) {
             $data = [];
         }
 
@@ -359,8 +358,7 @@ if (!function_exists('getJobGrade')) {
     {
         $data = JobGrade::where('tenant_id', Auth::user()->tenant_id)->get();
 
-        if(!$data)
-        {
+        if (!$data) {
             $data = [];
         }
 
@@ -373,8 +371,7 @@ if (!function_exists('getDesignation')) {
     {
         $data = Designation::where('tenant_id', Auth::user()->tenant_id)->get();
 
-        if(!$data)
-        {
+        if (!$data) {
             $data = [];
         }
 
@@ -528,8 +525,69 @@ if (!function_exists('customer')) {
     {
         $data = Customer::where('tenant_id', Auth::user()->tenant_id)->get();
 
-        if(!$data)
-        {
+        if (!$data) {
+            $data = [];
+        }
+
+        return $data;
+    }
+}
+
+if (!function_exists('projectLocation')) {
+    function projectLocation()
+    {
+        $data = ProjectLocation::where('tenant_id', Auth::user()->tenant_id)->get();
+
+        if (!$data) {
+            $data = [];
+        }
+
+        return $data;
+    }
+}
+
+if (!function_exists('getEmployee')) {
+    function getEmployee()
+    {
+        $data = Employee::where('tenant_id', Auth::user()->tenant_id)->get();
+
+        if (!$data) {
+            $data = [];
+        }
+
+        return $data;
+    }
+}
+
+if (!function_exists('accManager')) {
+    function accManager()
+    {
+        $data = DB::table('project as a')
+            ->leftJoin('employment as b', 'a.acc_manager', '=', 'b.id')
+            ->select('b.id', 'b.employeeName as name')
+            ->groupBy('acc_manager')
+            // ->whereNotIn('a.id', $projectId)
+            ->where('a.tenant_id', Auth::user()->tenant_id)
+            ->get();
+        if (!$data) {
+            $data = [];
+        }
+
+        return $data;
+    }
+}
+
+if (!function_exists('prjManager')) {
+    function prjManager()
+    {
+        $data = DB::table('project as a')
+            ->leftJoin('employment as b', 'a.project_manager', '=', 'b.id')
+            ->select('b.id', 'b.employeeName as name')
+            ->groupBy('project_manager')
+            // ->whereNotIn('a.id', $projectId)
+            ->where('a.tenant_id', Auth::user()->tenant_id)
+            ->get();
+        if (!$data) {
             $data = [];
         }
 

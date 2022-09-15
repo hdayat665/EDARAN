@@ -2,6 +2,7 @@
 
 namespace App\Service;
 
+use App\Models\Employee;
 use App\Models\Subscription;
 use App\Models\Tenant;
 use App\Models\UserAddress;
@@ -79,6 +80,7 @@ class RegisterService
 
         UserAddress::create($userProfile);
         UserEmergency::create($userProfile);
+        Employee::create($userProfile);
 
         $userProfile['tenant_id'] = $user['tenant_id'];
         $userProfile['tenant_name'] = $r['tenant'];

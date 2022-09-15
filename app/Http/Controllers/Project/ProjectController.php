@@ -44,7 +44,7 @@ class ProjectController extends Controller
         $data['previousProjectMembers'] = $ps->getProjectMember('on');
         $data['projectMembers'] = $ps->getProjectMember();
 
-        // pr($data);
+        // pr($data['projectMembers']);
 
         return view('pages.project.projectInfoEdit', $data);
     }
@@ -183,6 +183,15 @@ class ProjectController extends Controller
         return response()->json($result);
     }
 
+    public function cancelProjectMember(Request $r, $id)
+    {
+        $ss = new ProjectService;
+
+        $result = $ss->updateStatusProjectMember($r, $id, 'cancel');
+
+        return response()->json($result);
+    }
+
     public function myProjectView()
     {
         $data = [];
@@ -192,5 +201,25 @@ class ProjectController extends Controller
         $data['myProjects'] = $ps->myProjectView();
 
         return view('pages.project.myProject', $data);
+    }
+
+    public function projectAssignView($id)
+    {
+        $data = [];
+
+        $ps = new ProjectService;
+
+        $data = $ps->projectAssignView($id);
+        // pr($data);
+        return view('pages.project.viewAssignLocation', $data);
+    }
+
+    public function deleteAssignLocation($id, $member_id)
+    {
+        $ss = new ProjectService;
+
+        $result = $ss->deleteAssignLocation($id, $member_id);
+
+        return response()->json($result);
     }
 }

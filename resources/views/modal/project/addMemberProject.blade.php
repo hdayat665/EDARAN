@@ -58,7 +58,7 @@
 
                         <div class="col-md-6">
                             <select class="form-select" name="designation" id="designation">
-                                <option label="Select State ">Select State </option>
+                                <option value="" label="Select State ">Select State </option>
                                 <?php $Designations = getDesignation() ?>
                                 @foreach ($Designations as $Designation)
                                 <option value="{{$Designation->designationName}}" >{{$Designation->designationName}}</option>
@@ -68,7 +68,7 @@
 
                         <div class="col-md-6">
                             <select class="form-select" id="department" name="department">
-                                <option label="Select State ">Select State </option>
+                                <option value="" label="Select State ">Select State </option>
                                 <?php $departments = getDepartment() ?>
                                 @foreach ($departments as $department)
                                 <option value="{{$department->departmentName}}" >{{$department->departmentName}}</option>
@@ -97,7 +97,7 @@
 
                         <div class="col-md-6">
                             <select class="form-select" name="branch" id="branch">
-                                <option label="Select State ">Select State </option>
+                                <option value="" label="Select State ">Select State </option>
                                 <?php $Branchs = getBranch() ?>
                                 @foreach ($Branchs as $Branch)
                                 <option value="{{$Branch->branchName}}" >{{$Branch->branchName}}</option>
@@ -108,7 +108,7 @@
 
                         <div class="col-md-6">
                             <select class="form-select" name="unit" id="unit">
-                                <option label="Select State ">Select State </option>
+                                <option value="" label="Select State ">Select State </option>
                                 <?php $Units = getUnit() ?>
                                 @foreach ($Units as $Unit)
                                 <option value="{{$Unit->unitName}}" >{{$Unit->unitName}}</option>
@@ -125,13 +125,12 @@
 
                     <div class="row mb-15px">
                         <div class="col-md-12">
-                            <select class="selectpicker form-control" name="location" id="location-search" multiple >
-                                <option value="1">Kuala Lumpur</option>
-                                <option value="2">Selangor</option>
-                                <option value="3">Petaling Jaya</option>
-                                <option value="4">Cyberjaya</option>
-                                <option value="5">Dungun</option>
-                                <option value="6">Kerteh</option>
+                            <select class="selectpicker form-control" name="location[]" id="location-search" multiple >
+                                <option value="" label="Select State ">Select Location </option>
+                                <?php $locations = projectLocation() ?>
+                                @foreach ($locations as $location)
+                                <option value="{{$location->id}}" >{{$location->location_name}}</option>
+                                @endforeach
                             </select>
 
                         </div>

@@ -28,7 +28,10 @@ requirejs.config({
         'projectJs': assets + '/js/projectJs',
         'editProjectJs': assets + '/js/editProjectJs',
         'requestProjectJs': assets + '/js/requestProjectJs',
-
+        'viewAssignLocation': assets + '/js/viewAssignLocation',
+        'myProjectJs': assets + '/js/myProjectJs',
+        'projectReportListingJs': assets + '/js/projectReportListingJs',
+        'projectStatusJs': assets + '/js/projectStatusJs',
 
         // 'main': 'assets/backend/js/main',
         'sweetAlert2': assets + '/assets/sweetalert2/sweetalert2',
@@ -145,6 +148,23 @@ if ($('#editProjectJs').length > 0) {
 if ($('#requestProjectJs').length > 0) {
     requirejs(['requestProjectJs']);
 }
+
+if ($('#viewAssignLocation').length > 0) {
+    requirejs(['viewAssignLocation']);
+}
+
+if ($('#myProjectJs').length > 0) {
+    requirejs(['myProjectJs']);
+}
+
+if ($('#projectReportListingJs').length > 0) {
+    requirejs(['projectReportListingJs']);
+}
+
+if ($('#projectStatusJs').length > 0) {
+    requirejs(['projectStatusJs']);
+}
+
 
 
 

@@ -96,7 +96,11 @@
                     <div class="row mb-15px">
                         <div class="col-md-4">
                             <select class="form-select" name="acc_manager">
-                                <option value="0" label="Please Choose " selected="selected"></option>
+                                <option value="" label="Please Choose "></option>
+                                <?php $getEmployees = getEmployee() ?>
+                                @foreach ($getEmployees as $getEmployee)
+                                    <option value="{{$getEmployee->id}}">{{$getEmployee->employeeName}}</option>
+                                @endforeach
                             </select>
                         </div>
                         <div class="col-md-4">

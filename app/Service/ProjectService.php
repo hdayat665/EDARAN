@@ -2,6 +2,7 @@
 
 namespace App\Service;
 
+use App\Mail\Mail as MailMail;
 use App\Models\Attachments;
 use App\Models\Employee;
 use App\Models\JobHistory;
@@ -24,6 +25,7 @@ use Illuminate\Mail\Attachment;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 
 class ProjectService
@@ -40,7 +42,8 @@ class ProjectService
 
         $data = DB::table('project as a')
             ->leftJoin('customer as b', 'a.customer_id', '=', 'b.id')
-            ->select('a.*', 'b.customer_name')
+            ->leftJoin('employment as c', 'a.acc_manager', '=', 'c.id')
+            ->select('a.*', 'b.customer_name', 'c.employeeName as acc_manager_name')
             ->where($cond)
             ->get();
 
@@ -80,7 +83,8 @@ class ProjectService
 
         $data = DB::table('project as a')
             ->leftJoin('customer as b', 'a.customer_id', '=', 'b.id')
-            ->select('a.*', 'b.customer_name')
+            ->leftJoin('employment as c', 'a.project_manager', '=', 'c.id')
+            ->select('a.*', 'b.customer_name', 'c.employeeName')
             ->where([['a.tenant_id', $tenant_id], ['a.id', $id]])
             ->first();
 
@@ -186,11 +190,20 @@ class ProjectService
 
     public function createProjectMember($r)
     {
+
         $input = $r->input();
         $input['joined_date'] = date_format(date_create($input['joined_date']), 'Y-m-d');
-        if ($input['exit_project'] == 'on') {
+        $exit = $input['exit_project'] ?? '';
+        if ($input['location']) {
+            $input['location'] = implode(',', $input['location']);
+        }
+
+        $input['assign_as'] = 'project member';
+
+        if ($exit == 'on') {
             $input['exit_project_date'] = date_format(date_create(), 'Y-m-d');
         }
+
         ProjectMember::create($input);
 
         $data['status'] = config('app.response.success.status');
@@ -302,6 +315,31 @@ class ProjectService
 
             ProjectMember::create($input);
 
+            $project =   DB::table('project as a')
+            ->leftJoin('customer as d', 'a.customer_id', '=', 'd.id')
+            ->leftJoin('employment as b', 'a.project_manager', '=', 'b.id')
+            ->leftJoin('users as c', 'b.user_id', '=', 'c.id')
+            ->select('a.*', 'b.employeeName as project_manager_name', 'c.username as email', 'd.customer_name')
+            ->where([['a.id', $project_id], ['a.tenant_id', Auth::user()->tenant_id]])
+            ->first();
+
+            $receiver = $project->email;
+            $response['typeEmail'] = 'projectReqEmail';
+            $response['content1'] = 'Dear '. $project->project_manager_name .' ,';
+            $response['customer_name'] = $project->customer_name;
+            $response['project_code'] = $project->project_code;
+            $response['project_name'] = $project->project_name;
+            $response['reason'] = $input['reason'];
+
+            $response['resetPassLink'] = env('APP_URL') . '/projectInfo';
+            $response['from'] = env('MAIL_FROM_ADDRESS');
+            $response['nameFrom'] = Auth::user()->username;
+            $response['subject'] = 'Orbit Project Request Application';
+            // $response['typeAttachment'] = "application/pdf";
+            //  $response['file'] = \public_path()."/assets/frontend/docs/gambar.jpg";
+
+            Mail::to($receiver)->send(new MailMail($response));
+
             $data['status'] = config('app.response.success.status');
             $data['type'] = config('app.response.success.type');
             $data['title'] = config('app.response.success.title');
@@ -341,6 +379,13 @@ class ProjectService
 
         ProjectMember::where('id', $id)->update($input);
 
+        if ($status == 'cancel') {
+            $this->cancelProjectEmail($id);
+        }else{
+            $this->updateStatusProjectEmail($id,$status);
+
+        }
+
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
@@ -349,30 +394,90 @@ class ProjectService
         return $data;
     }
 
+    public function cancelProjectEmail($id = '')
+    {
+        $projectMember = DB::table('project_member as a')
+        ->leftJoin('project as b', 'a.project_id', '=', 'b.id')
+        ->leftJoin('employment as x', 'b.project_manager', '=', 'x.id')
+        ->leftJoin('users as y', 'x.user_id', '=', 'y.id')
+        ->leftJoin('customer as d', 'b.customer_id', '=', 'd.id')
+        ->leftJoin('employment as e', 'a.employee_id', '=', 'e.id')
+        ->leftJoin('users as f', 'e.user_id', '=', 'f.id')
+        ->leftJoin('department as c', 'e.department', '=', 'c.id')
+        ->select('a.*', 'b.project_name', 'b.project_code'
+                , 'd.customer_name'
+                , 'c.departmentName'
+                , 'e.employeeName'
+                , 'f.username'
+                , 'y.username as manager_email')
+        ->where('a.id', $id)
+        ->first();
+            // pr($projectMember);
+        $receiver = $projectMember->manager_email;
+        $response['typeEmail'] = 'projectCancelReq';
+        $response['customer_name'] = $projectMember->customer_name;
+        $response['project_code'] = $projectMember->project_code;
+        $response['project_name'] = $projectMember->project_name;
+        $response['employeeName'] = $projectMember->employeeName;
+        $response['departmentName'] = $projectMember->departmentName;
+
+        $response['resetPassLink'] = env('APP_URL') . '/myProject';
+        $response['from'] = env('MAIL_FROM_ADDRESS');
+        $response['nameFrom'] = Auth::user()->username;
+        $response['subject'] = 'Orbit Project Request Application Status        ';
+        // $response['typeAttachment'] = "application/pdf";
+        //  $response['file'] = \public_path()."/assets/frontend/docs/gambar.jpg";
+
+        Mail::to($receiver)->send(new MailMail($response));
+    }
+
+    public function updateStatusProjectEmail($id = '', $status = '')
+    {
+        $projectMember = DB::table('project_member as a')
+        ->leftJoin('project as b', 'a.project_id', '=', 'b.id')
+        ->leftJoin('customer as d', 'b.customer_id', '=', 'd.id')
+        ->leftJoin('employment as e', 'a.employee_id', '=', 'e.id')
+        ->leftJoin('users as f', 'e.user_id', '=', 'f.id')
+        ->leftJoin('department as c', 'e.department', '=', 'c.id')
+        ->select('a.*', 'b.project_name', 'b.project_code', 'd.customer_name', 'c.departmentName', 'e.employeeName', 'f.username')
+        ->where('a.id', $id)
+        ->first();
+            // pr($projectMember);
+        $receiver = $projectMember->username;
+        $response['typeEmail'] = 'projectReqStatus';
+        $response['status'] = $status;
+        $response['customer_name'] = $projectMember->customer_name;
+        $response['project_code'] = $projectMember->project_code;
+        $response['project_name'] = $projectMember->project_name;
+
+        $response['resetPassLink'] = env('APP_URL') . '/myProject';
+        $response['from'] = env('MAIL_FROM_ADDRESS');
+        $response['nameFrom'] = Auth::user()->username;
+        $response['subject'] = 'Orbit Project Request Application Status        ';
+        // $response['typeAttachment'] = "application/pdf";
+        //  $response['file'] = \public_path()."/assets/frontend/docs/gambar.jpg";
+
+        Mail::to($receiver)->send(new MailMail($response));
+    }
+
     public function projectRequestView()
     {
         $employee = Employee::where('user_id', Auth::user()->id)->first();
         // pr($employee->id);
-        $projectMember = ProjectMember::select('project_id')->where('employee_id', '=', $employee->id)->groupBy('project_id')->get();
-
+        $projectMember = ProjectMember::select('project_id')->where([['employee_id', '=', $employee->id],['status', '=' ,'cancel'],['status', '=' ,'']])->groupBy('project_id')->get();
+        // pr($projectMember);
+        $projectId = [];
         foreach ($projectMember as $project) {
             $projectId[] = $project->project_id;
         }
-
-        // $projectIds = implode(',', $projectId);
-
-        // $data = DB::table('project_member as a')
-        //     ->leftJoin('project as b', 'a.project_id', '=', 'b.id')
-        //     ->leftJoin('customer as c', 'b.customer_id', '=', 'c.id')
-        //     ->select('b.*', 'c.customer_name')
-        //     ->where([['a.employee_id', '!=', $employee->id]])
-        //     ->groupBy('b.id')
-        //     ->get();
+        // pr($projectId);
 
         $data = DB::table('project as a')
             ->leftJoin('customer as b', 'a.customer_id', '=', 'b.id')
-            ->select('a.*', 'b.customer_name')
+            ->leftJoin('employment as c', 'a.project_manager', '=', 'c.id')
+            ->select('a.*', 'b.customer_name', 'c.employeeName')
             ->whereNotIn('a.id', $projectId)
+            ->where([['a.tenant_id', Auth::user()->tenant_id],['project_manager', '!=', '']])
             ->get();
 
         if (!$data) {
@@ -385,7 +490,7 @@ class ProjectService
     public function myProjectView()
     {
         $employee = Employee::where('user_id', Auth::user()->id)->first();
-        // pr($employee->id);
+        // pr(Auth::user()->id);
         $projectMember = ProjectMember::select('project_id')->where('employee_id', '=', $employee->id)->groupBy('project_id')->get();
 
         foreach ($projectMember as $project) {
@@ -396,19 +501,57 @@ class ProjectService
             ->leftJoin('project as b', 'a.project_id', '=', 'b.id')
             ->leftJoin('customer as c', 'b.customer_id', '=', 'c.id')
             ->select('a.location', 'b.*', 'c.customer_name')
-            ->where([['a.employee_id', '=', $employee->id]])
+            ->where([['a.employee_id', '=', $employee->id], ['a.status', '=', 'approve']])
             ->get();
+        // pr($data);
+        if (!$data) {
+            $data = [];
+        }
 
-        // $data = DB::table('project as a')
-        //     ->leftJoin('customer as b', 'a.customer_id', '=', 'b.id')
-        //     ->select('a.*', 'b.customer_name')
-        //     ->whereIn('a.id', $projectId)
-        //     ->get();
+        return $data;
+    }
+
+    public function projectAssignView($id)
+    {
+        $data['projectMember'] = DB::table('project_member as a')
+        ->leftJoin('employment as b', 'a.employee_id', '=', 'b.id')
+        ->select('a.id', 'a.location', 'b.employeeName')
+        ->where([['a.id', '=', $id]])
+        ->first();
+
+        $data['locations'] = ProjectLocation::select('id', 'location_name')->whereIn('id', explode(',', $data['projectMember']->location))->get();
+
+        // foreach ($locations as $location) {
+        //     $data['location'][] = locationAssign($location);
+        // }
 
         if (!$data) {
             $data = [];
         }
 
         return $data;
+    }
+
+    public function deleteAssignLocation($id, $member_id)
+    {
+        $projectMember = ProjectMember::where('id', $member_id)->first();
+
+        $location = explode(',',$projectMember->location);
+
+        if (($key = array_search($id, $location)) !== false) {
+            unset($location[$key]);
+        }
+
+        $newLocation['location'] = implode(',', $location);
+
+        ProjectMember::where('id', $member_id)->update($newLocation);
+
+        $data['status'] = config('app.response.success.status');
+        $data['type'] = config('app.response.success.type');
+        $data['title'] = config('app.response.success.title');
+        $data['msg'] = 'Success delete Location Assign to Project Member';
+
+        return $data;
+
     }
 }

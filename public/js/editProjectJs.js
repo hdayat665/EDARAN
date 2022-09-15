@@ -10,7 +10,15 @@ $(document).ready(function() {
         autoclose: true,
     });
 
-    $("#projectTable").DataTable({
+    $("#projectLocationTable").DataTable({
+        responsive: true,
+    });
+
+    $("#projectMemberTable").DataTable({
+        responsive: true,
+    });
+
+    $("#projectMemberPrevTable").DataTable({
         responsive: true,
     });
 
@@ -280,20 +288,12 @@ $(document).ready(function() {
             rules: {
                 joined_date: "required",
                 employee_id: "required",
-                designation: "required",
-                branch: "required",
-                unit: "required",
-                department: "required",
                 location_google: "required",
             },
 
             messages: {
                 joined_date: "",
                 employee_id: "",
-                postcode: "",
-                designation: "",
-                unit: "",
-                department: "",
                 location_google: "",
             },
             submitHandler: function(form) {
@@ -365,7 +365,7 @@ $(document).ready(function() {
         vehicleData.done(function(data) {
             console.log(data);
             $("#joined_date").val(data.joined_date);
-            $("#employee_idE").prop("selectedIndex", data.employee_id);
+            $("#employee_idE").val(data.employee_id);
             $("#unitE").val(data.unit);
             $("#designationE").val(data.designation);
             $("#departmentE").val(data.department);

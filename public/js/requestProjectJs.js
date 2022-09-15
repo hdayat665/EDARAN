@@ -10,7 +10,7 @@ $(document).ready(function() {
         autoclose: true,
     });
 
-    $("#projectTable").DataTable({
+    $("#data-table-projectrequest").DataTable({
         responsive: true,
     });
 
@@ -73,7 +73,7 @@ $(document).ready(function() {
             $('#customer_name').val(data.customer_name);
             $('#project_code').val(data.project_code);
             $('#project_name').val(data.project_name);
-            $('#project_manager').val(data.project_manager);
+            $('#project_manager').val(data.employeeName);
             $('#idRP').val(data.id);
         })
         $('#requestProjectModal').modal('show');

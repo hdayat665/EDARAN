@@ -7,6 +7,10 @@
     }
 }
 
+table{
+    width: 100% !important
+}
+
 .part {
     display: none;
 }
@@ -37,7 +41,7 @@
                     </div>
                     <br>
                     <div class="panel-body">
-                        <table id="data-table-projectmember" class="table table-striped table-bordered align-middle">
+                        <table id="projectMemberTable" class="table table-striped table-bordered align-middle">
                             <thead>
                                 <tr>
                                     <th width="1%" data-orderable="false" class="align-middle">Action</th>
@@ -61,7 +65,7 @@
                                             <td>{{$projectMember->branch}}</td>
                                             <td>{{$projectMember->unit}}</td>
                                             <td>{{$projectMember->joined_date}}</td>
-                                            <td><a href="#" data-bs-toggle="modal" data-id="{{$projectMember->id}}" id="viewAssignMemberPrevLoc">{{$projectMember->location}}</a></td>
+                                            <td><a href="/projectAssignView/{{$projectMember->id}}">view</a></td>
                                         </tr>
                                     @endforeach
                                 @endif
@@ -76,7 +80,7 @@
                 <div class="tab-pane fade" id="previous-member">
                     <br>
                     <div class="panel-body">
-                        <table id="data-table-previousmember" class="table table-striped table-bordered align-middle">
+                        <table id="projectMemberPrevTable" class="table table-striped table-bordered align-middle">
                             <thead>
                                 <tr>
                                     <th width="1%" data-orderable="false" class="align-middle">Action</th>
@@ -102,7 +106,7 @@
                                         <td>{{$projectMember->unit}}</td>
                                         <td>{{$projectMember->joined_date}}</td>
                                         <td>{{$projectMember->exit_project_date}}</td>
-                                        <td><a href="#" data-bs-toggle="modal" data-id="{{$projectMember->id}}" id="viewAssignPreviousMemberPrevLoc">{{$projectMember->location}}</a></td>
+                                        <td><a href="/projectAssignView/{{$projectMember->id}}">view</a></td>
                                     </tr>
                                 @endforeach
                             @endif

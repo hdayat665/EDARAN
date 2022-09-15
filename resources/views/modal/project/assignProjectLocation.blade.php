@@ -20,12 +20,11 @@
                     <div class="mb-3">
                         <label class="form-label">Project Location Name : </label><br><br>
                         <select class="selectpicker form-control" name="location[]" id="projectlocation" multiple>
-                            <option value="1">Putrajaya</option>
-                            <option value="2">Selangor</option>
-                            <option value="3">Kuala Lumpur</option>
-                            <option value="4">Cyberjaya</option>
-                            <option value="5">Kampung Baru</option>
-                            <option value="6">Negeri Sembilan</option>
+                            <option label="Select State ">Select Location </option>
+                                <?php $locations = projectLocation() ?>
+                                @foreach ($locations as $location)
+                                <option value="{{$location->id}}" >{{$location->location_name}}</option>
+                                @endforeach
                         </select>
                     </div>
                     <div class="modal-footer">

@@ -91,12 +91,20 @@
             <div class="row mb-15px">
                 <div class="col-md-4">
                     <select class="form-select" name="acc_manager">
-                        <option  label="Please Choose " selected="selected" ></option>
+                        <option value="" label="Please Choose " ></option>
+                        <?php $Employees = getEmployee() ?>
+                        @foreach ($Employees as $Employee)
+                            <option value="{{$Employee->id}}" {{($project->acc_manager == $Employee->id) ? 'selected="selected"' : ''}}">{{$Employee->employeeName}}</option>
+                        @endforeach
                     </select>
                 </div>
                 <div class="col-md-4">
                     <select class="form-select" name="project_manager">
-                        <option  label="Please Choose " selected="selected"></option>
+                        <option value="" label="Please Choose " ></option>
+                        <?php $Employees = getEmployee() ?>
+                        @foreach ($Employees as $Employee)
+                            <option value="{{$Employee->id}}" {{($project->project_manager == $Employee->id) ? 'selected="selected"' : ''}}">{{$Employee->employeeName}}</option>
+                        @endforeach
                     </select>
                 </div>
                 <div class="col-md-4">

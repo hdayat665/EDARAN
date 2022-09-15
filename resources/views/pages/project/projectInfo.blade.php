@@ -58,7 +58,7 @@
                                     <td>{{$projectInfo->customer_name}}</td>
                                     <td>{{$projectInfo->project_code}}</td>
                                     <td>{{$projectInfo->project_name}}</td>
-                                    <td>{{$projectInfo->acc_manager}}</td>
+                                    <td>{{$projectInfo->acc_manager_name}}</td>
                                     <td>{{$projectInfo->contract_value}}</td>
                                     <td>{{$projectInfo->contract_start_date}}</td>
                                     <td>{{$projectInfo->contract_end_date}}</td>
