@@ -40,8 +40,8 @@
                         <label for="lastname" class="d-flex align-items-center fs-13px text-gray-600">Last Name</label>
                     </div>
                     <div class="form-floating mb-15px">
-                        <input type="text" name="username" class="form-control h-45px fs-13px" placeholder="Email Address" id="adminEmail" />
-                        <label for="adminEmail" class="d-flex align-items-center fs-13px text-gray-600">Admin email</label>
+                        <input type="text" name="workingEmail" class="form-control h-45px fs-13px" placeholder="Email Address" id="adminEmail" />
+                        <label for="adminEmail" class="d-flex align-items-center fs-13px text-gray-600">Email Address</label>
                     </div>
                     <div class="form-floating mb-15px">
                         <input type="text" name="tenant" class="form-control h-45px fs-13px" placeholder="Tenant Name" id="tenancyName" />

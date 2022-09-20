@@ -18,7 +18,7 @@
                         </div>
                         <div class="input-group mb-2 mt-2">
                             <span class="input-group-text fw-light" id="basic-addon1"><i class="fas fa-address-card fa-fw me-2"></i></span>
-                            <input type="text" class="form-control bg-white" value="{{$username ?? '-'}}" aria-label="Username" aria-describedby="basic-addon1" readonly>
+                            <input type="text" class="form-control bg-white" value="{{$employment->workingEmail ?? '-'}}" aria-label="Username" aria-describedby="basic-addon1" readonly>
                         </div>
                         <div class="input-group mb-2 mt-2">
                             <span class="input-group-text" id="basic-addon1"><i class="fas fa-phone-square fa-fw me-2"></i></span>

@@ -326,7 +326,7 @@ class LoginService
 
     public function activationEmail($input)
     {
-        $user = Users::where('username', $input['username'])->first();
+        $user = Users::where('tenant', $input['tenant'])->first();
 
         if (!$user) {
             $data['status'] = config('app.response.error.status');
@@ -334,7 +334,7 @@ class LoginService
             $data['title'] = config('app.response.error.title');
             $data['msg'] = 'Email not found';
         } else {
-            $receiver = $input['username'];
+            $receiver = $input['workingEmail'];
             $response['typeEmail'] = 'activateAcc';
             $response['title'] = 'Orbit Activation Link';
             $response['content1'] = 'This email is sent you to activate your account.';

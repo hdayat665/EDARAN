@@ -243,7 +243,7 @@ class ProfileController extends Controller
         $ps = new ProfileService;
 
         $data = $ps->profileView();
-
+        // pr($data['employment']);
         return view('pages.HRIS.myProfile.index', $data);
     }
 

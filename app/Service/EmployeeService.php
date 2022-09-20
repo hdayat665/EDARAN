@@ -164,9 +164,9 @@ class EmployeeService
         $data['parents'] = UserParent::where('user_id', $data['user_id'])->get();
         $data['siblings'] = UserSibling::where('user_id', $data['user_id'])->get();
         $data['employment'] = Employee::where('user_id', $data['user_id'])->first();
-        $data['jobHistorys'] = JobHistory::where('user_id', $data['user_id'])->first();
+        $data['jobHistorys'] = JobHistory::where('user_id', $data['user_id'])->get();
         $data['vehicles'] = Vehicle::where('user_id', $data['user_id'])->get();
-        // dd($data['companions']);
+        // dd($data['jobHistorys']);
         $childId[] = '';
         if ($data['childrens']) {
             foreach ($data['childrens'] as $child) {
