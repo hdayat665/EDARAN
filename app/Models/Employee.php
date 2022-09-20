@@ -37,6 +37,7 @@ class Employee extends Authenticatable
         'employeeId',
         'employeeName',
         'employeeEmail',
+        'workingEmail',
         'effectiveFrom',
         'event',
     ];

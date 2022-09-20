@@ -23,7 +23,7 @@
                     @foreach ($projectInfos as $project)
                     <tr class="odd gradeX">
                         <td>
-                            <a href="#" class="btn btn-primary btn-xs" data-bs-toggle="modal" id="requestProjectButton" data-id="{{$project->id}}">Request</a><br><a href="#" class="btn btn-warning btn-xs">Cancel</a>
+                            <a href="#" class="btn btn-primary btn-xs" data-bs-toggle="modal" id="requestProjectButton" data-id="{{$project->id}}">Request</a>
                         </td>
                         <td>{{$project->customer_name}}</td>
                         <td>{{$project->project_code}}</td>

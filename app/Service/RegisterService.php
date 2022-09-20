@@ -31,16 +31,16 @@ class RegisterService
             return $data;
         }
         // checking existing domain/user
-        $user = Users::where('username', $r['username'])->first();
+        // $user = Users::where('username', $r['username'])->first();
 
-        if ($user) {
-            // show error user exists
-            $data['title'] = 'Error!';
-            $data['type'] = 'error';
-            $data['msg'] = 'Email already Exists';
+        // if ($user) {
+        //     // show error user exists
+        //     $data['title'] = 'Error!';
+        //     $data['type'] = 'error';
+        //     $data['msg'] = 'Email already Exists';
 
-            return $data;
-        }
+        //     return $data;
+        // }
 
         $user = Users::where('tenant', $r['tenant'])->first();
 
@@ -55,7 +55,7 @@ class RegisterService
 
         $countUser = Users::all()->count();
 
-        $param['username'] = $r['username'];
+        $param['username'] = 'Admin';
         $param['status'] = 'not verified';
         $param['tenant_id'] = $countUser+1;
         $param['tenant'] = $r['tenant'];
@@ -65,7 +65,7 @@ class RegisterService
 
         Users::create($param);
 
-        $user = Users::where([['username', '=', $r['username']]])
+        $user = Users::where([['tenant', '=', $r['tenant']]])
         ->first()->toArray();
 
         $userP['user_id'] = $user['id'];
@@ -80,7 +80,11 @@ class RegisterService
 
         UserAddress::create($userProfile);
         UserEmergency::create($userProfile);
-        Employee::create($userProfile);
+
+        $employee['workingEmail'] = $r['workingEmail'];
+        $employee['user_id'] = $user['id'];
+        // pr($employee);
+        Employee::create($employee);
 
         $userProfile['tenant_id'] = $user['tenant_id'];
         $userProfile['tenant_name'] = $r['tenant'];
@@ -88,7 +92,8 @@ class RegisterService
         Tenant::create($userProfile);
 
         $ls = new LoginService;
-        $email['username'] = $param['username'];
+        $email['workingEmail'] = $r['workingEmail'];
+        $email['tenant'] = $r['tenant'];
         $ls->activationEmail($email);
 
 

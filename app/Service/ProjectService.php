@@ -409,12 +409,15 @@ class ProjectService
                 , 'c.departmentName'
                 , 'e.employeeName'
                 , 'f.username'
-                , 'y.username as manager_email')
+                , 'y.username as manager_email'
+                , 'x.employeeName as manager_name')
         ->where('a.id', $id)
         ->first();
             // pr($projectMember);
-        $receiver = $projectMember->manager_email;
+        $receiver = $projectMember->manager_email ?? 'admin@edaran.com';
+
         $response['typeEmail'] = 'projectCancelReq';
+        $response['project_manager'] = $projectMember->manager_name;
         $response['customer_name'] = $projectMember->customer_name;
         $response['project_code'] = $projectMember->project_code;
         $response['project_name'] = $projectMember->project_name;
@@ -464,7 +467,7 @@ class ProjectService
     {
         $employee = Employee::where('user_id', Auth::user()->id)->first();
         // pr($employee->id);
-        $projectMember = ProjectMember::select('project_id')->where([['employee_id', '=', $employee->id],['status', '=' ,'cancel'],['status', '=' ,'']])->groupBy('project_id')->get();
+        $projectMember = ProjectMember::select('project_id')->where([['employee_id', '=', $employee->id]])->whereIn('status', ['pending','approve'])->groupBy('project_id')->get();
         // pr($projectMember);
         $projectId = [];
         foreach ($projectMember as $project) {
@@ -487,7 +490,7 @@ class ProjectService
         return $data;
     }
 
-    public function myProjectView()
+    public function myProjectView($status = '')
     {
         $employee = Employee::where('user_id', Auth::user()->id)->first();
         // pr(Auth::user()->id);
@@ -500,8 +503,8 @@ class ProjectService
         $data = DB::table('project_member as a')
             ->leftJoin('project as b', 'a.project_id', '=', 'b.id')
             ->leftJoin('customer as c', 'b.customer_id', '=', 'c.id')
-            ->select('a.location', 'b.*', 'c.customer_name')
-            ->where([['a.employee_id', '=', $employee->id], ['a.status', '=', 'approve']])
+            ->select('a.location', 'a.id as memberId', 'b.*', 'c.customer_name')
+            ->where([['a.employee_id', '=', $employee->id], ['a.status', '=', $status]])
             ->get();
         // pr($data);
         if (!$data) {
