@@ -158,7 +158,7 @@
                         <div class="col-sm-6">
                             <label for="firstname" class="form-label">First Name*</label>
                             <input type="text" id="firstName1" name="firstName" value="" class="form-control" aria-describedby="firstname">
-                            <input type="text" name="user_id" value="{{$user_id}}">
+                            <input type="hidden" name="user_id" value="{{$user_id}}">
                         </div>
                         <div class="col-sm-6">
                             <label for="lastname" class="form-label">Last Name*</label>
@@ -281,6 +281,7 @@
                     <h4 class="mt-3 p-2">File upload</h4>
                     <div class="row p-2">
                         <div class="col">
+                            <span id="supportDoc123"></span>
                             <input type="file" class="form-control" name="supportDoc">
                         </div>
                     </div>
@@ -344,7 +345,7 @@
                                 </div>
                                 <div class="col-sm-6">
                                     <label for="age" class="form-label">Age</label>
-                                    <input type="text" id="age" name="age" class="form-control" aria-describedby="age" readonly>
+                                    <input type="text" id="age123" name="age" class="form-control" aria-describedby="age" readonly>
                                 </div>
                             </div>
                         </div>
@@ -426,7 +427,8 @@
                         </div>
                     </div>
                     <h4 class="mt-3 p-2">File upload</h4>
-                    <div class="row p-2">
+                            <span id="supportDoc1234"></span>
+                            <div class="row p-2">
                         <div class="col">
                             <input type="file" class="form-control">
                         </div>

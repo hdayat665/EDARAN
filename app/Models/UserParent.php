@@ -32,6 +32,7 @@ class UserParent extends Authenticatable
         'issuingCountry',
         'contactNo',
         'DOB',
+        'gender',
         'age',
         'relationship',
         'address1',

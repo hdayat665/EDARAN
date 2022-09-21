@@ -12,7 +12,7 @@
 
                     </div>
                     <div class="mb-3">
-                        <label for="recipient-name" class="col-form-label">Email</label>
+                        <label for="recipient-name" class="col-form-label">Working Email</label>
                         <input type="text" class="form-control" name="username">
                     </div>
                 </form>

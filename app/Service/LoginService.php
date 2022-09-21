@@ -4,6 +4,7 @@ namespace App\Service;
 
 use App\Exceptions\CustomException;
 use App\Mail\Mail as MailMail;
+use App\Models\Employee;
 use App\Models\Subscription;
 use App\Models\Users;
 use App\Models\UsersDetails;
@@ -290,20 +291,21 @@ class LoginService
 
     public function forgotPassEmail($input)
     {
-        $user = Users::where('username', $input['username'])->first();
+        $employee = Employee::where('workingEmail', $input['username'])->first();
+        $user = Users::where('id', $employee['user_id'])->first();
 
         if (!$user) {
             $data['status'] = config('app.response.error.status');
             $data['type'] = config('app.response.error.type');
             $data['title'] = config('app.response.error.title');
-            $data['msg'] = 'Email not found';
+            $data['msg'] = 'User not found';
         }else{
-            $receiver = 'hdayat665@gmail.com';
+            $receiver = $input['username'];
             $response['typeEmail'] = 'forgotPass';
             $response['title'] = 'Orbit Reset Password';
             $response['content1'] = 'This email is sent you to reset your password.';
             $response['domain'] = $user->tenant;
-            $response['username'] = $user->username;
+            $response['username'] = $input['username'];
             $response['content2'] = 'Please click the button below to reset your password:';
             $response['resetPassLink'] = env('APP_URL') . '/resetPassView/'.$user->id;
             $response['from'] = env('MAIL_FROM_ADDRESS');
@@ -339,7 +341,7 @@ class LoginService
             $response['title'] = 'Orbit Activation Link';
             $response['content1'] = 'This email is sent you to activate your account.';
             $response['domain'] = $user->tenant;
-            $response['username'] = $user->username;
+            $response['username'] = $input['workingEmail'];
             $response['content2'] = 'Please click the button below to activate your account:';
             $response['resetPassLink'] = env('APP_URL') . '/activateView/' . $user->id;
             $response['from'] = env('MAIL_FROM_ADDRESS');

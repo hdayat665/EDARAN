@@ -630,10 +630,11 @@ class EmployeeService
         $sameAddress = $input['sameAddress'] ?? null;
         $user_id = $input['user_id'];
         if ($sameAddress) {
-            $userProfile = UserProfile::where('user_id', $user_id)->first();
+            $userProfile = UserAddress::where('user_id', $user_id)->first();
 
             $input['address1'] = $userProfile->address1;
             $input['address2'] = $userProfile->address2;
+            $input['postcode'] = $userProfile->postcode;
             $input['city'] = $userProfile->city;
             $input['state'] = $userProfile->state;
             $input['country'] = $userProfile->country;
