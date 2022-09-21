@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Storage;
 
 class ProfileService
 {
@@ -351,7 +352,7 @@ class ProfileService
 
             if ($_FILES['supportDoc']['name'])
             {
-                $payslip = upload($r, 'supportDoc');
+                $payslip = upload($r->file('supportDoc'));
                 $input['supportDoc'] = $payslip['filename'];
 
                 if (!$input['supportDoc']) {
@@ -647,6 +648,7 @@ class ProfileService
     public function getChildren($id = '')
     {
         $data['data'] = UserChildren::where('id', $id)->first();
+        // pr(Storage::path($data['data']->supportDoc));
         $data['msg'] = 'Success get children data';
 
         return $data;

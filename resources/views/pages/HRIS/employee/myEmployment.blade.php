@@ -78,13 +78,13 @@
                                 @endforeach
                             </select>
                         </div>
-                        <div class="row p-2">
+                                <div class="row p-2">
                             <label for="firstname" class="form-label">Employment Type*</label>
                             <select class="form-select" name="employmentType">
                                 <?php $EmploymentTypes = getEmploymentType() ?>
                                 <option value="0" label="Please Choose "></option>
                                 @foreach ($EmploymentTypes as $EmploymentType)
-                                <option value="{{$EmploymentType->id ?? null}}" label="{{$EmploymentType->employmentTypeName ?? null}}" {{ ($employment->EmploymentType == $EmploymentType->id) ? "selected='selected'" : '' }}></option>
+                                <option value="{{$EmploymentType->id}}" label="{{$EmploymentType->code}}" {{ ($employment->employmentType == $EmploymentType->id) ? "selected='selected'" : '' }}></option>
                                 @endforeach
                             </select>
                         </div>

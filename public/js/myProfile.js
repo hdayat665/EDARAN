@@ -300,7 +300,8 @@ $(document).ready(function() {
                 $('#idNo1').val(child.idNo);
                 $('#instituition1').val(child.instituition);
                 $("#issuingCountry1").val(child.issuingCountry);
-                // $("#issuingCountry1").prop("selectedIndex", child.issuingCountry);
+                $("#supportDoc123").html('<a href="/storage/' + child.supportDoc + '" target="_blank">click here</a> to view support document')
+                    // $("#issuingCountry1").prop("selectedIndex", child.issuingCountry);
                 $('#lastName1').val(child.lastName);
                 $("#maritalStatus1").prop("selectedIndex", child.maritalStatus);
                 if (child.nonCitizen == 'on') {
@@ -317,10 +318,11 @@ $(document).ready(function() {
             var childrenData = getChildren(id);
 
             childrenData.done(function(data) {
+                console.log(data);
                 $('#viewChildren').hide();
                 child = data.data;
                 $('#DOB').val(child.DOB);
-                $('#age').val(child.age);
+                $('#age123').val(child.age);
                 $('#created_at').val(child.created_at);
                 $("#educationLevel").prop("selectedIndex", child.educationLevel);
                 $("#educationType").prop("selectedIndex", child.educationType);
@@ -332,7 +334,8 @@ $(document).ready(function() {
                 $('#idNo').val(child.idNo);
                 $('#instituition').val(child.instituition);
                 $("#issuingCountry").val(child.issuingCountry);
-                // $("#issuingCountry").prop("selectedIndex", child.issuingCountry);
+                $("#supportDoc1234").html('<a href="/storage/' + child.supportDoc + '" target="_blank">click here</a> to view support document')
+                    // $("#issuingCountry").prop("selectedIndex", child.issuingCountry);
                 $('#lastName').val(child.lastName);
                 $("#maritalStatus").prop("selectedIndex", child.maritalStatus);
                 if (child.nonCitizen === 'on') {
