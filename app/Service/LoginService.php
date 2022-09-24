@@ -250,13 +250,17 @@ class LoginService
         $data['title'] = 'Success';
         $data['type'] = 'success';
         $data['msg'] = 'Authorized!';
-
         $user = $r->input();
 
-        $r->authenticate();
-        $r->session()->regenerate();
-
+        // $r->authenticate();
+        // $r->session()->regenerate();
         Auth::attempt($user);
+
+        if (!Auth::user()) {
+            $data['msg'] = 'Credential not match with tenant name!';
+
+            throw new CustomException($data['msg']);
+        }
 
         $user_id = Auth::user()->id;
 
@@ -342,6 +346,7 @@ class LoginService
             $response['content1'] = 'This email is sent you to activate your account.';
             $response['domain'] = $user->tenant;
             $response['username'] = $input['workingEmail'];
+            $response['password'] = $input['password'];
             $response['content2'] = 'Please click the button below to activate your account:';
             $response['resetPassLink'] = env('APP_URL') . '/activateView/' . $user->id;
             $response['from'] = env('MAIL_FROM_ADDRESS');

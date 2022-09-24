@@ -31,6 +31,7 @@ class UserSibling extends Authenticatable
         'expiryDate',
         'issuingCountry',
         'contactNo',
+        'gender',
         'DOB',
         'age',
         'relationship',

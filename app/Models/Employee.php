@@ -38,6 +38,7 @@ class Employee extends Authenticatable
         'employeeName',
         'employeeEmail',
         'workingEmail',
+        'report_to',
         'effectiveFrom',
         'event',
     ];

@@ -54,6 +54,7 @@
                     <div class="form-floating mb-15px">
                         <input type="text"class="form-control h-45px fs-13px" name="phoneNo" placeholder="phonenumber" id="phonenumber" />
                         <label for="phonenumber" class="d-flex align-items-center fs-13px text-gray-600">Phone Number</label>
+                        <input type="hidden" name="package" value="{{$package}}" />
                     </div>
                     <div class="form-group form-check mb-15px">
 							<input type="checkbox" class="form-check-input" id="exampleCheck1">
@@ -66,7 +67,7 @@
                             <option value="Brunei" label="Brunei">Brunei</option>
                         </select>
                     </div>
-                    <div class="form-floating mb-15px">
+                    {{-- <div class="form-floating mb-15px">
                         <input type="password" name="password" class="form-control h-45px fs-13px" placeholder="Password" id="password" />
                         <label for="password" class="d-flex align-items-center fs-13px text-gray-600">Password</label>
                     </div>
@@ -74,7 +75,7 @@
                         <input type="password" name="confirm_password" class="form-control h-45px fs-13px" placeholder="Password" id="password" />
                         <input type="hidden" name="package" value="{{$package}}" />
                         <label for="password" class="d-flex align-items-center fs-13px text-gray-600">Confirm Password</label>
-                    </div>
+                    </div> --}}
                     <div class="form-group form-check mb-15px">
                         <input type="checkbox" class="form-check-input" id="exampleCheck1">
                         <p  class="form-check-label" for="exampleCheck1">I agree to terms of <a href="#"> service & privacy policy </a> </p>

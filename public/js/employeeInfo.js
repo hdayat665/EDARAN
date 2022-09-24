@@ -49,7 +49,26 @@ $(document).ready(function() {
     $(document).on("click", "#terminate", function() {
         $('#exampleModal').modal('show');
         var userId = $(this).data('id');
+        var employeeId = $(this).data('employee');
         $("#userId").val(userId);
 
+        var ParentData = getEmployee(employeeId);
+
+        ParentData.done(function(data) {
+            parent = data;
+            // console.log(parent);
+            $('#employeeId').val(parent.employeeId);
+            $('#employeeName').val(parent.employeeName);
+            $('#employeeEmail').val(parent.employeeEmail);
+            $("#reportTo").val(parent.report_to);
+        });
+
     });
+
+    function getEmployee(id) {
+        return $.ajax({
+            url: "/getEmployeeById/" + id
+        });
+
+    }
 });

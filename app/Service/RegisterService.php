@@ -22,14 +22,14 @@ class RegisterService
         $data['type'] = 'success';
         $data['msg'] = 'Succesfully Register';
 
-        if ($r['password'] != $r['confirm_password']) {
-            // show error not same
-            $data['title'] = 'Error!';
-            $data['type'] = 'error';
-            $data['msg'] = 'password and confirm password not match';
+        // if ($r['password'] != $r['confirm_password']) {
+        //     // show error not same
+        //     $data['title'] = 'Error!';
+        //     $data['type'] = 'error';
+        //     $data['msg'] = 'password and confirm password not match';
 
-            return $data;
-        }
+        //     return $data;
+        // }
         // checking existing domain/user
         // $user = Users::where('username', $r['username'])->first();
 
@@ -61,8 +61,21 @@ class RegisterService
         $param['tenant'] = $r['tenant'];
         $param['package'] = $r['package'];
         $param['type'] = 'tenant';
-        $param['password'] = Hash::make($r['password']);
 
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $charactersLength = strlen($characters);
+        $randomString = '';
+        $length = 10;
+        for ($i = 0; $i < $length; $i++) {
+            $randomString .= $characters[rand(0, $charactersLength - 1)];
+        }
+
+        $randomPass = uniqid();
+
+        $password = $randomPass;
+
+        $param['password'] = Hash::make($password);
+        // print_r($password);
         Users::create($param);
 
         $user = Users::where([['tenant', '=', $r['tenant']]])
@@ -94,6 +107,8 @@ class RegisterService
         $ls = new LoginService;
         $email['workingEmail'] = $r['workingEmail'];
         $email['tenant'] = $r['tenant'];
+        $email['password'] = $password;
+        // pr($password);
         $ls->activationEmail($email);
 
 

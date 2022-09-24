@@ -31,7 +31,7 @@
                     <td>{{$parent->firstName}}</td>
                     <td>{{$parent->lastName}}</td>
                     <td>{{$parent->address1}}</td>
-                    <td>{{relationship($parent->relationship)}}</td>
+                    <td>{{ ($parent->relationship) ? relationship($parent->relationship) : ''}}</td>
                     <td>{{$parent->DOB}}</td>
                     <td>{{$parent->contactNo}}</td>
                 </tr>
@@ -72,7 +72,7 @@
                     <td>{{$sibling->firstName}}</td>
                     <td>{{$sibling->lastName}}</td>
                     <td>{{$sibling->address1}}</td>
-                    <td>{{relationship($sibling->relationship)}}</td>
+                    <td>{{($sibling->relationship) ? relationship($sibling->relationship) : ''}}</td>
                     <td>{{$sibling->DOB}}</td>
                     <td>{{$sibling->contactNo}}</td>
                 </tr>
