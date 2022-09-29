@@ -5,10 +5,19 @@ $(document).ready(function() {
         autoclose: true,
     });
 
-    $("#typeOfLogsTable").DataTable({
-        responsive: true,
-    });
-
+    $('#activityname').DataTable({
+        lengthMenu: [5],
+        responsive: false,
+        "searching": false,
+        "bLengthChange": false
+      });
+      $('#activitynameedit').DataTable({
+        lengthMenu: [5],
+        responsive: false,
+        "searching": false,
+        "bLengthChange": false
+      });
+    
     $(document).on("click", "#addButton", function() {
         $('#addModal').modal('show');
 
@@ -205,3 +214,40 @@ $(document).ready(function() {
     });
 
 });
+
+	
+    $("#add-row").click(function(){
+   
+    var addtypelogactivityName = document.getElementById('addtypelogactivityName').value;
+  
+    if(addtypelogactivityName == ""){
+      document.getElementById('addtypelogactivityName');
+      return;
+    }
+   
+    
+    else{
+      
+      let table = document.getElementById('activityname');
+      // Insert a row at the end of the table
+      let newRow = table.insertRow(-1);
+      var l = table.rows.length-1;
+      //Col 1 = addtypelogactivityName
+      table.rows[l].insertCell(0);
+      table.rows[l].cells[0].innerHTML = addtypelogactivityName;
+     
+      //Col 3 = Delete Button
+      table.rows[l].insertCell(1);
+      table.rows[l].cells[1].innerHTML = "<button type='button' class='btnDelete btn btn-danger btn-sm' onclick='delRow(this);' id='btnDelete' size='1' height='1'>Delete</button>";
+  
+      //Clear input
+      
+    
+  }
+    });
+  
+  function delRow(btn){
+    var row = btn.parentNode.parentNode;
+    row.parentNode.removeChild(row);
+  }
+      

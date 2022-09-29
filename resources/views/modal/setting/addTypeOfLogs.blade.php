@@ -36,38 +36,44 @@
                         </select>
                     </div>
                     <div class="row p-2">
-                        <div class="col-sm-10" id="" >
-                            <label for="firstname" class="form-label">Activity Name*</label>
-                            <input type="text" class="form-control" value="saya buat apa 1" name="activity_name[]" />
-                            <input type="text" class="form-control" value="saya buat apa 2" name="activity_name[]" />
-                        </div>
-                        <div class="col-sm-2" id="" >
-                            <label for="firstname" class="form-label">&nbsp;</label><br>
-                            <a href="#" class="btn btn-primary btn-sm">+ Add</a>
-                        </div>
-                    </div>
-                    <div class="row p-2">
-                        <table id="activityname" class="table table-striped table-bordered align-middle">
-                            <thead>
-                                <tr>
-                                    <th width="1%">NO</th>
-                                    <th class="text-nowrap">Department</th>
-                                    <th width="9%" data-orderable="false" class="align-middle">Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td width="1%">1</td>
-                                    <td >Corrective Maintenance</td>
-                                    <td width="1%"><a href="javascript:;" class="btn btn-outline-danger"><i class="fa fa-trash"></i></a></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" id="saveButton" class="btn btn-primary">Save</button>
-                    </div>
+								<div class="col-sm-10" id="" >
+								<label for="firstname" class="form-label">Activity Name*</label>	
+								<input type="text" id="addtypelogactivityName" placeholder="Name" class="form-control">
+								
+								
+								</div>
+								<div class="col-sm-2" id="" >
+									<label for="firstname" class="form-label">&nbsp;</label><br>
+									<input type="button" id="add-row" class="add-row btn btn-primary btn-sm" value="Add">
+									
+								</div>			
+						</div><br>
+                        <div class="form-control">
+						<div class="row p-2">
+						
+
+
+						<table id="activityname" class="table table-striped table-bordered align-middle">
+						
+						<thead>
+							<tr>
+								<th class="text-nowrap">Activity Name</th>
+								<th width="1%" data-orderable="false" class="align-middle">Action</th>
+                            </tr>
+							</thead>
+						<tr>
+							<th style="display:none"></th>
+							<th width="1%" style="display:none"></th>
+						</tr>
+						</table>
+
+					</div>
+                </div>
+					
+					<div class="modal-footer">
+					  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+					  <button type="submit" id="saveButton" class="btn btn-primary">Save</button>
+					</div>
                 </form>
             </div>
         </div>
