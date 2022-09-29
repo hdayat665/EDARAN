@@ -42,7 +42,7 @@
             </table>
         </div>
     </div>
-    @include('modal.setting.addTypeOfLogs');
-    @include('modal.setting.editTypeOfLogs');
+    @include('modal.setting.addTypeOfLogs')
+    @include('modal.setting.editTypeOfLogs')
 
     @endsection

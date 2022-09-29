@@ -8,7 +8,7 @@ $(document).ready(function() {
     $("#typeOfLogsTable").DataTable({
         responsive: true,
     });
-
+    
     $(document).on("click", "#addButton", function() {
         $('#addModal').modal('show');
 
@@ -370,14 +370,18 @@ $(document).ready(function() {
     $('#addneweventselectproject').picker({ search: true });
     $(function() {
         $("#starttime").timepicker({
-            timeFormat: 'HH:mm',
+            showMeridian:false,
         });
         $("#endtime").timepicker({
-            timeFormat: 'HH:mm',
+            showMeridian:false,
         });
         starteventtime
-        $("#starteventtime").timepicker();
-        $("#endeventtime").timepicker();
+        $("#starteventtime").timepicker({
+            showMeridian:false,
+        });
+        $("#endeventtime").timepicker({
+            showMeridian:false,
+        });
     })
 
     $(document).on('change', "#typeoflog", function() {
@@ -553,17 +557,17 @@ $(document).ready(function() {
     $('#addneweventparticipantedit').picker({ search: true });
     $('#addneweventselectprojectedit').picker({ search: true });
     $("#starttimeedit").timepicker({
-        timeFormat: 'HH:mm',
+        showMeridian:false,
     });
     $("#endtimeedit").timepicker({
-        timeFormat: 'HH:mm',
+        showMeridian:false,
     });
     starteventtime
     $("#starteventtimeedit").timepicker({
-        timeFormat: 'HH:mm',
+        showMeridian:false,
     });
     $("#endeventtimeedit").timepicker({
-        timeFormat: 'HH:mm',
+        showMeridian:false,
     });
     $(document).on('change', "#typeoflogedit", function() {
         if ($(this).val() == "2") {
