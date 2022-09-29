@@ -77,7 +77,7 @@
                     <h5 class="mb-5px">Timesheets Group</h5>
                 </div>
                 <div class="col-lg-2">
-                    <a class="mb-10px" href="#"><i class="fa fa-pen-to-square fa-4x text-blue"></i></a><br><br>
+                    <a class="mb-10px" href="/typeOfLogs"><i class="fa fa-pen-to-square fa-4x text-blue"></i></a><br><br>
                     <h5 class="mb-5px">Type of Logs</h5>
                 </div>
             </div>

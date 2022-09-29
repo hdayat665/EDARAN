@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\ActivityLogs;
 use App\Models\Branch;
 use App\Models\Company;
 use App\Models\Customer;
@@ -8,6 +9,7 @@ use App\Models\Designation;
 use App\Models\Employee;
 use App\Models\EmploymentType;
 use App\Models\JobGrade;
+use App\Models\Project;
 use App\Models\ProjectLocation;
 use App\Models\Unit;
 use Illuminate\Support\Facades\Auth;
@@ -629,3 +631,59 @@ if (!function_exists('prjManager')) {
         return $data;
     }
 }
+
+if (!function_exists('project')) {
+    function project($user_id = '')
+    {
+        $cond[1] = ['tenant_id', Auth::user()->tenant_id];
+
+        if ($user_id) {
+            $cond[2] = ['user_id', '=', $user_id];
+        }
+        $data = Project::where($cond)->get();
+
+        if (!$data) {
+            $data = [];
+        }
+
+        return $data;
+    }
+}
+
+if (!function_exists('project_member')) {
+    function project_member($user_id = '')
+    {
+        $cond[1] = ['a.tenant_id', Auth::user()->tenant_id];
+
+        if ($user_id) {
+            $cond[2] = ['a.user_id', '=', $user_id];
+        }
+
+        $data = DB::table('employment as a')
+            ->leftJoin('project_member as b', 'a.id', '=', 'b.employee_id')
+            ->leftJoin('project as c', 'b.project_id', '=', 'c.id')
+            ->select('c.id', 'c.project_name', 'c.project_code')
+            ->where($cond)
+            ->get();
+
+        if (!$data) {
+            $data = [];
+        }
+
+        return $data;
+    }
+}
+
+if (!function_exists('activityName')) {
+    function activityName()
+    {
+        $cond[1] = ['tenant_id', Auth::user()->tenant_id];
+        $data = ActivityLogs::where($cond)->get();
+        if (!$data) {
+            $data = [];
+        }
+
+        return $data;
+    }
+}
+
