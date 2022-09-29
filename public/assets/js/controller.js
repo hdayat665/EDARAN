@@ -32,6 +32,9 @@ requirejs.config({
         'myProjectJs': assets + '/js/myProjectJs',
         'projectReportListingJs': assets + '/js/projectReportListingJs',
         'projectStatusJs': assets + '/js/projectStatusJs',
+        'typeOfLogsJs': assets + '/js/typeOfLogsJs',
+        'myTimesheetJs': assets + '/js/myTimesheetJs',
+
 
         // 'main': 'assets/backend/js/main',
         'sweetAlert2': assets + '/assets/sweetalert2/sweetalert2',
@@ -163,6 +166,14 @@ if ($('#projectReportListingJs').length > 0) {
 
 if ($('#projectStatusJs').length > 0) {
     requirejs(['projectStatusJs']);
+}
+
+if ($('#typeOfLogsJs').length > 0) {
+    requirejs(['typeOfLogsJs']);
+}
+
+if ($('#myTimesheetJs').length > 0) {
+    requirejs(['myTimesheetJs']);
 }
 
 

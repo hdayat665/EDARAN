@@ -2,6 +2,7 @@
 
 namespace App\Service;
 
+use App\Models\ActivityLogs;
 use App\Models\Branch;
 use App\Models\Company;
 use App\Models\Department;
@@ -14,6 +15,7 @@ use App\Models\Policy;
 use App\Models\Role;
 use App\Models\SOP;
 use App\Models\Subscription;
+use App\Models\TypeOfLogs;
 use App\Models\Unit;
 use App\Models\Users;
 use App\Models\UsersDetails;
@@ -958,6 +960,116 @@ class SettingService
     public function getEmploymentTypeById($id)
     {
         $data = EmploymentType::find($id);
+
+        return $data;
+    }
+
+    public function getTypeOfLogsView()
+    {
+        $data = [];
+        // $data['data'] = TypeOfLogs::where('tenant_id', Auth::user()->tenant_id)->get();
+        $data = DB::table('type_of_logs as a')
+        ->leftJoin('project as b', 'a.project_id', '=', 'b.id')
+        ->leftJoin('activity_logs as c', 'a.id', '=', 'c.logs_id')
+        ->leftJoin('department as d', 'a.department', '=', 'd.id')
+        ->select('a.*', 'b.project_name', 'd.departmentName')
+        ->where('a.tenant_id', Auth::user()->tenant_id)
+        ->get();
+        // pr($data);
+        return $data;
+    }
+
+    public function createTypeOfLogs($r)
+    {
+        $input = $r->input();
+        $user = Auth::user();
+
+        if(isset($input['project_id']))
+        {
+            $logsData['project_id'] = $input['project_id'];
+        }
+        $logsData['department'] = $input['department'];
+        $logsData['type_of_log'] = $input['type_of_log'];
+        $logsData['tenant_id'] = $user->tenant_id;
+        $logsData['activity_name'] = implode(', ', $input['activity_name']);
+        // pr($logsData);
+
+        TypeOfLogs::create($logsData);
+
+        // $typeOfLog = TypeOfLogs::orderby('created_at', 'desc')->first();
+
+        // if (isset($input['activity_name'])) {
+
+        //     foreach ($input['activity_name'] as $activity) {
+        //         $activityData['activity_name'] = $activity;
+        //         $activityData['logs_id'] = $typeOfLog->id;
+
+        //         ActivityLogs::create($activityData);
+        //     }
+        // }
+
+        $data['status'] = config('app.response.success.status');
+        $data['type'] = config('app.response.success.type');
+        $data['title'] = config('app.response.success.title');
+        $data['msg'] = 'Success create type of logs';
+
+        return $data;
+    }
+
+    public function updateTypeOfLogs($r, $id)
+    {
+        $input = $r->input();
+        $user = Auth::user();
+
+        if(isset($input['project_id']))
+        {
+            $logsData['project_id'] = $input['project_id'];
+        }
+
+        if($input['type_of_log'] == 'Non-Project')
+        {
+            $logsData['project_id'] = null;
+        }
+
+        $logsData['department'] = $input['department'];
+        $logsData['type_of_log'] = $input['type_of_log'];
+        $logsData['tenant_id'] = $user->tenant_id;
+        $logsData['activity_name'] = implode(', ', $input['activity_name']);
+
+        TypeOfLogs::where('id', $id)->update($logsData);
+
+        $data['status'] = config('app.response.success.status');
+        $data['type'] = config('app.response.success.type');
+        $data['title'] = config('app.response.success.title');
+        $data['msg'] = 'Success update role';
+
+        return $data;
+    }
+
+    public function deleteTypeOfLogs($id)
+    {
+        $logs = TypeOfLogs::find($id);
+
+        if (!$logs) {
+            $data['status'] = config('app.response.error.status');
+            $data['type'] = config('app.response.error.type');
+            $data['title'] = config('app.response.error.title');
+            $data['msg'] = 'logs not found';
+        } else {
+            $logs->delete();
+
+            $data['status'] = config('app.response.success.status');
+            $data['type'] = config('app.response.success.type');
+            $data['title'] = config('app.response.success.title');
+            $data['msg'] = 'Success delete log';
+        }
+
+        return $data;
+    }
+
+    public function getLogsById($id)
+    {
+        $data = TypeOfLogs::find($id);
 
         return $data;
     }

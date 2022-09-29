@@ -8,7 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
-class UserSibling extends Authenticatable
+class TimesheetLog extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
@@ -18,30 +18,20 @@ class UserSibling extends Authenticatable
      * @var array<int, string>
      */
 
-    protected $table ='userSibling';
+    protected $table = 'timesheet_log';
 
     protected $fillable = [
+        'project_id',
+        'tenant_id',
         'user_id',
-        'firstName',
-        'lastName',
-        'fullName',
-        'nonCitizen',
-        'idNo',
-        'passport',
-        'expiryDate',
-        'issuingCountry',
-        'contactNo',
-        'gender',
-        'DOB',
-        'age',
-        'relationship',
-        'address1',
-        'address2',
-        'postcode',
-        'city',
-        'state',
-        'country',
+        'type_of_log',
+        'date',
+        'office_log',
+        'activity_name',
+        'project_location',
+        'start_time',
+        'end_time',
+        'desc',
+        'total_hour'
     ];
 }
-
-

@@ -12,6 +12,7 @@
     <br>
     <p><strong>Domain Name</strong> : {{ $domain }}</p>
     <p><strong>Working Email</strong> : {{ $username }} </p>
+    <p><strong>Password</strong> : {{ $password }} </p>
     <br>
     <p>{{$content2}}</p>
     <a href="{{ $resetPassLink }}"><button>Activate</button></a>

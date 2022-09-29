@@ -143,7 +143,7 @@ class EmployeeService
         $data['data'] = DB::table('employment as a')
         ->leftjoin('userProfile as b', 'a.user_id', '=', 'b.user_id')
         ->leftjoin('department as c', 'a.department', '=', 'c.id')
-        ->select('a.employeeId', 'a.user_id', 'b.firstName', 'b.lastName', 'b.personalEmail as email', 'b.phoneNo', 'c.departmentName as department', 'a.supervisor', 'a.status')
+        ->select('a.id', 'a.employeeId', 'a.user_id', 'b.firstName', 'b.lastName', 'b.personalEmail as email', 'b.phoneNo', 'c.departmentName as department', 'a.supervisor', 'a.status')
         ->where('a.tenant_id', $userId)
         ->get();
 

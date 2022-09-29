@@ -5,8 +5,9 @@ namespace App\Http\Controllers\Auth;
 use App\Service\LoginService;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Str;
-use Illuminate\Support\Facades\Auth;
+// use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Auth;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Mail\Mail;
 use App\Models\Users;
@@ -15,6 +16,7 @@ use Illuminate\Support\Facades\Session;
 use Symfony\Component\Debug\ExceptionHandler;
 class LoginController extends Controller
 {
+
     public function index()
     {
         // $user = Auth::check();

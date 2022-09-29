@@ -30,6 +30,12 @@
     <link href="{{env('ASSETS_URL')}}/plugins/nvd3/build/nv.d3.css" rel="stylesheet" />
     <link href="{{env('ASSETS_URL')}}/plugins/simple-calendar/dist/simple-calendar.css" rel="stylesheet" />
     <link href="{{env('ASSETS_URL')}}/plugins/jstree/dist/themes/default/style.min.css" rel="stylesheet" />
+
+    <link href="{{env('ASSETS_URL')}}/plugins/@fullcalendar/common/main.min.css" rel="stylesheet" />
+    <link href="{{env('ASSETS_URL')}}/plugins/@fullcalendar/daygrid/main.min.css" rel="stylesheet" />
+    <link href="{{env('ASSETS_URL')}}/plugins/@fullcalendar/timegrid/main.min.css" rel="stylesheet" />
+    <link href="{{env('ASSETS_URL')}}/plugins/@fullcalendar/list/main.min.css" rel="stylesheet" />
+    <link href="{{env('ASSETS_URL')}}/plugins/@fullcalendar/bootstrap/main.min.css" rel="stylesheet" />
     <style>
         .error{
             /* margin-top:2.4rem !important; */
@@ -217,7 +223,7 @@
                         </a>
                         <div class="menu-submenu">
                             <div class="menu-item">
-                                <a href="ui_general.html" class="menu-link">
+                                <a href="/myTimesheet" class="menu-link">
                                     <div class="menu-icon">
 										<i class="fa fa-calendar-check text-gray"></i>
 									</div>
@@ -622,6 +628,23 @@
         <script src="{{env('ASSETS_URL')}}/plugins/simple-calendar/dist/jquery.simple-calendar.min.js"></script>
         <script src="{{env('ASSETS_URL')}}/plugins/gritter/js/jquery.gritter.js"></script>
         <script src="{{env('ASSETS_URL')}}/js/demo/dashboard-v2.js"></script>
+    <script src="{{env('ASSETS_URL')}}/plugins/moment/min/moment.min.js"></script>
+    <script src="{{env('ASSETS_URL')}}/plugins/@fullcalendar/core/main.global.js"></script>
+        <script src="{{env('ASSETS_URL')}}/plugins/@fullcalendar/daygrid/main.global.js"></script>
+        <script src="{{env('ASSETS_URL')}}/plugins/@fullcalendar/timegrid/main.global.js"></script>
+        <script src="{{env('ASSETS_URL')}}/plugins/@fullcalendar/interaction/main.global.js"></script>
+        <script src="{{env('ASSETS_URL')}}/plugins/@fullcalendar/list/main.global.js"></script>
+        <script src="{{env('ASSETS_URL')}}/plugins/@fullcalendar/bootstrap/main.global.js"></script>
+
+         <!-- required files -->
+    <link href="{{env('ASSETS_URL')}}/plugins/bootstrap-timepicker/css/bootstrap-timepicker.min.css" rel="stylesheet" />
+    <script src="{{env('ASSETS_URL')}}/plugins/bootstrap-timepicker/js/bootstrap-timepicker.min.js"></script>
+    <!-- required files -->
+    <link href="{{env('ASSETS_URL')}}/plugins/bootstrap-datepicker/dist/css/bootstrap-datepicker.css" rel="stylesheet" />
+    <script src="{{env('ASSETS_URL')}}/plugins/bootstrap-datepicker/dist/js/bootstrap-datepicker.js"></script>
+    <!-- required files -->
+    <link href="{{env('ASSETS_URL')}}/plugins/select-picker/dist/picker.min.css" rel="stylesheet" />
+    <script src="{{env('ASSETS_URL')}}/plugins/select-picker/dist/picker.min.js"></script>
         <!-- ================== END page-js ================== -->
     </body>
     </html>

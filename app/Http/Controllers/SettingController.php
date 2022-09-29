@@ -598,4 +598,53 @@ class SettingController extends Controller
 
         return $result;
     }
+
+    public function typeOfLogsView()
+    {
+        $ss = new SettingService;
+
+        $result['datas'] = $ss->getTypeOfLogsView();
+
+        return view('pages.setting.typeOfLogs', $result);
+    }
+
+    public function createTypeOfLogs(Request $r)
+    {
+        $ss = new SettingService;
+
+        $result = $ss->createTypeOfLogs($r);
+
+        return response()->json($result);
+    }
+
+    public function deleteTypeOfLogs($id = '')
+    {
+        $ss = new SettingService;
+
+        $result = $ss->deleteTypeOfLogs($id);
+
+        return response()->json($result);
+    }
+
+    public function getLogsById($id = '')
+    {
+        $ss = new SettingService;
+
+        $result = $ss->getLogsById($id);
+
+        return $result;
+    }
+
+    public function updateTypeOfLogs(Request $r, $id)
+    {
+        $ss = new SettingService;
+
+        $result = $ss->updateTypeOfLogs($r, $id);
+
+        return response()->json($result);
+    }
+
+
+
+
 }

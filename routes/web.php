@@ -10,6 +10,7 @@ use App\Http\Controllers\SettingController;
 use App\Http\Controllers\OrganizationController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\HRIS\EmployeeController;
+use App\Http\Controllers\Timesheet\MyTimesheetController;
 use App\Http\Controllers\Project\CustomerController;
 use App\Http\Controllers\Project\ProjectController;
 use App\Http\Controllers\Report\ProjectReportController;
@@ -25,15 +26,15 @@ use App\Http\Controllers\Report\ProjectReportController;
 |
 */
 
-Route::get('/registerTenant/{package}', [RegisterController::class,'registerTenant']);
-Route::post('/saveRegisterTenant', [RegisterController::class,'saveRegisterTenant']);
+Route::get('/registerTenant/{package}', [RegisterController::class, 'registerTenant']);
+Route::post('/saveRegisterTenant', [RegisterController::class, 'saveRegisterTenant']);
 
 Route::controller(ProfileController::class)->group(function () {
     // Route::get('/profile', 'profile')->middleware('auth');
     Route::get('/profile', 'profile');
 });
 
-
+// Route::get('/', 'Auth\LoginController@loginView')->name('login');
 Route::group(['middleware' => ['web']], function () {
     Route::controller(LoginController::class)->group(function () {
         Route::post('/login/{type}', 'login');
@@ -68,7 +69,7 @@ Route::group(['middleware' => ['web']], function () {
         Route::post('/ajaxForgotPass', 'ajaxForgotPass');
     });
 
-    Route::group(['middleware' => 'auth'], function(){
+    Route::group(['middleware' => 'auth'], function () {
         Route::controller(DashboardController::class)->group(function () {
             Route::get('/dashboardTenant', 'dashboardTenant')->name('dashboardTenant');
             Route::get('/dashboardHost', 'dashboardHost')->name('dashboardHost');
@@ -106,8 +107,6 @@ Route::group(['middleware' => ['web']], function () {
             Route::delete('/deleteParent/{id}', 'deleteParent');
             Route::delete('/deleteSibling/{id}', 'deleteSibling');
             Route::post('/resetPassword', 'resetPassword');
-
-
         });
 
         Route::controller(EmployeeController::class)->group(function () {
@@ -136,7 +135,6 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('/updateEmployee', 'updateEmployee');
             Route::get('/getEmployeeById/{id}', 'getEmployeeById');
             Route::get('/getEmployeeByDepartmentId/{id}', 'getEmployeeByDepartmentId');
-
         });
 
         Route::controller(SettingController::class)->group(function () {
@@ -205,8 +203,11 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('/createEmploymentType', 'createEmploymentType');
             Route::delete('/deleteEmploymentType/{id}', 'deleteEmploymentType');
             Route::post('/updateEmploymentType/{id}', 'updateEmploymentType');
-
-
+            Route::get('/typeOfLogs', 'typeOfLogsView');
+            Route::post('/createTypeOfLogs', 'createTypeOfLogs');
+            Route::delete('/deleteTypeOfLogs/{id}', 'deleteTypeOfLogs');
+            Route::get('/getLogsById/{id}', 'getLogsById');
+            Route::post('/updateTypeOfLogs/{id}', 'updateTypeOfLogs');
         });
 
         Route::controller(OrganizationController::class)->group(function () {
@@ -258,6 +259,12 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('/getProjectByCustomerId/{customer_id}', 'getProjectByCustomerId');
             Route::get('/searchReport', 'searchReport');
             Route::post('/updateStatus/{id}/{status}', 'updateStatus');
+        });
+
+        Route::controller(MyTimesheetController::class)->group(function () {
+            Route::get('/myTimesheet', 'myTimesheetView');
+            Route::post('/createLog', 'createLog');
+            Route::post('/createEvent', 'createEvent');
         });
     });
 });
