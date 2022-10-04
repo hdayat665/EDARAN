@@ -164,7 +164,9 @@ class MyTimeSheetService
 
         $input['user_id'] = $user->id;
         $input['tenant_id'] = $user->tenant_id;
-        $input['type_recurring'] = implode(',', $input['type_recurring']);
+        if (isset($input['type_recurring'])) {
+            $input['type_recurring'] = implode(',', $input['type_recurring']);
+        }
         if (isset($input['set_reccuring'])) {
             $input['set_reccuring'] = implode(',', $input['set_reccuring']);
         }
@@ -218,7 +220,9 @@ class MyTimeSheetService
 
         $input['user_id'] = $user->id;
         $input['tenant_id'] = $user->tenant_id;
-        $input['type_recurring'] = implode(',', $input['type_recurring']);
+        if (isset($input['type_recurring'])) {
+            $input['type_recurring'] = implode(',', $input['type_recurring']);
+        }
         if (isset($input['set_reccuring'])) {
             $input['set_reccuring'] = implode(',', $input['set_reccuring']);
         }

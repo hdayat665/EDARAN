@@ -97,53 +97,110 @@ $(document).ready(function() {
 
     $(document).on("change", "#officeLogProject", function() {
         projectId = $(this).val();
-        getDataByProject(projectId)
+        getDataByProject(projectId, 'addLog')
     });
 
     $(document).on("change", "#myProject", function() {
         projectId = $(this).val();
-        getDataByProject(projectId)
+        getDataByProject(projectId, 'addLog')
     });
 
-    function getDataByProject(projectId) {
-        $('#locationByProjectHide').hide();
-        $('#locationByProjectShow').show();
-        $('#activityByProjectShow').show();
-        $('#activityByProjectHide').hide();
+    $(document).on("change", "#officeLogProjectEdit", function() {
+        projectId = $(this).val();
+        getDataByProject(projectId, 'editLog')
+    });
 
-        $('#projectLocationOffice')
-            .find('option')
-            .remove()
-            .end();
+    $(document).on("change", "#project_id_edit", function() {
+        projectId = $(this).val();
+        getDataByProject(projectId, 'editLog')
+    });
 
-        $('#activityOffice')
-            .find('option')
-            .remove()
-            .end();
 
-        var locationOffice = getLocationByProjectId(projectId);
+    $('#locationByProjectShow').hide();
+    $('#activityByProjectShow').hide();
 
-        locationOffice.done(function(data) {
-            console.log(data);
-            for (let i = 0; i < data.length; i++) {
-                const locations = data[i];
-                var opt = document.createElement("option");
-                document.getElementById("projectLocationOffice").innerHTML +=
-                    '<option value="' + locations['id'] + '">' + locations['location_name'] + "</option>";
-            }
-        })
+    function getDataByProject(projectId, type) {
+        if (type = 'addLog') {
+            $('#locationByProjectHide').hide();
+            $('#locationByProjectShow').show();
+            $('#activityByProjectShow').show();
+            $('#activityByProjectHide').hide();
 
-        var activityOffice = getActivityByProjectId(projectId);
+            $('#projectLocationOffice')
+                .find('option')
+                .remove()
+                .end();
 
-        activityOffice.done(function(data) {
-            console.log(data);
-            for (let i = 0; i < data.length; i++) {
-                const locations = data[i];
-                var opt = document.createElement("option");
-                document.getElementById("activityOffice").innerHTML +=
-                    '<option value="' + locations['id'] + '">' + locations['activity_name'] + "</option>";
-            }
-        })
+            $('#activityOffice')
+                .find('option')
+                .remove()
+                .end();
+
+            var locationOffice = getLocationByProjectId(projectId);
+
+            locationOffice.done(function(data) {
+                console.log(data);
+                for (let i = 0; i < data.length; i++) {
+                    const locations = data[i];
+                    var opt = document.createElement("option");
+                    document.getElementById("projectLocationOffice").innerHTML +=
+                        '<option value="' + locations['id'] + '">' + locations['location_name'] + "</option>";
+                }
+            })
+
+            var activityOffice = getActivityByProjectId(projectId);
+
+            activityOffice.done(function(data) {
+                console.log(data);
+                for (let i = 0; i < data.length; i++) {
+                    const locations = data[i];
+                    var opt = document.createElement("option");
+                    document.getElementById("activityOffice").innerHTML +=
+                        '<option value="' + locations['id'] + '">' + locations['activity_name'] + "</option>";
+                }
+            })
+        }
+
+        if (type = 'editLog') {
+            $('#activityByProjectEditHide').hide();
+            $('#activityByProjectEditShow').show();
+            $('#locationByProjectEditShow').show();
+            $('#locationByProjectEditHide').hide();
+
+            $('#projectLocationOfficeEdit')
+                .find('option')
+                .remove()
+                .end();
+
+            $('#activityOfficeEdit')
+                .find('option')
+                .remove()
+                .end();
+
+            var locationOffice = getLocationByProjectId(projectId);
+
+            locationOffice.done(function(data) {
+                console.log(data);
+                for (let i = 0; i < data.length; i++) {
+                    const locations = data[i];
+                    var opt = document.createElement("option");
+                    document.getElementById("projectLocationOfficeEdit").innerHTML +=
+                        '<option value="' + locations['id'] + '">' + locations['location_name'] + "</option>";
+                }
+            })
+
+            var activityOffice = getActivityByProjectId(projectId);
+
+            activityOffice.done(function(data) {
+                console.log(data);
+                for (let i = 0; i < data.length; i++) {
+                    const locations = data[i];
+                    var opt = document.createElement("option");
+                    document.getElementById("activityOfficeEdit").innerHTML +=
+                        '<option value="' + locations['id'] + '">' + locations['activity_name'] + "</option>";
+                }
+            })
+        }
     }
 
     var $elem = $('#addneweventselectproject');

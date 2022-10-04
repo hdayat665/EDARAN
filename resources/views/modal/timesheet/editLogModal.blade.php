@@ -37,7 +37,7 @@
                         </div>
                         <div class="col-sm-6" id="myprojectedit" style="display:none">
                             <label for="Office-Log" class="form-label">My Project</label>
-                            <select class="form-select" id="project_id" name="project_id" aria-label="Default select example">
+                            <select class="form-select" id="project_id_edit" name="project_id" aria-label="Default select example">
                                 <option class="form-label" value="">List all project</option>
                                 <?php $projects = project_member($user_id) ?>
                                 @foreach ($projects as $project)
@@ -84,7 +84,7 @@
                         </div>
                     </div>
                     <div class="row p-2">
-                        <div class="col-sm-6" id="locationByProjectHide">
+                        <div class="col-sm-6" id="locationByProjectEditHide">
                             <label for="issuing-country" class="form-label">Project Location</label>
                             <select class="form-select" id="projectlocsearchedit" name="project_location" aria-label="Default select example">
                                 <option class="form-label" value="">List All Project location</option>

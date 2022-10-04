@@ -74,15 +74,15 @@
                             <label for="issuing-country" class="form-label">Priority</label>
                             <div style="padding-top:10px;">
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="priority" id="inlineRadio1" value="option1">
+                                    <input class="form-check-input" type="radio" name="priority" id="inlineRadio1" value="low">
                                     <label class="form-label" for="inlineRadio1">Low</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="priority" id="inlineRadio2" value="option2">
+                                    <input class="form-check-input" type="radio" name="priority" id="inlineRadio2" value="medium">
                                     <label class="form-label" for="inlineRadio2">Medium</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="priority" id="inlineRadio3" value="option3">
+                                    <input class="form-check-input" type="radio" name="priority" id="inlineRadio3" value="high">
                                     <label class="form-label" for="inlineRadio3">High</label>
                                 </div>
                             </div>
