@@ -41,15 +41,15 @@ class MyTimeSheetService
         $end_time = strtotime($input['end_time']);
         $totaltime = $end_time - $start_time;
 
-        if ($input['office_log_project']) {
+        if (isset($input['office_log_project'])) {
             $input['project_id'] = $input['office_log_project'];
         }
 
-        if ($input['activity_office']) {
+        if (isset($input['activity_office'])) {
             $input['activity_name'] = $input['activity_office'];
         }
 
-        if ($input['project_location_office']) {
+        if (isset($input['project_location_office'])) {
             $input['project_location'] = $input['project_location_office'];
         }
 
