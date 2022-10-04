@@ -675,9 +675,12 @@ if (!function_exists('project_member')) {
 }
 
 if (!function_exists('activityName')) {
-    function activityName()
+    function activityName($departmentId = '')
     {
         $cond[1] = ['tenant_id', Auth::user()->tenant_id];
+        // $cond[1] = ['tenant_id', ];
+        $cond[2] = ['department', $departmentId];
+        // $cond[3] = ['project_id', null];
         $data = ActivityLogs::where($cond)->get();
         if (!$data) {
             $data = [];

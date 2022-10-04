@@ -991,22 +991,25 @@ class SettingService
         $logsData['department'] = $input['department'];
         $logsData['type_of_log'] = $input['type_of_log'];
         $logsData['tenant_id'] = $user->tenant_id;
-        $logsData['activity_name'] = implode(', ', $input['activity_name']);
-        // pr($logsData);
+        // $logsData['activity_name'] = implode(', ', $input['activity_name']);
+        // pr($input);
 
         TypeOfLogs::create($logsData);
 
-        // $typeOfLog = TypeOfLogs::orderby('created_at', 'desc')->first();
+        $typeOfLog = TypeOfLogs::orderby('created_at', 'desc')->first();
 
-        // if (isset($input['activity_name'])) {
+        if (isset($input['activity_name'])) {
 
-        //     foreach ($input['activity_name'] as $activity) {
-        //         $activityData['activity_name'] = $activity;
-        //         $activityData['logs_id'] = $typeOfLog->id;
+            foreach ($input['activity_name'] as $activity) {
+                $activityData['department'] = $input['department'];
+                $activityData['activity_name'] = $activity;
+                $activityData['project_id'] = $input['project_id'];
+                $activityData['logs_id'] = $typeOfLog->id;
+                $activityData['tenant_id'] = $user->tenant_id;
 
-        //         ActivityLogs::create($activityData);
-        //     }
-        // }
+                ActivityLogs::create($activityData);
+            }
+        }
 
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');

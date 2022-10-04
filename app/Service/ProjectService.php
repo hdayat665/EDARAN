@@ -319,11 +319,11 @@ class ProjectService
             ->leftJoin('customer as d', 'a.customer_id', '=', 'd.id')
             ->leftJoin('employment as b', 'a.project_manager', '=', 'b.id')
             ->leftJoin('users as c', 'b.user_id', '=', 'c.id')
-            ->select('a.*', 'b.employeeName as project_manager_name', 'c.username as email', 'd.customer_name')
+            ->select('a.*', 'b.employeeName as project_manager_name', 'c.username', 'd.customer_name','b.workingEmail')
             ->where([['a.id', $project_id], ['a.tenant_id', Auth::user()->tenant_id]])
             ->first();
 
-            $receiver = $project->email;
+            $receiver = $project->workingEmail;
             $response['typeEmail'] = 'projectReqEmail';
             $response['content1'] = 'Dear '. $project->project_manager_name .' ,';
             $response['customer_name'] = $project->customer_name;
@@ -409,8 +409,9 @@ class ProjectService
                 , 'c.departmentName'
                 , 'e.employeeName'
                 , 'f.username'
-                , 'y.username as manager_email'
-                , 'x.employeeName as manager_name')
+                , 'y.username'
+                , 'x.employeeName as manager_name'
+                , 'x.wokingEmail as manager_email')
         ->where('a.id', $id)
         ->first();
             // pr($projectMember);
@@ -442,11 +443,11 @@ class ProjectService
         ->leftJoin('employment as e', 'a.employee_id', '=', 'e.id')
         ->leftJoin('users as f', 'e.user_id', '=', 'f.id')
         ->leftJoin('department as c', 'e.department', '=', 'c.id')
-        ->select('a.*', 'b.project_name', 'b.project_code', 'd.customer_name', 'c.departmentName', 'e.employeeName', 'f.username')
+        ->select('a.*', 'b.project_name', 'b.project_code', 'd.customer_name', 'c.departmentName', 'e.employeeName', 'f.username','e.workingEmail')
         ->where('a.id', $id)
         ->first();
             // pr($projectMember);
-        $receiver = $projectMember->username;
+        $receiver = $projectMember->workingEmail;
         $response['typeEmail'] = 'projectReqStatus';
         $response['status'] = $status;
         $response['customer_name'] = $projectMember->customer_name;

@@ -265,6 +265,15 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('/myTimesheet', 'myTimesheetView');
             Route::post('/createLog', 'createLog');
             Route::post('/createEvent', 'createEvent');
+            Route::get('/getEvents', 'getEvents');
+            Route::get('/getLogs', 'getLogs');
+            Route::get('/getTimesheet', 'getTimesheet');
+            Route::get('/getLogsById/{id}', 'getLogsById');
+            Route::get('/getEventById/{id}', 'getEventById');
+            Route::post('/updateTimesheetLog/{id}', 'updateTimesheetLog');
+            Route::post('/updateTimesheetEvent/{id}', 'updateTimesheetEvent');
+            Route::get('/getLocationByProjectId/{id}', 'getLocationByProjectId');
+            Route::get('/getActivityByProjectId/{id}', 'getActivityByProjectId');
         });
     });
 });
