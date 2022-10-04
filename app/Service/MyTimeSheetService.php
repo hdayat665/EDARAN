@@ -2,6 +2,9 @@
 
 namespace App\Service;
 
+use App\Models\ActivityLogs;
+use App\Models\Employee;
+use App\Models\ProjectLocation;
 use App\Models\TimesheetEvent;
 use App\Models\TimesheetLog;
 use Illuminate\Support\Facades\Auth;
@@ -10,7 +13,17 @@ class MyTimeSheetService
 {
     public function myTimesheetView()
     {
-        $data = [];
+        // $cond[1] = ['a.tenant_id', Auth::user()->tenant_id];
+        // $cond[2] = ['b.user_id', Auth::user()->id];
+
+        // $data = DB::table('project_member as a')
+        // ->leftJoin('employment as b', 'a.employee_id', '=', 'b.id')
+        // // ->leftJoin('project as c', 'a.project_id', '=', 'c.id')
+        // ->select('b.id', 'b.employeeName as name')
+        // ->where($cond)
+        // ->get();
+
+        $data['employee'] = Employee::where([['tenant_id', Auth::user()->tenant_id], ['user_id', Auth::user()->id]])->first();
 
         return $data;
     }
@@ -23,21 +36,38 @@ class MyTimeSheetService
         $input['user_id'] = $user->id;
         $input['tenant_id'] = $user->tenant_id;
         $input['date'] = date_format(date_create($input['date']), 'Y/m/d');
-        // $input['total_hour'] = $input['start_time'] - $input['end_time'];
-        // pr($input);
+
+        $start_time = strtotime($input['start_time']);
+        $end_time = strtotime($input['end_time']);
+        $totaltime = $end_time - $start_time;
+
+        if ($input['office_log_project']) {
+            $input['project_id'] = $input['office_log_project'];
+        }
+
+        if ($input['activity_office']) {
+            $input['activity_name'] = $input['activity_office'];
+        }
+
+        if ($input['project_location_office']) {
+            $input['project_location'] = $input['project_location_office'];
+        }
+
+        $h = intval($totaltime / 3600);
+
+        $totaltime = $totaltime - ($h * 3600);
+
+        // Minutes is obtained by dividing
+        // remaining total time with 60
+        $m = intval($totaltime / 60);
+
+        // Remaining value is seconds
+        $s = $totaltime - ($m * 60);
+
+        // Printing the result
+        $input['total_hour'] = "$h:$m:$s";
+
         TimesheetLog::create($input);
-
-        // $typeOfLog = TypeOfLogs::orderby('created_at', 'desc')->first();
-
-        // if (isset($input['activity_name'])) {
-
-        //     foreach ($input['activity_name'] as $activity) {
-        //         $activityData['activity_name'] = $activity;
-        //         $activityData['logs_id'] = $typeOfLog->id;
-
-        //         ActivityLogs::create($activityData);
-        //     }
-        // }
 
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
@@ -52,27 +82,49 @@ class MyTimeSheetService
         $input = $r->input();
         $user = Auth::user();
 
-        if(isset($input['project_id']))
-        {
-            $logsData['project_id'] = $input['project_id'];
+        $input['user_id'] = $user->id;
+        $input['tenant_id'] = $user->tenant_id;
+        $input['date'] = date_format(date_create($input['date']), 'Y/m/d');
+
+        $start_time = strtotime($input['start_time']);
+        $end_time = strtotime($input['end_time']);
+        $totaltime = $end_time - $start_time;
+
+        if (isset($input['office_log_project'])) {
+            $input['project_id'] = $input['office_log_project'];
+            unset($input['office_log_project']);
         }
 
-        if($input['type_of_log'] == 'Non-Project')
-        {
-            $logsData['project_id'] = null;
+        if (isset($input['activity_office'])) {
+            $input['activity_name'] = $input['activity_office'];
+            unset($input['activity_office']);
         }
 
-        $logsData['department'] = $input['department'];
-        $logsData['type_of_log'] = $input['type_of_log'];
-        $logsData['tenant_id'] = $user->tenant_id;
-        $logsData['activity_name'] = implode(', ', $input['activity_name']);
+        if (isset($input['project_location_office'])) {
+            $input['project_location'] = $input['project_location_office'];
+            unset($input['project_location_office']);
+        }
 
-        TypeOfLogs::where('id', $id)->update($logsData);
+        $h = intval($totaltime / 3600);
+
+        $totaltime = $totaltime - ($h * 3600);
+
+        // Minutes is obtained by dividing
+        // remaining total time with 60
+        $m = intval($totaltime / 60);
+
+        // Remaining value is seconds
+        $s = $totaltime - ($m * 60);
+
+        // Printing the result
+        $input['total_hour'] = "$h:$m:$s";
+
+        TimesheetLog::where('id', $id)->update($input);
 
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success update role';
+        $data['msg'] = 'Success update timesheet log';
 
         return $data;
     }
@@ -100,7 +152,7 @@ class MyTimeSheetService
 
     public function getLogsById($id)
     {
-        $data = TypeOfLogs::find($id);
+        $data = TimesheetLog::find($id);
 
         return $data;
     }
@@ -120,6 +172,25 @@ class MyTimeSheetService
         $input['start_date'] = date_format(date_create($input['start_date']), 'Y/m/d');
         $input['end_date'] = date_format(date_create($input['end_date']), 'Y/m/d');
 
+
+        $start_time = strtotime($input['start_time']);
+        $end_time = strtotime($input['end_time']);
+        $totaltime = $end_time - $start_time;
+
+        $h = intval($totaltime / 3600);
+
+        $totaltime = $totaltime - ($h * 3600);
+
+        // Minutes is obtained by dividing
+        // remaining total time with 60
+        $m = intval($totaltime / 60);
+
+        // Remaining value is seconds
+        $s = $totaltime - ($m * 60);
+
+        // Printing the result
+        $input['total_hour'] = "$h:$m:$s";
+
         if ($_FILES['file_upload']['name']) {
             $file_upload = upload($r->file('file_upload'));
             $input['file_upload'] = $file_upload['filename'];
@@ -131,7 +202,6 @@ class MyTimeSheetService
         // $input['total_hour'] = $input['start_time'] - $input['end_time'];
         // pr($input);
         TimesheetEvent::create($input);
-
 
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
@@ -146,27 +216,57 @@ class MyTimeSheetService
         $input = $r->input();
         $user = Auth::user();
 
-        if(isset($input['project_id']))
-        {
-            $logsData['project_id'] = $input['project_id'];
+        $input['user_id'] = $user->id;
+        $input['tenant_id'] = $user->tenant_id;
+        $input['type_recurring'] = implode(',', $input['type_recurring']);
+        if (isset($input['set_reccuring'])) {
+            $input['set_reccuring'] = implode(',', $input['set_reccuring']);
         }
 
-        if($input['type_of_log'] == 'Non-Project')
-        {
-            $logsData['project_id'] = null;
+        $input['start_date'] = date_format(date_create($input['start_date']), 'Y/m/d');
+        $input['end_date'] = date_format(date_create($input['end_date']), 'Y/m/d');
+        unset($input['inlineRadioOptions']);
+
+        if ($input['location_by_project']) {
+            $input['location'] = $input['location_by_project'];
+            unset($input['location_by_project']);
         }
 
-        $logsData['department'] = $input['department'];
-        $logsData['type_of_log'] = $input['type_of_log'];
-        $logsData['tenant_id'] = $user->tenant_id;
-        $logsData['activity_name'] = implode(', ', $input['activity_name']);
 
-        TypeOfLogs::where('id', $id)->update($logsData);
+        // $start_time = strtotime($input['start_time']);
+        // $end_time = strtotime($input['end_time']);
+        // $totaltime = $end_time - $start_time;
+
+        // $h = intval($totaltime / 3600);
+
+        // $totaltime = $totaltime - ($h * 3600);
+
+        // // Minutes is obtained by dividing
+        // // remaining total time with 60
+        // $m = intval($totaltime / 60);
+
+        // // Remaining value is seconds
+        // $s = $totaltime - ($m * 60);
+
+        // // Printing the result
+        // $input['total_hour'] = "$h:$m:$s";
+
+        if ($_FILES['file_upload']['name']) {
+            $file_upload = upload($r->file('file_upload'));
+            $input['file_upload'] = $file_upload['filename'];
+
+            if (!$input['file_upload']) {
+                unset($input['file_upload']);
+            }
+        }
+        // $input['total_hour'] = $input['start_time'] - $input['end_time'];
+        // pr($input);
+        TimesheetEvent::where('id', $id)->update($input);
 
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success update role';
+        $data['msg'] = 'Success update event';
 
         return $data;
     }
@@ -194,8 +294,37 @@ class MyTimeSheetService
 
     public function getEventById($id)
     {
-        $data = TypeOfLogs::find($id);
+        $data = TimesheetEvent::find($id);
 
         return $data;
     }
+
+    public function getLogs()
+    {
+        $data = TimesheetLog::where('tenant_id',Auth::user()->tenant_id)->get();
+
+        return $data;
+    }
+
+    public function getEvents()
+    {
+        $data = TimesheetEvent::where('tenant_id',Auth::user()->tenant_id)->get();
+
+        return $data;
+    }
+
+    public function getLocationByProjectId($project_id = '')
+    {
+        $data = ProjectLocation::where([['tenant_id',Auth::user()->tenant_id], ['project_id', $project_id]])->get();
+
+        return $data;
+    }
+
+    public function getActivityByProjectId($project_id = '')
+    {
+        $data = ActivityLogs::where([['tenant_id',Auth::user()->tenant_id], ['project_id', $project_id]])->get();
+
+        return $data;
+    }
+
 }

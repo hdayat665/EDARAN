@@ -8,7 +8,7 @@ $(document).ready(function() {
     $("#typeOfLogsTable").DataTable({
         responsive: true,
     });
-    
+
     $(document).on("click", "#addButton", function() {
         $('#addModal').modal('show');
 
@@ -76,6 +76,134 @@ $(document).ready(function() {
         });
     }
 
+    function getLocationByProjectId(id) {
+        return $.ajax({
+            url: "/getLocationByProjectId/" + id
+        });
+    }
+
+    function getActivityByProjectId(id) {
+        return $.ajax({
+            url: "/getActivityByProjectId/" + id
+        });
+    }
+
+    var $elem = $('#addneweventselectprojectedit');
+    $elem.picker({ search: true });
+    $elem.on('sp-change', function() {
+        projectId = $(this).val();
+        getDataEventByProject(projectId, 'editEvent')
+    });
+
+    $(document).on("change", "#officeLogProject", function() {
+        projectId = $(this).val();
+        getDataByProject(projectId)
+    });
+
+    $(document).on("change", "#myProject", function() {
+        projectId = $(this).val();
+        getDataByProject(projectId)
+    });
+
+    function getDataByProject(projectId) {
+        $('#locationByProjectHide').hide();
+        $('#locationByProjectShow').show();
+        $('#activityByProjectShow').show();
+        $('#activityByProjectHide').hide();
+
+        $('#projectLocationOffice')
+            .find('option')
+            .remove()
+            .end();
+
+        $('#activityOffice')
+            .find('option')
+            .remove()
+            .end();
+
+        var locationOffice = getLocationByProjectId(projectId);
+
+        locationOffice.done(function(data) {
+            console.log(data);
+            for (let i = 0; i < data.length; i++) {
+                const locations = data[i];
+                var opt = document.createElement("option");
+                document.getElementById("projectLocationOffice").innerHTML +=
+                    '<option value="' + locations['id'] + '">' + locations['location_name'] + "</option>";
+            }
+        })
+
+        var activityOffice = getActivityByProjectId(projectId);
+
+        activityOffice.done(function(data) {
+            console.log(data);
+            for (let i = 0; i < data.length; i++) {
+                const locations = data[i];
+                var opt = document.createElement("option");
+                document.getElementById("activityOffice").innerHTML +=
+                    '<option value="' + locations['id'] + '">' + locations['activity_name'] + "</option>";
+            }
+        })
+    }
+
+    var $elem = $('#addneweventselectproject');
+    $elem.picker({ search: true });
+    $elem.on('sp-change', function() {
+        projectId = $(this).val();
+        getDataEventByProject(projectId, 'addEvent')
+    });
+
+    $('#locationByProjectEditEventShow').hide();
+    $('#locationByProjectAddEventShow').hide();
+
+    function getDataEventByProject(projectId, type) {
+
+        if (type == 'addEvent') {
+            $('#locationByProjectAddEventHide').hide();
+            $('#locationByProjectAddEventShow').show();
+
+            $('#location_by_project_add')
+                .find('option')
+                .remove()
+                .end();
+
+            var locationOffice = getLocationByProjectId(projectId);
+
+            locationOffice.done(function(data) {
+                // alert('ss');
+                for (let i = 0; i < data.length; i++) {
+                    const locations = data[i];
+                    var opt = document.createElement("option");
+                    document.getElementById("location_by_project_add").innerHTML +=
+                        '<option value="' + locations['id'] + '">' + locations['location_name'] + "</option>";
+                }
+            })
+        }
+
+        if (type == 'editEvent') {
+            $('#locationByProjectEditEventHide').hide();
+            $('#locationByProjectEditEventShow').show();
+
+            $('#location_by_project')
+                .find('option')
+                .remove()
+                .end();
+
+            var locationOffice = getLocationByProjectId(projectId);
+
+            locationOffice.done(function(data) {
+                // alert(data);
+                for (let i = 0; i < data.length; i++) {
+                    const locations = data[i];
+                    var opt = document.createElement("option");
+                    document.getElementById("location_by_project").innerHTML +=
+                        '<option value="' + locations['id'] + '">' + locations['location_name'] + "</option>";
+                }
+            })
+        }
+
+    }
+
     $('#saveLogButton').click(function(e) {
         $("#addLogForm").validate({
             rules: {
@@ -133,29 +261,27 @@ $(document).ready(function() {
     });
 
 
-    $('#updateButton').click(function(e) {
-        $("#editForm").validate({
+    $('#updateLogButton').click(function(e) {
+        $("#editLogForm").validate({
             rules: {
-                department: "required",
                 type_of_log: "required",
-                activity_name: "required",
+                date: "required",
             },
 
             messages: {
-                department: "",
                 type_of_log: "",
-                activity_name: "",
+                date: "",
             },
             submitHandler: function(form) {
                 requirejs(['sweetAlert2'], function(swal) {
 
-                    var data = new FormData(document.getElementById("editForm"));
+                    var data = new FormData(document.getElementById("editLogForm"));
                     // console.log(data);
-                    var id = $('#idT').val();
+                    var id = $('#id').val();
 
                     $.ajax({
                         type: "POST",
-                        url: "/updateTypeOfLogs/" + id,
+                        url: "/updateTimesheetLog/" + id,
                         data: data,
                         dataType: "json",
                         async: false,
@@ -239,6 +365,54 @@ $(document).ready(function() {
             },
         });
     });
+
+    $('#updateEventButton').click(function(e) {
+        $("#editEventForm").validate({
+            rules: {
+                type_of_log: "required",
+                date: "required",
+            },
+
+            messages: {
+                type_of_log: "",
+                date: "",
+            },
+            submitHandler: function(form) {
+                requirejs(['sweetAlert2'], function(swal) {
+
+                    var data = new FormData(document.getElementById("editEventForm"));
+                    // console.log(data);
+                    var id = $('#idE').val();
+
+                    $.ajax({
+                        type: "POST",
+                        url: "/updateTimesheetEvent/" + id,
+                        data: data,
+                        dataType: "json",
+                        async: false,
+                        processData: false,
+                        contentType: false,
+                    }).done(function(data) {
+                        swal({
+                            title: data.title,
+                            text: data.msg,
+                            type: data.type,
+                            confirmButtonColor: '#3085d6',
+                            confirmButtonText: 'OK'
+                        }).then(function() {
+                            if (data.type == 'error') {
+
+                            } else {
+                                location.reload();
+                            }
+
+                        });
+                    });
+
+                });
+            },
+        });
+    });
     ////////////////////////////  END EVENT //////////////////////////////////////
 
     ////////////////////////////CALENDAR JS///////////////////////////////////////
@@ -256,85 +430,507 @@ $(document).ready(function() {
         var today = moment().startOf('day');
         var calendarElm = document.getElementById('calendar');
 
-        var calendar = new FullCalendar.Calendar(calendarElm, {
-            headerToolbar: {
-                left: 'logButton EventButton',
-                center: 'title',
-                right: 'prev,today,next dayGridMonth,timeGridWeek,timeGridDay,listWeek'
-            },
-            customButtons: {
-                logButton: {
-                    text: 'New Log',
-                    click: function(event, jsEvent, view) {
-                        $('#addLogModal').modal('show');
+
+        function getTimesheet() {
+            return $.ajax({
+                url: "/getTimesheet"
+            });
+        }
+
+
+        var timesheetData = getTimesheet();
+
+        timesheetData.done(function(data) {
+
+            // console.log(data);
+            var event = [];
+            for (let i = 0; i < data['events'].length; i++) {
+                var events = data['events'][i];
+
+                var startDate = new Date(events['start_date']);
+                var startMonth = startDate.getMonth() + 1;
+                startMonth = startMonth < 10 ? "0" + startMonth : startMonth;
+                var startYear = startDate.getFullYear();
+                var startDay = startDate.getDate();
+                startDay = startDay < 10 ? "0" + startDay : startDay;
+
+                var endDate = new Date(events['end_date']);
+                var endMonth = endDate.getMonth() + 1;
+                endMonth = endMonth < 10 ? "0" + endMonth : endMonth;
+                var endYear = endDate.getFullYear();
+                var endDay = endDate.getDate();
+                endDay = endDay < 10 ? "0" + endDay : endDay;
+
+                event.push({
+                    title: events['event_name'],
+                    start: startYear + '-' + startMonth + '-' + startDay,
+                    end: endYear + '-' + endMonth + '-' + endDay,
+                    display: 'background',
+                    extendedProps: {
+                        type: 'event',
+                        eventId: events['id']
+                    }
+
+                });
+            }
+
+            var log = [];
+            for (let i = 0; i < data['logs'].length; i++) {
+                var logs = data['logs'][i];
+
+                var startDate = new Date(logs['date']);
+                var startMonth = startDate.getMonth() + 1;
+                startMonth = startMonth < 10 ? "0" + startMonth : startMonth;
+                var startYear = startDate.getFullYear();
+                var startDay = startDate.getDate();
+                startDay = startDay < 10 ? "0" + startDay : startDay;
+                var startTime = logs['start_time'];
+                startTime = startTime < 10 ? "0" + startTime : startTime;
+
+                var endDate = new Date(events['end_date']);
+                var endMonth = endDate.getMonth();
+                endMonth = endMonth < 10 ? "0" + endMonth : endMonth;
+                var endYear = endDate.getFullYear();
+                var endDay = endDate.getDate();
+                endDay = endDay < 10 ? "0" + endDay : endDay;
+
+                log.push({
+                    title: logs['type_of_log'],
+                    start: startYear + '-' + startMonth + '-' + startDay + 'T' + startTime + ':00',
+                    color: app.color.success,
+                    extendedProps: {
+                        type: 'log',
+                        logId: logs['id']
+                    }
+                });
+            }
+            dataEvent = event.concat(log);
+            // console.log(dataEvent);
+            var calendar = new FullCalendar.Calendar(calendarElm, {
+                headerToolbar: {
+                    left: 'logButton EventButton',
+                    center: 'title',
+                    right: 'prev,today,next dayGridMonth,timeGridWeek,timeGridDay,listWeek'
+                },
+                customButtons: {
+                    logButton: {
+                        text: 'New Log',
+                        click: function(event, jsEvent, view) {
+                            $('#addLogModal').modal('show');
+                        }
+                    },
+                    EventButton: {
+                        text: 'New Event',
+                        click: function(event, jsEvent, view) {
+                            $('#neweventmodal').modal('show');
+                        }
                     }
                 },
-                EventButton: {
-                    text: 'New Event',
-                    click: function(event, jsEvent, view) {
-                        $('#neweventmodal').modal('show');
+                eventClick: function(info) {
+                    info.jsEvent.preventDefault();
+
+                    function getEvents(id) {
+                        return $.ajax({
+                            url: "/getEventById/" + id
+                        });
                     }
-                }
-            },
-            eventClick: function(info) {
-                info.jsEvent.preventDefault();
+
+                    function getLogs(id) {
+                        return $.ajax({
+                            url: "/getLogsById/" + id
+                        });
+                    }
 
 
 
-                if (info.event.extendedProps.type == "log") {
-                    $('#editlogmodal').modal('show');
-                } else {
-                    $('#editeventmodal').modal('show');
-                }
+                    if (info.event.extendedProps.type == "log") {
+                        logId = info.event.extendedProps.logId;
+                        var logData = getLogs(logId);
+                        logData.done(function(data) {
+                            console.log(data);
+                            if (data.type_of_log == '3') {
 
-            },
-            buttonText: {
-                today: 'Today',
-                month: 'Month',
-                week: 'Week',
-                day: 'Day',
-                list: 'List'
-            },
-            initialView: 'dayGridMonth',
-            editable: false,
-            droppable: false,
-            selectable: false,
-            themeSystem: 'bootstrap',
-            views: {
-                timeGrid: {
-                    eventLimit: 6 // adjust to 6 only for timeGridWeek/timeGridDay
-                }
-            },
-            events: [{
-                title: 'EXAMPLE LOG',
-                start: year + '-' + month + '01',
-                end: year + '-' + month + '05',
-                color: app.color.success,
-                extendedProps: {
-                    type: 'log'
-                }
+                                var display = $("#myprojectedit").css("display");
+                                if (display == 'none') {
+                                    $('#myprojectedit').css("display", 'block');
+                                }
+                            } else {
+                                $('#myprojectedit').css("display", 'none');
+                            }
+
+                            if (data.type_of_log == '2') {
+
+                                var display = $("#officelogedit").css("display");
+                                var projectOfficeDisplay = $("#listprojectedit").css("display");
+                                if (display == 'none') {
+                                    $('#officelogedit').css("display", 'block');
+                                }
+
+                                if (projectOfficeDisplay == 'none') {
+                                    $('#listprojectedit').css("display", 'block');
+                                }
+                            } else {
+                                $('#officelogedit').css("display", 'none');
+                                $('#listprojectedit').css("display", 'none');
+                            }
+
+                            if (data.type_of_log == 2 && data.office_log == 1) {
+
+                            }
+
+                            $('#locationByProjectEditShow').hide();
+                            $('#activityByProjectEditShow').hide();
+                            $("#typeoflogedit").val(data.type_of_log);
+                            $("#officelog2edit").val(data.office_log);
+                            $("#dateaddlogedit").val(data.date);
+                            $("#project_id").val(data.project_id);
+                            $("#officeLogProjectEdit").val(data.project_id);
+                            $("#activity_name").val(data.activity_name);
+                            $("#starttimeedit").val(data.start_time);
+                            $('#projectlocsearchedit').picker('set', data.project_location);
+                            $('#projectlocsearchedit').picker('set', data.project_location);
+                            // $("#projectlocsearchedit").val(data.project_location);
+                            $("#exit_project").prop('checked', data.exit_project);
+                            $("#endtimeedit").val(data.end_time);
+                            $("#desc").val(data.desc);
+                            $("#total_hour").val(data.total_hour);
+                            $("#id").val(data.id);
+                        });
+
+                        $('#editlogmodal').modal('show');
+                    } else {
+                        eventId = info.event.extendedProps.eventId;
+                        var eventData = getEvents(eventId);
+                        eventData.done(function(data) {
+                            console.log(data);
+
+                            $("#event_name").val(data.event_name);
+                            $("#starteventdateedit").val(data.start_date);
+                            $("#endeventdateedit").val(data.end_date);
+                            $("#starteventtimeedit").val(data.start_time);
+                            $("#endeventtimeedit").val(data.end_time);
+                            $("#duration").val(data.duration);
+                            $('#addneweventprojectlocsearchedit').picker('set', data.location);
+                            if (data.type_recurring) {
+
+                                if (data.type_recurring == 'allday') {
+                                    $("#addeventalldayedit").prop('checked', true);
+                                } else if (data.type_recurring == 'recurring') {
+                                    // $("#addeventalldayedit").prop('checked', true);
+                                    $("#addeventrecurringedit").prop('checked', true);
+
+                                    var recurringDisplay = $("#addneweventrecurringedit").css("display");
+
+                                    if (recurringDisplay == 'none') {
+                                        $('#addneweventrecurringedit').css("display", 'block');
+                                    } else {
+                                        $('#addneweventrecurringedit').css("display", 'none');
+
+                                    }
+
+                                    if (data.recurring) {
+
+                                        if (data.recurring == 1 || data.recurring == 2 || data.recurring == 3) {
+                                            var setRecurringDisplay = $("#addneweventsetreccurringedit").css("display");
+
+                                            if (setRecurringDisplay == 'none') {
+                                                $('#addneweventsetreccurringedit').css("display", 'block');
+                                            } else {
+                                                $('#addneweventsetreccurringedit').css("display", 'none');
+
+                                            }
+                                        } else if (data.recurring == 4) {
+                                            var setRecurringDisplay = $("#setrecurringmontlyedit").css("display");
+                                            // alert(setRecurringDisplay);
+                                            if (setRecurringDisplay == 'none') {
+                                                if (data.set_reccuring_date_month) {
+
+                                                    $("#ondaycheckedit").prop('checked', true);
+                                                } else {
+                                                    $("#ondaycheckedit").prop('checked', false);
+                                                }
+
+                                                if (data.set_reccuring_week_month || data.set_reccuring_day_month) {
+                                                    $("#onthecheckedit").prop('checked', true);
+                                                    $('#recurringselectontheedit').show();
+                                                    $('#recurringselectwhatdayedit').show();
+
+                                                } else {
+                                                    $("#onthecheckedit").prop('checked', false);
+                                                    $('#recurringselectontheedit').hide();
+                                                    $('#recurringselectwhatdayedit').hide();
+
+                                                }
+
+                                                $('#setrecurringmontlyedit').css("display", 'block');
+
+                                                $('#ondayselectedit').show();
+                                                $('#setrecurringonmontlyedit').css("display", 'block');
+
+                                            } else {
+                                                $('#setrecurringmontlyedit').hide();
+                                                $('#ondayselectedit').hide();
+                                                $('#setrecurringonmontlyedit').hide();
+
+                                            }
+                                        } else if (data.recurring == 5) {
+                                            $('#setrecurringyearlyedit').show();
+                                            $('#setrecurringontheyearlyedit').show();
+
+                                            if (data.set_reccuring_month_yearly || data.set_reccuring_date_yearly) {
+                                                $('#ondayyearlycheckedit').prop('checked', true);
+                                                $("#recurringmonthyearlyedit").show();
+                                                $("#recurringdayyearlyedit").show();
+
+                                            } else {
+                                                $('#ondayyearlycheckedit').prop('checked', false);
+                                                $("#recurringmonthyearlyedit").hide();
+                                                $("#recurringdayyearlyedit").hide();
+
+                                            }
+
+                                            if (data.set_reccuring_week_yearly || data.set_reccuring_day_yearly || data.set_reccuring_month_yearly2) {
+                                                $('#ontheyearlycheckedit').prop('checked', true);
+                                                $("#recurringselectyearlyedit").show();
+                                                $("#recurringonthedayyearlyedit").show();
+                                                $("#recurringontheofedit").show();
+                                                $("#recurringonthemonthyearlyedit").show();
+                                            } else {
+                                                $('#ontheyearlycheckedit').prop('checked', false);
+                                                $("#recurringselectyearlyedit").hide();
+                                                $("#recurringonthedayyearlyedit").hide();
+                                                $("#recurringontheofedit").hide();
+                                                $("#recurringonthemonthyearlyedit").hide();
+                                            }
+                                        }
+                                    } else {
+                                        $('#setrecurringmontlyedit').hide();
+                                        $('#ondayselectedit').hide();
+                                        $('#setrecurringonmontlyedit').hide();
+                                        $('#setrecurringyearlyedit').hide();
+                                        $('#setrecurringontheyearlyedit').hide();
+                                    }
 
 
-            }, {
-                title: 'EXAMPLE LOG 2',
-                start: year + '-' + month + '-03T14:00:00',
-                color: app.color.success,
-                extendedProps: {
-                    type: 'log'
+
+                                } else {
+                                    $("#addeventalldayedit").prop('checked', true);
+                                    $("#addeventrecurringedit").prop('checked', true);
+
+                                    var recurringDisplay = $("#addneweventrecurringedit").css("display");
+
+                                    if (recurringDisplay == 'none') {
+                                        $('#addneweventrecurringedit').css("display", 'block');
+                                    } else {
+                                        $('#addneweventrecurringedit').css("display", 'none');
+
+                                    }
+
+                                    if (data.recurring) {
+
+                                        if (data.recurring == 1 || data.recurring == 2 || data.recurring == 3) {
+                                            var setRecurringDisplay = $("#addneweventsetreccurringedit").css("display");
+
+                                            if (setRecurringDisplay == 'none') {
+                                                $('#addneweventsetreccurringedit').css("display", 'block');
+                                            } else {
+                                                $('#addneweventsetreccurringedit').css("display", 'none');
+
+                                            }
+                                        } else if (data.recurring == 4) {
+                                            var setRecurringDisplay = $("#setrecurringmontlyedit").css("display");
+                                            // alert(setRecurringDisplay);
+                                            if (setRecurringDisplay == 'none') {
+                                                if (data.set_reccuring_date_month) {
+
+                                                    $("#ondaycheckedit").prop('checked', true);
+                                                } else {
+                                                    $("#ondaycheckedit").prop('checked', false);
+                                                }
+
+                                                if (data.set_reccuring_week_month || data.set_reccuring_day_month) {
+                                                    $("#onthecheckedit").prop('checked', true);
+                                                    $('#recurringselectontheedit').show();
+                                                    $('#recurringselectwhatdayedit').show();
+
+                                                } else {
+                                                    $("#onthecheckedit").prop('checked', false);
+                                                    $('#recurringselectontheedit').hide();
+                                                    $('#recurringselectwhatdayedit').hide();
+
+                                                }
+
+                                                $('#setrecurringmontlyedit').css("display", 'block');
+
+                                                $('#ondayselectedit').show();
+                                                $('#setrecurringonmontlyedit').css("display", 'block');
+
+                                            } else {
+                                                $('#setrecurringmontlyedit').hide();
+                                                $('#ondayselectedit').hide();
+                                                $('#setrecurringonmontlyedit').hide();
+
+                                            }
+                                        } else if (data.recurring == 5) {
+                                            $('#setrecurringyearlyedit').show();
+                                            $('#setrecurringontheyearlyedit').show();
+
+                                            if (data.set_reccuring_month_yearly || data.set_reccuring_date_yearly) {
+                                                $('#ondayyearlycheckedit').prop('checked', true);
+                                                $("#recurringmonthyearlyedit").show();
+                                                $("#recurringdayyearlyedit").show();
+
+                                            } else {
+                                                $('#ondayyearlycheckedit').prop('checked', false);
+                                                $("#recurringmonthyearlyedit").hide();
+                                                $("#recurringdayyearlyedit").hide();
+
+                                            }
+
+                                            if (data.set_reccuring_week_yearly || data.set_reccuring_day_yearly || data.set_reccuring_month_yearly2) {
+                                                $('#ontheyearlycheckedit').prop('checked', true);
+                                                $("#recurringselectyearlyedit").show();
+                                                $("#recurringonthedayyearlyedit").show();
+                                                $("#recurringontheofedit").show();
+                                                $("#recurringonthemonthyearlyedit").show();
+                                            } else {
+                                                $('#ontheyearlycheckedit').prop('checked', false);
+                                                $("#recurringselectyearlyedit").hide();
+                                                $("#recurringonthedayyearlyedit").hide();
+                                                $("#recurringontheofedit").hide();
+                                                $("#recurringonthemonthyearlyedit").hide();
+                                            }
+                                        }
+                                    } else {
+                                        $('#setrecurringmontlyedit').hide();
+                                        $('#ondayselectedit').hide();
+                                        $('#setrecurringonmontlyedit').hide();
+                                        $('#setrecurringyearlyedit').hide();
+                                        $('#setrecurringontheyearlyedit').hide();
+                                    }
+
+
+                                }
+                            }
+
+                            if (data.priority == 'low') {
+                                $("#inlineRadio11").prop('checked', true);
+                            } else if (data.priority == 'medium') {
+                                $("#inlineRadio22").prop('checked', true);
+                            } else if (data.priority == 'high') {
+                                $("#inlineRadio33").prop('checked', true);
+                            }
+
+                            $("#addneweventselectrecurringedit").prop('checked', data.priority);
+
+                            $("#addneweventselectrecurringedit").val(data.recurring);
+
+                            if (data.set_reccuring) {
+                                var set_recurring = data.set_reccuring.split(',');
+                                console.log(set_recurring);
+
+                                for (let i = 0; i < set_recurring.length; i++) {
+                                    const dataSetRecurring = set_recurring[i];
+                                    if (dataSetRecurring == 'sunday') {
+                                        $("#sunedit").prop('checked', true);
+
+                                    }
+
+                                    if (dataSetRecurring == 'monday') {
+                                        $("#monedit").prop('checked', true);
+
+                                    }
+
+                                    if (dataSetRecurring == 'sunday') {
+                                        $("#sunedit").prop('checked', true);
+
+                                    }
+
+                                    if (dataSetRecurring == 'tuesday') {
+                                        $("#tueedit").prop('checked', true);
+
+                                    }
+
+                                    if (dataSetRecurring == 'wednesda') {
+                                        $("#wededit").prop('checked', true);
+
+                                    }
+
+                                    if (dataSetRecurring == 'thursday') {
+                                        $("#thuedit").prop('checked', true);
+
+                                    }
+
+                                    if (dataSetRecurring == 'friday') {
+                                        $("#friedit").prop('checked', true);
+
+                                    }
+
+                                    if (dataSetRecurring == 'saturday') {
+                                        $("#satedit").prop('checked', true);
+
+                                    }
+
+                                }
+                            }
+
+                            if (data.reminder) {
+                                $('#addeventreminderedit').show();
+                            } else {
+                                $('#addeventreminderedit').hide();
+                            }
+
+                            $("#set_reccuring_date_month").val(data.set_reccuring_date_month);
+                            $("#set_reccuring_day_month").val(data.set_reccuring_day_month);
+
+                            $("#set_reccuring_month_yearly").val(data.set_reccuring_month_yearly);
+
+                            $("#set_reccuring_date_yearly").val(data.set_reccuring_date_yearly);
+                            $("#set_reccuring_week_yearly").val(data.set_reccuring_week_yearly);
+                            $("#set_reccuring_day_yearly").val(data.set_reccuring_day_yearly);
+                            $("#set_reccuring_month_yearly2").val(data.set_reccuring_month_yearly2);
+                            $("#set_reccuring_week_month").val(data.set_reccuring_week_month);
+                            $("#addneweventprojectlocsearchedit").val(data.location);
+                            $("#addneweventselectprojectedit").picker('set', data.project_id);
+                            $("#addneweventparticipantedit").val(data.participant);
+                            $("#descE").val(data.desc);
+                            $("#addeventreminderedit").val(data.reminder);
+                            if (data.file_upload) {
+                                $("#fileView").html('<a href="/storage/' + data.file_upload + '" target="_blank"> click here to view file.</a>');
+                            }
+                            $("#idE").val(data.id);
+
+
+                        });
+
+                        $('#editeventmodal').modal('show');
+                    }
+
                 },
-            }, {
-                title: 'EXAMPLE EVENT',
-                start: year + '-' + month + '-10',
-                end: year + '-' + month + '-12',
-                display: 'background',
-                extendedProps: {
-                    type: 'event'
+                buttonText: {
+                    today: 'Today',
+                    month: 'Month',
+                    week: 'Week',
+                    day: 'Day',
+                    list: 'List'
                 },
-            }],
+                initialView: 'dayGridMonth',
+                editable: false,
+                droppable: false,
+                selectable: false,
+                themeSystem: 'bootstrap',
+                views: {
+                    timeGrid: {
+                        eventLimit: 6 // adjust to 6 only for timeGridWeek/timeGridDay
+                    }
+                },
+                events: dataEvent,
+            });
+            calendar.render();
 
         });
 
-        calendar.render();
+
     };
 
     var Calendar = function() {
@@ -370,17 +966,17 @@ $(document).ready(function() {
     $('#addneweventselectproject').picker({ search: true });
     $(function() {
         $("#starttime").timepicker({
-            showMeridian:false,
+            showMeridian: false,
         });
         $("#endtime").timepicker({
-            showMeridian:false,
+            showMeridian: false,
         });
         starteventtime
         $("#starteventtime").timepicker({
-            showMeridian:false,
+            showMeridian: false,
         });
         $("#endeventtime").timepicker({
-            showMeridian:false,
+            showMeridian: false,
         });
     })
 
@@ -557,17 +1153,17 @@ $(document).ready(function() {
     $('#addneweventparticipantedit').picker({ search: true });
     $('#addneweventselectprojectedit').picker({ search: true });
     $("#starttimeedit").timepicker({
-        showMeridian:false,
+        showMeridian: false,
     });
     $("#endtimeedit").timepicker({
-        showMeridian:false,
+        showMeridian: false,
     });
     starteventtime
     $("#starteventtimeedit").timepicker({
-        showMeridian:false,
+        showMeridian: false,
     });
     $("#endeventtimeedit").timepicker({
-        showMeridian:false,
+        showMeridian: false,
     });
     $(document).on('change', "#typeoflogedit", function() {
         if ($(this).val() == "2") {
@@ -724,3 +1320,4 @@ $(document).ready(function() {
     });
 
 });
+// });

@@ -16,6 +16,8 @@ class MyTimesheetController extends Controller
 
         $data = $mts->myTimesheetView();
         $data['user_id'] = Auth::user()->id;
+        $data['employee_id'] = $data['employee']->id;
+        $data['department_id'] = $data['employee']->department;
 
         return view('pages.timesheet.myTimesheet', $data);
     }
@@ -47,7 +49,7 @@ class MyTimesheetController extends Controller
         return $result;
     }
 
-    public function updateLog(Request $r, $id)
+    public function updateTimesheetLog(Request $r, $id)
     {
         $ss = new MyTimeSheetService;
 
@@ -78,12 +80,12 @@ class MyTimesheetController extends Controller
     {
         $ss = new MyTimeSheetService;
 
-        $result = $ss->getLogsById($id);
+        $result = $ss->getEventById($id);
 
         return $result;
     }
 
-    public function updateEvent(Request $r, $id)
+    public function updateTimesheetEvent(Request $r, $id)
     {
         $ss = new MyTimeSheetService;
 
@@ -91,4 +93,52 @@ class MyTimesheetController extends Controller
 
         return response()->json($result);
     }
+
+    public function getLogs()
+    {
+        $ss = new MyTimeSheetService;
+
+        $result = $ss->getLogs();
+
+        return response()->json($result);
+    }
+
+    public function getEvents()
+    {
+        $ss = new MyTimeSheetService;
+
+        $result = $ss->getEvents();
+
+        return response()->json($result);
+    }
+
+    public function getTimesheet()
+    {
+        $ss = new MyTimeSheetService;
+
+        $result['events'] = $ss->getEvents();
+        $result['logs'] = $ss->getLogs();
+
+        return response()->json($result);
+    }
+
+    public function getLocationByProjectId($project_id = '')
+    {
+        $ss = new MyTimeSheetService;
+
+        $result = $ss->getLocationByProjectId($project_id);
+
+        return response()->json($result);
+    }
+
+    public function getActivityByProjectId($project_id = '')
+    {
+        $ss = new MyTimeSheetService;
+
+        $result = $ss->getActivityByProjectId($project_id);
+
+        return response()->json($result);
+    }
+
+
 }

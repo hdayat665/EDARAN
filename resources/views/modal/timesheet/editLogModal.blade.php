@@ -6,11 +6,11 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form id="addChildrenForm">
+                <form id="editLogForm">
                     <div class="row p-2">
                         <div class="col-sm-6">
                             <label for="firstname" class="form-label">Type Of Log*</label>
-                            <select class="form-select" id="typeoflogedit" aria-label="Default select example">
+                            <select class="form-select" id="typeoflogedit" name="type_of_log" aria-label="Default select example">
                                 <option class="form-label" value="" selected>Please Select</option>
                                 <option class="form-label" value="1">Home</option>
                                 <option class="form-label" value="2">Office</option>
@@ -21,7 +21,7 @@
                         <div class="col-sm-6">
                             <label for="lastname" class="form-label">Date*</label>
                             <div class="input-group">
-                                <input type="text" class="form-control" id="dateaddlogedit" />
+                                <input type="text" class="form-control" name="date" id="dateaddlogedit" />
                                 <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                             </div>
                         </div>
@@ -29,7 +29,7 @@
                     <div class="row p-2">
                         <div class="col-sm-6" id="officelogedit" style="display:none">
                             <label for="Office-Log" class="form-label">Office Log</label>
-                            <select class="form-select" id="officelog2edit" aria-label="Default select example">
+                            <select class="form-select" id="officelog2edit" name="office_log" aria-label="Default select example">
                                 <option class="form-label" value="" selected>Please Select</option>
                                 <option class="form-label" value="1">My Project</option>
                                 <option class="form-label" value="2">Activity</option>
@@ -37,45 +37,73 @@
                         </div>
                         <div class="col-sm-6" id="myprojectedit" style="display:none">
                             <label for="Office-Log" class="form-label">My Project</label>
-                            <select class="form-select" id="" aria-label="Default select example">
-                                <option class="form-label" value="" selected>List all project</option>
+                            <select class="form-select" id="project_id" name="project_id" aria-label="Default select example">
+                                <option class="form-label" value="">List all project</option>
+                                <?php $projects = project_member($user_id) ?>
+                                @foreach ($projects as $project)
+                                <option value="{{$project->id}}">{{$project->project_name}} - {{$project->project_code}}</option>
+                                @endforeach
                             </select>
                         </div>
                     </div>
                     <div class="row p-2">
                         <div class="col-sm-6" id="listprojectedit" style="display:none">
                             <label for="Office-Log" class="form-label">My Project</label>
-                            <select class="form-select" id="" aria-label="Default select example">
-                                <option class="form-label" value="" selected>List All Project</option>
+                            <select class="form-select" id="officeLogProjectEdit" name="office_log_project" aria-label="Default select example">
+                                <option class="form-label" value="">List all project</option>
+                                <?php $projects = project_member($user_id) ?>
+                                @foreach ($projects as $project)
+                                <option value="{{$project->id}}">{{$project->project_name}} - {{$project->project_code}}</option>
+                                @endforeach
                             </select>
                         </div>
                     </div>
                     <div class="row p-2">
-                        <div class="col-sm-6">
+                        <div class="col-sm-6" id="activityByProjectEditHide">
                             <label for="issuing-country" class="form-label">Activity Name</label>
-                            <select class="form-select" id="" >
-                                <option class="form-label" value="" selected>List All Activity Name</option>
+                            <select class="form-select" id="activity_name" name="activity_name">
+                                <option class="form-label" value="">List All Activity Name</option>
+                                <?php $activitys = activityName($department_id) ?>
+                                @foreach ($activitys as $activity)
+                                <option value="{{$activity->id}}">{{$activity->activity_name}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="col-sm-6" id="activityByProjectEditShow">
+                            <label for="issuing-country" class="form-label">Activity Name</label>
+                            <select class="form-select" id="activityOfficeEdit" name="activity_office" >
+
                             </select>
                         </div>
                         <div class="col-sm-6">
-                            <label for="issuing-country" class="form-label">End Time</label>
+                            <label for="issuing-country" class="form-label">Start Time</label>
                             <div class="input-group">
-                                <input id="starttimeedit" type="text" class="form-control" />
+                                <input id="starttimeedit" name="start_time" type="text" class="form-control" />
                                 <div class="input-group-text"><i class="fa fa-clock"></i></div>
                             </div>
                         </div>
                     </div>
                     <div class="row p-2">
-                        <div class="col-sm-6">
+                        <div class="col-sm-6" id="locationByProjectHide">
                             <label for="issuing-country" class="form-label">Project Location</label>
-                            <select class="selectpicker form-select" id="projectlocsearch" aria-label="Default select example">
-                                <option class="form-label" value="" selected>List All Project location</option>
+                            <select class="form-select" id="projectlocsearchedit" name="project_location" aria-label="Default select example">
+                                <option class="form-label" value="">List All Project location</option>
+                                <?php $projectLocations = projectLocation() ?>
+                                @foreach ($projectLocations as $projectLocation)
+                                <option value="{{$projectLocation->id}}">{{$projectLocation->location_name}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="col-sm-6" id="locationByProjectEditShow">
+                            <label for="issuing-country" class="form-label">Project Location</label>
+                            <select class="selectpicker form-select" id="projectLocationOfficeEdit" name="project_location_office" aria-label="Default select example">
+
                             </select>
                         </div>
                         <div class="col-sm-6 ">
                             <label for="issuing-country" class="form-label">End Time</label>
                             <div class="input-group">
-                                <input id="endtimeedit" type="text" class="form-control" />
+                                <input id="endtimeedit" name="end_time" type="text" class="form-control" />
                                 <div class="input-group-text"><i class="fa fa-clock"></i></div>
                             </div>
                         </div>
@@ -83,19 +111,20 @@
                     <div class="row p-2">
                         <div class="col-sm-6">
                             <label for="gender" class="form-label">Description</label>
-                            <textarea class="form-control" rows="5"></textarea>
+                            <textarea class="form-control" name="desc" id="desc" rows="5"></textarea>
                         </div>
                         <div class="col-sm-6">
                             <label for="issuing-country" class="form-label">Total Hours</label>
-                            <input type="text" readonly id="" value="Auto calculate (End time - Start time), default 00:00" name="" class="form-control" aria-describedby="dob">
+                            <input type="text" readonly id="total_hour" name="total_hour" class="form-control" aria-describedby="dob">
+                            <input type="hidden" readonly id="id" class="form-control" aria-describedby="dob">
                         </div>
                     </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" id="deleteButton" >Delete</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-primary formSave" id="updateLogButton">Save</button>
+                    </div>
                 </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-danger" >Delete</button>
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                <had type="button" class="btn btn-primary formSave" id="addChildren">Save</had>
             </div>
         </div>
     </div>
