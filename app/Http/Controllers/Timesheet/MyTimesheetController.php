@@ -112,6 +112,15 @@ class MyTimesheetController extends Controller
         return response()->json($result);
     }
 
+    public function submitForApproval($userId = '')
+    {
+        $ss = new MyTimeSheetService;
+
+        $result = $ss->submitForApproval($userId);
+
+        return response()->json($result);
+    }
+
     public function getTimesheet()
     {
         $ss = new MyTimeSheetService;
@@ -138,6 +147,42 @@ class MyTimesheetController extends Controller
         $result = $ss->getActivityByProjectId($project_id);
 
         return response()->json($result);
+    }
+
+    public function timesheetApprovalView()
+    {
+        $ss = new MyTimeSheetService;
+
+        $data['timesheets'] = $ss->timesheetApprovalView();
+        $data['statusId'] = '';
+        $data['departmentId'] = '';
+        $data['deisgnationId'] = '';
+        $data['employeeId'] = '';
+
+        return view('pages.timesheet.timesheetApproval', $data);
+    }
+
+    public function updateStatusTimesheet($id = '', $status = '')
+    {
+        $ss = new MyTimeSheetService;
+
+        $result = $ss->updateStatusTimesheet($id, $status);
+
+        return response()->json($result);
+    }
+
+    public function searchTimesheet(Request $r)
+    {
+        $ss = new MyTimeSheetService;
+        $input = $r->input();
+
+        $data['timesheets'] = $ss->searchTimesheet($r);
+        $data['statusId'] = $input['status'];
+        $data['departmentId'] = $input['department'];
+        $data['deisgnationId'] = $input['designation'];
+        $data['employeeId'] = $input['employee_name'];
+
+        return view('pages.timesheet.timesheetApproval', $data);
     }
 
 

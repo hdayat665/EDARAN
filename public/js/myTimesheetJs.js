@@ -498,8 +498,8 @@ $(document).ready(function() {
         var timesheetData = getTimesheet();
 
         timesheetData.done(function(data) {
-
-            // console.log(data);
+            $('#userIdForApproval').val(data['events'][1]['user_id']);
+            // console.log(data['events'][1]['user_id']);
             var event = [];
             for (let i = 0; i < data['events'].length; i++) {
                 var events = data['events'][i];
@@ -1374,6 +1374,43 @@ $(document).ready(function() {
             $("#recurringonthemonthyearlyedit").hide();
             $("#recurringontheofedit").hide();
         }
+    });
+
+
+    ///////////////////////////////////submit for approval////////////////////////////////////
+    // function getTimesheetApproval(userId) {
+    //     return $.ajax({
+    //         url: "/getTimesheetApproval"
+    //     });
+    // }
+    $(document).on("click", "#submitTimesheetApproval", function() {
+
+        userId = $('#userIdForApproval').val();
+        // alert(userId);
+        requirejs(['sweetAlert2'], function(swal) {
+            $.ajax({
+                type: "POST",
+                url: "/submitForApproval/" + userId,
+                dataType: "json",
+                async: false,
+                processData: false,
+                contentType: false,
+            }).done(function(data) {
+                swal({
+                    title: data.title,
+                    text: data.msg,
+                    type: data.type,
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'OK'
+                }).then(function() {
+                    if (data.type == 'error') {
+
+                    } else {
+                        location.reload();
+                    }
+                });
+            });
+        });
     });
 
 });
