@@ -362,7 +362,15 @@
                                 <option class="form-label" value="1">1 Hour Before</option>
                             </select>
                         </div>
+                        <div class="col-sm-4">
+                            <div class="btn-group w-100">
+                                <a class="btn btn-lime">Attend</a>
+                                <a class="btn btn-danger">Reject</a>
+                                
+                            </div>
                     </div>
+                    </div>
+                    
                     <div class="row p-2">
                         <div class="col-sm-6">
                             <label for="issuing-country" class="form-label">Attach File:</label>
@@ -370,6 +378,18 @@
                             <p id="fileView"></p>
                             <input type="hidden" id="idE" name="id">
                         </div>
+                        <div class="col-sm-4">
+                        <div class="alert alert-lime fade show" style=" display: none; align-items: center;  justify-content: center;">
+                            <h3 class='form-label'>Attend</h3>
+                        </div>
+                        <div class="alert alert-yellow fade show" style=" display: flex; align-items: center;  justify-content: center; ">
+                            <h3 class='form-label'>No Respond</h3>
+                        </div>
+                        <div class="alert alert-danger fade show" style=" display: none; align-items: center;  justify-content: center;">
+                            <h3 class='form-label'>Not Attend</h3>
+                        </div>
+                    </div>
+                    
                     </div>
                     <div class="modal-footer">
                         <button type="button" id="deleteEventButton" class="btn btn-danger" >Delete</button>

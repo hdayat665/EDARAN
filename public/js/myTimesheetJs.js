@@ -522,7 +522,7 @@ $(document).ready(function() {
                     title: events['event_name'],
                     start: startYear + '-' + startMonth + '-' + startDay,
                     end: endYear + '-' + endMonth + '-' + endDay,
-                    display: 'background',
+                    color: app.color.red,
                     extendedProps: {
                         type: 'event',
                         eventId: events['id']
@@ -554,7 +554,7 @@ $(document).ready(function() {
                 log.push({
                     title: logs['type_of_log'],
                     start: startYear + '-' + startMonth + '-' + startDay + 'T' + startTime + ':00',
-                    color: app.color.success,
+                    color: app.color.primary,
                     extendedProps: {
                         type: 'log',
                         logId: logs['id']
