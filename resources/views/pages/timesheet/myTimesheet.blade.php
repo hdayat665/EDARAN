@@ -9,7 +9,8 @@
     </div>
    <div style="height: 80px; display: flex; align-items: center; justify-content: center;">
         <div class="d-grid gap-2 col-6 mx-auto">
-             <button class="btn btn-primary" type="button">Submit</button>
+            <input type="hidden" id="userIdForApproval">
+             <button class="btn btn-primary" type="button" id="submitTimesheetApproval">Submit</button>
         </div>
     </div>
 </div>

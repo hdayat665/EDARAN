@@ -5,9 +5,11 @@ namespace App\Service;
 use App\Models\ActivityLogs;
 use App\Models\Employee;
 use App\Models\ProjectLocation;
+use App\Models\TimesheetApproval;
 use App\Models\TimesheetEvent;
 use App\Models\TimesheetLog;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class MyTimeSheetService
 {
@@ -305,30 +307,123 @@ class MyTimeSheetService
 
     public function getLogs()
     {
-        $data = TimesheetLog::where('tenant_id',Auth::user()->tenant_id)->get();
+        $data = TimesheetLog::where('tenant_id', Auth::user()->tenant_id)->get();
 
         return $data;
     }
 
     public function getEvents()
     {
-        $data = TimesheetEvent::where('tenant_id',Auth::user()->tenant_id)->get();
+        $data = TimesheetEvent::where('tenant_id', Auth::user()->tenant_id)->get();
 
         return $data;
     }
 
     public function getLocationByProjectId($project_id = '')
     {
-        $data = ProjectLocation::where([['tenant_id',Auth::user()->tenant_id], ['project_id', $project_id]])->get();
+        $data = ProjectLocation::where([['tenant_id', Auth::user()->tenant_id], ['project_id', $project_id]])->get();
 
         return $data;
     }
 
     public function getActivityByProjectId($project_id = '')
     {
-        $data = ActivityLogs::where([['tenant_id',Auth::user()->tenant_id], ['project_id', $project_id]])->get();
+        $data = ActivityLogs::where([['tenant_id', Auth::user()->tenant_id], ['project_id', $project_id]])->get();
 
         return $data;
     }
 
+    public function submitForApproval($userId = '')
+    {
+        $cond[1] = ['user_id', $userId];
+
+        $logs = TimesheetLog::where($cond)->whereMonth('date', date('m'))->select('id')->get();
+        $events = TimesheetEvent::where($cond)->whereMonth('end_date', date('m'))->select('id')->get();
+
+        foreach ($logs as $log) {
+            $log_id[] = $log->id;
+        }
+
+        foreach ($events as $event) {
+            $event_id[] = $event->id;
+        }
+
+        $employee =  DB::table('employment as a')
+            ->leftJoin('designation as b', 'a.designation', '=', 'b.id')
+            ->leftJoin('department as c', 'a.department', '=', 'c.id')
+            ->select('a.id', 'c.departmentName', 'b.designationName', 'a.employeeName')
+            ->where([['user_id', $userId]])
+            ->first();
+        // pr($employee);
+        $input['tenant_id'] = Auth::user()->tenant_id;
+        $input['user_id'] = $userId;
+        $input['month'] = date('M');
+        $input['log_id'] = implode(',', $log_id);
+        $input['event_id'] = implode(',', $event_id);
+        $input['employee_id'] = $employee->id;
+        $input['employee_name'] = $employee->employeeName;
+        $input['department'] = $employee->departmentName;
+        $input['designation'] = $employee->designationName;
+        $input['status'] = 'pending';
+
+        TimesheetApproval::create($input);
+
+        $data['status'] = config('app.response.success.status');
+        $data['type'] = config('app.response.success.type');
+        $data['title'] = config('app.response.success.title');
+        $data['msg'] = 'Success submit request';
+
+        return $data;
+    }
+
+    public function timesheetApprovalView()
+    {
+        $data = TimesheetApproval::where('tenant_id', Auth::user()->tenant_id)->get();
+
+        return $data;
+    }
+
+    public function updateStatusTimesheet($id = '', $status = '')
+    {
+        $input['status'] = $status;
+        TimesheetApproval::where('id', $id)->update($input);
+
+        $data['status'] = config('app.response.success.status');
+        $data['type'] = config('app.response.success.type');
+        $data['title'] = config('app.response.success.title');
+        $data['msg'] = 'Success ' . $status . ' Timesheet';
+
+        return $data;
+    }
+
+    public function searchTimesheet($r)
+    {
+        $input = $r->input();
+        // pr($input);
+
+        $cond[1] = ['tenant_id', Auth::user()->tenant_id];
+        if ($input['employee_name']) {
+            $cond[2] = ['employee_id', $input['employee_name']];
+        }
+
+        if ($input['month']) {
+            $cond[3] = ['month', $input['month']];
+        }
+
+        if ($input['designation']) {
+            $cond[4] = ['designation', $input['designation']];
+        }
+
+        if ($input['department']) {
+            $cond[5] = ['department', $input['department']];
+        }
+
+        if ($input['status']) {
+            $cond[6] = ['status', $input['status']];
+        }
+
+        $data = TimesheetApproval::where($cond)->get();
+
+        return $data;
+    }
 }

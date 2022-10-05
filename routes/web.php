@@ -274,7 +274,13 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('/updateTimesheetEvent/{id}', 'updateTimesheetEvent');
             Route::get('/getLocationByProjectId/{id}', 'getLocationByProjectId');
             Route::get('/getActivityByProjectId/{id}', 'getActivityByProjectId');
+            Route::get('/timesheetApproval', 'timesheetApprovalView');
+            Route::get('/updateStatusTimesheet/{id}/{status}', 'updateStatusTimesheet');
+            Route::post('/submitForApproval/{userId}', 'submitForApproval');
+            Route::post('/searchTimesheet', 'searchTimesheet');
+
         });
+
     });
 });
 // Route::group(['middleware' => ['auth']], function () {

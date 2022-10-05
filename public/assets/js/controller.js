@@ -34,6 +34,7 @@ requirejs.config({
         'projectStatusJs': assets + '/js/projectStatusJs',
         'typeOfLogsJs': assets + '/js/typeOfLogsJs',
         'myTimesheetJs': assets + '/js/myTimesheetJs',
+        'timesheetApprovalJs': assets + '/js/timesheetApprovalJs',
 
 
         // 'main': 'assets/backend/js/main',
@@ -175,6 +176,11 @@ if ($('#typeOfLogsJs').length > 0) {
 if ($('#myTimesheetJs').length > 0) {
     requirejs(['myTimesheetJs']);
 }
+
+if ($('#timesheetApprovalJs').length > 0) {
+    requirejs(['timesheetApprovalJs']);
+}
+
 
 
 
