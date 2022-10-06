@@ -278,6 +278,11 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('/updateStatusTimesheet/{id}/{status}', 'updateStatusTimesheet');
             Route::post('/submitForApproval/{userId}', 'submitForApproval');
             Route::post('/searchTimesheet', 'searchTimesheet');
+            Route::post('/approveAllTimesheet', 'approveAllTimesheet');
+            Route::get('/viewTimesheet/{id}', 'viewTimesheet');
+            Route::get('/getTimesheetById/{id}', 'getTimesheetById');
+            Route::get('/getProjectByidTimesheet/{id}', 'getProjectByidTimesheet');
+            Route::get('/getActivityNameById/{id}', 'getActivityNameById');
 
         });
 

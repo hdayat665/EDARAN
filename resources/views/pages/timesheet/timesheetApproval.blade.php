@@ -6,7 +6,7 @@
     <div class="panel panel" id="timesheetApprovalJs">
         <div class="panel-heading">
             <div class="col-md-12" style="display: flex; justify-content: flex-end" >
-                <a href="javascript:;"  class="btn btn-primary">Approve All</a>	&nbsp;&nbsp;&nbsp;
+                <a href="javascript:;" id="approveAllButton" class="btn btn-primary">Approve All</a>	&nbsp;&nbsp;&nbsp;
                 <a id="filter" class="btn btn-default btn-icon btn-lg">
                     <i class="fa fa-filter"></i>
                 </a>
@@ -76,79 +76,80 @@
             <br>
             <div class="form-control">
                 <div class="panel-body">
-
-                    <table id="timesheetapproval" class="table table-striped table-bordered align-middle">
-                        <thead>
-                            <tr>
-                                <th width="1%">&nbsp;</th>
-                                <th class="text-nowrap">Action</th>
-                                <th class="text-nowrap">Submitted Date</th>
-                                <th class="text-nowrap">Employee Name</th>
-                                <th class="text-nowrap">Month</th>
-                                <th class="text-nowrap">Designation</th>
-                                <th class="text-nowrap">Department</th>
-                                <th width="9%" data-orderable="false" class="align-middle">Status</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @if ($timesheets)
-                            @foreach ($timesheets as $timesheet)
-                            <tr class="odd gradeX">
-                                <td width="1%" class="fw-bold text-dark"><input class="form-check-input" value="{{$timesheet->id}}" name="id[]" type="checkbox" id="checkbox1" /></td>
-                                <td>
-                                    <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle"><i class="fa fa-cogs"></i> Actions <i class="fa fa-caret-down"></i></a>
-                                    <div class="dropdown-menu">
-                                        @if ($timesheet->status == 'approve')
-                                        <div class="viewtimesheet">
-                                            <a href="javascript:;" class="dropdown-item" data-id="{{$timesheet->id}}" id="viewtimesheet">View Timesheet</a>
-                                        </div>
-                                        <div class="canceltimesheet">
-                                            <div class="dropdown-divider "></div>
-                                            <a  class="dropdown-item" data-id="{{$timesheet->id}}" data-status="cancel" id="statusButton">Cancel Timesheet</a>
-                                        </div>
-                                        @else
-                                        <div class="viewtimesheet">
-                                            <a href="javascript:;" class="dropdown-item" data-id="{{$timesheet->id}}" id="viewtimesheet">View Timesheet</a>
-                                        </div>
-                                        <div class="approvereject">
-                                            <div class="dropdown-divider "></div>
-                                            <div class="approvetimesheet">
-                                                <a  class="dropdown-item" data-id="{{$timesheet->id}}" data-status="approve" id="statusButton">Approve Timesheet</a>
+                    <form id="approveAllForm">
+                        <table id="timesheetapproval" class="table table-striped table-bordered align-middle">
+                            <thead>
+                                <tr>
+                                    <th width="1%">&nbsp;</th>
+                                    <th class="text-nowrap">Action</th>
+                                    <th class="text-nowrap">Submitted Date</th>
+                                    <th class="text-nowrap">Employee Name</th>
+                                    <th class="text-nowrap">Month</th>
+                                    <th class="text-nowrap">Designation</th>
+                                    <th class="text-nowrap">Department</th>
+                                    <th width="9%" data-orderable="false" class="align-middle">Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if ($timesheets)
+                                @foreach ($timesheets as $timesheet)
+                                <tr class="odd gradeX">
+                                    <td width="1%" class="fw-bold text-dark"><input class="form-check-input" value="{{$timesheet->id}}" name="id[]" type="checkbox" id="checkbox1" /></td>
+                                    <td>
+                                        <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle"><i class="fa fa-cogs"></i> Actions <i class="fa fa-caret-down"></i></a>
+                                        <div class="dropdown-menu">
+                                            @if ($timesheet->status == 'approve')
+                                            <div class="viewtimesheet">
+                                                <a href="/viewTimesheet/{{$timesheet->id}}" class="dropdown-item" data-id="{{$timesheet->id}}" id="viewtimesheet">View Timesheet</a>
                                             </div>
-                                            <div class="rejecttimesheet">
-                                                <a  class="dropdown-item" data-id="{{$timesheet->id}}" data-status="reject" id="statusButton">Reject Timesheet</a>
+                                            <div class="canceltimesheet">
+                                                <div class="dropdown-divider "></div>
+                                                <a  class="dropdown-item" data-id="{{$timesheet->id}}" data-status="cancel" id="statusButton">Cancel Timesheet</a>
                                             </div>
+                                            @else
+                                            <div class="viewtimesheet">
+                                                <a href="/viewTimesheet/{{$timesheet->id}}" class="dropdown-item" data-id="{{$timesheet->id}}" id="viewtimesheet">View Timesheet</a>
+                                            </div>
+                                            <div class="approvereject">
+                                                <div class="dropdown-divider "></div>
+                                                <div class="approvetimesheet">
+                                                    <a  class="dropdown-item" data-id="{{$timesheet->id}}" data-status="approve" id="statusButton">Approve Timesheet</a>
+                                                </div>
+                                                <div class="rejecttimesheet">
+                                                    <a  class="dropdown-item" data-id="{{$timesheet->id}}" data-status="reject" id="statusButton">Reject Timesheet</a>
+                                                </div>
+                                            </div>
+                                            <div class="canceltimesheet">
+                                                <div class="dropdown-divider "></div>
+                                                <a  class="dropdown-item" data-id="{{$timesheet->id}}" data-status="cancel" id="statusButton">Cancel Timesheet</a>
+                                            </div>
+                                            @endif
                                         </div>
-                                        <div class="canceltimesheet">
-                                            <div class="dropdown-divider "></div>
-                                            <a  class="dropdown-item" data-id="{{$timesheet->id}}" data-status="cancel" id="statusButton">Cancel Timesheet</a>
-                                        </div>
+                                    </td>
+                                    <td>{{$timesheet->created_at}}</td>
+                                    <td>{{$timesheet->employee_name ?? '-'}}</td>
+                                    <td>{{$timesheet->month}}</td>
+                                    <td>{{$timesheet->designation ?? '-'}}</td>
+                                    <td>{{$timesheet->department}}</td>
+                                    <td>
+                                        @if ($timesheet->status == 'pending')
+                                        <div id="awaitingapproval"> <span class="badge bg-warning rounded-pill">Awaiting Approval</span> </div>
                                         @endif
-                                    </div>
-                                </td>
-                                <td>{{$timesheet->created_at}}</td>
-                                <td>{{$timesheet->employee_name ?? '-'}}</td>
-                                <td>{{$timesheet->month}}</td>
-                                <td>{{$timesheet->designation ?? '-'}}</td>
-                                <td>{{$timesheet->department}}</td>
-                                <td>
-                                    @if ($timesheet->status == 'pending')
-                                    <div id="awaitingapproval"> <span class="badge bg-warning rounded-pill">Awaiting Approval</span> </div>
-                                    @endif
 
-                                    @if ($timesheet->status == 'approve')
-                                    <div id="approved"> <span class="badge bg-lime rounded-pill">Approved</span> </div>
-                                    @endif
+                                        @if ($timesheet->status == 'approve')
+                                        <div id="approved"> <span class="badge bg-lime rounded-pill">Approved</span> </div>
+                                        @endif
 
-                                    @if ($timesheet->status == 'reject')
-                                    <div id="rejected"> <span class="badge bg-danger rounded-pill">Rejected</span></div>
-                                    @endif
-                                </td>
-                            </tr>
-                            @endforeach
-                            @endif
-                        </tbody>
-                    </table>
+                                        @if ($timesheet->status == 'reject')
+                                        <div id="rejected"> <span class="badge bg-danger rounded-pill">Rejected</span></div>
+                                        @endif
+                                    </td>
+                                </tr>
+                                @endforeach
+                                @endif
+                            </tbody>
+                        </table>
+                    </form>
                 </div>
             </div>
         </div>
