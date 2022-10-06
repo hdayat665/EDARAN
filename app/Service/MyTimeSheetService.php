@@ -4,6 +4,7 @@ namespace App\Service;
 
 use App\Models\ActivityLogs;
 use App\Models\Employee;
+use App\Models\Project;
 use App\Models\ProjectLocation;
 use App\Models\TimesheetApproval;
 use App\Models\TimesheetEvent;
@@ -426,4 +427,78 @@ class MyTimeSheetService
 
         return $data;
     }
+
+    public function approveAllTimesheet($r)
+    {
+        $input = $r->input();
+
+        if (!isset($input['id'])) {
+            $data['status'] = config('app.response.error.status');
+            $data['type'] = config('app.response.error.type');
+            $data['title'] = config('app.response.error.title');
+            $data['msg'] = 'Please checked at least 1 data';
+
+            return $data;
+        }
+
+        $ids = $input['id'];
+        $status['status'] = 'approve';
+
+        $cond[1] = ['tenant_id', Auth::user()->tenant_id];
+
+        TimesheetApproval::where($cond)->whereIn('id', $ids)->update($status);
+
+        $data['status'] = config('app.response.success.status');
+        $data['type'] = config('app.response.success.type');
+        $data['title'] = config('app.response.success.title');
+        $data['msg'] = 'Success approve timesheet';
+
+        return $data;
+    }
+
+    public function getTimesheetById($id)
+    {
+
+        $data = TimesheetApproval::find($id);
+
+        return $data;
+    }
+
+    public function getEventsByLotId($id)
+    {
+        $ids = explode(',', $id);
+
+        $data = TimesheetEvent::whereIn('id', $ids)->get();
+
+        return $data;
+    }
+
+    public function getLogsByLotId($id)
+    {
+        $ids = explode(',', $id);
+
+        $data = TimesheetLog::whereIn('id', $ids)->get();
+
+        return $data;
+    }
+
+    public function getProjectByidTimesheet($id)
+    {
+        $data = Project::find($id);
+
+        return $data;
+    }
+
+    public function getActivityNameById($id)
+    {
+        $data = ActivityLogs::find($id);
+
+        return $data;
+    }
+
+
+
+
+
+
 }

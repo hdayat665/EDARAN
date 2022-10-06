@@ -68,46 +68,39 @@
           });
       });
 
-      //   $('#searchButton').click(function(e) {
-      //       $("#searchForm").validate({
-      //           rules: {},
+      $('#approveAllButton').click(function(e) {
+          requirejs(['sweetAlert2'], function(swal) {
 
-      //           messages: {},
-      //           submitHandler: function(form) {
-      //               requirejs(['sweetAlert2'], function(swal) {
+              var data = new FormData(document.getElementById("approveAllForm"));
 
-      //                   var data = new FormData(document.getElementById("searchForm"));
+              $.ajax({
+                  type: "POST",
+                  url: "/approveAllTimesheet",
+                  data: data,
+                  dataType: "json",
+                  async: false,
+                  processData: false,
+                  contentType: false,
+              }).done(function(data) {
+                  swal({
+                      title: data.title,
+                      text: data.msg,
+                      type: data.type,
+                      confirmButtonColor: '#3085d6',
+                      confirmButtonText: 'OK'
+                  }).then(function() {
+                      if (data.type == 'error') {
 
-      //                   $.ajax({
-      //                       type: "POST",
-      //                       url: "/searchTimesheet",
-      //                       data: data,
-      //                       dataType: "json",
-      //                       async: false,
-      //                       processData: false,
-      //                       contentType: false,
-      //                   }).done(function(data) {
-      //                       swal({
-      //                           title: data.title,
-      //                           text: data.msg,
-      //                           type: data.type,
-      //                           confirmButtonColor: '#3085d6',
-      //                           confirmButtonText: 'OK'
-      //                       }).then(function() {
-      //                           if (data.type == 'error') {
-
-      //                           } else {
-      //                               location.reload();
-      //                           }
+                      } else {
+                          location.reload();
+                      }
 
 
-      //                       });
-      //                   });
+                  });
+              });
 
-      //               });
-      //           },
-      //       });
-      //   });
+          });
+      });
 
 
   });

@@ -185,5 +185,57 @@ class MyTimesheetController extends Controller
         return view('pages.timesheet.timesheetApproval', $data);
     }
 
+    public function approveAllTimesheet(Request $r)
+    {
+        $ss = new MyTimeSheetService;
+
+        $result = $ss->approveAllTimesheet($r);
+
+        return response()->json($result);
+    }
+
+    public function viewTimesheet($id = '')
+    {
+        // $ss = new MyTimeSheetService;
+
+        $data['id'] = $id;
+
+        return view('pages.timesheet.viewTimesheet', $data);
+    }
+
+    public function getTimesheetById($id = '')
+    {
+        // pr($id);
+        $ss = new MyTimeSheetService;
+
+        $getIds =  $ss->getTimesheetById($id);
+        // pr($getIds);
+
+        $result['events'] = $ss->getEventsByLotId($getIds->event_id);
+        $result['logs'] = $ss->getLogsByLotId($getIds->log_id);
+
+        return response()->json($result);
+    }
+
+    public function getProjectByidTimesheet($project_id = '')
+    {
+        $ss = new MyTimeSheetService;
+
+        $result = $ss->getProjectByidTimesheet($project_id);
+
+        return response()->json($result);
+    }
+
+    public function getActivityNameById($project_id = '')
+    {
+        $ss = new MyTimeSheetService;
+
+        $result = $ss->getActivityNameById($project_id);
+
+        return response()->json($result);
+    }
+
+
+
 
 }
