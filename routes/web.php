@@ -279,10 +279,13 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('/submitForApproval/{userId}', 'submitForApproval');
             Route::post('/searchTimesheet', 'searchTimesheet');
             Route::post('/approveAllTimesheet', 'approveAllTimesheet');
-            Route::get('/viewTimesheet/{id}', 'viewTimesheet');
+            Route::get('/viewTimesheet/{id}/{userId}', 'viewTimesheet');
             Route::get('/getTimesheetById/{id}', 'getTimesheetById');
             Route::get('/getProjectByidTimesheet/{id}', 'getProjectByidTimesheet');
             Route::get('/getActivityNameById/{id}', 'getActivityNameById');
+            Route::get('/updateAttendStatus/{id}/{status}', 'updateAttendStatus');
+            Route::get('/getAttendanceById/{eventId}/{userId}', 'getAttendanceById');
+
 
         });
 

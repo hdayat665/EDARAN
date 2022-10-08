@@ -19,7 +19,7 @@ $(document).ready(function() {
         var vehicleData = getData(id);
 
         vehicleData.done(function(data) {
-            console.log(data);
+            // console.log(data);
             $('#department').val(data.department);
             $('#project').val(data.project_id);
             if (data.project_id) {
@@ -139,7 +139,7 @@ $(document).ready(function() {
             var locationOffice = getLocationByProjectId(projectId);
 
             locationOffice.done(function(data) {
-                console.log(data);
+                // console.log(data);
                 for (let i = 0; i < data.length; i++) {
                     const locations = data[i];
                     var opt = document.createElement("option");
@@ -151,7 +151,7 @@ $(document).ready(function() {
             var activityOffice = getActivityByProjectId(projectId);
 
             activityOffice.done(function(data) {
-                console.log(data);
+                // console.log(data);
                 for (let i = 0; i < data.length; i++) {
                     const locations = data[i];
                     var opt = document.createElement("option");
@@ -180,7 +180,7 @@ $(document).ready(function() {
             var locationOffice = getLocationByProjectId(projectId);
 
             locationOffice.done(function(data) {
-                console.log(data);
+                // console.log(data);
                 for (let i = 0; i < data.length; i++) {
                     const locations = data[i];
                     var opt = document.createElement("option");
@@ -192,7 +192,7 @@ $(document).ready(function() {
             var activityOffice = getActivityByProjectId(projectId);
 
             activityOffice.done(function(data) {
-                console.log(data);
+                // console.log(data);
                 for (let i = 0; i < data.length; i++) {
                     const locations = data[i];
                     var opt = document.createElement("option");
@@ -439,7 +439,7 @@ $(document).ready(function() {
 
                     var data = new FormData(document.getElementById("editEventForm"));
                     // console.log(data);
-                    var id = $('#idE').val();
+                    var id = $('#idEvent').val();
 
                     $.ajax({
                         type: "POST",
@@ -498,8 +498,8 @@ $(document).ready(function() {
         var timesheetData = getTimesheet();
 
         timesheetData.done(function(data) {
-            $('#userIdForApproval').val(data['events'][1]['user_id']);
-            // console.log(data['events'][1]['user_id']);
+            // $('#userIdForApproval').val(data['events'][0]['user_id']);
+            // console.log(data['events']);
             var event = [];
             for (let i = 0; i < data['events'].length; i++) {
                 var events = data['events'][i];
@@ -544,7 +544,7 @@ $(document).ready(function() {
                 var startTime = logs['start_time'];
                 startTime = startTime < 10 ? "0" + startTime : startTime;
 
-                var endDate = new Date(events['end_date']);
+                var endDate = new Date(logs['end_date']);
                 var endMonth = endDate.getMonth();
                 endMonth = endMonth < 10 ? "0" + endMonth : endMonth;
                 var endYear = endDate.getFullYear();
@@ -598,13 +598,34 @@ $(document).ready(function() {
                         });
                     }
 
+                    function getAttendance(eventId, userId) {
+                        return $.ajax({
+                            url: "/getAttendanceById/" + eventId + '/' + userId
+                        });
+                    }
 
+                    function getEmployee(id) {
+                        return $.ajax({
+                            url: "/getEmployee"
+                        });
+                    }
+
+                    employeeData = getEmployee();
+                    employeeData.done(function(data) {
+                        // console.log(data.data);
+                        const employees = data.data;
+                        for (let i = 0; i < employees.length; i++) {
+                            const employee = employees[i];
+                            $("#addneweventparticipantedit").picker('remove', employee['user_id']);
+                            console.log(employee['user_id']);
+                        }
+                    })
 
                     if (info.event.extendedProps.type == "log") {
                         logId = info.event.extendedProps.logId;
                         var logData = getLogs(logId);
                         logData.done(function(data) {
-                            console.log(data);
+                            // console.log(data);
                             if (data.type_of_log == '3') {
 
                                 var display = $("#myprojectedit").css("display");
@@ -657,9 +678,65 @@ $(document).ready(function() {
                         $('#editlogmodal').modal('show');
                     } else {
                         eventId = info.event.extendedProps.eventId;
+
+                        $(document).on("click", "#attendEvent", function() {
+                            var status = $(this).data('status');
+                            requirejs(['sweetAlert2'], function(swal) {
+
+                                $.ajax({
+                                    type: "GET",
+                                    url: "/updateAttendStatus/" + eventId + '/' + status,
+                                    dataType: "json",
+                                    async: false,
+                                    processData: false,
+                                    contentType: false,
+                                }).done(function(data) {
+                                    swal({
+                                        title: data.title,
+                                        text: data.msg,
+                                        type: data.type,
+                                        confirmButtonColor: '#3085d6',
+                                        confirmButtonText: 'OK'
+                                    }).then(function() {
+                                        if (data.type == 'error') {
+
+                                        } else {
+                                            location.reload();
+                                        }
+                                    });
+                                });
+                            });
+                        })
                         var eventData = getEvents(eventId);
                         eventData.done(function(data) {
-                            console.log(data);
+                            // console.log(data);
+                            var userId = $('#userIdForApproval').val();
+                            $('#attendShow').hide();
+                            $('#attendNoResponse').show();
+                            $('#attendHide').show();
+                            $('#attendNotAttend').hide();
+
+                            var attendanceEvent = getAttendance(data.id, userId);
+                            attendanceEvent.done(function(dataAttendance) {
+                                // console.log(data);
+                                if (dataAttendance) {
+                                    if (dataAttendance.status == 'attend') {
+                                        $('#attendHide').hide();
+                                        $('#attendShow').show();
+                                        $('#attendNoResponse').hide();
+                                        $('#attendNotAttend').hide();
+
+                                    }
+
+                                    if (dataAttendance.status == 'not attend') {
+                                        $('#attendNotAttend').show();
+                                        $('#attendHide').hide();
+                                        $('#attendShow').hide();
+                                        $('#attendNoResponse').hide();
+
+                                    }
+                                }
+                            });
 
                             $("#event_name").val(data.event_name);
                             $("#starteventdateedit").val(data.start_date);
@@ -884,7 +961,7 @@ $(document).ready(function() {
 
                             if (data.set_reccuring) {
                                 var set_recurring = data.set_reccuring.split(',');
-                                console.log(set_recurring);
+                                // console.log(set_recurring);
 
                                 for (let i = 0; i < set_recurring.length; i++) {
                                     const dataSetRecurring = set_recurring[i];
@@ -949,13 +1026,25 @@ $(document).ready(function() {
                             $("#set_reccuring_week_month").val(data.set_reccuring_week_month);
                             $("#addneweventprojectlocsearchedit").val(data.location);
                             $("#addneweventselectprojectedit").picker('set', data.project_id);
-                            $("#addneweventparticipantedit").val(data.participant);
+
+                            // $("#addneweventparticipantedit").picker('remove', 114);
+                            // $("#addneweventparticipantedit").picker('remove', 113);
+                            // $("#addneweventparticipantedit").picker('remove', 112);
+
+                            // console.log(data.participant);
+                            participants = data.participant.split(",");
+                            for (let i = 0; i < participants.length; i++) {
+                                const participant = participants[i];
+                                $("#addneweventparticipantedit").picker('set', participant);
+
+                            }
+
                             $("#descE").val(data.desc);
                             $("#addeventreminderedit").val(data.reminder);
                             if (data.file_upload) {
                                 $("#fileView").html('<a href="/storage/' + data.file_upload + '" target="_blank"> click here to view file.</a>');
                             }
-                            $("#idE").val(data.id);
+                            $("#idEvent").val(data.id);
 
 
                         });
@@ -1414,4 +1503,4 @@ $(document).ready(function() {
     });
 
 });
-// });
+// });// });

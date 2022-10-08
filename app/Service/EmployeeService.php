@@ -85,7 +85,7 @@ class EmployeeService
         $data = [];
         $data['status'] = true;
         $data['msg'] = 'Success get user employment';
-        $data['data'] = Employee::all();
+        $data['data'] = Employee::where('tenant_id', Auth::user()->tenant_id)->get();
 
         return $data;
     }

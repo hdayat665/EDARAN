@@ -338,7 +338,7 @@
                                 <option class="form-label" value="">Please Select</option>
                                 <?php $employees = getEmployee() ?>
                                 @foreach ($employees as $employee)
-                                <option class="form-label" value="{{$employee->id}}">{{$employee->employeeName}}</option>
+                                <option class="form-label" value="{{$employee->user_id}}">{{$employee->employeeName}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -352,6 +352,7 @@
                             <button type="button" id="addreminderedit" class="btn btn-primary btn-xs">Add Reminder</button>
                         </div>
                         <div class="col-sm-4">
+                            <input type="hidden" id="idEvent" name="id">
                             <select class="form-select" id="addeventreminderedit" aria-label="Default select example" name="reminder" style="display: none">
                                 <option class="form-label" value="">Please Select</option>
                                 <option class="form-label" value="1">5 Minute Before</option>
@@ -362,35 +363,35 @@
                                 <option class="form-label" value="1">1 Hour Before</option>
                             </select>
                         </div>
-                        <div class="col-sm-4">
+                        <div class="col-sm-4" id="attendHide">
                             <div class="btn-group w-100">
-                                <a class="btn btn-lime">Attend</a>
-                                <a class="btn btn-danger">Reject</a>
-                                
+                                <a class="btn btn-lime" id="attendEvent" data-status="attend">Attend</a>
+                                <a class="btn btn-danger" id="attendEvent" data-status="not attend" >Reject</a>
+
                             </div>
+                        </div>
                     </div>
-                    </div>
-                    
+
                     <div class="row p-2">
                         <div class="col-sm-6">
                             <label for="issuing-country" class="form-label">Attach File:</label>
                             <input type="file" class="btn" name="file_upload"></input>
                             <p id="fileView"></p>
-                            <input type="hidden" id="idE" name="id">
                         </div>
                         <div class="col-sm-4">
-                        <div class="alert alert-lime fade show" style=" display: none; align-items: center;  justify-content: center;">
-                            <h3 class='form-label'>Attend</h3>
+                            <div class="alert alert-lime fade show" id="attendShow"  style=" display: none; align-items: center;  justify-content: center;">
+                                <h3 class='form-label'>Attend</h3>
+                            </div>
+                            <div class="alert alert-yellow fade show" id="attendNoResponse" style=" display: flex; align-items: center;  justify-content: center; ">
+                                <h3 class='form-label'>No Respond</h3>
+                            </div>
+                            <div class="alert alert-danger fade show" id="attendNotAttend" style=" display: none; align-items: center;  justify-content: center;">
+                                <h3 class='form-label'>Not Attend</h3>
+                            </div>
                         </div>
-                        <div class="alert alert-yellow fade show" style=" display: flex; align-items: center;  justify-content: center; ">
-                            <h3 class='form-label'>No Respond</h3>
-                        </div>
-                        <div class="alert alert-danger fade show" style=" display: none; align-items: center;  justify-content: center;">
-                            <h3 class='form-label'>Not Attend</h3>
-                        </div>
+
                     </div>
-                    
-                    </div>
+
                     <div class="modal-footer">
                         <button type="button" id="deleteEventButton" class="btn btn-danger" >Delete</button>
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

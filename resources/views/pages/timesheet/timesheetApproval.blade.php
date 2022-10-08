@@ -100,7 +100,7 @@
                                         <div class="dropdown-menu">
                                             @if ($timesheet->status == 'approve')
                                             <div class="viewtimesheet">
-                                                <a href="/viewTimesheet/{{$timesheet->id}}" class="dropdown-item" data-id="{{$timesheet->id}}" id="viewtimesheet">View Timesheet</a>
+                                                <a href="/viewTimesheet/{{$timesheet->id}}/{{$timesheet->user_id}}" class="dropdown-item" data-id="{{$timesheet->id}}" id="viewtimesheet">View Timesheet</a>
                                             </div>
                                             <div class="canceltimesheet">
                                                 <div class="dropdown-divider "></div>
@@ -108,7 +108,7 @@
                                             </div>
                                             @else
                                             <div class="viewtimesheet">
-                                                <a href="/viewTimesheet/{{$timesheet->id}}" class="dropdown-item" data-id="{{$timesheet->id}}" id="viewtimesheet">View Timesheet</a>
+                                                <a href="/viewTimesheet/{{$timesheet->id}}/{{$timesheet->user_id}}" class="dropdown-item" data-id="{{$timesheet->id}}" id="viewtimesheet">View Timesheet</a>
                                             </div>
                                             <div class="approvereject">
                                                 <div class="dropdown-divider "></div>
