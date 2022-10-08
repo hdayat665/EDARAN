@@ -334,11 +334,11 @@
                     <div class="row p-2">
                         <div class="col-sm-6">
                             <label for="firstname" class="form-label">Participant*</label>
-                            <select class="selectpicker form-select" name="participant" id="addneweventparticipant" aria-label="Default select example" multiple>
+                            <select class="selectpicker form-select" name="participant[]" id="addneweventparticipant" aria-label="Default select example" multiple>
                                 <option class="form-label" value="">Please Select</option>
                                 <?php $employees = getEmployee() ?>
                                 @foreach ($employees as $employee)
-                                <option class="form-label" value="{{$employee->id}}">{{$employee->employeeName}}</option>
+                                <option class="form-label" value="{{$employee->user_id}}">{{$employee->employeeName}}</option>
                                 @endforeach
                             </select>
                         </div>

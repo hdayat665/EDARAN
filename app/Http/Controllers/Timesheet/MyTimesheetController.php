@@ -194,11 +194,12 @@ class MyTimesheetController extends Controller
         return response()->json($result);
     }
 
-    public function viewTimesheet($id = '')
+    public function viewTimesheet($id = '', $userId = '')
     {
         // $ss = new MyTimeSheetService;
 
         $data['id'] = $id;
+        $data['userId'] = $userId;
 
         return view('pages.timesheet.viewTimesheet', $data);
     }
@@ -235,7 +236,23 @@ class MyTimesheetController extends Controller
         return response()->json($result);
     }
 
+    public function updateAttendStatus($id = '', $status = '')
+    {
+        $ss = new MyTimeSheetService;
 
+        $result = $ss->updateAttendStatus($id, $status);
+
+        return response()->json($result);
+    }
+
+    public function getAttendanceById($eventId = '', $userId = '')
+    {
+        $ss = new MyTimeSheetService;
+
+        $result = $ss->getAttendanceById($eventId, $userId);
+
+        return response()->json($result);
+    }
 
 
 }

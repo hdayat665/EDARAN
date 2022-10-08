@@ -3,6 +3,7 @@
 namespace App\Service;
 
 use App\Models\ActivityLogs;
+use App\Models\AttendanceEvent;
 use App\Models\Employee;
 use App\Models\Project;
 use App\Models\ProjectLocation;
@@ -173,6 +174,9 @@ class MyTimeSheetService
         if (isset($input['set_reccuring'])) {
             $input['set_reccuring'] = implode(',', $input['set_reccuring']);
         }
+        if (isset($input['participant'])) {
+            $input['participant'] = implode(',', $input['participant']);
+        }
 
         $input['start_date'] = date_format(date_create($input['start_date']), 'Y/m/d');
         $input['end_date'] = date_format(date_create($input['end_date']), 'Y/m/d');
@@ -221,13 +225,17 @@ class MyTimeSheetService
         $input = $r->input();
         $user = Auth::user();
 
-        $input['user_id'] = $user->id;
+        // $input['user_id'] = $user->id;
         $input['tenant_id'] = $user->tenant_id;
         if (isset($input['type_recurring'])) {
             $input['type_recurring'] = implode(',', $input['type_recurring']);
         }
         if (isset($input['set_reccuring'])) {
             $input['set_reccuring'] = implode(',', $input['set_reccuring']);
+        }
+
+        if (isset($input['participant'])) {
+            $input['participant'] = implode(',', $input['participant']);
         }
 
         $input['start_date'] = date_format(date_create($input['start_date']), 'Y/m/d');
@@ -238,25 +246,6 @@ class MyTimeSheetService
             $input['location'] = $input['location_by_project'];
             unset($input['location_by_project']);
         }
-
-
-        // $start_time = strtotime($input['start_time']);
-        // $end_time = strtotime($input['end_time']);
-        // $totaltime = $end_time - $start_time;
-
-        // $h = intval($totaltime / 3600);
-
-        // $totaltime = $totaltime - ($h * 3600);
-
-        // // Minutes is obtained by dividing
-        // // remaining total time with 60
-        // $m = intval($totaltime / 60);
-
-        // // Remaining value is seconds
-        // $s = $totaltime - ($m * 60);
-
-        // // Printing the result
-        // $input['total_hour'] = "$h:$m:$s";
 
         if ($_FILES['file_upload']['name']) {
             $file_upload = upload($r->file('file_upload'));
@@ -308,14 +297,18 @@ class MyTimeSheetService
 
     public function getLogs()
     {
-        $data = TimesheetLog::where('tenant_id', Auth::user()->tenant_id)->get();
+        $data = TimesheetLog::where([['tenant_id', Auth::user()->tenant_id], ['user_id', Auth::user()->id]])->get();
 
         return $data;
     }
 
     public function getEvents()
     {
-        $data = TimesheetEvent::where('tenant_id', Auth::user()->tenant_id)->get();
+        $cond[1] = ['tenant_id', Auth::user()->tenant_id];
+        $cond[2] = ['user_id', Auth::user()->id];
+        $data = TimesheetEvent::where($cond)
+        ->orWhere([['participant', 'like', '%' . Auth::user()->id . '%']])
+        ->get();
 
         return $data;
     }
@@ -339,7 +332,12 @@ class MyTimeSheetService
         $cond[1] = ['user_id', $userId];
 
         $logs = TimesheetLog::where($cond)->whereMonth('date', date('m'))->select('id')->get();
-        $events = TimesheetEvent::where($cond)->whereMonth('end_date', date('m'))->select('id')->get();
+
+        $events = TimesheetEvent::where($cond)
+        ->whereMonth('end_date', date('m'))
+        ->orWhere([['participant', 'like', '%' . Auth::user()->id . '%']])
+        ->select('id')
+        ->get();
 
         foreach ($logs as $log) {
             $log_id[] = $log->id;
@@ -348,7 +346,7 @@ class MyTimeSheetService
         foreach ($events as $event) {
             $event_id[] = $event->id;
         }
-
+        // pr($log_id);
         $employee =  DB::table('employment as a')
             ->leftJoin('designation as b', 'a.designation', '=', 'b.id')
             ->leftJoin('department as c', 'a.department', '=', 'c.id')
@@ -359,7 +357,9 @@ class MyTimeSheetService
         $input['tenant_id'] = Auth::user()->tenant_id;
         $input['user_id'] = $userId;
         $input['month'] = date('M');
-        $input['log_id'] = implode(',', $log_id);
+        if (isset($input['log_id'])) {
+            $input['log_id'] = implode(',', $log_id);
+        }
         $input['event_id'] = implode(',', $event_id);
         $input['employee_id'] = $employee->id;
         $input['employee_name'] = $employee->employeeName;
@@ -379,7 +379,7 @@ class MyTimeSheetService
 
     public function timesheetApprovalView()
     {
-        $data = TimesheetApproval::where('tenant_id', Auth::user()->tenant_id)->get();
+        $data = TimesheetApproval::where('tenant_id', Auth::user()->tenant_id)->orderBy('created_at', 'DESC')->get();
 
         return $data;
     }
@@ -496,9 +496,27 @@ class MyTimeSheetService
         return $data;
     }
 
+    public function updateAttendStatus($id = '', $status = '')
+    {
+        $input['status'] = $status;
+        $input['event_id'] = $id;
+        $input['user_id'] = Auth::user()->id;
+        AttendanceEvent::create($input);
 
+        $data['status'] = config('app.response.success.status');
+        $data['type'] = config('app.response.success.type');
+        $data['title'] = config('app.response.success.title');
+        $data['msg'] = 'Success ' . $status . ' Event';
 
+        return $data;
+    }
 
+    public function getAttendanceById($eventId = '', $userId = '')
+    {
+        $data = AttendanceEvent::where([['event_id', $eventId], ['user_id', $userId]])->orderBy('created_at','DESC')->first();
+
+        return $data;
+    }
 
 
 }

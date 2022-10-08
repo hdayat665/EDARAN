@@ -376,7 +376,7 @@ class LoginService
             $data['title'] = config('app.response.error.title');
             $data['msg'] = 'Email not found';
         } else {
-            $receiver = 'hdayat665@gmail.com';
+            $receiver = $input['workingEmail'];
             $response['typeEmail'] = 'tempPass';
             $response['title'] = 'Orbit Temporary Password';
             $response['content1'] = 'This email is sent you to show your temporary credential.';

@@ -5,6 +5,7 @@
         <div class="col-lg">
             <div id="calendar" class="calendar"></div>
             <input type="hidden" id="timesheetApprovalId" value="{{$id}}">
+            <input type="hidden" id="timesheetApprovalUserId" value="{{$userId}}">
         </div>
     </div>
 </div>

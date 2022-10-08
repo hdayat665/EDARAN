@@ -59,7 +59,7 @@
                     </div>
                     <div class="row p-2">
                         <div class="col-sm-2">
-                            <label for="firstname" class="form-label">Status: <td><span class="badge bg-lime rounded-pill" id="attend"></span></td></label>
+                            <label for="firstname" class="form-label">Status: <td><span id="attendStatus"></span></td></label>
                         </div>
                         <div class="col-sm-2">
                             <label class="form-label">Attach File:</label><br>

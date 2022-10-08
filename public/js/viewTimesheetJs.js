@@ -166,6 +166,12 @@ var handleCalendarDemo = function() {
                     });
                 }
 
+                function getAttendance(eventId, userId) {
+                    return $.ajax({
+                        url: "/getAttendanceById/" + eventId + '/' + userId
+                    });
+                }
+
 
                 // console.log(name(1));
 
@@ -210,7 +216,18 @@ var handleCalendarDemo = function() {
                     eventId = info.event.extendedProps.eventId;
                     var eventData = getEvents(eventId);
                     eventData.done(function(data) {
-                        console.log(data);
+                        // console.log(data);
+
+                        var userId = $('#timesheetApprovalUserId').val();
+
+                        var attendanceEvent = getAttendance(data.id, userId);
+                        attendanceEvent.done(function(dataAttendance) {
+                            console.log(dataAttendance);
+                            if (dataAttendance) {
+                                $('#attendStatus').html('<span class="badge bg-lime rounded-pill" id="attend">' + dataAttendance.status + '</span>');
+                            }
+                        });
+
                         $('#event_name').text(data.event_name);
                         $('#start_date').text(data.start_date);
                         $('#end_date').text(data.end_date);
@@ -236,7 +253,7 @@ var handleCalendarDemo = function() {
                         $('#desc_event').text(data.desc);
                         $('#reminder').text('None');
                         $('#file_upload').html('<a class="form-label" target="_blank" href="/storage/' + data.file_upload + '">' + data.file_upload + '</a>');
-                        $('#attend').text('attend');
+                        // $('#attend').text('attend');
 
                     });
 
