@@ -254,5 +254,31 @@ class MyTimesheetController extends Controller
         return response()->json($result);
     }
 
+    public function getAttendanceByEventId($eventId = '')
+    {
+        $ss = new MyTimeSheetService;
+
+        $result = $ss->getAttendanceByEventId($eventId);
+
+        return response()->json($result);
+    }
+
+    public function realtimeEventTimesheetView()
+    {
+        $data = [];
+        $ss = new MyTimeSheetService;
+        $data['events'] = $ss->getRealtimeEvents();
+
+        return view('pages.timesheet.realtimeTimesheet',$data);
+
+    }
+
+    public function realtimeEmployeeTimesheetView()
+    {
+        $data = [];
+
+        return view('pages.timesheet.employeeRealtime', $data);
+    }
+
 
 }

@@ -501,6 +501,9 @@ class MyTimeSheetService
         $input['status'] = $status;
         $input['event_id'] = $id;
         $input['user_id'] = Auth::user()->id;
+
+        AttendanceEvent::where([['user_id', $input['user_id']], ['event_id', $input['event_id']]])->delete();
+
         AttendanceEvent::create($input);
 
         $data['status'] = config('app.response.success.status');
@@ -514,6 +517,27 @@ class MyTimeSheetService
     public function getAttendanceById($eventId = '', $userId = '')
     {
         $data = AttendanceEvent::where([['event_id', $eventId], ['user_id', $userId]])->orderBy('created_at','DESC')->first();
+
+        return $data;
+    }
+
+    public function getAttendanceByEventId($eventId = '')
+    {
+        $data = DB::table('attendance_event as a')
+        ->leftJoin('employment as b', 'a.user_id', '=', 'b.user_id')
+        ->select('b.employeeName', 'a.status')
+        ->where('a.event_id', $eventId)
+        ->orderBy('b.employeeName','ASC')
+        ->get();
+
+        return $data;
+    }
+
+    public function getRealtimeEvents()
+    {
+        $cond[1] = ['tenant_id', Auth::user()->tenant_id];
+        $data = TimesheetEvent::where($cond)
+        ->get();
 
         return $data;
     }

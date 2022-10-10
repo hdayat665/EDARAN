@@ -14,6 +14,7 @@ use App\Http\Controllers\Timesheet\MyTimesheetController;
 use App\Http\Controllers\Project\CustomerController;
 use App\Http\Controllers\Project\ProjectController;
 use App\Http\Controllers\Report\ProjectReportController;
+use App\Http\Controllers\Report\TimesheetReportController;
 
 /*
 |--------------------------------------------------------------------------
@@ -261,6 +262,15 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('/updateStatus/{id}/{status}', 'updateStatus');
         });
 
+        Route::controller(TimesheetReportController::class)->group(function () {
+            Route::get('/statusReport', 'statusReportView');
+            Route::get('/employeeReport', 'employeeReportView');
+            Route::get('/overtimeReport', 'overtimeReportView');
+            Route::get('/getProjectByCustomerId/{customer_id}', 'getProjectByCustomerId');
+            Route::get('/searchReport', 'searchReport');
+            Route::post('/updateStatus/{id}/{status}', 'updateStatus');
+        });
+
         Route::controller(MyTimesheetController::class)->group(function () {
             Route::get('/myTimesheet', 'myTimesheetView');
             Route::post('/createLog', 'createLog');
@@ -285,7 +295,9 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('/getActivityNameById/{id}', 'getActivityNameById');
             Route::get('/updateAttendStatus/{id}/{status}', 'updateAttendStatus');
             Route::get('/getAttendanceById/{eventId}/{userId}', 'getAttendanceById');
-
+            Route::get('/realtimeEventTimesheet', 'realtimeEventTimesheetView');
+            Route::get('/realtimeEmployeeTimesheet', 'realtimeEmployeeTimesheetView');
+            Route::get('/getAttendanceByEventId/{eventId}', 'getAttendanceByEventId');
 
         });
 
