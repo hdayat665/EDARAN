@@ -36,6 +36,12 @@ requirejs.config({
         'myTimesheetJs': assets + '/js/myTimesheetJs',
         'timesheetApprovalJs': assets + '/js/timesheetApprovalJs',
         'viewTimesheetJs': assets + '/js/viewTimesheetJs',
+        'eventRealtimeJs': assets + '/js/eventRealtimeJs',
+        'statusReportJs': assets + '/js/statusReportJs',
+        'employeeReportJs': assets + '/js/employeeReportJs',
+        'overtimeReportJs': assets + '/js/overtimeReportJs',
+        'employeeReportByJs': assets + '/js/employeeReportByJs',
+        'employeeReportAllJs': assets + '/js/employeeReportAllJs',
 
 
         // 'main': 'assets/backend/js/main',
@@ -185,6 +191,31 @@ if ($('#timesheetApprovalJs').length > 0) {
 if ($('#viewTimesheetJs').length > 0) {
     requirejs(['viewTimesheetJs']);
 }
+
+if ($('#eventRealtimeJs').length > 0) {
+    requirejs(['eventRealtimeJs']);
+}
+
+if ($('#statusReportJs').length > 0) {
+    requirejs(['statusReportJs']);
+}
+
+if ($('#employeeReportJs').length > 0) {
+    requirejs(['employeeReportJs']);
+}
+
+if ($('#overtimeReportJs').length > 0) {
+    requirejs(['overtimeReportJs']);
+}
+
+if ($('#employeeReportByJs').length > 0) {
+    requirejs(['employeeReportByJs']);
+}
+
+if ($('#employeeReportAllJs').length > 0) {
+    requirejs(['employeeReportAllJs']);
+}
+
 
 
 // Global function

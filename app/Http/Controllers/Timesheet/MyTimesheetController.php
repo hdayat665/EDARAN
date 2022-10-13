@@ -204,16 +204,21 @@ class MyTimesheetController extends Controller
         return view('pages.timesheet.viewTimesheet', $data);
     }
 
-    public function getTimesheetById($id = '')
+    public function getTimesheetById($id = '', $userId = '')
     {
         // pr($id);
         $ss = new MyTimeSheetService;
 
-        $getIds =  $ss->getTimesheetById($id);
-        // pr($getIds);
+        $getIds =  $ss->getTimesheetById($id, $userId);
+        // pr($getIds->event_id);
 
-        $result['events'] = $ss->getEventsByLotId($getIds->event_id);
-        $result['logs'] = $ss->getLogsByLotId($getIds->log_id);
+        $result['events'] = [];
+        $result['logs'] = [];
+
+        if ($getIds) {
+            $result['events'] = $ss->getEventsByLotId($getIds->event_id);
+            $result['logs'] = $ss->getLogsByLotId($getIds->log_id);
+        }
 
         return response()->json($result);
     }
@@ -252,6 +257,44 @@ class MyTimesheetController extends Controller
         $result = $ss->getAttendanceById($eventId, $userId);
 
         return response()->json($result);
+    }
+
+    public function getAttendanceByEventId($eventId = '')
+    {
+        $ss = new MyTimeSheetService;
+
+        $result = $ss->getAttendanceByEventId($eventId);
+
+        return response()->json($result);
+    }
+
+    public function realtimeEventTimesheetView()
+    {
+        $data = [];
+        $input = [];
+        $ss = new MyTimeSheetService;
+        $data['events'] = $ss->getRealtimeEvents($input);
+
+        return view('pages.timesheet.realtimeTimesheet',$data);
+
+    }
+
+    public function searchRealtimeEventTimesheet(Request $r)
+    {
+        $data = [];
+        $input = $r->input();
+        $ss = new MyTimeSheetService;
+        $data['events'] = $ss->getRealtimeEvents($input);
+
+        return view('pages.timesheet.realtimeTimesheet',$data);
+
+    }
+
+    public function realtimeEmployeeTimesheetView()
+    {
+        $data = [];
+
+        return view('pages.timesheet.employeeRealtime', $data);
     }
 
 

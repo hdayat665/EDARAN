@@ -9,14 +9,15 @@ var handleCalendarDemo = function() {
     var today = moment().startOf('day');
     var calendarElm = document.getElementById('calendar');
 
-    function getTimesheet(id) {
+    function getTimesheet(id, userId) {
         return $.ajax({
-            url: "/getTimesheetById/" + id
+            url: "/getTimesheetById/" + id + '/' + userId
         });
     }
     var id = $('#timesheetApprovalId').val();
+    var userId = $('#timesheetApprovalUserId').val();
 
-    var timesheetData = getTimesheet(id);
+    var timesheetData = getTimesheet(id, userId);
 
     timesheetData.done(function(data) {
         console.log(data);
