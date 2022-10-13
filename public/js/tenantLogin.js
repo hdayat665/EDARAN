@@ -45,19 +45,13 @@ $(document).ready(function() {
                     // by the built-in "email" rule
                     // email: true
                 },
-                // password: {
-                //     required: true,
-                //     minlength: 5
-                // }
+                
             },
 
             // Specify validation error messages
             messages: {
-                password: {
-                    required: "",
-                    // minlength: "Your password must be at least 5 characters long"
-                },
-                username: "",
+                password: "Please Insert Password",
+                username: "Please Insert Username",
             },
             // Make sure the form is submitted to the destination defined
             // in the "action" attribute of the form when valid
