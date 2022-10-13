@@ -1,7 +1,57 @@
 $(document).ready(function() {
+    let croppie;
+
+    $('#edit-profile-picture').on('change', function() {
+    if (this.files && this.files[0]) {
+        let reader = new FileReader();
+        reader.onload = function(e) {
+        $('#croppie img').attr('src', e.target.result);
+        croppie = new Croppie($('#croppie img')[0], {
+            boundary: { width: 200, height: 200 },
+            viewport: { width: 100, height: 100, type: 'square' }
+        })
+        }
+        $('#showImage').show();
+        $('#crop').on('click', function() {
+        $('#showCroppedImage').show();
+        croppie
+            .result({ type: 'base64', circle: false })
+            .then(function(dataImg) {
+                var data = [{ image: dataImg }, { name: 'profilePicture.jpg' }];
+                // use ajax to send data to php
+                $('#result_image img').attr('src', dataImg);
+            });
+        });
+        reader.readAsDataURL(this.files[0]);
+    }
+    })
 
     $('#saveProfile').click(function(e) {
+        $("#formProfile").validate({
+            // Specify validation rules
+            rules: {
+                
+                username: "required",
+                personalEmail:{
+                    required: true,
+                    email: true
+                },
+                
+            },
+
+            messages: {
+
+                username: "Please insert username",
+                personalEmail:{
+                    required: "Please insert personal email",
+                    email: "Please insert valid email"
+                },
+
+            },
+            submitHandler: function(form) {
+
         requirejs(['sweetAlert2'], function(swal) {
+            
 
             var data = new FormData(document.getElementById("formProfile"));
 
@@ -33,7 +83,8 @@ $(document).ready(function() {
 
                 });
             });
-
+        });
+    }
         });
     });
 
