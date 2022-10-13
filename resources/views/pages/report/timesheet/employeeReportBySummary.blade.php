@@ -3,25 +3,8 @@
 @section('content')
 
 <div id="content" class="app-content">
-    <!-- BEGIN breadcrumb -->
-    <!-- BEGIN breadcrumb -->
-
-    <!-- END breadcrumb -->
-    <!-- BEGIN page-header -->
-
-    <!-- END page-header -->
-    <!-- BEGIN row -->
-
-    <!-- END breadcrumb -->
-    <!-- BEGIN page-header -->
     <h1 class="page-header">Reporting <small>| Timesheet | Employee Report </small></h1>
-
-    <!-- END page-header -->
-    <!-- BEGIN panel -->
     <div class="panel panel" id="employeeReportByJs">
-
-
-        <!-- BEGIN panel-body -->
         <div class="panel-body">
             <div class="row p-2">
                 <div class="col-sm-12">
@@ -30,7 +13,7 @@
             </div>
             <div class="row p-2">
                 <div class="col-sm-12">
-                    <h5> Date : 01/02/2020 - 10/10/2023</h5>
+					<h5> Date : {{$date_range}}</h5>
                 </div>
             </div>
             <table id="summarytable" class="table table-striped table-bordered align-middle">
@@ -46,34 +29,18 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <?php $no = 1 ?>
+                    @if ($summarys)
+                    @foreach ($summarys as $summary)
                     <tr class="odd gradeX">
-                        <td width="1%" class="fw-bold text-dark">1</td>
-                        <td>Amira Roslam</td>
-                        <td>Edaran Communications Sdn Bhd</td>
-                        <td> PRJ001 - Project A </td>
+                        <td width="1%" class="fw-bold text-dark">{{$no++}}</td>
+                        <td>{{$summary->employeeName}}</td>
+                        <td>{{$summary->departmentName}}</td>
+                        <td>{{$summary->project_name ?? '-'}}</td>
                         <td>321</td>
-
                     </tr>
-                    <tr class="even gradeC">
-                        <td width="1%" class="fw-bold text-dark">2</td>
-                        <td>Irsyad</td>
-                        <td>Edaran Enginnering Sdn Bhd</td>
-                        <td> PRJ003 - Project B </td>
-                        <td>120312</td>
-
-                    </tr>
-                    <tr class="even gradeC">
-                        <td width="1%" class="fw-bold text-dark">3</td>
-                        <td>Ali</td>
-                        <td>Edaran Service Sdn Bhd</td>
-                        <td> PRJ004 - Project C </td>
-                        <td>1023</td>
-
-                    </tr>
-
-
-
-
+                    @endforeach
+                    @endif
                 </tbody>
             </table>
         </div>

@@ -41,6 +41,7 @@ requirejs.config({
         'employeeReportJs': assets + '/js/employeeReportJs',
         'overtimeReportJs': assets + '/js/overtimeReportJs',
         'employeeReportByJs': assets + '/js/employeeReportByJs',
+        'employeeReportAllJs': assets + '/js/employeeReportAllJs',
 
 
         // 'main': 'assets/backend/js/main',
@@ -209,6 +210,10 @@ if ($('#overtimeReportJs').length > 0) {
 
 if ($('#employeeReportByJs').length > 0) {
     requirejs(['employeeReportByJs']);
+}
+
+if ($('#employeeReportAllJs').length > 0) {
+    requirejs(['employeeReportAllJs']);
 }
 
 

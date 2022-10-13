@@ -204,16 +204,21 @@ class MyTimesheetController extends Controller
         return view('pages.timesheet.viewTimesheet', $data);
     }
 
-    public function getTimesheetById($id = '')
+    public function getTimesheetById($id = '', $userId = '')
     {
         // pr($id);
         $ss = new MyTimeSheetService;
 
-        $getIds =  $ss->getTimesheetById($id);
-        // pr($getIds);
+        $getIds =  $ss->getTimesheetById($id, $userId);
+        // pr($getIds->event_id);
 
-        $result['events'] = $ss->getEventsByLotId($getIds->event_id);
-        $result['logs'] = $ss->getLogsByLotId($getIds->log_id);
+        $result['events'] = [];
+        $result['logs'] = [];
+
+        if ($getIds) {
+            $result['events'] = $ss->getEventsByLotId($getIds->event_id);
+            $result['logs'] = $ss->getLogsByLotId($getIds->log_id);
+        }
 
         return response()->json($result);
     }
@@ -266,8 +271,20 @@ class MyTimesheetController extends Controller
     public function realtimeEventTimesheetView()
     {
         $data = [];
+        $input = [];
         $ss = new MyTimeSheetService;
-        $data['events'] = $ss->getRealtimeEvents();
+        $data['events'] = $ss->getRealtimeEvents($input);
+
+        return view('pages.timesheet.realtimeTimesheet',$data);
+
+    }
+
+    public function searchRealtimeEventTimesheet(Request $r)
+    {
+        $data = [];
+        $input = $r->input();
+        $ss = new MyTimeSheetService;
+        $data['events'] = $ss->getRealtimeEvents($input);
 
         return view('pages.timesheet.realtimeTimesheet',$data);
 

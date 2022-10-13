@@ -11,6 +11,7 @@ use App\Models\EmploymentType;
 use App\Models\JobGrade;
 use App\Models\Project;
 use App\Models\ProjectLocation;
+use App\Models\TimesheetEvent;
 use App\Models\Unit;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -93,8 +94,7 @@ if (!function_exists('getMaritalStatus')) {
             '5' => 'Seperated',
         ];
 
-        if($id)
-        {
+        if ($id) {
             $data = $data[$id];
         }
 
@@ -127,8 +127,7 @@ if (!function_exists('educationLevel')) {
             '6' => 'higher education',
         ];
 
-        if($id)
-        {
+        if ($id) {
             $data = $data[$id];
         }
 
@@ -149,8 +148,7 @@ if (!function_exists('educationType')) {
             '6' => 'higher education Diploma/ Bachelor Degree/ Master Degree/ Doctoral Degree',
         ];
 
-        if($id)
-        {
+        if ($id) {
             $data = $data[$id];
         }
 
@@ -163,19 +161,18 @@ if (!function_exists('relationship')) {
     {
         $data = [
             '0' => '-',
-            '1'=>'Grand Father',
-            '2'=>'Grand Mother',
-            '3'=>'Grand Father-In-Law',
-            '4'=>'Grand Mother-In-Law',
-            '5'=>'Father',
-            '6'=>'Mother',
-            '7'=>'Father-In-Law',
-            '8'=>'Mother-In-Law',
-            '9'=>'Guardian',
+            '1' => 'Grand Father',
+            '2' => 'Grand Mother',
+            '3' => 'Grand Father-In-Law',
+            '4' => 'Grand Mother-In-Law',
+            '5' => 'Father',
+            '6' => 'Mother',
+            '7' => 'Father-In-Law',
+            '8' => 'Mother-In-Law',
+            '9' => 'Guardian',
         ];
 
-        if($id)
-        {
+        if ($id) {
             $data = $data[$id];
         }
 
@@ -348,9 +345,13 @@ if (!function_exists('getCompany')) {
 
 
 if (!function_exists('getDepartment')) {
-    function getDepartment()
+    function getDepartment($id = '')
     {
-        $data = Department::where('tenant_id', Auth::user()->tenant_id)->get();
+        if ($id) {
+            $data = Department::find($id);
+        } else {
+            $data = Department::where('tenant_id', Auth::user()->tenant_id)->get();
+        }
 
         if (!$data) {
             $data = [];
@@ -690,3 +691,43 @@ if (!function_exists('activityName')) {
     }
 }
 
+if (!function_exists('getEventTimesheet')) {
+    function getEventTimesheet()
+    {
+        $data = TimesheetEvent::where('tenant_id', Auth::user()->tenant_id)->get();
+
+        return $data;
+    }
+}
+
+if (!function_exists('month')) {
+    function month()
+    {
+        $data = [
+            '1' => 'January',
+            '2' => 'February',
+            '3' => 'March',
+            '4' => 'May',
+            '5' => 'Jun',
+            '6' => 'July',
+            '7' => 'August',
+        ];
+
+        return $data;
+    }
+}
+
+if (!function_exists('year')) {
+    function year()
+    {
+        $data = [
+            '2018' => '2018',
+            '2019' => '2019',
+            '2020' => '2020',
+            '2021' => '2021',
+            '2022' => '2022',
+        ];
+
+        return $data;
+    }
+}

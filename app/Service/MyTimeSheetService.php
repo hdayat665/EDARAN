@@ -456,10 +456,15 @@ class MyTimeSheetService
         return $data;
     }
 
-    public function getTimesheetById($id)
+    public function getTimesheetById($id = '', $userId = '')
     {
 
-        $data = TimesheetApproval::find($id);
+        if ($userId) {
+            $data = TimesheetApproval::where('user_id', $userId)->first();
+        }else{
+            $data = TimesheetApproval::find($id);
+        }
+
 
         return $data;
     }
@@ -533,12 +538,28 @@ class MyTimeSheetService
         return $data;
     }
 
-    public function getRealtimeEvents()
+    public function getRealtimeEvents($input = [])
     {
+
         $cond[1] = ['tenant_id', Auth::user()->tenant_id];
+        if (isset($input['employee_name'])) {
+            $cond[2] = ["participant",'like', "%".$input["employee_name"]."%"];
+        }
+
+        if (isset($input['event_name'])) {
+            $cond[3] = ['event_name', $input['event_name']];
+        }
+
+        if (isset($input['date_range'])) {
+            $date_range = explode(' - ',$input['date_range']);
+            $cond[4] = ['start_date','>=', date_format(date_create($date_range[0]), 'Y-m-d')];
+            $cond[5] = ['end_date','<=', date_format(date_create($date_range[1]), 'Y-m-d')];
+        }
+
         $data = TimesheetEvent::where($cond)
         ->get();
-
+        // pr($data);
+        // pr();
         return $data;
     }
 

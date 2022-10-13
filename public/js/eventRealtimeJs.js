@@ -33,6 +33,7 @@ $(document).on("click", "#buttonnViewParticipant", function() {
     var eventData = getEvents(id);
     eventData.done(function(data) {
         // console.log(data);
+        // console.log(data.id)
 
         var attendanceEvent = getAttendance(data.id);
         attendanceEvent.done(function(dataAttendance) {
@@ -43,11 +44,10 @@ $(document).on("click", "#buttonnViewParticipant", function() {
             // console.log(dataAttendance);
             for (let i = 0; i < dataAttendance.length; i++) {
                 const attendance = dataAttendance[i];
-                // alert(attendance['employeeName'])
                 var opt = document.createElement("tr");
                 document.getElementById('tableRowParticipant').innerHTML +=
                     '<tr class="odd gradeX">' +
-                    '<td>' + attendance.id + '</td>' +
+                    '<td>' + i + '</td>' +
                     '<td><span>' + attendance.employeeName + '</span></td>' +
                     '</tr>';
 

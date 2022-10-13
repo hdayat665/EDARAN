@@ -269,6 +269,11 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('/getProjectByCustomerId/{customer_id}', 'getProjectByCustomerId');
             Route::get('/searchReport', 'searchReport');
             Route::post('/updateStatus/{id}/{status}', 'updateStatus');
+            Route::post('/searchStatusReport', 'searchStatusReport');
+            Route::post('/searchEmployeeTimesheetReport', 'searchEmployeeTimesheetReport');
+            Route::post('/searchEmployeeReport', 'searchEmployeeReport');
+            Route::post('/searchOvertimeReport', 'searchOvertimeReport');
+
         });
 
         Route::controller(MyTimesheetController::class)->group(function () {
@@ -290,7 +295,7 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('/searchTimesheet', 'searchTimesheet');
             Route::post('/approveAllTimesheet', 'approveAllTimesheet');
             Route::get('/viewTimesheet/{id}/{userId}', 'viewTimesheet');
-            Route::get('/getTimesheetById/{id}', 'getTimesheetById');
+            Route::get('/getTimesheetById/{id}/{userId}', 'getTimesheetById');
             Route::get('/getProjectByidTimesheet/{id}', 'getProjectByidTimesheet');
             Route::get('/getActivityNameById/{id}', 'getActivityNameById');
             Route::get('/updateAttendStatus/{id}/{status}', 'updateAttendStatus');
@@ -298,6 +303,7 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('/realtimeEventTimesheet', 'realtimeEventTimesheetView');
             Route::get('/realtimeEmployeeTimesheet', 'realtimeEmployeeTimesheetView');
             Route::get('/getAttendanceByEventId/{eventId}', 'getAttendanceByEventId');
+            Route::post('/searchRealtimeEventTimesheet', 'searchRealtimeEventTimesheet');
 
         });
 

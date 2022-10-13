@@ -16,33 +16,44 @@
                 </div>
             </div><br>
             <div class="form-control" id="filterform" style="display:none">
-                <div class="row p-2">
-                    <h4>Filter</h4>
-                    <div class="col-sm-2">
-                        <label for="emergency-firstname" class="form-label">Employee Name</label>
-                        <select class="form-select" id="" >
-                            <option class="form-label" value="" selected>Please Select</option>
-                        </select>
+                <form action="/searchRealtimeEventTimesheet" method="POST">
+                    @csrf
+                    <div class="row p-2">
+                        <h4>Filter</h4>
+                        <div class="col-sm-2">
+                            <label for="emergency-firstname" class="form-label">Employee Name</label>
+                            <select class="form-select" id="" name="employee_name">
+                                <option class="form-label" value="" >Please Select</option>
+                                <?php $employees = getEmployee() ?>
+                                @foreach ($employees as $employee)
+                                    <option value="{{$employee->user_id}}">{{$employee->employeeName}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="col-sm-2">
+                            <label for="emergency-firstname" class="form-label">Event Name</label>
+                            <select class="form-select" id="" name="event_name">
+                                <option class="form-label" value="" >Please Select</option>
+                                <?php $timesheets = getEventTimesheet() ?>
+                                @foreach ($timesheets as $timesheet)
+                                    <option value="{{$timesheet->event_name}}">{{$timesheet->event_name}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="col-sm-2">
+                            <label for="emergency-firstname" class="form-label">Date Range</label>
+                            <input type="text" id="daterange" class="form-control" name="date_range" value="" placeholder="click to select the date range" />
+                        </div>
+                        <div class="col-sm-1">
+                            <label for="emergency-firstname" class="form-label">&nbsp;</label>
+                            <button class="btn btn-primary form-control" type="submit"> <i class="fas fa-magnifying-glass"></i> Search</button>
+                        </div>
+                        <div class="col-sm-1">
+                            <label for="emergency-firstname" class="form-label">&nbsp;</label>
+                            <a href="#" class="btn btn-primary form-control"> <i class="fas fa-repeat"></i> Reset</a>
+                        </div>
                     </div>
-                    <div class="col-sm-2">
-                        <label for="emergency-firstname" class="form-label">Event Name</label>
-                        <select class="form-select" id="" >
-                            <option class="form-label" value="" selected>Please Select</option>
-                        </select>
-                    </div>
-                    <div class="col-sm-2">
-                        <label for="emergency-firstname" class="form-label">Date Range</label>
-                        <input type="text" id="daterange" class="form-control" value="" placeholder="click to select the date range" />
-                    </div>
-                    <div class="col-sm-1">
-                        <label for="emergency-firstname" class="form-label">&nbsp;</label>
-                        <a href="#" class="btn btn-primary form-control"> <i class="fas fa-magnifying-glass"></i> Search</a>
-                    </div>
-                    <div class="col-sm-1">
-                        <label for="emergency-firstname" class="form-label">&nbsp;</label>
-                        <a href="#" class="btn btn-primary form-control"> <i class="fas fa-repeat"></i> Reset</a>
-                    </div>
-                </div>
+                </form>
             </div>
             <br>
             <div class="form-control">
