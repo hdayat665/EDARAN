@@ -132,21 +132,21 @@
                                         <div class="row p-2">
                                             <div class="col-sm-6">
                                                 <label for="firstname" class="form-label">Full Name</label>
-                                                <input type="text" id="firstname" name="fullName" value="{{$profile->fullName ?? ''}}" class="form-control" aria-describedby="firstname">
+                                                <input type="text" id="fullname" name="fullName" value="{{$profile->fullName ?? ''}}" class="form-control" aria-describedby="firstname" readonly>
                                             </div>
                                             <div class="col-sm-6">
                                                 <div class="row">
                                                     <div class="col-sm-6 ">
-                                                        <div class="form-check form-switch align-right">
-                                                            <input class="form-check-input" type="checkbox" name="nonNetizen" {{($profile->nonNetizen ?? '') ? 'checked' : ''}} id="citizen">
-                                                            <label class="form-check-label" for="citizen">
-                                                                Non-Citizen
-                                                            </label>
-                                                        </div>
+                                                    <div class="form-check form-switch align-right">
+                                                    <input class="form-check-input partCheck" value="door3" type="checkbox" name="nonNetizen" {{($profile->nonNetizen ?? '') ? 'checked' : ''}} id="citizen">
+                                                    <label class="form-label" for="citizen">
+                                                        Non-Citizen
+                                                    </label>
+                                                </div>
                                                     </div>
                                                     <div class="col-sm-6">
                                                         <label for="lastname" class="form-label">Identification Number*</label>
-                                                        <input type="text" value="{{$profile->idNo ?? ''}}" name="idNo" id="lastname" class="form-control" aria-describedby="lastname">
+                                                        <input type="text" value="{{$profile->idNo ?? ''}}" name="idNo" id="idNo" class="form-control" aria-describedby="lastname">
                                                     </div>
                                                 </div>
                                             </div>
@@ -156,18 +156,19 @@
                                                 <div class="row">
                                                     <div class="col-sm-6">
                                                         <label for="passport" class="form-label">Passport Number</label>
-                                                        <input type="text" id="passport" name="passport" value="{{ $profile->passport ?? '' }}" class="form-control" aria-describedby="passport">
+                                                        <input type="text" id="passport" name="passport" value="{{ $profile->passport ?? '' }}" class="form-control" aria-describedby="passport" readonly>
                                                     </div>
                                                     <div class="col-sm-6">
                                                         <label for="expirydate" class="form-label">Expiry Date</label>
-                                                        <input type="date" id="expirydate" name="expiryDate" value="{{ date_format(date_create($profile->expiryDate ?? null), 'Y-m-d') ?? '' }}" class="form-control" aria-describedby="expirydate">
+                                                        <input type="date" id="expirydate" name="expiryDate" value="{{ date_format(date_create($profile->expiryDate ?? null), 'Y-m-d') ?? '' }}" class="form-control" aria-describedby="expirydate" readonly>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="col-sm-6">
                                                 <label for="issuing-country" class="form-label">Issuing Country</label>
                                                 <select class="form-select" name="issuingCountry">
-                                                    <option value="0" label="Please Choose"  ></option>
+                                                    <option value="" label="Please Choose"  ></option>
+                                                    <option value="MY" label="Malaysia" selected ></option>
                                                     <?php
                                                     $americass = americas();
                                                     $asias = asias();
@@ -196,7 +197,7 @@
                                                         <label for="gender" class="form-label">Gender</label>
                                                         <select class="form-select" name="gender">
                                                             <?php $gender = gender() ?>
-                                                            <option value="0" label="Please Choose"  ></option>
+                                                            <option value="" label="Please Choose"  ></option>
                                                             @foreach ($gender as $key => $status)
                                                             <option value="{{$key}}" <?php echo ($key == $profile->gender) ? 'selected="selected"' : '' ?> >{{$status}}</option>
                                                             @endforeach
@@ -208,7 +209,7 @@
                                                 <label for="issuing-country" class="form-label">Marital Status</label>
                                                 <select class="form-select" name="maritialStatus">
                                                     <?php $MaritalStatus = getMaritalStatus() ?>
-                                                    <option value="0" label="Please Choose"  ></option>
+                                                    <option value="" label="Please Choose"  ></option>
                                                     @foreach ($MaritalStatus as $key => $status)
                                                     <option value="{{$key}}" <?php echo ($key == $profile->maritialStatus) ? 'selected="selected"' : '' ?> >{{$status}}</option>
                                                     @endforeach
@@ -220,7 +221,7 @@
                                                 <label for="religion" class="form-label">Religion</label>
                                                 <select class="form-select" name="religion">
                                                     <?php $religion = religion() ?>
-                                                    <option value="0" label="Please Choose"  ></option>
+                                                    <option value="" label="Please Choose"  ></option>
                                                     @foreach ($religion as $key => $status)
                                                     <option value="{{$key}}"  <?php echo ($key == $profile->religion) ? 'selected="selected"' : '' ?>>{{$status}}</option>
                                                     @endforeach
@@ -230,7 +231,7 @@
                                                 <label for="race" class="form-label">Race</label>
                                                 <select class="form-select" name="race">
                                                     <?php $race = race() ?>
-                                                    <option value="0" label="Please Choose"  ></option>
+                                                    <option value="" label="Please Choose"  ></option>
                                                     @foreach ($race as $key => $status)
                                                     <option value="{{$key}}"  <?php echo ($key == $profile->race) ? 'selected="selected"' : '' ?>>{{$status}}</option>
                                                     @endforeach
