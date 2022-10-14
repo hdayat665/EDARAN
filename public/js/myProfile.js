@@ -455,6 +455,20 @@ $(document).ready(function() {
         $("#fullNameChild").val(a+ ' '+b);
     });
 
+    $(".partCheck").click(function(){
+        if ($(this).prop("checked")) {
+              
+            $('#idnumber').prop('readonly', true);
+            $('#passportmyprofile').prop('readonly', false);
+            $('#expirydatemyprofile').prop('readonly', false);
+        } else {
+            
+            $('#idnumber').prop('readonly', false);
+            $('#passportmyprofile').prop('readonly', true);
+            $('#expirydatemyprofile').prop('readonly', true);
+        }
+      });
+
     $(".partCheck4").click(function(){
         if ($(this).prop("checked")) {
               

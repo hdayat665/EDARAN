@@ -179,6 +179,7 @@
                                     @endforeach
                                 </select>
                             </div>
+                            
                             <div class="col-sm-6">
                                 <label for="race" class="form-label">Race</label>
                                 <select class="form-select" name="race" id="race" style="text-transform:uppercase">
