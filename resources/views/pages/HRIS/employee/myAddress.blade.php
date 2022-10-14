@@ -20,13 +20,13 @@
             </div>
             <div class="col-sm-6">
                 <label for="city" class="form-label">City*</label>
-                <input type="text" class="form-control" name="city" value="{{ $address->city ?? '' }}">
+                <input type="text" class="form-control" id="city" name="city" value="{{ $address->city ?? '' }}">
             </div>
         </div>
         <div class="row p-2">
             <div class="col-sm-6">
                 <label for="state" class="form-label">State*</label>
-                <select class="form-select" name="state" value="{{ $address->state ?? '' }}">
+                <select class="form-select" name="state" id="state" value="{{ $address->state ?? '' }}">
                     <?php $state = state() ?>
                     <option value="0" label="Please Choose"  ></option>
                     @foreach ($state as $key => $status)
@@ -36,7 +36,8 @@
             </div>
             <div class="col-sm-6">
                 <label for="country" class="form-label">Country</label>
-                <select class="form-select" name="country" value="{{ $address->country ?? '' }}">
+                <select class="form-select" name="country" id="country" value="{{ $address->country ?? '' }}">
+                    <option value="MY" label="MALAYSIA" ></option>
                     <?php
                     $americass = americas();
                     $asias = asias();
@@ -69,27 +70,27 @@
         <div class="row p-2">
             <div class="col-sm-6">
                 <label for="address-1" class="form-label">Address 1*</label>
-                <input type="text" id="address-1" name="address1c" value="{{ $address->address1c ?? '' }}" class="form-control" aria-describedby="address-1">
+                <input type="text" id="address-1c" name="address1c" value="{{ $address->address1c ?? '' }}" class="form-control" aria-describedby="address-1">
             </div>
             <div class="col-sm-6">
                 <label for="address-2" class="form-label">Address 2</label>
-                <input type="text" id="address-2" name="address2c" value="{{ $address->address2c ?? '' }}" class="form-control" aria-describedby="address-2">
+                <input type="text" id="address-2c" name="address2c" value="{{ $address->address2c ?? '' }}" class="form-control" aria-describedby="address-2">
             </div>
         </div>
         <div class="row p-2">
             <div class="col-sm-6">
                 <label for="postcode" class="form-label">Postcode*</label>
-                <input type="text" id="postcode" name="postcodec" value="{{ $address->postcodec ?? '' }}" class="form-control" aria-describedby="postcode">
+                <input type="text" id="postcodec" name="postcodec" value="{{ $address->postcodec ?? '' }}" class="form-control" aria-describedby="postcode">
             </div>
             <div class="col-sm-6">
                 <label for="city" class="form-label">City*</label>
-                <input type="text" class="form-control" name="cityc" value="{{ $address->cityc ?? '' }}">
+                <input type="text" class="form-control" id="cityc" name="cityc" value="{{ $address->cityc ?? '' }}">
             </div>
         </div>
         <div class="row p-2">
             <div class="col-sm-6">
                 <label for="state" class="form-label">State*</label>
-                <select class="form-select" name="statec" value="{{ $address->statec ?? '' }}">
+                <select class="form-select" id="statec" name="statec" value="{{ $address->statec ?? '' }}">
                     <?php $state = state() ?>
                     <option value="0" label="Please Choose"  ></option>
                     @foreach ($state as $key => $status)
@@ -99,7 +100,8 @@
             </div>
             <div class="col-sm-6">
                 <label for="country" class="form-label">Country</label>
-                <select class="form-select" name="countryc" value="{{ $address->countryc ?? '' }}">
+                <select class="form-select" id="countryc" name="countryc" value="{{ $address->countryc ?? '' }}">
+                    <option value="1" label="Malaysia" ></option>
                     <?php
                     $americass = americas();
                     $asias = asias();

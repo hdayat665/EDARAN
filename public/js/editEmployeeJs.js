@@ -32,17 +32,70 @@ $(document).ready(function() {
         $("#fullname").val(a+ ' '+b);
     });
 
+    $("#dob").datepicker({
+        todayHighlight: true,
+        format: 'yyyy-mm-dd',
+        autoclose: true,
+      });
+      
+    $("#expirydate").datepicker({
+        todayHighlight: true,
+        format: 'yyyy-mm-dd',
+        autoclose: true,
+      });
+
+    $('#idNo').change(function(){
+
+        if($(this).val().length == 12){
+
+            var idn = $(this).val();
+            var year = '19'.concat(idn.substring(0, 2));
+            var month = idn.substring(2, 4)
+            var day = idn.substring(4, 6);
+            $('#dob').val(year+'-'+month+'-'+day);
+            
+        }
+
+    });
+
+    $("#same-address").change(function() {
+        if(this.checked) {
+            $('#address-1c').val($('#address-1').val()).prop('readonly', true);
+            $('#address-2c').val($('#address-2').val()).prop('readonly', true);
+            $('#postcodec').val($('#postcode').val()).prop('readonly', true);
+            $('#cityc').val($('#city').val()).prop('readonly', true);
+            $('#statec').val($('#state').val()).prop('disabled', true);
+            $('#countryc').val($('#country').val()).prop('disabled', true);
+        }
+        else {
+            $('#address-1c').val($('').val()).prop('readonly', false);
+            $('#address-2c').val($('').val()).prop('readonly', false);
+            $('#postcodec').val($('').val()).prop('readonly', false);
+            $('#cityc').val($('').val()).prop('readonly', false);
+            $('#statec').val($('').val()).prop('disabled', false);
+            $('#countryc').val($('1').val()).prop('disabled', false);
+            
+        }        
+      });
+
     $(".partCheck").click(function(){
         if ($(this).prop("checked")) {
               
             $('#idNo').prop('readonly', true);
             $('#passport').prop('readonly', false);
             $('#expirydate').prop('readonly', false);
+            $('#dob').prop('readonly', false);
+            $('#dob').css('pointer-events', 'auto');
+            $("#idNo").val("");
+
         } else {
             
             $('#idNo').prop('readonly', false);
             $('#passport').prop('readonly', true);
             $('#expirydate').prop('readonly', true);
+            $('#dob').prop('readonly', true);
+            $('#dob').css('pointer-events', 'none');
+            
         }
       });
 

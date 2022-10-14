@@ -151,6 +151,7 @@
                                                 </div>
                                             </div>
                                         </div>
+
                                         <div class="row p-2">
                                             <div class="col-sm-6">
                                                 <div class="row">
@@ -191,7 +192,7 @@
                                                 <div class="row">
                                                     <div class="col-sm-6">
                                                         <label for="dob" class="form-label">Date of Birth</label>
-                                                        <input type="date" id="dob" name="DOB" value="{{ date_format(date_create($profile->DOB ?? null), 'Y-m-d') ?? '' }}" class="form-control" aria-describedby="dob">
+                                                        <input type="date" id="dob" name="DOB" value="{{ date_format(date_create($profile->DOB ?? null), 'Y-m-d') ?? '' }}" class="form-control" aria-describedby="dob" style= "pointer-events: none;" readonly>
                                                     </div>
                                                     <div class="col-sm-6">
                                                         <label for="gender" class="form-label">Gender</label>

@@ -4,6 +4,7 @@ $(document).ready(function() {
         var b = $("#lastname").val();
         $("#fullName").val(a+ ' '+b);
     });
+    
     $('#idnumber').change(function(){
 
         if($(this).val().length == 12){
