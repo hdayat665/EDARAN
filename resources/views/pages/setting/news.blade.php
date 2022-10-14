@@ -34,10 +34,9 @@
         <!-- END panel-heading -->
         <!-- BEGIN panel-body -->
         <div class="panel-body">
-            <table id="data-table-default" class="table table-striped table-bordered align-middle">
+            <table id="tablenews" class="table table-striped table-bordered align-middle">
                 <thead>
                     <tr>
-                        <th width="9%" data-orderable="false" class="align-middle">Action</th>
                         <th class="text-nowrap">Title</th>
                         <th class="text-nowrap">Content</th>
                         <th class="text-nowrap">Attachment</th>
@@ -45,7 +44,7 @@
                         <th class="text-nowrap">Added Time</th>
                         <th class="text-nowrap">Modified By</th>
                         <th class="text-nowrap">Modified Time</th>
-
+                        <th width="9%" data-orderable="false" class="align-middle">Action</th>
 
 
                     </tr>
@@ -54,7 +53,6 @@
                     @if ($news)
                         @foreach ($news as $new)
                     <tr>
-                        <td><a href="javascript:;" data-bs-toggle="modal" id="editButton" data-id="{{$new->id}}" class="btn btn-outline-green"><i class="fa fa-pencil-alt"></i></a> <a id="deleteButton" data-id="{{$new->id}}" class="btn btn-outline-danger"><i class="fa fa-trash"></i></a></td>
                         <td>{{$new->title}}</td>
                         <td>{{$new->content}}</td>
                         <td>{{$new->file}}</td>
@@ -62,6 +60,7 @@
                         <td>{{$new->created_at}}</td>
                         <td>{{$new->modifiedBy}}</td>
                         <td>{{$new->updated_at}}</td>
+                        <td><a href="javascript:;" data-bs-toggle="modal" id="editButton" data-id="{{$new->id}}" class="btn btn-outline-green"><i class="fa fa-pencil-alt"></i></a> <a id="deleteButton" data-id="{{$new->id}}" class="btn btn-outline-danger"><i class="fa fa-trash"></i></a></td>
                     </tr>
                     @endforeach
                     @endif
@@ -85,27 +84,27 @@
                 <form id="addForm">
 
                     <div class="mb-3">
-                        <label>Title</label><br><br>
-                        <input type="text" class="form-control" name="title" placeholder="">
+                        <label class="form-label">Title</label><br><br>
+                        <input type="text" class="form-control" name="title" placeholder="" maxlength="100" style="text-transform:uppercase ;">
                     </div>
                     <div class="mb-3">
-                        <label>Source URL</label><br><br>
-                        <input type="text" class="form-control" name="sourceURL" placeholder="">
+                        <label class="form-label">Source URL</label><br><br>
+                        <input type="text" class="form-control" name="sourceURL" placeholder="" maxlength="255">
                     </div>
                     <div class="mb-3">
-                        <label>Content </label><br><br>
-                        <textarea class="form-control" rows="3" name="content"></textarea>
+                        <label class="form-label">Content</label><br><br>
+                        <textarea type="text" class="form-control" rows="3" name="content" maxlength="255" style="text-transform: uppercase;"></textarea>
                     </div>
                     <div class="mb-3">
-                        <label>File Upload </label><br><br>
+                        <label class="form-label">File Upload </label><br><br>
                         <input id="fileupload" type="file" name="file" multiple="multiple" ></input>
                     </div>
-                </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" id="saveButton">Save</button>
+                <button href="javascript:;" class="btn btn-primary" id="saveButton">Save</button>
             </div>
+            </form>
         </div>
     </div>
 </div>
@@ -121,28 +120,28 @@
                 <form id="editForm">
 
                     <div class="mb-3">
-                        <label>Title</label><br><br>
-                        <input type="text" class="form-control" name="title" id="title" placeholder="">
-                        <input type="hidden" class="form-control" name="id" id="idN" placeholder="">
+                        <label class="form-label">Title</label><br><br>
+                        <input type="text" class="form-control" name="title" id="title" placeholder="" maxlength="100" style="text-transform:uppercase ;">
+                        <input type="hidden" class="form-control" name="id" id="idN" placeholder="" maxlength="100" style="text-transform:uppercase ;">
                     </div>
                     <div class="mb-3">
-                        <label>Source URL</label><br><br>
-                        <input type="text" class="form-control" name="sourceURL" id="sourceURL" placeholder="">
+                        <label class="form-label">Source URL</label><br><br>
+                        <input type="text" class="form-control" name="sourceURL" id="sourceURL" placeholder="" maxlength="255">
                     </div>
                     <div class="mb-3">
-                        <label>Content </label><br><br>
-                        <textarea class="form-control" rows="3" name="content" id="contents"></textarea>
+                        <label class="form-label">Content </label><br><br>
+                        <textarea type="text" class="form-control" rows="3" name="content" id="contents" maxlength="255" style="text-transform: uppercase;"></textarea>
                     </div>
                     <div class="mb-3">
-                        <label>File Upload </label><br><br>
+                        <label class="form-label">File Upload </label><br><br>
                         <input id="fileupload" type="file" name="file" multiple="multiple" ></input>
                     </div>
-                </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary"  id="updateButton">Save</button>
+                <button href="javascript:;" class="btn btn-primary"  id="updateButton">Save</button>
             </div>
+            </form>
         </div>
     </div>
 </div>

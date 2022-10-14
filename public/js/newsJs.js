@@ -5,13 +5,22 @@ $(document).ready(function() {
         autoclose: true,
     });
 
-    $("#tableRoles").DataTable({
-        responsive: true,
+    $("#tablenews").DataTable({
+        responsive: false,
+        lengthMenu: [5, 10],
     });
 
     $(document).on("click", "#addButton", function() {
         $('#addModal').modal('show');
 
+    });
+
+    $("input[type=text]").keyup(function () {  
+        $(this).val($(this).val().toUpperCase());  
+    });
+
+    $("textarea[type=text]").keyup(function () {  
+        $(this).val($(this).val().toUpperCase());  
     });
 
     $(document).on("click", "#editButton", function() {
@@ -71,8 +80,29 @@ $(document).ready(function() {
         });
     }
 
-
     $('#saveButton').click(function(e) {
+
+        $("#addForm").validate({
+            // Specify validation rules
+            rules: {
+                
+                title: "required",
+                sourceURL:"required",
+                content: "required",
+                file: "required",
+                
+            },
+
+            messages: {
+               
+                title: "Please Insert Title",
+                sourceURL: "Please Insert URL",
+                content: "Please Insert Content",
+                file: "Upload Supporting Document",
+               
+            },
+            submitHandler: function(form) {
+
         requirejs(['sweetAlert2'], function(swal) {
 
             var data = new FormData(document.getElementById("addForm"));
@@ -104,10 +134,36 @@ $(document).ready(function() {
                 });
             });
 
+                });
+            }
         });
     });
+});
 
     $('#updateButton').click(function(e) {
+
+        $("#editForm").validate({
+            // Specify validation rules
+            rules: {
+                
+
+                title: "required",
+                sourceURL:"required",
+                content: "required",
+                file: "required",
+                
+            },
+
+            messages: {
+               
+                title: "Please Insert Title",
+                sourceURL: "Please Insert URL",
+                content: "Please Insert Content",
+                file: "Upload Supporting Document",
+               
+            },
+            submitHandler: function(form) {
+
         requirejs(['sweetAlert2'], function(swal) {
 
             var data = new FormData(document.getElementById("editForm"));
@@ -137,9 +193,9 @@ $(document).ready(function() {
 
 
                 });
-            });
-
         });
-    });
 
+             });
+         }
+    });
 });

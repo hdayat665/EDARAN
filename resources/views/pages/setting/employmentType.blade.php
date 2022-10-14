@@ -24,7 +24,7 @@
 
         <div class="panel-heading">
             <div class="col-md-6">
-                <a href="javascript:;" data-bs-toggle="modal" id="addButton" class="btn btn-primary">+ New employment Type</a>
+                <a href="javascript:;" data-bs-toggle="modal" id="addButton" class="btn btn-primary">+ New Employment Type</a>
             </div>
 
             <h4 class="panel-title"></h4>
@@ -34,7 +34,7 @@
         <!-- END panel-heading -->
         <!-- BEGIN panel-body -->
         <div class="panel-body">
-            <table id="data-table-default" class="table table-striped table-bordered align-middle">
+            <table id="tableemploymenttype" class="table table-striped table-bordered align-middle">
                 <thead>
                     <tr>
                         <th width="1%">NO</th>
@@ -84,19 +84,19 @@
                     <form id="addForm">
 
                         <div class="mb-3">
-                            <label>Employment Type Code* </label><br><br>
-                            <input type="text" class="form-control" name="code" placeholder="">
+                            <label class="form-label">Employment Type Code* </label><br><br>
+                            <input type="text" class="form-control" name="code" placeholder="" maxlength="100" style="text-transform:uppercase ;">
                         </div>
                         <div class="mb-3">
-                            <label>Employment Type* </label><br><br>
-                            <input type="text" class="form-control" name="type" placeholder="">
+                            <label class="form-label">Employment Type* </label><br><br>
+                            <input type="text" class="form-control" name="type" placeholder="" maxlength="100" style="text-transform:uppercase ;">
                         </div>
-                    </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" id="saveButton">Save</button>
+                    <button href="javascript:;" class="btn btn-primary" id="saveButton">Save</button>
                 </div>
+                </form>
             </div>
         </div>
     </div>
@@ -111,20 +111,20 @@
                     <form id="editForm">
 
                         <div class="mb-3">
-                            <label>Employment Type Code* </label><br><br>
-                            <input type="text" class="form-control" name="code" id="codes" placeholder="">
-                            <input type="hidden" class="form-control" name="id" id="idE" placeholder="">
+                            <label class="form-label">Employment Type Code* </label><br><br>
+                            <input type="text" class="form-control" name="code" placeholder="" maxlength="100" style="text-transform:uppercase ;">
+                            <input type="hidden" class="form-control" name="id" id="idE" placeholder="" maxlength="100" style="text-transform:uppercase ;">
                         </div>
                         <div class="mb-3">
-                            <label>Employment Type* </label><br><br>
-                            <input type="text" class="form-control" name="type" id="types" placeholder="">
+                            <label class="form-label">Employment Type* </label><br><br>
+                            <input type="text" class="form-control" name="type" placeholder="" maxlength="100" style="text-transform:uppercase ;">
                         </div>
-                    </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" id="updateButton">Save</button>
+                    <button href="javascript:;" class="btn btn-primary" id="updateButton">Save</button>
                 </div>
+                </form>
             </div>
         </div>
     </div>
