@@ -55,14 +55,14 @@
                                     </div> 
                                 <div class="col-sm-6">
                                         <label for="passport" class="form-label">Passport Number</label>
-                                        <input type="text" id="passport" name="passport" value="{{ $companion->passport ?? '' }}" class="form-control" aria-describedby="passport" readonly>
+                                        <input type="text" id="passportmc" name="passport" value="{{ $companion->passport ?? '' }}" class="form-control" aria-describedby="passport" readonly>
                                     </div>
                                    
                                 </div>
                             </div>
                             <div class="col-sm-3">
                                         <label for="expirydate" class="form-label">Expiry Date</label>
-                                        <input type="date" id="expirydatemc" name="expiryDate" value="{{ $companion->expiryDate ?? '' }}" class="form-control" aria-describedby="expirydate" style= "pointer-events: none;" readonly>
+                                        <input type="text" id="expirydatemc" name="expiryDate" value="{{ $companion->expiryDate ?? '' }}" class="form-control" aria-describedby="expirydate" style= "pointer-events: none;" readonly>
                                     </div>
                             <div class="col-sm-3">
                                 <label for="issuing-country" class="form-label">Issuing Country</label>
@@ -190,7 +190,7 @@
                             </div>
                             <div class="col-sm-6">
                                 <label for="date-joined-company" class="form-label">Date Joined Company</label>
-                                <input type="date" readonly  id="dateJoinedmc" name="dateJoined" value="{{ $companion->dateJoined ?? '' }}" class="form-control" aria-describedby="date-joined-company">
+                                <input type="text" readonly  id="dateJoinedmc" name="dateJoined" value="{{ $companion->dateJoined ?? '' }}" class="form-control" aria-describedby="date-joined-company" disabled>
                             </div>
                         </div>
                         <div class="row p-2">
@@ -460,7 +460,7 @@
                             </div>
                             <div class="col-sm-6">
                                 <label for="date-joined-company" class="form-label">Date Joined Company</label>
-                                <input type="date" id="date-joined-company" name="dateJoined" value="{{ date_format(date_create($companion->dateJoined), 'Y-m-d') }}" class="form-control" aria-describedby="date-joined-company">
+                                <input type="text" id="date-joined-company" name="dateJoined" value="{{ date_format(date_create($companion->dateJoined), 'Y-m-d') }}" class="form-control" aria-describedby="date-joined-company">
                             </div>
                         </div>
                         <div class="row p-2">

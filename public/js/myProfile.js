@@ -4,7 +4,45 @@ $(document).ready(function() {
         var b = $("#lastname").val();
         $("#fullName").val(a+ ' '+b);
     });
-    
+    $('#idnumber').change(function(){
+
+        if($(this).val().length == 12){
+
+            var idn = $(this).val();
+            var year = '19'.concat(idn.substring(0, 2));
+            var month = idn.substring(2, 4)
+            var day = idn.substring(4, 6);
+            $('#dob').val(year+'-'+month+'-'+day);
+            
+        }
+
+    });
+    $('#idnumber2').change(function(){
+
+        if($(this).val().length == 12){
+
+            var idn = $(this).val();
+            var year = '19'.concat(idn.substring(0, 2));
+            var month = idn.substring(2, 4)
+            var day = idn.substring(4, 6);
+            $('#dobmc').val(year+'/'+month+'/'+day);
+            
+        }
+
+    });
+    $('#idNoaddChild').change(function(){
+
+        if($(this).val().length == 12){
+
+            var idn = $(this).val();
+            var year = '19'.concat(idn.substring(0, 2));
+            var month = idn.substring(2, 4)
+            var day = idn.substring(4, 6);
+            $('#DOBChild').val(year+'/'+month+'/'+day);
+            
+        }
+
+    });
     $('#saveProfile').click(function(e) {
         
         $("#formProfile").validate({
@@ -461,11 +499,34 @@ $(document).ready(function() {
             $('#idnumber').prop('readonly', true);
             $('#passportmyprofile').prop('readonly', false);
             $('#expirydatemyprofile').prop('readonly', false);
+            $('#dob').prop('readonly', false);
+            $('#dob').css('pointer-events', 'auto');
+            $("#idnumber").val("");
         } else {
             
             $('#idnumber').prop('readonly', false);
             $('#passportmyprofile').prop('readonly', true);
             $('#expirydatemyprofile').prop('readonly', true);
+            $('#dob').prop('readonly', true);
+            $('#dob').css('pointer-events', 'none');
+        }
+      });
+    $(".partCheck2").click(function(){
+        if ($(this).prop("checked")) {
+              
+            $('#idnumber2').prop('readonly', true);
+            $('#passportmc').prop('readonly', false);
+            $('#expirydatemc').prop('readonly', false);
+            $('#dobmc').prop('readonly', false);
+            $('#dobmc').css('pointer-events', 'auto');
+        } else {
+            
+            $('#idnumber2').prop('readonly', false);
+            $('#passportmc').prop('readonly', true);
+            $('#expirydatemc').prop('readonly', true);
+            $('#dobmc').prop('readonly', true);
+            $('#dobmc').css('pointer-events', 'none');
+            
         }
       });
 
@@ -473,18 +534,34 @@ $(document).ready(function() {
         if ($(this).prop("checked")) {
               
             $('#idNoaddChild').prop('readonly', true);
-              
+            $('#passportChild').prop('readonly', false);
+            $('#expiryDateChild').prop('readonly', false);
+            $('#DOBChild').prop('readonly', false);
+            $('#DOBChild').css('pointer-events', 'auto');
+            
         } else {
             
             $('#idNoaddChild').prop('readonly', false);
-            
+            $('#passportChild').prop('readonly', true);
+            $('#expiryDateChild').prop('readonly', true);
+            $('#DOBChild').prop('readonly', true);
+            $('#DOBChild').css('pointer-events', 'none');
         }
       });
 
     $('#childModalAdd').click(function(e) {
         $('#add-children').modal('show');
     });
-
+    $("#dob").datepicker({
+        todayHighlight: true,
+        format: 'yyyy-mm-dd',
+        autoclose: true,
+      });
+      $("#dobmc").datepicker({
+        todayHighlight: true,
+        format: 'yyyy-mm-dd',
+        autoclose: true,
+      });
     $("#DOBChild").datepicker({
         todayHighlight: true,
         format: 'yyyy-mm-dd',
@@ -495,7 +572,11 @@ $(document).ready(function() {
         format: 'yyyy-mm-dd',
         autoclose: true,
       });
-
+      $("#dateJoinedmc").datepicker({
+        todayHighlight: true,
+        format: 'yyyy-mm-dd',
+        autoclose: true,
+      });
     $('#addChildren').click(function(e) {
 
         $("#addChildrenForm").validate({
@@ -1360,6 +1441,42 @@ $("#same-address").change(function() {
     }        
     });
 
+    $(".partCheck3").click(function(){
+        
+        if ($(this).prop("checked")) {
+              
+            $('#companyNamemc').prop('readonly', false);
+            $('#dateJoinedmc').prop('readonly', false);
+            $('#dateJoinedmc').prop('disabled', false);
+            $('#income-tax-number').prop('readonly', false);
+            $('#payslipmc').prop('disabled', false);
+            $('#extension-number').prop('readonly', false);
+            $('#officeNomc').prop('readonly', false);
+            $('#address1mc').prop('readonly', false);
+            $('#address2mc').prop('readonly', false);
+            $('#cityEmc').prop('readonly', false);
+            $('#postcodeEmc').prop('readonly', false);
+            $('#stateEmc').prop('disabled', false);
+            $('#countryEmc').prop('disabled', false);
+              
+        } else {
+            
+            $('#companyNamemc').prop('readonly', true);
+            $('#dateJoinedmc').prop('readonly', true);
+            $('#dateJoinedmc').prop('disabled', true);
+            $('#payslipmc').prop('disabled', true);
+            $('#income-tax-number').prop('readonly', true);
+            $('#extension-number').prop('readonly', true);
+            $('#officeNomc').prop('readonly', true);
+            $('#address1mc').prop('readonly', true);
+            $('#address2mc').prop('readonly', true);
+            $('#cityEmc').prop('readonly', true);
+            $('#postcodeEmc').prop('readonly', true);
+            $('#stateEmc').prop('disabled', true);
+            $('#countryEmc').prop('disabled', true);
+            
+        }
+      }); 
     $("#same-address5").change(function() {
         if(this.checked) {
             $('#address1S').val($('#address-1').val()).prop('readonly', true);

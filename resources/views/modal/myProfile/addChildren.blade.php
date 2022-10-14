@@ -44,7 +44,7 @@
                             <div class="row">
                                 <div class="col-sm-6">
                                     <label for="dob" class="form-label">Date of Birth</label>
-                                    <input type="text" id="DOBChild" name="DOB" class="form-control" aria-describedby="dob">
+                                    <input type="text" id="DOBChild" name="DOB" class="form-control" aria-describedby="dob" readonly>
                                 </div>
                                 <div class="col-sm-6">
                                     <label for="age" class="form-label">Age</label>
@@ -58,11 +58,11 @@
                             <div class="row">
                                 <div class="col-sm-6">
                                     <label for="passport" class="form-label">Passport Number</label>
-                                    <input type="text" id="" name="passport" class="form-control" aria-describedby="passport">
+                                    <input type="text" id="passportChild" name="passport" class="form-control" aria-describedby="passport" readonly>
                                 </div>
                                 <div class="col-sm-6">
                                     <label for="expirydate" class="form-label">Expiry Date</label>
-                                    <input type="text" id="expiryDateChild" name="expiryDate" class="form-control" aria-describedby="expirydate">
+                                    <input type="text" id="expiryDateChild" name="expiryDate" class="form-control" aria-describedby="expirydate" readonly>
                                 </div>
                             </div>
                         </div>
