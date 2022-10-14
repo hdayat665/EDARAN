@@ -2,7 +2,7 @@
 
 @section('content')
 
-<div class="row bg-white " id="registerTenant">
+<div class="row bg-white " id="registerTenant" style="height: 100%;">
 
     <div class="col-sm-6" style="display: flex; justify-content: center; align-items: center; background-image: url({{env('ASSETS_URL')}}/img/orbit/bh.png);background-repeat: no-repeat; background-size: cover;">
         <div class="mx-auto" style="width: 55rem;">
@@ -17,9 +17,9 @@
             </div>
         </div>
     </div>
-    <div class="col-sm-6" style="display: flex; justify-content: center; align-items: center; height: 98vh;">
-        <div class="mx-auto" style="width: 30rem;">
-            <div class="card-body bg-white">
+    <div class="col-sm-6" style="display: flex; justify-content: center; align-items: center;">
+        <div class="mx-auto" style="width: 30rem; height: 100%;" >
+            <div class="card-body bg-white" style="height: 100%;">
                 <div class="login-header mb-30px">
                     <div class="brand">
                     </div>
@@ -31,31 +31,26 @@
 
                 <form id="form-register" class="fs-13px">
                     <h4>Domain Information</h4><br>
-                    <div class="form-floating mb-15px">
-                        <input type="text"class="form-control h-45px fs-13px" name="firstName" placeholder="firstname" id="firstname" />
-                        <label for="firstname" class="d-flex align-items-center fs-13px text-gray-600">First Name</label>
+                    <div class="form mb-15px">
+                        <input type="text"class="form-control h-45px fs-13px" name="firstName" placeholder="FIRST NAME" id="firstname" style="text-transform:uppercase"/>
                     </div>
-                    <div class="form-floating mb-15px">
-                        <input type="text"class="form-control h-45px fs-13px" name="lastName" placeholder="lastname" id="lastname" />
-                        <label for="lastname" class="d-flex align-items-center fs-13px text-gray-600">Last Name</label>
+                    <div class="form mb-15px">
+                        <input type="text"class="form-control h-45px fs-13px" name="lastName" placeholder="LAST NAME" id="lastname" style="text-transform:uppercase"/>
                     </div>
-                    <div class="form-floating mb-15px">
-                        <input type="text" name="workingEmail" class="form-control h-45px fs-13px" placeholder="Email Address" id="adminEmail" />
-                        <label for="adminEmail" class="d-flex align-items-center fs-13px text-gray-600">Email Address</label>
+                    <div class="form mb-15px">
+                        <input type="text" name="workingEmail" class="form-control h-45px fs-13px" placeholder="EMAIL ADDRESS" id="adminEmail" />
                     </div>
-                    <div class="form-floating mb-15px">
-                        <input type="text" name="tenant" class="form-control h-45px fs-13px" placeholder="Tenant Name" id="tenancyName" />
-                        <label for="tenancyName" class="d-flex align-items-center fs-13px text-gray-600">Domain Name</label>
+                    <div class="form mb-15px">
+                        <input type="text" name="tenant" class="form-control h-45px fs-13px" placeholder="DOMAIN NAME" id="tenancyName" style="text-transform:uppercase"/>
                     </div>
-                    <div class="form-floating mb-15px">
-                        <input type="text" name="tenancy" class="form-control h-45px fs-13px" placeholder="Tenancy Name" id="tenantName" />
-                        <label for="tenantName" class="d-flex align-items-center fs-13px text-gray-600">Company Name</label>
+                    <div class="form mb-15px">
+                        <input type="text" name="tenancy" class="form-control h-45px fs-13px" placeholder="COMPANY NAME" id="tenantName" style="text-transform:uppercase"/>
                     </div>
-                    <div class="form-floating mb-15px">
-                        <input type="text"class="form-control h-45px fs-13px" name="phoneNo" placeholder="phonenumber" id="phonenumber" />
-                        <label for="phonenumber" class="d-flex align-items-center fs-13px text-gray-600">Phone Number</label>
+                    <div class="form mb-15px">
+                        <input type="text"class="form-control h-45px fs-13px" name="phoneNo" placeholder="PHONE NUMBER" id="phonenumber" />
                         <input type="hidden" name="package" value="{{$package}}" />
                     </div>
+
                     <div class="form-group form-check mb-15px">
 							<input type="checkbox" class="form-check-input" id="exampleCheck1">
 							<p  class="form-check-label" for="exampleCheck1">Your data will be allocated in Malaysia </a> </p>

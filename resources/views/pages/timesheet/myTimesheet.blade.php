@@ -13,6 +13,11 @@
              <button class="btn btn-primary" type="button" id="submitTimesheetApproval">Submit</button>
         </div>
     </div>
+    <div style="height: 80px; display: flex; align-items: center; justify-content: center; visibility: hidden;">
+        <div class="d-grid gap-2 col-6 mx-auto">
+            <button class="btn btn-primary" type="button" id="cancelTimesheetApproval">Cancel</button>
+        </div>
+    </div>
 </div>
 @include('modal.timesheet.addEventModal')
 @include('modal.timesheet.editEventModal')

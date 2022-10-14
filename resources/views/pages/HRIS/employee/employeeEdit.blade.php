@@ -8,7 +8,7 @@
             <div class="card">
                 <div class="card-body">
                     <div class="profile-pic m-3">
-                        <img src="../assets/img/user/user-13.jpg" width="100px" class="rounded d-block" alt="Profile Picture">
+                        <img src="../assets/img/user/user-13.jpg" width="100px" class="rounded d-block" alt="Profile Picture" data-bs-toggle="modal" data-bs-target="#modal-dialog">
                         <h4 class="mt-3 mb-0 fw-bold">{{$profile->fullName ?? 'Admin Tenant'}}</h4>
                         <p>{{$employment->employeeId ?? '-'}}</p>
                         <span class="badge bg-success d-block p-2">Active</span>
@@ -132,21 +132,21 @@
                                         <div class="row p-2">
                                             <div class="col-sm-6">
                                                 <label for="firstname" class="form-label">Full Name</label>
-                                                <input type="text" id="firstname" name="fullName" value="{{$profile->fullName ?? ''}}" class="form-control" aria-describedby="firstname">
+                                                <input type="text" id="fullname" name="fullName" value="{{$profile->fullName ?? ''}}" class="form-control" aria-describedby="firstname" readonly>
                                             </div>
                                             <div class="col-sm-6">
                                                 <div class="row">
                                                     <div class="col-sm-6 ">
-                                                        <div class="form-check form-switch align-right">
-                                                            <input class="form-check-input" type="checkbox" name="nonNetizen" {{($profile->nonNetizen ?? '') ? 'checked' : ''}} id="citizen">
-                                                            <label class="form-check-label" for="citizen">
-                                                                Non-Citizen
-                                                            </label>
-                                                        </div>
+                                                    <div class="form-check form-switch align-right">
+                                                    <input class="form-check-input partCheck" value="door3" type="checkbox" name="nonNetizen" {{($profile->nonNetizen ?? '') ? 'checked' : ''}} id="citizen">
+                                                    <label class="form-label" for="citizen">
+                                                        Non-Citizen
+                                                    </label>
+                                                </div>
                                                     </div>
                                                     <div class="col-sm-6">
                                                         <label for="lastname" class="form-label">Identification Number*</label>
-                                                        <input type="text" value="{{$profile->idNo ?? ''}}" name="idNo" id="lastname" class="form-control" aria-describedby="lastname">
+                                                        <input type="text" value="{{$profile->idNo ?? ''}}" name="idNo" id="idNo" class="form-control" aria-describedby="lastname">
                                                     </div>
                                                 </div>
                                             </div>
@@ -156,18 +156,19 @@
                                                 <div class="row">
                                                     <div class="col-sm-6">
                                                         <label for="passport" class="form-label">Passport Number</label>
-                                                        <input type="text" id="passport" name="passport" value="{{ $profile->passport ?? '' }}" class="form-control" aria-describedby="passport">
+                                                        <input type="text" id="passport" name="passport" value="{{ $profile->passport ?? '' }}" class="form-control" aria-describedby="passport" readonly>
                                                     </div>
                                                     <div class="col-sm-6">
                                                         <label for="expirydate" class="form-label">Expiry Date</label>
-                                                        <input type="date" id="expirydate" name="expiryDate" value="{{ date_format(date_create($profile->expiryDate ?? null), 'Y-m-d') ?? '' }}" class="form-control" aria-describedby="expirydate">
+                                                        <input type="date" id="expirydate" name="expiryDate" value="{{ date_format(date_create($profile->expiryDate ?? null), 'Y-m-d') ?? '' }}" class="form-control" aria-describedby="expirydate" readonly>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="col-sm-6">
                                                 <label for="issuing-country" class="form-label">Issuing Country</label>
                                                 <select class="form-select" name="issuingCountry">
-                                                    <option value="0" label="Please Choose"  ></option>
+                                                    <option value="" label="Please Choose"  ></option>
+                                                    <option value="MY" label="Malaysia" selected ></option>
                                                     <?php
                                                     $americass = americas();
                                                     $asias = asias();
@@ -196,7 +197,7 @@
                                                         <label for="gender" class="form-label">Gender</label>
                                                         <select class="form-select" name="gender">
                                                             <?php $gender = gender() ?>
-                                                            <option value="0" label="Please Choose"  ></option>
+                                                            <option value="" label="Please Choose"  ></option>
                                                             @foreach ($gender as $key => $status)
                                                             <option value="{{$key}}" <?php echo ($key == $profile->gender) ? 'selected="selected"' : '' ?> >{{$status}}</option>
                                                             @endforeach
@@ -208,7 +209,7 @@
                                                 <label for="issuing-country" class="form-label">Marital Status</label>
                                                 <select class="form-select" name="maritialStatus">
                                                     <?php $MaritalStatus = getMaritalStatus() ?>
-                                                    <option value="0" label="Please Choose"  ></option>
+                                                    <option value="" label="Please Choose"  ></option>
                                                     @foreach ($MaritalStatus as $key => $status)
                                                     <option value="{{$key}}" <?php echo ($key == $profile->maritialStatus) ? 'selected="selected"' : '' ?> >{{$status}}</option>
                                                     @endforeach
@@ -220,7 +221,7 @@
                                                 <label for="religion" class="form-label">Religion</label>
                                                 <select class="form-select" name="religion">
                                                     <?php $religion = religion() ?>
-                                                    <option value="0" label="Please Choose"  ></option>
+                                                    <option value="" label="Please Choose"  ></option>
                                                     @foreach ($religion as $key => $status)
                                                     <option value="{{$key}}"  <?php echo ($key == $profile->religion) ? 'selected="selected"' : '' ?>>{{$status}}</option>
                                                     @endforeach
@@ -230,7 +231,7 @@
                                                 <label for="race" class="form-label">Race</label>
                                                 <select class="form-select" name="race">
                                                     <?php $race = race() ?>
-                                                    <option value="0" label="Please Choose"  ></option>
+                                                    <option value="" label="Please Choose"  ></option>
                                                     @foreach ($race as $key => $status)
                                                     <option value="{{$key}}"  <?php echo ($key == $profile->race) ? 'selected="selected"' : '' ?>>{{$status}}</option>
                                                     @endforeach
@@ -251,13 +252,60 @@
                                             <label for="extension-number" class="form-label">Extension Number</label>
                                             <input type="text" id="extension-number" name="extensionNo"value="{{$profile->extensionNo ?? ''}}" class="form-control" aria-describedby="extension-number">
                                         </div>
-                                    </form>
+                                    
                                     <p class="text-end mb-0 mt-3">
                                         <a href="javascript:;" class="btn btn-white me-5px">Previous</a>
-                                        <a href="javascript:;" id="saveProfile" class="btn btn-primary">Save</a>
+                                        
+                                        <button href="javascript:;" id="saveProfile" class="btn btn-primary">Save</button>
                                     </p>
+                                    </form>
                                 </div>
+                                <div class="modal fade" id="modal-dialog">
+									<div class="modal-dialog">
+										<div class="modal-content">
+										<div class="modal-header">
+											<h4 class="modal-title">Update Profile Picture</h4>
+											<button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
+										</div>
+										<div class="modal-body">
+										<div class="col-sm-6">
+												
+												<input class="form-check-input" type="checkbox" id="Gravatar" />
+  												<label class="form-check-label" for="Gravatar">Use Gravatar profile picture</label><br><br>
+												<label for="edit-profile-picture" class="form-label">Profile Picture</label>
+												<input type="file" id="edit-profile-picture" class="form-control" aria-describedby="edit-profile-picture">
+												
+												<div class="d-flex" >
+												 <div class="mr-auto p-2" style="display: none;" id="showImage">
+												  <div class="col-12 border m-2">
+												    <div id="croppie" class="mt-2">
+                                                       
+                                                          <img src="" alt="">
+                                                       							     
+                                                    </div>
+													<a href="javascript:;" class="btn btn-primary" id="crop">Crop</a>
+                                                  </div>
+                                                 </div>
 
+												 <div class="ml-auto p-2" style="display: none;" id="showCroppedImage">
+												  <div class="col-12">
+												  <p class="text-left bold" ><strong>Cropped Picture</strong></p>
+												    <div id="result_image"  class="p-2 m-2 border">
+                                                       <img src="" alt="">
+                                                    </div> 
+                                                  </div>
+                                                 </div>
+                                                </div>
+												
+										</div>
+										</div>
+										<div class="modal-footer">
+											<a href="javascript:;" class="btn btn-white" data-bs-dismiss="modal">Close</a>
+											<a href="javascript:;" class="btn btn-primary">Save</a>
+										</div>
+										</div>
+									</div>
+									</div>
                                 @include('pages.HRIS.employee.myAddress')
 
                                 @include('pages.HRIS.employee.myEC')

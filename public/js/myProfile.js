@@ -1,6 +1,85 @@
 $(document).ready(function() {
-
+    $("#firstname,#lastname").change(function(){
+        var a = $("#firstname").val();
+        var b = $("#lastname").val();
+        $("#fullName").val(a+ ' '+b);
+    });
+    
     $('#saveProfile').click(function(e) {
+        
+        $("#formProfile").validate({
+            // Specify validation rules
+            rules: {
+                
+                personalEmail: {
+                    required: true,
+                    email: true
+                },
+
+                firstName: "required",
+                lastName:"required",
+                fullName:"required",
+                gender:"required",
+                maritialStatus:"required",
+                religion:"required",
+                race:"required",
+                idNo: {
+                    required: true,
+                    digits: true,
+                    rangelength: [12, 12]
+                },
+                phoneNo: {
+                    required: true,
+                    digits: true,
+                    
+                },
+                homeNo: {
+                    digits: true,
+
+                    
+                },
+                extensionNo: {
+                    digits: true,
+                    
+                },
+
+
+                
+            },
+
+            messages: {
+                personalEmail: {
+                    required: "Please Insert Email Address",
+                    email: "Please Provide Valid Email Address",
+                    
+                },
+                firstName: "Please Insert Your First Name",
+                lastName: "Please Insert Your Last Name",
+                fullName:"Please Insert Your Full Name",
+                gender:"Please Choose Your Gender",
+                maritialStatus:"Please Choose Your Marital Status",
+                religion:"Please Choose Your Religion",
+                race:"Please Choose Your Race",
+                idNo: {
+                    required: "Please Insert Identification Number",
+                    digits: "Please Insert Correct Identification Number Without ' - ' or Space",
+                    rangelength: "Please Provide Valid Identification Number"
+                },
+                phoneNo: {
+                    required: "Please Insert Phone Number",
+                    digits: "Please Insert Correct Identification Number Without ' - ' or Space",
+                    
+                },
+                homeNo: {
+                    digits: "Please Insert Correct Identification Number Without ' - ' or Space",
+                    
+                },
+                extensionNo: {
+                    digits: "Please Insert Correct Identification Number Without ' - ' or Space",
+                    
+                },
+            },
+            submitHandler: function(form) {
 
         requirejs(['sweetAlert2'], function(swal) {
 
@@ -35,10 +114,60 @@ $(document).ready(function() {
                 });
             });
 
+                });
+            }
         });
     });
 
     $('#saveAddress').click(function(e) {
+
+        $("#formAddress").validate({
+            // Specify validation rules
+            rules: {
+                
+                address1: "required",
+                city: "required",
+                state: "required",
+                country: "required",
+                postcode: {
+                    required: true,
+                    digits: true,
+                    rangelength: [5, 5]
+                },
+                address1c: "required",
+                cityc: "required",
+                statec: "required",
+                countryc: "required",
+                postcodec: {
+                    required: true,
+                    digits: true,
+                    rangelength: [5, 5]
+                },
+            },
+
+            messages: {
+                address1: "Please Insert Your Address",
+                city: "Please Insert Your City",
+                state: "Please Choose Your State",
+                country: "required",
+                postcode: {
+                    required: "Please Insert Your Postcode",
+                    digits: "Please Enter Valid Postcode",
+                    rangelength: "Please Enter Valid Postcode"
+                },
+                address1c: "Please Insert Your Address",
+                cityc: "Please Insert Your City",
+                statec: "Please Choose Your State",
+                countryc: "required",
+                postcodec: {
+                    required: "Please Insert Your Postcode",
+                    digits: "Please Enter Valid Postcode",
+                    rangelength: "Please Enter Valid Postcode"
+                },
+                
+               
+            },
+            submitHandler: function(form) {
 
         requirejs(['sweetAlert2'], function(swal) {
 
@@ -71,12 +200,58 @@ $(document).ready(function() {
 
 
                 });
-            });
+                    });
 
+                });
+            }
         });
     });
 
     $('#saveEmergency').click(function(e) {
+        
+        $("#formEmergency").validate({
+            // Specify validation rules
+            rules: {
+                
+                firstName: "required",
+                lastName: "required",
+                contactNo: {
+                    required: true,
+                    digits: true,
+                    
+                },
+                relationship: "required",
+                address1: "required",
+                postcode: {
+                    required: true,
+                    digits: true,
+                    rangelength: [5, 5]
+                },
+                city: "required",
+                state: "required",
+            },
+
+            messages: {
+                firstName: "Please Insert First Name",
+                lastName: "Please Insert Last Name",
+                contactNo: {
+                    required: "Please Insert Contact Number",
+                    digits: "Please Enter Correct Contact Number",
+                    
+                },
+                relationship: "Please Insert Relationship",
+                address1: "Please Insert Address",
+                postcode: {
+                    required: "Please Insert Your Postcode",
+                    digits: "Please Enter Valid Postcode",
+                    rangelength: "Please Enter Valid Postcode"
+                },
+                city: "Please Insert City",
+                state: "Please Choose State",
+            },
+            submitHandler: function(form) {
+
+
 
         requirejs(['sweetAlert2'], function(swal) {
 
@@ -108,15 +283,85 @@ $(document).ready(function() {
                     }
 
 
+                    });
                 });
-            });
 
-        });
+            });
+        }
+    });
     });
 
     $('#addCompanion').click(function(e) {
 
+        
+
+        $("#addCompanionForm").validate({
+            // Specify validation rules
+            rules: {
+                
+                firstName: "required",
+                lastName: "required",
+                idNo: {
+                    required: true,
+                    digits: true,
+                    rangelength: [12, 12]
+                },
+                contactNo: {
+                    digits: true,
+                    
+                },
+                age: {
+                    required: true,
+                    digits: true,
+                    
+                },
+                address1: "required",
+                city: "required",
+                state: "required",
+                country: "required",
+                postcode: {
+                    required: true,
+                    digits: true,
+                    rangelength: [5, 5]
+                },
+                
+                
+            },
+
+            messages: {
+                firstName: "Please Insert First Name",
+                lastName: "Please Insert Last Name",
+                idNo: {
+                    required: "Please Insert Identification Number",
+                    digits: "Please Insert Correct Identification Number Without ' - ' or Space",
+                    rangelength: "Please Provide Valid Identification Number"
+                },
+                contactNo: {
+                    digits: "Please Insert Correct Contact Number Without ' - ' or Space",
+                    
+                },
+                age: {
+                    required: "Please Insert Age",
+                    digits: "Please Insert Correct Age",
+                    
+                },
+                address1: "Please Insert Your Address",
+                city: "Please Insert Your City",
+                state: "Please Choose Your State",
+                country: "required",
+                postcode: {
+                    required: "Please Insert Your Postcode",
+                    digits: "Please Enter Valid Postcode",
+                    rangelength: "Please Enter Valid Postcode"
+                },
+                
+            },
+            submitHandler: function(form) {
+
+
+
         requirejs(['sweetAlert2'], function(swal) {
+            
 
             var data = new FormData(document.getElementById("addCompanionForm"));
 
@@ -150,7 +395,9 @@ $(document).ready(function() {
             });
 
         });
-    });
+    }
+});
+});
 
     companion = ['1', '2', '3', '4'];
 
@@ -197,12 +444,91 @@ $(document).ready(function() {
     $("#tableChildren").DataTable({
         responsive: true,
     });
+    $("#firstName1,#lastName1").change(function(){
+        var a = $("#firstName1").val();
+        var b = $("#lastName1").val();
+        $("#fullName1").val(a+ ' '+b);
+    });
+    $("#firstNameChild,#lastNameChild").change(function(){
+        var a = $("#firstNameChild").val();
+        var b = $("#lastNameChild").val();
+        $("#fullNameChild").val(a+ ' '+b);
+    });
+
+    $(".partCheck4").click(function(){
+        if ($(this).prop("checked")) {
+              
+            $('#idNoaddChild').prop('readonly', true);
+              
+        } else {
+            
+            $('#idNoaddChild').prop('readonly', false);
+            
+        }
+      });
 
     $('#childModalAdd').click(function(e) {
         $('#add-children').modal('show');
     });
 
+    $("#DOBChild").datepicker({
+        todayHighlight: true,
+        format: 'yyyy-mm-dd',
+        autoclose: true,
+      });
+      $("#expiryDateChild").datepicker({
+        todayHighlight: true,
+        format: 'yyyy-mm-dd',
+        autoclose: true,
+      });
+
     $('#addChildren').click(function(e) {
+
+        $("#addChildrenForm").validate({
+            // Specify validation rules
+            rules: {
+                
+                firstName: "required",
+                lastName: "required",
+                idNo: {
+                    required: true,
+                    digits: true,
+                    rangelength: [12, 12]
+                },
+                age: {
+                    required: true,
+                    digits: true,
+                    
+                },
+                gender:"required",
+                maritalStatus:"required",
+                educationType:"required",
+                educationLevel:"required",
+                
+            },
+
+            messages: {
+                firstName: "Please Insert First Name",
+                lastName: "Please Insert Last Name",
+                idNo: {
+                    required: "Please Insert Identification Number",
+                    digits: "Please Insert Correct Identification Number Without ' - ' or Space",
+                    rangelength: "Please Provide Valid Identification Number"
+                },
+                age: {
+                    required: "Please Insert Age",
+                    digits: "Please Insert Correct Age",
+                    
+                },
+                gender:"Please Choose Gender",
+                maritalStatus:"Please Choose Marital Status",
+                educationType:"Please Choose Education Type",
+                educationLevel:"Please Choose Education Level",
+
+            },
+            submitHandler: function(form) {
+
+
         requirejs(['sweetAlert2'], function(swal) {
 
             var data = new FormData(document.getElementById("addChildrenForm"));
@@ -231,11 +557,13 @@ $(document).ready(function() {
                     }
 
 
+                    });
                 });
-            });
 
+            });
+        }
         });
-    });
+        });
 
     $('#editChildren').click(function(e) {
         requirejs(['sweetAlert2'], function(swal) {
@@ -404,7 +732,65 @@ $(document).ready(function() {
         $('#add-sibling').modal('show');
     });
 
+    $("#DOBsibling").datepicker({
+        todayHighlight: true,
+        format: 'yyyy-mm-dd',
+        autoclose: true,
+      });
+      
     $('#addSibling').click(function(e) {
+
+        $("#addSiblingForm").validate({
+            // Specify validation rules
+            rules: {
+                
+                firstName: "required",
+                lastName: "required",
+                DOB: "required",
+                gender: "required",
+                contactNo: {
+                    digits: true,
+                    required: true,
+                    
+                },
+                relationship: "required",
+                address1: "required",
+                postcode: {
+                    required: true,
+                    digits: true,
+                    rangelength: [5, 5]
+                },
+                city: "required",
+                state: "required",
+                
+            },
+
+            messages: {
+                firstName: "Please Insert First Name",
+                lastName: "Please Insert Last Name",
+                DOB: "Please Insert Date of Birth",
+                gender: "Please Choose Gender",
+                contactNo: {
+                    digits: "Please Insert Correct Contact Number Without ' - ' or Space",
+                    required: "please insert contact number"
+                    
+                },
+                relationship: "Please Choose Relationship",
+                address1: "Please Insert Address",
+                postcode: {
+                    required: "Please Insert Your Postcode",
+                    digits: "Please Enter Valid Postcode",
+                    rangelength: "Please Enter Valid Postcode"
+                },
+                city: "Please Insert City",
+                state: "Please Choose State",
+               
+
+            },
+            submitHandler: function(form) {
+
+
+
         requirejs(['sweetAlert2'], function(swal) {
 
             var data = new FormData(document.getElementById("addSiblingForm"));
@@ -437,6 +823,8 @@ $(document).ready(function() {
             });
 
         });
+    }
+    });
     });
 
     $('#editSibling').click(function(e) {
@@ -607,7 +995,61 @@ $(document).ready(function() {
         $('#add-parent').modal('show');
     });
 
+    $("#DOBparent").datepicker({
+        todayHighlight: true,
+        format: 'yyyy-mm-dd',
+        autoclose: true,
+      });
+
     $('#addParent').click(function(e) {
+
+        $("#addParentForm").validate({
+            // Specify validation rules
+            rules: { 
+                firstName: "required",
+                lastName: "required",
+                DOB:"required",
+                gender:"required",
+                contactNo: {
+                    required: true,
+                    digits: true,
+                    
+                },
+                relationship:"required",
+                address1:"required",
+                postcode: {
+                    required: true,
+                    digits: true,
+                    rangelength: [5, 5]
+                },
+                city:"required",
+                state:"required",
+            },
+
+            messages: {
+                firstName: "PLEASE INSERT FIRST NAME",
+                lastName: "PLEASE INSERT LAST NAME",
+                DOB: "PLEASE INSERT DATE OF BIRTH",
+                gender: "PLEASE CHOOSE GENDER",
+                contactNo: {
+                    required: "PLEASE INSERT CONTACT NUMBER",
+                    digits: "PLEASE INSERT VALID CONTACT NUMBER WITHOUT ' - ' AND SPACE",
+                    
+                },
+                relationship:"PLEASE CHOOSE RELATIONSHIP",
+                address1:"PLEASE INSERT ADDRESS",
+                postcode: {
+                    required: "PLEASE INSERT YOUR POSTCODE",
+                    digits: "PLEASE ENTER VALID POSTCODE",
+                    rangelength: "PLEASE ENTER VALID POSTCODE"
+                },
+                city:"PLEASE INSERT CITY",
+                state:"PLEASE CHOOSE STATE",
+            },
+
+            submitHandler: function(form) {
+
+
         requirejs(['sweetAlert2'], function(swal) {
 
             var data = new FormData(document.getElementById("addParentForm"));
@@ -636,11 +1078,13 @@ $(document).ready(function() {
                     }
 
 
+                    });
                 });
-            });
 
-        });
-    });
+            });
+        }
+     });
+});
 
     $('#editParent').click(function(e) {
         requirejs(['sweetAlert2'], function(swal) {
@@ -821,3 +1265,103 @@ $(document).ready(function() {
 
 
 })
+
+$("#same-address").change(function() {
+    if(this.checked) {
+        $('#address-1c').val($('#address-1').val()).prop('readonly', true);
+        $('#address-2c').val($('#address-2').val()).prop('readonly', true);
+        $('#postcodec').val($('#postcode').val()).prop('readonly', true);
+        $('#cityc').val($('#city').val()).prop('readonly', true);
+        $('#statec').val($('#state').val()).prop('disabled', true);
+        $('#countryc').val($('#country').val()).prop('disabled', true);
+    }
+    else {
+        $('#address-1c').prop('readonly', false);
+        $('#address-2c').prop('readonly', false);
+        $('#postcodec').prop('readonly', false);
+        $('#cityc').prop('readonly', false);
+        $('#statec').prop('disabled', false);
+        $('#countryc').prop('disabled', false);
+        
+    }        
+  });
+  $("#same-address2").change(function() {
+    if(this.checked) {
+        $('#address1parent').val($('#address-1').val()).prop('readonly', true);
+        $('#address2parent').val($('#address-2').val()).prop('readonly', true);
+        $('#postcodeparent').val($('#postcode').val()).prop('readonly', true);
+        $('#cityparent').val($('#city').val()).prop('readonly', true);
+        $('#stateparent').val($('#state').val()).prop('disabled', true);
+        $('#countryparent').val($('#country').val()).prop('disabled', true);
+    }
+    else {
+        $('#address1parent').val($('').val()).prop('readonly', false);
+        $('#address2parent').val($('').val()).prop('readonly', false);
+        $('#postcodeparent').val($('').val()).prop('readonly', false);
+        $('#cityparent').val($('').val()).prop('readonly', false);
+        $('#stateparent').val($('').val()).prop('disabled', false);
+        $('#countryparent').val($('my').val()).prop('disabled', false);
+        
+    }        
+  });
+
+ 
+  $("#same-address3").change(function() {
+    if(this.checked) {
+        $('#address1P1').val($('#address-1').val()).prop('readonly', true);
+        $('#address2P1').val($('#address-2').val()).prop('readonly', true);
+        $('#postcodeP1').val($('#postcode').val()).prop('readonly', true);
+        $('#cityP1').val($('#city').val()).prop('readonly', true);
+        $('#stateP1').val($('#state').val()).prop('disabled', true);
+        $('#countryP').val($('#country').val()).prop('disabled', true);
+    }
+    else {
+        $('#address1P1').val($('').val()).prop('readonly', false);
+        $('#address2P1').val($('').val()).prop('readonly', false);
+        $('#postcodeP1').val($('').val()).prop('readonly', false);
+        $('#cityP1').val($('').val()).prop('readonly', false);
+        $('#stateP1').val($('').val()).prop('disabled', false);
+        $('#countryP').val($('my').val()).prop('disabled', false);
+        
+    }        
+  });
+
+  $("#same-address4").change(function() {
+    if(this.checked) {
+        $('#address1sibling').val($('#address-1').val()).prop('readonly', true);
+        $('#address2sibling').val($('#address-2').val()).prop('readonly', true);
+        $('#postcodesibling').val($('#postcode').val()).prop('readonly', true);
+        $('#citysibling').val($('#city').val()).prop('readonly', true);
+        $('#statesibling').val($('#state').val()).prop('disabled', true);
+        $('#countrysibling').val($('#country').val()).prop('disabled', true);
+    }
+    else {
+        $('#address1sibling').val($('').val()).prop('readonly', false);
+        $('#address2sibling').val($('').val()).prop('readonly', false);
+        $('#postcodesibling').val($('').val()).prop('readonly', false);
+        $('#citysibling').val($('').val()).prop('readonly', false);
+        $('#statesibling').val($('').val()).prop('disabled', false);
+        $('#countrysibling').val($('my').val()).prop('disabled', false);
+        
+    }        
+    });
+
+    $("#same-address5").change(function() {
+        if(this.checked) {
+            $('#address1S').val($('#address-1').val()).prop('readonly', true);
+            $('#address2S').val($('#address-2').val()).prop('readonly', true);
+            $('#postcodeS').val($('#postcode').val()).prop('readonly', true);
+            $('#cityS').val($('#city').val()).prop('readonly', true);
+            $('#stateS').val($('#state').val()).prop('disabled', true);
+            $('#countrySA').val($('#country').val()).prop('disabled', true);
+        }
+        else {
+            $('#address1S').prop('readonly', false);
+            $('#address2S').prop('readonly', false);
+            $('#postcodeS').prop('readonly', false);
+            $('#cityS').prop('readonly', false);
+            $('#stateS').prop('disabled', false);
+            $('#countrySA').prop('disabled', false);
+            
+        }        
+      });

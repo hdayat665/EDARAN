@@ -696,6 +696,8 @@
     <script src="{{env('ASSETS_URL')}}/js/demo/form-multiple-upload.demo.js"></script>
 	<script src="{{env('ASSETS_URL')}}/plugins/jstree/dist/jstree.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.2/croppie.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.2/croppie.js"></script>
     {{-- <script src="{{env('ASSETS_URL')}}/js/orgchart.js"></script> --}}
     {{-- <link href="../assets/plugins/nvd3/build/nv.d3.css" rel="stylesheet" /> --}}
     {{-- <script src="../assets/plugins/d3/d3.min.js"></script> --}}

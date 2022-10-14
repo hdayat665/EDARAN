@@ -23,7 +23,7 @@
             <div class="card-body bg-white">
                 <div class="login-header mb-30px">
                     <div class="brand">
-                        <p>Current domain <span id="tenant">not selected</span> .
+                        <p>Current Domain <span id="tenant">not selected</span> .
                             <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal" class="text-primary"> Change here.</a>
                         </p>
 
@@ -34,15 +34,15 @@
                 </div>
 
                 <form id="loginForm" class="fs-13px">
-                    <div class="form-floating mb-15px">
-                        <input type="text" name="username" class="form-control h-45px fs-13px" id="emailAddress" required/>
+                    <div class="form mb-15px">
+                        
+                        <input type="text" name="username" class="form-control h-45px fs-13px" id="emailAddress" placeholder="Username" required/>
                         <input type="hidden" name="tenant" id="tenantInput" />
-                        <label for="email" class="d-flex align-items-center fs-13px text-gray-600">Email Address</label>
-                    </div>
-                    <div class="form-floating mb-15px">
-                        <input type="password" name="password" class="form-control h-45px fs-13px"  id="password" />
-                        <label for="password" class="d-flex align-items-center fs-13px text-gray-600">Password</label>
-                    </div>
+                        </div>
+                    <div class="form mb-15px">
+                        
+                         <input type="password" name="password" class="form-control h-45px fs-13px" placeholder="Password"  id="password" />
+                        </div>
                     <div class="form-check mb-30px">
                         <input class="form-check-input" type="checkbox" value="1" id="rememberMe" />
                         <label class="form-check-label" for="rememberMe">
@@ -57,7 +57,7 @@
                 <div class="mb-40px pb-40px text-dark">
                     Not a member yet?
                     <br>
-                    <a href="/selectPackage" class="text-primary">New tenant</a> |
+                    <a href="/selectPackage" class="text-primary">New Domain</a> |
                     <a href="register_v3.html" data-bs-toggle="modal" data-bs-target="#exampleModal2" class="text-primary"> Email Activation</a> |
                     <a href="register_v3.html" data-bs-toggle="modal" data-bs-target="#exampleModal1" class="text-primary"> Forgot Password</a>
                 </div>

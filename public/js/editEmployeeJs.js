@@ -1,7 +1,131 @@
 $(document).ready(function() {
+    let croppie;
+
+    $('#edit-profile-picture').on('change', function() {
+    if (this.files && this.files[0]) {
+        let reader = new FileReader();
+        reader.onload = function(e) {
+        $('#croppie img').attr('src', e.target.result);
+        croppie = new Croppie($('#croppie img')[0], {
+            boundary: { width: 200, height: 200 },
+            viewport: { width: 100, height: 100, type: 'square' }
+        })
+        }
+        $('#showImage').show();
+        $('#crop').on('click', function() {
+        $('#showCroppedImage').show();
+        croppie
+            .result({ type: 'base64', circle: false })
+            .then(function(dataImg) {
+                var data = [{ image: dataImg }, { name: 'profilePicture.jpg' }];
+                // use ajax to send data to php
+                $('#result_image img').attr('src', dataImg);
+            });
+        });
+        reader.readAsDataURL(this.files[0]);
+    }
+    })
+
+    $("#firstname,#lastname").change(function(){
+        var a = $("#firstname").val();
+        var b = $("#lastname").val();
+        $("#fullname").val(a+ ' '+b);
+    });
+
+    $(".partCheck").click(function(){
+        if ($(this).prop("checked")) {
+              
+            $('#idNo').prop('readonly', true);
+            $('#passport').prop('readonly', false);
+            $('#expirydate').prop('readonly', false);
+        } else {
+            
+            $('#idNo').prop('readonly', false);
+            $('#passport').prop('readonly', true);
+            $('#expirydate').prop('readonly', true);
+        }
+      });
 
     $('#saveProfile').click(function(e) {
+        $("#formProfile").validate({
+            // Specify validation rules
+            rules: {
+                
+                username: "required",
+                personalEmail: {
+                    required: true,
+                    email: true
+                },
+
+                firstName: "required",
+                lastName:"required",
+                fullName:"required",
+                gender:"required",
+                maritialStatus:"required",
+                religion:"required",
+                race:"required",
+                idNo: {
+                    required: true,
+                    digits: true,
+                    rangelength: [12, 12]
+                },
+                phoneNo: {
+                    
+                    digits: true,
+                    
+                },
+                homeNo: {
+                    digits: true,
+
+                    
+                },
+                extensionNo: {
+                    digits: true,
+                    
+                },
+
+                
+            },
+
+            messages: {
+
+                username: "Please insert username",
+                personalEmail: {
+                    required: "Please Insert Email Address",
+                    email: "Please Provide Valid Email Address",
+                    
+                },
+                firstName: "Please Insert Your First Name",
+                lastName: "Please Insert Your Last Name",
+                fullName:"Please Insert Your Full Name",
+                gender:"Please Choose Your Gender",
+                maritialStatus:"Please Choose Your Marital Status",
+                religion:"Please Choose Your Religion",
+                race:"Please Choose Your Race",
+                idNo: {
+                    required: "Please Insert Identification Number",
+                    digits: "Please Insert Correct Identification Number Without ' - ' or Space",
+                    rangelength: "Please Provide Valid Identification Number"
+                },
+                phoneNo: {
+                    
+                    digits: "Please Insert Correct Identification Number Without ' - ' or Space",
+                    
+                },
+                homeNo: {
+                    digits: "Please Insert Correct Identification Number Without ' - ' or Space",
+                    
+                },
+                extensionNo: {
+                    digits: "Please Insert Correct Identification Number Without ' - ' or Space",
+                    
+                },
+
+            },
+            submitHandler: function(form) {
+
         requirejs(['sweetAlert2'], function(swal) {
+            
 
             var data = new FormData(document.getElementById("formProfile"));
 
@@ -33,7 +157,8 @@ $(document).ready(function() {
 
                 });
             });
-
+        });
+    }
         });
     });
 
