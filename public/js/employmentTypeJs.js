@@ -84,14 +84,13 @@ $(document).ready(function() {
             rules: {
                 
 
-                code: "required",
+               
                 type:"required",
                 
             },
 
             messages: {
                
-                code: "Please Insert Your Employment Code",
                 type: "Please Insert Your Employment Name",
                
             },
@@ -139,14 +138,13 @@ $(document).ready(function() {
             rules: {
                 
 
-                code: "required",
+               
                 type:"required",
                 
             },
 
             messages: {
                
-                code: "Please Insert Your Employment Code",
                 type: "Please Insert Your Employment Name",
                
             },

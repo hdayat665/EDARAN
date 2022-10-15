@@ -38,7 +38,6 @@
                 <thead>
                     <tr>
                         <th width="1%">NO</th>
-                        <th class="text-nowrap">Employment Type Code</th>
                         <th class="text-nowrap">Employment Type</th>
                         <th class="text-nowrap">Added By</th>
                         <th class="text-nowrap">Added Time</th>
@@ -56,7 +55,6 @@
                         <?php  $id++ ?>
                     <tr class="odd gradeX">
                         <td width="1%" class="fw-bold text-dark">{{$id}}</td>
-                        <td>{{$employmentType->code}}</td>
                         <td>{{$employmentType->type}}</td>
                         <td>{{$employmentType->addedBy}}</td>
                         <td>{{$employmentType->created_at}}</td>
@@ -83,13 +81,10 @@
                 <div class="modal-body">
                     <form id="addForm">
 
+                        
                         <div class="mb-3">
-                            <label class="form-label">Employment Type Code* </label><br><br>
-                            <input type="text" class="form-control" name="code" placeholder="" maxlength="100" style="text-transform:uppercase ;">
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">Employment Type* </label><br><br>
-                            <input type="text" class="form-control" name="type" placeholder="" maxlength="100" style="text-transform:uppercase ;">
+                            <label class="form-label">Employment Type* </label>
+                            <input type="text" class="form-control" name="type" placeholder="Employment Type" maxlength="100">
                         </div>
                 </div>
                 <div class="modal-footer">
@@ -110,19 +105,16 @@
                 <div class="modal-body">
                     <form id="editForm">
 
+                        
                         <div class="mb-3">
-                            <label class="form-label">Employment Type Code* </label><br><br>
-                            <input type="text" class="form-control" name="code" placeholder="" maxlength="100" style="text-transform:uppercase ;">
-                            <input type="hidden" class="form-control" name="id" id="idE" placeholder="" maxlength="100" style="text-transform:uppercase ;">
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">Employment Type* </label><br><br>
-                            <input type="text" class="form-control" name="type" placeholder="" maxlength="100" style="text-transform:uppercase ;">
+                            <label class="form-label">Employment Type* </label>
+                            <input type="text" class="form-control" name="type" placeholder="Employment Type" maxlength="100" >
+
                         </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button href="javascript:;" class="btn btn-primary" id="updateButton">Save</button>
+                    <button href="javascript:;" class="btn btn-primary" id="updateButton">Update</button>
                 </div>
                 </form>
             </div>

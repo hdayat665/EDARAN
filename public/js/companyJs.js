@@ -5,8 +5,13 @@ $(document).ready(function() {
         autoclose: true,
     });
 
+    $("input[type=text]").keyup(function () {  
+        $(this).val($(this).val().toUpperCase());  
+    });
+
     $('#data-table-default').DataTable({
-        responsive: true
+        responsive: true,
+        lengthMenu: [5, 10],
       });
 
     $("#tableRoles").DataTable({
@@ -186,9 +191,7 @@ $(document).ready(function() {
         });
     });
 
-    $("input[type=text]").keyup(function () {  
-        $(this).val($(this).val().toUpperCase());  
-    });
+    
 
 
 

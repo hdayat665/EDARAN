@@ -83,13 +83,13 @@
                     <form id="addForm">
 
                         <div class="mb-3">
-                            <label>Company Code* </label><br><br>
-                            <input type="text" class="form-control" name="companyCode" placeholder="">
+                            <label class="form-label">Company Code* </label>
+                            <input type="text" class="form-control" name="companyCode" placeholder="Company Code">
                         </div>
                         <div class="mb-3">
-                            <label>Company Name* </label><br><br>
-                            <input type="text" class="form-control" name="companyName" placeholder="">
-                        </div>
+                            <label class="form-label">Company Name* </label>
+                            <input type="text" class="form-control" name="companyName" placeholder="Company Name">
+                        </div> 
                     
                 </div>
                 <div class="modal-footer">
@@ -112,20 +112,20 @@
                     <form id="updateForm">
 
                         <div class="mb-3">
-                            <label>Company Code* </label><br><br>
-                            <input type="text" class="form-control" id="companyCode" name="companyCode" placeholder="" >
+                            <label class="form-label">Company Code* </label>
+                            <input type="text" class="form-control" id="companyCode" name="companyCode" placeholder="Company Code" >
                             <input type="hidden" id="idC" class="form-control" name="id" placeholder="">
                         </div>
                         <div class="mb-3">
-                            <label>Company Name* </label><br><br>
-                            <input type="text" class="form-control" id="companyName" name="companyName" placeholder="">
+                            <label class="form-label">Company Name* </label>
+                            <input type="text" class="form-control" id="companyName" name="companyName" placeholder="Company Name">
                         </div>
                     
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                     
-                    <button class="btn btn-primary" id="updateButton">Save</button>
+                    <button class="btn btn-primary" id="updateButton">Update</button>
                 </div>
                 </form>
             </div>

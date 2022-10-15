@@ -9,7 +9,7 @@ $(document).ready(function() {
         todayHighlight: true,
         autoclose: true,
     });
-
+ 
     $("#tabledepartment").DataTable({
         responsive: false,
         lengthMenu: [5, 10],

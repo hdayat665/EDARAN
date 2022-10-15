@@ -38,7 +38,7 @@
         <!-- END panel-heading -->
         <!-- BEGIN panel-body -->
         <div class="panel-body">
-            <table id="tabledesignation" class="table table-striped table-bordered align-middle" style="text-transform: uppercase;">
+            <table id="tabledesignation" class="table table-striped table-bordered align-middle" >
                 <thead>
                     <tr>
                         <th width="1%">NO</th>
@@ -94,16 +94,16 @@
                 <form id="addForm">
 
                     <div class="mb-3">
-                        <label class="form-label">Designation Code* </label><br><br>
-                        <input type="text" class="form-control" name="designationCode" placeholder="" style="text-transform:uppercase;">
+                        <label class="form-label">Designation Code* </label>
+                        <input type="text" class="form-control" name="designationCode" placeholder="Designation Code" >
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">Designation Name* </label><br><br>
-                        <input type="text" class="form-control" name="designationName" placeholder="" maxlength="100" style="text-transform:uppercase ;">
+                        <label class="form-label">Designation Name* </label>
+                        <input type="text" class="form-control" name="designationName" placeholder="Designation Name" maxlength="100" >
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">Job Description* </label><br><br>
-                        <textarea class="form-control" name="jobDesc" rows="5" maxlength="255" style="text-transform:uppercase;"></textarea>
+                        <label class="form-label">Job Description* </label>
+                        <textarea type="text" class="form-control" placeholder="Job Description" name="jobDesc" rows="5" maxlength="255" ></textarea>
                     </div>
 
             </div>
@@ -126,23 +126,23 @@
                 <form id="editForm">
 
                     <div class="mb-3">
-                        <label class="form-label">Designation Code* </label><br><br>
-                        <input type="text" class="form-control" name="designationCode" id="designationCode" placeholder="" style="text-transform:uppercase ;">
+                        <label class="form-label">Designation Code* </label>
+                        <input type="text" class="form-control" name="designationCode" id="designationCode" placeholder="Designation Code" >
                         <input type="hidden" class="form-control" name="id" id="idD" placeholder="">
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">Designation Name* </label><br><br>
-                        <input type="text" class="form-control" name="designationName" id="designationName" placeholder="" maxlength="100" style="text-transform:uppercase;">
+                        <label class="form-label">Designation Name* </label>
+                        <input type="text" class="form-control" name="designationName" id="designationName" placeholder="Designation Name" maxlength="100" >
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">Job Description* </label><br><br>
-                        <textarea class="form-control" id="jobDesc" name="jobDesc" rows="5" maxlength="255" style="text-transform: uppercase;"></textarea>
+                        <label class="form-label">Job Description* </label>
+                        <textarea type="text" class="form-control" placeholder="Job Description" id="jobDesc" name="jobDesc" rows="5" maxlength="255"></textarea>
                     </div>
 
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button href="javascript:;" class="btn btn-primary" id="updateButton">Save</button>
+                <button href="javascript:;" class="btn btn-primary" id="updateButton">Update</button>
             </div>
             </form>
         </div>

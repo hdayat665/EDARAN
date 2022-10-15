@@ -39,8 +39,8 @@
                     <tr>
                         <th width="1%">No.</th>
                         <th class="text-nowrap">Company Name</th>
-                        <th class="text-nowrap">Department Name</th>
                         <th class="text-nowrap">Department Code</th>
+                        <th class="text-nowrap">Department Name</th>
                         <th class="text-nowrap">Added By</th>
                         <th class="text-nowrap">Added Time</th>
                         <th class="text-nowrap">Modified By</th>
@@ -57,8 +57,8 @@
                         <tr class="odd gradeX">
                             <td width="1%" class="fw-bold text-dark">1</td>
                             <td>{{$department->companyName}}</td>
-                            <td>{{$department->departmentName}}</td>
                             <td>{{$department->departmentCode}}</td>
+                            <td>{{$department->departmentName}}</td>
                             <td> {{$department->addedBy}}</td>
                             <td>{{$department->created_at}}</td>
                             <td>{{$department->modifiedBy}}</td>
@@ -96,19 +96,20 @@
                         </select>
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">Department Name* </label>
-                        <input type="text" class="form-control" id="departmentName" name="departmentName" maxlength="100" placeholder="" style="text-transform:uppercase">
-                        <input type="hidden" class="form-control" id="idD" name="id" maxlength="100" placeholder="" style="text-transform:uppercase">
+                        <label class="form-label">Department code* </label>
+                        <input type="text" class="form-control" id="departmentCode" name="departmentCode" maxlength="100" placeholder="Department code" >
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">Department code* </label>
-                        <input type="text" class="form-control" id="departmentCode" name="departmentCode" maxlength="100" placeholder="" style="text-transform:uppercase">
+                        <label class="form-label">Department Name* </label>
+                        <input type="text" class="form-control" id="departmentName" name="departmentName" maxlength="100" placeholder="Department Name" >
+                        <input type="hidden" class="form-control" id="idD" name="id" maxlength="100" placeholder="" >
                     </div>
+                   
                 
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button href="javascript:;" class="btn btn-primary" id="updateButton">Save</button>
+                <button href="javascript:;" class="btn btn-primary" id="updateButton">Update</button>
             </div>
             </form>
         </div>
@@ -134,15 +135,15 @@
                             @endforeach
                         </select>
                     </div>
+                   
+                    <div class="mb-3">
+                        <label class="form-label">Department Code* </label>
+                        <input type="text" class="form-control" name="departmentCode" maxlength="100" placeholder="Department Code" >
+                    </div>
                     <div class="mb-3">
                         <label class="form-label">Department Name* </label>
-                        <input type="text" class="form-control" name="departmentName" maxlength="100" placeholder="" style="text-transform:uppercase">
+                        <input type="text" class="form-control" name="departmentName" maxlength="100" placeholder="Department Name" >
                     </div>
-                    <div class="mb-3">
-                        <label class="form-label">Department code* </label>
-                        <input type="text" class="form-control" name="departmentCode" maxlength="100" placeholder="" style="text-transform:uppercase">
-                    </div>
-                
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

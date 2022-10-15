@@ -84,19 +84,19 @@
                 <form id="addForm">
 
                     <div class="mb-3">
-                        <label class="form-label">Title</label><br><br>
-                        <input type="text" class="form-control" name="title" placeholder="" maxlength="100" style="text-transform:uppercase ;">
+                        <label class="form-label">Title*</label>
+                        <input type="text" class="form-control" name="title" placeholder="Title" maxlength="100" >
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">Source URL</label><br><br>
-                        <input type="text" class="form-control" name="sourceURL" placeholder="" maxlength="255">
+                        <label class="form-label">Source URL</label>
+                        <input type="url" class="form-control" name="sourceURL" placeholder="Source URL" maxlength="255">
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">Content</label><br><br>
-                        <textarea type="text" class="form-control" rows="3" name="content" maxlength="255" style="text-transform: uppercase;"></textarea>
+                        <label class="form-label">Content*</label>
+                        <textarea type="text" class="form-control" rows="3" placeholder="Content" name="content" maxlength="255" ></textarea>
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">File Upload </label><br><br>
+                        <label class="form-label">Attachment* </label>
                         <input id="fileupload" type="file" name="file" multiple="multiple" ></input>
                     </div>
             </div>
@@ -120,26 +120,26 @@
                 <form id="editForm">
 
                     <div class="mb-3">
-                        <label class="form-label">Title</label><br><br>
-                        <input type="text" class="form-control" name="title" id="title" placeholder="" maxlength="100" style="text-transform:uppercase ;">
-                        <input type="hidden" class="form-control" name="id" id="idN" placeholder="" maxlength="100" style="text-transform:uppercase ;">
+                        <label class="form-label">Title*</label>
+                        <input type="text" class="form-control" name="title" id="title" placeholder="" maxlength="100" >
+                        <input type="hidden" class="form-control" name="id" id="idN" placeholder="" maxlength="100" >
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">Source URL</label><br><br>
+                        <label class="form-label">Source URL</label>
                         <input type="text" class="form-control" name="sourceURL" id="sourceURL" placeholder="" maxlength="255">
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">Content </label><br><br>
-                        <textarea type="text" class="form-control" rows="3" name="content" id="contents" maxlength="255" style="text-transform: uppercase;"></textarea>
+                        <label class="form-label">Content*</label>
+                        <textarea type="text" class="form-control" rows="3" name="content" id="contents" maxlength="255" ></textarea>
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">File Upload </label><br><br>
+                        <label class="form-label">Attachment*</label>
                         <input id="fileupload" type="file" name="file" multiple="multiple" ></input>
                     </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button href="javascript:;" class="btn btn-primary"  id="updateButton">Save</button>
+                <button href="javascript:;" class="btn btn-primary"  id="updateButton">Update</button>
             </div>
             </form>
         </div>

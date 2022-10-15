@@ -3,12 +3,15 @@ $(document).ready(function() {
     $("input[type=text]").keyup(function () {  
         $(this).val($(this).val().toUpperCase());  
     });
-
+    $("option[type=text]").keyup(function () {  
+        $(this).val($(this).val().toUpperCase());  
+    });
 
     $("#datepicker-joindate").datepicker({
         todayHighlight: true,
         autoclose: true,
     });
+
 
     $("#tablebranch").DataTable({
         responsive: false,

@@ -87,7 +87,6 @@ $(document).ready(function() {
             rules: {
                 
                 title: "required",
-                sourceURL:"required",
                 content: "required",
                 file: "required",
                 
@@ -96,7 +95,6 @@ $(document).ready(function() {
             messages: {
                
                 title: "Please Insert Title",
-                sourceURL: "Please Insert URL",
                 content: "Please Insert Content",
                 file: "Upload Supporting Document",
                
