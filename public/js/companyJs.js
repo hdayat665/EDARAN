@@ -5,6 +5,10 @@ $(document).ready(function() {
         autoclose: true,
     });
 
+    $('#data-table-default').DataTable({
+        responsive: true
+      });
+
     $("#tableRoles").DataTable({
         responsive: true,
     });
@@ -71,6 +75,26 @@ $(document).ready(function() {
 
 
     $('#saveButton').click(function(e) {
+        
+        $("#addForm").validate({
+            // Specify validation rules
+            rules: {
+                
+
+                companyCode: "required",
+                companyName:"required",
+                
+                
+            },
+
+            messages: {
+               
+                companyCode: "Please Insert Company Code",
+                companyName: "Please Insert Company Name",
+               
+            },
+            submitHandler: function(form) {
+
         requirejs(['sweetAlert2'], function(swal) {
 
             var data = new FormData(document.getElementById("addForm"));
@@ -102,10 +126,30 @@ $(document).ready(function() {
                 });
             });
 
+                });
+            }
         });
     });
 
     $('#updateButton').click(function(e) {
+        $("#updateForm").validate({
+            // Specify validation rules
+            rules: {
+                
+
+                companyCode: "required",
+                companyName:"required",
+                
+                
+            },
+
+            messages: {
+               
+                companyCode: "Please Insert Company Code",
+                companyName: "Please Insert Company Name",
+               
+            },
+            submitHandler: function(form) {
         requirejs(['sweetAlert2'], function(swal) {
 
             var data = new FormData(document.getElementById("updateForm"));
@@ -137,8 +181,16 @@ $(document).ready(function() {
                 });
             });
 
+                });
+            }
         });
     });
+
+    $("input[type=text]").keyup(function () {  
+        $(this).val($(this).val().toUpperCase());  
+    });
+
+
 
     $('#kt_docs_jstree_checkable').jstree({
         'plugins': ["wholerow", "checkbox", "types"],

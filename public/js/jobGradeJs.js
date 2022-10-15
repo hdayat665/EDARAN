@@ -1,12 +1,18 @@
 $(document).ready(function() {
 
+    $("input[type=text]").keyup(function () {  
+        $(this).val($(this).val().toUpperCase());  
+    });
+
+
     $("#datepicker-joindate").datepicker({
         todayHighlight: true,
         autoclose: true,
     });
 
-    $("#tableRoles").DataTable({
-        responsive: true,
+    $("#tablejobgrade").DataTable({
+        responsive: false,
+        lengthMenu: [5, 10]
     });
 
     $(document).on("click", "#addButton", function() {
@@ -72,6 +78,26 @@ $(document).ready(function() {
 
 
     $('#saveButton').click(function(e) {
+
+        $("#addForm").validate({
+            // Specify validation rules
+            rules: {
+                
+
+                jobGradeCode: "required",
+                jobGradeName:"required",
+                
+                
+            },
+
+            messages: {
+               
+                jobGradeCode: "Please Insert Job Grade Code",
+                jobGradeName: "Please Insert Job Grade Name",
+               
+            },
+            submitHandler: function(form) {
+
         requirejs(['sweetAlert2'], function(swal) {
 
             var data = new FormData(document.getElementById("addForm"));
@@ -99,14 +125,35 @@ $(document).ready(function() {
                         location.reload();
                     }
 
-
                 });
             });
 
+                });
+            }
         });
     });
 
     $('#updateButton').click(function(e) {
+
+        $("#editForm").validate({
+            // Specify validation rules
+            rules: {
+                
+
+                jobGradeCode: "required",
+                jobGradeName:"required",
+                
+                
+            },
+
+            messages: {
+               
+                jobGradeCode: "Please Insert Job Grade Code",
+                jobGradeName: "Please Insert Job Grade Name",
+               
+            },
+            submitHandler: function(form) {
+
         requirejs(['sweetAlert2'], function(swal) {
 
             var data = new FormData(document.getElementById("editForm"));
@@ -135,10 +182,13 @@ $(document).ready(function() {
                     }
 
 
+
                 });
             });
 
+                });
+            }
         });
     });
 
-});
+    });

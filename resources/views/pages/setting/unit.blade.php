@@ -34,7 +34,7 @@
         <!-- END panel-heading -->
         <!-- BEGIN panel-body -->
         <div class="panel-body">
-            <table id="data-table-default" class="table table-striped table-bordered align-middle">
+            <table id="tableunit" class="table table-striped table-bordered align-middle">
                 <thead>
                     <tr>
                         <th width="1%">NO</th>
@@ -88,9 +88,9 @@
                 <form id="addForm">
 
                     <div class="mb-3">
-                        <label>Department Name* </label><br><br>
-                        <select class="form-select" name="departmentId">
-                            <option value="0" label="Select Department Name " selected="selected">Select Department Name </option>
+                        <label class="form-label">Department Name* </label><br><br>
+                        <select class="form-select" name="departmentId" style="text-transform: uppercase;">
+                            <option value="" label="Select Department Name " selected="selected">Select Department Name </option>
                             <?php $departments = getDepartment() ?>
                             @foreach ($departments as $department)
                                 <option value="{{$department->id}}" >{{$department->departmentName}}</option>
@@ -98,19 +98,19 @@
                         </select>
                     </div>
                     <div class="mb-3">
-                        <label>Unit Code* </label><br><br>
-                        <input type="text" class="form-control" name="unitCode" placeholder="">
+                        <label class="form-label">Unit Code* </label><br><br>
+                        <input type="text" class="form-control" name="unitCode" maxlength="100" placeholder="" style="text-transform:uppercase">
                     </div>
                     <div class="mb-3">
-                        <label>Unit Name* </label><br><br>
-                        <input type="text" class="form-control" name="unitName" placeholder="">
+                        <label class="form-label">Unit Name* </label><br><br>
+                        <input type="text" class="form-control" name="unitName" maxlength="100" placeholder="" style="text-transform:uppercase">
                     </div>
-                </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" id="saveButton">Save</button>
+                <button href="javascript:;" class="btn btn-primary" id="saveButton">Save</button>
             </div>
+            </form>
         </div>
     </div>
 </div>
@@ -128,9 +128,9 @@
                 <form id="updateForm">
 
                     <div class="mb-3">
-                        <label>Department Name* </label><br><br>
-                        <select class="form-select" name="departmentId" id="departmentId">
-                            <option value="0" label="Select Department Name " selected="selected">Select Department Name </option>
+                        <label class="form-label"> Department Name* </label><br><br>
+                        <select class="form-select" name="departmentId" id="departmentId" style="text-transform: uppercase;">
+                            <option value="" label="Select Department Name " selected="selected">Select Department Name </option>
                             <?php $departments = getDepartment() ?>
                             @foreach ($departments as $department)
                                 <option value="{{$department->id}}" >{{$department->departmentName}}</option>
@@ -139,20 +139,20 @@
                         </select>
                     </div>
                     <div class="mb-3">
-                        <label>Unit Code* </label><br><br>
-                        <input type="text" class="form-control" id="unitCode" name="unitCode" placeholder="">
-                        <input type="hidden" class="form-control" id="idU" name="id" placeholder="">
+                        <label class="form-label">Unit Code* </label><br><br>
+                        <input type="text" class="form-control" id="unitCode" name="unitCode" maxlength="100" placeholder="" style="text-transform:uppercase">
+                        <input type="hidden" class="form-control" id="idU" name="id" maxlength="100" placeholder="" style="text-transform:uppercase">
                     </div>
                     <div class="mb-3">
-                        <label>Unit Name* </label><br><br>
-                        <input type="text" class="form-control" id="unitName" name="unitName" placeholder="">
+                        <label class="form-label">Unit Name* </label><br><br>
+                        <input type="text" class="form-control" id="unitName" name="unitName" maxlength="100" placeholder="" style="text-transform:uppercase">
                     </div>
-                </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" id="updateButton">Save</button>
+                <button href="javascript:;" class="btn btn-primary" id="updateButton">Save</button>
             </div>
+            </form>
         </div>
     </div>
 </div>

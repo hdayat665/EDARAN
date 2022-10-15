@@ -38,7 +38,7 @@
         <!-- END panel-heading -->
         <!-- BEGIN panel-body -->
         <div class="panel-body">
-            <table id="table" class="table table-striped table-bordered align-middle">
+            <table id="tabledesignation" class="table table-striped table-bordered align-middle" style="text-transform: uppercase;">
                 <thead>
                     <tr>
                         <th width="1%">NO</th>
@@ -94,24 +94,24 @@
                 <form id="addForm">
 
                     <div class="mb-3">
-                        <label>Designation Code* </label><br><br>
-                        <input type="text" class="form-control" name="designationCode" placeholder="">
+                        <label class="form-label">Designation Code* </label><br><br>
+                        <input type="text" class="form-control" name="designationCode" placeholder="" style="text-transform:uppercase;">
                     </div>
                     <div class="mb-3">
-                        <label>Designation Name* </label><br><br>
-                        <input type="text" class="form-control" name="designationName" placeholder="">
+                        <label class="form-label">Designation Name* </label><br><br>
+                        <input type="text" class="form-control" name="designationName" placeholder="" maxlength="100" style="text-transform:uppercase ;">
                     </div>
                     <div class="mb-3">
-                        <label>Job Description* </label><br><br>
-                        <textarea class="form-control" name="jobDesc" rows="5"></textarea>
+                        <label class="form-label">Job Description* </label><br><br>
+                        <textarea class="form-control" name="jobDesc" rows="5" maxlength="255" style="text-transform:uppercase;"></textarea>
                     </div>
 
-                </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" id="saveButton">Save</button>
+                <button href="javascript:;" class="btn btn-primary" id="saveButton">Save</button>
             </div>
+            </form>
         </div>
     </div>
 </div>
@@ -126,25 +126,25 @@
                 <form id="editForm">
 
                     <div class="mb-3">
-                        <label>Designation Code* </label><br><br>
-                        <input type="text" class="form-control" name="designationCode" id="designationCode" placeholder="">
+                        <label class="form-label">Designation Code* </label><br><br>
+                        <input type="text" class="form-control" name="designationCode" id="designationCode" placeholder="" style="text-transform:uppercase ;">
                         <input type="hidden" class="form-control" name="id" id="idD" placeholder="">
                     </div>
                     <div class="mb-3">
-                        <label>Designation Name* </label><br><br>
-                        <input type="text" class="form-control" name="designationName" id="designationName" placeholder="">
+                        <label class="form-label">Designation Name* </label><br><br>
+                        <input type="text" class="form-control" name="designationName" id="designationName" placeholder="" maxlength="100" style="text-transform:uppercase;">
                     </div>
                     <div class="mb-3">
-                        <label>Job Description* </label><br><br>
-                        <textarea class="form-control" id="jobDesc" name="jobDesc" rows="5"></textarea>
+                        <label class="form-label">Job Description* </label><br><br>
+                        <textarea class="form-control" id="jobDesc" name="jobDesc" rows="5" maxlength="255" style="text-transform: uppercase;"></textarea>
                     </div>
 
-                </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" id="updateButton">Save</button>
+                <button href="javascript:;" class="btn btn-primary" id="updateButton">Save</button>
             </div>
+            </form>
         </div>
     </div>
 </div>
