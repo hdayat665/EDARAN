@@ -1,12 +1,18 @@
 $(document).ready(function() {
 
+    $("input[type=text]").keyup(function () {  
+        $(this).val($(this).val().toUpperCase());  
+    });
+
+
     $("#datepicker-joindate").datepicker({
         todayHighlight: true,
         autoclose: true,
     });
 
-    $("#tableRoles").DataTable({
-        responsive: true,
+    $("#tabledepartment").DataTable({
+        responsive: false,
+        lengthMenu: [5, 10],
     });
 
     $(document).on("click", "#addButton", function() {
@@ -72,6 +78,26 @@ $(document).ready(function() {
 
 
     $('#saveButton').click(function(e) {
+        $("#addForm").validate({
+            // Specify validation rules
+            rules: {
+                
+                companyId: "required",
+                departmentName: "required",
+                departmentCode: "required",
+                
+                
+            },
+
+            messages: {
+               
+                companyId: "Please Choose Company Name",
+                departmentName: "Please Insert Department Name",
+                departmentCode: "Please Insert Department Code",
+               
+            },
+            submitHandler: function(form) {
+
         requirejs(['sweetAlert2'], function(swal) {
 
             var data = new FormData(document.getElementById("addForm"));
@@ -99,14 +125,36 @@ $(document).ready(function() {
                         location.reload();
                     }
 
-
                 });
             });
 
+                });
+            }
         });
     });
 
     $('#updateButton').click(function(e) {
+
+        $("#updateForm").validate({
+            // Specify validation rules
+            rules: {
+                
+                companyId: "required",
+                departmentName: "required",
+                departmentCode: "required",
+                
+                
+            },
+
+            messages: {
+               
+                companyId: "Please Insert Company Name",
+                departmentName: "Please Insert Department Name",
+                departmentCode: "Please Insert Department Code",
+               
+            },
+            submitHandler: function(form) {
+
         requirejs(['sweetAlert2'], function(swal) {
 
             var data = new FormData(document.getElementById("updateForm"));
@@ -134,10 +182,11 @@ $(document).ready(function() {
                         location.reload();
                     }
 
-
                 });
             });
 
+                });
+            }
         });
     });
 

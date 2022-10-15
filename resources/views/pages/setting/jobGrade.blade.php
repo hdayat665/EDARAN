@@ -34,7 +34,7 @@
         <!-- END panel-heading -->
         <!-- BEGIN panel-body -->
         <div class="panel-body">
-            <table id="data-table-default" class="table table-striped table-bordered align-middle">
+            <table id="tablejobgrade" class="table table-striped table-bordered align-middle">
                 <thead>
                     <tr>
                         <th width="1%">NO</th>
@@ -86,19 +86,19 @@
                 <form id="addForm">
 
                     <div class="mb-3">
-                        <label>Job Grade Code* </label><br><br>
-                        <input type="text" class="form-control" name="jobGradeCode" placeholder="">
+                        <label class="form-label">Job Grade Code* </label><br><br>
+                        <input type="text" class="form-control" name="jobGradeCode" placeholder="" maxlength="100" style="text-transform:uppercase ;">
                     </div>
                     <div class="mb-3">
-                        <label>Job Grade Name* </label><br><br>
-                        <input type="text" class="form-control" name="jobGradeName" placeholder="">
+                        <label class="form-label">Job Grade Name* </label><br><br>
+                        <input type="text" class="form-control" name="jobGradeName" placeholder="" maxlength="100" style="text-transform:uppercase ;">
                     </div>
-                </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" id="saveButton">Save</button>
+                <button href="javascript:;" class="btn btn-primary" id="saveButton">Save</button>
             </div>
+            </form>
         </div>
     </div>
 </div>
@@ -113,20 +113,20 @@
                 <form id="editForm">
 
                     <div class="mb-3">
-                        <label>Job Grade Code* </label><br><br>
-                        <input type="text" class="form-control" name="jobGradeCode" id="jobGradeCode" placeholder="">
+                        <label class="form-label">Job Grade Code* </label><br><br>
+                        <input type="text" class="form-control" name="jobGradeCode" id="jobGradeCode" placeholder=""maxlength="100" style="text-transform:uppercase ;">
                         <input type="hidden" class="form-control" name="id" id="idJ" placeholder="">
                     </div>
                     <div class="mb-3">
-                        <label>Job Grade Name* </label><br><br>
-                        <input type="text" class="form-control" name="jobGradeName" id="jobGradeName" placeholder="">
+                        <label class="form-label">Job Grade Name* </label><br><br>
+                        <input type="text" class="form-control" name="jobGradeName" id="jobGradeName" placeholder="" maxlength="100" style="text-transform:uppercase ;">
                     </div>
-                </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" id="updateButton">Save</button>
+                <button href="javascript:;" class="btn btn-primary" id="updateButton">Save</button>
             </div>
+            </form>
         </div>
     </div>
 </div>

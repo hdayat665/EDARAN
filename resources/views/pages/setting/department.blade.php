@@ -34,7 +34,7 @@
         <!-- END panel-heading -->
         <!-- BEGIN panel-body -->
         <div class="panel-body">
-            <table id="data-table-default" class="table table-striped table-bordered align-middle">
+            <table id="tabledepartment" class="table table-striped table-bordered align-middle">
                 <thead>
                     <tr>
                         <th width="1%">No.</th>
@@ -86,30 +86,31 @@
                 <form id="updateForm">
 
                     <div class="mb-3">
-                        <label>Company Name* </label>
-                        <select class="form-select" name="companyId" id="companyId">
+                        <label class="form-label">Company Name* </label>
+                        <select class="form-select" name="companyId" id="companyId" style="text-transform: uppercase;">
                             <?php $companies = getCompany() ?>
-                            <option value="0" label="Select Company ">Select Company </option>
+                            <option value="" label="Select Company">Select Company </option>
                             @foreach ($companies as $company)
                                 <option value="{{$company->id}}" >{{$company->companyName}}</option>
                             @endforeach
                         </select>
                     </div>
                     <div class="mb-3">
-                        <label>Department Name* </label>
-                        <input type="text" class="form-control" id="departmentName" name="departmentName" placeholder="">
-                        <input type="hidden" class="form-control" id="idD" name="id" placeholder="">
+                        <label class="form-label">Department Name* </label>
+                        <input type="text" class="form-control" id="departmentName" name="departmentName" maxlength="100" placeholder="" style="text-transform:uppercase">
+                        <input type="hidden" class="form-control" id="idD" name="id" maxlength="100" placeholder="" style="text-transform:uppercase">
                     </div>
                     <div class="mb-3">
-                        <label>Department code* </label>
-                        <input type="text" class="form-control" id="departmentCode" name="departmentCode" placeholder="">
+                        <label class="form-label">Department code* </label>
+                        <input type="text" class="form-control" id="departmentCode" name="departmentCode" maxlength="100" placeholder="" style="text-transform:uppercase">
                     </div>
-                </form>
+                
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" id="updateButton">Save</button>
+                <button href="javascript:;" class="btn btn-primary" id="updateButton">Save</button>
             </div>
+            </form>
         </div>
     </div>
 </div>
@@ -124,29 +125,30 @@
                 <form id="addForm">
 
                     <div class="mb-3">
-                        <label>Company Name* </label>
+                        <label class="form-label">Company Name* </label>
                             <?php $companies = getCompany() ?>
-                            <select class="form-select" name="companyId">
-                            <option value="0" label="Select Company " >Select Company </option>
+                            <select class="form-select" name="companyId" style="text-transform:uppercase;">
+                            <option value="" label="Select Company " >Select Company </option>
                             @foreach ($companies as $company)
                                 <option value="{{$company->id}}">{{$company->companyName}}</option>
                             @endforeach
                         </select>
                     </div>
                     <div class="mb-3">
-                        <label>Department Name* </label>
-                        <input type="text" class="form-control" name="departmentName" placeholder="">
+                        <label class="form-label">Department Name* </label>
+                        <input type="text" class="form-control" name="departmentName" maxlength="100" placeholder="" style="text-transform:uppercase">
                     </div>
                     <div class="mb-3">
-                        <label>Department code* </label>
-                        <input type="text" class="form-control" name="departmentCode" placeholder="">
+                        <label class="form-label">Department code* </label>
+                        <input type="text" class="form-control" name="departmentCode" maxlength="100" placeholder="" style="text-transform:uppercase">
                     </div>
-                </form>
+                
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" id="saveButton">Save</button>
+                <button href="javascript:;" class="btn btn-primary" id="saveButton">Save</button>
             </div>
+            </form>
         </div>
     </div>
 </div>

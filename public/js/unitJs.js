@@ -1,12 +1,18 @@
 $(document).ready(function() {
 
+    $("input[type=text]").keyup(function () {  
+        $(this).val($(this).val().toUpperCase());  
+    });
+
+
     $("#datepicker-joindate").datepicker({
         todayHighlight: true,
         autoclose: true,
     });
 
-    $("#tableRoles").DataTable({
-        responsive: true,
+    $("#tableunit").DataTable({
+        responsive: false,
+        lengthMenu: [5, 10],
     });
 
     $(document).on("click", "#addButton", function() {
@@ -72,6 +78,26 @@ $(document).ready(function() {
 
 
     $('#saveButton').click(function(e) {
+        $("#addForm").validate({
+            // Specify validation rules
+            rules: {
+                
+                departmentId: "required",
+                unitName: "required",
+                unitCode: "required",
+                
+                
+            },
+
+            messages: {
+               
+                departmentId: "Please Choose Your Department Name",
+                unitName: "Please Insert Your Unit Code",
+                unitCode: "Please Insert Your Unit Name",
+               
+            },
+            submitHandler: function(form) {
+
         requirejs(['sweetAlert2'], function(swal) {
 
             var data = new FormData(document.getElementById("addForm"));
@@ -99,14 +125,35 @@ $(document).ready(function() {
                         location.reload();
                     }
 
-
                 });
             });
 
+                });
+            }
         });
     });
 
     $('#updateButton').click(function(e) {
+
+        $("#updateForm").validate({
+            // Specify validation rules
+            rules: {
+                
+                departmentId: "required",
+                unitName: "required",
+                unitCode: "required",
+                
+            },
+
+            messages: {
+               
+                departmentId: "Please Choose Your Department Name",
+                unitName: "Please Insert Your Unit Code",
+                unitCode: "Please Insert Your Unit Name",
+               
+            },
+            submitHandler: function(form) {
+
         requirejs(['sweetAlert2'], function(swal) {
 
             var data = new FormData(document.getElementById("updateForm"));
@@ -134,10 +181,11 @@ $(document).ready(function() {
                         location.reload();
                     }
 
-
                 });
             });
 
+                });
+            }
         });
     });
 

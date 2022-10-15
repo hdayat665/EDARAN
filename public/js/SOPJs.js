@@ -1,21 +1,35 @@
 $(document).ready(function() {
 
+    $("input[type=text]").keyup(function () {  
+        $(this).val($(this).val().toUpperCase());  
+    });
+
+    $("textarea[type=text]").keyup(function () {  
+        $(this).val($(this).val().toUpperCase());  
+    });
+
     $("#datepicker-joindate").datepicker({
         todayHighlight: true,
         autoclose: true,
     });
 
-    $("#table").DataTable({
-        responsive: true,
+    $("#tablesop").DataTable({
+        responsive: false,
+        lengthMenu: [5, 10],
+        
     });
-
+    $("#tablepolicy").DataTable({
+        responsive: false,
+        lengthMenu: [5, 10],
+       
+    });
     $(document).on("click", "#addButton1", function() {
         $('#addModal1').modal('show');
 
     });
 
     $(document).on("click", "#editButton1", function() {
-        alert('ss');
+        
         var id = $(this).data('id');
         var vehicleData = getPolicy(id);
 
@@ -74,6 +88,29 @@ $(document).ready(function() {
 
 
     $(document).on("click", "#saveButton1", function() {
+
+        $("#addForm1").validate({
+            // Specify validation rules
+            rules: {
+                
+
+                code: "required",
+                policy:"required",
+                desc: "required",
+                file: "required",
+                
+            },
+
+            messages: {
+               
+                code: "Please Insert Policy's Code",
+                policy: "Please Insert Policy's Name",
+                desc: "Please Insert Policy's Description",
+                file: "Please Upload Policy's Document",
+               
+            },
+            submitHandler: function(form) {
+
         requirejs(['sweetAlert2'], function(swal) {
 
             var data = new FormData(document.getElementById("addForm1"));
@@ -101,14 +138,39 @@ $(document).ready(function() {
                         location.reload();
                     }
 
-
                 });
             });
 
+                });
+            }
         });
     });
+});
 
     $(document).on("click", "#updateButton1", function() {
+
+        $("#editForm1").validate({
+            // Specify validation rules
+            rules: {
+                
+
+                code: "required",
+                policy:"required",
+                desc: "required",
+                file: "required",
+                
+            },
+
+            messages: {
+               
+                code: "Please Insert Policy's Code",
+                policy: "Please Insert Policy's Name",
+                desc: "Please Insert Policy's Description",
+                file: "Please Upload Policy's Document",
+               
+            },
+            submitHandler: function(form) {
+
         requirejs(['sweetAlert2'], function(swal) {
 
             var data = new FormData(document.getElementById("editForm1"));
@@ -140,6 +202,8 @@ $(document).ready(function() {
                 });
             });
 
+                });
+            }
         });
     });
 
@@ -147,6 +211,7 @@ $(document).ready(function() {
 
     $(document).on("click", "#addButton2", function() {
         $('#addModal2').modal('show');
+
 
     });
 
@@ -209,6 +274,28 @@ $(document).ready(function() {
 
 
     $('#saveButton2').click(function(e) {
+        $("#addForm2").validate({
+            // Specify validation rules
+            rules: {
+                
+
+                SOPCode: "required",
+                SOPName:"required",
+                desc: "required",
+                file: "required",
+                
+            },
+
+            messages: {
+               
+                SOPCode: "Please Insert SOP's Code",
+                SOPName: "Please Insert SOP's Name",
+                desc: "Please Insert SOP's Description",
+                file: "Please Upload SOP's Document",
+               
+            },
+            submitHandler: function(form) {
+
         requirejs(['sweetAlert2'], function(swal) {
 
             var data = new FormData(document.getElementById("addForm2"));
@@ -240,10 +327,35 @@ $(document).ready(function() {
                 });
             });
 
+                });
+            }
         });
     });
 
     $(document).on("click", "#updateButton2", function() {
+
+        $("#editForm2").validate({
+            // Specify validation rules
+            rules: {
+                
+
+                SOPCode: "required",
+                SOPName:"required",
+                desc: "required",
+                file: "required",
+                
+            },
+
+            messages: {
+               
+                SOPCode: "Please Insert SOP's Code",
+                SOPName: "Please Insert SOP's Name",
+                desc: "Please Insert SOP's Description",
+                file: "load SOP's Document",
+               
+            },
+            submitHandler: function(form) {
+
         requirejs(['sweetAlert2'], function(swal) {
 
             var data = new FormData(document.getElementById("editForm2"));
@@ -271,13 +383,10 @@ $(document).ready(function() {
                         location.reload();
                     }
 
-
                 });
             });
 
+                });
+            }
         });
     });
-
-
-
-});

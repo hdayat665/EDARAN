@@ -1,12 +1,18 @@
 $(document).ready(function() {
 
+    $("input[type=text]").keyup(function () {  
+        $(this).val($(this).val().toUpperCase());  
+    });
+
+
     $("#datepicker-joindate").datepicker({
         todayHighlight: true,
         autoclose: true,
     });
 
-    $("#tableRoles").DataTable({
-        responsive: true,
+    $("#tablebranch").DataTable({
+        responsive: false,
+        lengthMenu: [5, 10],
     });
 
     $(document).on("click", "#addButton", function() {
@@ -80,6 +86,44 @@ $(document).ready(function() {
 
 
     $('#saveButton').click(function(e) {
+
+        $("#addForm").validate({
+            // Specify validation rules
+            rules: {
+                
+                branchCode: "required",
+                branchName: "required",
+                branchType: "required",
+                unitId: "required",
+                address: "required",
+                postcode: {
+                    required: true,
+                    digits: true,
+                    rangelength: [5,5]
+                },
+                city: "required",
+                state: "required",
+                
+            },
+
+            messages: {
+               
+                branchCode: "Please Insert Branch Code ",
+                branchName: "Please Insert Branch Name",
+                branchType: "Please Insert Branch Type",
+                unitId: "Please Choose Unit Name",
+                address: "Please Insert Address",
+                postcode: {
+                    required: "Enter Postcode",
+                    digits: "Please Enter Valid Postcode",
+                    rangelength: "Please Enter Valid Postcode"
+                },
+                city: "Please Insert City",
+                state: "Please Choose State"
+               
+            },
+            submitHandler: function(form) {
+
         requirejs(['sweetAlert2'], function(swal) {
 
             var data = new FormData(document.getElementById("addForm"));
@@ -111,10 +155,50 @@ $(document).ready(function() {
                 });
             });
 
+                });
+            }
         });
     });
 
     $('#updateButton').click(function(e) {
+
+        $("#editForm").validate({
+            // Specify validation rules
+            rules: {
+                
+                branchCode: "required",
+                branchName: "required",
+                branchType: "required",
+                unitId: "required",
+                address: "required",
+                postcode: {
+                    required: true,
+                    digits: true,
+                    rangelength: [5,5]
+                },
+                city: "required",
+                state: "required",
+                
+            },
+
+            messages: {
+               
+                branchCode: "Please Insert Branch Code ",
+                branchName: "Please Insert Branch Name",
+                branchType: "Please Insert Branch Type",
+                unitId: "Please Choose Unit Name",
+                address: "Please Insert Address",
+                postcode: {
+                    required: "Enter Postcode",
+                    digits: "Please Enter Valid Postcode",
+                    rangelength: "Please Enter Valid Postcode"
+                },
+                city: "Please Insert City",
+                state: "Please Choose State"
+               
+            },
+            submitHandler: function(form) {
+
         requirejs(['sweetAlert2'], function(swal) {
 
             var data = new FormData(document.getElementById("editForm"));
@@ -146,7 +230,9 @@ $(document).ready(function() {
                 });
             });
 
+                });
+            }
         });
     });
 
-});
+    });

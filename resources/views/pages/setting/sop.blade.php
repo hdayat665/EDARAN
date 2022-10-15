@@ -43,10 +43,9 @@
                         <a href="javascript:;" data-bs-toggle="modal" id="addButton1" class="btn btn-primary">+ New Policy's</a>
                     </div>
                     <div class="panel-body">
-                        <table id="data-table-default" class="table table-striped table-bordered align-middle">
+                        <table id="tablepolicy" class="table table-striped table-bordered align-middle">
                             <thead>
-                                <tr>
-                                    <th width="9%" data-orderable="false" class="align-middle">Action</th>
+                                <tr>                                    
                                     <th class="text-nowrap">Policy Name</th>
                                     <th class="text-nowrap">Document Title</th>
                                     <th class="text-nowrap">Description</th>
@@ -55,16 +54,14 @@
                                     <th class="text-nowrap">Added Time</th>
                                     <th class="text-nowrap">Modified By</th>
                                     <th class="text-nowrap">Modified Time</th>
-
-
+                                    <th width="9%" data-orderable="false" class="align-middle">Action</th>
 
                                 </tr>
                             </thead>
                             <tbody>
                                 @if ($policys)
                                     @foreach ($policys as $policy)
-                                    <tr>
-                                        <td><a href="javascript:;" data-bs-toggle="modal" id="editButton1" data-id="{{$policy->id}}" class="btn btn-outline-green"><i class="fa fa-pencil-alt"></i></a> <a id="deleteButton1" data-id="{{$policy->id}}" class="btn btn-outline-danger"><i class="fa fa-trash"></i></a></td>
+                                    <tr>                                        
                                         <td>{{$policy->policy}}</td>
                                         <td>{{$policy->file}}</td>
                                         <td>{{$policy->desc}}</td>
@@ -73,6 +70,7 @@
                                         <td>{{$policy->created_at}}</td>
                                         <td>{{$policy->modifiedBy}}</td>
                                         <td>{{$policy->updated_at}}</td>
+                                        <td><a href="javascript:;" data-bs-toggle="modal" id="editButton1" data-id="{{$policy->id}}" class="btn btn-outline-green"><i class="fa fa-pencil-alt"></i></a> <a id="deleteButton1" data-id="{{$policy->id}}" class="btn btn-outline-danger"><i class="fa fa-trash"></i></a></td>
                                     </tr>
                                     @endforeach
                                 @endif
@@ -92,10 +90,9 @@
                     <a href="javascript:;" data-bs-toggle="modal" id="addButton2" class="btn btn-primary">+ New SOP's</a>
                 </div>
                 <div class="panel-body">
-                    <table id="data-table-default2" class="table table-striped table-bordered align-middle">
+                    <table id="tablesop" class="table table-striped table-bordered align-middle">
                         <thead>
-                            <tr>
-                                <th width="10%" data-orderable="false" class="align-middle">Action&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                            <tr>                                
                                 <th class="text-nowrap">SOP Name</th>
                                 <th class="text-nowrap">Document Title</th>
                                 <th class="text-nowrap">Description</th>
@@ -104,16 +101,14 @@
                                 <th class="text-nowrap">Added Time</th>
                                 <th class="text-nowrap">Modified By</th>
                                 <th class="text-nowrap">Modified Time</th>
-
-
+                                <th width="9%" data-orderable="false" class="align-middle">Action</th>
 
                             </tr>
                         </thead>
                         <tbody>
                             @if ($SOPs)
                                 @foreach ($SOPs as $SOP)
-                                <tr>
-                                    <td><a href="javascript:;" data-bs-toggle="modal" id="editButton2" data-id="{{$SOP->id}}" class="btn btn-outline-green"><i class="fa fa-pencil-alt"></i></a> <a id="deleteButton2" data-id="{{$SOP->id}}" class="btn btn-outline-danger"><i class="fa fa-trash"></i></a></td>
+                                <tr>                                    
                                     <td>{{$SOP->SOPName}}</td>
                                     <td>{{$SOP->file}}</td>
                                     <td>{{$SOP->desc}}</td>
@@ -122,6 +117,7 @@
                                     <td>{{$SOP->created_at}}</td>
                                     <td>{{$SOP->modifiedBy}}</td>
                                     <td>{{$SOP->updated_at}}</td>
+                                    <td><a href="javascript:;" data-bs-toggle="modal" id="editButton2" data-id="{{$SOP->id}}" class="btn btn-outline-green"><i class="fa fa-pencil-alt"></i></a> <a id="deleteButton2" data-id="{{$SOP->id}}" class="btn btn-outline-danger"><i class="fa fa-trash"></i></a></td>
                                 </tr>
                                 @endforeach
                             @endif
@@ -147,27 +143,27 @@
                 <form id="addForm1">
 
                     <div class="mb-3">
-                        <label>Policy's Code </label><br><br>
-                        <input type="text" class="form-control" name="code" placeholder="">
+                        <label class="form-label">Policy's Code </label><br><br>
+                        <input type="text" class="form-control" name="code" placeholder="" style="text-transform:uppercase ;">
                     </div>
                     <div class="mb-3">
-                        <label>Policy's Name </label><br><br>
-                        <input type="text" class="form-control" name="policy" placeholder="">
+                        <label class="form-label">Policy's Name </label><br><br>
+                        <input type="text" class="form-control" name="policy" placeholder="" maxlength="100" style="text-transform:uppercase ;">
                     </div>
                     <div class="mb-3">
-                        <label>Description </label><br><br>
-                        <textarea class="form-control" rows="3" name="desc"></textarea>
+                        <label class="form-label">Description </label><br><br>
+                        <textarea type="text" class="form-control" rows="3" name="desc" maxlength="255" style="text-transform: uppercase;"></textarea>
                     </div>
                     <div class="mb-3">
-                        <label>File Upload </label><br><br>
+                        <label class="form-label">File Upload </label><br><br>
                         <input id="fileupload" type="file" name="file" multiple="multiple" ></input>
                     </div>
-                </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" id="saveButton1">Save</button>
+                <button href="javascript:;" class="btn btn-primary" id="saveButton1">Save</button>
             </div>
+            </form>
         </div>
     </div>
 </div>
@@ -185,28 +181,28 @@
                 <form id="editForm1">
 
                     <div class="mb-3">
-                        <label>Policy's Code </label><br><br>
-                        <input type="text" class="form-control" id="code" name="code" placeholder="">
-                        <input type="hidden" class="form-control" id="idP" name="id" placeholder="">
+                        <label class="form-label">Policy's Code </label><br><br>
+                        <input type="text" class="form-control" id="code" name="code" placeholder="" style="text-transform:uppercase ;">
+                        <input type="hidden" class="form-control" id="idP" name="id" placeholder="" style="text-transform:uppercase ;">
                     </div>
                     <div class="mb-3">
-                        <label>Policy's Name </label><br><br>
-                        <input type="text" class="form-control" id="policy" name="policy" placeholder="">
+                        <label class="form-label">Policy's Name </label><br><br>
+                        <input type="text" class="form-control" id="policy" name="policy" placeholder="" maxlength="100" style="text-transform:uppercase ;">
                     </div>
                     <div class="mb-3">
-                        <label>Description </label><br><br>
-                        <textarea class="form-control" rows="3" name="desc" id="desc"></textarea>
+                        <label class="form-label">Description </label><br><br>
+                        <textarea type="text" class="form-control" rows="3" name="desc" id="desc" maxlength="255" style="text-transform: uppercase;"></textarea>
                     </div>
                     <div class="mb-3">
-                        <label>File Upload </label><br><br>
+                        <label class="form-label">File Upload </label><br><br>
                         <input id="fileupload" type="file" multiple="multiple" name="file"></input>
                     </div>
-                </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" id="updateButton1">Save</button>
+                <button href="javascript:;" class="btn btn-primary" id="updateButton1">Save</button>
             </div>
+            </form>
         </div>
     </div>
 </div>
@@ -222,27 +218,27 @@
                 <form id="addForm2">
 
                     <div class="mb-3">
-                        <label>SOP's Code </label><br><br>
-                        <input type="text" class="form-control" name="SOPCode" placeholder="">
+                        <label class="form-label">SOP's Code </label><br><br>
+                        <input type="text" class="form-control" name="SOPCode" placeholder="" maxlength="100" style="text-transform: uppercase;">
                     </div>
                     <div class="mb-3">
-                        <label>SOP's Name </label><br><br>
-                        <input type="text" class="form-control" name="SOPName" placeholder="">
+                        <label class="form-label">SOP's Name </label><br><br>
+                        <input type="text" class="form-control" name="SOPName" placeholder="" maxlength="100" style="text-transform: uppercase;">
                     </div>
                     <div class="mb-3">
-                        <label>Description </label><br><br>
-                        <textarea class="form-control" rows="3" name="desc"></textarea>
+                        <label class="form-label">Description </label><br><br>
+                        <textarea class="form-control" rows="3" name="desc" maxlength="255" style="text-transform: uppercase;"></textarea>
                     </div>
                     <div class="mb-3">
-                        <label>File Upload </label><br><br>
+                        <label class="form-label">File Upload </label><br><br>
                         <input id="fileupload" type="file" name="file" multiple="multiple" ></input>
                     </div>
-                </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" id="saveButton2">Save</button>
+                <button href="javascript:;" class="btn btn-primary" id="saveButton2">Save</button>
             </div>
+            </form>
         </div>
     </div>
 </div>
@@ -258,28 +254,28 @@
                 <form id="editForm2">
 
                     <div class="mb-3">
-                        <label>SOP's Code </label><br><br>
-                        <input type="text" class="form-control" name="SOPCode" id="SOPCode" placeholder="">
-                        <input type="hidden" class="form-control" name="id" id="idS" placeholder="">
+                        <label class="form-label">SOP's Code </label><br><br>
+                        <input type="text" class="form-control" name="SOPCode" id="SOPCode" placeholder="" style="text-transform:uppercase ;">
+                        <input type="hidden" class="form-control" name="id" id="idS" placeholder="" style="text-transform:uppercase ;">
                     </div>
                     <div class="mb-3">
-                        <label>SOP's Name </label><br><br>
-                        <input type="text" class="form-control" name="SOPName" id="SOPName" placeholder="">
+                        <label class="form-label">SOP's Name </label><br><br>
+                        <input type="text" class="form-control" name="SOPName" id="SOPName" placeholder="" maxlength="100" style="text-transform:uppercase ;">
                     </div>
                     <div class="mb-3">
-                        <label>Description </label><br><br>
-                        <textarea class="form-control" rows="3" name="desc" id="descr"></textarea>
+                        <label class="form-label">Description </label><br><br>
+                        <textarea class="form-control" rows="3" name="desc" id="descr" maxlength="255" style="text-transform: uppercase;" ></textarea>
                     </div>
                     <div class="mb-3">
-                        <label>File Upload </label><br><br>
+                        <label class="form-label">File Upload </label><br><br>
                         <input id="fileupload" type="file" name="file" multiple="multiple" ></input>
                     </div>
-                </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" id="updateButton2">Save</button>
+                <button href="javascript:;" class="btn btn-primary" id="updateButton2">Save</button>
             </div>
+            </form>
         </div>
     </div>
 </div>

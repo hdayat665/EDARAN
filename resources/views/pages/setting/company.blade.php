@@ -26,7 +26,6 @@
 
             <h4 class="panel-title"></h4>
 
-
         </div>
         <!-- END panel-heading -->
         <!-- BEGIN panel-body -->
@@ -91,12 +90,13 @@
                             <label>Company Name* </label><br><br>
                             <input type="text" class="form-control" name="companyName" placeholder="">
                         </div>
-                    </form>
+                    
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" id="saveButton">Save</button>
+                    <button class="btn btn-primary" id="saveButton">Save</button>
                 </div>
+                </form>
             </div>
         </div>
     </div>
@@ -113,19 +113,21 @@
 
                         <div class="mb-3">
                             <label>Company Code* </label><br><br>
-                            <input type="text" class="form-control" id="companyCode" name="companyCode" placeholder="">
+                            <input type="text" class="form-control" id="companyCode" name="companyCode" placeholder="" >
                             <input type="hidden" id="idC" class="form-control" name="id" placeholder="">
                         </div>
                         <div class="mb-3">
                             <label>Company Name* </label><br><br>
                             <input type="text" class="form-control" id="companyName" name="companyName" placeholder="">
                         </div>
-                    </form>
+                    
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" id="updateButton">Save</button>
+                    
+                    <button class="btn btn-primary" id="updateButton">Save</button>
                 </div>
+                </form>
             </div>
         </div>
     </div>
