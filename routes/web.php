@@ -258,7 +258,7 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('/projectDetail/{id}', 'projectDetail');
             Route::get('/projectFilter', 'projectFilter');
             Route::get('/getProjectByCustomerId/{customer_id}', 'getProjectByCustomerId');
-            Route::get('/searchReport', 'searchReport');
+            Route::get('/searchReportProject', 'searchReport');
             Route::post('/updateStatus/{id}/{status}', 'updateStatus');
         });
 

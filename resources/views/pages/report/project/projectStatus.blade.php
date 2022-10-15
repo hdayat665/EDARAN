@@ -13,7 +13,7 @@
     </div>
 
     <div class="panel-body">
-        <form id="searchForm" action="/searchReport">
+        <form id="searchForm" action="/searchReportProject">
             <div class="form-group col-md-4 ">
                 <label for="Menu1">View By : </label>
                 <select class="form-control" name="filter" id="select1">
