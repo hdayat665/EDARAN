@@ -20,15 +20,7 @@ class SOP extends Authenticatable
 
     protected $table ='SOP';
 
-    protected $fillable = [
-        'SOPName',
-        'tenant_id',
-        'SOPCode',
-        'file',
-        'desc',
-        'addedBy',
-        'modifiedBy',
-    ];
+    protected $guarded = [];
 
 }
 

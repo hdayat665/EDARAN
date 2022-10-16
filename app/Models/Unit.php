@@ -20,14 +20,7 @@ class Unit extends Authenticatable
 
     protected $table ='unit';
 
-    protected $fillable = [
-        'departmentId',
-        'tenant_id',
-        'unitCode',
-        'unitName',
-        'addedBy',
-        'modifiedBy',
-    ];
+    protected $guarded = [];
 
     public function department()
     {

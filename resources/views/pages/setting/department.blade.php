@@ -62,7 +62,7 @@
                             <td> {{$department->addedBy}}</td>
                             <td>{{$department->created_at}}</td>
                             <td>{{$department->modifiedBy}}</td>
-                            <td>{{$department->updated_at}}</td>
+                            <td>{{$department->modified_at}}</td>
                             <td><a href="javascript:;" data-bs-toggle="modal" id="editButton" data-id="{{$department->id}}" class="btn btn-outline-green"><i class="fa fa-pencil-alt"></i></a> <a href="javascript:;" class="btn btn-outline-danger" id="deleteButton" data-id="{{$department->id}}"><i class="fa fa-trash"></i></a></td>
                         </tr>
                         @endforeach
@@ -104,7 +104,7 @@
                         <label class="form-label">Department code* </label>
                         <input type="text" class="form-control" id="departmentCode" name="departmentCode" maxlength="100" placeholder="" style="text-transform:uppercase">
                     </div>
-                
+
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -142,7 +142,7 @@
                         <label class="form-label">Department code* </label>
                         <input type="text" class="form-control" name="departmentCode" maxlength="100" placeholder="" style="text-transform:uppercase">
                     </div>
-                
+
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

@@ -3,36 +3,14 @@
 @section('content')
 
 <div id="content" class="app-content">
-    <!-- BEGIN breadcrumb -->
-    <!-- BEGIN breadcrumb -->
-
-    <!-- END breadcrumb -->
-    <!-- BEGIN page-header -->
-
-    <!-- END page-header -->
-    <!-- BEGIN row -->
-
-    <!-- END breadcrumb -->
-    <!-- BEGIN page-header -->
     <h1 class="page-header" id="newsJs">Settings <small>| News</small></h1>
-
-    <!-- END page-header -->
-    <!-- BEGIN panel -->
     <div class="panel panel">
-
-        <!-- BEGIN panel-heading -->
-
         <div class="panel-heading">
             <div class="col-md-6">
                 <a href="javascript:;" data-bs-toggle="modal" id="addButton" class="btn btn-primary">+ New News</a>
             </div>
-
             <h4 class="panel-title"></h4>
-
-
         </div>
-        <!-- END panel-heading -->
-        <!-- BEGIN panel-body -->
         <div class="panel-body">
             <table id="tablenews" class="table table-striped table-bordered align-middle">
                 <thead>
@@ -45,8 +23,6 @@
                         <th class="text-nowrap">Modified By</th>
                         <th class="text-nowrap">Modified Time</th>
                         <th width="9%" data-orderable="false" class="align-middle">Action</th>
-
-
                     </tr>
                 </thead>
                 <tbody>
@@ -59,7 +35,7 @@
                         <td>{{$new->addedBy}}</td>
                         <td>{{$new->created_at}}</td>
                         <td>{{$new->modifiedBy}}</td>
-                        <td>{{$new->updated_at}}</td>
+                        <td>{{$new->modified_at}}</td>
                         <td><a href="javascript:;" data-bs-toggle="modal" id="editButton" data-id="{{$new->id}}" class="btn btn-outline-green"><i class="fa fa-pencil-alt"></i></a> <a id="deleteButton" data-id="{{$new->id}}" class="btn btn-outline-danger"><i class="fa fa-trash"></i></a></td>
                     </tr>
                     @endforeach
@@ -71,8 +47,6 @@
 </div>
 
 
-<!-- END row -->
-<!-- BEGIN row -->
 <div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -135,6 +109,7 @@
                     <div class="mb-3">
                         <label class="form-label">File Upload </label><br><br>
                         <input id="fileupload" type="file" name="file" multiple="multiple" ></input>
+                        <span id="fileDownload"></span>
                     </div>
             </div>
             <div class="modal-footer">

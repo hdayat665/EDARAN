@@ -38,7 +38,7 @@
                 <thead>
                     <tr>
                         <th width="1%">NO</th>
-                        <th class="text-nowrap">Employment Type Code</th>
+                        {{-- <th class="text-nowrap">Employment Type Code</th> --}}
                         <th class="text-nowrap">Employment Type</th>
                         <th class="text-nowrap">Added By</th>
                         <th class="text-nowrap">Added Time</th>
@@ -56,12 +56,12 @@
                         <?php  $id++ ?>
                     <tr class="odd gradeX">
                         <td width="1%" class="fw-bold text-dark">{{$id}}</td>
-                        <td>{{$employmentType->code}}</td>
+                        {{-- <td>{{$employmentType->code}}</td> --}}
                         <td>{{$employmentType->type}}</td>
                         <td>{{$employmentType->addedBy}}</td>
                         <td>{{$employmentType->created_at}}</td>
                         <td>{{$employmentType->modifiedBy}}</td>
-                        <td>{{$employmentType->updated_at}}</td>
+                        <td>{{$employmentType->modified_at}}</td>
                         <td><a href="javascript:;" data-bs-toggle="modal" id="editButton" data-id="{{$employmentType->id}}" class="btn btn-outline-green"><i class="fa fa-pencil-alt"></i></a> <a id="deleteButton" data-id="{{$employmentType->id}}" class="btn btn-outline-danger"><i class="fa fa-trash"></i></a></td>
                     </tr>
                     @endforeach
@@ -82,11 +82,10 @@
                 </div>
                 <div class="modal-body">
                     <form id="addForm">
-
-                        <div class="mb-3">
+                        {{-- <div class="mb-3">
                             <label class="form-label">Employment Type Code* </label><br><br>
                             <input type="text" class="form-control" name="code" placeholder="" maxlength="100" style="text-transform:uppercase ;">
-                        </div>
+                        </div> --}}
                         <div class="mb-3">
                             <label class="form-label">Employment Type* </label><br><br>
                             <input type="text" class="form-control" name="type" placeholder="" maxlength="100" style="text-transform:uppercase ;">
@@ -109,15 +108,15 @@
                 </div>
                 <div class="modal-body">
                     <form id="editForm">
-
-                        <div class="mb-3">
+                        {{-- <div class="mb-3">
                             <label class="form-label">Employment Type Code* </label><br><br>
                             <input type="text" class="form-control" name="code" placeholder="" maxlength="100" style="text-transform:uppercase ;">
                             <input type="hidden" class="form-control" name="id" id="idE" placeholder="" maxlength="100" style="text-transform:uppercase ;">
-                        </div>
+                        </div> --}}
                         <div class="mb-3">
                             <label class="form-label">Employment Type* </label><br><br>
-                            <input type="text" class="form-control" name="type" placeholder="" maxlength="100" style="text-transform:uppercase ;">
+                            <input type="text" class="form-control" name="type" id="type" placeholder="" maxlength="100" style="text-transform:uppercase ;">
+                            <input type="hidden" id="idE" name="id">
                         </div>
                 </div>
                 <div class="modal-footer">
