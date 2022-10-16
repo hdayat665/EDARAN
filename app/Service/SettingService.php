@@ -2,6 +2,7 @@
 
 namespace App\Service;
 
+use App\Exceptions\CustomException;
 use App\Models\ActivityLogs;
 use App\Models\Branch;
 use App\Models\Company;
@@ -113,6 +114,18 @@ class SettingService
     public function createCompany($r)
     {
         $input = $r->input();
+
+        date_default_timezone_set("Asia/Kuala_Lumpur");
+        $etData = Company::where('companyCode', $input['companyCode'])->first();
+        if ($etData) {
+            $data['msg'] = 'Company code already exists.';
+            $data['status'] = config('app.response.error.status');
+            $data['type'] = config('app.response.error.type');
+            $data['title'] = config('app.response.error.title');
+
+            return $data;
+        }
+
         $user = Auth::user();
         $input['addedBy'] = $user->username;
         $input['tenant_id'] = Auth::user()->tenant_id;
@@ -122,7 +135,7 @@ class SettingService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success create role';
+        $data['msg'] = 'Success create company';
 
         return $data;
     }
@@ -130,6 +143,10 @@ class SettingService
     public function updateCompany($r, $id)
     {
         $input = $r->input();
+
+        date_default_timezone_set("Asia/Kuala_Lumpur");
+
+        $input['modified_at'] = date('d-m-y h:i:s');
         $user = Auth::user();
         $input['modifiedBy'] = $user->username;
 
@@ -138,7 +155,7 @@ class SettingService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success update role';
+        $data['msg'] = 'Success update company';
 
         return $data;
     }
@@ -179,6 +196,17 @@ class SettingService
     public function createDepartment($r)
     {
         $input = $r->input();
+
+        date_default_timezone_set("Asia/Kuala_Lumpur");
+        $etData = Department::where('departmentCode', $input['departmentCode'])->first();
+        if ($etData) {
+            $data['msg'] = 'Department code already exists.';
+            $data['status'] = config('app.response.error.status');
+            $data['type'] = config('app.response.error.type');
+            $data['title'] = config('app.response.error.title');
+
+            return $data;
+        }
         $user = Auth::user();
         $input['tenant_id'] = Auth::user()->tenant_id;
         $input['addedBy'] = $user->username;
@@ -196,6 +224,10 @@ class SettingService
     public function updateDepartment($r, $id)
     {
         $input = $r->input();
+
+        date_default_timezone_set("Asia/Kuala_Lumpur");
+
+        $input['modified_at'] = date('d-m-y h:i:s');
         $user = Auth::user();
         $input['modifiedBy'] = $user->username;
 
@@ -243,6 +275,18 @@ class SettingService
     public function createUnit($r)
     {
         $input = $r->input();
+
+
+        date_default_timezone_set("Asia/Kuala_Lumpur");
+        $etData = Unit::where('unitCode', $input['unitCode'])->first();
+        if ($etData) {
+            $data['msg'] = 'Unit code already exists.';
+            $data['status'] = config('app.response.error.status');
+            $data['type'] = config('app.response.error.type');
+            $data['title'] = config('app.response.error.title');
+
+            return $data;
+        }
         $user = Auth::user();
         $input['tenant_id'] = Auth::user()->tenant_id;
         $input['addedBy'] = $user->username;
@@ -260,6 +304,10 @@ class SettingService
     public function updateUnit($r, $id)
     {
         $input = $r->input();
+
+        date_default_timezone_set("Asia/Kuala_Lumpur");
+
+        $input['modified_at'] = date('d-m-y h:i:s');
         $user = Auth::user();
         $input['modifiedBy'] = $user->username;
 
@@ -307,6 +355,18 @@ class SettingService
     public function createBranch($r)
     {
         $input = $r->input();
+
+        date_default_timezone_set("Asia/Kuala_Lumpur");
+        $etData = Branch::where('branchName', $input['branchName'])->first();
+        if ($etData) {
+            $data['msg'] = 'Branch name already exists.';
+            $data['status'] = config('app.response.error.status');
+            $data['type'] = config('app.response.error.type');
+            $data['title'] = config('app.response.error.title');
+
+            return $data;
+        }
+
         $user = Auth::user();
         $input['tenant_id'] = Auth::user()->tenant_id;
         $input['addedBy'] = $user->username;
@@ -324,6 +384,10 @@ class SettingService
     public function updateBranch($r, $id)
     {
         $input = $r->input();
+
+        date_default_timezone_set("Asia/Kuala_Lumpur");
+
+        $input['modified_at'] = date('d-m-y h:i:s');
         $user = Auth::user();
         $input['modifiedBy'] = $user->username;
 
@@ -371,9 +435,22 @@ class SettingService
     public function createJobGrade($r)
     {
         $input = $r->input();
+
+        date_default_timezone_set("Asia/Kuala_Lumpur");
+        $etData = JobGrade::where('jobGradeCode', $input['jobGradeCode'])->first();
+        if ($etData) {
+            $data['msg'] = 'Code already exists.';
+            $data['status'] = config('app.response.error.status');
+            $data['type'] = config('app.response.error.type');
+            $data['title'] = config('app.response.error.title');
+
+            return $data;
+        }
+
         $user = Auth::user();
         $input['tenant_id'] = Auth::user()->tenant_id;
         $input['addedBy'] = $user->username;
+
         JobGrade::create($input);
 
         $data['status'] = config('app.response.success.status');
@@ -387,6 +464,10 @@ class SettingService
     public function updateJobGrade($r, $id)
     {
         $input = $r->input();
+
+        date_default_timezone_set("Asia/Kuala_Lumpur");
+
+        $input['modified_at'] = date('d-m-y h:i:s');
         $user = Auth::user();
         $input['modifiedBy'] = $user->username;
         JobGrade::where('id', $id)->update($input);
@@ -433,6 +514,18 @@ class SettingService
     public function createDesignation($r)
     {
         $input = $r->input();
+
+        date_default_timezone_set("Asia/Kuala_Lumpur");
+        $etData = Designation::where('designationCode', $input['designationCode'])->first();
+        if ($etData) {
+            $data['msg'] = 'Code already exists.';
+            $data['status'] = config('app.response.error.status');
+            $data['type'] = config('app.response.error.type');
+            $data['title'] = config('app.response.error.title');
+
+            return $data;
+        }
+
         $user = Auth::user();
         $input['addedBy'] = $user->username;
         $input['tenant_id'] = Auth::user()->tenant_id;
@@ -450,6 +543,9 @@ class SettingService
     {
         $input = $r->input();
         $user = Auth::user();
+        date_default_timezone_set("Asia/Kuala_Lumpur");
+
+        $input['modified_at'] = date('d-m-y h:i:s');
         $input['modifiedBy'] = $user->username;
         Designation::where('id', $id)->update($input);
 
@@ -507,6 +603,18 @@ class SettingService
             }
         }
 
+        $sopData = SOP::where('SOPCode', $input['SOPCode'])->first();
+
+        if ($sopData) {
+            $data['status'] = config('app.response.error.status');
+            $data['type'] = config('app.response.error.type');
+            $data['title'] = config('app.response.error.title');
+            $data['msg'] = 'SOP code already exist';
+
+            return $data;
+        }
+        date_default_timezone_set("Asia/Kuala_Lumpur");
+
         $input['tenant_id'] = Auth::user()->tenant_id;
         $input['addedBy'] = $user->username;
         SOP::create($input);
@@ -533,7 +641,9 @@ class SettingService
             }
         }
 
+        date_default_timezone_set("Asia/Kuala_Lumpur");
         $input['modifiedBy'] = $user->username;
+        $input['modified_at'] = date('d-m-y h:i:s');
         SOP::where('id', $id)->update($input);
 
         $data['status'] = config('app.response.success.status');
@@ -665,7 +775,6 @@ class SettingService
     public function createNews($r)
     {
         $input = $r->input();
-
         if ($_FILES['file']['name']) {
             $payslip = upload($r->file('file'));
             $input['file'] = $payslip['filename'];
@@ -673,6 +782,17 @@ class SettingService
             if (!$input['file']) {
                 unset($input['file']);
             }
+        }
+
+        date_default_timezone_set("Asia/Kuala_Lumpur");
+        $newsData = News::where('title', $input['title'])->first();
+        if ($newsData) {
+            $data['msg'] = 'Title already exists.';
+            $data['status'] = config('app.response.error.status');
+            $data['type'] = config('app.response.error.type');
+            $data['title'] = config('app.response.error.title');
+
+            return $data;
         }
 
         $user = Auth::user();
@@ -691,6 +811,7 @@ class SettingService
 
     public function updateNews($r, $id)
     {
+
         $input = $r->input();
 
         if ($_FILES['file']['name']) {
@@ -704,6 +825,8 @@ class SettingService
 
         $user = Auth::user();
         $input['modifiedBy'] = $user->username;
+        date_default_timezone_set("Asia/Kuala_Lumpur");
+        $input['modified_at'] = date('d-m-y h:i:s');
 
         News::where('id', $id)->update($input);
 
@@ -752,6 +875,17 @@ class SettingService
     {
         $input = $r->input();
 
+        date_default_timezone_set("Asia/Kuala_Lumpur");
+        $etData = EmploymentType::where('type', $input['type'])->first();
+        if ($etData) {
+            $data['msg'] = 'Type already exists.';
+            $data['status'] = config('app.response.error.status');
+            $data['type'] = config('app.response.error.type');
+            $data['title'] = config('app.response.error.title');
+
+            return $data;
+        }
+
         $user = Auth::user();
         $input['addedBy'] = $user->username;
         $input['tenant_id'] = $user->tenant_id;
@@ -770,7 +904,9 @@ class SettingService
     {
         $input = $r->input();
 
+        date_default_timezone_set("Asia/Kuala_Lumpur");
         $user = Auth::user();
+        $input['modified_at'] = date('d-m-y h:i:s');
         $input['modifiedBy'] = $user->username;
 
         EmploymentType::where('id', $id)->update($input);

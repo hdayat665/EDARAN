@@ -61,7 +61,7 @@
                         <td>{{$jobGrade->addedBy}}</td>
                         <td>{{$jobGrade->created_at}}</td>
                         <td>{{$jobGrade->modifiedBy}}</td>
-                        <td>{{$jobGrade->updated_at}}</td>
+                        <td>{{$jobGrade->modified_at}}</td>
                         <td><a href="javascript:;" data-bs-toggle="modal" id="editButton" data-id="{{$jobGrade->id}}" class="btn btn-outline-green"><i class="fa fa-pencil-alt"></i></a> <a id="deleteButton" data-id="{{$jobGrade->id}}" class="btn btn-outline-danger"><i class="fa fa-trash"></i></a></td>
 
                     </tr>
