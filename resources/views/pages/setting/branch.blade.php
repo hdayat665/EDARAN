@@ -64,9 +64,9 @@
                         <td>{{$branch->branchName}}</td>
                         <td style="text-transform: uppercase;">{{$branch->state}}</td>
                         <td>{{$branch->addedBy}}</td>
-                        <td></td>
+                        <td>{{$branch->created_at}}</td>
                         <td>{{$branch->modifiedBy}}</td>
-                        <td>{{$branch->updated_at}}</td>
+                        <td>{{$branch->modified_at}}</td>
                         <td><a href="javascript:;" data-toggle="modal" data-bs-toggle="modal" id="editButton" data-id="{{$branch->id}}" class="btn btn-outline-green" ><i class="fa fa-pencil-alt"></i></a> <a id="deleteButton" data-id="{{$branch->id}}" class="btn btn-outline-danger"><i class="fa fa-trash"></i></a></td>
                     </tr>
                     @endforeach
@@ -99,12 +99,12 @@
                            
                         </div>
                         <div class="mb-2">
-                            <label class="form-label">Branch Type*</label>
-                            
-                            <select class="form-select" name="branchType" style="text-transform: uppercase;">
-                                <option type="text"value="" label="" selected="selected" selected="selected">Please Choose</option>
-                                <option type="text"value="HEADQUARTER" label="HEADQUARTER" >HEADQUARTER</option>
-                                <option type="text"value="STATE" label="STATE" >STATE</option>
+                            <label class="form-label">Branch Type</label>
+                            {{-- <input type="text" class="form-control" name="branchType" maxlength="100" placeholder="" style="text-transform:uppercase"> --}}
+                            <select class="form-select" name="branchType" id="">
+                                <option value="">Select Type</option>
+                                <option value="HEADQUARTERS ">HEADQUARTERS </option>
+                                <option value="STATE ">STATE </option>
                             </select>
                         </div>
                         <div class="mb-2">
@@ -191,8 +191,12 @@
                             <input type="text" class="form-control" name="branchName" id="branchName" maxlength="100" placeholder="Branch Name" >
                         </div>
                         <div class="mb-2">
-                            <label class="form-label">Branch Type*</label>
-                            <input type="text" class="form-control" name="branchType" id="branchType" maxlength="100" placeholder="Branch Type" >
+                            <label class="form-label">Branch Type</label>
+                            <select class="form-select" name="branchType" id="branchType">
+                                <option value="">Select Type</option>
+                                <option value="HEADQUARTERS">HEADQUARTERS </option>
+                                <option value="STATE">STATE </option>
+                            </select>
                         </div>
                         <div class="mb-2">
                             <label class="form-label">Unit Name*</label>
@@ -214,8 +218,8 @@
                             <input type="text" class="form-control" name="address2" id="address2" maxlength="100" placeholder="" >
                         </div>
                         <div class="mb-2">
-                            <label class="form-label">Postcode*</label>
-                            <input type="text" class="form-control" name="postcode" id="postcode" placeholder="" aria-describedby="postcode">
+                            <label class="form-label">Postcode</label>
+                            <input type="text" class="form-control" name="postcode" id="postcodeD" placeholder="" aria-describedby="postcode">
                         </div>
                         <div class="mb-2">
                             <label class="form-label">City*</label>

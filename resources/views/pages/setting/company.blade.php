@@ -57,7 +57,7 @@
                         <td> {{$company->addedBy}} </td>
                         <td>{{$company->created_at}}</td>
                         <td>{{$company->modifiedBy}}</td>
-                        <td>{{$company->updated_at}}</td>
+                        <td>{{$company->modified_at}}</td>
                         <td><a href="javascript:;" data-bs-toggle="modal" id="editButton" data-id="{{$company->id}}" class="btn btn-outline-green"><i class="fa fa-pencil-alt"></i></a> <a href="javascript:;" class="btn btn-outline-danger" id="deleteButton" data-id="{{$company->id}}"><i class="fa fa-trash"></i></a></td>
 
                     </tr>
@@ -120,7 +120,7 @@
                             <label class="form-label">Company Name* </label>
                             <input type="text" class="form-control" id="companyName" name="companyName" placeholder="Company Name">
                         </div>
-                    
+
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

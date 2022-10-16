@@ -1,7 +1,7 @@
 $(document).ready(function() {
 
-    $("input[type=text]").keyup(function () {  
-        $(this).val($(this).val().toUpperCase());  
+    $("input[type=text]").keyup(function() {
+        $(this).val($(this).val().toUpperCase());
     });
     $("option[type=text]").keyup(function () {  
         $(this).val($(this).val().toUpperCase());  
@@ -33,7 +33,8 @@ $(document).ready(function() {
             $('#branchName').val(data.branchName);
             $('#branchCode').val(data.branchCode);
             $('#branchType').val(data.branchType);
-            $('#postcode').val(data.postcode);
+            // $('#branchType').prop('selectedIndex', data.branchType);
+            $('#postcodeD').val(data.postcode);
             $('#address').val(data.address);
             $('#address2').val(data.address2);
             $('#city').val(data.city);
@@ -93,7 +94,7 @@ $(document).ready(function() {
         $("#addForm").validate({
             // Specify validation rules
             rules: {
-                
+
                 branchCode: "required",
                 branchName: "required",
                 branchType: "required",
@@ -102,15 +103,15 @@ $(document).ready(function() {
                 postcode: {
                     required: true,
                     digits: true,
-                    rangelength: [5,5]
+                    rangelength: [5, 5]
                 },
                 city: "required",
                 state: "required",
-                
+
             },
 
             messages: {
-               
+
                 branchCode: "Please Insert Branch Code ",
                 branchName: "Please Insert Branch Name",
                 branchType: "Please Insert Branch Type",
@@ -123,40 +124,40 @@ $(document).ready(function() {
                 },
                 city: "Please Insert City",
                 state: "Please Choose State"
-               
+
             },
             submitHandler: function(form) {
 
-        requirejs(['sweetAlert2'], function(swal) {
+                requirejs(['sweetAlert2'], function(swal) {
 
-            var data = new FormData(document.getElementById("addForm"));
-            // var data = $('#tree').jstree("get_selected");
+                    var data = new FormData(document.getElementById("addForm"));
+                    // var data = $('#tree').jstree("get_selected");
 
-            $.ajax({
-                type: "POST",
-                url: "/createBranch",
-                data: data,
-                dataType: "json",
-                async: false,
-                processData: false,
-                contentType: false,
-            }).done(function(data) {
-                swal({
-                    title: data.title,
-                    text: data.msg,
-                    type: data.type,
-                    confirmButtonColor: '#3085d6',
-                    confirmButtonText: 'OK'
-                }).then(function() {
-                    if (data.type == 'error') {
+                    $.ajax({
+                        type: "POST",
+                        url: "/createBranch",
+                        data: data,
+                        dataType: "json",
+                        async: false,
+                        processData: false,
+                        contentType: false,
+                    }).done(function(data) {
+                        swal({
+                            title: data.title,
+                            text: data.msg,
+                            type: data.type,
+                            confirmButtonColor: '#3085d6',
+                            confirmButtonText: 'OK'
+                        }).then(function() {
+                            if (data.type == 'error') {
 
-                    } else {
-                        location.reload();
-                    }
+                            } else {
+                                location.reload();
+                            }
 
 
-                });
-            });
+                        });
+                    });
 
                 });
             }
@@ -168,7 +169,7 @@ $(document).ready(function() {
         $("#editForm").validate({
             // Specify validation rules
             rules: {
-                
+
                 branchCode: "required",
                 branchName: "required",
                 branchType: "required",
@@ -177,15 +178,15 @@ $(document).ready(function() {
                 postcode: {
                     required: true,
                     digits: true,
-                    rangelength: [5,5]
+                    rangelength: [5, 5]
                 },
                 city: "required",
                 state: "required",
-                
+
             },
 
             messages: {
-               
+
                 branchCode: "Please Insert Branch Code ",
                 branchName: "Please Insert Branch Name",
                 branchType: "Please Insert Branch Type",
@@ -198,44 +199,44 @@ $(document).ready(function() {
                 },
                 city: "Please Insert City",
                 state: "Please Choose State"
-               
+
             },
             submitHandler: function(form) {
 
-        requirejs(['sweetAlert2'], function(swal) {
+                requirejs(['sweetAlert2'], function(swal) {
 
-            var data = new FormData(document.getElementById("editForm"));
-            var id = $('#idB').val();
+                    var data = new FormData(document.getElementById("editForm"));
+                    var id = $('#idB').val();
 
-            $.ajax({
-                type: "POST",
-                url: "/updateBranch/" + id,
-                data: data,
-                dataType: "json",
-                async: false,
-                processData: false,
-                contentType: false,
-            }).done(function(data) {
-                swal({
-                    title: data.title,
-                    text: data.msg,
-                    type: data.type,
-                    confirmButtonColor: '#3085d6',
-                    confirmButtonText: 'OK'
-                }).then(function() {
-                    if (data.type == 'error') {
+                    $.ajax({
+                        type: "POST",
+                        url: "/updateBranch/" + id,
+                        data: data,
+                        dataType: "json",
+                        async: false,
+                        processData: false,
+                        contentType: false,
+                    }).done(function(data) {
+                        swal({
+                            title: data.title,
+                            text: data.msg,
+                            type: data.type,
+                            confirmButtonColor: '#3085d6',
+                            confirmButtonText: 'OK'
+                        }).then(function() {
+                            if (data.type == 'error') {
 
-                    } else {
-                        location.reload();
-                    }
+                            } else {
+                                location.reload();
+                            }
 
 
-                });
-            });
+                        });
+                    });
 
                 });
             }
         });
     });
 
-    });
+});

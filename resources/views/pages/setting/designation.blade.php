@@ -68,7 +68,7 @@
                             <td>{{$designation->addedBy}}</td>
                             <td>{{$designation->created_at}}</td>
                             <td>{{$designation->modifiedBy}}</td>
-                            <td>{{$designation->updated_at}}</td>
+                            <td>{{$designation->modified_at}}</td>
                             <td><a href="javascript:;" data-bs-toggle="modal" id="editButton" data-id="{{$designation->id}}" class="btn btn-outline-green"><i class="fa fa-pencil-alt"></i></a> <a id="deleteButton" data-id="{{$designation->id}}" class="btn btn-outline-danger"><i class="fa fa-trash"></i></a></td>
 
                         </tr>

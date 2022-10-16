@@ -15,12 +15,12 @@ $(document).ready(function() {
 
     });
 
-    $("input[type=text]").keyup(function () {  
-        $(this).val($(this).val().toUpperCase());  
+    $("input[type=text]").keyup(function() {
+        $(this).val($(this).val().toUpperCase());
     });
 
-    $("textarea[type=text]").keyup(function () {  
-        $(this).val($(this).val().toUpperCase());  
+    $("textarea[type=text]").keyup(function() {
+        $(this).val($(this).val().toUpperCase());
     });
 
     $(document).on("click", "#editButton", function() {
@@ -31,6 +31,9 @@ $(document).ready(function() {
             console.log(data);
             $('#title').val(data.title);
             $('#sourceURL').val(data.sourceURL);
+            if (data.file) {
+                $('#fileDownload').html('<a href="/storage/' + data.file + '">Download File</a>')
+            }
             $('#contents').val(data.content);
             $('#idN').val(data.id);
         })
@@ -85,52 +88,52 @@ $(document).ready(function() {
         $("#addForm").validate({
             // Specify validation rules
             rules: {
-                
+
                 title: "required",
                 content: "required",
                 file: "required",
-                
+
             },
 
             messages: {
-               
+
                 title: "Please Insert Title",
                 content: "Please Insert Content",
                 file: "Upload Supporting Document",
-               
+
             },
             submitHandler: function(form) {
 
-        requirejs(['sweetAlert2'], function(swal) {
+                requirejs(['sweetAlert2'], function(swal) {
 
-            var data = new FormData(document.getElementById("addForm"));
-            // var data = $('#tree').jstree("get_selected");
+                    var data = new FormData(document.getElementById("addForm"));
+                    // var data = $('#tree').jstree("get_selected");
 
-            $.ajax({
-                type: "POST",
-                url: "/createNews",
-                data: data,
-                dataType: "json",
-                async: false,
-                processData: false,
-                contentType: false,
-            }).done(function(data) {
-                swal({
-                    title: data.title,
-                    text: data.msg,
-                    type: data.type,
-                    confirmButtonColor: '#3085d6',
-                    confirmButtonText: 'OK'
-                }).then(function() {
-                    if (data.type == 'error') {
+                    $.ajax({
+                        type: "POST",
+                        url: "/createNews",
+                        data: data,
+                        dataType: "json",
+                        async: false,
+                        processData: false,
+                        contentType: false,
+                    }).done(function(data) {
+                        swal({
+                            title: data.title,
+                            text: data.msg,
+                            type: data.type,
+                            confirmButtonColor: '#3085d6',
+                            confirmButtonText: 'OK'
+                        }).then(function() {
+                            if (data.type == 'error') {
 
-                    } else {
-                        location.reload();
-                    }
+                            } else {
+                                location.reload();
+                            }
 
 
-                });
-            });
+                        });
+                    });
 
                 });
             }
@@ -138,62 +141,62 @@ $(document).ready(function() {
     });
 });
 
-    $('#updateButton').click(function(e) {
+$('#updateButton').click(function(e) {
 
-        $("#editForm").validate({
-            // Specify validation rules
-            rules: {
-                
-
-                title: "required",
-                sourceURL:"required",
-                content: "required",
-                file: "required",
-                
-            },
-
-            messages: {
-               
-                title: "Please Insert Title",
-                sourceURL: "Please Insert URL",
-                content: "Please Insert Content",
-                file: "Upload Supporting Document",
-               
-            },
-            submitHandler: function(form) {
-
-        requirejs(['sweetAlert2'], function(swal) {
-
-            var data = new FormData(document.getElementById("editForm"));
-            var id = $('#idN').val();
-
-            $.ajax({
-                type: "POST",
-                url: "/updateNews/" + id,
-                data: data,
-                dataType: "json",
-                async: false,
-                processData: false,
-                contentType: false,
-            }).done(function(data) {
-                swal({
-                    title: data.title,
-                    text: data.msg,
-                    type: data.type,
-                    confirmButtonColor: '#3085d6',
-                    confirmButtonText: 'OK'
-                }).then(function() {
-                    if (data.type == 'error') {
-
-                    } else {
-                        location.reload();
-                    }
+    $("#editForm").validate({
+        // Specify validation rules
+        rules: {
 
 
+            title: "required",
+            sourceURL: "required",
+            content: "required",
+            file: "required",
+
+        },
+
+        messages: {
+
+            title: "Please Insert Title",
+            sourceURL: "Please Insert URL",
+            content: "Please Insert Content",
+            file: "Upload Supporting Document",
+
+        },
+        submitHandler: function(form) {
+
+            requirejs(['sweetAlert2'], function(swal) {
+
+                var data = new FormData(document.getElementById("editForm"));
+                var id = $('#idN').val();
+
+                $.ajax({
+                    type: "POST",
+                    url: "/updateNews/" + id,
+                    data: data,
+                    dataType: "json",
+                    async: false,
+                    processData: false,
+                    contentType: false,
+                }).done(function(data) {
+                    swal({
+                        title: data.title,
+                        text: data.msg,
+                        type: data.type,
+                        confirmButtonColor: '#3085d6',
+                        confirmButtonText: 'OK'
+                    }).then(function() {
+                        if (data.type == 'error') {
+
+                        } else {
+                            location.reload();
+                        }
+
+
+                    });
                 });
-        });
 
-             });
-         }
+            });
+        }
     });
 });

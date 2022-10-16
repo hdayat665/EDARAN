@@ -45,7 +45,7 @@
                     <div class="panel-body">
                         <table id="tablepolicy" class="table table-striped table-bordered align-middle">
                             <thead>
-                                <tr>                                    
+                                <tr>
                                     <th class="text-nowrap">Policy</th>
                                     <th class="text-nowrap">Document Title</th>
                                     <th class="text-nowrap">Description</th>
@@ -61,7 +61,7 @@
                             <tbody>
                                 @if ($policys)
                                     @foreach ($policys as $policy)
-                                    <tr>                                        
+                                    <tr>
                                         <td>{{$policy->policy}}</td>
                                         <td>{{$policy->file}}</td>
                                         <td>{{$policy->desc}}</td>
@@ -108,7 +108,7 @@
                         <tbody>
                             @if ($SOPs)
                                 @foreach ($SOPs as $SOP)
-                                <tr>                                    
+                                <tr>
                                     <td>{{$SOP->SOPName}}</td>
                                     <td>{{$SOP->file}}</td>
                                     <td>{{$SOP->desc}}</td>
@@ -116,7 +116,7 @@
                                     <td>{{$SOP->addedBy}}</td>
                                     <td>{{$SOP->created_at}}</td>
                                     <td>{{$SOP->modifiedBy}}</td>
-                                    <td>{{$SOP->updated_at}}</td>
+                                    <td>{{$SOP->modified_at}}</td>
                                     <td><a href="javascript:;" data-bs-toggle="modal" id="editButton2" data-id="{{$SOP->id}}" class="btn btn-outline-green"><i class="fa fa-pencil-alt"></i></a> <a id="deleteButton2" data-id="{{$SOP->id}}" class="btn btn-outline-danger"><i class="fa fa-trash"></i></a></td>
                                 </tr>
                                 @endforeach
@@ -196,6 +196,7 @@
                     <div class="mb-3">
                         <label class="form-label">Attachment*</label>
                         <input id="fileupload" type="file" multiple="multiple" name="file"></input>
+                        <span id="fileDownloadPolicy"></span>
                     </div>
             </div>
             <div class="modal-footer">
@@ -269,6 +270,7 @@
                     <div class="mb-3">
                         <label class="form-label">File Upload </label>
                         <input id="fileupload" type="file" name="file" multiple="multiple" ></input>
+                        <span id="fileDownloadSOP"></span>
                     </div>
             </div>
             <div class="modal-footer">

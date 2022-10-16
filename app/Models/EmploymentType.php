@@ -20,14 +20,7 @@ class EmploymentType extends Authenticatable
 
     protected $table ='employmentType';
 
-    protected $fillable = [
-        'id',
-        'tenant_id',
-        'code',
-        'type',
-        'addedBy',
-        'modifiedBy',
-    ];
-}
+    protected $guarded = [];
 
+}
 

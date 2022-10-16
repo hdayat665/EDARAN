@@ -18,20 +18,11 @@ class News extends Authenticatable
      * @var array<int, string>
      */
 
+     protected $guarded = [];
+
     protected $table ='news';
 
-    protected $fillable = [
-        'tenant_id',
-        'title',
-        'substitle',
-        'fileUpload',
-        'sourceURL',
-        'newThumbnail',
-        'newBanner',
-        'content',
-        'addedBy',
-        'modifiedBy',
-    ];
+
 
 }
 

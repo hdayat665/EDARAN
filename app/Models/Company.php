@@ -20,13 +20,7 @@ class Company extends Authenticatable
 
     protected $table ='company';
 
-    protected $fillable = [
-        'companyCode',
-        'tenant_id',
-        'companyName',
-        'addedBy',
-        'modifiedBy',
-    ];
+    protected $guarded = [];
 
 }
 

@@ -64,7 +64,7 @@
                         <td>{{$unit->addedBy}}</td>
                         <td>{{$unit->created_at}}</td>
                         <td>{{$unit->modifiedBy}}</td>
-                        <td>{{$unit->updated_at}}</td>
+                        <td>{{$unit->modified_at}}</td>
                         <td><a href="javascript:;" data-bs-toggle="modal" id="editButton" data-id="{{$unit->id}}" class="btn btn-outline-green"><i class="fa fa-pencil-alt"></i></a> <a href="javascript:;" id="deleteButton" data-id="{{$unit->id}}" class="btn btn-outline-danger"><i class="fa fa-trash"></i></a></td>
                     </tr>
                     @endforeach

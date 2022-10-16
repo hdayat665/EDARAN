@@ -20,23 +20,7 @@ class Branch extends Authenticatable
 
     protected $table ='branch';
 
-    protected $fillable = [
-        'unitName',
-        'tenant_id',
-        'unitId',
-        'branchName',
-        'branchType',
-        'branchCode',
-        'address',
-        'address2',
-        'city',
-        'branchType',
-        'state',
-        'country',
-        'postcode',
-        'addedBy',
-        'modifiedBy',
-    ];
+    protected $guarded = [];
 
     public function unit()
     {

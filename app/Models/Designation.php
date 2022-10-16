@@ -20,14 +20,7 @@ class Designation extends Authenticatable
 
     protected $table ='designation';
 
-    protected $fillable = [
-        'designationName',
-        'tenant_id',
-        'designationCode',
-        'jobDesc',
-        'addedBy',
-        'modifiedBy',
-    ];
+    protected $guarded = [];
 
 }
 

@@ -1,7 +1,7 @@
 $(document).ready(function() {
 
-    $("input[type=text]").keyup(function () {  
-        $(this).val($(this).val().toUpperCase());  
+    $("input[type=text]").keyup(function() {
+        $(this).val($(this).val().toUpperCase());
     });
 
 
@@ -27,7 +27,7 @@ $(document).ready(function() {
         vehicleData.done(function(data) {
             console.log(data);
             $('#codes').val(data.code);
-            $('#types').val(data.type);
+            $('#type').val(data.type);
             $('#idE').val(data.id);
         })
         $('#editModal').modal('show');
@@ -82,7 +82,7 @@ $(document).ready(function() {
         $("#addForm").validate({
             // Specify validation rules
             rules: {
-                
+
 
                
                 type:"required",
@@ -92,39 +92,39 @@ $(document).ready(function() {
             messages: {
                
                 type: "Please Insert Your Employment Name",
-               
+
             },
             submitHandler: function(form) {
 
-        requirejs(['sweetAlert2'], function(swal) {
+                requirejs(['sweetAlert2'], function(swal) {
 
-            var data = new FormData(document.getElementById("addForm"));
-            // var data = $('#tree').jstree("get_selected");
+                    var data = new FormData(document.getElementById("addForm"));
+                    // var data = $('#tree').jstree("get_selected");
 
-            $.ajax({
-                type: "POST",
-                url: "/createEmploymentType",
-                data: data,
-                dataType: "json",
-                async: false,
-                processData: false,
-                contentType: false,
-            }).done(function(data) {
-                swal({
-                    title: data.title,
-                    text: data.msg,
-                    type: data.type,
-                    confirmButtonColor: '#3085d6',
-                    confirmButtonText: 'OK'
-                }).then(function() {
-                    if (data.type == 'error') {
+                    $.ajax({
+                        type: "POST",
+                        url: "/createEmploymentType",
+                        data: data,
+                        dataType: "json",
+                        async: false,
+                        processData: false,
+                        contentType: false,
+                    }).done(function(data) {
+                        swal({
+                            title: data.title,
+                            text: data.msg,
+                            type: data.type,
+                            confirmButtonColor: '#3085d6',
+                            confirmButtonText: 'OK'
+                        }).then(function() {
+                            if (data.type == 'error') {
 
-                    } else {
-                        location.reload();
-                    }
+                            } else {
+                                location.reload();
+                            }
 
-                });
-            });
+                        });
+                    });
 
                 });
             }
@@ -136,7 +136,7 @@ $(document).ready(function() {
         $("#editForm").validate({
             // Specify validation rules
             rules: {
-                
+
 
                
                 type:"required",
@@ -146,40 +146,40 @@ $(document).ready(function() {
             messages: {
                
                 type: "Please Insert Your Employment Name",
-               
+
             },
             submitHandler: function(form) {
 
-        requirejs(['sweetAlert2'], function(swal) {
+                requirejs(['sweetAlert2'], function(swal) {
 
-            var data = new FormData(document.getElementById("editForm"));
-            var id = $('#idE').val();
+                    var data = new FormData(document.getElementById("editForm"));
+                    var id = $('#idE').val();
 
-            $.ajax({
-                type: "POST",
-                url: "/updateEmploymentType/" + id,
-                data: data,
-                dataType: "json",
-                async: false,
-                processData: false,
-                contentType: false,
-            }).done(function(data) {
-                swal({
-                    title: data.title,
-                    text: data.msg,
-                    type: data.type,
-                    confirmButtonColor: '#3085d6',
-                    confirmButtonText: 'OK'
-                }).then(function() {
-                    if (data.type == 'error') {
+                    $.ajax({
+                        type: "POST",
+                        url: "/updateEmploymentType/" + id,
+                        data: data,
+                        dataType: "json",
+                        async: false,
+                        processData: false,
+                        contentType: false,
+                    }).done(function(data) {
+                        swal({
+                            title: data.title,
+                            text: data.msg,
+                            type: data.type,
+                            confirmButtonColor: '#3085d6',
+                            confirmButtonText: 'OK'
+                        }).then(function() {
+                            if (data.type == 'error') {
 
-                    } else {
-                        location.reload();
-                    }
+                            } else {
+                                location.reload();
+                            }
 
 
-                });
-            });
+                        });
+                    });
 
                 });
             }
