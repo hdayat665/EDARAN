@@ -121,7 +121,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button href="javascript:;" class="btn btn-primary" id="updateButton">Save</button>
+                    <button href="javascript:;" class="btn btn-primary" id="updateButton">Update</button>
                 </div>
                 </form>
             </div>

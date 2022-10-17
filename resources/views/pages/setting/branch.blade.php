@@ -59,10 +59,10 @@
                     <?php $id++ ?>
                     <tr class="odd gradeX">
                         <td width="1%" class="fw-bold text-dark">{{$id}}</td>
-                        <td>{{$branch->unitName}}</td>
+                        <td style="text-transform: uppercase;">{{$branch->unitName}}</td>
                         <td>{{$branch->branchType}}</td>
                         <td>{{$branch->branchName}}</td>
-                        <td>{{$branch->state}}</td>
+                        <td style="text-transform: uppercase;">{{$branch->state}}</td>
                         <td>{{$branch->addedBy}}</td>
                         <td>{{$branch->created_at}}</td>
                         <td>{{$branch->modifiedBy}}</td>
@@ -90,12 +90,13 @@
                     <form id="addForm">
 
                         <div class="mb-3">
-                            <label class="form-label">Branch Code</label>
-                            <input type="text" class="form-control" name="branchCode" maxlength="100" placeholder="" style="text-transform:uppercase">
+                            <label class="form-label">Branch Code*</label>
+                            <input type="text" class="form-control" name="branchCode" maxlength="100" placeholder="Branch Code" >
                         </div>
                         <div class="mb-3">
-                            <label class="form-label">Branch Name</label>
-                            <input type="text" class="form-control" name="branchName" maxlength="100" placeholder="" style="text-transform:uppercase">
+                            <label class="form-label">Branch Name*</label>
+                            <input type="text" class="form-control" name="branchName" maxlength="100" placeholder="Branch Name" >
+                           
                         </div>
                         <div class="mb-2">
                             <label class="form-label">Branch Type</label>
@@ -107,56 +108,56 @@
                             </select>
                         </div>
                         <div class="mb-2">
-                            <label class="form-label">Unit Name</label>
+                            <label class="form-label">Unit Name*</label>
                             <select class="form-select" name="unitId" style="text-transform: uppercase;">
-                                <option value="" label="Select Unit" selected="selected">Select Unit </option>
+                                <option type="text"value="" label="Select Unit" selected="selected">Select Unit </option>
                                 <?php $units = getUnit() ?>
                                 @foreach ($units as $unit)
-                                <option value="{{$unit->id}}" >{{$unit->unitName}}</option>
+                                <option type="text"value="{{$unit->id}}" >{{$unit->unitName}}</option>
                                 @endforeach
                             </select>
                         </div>
                         <div class="mb-2">
-                            <label class="form-label">Address 1</label>
-                            <input type="text" class="form-control" name="address" maxlength="100" placeholder="" style="text-transform:uppercase">
+                            <label class="form-label">Address 1*</label>
+                            <input type="text" class="form-control" name="address" maxlength="100" placeholder="Address 1" >
                         </div>
                         <div class="mb-2">
                             <label class="form-label">Address 2</label>
-                            <input type="text" class="form-control" name="address2" maxlength="100" placeholder="" style="text-transform:uppercase">
+                            <input type="text" class="form-control" name="address2" maxlength="100" placeholder="Address 2" >
                         </div>
                         <div class="mb-2">
-                            <label class="form-label">Postcode</label>
-                            <input type="number" class="form-control" name="postcode" id="postcode" placeholder="" aria-describedby="postcode">
+                            <label class="form-label">Postcode*</label>
+                            <input type="number" class="form-control" name="postcode" id="postcode" placeholder="Postcode" aria-describedby="postcode">
                         </div>
                         <div class="mb-2">
-                            <label class="form-label">City</label>
-                            <input type="text" class="form-control" name="city" placeholder="" style="text-transform:uppercase;">
+                            <label class="form-label">City*</label>
+                            <input type="text" class="form-control" name="city" placeholder="City" >
                         </div>
                         <div class="mb-2">
-                            <label class="form-label">State</label>
+                            <label class="form-label">State*</label>
                             <select class="form-select" name="state" style="text-transform: uppercase;">
-                                <option value="" label="Select State " selected="selected">SELECT STATE</option>
-                                <option value="Johor" label="Johor">JOHOR</option>
-                                <option value="Kedah" label="Kedah">KEDAH</option>
-                                <option value="Kelantan" label="Kelantan">KELANTAN</option>
-                                <option value="Negeri Sembilan" label="Negeri Sembilan">NEGERI SEMBILAN</option>
-                                <option value="Pahang" label="Pahang">PAHANG</option>
-                                <option value="Penang" label="Penang">PENANG</option>
-                                <option value="Perak" label="Perak">PERAK</option>
-                                <option value="Perlis" label="Perlis">PERLIS</option>
-                                <option value="Sabah" label="Sabah">SABAH</option>
-                                <option value="Sarawak" label="Sarawak">SARAWAK</option>
-                                <option value="Selangor" label="Selangor">SELANGOR</option>
-                                <option value="Terengganu" label="Terengganu">TERENGGANU</option>
-                                <option value="Kuala Lumpur" label="Kuala Lumpur">KUALA LUMPUR</option>
-                                <option value="Labuan" label="Labuan">LABUAN</option>
-                                <option value="Putrajaya" label="Putrajaya">PUTRAJAYA</option>
+                                <option type="text"type="text" value="" label="Select State " selected="selected">SELECT STATE</option>
+                                <option type="text"value="Johor" label="Johor">JOHOR</option>
+                                <option type="text"value="Kedah" label="Kedah">KEDAH</option>
+                                <option type="text"value="Kelantan" label="Kelantan">KELANTAN</option>
+                                <option type="text"value="Negeri Sembilan" label="Negeri Sembilan">NEGERI SEMBILAN</option>
+                                <option type="text"value="Pahang" label="Pahang">PAHANG</option>
+                                <option type="text"value="Penang" label="Penang">PENANG</option>
+                                <option type="text"value="Perak" label="Perak">PERAK</option>
+                                <option type="text"value="Perlis" label="Perlis">PERLIS</option>
+                                <option type="text"value="Sabah" label="Sabah">SABAH</option>
+                                <option type="text"value="Sarawak" label="Sarawak">SARAWAK</option>
+                                <option type="text"value="Selangor" label="Selangor">SELANGOR</option>
+                                <option type="text"value="Terengganu" label="Terengganu">TERENGGANU</option>
+                                <option type="text"value="Kuala Lumpur" label="Kuala Lumpur">KUALA LUMPUR</option>
+                                <option type="text"value="Labuan" label="Labuan">LABUAN</option>
+                                <option type="text"value="Putrajaya" label="Putrajaya">PUTRAJAYA</option>
                             </select>
                         </div>
                         <div class="mb-2">
-                            <label class="form-label">Country</label>
+                            <label class="form-label">Country*</label>
                             <select class="form-select" name="country" style="text-transform: uppercase;">
-                                <option value="" label="malaysia" selected="selected">Select Country</option>
+                                <option type="text"value="MALAYSIA" label="MALAYSIA" selected="selected">MALAYSIA</option>
                             </select>
                         </div>
                 </div>
@@ -181,13 +182,13 @@
                     <form id="editForm">
 
                         <div class="mb-3">
-                            <label class="form-label">Branch Code</label>
-                            <input type="text" class="form-control" name="branchCode" id="branchCode" maxlength="100" placeholder="" style="text-transform:uppercase">
+                            <label class="form-label">Branch Code*</label>
+                            <input type="text" class="form-control" name="branchCode" id="branchCode" maxlength="100" placeholder="Branch Code" >
                             <input type="hidden" class="form-control" name="id" id="idB" placeholder="">
                         </div>
                         <div class="mb-3">
-                            <label class="form-label">Branch Name</label>
-                            <input type="text" class="form-control" name="branchName" id="branchName" maxlength="100" placeholder="" style="text-transform:uppercase;">
+                            <label class="form-label">Branch Name*</label>
+                            <input type="text" class="form-control" name="branchName" id="branchName" maxlength="100" placeholder="Branch Name" >
                         </div>
                         <div class="mb-2">
                             <label class="form-label">Branch Type</label>
@@ -198,64 +199,64 @@
                             </select>
                         </div>
                         <div class="mb-2">
-                            <label class="form-label">Unit Name</label>
+                            <label class="form-label">Unit Name*</label>
                             <select class="form-select" name="unitId" id="unitId" style="text-transform: uppercase;">
-                                <option value="" label="Select Unit">Select Unit </option>
+                                <option type="text"value="" label="Select Unit">Select Unit </option>
                                 <?php $units = getUnit() ?>
                                 @foreach ($units as $unit)
-                                <option value="{{$unit->id}}" >{{$unit->unitName}}</option>
+                                <option type="text"value="{{$unit->id}}" >{{$unit->unitName}}</option>
                                 @endforeach
 
                             </select>
                         </div>
                         <div class="mb-2">
-                            <label class="form-label">Address 1</label>
-                            <input type="text" class="form-control" name="address" id="address"  maxlength="100" placeholder="" style="text-transform:uppercase">
+                            <label class="form-label">Address 1*</label>
+                            <input type="text" class="form-control" name="address" id="address"  maxlength="100" placeholder="" >
                         </div>
                         <div class="mb-2">
                             <label class="form-label">Address 2</label>
-                            <input type="text" class="form-control" name="address2" id="address2" maxlength="100" placeholder="" style="text-transform:uppercase">
+                            <input type="text" class="form-control" name="address2" id="address2" maxlength="100" placeholder="" >
                         </div>
                         <div class="mb-2">
                             <label class="form-label">Postcode</label>
                             <input type="text" class="form-control" name="postcode" id="postcodeD" placeholder="" aria-describedby="postcode">
                         </div>
                         <div class="mb-2">
-                            <label class="form-label">City</label>
-                            <input type="text" class="form-control" name="city" id="city" placeholder="" style="text-transform: uppercase;">
+                            <label class="form-label">City*</label>
+                            <input type="text" class="form-control" name="city" id="city" placeholder="" >
                         </div>
                         <div class="mb-2">
-                            <label class="form-label">State</label>
-                            <select class="form-select" name="state" id="state" style="text-transform: uppercase;">
-                                <option value="" label="Select State " selected="selected">Select State </option>
-                                <option value="Johor" label="Johor">JOHOR</option>
-                                <option value="Kedah" label="Kedah">KEDAH</option>
-                                <option value="Kelantan" label="Kelantan">KELANTAN</option>
-                                <option value="Negeri Sembilan" label="Negeri Sembilan">NEGERI SEMBILAN</option>
-                                <option value="Pahang" label="Pahang">PAHANG</option>
-                                <option value="Penang" label="Penang">PENANG</option>
-                                <option value="Perak" label="Perak">PERAK</option>
-                                <option value="Perlis" label="Perlis">PERLIS</option>
-                                <option value="Sabah" label="Sabah">SABAH</option>
-                                <option value="Sarawak" label="Sarawak">SARAWAK</option>
-                                <option value="Selangor" label="Selangor">SELANGOR</option>
-                                <option value="Terengganu" label="Terengganu">TERENGGANU</option>
-                                <option value="Kuala Lumpur" label="Kuala Lumpur">KUALA LUMPUR</option>
-                                <option value="Labuan" label="Labuan">LABUAN</option>
-                                <option value="Putrajaya" label="Putrajaya">PUTRAJAYA</option>
+                            <label class="form-label">State*</label>
+                            <select type="text" class="form-select" name="state" id="state" style="text-transform: uppercase;">
+                                <option type="text"value="" label="Select State " selected="selected">Select State </option>
+                                <option type="text"value="Johor" label="Johor">JOHOR</option>
+                                <option type="text"value="Kedah" label="Kedah">KEDAH</option>
+                                <option type="text"value="Kelantan" label="Kelantan">KELANTAN</option>
+                                <option type="text"value="Negeri Sembilan" label="Negeri Sembilan">NEGERI SEMBILAN</option>
+                                <option type="text"value="Pahang" label="Pahang">PAHANG</option>
+                                <option type="text"value="Penang" label="Penang">PENANG</option>
+                                <option type="text"value="Perak" label="Perak">PERAK</option>
+                                <option type="text"value="Perlis" label="Perlis">PERLIS</option>
+                                <option type="text"value="Sabah" label="Sabah">SABAH</option>
+                                <option type="text"value="Sarawak" label="Sarawak">SARAWAK</option>
+                                <option type="text"value="Selangor" label="Selangor">SELANGOR</option>
+                                <option type="text"value="Terengganu" label="Terengganu">TERENGGANU</option>
+                                <option type="text"value="Kuala Lumpur" label="Kuala Lumpur">KUALA LUMPUR</option>
+                                <option type="text"value="Labuan" label="Labuan">LABUAN</option>
+                                <option type="text"value="Putrajaya" label="Putrajaya">PUTRAJAYA</option>
                             </select>
                         </div>
                         <div class="mb-2">
-                            <label class="form-label">Country</label>
+                            <label class="form-label">Country*</label>
                             <select class="form-select" name="country" style="text-transform: uppercase;">
-                                <option value="" label="malaysia" selected="selected">Select Country</option>
+                                <option type="text"value="" label="malaysia" selected="selected">Select Country</option>
                             </select>
                         </div>
                 </div>
 
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button href="javascript:;" class="btn btn-primary" id="updateButton">Save</button>
+                    <button href="javascript:;" class="btn btn-primary" id="updateButton">Update</button>
                 </div>
                 </form>
             </div>

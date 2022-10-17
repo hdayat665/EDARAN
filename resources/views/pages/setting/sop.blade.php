@@ -46,7 +46,7 @@
                         <table id="tablepolicy" class="table table-striped table-bordered align-middle">
                             <thead>
                                 <tr>
-                                    <th class="text-nowrap">Policy Name</th>
+                                    <th class="text-nowrap">Policy</th>
                                     <th class="text-nowrap">Document Title</th>
                                     <th class="text-nowrap">Description</th>
                                     <th class="text-nowrap">Attachment</th>
@@ -92,9 +92,9 @@
                 <div class="panel-body">
                     <table id="tablesop" class="table table-striped table-bordered align-middle">
                         <thead>
-                            <tr>
+                            <tr>                                
+                                <th class="text-nowrap">SOP Code</th>
                                 <th class="text-nowrap">SOP Name</th>
-                                <th class="text-nowrap">Document Title</th>
                                 <th class="text-nowrap">Description</th>
                                 <th class="text-nowrap">Attachment</th>
                                 <th class="text-nowrap">Added By</th>
@@ -143,19 +143,19 @@
                 <form id="addForm1">
 
                     <div class="mb-3">
-                        <label class="form-label">Policy's Code </label><br><br>
-                        <input type="text" class="form-control" name="code" placeholder="" style="text-transform:uppercase ;">
+                        <label class="form-label">Policy*</label>
+                        <input type="text" class="form-control" name="code" placeholder="Policy" >
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">Policy's Name </label><br><br>
-                        <input type="text" class="form-control" name="policy" placeholder="" maxlength="100" style="text-transform:uppercase ;">
+                        <label class="form-label">Document Title*</label>
+                        <input type="text" class="form-control" name="policy" placeholder="Document Title" maxlength="100" >
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">Description </label><br><br>
-                        <textarea type="text" class="form-control" rows="3" name="desc" maxlength="255" style="text-transform: uppercase;"></textarea>
+                        <label class="form-label">Description*</label>
+                        <textarea type="text" class="form-control" rows="3" placeholder="Description" name="desc" maxlength="255" ></textarea>
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">File Upload </label><br><br>
+                        <label class="form-label">Attachment </label>
                         <input id="fileupload" type="file" name="file" multiple="multiple" ></input>
                     </div>
             </div>
@@ -181,27 +181,27 @@
                 <form id="editForm1">
 
                     <div class="mb-3">
-                        <label class="form-label">Policy's Code </label><br><br>
-                        <input type="text" class="form-control" id="code" name="code" placeholder="" style="text-transform:uppercase ;">
-                        <input type="hidden" class="form-control" id="idP" name="id" placeholder="" style="text-transform:uppercase ;">
+                        <label class="form-label">Policy*</label>
+                        <input type="text" class="form-control" id="code" name="code" placeholder="Policy" >
+                        <input type="hidden" class="form-control" id="idP" name="id" placeholder="Policy" >
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">Policy's Name </label><br><br>
-                        <input type="text" class="form-control" id="policy" name="policy" placeholder="" maxlength="100" style="text-transform:uppercase ;">
+                        <label class="form-label">Document Title*</label>
+                        <input type="text" class="form-control" id="policy" name="policy" placeholder="Document Title" maxlength="100" >
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">Description </label><br><br>
-                        <textarea type="text" class="form-control" rows="3" name="desc" id="desc" maxlength="255" style="text-transform: uppercase;"></textarea>
+                        <label class="form-label">Description*</label>
+                        <textarea type="text" class="form-control" rows="3" name="desc" placeholder="Description" id="desc" maxlength="255" ></textarea>
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">File Upload </label><br><br>
+                        <label class="form-label">Attachment*</label>
                         <input id="fileupload" type="file" multiple="multiple" name="file"></input>
                         <span id="fileDownloadPolicy"></span>
                     </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button href="javascript:;" class="btn btn-primary" id="updateButton1">Save</button>
+                <button href="javascript:;" class="btn btn-primary" id="updateButton1">Update</button>
             </div>
             </form>
         </div>
@@ -219,19 +219,19 @@
                 <form id="addForm2">
 
                     <div class="mb-3">
-                        <label class="form-label">SOP's Code </label><br><br>
-                        <input type="text" class="form-control" name="SOPCode" placeholder="" maxlength="100" style="text-transform: uppercase;">
+                        <label class="form-label">SOP's Code* </label>
+                        <input type="text" class="form-control" name="SOPCode" placeholder="" maxlength="100" >
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">SOP's Name </label><br><br>
-                        <input type="text" class="form-control" name="SOPName" placeholder="" maxlength="100" style="text-transform: uppercase;">
+                        <label class="form-label">SOP's Name* </label>
+                        <input type="text" class="form-control" name="SOPName" placeholder="" maxlength="100" >
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">Description </label><br><br>
-                        <textarea class="form-control" rows="3" name="desc" maxlength="255" style="text-transform: uppercase;"></textarea>
+                        <label class="form-label">Description* </label>
+                        <textarea type="text" class="form-control" rows="3" name="desc" maxlength="255" ></textarea>
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">File Upload </label><br><br>
+                        <label class="form-label">Attachment* </label>
                         <input id="fileupload" type="file" name="file" multiple="multiple" ></input>
                     </div>
             </div>
@@ -255,27 +255,27 @@
                 <form id="editForm2">
 
                     <div class="mb-3">
-                        <label class="form-label">SOP's Code </label><br><br>
-                        <input type="text" class="form-control" name="SOPCode" id="SOPCode" placeholder="" style="text-transform:uppercase ;">
-                        <input type="hidden" class="form-control" name="id" id="idS" placeholder="" style="text-transform:uppercase ;">
+                        <label class="form-label">SOP's Code </label>
+                        <input type="text" class="form-control" name="SOPCode" id="SOPCode" placeholder="" >
+                        <input type="hidden" class="form-control" name="id" id="idS" placeholder="" >
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">SOP's Name </label><br><br>
-                        <input type="text" class="form-control" name="SOPName" id="SOPName" placeholder="" maxlength="100" style="text-transform:uppercase ;">
+                        <label class="form-label">SOP's Name </label>
+                        <input type="text" class="form-control" name="SOPName" id="SOPName" placeholder="" maxlength="100" >
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">Description </label><br><br>
-                        <textarea class="form-control" rows="3" name="desc" id="descr" maxlength="255" style="text-transform: uppercase;" ></textarea>
+                        <label class="form-label">Description </label>
+                        <textarea class="form-control" rows="3" name="desc" id="descr" maxlength="255"></textarea>
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">File Upload </label><br><br>
+                        <label class="form-label">File Upload </label>
                         <input id="fileupload" type="file" name="file" multiple="multiple" ></input>
                         <span id="fileDownloadSOP"></span>
                     </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button href="javascript:;" class="btn btn-primary" id="updateButton2">Save</button>
+                <button href="javascript:;" class="btn btn-primary" id="updateButton2">Update</button>
             </div>
             </form>
         </div>

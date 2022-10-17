@@ -88,7 +88,7 @@
                 <form id="addForm">
 
                     <div class="mb-3">
-                        <label class="form-label">Department Name* </label><br><br>
+                        <label class="form-label">Department Name* </label>
                         <select class="form-select" name="departmentId" style="text-transform: uppercase;">
                             <option value="" label="Select Department Name " selected="selected">Select Department Name </option>
                             <?php $departments = getDepartment() ?>
@@ -98,12 +98,12 @@
                         </select>
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">Unit Code* </label><br><br>
-                        <input type="text" class="form-control" name="unitCode" maxlength="100" placeholder="" style="text-transform:uppercase">
+                        <label class="form-label">Unit Code* </label>
+                        <input type="text" class="form-control" name="unitCode" maxlength="100" placeholder="Unit Code" >
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">Unit Name* </label><br><br>
-                        <input type="text" class="form-control" name="unitName" maxlength="100" placeholder="" style="text-transform:uppercase">
+                        <label class="form-label">Unit Name* </label>
+                        <input type="text" class="form-control" name="unitName" maxlength="100" placeholder="Unit Name" >
                     </div>
             </div>
             <div class="modal-footer">
@@ -128,7 +128,7 @@
                 <form id="updateForm">
 
                     <div class="mb-3">
-                        <label class="form-label"> Department Name* </label><br><br>
+                        <label class="form-label"> Department Name* </label>
                         <select class="form-select" name="departmentId" id="departmentId" style="text-transform: uppercase;">
                             <option value="" label="Select Department Name " selected="selected">Select Department Name </option>
                             <?php $departments = getDepartment() ?>
@@ -139,18 +139,18 @@
                         </select>
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">Unit Code* </label><br><br>
-                        <input type="text" class="form-control" id="unitCode" name="unitCode" maxlength="100" placeholder="" style="text-transform:uppercase">
-                        <input type="hidden" class="form-control" id="idU" name="id" maxlength="100" placeholder="" style="text-transform:uppercase">
+                        <label class="form-label">Unit Code* </label>
+                        <input type="text" class="form-control" id="unitCode" name="unitCode" maxlength="100" placeholder="" >
+                        <input type="hidden" class="form-control" id="idU" name="id" maxlength="100" placeholder="" >
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">Unit Name* </label><br><br>
-                        <input type="text" class="form-control" id="unitName" name="unitName" maxlength="100" placeholder="" style="text-transform:uppercase">
+                        <label class="form-label">Unit Name* </label>
+                        <input type="text" class="form-control" id="unitName" name="unitName" maxlength="100" placeholder="" >
                     </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button href="javascript:;" class="btn btn-primary" id="updateButton">Save</button>
+                <button href="javascript:;" class="btn btn-primary" id="updateButton">Update</button>
             </div>
             </form>
         </div>

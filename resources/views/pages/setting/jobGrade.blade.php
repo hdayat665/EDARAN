@@ -86,12 +86,12 @@
                 <form id="addForm">
 
                     <div class="mb-3">
-                        <label class="form-label">Job Grade Code* </label><br><br>
-                        <input type="text" class="form-control" name="jobGradeCode" placeholder="" maxlength="100" style="text-transform:uppercase ;">
+                        <label class="form-label">Job Grade Code* </label>
+                        <input type="text" class="form-control" name="jobGradeCode" placeholder="Job Grade Code" maxlength="100">
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">Job Grade Name* </label><br><br>
-                        <input type="text" class="form-control" name="jobGradeName" placeholder="" maxlength="100" style="text-transform:uppercase ;">
+                        <label class="form-label">Job Grade Name* </label>
+                        <input type="text" class="form-control" name="jobGradeName" placeholder="Job Grade Name" maxlength="100">
                     </div>
             </div>
             <div class="modal-footer">
@@ -113,18 +113,18 @@
                 <form id="editForm">
 
                     <div class="mb-3">
-                        <label class="form-label">Job Grade Code* </label><br><br>
-                        <input type="text" class="form-control" name="jobGradeCode" id="jobGradeCode" placeholder=""maxlength="100" style="text-transform:uppercase ;">
+                        <label class="form-label">Job Grade Code* </label>
+                        <input type="text" class="form-control" name="jobGradeCode" id="jobGradeCode" placeholder="Job Grade Code" maxlength="100" >
                         <input type="hidden" class="form-control" name="id" id="idJ" placeholder="">
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">Job Grade Name* </label><br><br>
-                        <input type="text" class="form-control" name="jobGradeName" id="jobGradeName" placeholder="" maxlength="100" style="text-transform:uppercase ;">
+                        <label class="form-label">Job Grade Name* </label>
+                        <input type="text" class="form-control" name="jobGradeName" id="jobGradeName" placeholder="Job Grade Name" maxlength="100" >
                     </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button href="javascript:;" class="btn btn-primary" id="updateButton">Save</button>
+                <button href="javascript:;" class="btn btn-primary" id="updateButton">Update</button>
             </div>
             </form>
         </div>
