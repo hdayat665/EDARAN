@@ -84,6 +84,7 @@ $(document).ready(function() {
             $('#idNo').prop('readonly', true);
             $('#passport').prop('readonly', false);
             $('#expirydate').prop('readonly', false);
+            $('#expirydate').css('pointer-events', 'auto');
             $('#dob').prop('readonly', false);
             $('#dob').css('pointer-events', 'auto');
             $("#idNo").val("");
@@ -93,6 +94,7 @@ $(document).ready(function() {
             $('#idNo').prop('readonly', false);
             $('#passport').prop('readonly', true);
             $('#expirydate').prop('readonly', true);
+            $('#expirydate').css('pointer-events', 'none');
             $('#dob').prop('readonly', true);
             $('#dob').css('pointer-events', 'none');
             
