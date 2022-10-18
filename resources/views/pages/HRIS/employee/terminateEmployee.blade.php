@@ -9,14 +9,14 @@
                 <form id="submitForm">
                     <div class="mb-5">
                         <label for="recipient-name" class="col-form-label">Employee ID</label>
-                        <input type="text" name="employeeId" id="employeeId" class="form-control">
+                        <input type="text" name="employeeId" id="employeeId" class="form-control" readonly>
                         <input type="hidden" name="user_id"  id="userId" >
                         <label for="recipient-name" class="col-form-label">Employee Name</label>
-                        <input type="text" name="employeeName" id="employeeName" class="form-control">
+                        <input type="text" name="employeeName" id="employeeName" class="form-control" readonly>
                         <label for="recipient-name" class="col-form-label">Employee Email</label>
-                        <input type="text" name="employeeEmail" id="employeeEmail" class="form-control">
+                        <input type="text" name="employeeEmail" id="employeeEmail" class="form-control" readonly>
                         <label for="recipient-name" class="col-form-label">Report To</label>
-                        <input type="text" name="report_to" id="reportTo" class="form-control">
+                        <input type="text" name="report_to" id="reportTo" class="form-control" readonly>
 
                     </div>
                     <div class="mb-5">

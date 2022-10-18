@@ -86,7 +86,7 @@ if (!function_exists('getMaritalStatus')) {
     function getMaritalStatus($id = '')
     {
         $data = [
-            '0' => '-',
+           
             '1' => 'Single',
             '2' => 'Married',
             '3' => 'Divorced',

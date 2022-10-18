@@ -14,8 +14,8 @@
             <table id="data-table-default" class="table table-striped table-bordered align-middle">
                 <thead>
                     <tr>
-                        <th width="1%"></th>
-                        <th width="1%" data-orderable="false"></th>
+                        <th width="1%">No</th>
+                        <th width="1%" data-orderable="false">Action</th>
                         <th class="text-nowrap">Employee ID</th>
                         <th class="text-nowrap">First Name</th>
                         <th class="text-nowrap">Last name</th>
@@ -37,6 +37,7 @@
                                 <a href="/editEmployee/{{$employeeInfo->user_id}}" class="dropdown-item">Edit Employee </a>
                                 <div class="dropdown-divider"></div>
                                 <a href="register_v3.html" data-bs-toggle="modal" id="terminate" data-employee="{{$employeeInfo->id}}" data-id="{{$employeeInfo->user_id}}" class="dropdown-item"> Terminate Employee</a>
+                                <a href="register_v3.html" class="dropdown-item" style="display:none"> Cancel Termination</a>
                             </div>
                         </td>
                         <td>{{$employeeInfo->employeeId}}</td>

@@ -110,18 +110,21 @@ $(document).ready(function() {
                     username:"required",
                     firstName:"required",
                     lastName:"required",
-                    fullName:"required",
                     idNo:"required",
                     issuingCountry:"required",
                     DOB:"required",
                     gender:"required",
                     maritialStatus:"required",
                     religion:"required",
-                    race:"required",
                     personalEmail:{
                         required: true,
                         email: true
-                    }
+                    },
+                    phoneNo: {
+                        required: true,
+                        digits: true,
+                        
+                    },
                 },
     
                 messages: {
@@ -129,7 +132,6 @@ $(document).ready(function() {
                     username:"Please insert username",
                     firstName:"Please insert first name",
                     lastName:"Please insert last namee",
-                    fullName:"Please insert full name",
                     idNo:"Please insert identification number",
                     expiryDate:"Please insert expiry date",
                     issuingCountry:"Please insert issuing country",
@@ -137,11 +139,15 @@ $(document).ready(function() {
                     gender:"Please insert gender",
                     maritialStatus:"Please insert marital status",
                     religion:"Please insert religion",
-                    race:"Please insert race",
                     personalEmail:{
                         required: "Please insert personal email",
                         email: "Please insert valid email"
-                    }
+                    },
+                    phoneNo: {
+                        required: "Please insert Phone Number",
+                        digits: "Please Insert Correct Identification Number Without ' - ' or Space",
+                        
+                    },
                 },
                 submitHandler: function(form) {
     
@@ -178,6 +184,14 @@ $(document).ready(function() {
                         $('#employeeEmail').val(employeeEmail);
                         $('#user_id1').val(data.data.user_id);
 
+                        $( "#nav-prof" ).removeClass( "active" );
+                        $( "#nav-addr" ).addClass( "active" );
+                        $( "#nav-det" ).removeClass( "active" );
+
+                        $( "#default-tab-1" ).removeClass( "active show" );
+                        $( "#default-tab-2" ).addClass( "active show" );
+                        $( "#default-tab-3" ).removeClass( "active show" );
+
                     }
 
 
@@ -187,7 +201,15 @@ $(document).ready(function() {
     }
         });      
     });
+    $( "#prev_btn_addr_det" ).click(function() {
+		$( "#nav-prof" ).addClass( "active" );
+		$( "#nav-addr" ).removeClass( "active" );
+		$( "#nav-det" ).removeClass( "active" );
 
+		$( "#default-tab-1" ).addClass( "active show" );
+		$( "#default-tab-2" ).removeClass( "active show" );
+		$( "#default-tab-3" ).removeClass( "active show" );
+      });
     $('#submitAddress').click(function(e) {
 
         $("#addressForm").validate({
@@ -271,6 +293,14 @@ $(document).ready(function() {
                         // $('#user_id').val(data.data.user_id);
                         // $('#user_id1').val(data.data.user_id);
 
+                        // Navigation after submit
+                        $( "#nav-prof" ).removeClass( "active" );
+                        $( "#nav-addr" ).removeClass( "active" );
+                        $( "#nav-det" ).addClass( "active" );
+
+                        $( "#default-tab-1" ).removeClass( "active show" );
+                        $( "#default-tab-2" ).removeClass( "active show" );
+                        $( "#default-tab-3" ).addClass( "active show" );
                     }
 
 
@@ -282,6 +312,16 @@ $(document).ready(function() {
     }
 });
     });
+    
+    $( "#prev_emp_det" ).click(function() {
+		$( "#nav-prof" ).removeClass( "active" );
+		$( "#nav-addr" ).addClass( "active" );
+		$( "#nav-det" ).removeClass( "active" );
+
+		$( "#default-tab-1" ).removeClass( "active show" );
+		$( "#default-tab-2" ).addClass( "active show" );
+		$( "#default-tab-3" ).removeClass( "active show" );
+      });
 
     $('#submitEmployment').click(function(e) {
         
