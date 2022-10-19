@@ -117,7 +117,7 @@
             </div>
             <label class="form-label col-form-label col-md-1">Report To*</label>
             <div class="col-md-5">
-                <select class="form-select" name="supervisor" required>
+                <select class="form-select" name="supervisor" >
 
                     <?php $employees = getEmployee(); ?>
                     <option label="Please Choose" selected="selected"> </option>
