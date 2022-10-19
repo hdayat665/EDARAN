@@ -9,29 +9,29 @@
     <br>
     <br>
     <p>Dear teams ,    </p>
-    <p>Please be informed that you are invited :</p>
-    <p>to participate in the following events on:</p>
+    <p>Please be adviced that the event has been cancelled :</p>
+    <p>as follows   :</p>
     <br>
-    <p>Start Date   : {{$start_date}}</p>
+    <p>Start Date   : {{$start_date ?? '-'}}</p>
     <br>
-    <p>Start Time   : {{$start_time}} </p>
+    <p>Start Time   : {{$start_time ?? '-'}} </p>
     <br>
-    <p>Duration     : {{$duration}}</p>
+    <p>Duration     : {{$duration ?? '-'}}</p>
     <br>
-    <p>Venue        : {{$venue}}</p>
+    <p>Venue        : {{$venue ?? '-'}}</p>
     <br>
-    <p>Description  : {{$desc}}</p>
+    <p>Description  : {{$desc ?? '-'}}</p>
     <br>
     <br>
     <br>
     <p> Thank you.</p>
     <br>
-    <p>Please make yourself available during that time.</p>
+    <p>We are sorry for the inconvenience caused.</p>
+    <p>Thank you.</p>
     <br>
-    <p>You may confirm your attendance in the orbit. <a href="{{$link}}">click here.</a> </p>
     <p>Best regards,    </p>
-    <p>{{$employeeName}}</p>
-    <p>{{$departmentName}}</p>
+    <p>{{$employeeName ?? '-'}}</p>
+    <p>{{$departmentName ?? '-'}}</p>
     {{-- <a href="{{ $resetPassLink }}"><button>Activate</button></a> --}}
     <br>
     <br>

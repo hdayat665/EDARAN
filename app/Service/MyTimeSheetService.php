@@ -137,7 +137,7 @@ class MyTimeSheetService
 
     public function deleteLog($id)
     {
-        $logs = TypeOfLogs::find($id);
+        $logs = TimesheetLog::find($id);
 
         if (!$logs) {
             $data['status'] = config('app.response.error.status');
@@ -219,7 +219,6 @@ class MyTimeSheetService
         TimesheetEvent::create($input);
 
         $eventDetails = TimesheetEvent::where('tenant_id', $user->tenant_id)->orderBy('created_at', 'DESC')->first();
-        $workingEmail = getWorkingEmail($user->id);
         $departmentName = getDepartmentName($user->id)->departmentName;
         $employeeName = getDepartmentName($user->id)->employeeName;
         $venue = projectLocationById($eventDetails->location);
@@ -233,6 +232,7 @@ class MyTimeSheetService
 
             $receiver = $receiverEmail;
             $response['typeEmail'] = 'eventInviation';
+            $response['title'] = $eventDetails->event_name;
             $response['start_date'] = $eventDetails->start_date;
             $response['start_time'] = $eventDetails->start_time;
             $response['duration'] = $eventDetails->duration;
@@ -298,6 +298,42 @@ class MyTimeSheetService
         // pr($input);
         TimesheetEvent::where('id', $id)->update($input);
 
+        $eventDetails = TimesheetEvent::where('id', $id)->orderBy('created_at', 'DESC')->first();
+        $departmentName = getDepartmentName($user->id)->departmentName;
+        $employeeName = getDepartmentName($user->id)->employeeName;
+        $venue = projectLocationById($eventDetails->location);
+
+        $participants = explode(',', $eventDetails->participant);
+
+        if ($participants) {
+            $participantDetail = Employee::whereIn('user_id', $participants)->get();
+
+            foreach ($participantDetail as $participant) {
+                $receiverEmail = $participant->workingEmail;
+
+                $receiver = $receiverEmail;
+                $response['typeEmail'] = 'eventUpdate';
+                $response['title'] = $eventDetails->event_name;
+                $response['start_date'] = $eventDetails->start_date;
+                $response['start_time'] = $eventDetails->start_time;
+                $response['duration'] = $eventDetails->duration;
+                $response['venue'] = $venue;
+                $response['desc'] = $eventDetails->desc;
+                $response['employeeName'] = $employeeName;
+                $response['departmentName'] = $departmentName;
+                $response['desc'] = $eventDetails->desc;
+                $response['link'] = env('APP_URL') . '/myTimesheet';
+                $response['from'] = env('MAIL_FROM_ADDRESS');
+                $response['nameFrom'] = 'Event Update';
+                $response['subject'] = 'Orbit Teams Meeting';
+                // $response['typeAttachment'] = "application/pdf";
+                // $response['file'] = \public_path()."/assets/frontend/docs/gambar.jpg";
+
+                FacadesMail::to($receiver)->send(new Mail($response));
+            }
+        }
+
+
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
@@ -308,15 +344,51 @@ class MyTimeSheetService
 
     public function deleteEvent($id)
     {
-        $logs = TypeOfLogs::find($id);
+        $result = TimesheetEvent::find($id);
+        $user = Auth::user();
 
-        if (!$logs) {
+        if (!$result) {
             $data['status'] = config('app.response.error.status');
             $data['type'] = config('app.response.error.type');
             $data['title'] = config('app.response.error.title');
-            $data['msg'] = 'logs not found';
+            $data['msg'] = 'timesheet event not found';
         } else {
-            $logs->delete();
+            $eventDetails = TimesheetEvent::where('id', $id)->orderBy('created_at', 'DESC')->first();
+            $departmentName = getDepartmentName($user->id)->departmentName;
+            $employeeName = getDepartmentName($user->id)->employeeName;
+            $venue = projectLocationById($eventDetails->location);
+
+            $participants = explode(',', $eventDetails->participant);
+
+            if ($participants) {
+                $participantDetail = Employee::whereIn('user_id', $participants)->get();
+
+                foreach ($participantDetail as $participant) {
+                    $receiverEmail = $participant->workingEmail;
+
+                    $receiver = $receiverEmail;
+                    $response['typeEmail'] = 'eventDelete';
+                    $response['title'] = $eventDetails->event_name;
+                    $response['start_date'] = $eventDetails->start_date;
+                    $response['start_time'] = $eventDetails->start_time;
+                    $response['duration'] = $eventDetails->duration;
+                    $response['venue'] = $venue ?? '-';
+                    $response['desc'] = $eventDetails->desc;
+                    $response['employeeName'] = $employeeName;
+                    $response['departmentName'] = $departmentName;
+                    $response['desc'] = $eventDetails->desc;
+                    $response['link'] = env('APP_URL') . '/myTimesheet';
+                    $response['from'] = env('MAIL_FROM_ADDRESS');
+                    $response['nameFrom'] = 'Event Delete';
+                    $response['subject'] = 'Orbit Teams Meeting';
+                    // $response['typeAttachment'] = "application/pdf";
+                    // $response['file'] = \public_path()."/assets/frontend/docs/gambar.jpg";
+
+                    FacadesMail::to($receiver)->send(new Mail($response));
+                }
+            }
+
+            $result->delete();
 
             $data['status'] = config('app.response.success.status');
             $data['type'] = config('app.response.success.type');

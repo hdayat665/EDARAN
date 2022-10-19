@@ -304,7 +304,8 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('/realtimeEmployeeTimesheet', 'realtimeEmployeeTimesheetView');
             Route::get('/getAttendanceByEventId/{eventId}', 'getAttendanceByEventId');
             Route::post('/searchRealtimeEventTimesheet', 'searchRealtimeEventTimesheet');
-
+            Route::post('/deleteEvent/{id}', 'deleteEvent');
+            Route::post('/deleteLog/{id}', 'deleteLog');
         });
 
     });
