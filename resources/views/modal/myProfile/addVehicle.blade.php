@@ -11,7 +11,7 @@
                         <label for="firstname" class="form-label">Vehicle Type*</label>
                         <select class="form-select" name="vehicle_type">
                             <?php $vehicleTypes = getVehicle() ?>
-                            <option value="0" label="Please Choose " selected="selected"></option>
+                            <option value="" label="Please Choose " selected="selected"></option>
                             @foreach ($vehicleTypes as $key => $vehicle)
                                 <option value="{{$key}}">{{$vehicle}}</option>
                             @endforeach
@@ -19,13 +19,15 @@
                     </div>
                     <div class="row p-2">
                         <label for="lastname" class="form-label">Plate Number*</label>
-                        <input type="text" id="lastname" name="plate_no" class="form-control" aria-describedby="lastname">
+                        <input type="text" id="lastname" name="plate_no" class="form-control" aria-describedby="lastname" placeholder="Plate Number">
                     </div>
-                </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-primary" id="saveVehicle">Save</button>
+                {{-- <button type="button" class="btn btn-primary" id="saveVehicle">Save</button> --}}
+                <button href="javascript:;" id="saveVehicle" class="btn btn-primary">Save</button>
+                
+            </form>
             </div>
         </div>
     </div>

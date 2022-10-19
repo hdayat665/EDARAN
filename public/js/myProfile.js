@@ -1330,8 +1330,47 @@ $(document).ready(function() {
 
     }
 
+    $.validator.addMethod('mypassword', function(value, element) {
+        return this.optional(element) || (value.match(/[A-Z]/) && value.match(/[0-9]/));
+    },
+    'Password must contain at least one numeric and one uppercase character.');
+
+    $.validator.addMethod("pwcheckspechars", function (value) {
+        return /[!@#$%^&*()_=\[\]{};':"\\|,.<>\/?+-]/.test(value)
+    }, "The password must contain at least one special character");
 
     $("#changePassButton").click(function(e) {
+
+        $("#changePassForm").validate({
+            // Specify validation rules
+            rules: {
+              
+            current_password: "required",
+            password: {
+                required: true,
+                minlength: 8,
+                mypassword: true,
+                pwcheckspechars: true
+              
+            },
+            
+                
+            },
+
+            messages: {
+                current_password: "Please enter your current password",
+               
+                password: {
+                    required: "Please enter new Password <br/>*The password Password must at least have 8 characters <br/>*Password must contain at least one digit and one uppercase character<br/>*    Password must at least contain one special character",
+                    minlength: "*The password Password must at least have 8 characters <br/>*Password must contain at least one digit and one uppercase character<br/>*    Password must at least contain one special character",
+                    mypassword: "*The password Password must at least have 8 characters <br/>*Password must contain at least one digit and one uppercase character<br/>*    Password must at least contain one special character",
+                    pwcheckspechars: "*The password Password must at least have 8 characters <br/>*Password must contain at least one digit and one uppercase character<br/>*    Password must at least contain one special character"
+                },
+
+               
+            },
+            submitHandler: function(form) {
+
         var data = new FormData(document.getElementById("changePassForm"));
 
         requirejs(["sweetAlert2"], function(swal) {
@@ -1356,6 +1395,9 @@ $(document).ready(function() {
                     }
                 });
             });
+
+                });
+            }
         });
     });
 

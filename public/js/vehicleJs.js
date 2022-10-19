@@ -1,5 +1,16 @@
 $(document).ready(function() {
 
+    $('#data-table-default')
+        .dataTable({
+            "responsive": true,
+            "bLengthChange": false,
+            "bFilter": true,
+        });
+
+        function Previous() {
+            window.history.back()
+        }
+
     $("#datepicker-joindate").datepicker({
         todayHighlight: true,
         autoclose: true,
@@ -96,7 +107,21 @@ $(document).ready(function() {
     }
 
 
-    $('#saveVehicle').click(function(e) {
+    $('#addVehicleView').click(function(e) {
+        $("#addVehicleForm").validate({
+            // Specify validation rules
+            rules: {
+                // vehicle_type: "required",
+                plate_no: "required",
+                vehicle_type: "required"
+            },
+
+            messages: {
+                // vehicle_type: "required",
+                plate_no: "Please insert plate No",
+                vehicle_type: "Please insert vehicle type"
+            },
+            submitHandler: function(form) {
         requirejs(['sweetAlert2'], function(swal) {
 
             var data = new FormData(document.getElementById("addVehicleForm"));
@@ -124,9 +149,11 @@ $(document).ready(function() {
                     }
 
 
-                });
+                 });
             });
 
+                });
+            }
         });
     });
 

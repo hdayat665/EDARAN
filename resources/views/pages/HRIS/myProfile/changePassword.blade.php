@@ -13,22 +13,23 @@
                 <div class="row p-2">
                     <label for="firstname" class="form-label">Current Password*</label>
                     <input type="password" id="password" name="current_password" class="form-control" aria-describedby="password">
-                    <input type="hidden" id="password" name="user_id" value="{{$user_id}}" class="form-control" aria-describedby="password">
+                    <input type="hidden" id="password1" name="user_id" value="{{$user_id}}" class="form-control" aria-describedby="password">
                 </div>
                 <div class="row p-2">
                     <label for="firstname" class="form-label">New Password*</label>
-                    <input type="password" id="password" name="password"  class="form-control" aria-describedby="password">
+                    <input type="password" id="password2" name="password"  class="form-control" aria-describedby="password">
                 </div>
                 <div class="row p-2">
                     <label for="firstname" class="form-label">Confirm Password*</label>
                     <input type="password" id="password" name="confirm_password" class="form-control" aria-describedby="password">
 
                 </div>
-            </form>
-            <button type="button" id="changePassButton" class="btn btn-primary float-end mt-3">
+            
+            {{-- <button type="button" id="changePassButton" class="btn btn-primary float-end mt-3">
                 Save
-            </button>
+            </button> --}}
+            <button href="javascript:;" id="changePassButton" class="btn btn-primary float-end mt-3">Save</button>
+        </form>
         </div>
-
     </div>
 </div>
