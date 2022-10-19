@@ -9,8 +9,8 @@
     <br>
     <br>
     <p>Dear teams ,    </p>
-    <p>Please be informed that you are invited :</p>
-    <p>to participate in the following events on:</p>
+    <p>Please be adviced that the event has been updated:</p>
+    <p>to following events on:</p>
     <br>
     <p>Start Date   : {{$start_date}}</p>
     <br>
@@ -28,7 +28,7 @@
     <br>
     <p>Please make yourself available during that time.</p>
     <br>
-    <p>You may confirm your attendance in the orbit. <a href="{{$link}}">click here.</a> </p>
+    <p>You may confirm your attendance in the orbit. <a href="{{$link}}">click here.</a></p>
     <p>Best regards,    </p>
     <p>{{$employeeName}}</p>
     <p>{{$departmentName}}</p>

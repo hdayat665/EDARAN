@@ -765,8 +765,10 @@ if (!function_exists('projectLocationById')) {
     function projectLocationById($id = '')
     {
         $data = ProjectLocation::where('id', $id)->first();
+
         if (!$data) {
-            $data = [];
+            $data = '';
+            return $data;
         }
 
         return $data->location_name;
