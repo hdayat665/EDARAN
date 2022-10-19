@@ -25,8 +25,8 @@
                                 <div class="dropdown-menu">
                                     <a href="javascript:;" id="editVehicleView" data-id="{{$vehicle->id}}" class="dropdown-item">Edit</a>
                                     <div class="dropdown-divider"></div>
-                                    <a href="javascript:;" id="viewVehicleView" data-id="{{$vehicle->id}}" class="dropdown-item">View</a>
-                                    <div class="dropdown-divider"></div>
+                                    {{-- <a href="javascript:;" id="viewVehicleView" data-id="{{$vehicle->id}}" class="dropdown-item">View</a>
+                                    <div class="dropdown-divider"></div> --}}
                                     <a href="javascript:;" id="deleteVehicle" data-id="{{$vehicle->id}}" class="dropdown-item">Delete</a>
                                 </div>
                         </td>
