@@ -47,7 +47,7 @@
                         <td>{{$employeeInfo->email}}</td>
                         <td>{{$employeeInfo->phoneNo}}</td>
                         <td>{{$employeeInfo->department}}</td>
-                        <td>{{ ($employeeInfo->supervisor) ? getSupervisor($employeeInfo->supervisor)->employeeName : '-'}}</td>
+                        <td>{{ ($employeeInfo->supervisor) ? getSupervisor($employeeInfo->supervisor)->employeeName : '-' }}</td>
                         <td><span class="badge <?= ($employeeInfo->status == 'active') ? 'bg-green' : 'bg-red'  ?>">{{$employeeInfo->status}}</span></td>
                     </tr>
                     @endforeach
