@@ -27,10 +27,11 @@
                     </tr>
                 </thead>
                 <tbody>
+                    @if ($employeeInfos)
+                    <?php $no = 1 ?>
                     @foreach ($employeeInfos as $employeeInfo)
-
                     <tr class="odd gradeX">
-                        <td width="1%" class="fw-bold text-dark">1</td>
+                        <td width="1%" class="fw-bold text-dark">{{$no++}}</td>
                         <td>
                             <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle"><i class="fa fa-cogs"></i> Actions <i class="fa fa-caret-down"></i></a>
                             <div class="dropdown-menu">
@@ -46,10 +47,11 @@
                         <td>{{$employeeInfo->email}}</td>
                         <td>{{$employeeInfo->phoneNo}}</td>
                         <td>{{$employeeInfo->department}}</td>
-                        <td>{{$employeeInfo->supervisor}}</td>
+                        <td>{{ ($employeeInfo->supervisor) ? getSupervisor($employeeInfo->supervisor)->employeeName : '-'}}</td>
                         <td><span class="badge <?= ($employeeInfo->status == 'active') ? 'bg-green' : 'bg-red'  ?>">{{$employeeInfo->status}}</span></td>
                     </tr>
                     @endforeach
+                    @endif
                 </tbody>
             </table>
         </div>

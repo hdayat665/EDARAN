@@ -86,7 +86,7 @@ if (!function_exists('getMaritalStatus')) {
     function getMaritalStatus($id = '')
     {
         $data = [
-           
+
             '1' => 'Single',
             '2' => 'Married',
             '3' => 'Divorced',
@@ -728,6 +728,14 @@ if (!function_exists('year')) {
             '2022' => '2022',
         ];
 
+        return $data;
+    }
+}
+
+if (!function_exists('getSupervisor')) {
+    function getSupervisor($id = '')
+    {
+        $data = Employee::where('id', $id)->select('employeeName')->first();
         return $data;
     }
 }
