@@ -724,29 +724,41 @@ class EmployeeService
 
     public function addEmployment($r)
     {
-        $input= $r->input();
-        $input['tenant_id'] = Auth::user()->tenant_id;
-        $input['status'] = 'inactive';
-        $input['joinedDate'] = date_format(date_create($input['joinedDate']), 'y-m-d');
-        Employee::create($input);
+        $input = $r->input();
 
-        $ec['user_id'] = $input['user_id'];
-        UserEmergency::create($ec);
-        $jh['user_id'] = $input['user_id'];
-        $jh['tenant_id'] = Auth::user()->tenant_id;
-        $jh['updatedBy'] = Auth::user()->username;
-        $jh['effectiveDate'] = $input['joinedDate'];
-        JobHistory::create($jh);
+        $workingEmail = Employee::where('workingEmail', $input['workingEmail'])->first();
 
-        $ls = new LoginService;
+        if ($workingEmail) {
+            $data['status'] = false;
+            $data['title'] = 'Error';
+            $data['type'] = 'error';
+            $data['msg'] = 'email already exist';
+        } else {
+            $input['tenant_id'] = Auth::user()->tenant_id;
+            // $input['status'] = 'inactive';
+            $input['status'] = 'active';
+            $input['joinedDate'] = date_format(date_create($input['joinedDate']), 'y-m-d');
+            Employee::create($input);
 
-        $ls->temporaryPasswordEmail($input);
+            $ec['user_id'] = $input['user_id'];
+            UserEmergency::create($ec);
+            $jh['user_id'] = $input['user_id'];
+            $jh['tenant_id'] = Auth::user()->tenant_id;
+            $jh['updatedBy'] = Auth::user()->username;
+            $jh['effectiveDate'] = $input['joinedDate'];
+            JobHistory::create($jh);
 
-        $data['status'] = true;
-        $data['title'] = 'Success';
-        $data['type'] = 'success';
-        $data['msg'] = 'Success create user employment';
-        $data['data'] = Employee::where('user_id', $input['user_id'])->first();
+            $ls = new LoginService;
+
+            $ls->temporaryPasswordEmail($input);
+
+            $data['status'] = true;
+            $data['title'] = 'Success';
+            $data['type'] = 'success';
+            $data['msg'] = 'Success create user employment';
+            $data['data'] = Employee::where('user_id', $input['user_id'])->first();
+        }
+
 
         return $data;
     }

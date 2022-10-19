@@ -108,7 +108,7 @@
                     @if ($employmentTypes)
 
                     @foreach ($employmentTypes as $employmentType)
-                        <option value="{{$employmentType->id }}">{{$employmentType->employmentTypeName}}</option>
+                        <option value="{{$employmentType->id }}">{{$employmentType->code}}</option>
                     @endforeach
                     @endif
 

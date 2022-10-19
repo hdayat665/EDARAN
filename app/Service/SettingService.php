@@ -146,7 +146,7 @@ class SettingService
 
         date_default_timezone_set("Asia/Kuala_Lumpur");
 
-        $input['modified_at'] = date('d-m-y h:i:s');
+        $input['modified_at'] = date('Y-m-d H:i:s');
         $user = Auth::user();
         $input['modifiedBy'] = $user->username;
 
@@ -227,7 +227,7 @@ class SettingService
 
         date_default_timezone_set("Asia/Kuala_Lumpur");
 
-        $input['modified_at'] = date('d-m-y h:i:s');
+        $input['modified_at'] = date('Y-m-d H:i:s');
         $user = Auth::user();
         $input['modifiedBy'] = $user->username;
 
@@ -307,7 +307,7 @@ class SettingService
 
         date_default_timezone_set("Asia/Kuala_Lumpur");
 
-        $input['modified_at'] = date('d-m-y h:i:s');
+        $input['modified_at'] = date('Y-m-d H:i:s');
         $user = Auth::user();
         $input['modifiedBy'] = $user->username;
 
@@ -387,7 +387,7 @@ class SettingService
 
         date_default_timezone_set("Asia/Kuala_Lumpur");
 
-        $input['modified_at'] = date('d-m-y h:i:s');
+        $input['modified_at'] = date('Y-m-d H:i:s');
         $user = Auth::user();
         $input['modifiedBy'] = $user->username;
 
@@ -467,7 +467,7 @@ class SettingService
 
         date_default_timezone_set("Asia/Kuala_Lumpur");
 
-        $input['modified_at'] = date('d-m-y h:i:s');
+        $input['modified_at'] = date('Y-m-d H:i:s');
         $user = Auth::user();
         $input['modifiedBy'] = $user->username;
         JobGrade::where('id', $id)->update($input);
@@ -545,7 +545,7 @@ class SettingService
         $user = Auth::user();
         date_default_timezone_set("Asia/Kuala_Lumpur");
 
-        $input['modified_at'] = date('d-m-y h:i:s');
+        $input['modified_at'] = date('Y-m-d H:i:s');
         $input['modifiedBy'] = $user->username;
         Designation::where('id', $id)->update($input);
 
@@ -643,7 +643,7 @@ class SettingService
 
         date_default_timezone_set("Asia/Kuala_Lumpur");
         $input['modifiedBy'] = $user->username;
-        $input['modified_at'] = date('d-m-y h:i:s');
+        $input['modified_at'] = date('Y-m-d H:i:s');
         SOP::where('id', $id)->update($input);
 
         $data['status'] = config('app.response.success.status');
@@ -826,7 +826,7 @@ class SettingService
         $user = Auth::user();
         $input['modifiedBy'] = $user->username;
         date_default_timezone_set("Asia/Kuala_Lumpur");
-        $input['modified_at'] = date('d-m-y h:i:s');
+        $input['modified_at'] = date('Y-m-d H:i:s');
 
         News::where('id', $id)->update($input);
 
@@ -906,7 +906,7 @@ class SettingService
 
         date_default_timezone_set("Asia/Kuala_Lumpur");
         $user = Auth::user();
-        $input['modified_at'] = date('d-m-y h:i:s');
+        $input['modified_at'] = date('Y-m-d H:i:s');
         $input['modifiedBy'] = $user->username;
 
         EmploymentType::where('id', $id)->update($input);

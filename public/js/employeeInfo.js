@@ -56,11 +56,16 @@ $(document).ready(function() {
 
         ParentData.done(function(data) {
             parent = data;
-            // console.log(parent);
             $('#employeeId').val(parent.employeeId);
             $('#employeeName').val(parent.employeeName);
             $('#employeeEmail').val(parent.employeeEmail);
-            $("#reportTo").val(parent.report_to);
+            supervisor = getEmployee(parent.supervisor);
+
+            supervisor.done(function(superdata) {
+                console.log(superdata);
+                $("#reportTo").val(superdata.employeeName);
+
+            })
         });
 
     });
