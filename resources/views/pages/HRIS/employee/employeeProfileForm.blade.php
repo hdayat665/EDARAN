@@ -243,13 +243,13 @@
                     <option label="Please Choose " selected="selected" disabled></option>
                     <option value="Male" label="Male">Male</option>
                     <option value="Female" label="Female">Female</option>
-                    <option value="Prefer" label="Prefer not to say">Prefer not to say</option>
+                    
                 </select>
             </div>
             <label class="form-label col-form-label col-md-1">Marital Status*</label>
             <div class="col-md-5">
                 <select class="form-select" name="maritialStatus">
-                    <option label="Select Marital Status" disabled></option>
+                    <option label="Select Marital Status" disabled selected></option>
                     <option value="single" label="Single">Single</option>
                     <option value="married" label="married">married</option>
                     <option value="windowed" label="windowed">windowed</option>
@@ -274,7 +274,7 @@
                 </select>
 
             </div>
-            <label class="form-label col-form-label col-md-1">Race*</label>
+            <label class="form-label col-form-label col-md-1">Race</label>
             <div class="col-md-5">
                 <select class="form-select" name="race" >
                     <option label="Select Race " selected="selected" disabled></option>
@@ -306,7 +306,7 @@
         <div class="row mb-15px">
             <label class="form-label col-form-label col-md-1">Phone Number*</label>
             <div class="col-md-5">
-                <input type="text" name="phoneNo" class="form-control mb-10px" placeholder="Phone Number" />
+                <input type="text" name="phoneNo" id="phoneNo" class="form-control mb-10px" placeholder="Phone Number" />
 
             </div>
             <label class="form-label col-form-label col-md-1">Personal Email*</label>
@@ -317,7 +317,7 @@
         </div>
         
         <p class="text-end mb-0">
-            <a href="javascript:;" class="btn btn-white me-5px">Cancel</a>
+           
             
             <button type="submit" id="submitProfile" class="btn btn-primary">Save</button>
             

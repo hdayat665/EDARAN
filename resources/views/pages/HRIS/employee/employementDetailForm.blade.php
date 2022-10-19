@@ -108,7 +108,7 @@
                     @if ($employmentTypes)
 
                     @foreach ($employmentTypes as $employmentType)
-                        <option value="{{$employmentType->id }}">{{$employmentType->employmentTypeName}}</option>
+                        <option value="{{$employmentType->id }}">{{$employmentType->code}}</option>
                     @endforeach
                     @endif
 
@@ -153,7 +153,7 @@
         </div>
 
     <p class="text-end mb-0">
-        <a href="javascript:;" class="btn btn-white me-5px">Previous</a>
+        <a href="javascript:;" id="prev_emp_det" class="btn btn-white me-5px">Previous</a>
         {{-- <a href="javascript:;" class="btn btn-primary">Save</a> --}}
         <button id="submitEmployment" class="btn btn-primary">Save</button>
     </p>

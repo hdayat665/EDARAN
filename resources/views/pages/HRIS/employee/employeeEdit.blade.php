@@ -10,7 +10,7 @@
                     <div class="profile-pic m-3">
                         <img src="../assets/img/user/user-13.jpg" width="100px" class="rounded d-block" alt="Profile Picture" data-bs-toggle="modal" data-bs-target="#modal-dialog">
                         <h4 class="mt-3 mb-0 fw-bold">{{$profile->fullName ?? 'Admin Tenant'}}</h4>
-                        <p>{{$employment->employeeId ?? '-'}}</p>
+                        <p>{{$username ?? ''}}</p> 
                         <span class="badge bg-success d-block p-2">Active</span>
                         <div class="input-group mb-2 mt-2">
                             <span class="input-group-text" id="basic-addon1"><i class="fas fa-briefcase fa-fw me-2"></i></span>
@@ -161,7 +161,7 @@
                                                     </div>
                                                     <div class="col-sm-6">
                                                         <label for="expirydate" class="form-label">Expiry Date</label>
-                                                        <input type="date" id="expirydate" name="expiryDate" value="{{ date_format(date_create($profile->expiryDate ?? null), 'Y-m-d') ?? '' }}" class="form-control" aria-describedby="expirydate" readonly>
+                                                        <input type="text" id="expirydate" name="expiryDate" value="{{ date_format(date_create($profile->expiryDate ?? null), 'Y-m-d') ?? '' }}" class="form-control" style= "pointer-events: none;" readonly>
                                                     </div>
                                                 </div>
                                             </div>
@@ -192,13 +192,13 @@
                                                 <div class="row">
                                                     <div class="col-sm-6">
                                                         <label for="dob" class="form-label">Date of Birth</label>
-                                                        <input type="date" id="dob" name="DOB" value="{{ date_format(date_create($profile->DOB ?? null), 'Y-m-d') ?? '' }}" class="form-control" aria-describedby="dob" style= "pointer-events: none;" readonly>
+                                                        <input type="text" id="dob" name="DOB" value="{{ date_format(date_create($profile->DOB ?? null), 'Y-m-d') ?? '' }}" class="form-control" aria-describedby="dob" style= "pointer-events: none;" readonly>
                                                     </div>
                                                     <div class="col-sm-6">
                                                         <label for="gender" class="form-label">Gender</label>
                                                         <select class="form-select" name="gender">
                                                             <?php $gender = gender() ?>
-                                                            <option value="" label="Please Choose"  ></option>
+                                                            <option value="" label="Please Choose" selected disabled></option>
                                                             @foreach ($gender as $key => $status)
                                                             <option value="{{$key}}" <?php echo ($key == $profile->gender) ? 'selected="selected"' : '' ?> >{{$status}}</option>
                                                             @endforeach
@@ -210,7 +210,7 @@
                                                 <label for="issuing-country" class="form-label">Marital Status</label>
                                                 <select class="form-select" name="maritialStatus">
                                                     <?php $MaritalStatus = getMaritalStatus() ?>
-                                                    <option value="" label="Please Choose"  ></option>
+                                                    <option value="" label="Please Choose"  selected disabled></option>
                                                     @foreach ($MaritalStatus as $key => $status)
                                                     <option value="{{$key}}" <?php echo ($key == $profile->maritialStatus) ? 'selected="selected"' : '' ?> >{{$status}}</option>
                                                     @endforeach

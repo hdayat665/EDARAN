@@ -20,28 +20,7 @@ class Employee extends Authenticatable
 
     protected $table ='employment';
 
-    protected $fillable = [
-        'user_id',
-        'tenant_id',
-        'company',
-        'department',
-        'unit',
-        'branch',
-        'jobGrade',
-        'designation',
-        'employmentType',
-        'userRole',
-        'supervisor',
-        'joinedDate',
-        'COR',
-        'employeeId',
-        'employeeName',
-        'employeeEmail',
-        'workingEmail',
-        'report_to',
-        'effectiveFrom',
-        'event',
-    ];
+    protected $guarded = [];
 }
 
 

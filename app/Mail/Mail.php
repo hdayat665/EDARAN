@@ -52,6 +52,9 @@ class Mail extends Mailable
         }else if ($data['typeEmail'] == 'projectCancelReq') {
             $view = 'emails.projectCancelRequestEmail';
 
+        }else if ($data['typeEmail'] == 'eventInviation') {
+            $view = 'emails.eventInvitationEmail';
+
         }
         // $address = 'janeexampexample@example.com';
         // $subject = 'This is a demo!';

@@ -86,7 +86,7 @@ if (!function_exists('getMaritalStatus')) {
     function getMaritalStatus($id = '')
     {
         $data = [
-            '0' => '-',
+
             '1' => 'Single',
             '2' => 'Married',
             '3' => 'Divorced',
@@ -729,5 +729,46 @@ if (!function_exists('year')) {
         ];
 
         return $data;
+    }
+}
+
+if (!function_exists('getSupervisor')) {
+    function getSupervisor($id = '')
+    {
+        $data = Employee::where('id', $id)->select('employeeName')->first();
+        return $data;
+    }
+}
+
+if (!function_exists('getWorkingEmail')) {
+    function getWorkingEmail($user_id = '')
+    {
+        $data = Employee::where('user_id', $user_id)->select('workingEmail')->first();
+        return $data->workingEmail;
+    }
+}
+
+if (!function_exists('getDepartmentName')) {
+    function getDepartmentName($user_id = '')
+    {
+        $cond[1] = ['user_id', $user_id];
+        $data = DB::table('employment as a')
+        ->leftJoin('department as b', 'a.department', '=', 'b.id')
+        ->select('b.departmentName', 'a.employeeName')
+        ->where($cond)
+        ->first();
+        return $data;
+    }
+}
+
+if (!function_exists('projectLocationById')) {
+    function projectLocationById($id = '')
+    {
+        $data = ProjectLocation::where('id', $id)->first();
+        if (!$data) {
+            $data = [];
+        }
+
+        return $data->location_name;
     }
 }

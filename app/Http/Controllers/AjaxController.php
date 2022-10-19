@@ -93,7 +93,7 @@ class AjaxController extends Controller
         $data['nameFrom'] = 'Claim';
         $data['subject'] = 'Orbit Reset Password';
         $data['typeAttachment'] = "application/pdf";
-       //  $data['file'] = \public_path()."/assets/frontend/docs/gambar.jpg";
+        //  $data['file'] = \public_path()."/assets/frontend/docs/gambar.jpg";
 
         // \Mail::to($receiver)->send(new Mail($data));
 

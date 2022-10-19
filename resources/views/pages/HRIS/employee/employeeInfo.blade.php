@@ -14,8 +14,8 @@
             <table id="data-table-default" class="table table-striped table-bordered align-middle">
                 <thead>
                     <tr>
-                        <th width="1%"></th>
-                        <th width="1%" data-orderable="false"></th>
+                        <th width="1%">No</th>
+                        <th width="1%" data-orderable="false">Action</th>
                         <th class="text-nowrap">Employee ID</th>
                         <th class="text-nowrap">First Name</th>
                         <th class="text-nowrap">Last name</th>
@@ -27,16 +27,18 @@
                     </tr>
                 </thead>
                 <tbody>
+                    @if ($employeeInfos)
+                    <?php $no = 1 ?>
                     @foreach ($employeeInfos as $employeeInfo)
-
                     <tr class="odd gradeX">
-                        <td width="1%" class="fw-bold text-dark">1</td>
+                        <td width="1%" class="fw-bold text-dark">{{$no++}}</td>
                         <td>
                             <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle"><i class="fa fa-cogs"></i> Actions <i class="fa fa-caret-down"></i></a>
                             <div class="dropdown-menu">
                                 <a href="/editEmployee/{{$employeeInfo->user_id}}" class="dropdown-item">Edit Employee </a>
                                 <div class="dropdown-divider"></div>
                                 <a href="register_v3.html" data-bs-toggle="modal" id="terminate" data-employee="{{$employeeInfo->id}}" data-id="{{$employeeInfo->user_id}}" class="dropdown-item"> Terminate Employee</a>
+                                <a href="register_v3.html" class="dropdown-item" style="display:none"> Cancel Termination</a>
                             </div>
                         </td>
                         <td>{{$employeeInfo->employeeId}}</td>
@@ -45,10 +47,11 @@
                         <td>{{$employeeInfo->email}}</td>
                         <td>{{$employeeInfo->phoneNo}}</td>
                         <td>{{$employeeInfo->department}}</td>
-                        <td>{{$employeeInfo->supervisor}}</td>
+                        <td>{{ ($employeeInfo->supervisor) ? getSupervisor($employeeInfo->supervisor)->employeeName : '-' }}</td>
                         <td><span class="badge <?= ($employeeInfo->status == 'active') ? 'bg-green' : 'bg-red'  ?>">{{$employeeInfo->status}}</span></td>
                     </tr>
                     @endforeach
+                    @endif
                 </tbody>
             </table>
         </div>

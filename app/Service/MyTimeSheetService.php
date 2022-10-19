@@ -2,6 +2,7 @@
 
 namespace App\Service;
 
+use App\Mail\Mail;
 use App\Models\ActivityLogs;
 use App\Models\AttendanceEvent;
 use App\Models\Employee;
@@ -12,6 +13,7 @@ use App\Models\TimesheetEvent;
 use App\Models\TimesheetLog;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail as FacadesMail;
 
 class MyTimeSheetService
 {
@@ -177,6 +179,10 @@ class MyTimeSheetService
         if (isset($input['participant'])) {
             $input['participant'] = implode(',', $input['participant']);
         }
+        if (isset($input['location_by_project'])) {
+            $input['location'] = $input['location_by_project'];
+            unset($input['location_by_project']);
+        }
 
         $input['start_date'] = date_format(date_create($input['start_date']), 'Y/m/d');
         $input['end_date'] = date_format(date_create($input['end_date']), 'Y/m/d');
@@ -198,7 +204,7 @@ class MyTimeSheetService
         $s = $totaltime - ($m * 60);
 
         // Printing the result
-        $input['total_hour'] = "$h:$m:$s";
+        // $input['total_hour'] = "$h:$m:$s";
 
         if ($_FILES['file_upload']['name']) {
             $file_upload = upload($r->file('file_upload'));
@@ -211,6 +217,39 @@ class MyTimeSheetService
         // $input['total_hour'] = $input['start_time'] - $input['end_time'];
         // pr($input);
         TimesheetEvent::create($input);
+
+        $eventDetails = TimesheetEvent::where('tenant_id', $user->tenant_id)->orderBy('created_at', 'DESC')->first();
+        $workingEmail = getWorkingEmail($user->id);
+        $departmentName = getDepartmentName($user->id)->departmentName;
+        $employeeName = getDepartmentName($user->id)->employeeName;
+        $venue = projectLocationById($eventDetails->location);
+
+        $participants = explode(',', $eventDetails->participant);
+
+        $participantDetail = Employee::whereIn('user_id', $participants)->get();
+
+        foreach ($participantDetail as $participant) {
+            $receiverEmail = $participant->workingEmail;
+
+            $receiver = $receiverEmail;
+            $response['typeEmail'] = 'eventInviation';
+            $response['start_date'] = $eventDetails->start_date;
+            $response['start_time'] = $eventDetails->start_time;
+            $response['duration'] = $eventDetails->duration;
+            $response['venue'] = $venue;
+            $response['desc'] = $eventDetails->desc;
+            $response['employeeName'] = $employeeName;
+            $response['departmentName'] = $departmentName;
+            $response['desc'] = $eventDetails->desc;
+            $response['link'] = env('APP_URL') . '/myTimesheet';
+            $response['from'] = env('MAIL_FROM_ADDRESS');
+            $response['nameFrom'] = 'Event Invitation';
+            $response['subject'] = 'Orbit Teams Meeting';
+            // $response['typeAttachment'] = "application/pdf";
+            // $response['file'] = \public_path()."/assets/frontend/docs/gambar.jpg";
+
+            FacadesMail::to($receiver)->send(new Mail($response));
+        }
 
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
