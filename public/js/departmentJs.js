@@ -180,7 +180,7 @@ $(document).ready(function() {
                     title: data.title,
                     text: data.msg,
                     type: data.type,
-                     confirmButtonColor: '#3085d6',
+                    confirmButtonColor: '#3085d6',
                     confirmButtonText: 'OK',
                     allowOutsideClick: false,
                     allowEscapeKey: false,

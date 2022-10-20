@@ -19,6 +19,8 @@ $(document).ready(function() {
                     type: data.type,
                     confirmButtonColor: "#3085d6",
                     confirmButtonText: "OK",
+                    allowOutsideClick: false,
+                    allowEscapeKey: false,
                 }).then(function() {
                     if (data.type == "error") {} else {
                         $("#exampleModal").modal("hide");
@@ -77,6 +79,9 @@ $(document).ready(function() {
                             type: data.type,
                             confirmButtonColor: "#3085d6",
                             confirmButtonText: "OK",
+                            allowOutsideClick: false,
+                            allowEscapeKey: false,
+                            
                         }).then(function() {
                             if (data.type == "error") {} else {
                                 window.location.href = "/dashboardTenant";
@@ -178,6 +183,8 @@ $(document).ready(function() {
                             type: data.type,
                             confirmButtonColor: "#3085d6",
                             confirmButtonText: "OK",
+                            allowOutsideClick: false,
+                            allowEscapeKey: false,
                         }).then(function() {
                             if (data.type == "error") {} else {
                                 window.location.href = "/dashboardHost";
@@ -274,6 +281,8 @@ $(document).ready(function() {
                             type: data.type,
                             confirmButtonColor: "#3085d6",
                             confirmButtonText: "OK",
+                            allowOutsideClick: false,
+                            allowEscapeKey: false,
                         }).then(function() {
                             if (data.type == "error") {} else {
                                 window.location.href = "/";
