@@ -109,13 +109,13 @@
                                     </div>
                                     <div class="col-sm-6 part" >
                                         <label for="passport" class="form-label">Passport Number</label>
-                                        <input type="text" id="passportmyprofile" name="passport" value="{{ $profile->passport ?? '' }}" class="form-control" aria-describedby="passport" readonly>
+                                        <input type="text" id="passportmyprofile" name="passport" value="{{ $profile->passport ?? '' }}" class="form-control" aria-describedby="passport">
                                     </div>
                                 </div>
                             </div>
                             <div class="col-sm-3 part" >
                                         <label for="expirydate" class="form-label">Expiry Date</label>
-                                        <input type="text" id="expirydatemyprofile" name="expiryDate" value="{{ date_format(date_create($profile->expiryDate ?? null), 'Y-m-d') ?? '' }}" class="form-control" aria-describedby="expirydate" readonly style= "pointer-events: none;">
+                                        <input type="text" id="expirydatemyprofile" name="expiryDate" value="{{ date_format(date_create($profile->expiryDate ?? null), 'Y-m-d') ?? '' }}" placeholder="YYYY-MM-DD" class="form-control" aria-describedby="expirydate" style= "pointer-events: none;" readonly>
                                     </div>
                             <div class="col-sm-3">
                                 <label for="issuing-country" class="form-label">Issuing Country</label>
@@ -147,7 +147,7 @@
                                     </div>
                                     <div class="col-sm-6">
                                         <label for="gender" class="form-label">Gender</label>
-                                        <select class="form-select" name="gender" id="gender" style="text-transform:uppercase">
+                                        <select class="form-select" name="gender" id="gender" style="text-transform:uppercase" disabled>
                                             <?php $gender = gender() ?>
                                             <option value="" label="Please Choose"></option>
                                             @foreach ($gender as $key => $status)
