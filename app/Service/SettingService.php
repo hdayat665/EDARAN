@@ -914,7 +914,7 @@ class SettingService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success update EmploymentType';
+        $data['msg'] = 'Success update Employment Type';
 
         return $data;
     }

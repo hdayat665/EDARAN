@@ -29,8 +29,10 @@ $(document).ready(function() {
                     title: data.title,
                     text: data.msg,
                     type: data.type,
-                    confirmButtonColor: '#3085d6',
-                    confirmButtonText: 'OK'
+                     confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'OK',
+                    allowOutsideClick: false,
+                    allowEscapeKey: false,
                 }).then(function() {
                     if (data.type == 'error') {
 

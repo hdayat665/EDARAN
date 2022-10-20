@@ -54,8 +54,9 @@
                     <?php $id = 0 ?>
                     @if ($departments)
                         @foreach ($departments as $department)
+                        <?php $id++ ?>
                         <tr class="odd gradeX">
-                            <td width="1%" class="fw-bold text-dark">1</td>
+                            <td width="1%" class="fw-bold text-dark">{{$id}}</td>
                             <td>{{$department->companyName}}</td>
                             <td>{{$department->departmentCode}}</td>
                             <td>{{$department->departmentName}}</td>
