@@ -4,20 +4,60 @@ $(document).ready(function() {
         var b = $("#lastname").val();
         $("#fullName").val(a+ ' '+b);
     });
+/*    
+    $('#passportmyprofile').change(function(){
+
+         $('#expirydatemyprofile').prop('readonly', false);
+         $('#expirydatemyprofile').css('pointer-events', "auto");
+
+    });
+*/
+//if ($(button).prop('disabled')) $(button).prop('disabled', false);
+//else $(button).prop('disabled', true);
+
+    $('#passportmyprofile').change(function(){
     
+        if ($('#expirydatemyprofile').prop('readonly')) {
+         $('#expirydatemyprofile').prop('readonly', false);
+         $('#expirydatemyprofile').css('pointer-events', "auto");
+       } else {
+         $('#expirydatemyprofile').prop('readonly', true);
+       }
+
+    });
+
     $('#idnumber').change(function(){
 
         if($(this).val().length == 12){
 
             var idn = $(this).val();
-            var year = '19'.concat(idn.substring(0, 2));
-            var month = idn.substring(2, 4)
+            var year = (idn.substring(0, 2));
+            var month = idn.substring(2, 4);
             var day = idn.substring(4, 6);
-            $('#dob').val(year+'-'+month+'-'+day);
             
+            var cutoff = (new Date()).getFullYear() - 2000;
+
+            $('#dob').val((year > cutoff ? '19' : '20') + year + '-' + month + '-' + day);
+        }
+    });
+
+    $('#idnumber').change(function(){
+
+        if($(this).val().length == 12){
+
+            var idn = $(this).val();
+            var lastIc = idn.substring(10,12);
+         
+            if(lastIc % 2 == 0){
+                $('#gender').val('2');
+            } else {
+                $('#gender').val('1');
+            }
+
         }
 
     });
+    
     $('#idnumber2').change(function(){
 
         if($(this).val().length == 12){
@@ -498,7 +538,7 @@ $(document).ready(function() {
         if ($(this).prop("checked")) {
               
             $('#idnumber').prop('readonly', true);
-            $('#passportmyprofile').prop('readonly', false);
+            
             $('#expirydatemyprofile').prop('readonly', false);
             $('#dob').prop('readonly', false);
             $('#dob').css('pointer-events', 'auto');
@@ -506,8 +546,8 @@ $(document).ready(function() {
         } else {
             
             $('#idnumber').prop('readonly', false);
-            $('#passportmyprofile').prop('readonly', true);
-            $('#expirydatemyprofile').prop('readonly', true);
+            
+            $('#expirydatemyprofile').prop('readonly', false);
             $('#dob').prop('readonly', true);
             $('#dob').css('pointer-events', 'none');
         }
@@ -555,6 +595,11 @@ $(document).ready(function() {
     });
     $("#dob").datepicker({
         todayHighlight: true,
+        format: 'yyyy-mm-dd',
+        autoclose: true,
+      });
+      $("#expirydatemyprofile").datepicker({
+        //todayHighlight: true,
         format: 'yyyy-mm-dd',
         autoclose: true,
       });
