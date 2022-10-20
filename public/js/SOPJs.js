@@ -58,12 +58,14 @@ $(document).ready(function() {
                 showCancelButton: true,
             }).then(function() {
                 $.ajax({
-                    type: "DELETE",
+                    type: "POST",
                     url: "/deletePolicy/" + id,
-                    dataType: "json",
-                    async: false,
-                    processData: false,
-                    contentType: false,
+                    // dataType: "json",
+                    data: { _method: "DELETE" },
+                    // async: false,
+                    // processData: false,
+                    // contentType: false,
+                   
                 }).done(function(data) {
                     swal({
                         title: data.title,

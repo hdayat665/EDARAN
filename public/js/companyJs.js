@@ -40,14 +40,14 @@ $(document).ready(function() {
         id = $(this).data('id');
         requirejs(['sweetAlert2'], function(swal) {
             swal({
-                title: "Are you sure! company",
+                title: "Are you sure!",
                 type: "error",
                 confirmButtonClass: "btn-danger",
                 confirmButtonText: "Yes!",
                 showCancelButton: true,
             }).then(function() {
                 $.ajax({
-                    type: "POST",
+                    type: "POST", 
                     url: "/deleteCompany/" + id,
                     // dataType: "json",
                     data: { _method: "DELETE" },
