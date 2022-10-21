@@ -82,7 +82,7 @@
                             <?php $EmploymentTypes = getEmploymentType() ?>
                             <option value="0" label="Please Choose "></option>
                             @foreach ($EmploymentTypes as $EmploymentType)
-                                <option value="{{$EmploymentType->id ?? null}}" label="{{$EmploymentType->code ?? null}}" {{ ($employment->employmentType == $EmploymentType->id) ? "selected='selected'" : '' }}></option>
+                                <option value="{{$EmploymentType->id ?? null}}" label="{{$EmploymentType->type ?? null}}" {{ ($employment->employmentType == $EmploymentType->id) ? "selected='selected'" : '' }}></option>
                             @endforeach
                         </select>
                     </div>

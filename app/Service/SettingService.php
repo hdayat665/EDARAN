@@ -895,7 +895,7 @@ class SettingService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success create EmploymentType';
+        $data['msg'] = 'Success create Employment Type';
 
         return $data;
     }
@@ -927,14 +927,14 @@ class SettingService
             $data['status'] = config('app.response.error.status');
             $data['type'] = config('app.response.error.type');
             $data['title'] = config('app.response.error.title');
-            $data['msg'] = 'EmploymentType not found';
+            $data['msg'] = 'Employment Type not found';
         } else {
             $EmploymentType->delete();
 
             $data['status'] = config('app.response.success.status');
             $data['type'] = config('app.response.success.type');
             $data['title'] = config('app.response.success.title');
-            $data['msg'] = 'Success delete EmploymentType';
+            $data['msg'] = 'Success delete Employment Type';
         }
 
         return $data;

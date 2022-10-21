@@ -108,14 +108,14 @@
                     @if ($employmentTypes)
 
                     @foreach ($employmentTypes as $employmentType)
-                        <option value="{{$employmentType->id }}">{{$employmentType->code}}</option>
+                        <option value="{{$employmentType->id }}">{{$employmentType->type}}</option>
                     @endforeach
                     @endif
 
                 </select>
 
             </div>
-            <label class="form-label col-form-label col-md-1">Report To*</label>
+            <label class="form-label col-form-label col-md-1">Report To</label>
             <div class="col-md-5">
                 <select class="form-select" name="supervisor" >
 
