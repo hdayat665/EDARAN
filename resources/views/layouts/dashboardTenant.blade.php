@@ -651,6 +651,7 @@
     <script src="{{env('ASSETS_URL')}}/plugins/datatables.net/js/jquery.dataTables.min.js"></script>
     <script src="{{env('ASSETS_URL')}}/plugins/datatables.net-bs5/js/dataTables.bootstrap5.min.js"></script>
     <script src="{{env('ASSETS_URL')}}/plugins/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+    <link href="{{env('ASSETS_URL')}}/plugins/datatables.net-buttons-bs5/css/buttons.bootstrap5.min.css" rel="stylesheet" />
     <script src="{{env('ASSETS_URL')}}/plugins/datatables.net-responsive-bs5/js/responsive.bootstrap5.min.js"></script>
     <script src="{{env('ASSETS_URL')}}/plugins/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
     <script src="{{env('ASSETS_URL')}}/plugins/datatables.net-buttons-bs5/js/buttons.bootstrap5.min.js"></script>
@@ -666,10 +667,6 @@
     <script src="{{env('ASSETS_URL')}}/js/demo/render.highlight.js"></script>
     <link href="{{env('ASSETS_URL')}}/plugins/datatables.net-bs5/css/dataTables.bootstrap5.min.css" rel="stylesheet" />
     <link href="{{env('ASSETS_URL')}}/plugins/datatables.net-responsive-bs5/css/responsive.bootstrap5.min.css" rel="stylesheet" />
-    <script src="{{env('ASSETS_URL')}}/plugins/datatables.net/js/jquery.dataTables.min.js"></script>
-    <script src="{{env('ASSETS_URL')}}/plugins/datatables.net-bs5/js/dataTables.bootstrap5.min.js"></script>
-    <script src="{{env('ASSETS_URL')}}/plugins/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
-    <script src="{{env('ASSETS_URL')}}/plugins/datatables.net-responsive-bs5/js/responsive.bootstrap5.min.js"></script>
     <link href="{{env('ASSETS_URL')}}/plugins/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet" />
     <script src="{{env('ASSETS_URL')}}/plugins/moment/min/moment.min.js"></script>
     <script src="{{env('ASSETS_URL')}}/plugins/bootstrap-daterangepicker/daterangepicker.js"></script>
@@ -703,10 +700,18 @@
     {{-- <script src="../assets/plugins/d3/d3.min.js"></script> --}}
     {{-- <script src="../assets/plugins/nvd3/build/nv.d3.min.js"></script> --}}
     {{-- <script src="../assets/plugins/chart.js/dist/Chart.min.js"></script> --}}
-    {{-- <script>
+    
+    
+
+
+
+
+
+    <script>
         $('#data-table-default-announcement').DataTable({
             responsive: true,
             lengthMenu: [5, 10],
+            
         });
     </script>
     <script>
@@ -720,7 +725,7 @@
             responsive: true,
             lengthMenu: [5, 10],
         });
-    </script> --}}
+    </script> 
     <script type="text/javascript">
         var require = {
             baseUrl: "{{env('ASSETS_URL')}}/js/",

@@ -88,19 +88,38 @@
                                 @endforeach
                             </select>
                         </div>
-                        <div class="row p-2">
+                        <div class="row">
                             <label class="form-label" for="supervisor">
                                 User Role
                             </label>
+                        </div>
+                        <div class="row p-2">
                             <div class="form-check form-switch">
                                 <input class="form-check-input" name="supervisor" {{ ($employment->supervisor == 'on' ? 'checked' : '') }} type="checkbox" id="supervisor">
                                 <label class="form-check-label" for="supervisor">
                                     Supervisor
                                 </label>
                             </div>
+                        </div>   
                             <div class="form-text">
                                 If enabled, report-to will enabled the username
                             </div>
+                            <div class="row p-2">
+                            <div class="col-sm-6">
+                                <label for="employee-id" class="form-label">Report To</label>
+                                <input type="text" id="" name=""  class="form-control" >
+                                
+                            </div>
+                            </div>
+                        
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <label for="employee-id" class="form-label">Charge Of Rate</label>
+                                <input type="text" id="" name=""  class="form-control" aria-describedby="employee-id">
+                                
+                            </div>
+                            
                         </div>
                         <hr>
                         <div class="row">
