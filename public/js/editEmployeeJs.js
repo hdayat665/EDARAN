@@ -2,85 +2,84 @@ $(document).ready(function() {
     let croppie;
 
     $('#edit-profile-picture').on('change', function() {
-    if (this.files && this.files[0]) {
-        let reader = new FileReader();
-        reader.onload = function(e) {
-        $('#croppie img').attr('src', e.target.result);
-        croppie = new Croppie($('#croppie img')[0], {
-            boundary: { width: 200, height: 200 },
-            viewport: { width: 100, height: 100, type: 'square' }
-        })
-        }
-        $('#showImage').show();
-        $('#crop').on('click', function() {
-        $('#showCroppedImage').show();
-        croppie
-            .result({ type: 'base64', circle: false })
-            .then(function(dataImg) {
-                var data = [{ image: dataImg }, { name: 'profilePicture.jpg' }];
-                // use ajax to send data to php
-                $('#result_image img').attr('src', dataImg);
+        if (this.files && this.files[0]) {
+            let reader = new FileReader();
+            reader.onload = function(e) {
+                $('#croppie img').attr('src', e.target.result);
+                croppie = new Croppie($('#croppie img')[0], {
+                    boundary: { width: 200, height: 200 },
+                    viewport: { width: 100, height: 100, type: 'square' }
+                })
+            }
+            $('#showImage').show();
+            $('#crop').on('click', function() {
+                $('#showCroppedImage').show();
+                croppie
+                    .result({ type: 'base64', circle: false })
+                    .then(function(dataImg) {
+                        var data = [{ image: dataImg }, { name: 'profilePicture.jpg' }];
+                        // use ajax to send data to php
+                        $('#result_image img').attr('src', dataImg);
+                    });
             });
-        });
-        reader.readAsDataURL(this.files[0]);
-    }
+            reader.readAsDataURL(this.files[0]);
+        }
     })
 
-    $("#firstname,#lastname").change(function(){
+    $("#firstname,#lastname").change(function() {
         var a = $("#firstname").val();
         var b = $("#lastname").val();
-        $("#fullname").val(a+ ' '+b);
+        $("#fullname").val(a + ' ' + b);
     });
 
     $("#dob").datepicker({
         todayHighlight: true,
         format: 'yyyy-mm-dd',
         autoclose: true,
-      });
-      
+    });
+
     $("#expirydate").datepicker({
         todayHighlight: true,
         format: 'yyyy-mm-dd',
         autoclose: true,
-      });
+    });
 
-    $('#idNo').change(function(){
+    $('#idNo').change(function() {
 
-        if($(this).val().length == 12){
+        if ($(this).val().length == 12) {
 
             var idn = $(this).val();
             var year = '19'.concat(idn.substring(0, 2));
             var month = idn.substring(2, 4)
             var day = idn.substring(4, 6);
-            $('#dob').val(year+'-'+month+'-'+day);
-            
+            $('#dob').val(year + '-' + month + '-' + day);
+
         }
 
     });
 
     $("#same-address").change(function() {
-        if(this.checked) {
+        if (this.checked) {
             $('#address-1c').val($('#address-1').val()).prop('readonly', true);
             $('#address-2c').val($('#address-2').val()).prop('readonly', true);
             $('#postcodec').val($('#postcode').val()).prop('readonly', true);
             $('#cityc').val($('#city').val()).prop('readonly', true);
             $('#statec').val($('#state').val()).prop('disabled', true);
             $('#countryc').val($('#country').val()).prop('disabled', true);
-        }
-        else {
+        } else {
             $('#address-1c').val($('').val()).prop('readonly', false);
             $('#address-2c').val($('').val()).prop('readonly', false);
             $('#postcodec').val($('').val()).prop('readonly', false);
             $('#cityc').val($('').val()).prop('readonly', false);
             $('#statec').val($('').val()).prop('disabled', false);
             $('#countryc').val($('1').val()).prop('disabled', false);
-            
-        }        
-      });
 
-    $(".partCheck").click(function(){
+        }
+    });
+
+    $(".partCheck").click(function() {
         if ($(this).prop("checked")) {
-              
+
             $('#idNo').prop('readonly', true);
             $('#passport').prop('readonly', false);
             $('#expirydate').prop('readonly', false);
@@ -90,22 +89,22 @@ $(document).ready(function() {
             $("#idNo").val("");
 
         } else {
-            
+
             $('#idNo').prop('readonly', false);
             $('#passport').prop('readonly', true);
             $('#expirydate').prop('readonly', true);
             $('#expirydate').css('pointer-events', 'none');
             $('#dob').prop('readonly', true);
             $('#dob').css('pointer-events', 'none');
-            
+
         }
-      });
+    });
 
     $('#saveProfile').click(function(e) {
         $("#formProfile").validate({
             // Specify validation rules
             rules: {
-                
+
                 username: "required",
                 personalEmail: {
                     required: true,
@@ -113,33 +112,33 @@ $(document).ready(function() {
                 },
 
                 firstName: "required",
-                lastName:"required",
-                fullName:"required",
-                gender:"required",
-                maritialStatus:"required",
-                religion:"required",
-                race:"required",
+                lastName: "required",
+                fullName: "required",
+                gender: "required",
+                maritialStatus: "required",
+                religion: "required",
+                race: "required",
                 idNo: {
                     required: true,
                     digits: true,
                     rangelength: [12, 12]
                 },
                 phoneNo: {
-                    
+
                     digits: true,
-                    
+
                 },
                 homeNo: {
                     digits: true,
 
-                    
+
                 },
                 extensionNo: {
                     digits: true,
-                    
+
                 },
 
-                
+
             },
 
             messages: {
@@ -148,74 +147,72 @@ $(document).ready(function() {
                 personalEmail: {
                     required: "Please Insert Email Address",
                     email: "Please Provide Valid Email Address",
-                    
+
                 },
                 firstName: "Please Insert Your First Name",
                 lastName: "Please Insert Your Last Name",
-                fullName:"Please Insert Your Full Name",
-                gender:"Please Choose Your Gender",
-                maritialStatus:"Please Choose Your Marital Status",
-                religion:"Please Choose Your Religion",
-                race:"Please Choose Your Race",
+                fullName: "Please Insert Your Full Name",
+                gender: "Please Choose Your Gender",
+                maritialStatus: "Please Choose Your Marital Status",
+                religion: "Please Choose Your Religion",
+                race: "Please Choose Your Race",
                 idNo: {
                     required: "Please Insert Identification Number",
                     digits: "Please Insert Correct Identification Number Without ' - ' or Space",
                     rangelength: "Please Provide Valid Identification Number"
                 },
                 phoneNo: {
-                    
+
                     digits: "Please Insert Correct Identification Number Without ' - ' or Space",
-                    
+
                 },
                 homeNo: {
                     digits: "Please Insert Correct Identification Number Without ' - ' or Space",
-                    
+
                 },
                 extensionNo: {
                     digits: "Please Insert Correct Identification Number Without ' - ' or Space",
-                    
+
                 },
 
             },
             submitHandler: function(form) {
 
-        requirejs(['sweetAlert2'], function(swal) {
-            
-
-            var data = new FormData(document.getElementById("formProfile"));
-
-            $.ajax({
-                type: "POST",
-                url: "/updateEmployeeProfile",
-                data: data,
-                dataType: "json",
-                async: false,
-                processData: false,
-                contentType: false,
-            }).done(function(data) {
-                console.log(data);
-                swal({
-                    title: data.title,
-                    text: data.msg,
-                    type: data.type,
-                     confirmButtonColor: '#3085d6',
-                    confirmButtonText: 'OK',
-                    allowOutsideClick: false,
-                    allowEscapeKey: false,
-                }).then(function() {
-                    if (data.type == 'error') {
-
-                    } else {
-                        location.reload();
-                        // window.location.href = "/myProfile";
-
-                    }
+                requirejs(['sweetAlert2'], function(swal) {
 
 
+                    var data = new FormData(document.getElementById("formProfile"));
+
+                    $.ajax({
+                        type: "POST",
+                        url: "/updateEmployeeProfile",
+                        data: data,
+                        dataType: "json",
+                        async: false,
+                        processData: false,
+                        contentType: false,
+                    }).done(function(data) {
+                        console.log(data);
+                        swal({
+                            title: data.title,
+                            text: data.msg,
+                            type: data.type,
+                            confirmButtonColor: '#3085d6',
+                            confirmButtonText: 'OK'
+                        }).then(function() {
+                            if (data.type == 'error') {
+
+                            } else {
+                                location.reload();
+                                // window.location.href = "/myProfile";
+
+                            }
+
+
+                        });
+                    });
                 });
-            });
-        });
-    }
+            }
         });
     });
 
@@ -1043,7 +1040,7 @@ $(document).ready(function() {
 
     });
 
-    $('#deleteVehicle').click(function(e) {
+    $(document).on("click", "#deleteVehicle", function() {
         id = $(this).data('id');
         requirejs(['sweetAlert2'], function(swal) {
             swal({
