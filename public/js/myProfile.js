@@ -4,16 +4,6 @@ $(document).ready(function() {
         var b = $("#lastname").val();
         $("#fullName").val(a+ ' '+b);
     });
-/*    
-    $('#passportmyprofile').change(function(){
-
-         $('#expirydatemyprofile').prop('readonly', false);
-         $('#expirydatemyprofile').css('pointer-events', "auto");
-
-    });
-*/
-//if ($(button).prop('disabled')) $(button).prop('disabled', false);
-//else $(button).prop('disabled', true);
 
     $('#passportmyprofile').change(function(){
     
@@ -22,12 +12,32 @@ $(document).ready(function() {
          $('#expirydatemyprofile').css('pointer-events', "auto");
        } else {
          $('#expirydatemyprofile').prop('readonly', true);
+         $('#expirydatemyprofile').css('pointer-events', "none");
        }
 
     });
 
-    $('#idnumber').change(function(){
+    // $(function() {
 
+    //     //var selectedValue = $('#gender').val(selectedValue ? '2' : '1'); // declare variable here
+        
+    //     var newv = $('#gender').val(newv ? '2' : '1');
+        
+    //     //$('#gender').val('2');
+    //     // on drop down change
+    //     $('#gender').change(function() {
+    //         newv = $(this).val(); // store value in variable
+    //         $('#gender').val(newv); // update on change
+    //     });
+    // });
+
+/*    $('#saveProfile').change(function() {
+        const values =  $("#gender").val();
+        console.log(values);
+        });
+*/
+    $('#idnumber').change(function(){
+        
         if($(this).val().length == 12){
 
             var idn = $(this).val();
@@ -46,12 +56,13 @@ $(document).ready(function() {
         if($(this).val().length == 12){
 
             var idn = $(this).val();
+            
             var lastIc = idn.substring(10,12);
-         
+            
             if(lastIc % 2 == 0){
-                $('#gender').val('2');
+                $('#gender').val(2);
             } else {
-                $('#gender').val('1');
+                $('#gender').val(1);
             }
 
         }
@@ -71,6 +82,35 @@ $(document).ready(function() {
         }
 
     });
+//COMPANION
+    $('#passportmc').change(function(){
+    
+        if ($('#expirydatemc').prop('readonly')) {
+         $('#expirydatemc').prop('readonly', false);
+         $('#expirydatemc').css('pointer-events', "auto");
+       } else {
+         $('#expirydatemc').prop('readonly', true);
+         $('#expirydatemc').css('pointer-events', "none");
+       }
+
+    });
+
+    $('#idnumber2').change(function(){
+        
+        if($(this).val().length == 12){
+
+            var idn = $(this).val();
+            var year = (idn.substring(0, 2));
+            var month = idn.substring(2, 4);
+            var day = idn.substring(4, 6);
+            
+            var cutoff = (new Date()).getFullYear() - 2000;
+
+            $('#dobmc').val((year > cutoff ? '19' : '20') + year + '-' + month + '-' + day);
+        }
+    });
+
+    //CHILDREN
     $('#idNoaddChild').change(function(){
 
         if($(this).val().length == 12){
@@ -539,7 +579,7 @@ $(document).ready(function() {
               
             $('#idnumber').prop('readonly', true);
             
-            $('#expirydatemyprofile').prop('readonly', false);
+            //$('#expirydatemyprofile').prop('readonly', false);
             $('#dob').prop('readonly', false);
             $('#dob').css('pointer-events', 'auto');
             $("#idnumber").val("");
@@ -547,7 +587,7 @@ $(document).ready(function() {
             
             $('#idnumber').prop('readonly', false);
             
-            $('#expirydatemyprofile').prop('readonly', false);
+            //$('#expirydatemyprofile').prop('readonly', false);
             $('#dob').prop('readonly', true);
             $('#dob').css('pointer-events', 'none');
         }
@@ -1583,4 +1623,5 @@ $("#same-address").change(function() {
             $('#countrySA').prop('disabled', false);
             
         }        
-      });
+
+    });
