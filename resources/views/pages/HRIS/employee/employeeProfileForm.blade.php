@@ -49,12 +49,12 @@
         <div class="row mb-15px">
             <label class="form-label col-form-label col-md-1">Passport Number</label>
             <div class="col-md-2">
-                <input type="text" name="passport" id="passport" class="form-control mb-10px" placeholder="Passport Number" readonly/>
+                <input type="text" name="passport" id="passport" class="form-control mb-10px" placeholder="Passport Number"/>
 
             </div>
             <label class="form-label col-form-label col-md-1">Expiry Date*</label>
             <div class="col-md-2">
-                <input type="text" name="expiryDate" id="datepicker-expiryDate" class="form-control" id="datepicker-autoClose" placeholder="dd/mm/yyyy" style="pointer-events: none" readonly/>
+                <input type="text" name="expiryDate" id="datepicker-expiryDate" class="form-control"  placeholder="dd/mm/yyyy" style="pointer-events: none" readonly/>
             </div>
             <label class="form-label col-form-label col-md-1">Issuing Country*</label>
             <div class="col-md-5">

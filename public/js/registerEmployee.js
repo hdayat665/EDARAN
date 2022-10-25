@@ -33,15 +33,32 @@ $(document).ready(function() {
         if($(this).val().length == 12){
 
             var idn = $(this).val();
-            var year = '19'.concat(idn.substring(0, 2));
-            var month = idn.substring(2, 4)
+            var year = (idn.substring(0, 2));
+            var month = idn.substring(2, 4);
             var day = idn.substring(4, 6);
-            $('#datepicker-birth').val(month+'/'+day+'/'+year);
             
+            var cutoff = (new Date()).getFullYear() - 2000;
+
+            $('#datepicker-birth').val((year > cutoff ? '19' : '20') + year + '-' + month + '-' + day);
+        }
+    });
+
+    $('#idnumber').change(function(){
+
+        if($(this).val().length == 12){
+
+            var idn = $(this).val();
+            var IdLast = idn.substring(10,12);
+         
+            if(ldLast % 2 == 0){
+                $('#gender').val('2');
+            } else {
+                $('#gender').val('1');
+            }
+
         }
 
     });
-
     $("#nonNetizen").change(function() {
         if(this.checked) {
             
@@ -90,12 +107,43 @@ $(document).ready(function() {
               
             $('#idnumber').prop('readonly', true);
             $('#idnumber').prop('required', false);  
-            $('#passport').prop('required', true); 
-            $('#datepicker-autoClose').prop('required', true); 
+           // $('#passport').prop('required', true); 
+           // $('#datepicker-autoClose').prop('required', true); 
         } else {
             
             $('#idnumber').prop('readonly', false);
             $('#idnumber').prop('required', true);  
+        }
+      });
+
+      $('#passport').change(function(){
+    
+        if ($('#datepicker-expiryDate').prop('readonly')) {
+         $('#datepicker-expiryDate').prop('readonly', false);
+         $('#datepicker-expiryDate').css('pointer-events', "auto");
+       } else {
+         $('#datepicker-expiryDate').prop('readonly', true);
+         $('#datepicker-expiryDate').css('pointer-events', "none");
+       }
+
+    });
+
+    $(".partCheck").click(function(){
+        if ($(this).prop("checked")) {
+              
+            $('#idnumber').prop('readonly', true);
+            
+            $('#datepicker-expiryDate').prop('readonly', false);
+            $('#datepicker-birth').prop('readonly', false);
+            $('#datepicker-birth').css('pointer-events', 'auto');
+            $("#idnumber").val("");
+        } else {
+            
+            $('#idnumber').prop('readonly', false);
+            
+            $('#datepicker-expiryDate').prop('readonly', false);
+            $('#datepicker-birth').prop('readonly', true);
+            $('#datepicker-birth').css('pointer-events', 'none');
         }
       });
     
