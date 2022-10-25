@@ -55,14 +55,18 @@
                                     </div> 
                                 <div class="col-sm-6">
                                         <label for="passport" class="form-label">Passport Number</label>
-                                        <input type="text" id="passportmc" name="passport" value="{{ $companion->passport ?? '' }}" class="form-control" aria-describedby="passport" readonly>
+                                        <input type="text" id="passportmc" name="passport" value="{{ $companion->passport ?? '' }}" class="form-control" aria-describedby="passport" >
                                     </div>
                                    
                                 </div>
                             </div>
+                            <!-- <div class="col-sm-3 part">
+                                <label for="expirydate" class="form-label">Expiry Date</label>
+                                <input type="text" id="expirydatemyprofile" name="expiryDate" value="{{ date_format(date_create($profile->expiryDate ?? null), 'Y-m-d') ?? '' }}" placeholder="YYYY-MM-DD" class="form-control" aria-describedby="expirydate" style="pointer-events: none;" readonly>
+                            </div> -->
                             <div class="col-sm-3">
                                         <label for="expirydate" class="form-label">Expiry Date</label>
-                                        <input type="text" id="expirydatemc" name="expiryDate" value="{{ $companion->expiryDate ?? '' }}" class="form-control" aria-describedby="expirydate" style= "pointer-events: none;" readonly>
+                                        <input type="text" id="expirydatemc" name="expiryDate" value="{{ date_format(date_create($companion->expiryDate ?? null), 'Y-m-d') ?? '' }}" placeholder="YYYY-MM-DD" class="form-control" aria-describedby="expirydate" style= "pointer-events: none;" readonly>
                                     </div>
                             <div class="col-sm-3">
                                 <label for="issuing-country" class="form-label">Issuing Country</label>
