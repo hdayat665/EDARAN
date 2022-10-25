@@ -84,23 +84,49 @@
                                 <?php $EmploymentTypes = getEmploymentType() ?>
                                 <option value="0" label="Please Choose "></option>
                                 @foreach ($EmploymentTypes as $EmploymentType)
-                                <option value="{{$EmploymentType->id}}" label="{{$EmploymentType->code}}" {{ ($employment->employmentType == $EmploymentType->id) ? "selected='selected'" : '' }}></option>
+                                <option value="{{$EmploymentType->id}}" label="{{$EmploymentType->type}}" {{ ($employment->employmentType == $EmploymentType->id) ? "selected='selected'" : '' }}></option>
                                 @endforeach
                             </select>
                         </div>
+                        
                         <div class="row p-2">
+                            <div class="col-sm-6">
                             <label class="form-label" for="supervisor">
                                 User Role
                             </label>
-                            <div class="form-check form-switch">
+                                <div class="form-check form-switch">
                                 <input class="form-check-input" name="supervisor" {{ ($employment->supervisor == 'on' ? 'checked' : '') }} type="checkbox" id="supervisor">
-                                <label class="form-check-label" for="supervisor">
+                                <label class="form-label" for="supervisor">
                                     Supervisor
                                 </label>
-                            </div>
-                            <div class="form-text">
+                                <div class="form-text">
                                 If enabled, report-to will enabled the username
                             </div>
+                                 </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <label for="employee-id" class="form-label">Report To</label>
+                                <select class="form-select" name="supervisor">
+                                <?php $EmploymentTypes = getEmploymentType() ?>
+                                <option value="0" label="Please Choose "></option>
+                                @foreach ($EmploymentTypes as $EmploymentType)
+                                <option value="{{$EmploymentType->id}}" label="{{$EmploymentType->type}}" {{ ($employment->employmentType == $EmploymentType->id) ? "selected='selected'" : '' }}></option>
+                                @endforeach
+                            </select>
+                                
+                            </div>
+                        </div>   
+                            
+                          
+                        
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <label for="employee-id" class="form-label">Charge Of Rate</label>
+                                <input type="text" id="" name=""  class="form-control" aria-describedby="employee-id">
+                                
+                            </div>
+                            
                         </div>
                         <hr>
                         <div class="row">
@@ -137,10 +163,12 @@
                                 </select>
                             </div>
                         </div>
-                        <hr>
-                        <p class="mt-3 mb-3 fw-bold">Changes Details</p>
+                        
+                    </div>
+                    <div class="modal-footer">
+                       
                         <button type="button" class="btn btn-primary float-end" id="updateEmp" data-bs-toggle="modal">
-                            Update
+                                    Update
                         </button>
                     </div>
                 </form>

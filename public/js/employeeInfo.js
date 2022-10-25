@@ -1,6 +1,16 @@
 $(document).ready(function() {
-    $("#data-table-default").DataTable({
-        responsive: true,
+    $("#tableemployeeinfo").DataTable({
+        responsive: false,
+        dom:
+            "<'row'<'col-sm-4'B><'col-sm-4 text-center'l><'col-sm-4'f>>" +
+            "<'row'<'col-sm-12'tr>>" +
+            "<'row'<'col-sm-4'i><'col-sm-4 text-center'><'col-sm-4'p>>",
+        buttons: [
+        { extend: 'pdf', className: 'btn-sm' },
+        { extend: 'csv', className: 'btn-sm' },
+        ],
+        autoWidth: true,
+        lengthMenu: [ [5, 10, 25, -1], [5, 10, 25, "All"] ]
     });
 
     $("#datepicker-terminatedate").datepicker({
@@ -29,8 +39,10 @@ $(document).ready(function() {
                     title: data.title,
                     text: data.msg,
                     type: data.type,
-                    confirmButtonColor: '#3085d6',
-                    confirmButtonText: 'OK'
+                     confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'OK',
+                    allowOutsideClick: false,
+                    allowEscapeKey: false,
                 }).then(function() {
                     if (data.type == 'error') {
 

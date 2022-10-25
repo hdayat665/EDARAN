@@ -77,8 +77,10 @@ $(document).ready(function() {
                             title: data.title,
                             text: data.msg,
                             type: data.type,
-                            confirmButtonColor: '#3085d6',
-                            confirmButtonText: 'OK'
+                           confirmButtonColor: '#3085d6',
+                            confirmButtonText: 'OK',
+                            allowOutsideClick: false,
+                            allowEscapeKey: false,
                         }).then(function() {
                             if (data.type == 'error') {
 
@@ -138,8 +140,10 @@ $(document).ready(function() {
                             title: data.title,
                             text: data.msg,
                             type: data.type,
-                            confirmButtonColor: '#3085d6',
-                            confirmButtonText: 'OK'
+                           confirmButtonColor: '#3085d6',
+                            confirmButtonText: 'OK',
+                            allowOutsideClick: false,
+                            allowEscapeKey: false,
                         }).then(function() {
                             if (data.type == 'error') {
 
@@ -221,8 +225,10 @@ $(document).ready(function() {
                             title: data.title,
                             text: data.msg,
                             type: data.type,
-                            confirmButtonColor: '#3085d6',
-                            confirmButtonText: 'OK'
+                           confirmButtonColor: '#3085d6',
+                            confirmButtonText: 'OK',
+                            allowOutsideClick: false,
+                            allowEscapeKey: false,
                         }).then(function() {
                             if (data.type == 'error') {
 
@@ -248,6 +254,8 @@ $(document).ready(function() {
                 confirmButtonClass: "btn-danger",
                 confirmButtonText: "Yes!",
                 showCancelButton: true,
+                allowOutsideClick: false,
+                allowEscapeKey: false
             }).then(function() {
                 $.ajax({
                     type: "DELETE",
@@ -262,7 +270,9 @@ $(document).ready(function() {
                         text: data.msg,
                         type: data.type,
                         confirmButtonColor: '#3085d6',
-                        confirmButtonText: 'OK'
+                        confirmButtonText: 'OK',
+                        allowOutsideClick: false,
+                        allowEscapeKey: false
                     }).then(function() {
                         if (data.type == 'error') {
 
@@ -316,8 +326,10 @@ $(document).ready(function() {
                             title: data.title,
                             text: data.msg,
                             type: data.type,
-                            confirmButtonColor: '#3085d6',
-                            confirmButtonText: 'OK'
+                           confirmButtonColor: '#3085d6',
+                            confirmButtonText: 'OK',
+                            allowOutsideClick: false,
+                            allowEscapeKey: false,
                         }).then(function() {
                             if (data.type == 'error') {
 
@@ -425,8 +437,10 @@ $(document).ready(function() {
                             title: data.title,
                             text: data.msg,
                             type: data.type,
-                            confirmButtonColor: '#3085d6',
-                            confirmButtonText: 'OK'
+                           confirmButtonColor: '#3085d6',
+                            confirmButtonText: 'OK',
+                            allowOutsideClick: false,
+                            allowEscapeKey: false,
                         }).then(function() {
                             if (data.type == 'error') {
 
@@ -478,8 +492,10 @@ $(document).ready(function() {
                             title: data.title,
                             text: data.msg,
                             type: data.type,
-                            confirmButtonColor: '#3085d6',
-                            confirmButtonText: 'OK'
+                           confirmButtonColor: '#3085d6',
+                            confirmButtonText: 'OK',
+                            allowOutsideClick: false,
+                            allowEscapeKey: false,
                         }).then(function() {
                             if (data.type == 'error') {
 
@@ -563,6 +579,8 @@ $(document).ready(function() {
                 confirmButtonClass: "btn-danger",
                 confirmButtonText: "Yes!",
                 showCancelButton: true,
+                allowOutsideClick: false,
+                allowEscapeKey: false
             }).then(function() {
                 $.ajax({
                     type: "DELETE",
@@ -577,7 +595,9 @@ $(document).ready(function() {
                         text: data.msg,
                         type: data.type,
                         confirmButtonColor: '#3085d6',
-                        confirmButtonText: 'OK'
+                        confirmButtonText: 'OK',
+                        allowOutsideClick: false,
+                        allowEscapeKey: false
                     }).then(function() {
                         if (data.type == 'error') {
 
@@ -636,8 +656,10 @@ $(document).ready(function() {
                             title: data.title,
                             text: data.msg,
                             type: data.type,
-                            confirmButtonColor: '#3085d6',
-                            confirmButtonText: 'OK'
+                           confirmButtonColor: '#3085d6',
+                            confirmButtonText: 'OK',
+                            allowOutsideClick: false,
+                            allowEscapeKey: false,
                         }).then(function() {
                             if (data.type == 'error') {
 
@@ -689,8 +711,10 @@ $(document).ready(function() {
                             title: data.title,
                             text: data.msg,
                             type: data.type,
-                            confirmButtonColor: '#3085d6',
-                            confirmButtonText: 'OK'
+                           confirmButtonColor: '#3085d6',
+                            confirmButtonText: 'OK',
+                            allowOutsideClick: false,
+                            allowEscapeKey: false,
                         }).then(function() {
                             if (data.type == 'error') {
 
@@ -730,8 +754,10 @@ $(document).ready(function() {
                     title: data.title,
                     text: data.msg,
                     type: data.type,
-                    confirmButtonColor: '#3085d6',
-                    confirmButtonText: 'OK'
+                     confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'OK',
+                    allowOutsideClick: false,
+                    allowEscapeKey: false,
                 }).then(function() {
                     if (data.type == 'error') {
 
