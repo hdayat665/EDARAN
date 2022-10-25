@@ -24,6 +24,8 @@ $(document).ready(function() {
                 confirmButtonClass: "btn-danger",
                 confirmButtonText: "Yes!",
                 showCancelButton: true,
+                allowOutsideClick: false,
+                allowEscapeKey: false
             }).then(function() {
                 $.ajax({
                     type: "POST",
@@ -38,7 +40,9 @@ $(document).ready(function() {
                         text: data.msg,
                         type: data.type,
                         confirmButtonColor: '#3085d6',
-                        confirmButtonText: 'OK'
+                        confirmButtonText: 'OK',
+                        allowOutsideClick: false,
+                        allowEscapeKey: false
                     }).then(function() {
                         if (data.type == 'error') {
 
