@@ -1,5 +1,3 @@
-
-
 <div class="tab-pane fade show active" id="v-pills-myprofile" role="tabpanel" aria-labelledby="v-pills-myprofile-tab">
     <div class="card">
         <div class="card-header bg-white bg-gray-100">
@@ -10,7 +8,7 @@
                 Update your personal information
             </p>
         </div>
-        
+
         <div class="card-body" id="myProfile">
             <ul class="nav nav-tabs">
                 <li class="nav-item">
@@ -63,7 +61,7 @@
                                 <input type="text" id="username" name="username" readonly value="{{$username ?? ''}}" class="form-control" aria-describedby="username">
                                 <div class="form-text">
                                     Cannot change the username of the admin.
-                                </div>  
+                                </div>
                             </div>
                             <div class="col-sm-6">
                                 <label for="email" class="form-label">Personal Email*</label>
@@ -88,10 +86,10 @@
                             </div>
                             <div class="col-sm-6">
                                 <div class="row">
-                                    
+
                                     <div class="col-sm-12 idnumber">
                                         <label for="lastname" class="form-label">Identification Number*</label>
-                                        <input type="text" value="{{$profile->idNo ?? ''}}" name="idNo" id="idnumber" class="form-control" aria-describedby="lastname" >
+                                        <input type="text" value="{{$profile->idNo ?? ''}}" name="idNo" id="idnumber" class="form-control" aria-describedby="lastname">
                                     </div>
                                 </div>
                             </div>
@@ -99,7 +97,7 @@
                         <div class="row p-2">
                             <div class="col-sm-6">
                                 <div class="row">
-                                <div class="col-sm-6 ">
+                                    <div class="col-sm-6 ">
                                         <div class="form-check form-switch align-right">
                                             <input class="form-check-input partCheck" value="door3" type="checkbox" name="nonNetizen" {{($profile->nonNetizen ?? '') ? 'checked' : ''}} id="citizen">
                                             <label class="form-label" for="citizen">
@@ -107,32 +105,32 @@
                                             </label>
                                         </div>
                                     </div>
-                                    <div class="col-sm-6 part" >
+                                    <div class="col-sm-6 part">
                                         <label for="passport" class="form-label">Passport Number</label>
                                         <input type="text" id="passportmyprofile" name="passport" value="{{ $profile->passport ?? '' }}" class="form-control" aria-describedby="passport">
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-sm-3 part" >
-                                        <label for="expirydate" class="form-label">Expiry Date</label>
-                                        <input type="text" id="expirydatemyprofile" name="expiryDate" value="{{ date_format(date_create($profile->expiryDate ?? null), 'Y-m-d') ?? '' }}" placeholder="YYYY-MM-DD" class="form-control" aria-describedby="expirydate" style= "pointer-events: none;" readonly>
-                                    </div>
+                            <div class="col-sm-3 part">
+                                <label for="expirydate" class="form-label">Expiry Date</label>
+                                <input type="text" id="expirydatemyprofile" name="expiryDate" value="{{ date_format(date_create($profile->expiryDate ?? null), 'Y-m-d') ?? '' }}" placeholder="YYYY-MM-DD" class="form-control" aria-describedby="expirydate" style="pointer-events: none;" readonly>
+                            </div>
                             <div class="col-sm-3">
                                 <label for="issuing-country" class="form-label">Issuing Country</label>
                                 <select class="form-select" name="issuingCountry" style="text-transform:uppercase">
-                                    <option value="MY" label="Malaysia" selected ></option>
+                                    <option value="MY" label="Malaysia" selected></option>
                                     <?php
-                                        $americass = americas();
-                                        $asias = asias();
+                                    $americass = americas();
+                                    $asias = asias();
                                     ?>
                                     <optgroup id="country-optgroup-Americas" label="Americas">
                                         @foreach ($americass as $key => $america)
-                                        <option value="{{$key}}" <?php echo ($key == $profile->issuingCountry) ? 'selected="selected"' : '' ?> >{{$america}}</option>
+                                        <option value="{{$key}}" <?php echo ($key == $profile->issuingCountry) ? 'selected="selected"' : '' ?>>{{$america}}</option>
                                         @endforeach
                                     </optgroup>
                                     <optgroup id="country-optgroup-Asia" label="Asia">
                                         @foreach ($asias as $key => $asia)
-                                        <option value="{{$key}}" <?php echo ($key == $profile->issuingCountry) ? 'selected="selected"' : '' ?> >{{$asia}}</option>
+                                        <option value="{{$key}}" <?php echo ($key == $profile->issuingCountry) ? 'selected="selected"' : '' ?>>{{$asia}}</option>
                                         @endforeach
                                     </optgroup>
                                 </select>
@@ -143,27 +141,28 @@
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <label for="dob" class="form-label">Date of Birth</label>
-                                        <input type="text"  name="DOB" id="dob"  value="{{ date_format(date_create($profile->DOB ?? null), 'Y-m-d') ?? '' }}" class="form-control" aria-describedby="dob" style= "pointer-events: none;" readonly>
+                                        <input type="text" name="DOB" id="dob" value="{{ date_format(date_create($profile->DOB ?? null), 'Y-m-d') ?? '' }}" class="form-control" aria-describedby="dob" style="pointer-events: none;" readonly>
                                     </div>
                                     <div class="col-sm-6">
                                         <label for="gender" class="form-label">Gender</label>
-                                        <select class="form-select" name="gender" id="gender" style="text-transform:uppercase" disabled>
+                                        <select class="form-select" name="gender" id="gender" style="text-transform:uppercase">
                                             <?php $gender = gender() ?>
                                             <option value="" label="Please Choose"></option>
                                             @foreach ($gender as $key => $status)
-                                            <option value="{{$key}}" <?php echo ($key == $profile->gender) ? 'selected="selected"' : '' ?> >{{$status}}</option>
+                                            <option value="{{$key}}" <?php echo ($key == $profile->gender) ? 'selected="selected"' : '' ?>>{{$status}} </option>
                                             @endforeach
                                         </select>
                                     </div>
+
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <label for="issuing-country" class="form-label">Marital Status</label>
                                 <select class="form-select" name="maritialStatus" id="maritialStatus" style="text-transform:uppercase">
                                     <?php $MaritalStatus = getMaritalStatus() ?>
-                                    <option value="" label="Please Choose" ></option>
+                                    <option value="" label="Please Choose"></option>
                                     @foreach ($MaritalStatus as $key => $status)
-                                    <option value="{{$key}}" <?php echo ($key == $profile->maritialStatus) ? 'selected="selected"' : '' ?> >{{$status}}</option>
+                                    <option value="{{$key}}" <?php echo ($key == $profile->maritialStatus) ? 'selected="selected"' : '' ?>>{{$status}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -175,18 +174,18 @@
                                     <?php $religion = religion() ?>
                                     <option value="" label="Please Choose"></option>
                                     @foreach ($religion as $key => $status)
-                                    <option value="{{$key}}"  <?php echo ($key == $profile->religion) ? 'selected="selected"' : '' ?>>{{$status}}</option>
+                                    <option value="{{$key}}" <?php echo ($key == $profile->religion) ? 'selected="selected"' : '' ?>>{{$status}}</option>
                                     @endforeach
                                 </select>
                             </div>
-                            
+
                             <div class="col-sm-6">
                                 <label for="race" class="form-label">Race</label>
                                 <select class="form-select" name="race" id="race" style="text-transform:uppercase">
                                     <?php $race = race() ?>
                                     <option value="" label="Please Choose"></option>
                                     @foreach ($race as $key => $status)
-                                    <option value="{{$key}}"  <?php echo ($key == $profile->race) ? 'selected="selected"' : '' ?>>{{$status}}</option>
+                                    <option value="{{$key}}" <?php echo ($key == $profile->race) ? 'selected="selected"' : '' ?>>{{$status}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -203,15 +202,15 @@
                         </div>
                         <div class="col p-2">
                             <label for="extension-number" class="form-label">Extension Number</label>
-                            <input type="text" id="extension-number" name="extensionNo"value="{{$profile->extensionNo ?? ''}}" class="form-control" aria-describedby="extension-number">
+                            <input type="text" id="extension-number" name="extensionNo" value="{{$profile->extensionNo ?? ''}}" class="form-control" aria-describedby="extension-number">
                         </div>
-                    
-                    
-                    <p class="text-end mb-0 mt-3">
-                        <a href="javascript:;" class="btn btn-white me-5px">Previous</a>
-                        <button type="submit" id="saveProfile" class="btn btn-primary">Save</button>
-                        
-                    </p>
+
+
+                        <p class="text-end mb-0 mt-3">
+                            <a href="javascript:;" class="btn btn-white me-5px">Previous</a>
+                            <button type="submit" id="saveProfile" class="btn btn-primary">Save</button>
+
+                        </p>
                     </form>
                 </div>
 
@@ -232,5 +231,3 @@
 
 
 </div>
-
-

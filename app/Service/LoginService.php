@@ -224,6 +224,17 @@ class LoginService
             return $data;
         }
 
+        $usersData = Users::where('id', $input['user_id'])->first();
+
+        if (Hash::check($input['password'], $usersData->password)) {
+            $data['title'] = 'Error!';
+            $data['type'] = 'error';
+            $data['msg'] = 'the current password is match with old password';
+
+            return $data;
+        }
+
+
         $password = Hash::make($input['password']);
 
         $update = Users::where('id', $input['user_id'])

@@ -11,19 +11,19 @@
             </div>
         </div>
         <div class="panel-body" id="employeeInfo">
-            <table id="data-table-default" class="table table-striped table-bordered align-middle">
+            <table id="tableemployeeinfo" class="table table-striped table-bordered align-middle">
                 <thead>
                     <tr>
-                        <th width="1%">No</th>
+                        <th width="1%" data-orderable="false">No</th>
                         <th width="1%" data-orderable="false">Action</th>
                         <th class="text-nowrap">Employee ID</th>
                         <th class="text-nowrap">First Name</th>
                         <th class="text-nowrap">Last name</th>
                         <th class="text-nowrap">Email</th>
                         <th class="text-nowrap">Phone Number</th>
-                        <th class="text-nowrap">department</th>
+                        <th class="text-nowrap">Department</th>
                         <th class="text-nowrap">Report to</th>
-                        <th class="text-nowrap">employee status</th>
+                        <th class="text-nowrap">Employee Status</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -33,7 +33,7 @@
                     <tr class="odd gradeX">
                         <td width="1%" class="fw-bold text-dark">{{$no++}}</td>
                         <td>
-                            <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle"><i class="fa fa-cogs"></i> Actions <i class="fa fa-caret-down"></i></a>
+                            <a href="#" data-bs-toggle="dropdown" class="btn btn-primary btn-sm dropdown-toggle"></i> Actions <i class="fa fa-caret-down"></i></a>
                             <div class="dropdown-menu">
                                 <a href="/editEmployee/{{$employeeInfo->user_id}}" class="dropdown-item">Edit Employee </a>
                                 <div class="dropdown-divider"></div>
@@ -58,3 +58,5 @@
         @include('pages.HRIS.employee.terminateEmployee')
     </div>
 @endsection
+
+ 

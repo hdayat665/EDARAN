@@ -219,8 +219,10 @@ $(document).ready(function() {
                     title: data.title,
                     text: data.msg,
                     type: data.type,
-                    confirmButtonColor: '#3085d6',
-                    confirmButtonText: 'OK'
+                     confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'OK',
+                    allowOutsideClick: false,
+                    allowEscapeKey: false,
                 }).then(function() {
                     if (data.type == 'error') {
 
@@ -331,8 +333,10 @@ $(document).ready(function() {
                     title: data.title,
                     text: data.msg,
                     type: data.type,
-                    confirmButtonColor: '#3085d6',
-                    confirmButtonText: 'OK'
+                     confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'OK',
+                    allowOutsideClick: false,
+                    allowEscapeKey: false,
                 }).then(function() {
                     if (data.type == 'error') {
 
@@ -384,7 +388,7 @@ $(document).ready(function() {
                 jobGrade: "required",
                 designation: "required",
                 employmentType: "required",
-                supervisor: "required",
+                // supervisor: "required",
                 workingEmail: {
                    required: true,
                    email: true
@@ -402,7 +406,7 @@ $(document).ready(function() {
                 jobGrade: "Please Insert Your Job Grade",
                 designation: "Please Insert Your Designation",
                 employmentType: "Please Insert Your Employment Type",
-                supervisor: "Please Insert Your Supervisor",
+                // supervisor: "Please Insert Your Supervisor",
                 workingEmail: {
                    required: "Please Insert Your Working Email",
                    email: "Please Insert Correct Email"
@@ -430,8 +434,10 @@ $(document).ready(function() {
                     title: data.title,
                     text: data.msg,
                     type: data.type,
-                    confirmButtonColor: '#3085d6',
-                    confirmButtonText: 'OK'
+                     confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'OK',
+                    allowOutsideClick: false,
+                    allowEscapeKey: false,
                 }).then(function() {
                     if (data.type == 'error') {
 
