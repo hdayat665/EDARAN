@@ -100,6 +100,7 @@ class MyTimeSheetService
             $input['project_id'] = $input['office_log_project'];
             unset($input['office_log_project']);
         }
+        unset($input['office_log_project']);
 
         if (isset($input['activity_office'])) {
             $input['activity_name'] = $input['activity_office'];

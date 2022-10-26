@@ -16,26 +16,26 @@
     <meta content="" name="description" />
     <meta content="" name="author" />
 
-    <link rel="shortcut icon" href="{{env('ASSETS_URL')}}/img/logo/orbit-sm.png" >
+    <link rel="shortcut icon" href="/assets/img/logo/orbit-sm.png" >
     <!-- ================== BEGIN core-css ================== -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400&display=swap" rel="stylesheet">	<link href="{{env('ASSETS_URL')}}/css/vendor.min.css" rel="stylesheet" />	<link href="{{env('ASSETS_URL')}}/css/vendor.min.css" rel="stylesheet" />
-    <link href="{{env('ASSETS_URL')}}/css/default/app.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400&display=swap" rel="stylesheet">	<link href="/assets/css/vendor.min.css" rel="stylesheet" />	<link href="/assets/css/vendor.min.css" rel="stylesheet" />
+    <link href="/assets/css/default/app.min.css" rel="stylesheet" />
     <!-- ================== END core-css ================== -->
 
     <!-- ================== BEGIN page-css ================== -->
-    <link href="{{env('ASSETS_URL')}}/plugins/jvectormap-next/jquery-jvectormap.css" rel="stylesheet" />
-    <link href="{{env('ASSETS_URL')}}/plugins/gritter/css/jquery.gritter.css" rel="stylesheet" />
-    <link href="{{env('ASSETS_URL')}}/plugins/nvd3/build/nv.d3.css" rel="stylesheet" />
-    <link href="{{env('ASSETS_URL')}}/plugins/simple-calendar/dist/simple-calendar.css" rel="stylesheet" />
-    <link href="{{env('ASSETS_URL')}}/plugins/jstree/dist/themes/default/style.min.css" rel="stylesheet" />
+    <link href="/assets/plugins/jvectormap-next/jquery-jvectormap.css" rel="stylesheet" />
+    <link href="/assets/plugins/gritter/css/jquery.gritter.css" rel="stylesheet" />
+    <link href="/assets/plugins/nvd3/build/nv.d3.css" rel="stylesheet" />
+    <link href="/assets/plugins/simple-calendar/dist/simple-calendar.css" rel="stylesheet" />
+    <link href="/assets/plugins/jstree/dist/themes/default/style.min.css" rel="stylesheet" />
 
-    <link href="{{env('ASSETS_URL')}}/plugins/@fullcalendar/common/main.min.css" rel="stylesheet" />
-    <link href="{{env('ASSETS_URL')}}/plugins/@fullcalendar/daygrid/main.min.css" rel="stylesheet" />
-    <link href="{{env('ASSETS_URL')}}/plugins/@fullcalendar/timegrid/main.min.css" rel="stylesheet" />
-    <link href="{{env('ASSETS_URL')}}/plugins/@fullcalendar/list/main.min.css" rel="stylesheet" />
-    <link href="{{env('ASSETS_URL')}}/plugins/@fullcalendar/bootstrap/main.min.css" rel="stylesheet" />
+    <link href="/assets/plugins/@fullcalendar/common/main.min.css" rel="stylesheet" />
+    <link href="/assets/plugins/@fullcalendar/daygrid/main.min.css" rel="stylesheet" />
+    <link href="/assets/plugins/@fullcalendar/timegrid/main.min.css" rel="stylesheet" />
+    <link href="/assets/plugins/@fullcalendar/list/main.min.css" rel="stylesheet" />
+    <link href="/assets/plugins/@fullcalendar/bootstrap/main.min.css" rel="stylesheet" />
     <style>
         .error{
             /* margin-top:2.4rem !important; */
@@ -59,7 +59,7 @@
         <div id="header" class="app-header">
             <!-- BEGIN navbar-header -->
             <div class="navbar-header">
-                <img src="{{env('ASSETS_URL')}}/img/logo/orbit-logo-5.png" class="navbar-logo navbar-brand"  alt="...">
+                <img src="/assets/img/logo/orbit-logo-5.png" class="navbar-logo navbar-brand"  alt="...">
                 <button type="button" class="navbar-mobile-toggler" data-toggle="app-sidebar-mobile">
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
@@ -88,7 +88,7 @@
                         </a>
                         <a href="javascript:;" class="dropdown-item media">
                             <div class="media-left">
-                                <img src="{{env('ASSETS_URL')}}/img/user/user-1.jpg" class="media-object" alt="" />
+                                <img src="/assets/img/user/user-1.jpg" class="media-object" alt="" />
                                 <i class="fab fa-facebook-messenger text-blue media-object-icon"></i>
                             </div>
                             <div class="media-body">
@@ -99,7 +99,7 @@
                         </a>
                         <a href="javascript:;" class="dropdown-item media">
                             <div class="media-left">
-                                <img src="{{env('ASSETS_URL')}}/img/user/user-2.jpg" class="media-object" alt="" />
+                                <img src="/assets/img/user/user-2.jpg" class="media-object" alt="" />
                                 <i class="fab fa-facebook-messenger text-blue media-object-icon"></i>
                             </div>
                             <div class="media-body">
@@ -135,7 +135,7 @@
 
                 <div class="navbar-item navbar-user dropdown">
                     <a href="#" class="navbar-link dropdown-toggle d-flex align-items-center" data-bs-toggle="dropdown">
-                        <img src="{{env('ASSETS_URL')}}/img/user/user-13.jpg" alt="" />
+                        <img src="/assets/img/user/user-13.jpg" alt="" />
                         <span>
                             <span class="d-none d-md-inline">Admin</span>
                             <b class="caret"></b>
@@ -616,92 +616,92 @@
         <!-- END #app -->
 
         <!-- ================== BEGIN core-js ================== -->
-        <script src="{{env('ASSETS_URL')}}/js/vendor.min.js"></script>
-        <script src="{{env('ASSETS_URL')}}/js/app.min.js"></script>
+        <script src="/assets/js/vendor.min.js"></script>
+        <script src="/assets/js/app.min.js"></script>
         <!-- ================== END core-js ================== -->
 
         <!-- ================== BEGIN page-js ================== -->
-        <script src="{{env('ASSETS_URL')}}/plugins/d3/d3.min.js"></script>
-        <script src="{{env('ASSETS_URL')}}/plugins/nvd3/build/nv.d3.min.js"></script>
-        <script src="{{env('ASSETS_URL')}}/plugins/jvectormap-next/jquery-jvectormap.min.js"></script>
-        <script src="{{env('ASSETS_URL')}}/plugins/jvectormap-next/jquery-jvectormap-world-mill.js"></script>
-        <script src="{{env('ASSETS_URL')}}/plugins/simple-calendar/dist/jquery.simple-calendar.min.js"></script>
-        <script src="{{env('ASSETS_URL')}}/plugins/gritter/js/jquery.gritter.js"></script>
-        <script src="{{env('ASSETS_URL')}}/js/demo/dashboard-v2.js"></script>
-    <script src="{{env('ASSETS_URL')}}/plugins/moment/min/moment.min.js"></script>
-    <script src="{{env('ASSETS_URL')}}/plugins/@fullcalendar/core/main.global.js"></script>
-        <script src="{{env('ASSETS_URL')}}/plugins/@fullcalendar/daygrid/main.global.js"></script>
-        <script src="{{env('ASSETS_URL')}}/plugins/@fullcalendar/timegrid/main.global.js"></script>
-        <script src="{{env('ASSETS_URL')}}/plugins/@fullcalendar/interaction/main.global.js"></script>
-        <script src="{{env('ASSETS_URL')}}/plugins/@fullcalendar/list/main.global.js"></script>
-        <script src="{{env('ASSETS_URL')}}/plugins/@fullcalendar/bootstrap/main.global.js"></script>
+        <script src="/assets/plugins/d3/d3.min.js"></script>
+        <script src="/assets/plugins/nvd3/build/nv.d3.min.js"></script>
+        <script src="/assets/plugins/jvectormap-next/jquery-jvectormap.min.js"></script>
+        <script src="/assets/plugins/jvectormap-next/jquery-jvectormap-world-mill.js"></script>
+        <script src="/assets/plugins/simple-calendar/dist/jquery.simple-calendar.min.js"></script>
+        <script src="/assets/plugins/gritter/js/jquery.gritter.js"></script>
+        <script src="/assets/js/demo/dashboard-v2.js"></script>
+    <script src="/assets/plugins/moment/min/moment.min.js"></script>
+    <script src="/assets/plugins/@fullcalendar/core/main.global.js"></script>
+        <script src="/assets/plugins/@fullcalendar/daygrid/main.global.js"></script>
+        <script src="/assets/plugins/@fullcalendar/timegrid/main.global.js"></script>
+        <script src="/assets/plugins/@fullcalendar/interaction/main.global.js"></script>
+        <script src="/assets/plugins/@fullcalendar/list/main.global.js"></script>
+        <script src="/assets/plugins/@fullcalendar/bootstrap/main.global.js"></script>
 
          <!-- required files -->
-    <link href="{{env('ASSETS_URL')}}/plugins/bootstrap-timepicker/css/bootstrap-timepicker.min.css" rel="stylesheet" />
-    <script src="{{env('ASSETS_URL')}}/plugins/bootstrap-timepicker/js/bootstrap-timepicker.min.js"></script>
+    <link href="/assets/plugins/bootstrap-timepicker/css/bootstrap-timepicker.min.css" rel="stylesheet" />
+    <script src="/assets/plugins/bootstrap-timepicker/js/bootstrap-timepicker.min.js"></script>
     <!-- required files -->
-    <link href="{{env('ASSETS_URL')}}/plugins/bootstrap-datepicker/dist/css/bootstrap-datepicker.css" rel="stylesheet" />
-    <script src="{{env('ASSETS_URL')}}/plugins/bootstrap-datepicker/dist/js/bootstrap-datepicker.js"></script>
+    <link href="/assets/plugins/bootstrap-datepicker/dist/css/bootstrap-datepicker.css" rel="stylesheet" />
+    <script src="/assets/plugins/bootstrap-datepicker/dist/js/bootstrap-datepicker.js"></script>
     <!-- required files -->
-    <link href="{{env('ASSETS_URL')}}/plugins/select-picker/dist/picker.min.css" rel="stylesheet" />
-    <script src="{{env('ASSETS_URL')}}/plugins/select-picker/dist/picker.min.js"></script>
+    <link href="/assets/plugins/select-picker/dist/picker.min.css" rel="stylesheet" />
+    <script src="/assets/plugins/select-picker/dist/picker.min.js"></script>
         <!-- ================== END page-js ================== -->
     </body>
     </html>
-    <script src="{{env('ASSETS_URL')}}/plugins/datatables.net/js/jquery.dataTables.min.js"></script>
-    <script src="{{env('ASSETS_URL')}}/plugins/datatables.net-bs5/js/dataTables.bootstrap5.min.js"></script>
-    <script src="{{env('ASSETS_URL')}}/plugins/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
-    <link href="{{env('ASSETS_URL')}}/plugins/datatables.net-buttons-bs5/css/buttons.bootstrap5.min.css" rel="stylesheet" />
-    <script src="{{env('ASSETS_URL')}}/plugins/datatables.net-responsive-bs5/js/responsive.bootstrap5.min.js"></script>
-    <script src="{{env('ASSETS_URL')}}/plugins/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
-    <script src="{{env('ASSETS_URL')}}/plugins/datatables.net-buttons-bs5/js/buttons.bootstrap5.min.js"></script>
-    <script src="{{env('ASSETS_URL')}}/plugins/datatables.net-buttons/js/buttons.colVis.min.js"></script>
-    <script src="{{env('ASSETS_URL')}}/plugins/datatables.net-buttons/js/buttons.flash.min.js"></script>
-    <script src="{{env('ASSETS_URL')}}/plugins/datatables.net-buttons/js/buttons.html5.min.js"></script>
-    <script src="{{env('ASSETS_URL')}}/plugins/datatables.net-buttons/js/buttons.print.min.js"></script>
-    <script src="{{env('ASSETS_URL')}}/plugins/pdfmake/build/pdfmake.min.js"></script>
-    <script src="{{env('ASSETS_URL')}}/plugins/pdfmake/build/vfs_fonts.js"></script>
-    <script src="{{env('ASSETS_URL')}}/plugins/jszip/dist/jszip.min.js"></script>
-    <script src="{{env('ASSETS_URL')}}/js/demo/table-manage-buttons.demo.js"></script>
-    <script src="{{env('ASSETS_URL')}}/plugins/@highlightjs/cdn-assets/highlight.min.js"></script>
-    <script src="{{env('ASSETS_URL')}}/js/demo/render.highlight.js"></script>
-    <link href="{{env('ASSETS_URL')}}/plugins/datatables.net-bs5/css/dataTables.bootstrap5.min.css" rel="stylesheet" />
-    <link href="{{env('ASSETS_URL')}}/plugins/datatables.net-responsive-bs5/css/responsive.bootstrap5.min.css" rel="stylesheet" />
-    <link href="{{env('ASSETS_URL')}}/plugins/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet" />
-    <script src="{{env('ASSETS_URL')}}/plugins/moment/min/moment.min.js"></script>
-    <script src="{{env('ASSETS_URL')}}/plugins/bootstrap-daterangepicker/daterangepicker.js"></script>
-    <link href="{{env('ASSETS_URL')}}/plugins/bootstrap-datepicker/dist/css/bootstrap-datepicker.css" rel="stylesheet" />
-    <script src="{{env('ASSETS_URL')}}/plugins/bootstrap-datepicker/dist/js/bootstrap-datepicker.js"></script>
+    <script src="/assets/plugins/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="/assets/plugins/datatables.net-bs5/js/dataTables.bootstrap5.min.js"></script>
+    <script src="/assets/plugins/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+    <link href="/assets/plugins/datatables.net-buttons-bs5/css/buttons.bootstrap5.min.css" rel="stylesheet" />
+    <script src="/assets/plugins/datatables.net-responsive-bs5/js/responsive.bootstrap5.min.js"></script>
+    <script src="/assets/plugins/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="/assets/plugins/datatables.net-buttons-bs5/js/buttons.bootstrap5.min.js"></script>
+    <script src="/assets/plugins/datatables.net-buttons/js/buttons.colVis.min.js"></script>
+    <script src="/assets/plugins/datatables.net-buttons/js/buttons.flash.min.js"></script>
+    <script src="/assets/plugins/datatables.net-buttons/js/buttons.html5.min.js"></script>
+    <script src="/assets/plugins/datatables.net-buttons/js/buttons.print.min.js"></script>
+    <script src="/assets/plugins/pdfmake/build/pdfmake.min.js"></script>
+    <script src="/assets/plugins/pdfmake/build/vfs_fonts.js"></script>
+    <script src="/assets/plugins/jszip/dist/jszip.min.js"></script>
+    <script src="/assets/js/demo/table-manage-buttons.demo.js"></script>
+    <script src="/assets/plugins/@highlightjs/cdn-assets/highlight.min.js"></script>
+    <script src="/assets/js/demo/render.highlight.js"></script>
+    <link href="/assets/plugins/datatables.net-bs5/css/dataTables.bootstrap5.min.css" rel="stylesheet" />
+    <link href="/assets/plugins/datatables.net-responsive-bs5/css/responsive.bootstrap5.min.css" rel="stylesheet" />
+    <link href="/assets/plugins/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet" />
+    <script src="/assets/plugins/moment/min/moment.min.js"></script>
+    <script src="/assets/plugins/bootstrap-daterangepicker/daterangepicker.js"></script>
+    <link href="/assets/plugins/bootstrap-datepicker/dist/css/bootstrap-datepicker.css" rel="stylesheet" />
+    <script src="/assets/plugins/bootstrap-datepicker/dist/js/bootstrap-datepicker.js"></script>
     <!-- required files -->
-    <link href="{{env('ASSETS_URL')}}/plugins/blueimp-gallery/css/blueimp-gallery.min.css" rel="stylesheet" />
-    <link href="{{env('ASSETS_URL')}}/plugins/blueimp-file-upload/css/jquery.fileupload.css" rel="stylesheet" />
-    <link href="{{env('ASSETS_URL')}}/plugins/blueimp-file-upload/css/jquery.fileupload-ui.css" rel="stylesheet" />
+    <link href="/assets/plugins/blueimp-gallery/css/blueimp-gallery.min.css" rel="stylesheet" />
+    <link href="/assets/plugins/blueimp-file-upload/css/jquery.fileupload.css" rel="stylesheet" />
+    <link href="/assets/plugins/blueimp-file-upload/css/jquery.fileupload-ui.css" rel="stylesheet" />
 
-    <script src="{{env('ASSETS_URL')}}/plugins/blueimp-file-upload/js/vendor/jquery.ui.widget.js"></script>
-    <script src="{{env('ASSETS_URL')}}/plugins/blueimp-tmpl/js/tmpl.js"></script>
-    <script src="{{env('ASSETS_URL')}}/plugins/blueimp-load-image/js/load-image.all.min.js"></script>
-    <script src="{{env('ASSETS_URL')}}/plugins/blueimp-canvas-to-blob/js/canvas-to-blob.js"></script>
-    <script src="{{env('ASSETS_URL')}}/plugins/blueimp-gallery/js/jquery.blueimp-gallery.min.js"></script>
-    <script src="{{env('ASSETS_URL')}}/plugins/blueimp-file-upload/js/jquery.iframe-transport.js"></script>
-    <script src="{{env('ASSETS_URL')}}/plugins/blueimp-file-upload/js/jquery.fileupload.js"></script>
-    <script src="{{env('ASSETS_URL')}}/plugins/blueimp-file-upload/js/jquery.fileupload-process.js"></script>
-    <script src="{{env('ASSETS_URL')}}/plugins/blueimp-file-upload/js/jquery.fileupload-image.js"></script>
-    <script src="{{env('ASSETS_URL')}}/plugins/blueimp-file-upload/js/jquery.fileupload-audio.js"></script>
-    <script src="{{env('ASSETS_URL')}}/plugins/blueimp-file-upload/js/jquery.fileupload-video.js"></script>
-    <script src="{{env('ASSETS_URL')}}/plugins/blueimp-file-upload/js/jquery.fileupload-validate.js"></script>
-    <script src="{{env('ASSETS_URL')}}/plugins/blueimp-file-upload/js/jquery.fileupload-ui.js"></script>
-    <script src="{{env('ASSETS_URL')}}/js/demo/form-multiple-upload.demo.js"></script>
-	<script src="{{env('ASSETS_URL')}}/plugins/jstree/dist/jstree.min.js"></script>
+    <script src="/assets/plugins/blueimp-file-upload/js/vendor/jquery.ui.widget.js"></script>
+    <script src="/assets/plugins/blueimp-tmpl/js/tmpl.js"></script>
+    <script src="/assets/plugins/blueimp-load-image/js/load-image.all.min.js"></script>
+    <script src="/assets/plugins/blueimp-canvas-to-blob/js/canvas-to-blob.js"></script>
+    <script src="/assets/plugins/blueimp-gallery/js/jquery.blueimp-gallery.min.js"></script>
+    <script src="/assets/plugins/blueimp-file-upload/js/jquery.iframe-transport.js"></script>
+    <script src="/assets/plugins/blueimp-file-upload/js/jquery.fileupload.js"></script>
+    <script src="/assets/plugins/blueimp-file-upload/js/jquery.fileupload-process.js"></script>
+    <script src="/assets/plugins/blueimp-file-upload/js/jquery.fileupload-image.js"></script>
+    <script src="/assets/plugins/blueimp-file-upload/js/jquery.fileupload-audio.js"></script>
+    <script src="/assets/plugins/blueimp-file-upload/js/jquery.fileupload-video.js"></script>
+    <script src="/assets/plugins/blueimp-file-upload/js/jquery.fileupload-validate.js"></script>
+    <script src="/assets/plugins/blueimp-file-upload/js/jquery.fileupload-ui.js"></script>
+    <script src="/assets/js/demo/form-multiple-upload.demo.js"></script>
+	<script src="/assets/plugins/jstree/dist/jstree.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.2/croppie.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.2/croppie.js"></script>
-    {{-- <script src="{{env('ASSETS_URL')}}/js/orgchart.js"></script> --}}
+    {{-- <script src="/assets/js/orgchart.js"></script> --}}
     {{-- <link href="../assets/plugins/nvd3/build/nv.d3.css" rel="stylesheet" /> --}}
     {{-- <script src="../assets/plugins/d3/d3.min.js"></script> --}}
     {{-- <script src="../assets/plugins/nvd3/build/nv.d3.min.js"></script> --}}
     {{-- <script src="../assets/plugins/chart.js/dist/Chart.min.js"></script> --}}
-    
-    
+
+
 
 
 
@@ -711,7 +711,7 @@
         $('#data-table-default-announcement').DataTable({
             responsive: true,
             lengthMenu: [5, 10],
-            
+
         });
     </script>
     <script>
@@ -725,15 +725,15 @@
             responsive: true,
             lengthMenu: [5, 10],
         });
-    </script> 
+    </script>
     <script type="text/javascript">
         var require = {
-            baseUrl: "{{env('ASSETS_URL')}}/js/",
+            baseUrl: "/assets/js/",
             waitSeconds: 15,
             urlArgs: "bust=10"
         };
     </script>
-    <script src="{{env('ASSETS_URL')}}/js/require.js" data-main="controller"></script>
+    <script src="/assets/js/require.js" data-main="controller"></script>
 
     {{-- <script>
         Chart.defaults.color = 'rgba('+ app.color.componentColorRgb + ', .65)';
