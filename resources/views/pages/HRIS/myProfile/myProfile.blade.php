@@ -107,7 +107,7 @@
                                     </div>
                                     <div class="col-sm-6 part">
                                         <label for="passport" class="form-label">Passport Number</label>
-                                        <input type="text" id="passportmyprofile" name="passport" value="{{ $profile->passport ?? '' }}" class="form-control" aria-describedby="passport">
+                                        <input type="text" id="passportmyprofile" name="passport" value="{{ $profile->passport ?? '' }}" class="form-control" aria-describedby="passport" >
                                     </div>
                                 </div>
                             </div>

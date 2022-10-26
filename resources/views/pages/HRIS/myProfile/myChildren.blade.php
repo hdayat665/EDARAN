@@ -11,6 +11,9 @@
             <th class="text-nowrap">Institution</th>
             <th class="text-nowrap">Marital Status</th>
         </thead>
+
+        
+
         <tbody>
             @if ($childrens)
             @foreach ($childrens as $children)
