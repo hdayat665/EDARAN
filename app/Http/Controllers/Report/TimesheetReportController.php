@@ -62,7 +62,10 @@ class TimesheetReportController extends Controller
             $data['departments'] = $trs->getDataEmployeeSummary($input);
             $data['date_range'] = $input['date_range'];
 
-            $data['department'] = getDepartment($input['department'])->departmentName;
+            $data['department'] = '';
+            if (isset($input['department'])) {
+                $data['department'] = getDepartment($input['department'])->departmentName;
+            }
 
             $view = 'pages.report.timesheet.employeeReportByDepartment';
         }else if($input['category'] == 'Employee'){
