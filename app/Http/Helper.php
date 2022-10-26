@@ -118,7 +118,7 @@ if (!function_exists('educationLevel')) {
     function educationLevel($id = '')
     {
         $data = [
-            '0' => '-',
+          
             '1' => 'primary school',
             '2' => 'lower secondary school',
             '3' => 'upper secondary school',
@@ -139,7 +139,7 @@ if (!function_exists('educationType')) {
     function educationType($id = '')
     {
         $data = [
-            '0' => '-',
+            
             '1' => 'primary school (year 6-12)',
             '2' => 'lower secondary school (form 1-3)',
             '3' => 'upper secondary school (form 4 & 5)',
@@ -160,7 +160,7 @@ if (!function_exists('relationship')) {
     function relationship($id = '')
     {
         $data = [
-            '0' => '-',
+           
             '1' => 'Grand Father',
             '2' => 'Grand Mother',
             '3' => 'Grand Father-In-Law',

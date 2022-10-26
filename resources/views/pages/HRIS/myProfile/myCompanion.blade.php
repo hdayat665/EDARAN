@@ -194,7 +194,7 @@
                             </div>
                             <div class="col-sm-6">
                                 <label for="date-joined-company" class="form-label">Date Joined Company</label>
-                                <input type="text" readonly  id="dateJoinedmc" name="dateJoined" value="{{ $companion->dateJoined ?? '' }}" class="form-control" aria-describedby="date-joined-company" disabled>
+                                <input type="text" readonly  id="dateJoinedmc" name="dateJoined" value="{{ $companion->dateJoined ?? '' }}" class="form-control" aria-describedby="date-joined-company" >
                             </div>
                         </div>
                         <div class="row p-2">

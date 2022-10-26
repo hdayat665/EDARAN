@@ -28,7 +28,8 @@
                             <div class="row">
                                 <div class="col-sm-6 ">
                                     <div class="form-check form-switch align-right">
-                                        <input class="form-check-input partCheck4" type="checkbox" id="" name="nonCitizen" >
+                                    <!-- <input class="form-check-input partCheck" value="door3" type="checkbox" name="nonNetizen" {{($profile->nonNetizen ?? '') ? 'checked' : ''}} id="citizen"> -->
+                                        <input class="form-check-input partCheck4" value="" type="checkbox" name="nonCitizen" {{($children->nonCitizen ?? '') ? 'checked' : ''}} id="citizen">
                                         <label class="form-check-label" for="citizen">
                                             Non-Citizen
                                         </label>
@@ -37,6 +38,7 @@
                                 <div class="col-sm-6">
                                     <label for="lastname" class="form-label">Identification Number*</label>
                                     <input type="number" id="idNoaddChild" name="idNo" value="" class="form-control" >
+                                    
                                 </div>
                             </div>
                         </div>
@@ -44,11 +46,11 @@
                             <div class="row">
                                 <div class="col-sm-6">
                                     <label for="dob" class="form-label">Date of Birth</label>
-                                    <input type="text" id="DOBChild" name="DOB" class="form-control" aria-describedby="dob" readonly>
+                                    <input type="text" id="DOBChild" name="DOB" class="form-control" aria-describedby="dob" disabled>
                                 </div>
                                 <div class="col-sm-6">
                                     <label for="age" class="form-label">Age</label>
-                                    <input type="number" id="" name="age" class="form-control" aria-describedby="age">
+                                    <input type="number" id="ageChild" name="age" class="form-control" aria-describedby="age" disabled>
                                 </div>
                             </div>
                         </div>
@@ -58,11 +60,13 @@
                             <div class="row">
                                 <div class="col-sm-6">
                                     <label for="passport" class="form-label">Passport Number</label>
-                                    <input type="text" id="passportChild" name="passport" class="form-control" aria-describedby="passport" readonly>
+                                  
+                                    <input type="text" id="passportChild" name="passport"  class="form-control" aria-describedby="passport">
                                 </div>
                                 <div class="col-sm-6">
                                     <label for="expirydate" class="form-label">Expiry Date</label>
-                                    <input type="text" id="expiryDateChild" name="expiryDate" class="form-control" aria-describedby="expirydate" readonly>
+                                    <input type="text" id="expiryDateChild" name="expiryDate"  placeholder="YYYY-MM-DD" class="form-control" aria-describedby="expirydate" style="pointer-events: none;" readonly>
+                                  
                                 </div>
                             </div>
                         </div>
@@ -86,13 +90,18 @@
                     <div class="row p-2">
                         <div class="col-sm-6">
                             <label for="gender" class="form-label">Gender</label>
-                            <select class="form-select" name="gender" id="" style="text-transform:uppercase">
-                                <option value="" label="Please Choose "></option>
-                                @foreach ($gender as $key => $status)
-                                <option value="{{$key}}">{{$status}}</option>
+                            <select class="form-select" name="gender" id="childgender" style="text-transform:uppercase">
+                            <?php $childgender = gender() ?>
+                                <option value="" label="Please Choose" selected="selected"></option>
+                                @foreach ($childgender as $key => $status)
+                                <option value="{{$key}}"> {{$status}}</option>
                                 @endforeach
                             </select>
                         </div>
+
+                    
+
+
                         <div class="col-sm-6">
                             <label for="issuing-country" class="form-label">Marital Status</label>
                             <select class="form-select" name="maritalStatus" id="" style="text-transform:uppercase">
@@ -141,13 +150,14 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                 <button href="javascript:;" id="addChildren" class="btn btn-primary">Save</button>
-                
+               
             </div>
             </form>
         </div>
     </div>
 </div>
 
+<!-- UPDATE CHILDREN DETAILS -->
 <div class="modal fade" id="edit-children" tabindex="-1" aria-labelledby="add-children" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
@@ -161,7 +171,7 @@
                         <div class="col-sm-6">
                             <label for="firstname" class="form-label">First Name*</label>
                             <input type="text" id="firstName1" name="firstName" value="" class="form-control" aria-describedby="firstname">
-                            <input type="hidden" name="user_id" value="{{$user_id}}">
+                            <input type="hidden" id="id1" name="id" value="{{$user_id}}" >
                         </div>
                         <div class="col-sm-6">
                             <label for="lastname" class="form-label">Last Name*</label>
@@ -179,7 +189,8 @@
                             <div class="row">
                                 <div class="col-sm-6 ">
                                     <div class="form-check form-switch align-right">
-                                        <input class="form-check-input" type="checkbox" id="nonCitizen1" name="nonCitizen" >
+                                        <input class="form-check-input partCheck5" type="checkbox" id="nonCitizen1" name="nonCitizen1" {{($children->nonCitizen1 ?? '') ? 'checked' : ''}}>
+                                       
                                         <label class="form-check-label" for="citizen">
                                             Non-Citizen
                                         </label>
@@ -187,7 +198,7 @@
                                 </div>
                                 <div class="col-sm-6">
                                     <label for="lastname" class="form-label">Identification Number*</label>
-                                    <input type="text" id="idNo1" name="idNo" value="" class="form-control" aria-describedby="lastname">
+                                    <input type="text" id="idNo1" name="idNo"  value="{{$children->idNo ?? ''}}" class="form-control" aria-describedby="lastname">
                                 </div>
                             </div>
                         </div>
@@ -195,11 +206,11 @@
                             <div class="row">
                                 <div class="col-sm-6">
                                     <label for="dob" class="form-label">Date of Birth</label>
-                                    <input type="date" id="DOB1" name="DOB" class="form-control" aria-describedby="dob">
+                                    <input type="text" id="DOB1" name="DOB" class="form-control" aria-describedby="dob" style="pointer-events: none;" readonly>
                                 </div>
                                 <div class="col-sm-6">
                                     <label for="age" class="form-label">Age</label>
-                                    <input type="text" id="age1" name="age" class="form-control" aria-describedby="age">
+                                    <input type="number" id="age1" name="age" class="form-control" aria-describedby="age">
                                 </div>
                             </div>
                         </div>
@@ -209,11 +220,11 @@
                             <div class="row">
                                 <div class="col-sm-6">
                                     <label for="passport" class="form-label">Passport Number</label>
-                                    <input type="text" id="passports1" name="passport" class="form-control" aria-describedby="passport">
+                                    <input type="text" id="passports1" name="passport" value="{{ $children->passport ?? '' }}" class="form-control" aria-describedby="passport">
                                 </div>
                                 <div class="col-sm-6">
                                     <label for="expirydate" class="form-label">Expiry Date</label>
-                                    <input type="date" id="expiryDate1" name="expiryDate" class="form-control" aria-describedby="expirydate">
+                                    <input type="text" id="expiryDate1" name="expiryDate"  value="{{ date_format(date_create($children->expiryDate ?? null), 'Y-m-d') ?? '' }}" placeholder="YYYY-MM-DD"  class="form-control" aria-describedby="expirydate" style="pointer-events: none;" readonly>
                                 </div>
                             </div>
                         </div>
@@ -237,13 +248,16 @@
                     <div class="row p-2">
                         <div class="col-sm-6">
                             <label for="gender" class="form-label">Gender</label>
-                            <select class="form-select" name="gender" id="gender1">
-                                <option value="0" label="Please Choose "></option>
-                                @foreach ($gender as $key => $status)
-                                <option value="{{$key}}">{{$status}}</option>
+                            <select class="form-select" name="gender" id="gender1" style="text-transform:uppercase">
+                            <?php $gender1 = gender() ?>
+                                <option value="" label="Please Choose "></option>
+                                @foreach ($gender1 as $key => $status)
+                                <option value="{{$key}}" <?php echo ($key == $children->gender) ? 'selected="selected"' : '' ?>>{{$status}}</option>
                                 @endforeach
                             </select>
                         </div>
+
+
                         <div class="col-sm-6">
                             <label for="issuing-country" class="form-label">Marital Status</label>
                             <select class="form-select" name="maritalStatus" id="maritalStatus1">
@@ -288,16 +302,17 @@
                             <input type="file" class="form-control" name="supportDoc">
                         </div>
                     </div>
-                </form>
+                    </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-primary formSave" id="editChildren">Update</button>
+                <button type="button" class="btn btn-primary" id="editChildren">Update</button>
+                
             </div>
         </div>
     </div>
 </div>
-
+<!-- VIEW CHILDREN DETAILS -->
 <div class="modal fade" id="view-children" tabindex="-1" aria-labelledby="add-children" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
@@ -344,7 +359,7 @@
                             <div class="row">
                                 <div class="col-sm-6">
                                     <label for="dob" class="form-label">Date of Birth</label>
-                                    <input type="date" id="DOB" name="DOB" class="form-control" aria-describedby="dob" readonly>
+                                    <input type="text" id="DOB" name="DOB" class="form-control" aria-describedby="dob" readonly>
                                 </div>
                                 <div class="col-sm-6">
                                     <label for="age" class="form-label">Age</label>

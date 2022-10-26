@@ -86,7 +86,7 @@
                             @endforeach
                         </select>
                     </div>
-                    <div class="row p-2">
+                    <!-- <div class="row p-2">
                         <label class="form-label" for="supervisor">
                               User Role
                         </label>
@@ -97,9 +97,9 @@
                             </label>
                         </div>
                         <div class="form-text">
-                            If enabled, report-to will enabled the username
+                            If enabled, report-to will enabled the usernameasddasd
                         </div>
-                    </div>
+                    </div> -->
                     <hr>
                     {{-- <button type="button" class="btn btn-primary float-end" data-bs-toggle="modal" data-bs-target="#update-employment"">
                         Update
