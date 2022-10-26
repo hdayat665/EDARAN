@@ -44,7 +44,7 @@ class TimesheetReportService
     {
         $cond[1] = ['a.tenant_id', Auth::user()->tenant_id];
 
-        // pr($input);
+
         if (isset($input['project'])) {
             $cond[2] = ['a.project_id', $input['project']];
         }
@@ -61,10 +61,11 @@ class TimesheetReportService
             $cond[6] = ['a.user_id', $input['employeeName']];
         }
 
-        // if (isset($input['month'])) {
-        //     $cond[6] = ["MONTH("."a.date".")", $input['month']];
-        //     // $month = $input['month'];
-        // }
+        if (isset($input['date_range'])) {
+            $dateRange = \explode(' - ', $input['date_range']);
+            $startDate = date_format(date_create($dateRange[0]), 'Y-m-d');
+            $endDate = date_format(date_create($dateRange[1]), 'Y-m-d');
+        }
 
         // if (isset($input['year'])) {
         //     $year = $input['year'];
@@ -78,6 +79,7 @@ class TimesheetReportService
             ->leftJoin('designation as e', 'c.designation', '=', 'e.id')
             ->select('a.*', 'b.project_name', 'c.employeeName', 'd.departmentName', 'e.designationName')
             ->where($cond)
+            ->whereBetween('date', [$startDate, $endDate])
             // ->whereMonth('a.date', $month)
             // ->whereYear('a.date', $year)
             ->get();
