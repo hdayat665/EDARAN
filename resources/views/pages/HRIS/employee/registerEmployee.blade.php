@@ -52,6 +52,6 @@
     <!-- END row -->
 </div>
 
-<link href="{{env('ASSETS_URL')}}/plugins/switchery/dist/switchery.min.css" rel="stylesheet" />
-<script src="{{env('ASSETS_URL')}}/plugins/switchery/dist/switchery.min.js"></script>
+<link href="/assets/plugins/switchery/dist/switchery.min.css" rel="stylesheet" />
+<script src="/assets/plugins/switchery/dist/switchery.min.js"></script>
 @endsection

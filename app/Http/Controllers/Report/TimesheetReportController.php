@@ -72,10 +72,12 @@ class TimesheetReportController extends Controller
         return view($view, $data);
     }
 
-    public function searchEmployeeReport()
+    public function searchEmployeeReport(Request $r)
     {
         $data = [];
 
+        $trs = new TimesheetReportService;
+        $data['logs'] = $trs->getReportTimesheetLog($r);
 
         return view('pages.report.timesheet.employeeReportAll', $data);
     }
@@ -104,3 +106,5 @@ class TimesheetReportController extends Controller
     }
 
 }
+
+

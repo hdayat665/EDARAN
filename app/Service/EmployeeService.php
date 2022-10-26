@@ -94,7 +94,7 @@ class EmployeeService
     {
         $input = $r->input();
 
-        $status['status'] = 'inactive';
+        $status['status'] = 'terminate';
 
         // check attachment
         // pr($r->file());

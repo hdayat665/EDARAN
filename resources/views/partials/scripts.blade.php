@@ -42,9 +42,9 @@
  <!-- Material Dashboard DEMO methods, don't include it in your project! -->
   <script type="text/javascript">
 	var require = {
-		baseUrl: "{{env('ASSETS_URL')}}/js/",
+		baseUrl: "/assets/js/",
 		waitSeconds: 15,
 		urlArgs: "bust=10"
 	};
 </script>
-<script src="{{env('ASSETS_URL')}}/js/require.js" data-main="controller"></script>
+<script src="/assets/js/require.js" data-main="controller"></script>

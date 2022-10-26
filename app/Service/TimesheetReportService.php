@@ -85,5 +85,29 @@ class TimesheetReportService
         return $data;
     }
 
+    public function getReportTimesheetLog($r)
+    {
+        $input = $r->input();
+
+        $cond[1] = ['employeeName', '!=', null];
+
+        if (isset($input['department2'])) {
+            $cond[2] = ['departmentName', $input['department2']];
+        }
+
+        if (isset($input['employeeName2'])) {
+            $cond[3] = ['employeeName', $input['employeeName2']];
+        }
+
+        $data = DB::table('timesheet_log_report')
+        ->whereMonth('date', $input['month2'] ?? now('m'))
+        ->whereYear('date', $input['year2'] ?? now('y'))
+        ->where($cond)
+        // ->whereYear('a.date', $year)
+        ->get();
+
+        return $data;
+    }
+
 
 }

@@ -100,8 +100,11 @@
                                 <div class="col-sm-3">
                                     <label for="emergency-firstname" class="form-label">Select Year</label>
                                     <select class="form-select"  name="year2">
-                                        <option class="form-label" value="" selected>Please Select</option>
-
+                                        <option class="form-label" value="" >Please Select</option>
+                                        <?php $years = year() ?>
+                                        @foreach ($years as $year => $value)
+                                        <option value="{{$value}}">{{$value}}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
@@ -109,8 +112,11 @@
                                 <div class="col-sm-3">
                                     <label for="emergency-firstname" class="form-label">Select Month</label>
                                     <select class="form-select"  name="month2">
-                                        <option class="form-label" value="" selected>Please Select</option>
-
+                                        <option class="form-label" value="">Please Select</option>
+                                        <?php $months = month() ?>
+                                        @foreach ($months as $month => $value)
+                                        <option value="{{$month}}">{{$value}}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
