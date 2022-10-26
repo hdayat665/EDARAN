@@ -39,11 +39,11 @@ if (!function_exists('upload')) {
     {
         $filename = time() . $uploadedFile->getClientOriginalName();
 
-        Storage::disk('local')->putFileAs(
-            'public/',
-            $uploadedFile,
-            $filename
-        );
+        // Storage::disk('local')->putFileAs(
+        //     'public/',
+        //     $uploadedFile,
+        //     $filename
+        // );
 
         $data['filename'] = $filename;
 
@@ -483,8 +483,15 @@ if (!function_exists('getEvent')) {
     function getEvent()
     {
         $data = [
-            '1' => 'event1',
-            '2' => 'event2',
+            '1' => 'JOINED',
+            '2' => 'RE-JOINED',
+            '3' => 'PROMOTION',
+            '4' => 'TRANSFER',
+            '5' => 'RELOCATION',
+            '6' => 'CHANGE OF WORKBASE',
+            '7' => 'SECONDMENT',
+            '8' => 'ERROR CORRECTION',
+            '9' => 'OTHERS',
         ];
 
         return $data;
