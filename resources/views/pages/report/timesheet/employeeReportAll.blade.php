@@ -80,350 +80,52 @@
                     </tr>
                 </thead>
                 <tbody>
+                    @if ($logs)
+                    <?php $no = 1 ?>
+                    @foreach ($logs as $log)
                     <tr class="odd gradeX">
-                        <td width="1%" class="fw-bold text-dark">1</td>
-                        <td>Amira Roslam</td>
-                        <td>Business Analyst</td>
-                        <td> Active</td>
-                        <td>8:00</td>
-                        <td><span class="badge bg-info">holiday</span></td>
-                        <td>8:00</td>
-                        <td>8:00</td>
-                        <td>8:00</td>
-                        <td><span class="badge bg-primary">Weekend</span></td>
-                        <td><span class="badge bg-primary">Weekend</span></td>
-                        <td>8:00</td>
-                        <td>8:00</td>
-                        <td>8:00</td>
-                        <td>8:00</td>
-                        <td><span class="badge bg-warning">On-Leave</span></td>
-                        <td><span class="badge bg-primary">Weekend</span></td>
-                        <td><span class="badge bg-primary">Weekend</span></td>
-                        <td>8:00</td>
-                        <td>8:00</td>
-                        <td>8:00</td>
-                        <td>8:00</td>
-                        <td>8:00</td>
-                        <td><span class="badge bg-primary">Weekend</span></td>
-                        <td><span class="badge bg-primary">Weekend</span></td>
-                        <td>8:00</td>
-                        <td>8:00</td>
-                        <td>8:00</td>
-                        <td>8:00</td>
-                        <td>8:00</td>
-                        <td><span class="badge bg-primary">Weekend</span></td>
-                        <td><span class="badge bg-primary">Weekend</span></td>
-                        <td>8:00</td>
-                        <td>8:00</td>
-                        <td>8:00</td>
-
+                        <td width="1%" class="fw-bold text-dark">{{$no++}}</td>
+                        <td>{{$log->employeeName}}</td>
+                        <td>{{$log->departmentName}}</td>
+                        <td>{{$log->status}}</td>
+                        <td>{{$log->a1hb}}</td>
+                        <td>{{$log->a2hb}}</td>
+                        <td>{{$log->a3hb}}</td>
+                        <td>{{$log->a4hb}}</td>
+                        <td>{{$log->a5hb}}</td>
+                        <td>{{$log->a6hb}}</td>
+                        <td>{{$log->a7hb}}</td>
+                        <td>{{$log->a8hb}}</td>
+                        <td>{{$log->a9hb}}</td>
+                        <td>{{$log->a10hb}}</td>
+                        <td>{{$log->a11hb}}</td>
+                        <td>{{$log->a12hb}}</td>
+                        <td>{{$log->a13hb}}</td>
+                        <td>{{$log->a14hb}}</td>
+                        <td>{{$log->a15hb}}</td>
+                        <td>{{$log->a16hb}}</td>
+                        <td>{{$log->a17hb}}</td>
+                        <td>{{$log->a18hb}}</td>
+                        <td>{{$log->a19hb}}</td>
+                        <td>{{$log->a20hb}}</td>
+                        <td>{{$log->a21hb}}</td>
+                        <td>{{$log->a22hb}}</td>
+                        <td>{{$log->a23hb}}</td>
+                        <td>{{$log->a24hb}}</td>
+                        <td>{{$log->a25hb}}</td>
+                        <td>{{$log->a26hb}}</td>
+                        <td>{{$log->a27hb}}</td>
+                        <td>{{$log->a28hb}}</td>
+                        <td>{{$log->a29hb}}</td>
+                        <td>{{$log->a30hb}}</td>
+                        <td>{{$log->a31hb}}</td>
                     </tr>
-                    <tr class="odd gradeX">
-                        <td width="1%" class="fw-bold text-dark">1</td>
-                        <td>Irsyad</td>
-                        <td>Developer</td>
-                        <td> Active</td>
-                        <td>8:00</td>
-                        <td><span class="badge bg-info">holiday</span></td>
-                        <td>8:00</td>
-                        <td><span class="badge bg-warning">On-Leave</span></td>
-                        <td>8:00</td>
-                        <td><span class="badge bg-primary">Weekend</span></td>
-                        <td><span class="badge bg-primary">Weekend</span></td>
-                        <td>8:00</td>
-                        <td>8:00</td>
-                        <td>8:00</td>
-                        <td>8:00</td>
-                        <td>8:00</td>
-                        <td><span class="badge bg-primary">Weekend</span></td>
-                        <td><span class="badge bg-primary">Weekend</span></td>
-                        <td>8:00</td>
-                        <td>8:00</td>
-                        <td>8:00</td>
-                        <td>8:00</td>
-                        <td>8:00</td>
-                        <td><span class="badge bg-primary">Weekend</span></td>
-                        <td><span class="badge bg-primary">Weekend</span></td>
-                        <td>8:00</td>
-                        <td>8:00</td>
-                        <td><span class="badge bg-warning">On-Leave</span></td>
-                        <td>8:00</td>
-                        <td>8:00</td>
-                        <td><span class="badge bg-primary">Weekend</span></td>
-                        <td><span class="badge bg-primary">Weekend</span></td>
-                        <td>8:00</td>
-                        <td>8:00</td>
-                        <td>8:00</td>
+                    @endforeach
+                    @endif
 
-                    </tr>
-                    <tr class="odd gradeX">
-                        <td width="1%" class="fw-bold text-dark">1</td>
-                        <td>Ahmad</td>
-                        <td>IT Support</td>
-                        <td> Active</td>
-                        <td>8:00</td>
-                        <td><span class="badge bg-info">holiday</span></td>
-                        <td>8:00</td>
-                        <td>8:00</td>
-                        <td>8:00</td>
-                        <td><span class="badge bg-primary">Weekend</span></td>
-                        <td><span class="badge bg-primary">Weekend</span></td>
-                        <td>8:00</td>
-                        <td>8:00</td>
-                        <td><span class="badge bg-warning">On-Leave</span></td>
-                        <td>8:00</td>
-                        <td>8:00</td>
-                        <td><span class="badge bg-primary">Weekend</span></td>
-                        <td><span class="badge bg-primary">Weekend</span></td>
-                        <td>8:00</td>
-                        <td>8:00</td>
-                        <td>8:00</td>
-                        <td>8:00</td>
-                        <td>8:00</td>
-                        <td><span class="badge bg-primary">Weekend</span></td>
-                        <td><span class="badge bg-primary">Weekend</span></td>
-                        <td>8:00</td>
-                        <td>8:00</td>
-                        <td><span class="badge bg-warning">On-Leave</span></td>
-                        <td>8:00</td>
-                        <td>8:00</td>
-                        <td><span class="badge bg-primary">Weekend</span></td>
-                        <td><span class="badge bg-primary">Weekend</span></td>
-                        <td>8:00</td>
-                        <td>8:00</td>
-                        <td>8:00</td>
-
-                    </tr>
-                    <tr class="odd gradeX">
-                        <td width="1%" class="fw-bold text-dark">1</td>
-                        <td>Apam</td>
-                        <td>IT Manager</td>
-                        <td> Active</td>
-                        <td>8:00</td>
-                        <td><span class="badge bg-info">holiday</span></td>
-                        <td>8:00</td>
-                        <td>8:00</td>
-                        <td>8:00</td>
-                        <td><span class="badge bg-primary">Weekend</span></td>
-                        <td><span class="badge bg-primary">Weekend</span></td>
-                        <td>8:00</td>
-                        <td>8:00</td>
-                        <td>8:00</td>
-                        <td>8:00</td>
-                        <td>8:00</td>
-                        <td><span class="badge bg-primary">Weekend</span></td>
-                        <td><span class="badge bg-primary">Weekend</span></td>
-                        <td>8:00</td>
-                        <td><span class="badge bg-warning">On-Leave</span></td>
-                        <td>8:00</td>
-                        <td><span class="badge bg-warning">On-Leave</span></td>
-                        <td>8:00</td>
-                        <td><span class="badge bg-primary">Weekend</span></td>
-                        <td><span class="badge bg-primary">Weekend</span></td>
-                        <td>8:00</td>
-                        <td>8:00</td>
-                        <td><span class="badge bg-warning">On-Leave</span></td>
-                        <td>8:00</td>
-                        <td>8:00</td>
-                        <td><span class="badge bg-primary">Weekend</span></td>
-                        <td><span class="badge bg-primary">Weekend</span></td>
-                        <td>8:00</td>
-                        <td>8:00</td>
-                        <td>8:00</td>
-
-                    </tr>
-                    <tr class="odd gradeX">
-                        <td width="1%" class="fw-bold text-dark">1</td>
-                        <td>Naim</td>
-                        <td>IT Manager</td>
-                        <td> Active</td>
-                        <td>8:00</td>
-                        <td><span class="badge bg-info">holiday</span></td>
-                        <td>8:00</td>
-                        <td>8:00</td>
-                        <td>8:00</td>
-                        <td><span class="badge bg-primary">Weekend</span></td>
-                        <td><span class="badge bg-primary">Weekend</span></td>
-                        <td>8:00</td>
-                        <td>8:00</td>
-                        <td>8:00</td>
-                        <td>8:00</td>
-                        <td>8:00</td>
-                        <td><span class="badge bg-primary">Weekend</span></td>
-                        <td><span class="badge bg-primary">Weekend</span></td>
-                        <td>8:00</td>
-                        <td><span class="badge bg-warning">On-Leave</span></td>
-                        <td>8:00</td>
-                        <td><span class="badge bg-warning">On-Leave</span></td>
-                        <td>8:00</td>
-                        <td><span class="badge bg-primary">Weekend</span></td>
-                        <td><span class="badge bg-primary">Weekend</span></td>
-                        <td>8:00</td>
-                        <td>8:00</td>
-                        <td><span class="badge bg-warning">On-Leave</span></td>
-                        <td>8:00</td>
-                        <td>8:00</td>
-                        <td><span class="badge bg-primary">Weekend</span></td>
-                        <td><span class="badge bg-primary">Weekend</span></td>
-                        <td>8:00</td>
-                        <td>8:00</td>
-                        <td>8:00</td>
-
-                    </tr>
-                    <tr class="odd gradeX">
-                        <td width="1%" class="fw-bold text-dark">1</td>
-                        <td>Danial</td>
-                        <td>IT Manager</td>
-                        <td> Active</td>
-                        <td>8:00</td>
-                        <td><span class="badge bg-info">holiday</span></td>
-                        <td>8:00</td>
-                        <td>8:00</td>
-                        <td>8:00</td>
-                        <td><span class="badge bg-primary">Weekend</span></td>
-                        <td><span class="badge bg-primary">Weekend</span></td>
-                        <td>8:00</td>
-                        <td>8:00</td>
-                        <td>8:00</td>
-                        <td>8:00</td>
-                        <td>8:00</td>
-                        <td><span class="badge bg-primary">Weekend</span></td>
-                        <td><span class="badge bg-primary">Weekend</span></td>
-                        <td>8:00</td>
-                        <td><span class="badge bg-warning">On-Leave</span></td>
-                        <td>8:00</td>
-                        <td><span class="badge bg-warning">On-Leave</span></td>
-                        <td>8:00</td>
-                        <td><span class="badge bg-primary">Weekend</span></td>
-                        <td><span class="badge bg-primary">Weekend</span></td>
-                        <td>8:00</td>
-                        <td>8:00</td>
-                        <td><span class="badge bg-warning">On-Leave</span></td>
-                        <td>8:00</td>
-                        <td>8:00</td>
-                        <td><span class="badge bg-primary">Weekend</span></td>
-                        <td><span class="badge bg-primary">Weekend</span></td>
-                        <td>8:00</td>
-                        <td>8:00</td>
-                        <td>8:00</td>
-
-                    </tr>
-                    <tr class="odd gradeX">
-                        <td width="1%" class="fw-bold text-dark">1</td>
-                        <td>Apam</td>
-                        <td>IT Manager</td>
-                        <td> Active</td>
-                        <td>8:00</td>
-                        <td><span class="badge bg-info">holiday</span></td>
-                        <td>8:00</td>
-                        <td>8:00</td>
-                        <td>8:00</td>
-                        <td><span class="badge bg-primary">Weekend</span></td>
-                        <td><span class="badge bg-primary">Weekend</span></td>
-                        <td>8:00</td>
-                        <td>8:00</td>
-                        <td>8:00</td>
-                        <td>8:00</td>
-                        <td>8:00</td>
-                        <td><span class="badge bg-primary">Weekend</span></td>
-                        <td><span class="badge bg-primary">Weekend</span></td>
-                        <td>8:00</td>
-                        <td><span class="badge bg-warning">On-Leave</span></td>
-                        <td>8:00</td>
-                        <td><span class="badge bg-warning">On-Leave</span></td>
-                        <td>8:00</td>
-                        <td><span class="badge bg-primary">Weekend</span></td>
-                        <td><span class="badge bg-primary">Weekend</span></td>
-                        <td>8:00</td>
-                        <td>8:00</td>
-                        <td><span class="badge bg-warning">On-Leave</span></td>
-                        <td>8:00</td>
-                        <td>8:00</td>
-                        <td><span class="badge bg-primary">Weekend</span></td>
-                        <td><span class="badge bg-primary">Weekend</span></td>
-                        <td>8:00</td>
-                        <td>8:00</td>
-                        <td>8:00</td>
-
-                    </tr>
-                    <tr class="odd gradeX">
-                        <td width="1%" class="fw-bold text-dark">1</td>
-                        <td>Apam</td>
-                        <td>IT Manager</td>
-                        <td> Active</td>
-                        <td>8:00</td>
-                        <td><span class="badge bg-info">holiday</span></td>
-                        <td>8:00</td>
-                        <td>8:00</td>
-                        <td>8:00</td>
-                        <td><span class="badge bg-primary">Weekend</span></td>
-                        <td><span class="badge bg-primary">Weekend</span></td>
-                        <td>8:00</td>
-                        <td>8:00</td>
-                        <td>8:00</td>
-                        <td>8:00</td>
-                        <td>8:00</td>
-                        <td><span class="badge bg-primary">Weekend</span></td>
-                        <td><span class="badge bg-primary">Weekend</span></td>
-                        <td>8:00</td>
-                        <td><span class="badge bg-warning">On-Leave</span></td>
-                        <td>8:00</td>
-                        <td><span class="badge bg-warning">On-Leave</span></td>
-                        <td>8:00</td>
-                        <td><span class="badge bg-primary">Weekend</span></td>
-                        <td><span class="badge bg-primary">Weekend</span></td>
-                        <td>8:00</td>
-                        <td>8:00</td>
-                        <td><span class="badge bg-warning">On-Leave</span></td>
-                        <td>8:00</td>
-                        <td>8:00</td>
-                        <td><span class="badge bg-primary">Weekend</span></td>
-                        <td><span class="badge bg-primary">Weekend</span></td>
-                        <td>8:00</td>
-                        <td>8:00</td>
-                        <td>8:00</td>
-
-                    </tr>
-                    <tr class="odd gradeX">
-                        <td width="1%" class="fw-bold text-dark">1</td>
-                        <td>Apam</td>
-                        <td>IT Manager</td>
-                        <td> Active</td>
-                        <td>8:00</td>
-                        <td><span class="badge bg-info">holiday</span></td>
-                        <td>8:00</td>
-                        <td>8:00</td>
-                        <td>8:00</td>
-                        <td><span class="badge bg-primary">Weekend</span></td>
-                        <td><span class="badge bg-primary">Weekend</span></td>
-                        <td>8:00</td>
-                        <td>8:00</td>
-                        <td>8:00</td>
-                        <td>8:00</td>
-                        <td>8:00</td>
-                        <td><span class="badge bg-primary">Weekend</span></td>
-                        <td><span class="badge bg-primary">Weekend</span></td>
-                        <td>8:00</td>
-                        <td><span class="badge bg-warning">On-Leave</span></td>
-                        <td>8:00</td>
-                        <td><span class="badge bg-warning">On-Leave</span></td>
-                        <td>8:00</td>
-                        <td><span class="badge bg-primary">Weekend</span></td>
-                        <td><span class="badge bg-primary">Weekend</span></td>
-                        <td>8:00</td>
-                        <td>8:00</td>
-                        <td><span class="badge bg-warning">On-Leave</span></td>
-                        <td>8:00</td>
-                        <td>8:00</td>
-                        <td><span class="badge bg-primary">Weekend</span></td>
-                        <td><span class="badge bg-primary">Weekend</span></td>
-                        <td>8:00</td>
-                        <td>8:00</td>
-                        <td>8:00</td>
-
-                    </tr>
                 </tbody>
             </table>
         </div>
     </div>
     @endsection
+
