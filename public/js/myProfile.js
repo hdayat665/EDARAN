@@ -52,19 +52,6 @@ $(document).ready(function() {
     });
 
     //COMPANION INFORMATION
-    $('#passportmc').change(function(){
-    
-        if ($('#expirydatemc').prop('readonly')) {
-         $('#expirydatemc').prop('readonly', false);
-         $('#expirydatemc').css('pointer-events', "auto");
-       } else {
-         $('#expirydatemc').prop('readonly', true);
-         $('#expirydatemc').css('pointer-events', "none");
-        
-       }
-
-    });
-
     $('#idnumber2').change(function(){
         
         if($(this).val().length == 12){
@@ -79,6 +66,37 @@ $(document).ready(function() {
             $('#dobmc').val((year > cutoff ? '19' : '20') + year + '-' + month + '-' + day);
         }
     });
+
+    $('#idnumber2').change(function(){
+
+        if($(this).val().length == 12){
+
+            var idn = $(this).val();
+            var year = (idn.substring(0, 2));
+
+            var cutoff = (new Date()).getFullYear() - 2000; 
+
+            var ww = (year > cutoff ? '19' : '20') + year;
+            var currentAge = new Date().getFullYear() - ww;
+            $('#age').val(currentAge);
+        }
+    });
+
+    $('#passportmc').change(function(){
+    
+        if ($('#expirydatemc').prop('readonly')) {
+         $('#expirydatemc').prop('readonly', false);
+         $('#expirydatemc').css('pointer-events', "auto");
+       } else {
+         $('#expirydatemc').prop('readonly', true);
+         $('#expirydatemc').css('pointer-events', "none");
+         $('#expirydatemc').val("");
+        
+       }
+
+    });
+
+
 
     //ADD CHILDREN DETAILS
     $('#idNoaddChild').change(function(){
@@ -668,6 +686,11 @@ $(document).ready(function() {
         var b = $("#lastNameChild").val();
         $("#fullNameChild").val(a+ ' '+b);
     });
+    $("#firstnamemc,#lastnamemc").change(function(){
+        var a = $("#firstnamemc").val();
+        var b = $("#lastnamemc").val();
+        $("#fullnamemc").val(a+ ' '+b);
+    });
 
 
     $(".partCheck").click(function(){
@@ -694,18 +717,18 @@ $(document).ready(function() {
         if ($(this).prop("checked")) {
               
             $('#idnumber2').prop('readonly', true);
-            $('#passportmc').prop('readonly', false);
-            $('#expirydatemc').prop('readonly', false);
             $('#dobmc').prop('readonly', false);
             $('#dobmc').css('pointer-events', 'auto');
+            $('#idnumber2').val("");
         } else {
             
             $('#idnumber2').prop('readonly', false);
-            $('#passportmc').prop('readonly', true);
-            $('#expirydatemc').prop('readonly', true);
             $('#dobmc').prop('readonly', true);
             $('#dobmc').css('pointer-events', 'none');
-            
+            $('#passportmc').val("");
+            $('#expirydatemc').val("");
+            $('#expirydatemc').prop('readonly', true);
+            $('#expirydatemc').css('pointer-events', 'none');
         }
       });
 
@@ -759,7 +782,12 @@ $(document).ready(function() {
         format: 'yyyy-mm-dd',
         autoclose: true,
       });
-
+      
+      $("#dommc").datepicker({
+        todayHighlight: true,
+        format: 'yyyy-mm-dd',
+        autoclose: true,
+      });
       $("#expiryDate1").datepicker({
         todayHighlight: true,
         format: 'yyyy-mm-dd',
@@ -784,6 +812,12 @@ $(document).ready(function() {
         format: 'yyyy-mm-dd',
         autoclose: true,
       });
+      $("#expirydatemc").datepicker({
+        todayHighlight: true,
+        format: 'yyyy-mm-dd',
+        autoclose: true,
+      });
+      
     $("#DOBChild").datepicker({
         todayHighlight: true,
         format: 'yyyy-mm-dd',
