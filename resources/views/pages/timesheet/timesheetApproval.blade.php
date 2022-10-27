@@ -39,7 +39,7 @@
                                 <option class="form-label" value="">Please Select</option>
                                 <?php $designations = getDesignation() ?>
                                 @foreach ($designations as $designation)
-                                <option value="{{$designation->designationName}}" {{($designationId == $designation->designationName) ? 'selected="selected"' : ''}}>{{$designation->designationName}}</option>
+                                <option value="{{$designation->designationName}}" {{($designation == $designation->designationName) ? 'selected="selected"' : ''}}>{{$designation->designationName}}</option>
                                 @endforeach
                             </select>
                         </div>

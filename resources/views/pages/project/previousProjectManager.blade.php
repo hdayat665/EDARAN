@@ -15,13 +15,13 @@
             </thead>
             <tbody>
                 <tr>
-                    <td>Farid Ahmad</td>
+                    <!-- <td>Farid Ahmad</td>
                     <td>Head of Department</td>
                     <td>Service Delivery Department</td>
                     <td>Application Unit</td>
                     <td>Headquaters</td>
                     <td>01/02/2020</td>
-                    <td>10/11/2020</td>
+                    <td>10/11/2020</td> -->
                 </tr>
             </tbody>
         </table>
