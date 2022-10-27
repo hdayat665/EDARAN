@@ -248,11 +248,11 @@
                     <div class="row p-2">
                         <div class="col-sm-6">
                             <label for="gender" class="form-label">Gender</label>
-                            <select class="form-select" name="gender" id="gender1" style="text-transform:uppercase">
-                            <?php $gender1 = gender() ?>
+                           
+                            <select class="form-select" name="gender" id="gender1">
                                 <option value="" label="Please Choose "></option>
-                                @foreach ($gender1 as $key => $status)
-                                <option value="{{$key}}" <?php echo ($key == $children->gender) ? 'selected="selected"' : '' ?>>{{$status}}</option>
+                                @foreach ($gender as $key => $status)
+                                <option value="{{$key}}">{{$status}}</option>
                                 @endforeach
                             </select>
                         </div>

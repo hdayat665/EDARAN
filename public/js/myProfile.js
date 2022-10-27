@@ -776,14 +776,7 @@ $(document).ready(function() {
             
         }
       });
-
       $("#DOB1").datepicker({
-        todayHighlight: true,
-        format: 'yyyy-mm-dd',
-        autoclose: true,
-      });
-      
-      $("#dommc").datepicker({
         todayHighlight: true,
         format: 'yyyy-mm-dd',
         autoclose: true,
@@ -807,6 +800,11 @@ $(document).ready(function() {
         format: 'yyyy-mm-dd',
         autoclose: true,
       });
+      $("#datepicker-joindate").datepicker({
+        todayHighlight: true,
+        format: 'yyyy-mm-dd',
+        autoclose: true,
+      });
       $("#dobmc").datepicker({
         todayHighlight: true,
         format: 'yyyy-mm-dd',
@@ -817,7 +815,11 @@ $(document).ready(function() {
         format: 'yyyy-mm-dd',
         autoclose: true,
       });
-      
+      $("#dommc").datepicker({
+        todayHighlight: true,
+        format: 'yyyy-mm-dd',
+        autoclose: true,
+      });
     $("#DOBChild").datepicker({
         todayHighlight: true,
         format: 'yyyy-mm-dd',

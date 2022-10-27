@@ -56,7 +56,7 @@
                         </div>
                         <div class="row p-2">
                             <label for="firstname" class="form-label">Joined Date*</label>
-                            <input type="date" name="joinedDate" value="{{$employment->joinedDate}}" id="datepicker-joindate" class="form-control" aria-describedby="address-2">
+                            <input type="text" name="joinedDate" id="datepicker-joindate" class="form-control" placeholder="YYYY-MM-DD" aria-describedby="address-2">
                         </div>
                         <div class="row p-2">
                             <label for="firstname" class="form-label">Job Grade*</label>
@@ -95,7 +95,7 @@
                                 User Role
                             </label>
                                 <div class="form-check form-switch">
-                                <input class="form-check-input" name="supervisor" {{ ($employment->supervisor == 'on' ? 'checked' : '') }} type="checkbox" id="supervisor">
+                                <input class="form-check-input partCheck2" name="supervisor" {{ ($employment->supervisor == 'on' ? 'checked' : '') }} type="checkbox" id="supervisor">
                                 <label class="form-label" for="supervisor">
                                     Supervisor
                                 </label>
@@ -104,13 +104,16 @@
                             </div>
                                  </div>
                             </div>
-                            <div class="col-sm-6">
+                            <div class="col-sm-6" style="display: none;" id="reportto">
                                 <label for="employee-id" class="form-label">Report To</label>
-                                <select class="form-select" name="supervisor">
+                                <select class="form-select" name="supervisor" id="reportto">
                                 <?php $EmploymentTypes = getEmploymentType() ?>
                                 <option value="0" label="Please Choose "></option>
                                 @foreach ($EmploymentTypes as $EmploymentType)
                                 <option value="{{$EmploymentType->id}}" label="{{$EmploymentType->type}}" {{ ($employment->employmentType == $EmploymentType->id) ? "selected='selected'" : '' }}></option>
+                                
+                                <!-- <input type="text" id="passportmyprofile" name="passport" value="{{ $profile->passport ?? '' }}" class="form-control" aria-describedby="passport" > -->
+                               
                                 @endforeach
                             </select>
                                 
@@ -150,7 +153,7 @@
                         <div class="row">
                             <div class="col-sm-6">
                                 <label for="effective-from" class="form-label">Effective From*</label>
-                                <input type="date" id="effective-from" name="effectiveFrom" class="form-control" value="{{$employment->effectiveFrom ?? ''}}" aria-describedby="effective-from">
+                                <input type="text" id="effective-from" name="effectiveFrom" class="form-control" value="{{$employment->effectiveFrom ?? ''}}" placeholder="YYYY-MM-DD"  aria-describedby="effective-from" >
                             </div>
                             <div class="col-sm-6">
                                 <label for="firstname" class="form-label">Event*</label>

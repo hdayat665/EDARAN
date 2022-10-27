@@ -31,6 +31,18 @@ $(document).ready(function() {
         var b = $("#lastname").val();
         $("#fullname").val(a + ' ' + b);
     });
+    
+    $("#effective-from").datepicker({
+        todayHighlight: true,
+        format: 'yyyy-mm-dd',
+        autoclose: true,
+    });
+
+    $("#datepicker-joindate").datepicker({
+        todayHighlight: true,
+        format: 'yyyy-mm-dd',
+        autoclose: true,
+    });
 
     $("#dob").datepicker({
         todayHighlight: true,
@@ -100,6 +112,17 @@ $(document).ready(function() {
         }
     });
 
+    $(".partCheck2").click(function() {
+        if ($(this).prop("checked")) {
+            $('#reportto').show();
+           
+        } else {
+            $('#reportto').hide();
+            $('#reportto').prop('disabled', true);
+            // $('#reportto').css('pointer-events', 'auto');
+     }
+    });
+    
     $('#saveProfile').click(function(e) {
         $("#formProfile").validate({
             // Specify validation rules
