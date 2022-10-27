@@ -2,7 +2,7 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="">Add Sibling Information</h5>
+                <h5 class="modal-title" id="">Edit Sibling Information</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -48,13 +48,13 @@
                             </select>
                         </div>
                     </div>
-                    <h4 class="mt-3 p-2">Address</h4>
-                    <div class="row p-2">
+                    <div class="row">
+                        <h4 class="col-sm-6 p-2">Address</h4>
                         <div class="col-sm-6">
-                            <div class="form-check form-switch align-right">
-                                <input class="form-check-input" type="checkbox" name="sameAddress" id="same-address">
-                                <label class="form-check-label" for="same-address">
-                                    Same as permenant address
+                            <br><div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="same-address2" name="sameaspermanent" style="text-transform:uppercase">
+                                <label class="form-check-label" for="same-address2">
+                                    Same as Permanent Address
                                 </label>
                             </div>
                         </div>
