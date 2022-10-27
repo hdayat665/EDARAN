@@ -22,6 +22,8 @@
                         <th class="text-nowrap">Email</th>
                         <th class="text-nowrap">Added By</th>
                         <th class="text-nowrap">Added Time</th>
+                        <th class="text-nowrap">Modified By</th>
+                        <th class="text-nowrap">Modified Time</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -43,6 +45,8 @@
                         <td>{{$customer->email}}</td>
                         <td>{{$customer->addedBy}}</td>
                         <td>{{$customer->created_at}}</td>
+                        <td></td>
+                        <td></td>
                     </tr>
                     @endforeach
                     @endif

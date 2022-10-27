@@ -20,8 +20,8 @@
                         <th class="text-nowrap">Account Manager</th>
                         <th class="text-nowrap">Project Manager</th>
                         <th class="text-nowrap">Contract Value</th>
-                        <th class="text-nowrap">Contract End Date</th>
                         <th class="text-nowrap">Contract Start Date</th>
+                        <th class="text-nowrap">Contract End Date</th>
                         <th class="text-nowrap">Status</th>
                     </tr>
                 </thead>
@@ -39,8 +39,8 @@
                             <td width="1%">{{$projectListing->acc_manager}}</td>
                             <td width="1%">{{$projectListing->project_manager}}</td>
                             <td width="1%">{{$projectListing->contract_value}}</td>
-                            <td width="1%">{{$projectListing->contract_end_date}}</td>
                             <td width="1%">{{$projectListing->contract_start_date}}</td>
+                            <td width="1%">{{$projectListing->contract_end_date}}</td>
                             <td width="1%">{{$projectListing->status}}</td>
                         </tr>
                         @endforeach

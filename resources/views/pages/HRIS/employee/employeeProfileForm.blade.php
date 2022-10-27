@@ -241,8 +241,8 @@
             <div class="col-md-2">
                 <select class="form-select" name="gender" >
                     <option label="Please Choose " selected="selected" disabled></option>
-                    <option value="Male" label="Male">Male</option>
-                    <option value="Female" label="Female">Female</option>
+                    <option value="1" label="Male">Male</option>
+                    <option value="2" label="Female">Female</option>
                     
                 </select>
             </div>
@@ -250,11 +250,11 @@
             <div class="col-md-5">
                 <select class="form-select" name="maritialStatus">
                     <option label="Select Marital Status" disabled selected></option>
-                    <option value="single" label="Single">Single</option>
-                    <option value="married" label="married">married</option>
-                    <option value="windowed" label="windowed">windowed</option>
-                    <option value="divorced" label="divorced">divorced</option>
-                    <option value="seperated" label="seperated">seperated</option>
+                    <option value="1" label="Single">Single</option>
+                    <option value="2" label="married">married</option>
+                    <option value="3" label="windowed">windowed</option>
+                    <option value="4" label="divorced">divorced</option>
+                    <option value="5" label="seperated">seperated</option>
 
                 </select>
             </div>
