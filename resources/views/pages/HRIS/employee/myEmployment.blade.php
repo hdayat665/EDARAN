@@ -125,28 +125,29 @@
                         <hr>
                         <div class="row">
                             <div class="col-sm-6">
-                                <label for="employee-id" class="form-label">Charge Of Rate</label>
-                                <input type="text" id="" name=""  class="form-control" aria-describedby="employee-id">
+                                <label for="employee-id" class="form-label">Charge Out Rate</label>
+                                <input type="number" id="" name=""  class="form-control" aria-describedby="employee-id">
                                 
                             </div>
                             
                         </div>
                         <hr>
-                        <div class="row">
+                        <div class="row p-2">
                             <div class="col-sm-6">
                                 <label for="employee-id" class="form-label">Employee ID</label>
-                                <input type="text" id="employee-id" name="employeeId" value="{{$employment->employeeId ?? ''}}" class="form-control" aria-describedby="employee-id">
+                                <input type="text" id="employee-id" name="employeeId" value="{{$employment->employeeId ?? ''}}" class="form-control" aria-describedby="employee-id" readonly>
                                 <input type="hidden" value="{{$employment->user_id ?? ''}}" name="user_id">
                             </div>
                             <div class="col-sm-6">
                                 <label for="employee-name" class="form-label">Employee Name</label>
-                                <input type="text" id="employee-name" name="employeeName" class="form-control" value="{{$employment->employeeName ?? ''}}" aria-describedby="employee-name">
+                                <input type="text" id="employee-name" name="employeeName" class="form-control" value="{{$employment->employeeName ?? ''}}" aria-describedby="employee-name" readonly>
                             </div>
                         </div>
+                        <div class="row p-2">
                         <div class="col-sm-6">
                             <label for="employee-email" class="form-label">Employee Email</label>
-                            <input type="text" id="employee-email" name="employeeEmail" class="form-control" value="{{$employment->employeeEmail ?? ''}}" aria-describedby="employee-email">
-                        </div>
+                            <input type="text" id="employee-email" name="employeeEmail" class="form-control" value="{{$employment->workingEmail ?? ''}}" aria-describedby="employee-email" readonly>
+                        </div></div>
                         <hr>
 
                         <p class="mt-3 mb-3 fw-bold">Confirm Changes</p>

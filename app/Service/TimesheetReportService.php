@@ -61,6 +61,9 @@ class TimesheetReportService
             $cond[6] = ['a.user_id', $input['employeeName']];
         }
 
+        $startDate = date_format(date_create(now()), 'Y').'-01-01';
+        $endDate = date_format(date_create(now()), 'Y').'-12-31';
+        // pr($startDate);
         if (isset($input['date_range'])) {
             $dateRange = \explode(' - ', $input['date_range']);
             $startDate = date_format(date_create($dateRange[0]), 'Y-m-d');
