@@ -6,7 +6,7 @@
     <div class="panel panel" id="myProjectJs">
         <div class="panel-heading">
             <div class="panel-body">
-                <h3 class="page-header">Project Approve</h3>
+                <h3 class="page-header">Project</h3>
                 <table id="myProjectTable" class="table table-striped table-bordered align-middle">
                     <thead>
                         <tr>
@@ -16,12 +16,13 @@
                             <th class="text-nowrap">Description</th>
                             <th class="text-nowrap">Project Manager</th>
                             <th class="text-nowrap">Contract End Date</th>
+                            <th class="text-nowrap">Status</th>
                             <th class="text-nowrap">Location</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @if ($approves)
-                        @foreach ($approves as $myProject)
+                        @if ($datas)
+                        @foreach ($datas as $myProject)
                         <tr>
                             <td>{{$myProject->customer_name}}</td>
                             <td>{{$myProject->project_code}}</td>
@@ -29,6 +30,7 @@
                             <td>{{$myProject->desc}}</td>
                             <td>{{$myProject->project_manager}}</td>
                             <td>{{$myProject->contract_end_date}}</td>
+                            <td>{{$myProject->request_status}}</td>
                             <td><a href="javascript:;" data-bs-toggle="modal" data-bs-target="#exampleModal">{{$myProject->location}}</a></td>
                         </tr>
                         @endforeach
@@ -38,7 +40,7 @@
             </div>
         </div>
 
-        <div class="panel-heading">
+        {{-- <div class="panel-heading">
             <div class="panel-body">
                 <h3 class="page-header">Project Pending</h3>
                 <table id="myProjectPendingTable" class="table table-striped table-bordered align-middle">
@@ -106,7 +108,7 @@
                     </tbody>
                 </table>
             </div>
-        </div>
+        </div> --}}
 
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">

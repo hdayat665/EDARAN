@@ -20,31 +20,7 @@ class Project extends Authenticatable
 
     protected $table = 'project';
 
-    protected $fillable = [
-        'LOA_date',
-        'desc',
-        'tenant_id',
-        'customer_id',
-        'project_code',
-        'reason',
-        'status_request',
-        'requested_date',
-        'employee_name',
-        'project_name',
-        'acc_manager',
-        'contract_value',
-        'contract_type',
-        'contract_start_date',
-        'contract_end_date',
-        'financial_year',
-        'project_manager',
-        'warranty_start_date',
-        'warranty_end_date',
-        'bank_guarantee_acc',
-        'bank_guarantee_amount',
-        'bank_guarantee_expiry_date',
-        'status'
-    ];
+    protected $guarded = [];
 
     public function Customer()
     {
