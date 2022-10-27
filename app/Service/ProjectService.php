@@ -504,8 +504,8 @@ class ProjectService
         $data = DB::table('project_member as a')
             ->leftJoin('project as b', 'a.project_id', '=', 'b.id')
             ->leftJoin('customer as c', 'b.customer_id', '=', 'c.id')
-            ->select('a.location', 'a.id as memberId', 'b.*', 'c.customer_name')
-            ->where([['a.employee_id', '=', $employee->id], ['a.status', '=', $status]])
+            ->select('a.status as request_status', 'a.location', 'a.id as memberId', 'b.*', 'c.customer_name')
+            ->where([['a.employee_id', '=', $employee->id]])
             ->get();
         // pr($data);
         if (!$data) {
