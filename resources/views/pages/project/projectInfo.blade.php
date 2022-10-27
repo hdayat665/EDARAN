@@ -43,6 +43,8 @@
                                     <th class="text-nowrap">Contract Start Date</th>
                                     <th class="text-nowrap">Contract End Date</th>
                                     <th class="text-nowrap">Status</th>
+                                    <th class="text-nowrap">Modified By</th>
+                                    <th class="text-nowrap">Modified Time</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -63,6 +65,8 @@
                                     <td>{{$projectInfo->contract_start_date}}</td>
                                     <td>{{$projectInfo->contract_end_date}}</td>
                                     <td>{{$projectInfo->status}}</td>
+                                    <td></td>
+                                    <td></td>
                                 </tr>
                                 @endforeach
                                 @endif

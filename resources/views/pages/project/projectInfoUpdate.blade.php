@@ -19,7 +19,7 @@
                 </div>
                 <div class="col-md-4">
                     <input type="hidden" id="idP" value="{{$project->id}}">
-                    <input type="Project Code" readonly class="form-control mb-5px" name="project_code" value="{{$project->project_code ?? ''}}"   />
+                    <input type="Project Code" class="form-control mb-5px" name="project_code" value="{{$project->project_code ?? ''}}"   />
                 </div>
                 <div class="col-md-4">
                     <input type="Project Name" class="form-control mb-5px " style="text-transform: uppercase;" name="project_name" value="{{$project->project_name ?? ''}}" />
@@ -144,7 +144,7 @@
             <div class="modal-footer">
                 <p class="text-end mb-0">
                     <a href="javascript:;" class="btn btn-white me-5px">Cancel</a>
-                    <button type="submit" class="btn btn-primary btnNext" id="updateProjectInfoButton">Save</button>
+                    <button type="submit" class="btn btn-primary btnNext" id="updateProjectInfoButton">Update</button>
                 </p>
             </div>
         </form>
