@@ -54,7 +54,7 @@
                     </div>
                     <div class="row p-2">
                         <label for="firstname" class="form-label">Joined Date*</label>
-                        <input type="date" name="joinedDate" id="datepicker-joindate" readonly class="form-control" aria-describedby="address-2">
+                        <input type="text" name="joinedDate" id="datepicker-joindate" placeholder="YYYY-MM-DD" class="form-control" aria-describedby="address-2" readonly>
                     </div>
                     <div class="row p-2">
                         <label for="firstname" class="form-label">Job Grade*</label>
