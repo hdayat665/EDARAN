@@ -3,7 +3,7 @@ $('#summarytable').DataTable({
     lengthMenu: [5, 10, -1],
     deferRender: true,
     scrollY: true,
-    scrollX: false,
+    scrollX: true,
     scrollCollapse: true,
     scroller: true,
     paging: true,
