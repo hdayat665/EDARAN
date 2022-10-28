@@ -27,9 +27,10 @@
         </table>
     </div>
     <div class="modal-footer">
-        <a class="btn btn-white btnPrevious">Back</a>
-        <a class="btn btn-primary btnNext">Next</a>
+        <a href="javascript:;" id="back_info_updt" class="btn btn-white btnPrevious">Back</a>
+        <button id="submitProject" class="btn btn-primary btnNext">Next</button>
     </div>
 </div>
+
 
 @include('modal.project.viewAssignPreviousMemberLocation')

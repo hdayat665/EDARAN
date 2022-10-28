@@ -48,17 +48,19 @@ $(document).ready(function() {
         if($(this).val().length == 12){
 
             var idn = $(this).val();
-            var IdLast = idn.substring(10,12);
-         
-            if(ldLast % 2 == 0){
-                $('#gender').val('2');
+            
+            var lastIc = idn.substring(10,12);
+            
+            if(lastIc % 2 == 0){
+                $('#gender').val(2);
             } else {
-                $('#gender').val('1');
+                $('#gender').val(1);
             }
 
         }
 
     });
+    
     $("#nonNetizen").change(function() {
         if(this.checked) {
             
@@ -260,8 +262,8 @@ $(document).ready(function() {
 		$( "#default-tab-2" ).removeClass( "active show" );
 		$( "#default-tab-3" ).removeClass( "active show" );
       });
-    $('#submitAddress').click(function(e) {
 
+    $('#submitAddress').click(function(e) {
         $("#addressForm").validate({
             // Specify validation rules
             rules: {
@@ -284,10 +286,6 @@ $(document).ready(function() {
                     digits: true,
                     rangelength: [5, 5]
                 },
-                
-                
-                
-                
             },
 
             messages: {

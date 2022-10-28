@@ -63,7 +63,7 @@
                         <div class="col-md-6">
                             <?php $states = state(); ?>
                             <select class="form-select" name="state">
-                                <option label="Select State ">Select State </option>
+                                <option value= "" label="Select State ">Select State </option>
                                 @foreach ($states as $key => $state)
                                 <option value="{{$key}}">{{$state}}</option>
                                 @endforeach

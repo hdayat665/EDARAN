@@ -103,10 +103,10 @@ $(document).ready(function() {
             },
 
             messages: {
-                customer_name: "",
-                address: "",
-                phoneNo: "",
-                email: ""
+                customer_name: "Please Insert Customer Name",
+                address: "Please Insert Address",
+                phoneNo: "Please Insert Phone Number",
+                email: "Please Enter Email Address"
             },
             submitHandler: function(form) {
                 requirejs(['sweetAlert2'], function(swal) {
@@ -157,10 +157,10 @@ $(document).ready(function() {
             },
 
             messages: {
-                customer_name: "",
-                address: "",
-                phoneNo: "",
-                email: ""
+                customer_name: "Please Insert Customer Name",
+                address: "Please Insert Address",
+                phoneNo: "Please Insert Phone Number",
+                email: "Please Enter Email Address"
             },
             submitHandler: function(form) {
                 requirejs(['sweetAlert2'], function(swal) {

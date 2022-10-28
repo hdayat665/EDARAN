@@ -2,7 +2,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Add project Member</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Update project Member</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -33,7 +33,7 @@
 
                         <div class="col-md-6">
                             <select class="selectpicker form-control" id="employee_idE" name="employee_id">
-                                <option >Please Select..</option>
+                                <option value="" label="SELECT NAME">PLEASE CHOOSE</option>
                               @foreach ($employeeInfos as $employee)
                                 <option value="{{$employee->id}}">{{$employee->employeeName}}</option>
                               @endforeach
@@ -59,7 +59,7 @@
 
                         <div class="col-md-6">
                             <select class="form-select" name="designation" id="designationE">
-                                <option label="Select State ">Select State </option>
+                                <option Value="" label="PLEASE CHOOSE">SELECT DESIGNATION </option>
                                 <?php $Designations = getDesignation() ?>
                                 @foreach ($Designations as $Designation)
                                 <option value="{{$Designation->designationName}}" >{{$Designation->designationName}}</option>
@@ -69,7 +69,7 @@
 
                         <div class="col-md-6">
                             <select class="form-select" id="departmentE" name="department">
-                                <option label="Select State ">Select State </option>
+                                <option Value="" label="PLEASE CHOOSE">SELECT DEPARTMENT</option>
                                 <?php $departments = getDepartment() ?>
                                 @foreach ($departments as $department)
                                 <option value="{{$department->departmentName}}" >{{$department->departmentName}}</option>
@@ -98,7 +98,7 @@
 
                         <div class="col-md-6">
                             <select class="form-select" name="branch" id="branchE">
-                                <option label="Select State ">Select State </option>
+                                <option Value="" label="PLEASE CHOOSE">SELECT BRANCH</option>
                                 <?php $Branchs = getBranch() ?>
                                 @foreach ($Branchs as $Branch)
                                 <option value="{{$Branch->branchName}}" >{{$Branch->branchName}}</option>
@@ -109,7 +109,7 @@
 
                         <div class="col-md-6">
                             <select class="form-select" name="unit" id="unitE">
-                                <option label="Select State ">Select State </option>
+                                <option Value="" label="PLEASE CHOOSE">SELECT UNIT</option>
                                 <?php $Units = getUnit() ?>
                                 @foreach ($Units as $Unit)
                                 <option value="{{$Unit->unitName}}" >{{$Unit->unitName}}</option>
@@ -126,8 +126,7 @@
 
                     <div class="row mb-15px">
                         <div class="col-md-12">
-                            <select class="selectpicker form-control" name="location[]" id="location-search" multiple >
-                                <option label="Select State ">Select Location </option>
+                            <select class="selectpicker form-control" name="location[]" id="location-search-edit" multiple >
                                 <?php $locations = projectLocation() ?>
                                 @foreach ($locations as $location)
                                 <option value="{{$location->id}}" >{{$location->location_name}}</option>

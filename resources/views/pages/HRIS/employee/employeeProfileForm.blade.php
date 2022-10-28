@@ -239,12 +239,13 @@
             </div>
             <label class="form-label col-form-label col-md-1">Gender*</label>
             <div class="col-md-2">
-                <select class="form-select" name="gender" >
+                <select class="form-select" name="gender" id="gender">
                     <option label="Please Choose " selected="selected" disabled></option>
-                    <option value="Male" label="Male">Male</option>
-                    <option value="Female" label="Female">Female</option>
+                    <option value="1" label="Male">Male</option>
+                    <option value="2" label="Female">Female</option>
                     
                 </select>
+                
             </div>
             <label class="form-label col-form-label col-md-1">Marital Status*</label>
             <div class="col-md-5">

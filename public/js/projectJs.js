@@ -110,20 +110,20 @@ $(document).ready(function() {
                 contract_start_date: "required",
                 contract_end_date: "required",
                 acc_manager: "required",
-                bank_guarantee_amount: "required",
+                status: "required",
             },
 
             messages: {
-                customer_id: "",
-                project_code: "",
-                project_name: "",
-                contract_value: "",
-                financial_year: "",
-                LOA_date: "",
-                contract_start_date: "",
-                contract_end_date: "",
-                acc_manager: "",
-                bank_guarantee_amount: "",
+                customer_id: "Please Select Customer Name",
+                project_code: "Please Enter Project Code",
+                project_name: "Please Enter Project Name",
+                contract_value: "Please Enter Contract Value",
+                financial_year: "Please Select Financial Year",
+                LOA_date: "Please Enter LOA Date",
+                contract_start_date: "Please Select Specific Date",
+                contract_end_date: "Please Select Specific Date",
+                acc_manager: "Please Enter Account Manager",
+                status: "Please Enter Status",
             },
             submitHandler: function(form) {
                 requirejs(['sweetAlert2'], function(swal) {
@@ -174,10 +174,10 @@ $(document).ready(function() {
             },
 
             messages: {
-                customer_name: "",
-                address: "",
-                phoneNo: "",
-                email: ""
+                customer_name: "Enter Name",
+                address: "Enter Address",
+                phoneNo: "Enter Phone Numer",
+                email: "Enter A valid Email Address"
             },
             submitHandler: function(form) {
                 requirejs(['sweetAlert2'], function(swal) {
