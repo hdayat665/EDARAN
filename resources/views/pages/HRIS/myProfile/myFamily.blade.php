@@ -14,15 +14,15 @@
                 <th class="text-nowrap">Contact Number</th>
             </thead>
             <tbody>
+                <?php $id = 0 ?>
                 @foreach ($parents as $parent)
+                <?php $id++ ?>
                 <tr>
-                    <td width="1%" class="fw-bold text-dark">1</td>
+                    <td width="1%" class="fw-bold text-dark">{{$id}}</td>
                     <td>
                         <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle btn-sm"><i class="fa fa-cogs"></i> Actions <i class="fa fa-caret-down"></i></a>
                         <div class="dropdown-menu">
                             <a href="javascript:;" class="dropdown-item" id="parentModalEdit{{$parent->id}}" data-id="{{$parent->id}}">Edit</a>
-                            <div class="dropdown-divider"></div>
-                            <a href="javascript:;" class="dropdown-item" id="parentModalView{{$parent->id}}" data-id="{{$parent->id}}">View</a>
                             <div class="dropdown-divider"></div>
                             <a href="javascript:;" class="dropdown-item" id="deleteParent{{$parent->id}}" data-id="{{$parent->id}}">Delete</a>
                         </div>
@@ -55,15 +55,16 @@
                 <th class="text-nowrap">Contact Number</th>
             </thead>
             <tbody>
+                <?php $id2 = 0 ?>
                 @foreach ($siblings as $sibling)
+                <?php $id2++ ?>
+                
                 <tr>
-                    <td width="1%" class="fw-bold text-dark">1</td>
+                    <td width="1%" class="fw-bold text-dark">{{$id2}}</td>
                     <td>
-                        <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle"><i class="fa fa-cogs"></i> Actions <i class="fa fa-caret-down"></i></a>
+                        <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle btn-sm"><i class="fa fa-cogs"></i> Actions <i class="fa fa-caret-down"></i></a>
                         <div class="dropdown-menu">
                             <a href="javascript:;" class="dropdown-item"id="siblingModalEdit{{$sibling->id}}" data-id="{{$sibling->id}}">Edit</a>
-                            <div class="dropdown-divider"></div>
-                            <a href="javascript:;" class="dropdown-item"id="siblingModalView{{$sibling->id}}" data-id="{{$sibling->id}}">View</a>
                             <div class="dropdown-divider"></div>
                             <a href="javascript:;" class="dropdown-item"id="deleteSibling{{$sibling->id}}" data-id="{{$sibling->id}}">Delete</a>
                         </div>

@@ -12,9 +12,12 @@
             <th class="text-nowrap">Marital Status</th>
         </thead>
         <tbody>
+        <?php $id = 0 ?>
+            
             @foreach ($childrens as $children)
+            <?php $id++ ?>
                 <tr>
-                    <td width="1%" class="fw-bold text-dark">1</td>
+                    <td width="1%" class="fw-bold text-dark">{{$id}}</td>
                     <td>
                         <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle"><i class="fa fa-cogs"></i> Actions <i class="fa fa-caret-down"></i></a>
                         <div class="dropdown-menu">
@@ -26,12 +29,12 @@
                         </div>
                     </td>
 
-                    <td>{{ $children->fullName }}</td>
-                    <td>{{ $children->idNo }}</td>
-                    <td>{{ $children->age }}</td>
-                    <td>{{ $children->educationLevel }}</td>
-                    <td>{{ $children->instituition }}</td>
-                    <td>{{ $children->maritalStatus }}</td>
+                   <td>{{ $children->fullName }}</td>
+                <td>{{ $children->idNo }}</td>
+                <td>{{ $children->age }}</td>
+                <td>{{ ($children->educationLevel == "0") ? '-' : educationLevel($children->educationLevel) }}</td>
+                <td>{{ $children->instituition }}</td>
+                <td>{{ ($children->maritalStatus == "0") ? '-' : getMaritalStatus($children->maritalStatus) }}</td>
                 </tr>
             @endforeach
             <span style="display: none"><input type="text" id="childId" value="{{$childId}}"></span>
