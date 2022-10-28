@@ -674,7 +674,12 @@ $(document).ready(function() {
     }
 
     $("#tableChildren").DataTable({
-        responsive: true,
+        responsive: false,
+        lengthMenu: [
+            [5,10, 15, 20, -1],
+            [5,10, 15, 20, 'All'],
+        ],
+
     });
     $("#firstName1,#lastName1").change(function(){
         var a = $("#firstName1").val();
@@ -855,8 +860,7 @@ $(document).ready(function() {
                 },
                 gender:"required",
                 maritalStatus:"required",
-                educationType:"required",
-                educationLevel:"required",
+                
                 
             },
 
@@ -875,8 +879,7 @@ $(document).ready(function() {
                 },
                 gender:"Please Choose Gender",
                 maritalStatus:"Please Choose Marital Status",
-                educationType:"Please Choose Education Type",
-                educationLevel:"Please Choose Education Level",
+                
 
             },
             submitHandler: function(form) {
@@ -1045,12 +1048,14 @@ $(document).ready(function() {
                     showCancelButton: true,
                 }).then(function() {
                     $.ajax({
-                        type: "DELETE",
+                        type: "POST",
                         url: "/deleteChildren/" + id,
-                        dataType: "json",
-                        async: false,
-                        processData: false,
-                        contentType: false,
+                        // dataType: "json",
+                        data: { _method: "DELETE" },
+                        // async: false,
+                        // processData: false,
+                        // contentType: false,
+                        
                     }).done(function(data) {
                         swal({
                             title: data.title,
@@ -1083,7 +1088,11 @@ $(document).ready(function() {
     }
 
     $("#tableSibling").DataTable({
-        responsive: true,
+        responsive: false,
+        lengthMenu: [
+            [5,10, 15, 20, -1],
+            [5,10, 15, 20, 'All'],
+        ],
     });
 
     $('#siblingModalAdd').click(function(e) {
@@ -1314,12 +1323,13 @@ $(document).ready(function() {
                     showCancelButton: true,
                 }).then(function() {
                     $.ajax({
-                        type: "DELETE",
+                        type: "POST",
                         url: "/deleteSibling/" + id,
-                        dataType: "json",
-                        async: false,
-                        processData: false,
-                        contentType: false,
+                        // dataType: "json",
+                        data: { _method: "DELETE" },
+                        // async: false,
+                        // processData: false,
+                        // contentType: false,
                     }).done(function(data) {
                         swal({
                             title: data.title,
@@ -1352,7 +1362,11 @@ $(document).ready(function() {
     }
 
     $("#tableParent").DataTable({
-        responsive: true,
+        responsive: false,
+        lengthMenu: [
+            [5,10, 15, 20, -1],
+            [5,10, 15, 20, 'All'],
+        ],
     });
 
     $('#parentModalAdd').click(function(e) {
@@ -1569,12 +1583,13 @@ $(document).ready(function() {
                     showCancelButton: true,
                 }).then(function() {
                     $.ajax({
-                        type: "DELETE",
+                        type: "POST",
                         url: "/deleteParent/" + id,
-                        dataType: "json",
-                        async: false,
-                        processData: false,
-                        contentType: false,
+                        // dataType: "json",
+                        data: { _method: "DELETE" },
+                        // async: false,
+                        // processData: false,
+                        // contentType: false,
                     }).done(function(data) {
                         swal({
                             title: data.title,
@@ -1765,7 +1780,7 @@ $("#same-address").change(function() {
     $(".partCheck3").click(function(){
         
         if ($(this).prop("checked")) {
-              
+            $('#designationmc').prop('readonly', false);
             $('#companyNamemc').prop('readonly', false);
             $('#dateJoinedmc').prop('readonly', false);
             $('#dateJoinedmc').prop('disabled', false);
@@ -1779,9 +1794,9 @@ $("#same-address").change(function() {
             $('#postcodeEmc').prop('readonly', false);
             $('#stateEmc').prop('disabled', false);
             $('#countryEmc').prop('disabled', false);
-              
+            $('#payslipmc').prop('readonly', false);
         } else {
-            
+            $('#designationmc').prop('readonly', true);
             $('#companyNamemc').prop('readonly', true);
             $('#dateJoinedmc').prop('readonly', true);
             $('#dateJoinedmc').prop('disabled', true);
@@ -1795,7 +1810,7 @@ $("#same-address").change(function() {
             $('#postcodeEmc').prop('readonly', true);
             $('#stateEmc').prop('disabled', true);
             $('#countryEmc').prop('disabled', true);
-            
+            $('#payslipmc').prop('readonly', true);
         }
       }); 
     $("#same-address5").change(function() {

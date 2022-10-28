@@ -21,9 +21,16 @@
             </div>
             <div class="col-sm-6">
                 <label for="emergency-relationship" class="form-label">Relationship*</label>
-                <input type="text" id="emergency-relationship" name="relationship" value="{{ $emergency->relationship ?? '' }}" class="form-control" aria-describedby="emergency-relationship" style="text-transform:uppercase">
-            </div>
-        </div>
+                <select class="form-select" name="relationship" id="emergency-relationship" style="text-transform:uppercase">
+                                <?php $relationship = relationship() ?>
+                                <option value="" label="Please Choose"  ></option>
+                                @foreach ($relationship as $key => $status)
+                                <option value="{{$key}}"<?php echo ($key == $emergency->relationship) ? 'selected="selected"' : '' ?>> {{$status}}</option>
+                                @endforeach
+                </select>
+
+             </div>
+        </div> 
         <div class="row p-2">
             <div class="col-sm-6">
                 <label for="emergency-address1" class="form-label">Address 1*</label>

@@ -1,4 +1,4 @@
-<div class="tab-pane fade" id="default-tab-6">
+<div class="tab-pane fade" id="default-tab-6"> 
     <div class="container">
         <h4 class="mt-3 mb-3">Parents information</h4>
         <button type="button"  data-bs-toggle="modal" id="parentModalAdd" class="btn btn-white mt-3 mb-3"><i class="fa fa-plus"></i> New Parent</button>
@@ -14,9 +14,11 @@
                 <th class="text-nowrap">Contact Number</th>
             </thead>
             <tbody>
+                <?php $id = 0 ?>
                 @foreach ($parents as $parent)
+                <?php $id++ ?>
                 <tr>
-                    <td width="1%" class="fw-bold text-dark">1</td>
+                    <td width="1%" class="fw-bold text-dark">{{$id}}</td>
                     <td>
                         <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle"><i class="fa fa-cogs"></i> Actions <i class="fa fa-caret-down"></i></a>
                         <div class="dropdown-menu">
@@ -55,9 +57,11 @@
                 <th class="text-nowrap">Contact Number</th>
             </thead>
             <tbody>
+                <?php $id2 = 0 ?>
                 @foreach ($siblings as $sibling)
+                <?php $id2++ ?>
                 <tr>
-                    <td width="1%" class="fw-bold text-dark">1</td>
+                    <td width="1%" class="fw-bold text-dark">{{$id2}}</td>
                     <td>
                         <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle"><i class="fa fa-cogs"></i> Actions <i class="fa fa-caret-down"></i></a>
                         <div class="dropdown-menu">

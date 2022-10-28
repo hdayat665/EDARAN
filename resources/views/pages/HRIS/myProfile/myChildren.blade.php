@@ -15,10 +15,12 @@
         
 
         <tbody>
+            <?php $id = 0 ?>
             @if ($childrens)
             @foreach ($childrens as $children)
+            <?php $id++ ?>
             <tr>
-                <td width="1%" class="fw-bold text-dark">1</td>
+                <td width="1%" class="fw-bold text-dark">{{$id}}</td>
                 <td>
                     <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle btn-sm"><i class="fa fa-cogs"></i> Actions <i class="fa fa-caret-down"></i></a>
                     <div class="dropdown-menu">
