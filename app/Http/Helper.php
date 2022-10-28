@@ -169,8 +169,8 @@ if (!function_exists('relationship')) {
             '6' => 'Mother',
             '7' => 'Father-In-Law',
             '8' => 'Mother-In-Law',
-            '9' => 'Guardian',
-            '10' => 'Siblings',
+            '9' => 'Sister',
+            '10' => 'Brother',
         ];
 
         if ($id) {

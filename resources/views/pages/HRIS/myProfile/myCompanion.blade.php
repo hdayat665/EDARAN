@@ -211,7 +211,7 @@
                         </div>
                         <div class="row p-2">
                             <div class="col-sm-6">
-                                <label for="extension-number" class="form-label">Payslip</label>
+                                <label for="extension-number" class="form-label">Monthly Salary</label>
                                 <input type="text" readonly id="payslipmc" name="payslip"  class="form-control" >
                             
                             </div>
