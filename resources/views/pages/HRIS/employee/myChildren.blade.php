@@ -2,7 +2,7 @@
     <button type="button"  data-bs-toggle="modal" id="childModalAdd" data-type="add" class="btn btn-white mt-3 mb-3"><i class="fa fa-plus"></i> New children</button>
     <table id="tableChildren" style="width: 100%" class="table table-striped align-middle">
         <thead>
-            <th width="1%"></th>
+            <th width="1%">No</th>
             <th width="1%" data-orderable="false">Action</th>
             <th class="text-nowrap">Name</th>
             <th class="text-nowrap">ID/Passport Number</th>
