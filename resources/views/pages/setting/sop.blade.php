@@ -62,8 +62,8 @@
                                 @if ($policys)
                                     @foreach ($policys as $policy)
                                     <tr>
+                                        <td>{{$policy->code}}</td>
                                         <td>{{$policy->policy}}</td>
-                                        <td>{{$policy->file}}</td>
                                         <td>{{$policy->desc}}</td>
                                         <td><a target="_blank" href="/storage/app/{{$policy->file}}">{{$policy->file}}</a></td>
                                         <td>{{$policy->addedBy}}</td>
@@ -109,8 +109,8 @@
                             @if ($SOPs)
                                 @foreach ($SOPs as $SOP)
                                 <tr>
+                                    <td>{{$SOP->SOPCode}}</td>
                                     <td>{{$SOP->SOPName}}</td>
-                                    <td>{{$SOP->file}}</td>
                                     <td>{{$SOP->desc}}</td>
                                     <td>{{$SOP->file}}</td>
                                     <td>{{$SOP->addedBy}}</td>

@@ -6,7 +6,7 @@
 <script src="../assets/js/one-page-parallax/vendor.min.js"></script>
 	<script src="../assets/js/one-page-parallax/app.min.js"></script>
 <div class="text-center">
-    <img src="{{env('ASSETS_URL')}}/img/logo/orbit-logo-5.png" class="img-fluid" style="margin:1h"  alt="Orbit Logo" width="500" height="500">
+    <img src="/assets/img/logo/orbit-logo-5.png" class="img-fluid" style="margin:1h"  alt="Orbit Logo" width="500" height="500">
 </div>
 
 
@@ -14,7 +14,7 @@
 <div class="content" data-scrollview="true">
 			<!-- begin container -->
 			<div class="container" data-animation="true" data-animation-type="fadeInDown">
-				
+
 				<!-- begin row -->
 				<div class="row ">
 					<!-- begin col-12 -->

@@ -13,29 +13,11 @@ $(document).ready(function() {
        } else {
          $('#expirydatemyprofile').prop('readonly', true);
          $('#expirydatemyprofile').css('pointer-events', "none");
+         $('#expirydatemyprofile').val("");
        }
 
     });
 
-    // $(function() {
-
-    //     //var selectedValue = $('#gender').val(selectedValue ? '2' : '1'); // declare variable here
-        
-    //     var newv = $('#gender').val(newv ? '2' : '1');
-        
-    //     //$('#gender').val('2');
-    //     // on drop down change
-    //     $('#gender').change(function() {
-    //         newv = $(this).val(); // store value in variable
-    //         $('#gender').val(newv); // update on change
-    //     });
-    // });
-
-/*    $('#saveProfile').change(function() {
-        const values =  $("#gender").val();
-        console.log(values);
-        });
-*/
     $('#idnumber').change(function(){
         
         if($(this).val().length == 12){
@@ -68,33 +50,8 @@ $(document).ready(function() {
         }
 
     });
-    
-    $('#idnumber2').change(function(){
 
-        if($(this).val().length == 12){
-
-            var idn = $(this).val();
-            var year = '19'.concat(idn.substring(0, 2));
-            var month = idn.substring(2, 4)
-            var day = idn.substring(4, 6);
-            $('#dobmc').val(year+'/'+month+'/'+day);
-            
-        }
-
-    });
-//COMPANION
-    $('#passportmc').change(function(){
-    
-        if ($('#expirydatemc').prop('readonly')) {
-         $('#expirydatemc').prop('readonly', false);
-         $('#expirydatemc').css('pointer-events', "auto");
-       } else {
-         $('#expirydatemc').prop('readonly', true);
-         $('#expirydatemc').css('pointer-events', "none");
-       }
-
-    });
-
+    //COMPANION INFORMATION
     $('#idnumber2').change(function(){
         
         if($(this).val().length == 12){
@@ -110,20 +67,166 @@ $(document).ready(function() {
         }
     });
 
-    //CHILDREN
+    $('#idnumber2').change(function(){
+
+        if($(this).val().length == 12){
+
+            var idn = $(this).val();
+            var year = (idn.substring(0, 2));
+
+            var cutoff = (new Date()).getFullYear() - 2000; 
+
+            var ww = (year > cutoff ? '19' : '20') + year;
+            var currentAge = new Date().getFullYear() - ww;
+            $('#age').val(currentAge);
+        }
+    });
+
+    $('#passportmc').change(function(){
+    
+        if ($('#expirydatemc').prop('readonly')) {
+         $('#expirydatemc').prop('readonly', false);
+         $('#expirydatemc').css('pointer-events', "auto");
+       } else {
+         $('#expirydatemc').prop('readonly', true);
+         $('#expirydatemc').css('pointer-events', "none");
+         $('#expirydatemc').val("");
+        
+       }
+
+    });
+
+
+
+    //ADD CHILDREN DETAILS
+    $('#idNoaddChild').change(function(){
+        
+        if($(this).val().length == 12){
+
+            var idn = $(this).val();
+            var year = (idn.substring(0, 2));
+            var month = idn.substring(2, 4);
+            var day = idn.substring(4, 6);
+            
+            var cutoff = (new Date()).getFullYear() - 2000; //2022-2000=22cutoff
+                                //98>22->19+98
+            $('#DOBChild').val((year > cutoff ? '19' : '20') + year + '-' + month + '-' + day);
+        }
+    });
+
     $('#idNoaddChild').change(function(){
 
         if($(this).val().length == 12){
 
             var idn = $(this).val();
-            var year = '19'.concat(idn.substring(0, 2));
-            var month = idn.substring(2, 4)
-            var day = idn.substring(4, 6);
-            $('#DOBChild').val(year+'/'+month+'/'+day);
             
+            var lastIc = idn.substring(10,12);
+            
+            if(lastIc % 2 == 0){
+                $('#childgender').val(2);
+            } else {
+                $('#childgender').val(1);
+            }
+
         }
 
     });
+
+    $('#idNoaddChild').change(function(){
+
+        if($(this).val().length == 12){
+
+            var idn = $(this).val();
+            var year = (idn.substring(0, 2));
+
+            var cutoff = (new Date()).getFullYear() - 2000; //2022-2000=22cutoff
+            //98>22->19+98->>1998
+            //$('#DOBChild').val((year > cutoff ? '19' : '20') + year + '-' + month + '-' + day);
+            //2022-1998
+            var ww = (year > cutoff ? '19' : '20') + year;
+            var currentAge = new Date().getFullYear() - ww;
+            $('#ageChild').val(currentAge);
+        }
+    });
+
+    $('#passportChild').change(function(){
+    
+        if ($('#expiryDateChild').prop('readonly')) {
+         $('#expiryDateChild').prop('readonly', false);
+         $('#expiryDateChild').css('pointer-events', "auto");
+       } else {
+         $('#expiryDateChild').prop('readonly', true);
+         $('#expiryDateChild').css('pointer-events', "none");
+         $('#expiryDateChild').val("");
+       }
+
+    });
+    
+    //UPDATE CHILDREN DETAILS
+    $('#idNo1').change(function(){
+        
+        if($(this).val().length == 12){
+
+            var idn = $(this).val();
+            var year = (idn.substring(0, 2));
+            var month = idn.substring(2, 4);
+            var day = idn.substring(4, 6);
+            
+            var cutoff = (new Date()).getFullYear() - 2000;
+
+            $('#DOB1').val((year > cutoff ? '19' : '20') + year + '-' + month + '-' + day);
+        }
+    });
+
+    $('#idNo1').change(function(){
+
+        if($(this).val().length == 12){
+
+            var idn = $(this).val();
+            
+            var lastIc = idn.substring(10,12);
+            
+            if(lastIc % 2 == 0){
+                $('#gender1').val(2);
+            } else {
+                $('#gender1').val(1);
+            }
+
+        }
+
+    });
+
+    $('#idNo1').change(function(){
+
+        if($(this).val().length == 12){
+
+            var idn = $(this).val();
+            var year = (idn.substring(0, 2));
+
+            var cutoff = (new Date()).getFullYear() - 2000; //2022-2000=22cutoff
+            //98>22->19+98->>1998
+            //$('#DOBChild').val((year > cutoff ? '19' : '20') + year + '-' + month + '-' + day);
+            //2022-1998
+            var ww = (year > cutoff ? '19' : '20') + year;
+            var currentAge = new Date().getFullYear() - ww;
+            $('#age1').val(currentAge);
+        }
+    });
+
+
+    $('#passports1').change(function(){
+    
+        if ($('#expiryDate1').prop('readonly')) {
+         $('#expiryDate1').prop('readonly', false);
+         $('#expiryDate1').css('pointer-events', "auto");
+       } else {
+         $('#expiryDate1').prop('readonly', true);
+         $('#expiryDate1').css('pointer-events', "none");
+         $('#expiryDate1').val("");
+       }
+
+    });
+
     $('#saveProfile').click(function(e) {
         
         $("#formProfile").validate({
@@ -571,7 +674,12 @@ $(document).ready(function() {
     }
 
     $("#tableChildren").DataTable({
-        responsive: true,
+        responsive: false,
+        lengthMenu: [
+            [5,10, 15, 20, -1],
+            [5,10, 15, 20, 'All'],
+        ],
+
     });
     $("#firstName1,#lastName1").change(function(){
         var a = $("#firstName1").val();
@@ -583,63 +691,107 @@ $(document).ready(function() {
         var b = $("#lastNameChild").val();
         $("#fullNameChild").val(a+ ' '+b);
     });
+    $("#firstnamemc,#lastnamemc").change(function(){
+        var a = $("#firstnamemc").val();
+        var b = $("#lastnamemc").val();
+        $("#fullnamemc").val(a+ ' '+b);
+    });
+
 
     $(".partCheck").click(function(){
         if ($(this).prop("checked")) {
               
             $('#idnumber').prop('readonly', true);
-            
-            //$('#expirydatemyprofile').prop('readonly', false);
             $('#dob').prop('readonly', false);
             $('#dob').css('pointer-events', 'auto');
             $("#idnumber").val("");
         } else {
             
             $('#idnumber').prop('readonly', false);
-            
-            //$('#expirydatemyprofile').prop('readonly', false);
             $('#dob').prop('readonly', true);
             $('#dob').css('pointer-events', 'none');
+            $("#passportmyprofile").val("");
+            $("#expirydatemyprofile").val("");
+            $('#expirydatemyprofile').prop('readonly', true);
+            $('#expirydatemyprofile').css('pointer-events', 'none');
+
         }
       });
+    //COMPANION INFORMATION
     $(".partCheck2").click(function(){
         if ($(this).prop("checked")) {
               
             $('#idnumber2').prop('readonly', true);
-            $('#passportmc').prop('readonly', false);
-            $('#expirydatemc').prop('readonly', false);
             $('#dobmc').prop('readonly', false);
             $('#dobmc').css('pointer-events', 'auto');
+            $('#idnumber2').val("");
         } else {
             
             $('#idnumber2').prop('readonly', false);
-            $('#passportmc').prop('readonly', true);
-            $('#expirydatemc').prop('readonly', true);
             $('#dobmc').prop('readonly', true);
             $('#dobmc').css('pointer-events', 'none');
-            
+            $('#passportmc').val("");
+            $('#expirydatemc').val("");
+            $('#expirydatemc').prop('readonly', true);
+            $('#expirydatemc').css('pointer-events', 'none');
         }
       });
 
+    //ADD CHILDREN DETAILS
     $(".partCheck4").click(function(){
         if ($(this).prop("checked")) {
               
             $('#idNoaddChild').prop('readonly', true);
-            $('#passportChild').prop('readonly', false);
-            $('#expiryDateChild').prop('readonly', false);
             $('#DOBChild').prop('readonly', false);
             $('#DOBChild').css('pointer-events', 'auto');
+            $("#idNoaddChild").val("");
             
         } else {
             
             $('#idNoaddChild').prop('readonly', false);
-            $('#passportChild').prop('readonly', true);
-            $('#expiryDateChild').prop('readonly', true);
             $('#DOBChild').prop('readonly', true);
             $('#DOBChild').css('pointer-events', 'none');
+            $("#passportChild").val("");
+            $("#expiryDateChild").val("");
+            $('#expiryDateChild').prop('readonly', true);
+            $('#expiryDateChild').css('pointer-events', 'none');
         }
       });
 
+    //UPDATE CHILDREN DETAILS
+      $(".partCheck5").click(function(){
+        if ($(this).prop("checked")) {
+              
+            $('#idNo1').prop('readonly', true);
+            
+            $('#DOB1').prop('readonly', false);
+            $('#DOB1').css('pointer-events', 'auto');
+            $("#idNo1").val("");
+           
+            
+        } else {
+            
+            $('#idNo1').prop('readonly', false);
+            $('#DOB1').prop('readonly', true);
+            $('#DOB1').css('pointer-events', 'none');
+            $("#passports1").val("");
+            $("#expiryDate1").val("");
+            $('#expiryDate1').prop('readonly', true);
+            $('#expiryDate1').css('pointer-events', 'none');
+            
+        }
+      });
+      $("#DOB1").datepicker({
+        todayHighlight: true,
+        format: 'yyyy-mm-dd',
+        autoclose: true,
+      });
+      $("#expiryDate1").datepicker({
+        todayHighlight: true,
+        format: 'yyyy-mm-dd',
+        autoclose: true,
+      });
+      
     $('#childModalAdd').click(function(e) {
         $('#add-children').modal('show');
     });
@@ -653,7 +805,22 @@ $(document).ready(function() {
         format: 'yyyy-mm-dd',
         autoclose: true,
       });
+      $("#datepicker-joindate").datepicker({
+        todayHighlight: true,
+        format: 'yyyy-mm-dd',
+        autoclose: true,
+      });
       $("#dobmc").datepicker({
+        todayHighlight: true,
+        format: 'yyyy-mm-dd',
+        autoclose: true,
+      });
+      $("#expirydatemc").datepicker({
+        todayHighlight: true,
+        format: 'yyyy-mm-dd',
+        autoclose: true,
+      });
+      $("#dommc").datepicker({
         todayHighlight: true,
         format: 'yyyy-mm-dd',
         autoclose: true,
@@ -693,8 +860,7 @@ $(document).ready(function() {
                 },
                 gender:"required",
                 maritalStatus:"required",
-                educationType:"required",
-                educationLevel:"required",
+                
                 
             },
 
@@ -713,8 +879,7 @@ $(document).ready(function() {
                 },
                 gender:"Please Choose Gender",
                 maritalStatus:"Please Choose Marital Status",
-                educationType:"Please Choose Education Type",
-                educationLevel:"Please Choose Education Level",
+                
 
             },
             submitHandler: function(form) {
@@ -759,10 +924,11 @@ $(document).ready(function() {
         });
 
     $('#editChildren').click(function(e) {
+        
         requirejs(['sweetAlert2'], function(swal) {
 
             var data = new FormData(document.getElementById("editChildrenForm"));
-
+            
             $.ajax({
                 type: "POST",
                 url: "/updateChildren",
@@ -882,12 +1048,14 @@ $(document).ready(function() {
                     showCancelButton: true,
                 }).then(function() {
                     $.ajax({
-                        type: "DELETE",
+                        type: "POST",
                         url: "/deleteChildren/" + id,
-                        dataType: "json",
-                        async: false,
-                        processData: false,
-                        contentType: false,
+                        // dataType: "json",
+                        data: { _method: "DELETE" },
+                        // async: false,
+                        // processData: false,
+                        // contentType: false,
+                        
                     }).done(function(data) {
                         swal({
                             title: data.title,
@@ -920,7 +1088,11 @@ $(document).ready(function() {
     }
 
     $("#tableSibling").DataTable({
-        responsive: true,
+        responsive: false,
+        lengthMenu: [
+            [5,10, 15, 20, -1],
+            [5,10, 15, 20, 'All'],
+        ],
     });
 
     $('#siblingModalAdd').click(function(e) {
@@ -1151,12 +1323,13 @@ $(document).ready(function() {
                     showCancelButton: true,
                 }).then(function() {
                     $.ajax({
-                        type: "DELETE",
+                        type: "POST",
                         url: "/deleteSibling/" + id,
-                        dataType: "json",
-                        async: false,
-                        processData: false,
-                        contentType: false,
+                        // dataType: "json",
+                        data: { _method: "DELETE" },
+                        // async: false,
+                        // processData: false,
+                        // contentType: false,
                     }).done(function(data) {
                         swal({
                             title: data.title,
@@ -1189,7 +1362,11 @@ $(document).ready(function() {
     }
 
     $("#tableParent").DataTable({
-        responsive: true,
+        responsive: false,
+        lengthMenu: [
+            [5,10, 15, 20, -1],
+            [5,10, 15, 20, 'All'],
+        ],
     });
 
     $('#parentModalAdd').click(function(e) {
@@ -1406,12 +1583,13 @@ $(document).ready(function() {
                     showCancelButton: true,
                 }).then(function() {
                     $.ajax({
-                        type: "DELETE",
+                        type: "POST",
                         url: "/deleteParent/" + id,
-                        dataType: "json",
-                        async: false,
-                        processData: false,
-                        contentType: false,
+                        // dataType: "json",
+                        data: { _method: "DELETE" },
+                        // async: false,
+                        // processData: false,
+                        // contentType: false,
                     }).done(function(data) {
                         swal({
                             title: data.title,
@@ -1602,7 +1780,7 @@ $("#same-address").change(function() {
     $(".partCheck3").click(function(){
         
         if ($(this).prop("checked")) {
-              
+            $('#designationmc').prop('readonly', false);
             $('#companyNamemc').prop('readonly', false);
             $('#dateJoinedmc').prop('readonly', false);
             $('#dateJoinedmc').prop('disabled', false);
@@ -1616,9 +1794,9 @@ $("#same-address").change(function() {
             $('#postcodeEmc').prop('readonly', false);
             $('#stateEmc').prop('disabled', false);
             $('#countryEmc').prop('disabled', false);
-              
+            $('#payslipmc').prop('readonly', false);
         } else {
-            
+            $('#designationmc').prop('readonly', true);
             $('#companyNamemc').prop('readonly', true);
             $('#dateJoinedmc').prop('readonly', true);
             $('#dateJoinedmc').prop('disabled', true);
@@ -1632,7 +1810,7 @@ $("#same-address").change(function() {
             $('#postcodeEmc').prop('readonly', true);
             $('#stateEmc').prop('disabled', true);
             $('#countryEmc').prop('disabled', true);
-            
+            $('#payslipmc').prop('readonly', true);
         }
       }); 
     $("#same-address5").change(function() {

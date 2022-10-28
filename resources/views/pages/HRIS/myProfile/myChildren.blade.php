@@ -11,13 +11,18 @@
             <th class="text-nowrap">Institution</th>
             <th class="text-nowrap">Marital Status</th>
         </thead>
+
+        
+
         <tbody>
+            <?php $id = 0 ?>
             @if ($childrens)
             @foreach ($childrens as $children)
+            <?php $id++ ?>
             <tr>
-                <td width="1%" class="fw-bold text-dark">1</td>
+                <td width="1%" class="fw-bold text-dark">{{$id}}</td>
                 <td>
-                    <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle"><i class="fa fa-cogs"></i> Actions <i class="fa fa-caret-down"></i></a>
+                    <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle btn-sm"><i class="fa fa-cogs"></i> Actions <i class="fa fa-caret-down"></i></a>
                     <div class="dropdown-menu">
                         <a href="javascript:;" data-bs-toggle="modal" id="childModalEdit{{$children->id}}" data-id="{{$children->id}}" data-type="edit" class="dropdown-item">Edit</a>
                         <div class="dropdown-divider"></div>

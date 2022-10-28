@@ -198,9 +198,9 @@ class ProjectController extends Controller
 
         $ps = new ProjectService;
 
-        $data['approves'] = $ps->myProjectView('approve');
-        $data['pendings'] = $ps->myProjectView('pending');
-        $data['rejects'] = $ps->myProjectView('reject');
+        $data['datas'] = $ps->myProjectView();
+        // $data['pendings'] = $ps->myProjectView('pending');
+        // $data['rejects'] = $ps->myProjectView('reject');
 
         return view('pages.project.myProject', $data);
     }

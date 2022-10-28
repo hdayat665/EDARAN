@@ -138,22 +138,7 @@
 
                     </div>
 
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-check form-switch">
-                                <input type="checkbox" name="exit_project"  class="form-check-input partCheck"></input>
-                                <label class="form-label" for="checkbox1">Exit Project?</label><br>
-                            </div>
-
-                        </div>
-
-                    </div>
-                    <div id="door3" class="part">
-                        <div class="col-md-12">
-                            <br>
-                            <input type="text" class="form-control" id="datepicker-exitdate" placeholder="dd/mm/yyyy" />
-                        </div>
-                    </div>
+                    
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                         <button type="submit" class="btn btn-primary" id="saveProjectMember">Save</button>

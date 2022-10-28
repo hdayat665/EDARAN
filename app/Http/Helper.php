@@ -39,11 +39,11 @@ if (!function_exists('upload')) {
     {
         $filename = time() . $uploadedFile->getClientOriginalName();
 
-        Storage::disk('local')->putFileAs(
-            'public/',
-            $uploadedFile,
-            $filename
-        );
+        // Storage::disk('local')->putFileAs(
+        //     'public/',
+        //     $uploadedFile,
+        //     $filename
+        // );
 
         $data['filename'] = $filename;
 
@@ -118,7 +118,7 @@ if (!function_exists('educationLevel')) {
     function educationLevel($id = '')
     {
         $data = [
-            '0' => '-',
+          
             '1' => 'primary school',
             '2' => 'lower secondary school',
             '3' => 'upper secondary school',
@@ -139,7 +139,7 @@ if (!function_exists('educationType')) {
     function educationType($id = '')
     {
         $data = [
-            '0' => '-',
+            
             '1' => 'primary school (year 6-12)',
             '2' => 'lower secondary school (form 1-3)',
             '3' => 'upper secondary school (form 4 & 5)',
@@ -160,7 +160,7 @@ if (!function_exists('relationship')) {
     function relationship($id = '')
     {
         $data = [
-            '0' => '-',
+           
             '1' => 'Grand Father',
             '2' => 'Grand Mother',
             '3' => 'Grand Father-In-Law',
@@ -170,6 +170,7 @@ if (!function_exists('relationship')) {
             '7' => 'Father-In-Law',
             '8' => 'Mother-In-Law',
             '9' => 'Guardian',
+            '10' => 'Siblings',
         ];
 
         if ($id) {
@@ -483,8 +484,15 @@ if (!function_exists('getEvent')) {
     function getEvent()
     {
         $data = [
-            '1' => 'event1',
-            '2' => 'event2',
+            '1' => 'JOINED',
+            '2' => 'RE-JOINED',
+            '3' => 'PROMOTION',
+            '4' => 'TRANSFER',
+            '5' => 'RELOCATION',
+            '6' => 'CHANGE OF WORKBASE',
+            '7' => 'SECONDMENT',
+            '8' => 'ERROR CORRECTION',
+            '9' => 'OTHERS',
         ];
 
         return $data;
@@ -704,13 +712,18 @@ if (!function_exists('month')) {
     function month()
     {
         $data = [
-            '1' => 'January',
-            '2' => 'February',
-            '3' => 'March',
-            '4' => 'May',
-            '5' => 'Jun',
-            '6' => 'July',
-            '7' => 'August',
+            '01' => 'January',
+            '02' => 'February',
+            '03' => 'March',
+            '04' => 'April',
+            '05' => 'May',
+            '06' => 'Jun',
+            '07' => 'July',
+            '08' => 'August',
+            '09' => 'September',
+            '10' => 'October',
+            '11' => 'November',
+            '12' => 'December',
         ];
 
         return $data;

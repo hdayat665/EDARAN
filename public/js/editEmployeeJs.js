@@ -31,6 +31,18 @@ $(document).ready(function() {
         var b = $("#lastname").val();
         $("#fullname").val(a + ' ' + b);
     });
+    
+    $("#effective-from").datepicker({
+        todayHighlight: true,
+        format: 'yyyy-mm-dd',
+        autoclose: true,
+    });
+
+    $("#datepicker-joindate").datepicker({
+        todayHighlight: true,
+        format: 'yyyy-mm-dd',
+        autoclose: true,
+    });
 
     $("#dob").datepicker({
         todayHighlight: true,
@@ -100,6 +112,17 @@ $(document).ready(function() {
         }
     });
 
+    $(".partCheck2").click(function() {
+        if ($(this).prop("checked")) {
+            $('#reportto').show();
+           
+        } else {
+            $('#reportto').hide();
+            $('#reportto').prop('disabled', true);
+            // $('#reportto').css('pointer-events', 'auto');
+     }
+    });
+    
     $('#saveProfile').click(function(e) {
         $("#formProfile").validate({
             // Specify validation rules
@@ -381,7 +404,11 @@ $(document).ready(function() {
     }
 
     $("#tableChildren").DataTable({
-        responsive: true,
+        responsive: false,
+        lengthMenu: [
+            [5,10, 15, 20, -1],
+            [5,10, 15, 20, 'All'],
+        ],
     });
 
     $('#childModalAdd').click(function(e) {
@@ -584,7 +611,11 @@ $(document).ready(function() {
     }
 
     $("#tableSibling").DataTable({
-        responsive: true,
+        responsive: false,
+        lengthMenu: [
+            [5,10, 15, 20, -1],
+            [5,10, 15, 20, 'All'],
+        ],
     });
 
     $('#siblingModalAdd').click(function(e) {
@@ -793,7 +824,13 @@ $(document).ready(function() {
     }
 
     $("#tableParent").DataTable({
-        responsive: true,
+        responsive: false,
+        lengthMenu: [
+            [5,10, 15, 20, -1],
+            [5,10, 15, 20, 'All'],
+        ],
+
+
     });
 
     $('#parentModalAdd').click(function(e) {

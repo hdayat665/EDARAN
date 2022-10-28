@@ -54,7 +54,7 @@
                     </div>
                     <div class="row p-2">
                         <label for="firstname" class="form-label">Joined Date*</label>
-                        <input type="date" name="joinedDate" id="datepicker-joindate" readonly class="form-control" aria-describedby="address-2">
+                        <input type="text" name="joinedDate" id="datepicker-joindate" placeholder="YYYY-MM-DD" class="form-control" aria-describedby="address-2" readonly>
                     </div>
                     <div class="row p-2">
                         <label for="firstname" class="form-label">Job Grade*</label>
@@ -86,7 +86,7 @@
                             @endforeach
                         </select>
                     </div>
-                    <div class="row p-2">
+                    <!-- <div class="row p-2">
                         <label class="form-label" for="supervisor">
                               User Role
                         </label>
@@ -97,9 +97,9 @@
                             </label>
                         </div>
                         <div class="form-text">
-                            If enabled, report-to will enabled the username
+                            If enabled, report-to will enabled the usernameasddasd
                         </div>
-                    </div>
+                    </div> -->
                     <hr>
                     {{-- <button type="button" class="btn btn-primary float-end" data-bs-toggle="modal" data-bs-target="#update-employment"">
                         Update

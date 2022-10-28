@@ -43,6 +43,16 @@
             </div>
         </div>
         <div class="col-xl-9">
+        <div class="tab-pane fade show active" id="v-pills-myprofile" role="tabpanel" aria-labelledby="v-pills-myprofile-tab">
+            <div class="card">
+                <div class="card-header bg-white bg-gray-100">
+                    <h4 class="fw-bold">
+                        Personal Information
+                    </h4>
+                    <p class="fw-light">
+                        Update Employee personal information
+                    </p>
+                </div>
             <div class="tab-content" id="v-pills-tabContent">
                 <div class="tab-pane fade show active" id="v-pills-myprofile" role="tabpanel" aria-labelledby="v-pills-myprofile-tab">
 
@@ -330,5 +340,7 @@
             </div>
         </div>
     </div>
+</div>
+</div>
 </div>
 @endsection

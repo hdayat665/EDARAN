@@ -53,7 +53,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <?php $id = 0 ?>
+                    <?php $id = 0 ?> 
                     @if ($branchs)
                     @foreach ($branchs as $branch)
                     <?php $id++ ?>
