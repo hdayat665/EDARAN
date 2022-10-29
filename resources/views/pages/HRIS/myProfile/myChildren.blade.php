@@ -44,6 +44,13 @@
             <span style="display: none"><input type="text" id="childId" value="{{$childId}}"></span>
         </tbody>
     </table>
+    <div class="row p-2">
+            <div class="modal-footer">
+                <a href="javascript:;" class="btn btn-white me-5px">Previous</a>
+                
+                <a href="javascript:;" class="btn btn-white me-5px">Next</a>
+            </div>
+</div>
 </div>
 
 @include('modal.myProfile.addChildren')

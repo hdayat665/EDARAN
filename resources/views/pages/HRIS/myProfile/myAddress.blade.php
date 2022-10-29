@@ -118,12 +118,14 @@
                 </select>
             </div>
         </div>
+        <div class="row p-2">
+            <div class="modal-footer">
+            <a href="javascript:;" class="btn btn-white me-5px">Previous</a>
+            <button type="submit" id="saveAddress" class="btn btn-primary">Update</button>
+            <a href="javascript:;" class="btn btn-white me-5px">Next</a>
+            </div>
+        </div>
     
-    <p class="text-end mb-0 mt-3">
-        <a href="javascript:;" class="btn btn-white me-5px">Previous</a>
-        <button type="submit" id="saveAddress" class="btn btn-primary">Save</button>
-        
-    </p>
     </form>
 </div>
 

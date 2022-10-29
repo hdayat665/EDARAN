@@ -551,7 +551,14 @@
         </div>
         @endforeach
         @endif
-    </div>
+    </div> 
+        <div class="row p-2">
+            <div class="modal-footer">
+                <a href="javascript:;" class="btn btn-white me-5px">Previous</a>
+                
+                <a href="javascript:;" class="btn btn-white me-5px">Next</a>
+            </div>
+        </div>
 </div>
 
 

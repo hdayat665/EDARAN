@@ -191,26 +191,32 @@
                             </div>
                         </div>
                         <hr class="mt-5">
-                        <h4 class="row p-2">Contact Details</h4>
-                        <div class="col p-2">
+                        <h4 class="p-2">Contact Details</h4>
+                        <div class="row p-2">
+                            <div class="col p-2">
                             <label for="phone-number" class="form-label">Phone Number*</label>
                             <input type="text" id="phone-number" name="phoneNo" value="{{$profile->phoneNo ?? ''}}" class="form-control" aria-describedby="phone-number">
+                            </div>
                         </div>
-                        <div class="col p-2">
-                            <label for="home-number" class="form-label">Home Number</label>
-                            <input type="text" id="home-number" name="homeNo" value="{{$profile->homeNo ?? ''}}" class="form-control" aria-describedby="home-number">
+                        <div class="row p-2">
+                            <div class="col p-2">
+                                <label for="home-number" class="form-label">Home Number</label>
+                                <input type="text" id="home-number" name="homeNo" value="{{$profile->homeNo ?? ''}}" class="form-control" aria-describedby="home-number">
+                            </div>
                         </div>
-                        <div class="col p-2">
-                            <label for="extension-number" class="form-label">Extension Number</label>
-                            <input type="text" id="extension-number" name="extensionNo" value="{{$profile->extensionNo ?? ''}}" class="form-control" aria-describedby="extension-number">
+                        <div class="row p-2">
+                            <div class="col p-2">
+                                <label for="extension-number" class="form-label">Extension Number</label>
+                                <input type="text" id="extension-number" name="extensionNo" value="{{$profile->extensionNo ?? ''}}" class="form-control" aria-describedby="extension-number">
+                            </div>
                         </div>
-
-
-                        <p class="text-end mb-0 mt-3">
-                            <a href="javascript:;" class="btn btn-white me-5px">Previous</a>
-                            <button type="submit" id="saveProfile" class="btn btn-primary">Save</button>
-
-                        </p>
+                        <div class="row p-2">
+                            <div class="modal-footer">
+                                <button type="submit" id="saveProfile" class="btn btn-primary">Update</button>
+                                <a href="javascript:;" class="btn btn-white me-5px">Next</a>
+                            </div>
+                        </div>
+                       
                     </form>
                 </div>
 
