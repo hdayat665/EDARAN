@@ -85,6 +85,11 @@
             </tbody>
         </table>
     </div>
+    <div class="row p-2">
+            <div class="modal-footer">
+                 <a  class="btn btn-white me-5px btnPrevious">Previous</a>
+            </div>
+    </div>
 </div>
 
         {{-- modal add parent --}}

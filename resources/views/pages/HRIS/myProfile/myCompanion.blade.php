@@ -551,7 +551,19 @@
         </div>
         @endforeach
         @endif
-    </div>
+    </div> 
+        <div class="row p-2">
+            <div class="modal-footer">
+                <a class="btn btn-white me-5px btnPrevious">Previous</a>
+                
+                <a class="btn btn-white me-5px btnNext">Next</a>
+            </div>
+        </div>
 </div>
+<!-- $('#updateCompanion').click(functiion({
 
+    var key = $(this).attr("data-id");
+
+    $('#form+''key' input['name']').value();
+})) -->
 

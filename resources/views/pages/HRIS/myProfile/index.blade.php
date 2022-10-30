@@ -6,7 +6,7 @@
     <div class="row">
         <div class="col-xl-3">
             <div class="card">
-                <div class="card-body">
+                <div class="card-body"> 
                     <div class="profile-pic m-3">
                         <img src="../assets/img/user/user-13.jpg" width="100px" class="rounded d-block" alt="Profile Picture">
                         <h4 class="mt-3 mb-0 fw-bold">{{$profile->fullName ?? 'Admin Tenant'}}</h4>

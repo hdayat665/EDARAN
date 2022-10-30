@@ -77,6 +77,8 @@
                 <div class="tab-pane fade" id="default-tab-2">
                     <br>
                     <div class="panel-body">
+                        
+
                         <table id="data-table-default2" style="width: 100% !important" class="table table-striped table-bordered align-middle">
                             <thead>
                                 <tr>
@@ -120,5 +122,5 @@
 </div>
 
 @include('modal.project.projectRegistration')
-
+@include('modal.project.rejectProjectApproval')
 @endsection
