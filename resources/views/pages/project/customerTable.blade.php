@@ -45,8 +45,8 @@
                         <td>{{$customer->email}}</td>
                         <td>{{$customer->addedBy}}</td>
                         <td>{{$customer->created_at}}</td>
-                        <td></td>
-                        <td></td>
+                        <td>{{($customer->update_by) ? getEmployeeName($customer->update_by) : '-'}}</td>
+                        <td>{{($customer->update_by) ? $customer->updated_at : '-'}}</td>
                     </tr>
                     @endforeach
                     @endif

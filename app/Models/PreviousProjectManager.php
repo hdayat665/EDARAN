@@ -8,7 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
-class Customer extends Authenticatable
+class PreviousProjectManager extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
@@ -18,14 +18,9 @@ class Customer extends Authenticatable
      * @var array<int, string>
      */
 
-    protected $table ='customer';
+    protected $table ='previous_project_manager';
 
     protected $guarded = [];
-
-    public function project()
-    {
-        return $this->hasMany(Project::class, 'id', 'customer_id');
-    }
 
 }
 

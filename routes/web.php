@@ -209,6 +209,10 @@ Route::group(['middleware' => ['web']], function () {
             Route::delete('/deleteTypeOfLogs/{id}', 'deleteTypeOfLogs');
             Route::get('/getLogsById/{id}', 'getLogsById');
             Route::post('/updateTypeOfLogs/{id}', 'updateTypeOfLogs');
+            Route::get('/departmentByCompanyId/{companyId}', 'departmentByCompanyId');
+            Route::get('/unitByDepartmentId/{departmentId}', 'unitByDepartmentId');
+            Route::get('/branchByUnitId/{unitId}', 'branchByUnitId');
+
         });
 
         Route::controller(OrganizationController::class)->group(function () {
@@ -226,7 +230,7 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('/updateCustomer/{id}', 'updateCustomer');
             Route::get('/getCustomerById/{id}', 'getCustomerById');
             Route::delete('/deleteCustomer/{id}', 'deleteCustomer');
-            Route::post('/updateStatus/{id}/{status}', 'updateStatus');
+            Route::post('/updateStatusCustomer/{id}/{status}', 'updateStatus');
         });
 
         Route::controller(ProjectController::class)->group(function () {

@@ -79,10 +79,10 @@
                 </div>
                 <div class="row mb-15px">
                     <div class="col-md-4">
-                        <input type="account-manager" readonly class="form-control mb-5px" value="{{$detailProject->acc_manager}}" />
+                        <input type="account-manager" readonly class="form-control mb-5px" value="{{($detailProject->acc_manager) ? getEmployeeNameById($detailProject->acc_manager)->employeeName ?? '-' : '-'}}" />
                     </div>
                     <div class="col-md-4">
-                        <input type="project-manager" readonly class="form-control mb-5px" value="{{$detailProject->project_manager}}" />
+                        <input type="project-manager" readonly class="form-control mb-5px" value="{{($detailProject->project_manager) ? getEmployeeNameById($detailProject->project_manager)->employeeName ?? '-' : '-'}}" />
                     </div>
                     <div class="col-md-4">
                         <input type="warranty-start-date" readonly class="form-control mb-5px" value="{{$detailProject->warranty_start_date}}" />
