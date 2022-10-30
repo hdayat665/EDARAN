@@ -28,7 +28,7 @@
                         <!-- Tabs navs -->
                         <div class="align-items-start mt-3">
                             <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                                <button class="nav-link active text-start border border-1 mt-1 mb-1" id="v-pills-myprofile-tab" data-bs-toggle="pill" data-bs-target="#v-pills-myprofile" type="button" role="tab" aria-controls="v-pills-myprofile" aria-selected="true">
+                                <button class="nav-link active text-start border border-1 mt-1 mb-1" id="v-pills-myprofile-tab" data-bs-toggle="pill" data-bs-target="#v-pills-myprofile1" type="button" role="tab" aria-controls="v-pills-myprofile" aria-selected="true">
                                     <i class="fas fa-circle-user fa-fw"></i>
                                     My Profile
                                 </button>
@@ -45,6 +45,9 @@
         <div class="col-xl-9">
         <div class="tab-pane fade show active" id="v-pills-myprofile" role="tabpanel" aria-labelledby="v-pills-myprofile-tab">
             <div class="card">
+                
+            <div class="tab-content" id="v-pills-tabContent">
+                <div class="tab-pane fade show active" id="v-pills-myprofile1" role="tabpanel" aria-labelledby="v-pills-myprofile-tab">
                 <div class="card-header bg-white bg-gray-100">
                     <h4 class="fw-bold">
                         Personal Information
@@ -53,11 +56,8 @@
                         Update Employee personal information
                     </p>
                 </div>
-            <div class="tab-content" id="v-pills-tabContent">
-                <div class="tab-pane fade show active" id="v-pills-myprofile" role="tabpanel" aria-labelledby="v-pills-myprofile-tab">
-
-                    <ul class="nav nav-tabs">
-                        <li class="nav-item">
+                    <ul class="nav nav-tabs" id="myTab">
+                        <li class="nav-item" >
                             <a href="#default-tab-1" data-bs-toggle="tab" class="nav-link active">
                                 <span class="d-sm-none">My Profile</span>
                                 <span class="d-sm-block d-none">My Profile</span>
@@ -206,7 +206,7 @@
                                                     </div>
                                                     <div class="col-sm-6">
                                                         <label for="gender" class="form-label">Gender</label>
-                                                        <select class="form-select" name="gender">
+                                                        <select class="form-select" name="gender" id="gender">
                                                             <?php $gender = gender() ?>
                                                             <option value="" label="Please Choose" selected disabled></option>
                                                             @foreach ($gender as $key => $status)
@@ -263,12 +263,14 @@
                                             <label for="extension-number" class="form-label">Extension Number</label>
                                             <input type="text" id="extension-number" name="extensionNo"value="{{$profile->extensionNo ?? ''}}" class="form-control" aria-describedby="extension-number">
                                         </div>
-                                    
-                                    <p class="text-end mb-0 mt-3">
-                                        <a href="javascript:;" class="btn btn-white me-5px">Previous</a>
-                                        
-                                        <button href="javascript:;" id="saveProfile" class="btn btn-primary">Save</button>
-                                    </p>
+                                        <div class="row p-2">
+                                            <div class="modal-footer">
+                                            <button href="javascript:;" id="saveProfile" class="btn btn-primary">Update</button>
+                                                
+                                                <a class="btn btn-white btnNext" >Next</a>
+                                            </div>
+                                        </div>
+                                   
                                     </form>
                                 </div>
                                 <div class="modal fade" id="modal-dialog">

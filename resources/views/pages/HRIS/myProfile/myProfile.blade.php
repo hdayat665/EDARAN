@@ -10,7 +10,7 @@
         </div>
 
         <div class="card-body" id="myProfile">
-            <ul class="nav nav-tabs">
+            <ul class="nav nav-tabs" id="myTab">
                 <li class="nav-item">
                     <a href="#default-tab-1" data-bs-toggle="tab" class="nav-link active">
                         <span class="d-sm-none">My Profile</span>
@@ -213,7 +213,8 @@
                         <div class="row p-2">
                             <div class="modal-footer">
                                 <button type="submit" id="saveProfile" class="btn btn-primary">Update</button>
-                                <a href="javascript:;" class="btn btn-white me-5px">Next</a>
+                                
+                                <a class="btn btn-white btnNext" >Next</a>
                             </div>
                         </div>
                        

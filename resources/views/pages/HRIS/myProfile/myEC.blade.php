@@ -82,9 +82,9 @@
         </div>
         <div class="row p-2">
             <div class="modal-footer">
-                <a href="javascript:;" class="btn btn-white me-5px">Previous</a>
+                <a  class="btn btn-white me-5px btnPrevious">Previous</a>
                 <button type="submit" id="saveEmergency" class="btn btn-primary">Update</button>
-                <a href="javascript:;" class="btn btn-white me-5px">Next</a>
+                <a class="btn btn-white me-5px btnNext">Next</a>
             </div>
         </div>
     

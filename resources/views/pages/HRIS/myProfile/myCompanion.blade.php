@@ -554,11 +554,16 @@
     </div> 
         <div class="row p-2">
             <div class="modal-footer">
-                <a href="javascript:;" class="btn btn-white me-5px">Previous</a>
+                <a class="btn btn-white me-5px btnPrevious">Previous</a>
                 
-                <a href="javascript:;" class="btn btn-white me-5px">Next</a>
+                <a class="btn btn-white me-5px btnNext">Next</a>
             </div>
         </div>
 </div>
+<!-- $('#updateCompanion').click(functiion({
 
+    var key = $(this).attr("data-id");
+
+    $('#form+''key' input['name']').value();
+})) -->
 

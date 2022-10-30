@@ -5,6 +5,8 @@ $(document).ready(function() {
         $("#fullName").val(a+ ' '+b);
     });
 
+    $("#gender").css({"pointer-events": "none", "touch-action": "none", "background": "#e9ecef"});
+
     $('#passportmyprofile').change(function(){
     
         if ($('#expirydatemyprofile').prop('readonly')) {
@@ -16,6 +18,27 @@ $(document).ready(function() {
          $('#expirydatemyprofile').val("");
        }
 
+    });
+
+    const nextBtn = document.querySelectorAll(".btnNext");
+    const prevBtn = document.querySelectorAll(".btnPrevious");
+
+    nextBtn.forEach(function(item, index){
+        item.addEventListener('click', function(){
+        let id = index + 1;
+        let tabElement = document.querySelectorAll("#myTab li a")[id];
+        var lastTab = new bootstrap.Tab(tabElement);
+        lastTab.show();   
+        });
+    });
+
+    prevBtn.forEach(function(item, index){
+        item.addEventListener('click', function(){
+        let id = index;
+        let tabElement = document.querySelectorAll("#myTab li a")[id];
+        var lastTab = new bootstrap.Tab(tabElement);
+        lastTab.show();
+        });
     });
 
     $('#idnumber').change(function(){
@@ -342,6 +365,7 @@ $(document).ready(function() {
             }
         });
     });
+
     var hash = location.hash.replace(/^#/, '');  // ^ means starting, meaning only match the first hash
     if (hash) {
         $('.nav-tabs a[href="#' + hash + '"]').tab('show');
@@ -349,6 +373,7 @@ $(document).ready(function() {
     $('.nav-tabs a').on('shown.bs.tab', function (e) {
         window.location.hash = e.target.hash;
     })
+    
     $('#saveAddress').click(function(e) {
 
         $("#formAddress").validate({
@@ -678,7 +703,7 @@ $(document).ready(function() {
             });
         });
     }
-
+ 
     $("#tableChildren").DataTable({
         responsive: false,
         lengthMenu: [
@@ -1819,6 +1844,13 @@ $("#same-address").change(function() {
             $('#payslipmc').prop('readonly', true);
         }
       }); 
+
+    
+
+      
+
+      
+      
     $("#same-address5").change(function() {
         if(this.checked) {
             $('#address1S').val($('#address-1').val()).prop('readonly', true);
