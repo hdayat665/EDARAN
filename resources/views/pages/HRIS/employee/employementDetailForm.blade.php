@@ -1,10 +1,10 @@
 <div class="tab-pane fade" id="default-tab-3">
-    <h3 class="mt-10px"></i> Employment Details</h3>	<br>
+    <h3 class="mt-10px" id="editHRISJs"></i> Employment Details</h3>	<br>
     <form id="employmentForm">
         <div class="row mb-15px">
             <label class="form-label col-form-label col-md-1">Company*</label>
             <div class="col-md-5">
-                <select class="form-select" name="company" required>
+                <select class="form-select" name="company" required id="companyForEmployment">
                 <?php $companys = getCompany(); ?>
                 <option label="Please Choose" selected="selected"> </option>
                 @if ($companys)
@@ -20,7 +20,18 @@
 
             <label class="form-label col-form-label col-md-1">Department*</label>
             <div class="col-md-5">
-                <select class="form-select" name="department" required>
+                <select class="form-select" name="department" required id="departmentHide">
+                    <?php $departments = getDepartment(); ?>
+                <option label="Please Choose" selected="selected"> </option>
+                @if ($departments)
+
+                @foreach ($departments as $department)
+                    <option value="{{$department->id }}">{{$department->departmentName}}</option>
+                    @endforeach
+                    @endif
+                </select>
+
+                <select class="form-select" name="departmentId" required id="departmentShow">
                     <?php $departments = getDepartment(); ?>
                 <option label="Please Choose" selected="selected"> </option>
                 @if ($departments)
@@ -36,7 +47,19 @@
         <div class="row mb-15px">
             <label class="form-label col-form-label col-md-1">Unit*</label>
             <div class="col-md-5">
-                <select class="form-select" name="unit" required>
+                <select class="form-select" name="unit" required id="unitHide">
+                    <?php $units = getUnit(); ?>
+                <option label="Please Choose" selected="selected"> </option>
+                @if ($units)
+
+                @foreach ($units as $unit)
+                    <option value="{{$unit->id }}">{{$unit->unitName}}</option>
+                    @endforeach
+                    @endif
+
+                </select>
+
+                <select class="form-select" name="unitId" required id="unitShow">
                     <?php $units = getUnit(); ?>
                 <option label="Please Choose" selected="selected"> </option>
                 @if ($units)
@@ -51,7 +74,19 @@
             </div>
             <label class="form-label col-form-label col-md-1">Branch*</label>
             <div class="col-md-5">
-                <select class="form-select" name="branch" required>
+                <select class="form-select" name="branch" required id="branchHide">
+                    <?php $branchs = getBranch(); ?>
+                <option label="Please Choose" selected="selected"> </option>
+                @if ($branchs)
+
+                @foreach ($branchs as $branch)
+                    <option value="{{$branch->id }}">{{$branch->branchName}}</option>
+                    @endforeach
+                    @endif
+
+                </select>
+
+                <select class="form-select" name="branchId" required id="branchShow">
                     <?php $branchs = getBranch(); ?>
                 <option label="Please Choose" selected="selected"> </option>
                 @if ($branchs)

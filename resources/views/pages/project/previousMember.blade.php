@@ -60,10 +60,10 @@ table{
                                         <tr>
                                             <td width="1%"><a data-bs-toggle="modal" data-id="{{$projectMember->id}}" id="editProjectMemberButton" class="btn btn-outline-green"><i class="fa fa-pencil-alt"></i></a></td>
                                             <td>{{$projectMember->employeeName}}</td>
-                                            <td>{{$projectMember->designation}}</td>
-                                            <td>{{$projectMember->department}}</td>
-                                            <td>{{$projectMember->branch}}</td>
-                                            <td>{{$projectMember->unit}}</td>
+                                            <td>{{($projectMember->designation) ? getDesignation($projectMember->designation)->designationName ?? '-' : '-'}}</td>
+                                            <td>{{($projectMember->department) ? getDepartment($projectMember->department)->departmentName ?? '-' : '-'}}</td>
+                                            <td>{{($projectMember->branch) ? getBranch($projectMember->branch)->branchName ?? '-' : '-'}}</td>
+                                            <td>{{($projectMember->unit) ? getUnit($projectMember->unit)->unitName ?? '-' : '-'}}</td>
                                             <td>{{$projectMember->joined_date}}</td>
                                             <td><a href="/projectAssignView/{{$projectMember->id}}">view</a></td>
                                         </tr>
@@ -100,10 +100,10 @@ table{
                                     <tr>
                                         <td width="1%"><a data-bs-toggle="modal" data-id="{{$projectMember->id}}" id="editPreviousProjectMemberButton" class="btn btn-outline-green"><i class="fa fa-pencil-alt"></i></a></td>
                                         <td>{{$projectMember->employeeName}}</td>
-                                        <td>{{$projectMember->designation}}</td>
-                                        <td>{{$projectMember->department}}</td>
-                                        <td>{{$projectMember->branch}}</td>
-                                        <td>{{$projectMember->unit}}</td>
+                                        <td>{{($projectMember->designation) ? getDesignation($projectMember->designation)->designationName ?? '-' : '-'}}</td>
+                                        <td>{{($projectMember->department) ? getDepartment($projectMember->department)->departmentName ?? '-' : '-'}}</td>
+                                        <td>{{($projectMember->branch) ? getBranch($projectMember->branch)->branchName ?? '-' : '-'}}</td>
+                                        <td>{{($projectMember->unit) ? getUnit($projectMember->unit)->unitName ?? '-' : '-'}}</td>
                                         <td>{{$projectMember->joined_date}}</td>
                                         <td>{{$projectMember->exit_project_date}}</td>
                                         <td><a href="/projectAssignView/{{$projectMember->id}}">view</a></td>

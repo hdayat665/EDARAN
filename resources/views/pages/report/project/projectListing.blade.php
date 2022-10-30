@@ -36,8 +36,8 @@
                             <td width="1%">{{$projectListing->customer_name}}</td>
                             <td width="1%">{{$projectListing->project_code}}</td>
                             <td width="1%">{{$projectListing->project_name}}</td>
-                            <td width="1%">{{$projectListing->acc_manager}}</td>
-                            <td width="1%">{{$projectListing->project_manager}}</td>
+                            <td width="1%">{{($projectListing->acc_manager) ? getEmployeeNameById($projectListing->acc_manager)->employeeName ?? '-' : '-'}}</td>
+                            <td width="1%">{{($projectListing->project_manager) ? getEmployeeNameById($projectListing->project_manager)->employeeName ?? '-' : '-'}}</td>
                             <td width="1%">{{$projectListing->contract_value}}</td>
                             <td width="1%">{{$projectListing->contract_start_date}}</td>
                             <td width="1%">{{$projectListing->contract_end_date}}</td>
