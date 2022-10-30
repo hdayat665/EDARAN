@@ -65,8 +65,8 @@
                                     <td>{{$projectInfo->contract_start_date}}</td>
                                     <td>{{$projectInfo->contract_end_date}}</td>
                                     <td>{{$projectInfo->status}}</td>
-                                    <td></td>
-                                    <td></td>
+                                    <td>{{($projectInfo->update_by) ? getEmployeeName($projectInfo->update_by) : '-'}}</td>
+                                    <td>{{($projectInfo->update_by) ? $projectInfo->updated_at : '-'}}</td>
                                 </tr>
                                 @endforeach
                                 @endif

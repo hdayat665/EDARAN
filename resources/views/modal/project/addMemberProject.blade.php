@@ -61,7 +61,7 @@
                                 <option value="" label="Select State ">Select State </option>
                                 <?php $Designations = getDesignation() ?>
                                 @foreach ($Designations as $Designation)
-                                <option value="{{$Designation->designationName}}" >{{$Designation->designationName}}</option>
+                                <option value="{{$Designation->id}}" >{{$Designation->designationName}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -71,7 +71,7 @@
                                 <option value="" label="Select State ">Select State </option>
                                 <?php $departments = getDepartment() ?>
                                 @foreach ($departments as $department)
-                                <option value="{{$department->departmentName}}" >{{$department->departmentName}}</option>
+                                <option value="{{$department->id}}" >{{$department->departmentName}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -96,11 +96,11 @@
                     <div class="row mb-15px">
 
                         <div class="col-md-6">
-                            <select class="form-select" name="branch" id="branch">
+                            <select class="form-select" name="branch" id="branchs">
                                 <option value="" label="Select State ">Select State </option>
                                 <?php $Branchs = getBranch() ?>
                                 @foreach ($Branchs as $Branch)
-                                <option value="{{$Branch->branchName}}" >{{$Branch->branchName}}</option>
+                                <option value="{{$Branch->id}}" >{{$Branch->branchName}}</option>
                                 @endforeach
                             </select>
 
@@ -111,7 +111,7 @@
                                 <option value="" label="Select State ">Select State </option>
                                 <?php $Units = getUnit() ?>
                                 @foreach ($Units as $Unit)
-                                <option value="{{$Unit->unitName}}" >{{$Unit->unitName}}</option>
+                                <option value="{{$Unit->id}}" >{{$Unit->unitName}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -138,7 +138,7 @@
 
                     </div>
 
-                    
+
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                         <button type="submit" class="btn btn-primary" id="saveProjectMember">Save</button>

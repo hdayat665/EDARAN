@@ -42,7 +42,7 @@ requirejs.config({
         'overtimeReportJs': assets + '/js/overtimeReportJs',
         'employeeReportByJs': assets + '/js/employeeReportByJs',
         'employeeReportAllJs': assets + '/js/employeeReportAllJs',
-
+        'editHRISJs': assets + '/js/editHRISJs',
 
         // 'main': 'assets/backend/js/main',
         'sweetAlert2': assets + '/assets/sweetalert2/sweetalert2',
@@ -216,6 +216,9 @@ if ($('#employeeReportAllJs').length > 0) {
     requirejs(['employeeReportAllJs']);
 }
 
+if ($('#editHRISJs').length > 0) {
+    requirejs(['editHRISJs']);
+}
 
 
 // Global function

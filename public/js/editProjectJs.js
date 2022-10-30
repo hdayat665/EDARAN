@@ -77,7 +77,7 @@ $(document).ready(function() {
                             title: data.title,
                             text: data.msg,
                             type: data.type,
-                           confirmButtonColor: '#3085d6',
+                            confirmButtonColor: '#3085d6',
                             confirmButtonText: 'OK',
                             allowOutsideClick: false,
                             allowEscapeKey: false,
@@ -140,7 +140,7 @@ $(document).ready(function() {
                             title: data.title,
                             text: data.msg,
                             type: data.type,
-                           confirmButtonColor: '#3085d6',
+                            confirmButtonColor: '#3085d6',
                             confirmButtonText: 'OK',
                             allowOutsideClick: false,
                             allowEscapeKey: false,
@@ -167,9 +167,9 @@ $(document).ready(function() {
 
     $(document).on("click", "#editProjectLocationButton", function() {
         var id = $(this).data('id');
-        var vehicleData = getProjectLocation(id);
+        var locationData = getProjectLocations(id);
 
-        vehicleData.done(function(data) {
+        locationData.done(function(data) {
             console.log(data);
             $('#location_name').val(data.location_name);
             $('#address').val(data.address);
@@ -225,7 +225,7 @@ $(document).ready(function() {
                             title: data.title,
                             text: data.msg,
                             type: data.type,
-                           confirmButtonColor: '#3085d6',
+                            confirmButtonColor: '#3085d6',
                             confirmButtonText: 'OK',
                             allowOutsideClick: false,
                             allowEscapeKey: false,
@@ -285,7 +285,7 @@ $(document).ready(function() {
         });
     });
 
-    function getProjectLocation(id) {
+    function getProjectLocations(id) {
         return $.ajax({
             url: "/getProjectLocationById/" + id
         });
@@ -326,7 +326,7 @@ $(document).ready(function() {
                             title: data.title,
                             text: data.msg,
                             type: data.type,
-                           confirmButtonColor: '#3085d6',
+                            confirmButtonColor: '#3085d6',
                             confirmButtonText: 'OK',
                             allowOutsideClick: false,
                             allowEscapeKey: false,
@@ -352,10 +352,14 @@ $(document).ready(function() {
 
         employee.done(function(data) {
             console.log(data);
-            $("#unit").prop("selectedIndex", data.unit);
-            $("#designation").prop("selectedIndex", data.unit);
-            $("#department").prop("selectedIndex", data.department);
-            $("#branch").prop("selectedIndex", data.branch);
+            // $("#unit").prop("selectedIndex", data.unit);
+            // $("#designation").prop("selectedIndex", data.designation);
+            // $("#department").prop("selectedIndex", data.department);
+            // $("#branchs").prop("selectedIndex", data.branch);
+            $("#unit").val(data.unit);
+            $("#designation").val(data.designation);
+            $("#department").val(data.department);
+            $("#branchs").val(data.branch);
         })
     })
 
@@ -437,7 +441,7 @@ $(document).ready(function() {
                             title: data.title,
                             text: data.msg,
                             type: data.type,
-                           confirmButtonColor: '#3085d6',
+                            confirmButtonColor: '#3085d6',
                             confirmButtonText: 'OK',
                             allowOutsideClick: false,
                             allowEscapeKey: false,
@@ -457,11 +461,11 @@ $(document).ready(function() {
         });
     });
 
-    function getProjectLocation(id) {
-        return $.ajax({
-            url: "/getProjectMemberById/" + id
-        });
-    }
+    // function getProjectMember(id) {
+    //     return $.ajax({
+    //         url: "/getProjectMemberById/" + id
+    //     });
+    // }
 
     $(document).on("click", "#assignProjectMemberButton", function() {
         $('#assignProjectMemberModal').modal('show');
@@ -492,7 +496,7 @@ $(document).ready(function() {
                             title: data.title,
                             text: data.msg,
                             type: data.type,
-                           confirmButtonColor: '#3085d6',
+                            confirmButtonColor: '#3085d6',
                             confirmButtonText: 'OK',
                             allowOutsideClick: false,
                             allowEscapeKey: false,
@@ -514,7 +518,7 @@ $(document).ready(function() {
 
     $(document).on("click", "#viewAssignMemberPrevLoc", function() {
         var id = $(this).data('id');
-        var vehicleData = getProjectLocation(id);
+        var vehicleData = getProjectMember(id);
 
         vehicleData.done(function(data) {
             console.log(data);
@@ -656,7 +660,7 @@ $(document).ready(function() {
                             title: data.title,
                             text: data.msg,
                             type: data.type,
-                           confirmButtonColor: '#3085d6',
+                            confirmButtonColor: '#3085d6',
                             confirmButtonText: 'OK',
                             allowOutsideClick: false,
                             allowEscapeKey: false,
@@ -711,7 +715,7 @@ $(document).ready(function() {
                             title: data.title,
                             text: data.msg,
                             type: data.type,
-                           confirmButtonColor: '#3085d6',
+                            confirmButtonColor: '#3085d6',
                             confirmButtonText: 'OK',
                             allowOutsideClick: false,
                             allowEscapeKey: false,
@@ -754,7 +758,7 @@ $(document).ready(function() {
                     title: data.title,
                     text: data.msg,
                     type: data.type,
-                     confirmButtonColor: '#3085d6',
+                    confirmButtonColor: '#3085d6',
                     confirmButtonText: 'OK',
                     allowOutsideClick: false,
                     allowEscapeKey: false,

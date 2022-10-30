@@ -7,6 +7,7 @@ use App\Models\Attachments;
 use App\Models\Employee;
 use App\Models\JobHistory;
 use App\Models\Customer;
+use App\Models\PreviousProjectManager;
 use App\Models\Project;
 use App\Models\ProjectLocation;
 use App\Models\ProjectMember;
@@ -99,6 +100,30 @@ class ProjectService
     public function updateProject($r, $id)
     {
         $input = $r->input();
+        $input['update_by'] = Auth::user()->id;
+
+        $projectManager = Project::where([['id', $id], ['project_manager', '!=', $input['project_manager']]])->first();
+
+        if ($projectManager) {
+            $previousManager['project_id'] = $id;
+            $previousManager['user_id'] = $projectManager->project_manager;
+            $previousManager['tenant_id'] = Auth::user()->tenant_id;
+            $previousManager['join_date'] = $input['contract_start_date'];
+            $previousManager['exit_date'] = now();
+            // pr($previousManager);
+            PreviousProjectManager::create($previousManager);
+        }
+
+        $project = Project::where([['id','!=', $id], ['project_code', $input['project_code']]])->first();
+
+        if ($project) {
+            $data['status'] = config('app.response.error.status');
+            $data['type'] = config('app.response.error.type');
+            $data['title'] = config('app.response.error.title');
+            $data['msg'] = 'Error update Project. Cannot use same project code';
+
+            return $data;
+        }
 
         Project::where('id', $id)->update($input);
 
@@ -114,6 +139,16 @@ class ProjectService
     {
         $input = $r->input();
 
+        $projectLocation = ProjectLocation::where('location_name', $input['location_name'])->first();
+
+        if ($projectLocation) {
+            $data['status'] = config('app.response.error.status');
+            $data['type'] = config('app.response.error.type');
+            $data['title'] = config('app.response.error.title');
+            $data['msg'] = 'Error create Project Location. Project location name duplicate';
+
+            return $data;
+        }
         ProjectLocation::create($input);
 
         $data['status'] = config('app.response.success.status');
@@ -557,5 +592,20 @@ class ProjectService
 
         return $data;
 
+    }
+
+    public function getPreviousManager($projectId = '')
+    {
+        $data = DB::table('previous_project_manager as a')
+        ->leftJoin('employment as b', 'a.user_id', '=', 'b.id')
+        ->select('b.*', 'a.join_date', 'a.exit_date')
+        ->where([['a.project_id', $projectId], ['a.tenant_id', Auth::user()->tenant_id]])
+        ->get();
+
+        if (!$data) {
+            $data = [];
+        }
+
+        return $data;
     }
 }
