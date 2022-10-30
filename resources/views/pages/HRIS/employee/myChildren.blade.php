@@ -2,7 +2,7 @@
     <button type="button"  data-bs-toggle="modal" id="childModalAdd" data-type="add" class="btn btn-white mt-3 mb-3"><i class="fa fa-plus"></i> New children</button>
     <table id="tableChildren" style="width: 100%" class="table table-striped align-middle">
         <thead>
-            <th width="1%"></th>
+            <th width="1%">No</th>
             <th width="1%" data-orderable="false">Action</th>
             <th class="text-nowrap">Name</th>
             <th class="text-nowrap">ID/Passport Number</th>
@@ -12,9 +12,12 @@
             <th class="text-nowrap">Marital Status</th>
         </thead>
         <tbody>
+        <?php $id = 0 ?>
+            
             @foreach ($childrens as $children)
+            <?php $id++ ?>
                 <tr>
-                    <td width="1%" class="fw-bold text-dark">1</td>
+                    <td width="1%" class="fw-bold text-dark">{{$id}}</td>
                     <td>
                         <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle"><i class="fa fa-cogs"></i> Actions <i class="fa fa-caret-down"></i></a>
                         <div class="dropdown-menu">
@@ -26,12 +29,12 @@
                         </div>
                     </td>
 
-                    <td>{{ $children->fullName }}</td>
-                    <td>{{ $children->idNo }}</td>
-                    <td>{{ $children->age }}</td>
-                    <td>{{ $children->educationLevel }}</td>
-                    <td>{{ $children->instituition }}</td>
-                    <td>{{ $children->maritalStatus }}</td>
+                   <td>{{ $children->fullName }}</td>
+                <td>{{ $children->idNo }}</td>
+                <td>{{ $children->age }}</td>
+                <td>{{ ($children->educationLevel == "0") ? '-' : educationLevel($children->educationLevel) }}</td>
+                <td>{{ $children->instituition }}</td>
+                <td>{{ ($children->maritalStatus == "0") ? '-' : getMaritalStatus($children->maritalStatus) }}</td>
                 </tr>
             @endforeach
             <span style="display: none"><input type="text" id="childId" value="{{$childId}}"></span>

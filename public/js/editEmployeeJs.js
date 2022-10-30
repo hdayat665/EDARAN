@@ -404,7 +404,11 @@ $(document).ready(function() {
     }
 
     $("#tableChildren").DataTable({
-        responsive: true,
+        responsive: false,
+        lengthMenu: [
+            [5,10, 15, 20, -1],
+            [5,10, 15, 20, 'All'],
+        ],
     });
 
     $('#childModalAdd').click(function(e) {
@@ -607,7 +611,11 @@ $(document).ready(function() {
     }
 
     $("#tableSibling").DataTable({
-        responsive: true,
+        responsive: false,
+        lengthMenu: [
+            [5,10, 15, 20, -1],
+            [5,10, 15, 20, 'All'],
+        ],
     });
 
     $('#siblingModalAdd').click(function(e) {
@@ -816,7 +824,13 @@ $(document).ready(function() {
     }
 
     $("#tableParent").DataTable({
-        responsive: true,
+        responsive: false,
+        lengthMenu: [
+            [5,10, 15, 20, -1],
+            [5,10, 15, 20, 'All'],
+        ],
+
+
     });
 
     $('#parentModalAdd').click(function(e) {

@@ -46,11 +46,11 @@
                             <div class="row">
                                 <div class="col-sm-6">
                                     <label for="dob" class="form-label">Date of Birth</label>
-                                    <input type="text" id="DOBChild" name="DOB" class="form-control" aria-describedby="dob" disabled>
+                                    <input type="text" id="DOBChild" name="DOB" class="form-control" aria-describedby="dob" readonly>
                                 </div>
                                 <div class="col-sm-6">
                                     <label for="age" class="form-label">Age</label>
-                                    <input type="number" id="ageChild" name="age" class="form-control" aria-describedby="age" disabled>
+                                    <input type="number" id="ageChild" name="age" class="form-control" aria-describedby="age" readonly>
                                 </div>
                             </div>
                         </div>
@@ -115,7 +115,7 @@
                     <h4 class="mt-3 p-2">Education Information</h4>
                     <div class="row p-2">
                         <div class="col-sm-6">
-                            <label for="education-type" class="form-label">Education Type*</label>
+                            <label for="education-type" class="form-label">Education Type</label>
                             <select class="form-select" name="educationType" id="" style="text-transform:uppercase">
                                 <option value="" label="Please Choose "></option>
                                 @foreach ($educationType as $key => $status)
@@ -124,7 +124,7 @@
                             </select>
                         </div>
                         <div class="col-sm-6">
-                            <label for="education-level" class="form-label">Education Level*</label>
+                            <label for="education-level" class="form-label">Education Level</label>
                             <select class="form-select" name="educationLevel" id="" style="text-transform:uppercase">
                                 <option value="" label="Please Choose "></option>
                                 @foreach ($educationLevel as $key => $status)
@@ -210,7 +210,7 @@
                                 </div>
                                 <div class="col-sm-6">
                                     <label for="age" class="form-label">Age</label>
-                                    <input type="number" id="age1" name="age" class="form-control" aria-describedby="age">
+                                    <input type="number" id="age1" name="age" value="{{$children->age ?? ''}}" class="form-control" aria-describedby="age">
                                 </div>
                             </div>
                         </div>
@@ -271,7 +271,7 @@
                     <h4 class="mt-3 p-2">Education Information</h4>
                     <div class="row p-2">
                         <div class="col-sm-6">
-                            <label for="education-type" class="form-label">Education Type*</label>
+                            <label for="education-type" class="form-label">Education Type</label>
                             <select class="form-select" name="educationType" id="educationType1">
                                 <option value="0" label="Please Choose "></option>
                                 @foreach ($educationType as $key => $status)
@@ -280,7 +280,7 @@
                             </select>
                         </div>
                         <div class="col-sm-6">
-                            <label for="education-level" class="form-label">Education Level*</label>
+                            <label for="education-level" class="form-label">Education Level</label>
                             <select class="form-select" name="educationLevel" id="educationLevel1">
                                 <option value="0" label="Please Choose "></option>
                                 @foreach ($educationLevel as $key => $status)

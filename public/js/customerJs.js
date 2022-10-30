@@ -6,7 +6,11 @@ $(document).ready(function() {
     });
 
     $("#customerTable").DataTable({
-        responsive: true,
+        responsive: false,
+        lengthMenu: [
+            [5,10, 15, 20, -1],
+            [5,10, 15, 20, 'All'],
+        ],
     });
 
     $(document).on("click", "#addButton", function() {
@@ -59,12 +63,15 @@ $(document).ready(function() {
                 allowEscapeKey: false
             }).then(function() {
                 $.ajax({
-                    type: "DELETE",
+                    type: "POST",
                     url: "/deleteCustomer/" + id,
-                    dataType: "json",
-                    async: false,
-                    processData: false,
-                    contentType: false,
+                    // dataType: "json",
+                    data: { _method: "DELETE" },
+                    // async: false,
+                    // processData: false,
+                    // contentType: false,
+                    
+
                 }).done(function(data) {
                     swal({
                         title: data.title,

@@ -158,7 +158,7 @@
                             </div>
                             <div class="col-sm-6">
                                 <label for="issuing-country" class="form-label">Marital Status</label>
-                                <select class="form-select" name="maritialStatus" id="maritialStatus" style="text-transform:uppercase">
+                                <select class="form-select" name="maritialStatus" id="maritialStatus" >
                                     <?php $MaritalStatus = getMaritalStatus() ?>
                                     <option value="" label="Please Choose"></option>
                                     @foreach ($MaritalStatus as $key => $status)

@@ -189,29 +189,37 @@
                         </div>
                         <div class="row p-2">
                             <div class="col-sm-6">
+                                <label for="company-name" class="form-label">Designation</label>
+                                <input type="text" id="designationmc" readonly name=""  class="form-control"  style="text-transform:uppercase">
+                            </div>
+                            <div class="col-sm-6">
                                 <label for="company-name" class="form-label">Company Name</label>
                                 <input type="text" id="companyNamemc" readonly name="companyName" value="{{ $companion->companyName ?? '' }}" class="form-control" aria-describedby="company-name" style="text-transform:uppercase">
                             </div>
+                            
+                        </div>
+                        <div class="row p-2">
                             <div class="col-sm-6">
                                 <label for="date-joined-company" class="form-label">Date Joined Company</label>
                                 <input type="text" readonly  id="dateJoinedmc" name="dateJoined" value="{{ $companion->dateJoined ?? '' }}" class="form-control" aria-describedby="date-joined-company" >
                             </div>
-                        </div>
-                        <div class="row p-2">
                             <div class="col-sm-6">
                                 <label for="income-tax-number" class="form-label">Income Tax Number*</label>
                                 <input type="text" readonly id="income-tax-number" name="incomeTax" value="{{ $companion->incomeTax ?? '' }}" class="form-control" aria-describedby="income-tax-number">
                             </div>
-                            <div class="col-sm-6">
-                                <label for="extension-number" class="form-label">Payslip</label>
-                                <input type="file" readonly id="payslipmc" name="payslip" value="{{ $companion->payslip ?? '' }}" class="form-control" aria-describedby="extension-number">
-                            </div>
+                            
                         </div>
                         <div class="row p-2">
+                            <div class="col-sm-6">
+                                <label for="extension-number" class="form-label">Monthly Salary</label>
+                                <input type="text" readonly id="payslipmc" name="payslip"  class="form-control" >
+                            
+                            </div>
                             <div class="col-sm-6">
                                 <label for="income-tax-number" class="form-label">Office Number</label>
                                 <input type="text" readonly id="officeNomc" name="officeNo" value="{{ $companion->officeNo ?? '' }}" class="form-control" aria-describedby="income-tax-number">
                             </div>
+
                         </div>
                         <div class="row p-2">
                             <div class="col-sm-6">
