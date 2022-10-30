@@ -6,7 +6,7 @@ $(document).ready(function() {
     });
 
     $("#projectTable").DataTable({
-        responsive: true,
+        responsive: false,
     });
 
     $("#data-table-default2").DataTable({
@@ -18,6 +18,8 @@ $(document).ready(function() {
         $('#addModal').modal('show');
 
     });
+
+    
 
     $(document).on("click", "#editButton", function() {
         var id = $(this).data('id');
@@ -76,9 +78,7 @@ $(document).ready(function() {
                         text: data.msg,
                         type: data.type,
                         confirmButtonColor: '#3085d6',
-                        confirmButtonText: 'OK',
-                        allowOutsideClick: false,
-                        allowEscapeKey: false
+                        confirmButtonText: 'OK'
                     }).then(function() {
                         if (data.type == 'error') {
 
@@ -144,10 +144,8 @@ $(document).ready(function() {
                             title: data.title,
                             text: data.msg,
                             type: data.type,
-                           confirmButtonColor: '#3085d6',
-                            confirmButtonText: 'OK',
-                            allowOutsideClick: false,
-                            allowEscapeKey: false,
+                            confirmButtonColor: '#3085d6',
+                            confirmButtonText: 'OK'
                         }).then(function() {
                             if (data.type == 'error') {
 
@@ -199,10 +197,8 @@ $(document).ready(function() {
                             title: data.title,
                             text: data.msg,
                             type: data.type,
-                           confirmButtonColor: '#3085d6',
-                            confirmButtonText: 'OK',
-                            allowOutsideClick: false,
-                            allowEscapeKey: false,
+                            confirmButtonColor: '#3085d6',
+                            confirmButtonText: 'OK'
                         }).then(function() {
                             if (data.type == 'error') {
 
@@ -242,10 +238,8 @@ $(document).ready(function() {
                     title: data.title,
                     text: data.msg,
                     type: data.type,
-                     confirmButtonColor: '#3085d6',
-                    confirmButtonText: 'OK',
-                    allowOutsideClick: false,
-                    allowEscapeKey: false,
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'OK'
                 }).then(function() {
                     if (data.type == 'error') {
 
@@ -287,9 +281,7 @@ $(document).ready(function() {
                         text: data.msg,
                         type: data.type,
                         confirmButtonColor: '#3085d6',
-                        confirmButtonText: 'OK',
-                        allowOutsideClick: false,
-                        allowEscapeKey: false
+                        confirmButtonText: 'OK'
                     }).then(function() {
                         if (data.type == 'error') {
 
@@ -327,9 +319,7 @@ $(document).ready(function() {
                         text: data.msg,
                         type: data.type,
                         confirmButtonColor: '#3085d6',
-                        confirmButtonText: 'OK',
-                        allowOutsideClick: false,
-                        allowEscapeKey: false
+                        confirmButtonText: 'OK'
                     }).then(function() {
                         if (data.type == 'error') {
 
