@@ -97,7 +97,7 @@
 
                         <div class="col-md-6">
                             <select class="form-select" name="branch" id="branchs">
-                                <option value="" label="Select State ">Select State </option>
+                                <option value="" label="PLEASE CHOOSE ">SELECT BRANCH </option>
                                 <?php $Branchs = getBranch() ?>
                                 @foreach ($Branchs as $Branch)
                                 <option value="{{$Branch->id}}" >{{$Branch->branchName}}</option>
@@ -125,7 +125,7 @@
 
                     <div class="row mb-15px">
                         <div class="col-md-12">
-                            <select class=class="default-select2 form-control" name="location[]" id="location-search" multiple >
+                            <select class="default-select2 form-control" name="location[]" id="location-search" multiple >
                             
                                 <?php $locations = projectLocation() ?>
                                 @foreach ($locations as $location)

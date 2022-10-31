@@ -72,10 +72,7 @@ table{
                             </tbody>
                         </table>
                     </div>
-                    <div class="modal-footer">
-                        <!-- <a class="btn btn-white btnPrevious">Back</a> -->
-                        <a class="btn btn-primary btnNext">Next</a>
-                    </div>
+                    
                 </div>
                 <div class="tab-pane fade" id="previous-member">
                     <br>
@@ -113,16 +110,12 @@ table{
                             </tbody>
                         </table>
                     </div>
-                    <div class="modal-footer">
-                        <a href="javascript:;" class="btn btn-white btnPrevious">Back</a>
-                        <!-- <a href="javascript:;" class="btn btn-primary btnNext">Next</a> -->
-
-                    </div>
+                    
                     </div>
                     <div class="modal-footer">
                         <a href="javascript:;" id="back_location" class="btn btn-white btnPrevious">Back</a>
-                        {{-- <a href="javascript:;" class="btn btn-primary btnNext">Save</a> --}}
-                        <button id="submitMember" class="btn btn-primary btnNext">Save</button>
+                        <!-- {{-- <a href="javascript:;" class="btn btn-primary btnNext">Save</a> --}} -->
+                        <!-- <button id="submitMember" class="btn btn-primary btnNext">vhh</button> -->
 
                     </div>
                 </div>
