@@ -72,10 +72,7 @@ table{
                             </tbody>
                         </table>
                     </div>
-                    <div class="modal-footer">
-                        <a class="btn btn-white btnPrevious">Back</a>
-                        <a class="btn btn-primary btnNext">Next</a>
-                    </div>
+                    
                 </div>
                 <div class="tab-pane fade" id="previous-member">
                     <br>
@@ -113,12 +110,14 @@ table{
                             </tbody>
                         </table>
                     </div>
+                    
+                    </div>
                     <div class="modal-footer">
-                        <a class="btn btn-white btnPrevious">Back</a>
-                        <a class="btn btn-primary btnNext">Next</a>
+                        <a href="javascript:;" id="back_location" class="btn btn-white btnPrevious">Back</a>
+                        <!-- {{-- <a href="javascript:;" class="btn btn-primary btnNext">Save</a> --}} -->
+                        <!-- <button id="submitMember" class="btn btn-primary btnNext">vhh</button> -->
 
                     </div>
-
                 </div>
 
             </div>
@@ -126,6 +125,7 @@ table{
         </div>
 
     </div>
+    
 </div>
 
 @include('modal.project.addMemberProject')

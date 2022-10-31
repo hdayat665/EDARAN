@@ -10,7 +10,7 @@
 
                     <div class="row">
                         <div class="col-md-6">
-                            <label class="form-label col-form-label col-md-4">Joined Date*</label>
+                            <label class="form-label col-form-label col-md-4">Joined Date</label>
                         </div>
 
 
@@ -24,15 +24,15 @@
                     <div class="row mb-15px">
 
                         <div class="col-md-6">
-                            <input type="hidden" value="{{$project->id}}" name="project_id">
+                            <input type="hidden" value="{{$project->id}}" name="project_id" style="text-transform: upppercase;">
                             <input type="hidden" value="{{$project->tenant_id}}" name="tenant_id">
                             <input type="text" class="form-control" name="joined_date" id="datepicker-joineddate" placeholder="dd/mm/yyyy" />
 
                         </div>
 
                         <div class="col-md-6">
-                            <select class="selectpicker form-control" id="employee_id" name="employee_id">
-                                <option >Please Select..</option>
+                            <select class="selectpicker form-control" id="employee_id" name="employee_id" style="text-transform: upppercase;">
+                                <option value="" label="PLEASE CHOOSE">PLEASE CHOOSE</option>
                               @foreach ($employeeInfos as $employee)
                                 <option value="{{$employee->id}}">{{$employee->employeeName}}</option>
                               @endforeach
@@ -44,12 +44,12 @@
 
                     <div class="row">
                         <div class="col-md-6">
-                            <label class="form-label col-form-label col-md-4">Designation*</label>
+                            <label class="form-label col-form-label col-md-4">Designation</label>
                         </div>
 
 
                         <div class="col-md-6">
-                            <label class="form-label col-form-label col-md-4">Department*</label>
+                            <label class="form-label col-form-label col-md-4">Department</label>
                         </div>
 
 
@@ -57,8 +57,8 @@
                     <div class="row mb-15px">
 
                         <div class="col-md-6">
-                            <select class="form-select" name="designation" id="designation">
-                                <option value="" label="Select State ">Select State </option>
+                            <select class="form-select" name="designation" id="designation" style="text-transform: upppercase;">
+                                <option value="" label="PLEASE CHOOSE">SELECT DESIGNATION</option>
                                 <?php $Designations = getDesignation() ?>
                                 @foreach ($Designations as $Designation)
                                 <option value="{{$Designation->id}}" >{{$Designation->designationName}}</option>
@@ -67,8 +67,8 @@
                         </div>
 
                         <div class="col-md-6">
-                            <select class="form-select" id="department" name="department">
-                                <option value="" label="Select State ">Select State </option>
+                            <select class="form-select" id="department" name="department" style="text-transform: upppercase;">
+                                <option value="" label="PLEASE CHOOSE">SELECT DEPARTMENT</option>
                                 <?php $departments = getDepartment() ?>
                                 @foreach ($departments as $department)
                                 <option value="{{$department->id}}" >{{$department->departmentName}}</option>
@@ -97,7 +97,7 @@
 
                         <div class="col-md-6">
                             <select class="form-select" name="branch" id="branchs">
-                                <option value="" label="Select State ">Select State </option>
+                                <option value="" label="PLEASE CHOOSE ">SELECT BRANCH </option>
                                 <?php $Branchs = getBranch() ?>
                                 @foreach ($Branchs as $Branch)
                                 <option value="{{$Branch->id}}" >{{$Branch->branchName}}</option>
@@ -107,8 +107,8 @@
                         </div>
 
                         <div class="col-md-6">
-                            <select class="form-select" name="unit" id="unit">
-                                <option value="" label="Select State ">Select State </option>
+                            <select class="form-select" name="unit" id="unit" style="text-transform: upppercase;">
+                                <option value="" label="PLEASE CHOOSE">SELECT UNIT</option>
                                 <?php $Units = getUnit() ?>
                                 @foreach ($Units as $Unit)
                                 <option value="{{$Unit->id}}" >{{$Unit->unitName}}</option>
@@ -125,8 +125,8 @@
 
                     <div class="row mb-15px">
                         <div class="col-md-12">
-                            <select class="selectpicker form-control" name="location[]" id="location-search" multiple >
-                                <option value="" label="Select State ">Select Location </option>
+                            <select class="default-select2 form-control" name="location[]" id="location-search" multiple >
+                            
                                 <?php $locations = projectLocation() ?>
                                 @foreach ($locations as $location)
                                 <option value="{{$location->id}}" >{{$location->location_name}}</option>
