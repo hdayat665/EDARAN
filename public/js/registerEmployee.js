@@ -1,5 +1,12 @@
 $(document).ready(function() {
 
+    $("input[type=text]").keyup(function() {
+        $(this).val($(this).val().toUpperCase());
+    });
+    $("option[type=text]").keyup(function () {  
+        $(this).val($(this).val().toUpperCase());  
+    });
+
     $("#datepicker-autoClose").datepicker({
         todayHighlight: true,
         autoclose: true,
@@ -17,9 +24,6 @@ $(document).ready(function() {
         autoclose: true,
     });
 
-    $("input[type=text]").keyup(function() {
-        $(this).val($(this).val().toUpperCase());
-    });
 
     $("#firstName,#lastName").change(function() {
 
