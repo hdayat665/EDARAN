@@ -19,7 +19,7 @@ $(document).ready(function() {
 
     });
 
-    
+
 
     $(document).on("click", "#editButton", function() {
         var id = $(this).data('id');
@@ -94,6 +94,12 @@ $(document).ready(function() {
     function getData(id) {
         return $.ajax({
             url: "/getCustomerById/" + id
+        });
+    }
+
+    function getProject(id) {
+        return $.ajax({
+            url: "/getProjectById/" + id
         });
     }
 
@@ -295,8 +301,27 @@ $(document).ready(function() {
         });
     });
 
+    $(document).on("click", "#rejectViewButton", function() {
+        var id = $(this).data('id');
+        var projectData = getProject(id);
+
+        projectData.done(function(data) {
+            console.log(data);
+            $('#idReject').val(data.id);
+            $('#employeeIdR').val(data.employeeId);
+            $('#employeeNameR').val(data.employeeName);
+            $('#workingEmailR').val(data.workingEmail);
+            $('#departmentR').val(data.departmentName);
+            $('#customerNameR').val(data.customer_name);
+            $('#projectCodeR').val(data.project_code);
+            $('#projectNameR').val(data.project_name);
+        })
+        $('#rejectProjectApproval').modal('show');
+
+    });
+
     $(document).on("click", "#rejectButton", function() {
-        id = $(this).data('id');
+        id = $('#idReject').val();
         requirejs(['sweetAlert2'], function(swal) {
             swal({
                 title: "Are you sure!",
@@ -307,10 +332,13 @@ $(document).ready(function() {
                 allowOutsideClick: false,
                 allowEscapeKey: false
             }).then(function() {
+                var data = new FormData(document.getElementById("rejectForm"));
+
                 $.ajax({
                     type: "POST",
                     url: "/rejectProjectMember/" + id,
                     dataType: "json",
+                    data: data,
                     async: false,
                     processData: false,
                     contentType: false,

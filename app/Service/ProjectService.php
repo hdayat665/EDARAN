@@ -384,18 +384,22 @@ class ProjectService
         return $data;
     }
 
-    public function projectApprovalData()
+    public function projectApprovalData($id = '')
     {
         $tenant_id = Auth::user()->tenant_id;
         $cond[1] = ['a.tenant_id', '=', $tenant_id];
         $cond[2] = ['a.status', '=', 'pending'];
+
+        if ($id) {
+            $cond[3] = ['a.id', $id];
+        }
 
         $data = DB::table('project_member as a')
             ->leftJoin('project as b', 'a.project_id', '=', 'b.id')
             ->leftJoin('customer as d', 'b.customer_id', '=', 'd.id')
             ->leftJoin('employment as e', 'a.employee_id', '=', 'e.id')
             ->leftJoin('department as c', 'e.department', '=', 'c.id')
-            ->select('a.*', 'b.project_name', 'b.project_code', 'd.customer_name', 'c.departmentName', 'e.employeeName')
+            ->select('a.*', 'b.project_name', 'b.project_code', 'd.customer_name', 'c.departmentName', 'e.employeeName', 'e.employeeId', 'e.workingEmail')
             ->where($cond)
             ->get();
 
@@ -411,6 +415,9 @@ class ProjectService
     {
         $input = $r->input();
         $input['status'] = $status;
+        if ($status != 'reject') {
+            unset($input['reason']);
+        }
 
         ProjectMember::where('id', $id)->update($input);
 
