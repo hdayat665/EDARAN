@@ -1,13 +1,46 @@
 <!DOCTYPE html>
 <html lang="en" >
 <style>
-  #chart-wrapper {
+  /* #chart-wrapper {
 	display: flex;
     position: relative;
     width: 50%;
 	margin: 0 auto;
 	align-items: center;
-  }
+  } */
+
+  #chart_div .google-visualization-orgchart-linebottom {
+  border-bottom: 4px solid magenta;
+}
+
+#chart_div .google-visualization-orgchart-lineleft {
+  border-left: 4px solid magenta;
+}
+
+#chart_div .google-visualization-orgchart-lineright {
+  border-right: 4px solid magenta;
+}
+
+#chart_div .google-visualization-orgchart-linetop {
+  border-top: 4px solid magenta;
+} 
+
+#chart_div {
+    font-weight: bold;
+    /* font-size: 14; */
+    color: black;
+}
+
+/* #size_chart {
+    size: 'large';
+} */
+
+.google-visualization-orgchart-table tr td.google-visualization-orgchart-node div {  } */
+
+/* /* #chart_div .google-visualization-orgchart-table{
+ size: 100px
+} */
+
 </style>
 <head>
     <meta charset="utf-8" />
@@ -422,14 +455,14 @@
                                         <div class="menu-text text-gray">Organization Chart</div>
                                     </a>
                                 </div>
-                                <div class="menu-item">
+                                {{-- <div class="menu-item">
                                     <a href="/departmentTree" class="menu-link">
                                     <div class="menu-icon">
 								        <i class="fa fa-folder-tree text-gray"></i>
 							        </div>
                                         <div class="menu-text text-gray">Department Tree</div>
                                     </a>
-                                </div>
+                                </div> --}}
                             </div>
 
                     </div>
