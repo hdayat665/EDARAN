@@ -129,17 +129,18 @@
                                 </div>
                             </div>
                             @if ($employment->supervisor == 'on')
-                            <div class="col-sm-6" id="reportto">
+                            <div class="col-sm-6" id="reportto"> 
                                 @else
                                 <div class="col-sm-6" style="display: none;" id="reportto">
                                     @endif
                                     <label for="employee-id" class="form-label">Report To</label>
                                     <select class="form-select" name="report_to" id="reportto">
-                                        <?php $EmploymentTypes = getEmploymentType() ?>
+                                        <?php $employees = getEmployee(); ?>
                                         <option value="0" label="Please Choose "></option>
-                                        @foreach ($EmploymentTypes as $EmploymentType)
-                                        <option value="{{$EmploymentType->id}}" label="{{$EmploymentType->type}}" {{ ($employment->employmentType == $EmploymentType->id) ? "selected='selected'" : '' }}></option>
-
+                                        @foreach ($employees as $employee)
+                                        <option value="{{$employee->id}}" label="{{$employee->employeeName}}" {{ ($employment->report_to == $employee->id) ? "selected='selected'" : '' }}></option>
+                                        
+                                        
                                         <!-- <input type="text" id="passportmyprofile" name="passport" value="{{ $profile->passport ?? '' }}" class="form-control" aria-describedby="passport" > -->
 
                                         @endforeach
