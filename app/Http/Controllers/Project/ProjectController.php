@@ -22,6 +22,21 @@ class ProjectController extends Controller
         return view('pages.project.projectInfo', $data);
     }
 
+    public function getProjectById($id = '')
+    {
+        $data = [];
+
+        $ps = new ProjectService;
+
+        $data = $ps->projectApprovalData($id);
+
+        if ($data) {
+            $data = $data[0];
+        }
+
+        return response()->json($data);
+    }
+
     public function createProject(Request $r)
     {
         $ps = new ProjectService;
