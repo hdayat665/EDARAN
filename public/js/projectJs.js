@@ -163,6 +163,7 @@ $(document).ready(function() {
     });
 
     $('#updateButton').click(function(e) {
+        
         $("#editForm").validate({
             rules: {
                 customer_name: "required",
@@ -181,7 +182,7 @@ $(document).ready(function() {
                 requirejs(['sweetAlert2'], function(swal) {
 
                     var data = new FormData(document.getElementById("editForm"));
-                    // console.log(data);
+                    //console.log(data);
                     var id = $('#idC').val();
 
                     $.ajax({

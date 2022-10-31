@@ -110,10 +110,10 @@ $(document).ready(function() {
             },
 
             messages: {
-                customer_name: "",
-                address: "",
-                phoneNo: "",
-                email: ""
+                customer_name: "requured",
+                address: "required",
+                phoneNo: "required",
+                email: "required"
             },
             submitHandler: function(form) {
                 requirejs(['sweetAlert2'], function(swal) {
@@ -153,8 +153,8 @@ $(document).ready(function() {
             },
         });
     });
-
     $('#updateButton').click(function(e) {
+    
         $("#editForm").validate({
             rules: {
                 customer_name: "required",
@@ -164,11 +164,12 @@ $(document).ready(function() {
             },
 
             messages: {
-                customer_name: "",
-                address: "",
-                phoneNo: "",
-                email: ""
+                customer_name: "requured",
+                address: "required",
+                phoneNo: "required",
+                email: "required"
             },
+            
             submitHandler: function(form) {
                 requirejs(['sweetAlert2'], function(swal) {
 
@@ -184,6 +185,7 @@ $(document).ready(function() {
                         async: false,
                         processData: false,
                         contentType: false,
+                       
                     }).done(function(data) {
                         swal({
                             title: data.title,
