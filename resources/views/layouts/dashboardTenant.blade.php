@@ -661,8 +661,8 @@
         <script src="/assets/plugins/simple-calendar/dist/jquery.simple-calendar.min.js"></script>
         <script src="/assets/plugins/gritter/js/jquery.gritter.js"></script>
         <script src="/assets/js/demo/dashboard-v2.js"></script>
-    <script src="/assets/plugins/moment/min/moment.min.js"></script>
-    <script src="/assets/plugins/@fullcalendar/core/main.global.js"></script>
+        <script src="/assets/plugins/moment/min/moment.min.js"></script>
+        <script src="/assets/plugins/@fullcalendar/core/main.global.js"></script>
         <script src="/assets/plugins/@fullcalendar/daygrid/main.global.js"></script>
         <script src="/assets/plugins/@fullcalendar/timegrid/main.global.js"></script>
         <script src="/assets/plugins/@fullcalendar/interaction/main.global.js"></script>
