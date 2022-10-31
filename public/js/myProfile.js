@@ -4,7 +4,23 @@ $(document).ready(function() {
         var b = $("#lastname").val();
         $("#fullName").val(a+ ' '+b);
     });
-
+    
+    $("#tableSibling").DataTable({
+        
+        responsive: true,
+        scrollY: false,
+        scrollX: true,
+        scrollCollapse: true,
+        scroller: true,
+        paging: true,
+        lengthMenu: [
+            [5,10, 15, 20, -1],
+            [5,10, 15, 20, 'All'],
+            
+        ],
+        
+    });
+    
     $("#gender").css({"pointer-events": "none", "touch-action": "none", "background": "#e9ecef"});
 
     $('#passportmyprofile').change(function(){
@@ -1118,13 +1134,7 @@ $(document).ready(function() {
 
     }
 
-    $("#tableSibling").DataTable({
-        responsive: false,
-        lengthMenu: [
-            [5,10, 15, 20, -1],
-            [5,10, 15, 20, 'All'],
-        ],
-    });
+    
 
     $('#siblingModalAdd').click(function(e) {
         $('input').prop('disabled', false);
