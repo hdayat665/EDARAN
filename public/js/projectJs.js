@@ -6,7 +6,7 @@ $(document).ready(function() {
     });
 
     $("#projectTable").DataTable({
-        responsive: true,
+        responsive: false,
     });
 
     $("#data-table-default2").DataTable({
@@ -18,6 +18,8 @@ $(document).ready(function() {
         $('#addModal').modal('show');
 
     });
+
+
 
     $(document).on("click", "#editButton", function() {
         var id = $(this).data('id');
@@ -76,9 +78,7 @@ $(document).ready(function() {
                         text: data.msg,
                         type: data.type,
                         confirmButtonColor: '#3085d6',
-                        confirmButtonText: 'OK',
-                        allowOutsideClick: false,
-                        allowEscapeKey: false
+                        confirmButtonText: 'OK'
                     }).then(function() {
                         if (data.type == 'error') {
 
@@ -94,6 +94,12 @@ $(document).ready(function() {
     function getData(id) {
         return $.ajax({
             url: "/getCustomerById/" + id
+        });
+    }
+
+    function getProject(id) {
+        return $.ajax({
+            url: "/getProjectById/" + id
         });
     }
 
@@ -144,10 +150,8 @@ $(document).ready(function() {
                             title: data.title,
                             text: data.msg,
                             type: data.type,
-                           confirmButtonColor: '#3085d6',
-                            confirmButtonText: 'OK',
-                            allowOutsideClick: false,
-                            allowEscapeKey: false,
+                            confirmButtonColor: '#3085d6',
+                            confirmButtonText: 'OK'
                         }).then(function() {
                             if (data.type == 'error') {
 
@@ -165,6 +169,7 @@ $(document).ready(function() {
     });
 
     $('#updateButton').click(function(e) {
+        
         $("#editForm").validate({
             rules: {
                 customer_name: "required",
@@ -183,7 +188,7 @@ $(document).ready(function() {
                 requirejs(['sweetAlert2'], function(swal) {
 
                     var data = new FormData(document.getElementById("editForm"));
-                    // console.log(data);
+                    //console.log(data);
                     var id = $('#idC').val();
 
                     $.ajax({
@@ -199,10 +204,8 @@ $(document).ready(function() {
                             title: data.title,
                             text: data.msg,
                             type: data.type,
-                           confirmButtonColor: '#3085d6',
-                            confirmButtonText: 'OK',
-                            allowOutsideClick: false,
-                            allowEscapeKey: false,
+                            confirmButtonColor: '#3085d6',
+                            confirmButtonText: 'OK'
                         }).then(function() {
                             if (data.type == 'error') {
 
@@ -242,10 +245,8 @@ $(document).ready(function() {
                     title: data.title,
                     text: data.msg,
                     type: data.type,
-                     confirmButtonColor: '#3085d6',
-                    confirmButtonText: 'OK',
-                    allowOutsideClick: false,
-                    allowEscapeKey: false,
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'OK'
                 }).then(function() {
                     if (data.type == 'error') {
 
@@ -287,9 +288,7 @@ $(document).ready(function() {
                         text: data.msg,
                         type: data.type,
                         confirmButtonColor: '#3085d6',
-                        confirmButtonText: 'OK',
-                        allowOutsideClick: false,
-                        allowEscapeKey: false
+                        confirmButtonText: 'OK'
                     }).then(function() {
                         if (data.type == 'error') {
 
@@ -302,8 +301,27 @@ $(document).ready(function() {
         });
     });
 
+    $(document).on("click", "#rejectViewButton", function() {
+        var id = $(this).data('id');
+        var projectData = getProject(id);
+
+        projectData.done(function(data) {
+            console.log(data);
+            $('#idReject').val(data.id);
+            $('#employeeIdR').val(data.employeeId);
+            $('#employeeNameR').val(data.employeeName);
+            $('#workingEmailR').val(data.workingEmail);
+            $('#departmentR').val(data.departmentName);
+            $('#customerNameR').val(data.customer_name);
+            $('#projectCodeR').val(data.project_code);
+            $('#projectNameR').val(data.project_name);
+        })
+        $('#rejectProjectApproval').modal('show');
+
+    });
+
     $(document).on("click", "#rejectButton", function() {
-        id = $(this).data('id');
+        id = $('#idReject').val();
         requirejs(['sweetAlert2'], function(swal) {
             swal({
                 title: "Are you sure!",
@@ -314,10 +332,13 @@ $(document).ready(function() {
                 allowOutsideClick: false,
                 allowEscapeKey: false
             }).then(function() {
+                var data = new FormData(document.getElementById("rejectForm"));
+
                 $.ajax({
                     type: "POST",
                     url: "/rejectProjectMember/" + id,
                     dataType: "json",
+                    data: data,
                     async: false,
                     processData: false,
                     contentType: false,
@@ -327,9 +348,7 @@ $(document).ready(function() {
                         text: data.msg,
                         type: data.type,
                         confirmButtonColor: '#3085d6',
-                        confirmButtonText: 'OK',
-                        allowOutsideClick: false,
-                        allowEscapeKey: false
+                        confirmButtonText: 'OK'
                     }).then(function() {
                         if (data.type == 'error') {
 

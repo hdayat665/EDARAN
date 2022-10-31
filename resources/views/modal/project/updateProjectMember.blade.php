@@ -62,7 +62,7 @@
                                 <option Value="" label="PLEASE CHOOSE">SELECT DESIGNATION </option>
                                 <?php $Designations = getDesignation() ?>
                                 @foreach ($Designations as $Designation)
-                                <option value="{{$Designation->designationName}}" >{{$Designation->designationName}}</option>
+                                <option value="{{$Designation->id}}" >{{$Designation->designationName}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -72,7 +72,7 @@
                                 <option Value="" label="PLEASE CHOOSE">SELECT DEPARTMENT</option>
                                 <?php $departments = getDepartment() ?>
                                 @foreach ($departments as $department)
-                                <option value="{{$department->departmentName}}" >{{$department->departmentName}}</option>
+                                <option value="{{$department->id}}" >{{$department->departmentName}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -101,7 +101,7 @@
                                 <option Value="" label="PLEASE CHOOSE">SELECT BRANCH</option>
                                 <?php $Branchs = getBranch() ?>
                                 @foreach ($Branchs as $Branch)
-                                <option value="{{$Branch->branchName}}" >{{$Branch->branchName}}</option>
+                                <option value="{{$Branch->id}}" >{{$Branch->branchName}}</option>
                                 @endforeach
                             </select>
 
@@ -112,7 +112,7 @@
                                 <option Value="" label="PLEASE CHOOSE">SELECT UNIT</option>
                                 <?php $Units = getUnit() ?>
                                 @foreach ($Units as $Unit)
-                                <option value="{{$Unit->unitName}}" >{{$Unit->unitName}}</option>
+                                <option value="{{$Unit->id}}" >{{$Unit->unitName}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -151,8 +151,8 @@
                     <div >
                     <div class="row">
                         <div class="col-md-6">
-                            
-                            <input type="text" class="form-control" id="datepicker-exitdate" placeholder="dd/mm/yyyy" />
+
+                            <input type="text" class="form-control" id="datepicker-exitdate" name="exit_project_date" placeholder="dd/mm/yyyy" />
                         </div>
                     </div>
                     </div>

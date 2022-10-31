@@ -1212,4 +1212,25 @@ class SettingService
 
         return $data;
     }
+
+    public function departmentByCompanyId($id = '')
+    {
+        $data = Department::where([['tenant_id', Auth::user()->tenant_id], ['companyId', $id]])->get();
+
+        return $data;
+    }
+
+    public function unitByDepartmentId($id = '')
+    {
+        $data = Unit::where([['tenant_id', Auth::user()->tenant_id], ['departmentId', $id]])->get();
+        return $data;
+    }
+
+    public function branchByUnitId($id = '')
+    {
+        $data = Branch::where([['tenant_id', Auth::user()->tenant_id], ['unitId', $id]])->get();
+
+        return $data;
+    }
+
 }

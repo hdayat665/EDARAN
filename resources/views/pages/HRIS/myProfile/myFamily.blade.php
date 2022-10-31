@@ -4,7 +4,7 @@
         <button type="button"  data-bs-toggle="modal" id="parentModalAdd" class="btn btn-white mt-3 mb-3"><i class="fa fa-plus"></i> New Parent</button>
         <table id="tableParent" style="width: 100%" class="table table-striped align-middle">
             <thead>
-                <th width="1%"></th>
+                <th width="1%">No</th>
                 <th width="1%" data-orderable="false">Action</th>
                 <th class="text-nowrap">First Name</th>
                 <th class="text-nowrap">Last Name</th>
@@ -45,7 +45,7 @@
         <button type="button"  data-bs-toggle="modal" id="siblingModalAdd"  class="btn btn-white mt-3 mb-3"><i class="fa fa-plus"></i> New Sibling</button>
         <table id="tableSibling" style="width: 100%" class="table table-striped align-middle">
             <thead>
-                <th width="1%"></th>
+                <th width="1%">No</th>
                 <th width="1%" data-orderable="false">Action</th>
                 <th class="text-nowrap">First Name</th>
                 <th class="text-nowrap">Last Name</th>
@@ -81,7 +81,13 @@
                 <span style="display: none"><input type="text" id="siblingId" value="{{$siblingId}}"></span>
             </tbody>
         </table>
+
     </div>
+    <div class="row p-2">
+            <div class="modal-footer">
+                 <a  class="btn btn-white me-5px btnPrevious">Previous</a>
+            </div>
+        </div>
 </div>
 
         {{-- modal add parent --}}

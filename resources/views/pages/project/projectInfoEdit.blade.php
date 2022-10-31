@@ -2,7 +2,7 @@
 
 @section('content')
 <div id="content" class="app-content">
-    <h1 class="page-header" id="editProjectJs">Project Registration | Update Project -  {{$project->project_name ?? ''}} </h1>
+    <h1 class="page-header" id="editProjectJs">Project Registration | Update Project - ( {{$project->project_code. ' - ' .$project->project_name}} )</h1>
     <div class="row">
         <div class="col-xl-15">
             <ul class="nav nav-tabs">

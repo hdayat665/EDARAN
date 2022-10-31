@@ -22,6 +22,21 @@ class ProjectController extends Controller
         return view('pages.project.projectInfo', $data);
     }
 
+    public function getProjectById($id = '')
+    {
+        $data = [];
+
+        $ps = new ProjectService;
+
+        $data = $ps->projectApprovalData($id);
+
+        if ($data) {
+            $data = $data[0];
+        }
+
+        return response()->json($data);
+    }
+
     public function createProject(Request $r)
     {
         $ps = new ProjectService;
@@ -31,7 +46,7 @@ class ProjectController extends Controller
         return response()->json($result);
     }
 
-    public function projectInfoEditView($id)
+    public function projectInfoEditView($id = '')
     {
         $data = [];
 
@@ -42,9 +57,10 @@ class ProjectController extends Controller
         $data['projectLocations'] = $ps->getProjectLocation();
         $data['employeeInfos'] = $es->getEmployeeProject();
         $data['previousProjectMembers'] = $ps->getProjectMember('on');
+        $data['previousProjectManagers'] = $ps->getPreviousManager($id);
         $data['projectMembers'] = $ps->getProjectMember();
 
-        // pr($data['projectMembers']);
+        // pr($data['projectMembers'][1]->joined_date);
 
         return view('pages.project.projectInfoEdit', $data);
     }

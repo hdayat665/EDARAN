@@ -28,7 +28,7 @@
                             <td>{{$myProject->project_code}}</td>
                             <td>{{$myProject->project_name}}</td>
                             <td>{{$myProject->desc}}</td>
-                            <td>{{$myProject->project_manager}}</td>
+                            <td>{{($myProject->project_manager) ? getEmployeeNameById($myProject->project_manager)->employeeName ?? '-' : '-'}}</td>
                             <td>{{$myProject->contract_end_date}}</td>
                             <td>{{$myProject->request_status}}</td>
                             <td><a href="javascript:;" data-bs-toggle="modal" data-bs-target="#exampleModal">{{$myProject->location}}</a></td>

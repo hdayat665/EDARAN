@@ -16,6 +16,7 @@ use App\Models\Users;
 use App\Models\UsersDetails;
 use App\Models\UserSibling;
 use App\Models\Vehicle;
+use Illuminate\Foundation\Auth\User;
 use Illuminate\Mail\Attachment;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -28,7 +29,7 @@ class EmployeeService
     {
         $input = $r->input();
 
-        $user = Users::where('username', $r['username'])->first();
+        $user = Users::where([['username', $r['username']], ['status', 'active']])->first();
 
         if ($user) {
             $data['status'] = false;
@@ -37,7 +38,7 @@ class EmployeeService
             $data['msg'] = 'email already exist';
         }else{
             $user['type'] = 'employee';
-            $user['status'] = 'active';
+            $user['status'] = 'not complete';
             $user['username'] = $r['username'];
             $user['tenant_id'] = Auth::user()->tenant_id;
             $user['tenant'] = Auth::user()->tenant;
@@ -143,8 +144,8 @@ class EmployeeService
         $data['data'] = DB::table('employment as a')
         ->leftjoin('userProfile as b', 'a.user_id', '=', 'b.user_id')
         ->leftjoin('department as c', 'a.department', '=', 'c.id')
-        ->select('a.id', 'a.employeeId', 'a.user_id', 'b.firstName', 'b.lastName', 'b.personalEmail as email', 'b.phoneNo', 'c.departmentName as department', 'a.supervisor', 'a.status')
-        ->where('a.tenant_id', $userId)
+        ->select('a.id', 'a.employeeId', 'a.user_id', 'b.firstName', 'b.lastName', 'b.personalEmail as email', 'b.phoneNo', 'c.departmentName as department', 'a.supervisor', 'a.report_to', 'a.status')
+        ->where([['a.tenant_id', $userId], ['status', '!=', 'not complete']])
         ->get();
 
 
@@ -683,7 +684,7 @@ class EmployeeService
     public function updateEmployee($r)
     {
         $input = $r->input();
-
+        // pr($input);
         $id = $input['id'];
         // $id = $input['empId'];
 
@@ -696,6 +697,21 @@ class EmployeeService
             $data['title'] = config('app.response.error.title');
             $data['msg'] = 'user not found';
         }else{
+
+            if ($input['branchId']) {
+                $input['branch'] = $input['branchId'];
+                unset($input['branchId']);
+            }
+
+            if ($input['departmentId']) {
+                $input['department'] = $input['departmentId'];
+                unset($input['departmentId']);
+            }
+
+            if ($input['unitId']) {
+                $input['unit'] = $input['unitId'];
+                unset($input['unitId']);
+            }
 
             Employee::where('id', $id)->update($input);
             $user = Auth::user();
@@ -734,6 +750,22 @@ class EmployeeService
             $data['type'] = 'error';
             $data['msg'] = 'email already exist';
         } else {
+
+            if ($input['branchId']) {
+                $input['branch'] = $input['branchId'];
+                unset($input['branchId']);
+            }
+
+            if ($input['departmentId']) {
+                $input['department'] = $input['departmentId'];
+                unset($input['departmentId']);
+            }
+
+            if ($input['unitId']) {
+                $input['unit'] = $input['unitId'];
+                unset($input['unitId']);
+            }
+
             $input['tenant_id'] = Auth::user()->tenant_id;
             // $input['status'] = 'inactive';
             $input['status'] = 'active';
@@ -747,6 +779,9 @@ class EmployeeService
             $jh['updatedBy'] = Auth::user()->username;
             $jh['effectiveDate'] = $input['joinedDate'];
             JobHistory::create($jh);
+
+            $user['status'] = 'active';
+            User::where('id', $input['user_id'])->update($user);
 
             $ls = new LoginService;
 

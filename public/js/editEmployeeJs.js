@@ -32,6 +32,37 @@ $(document).ready(function() {
         $("#fullname").val(a + ' ' + b);
     });
     
+    $("#gender").css({"pointer-events": "none", "touch-action": "none", "background": "#e9ecef"});
+
+    var hash = location.hash.replace(/^#/, '');  // ^ means starting, meaning only match the first hash
+    if (hash) {
+        $('.nav-tabs a[href="#' + hash + '"]').tab('show');
+    } 
+    $('.nav-tabs a').on('shown.bs.tab', function (e) {
+        window.location.hash = e.target.hash;
+    })
+
+    const nextBtn = document.querySelectorAll(".btnNext");
+    const prevBtn = document.querySelectorAll(".btnPrevious");
+
+    nextBtn.forEach(function(item, index){
+        item.addEventListener('click', function(){
+        let id = index + 1;
+        let tabElement = document.querySelectorAll("#myTab li a")[id];
+        var lastTab = new bootstrap.Tab(tabElement);
+        lastTab.show();   
+        });
+    });
+
+    prevBtn.forEach(function(item, index){
+        item.addEventListener('click', function(){
+        let id = index;
+        let tabElement = document.querySelectorAll("#myTab li a")[id];
+        var lastTab = new bootstrap.Tab(tabElement);
+        lastTab.show();
+        });
+    });
+    
     $("#effective-from").datepicker({
         todayHighlight: true,
         format: 'yyyy-mm-dd',
@@ -69,7 +100,24 @@ $(document).ready(function() {
         }
 
     });
+    
+    $('#idNo').change(function(){
 
+        if($(this).val().length == 12){
+
+            var idn = $(this).val();
+            
+            var lastIc = idn.substring(10,12);
+            
+            if(lastIc % 2 == 0){
+                $('#gender').val(2);
+            } else {
+                $('#gender').val(1);
+            }
+
+        }
+
+    });
     $("#same-address").change(function() {
         if (this.checked) {
             $('#address-1c').val($('#address-1').val()).prop('readonly', true);

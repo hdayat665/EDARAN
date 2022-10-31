@@ -65,8 +65,8 @@
                                     <td>{{$projectInfo->contract_start_date}}</td>
                                     <td>{{$projectInfo->contract_end_date}}</td>
                                     <td>{{$projectInfo->status}}</td>
-                                    <td></td>
-                                    <td></td>
+                                    <td>{{($projectInfo->update_by) ? getEmployeeName($projectInfo->update_by) : '-'}}</td>
+                                    <td>{{($projectInfo->update_by) ? $projectInfo->updated_at : '-'}}</td>
                                 </tr>
                                 @endforeach
                                 @endif
@@ -77,6 +77,8 @@
                 <div class="tab-pane fade" id="default-tab-2">
                     <br>
                     <div class="panel-body">
+
+
                         <table id="data-table-default2" style="width: 100% !important" class="table table-striped table-bordered align-middle">
                             <thead>
                                 <tr>
@@ -98,7 +100,7 @@
                                         <a href="javascript:;" id="approveButton" data-id="{{$projectInfo->id}}" class="btn btn-outline-green">
                                             <i class="fa fa-circle-check"></i>
                                         </a>
-                                        <a href="javascript:;" id="rejectButton" data-id="{{$projectInfo->id}}" class="btn btn-outline-danger"><i class="fa fa-circle-xmark"></i></a>
+                                        <a href="javascript:;" id="rejectViewButton" data-id="{{$projectInfo->id}}" class="btn btn-outline-danger"><i class="fa fa-circle-xmark"></i></a>
                                     </td>
                                     <td>{{$projectInfo->requested_date}}</td>
                                     <td>{{$projectInfo->employeeName}}</td>
@@ -120,5 +122,5 @@
 </div>
 
 @include('modal.project.projectRegistration')
-
+@include('modal.project.rejectProjectApproval')
 @endsection
