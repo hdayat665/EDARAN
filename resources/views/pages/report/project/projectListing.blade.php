@@ -30,7 +30,7 @@
                         @foreach ($projectListings as $projectListing)
                         <tr class="odd gradeX">
                             <td style="text-align:center" width="1%" >
-                                <a href ="/projectDetail/{{$projectListing->id}}"><i class="fas fa-eye fa-2x"></i></a>
+                                <a href ="/projectDetail/{{$projectListing->id}}" class="btn btn-primary">View</a>
                             </td>
                             <td width="1%">{{$projectListing->LOA_date}}</td>
                             <td width="1%">{{$projectListing->customer_name}}</td>
