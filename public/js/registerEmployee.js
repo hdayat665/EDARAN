@@ -235,11 +235,7 @@ $(document).ready(function() {
                     required: true,
                     digits: true,
                     rangelength: [5, 5]
-                },
-                
-                
-                
-                
+                },           
             },
 
             messages: {

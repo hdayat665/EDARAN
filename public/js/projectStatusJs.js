@@ -10,35 +10,49 @@ $(document).ready(function() {
     $(document).on('change', "#select1", function() {
         if ($(this).val() == "CustName") {
             $("#menu2").show();
+            $('#select2').prop('required', true);  
+            
         } else {
             $("#menu2").hide();
+            $('#select2').prop('required', false);
         }
     });
 
     $(document).on('change', "#select1", function() {
         if ($(this).val() == "FinYear") {
             $("#menu3").show();
-        } else {
+            $('#select3').prop('required', true);
+            
+        }
+        else {
             $("#menu3").hide();
+            $('#select3').prop('required', false);
+         
+            
         }
     });
     $(document).on('change', "#select1", function() {
         if ($(this).val() == "AccManager") {
             $("#menu4").show();
+            $('#select4').prop('required', true);
         } else {
             $("#menu4").hide();
+            $('#select4').prop('required', false);
         }
     });
     $(document).on('change', "#select1", function() {
         if ($(this).val() == "ProjManager") {
             $("#menu5").show();
+            $('#select5').prop('required', true);
         } else {
             $("#menu5").hide();
+            $('#select5').prop('required', false);
         }
     });
     $(document).on('change', "#select1", function() {
         if ($(this).val() == "Status") {
             $("#menu6").show();
+            $('#select6').prop('required', true);
         } else {
             $("#menu6").hide();
         }
@@ -46,11 +60,14 @@ $(document).ready(function() {
     $(document).on('change', "#select1", function() {
         if ($(this).val() == "ProjName") {
             $("#menu7").show();
+            $('#select7').prop('required', true);
+            
         } else {
             $("#menu7").hide();
         }
     });
     $(document).on('change', "#select7", function() {
+        $('#select8').prop('required', true);
         var customer_id = $(this).val()
         var list_project = getProjectByCustomerId(customer_id)
         list_project.done(function(data) {
@@ -64,8 +81,11 @@ $(document).ready(function() {
                 }
                 document.getElementById("select8").innerHTML = html.join("");
                 $("#menu8").show();
+                
+               
             } else {
                 $("#menu8").hide();
+                
             }
         })
 
@@ -80,6 +100,7 @@ $(document).ready(function() {
     $(document).on('change', "#select1", function() {
         if ($(this).val() == "EmpName") {
             $("#menu9").show();
+            $('#select9').prop('required', true);
         } else {
             $("#menu9").hide();
         }
@@ -206,8 +227,4 @@ $(document).ready(function() {
         ],
 
     });
-
-
-
-
 });
