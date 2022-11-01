@@ -124,7 +124,7 @@
                         </div>
                         <div class="col-md-4">
                             <select class="form-select" name="status">
-                                <option value="-" label="Please Choose " selected="selected"></option>
+                                <option value="" label="Please Choose " selected="selected"></option>
                                 <option value="Ongoing" label="Ongoing">Ongoing</option>
                                 <option value="Warranty" label="Warranty">Warranty</option>
                                 <option value="Closed" label="Closed">Closed</option>

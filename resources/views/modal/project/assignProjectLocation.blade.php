@@ -11,7 +11,6 @@
                     <div class="mb-3">
                         <label class="form-label">Project Member Name : </label><br><br>
                         <select class="selectpicker form-control" name="employee_id[]" id="projectmember" multiple>
-                            <option >Please Select..</option>
                             @foreach ($projectMembers as $employee)
                               <option value="{{$employee->id}}">{{$employee->employeeName}}</option>
                             @endforeach
@@ -20,7 +19,6 @@
                     <div class="mb-3">
                         <label class="form-label">Project Location Name : </label><br><br>
                         <select class="selectpicker form-control" name="location[]" id="projectlocation" multiple>
-                            <option label="Select State ">Select Location </option>
                                 <?php $locations = projectLocation() ?>
                                 @foreach ($locations as $location)
                                 <option value="{{$location->id}}" >{{$location->location_name}}</option>

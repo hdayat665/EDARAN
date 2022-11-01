@@ -1,5 +1,12 @@
 $(document).ready(function() {
 
+    $("input[type=text]").keyup(function() {
+        $(this).val($(this).val().toUpperCase());
+    });
+    $("option[type=text]").keyup(function () {  
+        $(this).val($(this).val().toUpperCase());  
+    });
+
     $("#gender").css({"pointer-events": "none", "touch-action": "none", "background": "#e9ecef"});
     
     $('#idnumber').change(function(){
@@ -38,9 +45,6 @@ $(document).ready(function() {
         autoclose: true,
     });
 
-    $("input[type=text]").keyup(function() {
-        $(this).val($(this).val().toUpperCase());
-    });
 
     $("#firstName,#lastName").change(function() {
 
@@ -54,15 +58,34 @@ $(document).ready(function() {
         if ($(this).val().length == 12) {
 
             var idn = $(this).val();
-            var year = '19'.concat(idn.substring(0, 2));
-            var month = idn.substring(2, 4)
+            var year = (idn.substring(0, 2));
+            var month = idn.substring(2, 4);
             var day = idn.substring(4, 6);
-            $('#datepicker-birth').val(year + '-' + month + '-' + day);
             
+            var cutoff = (new Date()).getFullYear() - 2000;
+
+            $('#datepicker-birth').val((year > cutoff ? '19' : '20') + year + '-' + month + '-' + day);
+        }
+    });
+
+    $('#idnumber').change(function(){
+
+        if($(this).val().length == 12){
+
+            var idn = $(this).val();
+            
+            var lastIc = idn.substring(10,12);
+            
+            if(lastIc % 2 == 0){
+                $('#gender').val(2);
+            } else {
+                $('#gender').val(1);
+            }
+
         }
 
     });
-
+    
     $("#nonNetizen").change(function() {
         if (this.checked) {
 
@@ -108,16 +131,47 @@ $(document).ready(function() {
         if ($(this).prop("checked")) {
 
             $('#idnumber').prop('readonly', true);
-            $('#idnumber').prop('required', false);
-            $('#passport').prop('required', true);
-            $('#datepicker-autoClose').prop('required', true);
+            $('#idnumber').prop('required', false);  
+           // $('#passport').prop('required', true); 
+           // $('#datepicker-autoClose').prop('required', true); 
         } else {
 
             $('#idnumber').prop('readonly', false);
             $('#idnumber').prop('required', true);
         }
+      });
+
+      $('#passport').change(function(){
+    
+        if ($('#datepicker-expiryDate').prop('readonly')) {
+         $('#datepicker-expiryDate').prop('readonly', false);
+         $('#datepicker-expiryDate').css('pointer-events', "auto");
+       } else {
+         $('#datepicker-expiryDate').prop('readonly', true);
+         $('#datepicker-expiryDate').css('pointer-events', "none");
+       }
+
     });
 
+    $(".partCheck").click(function(){
+        if ($(this).prop("checked")) {
+              
+            $('#idnumber').prop('readonly', true);
+            
+            $('#datepicker-expiryDate').prop('readonly', false);
+            $('#datepicker-birth').prop('readonly', false);
+            $('#datepicker-birth').css('pointer-events', 'auto');
+            $("#idnumber").val("");
+        } else {
+            
+            $('#idnumber').prop('readonly', false);
+            
+            $('#datepicker-expiryDate').prop('readonly', false);
+            $('#datepicker-birth').prop('readonly', true);
+            $('#datepicker-birth').css('pointer-events', 'none');
+        }
+      });
+    
     $('#profileForm').click(function(e) {
 
         $('#profileForm').validate({
@@ -227,12 +281,12 @@ $(document).ready(function() {
         $("#nav-addr").removeClass("active");
         $("#nav-det").removeClass("active");
 
-        $("#default-tab-1").addClass("active show");
-        $("#default-tab-2").removeClass("active show");
-        $("#default-tab-3").removeClass("active show");
-    });
-    $('#submitAddress').click(function(e) {
+		$( "#default-tab-1" ).addClass( "active show" );
+		$( "#default-tab-2" ).removeClass( "active show" );
+		$( "#default-tab-3" ).removeClass( "active show" );
+      });
 
+    $('#submitAddress').click(function(e) {
         $("#addressForm").validate({
             // Specify validation rules
             rules: {
@@ -255,10 +309,6 @@ $(document).ready(function() {
                     digits: true,
                     rangelength: [5, 5]
                 },
-
-
-
-
             },
 
             messages: {

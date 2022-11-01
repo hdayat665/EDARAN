@@ -7,25 +7,25 @@
         <div class="col-xl-15">
             <ul class="nav nav-tabs">
                 <li class="nav-item">
-                    <a href="#tab1" data-bs-toggle="tab" class="nav-link active">
+                    <a href="#tab1" id="nav_pro_info" data-bs-toggle="tab" class="nav-link active">
                         <span class="d-sm-none">Tab 1</span>
                         <span class="d-sm-block d-none">Project Information</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#tab2" data-bs-toggle="tab" class="nav-link">
+                    <a href="#tab2" id="nav_pre_pro" data-bs-toggle="tab" class="nav-link">
                         <span class="d-sm-none">Tab 2</span>
                         <span class="d-sm-block d-none">Previous Project Manager</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#tab3" data-bs-toggle="tab" class="nav-link">
+                    <a href="#tab3" id="nav_pro_loc" data-bs-toggle="tab" class="nav-link">
                         <span class="d-sm-none">Tab 3</span>
                         <span class="d-sm-block d-none">Project Location</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#tab4" data-bs-toggle="tab" class="nav-link">
+                    <a href="#tab4" id="nav_pro_mem" data-bs-toggle="tab" class="nav-link">
                         <span class="d-sm-none">Tab 4\5</span>
                         <span class="d-sm-block d-none">Project Member</span>
                     </a>
