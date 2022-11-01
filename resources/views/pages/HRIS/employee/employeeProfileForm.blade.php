@@ -240,7 +240,7 @@
             <label class="form-label col-form-label col-md-1">Gender*</label>
             <div class="col-md-2">
                 <select class="form-select" name="gender" id="gender">
-                    <option label="Please Choose " selected="selected" disabled></option>
+                    <option value="" label="Please Choose " selected="selected" ></option>
                     <option value="1" label="Male">Male</option>
                     <option value="2" label="Female">Female</option>
                     

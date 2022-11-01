@@ -8,8 +8,10 @@ $(document).ready(function() {
     $("#tableSibling").DataTable({
         
         responsive: true,
-        scrollY: false,
+        deferRender:    true,
         scrollX: true,
+        scrollY: true,
+        fixedHeader: true,
         scrollCollapse: true,
         scroller: true,
         paging: true,
@@ -18,6 +20,8 @@ $(document).ready(function() {
             [5,10, 15, 20, 'All'],
             
         ],
+        
+        
         
     });
     
