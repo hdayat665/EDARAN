@@ -161,12 +161,18 @@ $(document).ready(function() {
     });
 
     $(".partCheck2").click(function() {
-        if ($(this).prop("checked")) {
+        if ($(this).prop('checked')) {
+            
             $('#reportto').show();
+            $('#reporttoo').prop('disabled', false);
+            $(this).val('on');
            
         } else {
+            $(this).val('das');
             $('#reportto').hide();
-            $('#reportto').prop('disabled', true);
+            
+            $('#reporttoo').val($('').val());
+            
             // $('#reportto').css('pointer-events', 'auto');
      }
     });
@@ -1246,8 +1252,42 @@ $(document).ready(function() {
 
     $('#updateEmp').click(function(e) {
         // id = $(this).data('id');
-        var data = new FormData(document.getElementById("addEmpForm"));
+        
+        var data = new FormData(document.getElementById("addEmpForm"))
 
+        $("#addEmpForm").validate({
+            // Specify validation rules
+            rules: {
+
+                company: "required",
+                departmentId: "required",
+                unitId: "required",
+                branchId: "required",
+                jobGrade: "required",
+                designation: "required",
+                employmentType: "required",
+                // // supervisor: "required",
+                
+                joinedDate: "required",
+
+            },
+
+            messages: {
+
+                company: "Please Insert Employee Company",
+                departmentId: "Please Insert Employee Department",
+                unitId: "Please Insert Employee Unit",
+                branchId: "Please Insert Employee Branch",
+                jobGrade: "Please Insert Employee Job Grade",
+                designation: "Please Insert Employee Designation",
+                employmentType: "Please Insert Employee Employment Type",
+                // // supervisor: "Please Insert Your Supervisor",
+                
+                joinedDate: "Please Insert Employee Joined Date",
+
+            },
+            submitHandler: function(form) {
+                
         requirejs(['sweetAlert2'], function(swal) {
             swal({
                 title: "Are you sure!",
@@ -1288,6 +1328,11 @@ $(document).ready(function() {
                 });
             });
         });
-    });
+    }
 
-})
+});
+});
+
+
+});
+

@@ -27,7 +27,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" id="updateButton" class="btn btn-primary">SavUpdatee</button>
+                        <button type="submit" id="updateButton" class="btn btn-primary">Update</button>
                     </div>
                 </form>
             </div>

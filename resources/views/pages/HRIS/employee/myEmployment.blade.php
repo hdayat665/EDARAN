@@ -16,7 +16,7 @@
                         <div class="row p-2">
                             <label for="firstname" class="form-label">Company*</label>
                             <select class="form-select" name="company" id="companyForEmployment">
-                                <option value="0" label="Please Choose "></option>
+                                <option value="" label="Please Choose "></option>
                                 <?php $companys = getCompany() ?>
                                 @foreach ($companys as $company)
                                 <option value="{{$company->id}}" <?php echo ($employment->company == $company->id) ? 'selected="selected"' : '' ?> label="{{$company->companyName}}"></option>
@@ -26,17 +26,11 @@
                         </div>
                         <div class="row p-2">
                             <label for="firstname" class="form-label">Department*</label>
-                            <select class="form-select" name="department" id="departmentHide">
-                                <?php $Departments = getDepartment() ?>
-                                <option value="0" label="Please Choose "></option>
-                                @foreach ($Departments as $Department)
-                                <option value="{{$Department->id ?? null}}" <?php echo ($employment->department == $Department->id) ? 'selected="selected"' : '' ?> label="{{$Department->departmentName}}" ></option>
-                                @endforeach
-                            </select>
+                           
 
                             <select class="form-select" name="departmentId" id="departmentShow">
                                 <?php $Departments = getDepartment() ?>
-                                <option value="0" label="Please Choose "></option>
+                                <option value="" label="Please Choose "></option>
                                 @foreach ($Departments as $Department)
                                 <option value="{{$Department->id ?? null}}" <?php echo ($employment->department == $Department->id) ? 'selected="selected"' : '' ?> label="{{$Department->departmentName}}" ></option>
                                 @endforeach
@@ -44,17 +38,11 @@
                         </div>
                         <div class="row p-2">
                             <label for="firstname" class="form-label">Unit*</label>
-                            <select class="form-select" name="unit" id="unitHide">
-                                <?php $Units = getUnit() ?>
-                                <option value="0" label="Please Choose "></option>
-                                @foreach ($Units as $Unit)
-                                <option value="{{$Unit->id}}" <?php echo ($employment->unit == $Unit->id) ? 'selected="selected"' : '' ?> label="{{$Unit->unitName}}" ></option>
-                                @endforeach
-                            </select>
+                            
 
                             <select class="form-select" name="unitId" id="unitShow">
                                 <?php $Units = getUnit() ?>
-                                <option value="0" label="Please Choose "></option>
+                                <option value="" label="Please Choose "></option>
                                 @foreach ($Units as $Unit)
                                 <option value="{{$Unit->id}}" <?php echo ($employment->unit == $Unit->id) ? 'selected="selected"' : '' ?> label="{{$Unit->unitName}}" ></option>
                                 @endforeach
@@ -62,17 +50,11 @@
                         </div>
                         <div class="row p-2">
                             <label for="firstname" class="form-label">Branch*</label>
-                            <select class="form-select" name="branch" id="branchHide">
-                                <?php $Branchs = getBranch() ?>
-                                <option value="0" label="Please Choose "></option>
-                                @foreach ($Branchs as $Branch)
-                                <option value="{{$Branch->id}}" <?php echo ($employment->branch == $Branch->id) ? 'selected="selected"' : '' ?> label="{{$Branch->branchName}}" ></option>
-                                @endforeach
-                            </select>
+                            
 
                             <select class="form-select" name="branchId" id="branchShow">
                                 <?php $Branchs = getBranch() ?>
-                                <option value="0" label="Please Choose "></option>
+                                <option value="" label="Please Choose "></option>
                                 @foreach ($Branchs as $Branch)
                                 <option value="{{$Branch->id}}" <?php echo ($employment->branch == $Branch->id) ? 'selected="selected"' : '' ?> label="{{$Branch->branchName}}" ></option>
                                 @endforeach
@@ -86,7 +68,7 @@
                             <label for="firstname" class="form-label">Job Grade*</label>
                             <select class="form-select" name="jobGrade">
                                 <?php $JobGrades = getJobGrade() ?>
-                                <option value="0" label="Please Choose "></option>
+                                <option value="" label="Please Choose "></option>
                                 @foreach ($JobGrades as $JobGrade)
                                 <option value="{{$JobGrade->id}}" <?php echo ($employment->jobGrade == $JobGrade->id) ? 'selected="selected"' : '' ?> label="{{$JobGrade->jobGradeName}}" ></option>
                                 @endforeach
@@ -96,7 +78,7 @@
                             <label for="firstname" class="form-label">Designation*</label>
                             <select class="form-select" name="designation">
                                 <?php $Designations = getDesignation() ?>
-                                <option value="0" label="Please Choose "></option>
+                                <option value="" label="Please Choose "></option>
                                 @foreach ($Designations as $Designation)
                                 <option value="{{$Designation->id}}" <?php echo ($employment->designation == $Designation->id) ? 'selected="selected"' : '' ?> label="{{$Designation->designationName}}" ></option>
                                 @endforeach
@@ -106,7 +88,7 @@
                             <label for="firstname" class="form-label">Employment Type*</label>
                             <select class="form-select" name="employmentType">
                                 <?php $EmploymentTypes = getEmploymentType() ?>
-                                <option value="0" label="Please Choose "></option>
+                                <option value="" label="Please Choose "></option>
                                 @foreach ($EmploymentTypes as $EmploymentType)
                                 <option value="{{$EmploymentType->id}}" label="{{$EmploymentType->type}}" {{ ($employment->employmentType == $EmploymentType->id) ? "selected='selected'" : '' }}></option>
                                 @endforeach
@@ -119,7 +101,7 @@
                                     User Role
                                 </label>
                                 <div class="form-check form-switch">
-                                    <input class="form-check-input partCheck2" value="on" name="supervisor" {{ ($employment->supervisor == 'on' ? 'checked' : '') }} type="checkbox" id="supervisor">
+                                    <input class="form-check-input partCheck2" id="supervisor" name="supervisor" {{ ($employment->supervisor == 'on' ? 'checked' : '') }} type="checkbox" name="supervisor" id="supervisor">
                                     <label class="form-label" for="supervisor">
                                         Supervisor
                                     </label>
@@ -134,9 +116,9 @@
                                 <div class="col-sm-6" style="display: none;" id="reportto">
                                     @endif
                                     <label for="employee-id" class="form-label">Report To</label>
-                                    <select class="form-select" name="report_to" id="reportto">
+                                    <select class="form-select" name="report_to" id="reporttoo">
                                         <?php $employees = getEmployee(); ?>
-                                        <option value="0" label="Please Choose "></option>
+                                        <option value="" label="Please Choose "></option>
                                         @foreach ($employees as $employee)
                                         <option value="{{$employee->id}}" label="{{$employee->employeeName}}" {{ ($employment->report_to == $employee->id) ? "selected='selected'" : '' }}></option>
                                         
@@ -188,7 +170,7 @@
                                     <div class="col-sm-6">
                                         <label for="firstname" class="form-label">Event*</label>
                                         <select class="form-select" name="event">
-                                            <option value="0" label="Please Choose"></option>
+                                            <option value="" label="Please Choose"></option>
                                             <?php $events = getEvent(); ?>
                                             @foreach ($events as $key => $event)
                                             <option value="{{ $key }}" <?= ($employment->event == $key) ? 'selected="selected"' : '' ?>>{{$event}}</option>
@@ -200,7 +182,7 @@
                             </div>
                             <div class="modal-footer">
 
-                                <button type="button" class="btn btn-primary float-end" id="updateEmp" data-bs-toggle="modal">
+                                <button type="submit" class="btn btn-primary float-end" id="updateEmp" >
                                     Update
                                 </button>
                             </div>
