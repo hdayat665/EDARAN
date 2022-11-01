@@ -374,22 +374,22 @@ class EmployeeService
 
             if ($_FILES['payslip']['name'])
             {
-                $payslip = upload($r->file('payslip'));
-                $input['payslip'] = $payslip['filename'];
+                // $payslip = upload($r->file('payslip'));
+                // $input['payslip'] = $payslip['filename'];
 
-                if (!$input['payslip']) {
-                    unset($input['payslip']);
-                }
+                // if (!$input['payslip']) {
+                //     unset($input['payslip']);
+                // }
             }
 
             if ($_FILES['marrigeCert']['name'])
             {
-                $marrigeCert = upload($r->file('marrigeCert'));
-                $input['marrigeCert'] = $marrigeCert['filename'];
+                // $marrigeCert = upload($r->file('marrigeCert'));
+                // $input['marrigeCert'] = $marrigeCert['filename'];
 
-                if (!$input['marrigeCert']) {
-                    unset($input['marrigeCert']);
-                }
+                // if (!$input['marrigeCert']) {
+                //     unset($input['marrigeCert']);
+                // }
             }
 
             if(!$input['DOM'])

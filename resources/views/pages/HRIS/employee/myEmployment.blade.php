@@ -246,7 +246,7 @@
                         </div>
                     </div>
                 </div>
-                <!-- Modal Update Employment-->
+                <!-- Modal Update Employment
                 {{-- <div class="modal fade" id="update-employment" tabindex="-1" aria-labelledby="update-employment" aria-hidden="true">
                     <div class="modal-dialog modal-lg">
                         <div class="modal-content">
@@ -301,7 +301,7 @@
                             </div>
                         </div>
                     </div>
-                </div> --}}
+                </div> --}} -->
             </div>
         </div>
 

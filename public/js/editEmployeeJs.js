@@ -31,7 +31,216 @@ $(document).ready(function() {
         var b = $("#lastname").val();
         $("#fullname").val(a + ' ' + b);
     });
+    $("#gender").css({"pointer-events": "none", "touch-action": "none", "background": "#e9ecef"});
+    $("#childgender").css({"pointer-events": "none", "touch-action": "none", "background": "#e9ecef"});
     
+    $("#firstnamemc,#lastnamemc").change(function(){
+        var a = $("#firstnamemc").val();
+        var b = $("#lastnamemc").val();
+        $("#fullnamemc").val(a+ ' '+b);
+    });
+
+    $('#passportmc').change(function(){
+    
+        if ($('#expirydatemc').prop('readonly')) {
+         $('#expirydatemc').prop('readonly', false);
+         $('#expirydatemc').css('pointer-events', "auto");
+       } else {
+         $('#expirydatemc').prop('readonly', true);
+         $('#expirydatemc').css('pointer-events', "none");
+         $('#expirydatemc').val("");
+        
+       }
+
+    });
+    $("#firstNameChild,#lastNameChild").change(function(){
+        var a = $("#firstNameChild").val();
+        var b = $("#lastNameChild").val();
+        $("#fullNameChild").val(a+ ' '+b);
+    });
+    $('#idNoaddChild').change(function(){
+        
+        if($(this).val().length == 12){
+
+            var idn = $(this).val();
+            var year = (idn.substring(0, 2));
+            var month = idn.substring(2, 4);
+            var day = idn.substring(4, 6);
+            
+            var cutoff = (new Date()).getFullYear() - 2000; //2022-2000=22cutoff
+                                //98>22->19+98
+            $('#DOBChild').val((year > cutoff ? '19' : '20') + year + '-' + month + '-' + day);
+        }
+    });
+
+    $('#idNoaddChild').change(function(){
+
+        if($(this).val().length == 12){
+
+            var idn = $(this).val();
+            
+            var lastIc = idn.substring(10,12);
+            
+            if(lastIc % 2 == 0){
+                $('#childgender').val(2);
+            } else {
+                $('#childgender').val(1);
+            }
+
+        }
+
+    });
+
+    $('#idNoaddChild').change(function(){
+
+        if($(this).val().length == 12){
+
+            var idn = $(this).val();
+            var year = (idn.substring(0, 2));
+
+            var cutoff = (new Date()).getFullYear() - 2000; //2022-2000=22cutoff
+            //98>22->19+98->>1998
+            //$('#DOBChild').val((year > cutoff ? '19' : '20') + year + '-' + month + '-' + day);
+            //2022-1998
+            var ww = (year > cutoff ? '19' : '20') + year;
+            var currentAge = new Date().getFullYear() - ww;
+            $('#ageChild').val(currentAge);
+        }
+    });
+    $(".partCheck4").click(function(){
+        if ($(this).prop("checked")) {
+              
+            $('#idNoaddChild').prop('readonly', true);
+            $('#DOBChild').prop('readonly', false);
+            $('#DOBChild').css('pointer-events', 'auto');
+            $("#idNoaddChild").val("");
+            
+        } else {
+            
+            $('#idNoaddChild').prop('readonly', false);
+            $('#DOBChild').prop('readonly', true);
+            $('#DOBChild').css('pointer-events', 'none');
+            $("#passportChild").val("");
+            $("#expiryDateChild").val("");
+            $('#expiryDateChild').prop('readonly', true);
+            $('#expiryDateChild').css('pointer-events', 'none');
+        }
+      });
+    
+      $("#expiryDateChild").datepicker({
+        todayHighlight: true,
+        format: 'yyyy-mm-dd',
+        autoclose: true,
+      });
+      $('#passportChild').change(function(){
+    
+        if ($('#expiryDateChild').prop('readonly')) {
+         $('#expiryDateChild').prop('readonly', false);
+         $('#expiryDateChild').css('pointer-events', "auto");
+       } else {
+         $('#expiryDateChild').prop('readonly', true);
+         $('#expiryDateChild').css('pointer-events', "none");
+         $('#expiryDateChild').val("");
+       }
+
+    });
+    $('#idnumber2').change(function(){
+        
+        if($(this).val().length == 12){
+
+            var idn = $(this).val();
+            var year = (idn.substring(0, 2));
+            var month = idn.substring(2, 4);
+            var day = idn.substring(4, 6);
+            
+            var cutoff = (new Date()).getFullYear() - 2000;
+
+            $('#dobmc').val((year > cutoff ? '19' : '20') + year + '-' + month + '-' + day);
+        }
+    });
+
+    $('#idnumber2').change(function(){
+
+        if($(this).val().length == 12){
+
+            var idn = $(this).val();
+            var year = (idn.substring(0, 2));
+
+            var cutoff = (new Date()).getFullYear() - 2000; 
+
+            var ww = (year > cutoff ? '19' : '20') + year;
+            var currentAge = new Date().getFullYear() - ww;
+            $('#age').val(currentAge);
+        }
+    });
+    $("#stateEmc").css({"pointer-events": "none","background": "#e9ecef"});
+    $("#countryEmc").css({"pointer-events": "none", "background": "#e9ecef"});
+
+    $("#expirydatemc").datepicker({
+        todayHighlight: true,
+        format: 'yyyy-mm-dd',
+        autoclose: true,
+      });
+      $("#dommc").datepicker({
+        todayHighlight: true,
+        format: 'yyyy-mm-dd',
+        autoclose: true,
+      });
+      $(".partCheck3").click(function(){
+        
+        if ($(this).prop("checked")) {
+            $('#designationmc').prop('readonly', false);
+            $('#companyNamemc').prop('readonly', false);
+            $('#dateJoinedmc').prop('readonly', false);
+            $('#dateJoinedmc').prop('disabled', false);
+            $('#income-tax-number').prop('readonly', false);
+            $('#payslipmc').prop('disabled', false);
+            $('#extension-number').prop('readonly', false);
+            $('#officeNomc').prop('readonly', false);
+            $('#address1mc').prop('readonly', false);
+            $('#address2mc').prop('readonly', false);
+            $('#cityEmc').prop('readonly', false);
+            $('#postcodeEmc').prop('readonly', false);
+            $("#stateEmc").css({"pointer-events": "auto", "background": "#ffffff"});
+            $("#countryEmc").css({"pointer-events": "auto", "background": "#ffffff"});
+            $('#payslipmc').prop('readonly', false);
+        } else {
+            $('#designationmc').prop('readonly', true);
+            $('#companyNamemc').prop('readonly', true);
+            $('#dateJoinedmc').prop('readonly', true);
+            $('#dateJoinedmc').prop('disabled', true);
+            $('#payslipmc').prop('disabled', true);
+            $('#income-tax-number').prop('readonly', true);
+            $('#extension-number').prop('readonly', true);
+            $('#officeNomc').prop('readonly', true);
+            $('#address1mc').prop('readonly', true);
+            $('#address2mc').prop('readonly', true);
+            $('#cityEmc').prop('readonly', true);
+            $('#postcodeEmc').prop('readonly', true);
+            $("#stateEmc").css({"pointer-events": "none","background": "#e9ecef"});
+            $("#countryEmc").css({"pointer-events": "none", "background": "#e9ecef"});
+            $('#payslipmc').prop('readonly', true);
+        }
+      }); 
+    $(".partCheck2").click(function(){
+        if ($(this).prop("checked")) {
+              
+            $('#idnumber2').prop('readonly', true);
+            $('#dobmc').prop('readonly', false);
+            $('#dobmc').css('pointer-events', 'auto');
+            $('#idnumber2').val("");
+        } else {
+            
+            $('#idnumber2').prop('readonly', false);
+            $('#dobmc').prop('readonly', true);
+            $('#dobmc').css('pointer-events', 'none');
+            $('#passportmc').val("");
+            $('#expirydatemc').val("");
+            $('#expirydatemc').prop('readonly', true);
+            $('#expirydatemc').css('pointer-events', 'none');
+        }
+      });
+
     $("#gender").css({"pointer-events": "none", "touch-action": "none", "background": "#e9ecef"});
 
     var hash = location.hash.replace(/^#/, '');  // ^ means starting, meaning only match the first hash
@@ -87,6 +296,9 @@ $(document).ready(function() {
         autoclose: true,
     });
 
+    $("input[type=text]").keyup(function() {
+        $(this).val($(this).val().toUpperCase());
+    });
     $('#idNo').change(function() {
 
         if ($(this).val().length == 12) {
@@ -294,6 +506,53 @@ $(document).ready(function() {
     });
 
     $('#saveAddress').click(function(e) {
+        $("#formAddress").validate({
+            // Specify validation rules
+            rules: {
+                
+                address1: "required",
+                city: "required",
+                state: "required",
+                country: "required",
+                postcode: {
+                    required: true,
+                    digits: true,
+                    rangelength: [5, 5]
+                },
+                address1c: "required",
+                cityc: "required",
+                statec: "required",
+                countryc: "required",
+                postcodec: {
+                    required: true,
+                    digits: true,
+                    rangelength: [5, 5]
+                },
+            },
+
+            messages: {
+                address1: "Please Insert Your Address",
+                city: "Please Insert Your City",
+                state: "Please Choose Your State",
+                country: "required",
+                postcode: {
+                    required: "Please Insert Your Postcode",
+                    digits: "Please Enter Valid Postcode",
+                    rangelength: "Please Enter Valid Postcode"
+                },
+                address1c: "Please Insert Your Address",
+                cityc: "Please Insert Your City",
+                statec: "Please Choose Your State",
+                countryc: "required",
+                postcodec: {
+                    required: "Please Insert Your Postcode",
+                    digits: "Please Enter Valid Postcode",
+                    rangelength: "Please Enter Valid Postcode"
+                },
+                
+               
+            },
+            submitHandler: function(form) {
 
         requirejs(['sweetAlert2'], function(swal) {
 
@@ -331,9 +590,55 @@ $(document).ready(function() {
             });
 
         });
-    });
+    }
+});
+});
 
     $('#saveEmergency').click(function(e) {
+
+        $("#formEmergency").validate({
+            // Specify validation rules
+            rules: {
+                
+                firstName: "required",
+                lastName: "required",
+                contactNo: {
+                    required: true,
+                    digits: true,
+                    
+                },
+                relationship: "required",
+                address1: "required",
+                postcode: {
+                    required: true,
+                    digits: true,
+                    rangelength: [5, 5]
+                },
+                city: "required",
+                state: "required",
+            },
+
+            messages: {
+                firstName: "Please Insert First Name",
+                lastName: "Please Insert Last Name",
+                contactNo: {
+                    required: "Please Insert Contact Number",
+                    digits: "Please Enter Correct Contact Number",
+                    
+                },
+                relationship: "Please Insert Relationship",
+                address1: "Please Insert Address",
+                postcode: {
+                    required: "Please Insert Your Postcode",
+                    digits: "Please Enter Valid Postcode",
+                    rangelength: "Please Enter Valid Postcode"
+                },
+                city: "Please Insert City",
+                state: "Please Choose State",
+            },
+            submitHandler: function(form) {
+
+
 
         requirejs(['sweetAlert2'], function(swal) {
 
@@ -371,9 +676,73 @@ $(document).ready(function() {
             });
 
         });
-    });
+    }
+});
+});
 
     $('#addCompanion').click(function(e) {
+        $("#addCompanionForm").validate({
+            // Specify validation rules
+            rules: {
+                
+                firstName: "required",
+                lastName: "required",
+                idNo: {
+                    required: true,
+                    digits: true,
+                    rangelength: [12, 12]
+                },
+                contactNo: {
+                    digits: true,
+                    
+                },
+                age: {
+                    required: true,
+                    digits: true,
+                    
+                },
+                address1: "required",
+                city: "required",
+                state: "required",
+                country: "required",
+                postcode: {
+                    required: true,
+                    digits: true,
+                    rangelength: [5, 5]
+                },
+                
+                
+            },
+
+            messages: {
+                firstName: "Please Insert First Name",
+                lastName: "Please Insert Last Name",
+                idNo: {
+                    required: "Please Insert Identification Number",
+                    digits: "Please Insert Correct Identification Number Without ' - ' or Space",
+                    rangelength: "Please Provide Valid Identification Number"
+                },
+                contactNo: {
+                    digits: "Please Insert Correct Contact Number Without ' - ' or Space",
+                    
+                },
+                age: {
+                    required: "Please Insert Age",
+                    digits: "Please Insert Correct Age",
+                    
+                },
+                address1: "Please Insert Your Address",
+                city: "Please Insert Your City",
+                state: "Please Choose Your State",
+                country: "required",
+                postcode: {
+                    required: "Please Insert Your Postcode",
+                    digits: "Please Enter Valid Postcode",
+                    rangelength: "Please Enter Valid Postcode"
+                },
+                
+            },
+            submitHandler: function(form) {
 
         requirejs(['sweetAlert2'], function(swal) {
 
@@ -407,11 +776,13 @@ $(document).ready(function() {
                     }
 
 
-                });
+               });
             });
 
         });
-    });
+    }
+});
+});
 
     companion = ['1', '2', '3', '4'];
 
@@ -470,6 +841,50 @@ $(document).ready(function() {
     });
 
     $('#addChildren').click(function(e) {
+
+        $("#addChildrenForm").validate({
+            // Specify validation rules
+            rules: {
+                
+                firstName: "required",
+                lastName: "required",
+                idNo: {
+                    required: true,
+                    digits: true,
+                    rangelength: [12, 12]
+                },
+                age: {
+                    required: true,
+                    digits: true,
+                    
+                },
+                gender:"required",
+                maritalStatus:"required",
+                
+                
+            },
+
+            messages: {
+                firstName: "Please Insert First Name",
+                lastName: "Please Insert Last Name",
+                idNo: {
+                    required: "Please Insert Identification Number",
+                    digits: "Please Insert Correct Identification Number Without ' - ' or Space",
+                    rangelength: "Please Provide Valid Identification Number"
+                },
+                age: {
+                    required: "Please Insert Age",
+                    digits: "Please Insert Correct Age",
+                    
+                },
+                gender:"Please Choose Gender",
+                maritalStatus:"Please Choose Marital Status",
+                
+
+            },
+            submitHandler: function(form) {
+
+
         requirejs(['sweetAlert2'], function(swal) {
 
             var data = new FormData(document.getElementById("addChildrenForm"));
@@ -504,6 +919,8 @@ $(document).ready(function() {
             });
 
         });
+    }
+    });
     });
 
     $('#editChildren').click(function(e) {
@@ -627,12 +1044,13 @@ $(document).ready(function() {
                     showCancelButton: true,
                 }).then(function() {
                     $.ajax({
-                        type: "DELETE",
+                        type: "POST",
                         url: "/deleteChildren/" + id,
-                        dataType: "json",
-                        async: false,
-                        processData: false,
-                        contentType: false,
+                        // dataType: "json",
+                        data: { _method: "DELETE" },
+                        // async: false,
+                        // processData: false,
+                        // contentType: false,
                     }).done(function(data) {
                         swal({
                             title: data.title,

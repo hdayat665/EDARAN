@@ -692,6 +692,7 @@
     <script src="/assets/plugins/blueimp-file-upload/js/jquery.fileupload-ui.js"></script>
     <script src="/assets/js/demo/form-multiple-upload.demo.js"></script>
 	<script src="/assets/plugins/jstree/dist/jstree.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.2/croppie.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.2/croppie.js"></script>

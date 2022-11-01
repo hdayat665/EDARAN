@@ -33,11 +33,11 @@
         <div class="row p-2">
             <div class="col-sm-6">
                 <label for="emergency-address1" class="form-label">Address 1*</label>
-                <input type="text" id="emergency-address1" name="address1" value="{{ $emergency->address1 ?? '' }}" class="form-control" aria-describedby="emergency-address1">
+                <input type="text" id="emergency-address1" name="address1" value="{{ $emergency->address1 ?? '' }}" class="form-control" aria-describedby="emergency-address1" style="text-transform: uppercase;">
             </div>
             <div class="col-sm-6">
                 <label for="emergency-address1" class="form-label">Address 2</label>
-                <input type="text" id="emergency-address2" name="address2" value="{{ $emergency->address2 ?? '' }}" class="form-control" aria-describedby="emergency-address2">
+                <input type="text" id="emergency-address2" name="address2" value="{{ $emergency->address2 ?? '' }}" class="form-control" aria-describedby="emergency-address2" style="text-transform: uppercase;">
             </div>
 
         </div>
@@ -48,7 +48,7 @@
             </div>
             <div class="col-sm-6">
                 <label for="emergency-city" class="form-label">City*</label>
-                <input type="text" class="form-control" name="city" value="{{ $emergency->city ?? '' }}">
+                <input type="text" class="form-control" name="city" value="{{ $emergency->city ?? '' }}" style="text-transform: uppercase;">
             </div>
         </div>
         <div class="row p-2">
@@ -56,7 +56,7 @@
                 <label for="emergency-state" class="form-label">State*</label>
                 <select class="form-select" name="state" value="{{ $emergency->state ?? '' }}">>
                     <?php $state = state() ?>
-                    <option value="0" label="Please Choose"  ></option>
+                    <option value="" label="Please Choose"  ></option>
                     @foreach ($state as $key => $status)
                     <option value="{{$key}}"  <?php echo ($key == $emergency->state) ? 'selected="selected"' : '' ?>>{{$status}}</option>
                     @endforeach
@@ -78,13 +78,13 @@
                 </select>
             </div>
         </div>
-    </form>
+    
     <div class="row p-2">
             <div class="modal-footer">
                 <a  class="btn btn-white me-5px btnPrevious">Previous</a>
-                <a href="javascript:;" id="saveEmergency" class="btn btn-primary">Update</a>
+                <button type="submit" id="saveEmergency" class="btn btn-primary">Update</button>
                 <a class="btn btn-white me-5px btnNext">Next</a>
             </div>
         </div>
-    
+        </form>
 </div>
