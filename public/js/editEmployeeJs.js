@@ -32,6 +32,37 @@ $(document).ready(function() {
         $("#fullname").val(a + ' ' + b);
     });
     
+    $("#gender").css({"pointer-events": "none", "touch-action": "none", "background": "#e9ecef"});
+
+    var hash = location.hash.replace(/^#/, '');  // ^ means starting, meaning only match the first hash
+    if (hash) {
+        $('.nav-tabs a[href="#' + hash + '"]').tab('show');
+    } 
+    $('.nav-tabs a').on('shown.bs.tab', function (e) {
+        window.location.hash = e.target.hash;
+    })
+
+    const nextBtn = document.querySelectorAll(".btnNext");
+    const prevBtn = document.querySelectorAll(".btnPrevious");
+
+    nextBtn.forEach(function(item, index){
+        item.addEventListener('click', function(){
+        let id = index + 1;
+        let tabElement = document.querySelectorAll("#myTab li a")[id];
+        var lastTab = new bootstrap.Tab(tabElement);
+        lastTab.show();   
+        });
+    });
+
+    prevBtn.forEach(function(item, index){
+        item.addEventListener('click', function(){
+        let id = index;
+        let tabElement = document.querySelectorAll("#myTab li a")[id];
+        var lastTab = new bootstrap.Tab(tabElement);
+        lastTab.show();
+        });
+    });
+    
     $("#effective-from").datepicker({
         todayHighlight: true,
         format: 'yyyy-mm-dd',
@@ -69,7 +100,24 @@ $(document).ready(function() {
         }
 
     });
+    
+    $('#idNo').change(function(){
 
+        if($(this).val().length == 12){
+
+            var idn = $(this).val();
+            
+            var lastIc = idn.substring(10,12);
+            
+            if(lastIc % 2 == 0){
+                $('#gender').val(2);
+            } else {
+                $('#gender').val(1);
+            }
+
+        }
+
+    });
     $("#same-address").change(function() {
         if (this.checked) {
             $('#address-1c').val($('#address-1').val()).prop('readonly', true);
@@ -113,12 +161,18 @@ $(document).ready(function() {
     });
 
     $(".partCheck2").click(function() {
-        if ($(this).prop("checked")) {
+        if ($(this).prop('checked')) {
+            
             $('#reportto').show();
+            $('#reporttoo').prop('disabled', false);
+            $(this).val('on');
            
         } else {
+            $(this).val('das');
             $('#reportto').hide();
-            $('#reportto').prop('disabled', true);
+            
+            $('#reporttoo').val($('').val());
+            
             // $('#reportto').css('pointer-events', 'auto');
      }
     });
@@ -1198,8 +1252,42 @@ $(document).ready(function() {
 
     $('#updateEmp').click(function(e) {
         // id = $(this).data('id');
-        var data = new FormData(document.getElementById("addEmpForm"));
+        
+        var data = new FormData(document.getElementById("addEmpForm"))
 
+        $("#addEmpForm").validate({
+            // Specify validation rules
+            rules: {
+
+                company: "required",
+                departmentId: "required",
+                unitId: "required",
+                branchId: "required",
+                jobGrade: "required",
+                designation: "required",
+                employmentType: "required",
+                // // supervisor: "required",
+                
+                joinedDate: "required",
+
+            },
+
+            messages: {
+
+                company: "Please Insert Employee Company",
+                departmentId: "Please Insert Employee Department",
+                unitId: "Please Insert Employee Unit",
+                branchId: "Please Insert Employee Branch",
+                jobGrade: "Please Insert Employee Job Grade",
+                designation: "Please Insert Employee Designation",
+                employmentType: "Please Insert Employee Employment Type",
+                // // supervisor: "Please Insert Your Supervisor",
+                
+                joinedDate: "Please Insert Employee Joined Date",
+
+            },
+            submitHandler: function(form) {
+                
         requirejs(['sweetAlert2'], function(swal) {
             swal({
                 title: "Are you sure!",
@@ -1240,6 +1328,11 @@ $(document).ready(function() {
                 });
             });
         });
-    });
+    }
 
-})
+});
+});
+
+
+});
+

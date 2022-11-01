@@ -1,4 +1,23 @@
 $(document).ready(function() {
+    
+
+    $('#location-search').picker({
+        search:true,
+        
+    });
+
+    $('#location-search-edit').picker({
+        search:true,
+        
+    });
+
+    $('#projectmember').picker({
+        search:true,
+    });
+
+    $('#projectlocation').picker({
+        search:true,
+    });
 
     $("#datepicker-joineddate").datepicker({
         todayHighlight: true,
@@ -13,7 +32,10 @@ $(document).ready(function() {
     $("#projectLocationTable").DataTable({
         responsive: true,
     });
-
+   
+    $("#data-table-prevproject").DataTable({
+        responsive: true,
+    });
     $("#projectMemberTable").DataTable({
         responsive: true,
     });
@@ -37,25 +59,26 @@ $(document).ready(function() {
                 contract_value: "required",
                 financial_year: "required",
                 LOA_date: "required",
+                project_manager: "required",
                 contract_start_date: "required",
                 contract_end_date: "required",
                 acc_manager: "required",
                 project_manager: "required",
-                bank_guarantee_amount: "required",
+                status: "required",
             },
 
             messages: {
-                customer_id: "",
-                project_code: "",
-                project_name: "",
-                contract_value: "",
-                financial_year: "",
-                LOA_date: "",
-                contract_start_date: "",
-                contract_end_date: "",
-                project_manager: "",
-                acc_manager: "",
-                bank_guarantee_amount: "",
+                customer_id: "Please Select Customer Name",
+                project_code: "Please Enter Project Code",
+                project_name: "Please Enter Project Name",
+                contract_value: "Please Enter Contract Value",
+                financial_year: "Please Select Financial Year",
+                project_manager: "Please Select Project Manager",
+                LOA_date: "Please Enter LOA Date",
+                contract_start_date: "Please Select Specific Date",
+                contract_end_date: "Please Select Specific Date",
+                acc_manager: "Please Enter Account Manager",
+                status: "Please Enter Status",
             },
             submitHandler: function(form) {
                 requirejs(['sweetAlert2'], function(swal) {
@@ -77,7 +100,7 @@ $(document).ready(function() {
                             title: data.title,
                             text: data.msg,
                             type: data.type,
-                           confirmButtonColor: '#3085d6',
+                            confirmButtonColor: '#3085d6',
                             confirmButtonText: 'OK',
                             allowOutsideClick: false,
                             allowEscapeKey: false,
@@ -86,16 +109,35 @@ $(document).ready(function() {
 
                             } else {
                                 location.reload();
+                                // $( "#nav_pro_info" ).removeClass( "active" );
+                                // $( "#nav_pre_pro" ).addClass( "active" );
+                                // $( "#nav_pro_loc" ).removeClass( "active" );
+                                // $( "#nav_pro_mem" ).removeClass( "active" );
+        
+                                // $( "#tab1" ).removeClass( "active show" );
+                                // $( "#tab2" ).addClass( "active show" );
+                                // $( "#tab3" ).removeClass( "active show" );
+                                // $( "#tab4" ).removeClass( "active show" );
+        
                             }
-
-
                         });
                     });
-
                 });
-            },
-        });
-    });
+            }
+                });      
+            });
+            
+            $( "#back_info_updt").click(function() {
+                $( "#nav_pro_info" ).addClass( "active" );
+                $( "#nav_pre_pro" ).removeClass( "active" );
+                $( "#nav_pro_loc" ).removeClass( "active" );
+                $( "#nav_pro_mem" ).removeClass( "active" );
+        
+                $( "#tab1" ).addClass( "active show" );
+                $( "#tab2" ).removeClass( "active show" );
+                $( "#tab3" ).removeClass( "active show" );
+                $( "#tab4" ).removeClass( "active show" );
+              });
     /////////////////////// END PROJECT /////////////////////
 
     /////////////////////// START PROJECT LOCATION /////////////////////
@@ -104,21 +146,27 @@ $(document).ready(function() {
             rules: {
                 location_name: "required",
                 address: "required",
-                postcode: "required",
+                postcode: {
+                    required: true,
+                    digits: true,
+                    rangelength: [5,5],
+                },
                 city: "required",
                 state: "required",
-                country: "required",
                 location_google: "required",
             },
 
             messages: {
-                location_name: "",
-                address: "",
-                postcode: "",
-                city: "",
-                state: "",
-                country: "",
-                location_google: "",
+                location_name: "Insert Location Name",
+                address: "Enter Address",
+                postcode: {
+                    required: "Enter Valid Postcode",
+                    digits: "Enter Valid Postcode",
+                    rangelength: "Enter Valid Postcode",
+                },
+                city: "Enter City",
+                state: "Choose State",
+                location_google: "Selecet Location",
             },
             submitHandler: function(form) {
                 requirejs(['sweetAlert2'], function(swal) {
@@ -140,7 +188,7 @@ $(document).ready(function() {
                             title: data.title,
                             text: data.msg,
                             type: data.type,
-                           confirmButtonColor: '#3085d6',
+                            confirmButtonColor: '#3085d6',
                             confirmButtonText: 'OK',
                             allowOutsideClick: false,
                             allowEscapeKey: false,
@@ -167,9 +215,9 @@ $(document).ready(function() {
 
     $(document).on("click", "#editProjectLocationButton", function() {
         var id = $(this).data('id');
-        var vehicleData = getProjectLocation(id);
+        var locationData = getProjectLocations(id);
 
-        vehicleData.done(function(data) {
+        locationData.done(function(data) {
             console.log(data);
             $('#location_name').val(data.location_name);
             $('#address').val(data.address);
@@ -189,21 +237,27 @@ $(document).ready(function() {
             rules: {
                 location_name: "required",
                 address: "required",
-                postcode: "required",
+                postcode: {
+                    required: true,
+                    digits: true,
+                    rangelength: [5,5],
+                },
                 city: "required",
                 state: "required",
-                country: "required",
                 location_google: "required",
             },
 
             messages: {
-                location_name: "",
-                address: "",
-                postcode: "",
-                city: "",
-                state: "",
-                country: "",
-                location_google: "",
+                location_name: "Insert Location Name",
+                address: "Enter Address",
+                postcode: {
+                    required: "Enter Valid Postcode",
+                    digits: "Enter Valid Postcode",
+                    rangelength: "Enter Valid Postcode",
+                },
+                city: "Enter City",
+                state: "Choose State",
+                location_google: "Selecet Location",
             },
             submitHandler: function(form) {
                 requirejs(['sweetAlert2'], function(swal) {
@@ -225,7 +279,7 @@ $(document).ready(function() {
                             title: data.title,
                             text: data.msg,
                             type: data.type,
-                           confirmButtonColor: '#3085d6',
+                            confirmButtonColor: '#3085d6',
                             confirmButtonText: 'OK',
                             allowOutsideClick: false,
                             allowEscapeKey: false,
@@ -285,7 +339,7 @@ $(document).ready(function() {
         });
     });
 
-    function getProjectLocation(id) {
+    function getProjectLocations(id) {
         return $.ajax({
             url: "/getProjectLocationById/" + id
         });
@@ -298,13 +352,17 @@ $(document).ready(function() {
             rules: {
                 joined_date: "required",
                 employee_id: "required",
-                location_google: "required",
+                branch: "required",
+                unit:"required",
+                location_name: "required",
             },
 
             messages: {
-                joined_date: "",
-                employee_id: "",
-                location_google: "",
+                joined_date: "Please Choose Date",
+                employee_id: "Please Choose Name",
+                branch: "Please Choose Branch",
+                unit:"Please Choose Unit",
+                location_name:"Please Select Location",
             },
             submitHandler: function(form) {
                 requirejs(['sweetAlert2'], function(swal) {
@@ -326,7 +384,7 @@ $(document).ready(function() {
                             title: data.title,
                             text: data.msg,
                             type: data.type,
-                           confirmButtonColor: '#3085d6',
+                            confirmButtonColor: '#3085d6',
                             confirmButtonText: 'OK',
                             allowOutsideClick: false,
                             allowEscapeKey: false,
@@ -352,10 +410,14 @@ $(document).ready(function() {
 
         employee.done(function(data) {
             console.log(data);
-            $("#unit").prop("selectedIndex", data.unit);
-            $("#designation").prop("selectedIndex", data.unit);
-            $("#department").prop("selectedIndex", data.department);
-            $("#branch").prop("selectedIndex", data.branch);
+            // $("#unit").prop("selectedIndex", data.unit);
+            // $("#designation").prop("selectedIndex", data.designation);
+            // $("#department").prop("selectedIndex", data.department);
+            // $("#branchs").prop("selectedIndex", data.branch);
+            $("#unit").val(data.unit);
+            $("#designation").val(data.designation);
+            $("#department").val(data.department);
+            $("#branchs").val(data.branch);
         })
     })
 
@@ -401,21 +463,19 @@ $(document).ready(function() {
             rules: {
                 joined_date: "required",
                 employee_id: "required",
-                designation: "required",
+                //project_id: "required",
                 branch: "required",
-                unit: "required",
-                department: "required",
-                location_google: "required",
+                unit:"required",
+                location_name: "required",
             },
 
             messages: {
-                joined_date: "",
-                employee_id: "",
-                designation: "",
-                branch: "",
-                unit: "",
-                department: "",
-                location_google: "",
+                joined_date: "Please Choose Date",
+                employee_id: "Please Choose Name",
+                //project_id: "Please Choos Name",
+                branch: "Please Choose Branch",
+                unit:"Please Choose Unit",
+                location_name:"Please Select Location",
             },
             submitHandler: function(form) {
                 requirejs(['sweetAlert2'], function(swal) {
@@ -437,7 +497,7 @@ $(document).ready(function() {
                             title: data.title,
                             text: data.msg,
                             type: data.type,
-                           confirmButtonColor: '#3085d6',
+                            confirmButtonColor: '#3085d6',
                             confirmButtonText: 'OK',
                             allowOutsideClick: false,
                             allowEscapeKey: false,
@@ -457,21 +517,27 @@ $(document).ready(function() {
         });
     });
 
-    function getProjectLocation(id) {
-        return $.ajax({
-            url: "/getProjectMemberById/" + id
-        });
-    }
+    // function getProjectMember(id) {
+    //     return $.ajax({
+    //         url: "/getProjectMemberById/" + id
+    //     });
+    // }
 
     $(document).on("click", "#assignProjectMemberButton", function() {
         $('#assignProjectMemberModal').modal('show');
     });
 
     $('#assignProjectMember').click(function(e) {
-        $("#assignProjectMemberForm").validate({
-            rules: {},
 
-            messages: {},
+        $("#assignProjectMemberForm").validate({
+            rules: {
+                location_name: "required",
+            },
+
+            messages: {
+                location_name: "Please Select Location",
+            },
+
             submitHandler: function(form) {
                 requirejs(['sweetAlert2'], function(swal) {
 
@@ -492,7 +558,7 @@ $(document).ready(function() {
                             title: data.title,
                             text: data.msg,
                             type: data.type,
-                           confirmButtonColor: '#3085d6',
+                            confirmButtonColor: '#3085d6',
                             confirmButtonText: 'OK',
                             allowOutsideClick: false,
                             allowEscapeKey: false,
@@ -514,7 +580,7 @@ $(document).ready(function() {
 
     $(document).on("click", "#viewAssignMemberPrevLoc", function() {
         var id = $(this).data('id');
-        var vehicleData = getProjectLocation(id);
+        var vehicleData = getProjectMember(id);
 
         vehicleData.done(function(data) {
             console.log(data);
@@ -626,16 +692,16 @@ $(document).ready(function() {
             },
 
             messages: {
-                customer_id: "",
-                project_code: "",
-                project_name: "",
-                contract_value: "",
-                financial_year: "",
-                LOA_date: "",
-                contract_start_date: "",
-                contract_end_date: "",
-                acc_manager: "",
-                bank_guarantee_amount: "",
+                customer_id: "Please Select Name",
+                project_code: "Please Inser Code",
+                project_name: "Please Insert Project Name",
+                contract_value: "Please Insert Value",
+                financial_year: "Please Select Year",
+                LOA_date: "Please Select Specific Date",
+                contract_start_date: "Please Select Specific Date",
+                contract_end_date: "Please Select Specific Date",
+                acc_manager: "Please Insert Account Manager",
+                bank_guarantee_amount: "Pleaser Enter Amount",
             },
             submitHandler: function(form) {
                 requirejs(['sweetAlert2'], function(swal) {
@@ -656,7 +722,7 @@ $(document).ready(function() {
                             title: data.title,
                             text: data.msg,
                             type: data.type,
-                           confirmButtonColor: '#3085d6',
+                            confirmButtonColor: '#3085d6',
                             confirmButtonText: 'OK',
                             allowOutsideClick: false,
                             allowEscapeKey: false,
@@ -682,14 +748,14 @@ $(document).ready(function() {
                 customer_name: "required",
                 address: "required",
                 phoneNo: "required",
-                email: "required"
+                email: "required",
             },
 
             messages: {
-                customer_name: "",
-                address: "",
-                phoneNo: "",
-                email: ""
+                customer_name: "Please Insert Name",
+                address: "Please Insert Address",
+                phoneNo: "Please Inser Phone Number",
+                email: "Please Inser a Valid Email Address",
             },
             submitHandler: function(form) {
                 requirejs(['sweetAlert2'], function(swal) {
@@ -711,7 +777,7 @@ $(document).ready(function() {
                             title: data.title,
                             text: data.msg,
                             type: data.type,
-                           confirmButtonColor: '#3085d6',
+                            confirmButtonColor: '#3085d6',
                             confirmButtonText: 'OK',
                             allowOutsideClick: false,
                             allowEscapeKey: false,
@@ -754,7 +820,7 @@ $(document).ready(function() {
                     title: data.title,
                     text: data.msg,
                     type: data.type,
-                     confirmButtonColor: '#3085d6',
+                    confirmButtonColor: '#3085d6',
                     confirmButtonText: 'OK',
                     allowOutsideClick: false,
                     allowEscapeKey: false,

@@ -18,16 +18,16 @@
                     </div>
                     <div class="mb-3">
                         <label>Phone Number </label><br><br>
-                        <input type="text" class="form-control" name="phoneNo" id="phoneNo" placeholder="">
+                        <input type="number" class="form-control" name="phoneNo" id="phoneNo" placeholder="">
                     </div>
                     <div class="mb-3">
                         <label>Email</label><br><br>
-                        <input type="text" class="form-control" name="email" id="email" placeholder="">
+                        <input type="email" class="form-control" name="email" id="email" placeholder="">
                         <input type="hidden" class="form-control" name="id" id="idC" placeholder="">
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary" id="updateButton">Update</button>
+                        <button type="submit" id="updateButton" class="btn btn-primary">Update</button>
                     </div>
                 </form>
             </div>

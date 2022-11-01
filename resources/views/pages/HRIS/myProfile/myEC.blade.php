@@ -80,10 +80,14 @@
                 </select>
             </div>
         </div>
-   
-    <p class="text-end mb-0 mt-3">
-        <a href="javascript:;" class="btn btn-white me-5px">Previous</a>
-        <button type="submit" id="saveEmergency" class="btn btn-primary">Save</button>
-    </p>
+        <div class="row p-2">
+            <div class="modal-footer">
+                <a  class="btn btn-white me-5px btnPrevious">Previous</a>
+                <button type="submit" id="saveEmergency" class="btn btn-primary">Update</button>
+                <a class="btn btn-white me-5px btnNext">Next</a>
+            </div>
+        </div>
+    
+       
     </form>
 </div>

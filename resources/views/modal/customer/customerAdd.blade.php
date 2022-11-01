@@ -17,11 +17,11 @@
                     </div>
                     <div class="mb-3">
                         <label>Phone Number </label><br><br>
-                        <input type="text" class="form-control" name="phoneNo" placeholder="">
+                        <input type="number" class="form-control" name="phoneNo" placeholder="">
                     </div>
                     <div class="mb-3">
                         <label>Email</label><br><br>
-                        <input type="text" class="form-control" name="email" placeholder="">
+                        <input type="email" class="form-control" name="email" placeholder="">
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

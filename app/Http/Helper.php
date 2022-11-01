@@ -118,7 +118,7 @@ if (!function_exists('educationLevel')) {
     function educationLevel($id = '')
     {
         $data = [
-          
+
             '1' => 'primary school',
             '2' => 'lower secondary school',
             '3' => 'upper secondary school',
@@ -139,7 +139,7 @@ if (!function_exists('educationType')) {
     function educationType($id = '')
     {
         $data = [
-            
+
             '1' => 'primary school (year 6-12)',
             '2' => 'lower secondary school (form 1-3)',
             '3' => 'upper secondary school (form 4 & 5)',
@@ -160,7 +160,7 @@ if (!function_exists('relationship')) {
     function relationship($id = '')
     {
         $data = [
-           
+
             '1' => 'Grand Father',
             '2' => 'Grand Mother',
             '3' => 'Grand Father-In-Law',
@@ -169,8 +169,8 @@ if (!function_exists('relationship')) {
             '6' => 'Mother',
             '7' => 'Father-In-Law',
             '8' => 'Mother-In-Law',
-            '9' => 'Guardian',
-            '10' => 'Siblings',
+            '9' => 'Sister',
+            '10' => 'Brother',
         ];
 
         if ($id) {
@@ -363,9 +363,13 @@ if (!function_exists('getDepartment')) {
 }
 
 if (!function_exists('getUnit')) {
-    function getUnit()
+    function getUnit($id = '')
     {
-        $data = Unit::where('tenant_id', Auth::user()->tenant_id)->get();
+        if ($id) {
+            $data = Unit::find($id);
+        } else {
+            $data = Unit::where('tenant_id', Auth::user()->tenant_id)->get();
+        }
 
         if (!$data) {
             $data = [];
@@ -376,9 +380,14 @@ if (!function_exists('getUnit')) {
 }
 
 if (!function_exists('getBranch')) {
-    function getBranch()
+    function getBranch($id = '')
     {
-        $data = Branch::where('tenant_id', Auth::user()->tenant_id)->get();
+
+        if ($id) {
+            $data = Branch::find($id);
+        } else {
+            $data = Branch::where('tenant_id', Auth::user()->tenant_id)->get();
+        }
 
         if (!$data) {
             $data = [];
@@ -402,12 +411,15 @@ if (!function_exists('getJobGrade')) {
 }
 
 if (!function_exists('getDesignation')) {
-    function getDesignation()
+    function getDesignation($id = '')
     {
-        $data = Designation::where('tenant_id', Auth::user()->tenant_id)->get();
-
+        if ($id) {
+            $data = Designation::find($id);
+        } else {
+            $data = Designation::where('tenant_id', Auth::user()->tenant_id)->get();
+        }
         if (!$data) {
-            $data = [];
+            $data = '';
         }
 
         return $data;
@@ -749,6 +761,34 @@ if (!function_exists('getSupervisor')) {
     function getSupervisor($id = '')
     {
         $data = Employee::where('id', $id)->select('employeeName')->first();
+
+        if (!$data) {
+            $data = '';
+        }
+        return $data;
+    }
+}
+
+if (!function_exists('getEmployeeName')) {
+    function getEmployeeName($id = '')
+    {
+        $data = Employee::where('user_id', $id)->select('employeeName')->first()->employeeName;
+
+        if (!$data) {
+            $data = '';
+        }
+        return $data;
+    }
+}
+
+if (!function_exists('getEmployeeNameById')) {
+    function getEmployeeNameById($id = '')
+    {
+        $data = Employee::where('id', $id)->select('employeeName')->first();
+
+        if (!$data) {
+            $data = '';
+        }
         return $data;
     }
 }
@@ -766,10 +806,10 @@ if (!function_exists('getDepartmentName')) {
     {
         $cond[1] = ['user_id', $user_id];
         $data = DB::table('employment as a')
-        ->leftJoin('department as b', 'a.department', '=', 'b.id')
-        ->select('b.departmentName', 'a.employeeName')
-        ->where($cond)
-        ->first();
+            ->leftJoin('department as b', 'a.department', '=', 'b.id')
+            ->select('b.departmentName', 'a.employeeName')
+            ->where($cond)
+            ->first();
         return $data;
     }
 }

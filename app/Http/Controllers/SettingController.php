@@ -644,6 +644,36 @@ class SettingController extends Controller
         return response()->json($result);
     }
 
+    public function departmentByCompanyId($id = '')
+    {
+        $ss = new SettingService;
+
+        $result = $ss->departmentByCompanyId($id);
+
+        return $result;
+    }
+
+    public function unitByDepartmentId($id = '')
+    {
+        $ss = new SettingService;
+
+        $result = $ss->unitByDepartmentId($id);
+
+        return $result;
+    }
+
+    public function branchByUnitId($id = '')
+    {
+        $ss = new SettingService;
+
+        $result = $ss->branchByUnitId($id);
+
+        return $result;
+    }
+
+
+
+
 
 
 

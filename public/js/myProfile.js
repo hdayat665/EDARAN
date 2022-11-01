@@ -4,6 +4,28 @@ $(document).ready(function() {
         var b = $("#lastname").val();
         $("#fullName").val(a+ ' '+b);
     });
+    
+    $("#tableSibling").DataTable({
+        
+        responsive: true,
+        deferRender:    true,
+        scrollX: true,
+        scrollY: true,
+        fixedHeader: true,
+        scrollCollapse: true,
+        scroller: true,
+        paging: true,
+        lengthMenu: [
+            [5,10, 15, 20, -1],
+            [5,10, 15, 20, 'All'],
+            
+        ],
+        
+        
+        
+    });
+    
+    $("#gender").css({"pointer-events": "none", "touch-action": "none", "background": "#e9ecef"});
 
     $('#passportmyprofile').change(function(){
     
@@ -16,6 +38,27 @@ $(document).ready(function() {
          $('#expirydatemyprofile').val("");
        }
 
+    });
+
+    const nextBtn = document.querySelectorAll(".btnNext");
+    const prevBtn = document.querySelectorAll(".btnPrevious");
+
+    nextBtn.forEach(function(item, index){
+        item.addEventListener('click', function(){
+        let id = index + 1;
+        let tabElement = document.querySelectorAll("#myTab li a")[id];
+        var lastTab = new bootstrap.Tab(tabElement);
+        lastTab.show();   
+        });
+    });
+
+    prevBtn.forEach(function(item, index){
+        item.addEventListener('click', function(){
+        let id = index;
+        let tabElement = document.querySelectorAll("#myTab li a")[id];
+        var lastTab = new bootstrap.Tab(tabElement);
+        lastTab.show();
+        });
     });
 
     $('#idnumber').change(function(){
@@ -343,6 +386,14 @@ $(document).ready(function() {
         });
     });
 
+    var hash = location.hash.replace(/^#/, '');  // ^ means starting, meaning only match the first hash
+    if (hash) {
+        $('.nav-tabs a[href="#' + hash + '"]').tab('show');
+    } 
+    $('.nav-tabs a').on('shown.bs.tab', function (e) {
+        window.location.hash = e.target.hash;
+    })
+    
     $('#saveAddress').click(function(e) {
 
         $("#formAddress").validate({
@@ -672,7 +723,7 @@ $(document).ready(function() {
             });
         });
     }
-
+ 
     $("#tableChildren").DataTable({
         responsive: false,
         lengthMenu: [
@@ -1087,13 +1138,7 @@ $(document).ready(function() {
 
     }
 
-    $("#tableSibling").DataTable({
-        responsive: false,
-        lengthMenu: [
-            [5,10, 15, 20, -1],
-            [5,10, 15, 20, 'All'],
-        ],
-    });
+    
 
     $('#siblingModalAdd').click(function(e) {
         $('input').prop('disabled', false);
@@ -1813,6 +1858,13 @@ $("#same-address").change(function() {
             $('#payslipmc').prop('readonly', true);
         }
       }); 
+
+    
+
+      
+
+      
+      
     $("#same-address5").change(function() {
         if(this.checked) {
             $('#address1S').val($('#address-1').val()).prop('readonly', true);

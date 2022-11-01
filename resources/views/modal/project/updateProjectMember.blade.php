@@ -33,7 +33,7 @@
 
                         <div class="col-md-6">
                             <select class="selectpicker form-control" id="employee_idE" name="employee_id">
-                                <option >Please Select..</option>
+                                <option value="" label="SELECT NAME">PLEASE CHOOSE</option>
                               @foreach ($employeeInfos as $employee)
                                 <option value="{{$employee->id}}">{{$employee->employeeName}}</option>
                               @endforeach
@@ -59,20 +59,20 @@
 
                         <div class="col-md-6">
                             <select class="form-select" name="designation" id="designationE">
-                                <option label="Select State ">Select State </option>
+                                <option Value="" label="PLEASE CHOOSE">SELECT DESIGNATION </option>
                                 <?php $Designations = getDesignation() ?>
                                 @foreach ($Designations as $Designation)
-                                <option value="{{$Designation->designationName}}" >{{$Designation->designationName}}</option>
+                                <option value="{{$Designation->id}}" >{{$Designation->designationName}}</option>
                                 @endforeach
                             </select>
                         </div>
 
                         <div class="col-md-6">
                             <select class="form-select" id="departmentE" name="department">
-                                <option label="Select State ">Select State </option>
+                                <option Value="" label="PLEASE CHOOSE">SELECT DEPARTMENT</option>
                                 <?php $departments = getDepartment() ?>
                                 @foreach ($departments as $department)
-                                <option value="{{$department->departmentName}}" >{{$department->departmentName}}</option>
+                                <option value="{{$department->id}}" >{{$department->departmentName}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -98,10 +98,10 @@
 
                         <div class="col-md-6">
                             <select class="form-select" name="branch" id="branchE">
-                                <option label="Select State ">Select State </option>
+                                <option Value="" label="PLEASE CHOOSE">SELECT BRANCH</option>
                                 <?php $Branchs = getBranch() ?>
                                 @foreach ($Branchs as $Branch)
-                                <option value="{{$Branch->branchName}}" >{{$Branch->branchName}}</option>
+                                <option value="{{$Branch->id}}" >{{$Branch->branchName}}</option>
                                 @endforeach
                             </select>
 
@@ -109,10 +109,10 @@
 
                         <div class="col-md-6">
                             <select class="form-select" name="unit" id="unitE">
-                                <option label="Select State ">Select State </option>
+                                <option Value="" label="PLEASE CHOOSE">SELECT UNIT</option>
                                 <?php $Units = getUnit() ?>
                                 @foreach ($Units as $Unit)
-                                <option value="{{$Unit->unitName}}" >{{$Unit->unitName}}</option>
+                                <option value="{{$Unit->id}}" >{{$Unit->unitName}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -126,8 +126,7 @@
 
                     <div class="row mb-15px">
                         <div class="col-md-12">
-                            <select class="selectpicker form-control" name="location[]" id="location-search" multiple >
-                                <option label="Select State ">Select Location </option>
+                            <select class="selectpicker form-control" name="location[]" id="location-search-edit" multiple >
                                 <?php $locations = projectLocation() ?>
                                 @foreach ($locations as $location)
                                 <option value="{{$location->id}}" >{{$location->location_name}}</option>
@@ -152,8 +151,8 @@
                     <div >
                     <div class="row">
                         <div class="col-md-6">
-                            
-                            <input type="text" class="form-control" id="datepicker-exitdate" placeholder="dd/mm/yyyy" />
+
+                            <input type="text" class="form-control" id="datepicker-exitdate" name="exit_project_date" placeholder="dd/mm/yyyy" />
                         </div>
                     </div>
                     </div>

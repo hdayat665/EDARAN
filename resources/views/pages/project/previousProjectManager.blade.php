@@ -14,22 +14,28 @@
                 </tr>
             </thead>
             <tbody>
+                @if ($previousProjectManagers)
+                @foreach ($previousProjectManagers as $previousProjectManager)
                 <tr>
-                    <!-- <td>Farid Ahmad</td>
-                    <td>Head of Department</td>
-                    <td>Service Delivery Department</td>
-                    <td>Application Unit</td>
-                    <td>Headquaters</td>
-                    <td>01/02/2020</td>
-                    <td>10/11/2020</td> -->
+                    <th>{{$previousProjectManager->employeeName}}</th>
+                    <th>{{($previousProjectManager->designation) ? getDesignation($previousProjectManager->designation)->designationName : '-' }}</th>
+                    <th>{{($previousProjectManager->department) ? getDepartment($previousProjectManager->department)->departmentName : '-' }}</th>
+                    <th>{{($previousProjectManager->branch) ? getBranch($previousProjectManager->branch)->branchName : '-' }}</th>
+                    <th>{{($previousProjectManager->unit) ? getUnit($previousProjectManager->unit)->unitName : '-' }}</th>
+                    <th>{{$previousProjectManager->join_date}}</th>
+                    <th>{{$previousProjectManager->exit_date}}</th>
+                    @endforeach
                 </tr>
+                @endif
+
             </tbody>
         </table>
     </div>
     <div class="modal-footer">
-        <a class="btn btn-white btnPrevious">Back</a>
-        <a class="btn btn-primary btnNext">Next</a>
+        <a href="javascript:;" id="back_info_updt" class="btn btn-white btnPrevious">Back</a>
+        <button id="submitProject" class="btn btn-primary btnNext">Next</button>
     </div>
 </div>
+
 
 @include('modal.project.viewAssignPreviousMemberLocation')

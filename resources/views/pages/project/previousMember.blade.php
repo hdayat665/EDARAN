@@ -60,10 +60,10 @@ table{
                                         <tr>
                                             <td width="1%"><a data-bs-toggle="modal" data-id="{{$projectMember->id}}" id="editProjectMemberButton" class="btn btn-outline-green"><i class="fa fa-pencil-alt"></i></a></td>
                                             <td>{{$projectMember->employeeName}}</td>
-                                            <td>{{$projectMember->designation}}</td>
-                                            <td>{{$projectMember->department}}</td>
-                                            <td>{{$projectMember->branch}}</td>
-                                            <td>{{$projectMember->unit}}</td>
+                                            <td>{{($projectMember->designation) ? getDesignation($projectMember->designation)->designationName ?? '-' : '-'}}</td>
+                                            <td>{{($projectMember->department) ? getDepartment($projectMember->department)->departmentName ?? '-' : '-'}}</td>
+                                            <td>{{($projectMember->branch) ? getBranch($projectMember->branch)->branchName ?? '-' : '-'}}</td>
+                                            <td>{{($projectMember->unit) ? getUnit($projectMember->unit)->unitName ?? '-' : '-'}}</td>
                                             <td>{{$projectMember->joined_date}}</td>
                                             <td><a href="/projectAssignView/{{$projectMember->id}}">view</a></td>
                                         </tr>
@@ -72,10 +72,7 @@ table{
                             </tbody>
                         </table>
                     </div>
-                    <div class="modal-footer">
-                        <a class="btn btn-white btnPrevious">Back</a>
-                        <a class="btn btn-primary btnNext">Next</a>
-                    </div>
+                    
                 </div>
                 <div class="tab-pane fade" id="previous-member">
                     <br>
@@ -100,10 +97,10 @@ table{
                                     <tr>
                                         <td width="1%"><a data-bs-toggle="modal" data-id="{{$projectMember->id}}" id="editPreviousProjectMemberButton" class="btn btn-outline-green"><i class="fa fa-pencil-alt"></i></a></td>
                                         <td>{{$projectMember->employeeName}}</td>
-                                        <td>{{$projectMember->designation}}</td>
-                                        <td>{{$projectMember->department}}</td>
-                                        <td>{{$projectMember->branch}}</td>
-                                        <td>{{$projectMember->unit}}</td>
+                                        <td>{{($projectMember->designation) ? getDesignation($projectMember->designation)->designationName ?? '-' : '-'}}</td>
+                                        <td>{{($projectMember->department) ? getDepartment($projectMember->department)->departmentName ?? '-' : '-'}}</td>
+                                        <td>{{($projectMember->branch) ? getBranch($projectMember->branch)->branchName ?? '-' : '-'}}</td>
+                                        <td>{{($projectMember->unit) ? getUnit($projectMember->unit)->unitName ?? '-' : '-'}}</td>
                                         <td>{{$projectMember->joined_date}}</td>
                                         <td>{{$projectMember->exit_project_date}}</td>
                                         <td><a href="/projectAssignView/{{$projectMember->id}}">view</a></td>
@@ -113,12 +110,14 @@ table{
                             </tbody>
                         </table>
                     </div>
+                    
+                    </div>
                     <div class="modal-footer">
-                        <a class="btn btn-white btnPrevious">Back</a>
-                        <a class="btn btn-primary btnNext">Next</a>
+                        <a href="javascript:;" id="back_location" class="btn btn-white btnPrevious">Back</a>
+                        <!-- {{-- <a href="javascript:;" class="btn btn-primary btnNext">Save</a> --}} -->
+                        <!-- <button id="submitMember" class="btn btn-primary btnNext">vhh</button> -->
 
                     </div>
-
                 </div>
 
             </div>
@@ -126,6 +125,7 @@ table{
         </div>
 
     </div>
+    
 </div>
 
 @include('modal.project.addMemberProject')

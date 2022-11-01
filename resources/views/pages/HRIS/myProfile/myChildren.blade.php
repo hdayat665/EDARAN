@@ -2,7 +2,7 @@
     <button type="button"  data-bs-toggle="modal" id="childModalAdd" data-type="add" class="btn btn-white mt-3 mb-3"><i class="fa fa-plus"></i> New children</button>
     <table id="tableChildren" style="width: 100%" class="table table-striped align-middle">
         <thead>
-            <th width="1%"></th>
+            <th width="1%" >No</th>
             <th width="1%" data-orderable="false">Action</th>
             <th class="text-nowrap">Name</th>
             <th class="text-nowrap">ID/Passport Number</th>
@@ -20,7 +20,7 @@
             @foreach ($childrens as $children)
             <?php $id++ ?>
             <tr>
-                <td width="1%" class="fw-bold text-dark">{{$id}}</td>
+                <td width="1%">{{$id}}</td>
                 <td>
                     <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle btn-sm"><i class="fa fa-cogs"></i> Actions <i class="fa fa-caret-down"></i></a>
                     <div class="dropdown-menu">
@@ -44,6 +44,13 @@
             <span style="display: none"><input type="text" id="childId" value="{{$childId}}"></span>
         </tbody>
     </table>
+    <div class="row p-2">
+            <div class="modal-footer">
+                <a class="btn btn-white me-5px btnPrevious">Previous</a>
+                
+                <a class="btn btn-white me-5px btnNext">Next</a>
+            </div>
+    </div>
 </div>
 
 @include('modal.myProfile.addChildren')

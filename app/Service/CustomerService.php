@@ -56,6 +56,7 @@ class CustomerService
     public function updateCustomer($r, $id)
     {
         $input = $r->input();
+        $input['update_by'] = Auth::user()->id;
 
         Customer::where('id', $id)->update($input);
 
@@ -97,8 +98,10 @@ class CustomerService
 
     public function updateStatus($id, $status)
     {
+        $customer['status'] = $status;
+        $customer['update_by'] = Auth::user()->id;
 
-        Customer::where('id', $id)->update(['status' => $status]);
+        Customer::where('id', $id)->update($customer);
 
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
