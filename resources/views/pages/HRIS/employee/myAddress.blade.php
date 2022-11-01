@@ -28,7 +28,7 @@
                 <label for="state" class="form-label">State*</label>
                 <select class="form-select" name="state" id="state" value="{{ $address->state ?? '' }}">
                     <?php $state = state() ?>
-                    <option value="0" label="Please Choose"  ></option>
+                    <option value="" label="Please Choose"  ></option>
                     @foreach ($state as $key => $status)
                     <option value="{{$key}}"  <?php echo ($key == $address->state) ? 'selected="selected"' : '' ?>>{{$status}}</option>
                     @endforeach
@@ -92,7 +92,7 @@
                 <label for="state" class="form-label">State*</label>
                 <select class="form-select" id="statec" name="statec" value="{{ $address->statec ?? '' }}">
                     <?php $state = state() ?>
-                    <option value="0" label="Please Choose"  ></option>
+                    <option value="" label="Please Choose"  ></option>
                     @foreach ($state as $key => $status)
                     <option value="{{$key}}"  <?php echo ($key == $address->statec) ? 'selected="selected"' : '' ?>>{{$status}}</option>
                     @endforeach
@@ -119,13 +119,13 @@
                 </select>
             </div>
         </div>
-    </form>
-    <div class="row p-2">
+   
+        <div class="row p-2">
             <div class="modal-footer">
             <a class="btn btn-white me-5px btnPrevious">Previous</a>
-            <a href="javascript:;" id="saveAddress" class="btn btn-primary">Update</a>
+            <button type="submit" id="saveAddress" class="btn btn-primary">Update</button>
             <a class="btn btn-white me-5px btnNext">Next</a>
             </div>
         </div>
-    
+    </form>
 </div>

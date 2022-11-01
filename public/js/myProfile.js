@@ -3,7 +3,7 @@ $(document).ready(function() {
         var a = $("#firstname").val();
         var b = $("#lastname").val();
         $("#fullName").val(a+ ' '+b);
-    });
+    }); 
     
     $("#tableSibling").DataTable({
         
@@ -1801,6 +1801,8 @@ $("#same-address").change(function() {
         
     }        
   });
+  $("#stateEmc").css({"pointer-events": "none","background": "#e9ecef"});
+  $("#countryEmc").css({"pointer-events": "none", "background": "#e9ecef"});
 
   $("#same-address4").change(function() {
     if(this.checked) {
@@ -1837,8 +1839,8 @@ $("#same-address").change(function() {
             $('#address2mc').prop('readonly', false);
             $('#cityEmc').prop('readonly', false);
             $('#postcodeEmc').prop('readonly', false);
-            $('#stateEmc').prop('disabled', false);
-            $('#countryEmc').prop('disabled', false);
+            $("#stateEmc").css({"pointer-events": "auto", "background": "#ffffff"});
+            $("#countryEmc").css({"pointer-events": "auto", "background": "#ffffff"});
             $('#payslipmc').prop('readonly', false);
         } else {
             $('#designationmc').prop('readonly', true);
@@ -1853,8 +1855,8 @@ $("#same-address").change(function() {
             $('#address2mc').prop('readonly', true);
             $('#cityEmc').prop('readonly', true);
             $('#postcodeEmc').prop('readonly', true);
-            $('#stateEmc').prop('disabled', true);
-            $('#countryEmc').prop('disabled', true);
+            $("#stateEmc").css({"pointer-events": "none","background": "#e9ecef"});
+            $("#countryEmc").css({"pointer-events": "none", "background": "#e9ecef"});
             $('#payslipmc').prop('readonly', true);
         }
       }); 

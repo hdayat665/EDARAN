@@ -102,6 +102,13 @@
                 <div class="form-group mt-3" id="menu8">
                     <label for="Menu3">Select Project Name : </label>
                     <select class="form-control" name="projectName" id="select8">
+                    <option ></option>
+                    <?php $projects = project() ?>
+                    @if ($projects)
+                    @foreach ($projects as $project)
+                    <option value="{{$project->id}}">{{$project->project_name}}</option>
+                    @endforeach
+                    @endif
                     </select>
                 </div>
 
@@ -120,7 +127,7 @@
                 <div class="form-group mt-3" id="menu10">
                     <label for="Menu3">Select Employee Name : </label>
                     <select class="form-control" name="employee" id="select10">
-
+                   
                     </select>
                 </div>
             </div>
