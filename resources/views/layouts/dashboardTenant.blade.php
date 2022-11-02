@@ -9,37 +9,10 @@
 	align-items: center;
   } */
 
-  #chart_div .google-visualization-orgchart-linebottom {
-  border-bottom: 4px solid magenta;
-}
 
-#chart_div .google-visualization-orgchart-lineleft {
-  border-left: 4px solid magenta;
-}
 
-#chart_div .google-visualization-orgchart-lineright {
-  border-right: 4px solid magenta;
-}
 
-#chart_div .google-visualization-orgchart-linetop {
-  border-top: 4px solid magenta;
-} 
 
-#chart_div {
-    font-weight: bold;
-    /* font-size: 14; */
-    color: black;
-}
-
-/* #size_chart {
-    size: 'large';
-} */
-
-.google-visualization-orgchart-table tr td.google-visualization-orgchart-node div {  } */
-
-/* /* #chart_div .google-visualization-orgchart-table{
- size: 100px
-} */
 
 </style>
 <head>
