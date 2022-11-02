@@ -15,6 +15,7 @@
 
 
 </style>
+
 <head>
     <meta charset="utf-8" />
     <title>OrbitHRM</title>
@@ -200,7 +201,7 @@
                                     <div class="menu-icon">
 										<i class="fa fa-address-card text-gray"></i>
 									</div>
-                                    <div class="menu-text text-gray"> My Profile </div>
+                                    <div class="menu-text text-gray">My Profile </div>
                                 </a>
                             </div>
 
@@ -740,6 +741,22 @@
             urlArgs: "bust=10"
         };
     </script>
+
+<script>
+    $(function (){
+        $('a').each(function(){
+            if ($(this).prop('href') === window.location.href) {
+                $(this).parents().addClass('active');
+                $(this).css({
+                    "background": "linear-gradient(to left,#ececec 0, #ececec 66%, #ececec 100%)", 
+                    "border-radius": "50px",
+                });
+                
+            }
+        })
+    })
+</script>
+
     <script src="/assets/js/require.js" data-main="controller"></script>
 
     <script>
