@@ -54,13 +54,13 @@ class ProjectController extends Controller
         $ps = new ProjectService;
 
         $data['project'] = $ps->getProjectById($id);
-        $data['projectLocations'] = $ps->getProjectLocation();
+        $data['projectLocations'] = $ps->getProjectLocation($id);
         $data['employeeInfos'] = $es->getEmployeeProject();
-        $data['previousProjectMembers'] = $ps->getProjectMember('on');
+        $data['previousProjectMembers'] = $ps->getProjectMember('on', $id);
         $data['previousProjectManagers'] = $ps->getPreviousManager($id);
-        $data['projectMembers'] = $ps->getProjectMember();
+        $data['projectMembers'] = $ps->getProjectMember('', $id);
 
-        // pr($data['projectMembers'][1]->joined_date);
+        // pr($data['projectMembers']);
 
         return view('pages.project.projectInfoEdit', $data);
     }

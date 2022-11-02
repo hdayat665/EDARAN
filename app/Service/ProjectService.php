@@ -159,11 +159,16 @@ class ProjectService
         return $data;
     }
 
-    public function getProjectLocation()
+    public function getProjectLocation($id = '')
     {
         $tenant_id = Auth::user()->tenant_id;
 
-        $data = ProjectLocation::where([['tenant_id', $tenant_id]])->get();
+        $cond[0] = ['tenant_id', $tenant_id];
+        if ($id) {
+            $cond[1] = ['project_id', $id];
+        }
+
+        $data = ProjectLocation::where($cond)->get();
 
         if (!$data) {
             $data = [];
@@ -249,12 +254,16 @@ class ProjectService
         return $data;
     }
 
-    public function getProjectMember($exit_project = '')
+    public function getProjectMember($exit_project = '', $id = '')
     {
         $tenant_id = Auth::user()->tenant_id;
 
         $cond[1] = ['a.tenant_id', '=', $tenant_id];
         $cond[2] = ['exit_project', '=', null];
+
+        if ($id) {
+            $cond[3] = ['project_id', '=', $id];
+        }
 
         if ($exit_project) {
             $cond[2] = ['exit_project', '=', $exit_project];
@@ -296,7 +305,10 @@ class ProjectService
         if (isset($input['exit_project'])) {
             $input['exit_project_date'] = date_format(date_create(), 'Y-m-d');
         }
-        $input['location'] = implode(',', $input['location']);
+
+        if (isset($input['location'])) {
+            $input['location'] = implode(',', $input['location']);
+        }
 
         ProjectMember::where('id', $id)->update($input);
 
