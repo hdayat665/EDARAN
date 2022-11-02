@@ -30,6 +30,8 @@ use App\Http\Controllers\Report\TimesheetReportController;
 Route::get('/registerTenant/{package}', [RegisterController::class, 'registerTenant']);
 Route::post('/saveRegisterTenant', [RegisterController::class, 'saveRegisterTenant']);
 
+
+
 Route::controller(ProfileController::class)->group(function () {
     // Route::get('/profile', 'profile')->middleware('auth');
     Route::get('/profile', 'profile');
@@ -320,3 +322,27 @@ Route::group(['middleware' => ['web']], function () {
 // });
 
 // require __DIR__.'/auth.php';
+
+
+//
+
+Route::get('org/chartchild', function () {
+    return view('pages.org.chartchild');
+});
+
+
+Route::get('org/charthumanresource', function () {
+    return view('pages.org.childChartHumanResource');
+});
+
+Route::get('org/childfinancialaccounting', function () {
+    return view('pages.org.childFinancialAccounting');
+});
+
+Route::get('org/childfinancialaccounting', function () {
+    return view('pages.org.childFinancialAccounting');
+});
+
+Route::get('org/childinternalaudit', function () {
+    return view('pages.org.childInternalAudit');
+});
