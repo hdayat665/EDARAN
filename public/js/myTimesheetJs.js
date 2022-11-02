@@ -675,9 +675,21 @@ $(document).ready(function() {
                         }
                     }
                 },
-                eventClick: function(info) {
-                    info.jsEvent.preventDefault();
+                dateClick: function(info) {
+                    
+                    $('#addLogModal').modal('show');
+                    
+                    const formatedDate = dayjs(info.dateStr).format("DD-MM-YYYY")
+                    // console.log(formatedDate);
+                    // console.log(info.dateStr);
 
+                    $("#dateaddlog").val(formatedDate);
+                },
+                eventClick: function(info) {
+                    
+                    info.jsEvent.preventDefault();
+                   
+                    
                     function getEvents(id) {
                         return $.ajax({
                             url: "/getEventById/" + id
@@ -1155,7 +1167,7 @@ $(document).ready(function() {
                 initialView: 'dayGridMonth',
                 editable: false,
                 droppable: false,
-                selectable: false,
+                selectable: true,
                 themeSystem: 'bootstrap',
                 views: {
                     timeGrid: {
@@ -1178,7 +1190,7 @@ $(document).ready(function() {
             init: function() {
                 handleCalendarDemo();
             }
-        };
+        }; 
     }();
 
     $(document).ready(function() {
@@ -1188,7 +1200,8 @@ $(document).ready(function() {
     //  FOR MODAL LOG AND EVENT
     $("#dateaddlog").datepicker({
         todayHighlight: true,
-        autoclose: true
+        autoclose: true,
+        format: 'dd-mm-yyyy'
     });
     $("#starteventdate").datepicker({
         todayHighlight: true,

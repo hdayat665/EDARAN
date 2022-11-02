@@ -4,7 +4,7 @@
         <div class="row mb-15px">
             <label class="form-label col-form-label col-md-1">Company*</label>
             <div class="col-md-5">
-                <select class="form-select" name="company" required id="companyForEmployment">
+                <select class="form-select" name="company"  id="companyForEmployment">
                 <?php $companys = getCompany(); ?>
                 <option label="Please Choose" selected="selected"> </option>
                 @if ($companys)
@@ -20,26 +20,12 @@
 
             <label class="form-label col-form-label col-md-1">Department*</label>
             <div class="col-md-5">
-                <select class="form-select" name="department" required id="departmentHide">
-                    <?php $departments = getDepartment(); ?>
+                
+
+                <select class="form-select" name="departmentId"  id="departmentShow">
+                    
                 <option label="Please Choose" selected="selected"> </option>
-                @if ($departments)
-
-                @foreach ($departments as $department)
-                    <option value="{{$department->id }}">{{$department->departmentName}}</option>
-                    @endforeach
-                    @endif
-                </select>
-
-                <select class="form-select" name="departmentId" required id="departmentShow">
-                    <?php $departments = getDepartment(); ?>
-                <option label="Please Choose" selected="selected"> </option>
-                @if ($departments)
-
-                @foreach ($departments as $department)
-                    <option value="{{$department->id }}">{{$department->departmentName}}</option>
-                    @endforeach
-                    @endif
+               
                 </select>
             </div>
         </div>
@@ -47,55 +33,23 @@
         <div class="row mb-15px">
             <label class="form-label col-form-label col-md-1">Unit*</label>
             <div class="col-md-5">
-                <select class="form-select" name="unit" required id="unitHide">
-                    <?php $units = getUnit(); ?>
+                
+
+                <select class="form-select" name="unitId"  id="unitShow">
+                    
                 <option label="Please Choose" selected="selected"> </option>
-                @if ($units)
-
-                @foreach ($units as $unit)
-                    <option value="{{$unit->id }}">{{$unit->unitName}}</option>
-                    @endforeach
-                    @endif
-
-                </select>
-
-                <select class="form-select" name="unitId" required id="unitShow">
-                    <?php $units = getUnit(); ?>
-                <option label="Please Choose" selected="selected"> </option>
-                @if ($units)
-
-                @foreach ($units as $unit)
-                    <option value="{{$unit->id }}">{{$unit->unitName}}</option>
-                    @endforeach
-                    @endif
-
+                
                 </select>
 
             </div>
             <label class="form-label col-form-label col-md-1">Branch*</label>
             <div class="col-md-5">
-                <select class="form-select" name="branch" required id="branchHide">
-                    <?php $branchs = getBranch(); ?>
+                
+
+                <select class="form-select" name="branchId"  id="branchShow">
+                   
                 <option label="Please Choose" selected="selected"> </option>
-                @if ($branchs)
-
-                @foreach ($branchs as $branch)
-                    <option value="{{$branch->id }}">{{$branch->branchName}}</option>
-                    @endforeach
-                    @endif
-
-                </select>
-
-                <select class="form-select" name="branchId" required id="branchShow">
-                    <?php $branchs = getBranch(); ?>
-                <option label="Please Choose" selected="selected"> </option>
-                @if ($branchs)
-
-                @foreach ($branchs as $branch)
-                    <option value="{{$branch->id }}">{{$branch->branchName}}</option>
-                    @endforeach
-                    @endif
-
+                
                 </select>
 
             </div>
@@ -104,7 +58,7 @@
         <div class="row mb-15px">
             <label class="form-label col-form-label col-md-1">Job Grade*</label>
             <div class="col-md-5">
-                <select class="form-select" name="jobGrade" required>
+                <select class="form-select" name="jobGrade" >
                     <?php $jobGrades = getJobGrade(); ?>
                     <option label="Please Choose" selected="selected"> </option>
                     @if ($jobGrades)
@@ -119,7 +73,7 @@
             </div>
             <label class="form-label col-form-label col-md-1">Designation*</label>
             <div class="col-md-5">
-                <select class="form-select" name="designation" required>
+                <select class="form-select" name="designation" >
                     <?php $designations = getDesignation(); ?>
                     <option label="Please Choose" selected="selected"> </option>
                     @if ($designations)
@@ -137,7 +91,7 @@
         <div class="row mb-15px">
             <label class="form-label col-form-label col-md-1">Employment Type*</label>
             <div class="col-md-5">
-                <select class="form-select" name="employmentType" required>
+                <select class="form-select" name="employmentType" >
                     <?php $employmentTypes = getEmploymentType(); ?>
                     <option label="Please Choose" selected="selected"> </option>
                     @if ($employmentTypes)
@@ -152,10 +106,10 @@
             </div>
             <label class="form-label col-form-label col-md-1">Report To</label>
             <div class="col-md-5">
-                <select class="form-select" name="supervisor" >
+                <select class="form-select" name="report_to" >
 
                     <?php $employees = getEmployee(); ?>
-                    <option label="Please Choose" selected="selected"> </option>
+                    <option value="" label="Please Choose" selected="selected"> </option>
                     @if ($employees)
 
                     @foreach ($employees as $employee)
