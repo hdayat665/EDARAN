@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en" >
 <style>
-  /* #chart-wrapper {
+  #chart-wrapper {
 	display: flex;
     position: relative;
     width: 50%;
 	margin: 0 auto;
 	align-items: center;
-  } */
+  }
 
 
 

@@ -472,13 +472,13 @@
     
 	<div class="row">
 					<div class="col-lg-6 panel panel-inverse">
-					<div class="panel-heading mt-15px">
+						<div class="panel-heading mt-15px">
 								<h4 class="panel-title"><i class="fas fa-clipboard-check fa-fw me-3"></i>Leave Employee Report</h4>
 							</div>
 						<div class="panel-body">
 							
 							<div id="chart-wrapper" style="display: flex; justify-content: center;">
-									<canvas id="pie-chart"  style="width:100%;max-width:400px" >
+									<canvas id="pie-chart"  style="width:100%;max-width:700px" > </canvas>
 					</div>
 				</div>
 			</div>
