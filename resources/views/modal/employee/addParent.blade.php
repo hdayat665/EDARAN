@@ -21,12 +21,12 @@
                     <div class="row p-2">
                         <div class="col-sm-6">
                             <label for="dob" class="form-label">Date of Birth*</label>
-                            <input type="date" id="" name="DOB" class="form-control" aria-describedby="dob">
+                            <input type="text" id="DOBaddparent" name="DOB" class="form-control" aria-describedby="dob">
                         </div>
                         <div class="col-sm-6">
                             <label for="age" class="form-label">Gender*</label>
                             <select class="form-select" name="gender" id="">
-                                <option value="0" label="Please Choose "></option>
+                                <option value="" label="Please Choose "></option>
                                 @foreach ($gender as $key => $status)
                                 <option value="{{$key}}">{{$status}}</option>
                                 @endforeach
@@ -49,13 +49,13 @@
                             </select>
                         </div>
                     </div>
-                    <h4 class="mt-3 p-2">Address</h4>
-                    <div class="row p-2">
+                    <div class="row">
+                        <h4 class="col-sm-6 p-2">Address</h4>
                         <div class="col-sm-6">
-                            <div class="form-check form-switch align-right">
-                                <input class="form-check-input" type="checkbox" name="sameAddress" id="same-address">
-                                <label class="form-check-label" for="same-address">
-                                    Same as permenant address
+                            <br><div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="same-address2" name="sameaspermanent" style="text-transform:uppercase">
+                                <label class="form-check-label" for="same-address2">
+                                    Same as Permanent Address
                                 </label>
                             </div>
                         </div>
@@ -63,27 +63,27 @@
                     <div class="row p-2">
                         <div class="col-sm-6">
                             <label for="address-1" class="form-label">Address 1*</label>
-                            <input type="text" id="" name="address1" class="form-control" aria-describedby="address-1">
+                            <input type="text" id="address1parent" name="address1" class="form-control" aria-describedby="address-1">
                         </div>
                         <div class="col-sm-6">
                             <label for="address-2" class="form-label">Address 2</label>
-                            <input type="text" id="" name="address2" class="form-control" aria-describedby="address-2">
+                            <input type="text" id="address2parent" name="address2" class="form-control" aria-describedby="address-2">
                         </div>
                     </div>
                     <div class="row p-2">
                         <div class="col-sm-6">
                             <label for="postcode" class="form-label">Postcode*</label>
-                            <input type="text" id="" name="postcode" class="form-control" aria-describedby="postcode">
+                            <input type="text" id="postcodeparent" name="postcode" class="form-control" aria-describedby="postcode">
                         </div>
                         <div class="col-sm-6">
                             <label for="city" class="form-label">City*</label>
-                            <input type="text" class="form-select" name="city" id="">
+                            <input type="text" class="form-select" name="city" id="cityparent">
                         </div>
                     </div>
                     <div class="row p-2">
                         <div class="col-sm-6">
                             <label for="state" class="form-label">State*</label>
-                            <select class="form-select" id="" name="state">
+                            <select class="form-select" id="stateparent" name="state">
                                 <?php $state = state() ?>
                                 <option value="0" label="Please Choose"  ></option>
                                 @foreach ($state as $key => $status)
@@ -93,7 +93,7 @@
                         </div>
                         <div class="col-sm-6">
                             <label for="country" class="form-label">Country</label>
-                            <select class="form-select" name="country" id="">
+                            <select class="form-select" name="country" id="countryparent">
                                 <optgroup id="country-optgroup-Americas" label="Americas">
                                     @foreach ($americass as $key => $america)
                                     <option value="{{$key}}" >{{$america}}</option>
@@ -108,12 +108,13 @@
                         </div>
                     </div>
 
-                </form>
+                
             </div>
-            <div class="modal-footer">
+            <div class="modal-footer"> 
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-primary" id="addParent">Save</button>
+                <button href="javascript:;" id="addParent" class="btn btn-primary">Save</button>
             </div>
+            </form>
         </div>
     </div>
 </div>

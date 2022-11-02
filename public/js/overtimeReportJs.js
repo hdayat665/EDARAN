@@ -1,8 +1,11 @@
 $("#timesheetapproval").DataTable({
     searching: false,
     lengthChange: true,
-    lengthMenu: [5, 10],
     responsive: false,
+    lengthMenu: [
+        [5,10, 15, 20, -1],
+        [5,10, 15, 20, 'All'],
+    ],
 
     dom: '<"row"<"col-sm-11"B><"col-sm-1"l>>t<"row"<"col-sm-5"i><"col-sm-7"p>>',
     buttons: [

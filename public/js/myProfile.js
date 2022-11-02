@@ -7,18 +7,10 @@ $(document).ready(function() {
     
     $("#tableSibling").DataTable({
         
-        responsive: true,
-        deferRender:    true,
-        scrollX: true,
-        scrollY: true,
-        fixedHeader: true,
-        scrollCollapse: true,
-        scroller: true,
-        paging: true,
+        responsive: false,
         lengthMenu: [
             [5,10, 15, 20, -1],
             [5,10, 15, 20, 'All'],
-            
         ],
         
         
@@ -155,6 +147,10 @@ $(document).ready(function() {
                                 //98>22->19+98
             $('#DOBChild').val((year > cutoff ? '19' : '20') + year + '-' + month + '-' + day);
         }
+    });
+    
+    $("input[type=text]").keyup(function() {
+        $(this).val($(this).val().toUpperCase());
     });
 
     $('#idNoaddChild').change(function(){
@@ -732,7 +728,7 @@ $(document).ready(function() {
         ],
 
     });
-    $("#firstName1,#lastName1").change(function(){
+    $("#xName1,#lastName1").change(function(){
         var a = $("#firstName1").val();
         var b = $("#lastName1").val();
         $("#fullName1").val(a+ ' '+b);

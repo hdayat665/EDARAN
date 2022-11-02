@@ -110,7 +110,7 @@
 
                 
             </div>
-            <div class="modal-footer">
+            <div class="modal-footer"> 
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                 <button href="javascript:;" id="addParent" class="btn btn-primary">Save</button>
             </div>

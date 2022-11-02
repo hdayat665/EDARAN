@@ -33,6 +33,7 @@ $(document).ready(function() {
     });
     $("#gender").css({"pointer-events": "none", "touch-action": "none", "background": "#e9ecef"});
     $("#childgender").css({"pointer-events": "none", "touch-action": "none", "background": "#e9ecef"});
+    $("#gender1").css({"pointer-events": "none", "touch-action": "none", "background": "#e9ecef"});
     
     $("#firstnamemc,#lastnamemc").change(function(){
         var a = $("#firstnamemc").val();
@@ -107,6 +108,58 @@ $(document).ready(function() {
             $('#ageChild').val(currentAge);
         }
     });
+    //EDIT CHILD 
+    $('#idNo1').change(function(){
+        
+        if($(this).val().length == 12){
+
+            var idn = $(this).val();
+            var year = (idn.substring(0, 2));
+            var month = idn.substring(2, 4);
+            var day = idn.substring(4, 6);
+            
+            var cutoff = (new Date()).getFullYear() - 2000; //2022-2000=22cutoff
+                                //98>22->19+98
+            $('#DOB1').val((year > cutoff ? '19' : '20') + year + '-' + month + '-' + day);
+        }
+    });
+
+    $('#idNo1').change(function(){
+
+        if($(this).val().length == 12){
+
+            var idn = $(this).val();
+            
+            var lastIc = idn.substring(10,12);
+            
+            if(lastIc % 2 == 0){
+                $('#gender1').val(2);
+            } else {
+                $('#gender1').val(1);
+            }
+
+        }
+
+    });
+
+    $('#idNo1').change(function(){
+
+        if($(this).val().length == 12){
+
+            var idn = $(this).val();
+            var year = (idn.substring(0, 2));
+
+            var cutoff = (new Date()).getFullYear() - 2000; //2022-2000=22cutoff
+            //98>22->19+98->>1998
+            //$('#DOBChild').val((year > cutoff ? '19' : '20') + year + '-' + month + '-' + day);
+            //2022-1998
+            var ww = (year > cutoff ? '19' : '20') + year;
+            var currentAge = new Date().getFullYear() - ww;
+            $('#age1').val(currentAge);
+        }
+    });
+
+    //EDIT CHILD
     $(".partCheck4").click(function(){
         if ($(this).prop("checked")) {
               
@@ -114,6 +167,9 @@ $(document).ready(function() {
             $('#DOBChild').prop('readonly', false);
             $('#DOBChild').css('pointer-events', 'auto');
             $("#idNoaddChild").val("");
+            $('#ageChild').prop('readonly', false);
+            $("#childgender").css({"pointer-events": "auto", "touch-action": "auto", "background": "#ffffff"});
+            
             
         } else {
             
@@ -124,14 +180,68 @@ $(document).ready(function() {
             $("#expiryDateChild").val("");
             $('#expiryDateChild').prop('readonly', true);
             $('#expiryDateChild').css('pointer-events', 'none');
+            $("#childgender").css({"pointer-events": "none", "touch-action": "none", "background": "#e9ecef"});
+            $('#ageChild').prop('readonly', true);
         }
       });
-    
+      $(".partCheck5").click(function(){
+        if ($(this).prop("checked")) {
+              
+            $('#idNo1').prop('readonly', true);
+            $('#DOB1').prop('readonly', false);
+            $('#DOB1').css('pointer-events', 'auto');
+            $("#idNo1").val("");
+            $('#age1').prop('readonly', false);
+            $("#gender1").css({"pointer-events": "auto", "touch-action": "auto", "background": "#ffffff"});
+            
+            
+        } else {
+            
+            $('#idNo1').prop('readonly', false);
+            $('#DOB1').prop('readonly', true);
+            $('#DOB1').css('pointer-events', 'none');
+            $("#passports1").val("");
+            $("#expiryDateChild").val("");
+            $('#expiryDateChild').prop('readonly', true);
+            $('#expiryDateChild').css('pointer-events', 'none');
+            $("#gender1").css({"pointer-events": "none", "touch-action": "none", "background": "#e9ecef"});
+            $('#age1').prop('readonly', true);
+        }
+      });
+      $(".mcdetaildrop").css({"pointer-events": "none","background": "#e9ecef"});
+      $(".partChecks").click(function(){
+        if ($(this).prop("checked")) {
+            $('.mcdetail').prop('readonly', false);
+            $(".mcdetaildrop").css({"pointer-events": "auto","background": "#ffffff"});
+            
+        } else {
+            $('.mcdetail').prop('readonly', true);
+            
+            $(".mcdetaildrop").css({"pointer-events": "none","background": "#e9ecef"});
+            
+        }
+      });
       $("#expiryDateChild").datepicker({
         todayHighlight: true,
         format: 'yyyy-mm-dd',
         autoclose: true,
       });
+      $("#DOBChild").datepicker({
+        todayHighlight: true,
+        format: 'yyyy-mm-dd',
+        autoclose: true,
+      });
+      $("#dobsibling").datepicker({
+        todayHighlight: true,
+        format: 'yyyy-mm-dd',
+        autoclose: true,
+      });
+      $("#DOBS").datepicker({
+        todayHighlight: true,
+        format: 'yyyy-mm-dd',
+        autoclose: true,
+      });
+      
       $('#passportChild').change(function(){
     
         if ($('#expiryDateChild').prop('readonly')) {
@@ -296,9 +406,36 @@ $(document).ready(function() {
         autoclose: true,
     });
 
+    $("#DOBaddparent").datepicker({
+        todayHighlight: true,
+        format: 'yyyy-mm-dd',
+        autoclose: true,
+      });
+
+      $("#same-address2").change(function() {
+        if(this.checked) {
+            $('#address1parent').val($('#address-1').val()).prop('readonly', true);
+            $('#address2parent').val($('#address-2').val()).prop('readonly', true);
+            $('#postcodeparent').val($('#postcode').val()).prop('readonly', true);
+            $('#cityparent').val($('#city').val()).css({"pointer-events": "none", "touch-action": "none", "background": "#e9ecef"});
+            $('#stateparent').val($('#state').val()).css({"pointer-events": "none", "touch-action": "none", "background": "#e9ecef"});
+            $('#countryparent').val($('#country').val()).css({"pointer-events": "none", "touch-action": "none", "background": "#e9ecef"});
+        }
+        else {
+            $('#address1parent').val($('').val()).prop('readonly', false);
+            $('#address2parent').val($('').val()).prop('readonly', false);
+            $('#postcodeparent').val($('').val()).prop('readonly', false);
+            $('#cityparent').val($('').val()).css({"pointer-events": "auto", "touch-action": "auto", "background": "#ffffff"});
+            $('#stateparent').val($('').val()).css({"pointer-events": "auto", "touch-action": "auto", "background": "#ffffff"});
+            $('#countryparent').val($('my').val()).css({"pointer-events": "auto", "touch-action": "auto", "background": "#ffffff"});
+            
+        }        
+      });
+
     $("input[type=text]").keyup(function() {
         $(this).val($(this).val().toUpperCase());
     });
+    
     $('#idNo').change(function() {
 
         if ($(this).val().length == 12) {
@@ -853,14 +990,9 @@ $(document).ready(function() {
                     digits: true,
                     rangelength: [12, 12]
                 },
-                age: {
-                    required: true,
-                    digits: true,
-                    
-                },
-                gender:"required",
                 maritalStatus:"required",
-                
+                DOBChild:"required",
+               
                 
             },
 
@@ -872,13 +1004,8 @@ $(document).ready(function() {
                     digits: "Please Insert Correct Identification Number Without ' - ' or Space",
                     rangelength: "Please Provide Valid Identification Number"
                 },
-                age: {
-                    required: "Please Insert Age",
-                    digits: "Please Insert Correct Age",
-                    
-                },
-                gender:"Please Choose Gender",
                 maritalStatus:"Please Choose Marital Status",
+                DOBChild:"Please Enter Date Of Birth",
                 
 
             },
@@ -1096,7 +1223,78 @@ $(document).ready(function() {
         $('#add-sibling').modal('show');
     });
 
+    $("#same-address4").change(function() {
+        if(this.checked) {
+            $('#address1sibling').val($('#address-1').val()).prop('readonly', true);
+            $('#address2sibling').val($('#address-2').val()).prop('readonly', true);
+            $('#postcodesibling').val($('#postcode').val()).prop('readonly', true);
+            $('#citysibling').val($('#city').val()).prop('readonly', true);
+            $('#statesibling').val($('#state').val()).css({"pointer-events": "none", "touch-action": "none", "background": "#e9ecef"});
+            $('#countrysibling').val($('#country').val()).css({"pointer-events": "none", "touch-action": "none", "background": "#e9ecef"});
+        }
+        else {
+            $('#address1sibling').val($('').val()).prop('readonly', false);
+            $('#address2sibling').val($('').val()).prop('readonly', false);
+            $('#postcodesibling').val($('').val()).prop('readonly', false);
+            $('#citysibling').val($('').val()).prop('readonly', false);
+            $('#statesibling').val($('').val()).css({"pointer-events": "auto", "touch-action": "auto", "background": "#ffffff"});
+            $('#countrysibling').val($('my').val()).css({"pointer-events": "auto", "touch-action": "auto", "background": "#ffffff"});
+            
+        }        
+        });
+        
     $('#addSibling').click(function(e) {
+        $("#addSiblingForm").validate({
+            // Specify validation rules
+            rules: {
+                
+                firstName: "required",
+                lastName: "required",
+                DOB: "required",
+                gender: "required",
+                contactNo: {
+                    digits: true,
+                    required: true,
+                    
+                },
+                relationship: "required",
+                address1: "required",
+                postcode: {
+                    required: true,
+                    digits: true,
+                    rangelength: [5, 5]
+                },
+                city: "required",
+                state: "required",
+                
+            },
+
+            messages: {
+                firstName: "Please Insert First Name",
+                lastName: "Please Insert Last Name",
+                DOB: "Please Insert Date of Birth",
+                gender: "Please Choose Gender",
+                contactNo: {
+                    digits: "Please Insert Correct Contact Number Without ' - ' or Space",
+                    required: "please insert contact number"
+                    
+                },
+                relationship: "Please Choose Relationship",
+                address1: "Please Insert Address",
+                postcode: {
+                    required: "Please Insert Your Postcode",
+                    digits: "Please Enter Valid Postcode",
+                    rangelength: "Please Enter Valid Postcode"
+                },
+                city: "Please Insert City",
+                state: "Please Choose State",
+               
+
+            },
+            submitHandler: function(form) {
+
+
+
         requirejs(['sweetAlert2'], function(swal) {
 
             var data = new FormData(document.getElementById("addSiblingForm"));
@@ -1131,8 +1329,9 @@ $(document).ready(function() {
             });
 
         });
+    }
     });
-
+    });
     $('#editSibling').click(function(e) {
         requirejs(['sweetAlert2'], function(swal) {
 
@@ -1258,12 +1457,13 @@ $(document).ready(function() {
                     showCancelButton: true,
                 }).then(function() {
                     $.ajax({
-                        type: "DELETE",
+                        type: "POST",
                         url: "/deleteSibling/" + id,
-                        dataType: "json",
-                        async: false,
-                        processData: false,
-                        contentType: false,
+                        // dataType: "json",
+                        data: { _method: "DELETE" },
+                        // async: false,
+                        // processData: false,
+                        // contentType: false,
                     }).done(function(data) {
                         swal({
                             title: data.title,
@@ -1311,7 +1511,54 @@ $(document).ready(function() {
         $('#add-parent').modal('show');
     });
 
-    $('#addParent').click(function(e) {
+    $('#addParent').click(function(e) { 
+        $("#addParentForm").validate({
+            // Specify validation rules
+            rules: { 
+                firstName: "required",
+                lastName: "required",
+                DOB:"required",
+                gender:"required",
+                contactNo: {
+                    required: true,
+                    digits: true,
+                    
+                },
+                relationship:"required",
+                address1:"required",
+                postcode: {
+                    required: true,
+                    digits: true,
+                    rangelength: [5, 5]
+                },
+                city:"required",
+                state:"required",
+            },
+
+            messages: {
+                firstName: "PLEASE INSERT FIRST NAME",
+                lastName: "PLEASE INSERT LAST NAME",
+                DOB: "PLEASE INSERT DATE OF BIRTH",
+                gender: "PLEASE CHOOSE GENDER",
+                contactNo: {
+                    required: "PLEASE INSERT CONTACT NUMBER",
+                    digits: "PLEASE INSERT VALID CONTACT NUMBER WITHOUT ' - ' AND SPACE",
+                    
+                },
+                relationship:"PLEASE CHOOSE RELATIONSHIP",
+                address1:"PLEASE INSERT ADDRESS",
+                postcode: {
+                    required: "PLEASE INSERT YOUR POSTCODE",
+                    digits: "PLEASE ENTER VALID POSTCODE",
+                    rangelength: "PLEASE ENTER VALID POSTCODE"
+                },
+                city:"PLEASE INSERT CITY",
+                state:"PLEASE CHOOSE STATE",
+            },
+
+            submitHandler: function(form) {
+
+
         requirejs(['sweetAlert2'], function(swal) {
 
             var data = new FormData(document.getElementById("addParentForm"));
@@ -1346,7 +1593,9 @@ $(document).ready(function() {
             });
 
         });
-    });
+    }
+ });
+});
 
     $('#editParent').click(function(e) {
         requirejs(['sweetAlert2'], function(swal) {
@@ -1463,12 +1712,13 @@ $(document).ready(function() {
                     showCancelButton: true,
                 }).then(function() {
                     $.ajax({
-                        type: "DELETE",
+                        type: "POST",
                         url: "/deleteParent/" + id,
-                        dataType: "json",
-                        async: false,
-                        processData: false,
-                        contentType: false,
+                        // dataType: "json",
+                        data: { _method: "DELETE" },
+                        // async: false,
+                        // processData: false,
+                        // contentType: false,
                     }).done(function(data) {
                         swal({
                             title: data.title,

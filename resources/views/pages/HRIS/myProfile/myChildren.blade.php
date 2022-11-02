@@ -32,12 +32,12 @@
                     </div>
                 </td>
 
-                <td>{{ $children->fullName }}</td>
+                <td style="text-transform: uppercase;">{{ $children->fullName }}</td>
                 <td>{{ $children->idNo }}</td>
                 <td>{{ $children->age }}</td>
-                <td>{{ ($children->educationLevel == "0") ? '-' : educationLevel($children->educationLevel) }}</td>
-                <td>{{ $children->instituition }}</td>
-                <td>{{ ($children->maritalStatus == "0") ? '-' : getMaritalStatus($children->maritalStatus) }}</td>
+                <td style="text-transform: uppercase;">{{ ($children->educationLevel == "0") ? '-' : educationLevel($children->educationLevel) }}</td>
+                <td style="text-transform: uppercase;">{{ $children->instituition }}</td>
+                <td style="text-transform: uppercase;">{{ ($children->maritalStatus == "0") ? '-' : getMaritalStatus($children->maritalStatus) }}</td>
             </tr>
             @endforeach
             @endif
