@@ -90,7 +90,7 @@
                 </div>
                 <div class="row">
                     <label class="form-label col-form-label col-md-4">Warranty End Date</label>
-                    <label class="form-label col-form-label col-md-4">Bank Guarantee Amount*</label>
+                    <label class="form-label col-form-label col-md-4">Bank Guarantee Amount</label>
                     <label class="form-label col-form-label col-md-4">Bank Guarantee Expiry Date</label>
                 </div>
                 <div class="row mb-15px">

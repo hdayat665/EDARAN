@@ -21,12 +21,12 @@
                     <div class="row p-2">
                         <div class="col-sm-6">
                             <label for="dob" class="form-label">Date of Birth</label>
-                            <input type="date" id="" name="DOB" class="form-control" aria-describedby="dob">
+                            <input type="text" id="dobsibling" name="DOB" class="form-control" aria-describedby="dob">
                         </div>
                         <div class="col-sm-6">
                             <label for="gender" class="form-label">Gender</label>
                             <select class="form-select" name="gender">
-                                <option value="0" label="Please Choose " ></option>
+                                <option value="" label="Please Choose " ></option>
                                 @foreach ($gender as $key => $status)
                                 <option value="{{$key}}" >{{$status}}</option>
                                 @endforeach
@@ -36,25 +36,26 @@
                     <div class="row p-2">
                         <div class="col-sm-6">
                             <label for="lastname" class="form-label">Contact Number*</label>
-                            <input type="text" value="XXXXXXXXXX" name="contactNo" id="" class="form-control" aria-describedby="lastname">
+                            <input type="text" name="contactNo" id="" class="form-control" aria-describedby="lastname">
                         </div>
                         <div class="col-sm-6">
                             <label for="lastname" class="form-label">Relationship</label>
                             <select class="form-select" name="relationship">
-                                <option value="0" label="Please Choose "></option>
+                                <option value="" label="Please Choose "></option>
                                 @foreach ($relationships as $key => $relationship)
                                 <option value="{{$key}}" >{{$relationship}}</option>
                                 @endforeach
                             </select>
                         </div>
                     </div>
-                    <h4 class="mt-3 p-2">Address</h4>
-                    <div class="row p-2">
-                        <div class="col-sm-6">
-                            <div class="form-check form-switch align-right">
-                                <input class="form-check-input" type="checkbox" name="sameAddress" id="same-address">
+                    <div class="row">
+                        <h4 class="col-sm-6 p-2">Address</h4>
+                        <div class="col-sm-6"><br>
+                            <div class="form-check">
+                                {{-- <input class="form-check-input" type="checkbox" id="same-address3" name="sameAsPermenant"> --}}
+                                <input class="form-check-input" type="checkbox" id="same-address4" name="sameAsPermenant" style="text-transform:uppercase">
                                 <label class="form-check-label" for="same-address">
-                                    Same as permenant address
+                                    Same as Permanent Address
                                 </label>
                             </div>
                         </div>
@@ -62,28 +63,28 @@
                     <div class="row p-2">
                         <div class="col-sm-6">
                             <label for="address-1" class="form-label">Address 1*</label>
-                            <input type="text" id="-1" class="form-control" name="address1" aria-describedby="address-1">
+                            <input type="text" id="address1sibling" class="form-control" name="address1" aria-describedby="address-1">
                         </div>
                         <div class="col-sm-6">
                             <label for="address-2" class="form-label">Address 2</label>
-                            <input type="text" id="-2" class="form-control" name="address2" aria-describedby="address-2">
+                            <input type="text" id="address2sibling" class="form-control" name="address2" aria-describedby="address-2">
                         </div>
                     </div>
                     <div class="row p-2">
                         <div class="col-sm-6">
                             <label for="postcode" class="form-label">Postcode*</label>
-                            <input type="text" id="" class="form-control" name="postcode" aria-describedby="postcode">
+                            <input type="text" id="postcodesibling" class="form-control" name="postcode" aria-describedby="postcode">
                         </div>
                         <div class="col-sm-6">
                             <label for="city" class="form-label">City*</label>
-                            <input type="text" class="form-control" name="city">
+                            <input type="text" id="citysibling" class="form-control" name="city">
                         </div>
                     </div>
                     <div class="row p-2">
                         <div class="col-sm-6">
                             <label for="state" class="form-label">State*</label>
-                            <select class="form-select" name="state">
-                                <option value="0" label="Please Choose " ></option>
+                            <select class="form-select" name="state" id="statesibling">
+                                <option value="" label="Please Choose " ></option>
                                 @foreach ($states as $key => $state)
                                 <option value="{{$key}}"  >{{$state}}</option>
                                 @endforeach
@@ -91,8 +92,8 @@
                         </div>
                         <div class="col-sm-6">
                             <label for="country" class="form-label">Country</label>
-                            <select class="form-select" name="country">
-                                <option value="0" label="Please Choose " ></option>
+                            <select class="form-select" name="country" id="countrysibling">
+                                <option value="MY" label="MALAYSIA" selected></option>
                                 <optgroup id="country-optgroup-Americas" label="Americas">
                                     @foreach ($americass as $key => $america)
                                     <option value="{{$key}}"  >{{$america}}</option>
@@ -107,12 +108,13 @@
                         </div>
                     </div>
 
-                </form>
+                
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-primary" id="addSibling">Save</button>
+                <button href="javascript:;" id="addSibling" class="btn btn-primary">Save</button>
             </div>
+        </form>
         </div>
     </div>
 </div>

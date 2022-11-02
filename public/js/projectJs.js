@@ -7,11 +7,18 @@ $(document).ready(function() {
 
     $("#projectTable").DataTable({
         responsive: false,
+        lengthMenu: [
+            [5,10, 15, 20, -1],
+            [5,10, 15, 20, 'All'],
+        ],
     });
 
     $("#data-table-default2").DataTable({
-        responsive: true,
-        lengthMenu: [5, 10, 15],
+        responsive: false,
+        lengthMenu: [
+            [5,10, 15, 20, -1],
+            [5,10, 15, 20, 'All'],
+        ],
     });
 
     $(document).on("click", "#addButton", function() {
