@@ -16437,7 +16437,7 @@ fieldset:disabled .btn {
     --app-sidebar-profile-bg-image: url(images/cover-sidebar-user.jpg);
     --app-sidebar-component-color: #FFFFFF;
     --app-sidebar-component-color-rgb: 255, 255, 255;
-    --app-sidebar-active-component-bg: #20252a;
+    --app-sidebar-active-component-bg: #dbedff;
     --app-sidebar-active-component-bg-rgb: 32, 37, 42;
     --app-sidebar-menu-header-color: rgba(255, 255, 255, 0.45);
     --app-sidebar-menu-divider-bg: #20252a;
@@ -17762,7 +17762,7 @@ a:focus {
     top: 11px;
     width: 11px;
     height: 2px;
-    background: var(--app-sidebar-active-component-bg)
+    background: var(--app-sidebar-bg)
 }
 
 .app-sidebar .menu .menu-item .menu-submenu .menu-item:before {
@@ -17772,7 +17772,7 @@ a:focus {
     top: 0;
     bottom: 0;
     width: 2px;
-    background: var(--app-sidebar-active-component-bg)
+    background: var(--app-sidebar-bg)
 }
 
 .app-sidebar .menu .menu-item .menu-submenu .menu-item:after {
