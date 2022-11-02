@@ -1,13 +1,19 @@
 <!DOCTYPE html>
 <html lang="en" >
 <style>
-    #chart-wrapper {
-        display: flex;
-        position: relative;
-        width: 50%;
-        margin: 0 auto;
-        align-items: center;
-    }
+  /* #chart-wrapper {
+	display: flex;
+    position: relative;
+    width: 50%;
+	margin: 0 auto;
+	align-items: center;
+  } */
+
+
+
+
+
+
 </style>
 
 <head>
@@ -423,14 +429,14 @@
                                         <div class="menu-text text-gray">Organization Chart</div>
                                     </a>
                                 </div>
-                                <div class="menu-item">
+                                {{-- <div class="menu-item">
                                     <a href="/departmentTree" class="menu-link">
                                     <div class="menu-icon">
 								        <i class="fa fa-folder-tree text-gray"></i>
 							        </div>
                                         <div class="menu-text text-gray">Department Tree</div>
                                     </a>
-                                </div>
+                                </div> --}}
                             </div>
 
                     </div>
@@ -693,6 +699,7 @@
     <script src="/assets/plugins/blueimp-file-upload/js/jquery.fileupload-ui.js"></script>
     <script src="/assets/js/demo/form-multiple-upload.demo.js"></script>
 	<script src="/assets/plugins/jstree/dist/jstree.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.2/croppie.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.2/croppie.js"></script>

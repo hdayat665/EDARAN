@@ -7,10 +7,31 @@ $(document).ready(function() {
         $(this).val($(this).val().toUpperCase());  
     });
 
+    $("#gender").css({"pointer-events": "none", "touch-action": "none", "background": "#e9ecef"});
+    
+    $('#idnumber').change(function(){
+
+        if($(this).val().length == 12){
+
+            var idn = $(this).val();
+            
+            var lastIc = idn.substring(10,12);
+            
+            if(lastIc % 2 == 0){
+                $('#gender').val(2);
+            } else {
+                $('#gender').val(1);
+            }
+
+        }
+
+    });
+    
     $("#datepicker-autoClose").datepicker({
         todayHighlight: true,
         autoclose: true,
     });
+    
     $("#datepicker-birth").datepicker({
         todayHighlight: true,
         autoclose: true,
@@ -94,15 +115,15 @@ $(document).ready(function() {
             $('#address2c').val($('#address2').val()).prop('readonly', true);
             $('#postcodec').val($('#postcode').val()).prop('readonly', true);
             $('#cityc').val($('#city').val()).prop('readonly', true);
-            $('#statec').val($('#state').val()).prop('disabled', true);
-            $('#countryc').val($('#country').val()).prop('disabled', true);
+            $('#statec').val($('#state').val()).css({"pointer-events": "none", "touch-action": "none", "background": "#e9ecef"});
+            $('#countryc').val($('#country').val()).css({"pointer-events": "none", "touch-action": "none", "background": "#e9ecef"});
         } else {
             $('#address1c').prop('readonly', false);
             $('#address2c').prop('readonly', false);
             $('#postcodec').prop('readonly', false);
             $('#cityc').prop('readonly', false);
-            $('#statec').prop('disabled', false);
-            $('#countryc').prop('disabled', false);
+            $('#statec').css({"pointer-events": "auto", "touch-action": "auto", "background": "#ffffff"});
+            $('#countryc').css({"pointer-events": "auto", "touch-action": "auto", "background": "#ffffff"});
         }
     });
 
@@ -382,9 +403,9 @@ $(document).ready(function() {
             rules: {
 
                 company: "required",
-                department: "required",
-                unit: "required",
-                branch: "required",
+                departmentId: "required",
+                unitId: "required",
+                branchId: "required",
                 jobGrade: "required",
                 designation: "required",
                 employmentType: "required",
@@ -400,9 +421,9 @@ $(document).ready(function() {
             messages: {
 
                 company: "Please Insert Your Company",
-                department: "Please Insert Your Department",
-                unit: "Please Insert Your Unit",
-                branch: "Please Insert Your Branch",
+                departmentId: "Please Insert Your Department",
+                unitId: "Please Insert Your Unit",
+                branchId: "Please Insert Your Branch",
                 jobGrade: "Please Insert Your Job Grade",
                 designation: "Please Insert Your Designation",
                 employmentType: "Please Insert Your Employment Type",
@@ -416,7 +437,7 @@ $(document).ready(function() {
             },
             submitHandler: function(form) {
 
-                requirejs(['sweetAlert2'], function(swal) {
+                requirejs(['sweetAlert2'], function(swal) { 
 
                     var data = new FormData(document.getElementById("employmentForm"));
 
