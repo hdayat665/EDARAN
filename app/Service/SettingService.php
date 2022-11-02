@@ -116,7 +116,7 @@ class SettingService
         $input = $r->input();
 
         date_default_timezone_set("Asia/Kuala_Lumpur");
-        $etData = Company::where('companyCode', $input['companyCode'])->first();
+        $etData = Company::where([['companyCode', $input['companyCode']], ['tenant_id', Auth::user()->tenant_id]])->first();
         if ($etData) {
             $data['msg'] = 'Company code already exists.';
             $data['status'] = config('app.response.error.status');
@@ -198,7 +198,7 @@ class SettingService
         $input = $r->input();
 
         date_default_timezone_set("Asia/Kuala_Lumpur");
-        $etData = Department::where('departmentCode', $input['departmentCode'])->first();
+        $etData = Department::where([['departmentCode', $input['departmentCode']], ['tenant_id', Auth::user()->tenant_id]])->first();
         if ($etData) {
             $data['msg'] = 'Department code already exists.';
             $data['status'] = config('app.response.error.status');
@@ -278,7 +278,7 @@ class SettingService
 
 
         date_default_timezone_set("Asia/Kuala_Lumpur");
-        $etData = Unit::where('unitCode', $input['unitCode'])->first();
+        $etData = Unit::where([['unitCode', $input['unitCode']], ['tenant_id', Auth::user()->tenant_id]])->first();
         if ($etData) {
             $data['msg'] = 'Unit code already exists.';
             $data['status'] = config('app.response.error.status');
@@ -357,7 +357,7 @@ class SettingService
         $input = $r->input();
 
         date_default_timezone_set("Asia/Kuala_Lumpur");
-        $etData = Branch::where('branchName', $input['branchName'])->first();
+        $etData = Branch::where([['branchName', $input['branchName']], ['tenant_id', Auth::user()->tenant_id]])->first();
         if ($etData) {
             $data['msg'] = 'Branch name already exists.';
             $data['status'] = config('app.response.error.status');
@@ -437,7 +437,7 @@ class SettingService
         $input = $r->input();
 
         date_default_timezone_set("Asia/Kuala_Lumpur");
-        $etData = JobGrade::where('jobGradeCode', $input['jobGradeCode'])->first();
+        $etData = JobGrade::where([['jobGradeCode', $input['jobGradeCode']], ['tenant_id', Auth::user()->tenant_id]])->first();
         if ($etData) {
             $data['msg'] = 'Code already exists.';
             $data['status'] = config('app.response.error.status');
@@ -516,7 +516,7 @@ class SettingService
         $input = $r->input();
 
         date_default_timezone_set("Asia/Kuala_Lumpur");
-        $etData = Designation::where('designationCode', $input['designationCode'])->first();
+        $etData = Designation::where([['designationCode', $input['designationCode']], ['tenant_id', Auth::user()->tenant_id]])->first();
         if ($etData) {
             $data['msg'] = 'Code already exists.';
             $data['status'] = config('app.response.error.status');
@@ -603,7 +603,7 @@ class SettingService
             }
         }
 
-        $sopData = SOP::where('SOPCode', $input['SOPCode'])->first();
+        $sopData = SOP::where([['SOPCode', $input['SOPCode']], ['tenant_id', Auth::user()->tenant_id]])->first();
 
         if ($sopData) {
             $data['status'] = config('app.response.error.status');
@@ -785,7 +785,7 @@ class SettingService
         }
 
         date_default_timezone_set("Asia/Kuala_Lumpur");
-        $newsData = News::where('title', $input['title'])->first();
+        $newsData = News::where([['title', $input['title']], ['tenant_id', Auth::user()->tenant_id]])->first();
         if ($newsData) {
             $data['msg'] = 'Title already exists.';
             $data['status'] = config('app.response.error.status');
@@ -876,7 +876,7 @@ class SettingService
         $input = $r->input();
 
         date_default_timezone_set("Asia/Kuala_Lumpur");
-        $etData = EmploymentType::where('type', $input['type'])->first();
+        $etData = EmploymentType::where([['type', $input['type']], ['tenant_id', Auth::user()->tenant_id]])->first();
         if ($etData) {
             $data['msg'] = 'Type already exists.';
             $data['status'] = config('app.response.error.status');
