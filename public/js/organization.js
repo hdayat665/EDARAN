@@ -213,7 +213,7 @@ $(document).ready(function() {
       });
       } 
 
-      //Group Human Resource Development
+      //Group Human financial accounting
     function drawChartchildFinancialAccounting() {
         var data = new google.visualization.DataTable();
         data.addColumn('string', 'Name');
@@ -233,16 +233,16 @@ $(document).ready(function() {
         [{'v':'Muhammad Hafiz Zulkifli', 'f':'<div style="color: black">Muhammad Hafiz Zulkifli</div><div style="color:blue; font-style:italic">Senior Executive, Finance & Accounts</div>'},
         'Tengku Nazwa Naim Tengku Endut', ''], 
 
-        [{'v':'Accounting(Settlement)', 'f':'<div style="color: black">Accounting(Settlement)</div><div style="color:blue; font-style:italic">Nur Mukminah Abdullah</div>'},
+        [{'v':'Nur Mukminah Abdullah', 'f':'<div style="color: black">Nur Mukminah Abdullah</div><div style="color:blue; font-style:italic">Accounting(Settlement)</div>'},
         'Tengku Nazwa Naim Tengku Endut', ''], 
 
-        [{'v':'Accounting', 'f':'<div style="color: black">Accounting</div><div style="color:blue; font-style:italic">1) Mazura Abdullah <br>  2) Zaheira Muhammad Rushdi</div>'},
-        'Tengku Nazwa Naim Tengku Endut', ''], 
+        [{'v':'Accounting', 'f':'<div style="color: black">1) Mazura Abdullah <br>  2) Zaheira Muhammad Rushdi</div><div style="color:blue; font-style:italic">Accounting</div>'},
+        'Tengku Nazwa Naim Tengku Endut', ''],  
 
-        [{'v':'Costing', 'f':'<div style="color: black">Costing</div><div style="color:blue; font-style:italic">1) Zuliana Ismail <br>  2) Vacant</div>'},
-        'Tengku Nazwa Naim Tengku Endut', ''], 
+        [{'v':'Costing', 'f':'<div style="color: black">1) Zuliana Ismail <br>  2) Vacant</div><div style="color:blue; font-style:italic">Costing</div>'},
+        'Tengku Nazwa Naim Tengku Endut', ''],  
 
-        [{'v':'Accounts Payable', 'f':'<div style="color: black">Accounts Payable</div><div style="color:blue; font-style:italic">Nuuralinawati Azmi</div>'},
+        [{'v':'Accounts Payable', 'f':'<div style="color: black">Nuuralinawati Azmi</div><div style="color:blue; font-style:italic">Accounts Payable</div>'},
         'Tengku Nazwa Naim Tengku Endut', ''], 
 
 
