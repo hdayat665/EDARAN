@@ -117,7 +117,7 @@
                         <div class="col-sm-6">
                             <label for="education-type" class="form-label">Education Type</label>
                             <select class="form-select" name="educationType" id="" style="text-transform:uppercase">
-                                <option value="" label="Please Choose "></option>
+                                <option value="0" label="Please Choose "></option>
                                 @foreach ($educationType as $key => $status)
                                 <option value="{{$key}}">{{$status}}</option>
                                 @endforeach
@@ -126,7 +126,7 @@
                         <div class="col-sm-6">
                             <label for="education-level" class="form-label">Education Level</label>
                             <select class="form-select" name="educationLevel" id="" style="text-transform:uppercase">
-                                <option value="" label="Please Choose "></option>
+                                <option value="0" label="Please Choose "></option>
                                 @foreach ($educationLevel as $key => $status)
                                 <option value="{{$key}}">{{$status}}</option>
                                 @endforeach

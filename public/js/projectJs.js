@@ -27,6 +27,13 @@ $(document).ready(function() {
     });
 
 
+    $("input[type=text]").keyup(function() {
+        $(this).val($(this).val().toUpperCase());
+    });
+
+    $("textarea[type=text]").keyup(function() {
+        $(this).val($(this).val().toUpperCase());
+    });
 
     $(document).on("click", "#editButton", function() {
         var id = $(this).data('id');
@@ -292,7 +299,7 @@ $(document).ready(function() {
                 }).done(function(data) {
                     swal({
                         title: data.title,
-                        text: data.msg,
+                        text: "Successfully Approve Project Request",
                         type: data.type,
                         confirmButtonColor: '#3085d6',
                         confirmButtonText: 'OK'

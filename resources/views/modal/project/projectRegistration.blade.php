@@ -24,10 +24,10 @@
                             </select>
                         </div>
                         <div class="col-md-4">
-                            <input type="Project Code" name="project_code" class="form-control mb-5px"  />
+                            <input type="text" name="project_code" class="form-control mb-5px"  />
                         </div>
                         <div class="col-md-4">
-                            <input type="Project Name" name="project_name" class="form-control mb-5px " style="text-transform: uppercase;"  />
+                            <input type="text" name="project_name" class="form-control mb-5px " style="text-transform: uppercase;"  />
                         </div>
                     </div>
                     <div class="row">
@@ -35,7 +35,7 @@
                     </div>
                     <div class="row mb-15px">
                         <div class="col-md-12">
-                            <textarea class="form-control " rows="5" name="desc" style="text-transform: uppercase;"></textarea>
+                            <textarea type="text" class="form-control " rows="5" name="desc" style="text-transform: uppercase;"></textarea>
                         </div>
                     </div>
                     <div class="row">

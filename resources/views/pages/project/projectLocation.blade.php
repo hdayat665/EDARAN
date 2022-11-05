@@ -33,8 +33,9 @@
         </table>
     </div>
     <div class="modal-footer">
-        <a href="javascript:;" id="back_pro_mng" class="btn btn-white btnPrevious">Back</a>
-        <button id="submitLocation" class="btn btn-primary btnNext">Next</button>
+            <a class="btn btn-white me-5px btnPrevious">Previous</a>
+            
+            <a class="btn btn-white me-5px btnNext">Next</a>
     </div>
 </div>
 

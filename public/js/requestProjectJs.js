@@ -8,15 +8,22 @@ $(document).ready(function() {
     $("#datepicker-exitdate").datepicker({
         todayHighlight: true,
         autoclose: true,
-    });
+    }); 
 
     $("#data-table-projectrequest").DataTable({
-        responsive: true,
+        responsive: false,
+        lengthMenu: [
+            [5,10, 15, 20, -1],
+            [5,10, 15, 20, 'All'],
+        ],
     });
 
     $("#data-table-default2").DataTable({
-        responsive: true,
-        lengthMenu: [5, 10, 15],
+        responsive: false,
+        lengthMenu: [
+            [5,10, 15, 20, -1],
+            [5,10, 15, 20, 'All'],
+        ],
     });
 
     $('#updateRequestProject').click(function(e) {

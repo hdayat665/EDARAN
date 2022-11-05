@@ -5,7 +5,7 @@
     <h1 class="page-header" id="editProjectJs">Project Registration | Update Project - ( {{$project->project_code. ' - ' .$project->project_name}} )</h1>
     <div class="row">
         <div class="col-xl-15">
-            <ul class="nav nav-tabs">
+            <ul class="nav nav-tabs" id="myTab">
                 <li class="nav-item">
                     <a href="#tab1" id="nav_pro_info" data-bs-toggle="tab" class="nav-link active">
                         <span class="d-sm-none">Tab 1</span>
@@ -26,7 +26,7 @@
                 </li>
                 <li class="nav-item">
                     <a href="#tab4" id="nav_pro_mem" data-bs-toggle="tab" class="nav-link">
-                        <span class="d-sm-none">Tab 4\5</span>
+                        <span class="d-sm-none">Tab 4</span>
                         <span class="d-sm-block d-none">Project Member</span>
                     </a>
                 </li>

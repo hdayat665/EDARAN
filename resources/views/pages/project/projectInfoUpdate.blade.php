@@ -19,10 +19,10 @@
                 </div>
                 <div class="col-md-4">
                     <input type="hidden" id="idP" value="{{$project->id}}">
-                    <input type="Project Code" class="form-control mb-5px" name="project_code" value="{{$project->project_code ?? ''}}"   />
+                    <input type="text" class="form-control mb-5px" name="project_code" value="{{$project->project_code ?? ''}}"   />
                 </div>
                 <div class="col-md-4">
-                    <input type="Project Name" class="form-control mb-5px " style="text-transform: uppercase;" name="project_name" value="{{$project->project_name ?? ''}}" />
+                    <input type="text" class="form-control mb-5px " style="text-transform: uppercase;" name="project_name" value="{{$project->project_name ?? ''}}" />
                 </div>
             </div>
             <div class="row">
@@ -30,7 +30,7 @@
             </div>
             <div class="row mb-15px">
                 <div class="col-md-12">
-                    <textarea class="form-control " rows="5" style="text-transform: uppercase;"name="desc">{{$project->desc ?? ''}}</textarea>
+                    <textarea type="text" class="form-control " rows="5" style="text-transform: uppercase;"name="desc">{{$project->desc ?? ''}}</textarea>
                 </div>
             </div>
             <div class="row">
@@ -143,9 +143,11 @@
             </div>
             <div class="modal-footer">
                 <p class="text-end mb-0">
-                    <a href="javascript:;" class="btn btn-white me-5px">Cancel</a>
-                    <button type="submit" class="btn btn-primary btnNext" id="updateProjectInfoButton">Update</button>
-                </p>
+                    <a class="btn btn-white" href="{{ url("projectInfo") }}" >Back</a>
+                    <button type="submit" class="btn btn-primary" id="updateProjectInfoButton">Update</button>
+                   
+                    <a class="btn btn-white me-5px btnNext">Next</a>
+                </p> 
             </div>
         </form>
     </div>
