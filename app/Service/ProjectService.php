@@ -334,7 +334,7 @@ class ProjectService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success Assign Project Member';
+        $data['msg'] = 'Successfully Save Project Member Location';
 
         return $data;
     }
@@ -390,7 +390,7 @@ class ProjectService
             $data['status'] = config('app.response.success.status');
             $data['type'] = config('app.response.success.type');
             $data['title'] = config('app.response.success.title');
-            $data['msg'] = 'Success update Project Request';
+            $data['msg'] = 'Successfully Submit Project Request';
         }
 
         return $data;

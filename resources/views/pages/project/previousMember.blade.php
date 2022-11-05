@@ -80,7 +80,6 @@ table{
                         <table id="projectMemberPrevTable" class="table table-striped table-bordered align-middle">
                             <thead>
                                 <tr>
-                                    <th width="1%" data-orderable="false" class="align-middle">Action</th>
                                     <th class="text-nowrap">Project Member Name</th>
                                     <th class="text-nowrap">Designation</th>
                                     <th class="text-nowrap">Department</th>
@@ -95,7 +94,6 @@ table{
                                 @if ($previousProjectMembers)
                                 @foreach ($previousProjectMembers as $projectMember)
                                     <tr>
-                                        <td width="1%"><a data-bs-toggle="modal" data-id="{{$projectMember->id}}" id="editPreviousProjectMemberButton" class="btn btn-outline-green"><i class="fa fa-pencil-alt"></i></a></td>
                                         <td>{{$projectMember->employeeName}}</td>
                                         <td>{{($projectMember->designation) ? getDesignation($projectMember->designation)->designationName ?? '-' : '-'}}</td>
                                         <td>{{($projectMember->department) ? getDepartment($projectMember->department)->departmentName ?? '-' : '-'}}</td>
@@ -113,7 +111,7 @@ table{
                     
                     </div>
                     <div class="modal-footer">
-                        <a href="javascript:;" id="back_location" class="btn btn-white btnPrevious">Back</a>
+                    <a class="btn btn-white me-5px btnPrevious">Previous</a>
                         <!-- {{-- <a href="javascript:;" class="btn btn-primary btnNext">Save</a> --}} -->
                         <!-- <button id="submitMember" class="btn btn-primary btnNext">vhh</button> -->
 

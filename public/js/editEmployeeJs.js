@@ -1812,12 +1812,14 @@ $(document).ready(function() {
                 allowEscapeKey: false
             }).then(function() {
                 $.ajax({
-                    type: "DELETE",
+                    type: "POST",
                     url: "/deleteVehicle/" + id,
-                    dataType: "json",
-                    async: false,
-                    processData: false,
-                    contentType: false,
+                    // dataType: "json",
+                    data: { _method: "DELETE" },
+                    // async: false,
+                    // processData: false,
+                    // contentType: false,
+                   
                 }).done(function(data) {
                     swal({
                         title: data.title,

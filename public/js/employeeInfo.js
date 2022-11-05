@@ -6,7 +6,7 @@ $(document).ready(function() {
             "<'row'<'col-sm-12'tr>>" +
             "<'row'<'col-sm-4'i><'col-sm-4 text-center'><'col-sm-4'p>>",
         buttons: [
-        { extend: 'pdf', className: 'btn-sm' },
+        { extend: 'pdf', className: 'btn-sm', orientation: 'landscape',pageSize: 'LEGAL',exportOptions: {columns:[2,3,4,5,6,7,8,9]}},
         { extend: 'csv', className: 'btn-sm' },
         ],
         autoWidth: true,
