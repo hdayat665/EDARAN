@@ -36,7 +36,7 @@
                     <div class="row p-2">
                         <div class="col-sm-6">
                             <label for="lastname" class="form-label">Contact Number*</label>
-                            <input type="text" value="XXXXXXXXXX" name="contactNo" id="contactNo" class="form-control" aria-describedby="lastname">
+                            <input type="text"  name="contactNo" id="contactNo" class="form-control" aria-describedby="lastname">
                         </div>
                         <div class="col-sm-6">
                             <label for="lastname" class="form-label">Relationship</label>

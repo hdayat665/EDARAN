@@ -50,6 +50,10 @@ $(document).ready(function() {
 
     });
 
+    $("input[type=text]").keyup(function() {
+        $(this).val($(this).val().toUpperCase());
+    });
+    
     $(document).on("click", "#deleteButton", function() {
         id = $(this).data('id');
         requirejs(['sweetAlert2'], function(swal) {

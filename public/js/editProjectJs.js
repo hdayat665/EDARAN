@@ -1,5 +1,8 @@
 $(document).ready(function() {
     
+    $("input[type=text]").keyup(function() {
+        $(this).val($(this).val().toUpperCase());
+    });
 
     $('#location-search').picker({
         search:true,
@@ -17,8 +20,8 @@ $(document).ready(function() {
 
     $('#projectlocation').picker({
         search:true,
-    });
-
+    }); 
+ 
     $("#datepicker-joineddate").datepicker({
         todayHighlight: true,
         autoclose: true,
@@ -30,25 +33,51 @@ $(document).ready(function() {
     });
 
     $("#projectLocationTable").DataTable({
-        responsive: true,
+        responsive: false,
+        lengthMenu: [
+            [5,10, 15, 20, -1],
+            [5,10, 15, 20, 'All'],
+        ],
     });
    
     $("#data-table-prevproject").DataTable({
-        responsive: true,
+        responsive: false,
+        lengthMenu: [
+            [5,10, 15, 20, -1],
+            [5,10, 15, 20, 'All'],
+        ],
     });
     $("#projectMemberTable").DataTable({
-        responsive: true,
+        responsive: false,
+        lengthMenu: [
+            [5,10, 15, 20, -1],
+            [5,10, 15, 20, 'All'],
+        ],
     });
 
     $("#projectMemberPrevTable").DataTable({
-        responsive: true,
+        responsive: false,
+        lengthMenu: [
+            [5,10, 15, 20, -1],
+            [5,10, 15, 20, 'All'],
+        ],
     });
 
     $("#data-table-default2").DataTable({
-        responsive: true,
-        lengthMenu: [5, 10, 15],
+        responsive: false,
+        lengthMenu: [
+            [5,10, 15, 20, -1],
+            [5,10, 15, 20, 'All'],
+        ],
     });
 
+    var hash = location.hash.replace(/^#/, '');  // ^ means starting, meaning only match the first hash
+    if (hash) {
+        $('.nav-tabs a[href="#' + hash + '"]').tab('show');
+    } 
+    $('.nav-tabs a').on('shown.bs.tab', function (e) {
+        window.location.hash = e.target.hash;
+    })
     /////////////////////// START PROJECT /////////////////////
     $('#updateProjectInfoButton').click(function(e) {
         $("#editProjectInfoForm").validate({
@@ -109,15 +138,7 @@ $(document).ready(function() {
 
                             } else {
                                 location.reload();
-                                // $( "#nav_pro_info" ).removeClass( "active" );
-                                // $( "#nav_pre_pro" ).addClass( "active" );
-                                // $( "#nav_pro_loc" ).removeClass( "active" );
-                                // $( "#nav_pro_mem" ).removeClass( "active" );
-        
-                                // $( "#tab1" ).removeClass( "active show" );
-                                // $( "#tab2" ).addClass( "active show" );
-                                // $( "#tab3" ).removeClass( "active show" );
-                                // $( "#tab4" ).removeClass( "active show" );
+                                
         
                             }
                         });
@@ -127,17 +148,7 @@ $(document).ready(function() {
                 });      
             });
             
-            $( "#back_info_updt").click(function() {
-                $( "#nav_pro_info" ).addClass( "active" );
-                $( "#nav_pre_pro" ).removeClass( "active" );
-                $( "#nav_pro_loc" ).removeClass( "active" );
-                $( "#nav_pro_mem" ).removeClass( "active" );
-        
-                $( "#tab1" ).addClass( "active show" );
-                $( "#tab2" ).removeClass( "active show" );
-                $( "#tab3" ).removeClass( "active show" );
-                $( "#tab4" ).removeClass( "active show" );
-              });
+            
     /////////////////////// END PROJECT /////////////////////
 
     /////////////////////// START PROJECT LOCATION /////////////////////
@@ -208,6 +219,27 @@ $(document).ready(function() {
         });
     });
 
+    const nextBtn = document.querySelectorAll(".btnNext");
+    const prevBtn = document.querySelectorAll(".btnPrevious");
+
+    nextBtn.forEach(function(item, index){
+        item.addEventListener('click', function(){
+        let id = index + 1;
+        let tabElement = document.querySelectorAll("#myTab li a")[id];
+        var lastTab = new bootstrap.Tab(tabElement);
+        lastTab.show();   
+        });
+    });
+
+    prevBtn.forEach(function(item, index){
+        item.addEventListener('click', function(){
+        let id = index;
+        let tabElement = document.querySelectorAll("#myTab li a")[id];
+        var lastTab = new bootstrap.Tab(tabElement);
+        lastTab.show();
+        });
+    });
+    
     $(document).on("click", "#addProjectLocationButton", function() {
         $('#addProjectLocationModal').modal('show');
 
@@ -311,13 +343,14 @@ $(document).ready(function() {
                 allowOutsideClick: false,
                 allowEscapeKey: false
             }).then(function() {
-                $.ajax({
-                    type: "DELETE",
+                $.ajax({ 
+                    type: "POST",
                     url: "/deleteProjectLocation/" + id,
-                    dataType: "json",
-                    async: false,
-                    processData: false,
-                    contentType: false,
+                    // dataType: "json",
+                    data: { _method: "DELETE" },
+                    // async: false,
+                    // processData: false,
+                    // contentType: false,
                 }).done(function(data) {
                     swal({
                         title: data.title,
@@ -740,7 +773,7 @@ $(document).ready(function() {
                 });
             },
         });
-    });
+    }); 
 
     $('#updateButton').click(function(e) {
         $("#editForm").validate({

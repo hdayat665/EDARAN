@@ -1,18 +1,27 @@
 $(document).ready(function() {
 
     $("#myProjectTable").DataTable({
-        responsive: true,
-        lengthMenu: [5, 10, 15],
+        responsive: false,
+        lengthMenu: [
+            [5,10, 15, 20, -1],
+            [5,10, 15, 20, 'All'],
+        ],
     });
 
     $("#myProjectPendingTable").DataTable({
-        responsive: true,
-        lengthMenu: [5, 10, 15],
+        responsive: false,
+        lengthMenu: [
+            [5,10, 15, 20, -1],
+            [5,10, 15, 20, 'All'],
+        ],
     });
 
     $("#myProjectRejectTable").DataTable({
-        responsive: true,
-        lengthMenu: [5, 10, 15],
+        responsive: false,
+        lengthMenu: [
+            [5,10, 15, 20, -1],
+            [5,10, 15, 20, 'All'],
+        ],
     });
 
     $(document).on("click", "#cancelProject", function() {

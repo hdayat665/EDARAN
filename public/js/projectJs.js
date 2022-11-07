@@ -7,11 +7,18 @@ $(document).ready(function() {
 
     $("#projectTable").DataTable({
         responsive: false,
+        lengthMenu: [
+            [5,10, 15, 20, -1],
+            [5,10, 15, 20, 'All'],
+        ],
     });
 
     $("#data-table-default2").DataTable({
-        responsive: true,
-        lengthMenu: [5, 10, 15],
+        responsive: false,
+        lengthMenu: [
+            [5,10, 15, 20, -1],
+            [5,10, 15, 20, 'All'],
+        ],
     });
 
     $(document).on("click", "#addButton", function() {
@@ -20,6 +27,13 @@ $(document).ready(function() {
     });
 
 
+    $("input[type=text]").keyup(function() {
+        $(this).val($(this).val().toUpperCase());
+    });
+
+    $("textarea[type=text]").keyup(function() {
+        $(this).val($(this).val().toUpperCase());
+    });
 
     $(document).on("click", "#editButton", function() {
         var id = $(this).data('id');
@@ -285,7 +299,7 @@ $(document).ready(function() {
                 }).done(function(data) {
                     swal({
                         title: data.title,
-                        text: data.msg,
+                        text: "Successfully Approve Project Request",
                         type: data.type,
                         confirmButtonColor: '#3085d6',
                         confirmButtonText: 'OK'

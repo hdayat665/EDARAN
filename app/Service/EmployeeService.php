@@ -29,7 +29,7 @@ class EmployeeService
     {
         $input = $r->input();
 
-        $user = Users::where([['username', $r['username']], ['status', 'active']])->first();
+        $user = Users::where([['tenant_id', Auth::user()->tenant_id], ['username', $r['username']], ['status', 'active']])->first();
 
         if ($user) {
             $data['status'] = false;

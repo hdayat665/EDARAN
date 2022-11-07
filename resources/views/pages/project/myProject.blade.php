@@ -6,7 +6,7 @@
     <div class="panel panel" id="myProjectJs">
         <div class="panel-heading">
             <div class="panel-body">
-                <h3 class="page-header">Project</h3>
+                
                 <table id="myProjectTable" class="table table-striped table-bordered align-middle">
                     <thead>
                         <tr>

@@ -303,7 +303,7 @@ $(document).ready(function() {
                             title: data.title,
                             text: data.msg,
                             type: data.type,
-                           confirmButtonColor: '#3085d6',
+                            confirmButtonColor: '#3085d6',
                             confirmButtonText: 'OK',
                             allowOutsideClick: false,
                             allowEscapeKey: false,
@@ -355,7 +355,7 @@ $(document).ready(function() {
                             title: data.title,
                             text: data.msg,
                             type: data.type,
-                           confirmButtonColor: '#3085d6',
+                            confirmButtonColor: '#3085d6',
                             confirmButtonText: 'OK',
                             allowOutsideClick: false,
                             allowEscapeKey: false,
@@ -453,7 +453,7 @@ $(document).ready(function() {
                             title: data.title,
                             text: data.msg,
                             type: data.type,
-                           confirmButtonColor: '#3085d6',
+                            confirmButtonColor: '#3085d6',
                             confirmButtonText: 'OK',
                             allowOutsideClick: false,
                             allowEscapeKey: false,
@@ -504,7 +504,7 @@ $(document).ready(function() {
                             title: data.title,
                             text: data.msg,
                             type: data.type,
-                           confirmButtonColor: '#3085d6',
+                            confirmButtonColor: '#3085d6',
                             confirmButtonText: 'OK',
                             allowOutsideClick: false,
                             allowEscapeKey: false,
@@ -643,8 +643,19 @@ $(document).ready(function() {
                 var endDay = endDate.getDate();
                 endDay = endDay < 10 ? "0" + endDay : endDay;
 
+                function type_of_log(id) {
+                    const data = {
+                        '1': 'Home',
+                        '2': 'Office',
+                        '3': 'My Project',
+                        '4': 'Others',
+                    }
+
+                    return data[id];
+                }
+
                 log.push({
-                    title: logs['type_of_log'],
+                    title: type_of_log(logs['type_of_log']),
                     start: startYear + '-' + startMonth + '-' + startDay + 'T' + startTime + ':00',
                     color: app.color.primary,
                     extendedProps: {
@@ -676,20 +687,20 @@ $(document).ready(function() {
                     }
                 },
                 dateClick: function(info) {
-                    
+
                     $('#addLogModal').modal('show');
-                    
+
                     const formatedDate = dayjs(info.dateStr).format("DD-MM-YYYY")
-                    // console.log(formatedDate);
-                    // console.log(info.dateStr);
+                        // console.log(formatedDate);
+                        // console.log(info.dateStr);
 
                     $("#dateaddlog").val(formatedDate);
                 },
                 eventClick: function(info) {
-                    
+
                     info.jsEvent.preventDefault();
-                   
-                    
+
+
                     function getEvents(id) {
                         return $.ajax({
                             url: "/getEventById/" + id
@@ -1190,7 +1201,7 @@ $(document).ready(function() {
             init: function() {
                 handleCalendarDemo();
             }
-        }; 
+        };
     }();
 
     $(document).ready(function() {
@@ -1594,7 +1605,7 @@ $(document).ready(function() {
                     title: data.title,
                     text: data.msg,
                     type: data.type,
-                     confirmButtonColor: '#3085d6',
+                    confirmButtonColor: '#3085d6',
                     confirmButtonText: 'OK',
                     allowOutsideClick: false,
                     allowEscapeKey: false,
