@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Service\EmployeeService;
+
 use App\Service\OrganizationService;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Str;
@@ -44,7 +46,12 @@ class OrganizationController extends Controller
 
     public function phoneDirectoryView()
     {
-        return view('pages.org.phone');
+        // return view('pages.org.phone');
+        $ps = new OrganizationService;
+
+        $data['phoneDirectoryInfos'] = $ps->getPhoneDirectoryInfo()['data'];
+
+        return view('pages.org.phone',$data);
     }
 
     public function chartView()

@@ -10,18 +10,18 @@
                     <div class="row p-2">
                         <div class="col-sm-6">
                             <label for="firstname" class="form-label">First Name*</label>
-                            <input type="text" id="" name="firstName" value="" class="form-control" aria-describedby="firstname">
+                            <input type="text" id="firstNameChild" name="firstName" value="" class="form-control" aria-describedby="firstname">
                             <input type="hidden" name="user_id" value="{{$user_id}}">
                         </div>
                         <div class="col-sm-6">
                             <label for="lastname" class="form-label">Last Name*</label>
-                            <input type="text" id="" name="lastName" value=""  class="form-control" aria-describedby="lastname">
+                            <input type="text" id="lastNameChild" name="lastName" value=""  class="form-control" aria-describedby="lastname">
                         </div>
                     </div>
                     <div class="row p-2">
                         <div class="col">
                             <label for="fullname" class="form-label">Full Name</label>
-                            <input type="text" id="" name="fullName" value=""  class="form-control" aria-describedby="fullname">
+                            <input type="text" id="fullNameChild" readonly name="fullName" value=""  class="form-control" aria-describedby="fullname">
                         </div>
                     </div>
                     <div class="row p-2">
@@ -29,7 +29,7 @@
                             <div class="row">
                                 <div class="col-sm-6 ">
                                     <div class="form-check form-switch align-right">
-                                        <input class="form-check-input" type="checkbox" id="" name="nonCitizen" >
+                                        <input class="form-check-input partCheck4" value="" type="checkbox" name="nonCitizen" {{($children->nonCitizen ?? '') ? 'checked' : ''}} id="citizen">
                                         <label class="form-check-label" for="citizen">
                                             Non-Citizen
                                         </label>
@@ -37,7 +37,7 @@
                                 </div>
                                 <div class="col-sm-6">
                                     <label for="lastname" class="form-label">Identification Number*</label>
-                                    <input type="text" id="" name="idNo" value="" class="form-control" aria-describedby="lastname">
+                                    <input type="text" id="idNoaddChild" name="idNo" value="" class="form-control" aria-describedby="lastname">
                                 </div>
                             </div>
                         </div>
@@ -45,11 +45,11 @@
                             <div class="row">
                                 <div class="col-sm-6">
                                     <label for="dob" class="form-label">Date of Birth</label>
-                                    <input type="date" id="" name="DOB" class="form-control" aria-describedby="dob">
+                                    <input type="text" id="DOBChild" name="DOB" class="form-control"  aria-describedby="dob" readonly style="pointer-events: none;">
                                 </div>
                                 <div class="col-sm-6">
                                     <label for="age" class="form-label">Age</label>
-                                    <input type="text" id="" name="age" class="form-control" aria-describedby="age">
+                                    <input type="text" id="ageChild" name="age" class="form-control" aria-describedby="age" readonly>
                                 </div>
                             </div>
                         </div>
@@ -59,17 +59,18 @@
                             <div class="row">
                                 <div class="col-sm-6">
                                     <label for="passport" class="form-label">Passport Number</label>
-                                    <input type="text" id="" name="passport" class="form-control" aria-describedby="passport">
+                                    <input type="text" id="passportChild" name="passport" class="form-control" aria-describedby="passport">
                                 </div>
                                 <div class="col-sm-6">
                                     <label for="expirydate" class="form-label">Expiry Date</label>
-                                    <input type="date" id="" name="expiryDate" class="form-control" aria-describedby="expirydate">
+                                    <input type="text" id="expiryDateChild" name="expiryDate" class="form-control" aria-describedby="expirydate" style="pointer-events: none;" readonly>
                                 </div>
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <label for="issuing-country" class="form-label">Issuing Country</label>
                             <select class="form-select" name="issuingCountry" id="">
+                                <option value="MY" label="Malaysia" selected ></option>
                                 <optgroup id="country-optgroup-Americas" label="Americas">
                                     @foreach ($americass as $key => $america)
                                     <option value="{{$key}}">{{$america}}</option>
@@ -86,8 +87,8 @@
                     <div class="row p-2">
                         <div class="col-sm-6">
                             <label for="gender" class="form-label">Gender</label>
-                            <select class="form-select" name="gender" id="">
-                                <option value="0" label="Please Choose "></option>
+                            <select class="form-select" name="gender" id="childgender">
+                                <option value="" label="Please Choose "></option>
                                 @foreach ($gender as $key => $status)
                                 <option value="{{$key}}">{{$status}}</option>
                                 @endforeach
@@ -106,7 +107,7 @@
                     <h4 class="mt-3 p-2">Education Information</h4>
                     <div class="row p-2">
                         <div class="col-sm-6">
-                            <label for="education-type" class="form-label">Education Type*</label>
+                            <label for="education-type" class="form-label">Education Type</label>
                             <select class="form-select" name="educationType" id="">
                                 <option value="0" label="Please Choose "></option>
                                 @foreach ($educationType as $key => $status)
@@ -115,7 +116,7 @@
                             </select>
                         </div>
                         <div class="col-sm-6">
-                            <label for="education-level" class="form-label">Education Level*</label>
+                            <label for="education-level" class="form-label">Education Level</label>
                             <select class="form-select" name="educationLevel" id="">
                                 <option value="0" label="Please Choose "></option>
                                 @foreach ($educationLevel as $key => $status)
@@ -136,12 +137,14 @@
                             <input type="file" class="form-control" name="supportDoc">
                         </div>
                     </div>
-                </form>
+                
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                <had type="button" class="btn btn-primary formSave" id="addChildren">Save</had>
+                <button href="javascript:;" id="addChildren" class="btn btn-primary">Save</button>
+               
             </div>
+            </form>
         </div>
     </div>
 </div>
@@ -150,7 +153,7 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="add-children">Add Children Details</h5>
+                <h5 class="modal-title" id="add-children">Update Children Details</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -170,7 +173,7 @@
                     <div class="row p-2">
                         <div class="col">
                             <label for="fullname" class="form-label">Full Name</label>
-                            <input type="text" id="fullName1" name="fullName" value=""  class="form-control" aria-describedby="fullname">
+                            <input type="text" id="fullName1" name="fullName" value="" readonly  class="form-control" aria-describedby="fullname">
                         </div>
                     </div>
                     <div class="row p-2">
@@ -178,7 +181,7 @@
                             <div class="row">
                                 <div class="col-sm-6 ">
                                     <div class="form-check form-switch align-right">
-                                        <input class="form-check-input" type="checkbox" id="nonCitizen1" name="nonCitizen" >
+                                        <input class="form-check-input partCheck5" type="checkbox" id="nonCitizen1" name="nonCitizen" >
                                         <label class="form-check-label" for="citizen">
                                             Non-Citizen
                                         </label>
@@ -194,11 +197,11 @@
                             <div class="row">
                                 <div class="col-sm-6">
                                     <label for="dob" class="form-label">Date of Birth</label>
-                                    <input type="date" id="DOB1" name="DOB" class="form-control" aria-describedby="dob">
+                                    <input type="text" id="DOB1" name="DOB" readonly class="form-control" aria-describedby="dob">
                                 </div>
                                 <div class="col-sm-6">
                                     <label for="age" class="form-label">Age</label>
-                                    <input type="text" id="age1" name="age" class="form-control" aria-describedby="age">
+                                    <input type="text" id="age1" name="age" readonly class="form-control" aria-describedby="age">
                                 </div>
                             </div>
                         </div>
@@ -212,7 +215,7 @@
                                 </div>
                                 <div class="col-sm-6">
                                     <label for="expirydate" class="form-label">Expiry Date</label>
-                                    <input type="date" id="expiryDate1" name="expiryDate" class="form-control" aria-describedby="expirydate">
+                                    <input type="text" id="expiryDate1" name="expiryDate" class="form-control" aria-describedby="expirydate">
                                 </div>
                             </div>
                         </div>
@@ -233,11 +236,11 @@
                             </select>
                         </div>
                     </div>
-                    <div class="row p-2">
+                    <div class="row p-2"> 
                         <div class="col-sm-6">
                             <label for="gender" class="form-label">Gender</label>
                             <select class="form-select" name="gender" id="gender1">
-                                <option value="0" label="Please Choose "></option>
+                                <option value="" label="Please Choose "></option>
                                 @foreach ($gender as $key => $status)
                                 <option value="{{$key}}">{{$status}}</option>
                                 @endforeach
@@ -290,7 +293,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-primary formSave" id="editChildren">Save</button>
+                <button type="button" class="btn btn-primary formSave" id="editChildren">Update</button>
             </div>
         </div>
     </div>
@@ -300,7 +303,7 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="add-children">Add Children Details</h5>
+                <h5 class="modal-title" id="add-children">View Children Details</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">

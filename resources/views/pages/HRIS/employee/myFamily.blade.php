@@ -30,10 +30,10 @@
                         </div>
                     </td>
 
-                    <td>{{$parent->firstName}}</td>
-                    <td>{{$parent->lastName}}</td>
-                    <td>{{$parent->address1}}</td>
-                    <td>{{($parent->relationship) ? relationship($parent->relationship) : ''}}</td>
+                    <td style="text-transform: uppercase;">{{$parent->firstName}}</td>
+                    <td style="text-transform: uppercase;">{{$parent->lastName}}</td>
+                    <td style="text-transform: uppercase;">{{$parent->address1}}</td>
+                    <td style="text-transform: uppercase;">{{($parent->relationship) ? relationship($parent->relationship) : ''}}</td>
                     <td>{{$parent->DOB}}</td>
                     <td>{{$parent->contactNo}}</td>
                 </tr>
@@ -73,10 +73,10 @@
                         </div>
                     </td>
 
-                    <td>{{$sibling->firstName}}</td>
-                    <td>{{$sibling->lastName}}</td>
-                    <td>{{$sibling->address1}}</td>
-                    <td>{{($sibling->relationship) ? relationship($sibling->relationship) : ''}}</td>
+                    <td style="text-transform: uppercase;">{{$sibling->firstName}}</td>
+                    <td style="text-transform: uppercase;">{{$sibling->lastName}}</td>
+                    <td style="text-transform: uppercase;">{{$sibling->address1}}</td>
+                    <td style="text-transform: uppercase;">{{($sibling->relationship) ? relationship($sibling->relationship) : ''}}</td>
                     <td>{{$sibling->DOB}}</td>
                     <td>{{$sibling->contactNo}}</td>
                 </tr>

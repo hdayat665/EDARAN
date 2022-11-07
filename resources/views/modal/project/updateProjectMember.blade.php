@@ -30,9 +30,9 @@
                             <input type="text" class="form-control" name="joined_date" id="joined_date" id="datepicker-joineddate" placeholder="dd/mm/yyyy" />
 
                         </div>
-
+                        
                         <div class="col-md-6">
-                            <select class="selectpicker form-control" id="employee_idE" name="employee_id">
+                            <select class="selectpicker form-control" id="employee_idE" name="employee_id" style="pointer-events: none; touch-action: none; background: #e9ecef;">
                                 <option value="" label="SELECT NAME">PLEASE CHOOSE</option>
                               @foreach ($employeeInfos as $employee)
                                 <option value="{{$employee->id}}">{{$employee->employeeName}}</option>
@@ -58,7 +58,7 @@
                     <div class="row mb-15px">
 
                         <div class="col-md-6">
-                            <select class="form-select" name="designation" id="designationE">
+                            <select class="form-select" name="designation" id="designationE" style="pointer-events: none; touch-action: none; background: #e9ecef;">
                                 <option Value="" label="PLEASE CHOOSE">SELECT DESIGNATION </option>
                                 <?php $Designations = getDesignation() ?>
                                 @foreach ($Designations as $Designation)
@@ -68,7 +68,7 @@
                         </div>
 
                         <div class="col-md-6">
-                            <select class="form-select" id="departmentE" name="department">
+                            <select class="form-select" id="departmentE" name="department" style="pointer-events: none; touch-action: none; background: #e9ecef;">
                                 <option Value="" label="PLEASE CHOOSE">SELECT DEPARTMENT</option>
                                 <?php $departments = getDepartment() ?>
                                 @foreach ($departments as $department)
@@ -97,7 +97,7 @@
                     <div class="row mb-15px">
 
                         <div class="col-md-6">
-                            <select class="form-select" name="branch" id="branchE">
+                            <select class="form-select" name="branch" id="branchE" style="pointer-events: none; touch-action: none; background: #e9ecef;">
                                 <option Value="" label="PLEASE CHOOSE">SELECT BRANCH</option>
                                 <?php $Branchs = getBranch() ?>
                                 @foreach ($Branchs as $Branch)
@@ -108,7 +108,7 @@
                         </div>
 
                         <div class="col-md-6">
-                            <select class="form-select" name="unit" id="unitE">
+                            <select class="form-select" name="unit" id="unitE" style="pointer-events: none; touch-action: none; background: #e9ecef;">
                                 <option Value="" label="PLEASE CHOOSE">SELECT UNIT</option>
                                 <?php $Units = getUnit() ?>
                                 @foreach ($Units as $Unit)

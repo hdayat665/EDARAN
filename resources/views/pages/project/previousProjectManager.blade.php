@@ -17,13 +17,13 @@
                 @if ($previousProjectManagers)
                 @foreach ($previousProjectManagers as $previousProjectManager)
                 <tr>
-                    <th>{{$previousProjectManager->employeeName}}</th>
-                    <th>{{($previousProjectManager->designation) ? getDesignation($previousProjectManager->designation)->designationName : '-' }}</th>
-                    <th>{{($previousProjectManager->department) ? getDepartment($previousProjectManager->department)->departmentName : '-' }}</th>
-                    <th>{{($previousProjectManager->branch) ? getBranch($previousProjectManager->branch)->branchName : '-' }}</th>
-                    <th>{{($previousProjectManager->unit) ? getUnit($previousProjectManager->unit)->unitName : '-' }}</th>
-                    <th>{{$previousProjectManager->join_date}}</th>
-                    <th>{{$previousProjectManager->exit_date}}</th>
+                    <td>{{$previousProjectManager->employeeName}}</td>
+                    <td>{{($previousProjectManager->designation) ? getDesignation($previousProjectManager->designation)->designationName : '-' }}</td>
+                    <td>{{($previousProjectManager->department) ? getDepartment($previousProjectManager->department)->departmentName : '-' }}</td>
+                    <td>{{($previousProjectManager->branch) ? getBranch($previousProjectManager->branch)->branchName : '-' }}</td>
+                    <td>{{($previousProjectManager->unit) ? getUnit($previousProjectManager->unit)->unitName : '-' }}</td>
+                    <td>{{$previousProjectManager->join_date}}</td>
+                    <td>{{$previousProjectManager->exit_date}}</td>
                     @endforeach
                 </tr>
                 @endif
@@ -32,8 +32,9 @@
         </table>
     </div>
     <div class="modal-footer">
-        <a href="javascript:;" id="back_info_updt" class="btn btn-white btnPrevious">Back</a>
-        <button id="submitProject" class="btn btn-primary btnNext">Next</button>
+         <a class="btn btn-white me-5px btnPrevious">Previous</a>
+            <a class="btn btn-white me-5px btnNext">Next</a>
+        
     </div>
 </div>
 

@@ -8,14 +8,21 @@
 	margin: 0 auto;
 	align-items: center;
   }
+
+
+
+
+
+
 </style>
+
 <head>
     <meta charset="utf-8" />
-    <title>OrbitHRM | Dashboard 1</title>
+    <title>OrbitHRM</title>
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
     <meta content="" name="description" />
     <meta content="" name="author" />
-
+    
     <link rel="shortcut icon" href="/assets/img/logo/orbit-sm.png" >
     <!-- ================== BEGIN core-css ================== -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -194,7 +201,7 @@
                                     <div class="menu-icon">
 										<i class="fa fa-address-card text-gray"></i>
 									</div>
-                                    <div class="menu-text text-gray"> My Profile </div>
+                                    <div class="menu-text text-gray">My Profile </div>
                                 </a>
                             </div>
 
@@ -422,14 +429,14 @@
                                         <div class="menu-text text-gray">Organization Chart</div>
                                     </a>
                                 </div>
-                                <div class="menu-item">
+                                {{-- <div class="menu-item">
                                     <a href="/departmentTree" class="menu-link">
                                     <div class="menu-icon">
 								        <i class="fa fa-folder-tree text-gray"></i>
 							        </div>
                                         <div class="menu-text text-gray">Department Tree</div>
                                     </a>
-                                </div>
+                                </div> --}}
                             </div>
 
                     </div>
@@ -692,14 +699,15 @@
     <script src="/assets/plugins/blueimp-file-upload/js/jquery.fileupload-ui.js"></script>
     <script src="/assets/js/demo/form-multiple-upload.demo.js"></script>
 	<script src="/assets/plugins/jstree/dist/jstree.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.2/croppie.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.2/croppie.js"></script>
-    {{-- <script src="/assets/js/orgchart.js"></script> --}}
-    {{-- <link href="../assets/plugins/nvd3/build/nv.d3.css" rel="stylesheet" /> --}}
-    {{-- <script src="../assets/plugins/d3/d3.min.js"></script> --}}
-    {{-- <script src="../assets/plugins/nvd3/build/nv.d3.min.js"></script> --}}
-    {{-- <script src="../assets/plugins/chart.js/dist/Chart.min.js"></script> --}}
+    <script src="/assets/js/orgchart.js"></script> 
+    <link href="../assets/plugins/nvd3/build/nv.d3.css" rel="stylesheet" /> 
+    <script src="../assets/plugins/d3/d3.min.js"></script> 
+    <script src="../assets/plugins/nvd3/build/nv.d3.min.js"></script> 
+    <script src="../assets/plugins/chart.js/dist/Chart.min.js"></script> 
 
 
 
@@ -733,9 +741,25 @@
             urlArgs: "bust=10"
         };
     </script>
+
+<script>
+    $(function (){
+        $('a').each(function(){
+            if ($(this).prop('href') === window.location.href) {
+                $(this).parents().addClass('active');
+                $(this).css({
+                    "background": "linear-gradient(to left,#ececec 0, #ececec 66%, #ececec 100%)", 
+                    "border-radius": "50px",
+                });
+                
+            }
+        })
+    })
+</script>
+
     <script src="/assets/js/require.js" data-main="controller"></script>
 
-    {{-- <script>
+    <script>
         Chart.defaults.color = 'rgba('+ app.color.componentColorRgb + ', .65)';
         Chart.defaults.font.family = app.font.family;
         Chart.defaults.font.weight = 500;
@@ -762,11 +786,11 @@
             }
         });
 
-    </script> --}}
+    </script> 
 
 
 
-    {{-- <script>
+    <script>
         Chart.defaults.color = 'rgba('+ app.color.componentColorRgb + ', .65)';
         Chart.defaults.font.family = app.font.family;
         Chart.defaults.font.weight = 500;
@@ -803,4 +827,4 @@
                 }]
             }
         });
-    </script> --}}
+    </script> 

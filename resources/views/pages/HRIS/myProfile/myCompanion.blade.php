@@ -11,7 +11,7 @@
                     <form id="addCompanionForm">
                         <div class="row p-2">
                             <div class="col-sm-6">
-                                <h4>Companion Information</h4>
+                                <h4>Companion Information</h4> 
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-check form-switch">
@@ -98,7 +98,7 @@
                                     </div>
                                     <div class="col-sm-6">
                                         <label for="age" class="form-label">Age</label>
-                                        <input type="number" id="age" name="age" value="{{ $companion->age ?? '' }}" class="form-control" aria-describedby="age">
+                                        <input type="number" id="age" name="age" value="{{ $companion->age ?? '' }}" class="form-control" aria-describedby="age" readonly>
                                     </div>
                                 </div>
                             </div>
@@ -213,7 +213,7 @@
                             <div class="col-sm-6">
                                 <label for="extension-number" class="form-label">Monthly Salary</label>
                                 <input type="text" readonly id="payslipmc" name="payslip"  class="form-control" >
-                            
+                                <input type="file" name="payslip"  hidden aria-describedby="dob">
                             </div>
                             <div class="col-sm-6">
                                 <label for="income-tax-number" class="form-label">Office Number</label>
@@ -224,7 +224,7 @@
                         <div class="row p-2">
                             <div class="col-sm-6">
                                 <label for="address1" class="form-label">Address 1*</label>
-                                <input type="text"readonly id="address1mc" name="address1E" value="{{ $companion->address1E ?? '' }}" class="form-control" aria-describedby="address1" style="text-transform:uppercase">
+                                <input type="text" readonly id="address1mc" name="address1E" value="{{ $companion->address1E ?? '' }}" class="form-control" aria-describedby="address1" style="text-transform:uppercase">
                             </div>
                             <div class="col-sm-6">
                                 <label for="address2" class="form-label">Address 2</label>

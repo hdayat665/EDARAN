@@ -32,12 +32,22 @@
                             <th class="text-nowrap">Email</th>
                             <th class="text-nowrap">Department</th>
 
+                            {{-- <th class="text-nowrap">No</th>
+                            <th class="text-nowrap">Action</th>
+                            <th class="text-nowrap">Employee ID</th>
+                            <th class="text-nowrap">First Name</th>
+                            <th class="text-nowrap">Last Name</th>
+                            <th class="text-nowrap">Email</th>
+                            <th class="text-nowrap">Phone Number</th>
+                            <th class="text-nowrap">Department</th>
+                            <th class="text-nowrap">Report to</th>
+                            <th class="text-nowrap">Employee Status</th> --}}
 
                         </tr>
                     </thead>
                     <tbody>
 
-                        <tr class="odd gradeX">
+                        {{-- <tr class="odd gradeX">
                             <td>1</td>
                             <td class="text-center"><img src="../assets/img/user/user-13.jpg" class="w-50px"></td>
                             <td>Ali</td>
@@ -146,11 +156,27 @@
                             <td>Safuan</td>
                             <td>60123456789</td>
                             <td>IT</td>
-                        </tr>
-                    </tbody>
+                        </tr> --}}
+                        @if ($phoneDirectoryInfos)
+                    <?php $no = 1 ?>
+                    @foreach ($phoneDirectoryInfos as $phoneInfo)
+                    <tr class="odd gradeX">
+                        <td width="1%" class="fw-bold text-dark">{{$no++}}</td>
+                        <td class="text-center"><img src="../assets/img/user/user-13.jpg" class="w-50px"></td>
+                        <td>{{$phoneInfo->firstName}}</td>
+                        <td>{{$phoneInfo->lastName}}</td>
+                        <td>{{$phoneInfo->designationName}}</td>
+                        <td>{{$phoneInfo->extensionNo}}</td>
+                        <td>{{$phoneInfo->phoneNo}}</td>
+                        <td>{{$phoneInfo->workingEmail}}</td>
+                        <td>{{$phoneInfo->department}}</td>
+                    </tr>
+                    @endforeach
+                    @endif
+                </tbody>
                 </table>
-
             </div>
+            @include('pages.HRIS.employee.terminateEmployee')
         </div>
     </div>
     <div class="row">

@@ -113,7 +113,8 @@
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                 <button href="javascript:;" id="addSibling" class="btn btn-primary">Save</button>
                 
-            </div></form>
+            </div>
+        </form>
         </div>
     </div>
 </div>

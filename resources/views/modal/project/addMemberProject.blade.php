@@ -57,7 +57,7 @@
                     <div class="row mb-15px">
 
                         <div class="col-md-6">
-                            <select class="form-select" name="designation" id="designation" style="text-transform: upppercase;">
+                            <select class="form-select" name="designation" id="designation"  style="pointer-events: none; touch-action: none; background: #e9ecef;">
                                 <option value="" label="PLEASE CHOOSE">SELECT DESIGNATION</option>
                                 <?php $Designations = getDesignation() ?>
                                 @foreach ($Designations as $Designation)
@@ -67,7 +67,7 @@
                         </div>
 
                         <div class="col-md-6">
-                            <select class="form-select" id="department" name="department" style="text-transform: upppercase;">
+                            <select class="form-select" id="department" name="department" style="pointer-events: none; touch-action: none; background: #e9ecef;">
                                 <option value="" label="PLEASE CHOOSE">SELECT DEPARTMENT</option>
                                 <?php $departments = getDepartment() ?>
                                 @foreach ($departments as $department)
@@ -96,7 +96,7 @@
                     <div class="row mb-15px">
 
                         <div class="col-md-6">
-                            <select class="form-select" name="branch" id="branchs">
+                            <select class="form-select" name="branch" id="branchs" style="pointer-events: none; touch-action: none; background: #e9ecef;">
                                 <option value="" label="PLEASE CHOOSE ">SELECT BRANCH </option>
                                 <?php $Branchs = getBranch() ?>
                                 @foreach ($Branchs as $Branch)
@@ -107,7 +107,7 @@
                         </div>
 
                         <div class="col-md-6">
-                            <select class="form-select" name="unit" id="unit" style="text-transform: upppercase;">
+                            <select class="form-select" name="unit" id="unit" style="pointer-events: none; touch-action: none; background: #e9ecef;">
                                 <option value="" label="PLEASE CHOOSE">SELECT UNIT</option>
                                 <?php $Units = getUnit() ?>
                                 @foreach ($Units as $Unit)
