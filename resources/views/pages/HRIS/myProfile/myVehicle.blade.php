@@ -31,7 +31,7 @@
                                 </div>
                         </td>
                         <td>{{($vehicle->vehicle_type == 1) ? 'Car' : 'Motorcycle'}}</td>
-                        <td>{{$vehicle->plate_no}}</td>
+                        <td style="text-transform:uppercase">{{$vehicle->plate_no}}</td>
                     </tr>
                     @endforeach
                     @endif

@@ -8,6 +8,22 @@ use App\Service\EmployeeService;
 use App\Service\ProjectReportService;
 use App\Service\ProjectService;
 use Illuminate\Http\Request;
+//for display option
+use App\Models\Customer;
+use App\Models\Project;
+use App\Models\ActivityLogs;
+use App\Models\Branch;
+use App\Models\Company;
+use App\Models\Department;
+use App\Models\Designation;
+use App\Models\Employee;
+use App\Models\EmploymentType;
+use App\Models\JobGrade;
+use App\Models\ProjectLocation;
+use App\Models\TimesheetEvent;
+use App\Models\Unit;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 
 class ProjectReportController extends Controller
@@ -63,25 +79,40 @@ class ProjectReportController extends Controller
         $prs = new ProjectReportService;
         // pr($query);
         if ($query['filter'] == 'All') {
-
             $data['statusAll'] = $prs->searchReportAll();
             $view = 'pages.report.project.filter.statusAllTable';
+
         }else if($query['filter'] == 'CustName'){
+            $customer = Customer::where('id', $query['customerName'])->first();
+            $data['customerName'] = $customer->customer_name;
+// dd($query);
             $data['custName'] = $prs->searchReportCustName($query);
             $view = 'pages.report.project.filter.customerNameTable';
+            
         }else if($query['filter'] == 'EmpName'){
+           
+
             $data['empName'] = $prs->searchReportEmpName($query);
             $view = 'pages.report.project.filter.employeeNameTable';
+
         }else if($query['filter'] == 'ProjName'){
+
             $data['projName'] = $prs->searchReportProjName($query);
             $data['projMember'] = $prs->getProjectMember($query);
             $view = 'pages.report.project.filter.projectNameTable';
+
         }else if($query['filter'] == 'FinYear'){
+
+            $data['financialYear'] = $query['financialYear'];
+
             $data['finYear'] = $prs->searchReportFinYear($query);
             $view = 'pages.report.project.filter.finYearTable';
+
         }else if($query['filter'] == 'AccManager'){
+            dd($query);
             $data['accManager'] = $prs->searchReportAccManager($query);
             $view = 'pages.report.project.filter.accManagerTable';
+
         }else if($query['filter'] == 'ProjManager'){
             $data['projManager'] = $prs->searchReportAccManager($query);
             $view = 'pages.report.project.filter.projManagerTable';
@@ -89,7 +120,8 @@ class ProjectReportController extends Controller
             $data['status'] = $prs->searchReportAccManager($query);
             $view = 'pages.report.project.filter.statusTable';
         }
-        // pr($data);
+    // dd($query);        
+       //dd($view);
         return view($view, $data);
     }
 
