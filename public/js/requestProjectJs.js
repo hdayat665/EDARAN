@@ -5,10 +5,14 @@ $(document).ready(function() {
         autoclose: true,
     });
 
+    $("textarea[type=text]").keyup(function() {
+        $(this).val($(this).val().toUpperCase());
+    });
+
     $("#datepicker-exitdate").datepicker({
         todayHighlight: true,
         autoclose: true,
-    }); 
+    });  
 
     $("#data-table-projectrequest").DataTable({
         responsive: false,

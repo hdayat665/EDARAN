@@ -47,7 +47,7 @@
                     </div>
                     <div class="row">
                         <div class="col-md-12">
-                            <textarea class="form-control " name="reason" rows="5" style="text-transform: uppercase;" placeholder="Please State Your Reason"></textarea>
+                            <textarea class="form-control " name="reason" rows="5" type="text" placeholder="Please State Your Reason"></textarea>
                         </div>
                     </div>
                     <div class="modal-footer">
