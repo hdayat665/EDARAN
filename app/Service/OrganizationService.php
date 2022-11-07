@@ -2,6 +2,8 @@
 
 namespace App\Service;
 
+use Illuminate\Support\Facades\DB;
+
 use App\Models\DepartmentTree;
 use App\Models\OrganizationChart;
 use App\Models\PhoneDirectory;
@@ -38,6 +40,23 @@ class OrganizationService
         $data['status'] = true;
         $data['msg'] = 'Success get DepartmentTree';
 
+        return $data;
+    }
+
+
+    public function getPhoneDirectoryInfo()
+    {
+        $userId = Auth::user()->tenant_id;
+        $data = [];
+        $data['status'] = true;
+        $data['msg'] = 'Success get user employment';
+        $data['data'] = DB::table('employment as a')
+        ->leftjoin('userProfile as b', 'a.user_id', '=', 'b.user_id')
+        ->leftjoin('department as c', 'a.department', '=', 'c.id')
+        ->leftjoin('designation as d', 'd.id', '=', 'a.designation')
+        ->select('a.id', 'a.employeeId', 'a.user_id', 'a.department', 'a.workingEmail', 'b.firstName', 'b.lastName', 'b.personalEmail as email', 'b.phoneNo', 'b.extensionNo', 'c.departmentName as department', 'a.supervisor', 'a.report_to', 'a.status', 'd.designationName')
+        ->where([['a.tenant_id', $userId], ['status', '!=', 'not complete']])
+        ->get();
         return $data;
     }
 
