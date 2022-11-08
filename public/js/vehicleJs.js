@@ -105,7 +105,7 @@ $(document).ready(function() {
             });
         });
     });
-
+z
     function getVehicle(id) {
         return $.ajax({
             url: "/getVehicleById/" + id

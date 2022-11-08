@@ -4,13 +4,15 @@
 
 <div id="content" class="app-content">
     <h1 class="page-header">Reporting <small>| Project  | Project Report </small></h1>
-    <div class="panel panel" id="projectStatusJs">
-        <div class="panel-heading">
-            <h4 class="panel-title">Project Report</h4>
-            <div class="panel-heading-btn">
-            </a>
-        </div>
-    </div>
+    <div class="panel panel">   
+        <div class="panel-body" id="projectStatusJs">
+            <div class="row p-2"> 
+                <h4>Project Status Report</h4>
+            </div>
+            <div class="row p-2"> 
+                <h5>Project Name:</h5>
+                
+            </div>
     <div class="panel-body">
         <h4 class="row">
             <label class="form-label col-form-label col-md-4">Project Information</label>
@@ -184,6 +186,7 @@
     </div>
 </div>
 <div class="modal-footer">
-</div>
 
+</div>
+<a href="/projectFilter"><button type="button" class="btn btn-primary">Back</button></a>
 @endsection

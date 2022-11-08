@@ -4,14 +4,15 @@
 
 <div id="content" class="app-content">
     <h1 class="page-header">Reporting <small>| Project  | Project Report </small></h1>
-    <div class="panel panel">
-        <div class="panel-heading" id="projectStatusJs">
-            <h4 class="panel-title">Project Report</h4>
-            <div class="panel-heading-btn">
-            </a>
-        </div>
-    </div>
-    <div class="panel-body">
+    <div class="panel panel">   
+        <div class="panel-body" id="projectStatusJs">
+            <div class="row p-2"> 
+                <h4>Project Status Report</h4>
+            </div>
+            <div class="row p-2"> 
+                <h5>Customer Name: {{ $customerName }}</h5>
+            </div>
+
         <table id="customerTable" class="table table-striped table-bordered align-middle">
             <thead>
                 <tr>
@@ -63,4 +64,5 @@
         </table>
     </div>
 </div>
+<a href="/projectFilter"><button type="button" class="btn btn-primary">Back</button></a>
 @endsection
