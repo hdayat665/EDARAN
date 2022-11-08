@@ -133,10 +133,15 @@ $(document).ready(function() {
     }
 
     $('#statusAll').DataTable({
-        scrollY: 170,
+        
+        scrollY: false,
         scrollX: true,
-        paging: false,
-        dom: '<"row"<"col-sm-5"B><"col-sm-7"fr>>t<"row"<"col-sm-5"i><"col-sm-7"p>>',
+        paging: true,
+        lengthMenu: [
+            [5,10, 15, 20, -1], 
+            [5,10, 15, 20, 'All'],
+        ],
+        dom: '<"row"<"col-sm-5"B><"col-sm-7"fr>>t<"row"<"col-sm-5"l><"col-sm-7"p>>',
         buttons: [
             { extend: 'excel', text: 'Excel', className: 'btn-sm' },
 
@@ -145,10 +150,14 @@ $(document).ready(function() {
     });
 
     $('#customerTable').DataTable({
-        scrollY: 170,
+        scrollY: false,
         scrollX: true,
-        paging: false,
-        dom: '<"row"<"col-sm-5"B><"col-sm-7"fr>>t<"row"<"col-sm-5"i><"col-sm-7"p>>',
+        paging: true,
+        lengthMenu: [
+            [5,10, 15, 20, -1], 
+            [5,10, 15, 20, 'All'],
+        ],
+        dom: '<"row"<"col-sm-5"B><"col-sm-7"fr>>t<"row"<"col-sm-5"l><"col-sm-7"p>>',
         buttons: [
             { extend: 'excel', text: 'Excel', className: 'btn-sm' },
 
@@ -157,14 +166,20 @@ $(document).ready(function() {
     });
 
     $('#employeeTable').DataTable({
-        scrollY: 170,
+        scrollY: false,
         scrollX: true,
-        paging: false,
-        dom: '<"row"<"col-sm-5"B><"col-sm-7"fr>>t<"row"<"col-sm-5"i><"col-sm-7"p>>',
+        paging: true,
+        lengthMenu: [
+            [5,10, 15, 20, -1], 
+            [5,10, 15, 20, 'All'],
+        ],
+        dom: '<"row"<"col-sm-5"B><"col-sm-7"fr>>t<"row"<"col-sm-5"l><"col-sm-7"p>>',
         buttons: [
             { extend: 'excel', text: 'Excel', className: 'btn-sm' },
 
         ],
+
+
 
     });
 
@@ -181,34 +196,44 @@ $(document).ready(function() {
     });
 
     $('#finYearTable').DataTable({
-        scrollY: 170,
+        scrollY: false,
         scrollX: true,
-        paging: false,
-        dom: '<"row"<"col-sm-5"B><"col-sm-7"fr>>t<"row"<"col-sm-5"i><"col-sm-7"p>>',
+        paging: true,
+        lengthMenu: [
+            [5,10, 15, 20, -1], 
+            [5,10, 15, 20, 'All'],
+        ],
+        dom: '<"row"<"col-sm-5"B><"col-sm-7"fr>>t<"row"<"col-sm-5"l><"col-sm-7"p>>',
         buttons: [
             { extend: 'excel', text: 'Excel', className: 'btn-sm' },
 
         ],
-
     });
 
     $('#accManagerTable').DataTable({
-        scrollY: 170,
+        scrollY: false,
         scrollX: true,
-        paging: false,
-        dom: '<"row"<"col-sm-5"B><"col-sm-7"fr>>t<"row"<"col-sm-5"i><"col-sm-7"p>>',
+        paging: true,
+        lengthMenu: [
+            [5,10, 15, 20, -1], 
+            [5,10, 15, 20, 'All'],
+        ],
+        dom: '<"row"<"col-sm-5"B><"col-sm-7"fr>>t<"row"<"col-sm-5"l><"col-sm-7"p>>',
         buttons: [
             { extend: 'excel', text: 'Excel', className: 'btn-sm' },
 
         ],
-
     });
 
     $('#projManagerTable').DataTable({
-        scrollY: 170,
+        scrollY: false,
         scrollX: true,
-        paging: false,
-        dom: '<"row"<"col-sm-5"B><"col-sm-7"fr>>t<"row"<"col-sm-5"i><"col-sm-7"p>>',
+        paging: true,
+        lengthMenu: [
+            [5,10, 15, 20, -1], 
+            [5,10, 15, 20, 'All'],
+        ],
+        dom: '<"row"<"col-sm-5"B><"col-sm-7"fr>>t<"row"<"col-sm-5"l><"col-sm-7"p>>',
         buttons: [
             { extend: 'excel', text: 'Excel', className: 'btn-sm' },
 
@@ -217,14 +242,17 @@ $(document).ready(function() {
     });
 
     $('#statusTable').DataTable({
-        scrollY: 170,
+        scrollY: false,
         scrollX: true,
-        paging: false,
-        dom: '<"row"<"col-sm-5"B><"col-sm-7"fr>>t<"row"<"col-sm-5"i><"col-sm-7"p>>',
+        paging: true,
+        lengthMenu: [
+            [5,10, 15, 20, -1], 
+            [5,10, 15, 20, 'All'],
+        ],
+        dom: '<"row"<"col-sm-5"B><"col-sm-7"fr>>t<"row"<"col-sm-5"l><"col-sm-7"p>>',
         buttons: [
             { extend: 'excel', text: 'Excel', className: 'btn-sm' },
 
         ],
-
     });
 });
