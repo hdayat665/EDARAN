@@ -90,7 +90,7 @@
                 </div>
                 <div class="row">
                     <label class="form-label col-form-label col-md-4">Warranty End Date</label>
-                    <label class="form-label col-form-label col-md-4">Bank Guarantee Amount</label>
+                    <label class="form-label col-form-label col-md-4">Bank Guarantee Amount*</label>
                     <label class="form-label col-form-label col-md-4">Bank Guarantee Expiry Date</label>
                 </div>
                 <div class="row mb-15px">
@@ -129,10 +129,14 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @if ($projectMembers)
+                <?php $id = 0 ?> 
+            
+                @if ($projectMembers)
                         @foreach ($projectMembers as $projectMember)
+                <?php $id++ ?>
+                    
                         <tr class="odd gradeX">
-                            <td width="1%" class="fw-bold text-dark">1</td>
+                            <td width="1%" class="fw-bold text-dark">{{$id}}</td>
                             <td>{{$projectMember->employeeName}}</td>
                             <td>{{$projectMember->designationName}}</td>
                             <td>{{$projectMember->departmentName}}</td>

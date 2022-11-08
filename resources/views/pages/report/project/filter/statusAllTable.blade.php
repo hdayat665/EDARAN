@@ -3,10 +3,10 @@
 @section('content')
 
 <div id="content" class="app-content">
-    <h1 class="page-header">Reporting <small>| Project  | Project Status </small></h1>
+    <h1 class="page-header">Reporting <small>| Project  | Project Report </small></h1>
     <div class="panel panel" id="projectStatusJs">
         <div class="panel-heading">
-            <h4 class="panel-title">Project Status Report</h4>
+            <h4 class="panel-title">Project Report</h4>
             <div class="panel-heading-btn">
             </a>
         </div>
