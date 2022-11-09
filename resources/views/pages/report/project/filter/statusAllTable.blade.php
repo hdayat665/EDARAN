@@ -6,7 +6,7 @@
     <h1 class="page-header">Reporting <small>| Project  | Project Report </small></h1>
     <div class="panel panel" id="projectStatusJs">
         <div class="panel-heading">
-            <h4 class="panel-title">Project Report</h4>
+            <h3>Project Report</h3>
             <div class="panel-heading-btn">
             </a>
         </div>

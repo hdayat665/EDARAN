@@ -7,7 +7,7 @@
     <div class="panel panel">   
         <div class="panel-body" id="projectStatusJs">
             <div class="row p-2"> 
-                <h4>Project Status Report</h4>
+                <h4>Project Report</h4>
             </div>
             <div class="row p-2"> 
                 <h5>Customer Name: {{ $customerName }}</h5>

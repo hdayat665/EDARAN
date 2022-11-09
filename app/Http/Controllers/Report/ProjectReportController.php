@@ -85,19 +85,21 @@ class ProjectReportController extends Controller
         }else if($query['filter'] == 'CustName'){
             $customer = Customer::where('id', $query['customerName'])->first();
             $data['customerName'] = $customer->customer_name;
-// dd($query);
+            //dd($customer);
             $data['custName'] = $prs->searchReportCustName($query);
             $view = 'pages.report.project.filter.customerNameTable';
             
         }else if($query['filter'] == 'EmpName'){
-           
-
+            $employeeName = Employee::where('id', $query['employee'])->first();
+            $data['employeeName'] = $employeeName->employeeName;
+            //dd($query);
             $data['empName'] = $prs->searchReportEmpName($query);
             $view = 'pages.report.project.filter.employeeNameTable';
 
         }else if($query['filter'] == 'ProjName'){
 
             $data['projName'] = $prs->searchReportProjName($query);
+            
             $data['projMember'] = $prs->getProjectMember($query);
             $view = 'pages.report.project.filter.projectNameTable';
 
@@ -109,14 +111,21 @@ class ProjectReportController extends Controller
             $view = 'pages.report.project.filter.finYearTable';
 
         }else if($query['filter'] == 'AccManager'){
-            dd($query);
+            $accName = Employee::where('id', $query['accManager'])->first();
+            $data['accName'] = $accName->employeeName;
+            //dd($accName);
             $data['accManager'] = $prs->searchReportAccManager($query);
             $view = 'pages.report.project.filter.accManagerTable';
 
         }else if($query['filter'] == 'ProjManager'){
+            $projName = Employee::where('id', $query['projectManager'])->first();
+            $data['projName'] = $projName->employeeName;
+            //  dd($data);
             $data['projManager'] = $prs->searchReportAccManager($query);
             $view = 'pages.report.project.filter.projManagerTable';
         }else if($query['filter'] == 'Status'){
+            $data['datastatus'] = $query['statusProject'];
+            //dd($data);
             $data['status'] = $prs->searchReportAccManager($query);
             $view = 'pages.report.project.filter.statusTable';
         }
