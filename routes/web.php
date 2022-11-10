@@ -258,6 +258,7 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('/projectAssignView/{id}', 'projectAssignView');
             Route::post('/deleteAssignLocation/{id}/{member_id}', 'deleteAssignLocation');
             Route::get('/getProjectById/{id}', 'getProjectById');
+            Route::get('/getLocationsProjectMemberById/{id}', 'getLocationsProjectMemberById');
         });
 
         Route::controller(ProjectReportController::class)->group(function () {

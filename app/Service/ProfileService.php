@@ -395,6 +395,7 @@ class ProfileService
     {
         $input = $r->input();
         $input['user_id'] = Auth::user()->id;
+        $input['address1'] = $input['address1'] . ' ' . $input['address2'] . '' . $input['city'] . ' ' . $input['postcode'] . ' ' . $input['state'] . ' ' . $input['country'];
 
         UserSibling::create($input);
 
@@ -410,16 +411,19 @@ class ProfileService
     {
         $input = $r->input();
         $sameAddress = $input['sameAddress'] ?? null;
+        $input['address1'] = $input['address1'] . ' ' . $input['address2'] . '' . $input['city'] . ' ' . $input['postcode'] .' '. $input['state'] . ' ' . $input['country'];
         if ($sameAddress) {
             $userProfile = UserProfile::where('user_id', Auth::user()->id)->first();
 
-            $input['address1'] = $userProfile->address1;
+            $input['address1'] = $userProfile->address1 . ' ' . $userProfile->address2 . '' . $userProfile->city . ' ' . $userProfile->state . ' ' . $userProfile->country;
             $input['address2'] = $userProfile->address2;
             $input['city'] = $userProfile->city;
             $input['state'] = $userProfile->state;
+            $input['postcode'] = $userProfile->postcode;
             $input['country'] = $userProfile->country;
             unset($input['sameAddress']);
         }
+
         $input['user_id'] = Auth::user()->id;
         UserParent::create($input);
 
@@ -447,6 +451,7 @@ class ProfileService
             $data['msg'] = 'user not found';
         }else{
             unset($input['sameAddress']);
+            // $input['address1'] = $input['address1'] . ' ' . $input['address2'] . '' . $input['city'] . ' ' . $input['postcode'] . ' ' . $input['state'] . ' ' . $input['country'];
             UserParent::where('id', $id)->update($input);
 
             $data['status'] = config('app.response.success.status');

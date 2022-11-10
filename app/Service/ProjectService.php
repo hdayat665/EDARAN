@@ -3,31 +3,14 @@
 namespace App\Service;
 
 use App\Mail\Mail as MailMail;
-use App\Models\Attachments;
 use App\Models\Employee;
-use App\Models\JobHistory;
-use App\Models\Customer;
 use App\Models\PreviousProjectManager;
 use App\Models\Project;
 use App\Models\ProjectLocation;
 use App\Models\ProjectMember;
-use App\Models\Subscription;
-use App\Models\UserAddress;
-use App\Models\UserChildren;
-use App\Models\UserCompanion;
-use App\Models\UserEmergency;
-use App\Models\UserParent;
-use App\Models\UserProfile;
-use App\Models\Users;
-use App\Models\UsersDetails;
-use App\Models\UserSibling;
-use App\Models\Vehicle;
-use Illuminate\Mail\Attachment;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\Session;
 
 class ProjectService
 {
@@ -243,6 +226,8 @@ class ProjectService
         if ($exit == 'on') {
             $input['exit_project_date'] = date_format(date_create(), 'Y-m-d');
         }
+
+        $input['status'] = 'approve';
 
         ProjectMember::create($input);
 
@@ -521,14 +506,13 @@ class ProjectService
     public function projectRequestView()
     {
         $employee = Employee::where('user_id', Auth::user()->id)->first();
-        // pr($employee->id);
-        $projectMember = ProjectMember::select('project_id')->where([['employee_id', '=', $employee->id]])->whereIn('status', ['pending','approve'])->groupBy('project_id')->get();
-        // pr($projectMember);
+
+        $projectMember = ProjectMember::select('project_id')->where([['employee_id', '=', $employee->id]])->whereIn('status', ['approve'])->groupBy('project_id')->get();
+
         $projectId = [];
         foreach ($projectMember as $project) {
             $projectId[] = $project->project_id;
         }
-        // pr($projectId);
 
         $data = DB::table('project as a')
             ->leftJoin('customer as b', 'a.customer_id', '=', 'b.id')
@@ -558,8 +542,8 @@ class ProjectService
         $data = DB::table('project_member as a')
             ->leftJoin('project as b', 'a.project_id', '=', 'b.id')
             ->leftJoin('customer as c', 'b.customer_id', '=', 'c.id')
-            ->select('a.status as request_status', 'a.location', 'a.id as memberId', 'b.*', 'c.customer_name')
-            ->where([['a.employee_id', '=', $employee->id]])
+            ->select('a.id as member_id','a.status as request_status', 'a.location', 'a.id as memberId', 'b.*', 'c.customer_name')
+            ->where([['a.employee_id', '=', $employee->id], ['a.status', 'approve']])
             ->get();
         // pr($data);
         if (!$data) {
@@ -627,4 +611,38 @@ class ProjectService
 
         return $data;
     }
+
+    public function getLocationsProjectMemberById($id = '')
+    {
+        $data = ProjectLocation::where('id', $id)->first();
+
+        if (!$data) {
+            $data = [];
+        }
+
+        return $data;
+    }
+
+    public function checkIfUserProjectManager()
+    {
+        $user = Auth::user();
+
+        $employeeInfo = Employee::where([['tenant_id', $user->tenant_id], ['user_id', $user->id]])->first();
+        // pr($employeeInfo->id);
+        if ($employeeInfo) {
+            $projectInfo = Project::where('project_manager', $employeeInfo->id)->first();
+
+            if ($projectInfo) {
+                $data = 1;
+            }else{
+                $data = 0;
+            }
+            return $data;
+
+        }else{
+                return 0;
+        }
+    }
+
+
 }
