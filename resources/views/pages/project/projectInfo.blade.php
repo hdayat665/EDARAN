@@ -13,12 +13,14 @@
                         <span class="d-sm-block d-none">Project Information</span>
                     </a>
                 </li>
+                @if ($projectManager)
                 <li class="nav-item">
                     <a href="#default-tab-2" data-bs-toggle="tab" class="nav-link">
                         <span class="d-sm-none">Tab 2</span>
                         <span class="d-sm-block d-none">Project Approval</span>
                     </a>
                 </li>
+                @endif
             </ul>
             <div class="tab-content panel m-0 rounded-0 p-3">
                 <div class="tab-pane fade active show" id="default-tab-1">
@@ -77,8 +79,6 @@
                 <div class="tab-pane fade" id="default-tab-2">
                     <br>
                     <div class="panel-body">
-
-
                         <table id="data-table-default2" style="width: 100% !important" class="table table-striped table-bordered align-middle">
                             <thead>
                                 <tr>
@@ -114,6 +114,7 @@
                                 @endif
                             </tbody>
                         </table>
+
                     </div>
                 </div>
             </div>
