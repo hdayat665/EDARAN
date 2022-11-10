@@ -17,7 +17,8 @@ class ProjectController extends Controller
         $ps = new ProjectService;
 
         $data['projectInfos'] = $ps->projectInfoView();
-        $data['projectApproval'] = $ps->projectApprovalData();;
+        $data['projectApproval'] = $ps->projectApprovalData();
+        $data['projectManager'] = $ps->checkIfUserProjectManager();
 
         return view('pages.project.projectInfo', $data);
     }
@@ -159,6 +160,7 @@ class ProjectController extends Controller
         $ps = new ProjectService;
 
         $data['projectInfos'] = $ps->projectRequestView();
+
         // pr($data);
         return view('pages.project.projectRequest', $data);
     }
@@ -237,6 +239,15 @@ class ProjectController extends Controller
         $ss = new ProjectService;
 
         $result = $ss->deleteAssignLocation($id, $member_id);
+
+        return response()->json($result);
+    }
+
+    public function getLocationsProjectMemberById($id)
+    {
+        $ss = new ProjectService;
+
+        $result = $ss->getLocationsProjectMemberById($id);
 
         return response()->json($result);
     }
