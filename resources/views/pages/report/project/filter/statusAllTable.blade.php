@@ -10,6 +10,7 @@
             <div class="panel-heading-btn">
             </a>
         </div>
+        
     </div>
     <div class="panel-body">
         <table id="statusAll" class="table table-striped table-bordered align-middle">
@@ -64,6 +65,10 @@
                 @endif
             </tbody>
         </table>
+        
+        <a href="/projectFilter"><button type="button" class="btn btn-primary">Back</button></a>
+      
+
     </div>
 </div>
 @endsection
