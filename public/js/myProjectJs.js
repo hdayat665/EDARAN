@@ -3,16 +3,16 @@ $(document).ready(function() {
     $("#myProjectTable").DataTable({
         responsive: false,
         lengthMenu: [
-            [5,10, 15, 20, -1],
-            [5,10, 15, 20, 'All'],
+            [5, 10, 15, 20, -1],
+            [5, 10, 15, 20, 'All'],
         ],
     });
 
     $("#myProjectPendingTable").DataTable({
         responsive: false,
         lengthMenu: [
-            [5,10, 15, 20, -1],
-            [5,10, 15, 20, 'All'],
+            [5, 10, 15, 20, -1],
+            [5, 10, 15, 20, 'All'],
         ],
     });
     $("#data-table-default1").DataTable({
@@ -26,10 +26,53 @@ $(document).ready(function() {
     $("#myProjectRejectTable").DataTable({
         responsive: false,
         lengthMenu: [
-            [5,10, 15, 20, -1],
-            [5,10, 15, 20, 'All'],
+            [5, 10, 15, 20, -1],
+            [5, 10, 15, 20, 'All'],
         ],
     });
+
+
+    function getLocations(id) {
+        return $.ajax({
+            url: "/getLocationsProjectMemberById/" + id
+        });
+
+    }
+
+    $(document).on("click", "#getLocation", function() {
+        $('#locationTable')
+            .find('tr')
+            .remove()
+            .end();
+        var location = $(this).data('id');
+
+        const locations = location.split(",");
+        locations.splice(0, 1);
+        let a = 1;
+        for (let i = 0; i < locations.length; i++) {
+            const element = locations[i];
+            locationData = getLocations(element);
+            locationData.done(function(data) {
+                $('#locationTable').append('<tr><td>' + a++ + '</td><td>' + data['location_name'] + '</td></tr>')
+                    // console.log(data['location_name']);
+
+
+            })
+
+
+        }
+        // locationData = getLocations(id);
+        // locationData.done(function(data) {
+        //     // console.log(data);
+        //     for (let i = 0; i < data.length; i++) {
+        //         const element = data[i];
+        //         console.log(element);
+
+        //     }
+        // })
+
+    })
+
 
     $(document).on("click", "#cancelProject", function() {
         id = $(this).data('id');

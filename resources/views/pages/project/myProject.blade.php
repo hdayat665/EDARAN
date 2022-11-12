@@ -6,7 +6,7 @@
     <div class="panel panel" id="myProjectJs">
         <div class="panel-heading">
             <div class="panel-body">
-                
+
                 <table id="myProjectTable" class="table table-striped table-bordered align-middle">
                     <thead>
                         <tr>
@@ -16,7 +16,7 @@
                             <th class="text-nowrap">Description</th>
                             <th class="text-nowrap">Project Manager</th>
                             <th class="text-nowrap">Contract End Date</th>
-                            <th class="text-nowrap">Status</th>
+                            {{-- <th class="text-nowrap">Status</th> --}}
                             <th class="text-nowrap">Location</th>
                         </tr>
                     </thead>
@@ -30,8 +30,8 @@
                             <td>{{$myProject->desc}}</td>
                             <td>{{($myProject->project_manager) ? getEmployeeNameById($myProject->project_manager)->employeeName ?? '-' : '-'}}</td>
                             <td>{{$myProject->contract_end_date}}</td>
-                            <td>{{$myProject->request_status}}</td>
-                            <td><a href="javascript:;" data-bs-toggle="modal" data-bs-target="#exampleModal">{{$myProject->location}}</a></td>
+                            {{-- <td>{{$myProject->request_status}}</td> --}}
+                            <td><a href="javascript:;" data-bs-toggle="modal" data-id=",{{$myProject->location}}" id="getLocation" data-bs-target="#exampleModal">{{count(explode(',',$myProject->location))}}</a></td>
                         </tr>
                         @endforeach
                         @endif
@@ -125,11 +125,8 @@
                                     <th class="text-nowrap">Location Name</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Putrajaya</td>
-                                </tr>
+                            <tbody id="locationTable">
+
                             </tbody>
                         </table>
 
