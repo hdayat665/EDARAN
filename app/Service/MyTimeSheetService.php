@@ -151,7 +151,7 @@ class MyTimeSheetService
             $data['status'] = config('app.response.success.status');
             $data['type'] = config('app.response.success.type');
             $data['title'] = config('app.response.success.title');
-            $data['msg'] = 'Success delete log';
+            $data['msg'] = 'Successfully delete log';
         }
 
         return $data;
@@ -394,7 +394,7 @@ class MyTimeSheetService
             $data['status'] = config('app.response.success.status');
             $data['type'] = config('app.response.success.type');
             $data['title'] = config('app.response.success.title');
-            $data['msg'] = 'Success delete log';
+            $data['msg'] = 'Successfully delete event';
         }
 
         return $data;
@@ -484,7 +484,7 @@ class MyTimeSheetService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success submit request';
+        $data['msg'] = 'Successfully sumbit log';
 
         return $data;
     }
@@ -548,7 +548,7 @@ class MyTimeSheetService
             $data['status'] = config('app.response.error.status');
             $data['type'] = config('app.response.error.type');
             $data['title'] = config('app.response.error.title');
-            $data['msg'] = 'Please checked at least 1 data';
+            $data['msg'] = 'Please select the timesheet submission first!';
 
             return $data;
         }

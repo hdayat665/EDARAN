@@ -268,21 +268,31 @@ $(document).ready(function() {
     $('#saveLogButton').click(function(e) {
         $("#addLogForm").validate({
             rules: {
-                // department: "required",
-                // type_of_log: "required",
-                // activity_name: "required",
-                // financial_year: "required",
-                // LOA_date: "required",
-                // contract_start_date: "required",
-                // contract_end_date: "required",
-                // acc_manager: "required",
-                // bank_guarantee_amount: "required",
+                type_of_log: "required",
+                date: "required",
+                office_log: "required",
+                project_id: "required",
+                office_log_project: "required",
+                activity_name: "required",
+                activity_office: "required",
+                start_time: "required",
+                project_location: "required",
+                project_location_office: "required",
+                end_time: "required",
             },
 
             messages: {
-                // department: "",
-                // type_of_log: "",
-                // activity_name: "",
+                type_of_log: "Please Choose Type of Log",
+                date: "",
+                office_log: "Please Choose Office Log",
+                project_id: "Please Choose",
+                office_log_project: "Please Choose",
+                activity_name: "Please Choose Activity Name",
+                activity_office: "Please Choose",
+                start_time: "",
+                project_location: "Please Enter Location",
+                project_location_office: "Please Enter Location",
+                end_time: "",
             },
             submitHandler: function(form) {
                 requirejs(['sweetAlert2'], function(swal) {
@@ -329,11 +339,29 @@ $(document).ready(function() {
             rules: {
                 type_of_log: "required",
                 date: "required",
+                office_log: "required",
+                project_id: "required",
+                office_log_project: "required",
+                activity_name: "required",
+                activity_office: "required",
+                start_time: "required",
+                project_location: "required",
+                project_location_office: "required",
+                end_time: "required",
             },
 
             messages: {
-                type_of_log: "",
+                type_of_log: "Please Choose Type of Log",
                 date: "",
+                office_log: "Please Choose Office Log",
+                project_id: "Please Choose",
+                office_log_project: "Please Choose",
+                activity_name: "Please Choose Activity Name",
+                activity_office: "Please Choose",
+                start_time: "",
+                project_location: "Please Enter Location",
+                project_location_office: "Please Enter Location",
+                end_time: "",
             },
             submitHandler: function(form) {
                 requirejs(['sweetAlert2'], function(swal) {
@@ -418,21 +446,27 @@ $(document).ready(function() {
     $('#saveEventButton').click(function(e) {
         $("#addEventForm").validate({
             rules: {
-                // department: "required",
-                // type_of_log: "required",
-                // activity_name: "required",
-                // financial_year: "required",
-                // LOA_date: "required",
-                // contract_start_date: "required",
-                // contract_end_date: "required",
-                // acc_manager: "required",
-                // bank_guarantee_amount: "required",
+                event_name: "required",
+                start_date: "required",
+                end_date: "required",
+                start_time: "required",
+                end_time: "required",
+                duration: "required",
+                recurring: "required",
+                location: "required",
+                location_by_project: "required",
             },
 
             messages: {
-                // department: "",
-                // type_of_log: "",
-                // activity_name: "",
+                event_name: "Please Insert Event Name",
+                start_date: "Choose Date",
+                end_date: "Choose Date",
+                start_time: "Choose Date",
+                end_time: "Choose Date",
+                duration: "Please Choose Duration",
+                recurring: "Please Select",
+                location: "Please Enter Specific Location",
+                location_by_project: "Please Enter Specific Location",
             },
             submitHandler: function(form) {
                 requirejs(['sweetAlert2'], function(swal) {
@@ -476,13 +510,27 @@ $(document).ready(function() {
     $('#updateEventButton').click(function(e) {
         $("#editEventForm").validate({
             rules: {
-                type_of_log: "required",
-                date: "required",
+                event_name: "required",
+                start_date: "required",
+                end_date: "required",
+                start_time: "required",
+                end_time: "required",
+                duration: "required",
+                recurring: "required",
+                location: "required",
+                location_by_project: "required",
             },
 
             messages: {
-                type_of_log: "",
-                date: "",
+                event_name: "Please Insert Event Name",
+                start_date: "Choose Date",
+                end_date: "Choose Date",
+                start_time: "Choose Date",
+                end_time: "Choose Date",
+                duration: "Please Choose Duration",
+                recurring: "Please Select",
+                location: "Please Enter Specific Location",
+                location_by_project: "Please Enter Specific Location",
             },
             submitHandler: function(form) {
                 requirejs(['sweetAlert2'], function(swal) {
