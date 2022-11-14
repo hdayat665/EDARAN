@@ -1858,10 +1858,6 @@ $("#same-address").change(function() {
       }); 
 
     
-
-      
-
-      
       
     $("#same-address5").change(function() {
         if(this.checked) {

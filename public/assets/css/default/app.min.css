@@ -17261,6 +17261,10 @@ a:focus {
     transform: rotate(90deg)
 }
 
+.rotate{
+    transform: rotate(90deg);
+}
+
 .app-sidebar-float-submenu-container .app-sidebar-float-submenu .menu-caret {
     display: block;
     margin-left: auto;
@@ -17685,7 +17689,8 @@ a:focus {
 
 .app-sidebar .menu .menu-item .menu-link:focus,
 .app-sidebar .menu .menu-item .menu-link:hover {
-    background: 0 0;
+    background: #efeff0;
+    transition: 0.3s ease;
     color: var(--app-sidebar-component-color)
 }
 
@@ -17739,7 +17744,7 @@ a:focus {
     padding: 5px 0 10px 39px;
     margin: 0;
     position: relative;
-    display: none
+    display: none;
 }
 
 .app-sidebar .menu .menu-item .menu-submenu .menu-item .menu-link {
@@ -17747,7 +17752,7 @@ a:focus {
     color: rgba(255, 255, 255, .45);
     text-decoration: none;
     position: relative;
-    line-height: 18px
+    line-height: 18px;
 }
 
 .app-sidebar .menu .menu-item .menu-submenu .menu-item .menu-link:focus,
