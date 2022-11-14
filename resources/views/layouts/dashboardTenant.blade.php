@@ -174,7 +174,7 @@
                     <!-- Sidenav Content Orbit -->
 
                     <div class="menu-item has-sub mt-3">
-                        <a href="/dashboardTenant" class="menu-link">
+                        <a href="/dashboardTenant" class="menu-link highlight">
                             <div class="menu-icon">
                                 <i class="fa fa-clipboard-list text-gray"></i>
                             </div>
@@ -187,17 +187,17 @@
                         <!-- Sidenav Content Orbit -->
 
                         <div class="menu-item has-sub">
-                        <a href="javascript:;" class="menu-link">
+                        <a href="javascript:;" class="menu-link highlight">
                             <div class="menu-icon">
                                 <i class="fa fa-commenting text-gray"></i>
                             </div>
-                            <div class="menu-text text-gray">HRIS</div>
+                            <div class="menu-text text-gray active" >HRIS</div>
                             <div class="menu-caret text-gray"></div>
                         </a>
                         <div class="menu-submenu">
 
                             <div class="menu-item">
-                                <a href="/myProfile" class="menu-link">
+                                <a href="/myProfile" class="menu-link highlight">
                                     <div class="menu-icon">
 										<i class="fa fa-address-card text-gray"></i>
 									</div>
@@ -206,7 +206,7 @@
                             </div>
 
                             <div class="menu-item">
-                                <a href="/employeeInfoView" class="menu-link">
+                                <a href="/employeeInfoView" class="menu-link highlight">
                                     <div class="menu-icon">
 										<i class="fa fa-indent text-gray"></i>
 									</div>
@@ -221,7 +221,7 @@
                     <!-- Sidenav Content Orbit -->
 
                     <div class="menu-item has-sub">
-                        <a href="#" class="menu-link">
+                        <a href="javascript:;" class="menu-link highlight">
                             <div class="menu-icon">
                                 <i class="fa fa-business-time text-gray"></i>
                             </div>
@@ -230,7 +230,7 @@
                         </a>
                         <div class="menu-submenu">
                             <div class="menu-item">
-                                <a href="/myTimesheet" class="menu-link">
+                                <a href="/myTimesheet" class="menu-link highlight">
                                     <div class="menu-icon">
 										<i class="fa fa-calendar-check text-gray"></i>
 									</div>
@@ -238,7 +238,7 @@
                                 </a>
                             </div>
                             <div class="menu-item">
-                                <a href="/timesheetApproval" class="menu-link">
+                                <a href="/timesheetApproval" class="menu-link highlight">
                                     <div class="menu-icon">
 										<i class="fa fa-receipt text-gray"></i>
 									</div>
@@ -246,7 +246,7 @@
                                 </a>
                             </div>
                             <div class="menu-item">
-                                <a href="/realtimeEventTimesheet" class="menu-link">
+                                <a href="/realtimeEventTimesheet" class="menu-link highlight">
                                     <div class="menu-icon">
 										<i class="fa fa-receipt text-gray"></i>
 									</div>
@@ -261,7 +261,7 @@
                     <!-- Sidenav Content Orbit -->
 
                     <div class="menu-item has-sub">
-                        <a href="#" class="menu-link">
+                        <a href="javascript:;" class="menu-link highlight">
                             <div class="menu-icon">
                                 <i class="fa fa-user-edit text-gray"></i>
                             </div>
@@ -270,7 +270,7 @@
                         </a>
                         <div class="menu-submenu">
                             <div class="menu-item">
-                                <a href="#" class="menu-link">
+                                <a href="#" class="menu-link highlight">
                                     <div class="menu-icon">
 										<i class="fa fa-bell text-gray"></i>
 									</div>
@@ -278,7 +278,7 @@
                                 </a>
                             </div>
                             <div class="menu-item">
-                                <a href="#" class="menu-link">
+                                <a href="#" class="menu-link highlight">
                                     <div class="menu-icon">
 										<i class="fa fa-list-check text-gray"></i>
 									</div>
@@ -293,7 +293,7 @@
                     <!-- Sidenav Content Orbit -->
 
                     <div class="menu-item has-sub">
-                        <a href="#" class="menu-link">
+                        <a href="javascript:;" class="menu-link highlight">
                             <div class="menu-icon">
                                 <i class="fa fa-user-cog text-gray"></i>
                             </div>
@@ -302,7 +302,7 @@
                         </a>
                         <div class="menu-submenu">
                             <div class="menu-item">
-                                <a href="#" class="menu-link">
+                                <a href="#" class="menu-link highlight">
                                     <div class="menu-icon">
 										<i class="fa fa-clipboard text-gray"></i>
 									</div>
@@ -310,7 +310,7 @@
                                 </a>
                             </div>
                             <div class="menu-item">
-                                <a href="#" class="menu-link">
+                                <a href="#" class="menu-link highlight">
                                     <div class="menu-icon">
 										<i class="fa fa-list-check text-gray"></i>
 									</div>
@@ -325,7 +325,7 @@
                     <!-- Sidenav Content Orbit -->
 
                     <div class="menu-item has-sub">
-                        <a href="#" class="menu-link">
+                        <a href="javascript:;" class="menu-link highlight">
                             <div class="menu-icon">
                                 <i class="fa fa-diagram-project text-gray"></i>
                             </div>
@@ -334,7 +334,7 @@
                         </a>
                         <div class="menu-submenu">
                             <div class="menu-item">
-                                <a href="/customer" class="menu-link">
+                                <a href="/customer" class="menu-link highlight">
                                 <div class="menu-icon">
 								    <i class="fa fa-share-nodes text-gray"></i>
 							    </div>
@@ -342,7 +342,7 @@
                                 </a>
                             </div>
                             <div class="menu-item">
-                                <a href="/projectInfo" class="menu-link">
+                                <a href="/projectInfo" class="menu-link highlight">
                                 <div class="menu-icon">
 								    <i class="fa fa-book text-gray"></i>
 							    </div>
@@ -350,7 +350,7 @@
                                 </a>
                             </div>
                             <div class="menu-item">
-                                <a href="/myProject" class="menu-link">
+                                <a href="/myProject" class="menu-link highlight">
                                 <div class="menu-icon">
 								    <i class="fa fa-clipboard-list text-gray"></i>
 							    </div>
@@ -358,7 +358,7 @@
                                 </a>
                             </div>
                             <div class="menu-item">
-                                <a href="/projectRequest" class="menu-link">
+                                <a href="/projectRequest" class="menu-link highlight">
                                 <div class="menu-icon">
 								    <i class="fa fa-code-pull-request text-gray"></i>
 							    </div>
@@ -372,7 +372,7 @@
                     <!-- Sidenav Content Orbit -->
 
                     <div class="menu-item has-sub">
-						<a href="#" class="menu-link">
+						<a href="javascript:;" class="menu-link highlight">
 							<div class="menu-icon">
 								<i class="fa fa-file-lines text-gray"></i>
 							</div>
@@ -381,7 +381,7 @@
 						</a>
 						<div class="menu-submenu">
 							<div class="menu-item">
-								<a href="#" class="menu-link">
+								<a href="#" class="menu-link highlight">
 								<div class="menu-icon">
 										<i class="fa fa-envelope-open-text text-gray"></i>
 									</div>
@@ -389,7 +389,7 @@
 								</a>
 							</div>
 							<div class="menu-item">
-								<a href="#" class="menu-link">
+								<a href="javascript:;" class="menu-link highlight">
 								<div class="menu-icon">
 										<i class="fa fa-list-check text-gray"></i>
 									</div>
@@ -404,7 +404,7 @@
                     <!-- Sidenav Content Orbit -->
 
                     <div class="menu-item has-sub">
-                        <a href="#" class="menu-link">
+                        <a href="javascript:;" class="menu-link highlight">
                             <div class="menu-icon">
                                 <i class="fa fa-user-group text-gray"></i>
                             </div>
@@ -414,7 +414,7 @@
 
                             <div class="menu-submenu">
                                 <div class="menu-item">
-                                    <a href="/phoneDirectory" class="menu-link">
+                                    <a href="/phoneDirectory" class="menu-link highlight">
                                     <div class="menu-icon">
 								        <i class="fa fa-rectangle-list text-gray"></i>
 							        </div>
@@ -422,7 +422,7 @@
                                     </a>
                                 </div>
                                 <div class="menu-item">
-                                    <a href="/organizationChart" class="menu-link">
+                                    <a href="/organizationChart" class="menu-link highlight">
                                     <div class="menu-icon">
 								        <i class="fa fa-rectangle-list text-gray"></i>
 							        </div>
@@ -430,7 +430,7 @@
                                     </a>
                                 </div>
                                 {{-- <div class="menu-item">
-                                    <a href="/departmentTree" class="menu-link">
+                                    <a href="/departmentTree" class="menu-link highlight">
                                     <div class="menu-icon">
 								        <i class="fa fa-folder-tree text-gray"></i>
 							        </div>
@@ -445,7 +445,7 @@
                     <!-- Sidenav Content Orbit -->
 
                     <div class="menu-item has-sub">
-                        <a href="#" class="menu-link">
+                        <a href="javascript:;" class="menu-link highlight">
                             <div class="menu-icon">
                                 <i class="fa fa-pen-fancy text-gray"></i>
                             </div>
@@ -454,7 +454,7 @@
                         </a>
                              <div class="menu-submenu">
                             <div class="menu-item has-sub">
-                                <a href="#" class="menu-link">
+                                <a href="#" class="menu-link highlight">
                                     <div class="menu-icon">
 							    	    <i class="fa fa-file-signature text-gray"></i>
 							        </div>
@@ -463,7 +463,7 @@
                                 </a>
                             <div class="menu-submenu">
                                 <div class="menu-item">
-                                    <a href="/statusReport" class="menu-link">
+                                    <a href="/statusReport" class="menu-link highlight">
                                         <div class="menu-icon">
 								             <i class="fa fa-address-card text-gray"></i>
 							            </div>
@@ -471,7 +471,7 @@
                                     </a>
                                     </div>
                                     <div class="menu-item">
-                                <a href="/employeeReport" class="menu-link">
+                                <a href="/employeeReport" class="menu-link highlight">
                                 <div class="menu-icon">
 								    <i class="fa fa-user-clock text-gray"></i>
 							    </div>
@@ -479,7 +479,7 @@
                                 </a>
                             </div>
                             <div class="menu-item">
-                                <a href="/overtimeReport" class="menu-link">
+                                <a href="/overtimeReport" class="menu-link highlight">
                                 <div class="menu-icon">
 								    <i class="fa fa-user-gear text-gray"></i>
 							    </div>
@@ -490,7 +490,7 @@
 
                             </div>
                             <div class="menu-item has-sub">
-                                <a href="#" class="menu-link">
+                                <a href="#" class="menu-link highlight">
                                 <div class="menu-icon">
 								    <i class="fa fa-user-check text-gray"></i>
 							    </div>
@@ -498,7 +498,7 @@
                                     <div class="menu-caret text-gray"></div>
                                 </a><div class="menu-submenu">
                                 <div class="menu-item">
-                                    <a href="#" class="menu-link">
+                                    <a href="#" class="menu-link highlight">
                                         <div class="menu-icon">
 								             <i class="fa fa-user-pen text-gray"></i>
 							            </div>
@@ -506,7 +506,7 @@
                                     </a>
                                     </div>
                                     <div class="menu-item">
-                                <a href="#" class="menu-link">
+                                <a href="#" class="menu-link highlight">
                                 <div class="menu-icon">
 								    <i class="fa fa-users-gear text-gray"></i>
 							    </div>
@@ -519,7 +519,7 @@
 
                             </div>
                             <div class="menu-item">
-								<a href="#" class="menu-link">
+								<a href="#" class="menu-link highlight">
 								<div class="menu-icon">
 								<i class="fa fa-user-minus text-gray"></i>
 							</div>
@@ -528,7 +528,7 @@
 							</div>
 
                             <div class="menu-item has-sub">
-								<a href="#" class="menu-link">
+								<a href="#" class="menu-link highlight">
 								<div class="menu-icon">
 								<i class="fa fa-keyboard text-gray"></i>
 							</div>
@@ -536,7 +536,7 @@
                                     <div class="menu-caret text-gray"></div>
 								</a><div class="menu-submenu">
                                 <div class="menu-item">
-                                    <a href="/projectListing" class="menu-link">
+                                    <a href="/projectListing" class="menu-link highlight">
                                         <div class="menu-icon">
 								             <i class="fa fa-book text-gray"></i>
 							            </div>
@@ -544,7 +544,7 @@
                                     </a>
                                     </div>
                                     <div class="menu-item">
-                                <a href="/projectFilter" class="menu-link">
+                                <a href="/projectFilter" class="menu-link highlight">
                                 <div class="menu-icon">
 								    <i class="fa fa-book-open text-gray"></i>
 							    </div>
@@ -556,7 +556,7 @@
 
 							</div>
                             <div class="menu-item has-sub">
-								<a href="#" class="menu-link">
+								<a href="#" class="menu-link highlight">
 								<div class="menu-icon">
 								<i class="fa fa-money-check text-gray"></i>
 							</div>
@@ -565,7 +565,7 @@
 								</a>
                                 <div class="menu-submenu">
                                 <div class="menu-item">
-                                    <a href="#" class="menu-link">
+                                    <a href="#" class="menu-link highlight">
                                         <div class="menu-icon">
 								             <i class="fa fa-money-bill-wave text-gray"></i>
 							            </div>
@@ -573,7 +573,7 @@
                                     </a>
                                     </div>
                                     <div class="menu-item">
-                                <a href="#" class="menu-link">
+                                <a href="#" class="menu-link highlight">
                                 <div class="menu-icon">
 								    <i class="fa fa-money-bill-1-wave text-gray"></i>
 							    </div>
@@ -590,7 +590,7 @@
                     <!-- Sidenav Content Orbit -->
 
                     <div class="menu-item has-sub">
-                        <a href="/setting" class="menu-link">
+                        <a href="/setting" class="menu-link highlight">
                             <div class="menu-icon">
                                 <i class="fa fa-gear text-gray"></i>
                             </div>
@@ -744,18 +744,26 @@
 
 <script>
     $(function (){
-        $('a').each(function(){
+        $('.highlight').each(function(){
             if ($(this).prop('href') === window.location.href) {
                 $(this).parents().addClass('active');
                 $(this).css({
                     "background": "linear-gradient(to left,#ececec 0, #ececec 66%, #ececec 100%)", 
                     "border-radius": "50px",
                 });
-                
             }
-        })
-    })
+        })
+    });
 </script>
+
+<!-- <script>
+    $(document).ready(function(){
+        $('.menu-item').click(function(){
+            $(this).next('.menu-submenu').slideToogle();
+            $(this).find('manu-caret').toggleClass('rotate');
+        });
+    });
+</script> -->
 
     <script src="/assets/js/require.js" data-main="controller"></script>
 
