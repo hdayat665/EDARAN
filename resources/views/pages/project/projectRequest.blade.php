@@ -23,7 +23,11 @@
                     @foreach ($projectInfos as $project)
                     <tr class="odd gradeX">
                         <td>
+                            @if (in_array($project->id, $projectIdPending))
+                            <a href="#" class="btn btn-warning btn-xs" id="" data-id="{{$project->id}}">Cancel</a>
+                            @else
                             <a href="#" class="btn btn-primary btn-xs" data-bs-toggle="modal" id="requestProjectButton" data-id="{{$project->id}}">Request</a>
+                            @endif
                         </td>
                         <td>{{$project->customer_name}}</td>
                         <td>{{$project->project_code}}</td>
