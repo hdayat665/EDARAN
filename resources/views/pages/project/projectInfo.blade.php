@@ -13,14 +13,14 @@
                         <span class="d-sm-block d-none">Project Information</span>
                     </a>
                 </li>
-                @if ($projectManager)
+                {{-- @if ($projectManager) --}}
                 <li class="nav-item">
                     <a href="#default-tab-2" data-bs-toggle="tab" class="nav-link">
                         <span class="d-sm-none">Tab 2</span>
                         <span class="d-sm-block d-none">Project Approval</span>
                     </a>
                 </li>
-                @endif
+                {{-- @endif --}}
             </ul>
             <div class="tab-content panel m-0 rounded-0 p-3">
                 <div class="tab-pane fade active show" id="default-tab-1">

@@ -160,8 +160,21 @@ class ProjectController extends Controller
         $ps = new ProjectService;
 
         $data['projectInfos'] = $ps->projectRequestView();
+        $data['projectIdPending'] = $ps->projectPendingRequest();
 
         // pr($data);
+
+        // foreach ($data['projectPending'] as $projectIdPending)
+        // {
+        //     $dateRequest = strtotime($projectIdPending->created_at);
+        //     $now = strtotime(now());
+        //     $hour = abs($dateRequest - $now)/(60*60);
+
+        //     if ($hour < 24 && $dateRequest <= $now) {
+        //         $data['projectIdPending'][] = $projectIdPending->project_id;
+        //     }
+        // }
+
         return view('pages.project.projectRequest', $data);
     }
 

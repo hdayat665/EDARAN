@@ -97,7 +97,7 @@ class ProjectService
             PreviousProjectManager::create($previousManager);
         }
 
-        $project = Project::where([['id','!=', $id], ['project_code', $input['project_code']]])->first();
+        $project = Project::where([['id', '!=', $id], ['project_code', $input['project_code']]])->first();
 
         if ($project) {
             $data['status'] = config('app.response.error.status');
@@ -348,16 +348,16 @@ class ProjectService
             ProjectMember::create($input);
 
             $project =   DB::table('project as a')
-            ->leftJoin('customer as d', 'a.customer_id', '=', 'd.id')
-            ->leftJoin('employment as b', 'a.project_manager', '=', 'b.id')
-            ->leftJoin('users as c', 'b.user_id', '=', 'c.id')
-            ->select('a.*', 'b.employeeName as project_manager_name', 'c.username', 'd.customer_name','b.workingEmail')
-            ->where([['a.id', $project_id], ['a.tenant_id', Auth::user()->tenant_id]])
-            ->first();
+                ->leftJoin('customer as d', 'a.customer_id', '=', 'd.id')
+                ->leftJoin('employment as b', 'a.project_manager', '=', 'b.id')
+                ->leftJoin('users as c', 'b.user_id', '=', 'c.id')
+                ->select('a.*', 'b.employeeName as project_manager_name', 'c.username', 'd.customer_name', 'b.workingEmail')
+                ->where([['a.id', $project_id], ['a.tenant_id', Auth::user()->tenant_id]])
+                ->first();
 
             $receiver = $project->workingEmail;
             $response['typeEmail'] = 'projectReqEmail';
-            $response['content1'] = 'Dear '. $project->project_manager_name .' ,';
+            $response['content1'] = 'Dear ' . $project->project_manager_name . ' ,';
             $response['customer_name'] = $project->customer_name;
             $response['project_code'] = $project->project_code;
             $response['project_name'] = $project->project_name;
@@ -420,9 +420,8 @@ class ProjectService
 
         if ($status == 'cancel') {
             $this->cancelProjectEmail($id);
-        }else{
-            $this->updateStatusProjectEmail($id,$status);
-
+        } else {
+            $this->updateStatusProjectEmail($id, $status);
         }
 
         $data['status'] = config('app.response.success.status');
@@ -436,24 +435,28 @@ class ProjectService
     public function cancelProjectEmail($id = '')
     {
         $projectMember = DB::table('project_member as a')
-        ->leftJoin('project as b', 'a.project_id', '=', 'b.id')
-        ->leftJoin('employment as x', 'b.project_manager', '=', 'x.id')
-        ->leftJoin('users as y', 'x.user_id', '=', 'y.id')
-        ->leftJoin('customer as d', 'b.customer_id', '=', 'd.id')
-        ->leftJoin('employment as e', 'a.employee_id', '=', 'e.id')
-        ->leftJoin('users as f', 'e.user_id', '=', 'f.id')
-        ->leftJoin('department as c', 'e.department', '=', 'c.id')
-        ->select('a.*', 'b.project_name', 'b.project_code'
-                , 'd.customer_name'
-                , 'c.departmentName'
-                , 'e.employeeName'
-                , 'f.username'
-                , 'y.username'
-                , 'x.employeeName as manager_name'
-                , 'x.wokingEmail as manager_email')
-        ->where('a.id', $id)
-        ->first();
-            // pr($projectMember);
+            ->leftJoin('project as b', 'a.project_id', '=', 'b.id')
+            ->leftJoin('employment as x', 'b.project_manager', '=', 'x.id')
+            ->leftJoin('users as y', 'x.user_id', '=', 'y.id')
+            ->leftJoin('customer as d', 'b.customer_id', '=', 'd.id')
+            ->leftJoin('employment as e', 'a.employee_id', '=', 'e.id')
+            ->leftJoin('users as f', 'e.user_id', '=', 'f.id')
+            ->leftJoin('department as c', 'e.department', '=', 'c.id')
+            ->select(
+                'a.*',
+                'b.project_name',
+                'b.project_code',
+                'd.customer_name',
+                'c.departmentName',
+                'e.employeeName',
+                'f.username',
+                'y.username',
+                'x.employeeName as manager_name',
+                'x.wokingEmail as manager_email'
+            )
+            ->where('a.id', $id)
+            ->first();
+        // pr($projectMember);
         $receiver = $projectMember->manager_email ?? 'admin@edaran.com';
 
         $response['typeEmail'] = 'projectCancelReq';
@@ -477,15 +480,15 @@ class ProjectService
     public function updateStatusProjectEmail($id = '', $status = '')
     {
         $projectMember = DB::table('project_member as a')
-        ->leftJoin('project as b', 'a.project_id', '=', 'b.id')
-        ->leftJoin('customer as d', 'b.customer_id', '=', 'd.id')
-        ->leftJoin('employment as e', 'a.employee_id', '=', 'e.id')
-        ->leftJoin('users as f', 'e.user_id', '=', 'f.id')
-        ->leftJoin('department as c', 'e.department', '=', 'c.id')
-        ->select('a.*', 'b.project_name', 'b.project_code', 'd.customer_name', 'c.departmentName', 'e.employeeName', 'f.username','e.workingEmail')
-        ->where('a.id', $id)
-        ->first();
-            // pr($projectMember);
+            ->leftJoin('project as b', 'a.project_id', '=', 'b.id')
+            ->leftJoin('customer as d', 'b.customer_id', '=', 'd.id')
+            ->leftJoin('employment as e', 'a.employee_id', '=', 'e.id')
+            ->leftJoin('users as f', 'e.user_id', '=', 'f.id')
+            ->leftJoin('department as c', 'e.department', '=', 'c.id')
+            ->select('a.*', 'b.project_name', 'b.project_code', 'd.customer_name', 'c.departmentName', 'e.employeeName', 'f.username', 'e.workingEmail')
+            ->where('a.id', $id)
+            ->first();
+        // pr($projectMember);
         $receiver = $projectMember->workingEmail;
         $response['typeEmail'] = 'projectReqStatus';
         $response['status'] = $status;
@@ -507,20 +510,49 @@ class ProjectService
     {
         $employee = Employee::where('user_id', Auth::user()->id)->first();
 
-        $projectMember = ProjectMember::select('project_id')->where([['employee_id', '=', $employee->id]])->whereIn('status', ['approve'])->groupBy('project_id')->get();
-
+        $projectMember = ProjectMember::select('project_id', 'status', 'created_at')->where([['employee_id', '=', $employee->id]])->whereIn('status', ['pending', 'approve'])->groupBy('project_id')->get();
+        // dd($projectMember);
         $projectId = [];
         foreach ($projectMember as $project) {
-            $projectId[] = $project->project_id;
+            $dateRequest = strtotime($project->created_at);
+            $now = strtotime(now());
+            $hour = abs($dateRequest - $now) / (60 * 60);
+
+            if ($project->status == 'pending') {
+                if ($hour > 24) {
+                    $projectId['approve'][] = $project->project_id;
+                }
+            } else {
+                $projectId['approve'][] = $project->project_id;
+            }
+
+
         }
 
         $data = DB::table('project as a')
             ->leftJoin('customer as b', 'a.customer_id', '=', 'b.id')
             ->leftJoin('employment as c', 'a.project_manager', '=', 'c.id')
             ->select('a.*', 'b.customer_name', 'c.employeeName')
-            ->whereNotIn('a.id', $projectId)
-            ->where([['a.tenant_id', Auth::user()->tenant_id],['project_manager', '!=', '']])
+            ->whereNotIn('a.id', $projectId['approve'])
+            ->where([['a.tenant_id', Auth::user()->tenant_id], ['project_manager', '!=', '']])
             ->get();
+
+        if (!$data) {
+            $data = [];
+        }
+
+        return $data;
+    }
+
+    public function projectPendingRequest()
+    {
+        $employee = Employee::where('user_id', Auth::user()->id)->first();
+        $projectMember = ProjectMember::select('project_id', 'status', 'created_at')->where([['employee_id', '=', $employee->id]])->whereIn('status', ['pending'])->groupBy('project_id')->get();
+
+        $projectId = [];
+        foreach ($projectMember as $project) {
+            $data[] = $project->project_id;
+        }
 
         if (!$data) {
             $data = [];
@@ -542,7 +574,7 @@ class ProjectService
         $data = DB::table('project_member as a')
             ->leftJoin('project as b', 'a.project_id', '=', 'b.id')
             ->leftJoin('customer as c', 'b.customer_id', '=', 'c.id')
-            ->select('a.id as member_id','a.status as request_status', 'a.location', 'a.id as memberId', 'b.*', 'c.customer_name')
+            ->select('a.id as member_id', 'a.status as request_status', 'a.location', 'a.id as memberId', 'b.*', 'c.customer_name')
             ->where([['a.employee_id', '=', $employee->id], ['a.status', 'approve']])
             ->get();
         // pr($data);
@@ -556,10 +588,10 @@ class ProjectService
     public function projectAssignView($id)
     {
         $data['projectMember'] = DB::table('project_member as a')
-        ->leftJoin('employment as b', 'a.employee_id', '=', 'b.id')
-        ->select('a.id', 'a.location', 'b.employeeName')
-        ->where([['a.id', '=', $id]])
-        ->first();
+            ->leftJoin('employment as b', 'a.employee_id', '=', 'b.id')
+            ->select('a.id', 'a.location', 'b.employeeName')
+            ->where([['a.id', '=', $id]])
+            ->first();
 
         $data['locations'] = ProjectLocation::select('id', 'location_name')->whereIn('id', explode(',', $data['projectMember']->location))->get();
 
@@ -578,7 +610,7 @@ class ProjectService
     {
         $projectMember = ProjectMember::where('id', $member_id)->first();
 
-        $location = explode(',',$projectMember->location);
+        $location = explode(',', $projectMember->location);
 
         if (($key = array_search($id, $location)) !== false) {
             unset($location[$key]);
@@ -594,16 +626,15 @@ class ProjectService
         $data['msg'] = 'Success delete Location Assign to Project Member';
 
         return $data;
-
     }
 
     public function getPreviousManager($projectId = '')
     {
         $data = DB::table('previous_project_manager as a')
-        ->leftJoin('employment as b', 'a.user_id', '=', 'b.id')
-        ->select('b.*', 'a.join_date', 'a.exit_date')
-        ->where([['a.project_id', $projectId], ['a.tenant_id', Auth::user()->tenant_id]])
-        ->get();
+            ->leftJoin('employment as b', 'a.user_id', '=', 'b.id')
+            ->select('b.*', 'a.join_date', 'a.exit_date')
+            ->where([['a.project_id', $projectId], ['a.tenant_id', Auth::user()->tenant_id]])
+            ->get();
 
         if (!$data) {
             $data = [];
@@ -634,15 +665,12 @@ class ProjectService
 
             if ($projectInfo) {
                 $data = 1;
-            }else{
+            } else {
                 $data = 0;
             }
             return $data;
-
-        }else{
-                return 0;
+        } else {
+            return 0;
         }
     }
-
-
 }
