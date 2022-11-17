@@ -1,28 +1,25 @@
-
-
-
 $(document).on('change', "#companyForEmployment", function() {
     companyId = $(this).val();
     $('#departmentShow')
-    .find('option')
-    .remove()
-    .end()
-    .append('<option label="Please Choose" value="" selected="selected"> </option>')
-    .val('')
+        .find('option')
+        .remove()
+        .end()
+        .append('<option label="Please Choose" value="" selected="selected"> </option>')
+        .val('')
 
     $('#unitShow')
-    .find('option')
-    .remove()
-    .end()
-    .append('<option label="Please Choose" value="" selected="selected"> </option>')
-    .val('')
+        .find('option')
+        .remove()
+        .end()
+        .append('<option label="Please Choose" value="" selected="selected"> </option>')
+        .val('')
 
     $('#branchShow')
-    .find('option')
-    .remove()
-    .end()
-    .append('<option label="Please Choose" value="" selected="selected"> </option>')
-    .val('')
+        .find('option')
+        .remove()
+        .end()
+        .append('<option label="Please Choose" value="" selected="selected"> </option>')
+        .val('')
 
     function departmentByCompanyId(companyId) {
         return $.ajax({
@@ -38,9 +35,7 @@ $(document).on('change', "#companyForEmployment", function() {
     var department = departmentByCompanyId(companyId);
 
     department.done(function(data) {
-        // alert('ss');
-       
-        
+
         for (let i = 0; i < data.length; i++) {
             const department = data[i];
             var opt = document.createElement("option");
@@ -53,27 +48,24 @@ $(document).on('change', "#companyForEmployment", function() {
 $(document).on('change', "#departmentShow", function() {
     departmentId = $(this).val();
     $('#unitShow')
-    .find('option')
-    .remove()
-    .end()
-    .append('<option label="Please Choose" selected="selected"> </option>')
-    .val('')
+        .find('option')
+        .remove()
+        .end()
+        .append('<option label="Please Choose" selected="selected"> </option>')
+        .val('')
 
     $('#branchShow')
-    .find('option')
-    .remove()
-    .end()
-    .append('<option label="Please Choose" value="" selected="selected"> </option>')
-    .val('')
-    
+        .find('option')
+        .remove()
+        .end()
+        .append('<option label="Please Choose" value="" selected="selected"> </option>')
+        .val('')
+
     function unitByDepartmentId(departmentId) {
         return $.ajax({
             url: "/unitByDepartmentId/" + departmentId
         });
     }
-
-    // $('#unitHide').hide();
-    // $('#unitShow').show();
 
     $('#unitShow')
         .find('option')
@@ -96,11 +88,11 @@ $(document).on('change', "#departmentShow", function() {
 $(document).on('change', "#unitShow", function() {
     unitId = $(this).val();
     $('#branchShow')
-    .find('option')
-    .remove()
-    .end()
-    .append('<option label="Please Choose" selected="selected"> </option>')
-    .val('')
+        .find('option')
+        .remove()
+        .end()
+        .append('<option label="Please Choose" selected="selected"> </option>')
+        .val('')
 
     function branchByUnitId(unitId) {
         return $.ajax({
