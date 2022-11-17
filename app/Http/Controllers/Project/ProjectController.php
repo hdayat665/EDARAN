@@ -160,7 +160,8 @@ class ProjectController extends Controller
         $ps = new ProjectService;
 
         $data['projectInfos'] = $ps->projectRequestView();
-        $data['projectIdPending'] = $ps->projectPendingRequest();
+        $data['projectIdPending'] = $ps->projectPendingRequest('pending');
+        $data['projectIdApprove'] = $ps->projectPendingRequest('approve');
 
         // pr($data);
 
@@ -264,4 +265,14 @@ class ProjectController extends Controller
 
         return response()->json($result);
     }
+
+    public function projectNameByCustomerId($id)
+    {
+        $ss = new ProjectService;
+
+        $result = $ss->projectNameByCustomerId($id);
+
+        return response()->json($result);
+    }
+
 }

@@ -544,10 +544,10 @@ class ProjectService
         return $data;
     }
 
-    public function projectPendingRequest()
+    public function projectPendingRequest($status = '')
     {
         $employee = Employee::where('user_id', Auth::user()->id)->first();
-        $projectMember = ProjectMember::select('project_id', 'status', 'created_at')->where([['employee_id', '=', $employee->id]])->whereIn('status', ['pending'])->groupBy('project_id')->get();
+        $projectMember = ProjectMember::select('project_id', 'status', 'created_at')->where([['employee_id', '=', $employee->id]])->whereIn('status', [$status])->groupBy('project_id')->get();
 
         $projectId = [];
         foreach ($projectMember as $project) {
@@ -672,5 +672,16 @@ class ProjectService
         } else {
             return 0;
         }
+    }
+
+    public function projectNameByCustomerId($id)
+    {
+        $data = Project::where([['customer_id', $id], ['tenant_id', Auth::user()->tenant_id]])->get();
+
+        if (!$data) {
+            $data = [];
+        }
+
+        return $data;
     }
 }

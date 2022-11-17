@@ -3,28 +3,8 @@
 namespace App\Http\Controllers\Report;
 
 use App\Http\Controllers\Controller;
-use App\Service\CustomerService;
-use App\Service\EmployeeService;
 use App\Service\ProjectReportService;
-use App\Service\ProjectService;
-use Illuminate\Http\Request;
-//for display option
 use App\Models\Customer;
-use App\Models\Project;
-use App\Models\ActivityLogs;
-use App\Models\Branch;
-use App\Models\Company;
-use App\Models\Department;
-use App\Models\Designation;
-use App\Models\Employee;
-use App\Models\EmploymentType;
-use App\Models\JobGrade;
-use App\Models\ProjectLocation;
-use App\Models\TimesheetEvent;
-use App\Models\Unit;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
-
 
 class ProjectReportController extends Controller
 {
@@ -57,9 +37,6 @@ class ProjectReportController extends Controller
 
         $prs = new ProjectReportService;
 
-        // $data['detailProject'] = $prs->detailsProject($id);
-        // $data['projectMembers'] = $prs->projectMemberList($id);
-        // pr($data);
         return view('pages.report.project.projectStatus', $data);
     }
 
@@ -88,9 +65,9 @@ class ProjectReportController extends Controller
 // dd($query);
             $data['custName'] = $prs->searchReportCustName($query);
             $view = 'pages.report.project.filter.customerNameTable';
-            
+
         }else if($query['filter'] == 'EmpName'){
-           
+
 
             $data['empName'] = $prs->searchReportEmpName($query);
             $view = 'pages.report.project.filter.employeeNameTable';
@@ -120,7 +97,7 @@ class ProjectReportController extends Controller
             $data['status'] = $prs->searchReportAccManager($query);
             $view = 'pages.report.project.filter.statusTable';
         }
-    // dd($query);        
+    // dd($query);
        //dd($view);
         return view($view, $data);
     }
