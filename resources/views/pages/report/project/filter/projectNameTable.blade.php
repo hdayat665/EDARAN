@@ -7,10 +7,10 @@
     <div class="panel panel">   
         <div class="panel-body" id="projectStatusJs">
             <div class="row p-2"> 
-                <h4>Project Status Report</h4>
+                <h4>Project Report</h4>
             </div>
             <div class="row p-2"> 
-                <h5>Project Name:</h5>
+                <h5>Project Name: {{$projName->project_name ?? ''}}</h5>
                 
             </div>
     <div class="panel-body">

@@ -15,7 +15,14 @@ $(document).ready(function() {
             [5, 10, 15, 20, 'All'],
         ],
     });
-
+    $("#data-table-default1").DataTable({
+        responsive: false,
+        lengthMenu: [
+            [5,10, 15, 20, -1],
+            [5,10, 15, 20, 'All'],
+        ],
+    });
+    
     $("#myProjectRejectTable").DataTable({
         responsive: false,
         lengthMenu: [
