@@ -10,8 +10,8 @@ $(document).ready(function() {
     $(document).on('change', "#select1", function() {
         if ($(this).val() == "CustName") {
             $("#menu2").show();
-            $('#select2').prop('required', true);  
-            
+            $('#select2').prop('required', true);
+
         } else {
             $("#menu2").hide();
             $('#select2').prop('required', false);
@@ -22,13 +22,12 @@ $(document).ready(function() {
         if ($(this).val() == "FinYear") {
             $("#menu3").show();
             $('#select3').prop('required', true);
-            
-        }
-        else {
+
+        } else {
             $("#menu3").hide();
             $('#select3').prop('required', false);
-         
-            
+
+
         }
     });
     $(document).on('change', "#select1", function() {
@@ -61,7 +60,7 @@ $(document).ready(function() {
         if ($(this).val() == "ProjName") {
             $("#menu7").show();
             $('#select7').prop('required', true);
-            
+
         } else {
             $("#menu7").hide();
         }
@@ -81,11 +80,11 @@ $(document).ready(function() {
                 }
                 document.getElementById("select8").innerHTML = html.join("");
                 $("#menu8").show();
-                
-               
+
+
             } else {
                 $("#menu8").hide();
-                
+
             }
         })
 
@@ -93,7 +92,7 @@ $(document).ready(function() {
 
     function getProjectByCustomerId(id) {
         return $.ajax({
-            url: "/getProjectByCustomerId/" + id
+            url: "/projectNameByCustomerId/" + id
         });
     }
 
@@ -133,13 +132,13 @@ $(document).ready(function() {
     }
 
     $('#statusAll').DataTable({
-        
+
         scrollY: false,
         scrollX: true,
         paging: true,
         lengthMenu: [
-            [5,10, 15, 20, -1], 
-            [5,10, 15, 20, 'All'],
+            [5, 10, 15, 20, -1],
+            [5, 10, 15, 20, 'All'],
         ],
         dom: '<"row"<"col-sm-5"B><"col-sm-7"fr>>t<"row"<"col-sm-5"l><"col-sm-7"p>>',
         buttons: [
@@ -154,8 +153,8 @@ $(document).ready(function() {
         scrollX: true,
         paging: true,
         lengthMenu: [
-            [5,10, 15, 20, -1], 
-            [5,10, 15, 20, 'All'],
+            [5, 10, 15, 20, -1],
+            [5, 10, 15, 20, 'All'],
         ],
         dom: '<"row"<"col-sm-5"B><"col-sm-7"fr>>t<"row"<"col-sm-5"l><"col-sm-7"p>>',
         buttons: [
@@ -170,8 +169,8 @@ $(document).ready(function() {
         scrollX: true,
         paging: true,
         lengthMenu: [
-            [5,10, 15, 20, -1], 
-            [5,10, 15, 20, 'All'],
+            [5, 10, 15, 20, -1],
+            [5, 10, 15, 20, 'All'],
         ],
         dom: '<"row"<"col-sm-5"B><"col-sm-7"fr>>t<"row"<"col-sm-5"l><"col-sm-7"p>>',
         buttons: [
@@ -200,8 +199,8 @@ $(document).ready(function() {
         scrollX: true,
         paging: true,
         lengthMenu: [
-            [5,10, 15, 20, -1], 
-            [5,10, 15, 20, 'All'],
+            [5, 10, 15, 20, -1],
+            [5, 10, 15, 20, 'All'],
         ],
         dom: '<"row"<"col-sm-5"B><"col-sm-7"fr>>t<"row"<"col-sm-5"l><"col-sm-7"p>>',
         buttons: [
@@ -215,8 +214,8 @@ $(document).ready(function() {
         scrollX: true,
         paging: true,
         lengthMenu: [
-            [5,10, 15, 20, -1], 
-            [5,10, 15, 20, 'All'],
+            [5, 10, 15, 20, -1],
+            [5, 10, 15, 20, 'All'],
         ],
         dom: '<"row"<"col-sm-5"B><"col-sm-7"fr>>t<"row"<"col-sm-5"l><"col-sm-7"p>>',
         buttons: [
@@ -230,8 +229,8 @@ $(document).ready(function() {
         scrollX: true,
         paging: true,
         lengthMenu: [
-            [5,10, 15, 20, -1], 
-            [5,10, 15, 20, 'All'],
+            [5, 10, 15, 20, -1],
+            [5, 10, 15, 20, 'All'],
         ],
         dom: '<"row"<"col-sm-5"B><"col-sm-7"fr>>t<"row"<"col-sm-5"l><"col-sm-7"p>>',
         buttons: [
@@ -246,8 +245,8 @@ $(document).ready(function() {
         scrollX: true,
         paging: true,
         lengthMenu: [
-            [5,10, 15, 20, -1], 
-            [5,10, 15, 20, 'All'],
+            [5, 10, 15, 20, -1],
+            [5, 10, 15, 20, 'All'],
         ],
         dom: '<"row"<"col-sm-5"B><"col-sm-7"fr>>t<"row"<"col-sm-5"l><"col-sm-7"p>>',
         buttons: [
@@ -255,4 +254,38 @@ $(document).ready(function() {
 
         ],
     });
+
+
+    // $(document).on('change', "#select7", function() {
+    //     customerId = $(this).val();
+
+    //     $('#select8')
+    //         .find('option')
+    //         .remove()
+    //         .end()
+    //         .append('<option label="Please Choose" value="" selected="selected"> </option>')
+    //         .val('')
+
+    //     function projectNameByCustomerId(customerId) {
+    //         return $.ajax({
+    //             url: "/projectNameByCustomerId/" + customerId
+    //         });
+    //     }
+
+    //     // $('#unitShow')
+    //     //     .find('option')
+    //     //     // .remove()
+    //     //     .end();
+
+    //     var project = projectNameByCustomerId(customerId);
+
+    //     project.done(function(data) {
+    //         for (let i = 0; i < data.length; i++) {
+    //             const project = data[i];
+    //             var opt = document.createElement("option");
+    //             document.getElementById("select8").innerHTML +=
+    //                 '<option value="' + project['id'] + '">' + project['project_name'] + "</option>";
+    //         }
+    //     })
+    // });
 });

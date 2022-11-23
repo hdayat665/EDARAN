@@ -40,7 +40,7 @@
                     @endif
                 </select>
             </div>
-            <div class="form-group col-md-4 mt-3" id="menu3"> 
+            <div class="form-group col-md-4 mt-3" id="menu3">
                 <label for="Menu2">Select Financial Year : </label>
                 <select class="form-control" name="financialYear" id="select3" oninvalid="this.setCustomValidity('Please Select Financial Year')" oninput="setCustomValidity('')">
                     <option value="">Please Select ...</option>
@@ -52,7 +52,7 @@
                     @endif
                 </select>
             </div>
-            
+
             <div class="form-group col-md-4 mt-3" id="menu4">
                 <label for="Menu2">Select Account Manager : </label>
                 <select class="form-control" name="accManager" id="select4" oninvalid="this.setCustomValidity('Please Select Account Manager')" oninput="setCustomValidity('')">
@@ -103,15 +103,19 @@
 
                 <div class="form-group mt-3" id="menu8">
                     <label for="Menu3">Select Project Name : </label>
-                    <select class="form-control" name="projectName" id="select8"  oninvalid="this.setCustomValidity('Please Select Project Name')" oninput="setCustomValidity('')">
-                    <option ></option>
+                    <select class="form-select" name="projectName"  id="select8">
+
+                        <option label="Please Choose" selected="selected"> </option>
+
+                    </select>
+                    {{-- <select class="form-control" name="projectName" id="select8"  oninvalid="this.setCustomValidity('Please Select Project Name')" oninput="setCustomValidity('')">
                     <?php $projects = project() ?>
                     @if ($projects)
                     @foreach ($projects as $project)
                     <option value="{{$project->id}}">{{$project->project_name}}</option>
                     @endforeach
                     @endif
-                    </select>
+                    </select> --}}
                 </div>
 
             </div>
@@ -132,12 +136,12 @@
 
                     </select>
                 </div>
-           
+
             </div>
             <button type="submit" id="searchButton" class="btn btn-primary mt-3" >
                 Submit
             </button>
-        
+
         </div>
     </form>
 </div>

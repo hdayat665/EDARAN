@@ -581,7 +581,7 @@ if (!function_exists('state')) {
 if (!function_exists('customer')) {
     function customer()
     {
-        $data = Customer::where('tenant_id', Auth::user()->tenant_id)->get();
+        $data = Customer::where([['tenant_id', Auth::user()->tenant_id], ['status', 1]])->get();
 
         if (!$data) {
             $data = [];
