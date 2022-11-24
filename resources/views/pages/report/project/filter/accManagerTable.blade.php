@@ -3,14 +3,14 @@
 @section('content')
 
 <div id="content" class="app-content">
-    <h1 class="page-header">Reporting <small>| Project  | Project Status </small></h1>
+    <h1 class="page-header">Reporting <small>| Project  | Project Report </small></h1>
     <div class="panel panel">
     <div class="panel-body" id="projectStatusJs">
             <div class="row p-2"> 
-                <h4>Project Status Report</h4>
+                <h4>Project Report</h4>
             </div>
             <div class="row p-2"> 
-                <h5>Account Manager: </h5>
+                <h5>Account Manager: {{$accName}}</h5>
                 
             </div>
         <table id="accManagerTable" class="table table-striped table-bordered align-middle">

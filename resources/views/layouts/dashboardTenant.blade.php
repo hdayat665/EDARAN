@@ -601,7 +601,7 @@
                                 <div class="menu-icon">
 								    <i class="fa fa-book-open text-gray"></i>
 							    </div>
-                                    <div class="menu-text text-gray">Project Status</div>
+                                    <div class="menu-text text-gray">Project Report</div>
                                 </a>
                             </div>
 

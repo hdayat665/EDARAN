@@ -23,7 +23,11 @@
                     @foreach ($projectInfos as $project)
                     <tr class="odd gradeX">
                         <td>
+                            @if (in_array($project->id, $projectIdPending))
+                            <a href="#" class="btn btn-warning btn-xs" id="" data-id="{{$project->id}}">Cancel</a>
+                            @else
                             <a href="#" class="btn btn-primary btn-xs" data-bs-toggle="modal" id="requestProjectButton" data-id="{{$project->id}}">Request</a>
+                            @endif
                         </td>
                         <td>{{$project->customer_name}}</td>
                         <td>{{$project->project_code}}</td>
@@ -32,7 +36,13 @@
                         <td>{{$project->employeeName}}</td>
                         <td>{{$project->contract_start_date}}</td>
                         <td>{{$project->contract_end_date}}</td>
-                        <td><a href="#" data-bs-toggle="modal" data-id="{{$project->id}}" id="viewProjectRequestButton" >{{$project->status}}</a></td>
+                        @if (in_array($project->id, $projectIdPending))
+                        <td><a data-bs-toggle="modal" data-id="{{$project->id}}" id="viewProjectRequestButton" >Pending</a></td>
+                        @elseif (in_array($project->id, $projectIdApprove))
+                        <td><a data-bs-toggle="modal" data-id="{{$project->id}}" id="viewProjectRequestButton" >Approve</a></td>
+                        @else
+                        <td><a data-bs-toggle="modal" data-id="{{$project->id}}" id="viewProjectRequestButton" >-</a></td>
+                        @endif
                     </tr>
                     @endforeach
                     @endif

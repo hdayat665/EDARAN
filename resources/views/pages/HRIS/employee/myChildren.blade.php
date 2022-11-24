@@ -12,7 +12,7 @@
             <th class="text-nowrap">Marital Status</th>
         </thead>
         <tbody>
-        <?php $id = 0 ?>
+        <?php $id = 0 ?> 
             
             @foreach ($childrens as $children)
             <?php $id++ ?>

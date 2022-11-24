@@ -7,10 +7,10 @@
     <div class="panel panel">
     <div class="panel-body" id="projectStatusJs">
             <div class="row p-2"> 
-                <h4>Project Status Report</h4>
+                <h4>Project Report</h4>
             </div>
             <div class="row p-2"> 
-                <h5>Employee Name: {{ }}</h5>
+                <h5>Employee Name: {{$employeeName}}</h5>
                 
             </div>
         <table id="employeeTable" class="table table-striped table-bordered align-middle">

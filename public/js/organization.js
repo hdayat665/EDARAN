@@ -1,5 +1,13 @@
 $(document).ready(function() {
 
+  
+  $("#data-table-default").DataTable({
+    responsive: false,
+    lengthMenu: [
+        [5,10, 15, 20, -1],
+        [5,10, 15, 20, 'All'],
+    ],
+});
     // department tree
     // var chart = new OrgChart(document.getElementById("tree"), {
     //     mouseScrool: OrgChart.action.none,
