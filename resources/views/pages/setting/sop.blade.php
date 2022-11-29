@@ -65,7 +65,7 @@
                                         <td>{{$policy->code}}</td>
                                         <td>{{$policy->policy}}</td>
                                         <td>{{$policy->desc}}</td>
-                                        <td><a target="_blank" href="/storage/app/{{$policy->file}}">{{$policy->file}}</a></td>
+                                        <td><a target="_blank" href="/storage/{{$policy->file}}" download>{{$policy->file}}</a></td>
                                         <td>{{$policy->addedBy}}</td>
                                         <td>{{$policy->created_at}}</td>
                                         <td>{{$policy->modifiedBy}}</td>
