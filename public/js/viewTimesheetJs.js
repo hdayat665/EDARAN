@@ -20,7 +20,7 @@ var handleCalendarDemo = function() {
     var timesheetData = getTimesheet(id, userId);
 
     timesheetData.done(function(data) {
-        console.log(data);
+        // console.log(data);
         var event = [];
         for (let i = 0; i < data['events'].length; i++) {
             var events = data['events'][i];
@@ -63,7 +63,8 @@ var handleCalendarDemo = function() {
             var startDay = startDate.getDate();
             startDay = startDay < 10 ? "0" + startDay : startDay;
             var startTime = logs['start_time'];
-            startTime = startTime < 10 ? "0" + startTime : startTime;
+            var time = startTime.split(":");
+            startTime = time[0] < 10 ? "0" + startTime : startTime;
 
             var endDate = new Date(events['end_date']);
             var endMonth = endDate.getMonth();

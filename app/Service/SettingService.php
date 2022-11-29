@@ -1106,7 +1106,7 @@ class SettingService
         // $data['data'] = TypeOfLogs::where('tenant_id', Auth::user()->tenant_id)->get();
         $data = DB::table('type_of_logs as a')
         ->leftJoin('project as b', 'a.project_id', '=', 'b.id')
-        ->leftJoin('activity_logs as c', 'a.id', '=', 'c.logs_id')
+        // ->leftJoin('activity_logs as c', 'a.id', '=', 'c.logs_id')
         ->leftJoin('department as d', 'a.department', '=', 'd.id')
         ->select('a.*', 'b.project_name', 'd.departmentName')
         ->where('a.tenant_id', Auth::user()->tenant_id)

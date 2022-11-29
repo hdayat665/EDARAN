@@ -28,7 +28,7 @@ $(document).ready(function() {
         var vehicleData = getData(id);
 
         vehicleData.done(function(data) {
-            console.log(data);
+            // console.log(data);
             $('#department').val(data.department);
             $('#project').val(data.project_id);
             if (data.project_id) {
@@ -129,7 +129,7 @@ $(document).ready(function() {
                             title: data.title,
                             text: data.msg,
                             type: data.type,
-                           confirmButtonColor: '#3085d6',
+                            confirmButtonColor: '#3085d6',
                             confirmButtonText: 'OK',
                             allowOutsideClick: false,
                             allowEscapeKey: false,
@@ -183,7 +183,7 @@ $(document).ready(function() {
                             title: data.title,
                             text: data.msg,
                             type: data.type,
-                           confirmButtonColor: '#3085d6',
+                            confirmButtonColor: '#3085d6',
                             confirmButtonText: 'OK',
                             allowOutsideClick: false,
                             allowEscapeKey: false,
@@ -246,10 +246,50 @@ $("#add-row").click(function() {
         table.rows[l].cells[1].innerHTML = "<input hidden name='activity_name[]' value='" + addtypelogactivityName + "' /><button type='button' class='btnDelete btn btn-danger btn-sm' onclick='delRow(this);' id='btnDelete' size='1' height='1'>Delete</button>";
 
         //Clear input
-
-
     }
 });
+
+$("#add-for-edit-row").click(function() {
+
+    var addtypelogactivityName = document.getElementById('edittypelogactivityName').value;
+
+    if (addtypelogactivityName == "") {
+        document.getElementById('edittypelogactivityName');
+        return;
+    } else {
+
+        let table = document.getElementById('editactivityname');
+        // Insert a row at the end of the table
+        let newRow = table.insertRow(-1);
+        var l = table.rows.length - 1;
+        //Col 1 = addtypelogactivityName
+        table.rows[l].insertCell(0);
+        table.rows[l].cells[0].innerHTML = addtypelogactivityName;
+
+        //Col 3 = Delete Button
+        table.rows[l].insertCell(1);
+        table.rows[l].cells[1].innerHTML = "<input hidden name='activity_name[]' value='" + addtypelogactivityName + "' /><button type='button' class='btnDelete btn btn-danger btn-sm' onclick='delRow(this);' id='btnDelete' size='1' height='1'>Delete</button>";
+
+        //Clear input
+    }
+});
+
+var table = document.getElementById("editactivityname");
+
+const cars = ["BMW", "Volvo", "Saab", "Ford", "Fiat", "Audi"];
+for (let i = 0; i < cars.length; i++) {
+    // alert(cars);
+    var row = table.insertRow(-1);
+    var l = table.rows.length - 1;
+    table.rows[l].insertCell(0);
+    table.rows[l].cells[0].innerHTML = cars[i];
+
+    table.rows[l].insertCell(1);
+    table.rows[l].cells[1].innerHTML =
+        "<input hidden name='activity_name[]' value='" +
+        cars[i] +
+        "' /><button type='button' class='btnDelete btn btn-danger btn-sm' onclick='delRow(this);' id='btnDelete' size='1' height='1'>Delete</button>";
+}
 
 function delRow(btn) {
     var row = btn.parentNode.parentNode;
