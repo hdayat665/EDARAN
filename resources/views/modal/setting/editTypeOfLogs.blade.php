@@ -62,7 +62,7 @@
                                         <th width="1%" data-orderable="false" class="align-middle">Action</th>
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <tbody id="testkit">
                                     <tr>
                                         <th style="display:none"></th>
                                         <th width="1%" style="display:none"></th>
