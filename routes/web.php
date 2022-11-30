@@ -209,12 +209,12 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('/typeOfLogs', 'typeOfLogsView');
             Route::post('/createTypeOfLogs', 'createTypeOfLogs');
             Route::delete('/deleteTypeOfLogs/{id}', 'deleteTypeOfLogs');
-            Route::get('/getLogsById/{id}', 'getLogsById');
+            Route::get('/getTypeOfLogsById/{id}', 'getLogsById');
             Route::post('/updateTypeOfLogs/{id}', 'updateTypeOfLogs');
             Route::get('/departmentByCompanyId/{companyId}', 'departmentByCompanyId');
             Route::get('/unitByDepartmentId/{departmentId}', 'unitByDepartmentId');
             Route::get('/branchByUnitId/{unitId}', 'branchByUnitId');
-
+            Route::get('/getActivityNamesById/{id}', 'getActivityNamesById');
         });
 
         Route::controller(OrganizationController::class)->group(function () {

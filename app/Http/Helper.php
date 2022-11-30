@@ -39,11 +39,11 @@ if (!function_exists('upload')) {
     {
         $filename = time() . $uploadedFile->getClientOriginalName();
 
-        // Storage::disk('local')->putFileAs(
-        //     'public/',
-        //     $uploadedFile,
-        //     $filename
-        // );
+        Storage::disk('local')->putFileAs(
+            'public/',
+            $uploadedFile,
+            $filename
+        );
 
         $data['filename'] = $filename;
 
