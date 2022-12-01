@@ -2,7 +2,6 @@
 
 namespace App\Service;
 
-use App\Exceptions\CustomException;
 use App\Models\ActivityLogs;
 use App\Models\Branch;
 use App\Models\Company;
@@ -11,19 +10,13 @@ use App\Models\Designation;
 use App\Models\EmploymentType;
 use App\Models\JobGrade;
 use App\Models\News;
-use App\Models\PhoneDirectory;
 use App\Models\Policy;
 use App\Models\Role;
 use App\Models\SOP;
-use App\Models\Subscription;
 use App\Models\TypeOfLogs;
 use App\Models\Unit;
-use App\Models\Users;
-use App\Models\UsersDetails;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Session;
 
 class SettingService
 {
@@ -1106,7 +1099,7 @@ class SettingService
         // $data['data'] = TypeOfLogs::where('tenant_id', Auth::user()->tenant_id)->get();
         $data = DB::table('type_of_logs as a')
         ->leftJoin('project as b', 'a.project_id', '=', 'b.id')
-        ->leftJoin('activity_logs as c', 'a.id', '=', 'c.logs_id')
+        // ->leftJoin('activity_logs as c', 'a.id', '=', 'c.logs_id')
         ->leftJoin('department as d', 'a.department', '=', 'd.id')
         ->select('a.*', 'b.project_name', 'd.departmentName')
         ->where('a.tenant_id', Auth::user()->tenant_id)
@@ -1232,5 +1225,13 @@ class SettingService
 
         return $data;
     }
+
+    public function getActivityNamesById($id = '')
+    {
+        $data = ActivityLogs::where([['tenant_id', Auth::user()->tenant_id], ['logs_id', $id]])->get();
+
+        return $data;
+    }
+
 
 }

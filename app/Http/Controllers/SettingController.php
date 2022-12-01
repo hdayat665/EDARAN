@@ -671,10 +671,12 @@ class SettingController extends Controller
         return $result;
     }
 
+    public function getActivityNamesById($id = '')
+    {
+        $ss = new SettingService;
 
+        $result = $ss->getActivityNamesById($id);
 
-
-
-
-
+        return $result;
+    }
 }

@@ -22,7 +22,7 @@
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
     <meta content="" name="description" />
     <meta content="" name="author" />
-    
+
     <link rel="shortcut icon" href="/assets/img/logo/orbit-sm.png" >
     <!-- ================== BEGIN core-css ================== -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -703,11 +703,11 @@
     <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.2/croppie.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.2/croppie.js"></script>
-    <script src="/assets/js/orgchart.js"></script> 
-    <link href="../assets/plugins/nvd3/build/nv.d3.css" rel="stylesheet" /> 
-    <script src="../assets/plugins/d3/d3.min.js"></script> 
-    <script src="../assets/plugins/nvd3/build/nv.d3.min.js"></script> 
-    <script src="../assets/plugins/chart.js/dist/Chart.min.js"></script> 
+    <script src="/assets/js/orgchart.js"></script>
+    <link href="/assets/plugins/nvd3/build/nv.d3.css" rel="stylesheet" />
+    <script src="/assets/plugins/d3/d3.min.js"></script>
+    <script src="/assets/plugins/nvd3/build/nv.d3.min.js"></script>
+    <script src="/assets/plugins/chart.js/dist/chart.min.js"></script>
 
 
 
@@ -748,7 +748,7 @@
             if ($(this).prop('href') === window.location.href) {
                 $(this).parents().addClass('active');
                 $(this).css({
-                    "background": "linear-gradient(to left,#ececec 0, #ececec 66%, #ececec 100%)", 
+                    "background": "linear-gradient(to left,#ececec 0, #ececec 66%, #ececec 100%)",
                     "border-radius": "50px",
                 });
             }
@@ -794,7 +794,7 @@
             }
         });
 
-    </script> 
+    </script>
 
 
 
@@ -835,4 +835,4 @@
                 }]
             }
         });
-    </script> 
+    </script>

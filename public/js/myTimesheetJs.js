@@ -634,7 +634,8 @@ $(document).ready(function() {
                 var startDay = startDate.getDate();
                 startDay = startDay < 10 ? "0" + startDay : startDay;
                 var startTime = logs['start_time'];
-                startTime = startTime < 10 ? "0" + startTime : startTime;
+                var time = startTime.split(":");
+                startTime = time[0] < 10 ? "0" + startTime : startTime;
 
                 var endDate = new Date(logs['end_date']);
                 var endMonth = endDate.getMonth();
@@ -732,7 +733,7 @@ $(document).ready(function() {
                         for (let i = 0; i < employees.length; i++) {
                             const employee = employees[i];
                             $("#addneweventparticipantedit").picker('remove', employee['user_id']);
-                            console.log(employee['user_id']);
+                            // console.log(employee['user_id']);
                         }
                     })
 
@@ -788,6 +789,7 @@ $(document).ready(function() {
                             $("#desc").val(data.desc);
                             $("#total_hour").val(data.total_hour);
                             $("#id").val(data.id);
+
                         });
 
                         $('#editlogmodal').modal('show');
@@ -1060,6 +1062,14 @@ $(document).ready(function() {
 
 
                                 }
+                            }
+                            console.log(120 != parseInt($("#user_id_event").val()));
+                            if (data.user_id != parseInt($("#user_id_event").val())) {
+                                document.getElementById("deleteEventButton").disabled = true;
+                                document.getElementById("updateEventButton").disabled = true;
+                            } else {
+                                document.getElementById("deleteEventButton").disabled = false;
+                                document.getElementById("updateEventButton").disabled = false;
                             }
 
                             if (data.priority == 'low') {

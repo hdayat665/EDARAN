@@ -32,7 +32,7 @@
                         <td >{{$data->departmentName}}</td>
                         <td >{{$data->type_of_log}}</td>
                         <td >{{$data->project_name}}</td>
-                        <td >{{$data->activity_name}}</td>
+                        <td ><a href="javascript:;" data-bs-toggle="modal" id="listActivityNames" data-id="{{$data->id}}">click here</a></td>
                         {{-- <td>1. Corrective Maintenance, <br> 2. Reviewing & Documenting, <br>3. Reporting </td> --}}
                         <td><a href="javascript:;" data-bs-toggle="modal" id="editButton" data-id="{{$data->id}}" data-bs-target="#exampleModaledit" class="btn btn-outline-green"><i class="fa fa-pencil-alt"></i></a> <a href="javascript:;" id="deleteButton" data-id="{{$data->id}}" class="btn btn-outline-danger"><i class="fa fa-trash"></i></a></td>
                     </tr>
@@ -44,5 +44,6 @@
     </div>
     @include('modal.setting.addTypeOfLogs')
     @include('modal.setting.editTypeOfLogs')
+    @include('modal.setting.listActivityNamesTypeOfLogs')
 
     @endsection
