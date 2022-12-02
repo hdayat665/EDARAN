@@ -96,11 +96,14 @@ class RegisterService
 
         $employee['workingEmail'] = $r['workingEmail'];
         $employee['user_id'] = $user['id'];
+        $employee['tenant_id'] = $user['tenant_id'];
+
         // pr($employee);
         Employee::create($employee);
 
         $userProfile['tenant_id'] = $user['tenant_id'];
         $userProfile['tenant_name'] = $r['tenant'];
+
 
         Tenant::create($userProfile);
 
