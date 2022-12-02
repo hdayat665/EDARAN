@@ -512,7 +512,7 @@ class ProjectService
 
         $projectMember = ProjectMember::select('project_id', 'status', 'created_at')->where([['employee_id', '=', $employee->id]])->whereIn('status', ['pending', 'approve'])->groupBy('project_id')->get();
         // dd($projectMember);
-        $projectId = [];
+        $projectId['approve'] = [];
         foreach ($projectMember as $project) {
             $dateRequest = strtotime($project->created_at);
             $now = strtotime(now());
@@ -525,8 +525,6 @@ class ProjectService
             } else {
                 $projectId['approve'][] = $project->project_id;
             }
-
-
         }
 
         $data = DB::table('project as a')
@@ -549,7 +547,7 @@ class ProjectService
         $employee = Employee::where('user_id', Auth::user()->id)->first();
         $projectMember = ProjectMember::select('project_id', 'status', 'created_at')->where([['employee_id', '=', $employee->id]])->whereIn('status', [$status])->groupBy('project_id')->get();
 
-        $projectId = [];
+        $data = [];
         foreach ($projectMember as $project) {
             $data[] = $project->project_id;
         }
