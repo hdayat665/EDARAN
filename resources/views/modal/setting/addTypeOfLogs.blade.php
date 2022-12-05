@@ -13,7 +13,7 @@
                             <?php $departments = getDepartment() ?>
                             <option class="form-label" value="">Select department</option>
                             @foreach ($departments as $department)
-                                <option value="{{$department->id}}">{{$department->departmentName}}</option>
+                            <option value="{{$department->id}}">{{$department->departmentName}}</option>
                             @endforeach
                         </select>
                     </div>
@@ -31,49 +31,45 @@
                             <?php $projects = project() ?>
                             <option class="form-label" value="">Select Project</option>
                             @foreach ($projects as $project)
-                                <option value="{{$project->id}}">{{$project->project_name}}</option>
+                            <option value="{{$project->id}}">{{$project->project_name}}</option>
                             @endforeach
                         </select>
                     </div>
                     <div class="row p-2">
-								<div class="col-sm-10" id="" >
-								<label for="firstname" class="form-label">Activity Name*</label>	
-								<input type="text" id="addtypelogactivityName" name="activity_name" placeholder="Name" class="form-control">
-								
-								
-								</div>
-								<div class="col-sm-2" id="" >
-									<label for="firstname" class="form-label">&nbsp;</label><br>
-									<input type="button" id="add-row" class="add-row btn btn-primary btn-sm" value="Add">
-									
-								</div>			
-						</div><br>
-                        <div class="form-control">
-						<div class="row p-2">
-						
+                        <div class="col-sm-10" id="" >
+                            <label for="firstname" class="form-label">Activity Name*</label>
+                            <input type="text" id="addtypelogactivityName" placeholder="Name" class="form-control">
 
 
-						<table id="activityname" class="table table-striped table-bordered align-middle">
-						
-						<thead>
-							<tr>
-								<th class="text-nowrap">Activity Name</th>
-								<th width="1%" data-orderable="false" class="align-middle">Action</th>
-                            </tr>
-							</thead>
-						<tr>
-							<th style="display:none"></th>
-							<th width="1%" style="display:none"></th>
-						</tr>
-						</table>
+                        </div>
+                        <div class="col-sm-2" id="" >
+                            <label for="firstname" class="form-label">&nbsp;</label><br>
+                            <input type="button" id="add-row" class="add-row btn btn-primary btn-sm" value="Add">
 
-					</div>
-                </div>
-					
-					<div class="modal-footer">
-					  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-					  <button type="submit" id="saveButton" class="btn btn-primary">Save</button>
-					</div>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="form-control">
+                        <div class="row p-2">
+                            <table id="activityname" class="table table-striped table-bordered align-middle">
+                                <thead>
+                                    <tr>
+                                        <th class="text-nowrap">Activity Name</th>
+                                        <th width="1%" data-orderable="false" class="align-middle">Action</th>
+                                    </tr>
+                                </thead>
+                                <tr>
+                                    <th style="display:none"></th>
+                                    <th width="1%" style="display:none"></th>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" id="saveButton" class="btn btn-primary">Save</button>
+                    </div>
                 </form>
             </div>
         </div>

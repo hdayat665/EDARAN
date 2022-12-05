@@ -37,13 +37,20 @@ if (!function_exists('getCountryRegisterDomain')) {
 if (!function_exists('upload')) {
     function upload($uploadedFile, $type = '')
     {
-        $filename = time() . $uploadedFile->getClientOriginalName();
+        // $filename = time() . $uploadedFile->getClientOriginalName();
 
         // Storage::disk('local')->putFileAs(
         //     'public/',
         //     $uploadedFile,
         //     $filename
         // );
+        $filename = $uploadedFile->getClientOriginalName();
+        //$filename = time() . $uploadedFile->getClientOriginalName();
+
+        Storage::disk('local')->put(
+            'public/'.$filename,
+            file_get_contents($uploadedFile),
+        );
 
         $data['filename'] = $filename;
 

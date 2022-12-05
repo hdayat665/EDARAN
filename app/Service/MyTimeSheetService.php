@@ -572,7 +572,7 @@ class MyTimeSheetService
     {
 
         if ($userId) {
-            $data = TimesheetApproval::where('user_id', $userId)->first();
+            $data = TimesheetApproval::where([['user_id', $userId],['id', $id]])->first();
         }else{
             $data = TimesheetApproval::find($id);
         }
