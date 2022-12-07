@@ -20,9 +20,9 @@
                         </div>
                         <div class="col-sm-6">
                             <label for="lastname" class="form-label">Date*</label>
-                            <div class="input-group">
+                            <div class="">
                                 <input type="text" class="form-control" name="date" id="dateaddlogedit" />
-                                <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                <!-- <div class="input-group-text"><i class="fa fa-calendar"></i></div> -->
                             </div>
                         </div>
                     </div>

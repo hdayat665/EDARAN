@@ -15,7 +15,7 @@
     <div class="panel-body">
         <form id="searchForm" action="/searchReportProject">
             <div class="form-group col-md-4 ">
-                <label for="Menu1">View By : </label>
+                <label for="Menu1">Select By : </label>
                 <select class="form-control" name="filter" id="select1" required oninvalid="this.setCustomValidity('Please select an item in the list')" oninput="setCustomValidity('')">
                     <option value="">Please Choose</option>
                     <option value="All">All</option>
@@ -31,7 +31,7 @@
             <div class="form-group col-md-4 mt-3" id="menu2">
                 <label for="Menu2">Select Customer Name : </label>
                 <select class="form-control" name="customerName" id="select2" oninvalid="this.setCustomValidity('Please Select Customer Name')" oninput="setCustomValidity('')">
-                    <option value="">Please Select ...</option>
+                    <option value="">All</option>
                     <?php $customers = customer() ?>
                     @if ($customers)
                     @foreach ($customers as $customer)
@@ -56,7 +56,7 @@
             <div class="form-group col-md-4 mt-3" id="menu4">
                 <label for="Menu2">Select Account Manager : </label>
                 <select class="form-control" name="accManager" id="select4" oninvalid="this.setCustomValidity('Please Select Account Manager')" oninput="setCustomValidity('')">
-                    <option value="">Please Select ...</option>
+                    <option value="">All</option>
                     <?php $accManagers = accManager() ?>
                     @if ($accManagers)
                     @foreach ($accManagers as  $manager)
@@ -68,7 +68,7 @@
             <div class="form-group col-md-4 mt-3" id="menu5">
                 <label for="Menu2">Select Project Manager : </label>
                 <select class="form-control" name="projectManager" id="select5" oninvalid="this.setCustomValidity('Please Select Project Manager')" oninput="setCustomValidity('')">
-                    <option value="">Please Select ...</option>
+                    <option value="">All</option>
                     <?php $prjManagers = prjManager() ?>
                     @if ($prjManagers)
                     @foreach ($prjManagers as  $manager)
@@ -92,7 +92,7 @@
             <div class="form-group col-md-4 mt-3" id="menu7">
                 <label for="Menu2">Select Customer Name : </label>
                 <select class="form-control" name="customerNameProject" id="select7" oninvalid="this.setCustomValidity('Please Select Customer Name')" oninput="setCustomValidity('')">
-                    <option ></option>
+                    <option label="All" selected="selected">All</option>
                     <?php $customers = customer() ?>
                     @if ($customers)
                     @foreach ($customers as $customer)
@@ -105,7 +105,7 @@
                     <label for="Menu3">Select Project Name : </label>
                     <select class="form-select" name="projectName"  id="select8">
 
-                        <option label="Please Choose" selected="selected"> </option>
+                        <option label="All" selected="selected"> All</option>
 
                     </select>
                     {{-- <select class="form-control" name="projectName" id="select8"  oninvalid="this.setCustomValidity('Please Select Project Name')" oninput="setCustomValidity('')">
@@ -122,7 +122,7 @@
             <div class="form-group col-md-4 mt-3" id="menu9">
                 <label for="Menu2">Select Department : </label>
                 <select class="form-control" name="department" id="select9" oninvalid="this.setCustomValidity('Please Select Department')" oninput="setCustomValidity('')">
-                    <option ></option>
+                    <option label="All" selected="selected"> All</option>
                     <?php $getDepartments = getDepartment() ?>
                     @if ($getDepartments)
                     @foreach ($getDepartments as $getDepartment)
@@ -133,7 +133,7 @@
                 <div class="form-group mt-3" id="menu10">
                     <label for="Menu3">Select Employee Name : </label>
                     <select class="form-control" name="employee" id="select10">
-
+                        <option label="All" selected="selected"> All</option>
                     </select>
                 </div>
 

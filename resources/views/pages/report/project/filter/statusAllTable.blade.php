@@ -13,6 +13,7 @@
         
     </div>
     <div class="panel-body">
+        <caption><h5>Table for All</h5></caption>
         <table id="statusAll" class="table table-striped table-bordered align-middle">
             <thead>
                 <tr>

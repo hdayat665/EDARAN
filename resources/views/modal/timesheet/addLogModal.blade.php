@@ -20,9 +20,9 @@
                         </div>
                         <div class="col-sm-6">
                             <label for="lastname" class="form-label">Date*</label>
-                            <div class="input-group">
+                            <div class="">
                                 <input type="text" class="form-control" name="date" id="dateaddlog" />
-                                <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                <!-- <div class="input-group-text"><i class="fa fa-calendar"></i></div> -->
                             </div>
                         </div>
                     </div>
@@ -79,7 +79,7 @@
                             <label for="issuing-country" class="form-label">Start Time*</label>
                             <div class="input-group">
                                 <input id="starttime" type="text" name="start_time" class="form-control" />
-                                <div class="input-group-text"><i class="fa fa-clock"></i></div>
+                                <!-- <div class="input-group-text"><i class="fa fa-clock"></i></div> -->
                             </div>
                         </div>
                     </div>
@@ -87,7 +87,7 @@
                         <div class="col-sm-6" id="locationByProjectHide">
                             <label for="issuing-country" class="form-label">Project Location*</label>
                             <select class="selectpicker form-select" id="projectlocsearch" name="project_location" aria-label="Default select example">
-                                <option class="form-label" value="">List All Project location</option>
+                                <option value="" selected>List All Project location</option>
                                 <?php $projectLocations = projectLocation() ?>
                                 @foreach ($projectLocations as $projectLocation)
                                 <option value="{{$projectLocation->id}}">{{$projectLocation->location_name}}</option>
@@ -104,7 +104,7 @@
                             <label for="issuing-country" class="form-label">End Time*</label>
                             <div class="input-group">
                                 <input id="endtime" type="text" name="end_time" class="form-control" />
-                                <div class="input-group-text"><i class="fa fa-clock"></i></div>
+                                <!-- <div class="input-group-text"><i class="fa fa-clock"></i></div> -->
                             </div>
                         </div>
                     </div>

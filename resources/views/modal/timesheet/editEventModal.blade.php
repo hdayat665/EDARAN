@@ -16,32 +16,32 @@
                     <div class="row p-2">
                         <div class="col-sm-6">
                             <label for="lastname" class="form-label">Start Date*</label>
-                            <div class="input-group">
+                            <div class="">
                                 <input type="text" class="form-control" name="start_date" id="starteventdateedit" />
-                                <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                <!-- <div class="input-group-text"><i class="fa fa-calendar"></i></div> -->
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <label for="lastname" class="form-label">End Date*</label>
-                            <div class="input-group">
+                            <div class="">
                                 <input type="text" name="end_date" class="form-control" id="endeventdateedit" />
-                                <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                <!-- <div class="input-group-text"><i class="fa fa-calendar"></i></div> -->
                             </div>
                         </div>
                     </div>
                     <div class="row p-2">
                         <div class="col-sm-6">
                             <label for="issuing-country" class="form-label">Start Time*</label>
-                            <div class="input-group">
+                            <div class="">
                                 <input id="starteventtimeedit" name="start_time" type="text" class="form-control" value="00:00 AM"/>
-                                <div class="input-group-text"><i class="fa fa-clock"></i></div>
+                                <!-- <div class="input-group-text"><i class="fa fa-clock"></i></div> -->
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <label for="issuing-country" class="form-label">End Time*</label>
-                            <div class="input-group">
+                            <div class="">
                                 <input id="endeventtimeedit" name="end_time" type="text" class="form-control" value="00:00 AM"/>
-                                <div class="input-group-text"><i class="fa fa-clock"></i></div>
+                                <!-- <div class="input-group-text"><i class="fa fa-clock"></i></div> -->
                             </div>
                         </div>
                     </div>
