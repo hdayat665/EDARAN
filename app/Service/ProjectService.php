@@ -452,7 +452,7 @@ class ProjectService
                 'f.username',
                 'y.username',
                 'x.employeeName as manager_name',
-                'x.wokingEmail as manager_email'
+                'x.workingEmail as manager_email'
             )
             ->where('a.id', $id)
             ->first();
@@ -510,7 +510,7 @@ class ProjectService
     {
         $employee = Employee::where('user_id', Auth::user()->id)->first();
 
-        $projectMember = ProjectMember::select('project_id', 'status', 'created_at')->where([['employee_id', '=', $employee->id]])->whereIn('status', ['pending', 'approve'])->groupBy('project_id')->get();
+        $projectMember = ProjectMember::select('id', 'project_id', 'status', 'created_at')->where([['employee_id', '=', $employee->id]])->whereIn('status', ['pending', 'approve', 'reject'])->groupBy('project_id')->get();
         // dd($projectMember);
         $projectId['approve'] = [];
         foreach ($projectMember as $project) {
@@ -522,22 +522,42 @@ class ProjectService
                 if ($hour > 24) {
                     $projectId['approve'][] = $project->project_id;
                 }
+            } elseif ($project->status == 'reject') {
+                if ($hour > 24) {
+                    $this->updateStatusProjectMemberReject($project->id, 'rejected');
+                    // $projectId['approve'][] = $project->project_id;
+                }
             } else {
                 $projectId['approve'][] = $project->project_id;
             }
         }
+        // dd($projectId);
 
         $data = DB::table('project as a')
             ->leftJoin('customer as b', 'a.customer_id', '=', 'b.id')
             ->leftJoin('employment as c', 'a.project_manager', '=', 'c.id')
             ->select('a.*', 'b.customer_name', 'c.employeeName')
-            ->whereNotIn('a.id', $projectId['approve'])
             ->where([['a.tenant_id', Auth::user()->tenant_id], ['project_manager', '!=', '']])
+            ->whereNotIn('a.id', $projectId['approve'])
             ->get();
 
         if (!$data) {
             $data = [];
         }
+
+        return $data;
+    }
+
+    public function updateStatusProjectMemberReject($id, $status)
+    {
+        $input['status'] = $status;
+
+        ProjectMember::where([['id', $id], ['status', 'reject']])->update($input);
+
+        $data['status'] = config('app.response.success.status');
+        $data['type'] = config('app.response.success.type');
+        $data['title'] = config('app.response.success.title');
+        $data['msg'] = 'Success ' . $status . ' Project Member';
 
         return $data;
     }
@@ -675,6 +695,16 @@ class ProjectService
     public function projectNameByCustomerId($id)
     {
         $data = Project::where([['customer_id', $id], ['tenant_id', Auth::user()->tenant_id]])->get();
+
+        if (!$data) {
+            $data = [];
+        }
+
+        return $data;
+    }
+    public function getRejectProject($id)
+    {
+        $data = ProjectMember::where([['project_id', $id], ['tenant_id', Auth::user()->tenant_id], ['employee_id', Auth::user()->id], ['status', 'reject']])->first();
 
         if (!$data) {
             $data = [];

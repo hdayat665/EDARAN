@@ -11,6 +11,7 @@ use App\Models\EmploymentType;
 use App\Models\JobGrade;
 use App\Models\Project;
 use App\Models\ProjectLocation;
+use App\Models\ProjectMember;
 use App\Models\TimesheetEvent;
 use App\Models\Unit;
 use Illuminate\Support\Facades\Auth;
@@ -48,7 +49,7 @@ if (!function_exists('upload')) {
         //$filename = time() . $uploadedFile->getClientOriginalName();
 
         Storage::disk('local')->put(
-            'public/'.$filename,
+            'public/' . $filename,
             file_get_contents($uploadedFile),
         );
 
@@ -484,14 +485,9 @@ if (!function_exists('getContractType')) {
 if (!function_exists('getFinancialYear')) {
     function getFinancialYear()
     {
-        $data = [
-            '2025' => '2025',
-            '2024' => '2024',
-            '2023' => '2023',
-            '2022' => '2022',
-            '2021' => '2021',
-            '2020' => '2020',
-        ];
+        $data = [];
+
+        $data = Project::where([['tenant_id', Auth::user()->tenant_id]])->select('financial_year')->get();
 
         return $data;
     }
@@ -588,7 +584,7 @@ if (!function_exists('state')) {
 if (!function_exists('customer')) {
     function customer()
     {
-        $data = Customer::where([['tenant_id', Auth::user()->tenant_id], ['status', 1]])->get();
+        $data = Customer::where([['tenant_id', Auth::user()->tenant_id]])->get();
 
         if (!$data) {
             $data = [];
@@ -628,8 +624,8 @@ if (!function_exists('accManager')) {
     function accManager()
     {
         $data = DB::table('project as a')
-            ->leftJoin('employment as b', 'a.acc_manager', '=', 'b.id')
-            ->select('b.id', 'b.employeeName as name')
+            ->leftJoin('userProfile as b', 'a.acc_manager', '=', 'b.user_id')
+            ->select('b.id', 'b.fullName as name')
             ->groupBy('acc_manager')
             // ->whereNotIn('a.id', $projectId)
             ->where('a.tenant_id', Auth::user()->tenant_id)
@@ -646,8 +642,8 @@ if (!function_exists('prjManager')) {
     function prjManager()
     {
         $data = DB::table('project as a')
-            ->leftJoin('employment as b', 'a.project_manager', '=', 'b.id')
-            ->select('b.id', 'b.employeeName as name')
+            ->leftJoin('userProfile as b', 'a.project_manager', '=', 'b.user_id')
+            ->select('b.id', 'b.fullName as name')
             ->groupBy('project_manager')
             // ->whereNotIn('a.id', $projectId)
             ->where('a.tenant_id', Auth::user()->tenant_id)
@@ -832,5 +828,32 @@ if (!function_exists('projectLocationById')) {
         }
 
         return $data->location_name;
+    }
+}
+
+if (!function_exists('checkProjectMemberStatus')) {
+    function checkProjectMemberStatus($projectId = '')
+    {
+        $data = ProjectMember::where('project_id', $projectId)->first();
+        // dd($data);
+        if (!$data) {
+            $data = '';
+            return $data;
+        }
+
+        return $data->location_name;
+    }
+}
+
+if (!function_exists('getProjectLocation')) {
+    function getProjectLocation($id = '')
+    {
+        $data = ProjectLocation::where([['tenant_id', Auth::user()->tenant_id], ['id', $id]])->first();
+
+        if (!$data) {
+            $data = '';
+        }
+
+        return $data;
     }
 }
