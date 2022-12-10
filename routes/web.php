@@ -260,7 +260,7 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('/getProjectById/{id}', 'getProjectById');
             Route::get('/getLocationsProjectMemberById/{id}', 'getLocationsProjectMemberById');
             Route::get('/projectNameByCustomerId/{id}', 'projectNameByCustomerId');
-
+            Route::get('/getRejectProject/{id}', 'getRejectProject');
         });
 
         Route::controller(ProjectReportController::class)->group(function () {
@@ -283,7 +283,6 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('/searchEmployeeTimesheetReport', 'searchEmployeeTimesheetReport');
             Route::post('/searchEmployeeReport', 'searchEmployeeReport');
             Route::post('/searchOvertimeReport', 'searchOvertimeReport');
-
         });
 
         Route::controller(MyTimesheetController::class)->group(function () {
@@ -317,7 +316,6 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('/deleteEvent/{id}', 'deleteEvent');
             Route::post('/deleteLog/{id}', 'deleteLog');
         });
-
     });
 });
 // Route::group(['middleware' => ['auth']], function () {

@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers\Project;
 
 use App\Http\Controllers\Controller;
@@ -162,6 +163,7 @@ class ProjectController extends Controller
         $data['projectInfos'] = $ps->projectRequestView();
         $data['projectIdPending'] = $ps->projectPendingRequest('pending');
         $data['projectIdApprove'] = $ps->projectPendingRequest('approve');
+        $data['projectIdReject'] = $ps->projectPendingRequest('reject');
 
         // pr($data);
 
@@ -185,7 +187,6 @@ class ProjectController extends Controller
         $data = $ps->getProjectById($id);
 
         return response()->json($data);
-
     }
 
     public function addRequestProject(Request $r, $id)
@@ -275,4 +276,12 @@ class ProjectController extends Controller
         return response()->json($result);
     }
 
+    public function getRejectProject($id)
+    {
+        $ss = new ProjectService;
+
+        $result = $ss->getRejectProject($id);
+
+        return response()->json($result);
+    }
 }
