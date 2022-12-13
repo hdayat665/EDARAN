@@ -43,7 +43,7 @@
             <div class="form-group col-md-4 mt-3" id="menu3">
                 <label for="Menu2">Select Financial Year : </label>
                 <select class="form-control" name="financialYear" id="select3" oninvalid="this.setCustomValidity('Please Select Financial Year')" oninput="setCustomValidity('')">
-                    <option value="">Please Select ...</option>
+                    <option value="">All</option>
                     <?php $getFinancialYears = getFinancialYear() ?>
                     @if ($getFinancialYears)
                     @foreach ($getFinancialYears as $key => $name)
@@ -80,7 +80,7 @@
             <div class="form-group col-md-4 mt-3" id="menu6">
                 <label for="Menu2">Select Status : </label>
                 <select class="form-control" name="statusProject" id="select6" oninvalid="this.setCustomValidity('Please Select Status')" oninput="setCustomValidity('')">
-                <option value="">Please Select ...</option>
+                <option value="">All</option>
                     <?php $getStatusProjects = getStatusProject() ?>
                     @if ($getStatusProjects)
                     @foreach ($getStatusProjects as $key => $name)

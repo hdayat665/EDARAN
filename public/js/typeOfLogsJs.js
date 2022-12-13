@@ -147,15 +147,15 @@ $(document).ready(function() {
             rules: {
                 department: "required",
                 type_of_log: "required",
-                project_id: "required",
-                activity_name: "required",
+                // project_id: "required",
+                // activity_name: "required",
             },
 
             messages: {
                 department: "Please Choose Department",
                 type_of_log: "Please Choose Type of Logs",
-                project_id: "Please Enter Project Name",
-                activity_name: "At Least 1 Activity are required",
+                // project_id: "Please Enter Project Name",
+                // activity_name: "At Least 1 Activity are required",
             },
             submitHandler: function(form) {
                 requirejs(['sweetAlert2'], function(swal) {
