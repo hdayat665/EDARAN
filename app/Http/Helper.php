@@ -487,7 +487,23 @@ if (!function_exists('getFinancialYear')) {
     {
         $data = [];
 
-        $data = Project::where([['tenant_id', Auth::user()->tenant_id]])->select('financial_year')->get();
+        $data = Project::where([['tenant_id', Auth::user()->tenant_id]])->select('financial_year')->groupBy('financial_year')->get();
+
+        return $data;
+    }
+}
+
+if (!function_exists('getFinancialYearForm')) {
+    function getFinancialYearForm()
+    {
+        $data = [
+            '2020' => '2020',
+            '2021' => '2021',
+            '2022' => '2022',
+            '2023' => '2023',
+            '2024' => '2024',
+            '2025' => '2025',
+        ];
 
         return $data;
     }
