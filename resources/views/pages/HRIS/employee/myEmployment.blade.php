@@ -14,6 +14,14 @@
                 <form id="addEmpForm">
                     <div class="card-body">
                         <div class="row p-2">
+                            <label for="firstname" class="form-label">Role*</label>
+                            <select class="form-select" name="Role" >
+                                <option value="" label="Please Choose "></option>
+                                
+                            </select>
+                            <input type="hidden" name="id" value="{{$employment->id}}">
+                        </div>
+                        <div class="row p-2">
                             <label for="firstname" class="form-label">Company*</label>
                             <select class="form-select" name="company" id="companyForEmployment">
                                 <option value="" label="Please Choose "></option>
