@@ -13,6 +13,12 @@
 
                 <div class="card-body">
                     <div class="row p-2">
+                            <label for="firstname" class="form-label">Role*</label>
+                            <select class="form-select" name="Role" disabled>
+                                <option value="" label="Please Choose " ></option>
+                            </select>
+                        </div>
+                    <div class="row p-2">
                         <label for="firstname" class="form-label">Company*</label>
                         <select class="form-select" name="company" aria-label="Disabled select example" disabled >
                             <option value="0" label="Please Choose "></option>
