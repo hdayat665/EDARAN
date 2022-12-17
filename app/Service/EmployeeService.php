@@ -36,7 +36,7 @@ class EmployeeService
             $data['title'] = 'Error';
             $data['type'] = 'error';
             $data['msg'] = 'email already exist';
-        }else{
+        } else {
             $user['type'] = 'employee';
             $user['status'] = 'not complete';
             $user['username'] = $r['username'];
@@ -50,8 +50,8 @@ class EmployeeService
             $user = Users::where('username', $r['username'])->first();
 
             $input['user_id'] = $user->id;
-            $input['DOB'] = date_format(date_create($input['DOB']),"Y/m/d H:i:s");
-            $input['expiryDate'] = date_format(date_create($input['expiryDate']),"Y/m/d H:i:s");
+            $input['DOB'] = date_format(date_create($input['DOB']), "Y/m/d H:i:s");
+            $input['expiryDate'] = date_format(date_create($input['expiryDate']), "Y/m/d H:i:s");
             $input['tenant_id'] = Auth::user()->tenant_id;
 
             UserProfile::create($input);
@@ -68,7 +68,7 @@ class EmployeeService
 
     public function addAddress($r)
     {
-        $input= $r->input();
+        $input = $r->input();
 
         UserAddress::create($input);
 
@@ -121,7 +121,7 @@ class EmployeeService
         $jobHistory = [];
         $jobHistory['user_id'] = $input['user_id'];
         $jobHistory['employmentDetail'] = $input['employmentDetail'];
-        $jobHistory['effectiveDate'] = date_format(date_create($input['effectiveFrom']),"Y/m/d H:i:s");
+        $jobHistory['effectiveDate'] = date_format(date_create($input['effectiveFrom']), "Y/m/d H:i:s");
         $jobHistory['updatedBy'] = $input['updatedBy'];
 
         JobHistory::create($jobHistory);
@@ -142,11 +142,11 @@ class EmployeeService
         $data['status'] = true;
         $data['msg'] = 'Success get user employment';
         $data['data'] = DB::table('employment as a')
-        ->leftjoin('userProfile as b', 'a.user_id', '=', 'b.user_id')
-        ->leftjoin('department as c', 'a.department', '=', 'c.id')
-        ->select('a.id', 'a.employeeId', 'a.user_id', 'b.firstName', 'b.lastName', 'b.personalEmail as email', 'b.phoneNo', 'c.departmentName as department', 'a.supervisor', 'a.report_to', 'a.status')
-        ->where([['a.tenant_id', $userId], ['status', '!=', 'not complete']])
-        ->get();
+            ->leftjoin('userProfile as b', 'a.user_id', '=', 'b.user_id')
+            ->leftjoin('department as c', 'a.department', '=', 'c.id')
+            ->select('a.id', 'a.employeeId', 'a.user_id', 'b.firstName', 'b.lastName', 'b.personalEmail as email', 'b.phoneNo', 'c.departmentName as department', 'a.supervisor', 'a.report_to', 'a.status')
+            ->where([['a.tenant_id', $userId], ['status', '!=', 'not complete']])
+            ->get();
 
 
         return $data;
@@ -212,7 +212,6 @@ class EmployeeService
         $data['asias'] = asias();
 
         return $data;
-
     }
 
     public function updateEmployeeProfile($input)
@@ -221,40 +220,30 @@ class EmployeeService
 
         $profile = UserProfile::where('user_id', $user_id)->first();
 
-        if(!$profile)
-        {
+        if (!$profile) {
             $data['status'] = config('app.response.error.status');;
             $data['title'] = config('app.response.error.title');
             $data['type'] = config('app.response.error.type');
             $data['msg'] = 'Profile not found';
-        }else{
-            if(!$input['religion'])
-            {
+        } else {
+            if (!$input['religion']) {
                 unset($input['religion']);
             }
 
-            if(!$input['race'])
-            {
+            if (!$input['race']) {
                 unset($input['race']);
-
             }
 
-            if(!$input['phoneNo'])
-            {
+            if (!$input['phoneNo']) {
                 unset($input['phoneNo']);
-
             }
 
-            if(!$input['homeNo'])
-            {
+            if (!$input['homeNo']) {
                 unset($input['homeNo']);
-
             }
 
-            if(!$input['extensionNo'])
-            {
+            if (!$input['extensionNo']) {
                 unset($input['extensionNo']);
-
             }
 
             if ($input['username']) {
@@ -273,7 +262,6 @@ class EmployeeService
         }
 
         return $data;
-
     }
 
     public function updateEmployeeAddress($input)
@@ -282,23 +270,19 @@ class EmployeeService
 
         $user = UserAddress::where('user_id', $user_id)->first();
 
-        if(!$user)
-        {
+        if (!$user) {
             $data['status'] = config('app.response.error.status');
             $data['type'] = config('app.response.error.type');
             $data['title'] = config('app.response.error.title');
             $data['msg'] = 'user not found';
-        }else{
+        } else {
 
-            if(!$input['address2'])
-            {
+            if (!$input['address2']) {
                 unset($input['address2']);
             }
 
-            if(!$input['address2c'])
-            {
+            if (!$input['address2c']) {
                 unset($input['address2c']);
-
             }
             $sameAsPermenant = $input['sameAsPermenant'] ?? '';
 
@@ -318,7 +302,6 @@ class EmployeeService
             $data['type'] = config('app.response.success.type');
             $data['title'] = config('app.response.success.title');
             $data['msg'] = 'Success update Address';
-
         }
 
         return $data;
@@ -331,16 +314,14 @@ class EmployeeService
 
         $user = UserEmergency::where('id', $id)->first();
 
-        if(!$user)
-        {
+        if (!$user) {
             $data['status'] = config('app.response.error.status');
             $data['type'] = config('app.response.error.type');
             $data['title'] = config('app.response.error.title');
             $data['msg'] = 'user not found';
-        }else{
+        } else {
 
-            if(!$input['address2'])
-            {
+            if (!$input['address2']) {
                 unset($input['address2']);
             }
 
@@ -350,7 +331,6 @@ class EmployeeService
             $data['type'] = config('app.response.success.type');
             $data['title'] = config('app.response.success.title');
             $data['msg'] = 'Success update Emergency Contact';
-
         }
 
         return $data;
@@ -364,16 +344,14 @@ class EmployeeService
 
         $user = UserCompanion::where('user_id', $user_id)->first();
 
-        if(!$user)
-        {
+        if (!$user) {
             $data['status'] = config('app.response.error.status');
             $data['type'] = config('app.response.error.type');
             $data['title'] = config('app.response.error.title');
             $data['msg'] = 'user not found';
-        }else{
+        } else {
 
-            if ($_FILES['payslip']['name'])
-            {
+            if ($_FILES['payslip']['name']) {
                 // $payslip = upload($r->file('payslip'));
                 // $input['payslip'] = $payslip['filename'];
 
@@ -382,8 +360,7 @@ class EmployeeService
                 // }
             }
 
-            if ($_FILES['marrigeCert']['name'])
-            {
+            if ($_FILES['marrigeCert']['name']) {
                 // $marrigeCert = upload($r->file('marrigeCert'));
                 // $input['marrigeCert'] = $marrigeCert['filename'];
 
@@ -392,33 +369,27 @@ class EmployeeService
                 // }
             }
 
-            if(!$input['DOM'])
-            {
+            if (!$input['DOM']) {
                 unset($input['DOM']);
             }
 
-            if(!$input['address2'])
-            {
+            if (!$input['address2']) {
                 unset($input['address2']);
             }
 
-            if(!$input['companyName'])
-            {
+            if (!$input['companyName']) {
                 unset($input['companyName']);
             }
 
-            if(!$input['incomeTax'])
-            {
+            if (!$input['incomeTax']) {
                 unset($input['incomeTax']);
             }
 
-            if(!$input['officeNo'])
-            {
+            if (!$input['officeNo']) {
                 unset($input['officeNo']);
             }
 
-            if(!$input['address2E'])
-            {
+            if (!$input['address2E']) {
                 unset($input['address2E']);
             }
 
@@ -436,7 +407,6 @@ class EmployeeService
         }
 
         return $data;
-
     }
 
     public function addEmployeeCompanion($r)
@@ -452,10 +422,9 @@ class EmployeeService
             $data['type'] = config('app.response.error.type');
             $data['title'] = config('app.response.error.title');
             $data['msg'] = 'Max Companion can add only 4';
-        }else{
+        } else {
 
-            if ($_FILES['payslip']['name'])
-            {
+            if ($_FILES['payslip']['name']) {
                 $payslip = upload($r->file('payslip'));
                 $input['payslip'] = $payslip['filename'];
 
@@ -464,8 +433,7 @@ class EmployeeService
                 }
             }
 
-            if ($_FILES['marrigeCert']['name'])
-            {
+            if ($_FILES['marrigeCert']['name']) {
                 $marrigeCert = upload($r->file('marrigeCert'));
                 $input['marrigeCert'] = $marrigeCert['filename'];
 
@@ -498,16 +466,14 @@ class EmployeeService
 
         $user = UserChildren::where('id', $id)->first();
 
-        if(!$user)
-        {
+        if (!$user) {
             $data['status'] = config('app.response.error.status');
             $data['type'] = config('app.response.error.type');
             $data['title'] = config('app.response.error.title');
             $data['msg'] = 'user not found';
-        }else{
+        } else {
 
-            if ($_FILES['supportDoc']['name'])
-            {
+            if ($_FILES['supportDoc']['name']) {
                 $payslip = upload($r, 'supportDoc');
                 $input['supportDoc'] = $payslip['filename'];
 
@@ -525,7 +491,6 @@ class EmployeeService
         }
 
         return $data;
-
     }
 
     public function addEmployeeChildren($r)
@@ -594,13 +559,12 @@ class EmployeeService
 
         $user = UserSibling::where('id', $id)->first();
 
-        if(!$user)
-        {
+        if (!$user) {
             $data['status'] = config('app.response.error.status');
             $data['type'] = config('app.response.error.type');
             $data['title'] = config('app.response.error.title');
             $data['msg'] = 'user not found';
-        }else{
+        } else {
             $sameAddress = $input['sameAddress'] ?? null;
             if ($sameAddress) {
                 $userProfile = UserProfile::where('user_id', Auth::user()->id)->first();
@@ -622,7 +586,6 @@ class EmployeeService
         }
 
         return $data;
-
     }
 
     public function addEmployeeParent($r)
@@ -661,13 +624,12 @@ class EmployeeService
 
         $user = UserParent::where('id', $id)->first();
 
-        if(!$user)
-        {
+        if (!$user) {
             $data['status'] = config('app.response.error.status');
             $data['type'] = config('app.response.error.type');
             $data['title'] = config('app.response.error.title');
             $data['msg'] = 'user not found';
-        }else{
+        } else {
             unset($input['sameAddress']);
             UserParent::where('id', $id)->update($input);
 
@@ -678,7 +640,6 @@ class EmployeeService
         }
 
         return $data;
-
     }
 
     public function updateEmployee($r)
@@ -690,13 +651,19 @@ class EmployeeService
 
         $user = Employee::where('id', $id)->first();
 
-        if(!$user)
-        {
+        if (!$user) {
             $data['status'] = config('app.response.error.status');
             $data['type'] = config('app.response.error.type');
             $data['title'] = config('app.response.error.title');
             $data['msg'] = 'user not found';
-        }else{
+        } else {
+
+            // update role user
+            if ($input['role']) {
+                $userRole['role_id'] = $input['role'];
+                Users::where('id', $input['user_id'])->update($userRole);
+                unset($input['role']);
+            }
 
             if ($input['branchId']) {
                 $input['branch'] = $input['branchId'];
@@ -724,7 +691,7 @@ class EmployeeService
             $jobz['effectiveDate'] = $input['effectiveFrom'];
             $jobz['tenant_id'] = $user->id;
             $jobz['updatedBy'] = $user->username;
-               // pr($input);
+            // pr($input);
             // pr($input_job);
             JobHistory::create($jobz);
 
@@ -735,7 +702,6 @@ class EmployeeService
         }
 
         return $data;
-
     }
 
     public function addEmployment($r)
@@ -806,13 +772,12 @@ class EmployeeService
 
         $user = Vehicle::where('id', $id)->first();
 
-        if(!$user)
-        {
+        if (!$user) {
             $data['status'] = config('app.response.error.status');
             $data['type'] = config('app.response.error.type');
             $data['title'] = config('app.response.error.title');
             $data['msg'] = 'user not found';
-        }else{
+        } else {
 
             Vehicle::where('id', $id)->update($input);
 
@@ -823,7 +788,6 @@ class EmployeeService
         }
 
         return $data;
-
     }
 
     public function addVehicle($r)
@@ -900,5 +864,4 @@ class EmployeeService
 
         return $data;
     }
-
 }

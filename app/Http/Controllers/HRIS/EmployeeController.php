@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\HRIS;
 
 use App\Service\EmployeeService;
+use App\Service\LoginService;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 
@@ -59,7 +60,7 @@ class EmployeeController extends Controller
 
         $data['employeeInfos'] = $ps->getEmployeeInfo()['data'];
 
-        return view('pages.HRIS.employee.employeeInfo',$data);
+        return view('pages.HRIS.employee.employeeInfo', $data);
     }
 
     public function registerEmployeeView()
@@ -80,7 +81,7 @@ class EmployeeController extends Controller
         return view('pages.HRIS.employee.employeeEdit', $result);
     }
 
-    public function updateEmployeeProfile (Request $r)
+    public function updateEmployeeProfile(Request $r)
     {
         $input = $r->input();
 
@@ -162,7 +163,7 @@ class EmployeeController extends Controller
     {
         $ps = new EmployeeService;
 
-        $result = $ps->getParent($user_id);
+        $result = $ps->getParentByUserId($user_id);
 
         return response()->json($result);
     }
@@ -267,6 +268,4 @@ class EmployeeController extends Controller
 
         return response()->json($result);
     }
-
-
 }

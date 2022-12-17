@@ -9,86 +9,109 @@
                     <p class="fw-light">
                         Update your employment information
                     </p>
-                 </div>
+                </div>
 
                 <div class="card-body">
                     <div class="row p-2">
-                            <label for="firstname" class="form-label">Role*</label>
-                            <select class="form-select" name="Role" disabled>
-                                <option value="" label="Please Choose " ></option>
-                            </select>
-                        </div>
+                        <label for="firstname" class="form-label">Role*</label>
+                        <select class="form-select" name="Role" disabled>
+                            <option value="" label="Please Choose "></option>
+                            <?php $roles = getAllRole(); ?>
+                            @foreach ($roles as $role)
+                                <option value="{{ $role->id }}"
+                                    {{ Auth::user()->role_id == $role->id ? 'selected="selected"' : '' }}
+                                    label="{{ $role->roleName }}"></option>
+                            @endforeach
+                        </select>
+                    </div>
                     <div class="row p-2">
                         <label for="firstname" class="form-label">Company*</label>
-                        <select class="form-select" name="company" aria-label="Disabled select example" disabled >
+                        <select class="form-select" name="company" aria-label="Disabled select example" disabled>
                             <option value="0" label="Please Choose "></option>
-                            <?php $companys = getCompany() ?>
+                            <?php $companys = getCompany(); ?>
                             @foreach ($companys as $company)
-                                <option value="{{$company->id}}" {{($employment->company == $company->id) ? 'selected="selected"' : ''}} label="{{$company->companyName}}"></option>
+                                <option value="{{ $company->id }}"
+                                    {{ $employment->company == $company->id ? 'selected="selected"' : '' }}
+                                    label="{{ $company->companyName }}"></option>
                             @endforeach
                         </select>
                     </div>
                     <div class="row p-2">
                         <label for="firstname" class="form-label">Department*</label>
-                        <select class="form-select" name="department"  aria-label="Disabled select example" disabled >>
-                            <?php $Departments = getDepartment() ?>
+                        <select class="form-select" name="department" aria-label="Disabled select example" disabled>>
+                            <?php $Departments = getDepartment(); ?>
                             <option value="0" label="Please Choose "></option>
                             @foreach ($Departments as $Department)
-                                <option value="{{$Department->id ?? null}}" {{($employment->department == $Department->id) ? 'selected="selected"' : ''}} label="{{$Department->departmentName}}" ></option>
+                                <option value="{{ $Department->id ?? null }}"
+                                    {{ $employment->department == $Department->id ? 'selected="selected"' : '' }}
+                                    label="{{ $Department->departmentName }}"></option>
                             @endforeach
                         </select>
                     </div>
                     <div class="row p-2">
                         <label for="firstname" class="form-label">Unit*</label>
-                        <select class="form-select" name="unit"  aria-label="Disabled select example" disabled >>
-                            <?php $Units = getUnit() ?>
+                        <select class="form-select" name="unit" aria-label="Disabled select example" disabled>>
+                            <?php $Units = getUnit(); ?>
                             <option value="0" label="Please Choose "></option>
                             @foreach ($Units as $Unit)
-                                <option value="{{$Unit->id}}" {{($employment->unit == $Unit->id) ? 'selected="selected"' : ''}}  label="{{$Unit->unitName}}" ></option>
+                                <option value="{{ $Unit->id }}"
+                                    {{ $employment->unit == $Unit->id ? 'selected="selected"' : '' }}
+                                    label="{{ $Unit->unitName }}"></option>
                             @endforeach
                         </select>
                     </div>
                     <div class="row p-2">
                         <label for="firstname" class="form-label">Branch*</label>
-                        <select class="form-select" name="branch"  aria-label="Disabled select example" disabled >>
-                            <?php $Branchs = getBranch() ?>
+                        <select class="form-select" name="branch" aria-label="Disabled select example" disabled>>
+                            <?php $Branchs = getBranch(); ?>
                             <option value="0" label="Please Choose "></option>
                             @foreach ($Branchs as $Branch)
-                                <option value="{{$Branch->id}}" {{($employment->branch == $Branch->id) ? 'selected="selected"' : ''}} label="{{$Branch->branchName}}" ></option>
+                                <option value="{{ $Branch->id }}"
+                                    {{ $employment->branch == $Branch->id ? 'selected="selected"' : '' }}
+                                    label="{{ $Branch->branchName }}"></option>
                             @endforeach
                         </select>
                     </div>
                     <div class="row p-2">
                         <label for="firstname" class="form-label">Joined Date*</label>
-                        <input type="text" name="joinedDate" id="datepicker-joindate" placeholder="YYYY-MM-DD" class="form-control" aria-describedby="address-2" readonly>
+                        <input type="text" name="joinedDate" id="datepicker-joindate" placeholder="YYYY-MM-DD"
+                            class="form-control" aria-describedby="address-2" readonly>
                     </div>
                     <div class="row p-2">
                         <label for="firstname" class="form-label">Job Grade*</label>
-                        <select class="form-select" name="jobGrade"  aria-label="Disabled select example" disabled >>
-                            <?php $JobGrades = getJobGrade() ?>
+                        <select class="form-select" name="jobGrade" aria-label="Disabled select example" disabled>>
+                            <?php $JobGrades = getJobGrade(); ?>
                             <option value="0" label="Please Choose "></option>
                             @foreach ($JobGrades as $JobGrade)
-                                <option value="{{$JobGrade->id}}" {{($employment->jobGrade == $JobGrade->id) ? 'selected="selected"' : ''}} label="{{$JobGrade->jobGradeName}}" ></option>
+                                <option value="{{ $JobGrade->id }}"
+                                    {{ $employment->jobGrade == $JobGrade->id ? 'selected="selected"' : '' }}
+                                    label="{{ $JobGrade->jobGradeName }}"></option>
                             @endforeach
                         </select>
                     </div>
                     <div class="row p-2">
                         <label for="firstname" class="form-label">Designation*</label>
-                        <select class="form-select" name="designation"  aria-label="Disabled select example" disabled >>
-                            <?php $Designations = getDesignation() ?>
+                        <select class="form-select" name="designation" aria-label="Disabled select example" disabled>>
+                            <?php $Designations = getDesignation(); ?>
                             <option value="0" label="Please Choose "></option>
                             @foreach ($Designations as $Designation)
-                                <option value="{{$Designation->id}}" {{($employment->designation == $Designation->id) ? 'selected="selected"' : ''}} label="{{$Designation->designationName}}" ></option>
+                                <option value="{{ $Designation->id }}"
+                                    {{ $employment->designation == $Designation->id ? 'selected="selected"' : '' }}
+                                    label="{{ $Designation->designationName }}"></option>
                             @endforeach
                         </select>
                     </div>
                     <div class="row p-2">
                         <label for="firstname" class="form-label">Employment Type*</label>
-                        <select class="form-select" name="employmentType"  aria-label="Disabled select example" disabled >>
-                            <?php $EmploymentTypes = getEmploymentType() ?>
+                        <select class="form-select" name="employmentType" aria-label="Disabled select example"
+                            disabled>>
+                            <?php $EmploymentTypes = getEmploymentType(); ?>
                             <option value="0" label="Please Choose "></option>
                             @foreach ($EmploymentTypes as $EmploymentType)
-                                <option value="{{$EmploymentType->id ?? null}}" label="{{$EmploymentType->type ?? null}}" {{ ($employment->employmentType == $EmploymentType->id) ? "selected='selected'" : '' }}></option>
+                                <option value="{{ $EmploymentType->id ?? null }}"
+                                    label="{{ $EmploymentType->type ?? null }}"
+                                    {{ $employment->employmentType == $EmploymentType->id ? "selected='selected'" : '' }}>
+                                </option>
                             @endforeach
                         </select>
                     </div>
@@ -97,7 +120,7 @@
                               User Role
                         </label>
                         <div class="form-check form-switch">
-                            <input class="form-check-input" {{ ($employment->supervisor == 'on') ? "checked='checked'" : '' }} name="supervisor" type="checkbox" id="supervisor">
+                            <input class="form-check-input" {{ $employment->supervisor == 'on' ? "checked='checked'" : '' }} name="supervisor" type="checkbox" id="supervisor">
                             <label class="form-check-label" for="supervisor">
                                   Supervisor
                             </label>
@@ -143,26 +166,27 @@
                             </div>
                         </div>
                     </div>
-                 </div>
+                </div>
                 <div class="card-body">
                     <div class="container">
                         <ul class="timeline-with-icons">
                             @if ($jobHistorys)
-                            @foreach ($jobHistorys as $jobHistory)
-                            <li class="timeline-item mb-5 ">
-                                <span class="timeline-icon">
-                                  <i class="fas fa-rocket text-primary fa-sm fa-fw"></i>
-                                </span>
+                                @foreach ($jobHistorys as $jobHistory)
+                                    <li class="timeline-item mb-5 ">
+                                        <span class="timeline-icon">
+                                            <i class="fas fa-rocket text-primary fa-sm fa-fw"></i>
+                                        </span>
 
-                                <div class="card p-3 bg-white">
-                                    <p class="fw-bold">{{$jobHistory->employmentDetail ?? ''}}</p>
-                                    <p class="text-muted mb-2 fw-bold">{{$jobHistory->effectiveDate ?? ''}}</p>
-                                    <p class="text-muted">
-                                        Effective Date: {{$jobHistory->effectiveDate ?? ''}}
-                                    </p>
-                                </div>
-                            </li>
-                            @endforeach
+                                        <div class="card p-3 bg-white">
+                                            <p class="fw-bold">{{ $jobHistory->employmentDetail ?? '' }}</p>
+                                            <p class="text-muted mb-2 fw-bold">{{ $jobHistory->effectiveDate ?? '' }}
+                                            </p>
+                                            <p class="text-muted">
+                                                Effective Date: {{ $jobHistory->effectiveDate ?? '' }}
+                                            </p>
+                                        </div>
+                                    </li>
+                                @endforeach
                             @endif
                         </ul>
                     </div>
@@ -171,27 +195,32 @@
             </div>
         </div>
         <!-- Modal Update Employment-->
-        <div class="modal fade" id="update-employment" tabindex="-1" aria-labelledby="update-employment" aria-hidden="true">
+        <div class="modal fade" id="update-employment" tabindex="-1" aria-labelledby="update-employment"
+            aria-hidden="true">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
-                    <h5 class="modal-title" id="update-employment">Employment Details - Confirm Changes</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <h5 class="modal-title" id="update-employment">Employment Details - Confirm Changes</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <div class="row">
                             <div class="col-sm-6">
                                 <label for="employee-id" class="form-label">Employee ID</label>
-                                <input type="text" id="employee-id" name="employeeID" class="form-control" aria-describedby="employee-id">
+                                <input type="text" id="employee-id" name="employeeID" class="form-control"
+                                    aria-describedby="employee-id">
                             </div>
                             <div class="col-sm-6">
                                 <label for="employee-name" class="form-label">Employee Name</label>
-                                <input type="text" id="employee-name" name="employeeName" class="form-control" aria-describedby="employee-name">
+                                <input type="text" id="employee-name" name="employeeName" class="form-control"
+                                    aria-describedby="employee-name">
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <label for="employee-email" class="form-label">Employee Email</label>
-                            <input type="text" id="employee-email" name="employeeEmail" class="form-control" aria-describedby="employee-email">
+                            <input type="text" id="employee-email" name="employeeEmail" class="form-control"
+                                aria-describedby="employee-email">
                         </div>
                         <hr>
 
@@ -199,7 +228,8 @@
                         <div class="row">
                             <div class="col-sm-6">
                                 <label for="effective-from" class="form-label">Effective From*</label>
-                                <input type="date" id="effective-from" name="effectiveFrom" class="form-control" aria-describedby="effective-from">
+                                <input type="date" id="effective-from" name="effectiveFrom" class="form-control"
+                                    aria-describedby="effective-from">
                             </div>
                             <div class="col-sm-6">
                                 <label for="firstname" class="form-label">Event*</label>
@@ -207,7 +237,7 @@
                                     <option value="0" label="Please Choose"></option>
                                     <?php $events = getEvent(); ?>
                                     @foreach ($events as $key => $event)
-                                        <option value="{{ $key }}">{{$event}}</option>
+                                        <option value="{{ $key }}">{{ $event }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -216,7 +246,8 @@
                         <p class="mt-3 mb-3 fw-bold">Changes Details</p>
                         <div class="row">
                             <label for="changes-input" class="form-label">Input</label>
-                            <input type="file" id="changes-input" class="form-control" aria-describedby="changes-input">
+                            <input type="file" id="changes-input" class="form-control"
+                                aria-describedby="changes-input">
                         </div>
                     </div>
                     <div class="modal-footer">

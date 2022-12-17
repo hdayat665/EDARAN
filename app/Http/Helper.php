@@ -12,6 +12,7 @@ use App\Models\JobGrade;
 use App\Models\Project;
 use App\Models\ProjectLocation;
 use App\Models\ProjectMember;
+use App\Models\Role;
 use App\Models\TimesheetEvent;
 use App\Models\Unit;
 use Illuminate\Support\Facades\Auth;
@@ -868,6 +869,19 @@ if (!function_exists('getProjectLocation')) {
 
         if (!$data) {
             $data = '';
+        }
+
+        return $data;
+    }
+}
+
+if (!function_exists('getAllRole')) {
+    function getAllRole()
+    {
+        $data = Role::where([['tenant_id', Auth::user()->tenant_id]])->get();
+
+        if (!$data) {
+            $data = [];
         }
 
         return $data;
