@@ -1098,12 +1098,12 @@ class SettingService
         $data = [];
         // $data['data'] = TypeOfLogs::where('tenant_id', Auth::user()->tenant_id)->get();
         $data = DB::table('type_of_logs as a')
-        ->leftJoin('project as b', 'a.project_id', '=', 'b.id')
-        // ->leftJoin('activity_logs as c', 'a.id', '=', 'c.logs_id')
-        ->leftJoin('department as d', 'a.department', '=', 'd.id')
-        ->select('a.*', 'b.project_name', 'd.departmentName')
-        ->where('a.tenant_id', Auth::user()->tenant_id)
-        ->get();
+            ->leftJoin('project as b', 'a.project_id', '=', 'b.id')
+            // ->leftJoin('activity_logs as c', 'a.id', '=', 'c.logs_id')
+            ->leftJoin('department as d', 'a.department', '=', 'd.id')
+            ->select('a.*', 'b.project_name', 'd.departmentName')
+            ->where('a.tenant_id', Auth::user()->tenant_id)
+            ->get();
         // pr($data);
         return $data;
     }
@@ -1113,8 +1113,7 @@ class SettingService
         $input = $r->input();
         $user = Auth::user();
 
-        if(isset($input['project_id']))
-        {
+        if (isset($input['project_id'])) {
             $logsData['project_id'] = $input['project_id'];
         }
         $logsData['department'] = $input['department'];
@@ -1153,13 +1152,11 @@ class SettingService
         $input = $r->input();
         $user = Auth::user();
 
-        if(isset($input['project_id']))
-        {
+        if (isset($input['project_id'])) {
             $logsData['project_id'] = $input['project_id'];
         }
 
-        if($input['type_of_log'] == 'Non-Project')
-        {
+        if ($input['type_of_log'] == 'Non-Project') {
             $logsData['project_id'] = null;
         }
 
@@ -1232,6 +1229,4 @@ class SettingService
 
         return $data;
     }
-
-
 }
