@@ -8,12 +8,6 @@
 	margin: 0 auto;
 	align-items: center;
   }
-
-
-
-
-
-
 </style>
 
 <head>

@@ -419,8 +419,8 @@ class MyTimeSheetService
         $cond[1] = ['tenant_id', Auth::user()->tenant_id];
         $cond[2] = ['user_id', Auth::user()->id];
         $data = TimesheetEvent::where($cond)
-        ->orWhere([['participant', 'like', '%' . Auth::user()->id . '%']])
-        ->get();
+            ->orWhere([['participant', 'like', '%' . Auth::user()->id . '%']])
+            ->get();
 
         return $data;
     }
@@ -446,33 +446,37 @@ class MyTimeSheetService
         $logs = TimesheetLog::where($cond)->whereMonth('date', date('m'))->select('id')->get();
 
         $events = TimesheetEvent::where($cond)
-        ->whereMonth('end_date', date('m'))
-        ->orWhere([['participant', 'like', '%' . Auth::user()->id . '%']])
-        ->select('id')
-        ->get();
+            ->whereMonth('end_date', date('m'))
+            ->orWhere([['participant', 'like', '%' . Auth::user()->id . '%']])
+            ->select('id')
+            ->get();
 
+        $log_id = [];
         foreach ($logs as $log) {
             $log_id[] = $log->id;
         }
 
+        $event_id = [];
         foreach ($events as $event) {
             $event_id[] = $event->id;
         }
-        // pr($log_id);
+
         $employee =  DB::table('employment as a')
             ->leftJoin('designation as b', 'a.designation', '=', 'b.id')
             ->leftJoin('department as c', 'a.department', '=', 'c.id')
             ->select('a.id', 'c.departmentName', 'b.designationName', 'a.employeeName')
             ->where([['user_id', $userId]])
             ->first();
-        // pr($employee);
+
         $input['tenant_id'] = Auth::user()->tenant_id;
         $input['user_id'] = $userId;
         $input['month'] = date('M');
-        if (isset($input['log_id'])) {
+        if (isset($log_id)) {
             $input['log_id'] = implode(',', $log_id);
         }
-        $input['event_id'] = implode(',', $event_id);
+        if (isset($event_id)) {
+            $input['event_id'] = implode(',', $event_id);
+        }
         $input['employee_id'] = $employee->id;
         $input['employee_name'] = $employee->employeeName;
         $input['department'] = $employee->departmentName;
@@ -572,8 +576,8 @@ class MyTimeSheetService
     {
 
         if ($userId) {
-            $data = TimesheetApproval::where([['user_id', $userId],['id', $id]])->first();
-        }else{
+            $data = TimesheetApproval::where([['user_id', $userId], ['id', $id]])->first();
+        } else {
             $data = TimesheetApproval::find($id);
         }
 
@@ -633,7 +637,7 @@ class MyTimeSheetService
 
     public function getAttendanceById($eventId = '', $userId = '')
     {
-        $data = AttendanceEvent::where([['event_id', $eventId], ['user_id', $userId]])->orderBy('created_at','DESC')->first();
+        $data = AttendanceEvent::where([['event_id', $eventId], ['user_id', $userId]])->orderBy('created_at', 'DESC')->first();
 
         return $data;
     }
@@ -641,11 +645,11 @@ class MyTimeSheetService
     public function getAttendanceByEventId($eventId = '')
     {
         $data = DB::table('attendance_event as a')
-        ->leftJoin('employment as b', 'a.user_id', '=', 'b.user_id')
-        ->select('b.employeeName', 'a.status')
-        ->where('a.event_id', $eventId)
-        ->orderBy('b.employeeName','ASC')
-        ->get();
+            ->leftJoin('employment as b', 'a.user_id', '=', 'b.user_id')
+            ->select('b.employeeName', 'a.status')
+            ->where('a.event_id', $eventId)
+            ->orderBy('b.employeeName', 'ASC')
+            ->get();
 
         return $data;
     }
@@ -655,7 +659,7 @@ class MyTimeSheetService
 
         $cond[1] = ['tenant_id', Auth::user()->tenant_id];
         if (isset($input['employee_name'])) {
-            $cond[2] = ["participant",'like', "%".$input["employee_name"]."%"];
+            $cond[2] = ["participant", 'like', "%" . $input["employee_name"] . "%"];
         }
 
         if (isset($input['event_name'])) {
@@ -663,17 +667,15 @@ class MyTimeSheetService
         }
 
         if (isset($input['date_range'])) {
-            $date_range = explode(' - ',$input['date_range']);
-            $cond[4] = ['start_date','>=', date_format(date_create($date_range[0]), 'Y-m-d')];
-            $cond[5] = ['end_date','<=', date_format(date_create($date_range[1]), 'Y-m-d')];
+            $date_range = explode(' - ', $input['date_range']);
+            $cond[4] = ['start_date', '>=', date_format(date_create($date_range[0]), 'Y-m-d')];
+            $cond[5] = ['end_date', '<=', date_format(date_create($date_range[1]), 'Y-m-d')];
         }
 
         $data = TimesheetEvent::where($cond)
-        ->get();
+            ->get();
         // pr($data);
         // pr();
         return $data;
     }
-
-
 }

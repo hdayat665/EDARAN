@@ -1,4 +1,3 @@
-
 <div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" style="max-width: 1200px">
         <div class="modal-content">
@@ -16,18 +15,19 @@
                     <div class="row mb-15px">
                         <div class="col-md-4">
                             <select class="form-select" name="customer_id">
-                                <option  label="Please Choose "></option>
-                                <?php $customers = customer() ?>
+                                <option label="Please Choose "></option>
+                                <?php $customers = customer(); ?>
                                 @foreach ($customers as $customer)
-                                    <option value="{{$customer->id}}">{{$customer->customer_name}}</option>
+                                    <option value="{{ $customer->id }}">{{ $customer->customer_name }}</option>
                                 @endforeach
                             </select>
                         </div>
                         <div class="col-md-4">
-                            <input type="text" name="project_code" class="form-control mb-5px"  />
+                            <input type="text" name="project_code" class="form-control mb-5px" />
                         </div>
                         <div class="col-md-4">
-                            <input type="text" name="project_name" class="form-control mb-5px " style="text-transform: uppercase;"  />
+                            <input type="text" name="project_name" class="form-control mb-5px "
+                                style="text-transform: uppercase;" />
                         </div>
                     </div>
                     <div class="row">
@@ -51,23 +51,23 @@
                     </div>
                     <div class="row mb-15px">
                         <div class="col-md-4">
-                            <input type="number" name="contract_value" class="form-control mb-5px"  />
+                            <input type="number" name="contract_value" class="form-control mb-5px" />
                         </div>
                         <div class="col-md-4">
                             <select class="form-select" name="contract_type">
-                                <option  label="Please Choose "></option>
-                                <?php $types = getContractType() ?>
+                                <option label="Please Choose "></option>
+                                <?php $types = getContractType(); ?>
                                 @foreach ($types as $key => $type)
-                                    <option value="{{$key}}">{{$type}}</option>
+                                    <option value="{{ $key }}">{{ $type }}</option>
                                 @endforeach
                             </select>
                         </div>
                         <div class="col-md-4">
                             <select class="form-select" name="financial_year">
-                                <option  label="Please Choose "></option>
-                                <?php $years = getFinancialYear() ?>
+                                <option label="Please Choose "></option>
+                                <?php $years = getFinancialYearForm(); ?>
                                 @foreach ($years as $key => $type)
-                                    <option value="{{$key}}">{{$type}}</option>
+                                    <option value="{{ $key }}">{{ $type }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -79,13 +79,16 @@
                     </div>
                     <div class="row mb-15px">
                         <div class="col-md-4">
-                            <input type="text" class="form-control" name="LOA_date" id="datepicker-loa" placeholder="dd/mm/yyyy" />
+                            <input type="text" class="form-control" name="LOA_date" id="datepicker-loa"
+                                placeholder="dd/mm/yyyy" />
                         </div>
                         <div class="col-md-4">
-                            <input type="text" class="form-control" name="contract_start_date" id="datepicker-start" placeholder="dd/mm/yyyy" />
+                            <input type="text" class="form-control" name="contract_start_date" id="datepicker-start"
+                                placeholder="dd/mm/yyyy" />
                         </div>
                         <div class="col-md-4">
-                            <input type="text" class="form-control" name="contract_end_date" id="datepicker-end" placeholder="dd/mm/yyyy" />
+                            <input type="text" class="form-control" name="contract_end_date" id="datepicker-end"
+                                placeholder="dd/mm/yyyy" />
                         </div>
                     </div>
                     <div class="row">
@@ -97,17 +100,19 @@
                         <div class="col-md-4">
                             <select class="form-select" name="acc_manager">
                                 <option value="" label="Please Choose "></option>
-                                <?php $getEmployees = getEmployee() ?>
+                                <?php $getEmployees = getEmployee(); ?>
                                 @foreach ($getEmployees as $getEmployee)
-                                    <option value="{{$getEmployee->id}}">{{$getEmployee->employeeName}}</option>
+                                    <option value="{{ $getEmployee->id }}">{{ $getEmployee->employeeName }}</option>
                                 @endforeach
                             </select>
                         </div>
                         <div class="col-md-4">
-                            <input type="text" class="form-control" name="warranty_start_date" id="datepicker-warstart" placeholder="dd/mm/yyyy" />
+                            <input type="text" class="form-control" name="warranty_start_date"
+                                id="datepicker-warstart" placeholder="dd/mm/yyyy" />
                         </div>
                         <div class="col-md-4">
-                            <input type="text" class="form-control" id="datepicker-warend" name="warranty_end_date" placeholder="dd/mm/yyyy" />
+                            <input type="text" class="form-control" id="datepicker-warend"
+                                name="warranty_end_date" placeholder="dd/mm/yyyy" />
                         </div>
                     </div>
                     <div class="row">
@@ -120,7 +125,8 @@
                             <input type="number" class="form-control mb-5px" name="bank_guarantee_amount" />
                         </div>
                         <div class="col-md-4">
-                            <input type="text" class="form-control" id="datepicker-bankexpiry" name="bank_guarantee_expiry_date" placeholder="dd/mm/yyyy" />
+                            <input type="text" class="form-control" id="datepicker-bankexpiry"
+                                name="bank_guarantee_expiry_date" placeholder="dd/mm/yyyy" />
                         </div>
                         <div class="col-md-4">
                             <select class="form-select" name="status">
