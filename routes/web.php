@@ -215,6 +215,21 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('/unitByDepartmentId/{departmentId}', 'unitByDepartmentId');
             Route::get('/branchByUnitId/{unitId}', 'branchByUnitId');
             Route::get('/getActivityNamesById/{id}', 'getActivityNamesById');
+
+            // eclaim
+            Route::get('/setting/eclaimGeneralView', 'eclaimGeneralView');
+            Route::get('/setting/eclaimDateView', 'eclaimDateView');
+            Route::get('/setting/eclaimCategoryView', 'eclaimCategoryView');
+            Route::get('/setting/eclaimEntitleGroupView', 'eclaimEntitleGroupView');
+            Route::get('/setting/cashAdvanceView', 'cashAdvanceView');
+            Route::get('/setting/approvalConfigView', 'approvalConfigView');
+            Route::get('/setting/approvalRoleView', 'approvalRoleView');
+            Route::get('/setting/addClaimView', 'addClaimView');
+            Route::get('/setting/editClaimView', 'editClaimView');
+            Route::get('/setting/addClaimView', 'addClaimView');
+            Route::get('/setting/editClaimView', 'editClaimView');
+            Route::get('/setting/eclaimEntitleGroupAddView', 'eclaimEntitleGroupAddView');
+            Route::get('/setting/eclaimEntitleGroupEditView', 'eclaimEntitleGroupEditView');
         });
 
         Route::controller(OrganizationController::class)->group(function () {
