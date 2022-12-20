@@ -1229,4 +1229,11 @@ class SettingService
 
         return $data;
     }
+
+    public function eclaimGeneralView()
+    {
+        // $data = ActivityLogs::where([['tenant_id', Auth::user()->tenant_id], ['logs_id', $id]])->get();
+
+        return [];
+    }
 }

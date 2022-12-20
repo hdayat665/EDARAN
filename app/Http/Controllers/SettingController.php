@@ -461,7 +461,7 @@ class SettingController extends Controller
 
         $result = $ss->jobGradeView();
 
-        return view('pages.setting.jobGrade',$result);
+        return view('pages.setting.jobGrade', $result);
     }
 
     public function newsView()
@@ -678,5 +678,104 @@ class SettingController extends Controller
         $result = $ss->getActivityNamesById($id);
 
         return $result;
+    }
+
+    public function eclaimGeneralView()
+    {
+        $ss = new SettingService;
+
+        $result['datas'] = $ss->eclaimGeneralView();
+
+        return view('pages.setting.eclaim.eclaimGeneral', $result);
+    }
+
+    public function eclaimCategoryView()
+    {
+        $ss = new SettingService;
+
+        $result['datas'] = $ss->eclaimGeneralView();
+
+        return view('pages.setting.eclaim.eclaimCategory', $result);
+    }
+
+    public function eclaimEntitleGroupView()
+    {
+        $ss = new SettingService;
+
+        $result['datas'] = $ss->eclaimGeneralView();
+
+        return view('pages.setting.eclaim.eclaimEntitleGroup', $result);
+    }
+
+    public function eclaimEntitleGroupAddView()
+    {
+        $ss = new SettingService;
+
+        $result['datas'] = $ss->eclaimGeneralView();
+
+        return view('pages.setting.eclaim.addEntitle', $result);
+    }
+
+    public function eclaimEntitleGroupEditView()
+    {
+        $ss = new SettingService;
+
+        $result['datas'] = $ss->eclaimGeneralView();
+
+        return view('pages.setting.eclaim.editEntitle', $result);
+    }
+
+    public function cashAdvanceView()
+    {
+        $ss = new SettingService;
+
+        $result['datas'] = $ss->eclaimGeneralView();
+
+        return view('pages.setting.eclaim.eclaimCashAdvance', $result);
+    }
+
+    public function approvalConfigView()
+    {
+        $ss = new SettingService;
+
+        $result['datas'] = $ss->eclaimGeneralView();
+
+        return view('pages.setting.eclaim.eclaimApprovalConfig', $result);
+    }
+
+    public function approvalRoleView()
+    {
+        $ss = new SettingService;
+
+        $result['datas'] = $ss->eclaimGeneralView();
+
+        return view('pages.setting.eclaim.eclaimApprovalRole', $result);
+    }
+
+    public function addClaimView()
+    {
+        $ss = new SettingService;
+
+        $result['datas'] = $ss->eclaimGeneralView();
+
+        return view('pages.setting.eclaim.addClaim', $result);
+    }
+
+    public function editClaimView()
+    {
+        $ss = new SettingService;
+
+        $result['datas'] = $ss->eclaimGeneralView();
+
+        return view('pages.setting.eclaim.editClaim', $result);
+    }
+
+    public function eclaimDateView()
+    {
+        $ss = new SettingService;
+
+        $result['datas'] = $ss->eclaimGeneralView();
+
+        return view('pages.setting.eclaim.eclaimDate', $result);
     }
 }
