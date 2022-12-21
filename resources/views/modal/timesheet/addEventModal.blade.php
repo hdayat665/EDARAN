@@ -16,38 +16,38 @@
                     <div class="row p-2">
                         <div class="col-sm-6">
                             <label for="lastname" class="form-label">Start Date*</label>
-                            <div class="input-group">
+                            <div class="">
                                 <input type="text" class="form-control" name="start_date" id="starteventdate" />
-                                <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                <!-- <div class="input-group-text"><i class="fa fa-calendar"></i></div> -->
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <label for="lastname" class="form-label">End Date*</label>
-                            <div class="input-group">
+                            <div class="">
                                 <input type="text" class="form-control" name="end_date" id="endeventdate" />
-                                <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                <!-- <div class="input-group-text"><i class="fa fa-calendar"></i></div> -->
                             </div>
                         </div>
                     </div>
                     <div class="row p-2">
                         <div class="col-sm-6">
                             <label for="issuing-country" class="form-label">Start Time*</label>
-                            <div class="input-group">
+                            <div class="">
                                 <input id="starteventtime" type="text" name="start_time" class="form-control" value="00:00 AM"/>
-                                <div class="input-group-text"><i class="fa fa-clock"></i></div>
+                                <!-- <div class="input-group-text"><i class="fa fa-clock"></i></div> -->
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <label for="issuing-country" class="form-label">End Time*</label>
-                            <div class="input-group">
+                            <div class="">
                                 <input id="endeventtime" type="text" name="end_time" class="form-control" value="00:00 AM"/>
-                                <div class="input-group-text"><i class="fa fa-clock"></i></div>
+                                <!-- <div class="input-group-text"><i class="fa fa-clock"></i></div> -->
                             </div>
                         </div>
                     </div>
                     <div class="row p-2">
                         <div class="col-sm-3">
-                            <label for="issuing-country" class="form-label">Duration</label>
+                            <label for="issuing-country" class="form-label">Duration*</label>
                             <select class="form-select" id="" name="duration" aria-label="Default select example">
                                 <option class="form-label" value="" selected>Please Select</option>
                                 <option class="form-label" value="1">30 Minute</option>
@@ -178,6 +178,9 @@
                                 <option class="form-label" value="26">26</option>
                                 <option class="form-label" value="27">27</option>
                                 <option class="form-label" value="28">28</option>
+                                <option class="form-label" value="29">29</option>
+                                <option class="form-label" value="30">30</option>
+                                <option class="form-label" value="31">31</option>
                             </select>
                         </div>
                     </div>
@@ -215,6 +218,34 @@
                                 <option class="form-label" value="" selected>Please Select</option>
                                 <option class="form-label" value="1">1 </option>
                                 <option class="form-label" value="2">2</option>
+                                <option class="form-label" value="3">3</option>
+                                <option class="form-label" value="4">4</option>
+                                <option class="form-label" value="5">5</option>
+                                <option class="form-label" value="6">6</option>
+                                <option class="form-label" value="7">7</option>
+                                <option class="form-label" value="8">8</option>
+                                <option class="form-label" value="9">9</option>
+                                <option class="form-label" value="10">10</option>
+                                <option class="form-label" value="11">11</option>
+                                <option class="form-label" value="12">12</option>
+                                <option class="form-label" value="13">13</option>
+                                <option class="form-label" value="14">14</option>
+                                <option class="form-label" value="15">15</option>
+                                <option class="form-label" value="16">16</option>
+                                <option class="form-label" value="17">17</option>
+                                <option class="form-label" value="18">18</option>
+                                <option class="form-label" value="19">19</option>
+                                <option class="form-label" value="20">20</option>
+                                <option class="form-label" value="21">21</option>
+                                <option class="form-label" value="22">22</option>
+                                <option class="form-label" value="23">23</option>
+                                <option class="form-label" value="24">24</option>
+                                <option class="form-label" value="25">25</option>
+                                <option class="form-label" value="26">26</option>
+                                <option class="form-label" value="27">27</option>
+                                <option class="form-label" value="28">28</option>
+                                <option class="form-label" value="29">29</option>
+                                <option class="form-label" value="30">30</option>
                                 <option class="form-label" value="31">31</option>
                             </select>
                         </div>
@@ -225,7 +256,7 @@
                             <div class="form-control">
                                 <div class="form-check">
                                     <input class="form-check-input" id="ontheyearlycheck" type="checkbox"  name="inlineRadioOptions" >
-                                    <label class="form-check-label" >On The</label>
+                                    <label class="form-check-label">On The</label>
                                 </div>
                             </div>
                         </div>
@@ -262,10 +293,15 @@
                                 <option class="form-label" value="1">January </option>
                                 <option class="form-label" value="2">February</option>
                                 <option class="form-label" value="3">March</option>
-                                <option class="form-label" value="4">May</option>
-                                <option class="form-label" value="5">Jun</option>
-                                <option class="form-label" value="6">July</option>
-                                <option class="form-label" value="7">August</option>
+                                <option class="form-label" value="4">April </option>
+                                <option class="form-label" value="5">May</option>
+                                <option class="form-label" value="6">Jun</option>
+                                <option class="form-label" value="7">July</option>
+                                <option class="form-label" value="8">August</option>
+                                <option class="form-label" value="9">September</option>
+                                <option class="form-label" value="10">October</option>
+                                <option class="form-label" value="11">November</option>
+                                <option class="form-label" value="12">December</option>
                             </select>
                         </div>
                     </div>
@@ -315,13 +351,13 @@
                             </select>
                         </div>
                         <div class="col-sm-6" id="locationByProjectAddEventShow">
-                            <label for="issuing-country" class="form-label">Location</label>
+                            <label for="issuing-country" class="form-label">Location*</label>
                             <select class="selectpicker form-select" id="location_by_project_add" name="location_by_project" aria-label="Default select example">
 
                             </select>
                         </div>
                         <div class="col-sm-6">
-                            <label for="issuing-country" class="form-label">Project*</label>
+                            <label for="issuing-country" class="form-label">Project</label>
                             <select class="selectpicker form-select" name="project_id" id="addneweventselectproject" aria-label="Default select example">
                                 <option class="form-label" value="">Please Select</option>
                                 <?php $projects = project() ?>
@@ -343,7 +379,7 @@
                             </select>
                         </div>
                         <div class="col-sm-6">
-                            <label for="issuing-country" class="form-label">Description*</label>
+                            <label for="issuing-country" class="form-label">Description</label>
                             <textarea class="form-control" rows="3" name="desc"></textarea>
                         </div>
                     </div>

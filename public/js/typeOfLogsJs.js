@@ -148,20 +148,14 @@ $(document).ready(function() {
                 department: "required",
                 type_of_log: "required",
                 // project_id: "required",
-                activity_name: "required",
-                // financial_year: "required",
-                // LOA_date: "required",
-                // contract_start_date: "required",
-                // contract_end_date: "required",
-                // acc_manager: "required",
-                // bank_guarantee_amount: "required",
+                // activity_name: "required",
             },
 
             messages: {
-                department: "",
-                type_of_log: "",
-                // project_id: "",
-                activity_name: "",
+                department: "Please Choose Department",
+                type_of_log: "Please Choose Type of Logs",
+                // project_id: "Please Enter Project Name",
+                // activity_name: "At Least 1 Activity are required",
             },
             submitHandler: function(form) {
                 requirejs(['sweetAlert2'], function(swal) {
@@ -208,13 +202,15 @@ $(document).ready(function() {
             rules: {
                 department: "required",
                 type_of_log: "required",
+                project_id: "required",
                 activity_name: "required",
             },
 
             messages: {
-                department: "",
-                type_of_log: "",
-                activity_name: "",
+                department: "Please Choose Department",
+                type_of_log: "Please Choose Type of Logs",
+                project_id: "Please Enter Project Name",
+                activity_name: "At Least 1 Activity are required",
             },
             submitHandler: function(form) {
                 requirejs(['sweetAlert2'], function(swal) {

@@ -18,7 +18,7 @@
                         </select>
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">Type of Log* </label>
+                        <label class="form-label">Type of Log*</label>
                         <select class="form-select" id="addtypeoflog" name="type_of_log" aria-label="Default select example">
                             <option class="form-label" value="" selected>Select Type of Log</option>
                             <option class="form-label" value="Non-Project" >Non-Project</option>
@@ -26,9 +26,9 @@
                         </select>
                     </div>
                     <div class="mb-3" id="addtypeoflogproject" style="display:none">
-                        <label class="form-label">Project* </label>
+                        <label class="form-label">Project Name*</label>
                         <select class="form-select" id="" name="project_id" aria-label="Default select example">
-                            <?php $projects = project() ?>
+                            <?php $projects = project()?>
                             <option class="form-label" value="">Select Project</option>
                             @foreach ($projects as $project)
                             <option value="{{$project->id}}">{{$project->project_name}}</option>
@@ -36,7 +36,7 @@
                         </select>
                     </div>
                     <div class="row p-2">
-                        <div class="col-sm-10" id="" >
+                        <div class="col-sm-10" id="">
                             <label for="firstname" class="form-label">Activity Name*</label>
                             <input type="text" id="addtypelogactivityName" placeholder="Name" class="form-control">
 

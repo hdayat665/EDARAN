@@ -1142,7 +1142,7 @@ class SettingService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success create type of logs';
+        $data['msg'] = 'Successfully create type of logs';
 
         return $data;
     }
@@ -1170,7 +1170,7 @@ class SettingService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success update role';
+        $data['msg'] = 'Success update type of log';
 
         return $data;
     }
@@ -1190,7 +1190,7 @@ class SettingService
             $data['status'] = config('app.response.success.status');
             $data['type'] = config('app.response.success.type');
             $data['title'] = config('app.response.success.title');
-            $data['msg'] = 'Success delete log';
+            $data['msg'] = 'Successfully delete type of log';
         }
 
         return $data;

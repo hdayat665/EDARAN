@@ -20,15 +20,15 @@
                         </div>
                         <div class="col-sm-6">
                             <label for="lastname" class="form-label">Date*</label>
-                            <div class="input-group">
+                            <div class="">
                                 <input type="text" class="form-control" name="date" id="dateaddlog" />
-                                <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                <!-- <div class="input-group-text"><i class="fa fa-calendar"></i></div> -->
                             </div>
                         </div>
                     </div>
                     <div class="row p-2">
                         <div class="col-sm-6" id="officelog" style="display:none">
-                            <label for="Office-Log" class="form-label">Office Log</label>
+                            <label for="Office-Log" class="form-label">Office Log*</label>
                             <select class="form-select" id="officelog2" name="office_log" aria-label="Default select example">
                                 <option class="form-label" value="" selected>Please Select</option>
                                 <option class="form-label" value="1">My Project</option>
@@ -36,7 +36,7 @@
                             </select>
                         </div>
                         <div class="col-sm-6" id="myproject" style="display:none">
-                            <label for="Office-Log" class="form-label">My Project</label>
+                            <label for="Office-Log" class="form-label">My Project*</label>
                             <select class="form-select" id="myProject" name="project_id" aria-label="Default select example">
                                 <option class="form-label" value="">List all project</option>
                                 <?php $projects = project_member($user_id) ?>
@@ -48,7 +48,7 @@
                     </div>
                     <div class="row p-2">
                         <div class="col-sm-6" id="listproject" style="display:none">
-                            <label for="Office-Log" class="form-label">My Project</label>
+                            <label for="Office-Log" class="form-label">My Project*</label>
                             <select class="form-select" id="officeLogProject" name="office_log_project" aria-label="Default select example">
                                 <option class="form-label" value="">List all project</option>
                                 <?php $projects = project_member($user_id) ?>
@@ -60,7 +60,7 @@
                     </div>
                     <div class="row p-2">
                         <div class="col-sm-6" id="activityByProjectHide">
-                            <label for="issuing-country" class="form-label">Activity Name</label>
+                            <label for="issuing-country" class="form-label">Activity Name*</label>
                             <select class="form-select" id="" name="activity_name">
                                 <option class="form-label" value="">List All Activity Name</option>
                                 <?php $activitys = activityName($department_id) ?>
@@ -70,24 +70,24 @@
                             </select>
                         </div>
                         <div class="col-sm-6" id="activityByProjectShow">
-                            <label for="issuing-country" class="form-label">Activity Name</label>
+                            <label for="issuing-country" class="form-label">Activity Name*</label>
                             <select class="form-select" id="activityOffice" name="activity_office" >
 
                             </select>
                         </div>
                         <div class="col-sm-6">
-                            <label for="issuing-country" class="form-label">Start Time</label>
+                            <label for="issuing-country" class="form-label">Start Time*</label>
                             <div class="input-group">
                                 <input id="starttime" type="text" name="start_time" class="form-control" />
-                                <div class="input-group-text"><i class="fa fa-clock"></i></div>
+                                <!-- <div class="input-group-text"><i class="fa fa-clock"></i></div> -->
                             </div>
                         </div>
                     </div>
                     <div class="row p-2">
                         <div class="col-sm-6" id="locationByProjectHide">
-                            <label for="issuing-country" class="form-label">Project Location</label>
+                            <label for="issuing-country" class="form-label">Project Location*</label>
                             <select class="selectpicker form-select" id="projectlocsearch" name="project_location" aria-label="Default select example">
-                                <option class="form-label" value="">List All Project location</option>
+                                <option value="" selected>List All Project location</option>
                                 <?php $projectLocations = projectLocation() ?>
                                 @foreach ($projectLocations as $projectLocation)
                                 <option value="{{$projectLocation->id}}">{{$projectLocation->location_name}}</option>
@@ -95,16 +95,16 @@
                             </select>
                         </div>
                         <div class="col-sm-6" id="locationByProjectShow">
-                            <label for="issuing-country" class="form-label">Project Location</label>
+                            <label for="issuing-country" class="form-label">Project Location*</label>
                             <select class="selectpicker form-select" id="projectLocationOffice" name="project_location_office" aria-label="Default select example">
 
                             </select>
                         </div>
                         <div class="col-sm-6 ">
-                            <label for="issuing-country" class="form-label">End Time</label>
+                            <label for="issuing-country" class="form-label">End Time*</label>
                             <div class="input-group">
                                 <input id="endtime" type="text" name="end_time" class="form-control" />
-                                <div class="input-group-text"><i class="fa fa-clock"></i></div>
+                                <!-- <div class="input-group-text"><i class="fa fa-clock"></i></div> -->
                             </div>
                         </div>
                     </div>
