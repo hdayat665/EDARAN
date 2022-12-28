@@ -684,7 +684,7 @@ class SettingController extends Controller
     {
         $ss = new SettingService;
 
-        $result['datas'] = $ss->eclaimGeneralView();
+        $result['subsistances'] = $ss->eclaimGeneralView();
 
         return view('pages.setting.eclaim.eclaimGeneral', $result);
     }
@@ -693,16 +693,16 @@ class SettingController extends Controller
     {
         $ss = new SettingService;
 
-        $result['datas'] = $ss->eclaimGeneralView();
+        $result['claimCategorys'] = $ss->eclaimCategoryView();
 
-        return view('pages.setting.eclaim.eclaimCategory', $result);
+        return view('pages.setting.eclaim.`eclaimCategory`', $result);
     }
 
     public function eclaimEntitleGroupView()
     {
         $ss = new SettingService;
 
-        $result['datas'] = $ss->eclaimGeneralView();
+        $result['entitles'] = $ss->eclaimEntitleGroupView();
 
         return view('pages.setting.eclaim.eclaimEntitleGroup', $result);
     }
@@ -712,15 +712,20 @@ class SettingController extends Controller
         $ss = new SettingService;
 
         $result['datas'] = $ss->eclaimGeneralView();
+        $result['subsistances'] = $ss->eclaimGeneralView();
+        $result['claimCategorys'] = $ss->eclaimCategoryView();
 
         return view('pages.setting.eclaim.addEntitle', $result);
     }
 
-    public function eclaimEntitleGroupEditView()
+    public function eclaimEntitleGroupEditView($id = '')
     {
         $ss = new SettingService;
 
-        $result['datas'] = $ss->eclaimGeneralView();
+        $result['entitys'] = $ss->eclaimEntitleGroupEditView($id);
+        $result['transports'] = $ss->getTransportMillage($id);
+        $result['claimCategorys'] = $ss->eclaimCategoryView();
+        $result['subsistances'] = $ss->eclaimGeneralView();
 
         return view('pages.setting.eclaim.editEntitle', $result);
     }
@@ -747,7 +752,8 @@ class SettingController extends Controller
     {
         $ss = new SettingService;
 
-        $result['datas'] = $ss->eclaimGeneralView();
+        $result['datas'] = $ss->approvalRoleView();
+        $result['companys'] = getCompany();
 
         return view('pages.setting.eclaim.eclaimApprovalRole', $result);
     }
@@ -756,18 +762,44 @@ class SettingController extends Controller
     {
         $ss = new SettingService;
 
-        $result['datas'] = $ss->eclaimGeneralView();
-
-        return view('pages.setting.eclaim.addClaim', $result);
+        return view('pages.setting.eclaim.addClaim');
     }
 
-    public function editClaimView()
+    public function createClaimCategory(Request $r)
     {
         $ss = new SettingService;
 
-        $result['datas'] = $ss->eclaimGeneralView();
+        $result = $ss->createClaimCategory($r);
+
+        return response()->json($result);
+    }
+
+    public function updateClaimCategory(Request $r, $id)
+    {
+        $ss = new SettingService;
+
+        $result = $ss->updateClaimCategory($r, $id);
+
+        return response()->json($result);
+    }
+
+    public function editClaimView($id = '')
+    {
+        $ss = new SettingService;
+
+        $result['claimCategory'] = $ss->editClaimView($id);
+        // dd($result);
 
         return view('pages.setting.eclaim.editClaim', $result);
+    }
+
+    public function claimCatById($id = '')
+    {
+        $ss = new SettingService;
+
+        $result = $ss->editClaimView($id);
+
+        return response()->json($result);
     }
 
     public function eclaimDateView()
@@ -777,5 +809,102 @@ class SettingController extends Controller
         $result['datas'] = $ss->eclaimGeneralView();
 
         return view('pages.setting.eclaim.eclaimDate', $result);
+    }
+
+    public function getEclaimGeneralById($id = '')
+    {
+        $ss = new SettingService;
+
+        $result = $ss->getEclaimGeneralById($id);
+
+        return $result;
+    }
+
+    public function createSubsistance(Request $r)
+    {
+        $ss = new SettingService;
+
+        $result = $ss->createSubsistance($r);
+
+        return response()->json($result);
+    }
+
+    public function updateSubsistance(Request $r, $id)
+    {
+        $ss = new SettingService;
+
+        $result = $ss->updateSubsistance($r, $id);
+
+        return response()->json($result);
+    }
+
+    public function deleteClaimCategory($id)
+    {
+        $ss = new SettingService;
+
+        $result = $ss->deleteClaimCategory($id);
+
+        return response()->json($result);
+    }
+
+    public function createEntitleGroup(Request $r)
+    {
+        $ss = new SettingService;
+
+        $result = $ss->createEntitleGroup($r);
+
+        return response()->json($result);
+    }
+
+    public function updateEntitleGroup(Request $r, $id)
+    {
+        $ss = new SettingService;
+
+        $result = $ss->updateEntitleGroup($r, $id);
+
+        return response()->json($result);
+    }
+
+    public function updateStatusEntitleGroup($id, $status)
+    {
+        $ss = new SettingService;
+
+        $result = $ss->updateStatusEntitleGroup($id, $status);
+
+        return response()->json($result);
+    }
+
+    public function deleteEntitleGroup($id)
+    {
+        $ss = new SettingService;
+
+        $result = $ss->deleteEntitleGroup($id);
+
+        return response()->json($result);
+    }
+
+    public function createGeneralApprover(Request $r)
+    {
+        $ss = new SettingService;
+
+        $result = $ss->createGeneralApprover($r);
+
+        return response()->json($result);
+    }
+
+    public function getUserByRole($id = '')
+    {
+        $result = getUserByRole($id);
+        // pr($result->userProfile->id);
+        return response()->json($result);
+    }
+
+    public function createDomainList(Request $r)
+    {
+        $ss = new SettingService;
+
+        $result = $ss->createDomainList($r);
+
+        return response()->json($result);
     }
 }

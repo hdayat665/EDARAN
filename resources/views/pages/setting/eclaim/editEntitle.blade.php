@@ -1,17 +1,13 @@
 @extends('layouts.dashboardTenant')
 @section('content')
     <div id="content" class="app-content">
-        <!-- BEGIN breadcrumb -->
-        <!-- BEGIN breadcrumb -->
-        <!-- END breadcrumb -->
-        <!-- BEGIN page-header -->
-        <h1 class="page-header">Settings | Update Entitlement Group</h1>
-        <div class="panel panel">
-            <div class="panel-body">
-                <div class="row p-2">
-                    <h3>Update Entitlement Group</h3>
-                </div>
-                <form>
+        <form id="editForm">
+            <h1 class="page-header">Settings | Update Entitlement Group</h1>
+            <div class="panel panel" id="entitleJs">
+                <div class="panel-body">
+                    <div class="row p-2">
+                        <h3>Update Entitlement Group</h3>
+                    </div>
                     <div class="form-control">
                         <div class="row p-2">
                             <div class="col mb-6">
@@ -19,17 +15,24 @@
                                     <label for="entitlementgroupname" class="col-sm col-form-label">Entitlement Group
                                         Name*</label>
                                     <div class="col">
-                                        <input type="text" class="form-control" name="entitlementgroupname"
-                                            id="entitlement_groupname" placeholder="Entitlement Group Name">
+                                        <input type="text" class="form-control" name="group_name"
+                                            value="{{ $entitys['group_name'] }}" id="entitlement_groupname"
+                                            placeholder="Entitlement Group Name">
+                                        <input type="hidden" id="idEG" value="{{ $entitys['id'] }}">
                                     </div>
                                 </div>
                                 <br>
                                 <div class="row">
                                     <label for="jobgrade" class="col-sm col-form-label">Job Grade*</label>
                                     <div class="col">
-                                        <select class="form-select" name="" id=""
+                                        <select class="form-select" name="job_grade" id=""
                                             aria-label="Disabled select example" id="">
-                                            <option selected>Please Select</option>
+                                            <option value="">Please Select</option>
+                                            <?php $jobGrades = getJobGrade(); ?>
+                                            @foreach ($jobGrades as $jobGrade)
+                                                <option {{ $entitys['job_grade'] == $jobGrade->id ? 'selected' : '' }}
+                                                    value="{{ $jobGrade->id }}">{{ $jobGrade->jobGradeName }}</option>
+                                            @endforeach
                                         </select>
                                     </div>
                                 </div>
@@ -40,20 +43,25 @@
                                     </div>
                                     <div class="col">
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="Local" id="flexRadioF"
-                                                checked>
+                                            <input class="form-check-input"
+                                                {{ $entitys['local_travel'] == 'F' ? 'checked' : '' }} type="radio"
+                                                name="local_travel" id="flexRadioF" value="F" checked>
                                             <label class="form-check-label" for="flexRadioF">
                                                 F- First Class
                                             </label>
                                         </div>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="Local" id="flexRadioC">
+                                            <input class="form-check-input" type="radio"
+                                                {{ $entitys['local_travel'] == 'C' ? 'checked' : '' }} value="C"
+                                                name="local_travel" id="flexRadioC">
                                             <label class="form-check-label" for="flexRadioC">
                                                 C- Business Class
                                             </label>
                                         </div>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="Local" id="flexRadioY">
+                                            <input class="form-check-input"
+                                                type="radio"{{ $entitys['local_travel'] == 'Y' ? 'checked' : '' }}
+                                                value="Y" name="local_travel" id="flexRadioY">
                                             <label class="form-check-label" for="flexRadioY">
                                                 Y - First Class
                                             </label>
@@ -67,20 +75,25 @@
                                     </div>
                                     <div class="col">
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="Overseas" id="flexRadioOF">
+                                            <input class="form-check-input" type="radio" value="F"
+                                                {{ $entitys['oversea_travel'] == 'F' ? 'checked' : '' }}
+                                                name="oversea_travel" id="flexRadioOF">
                                             <label class="form-check-label" for="flexRadioOF">
                                                 F- First Class
                                             </label>
                                         </div>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="Overseas" id="flexRadioOC"
-                                                checked>
+                                            <input class="form-check-input" type="radio" value="C"
+                                                {{ $entitys['oversea_travel'] == 'C' ? 'checked' : '' }}
+                                                name="oversea_travel" id="flexRadioOC" checked>
                                             <label class="form-check-label" for="flexRadioOC">
                                                 C- Business Class
                                             </label>
                                         </div>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="Overseas" id="flexRadioOY">
+                                            <input class="form-check-input" type="radio" value="Y"
+                                                {{ $entitys['oversea_travel'] == 'Y' ? 'checked' : '' }}
+                                                name="oversea_travel" id="flexRadioOY">
                                             <label class="form-check-label" for="flexRadioOY">
                                                 Y - First Class
                                             </label>
@@ -93,59 +106,111 @@
                                     <label for="localhotela" class="col-sm-3 col-form-label">Local Hotel
                                         Allowance</label>
                                     <div class="col-sm-3">
-                                        <select class="form-select" name="localhotela" id="ulocalhotela"
+                                        <select class="form-select" name="local_hotel_allowance" id="ulocalhotela"
                                             aria-label="Disabled select example">
-                                            <option selected value="0">None</option>
-                                            <option value="1">Actual</option>
-                                            <option value="2">Input Value</option>
+                                            <option value="0">None</option>
+                                            <option {{ $entitys['local_hotel_allowance'] == '1' ? 'selected' : '' }}
+                                                value="1">Actual</option>
+                                            <option {{ $entitys['local_hotel_allowance'] == '2' ? 'selected' : '' }}
+                                                value="2">Input Value</option>
                                         </select>
                                     </div>
-                                    <div class="col-sm-3" style="display: none" id="ulocalhoteli">
-                                        <input type="text" class="form-control" id="" name=""
-                                            value="">
+                                    <div class="col-sm-3"
+                                        {{ $entitys['local_hotel_allowance'] == 1 ? 'style=display:none' : '' }}
+                                        id="ulocalhoteli">
+                                        <input type="text" value="{{ $entitys['local_hotel_value'] }}"
+                                            class="form-control" id="ulocalhotelval" name="local_hotel_value"
+                                            value="{{ $entitys['local_hotel_value'] }}">
                                     </div>
                                 </div>
                                 <br>
-                                <div class="row"> <label for="lodgingallowance" class="col-sm-3 col-form-label">Lodging
+                                <div class="row"> <label for="lodgingallowance"
+                                        class="col-sm-3 col-form-label">Lodging
                                         Allowance</label>
                                     <div class="col-sm-3">
-                                        <select class="form-select" name="" id="ulodgingallowance"
+                                        <select class="form-select" name="lodging_allowance" id="ulodginghotela"
                                             aria-label="Disabled select example">
-                                            <option selected value="0">None</option>
-                                            <option value="1">Actual</option>
-                                            <option value="2">Input Value</option>
+                                            <option value="0">None</option>
+                                            <option {{ $entitys['lodging_allowance'] == '1' ? 'selected' : '' }}
+                                                value="1">Actual</option>
+                                            <option {{ $entitys['lodging_allowance'] == '2' ? 'selected' : '' }}
+                                                value="2">Input Value</option>
                                         </select>
                                     </div>
-                                    <div class="col-sm-3" style="display: none" id="ulodginghoteli">
-                                        <input type="text" class="form-control" id="" name=""
-                                            value="">
+                                    <div class="col-sm-3"
+                                        {{ $entitys['lodging_allowance'] == 1 ? 'style=display:none' : '' }}
+                                        id="ulodginghoteli">
+                                        <input type="text" class="form-control" id="lodging_allowance_val"
+                                            value="{{ $entitys['lodging_allowance_value'] }}"
+                                            name="lodging_allowance_value" value="">
                                     </div>
                                 </div>
                                 <br>
-                                <div class="row">
-                                    <label for="carmileage" class="col-sm-3 col-form-label">Car Mileage Claim*
-                                        <i class="fa fa-question-circle" style="color:rgba(0, 81, 255, 0.904)"
-                                            data-toggle="tooltip1"
-                                            title="Mileage claim  for own car only & with prior approval&#010; from supervisor.&#010; if leave blank KM field, it will assume as no limit.&#010; Click the &quot;+&quot; button to add the subsequent KM and rate.&#010;Click the &quot;-&quot; button to remove the subsequent KM and rate"></i></label>
-                                    <div class="col-sm-3">
-                                        <input type="text" class="form-control" name="carmileagecharge"
-                                            id="car_mileagecharge" value="0.7">
+                                @if ($transports)
+                                    <div class="row">
+                                        @foreach ($transports as $item)
+                                            @if ($item['type'] == 'car')
+                                                <label for="carmileage" class="col-sm-3 col-form-label">Car Mileage
+                                                    Claim*
+                                                    <i class="fa fa-question-circle" style="color:rgba(0, 81, 255, 0.904)"
+                                                        data-toggle="tooltip1"
+                                                        title="{{ config('app.entitle-group.car') }}">
+                                                    </i></label>
+                                                <div class="col-sm-3">
+                                                    <input type="text" class="form-control" id="car_mileagecharge"
+                                                        name="car_price[]" value="{{ $item['price'] }}">
+                                                    <input type="hidden" name="car_id[]" value="{{ $item['id'] }}">
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <input type="text" class="form-control" id="car_mileagekm"
+                                                        name="car_km[]" value="{{ $item['km'] }}">
+                                                </div>
+                                                <div class="col">
+                                                    <h5 class="form-control" id="km1" aria-readonly="true">KM
+                                                    </h5>
+                                                </div>
+                                                {{-- <div class="col">
+                                                    <button id="plusbtn" type="button"><i class="fa fa-plus"></i>
+                                                    </button>
+                                                    <button id="minusbtn" type="button" style="display: none;"><i
+                                                            class="fa fa-minus"></i> </button>
+                                                </div> --}}
+                                                <br>
+                                            @endif
+                                        @endforeach
                                     </div>
-                                    <div class="col-sm-3">
-                                        <input type="text" class="form-control" id="car_mileagekm"
-                                            name="carmileagekm" value="700">
+                                    <div class="row">
+                                        @foreach ($transports as $item)
+                                            @if ($item['type'] == 'motor')
+                                                <label for="staticEmail" class="col-sm-3 col-form-label">Motorcycle
+                                                    Mileage <i class="fa fa-question-circle"
+                                                        style="color:rgba(0, 81, 255, 0.904)" data-toggle="tooltip2"
+                                                        title="{{ config('app.entitle-group.motor') }}"></i>
+                                                    claim* </label>
+                                                <div class="col-sm-3">
+                                                    <input type="text" class="form-control" name="motor_price[]"
+                                                        id="mileagemcharge" value="{{ $item['price'] }}">
+                                                    <input type="hidden" name="motor_id[]" value="{{ $item['id'] }}">
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <input type="text" class="form-control" name="motor_km[]"
+                                                        id="mileagemkm" value="{{ $item['km'] }}">
+                                                </div>
+                                                <div class="col">
+                                                    <h5 class="form-control" id="mkm1" aria-readonly="true">KM
+                                                    </h5>
+                                                </div>
+                                                {{-- <div class="col">
+                                            <button id="plusmbtn" type="button"><i class="fa fa-plus"
+                                                    aria-hidden="true"></i> </button>
+                                            <button id="minusmbtn" style="display: none;" type="button"><i
+                                                    class="fa fa-minus"></i> </button>
+                                        </div> --}}
+                                            @endif
+                                        @endforeach
                                     </div>
-                                    <div class="col">
-                                        <h5 class="form-control" id="ukm1" aria-readonly="true">KM</h5>
-                                    </div>
-                                    <div class="col">
-                                        <button id="uplusbtn" type="button"><i class="fa fa-plus"></i>
-                                        </button>
-                                        <button id="uminusbtn" type="button" style="display: none;"><i
-                                                class="fa fa-minus"></i> </button>
-                                    </div>
-                                </div> <br>
-                                <div class="row">
+                                @endif
+                                {{-- <div class="row">
                                     <label for="carmileage1" class="col-sm-3 col-form-label"></label>
                                     <div class="col-sm-3">
                                         <input style="display: none;" type="text" class="form-control"
@@ -168,7 +233,6 @@
                                 </div>
                                 <br>
                                 <div class="row">
-                                    {{-- <label for="inputEmail3" class="col-sm col-form-label">Car Mileage Claim*</label> --}}
                                     <label for="staticEmail" class="col-sm-3 col-form-label"></label>
                                     <div class="col-sm-3">
                                         <input type="text" style="display: none;" class="form-control"
@@ -189,30 +253,9 @@
                                                 class="fa fa-minus"></i> </button>
                                     </div>
                                 </div>
-                                <br>
-                                <div class="row">
-                                    <label for="staticEmail" class="col-sm-3 col-form-label">Motorcycle
-                                        Mileage <i class="fa fa-question-circle" style="color:rgba(0, 81, 255, 0.904)"
-                                            data-toggle="tooltip2"
-                                            title="Mileage claim  for own motorcycle only & with prior approval&#010; from supervisor.&#010; if leave blank KM field, it will assume as no limit.&#010; Click the &quot;+&quot; button to add the subsequent KM and rate.&#010;Click the &quot;-&quot; button to remove the subsequent KM and rate"></i>
-                                        claim* </label>
-                                    <div class="col-sm-3">
-                                        <input type="text" class="form-control" id="umileagemcharge" value="0.40">
-                                    </div>
-                                    <div class="col-sm-3">
-                                        <input type="text" class="form-control" id="umileagemkm" value="700">
-                                    </div>
-                                    <div class="col">
-                                        <h5 class="form-control" id="umkm1" aria-readonly="true">KM</h5>
-                                    </div>
-                                    <div class="col">
-                                        <button id="uplusmbtn" type="button"><i class="fa fa-plus"
-                                                aria-hidden="true"></i> </button>
-                                        <button id="uminusmbtn" style="display: none;" type="button"><i
-                                                class="fa fa-minus"></i> </button>
-                                    </div>
-                                </div>
-                                <div class="row">
+                                <br> --}}
+
+                                {{-- <div class="row">
                                     <label for="staticEmail" class="col-sm-3 col-form-label"></label>
                                     <div class="col-sm-3">
                                         <input type="text" style="display: none;" class="form-control"
@@ -254,7 +297,7 @@
                                         <button id="uminusmbtn2" type="button" style="display: none;"><i
                                                 class="fa fa-minus"></i> </button>
                                     </div>
-                                </div>
+                                </div> --}}
                                 <div class="row">
                                     <div class="col-sm-3">
                                         <label for="carmileage" class="col-sm-3 col-form-label">Food
@@ -275,193 +318,100 @@
                                 <div class="row">
                                     <div class="col-sm-3"> </div>
                                     <div class="col-sm-3">
-                                        <input type="text" class="form-control" name="" id="">
+                                        <input type="text" class="form-control" id=""
+                                            value="{{ $entitys['breakfast'] }}" name="breakfast">
                                     </div>
                                     <div class="col-sm-3">
-                                        <input type="text" class="form-control" id="" name="">
+                                        <input type="text" class="form-control" id="" name="dinner"
+                                            value="{{ $entitys['dinner'] }}">
                                     </div>
                                     <div class="col-sm-3">
-                                        <input type="text" class="form-control" id="" name="">
+                                        <input type="text" class="form-control" name="lunch" id=""
+                                            value="{{ $entitys['lunch'] }}">
                                     </div>
                                 </div>
                             </div>
-                </form>
-            </div>
-            </form>
-        </div>
-        <br>
-        <div class="row">
-            <div class="col mb-6">
-                <div class="form-control">
-                    <h5>Subsistence Allowance</h5>
-                    <table id="tablesavesubsistence" class="table table-striped table-bordered align-middle">
-                        <thead>
-                            <tr>
-                                <th data-orderable="false">Action</th>
-                                <th class="text-nowrap">Area</th>
-                                <th class="text-nowrap">Value</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>
-                                    <a href="javascript:;" data-toggle="modal" data-bs-toggle="modal"
-                                        data-bs-target="#updatesubsistence" class="btn btn-outline-blue"><i
-                                            class="fa fa-edit"></i></a>
-                                </td>
-                                <td>MALAYSIA</td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <a href="javascript:;" data-toggle="modal" data-bs-toggle="modal"
-                                        data-bs-target="#updatesubsistence" class="btn btn-outline-blue"><i
-                                            class="fa fa-edit"></i></a>
-                                </td>
-                                <td>MIDDLE EAST</td>
-                                <td>unlimited</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <a href="javascript:;" data-toggle="modal" data-bs-toggle="modal"
-                                        data-bs-target="#updatesubsistence" class="btn btn-outline-blue"><i
-                                            class="fa fa-edit"></i></a>
-                                </td>
-                                <td>SINGAPORE/BRUNEI</td>
-                                <td>80</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            <div class="col mb-6">
-                <div class="form-control">
-                    <h5>Claim Benefits</h5>
-                    <table id="tableSaveArea" class="table table-striped table-bordered align-middle">
-                        <thead>
-                            <tr>
-                                <th data-orderable="false">Action</th>
-                                <th class="text-nowrap">Area</th>
-                                <th class="text-nowrap">Value</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>
-                                    <a href="javascript:;" data-toggle="modal" data-bs-toggle="modal"
-                                        data-bs-target="#updateclaimbenefit" class="btn btn-outline-blue"><i
-                                            class="fa fa-edit"></i></a>
-                                </td>
-                                <td>ENTERTAINMENT</td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <a href="javascript:;" data-toggle="modal" data-bs-toggle="modal"
-                                        data-bs-target="#updateclaimbenefit" class="btn btn-outline-blue"><i
-                                            class="fa fa-edit"></i></a>
-                                </td>
-                                <td>PHONE BILL</td>
-                                <td>unlimited</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <a href="javascript:;" data-toggle="modal" data-bs-toggle="modal"
-                                        data-bs-target="#updateclaimbenefit" class="btn btn-outline-blue"><i
-                                            class="fa fa-edit"></i></a>
-                                </td>
-                                <td>OTHERS</td>
-                                <td>80</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-        <br>
-        <div class="row p-2">
-            <div class="modal-footer">
-                <div class="col align-self-start">
-                    <a href="/setting/entitlement" class="btn btn-light" style="color: black" type="submit"><i
-                            class="fa fa-arrow-left"></i> Back</a>
-                </div>
-                <div class="col d-flex justify-content-end">
-                    <button class="btn btn-light" style="color: black" type="submit"><i class="fa fa-save"></i>
-                        Update</button>
-                </div>
-            </div>
-        </div>
-    </div> <!-- Modal subsistence -->
-    <div class="modal fade" id="updatesubsistence" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Subsistence Allowance</h5>
-                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form>
-                        <div class="row mb-3">
-                            <label for="subsistence allowance" class="col-sm-2 col-form-label">Subsistence
-                                Allowance</label><br>
-                            <div class="col-sm-6">
-                                <input type="text" class="form-control" id="" placeholder="" readonly>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col mb-6">
+                            <div class="form-control">
+                                <h5>Subsistence Allowance</h5>
+                                <table id="tablesavesubsistence" class="table table-striped table-bordered align-middle">
+                                    <thead>
+                                        <tr>
+                                            <th data-orderable="false">Action</th>
+                                            <th class="text-nowrap">Area</th>
+                                            <th class="text-nowrap">Value</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @if ($subsistances)
+                                            @foreach ($subsistances as $data)
+                                                <tr>
+                                                    <td>
+                                                        <a href="javascript:;" id="viewSubsAddButton"
+                                                            class="btn btn-outline-blue" data-id="{{ $data->id }}"><i
+                                                                class="fa fa-edit"></i></a>
+                                                    </td>
+                                                    <td>{{ $data->area_name }}</td>
+                                                    <td>{{ $data->value }}</td>
+                                                </tr>
+                                            @endforeach
+                                        @endif
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
-                        <div class="row mb-3">
-                            <label for="unlimited subsistence" class="col-sm-2 col-form-label">Value</label><br>
-                            <div class="col-sm-6">
-                                <input type="text" class="form-control" id="valuesubsistence1" placeholder="value">
-                                <input type="checkbox" class="unlimited" value="unlimited"> unlimited
+                        <div class="col mb-6">
+                            <div class="form-control">
+                                <h5>Claim Benefits</h5>
+                                <table id="tableSaveArea" class="table table-striped table-bordered align-middle">
+                                    <thead>
+                                        <tr>
+                                            <th data-orderable="false">Action</th>
+                                            <th class="text-nowrap">Area</th>
+                                            <th class="text-nowrap">Value</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @if ($claimCategorys)
+                                            @foreach ($claimCategorys as $item)
+                                                <tr>
+                                                    <td>
+                                                        <a href="javascript:;" id="viewClaimAddButton"
+                                                            class="btn btn-outline-blue" data-id="{{ $item->id }}"><i
+                                                                class="fa fa-edit"></i></a>
+                                                    </td>
+                                                    <td>{{ $item->claim_catagory }}</td>
+                                                    <td>{{ $item->claim_value }}</td>
+                                                </tr>
+                                            @endforeach
+                                        @endif
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" id="savesubsistence" class="btn btn-primary">Update
-                        Changes</button>
-                </div>
-            </div>
-        </div>
+                    </div>
+                    <br>
+                    <div class="row p-2">
+                        <div class="modal-footer">
+                            <div class="col align-self-start">
+                                <a href="/setting/eclaimEntitleGroupView" class="btn btn-light" style="color: black"
+                                    type="submit"><i class="fa fa-arrow-left"></i> Back</a>
+                            </div>
+                            <div class="col d-flex justify-content-end">
+                                <button class="btn btn-light" style="color: black" type="submit" id="editButton"><i
+                                        class="fa fa-save"></i>
+                                    Update</button>
+                            </div>
+                        </div>
+                    </div>
+        </form>
     </div>
-    {{-- modal claim --}}
-    <div class="modal fade" id="updateclaimbenefit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Claims Benefit</h5>
-                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form>
-                        <div class="row mb-3">
-                            <label for="inputEmail3" class="col-sm-2 col-form-label">Area</label><br>
-                            <div class="col-sm-6">
-                                <input type="text" class="form-control" id="" placeholder="" readonly>
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                            <label for="inputEmail3" class="col-sm-2 col-form-label">Value</label><br>
-                            <div class="col-sm-6">
-                                <input type="text" class="form-control" id="valueclaim1" placeholder="value">
-                                <input type="checkbox" class="unlimited1" value="unlimited">unlimited
-                            </div>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" id="savesubsistence" class="btn btn-primary">Update
-                        Changes</button>
-                </div>
-            </div>
-        </div>
-    </div>
+
+    @include('modal.setting.eclaim.editSubsEntitleGroup')
+    @include('modal.setting.eclaim.editClaimBenefitEntitleGroup')
+
 @endsection

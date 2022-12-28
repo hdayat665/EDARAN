@@ -3,16 +3,22 @@
 namespace App\Service;
 
 use App\Models\ActivityLogs;
+use App\Models\ApprovelRoleGeneral;
 use App\Models\Branch;
+use App\Models\ClaimCategory;
 use App\Models\Company;
 use App\Models\Department;
 use App\Models\Designation;
+use App\Models\DomainList;
+use App\Models\EclaimGeneral;
 use App\Models\EmploymentType;
+use App\Models\EntitleGroup;
 use App\Models\JobGrade;
 use App\Models\News;
 use App\Models\Policy;
 use App\Models\Role;
 use App\Models\SOP;
+use App\Models\TransportMillage;
 use App\Models\TypeOfLogs;
 use App\Models\Unit;
 use Illuminate\Support\Facades\Auth;
@@ -1232,8 +1238,393 @@ class SettingService
 
     public function eclaimGeneralView()
     {
-        // $data = ActivityLogs::where([['tenant_id', Auth::user()->tenant_id], ['logs_id', $id]])->get();
+        $data = EclaimGeneral::where([['tenant_id', Auth::user()->tenant_id]])->get();
 
-        return [];
+        if (!$data) {
+            $data = [];
+        }
+
+        return $data;
+    }
+
+    public function getEclaimGeneralById($id = '')
+    {
+        $data = EclaimGeneral::where([['tenant_id', Auth::user()->tenant_id], ['id', $id]])->first();
+
+        return $data;
+    }
+
+    public function createSubsistance($r)
+    {
+        $input = $r->input();
+
+        date_default_timezone_set("Asia/Kuala_Lumpur");
+        $newsData = EclaimGeneral::where([['tenant_id', Auth::user()->tenant_id], ['area_name', $input['area_name']]])->first();
+        if ($newsData) {
+            $data['msg'] = 'Subsistance already exists.';
+            $data['status'] = config('app.response.error.status');
+            $data['type'] = config('app.response.error.type');
+            $data['title'] = config('app.response.error.title');
+
+            return $data;
+        }
+
+        $user = Auth::user();
+        $input['tenant_id'] = $user->tenant_id;
+        $input['user_id'] = $user->id;
+
+        EclaimGeneral::create($input);
+
+        $data['status'] = config('app.response.success.status');
+        $data['type'] = config('app.response.success.type');
+        $data['title'] = config('app.response.success.title');
+        $data['msg'] = 'Success create Subsistance';
+
+        return $data;
+    }
+
+    public function updateSubsistance($r, $id)
+    {
+
+        $input = $r->input();
+
+        // $user = Auth::user();
+        // $input['modifiedBy'] = $user->username;
+        // date_default_timezone_set("Asia/Kuala_Lumpur");
+        // $input['modified_at'] = date('Y-m-d H:i:s');
+
+        EclaimGeneral::where('id', $id)->update($input);
+
+        $data['status'] = config('app.response.success.status');
+        $data['type'] = config('app.response.success.type');
+        $data['title'] = config('app.response.success.title');
+        $data['msg'] = 'Success update Subsistance';
+
+        return $data;
+    }
+
+    public function eclaimCategoryView()
+    {
+        $data = ClaimCategory::where([['tenant_id', Auth::user()->tenant_id]])->get();
+
+        if (!$data) {
+            $data = [];
+        }
+
+        return $data;
+    }
+
+    public function createClaimCategory($r)
+    {
+        $input = $r->input();
+        // pr($input['claim_catagory']);
+
+        date_default_timezone_set("Asia/Kuala_Lumpur");
+        $newsData = ClaimCategory::where([['tenant_id', Auth::user()->tenant_id], ['claim_catagory', $input['claim_catagory']]])->first();
+        if ($newsData) {
+            $data['msg'] = 'Subsistance already exists.';
+            $data['status'] = config('app.response.error.status');
+            $data['type'] = config('app.response.error.type');
+            $data['title'] = config('app.response.error.title');
+
+            return $data;
+        }
+
+        if ($input['claim_type']) {
+            $input['claim_type'] = implode(',', $input['claim_type']);
+        }
+
+        $user = Auth::user();
+        $input['tenant_id'] = $user->tenant_id;
+        $input['user_id'] = $user->id;
+
+        ClaimCategory::create($input);
+
+        $data['status'] = config('app.response.success.status');
+        $data['type'] = config('app.response.success.type');
+        $data['title'] = config('app.response.success.title');
+        $data['msg'] = 'Success create Claim Category';
+
+        return $data;
+    }
+
+    public function updateClaimCategory($r, $id)
+    {
+
+        $input = $r->input();
+
+        // $user = Auth::user();
+        // $input['modifiedBy'] = $user->username;
+        // date_default_timezone_set("Asia/Kuala_Lumpur");
+        // $input['modified_at'] = date('Y-m-d H:i:s');
+        if ($input['claim_type']) {
+            $input['claim_type'] = implode(',', $input['claim_type']);
+        }
+
+        ClaimCategory::where('id', $id)->update($input);
+
+        $data['status'] = config('app.response.success.status');
+        $data['type'] = config('app.response.success.type');
+        $data['title'] = config('app.response.success.title');
+        $data['msg'] = 'Success update Claim Category';
+
+        return $data;
+    }
+
+    public function editClaimView($id = '')
+    {
+        $data = ClaimCategory::where([['tenant_id', Auth::user()->tenant_id], ['id', $id]])->first();
+
+        return $data;
+    }
+
+    public function deleteClaimCategory($id)
+    {
+        $logs = ClaimCategory::find($id);
+
+        if (!$logs) {
+            $data['status'] = config('app.response.error.status');
+            $data['type'] = config('app.response.error.type');
+            $data['title'] = config('app.response.error.title');
+            $data['msg'] = 'Category not found';
+        } else {
+            $logs->delete();
+
+            $data['status'] = config('app.response.success.status');
+            $data['type'] = config('app.response.success.type');
+            $data['title'] = config('app.response.success.title');
+            $data['msg'] = 'Success delete Category';
+        }
+
+        return $data;
+    }
+
+    public function eclaimEntitleGroupView()
+    {
+        $data = EntitleGroup::where([['tenant_id', Auth::user()->tenant_id]])->get();
+
+        return $data;
+    }
+
+    public function createEntitleGroup($r)
+    {
+        $input = $r->input();
+
+        date_default_timezone_set("Asia/Kuala_Lumpur");
+        $newsData = EntitleGroup::where([['tenant_id', Auth::user()->tenant_id], ['group_name', $input['group_name']]])->first();
+        if ($newsData) {
+            $data['msg'] = 'Entitle Group already exists.';
+            $data['status'] = config('app.response.error.status');
+            $data['type'] = config('app.response.error.type');
+            $data['title'] = config('app.response.error.title');
+
+            return $data;
+        }
+
+        $entitleData['group_name'] =  $input['group_name'];
+        $entitleData['job_grade'] =  $input['job_grade'];
+        $entitleData['local_travel'] =  $input['local_travel'];
+        $entitleData['oversea_travel'] =  $input['oversea_travel'];
+        $entitleData['local_hotel_allowance'] =  $input['local_hotel_allowance'];
+        $entitleData['local_hotel_value'] =  $input['local_hotel_value'];
+        $entitleData['lodging_allowance'] =  $input['lodging_allowance'];
+        $entitleData['lodging_allowance_value'] =  $input['lodging_allowance_value'];
+        $entitleData['breakfast'] =  $input['breakfast'];
+        $entitleData['lunch'] =  $input['lunch'];
+        $entitleData['dinner'] =  $input['dinner'];
+
+        $entitleData['tenant_id'] = Auth::user()->tenant_id;
+        EntitleGroup::create($entitleData);
+
+        $entitle = EntitleGroup::where('tenant_id', Auth::user()->tenant_id)->orderBy('created_at')->first();
+
+        if ($input['car_price']) {
+            foreach ($input['car_price'] as $key => $data) {
+                if ($input['car_price'][$key] || $input['car_km'][$key]) {
+                    $car[] = [
+                        'price' => $input['car_price'][$key],
+                        'km' => $input['car_km'][$key],
+                        'type' => 'car',
+                        'entitle_id' => $entitle->id,
+                        'tenant_id' => Auth::user()->tenant_id,
+                        'user_id' => Auth::user()->id,
+                    ];
+                }
+            }
+        }
+
+        if ($input['motor_price']) {
+            foreach ($input['motor_price'] as $key => $data) {
+                if ($input['motor_price'][$key] || $input['motor_km'][$key]) {
+                    $motor[] = [
+                        'price' => $input['motor_price'][$key],
+                        'km' => $input['motor_km'][$key],
+                        'type' => 'motor',
+                        'entitle_id' => $entitle->id,
+                        'tenant_id' => Auth::user()->tenant_id,
+                        'user_id' => Auth::user()->id,
+                    ];
+                }
+            }
+        }
+
+        TransportMillage::insert($car);
+        TransportMillage::insert($motor);
+
+        $data['status'] = config('app.response.success.status');
+        $data['type'] = config('app.response.success.type');
+        $data['title'] = config('app.response.success.title');
+        $data['msg'] = 'Success create Entitle Group';
+
+        return $data;
+    }
+
+    public function eclaimEntitleGroupEditView($id = '')
+    {
+        $data = EntitleGroup::where([['tenant_id', Auth::user()->tenant_id], ['id', $id]])->first();
+
+        return $data;
+    }
+
+    public function getTransportMillage($entitle_id = '')
+    {
+        $data = TransportMillage::where([['tenant_id', Auth::user()->tenant_id], ['entitle_id', $entitle_id]])->get();
+
+        return $data;
+    }
+
+    public function updateEntitleGroup($r, $id)
+    {
+
+        $input = $r->input();
+
+        if ($input['car_price']) {
+            foreach ($input['car_price'] as $key => $data) {
+                if ($input['car_price'][$key] || $input['car_km'][$key]) {
+                    $car = [
+                        'price' => $input['car_price'][$key],
+                        'km' => $input['car_km'][$key],
+                        'type' => 'car',
+                        'id' => $input['car_id'][$key],
+                        'tenant_id' => Auth::user()->tenant_id,
+                        'user_id' => Auth::user()->id,
+                    ];
+                    TransportMillage::where('id', $car['id'])->update($car);
+                }
+            }
+        }
+
+        if ($input['motor_price']) {
+            foreach ($input['motor_price'] as $key => $data) {
+                if ($input['motor_price'][$key] || $input['motor_km'][$key]) {
+                    $motor = [
+                        'price' => $input['motor_price'][$key],
+                        'km' => $input['motor_km'][$key],
+                        'type' => 'motor',
+                        'id' => $input['motor_id'][$key],
+                        'tenant_id' => Auth::user()->tenant_id,
+                        'user_id' => Auth::user()->id,
+                    ];
+
+                    TransportMillage::where('id', $motor['id'])->update($motor);
+                }
+            }
+        }
+
+        unset($input['car_km']);
+        unset($input['car_price']);
+        unset($input['motor_km']);
+        unset($input['motor_price']);
+        unset($input['motor_id']);
+        unset($input['car_id']);
+
+        EntitleGroup::where('id', $id)->update($input);
+
+        $result['status'] = config('app.response.success.status');
+        $result['type'] = config('app.response.success.type');
+        $result['title'] = config('app.response.success.title');
+        $result['msg'] = 'Success update Entity Group';
+
+        return $result;
+    }
+
+    public function updateStatusEntitleGroup($id, $status)
+    {
+        $update['status'] = $status;
+
+        EntitleGroup::where('id', $id)->update($update);
+
+        $data['status'] = config('app.response.success.status');
+        $data['type'] = config('app.response.success.type');
+        $data['title'] = config('app.response.success.title');
+        $data['msg'] = 'Success update Status';
+
+        return $data;
+    }
+
+    public function deleteEntitleGroup($id)
+    {
+        $logs = EntitleGroup::find($id);
+
+        if (!$logs) {
+            $data['status'] = config('app.response.error.status');
+            $data['type'] = config('app.response.error.type');
+            $data['title'] = config('app.response.error.title');
+            $data['msg'] = 'Category not found';
+        } else {
+            $logs->delete();
+
+            $data['status'] = config('app.response.success.status');
+            $data['type'] = config('app.response.success.type');
+            $data['title'] = config('app.response.success.title');
+            $data['msg'] = 'Success delete Entitle Category';
+        }
+
+        return $data;
+    }
+
+    public function createGeneralApprover($r)
+    {
+        $input = $r->input();
+        $input['user_id'] = Auth::user()->id;
+        $input['tenant_id'] = Auth::user()->tenant_id;
+
+        date_default_timezone_set("Asia/Kuala_Lumpur");
+
+        ApprovelRoleGeneral::create($input);
+
+        $data['status'] = config('app.response.success.status');
+        $data['type'] = config('app.response.success.type');
+        $data['title'] = config('app.response.success.title');
+        $data['msg'] = 'Success';
+
+        return $data;
+    }
+
+    public function approvalRoleView()
+    {
+        $data = ApprovelRoleGeneral::where([['tenant_id', Auth::user()->tenant_id]])->get();
+
+        if (!$data) {
+            $data = [];
+        }
+
+        return $data;
+    }
+
+    public function createDomainList($r)
+    {
+        $input = $r->input();
+        $input['user_id'] = Auth::user()->id;
+        $input['tenant_id'] = Auth::user()->tenant_id;
+
+        DomainList::create($input);
+
+        $data['status'] = config('app.response.success.status');
+        $data['type'] = config('app.response.success.type');
+        $data['title'] = config('app.response.success.title');
+        $data['msg'] = 'Success';
+
+        return $data;
     }
 }

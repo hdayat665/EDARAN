@@ -2,7 +2,7 @@
 @section('content')
     <div id="content" class="app-content">
         <h1 class="page-header">Setting <small> | eClaim | General </small></h1>
-        <div class="panel panel">
+        <div class="panel panel" id="eclaimGenearalJs">
             <div class="panel-body">
                 <div class="form-control">
                     <h3>Claim Settings</h3>
@@ -56,8 +56,8 @@
                     </form> <br>
                     <h5>Subsistence Allowence</h5>
                     <br>
-                    <button type="button" class="btn btn-white mt-3 mb-3" data-bs-toggle="modal" id="myModal1"
-                        data-bs-target="#addarea"><i class="fa fa-plus"></i> Area</button>
+                    <button type="button" class="btn btn-white mt-3 mb-3" id="addModalButton"><i class="fa fa-plus"></i>
+                        Area</button>
                     <div class="col-sm-6">
                         <table id="tableSaveArea" class="table table-striped table-bordered align-middle">
                             <thead>
@@ -67,7 +67,16 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr> </tr>
+                                @if ($subsistances)
+                                    @foreach ($subsistances as $subsistance)
+                                        <tr>
+                                            <td><button class="btn btn-primary btn-xs" data-id="{{ $subsistance->id }}"
+                                                    id="editModalButton">Edit</button>
+                                            </td>
+                                            <td>{{ $subsistance->area_name }}</td>
+                                        </tr>
+                                    @endforeach
+                                @endif
                             </tbody>
                         </table>
                         <br>
@@ -84,59 +93,11 @@
                             Save</button>
                     </div>
                 </div>
-                <!-- Modal add subsitence -->
-                <div class="modal fade" id="addarea" tabindex="-1" role="dialog"
-                    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLongTitle">Add Area</h5>
-                                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <form>
-                                    <div class="row mb-3">
-                                        <label for="inputEmail3" class="col-sm-2 col-form-label">Area*</label><br>
-                                        <div class="col-sm-6">
-                                            <input type="text" class="form-control" id="Area" value="">
-                                </form>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="button" id="saveArea" class="btn btn-primary" data-bs-dismiss="modal"> Save
-                                changes</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div> <!-- Modal update subsistence -->
-        <div class="modal fade" id="updatearea" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
-            aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLongTitle">Update Area</h5>
-                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <form>
-                            <div class="row mb-3">
-                                <label for="inputEmail3" class="col-sm-2 col-form-label">Area*</label><br>
-                                <div class="col-sm-6">
-                                    <input type="text" class="form-control" id="" value="">
-                        </form>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                </div>
             </div>
         </div>
+
     </div>
+
+    @include('modal.setting.eclaim.addSubsistence')
+    @include('modal.setting.eclaim.editSubsistence')
 @endsection

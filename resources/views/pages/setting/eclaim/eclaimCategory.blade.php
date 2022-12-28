@@ -1,15 +1,11 @@
 @extends('layouts.dashboardTenant')
 @section('content')
     <div id="content" class="app-content">
-        <!-- BEGIN breadcrumb -->
-        <!-- BEGIN breadcrumb -->
-        <!-- END breadcrumb -->
-        <!-- BEGIN page-header -->
         <h1 class="page-header">Setting | Claim Category</h1>
         <div class="panel panel">
             <div class="panel-body" style="relative">
                 <div>
-                    <div class="row">
+                    <div class="row" id="claimCategoryJs">
                         <h3>Claim Category List</h3>
                         <div class="form-check">
                             <a href="/setting/addClaimView" type="button" class="btn btn-white mt-3 mb-3" name=""
@@ -17,7 +13,7 @@
                         </div>
                     </div>
                     <div class="row p-2">
-                        <table id="tableSaveArea" class="table table-striped table-bordered align-middle">
+                        <table id="claimCategoryTable" class="table table-striped table-bordered align-middle">
                             <thead>
                                 <tr>
                                     <th data-orderable="false">Action</th>
@@ -29,27 +25,32 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>
-                                        <a href="/setting/editClaimView" class="btn btn-outline-green"><i
-                                                class="fa fa-edit"></i></a>
-                                        <button class="btn btn-outline-red"><i class="fa fa-trash"></i></button>
-                                    </td>
-                                    <td>
-                                        <div class="form-check form-switch">
-                                            <input class="form-check-input" name="" type="checkbox" role="switch"
-                                                id="" checked>
-                                        </div>
-                                    </td>
-                                    <td>C01</td>
-                                    <td>Phone Bill</td>
-                                    <td>
-                                        <div class="col"> <span class="badge bg-primary">GC</span>
-                                            <span class="badge bg-warning">MTC</span>
-                                        </div>
-                                    </td>
-                                    <td>Phone bill</td>
-                                </tr>
+                                @if ($claimCategorys)
+                                    @foreach ($claimCategorys as $data)
+                                        <tr>
+                                            <td>
+                                                <a href="/setting/editClaimView/{{ $data->id }}"
+                                                    class="btn btn-outline-green"><i class="fa fa-edit"></i></a>
+                                                <button class="btn btn-outline-red" id="deleteButton"
+                                                    data-id="{{ $data->id }}"><i class="fa fa-trash"></i></button>
+                                            </td>
+                                            <td>
+                                                <div class="form-check form-switch">
+                                                    <input class="form-check-input" name="" type="checkbox"
+                                                        role="switch" id="" checked>
+                                                </div>
+                                            </td>
+                                            <td>{{ $data->claim_catagory_code }}</td>
+                                            <td>{{ $data->claim_catagory }}</td>
+                                            <td>
+                                                <div class="col"> <span class="badge bg-primary"></span>
+                                                    <span class="badge bg-warning">{{ $data->claim_type }}</span>
+                                                </div>
+                                            </td>
+                                            <td>{{ $data->desc }}</td>
+                                        </tr>
+                                    @endforeach
+                                @endif
                             </tbody>
                         </table>
                     </div>

@@ -18,17 +18,12 @@ class Users extends Authenticatable
      * @var array<int, string>
      */
 
-    protected $table ='users';
+    protected $table = 'users';
 
-    protected $fillable = [
-        'username',
-        'password',
-        'type',
-        'status',
-        'tenant',
-        'tenant_id',
-        'package',
-    ];
+    protected $guarded = [];
+
+    public function userProfile()
+    {
+        return $this->belongsTo(UserProfile::class, 'id', 'user_id');
+    }
 }
-
-

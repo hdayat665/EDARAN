@@ -2,7 +2,7 @@
 @section('content')
     <div id="content" class="app-content">
         <h1 class="page-header">Setting | Approval Role</h1>
-        <div class="row">
+        <div class="row" id="approveRoleJs">
             <div class="col-xl-15">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
