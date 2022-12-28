@@ -1,19 +1,15 @@
 @extends('layouts.dashboardTenant')
 @section('content')
     <div id="content" class="app-content">
-        <!-- BEGIN breadcrumb -->
-        <!-- BEGIN breadcrumb -->
-        <!-- END breadcrumb -->
-        <!-- BEGIN page-header -->
         <h1 class="page-header">Settings | Cash Advance Controller</h1>
-        <div class="panel panel">
+        <div class="panel panel" id="cashAdvanceJs">
             <div class="panel-body">
                 <div>
                     <div class="row">
                         <h3>Claim Controller List</h3>
                     </div>
                     <div class="row p-2">
-                        <table id="tablecashadvance" class="table table-striped table-bordered align-middle">
+                        <table id="cashAdvanceTable" class="table table-striped table-bordered align-middle">
                             <thead>
                                 <tr>
                                     <th class="text-nowrap">Action</th>

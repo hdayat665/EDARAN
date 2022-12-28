@@ -208,4 +208,9 @@ return [
 
     ],
 
+    'entitle-group' => [
+        'motor' => 'Mileage claim  for own motorcycle only & with prior approval from supervisor. if leave blank KM field, it will assume as no limit. Click the + button to add the subsequent KM and rate.Click the - button to remove the subsequent KM and rate',
+        'car' => 'Mileage claim  for own car only & with prior approval from supervisor. if leave blank KM field, it will assume as no limit. Click the + button to add the subsequent KM and rate.Click the - button to remove the subsequent KM and rate'
+    ]
+
 ];

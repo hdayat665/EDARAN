@@ -18,31 +18,7 @@ class UserProfile extends Authenticatable
      * @var array<int, string>
      */
 
-    protected $table ='userProfile';
+    protected $table = 'userProfile';
 
-    protected $fillable = [
-        'user_id',
-        'username',
-        'email',
-        'firstName',
-        'lastName',
-        'fullName',
-        'nonNetizen',
-        'idNo',
-        'passpord',
-        'expiryDate',
-        'issuingCountry',
-        'DOB',
-        'gender',
-        'maritialStatus',
-        'religion',
-        'race',
-        'phoneNo',
-        'homeNo',
-        'extensionNo',
-        'tenant_id',
-        'personalEmail',
-    ];
+    protected $guarded = [];
 }
-
-

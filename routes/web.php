@@ -225,11 +225,26 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('/setting/approvalConfigView', 'approvalConfigView');
             Route::get('/setting/approvalRoleView', 'approvalRoleView');
             Route::get('/setting/addClaimView', 'addClaimView');
-            Route::get('/setting/editClaimView', 'editClaimView');
+            // Route::get('/setting/editClaimView', 'editClaimView');
             Route::get('/setting/addClaimView', 'addClaimView');
-            Route::get('/setting/editClaimView', 'editClaimView');
+            Route::get('/setting/editClaimView/{id}', 'editClaimView');
             Route::get('/setting/eclaimEntitleGroupAddView', 'eclaimEntitleGroupAddView');
-            Route::get('/setting/eclaimEntitleGroupEditView', 'eclaimEntitleGroupEditView');
+            Route::get('/setting/eclaimEntitleGroupEditView/{id}', 'eclaimEntitleGroupEditView');
+            Route::post('/createSubsistance', 'createSubsistance');
+            Route::post('/updateSubsistance', 'updateSubsistance');
+            Route::get('/getEclaimGeneralById/{id}', 'getEclaimGeneralById');
+            Route::post('/createClaimCategory', 'createClaimCategory');
+            Route::post('/updateClaimCategory/{id}', 'updateClaimCategory');
+            Route::delete('/deleteClaimCategory/{id}', 'deleteClaimCategory');
+            Route::post('/createEntitleGroup', 'createEntitleGroup');
+            Route::post('/updateEntitleGroup/{id}', 'updateEntitleGroup');
+            Route::get('/updateStatusEntitleGroup/{id}/{status}', 'updateStatusEntitleGroup');
+            Route::delete('/deleteEntitleGroup/{id}', 'deleteEntitleGroup');
+            Route::post('/updateSubsistance/{id}', 'updateSubsistance');
+            Route::get('/claimCatById/{id}', 'claimCatById');
+            Route::post('/createGeneralApprover', 'createGeneralApprover');
+            Route::get('/getUserByRole/{id}', 'getUserByRole');
+            Route::post('/createDomainList', 'createDomainList');
         });
 
         Route::controller(OrganizationController::class)->group(function () {

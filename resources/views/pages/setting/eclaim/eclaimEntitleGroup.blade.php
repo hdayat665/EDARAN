@@ -2,7 +2,7 @@
 @section('content')
     <div id="content" class="app-content">
         <h1 class="page-header">Settings| Entitlement Group</h1>
-        <div class="panel panel">
+        <div class="panel panel" id="entitleJs">
             <div class="panel-body">
                 <div class="row">
                     <h3>Entitlement Group List</h3>
@@ -14,7 +14,7 @@
                     </div>
                 </div>
                 <div class="row p-2">
-                    <table id="tableSaveArea" class="table table-striped table-bordered align-middle">
+                    <table id="tableEntitle" class="table table-striped table-bordered align-middle">
                         <thead>
                             <tr>
                                 <th data-orderable="false">Action</th>
@@ -31,37 +31,46 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>
-                                    <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle"><i
-                                            class="fa fa-cogs"></i>
-                                        Action <i class="fa fa-caret-down"></i></a>
-                                    <div class="dropdown-menu">
-                                        <a href="/setting/eclaimEntitleGroupEditView" id="" data-id=""
-                                            class="dropdown-item">Update</a>
-                                        <div class="dropdown-divider"></div>
-                                        <a href="javascript:;" id="" data-id=""
-                                            class="dropdown-item">Delete</a>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="form-check form-switch">
-                                        <input class="form-check-input" name="mainCompanion" type="checkbox" role=""
-                                            id="" checked>
-                                    </div>
-                                </td>
-                                <td><button class="btn btn-primary" data-bs-toggle="modal"
-                                        data-bs-target="#claimbenefit">view</button></td>
-                                <td><button class="btn btn-primary" data-bs-toggle="modal"
-                                        data-bs-target="#subsistenceallowance">view</button></i></td>
-                                <td>Chairman</td>
-                                <td>F</td>
-                                <td>F</td>
-                                <td>None</td>
-                                <td>Actual</td>
-                                <td>0.7</td>
-                                <td>0.4</td>
-                            </tr>
+                            @if ($entitles)
+                                @foreach ($entitles as $data)
+                                    <tr>
+                                        <td>
+                                            <a href="#" data-bs-toggle="dropdown"
+                                                class="btn btn-primary dropdown-toggle"><i class="fa fa-cogs"></i>
+                                                Action <i class="fa fa-caret-down"></i></a>
+                                            <div class="dropdown-menu">
+                                                <a href="/setting/eclaimEntitleGroupEditView/{{ $data->id }}"
+                                                    class="dropdown-item">Update</a>
+                                                <div class="dropdown-divider"></div>
+                                                <a href="javascript:;" id="deleteButton" data-id="{{ $data->id }}"
+                                                    class="dropdown-item">Delete</a>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="form-check form-switch">
+                                                <input class="form-check-input statusCheck" name="mainCompanion"
+                                                    type="checkbox" data-id="{{ $data->id }}" id="updateStatus"
+                                                    {{ $data->status == '1' ? 'checked' : '' }}>
+                                            </div>
+                                        </td>
+                                        <td><button class="btn btn-primary" id="viewClaimButton"
+                                                data-id="{{ $data->id }}">view</button>
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-primary" data-id="{{ $data->id }}"
+                                                id="viewSubsButton">view</button></i>
+                                        </td>
+                                        <td>{{ $data->group_name }}</td>
+                                        <td>{{ $data->local_travel }}</td>
+                                        <td>{{ $data->oversea_travel }}</td>
+                                        {{-- <td>{{ $data->local_hotel_allowance }}</td> --}}
+                                        <td>{{ $data->lodging_allowance == 1 ? 'Actual' : 'Input Value' }}</td>
+                                        <td>{{ $data->local_hotel_allowance == 1 ? 'Actual' : 'Input Value' }}</td>
+                                        <td>{{ $data->car_millage }}</td>
+                                        <td>{{ $data->motor_millage }}</td>
+                                    </tr>
+                                @endforeach
+                            @endif
                         </tbody>
                     </table>
                 </div>
