@@ -144,7 +144,7 @@
                                         <input type="text" name="DOB" id="dob" value="{{ date_format(date_create($profile->DOB ?? null), 'Y-m-d') ?? '' }}" class="form-control" aria-describedby="dob" style="pointer-events: none;" readonly>
                                     </div>
                                     <div class="col-sm-6">
-                                        <label for="gender" class="form-label">Gender</label>
+                                        <label for="gender" class="form-label">Gender*</label>
                                         <select class="form-select" name="gender" id="gender" style="text-transform:uppercase">
                                             <?php $gender = gender() ?>
                                             <option value="" label="Please Choose"></option>
@@ -157,7 +157,7 @@
                                 </div>
                             </div>
                             <div class="col-sm-6">
-                                <label for="issuing-country" class="form-label">Marital Status</label>
+                                <label for="issuing-country" class="form-label">Marital Status*</label>
                                 <select class="form-select" name="maritialStatus" id="maritialStatus" >
                                     <?php $MaritalStatus = getMaritalStatus() ?>
                                     <option value="" label="Please Choose"></option>

@@ -30,7 +30,7 @@
                         </select>
                     </div>
                     <div class="mb-3" id="addtypeoflogprojectedit" style="display:none">
-                        <label class="form-label">Project* </label>
+                        <label class="form-label">Project Name*</label>
                         <select class="form-select" id="project" name="project_id" aria-label="Default select example">
                             <?php $projects = project() ?>
                             <option class="form-label" value="">Select Project</option>
@@ -73,7 +73,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" id="updateButton" class="btn btn-primary">Save</button>
+                        <button type="submit" id="updateButton" class="btn btn-primary">Update</button>
                     </div>
                 </form>
             </div>
