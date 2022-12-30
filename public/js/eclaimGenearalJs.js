@@ -1,6 +1,6 @@
 $(document).ready(function () {
     $(document).on("click", "#addModalButton", function () {
-        $("#updateModal").modal("show");
+        $("#addModal").modal("show");
     });
 
     function getEclaimGeneralById(id) {

@@ -695,7 +695,7 @@ class SettingController extends Controller
 
         $result['claimCategorys'] = $ss->eclaimCategoryView();
 
-        return view('pages.setting.eclaim.`eclaimCategory`', $result);
+        return view('pages.setting.eclaim.eclaimCategory', $result);
     }
 
     public function eclaimEntitleGroupView()
