@@ -3,7 +3,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Update Content Description</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Add Content Description</h5>
                 <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -13,7 +13,7 @@
                     <div class="row mb-3">
                         <label for="Content" class="col-sm-2 col-form-label">Content</label><br>
                         <div class="col-sm-6">
-                            <input type="text" class="form-control" id="uaddcontent">
+                            <input type="text" class="form-control" id="addcontent">
                 </form>
             </div>
         </div>
