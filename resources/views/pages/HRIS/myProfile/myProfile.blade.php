@@ -88,8 +88,8 @@
                                 <div class="row">
 
                                     <div class="col-sm-12 idnumber">
-                                        <label for="lastname" class="form-label">Identification Number*</label>
-                                        <input type="text" value="{{$profile->idNo ?? ''}}" name="idNo" id="idnumber" class="form-control" aria-describedby="lastname">
+                                        <label for="lastname" class="form-label">Old Identification Number*</label>
+                                        <input type="text" class="form-control">
                                     </div>
                                 </div>
                             </div>
@@ -105,7 +105,22 @@
                                             </label>
                                         </div>
                                     </div>
-                                    <div class="col-sm-6 part">
+                                    <div class="col-sm-6 idnumber">
+                                        <label for="lastname" class="form-label">New Identification Number*</label>
+                                        <input type="text" value="{{$profile->idNo ?? ''}}" name="idNo" id="idnumber" class="form-control" aria-describedby="lastname">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <label class="form-label">ID Attachment* </label>
+                                <input id="iDfileupload" type="file" name="file" multiple="multiple" ></input>
+                            </div>
+                            <!-- </div> -->
+                        </div>
+                        <div class="row p-2">
+                            <div class="col-sm-6">
+                                <div class="row">
+                                    <div class="col-sm-12 part">
                                         <label for="passport" class="form-label">Passport Number</label>
                                         <input type="text" id="passportmyprofile" name="passport" value="{{ $profile->passport ?? '' }}" class="form-control" aria-describedby="passport" >
                                     </div>
@@ -190,22 +205,47 @@
                                 </select>
                             </div>
                         </div>
+                        <div class="row p-2">
+                            <div class="col-sm-6">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-check form-switch align-right">
+                                            <input class="form-check-input partCheck" value="door3" type="checkbox" name="oku" id="oku">
+                                            <label class="form-label" for="oku">
+                                                OKU
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label for="okucard" class="form-label">OKU Card Number</label>
+                                        <input type="text" id="okucardnofam" name="okucard" class="form-control" aria-describedby="okucard" >
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <label class="form-label">OKU Attachment* </label>
+                                <input id="okufileupload" type="file" name="file" multiple="multiple" ></input>
+                            </div>
+                        </div>
+
                         <hr class="mt-5">
                         <h4 class="p-2">Contact Details</h4>
                         <div class="row p-2">
-                            <div class="col p-2">
-                            <label for="phone-number" class="form-label">Phone Number*</label>
-                            <input type="text" id="phone-number" name="phoneNo" value="{{$profile->phoneNo ?? ''}}" class="form-control" aria-describedby="phone-number">
+                            <div class="col-sm-6">
+                                <label for="phone-number" class="form-label">Phone Number 1*</label>
+                                <input type="text" id="phone-number" name="phoneNo" value="{{$profile->phoneNo ?? ''}}" class="form-control" aria-describedby="phone-number">
+                            </div>
+                            <div class="col-sm-6">
+                                <label for="phone-number" class="form-label">Phone Number 2*</label>
+                                <input type="text" id="phone-number" name="phoneNo" value="{{$profile->phoneNo ?? ''}}" class="form-control" aria-describedby="phone-number">
                             </div>
                         </div>
                         <div class="row p-2">
-                            <div class="col p-2">
+                            <div class="col-sm-6">
                                 <label for="home-number" class="form-label">Home Number</label>
                                 <input type="text" id="home-number" name="homeNo" value="{{$profile->homeNo ?? ''}}" class="form-control" aria-describedby="home-number">
                             </div>
-                        </div>
-                        <div class="row p-2">
-                            <div class="col p-2">
+                            <div class="col-sm-6">
                                 <label for="extension-number" class="form-label">Extension Number</label>
                                 <input type="text" id="extension-number" name="extensionNo" value="{{$profile->extensionNo ?? ''}}" class="form-control" aria-describedby="extension-number">
                             </div>
