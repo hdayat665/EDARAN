@@ -21,35 +21,33 @@
             </div>
             <div class="col-sm-6">
                 <label for="emergency-relationship" class="form-label">Relationship*</label>
-                <select class="form-select" name="relationship" id="emergency-relationship" style="text-transform:uppercase">
-                                <?php $relationship = relationship() ?>
-                                <option value="" label="Please Choose"  ></option>
-                                @foreach ($relationship as $key => $status)
-                                <option value="{{$key}}"<?php echo ($key == $emergency->relationship) ? 'selected="selected"' : '' ?>> {{$status}}</option>
-                                @endforeach
-                </select>
-
-             </div>
+                    <select class="form-select" name="relationship" id="emergency-relationship" style="text-transform:uppercase">
+                        <?php $relationship = relationship() ?>
+                        <option value="" label="Please Choose"  ></option>
+                        @foreach ($relationship as $key => $status)
+                        <option value="{{$key}}"<?php echo ($key == $emergency->relationship) ? 'selected="selected"' : '' ?>> {{$status}}</option>
+                        @endforeach
+                    </select>
+            </div>
         </div> 
         <div class="row p-2">
             <div class="col-sm-6">
                 <label for="emergency-address1" class="form-label">Address 1*</label>
-                <input type="text" id="emergency-address1" name="address1" value="{{ $emergency->address1 ?? '' }}" class="form-control" aria-describedby="emergency-address1" style="text-transform:uppercase">
+                    <input type="text" id="emergency-address1" name="address1" value="{{ $emergency->address1 ?? '' }}" class="form-control" aria-describedby="emergency-address1" style="text-transform:uppercase">
             </div>
             <div class="col-sm-6">
                 <label for="emergency-address1" class="form-label">Address 2</label>
-                <input type="text" id="emergency-address2" name="address2" value="{{ $emergency->address2 ?? '' }}" class="form-control" aria-describedby="emergency-address2" style="text-transform:uppercase">
+                    <input type="text" id="emergency-address2" name="address2" value="{{ $emergency->address2 ?? '' }}" class="form-control" aria-describedby="emergency-address2" style="text-transform:uppercase">
             </div>
-
         </div>
         <div class="row p-2">
             <div class="col-sm-6">
                 <label for="emergency-postcode" class="form-label">Postcode*</label>
-                <input type="number" id="emergency-postcode" name="postcode" value="{{ $emergency->postcode ?? '' }}" class="form-control" aria-describedby="emergency-postcode">
+                    <input type="number" id="emergency-postcode" name="postcode" value="{{ $emergency->postcode ?? '' }}" class="form-control" aria-describedby="emergency-postcode">
             </div>
             <div class="col-sm-6">
                 <label for="emergency-city" class="form-label">City*</label>
-                <input type="text" class="form-control" name="city" value="{{ $emergency->city ?? '' }}" style="text-transform:uppercase">
+                    <input type="text" class="form-control" name="city" value="{{ $emergency->city ?? '' }}" style="text-transform:uppercase">
             </div>
         </div>
         <div class="row p-2">
@@ -72,7 +70,7 @@
                         @endforeach
                     </optgroup>
                     <optgroup id="country-optgroup-Asia" label="Asia">
-                    <option value="MY" label="Malaysia" selected ></option>
+                        <option value="MY" label="Malaysia" selected ></option>
                         @foreach ($asias as $key => $asia)
                         <option value="{{$key}}" <?php echo ($key == $emergency->country) ? 'selected="selected"' : '' ?> >{{$asia}}</option>
                         @endforeach
@@ -87,7 +85,5 @@
                 <a class="btn btn-white me-5px btnNext">Next</a>
             </div>
         </div>
-    
-       
     </form>
 </div>
