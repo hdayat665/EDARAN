@@ -25,9 +25,9 @@
                     </li>
                 </ul>
                 <div class="tab-content panel m-0 rounded-0 p-3">
-                    @include('pages.setting.eclaim.approvalRoleGeneralTab');
-                    @include('pages.setting.eclaim.approvalRoleDomainTab');
-                    @include('pages.setting.eclaim.approvalRoleCompanyTab');
+                    @include('pages.setting.eclaim.approvalRoleGeneralTab')
+                    @include('pages.setting.eclaim.approvalRoleDomainTab')
+                    @include('pages.setting.eclaim.approvalRoleCompanyTab')
                 </div>
             </div>
         </div>

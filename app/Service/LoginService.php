@@ -359,9 +359,9 @@ class LoginService
             $response['username'] = $input['workingEmail'];
             $response['password'] = $input['password'];
             $response['content2'] = 'Please click the button below to activate your account:';
-            $response['resetPassLink'] = env('APP_URL') . '/activateView/' . $user->id;
+            $response['resetPassLink'] = env('APP_URL') . 'activateView/' . $user->id;
             $response['from'] = env('MAIL_FROM_ADDRESS');
-            $response['nameFrom'] = 'Claim';
+            $response['nameFrom'] = 'Orbit HRMS';
             $response['subject'] = 'Orbit Activation Link';
             // $response['typeAttachment'] = "application/pdf";
             //  $response['file'] = \public_path()."/assets/frontend/docs/gambar.jpg";
