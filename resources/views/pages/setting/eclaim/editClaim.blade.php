@@ -10,7 +10,7 @@
                             <h3>Update Claim Category</h3>
                             <br>
                             <div class="form-group row p-2">
-                                <label for="categorycode" class="col-sm-2 col-form-label">Claim Category
+                                <label for="categorycode" class="col-sm-3 col-form-label">Claim Category
                                     Code*</label>
                                 <div class="col">
                                     <input type="text" class="form-control" id="category_code"
@@ -20,7 +20,7 @@
                             </div>
                             <br>
                             <div class="form-group row p-2">
-                                <label for="claimcategory" class="col-sm-2 col-form-label">Claim
+                                <label for="claimcategory" class="col-sm-3 col-form-label">Claim
                                     Category*</label>
                                 <div class="col">
                                     <input type="text" class="form-control" name="claim_catagory"
@@ -31,9 +31,9 @@
                             </div>
                             <br>
                             <div class="form-group row p-2">
-                                <label for="claimtype" class="col-sm-2 col-form-label">Claim Type*</label>
+                                <label for="claimtype" class="col-sm-3 col-form-label">Claim Type*</label>
                                 <div class="col-sm-6">
-                                    <div class="row-sm-6 p-2">
+                                    <div class="row-sm-6 p-1">
                                         <input type="checkbox" class="form-check-input"
                                             {{ $claimCategory->claim_type == 'MTC' ? 'checked' : '' }}
                                             {{ $claimCategory->claim_type == 'MTC,GC' ? 'checked' : '' }} value="MTC"
@@ -41,7 +41,7 @@
                                             name="claim_type[]" id="" />
                                         <label>MTC- Monthly Claim</label>
                                     </div>
-                                    <div class="row-sm-6 p-2">
+                                    <div class="row-sm-6 p-1">
                                         <input type="checkbox" value="GC"
                                             {{ $claimCategory->claim_type == 'GC' ? 'checked' : '' }}
                                             {{ $claimCategory->claim_type == 'MTC,GC' ? 'checked' : '' }}
@@ -51,11 +51,20 @@
                                     </div>
                                 </div>
                             </div>
-                            <br>
                             <div class="form-group row p-2">
-                                <label for="description" class="col-sm-2 col-form-label">Description</label>
+                                <label for="claimtype" class="col-sm-3 col-form-label">Add Dropdown</label>
+                                <div class="col-sm-6">
+                                    <div class="row-sm-6 p-1">
+                                      <input type="checkbox" class="form-check-input" name="" id="adddropdownu" /> <label></label>
+                                    </div>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="labelu" style="display: none">
+                            <div class="form-group row p-2">
+                                <label for="description" class="col-sm-3 col-form-label">Labelling Name</label>
                                 <div class="col">
-                                    <textarea class="form-control" name="desc" id="descriptionn" rows="3" placeholder="Input Description">{{ $claimCategory->desc }}</textarea>
+                                    <textarea class="form-control" name="desc" id="descriptionn" rows="3" placeholder="Input Labelling Name">{{ $claimCategory->desc }}</textarea>
                                 </div>
                             </div>
                             <button type="button" class="btn btn-white mt-3 mb-3" data-bs-toggle="modal" id="myModal1"
@@ -72,6 +81,7 @@
                                     <tr> </tr>
                                 </tbody>
                             </table>
+                            </div>
                             <br><br>
                         </div>
                         <br>
