@@ -27,8 +27,8 @@ class LoginService
             return $data;
         }
         // checking existing domain/user
-        $user = Users::where([['username', '=',  "'".$params['email']."'"]])
-        ->first();
+        $user = Users::where([['username', '=',  "'" . $params['email'] . "'"]])
+            ->first();
 
         if ($user) {
             // show error user exists
@@ -47,7 +47,7 @@ class LoginService
         $saveUser = Users::create($param);
 
         $user = Users::where([['username', '=', $params['email']]])
-        ->first()->toArray();
+            ->first()->toArray();
 
         // $subsData = [];
         // $subsData['user_id'] = $user['id'];
@@ -70,7 +70,7 @@ class LoginService
             $data['title'] = 'Success!';
             $data['type'] = 'success';
             $data['msg'] = 'Success register';
-        }else{
+        } else {
             $data['title'] = 'Error';
             $data['type'] = 'error';
             $data['msg'] = 'Error register';
@@ -82,8 +82,8 @@ class LoginService
     public function verifiedAcc($id = '')
     {
         $user = Users::where('id', $id)
-        ->update(['status' => 'active']);
-            // dd($user);
+            ->update(['status' => 'active']);
+        // dd($user);
 
         if (!$user) {
             $data['title'] = 'Error!';
@@ -98,7 +98,6 @@ class LoginService
         $data['msg'] = 'Your Account have been verified';
 
         return $data;
-
     }
 
     public function ajaxLogin($input, $type = '')
@@ -106,7 +105,7 @@ class LoginService
         // check tenant exist or not
         if ($type == 'tenant') {
             $tenant = UsersDetails::where([['tenant', '=', $input['tenant']]])
-            ->first();
+                ->first();
 
             if (!$tenant) {
                 $data['title'] = 'Error!';
@@ -139,16 +138,16 @@ class LoginService
                 if ($user->failLogin) {
 
                     Users::where('username', $input['username'])
-                    ->update(['failLogin' =>  $user->failLogin+1 ]);
-                } else  {
+                        ->update(['failLogin' =>  $user->failLogin + 1]);
+                } else {
                     Users::where('username', $input['username'])
-                    ->update(['failLogin' =>  $count ]);
+                        ->update(['failLogin' =>  $count]);
                 }
 
                 //   if more than 3 attemps lock acc
-                if($user->failLogin >= 3){
+                if ($user->failLogin >= 3) {
                     Users::where('username', $input['username'])
-                    ->update(['status' =>  'lock' ]);
+                        ->update(['status' =>  'lock']);
 
                     // sending email
 
@@ -157,7 +156,6 @@ class LoginService
                     $data['msg'] = 'Your account have been lock.';
 
                     return $data;
-
                 }
             }
 
@@ -182,7 +180,7 @@ class LoginService
         }
 
         Users::where('username', $input['username'])
-                    ->update(['failLogin' =>  0]);
+            ->update(['failLogin' =>  0]);
 
         $data['title'] = 'Success!';
         $data['type'] = 'success';
@@ -195,19 +193,17 @@ class LoginService
     {
         $checkEmail = UsersDetails::where('email', $email)->first();
 
-        if(!$checkEmail)
-        {
+        if (!$checkEmail) {
             $data['title'] = 'Error!';
             $data['type'] = 'error';
             $data['msg'] = 'You email does not exist!';
-        }else {
+        } else {
             $data['title'] = 'Success!';
             $data['type'] = 'success';
             $data['msg'] = 'You email have been send!';
             $data['email'] = $checkEmail->email;
             $data['domain'] = $checkEmail->domain;
             $data['data'] = $checkEmail;
-
         }
 
         return $data;
@@ -238,7 +234,7 @@ class LoginService
         $password = Hash::make($input['password']);
 
         $update = Users::where('id', $input['user_id'])
-                    ->update(['password' =>  $password ]);
+            ->update(['password' =>  $password]);
 
         if (!$update) {
             $data['title'] = 'Error!';
@@ -253,7 +249,6 @@ class LoginService
         $data['msg'] = 'Reset password Success';
 
         return $data;
-
     }
 
     public function login($r, $type = '')
@@ -291,7 +286,6 @@ class LoginService
 
                 throw new CustomException($data['msg']);
             }
-
         }
 
         return $data;
@@ -314,7 +308,7 @@ class LoginService
             $data['type'] = config('app.response.error.type');
             $data['title'] = config('app.response.error.title');
             $data['msg'] = 'User not found';
-        }else{
+        } else {
             $receiver = $input['username'];
             $response['typeEmail'] = 'forgotPass';
             $response['title'] = 'Orbit Reset Password';
@@ -322,7 +316,7 @@ class LoginService
             $response['domain'] = $user->tenant;
             $response['username'] = $input['username'];
             $response['content2'] = 'Please click the button below to reset your password:';
-            $response['resetPassLink'] = env('APP_URL') . '/resetPassView/'.$user->id;
+            $response['resetPassLink'] = env('APP_URL') . '/resetPassView/' . $user->id;
             $response['from'] = env('MAIL_FROM_ADDRESS');
             $response['nameFrom'] = 'Claim';
             $response['subject'] = 'Orbit Reset Password';
@@ -338,7 +332,6 @@ class LoginService
         }
 
         return $data;
-
     }
 
     public function activationEmail($input)

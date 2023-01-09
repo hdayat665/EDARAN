@@ -6,6 +6,7 @@ use App\Models\ActivityLogs;
 use App\Models\ApprovelRoleGeneral;
 use App\Models\Branch;
 use App\Models\ClaimCategory;
+use App\Models\ClaimCategoryContent;
 use App\Models\Company;
 use App\Models\Department;
 use App\Models\Designation;
@@ -1317,7 +1318,6 @@ class SettingService
     public function createClaimCategory($r)
     {
         $input = $r->input();
-        // pr($input['claim_catagory']);
 
         date_default_timezone_set("Asia/Kuala_Lumpur");
         $newsData = ClaimCategory::where([['tenant_id', Auth::user()->tenant_id], ['claim_catagory', $input['claim_catagory']]])->first();
@@ -1331,14 +1331,32 @@ class SettingService
         }
 
         if ($input['claim_type']) {
-            $input['claim_type'] = implode(',', $input['claim_type']);
+            $claimCategory['claim_type'] = implode(',', $input['claim_type']);
         }
 
         $user = Auth::user();
-        $input['tenant_id'] = $user->tenant_id;
-        $input['user_id'] = $user->id;
+        $claimCategory['tenant_id'] = $user->tenant_id;
+        $claimCategory['user_id'] = $user->id;
+        $claimCategory['claim_catagory_code'] = $input['claim_catagory_code'];
+        $claimCategory['claim_catagory'] = $input['claim_catagory'];
 
-        ClaimCategory::create($input);
+        ClaimCategory::create($claimCategory);
+
+        $category = ClaimCategory::where('tenant_id', $user->tenant_id)->orderBy('created_at', 'DESC')->first();
+
+        if ($input['content']) {
+            foreach ($input['content'] as $content) {
+                $dataContent[] = [
+                    'content' => $content,
+                    'category_id' => $category->id,
+                    'label' => $input['label'],
+                    'updated_at' => date_format(date_create(date("Y-m-d H:i:s")), "Y-m-d H:i:s"),
+                    'created_at' => date_format(date_create(date("Y-m-d H:i:s")), "Y-m-d H:i:s"),
+                ];
+            }
+
+            ClaimCategoryContent::insert($dataContent);
+        }
 
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');

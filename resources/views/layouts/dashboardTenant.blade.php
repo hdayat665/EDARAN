@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html lang="en" >
+<html lang="en">
 <style>
-  #chart-wrapper {
-	display: flex;
-    position: relative;
-    width: 50%;
-	margin: 0 auto;
-	align-items: center;
-  }
+    #chart-wrapper {
+        display: flex;
+        position: relative;
+        width: 50%;
+        margin: 0 auto;
+        align-items: center;
+    }
 </style>
 
 <head>
@@ -17,11 +17,13 @@
     <meta content="" name="description" />
     <meta content="" name="author" />
 
-    <link rel="shortcut icon" href="/assets/img/logo/orbit-sm.png" >
+    <link rel="shortcut icon" href="/assets/img/logo/orbit-sm.png">
     <!-- ================== BEGIN core-css ================== -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400&display=swap" rel="stylesheet">	<link href="/assets/css/vendor.min.css" rel="stylesheet" />	<link href="/assets/css/vendor.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400&display=swap" rel="stylesheet">
+    <link href="/assets/css/vendor.min.css" rel="stylesheet" />
+    <link href="/assets/css/vendor.min.css" rel="stylesheet" />
     <link href="/assets/css/default/app.min.css" rel="stylesheet" />
     <!-- ================== END core-css ================== -->
 
@@ -38,7 +40,7 @@
     <link href="/assets/plugins/@fullcalendar/list/main.min.css" rel="stylesheet" />
     <link href="/assets/plugins/@fullcalendar/bootstrap/main.min.css" rel="stylesheet" />
     <style>
-        .error{
+        .error {
             /* margin-top:2.4rem !important; */
             color: red !important;
             text-align: left !important;
@@ -47,6 +49,7 @@
     </style>
     <!-- ================== END page-css ================== -->
 </head>
+
 <body>
     <!-- BEGIN #loader -->
     <div id="loader" class="app-loader">
@@ -60,7 +63,7 @@
         <div id="header" class="app-header">
             <!-- BEGIN navbar-header -->
             <div class="navbar-header">
-                <img src="/assets/img/logo/orbit-logo-5.png" class="navbar-logo navbar-brand"  alt="...">
+                <img src="/assets/img/logo/orbit-logo-5.png" class="navbar-logo navbar-brand" alt="...">
                 <button type="button" class="navbar-mobile-toggler" data-toggle="app-sidebar-mobile">
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
@@ -83,7 +86,8 @@
                                 <i class="fa fa-bug media-object bg-gray-500"></i>
                             </div>
                             <div class="media-body">
-                                <h6 class="media-heading">Server Error Reports <i class="fa fa-exclamation-circle text-danger"></i></h6>
+                                <h6 class="media-heading">Server Error Reports <i
+                                        class="fa fa-exclamation-circle text-danger"></i></h6>
                                 <div class="text-muted fs-10px">3 minutes ago</div>
                             </div>
                         </a>
@@ -135,7 +139,8 @@
                 </div>
 
                 <div class="navbar-item navbar-user dropdown">
-                    <a href="#" class="navbar-link dropdown-toggle d-flex align-items-center" data-bs-toggle="dropdown">
+                    <a href="#" class="navbar-link dropdown-toggle d-flex align-items-center"
+                        data-bs-toggle="dropdown">
                         <img src="/assets/img/user/user-13.jpg" alt="" />
                         <span>
                             <span class="d-none d-md-inline">Admin</span>
@@ -176,16 +181,16 @@
                         </a>
                     </div>
 
-                        <!-- End Sidenav Content Orbit -->
+                    <!-- End Sidenav Content Orbit -->
 
-                        <!-- Sidenav Content Orbit -->
+                    <!-- Sidenav Content Orbit -->
 
-                        <div class="menu-item has-sub">
+                    <div class="menu-item has-sub">
                         <a href="javascript:;" class="menu-link highlight">
                             <div class="menu-icon">
                                 <i class="fa fa-commenting text-gray"></i>
                             </div>
-                            <div class="menu-text text-gray active" >HRIS</div>
+                            <div class="menu-text text-gray active">HRIS</div>
                             <div class="menu-caret text-gray"></div>
                         </a>
                         <div class="menu-submenu">
@@ -193,8 +198,8 @@
                             <div class="menu-item">
                                 <a href="/myProfile" class="menu-link highlight">
                                     <div class="menu-icon">
-										<i class="fa fa-address-card text-gray"></i>
-									</div>
+                                        <i class="fa fa-address-card text-gray"></i>
+                                    </div>
                                     <div class="menu-text text-gray">My Profile </div>
                                 </a>
                             </div>
@@ -202,8 +207,8 @@
                             <div class="menu-item">
                                 <a href="/employeeInfoView" class="menu-link highlight">
                                     <div class="menu-icon">
-										<i class="fa fa-indent text-gray"></i>
-									</div>
+                                        <i class="fa fa-indent text-gray"></i>
+                                    </div>
                                     <div class="menu-text text-gray">Employee Information</div>
                                 </a>
                             </div>
@@ -226,24 +231,24 @@
                             <div class="menu-item">
                                 <a href="/myTimesheet" class="menu-link highlight">
                                     <div class="menu-icon">
-										<i class="fa fa-calendar-check text-gray"></i>
-									</div>
+                                        <i class="fa fa-calendar-check text-gray"></i>
+                                    </div>
                                     <div class="menu-text text-gray">My Timesheets</div>
                                 </a>
                             </div>
                             <div class="menu-item">
                                 <a href="/timesheetApproval" class="menu-link highlight">
                                     <div class="menu-icon">
-										<i class="fa fa-receipt text-gray"></i>
-									</div>
+                                        <i class="fa fa-receipt text-gray"></i>
+                                    </div>
                                     <div class="menu-text text-gray">Timesheets Approval</div>
                                 </a>
                             </div>
                             <div class="menu-item">
                                 <a href="/realtimeEventTimesheet" class="menu-link highlight">
                                     <div class="menu-icon">
-										<i class="fa fa-receipt text-gray"></i>
-									</div>
+                                        <i class="fa fa-receipt text-gray"></i>
+                                    </div>
                                     <div class="menu-text text-gray">Realtime Activities</div>
                                 </a>
                             </div>
@@ -266,16 +271,16 @@
                             <div class="menu-item">
                                 <a href="#" class="menu-link highlight">
                                     <div class="menu-icon">
-										<i class="fa fa-bell text-gray"></i>
-									</div>
+                                        <i class="fa fa-bell text-gray"></i>
+                                    </div>
                                     <div class="menu-text text-gray">My Attendance</div>
                                 </a>
                             </div>
                             <div class="menu-item">
                                 <a href="#" class="menu-link highlight">
                                     <div class="menu-icon">
-										<i class="fa fa-list-check text-gray"></i>
-									</div>
+                                        <i class="fa fa-list-check text-gray"></i>
+                                    </div>
                                     <div class="menu-text text-gray">Attendance Information</div>
                                 </a>
                             </div>
@@ -298,16 +303,16 @@
                             <div class="menu-item">
                                 <a href="#" class="menu-link highlight">
                                     <div class="menu-icon">
-										<i class="fa fa-clipboard text-gray"></i>
-									</div>
+                                        <i class="fa fa-clipboard text-gray"></i>
+                                    </div>
                                     <div class="menu-text text-gray">My Leave</div>
                                 </a>
                             </div>
                             <div class="menu-item">
                                 <a href="#" class="menu-link highlight">
                                     <div class="menu-icon">
-										<i class="fa fa-list-check text-gray"></i>
-									</div>
+                                        <i class="fa fa-list-check text-gray"></i>
+                                    </div>
                                     <div class="menu-text text-gray">Leave Approval</div>
                                 </a>
                             </div>
@@ -329,33 +334,33 @@
                         <div class="menu-submenu">
                             <div class="menu-item">
                                 <a href="/customer" class="menu-link highlight">
-                                <div class="menu-icon">
-								    <i class="fa fa-share-nodes text-gray"></i>
-							    </div>
+                                    <div class="menu-icon">
+                                        <i class="fa fa-share-nodes text-gray"></i>
+                                    </div>
                                     <div class="menu-text text-gray">Customer</i></div>
                                 </a>
                             </div>
                             <div class="menu-item">
                                 <a href="/projectInfo" class="menu-link highlight">
-                                <div class="menu-icon">
-								    <i class="fa fa-book text-gray"></i>
-							    </div>
+                                    <div class="menu-icon">
+                                        <i class="fa fa-book text-gray"></i>
+                                    </div>
                                     <div class="menu-text text-gray">Project Information</div>
                                 </a>
                             </div>
                             <div class="menu-item">
                                 <a href="/myProject" class="menu-link highlight">
-                                <div class="menu-icon">
-								    <i class="fa fa-clipboard-list text-gray"></i>
-							    </div>
+                                    <div class="menu-icon">
+                                        <i class="fa fa-clipboard-list text-gray"></i>
+                                    </div>
                                     <div class="menu-text text-gray">My Project</div>
                                 </a>
                             </div>
                             <div class="menu-item">
                                 <a href="/projectRequest" class="menu-link highlight">
-                                <div class="menu-icon">
-								    <i class="fa fa-code-pull-request text-gray"></i>
-							    </div>
+                                    <div class="menu-icon">
+                                        <i class="fa fa-code-pull-request text-gray"></i>
+                                    </div>
                                     <div class="menu-text text-gray">Project Request</div>
                                 </a>
                             </div>
@@ -366,84 +371,91 @@
                     <!-- Sidenav Content Orbit -->
 
                     <div class="menu-item has-sub">
-						<a href="javascript:;" class="menu-link highlight">
-							<div class="menu-icon">
-								<i class="fa fa-file-lines text-gray"></i>
-							</div>
-							<div class="menu-text text-gray">E-Claim</div>
-							<div class="menu-caret text-gray"></div>
-						</a>
-						<div class="menu-submenu">
-							<div class="menu-item">
-								<a href="#" class="menu-link highlight">
-							        <div class="menu-icon">
-									    <i class="fa fa-envelope-open-text text-gray"></i>
-								    </div>
-									<div class="menu-text text-gray">My Claim</div>
-								</a>
-							</div>
-							<div class="menu-item has-sub">
-								<a href="javascript:;" class="menu-link highlight">
-								    <div class="menu-icon">
-										<i class="fa fa-list-check text-gray"></i></div>
-									    <div class="menu-text text-gray">Claim Approval</i></div>
-                                        <div class="menu-caret text-gray"></div>
-								</a>
-                                    <div class="menu-submenu">
-                                        <div class="menu-item">
-                                            <a href="#" class="menu-link highlight">
-                                                <div class="menu-icon">
-                                                    <i class="fa fa-user text-gray"></i>
-                                                </div>
-                                                <div class="menu-text text-gray">(SV)</i></div>
-                                            </a>
-                                        </div>
-                                        <div class="menu-item">
-                                            <a href="#" class="menu-link highlight">
-                                                <div class="menu-icon">
-                                                    <i class="fa fa-user-tie text-gray"></i></div>
-                                                <div class="menu-text text-gray">(HOD)</i></div>
-                                            </a>
-                                        </div>
-                                        <div class="menu-item">
-                                            <a href="#" class="menu-link highlight">
-                                                <div class="menu-icon">
-                                                    <i class="fa fa-user-gear text-gray"></i></div>
-                                                <div class="menu-text text-gray">Admin(Recommender)</i></div>
-                                            </a>
-                                        </div>
-                                        <div class="menu-item">
-                                            <a href="#" class="menu-link highlight">
-                                                <div class="menu-icon">
-                                                    <i class="fa fa-user-gear text-gray"></i></div>
-                                                <div class="menu-text text-gray">Admin(Approver)</i></div>
-                                            </a>
-                                        </div>
-                                        <div class="menu-item">
-                                            <a href="#" class="menu-link highlight">
-                                                <div class="menu-icon">
-                                                    <i class="fa fa-user-gear text-gray"></i></div>
-                                                <div class="menu-text text-gray">Finance(Checker)</i></div>
-                                            </a>
-                                        </div>
-                                        <div class="menu-item">
-                                            <a href="#" class="menu-link highlight">
-                                                <div class="menu-icon">
-                                                    <i class="fa fa-user-gear text-gray"></i></div>
-                                                <div class="menu-text text-gray">Finance(Recommender)</i></div>
-                                            </a>
-                                        </div>
-                                        <div class="menu-item">
-                                            <a href="#" class="menu-link highlight">
-                                                <div class="menu-icon">
-                                                    <i class="fa fa-user-gear text-gray"></i></div>
-                                                <div class="menu-text text-gray">Finance(Approver)</i></div>
-                                            </a>
-                                        </div>
+                        <a href="javascript:;" class="menu-link highlight">
+                            <div class="menu-icon">
+                                <i class="fa fa-file-lines text-gray"></i>
+                            </div>
+                            <div class="menu-text text-gray">E-Claim</div>
+                            <div class="menu-caret text-gray"></div>
+                        </a>
+                        <div class="menu-submenu">
+                            <div class="menu-item">
+                                <a href="/myClaimView" class="menu-link highlight">
+                                    <div class="menu-icon">
+                                        <i class="fa fa-envelope-open-text text-gray"></i>
                                     </div>
-							</div>
-						</div>
-					</div>
+                                    <div class="menu-text text-gray">My Claim</div>
+                                </a>
+                            </div>
+                            <div class="menu-item has-sub">
+                                <a href="javascript:;" class="menu-link highlight">
+                                    <div class="menu-icon">
+                                        <i class="fa fa-list-check text-gray"></i>
+                                    </div>
+                                    <div class="menu-text text-gray">Claim Approval</i></div>
+                                    <div class="menu-caret text-gray"></div>
+                                </a>
+                                <div class="menu-submenu">
+                                    <div class="menu-item">
+                                        <a href="#" class="menu-link highlight">
+                                            <div class="menu-icon">
+                                                <i class="fa fa-user text-gray"></i>
+                                            </div>
+                                            <div class="menu-text text-gray">(SV)</i></div>
+                                        </a>
+                                    </div>
+                                    <div class="menu-item">
+                                        <a href="#" class="menu-link highlight">
+                                            <div class="menu-icon">
+                                                <i class="fa fa-user-tie text-gray"></i>
+                                            </div>
+                                            <div class="menu-text text-gray">(HOD)</i></div>
+                                        </a>
+                                    </div>
+                                    <div class="menu-item">
+                                        <a href="#" class="menu-link highlight">
+                                            <div class="menu-icon">
+                                                <i class="fa fa-user-gear text-gray"></i>
+                                            </div>
+                                            <div class="menu-text text-gray">Admin(Recommender)</i></div>
+                                        </a>
+                                    </div>
+                                    <div class="menu-item">
+                                        <a href="#" class="menu-link highlight">
+                                            <div class="menu-icon">
+                                                <i class="fa fa-user-gear text-gray"></i>
+                                            </div>
+                                            <div class="menu-text text-gray">Admin(Approver)</i></div>
+                                        </a>
+                                    </div>
+                                    <div class="menu-item">
+                                        <a href="#" class="menu-link highlight">
+                                            <div class="menu-icon">
+                                                <i class="fa fa-user-gear text-gray"></i>
+                                            </div>
+                                            <div class="menu-text text-gray">Finance(Checker)</i></div>
+                                        </a>
+                                    </div>
+                                    <div class="menu-item">
+                                        <a href="#" class="menu-link highlight">
+                                            <div class="menu-icon">
+                                                <i class="fa fa-user-gear text-gray"></i>
+                                            </div>
+                                            <div class="menu-text text-gray">Finance(Recommender)</i></div>
+                                        </a>
+                                    </div>
+                                    <div class="menu-item">
+                                        <a href="#" class="menu-link highlight">
+                                            <div class="menu-icon">
+                                                <i class="fa fa-user-gear text-gray"></i>
+                                            </div>
+                                            <div class="menu-text text-gray">Finance(Approver)</i></div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
                     <!-- End Sidenav Content Orbit -->
                     <!-- Sidenav Content Orbit -->
@@ -454,27 +466,27 @@
                                 <i class="fa fa-user-group text-gray"></i>
                             </div>
                             <div class="menu-text text-gray">Organization</div>
-							<div class="menu-caret text-gray"></div>
+                            <div class="menu-caret text-gray"></div>
                         </a>
 
-                            <div class="menu-submenu">
-                                <div class="menu-item">
-                                    <a href="/phoneDirectory" class="menu-link highlight">
+                        <div class="menu-submenu">
+                            <div class="menu-item">
+                                <a href="/phoneDirectory" class="menu-link highlight">
                                     <div class="menu-icon">
-								        <i class="fa fa-rectangle-list text-gray"></i>
-							        </div>
-                                        <div class="menu-text text-gray">Phone Directory</i></div>
-                                    </a>
-                                </div>
-                                <div class="menu-item">
-                                    <a href="/organizationChart" class="menu-link highlight">
+                                        <i class="fa fa-rectangle-list text-gray"></i>
+                                    </div>
+                                    <div class="menu-text text-gray">Phone Directory</i></div>
+                                </a>
+                            </div>
+                            <div class="menu-item">
+                                <a href="/organizationChart" class="menu-link highlight">
                                     <div class="menu-icon">
-								        <i class="fa fa-rectangle-list text-gray"></i>
-							        </div>
-                                        <div class="menu-text text-gray">Organization Chart</div>
-                                    </a>
-                                </div>
-                                {{-- <div class="menu-item">
+                                        <i class="fa fa-rectangle-list text-gray"></i>
+                                    </div>
+                                    <div class="menu-text text-gray">Organization Chart</div>
+                                </a>
+                            </div>
+                            {{-- <div class="menu-item">
                                     <a href="/departmentTree" class="menu-link highlight">
                                     <div class="menu-icon">
 								        <i class="fa fa-folder-tree text-gray"></i>
@@ -482,7 +494,7 @@
                                         <div class="menu-text text-gray">Department Tree</div>
                                     </a>
                                 </div> --}}
-                            </div>
+                        </div>
 
                     </div>
 
@@ -490,146 +502,148 @@
                     <!-- Sidenav Content Orbit -->
 
                     <div class="menu-item has-sub">
-                            <a href="javascript:;" class="menu-link highlight">
-                                <div class="menu-icon">
-                                    <i class="fa fa-pen-fancy text-gray"></i>
-                                </div>
-                                <div class="menu-text text-gray">Reporting</div>
-                                <div class="menu-caret text-gray"></div>
-                            </a>
+                        <a href="javascript:;" class="menu-link highlight">
+                            <div class="menu-icon">
+                                <i class="fa fa-pen-fancy text-gray"></i>
+                            </div>
+                            <div class="menu-text text-gray">Reporting</div>
+                            <div class="menu-caret text-gray"></div>
+                        </a>
                         <div class="menu-submenu">
                             <div class="menu-item has-sub">
                                 <a href="#" class="menu-link highlight">
                                     <div class="menu-icon">
-							    	    <i class="fa fa-file-signature text-gray"></i>
-							        </div>
+                                        <i class="fa fa-file-signature text-gray"></i>
+                                    </div>
                                     <div class="menu-text text-gray">Timesheet</i></div>
                                     <div class="menu-caret text-gray"></div>
                                 </a>
 
-                        <div class="menu-submenu">
-                            <div class="menu-item">
-                                <a href="/statusReport" class="menu-link highlight">
-                                    <div class="menu-icon">
-								        <i class="fa fa-address-card text-gray"></i>
-							        </div>
-                                        <div class="menu-text text-gray">Status Report</div>
-                                </a>
-                            </div>
-
-                            <div class="menu-item">
-                                <a href="/employeeReport" class="menu-link highlight">
-                                    <div class="menu-icon">
-                                        <i class="fa fa-user-clock text-gray"></i>
+                                <div class="menu-submenu">
+                                    <div class="menu-item">
+                                        <a href="/statusReport" class="menu-link highlight">
+                                            <div class="menu-icon">
+                                                <i class="fa fa-address-card text-gray"></i>
+                                            </div>
+                                            <div class="menu-text text-gray">Status Report</div>
+                                        </a>
                                     </div>
-                                        <div class="menu-text text-gray">Employee Report</div>
-                                </a>
-                            </div>
 
-                            <div class="menu-item">
-                                <a href="/overtimeReport" class="menu-link highlight">
-                                    <div class="menu-icon">
-                                        <i class="fa fa-user-gear text-gray"></i>
+                                    <div class="menu-item">
+                                        <a href="/employeeReport" class="menu-link highlight">
+                                            <div class="menu-icon">
+                                                <i class="fa fa-user-clock text-gray"></i>
+                                            </div>
+                                            <div class="menu-text text-gray">Employee Report</div>
+                                        </a>
                                     </div>
-                                        <div class="menu-text text-gray">Overtime Report</div>
-                                </a>
+
+                                    <div class="menu-item">
+                                        <a href="/overtimeReport" class="menu-link highlight">
+                                            <div class="menu-icon">
+                                                <i class="fa fa-user-gear text-gray"></i>
+                                            </div>
+                                            <div class="menu-text text-gray">Overtime Report</div>
+                                        </a>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
                             <div class="menu-item has-sub">
                                 <a href="#" class="menu-link highlight">
-                                <div class="menu-icon">
-								    <i class="fa fa-user-check text-gray"></i>
-							    </div>
+                                    <div class="menu-icon">
+                                        <i class="fa fa-user-check text-gray"></i>
+                                    </div>
                                     <div class="menu-text text-gray">E-Attendance</div>
                                     <div class="menu-caret text-gray"></div>
-                                </a><div class="menu-submenu">
-                                <div class="menu-item">
-                                    <a href="#" class="menu-link highlight">
-                                        <div class="menu-icon">
-								             <i class="fa fa-user-pen text-gray"></i>
-							            </div>
-                                        <div class="menu-text text-gray">Daily Report</div>
-                                    </a>
+                                </a>
+                                <div class="menu-submenu">
+                                    <div class="menu-item">
+                                        <a href="#" class="menu-link highlight">
+                                            <div class="menu-icon">
+                                                <i class="fa fa-user-pen text-gray"></i>
+                                            </div>
+                                            <div class="menu-text text-gray">Daily Report</div>
+                                        </a>
                                     </div>
                                     <div class="menu-item">
-                                <a href="#" class="menu-link highlight">
-                                <div class="menu-icon">
-								    <i class="fa fa-users-gear text-gray"></i>
-							    </div>
-                                    <div class="menu-text text-gray">Status Report</div>
-                                </a>
-                            </div>
+                                        <a href="#" class="menu-link highlight">
+                                            <div class="menu-icon">
+                                                <i class="fa fa-users-gear text-gray"></i>
+                                            </div>
+                                            <div class="menu-text text-gray">Status Report</div>
+                                        </a>
+                                    </div>
 
-                        </div>
+                                </div>
 
 
                             </div>
                             <div class="menu-item">
-								<a href="#" class="menu-link highlight">
-								<div class="menu-icon">
-								<i class="fa fa-user-minus text-gray"></i>
-							</div>
-									<div class="menu-text text-gray">E-Leave</div>
-								</a>
-							</div>
-
-                            <div class="menu-item has-sub">
-								<a href="#" class="menu-link highlight">
-								<div class="menu-icon">
-								<i class="fa fa-keyboard text-gray"></i>
-							</div>
-									<div class="menu-text text-gray">Project</div>
-                                    <div class="menu-caret text-gray"></div>
-								</a><div class="menu-submenu">
-                                <div class="menu-item">
-                                    <a href="/projectListing" class="menu-link highlight">
-                                        <div class="menu-icon">
-								             <i class="fa fa-book text-gray"></i>
-							            </div>
-                                        <div class="menu-text text-gray">Project Listing</div>
-                                    </a>
-                                    </div>
-                                    <div class="menu-item">
-                                <a href="/projectFilter" class="menu-link highlight">
-                                <div class="menu-icon">
-								    <i class="fa fa-book-open text-gray"></i>
-							    </div>
-                                    <div class="menu-text text-gray">Project Report</div>
-                                </a>
-                            </div>
-
-                                </div>
-
-							</div>
-                            <div class="menu-item has-sub">
-								<a href="#" class="menu-link highlight">
-								<div class="menu-icon">
-								<i class="fa fa-money-check text-gray"></i>
-							</div>
-									<div class="menu-text text-gray">Claim</div>
-                                    <div class="menu-caret text-gray"></div>
-								</a>
-                                <div class="menu-submenu">
-                                <div class="menu-item">
-                                    <a href="#" class="menu-link highlight">
-                                        <div class="menu-icon">
-								             <i class="fa fa-money-bill-wave text-gray"></i>
-							            </div>
-                                        <div class="menu-text text-gray">Claim</div>
-                                    </a>
-                                    </div>
-                                    <div class="menu-item">
                                 <a href="#" class="menu-link highlight">
-                                <div class="menu-icon">
-								    <i class="fa fa-money-bill-1-wave text-gray"></i>
-							    </div>
-                                    <div class="menu-text text-gray">Cash Advance</div>
+                                    <div class="menu-icon">
+                                        <i class="fa fa-user-minus text-gray"></i>
+                                    </div>
+                                    <div class="menu-text text-gray">E-Leave</div>
                                 </a>
                             </div>
 
+                            <div class="menu-item has-sub">
+                                <a href="#" class="menu-link highlight">
+                                    <div class="menu-icon">
+                                        <i class="fa fa-keyboard text-gray"></i>
+                                    </div>
+                                    <div class="menu-text text-gray">Project</div>
+                                    <div class="menu-caret text-gray"></div>
+                                </a>
+                                <div class="menu-submenu">
+                                    <div class="menu-item">
+                                        <a href="/projectListing" class="menu-link highlight">
+                                            <div class="menu-icon">
+                                                <i class="fa fa-book text-gray"></i>
+                                            </div>
+                                            <div class="menu-text text-gray">Project Listing</div>
+                                        </a>
+                                    </div>
+                                    <div class="menu-item">
+                                        <a href="/projectFilter" class="menu-link highlight">
+                                            <div class="menu-icon">
+                                                <i class="fa fa-book-open text-gray"></i>
+                                            </div>
+                                            <div class="menu-text text-gray">Project Report</div>
+                                        </a>
+                                    </div>
+
                                 </div>
-							</div>
+
+                            </div>
+                            <div class="menu-item has-sub">
+                                <a href="#" class="menu-link highlight">
+                                    <div class="menu-icon">
+                                        <i class="fa fa-money-check text-gray"></i>
+                                    </div>
+                                    <div class="menu-text text-gray">Claim</div>
+                                    <div class="menu-caret text-gray"></div>
+                                </a>
+                                <div class="menu-submenu">
+                                    <div class="menu-item">
+                                        <a href="#" class="menu-link highlight">
+                                            <div class="menu-icon">
+                                                <i class="fa fa-money-bill-wave text-gray"></i>
+                                            </div>
+                                            <div class="menu-text text-gray">Claim</div>
+                                        </a>
+                                    </div>
+                                    <div class="menu-item">
+                                        <a href="#" class="menu-link highlight">
+                                            <div class="menu-icon">
+                                                <i class="fa fa-money-bill-1-wave text-gray"></i>
+                                            </div>
+                                            <div class="menu-text text-gray">Cash Advance</div>
+                                        </a>
+                                    </div>
+
+                                </div>
+                            </div>
                         </div>
                     </div>
 
@@ -661,11 +675,13 @@
             <!-- END scrollbar -->
         </div>
         <div class="app-sidebar-bg"></div>
-        <div class="app-sidebar-mobile-backdrop"><a href="#" data-dismiss="app-sidebar-mobile" class="stretched-link"></a></div>
+        <div class="app-sidebar-mobile-backdrop"><a href="#" data-dismiss="app-sidebar-mobile"
+                class="stretched-link"></a></div>
         <!-- END #sidebar -->
         @yield('content')
         <!-- BEGIN #content -->
-        <a href="javascript:;" class="btn btn-icon btn-circle btn-success btn-scroll-to-top" data-toggle="scroll-to-top"><i class="fa fa-angle-up"></i></a>
+        <a href="javascript:;" class="btn btn-icon btn-circle btn-success btn-scroll-to-top"
+            data-toggle="scroll-to-top"><i class="fa fa-angle-up"></i></a>
 
         <!-- END #app -->
 
@@ -690,108 +706,109 @@
         <script src="/assets/plugins/@fullcalendar/list/main.global.js"></script>
         <script src="/assets/plugins/@fullcalendar/bootstrap/main.global.js"></script>
 
-         <!-- required files -->
-    <link href="/assets/plugins/bootstrap-timepicker/css/bootstrap-timepicker.min.css" rel="stylesheet" />
-    <script src="/assets/plugins/bootstrap-timepicker/js/bootstrap-timepicker.min.js"></script>
-    <!-- required files -->
-    <link href="/assets/plugins/bootstrap-datepicker/dist/css/bootstrap-datepicker.css" rel="stylesheet" />
-    <script src="/assets/plugins/bootstrap-datepicker/dist/js/bootstrap-datepicker.js"></script>
-    <!-- required files -->
-    <link href="/assets/plugins/select-picker/dist/picker.min.css" rel="stylesheet" />
-    <script src="/assets/plugins/select-picker/dist/picker.min.js"></script>
+        <!-- required files -->
+        <link href="/assets/plugins/bootstrap-timepicker/css/bootstrap-timepicker.min.css" rel="stylesheet" />
+        <script src="/assets/plugins/bootstrap-timepicker/js/bootstrap-timepicker.min.js"></script>
+        <!-- required files -->
+        <link href="/assets/plugins/bootstrap-datepicker/dist/css/bootstrap-datepicker.css" rel="stylesheet" />
+        <script src="/assets/plugins/bootstrap-datepicker/dist/js/bootstrap-datepicker.js"></script>
+        <!-- required files -->
+        <link href="/assets/plugins/select-picker/dist/picker.min.css" rel="stylesheet" />
+        <script src="/assets/plugins/select-picker/dist/picker.min.js"></script>
         <!-- ================== END page-js ================== -->
-    </body>
-    </html>
-    <script src="/assets/plugins/datatables.net/js/jquery.dataTables.min.js"></script>
-    <script src="/assets/plugins/datatables.net-bs5/js/dataTables.bootstrap5.min.js"></script>
-    <script src="/assets/plugins/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
-    <link href="/assets/plugins/datatables.net-buttons-bs5/css/buttons.bootstrap5.min.css" rel="stylesheet" />
-    <script src="/assets/plugins/datatables.net-responsive-bs5/js/responsive.bootstrap5.min.js"></script>
-    <script src="/assets/plugins/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
-    <script src="/assets/plugins/datatables.net-buttons-bs5/js/buttons.bootstrap5.min.js"></script>
-    <script src="/assets/plugins/datatables.net-buttons/js/buttons.colVis.min.js"></script>
-    <script src="/assets/plugins/datatables.net-buttons/js/buttons.flash.min.js"></script>
-    <script src="/assets/plugins/datatables.net-buttons/js/buttons.html5.min.js"></script>
-    <script src="/assets/plugins/datatables.net-buttons/js/buttons.print.min.js"></script>
-    <script src="/assets/plugins/pdfmake/build/pdfmake.min.js"></script>
-    <script src="/assets/plugins/pdfmake/build/vfs_fonts.js"></script>
-    <script src="/assets/plugins/jszip/dist/jszip.min.js"></script>
-    <script src="/assets/js/demo/table-manage-buttons.demo.js"></script>
-    <script src="/assets/plugins/@highlightjs/cdn-assets/highlight.min.js"></script>
-    <script src="/assets/js/demo/render.highlight.js"></script>
-    <link href="/assets/plugins/datatables.net-bs5/css/dataTables.bootstrap5.min.css" rel="stylesheet" />
-    <link href="/assets/plugins/datatables.net-responsive-bs5/css/responsive.bootstrap5.min.css" rel="stylesheet" />
-    <link href="/assets/plugins/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet" />
-    <script src="/assets/plugins/moment/min/moment.min.js"></script>
-    <script src="/assets/plugins/bootstrap-daterangepicker/daterangepicker.js"></script>
-    <link href="/assets/plugins/bootstrap-datepicker/dist/css/bootstrap-datepicker.css" rel="stylesheet" />
-    <script src="/assets/plugins/bootstrap-datepicker/dist/js/bootstrap-datepicker.js"></script>
-    <!-- required files -->
-    <link href="/assets/plugins/blueimp-gallery/css/blueimp-gallery.min.css" rel="stylesheet" />
-    <link href="/assets/plugins/blueimp-file-upload/css/jquery.fileupload.css" rel="stylesheet" />
-    <link href="/assets/plugins/blueimp-file-upload/css/jquery.fileupload-ui.css" rel="stylesheet" />
+</body>
 
-    <script src="/assets/plugins/blueimp-file-upload/js/vendor/jquery.ui.widget.js"></script>
-    <script src="/assets/plugins/blueimp-tmpl/js/tmpl.js"></script>
-    <script src="/assets/plugins/blueimp-load-image/js/load-image.all.min.js"></script>
-    <script src="/assets/plugins/blueimp-canvas-to-blob/js/canvas-to-blob.js"></script>
-    <script src="/assets/plugins/blueimp-gallery/js/jquery.blueimp-gallery.min.js"></script>
-    <script src="/assets/plugins/blueimp-file-upload/js/jquery.iframe-transport.js"></script>
-    <script src="/assets/plugins/blueimp-file-upload/js/jquery.fileupload.js"></script>
-    <script src="/assets/plugins/blueimp-file-upload/js/jquery.fileupload-process.js"></script>
-    <script src="/assets/plugins/blueimp-file-upload/js/jquery.fileupload-image.js"></script>
-    <script src="/assets/plugins/blueimp-file-upload/js/jquery.fileupload-audio.js"></script>
-    <script src="/assets/plugins/blueimp-file-upload/js/jquery.fileupload-video.js"></script>
-    <script src="/assets/plugins/blueimp-file-upload/js/jquery.fileupload-validate.js"></script>
-    <script src="/assets/plugins/blueimp-file-upload/js/jquery.fileupload-ui.js"></script>
-    <script src="/assets/js/demo/form-multiple-upload.demo.js"></script>
-	<script src="/assets/plugins/jstree/dist/jstree.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.2/croppie.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.2/croppie.js"></script>
-    <script src="/assets/js/orgchart.js"></script>
-    <link href="/assets/plugins/nvd3/build/nv.d3.css" rel="stylesheet" />
-    <script src="/assets/plugins/d3/d3.min.js"></script>
-    <script src="/assets/plugins/nvd3/build/nv.d3.min.js"></script>
-    <script src="/assets/plugins/chart.js/dist/chart.min.js"></script>
+</html>
+<script src="/assets/plugins/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="/assets/plugins/datatables.net-bs5/js/dataTables.bootstrap5.min.js"></script>
+<script src="/assets/plugins/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+<link href="/assets/plugins/datatables.net-buttons-bs5/css/buttons.bootstrap5.min.css" rel="stylesheet" />
+<script src="/assets/plugins/datatables.net-responsive-bs5/js/responsive.bootstrap5.min.js"></script>
+<script src="/assets/plugins/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+<script src="/assets/plugins/datatables.net-buttons-bs5/js/buttons.bootstrap5.min.js"></script>
+<script src="/assets/plugins/datatables.net-buttons/js/buttons.colVis.min.js"></script>
+<script src="/assets/plugins/datatables.net-buttons/js/buttons.flash.min.js"></script>
+<script src="/assets/plugins/datatables.net-buttons/js/buttons.html5.min.js"></script>
+<script src="/assets/plugins/datatables.net-buttons/js/buttons.print.min.js"></script>
+<script src="/assets/plugins/pdfmake/build/pdfmake.min.js"></script>
+<script src="/assets/plugins/pdfmake/build/vfs_fonts.js"></script>
+<script src="/assets/plugins/jszip/dist/jszip.min.js"></script>
+<script src="/assets/js/demo/table-manage-buttons.demo.js"></script>
+<script src="/assets/plugins/@highlightjs/cdn-assets/highlight.min.js"></script>
+<script src="/assets/js/demo/render.highlight.js"></script>
+<link href="/assets/plugins/datatables.net-bs5/css/dataTables.bootstrap5.min.css" rel="stylesheet" />
+<link href="/assets/plugins/datatables.net-responsive-bs5/css/responsive.bootstrap5.min.css" rel="stylesheet" />
+<link href="/assets/plugins/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet" />
+<script src="/assets/plugins/moment/min/moment.min.js"></script>
+<script src="/assets/plugins/bootstrap-daterangepicker/daterangepicker.js"></script>
+<link href="/assets/plugins/bootstrap-datepicker/dist/css/bootstrap-datepicker.css" rel="stylesheet" />
+<script src="/assets/plugins/bootstrap-datepicker/dist/js/bootstrap-datepicker.js"></script>
+<!-- required files -->
+<link href="/assets/plugins/blueimp-gallery/css/blueimp-gallery.min.css" rel="stylesheet" />
+<link href="/assets/plugins/blueimp-file-upload/css/jquery.fileupload.css" rel="stylesheet" />
+<link href="/assets/plugins/blueimp-file-upload/css/jquery.fileupload-ui.css" rel="stylesheet" />
 
-
-
+<script src="/assets/plugins/blueimp-file-upload/js/vendor/jquery.ui.widget.js"></script>
+<script src="/assets/plugins/blueimp-tmpl/js/tmpl.js"></script>
+<script src="/assets/plugins/blueimp-load-image/js/load-image.all.min.js"></script>
+<script src="/assets/plugins/blueimp-canvas-to-blob/js/canvas-to-blob.js"></script>
+<script src="/assets/plugins/blueimp-gallery/js/jquery.blueimp-gallery.min.js"></script>
+<script src="/assets/plugins/blueimp-file-upload/js/jquery.iframe-transport.js"></script>
+<script src="/assets/plugins/blueimp-file-upload/js/jquery.fileupload.js"></script>
+<script src="/assets/plugins/blueimp-file-upload/js/jquery.fileupload-process.js"></script>
+<script src="/assets/plugins/blueimp-file-upload/js/jquery.fileupload-image.js"></script>
+<script src="/assets/plugins/blueimp-file-upload/js/jquery.fileupload-audio.js"></script>
+<script src="/assets/plugins/blueimp-file-upload/js/jquery.fileupload-video.js"></script>
+<script src="/assets/plugins/blueimp-file-upload/js/jquery.fileupload-validate.js"></script>
+<script src="/assets/plugins/blueimp-file-upload/js/jquery.fileupload-ui.js"></script>
+<script src="/assets/js/demo/form-multiple-upload.demo.js"></script>
+<script src="/assets/plugins/jstree/dist/jstree.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.2/croppie.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.2/croppie.js"></script>
+<script src="/assets/js/orgchart.js"></script>
+<link href="/assets/plugins/nvd3/build/nv.d3.css" rel="stylesheet" />
+<script src="/assets/plugins/d3/d3.min.js"></script>
+<script src="/assets/plugins/nvd3/build/nv.d3.min.js"></script>
+<script src="/assets/plugins/chart.js/dist/chart.min.js"></script>
 
 
 
 
-    <script>
-        $('#data-table-default-announcement').DataTable({
-            responsive: true,
-            lengthMenu: [5, 10],
 
-        });
-    </script>
-    <script>
-        $('#data-table-default-events').DataTable({
-            responsive: true,
-            lengthMenu: [5, 10],
-        });
-    </script>
-    <script>
-        $('#data-table-default-clocks').DataTable({
-            responsive: true,
-            lengthMenu: [5, 10],
-        });
-    </script>
-    <script type="text/javascript">
-        var require = {
-            baseUrl: "/assets/js/",
-            waitSeconds: 15,
-            urlArgs: "bust=10"
-        };
-    </script>
+
 
 <script>
-    $(function (){
-        $('.highlight').each(function(){
+    $('#data-table-default-announcement').DataTable({
+        responsive: true,
+        lengthMenu: [5, 10],
+
+    });
+</script>
+<script>
+    $('#data-table-default-events').DataTable({
+        responsive: true,
+        lengthMenu: [5, 10],
+    });
+</script>
+<script>
+    $('#data-table-default-clocks').DataTable({
+        responsive: true,
+        lengthMenu: [5, 10],
+    });
+</script>
+<script type="text/javascript">
+    var require = {
+        baseUrl: "/assets/js/",
+        waitSeconds: 15,
+        urlArgs: "bust=10"
+    };
+</script>
+
+<script>
+    $(function() {
+        $('.highlight').each(function() {
             if ($(this).prop('href') === window.location.href) {
                 $(this).parents().addClass('active');
                 $(this).css({
@@ -799,87 +816,90 @@
                     "border-radius": "50px",
                 });
             }
-        })
-    });
+        })
+    });
 </script>
 
 <!-- <script>
-    $(document).ready(function(){
-        $('.menu-item').click(function(){
+    $(document).ready(function() {
+        $('.menu-item').click(function() {
             $(this).next('.menu-submenu').slideToogle();
             $(this).find('manu-caret').toggleClass('rotate');
         });
     });
 </script> -->
 
-    <script src="/assets/js/require.js" data-main="controller"></script>
+<script src="/assets/js/require.js" data-main="controller"></script>
 
-    <script>
-        Chart.defaults.color = 'rgba('+ app.color.componentColorRgb + ', .65)';
-        Chart.defaults.font.family = app.font.family;
-        Chart.defaults.font.weight = 500;
-        Chart.defaults.scale.grid.color = 'rgba('+ app.color.componentColorRgb + ', .15)';
-        Chart.defaults.scale.ticks.backdropColor = 'rgba('+ app.color.componentColorRgb + ', 0)';
+<script>
+    Chart.defaults.color = 'rgba(' + app.color.componentColorRgb + ', .65)';
+    Chart.defaults.font.family = app.font.family;
+    Chart.defaults.font.weight = 500;
+    Chart.defaults.scale.grid.color = 'rgba(' + app.color.componentColorRgb + ', .15)';
+    Chart.defaults.scale.ticks.backdropColor = 'rgba(' + app.color.componentColorRgb + ', 0)';
 
-        var ctx5 = document.getElementById('pie-chart').getContext('2d');
-
-
-        window.myPie = new Chart(ctx5, {
-            type: 'pie',
-            data: {
-                labels: ['Annual Leave', 'Emergency Leave', 'Sick Leave', 'Unpaid Leave', 'Maternity Leave'],
-                datasets: [{
-                    data: [300, 50, 100, 40, 120],
-                    backgroundColor: ['rgba(52, 143, 226)','rgb(73, 182, 214)', 'rgba(255, 99, 71, 0.5)', 'rgb(255, 91, 87)', 'rgb(0, 172, 172)'],
-                    borderColor: [app.color.red, app.color.orange, app.color.gray500, app.color.gray300, app.color.gray900],
-                    borderWidth: 1,
-                    label: 'My dataset'
-                }],
-            },
-            options: {
-                responsive: true
-            }
-        });
-
-    </script>
+    var ctx5 = document.getElementById('pie-chart').getContext('2d');
 
 
+    window.myPie = new Chart(ctx5, {
+        type: 'pie',
+        data: {
+            labels: ['Annual Leave', 'Emergency Leave', 'Sick Leave', 'Unpaid Leave', 'Maternity Leave'],
+            datasets: [{
+                data: [300, 50, 100, 40, 120],
+                backgroundColor: ['rgba(52, 143, 226)', 'rgb(73, 182, 214)', 'rgba(255, 99, 71, 0.5)',
+                    'rgb(255, 91, 87)', 'rgb(0, 172, 172)'
+                ],
+                borderColor: [app.color.red, app.color.orange, app.color.gray500, app.color.gray300, app
+                    .color.gray900
+                ],
+                borderWidth: 1,
+                label: 'My dataset'
+            }],
+        },
+        options: {
+            responsive: true
+        }
+    });
+</script>
 
-    <script>
-        Chart.defaults.color = 'rgba('+ app.color.componentColorRgb + ', .65)';
-        Chart.defaults.font.family = app.font.family;
-        Chart.defaults.font.weight = 500;
-        Chart.defaults.scale.grid.color = 'rgba('+ app.color.componentColorRgb + ', .15)';
-        Chart.defaults.scale.ticks.backdropColor = 'rgba('+ app.color.componentColorRgb + ', 0)';
 
-        var randomScalingFactor = function() {
-            return Math.round(Math.random()*100)
-        };
 
-        var ctx2 = document.getElementById('bar-chart').getContext('2d');
-        var barChart = new Chart(ctx2, {
-            type: 'bar',
-            data: {
-                labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-                datasets: [{
-                    label: 'Check-In',
-                    borderWidth: 1,
-                    borderColor: 'rgb(64, 193, 193)',
-                    backgroundColor: 'rgb(64, 193, 193)',
-                    data: [12, 42, 42, 43, 35, 25, 42]
-                }, {
-                    label: 'Check-Out',
-                    borderWidth: 1,
-                    borderColor: 'rgb(248, 181, 83)',
-                    backgroundColor: 'rgb(248, 181, 83)',
-                    data: [10, 12, 15, 13, 20, 22,21]
-                },{
-                    label: 'Idle',
-                    borderWidth: 1,
-                    borderColor: 'rgb(194, 200, 206)',
-                    backgroundColor: 'rgb(194, 200, 206)',
-                    data: [2, 4, 5, 4, 7, 7, 7]
-                }]
-            }
-        });
-    </script>
+<script>
+    Chart.defaults.color = 'rgba(' + app.color.componentColorRgb + ', .65)';
+    Chart.defaults.font.family = app.font.family;
+    Chart.defaults.font.weight = 500;
+    Chart.defaults.scale.grid.color = 'rgba(' + app.color.componentColorRgb + ', .15)';
+    Chart.defaults.scale.ticks.backdropColor = 'rgba(' + app.color.componentColorRgb + ', 0)';
+
+    var randomScalingFactor = function() {
+        return Math.round(Math.random() * 100)
+    };
+
+    var ctx2 = document.getElementById('bar-chart').getContext('2d');
+    var barChart = new Chart(ctx2, {
+        type: 'bar',
+        data: {
+            labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+            datasets: [{
+                label: 'Check-In',
+                borderWidth: 1,
+                borderColor: 'rgb(64, 193, 193)',
+                backgroundColor: 'rgb(64, 193, 193)',
+                data: [12, 42, 42, 43, 35, 25, 42]
+            }, {
+                label: 'Check-Out',
+                borderWidth: 1,
+                borderColor: 'rgb(248, 181, 83)',
+                backgroundColor: 'rgb(248, 181, 83)',
+                data: [10, 12, 15, 13, 20, 22, 21]
+            }, {
+                label: 'Idle',
+                borderWidth: 1,
+                borderColor: 'rgb(194, 200, 206)',
+                backgroundColor: 'rgb(194, 200, 206)',
+                data: [2, 4, 5, 4, 7, 7, 7]
+            }]
+        }
+    });
+</script>

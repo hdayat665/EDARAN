@@ -19,6 +19,7 @@ use App\Models\UserProfile;
 use App\Models\Users;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 if (!function_exists('pr')) {
     function pr($data)
