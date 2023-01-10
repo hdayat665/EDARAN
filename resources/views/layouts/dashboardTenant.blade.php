@@ -380,7 +380,7 @@
 						</a>
 						<div class="menu-submenu">
 							<div class="menu-item">
-								<a href="#" class="menu-link highlight">
+								<a href="/myClaimView" class="menu-link highlight">
 							        <div class="menu-icon">
 									    <i class="fa fa-envelope-open-text text-gray"></i>
 								    </div>
