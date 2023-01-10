@@ -247,6 +247,8 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('/createGeneralApprover', 'createGeneralApprover');
             Route::get('/getUserByRole/{id}', 'getUserByRole');
             Route::post('/createDomainList', 'createDomainList');
+            Route::get('/getClaimCategoryContent/{id}', 'getClaimCategoryContent');
+            Route::get('/getClaimCategoryById/{id}', 'getClaimCategoryById');
         });
 
         Route::controller(OrganizationController::class)->group(function () {
@@ -357,6 +359,11 @@ Route::group(['middleware' => ['web']], function () {
 
         Route::controller(generalClaimController::class)->group(function () {
             Route::post('/createGeneralClaim', 'createGeneralClaim');
+            Route::post('/submitGeneralClaim', 'submitGeneralClaim');
+            Route::get('/editGeneralClaimView/{id}', 'editGeneralClaimView');
+            Route::post('/updateGeneralClaim/{id}', 'updateGeneralClaim');
+            Route::delete('/deleteGNCDetail/{id}', 'deleteGNCDetail');
+            Route::post('/updateStatusGeneralClaims/{id}', 'updateStatusGeneralClaims');
         });
     });
 });

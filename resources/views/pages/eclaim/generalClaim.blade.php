@@ -97,16 +97,20 @@
                                             <select class="form-select" id="claimcategory">
                                                 <option class="form-label" value="Please Select" selected>Please
                                                     Select</option>
+                                                {{ $categorys = getClaimCategory() }}
+                                                @foreach ($categorys as $category)
+                                                    <option value="{{ $category->id }}">{{ $category->claim_catagory }}</option>
+                                                @endforeach
                                             </select>
                                         </div>
                                     </div>
                                     {{-- akan tarik data dari  labelling name dlam setting add claim --}}
                                     <div class="row p-2">
                                         <div class="col-md-3">
-                                            <input type="text" value="test" class="form-control" name="labellingname" id="label" readonly>
+                                            <label class="form-label" id="label"></label>
                                         </div>
                                         <div class="col-md-9">
-                                            <select class="form-select" id="contentlabel">
+                                            <select class="form-select" id="contentLabel">
                                                 <option class="form-label" value="Please Select" selected>Please
                                                     Select</option>
                                             </select>
@@ -178,7 +182,7 @@
                     </div>
                     <div class="col d-flex justify-content-end">
                         <button class="btn btn-light" id="saveButton" style="color: black" type="submit"><i class="fa fa-save"></i> Save Draft</button>
-                        <a class="btn btn-light" style="color: black" type="submit"><i class="fa fa-save"></i> Submit</a>
+                        <button class="btn btn-light" id="submitButton" style="color: black" type="submit"><i class="fa fa-save"></i> Submit</button>
                     </div>
                 </div>
             </form>
@@ -189,7 +193,7 @@
             // var year = document.getElementById("year");
             // var month = document.getElementById("month");
             var label = document.getElementById("label");
-            var contentlabel = document.getElementById("contentlabel");
+            var contentlabel = document.getElementById("contentLabel");
             var applieddate = document.getElementById("applieddate");
             var claimcategory = document.getElementById("claimcategory");
             var amount = document.getElementById("amount");
@@ -200,16 +204,32 @@
             var row = table.insertRow(rowCount);
             var count = 1;
 
-            row.insertCell(0).innerHTML = "<a class='btn btn-primary btn-sm' onclick='deleteRow(this);' id='btnDelete'>Delete</a>";
-            row.insertCell(1).innerHTML = "<input type='text' name='applied_date[]' class='form-control' value='" + applieddate.value + "' >";
-            row.insertCell(2).innerHTML = "<input type='text' name='claim_category[]' class='form-control' value='" + claimcategory.value + "' >";
-            row.insertCell(3).innerHTML = "<input type='text' name='amount[]' class='form-control' value='" + amount.value + "' >";
-            row.insertCell(4).innerHTML = "<input type='text' name='desc[]' class='form-control' value='" + description.value + "' >";
-            row.insertCell(5).innerHTML = "<input type='file' name='file_upload[]' class='form-control' >" +
-                // "<input type='hidden' name='year[]' class='form-control' value='" + year.value + "' >" +
-                // "<input type='hidden' name='month[]' class='form-control' value='" + month.value + "' >" +
-                "<input type='hidden' name='claim_category[]' class='form-control' value='" + label.value + "' >" +
-                "<input type='hidden' name='claim_category_detail[]' class='form-control' value='" + contentlabel.value + "' >";
+            if (claimcategory.value) {
+                function getClaimCategoryById(id) {
+                    return $.ajax({
+                        url: "/getClaimCategoryById/" + claimcategory.value,
+                    });
+                }
+
+                var user = getClaimCategoryById(id);
+
+                user.done(function(data) {
+                    // console.log(data.claim_catagory);
+                    row.insertCell(0).innerHTML = "<a class='btn btn-primary btn-sm' onclick='deleteRow(this);' id='btnDelete'>Delete</a>";
+                    row.insertCell(1).innerHTML = "<input type='text' name='applied_date[]' class='form-control' value='" + applieddate.value + "' >";
+                    row.insertCell(2).innerHTML = "<input type='text' name='claim_category[]' class='form-control' value='" + data.claim_catagory + "' >";
+                    row.insertCell(3).innerHTML = "<input type='text' name='amount[]' class='form-control' value='" + amount.value + "' >";
+                    row.insertCell(4).innerHTML = "<input type='text' name='desc[]' class='form-control' value='" + description.value + "' >";
+                    row.insertCell(5).innerHTML = "<input type='file' name='file_upload[]' class='form-control' >" +
+                        // "<input type='hidden' name='year[]' class='form-control' value='" + year.value + "' >" +
+                        // "<input type='hidden' name='month[]' class='form-control' value='" + month.value + "' >" +
+                        "<input type='hidden' name='claim_category[]' class='form-control' value='" + label.value + "' >" +
+                        "<input type='hidden' name='claim_category_detail[]' class='form-control' value='" + contentlabel.value + "' >";
+
+                })
+            }
+
+
         }
 
         function deleteRow(row) {
