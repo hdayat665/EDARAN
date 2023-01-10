@@ -99,46 +99,7 @@
                 </div>
                 </div>
 
-			<br>
-			<h3 class="mt-10px"></i> eClaim Settings</h3> <br>
-			<div class="row text-center">
-				<!-- BEGIN col-4 -->
-				
-				<div class="col-lg-2" >
-					<a class="mb-10px" href="#"><i class="fa fa-wrench fa-4x text-blue" ></i></a><br><br>
-					<h5 class="mb-5px" >General</h5> 
-					
-				</div>
-				<!-- END col-4 -->
-				<!-- BEGIN col-4 -->
-				<div class="col-lg-2">
-					<a class="mb-10px" href="#"><i class="fas fa-calendar fa-4x text-blue"></i></a><br><br>
-					<h5 class="mb-5px">Claim Date</h5> 
-					</div>
-				<!-- END col-4 -->
-				<!-- BEGIN col-4 -->
-				<div class="col-lg-2">
-					<a class="mb-10px" href="#"><i class="fa fa-file fa-4x text-blue"></i></a><br><br>
-					<h5 class="mb-5px">Claim Category</h5> 
-					</div>
-
-				
-					<div class="col-lg-2">
-						<a class="mb-10px" href="#"><i class="fa fa-briefcase fa-4x text-blue"></i></a><br><br>
-						<h5 class="mb-5px">Entitlement <br> Group</h5> 
-						</div>
-
-					<div class="col-lg-2">
-						<a class="mb-10px" href="#"><i class="fa fa-gamepad fa-4x text-blue"></i></a><br><br>
-						<h5 class="mb-5px">Cash Advanced <br> Controller</h5> 
-						</div>
-
-				
-					
-				
-				<!-- END col-4 -->
-			</div>
-            </div>
+			
             <br>
             <h3 class="mt-10px"></i> eClaim Settings</h3> <br>
             <div class="row text-center">

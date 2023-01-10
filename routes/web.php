@@ -9,6 +9,8 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\OrganizationController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\Eclaim\generalClaimController;
+use App\Http\Controllers\Eclaim\myClaimController;
 use App\Http\Controllers\HRIS\EmployeeController;
 use App\Http\Controllers\Timesheet\MyTimesheetController;
 use App\Http\Controllers\Project\CustomerController;
@@ -345,6 +347,16 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('/searchRealtimeEventTimesheet', 'searchRealtimeEventTimesheet');
             Route::post('/deleteEvent/{id}', 'deleteEvent');
             Route::post('/deleteLog/{id}', 'deleteLog');
+        });
+
+        Route::controller(myClaimController::class)->group(function () {
+            Route::get('/myClaimView', 'myClaimView');
+            Route::get('/generalClaimView', 'generalClaimView');
+            Route::get('/cashAdvanceView', 'cashAdvanceView');
+        });
+
+        Route::controller(generalClaimController::class)->group(function () {
+            Route::post('/createGeneralClaim', 'createGeneralClaim');
         });
     });
 });
