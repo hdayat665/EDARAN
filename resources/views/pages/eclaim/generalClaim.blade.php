@@ -217,13 +217,13 @@
                     // console.log(data.claim_catagory);
                     row.insertCell(0).innerHTML = "<a class='btn btn-primary btn-sm' onclick='deleteRow(this);' id='btnDelete'>Delete</a>";
                     row.insertCell(1).innerHTML = "<input type='text' name='applied_date[]' class='form-control' value='" + applieddate.value + "' >";
-                    row.insertCell(2).innerHTML = "<input type='text' name='claim_category[]' class='form-control' value='" + data.claim_catagory + "' >";
+                    row.insertCell(2).innerHTML = "<input type='text' name='claim_category' class='form-control' value='" + data.claim_catagory + "' >";
                     row.insertCell(3).innerHTML = "<input type='text' name='amount[]' class='form-control' value='" + amount.value + "' >";
                     row.insertCell(4).innerHTML = "<input type='text' name='desc[]' class='form-control' value='" + description.value + "' >";
                     row.insertCell(5).innerHTML = "<input type='file' name='file_upload[]' class='form-control' >" +
                         // "<input type='hidden' name='year[]' class='form-control' value='" + year.value + "' >" +
                         // "<input type='hidden' name='month[]' class='form-control' value='" + month.value + "' >" +
-                        "<input type='hidden' name='claim_category[]' class='form-control' value='" + label.value + "' >" +
+                        "<input type='hidden' name='label[]' class='form-control' value='" + label.value + "' >" +
                         "<input type='hidden' name='claim_category_detail[]' class='form-control' value='" + contentlabel.value + "' >";
 
                 })

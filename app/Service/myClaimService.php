@@ -63,7 +63,7 @@ class myClaimService
                 'general_id' => $generalClaimData->id,
                 'general_claim_id' => 'GNC' . $generalClaimCount + 1,
                 'applied_date' => $input['applied_date'][$key],
-                'claim_category' => $input['claim_category'][$key],
+                'claim_category' => $input['claim_category'],
                 'claim_category_detail' => $input['claim_category_detail'][$key],
                 'amount' => $input['amount'][$key],
                 'desc' => $input['desc'][$key],

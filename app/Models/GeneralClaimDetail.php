@@ -12,4 +12,9 @@ class GeneralClaimDetail extends Model
     protected $table = 'general_claim_details';
 
     protected $guarded = [];
+
+    public function claim_category_content()
+    {
+        return $this->belongsTo(ClaimCategoryContent::class, 'claim_category_detail', 'id');
+    }
 }

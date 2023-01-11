@@ -985,3 +985,16 @@ if (!function_exists('getGNCDetailByGeneralId')) {
         return $data;
     }
 }
+
+if (!function_exists('getClaimContentById')) {
+    function getClaimContentById($id = '')
+    {
+        $data = GeneralClaimDetail::where([['id', $id]])->with('claim_category_content')->first();
+
+        if (!$data) {
+            $data = [];
+        }
+
+        return $data;
+    }
+}

@@ -53,6 +53,7 @@ requirejs.config({
         generalClaimJs: assets + "/js/generalClaimJs",
         myClaimJs: assets + "/js/myClaimJs",
         editGNCJs: assets + "/js/editGNCJs",
+        viewGNSJs: assets + "/js/viewGNSJs",
 
         // 'main': 'assets/backend/js/main',
         sweetAlert2: assets + "/assets/sweetalert2/sweetalert2",
@@ -268,6 +269,10 @@ if ($("#myClaimJs").length > 0) {
 
 if ($("#editGNCJs").length > 0) {
     requirejs(["editGNCJs"]);
+}
+
+if ($("#viewGNSJs").length > 0) {
+    requirejs(["viewGNSJs"]);
 }
 
 // Global function

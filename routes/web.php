@@ -364,6 +364,8 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('/updateGeneralClaim/{id}', 'updateGeneralClaim');
             Route::delete('/deleteGNCDetail/{id}', 'deleteGNCDetail');
             Route::post('/updateStatusGeneralClaims/{id}', 'updateStatusGeneralClaims');
+            Route::get('/viewGeneralClaim/{id}', 'viewGeneralClaim');
+            Route::get('/getClaimContentById/{id}', 'getClaimContentById');
         });
     });
 });

@@ -62,4 +62,21 @@ class generalClaimController extends Controller
 
         return response()->json($data);
     }
+
+    public function viewGeneralClaim($id = '')
+    {
+        $mcs = new myClaimService;
+
+        $data['GNC'] = $mcs->getGeneralClaimDataById($id);
+        $data['details'] = getGNCDetailByGeneralId($id);
+
+        return view('pages.eclaim.viewGNC', $data);
+    }
+
+    public function getClaimContentById($id = '')
+    {
+        $data = getClaimContentById($id);
+
+        return response()->json($data);
+    }
 }
