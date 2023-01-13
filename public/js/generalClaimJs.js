@@ -1,21 +1,19 @@
 $(document).ready(function () {
-    $("#claimCategoryTable").DataTable({});
+    $("#cashAdvanceTable").DataTable({});
 
     $("#saveButton").click(function (e) {
-        $("#saveForm").validate({
+        $("#addForm").validate({
             // Specify validation rules
             rules: {},
 
             messages: {},
             submitHandler: function (form) {
                 requirejs(["sweetAlert2"], function (swal) {
-                    var data = new FormData(
-                        document.getElementById("saveForm")
-                    );
+                    var data = new FormData(document.getElementById("addForm"));
 
                     $.ajax({
                         type: "POST",
-                        url: "/createClaimCategory",
+                        url: "/createGeneralClaim",
                         data: data,
                         dataType: "json",
                         async: false,
@@ -33,9 +31,8 @@ $(document).ready(function () {
                         }).then(function () {
                             if (data.type == "error") {
                             } else {
+                                window.location.href = "/myClaimView";
                                 // location.reload();
-                                window.location.href =
-                                    "/setting/eclaimCategoryView";
                             }
                         });
                     });
@@ -44,22 +41,19 @@ $(document).ready(function () {
         });
     });
 
-    $("#updateButton").click(function (e) {
-        var id = $("#idClaim").val();
-        $("#updateForm").validate({
+    $("#submitButton").click(function (e) {
+        $("#addForm").validate({
             // Specify validation rules
             rules: {},
 
             messages: {},
             submitHandler: function (form) {
                 requirejs(["sweetAlert2"], function (swal) {
-                    var data = new FormData(
-                        document.getElementById("updateForm")
-                    );
+                    var data = new FormData(document.getElementById("addForm"));
 
                     $.ajax({
                         type: "POST",
-                        url: "/updateClaimCategory/" + id,
+                        url: "/submitGeneralClaim",
                         data: data,
                         dataType: "json",
                         async: false,
@@ -77,8 +71,8 @@ $(document).ready(function () {
                         }).then(function () {
                             if (data.type == "error") {
                             } else {
-                                window.location.href =
-                                    "/setting/eclaimCategoryView";
+                                window.location.href = "/myClaimView";
+                                // location.reload();
                             }
                         });
                     });
@@ -101,7 +95,7 @@ $(document).ready(function () {
             }).then(function () {
                 $.ajax({
                     type: "POST",
-                    url: "/deleteClaimCategory/" + id,
+                    url: "/deleteJobGrade/" + id,
                     // dataType: "json",
                     data: { _method: "DELETE" },
                     // async: false,
@@ -127,51 +121,62 @@ $(document).ready(function () {
         });
     });
 
-    $("#savecontent").click(function () {
-        var addtypelogactivityName =
-            document.getElementById("addcontent").value;
-
-        if (addtypelogactivityName == "") {
-            document.getElementById("addcontent");
-            return;
-        } else {
-            let table = document.getElementById("tablesavecontent");
-            // Insert a row at the end of the table
-            let newRow = table.insertRow(-1);
-            var l = table.rows.length - 1;
-
-            //Col 3 = Delete Button
-            table.rows[l].insertCell(0);
-            table.rows[l].cells[0].innerHTML =
-                "<input hidden name='content[]' value='" +
-                addtypelogactivityName +
-                "' /><button type='button' class='btn btn-outline-danger' onclick='delRow(this);' id='btnDelete' size='1' height='1' ><i class='fa fa-trash'></i></button>";
-
-            //Col 1 = addtypelogactivityName
-            table.rows[l].insertCell(1);
-            table.rows[l].cells[1].innerHTML = addtypelogactivityName;
-
-            //Clear input
-        }
+    $("#applyclaimtable").DataTable({
+        searching: false,
+        lengthChange: true,
+        lengthMenu: [5, 10],
+        responsive: false,
+        info: false,
     });
 
-    $("#adddropdown").click(function () {
-        if ($(this).is(":checked")) {
-            $(".label").show();
-        } else {
-            $(".label").hide();
+    $(document).on("change", "#claimcategory", function () {
+        id = $(this).val();
+        const inputs = ["contentLabel"];
+
+        for (let i = 0; i < inputs.length; i++) {
+            $("#" + inputs[i] + "")
+                .find("option")
+                .remove()
+                .end()
+                .append(
+                    '<option label="Please Choose" selected="selected"> </option>'
+                )
+                .val("");
+
+            function getClaimCategoryContent(id) {
+                return $.ajax({
+                    url: "/getClaimCategoryContent/" + id,
+                });
+            }
+            $("#" + inputs[i] + "")
+                .find("option")
+                .end();
         }
+
+        var user = getClaimCategoryContent(id);
+
+        user.done(function (data) {
+            $("#label").text(data[0].label);
+            // console.log(data[0].label);
+            for (let i = 0; i < data.length; i++) {
+                const user = data[i];
+                var opt = document.createElement("option");
+                document.getElementById("contentLabel").innerHTML +=
+                    '<option value="' +
+                    user["id"] +
+                    '">' +
+                    user["content"] +
+                    "</option>";
+            }
+        });
     });
 
-    $("#adddropdownu").click(function () {
-        if ($(this).is(":checked")) {
-            $(".labelu").show();
-        } else {
-            $(".labelu").hide();
-        }
-    });
+    $("#applieddate")
+        .datepicker({
+            setDate: new Date(),
+            todayHighlight: true,
+            autoclose: true,
+            format: "dd/mm/yyyy",
+        })
+        .datepicker("setDate", "now");
 });
-function delRow(btn) {
-    var row = btn.parentNode.parentNode;
-    row.parentNode.removeChild(row);
-}

@@ -49,6 +49,11 @@ requirejs.config({
         cashAdvanceJs: assets + "/js/cashAdvanceJs",
         approvalConfigJs: assets + "/js/approvalConfigJs",
         approveRoleJs: assets + "/js/approveRoleJs",
+        cashAdvanceClaimJs: assets + "/js/cashAdvanceClaimJs",
+        generalClaimJs: assets + "/js/generalClaimJs",
+        myClaimJs: assets + "/js/myClaimJs",
+        editGNCJs: assets + "/js/editGNCJs",
+        viewGNSJs: assets + "/js/viewGNSJs",
 
         // 'main': 'assets/backend/js/main',
         sweetAlert2: assets + "/assets/sweetalert2/sweetalert2",
@@ -248,6 +253,26 @@ if ($("#approvalConfigJs").length > 0) {
 
 if ($("#approveRoleJs").length > 0) {
     requirejs(["approveRoleJs"]);
+}
+
+if ($("#cashAdvanceClaimJs").length > 0) {
+    requirejs(["cashAdvanceClaimJs"]);
+}
+
+if ($("#generalClaimJs").length > 0) {
+    requirejs(["generalClaimJs"]);
+}
+
+if ($("#myClaimJs").length > 0) {
+    requirejs(["myClaimJs"]);
+}
+
+if ($("#editGNCJs").length > 0) {
+    requirejs(["editGNCJs"]);
+}
+
+if ($("#viewGNSJs").length > 0) {
+    requirejs(["viewGNSJs"]);
 }
 
 // Global function

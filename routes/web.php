@@ -9,6 +9,8 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\OrganizationController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\Eclaim\generalClaimController;
+use App\Http\Controllers\Eclaim\myClaimController;
 use App\Http\Controllers\HRIS\EmployeeController;
 use App\Http\Controllers\Timesheet\MyTimesheetController;
 use App\Http\Controllers\Project\CustomerController;
@@ -245,6 +247,8 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('/createGeneralApprover', 'createGeneralApprover');
             Route::get('/getUserByRole/{id}', 'getUserByRole');
             Route::post('/createDomainList', 'createDomainList');
+            Route::get('/getClaimCategoryContent/{id}', 'getClaimCategoryContent');
+            Route::get('/getClaimCategoryById/{id}', 'getClaimCategoryById');
         });
 
         Route::controller(OrganizationController::class)->group(function () {
@@ -345,6 +349,23 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('/searchRealtimeEventTimesheet', 'searchRealtimeEventTimesheet');
             Route::post('/deleteEvent/{id}', 'deleteEvent');
             Route::post('/deleteLog/{id}', 'deleteLog');
+        });
+
+        Route::controller(myClaimController::class)->group(function () {
+            Route::get('/myClaimView', 'myClaimView');
+            Route::get('/generalClaimView', 'generalClaimView');
+            Route::get('/cashAdvanceView', 'cashAdvanceView');
+        });
+
+        Route::controller(generalClaimController::class)->group(function () {
+            Route::post('/createGeneralClaim', 'createGeneralClaim');
+            Route::post('/submitGeneralClaim', 'submitGeneralClaim');
+            Route::get('/editGeneralClaimView/{id}', 'editGeneralClaimView');
+            Route::post('/updateGeneralClaim/{id}', 'updateGeneralClaim');
+            Route::delete('/deleteGNCDetail/{id}', 'deleteGNCDetail');
+            Route::post('/updateStatusGeneralClaims/{id}', 'updateStatusGeneralClaims');
+            Route::get('/viewGeneralClaim/{id}', 'viewGeneralClaim');
+            Route::get('/getClaimContentById/{id}', 'getClaimContentById');
         });
     });
 });

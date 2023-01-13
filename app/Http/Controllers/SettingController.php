@@ -907,4 +907,18 @@ class SettingController extends Controller
 
         return response()->json($result);
     }
+
+    public function getClaimCategoryContent($id = '')
+    {
+        $data = getClaimCategoryContentByClaimId($id);
+
+        return response()->json($data);
+    }
+
+    public function getClaimCategoryById($id = '')
+    {
+        $data = getClaimCategoryById($id);
+
+        return response()->json($data);
+    }
 }

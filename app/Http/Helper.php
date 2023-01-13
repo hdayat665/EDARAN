@@ -2,12 +2,15 @@
 
 use App\Models\ActivityLogs;
 use App\Models\Branch;
+use App\Models\ClaimCategory;
+use App\Models\ClaimCategoryContent;
 use App\Models\Company;
 use App\Models\Customer;
 use App\Models\Department;
 use App\Models\Designation;
 use App\Models\Employee;
 use App\Models\EmploymentType;
+use App\Models\GeneralClaimDetail;
 use App\Models\JobGrade;
 use App\Models\Project;
 use App\Models\ProjectLocation;
@@ -19,6 +22,7 @@ use App\Models\UserProfile;
 use App\Models\Users;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 if (!function_exists('pr')) {
     function pr($data)
@@ -920,6 +924,72 @@ if (!function_exists('getUserByRole')) {
     function getUserByRole($id = '')
     {
         $data = Users::where([['tenant_id', Auth::user()->tenant_id], ['role_id', $id]])->with('userProfile')->get();
+
+        if (!$data) {
+            $data = [];
+        }
+
+        return $data;
+    }
+}
+
+
+if (!function_exists('getClaimCategory')) {
+    function getClaimCategory($id = '')
+    {
+        $data = ClaimCategory::where('tenant_id', Auth::user()->tenant_id)->get();
+
+        if (!$data) {
+            $data = [];
+        }
+
+        return $data;
+    }
+}
+
+if (!function_exists('getClaimCategoryContentByClaimId')) {
+    function getClaimCategoryContentByClaimId($id = '')
+    {
+        $data = ClaimCategoryContent::where([['category_id', $id]])->get();
+
+        if (!$data) {
+            $data = [];
+        }
+
+        return $data;
+    }
+}
+
+if (!function_exists('getClaimCategoryById')) {
+    function getClaimCategoryById($id = '')
+    {
+        $data = ClaimCategory::where([['id', $id]])->first();
+
+        if (!$data) {
+            $data = [];
+        }
+
+        return $data;
+    }
+}
+
+if (!function_exists('getGNCDetailByGeneralId')) {
+    function getGNCDetailByGeneralId($id = '')
+    {
+        $data = GeneralClaimDetail::where([['general_id', $id]])->get();
+
+        if (!$data) {
+            $data = [];
+        }
+
+        return $data;
+    }
+}
+
+if (!function_exists('getClaimContentById')) {
+    function getClaimContentById($id = '')
+    {
+        $data = GeneralClaimDetail::where([['id', $id]])->with('claim_category_content')->first();
 
         if (!$data) {
             $data = [];
