@@ -5,14 +5,14 @@
                 <label class="form-label">Mode Of Transport</label>
             </div>
             <div class="col-md-8">
-                <select class="form-select" id="SMOT">
-                    <option class="form-label" value="1" selected>Please Select
+                <select class="form-select" id="SMOT" name="transport_type">
+                    <option class="form-label" value="" selected>Please Select
                     </option>
-                    <option class="form-label" value="2">Personal Car</option>
-                    <option class="form-label" value="3">Personal Motorcycle</option>
-                    <option class="form-label" value="4">Public Transport </option>
-                    <option class="form-label" value="5">Company Car</option>
-                    <option class="form-label" value="6">Carpool</option>
+                    <option class="form-label" value="1">Personal Car</option>
+                    <option class="form-label" value="2">Personal Motorcycle</option>
+                    <option class="form-label" value="3">Public Transport </option>
+                    <option class="form-label" value="4">Company Car</option>
+                    <option class="form-label" value="5">Carpool</option>
                 </select>
             </div>
         </div>
@@ -30,7 +30,7 @@
                         <label class="form-label">Day</label>
                     </div>
                     <div class="col-md-2">
-                        <input type="text" class="form-control" id="day" value="0">
+                        <input type="text" class="form-control" name="subs_allowance_day" id="day" value="0">
                     </div>
                     <div class="col-md-1">
                         <label class="form-label">X</label>
@@ -61,7 +61,7 @@
                         <label class="form-label">Total</label>
                     </div>
                     <div class="col-md-3">
-                        <input readonly type="text" class="form-control" id="totalsubs" value="0">
+                        <input readonly type="text" name="subs_allowance_total" class="form-control" id="totalsubs" value="0">
                     </div>
                 </div>
                 <div class="row p-2">
@@ -75,7 +75,7 @@
                         <label class="form-label">Night</label>
                     </div>
                     <div class="col-md-2">
-                        <input type="text" class="form-control" id="night" value="0">
+                        <input type="text" class="form-control" name="accommadation_night" id="night" value="0">
                     </div>
                     <div class="col-md-1">
                         <label class="form-label">X</label>
@@ -107,7 +107,7 @@
                         <label class="form-label">Total</label>
                     </div>
                     <div class="col-md-3">
-                        <input readonly type="text" class="form-control" id="totalacco" value="0">
+                        <input readonly type="text" name="accommadation_total" class="form-control" id="totalacco" value="0">
                     </div>
                 </div>
             </div>
@@ -128,7 +128,7 @@
                     <label class="form-label">Fuel/Fare</label>
                 </div>
                 <div class="col-md-3">
-                    <input type="number" class="form-control" id="fuelfare" value="0">
+                    <input type="number" class="form-control" name="fuel" id="fuelfare" value="0">
                 </div>
             </div>
         </div>
@@ -141,7 +141,7 @@
                     <label class="form-label">Toll/Parking</label>
                 </div>
                 <div class="col-md-3">
-                    <input type="number" class="form-control" id="tollparking" value="0">
+                    <input type="number" class="form-control" name="toll" id="tollparking" value="0">
                 </div>
             </div>
         </div>
@@ -154,7 +154,7 @@
                     <label class="form-label">Entertainment</label>
                 </div>
                 <div class="col-md-3">
-                    <input type="number" class="form-control" id="ent" value="0">
+                    <input type="number" class="form-control" name="entertainment" id="ent" value="0">
                 </div>
             </div>
         </div>
@@ -167,7 +167,7 @@
                     <label class="form-label">Total</label>
                 </div>
                 <div class="col-md-3">
-                    <input readonly type="text" class="form-control" id="totalexp" value="0">
+                    <input readonly type="text" class="form-control" name="total" id="totalexp" value="0">
                 </div>
             </div>
         </div>
@@ -180,7 +180,7 @@
                     <label class="form-label">Maximum Paid Out (75%)</label>
                 </div>
                 <div class="col-md-3">
-                    <input readonly type="text" class="form-control" id="maxpaid">
+                    <input readonly type="text" class="form-control" name="max_total" id="maxpaid">
                 </div>
             </div>
         </div>
