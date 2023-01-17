@@ -1,6 +1,8 @@
 $(document).ready(function () {
     $("#projectTable").DataTable({});
     $(document).on("change", "#toca", function () {
+        $("input").val("");
+
         if ($(this).val() == "1") {
             $(".PO").show();
             $(".MOT").show();
@@ -19,7 +21,7 @@ $(document).ready(function () {
             $(".OTHERSNO").hide();
             $(".OTHERSO").hide();
             $(".subacco").hide();
-            $("#btnPO").hide();
+            $("#btnPO").show();
             $("#btnPNO").show();
             $("#btnOO").hide();
             $("#btnONO").hide();
@@ -30,7 +32,7 @@ $(document).ready(function () {
             $(".PNO").hide();
             $(".OTHERSNO").hide();
             $(".subacco").show();
-            $("#btnPO").hide();
+            $("#btnPO").show();
             $("#btnPNO").hide();
             $("#btnOO").show();
             $("#btnONO").hide();
@@ -41,7 +43,7 @@ $(document).ready(function () {
             $(".PO").hide();
             $(".PNO").hide();
             $(".subacco").show();
-            $("#btnPO").hide();
+            $("#btnPO").show();
             $("#btnPNO").hide();
             $("#btnOO").hide();
             $("#btnONO").show();
@@ -52,7 +54,7 @@ $(document).ready(function () {
             $(".MOT").hide();
             $(".PNO").hide();
             $(".subacco").show();
-            $("#btnPO").hide();
+            $("#btnPO").show();
             $("#btnPNO").hide();
             $("#btnOO").hide();
             $("#btnONO").hide();
@@ -240,6 +242,108 @@ $(document).ready(function () {
             autoclose: true,
             format: "dd/mm/yyyy",
             orientation: "bottom",
+        });
+    });
+
+    $(document).on("change", "#project", function () {
+        projectId = $(this).val();
+
+        function getLocationByProjectId(id) {
+            return $.ajax({
+                url: "/getLocationByProjectId/" + id,
+            });
+        }
+
+        $("#locationShow")
+            .find("option")
+            // .remove()
+            .end();
+
+        var location = getLocationByProjectId(projectId);
+
+        location.done(function (data) {
+            for (let i = 0; i < data.length; i++) {
+                const location = data[i];
+                var opt = document.createElement("option");
+                document.getElementById("locationShow").innerHTML +=
+                    '<option value="' +
+                    location["id"] +
+                    '">' +
+                    location["location_name"] +
+                    "</option>";
+            }
+        });
+    });
+
+    $(document).on("change", "#project2", function () {
+        projectId = $(this).val();
+
+        function getLocationByProjectId(id) {
+            return $.ajax({
+                url: "/getLocationByProjectId/" + id,
+            });
+        }
+
+        $("#locationShow2")
+            .find("option")
+            // .remove()
+            .end();
+
+        var location = getLocationByProjectId(projectId);
+
+        location.done(function (data) {
+            for (let i = 0; i < data.length; i++) {
+                const location = data[i];
+                var opt = document.createElement("option");
+                document.getElementById("locationShow2").innerHTML +=
+                    '<option value="' +
+                    location["id"] +
+                    '">' +
+                    location["location_name"] +
+                    "</option>";
+            }
+        });
+    });
+
+    $("#btnPO").click(function (e) {
+        $("#saveForm").validate({
+            // Specify validation rules
+            rules: {},
+
+            messages: {},
+            submitHandler: function (form) {
+                requirejs(["sweetAlert2"], function (swal) {
+                    var data = new FormData(
+                        document.getElementById("saveForm")
+                    );
+
+                    $.ajax({
+                        type: "POST",
+                        url: "/createCashAdvance",
+                        data: data,
+                        dataType: "json",
+                        async: false,
+                        processData: false,
+                        contentType: false,
+                    }).done(function (data) {
+                        swal({
+                            title: data.title,
+                            text: data.msg,
+                            type: data.type,
+                            confirmButtonColor: "#3085d6",
+                            confirmButtonText: "OK",
+                            allowOutsideClick: false,
+                            allowEscapeKey: false,
+                        }).then(function () {
+                            if (data.type == "error") {
+                            } else {
+                                // location.reload();
+                                window.location.href = "/myClaimView";
+                            }
+                        });
+                    });
+                });
+            },
         });
     });
 });

@@ -6,16 +6,15 @@ use App\Service\myClaimService;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 
-class myClaimController extends Controller
+class cashAdvanceController extends Controller
 {
-    public function myClaimView()
+    public function createCashAdvance(Request $r)
     {
         $mcs = new myClaimService;
 
-        $data['claims'] = $mcs->getClaimsData();
-        $data['cashClaims'] = $mcs->getCashClaimsData();
+        $data = $mcs->createCashAdvance($r, 'amend');
 
-        return view('pages.eclaim.myClaim', $data);
+        return response()->json($data);
     }
 
     public function generalClaimView()
@@ -30,5 +29,15 @@ class myClaimController extends Controller
     public function cashAdvanceView()
     {
         return view('pages.eclaim.cashAdvance');
+    }
+
+    public function viewCashAdvance($id = '')
+    {
+
+        $mcs = new myClaimService;
+
+        $data['cashClaim'] = $mcs->getCashAdvanceById($id);
+
+        return view('pages.eclaim.viewCashAdvance', $data);
     }
 }
