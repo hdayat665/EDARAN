@@ -195,6 +195,7 @@ class myClaimService
         $cashAdvance['destination'] = $input['destination'] ?? '';
         $cashAdvance['date_require_cash'] = $input['date_require_cash'] ?? '';
         $cashAdvance['status'] = $status ?? '';
+        $cashAdvance['amount'] = $input['amount'] ?? '';
 
         if ($_FILES['file_upload']['name']) {
             $filename = upload($r->file('file_upload'));
@@ -237,6 +238,20 @@ class myClaimService
     public function getCashAdvanceById($id = '')
     {
         $data = CashAdvanceDetail::where([['tenant_id', Auth::user()->tenant_id], ['id', $id]])->first();
+
+        return $data;
+    }
+
+    public function updateStatusCashClaim($id = '', $status = '')
+    {
+        $cashAdvance = [];
+        $cashAdvance['status'] = $status;
+        CashAdvanceDetail::where([['tenant_id', Auth::user()->tenant_id], ['id', $id]])->update($cashAdvance);
+
+        $data['status'] = config('app.response.success.status');
+        $data['type'] = config('app.response.success.type');
+        $data['title'] = config('app.response.success.title');
+        $data['msg'] = 'Success';
 
         return $data;
     }

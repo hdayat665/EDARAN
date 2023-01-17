@@ -372,6 +372,8 @@ Route::group(['middleware' => ['web']], function () {
         Route::controller(cashAdvanceController::class)->group(function () {
             Route::post('/createCashAdvance', 'createCashAdvance');
             Route::get('/viewCashAdvance/{id}', 'viewCashAdvance');
+            Route::post('/submitCashAdvance', 'submitCashAdvance');
+            Route::delete('/cancelCashClaim/{id}', 'cancelCashClaim');
         });
     });
 });

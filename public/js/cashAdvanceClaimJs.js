@@ -346,4 +346,46 @@ $(document).ready(function () {
             },
         });
     });
+
+    $("#submitButton").click(function (e) {
+        $("#saveForm").validate({
+            // Specify validation rules
+            rules: {},
+
+            messages: {},
+            submitHandler: function (form) {
+                requirejs(["sweetAlert2"], function (swal) {
+                    var data = new FormData(
+                        document.getElementById("saveForm")
+                    );
+
+                    $.ajax({
+                        type: "POST",
+                        url: "/submitCashAdvance",
+                        data: data,
+                        dataType: "json",
+                        async: false,
+                        processData: false,
+                        contentType: false,
+                    }).done(function (data) {
+                        swal({
+                            title: data.title,
+                            text: data.msg,
+                            type: data.type,
+                            confirmButtonColor: "#3085d6",
+                            confirmButtonText: "OK",
+                            allowOutsideClick: false,
+                            allowEscapeKey: false,
+                        }).then(function () {
+                            if (data.type == "error") {
+                            } else {
+                                // location.reload();
+                                window.location.href = "/myClaimView";
+                            }
+                        });
+                    });
+                });
+            },
+        });
+    });
 });

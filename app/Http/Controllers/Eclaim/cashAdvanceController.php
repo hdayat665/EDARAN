@@ -17,6 +17,15 @@ class cashAdvanceController extends Controller
         return response()->json($data);
     }
 
+    public function submitCashAdvance(Request $r)
+    {
+        $mcs = new myClaimService;
+
+        $data = $mcs->createCashAdvance($r, 'paid');
+
+        return response()->json($data);
+    }
+
     public function generalClaimView()
     {
         $mcs = new myClaimService;
@@ -39,5 +48,14 @@ class cashAdvanceController extends Controller
         $data['cashClaim'] = $mcs->getCashAdvanceById($id);
 
         return view('pages.eclaim.viewCashAdvance', $data);
+    }
+
+    public function cancelCashClaim($id = '')
+    {
+        $mcs = new myClaimService;
+
+        $data = $mcs->updateStatusCashClaim($id, 'cancelled');
+
+        return response()->json($data);
     }
 }

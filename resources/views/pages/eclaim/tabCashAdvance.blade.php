@@ -39,7 +39,7 @@
                                         <a href="/viewCashAdvance/{{ $cashClaim->id }}" class="dropdown-item">View Claim</a>
                                         <a href="/eclaim/updatecashadvance" class="dropdown-item">Update Claim</a>
                                         <div class="dropdown-divider"></div>
-                                        <a href="javascript:;" class="dropdown-item">Cancel Claim</a>
+                                        <a href="javascript:;" id="cancelCashButton" data-id="{{ $cashClaim->id }}" class="dropdown-item">Cancel Claim</a>
                                     </div>
                                 @elseif ($cashClaim->status == 'rejected' || $cashClaim->status == 'amend')
                                     <div class="dropdown-menu dropdown-menu-end">
