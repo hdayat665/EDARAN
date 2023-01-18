@@ -546,4 +546,16 @@ $(document).ready(function () {
             },
         },
     });
+
+    $(".checkbox-dropdown").click(function () {
+        $(this).toggleClass("is-active");
+    });
+    
+    $(".checkbox-dropdown ul").click(function(e) {
+        e.stopPropagation();
+    });
+
+    $('#ex-search').picker({ search: true });
+    $('#multi').picker({ search: true });
+    
 });

@@ -1,4 +1,4 @@
-<div class="tab-pane fade" id="default-tab-4">
+<div class="tab-pane fade" id="default-tab-5">
     <div class="accordion" id="accordionExample">
         <div class="accordion-item">
             <h2 class="accordion-header" id="headingOne">
@@ -35,11 +35,12 @@
                                 <label for="fullname" class="form-label">Full Name</label>
                                 <input type="text" id="fullnamemc" name="fullName" readonly value="{{ $companion->fullName ?? '' }}" class="form-control" aria-describedby="fullname" style="text-transform:uppercase">
                             </div>
+                            {{-- new --}}
                             <div class="col-sm-6">
-                                <div class="row">
+                                 <div class="row">
                                      <div class="col-sm-12">
-                                        <label for="passport-number" class="form-label">Identification Number*</label>
-                                        <input type="text" name="idNo" value="{{ $companion->idNo ?? '' }}" id="idnumber2" class="form-control" aria-describedby="passport-number">
+                                        <label for="passport-number" class="form-label">Old Identification Number*</label>
+                                        <input type="text" name="" value="" id="" class="form-control" aria-describedby="">
                                     </div>
                                 </div>
                             </div>
@@ -54,16 +55,22 @@
                                         </div>
                                     </div> 
                                 <div class="col-sm-6">
-                                        <label for="passport" class="form-label">Passport Number</label>
-                                        <input type="text" id="passportmc" name="passport" value="{{ $companion->passport ?? '' }}" class="form-control" aria-describedby="passport" >
+                                        <label for="passport-number" class="form-label">New Identification Number*</label>
+                                        <input type="text" name="idNo" value="{{ $companion->idNo ?? '' }}" id="idnumber2" class="form-control" aria-describedby="passport-number">
                                     </div>
                                    
                                 </div>
                             </div>
-                            <!-- <div class="col-sm-3 part">
-                                <label for="expirydate" class="form-label">Expiry Date</label>
-                                <input type="text" id="expirydatemyprofile" name="expiryDate" value="{{ date_format(date_create($profile->expiryDate ?? null), 'Y-m-d') ?? '' }}" placeholder="YYYY-MM-DD" class="form-control" aria-describedby="expirydate" style="pointer-events: none;" readonly>
-                            </div> -->
+                            <div class="col-sm-3">
+                                <label for="" class="form-label">ID Attachment</label>
+                                <input type="file" id="" name="" value=""  class="form-control" aria-describedby="" >
+                            </div>
+                        </div>
+                        <div class="row p-2">
+                            <div class="col-sm-3">
+                                <label for="passport" class="form-label">Passport Number</label>
+                                <input type="text" id="passportmc" name="passport" value="{{ $companion->passport ?? '' }}" class="form-control" aria-describedby="passport" >
+                            </div>
                             <div class="col-sm-3">
                                         <label for="expirydate" class="form-label">Expiry Date</label>
                                         <input type="text" id="expirydatemc" name="expiryDate" value="{{ date_format(date_create($companion->expiryDate ?? null), 'Y-m-d') ?? '' }}" placeholder="YYYY-MM-DD" class="form-control" aria-describedby="expirydate" style= "pointer-events: none;" readonly>
@@ -84,46 +91,82 @@
                                     </optgroup>
                                 </select>
                             </div>
+                            <div class="col-sm-3">
+                                <label for="dob" class="form-label">Date of Birth</label>
+                                <input type="text" id="dobmc" name="DOB" value="{{ $companion->DOB ?? '' }}" class="form-control" aria-describedby="dob" readonly  style= "pointer-events: none;">
+                            </div>
                         </div>
                         <div class="row p-2">
+                            <div class="col-sm-3">
+                                <label for="age" class="form-label">Age</label>
+                                <input type="number" id="age" name="age" value="{{ $companion->age ?? '' }}" class="form-control" aria-describedby="age" readonly>
+                            </div>
+                            <div class="col-sm-3">
+                                <label for="dom" class="form-label">Date of Marriage</label>
+                                <input type="text" id="dommc" name="DOM" value="{{ $companion->DOM ?? '' }}" class="form-control" aria-describedby="dom">
+                            </div>
+                            <div class="col-sm-3">
+                                <label for="marriage-cert" class="form-label">Marriage Certificate</label>
+                                <input type="file" name="marrigeCert" id="marrige-cert" class="form-control" aria-describedby="dob">
+                            </div>
+                            <div class="col-sm-3">
+                                <label for="marriage-status" class="form-label">Marriage Status</label>
+                                <select class="form-select" name="marrigeStatus" style="text-transform:uppercase">
+                                    <?php $maritialStatus = getMaritalStatus() ?>
+                                    <option value="0" label="Please Choose"  ></option>
+                                    @foreach ($maritialStatus as $key => $status)
+                                    <option value="{{$key}}" >{{$status}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        {{-- new --}}
+                        <div class="row p-2">
                             <div class="col-sm-6">
-                                <label for="contact-number" class="form-label">Contact Number</label>
-                                <input type="text" id="contact-number" name="contactNo" value="{{ $companion->contactNo ?? '' }}" class="form-control" aria-describedby="contact-number">
+                                <div class="row">
+                                    <div class="col-sm-6 ">
+                                        <div class="form-check form-switch align-right">
+                                            <input class="form-check-input okuCheck1 "  id="" value="" type="checkbox" name=""  >
+                                            <label class="form-check-label" for="citizen">
+                                                OKU?
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label for="" class="form-label">OKU Card Number*</label>
+                                        <input type="number" id="okucard1" name="" value="" class="form-control" readonly >
+                                        
+                                    </div>
+                                </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="row">
                                     <div class="col-sm-6">
-                                        <label for="dob" class="form-label">Date of Birth</label>
-                                        <input type="text" id="dobmc" name="DOB" value="{{ $companion->DOB ?? '' }}" class="form-control" aria-describedby="dob" readonly  style= "pointer-events: none;">
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <label for="age" class="form-label">Age</label>
-                                        <input type="number" id="age" name="age" value="{{ $companion->age ?? '' }}" class="form-control" aria-describedby="age" readonly>
+                                        <label for="dob" class="form-label">OKU Attachment</label>
+                                        <input type="file" id="okuattach1" name="" class="form-control" aria-describedby="" style="pointer-events: none">
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="row p-2">
                             <div class="col-sm-6">
-                                <label for="dom" class="form-label">Date of Marriage</label>
-                                <input type="text" id="dommc" name="DOM" value="{{ $companion->DOM ?? '' }}" class="form-control" aria-describedby="dom">
+                                <label for="contact-number" class="form-label">Contact Number</label>
+                                <input type="text" id="contact-number" name="contactNo" value="{{ $companion->contactNo ?? '' }}" class="form-control" aria-describedby="contact-number">
                             </div>
+                            {{-- new --}}
                             <div class="col-sm-6">
-                                <div class="row">
-                                    <div class="col-sm-6">
-                                        <label for="marriage-cert" class="form-label">Marriage Certificate</label>
-                                        <input type="file" name="marrigeCert" id="marrige-cert" class="form-control" aria-describedby="dob">
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <label for="marriage-status" class="form-label">Marriage Status</label>
-                                        <select class="form-select" name="marrigeStatus" style="text-transform:uppercase">
-                                            <?php $maritialStatus = getMaritalStatus() ?>
-                                            <option value="0" label="Please Choose"  ></option>
-                                            @foreach ($maritialStatus as $key => $status)
-                                            <option value="{{$key}}" >{{$status}}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
+                                <label for="contact-number" class="form-label">Home Number</label>
+                                <input type="text" id="" name="" value="" class="form-control" aria-describedby="">
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row p-2">
+                            <div class="col-sm-6">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="same-address" name="sameAsPermenant">
+                                    <label class="form-check-label" for="same-address">
+                                        Same as Employee Permanent Address
+                                    </label>
                                 </div>
                             </div>
                         </div>
@@ -317,19 +360,33 @@
                                 <label for="fullname" class="form-label">Full Name</label>
                                 <input type="text" id="fullname" name="fullName" value="{{ $companion->fullName ?? '' }}" class="form-control" aria-describedby="fullname">
                             </div>
+                            {{-- new --}}
+                            <div class="col-sm-6">
+                                <div class="col-sm-12">
+                                    <label for="fullname" class="form-label">Old Identification Number</label>
+                                    <input type="text" id="" name="" value="" class="form-control" aria-describedby="">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row p-2">
                             <div class="col-sm-6">
                                 <div class="row">
-                                    <div class="col-sm-6">
-                                        <div class="form-check form-switch">
-                                            <label for="citizen" class="form-label">Non-Citizen ?</label>
-                                            <input class="form-check-input" {{ ($companion->mainCompanion ?? '') ? 'checked' : '' }} name="nonCitizen" value="{{ $companion->nonCitizen ?? '' }}" type="checkbox" role="switch" id="citizen" checked>
-                                        </div>
+                                <div class="col-sm-6">
+                                    <div class="form-check form-switch">
+                                        <label for="citizen" class="form-label">Non-Citizen ?</label>
+                                        <input class="form-check-input partCheck7" {{ ($companion->mainCompanion ?? '') ? 'checked' : '' }} name="nonCitizen" value="{{ $companion->nonCitizen ?? '' }}" type="checkbox" role="switch" id="citizen2">
                                     </div>
-                                    <div class="col-sm-6">
-                                        <label for="passport-number" class="form-label">Identification Number*</label>
-                                        <input type="text"name="idNo" value="{{ $companion->idNo ?? '' }}" id="passport-number" class="form-control" aria-describedby="passport-number">
-                                    </div>
+                                </div> 
+                                <div class="col-sm-6">
+                                    <label for="passport-number" class="form-label">New Identification Number*</label>
+                                    <input type="text" name="idNo" value="{{ $companion->idNo ?? '' }}" id="idnumber3" class="form-control" aria-describedby="passport-number">
                                 </div>
+                                   
+                                </div>
+                            </div>
+                            <div class="col-sm-3 part">
+                                <label for="marriage-cert" class="form-label">ID Attachment</label>
+                                <input type="file" name="" id="" class="form-control" aria-describedby="">
                             </div>
                         </div>
                         <div class="row p-2">
@@ -337,15 +394,16 @@
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <label for="passport" class="form-label">Passport Number</label>
-                                        <input type="text" id="passport" name="passport" value="{{ $companion->passport ?? '' }}" class="form-control" aria-describedby="passport">
+                                        <input type="text" id="passport3" name="passport" value="{{ $companion->passport ?? '' }}" class="form-control" aria-describedby="passport">
                                     </div>
                                     <div class="col-sm-6">
                                         <label for="expirydate" class="form-label">Expiry Date</label>
-                                        <input type="date" id="expirydate" name="expiryDate" value="{{ date_format(date_create($companion->expiryDate), 'Y-m-d') }}" class="form-control" aria-describedby="expirydate">
+                                        <input type="date" id="expirydate3" name="expiryDate" value="{{ date_format(date_create($companion->expiryDate), 'Y-m-d') }}" class="form-control" aria-describedby="expirydate">
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-sm-6">
+                            
+                            <div class="col-sm-3">
                                 <label for="issuing-country" class="form-label">Issuing Country</label>
                                 <select class="form-select" name="issuingCountry" value="{{ $companion->issuingCountry ?? '' }}">
                                     <optgroup id="country-optgroup-Americas" label="Americas">
@@ -360,34 +418,28 @@
                                     </optgroup>
                                 </select>
                             </div>
+                            <div class="col-sm-3">
+                                <label for="dob" class="form-label">Date of Birth</label>
+                                <input type="date" id="dobuc" name="DOB" value="{{ date_format(date_create($companion->DOB), 'Y-m-d') }}" class="form-control" aria-describedby="dob">
+                            </div>
                         </div>
                         <div class="row p-2">
                             <div class="col-sm-6">
-                                <label for="contact-number" class="form-label">Contact Number</label>
-                                <input type="text" id="contact-number" name="contactNo" value="{{ $companion->contactNo ?? '' }}" class="form-control" aria-describedby="contact-number">
-                            </div>
-                            <div class="col-sm-6">
                                 <div class="row">
-                                    <div class="col-sm-6">
-                                        <label for="dob" class="form-label">Date of Birth</label>
-                                        <input type="date" id="dob" name="DOB" value="{{ date_format(date_create($companion->DOB), 'Y-m-d') }}" class="form-control" aria-describedby="dob">
-                                    </div>
                                     <div class="col-sm-6">
                                         <label for="age" class="form-label">Age</label>
-                                        <input type="text" id="age" name="age" value="{{ $companion->age ?? '' }}" class="form-control" aria-describedby="age">
+                                        <input type="text" id="age3" name="age" value="{{ $companion->age ?? '' }}" class="form-control" aria-describedby="age">
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label for="dom" class="form-label">Date of Marriage</label>
+                                        <input type="date" id="dom" name="DOM" value="{{ date_format(date_create($companion->DOM), 'Y-m-d') }}" class="form-control" aria-describedby="dom">
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="row p-2">
-                            <div class="col-sm-6">
-                                <label for="dom" class="form-label">Date of Marriage</label>
-                                <input type="date" id="dom" name="DOM" value="{{ date_format(date_create($companion->DOM), 'Y-m-d') }}" class="form-control" aria-describedby="dom">
-                            </div>
+                            </div>  
                             <div class="col-sm-6">
                                 <div class="row">
                                     <div class="col-sm-6">
-                                        <label for="marriage-cert" class="form-label">Marriage Certificate</label>
+                                        <label for="marriage-cert" class="form-label">Marriage Certificatee</label>
                                         <input type="file" name="marrigeCert" id="marriage-cert" class="form-control" aria-describedby="dob">
                                         @if ($companion->marrigeCert)
                                         Click <a href="/storage/app/file/{{$companion->marrigeCert}}" target="_blank">here</a> to see marriage cert.
@@ -404,6 +456,45 @@
                                         </select>
                                     </div>
                                 </div>
+                            </div>  
+                        </div>
+                        {{-- new --}}
+                        <div class="row p-2">
+                            <div class="col-sm-6">
+                                <div class="row">
+                                    <div class="col-sm-6 ">
+                                        <div class="form-check form-switch align-right">
+                                            <input class="form-check-input okuCheck2 " value="" type="checkbox" name=""  id="">
+                                            <label class="form-check-label" for="citizen">
+                                                OKU?
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label for="lastname" class="form-label">OKU Card Number*</label>
+                                        <input type="number" id="okucard2" name="" value="" class="form-control" readonly >
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <label for="dob" class="form-label">OKU Attachment</label>
+                                        <input type="file" id="okuattach2" name="" class="form-control" aria-describedby="" style="pointer-events: none">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row p-2">
+                             <div class="col-sm-6">
+                                <label for="contact-number" class="form-label">Phone Number</label>
+                                <input type="text" id="contact-number" name="contactNo" value="{{ $companion->contactNo ?? '' }}" class="form-control" aria-describedby="contact-number">
+                            </div>
+                            {{-- new --}}
+                            <div class="col-sm-6">
+                                <label for="contact-number" class="form-label">Home Number</label>
+                                <input type="text" id="" name="" value="" class="form-control" aria-describedby="contact-number">
                             </div>
                         </div>
                         <div class="row p-2">
