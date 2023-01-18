@@ -255,4 +255,35 @@ class myClaimService
 
         return $data;
     }
+
+    public function updateCashAdvance($r, $status = '')
+    {
+        $input = $r->input();
+        $cash = $input['cash'];
+
+        if ($status) {
+            $cash['status'] = $status;
+        }
+        if ($_FILES) {
+            if ($_FILES['file_upload']['name']) {
+                $filename = upload($r->file('file_upload'));
+                $cash['file_upload'] = $filename['filename'];
+            }
+        }
+
+        CashAdvanceDetail::where([['tenant_id', Auth::user()->tenant_id], ['id', $cash['id']]])->update($cash);
+
+        if (isset($input['mot'])) {
+            $mot = $input['mot'];
+            ModeOfTransport::where([['tenant_id', Auth::user()->tenant_id], ['id', $mot['id']]])->update($mot);
+        }
+
+
+        $data['status'] = config('app.response.success.status');
+        $data['type'] = config('app.response.success.type');
+        $data['title'] = config('app.response.success.title');
+        $data['msg'] = 'Success';
+
+        return $data;
+    }
 }

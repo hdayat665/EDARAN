@@ -9,7 +9,7 @@
                     <label class="form-label col-form-label">Type of Cash Advance :</label>
                 </div>
                 <div class="col-md-9">
-                    <input readonly type="text" class="form-control" value="{{ getCashAdvanceType($cashClaim->type) }}">
+                    <input type="text" class="form-control" readonly value="{{ getCashAdvanceType($cashClaim->type) }}">
                 </div>
             </div>
             <div class="row p-2">
@@ -17,7 +17,7 @@
                     <label class="form-label col-form-label">Cash Advance ID:</label>
                 </div>
                 <div class="col-md-9">
-                    <input readonly type="text" class="form-control" value="{{ $cashClaim->id }}">
+                    <input type="text" class="form-control" name="cash[id]" value="{{ $cashClaim->id }}">
                 </div>
             </div>
             <div class="row p-2">
@@ -25,7 +25,7 @@
                     <label class="form-label col-form-label">Claim Type :</label>
                 </div>
                 <div class="col-md-9">
-                    <input readonly type="text" class="form-control" value="Cash Advance">
+                    <input type="text" class="form-control" value="Cash Advance">
                 </div>
             </div>
             <div class="row p-2">
@@ -33,7 +33,7 @@
                     <label class="form-label col-form-label">Date of Cash Required :</label>
                 </div>
                 <div class="col-md-9">
-                    <input readonly type="text" class="form-control" value="{{ $cashClaim->date_require_cash }}">
+                    <input type="text" class="form-control" name="cash[date_require_cash]" value="{{ $cashClaim->date_require_cash }}">
                 </div>
             </div>
             <div class="row p-2">
@@ -41,7 +41,7 @@
                     <label class="form-label col-form-label">Purpose :</label>
                 </div>
                 <div class="col-md-9">
-                    <textarea type="text" readonly class="form-control" rows="3" maxlength="255">{{ $cashClaim->purpose }}</textarea>
+                    <textarea type="text" class="form-control" name="cash[purpose]" rows="3" maxlength="255">{{ $cashClaim->purpose ?? '-' }}</textarea>
                 </div>
             </div>
             <div class="row p-2">
@@ -49,7 +49,7 @@
                     <label class="form-label col-form-label">Amount :</label>
                 </div>
                 <div class="col-md-9">
-                    <input readonly type="text" class="form-control" value="{{ $cashClaim->amount }}">
+                    <input type="text" class="form-control" name="cash[amount]" value="{{ $cashClaim->amount }}">
                 </div>
             </div>
             <div class="row p-2">
@@ -58,7 +58,7 @@
                 </div>
                 <div class="col-md-9">
                     <a href="/storage/{{ $cashClaim->file_upload }}">{{ $cashClaim->file_upload }}</a>
-                    <input readonly type="text" class="form-control">
+                    <input type="file" class="form-control" name="file_upload">
                 </div>
             </div>
         </div>
