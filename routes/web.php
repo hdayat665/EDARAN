@@ -374,6 +374,9 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('/viewCashAdvance/{id}', 'viewCashAdvance');
             Route::post('/submitCashAdvance', 'submitCashAdvance');
             Route::delete('/cancelCashClaim/{id}', 'cancelCashClaim');
+            Route::get('/editCashAdvance/{id}', 'editCashAdvance');
+            Route::post('/updateCashAdvance', 'updateCashAdvance');
+            Route::post('/submitUpdateCashAdvance', 'submitUpdateCashAdvance');
         });
     });
 });
