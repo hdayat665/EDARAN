@@ -22,8 +22,11 @@ use App\Models\SOP;
 use App\Models\TransportMillage;
 use App\Models\TypeOfLogs;
 use App\Models\Unit;
+use App\Models\leaveEntitlementModel;
+use App\Models\UserProfile;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Symfony\Component\Console\Input\Input;
 
 class SettingService
 {
@@ -1645,4 +1648,106 @@ class SettingService
 
         return $data;
     }
+
+    public function leaveEntitlementView()
+    {
+        $data['leave'] = leaveEntitlementModel::where('tenant_id', Auth::user()->tenant_id)->get();
+
+        return $data;
+    }
+
+    public function leaveNameStaff(){
+        $data['nameStaff'] = UserProfile::where('userprofile.tenant_id', Auth::user()->tenant_id)
+                            ->leftJoin('employment', 'userprofile.user_id', '=', 'employment.user_id')
+                            ->leftJoin('department', 'employment.department', '=', 'department.id')
+                            ->select('userprofile.user_id', 'userprofile.fullname', 'department.departmentName')
+                            ->get();
+        return $data;
+    
+    }
+
+    public function createLeaveEntitlement($r)
+    {
+        $input = $r->input();
+
+        // date_default_timezone_set("Asia/Kuala_Lumpur");
+        $etData = leaveEntitlementModel::where([['id_userprofile', $input['employerName']], ['tenant_id', Auth::user()->tenant_id]])->first();
+        if ($etData) {
+            $data['msg'] = 'User already exists in list leave.';
+            $data['status'] = config('app.response.error.status');
+            $data['type'] = config('app.response.error.type');
+            $data['title'] = config('app.response.error.title');
+
+            return $data;
+        }
+
+        $data1 = $input['employerName'];
+        $data2 = $input['employerName'];
+        $data3 = $input['employerName'];
+        $data4 = Auth::user()->tenant_id;
+        $data5 = $input['lapsed'];
+
+        $input = [
+                'id_userprofile' => $data1,
+                'id_employment' => $data2,
+                'id_department' => $data3,
+                'tenant_id' => $data4,
+                'lapse' => $data5
+            ];
+
+        leaveEntitlementModel::create($input);
+        
+
+        $data['status'] = config('app.response.success.status');
+        $data['type'] = config('app.response.success.type');
+        $data['title'] = config('app.response.success.title');
+        $data['msg'] = 'Success create company';
+
+        return $data;
+    }
+
+    public function getcreateLeaveEntitlement($id)
+    {
+        $data = leaveEntitlementModel::find($id);
+
+        return $data;
+    }
+
+     public function updateleaveEntitlement($r, $id)
+    {
+        $input = $r->input();
+
+        date_default_timezone_set("Asia/Kuala_Lumpur");
+
+        // $input['modified_at'] = date('Y-m-d H:i:s');
+        // $user = Auth::user();
+        // $input['modifiedBy'] = $user->username;
+
+        $data1 = $input['CurrentEntitlementBalance'];
+        $data2 = $input['SickLeaveEntitlement'];
+        $data3 = $input['CarryForward'];
+        $data4= $input['CurrentForwardBalance'];
+        $data5 = $input['LapsedDate'];
+        $data6 = $input['Lapsed'];
+
+
+         $input = [
+                'current_entitlement_balance' => $data1,
+                'sick_leave_entitlement' => $data2,
+                'carry_forward' => $data3,
+                'carry_forward_balance' => $data4,
+                'lapsed_date' => $data5,
+                'lapse' => $data6
+            ];
+
+        leaveEntitlementModel::where('id', $id)->update($input);
+
+        $data['status'] = config('app.response.success.status');
+        $data['type'] = config('app.response.success.type');
+        $data['title'] = config('app.response.success.title');
+        $data['msg'] = 'Success update company';
+
+        return $data;
+    }
+
 }

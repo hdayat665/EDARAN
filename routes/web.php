@@ -17,6 +17,7 @@ use App\Http\Controllers\Project\CustomerController;
 use App\Http\Controllers\Project\ProjectController;
 use App\Http\Controllers\Report\ProjectReportController;
 use App\Http\Controllers\Report\TimesheetReportController;
+use App\Http\Controllers\Eleave\EleaveController;
 
 /*
 |--------------------------------------------------------------------------
@@ -249,6 +250,14 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('/createDomainList', 'createDomainList');
             Route::get('/getClaimCategoryContent/{id}', 'getClaimCategoryContent');
             Route::get('/getClaimCategoryById/{id}', 'getClaimCategoryById');
+
+            // eleave
+            Route::get('/leaveEntitlement', 'eleaveEntitlementView');
+            Route::post('/createLeaveEntitlement', 'createLeaveEntitlement');
+            Route::get('/getcreateLeaveEntitlement/{id}', 'getcreateLeaveEntitlement');
+            Route::post('/updateleaveEntitlement/{id}', 'updateleaveEntitlement');
+            Route::get('/holidaylist', 'holidaylistView');
+            Route::get('/leavetypes', 'leavetypesView');
         });
 
         Route::controller(OrganizationController::class)->group(function () {
@@ -367,6 +376,14 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('/viewGeneralClaim/{id}', 'viewGeneralClaim');
             Route::get('/getClaimContentById/{id}', 'getClaimContentById');
         });
+
+        // Route::controller(EleaveController::class)
+        // ->group(function (){
+
+        //     Route::get('/leaveentitlement', 'leaveentitlement');
+
+
+        // });
     });
 });
 // Route::group(['middleware' => ['auth']], function () {

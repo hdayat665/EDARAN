@@ -57,6 +57,9 @@ requirejs.config({
 
         // 'main': 'assets/backend/js/main',
         sweetAlert2: assets + "/assets/sweetalert2/sweetalert2",
+
+        // eleave
+        eleaveentitlementJs: assets + "/js/eleaveentitlementJs",
     },
 });
 
@@ -273,6 +276,11 @@ if ($("#editGNCJs").length > 0) {
 
 if ($("#viewGNSJs").length > 0) {
     requirejs(["viewGNSJs"]);
+}
+
+// eleave
+if ($("#eleaveentitlementJs").length > 0) {
+    requirejs(["eleaveentitlementJs"]);
 }
 
 // Global function
