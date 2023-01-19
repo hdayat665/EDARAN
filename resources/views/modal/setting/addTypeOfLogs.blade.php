@@ -23,6 +23,8 @@
                             <option class="form-label" value="" selected>Select Type of Log</option>
                             <option class="form-label" value="Non-Project" >Non-Project</option>
                             <option class="form-label" value="Project" >Project</option>
+                            <option class="form-label" value="Office" >Office</option>
+                            <option class="form-label" value="Others" >Others</option>
                         </select>
                     </div>
                     <div class="mb-3" id="addtypeoflogproject" style="display:none">
