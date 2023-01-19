@@ -1174,6 +1174,21 @@ class SettingService
 
         TypeOfLogs::where('id', $id)->update($logsData);
 
+        $typeOfLog = TypeOfLogs::orderby('created_at', 'desc')->first();
+
+        if (isset($input['activity_name'])) {
+
+            foreach ($input['activity_name'] as $activity) {
+                $activityData['department'] = $input['department'];
+                $activityData['activity_name'] = $activity;
+                $activityData['project_id'] = $input['project_id'];
+                $activityData['logs_id'] = $typeOfLog->id;
+                $activityData['tenant_id'] = $user->tenant_id;
+
+                ActivityLogs::create($activityData);
+            }
+        }
+
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
