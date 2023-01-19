@@ -12,7 +12,7 @@
             <label class="form-label">Date of Required Cash</label>
         </div>
         <div class="col-md-8">
-            <input type="text" class="form-control" id="datefilter4" value="">
+            <input type="text" class="form-control" id="datefilter4" value="" name="date_require_cash">
         </div>
     </div>
     <div class="row p-2">
@@ -21,7 +21,7 @@
         </div>
         <div class="col-md-8">
             {{-- <input  type="text" class="form-control"> --}}
-            <textarea class="form-control" id="" rows="3"></textarea>
+            <textarea class="form-control" id="" rows="3" name="purpose"></textarea>
         </div>
     </div>
     <div class="row p-2">
@@ -29,7 +29,7 @@
             <label class="form-label">Amount</label>
         </div>
         <div class="col-md-8">
-            <input type="number" class="form-control">
+            <input type="number" class="form-control" name="amount">
         </div>
     </div>
     <div class="row p-2">
@@ -37,12 +37,12 @@
             <label class="form-label">Supporting Document</label>
         </div>
         <div class="col-md-8">
-            <input type="file" class="form-control-file" id="">
+            <input type="file" class="form-control-file" id="" name="file_upload">
         </div>
     </div>
-    <div class="row p-2">
+    {{-- <div class="row p-2">
         <div class="modal-footer">
             <button type="button" class="btn btn-primary">Save</button>
         </div>
-    </div>
+    </div> --}}
 </div>

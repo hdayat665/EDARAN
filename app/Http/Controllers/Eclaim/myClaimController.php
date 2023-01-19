@@ -13,6 +13,7 @@ class myClaimController extends Controller
         $mcs = new myClaimService;
 
         $data['claims'] = $mcs->getClaimsData();
+        $data['cashClaims'] = $mcs->getCashClaimsData();
 
         return view('pages.eclaim.myClaim', $data);
     }

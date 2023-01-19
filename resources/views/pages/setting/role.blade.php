@@ -117,12 +117,18 @@
                                     <span class="d-sm-block d-none">Role name</span>
                                 </a>
                             </li>
-                            <li class="nav-item">
+                            {{-- <li class="nav-item">
                                 <a href="#default-tab-2" data-bs-toggle="tab" class="nav-link">
                                     <span class="d-sm-none">Tab 2</span>
                                     <span class="d-sm-block d-none">Permissions</span>
                                 </a>
                             </li>
+                            <li class="nav-item">
+                                <a href="#default-tab-3" data-bs-toggle="tab" class="nav-link">
+                                    <span class="d-sm-none">Tab 3</span>
+                                    <span class="d-sm-block d-none">User</span>
+                                </a>
+                            </li> --}}
 
                         </ul>
 
@@ -153,7 +159,7 @@
                                 </div>
                                 <!-- END tab-pane -->
                                 <!-- BEGIN tab-pane -->
-                                <div class="tab-pane fade" id="default-tab-2">
+                                {{-- <div class="tab-pane fade" id="default-tab-2">
                                     <blockquote class="blockquote">
 
                                         <input type="text" class="form-control" id="recipient-name" placeholder="Search">
@@ -171,9 +177,10 @@
                                         </div>
 
                                     </div>
-                                </div>
+                                </div> --}}
                                 <!-- END tab-pane -->
                                 <!-- BEGIN tab-pane -->
+                                
 
                                 <!-- END tab-pane -->
                             </div>
@@ -190,8 +197,8 @@
     </div>
 
     <!--  -->
-    <div class="modal fade" id="editRoleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
+    <div class="modal fade bd-example-modal-lg" id="editRoleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
 
@@ -205,15 +212,21 @@
 
                         <ul class="nav nav-tabs">
                             <li class="nav-item">
-                                <a href="#default-tab-3" data-bs-toggle="tab" class="nav-link active">
+                                <a href="#default-tab-4" data-bs-toggle="tab" class="nav-link active">
                                     <span class="d-sm-none" >Tab 1</span>
                                     <span class="d-sm-block d-none">Role name</span>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="#default-tab-4" data-bs-toggle="tab" class="nav-link">
+                                <a href="#default-tab-5" data-bs-toggle="tab" class="nav-link">
                                     <span class="d-sm-none">Tab 2</span>
                                     <span class="d-sm-block d-none">Permissions</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#default-tab-6" data-bs-toggle="tab" class="nav-link">
+                                    <span class="d-sm-none">Tab 3</span>
+                                    <span class="d-sm-block d-none">User</span>
                                 </a>
                             </li>
 
@@ -221,7 +234,7 @@
                         <form id="updateRoleForm">
                         <div class="tab-content panel m-0 rounded-0 p-3">
                             <!-- BEGIN tab-pane -->
-                            <div class="tab-pane fade active show" id="default-tab-3">
+                            <div class="tab-pane fade active show" id="default-tab-4">
                                 <blockquote class="blockquote">
                                     <p>Role name</p>
                                     <input type="text" class="form-control" name="roleName" id="roleName" >
@@ -246,7 +259,7 @@
                             </div>
                             <!-- END tab-pane -->
                             <!-- BEGIN tab-pane -->
-                            <div class="tab-pane fade" id="default-tab-4">
+                            <div class="tab-pane fade" id="default-tab-5">
                                 <blockquote class="blockquote">
 
                                     <input type="text" class="form-control" id="recipient-name" placeholder="Search">
@@ -263,6 +276,63 @@
                                         </p>
                                     </div>
 
+                                </div>
+                            </div>
+                            <!-- END tab-pane -->
+                            <!-- BEGIN tab-pane -->
+
+                            <div class="tab-pane fade" id="default-tab-6">
+                                {{-- <blockquote class="blockquote"> --}}
+
+                                          
+                                          <select class="selectpicker form-control" id="multi" multiple>
+                                            {{-- <option class="form-label" value="">Select Employee Name</option> --}}
+                                            <option value="1" selected>Syakir</option>
+                                            <option value="2" selected>Marwar</option>
+                                            <option value="3">Zulfazli</option>
+                                            <option value="4">Sariza Ibrahim</option>
+                                            <option value="5">Zuliana</option>
+                                          </select>
+                                       
+                                {{-- </blockquote> --}}
+                                <div class="row p-2">
+                                    <table id="" class="table table-striped table-bordered align-middle">
+                                        <thead>
+                                            <tr>
+                                                <th class="text-nowrap">No</th>
+                                                <th class="text-nowrap">Employee Name</th>
+                                                <th class="text-nowrap">Added By</th>
+                                                <th class="text-nowrap">Added Time</th>
+                                                <th class="text-nowrap">Modified By</th>
+                                                <th class="text-nowrap">Modified Time</th>
+                                                <th class="text-nowrap">Action</th>
+                                                
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            
+                                            <tr>
+                                                <td>1</td>
+                                                <td>Marwar</td>
+                                                <td>Sariza</td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>2</td>
+                                                <td>Syakir</td>
+                                                <td>Sariza</td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+                                           
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
                             <!-- END tab-pane -->

@@ -9,6 +9,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\OrganizationController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\Eclaim\cashAdvanceController;
 use App\Http\Controllers\Eclaim\generalClaimController;
 use App\Http\Controllers\Eclaim\myClaimController;
 use App\Http\Controllers\HRIS\EmployeeController;
@@ -377,13 +378,15 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('/getClaimContentById/{id}', 'getClaimContentById');
         });
 
-        // Route::controller(EleaveController::class)
-        // ->group(function (){
-
-        //     Route::get('/leaveentitlement', 'leaveentitlement');
-
-
-        // });
+        Route::controller(cashAdvanceController::class)->group(function () {
+            Route::post('/createCashAdvance', 'createCashAdvance');
+            Route::get('/viewCashAdvance/{id}', 'viewCashAdvance');
+            Route::post('/submitCashAdvance', 'submitCashAdvance');
+            Route::delete('/cancelCashClaim/{id}', 'cancelCashClaim');
+            Route::get('/editCashAdvance/{id}', 'editCashAdvance');
+            Route::post('/updateCashAdvance', 'updateCashAdvance');
+            Route::post('/submitUpdateCashAdvance', 'submitUpdateCashAdvance');
+        });
     });
 });
 // Route::group(['middleware' => ['auth']], function () {

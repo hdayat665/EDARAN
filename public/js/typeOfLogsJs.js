@@ -4,7 +4,12 @@ $(document).ready(function() {
         todayHighlight: true,
         autoclose: true,
     });
-
+    $('#typeOfLogsTable').DataTable({
+        lengthMenu: [5],
+        responsive: false,
+        "searching": true,
+        "bLengthChange": false
+    });
     $('#activityname').DataTable({
         lengthMenu: [5],
         responsive: false,
@@ -109,12 +114,13 @@ $(document).ready(function() {
                 allowEscapeKey: false
             }).then(function() {
                 $.ajax({
-                    type: "DELETE",
+                    type: "POST",
                     url: "/deleteTypeOfLogs/" + id,
-                    dataType: "json",
-                    async: false,
-                    processData: false,
-                    contentType: false,
+                    // dataType: "json",
+                    data: { _method: "DELETE" },
+                    // async: false,
+                    // processData: false,
+                    // contentType: false,
                 }).done(function(data) {
                     swal({
                         title: data.title,
@@ -227,6 +233,8 @@ $(document).ready(function() {
                         async: false,
                         processData: false,
                         contentType: false,
+
+                        
                     }).done(function(data) {
                         swal({
                             title: data.title,
