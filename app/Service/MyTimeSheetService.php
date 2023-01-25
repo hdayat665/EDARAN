@@ -674,8 +674,7 @@ class MyTimeSheetService
 
         $data = TimesheetEvent::where($cond)
             ->get();
-        // pr($data);
-        // pr();
+        // dd($data);
         return $data;
     }
 }
