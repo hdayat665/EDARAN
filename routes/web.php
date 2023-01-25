@@ -9,6 +9,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\OrganizationController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\Eclaim\cashAdvanceController;
 use App\Http\Controllers\Eclaim\generalClaimController;
 use App\Http\Controllers\Eclaim\myClaimController;
 use App\Http\Controllers\HRIS\EmployeeController;
@@ -247,6 +248,8 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('/createGeneralApprover', 'createGeneralApprover');
             Route::get('/getUserByRole/{id}', 'getUserByRole');
             Route::post('/createDomainList', 'createDomainList');
+            Route::get('/getClaimCategoryContent/{id}', 'getClaimCategoryContent');
+            Route::get('/getClaimCategoryById/{id}', 'getClaimCategoryById');
         });
 
         Route::controller(OrganizationController::class)->group(function () {
@@ -357,6 +360,23 @@ Route::group(['middleware' => ['web']], function () {
 
         Route::controller(generalClaimController::class)->group(function () {
             Route::post('/createGeneralClaim', 'createGeneralClaim');
+            Route::post('/submitGeneralClaim', 'submitGeneralClaim');
+            Route::get('/editGeneralClaimView/{id}', 'editGeneralClaimView');
+            Route::post('/updateGeneralClaim/{id}', 'updateGeneralClaim');
+            Route::delete('/deleteGNCDetail/{id}', 'deleteGNCDetail');
+            Route::post('/updateStatusGeneralClaims/{id}', 'updateStatusGeneralClaims');
+            Route::get('/viewGeneralClaim/{id}', 'viewGeneralClaim');
+            Route::get('/getClaimContentById/{id}', 'getClaimContentById');
+        });
+
+        Route::controller(cashAdvanceController::class)->group(function () {
+            Route::post('/createCashAdvance', 'createCashAdvance');
+            Route::get('/viewCashAdvance/{id}', 'viewCashAdvance');
+            Route::post('/submitCashAdvance', 'submitCashAdvance');
+            Route::delete('/cancelCashClaim/{id}', 'cancelCashClaim');
+            Route::get('/editCashAdvance/{id}', 'editCashAdvance');
+            Route::post('/updateCashAdvance', 'updateCashAdvance');
+            Route::post('/submitUpdateCashAdvance', 'submitUpdateCashAdvance');
         });
     });
 });

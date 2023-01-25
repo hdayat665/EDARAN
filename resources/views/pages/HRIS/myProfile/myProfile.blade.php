@@ -17,32 +17,38 @@
                         <span class="d-sm-block d-none">My Profile</span>
                     </a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item" id="qualifi">
                     <a href="#default-tab-2" data-bs-toggle="tab" class="nav-link">
+                        <span class="d-sm-none">Qualification</span>
+                        <span class="d-sm-block d-none">Qualification</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#default-tab-3" data-bs-toggle="tab" class="nav-link">
                         <span class="d-sm-none">Address Details</span>
                         <span class="d-sm-block d-none">Address Details</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#default-tab-3" data-bs-toggle="tab" class="nav-link">
+                    <a href="#default-tab-4" data-bs-toggle="tab" class="nav-link">
                         <span class="d-sm-none">Emergency Contact</span>
                         <span class="d-sm-block d-none">Emergency Contact</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#default-tab-4" data-bs-toggle="tab" class="nav-link">
+                    <a href="#default-tab-5" data-bs-toggle="tab" class="nav-link">
                         <span class="d-sm-none">Companion</span>
                         <span class="d-sm-block d-none">Companion</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#default-tab-5" data-bs-toggle="tab" class="nav-link">
+                    <a href="#default-tab-6" data-bs-toggle="tab" class="nav-link">
                         <span class="d-sm-none">Children</span>
                         <span class="d-sm-block d-none">Children</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#default-tab-6" data-bs-toggle="tab" class="nav-link">
+                    <a href="#default-tab-7" data-bs-toggle="tab" class="nav-link">
                         <span class="d-sm-none">Family Particular</span>
                         <span class="d-sm-block d-none">Family Particular</span>
                     </a>
@@ -84,9 +90,9 @@
                                 <label for="firstname" class="form-label">Full Name</label>
                                 <input type="text" readonly id="fullName" name="fullName" value="{{$profile->fullName ?? ''}}" class="form-control" aria-describedby="firstname" style="text-transform:uppercase">
                             </div>
+                            {{-- new --}}
                             <div class="col-sm-6">
                                 <div class="row">
-
                                     <div class="col-sm-12 idnumber">
                                         <label for="lastname" class="form-label">Old Identification Number*</label>
                                         <input type="text" class="form-control">
@@ -105,18 +111,24 @@
                                             </label>
                                         </div>
                                     </div>
-                                    <div class="col-sm-6 idnumber">
+                                     <div class="col-sm-6">
+                                    <div class="row">
+
+                                    <div class="col-sm-12 idnumber">
                                         <label for="lastname" class="form-label">New Identification Number*</label>
                                         <input type="text" value="{{$profile->idNo ?? ''}}" name="idNo" id="idnumber" class="form-control" aria-describedby="lastname">
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-sm-3">
-                                <label class="form-label">ID Attachment* </label>
-                                <input id="iDfileupload" type="file" name="file" multiple="multiple" ></input>
+                                </div>
                             </div>
-                            <!-- </div> -->
+                            {{-- new --}}
+                            <div class="col-sm-3 part">
+                                <label for="idattach" class="form-label">ID Attachment</label>
+                                <input type="file" class="form-control-file" id="">
+                            </div> 
                         </div>
+
                         <div class="row p-2">
                             <div class="col-sm-6">
                                 <div class="row">
@@ -149,7 +161,7 @@
                                         @endforeach
                                     </optgroup>
                                 </select>
-                            </div>
+                            </div> 
                         </div>
                         <div class="row p-2">
                             <div class="col-sm-6">
@@ -205,49 +217,63 @@
                                 </select>
                             </div>
                         </div>
+                        {{-- new --}}
                         <div class="row p-2">
                             <div class="col-sm-6">
                                 <div class="row">
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-6 ">
                                         <div class="form-check form-switch align-right">
-                                            <input class="form-check-input partCheck" value="door3" type="checkbox" name="oku" id="oku">
-                                            <label class="form-label" for="oku">
-                                                OKU
+                                            <input class="form-check-input okuCheck" value="" type="checkbox" name=""  id="">
+                                            <label class="form-label" for="OKU">
+                                                OKU?
                                             </label>
                                         </div>
                                     </div>
-                                    <div class="col-sm-6">
-                                        <label for="okucard" class="form-label">OKU Card Number</label>
-                                        <input type="text" id="okucardnofam" name="okucard" class="form-control" aria-describedby="okucard" >
+                                     <div class="col-sm-6">
+                                    <div class="row">
+
+                                    <div class="col-sm-12 idnumber">
+                                        <label for="" class="form-label">OKU Card Number*</label>
+                                        <input type="text" value="" name="" id="okucard" class="form-control" readonly >
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-sm-3">
-                                <label class="form-label">OKU Attachment* </label>
-                                <input id="okufileupload" type="file" name="file" multiple="multiple" ></input>
+                                </div>
                             </div>
+                            <div class="col-sm-3 part">
+                                <label for="idattach" class="form-label">OKU Attachment</label>
+                                <input type="file" class="form-control-file" id="okuattach" style="pointer-events: none">
+                            </div> 
                         </div>
-
                         <hr class="mt-5">
                         <h4 class="p-2">Contact Details</h4>
                         <div class="row p-2">
-                            <div class="col-sm-6">
-                                <label for="phone-number" class="form-label">Phone Number 1*</label>
-                                <input type="text" id="phone-number" name="phoneNo" value="{{$profile->phoneNo ?? ''}}" class="form-control" aria-describedby="phone-number">
+                            <div class="col-md-6">
+                                <div class="col p-2">
+                                    <label for="phone-number" class="form-label">Phone Number*</label>
+                                    <input type="text" id="phone-number" name="phoneNo" value="{{$profile->phoneNo ?? ''}}" class="form-control" aria-describedby="phone-number">
+                                </div>
                             </div>
-                            <div class="col-sm-6">
-                                <label for="phone-number" class="form-label">Phone Number 2*</label>
-                                <input type="text" id="phone-number" name="phoneNo" value="{{$profile->phoneNo ?? ''}}" class="form-control" aria-describedby="phone-number">
+                            {{-- new --}}
+                            <div class="col-md-6">
+                                <div class="col p-2">
+                                    <label for="phone-number2" class="form-label">Phone Number 2</label>
+                                    <input type="text" id="" name="" value="" class="form-control" aria-describedby="">
+                                </div>
                             </div>
                         </div>
                         <div class="row p-2">
-                            <div class="col-sm-6">
-                                <label for="home-number" class="form-label">Home Number</label>
-                                <input type="text" id="home-number" name="homeNo" value="{{$profile->homeNo ?? ''}}" class="form-control" aria-describedby="home-number">
+                            <div class="col-md-6">
+                                <div class="col p-2">
+                                    <label for="home-number" class="form-label">Home Number</label>
+                                    <input type="text" id="home-number" name="homeNo" value="{{$profile->homeNo ?? ''}}" class="form-control" aria-describedby="home-number">
+                                </div>
                             </div>
-                            <div class="col-sm-6">
-                                <label for="extension-number" class="form-label">Extension Number</label>
-                                <input type="text" id="extension-number" name="extensionNo" value="{{$profile->extensionNo ?? ''}}" class="form-control" aria-describedby="extension-number">
+                            <div class="col-md-6">
+                                <div class="col p-2">
+                                    <label for="extension-number" class="form-label">Extension Number</label>
+                                    <input type="text" id="extension-number" name="extensionNo" value="{{$profile->extensionNo ?? ''}}" class="form-control" aria-describedby="extension-number">
+                                </div>
                             </div>
                         </div>
                         <div class="row p-2">
@@ -257,11 +283,12 @@
                                 <a class="btn btn-white btnNext" >Next</a>
                             </div>
                         </div>
-                       
                     </form>
                 </div>
 
                 @include('pages.HRIS.myProfile.myAddress')
+
+                @include('pages.HRIS.myProfile.qualification')
 
                 @include('pages.HRIS.myProfile.myEC')
 

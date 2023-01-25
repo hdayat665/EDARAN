@@ -1879,3 +1879,392 @@ $("#same-address").change(function() {
         }        
 
     });
+
+    // $("#same-address6").change(function() {
+    //     if(this.checked) {
+    //         $('#addresscom').val($('#address-1').val()).prop('readonly', true);
+    //         $('#address2com').val($('#address-2').val()).prop('readonly', true);
+    //         $('#postcodecom').val($('#postcode').val()).prop('readonly', true);
+    //         $('#citycom').val($('#city').val()).prop('readonly', true);
+    //         $('#statecom').val($('#state').val()).prop('disabled', true);
+    //         $('#countrycom').val($('#country').val()).prop('disabled', true);
+    //     }
+    //     else {
+    //         $('#addresscom').val($('').val()).prop('readonly', false);
+    //         $('#address2com').val($('').val()).prop('readonly', false);
+    //         $('#postcodecom').val($('').val()).prop('readonly', false);
+    //         $('#citycom').val($('').val()).prop('readonly', false);
+    //         $('#statecom').val($('').val()).prop('disabled', false);
+    //         $('#countrycom').val($('my').val()).prop('disabled', false);
+            
+    //     }        
+
+    // });
+
+    $("#datepicker-fromdate").datepicker({
+        todayHighlight: true,
+        autoclose: true,
+        format: 'dd/mm/yyyy',
+      });
+
+      $("#datepicker-todate").datepicker({
+        todayHighlight: true,
+        autoclose: true,
+        format: 'dd/mm/yyyy',
+      });
+
+      $("#datepicker-fromdateu").datepicker({
+        todayHighlight: true,
+        autoclose: true,
+        format: 'dd/mm/yyyy',
+      });
+
+      $("#datepicker-todateu").datepicker({
+        todayHighlight: true,
+        autoclose: true,
+        format: 'dd/mm/yyyy',
+      });
+      
+
+      $("#datepicker-others").datepicker({
+        todayHighlight: true,
+        autoclose: true,
+        format: 'dd/mm/yyyy',
+      });
+
+      $("#datepicker-othersu").datepicker({
+        todayHighlight: true,
+        autoclose: true,
+        format: 'dd/mm/yyyy',
+      });
+
+    //   oku checkbox myprofile
+    $(".okuCheck").click(function(){
+        if ($(this).prop("checked")) {
+              
+            $('#okucard').prop('readonly', false);
+            $('#okuattach').css('pointer-events', 'auto');
+        } else {
+            $('#okucard').prop('readonly', true);
+            $('#okuattach').css('pointer-events', 'none');
+        }
+      });
+
+      //oku check companion
+      $(".okuCheck1").click(function(){
+        if ($(this).prop("checked")) {
+              
+            $('#okucard1').prop('readonly', false);
+            $('#okuattach1').css('pointer-events', 'auto');
+        } else {
+            $('#okucard1').prop('readonly', true);
+            $('#okuattach1').css('pointer-events', 'none');
+        }
+      });
+
+      //oku check update companion
+      $(".okuCheck2").click(function(){
+        if ($(this).prop("checked")) {
+              
+            $('#okucard2').prop('readonly', false);
+            $('#okuattach2').css('pointer-events', 'auto');
+        } else {
+            $('#okucard2').prop('readonly', true);
+            $('#okuattach2').css('pointer-events', 'none');
+        }
+      });
+
+       //oku check add children
+       $(".okuCheck3").click(function(){
+        if ($(this).prop("checked")) {
+              
+            $('#okucard3').prop('readonly', false);
+            $('#okuattach3').css('pointer-events', 'auto');
+        } else {
+            $('#okucard3').prop('readonly', true);
+            $('#okuattach3').css('pointer-events', 'none');
+        }
+      });
+
+      //oku check update children
+      $(".okuCheck4").click(function(){
+        if ($(this).prop("checked")) {
+              
+            $('#okucard4').prop('readonly', false);
+            $('#okuattach4').css('pointer-events', 'auto');
+        } else {
+            $('#okucard4').prop('readonly', true);
+            $('#okuattach4').css('pointer-events', 'none');
+        }
+      });
+
+      //oku check add family
+      $(".okuCheck5").click(function(){
+        if ($(this).prop("checked")) {
+              
+            $('#okucard5').prop('readonly', false);
+            $('#okuattach5').css('pointer-events', 'auto');
+        } else {
+            $('#okucard5').prop('readonly', true);
+            $('#okuattach5').css('pointer-events', 'none');
+        }
+      });
+
+       //oku check edit family
+       $(".okuCheck6").click(function(){
+        if ($(this).prop("checked")) {
+              
+            $('#okucard6').prop('readonly', false);
+            $('#okuattach6').css('pointer-events', 'auto');
+        } else {
+            $('#okucard6').prop('readonly', true);
+            $('#okuattach6').css('pointer-events', 'none');
+        }
+      });
+
+      //COMPANION UPDATE INFORMATION
+    $('#idnumber3').change(function(){
+        
+        if($(this).val().length == 12){
+
+            var idn = $(this).val();
+            var year = (idn.substring(0, 2));
+            var month = idn.substring(2, 4);
+            var day = idn.substring(4, 6);
+            
+            var cutoff = (new Date()).getFullYear() - 2000;
+
+            $('#dobuc').val((year > cutoff ? '19' : '20') + year + '-' + month + '-' + day);
+        }
+    });
+
+    $('#idnumber3').change(function(){
+
+        if($(this).val().length == 12){
+
+            var idn = $(this).val();
+            var year = (idn.substring(0, 2));
+
+            var cutoff = (new Date()).getFullYear() - 2000; 
+
+            var ww = (year > cutoff ? '19' : '20') + year;
+            var currentAge = new Date().getFullYear() - ww;
+            $('#age3').val(currentAge);
+        }
+    });
+
+     //children add info
+    $('#idnumber4').change(function(){
+        
+        if($(this).val().length == 12){
+
+            var idn = $(this).val();
+            var year = (idn.substring(0, 2));
+            var month = idn.substring(2, 4);
+            var day = idn.substring(4, 6);
+            
+            var cutoff = (new Date()).getFullYear() - 2000;
+
+            $('#dob4').val((year > cutoff ? '19' : '20') + year + '-' + month + '-' + day);
+        }
+    });
+
+    $('#idnumber4').change(function(){
+
+        if($(this).val().length == 12){
+
+            var idn = $(this).val();
+            var year = (idn.substring(0, 2));
+
+            var cutoff = (new Date()).getFullYear() - 2000; 
+
+            var ww = (year > cutoff ? '19' : '20') + year;
+            var currentAge = new Date().getFullYear() - ww;
+            $('#age4').val(currentAge);
+        }
+    });
+
+    //children update info
+    $('#idnumber5').change(function(){
+        
+        if($(this).val().length == 12){
+
+            var idn = $(this).val();
+            var year = (idn.substring(0, 2));
+            var month = idn.substring(2, 4);
+            var day = idn.substring(4, 6);
+            
+            var cutoff = (new Date()).getFullYear() - 2000;
+
+            $('#dob5').val((year > cutoff ? '19' : '20') + year + '-' + month + '-' + day);
+        }
+    });
+
+    $('#idnumber5').change(function(){
+
+        if($(this).val().length == 12){
+
+            var idn = $(this).val();
+            var year = (idn.substring(0, 2));
+
+            var cutoff = (new Date()).getFullYear() - 2000; 
+
+            var ww = (year > cutoff ? '19' : '20') + year;
+            var currentAge = new Date().getFullYear() - ww;
+            $('#age5').val(currentAge);
+        }
+    });
+
+    //parent add info
+    $('#idnumber6').change(function(){
+        
+        if($(this).val().length == 12){
+
+            var idn = $(this).val();
+            var year = (idn.substring(0, 2));
+            var month = idn.substring(2, 4);
+            var day = idn.substring(4, 6);
+            
+            var cutoff = (new Date()).getFullYear() - 2000;
+
+            $('#dob6').val((year > cutoff ? '19' : '20') + year + '-' + month + '-' + day);
+        }
+    });
+
+    $('#idnumber6').change(function(){
+
+        if($(this).val().length == 12){
+
+            var idn = $(this).val();
+            var year = (idn.substring(0, 2));
+
+            var cutoff = (new Date()).getFullYear() - 2000; 
+
+            var ww = (year > cutoff ? '19' : '20') + year;
+            var currentAge = new Date().getFullYear() - ww;
+            $('#age6').val(currentAge);
+        }
+    });
+
+
+    //parent update info
+    $('#idnumber7').change(function(){
+        
+        if($(this).val().length == 12){
+
+            var idn = $(this).val();
+            var year = (idn.substring(0, 2));
+            var month = idn.substring(2, 4);
+            var day = idn.substring(4, 6);
+            
+            var cutoff = (new Date()).getFullYear() - 2000;
+
+            $('#DOBP1').val((year > cutoff ? '19' : '20') + year + '-' + month + '-' + day);
+        }
+    });
+
+    $('#idnumber7').change(function(){
+
+        if($(this).val().length == 12){
+
+            var idn = $(this).val();
+            var year = (idn.substring(0, 2));
+
+            var cutoff = (new Date()).getFullYear() - 2000; 
+
+            var ww = (year > cutoff ? '19' : '20') + year;
+            var currentAge = new Date().getFullYear() - ww;
+            $('#age7').val(currentAge);
+        }
+    });
+
+
+    //UPDATE COMPANION DETAILS
+    $(".partCheck6").click(function(){
+        if ($(this).prop("checked")) {
+            $('#idnumber3').prop('readonly', true);
+            $('#dobuc').prop('readonly', false);
+            $('#dobuc').css('pointer-events', 'auto');
+            $("#idnumber3").val("");
+           
+            
+        } else {
+            
+            $('#idnumber3').prop('readonly', false);
+            $('#dobuc').prop('readonly', true);
+            $('#dobuc').css('pointer-events', 'none');
+            $("#passport3").val("");
+            $("#expirydate3").val("");
+            $('#expirydate3').prop('readonly', true);
+            $('#expirydate3').css('pointer-events', 'none');
+            
+        }
+      });
+
+      //ADD CHILDREN DETAILS
+    $(".partCheck7").click(function(){
+        if ($(this).prop("checked")) {
+            $('#idnumber4').prop('readonly', true);
+            $('#dob4').prop('readonly', false);
+            $('#dob4').css('pointer-events', 'auto');
+            $("#idnumber4").val("");
+           
+            
+        } else {
+            
+            $('#idnumber4').prop('readonly', false);
+            $('#dob4').prop('readonly', true);
+            $('#dob4').css('pointer-events', 'none');
+            $("#passportChild").val("");
+            $("#expiryDateChild").val("");
+            $('#expiryDateChild').prop('readonly', true);
+            $('#expiryDateChild').css('pointer-events', 'none');
+            
+        }
+      });
+
+      //ADD FAMILY DETAILS
+    $(".partCheck8").click(function(){
+        if ($(this).prop("checked")) {
+            $('#idnumber6').prop('readonly', true);
+            $('#dob6').prop('readonly', false);
+            $('#dob6').css('pointer-events', 'auto');
+            $("#idnumber6").val("");
+           
+            
+        } else {
+            
+            $('#idnumber6').prop('readonly', false);
+            $('#dob6').prop('readonly', true);
+            $('#dob6').css('pointer-events', 'none');
+            $("#passportparent").val("");
+            $("#expiryDateParent").val("");
+            $('#expiryDateParent').prop('readonly', true);
+            $('#expiryDateParent').css('pointer-events', 'none');
+            
+        }
+      });
+
+      //UPDATE FAMILY DETAILS
+    $(".partCheck9").click(function(){
+        if ($(this).prop("checked")) {
+            $('#idnumber7').prop('readonly', true);
+            $('#dob7').prop('readonly', false);
+            $('#dob6').css('pointer-events', 'auto');
+            $("#idnumber6").val("");
+           
+            
+        } else {
+            
+            $('#idnumber6').prop('readonly', false);
+            $('#dob6').prop('readonly', true);
+            $('#dob6').css('pointer-events', 'none');
+            $("#passportparent").val("");
+            $("#expiryDateParent").val("");
+            $('#expiryDateParent').prop('readonly', true);
+            $('#expiryDateParent').css('pointer-events', 'none');
+            
+        }
+      });
+      
+      

@@ -33,15 +33,15 @@
                                         <a href="javascript:;" class="btn btn-primary btn-sm">Action</a>
                                         <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle btn-sm"><i class="fa fa-caret-down"></i></a>
                                         <div class="dropdown-menu dropdown-menu-end">
-                                            <a href="/eclaim/viewgeneralclaim" class="dropdown-item">View General
+                                            <a href="/viewGeneralClaim/{{ $claim->id }}" class="dropdown-item">View General
                                                 Claim</a>
-                                            <a href="/eclaim/updategeneral" class="dropdown-item">Update Claim</a>
+                                            <a href="/editGeneralClaimView/{{ $claim->id }}" class="dropdown-item">Update Claim</a>
                                         </div>
                                     @elseif ($claim->status == 'paid' || $claim->status == 'rejected')
                                         <a href="javascript:;" class="btn btn-primary btn-sm">Action</a>
                                         <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle btn-sm"><i class="fa fa-caret-down"></i></a>
                                         <div class="dropdown-menu dropdown-menu-end">
-                                            <a href="/eclaim/viewgeneralclaim" class="dropdown-item">View General
+                                            <a href="/viewGeneralClaim/{{ $claim->id }}"class="dropdown-item">View General
                                                 Claim</a>
                                         </div>
                                     @endif

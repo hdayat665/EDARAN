@@ -2,12 +2,15 @@
 
 use App\Models\ActivityLogs;
 use App\Models\Branch;
+use App\Models\ClaimCategory;
+use App\Models\ClaimCategoryContent;
 use App\Models\Company;
 use App\Models\Customer;
 use App\Models\Department;
 use App\Models\Designation;
 use App\Models\Employee;
 use App\Models\EmploymentType;
+use App\Models\GeneralClaimDetail;
 use App\Models\JobGrade;
 use App\Models\Project;
 use App\Models\ProjectLocation;
@@ -924,6 +927,123 @@ if (!function_exists('getUserByRole')) {
 
         if (!$data) {
             $data = [];
+        }
+
+        return $data;
+    }
+}
+
+
+if (!function_exists('getClaimCategory')) {
+    function getClaimCategory($id = '')
+    {
+        $data = ClaimCategory::where('tenant_id', Auth::user()->tenant_id)->get();
+
+        if (!$data) {
+            $data = [];
+        }
+
+        return $data;
+    }
+}
+
+if (!function_exists('getClaimCategoryContentByClaimId')) {
+    function getClaimCategoryContentByClaimId($id = '')
+    {
+        $data = ClaimCategoryContent::where([['category_id', $id]])->get();
+
+        if (!$data) {
+            $data = [];
+        }
+
+        return $data;
+    }
+}
+
+if (!function_exists('getClaimCategoryById')) {
+    function getClaimCategoryById($id = '')
+    {
+        $data = ClaimCategory::where([['id', $id]])->first();
+
+        if (!$data) {
+            $data = [];
+        }
+
+        return $data;
+    }
+}
+
+if (!function_exists('getGNCDetailByGeneralId')) {
+    function getGNCDetailByGeneralId($id = '')
+    {
+        $data = GeneralClaimDetail::where([['general_id', $id]])->get();
+
+        if (!$data) {
+            $data = [];
+        }
+
+        return $data;
+    }
+}
+
+if (!function_exists('getClaimContentById')) {
+    function getClaimContentById($id = '')
+    {
+        $data = GeneralClaimDetail::where([['id', $id]])->with('claim_category_content')->first();
+
+        if (!$data) {
+            $data = [];
+        }
+
+        return $data;
+    }
+}
+
+if (!function_exists('getCashAdvanceType')) {
+    function getCashAdvanceType($id = '')
+    {
+        $data = [
+            '1' => 'Project ( Outstation )',
+            '2' => 'Project ( Non Outstation )',
+            '3' => 'Other ( Outstation )',
+            '4' => 'Other ( Non Outstation )',
+        ];
+
+        if ($id) {
+            return $data[$id];
+        }
+
+        return $data;
+    }
+}
+
+if (!function_exists('getProjectById')) {
+    function getProjectById($id = '')
+    {
+        $data = Project::where('id', $id)->first();
+
+        if (!$data) {
+            $data = [];
+        }
+
+        return $data;
+    }
+}
+
+if (!function_exists('getModeOfTransport')) {
+    function getModeOfTransport($id = '')
+    {
+        $data = [
+            '0' => '',
+            '1' => 'Personal Car',
+            '2' => 'Personal Motorcycle',
+            '3' => 'Public Transport',
+            '4' => 'Company Car',
+            '5' => 'Carpool',
+        ];
+
+        if ($id) {
+            return $data[$id];
         }
 
         return $data;
