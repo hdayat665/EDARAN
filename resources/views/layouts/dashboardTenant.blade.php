@@ -371,91 +371,154 @@
                     <!-- Sidenav Content Orbit -->
 
                     <div class="menu-item has-sub">
-                        <a href="javascript:;" class="menu-link highlight">
-                            <div class="menu-icon">
-                                <i class="fa fa-file-lines text-gray"></i>
-                            </div>
-                            <div class="menu-text text-gray">E-Claim</div>
-                            <div class="menu-caret text-gray"></div>
-                        </a>
-                        <div class="menu-submenu">
-                            <div class="menu-item">
-                                <a href="/myClaimView" class="menu-link highlight">
-                                    <div class="menu-icon">
-                                        <i class="fa fa-envelope-open-text text-gray"></i>
+						<a href="javascript:;" class="menu-link highlight">
+							<div class="menu-icon">
+								<i class="fa fa-file-lines text-gray"></i>
+							</div>
+							<div class="menu-text text-gray">E-Claim</div>
+							<div class="menu-caret text-gray"></div>
+						</a>
+						<div class="menu-submenu">
+							<div class="menu-item">
+								<a href="/myClaimView" class="menu-link highlight">
+							        <div class="menu-icon">
+									    <i class="fa fa-envelope-open-text text-gray"></i>
+								    </div>
+									<div class="menu-text text-gray">My Claim</div>
+								</a>
+							</div>
+							<div class="menu-item has-sub">
+								<a href="javascript:;" class="menu-link highlight">
+								    <div class="menu-icon">
+										<i class="fa fa-list-check text-gray"></i>
                                     </div>
-                                    <div class="menu-text text-gray">My Claim</div>
-                                </a>
-                            </div>
-                            <div class="menu-item has-sub">
-                                <a href="javascript:;" class="menu-link highlight">
-                                    <div class="menu-icon">
-                                        <i class="fa fa-list-check text-gray"></i>
-                                    </div>
-                                    <div class="menu-text text-gray">Claim Approval</i></div>
-                                    <div class="menu-caret text-gray"></div>
-                                </a>
+									    <div class="menu-text text-gray">Claim Approval</i>
+                                        </div>
+                                        <div class="menu-caret text-gray">
+                                        </div>
+								</a>
                                 <div class="menu-submenu">
-                                    <div class="menu-item">
+                                    <div class="menu-item has-sub">
                                         <a href="#" class="menu-link highlight">
                                             <div class="menu-icon">
                                                 <i class="fa fa-user text-gray"></i>
                                             </div>
-                                            <div class="menu-text text-gray">(SV)</i></div>
+                                            <div class="menu-text text-gray">Department</i>
+                                            </div>
+                                            <div class="menu-caret text-gray">
+                                            </div>
                                         </a>
+                                        <div class="menu-submenu">
+                                            <div class="menu-item">
+                                                <a href="#" class="menu-link highlight">
+                                                    <div class="menu-icon">
+                                                        <i class="fa fa-list-check text-gray"></i>
+                                                    </div>
+                                                        <div class="menu-text text-gray">Approver
+                                                    </div>
+                                                </a>
+                                            </div>
+                                            <div class="menu-item">
+                                                <a href="#" class="menu-link highlight">
+                                                    <div class="menu-icon">
+                                                        <i class="fa fa-list-check text-gray"></i>
+                                                    </div>
+                                                        <div class="menu-text text-gray">Recommender
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="menu-item">
+                                    <div class="menu-item has-sub">
                                         <a href="#" class="menu-link highlight">
                                             <div class="menu-icon">
                                                 <i class="fa fa-user-tie text-gray"></i>
                                             </div>
-                                            <div class="menu-text text-gray">(HOD)</i></div>
+                                            <div class="menu-text text-gray">Finance
+                                            </div>
+                                            <div class="menu-caret text-gray">
+                                            </div>
                                         </a>
+                                        <div class="menu-submenu">
+                                            <div class="menu-item">
+                                                <a href="#" class="menu-link highlight">
+                                                    <div class="menu-icon">
+                                                        <i class="fa fa-list-check text-gray"></i>
+                                                    </div>
+                                                        <div class="menu-text text-gray">Approver
+                                                    </div>
+                                                </a>
+                                            </div>
+                                            <div class="menu-item">
+                                                <a href="#" class="menu-link highlight">
+                                                    <div class="menu-icon">
+                                                        <i class="fa fa-list-check text-gray"></i>
+                                                    </div>
+                                                        <div class="menu-text text-gray">Recommender
+                                                    </div>
+                                                </a>
+                                            </div>
+                                            <div class="menu-item">
+                                                <a href="#" class="menu-link highlight">
+                                                    <div class="menu-icon">
+                                                        <i class="fa fa-list-check text-gray"></i>
+                                                    </div>
+                                                        <div class="menu-text text-gray">Checker
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="menu-item">
+                                    <div class="menu-item has-sub">
                                         <a href="#" class="menu-link highlight">
                                             <div class="menu-icon">
-                                                <i class="fa fa-user-gear text-gray"></i>
+                                                <i class="fa fa-user-gear text-gray"></i></div>
+                                            <div class="menu-text text-gray">Admin</i></div>
+                                            <div class="menu-caret text-gray">
                                             </div>
-                                            <div class="menu-text text-gray">Admin(Recommender)</i></div>
                                         </a>
-                                    </div>
-                                    <div class="menu-item">
-                                        <a href="#" class="menu-link highlight">
-                                            <div class="menu-icon">
-                                                <i class="fa fa-user-gear text-gray"></i>
+                                        <div class="menu-submenu">
+                                            <div class="menu-item">
+                                                <a href="#" class="menu-link highlight">
+                                                    <div class="menu-icon">
+                                                        <i class="fa fa-list-check text-gray"></i>
+                                                    </div>
+                                                        <div class="menu-text text-gray">Approver
+                                                    </div>
+                                                </a>
                                             </div>
-                                            <div class="menu-text text-gray">Admin(Approver)</i></div>
-                                        </a>
-                                    </div>
-                                    <div class="menu-item">
-                                        <a href="#" class="menu-link highlight">
-                                            <div class="menu-icon">
-                                                <i class="fa fa-user-gear text-gray"></i>
+                                            <div class="menu-item">
+                                                <a href="#" class="menu-link highlight">
+                                                    <div class="menu-icon">
+                                                        <i class="fa fa-list-check text-gray"></i>
+                                                    </div>
+                                                        <div class="menu-text text-gray">Recommender
+                                                    </div>
+                                                </a>
                                             </div>
-                                            <div class="menu-text text-gray">Finance(Checker)</i></div>
-                                        </a>
-                                    </div>
-                                    <div class="menu-item">
-                                        <a href="#" class="menu-link highlight">
-                                            <div class="menu-icon">
-                                                <i class="fa fa-user-gear text-gray"></i>
+                                            <div class="menu-item">
+                                                <a href="#" class="menu-link highlight">
+                                                    <div class="menu-icon">
+                                                        <i class="fa fa-list-check text-gray"></i>
+                                                    </div>
+                                                        <div class="menu-text text-gray">Checker
+                                                    </div>
+                                                </a>
                                             </div>
-                                            <div class="menu-text text-gray">Finance(Recommender)</i></div>
-                                        </a>
-                                    </div>
-                                    <div class="menu-item">
-                                        <a href="#" class="menu-link highlight">
-                                            <div class="menu-icon">
-                                                <i class="fa fa-user-gear text-gray"></i>
-                                            </div>
-                                            <div class="menu-text text-gray">Finance(Approver)</i></div>
-                                        </a>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                    </div>
+							</div>
+                            <div class="menu-item">
+								<a href="#" class="menu-link highlight">
+							        <div class="menu-icon">
+									    <i class="fa fa-envelope-open-text text-gray"></i>
+								    </div>
+									<div class="menu-text text-gray">Cash Advance</div>
+								</a>
+							</div>
+						</div>
+					</div>
 
                     <!-- End Sidenav Content Orbit -->
                     <!-- Sidenav Content Orbit -->
