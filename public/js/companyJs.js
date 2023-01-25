@@ -91,6 +91,7 @@ $(document).ready(function () {
                 companyCode: "Please Insert Company Code",
                 companyName: "Please Insert Company Name",
             },
+
             submitHandler: function (form) {
                 requirejs(["sweetAlert2"], function (swal) {
                     var data = new FormData(document.getElementById("addForm"));
