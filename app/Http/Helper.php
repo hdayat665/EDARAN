@@ -17,6 +17,7 @@ use App\Models\ProjectLocation;
 use App\Models\ProjectMember;
 use App\Models\Role;
 use App\Models\TimesheetEvent;
+use App\Models\TypeOfLogs;
 use App\Models\Unit;
 use App\Models\UserProfile;
 use App\Models\Users;
@@ -1044,6 +1045,19 @@ if (!function_exists('getModeOfTransport')) {
 
         if ($id) {
             return $data[$id];
+        }
+
+        return $data;
+    }
+}
+
+if (!function_exists('typeOfLog')) {
+    function typeOfLog()
+    {
+        $data = TypeOfLogs::where('tenant_id', Auth::user()->tenant_id)->get();
+
+        if (!$data) {
+            $data = [];
         }
 
         return $data;

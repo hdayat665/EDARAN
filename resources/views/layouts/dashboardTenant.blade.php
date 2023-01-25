@@ -39,6 +39,8 @@
     <link href="/assets/plugins/@fullcalendar/timegrid/main.min.css" rel="stylesheet" />
     <link href="/assets/plugins/@fullcalendar/list/main.min.css" rel="stylesheet" />
     <link href="/assets/plugins/@fullcalendar/bootstrap/main.min.css" rel="stylesheet" />
+    <link href="/assets/plugins/timepicker/css/mdtimepicker.css" rel="stylesheet" type="text/css">
+
     <style>
         .error {
             /* margin-top:2.4rem !important; */
@@ -86,8 +88,7 @@
                                 <i class="fa fa-bug media-object bg-gray-500"></i>
                             </div>
                             <div class="media-body">
-                                <h6 class="media-heading">Server Error Reports <i
-                                        class="fa fa-exclamation-circle text-danger"></i></h6>
+                                <h6 class="media-heading">Server Error Reports <i class="fa fa-exclamation-circle text-danger"></i></h6>
                                 <div class="text-muted fs-10px">3 minutes ago</div>
                             </div>
                         </a>
@@ -139,8 +140,7 @@
                 </div>
 
                 <div class="navbar-item navbar-user dropdown">
-                    <a href="#" class="navbar-link dropdown-toggle d-flex align-items-center"
-                        data-bs-toggle="dropdown">
+                    <a href="#" class="navbar-link dropdown-toggle d-flex align-items-center" data-bs-toggle="dropdown">
                         <img src="/assets/img/user/user-13.jpg" alt="" />
                         <span>
                             <span class="d-none d-md-inline">Admin</span>
@@ -738,13 +738,11 @@
             <!-- END scrollbar -->
         </div>
         <div class="app-sidebar-bg"></div>
-        <div class="app-sidebar-mobile-backdrop"><a href="#" data-dismiss="app-sidebar-mobile"
-                class="stretched-link"></a></div>
+        <div class="app-sidebar-mobile-backdrop"><a href="#" data-dismiss="app-sidebar-mobile" class="stretched-link"></a></div>
         <!-- END #sidebar -->
         @yield('content')
         <!-- BEGIN #content -->
-        <a href="javascript:;" class="btn btn-icon btn-circle btn-success btn-scroll-to-top"
-            data-toggle="scroll-to-top"><i class="fa fa-angle-up"></i></a>
+        <a href="javascript:;" class="btn btn-icon btn-circle btn-success btn-scroll-to-top" data-toggle="scroll-to-top"><i class="fa fa-angle-up"></i></a>
 
         <!-- END #app -->
 
@@ -835,6 +833,8 @@
 <script src="/assets/plugins/d3/d3.min.js"></script>
 <script src="/assets/plugins/nvd3/build/nv.d3.min.js"></script>
 <script src="/assets/plugins/chart.js/dist/chart.min.js"></script>
+<script src="/assets/plugins/timepicker/js/mdtimepicker.js"></script>
+
 
 
 
@@ -966,5 +966,3 @@
         }
     });
 </script>
-
-

@@ -55,6 +55,7 @@ requirejs.config({
         editGNCJs: assets + "/js/editGNCJs",
         viewGNSJs: assets + "/js/viewGNSJs",
         editCashAdvanceJs: assets + "/js/editCashAdvanceJs",
+        monthlyClaimJs: assets + "/js/monthlyClaimJs",
 
         // 'main': 'assets/backend/js/main',
         sweetAlert2: assets + "/assets/sweetalert2/sweetalert2",
@@ -283,6 +284,9 @@ if ($("#editCashAdvanceJs").length > 0) {
     requirejs(["editCashAdvanceJs"]);
 }
 
+if ($("#monthlyClaimJs").length > 0) {
+    requirejs(["monthlyClaimJs"]);
+}
 // eleave
 if ($("#eleaveentitlementJs").length > 0) {
     requirejs(["eleaveentitlementJs"]);
