@@ -108,6 +108,45 @@
                                 <option value="{{$key}}">{{$status}}</option>
                                 @endforeach
                             </select>
+                        </div> --}}
+
+                        <div class="col-sm-6">
+                            <label for="expirydate" class="form-label">Relationship</label>
+                            <select class="form-select" name="relationship" id="relationshipP">
+                                    <?php $relationship = relationship() ?>
+                                    <option value="0" label="Please Choose"  ></option>
+                                    @foreach ($relationship as $key => $status)
+                                    <option value="{{$key}}"> {{$status}}</option>
+                                    @endforeach
+                            </select>
+                        </div>
+
+                    </div>
+                    <div class="row p-2">
+                        <div class="col-sm-6">
+                            <div class="row">
+                                <div class="col-sm-6 ">
+                                    <div class="form-check form-switch align-right">
+                                        <input class="form-check-input " value="" type="checkbox" name=""  id="">
+                                        <label class="form-check-label" for="citizen">
+                                            OKU?
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <label for="lastname" class="form-label">OKU Card Number*</label>
+                                    <input type="number" id="idNoaddChild" name="idNo" value="" class="form-control" >
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <label for="dob" class="form-label">OKU Attachment</label>
+                                    <input type="file" id="" name="" class="form-control" aria-describedby="">
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="row p-2">
@@ -134,6 +173,7 @@
                                 @endforeach
                             </select>
                         </div>
+
                     </div>
                     <div class="row">
                         <h4 class="col-sm-6 p-2">Address</h4>
