@@ -921,4 +921,57 @@ class SettingController extends Controller
 
         return response()->json($data);
     }
+
+    public function eleaveEntitlementView()
+    {
+        $ss = new SettingService;
+
+        $result = $ss->leaveEntitlementView();
+        $resultName = $ss->leaveNameStaff();
+
+        // dd($result,$resultName);
+
+        return view('pages.setting.eleave.eleaveentitlement', $result,$resultName);
+    }
+
+     public function createLeaveEntitlement(Request $r)
+    {
+        
+        $ss = new SettingService;
+
+        $result = $ss->createLeaveEntitlement($r);
+
+        return response()->json($result);
+    }
+
+    public function getcreateLeaveEntitlement($id = '')
+    {
+        $ss = new SettingService;
+
+        $result = $ss->getcreateLeaveEntitlement($id);
+
+        return $result;
+    }
+
+     public function updateleaveEntitlement(Request $r, $id)
+    {
+        $ss = new SettingService;
+
+        $result = $ss->updateleaveEntitlement($r, $id);
+
+        return response()->json($result);
+    }
+
+
+    // public function eleaveEntitlementView(){
+    //      return view('pages.setting.eleave.eleaveentitlement');
+    // }
+
+    public function holidaylistView(){
+         return view('pages.setting.eleave.holidaylist');
+    }
+
+    public function leavetypesView(){
+         return view('pages.setting.eleave.leavetypes');
+    }
 }

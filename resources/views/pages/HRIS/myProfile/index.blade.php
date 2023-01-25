@@ -2,7 +2,7 @@
 
 @section('content')
 <div id="content" class="app-content">
-    <h1 class="page-header">HRIS | My Profile</h1>
+    <h1 class="page-header">HRIS | My Profile </h1>
     <div class="row">
         <div class="col-xl-3">
             <div class="card">

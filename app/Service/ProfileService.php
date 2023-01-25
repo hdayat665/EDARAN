@@ -29,7 +29,7 @@ class ProfileService
 
         $data = UsersDetails::where('user_id', $user_id)->get();
 
-      return $data;
+        return $data;
 
     }
 
