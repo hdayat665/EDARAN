@@ -414,7 +414,7 @@
                                                     <div class="menu-icon">
                                                         <i class="fa fa-list-check text-gray"></i>
                                                     </div>
-                                                        <div class="menu-text text-gray">HOD
+                                                        <div class="menu-text text-gray">Approver
                                                     </div>
                                                 </a>
                                             </div>
@@ -423,7 +423,7 @@
                                                     <div class="menu-icon">
                                                         <i class="fa fa-list-check text-gray"></i>
                                                     </div>
-                                                        <div class="menu-text text-gray">Supervisor
+                                                        <div class="menu-text text-gray">Recommender
                                                     </div>
                                                 </a>
                                             </div>
