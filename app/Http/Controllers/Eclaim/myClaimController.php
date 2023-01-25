@@ -31,4 +31,9 @@ class myClaimController extends Controller
     {
         return view('pages.eclaim.cashAdvance');
     }
+
+    public function newMonthlyClaimView()
+    {
+        return view('pages.eclaim.monthlyClaim');
+    }
 }
