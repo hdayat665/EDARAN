@@ -8,6 +8,8 @@ use App\Models\CashAdvanceDetail;
 use App\Models\GeneralClaim;
 use App\Models\GeneralClaimDetail;
 use App\Models\ModeOfTransport;
+use App\Models\PersonalClaim;
+use App\Models\TravelClaim;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
@@ -28,7 +30,11 @@ class myClaimService
     {
         $input = $r->input();
 
-        $generalClaimCount = GeneralClaim::where('tenant_id', Auth::user()->tenant_id)->count();
+        $generalClaimCount = GeneralClaim::where([['tenant_id', Auth::user()->tenant_id], ['type', 'GNC']])->count();
+
+        if (!$generalClaimCount) {
+            $generalClaimCount = 0;
+        }
 
         // add to general claim
         $generalClaim['user_id'] = Auth::user()->id;
@@ -283,6 +289,171 @@ class myClaimService
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
         $data['msg'] = 'Success';
+
+        return $data;
+    }
+
+    public function createPersonalClaim($r)
+    {
+        $input = $r->input();
+
+        $id = $input['general_id'];
+
+        $monthlyClaimCount = GeneralClaim::where([['tenant_id', Auth::user()->tenant_id], ['claim_type', 'MTC']])->count();
+
+        if (!$monthlyClaimCount) {
+            $monthlyClaimCount = 0;
+        }
+
+        if (!$id) {
+            // add to general claim
+            $generalClaim['user_id'] = Auth::user()->id;
+            $generalClaim['tenant_id'] = Auth::user()->tenant_id;
+            $generalClaim['claim_id'] = 'MTC' . $monthlyClaimCount + 1;
+            $generalClaim['claim_type'] = $input['claim_type'] ?? 'MTC';
+            $generalClaim['status'] = 'draft';
+            // $generalClaim['total_amount'] = array_sum($input['amount']) ?? '';
+
+            GeneralClaim::create($generalClaim);
+            $generalClaimData = GeneralClaim::where('tenant_id', Auth::user()->tenant_id)->orderBy('created_at', 'DESC')->first();
+        } else {
+            $generalClaimData = GeneralClaim::where([['tenant_id', Auth::user()->tenant_id], ['id', $id]])->orderBy('created_at', 'DESC')->first();
+        }
+
+        if ($_FILES['file_upload']['name']) {
+            $filename = upload($r->file('file_upload'));
+            $input['file_upload'] = $filename['filename'];
+        }
+
+        $input['user_id'] = Auth::user()->id;
+        $input['tenant_id'] = Auth::user()->tenant_id;
+        $input['general_id'] = $generalClaimData->id;
+
+        PersonalClaim::create($input);
+
+        $data['status'] = config('app.response.success.status');
+        $data['type'] = config('app.response.success.type');
+        $data['title'] = config('app.response.success.title');
+        $data['id'] = $generalClaimData->id;
+        $data['msg'] = 'Success';
+
+        return $data;
+    }
+
+    public function createTravelClaim($r)
+    {
+        $input = $r->input();
+
+        $id = $input['general_id'];
+
+        $monthlyClaimCount = GeneralClaim::where([['tenant_id', Auth::user()->tenant_id], ['claim_type', 'MTC']])->count();
+
+        if (!$monthlyClaimCount) {
+            $monthlyClaimCount = 0;
+        }
+
+        if (!$id) {
+            // add to general claim
+            $generalClaim['user_id'] = Auth::user()->id;
+            $generalClaim['tenant_id'] = Auth::user()->tenant_id;
+            $generalClaim['claim_id'] = 'MTC' . $monthlyClaimCount + 1;
+            $generalClaim['claim_type'] = $input['claim_type'] ?? 'MTC';
+            $generalClaim['status'] = 'draft';
+            // $generalClaim['total_amount'] = array_sum($input['amount']) ?? '';
+
+            GeneralClaim::create($generalClaim);
+            $generalClaimData = GeneralClaim::where('tenant_id', Auth::user()->tenant_id)->orderBy('created_at', 'DESC')->first();
+        } else {
+            $generalClaimData = GeneralClaim::where([['tenant_id', Auth::user()->tenant_id], ['id', $id]])->orderBy('created_at', 'DESC')->first();
+        }
+
+
+        if ($_FILES['file_upload']['name']) {
+            $filename = upload($r->file('file_upload'));
+            $input['file_upload'] = $filename['filename'];
+        }
+
+        $input['user_id'] = Auth::user()->id;
+        $input['tenant_id'] = Auth::user()->tenant_id;
+        $input['general_id'] = $generalClaimData->id;
+
+        TravelClaim::create($input);
+
+        $data['status'] = config('app.response.success.status');
+        $data['type'] = config('app.response.success.type');
+        $data['title'] = config('app.response.success.title');
+        $data['id'] = $generalClaimData->id;
+        $data['msg'] = 'Success';
+
+        return $data;
+    }
+
+    public function createSubsClaim($r)
+    {
+        $input = $r->input();
+
+        $id = $input['general_id'];
+        unset($input['claimtable_length']);
+
+        $monthlyClaimCount = GeneralClaim::where([['tenant_id', Auth::user()->tenant_id], ['claim_type', 'MTC']])->count();
+
+        if (!$monthlyClaimCount) {
+            $monthlyClaimCount = 0;
+        }
+
+        if (!$id) {
+            // add to general claim
+            $generalClaim['user_id'] = Auth::user()->id;
+            $generalClaim['tenant_id'] = Auth::user()->tenant_id;
+            $generalClaim['claim_id'] = 'MTC' . $monthlyClaimCount + 1;
+            $generalClaim['claim_type'] = $input['claim_type'] ?? 'MTC';
+            $generalClaim['status'] = 'draft';
+            // $generalClaim['total_amount'] = array_sum($input['amount']) ?? '';
+
+            GeneralClaim::create($generalClaim);
+            $generalClaimData = GeneralClaim::where('tenant_id', Auth::user()->tenant_id)->orderBy('created_at', 'DESC')->first();
+        } else {
+            $generalClaimData = GeneralClaim::where([['tenant_id', Auth::user()->tenant_id], ['id', $id]])->orderBy('created_at', 'DESC')->first();
+        }
+
+
+        if ($_FILES['file_upload']['name']) {
+            $filename = upload($r->file('file_upload'));
+            $input['file_upload'] = $filename['filename'];
+        }
+
+        $input['user_id'] = Auth::user()->id;
+        $input['tenant_id'] = Auth::user()->tenant_id;
+        $input['general_id'] = $generalClaimData->id;
+
+        TravelClaim::create($input);
+
+        $data['status'] = config('app.response.success.status');
+        $data['type'] = config('app.response.success.type');
+        $data['title'] = config('app.response.success.title');
+        $data['id'] = $generalClaimData->id;
+        $data['msg'] = 'Success';
+
+        return $data;
+    }
+
+    public function getCashAdvance()
+    {
+        $data = CashAdvanceDetail::where([['tenant_id', Auth::user()->tenant_id], ['user_id', Auth::user()->id]])->get();
+
+        return $data;
+    }
+
+    public function getTravelClaimByGeneralId($id = '')
+    {
+        $data = TravelClaim::where('general_id', $id)->get();
+
+        return $data;
+    }
+
+    public function getPersonalClaimByGeneralId($id = '')
+    {
+        $data = PersonalClaim::where('general_id', $id)->get();
 
         return $data;
     }

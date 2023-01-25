@@ -47,7 +47,7 @@ $("document").ready(function () {
 
     //
     $(document).on("change", "#ls", function () {
-        if ($(this).val() == "3") {
+        if ($(this).val() == "My Project") {
             $("#project").show();
         } else {
             $("#project").hide();
@@ -56,10 +56,10 @@ $("document").ready(function () {
 
     //
     $(document).on("change", "#dest", function () {
-        if ($(this).val() == "3") {
+        if ($(this).val() == "My Project") {
             $("#projectdest").show();
             $("#logname").hide();
-        } else if ($(this).val() == "4") {
+        } else if ($(this).val() == "Others") {
             $("#projectdest").hide();
             $("#logname").show();
         } else {
@@ -72,7 +72,7 @@ $("document").ready(function () {
         .datepicker({
             todayHighlight: true,
             autoclose: true,
-            format: "dd-mm-yyyy",
+            format: "yyyy-mm-dd",
         })
         .datepicker("setDate", "now");
 
@@ -80,20 +80,20 @@ $("document").ready(function () {
         .datepicker({
             todayHighlight: true,
             autoclose: true,
-            format: "dd-mm-yyyy",
+            format: "yyyy-mm-dd",
         })
         .datepicker("setDate", "now");
 
     $(function () {
         $("#date1, #date2").datepicker({
-            format: "mm/dd/yyyy",
+            format: "yyyy-mm-dd",
         });
         $("#time1,#time2").mdtimepicker({});
 
         $("#timestart,#timeend").mdtimepicker({});
         $("#daystart,#dayend")
             .datepicker({
-                format: "mm/dd/yyyy",
+                format: "yyyy-mm-dd",
             })
             .datepicker("setDate", "now");
     });
@@ -218,5 +218,179 @@ $("document").ready(function () {
             $("#ln").prop("disabled", true); // If checked disable item
             $("#ln").val(0);
         }
+    });
+
+    $(document).on("change", "#claimcategory", function () {
+        id = $(this).val();
+        const inputs = ["contentLabel"];
+
+        for (let i = 0; i < inputs.length; i++) {
+            $("#" + inputs[i] + "")
+                .find("option")
+                .remove()
+                .end()
+                .append(
+                    '<option label="Please Choose" selected="selected"> </option>'
+                )
+                .val("");
+
+            function getClaimCategoryContent(id) {
+                return $.ajax({
+                    url: "/getClaimCategoryContent/" + id,
+                });
+            }
+            $("#" + inputs[i] + "")
+                .find("option")
+                .end();
+        }
+
+        var user = getClaimCategoryContent(id);
+
+        user.done(function (data) {
+            // console.log(data);
+            $("#label").text(data[0].label);
+            for (let i = 0; i < data.length; i++) {
+                const user = data[i];
+                var opt = document.createElement("option");
+                document.getElementById("contentLabel").innerHTML +=
+                    '<option value="' +
+                    user["id"] +
+                    '">' +
+                    user["content"] +
+                    "</option>";
+            }
+        });
+    });
+
+    $("#personalSaveButton").click(function (e) {
+        $("#personalForm").validate({
+            // Specify validation rules
+            rules: {},
+
+            messages: {},
+            submitHandler: function (form) {
+                requirejs(["sweetAlert2"], function (swal) {
+                    var data = new FormData(
+                        document.getElementById("personalForm")
+                    );
+
+                    $.ajax({
+                        type: "POST",
+                        url: "/submitPersonalClaim",
+                        data: data,
+                        dataType: "json",
+                        async: false,
+                        processData: false,
+                        contentType: false,
+                    }).done(function (data) {
+                        swal({
+                            title: data.title,
+                            text: data.msg,
+                            type: data.type,
+                            confirmButtonColor: "#3085d6",
+                            confirmButtonText: "OK",
+                            allowOutsideClick: false,
+                            allowEscapeKey: false,
+                        }).then(function () {
+                            alert(data.id);
+                            if (data.type == "error") {
+                            } else {
+                                window.location.href =
+                                    "/monthClaimEditView/" + data.id;
+                                // location.reload();
+                            }
+                        });
+                    });
+                });
+            },
+        });
+    });
+
+    $("#travelSaveButton").click(function (e) {
+        $("#travelForm").validate({
+            // Specify validation rules
+            rules: {},
+
+            messages: {},
+            submitHandler: function (form) {
+                requirejs(["sweetAlert2"], function (swal) {
+                    var data = new FormData(
+                        document.getElementById("travelForm")
+                    );
+
+                    $.ajax({
+                        type: "POST",
+                        url: "/submitTravelClaim",
+                        data: data,
+                        dataType: "json",
+                        async: false,
+                        processData: false,
+                        contentType: false,
+                    }).done(function (data) {
+                        swal({
+                            title: data.title,
+                            text: data.msg,
+                            type: data.type,
+                            confirmButtonColor: "#3085d6",
+                            confirmButtonText: "OK",
+                            allowOutsideClick: false,
+                            allowEscapeKey: false,
+                        }).then(function () {
+                            alert(data.id);
+                            if (data.type == "error") {
+                            } else {
+                                window.location.href =
+                                    "/monthClaimEditView/" + data.id;
+                                // location.reload();
+                            }
+                        });
+                    });
+                });
+            },
+        });
+    });
+
+    $("#subsSaveButton").click(function (e) {
+        $("#subsForm").validate({
+            // Specify validation rules
+            rules: {},
+
+            messages: {},
+            submitHandler: function (form) {
+                requirejs(["sweetAlert2"], function (swal) {
+                    var data = new FormData(
+                        document.getElementById("subsForm")
+                    );
+
+                    $.ajax({
+                        type: "POST",
+                        url: "/submitSubsClaim",
+                        data: data,
+                        dataType: "json",
+                        async: false,
+                        processData: false,
+                        contentType: false,
+                    }).done(function (data) {
+                        swal({
+                            title: data.title,
+                            text: data.msg,
+                            type: data.type,
+                            confirmButtonColor: "#3085d6",
+                            confirmButtonText: "OK",
+                            allowOutsideClick: false,
+                            allowEscapeKey: false,
+                        }).then(function () {
+                            alert(data.id);
+                            if (data.type == "error") {
+                            } else {
+                                window.location.href =
+                                    "/monthClaimEditView/" + data.id;
+                                // location.reload();
+                            }
+                        });
+                    });
+                });
+            },
+        });
     });
 });
