@@ -17,6 +17,7 @@ use App\Models\ProjectLocation;
 use App\Models\ProjectMember;
 use App\Models\Role;
 use App\Models\TimesheetEvent;
+use App\Models\TypeOfLogs;
 use App\Models\Unit;
 use App\Models\UserProfile;
 use App\Models\Users;
@@ -990,6 +991,70 @@ if (!function_exists('getClaimContentById')) {
     function getClaimContentById($id = '')
     {
         $data = GeneralClaimDetail::where([['id', $id]])->with('claim_category_content')->first();
+
+        if (!$data) {
+            $data = [];
+        }
+
+        return $data;
+    }
+}
+
+if (!function_exists('getCashAdvanceType')) {
+    function getCashAdvanceType($id = '')
+    {
+        $data = [
+            '1' => 'Project ( Outstation )',
+            '2' => 'Project ( Non Outstation )',
+            '3' => 'Other ( Outstation )',
+            '4' => 'Other ( Non Outstation )',
+        ];
+
+        if ($id) {
+            return $data[$id];
+        }
+
+        return $data;
+    }
+}
+
+if (!function_exists('getProjectById')) {
+    function getProjectById($id = '')
+    {
+        $data = Project::where('id', $id)->first();
+
+        if (!$data) {
+            $data = [];
+        }
+
+        return $data;
+    }
+}
+
+if (!function_exists('getModeOfTransport')) {
+    function getModeOfTransport($id = '')
+    {
+        $data = [
+            '0' => '',
+            '1' => 'Personal Car',
+            '2' => 'Personal Motorcycle',
+            '3' => 'Public Transport',
+            '4' => 'Company Car',
+            '5' => 'Carpool',
+        ];
+
+        if ($id) {
+            return $data[$id];
+        }
+
+        return $data;
+    }
+}
+
+if (!function_exists('typeOfLog')) {
+    function typeOfLog()
+    {
+        $data = TypeOfLogs::where('tenant_id', Auth::user()->tenant_id)->get();
 
         if (!$data) {
             $data = [];

@@ -54,9 +54,14 @@ requirejs.config({
         myClaimJs: assets + "/js/myClaimJs",
         editGNCJs: assets + "/js/editGNCJs",
         viewGNSJs: assets + "/js/viewGNSJs",
+        editCashAdvanceJs: assets + "/js/editCashAdvanceJs",
+        monthlyClaimJs: assets + "/js/monthlyClaimJs",
 
         // 'main': 'assets/backend/js/main',
         sweetAlert2: assets + "/assets/sweetalert2/sweetalert2",
+
+        // eleave
+        eleaveentitlementJs: assets + "/js/eleaveentitlementJs",
     },
 });
 
@@ -273,6 +278,18 @@ if ($("#editGNCJs").length > 0) {
 
 if ($("#viewGNSJs").length > 0) {
     requirejs(["viewGNSJs"]);
+}
+
+if ($("#editCashAdvanceJs").length > 0) {
+    requirejs(["editCashAdvanceJs"]);
+}
+
+if ($("#monthlyClaimJs").length > 0) {
+    requirejs(["monthlyClaimJs"]);
+}
+// eleave
+if ($("#eleaveentitlementJs").length > 0) {
+    requirejs(["eleaveentitlementJs"]);
 }
 
 // Global function

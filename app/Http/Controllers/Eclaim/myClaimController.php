@@ -13,6 +13,7 @@ class myClaimController extends Controller
         $mcs = new myClaimService;
 
         $data['claims'] = $mcs->getClaimsData();
+        $data['cashClaims'] = $mcs->getCashClaimsData();
 
         return view('pages.eclaim.myClaim', $data);
     }
@@ -29,5 +30,55 @@ class myClaimController extends Controller
     public function cashAdvanceView()
     {
         return view('pages.eclaim.cashAdvance');
+    }
+
+    public function newMonthlyClaimView()
+    {
+        $mcs = new myClaimService;
+
+        $data['cashAdvances'] = $mcs->getCashAdvance();
+
+        $data['travelClaims'] = [];
+        $data['personalClaims'] = [];
+
+        return view('pages.eclaim.monthlyClaim', $data);
+    }
+
+    public function submitPersonalClaim(request $r)
+    {
+        $mcs = new myClaimService;
+
+        $data = $mcs->createPersonalClaim($r);
+
+        return response()->json($data);
+    }
+
+    public function monthClaimEditView($id = '')
+    {
+        $mcs = new myClaimService;
+
+        $data['cashAdvances'] = $mcs->getCashAdvance();
+        $data['travelClaims'] = $mcs->getTravelClaimByGeneralId($id);
+        $data['personalClaims'] = $mcs->getPersonalClaimByGeneralId($id);
+
+        return view('pages.eclaim.monthClaimEditView', $data);
+    }
+
+    public function submitTravelClaim(request $r)
+    {
+        $mcs = new myClaimService;
+
+        $data = $mcs->createTravelClaim($r);
+
+        return response()->json($data);
+    }
+
+    public function submitSubsClaim(request $r)
+    {
+        $mcs = new myClaimService;
+
+        $data = $mcs->createSubsClaim($r);
+
+        return response()->json($data);
     }
 }

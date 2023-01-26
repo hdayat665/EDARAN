@@ -131,7 +131,7 @@ class ProfileController extends Controller
     {
         $ps = new ProfileService;
 
-        $result = $ps->getParent($user_id);
+        $result = $ps->$this->getParent($user_id);
 
         return response()->json($result);
     }
