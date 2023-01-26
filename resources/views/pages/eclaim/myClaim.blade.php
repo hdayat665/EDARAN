@@ -64,8 +64,8 @@
                                                         {{-- <?php $months = month(); ?> --}}
                                                         {{-- @foreach ($months as $key => $month) --}}
                                                         <tr class="odd gradeX">
-                                                            <td>2022</td>
-                                                            <td>SEPTEMBER</td>
+                                                            <td>2023</td>
+                                                            <td>January</td>
                                                             <td><span class="badge bg-lime">Open</span></td>
                                                             {{-- <td><a href="/eclaim/updatemontly" type="button" class="btn btn-primary btn-sm">Update</a></td> --}}
                                                             <td><a href="/newMonthlyClaimView" type="button" class="btn btn-primary btn-sm">+ Apply</a></td>
