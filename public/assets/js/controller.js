@@ -61,6 +61,8 @@ requirejs.config({
 
         // eleave
         eleaveentitlementJs: assets + "/js/eleaveentitlementJs",
+        eleaveholidayJs: assets + "/js/eleaveholidayJs",
+        eleavetypesJs: assets + "/js/eleavetypesJs",
     },
 });
 
@@ -286,6 +288,14 @@ if ($("#editCashAdvanceJs").length > 0) {
 // eleave
 if ($("#eleaveentitlementJs").length > 0) {
     requirejs(["eleaveentitlementJs"]);
+}
+
+if ($("#eleaveholidayJs").length > 0) {
+    requirejs(["eleaveholidayJs"]);
+}
+
+if ($("#eleavetypesJs").length > 0) {
+    requirejs(["eleavetypesJs"]);
 }
 
 // Global function
