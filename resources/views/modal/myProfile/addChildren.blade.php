@@ -24,12 +24,12 @@
                         </div>
                         {{-- new --}}
                         <div class="col-md-3">
-                            <label for="" class="form-label">Old Identification Number</label>
+                            <label for="" class="form-label" style="color: red;">Old Identification Number</label>
                             <input type="text" id=""  name="" value=""  class="form-control" style="text-transform:uppercase">
                         </div>
                         {{-- new --}}
                         <div class="col-md-3">
-                            <label for="" class="form-label">Birth of Certificate</label>
+                            <label for="" class="form-label" style="color: red;">Birth of Certificate</label>
                             <input type="file" id=""  name="" value=""  class="form-control">
                         </div>
                     </div>
@@ -56,7 +56,7 @@
                             <div class="row">
                                 {{-- new --}}
                                 <div class="col-sm-6">
-                                    <label for="dob" class="form-label">ID Attachment</label>
+                                    <label for="dob" class="form-label" style="color: red;">ID Attachment</label>
                                     <input type="file" id="" name="" class="form-control" aria-describedby="">
                                 </div>
                             </div>
@@ -101,7 +101,7 @@
                     </div>
                     <div class="row p-2">
                          <div class="col-sm-3">
-                            <label for="dob" class="form-label">Date of Birth</label>
+                            <label for="dob" class="form-label">Date Birth</label>
                             <input type="text" id="dob4" name="DOB" class="form-control" aria-describedby="dob" readonly>
                         </div>
                         <div class="col-sm-3">
@@ -137,13 +137,13 @@
                                     <div class="form-check form-switch align-right">
                                         <input class="form-check-input okuCheck3" type="checkbox" id="nonCitizen1" name="nonCitizen1" {{($children->nonCitizen1 ?? '') ? 'checked' : ''}}>
                                        
-                                        <label class="form-check-label" for="citizen">
+                                        <label class="form-check-label" for="citizen" style="color: red;">
                                             OKU?
                                         </label>
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
-                                    <label for="lastname" class="form-label">OKU Card Number*</label>
+                                    <label for="lastname" class="form-label" style="color: red;">OKU Card Number*</label>
                                     <input type="text" id="okucard3" name=""  value="" class="form-control" aria-describedby="" readonly>
                                 </div>
                             </div>
@@ -151,7 +151,7 @@
                         <div class="col-sm-6">
                             <div class="row">
                                 <div class="col-sm-6">
-                                    <label for="dob" class="form-label">OKU Attachment</label>
+                                    <label for="dob" class="form-label" style="color: red;">OKU Attachment</label>
                                     <input type="file" id="okuattach3" name="" class="form-control" style="pointer-events: none" aria-describedby="">
                                 </div>
                             </div>
@@ -193,27 +193,27 @@
 
                     <div class="row p-2">
                         <div class="col-sm-6">
-                            <label for="address1" class="form-label">Address 1*</label>
+                            <label for="address1" class="form-label" style="color: red;">Address 1*</label>
                             <input type="text" id="" name="" value="" class="form-control" aria-describedby="address1" style="text-transform:uppercase">
                         </div>
                         <div class="col-sm-6">
-                            <label for="address2" class="form-label">Address 2</label>
+                            <label for="address2" class="form-label" style="color: red;">Address 2</label>
                             <input type="text" id="" name="" value="" class="form-control" aria-describedby="address2" style="text-transform:uppercase">
                         </div>
                     </div>
                     <div class="row p-2">
                         <div class="col-sm-6">
-                            <label for="firstname" class="form-label">City*</label>
+                            <label for="firstname" class="form-label" style="color: red;">City*</label>
                             <input type="text" id="" name="" value="" class="form-control" style="text-transform:uppercase">
                         </div>
                         <div class="col-sm-6">
-                            <label for="lastname" class="form-label">Postcode*</label>
+                            <label for="lastname" class="form-label" style="color: red;">Postcode*</label>
                             <input type="number" id="" name="" value="" class="form-control" style="text-transform:uppercase">
                         </div>
                     </div>
                     <div class="row p-2">
                         <div class="col-sm-6">
-                            <label for="state" class="form-label">State*</label>
+                            <label for="state" class="form-label" style="color: red;">State*</label>
                             <select class="form-select" name="state" id="statecom" value="{{ $companion->state ?? '' }}" style="text-transform:uppercase" >
                                 <?php $state = state() ?>
                                 <option value="" label="Please Choose"  ></option>
@@ -223,7 +223,7 @@
                             </select>
                         </div>
                         <div class="col-sm-6">
-                            <label for="country" class="form-label">Country</label>
+                            <label for="country" class="form-label" style="color: red;">Country</label>
                             <select class="form-select" name="country" id="countrycom" value="{{ $companion->country ?? '' }}" style="text-transform:uppercase" >
                                 <option value="MY" label="Malaysia" selected ></option>
                                 <optgroup id="country-optgroup-Americas" label="Americas">
@@ -250,6 +250,7 @@
         </div>
     </div>
 </div>
+
 
 <!-- UPDATE CHILDREN DETAILS -->
 <div class="modal fade" id="edit-children" tabindex="-1" aria-labelledby="add-children" aria-hidden="true">
@@ -278,11 +279,11 @@
                             <input type="text" id="fullName1" name="fullName" value=""  class="form-control" aria-describedby="fullname" readonly>
                         </div>
                         <div class="col-md-3">
-                            <label for="" class="form-label">Old Identification Number</label>
+                            <label for="" class="form-label" style="color: red;">Old Identification Number</label>
                             <input type="text" id="" name="" value=""  class="form-control" aria-describedby="" >
                         </div>
                         <div class="col-md-3">
-                            <label for="" class="form-label">Birth of Certificate</label>
+                            <label for="" class="form-label" style="color: red;">Birth of Certificate</label>
                             <input type="text" id="" name="" value=""  class="form-control" aria-describedby="" >
                         </div>
                     </div>
@@ -306,16 +307,8 @@
                         </div>
                         <div class="col-sm-6">
                             <div class="row">
-                                {{-- <div class="col-sm-6">
-                                    <label for="dob" class="form-label">Date of Birth</label>
-                                    <input type="text" id="DOB1" name="DOB" class="form-control" aria-describedby="dob" style="pointer-events: none;" readonly>
-                                </div>
                                 <div class="col-sm-6">
-                                    <label for="age" class="form-label">Age</label>
-                                    <input type="number" id="age1" name="age" value="{{$children->age ?? ''}}" class="form-control" aria-describedby="age">
-                                </div> --}}
-                                <div class="col-sm-6">
-                                    <label for="" class="form-label">ID Attachment</label>
+                                    <label for="" class="form-label" style="color: red;">ID Attachment</label>
                                     <input type="file" id="" name="" value="" class="form-control" aria-describedby="">
                                 </div>
                             </div>
@@ -328,10 +321,7 @@
                                     <label for="passport" class="form-label">Passport Number</label>
                                     <input type="text" id="passports1" name="passport" value="{{ $children->passport ?? '' }}" class="form-control" aria-describedby="passport">
                                 </div>
-                                {{-- <div class="col-sm-6">
-                                    <label for="expirydate" class="form-label">Expiry Date</label>
-                                    <input type="text" id="expiryDate1" name="expiryDate"  value="{{ date_format(date_create($children->expiryDate ?? null), 'Y-m-d') ?? '' }}" placeholder="YYYY-MM-DD"  class="form-control" aria-describedby="expirydate" style="pointer-events: none;" readonly>
-                                </div> --}}
+                               
                             </div>
                         </div>
                          <div class="col-sm-3">
@@ -357,7 +347,7 @@
                     </div>
                     <div class="row p-2">
                           <div class="col-sm-3">
-                                    <label for="dob" class="form-label">Date of Birth</label>
+                                    <label for="dob" class="form-label">Date Birth</label>
                                     <input type="text" id="DOB1" name="DOB" class="form-control" aria-describedby="dob" style="pointer-events: none;" readonly>
                                 </div>
                                 <div class="col-sm-3">
@@ -392,13 +382,13 @@
                                 <div class="col-sm-6 ">
                                     <div class="form-check form-switch align-right">
                                         <input class="form-check-input okuCheck4" type="checkbox" id="" name="">
-                                        <label class="form-check-label" for="citizen">
+                                        <label class="form-check-label" for="citizen" style="color: red;">
                                             OKU?
                                         </label>
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
-                                    <label for="lastname" class="form-label">OKU Card Number</label>
+                                    <label for="lastname" class="form-label" style="color: red;">OKU Card Number</label>
                                     <input type="text" id="okucard4" name="" value="" class="form-control" readonly aria-describedby="" >
                                 </div>
                             </div>
@@ -406,7 +396,7 @@
                         <div class="col-sm-6">
                             <div class="row">
                                 <div class="col-sm-6">
-                                    <label for="dob" class="form-label">OKU Attachment</label>
+                                    <label for="dob" class="form-label" style="color: red;">OKU Attachment</label>
                                     <input type="file" id="okuattach4" name="" class="form-control" style="pointer-events: none" aria-describedby="" >
                                 </div>
                             </div>
@@ -440,41 +430,33 @@
                         </div>
                         <div class="col-md-6">
                             <label for="" class="form-label">Supporting Document</label>
-                            <input type="file" name="" id="" class="form-control" aria-describedby="">
+                            <input type="file" name="supportDoc" id="" class="form-control" aria-describedby="">
                         </div>
                     </div>
-                    {{-- <h4 class="mt-3 p-2">File upload</h4>
-                    <div class="row p-2">
-                        <div class="col">
-                            <span id="supportDoc123"></span>
-                            <input type="file" class="form-control" name="supportDoc">
-                        </div>
-                    </div> --}}
-                    
                     <div class="row p-2">
                         <div class="col-sm-6">
-                            <label for="address1" class="form-label">Address 1*</label>
-                            <input type="text" id="" name="addresscom" value="" class="form-control" aria-describedby="address1" style="text-transform:uppercase">
+                            <label for="address1" class="form-label" style="color: red;">Address 1*</label>
+                            <input type="text" id="" name="" value="" class="form-control" aria-describedby="address1" style="text-transform:uppercase">
                         </div>
                         <div class="col-sm-6">
-                            <label for="address2" class="form-label">Address 2</label>
+                            <label for="address2" class="form-label" style="color: red;">Address 2</label>
                             <input type="text" id="" name="" value="" class="form-control" aria-describedby="address2" style="text-transform:uppercase">
                         </div>
                     </div>
                     <div class="row p-2">
                         <div class="col-sm-6">
-                            <label for="firstname" class="form-label">City*</label>
+                            <label for="firstname" class="form-label" style="color: red;">City*</label>
                             <input type="text" id="citycom" name="" value="" class="form-control" style="text-transform:uppercase">
                         </div>
                         <div class="col-sm-6">
-                            <label for="lastname" class="form-label">Postcode*</label>
+                            <label for="lastname" class="form-label" style="color: red;">Postcode*</label>
                             <input type="number" id="" name="" value="" class="form-control" style="text-transform:uppercase">
                         </div>
                     </div>
                     <div class="row p-2">
                         <div class="col-sm-6">
-                            <label for="state" class="form-label">State*</label>
-                            <select class="form-select" name="state" id="" value="{{ $companion->state ?? '' }}" style="text-transform:uppercase" >
+                            <label for="state" class="form-label" style="color: red;">State*</label>
+                            <select class="form-select" name="" id="" value="{{ $companion->state ?? '' }}" style="text-transform:uppercase" >
                                 <?php $state = state() ?>
                                 <option value="" label="Please Choose"  ></option>
                                 @foreach ($state as $key => $status)
@@ -483,8 +465,8 @@
                             </select>
                         </div>
                         <div class="col-sm-6">
-                            <label for="country" class="form-label">Country</label>
-                            <select class="form-select" name="country" id="countrycom" value="{{ $companion->country ?? '' }}" style="text-transform:uppercase" >
+                            <label for="country" class="form-label" style="color: red;">Country</label>
+                            <select class="form-select" name="" id="countrycom" value="{{ $companion->country ?? '' }}" style="text-transform:uppercase" >
                                 <option value="MY" label="Malaysia" selected ></option>
                                 <optgroup id="country-optgroup-Americas" label="Americas">
                                     @foreach ($americass as $key => $america)
@@ -522,11 +504,11 @@
                 <form id="editChildren">
                     <div class="row p-2">
                         <div class="col-sm-6">
-                            <label for="firstname" class="form-label">First Name*</label>
+                            <label for="firstname" class="form-label">First Name</label>
                             <input type="text" id="firstName" name="firstName" value="" class="form-control" aria-describedby="firstname" readonly>
                         </div>
                         <div class="col-sm-6">
-                            <label for="lastname" class="form-label">Last Name*</label>
+                            <label for="lastname" class="form-label">Last Name</label>
                             <input type="text" id="lastName" name="lastName" value=""  class="form-control" aria-describedby="lastname" readonly>
                         </div>
                     </div>
@@ -536,11 +518,11 @@
                             <input type="text" id="fullName" name="fullName" value=""  class="form-control" aria-describedby="fullname" readonly>
                         </div>
                         <div class="col-md-3">
-                            <label for="" class="form-label">Old Identification Number</label>
+                            <label for="" class="form-label" style="color: red;">Old Identification Number</label>
                             <input type="text" id="" name="" value=""  class="form-control" aria-describedby="" readonly>
                         </div>
                         <div class="col-md-3">
-                            <label for="" class="form-label">Birth Of Certificate</label>
+                            <label for="" class="form-label" style="color: red;">Birth Of Certificate</label>
                             <input type="text" id="" name="" value=""  class="form-control" aria-describedby="" readonly>
                         </div>
                     </div>
@@ -555,26 +537,19 @@
                                         </label>
                                     </div>
                                 </div>
+                                
                                 <div class="col-sm-6">
-                                    <label for="lastname" class="form-label">New Identification Number*</label>
-                                    <input type="text" id="idnumber5" name="idNo" value="" class="form-control" aria-describedby="lastname" readonly>
+                                    <label for="lastname" class="form-label">New Identification Number</label>
+                                    <input type="text" id="idnumber5" name="idNo" value="{{$children->idNo ?? ''}}" class="form-control" aria-describedby="lastname" readonly>
                                 </div>
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="row">
                                 <div class="col-sm-6">
-                                    <label for="lastname" class="form-label">ID Attachment</label>
+                                    <label for="lastname" class="form-label" style="color: red;">ID Attachment</label>
                                     <input type="file" id="" name="" value="" class="form-control" aria-describedby="" readonly>
                                 </div>
-                                {{-- <div class="col-sm-6">
-                                    <label for="dob" class="form-label">Date of Birth</label>
-                                    <input type="text" id="DOB" name="DOB" class="form-control" aria-describedby="dob" readonly>
-                                </div>
-                                <div class="col-sm-6">
-                                    <label for="age" class="form-label">Age</label>
-                                    <input type="text" id="age123" name="age" class="form-control" aria-describedby="age" readonly>
-                                </div> --}}
                             </div>
                         </div>
                     </div>
@@ -585,10 +560,6 @@
                                     <label for="passport" class="form-label">Passport Number</label>
                                     <input type="text" id="passports" name="passport" class="form-control" aria-describedby="passport" readonly>
                                 </div>
-                                {{-- <div class="col-sm-6">
-                                    <label for="expirydate" class="form-label">Expiry Date</label>
-                                    <input type="date" id="expiryDate" name="expiryDate" class="form-control" aria-describedby="expirydate" readonly>
-                                </div> --}}
                             </div>
                         </div>
                          <div class="col-sm-3">
@@ -597,7 +568,7 @@
                                 </div>
                         <div class="col-sm-3">
                             <label for="issuing-country" class="form-label">Issuing Country</label>
-                            <select class="form-select" name="issuingCountry" id="issuingCountry" disabled>
+                            <select class="form-select" name="issuingCountry" id="issuingCountry" >
                                 <optgroup id="country-optgroup-Americas" label="Americas">
                                     @foreach ($americass as $key => $america)
                                     <option value="{{$key}}">{{$america}}</option>
@@ -613,25 +584,26 @@
                     </div>
                     <div class="row p-2">
                         <div class="col-sm-3">
-                                    <label for="dob" class="form-label">Date of Birth</label>
-                                    <input type="text" id="dob5" name="DOB" class="form-control" aria-describedby="dob" readonly>
+                                    <label for="dob" class="form-label">Date Birth</label>
+                                    <input type="text" id="DOB" name="DOB" class="form-control" aria-describedby="dob" readonly>
                                 </div>
                                 <div class="col-sm-3">
                                     <label for="age" class="form-label">Age</label>
-                                    <input type="text" id="age5" name="age" class="form-control" aria-describedby="age" readonly>
+                                    <input type="text" id="age5" name="age" value="{{$children->age ?? ''}}" class="form-control" aria-describedby="age" readonly>
+                                </div>
+                        
+                                <div class="col-sm-3">
+                                    <label for="gender" class="form-label">Gender</label>
+                                    <select class="form-select" name="gender" id="genderview" >
+                                        <option value="0" label="Please Choose "></option>
+                                        @foreach ($gender as $key => $status)
+                                        <option value="{{$key}}">{{$status}}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                         <div class="col-sm-3">
-                            <label for="gender" class="form-label">Gender</label>
-                            <select class="form-select" name="gender" id="gender" disabled>
-                                <option value="0" label="Please Choose "></option>
-                                @foreach ($gender as $key => $status)
-                                <option value="{{$key}}">{{$status}}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="col-sm-3">
                             <label for="issuing-country" class="form-label">Marital Status</label>
-                            <select class="form-select" name="maritalStatus" id="maritalStatus" disabled>
+                            <select class="form-select" name="maritalStatus" id="maritalStatus" >
                                 <option value="0" label="Please Choose "></option>
                                 @foreach ($maritalStatus as $key => $status)
                                 <option value="{{$key}}">{{$status}}</option>
@@ -646,13 +618,13 @@
                                     <div class="form-check form-switch align-right">
                                     <!-- <input class="form-check-input partCheck" value="door3" type="checkbox" name="nonNetizen" {{($profile->nonNetizen ?? '') ? 'checked' : ''}} id="citizen"> -->
                                         <input class="form-check-input partCheck4" value="" type="checkbox" name=""  id="citizen">
-                                        <label class="form-check-label" for="citizen">
+                                        <label class="form-check-label" for="citizen" style="color: red;">
                                            OKU
                                         </label>
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
-                                    <label for="lastname" class="form-label">OKU Card Number</label>
+                                    <label for="lastname" class="form-label" style="color: red;">OKU Card Number</label>
                                     <input type="number" id="" name="" value="" class="form-control" readonly >
                                     
                                 </div>
@@ -661,7 +633,7 @@
                         <div class="col-sm-6">
                             <div class="row">
                                 <div class="col-sm-6">
-                                    <label for="dob" class="form-label">OKU Attachment</label>
+                                    <label for="dob" class="form-label" style="color: red;">OKU Attachment</label>
                                     <input type="file" id="" name="" class="form-control" aria-describedby="">
                                 </div>
                             </div>
@@ -670,7 +642,7 @@
                     <h4 class="mt-3 p-2">Education Information</h4>
                     <div class="row p-2">
                         <div class="col-sm-6">
-                            <label for="education-type" class="form-label">Education Type*</label>
+                            <label for="education-type" class="form-label">Education Type</label>
                             <select class="form-select" name="educationType" id="educationType" disabled>
                                 <option value="0" label="Please Choose "></option>
                                 @foreach ($educationType as $key => $status)
@@ -679,7 +651,7 @@
                             </select>
                         </div>
                         <div class="col-sm-6">
-                            <label for="education-level" class="form-label">Education Level*</label>
+                            <label for="education-level" class="form-label">Education Level</label>
                             <select class="form-select" name="educationLevel" id="educationLevel" disabled>
                                 <option value="0" label="Please Choose "></option>
                                 @foreach ($educationLevel as $key => $status)
@@ -698,37 +670,30 @@
                             <input type="file" name="" id="" class="form-control" aria-describedby="" readonly>
                         </div>
                     </div>
-                    {{-- <h4 class="mt-3 p-2">File upload</h4>
-                            <span id="supportDoc1234"></span>
-                            <div class="row p-2">
-                        <div class="col">
-                            <input type="file" class="form-control">
-                        </div>
-                    </div> --}}
                     <div class="row p-2">
                         <div class="col-sm-6">
-                            <label for="address1" class="form-label">Address 1*</label>
+                            <label for="address1" class="form-label" style="color: red;">Address 1</label>
                             <input type="text" id="" name="" value="" class="form-control" aria-describedby="" readonly style="text-transform:uppercase">
                         </div>
                         <div class="col-sm-6">
-                            <label for="address2" class="form-label">Address 2</label>
+                            <label for="address2" class="form-label" style="color: red;">Address 2</label>
                             <input type="text" id="" name="" value="" class="form-control" aria-describedby="" readonly style="text-transform:uppercase">
                         </div>
                     </div>
                     <div class="row p-2">
                         <div class="col-sm-6">
-                            <label for="" class="form-label">City*</label>
+                            <label for="" class="form-label" style="color: red;">City</label>
                             <input type="text" id="" name="citycom" value="" class="form-control" readonly style="text-transform:uppercase">
                         </div>
                         <div class="col-sm-6">
-                            <label for="" class="form-label">Postcode*</label>
+                            <label for="" class="form-label" style="color: red;">Postcode</label>
                             <input type="number" id="" name="" value="" class="form-control" readonly style="text-transform:uppercase">
                         </div>
                     </div>
                     <div class="row p-2">
                         <div class="col-sm-6">
-                            <label for="state" class="form-label">State*</label>
-                            <select class="form-select" name="state" id="" value="{{ $companion->state ?? '' }}" style="pointer-events: none;" >
+                            <label for="state" class="form-label" style="color: red;">State</label>
+                            <select class="form-select" name="state" id="" value="{{ $companion->state ?? '' }}"  style="pointer-events: none;" >
                                 <?php $state = state() ?>
                                 <option value="" label="Please Choose"  ></option>
                                 @foreach ($state as $key => $status)
@@ -737,8 +702,8 @@
                             </select>
                         </div>
                         <div class="col-sm-6">
-                            <label for="country" class="form-label">Country</label>
-                            <select class="form-select" name="country" id="" value="{{ $companion->country ?? '' }}" style="pointer-events: none;" >
+                            <label for="country" class="form-label" style="color: red;">Country</label>
+                            <select class="form-select" name="country" id="" value="{{ $companion->country ?? '' }}"  style="pointer-events: none;" >
                                 <option value="MY" label="Malaysia" selected ></option>
                                 <optgroup id="country-optgroup-Americas" label="Americas">
                                     @foreach ($americass as $key => $america)

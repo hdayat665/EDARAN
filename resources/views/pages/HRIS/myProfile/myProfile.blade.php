@@ -17,7 +17,7 @@
                         <span class="d-sm-block d-none">My Profile</span>
                     </a>
                 </li>
-                <li class="nav-item" id="qualifi">
+                <li class="nav-item">
                     <a href="#default-tab-2" data-bs-toggle="tab" class="nav-link">
                         <span class="d-sm-none">Qualification</span>
                         <span class="d-sm-block d-none">Qualification</span>
@@ -94,7 +94,7 @@
                             <div class="col-sm-6">
                                 <div class="row">
                                     <div class="col-sm-12 idnumber">
-                                        <label for="lastname" class="form-label">Old Identification Number*</label>
+                                        <label for="" class="form-label" style="color: red;">Old Identification Number : </label>
                                         <input type="text" class="form-control">
                                     </div>
                                 </div>
@@ -124,7 +124,7 @@
                             </div>
                             {{-- new --}}
                             <div class="col-sm-3 part">
-                                <label for="idattach" class="form-label">ID Attachment</label>
+                                <label for="idattach" class="form-label" style="color: red;">ID Attachment</label>
                                 <input type="file" class="form-control-file" id="">
                             </div> 
                         </div>
@@ -167,7 +167,7 @@
                             <div class="col-sm-6">
                                 <div class="row">
                                     <div class="col-sm-6">
-                                        <label for="dob" class="form-label">Date of Birth</label>
+                                        <label for="dob" class="form-label">Date Birth</label>
                                         <input type="text" name="DOB" id="dob" value="{{ date_format(date_create($profile->DOB ?? null), 'Y-m-d') ?? '' }}" class="form-control" aria-describedby="dob" style="pointer-events: none;" readonly>
                                     </div>
                                     <div class="col-sm-6">
@@ -224,7 +224,7 @@
                                     <div class="col-sm-6 ">
                                         <div class="form-check form-switch align-right">
                                             <input class="form-check-input okuCheck" value="" type="checkbox" name=""  id="">
-                                            <label class="form-label" for="OKU">
+                                            <label class="form-label" for="OKU" style="color: red;">
                                                 OKU?
                                             </label>
                                         </div>
@@ -233,7 +233,7 @@
                                     <div class="row">
 
                                     <div class="col-sm-12 idnumber">
-                                        <label for="" class="form-label">OKU Card Number*</label>
+                                        <label for="" class="form-label" style="color: red;">OKU Card Number*</label>
                                         <input type="text" value="" name="" id="okucard" class="form-control" readonly >
                                     </div>
                                 </div>
@@ -241,7 +241,7 @@
                                 </div>
                             </div>
                             <div class="col-sm-3 part">
-                                <label for="idattach" class="form-label">OKU Attachment</label>
+                                <label for="idattach" class="form-label" style="color: red;">OKU Attachment</label>
                                 <input type="file" class="form-control-file" id="okuattach" style="pointer-events: none">
                             </div> 
                         </div>
@@ -257,7 +257,7 @@
                             {{-- new --}}
                             <div class="col-md-6">
                                 <div class="col p-2">
-                                    <label for="phone-number2" class="form-label">Phone Number 2</label>
+                                    <label for="phone-number2" class="form-label" style="color: red;">Phone Number 2</label>
                                     <input type="text" id="" name="" value="" class="form-control" aria-describedby="">
                                 </div>
                             </div>
@@ -286,9 +286,9 @@
                     </form>
                 </div>
 
-                @include('pages.HRIS.myProfile.myAddress')
-
                 @include('pages.HRIS.myProfile.qualification')
+
+                @include('pages.HRIS.myProfile.myAddress')
 
                 @include('pages.HRIS.myProfile.myEC')
 

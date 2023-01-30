@@ -1,4 +1,4 @@
-<div class="tab-pane fade" id="default-tab-6"> 
+<div class="tab-pane fade" id="default-tab-7"> 
     <div class="container">
         <h4 class="mt-3 mb-3">Parents information</h4>
         <button type="button"  data-bs-toggle="modal" id="parentModalAdd" class="btn btn-white mt-3 mb-3"><i class="fa fa-plus"></i> New Parent</button>
@@ -42,7 +42,7 @@
             </tbody>
         </table>
     </div>
-    <div class="container">
+    <div class="container" style="display: none">
         <h4 class="mt-3 mb-3">Siblings Information</h4>
         <button type="button"  data-bs-toggle="modal" id="siblingModalAdd"  class="btn btn-white mt-3 mb-3"><i class="fa fa-plus"></i> New Sibling</button>
         <table id="tableSibling" style="width: 100%" class="table table-striped align-middle">

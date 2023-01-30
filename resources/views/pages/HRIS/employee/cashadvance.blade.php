@@ -1,4 +1,4 @@
-<div class="tab-pane fade" id="v-pills-eleave" role="tabpanel" aria-labelledby="v-pills-eleave-tab">
+<div class="tab-pane fade" id="v-pills-cashadvance" role="tabpanel" aria-labelledby="v-pills-cashadvance-tab">
     <div class="accordion" id="accordionExample">
         <div class="accordion-item">
             <h2 class="accordion-header" id="headingOne">
@@ -13,7 +13,7 @@
                             <div class="card">
                                 <div class="card-header bg-white bg-gray-100">
                                     <h4 class="fw-bold">
-                                        eLeave
+                                        Cash Advance
                                     </h4>
                                     <p class="fw-light">
                                         Approval Hierarchy
@@ -21,14 +21,8 @@
                                     </div>
                                 <div class="card-body">
                                     <div class="row p-2">
-                                        <label for="firstname" class="form-label">Employee Name</label>
-                                        <input type="text" id="text" class="form-control" aria-describedby="password">
-                                    </div>
-                                    <div class="row p-2">
-                                        <label for="firstname" class="form-label">Recommender*</label>
-                                        <select class="form-select">
-                                            <option value="0" label="Please Choose " selected="selected"></option>
-                                        </select>
+                                        <label for="firstname" class="form-label">Employee No</label>
+                                        <input type="text" id="" class="form-control" aria-describedby="" readonly>
                                     </div>
                                     <div class="row p-2">
                                         <label for="firstname" class="form-label">Approver*</label>
@@ -37,37 +31,6 @@
                                         </select>
                                     </div>
                                     <br>
-                                    <div class="row p-2">
-                                        <div class="col-md-4">
-                                            <p class="form-label">User Roles :</p>
-                                        </div>
-                                        <div class="col-md-8">
-                                            <div class="row p-2">
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="" id="">
-                                                    <label class="form-check-label" for="flexCheckDefault">
-                                                      Recommender
-                                                    </label>
-                                                  </div>
-                                            </div>
-                                            <div class="row p-2">
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="" id="" >
-                                                    <label class="form-check-label" for="flexCheckChecked">
-                                                      Approver
-                                                    </label>
-                                                  </div>
-                                            </div>
-                                            <div class="row p-2">
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="" id="" >
-                                                    <label class="form-check-label" for="flexCheckChecked">
-                                                      HR Administrator
-                                                    </label>
-                                                  </div>
-                                            </div>
-                                        </div>
-                                    </div>
                                     {{-- <button type="button" class="btn btn-primary float-end mt-3">
                                         Save
                                     </button> --}}
@@ -128,7 +91,7 @@
                                 </div>
                             </div>
                         </div>
-                        <button type="button" class="btn btn-primary float-end mt-3 col-md-2">
+                         <button type="button" class="btn btn-primary float-end mt-3 col-md-2">
                             Save
                         </button>
                     </div>
@@ -149,7 +112,7 @@
                         <div class="card">
                             <div class="card-header bg-white bg-gray-100">
                                 <h4 class="fw-bold">
-                                    eLeave
+                                    Cash Advance
                                 </h4>
                                 <p class="fw-light">
                                     Approval Hierarchy
@@ -157,14 +120,8 @@
                                 </div>
                             <div class="card-body">
                                 <div class="row p-2">
-                                    <label for="firstname" class="form-label">Employee Name</label>
-                                    <input type="text" id="text" class="form-control" aria-describedby="password">
-                                </div>
-                                <div class="row p-2">
-                                    <label for="firstname" class="form-label">Recommender*</label>
-                                    <select class="form-select">
-                                        <option value="0" label="Please Choose " selected="selected"></option>
-                                    </select>
+                                    <label for="firstname" class="form-label">Employee No</label>
+                                    <input type="text" id="" class="form-control" aria-describedby="password" readonly>
                                 </div>
                                 <div class="row p-2">
                                     <label for="firstname" class="form-label">Approver*</label>
@@ -173,37 +130,6 @@
                                     </select>
                                 </div>
                                 <br>
-                                <div class="row p-2">
-                                    <div class="col-md-4">
-                                        <p class="form-label">User Roles :</p>
-                                    </div>
-                                    <div class="col-md-8">
-                                        <div class="row p-2">
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" value="" id="">
-                                                <label class="form-check-label" for="flexCheckDefault">
-                                                  Recommender
-                                                </label>
-                                              </div>
-                                        </div>
-                                        <div class="row p-2">
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" value="" id="" >
-                                                <label class="form-check-label" for="flexCheckChecked">
-                                                  Approver
-                                                </label>
-                                              </div>
-                                        </div>
-                                        <div class="row p-2">
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" value="" id="" >
-                                                <label class="form-check-label" for="flexCheckChecked">
-                                                  HR Administrator
-                                                </label>
-                                              </div>
-                                        </div>
-                                    </div>
-                                </div>
                                 {{-- <button type="button" class="btn btn-primary float-end mt-3">
                                     Save
                                 </button> --}}
@@ -264,7 +190,7 @@
                             </div>
                         </div>
                     </div>
-                    <button type="button" class="btn btn-primary float-end mt-3 col-md-2">
+                     <button type="button" class="btn btn-primary float-end mt-3 col-md-2">
                         Save
                     </button>
                 </div>
@@ -273,36 +199,3 @@
     </div>
 </div>
 
-{{-- 
-    <div class="card">
-        <div class="card-header bg-white bg-gray-100">
-            <h4 class="fw-bold">
-                eLeave
-            </h4>
-            <p class="fw-light">
-                Approval Hierarchy
-            </p>
-         </div>
-        <div class="card-body">
-            <div class="row p-2">
-                <label for="firstname" class="form-label">Employee Name</label>
-                <input type="text" id="text" class="form-control" aria-describedby="password">
-            </div>
-            <div class="row p-2">
-                <label for="firstname" class="form-label">Recommender*</label>
-                <select class="form-select">
-                    <option value="0" label="Please Choose " selected="selected"></option>
-                </select>
-            </div>
-            <div class="row p-2">
-                <label for="firstname" class="form-label">Approver*</label>
-                <select class="form-select">
-                    <option value="0" label="Please Choose " selected="selected"></option>
-                </select>
-            </div>
-            <button type="button" class="btn btn-primary float-end mt-3">
-                Save
-            </button>
-        </div>
-    </div>
-</div> --}}
