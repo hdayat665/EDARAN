@@ -61,25 +61,18 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody>
+                                                        {{-- <?php $months = month(); ?> --}}
+                                                        {{-- @foreach ($months as $key => $month) --}}
                                                         <tr class="odd gradeX">
-                                                            <td>2022</td>
-                                                            <td>SEPTEMBER</td>
+                                                            <td>2023</td>
+                                                            <td>January</td>
                                                             <td><span class="badge bg-lime">Open</span></td>
-                                                            <td><a href="/eclaim/applyclaim" type="button" class="btn btn-primary btn-sm">+ Apply</a></td>
+                                                            {{-- <td><a href="/eclaim/updatemontly" type="button" class="btn btn-primary btn-sm">Update</a></td> --}}
+                                                            <td><a href="/newMonthlyClaimView" type="button" class="btn btn-primary btn-sm">+ Apply</a></td>
+                                                            {{-- <td><button type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal">+
+                                                                    Appeal</button></td> --}}
                                                         </tr>
-                                                        <tr class="even gradeC">
-                                                            <td>2022</td>
-                                                            <td>AUGUST</td>
-                                                            <td><span class="badge bg-lime">Open</span></td>
-                                                            <td><a href="/eclaim/updatemontly" type="button" class="btn btn-primary btn-sm">Update</a></td>
-                                                        </tr>
-                                                        <tr class="even gradeC">
-                                                            <td>2022</td>
-                                                            <td>JULY</td>
-                                                            <td><span class="badge bg-danger">Expired</span></td>
-                                                            <td><button type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal">+
-                                                                    Appeal</button></td>
-                                                        </tr>
+                                                        {{-- @endforeach --}}
                                                     </tbody>
                                                 </table>
                                             </div>
