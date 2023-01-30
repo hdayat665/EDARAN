@@ -347,6 +347,7 @@ $(document).ready(function () {
         } else {
             var status = 2;
         }
+        console.log(status);
         requirejs(["sweetAlert2"], function (swal) {
             $.ajax({
                 type: "get",
