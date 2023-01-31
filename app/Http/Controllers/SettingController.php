@@ -967,15 +967,6 @@ class SettingController extends Controller
     //      return view('pages.setting.eleave.eleaveentitlement');
     // }
 
-    public function holidaylistView()
-    {
-        return view('pages.setting.eleave.holidaylist');
-    }
-
-    public function leavetypesView()
-    {
-        return view('pages.setting.eleave.leavetypes');
-    }
 
     public function updateClaimDate(Request $r)
     {
