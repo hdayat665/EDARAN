@@ -985,4 +985,121 @@ class SettingController extends Controller
 
         return response()->json($result);
     }
+
+    public function updateStatusleaveholiday($id, $status)
+    {
+        $ss = new SettingService;
+
+        $result = $ss->updateStatusleaveholiday($id, $status);
+
+        return response()->json($result);
+    }
+
+
+    public function leavetypesView()
+    {
+        $ltv = new SettingService;
+
+        $result = $ltv->leavetypesView();
+
+        return view('pages.setting.eleave.leavetypes', $result);
+    }
+
+
+
+    public function createtypes(Request $r)
+    {
+
+        $clt = new SettingService;
+
+        $result = $clt->createtypes($r);
+
+        return response()->json($result);
+    }
+
+    public function getcreateLeavetypes($id = '')
+    {
+        $gclh = new SettingService;
+
+        $result = $gclh->getcreateLeavetypes($id);
+
+        return $result;
+    }
+
+    public function updateLeaveleavetypes(Request $r, $id)
+    {
+        $ss = new SettingService;
+
+        $result = $ss->updateLeaveleavetypes($r, $id);
+
+        return response()->json($result);
+    }
+
+    public function deleteLeavetypes($id)
+    {
+        $dlh = new SettingService;
+
+        $result = $dlh->deleteLeavetypes($id);
+
+        return response()->json($result);
+    }
+
+    public function updateStatusleavetypes($id, $status)
+    {
+        $ss = new SettingService;
+
+        $result = $ss->updateStatusleavetypes($id, $status);
+
+        return response()->json($result);
+    }
+
+    // public function holidaylistView(){
+    //      return view('pages.setting.eleave.holidaylist');
+    // }
+
+    public function holidaylistView()
+    {
+        $hlv = new SettingService;
+
+        $result = $hlv->holidaylistView();
+
+        return view('pages.setting.eleave.holidaylist', $result);
+    }
+
+    public function createholidaylist(Request $r)
+    {
+
+        $chl = new SettingService;
+
+        $result = $chl->createholidaylist($r);
+
+        return response()->json($result);
+    }
+
+
+    public function getcreateLeaveholiday($id = '')
+    {
+        $gclh = new SettingService;
+
+        $result = $gclh->getcreateLeaveholiday($id);
+
+        return $result;
+    }
+
+    public function updateLeaveholiday(Request $r, $id)
+    {
+        $ss = new SettingService;
+
+        $result = $ss->updateLeaveholiday($r, $id);
+
+        return response()->json($result);
+    }
+
+    public function deleteLeaveholiday($id)
+    {
+        $dlh = new SettingService;
+
+        $result = $dlh->deleteLeaveholiday($id);
+        return response()->json($result);
+    }
 }

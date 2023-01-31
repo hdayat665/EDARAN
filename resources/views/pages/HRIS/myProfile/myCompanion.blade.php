@@ -39,7 +39,7 @@
                             <div class="col-sm-6">
                                  <div class="row">
                                      <div class="col-sm-12">
-                                        <label for="passport-number" class="form-label">Old Identification Number*</label>
+                                        <label for="passport-number" class="form-label" style="color: red;">Old Identification Number</label>
                                         <input type="text" name="" value="" id="" class="form-control" aria-describedby="">
                                     </div>
                                 </div>
@@ -62,7 +62,7 @@
                                 </div>
                             </div>
                             <div class="col-sm-3">
-                                <label for="" class="form-label">ID Attachment</label>
+                                <label for="" class="form-label" style="color: red;">ID Attachment</label>
                                 <input type="file" id="" name="" value=""  class="form-control" aria-describedby="" >
                             </div>
                         </div>
@@ -92,7 +92,7 @@
                                 </select>
                             </div>
                             <div class="col-sm-3">
-                                <label for="dob" class="form-label">Date of Birth</label>
+                                <label for="dob" class="form-label">Date Birth</label>
                                 <input type="text" id="dobmc" name="DOB" value="{{ $companion->DOB ?? '' }}" class="form-control" aria-describedby="dob" readonly  style= "pointer-events: none;">
                             </div>
                         </div>
@@ -127,13 +127,13 @@
                                     <div class="col-sm-6 ">
                                         <div class="form-check form-switch align-right">
                                             <input class="form-check-input okuCheck1 "  id="" value="" type="checkbox" name=""  >
-                                            <label class="form-check-label" for="citizen">
+                                            <label class="form-check-label" for="citizen" style="color: red;">
                                                 OKU?
                                             </label>
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
-                                        <label for="" class="form-label">OKU Card Number*</label>
+                                        <label for="" class="form-label" style="color: red;">OKU Card Number*</label>
                                         <input type="number" id="okucard1" name="" value="" class="form-control" readonly >
                                         
                                     </div>
@@ -142,7 +142,7 @@
                             <div class="col-sm-6">
                                 <div class="row">
                                     <div class="col-sm-6">
-                                        <label for="dob" class="form-label">OKU Attachment</label>
+                                        <label for="dob" class="form-label" style="color: red;">OKU Attachment</label>
                                         <input type="file" id="okuattach1" name="" class="form-control" aria-describedby="" style="pointer-events: none">
                                     </div>
                                 </div>
@@ -155,7 +155,7 @@
                             </div>
                             {{-- new --}}
                             <div class="col-sm-6">
-                                <label for="contact-number" class="form-label">Home Number</label>
+                                <label for="contact-number" class="form-label" style="color: red;">Home Number</label>
                                 <input type="text" id="" name="" value="" class="form-control" aria-describedby="">
                             </div>
                         </div>
@@ -363,7 +363,7 @@
                             {{-- new --}}
                             <div class="col-sm-6">
                                 <div class="col-sm-12">
-                                    <label for="fullname" class="form-label">Old Identification Number</label>
+                                    <label for="fullname" class="form-label" style="color: red;">Old Identification Number</label>
                                     <input type="text" id="" name="" value="" class="form-control" aria-describedby="">
                                 </div>
                             </div>
@@ -385,7 +385,7 @@
                                 </div>
                             </div>
                             <div class="col-sm-3 part">
-                                <label for="marriage-cert" class="form-label">ID Attachment</label>
+                                <label for="marriage-cert" class="form-label" style="color: red;">ID Attachment</label>
                                 <input type="file" name="" id="" class="form-control" aria-describedby="">
                             </div>
                         </div>
@@ -419,7 +419,7 @@
                                 </select>
                             </div>
                             <div class="col-sm-3">
-                                <label for="dob" class="form-label">Date of Birth</label>
+                                <label for="dob" class="form-label">Date Birth</label>
                                 <input type="date" id="dobuc" name="DOB" value="{{ date_format(date_create($companion->DOB), 'Y-m-d') }}" class="form-control" aria-describedby="dob">
                             </div>
                         </div>
@@ -431,7 +431,7 @@
                                         <input type="text" id="age3" name="age" value="{{ $companion->age ?? '' }}" class="form-control" aria-describedby="age">
                                     </div>
                                     <div class="col-sm-6">
-                                        <label for="dom" class="form-label">Date of Marriage</label>
+                                        <label for="dom" class="form-label">Date Marriage</label>
                                         <input type="date" id="dom" name="DOM" value="{{ date_format(date_create($companion->DOM), 'Y-m-d') }}" class="form-control" aria-describedby="dom">
                                     </div>
                                 </div>
@@ -465,13 +465,13 @@
                                     <div class="col-sm-6 ">
                                         <div class="form-check form-switch align-right">
                                             <input class="form-check-input okuCheck2 " value="" type="checkbox" name=""  id="">
-                                            <label class="form-check-label" for="citizen">
+                                            <label class="form-check-label" for="citizen" style="color: red;">
                                                 OKU?
                                             </label>
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
-                                        <label for="lastname" class="form-label">OKU Card Number*</label>
+                                        <label for="lastname" class="form-label" style="color: red;">OKU Card Number*</label>
                                         <input type="number" id="okucard2" name="" value="" class="form-control" readonly >
                                         
                                     </div>
@@ -480,7 +480,7 @@
                             <div class="col-sm-6">
                                 <div class="row">
                                     <div class="col-sm-6">
-                                        <label for="dob" class="form-label">OKU Attachment</label>
+                                        <label for="dob" class="form-label" style="color: red;" >OKU Attachment</label>
                                         <input type="file" id="okuattach2" name="" class="form-control" aria-describedby="" style="pointer-events: none">
                                     </div>
                                 </div>
@@ -493,7 +493,7 @@
                             </div>
                             {{-- new --}}
                             <div class="col-sm-6">
-                                <label for="contact-number" class="form-label">Home Number</label>
+                                <label for="contact-number" class="form-label" style="color: red;">Home Number</label>
                                 <input type="text" id="" name="" value="" class="form-control" aria-describedby="contact-number">
                             </div>
                         </div>

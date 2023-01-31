@@ -1106,6 +1106,9 @@ $(document).ready(function () {
             id = $(this).data("id");
             var childrenData = getChildren(id);
 
+            $('input').prop('disabled', true);
+            $('select').prop('disabled', true);
+
             childrenData.done(function (data) {
                 $("#viewChildren").hide();
                 child = data.data;
@@ -1938,5 +1941,187 @@ $(document).ready(function () {
                 });
             },
         });
+    });
+
+    //   oku checkbox myprofile
+    $(".okuCheck").click(function(){
+        if ($(this).prop("checked")) {
+              
+            $('#okucard').prop('readonly', false);
+            $('#okuattach').css('pointer-events', 'auto');
+        } else {
+            $('#okucard').prop('readonly', true);
+            $('#okuattach').css('pointer-events', 'none');
+        }
+      });
+
+       //oku check companion
+       $(".okuCheck1").click(function(){
+        if ($(this).prop("checked")) {
+              
+            $('#okucard1').prop('readonly', false);
+            $('#okuattach1').css('pointer-events', 'auto');
+        } else {
+            $('#okucard1').prop('readonly', true);
+            $('#okuattach1').css('pointer-events', 'none');
+        }
+      });
+
+      //oku check add children
+      $(".okuCheck3").click(function(){
+        if ($(this).prop("checked")) {
+              
+            $('#okucard3').prop('readonly', false);
+            $('#okuattach3').css('pointer-events', 'auto');
+        } else {
+            $('#okucard3').prop('readonly', true);
+            $('#okuattach3').css('pointer-events', 'none');
+        }
+      });
+
+      //oku check update children
+      $(".okuCheck4").click(function(){
+        if ($(this).prop("checked")) {
+              
+            $('#okucard4').prop('readonly', false);
+            $('#okuattach4').css('pointer-events', 'auto');
+        } else {
+            $('#okucard4').prop('readonly', true);
+            $('#okuattach4').css('pointer-events', 'none');
+        }
+      });
+
+      //add child
+    $(".partCheck6").click(function () {
+        if ($(this).prop("checked")) {
+            $("#idno6").prop("readonly", true);
+            $("#DOBaddparent").prop("readonly", false);
+            $("#DOBaddparent").css("pointer-events", "auto");
+            $("#idno6").val("");
+            $("#age6").prop("readonly", false);
+            $("#gender6").css({
+                "pointer-events": "auto",
+                "touch-action": "auto",
+                background: "#ffffff",
+            });
+        } else {
+            $("#idno6").prop("readonly", false);
+            $("#DOBaddparent").prop("readonly", true);
+            $("#DOBaddparent").css("pointer-events", "none");
+            $("#passport6").val("");
+            $("#expirydate6").val("");
+            $("#expirydate6").prop("readonly", true);
+            $("#expirydate6").css("pointer-events", "none");
+            $("#gender6").css({
+                "pointer-events": "none",
+                "touch-action": "none",
+                background: "#e9ecef",
+            });
+            $("#age6").prop("readonly", true);
+        }
+    });
+
+    $("#idno6").change(function () {
+        if ($(this).val().length == 12) {
+            var idn = $(this).val();
+            var year = "19".concat(idn.substring(0, 2));
+            var month = idn.substring(2, 4);
+            var day = idn.substring(4, 6);
+            $("#DOBaddparent").val(year + "-" + month + "-" + day);
+        }
+    });
+
+    $("#idno6").change(function () {
+        if ($(this).val().length == 12) {
+            var idn = $(this).val();
+
+            var lastIc = idn.substring(10, 12);
+
+            if (lastIc % 2 == 0) {
+                $("#gender6").val(2);
+            } else {
+                $("#gender6").val(1);
+            }
+        }
+    });
+
+    $("#idno6").change(function () {
+        if ($(this).val().length == 12) {
+            var idn = $(this).val();
+            var year = idn.substring(0, 2);
+
+            var cutoff = new Date().getFullYear() - 2000; //2022-2000=22cutoff
+           
+            var ww = (year > cutoff ? "19" : "20") + year;
+            var currentAge = new Date().getFullYear() - ww;
+            $("#age6").val(currentAge);
+        }
+    });
+
+    //update child
+    $(".partCheck7").click(function () {
+        if ($(this).prop("checked")) {
+            $("#idno7").prop("readonly", true);
+            $("#DOBP1").prop("readonly", false);
+            $("#DOBP1").css("pointer-events", "auto");
+            $("#idno7").val("");
+            $("#age7").prop("readonly", false);
+            $("#genderP1").css({
+                "pointer-events": "auto",
+                "touch-action": "auto",
+                background: "#ffffff",
+            });
+        } else {
+            $("#idno7").prop("readonly", false);
+            $("#DOBP1").prop("readonly", true);
+            $("#DOBP1").css("pointer-events", "none");
+            $("#passport7").val("");
+            $("#expirydate7").val("");
+            $("#expirydate7").prop("readonly", true);
+            $("#expirydate7").css("pointer-events", "none");
+            $("#genderP1").css({
+                "pointer-events": "none",
+                "touch-action": "none",
+                background: "#e9ecef",
+            });
+            $("#age7").prop("readonly", true);
+        }
+    });
+
+    $("#idno7").change(function () {
+        if ($(this).val().length == 12) {
+            var idn = $(this).val();
+            var year = "19".concat(idn.substring(0, 2));
+            var month = idn.substring(2, 4);
+            var day = idn.substring(4, 6);
+            $("#DOBP1").val(year + "-" + month + "-" + day);
+        }
+    });
+
+    $("#idno7").change(function () {
+        if ($(this).val().length == 12) {
+            var idn = $(this).val();
+
+            var lastIc = idn.substring(10, 12);
+
+            if (lastIc % 2 == 0) {
+                $("#genderP1").val(2);
+            } else {
+                $("#genderP1").val(1);
+            }
+        }
+    });
+
+    $("#idno7").change(function () {
+        if ($(this).val().length == 12) {
+            var idn = $(this).val();
+            var year = idn.substring(0, 2);
+
+            var cutoff = new Date().getFullYear() - 2000; //2022-2000=22cutoff
+           
+            var ww = (year > cutoff ? "19" : "20") + year;
+            var currentAge = new Date().getFullYear() - ww;
+            $("#age7").val(currentAge);
+        }
     });
 });
