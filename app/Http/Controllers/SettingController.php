@@ -931,12 +931,12 @@ class SettingController extends Controller
 
         // dd($result,$resultName);
 
-        return view('pages.setting.eleave.eleaveentitlement', $result,$resultName);
+        return view('pages.setting.eleave.eleaveentitlement', $result, $resultName);
     }
 
-     public function createLeaveEntitlement(Request $r)
+    public function createLeaveEntitlement(Request $r)
     {
-        
+
         $ss = new SettingService;
 
         $result = $ss->createLeaveEntitlement($r);
@@ -953,7 +953,7 @@ class SettingController extends Controller
         return $result;
     }
 
-     public function updateleaveEntitlement(Request $r, $id)
+    public function updateleaveEntitlement(Request $r, $id)
     {
         $ss = new SettingService;
 
@@ -967,11 +967,22 @@ class SettingController extends Controller
     //      return view('pages.setting.eleave.eleaveentitlement');
     // }
 
-    public function holidaylistView(){
-         return view('pages.setting.eleave.holidaylist');
+    public function holidaylistView()
+    {
+        return view('pages.setting.eleave.holidaylist');
     }
 
-    public function leavetypesView(){
-         return view('pages.setting.eleave.leavetypes');
+    public function leavetypesView()
+    {
+        return view('pages.setting.eleave.leavetypes');
+    }
+
+    public function updateClaimDate(Request $r)
+    {
+        $ss = new SettingService;
+
+        $result = $ss->updateClaimDate($r);
+
+        return response()->json($result);
     }
 }

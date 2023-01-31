@@ -50,7 +50,7 @@
                                         <a href="javascript:;" class="btn btn-primary btn-sm">Action</a>
                                         <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle btn-sm"><i class="fa fa-caret-down"></i></a>
                                         <div class="dropdown-menu dropdown-menu-end">
-                                            <a href="/eclaim/updatemontly" class="dropdown-item">Update Claim</a>
+                                            <a href="/monthClaimEditView/edit/{{ $claim->id }}" class="dropdown-item">Update Claim</a>
                                             <div class="dropdown-divider"></div>
                                             <a href="javascript:;" class="dropdown-item">Cancel Claim</a>
                                         </div>

@@ -54,6 +54,7 @@
                                                 <table id="generalclaim" class="table table-striped table-bordered align-middle">
                                                     <thead>
                                                         <tr>
+                                                            <th class="text-nowrap" style="display: none"></th>
                                                             <th class="text-nowrap">Year</th>
                                                             <th class="text-nowrap">Month</th>
                                                             <th class="text-nowrap">Status</th>
@@ -61,18 +62,37 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        {{-- <?php $months = month(); ?> --}}
-                                                        {{-- @foreach ($months as $key => $month) --}}
-                                                        <tr class="odd gradeX">
-                                                            <td>2023</td>
-                                                            <td>January</td>
-                                                            <td><span class="badge bg-lime">Open</span></td>
-                                                            {{-- <td><a href="/eclaim/updatemontly" type="button" class="btn btn-primary btn-sm">Update</a></td> --}}
-                                                            <td><a href="/newMonthlyClaimView" type="button" class="btn btn-primary btn-sm">+ Apply</a></td>
-                                                            {{-- <td><button type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal">+
-                                                                    Appeal</button></td> --}}
-                                                        </tr>
-                                                        {{-- @endforeach --}}
+                                                        <?php
+                                                        $dataDate['year'][] = date('Y');
+                                                        $dataDate['month'][] = date('F');
+                                                        $dataDate['value'][] = date('m');
+                                                        for ($i = 1; $i < claimDateSetting()->table_row_display; $i++) {
+                                                            $dataDate['month'][] = date('F', strtotime("-$i month"));
+                                                            $dataDate['year'][] = date('Y', strtotime("-$i month"));
+                                                            $dataDate['value'][] = date('m', strtotime("-$i month"));
+                                                        }
+                                                        // pr($dataDate['month']);
+                                                        foreach ($dataDate['month'] as $key => $month) {
+                                                            $monthData[] = [
+                                                                'month' => $dataDate['month'][$key],
+                                                                'year' => $dataDate['year'][$key],
+                                                                'value' => $dataDate['value'][$key],
+                                                            ];
+                                                        }
+                                                        // pr($monthData);
+                                                        ?>
+                                                        @foreach ($monthData as $data)
+                                                            <tr class="odd gradeX">
+                                                                <td style="display: none">{{ $data['value'] }}</td>
+                                                                <td>{{ $data['year'] }}</td>
+                                                                <td>{{ $data['month'] }}</td>
+                                                                <td><span class="badge bg-lime">Open</span></td>
+                                                                {{-- <td><a href="/eclaim/updatemontly" type="button" class="btn btn-primary btn-sm">Update</a></td> --}}
+                                                                <td><a href="/newMonthlyClaimView/{{ $data['value'] }}" type="button" class="btn btn-primary btn-sm">+ Apply</a></td>
+                                                                {{-- <td><button type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal">+ --}}
+                                                                {{-- Appeal</button></td> --}}
+                                                            </tr>
+                                                        @endforeach
                                                     </tbody>
                                                 </table>
                                             </div>

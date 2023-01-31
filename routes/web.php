@@ -251,6 +251,8 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('/createDomainList', 'createDomainList');
             Route::get('/getClaimCategoryContent/{id}', 'getClaimCategoryContent');
             Route::get('/getClaimCategoryById/{id}', 'getClaimCategoryById');
+            Route::post('/updateClaimDate', 'updateClaimDate');
+
 
             // eleave
             Route::get('/leaveEntitlement', 'eleaveEntitlementView');
@@ -365,11 +367,11 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('/myClaimView', 'myClaimView');
             Route::get('/generalClaimView', 'generalClaimView');
             Route::get('/cashAdvanceView', 'cashAdvanceView');
-            Route::get('/newMonthlyClaimView', 'newMonthlyClaimView');
+            Route::get('/newMonthlyClaimView/{month}', 'newMonthlyClaimView');
             Route::post('/submitPersonalClaim', 'submitPersonalClaim');
             Route::post('/submitTravelClaim', 'submitTravelClaim');
             Route::post('/submitSubsClaim', 'submitSubsClaim');
-            Route::get('/monthClaimEditView/{id}', 'monthClaimEditView');
+            Route::get('/monthClaimEditView/edit/{id}', 'monthClaimEditView');
         });
 
         Route::controller(generalClaimController::class)->group(function () {
