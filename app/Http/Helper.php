@@ -622,7 +622,7 @@ if (!function_exists('customer')) {
     function customer()
     {
         $data = Customer::where([['tenant_id', Auth::user()->tenant_id]])->get();
-
+            
         if (!$data) {
             $data = [];
         }
@@ -630,7 +630,18 @@ if (!function_exists('customer')) {
         return $data;
     }
 }
+if (!function_exists('customeractive')) {
+    function customeractive()
+    {
+        $data = Customer::where([['tenant_id', Auth::user()->tenant_id],['status', '=', 1]])->get();
+            
+        if (!$data) {
+            $data = [];
+        }
 
+        return $data;
+    }
+}
 if (!function_exists('projectLocation')) {
     function projectLocation()
     {
