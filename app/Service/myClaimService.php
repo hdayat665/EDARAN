@@ -312,6 +312,8 @@ class myClaimService
             $generalClaim['claim_id'] = 'MTC' . $monthlyClaimCount + 1;
             $generalClaim['claim_type'] = $input['claim_type'] ?? 'MTC';
             $generalClaim['status'] = 'draft';
+            $generalClaim['month'] = $input['month'] ?? '-';
+            $generalClaim['year'] = date('Y');
             // $generalClaim['total_amount'] = array_sum($input['amount']) ?? '';
 
             GeneralClaim::create($generalClaim);
@@ -319,6 +321,7 @@ class myClaimService
         } else {
             $generalClaimData = GeneralClaim::where([['tenant_id', Auth::user()->tenant_id], ['id', $id]])->orderBy('created_at', 'DESC')->first();
         }
+        unset($input['month']);
 
         if ($_FILES['file_upload']['name']) {
             $filename = upload($r->file('file_upload'));
@@ -330,6 +333,18 @@ class myClaimService
         $input['general_id'] = $generalClaimData->id;
 
         PersonalClaim::create($input);
+
+        $personalClaims = PersonalClaim::where([['tenant_id', Auth::user()->tenant_id], ['general_id', $generalClaimData->id]])->get();
+
+        foreach ($personalClaims as $claim) {
+            $total[] = $claim->amount;
+        }
+
+        $totalAmount = [
+            'total_amount' => $generalClaimData->amount ?? 0 + array_sum($total),
+        ];
+
+        GeneralClaim::where('id', $generalClaimData->id)->update($totalAmount);
 
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
@@ -359,6 +374,8 @@ class myClaimService
             $generalClaim['claim_id'] = 'MTC' . $monthlyClaimCount + 1;
             $generalClaim['claim_type'] = $input['claim_type'] ?? 'MTC';
             $generalClaim['status'] = 'draft';
+            $generalClaim['month'] = $input['month'] ?? '-';
+            $generalClaim['year'] = date('Y');
             // $generalClaim['total_amount'] = array_sum($input['amount']) ?? '';
 
             GeneralClaim::create($generalClaim);
@@ -366,6 +383,7 @@ class myClaimService
         } else {
             $generalClaimData = GeneralClaim::where([['tenant_id', Auth::user()->tenant_id], ['id', $id]])->orderBy('created_at', 'DESC')->first();
         }
+        unset($input['month']);
 
 
         if ($_FILES['file_upload']['name']) {
@@ -376,8 +394,22 @@ class myClaimService
         $input['user_id'] = Auth::user()->id;
         $input['tenant_id'] = Auth::user()->tenant_id;
         $input['general_id'] = $generalClaimData->id;
+        $input['amount'] = $input['toll'] + $input['millage'] + $input['petrol'] + $input['parking'];
+        $input['type_claim'] = 'travel';
 
         TravelClaim::create($input);
+
+        $travelClaims = TravelClaim::where([['tenant_id', Auth::user()->tenant_id], ['general_id', $generalClaimData->id]])->get();
+
+        foreach ($travelClaims as $claim) {
+            $total[] = $claim->amount;
+        }
+
+        $totalAmount = [
+            'total_amount' => $generalClaimData->amount ?? 0 + array_sum($total),
+        ];
+
+        GeneralClaim::where('id', $generalClaimData->id)->update($totalAmount);
 
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
@@ -408,6 +440,8 @@ class myClaimService
             $generalClaim['claim_id'] = 'MTC' . $monthlyClaimCount + 1;
             $generalClaim['claim_type'] = $input['claim_type'] ?? 'MTC';
             $generalClaim['status'] = 'draft';
+            $generalClaim['month'] = $input['month'] ?? '-';
+            $generalClaim['year'] = date('Y');
             // $generalClaim['total_amount'] = array_sum($input['amount']) ?? '';
 
             GeneralClaim::create($generalClaim);
@@ -415,6 +449,7 @@ class myClaimService
         } else {
             $generalClaimData = GeneralClaim::where([['tenant_id', Auth::user()->tenant_id], ['id', $id]])->orderBy('created_at', 'DESC')->first();
         }
+        unset($input['month']);
 
 
         if ($_FILES['file_upload']['name']) {
@@ -425,8 +460,22 @@ class myClaimService
         $input['user_id'] = Auth::user()->id;
         $input['tenant_id'] = Auth::user()->tenant_id;
         $input['general_id'] = $generalClaimData->id;
+        $input['amount'] = $input['total'];
+        $input['type_claim'] = 'subs';
 
         TravelClaim::create($input);
+
+        $travelClaims = TravelClaim::where([['tenant_id', Auth::user()->tenant_id], ['general_id', $generalClaimData->id]])->get();
+
+        foreach ($travelClaims as $claim) {
+            $total[] = $claim->amount;
+        }
+
+        $totalAmount = [
+            'total_amount' => $generalClaimData->amount ?? 0 + array_sum($total),
+        ];
+
+        GeneralClaim::where('id', $generalClaimData->id)->update($totalAmount);
 
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
@@ -454,6 +503,13 @@ class myClaimService
     public function getPersonalClaimByGeneralId($id = '')
     {
         $data = PersonalClaim::where('general_id', $id)->get();
+
+        return $data;
+    }
+
+    public function getGeneralClaimById($id = '')
+    {
+        $data = GeneralClaim::where('id', $id)->first();
 
         return $data;
     }

@@ -7,6 +7,7 @@ use App\Models\ApprovelRoleGeneral;
 use App\Models\Branch;
 use App\Models\ClaimCategory;
 use App\Models\ClaimCategoryContent;
+use App\Models\ClaimDateSetting;
 use App\Models\Company;
 use App\Models\Department;
 use App\Models\Designation;
@@ -1673,14 +1674,14 @@ class SettingService
         return $data;
     }
 
-    public function leaveNameStaff(){
+    public function leaveNameStaff()
+    {
         $data['nameStaff'] = UserProfile::where('userprofile.tenant_id', Auth::user()->tenant_id)
-                            ->leftJoin('employment', 'userprofile.user_id', '=', 'employment.user_id')
-                            ->leftJoin('department', 'employment.department', '=', 'department.id')
-                            ->select('userprofile.user_id', 'userprofile.fullname', 'department.departmentName')
-                            ->get();
+            ->leftJoin('employment', 'userprofile.user_id', '=', 'employment.user_id')
+            ->leftJoin('department', 'employment.department', '=', 'department.id')
+            ->select('userprofile.user_id', 'userprofile.fullname', 'department.departmentName')
+            ->get();
         return $data;
-    
     }
 
     public function createLeaveEntitlement($r)
@@ -1705,15 +1706,15 @@ class SettingService
         $data5 = $input['lapsed'];
 
         $input = [
-                'id_userprofile' => $data1,
-                'id_employment' => $data2,
-                'id_department' => $data3,
-                'tenant_id' => $data4,
-                'lapse' => $data5
-            ];
+            'id_userprofile' => $data1,
+            'id_employment' => $data2,
+            'id_department' => $data3,
+            'tenant_id' => $data4,
+            'lapse' => $data5
+        ];
 
         leaveEntitlementModel::create($input);
-        
+
 
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
@@ -1730,7 +1731,7 @@ class SettingService
         return $data;
     }
 
-     public function updateleaveEntitlement($r, $id)
+    public function updateleaveEntitlement($r, $id)
     {
         $input = $r->input();
 
@@ -1743,19 +1744,19 @@ class SettingService
         $data1 = $input['CurrentEntitlementBalance'];
         $data2 = $input['SickLeaveEntitlement'];
         $data3 = $input['CarryForward'];
-        $data4= $input['CurrentForwardBalance'];
+        $data4 = $input['CurrentForwardBalance'];
         $data5 = $input['LapsedDate'];
         $data6 = $input['Lapsed'];
 
 
-         $input = [
-                'current_entitlement_balance' => $data1,
-                'sick_leave_entitlement' => $data2,
-                'carry_forward' => $data3,
-                'carry_forward_balance' => $data4,
-                'lapsed_date' => $data5,
-                'lapse' => $data6
-            ];
+        $input = [
+            'current_entitlement_balance' => $data1,
+            'sick_leave_entitlement' => $data2,
+            'carry_forward' => $data3,
+            'carry_forward_balance' => $data4,
+            'lapsed_date' => $data5,
+            'lapse' => $data6
+        ];
 
         leaveEntitlementModel::where('id', $id)->update($input);
 
@@ -1767,7 +1768,7 @@ class SettingService
         return $data;
     }
 
-     public function holidaylistView()
+    public function holidaylistView()
     {
         $data['holiday'] = holidayModel::where('tenant_id', Auth::user()->tenant_id)->get();
 
@@ -1797,16 +1798,16 @@ class SettingService
         $data6 = 1;
 
         $input = [
-                'holiday_title' => $data1,
-                'start_date' => $data2,
-                'end_date' => $data3,
-                'annual_date' => $data4,
-                'tenant_id' => $data5,
-                'status' => $data6
-            ];
+            'holiday_title' => $data1,
+            'start_date' => $data2,
+            'end_date' => $data3,
+            'annual_date' => $data4,
+            'tenant_id' => $data5,
+            'status' => $data6
+        ];
 
         holidayModel::create($input);
-        
+
 
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
@@ -1835,12 +1836,12 @@ class SettingService
         $data4 = $input['flexRadioDefault'];
 
 
-         $input = [
-                'holiday_title' => $data1,
-                'start_date' => $data2,
-                'end_date' => $data3,
-                'annual_date' => $data4,
-            ];
+        $input = [
+            'holiday_title' => $data1,
+            'start_date' => $data2,
+            'end_date' => $data3,
+            'annual_date' => $data4,
+        ];
 
         holidayModel::where('id', $id)->update($input);
 
@@ -1852,7 +1853,7 @@ class SettingService
         return $data;
     }
 
-     public function deleteLeaveholiday($id)
+    public function deleteLeaveholiday($id)
     {
         $logs = holidayModel::find($id);
 
@@ -1888,7 +1889,7 @@ class SettingService
     }
 
 
-     public function leavetypesView()
+    public function leavetypesView()
     {
         $data['types'] = leavetypesModel::where('tenant_id', Auth::user()->tenant_id)->get();
 
@@ -1896,7 +1897,7 @@ class SettingService
     }
 
 
-     public function createtypes($r)
+    public function createtypes($r)
     {
         $input = $r->input();
 
@@ -1917,14 +1918,14 @@ class SettingService
         $data5 = Auth::user()->tenant_id;
 
         $input = [
-                'leave_types_code' => $data1,
-                'leave_types' => $data2,
-                'day' => $data3,
-                'tenant_id' => $data5
-            ];
+            'leave_types_code' => $data1,
+            'leave_types' => $data2,
+            'day' => $data3,
+            'tenant_id' => $data5
+        ];
 
         leavetypesModel::create($input);
-        
+
 
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
@@ -1942,7 +1943,7 @@ class SettingService
     }
 
 
-     public function updateLeaveleavetypes($r, $id)
+    public function updateLeaveleavetypes($r, $id)
     {
         $input = $r->input();
 
@@ -1953,11 +1954,11 @@ class SettingService
         $data3 = $input['day'];
 
 
-         $input = [
-                'leave_types_code' => $data1,
-                'leave_types' => $data2,
-                'day' => $data3,
-            ];
+        $input = [
+            'leave_types_code' => $data1,
+            'leave_types' => $data2,
+            'day' => $data3,
+        ];
 
         leavetypesModel::where('id', $id)->update($input);
 
@@ -1969,7 +1970,7 @@ class SettingService
         return $data;
     }
 
-     public function deleteLeavetypes($id)
+    public function deleteLeavetypes($id)
     {
         $logs = leavetypesModel::find($id);
 
@@ -2004,8 +2005,22 @@ class SettingService
         return $data;
     }
 
+    public function updateClaimDate($r)
+    {
+        $input = $r->input();
 
-    
+        $ecData = ClaimDateSetting::where('tenant_id', Auth::user()->tenant_id)->first();
+        $input['tenant_id'] = Auth::user()->tenant_id;
+        $input['user_id'] = Auth::user()->id;
+        if ($ecData) {
 
+            ClaimDateSetting::where('id', $ecData->id)->update($input);
+            $data['msg'] = 'Success update claim date setting';
+        } else {
+            ClaimDateSetting::create($input);
+            $data['msg'] = 'Success update claim date setting';
+        }
 
+        return $data;
+    }
 }

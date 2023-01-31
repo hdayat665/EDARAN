@@ -56,6 +56,7 @@ requirejs.config({
         viewGNSJs: assets + "/js/viewGNSJs",
         editCashAdvanceJs: assets + "/js/editCashAdvanceJs",
         monthlyClaimJs: assets + "/js/monthlyClaimJs",
+        eclaimDateJs: assets + "/js/eclaimDateJs",
 
         // 'main': 'assets/backend/js/main',
         sweetAlert2: assets + "/assets/sweetalert2/sweetalert2",
@@ -300,6 +301,10 @@ if ($("#eleaveholidayJs").length > 0) {
 
 if ($("#eleavetypesJs").length > 0) {
     requirejs(["eleavetypesJs"]);
+}
+
+if ($("#eclaimDateJs").length > 0) {
+    requirejs(["eclaimDateJs"]);
 }
 
 // Global function
