@@ -292,11 +292,10 @@ $("document").ready(function () {
                             allowOutsideClick: false,
                             allowEscapeKey: false,
                         }).then(function () {
-                            alert(data.id);
                             if (data.type == "error") {
                             } else {
                                 window.location.href =
-                                    "/monthClaimEditView/" + data.id;
+                                    "/monthClaimEditView/edit/" + data.id;
                                 // location.reload();
                             }
                         });
@@ -336,11 +335,10 @@ $("document").ready(function () {
                             allowOutsideClick: false,
                             allowEscapeKey: false,
                         }).then(function () {
-                            alert(data.id);
                             if (data.type == "error") {
                             } else {
                                 window.location.href =
-                                    "/monthClaimEditView/" + data.id;
+                                    "/monthClaimEditView/edit/" + data.id;
                                 // location.reload();
                             }
                         });
@@ -380,11 +378,10 @@ $("document").ready(function () {
                             allowOutsideClick: false,
                             allowEscapeKey: false,
                         }).then(function () {
-                            alert(data.id);
                             if (data.type == "error") {
                             } else {
                                 window.location.href =
-                                    "/monthClaimEditView/" + data.id;
+                                    "/monthClaimEditView/edit/" + data.id;
                                 // location.reload();
                             }
                         });

@@ -15,7 +15,8 @@
                                 <label class="form-label">Applied Date</label>
                             </div>
                             <div class="col-md-8">
-                                <input type="hidden" name="general_id" value="{{ Request::segment(2) }}">
+                                <input type="hidden" name="general_id" value="{{ Request::segment(3) }}">
+                                <input type="hidden" value="{{ isset($month_id) ? month($month_id) : $month }}" name="month">
                                 <input type="text" class="form-control" name="applied_date" id="datepickerpc">
                             </div>
                         </div>
@@ -93,8 +94,9 @@
                                 <label class="form-label">Travel Date</label>
                             </div>
                             <div class="col-md-8">
-                                <input type="hidden" name="general_id" value="{{ Request::segment(2) }}">
-                                <input type="text " class="form-control" id="datepickertc" name="travel_date">
+                                <input type="hidden" name="general_id" value="{{ Request::segment(3) }}">
+                                <input type="hidden" value="{{ isset($month_id) ? month($month_id) : $month }}" name="month">
+                                <input type="hidden " class="form-control" id="datepickertc" name="travel_date">
                             </div>
                         </div>
                         <div class="row p-2">
@@ -350,7 +352,8 @@
                             </div>
                             <div class="col-md-8">
                                 <input type="file" class="form-control-file" id="" name="file_upload">
-                                <input type="hidden" name="general_id" value="{{ Request::segment(2) }}">
+                                <input type="hidden" name="general_id" value="{{ Request::segment(3) }}">
+                                <input type="hidden" value="{{ isset($month_id) ? month($month_id) : $month }}" name="month">
 
                             </div>
                         </div>
