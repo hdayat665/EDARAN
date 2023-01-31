@@ -659,7 +659,7 @@ if (!function_exists('projectLocation')) {
 if (!function_exists('getEmployee')) {
     function getEmployee()
     {
-        $data = Employee::where('tenant_id', Auth::user()->tenant_id)->get();
+        $data = Employee::where([['tenant_id', Auth::user()->tenant_id],['employeeid', '!=', null]])->get();
 
         if (!$data) {
             $data = [];

@@ -459,9 +459,9 @@
     
 
     <p class="text-end mb-0">
-        <a href="javascript:;" id="prev_btn_addr_det" class="btn btn-white me-5px">Previous</a> 
+        <!-- <a href="javascript:;" id="prev_btn_addr_det" class="btn btn-white me-5px">Previous</a>  -->
        
-        <button id="submitAddress" class="btn btn-primary">Next</button>
+        <button id="submitAddress" class="btn btn-primary">Save</button>
     </p>
     </form>
 

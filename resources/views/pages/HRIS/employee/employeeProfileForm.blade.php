@@ -320,7 +320,7 @@
         <p class="text-end mb-0">
            
             
-            <button type="submit" id="submitProfile" class="btn btn-primary">Next</button>
+            <button type="submit" id="submitProfile" class="btn btn-primary">Save</button>
             
         </p>
         </form>
