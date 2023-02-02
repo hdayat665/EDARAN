@@ -1,4 +1,8 @@
+
+
 $(document).ready(function() {
+
+    
 
     $("#datepicker-joindate").datepicker({
         todayHighlight: true,
@@ -1274,11 +1278,13 @@ $(document).ready(function() {
     });
     $("#starteventdate").datepicker({
         todayHighlight: true,
-        autoclose: true
+        autoclose: true,
+        format: 'mm/dd/yyyy'
     });
     $("#endeventdate").datepicker({
         todayHighlight: true,
-        autoclose: true
+        autoclose: true,
+        format: 'mm/dd/yyyy'
     });
     $('#projectlocsearch').picker({ search: true });
     $('#addneweventprojectlocsearch').picker({ search: true });
@@ -1292,12 +1298,15 @@ $(document).ready(function() {
             showMeridian: false,
         });
         starteventtime
-        $("#starteventtime").timepicker({
-            showMeridian: false,
+        $('#starteventtime,#endeventtime').mdtimepicker({
+       
         });
-        $("#endeventtime").timepicker({
-            showMeridian: false,
-        });
+        // $("#starteventtime").timepicker({
+        //     showMeridian: false,
+        // });
+        // $("#endeventtime").timepicker({
+        //     showMeridian: false,
+        // });
     })
 
     $(document).on('change', "#typeoflog", function() {
@@ -1679,4 +1688,25 @@ $(document).ready(function() {
     });
 
 });
+$("#duration,#starteventdate,#starteventtime,#endeventdate,#endeventtime").focus(function () {
+
+    var startdt = new Date($("#starteventdate").val() + " " + $("#starteventtime").val());
+    
+    var enddt = new Date($("#endeventdate").val() + " " + $("#endeventtime").val());
+
+    var diff = enddt - startdt;
+    
+    var days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    diff -=  days * (1000 * 60 * 60 * 24);
+    
+    var hours = Math.floor(diff / (1000 * 60 * 60));
+    diff -= hours * (1000 * 60 * 60);
+    
+    var mins = Math.floor(diff / (1000 * 60));
+    diff -= mins * (1000 * 60);
+    
+    $("#duration").val(days + " days : " + hours + " hours : " + mins + " minutes ");
+    
+
+     });
 // });// });
