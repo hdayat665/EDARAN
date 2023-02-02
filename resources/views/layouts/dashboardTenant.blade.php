@@ -40,13 +40,17 @@
     <link href="/assets/plugins/@fullcalendar/list/main.min.css" rel="stylesheet" />
     <link href="/assets/plugins/@fullcalendar/bootstrap/main.min.css" rel="stylesheet" />
     <link href="/assets/plugins/timepicker/css/mdtimepicker.css" rel="stylesheet" type="text/css">
-
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.1/dist/sweetalert2.min.css" rel="stylesheet">
     <style>
         .error {
             /* margin-top:2.4rem !important; */
             color: red !important;
             text-align: left !important;
             height: auto !important;
+        }
+
+        .swal2-icon.swal2-info {
+            font-size: 20px !important
         }
     </style>
     <!-- ================== END page-css ================== -->
@@ -837,10 +841,7 @@
 
 
 
-
-
-
-
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.1/dist/sweetalert2.all.min.js"></script>
 
 <script>
     $('#data-table-default-announcement').DataTable({
