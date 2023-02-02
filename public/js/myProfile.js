@@ -282,8 +282,6 @@ $(document).ready(function() {
                 fullName:"required",
                 gender:"required",
                 maritialStatus:"required",
-                religion:"required",
-                race:"required",
                 idNo: {
                     required: true,
                     digits: true,
@@ -292,6 +290,7 @@ $(document).ready(function() {
                 phoneNo: {
                     required: true,
                     digits: true,
+                    rangelength: [10, 11]
                     
                 },
                 homeNo: {
@@ -310,19 +309,19 @@ $(document).ready(function() {
 
             messages: {
                 personalEmail: {
-                    required: "Please Insert Email Address",
+                    required: "Please Insert Personal Email",
                     email: "Please Provide Valid Email Address",
                     
                 },
-                firstName: "Please Insert Your First Name",
-                lastName: "Please Insert Your Last Name",
-                fullName:"Please Insert Your Full Name",
-                gender:"Please Choose Your Gender",
-                maritialStatus:"Please Choose Your Marital Status",
-                religion:"Please Choose Your Religion",
-                race:"Please Choose Your Race",
+                firstName: "Please Insert First Name",
+                lastName: "Please Insert Last Name",
+                fullName:"Please Insert Full Name",
+                gender:"Please Choose Gender",
+                maritialStatus:"Please Choose Marital Status",
+                religion:"Please Choose Religion",
+                race:"Please Choose Race",
                 idNo: {
-                    required: "Please Insert Identification Number",
+                    required: "Please Insert New Identification Number",
                     digits: "Please Insert Correct Identification Number Without ' - ' or Space",
                     rangelength: "Please Provide Valid Identification Number"
                 },
@@ -444,23 +443,23 @@ $(document).ready(function() {
             },
 
             messages: {
-                address1: "Please Insert Your Address",
-                city: "Please Insert Your City",
-                state: "Please Choose Your State",
+                address1: "Please Insert Address",
+                city: "Please Insert City",
+                state: "Please Choose State",
                 country: "required",
                 postcode: {
-                    required: "Please Insert Your Postcode",
-                    digits: "Please Enter Valid Postcode",
-                    rangelength: "Please Enter Valid Postcode"
+                    required: "Please Insert Postcode",
+                    digits: "Please Insert Valid Postcode",
+                    rangelength: "Please Insert Valid Postcode"
                 },
-                address1c: "Please Insert Your Address",
-                cityc: "Please Insert Your City",
-                statec: "Please Choose Your State",
+                address1c: "Please Insert Address",
+                cityc: "Please Insert City",
+                statec: "Please Choose State",
                 countryc: "required",
                 postcodec: {
-                    required: "Please Insert Your Postcode",
-                    digits: "Please Enter Valid Postcode",
-                    rangelength: "Please Enter Valid Postcode"
+                    required: "Please Insert Postcode",
+                    digits: "Please Insert Valid Postcode",
+                    rangelength: "Please Insert Valid Postcode"
                 },
                 
                
@@ -515,9 +514,11 @@ $(document).ready(function() {
                 
                 firstName: "required",
                 lastName: "required",
+                relationship: "required",
                 contactNo: {
                     required: true,
                     digits: true,
+                    rangelength: [10, 11]
                     
                 },
                 relationship: "required",
@@ -534,17 +535,18 @@ $(document).ready(function() {
             messages: {
                 firstName: "Please Insert First Name",
                 lastName: "Please Insert Last Name",
+                relationship: "Please Choose Relationship",
                 contactNo: {
                     required: "Please Insert Contact Number",
-                    digits: "Please Enter Correct Contact Number",
+                    digits: "Please Insert Correct Contact Number",
                     
                 },
                 relationship: "Please Insert Relationship",
                 address1: "Please Insert Address",
                 postcode: {
-                    required: "Please Insert Your Postcode",
-                    digits: "Please Enter Valid Postcode",
-                    rangelength: "Please Enter Valid Postcode"
+                    required: "Please Insert Postcode",
+                    digits: "Please Insert Valid Postcode",
+                    rangelength: "Please Insert Valid Postcode"
                 },
                 city: "Please Insert City",
                 state: "Please Choose State",
@@ -634,13 +636,10 @@ $(document).ready(function() {
                 },
                 contactNo: {
                     digits: true,
+                    rangelength: [10, 11]
                     
                 },
-                age: {
-                    required: true,
-                    digits: true,
-                    
-                },
+                
                 address1: "required",
                 city: "required",
                 state: "required",
@@ -658,27 +657,25 @@ $(document).ready(function() {
                 firstName: "Please Insert First Name",
                 lastName: "Please Insert Last Name",
                 idNo: {
-                    required: "Please Insert Identification Number",
+                    required: "Please Insert New Identification Number",
                     digits: "Please Insert Correct Identification Number Without ' - ' or Space",
-                    rangelength: "Please Provide Valid Identification Number"
+                    rangelength: "Please insert Valid Identification Number"
                 },
                 contactNo: {
+                    required: "Please Insert Contact Number",
                     digits: "Please Insert Correct Contact Number Without ' - ' or Space",
+                    rangelength: "Please Insert Valid Contact Number "
                     
                 },
-                age: {
-                    required: "Please Insert Age",
-                    digits: "Please Insert Correct Age",
-                    
-                },
-                address1: "Please Insert Your Address",
-                city: "Please Insert Your City",
-                state: "Please Choose Your State",
+               
+                address1: "Please Insert Address",
+                city: "Please Insert City",
+                state: "Please Choose State",
                 country: "required",
                 postcode: {
-                    required: "Please Insert Your Postcode",
-                    digits: "Please Enter Valid Postcode",
-                    rangelength: "Please Enter Valid Postcode"
+                    required: "Please Insert Postcode",
+                    digits: "Please Insert Valid Postcode",
+                    rangelength: "Please Insert Valid Postcode"
                 },
                 
             },
@@ -1003,34 +1000,18 @@ submitHandler: function(form) {
                     digits: true,
                     rangelength: [12, 12]
                 },
-                age: {
-                    required: true,
-                    digits: true,
-                    
-                },
-                gender:"required",
-                maritalStatus:"required",
-                
-                
+                                
             },
 
             messages: {
                 firstName: "Please Insert First Name",
                 lastName: "Please Insert Last Name",
                 idNo: {
-                    required: "Please Insert Identification Number",
+                    required: "Please Insert New Identification Number",
                     digits: "Please Insert Correct Identification Number Without ' - ' or Space",
-                    rangelength: "Please Provide Valid Identification Number"
+                    rangelength: "Please Insert Valid Identification Number"
                 },
-                age: {
-                    required: "Please Insert Age",
-                    digits: "Please Insert Correct Age",
-                    
-                },
-                gender:"Please Choose Gender",
-                maritalStatus:"Please Choose Marital Status",
                 
-
             },
             submitHandler: function(form) {
 
@@ -1325,6 +1306,7 @@ submitHandler: function(form) {
                 contactNo: {
                     digits: true,
                     required: true,
+                    rangelength: [10, 11]
                     
                 },
                 relationship: "required",
@@ -1346,15 +1328,16 @@ submitHandler: function(form) {
                 gender: "Please Choose Gender",
                 contactNo: {
                     digits: "Please Insert Correct Contact Number Without ' - ' or Space",
-                    required: "please insert contact number"
+                    required: "Please Insert Contact Number",
+                    rangelength: "Please Enter Valid Contact Number"
                     
                 },
                 relationship: "Please Choose Relationship",
                 address1: "Please Insert Address",
                 postcode: {
                     required: "Please Insert Your Postcode",
-                    digits: "Please Enter Valid Postcode",
-                    rangelength: "Please Enter Valid Postcode"
+                    digits: "Please Insert Valid Postcode",
+                    rangelength: "Please Insert Valid Postcode"
                 },
                 city: "Please Insert City",
                 state: "Please Choose State",
@@ -1598,6 +1581,7 @@ submitHandler: function(form) {
                 contactNo: {
                     required: true,
                     digits: true,
+                    rangelength: [10, 11]
                     
                 },
                 relationship:"required",
@@ -1612,24 +1596,25 @@ submitHandler: function(form) {
             },
 
             messages: {
-                firstName: "PLEASE INSERT FIRST NAME",
-                lastName: "PLEASE INSERT LAST NAME",
-                DOB: "PLEASE INSERT DATE OF BIRTH",
-                gender: "PLEASE CHOOSE GENDER",
+                firstName: "Please Insert First Name",
+                lastName: "Please Insert Last Name",
+                DOB: "Please Insert Date Of Birth",
+                gender: "Please Choose Gender",
                 contactNo: {
-                    required: "PLEASE INSERT CONTACT NUMBER",
-                    digits: "PLEASE INSERT VALID CONTACT NUMBER WITHOUT ' - ' AND SPACE",
+                    required: "Please Insert Contact Number",
+                    digits: "Please Insert Valid Contact Number Without ' - ' And Space",
+                    rangelength: "Please Insert Valid Contact Number"
                     
                 },
-                relationship:"PLEASE CHOOSE RELATIONSHIP",
-                address1:"PLEASE INSERT ADDRESS",
+                relationship:"Please Choose Relationship",
+                address1:"Please Insert Address",
                 postcode: {
-                    required: "PLEASE INSERT YOUR POSTCODE",
-                    digits: "PLEASE ENTER VALID POSTCODE",
-                    rangelength: "PLEASE ENTER VALID POSTCODE"
+                    required: "Please Insert Postcode",
+                    digits: "Please Insert Valid Postcode",
+                    rangelength: "Please Insert Valid Postcode"
                 },
-                city:"PLEASE INSERT CITY",
-                state:"PLEASE CHOOSE STATE",
+                city:"Please Insert City",
+                state:"Please Choose State",
             },
 
 submitHandler: function(form) {
@@ -1914,10 +1899,10 @@ submitHandler: function(form) {
             },
 
             messages: {
-                current_password: "Please enter your current password",
+                current_password: "Please Insert Current Password",
                
                 password: {
-                    required: "Please enter new Password <br/>*The password Password must at least have 8 characters <br/>*Password must contain at least one digit and one uppercase character<br/>*    Password must at least contain one special character",
+                    required: "Please Insert New Password <br/>*The Password must at least have 8 characters <br/>*Password must contain at least one digit and one uppercase character<br/>*    Password must at least contain one special character",
                     minlength: "*The password Password must at least have 8 characters <br/>*Password must contain at least one digit and one uppercase character<br/>*    Password must at least contain one special character",
                     mypassword: "*The password Password must at least have 8 characters <br/>*Password must contain at least one digit and one uppercase character<br/>*    Password must at least contain one special character",
                     pwcheckspechars: "*The password Password must at least have 8 characters <br/>*Password must contain at least one digit and one uppercase character<br/>*    Password must at least contain one special character"

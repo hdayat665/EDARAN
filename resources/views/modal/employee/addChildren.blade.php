@@ -64,11 +64,11 @@
                             </div>
                         </div>
                         <div class="col-sm-3">
-                            <label for="expirydate" class="form-label">Expiry Date</label>
+                            <label for="expirydate" class="form-label">Expiry Date*</label>
                             <input type="text" id="expiryDateChild" name="expiryDate" class="form-control" aria-describedby="expirydate" style="pointer-events: none;" readonly>
                         </div>
                         <div class="col-sm-3">
-                            <label for="issuing-country" class="form-label">Issuing Country</label>
+                            <label for="issuing-country" class="form-label">Issuing Country*</label>
                             <select class="form-select" name="issuingCountry" id="">
                                 <option value="MY" label="Malaysia" selected ></option>
                                 <optgroup id="country-optgroup-Americas" label="Americas">
@@ -137,7 +137,7 @@
                         <div class="col-sm-6">
                             <div class="row">
                                 <div class="col-sm-6">
-                                    <label for="dob" class="form-label" style="color: red">OKU Attachment</label>
+                                    <label for="dob" class="form-label" style="color: red">OKU Attachment*</label>
                                     <input type="file" id="okuattach3" name="" class="form-control" style="pointer-events: none" aria-describedby="">
                                 </div>
                             </div>
@@ -207,7 +207,7 @@
                             </select>
                         </div>
                         <div class="col-sm-6">
-                            <label for="country" class="form-label" style="color: red">Country</label>
+                            <label for="country" class="form-label" style="color: red">Country*</label>
                             <select class="form-select" name="" id="" value="" style="text-transform:uppercase" >
                                 <option value="MY" label="Malaysia" selected ></option>
                                 <optgroup id="country-optgroup-Americas" label="Americas">
@@ -302,11 +302,11 @@
                             </div>
                         </div>
                         <div class="col-sm-3">
-                            <label for="expirydate" class="form-label">Expiry Date</label>
+                            <label for="expirydate" class="form-label">Expiry Date*</label>
                             <input type="text" id="expiryDate1" name="expiryDate" class="form-control" aria-describedby="expirydate">
                         </div>
                         <div class="col-sm-3">
-                            <label for="issuing-country" class="form-label">Issuing Country</label>
+                            <label for="issuing-country" class="form-label">Issuing Country*</label>
                             <select class="form-select" name="issuingCountry" id="issuingCountry1">
                                 <optgroup id="country-optgroup-Americas" label="Americas">
                                     @foreach ($americass as $key => $america)
@@ -371,7 +371,7 @@
                         <div class="col-sm-6">
                             <div class="row">
                                 <div class="col-sm-6">
-                                    <label for="dob" class="form-label" style="color: red">OKU Attachment</label>
+                                    <label for="dob" class="form-label" style="color: red">OKU Attachment*</label>
                                     <input type="file" id="okuattach4" name="" class="form-control" style="pointer-events: none" aria-describedby="">
                                 </div>
                             </div>
@@ -440,7 +440,7 @@
                             </select>
                         </div>
                         <div class="col-sm-6">
-                            <label for="country" class="form-label" style="color: red">Country</label>
+                            <label for="country" class="form-label" style="color: red">Country*</label>
                             <select class="form-select" name="" id="" value="" style="text-transform:uppercase" >
                                 <option value="MY" label="Malaysia" selected ></option>
                                 <optgroup id="country-optgroup-Americas" label="Americas">

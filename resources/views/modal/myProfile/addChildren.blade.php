@@ -71,14 +71,14 @@
                                     <input type="text" id="passportChild" name="passport"  class="form-control" aria-describedby="passport">
                                 </div>
                                 {{-- <div class="col-sm-6">
-                                    <label for="expirydate" class="form-label">Expiry Date</label>
+                                    <label for="expirydate" class="form-label">Expiry Date*</label>
                                     <input type="text" id="expiryDateChild" name="expiryDate"  placeholder="YYYY-MM-DD" class="form-control" aria-describedby="expirydate" style="pointer-events: none;" readonly>
                                 
                                 </div> --}}
                             </div>
                         </div>
                           <div class="col-sm-3">
-                                    <label for="expirydate" class="form-label">Expiry Date</label>
+                                    <label for="expirydate" class="form-label">Expiry Date*</label>
                                     <input type="text" id="expiryDateChild" name="expiryDate"  placeholder="YYYY-MM-DD" class="form-control" aria-describedby="expirydate" style="pointer-events: none;" readonly>
                                   
                                 </div>
@@ -151,7 +151,7 @@
                         <div class="col-sm-6">
                             <div class="row">
                                 <div class="col-sm-6">
-                                    <label for="dob" class="form-label" style="color: red;">OKU Attachment</label>
+                                    <label for="dob" class="form-label" style="color: red;">OKU Attachment*</label>
                                     <input type="file" id="okuattach3" name="" class="form-control" style="pointer-events: none" aria-describedby="">
                                 </div>
                             </div>
@@ -223,7 +223,7 @@
                             </select>
                         </div>
                         <div class="col-sm-6">
-                            <label for="country" class="form-label" style="color: red;">Country</label>
+                            <label for="country" class="form-label" style="color: red;">Country*</label>
                             <select class="form-select" name="country" id="countrycom" value="{{ $companion->country ?? '' }}" style="text-transform:uppercase" >
                                 <option value="MY" label="Malaysia" selected ></option>
                                 <optgroup id="country-optgroup-Americas" label="Americas">
@@ -325,11 +325,11 @@
                             </div>
                         </div>
                          <div class="col-sm-3">
-                                    <label for="expirydate" class="form-label">Expiry Date</label>
+                                    <label for="expirydate" class="form-label">Expiry Date*</label>
                                     <input type="text" id="expiryDate1" name="expiryDate"  value="{{ date_format(date_create($children->expiryDate ?? null), 'Y-m-d') ?? '' }}" placeholder="YYYY-MM-DD"  class="form-control" aria-describedby="expirydate" style="pointer-events: none;" readonly>
                                 </div>
                         <div class="col-sm-3">
-                            <label for="issuing-country" class="form-label">Issuing Country</label>
+                            <label for="issuing-country" class="form-label">Issuing Country*</label>
                             <select class="form-select" name="issuingCountry" id="issuingCountry1">
                                 <optgroup id="country-optgroup-Americas" label="Americas">
                                     @foreach ($americass as $key => $america)
@@ -388,7 +388,7 @@
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
-                                    <label for="lastname" class="form-label" style="color: red;">OKU Card Number</label>
+                                    <label for="lastname" class="form-label" style="color: red;">OKU Card Number*</label>
                                     <input type="text" id="okucard4" name="" value="" class="form-control" readonly aria-describedby="" >
                                 </div>
                             </div>
@@ -396,7 +396,7 @@
                         <div class="col-sm-6">
                             <div class="row">
                                 <div class="col-sm-6">
-                                    <label for="dob" class="form-label" style="color: red;">OKU Attachment</label>
+                                    <label for="dob" class="form-label" style="color: red;">OKU Attachment*</label>
                                     <input type="file" id="okuattach4" name="" class="form-control" style="pointer-events: none" aria-describedby="" >
                                 </div>
                             </div>
@@ -465,7 +465,7 @@
                             </select>
                         </div>
                         <div class="col-sm-6">
-                            <label for="country" class="form-label" style="color: red;">Country</label>
+                            <label for="country" class="form-label" style="color: red;">Country*</label>
                             <select class="form-select" name="" id="countrycom" value="{{ $companion->country ?? '' }}" style="text-transform:uppercase" >
                                 <option value="MY" label="Malaysia" selected ></option>
                                 <optgroup id="country-optgroup-Americas" label="Americas">
@@ -539,7 +539,7 @@
                                 </div>
                                 
                                 <div class="col-sm-6">
-                                    <label for="lastname" class="form-label">New Identification Number</label>
+                                    <label for="lastname" class="form-label">New Identification Number*</label>
                                     <input type="text" id="idnumber5" name="idNo" value="{{$children->idNo ?? ''}}" class="form-control" aria-describedby="lastname" readonly>
                                 </div>
                             </div>
@@ -563,11 +563,11 @@
                             </div>
                         </div>
                          <div class="col-sm-3">
-                                    <label for="expirydate" class="form-label">Expiry Date</label>
+                                    <label for="expirydate" class="form-label">Expiry Date*</label>
                                     <input type="date" id="expiryDate" name="expiryDate" class="form-control" aria-describedby="expirydate" readonly>
                                 </div>
                         <div class="col-sm-3">
-                            <label for="issuing-country" class="form-label">Issuing Country</label>
+                            <label for="issuing-country" class="form-label">Issuing Country*</label>
                             <select class="form-select" name="issuingCountry" id="issuingCountry" >
                                 <optgroup id="country-optgroup-Americas" label="Americas">
                                     @foreach ($americass as $key => $america)
@@ -624,7 +624,7 @@
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
-                                    <label for="lastname" class="form-label" style="color: red;">OKU Card Number</label>
+                                    <label for="lastname" class="form-label" style="color: red;">OKU Card Number*</label>
                                     <input type="number" id="" name="" value="" class="form-control" readonly >
                                     
                                 </div>
@@ -633,7 +633,7 @@
                         <div class="col-sm-6">
                             <div class="row">
                                 <div class="col-sm-6">
-                                    <label for="dob" class="form-label" style="color: red;">OKU Attachment</label>
+                                    <label for="dob" class="form-label" style="color: red;">OKU Attachment*</label>
                                     <input type="file" id="" name="" class="form-control" aria-describedby="">
                                 </div>
                             </div>
@@ -672,7 +672,7 @@
                     </div>
                     <div class="row p-2">
                         <div class="col-sm-6">
-                            <label for="address1" class="form-label" style="color: red;">Address 1</label>
+                            <label for="address1" class="form-label" style="color: red;">Address 1*</label>
                             <input type="text" id="" name="" value="" class="form-control" aria-describedby="" readonly style="text-transform:uppercase">
                         </div>
                         <div class="col-sm-6">
@@ -682,17 +682,17 @@
                     </div>
                     <div class="row p-2">
                         <div class="col-sm-6">
-                            <label for="" class="form-label" style="color: red;">City</label>
+                            <label for="" class="form-label" style="color: red;">City*</label>
                             <input type="text" id="" name="citycom" value="" class="form-control" readonly style="text-transform:uppercase">
                         </div>
                         <div class="col-sm-6">
-                            <label for="" class="form-label" style="color: red;">Postcode</label>
+                            <label for="" class="form-label" style="color: red;">Postcode*</label>
                             <input type="number" id="" name="" value="" class="form-control" readonly style="text-transform:uppercase">
                         </div>
                     </div>
                     <div class="row p-2">
                         <div class="col-sm-6">
-                            <label for="state" class="form-label" style="color: red;">State</label>
+                            <label for="state" class="form-label" style="color: red;">State*</label>
                             <select class="form-select" name="state" id="" value="{{ $companion->state ?? '' }}"  style="pointer-events: none;" >
                                 <?php $state = state() ?>
                                 <option value="" label="Please Choose"  ></option>
@@ -702,7 +702,7 @@
                             </select>
                         </div>
                         <div class="col-sm-6">
-                            <label for="country" class="form-label" style="color: red;">Country</label>
+                            <label for="country" class="form-label" style="color: red;">Country*</label>
                             <select class="form-select" name="country" id="" value="{{ $companion->country ?? '' }}"  style="pointer-events: none;" >
                                 <option value="MY" label="Malaysia" selected ></option>
                                 <optgroup id="country-optgroup-Americas" label="Americas">

@@ -29,7 +29,7 @@
                             <label for="emergency-relationship" class="form-label">Relationship*</label>
                             <select class="form-select" name="" value="" id="" style="text-transform:uppercase">
                                             <?php $relationship = relationship() ?>
-                                            <option value="0" label="Please Choose"  ></option>
+                                            <option value="0" label="Please Choose Relationship"  ></option>
                                             @foreach ($relationship as $key => $status)
                                             <option value="{{$key}}"<?php echo ($key == $emergency->relationship) ? 'selected="selected"' : '' ?>> {{$status}}</option>
                                             <option value="{{$key}}"> {{$status}}</option>
@@ -64,14 +64,14 @@
                             <label for="emergency-state" class="form-label">State*</label>
                             <select class="form-select" name="state" value="{{ $emergency->state ?? '' }}" style="text-transform:uppercase">
                                 <?php $state = state() ?>
-                                <option value="" label="Please Choose"  ></option>
+                                <option value="" label="Please Choose State"  ></option>
                                 @foreach ($state as $key => $status)
                                 <option value="{{$key}}"  <?php echo ($key == $emergency->state) ? 'selected="selected"' : '' ?>>{{$status}}</option>
                                 @endforeach
                             </select>
                         </div>
                         <div class="col-sm-6">
-                            <label for="emergency-country" class="form-label">Country</label>
+                            <label for="emergency-country" class="form-label">Country*</label>
                             <select class="form-select" name="country" value="{{ $emergency->country ?? '' }}" style="text-transform:uppercase">
                                 <optgroup id="country-optgroup-Americas" label="Americas">
                                     @foreach ($americass as $key => $america)
@@ -126,7 +126,7 @@
                                 <label for="emergency-relationship" class="form-label">Relationship*</label>
                                 <select class="form-select" name="relationship" id="emergency-relationship" style="text-transform:uppercase">
                                                 <?php $relationship = relationship() ?>
-                                                <option value="" label="Please Choose"  ></option>
+                                                <option value="" label="Please Choose Relationship"  ></option>
                                                 @foreach ($relationship as $key => $status)
                                                 <option value="{{$key}}"> {{$status}}</option>
                                                 @endforeach
@@ -160,14 +160,14 @@
                                 <label for="emergency-state" class="form-label">State*</label>
                                 <select class="form-select" name="" value="" style="text-transform:uppercase">
                                     <?php $state = state() ?>
-                                    <option value="" label="Please Choose"  ></option>
+                                    <option value="" label="Please Choose State"  ></option>
                                     @foreach ($state as $key => $status)
                                     <option value="{{$key}}"  <?php echo ($key == $emergency->state) ? 'selected="selected"' : '' ?>>{{$status}}</option>
                                     @endforeach
                                 </select>
                             </div>
                             <div class="col-sm-6">
-                                <label for="emergency-country" class="form-label">Country</label>
+                                <label for="emergency-country" class="form-label">Country*</label>
                                 <select class="form-select" name="" value="" style="text-transform:uppercase">
                                     <optgroup id="country-optgroup-Americas" label="Americas">
                                         @foreach ($americass as $key => $america)
