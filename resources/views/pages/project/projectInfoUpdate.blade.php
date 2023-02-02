@@ -67,7 +67,7 @@
                 <div class="col-md-4">
                     <select class="form-select" name="financial_year">
                         <option label="Please Choose "></option>
-                        <?php $FinancialYear = getFinancialYearForm(); ?>
+                        <?php $FinancialYear = getFinancialYearFormold(); ?>
                         @foreach ($FinancialYear as $key => $value)
                             <option value="{{ $key }}"
                                 {{ $key == $project->financial_year ? 'selected="selected"' : '' }}>

@@ -1,8 +1,9 @@
-$(document).ready(function() {
+$(document).ready(function() { 
 
     $("#datepicker-joindate").datepicker({
         todayHighlight: true,
         autoclose: true,
+        format: 'yyyy/mm/dd',
     });
 
     $("#projectTable").DataTable({
@@ -378,27 +379,33 @@ $(document).ready(function() {
 
     $("#datepicker-loa").datepicker({
         todayHighlight: true,
-        autoclose: true
+        autoclose: true,
+        format: 'yyyy/mm/dd',
     });
     $("#datepicker-start").datepicker({
         todayHighlight: true,
-        autoclose: true
+        autoclose: true,
+        format: 'yyyy/mm/dd',
     });
     $("#datepicker-end").datepicker({
         todayHighlight: true,
-        autoclose: true
+        autoclose: true,
+        format: 'yyyy/mm/dd',
     });
     $("#datepicker-warstart").datepicker({
         todayHighlight: true,
-        autoclose: true
+        autoclose: true,
+        format: 'yyyy/mm/dd',
     });
     $("#datepicker-warend").datepicker({
         todayHighlight: true,
-        autoclose: true
+        autoclose: true,
+        format: 'yyyy/mm/dd',
     });
     $("#datepicker-bankexpiry").datepicker({
         todayHighlight: true,
-        autoclose: true
+        autoclose: true,
+        format: 'yyyy/mm/dd',
     });
 
 
