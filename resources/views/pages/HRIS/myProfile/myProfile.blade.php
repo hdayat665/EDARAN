@@ -94,7 +94,7 @@
                             <div class="col-sm-6">
                                 <div class="row">
                                     <div class="col-sm-12 idnumber">
-                                        <label for="" class="form-label" style="color: red;">Old Identification Number : </label>
+                                        <label for="" class="form-label" style="color: red;">Old Identification Number </label>
                                         <input type="text" class="form-control">
                                     </div>
                                 </div>
@@ -124,7 +124,7 @@
                             </div>
                             {{-- new --}}
                             <div class="col-sm-3 part">
-                                <label for="idattach" class="form-label" style="color: red;">ID Attachment</label>
+                                <label for="idattach" class="form-label" style="color: red;">ID Attachment*</label>
                                 <input type="file" class="form-control-file" id="">
                             </div> 
                         </div>
@@ -187,7 +187,7 @@
                                 <label for="issuing-country" class="form-label">Marital Status*</label>
                                 <select class="form-select" name="maritialStatus" id="maritialStatus" >
                                     <?php $MaritalStatus = getMaritalStatus() ?>
-                                    <option value="" label="Please Choose"></option>
+                                    <option value="" label="Please Choose Marital Status"></option>
                                     @foreach ($MaritalStatus as $key => $status)
                                     <option value="{{$key}}" <?php echo ($key == $profile->maritialStatus) ? 'selected="selected"' : '' ?>>{{$status}}</option>
                                     @endforeach
@@ -241,7 +241,7 @@
                                 </div>
                             </div>
                             <div class="col-sm-3 part">
-                                <label for="idattach" class="form-label" style="color: red;">OKU Attachment</label>
+                                <label for="idattach" class="form-label" style="color: red;">OKU Attachment*</label>
                                 <input type="file" class="form-control-file" id="okuattach" style="pointer-events: none">
                             </div> 
                         </div>

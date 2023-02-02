@@ -789,9 +789,11 @@ $(document).ready(function () {
             rules: {
                 firstName: "required",
                 lastName: "required",
+                relationship: "required",
                 contactNo: {
                     required: true,
                     digits: true,
+                    rangelength: [10, 11]
                 },
                 relationship: "required",
                 address1: "required",
@@ -807,16 +809,18 @@ $(document).ready(function () {
             messages: {
                 firstName: "Please Insert First Name",
                 lastName: "Please Insert Last Name",
+                relationship: "Please Choose Relationship",
                 contactNo: {
                     required: "Please Insert Contact Number",
-                    digits: "Please Enter Correct Contact Number",
+                    digits: "Please Insert Valid Contact Number",
+                    rangelength: "Please Insert Valid Contact Number"
                 },
                 relationship: "Please Insert Relationship",
                 address1: "Please Insert Address",
                 postcode: {
                     required: "Please Insert Your Postcode",
-                    digits: "Please Enter Valid Postcode",
-                    rangelength: "Please Enter Valid Postcode",
+                    digits: "Please Insert Valid Postcode",
+                    rangelength: "Please Insert Valid Postcode",
                 },
                 city: "Please Insert City",
                 state: "Please Choose State",
@@ -925,7 +929,7 @@ $(document).ready(function () {
                 idNo: {
                     required: "Please Insert Identification Number",
                     digits: "Please Insert Correct Identification Number Without ' - ' or Space",
-                    rangelength: "Please Provide Valid Identification Number",
+                    rangelength: "Please Insert Valid Identification Number",
                 },
                 contactNo: {
                     digits: "Please Insert Correct Contact Number Without ' - ' or Space",
