@@ -251,14 +251,31 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('/createDomainList', 'createDomainList');
             Route::get('/getClaimCategoryContent/{id}', 'getClaimCategoryContent');
             Route::get('/getClaimCategoryById/{id}', 'getClaimCategoryById');
+            Route::post('/updateClaimDate', 'updateClaimDate');
 
-            // eleave
+
+            // eleave Leave Entitlement
             Route::get('/leaveEntitlement', 'eleaveEntitlementView');
             Route::post('/createLeaveEntitlement', 'createLeaveEntitlement');
             Route::get('/getcreateLeaveEntitlement/{id}', 'getcreateLeaveEntitlement');
             Route::post('/updateleaveEntitlement/{id}', 'updateleaveEntitlement');
+
+            // eleave Leave Holiday
             Route::get('/holidaylist', 'holidaylistView');
+            Route::post('/createholidaylist', 'createholidaylist');
+            Route::get('/getcreateLeaveholiday/{id}', 'getcreateLeaveholiday');
+            Route::post('/updateLeaveholiday/{id}', 'updateLeaveholiday');
+            Route::delete('/deleteLeaveholiday/{id}', 'deleteLeaveholiday');
+            Route::get('/updateStatusleaveholiday/{id}/{status}', 'updateStatusleaveholiday');
+            
+            // eleave Leave Types
             Route::get('/leavetypes', 'leavetypesView');
+            Route::post('/createtypes', 'createtypes');
+            Route::get('/getcreateLeavetypes/{id}', 'getcreateLeavetypes');
+            Route::post('/updateLeaveleavetypes/{id}', 'updateLeaveleavetypes');
+            Route::delete('/deleteLeavetypes/{id}', 'deleteLeavetypes');
+            Route::get('/updateStatusleavetypes/{id}/{status}', 'updateStatusleavetypes');
+            
         });
 
         Route::controller(OrganizationController::class)->group(function () {
@@ -365,11 +382,11 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('/myClaimView', 'myClaimView');
             Route::get('/generalClaimView', 'generalClaimView');
             Route::get('/cashAdvanceView', 'cashAdvanceView');
-            Route::get('/newMonthlyClaimView', 'newMonthlyClaimView');
+            Route::get('/newMonthlyClaimView/{month}', 'newMonthlyClaimView');
             Route::post('/submitPersonalClaim', 'submitPersonalClaim');
             Route::post('/submitTravelClaim', 'submitTravelClaim');
             Route::post('/submitSubsClaim', 'submitSubsClaim');
-            Route::get('/monthClaimEditView/{id}', 'monthClaimEditView');
+            Route::get('/monthClaimEditView/edit/{id}', 'monthClaimEditView');
         });
 
         Route::controller(generalClaimController::class)->group(function () {

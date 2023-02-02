@@ -7,6 +7,7 @@ use App\Models\ApprovelRoleGeneral;
 use App\Models\Branch;
 use App\Models\ClaimCategory;
 use App\Models\ClaimCategoryContent;
+use App\Models\ClaimDateSetting;
 use App\Models\Company;
 use App\Models\Department;
 use App\Models\Designation;
@@ -24,6 +25,8 @@ use App\Models\TypeOfLogs;
 use App\Models\Unit;
 use App\Models\leaveEntitlementModel;
 use App\Models\UserProfile;
+use App\Models\holidayModel;
+use App\Models\leavetypesModel;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Symfony\Component\Console\Input\Input;
@@ -1671,14 +1674,14 @@ class SettingService
         return $data;
     }
 
-    public function leaveNameStaff(){
+    public function leaveNameStaff()
+    {
         $data['nameStaff'] = UserProfile::where('userprofile.tenant_id', Auth::user()->tenant_id)
-                            ->leftJoin('employment', 'userprofile.user_id', '=', 'employment.user_id')
-                            ->leftJoin('department', 'employment.department', '=', 'department.id')
-                            ->select('userprofile.user_id', 'userprofile.fullname', 'department.departmentName')
-                            ->get();
+            ->leftJoin('employment', 'userprofile.user_id', '=', 'employment.user_id')
+            ->leftJoin('department', 'employment.department', '=', 'department.id')
+            ->select('userprofile.user_id', 'userprofile.fullname', 'department.departmentName')
+            ->get();
         return $data;
-    
     }
 
     public function createLeaveEntitlement($r)
@@ -1703,15 +1706,15 @@ class SettingService
         $data5 = $input['lapsed'];
 
         $input = [
-                'id_userprofile' => $data1,
-                'id_employment' => $data2,
-                'id_department' => $data3,
-                'tenant_id' => $data4,
-                'lapse' => $data5
-            ];
+            'id_userprofile' => $data1,
+            'id_employment' => $data2,
+            'id_department' => $data3,
+            'tenant_id' => $data4,
+            'lapse' => $data5
+        ];
 
         leaveEntitlementModel::create($input);
-        
+
 
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
@@ -1728,7 +1731,7 @@ class SettingService
         return $data;
     }
 
-     public function updateleaveEntitlement($r, $id)
+    public function updateleaveEntitlement($r, $id)
     {
         $input = $r->input();
 
@@ -1741,19 +1744,19 @@ class SettingService
         $data1 = $input['CurrentEntitlementBalance'];
         $data2 = $input['SickLeaveEntitlement'];
         $data3 = $input['CarryForward'];
-        $data4= $input['CurrentForwardBalance'];
+        $data4 = $input['CurrentForwardBalance'];
         $data5 = $input['LapsedDate'];
         $data6 = $input['Lapsed'];
 
 
-         $input = [
-                'current_entitlement_balance' => $data1,
-                'sick_leave_entitlement' => $data2,
-                'carry_forward' => $data3,
-                'carry_forward_balance' => $data4,
-                'lapsed_date' => $data5,
-                'lapse' => $data6
-            ];
+        $input = [
+            'current_entitlement_balance' => $data1,
+            'sick_leave_entitlement' => $data2,
+            'carry_forward' => $data3,
+            'carry_forward_balance' => $data4,
+            'lapsed_date' => $data5,
+            'lapse' => $data6
+        ];
 
         leaveEntitlementModel::where('id', $id)->update($input);
 
@@ -1765,4 +1768,259 @@ class SettingService
         return $data;
     }
 
+    public function holidaylistView()
+    {
+        $data['holiday'] = holidayModel::where('tenant_id', Auth::user()->tenant_id)->get();
+
+        return $data;
+    }
+
+    public function createholidaylist($r)
+    {
+        $input = $r->input();
+
+        // date_default_timezone_set("Asia/Kuala_Lumpur");
+        $etData = holidayModel::where([['holiday_title', $input['holiday_title']], ['tenant_id', Auth::user()->tenant_id]])->first();
+        if ($etData) {
+            $data['msg'] = 'Title already exists in list holiday.';
+            $data['status'] = config('app.response.error.status');
+            $data['type'] = config('app.response.error.type');
+            $data['title'] = config('app.response.error.title');
+
+            return $data;
+        }
+
+        $data1 = $input['holiday_title'];
+        $data2 = $input['start_date'];
+        $data3 = $input['end_date'];
+        $data4 = $input['annual_date'];
+        $data5 = Auth::user()->tenant_id;
+        $data6 = 1;
+
+        $input = [
+            'holiday_title' => $data1,
+            'start_date' => $data2,
+            'end_date' => $data3,
+            'annual_date' => $data4,
+            'tenant_id' => $data5,
+            'status' => $data6
+        ];
+
+        holidayModel::create($input);
+
+
+        $data['status'] = config('app.response.success.status');
+        $data['type'] = config('app.response.success.type');
+        $data['title'] = config('app.response.success.title');
+        $data['msg'] = 'Success create company';
+
+        return $data;
+    }
+
+    public function getcreateLeaveholiday($id)
+    {
+        $data = holidayModel::find($id);
+
+        return $data;
+    }
+
+    public function updateLeaveholiday($r, $id)
+    {
+        $input = $r->input();
+
+        date_default_timezone_set("Asia/Kuala_Lumpur");
+
+        $data1 = $input['holidaytitle'];
+        $data2 = $input['start_date'];
+        $data3 = $input['enddate'];
+        $data4 = $input['flexRadioDefault'];
+
+
+        $input = [
+            'holiday_title' => $data1,
+            'start_date' => $data2,
+            'end_date' => $data3,
+            'annual_date' => $data4,
+        ];
+
+        holidayModel::where('id', $id)->update($input);
+
+        $data['status'] = config('app.response.success.status');
+        $data['type'] = config('app.response.success.type');
+        $data['title'] = config('app.response.success.title');
+        $data['msg'] = 'Success update company';
+
+        return $data;
+    }
+
+    public function deleteLeaveholiday($id)
+    {
+        $logs = holidayModel::find($id);
+
+        if (!$logs) {
+            $data['status'] = config('app.response.error.status');
+            $data['type'] = config('app.response.error.type');
+            $data['title'] = config('app.response.error.title');
+            $data['msg'] = 'Leave holiday not found';
+        } else {
+            $logs->delete();
+
+            $data['status'] = config('app.response.success.status');
+            $data['type'] = config('app.response.success.type');
+            $data['title'] = config('app.response.success.title');
+            $data['msg'] = 'Success delete Leave holiday';
+        }
+
+        return $data;
+    }
+
+    public function updateStatusleaveholiday($id, $status)
+    {
+        $update['status'] = $status;
+
+        holidayModel::where('id', $id)->update($update);
+
+        $data['status'] = config('app.response.success.status');
+        $data['type'] = config('app.response.success.type');
+        $data['title'] = config('app.response.success.title');
+        $data['msg'] = 'Success update Status';
+
+        return $data;
+    }
+
+
+    public function leavetypesView()
+    {
+        $data['types'] = leavetypesModel::where('tenant_id', Auth::user()->tenant_id)->get();
+
+        return $data;
+    }
+
+
+    public function createtypes($r)
+    {
+        $input = $r->input();
+
+        // date_default_timezone_set("Asia/Kuala_Lumpur");
+        $etData = leavetypesModel::where([['leave_types_code', $input['leave_types_code']], ['tenant_id', Auth::user()->tenant_id]])->first();
+        if ($etData) {
+            $data['msg'] = 'Title already exists in list holiday.';
+            $data['status'] = config('app.response.error.status');
+            $data['type'] = config('app.response.error.type');
+            $data['title'] = config('app.response.error.title');
+
+            return $data;
+        }
+
+        $data1 = $input['leave_types_code'];
+        $data2 = $input['leave_types'];
+        $data3 = $input['day'];
+        $data5 = Auth::user()->tenant_id;
+
+        $input = [
+            'leave_types_code' => $data1,
+            'leave_types' => $data2,
+            'day' => $data3,
+            'tenant_id' => $data5
+        ];
+
+        leavetypesModel::create($input);
+
+
+        $data['status'] = config('app.response.success.status');
+        $data['type'] = config('app.response.success.type');
+        $data['title'] = config('app.response.success.title');
+        $data['msg'] = 'Success create company';
+
+        return $data;
+    }
+
+    public function getcreateLeavetypes($id)
+    {
+        $data = leavetypesModel::find($id);
+
+        return $data;
+    }
+
+
+    public function updateLeaveleavetypes($r, $id)
+    {
+        $input = $r->input();
+
+        date_default_timezone_set("Asia/Kuala_Lumpur");
+
+        $data1 = $input['leavetypescode'];
+        $data2 = $input['leavetypes'];
+        $data3 = $input['day'];
+
+
+        $input = [
+            'leave_types_code' => $data1,
+            'leave_types' => $data2,
+            'day' => $data3,
+        ];
+
+        leavetypesModel::where('id', $id)->update($input);
+
+        $data['status'] = config('app.response.success.status');
+        $data['type'] = config('app.response.success.type');
+        $data['title'] = config('app.response.success.title');
+        $data['msg'] = 'Success update company';
+
+        return $data;
+    }
+
+    public function deleteLeavetypes($id)
+    {
+        $logs = leavetypesModel::find($id);
+
+        if (!$logs) {
+            $data['status'] = config('app.response.error.status');
+            $data['type'] = config('app.response.error.type');
+            $data['title'] = config('app.response.error.title');
+            $data['msg'] = 'Leave holiday not found';
+        } else {
+            $logs->delete();
+
+            $data['status'] = config('app.response.success.status');
+            $data['type'] = config('app.response.success.type');
+            $data['title'] = config('app.response.success.title');
+            $data['msg'] = 'Success delete Leave holiday';
+        }
+
+        return $data;
+    }
+
+    public function updateStatusleavetypes($id, $status)
+    {
+        $update['status'] = $status;
+
+        leavetypesModel::where('id', $id)->update($update);
+
+        $data['status'] = config('app.response.success.status');
+        $data['type'] = config('app.response.success.type');
+        $data['title'] = config('app.response.success.title');
+        $data['msg'] = 'Success update Status';
+
+        return $data;
+    }
+
+    public function updateClaimDate($r)
+    {
+        $input = $r->input();
+
+        $ecData = ClaimDateSetting::where('tenant_id', Auth::user()->tenant_id)->first();
+        $input['tenant_id'] = Auth::user()->tenant_id;
+        $input['user_id'] = Auth::user()->id;
+        if ($ecData) {
+
+            ClaimDateSetting::where('id', $ecData->id)->update($input);
+            $data['msg'] = 'Success update claim date setting';
+        } else {
+            ClaimDateSetting::create($input);
+            $data['msg'] = 'Success update claim date setting';
+        }
+
+        return $data;
+    }
 }
