@@ -10,7 +10,7 @@
                     <div class="row p-2">
                         <div class="col-sm-6">
                             <label for="firstname" class="form-label">First Name*</label>
-                            <input type="text" id="firstName" name="firstName" class="form-control" aria-describedby="firstname" style="text-transform:uppercase" >
+                            <input type="text" id="" name="firstName" class="form-control" aria-describedby="firstname" style="text-transform:uppercase" >
                         </div>
                         <div class="col-sm-6">
                             <label for="lastname" class="form-label">Last Name*</label>
@@ -25,7 +25,7 @@
                         </div>
                         <div class="col-sm-6">
                             <label for="lastname" class="form-label" style="color: red;">Old Identification Number</label>
-                            <input type="text" id="" name="lastName" class="form-control" aria-describedby="lastname" style="text-transform:uppercase" >
+                            <input type="text" id="" name="" class="form-control" aria-describedby="" style="text-transform:uppercase" >
                         </div>
                     </div>
                     <div class="row p-2">
