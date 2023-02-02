@@ -29,7 +29,7 @@
                                         @elseif(in_array($project->id, $projectIdReject))
                                             <button class="btn btn-primary btn-xs" disabled>Request</button>
                                             <button class="btn btn-warning btn-xs" id="viewReasonButton"
-                                                data-id={{ $project->id }}> View Reason
+                                                data-id="{{ $project->id }}"> View Reason
                                                 Rejected</button>
                                         @else
                                             <a href="#" class="btn btn-primary btn-xs" data-bs-toggle="modal"
@@ -49,6 +49,9 @@
                                     @elseif (in_array($project->id, $projectIdApprove))
                                         <td><a data-bs-toggle="modal" data-id="{{ $project->id }}"
                                                 id="viewProjectRequestButton">Approve</a></td>
+                                    @elseif (in_array($project->id, $projectIdReject))
+                                        <td><a data-bs-toggle="modal" data-id="{{ $project->id }}"
+                                                id="viewProjectRequestButton">Rejected</a></td>
                                     @else
                                         <td><a data-bs-toggle="modal" data-id="{{ $project->id }}"
                                                 id="viewProjectRequestButton">-</a></td>
