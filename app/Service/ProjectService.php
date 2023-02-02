@@ -704,7 +704,8 @@ class ProjectService
     }
     public function getRejectProject($id)
     {
-        $data = ProjectMember::where([['project_id', $id], ['tenant_id', Auth::user()->tenant_id], ['employee_id', Auth::user()->id], ['status', 'reject']])->first();
+        //$data = ProjectMember::where([['project_id', $id], ['tenant_id', Auth::user()->tenant_id], ['employee_id', Auth::user()->id], ['status', 'reject']])->first();
+        $data = ProjectMember::where([['project_id', $id], ['tenant_id', Auth::user()->tenant_id], ['status', 'reject']])->first();
 
         if (!$data) {
             $data = [];
