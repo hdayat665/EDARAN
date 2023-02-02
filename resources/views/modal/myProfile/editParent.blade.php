@@ -10,18 +10,18 @@
                     <div class="row p-2">
                         <div class="col-sm-6">
                             <label for="firstname" class="form-label">First Name*</label>
-                            <input type="text" id="firstNames1" name="firstName" class="form-control" aria-describedby="firstname">
+                            <input type="text" id="firstNamesP1" name="firstName" class="form-control" aria-describedby="firstname">
                             <input type="hidden" id="idP" name="id" class="form-control" aria-describedby="firstname">
                         </div>
                         <div class="col-sm-6">
                             <label for="lastname" class="form-label">Last Name*</label>
-                            <input type="text" id="lastNameP1" name="lastName" class="form-control" aria-describedby="lastname">
+                            <input type="text" id="lastNamesP1" name="lastName" class="form-control" aria-describedby="lastname">
                         </div>
                     </div>
                     <div class="row p-2">
                         <div class="col-sm-6">
                             <label for="firstname" class="form-label" style="color: red">Full Name*</label>
-                            <input type="text" id="" name="firstName" class="form-control" aria-describedby="">
+                            <input type="text" id="" name="" class="form-control" aria-describedby="">
                             <input type="hidden" id="" name="" class="form-control" aria-describedby="">
                         </div>
                         {{-- new --}}
