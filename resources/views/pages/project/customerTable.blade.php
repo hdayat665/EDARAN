@@ -31,10 +31,16 @@
                             @foreach ($customers as $customer)
                                 <tr>
                                     <td>
-                                        <a href="javascript:;" id="editButton" data-id="{{ $customer->id }}"
-                                            class="btn btn-outline-green"><i class="fa fa-pencil-alt"></i></a>
-                                        <a href="javascript:;" id="deleteButton" data-id="{{ $customer->id }}"
-                                            class="btn btn-outline-danger"><i class="fa fa-trash"></i></a>
+                                        <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle"><i class="fa fa-cogs"></i> Actions <i class="fa fa-caret-down"></i></a>
+                                        <div class="dropdown-menu">
+                                            <a href="javascript:;" id="editButton" data-id="{{ $customer->id }}" class="dropdown-item">Edit</a>
+                                            <div class="dropdown-divider"></div>
+                                            <a href="javascript:;"  class="dropdown-item">Close</a>
+                                        </div>
+                                        <!-- <a href="javascript:;" id="editButton" data-id="{{ $customer->id }}"
+                                            class="btn btn-primary">Edit</a> -->
+                                        <!-- <a href="javascript:;" id="deleteButton" data-id="{{ $customer->id }}"
+                                            class="btn btn-outline-danger"><i class="fa fa-trash"></i></a> -->
                                     </td>
                                     <td>
                                         <div class="form-check form-switch">
@@ -50,7 +56,7 @@
                                     <td>{{ $customer->email }}</td>
                                     <td>{{ $customer->addedBy }}</td>
                                     <td>{{ $customer->created_at }}</td>
-                                    <td>{{ $customer->update_by ? getEmployeeName($customer->update_by) : '-' }}</td>
+                                    <td>{{ $customer->update_by ? getEmployeeUsername($customer->update_by) : '-' }}</td>
                                     <td>{{ $customer->update_by ? $customer->updated_at : '-' }}</td>
                                 </tr>
                             @endforeach

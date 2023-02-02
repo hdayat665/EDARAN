@@ -91,7 +91,7 @@ class ProjectService
             $previousManager['project_id'] = $id;
             $previousManager['user_id'] = $projectManager->project_manager;
             $previousManager['tenant_id'] = Auth::user()->tenant_id;
-            $previousManager['join_date'] = $input['contract_start_date'];
+            $previousManager['join_date'] = date_format(date_create(), 'Y-m-d');
             $previousManager['exit_date'] = now();
             // pr($previousManager);
             PreviousProjectManager::create($previousManager);

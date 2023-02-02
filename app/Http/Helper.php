@@ -518,20 +518,32 @@ if (!function_exists('getFinancialYear')) {
 if (!function_exists('getFinancialYearForm')) {
     function getFinancialYearForm()
     {
+        $current_year = date("Y");
+        $next_year = date("Y", strtotime("+1 year"));
+
         $data = [
-            '2020' => '2020',
-            '2021' => '2021',
-            '2022' => '2022',
-            '2023' => '2023',
-            '2024' => '2024',
-            '2025' => '2025',
+            $current_year => $current_year,
+            $next_year => $next_year,
         ];
 
         return $data;
     }
 }
 
+if (!function_exists('getFinancialYearFormold')) {
+    function getFinancialYearFormold()
+    {
+        $current_year = date("Y");
+        $next_year = date("Y", strtotime("+1 year"));
 
+        $data = [];
+        for ($i = 2010; $i <= $current_year; $i++) {
+            $data[$i] = $i;
+        }
+        $data[$next_year] = $next_year;
+
+    }
+}
 
 if (!function_exists('getEvent')) {
     function getEvent()
@@ -829,6 +841,18 @@ if (!function_exists('getEmployeeName')) {
     function getEmployeeName($id = '')
     {
         $data = Employee::where('user_id', $id)->select('employeeName')->first()->employeeName;
+
+        if (!$data) {
+            $data = '';
+        }
+        return $data;
+    }
+}
+
+if (!function_exists('getEmployeeUsername')) {
+    function getEmployeeUsername($id = '')
+    {
+        $data = Userprofile::where('user_id', $id)->select('username')->first()->username;
 
         if (!$data) {
             $data = '';
