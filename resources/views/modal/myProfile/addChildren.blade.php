@@ -73,7 +73,7 @@
                                 {{-- <div class="col-sm-6">
                                     <label for="expirydate" class="form-label">Expiry Date</label>
                                     <input type="text" id="expiryDateChild" name="expiryDate"  placeholder="YYYY-MM-DD" class="form-control" aria-describedby="expirydate" style="pointer-events: none;" readonly>
-                                  
+                                
                                 </div> --}}
                             </div>
                         </div>
