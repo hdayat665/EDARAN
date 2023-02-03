@@ -27,7 +27,7 @@
                             <input type="hidden" value="{{$project->id}}" name="project_id">
                             <input type="hidden" id="idPM">
                             <input type="hidden" value="{{$project->tenant_id}}" name="tenant_id">
-                            <input type="text" class="form-control" name="joined_date" id="joined_date" id="datepicker-joineddate" placeholder="dd/mm/yyyy" />
+                            <input type="text" class="form-control" name="joined_date" id="joined_date"  placeholder="yyyy/mm/dd" />
 
                         </div>
                         
@@ -137,24 +137,26 @@
 
 
                     </div>
-
+                    
                     <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-md-2">
                             <div class="form-check form-switch">
                                 <input type="checkbox" name="exit_project" id="exit_project" class="form-check-input partCheck"></input>
-                                <label class="form-label" for="checkbox1">Exit Project?</label><br>
+                                <label class="form-label" for="checkbox1">Exit Date?</label><br>
                             </div>
-
                         </div>
-
+                            <div class="col-md-4" id="exitdatediv" style="display: none;">
+                                <input type="text" class="form-control" id="datepicker-exitdate" name="exit_project_date" placeholder="yyyy/mm/dd" />
+                            </div>
+                        
                     </div>
                     <div >
-                    <div class="row">
+                    <!-- <div class="row">
                         <div class="col-md-6">
 
                             <input type="text" class="form-control" id="datepicker-exitdate" name="exit_project_date" placeholder="dd/mm/yyyy" />
                         </div>
-                    </div>
+                    </div> -->
                     </div>
                     <br>
                     <div class="modal-footer">
