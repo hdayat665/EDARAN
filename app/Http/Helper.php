@@ -533,14 +533,23 @@ if (!function_exists('getFinancialYearForm')) {
 if (!function_exists('getFinancialYearFormold')) {
     function getFinancialYearFormold()
     {
+        $start_year = 2010;
         $current_year = date("Y");
         $next_year = date("Y", strtotime("+1 year"));
-
+        $year_difference = $current_year - $start_year + 2;
+        
         $data = [];
-        for ($i = 2010; $i <= $current_year; $i++) {
-            $data[$i] = $i;
+        for ($i = 0; $i < $year_difference; $i++) {
+            $year = date("Y", strtotime("+".$i." year", strtotime($start_year."-01-01")));
+            $data[$year] = $year;
         }
-        $data[$next_year] = $next_year;
+        
+        return $data;
+        
+        
+
+
+        
 
     }
 }
@@ -656,7 +665,7 @@ if (!function_exists('customeractive')) {
     }
 }
 if (!function_exists('projectLocation')) {
-    function projectLocation()
+    function projectLocation($projectid = '')
     {
         $data = ProjectLocation::where('tenant_id', Auth::user()->tenant_id)->get();
 
@@ -667,7 +676,23 @@ if (!function_exists('projectLocation')) {
         return $data;
     }
 }
+if (!function_exists('getBranch')) {
+    function getBranch($id = '')
+    {
 
+        if ($id) {
+            $data = Branch::find($id);
+        } else {
+            $data = Branch::where('tenant_id', Auth::user()->tenant_id)->get();
+        }
+
+        if (!$data) {
+            $data = [];
+        }
+
+        return $data;
+    }
+}
 if (!function_exists('getEmployee')) {
     function getEmployee()
     {
