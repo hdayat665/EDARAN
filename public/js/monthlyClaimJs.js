@@ -295,7 +295,7 @@ $("document").ready(function () {
                             if (data.type == "error") {
                             } else {
                                 window.location.href =
-                                    "/monthClaimEditView/edit/" + data.id;
+                                    "/monthClaimEditView/edit/month/" + data.id;
                                 // location.reload();
                             }
                         });
@@ -338,7 +338,7 @@ $("document").ready(function () {
                             if (data.type == "error") {
                             } else {
                                 window.location.href =
-                                    "/monthClaimEditView/edit/" + data.id;
+                                    "/monthClaimEditView/edit/month/" + data.id;
                                 // location.reload();
                             }
                         });
@@ -381,7 +381,7 @@ $("document").ready(function () {
                             if (data.type == "error") {
                             } else {
                                 window.location.href =
-                                    "/monthClaimEditView/edit/" + data.id;
+                                    "/monthClaimEditView/edit/month/" + data.id;
                                 // location.reload();
                             }
                         });
