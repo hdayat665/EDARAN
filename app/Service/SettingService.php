@@ -2012,6 +2012,9 @@ class SettingService
         $ecData = ClaimDateSetting::where('tenant_id', Auth::user()->tenant_id)->first();
         $input['tenant_id'] = Auth::user()->tenant_id;
         $input['user_id'] = Auth::user()->id;
+
+        $data = getResponseSuccessAjax();
+
         if ($ecData) {
 
             ClaimDateSetting::where('id', $ecData->id)->update($input);
@@ -2020,6 +2023,13 @@ class SettingService
             ClaimDateSetting::create($input);
             $data['msg'] = 'Success update claim date setting';
         }
+
+        return $data;
+    }
+
+    public function getDateClaim()
+    {
+        $data = ClaimDateSetting::where('tenant_id', Auth::user()->tenant_id)->first();
 
         return $data;
     }

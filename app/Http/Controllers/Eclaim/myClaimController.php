@@ -32,7 +32,7 @@ class myClaimController extends Controller
         return view('pages.eclaim.cashAdvance');
     }
 
-    public function newMonthlyClaimView($month = '')
+    public function newMonthlyClaimView($month = '', $year = '')
     {
         $mcs = new myClaimService;
 
@@ -41,6 +41,7 @@ class myClaimController extends Controller
         $data['travelClaims'] = [];
         $data['personalClaims'] = [];
         $data['month_id'] = $month;
+        $data['year'] = $year;
 
         return view('pages.eclaim.monthlyClaim', $data);
     }
@@ -61,7 +62,9 @@ class myClaimController extends Controller
         $data['cashAdvances'] = $mcs->getCashAdvance();
         $data['travelClaims'] = $mcs->getTravelClaimByGeneralId($id);
         $data['personalClaims'] = $mcs->getPersonalClaimByGeneralId($id);
-        $data['month'] = $mcs->getGeneralClaimById($id)->month;
+        $generalClaim = $mcs->getGeneralClaimById($id);
+        $data['month'] = $generalClaim->month ?? '';
+        $data['year'] = $generalClaim->year ?? '';
 
         return view('pages.eclaim.monthClaimEditView', $data);
     }

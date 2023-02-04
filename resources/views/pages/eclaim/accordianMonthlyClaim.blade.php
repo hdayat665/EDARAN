@@ -15,9 +15,10 @@
                                 <label class="form-label">Applied Date</label>
                             </div>
                             <div class="col-md-8">
-                                <input type="hidden" name="general_id" value="{{ Request::segment(3) }}">
+                                <input type="hidden" name="general_id" value="{{ Request::segment(4) }}">
                                 <input type="hidden" value="{{ isset($month_id) ? month($month_id) : $month }}" name="month">
                                 <input type="text" class="form-control" name="applied_date" id="datepickerpc">
+                                <input type="hidden" value="{{ $year }}" name="year">
                             </div>
                         </div>
                         <div class="row p-2">
@@ -94,8 +95,9 @@
                                 <label class="form-label">Travel Date</label>
                             </div>
                             <div class="col-md-8">
-                                <input type="hidden" name="general_id" value="{{ Request::segment(3) }}">
+                                <input type="hidden" name="general_id" value="{{ Request::segment(4) }}">
                                 <input type="hidden" value="{{ isset($month_id) ? month($month_id) : $month }}" name="month">
+                                <input type="hidden" value="{{ $year }}" name="year">
                                 <input type="hidden " class="form-control" id="datepickertc" name="travel_date">
                             </div>
                         </div>
@@ -352,7 +354,7 @@
                             </div>
                             <div class="col-md-8">
                                 <input type="file" class="form-control-file" id="" name="file_upload">
-                                <input type="hidden" name="general_id" value="{{ Request::segment(3) }}">
+                                <input type="hidden" name="general_id" value="{{ Request::segment(4) }}">
                                 <input type="hidden" value="{{ isset($month_id) ? month($month_id) : $month }}" name="month">
 
                             </div>
