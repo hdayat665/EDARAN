@@ -42,7 +42,7 @@ $(document).ready(function() {
         id = $(this).data('id');
         requirejs(['sweetAlert2'], function(swal) {
             swal({
-                title: "Are you sure!",
+                title: "Are you sure to delete Event?",
                 type: "error",
                 confirmButtonClass: "btn-danger",
                 confirmButtonText: "Yes!",
@@ -410,7 +410,7 @@ $(document).ready(function() {
         var id = $('#id').val();
         requirejs(['sweetAlert2'], function(swal) {
             swal({
-                title: "Are you sure!",
+                title: "Are you sure to delete Log?",
                 type: "error",
                 confirmButtonClass: "btn-danger",
                 confirmButtonText: "Yes!",
@@ -579,7 +579,7 @@ $(document).ready(function() {
         var id = $('#idEvent').val();
         requirejs(['sweetAlert2'], function(swal) {
             swal({
-                title: "Are you sure!",
+                title: "Are you sure to delete Event?",
                 type: "error",
                 confirmButtonClass: "btn-danger",
                 confirmButtonText: "Yes!",
