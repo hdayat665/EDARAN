@@ -80,15 +80,15 @@
                     <div class="row mb-15px">
                         <div class="col-md-4">
                             <input type="text" class="form-control" name="LOA_date" id="datepicker-loa"
-                                placeholder="dd/mm/yyyy" />
+                                placeholder="yyyy/mm/dd" />
                         </div>
                         <div class="col-md-4">
                             <input type="text" class="form-control" name="contract_start_date" id="datepicker-start"
-                                placeholder="dd/mm/yyyy" />
+                                placeholder="yyyy/mm/dd" />
                         </div>
                         <div class="col-md-4">
                             <input type="text" class="form-control" name="contract_end_date" id="datepicker-end"
-                                placeholder="dd/mm/yyyy" />
+                                placeholder="yyyy/mm/dd" />
                         </div>
                     </div>
                     <div class="row">
@@ -108,17 +108,17 @@
                         </div>
                         <div class="col-md-4">
                             <input type="text" class="form-control" name="warranty_start_date"
-                                id="datepicker-warstart" placeholder="dd/mm/yyyy" />
+                                id="datepicker-warstart" placeholder="yyyy/mm/dd" />
                         </div>
                         <div class="col-md-4">
                             <input type="text" class="form-control" id="datepicker-warend"
-                                name="warranty_end_date" placeholder="dd/mm/yyyy" />
+                                name="warranty_end_date" placeholder="yyyy/mm/dd" />
                         </div>
                     </div>
                     <div class="row">
                         <label class="form-label col-form-label col-md-4">Bank Guarantee Amount</label>
                         <label class="form-label col-form-label col-md-4">Bank Guarantee Expiry Date</label>
-                        <label class="form-label col-form-label col-md-4">Status</label>
+                        <label class="form-label col-form-label col-md-4">Status*</label>
                     </div>
                     <div class="row mb-15px">
                         <div class="col-md-4">
@@ -126,7 +126,7 @@
                         </div>
                         <div class="col-md-4">
                             <input type="text" class="form-control" id="datepicker-bankexpiry"
-                                name="bank_guarantee_expiry_date" placeholder="dd/mm/yyyy" />
+                                name="bank_guarantee_expiry_date" placeholder="yyyy/mm/dd" />
                         </div>
                         <div class="col-md-4">
                             <select class="form-select" name="status">

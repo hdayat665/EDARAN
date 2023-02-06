@@ -1,6 +1,7 @@
 $("document").ready(function () {
     $("#generalclaim").DataTable({
         searching: false,
+        aaSorting: [],
         lengthChange: false,
         lengthMenu: [5, 10],
         responsive: false,

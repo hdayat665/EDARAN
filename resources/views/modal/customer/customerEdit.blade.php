@@ -9,7 +9,7 @@
                 <form id="editForm">
                 <div class="row p-2">
                         <div class="col-md-4">
-                            <label class="form-label">Customer Name</label>
+                            <label class="form-label">Customer Name*</label>
                         </div>
                     </div>
                     <div class="row p-2">
@@ -19,7 +19,7 @@
                     </div>
                     <div class="row p-2">
                         <div class="col-md-4">
-                            <label class="form-label">Address 1</label>
+                            <label class="form-label">Address 1*</label>
                         </div>
                     </div>
                     <div class="row p-2">
@@ -39,10 +39,10 @@
                     </div>
                     <div class="row p-2">
                         <div class="col-md-6">
-                            <label class="form-label">Poscode</label>
+                            <label class="form-label">Postcode*</label>
                         </div>
                         <div class="col-md-6">
-                            <label class="form-label">City</label>
+                            <label class="form-label">City*</label>
                         </div>
                     </div>
                     <div class="row p-2">
@@ -55,10 +55,10 @@
                     </div>
                     <div class="row p-2">
                         <div class="col-md-6">
-                            <label class="form-label">State</label>
+                            <label class="form-label">State*</label>
                         </div>
                         <div class="col-md-6">
-                            <label class="form-label">Country</label>
+                            <label class="form-label">Country*</label>
                         </div>
                     </div>
                     <div class="row p-2">
@@ -257,10 +257,10 @@
                     </div>
                     <div class="row p-2">
                         <div class="col-md-6">
-                            <label class="form-label">Phone Number</label>
+                            <label class="form-label">Phone Number*</label>
                         </div>
                         <div class="col-md-6">
-                            <label class="form-label">Email</label>
+                            <label class="form-label">Email*</label>
                         </div>
                     </div>
                     <div class="row p-2">

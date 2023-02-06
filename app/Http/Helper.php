@@ -11,6 +11,7 @@ use App\Models\Department;
 use App\Models\Designation;
 use App\Models\Employee;
 use App\Models\EmploymentType;
+use App\Models\GeneralClaim;
 use App\Models\GeneralClaimDetail;
 use App\Models\JobGrade;
 use App\Models\Project;
@@ -518,20 +519,35 @@ if (!function_exists('getFinancialYear')) {
 if (!function_exists('getFinancialYearForm')) {
     function getFinancialYearForm()
     {
+        $current_year = date("Y");
+        $next_year = date("Y", strtotime("+1 year"));
+
         $data = [
-            '2020' => '2020',
-            '2021' => '2021',
-            '2022' => '2022',
-            '2023' => '2023',
-            '2024' => '2024',
-            '2025' => '2025',
+            $current_year => $current_year,
+            $next_year => $next_year,
         ];
 
         return $data;
     }
 }
 
+if (!function_exists('getFinancialYearFormold')) {
+    function getFinancialYearFormold()
+    {
+        $start_year = 2010;
+        $current_year = date("Y");
+        $next_year = date("Y", strtotime("+1 year"));
+        $year_difference = $current_year - $start_year + 2;
 
+        $data = [];
+        for ($i = 0; $i < $year_difference; $i++) {
+            $year = date("Y", strtotime("+" . $i . " year", strtotime($start_year . "-01-01")));
+            $data[$year] = $year;
+        }
+
+        return $data;
+    }
+}
 
 if (!function_exists('getEvent')) {
     function getEvent()
@@ -623,7 +639,7 @@ if (!function_exists('customer')) {
     function customer()
     {
         $data = Customer::where([['tenant_id', Auth::user()->tenant_id]])->get();
-            
+
         if (!$data) {
             $data = [];
         }
@@ -634,8 +650,8 @@ if (!function_exists('customer')) {
 if (!function_exists('customeractive')) {
     function customeractive()
     {
-        $data = Customer::where([['tenant_id', Auth::user()->tenant_id],['status', '=', 1]])->get();
-            
+        $data = Customer::where([['tenant_id', Auth::user()->tenant_id], ['status', '=', 1]])->get();
+
         if (!$data) {
             $data = [];
         }
@@ -644,7 +660,7 @@ if (!function_exists('customeractive')) {
     }
 }
 if (!function_exists('projectLocation')) {
-    function projectLocation()
+    function projectLocation($projectid = '')
     {
         $data = ProjectLocation::where('tenant_id', Auth::user()->tenant_id)->get();
 
@@ -655,11 +671,27 @@ if (!function_exists('projectLocation')) {
         return $data;
     }
 }
+if (!function_exists('getBranch')) {
+    function getBranch($id = '')
+    {
 
+        if ($id) {
+            $data = Branch::find($id);
+        } else {
+            $data = Branch::where('tenant_id', Auth::user()->tenant_id)->get();
+        }
+
+        if (!$data) {
+            $data = [];
+        }
+
+        return $data;
+    }
+}
 if (!function_exists('getEmployee')) {
     function getEmployee()
     {
-        $data = Employee::where([['tenant_id', Auth::user()->tenant_id],['employeeid', '!=', null]])->get();
+        $data = Employee::where([['tenant_id', Auth::user()->tenant_id], ['employeeid', '!=', null]])->get();
 
         if (!$data) {
             $data = [];
@@ -829,6 +861,18 @@ if (!function_exists('getEmployeeName')) {
     function getEmployeeName($id = '')
     {
         $data = Employee::where('user_id', $id)->select('employeeName')->first()->employeeName;
+
+        if (!$data) {
+            $data = '';
+        }
+        return $data;
+    }
+}
+
+if (!function_exists('getEmployeeUsername')) {
+    function getEmployeeUsername($id = '')
+    {
+        $data = Userprofile::where('user_id', $id)->select('username')->first()->username;
 
         if (!$data) {
             $data = '';
@@ -1087,6 +1131,135 @@ if (!function_exists('claimDateSetting')) {
 
         if (!$data) {
             $data = [];
+        }
+
+        return $data;
+    }
+}
+
+if (!function_exists('getDaysInMonth')) {
+    function getDaysInMonth()
+    {
+
+        for ($i = 1; $i < 32; $i++) {
+            $data[] = $i;
+        }
+
+        if (!$data) {
+            $data = [];
+        }
+
+        return $data;
+    }
+}
+
+if (!function_exists('getNumberMonth')) {
+    function getNumberMonth()
+    {
+        for ($i = 1; $i < 6; $i++) {
+            $data[] = $i;
+        }
+
+        if (!$data) {
+            $data = [];
+        }
+
+        return $data;
+    }
+}
+
+if (!function_exists('getDisplayRow')) {
+    function getDisplayRow()
+    {
+        for ($i = 1; $i < 6; $i++) {
+            $data[] = $i;
+        }
+
+        if (!$data) {
+            $data = [];
+        }
+
+        return $data;
+    }
+}
+
+if (!function_exists('getResponseSuccessAjax')) {
+    function getResponseSuccessAjax()
+    {
+        $data['status'] = config('app.response.success.status');
+        $data['type'] = config('app.response.success.type');
+        $data['title'] = config('app.response.success.title');
+
+        if (!$data) {
+            $data = [];
+        }
+
+        return $data;
+    }
+}
+
+if (!function_exists('getResponseErrorAjax')) {
+    function getResponseErrorAjax()
+    {
+        $data['status'] = config('app.response.error.status');
+        $data['type'] = config('app.response.error.type');
+        $data['title'] = config('app.response.error.title');
+
+        if (!$data) {
+            $data = [];
+        }
+
+        return $data;
+    }
+}
+
+if (!function_exists('getMyClaimMonth')) {
+    function getMyClaimMonth()
+    {
+        $dataDate['year'][] = date('Y');
+        $dataDate['month'][] = date('F');
+        $dataDate['value'][] = date('m');
+        for ($i = 1; $i < claimDateSetting()->table_row_display; $i++) {
+            $dataDate['month'][] = date('F', strtotime("-$i month"));
+            $dataDate['year'][] = date('Y', strtotime("-$i month"));
+            $dataDate['value'][] = date('m', strtotime("-$i month"));
+        }
+
+        foreach ($dataDate['month'] as $key => $month) {
+            $monthData[] = [
+                'month' => $dataDate['month'][$key],
+                'year' => $dataDate['year'][$key],
+                'value' => $dataDate['value'][$key],
+            ];
+        }
+
+        $data = $monthData;
+
+        if (!$data) {
+            $data = [];
+        }
+
+        return $data;
+    }
+}
+
+if (!function_exists('checkingMonthlyClaim')) {
+    function checkingMonthlyClaim($year = '', $month = '')
+    {
+        $cond[0] = ['tenant_id', Auth::user()->tenant_id];
+        $cond[1] = ['user_id', Auth::user()->id];
+        $cond[2] = ['claim_type', 'MTC'];
+        $cond[3] = ['year', $year];
+        $cond[4] = ['month', $month];
+
+        $claim = GeneralClaim::where($cond)->first();
+
+        if (!$claim) {
+            $data['month'] = '-';
+            $data['id'] = '-';
+        } else {
+            $data['month'] = $claim->month;
+            $data['id'] = $claim->id;
         }
 
         return $data;

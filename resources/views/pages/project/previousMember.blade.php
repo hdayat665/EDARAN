@@ -33,7 +33,7 @@ table{
                 </li>
             </ul>
             <div class="tab-content panel m-0 rounded-0 p-3">
-                <div class="tab-pane fade active show" id="current-member">
+                <div class="tab-pane fade active show" id="current-member"> 
                     <div class="panel-heading-btn">
                         <br>
                         <a href="javascript:;" data-bs-toggle="modal" id="addProjectMemberButton" class="btn btn-primary">+ Add Project Member</a>

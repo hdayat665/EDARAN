@@ -1,5 +1,18 @@
 $(document).ready(function() {
-    
+
+    $(".partCheck").click(function(){
+        if ($(this).prop("checked")) {
+            $('#exitdatediv').show();
+           
+           
+            
+        } else {
+            
+            $('#exitdatediv').hide();
+            
+        }
+      });
+
     $("input[type=text]").keyup(function() {
         $(this).val($(this).val().toUpperCase());
     });
@@ -22,14 +35,20 @@ $(document).ready(function() {
         search:true,
     }); 
  
+    $("#joined_date").datepicker({
+        todayHighlight: true,
+        autoclose: true,
+        format: 'yyyy/mm/dd',
+    });
     $("#datepicker-joineddate").datepicker({
         todayHighlight: true,
         autoclose: true,
+        format: 'yyyy/mm/dd',
     });
-
     $("#datepicker-exitdate").datepicker({
         todayHighlight: true,
         autoclose: true,
+        format: 'yyyy/mm/dd',
     });
 
     $("#projectLocationTable").DataTable({
@@ -461,7 +480,7 @@ $(document).ready(function() {
     }
 
     $(document).on("click", "#addProjectMemberButton", function() {
-        $('#addProjectMemberModal').modal('show');
+        $('#addProjectMemberModal').modal('show'); 
 
     });
 
@@ -875,27 +894,34 @@ $(document).ready(function() {
 
     $("#datepicker-loa").datepicker({
         todayHighlight: true,
-        autoclose: true
+        autoclose: true,
+        format: 'yyyy/mm/dd',
+        
     });
     $("#datepicker-start").datepicker({
         todayHighlight: true,
-        autoclose: true
+        autoclose: true,
+        format: 'yyyy/mm/dd',
     });
     $("#datepicker-end").datepicker({
         todayHighlight: true,
-        autoclose: true
+        autoclose: true,
+        format: 'yyyy/mm/dd',
     });
     $("#datepicker-warstart").datepicker({
         todayHighlight: true,
-        autoclose: true
+        autoclose: true,
+        format: 'yyyy/mm/dd',
     });
     $("#datepicker-warend").datepicker({
         todayHighlight: true,
-        autoclose: true
+        autoclose: true,
+        format: 'yyyy/mm/dd',
     });
     $("#datepicker-bankexpiry").datepicker({
         todayHighlight: true,
-        autoclose: true
+        autoclose: true,
+        format: 'yyyy/mm/dd',
     });
 
 

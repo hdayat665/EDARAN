@@ -806,7 +806,7 @@ class SettingController extends Controller
     {
         $ss = new SettingService;
 
-        $result['datas'] = $ss->eclaimGeneralView();
+        $result['data'] = $ss->getDateClaim();
 
         return view('pages.setting.eclaim.eclaimDate', $result);
     }

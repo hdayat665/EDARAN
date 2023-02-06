@@ -20,7 +20,7 @@
                     </div>
                     <div class="row p-2">
                         <div class="col-sm-6">
-                            <label for="fullname" class="form-label">Full Name</label>
+                            <label for="fullname" class="form-label" style="color: red">Full Name</label>
                             <input type="text" id="" name="" class="form-control" aria-describedby="fullname">
                         </div>
                         <div class="col-sm-6">

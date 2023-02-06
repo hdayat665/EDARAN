@@ -81,7 +81,7 @@ class EmployeeService
         return $data;
     }
 
-    public function getEmployee() 
+    public function getEmployee()
     {
         $data = [];
         $data['status'] = true;
@@ -98,7 +98,6 @@ class EmployeeService
         $status['status'] = 'terminate';
 
         // check attachment
-        // pr($r->file());
         if ($r->hasfile('file')) {
             foreach ($r->file('file') as $file) {
                 $nameFile = upload($file);
