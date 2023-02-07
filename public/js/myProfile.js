@@ -1233,7 +1233,7 @@ submitHandler: function(form) {
             id = $(this).data('id');
             requirejs(['sweetAlert2'], function(swal) {
                 swal({
-                    title: "Are you sure!",
+                    title: "Are you sure to delete Children?",
                     type: "error",
                     confirmButtonClass: "btn-danger",
                     confirmButtonText: "Yes!",
@@ -1504,7 +1504,7 @@ submitHandler: function(form) {
             id = $(this).data('id');
             requirejs(['sweetAlert2'], function(swal) {
                 swal({
-                    title: "Are you sure!",
+                    title: "Are you sureto delete Sibling?",
                     type: "error",
                     confirmButtonClass: "btn-danger",
                     confirmButtonText: "Yes!",
@@ -1826,7 +1826,7 @@ submitHandler: function(form) {
             id = $(this).data('id');
             requirejs(['sweetAlert2'], function(swal) {
                 swal({
-                    title: "Are you sure!",
+                    title: "Are you sure to delete Parent?",
                     type: "error",
                     confirmButtonClass: "btn-danger",
                     confirmButtonText: "Yes!",

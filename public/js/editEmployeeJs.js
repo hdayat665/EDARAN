@@ -1344,7 +1344,7 @@ $(document).ready(function () {
             id = $(this).data("id");
             requirejs(["sweetAlert2"], function (swal) {
                 swal({
-                    title: "Are you sure!",
+                    title: "Are you sure to delete Children?",
                     type: "error",
                     confirmButtonClass: "btn-danger",
                     confirmButtonText: "Yes!",
@@ -1637,7 +1637,7 @@ $(document).ready(function () {
             id = $(this).data("id");
             requirejs(["sweetAlert2"], function (swal) {
                 swal({
-                    title: "Are you sure!",
+                    title: "Are you sure to delete Sibling?",
                     type: "error",
                     confirmButtonClass: "btn-danger",
                     confirmButtonText: "Yes!",
@@ -1938,7 +1938,7 @@ $(document).ready(function () {
             id = $(this).data("id");
             requirejs(["sweetAlert2"], function (swal) {
                 swal({
-                    title: "Are you sure!",
+                    title: "Are you sure to delete Parent?",
                     type: "error",
                     confirmButtonClass: "btn-danger",
                     confirmButtonText: "Yes!",
@@ -2028,7 +2028,7 @@ $(document).ready(function () {
         id = $(this).data("id");
         requirejs(["sweetAlert2"], function (swal) {
             swal({
-                title: "Are you sure!",
+                title: "Are you sure to delete Vehicle?",
                 type: "error",
                 confirmButtonClass: "btn-danger",
                 confirmButtonText: "Yes!",

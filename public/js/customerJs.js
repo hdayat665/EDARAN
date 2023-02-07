@@ -54,7 +54,7 @@ $(document).ready(function () {
         id = $(this).data("id");
         requirejs(["sweetAlert2"], function (swal) {
             swal({
-                title: "Are you sure!",
+                title: "Are you sure to delete Customer?",
                 type: "error",
                 confirmButtonClass: "btn-danger",
                 confirmButtonText: "Yes!",
