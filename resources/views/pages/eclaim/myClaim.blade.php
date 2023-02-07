@@ -69,7 +69,7 @@
                                                                 <td><span class="badge bg-lime">Open</span></td>
                                                                 <?php $checkMonth = checkingMonthlyClaim($data['year'], $data['month']); ?>
                                                                 @if ($data['month'] == $checkMonth['month'])
-                                                                    <td><a href="/editGeneralClaimView/{{ $checkMonth['id'] }}" type="button" class="btn btn-primary btn-sm">Update</a></td>
+                                                                    <td><a href="/monthClaimEditView/edit/month/{{ $checkMonth['id'] }}" type="button" class="btn btn-primary btn-sm">Update</a></td>
                                                                 @else
                                                                     <td><a href="/newMonthlyClaimView/{{ $data['value'] }}/{{ $data['year'] }}" type="button" class="btn btn-primary btn-sm">+ Apply</a>
                                                                     </td>

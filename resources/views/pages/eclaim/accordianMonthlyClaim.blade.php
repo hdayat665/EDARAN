@@ -377,7 +377,7 @@
                                         <?php $no = 1; ?>
                                         @foreach ($cashAdvances as $cashAdvance)
                                             <tr>
-                                                <td><input class="form-check-input" type="checkbox" /></td>
+                                                <td><input class="form-check-input" type="checkbox" value="{{ $cashAdvance->id }}" name="cashAdvanceId[]" /></td>
                                                 <td>{{ $no++ }}</td>
                                                 <td>Form ID {{ $cashAdvance->id }}</td>
                                                 <td> {{ getCashAdvanceType($cashAdvance->type) }}</td>
@@ -389,7 +389,7 @@
                                 </table>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-primary">Save</button>
+                                <button type="submit" id="caButton" class="btn btn-primary">Save</button>
                             </div>
                         </div>
                         <div class="WOC" style="display:none">

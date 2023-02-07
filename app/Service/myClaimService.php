@@ -487,6 +487,83 @@ class myClaimService
         return $data;
     }
 
+    public function createCaClaim($r)
+    {
+        $input = $r->input();
+
+        $id = $input['general_id'];
+        unset($input['claimtable_length']);
+
+        $monthlyClaimCount = GeneralClaim::where([['tenant_id', Auth::user()->tenant_id], ['claim_type', 'MTC']])->count();
+
+        if (!$monthlyClaimCount) {
+            $monthlyClaimCount = 0;
+        }
+
+        if (!$id) {
+            // add to general claim
+            $generalClaim['user_id'] = Auth::user()->id;
+            $generalClaim['tenant_id'] = Auth::user()->tenant_id;
+            $generalClaim['claim_id'] = 'MTC' . $monthlyClaimCount + 1;
+            $generalClaim['claim_type'] = $input['claim_type'] ?? 'MTC';
+            $generalClaim['status'] = 'draft';
+            $generalClaim['month'] = $input['month'] ?? '-';
+            $generalClaim['year'] = $input['year'] ?? '-';
+            // $generalClaim['total_amount'] = array_sum($input['amount']) ?? '';
+
+            GeneralClaim::create($generalClaim);
+            $generalClaimData = GeneralClaim::where('tenant_id', Auth::user()->tenant_id)->orderBy('created_at', 'DESC')->first();
+        } else {
+            $generalClaimData = GeneralClaim::where([['tenant_id', Auth::user()->tenant_id], ['id', $id]])->orderBy('created_at', 'DESC')->first();
+        }
+        unset($input['month'], $input['year']);
+
+
+        if ($_FILES['file_upload']['name']) {
+            $filename = upload($r->file('file_upload'));
+            $input['file_upload'] = $filename['filename'];
+        }
+
+        $cashAdvances = CashAdvanceDetail::whereIn('id', $input['cashAdvanceId'])->where([['tenant_id', Auth::user()->tenant_id], ['user_id', Auth::user()->id]])->get();
+        unset($input['cashAdvanceId']);
+        foreach ($cashAdvances as $cashAdvance) {
+            $input['user_id'] = Auth::user()->id;
+            $input['tenant_id'] = Auth::user()->tenant_id;
+            $input['general_id'] = $generalClaimData->id;
+            $input['amount'] = $input['total'];
+            $input['type_claim'] = 'subs';
+            $input['total'] = $cashAdvance['amount'] ?? '0';
+            $input['amount'] = $cashAdvance['amount'] ?? '0';
+            $input['travel_date'] = $cashAdvance['travel_date'] ?? '-';
+            $input['project_id'] = $cashAdvance['project_id'] ?? '-';
+            $input['file_upload'] = $cashAdvance['file_upload'] ?? '-';
+
+            TravelClaim::create($input);
+        }
+
+
+
+        $travelClaims = TravelClaim::where([['tenant_id', Auth::user()->tenant_id], ['general_id', $generalClaimData->id]])->get();
+
+        foreach ($travelClaims as $claim) {
+            $total[] = $claim->amount;
+        }
+
+        $totalAmount = [
+            'total_amount' => $generalClaimData->amount ?? 0 + array_sum($total),
+        ];
+
+        GeneralClaim::where('id', $generalClaimData->id)->update($totalAmount);
+
+        $data['status'] = config('app.response.success.status');
+        $data['type'] = config('app.response.success.type');
+        $data['title'] = config('app.response.success.title');
+        $data['id'] = $generalClaimData->id;
+        $data['msg'] = 'Success';
+
+        return $data;
+    }
+
     public function getCashAdvance()
     {
         $data = CashAdvanceDetail::where([['tenant_id', Auth::user()->tenant_id], ['user_id', Auth::user()->id]])->get();
@@ -511,6 +588,21 @@ class myClaimService
     public function getGeneralClaimById($id = '')
     {
         $data = GeneralClaim::where('id', $id)->first();
+
+        return $data;
+    }
+
+    public function updateStatusMonthlyClaim($id = '', $status = '')
+    {
+
+        $claim['status'] = $status;
+
+        GeneralClaim::where([['tenant_id', Auth::user()->tenant_id], ['id', $id]])->update($claim);
+
+        $data['status'] = config('app.response.success.status');
+        $data['type'] = config('app.response.success.type');
+        $data['title'] = config('app.response.success.title');
+        $data['msg'] = 'Success';
 
         return $data;
     }
