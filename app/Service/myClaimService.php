@@ -313,7 +313,7 @@ class myClaimService
             $generalClaim['claim_type'] = $input['claim_type'] ?? 'MTC';
             $generalClaim['status'] = 'draft';
             $generalClaim['month'] = $input['month'] ?? '-';
-            $generalClaim['year'] = date('Y');
+            $generalClaim['year'] = $input['year'] ?? '-';
             // $generalClaim['total_amount'] = array_sum($input['amount']) ?? '';
 
             GeneralClaim::create($generalClaim);
@@ -321,7 +321,7 @@ class myClaimService
         } else {
             $generalClaimData = GeneralClaim::where([['tenant_id', Auth::user()->tenant_id], ['id', $id]])->orderBy('created_at', 'DESC')->first();
         }
-        unset($input['month']);
+        unset($input['month'], $input['year']);
 
         if ($_FILES['file_upload']['name']) {
             $filename = upload($r->file('file_upload'));
@@ -375,7 +375,8 @@ class myClaimService
             $generalClaim['claim_type'] = $input['claim_type'] ?? 'MTC';
             $generalClaim['status'] = 'draft';
             $generalClaim['month'] = $input['month'] ?? '-';
-            $generalClaim['year'] = date('Y');
+            $generalClaim['year'] = $input['year'] ?? '-';
+
             // $generalClaim['total_amount'] = array_sum($input['amount']) ?? '';
 
             GeneralClaim::create($generalClaim);
@@ -383,7 +384,7 @@ class myClaimService
         } else {
             $generalClaimData = GeneralClaim::where([['tenant_id', Auth::user()->tenant_id], ['id', $id]])->orderBy('created_at', 'DESC')->first();
         }
-        unset($input['month']);
+        unset($input['month'], $input['year']);
 
 
         if ($_FILES['file_upload']['name']) {
@@ -441,7 +442,7 @@ class myClaimService
             $generalClaim['claim_type'] = $input['claim_type'] ?? 'MTC';
             $generalClaim['status'] = 'draft';
             $generalClaim['month'] = $input['month'] ?? '-';
-            $generalClaim['year'] = date('Y');
+            $generalClaim['year'] = $input['year'] ?? '-';
             // $generalClaim['total_amount'] = array_sum($input['amount']) ?? '';
 
             GeneralClaim::create($generalClaim);
@@ -449,7 +450,7 @@ class myClaimService
         } else {
             $generalClaimData = GeneralClaim::where([['tenant_id', Auth::user()->tenant_id], ['id', $id]])->orderBy('created_at', 'DESC')->first();
         }
-        unset($input['month']);
+        unset($input['month'], $input['year']);
 
 
         if ($_FILES['file_upload']['name']) {
