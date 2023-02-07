@@ -9,7 +9,7 @@ $(document).ready(function() {
         member_id = $(this).data('member-id');
         requirejs(['sweetAlert2'], function(swal) {
             swal({
-                title: "Are you sure!",
+                title: "Are you sure to delete Assign Location?",
                 type: "error",
                 confirmButtonClass: "btn-danger",
                 confirmButtonText: "Yes!",
