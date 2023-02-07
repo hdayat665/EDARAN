@@ -86,4 +86,22 @@ class myClaimController extends Controller
 
         return response()->json($data);
     }
+
+    public function submitCaClaim(request $r)
+    {
+        $mcs = new myClaimService;
+
+        $data = $mcs->createCaClaim($r);
+
+        return response()->json($data);
+    }
+
+    public function submitMonthlyClaim($id = '')
+    {
+        $mcs = new myClaimService;
+
+        $data = $mcs->updateStatusMonthlyClaim($id, 'paid');
+
+        return response()->json($data);
+    }
 }
