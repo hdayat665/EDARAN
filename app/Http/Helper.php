@@ -526,6 +526,8 @@ if (!function_exists('getFinancialYearForm')) {
             $next_year => $next_year,
         ];
 
+                $data = array_reverse($data);
+
         return $data;
     }
 }
@@ -544,6 +546,8 @@ if (!function_exists('getFinancialYearFormold')) {
             $data[$year] = $year;
         }
         
+        $data = array_reverse($data);
+
         return $data;
         
         
@@ -1130,14 +1134,20 @@ if (!function_exists('typeOfLog')) {
 }
 
 if (!function_exists('claimDateSetting')) {
-    function claimDateSetting()
-    {
-        $data = ClaimDateSetting::where('tenant_id', Auth::user()->tenant_id)->first();
-
-        if (!$data) {
-            $data = [];
-        }
-
-        return $data;
-    }
+    function claimDateSetting() {
+        return (object) [
+          'table_row_display' => 1
+        ];
+      }
+      
+      $dataDate = [];
+      $dataDate['year'][] = date('Y');
+      $dataDate['month'][] = date('F');
+      $dataDate['value'][] = date('m');
+      
+      for ($i = 1; $i < claimDateSetting()->table_row_display; $i++) {
+        $dataDate['month'][] = date('F', strtotime("-$i month"));
+        $dataDate['year'][] = date('Y', strtotime("-$i month"));
+        $dataDate['value'][] = date('m', strtotime("-$i month"));
+      }
 }

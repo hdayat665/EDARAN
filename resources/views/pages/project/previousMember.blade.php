@@ -65,7 +65,9 @@ table{
                                             <td>{{($projectMember->branch) ? getBranch($projectMember->branch)->branchName ?? '-' : '-'}}</td>
                                             <td>{{($projectMember->unit) ? getUnit($projectMember->unit)->unitName ?? '-' : '-'}}</td>
                                             <td>{{$projectMember->joined_date}}</td>
-                                            <td><a href="/projectAssignView/{{$projectMember->id}}">view</a></td>
+                                            <!-- <td><a href="/projectAssignView/{{$projectMember->id}}">view</a></td> -->
+                                            <td><a href="/projectAssignView/{{$projectMember->id}}" class="btn btn-primary"> View </a></td>
+
                                         </tr>
                                     @endforeach
                                 @endif

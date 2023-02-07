@@ -2,7 +2,7 @@
     <div class="modal-dialog" style="max-width: 780px!important;">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Reason Project Request Cancelled</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Rejection Reason</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
