@@ -112,10 +112,10 @@ $(document).ready(function() {
 
             messages: {
 
-                code: "Please Insert Policy's Code",
-                policy: "Please Insert Policy's Name",
-                desc: "Please Insert Policy's Description",
-                file: "Please Upload Policy's Document",
+                code: "Please Insert Policy",
+                policy: "Please Insert Document Title",
+                desc: "Please Insert Description",
+                file: "Please Upload Attachment",
 
             },
             submitHandler: function(form) {
@@ -174,10 +174,10 @@ $(document).on("click", "#updateButton1", function() {
 
         messages: {
 
-            code: "Please Insert Policy's Code",
-            policy: "Please Insert Policy's Name",
-            desc: "Please Insert Policy's Description",
-            file: "Please Upload Policy's Document",
+            code: "Please Insert Policy's",
+            policy: "Please Insert Document Title",
+            desc: "Please Insert Description",
+            file: "Please Upload Document",
 
         },
         submitHandler: function(form) {
@@ -310,8 +310,8 @@ $('#saveButton2').click(function(e) {
 
             SOPCode: "Please Insert SOP's Code",
             SOPName: "Please Insert SOP's Name",
-            desc: "Please Insert SOP's Description",
-            file: "Please Upload SOP's Document",
+            desc: "Please Insert Description",
+            file: "Please Upload Attachment",
 
         },
         submitHandler: function(form) {
@@ -372,8 +372,8 @@ $(document).on("click", "#updateButton2", function() {
 
             SOPCode: "Please Insert SOP's Code",
             SOPName: "Please Insert SOP's Name",
-            desc: "Please Insert SOP's Description",
-            file: "load SOP's Document",
+            desc: "Please Insert Description",
+            file: "Please Upload Attachment",
 
         },
         submitHandler: function(form) {

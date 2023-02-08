@@ -28,7 +28,7 @@
                 <label for="state" class="form-label">State*</label>
                 <select class="form-select" name="state" id="state" value="{{ $address->state ?? '' }}">
                     <?php $state = state() ?>
-                    <option value="" label="Please Choose"  ></option>
+                    <option value="" label="PLEASE CHOOSE"  ></option>
                     @foreach ($state as $key => $status)
                     <option value="{{$key}}"  <?php echo ($key == $address->state) ? 'selected="selected"' : '' ?>>{{$status}}</option>
                     @endforeach
@@ -92,7 +92,7 @@
                 <label for="state" class="form-label">State*</label>
                 <select class="form-select" id="statec" name="statec" value="{{ $address->statec ?? '' }}">
                     <?php $state = state() ?>
-                    <option value="" label="Please Choose"  ></option>
+                    <option value="" label="PLEASE CHOOSE"  ></option>
                     @foreach ($state as $key => $status)
                     <option value="{{$key}}"  <?php echo ($key == $address->statec) ? 'selected="selected"' : '' ?>>{{$status}}</option>
                     @endforeach
@@ -257,7 +257,7 @@
                 <label for="state" class="form-label">State*</label>
                 <select class="form-select" name="state" id="state" value="" style="text-transform:uppercase">
                     <?php $state = state() ?>
-                    <option value="" label="Please Choose"  ></option>
+                    <option value="" label="PLEASE CHOOSE" ></option>
                     @foreach ($state as $key => $status)
                     <option value="{{$key}}"  >{{$status}}</option>
                     @endforeach
@@ -344,7 +344,7 @@
                 <label for="state" class="form-label">State*</label>
                 <select class="form-select" name="" id="" value="" style="text-transform:uppercase">
                     <?php $state = state() ?>
-                    <option value="" label="Please Choose"  ></option>
+                    <option value="" label="PLEASE CHOOSE" ></option>
                     @foreach ($state as $key => $status)
                     <option value="{{$key}}" >{{$status}}</option>
                     @endforeach

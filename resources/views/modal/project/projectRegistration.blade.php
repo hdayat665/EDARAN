@@ -15,7 +15,7 @@
                     <div class="row mb-15px">
                         <div class="col-md-4">
                             <select class="form-select" name="customer_id">
-                                <option label="Please Choose "></option>
+                                <option label="PLEASE CHOOSE"></option>
                                 <?php $customers = customeractive(); ?>
                                 @foreach ($customers as $customer)
                                     <option value="{{ $customer->id }}">{{ $customer->customer_name }}</option>
@@ -55,7 +55,7 @@
                         </div>
                         <div class="col-md-4">
                             <select class="form-select" name="contract_type">
-                                <option label="Please Choose "></option>
+                                <option label="PLEASE CHOOSE"></option>
                                 <?php $types = getContractType(); ?>
                                 @foreach ($types as $key => $type)
                                     <option value="{{ $key }}">{{ $type }}</option>
@@ -64,7 +64,7 @@
                         </div>
                         <div class="col-md-4">
                             <select class="form-select" name="financial_year">
-                                <option label="Please Choose "></option>
+                                <option label="PLEASE CHOOSE"></option>
                                 <?php $years = getFinancialYearForm(); ?>
                                 @foreach ($years as $key => $type)
                                     <option value="{{ $key }}">{{ $type }}</option>
@@ -99,7 +99,7 @@
                     <div class="row mb-15px">
                         <div class="col-md-4">
                             <select class="form-select" name="acc_manager">
-                                <option value="" label="Please Choose "></option>
+                                <option value="" label="PLEASE CHOOSE"></option>
                                 <?php $getEmployees = getEmployee(); ?>
                                 @foreach ($getEmployees as $getEmployee)
                                     <option value="{{ $getEmployee->id }}">{{ $getEmployee->employeeName }}</option>
@@ -130,7 +130,7 @@
                         </div>
                         <div class="col-md-4">
                             <select class="form-select" name="status">
-                                <option value="" label="Please Choose " selected="selected"></option>
+                                <option value="" label="PLEASE CHOOSE" selected="selected"></option>
                                 <option value="Ongoing" label="Ongoing">Ongoing</option>
                                 <option value="Warranty" label="Warranty">Warranty</option>
                                 <option value="Closed" label="Closed">Closed</option>

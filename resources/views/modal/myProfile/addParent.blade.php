@@ -101,7 +101,7 @@
                             <label for="" class="form-label">Relationship</label>
                             <select class="form-select" name="relationship" id="relationshipparent" style="text-transform:uppercase">
                                 <?php $relationship = relationship() ?>
-                                <option value="" label="Please Choose"  ></option>
+                                <option value="" label="PLEASE CHOOSE"  ></option>
                                 @foreach ($relationship as $key => $status)
                                 <option value="{{$key}}"> {{$status}}</option>
                                 @endforeach
@@ -116,7 +116,7 @@
                         <div class="col-sm-6">
                             <label for="age" class="form-label">Gender*</label>
                             <select class="form-select" name="gender" id=""  style="text-transform:uppercase">
-                                <option value="" label="Please Choose "></option>
+                                <option value="" label="PLEASE CHOOSE"></option>
                                 @foreach ($gender as $key => $status)
                                 <option value="{{$key}}">{{$status}}</option>
                                 @endforeach
@@ -188,7 +188,7 @@
                             <label for="state" class="form-label">State*</label>
                             <select class="form-select" id="stateparent" name="state" style="text-transform:uppercase">
                                 <?php $state = state() ?>
-                                <option value="" label="Please Choose"></option>
+                                <option value="" label="PLEASE CHOOSE"></option>
                                 @foreach ($state as $key => $status)
                                 <option value="{{$key}}"> {{$status}}</option>
                                 @endforeach

@@ -15,7 +15,7 @@
                     <div class="row p-2">
                         <label for="firstname" class="form-label">Role*</label>
                         <select class="form-select" name="Role" disabled>
-                            <option value="" label="Please Choose "></option>
+                            <option value="" label="PLEASE CHOOSE"></option>
                             <?php $roles = getAllRole(); ?>
                             @foreach ($roles as $role)
                                 <option value="{{ $role->id }}"
@@ -27,7 +27,7 @@
                     <div class="row p-2">
                         <label for="firstname" class="form-label">Company*</label>
                         <select class="form-select" name="company" aria-label="Disabled select example" disabled>
-                            <option value="0" label="Please Choose "></option>
+                            <option value="0" label="PLEASE CHOOSE"></option>
                             <?php $companys = getCompany(); ?>
                             @foreach ($companys as $company)
                                 <option value="{{ $company->id }}"
@@ -40,7 +40,7 @@
                         <label for="firstname" class="form-label">Department*</label>
                         <select class="form-select" name="department" aria-label="Disabled select example" disabled>>
                             <?php $Departments = getDepartment(); ?>
-                            <option value="0" label="Please Choose "></option>
+                            <option value="0" label="PLEASE CHOOSE"></option>
                             @foreach ($Departments as $Department)
                                 <option value="{{ $Department->id ?? null }}"
                                     {{ $employment->department == $Department->id ? 'selected="selected"' : '' }}
@@ -52,7 +52,7 @@
                         <label for="firstname" class="form-label">Unit*</label>
                         <select class="form-select" name="unit" aria-label="Disabled select example" disabled>>
                             <?php $Units = getUnit(); ?>
-                            <option value="0" label="Please Choose "></option>
+                            <option value="0" label="PLEASE CHOOSE"></option>
                             @foreach ($Units as $Unit)
                                 <option value="{{ $Unit->id }}"
                                     {{ $employment->unit == $Unit->id ? 'selected="selected"' : '' }}
@@ -64,7 +64,7 @@
                         <label for="firstname" class="form-label">Branch*</label>
                         <select class="form-select" name="branch" aria-label="Disabled select example" disabled>>
                             <?php $Branchs = getBranch(); ?>
-                            <option value="0" label="Please Choose "></option>
+                            <option value="0" label="PLEASE CHOOSE"></option>
                             @foreach ($Branchs as $Branch)
                                 <option value="{{ $Branch->id }}"
                                     {{ $employment->branch == $Branch->id ? 'selected="selected"' : '' }}
@@ -81,7 +81,7 @@
                         <label for="firstname" class="form-label">Job Grade*</label>
                         <select class="form-select" name="jobGrade" aria-label="Disabled select example" disabled>>
                             <?php $JobGrades = getJobGrade(); ?>
-                            <option value="0" label="Please Choose "></option>
+                            <option value="0" label="PLEASE CHOOSE"></option>
                             @foreach ($JobGrades as $JobGrade)
                                 <option value="{{ $JobGrade->id }}"
                                     {{ $employment->jobGrade == $JobGrade->id ? 'selected="selected"' : '' }}
@@ -93,7 +93,7 @@
                         <label for="firstname" class="form-label">Designation*</label>
                         <select class="form-select" name="designation" aria-label="Disabled select example" disabled>>
                             <?php $Designations = getDesignation(); ?>
-                            <option value="0" label="Please Choose "></option>
+                            <option value="0" label="PLEASE CHOOSE"></option>
                             @foreach ($Designations as $Designation)
                                 <option value="{{ $Designation->id }}"
                                     {{ $employment->designation == $Designation->id ? 'selected="selected"' : '' }}
@@ -106,7 +106,7 @@
                         <select class="form-select" name="employmentType" aria-label="Disabled select example"
                             disabled>>
                             <?php $EmploymentTypes = getEmploymentType(); ?>
-                            <option value="0" label="Please Choose "></option>
+                            <option value="0" label="PLEASE CHOOSE"></option>
                             @foreach ($EmploymentTypes as $EmploymentType)
                                 <option value="{{ $EmploymentType->id ?? null }}"
                                     label="{{ $EmploymentType->type ?? null }}"
@@ -234,7 +234,7 @@
                             <div class="col-sm-6">
                                 <label for="firstname" class="form-label">Event*</label>
                                 <select class="form-select" name="event">
-                                    <option value="0" label="Please Choose"></option>
+                                    <option value="0" label="PLEASE CHOOSE"></option>
                                     <?php $events = getEvent(); ?>
                                     @foreach ($events as $key => $event)
                                         <option value="{{ $key }}">{{ $event }}</option>

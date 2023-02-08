@@ -101,15 +101,15 @@
 
                     <div class="mb-3">
                         <label class="form-label">Designation Code* </label>
-                        <input type="text" class="form-control" name="designationCode" placeholder="Designation Code" >
+                        <input type="text" class="form-control" name="designationCode" placeholder="DESIGNATION CODE" >
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Designation Name* </label>
-                        <input type="text" class="form-control" name="designationName" placeholder="Designation Name" maxlength="100" >
+                        <input type="text" class="form-control" name="designationName" placeholder="DESIGNATION NAME" maxlength="100" >
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Job Description* </label>
-                        <textarea type="text" class="form-control" placeholder="Job Description" name="jobDesc" rows="5" maxlength="255" ></textarea>
+                        <textarea type="text" class="form-control" placeholder="Job Description" name="jobDesc" rows="5" maxlength="255" placeholder="JOB DESCRIPTION"></textarea>
                     </div>
 
             </div>
@@ -133,16 +133,16 @@
 
                     <div class="mb-3">
                         <label class="form-label">Designation Code* </label>
-                        <input type="text" class="form-control" name="designationCode" id="designationCode" placeholder="Designation Code" >
+                        <input type="text" class="form-control" name="designationCode" id="designationCode" placeholder="DESIGNATION CODE" >
                         <input type="hidden" class="form-control" name="id" id="idD" placeholder="">
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Designation Name* </label>
-                        <input type="text" class="form-control" name="designationName" id="designationName" placeholder="Designation Name" maxlength="100" >
+                        <input type="text" class="form-control" name="designationName" id="designationName" placeholder="DESIGNATION NAME" maxlength="100" >
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Job Description* </label>
-                        <textarea type="text" class="form-control" placeholder="Job Description" id="jobDesc" name="jobDesc" rows="5" maxlength="255"></textarea>
+                        <textarea type="text" class="form-control" placeholder="Job Description" id="jobDesc" name="jobDesc" rows="5" maxlength="255" placeholder="JOB DESCRIPTION"></textarea>
                     </div>
 
             </div>

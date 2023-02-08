@@ -97,9 +97,9 @@ $(document).ready(function() {
 
             messages: {
                
-                departmentId: "Please Choose Your Department Name",
-                unitName: "Please Insert Your Unit Code",
-                unitCode: "Please Insert Your Unit Name",
+                departmentId: "Please Choose Department Name",
+                unitName: "Please Insert Unit Code",
+                unitCode: "Please Insert Unit Name",
                
             },
             submitHandler: function(form) {
@@ -155,9 +155,9 @@ $(document).ready(function() {
 
             messages: {
                
-                departmentId: "Please Choose Your Department Name",
-                unitName: "Please Insert Your Unit Code",
-                unitCode: "Please Insert Your Unit Name",
+                departmentId: "Please Choose Department Name",
+                unitName: "Please Insert Unit Code",
+                unitCode: "Please Insert Unit Name",
                
             },
             submitHandler: function(form) {

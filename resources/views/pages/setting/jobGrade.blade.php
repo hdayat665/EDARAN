@@ -92,11 +92,11 @@
 
                     <div class="mb-3">
                         <label class="form-label">Job Grade Code* </label>
-                        <input type="text" class="form-control" name="jobGradeCode" placeholder="Job Grade Code" maxlength="100">
+                        <input type="text" class="form-control" name="jobGradeCode" placeholder="JOB GRADE CODE" maxlength="100">
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Job Grade Name* </label>
-                        <input type="text" class="form-control" name="jobGradeName" placeholder="Job Grade Name" maxlength="100">
+                        <input type="text" class="form-control" name="jobGradeName" placeholder="JOB GRADE NAME" maxlength="100">
                     </div>
             </div>
             <div class="modal-footer">
@@ -119,12 +119,12 @@
 
                     <div class="mb-3">
                         <label class="form-label">Job Grade Code* </label>
-                        <input type="text" class="form-control" name="jobGradeCode" id="jobGradeCode" placeholder="Job Grade Code" maxlength="100" >
+                        <input type="text" class="form-control" name="jobGradeCode" id="jobGradeCode" placeholder="JOB GRADE CODE" maxlength="100" >
                         <input type="hidden" class="form-control" name="id" id="idJ" placeholder="">
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Job Grade Name* </label>
-                        <input type="text" class="form-control" name="jobGradeName" id="jobGradeName" placeholder="Job Grade Name" maxlength="100" >
+                        <input type="text" class="form-control" name="jobGradeName" id="jobGradeName" placeholder="JOB GRADE NAME" maxlength="100" >
                     </div>
             </div>
             <div class="modal-footer">
