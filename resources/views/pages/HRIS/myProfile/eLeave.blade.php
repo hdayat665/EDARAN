@@ -16,13 +16,13 @@
             <div class="row p-2">
                 <label for="firstname" class="form-label">Recommender*</label>
                 <select class="form-select">
-                    <option value="0" label="Please Choose " selected="selected"></option>
+                    <option value="0" label="PLEASE CHOOSE" selected="selected"></option>
                 </select>
             </div>
             <div class="row p-2">
                 <label for="firstname" class="form-label">Approver*</label>
                 <select class="form-select">
-                    <option value="0" label="Please Choose " selected="selected"></option>
+                    <option value="0" label="PLEASE CHOOSE" selected="selected"></option>
                 </select>
             </div>
             <button type="button" class="btn btn-primary float-end mt-3">

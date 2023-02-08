@@ -105,7 +105,7 @@ $(document).ready(function() {
 
                 title: "Please Insert Title",
                 content: "Please Insert Content",
-                file: "Upload Supporting Document",
+                file: "Please Upload Attachment",
 
             },
             submitHandler: function(form) {
@@ -168,7 +168,7 @@ $('#updateButton').click(function(e) {
             title: "Please Insert Title",
             sourceURL: "Please Insert URL",
             content: "Please Insert Content",
-            file: "Upload Supporting Document",
+            file: "Please Upload Attachment",
 
         },
         submitHandler: function(form) {

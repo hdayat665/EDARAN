@@ -12,7 +12,7 @@
                         <label for="firstname" class="form-label">Vehicle Type*</label>
                         <select class="form-select" id="vehicleType1" name="vehicle_type">
                             <?php $vehicleTypes = getVehicle() ?>
-                            <option value="0" label="Please Choose " selected="selected"></option>
+                            <option value="0" label="PLEASE CHOOSE" selected="selected"></option>
                             @foreach ($vehicleTypes as $key => $vehicle)
                                 <option value="{{$key}}">{{$vehicle}}</option>
                             @endforeach

@@ -65,15 +65,15 @@
 
                     <div class="mb-3">
                         <label class="form-label">Title*</label>
-                        <input type="text" class="form-control" name="title" placeholder="Title" maxlength="100" >
+                        <input type="text" class="form-control" name="title" placeholder="Title" maxlength="100" placeholder="TITLE">
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Source URL</label>
-                        <input type="url" class="form-control" name="sourceURL" placeholder="Source URL" maxlength="255">
+                        <input type="url" class="form-control" name="sourceURL" placeholder="Source URL" maxlength="255" placeholder="SOURCE URL">
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Content*</label>
-                        <textarea type="text" class="form-control" rows="3" placeholder="Content" name="content" maxlength="255" ></textarea>
+                        <textarea type="text" class="form-control" rows="3" placeholder="Content" name="content" maxlength="255" placeholder="CONTENT"></textarea>
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Attachment* </label>
@@ -101,16 +101,16 @@
 
                     <div class="mb-3">
                         <label class="form-label">Title*</label>
-                        <input type="text" class="form-control" name="title" id="title" placeholder="" maxlength="100" >
-                        <input type="hidden" class="form-control" name="id" id="idN" placeholder="" maxlength="100" >
+                        <input type="text" class="form-control" name="title" id="title" placeholder="TITLE" maxlength="100" >
+                        <input type="hidden" class="form-control" name="id" id="idN" placeholder="TITLE" maxlength="100" >
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Source URL</label>
-                        <input type="text" class="form-control" name="sourceURL" id="sourceURL" placeholder="" maxlength="255">
+                        <input type="text" class="form-control" name="sourceURL" id="sourceURL" placeholder="SOURCE URL" maxlength="255">
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Content*</label>
-                        <textarea type="text" class="form-control" rows="3" name="content" id="contents" maxlength="255" ></textarea>
+                        <textarea type="text" class="form-control" rows="3" name="content" id="contents" maxlength="255" placeholder="CONTENT"></textarea>
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Attachment*</label>

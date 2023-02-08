@@ -26,7 +26,7 @@
                         <div class="col-sm-6">
                             <label for="gender" class="form-label">Gender</label>
                             <select class="form-select" name="gender">
-                                <option value="" label="Please Choose " ></option>
+                                <option value="" label="PLEASE CHOOSE" ></option>
                                 @foreach ($gender as $key => $status)
                                 <option value="{{$key}}" >{{$status}}</option>
                                 @endforeach
@@ -41,7 +41,7 @@
                         <div class="col-sm-6">
                             <label for="lastname" class="form-label">Relationship</label>
                             <select class="form-select" name="relationship">
-                                <option value="" label="Please Choose "></option>
+                                <option value="" label="PLEASE CHOOSE"></option>
                                 @foreach ($relationships as $key => $relationship)
                                 <option value="{{$key}}" >{{$relationship}}</option>
                                 @endforeach
@@ -84,7 +84,7 @@
                         <div class="col-sm-6">
                             <label for="state" class="form-label">State*</label>
                             <select class="form-select" name="state" id="statesibling">
-                                <option value="" label="Please Choose " ></option>
+                                <option value="" label="PLEASE CHOOSE" ></option>
                                 @foreach ($states as $key => $state)
                                 <option value="{{$key}}"  >{{$state}}</option>
                                 @endforeach

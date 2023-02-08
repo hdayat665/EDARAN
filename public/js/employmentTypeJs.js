@@ -96,7 +96,7 @@ $(document).ready(function() {
 
             messages: {
                
-                type: "Please Insert Your Employment Name",
+                type: "Please Insert Employment Name",
 
             },
             submitHandler: function(form) {
@@ -152,7 +152,7 @@ $(document).ready(function() {
 
             messages: {
                
-                type: "Please Insert Your Employment Name",
+                type: "Please Insert Employment Name",
 
             },
             submitHandler: function(form) {
