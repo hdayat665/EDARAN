@@ -352,7 +352,7 @@ if (!function_exists('asias')) {
 if (!function_exists('getCompany')) {
     function getCompany()
     {
-        $data = Company::where('tenant_id', Auth::user()->tenant_id)->orderBy('id', 'desc')->get();
+        $data = Company::where('tenant_id', Auth::user()->tenant_id)->get();
 
         if (blank($data)) {
             $data = [];
@@ -386,7 +386,7 @@ if (!function_exists('getUnit')) {
         if ($id) {
             $data = Unit::find($id);
         } else {
-            $data = Unit::where('tenant_id', Auth::user()->tenant_id)->orderBy('id', 'desc')->get();
+            $data = Unit::where('tenant_id', Auth::user()->tenant_id)->get();
         }
 
         if (!$data) {
@@ -447,7 +447,7 @@ if (!function_exists('getDesignation')) {
         if ($id) {
             $data = Designation::find($id);
         } else {
-            $data = Designation::where('tenant_id', Auth::user()->tenant_id)->orderBy('id', 'desc')->get();
+            $data = Designation::where('tenant_id', Auth::user()->tenant_id)->get();
         }
         if (!$data) {
             $data = '';
@@ -473,7 +473,7 @@ if (!function_exists('getEmploymentType')) {
 if (!function_exists('getCustomer')) {
     function getCustomer()
     {
-        $data = Customer::where('tenant_id', Auth::user()->tenant_id)->orderBy('id', 'desc')->get();
+        $data = Customer::where('tenant_id', Auth::user()->tenant_id)->get();
 
         return $data;
     }
@@ -682,7 +682,7 @@ if (!function_exists('getBranch')) {
         if ($id) {
             $data = Branch::find($id);
         } else {
-            $data = Branch::where('tenant_id', Auth::user()->tenant_id)->orderBy('id', 'desc')->get();
+            $data = Branch::where('tenant_id', Auth::user()->tenant_id)->get();
         }
 
         if (!$data) {
@@ -1002,7 +1002,7 @@ if (!function_exists('getUserByRole')) {
 if (!function_exists('getClaimCategory')) {
     function getClaimCategory($id = '')
     {
-        $data = ClaimCategory::where('tenant_id', Auth::user()->tenant_id)->orderBy('id', 'desc')->get();
+        $data = ClaimCategory::where('tenant_id', Auth::user()->tenant_id)->get();
 
         if (!$data) {
             $data = [];
