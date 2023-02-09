@@ -15,12 +15,18 @@ $(document).ready(function() {
 
     $("#tablesop").DataTable({
         responsive: false,
-        lengthMenu: [5, 10,25,50,All],
+        lengthMenu: [
+            [5, 10, 25, 50, -1],
+            [5, 10, 25, 50, "All"],
+        ],
 
     });
     $("#tablepolicy").DataTable({
         responsive: false,
-        lengthMenu: [5, 10,25,50,All],
+        lengthMenu: [
+            [5, 10, 25, 50, -1],
+            [5, 10, 25, 50, "All"],
+        ],
 
     });
     $(document).on("click", "#addButton1", function() {

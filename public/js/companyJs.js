@@ -10,12 +10,18 @@ $(document).ready(function () {
 
     $("#data-table-default").DataTable({
         responsive: true,
-        lengthMenu: [5, 10,25,50,All],
+        lengthMenu: [
+            [5, 10, 25, 50, -1],
+            [5, 10, 25, 50, "All"],
+        ],
     });
 
     $("#tableRoles").DataTable({
         responsive: true,
-        lengthMenu: [5, 10,25,50,All],
+        lengthMenu: [
+            [5, 10, 25, 50, -1],
+            [5, 10, 25, 50, "All"],
+        ],
     });
 
     $(document).on("click", "#addButton", function () {

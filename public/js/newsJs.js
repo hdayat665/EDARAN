@@ -7,7 +7,10 @@ $(document).ready(function() {
 
     $("#tablenews").DataTable({
         responsive: false,
-        lengthMenu: [5, 10,25,50,All],
+        lengthMenu: [
+            [5, 10, 25, 50, -1],
+            [5, 10, 25, 50, "All"],
+        ],
     });
 
     $(document).on("click", "#addButton", function() {

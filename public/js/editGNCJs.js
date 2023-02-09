@@ -2,7 +2,10 @@ $(document).ready(function () {
     $("#applyclaimtable").DataTable({
         searching: false,
         lengthChange: true,
-        lengthMenu: [5, 10,25,50,All],
+        lengthMenu: [
+            [5, 10, 25, 50, -1],
+            [5, 10, 25, 50, "All"],
+        ],
         responsive: false,
         info: false,
     });
