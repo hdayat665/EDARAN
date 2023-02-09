@@ -369,7 +369,7 @@ if (!function_exists('getDepartment')) {
         if ($id) {
             $data = Department::find($id);
         } else {
-            $data = Department::where('tenant_id', Auth::user()->tenant_id)->orderBy('id', 'desc')->get();
+            $data = Department::where('tenant_id', Auth::user()->tenant_id)->get();
         }
 
         if (!$data) {
@@ -418,7 +418,7 @@ if (!function_exists('getBranch')) {
 if (!function_exists('getJobGrade')) {
     function getJobGrade()
     {
-        $data = JobGrade::where('tenant_id', Auth::user()->tenant_id)->orderBy('id', 'desc')->get();
+        $data = JobGrade::where('tenant_id', Auth::user()->tenant_id)->get();
 
         if (!$data) {
             $data = [];
@@ -460,8 +460,7 @@ if (!function_exists('getDesignation')) {
 if (!function_exists('getEmploymentType')) {
     function getEmploymentType()
     {
-        $data = EmploymentType::where('tenant_id', Auth::user()->tenant_id)->orderBy('id', 'desc')->get();
-
+        $data = EmploymentType::where('tenant_id', Auth::user()->tenant_id)->get();
         if (!$data) {
             $data = [];
         }
@@ -666,7 +665,7 @@ if (!function_exists('customeractive')) {
 if (!function_exists('projectLocation')) {
     function projectLocation($projectid = '')
     {
-        $data = ProjectLocation::where('tenant_id', Auth::user()->tenant_id)->orderBy('id', 'desc')->get();
+        $data = ProjectLocation::where('tenant_id', Auth::user()->tenant_id)->get();
 
         if (!$data) {
             $data = [];
@@ -802,8 +801,7 @@ if (!function_exists('activityName')) {
 if (!function_exists('getEventTimesheet')) {
     function getEventTimesheet()
     {
-        $data = TimesheetEvent::where('tenant_id', Auth::user()->tenant_id)->orderBy('id', 'desc')->get();
-
+        $data = TimesheetEvent::where('tenant_id', Auth::user()->tenant_id)->get();
         return $data;
     }
 }
@@ -1118,7 +1116,7 @@ if (!function_exists('getModeOfTransport')) {
 if (!function_exists('typeOfLog')) {
     function typeOfLog()
     {
-        $data = TypeOfLogs::where('tenant_id', Auth::user()->tenant_id)->orderBy('id', 'desc')->get();
+        $data = TypeOfLogs::where('tenant_id', Auth::user()->tenant_id)->get();
 
         if (!$data) {
             $data = [];
