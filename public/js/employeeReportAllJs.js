@@ -1,6 +1,6 @@
 $('#summarytable').DataTable({
     responsive: false,
-    lengthMenu: [5, 10, -1],
+    lengthMenu: [5, 10,25,50,All],
     deferRender: true,
     scrollY: true,
     scrollX: true,

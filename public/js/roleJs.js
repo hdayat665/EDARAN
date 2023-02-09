@@ -6,6 +6,7 @@ $(document).ready(function () {
 
     $("#tableRoles").DataTable({
         responsive: true,
+        lengthMenu: [5, 10,25,50,All],
     });
 
     $(document).on("click", "#addRoleButton", function () {

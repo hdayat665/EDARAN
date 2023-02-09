@@ -352,7 +352,7 @@ if (!function_exists('asias')) {
 if (!function_exists('getCompany')) {
     function getCompany()
     {
-        $data = Company::where('tenant_id', Auth::user()->tenant_id)->get();
+        $data = Company::where('tenant_id', Auth::user()->tenant_id)->orderBy('id', 'desc')->get();
 
         if (blank($data)) {
             $data = [];
@@ -369,7 +369,7 @@ if (!function_exists('getDepartment')) {
         if ($id) {
             $data = Department::find($id);
         } else {
-            $data = Department::where('tenant_id', Auth::user()->tenant_id)->get();
+            $data = Department::where('tenant_id', Auth::user()->tenant_id)->orderBy('id', 'desc')->get();
         }
 
         if (!$data) {
@@ -386,7 +386,7 @@ if (!function_exists('getUnit')) {
         if ($id) {
             $data = Unit::find($id);
         } else {
-            $data = Unit::where('tenant_id', Auth::user()->tenant_id)->get();
+            $data = Unit::where('tenant_id', Auth::user()->tenant_id)->orderBy('id', 'desc')->get();
         }
 
         if (!$data) {
@@ -404,7 +404,7 @@ if (!function_exists('getBranch')) {
         if ($id) {
             $data = Branch::find($id);
         } else {
-            $data = Branch::where('tenant_id', Auth::user()->tenant_id)->get();
+            $data = Branch::where('tenant_id', Auth::user()->tenant_id)-orderBy('id', 'desc')->get();
         }
 
         if (!$data) {
@@ -418,7 +418,7 @@ if (!function_exists('getBranch')) {
 if (!function_exists('getJobGrade')) {
     function getJobGrade()
     {
-        $data = JobGrade::where('tenant_id', Auth::user()->tenant_id)->get();
+        $data = JobGrade::where('tenant_id', Auth::user()->tenant_id)->orderBy('id', 'desc')->get();
 
         if (!$data) {
             $data = [];
@@ -447,7 +447,7 @@ if (!function_exists('getDesignation')) {
         if ($id) {
             $data = Designation::find($id);
         } else {
-            $data = Designation::where('tenant_id', Auth::user()->tenant_id)->get();
+            $data = Designation::where('tenant_id', Auth::user()->tenant_id)->orderBy('id', 'desc')->get();
         }
         if (!$data) {
             $data = '';
@@ -460,7 +460,7 @@ if (!function_exists('getDesignation')) {
 if (!function_exists('getEmploymentType')) {
     function getEmploymentType()
     {
-        $data = EmploymentType::where('tenant_id', Auth::user()->tenant_id)->get();
+        $data = EmploymentType::where('tenant_id', Auth::user()->tenant_id)->orderBy('id', 'desc')->get();
 
         if (!$data) {
             $data = [];
@@ -473,7 +473,7 @@ if (!function_exists('getEmploymentType')) {
 if (!function_exists('getCustomer')) {
     function getCustomer()
     {
-        $data = Customer::where('tenant_id', Auth::user()->tenant_id)->get();
+        $data = Customer::where('tenant_id', Auth::user()->tenant_id)->orderBy('id', 'desc')->get();
 
         return $data;
     }
@@ -666,7 +666,7 @@ if (!function_exists('customeractive')) {
 if (!function_exists('projectLocation')) {
     function projectLocation($projectid = '')
     {
-        $data = ProjectLocation::where('tenant_id', Auth::user()->tenant_id)->get();
+        $data = ProjectLocation::where('tenant_id', Auth::user()->tenant_id)->orderBy('id', 'desc')->get();
 
         if (!$data) {
             $data = [];
@@ -682,7 +682,7 @@ if (!function_exists('getBranch')) {
         if ($id) {
             $data = Branch::find($id);
         } else {
-            $data = Branch::where('tenant_id', Auth::user()->tenant_id)->get();
+            $data = Branch::where('tenant_id', Auth::user()->tenant_id)->orderBy('id', 'desc')->get();
         }
 
         if (!$data) {
@@ -802,7 +802,7 @@ if (!function_exists('activityName')) {
 if (!function_exists('getEventTimesheet')) {
     function getEventTimesheet()
     {
-        $data = TimesheetEvent::where('tenant_id', Auth::user()->tenant_id)->get();
+        $data = TimesheetEvent::where('tenant_id', Auth::user()->tenant_id)->orderBy('id', 'desc')->get();
 
         return $data;
     }
@@ -1002,7 +1002,7 @@ if (!function_exists('getUserByRole')) {
 if (!function_exists('getClaimCategory')) {
     function getClaimCategory($id = '')
     {
-        $data = ClaimCategory::where('tenant_id', Auth::user()->tenant_id)->get();
+        $data = ClaimCategory::where('tenant_id', Auth::user()->tenant_id)->orderBy('id', 'desc')->get();
 
         if (!$data) {
             $data = [];
@@ -1118,7 +1118,7 @@ if (!function_exists('getModeOfTransport')) {
 if (!function_exists('typeOfLog')) {
     function typeOfLog()
     {
-        $data = TypeOfLogs::where('tenant_id', Auth::user()->tenant_id)->get();
+        $data = TypeOfLogs::where('tenant_id', Auth::user()->tenant_id)->orderBy('id', 'desc')->get();
 
         if (!$data) {
             $data = [];

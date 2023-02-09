@@ -846,20 +846,19 @@
 <script>
     $('#data-table-default-announcement').DataTable({
         responsive: true,
-        lengthMenu: [5, 10],
-
+        lengthMenu: [5, 10,25,50,All],
     });
 </script>
 <script>
     $('#data-table-default-events').DataTable({
         responsive: true,
-        lengthMenu: [5, 10],
+        lengthMenu: [5, 10,25,50,All],
     });
 </script>
 <script>
     $('#data-table-default-clocks').DataTable({
         responsive: true,
-        lengthMenu: [5, 10],
+        lengthMenu: [5, 10,25,50,All],
     });
 </script>
 <script type="text/javascript">

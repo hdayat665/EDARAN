@@ -15,7 +15,7 @@ $(document).ready(function() {
 
     $("#tablebranch").DataTable({
         responsive: false,
-        lengthMenu: [5, 10],
+        lengthMenu: [5, 10,25,50,All],
     });
 
     $(document).on("click", "#addButton", function() {
