@@ -21,6 +21,16 @@ class Employee extends Authenticatable
     protected $table ='employment';
 
     protected $guarded = [];
+
+    public function getRecommender()
+    {
+        return $this->belongsTo(Employee::class, 'id', 'user_id');
+    }
+
+    public function getApprover()
+    {
+        return $this->belongsTo(Employee::class, 'id', 'user_id');
+    }
 }
 
 

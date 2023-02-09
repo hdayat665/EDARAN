@@ -220,6 +220,9 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('/branchByUnitId/{unitId}', 'branchByUnitId');
             Route::get('/getActivityNamesById/{id}', 'getActivityNamesById');
 
+            Route::get('/getRecommender', 'getRecommender');
+            Route::get('/getApprover', 'getApprover');
+
             // eclaim
             Route::get('/setting/eclaimGeneralView', 'eclaimGeneralView');
             Route::get('/setting/eclaimDateView', 'eclaimDateView');

@@ -1269,3 +1269,29 @@ if (!function_exists('checkingMonthlyClaim')) {
         return $data;
     }
 }
+
+if (!function_exists('getRecommender')) {
+    function getRecommender()
+    {
+        $data = Employee::all();
+
+        if (blank($data)) {
+            $data = [];
+        }
+
+        return $data;
+    }
+}
+
+if (!function_exists('getApprover')) {
+    function getApprover()
+    {
+        $data = Employee::all();
+
+        if (blank($data)) {
+            $data = [];
+        }
+
+        return $data;
+    }
+}

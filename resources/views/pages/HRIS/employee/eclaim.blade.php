@@ -22,18 +22,26 @@
                                 <div class="card-body">
                                     <div class="row p-2">
                                         <label for="firstname" class="form-label">Employee Name</label>
-                                        <input type="text" id="text" class="form-control" aria-describedby="password">
+                                        <input type="text" id="text" class="form-control" aria-describedby="password"  readonly value="{{$profile->fullName ?? ''}}">
                                     </div>
                                     <div class="row p-2">
                                         <label for="firstname" class="form-label">Recommender*</label>
                                         <select class="form-select">
-                                            <option value="0" label="PLEASE CHOOSE" selected="selected"></option>
+                                            <?php $users_id = getRecommender() ?>
+                                            <option value="" label="Please Choose">Select User </option>
+                                            @foreach ($users_id as $recommender)
+                                                <option value="{{$recommender->id}}" >{{$recommender->employeeName}}</option>
+                                            @endforeach
                                         </select>
                                     </div>
                                     <div class="row p-2">
                                         <label for="firstname" class="form-label">Approver*</label>
                                         <select class="form-select">
-                                            <option value="0" label="PLEASE CHOOSE" selected="selected"></option>
+                                            <?php $users_id = getApprover() ?>
+                                            <option value="" label="Please Choose">Select User </option>
+                                            @foreach ($users_id as $approver)
+                                                <option value="{{$approver->id}}" >{{$approver->employeeName}}</option>
+                                            @endforeach
                                         </select>
                                     </div>
                                     <br>
