@@ -2,7 +2,10 @@ $(document).ready(function() {
 
     $("#data-table-viewassigned").DataTable({
         responsive: true,
-        lengthMenu: [5, 10, 15],
+        lengthMenu: [
+            [5, 10, 25, 50, -1],
+            [5, 10, 25, 50, "All"],
+        ],
     });
     $(document).on("click", "#deleteButton", function() {
         id = $(this).data('id');
