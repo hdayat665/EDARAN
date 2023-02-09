@@ -124,7 +124,7 @@
                             </div>
                             {{-- new --}}
                             <div class="col-sm-3 part">
-                                <label for="idattach" class="form-label" style="color: red;">ID Attachment*</label>
+                                <label for="idattach" class="form-label" style="color: red;">ID Attachment</label>
                                 <input type="file" class="form-control-file" id="">
                             </div> 
                         </div>
