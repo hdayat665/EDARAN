@@ -1004,6 +1004,7 @@ class SettingService
     public function jobGradeView()
     {
         $data['jobGrades'] = JobGrade::where('tenant_id', Auth::user()->tenant_id)->get();
+
         return $data;
     }
 
@@ -1024,6 +1025,7 @@ class SettingService
     public function employmentTypeView()
     {
         $data['employmentTypes'] = EmploymentType::where('tenant_id', Auth::user()->tenant_id)->get();
+
         return $data;
     }
 

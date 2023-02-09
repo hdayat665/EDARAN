@@ -404,7 +404,7 @@ if (!function_exists('getBranch')) {
         if ($id) {
             $data = Branch::find($id);
         } else {
-            $data = Branch::where('tenant_id', Auth::user()->tenant_id)-orderBy('id', 'desc')->get();
+            $data = Branch::where('tenant_id', Auth::user()->tenant_id)->get();
         }
 
         if (!$data) {
@@ -461,6 +461,7 @@ if (!function_exists('getEmploymentType')) {
     function getEmploymentType()
     {
         $data = EmploymentType::where('tenant_id', Auth::user()->tenant_id)->get();
+
         if (!$data) {
             $data = [];
         }
@@ -802,6 +803,7 @@ if (!function_exists('getEventTimesheet')) {
     function getEventTimesheet()
     {
         $data = TimesheetEvent::where('tenant_id', Auth::user()->tenant_id)->get();
+
         return $data;
     }
 }
