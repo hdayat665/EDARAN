@@ -70,6 +70,11 @@
                     @endif
                 </tbody>
             </table>
+            <div class="row p-2">
+                <div class="col align-self-start">
+                    <a href="/setting" class="btn btn-light" style="color: black;" type="submit"><i class="fa fa-arrow-left"></i> Back</a>
+                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -90,7 +95,7 @@
                         <label class="form-label">Company Name* </label>
                         <select class="form-select" name="companyId" id="companyId" style="text-transform: uppercase;">
                             <?php $companies = getCompany() ?>
-                            <option value="" label="Select Company">Select Company </option>
+                            <option value="" label="PLEASE CHOOSE"> PLEASE CHOOSE</option>
                             @foreach ($companies as $company)
                                 <option value="{{$company->id}}" >{{$company->companyName}}</option>
                             @endforeach
@@ -98,11 +103,11 @@
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Department code* </label>
-                        <input type="text" class="form-control" id="departmentCode" name="departmentCode" maxlength="100" placeholder="Department code" >
+                        <input type="text" class="form-control" id="departmentCode" name="departmentCode" maxlength="100" placeholder="DEPARTMENT CODE" >
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Department Name* </label>
-                        <input type="text" class="form-control" id="departmentName" name="departmentName" maxlength="100" placeholder="Department Name" >
+                        <input type="text" class="form-control" id="departmentName" name="departmentName" maxlength="100" placeholder="DEPARTMENT NAME" >
                         <input type="hidden" class="form-control" id="idD" name="id" maxlength="100" placeholder="" >
                     </div>
 
@@ -129,7 +134,7 @@
                         <label class="form-label">Company Name* </label>
                             <?php $companies = getCompany() ?>
                             <select class="form-select" name="companyId" style="text-transform:uppercase;">
-                            <option value="" label="Select Company " >Select Company </option>
+                            <option value="" label="PLEASE CHOOSE" >PLEASE CHOOSE </option>
                             @foreach ($companies as $company)
                                 <option value="{{$company->id}}">{{$company->companyName}}</option>
                             @endforeach
@@ -138,11 +143,11 @@
                    
                     <div class="mb-3">
                         <label class="form-label">Department Code* </label>
-                        <input type="text" class="form-control" name="departmentCode" maxlength="100" placeholder="Department Code" >
+                        <input type="text" class="form-control" name="departmentCode" maxlength="100" placeholder="DEPARTMENT CODE" >
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Department Name* </label>
-                        <input type="text" class="form-control" name="departmentName" maxlength="100" placeholder="Department Name" >
+                        <input type="text" class="form-control" name="departmentName" maxlength="100" placeholder="DEPARTMENT NAME" >
                     </div>
 
             </div>

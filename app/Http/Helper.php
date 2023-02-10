@@ -527,6 +527,8 @@ if (!function_exists('getFinancialYearForm')) {
             $next_year => $next_year,
         ];
 
+                $data = array_reverse($data);
+
         return $data;
     }
 }
@@ -544,6 +546,8 @@ if (!function_exists('getFinancialYearFormold')) {
             $year = date("Y", strtotime("+" . $i . " year", strtotime($start_year . "-01-01")));
             $data[$year] = $year;
         }
+
+        $data = array_reverse($data);
 
         return $data;
     }

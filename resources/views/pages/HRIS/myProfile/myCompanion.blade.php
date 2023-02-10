@@ -113,7 +113,7 @@
                                 <label for="marriage-status" class="form-label">Marriage Status</label>
                                 <select class="form-select" name="marrigeStatus" style="text-transform:uppercase">
                                     <?php $maritialStatus = getMaritalStatus() ?>
-                                    <option value="0" label="Please Choose"  ></option>
+                                    <option value="0" label="PLEASE CHOOSE" ></option>
                                     @foreach ($maritialStatus as $key => $status)
                                     <option value="{{$key}}" >{{$status}}</option>
                                     @endforeach
@@ -195,7 +195,7 @@
                                 <label for="state" class="form-label">State*</label>
                                 <select class="form-select" name="state" value="{{ $companion->state ?? '' }}" style="text-transform:uppercase">
                                     <?php $state = state() ?>
-                                    <option value="" label="Please Choose"  ></option>
+                                    <option value="" label="PLEASE CHOOSE" ></option>
                                     @foreach ($state as $key => $status)
                                     <option value="{{$key}}" >{{$status}}</option>
                                     @endforeach
@@ -449,7 +449,7 @@
                                         <label for="marriage-status" class="form-label">Marriage Status</label>
                                         <select class="form-select" name="marrigeStatus" >
                                             <?php $maritialStatus = getMaritalStatus() ?>
-                                            <option value="0" label="Please Choose"  ></option>
+                                            <option value="0" label="PLEASE CHOOSE"  ></option>
                                             @foreach ($maritialStatus as $key => $status)
                                             <option value="{{$key}}" <?php echo ($key == $companion->marrigeStatus) ? 'selected="selected"' : '' ?>>{{$status}}</option>
                                             @endforeach
@@ -522,7 +522,7 @@
                                 <label for="state" class="form-label">State*</label>
                                 <select class="form-select" name="state" value="{{ $companion->state ?? '' }}">
                                     <?php $state = state() ?>
-                                    <option value="0" label="Please Choose"  ></option>
+                                    <option value="0" label="PLEASE CHOOSE" ></option>
                                     @foreach ($state as $key => $status)
                                     <option value="{{$key}}"  <?php echo ($key == $companion->state) ? 'selected="selected"' : '' ?>>{{$status}}</option>
                                     @endforeach
@@ -610,7 +610,7 @@
                                 <label for="state" class="form-label">State</label>
                                 <select class="form-select" name="stateE" value="{{ $companion->stateE ?? '' }}">
                                     <?php $state = state() ?>
-                                    <option value="0" label="Please Choose"  ></option>
+                                    <option value="0" label="PLEASE CHOOSE" ></option>
                                     @foreach ($state as $key => $status)
                                     <option value="{{$key}}"  <?php echo ($key == $companion->stateE) ? 'selected="selected"' : '' ?>>{{$status}}</option>
                                     @endforeach

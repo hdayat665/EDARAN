@@ -183,7 +183,7 @@
                                                     <div class="col-sm-3">
                                                         <label for="issuing-country" class="form-label">Issuing Country</label>
                                                         <select class="form-select" name="issuingCountry">
-                                                            <option value="" label="Please Choose"  ></option>
+                                                            <option value="" label="PLEASE CHOOSE" ></option>
                                                             <option value="MY" label="Malaysia" selected ></option>
                                                             <?php
                                                             $americass = americas();
@@ -213,7 +213,7 @@
                                                                 <label for="gender" class="form-label">Gender</label>
                                                                 <select class="form-select" name="gender" id="gender">
                                                                     <?php $gender = gender() ?>
-                                                                    <option value="" label="Please Choose" selected disabled></option>
+                                                                    <option value="" label="PLEASE CHOOSE" selected disabled></option>
                                                                     @foreach ($gender as $key => $status)
                                                                     <option value="{{$key}}" <?php echo ($key == $profile->gender) ? 'selected="selected"' : '' ?> >{{$status}}</option>
                                                                     @endforeach
@@ -225,7 +225,7 @@
                                                         <label for="issuing-country" class="form-label">Marital Status</label>
                                                         <select class="form-select" name="maritialStatus">
                                                             <?php $MaritalStatus = getMaritalStatus() ?>
-                                                            <option value="" label="Please Choose"  selected disabled></option>
+                                                            <option value="" label="PLEASE CHOOSE"  selected disabled></option>
                                                             @foreach ($MaritalStatus as $key => $status)
                                                             <option value="{{$key}}" <?php echo ($key == $profile->maritialStatus) ? 'selected="selected"' : '' ?> >{{$status}}</option>
                                                             @endforeach
@@ -237,7 +237,7 @@
                                                         <label for="religion" class="form-label">Religion</label>
                                                         <select class="form-select" name="religion">
                                                             <?php $religion = religion() ?>
-                                                            <option value="" label="Please Choose"  ></option>
+                                                            <option value="" label="PLEASE CHOOSE"  ></option>
                                                             @foreach ($religion as $key => $status)
                                                             <option value="{{$key}}"  <?php echo ($key == $profile->religion) ? 'selected="selected"' : '' ?>>{{$status}}</option>
                                                             @endforeach
@@ -246,8 +246,7 @@
                                                     <div class="col-sm-6">
                                                         <label for="race" class="form-label">Race</label>
                                                         <select class="form-select" name="race">
-                                                            <?php $race = race() ?>
-                                                            <option value="" label="Please Choose"  ></option>
+                                                            <?php $race = race() ?>"PLEASE CHOOSE""Please Choose"  ></option>
                                                             @foreach ($race as $key => $status)
                                                             <option value="{{$key}}"  <?php echo ($key == $profile->race) ? 'selected="selected"' : '' ?>>{{$status}}</option>
                                                             @endforeach

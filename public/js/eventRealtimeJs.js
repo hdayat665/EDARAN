@@ -257,7 +257,10 @@ $("#daterange").daterangepicker({
 $('#timesheetapproval').DataTable({
     "searching": false,
     "lengthChange": true,
-    lengthMenu: [5, 10],
+    lengthMenu: [
+        [5, 10, 25, 50, -1],
+        [5, 10, 25, 50, "All"],
+    ],
     responsive: false,
     scrollX: true,
 
@@ -278,7 +281,10 @@ $('#timesheetapproval').DataTable({
 $('#tableviewparticipant').DataTable({
     responsive: false,
     "searching": false,
-    lengthMenu: [5, 10],
+    lengthMenu: [
+        [5, 10, 25, 50, -1],
+        [5, 10, 25, 50, "All"],
+    ],
     "lengthChange": false,
 });
 

@@ -15,7 +15,10 @@ $(document).ready(function() {
 
     $("#tablebranch").DataTable({
         responsive: false,
-        lengthMenu: [5, 10],
+        lengthMenu: [
+            [5, 10, 25, 50, -1],
+            [5, 10, 25, 50, "All"],
+        ],
     });
 
     $(document).on("click", "#addButton", function() {
@@ -50,7 +53,7 @@ $(document).ready(function() {
         id = $(this).data('id');
         requirejs(['sweetAlert2'], function(swal) {
             swal({
-                title: "Are you sure!",
+                title: "Are you sure to delete Branch?",
                 type: "error",
                 confirmButtonClass: "btn-danger",
                 confirmButtonText: "Yes!",
@@ -121,13 +124,13 @@ $(document).ready(function() {
 
                 branchCode: "Please Insert Branch Code ",
                 branchName: "Please Insert Branch Name",
-                branchType: "Please Insert Branch Type",
+                branchType: "Please Choose Branch Type",
                 unitId: "Please Choose Unit Name",
-                address: "Please Insert Address",
+                address: "Please Insert Address 1",
                 postcode: {
-                    required: "Enter Postcode",
-                    digits: "Please Enter Valid Postcode",
-                    rangelength: "Please Enter Valid Postcode"
+                    required: "Please Insert Postcode",
+                    digits: "Please Insert Valid Postcode",
+                    rangelength: "Please Insert Valid Postcode"
                 },
                 city: "Please Insert City",
                 state: "Please Choose State"
@@ -198,13 +201,13 @@ $(document).ready(function() {
 
                 branchCode: "Please Insert Branch Code ",
                 branchName: "Please Insert Branch Name",
-                branchType: "Please Insert Branch Type",
+                branchType: "Please Choose Branch Type",
                 unitId: "Please Choose Unit Name",
-                address: "Please Insert Address",
+                address: "Please Insert Address 1",
                 postcode: {
-                    required: "Enter Postcode",
-                    digits: "Please Enter Valid Postcode",
-                    rangelength: "Please Enter Valid Postcode"
+                    required: "Please Insert Postcode",
+                    digits: "Please Insert Valid Postcode",
+                    rangelength: "Please Insert Valid Postcode"
                 },
                 city: "Please Insert City",
                 state: "Please Choose State"

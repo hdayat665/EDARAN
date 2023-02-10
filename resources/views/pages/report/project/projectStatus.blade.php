@@ -19,7 +19,7 @@
                         <select class="form-control" name="filter" id="select1" required
                             oninvalid="this.setCustomValidity('Please select an item in the list')"
                             oninput="setCustomValidity('')">
-                            <option value="">Please Choose</option>
+                            <option value="">PLEASE CHOOSE</option>
                             <option value="All">All</option>
                             <option value="CustName">Customer Name</option>
                             <option value="FinYear">Financial Year</option>
@@ -118,7 +118,7 @@
                             <label for="Menu3">Select Project Name : </label>
                             <select class="form-select" name="projectName" id="select8">
 
-                                <option label="Please Choose" selected="selected"> </option>
+                                <option label="PLEASE CHOOSE" selected="selected"> </option>
 
                             </select>
                             {{-- <select class="form-control" name="projectName" id="select8"  oninvalid="this.setCustomValidity('Please Select Project Name')" oninput="setCustomValidity('')">

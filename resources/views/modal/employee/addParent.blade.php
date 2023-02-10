@@ -94,7 +94,7 @@
                         <div class="col-sm-6">
                             <label for="age" class="form-label">Gender*</label>
                             <select class="form-select" name="gender" id="gender6" style="pointer-events: none">
-                                <option value="" label="Please Choose "></option>
+                                <option value="" label="PLEASE CHOOSE"></option>
                                 @foreach ($gender as $key => $status)
                                 <option value="{{$key}}">{{$status}}</option>
                                 @endforeach
@@ -110,7 +110,7 @@
                             <label for="expirydate" class="form-label">Relationship</label>
                             <select class="form-select" name="relationship" id="">
                                 <?php $relationship = relationship() ?>
-                                <option value="0" label="Please Choose"  ></option>
+                                <option value="0" label="PLEASE CHOOSE"  ></option>
                                 @foreach ($relationship as $key => $status)
                                 <option value="{{$key}}"> {{$status}}</option>
                                 @endforeach
@@ -180,7 +180,7 @@
                             <label for="state" class="form-label">State*</label>
                             <select class="form-select" id="stateparent" name="state">
                                 <?php $state = state() ?>
-                                <option value="0" label="Please Choose"  ></option>
+                                <option value="0" label="PLEASE CHOOSE"  ></option>
                                 @foreach ($state as $key => $status)
                                 <option value="{{$key}}"> {{$status}}</option>
                                 @endforeach

@@ -125,7 +125,7 @@
                 <label for="state" class="form-label">State*</label>
                 <select class="form-select" name="state" id="state" value="" style="text-transform:uppercase">
                     <?php $state = state() ?>
-                    <option value="" label="Please Choose"  ></option>
+                    <option value="" label="PLEASE CHOOSE"  ></option>
                     @foreach ($state as $key => $status)
                     <option value="{{$key}}"  >{{$status}}</option>
                     @endforeach
@@ -212,7 +212,7 @@
                 <label for="state" class="form-label">State*</label>
                 <select class="form-select" name="" id="" value="" style="text-transform:uppercase">
                     <?php $state = state() ?>
-                    <option value="" label="Please Choose"  ></option>
+                    <option value="" label="PLEASE CHOOSE"  ></option>
                     @foreach ($state as $key => $status)
                     <option value="{{$key}}" >{{$status}}</option>
                     @endforeach

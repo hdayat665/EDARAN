@@ -24,14 +24,15 @@
                         @if ($datas)
                         @foreach ($datas as $myProject)
                         <tr>
-                            <td>{{$myProject->customer_name}}</td>
+                            <td>{{$myProject->customer_name}}</td> 
                             <td>{{$myProject->project_code}}</td>
                             <td>{{$myProject->project_name}}</td>
                             <td>{{$myProject->desc}}</td>
                             <td>{{($myProject->project_manager) ? getEmployeeNameById($myProject->project_manager)->employeeName ?? '-' : '-'}}</td>
                             <td>{{$myProject->contract_end_date}}</td>
                             {{-- <td>{{$myProject->request_status}}</td> --}}
-                            <td><a href="javascript:;" data-bs-toggle="modal" data-id=",{{$myProject->location}}" id="getLocation" data-bs-target="#exampleModal">{{count(explode(',',$myProject->location))}}</a></td>
+                            <!-- <td><a href="javascript:;" data-bs-toggle="modal" data-id=",{{$myProject->location}}" id="getLocation" data-bs-target="#exampleModal">{{count(explode(',',$myProject->location))}}</a></td> -->
+                                <td><a href="javascript:;" data-bs-toggle="modal" data-id=",{{$myProject->location}}" id="getLocation" data-bs-target="#exampleModal" class="btn btn-primary"> View </a></td>
                         </tr>
                         @endforeach
                         @endif

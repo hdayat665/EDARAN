@@ -125,6 +125,11 @@
                     </table>
                 </div>
             </div>
+            <div class="row p-2">
+                <div class="col align-self-start">
+                    <a href="/setting" class="btn btn-light" style="color: black;" type="submit"><i class="fa fa-arrow-left"></i> Back</a>
+                </div>
+            </div>
 
             <!-- END col-4 -->
         </div>
@@ -144,15 +149,15 @@
 
                     <div class="mb-3">
                         <label class="form-label">Policy*</label>
-                        <input type="text" class="form-control" name="code" placeholder="Policy" >
+                        <input type="text" class="form-control" name="code" placeholder="POLICY" >
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Document Title*</label>
-                        <input type="text" class="form-control" name="policy" placeholder="Document Title" maxlength="100" >
+                        <input type="text" class="form-control" name="policy" placeholder="DOCUMENT TITLE" maxlength="100" >
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Description*</label>
-                        <textarea type="text" class="form-control" rows="3" placeholder="Description" name="desc" maxlength="255" ></textarea>
+                        <textarea type="text" class="form-control" rows="3" placeholder="DESCRIPTION" name="desc" maxlength="255" ></textarea>
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Attachment </label>
@@ -182,16 +187,16 @@
 
                     <div class="mb-3">
                         <label class="form-label">Policy*</label>
-                        <input type="text" class="form-control" id="code" name="code" placeholder="Policy" >
-                        <input type="hidden" class="form-control" id="idP" name="id" placeholder="Policy" >
+                        <input type="text" class="form-control" id="code" name="code" placeholder="POLICY" >
+                        <input type="hidden" class="form-control" id="idP" name="id" placeholder="POLICY" >
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Document Title*</label>
-                        <input type="text" class="form-control" id="policy" name="policy" placeholder="Document Title" maxlength="100" >
+                        <input type="text" class="form-control" id="policy" name="policy" placeholder="DOCUMENT TITLE" maxlength="100" >
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Description*</label>
-                        <textarea type="text" class="form-control" rows="3" name="desc" placeholder="Description" id="desc" maxlength="255" ></textarea>
+                        <textarea type="text" class="form-control" rows="3" name="desc" placeholder="DESCRIPTION" id="desc" maxlength="255" ></textarea>
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Attachment*</label>
@@ -220,15 +225,15 @@
 
                     <div class="mb-3">
                         <label class="form-label">SOP's Code* </label>
-                        <input type="text" class="form-control" name="SOPCode" placeholder="" maxlength="100" >
+                        <input type="text" class="form-control" name="SOPCode" placeholder="SOP'S CODE" maxlength="100" >
                     </div>
                     <div class="mb-3">
                         <label class="form-label">SOP's Name* </label>
-                        <input type="text" class="form-control" name="SOPName" placeholder="" maxlength="100" >
+                        <input type="text" class="form-control" name="SOPName" placeholder="SOP'S NAME" maxlength="100" >
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Description* </label>
-                        <textarea type="text" class="form-control" rows="3" name="desc" maxlength="255" ></textarea>
+                        <textarea type="text" class="form-control" rows="3" name="desc" maxlength="255" placeholder="DESCRIPTION"></textarea>
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Attachment* </label>
@@ -256,16 +261,16 @@
 
                     <div class="mb-3">
                         <label class="form-label">SOP's Code </label>
-                        <input type="text" class="form-control" name="SOPCode" id="SOPCode" placeholder="" >
-                        <input type="hidden" class="form-control" name="id" id="idS" placeholder="" >
+                        <input type="text" class="form-control" name="SOPCode" id="SOPCode" placeholder="SOP'S CODE" >
+                        <input type="hidden" class="form-control" name="id" id="idS" placeholder="SOP'S CODE" >
                     </div>
                     <div class="mb-3">
                         <label class="form-label">SOP's Name </label>
-                        <input type="text" class="form-control" name="SOPName" id="SOPName" placeholder="" maxlength="100" >
+                        <input type="text" class="form-control" name="SOPName" id="SOPName" placeholder="SOP'S NAME" maxlength="100" >
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Description </label>
-                        <textarea class="form-control" rows="3" name="desc" id="descr" maxlength="255"></textarea>
+                        <textarea class="form-control" rows="3" name="desc" id="descr" maxlength="255" placeholder="DESCRIPTION"></textarea>
                     </div>
                     <div class="mb-3">
                         <label class="form-label">File Upload </label>

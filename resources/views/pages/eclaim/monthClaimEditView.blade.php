@@ -51,8 +51,9 @@
                     <a href="/myClaimView" class="btn btn-light" style="color: black;" type="submit"><i class="fa fa-arrow-left"></i> Back</a>
                 </div>
                 <div class="col d-flex justify-content-end">
-                    <a class="btn btn-light" style="color: black" type="submit"><i class="fa fa-save"></i>
-                        Submit</a>
+                    <input type="hidden" value="{{ Request::segment(4) }}" id="generalId">
+                    <button class="btn btn-light" id="editSubmitButton" style="color: black" type="submit"><i class="fa fa-save"></i>
+                        Submit</button>
                 </div>
             </div>
         </div>

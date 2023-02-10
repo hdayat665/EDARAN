@@ -68,7 +68,13 @@
                     @endif
                 </tbody>
             </table>
+            <div class="row p-2">
+                <div class="col align-self-start">
+                    <a href="/setting" class="btn btn-light" style="color: black;" type="submit"><i class="fa fa-arrow-left"></i> Back</a>
+                </div>
+            </div>
         </div>
+        
     </div>
 
     <!-- END row -->
@@ -84,11 +90,11 @@
                     <form id="addForm">
                         {{-- <div class="mb-3">
                             <label class="form-label">Employment Type Code* </label><br><br>
-                            <input type="text" class="form-control" name="code" placeholder="" maxlength="100" style="text-transform:uppercase ;">
+                            <input type="text" class="form-control" name="code" placeholder="EMPLYMENT TYPE CODE" maxlength="100" style="text-transform:uppercase ;">
                         </div> --}}
                         <div class="mb-3">
                             <label class="form-label">Employment Type* </label><br><br>
-                            <input type="text" class="form-control" name="type" placeholder="" maxlength="100" style="text-transform:uppercase ;">
+                            <input type="text" class="form-control" name="type" placeholder="EMPLYMENT TYPE" maxlength="100" style="text-transform:uppercase ;">
                         </div>
                 </div>
                 <div class="modal-footer">
@@ -110,12 +116,12 @@
                     <form id="editForm">
                         {{-- <div class="mb-3">
                             <label class="form-label">Employment Type Code* </label><br><br>
-                            <input type="text" class="form-control" name="code" placeholder="" maxlength="100" style="text-transform:uppercase ;">
+                            <input type="text" class="form-control" name="code" placeholder="EMPLYMENT TYPE CODE" maxlength="100" style="text-transform:uppercase ;">
                             <input type="hidden" class="form-control" name="id" id="idE" placeholder="" maxlength="100" style="text-transform:uppercase ;">
                         </div> --}}
                         <div class="mb-3">
                             <label class="form-label">Employment Type* </label><br><br>
-                            <input type="text" class="form-control" name="type" id="type" placeholder="" maxlength="100" style="text-transform:uppercase ;">
+                            <input type="text" class="form-control" name="type" id="type" placeholder="EMPLOYMENT TYPE" maxlength="100" style="text-transform:uppercase ;">
                             <input type="hidden" id="idE" name="id">
                         </div>
                 </div>

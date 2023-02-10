@@ -295,11 +295,13 @@ $(document).ready(function() {
                 },
                 homeNo: {
                     digits: true,
+                    rangelength: [9, 9]
 
                     
                 },
                 extensionNo: {
                     digits: true,
+                    rangelength: [9, 9]
                     
                 },
 
@@ -310,7 +312,7 @@ $(document).ready(function() {
             messages: {
                 personalEmail: {
                     required: "Please Insert Personal Email",
-                    email: "Please Provide Valid Email Address",
+                    email: "Please Insert Valid Email Address",
                     
                 },
                 firstName: "Please Insert First Name",
@@ -323,20 +325,21 @@ $(document).ready(function() {
                 idNo: {
                     required: "Please Insert New Identification Number",
                     digits: "Please Insert Correct Identification Number Without ' - ' or Space",
-                    rangelength: "Please Provide Valid Identification Number"
+                    rangelength: "Please Insert Valid Identification Number"
                 },
                 phoneNo: {
                     required: "Please Insert Phone Number",
                     digits: "Please Insert Correct Identification Number Without ' - ' or Space",
+                    rangelength: "Please Insert Valid Phone Number"
                     
                 },
                 homeNo: {
                     digits: "Please Insert Correct Identification Number Without ' - ' or Space",
-                    
+                    rangelength: "Please Insert Valid Phone Number"
                 },
                 extensionNo: {
                     digits: "Please Insert Correct Identification Number Without ' - ' or Space",
-                    
+                    rangelength: "Please Insert Valid Phone Number"
                 },
             },
             submitHandler: function(form) {
@@ -1233,7 +1236,7 @@ submitHandler: function(form) {
             id = $(this).data('id');
             requirejs(['sweetAlert2'], function(swal) {
                 swal({
-                    title: "Are you sure!",
+                    title: "Are you sure to delete Children?",
                     type: "error",
                     confirmButtonClass: "btn-danger",
                     confirmButtonText: "Yes!",
@@ -1504,7 +1507,7 @@ submitHandler: function(form) {
             id = $(this).data('id');
             requirejs(['sweetAlert2'], function(swal) {
                 swal({
-                    title: "Are you sure!",
+                    title: "Are you sureto delete Sibling?",
                     type: "error",
                     confirmButtonClass: "btn-danger",
                     confirmButtonText: "Yes!",
@@ -1826,7 +1829,7 @@ submitHandler: function(form) {
             id = $(this).data('id');
             requirejs(['sweetAlert2'], function(swal) {
                 swal({
-                    title: "Are you sure!",
+                    title: "Are you sure to delete Parent?",
                     type: "error",
                     confirmButtonClass: "btn-danger",
                     confirmButtonText: "Yes!",

@@ -29,7 +29,7 @@
                             <label for="emergency-relationship" class="form-label">Relationship*</label>
                             <select class="form-select" name="" value="" id="" style="text-transform:uppercase">
                                             <?php $relationship = relationship() ?>
-                                            <option value="0" label="Please Choose Relationship"  ></option>
+                                            <option value="0" label="PLEASE CHOOSE"  ></option>
                                             @foreach ($relationship as $key => $status)
                                             <option value="{{$key}}"<?php echo ($key == $emergency->relationship) ? 'selected="selected"' : '' ?>> {{$status}}</option>
                                             <option value="{{$key}}"> {{$status}}</option>
@@ -64,7 +64,7 @@
                             <label for="emergency-state" class="form-label">State*</label>
                             <select class="form-select" name="state" value="{{ $emergency->state ?? '' }}" style="text-transform:uppercase">
                                 <?php $state = state() ?>
-                                <option value="" label="Please Choose State"  ></option>
+                                <option value="" label="PLEASE CHOOSE" ></option>
                                 @foreach ($state as $key => $status)
                                 <option value="{{$key}}"  <?php echo ($key == $emergency->state) ? 'selected="selected"' : '' ?>>{{$status}}</option>
                                 @endforeach
@@ -126,7 +126,7 @@
                                 <label for="emergency-relationship" class="form-label">Relationship*</label>
                                 <select class="form-select" name="relationship" id="emergency-relationship" style="text-transform:uppercase">
                                                 <?php $relationship = relationship() ?>
-                                                <option value="" label="Please Choose Relationship"  ></option>
+                                                <option value="" label="PLEASE CHOOSE"  ></option>
                                                 @foreach ($relationship as $key => $status)
                                                 <option value="{{$key}}"> {{$status}}</option>
                                                 @endforeach
@@ -160,7 +160,7 @@
                                 <label for="emergency-state" class="form-label">State*</label>
                                 <select class="form-select" name="" value="" style="text-transform:uppercase">
                                     <?php $state = state() ?>
-                                    <option value="" label="Please Choose State"  ></option>
+                                    <option value="" label="PLEASE CHOOSE"></option>
                                     @foreach ($state as $key => $status)
                                     <option value="{{$key}}"  <?php echo ($key == $emergency->state) ? 'selected="selected"' : '' ?>>{{$status}}</option>
                                     @endforeach

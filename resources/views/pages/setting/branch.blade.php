@@ -73,6 +73,11 @@
                     @endif
                 </tbody>
             </table>
+            <div class="row p-2">
+                <div class="col align-self-start">
+                    <a href="/setting" class="btn btn-light" style="color: black;" type="submit"><i class="fa fa-arrow-left"></i> Back</a>
+                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -91,18 +96,18 @@
 
                         <div class="mb-3">
                             <label class="form-label">Branch Code*</label>
-                            <input type="text" class="form-control" name="branchCode" maxlength="100" placeholder="Branch Code" >
+                            <input type="text" class="form-control" name="branchCode" maxlength="100" placeholder="BRANCH CODE" >
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Branch Name*</label>
-                            <input type="text" class="form-control" name="branchName" maxlength="100" placeholder="Branch Name" >
+                            <input type="text" class="form-control" name="branchName" maxlength="100" placeholder="BRANCH NAME" >
                            
                         </div>
                         <div class="mb-2">
                             <label class="form-label">Branch Type</label>
                             {{-- <input type="text" class="form-control" name="branchType" maxlength="100" placeholder="" style="text-transform:uppercase"> --}}
                             <select class="form-select" name="branchType" id="">
-                                <option value="">Select Type</option>
+                                <option value="">SELECT BRANCH TYPE</option>
                                 <option value="HEADQUARTERS ">HEADQUARTERS </option>
                                 <option value="STATE ">STATE </option>
                             </select>
@@ -119,19 +124,19 @@
                         </div>
                         <div class="mb-2">
                             <label class="form-label">Address 1*</label>
-                            <input type="text" class="form-control" name="address" maxlength="100" placeholder="Address 1" >
+                            <input type="text" class="form-control" name="address" maxlength="100" placeholder="ADDRESS 1" >
                         </div>
                         <div class="mb-2">
                             <label class="form-label">Address 2</label>
-                            <input type="text" class="form-control" name="address2" maxlength="100" placeholder="Address 2" >
+                            <input type="text" class="form-control" name="address2" maxlength="100" placeholder="ADDRESS 2" >
                         </div>
                         <div class="mb-2">
                             <label class="form-label">Postcode*</label>
-                            <input type="number" class="form-control" name="postcode" id="postcode" placeholder="Postcode" aria-describedby="postcode">
+                            <input type="number" class="form-control" name="postcode" id="postcode" placeholder="POSTCODE" aria-describedby="postcode">
                         </div>
                         <div class="mb-2">
                             <label class="form-label">City*</label>
-                            <input type="text" class="form-control" name="city" placeholder="City" >
+                            <input type="text" class="form-control" name="city" placeholder="CITY" >
                         </div>
                         <div class="mb-2">
                             <label class="form-label">State*</label>
@@ -183,17 +188,17 @@
 
                         <div class="mb-3">
                             <label class="form-label">Branch Code*</label>
-                            <input type="text" class="form-control" name="branchCode" id="branchCode" maxlength="100" placeholder="Branch Code" >
+                            <input type="text" class="form-control" name="branchCode" id="branchCode" maxlength="100" placeholder="BRANCH CODE" >
                             <input type="hidden" class="form-control" name="id" id="idB" placeholder="">
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Branch Name*</label>
-                            <input type="text" class="form-control" name="branchName" id="branchName" maxlength="100" placeholder="Branch Name" >
+                            <input type="text" class="form-control" name="branchName" id="branchName" maxlength="100" placeholder="BRANCH NAME" >
                         </div>
                         <div class="mb-2">
                             <label class="form-label">Branch Type</label>
                             <select class="form-select" name="branchType" id="branchType">
-                                <option value="">Select Type</option>
+                                <option value="">SELECT BRANCH TYPE</option>
                                 <option value="HEADQUARTERS">HEADQUARTERS </option>
                                 <option value="STATE">STATE </option>
                             </select>
@@ -201,7 +206,7 @@
                         <div class="mb-2">
                             <label class="form-label">Unit Name*</label>
                             <select class="form-select" name="unitId" id="unitId" style="text-transform: uppercase;">
-                                <option type="text"value="" label="Select Unit">Select Unit </option>
+                                <option type="text"value="" label="SELECT UNIT">SELECT UNIT </option>
                                 <?php $units = getUnit() ?>
                                 @foreach ($units as $unit)
                                 <option type="text"value="{{$unit->id}}" >{{$unit->unitName}}</option>
@@ -211,19 +216,19 @@
                         </div>
                         <div class="mb-2">
                             <label class="form-label">Address 1*</label>
-                            <input type="text" class="form-control" name="address" id="address"  maxlength="100" placeholder="" >
+                            <input type="text" class="form-control" name="address" id="address"  maxlength="100" placeholder="ADDRESS 1" >
                         </div>
                         <div class="mb-2">
                             <label class="form-label">Address 2</label>
-                            <input type="text" class="form-control" name="address2" id="address2" maxlength="100" placeholder="" >
+                            <input type="text" class="form-control" name="address2" id="address2" maxlength="100" placeholder="ADDRESS 2" >
                         </div>
                         <div class="mb-2">
                             <label class="form-label">Postcode</label>
-                            <input type="text" class="form-control" name="postcode" id="postcodeD" placeholder="" aria-describedby="postcode">
+                            <input type="text" class="form-control" name="postcode" id="postcodeD" placeholder="POSTCODE" aria-describedby="postcode">
                         </div>
                         <div class="mb-2">
                             <label class="form-label">City*</label>
-                            <input type="text" class="form-control" name="city" id="city" placeholder="" >
+                            <input type="text" class="form-control" name="city" id="city" placeholder="CITY" >
                         </div>
                         <div class="mb-2">
                             <label class="form-label">State*</label>

@@ -35,7 +35,7 @@
                                     <div class="row p-2">
                                         <label for="firstname" class="form-label">Role*</label>
                                         <select class="form-select" name="role">
-                                            <option value="" label="Please Choose "></option>
+                                            <option value="" label="PLEASE CHOOSE"></option>
                                             <?php $roles = getAllRole(); ?>
                                             @foreach ($roles as $role)
                                                 <option value="{{ $role->id }}"
@@ -48,7 +48,7 @@
                                     <div class="row p-2">
                                         <label for="firstname" class="form-label">Company*</label>
                                         <select class="form-select" name="company" id="companyForEmployment">
-                                            <option value="" label="Please Choose "></option>
+                                            <option value="" label="PLEASE CHOOSE"></option>
                                             <?php $companys = getCompany(); ?>
                                             @foreach ($companys as $company)
                                                 <option value="{{ $company->id }}" <?php echo $employment->company == $company->id ? 'selected="selected"' : ''; ?>
@@ -61,7 +61,7 @@
                                         <label for="firstname" class="form-label">Department*</label>
                                         <select class="form-select" name="departmentId" id="departmentShow">
                                             <?php $Departments = getDepartment(); ?>
-                                            <option value="" label="Please Choose "></option>
+                                            <option value="" label="PLEASE CHOOSE"></option>
                                             @foreach ($Departments as $Department)
                                                 <option value="{{ $Department->id ?? null }}" <?php echo $employment->department == $Department->id ? 'selected="selected"' : ''; ?>
                                                     label="{{ $Department->departmentName }}"></option>
@@ -72,7 +72,7 @@
                                         <label for="firstname" class="form-label">Unit*</label>
                                         <select class="form-select" name="unitId" id="unitShow">
                                             <?php $Units = getUnit(); ?>
-                                            <option value="" label="Please Choose "></option>
+                                            <option value="" label="PLEASE CHOOSE"></option>
                                             @foreach ($Units as $Unit)
                                                 <option value="{{ $Unit->id }}" <?php echo $employment->unit == $Unit->id ? 'selected="selected"' : ''; ?>
                                                     label="{{ $Unit->unitName }}"></option>
@@ -83,7 +83,7 @@
                                         <label for="firstname" class="form-label">Branch*</label>
                                         <select class="form-select" name="branchId" id="branchShow">
                                             <?php $Branchs = getBranch(); ?>
-                                            <option value="" label="Please Choose "></option>
+                                            <option value="" label="PLEASE CHOOSE"></option>
                                             @foreach ($Branchs as $Branch)
                                                 <option value="{{ $Branch->id }}" <?php echo $employment->branch == $Branch->id ? 'selected="selected"' : ''; ?>
                                                     label="{{ $Branch->branchName }}"></option>
@@ -100,7 +100,7 @@
                                         <label for="firstname" class="form-label">Job Grade*</label>
                                         <select class="form-select" name="jobGrade">
                                             <?php $JobGrades = getJobGrade(); ?>
-                                            <option value="" label="Please Choose "></option>
+                                            <option value="" label="PLEASE CHOOSE"></option>
                                             @foreach ($JobGrades as $JobGrade)
                                                 <option value="{{ $JobGrade->id }}" <?php echo $employment->jobGrade == $JobGrade->id ? 'selected="selected"' : ''; ?>
                                                     label="{{ $JobGrade->jobGradeName }}"></option>
@@ -111,7 +111,7 @@
                                         <label for="firstname" class="form-label">Designation*</label>
                                         <select class="form-select" name="designation">
                                             <?php $Designations = getDesignation(); ?>
-                                            <option value="" label="Please Choose "></option>
+                                            <option value="" label="PLEASE CHOOSE"></option>
                                             @foreach ($Designations as $Designation)
                                                 <option value="{{ $Designation->id }}" <?php echo $employment->designation == $Designation->id ? 'selected="selected"' : ''; ?>
                                                     label="{{ $Designation->designationName }}"></option>
@@ -122,7 +122,7 @@
                                         <label for="firstname" class="form-label">Employment Type*</label>
                                         <select class="form-select" name="employmentType">
                                             <?php $EmploymentTypes = getEmploymentType(); ?>
-                                            <option value="" label="Please Choose "></option>
+                                            <option value="" label="PLEASE CHOOSE"></option>
                                             @foreach ($EmploymentTypes as $EmploymentType)
                                                 <option value="{{ $EmploymentType->id }}" label="{{ $EmploymentType->type }}"
                                                     {{ $employment->employmentType == $EmploymentType->id ? "selected='selected'" : '' }}>
@@ -155,7 +155,7 @@
                                         <label for="employee-id" class="form-label">Report To</label>
                                         <select class="form-select" name="report_to" id="reporttoo">
                                             <?php $employees = getEmployee(); ?>
-                                            <option value="" label="Please Choose "></option>
+                                            <option value="" label="PLEASE CHOOSE"></option>
                                             @foreach ($employees as $employee)
                                                 <option value="{{ $employee->id }}" label="{{ $employee->employeeName }}"
                                                     {{ $employment->report_to == $employee->id ? "selected='selected'" : '' }}>
@@ -213,7 +213,7 @@
                                     <div class="col-sm-6">
                                         <label for="firstname" class="form-label">Event*</label>
                                         <select class="form-select" name="event">
-                                            <option value="" label="Please Choose"></option>
+                                            <option value="" label="PLEASE CHOOSE"></option>
                                             <?php $events = getEvent(); ?>
                                             @foreach ($events as $key => $event)
                                                 <option value="{{ $key }}"
@@ -327,7 +327,7 @@
                                         <div class="row p-2">
                                             <label for="firstname" class="form-label">Role*</label>
                                             <select class="form-select" name="role">
-                                                <option value="" label="Please Choose "></option>
+                                                <option value="" label="PLEASE CHOOSE"></option>
                                                 
                                             </select>
                                             <input type="hidden" name="id" value="">
@@ -335,7 +335,7 @@
                                         <div class="row p-2">
                                             <label for="firstname" class="form-label">Company*</label>
                                             <select class="form-select" name="company" id="companyForEmployment">
-                                                <option value="" label="Please Choose "></option>
+                                                <option value="" label="PLEASE CHOOSE""></option>
                                                 
                                             </select>
                                             <input type="hidden" name="id" value="">
@@ -344,7 +344,7 @@
                                             <label for="firstname" class="form-label">Department*</label>
                                             <select class="form-select" name="departmentId" id="departmentShow">
                                                 
-                                                <option value="" label="Please Choose "></option>
+                                                <option value="" label="PLEASE CHOOSE"></option>
                                                 
                                             </select>
                                         </div>
@@ -352,14 +352,14 @@
                                             <label for="firstname" class="form-label">Unit*</label>
                                             <select class="form-select" name="" id="">
                                                
-                                                <option value="" label="Please Choose "></option>
+                                                <option value="" label="PLEASE CHOOSE"></option>
                                                 
                                             </select>
                                         </div>
                                         <div class="row p-2">
                                             <label for="firstname" class="form-label">Branch*</label>
                                             <select class="form-select" name="branchId" id="branchShow">         
-                                                <option value="" label="Please Choose "></option>
+                                                <option value="" label="PLEASE CHOOSE"></option>
                                             </select>
                                         </div>
                                         <div class="row p-2">
@@ -371,20 +371,20 @@
                                         <div class="row p-2">
                                             <label for="firstname" class="form-label">Job Grade*</label>
                                             <select class="form-select" name="jobGrade">
-                                                <option value="" label="Please Choose "></option>
+                                                <option value="" label="PLEASE CHOOSE"></option>
                                             </select>
                                         </div>
                                         <div class="row p-2">
                                             <label for="firstname" class="form-label">Designation*</label>
                                             <select class="form-select" name="designation">
-                                                <option value="" label="Please Choose "></option>
+                                                <option value="" label="PLEASE CHOOSE"></option>
                                             </select>
                                         </div>
                                         <div class="row p-2">
                                             <label for="firstname" class="form-label">Employment Type*</label>
                                             <select class="form-select" name="employmentType">
                                                 
-                                                <option value="" label="Please Choose "></option>
+                                                <option value="" label="PLEASE CHOOSE"></option>
                                                 
                                             </select>
                                         </div>
@@ -413,7 +413,7 @@
                                             <label for="employee-id" class="form-label">Report To</label>
                                             <select class="form-select" name="report_to" id="reporttoo">
                                                 
-                                                <option value="" label="Please Choose "></option>
+                                                <option value="" label="PLEASE CHOOSE"></option>
                                                
                                             </select>
 
@@ -464,7 +464,7 @@
                                         <div class="col-sm-6">
                                             <label for="firstname" class="form-label">Event*</label>
                                             <select class="form-select" name="event">
-                                                <option value="" label="Please Choose"></option>
+                                                <option value="" label="PLEASE CHOOSE"></option>
                                                 
                                                 
                                         </select>

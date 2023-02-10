@@ -12,7 +12,10 @@ $(document).ready(function() {
 
     $("#tableunit").DataTable({
         responsive: false,
-        lengthMenu: [5, 10],
+        lengthMenu: [
+            [5, 10, 25, 50, -1],
+            [5, 10, 25, 50, "All"],
+        ],
     });
 
     $(document).on("click", "#addButton", function() {
@@ -38,7 +41,7 @@ $(document).ready(function() {
         id = $(this).data('id');
         requirejs(['sweetAlert2'], function(swal) {
             swal({
-                title: "Are you sure!",
+                title: "Are you sure to delete Unit?",
                 type: "error",
                 confirmButtonClass: "btn-danger",
                 confirmButtonText: "Yes!",
@@ -97,9 +100,9 @@ $(document).ready(function() {
 
             messages: {
                
-                departmentId: "Please Choose Your Department Name",
-                unitName: "Please Insert Your Unit Code",
-                unitCode: "Please Insert Your Unit Name",
+                departmentId: "Please Choose Department Name",
+                unitName: "Please Insert Unit Code",
+                unitCode: "Please Insert Unit Name",
                
             },
             submitHandler: function(form) {
@@ -155,9 +158,9 @@ $(document).ready(function() {
 
             messages: {
                
-                departmentId: "Please Choose Your Department Name",
-                unitName: "Please Insert Your Unit Code",
-                unitCode: "Please Insert Your Unit Name",
+                departmentId: "Please Choose Department Name",
+                unitName: "Please Insert Unit Code",
+                unitCode: "Please Insert Unit Name",
                
             },
             submitHandler: function(form) {
