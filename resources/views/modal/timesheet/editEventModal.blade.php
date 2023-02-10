@@ -33,20 +33,20 @@
                         <div class="col-sm-6">
                             <label for="issuing-country" class="form-label">Start Time*</label>
                             <div class="">
-                                <input id="starteventtimeedit" name="start_time" type="text" class="form-control" value="00:00 AM"/>
+                                <input id="starteventtimeedit" name="start_time" type="text" class="form-control" value="00:00 AM" style="background: #ffffff;"/>
                                 <!-- <div class="input-group-text"><i class="fa fa-clock"></i></div> -->
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <label for="issuing-country" class="form-label">End Time*</label>
                             <div class="">
-                                <input id="endeventtimeedit" name="end_time" type="text" class="form-control" value="00:00 AM"/>
+                                <input id="endeventtimeedit" name="end_time" type="text" class="form-control" value="00:00 AM"  style="background: #ffffff;"/>
                                 <!-- <div class="input-group-text"><i class="fa fa-clock"></i></div> -->
                             </div>
                         </div>
                     </div>
                     <div class="row p-2">
-                        <div class="col-sm-3">
+                        {{-- <div class="col-sm-3">
                             <label for="issuing-country" class="form-label">Duration*</label>
                             <select class="form-select" id="duration" name="duration" aria-label="Default select example">
                                 <option class="form-label" value="" selected>Please Select</option>
@@ -57,6 +57,10 @@
                                 <option class="form-label" value="5">2 Hour 30 Minute</option>
                                 <option class="form-label" value="6">3 Hour</option>
                             </select>
+                        </div> --}}
+                        <div class="col-sm-3">
+                            <label for="issuing-country" class="form-label">Duration*</label>
+                            <input type="text"  class="form-control" name="duration" id="durationeditevent"   style="pointer-events: none; touch-action: none; background: #e9ecef;">
                         </div>
                         <div class="col-sm-3">
                             <div style="padding-top:20px;">

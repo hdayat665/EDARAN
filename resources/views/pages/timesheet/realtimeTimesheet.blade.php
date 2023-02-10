@@ -22,7 +22,7 @@
                             <h4>Filter</h4>
                             <div class="col-sm-2">
                                 <label for="emergency-firstname" class="form-label">Employee Name</label>
-                                <select class="form-select" id="" name="employee_name">
+                                <select class="form-select" id="employeesearch" name="employee_name" data-default-value="">
                                     <option class="form-label" value="">Please Select</option>
                                     <?php $employees = getEmployee(); ?>
                                     @foreach ($employees as $employee)
@@ -32,7 +32,7 @@
                             </div>
                             <div class="col-sm-2">
                                 <label for="emergency-firstname" class="form-label">Event Name</label>
-                                <select class="form-select" id="" name="event_name">
+                                <select class="form-select" id="eventsearch" name="event_name" data-default-value="">
                                     <option class="form-label" value="">Please Select</option>
                                     <?php $timesheets = getEventTimesheet(); ?>
                                     @foreach ($timesheets as $timesheet)
@@ -52,7 +52,7 @@
                             </div>
                             <div class="col-sm-1">
                                 <label for="emergency-firstname" class="form-label">&nbsp;</label>
-                                <a href="#" class="btn btn-primary form-control"> <i class="fas fa-repeat"></i>
+                                <a href="#" class="btn btn-primary form-control" id="reset"> <i class="fas fa-repeat"></i>
                                     Reset</a>
                             </div>
                         </div>
@@ -77,17 +77,17 @@
                                 @if ($events)
                                     @foreach ($events as $event)
                                         <tr class="odd gradeX">
-                                            <td width="5%"><a href="javascript:;" data-bs-toggle="modal"
+                                            <td style="text-align: center" width="7%"><a href="javascript:;" data-bs-toggle="modal"
                                                     data-id="{{ $event->id }}" id="buttonViewEvent"
-                                                    class="btn btn-primary">View</a></td>
+                                                    class="btn btn-primary"></i> View</a></td>
                                             <td>{{ $event->event_name }}</td>
                                             <td>{{ $event->start_date }} - {{ $event->end_date }}</td>
                                             <td>{{ $event->start_time }} - {{ $event->end_time }}</td>
                                             <td>{{ $event->location ? getProjectLocation($event->location)->location_name : '-' }}
                                             </td>
                                             <td>{{ $event->desc }}</td>
-                                            <td width="5%"><a href="javascript:;" data-bs-toggle="modal"
-                                                    data-id="{{ $event->id }}" id="buttonnViewParticipant">view</a></td>
+                                            <td style="text-align: center" width="7%"><a class="btn btn-primary" href="javascript:;" data-bs-toggle="modal"
+                                                    data-id="{{ $event->id }}" id="buttonnViewParticipant"></i> view</a></td>
                                         </tr>
                                     @endforeach
                                 @endif

@@ -19,8 +19,8 @@
                         <h4>Filter</h4>
                         <div class="col-sm-2">
                             <label for="emergency-firstname" class="form-label">Employer Name</label>
-                            <select class="form-select" id="" name="employee_name">
-                                <option class="form-label" value="">Please Select</option>
+                            <select class="form-select" id="employeesearch" name="employee_name"  data-default-value="">
+                                <option class="form-label" value="" >Please Select</option>
                                 <?php $employees = getEmployee() ?>
                                 @foreach ($employees as $employee)
                                 <option value="{{$employee->id}}" {{($employeeId == $employee->id) ? 'selected="selected"' : ''}}>{{$employee->employeeName}}</option>
@@ -29,13 +29,26 @@
                         </div>
                         <div class="col-sm-2">
                             <label for="emergency-lastname" class="form-label">Month</label>
-                            <select class="form-select" id=""  name="month">
+                            <select class="form-select" id="monthsearch"  name="month" data-default-value="">
                                 <option class="form-label" value="">Please Select</option>
+                                <option class="form-label" {{($months == 'jan') ? 'selected="selected"' : ''}} value="jan">JANUARY</option>
+                                <option class="form-label" {{($months == 'feb') ? 'selected="selected"' : ''}} value="feb">FEBRUARY</option>
+                                <option class="form-label" {{($months == 'mac') ? 'selected="selected"' : ''}} value="mac">MARCH</option>
+                                <option class="form-label" {{($months == 'april') ? 'selected="selected"' : ''}} value="april">APRIL</option>
+                                <option class="form-label" {{($months == 'may') ? 'selected="selected"' : ''}} value="may">MAY</option>
+                                <option class="form-label" {{($months == 'june') ? 'selected="selected"' : ''}} value="june">JUNE</option>
+                                <option class="form-label" {{($months == 'july') ? 'selected="selected"' : ''}} value="july">JULY</option>
+                                <option class="form-label" {{($months == 'aug') ? 'selected="selected"' : ''}} value="aug">AUGUST</option>
+                                <option class="form-label" {{($months == 'sept') ? 'selected="selected"' : ''}} value="sept">SEPTEMBER</option>
+                                <option class="form-label" {{($months == 'oct') ? 'selected="selected"' : ''}} value="oct">OCTOBER</option>
+                                <option class="form-label" {{($months == 'nov') ? 'selected="selected"' : ''}} value="nov">NOVEMBER</option>
+                                <option class="form-label" {{($months == 'dec') ? 'selected="selected"' : ''}} value="dec">DECEMBER</option>
+                               
                             </select>
                         </div>
                         <div class="col-sm-2">
                             <label for="emergency-firstname" class="form-label">Designation</label>
-                            <select class="form-select" id=""  name="designation">
+                            <select class="form-select" id="designsearch"  name="designation" data-default-value="">
                                 <option class="form-label" value="">Please Select</option>
                                 <?php $designations = getDesignation() ?>
                                 @foreach ($designations as $designation)
@@ -45,7 +58,7 @@
                         </div>
                         <div class="col-sm-2">
                             <label for="emergency-firstname" class="form-label">Department</label>
-                            <select class="form-select" id="" name="department">
+                            <select class="form-select" id="departmentsearch" name="department" data-default-value="">
                                 <option class="form-label" value="">Please Select</option>
                                 <?php $departments = getDepartment() ?>
                                 @foreach ($departments as $department)
@@ -55,11 +68,11 @@
                         </div>
                         <div class="col-sm-2">
                             <label for="emergency-firstname" class="form-label">Status</label>
-                            <select class="form-select" id="" name="status">
+                            <select class="form-select" id="statussearch" name="status" data-default-value="">
                                 <option class="form-label" value="">Please Select</option>
-                                <option class="form-label" {{($statusId == 'cancel') ? 'selected="selected"' : ''}} value="cancel">Cancel</option>
-                                <option class="form-label" {{($statusId == 'approve') ? 'selected="selected"' : ''}} value="approve">Approve</option>
-                                <option class="form-label" {{($statusId == 'reject') ? 'selected="selected"' : ''}} value="reject">Reject</option>
+                                <option class="form-label" {{($statusId == 'cancel') ? 'selected="selected"' : ''}} value="cancel">CANCEL</option>
+                                <option class="form-label" {{($statusId == 'approve') ? 'selected="selected"' : ''}} value="approve">APPROVE</option>
+                                <option class="form-label" {{($statusId == 'reject') ? 'selected="selected"' : ''}} value="reject">REJECT</option>
                             </select>
                         </div>
                         <div class="col-sm-1">
@@ -68,7 +81,7 @@
                         </div>
                         <div class="col-sm-1">
                             <label for="emergency-firstname" class="form-label">&nbsp;</label>
-                            <a href="#" class="btn btn-primary form-control"> <i class="fas fa-repeat"></i> Reset</a>
+                            <a href="#" class="btn btn-primary form-control" id="reset"> <i class="fas fa-repeat"></i> Reset</a>
                         </div>
                     </div>
                 </form>
@@ -123,6 +136,8 @@
                                                 <div class="dropdown-divider "></div>
                                                 <a  class="dropdown-item" data-id="{{$timesheet->id}}" data-status="cancel" id="statusButton">Cancel Timesheet</a>
                                             </div>
+                                            <a href="#" style="display: none" class="btn btn-primary btn-xs" data-bs-toggle="modal"
+                                            id="amendreasonmodal" data-id="{{$timesheet->id}}">Tesing for amend modal</a>
                                             @endif
                                         </div>
                                     </td>
@@ -160,4 +175,5 @@
         </div>
     </div>
 </div>
+@include('modal.timesheet.amendreasonmodal')
 @endsection

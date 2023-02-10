@@ -375,6 +375,8 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('/searchRealtimeEventTimesheet', 'searchRealtimeEventTimesheet');
             Route::post('/deleteEvent/{id}', 'deleteEvent');
             Route::post('/deleteLog/{id}', 'deleteLog');
+            // Route::get('/getRequestTimesheetById123/{id}/{userId}', 'getRequestTimesheetById123');
+            Route::get('/getTimesheetamendById/{id}', 'getTimesheetamendById');
         });
 
         Route::controller(myClaimController::class)->group(function () {

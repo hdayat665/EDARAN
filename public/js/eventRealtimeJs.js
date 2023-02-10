@@ -123,11 +123,23 @@ $(document).on("click", "#buttonViewEvent", function() {
 $('#saveEventButton').click(function(e) {
     $("#addEventForm").validate({
         rules: {
-            // bank_guarantee_amount: "required",
+            event_name: "required",
+            start_date: "required",
+            end_date: "required",
+            start_time: "required",
+            end_time: "required",
+            
+            
         },
 
         messages: {
-            // department: "",
+            event_name: "Please insert event name",
+            start_date: "Please choose start date",
+            end_date: "Please choose end date",
+            start_time: "Please choose start time",
+            end_time: "Please choose end time",
+           
+           
         },
         submitHandler: function(form) {
             requirejs(['sweetAlert2'], function(swal) {
@@ -151,7 +163,7 @@ $('#saveEventButton').click(function(e) {
                         confirmButtonColor: '#3085d6',
                         confirmButtonText: 'OK',
                         allowOutsideClick: false,
-                        allowEscapeKey: false
+                        allowEscapeKey: false,
                     }).then(function() {
                         if (data.type == 'error') {
 
@@ -167,7 +179,6 @@ $('#saveEventButton').click(function(e) {
         },
     });
 });
-
 function getLocationByProjectId(id) {
     return $.ajax({
         url: "/getLocationByProjectId/" + id
@@ -248,12 +259,19 @@ $('#timesheetapproval').DataTable({
     "lengthChange": true,
     lengthMenu: [5, 10],
     responsive: false,
+    scrollX: true,
 
-    dom: '<"row"<"col-sm-11"B><"col-sm-1"l>>t<"row"<"col-sm-5"i><"col-sm-7"p>>',
+    dom: '<"row"<"col-sm-10"B><"col-sm-1"l>>t<"row"<"col-sm-5"i><"col-sm-7"p>>',
     buttons: [
-        { extend: 'excel', className: 'btn-blue' },
-        { extend: 'pdf', className: 'btn-blue' },
-        { extend: 'print', className: 'btn-blue' }
+        { extend: 'excel', className: 'btn-blue', exportOptions: {
+            columns: [1,2,3,4,5]
+        }},
+        { extend: 'pdf', className: 'btn-blue', exportOptions: {
+            columns: [1,2,3,4,5]
+        }},
+        { extend: 'print', className: 'btn-blue', exportOptions: {
+            columns: [1,2,3,4,5]
+        }},
     ],
 });
 
@@ -276,21 +294,23 @@ $().ready = function() {
 }();
 $("#starteventdate").datepicker({
     todayHighlight: true,
-    autoclose: true
+    autoclose: true,
+    format: "yyyy/mm/dd"
 });
 $("#endeventdate").datepicker({
     todayHighlight: true,
-    autoclose: true
+    autoclose: true,
+    format: "yyyy/mm/dd"
 });
 $('#projectlocsearch').picker({ search: true });
 $('#addneweventprojectlocsearch').picker({ search: true });
 $('#addneweventparticipant').picker({ search: true });
 $('#addneweventselectproject').picker({ search: true });
 
-$("#starteventtime").timepicker({
+$("#starteventtime").mdtimepicker({
     showMeridian: false,
 });
-$("#endeventtime").timepicker({
+$("#endeventtime").mdtimepicker({
     showMeridian: false,
 });
 
@@ -431,3 +451,31 @@ $("#ontheyearlycheck").click(function() {
         $("#recurringontheof").hide();
     }
 });
+
+$("#durationrt,#starteventdate,#endeventdate,#starteventtime,#endeventtime").focus(function () {
+
+    var startdt = new Date($("#starteventdate").val() + " " + $("#starteventtime").val());
+    
+    var enddt = new Date($("#endeventdate").val() + " " + $("#endeventtime").val());
+
+    var diff = enddt - startdt;
+    
+    var days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    diff -=  days * (1000 * 60 * 60 * 24);
+    
+    var hours = Math.floor(diff / (1000 * 60 * 60));
+    diff -= hours * (1000 * 60 * 60);
+    
+    var mins = Math.floor(diff / (1000 * 60));
+    diff -= mins * (1000 * 60);
+    
+    $("#durationrt").val( days + " days : " + hours + " hours : " + mins + " minutes ");
+    
+
+     });
+
+     $("#reset").on("click", function () {
+        $("#employeesearch").val($("#employeesearch").data("default-value"));
+        $("#eventsearch").val($("#eventsearch").data("default-value"));
+        
+    });

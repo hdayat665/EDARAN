@@ -16,37 +16,37 @@
                     <div class="row p-2">
                         <div class="col-sm-6">
                             <label for="lastname" class="form-label">Start Date*</label>
-                            <div class="input-group">
+                            {{-- <div class="input-group"> --}}
                                 <input type="text" class="form-control" name="start_date" id="starteventdate" />
-                                <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                            </div>
+                                {{-- <div class="input-group-text"><i class="fa fa-calendar"></i></div> --}}
+                            {{-- </div> --}}
                         </div>
                         <div class="col-sm-6">
                             <label for="lastname" class="form-label">End Date*</label>
-                            <div class="input-group">
+                            {{-- <div class="input-group"> --}}
                                 <input type="text" class="form-control" name="end_date" id="endeventdate" />
-                                <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                            </div>
+                                {{-- <div class="input-group-text"><i class="fa fa-calendar"></i></div> --}}
+                            {{-- </div> --}}
                         </div>
                     </div>
                     <div class="row p-2">
                         <div class="col-sm-6">
                             <label for="issuing-country" class="form-label">Start Time*</label>
-                            <div class="input-group">
-                                <input id="starteventtime" type="text" name="start_time" class="form-control" value="00:00 AM"/>
-                                <div class="input-group-text"><i class="fa fa-clock"></i></div>
+                            <div class="">
+                                <input id="starteventtime" type="text" name="start_time" class="form-control" value="00:00 AM" style=" background: #ffffff;"/>
+                                {{-- <div class="input-group-text"><i class="fa fa-clock"></i></div> --}}
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <label for="issuing-country" class="form-label">End Time*</label>
-                            <div class="input-group">
-                                <input id="endeventtime" type="text" name="end_time" class="form-control" value="00:00 AM"/>
-                                <div class="input-group-text"><i class="fa fa-clock"></i></div>
+                            <div class="">
+                                <input id="endeventtime" type="text" name="end_time" class="form-control" value="00:00 AM" style=" background: #ffffff;"/>
+                                {{-- <div class="input-group-text"><i class="fa fa-clock"></i></div> --}}
                             </div>
                         </div>
                     </div>
                     <div class="row p-2">
-                        <div class="col-sm-3">
+                        {{-- <div class="col-sm-3">
                             <label for="issuing-country" class="form-label">Duration</label>
                             <select class="form-select" id="" name="duration" aria-label="Default select example">
                                 <option class="form-label" value="" selected>Please Select</option>
@@ -57,6 +57,10 @@
                                 <option class="form-label" value="5">2 Hour 30 Minute</option>
                                 <option class="form-label" value="6">3 Hour</option>
                             </select>
+                        </div> --}}
+                        <div class="col-sm-3">
+                            <label for="issuing-country" class="form-label">Duration</label>
+                            <input type="text" id="durationrt"  name="duration" class="form-control" value="" readonly/>
                         </div>
                         <div class="col-sm-3">
                             <div style="padding-top:20px;">
@@ -371,7 +375,8 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary" id="saveEventButton">Save</button>
+                        {{-- <button type="submit" class="btn btn-primary" id="saveEventButton">Save</button> --}}
+                        <button href="javascript:;" id="saveEventButton" class="btn btn-primary">Save</button>
                     </div>
                 </form>
             </div>
