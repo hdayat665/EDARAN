@@ -158,6 +158,7 @@ class MyTimesheetController extends Controller
         $data['departmentId'] = '';
         $data['deisgnationId'] = '';
         $data['employeeId'] = '';
+        $data['months'] = '';
 
         return view('pages.timesheet.timesheetApproval', $data);
     }
@@ -181,6 +182,9 @@ class MyTimesheetController extends Controller
         $data['departmentId'] = $input['department'];
         $data['deisgnationId'] = $input['designation'];
         $data['employeeId'] = $input['employee_name'];
+        $data['employee_id'] = $input['employee_name'];
+
+        $data['months'] = $input['month'];
 
         return view('pages.timesheet.timesheetApproval', $data);
     }
@@ -296,6 +300,17 @@ class MyTimesheetController extends Controller
 
         return view('pages.timesheet.employeeRealtime', $data);
     }
+
+
+    public function getTimesheetamendById($id)
+    {
+        $ss = new MyTimeSheetService;
+
+        $data = $ss->gettimesheetid($id);
+
+        return response()->json($data);
+    }
+
 
 
 }

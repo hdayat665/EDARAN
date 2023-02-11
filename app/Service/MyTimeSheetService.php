@@ -677,4 +677,32 @@ class MyTimeSheetService
         // dd($data);
         return $data;
     }
+
+
+    public function gettimesheetid($id)
+    {
+
+        // $data = TimesheetApproval::where('tenant_id', Auth::user()->tenant_id)->orderBy('created_at', 'DESC')->get();
+
+        // return $data;
+
+
+        //
+        $tenant_id = Auth::user()->tenant_id;
+
+        $data = DB::table('timesheet_approval as a')
+            // ->leftJoin('customer as b', 'a.customer_id', '=', 'b.id')
+            // ->leftJoin('employment as c', 'a.project_manager', '=', 'c.id')
+            ->select('a.*')
+            ->where([['a.tenant_id', $tenant_id], ['a.id', $id]])
+            ->first();
+
+        if (!$data) {
+            $data = [];
+        }
+
+
+        return $data;
+        
+    }
 }

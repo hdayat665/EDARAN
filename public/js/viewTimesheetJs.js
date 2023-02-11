@@ -40,7 +40,8 @@ var handleCalendarDemo = function() {
             endDay = endDay < 10 ? "0" + endDay : endDay;
 
             event.push({
-                title: events['event_name'],
+                // title: events['event_name'],
+                title: "Event: " + events['event_name'] +  ' ' + events['project_id'],
                 start: startYear + '-' + startMonth + '-' + startDay,
                 end: endYear + '-' + endMonth + '-' + endDay,
                 color: app.color.red,
@@ -73,9 +74,22 @@ var handleCalendarDemo = function() {
             var endDay = endDate.getDate();
             endDay = endDay < 10 ? "0" + endDay : endDay;
 
+            function type_of_log(id) {
+                const data = {
+                    '1': 'Home',
+                    '2': 'Office',
+                    '3': 'My Project',
+                    '4': 'Others',
+                }
+
+                return data[id];
+            }
+
             log.push({
-                title: logs['type_of_log'],
-                start: startYear + '-' + startMonth + '-' + startDay + 'T' + startTime + ':00',
+                // title: type_of_log(logs['type_of_log']),
+                title: type_of_log(logs['type_of_log']) + ' ' + logs['start_time'],
+                // start: startYear + '-' + startMonth + '-' + startDay + 'T' + startTime + ':00',
+                start: startYear + '-' + startMonth + '-' + startDay,
                 color: app.color.primary,
                 extendedProps: {
                     type: 'log',
