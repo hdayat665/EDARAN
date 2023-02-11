@@ -43,6 +43,42 @@ $(document).ready(function () {
         });
     });
 
+    $(document).on("change", "#recommenderGeneral", function () {
+        roleId = $(this).val();
+        $("#approverGeneralShow")
+            .find("option")
+            .remove()
+            .end()
+            .append(
+                '<option label="Please Choose" selected="selected"> </option>'
+            )
+            .val("");
+
+        function getUserByRole(roleId) {
+            return $.ajax({
+                url: "/getUserByRole/" + roleId,
+            });
+        }
+
+        $("#approverGeneralShow").find("option").end();
+
+        var user = getUserByRole(roleId);
+
+        user.done(function (datas) {
+            // console.log(datas);
+            for (let i = 0; i < datas.length; i++) {
+                const userApprover = datas[i];
+                var opt = document.createElement("option");
+                document.getElementById("approverGeneralShow").innerHTML +=
+                    '<option value="' +
+                    userApprover["id"] +
+                    '">' +
+                    userApprover["user_profile"]["fullName"] +
+                    "</option>";
+            }
+        });
+    });
+
     $(document).on("change", "#roleId", function () {
         roleId = $(this).val();
         $("#checker1")
