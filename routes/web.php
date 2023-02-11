@@ -9,6 +9,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\OrganizationController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\Eclaim\ClaimApprovalController;
 use App\Http\Controllers\Eclaim\cashAdvanceController;
 use App\Http\Controllers\Eclaim\generalClaimController;
 use App\Http\Controllers\Eclaim\myClaimController;
@@ -80,6 +81,13 @@ Route::group(['middleware' => ['web']], function () {
         Route::controller(DashboardController::class)->group(function () {
             Route::get('/dashboardTenant', 'dashboardTenant')->name('dashboardTenant');
             Route::get('/dashboardHost', 'dashboardHost')->name('dashboardHost');
+        });
+
+        Route::controller(ClaimApprovalController::class)->group(function () {
+            Route::get('/claimApprovalView', 'claimApprovalView');
+            Route::post('/updateStatusClaim/{id}/{status}', 'updateStatusClaim');
+
+            // Route::get('/dashboardHost', 'dashboardHost')->name('dashboardHost');
         });
 
         Route::controller(ProfileController::class)->group(function () {

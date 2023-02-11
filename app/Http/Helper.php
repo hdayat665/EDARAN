@@ -527,7 +527,7 @@ if (!function_exists('getFinancialYearForm')) {
             $next_year => $next_year,
         ];
 
-                $data = array_reverse($data);
+        $data = array_reverse($data);
 
         return $data;
     }
@@ -1264,6 +1264,36 @@ if (!function_exists('checkingMonthlyClaim')) {
         } else {
             $data['month'] = $claim->month;
             $data['id'] = $claim->id;
+        }
+
+        return $data;
+    }
+}
+
+if (!function_exists('getRoleById')) {
+    function getRoleById($id = '')
+    {
+        $data = Role::where('id', $id)->first();
+
+        if (!$data) {
+            $data = [];
+        }
+
+        return $data;
+    }
+}
+
+if (!function_exists('getViewForClaimApproval')) {
+    function getViewForClaimApproval()
+    {
+
+        $user = Users::where('id', Auth::user()->id)->first();
+        $role = ucwords($user->role->roleName);
+
+        if ($role == ucwords('supervisor')) {
+            $data = 'supervisorClaim';
+        } else {
+            $data = 'supervisorClaim';
         }
 
         return $data;
