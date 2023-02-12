@@ -122,6 +122,9 @@ Route::group(['middleware' => ['web']], function () {
             Route::delete('/deleteParent/{id}', 'deleteParent');
             Route::delete('/deleteSibling/{id}', 'deleteSibling');
             Route::post('/resetPassword', 'resetPassword');
+            //Route::post('/storeIDAttachment', 'storeID')->name('storeID');
+            //Route::post('/updateOKUStatus', [ProfileService::class, 'updateOKUStatus'])->name('updateOKUStatus');
+            Route::post('/updateOKUStatus', 'updateOKUStatus');
         });
 
         Route::controller(EmployeeController::class)->group(function () {

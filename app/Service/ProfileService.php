@@ -808,4 +808,14 @@ class ProfileService
 
         return $data;
     }
+
+    public function updateOKUStatus($id = '')
+    {
+        $this->$data;
+        $data['user_id'] = Auth::user()->id;
+        $data['okuStatus'] = $profile->okuStatus;
+        $data['okucard'] = $profile->okuNumber;
+
+        return $data;
+    }
 }

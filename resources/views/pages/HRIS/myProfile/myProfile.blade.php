@@ -94,8 +94,8 @@
                             <div class="col-sm-6">
                                 <div class="row">
                                     <div class="col-sm-12 idnumber">
-                                        <label for="" class="form-label" style="color: red;">Old Identification Number </label>
-                                        <input type="text" class="form-control">
+                                        <label for="lastname" class="form-label">Old Identification Number </label>
+                                        <input type="text" value="{{$profile->oldIDNo ?? ''}}" name="oldidNo" id="oldidnumber" class="form-control" aria-describedby="lastname" placeholder="OLD IDENTIFICATION NUMBER">
                                     </div>
                                 </div>
                             </div>
@@ -125,7 +125,7 @@
                             {{-- new --}}
                             <div class="col-sm-3 part">
                                 <label for="idattach" class="form-label" style="color: red;">ID Attachment</label>
-                                <input type="file" class="form-control-file" id="">
+                                <input type="file" class="form-control-file" id="idattach" name="idattach">
                             </div> 
                         </div>
 
@@ -223,7 +223,7 @@
                                 <div class="row">
                                     <div class="col-sm-6 ">
                                         <div class="form-check form-switch align-right">
-                                            <input class="form-check-input okuCheck" value="" type="checkbox" name=""  id="">
+                                            <input class="form-check-input okuCheck" {{($profile->okuStatus) ? '' : 'checked'}} type="checkbox" name="okuStatus"  id="okuStatus">
                                             <label class="form-label" for="OKU" style="color: red;">
                                                 OKU?
                                             </label>
@@ -234,7 +234,7 @@
 
                                     <div class="col-sm-12 idnumber">
                                         <label for="" class="form-label" style="color: red;">OKU Card Number*</label>
-                                        <input type="text" value="" name="" id="okucard" class="form-control" readonly placeholder="OKU CARD NUMBER">
+                                        <input type="text" value="{{$profile->okuNumber ?? ''}}" name="" id="okucard" class="form-control" readonly placeholder="OKU CARD NUMBER">
                                     </div>
                                 </div>
                             </div>
@@ -257,8 +257,8 @@
                             {{-- new --}}
                             <div class="col-md-6">
                                 <div class="col p-2">
-                                    <label for="phone-number2" class="form-label" style="color: red;">Phone Number 2</label>
-                                    <input type="text" id="" name="" value="" class="form-control" aria-describedby="" placeholder="PHONE NUMBER 2">
+                                    <label for="phone-number2" class="form-label">Phone Number 2</label>
+                                    <input type="text" id="phone-number2" name="phoneNo2" value="{{$profile->phoneNo2 ?? ''}}" class="form-control" aria-describedby="" placeholder="PHONE NUMBER 2">
                                 </div>
                             </div>
                         </div>

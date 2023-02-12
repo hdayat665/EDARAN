@@ -331,5 +331,31 @@ class ProfileController extends Controller
         return response()->json($result);
     }
 
+    //Store ID Attachment (bug)
+    // public function storeIDAttachment(Request $r)
+    // {
+    //     $request->validate([
+    //         'idattach' => 'required|file|max:5000',
+    //     ]);
+    
+    //     $path = $request->idattach->store('attachments');
+    
+    //     UserProfile::create([
+    //         'idattach' => $path,
+    //     ]);
+    
+    //     return response()->json($data);
+    // }
 
+    //update OKU status
+    public function updateOKUStatus(Request $r)
+    {
+        $input = $r->input();
+
+        $ps = new ProfileService;
+
+        $result = $ps->updateOKUStatus($input);
+
+        return response()->json($result);
+    }
 }
