@@ -268,4 +268,21 @@ class EmployeeController extends Controller
 
         return response()->json($result);
     }
+    ////
+    public function updateclaimhierarchy(Request $r, $id)
+    {
+        $ss = new EmployeeService;
+
+        $result = $ss->updateclaimhierarchy($r, $id);
+
+        return response()->json($result);
+    }
+    public function updatecashhierarchy(Request $r, $id)
+    {
+        $ss = new EmployeeService;
+        
+        $result = $ss->updatecashhierarchy($r, $id);
+
+        return response()->json($result);
+    }
 }

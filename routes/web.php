@@ -150,6 +150,9 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('/updateEmployee', 'updateEmployee');
             Route::get('/getEmployeeById/{id}', 'getEmployeeById');
             Route::get('/getEmployeeByDepartmentId/{id}', 'getEmployeeByDepartmentId');
+            // hierarchy
+            Route::post('/updateclaimhierarchy/{id}', 'updateclaimhierarchy');
+            Route::post('/updatecashhierarchy/{id}', 'updatecashhierarchy');
         });
 
         Route::controller(SettingController::class)->group(function () {

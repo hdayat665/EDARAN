@@ -2133,7 +2133,118 @@ $(document).ready(function () {
             });
         });
     });
+    ///////
+    
+    $("#buttonhierarchy").click(function (e) {
+        var id = $("#hierarchyid").val();
+        
+        $("#updatehierarchy").validate({
+            
+            // Specify validation rules
+            rules: {
+                eclaimrecommender: "required",
+                eclaimapprover: "required",
+                
+                
+            },
 
+            messages: {
+                eclaimrecommender: "PLEASE INSERT FIRST NAME",
+                eclaimapprover: "PLEASE INSERT FIRST NAME",
+            },
+
+            submitHandler: function (form) {
+                requirejs(["sweetAlert2"], function (swal) {
+                    var data = new FormData(
+                        document.getElementById("updatehierarchy")
+                    );
+                    var id = $("#hierarchyid").val();
+                    //console.log(id);
+                    // return false;
+
+                    $.ajax({
+                        type: "POST",
+                        url: "/updateclaimhierarchy/" + id,
+                        data: data,
+                        dataType: "json",
+                        async: false,
+                        processData: false,
+                        contentType: false,
+                    }).done(function (data) {
+                        swal({
+                            title: data.title,
+                            text: data.msg,
+                            type: data.type,
+                            confirmButtonColor: "#3085d6",
+                            confirmButtonText: "OK",
+                            allowOutsideClick: false,
+                            allowEscapeKey: false,
+                        }).then(function () {
+                            if (data.type == "error") {
+                            } else {
+                                location.reload();
+                            }
+                        });
+                    });
+                });
+            },
+        });
+    });
+    $("#cashadvancehierarchy").click(function (e) {
+        var id = $("#hierarchyid").val();
+        
+        $("#updatecashhierarchy").validate({
+            
+            // Specify validation rules
+            rules: {
+                
+                caapprover: "required",
+                
+                
+            },
+
+            messages: {
+                
+                caapprover: "PLEASE INSERT FIRST NAME",
+            },
+
+            submitHandler: function (form) {
+                requirejs(["sweetAlert2"], function (swal) {
+                    var data = new FormData(
+                        document.getElementById("updatecashhierarchy")
+                    );
+                    var id = $("#hierarchyid").val();
+                    //console.log(id);
+                    // return false;
+
+                    $.ajax({
+                        type: "POST",
+                        url: "/updatecashhierarchy/" + id,
+                        data: data,
+                        dataType: "json",
+                        async: false,
+                        processData: false,
+                        contentType: false,
+                    }).done(function (data) {
+                        swal({
+                            title: data.title,
+                            text: data.msg,
+                            type: data.type,
+                            confirmButtonColor: "#3085d6",
+                            confirmButtonText: "OK",
+                            allowOutsideClick: false,
+                            allowEscapeKey: false,
+                        }).then(function () {
+                            if (data.type == "error") {
+                            } else {
+                                location.reload();
+                            }
+                        });
+                    });
+                });
+            },
+        });
+    });
     $("#updateEmp").click(function (e) {
         // id = $(this).data('id');
 

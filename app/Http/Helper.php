@@ -704,7 +704,18 @@ if (!function_exists('getEmployee')) {
         return $data;
     }
 }
+if (!function_exists('getEmployeeexcept')) {
+    function getEmployeeexcept()
+    {
+        $data = Employee::where([['tenant_id', Auth::user()->tenant_id], ['employeeid', '!=', null]])->get();
 
+        if (!$data) {
+            $data = [];
+        }
+
+        return $data;
+    }
+}
 if (!function_exists('accManager')) {
     function accManager()
     {
