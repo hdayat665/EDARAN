@@ -11,7 +11,7 @@
                         <div class="col-sm-6">
                             <label for="firstname" class="form-label">Type Of Log*</label>
                             <select class="form-select" id="typeoflogedit" name="type_of_log" aria-label="Default select example">
-                                <option class="form-label" value="" selected>Please Select</option>
+                                <option class="form-label" value="" selected>Please Choose </option>
                                 <option class="form-label" value="1">Home</option>
                                 <option class="form-label" value="2">Office</option>
                                 <option class="form-label" value="3">My Project</option>
@@ -30,7 +30,7 @@
                         <div class="col-sm-6" id="officelogedit" style="display:none">
                             <label for="Office-Log" class="form-label">Office Log*</label>
                             <select class="form-select" id="officelog2edit" name="office_log" aria-label="Default select example">
-                                <option class="form-label" value="" selected>Please Select</option>
+                                <option class="form-label" value="" selected>Please Choose</option>
                                 <option class="form-label" value="1">My Project</option>
                                 <option class="form-label" value="2">Activity</option>
                             </select>
@@ -77,9 +77,9 @@
                         </div>
                         <div class="col-sm-6">
                             <label for="issuing-country" class="form-label">Start Time*</label>
-                            <div class="input-group">
-                                <input id="starttimeedit" name="start_time" type="text" class="form-control" />
-                                <div class="input-group-text"><i class="fa fa-clock"></i></div>
+                            <div class="">
+                                <input id="starttimeedit" name="start_time" type="text" class="form-control"  style=" background: #ffffff;"/>
+                                {{-- <div class="input-group-text"><i class="fa fa-clock"></i></div> --}}
                             </div>
                         </div>
                     </div>
@@ -102,11 +102,28 @@
                         </div>
                         <div class="col-sm-6 ">
                             <label for="issuing-country" class="form-label">End Time*</label>
-                            <div class="input-group">
-                                <input id="endtimeedit" name="end_time" type="text" class="form-control" />
-                                <div class="input-group-text"><i class="fa fa-clock"></i></div>
+                            <div class="">
+                                <input id="endtimeedit" name="end_time" type="text" class="form-control" style=" background: #ffffff;" />
+                                {{-- <div class="input-group-text"><i class="fa fa-clock"></i></div> --}}
                             </div>
                         </div>
+                            {{-- duration purpose --}}
+                            <div id="" style="display: none">
+                                <div class="row p-2">
+                                    <div class="col-md-4">
+                                        <label class="form-label" >Start date</label>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <input  type="text" id="daystartedit" class=" form-control" value="">
+                                    </div>
+                                    <div class="col-md-2" >
+                                        <label class="form-label">End date</label>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <input  type="text" id="dayendedit" class=" form-control">
+                                    </div>
+                                </div>
+                            </div>
                     </div>
                     <div class="row p-2">
                         <div class="col-sm-6">

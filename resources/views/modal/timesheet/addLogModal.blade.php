@@ -11,7 +11,7 @@
                         <div class="col-sm-6">
                             <label for="firstname" class="form-label">Type Of Log*</label>
                             <select class="form-select" id="typeoflog" name="type_of_log" aria-label="Default select example">
-                                <option class="form-label" value="" selected>Please Select</option>
+                                <option class="form-label" value="" selected>Please Choose</option>
                                 <option class="form-label" value="1">Home</option>
                                 <option class="form-label" value="2">Office</option>
                                 <option class="form-label" value="3">My Project</option>
@@ -19,9 +19,9 @@
                             </select>
                         </div>
                         <div class="col-sm-6">
-                            <label for="lastname" class="form-label">Date*</label>
+                            <label for="lastname" class="form-label" >Date*</label>
                             <div class="">
-                                <input type="text" class="form-control" name="date" id="dateaddlog" />
+                                <input type="text" class="form-control" placeholder="Date" name="date" id="dateaddlog" />
                                 <!-- <div class="input-group-text"><i class="fa fa-calendar"></i></div> -->
                             </div>
                         </div>
@@ -77,10 +77,10 @@
                         </div>
                         <div class="col-sm-6">
                             <label for="issuing-country" class="form-label">Start Time*</label>
-                            <div class="input-group">
-                                <input id="starttime" type="text" name="start_time" class="form-control" />
+                            {{-- <div class="input-group"> --}}
+                                <input id="starttime" type="text" name="start_time" class="form-control" style=" background: #ffffff;" />
                                 <!-- <div class="input-group-text"><i class="fa fa-clock"></i></div> -->
-                            </div>
+                            {{-- </div> --}}
                         </div>
                     </div>
                     <div class="row p-2">
@@ -102,9 +102,26 @@
                         </div>
                         <div class="col-sm-6 ">
                             <label for="issuing-country" class="form-label">End Time*</label>
-                            <div class="input-group">
-                                <input id="endtime" type="text" name="end_time" class="form-control" />
+                            {{-- <div class="input-group"> --}}
+                                <input id="endtime" type="text" name="end_time" class="form-control"  style=" background: #ffffff;"/>
                                 <!-- <div class="input-group-text"><i class="fa fa-clock"></i></div> -->
+                            {{-- </div> --}}
+                        </div>
+                        {{-- duration purpose --}}
+                        <div id="" style="display: none">
+                            <div class="row p-2">
+                                <div class="col-md-4">
+                                    <label class="form-label" >Start date</label>
+                                </div>
+                                <div class="col-md-3">
+                                    <input  type="text" id="daystart" class=" form-control" value="">
+                                </div>
+                                <div class="col-md-2" >
+                                    <label class="form-label">End date</label>
+                                </div>
+                                <div class="col-md-3">
+                                    <input  type="text" id="dayend" class=" form-control">
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -115,7 +132,7 @@
                         </div>
                         <div class="col-sm-6">
                             <label for="issuing-country" class="form-label">Total Hours</label>
-                            <input type="text" readonly id="" name="total_hours" value="Auto calculate (End time - Start time), default 00:00" name="" class="form-control" aria-describedby="dob">
+                            <input type="text" readonly id="logduration" name="total_hours" value="" name="" class="form-control" aria-describedby="dob">
                         </div>
                     </div>
                     <div class="modal-footer">

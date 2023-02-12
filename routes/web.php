@@ -9,6 +9,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\OrganizationController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\Eclaim\ClaimApprovalController;
 use App\Http\Controllers\Eclaim\cashAdvanceController;
 use App\Http\Controllers\Eclaim\generalClaimController;
 use App\Http\Controllers\Eclaim\myClaimController;
@@ -82,6 +83,13 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('/dashboardHost', 'dashboardHost')->name('dashboardHost');
         });
 
+        Route::controller(ClaimApprovalController::class)->group(function () {
+            Route::get('/claimApprovalView', 'claimApprovalView');
+            Route::post('/updateStatusClaim/{id}/{status}', 'updateStatusClaim');
+
+            // Route::get('/dashboardHost', 'dashboardHost')->name('dashboardHost');
+        });
+
         Route::controller(ProfileController::class)->group(function () {
             Route::get('/getProfileData', 'profileData');
             Route::post('/updateProfilePicture', 'updateProfilePicture');
@@ -142,6 +150,9 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('/updateEmployee', 'updateEmployee');
             Route::get('/getEmployeeById/{id}', 'getEmployeeById');
             Route::get('/getEmployeeByDepartmentId/{id}', 'getEmployeeByDepartmentId');
+            // hierarchy
+            Route::post('/updateclaimhierarchy/{id}', 'updateclaimhierarchy');
+            Route::post('/updatecashhierarchy/{id}', 'updatecashhierarchy');
         });
 
         Route::controller(SettingController::class)->group(function () {
@@ -378,6 +389,8 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('/searchRealtimeEventTimesheet', 'searchRealtimeEventTimesheet');
             Route::post('/deleteEvent/{id}', 'deleteEvent');
             Route::post('/deleteLog/{id}', 'deleteLog');
+            // Route::get('/getRequestTimesheetById123/{id}/{userId}', 'getRequestTimesheetById123');
+            Route::get('/getTimesheetamendById/{id}', 'getTimesheetamendById');
         });
 
         Route::controller(myClaimController::class)->group(function () {

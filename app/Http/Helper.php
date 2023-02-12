@@ -527,7 +527,7 @@ if (!function_exists('getFinancialYearForm')) {
             $next_year => $next_year,
         ];
 
-                $data = array_reverse($data);
+        $data = array_reverse($data);
 
         return $data;
     }
@@ -704,7 +704,18 @@ if (!function_exists('getEmployee')) {
         return $data;
     }
 }
+if (!function_exists('getEmployeeexcept')) {
+    function getEmployeeexcept()
+    {
+        $data = Employee::where([['tenant_id', Auth::user()->tenant_id], ['employeeid', '!=', null]])->get();
 
+        if (!$data) {
+            $data = [];
+        }
+
+        return $data;
+    }
+}
 if (!function_exists('accManager')) {
     function accManager()
     {
@@ -1270,12 +1281,12 @@ if (!function_exists('checkingMonthlyClaim')) {
     }
 }
 
-if (!function_exists('getRecommender')) {
-    function getRecommender()
+if (!function_exists('getRoleById')) {
+    function getRoleById($id = '')
     {
-        $data = Employee::all();
+        $data = Role::where('id', $id)->first();
 
-        if (blank($data)) {
+        if (!$data) {
             $data = [];
         }
 
@@ -1283,13 +1294,17 @@ if (!function_exists('getRecommender')) {
     }
 }
 
-if (!function_exists('getApprover')) {
-    function getApprover()
+if (!function_exists('getViewForClaimApproval')) {
+    function getViewForClaimApproval()
     {
-        $data = Employee::all();
 
-        if (blank($data)) {
-            $data = [];
+        $user = Users::where('id', Auth::user()->id)->first();
+        $role = ucwords($user->role->roleName);
+
+        if ($role == ucwords('supervisor')) {
+            $data = 'supervisorClaim';
+        } else {
+            $data = 'supervisorClaim';
         }
 
         return $data;
