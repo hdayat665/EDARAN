@@ -863,4 +863,49 @@ class EmployeeService
 
         return $data;
     }
+
+    public function updateclaimhierarchy($r, $id)
+    {
+        $input = $r->input();
+
+        $data1 = $input['eclaimrecommender'];
+        $data2 = $input['eclaimapprover'];
+
+
+        $input = [
+            'eclaimrecommender' => $data1,
+            'eclaimapprover' => $data2
+        ];
+
+        Employee::where('user_id', $id)->update($input);
+
+        $data['status'] = config('app.response.success.status');
+        $data['type'] = config('app.response.success.type');
+        $data['title'] = config('app.response.success.title');
+        $data['msg'] = 'Success update company';
+
+        return $data;
+    }
+    public function updatecashhierarchy($r, $id)
+    {
+        $input = $r->input();
+
+       
+        $data2 = $input['caapprover'];
+
+
+        $input = [
+            
+            'caapprover' => $data2
+        ];
+
+        Employee::where('user_id', $id)->update($input);
+
+        $data['status'] = config('app.response.success.status');
+        $data['type'] = config('app.response.success.type');
+        $data['title'] = config('app.response.success.title');
+        $data['msg'] = 'Success update company';
+
+        return $data;
+    }
 }

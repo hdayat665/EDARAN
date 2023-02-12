@@ -335,7 +335,7 @@
                                         <div class="row p-2">
                                             <label for="firstname" class="form-label">Company*</label>
                                             <select class="form-select" name="company" id="companyForEmployment">
-                                                <option value="" label="PLEASE CHOOSE""></option>
+                                                <option value="" label="PLEASE CHOOSE"></option>
                                                 
                                             </select>
                                             <input type="hidden" name="id" value="">

@@ -62,8 +62,7 @@
                                                 <div class="card p-3 bg-white">
                                                     <p class="fw-bold">Recommender and Approver has change <br>
                                                         Recommender : {{ getRoleById($data->recommender)->roleName }}<br>
-                                                        Approver : {{ getUserProfileByUserId($data->approver)->fullName }}<br>
-                                                        updated by {{ getUserProfileByUserId($data->user_id)->fullName }}</p>
+                                                        
                                                     <p class="text-muted mb-2 fw-bold">11 March 2020
                                                     </p>
                                                 </div>
