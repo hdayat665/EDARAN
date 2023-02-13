@@ -886,6 +886,7 @@ class EmployeeService
 
         return $data;
     }
+
     public function updatecashhierarchy($r, $id)
     {
         $input = $r->input();
@@ -897,6 +898,28 @@ class EmployeeService
         $input = [
             
             'caapprover' => $data2
+        ];
+
+        Employee::where('user_id', $id)->update($input);
+
+        $data['status'] = config('app.response.success.status');
+        $data['type'] = config('app.response.success.type');
+        $data['title'] = config('app.response.success.title');
+        $data['msg'] = 'Success update company';
+
+        return $data;
+    }
+    public function updateeleavehierarchy($r, $id)
+    {
+        $input = $r->input();
+
+        $data1 = $input['eleaverecommender'];
+        $data2 = $input['eleaveapprover'];
+
+
+        $input = [
+            'eleaverecommender' => $data1,
+            'eleaveapprover' => $data2
         ];
 
         Employee::where('user_id', $id)->update($input);

@@ -109,7 +109,7 @@
                 <select class="form-select" name="report_to" >
 
                     <?php $employees = getEmployee(); ?>
-                    <option value="" label="PLEASE CHOOSE"" selected="selected"> </option>
+                    <option value="" label="PLEASE CHOOSE" selected="selected"> </option>
                     @if ($employees)
 
                     @foreach ($employees as $employee)

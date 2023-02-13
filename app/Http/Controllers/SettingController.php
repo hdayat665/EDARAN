@@ -1093,4 +1093,16 @@ class SettingController extends Controller
         $result = $dlh->deleteLeaveholiday($id);
         return response()->json($result);
     }
+
+    // timesheet period
+    public function timesheetperiodView()
+    {
+        // $ltv = new SettingService;
+
+        // $result = $ltv->timesheetperiodView();
+
+        //return view('pages.setting.timesheet.settingtimesheetperiod', $result);
+        return view('pages.setting.timesheet.settingtimesheetperiod');
+
+    }
 }

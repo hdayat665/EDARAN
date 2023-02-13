@@ -58,7 +58,8 @@ requirejs.config({
         monthlyClaimJs: assets + "/js/monthlyClaimJs",
         eclaimDateJs: assets + "/js/eclaimDateJs",
         supervisorDepartmentJs: assets + "/js/supervisorDepartmentJs",
-
+        /// timesheet period
+        sheetPeriodJs: assets + "/js/sheetPeriodJs",
         // 'main': 'assets/backend/js/main',
         sweetAlert2: assets + "/assets/sweetalert2/sweetalert2",
 
@@ -310,6 +311,9 @@ if ($("#eclaimDateJs").length > 0) {
 
 if ($("#supervisorDepartmentJs").length > 0) {
     requirejs(["supervisorDepartmentJs"]);
+}
+if ($("#sheetPeriodJs").length > 0) {
+    requirejs(["sheetPeriodJs"]);
 }
 
 // Global function

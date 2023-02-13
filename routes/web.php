@@ -153,6 +153,7 @@ Route::group(['middleware' => ['web']], function () {
             // hierarchy
             Route::post('/updateclaimhierarchy/{id}', 'updateclaimhierarchy');
             Route::post('/updatecashhierarchy/{id}', 'updatecashhierarchy');
+            Route::post('/updateeleavehierarchy/{id}', 'updateeleavehierarchy');
         });
 
         Route::controller(SettingController::class)->group(function () {
@@ -286,6 +287,11 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('/updateLeaveleavetypes/{id}', 'updateLeaveleavetypes');
             Route::delete('/deleteLeavetypes/{id}', 'deleteLeavetypes');
             Route::get('/updateStatusleavetypes/{id}/{status}', 'updateStatusleavetypes');
+            
+            // timesheet period
+            Route::get('/timesheetperiod', 'timesheetperiodView');
+
+        
         });
 
         Route::controller(OrganizationController::class)->group(function () {
