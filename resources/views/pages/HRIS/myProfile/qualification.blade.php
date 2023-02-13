@@ -152,13 +152,13 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="" class="form-label">From Date</label>
-                        <input type="text" class="form-control" id="datepicker-fromdate">
+                        <input type="text" class="form-control" id="datepicker-fromdate" placeholder="YYYY/MM/DD">
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="" class="form-label">To Date</label>
-                        <input type="text" class="form-control" id="datepicker-todate">
+                        <input type="text" class="form-control" id="datepicker-todate" placeholder="YYYY/MM/DD">
                     </div>
                 </div>
             </div>
@@ -166,13 +166,13 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="" class="form-label">Institute Name</label>
-                        <input type="text" class="form-control" id="">
+                        <input type="text" class="form-control" id="" placeholder="INSTITUTE NAME">
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="" class="form-label">Highest Level Attained</label>
-                        <input type="text" class="form-control" id="">
+                        <input type="text" class="form-control" id="" placeholder="HIGHEST LEVEL ATTAINED">
                     </div>
                 </div>
             </div>
@@ -180,7 +180,7 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="" class="form-label">Result</label>
-                        <input type="text" class="form-control" id="">
+                        <input type="text" class="form-control" id="" placeholder="RESULT">
                     </div>
                 </div>
                 <div class="col-md-6">
@@ -214,13 +214,13 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="" class="form-label">From Date</label>
-                        <input type="text" class="form-control" id="datepicker-fromdateu">
+                        <input type="text" class="form-control" id="datepicker-fromdateu" placeholder="YYYY/MM/DD">
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="" class="form-label">To Date</label>
-                        <input type="text" class="form-control" id="datepicker-todateu">
+                        <input type="text" class="form-control" id="datepicker-todateu" placeholder="YYYY/MM/DD">
                     </div>
                 </div>
             </div>
@@ -228,13 +228,13 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="" class="form-label">Institute Name</label>
-                        <input type="text" class="form-control" id="">
+                        <input type="text" class="form-control" id="" placeholder="INSTITUTE NAME">
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="" class="form-label">Highest Level Attained</label>
-                        <input type="text" class="form-control" id="">
+                        <input type="text" class="form-control" id="" placeholder="HIGHEST LEVEL ATTAINED">
                     </div>
                 </div>
             </div>
@@ -242,7 +242,7 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="" class="form-label">Result</label>
-                        <input type="text" class="form-control" id="">
+                        <input type="text" class="form-control" id="" placeholder="RESULT">
                     </div>
                 </div>
                 <div class="col-md-6">
@@ -276,7 +276,7 @@
                 <div class="form-group row">
                     <label for="staticEmail" class="col-sm-4 col-form-label">Date</label>
                     <div class="col-sm-8">
-                        <input type="text" class="form-control" id="datepicker-others">
+                        <input type="text" class="form-control" id="datepicker-others" placeholder="YYYY/MM/DD">
                     </div>
                 </div>
            </div>
@@ -284,7 +284,7 @@
                 <div class="form-group row">
                     <label for="staticEmail" class="col-sm-4 col-form-label">Professional Qualification Details</label>
                     <div class="col-sm-8">
-                        <input type="text" class="form-control">
+                        <input type="text" class="form-control" placeholder="PROFESSIONAL QUALIFICATION DETAILS">
                     </div>
                 </div>
             </div>
@@ -320,7 +320,7 @@
                 <div class="form-group row">
                     <label for="staticEmail" class="col-sm-4 col-form-label">Date</label>
                     <div class="col-sm-8">
-                        <input type="text" class="form-control" id="datepicker-othersu">
+                        <input type="text" class="form-control" id="datepicker-othersu" placeholder="YYYY/MM/DD">
                     </div>
                 </div>
            </div>
@@ -328,7 +328,7 @@
                 <div class="form-group row">
                     <label for="staticEmail" class="col-sm-4 col-form-label">Professional Qualification Details</label>
                     <div class="col-sm-8">
-                        <input type="text" class="form-control">
+                        <input type="text" class="form-control" placeholder="PROFESSIONAL QUALIFICATION DETAILS">
                     </div>
                 </div>
             </div>

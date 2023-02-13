@@ -948,14 +948,14 @@ class SettingService
 
     public function roleView()
     {
-        $data['roles'] = Role::where('tenant_id', Auth::user()->tenant_id)->get();
+        $data['roles'] = Role::where('tenant_id', Auth::user()->tenant_id)->orderBy('id', 'desc')->get();
 
         return $data;
     }
 
     public function companyView()
     {
-        $data['companies'] = Company::where('tenant_id', Auth::user()->tenant_id)->get();
+        $data['companies'] = Company::where('tenant_id', Auth::user()->tenant_id)->orderBy('id', 'desc')->get();
 
         return $data;
     }
@@ -966,6 +966,7 @@ class SettingService
             ->leftJoin('unit as b', 'a.unitId', '=', 'b.id')
             ->select('a.*', 'b.unitName')
             ->where('a.tenant_id', Auth::user()->tenant_id)
+            ->orderBy('id', 'desc')
             ->get();
 
         return $data;
@@ -977,6 +978,7 @@ class SettingService
             ->leftJoin('department as b', 'a.departmentId', '=', 'b.id')
             ->select('a.*', 'b.departmentCode', 'b.departmentName')
             ->where('a.tenant_id', Auth::user()->tenant_id)
+            ->orderBy('id', 'desc')
             ->get();
 
         return $data;
@@ -988,6 +990,7 @@ class SettingService
             ->leftJoin('company as b', 'a.companyId', '=', 'b.id')
             ->select('a.*', 'b.companyName', 'b.companyCode')
             ->where('a.tenant_id', Auth::user()->tenant_id)
+            ->orderBy('id', 'desc')
             ->get();
 
         return $data;
@@ -995,36 +998,36 @@ class SettingService
 
     public function sopView()
     {
-        $data['SOPs'] = SOP::where('tenant_id', Auth::user()->tenant_id)->get();
-        $data['policys'] = Policy::where('tenant_id', Auth::user()->tenant_id)->get();
+        $data['SOPs'] = SOP::where('tenant_id', Auth::user()->tenant_id)->orderBy('id', 'desc')->get();
+        $data['policys'] = Policy::where('tenant_id', Auth::user()->tenant_id)->orderBy('id', 'desc')->get();
 
         return $data;
     }
 
     public function jobGradeView()
     {
-        $data['jobGrades'] = JobGrade::where('tenant_id', Auth::user()->tenant_id)->get();
+        $data['jobGrades'] = JobGrade::where('tenant_id', Auth::user()->tenant_id)->orderBy('id', 'desc')->get();
 
         return $data;
     }
 
     public function designationView()
     {
-        $data['designations'] = Designation::where('tenant_id', Auth::user()->tenant_id)->get();
+        $data['designations'] = Designation::where('tenant_id', Auth::user()->tenant_id)->orderBy('id', 'desc')->get();
 
         return $data;
     }
 
     public function newsView()
     {
-        $data['news'] = News::where('tenant_id', Auth::user()->tenant_id)->get();
+        $data['news'] = News::where('tenant_id', Auth::user()->tenant_id)->orderBy('id', 'desc')->get();
 
         return $data;
     }
 
     public function employmentTypeView()
     {
-        $data['employmentTypes'] = EmploymentType::where('tenant_id', Auth::user()->tenant_id)->get();
+        $data['employmentTypes'] = EmploymentType::where('tenant_id', Auth::user()->tenant_id)->orderBy('id', 'desc')->get();
 
         return $data;
     }
@@ -1669,7 +1672,7 @@ class SettingService
 
     public function leaveEntitlementView()
     {
-        $data['leave'] = leaveEntitlementModel::where('tenant_id', Auth::user()->tenant_id)->get();
+        $data['leave'] = leaveEntitlementModel::where('tenant_id', Auth::user()->tenant_id)->orderBy('id', 'desc')->get();
 
         return $data;
     }
@@ -1770,7 +1773,7 @@ class SettingService
 
     public function holidaylistView()
     {
-        $data['holiday'] = holidayModel::where('tenant_id', Auth::user()->tenant_id)->get();
+        $data['holiday'] = holidayModel::where('tenant_id', Auth::user()->tenant_id)->orderBy('id', 'desc')->get();
 
         return $data;
     }
@@ -1891,7 +1894,7 @@ class SettingService
 
     public function leavetypesView()
     {
-        $data['types'] = leavetypesModel::where('tenant_id', Auth::user()->tenant_id)->get();
+        $data['types'] = leavetypesModel::where('tenant_id', Auth::user()->tenant_id)->orderBy('id', 'desc')->get();
 
         return $data;
     }

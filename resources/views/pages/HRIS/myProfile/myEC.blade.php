@@ -12,18 +12,18 @@
                     <div class="row p-2">
                         <div class="col-sm-6">
                             <label for="emergency-firstname" class="form-label">First Name*</label>
-                            <input type="text" id="emergency-firstname" name="firstName" value="{{ $emergency->firstName ?? '' }}" class="form-control" aria-describedby="emergency-firstname" style="text-transform:uppercase">
+                            <input type="text" id="emergency-firstname" name="firstName" value="{{ $emergency->firstName ?? '' }}" class="form-control" placeholder="FIRST NAME" aria-describedby="emergency-firstname" style="text-transform:uppercase">
                         </div>
                         <div class="col-sm-6">
                             <label for="emergency-lastname" class="form-label">Last Name*</label>
-                            <input type="text" id="emergency-lastname" name="lastName" value="{{ $emergency->lastName ?? '' }}" class="form-control" aria-describedby="emergency-lastname" style="text-transform:uppercase">
+                            <input type="text" id="emergency-lastname" name="lastName" value="{{ $emergency->lastName ?? '' }}" class="form-control" placeholder="LAST NAME" aria-describedby="emergency-lastname" style="text-transform:uppercase">
                             <input type="hidden" name="id" value="{{$emergency->id ?? ''}}">
                         </div>
                     </div>
                     <div class="row p-2">
                         <div class="col-sm-6">
                             <label for="emergency-contactnumber" class="form-label">Contact Number*</label>
-                            <input type="text" id="emergency-contactnumber" name="contactNo" value="{{ $emergency->contactNo ?? '' }}" class="form-control" aria-describedby="emergency-contactnumber">
+                            <input type="text" id="emergency-contactnumber" name="contactNo" value="{{ $emergency->contactNo ?? '' }}" class="form-control" placeholder="CONTACT NUMBER" aria-describedby="emergency-contactnumber">
                         </div>
                         <div class="col-sm-6">
                             <label for="emergency-relationship" class="form-label">Relationship*</label>
@@ -41,22 +41,22 @@
                     <div class="row p-2">
                         <div class="col-sm-6">
                             <label for="emergency-address1" class="form-label">Address 1*</label>
-                            <input type="text" id="emergency-address1" name="address1" value="{{ $emergency->address1 ?? '' }}" class="form-control" aria-describedby="emergency-address1" style="text-transform:uppercase">
+                            <input type="text" id="emergency-address1" name="address1" value="{{ $emergency->address1 ?? '' }}" class="form-control" aria-describedby="emergency-address1" placeholder="ADDRESS 1" style="text-transform:uppercase">
                         </div>
                         <div class="col-sm-6">
                             <label for="emergency-address1" class="form-label">Address 2</label>
-                            <input type="text" id="emergency-address2" name="address2" value="{{ $emergency->address2 ?? '' }}" class="form-control" aria-describedby="emergency-address2" style="text-transform:uppercase">
+                            <input type="text" id="emergency-address2" name="address2" value="{{ $emergency->address2 ?? '' }}" class="form-control" aria-describedby="emergency-address2" placeholder="ADDRESS 2" style="text-transform:uppercase">
                         </div>
             
                     </div>
                     <div class="row p-2">
                         <div class="col-sm-6">
                             <label for="emergency-postcode" class="form-label">Postcode*</label>
-                            <input type="number" id="emergency-postcode" name="postcode" value="{{ $emergency->postcode ?? '' }}" class="form-control" aria-describedby="emergency-postcode">
+                            <input type="number" id="emergency-postcode" name="postcode" value="{{ $emergency->postcode ?? '' }}" class="form-control" placeholder="POSTCODE" aria-describedby="emergency-postcode">
                         </div>
                         <div class="col-sm-6">
                             <label for="emergency-city" class="form-label">City*</label>
-                            <input type="text" class="form-control" name="city" value="{{ $emergency->city ?? '' }}" style="text-transform:uppercase">
+                            <input type="text" class="form-control" name="city" value="{{ $emergency->city ?? '' }}" style="text-transform:uppercase" placeholder="CITY">
                         </div>
                     </div>
                     <div class="row p-2">
@@ -109,18 +109,18 @@
                         <div class="row p-2">
                             <div class="col-sm-6">
                                 <label for="emergency-firstname" class="form-label">First Name*</label>
-                                <input type="text" id="" name="" value="" class="form-control" aria-describedby="emergency-firstname" style="text-transform:uppercase">
+                                <input type="text" id="" name="" value="" class="form-control" aria-describedby="emergency-firstname" style="text-transform:uppercase" placeholder="FIRST NAME">
                             </div>
                             <div class="col-sm-6">
                                 <label for="emergency-lastname" class="form-label">Last Name*</label>
-                                <input type="text" id="" name="" value="" class="form-control" aria-describedby="emergency-lastname" style="text-transform:uppercase">
+                                <input type="text" id="" name="" value="" class="form-control" aria-describedby="emergency-lastname" style="text-transform:uppercase" placeholder="LAST NAME">
                                 <input type="hidden" name="id" value="">
                             </div>
                         </div>
                         <div class="row p-2">
                             <div class="col-sm-6">
                                 <label for="emergency-contactnumber" class="form-label">Contact Number*</label>
-                                <input type="text" id="" name="contactNo" value="" class="form-control" aria-describedby="emergency-contactnumber">
+                                <input type="text" id="" name="contactNo" value="" class="form-control" aria-describedby="emergency-contactnumber" placeholder="CONTACT NUMBER">
                             </div>
                             <div class="col-sm-6">
                                 <label for="emergency-relationship" class="form-label">Relationship*</label>
@@ -137,22 +137,22 @@
                         <div class="row p-2">
                             <div class="col-sm-6">
                                 <label for="emergency-address1" class="form-label">Address 1*</label>
-                                <input type="text" id="" name="address1" value="" class="form-control" aria-describedby="emergency-address1" style="text-transform:uppercase">
+                                <input type="text" id="" name="address1" value="" class="form-control" aria-describedby="emergency-address1" placeholder="ADDRESS 1" style="text-transform:uppercase">
                             </div>
                             <div class="col-sm-6">
                                 <label for="emergency-address1" class="form-label">Address 2</label>
-                                <input type="text" id="" name="address2" value="" class="form-control" aria-describedby="emergency-address2" style="text-transform:uppercase">
+                                <input type="text" id="" name="address2" value="" class="form-control" aria-describedby="emergency-address2" placeholder="ADDRESS 2" style="text-transform:uppercase">
                             </div>
                 
                         </div>
                         <div class="row p-2">
                             <div class="col-sm-6">
                                 <label for="emergency-postcode" class="form-label">Postcode*</label>
-                                <input type="number" id="" name="postcode" value="" class="form-control" aria-describedby="emergency-postcode">
+                                <input type="number" id="" name="postcode" value="" class="form-control" aria-describedby="emergency-postcode" placeholder="POSTCODE">
                             </div>
                             <div class="col-sm-6">
                                 <label for="emergency-city" class="form-label">City*</label>
-                                <input type="text" class="form-control" name="" value="" style="text-transform:uppercase">
+                                <input type="text" class="form-control" name="" value="" style="text-transform:uppercase" placeholder="CITY">
                             </div>
                         </div>
                         <div class="row p-2">
