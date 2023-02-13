@@ -47,7 +47,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="modal-footer">
-                                                    <button class="btn btn-primary" id="cashadvancehierarchy">Update</button>
+                                                    <button class="btn btn-primary" id="cahierarchybutton">Update</button>
                                                     </form>
                                                 </div>
                                         </div>

@@ -285,4 +285,12 @@ class EmployeeController extends Controller
 
         return response()->json($result);
     }
+    public function updateeleavehierarchy(Request $r, $id)
+    {
+        $ss = new EmployeeService;
+        
+        $result = $ss->updateeleavehierarchy($r, $id);
+
+        return response()->json($result);
+    }
 }
