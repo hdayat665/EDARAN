@@ -119,7 +119,7 @@
                                                     </div>
                                                     <div class="col-sm-6">
                                                         <label for="email" class="form-label">Personal Email</label>
-                                                        <input type="email" id="email" name="personalEmail" value="{{$profile->personalEmail ?? ''}}" class="form-control" aria-describedby="email">
+                                                        <input type="email" id="email" name="personalEmail" value="{{$profile->personalEmail ?? ''}}" class="form-control" aria-describedby="email" placeholder="email@gmail.com">
                                                         <input type="hidden" value="{{$user_id}}" name="user_id">
                                                     </div>
                             
@@ -127,21 +127,21 @@
                                                 <div class="row p-2">
                                                     <div class="col-sm-6">
                                                         <label for="firstname" class="form-label">First Name*</label>
-                                                        <input type="text" id="firstname" name="firstName" value="{{$profile->firstName ?? ''}}" class="form-control" aria-describedby="firstname">
+                                                        <input type="text" id="firstname" name="firstName" value="{{$profile->firstName ?? ''}}" class="form-control" aria-describedby="firstname" placeholder="FIRST NAME">
                                                     </div>
                                                     <div class="col-sm-6">
                                                         <label for="lastname" class="form-label">Last Name*</label>
-                                                        <input type="text" id="lastname" name="lastName" value="{{$profile->lastName ?? ''}}" class="form-control" aria-describedby="lastname">
+                                                        <input type="text" id="lastname" name="lastName" value="{{$profile->lastName ?? ''}}" class="form-control" aria-describedby="lastname" placeholder="LAST NAME">
                                                     </div>
                                                 </div>
                                                 <div class="row p-2">
                                                     <div class="col-sm-6">
                                                         <label for="firstname" class="form-label">Full Name</label>
-                                                        <input type="text" id="fullname" name="fullName" value="{{$profile->fullName ?? ''}}" class="form-control" aria-describedby="firstname" readonly>
+                                                        <input type="text" id="fullname" name="fullName" value="{{$profile->fullName ?? ''}}" class="form-control" aria-describedby="firstname" readonly placeholder="FULL NAME">
                                                     </div>
                                                     <div class="col-sm-6">
                                                         <label for="firstname" class="form-label" style="color: red">Old Identification Number</label>
-                                                        <input type="text" id="" name="" value="" class="form-control" aria-describedby="" >
+                                                        <input type="text" id="" name="" value="" class="form-control" aria-describedby="" placeholder="0000000">
                                                     </div>
                                                 </div>
                                                 <div class="row p-2">
@@ -157,7 +157,7 @@
                                                             </div>
                                                             <div class="col-sm-6">
                                                                 <label for="lastname" class="form-label">New Identification Number*</label>
-                                                                <input type="text" value="{{$profile->idNo ?? ''}}" name="idNo" id="idNo" class="form-control" aria-describedby="lastname">
+                                                                <input type="text" value="{{$profile->idNo ?? ''}}" name="idNo" id="idNo" class="form-control" aria-describedby="lastname" placeholder="000000-00-0000">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -172,13 +172,13 @@
                                                         <div class="row">
                                                             <div class="col-sm-12">
                                                                 <label for="passport" class="form-label">Passport Number</label>
-                                                                <input type="text" id="passport" name="passport" value="{{ $profile->passport ?? '' }}" class="form-control" aria-describedby="passport" readonly>
+                                                                <input type="text" id="passport" name="passport" value="{{ $profile->passport ?? '' }}" class="form-control" aria-describedby="passport" readonly placeholder="A00000000">
                                                             </div>
                                                         </div>
                                                     </div>
                                                      <div class="col-sm-3">
                                                                 <label for="expirydate" class="form-label">Expiry Date</label>
-                                                                <input type="text" id="expirydate" name="expiryDate" value="{{ date_format(date_create($profile->expiryDate ?? null), 'Y-m-d') ?? '' }}" class="form-control" style= "pointer-events: none;" readonly>
+                                                                <input type="text" id="expirydate" name="expiryDate" value="{{ date_format(date_create($profile->expiryDate ?? null), 'Y-m-d') ?? '' }}" class="form-control" placeholder="YYYY/MM/DD" style= "pointer-events: none;" readonly>
                                                             </div>
                                                     <div class="col-sm-3">
                                                         <label for="issuing-country" class="form-label">Issuing Country</label>
@@ -206,8 +206,8 @@
                                                     <div class="col-sm-6">
                                                         <div class="row">
                                                             <div class="col-sm-6">
-                                                                <label for="dob" class="form-label">Date Birth</label>
-                                                                <input type="text" id="dob" name="DOB" value="{{ date_format(date_create($profile->DOB ?? null), 'Y-m-d') ?? '' }}" class="form-control" aria-describedby="dob" style= "pointer-events: none;" readonly>
+                                                                <label for="dob" class="form-label">Date Of Birth</label>
+                                                                <input type="text" id="dob" name="DOB" value="{{ date_format(date_create($profile->DOB ?? null), 'Y-m-d') ?? '' }}" placeholder="YYYY/MM/DD" class="form-control" aria-describedby="dob" style= "pointer-events: none;" readonly>
                                                             </div>
                                                             <div class="col-sm-6">
                                                                 <label for="gender" class="form-label">Gender</label>
@@ -269,7 +269,7 @@
                         
                                                             <div class="col-sm-12 idnumber">
                                                                 <label for="" class="form-label" style="color: red;">OKU Card Number*</label>
-                                                                <input type="text" value="" name="" id="okucard" class="form-control" readonly >
+                                                                <input type="text" value="" name="" id="okucard" class="form-control" readonly placeholder="OKU CARD NUMBER">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -286,22 +286,22 @@
                                                 <div class="row p-2">
                                                     <div class="col-sm-6">
                                                         <label for="phone-number" class="form-label">Phone Number*</label>
-                                                        <input type="text" id="phone-number" name="phoneNo" value="{{$profile->phoneNo ?? ''}}" class="form-control" aria-describedby="phone-number">
+                                                        <input type="text" id="phone-number" name="phoneNo" value="{{$profile->phoneNo ?? ''}}" class="form-control" aria-describedby="phone-number" placeholder="000-00000000">
                                                     </div>
                                                     <div class="col-sm-6">
                                                         <label for="phone-number2" class="form-label" style="color: red">Phone Number 2</label>
-                                                        <input type="text" id="" name="" value="" class="form-control" aria-describedby="phone-number2">
+                                                        <input type="text" id="" name="" value="" class="form-control" aria-describedby="phone-number2" placeholder="000-00000000">
                                                     </div>
                                                 </div>
 
                                                 <div class="row p-2">
                                                     <div class="col-sm-6">
                                                         <label for="home-number" class="form-label">Home Number</label>
-                                                        <input type="text" id="home-number" name="homeNo" value="{{$profile->homeNo ?? ''}}" class="form-control" aria-describedby="home-number">
+                                                        <input type="text" id="home-number" name="homeNo" value="{{$profile->homeNo ?? ''}}" class="form-control" aria-describedby="home-number" placeholder="00-0000000">
                                                     </div>
                                                     <div class="col-sm-6">
                                                         <label for="extension-number" class="form-label">Extension Number</label>
-                                                        <input type="text" id="extension-number" name="extensionNo"value="{{$profile->extensionNo ?? ''}}" class="form-control" aria-describedby="extension-number">
+                                                        <input type="text" id="extension-number" name="extensionNo"value="{{$profile->extensionNo ?? ''}}" class="form-control" aria-describedby="extension-number" placeholder="0000">
                                                     </div>
                                                 </div>
                                                 <div class="row p-2">

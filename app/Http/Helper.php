@@ -105,11 +105,11 @@ if (!function_exists('getMaritalStatus')) {
     {
         $data = [
 
-            '1' => 'Single',
-            '2' => 'Married',
-            '3' => 'Divorced',
-            '4' => 'Widowed',
-            '5' => 'Seperated',
+            '1' => 'SINGLE',
+            '2' => 'MARRIED',
+            '3' => 'DIVORCED',
+            '4' => 'WIDOWED',
+            '5' => 'SEPARATED',
         ];
 
         if ($id) {
@@ -124,8 +124,8 @@ if (!function_exists('gender')) {
     function gender()
     {
         $data = [
-            '1' => 'Male',
-            '2' => 'Female',
+            '1' => 'MALE',
+            '2' => 'FEMALE',
         ];
 
         return $data;
@@ -179,16 +179,16 @@ if (!function_exists('relationship')) {
     {
         $data = [
 
-            '1' => 'Grand Father',
-            '2' => 'Grand Mother',
-            '3' => 'Grand Father-In-Law',
-            '4' => 'Grand Mother-In-Law',
-            '5' => 'Father',
-            '6' => 'Mother',
-            '7' => 'Father-In-Law',
-            '8' => 'Mother-In-Law',
-            '9' => 'Sister',
-            '10' => 'Brother',
+            '1' => 'GRANDFATHER',
+            '2' => 'GRANDMOTHER',
+            '3' => 'GRANDFATHER-IN-LAW',
+            '4' => 'GRANDMOTHER-IN-LAW',
+            '5' => 'FATHER',
+            '6' => 'MOTHER',
+            '7' => 'FATHER-IN-LAW',
+            '8' => 'MOTHER-IN-LAW',
+            '9' => 'SISTER',
+            '10' => 'BROTHER',
         ];
 
         if ($id) {
@@ -589,11 +589,11 @@ if (!function_exists('religion')) {
     function religion()
     {
         $data = [
-            'Islam' => 'Islam',
-            'Buddhist' => 'Buddhist',
-            'Christian' => 'Christian',
-            'Hindu' => 'Hindu',
-            'Others' => 'Others',
+            'ISLAM' => 'ISLAM',
+            'BUDDHIST' => 'BUDDHIST',
+            'CHRISTIAN' => 'CHRISTIAN',
+            'HINDU' => 'HINDU',
+            'OTHERS' => 'OTHERS',
         ];
 
         return $data;
@@ -604,10 +604,10 @@ if (!function_exists('race')) {
     function race()
     {
         $data = [
-            'Malay' => 'Malay',
-            'Chinese' => 'Chinese',
-            'Indian' => 'Indian',
-            'Others' => 'Others',
+            'MALAY' => 'MALAY',
+            'CHINESE' => 'CHINESE',
+            'INDIAN' => 'INDIAN',
+            'OTHERS' => 'OTHERS',
         ];
 
         return $data;
@@ -618,21 +618,21 @@ if (!function_exists('state')) {
     function state()
     {
         $data = [
-            'Johor' => 'Johor',
-            'Kedah' => 'Kedah',
-            'Kelantan' => 'Kelantan',
-            'Negeri Sembilan' => 'Negeri Sembilan',
-            'Pahang' => 'Pahang',
-            'Penang' => 'Penang',
-            'Perak' => 'Perak',
-            'Perlis' => 'Perlis',
-            'Sabah' => 'Sabah',
-            'Sarawak' => 'Sarawak',
-            'Selangor' => 'Selangor',
-            'Terengganu' => 'Terengganu',
-            'Kuala Lumpur' => 'Kuala Lumpur',
-            'Labuan' => 'Labuan',
-            'Putrajaya' => 'Putrajaya'
+            'JOHOR' => 'JOHOR',
+            'KEDAH' => 'KEDAH',
+            'KELANTAN' => 'KELANTAN',
+            'NEGERI SEMBILAN' => 'NEGERI SEMBILAN',
+            'PAHANG' => 'PAHANG',
+            'PENANG' => 'PENANG',
+            'PERAK' => 'PERAK',
+            'PERLIS' => 'PERLIS',
+            'SABAH' => 'SABAH',
+            'SARAWAK' => 'SARAWAK',
+            'SELANGOR' => 'SELANGOR',
+            'TERENGGANU' => 'TERENGGANU',
+            'KUALA LUMPUR' => 'KUALA LUMPUR',
+            'LABUAN' => 'LABUAN',
+            'PUTRAJAYA' => 'PUTRAJAYA'
         ];
 
         return $data;
@@ -823,18 +823,18 @@ if (!function_exists('month')) {
     function month($id = '')
     {
         $data = [
-            '01' => 'January',
-            '02' => 'February',
-            '03' => 'March',
-            '04' => 'April',
-            '05' => 'May',
-            '06' => 'Jun',
-            '07' => 'July',
-            '08' => 'August',
-            '09' => 'September',
-            '10' => 'October',
-            '11' => 'November',
-            '12' => 'December',
+            '01' => 'JANUARY',
+            '02' => 'FEBRUARY',
+            '03' => 'MARCH',
+            '04' => 'APRIL',
+            '05' => 'MAY',
+            '06' => 'JUNE',
+            '07' => 'JULY',
+            '08' => 'AUGUST',
+            '09' => 'SEPTEMBER',
+            '10' => 'OCTOBER',
+            '11' => 'NOVEMBER',
+            '12' => 'DECEMBER',
         ];
 
         if ($id) {

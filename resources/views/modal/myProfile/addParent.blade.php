@@ -10,22 +10,22 @@
                     <div class="row p-2">
                         <div class="col-sm-6">
                             <label for="firstname" class="form-label">First Name*</label>
-                            <input type="text" id="" name="firstName" class="form-control" aria-describedby="firstname" style="text-transform:uppercase" >
+                            <input type="text" id="" name="firstName" class="form-control" aria-describedby="firstname" style="text-transform:uppercase" placeholder="FIRST NAME">
                         </div>
                         <div class="col-sm-6">
                             <label for="lastname" class="form-label">Last Name*</label>
-                            <input type="text" id="" name="lastName" class="form-control" aria-describedby="lastname" style="text-transform:uppercase" >
+                            <input type="text" id="" name="lastName" class="form-control" aria-describedby="lastname" style="text-transform:uppercase" placeholder="LAST NAME">
                         </div>
                     </div>
                     <div class="row p-2">
                         {{-- full name --}}
                         <div class="col-sm-6">
                             <label for="firstname" class="form-label" style="color: red">Full Name</label>
-                            <input type="text" id="" name="" class="form-control" aria-describedby="" readonly style="text-transform:uppercase" >
+                            <input type="text" id="" name="" class="form-control" aria-describedby="" readonly style="text-transform:uppercase" placeholder="FULL NAME">
                         </div>
                         <div class="col-sm-6">
                             <label for="lastname" class="form-label" style="color: red;">Old Identification Number</label>
-                            <input type="text" id="" name="" class="form-control" aria-describedby="" style="text-transform:uppercase" >
+                            <input type="text" id="" name="" class="form-control" aria-describedby="" style="text-transform:uppercase" placeholder="0000000">
                         </div>
                     </div>
                     <div class="row p-2">
@@ -41,7 +41,7 @@
                                 </div>
                                 <div class="col-sm-6">
                                     <label for="lastname" class="form-label" style="color: red">New Identification Number*</label>
-                                    <input type="number" id="idnumber6" name="idNo" value="" class="form-control" >
+                                    <input type="number" id="idnumber6" name="idNo" value="" class="form-control" placeholder="000000-00-0000" >
                                     
                                 </div>
                             </div>
@@ -62,7 +62,7 @@
                                 <div class="col-sm-12">
                                     <label for="passport" class="form-label">Passport Number</label>
                                   
-                                    <input type="text" id="passportparent" name="passport"  class="form-control" aria-describedby="passport">
+                                    <input type="text" id="passportparent" name="passport"  class="form-control" aria-describedby="passport" placeholder="A00000000">
                                 </div>
                             </div>
                         </div>
@@ -90,12 +90,12 @@
                     </div>
                     <div class="row p-2">
                         <div class="col-sm-3">
-                            <label for="dob" class="form-label">Date Birth*</label>
-                            <input type="text" id="dob6" name="DOB" class="form-control" aria-describedby="dob" readonly>
+                            <label for="dob" class="form-label">Date Of Birth*</label>
+                            <input type="text" id="dob6" name="DOB" class="form-control" aria-describedby="dob" readonly placeholder="YYYY/MM/DD">
                         </div>
                         <div class="col-sm-3" style="color: red">
                             <label for="dob" class="form-label">Age</label>
-                            <input type="text" id="age6" name="" class="form-control" aria-describedby="" readonly>
+                            <input type="text" id="age6" name="" class="form-control" aria-describedby="" readonly placeholder="AGE">
                         </div>
                         <div class="col-sm-6">
                             <label for="" class="form-label">Relationship</label>
@@ -111,7 +111,7 @@
                     <div class="row p-2">
                         <div class="col-sm-6">
                             <label for="passport" class="form-label">Contact Number</label>
-                            <input type="text" id="contactNoparent" name="contactNo" class="form-control" aria-describedby="passport">
+                            <input type="text" id="contactNoparent" name="contactNo" class="form-control" aria-describedby="passport" placeholder="000-00000000">
                         </div>
                         <div class="col-sm-6">
                             <label for="age" class="form-label">Gender*</label>
@@ -137,7 +137,7 @@
                                 </div>
                                 <div class="col-sm-6">
                                     <label for="lastname" class="form-label" style="color: red;">OKU Card Number*</label>
-                                    <input type="number" id="okucard5" name="" value="" class="form-control" readonly >
+                                    <input type="number" id="okucard5" name="" value="" class="form-control" readonly placeholder="OKU CARD NUMBER">
                                     
                                 </div>
                             </div>
@@ -145,7 +145,7 @@
                         <div class="col-sm-6">
                             <div class="row">
                                 <div class="col-sm-6">
-                                    <label for="dob" class="form-label" style="color: red;">OKU Attachment</label>
+                                    <label for="dob" class="form-label" style="color: red;">OKU Attachment*</label>
                                     <input type="file" id="okuattach4" name="" class="form-control" style="pointer-events: none" aria-describedby="" >
                                 </div>
                             </div>
@@ -166,21 +166,21 @@
                     <div class="row p-2">
                         <div class="col-sm-6">
                             <label for="address-1" class="form-label">Address 1*</label>
-                            <input type="text" id="address1parent" name="address1" class="form-control" aria-describedby="address-1" style="text-transform:uppercase">
+                            <input type="text" id="address1parent" name="address1" class="form-control" aria-describedby="address-1" style="text-transform:uppercase" placeholder="ADDRESS 1">
                         </div>
                         <div class="col-sm-6">
                             <label for="address-2" class="form-label">Address 2</label>
-                            <input type="text" id="address2parent" name="address2" class="form-control" aria-describedby="address-2" style="text-transform:uppercase">
+                            <input type="text" id="address2parent" name="address2" class="form-control" aria-describedby="address-2" style="text-transform:uppercase" placeholder="ADDRESS 2">
                         </div>
                     </div>
                     <div class="row p-2">
                         <div class="col-sm-6">
                             <label for="postcode" class="form-label">Postcode*</label>
-                            <input type="text" id="postcodeparent" name="postcode" class="form-control" aria-describedby="postcode">
+                            <input type="text" id="postcodeparent" name="postcode" class="form-control" aria-describedby="postcode" placeholder="00000">
                         </div>
                         <div class="col-sm-6">
                             <label for="city" class="form-label">City*</label>
-                            <input type="text" class="form-control" name="city" id="cityparent" style="text-transform:uppercase">
+                            <input type="text" class="form-control" name="city" id="cityparent" style="text-transform:uppercase" placeholder="CITY">
                         </div>
                     </div>
                     <div class="row p-2">

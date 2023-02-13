@@ -71,7 +71,7 @@
                             </div>
                             <div class="col-sm-6">
                                 <label for="email" class="form-label">Personal Email*</label>
-                                <input type="email" id="email" name="personalEmail" value="{{$profile->personalEmail ?? ''}}" class="form-control" aria-describedby="email" placeholder="PERSONAL EMAIL">
+                                <input type="email" id="email" name="personalEmail" value="{{$profile->personalEmail ?? ''}}" class="form-control" aria-describedby="email" placeholder="email@gmail.com">
                             </div>
 
                         </div>
@@ -95,7 +95,7 @@
                                 <div class="row">
                                     <div class="col-sm-12 idnumber">
                                         <label for="" class="form-label" style="color: red;">Old Identification Number </label>
-                                        <input type="text" class="form-control">
+                                        <input type="text" class="form-control" placeholder="0000000">
                                     </div>
                                 </div>
                             </div>
@@ -116,7 +116,7 @@
 
                                     <div class="col-sm-12 idnumber">
                                         <label for="lastname" class="form-label">New Identification Number*</label>
-                                        <input type="text" value="{{$profile->idNo ?? ''}}" name="idNo" id="idnumber" class="form-control" aria-describedby="lastname" placeholder="NEW IDENTIFICATION NUMBER">
+                                        <input type="text" value="{{$profile->idNo ?? ''}}" name="idNo" id="idnumber" class="form-control" aria-describedby="lastname" placeholder="000000-00-0000">
                                     </div>
                                 </div>
                             </div>
@@ -134,7 +134,7 @@
                                 <div class="row">
                                     <div class="col-sm-12 part">
                                         <label for="passport" class="form-label">Passport Number</label>
-                                        <input type="text" id="passportmyprofile" name="passport" value="{{ $profile->passport ?? '' }}" class="form-control" aria-describedby="passport" placeholder="PASSPORT NUMBER">
+                                        <input type="text" id="passportmyprofile" name="passport" value="{{ $profile->passport ?? '' }}" class="form-control" aria-describedby="passport" placeholder="A00000000">
                                     </div>
                                 </div>
                             </div>
@@ -167,8 +167,8 @@
                             <div class="col-sm-6">
                                 <div class="row">
                                     <div class="col-sm-6">
-                                        <label for="dob" class="form-label">Date Birth</label>
-                                        <input type="text" name="DOB" id="dob" value="{{ date_format(date_create($profile->DOB ?? null), 'Y-m-d') ?? '' }}" class="form-control" aria-describedby="dob" style="pointer-events: none;" readonly>
+                                        <label for="dob" class="form-label">Date Of Birth</label>
+                                        <input type="text" name="DOB" id="dob" value="{{ date_format(date_create($profile->DOB ?? null), 'Y-m-d') ?? '' }}" placeholder="YYYY/MM/DD" class="form-control" aria-describedby="dob" style="pointer-events: none;" readonly>
                                     </div>
                                     <div class="col-sm-6">
                                         <label for="gender" class="form-label">Gender*</label>
@@ -251,14 +251,14 @@
                             <div class="col-md-6">
                                 <div class="col p-2">
                                     <label for="phone-number" class="form-label">Phone Number*</label>
-                                    <input type="text" id="phone-number" name="phoneNo" value="{{$profile->phoneNo ?? ''}}" class="form-control" aria-describedby="phone-number" placeholder="PHONE NUMBER">
+                                    <input type="text" id="phone-number" name="phoneNo" value="{{$profile->phoneNo ?? ''}}" class="form-control" aria-describedby="phone-number" placeholder="000-00000000">
                                 </div>
                             </div>
                             {{-- new --}}
                             <div class="col-md-6">
                                 <div class="col p-2">
                                     <label for="phone-number2" class="form-label" style="color: red;">Phone Number 2</label>
-                                    <input type="text" id="" name="" value="" class="form-control" aria-describedby="" placeholder="PHONE NUMBER 2">
+                                    <input type="text" id="" name="" value="" class="form-control" aria-describedby="" placeholder="000-00000000">
                                 </div>
                             </div>
                         </div>
@@ -266,13 +266,13 @@
                             <div class="col-md-6">
                                 <div class="col p-2">
                                     <label for="home-number" class="form-label">Home Number</label>
-                                    <input type="text" id="home-number" name="homeNo" value="{{$profile->homeNo ?? ''}}" class="form-control" aria-describedby="home-number" placeholder="HOME NUMBER">
+                                    <input type="text" id="home-number" name="homeNo" value="{{$profile->homeNo ?? ''}}" class="form-control" aria-describedby="home-number" placeholder="00-0000000">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="col p-2">
                                     <label for="extension-number" class="form-label">Extension Number</label>
-                                    <input type="text" id="extension-number" name="extensionNo" value="{{$profile->extensionNo ?? ''}}" class="form-control" aria-describedby="extension-number" placeholder="EXTENSION NUMBER">
+                                    <input type="text" id="extension-number" name="extensionNo" value="{{$profile->extensionNo ?? ''}}" class="form-control" aria-describedby="extension-number" placeholder="0000">
                                 </div>
                             </div>
                         </div>
