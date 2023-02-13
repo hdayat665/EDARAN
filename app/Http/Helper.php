@@ -983,6 +983,19 @@ if (!function_exists('getAllRole')) {
     }
 }
 
+if (!function_exists('getAllJobGrade')) {
+    function getAllJobGrade()
+    {
+        $data = JobGrade::where([['tenant_id', Auth::user()->tenant_id]])->get();
+
+        if (!$data) {
+            $data = [];
+        }
+
+        return $data;
+    }
+}
+
 if (!function_exists('getUserProfileByUserId')) {
     function getUserProfileByUserId($id = '')
     {

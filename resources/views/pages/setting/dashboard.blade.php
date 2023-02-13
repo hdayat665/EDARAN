@@ -69,7 +69,7 @@
             <h3 class="mt-10px"></i> Timesheets Settings</h3> <br>
             <div class="row text-center">
                 <div class="col-lg-2">
-                    <a class="mb-10px" href="#"><i class="fas fa-calendar-days fa-4x text-blue"></i></a><br><br>
+                    <a class="mb-10px" href="/timesheetperiod"><i class="fas fa-calendar-days fa-4x text-blue"></i></a><br><br>
                     <h5 class="mb-5px">Timesheets Administrator and Timesheets Period</h5>
                 </div>
                 <div class="col-lg-2">

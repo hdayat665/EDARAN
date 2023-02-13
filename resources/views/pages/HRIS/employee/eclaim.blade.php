@@ -63,7 +63,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="modal-footer">
-                                                    <button class="btn btn-primary" id="buttonhierarchy">Update</button>
+                                                    <a class="btn btn-primary" id="buttonhierarchy">Update</a>
                                                     </form>
                                                 </div>
                                         </div>

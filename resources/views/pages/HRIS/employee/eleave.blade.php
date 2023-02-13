@@ -19,25 +19,55 @@
                                         Approval Hierarchy
                                     </p>
                                     </div>
-                                    <div class="card-body">
-                                        <div class="row p-2">
-                                            <label for="firstname" class="form-label">Employee Name</label>
-                                            <input type="text" id="text" class="form-control" aria-describedby="password">
+                                <div class="card-body">
+                                    <form id="updateeleavehierarchy">
+                                        <div class="row">
+                                            <div class="col md-6">
+                                                <div class="mb-3">
+                                                    <label for="" class="form-label">Employee Name </label>
+                                                    <input type="text" readonly value="{{$profile->fullName ?? ''}}" class="form-control" >
+                                                    <input type="hidden" readonly id="hierarchyid" value="{{$profile->user_id ?? ''}}" class="form-control" >
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div class="row p-2">
-                                            <label for="firstname" class="form-label">Recommender*</label>
-                                            <select class="form-select">
-                                                <option value="0" label="PLEASE CHOOSE" selected="selected"></option>
-                                            </select>
+                                        <div class="row ">
+                                            <div class="col md-6">
+                                                <div class="mb-3">
+                                                    <label for="" class="form-label">Recommender* </label>
+                                                    <select class="form-select" name="eleaverecommender" >
+                                                        <?php $employees = getEmployeeexcept(); ?>
+                                                        <option value="" label="PLEASE CHOOSE"></option>
+                                                        @foreach ($employees as $employee)
+                                                            <option value="{{ $employee->id }}" label="{{ $employee->employeeName }}"
+                                                            {{ $employment->eleaverecommender == $employee->id ? "selected='selected'" : '' }}>
+                                                            </option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div class="row p-2">
-                                            <label for="firstname" class="form-label">Approver*</label>
-                                            <select class="form-select">
-                                                <option value="0" label="PLEASE CHOOSE" selected="selected"></option>
-                                            </select>
+                                        <div class="row ">
+                                            <div class="col md-6">
+                                                <div class="mb-3">
+                                                    <label for="holiday_title" class="form-label">Approver </label>
+                                                    <select class="form-select" name="eleaveapprover" >
+                                                        <?php $employees = getEmployeeexcept(); ?>
+                                                        <option value="" label="PLEASE CHOOSE"></option>
+                                                        @foreach ($employees as $employee)
+                                                            <option value="{{ $employee->id }}" label="{{ $employee->employeeName }}"
+                                                            {{ $employment->eleaveapprover == $employee->id ? "selected='selected'" : '' }}>
+                                                            </option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button class="btn btn-primary" id="eleavehierarchy">Update</button>
+                                            </form>
                                         </div>
                                     <br>
-                                    <div class="row p-2">
+                                    <!-- <div class="row p-2">
                                         <div class="col-md-4">
                                             <p class="form-label">User Roles :</p>
                                         </div>
@@ -67,7 +97,7 @@
                                                   </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> -->
                                     {{-- <button type="button" class="btn btn-primary float-end mt-3">
                                         Save
                                     </button> --}}
@@ -128,9 +158,9 @@
                                 </div>
                             </div>
                         </div>
-                        <button type="button" class="btn btn-primary float-end mt-3 col-md-2">
+                        <!-- <button type="button" class="btn btn-primary float-end mt-3 col-md-2">
                             Save
-                        </button>
+                        </button> -->
                     </div>
                 </div>
             </div>
@@ -172,8 +202,12 @@
                                         <option value="0" label="PLEASE CHOOSE" selected="selected"></option>
                                     </select>
                                 </div>
+                                <div class="modal-footer">
+                                    <button class="btn btn-primary" id="cashadvancehierarchy">Update</button>
+                                    </form>
+                                </div>
                                 <br>
-                                <div class="row p-2">
+                                <!-- <div class="row p-2">
                                     <div class="col-md-4">
                                         <p class="form-label">User Roles :</p>
                                     </div>
@@ -203,7 +237,7 @@
                                               </div>
                                         </div>
                                     </div>
-                                </div>
+                                </div> -->
                                 {{-- <button type="button" class="btn btn-primary float-end mt-3">
                                     Save
                                 </button> --}}
@@ -264,9 +298,9 @@
                             </div>
                         </div>
                     </div>
-                    <button type="button" class="btn btn-primary float-end mt-3 col-md-2">
+                    <!-- <button type="button" class="btn btn-primary float-end mt-3 col-md-2">
                         Save
-                    </button>
+                    </button> -->
                 </div>
             </div>
         </div>
