@@ -34,7 +34,7 @@
                     </div>
                     <div class="row p-2">
                         <div class="col-md-12">
-                            <input type="text" class="form-control">
+                            <input type="text" name="address2" class="form-control">
                         </div>
                     </div>
                     <div class="row p-2">
@@ -47,10 +47,10 @@
                     </div>
                     <div class="row p-2">
                         <div class="col-md-6">
-                            <input type="text" class="form-control">
+                            <input type="text" name="postcode" class="form-control">
                         </div>
                         <div class="col-md-6">
-                            <input type="text" class="form-control">
+                            <input type="text" name="city" class="form-control">
                         </div>
                     </div>
                     <div class="row p-2">
@@ -63,7 +63,7 @@
                     </div>
                     <div class="row p-2">
                         <div class="col-md-6">
-                        <select class="form-select">
+                        <select class="form-select" name="state">
                             <option label="Select State " selected="selected"></option>
                             <option value="Johor" label="Johor">Johor</option>
                             <option value="Kedah" label="Kedah">Kedah</option>
@@ -83,7 +83,7 @@
                         </select>
                         </div>
                         <div class="col-md-6">
-                        <select class="form-select" >
+                        <select class="form-select" name="country">
                             <option label="Select a country ... " disabled></option>
                             <optgroup id="country-optgroup-Africa" label="Africa">
                                 <option value="DZ" label="Algeria">Algeria</option>
