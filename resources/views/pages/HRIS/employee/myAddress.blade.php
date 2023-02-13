@@ -5,22 +5,22 @@
         <div class="row p-2">
             <div class="col-sm-6">
                 <label for="address-1" class="form-label">Address 1*</label>
-                <input type="text" id="address-1" name="address1" value="{{ $address->address1 ?? '' }}" class="form-control" aria-describedby="address-1">
+                <input type="text" id="address-1" name="address1" value="{{ $address->address1 ?? '' }}" class="form-control" aria-describedby="address-1" placeholder="ADDRESS 1">
                 <input type="hidden" name="user_id" value="{{$user_id ?? ''}}">
             </div>
             <div class="col-sm-6">
                 <label for="address-2" class="form-label">Address 2</label>
-                <input type="text" id="address-2" class="form-control" name="address2" value="{{ $address->address2 ?? '' }}" aria-describedby="address-2">
+                <input type="text" id="address-2" class="form-control" name="address2" value="{{ $address->address2 ?? '' }}" aria-describedby="address-2" placeholder="ADDRESS 2">
             </div>
         </div>
         <div class="row p-2">
             <div class="col-sm-6">
                 <label for="postcode" class="form-label">Postcode*</label>
-                <input type="text" id="postcode" name="postcode" value="{{ $address->postcode ?? '' }}" class="form-control" aria-describedby="postcode">
+                <input type="text" id="postcode" name="postcode" value="{{ $address->postcode ?? '' }}" class="form-control" aria-describedby="postcode" placeholder="00000">
             </div>
             <div class="col-sm-6">
                 <label for="city" class="form-label">City*</label>
-                <input type="text" class="form-control" id="city" name="city" value="{{ $address->city ?? '' }}">
+                <input type="text" class="form-control" id="city" name="city" value="{{ $address->city ?? '' }}" placeholder="CITY">
             </div>
         </div>
         <div class="row p-2">
@@ -70,21 +70,21 @@
         <div class="row p-2">
             <div class="col-sm-6">
                 <label for="address-1" class="form-label">Address 1*</label>
-                <input type="text" id="address-1c" name="address1c" value="{{ $address->address1c ?? '' }}" class="form-control" aria-describedby="address-1">
+                <input type="text" id="address-1c" name="address1c" value="{{ $address->address1c ?? '' }}" class="form-control" aria-describedby="address-1" placeholder="ADDRESS 1">
             </div>
             <div class="col-sm-6">
                 <label for="address-2" class="form-label">Address 2</label>
-                <input type="text" id="address-2c" name="address2c" value="{{ $address->address2c ?? '' }}" class="form-control" aria-describedby="address-2">
+                <input type="text" id="address-2c" name="address2c" value="{{ $address->address2c ?? '' }}" class="form-control" aria-describedby="address-2" placeholder="ADDRESS 2">
             </div>
         </div>
         <div class="row p-2">
             <div class="col-sm-6">
                 <label for="postcode" class="form-label">Postcode*</label>
-                <input type="text" id="postcodec" name="postcodec" value="{{ $address->postcodec ?? '' }}" class="form-control" aria-describedby="postcode">
+                <input type="text" id="postcodec" name="postcodec" value="{{ $address->postcodec ?? '' }}" class="form-control" aria-describedby="postcode" placeholder="00000">
             </div>
             <div class="col-sm-6">
                 <label for="city" class="form-label">City*</label>
-                <input type="text" class="form-control" id="cityc" name="cityc" value="{{ $address->cityc ?? '' }}">
+                <input type="text" class="form-control" id="cityc" name="cityc" value="{{ $address->cityc ?? '' }}" placeholder="CITY">
             </div>
         </div>
         <div class="row p-2">
@@ -235,21 +235,21 @@
         <div class="row p-2">
             <div class="col-sm-6">
                 <label for="address-1" class="form-label">Address 1*</label>
-                <input type="text" id="" name="" value="" class="form-control" aria-describedby="address-1" style="text-transform:uppercase">
+                <input type="text" id="" name="" value="" class="form-control" aria-describedby="address-1" placeholder="ADDRESS 1" style="text-transform:uppercase" placeholder="ADDRESS 1">
             </div>
             <div class="col-sm-6">
                 <label for="address-2" class="form-label">Address 2</label>
-                <input type="text" id="" class="form-control" name="" value="" aria-describedby="address-2" style="text-transform:uppercase">
+                <input type="text" id="" class="form-control" name="" value="" aria-describedby="address-2" placeholder="ADDRESS 2" style="text-transform:uppercase" placeholder="ADDRESS 2">
             </div>
         </div>
         <div class="row p-2">
             <div class="col-sm-6">
                 <label for="postcode" class="form-label">Postcode*</label>
-                <input type="text" id="postcode" name="" value="" class="form-control" aria-describedby="postcode">
+                <input type="text" id="postcode" name="" value="" class="form-control" placeholder="POSTCODE" aria-describedby="postcode" placeholder="00000">
             </div>
             <div class="col-sm-6">
                 <label for="city" class="form-label">City*</label>
-                <input type="text" class="form-control" name="" id="" value="" style="text-transform:uppercase">
+                <input type="text" class="form-control" name="" id="" value="" placeholder="CITY" style="text-transform:uppercase" placeholder="CITY">
             </div>
         </div>
         <div class="row p-2">
@@ -288,11 +288,11 @@
             <div class="col-sm-6">
                 <label for="Addresstype" class="form-label">Address Type</label>
                 <select class="form-select" >
-                    <option class="form-label" value="" selected>Please Select</option>
-                    <option class="form-label" value="" >Correspondence</option>
-                    <option class="form-label" value="" >Permanent</option>
-                    <option class="form-label" value="" >Both</option>
-                    <option class="form-label" value="" >None</option>
+                    <option class="form-label" value="" selected>PLEASE SELECT</option>
+                    <option class="form-label" value="" >CORRESPONDENCE</option>
+                    <option class="form-label" value="" >PERMANENT</option>
+                    <option class="form-label" value="" >BOTH</option>
+                    <option class="form-label" value="" >NONE</option>
                     
                 </select>
             </div>
@@ -322,21 +322,21 @@
         <div class="row p-2">
             <div class="col-sm-6">
                 <label for="address-1" class="form-label">Address 1*</label>
-                <input type="text" id="" name="" value="" class="form-control" aria-describedby="address-1" style="text-transform:uppercase">
+                <input type="text" id="" name="" value="" class="form-control" aria-describedby="address-1" style="text-transform:uppercase" placeholder="ADDRESS 1">
             </div>
             <div class="col-sm-6">
                 <label for="address-2" class="form-label">Address 2</label>
-                <input type="text" id="" class="form-control" name="" value="" aria-describedby="address-2" style="text-transform:uppercase">
+                <input type="text" id="" class="form-control" name="" value="" aria-describedby="address-2" style="text-transform:uppercase" placeholder="ADDRESS 2">
             </div>
         </div>
         <div class="row p-2">
             <div class="col-sm-6">
                 <label for="postcode" class="form-label">Postcode*</label>
-                <input type="text" id="" name="postcode" value="" class="form-control" aria-describedby="postcode">
+                <input type="text" id="" name="postcode" value="" class="form-control" aria-describedby="postcode" placeholder="00000">
             </div>
             <div class="col-sm-6">
                 <label for="city" class="form-label">City*</label>
-                <input type="text" class="form-control" name="" id="" value="" style="text-transform:uppercase">
+                <input type="text" class="form-control" name="" id="" value="" style="text-transform:uppercase" placeholder="CITY">
             </div>
         </div>
         <div class="row p-2">
@@ -375,11 +375,11 @@
             <div class="col-sm-6">
                 <label for="Addresstype" class="form-label">Address Type</label>
                 <select class="form-select" >
-                    <option class="form-label" value="" selected>Please Select</option>
-                    <option class="form-label" value="" >Correspondence</option>
-                    <option class="form-label" value="" >Permanent</option>
-                    <option class="form-label" value="" >Both</option>
-                    <option class="form-label" value="" >None</option>
+                    <option class="form-label" value="" selected>PLEASE SELECT</option>
+                    <option class="form-label" value="" >CORRESPONDENCE</option>
+                    <option class="form-label" value="" >PERMANENT</option>
+                    <option class="form-label" value="" >BOTH</option>
+                    <option class="form-label" value="" >NONE</option>
                     
                 </select>
             </div>
