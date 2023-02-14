@@ -150,7 +150,7 @@
                 </div>
             </div>
             <div class="row">
-                <label class="form-label col-form-label col-md-4">Status</label>
+                <label class="form-label col-form-label col-md-4">Status*</label>
             </div>
             <div class="row mb-15px">
                 <div class="col-md-4">

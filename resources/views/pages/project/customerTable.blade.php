@@ -20,7 +20,7 @@
                     <thead>
                         <tr>
                             <th class="text-nowrap">No</th>
-                            <th width="6%" data-orderable="false" class="align-middle">Action</th>
+                            <th width="8%" data-orderable="false" class="align-middle">Action</th>
                             <th class="text-nowrap">Status</th>
                             <th class="text-nowrap">Customer Name</th>
                             <th class="text-nowrap">Address</th>
@@ -63,7 +63,7 @@
                                         </div>
                                     </td>
                                     <td>{{ $customer->customer_name }}</td>
-                                    <td>{{ $customer->address }}, {{ $customer->address2 }}, {{ $customer->city}}, {{ $customer->postcode}}, {{ $customer->state}} ,{{ $customer->country}}</td>
+                                    <td>{{ $customer->address }}, {{ $customer->address2 }} {{ $customer->city}}, {{ $customer->postcode}}, {{ $customer->state}} ,{{ $customer->country}}</td>
                                     <td>{{ $customer->phoneNo }}</td>
                                     <td>{{ $customer->email }}</td>
                                     <td>{{ $customer->addedBy }}</td>

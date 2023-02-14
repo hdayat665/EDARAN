@@ -40,9 +40,21 @@ class CustomerService
     public function createCustomer($r)
     {
         $input = $r->input();
+
+        $etData = customer::where([['customer_name', $input['customer_name']], ['tenant_id', Auth::user()->tenant_id]])->first();
+        if ($etData) {
+            $data['msg'] = 'Customer already exists.';
+            $data['status'] = config('app.response.error.status');
+            $data['type'] = config('app.response.error.type');
+            $data['title'] = config('app.response.error.title');
+
+            return $data;
+        }
+
         $input['tenant_id'] = Auth::user()->tenant_id;
         $input['addedBy'] = Employee::where('user_id', Auth::user()->id)->select('employeeName')->first()->employeeName;
         $input['status'] = 1;
+        $address2 = $input['address2'] ?? null;
         // $data = Employee::where('user_id', $id)->select('employeeName')->first()->employeeName;
         
         Customer::create($input);
@@ -60,6 +72,7 @@ class CustomerService
     {
         $input = $r->input();
         $input['update_by'] = Auth::user()->id;
+        $address2 = $input['address2'] ?? null;
 
         Customer::where('id', $id)->update($input);
 
