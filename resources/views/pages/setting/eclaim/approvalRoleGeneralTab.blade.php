@@ -21,7 +21,9 @@
                                         <option class="form-label" value="">Please Select</option>
                                         <?php $roles = getAllRole(); ?>
                                         @foreach ($roles as $role)
-                                            <option value="{{ $role->id }}">{{ $role->roleName }}</option>
+                                            <option value="{{ $role->id }}" label="{{ $role->roleName }}"
+                                            {{ $role->roleName == $role->id ? "selected='selected'" : '' }}>
+                                            </option>
                                         @endforeach
 
                                     </select>
@@ -61,8 +63,11 @@
                                             <li class="timeline-item mb-5 ">
                                                 <div class="card p-3 bg-white">
                                                     <p class="fw-bold">Recommender and Approver has change <br>
-                                                        Recommender : {{ getRoleById($data->recommender)->roleName }}<br>
-                                                        
+                                                    Recommender : {{ getRoleById($data->recommender)->roleName }}<br>
+                                                    Approver : {{ optional(getUserProfileByUserId($data->approver))->fullName ?? 'Unable to retrieve approver information.' }}<br>
+                                                    updated by {{ optional(getUserProfileByUserId($data->user_id))->fullName ?? 'Unable to retrieve updater information.' }}
+
+
                                                     <p class="text-muted mb-2 fw-bold">11 March 2020
                                                     </p>
                                                 </div>
