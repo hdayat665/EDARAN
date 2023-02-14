@@ -4,13 +4,71 @@ $(document).ready(function () {
         autoclose: true,
     });
 
-    $("#customerTable").DataTable({
-        responsive: false,
-        lengthMenu: [
+    $(document).ready(function () {
+        var table = $("#customerTable").DataTable({
+          responsive: true,
+          lengthMenu: [
             [5, 10, 25, 50, -1],
             [5, 10, 25, 50, "All"],
-        ],
-    });
+          ],
+          columnDefs: [
+            {
+              targets: 1, // Column index of the "Action" column
+              orderable: false, // Set orderable to false
+            },
+          ],
+          
+          
+        });
+      
+        table.on("draw.dt", function () {
+          $(".statusCheck").off("change").on("change", function () {
+            var id = $(this).data("id");
+            var status;
+      
+            if ($(this).is(":checked")) {
+              status = 1;
+            } else {
+              status = 2;
+            }
+      
+            requirejs(["sweetAlert2"], function (swal) {
+                $.ajax({
+                    type: "POST",
+                    url: "/updateStatusCustomer/" + id + "/" + status,
+                    async: false,
+                    processData: false,
+                    contentType: false,
+                }).done(function (data) {
+                    swal({
+                        title: data.title,
+                        text: data.msg,
+                        type: data.type,
+                        confirmButtonColor: "#3085d6",
+                        confirmButtonText: "OK",
+                        allowOutsideClick: false,
+                        allowEscapeKey: false,
+                    }).then(function () {
+                        if (data.type == "error") {
+                        } else {
+                            location.reload();
+                        }
+                    });
+                });
+            });
+          });
+        });
+      
+        $("#customerTable").on("responsive-display", function (e, datatable, row, showHide, update) {
+          if (showHide) {
+            $(row.child()[0]).find("input.statusCheck").prop("checked", $(row.node()).find("input.statusCheck").prop("checked"));
+            $(row.child()[0]).find("input.statusCheck").off("change").on("change", function () {
+              $(".statusCheck").trigger("change");
+            });
+          }
+        });
+      });
+      
 
     $(document).on("click", "#addButton", function () {
         $("#addModal").modal("show");
@@ -24,6 +82,9 @@ $(document).ready(function () {
             console.log(data);
             $("#customer_name").val(data.customer_name);
             $("#address").val(data.address);
+            $("#address2").val(data.address2);
+            $("#postcode").val(data.postcode);
+            $("#city").val(data.city);
             $("#phoneNo").val(data.phoneNo);
             $("#idC").val(data.id);
             $("#email").val(data.email);
@@ -198,13 +259,15 @@ $(document).ready(function () {
     });
 
     $(".statusCheck").on("change", function () {
-        var checkedValue = $(".statusCheck:checked").val();
-        var id = $(this).data("id");
+        
 
-        if (checkedValue) {
-            var status = 1;
+        var id = $(this).data("id");
+        var status;
+
+        if ($(this).is(":checked")) {
+            status = 1;
         } else {
-            var status = 2;
+            status = 2;
         }
         requirejs(["sweetAlert2"], function (swal) {
             $.ajax({

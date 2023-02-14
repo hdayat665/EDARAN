@@ -41,10 +41,13 @@ class CustomerService
     {
         $input = $r->input();
         $input['tenant_id'] = Auth::user()->tenant_id;
-        $input['addedBy'] = Auth::user()->username;
-
+        $input['addedBy'] = Employee::where('user_id', Auth::user()->id)->select('employeeName')->first()->employeeName;
+        $input['status'] = 1;
+        // $data = Employee::where('user_id', $id)->select('employeeName')->first()->employeeName;
+        
         Customer::create($input);
-
+        $data['americass'] = americas();
+        $data['asias'] = asias();
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
@@ -64,7 +67,8 @@ class CustomerService
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
         $data['msg'] = 'Success update Customer';
-
+        $data['americass'] = americas();
+        $data['asias'] = asias();
         return $data;
     }
 
