@@ -6,15 +6,22 @@ $(document).ready(function () {
 
     $(document).ready(function () {
         var table = $("#customerTable").DataTable({
-          responsive: true,
+          responsive: false,
           lengthMenu: [
             [5, 10, 25, 50, -1],
             [5, 10, 25, 50, "All"],
           ],
+          scrollX:true,
           columnDefs: [
             {
               targets: 1, // Column index of the "Action" column
               orderable: false, // Set orderable to false
+            }, 
+            {
+              targets: 4, width: '200px'
+            },
+            {
+              targets: 1, width: '80px'
             },
           ],
           

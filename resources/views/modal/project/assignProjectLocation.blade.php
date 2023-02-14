@@ -19,10 +19,10 @@
                     <div class="mb-3">
                         <label class="form-label">Project Location Name : </label><br><br>
                         <select class="selectpicker form-control" name="location[]" id="projectlocation" multiple>
-                                <?php $locations = projectLocation() ?>
-                                @foreach ($locations as $location)
-                                <option value="{{$location->id}}" >{{$location->location_name}}</option>
-                                @endforeach
+                            <?php $projectLocations = projectLocation($project->id) ?>
+                            @foreach ($projectLocations as $projectLocation)
+                                <option value="{{$projectLocation->id}}">{{$projectLocation->location_name}}</option>
+                            @endforeach
                         </select>
                     </div>
                     <div class="modal-footer">

@@ -78,8 +78,8 @@
                         </select>
                         </div>
                         <div class="col-md-6">
-                        <select class="form-select" name="issuingCountry" id="">
-                                <option value="MY" label="MALAYSIA" selected ></option>
+                        <select class="form-select" name="country" id="">
+                                <option value="MALAYSIA" label="MALAYSIA" selected ></option>
                                 <optgroup id="country-optgroup-Americas" label="Americas">
                                 <?php $americass = americas(); ?>
                                     @foreach ($americass as $key => $america)

@@ -125,13 +125,13 @@
 
                     <div class="row mb-15px">
                         <div class="col-md-12">
-                            <select class="default-select2 form-control" name="location[]" id="location-search" multiple >
-                            
-                                <?php $locations = projectLocation() ?>
-                                @foreach ($locations as $location)
-                                <option value="{{$location->id}}" >{{$location->location_name}}</option>
-                                @endforeach
-                            </select>
+                        <select class="default-select2 form-control" name="location[]" id="location-search" multiple>
+                            <?php $projectLocations = projectLocation($project->id) ?>
+                            @foreach ($projectLocations as $projectLocation)
+                                <option value="{{$projectLocation->id}}">{{$projectLocation->location_name}}</option>
+                            @endforeach
+                        </select>
+
 
                         </div>
 

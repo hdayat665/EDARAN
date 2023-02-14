@@ -67,35 +67,55 @@
                     </div>
                     <div class="row ">
                         <div class="col-md-6">
+                        <?php
+                        $customers = getCustomer(); // assuming this function returns a collection of customer objects
+                        $state = state();
+                        ?>
                         <select class="form-select" name="state" value="" style="text-transform:uppercase">
-                                    <?php $state = state() ?>
-                                    <option value="" label="PLEASE CHOOSE" ></option>
-                                    @foreach ($state as $key => $status)
-                                    <option value="{{$key}}"  <?php echo ($key == $customer->state) ? 'selected="selected"' : '' ?>>{{$status}}</option>
-                                    @endforeach
-                                </select>
+                            <option value="" label="PLEASE CHOOSE"></option>
+                            @foreach ($state as $key => $status)
+                                <option value="{{$key}}"  <?php echo (isset($customer) && $key == $customer->state) ? 'selected="selected"' : '' ?>>{{$status}}</option>
+                            @endforeach
+                        </select>
+
+
+
                         </div>
 
 
                         <div class="col-md-6">
-                        <select class="form-select" name="country">
-                            <option value="" label="PLEASE CHOOSE" ></option>
-                            
-                            <?php
-                            $americass = americas();
-                            $asias = asias();
-                            ?>
-                            <optgroup id="country-optgroup-Americas" label="Americas">
-                                @foreach ($americass as $key => $america)
-                                <option value="{{$key}}" <?php echo ($key == $customer->country) ? 'selected="selected"' : '' ?> >{{$america}}</option>
-                                @endforeach
-                            </optgroup>
-                            <optgroup id="country-optgroup-Asia" label="Asia">
-                                @foreach ($asias as $key => $asia)
-                                <option value="{{$key}}" <?php echo ($key == $customer->country) ? 'selected="selected"' : '' ?> >{{$asia}}</option>
-                                @endforeach
-                            </optgroup>
-                        </select>
+                        <?php
+                        $customers = getCustomer(); // assuming this function returns a collection of customer objects
+                        $state = state();
+                        ?>
+                        @if($customers->isNotEmpty())
+                            @foreach ($customers as $customer)
+                                <select class="form-select" name="country">
+                                    <option value="" label="PLEASE CHOOSE"></option>
+
+                                    <?php
+                                    $americass = americas();
+                                    $asias = asias();
+                                    ?>
+                                    <optgroup id="country-optgroup-Americas" label="Americas">
+                                        @foreach ($americass as $key => $america)
+                                            <option value="{{$key}}" <?php echo ($key == $customer->country) ? 'selected="selected"' : '' ?> >{{$america}}</option>
+                                        @endforeach
+                                    </optgroup>
+                                    <optgroup id="country-optgroup-Asia" label="Asia">
+                                        @foreach ($asias as $key => $asia)
+                                            <option value="{{$key}}" <?php echo ($key == $customer->country) ? 'selected="selected"' : '' ?> >{{$asia}}</option>
+                                        @endforeach
+                                    </optgroup>
+                                </select>
+                            @endforeach
+                        @else
+                            <p>No customers found</p>
+                        @endif
+
+
+
+
                         </div>
                     </div>
                     <br>

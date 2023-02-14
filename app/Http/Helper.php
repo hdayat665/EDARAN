@@ -509,9 +509,9 @@ if (!function_exists('getStatusProject')) {
     function getStatusProject()
     {
         $data = [
-            'Ongoing' => 'Ongoing',
-            'Warranty' => 'Warranty',
-            'Closed' => 'Closed',
+            'ONGOING' => 'ONGOING',
+            'WARRANTY' => 'WARRANTY',
+            'CLOSED' => 'CLOSED',
         ];
 
         return $data;
@@ -602,8 +602,8 @@ if (!function_exists('getVehicle')) {
     function getVehicle()
     {
         $data = [
-            '1' => 'Car',
-            '2' => 'Motorcycle',
+            '1' => 'CAR',
+            '2' => 'MOTORCYCLE',
         ];
 
         return $data;
@@ -692,7 +692,13 @@ if (!function_exists('customeractive')) {
 if (!function_exists('projectLocation')) {
     function projectLocation($projectid = '')
     {
-        $data = ProjectLocation::where('tenant_id', Auth::user()->tenant_id)->get();
+        $query = ProjectLocation::where('tenant_id', Auth::user()->tenant_id);
+        
+        if ($projectid) {
+            $query->where('project_id', $projectid);
+        }
+
+        $data = $query->get();
 
         if (!$data) {
             $data = [];
@@ -701,6 +707,8 @@ if (!function_exists('projectLocation')) {
         return $data;
     }
 }
+
+
 if (!function_exists('getBranch')) {
     function getBranch($id = '')
     {
@@ -1120,10 +1128,10 @@ if (!function_exists('getCashAdvanceType')) {
     function getCashAdvanceType($id = '')
     {
         $data = [
-            '1' => 'Project ( Outstation )',
-            '2' => 'Project ( Non Outstation )',
-            '3' => 'Other ( Outstation )',
-            '4' => 'Other ( Non Outstation )',
+            '1' => 'PROJECT ( OUTSTATION )',
+            '2' => 'PROJECT ( NON OUTSTATION )',
+            '3' => 'OTHER ( OUTSTATION )',
+            '4' => 'OTHER ( NON OUTSTATION )',
         ];
 
         if ($id) {
