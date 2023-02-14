@@ -301,7 +301,7 @@ $(document).ready(function() {
                 },
                 extensionNo: {
                     digits: true,
-                    rangelength: [9, 9]
+                    rangelength: [4, 4]
                     
                 },
 
@@ -329,17 +329,17 @@ $(document).ready(function() {
                 },
                 phoneNo: {
                     required: "Please Insert Phone Number",
-                    digits: "Please Insert Correct Identification Number Without ' - ' or Space",
+                    digits: "Please Insert Correct Phone Number Without ' - ' or Space",
                     rangelength: "Please Insert Valid Phone Number"
                     
                 },
                 homeNo: {
-                    digits: "Please Insert Correct Identification Number Without ' - ' or Space",
-                    rangelength: "Please Insert Valid Phone Number"
+                    digits: "Please Insert Correct Home Number Without ' - ' or Space",
+                    rangelength: "Please Insert Valid Homee Number"
                 },
                 extensionNo: {
-                    digits: "Please Insert Correct Identification Number Without ' - ' or Space",
-                    rangelength: "Please Insert Valid Phone Number"
+                    digits: "Please Insert Correct Extension Number Without ' - ' or Space",
+                    rangelength: "Please Insert Valid Extension Number"
                 },
             },
             submitHandler: function(form) {
