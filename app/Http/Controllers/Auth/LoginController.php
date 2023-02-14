@@ -164,7 +164,7 @@ class LoginController extends Controller
         if ($data) {
             $tenant = $data->tenant;
             $title = 'Success';
-            $type = 'success';
+            $type = 'Success';
             $msg = 'Tenant found!';
         }
 

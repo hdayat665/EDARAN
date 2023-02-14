@@ -68,12 +68,12 @@ class LoginService
 
         if ($saveUser) {
             $data['title'] = 'Success!';
-            $data['type'] = 'success';
-            $data['msg'] = 'Success register';
+            $data['type'] = 'Success';
+            $data['msg'] = 'Success Register';
         } else {
             $data['title'] = 'Error';
-            $data['type'] = 'error';
-            $data['msg'] = 'Error register';
+            $data['type'] = 'Error';
+            $data['msg'] = 'Error Register';
         }
 
         return $this->response($saveUser);
@@ -94,8 +94,8 @@ class LoginService
         }
 
         $data['title'] = 'Success!';
-        $data['type'] = 'success';
-        $data['msg'] = 'Your Account have been verified';
+        $data['type'] = 'Success';
+        $data['msg'] = 'Your Account Have Been Verified';
 
         return $data;
     }
@@ -183,7 +183,7 @@ class LoginService
             ->update(['failLogin' =>  0]);
 
         $data['title'] = 'Success!';
-        $data['type'] = 'success';
+        $data['type'] = 'Success';
         $data['msg'] = 'Success';
 
         return $data;
@@ -199,8 +199,8 @@ class LoginService
             $data['msg'] = 'You email does not exist!';
         } else {
             $data['title'] = 'Success!';
-            $data['type'] = 'success';
-            $data['msg'] = 'You email have been send!';
+            $data['type'] = 'Success';
+            $data['msg'] = 'Your Email Have Been Send!';
             $data['email'] = $checkEmail->email;
             $data['domain'] = $checkEmail->domain;
             $data['data'] = $checkEmail;
@@ -245,8 +245,8 @@ class LoginService
         }
 
         $data['title'] = 'Success!';
-        $data['type'] = 'success';
-        $data['msg'] = 'Reset password Success';
+        $data['type'] = 'Success';
+        $data['msg'] = 'Reset Password Success';
 
         return $data;
     }
@@ -254,7 +254,7 @@ class LoginService
     public function login($r, $type = '')
     {
         $data['title'] = 'Success';
-        $data['type'] = 'success';
+        $data['type'] = 'Success';
         $data['msg'] = 'Authorized!';
         $user = $r->input();
 
@@ -328,7 +328,7 @@ class LoginService
             $data['status'] = config('app.response.success.status');
             $data['type'] = config('app.response.success.type');
             $data['title'] = config('app.response.success.title');
-            $data['msg'] = 'Email have been send to your email';
+            $data['msg'] = 'Email Have Been Send To You';
         }
 
         return $data;
@@ -364,7 +364,7 @@ class LoginService
             $data['status'] = config('app.response.success.status');
             $data['type'] = config('app.response.success.type');
             $data['title'] = config('app.response.success.title');
-            $data['msg'] = 'Email have been send to your email';
+            $data['msg'] = 'Email Have Been Send To You';
         }
 
         return $data;
@@ -400,7 +400,7 @@ class LoginService
             $data['status'] = config('app.response.success.status');
             $data['type'] = config('app.response.success.type');
             $data['title'] = config('app.response.success.title');
-            $data['msg'] = 'Email have been send to your email';
+            $data['msg'] = 'Email Have Been Send To You';
         }
 
         return $data;
@@ -412,7 +412,7 @@ class LoginService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Your account have been activate';
+        $data['msg'] = 'Your Account Have Been Activate';
         return $data;
     }
 }

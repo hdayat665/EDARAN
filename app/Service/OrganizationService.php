@@ -18,7 +18,7 @@ class OrganizationService
         $data = [];
         $data['data'] = PhoneDirectory::all();
         $data['status'] = true;
-        $data['msg'] = 'Success get PhoneDirectory';
+        $data['msg'] = 'Success Get PhoneDirectory';
 
         return $data;
     }
@@ -28,7 +28,7 @@ class OrganizationService
         $data = [];
         $data['data'] = OrganizationChart::all();
         $data['status'] = true;
-        $data['msg'] = 'Success get OrganizationChart';
+        $data['msg'] = 'Success Get OrganizationChart';
 
         return $data;
     }
@@ -38,7 +38,7 @@ class OrganizationService
         $data = [];
         $data['data'] = DepartmentTree::all();
         $data['status'] = true;
-        $data['msg'] = 'Success get DepartmentTree';
+        $data['msg'] = 'Success Get DepartmentTree';
 
         return $data;
     }
@@ -49,7 +49,7 @@ class OrganizationService
         $userId = Auth::user()->tenant_id;
         $data = [];
         $data['status'] = true;
-        $data['msg'] = 'Success get user employment';
+        $data['msg'] = 'Success Get User Employment';
         $data['data'] = DB::table('employment as a')
         ->leftjoin('userProfile as b', 'a.user_id', '=', 'b.user_id')
         ->leftjoin('department as c', 'a.department', '=', 'c.id')

@@ -55,7 +55,7 @@ class ProjectService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success create Project';
+        $data['msg'] = 'Success Create Project';
 
         return $data;
     }
@@ -113,7 +113,7 @@ class ProjectService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success update Project';
+        $data['msg'] = 'Success Update Project';
 
         return $data;
     }
@@ -137,7 +137,7 @@ class ProjectService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success create Project Location';
+        $data['msg'] = 'Success Create Project Location';
 
         return $data;
     }
@@ -184,7 +184,7 @@ class ProjectService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success update Project Location';
+        $data['msg'] = 'Success Update Project Location';
 
         return $data;
     }
@@ -205,7 +205,7 @@ class ProjectService
             $data['status'] = config('app.response.success.status');
             $data['type'] = config('app.response.success.type');
             $data['title'] = config('app.response.success.title');
-            $data['msg'] = 'Success delete Project Location';
+            $data['msg'] = 'Success Delete Project Location';
         }
 
         return $data;
@@ -234,7 +234,7 @@ class ProjectService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success create Project Member';
+        $data['msg'] = 'Success Create Project Member';
 
         return $data;
     }
@@ -300,7 +300,7 @@ class ProjectService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success update Project Member';
+        $data['msg'] = 'Success Update Project Member';
 
         return $data;
     }
@@ -319,7 +319,7 @@ class ProjectService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Successfully Save Project Member Location';
+        $data['msg'] = 'Success Save Project Member Location';
 
         return $data;
     }
@@ -375,7 +375,7 @@ class ProjectService
             $data['status'] = config('app.response.success.status');
             $data['type'] = config('app.response.success.type');
             $data['title'] = config('app.response.success.title');
-            $data['msg'] = 'Successfully Submit Project Request';
+            $data['msg'] = 'Success Submit Project Request';
         }
 
         return $data;
