@@ -229,12 +229,14 @@ $(document).ready(function () {
         function () {
             // alert("ss");
             var id = $(this).data("id");
+            var stage = "supervisor";
             var status = "recommend";
 
             requirejs(["sweetAlert2"], function (swal) {
                 $.ajax({
                     type: "POST",
-                    url: "/updateStatusClaim/" + id + "/" + status,
+                    url:
+                        "/updateStatusClaim/" + id + "/" + status + "/" + stage,
                     async: false,
                     processData: false,
                     contentType: false,
@@ -264,6 +266,7 @@ $(document).ready(function () {
     $("#rejectButton").click(function (e) {
         var id = $("#rejectId").val();
         var status = "reject";
+        var stage = "supervisor";
 
         $("#rejectForm").validate({
             // Specify validation rules
@@ -278,7 +281,13 @@ $(document).ready(function () {
 
                     $.ajax({
                         type: "POST",
-                        url: "/updateStatusClaim/" + id + "/" + status,
+                        url:
+                            "/updateStatusClaim/" +
+                            id +
+                            "/" +
+                            status +
+                            "/" +
+                            stage,
                         data: data,
                         dataType: "json",
                         async: false,
@@ -308,6 +317,7 @@ $(document).ready(function () {
 
     $("#amendButton").click(function (e) {
         var id = $("#amendId").val();
+        var stage = "supervisor";
         var status = "amend";
 
         $("#amendForm").validate({
@@ -323,7 +333,13 @@ $(document).ready(function () {
 
                     $.ajax({
                         type: "POST",
-                        url: "/updateStatusClaim/" + id + "/" + status,
+                        url:
+                            "/updateStatusClaim/" +
+                            id +
+                            "/" +
+                            status +
+                            "/" +
+                            stage,
                         data: data,
                         dataType: "json",
                         async: false,
