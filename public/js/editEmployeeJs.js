@@ -1716,23 +1716,23 @@ $(document).ready(function () {
             },
 
             messages: {
-                firstName: "PLEASE INSERT FIRST NAME",
-                lastName: "PLEASE INSERT LAST NAME",
-                DOB: "PLEASE INSERT DATE OF BIRTH",
-                gender: "PLEASE CHOOSE GENDER",
+                firstName: "Please Insert First Name",
+                lastName: "Please Insert Last Name",
+                DOB: "Please Insert Date Of Birth",
+                gender: "Please Choose Gender",
                 contactNo: {
-                    required: "PLEASE INSERT CONTACT NUMBER",
-                    digits: "PLEASE INSERT VALID CONTACT NUMBER WITHOUT ' - ' AND SPACE",
+                    required: "Please Insert Contact Number",
+                    digits: "Please Insert Valid Contact Number Without ' - ' And Space",
                 },
-                relationship: "PLEASE CHOOSE RELATIONSHIP",
-                address1: "PLEASE INSERT ADDRESS",
+                relationship: "Please Choose Relationship",
+                address1: "Please insert Address",
                 postcode: {
-                    required: "PLEASE INSERT YOUR POSTCODE",
-                    digits: "PLEASE ENTER VALID POSTCODE",
-                    rangelength: "PLEASE ENTER VALID POSTCODE",
+                    required: "Please Insert Postcode",
+                    digits: "Please Insert Valid Postcode",
+                    rangelength: "Please Enter Valid Postcode",
                 },
-                city: "PLEASE INSERT CITY",
-                state: "PLEASE CHOOSE STATE",
+                city: "Please Insert City",
+                state: "Please Choose State",
             },
             submitHandler: function(form) {
 
@@ -2149,8 +2149,8 @@ $(document).ready(function () {
             },
 
             messages: {
-                eclaimrecommender: "PLEASE INSERT FIRST NAME",
-                eclaimapprover: "PLEASE INSERT FIRST NAME",
+                eclaimrecommender: "Please Choose Recommender",
+                eclaimapprover: "Please Choose Approver",
             },
 
             submitHandler: function (form) {
@@ -2199,14 +2199,14 @@ $(document).ready(function () {
             // Specify validation rules
             rules: {
                 
-                nama: "required",
+                caapprover: "required",
                 
                 
             },
 
             messages: {
                 
-                nama: "PLEASE INSERT FIRST NAME",
+                caapprover: "Pleace Choose Approver",
             },
 
             submitHandler: function (form) {
@@ -2263,8 +2263,8 @@ $(document).ready(function () {
 
             messages: {
                 
-                eleaverecommender: "PLEASE INSERT FIRST NAME",
-                eleaveapprover: "PLEASE INSERT FIRST NAME",
+                eleaverecommender: "Please Choose Recommender",
+                eleaveapprover: "Please Choose Approver",
             },
 
             submitHandler: function (form) {

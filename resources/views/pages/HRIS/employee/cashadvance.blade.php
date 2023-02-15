@@ -33,7 +33,7 @@
                                                 <div class="row ">
                                                     <div class="col md-6">
                                                         <div class="mb-3">
-                                                            <label for="" class="form-label">Approver </label>
+                                                            <label for="" class="form-label">Approver* </label>
                                                             <select class="form-select" name="caapprover" >
                                                                 <?php $employees = getEmployeeexcept(); ?>
                                                                 <option value="" label="PLEASE CHOOSE"></option>

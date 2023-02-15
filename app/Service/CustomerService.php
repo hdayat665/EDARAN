@@ -63,7 +63,7 @@ class CustomerService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success create customer';
+        $data['msg'] = 'Success Create Customer';
 
         return $data;
     }
@@ -79,7 +79,7 @@ class CustomerService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success update Customer';
+        $data['msg'] = 'Success Update Customer';
         $data['americass'] = americas();
         $data['asias'] = asias();
         return $data;
@@ -107,7 +107,7 @@ class CustomerService
             $data['status'] = config('app.response.success.status');
             $data['type'] = config('app.response.success.type');
             $data['title'] = config('app.response.success.title');
-            $data['msg'] = 'Success delete Customer';
+            $data['msg'] = 'Success Delete Customer';
         }
 
         return $data;
@@ -123,7 +123,7 @@ class CustomerService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success update Status';
+        $data['msg'] = 'Success Update Customer';
 
         return $data;
     }
