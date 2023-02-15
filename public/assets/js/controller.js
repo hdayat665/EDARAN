@@ -58,6 +58,18 @@ requirejs.config({
         monthlyClaimJs: assets + "/js/monthlyClaimJs",
         eclaimDateJs: assets + "/js/eclaimDateJs",
         supervisorDepartmentJs: assets + "/js/supervisorDepartmentJs",
+        supervisorDetailClaimJs: assets + "/js/supervisorDetailClaimJs",
+        hodClaimJs: assets + "/js/hodClaimJs",
+        hodClaimDetailJs: assets + "/js/hodClaimDetailJs",
+        fcheckerJs: assets + "/js/fcheckerJs",
+        fcheckerGncJs: assets + "/js/fcheckerGncJs",
+        financeCheckerMtcJs: assets + "/js/financeCheckerMtcJs",
+        financeRecJs: assets + "/js/financeRecJs",
+        financeRecMtcJs: assets + "/js/financeRecMtcJs",
+        frecGncJs: assets + "/js/frecGncJs",
+        fapprovalJs: assets + "/js/fapprovalJs",
+        fapprovalDetailJs: assets + "/js/fapprovalDetailJs",
+
         /// timesheet period
         sheetPeriodJs: assets + "/js/sheetPeriodJs",
         // 'main': 'assets/backend/js/main',
@@ -314,6 +326,50 @@ if ($("#supervisorDepartmentJs").length > 0) {
 }
 if ($("#sheetPeriodJs").length > 0) {
     requirejs(["sheetPeriodJs"]);
+}
+
+if ($("#supervisorDetailClaimJs").length > 0) {
+    requirejs(["supervisorDetailClaimJs"]);
+}
+
+if ($("#hodClaimJs").length > 0) {
+    requirejs(["hodClaimJs"]);
+}
+
+if ($("#hodClaimDetailJs").length > 0) {
+    requirejs(["hodClaimDetailJs"]);
+}
+
+if ($("#fcheckerGncJs").length > 0) {
+    requirejs(["fcheckerGncJs"]);
+}
+
+if ($("#fcheckerJs").length > 0) {
+    requirejs(["fcheckerJs"]);
+}
+
+if ($("#financeCheckerMtcJs").length > 0) {
+    requirejs(["financeCheckerMtcJs"]);
+}
+
+if ($("#financeRecJs").length > 0) {
+    requirejs(["financeRecJs"]);
+}
+
+if ($("#financeRecMtcJs").length > 0) {
+    requirejs(["financeRecMtcJs"]);
+}
+
+if ($("#frecGncJs").length > 0) {
+    requirejs(["frecGncJs"]);
+}
+
+if ($("#fapprovalJs").length > 0) {
+    requirejs(["fapprovalJs"]);
+}
+
+if ($("#fapprovalDetailJs").length > 0) {
+    requirejs(["fapprovalDetailJs"]);
 }
 
 // Global function

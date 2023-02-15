@@ -12,4 +12,14 @@ class TravelClaim extends Model
     protected $table = 'travel_claim';
 
     protected $guarded = [];
+
+    public function project()
+    {
+        return $this->belongsTo(Project::class, 'project_id', 'id');
+    }
+
+    public function claimCategory()
+    {
+        return $this->belongsTo(ClaimCategory::class, 'category_id', 'id');
+    }
 }
