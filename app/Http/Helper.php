@@ -693,7 +693,7 @@ if (!function_exists('projectLocation')) {
     function projectLocation($projectid = '')
     {
         $query = ProjectLocation::where('tenant_id', Auth::user()->tenant_id);
-        
+
         if ($projectid) {
             $query->where('project_id', $projectid);
         }
@@ -1347,13 +1347,13 @@ if (!function_exists('getViewForClaimApproval')) {
     function getViewForClaimApproval()
     {
 
-        $user = Users::where('id', Auth::user()->id)->first();
-        $role = ucwords($user->role->roleName);
+        $employee = Employee::where('user_id', Auth::user()->id)->first();
 
-        if ($role == ucwords('supervisor')) {
+        // hod = 2 supervisor = 1
+        if ($employee->jobGrade == '1') {
             $data = 'supervisorClaim';
-        } else {
-            $data = 'supervisorClaim';
+        } elseif ($employee->jobGrade == '2') {
+            $data = 'hodClaim';
         }
 
         return $data;

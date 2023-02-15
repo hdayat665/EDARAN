@@ -85,7 +85,22 @@ Route::group(['middleware' => ['web']], function () {
 
         Route::controller(ClaimApprovalController::class)->group(function () {
             Route::get('/claimApprovalView', 'claimApprovalView');
-            Route::post('/updateStatusClaim/{id}/{status}', 'updateStatusClaim');
+            Route::post('/updateStatusClaim/{id}/{status}/{stage}', 'updateStatusClaim');
+            Route::get('/supervisorDetailClaimView/{id}', 'supervisorDetailClaimView');
+            Route::get('/getTravelById/{id}', 'getTravelById');
+            Route::get('/getPersonalById/{id}', 'getPersonalById');
+            Route::get('/hodDetailClaimView/{id}', 'hodDetailClaimView');
+            Route::get('/getGncById/{id}', 'getGncById');
+            Route::get('/financeCheckerView', 'financeCheckerView');
+            Route::get('/financeCheckerDetail/{id}', 'financeCheckerDetail');
+            Route::post('/updateStatusGncClaim/{id}/{status}/{stage}', 'updateStatusGncClaim');
+            Route::post('/updateStatusPersonalClaim/{id}/{status}/{stage}', 'updateStatusPersonalClaim');
+            Route::post('/updateStatusTravelClaim/{id}/{status}/{stage}', 'updateStatusTravelClaim');
+            Route::get('/financeRecView', 'financeRecView');
+            Route::get('/financeRecDetailClaimView/{id}', 'financeRecDetailClaimView');
+            Route::get('/financeApprovalView', 'financeApprovalView');
+            Route::get('/financeAppDetailClaimView/{id}', 'financeAppDetailClaimView');
+
 
             // Route::get('/dashboardHost', 'dashboardHost')->name('dashboardHost');
         });
@@ -287,11 +302,9 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('/updateLeaveleavetypes/{id}', 'updateLeaveleavetypes');
             Route::delete('/deleteLeavetypes/{id}', 'deleteLeavetypes');
             Route::get('/updateStatusleavetypes/{id}/{status}', 'updateStatusleavetypes');
-            
+
             // timesheet period
             Route::get('/timesheetperiod', 'timesheetperiodView');
-
-        
         });
 
         Route::controller(OrganizationController::class)->group(function () {
