@@ -1,5 +1,9 @@
+
 $(document).ready(function() {
 
+    // google map
+
+    
     $(".partCheck").click(function(){
         if ($(this).prop("checked")) {
             $('#exitdatediv').show();
