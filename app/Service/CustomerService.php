@@ -28,7 +28,7 @@ class CustomerService
     public function customerView()
     {
         $tenant_id = Auth::user()->tenant_id;
-        $data = Customer::where('tenant_id', $tenant_id)->get();
+        $data = Customer::where('tenant_id', $tenant_id)->orderBy('id', 'desc')->get();
         if(!$data)
         {
             $data = [];
@@ -79,7 +79,7 @@ class CustomerService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success Update Customer';
+        $data['msg'] = 'Success Update Status';
         $data['americass'] = americas();
         $data['asias'] = asias();
         return $data;
@@ -123,7 +123,7 @@ class CustomerService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success Update Customer';
+        $data['msg'] = 'Success Update Status';
 
         return $data;
     }

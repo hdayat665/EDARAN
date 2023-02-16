@@ -14,7 +14,7 @@
                     </div>
                     <div class="row ">
                         <div class="col-md-12">
-                            <input type="text" name="customer_name" class="form-control">
+                            <input type="text" name="customer_name" class="form-control" placeholder="CUSTOMER NAME">
                         </div>
                     </div>
                     <br>
@@ -25,7 +25,7 @@
                     </div>
                     <div class="row ">
                         <div class="col-md-12">
-                            <input type="text" name="address" class="form-control">
+                            <input type="text" name="address" class="form-control" placeholder="ADDRESS 1">
                         </div>
                     </div>
                     <br>
@@ -36,7 +36,7 @@
                     </div>
                     <div class="row ">
                         <div class="col-md-12">
-                            <input type="text" name="address2" class="form-control">
+                            <input type="text" name="address2" class="form-control" placeholder="ADDRESS 2">
                         </div>
                     </div>
                     <br>
@@ -50,10 +50,10 @@
                     </div>
                     <div class="row ">
                         <div class="col-md-6">
-                            <input type="text" name="postcode" class="form-control">
+                            <input type="text" name="postcode" class="form-control" placeholder="00000">
                         </div>
                         <div class="col-md-6">
-                            <input type="text" name="city" class="form-control">
+                            <input type="text" name="city" class="form-control" placeholder="CITY">
                         </div>
                     </div>
                     <br>
@@ -68,7 +68,7 @@
                     <div class="row ">
                         <div class="col-md-6">
                         <select class="form-select" name="state" id="state" style="text-transform: uppercase;">
-                            <option value="" label="Please Choose" selected ></option>
+                            <option value="" label="PLEASE CHOOSE" selected ></option>
                             <?php $getState = getState(); ?>
                             @if ($getState)
                                 @foreach ($getState as $key => $name)
@@ -106,10 +106,10 @@
                     </div>
                     <div class="row ">
                         <div class="col-md-6">
-                            <input type="number" class="form-control" name="phoneNo" placeholder="">
+                            <input type="number" class="form-control" name="phoneNo" placeholder="000-00000000">
                         </div>
                         <div class="col-md-6">
-                            <input type="email" class="form-control" name="email" placeholder="">
+                            <input type="email" class="form-control" name="email" placeholder="email@gmail.com">
                         </div>
                     </div>
                     <br>
