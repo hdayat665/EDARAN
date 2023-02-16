@@ -80,7 +80,7 @@ class ClaimApprovalService
         //     $input['status'] = $status;
         // }
 
-        $input['status'] = $status;
+        // $input['status'] = $status;
         $input[$stage] = $status;
 
         PersonalClaim::where('id', $id)->update($input);
@@ -100,7 +100,7 @@ class ClaimApprovalService
         // if (in_array($status, ['reject', 'amend'])) {
         // }
 
-        $input['status'] = $status;
+        // $input['status'] = $status;
         $input[$stage] = $status;
 
         TravelClaim::where('id', $id)->update($input);

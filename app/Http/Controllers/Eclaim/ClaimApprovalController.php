@@ -108,6 +108,28 @@ class ClaimApprovalController extends Controller
         return view('pages.eclaim.claimApproval.finance.checker.' . $view, $data);
     }
 
+    public function adminCheckerDetail($id = '')
+    {
+        $mcs = new ClaimApprovalService;
+
+        $result = $mcs->supervisorDetailClaimView($id);
+
+        $data['general'] = $result['claim'];
+        $data['travels'] = $result['travel'];
+        $data['personals'] = $result['personal'];
+        $data['gncs'] = $result['general'];
+
+        // if ($data['general']->claim_type == 'MTC') {
+        //     $view = 'adminCheckerMtc';
+        // } else {
+        //     $view = 'financeCheckerGnc';
+        // }
+        $view = 'adminCheckerMtc';
+
+        return view('pages.eclaim.claimApproval.admin.checker.' . $view, $data);
+    }
+
+
     public function financeAppDetailClaimView($id = '')
     {
         $mcs = new ClaimApprovalService;
@@ -128,6 +150,26 @@ class ClaimApprovalController extends Controller
         return view('pages.eclaim.claimApproval.finance.approval.' . $view, $data);
     }
 
+    public function adminApprovalDetail($id = '')
+    {
+        $mcs = new ClaimApprovalService;
+
+        $result = $mcs->supervisorDetailClaimView($id);
+
+        $data['general'] = $result['claim'];
+        $data['travels'] = $result['travel'];
+        $data['personals'] = $result['personal'];
+        $data['gncs'] = $result['general'];
+
+        // if ($data['general']->claim_type == 'MTC') {
+        $view = 'adminApprovalDetailMtc';
+        // } else {
+        //     $view = 'fapprovalGnc';
+        // }
+
+        return view('pages.eclaim.claimApproval.admin.approval.' . $view, $data);
+    }
+
     public function financeCheckerView()
     {
         $mcs = new ClaimApprovalService;
@@ -138,6 +180,19 @@ class ClaimApprovalController extends Controller
 
         return view('pages.eclaim.claimApproval.finance.checker.' . $view, $data);
     }
+
+    public function adminCheckerView()
+    {
+        $mcs = new ClaimApprovalService;
+
+        $data['claims'] = $mcs->getGeneralClaim();
+
+        $view = 'adminChecker';
+
+        return view('pages.eclaim.claimApproval.admin.checker.' . $view, $data);
+    }
+
+
 
     public function financeRecView()
     {
@@ -150,6 +205,18 @@ class ClaimApprovalController extends Controller
         return view('pages.eclaim.claimApproval.finance.recommender.' . $view, $data);
     }
 
+    public function adminRecView()
+    {
+        $mcs = new ClaimApprovalService;
+
+        $data['claims'] = $mcs->getGeneralClaim();
+
+        $view = 'adminRec';
+
+        return view('pages.eclaim.claimApproval.admin.recommender.' . $view, $data);
+    }
+
+
     public function financeApprovalView()
     {
         $mcs = new ClaimApprovalService;
@@ -159,6 +226,17 @@ class ClaimApprovalController extends Controller
         $view = 'fapproval';
 
         return view('pages.eclaim.claimApproval.finance.approval.' . $view, $data);
+    }
+
+    public function adminApprovalView()
+    {
+        $mcs = new ClaimApprovalService;
+
+        $data['claims'] = $mcs->getGeneralClaim();
+
+        $view = 'adminApproval';
+
+        return view('pages.eclaim.claimApproval.admin.approval.' . $view, $data);
     }
 
     public function financeRecDetailClaimView($id = '')
@@ -180,6 +258,28 @@ class ClaimApprovalController extends Controller
 
         return view('pages.eclaim.claimApproval.finance.recommender.' . $view, $data);
     }
+
+    public function adminRecDetailView($id = '')
+    {
+        $mcs = new ClaimApprovalService;
+
+        $result = $mcs->supervisorDetailClaimView($id);
+
+        $data['general'] = $result['claim'];
+        $data['travels'] = $result['travel'];
+        $data['personals'] = $result['personal'];
+        $data['gncs'] = $result['general'];
+
+        // if ($data['general']->claim_type == 'MTC') {
+        $view = 'adminRecDetail';
+        // } else {
+        // $view = 'financeRecGnc';
+        // }
+
+        return view('pages.eclaim.claimApproval.admin.recommender.' . $view, $data);
+    }
+
+
 
     public function getPersonalById($id = '')
     {
