@@ -14,7 +14,7 @@
                     </div>
                     <div class="row ">
                         <div class="col-md-12">
-                            <input type="text" name="customer_name" id="customer_name" class="form-control">
+                            <input type="text" name="customer_name" id="customer_name" class="form-control" placeholder="CUSTOMER NAME">
                         </div>
                     </div>
                     <br>
@@ -25,7 +25,7 @@
                     </div>
                     <div class="row ">
                         <div class="col-md-12">
-                            <input type="text" class="form-control" name="address" id="address" placeholder="">
+                            <input type="text" class="form-control" name="address" id="address" placeholder="ADDRESS 1">
                         </div>
                     </div>
                     <br>
@@ -36,7 +36,7 @@
                     </div>
                     <div class="row ">
                         <div class="col-md-12">
-                            <input type="text" id="address2" name="address2" class="form-control">
+                            <input type="text" id="address2" name="address2" class="form-control" placeholder="ADDRESS 2">
                         </div>
                     </div>
                     <br>
@@ -50,10 +50,10 @@
                     </div>
                     <div class="row ">
                         <div class="col-md-6">
-                            <input type="text" id="postcode" name="postcode" class="form-control">
+                            <input type="text" id="postcode" name="postcode" class="form-control" placeholder="00000">
                         </div>
                         <div class="col-md-6">
-                            <input type="text" id="city" name="city" class="form-control">
+                            <input type="text" id="city" name="city" class="form-control" placeholder="CITY">
                         </div>
                     </div>
                     <br>
@@ -129,10 +129,10 @@
                     </div>
                     <div class="row ">
                         <div class="col-md-6">
-                            <input type="number" class="form-control" name="phoneNo" id="phoneNo" placeholder="">
+                            <input type="number" class="form-control" name="phoneNo" id="phoneNo" placeholder="000-0000000">
                         </div>
                         <div class="col-md-6">
-                            <input type="email" class="form-control" name="email" id="email" placeholder="">
+                            <input type="email" class="form-control" name="email" id="email" placeholder="email@gmail.com">
                             <input type="hidden" class="form-control" name="id" id="idC" placeholder="">
                         </div>
                     </div>
