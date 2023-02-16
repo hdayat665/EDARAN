@@ -12,7 +12,7 @@ class cashAdvanceController extends Controller
     {
         $mcs = new myClaimService;
 
-        $data = $mcs->createCashAdvance($r, 'amend');
+        $data = $mcs->createCashAdvance($r, 'draft');
 
         return response()->json($data);
     }
@@ -21,7 +21,7 @@ class cashAdvanceController extends Controller
     {
         $mcs = new myClaimService;
 
-        $data = $mcs->createCashAdvance($r, 'paid');
+        $data = $mcs->createCashAdvance($r, 'active');
 
         return response()->json($data);
     }
@@ -80,7 +80,7 @@ class cashAdvanceController extends Controller
     {
         $mcs = new myClaimService;
 
-        $data = $mcs->updateCashAdvance($r, 'paid');
+        $data = $mcs->updateCashAdvance($r, 'active');
 
         return response()->json($data);
     }

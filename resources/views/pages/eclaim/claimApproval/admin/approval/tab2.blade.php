@@ -17,7 +17,7 @@
         <tbody>
             @if ($claims)
                 @foreach ($claims as $claim)
-                    @if ($claim->a_recommender == 'recommend' && $claim->a_approval == '' && $claim->claim_type == 'MTC')
+                    @if ($claim->a_approval == 'recommend' && $claim->claim_type == 'MTC')
                         <tr>
                             <td><input type="checkbox" id="" name="" value=""></td>
                             <td>

@@ -69,7 +69,7 @@ $(document).ready(function () {
         // alert("ss");
         var id = $(this).data("id");
         var status = "recommend";
-        var stage = "f1";
+        var stage = $("#checkers").val();
 
         requirejs(["sweetAlert2"], function (swal) {
             $.ajax({
@@ -99,7 +99,7 @@ $(document).ready(function () {
 
     $("#rejectButton").click(function (e) {
         var id = $("#rejectId").val();
-        var stage = "f1";
+        var stage = $("#checkers").val();
         var status = "reject";
 
         $("#hodRejectForm").validate({
@@ -151,7 +151,7 @@ $(document).ready(function () {
 
     $("#amendButton").click(function (e) {
         var id = $("#amendId").val();
-        var stage = "f1";
+        var stage = $("#checkers").val();
         var status = "amend";
 
         $("#hodAmendForm").validate({

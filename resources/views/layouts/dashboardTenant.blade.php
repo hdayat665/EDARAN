@@ -415,7 +415,7 @@
                                         </a>
                                         <div class="menu-submenu">
                                             <div class="menu-item">
-                                                <a href="/claimApprovalView" class="menu-link highlight">
+                                                <a href="/claimApprovalView/1" class="menu-link highlight">
                                                     <div class="menu-icon">
                                                         <i class="fa fa-list-check text-gray"></i>
                                                     </div>
@@ -424,7 +424,7 @@
                                                 </a>
                                             </div>
                                             <div class="menu-item">
-                                                <a href="/claimApprovalView" class="menu-link highlight">
+                                                <a href="/claimApprovalView/2" class="menu-link highlight">
                                                     <div class="menu-icon">
                                                         <i class="fa fa-list-check text-gray"></i>
                                                     </div>

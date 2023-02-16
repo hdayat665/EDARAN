@@ -18,6 +18,7 @@
                                     <label class="form-label col-form-label">Claim ID :</label>
                                 </div>
                                 <div class="col-md-4">
+                                    <input type="hidden" id="financeChecker" value="{{ $checkers }}">
                                     <input readonly type="text" value="{{ $general->id ?? '-' }}" class="form-control">
                                 </div>
                                 <div class="col-md-2">

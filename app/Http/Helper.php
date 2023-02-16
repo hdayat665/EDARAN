@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\ActivityLogs;
+use App\Models\ApprovelRoleGeneral;
 use App\Models\Branch;
 use App\Models\ClaimCategory;
 use App\Models\ClaimCategoryContent;
@@ -9,6 +10,7 @@ use App\Models\Company;
 use App\Models\Customer;
 use App\Models\Department;
 use App\Models\Designation;
+use App\Models\DomainList;
 use App\Models\Employee;
 use App\Models\EmploymentType;
 use App\Models\GeneralClaim;
@@ -739,9 +741,9 @@ if (!function_exists('getEmployee')) {
     }
 }
 if (!function_exists('getEmployeeexcept')) {
-    function getEmployeeexcept()
+    function getEmployeeexcept($id = '')
     {
-        $data = Employee::where([['tenant_id', Auth::user()->tenant_id], ['employeeid', '!=', null]])->get();
+        $data = Employee::where([['tenant_id', Auth::user()->tenant_id], ['employeeid', '!=', null], ['jobGrade', $id]])->get();
 
         if (!$data) {
             $data = [];
@@ -1360,16 +1362,77 @@ if (!function_exists('getRoleById')) {
 }
 
 if (!function_exists('getViewForClaimApproval')) {
-    function getViewForClaimApproval()
+    function getViewForClaimApproval($type = '')
     {
 
-        $employee = Employee::where('user_id', Auth::user()->id)->first();
+        // $employee = Employee::where('user_id', Auth::user()->id)->first();
 
-        // hod = 2 supervisor = 1
-        if ($employee->jobGrade == '1') {
+        // recommender = 2 approval = 1
+        if ($type == '1') {
             $data = 'supervisorClaim';
-        } elseif ($employee->jobGrade == '2') {
+        } elseif ($type == '2') {
             $data = 'hodClaim';
+        }
+
+        return $data;
+    }
+}
+
+if (!function_exists('getEclaimApproval')) {
+    function getEclaimApproval()
+    {
+
+        $data = ApprovelRoleGeneral::where('tenant_id', Auth::user()->tenant_id)->first();
+
+        if (!$data) {
+            $data = [];
+        }
+
+        return $data;
+    }
+}
+
+if (!function_exists('getFinanceChecker')) {
+    function getFinanceChecker()
+    {
+
+        // find checker 
+        $domainList = DomainList::where([['tenant_id', Auth::user()->tenant_id], ['category_role', 'finance']])->orderBy('created_at', 'DESC')->first();
+        $userId = Auth::user()->id;
+
+        if ($domainList->checker1 == $userId) {
+            $data = 'f1';
+        } else if ($domainList->checker2 == $userId) {
+            $data = 'f2';
+        } else if ($domainList->checker3 == $userId) {
+            $data = 'f3';
+        }
+
+        if (!$data) {
+            $data = [];
+        }
+
+        return $data;
+    }
+}
+
+if (!function_exists('getAdminChecker')) {
+    function getAdminChecker()
+    {
+        // find checker 
+        $domainList = DomainList::where([['tenant_id', Auth::user()->tenant_id], ['category_role', 'admin']])->orderBy('created_at', 'DESC')->first();
+        $userId = Auth::user()->id;
+
+        if ($domainList->checker1 == $userId) {
+            $data = 'a1';
+        } else if ($domainList->checker2 == $userId) {
+            $data = 'a2';
+        } else if ($domainList->checker3 == $userId) {
+            $data = 'a3';
+        }
+
+        if (!$data) {
+            $data = [];
         }
 
         return $data;

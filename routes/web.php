@@ -84,7 +84,7 @@ Route::group(['middleware' => ['web']], function () {
         });
 
         Route::controller(ClaimApprovalController::class)->group(function () {
-            Route::get('/claimApprovalView', 'claimApprovalView');
+            Route::get('/claimApprovalView/{type}', 'claimApprovalView');
             Route::post('/updateStatusClaim/{id}/{status}/{stage}', 'updateStatusClaim');
             Route::get('/supervisorDetailClaimView/{id}', 'supervisorDetailClaimView');
             Route::get('/getTravelById/{id}', 'getTravelById');
