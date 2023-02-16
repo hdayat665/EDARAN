@@ -100,7 +100,12 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('/financeRecDetailClaimView/{id}', 'financeRecDetailClaimView');
             Route::get('/financeApprovalView', 'financeApprovalView');
             Route::get('/financeAppDetailClaimView/{id}', 'financeAppDetailClaimView');
-
+            Route::get('/adminCheckerView', 'adminCheckerView');
+            Route::get('/adminCheckerDetail/{id}', 'adminCheckerDetail');
+            Route::get('/adminApprovalView', 'adminApprovalView');
+            Route::get('/adminApprovalDetail/{id}', 'adminApprovalDetail');
+            Route::get('/adminRecView', 'adminRecView');
+            Route::get('/adminRecDetailView/{id}', 'adminRecDetailView');
 
             // Route::get('/dashboardHost', 'dashboardHost')->name('dashboardHost');
         });
@@ -412,7 +417,7 @@ Route::group(['middleware' => ['web']], function () {
         });
 
 
-            Route::controller(myClaimController::class)->group(function () {
+        Route::controller(myClaimController::class)->group(function () {
             Route::get('/myClaimView', 'myClaimView');
             Route::get('/generalClaimView', 'generalClaimView');
             Route::get('/cashAdvanceView', 'cashAdvanceView');
