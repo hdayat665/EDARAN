@@ -17,11 +17,13 @@
                                     <label class="form-label">Recommender</label>
                                 </div>
                                 <div class="col-md-6">
-                                    <select class="form-select" name="recommender" id="">
+                                    <select class="form-select" name="recommender" id="recommenderGeneral">
                                         <option class="form-label" value="">Please Select</option>
-                                        <?php $jobGrades = getJobGrade(); ?>
-                                        @foreach ($jobGrades as $jobGrade)
-                                            <option value="{{ $jobGrade->id }}">{{ $jobGrade->jobGradeName }}</option>
+                                        <?php $roles = getAllRole(); ?>
+                                        @foreach ($roles as $role)
+                                            <option value="{{ $role->id }}" label="{{ $role->roleName }}"
+                                            {{ $role->roleName == $role->id ? "selected='selected'" : '' }}>
+                                            </option>
                                         @endforeach
 
                                     </select>
@@ -33,11 +35,8 @@
                                     <label class="form-label">Approver</label>
                                 </div>
                                 <div class="col-md-6">
-                                    <select class="form-select" name="approver" id="">
+                                    <select class="form-select" name="approver" id="approverGeneralShow">
                                         <option class="form-label" value="">Please Select</option>
-                                        @foreach ($jobGrades as $jobGrade)
-                                            <option value="{{ $jobGrade->id }}">{{ $jobGrade->jobGradeName }}</option>
-                                        @endforeach
                                     </select>
                                 </div>
                             </div>
@@ -63,10 +62,12 @@
                                         @foreach ($datas as $data)
                                             <li class="timeline-item mb-5 ">
                                                 <div class="card p-3 bg-white">
-                                                    <p class="fw-bold">Recommender has change from
-                                                        {{ getJobGradeById($data->recommender)->jobGradeName }} to
-                                                        {{ getJobGradeById($data->approver)->jobGradeName }} updated
-                                                        by {{ getUserProfileByUserId($data->user_id)->fullName }}</p>
+                                                    <p class="fw-bold">Recommender and Approver has change <br>
+                                                    Recommender : {{ getRoleById($data->recommender)->roleName }}<br>
+                                                    Approver : {{ optional(getUserProfileByUserId($data->approver))->fullName ?? 'Unable to retrieve approver information.' }}<br>
+                                                    updated by {{ optional(getUserProfileByUserId($data->user_id))->fullName ?? 'Unable to retrieve updater information.' }}
+
+
                                                     <p class="text-muted mb-2 fw-bold">11 March 2020
                                                     </p>
                                                 </div>

@@ -78,7 +78,7 @@ class MyTimeSheetService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success create logs';
+        $data['msg'] = 'Success Create Timesheet Logs';
 
         return $data;
     }
@@ -131,7 +131,7 @@ class MyTimeSheetService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success update timesheet log';
+        $data['msg'] = 'Success Update Timesheet Log';
 
         return $data;
     }
@@ -151,7 +151,7 @@ class MyTimeSheetService
             $data['status'] = config('app.response.success.status');
             $data['type'] = config('app.response.success.type');
             $data['title'] = config('app.response.success.title');
-            $data['msg'] = 'Successfully delete log';
+            $data['msg'] = 'Success Delete Log';
         }
 
         return $data;
@@ -255,7 +255,7 @@ class MyTimeSheetService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success create event';
+        $data['msg'] = 'Success Create Event';
 
         return $data;
     }
@@ -338,7 +338,7 @@ class MyTimeSheetService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success update event';
+        $data['msg'] = 'Success Update Event';
 
         return $data;
     }
@@ -394,7 +394,7 @@ class MyTimeSheetService
             $data['status'] = config('app.response.success.status');
             $data['type'] = config('app.response.success.type');
             $data['title'] = config('app.response.success.title');
-            $data['msg'] = 'Successfully delete event';
+            $data['msg'] = 'Success Delete Event';
         }
 
         return $data;
@@ -506,7 +506,7 @@ class MyTimeSheetService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Successfully sumbit log';
+        $data['msg'] = 'Success Sumbit Log';
 
         return $data;
     }
@@ -585,7 +585,7 @@ class MyTimeSheetService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success approve timesheet';
+        $data['msg'] = 'Success Approve Timesheet';
 
         return $data;
     }

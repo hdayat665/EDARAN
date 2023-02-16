@@ -9,6 +9,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\OrganizationController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\Eclaim\ClaimApprovalController;
 use App\Http\Controllers\Eclaim\cashAdvanceController;
 use App\Http\Controllers\Eclaim\generalClaimController;
 use App\Http\Controllers\Eclaim\myClaimController;
@@ -82,6 +83,28 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('/dashboardHost', 'dashboardHost')->name('dashboardHost');
         });
 
+        Route::controller(ClaimApprovalController::class)->group(function () {
+            Route::get('/claimApprovalView', 'claimApprovalView');
+            Route::post('/updateStatusClaim/{id}/{status}/{stage}', 'updateStatusClaim');
+            Route::get('/supervisorDetailClaimView/{id}', 'supervisorDetailClaimView');
+            Route::get('/getTravelById/{id}', 'getTravelById');
+            Route::get('/getPersonalById/{id}', 'getPersonalById');
+            Route::get('/hodDetailClaimView/{id}', 'hodDetailClaimView');
+            Route::get('/getGncById/{id}', 'getGncById');
+            Route::get('/financeCheckerView', 'financeCheckerView');
+            Route::get('/financeCheckerDetail/{id}', 'financeCheckerDetail');
+            Route::post('/updateStatusGncClaim/{id}/{status}/{stage}', 'updateStatusGncClaim');
+            Route::post('/updateStatusPersonalClaim/{id}/{status}/{stage}', 'updateStatusPersonalClaim');
+            Route::post('/updateStatusTravelClaim/{id}/{status}/{stage}', 'updateStatusTravelClaim');
+            Route::get('/financeRecView', 'financeRecView');
+            Route::get('/financeRecDetailClaimView/{id}', 'financeRecDetailClaimView');
+            Route::get('/financeApprovalView', 'financeApprovalView');
+            Route::get('/financeAppDetailClaimView/{id}', 'financeAppDetailClaimView');
+
+
+            // Route::get('/dashboardHost', 'dashboardHost')->name('dashboardHost');
+        });
+
         Route::controller(ProfileController::class)->group(function () {
             Route::get('/getProfileData', 'profileData');
             Route::post('/updateProfilePicture', 'updateProfilePicture');
@@ -142,6 +165,10 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('/updateEmployee', 'updateEmployee');
             Route::get('/getEmployeeById/{id}', 'getEmployeeById');
             Route::get('/getEmployeeByDepartmentId/{id}', 'getEmployeeByDepartmentId');
+            // hierarchy
+            Route::post('/updateclaimhierarchy/{id}', 'updateclaimhierarchy');
+            Route::post('/updatecashhierarchy/{id}', 'updatecashhierarchy');
+            Route::post('/updateeleavehierarchy/{id}', 'updateeleavehierarchy');
         });
 
         Route::controller(SettingController::class)->group(function () {
@@ -275,6 +302,9 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('/updateLeaveleavetypes/{id}', 'updateLeaveleavetypes');
             Route::delete('/deleteLeavetypes/{id}', 'deleteLeavetypes');
             Route::get('/updateStatusleavetypes/{id}/{status}', 'updateStatusleavetypes');
+
+            // timesheet period
+            Route::get('/timesheetperiod', 'timesheetperiodView');
         });
 
         Route::controller(OrganizationController::class)->group(function () {

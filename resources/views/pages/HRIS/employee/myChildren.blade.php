@@ -4,7 +4,7 @@
         <thead>
             <th width="1%">No</th>
             <th width="1%" data-orderable="false">Action</th>
-            <th class="text-nowrap">Name</th>
+            <th class="text-nowrap">Full Name</th>
             <th class="text-nowrap">ID/Passport Number</th>
             <th class="text-nowrap">Age</th>
             <th class="text-nowrap">Education</th>

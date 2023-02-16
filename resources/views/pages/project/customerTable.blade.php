@@ -1,6 +1,11 @@
 @extends('layouts.dashboardTenant')
 
 @section('content')
+    <style>
+    table.dataTable thead th:first-child {
+    background-image: none !important;
+    }
+    </style>
     <div id="content" class="app-content">
         <h1 class="page-header" id="customerJs">Project Registration <small>| Customers</small></h1>
         <div class="panel panel">
@@ -14,7 +19,8 @@
                 <table id="customerTable" class="table table-striped table-bordered align-middle">
                     <thead>
                         <tr>
-                            <th width="9%" data-orderable="false" class="align-middle">Action</th>
+                            <th class="text-nowrap">No</th>
+                            <th width="8%" data-orderable="false" class="align-middle">Action</th>
                             <th class="text-nowrap">Status</th>
                             <th class="text-nowrap">Customer Name</th>
                             <th class="text-nowrap">Address</th>
@@ -27,16 +33,21 @@
                         </tr>
                     </thead>
                     <tbody>
+                        <?php $id = 0 ?>
                         @if ($customers)
                             @foreach ($customers as $customer)
+                            <?php $id++ ?>
                                 <tr>
+                                    <td width="1%" class="fw-bold text-dark">{{$id}}</td>
                                     <td>
-                                        <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle"><i class="fa fa-cogs"></i> Actions <i class="fa fa-caret-down"></i></a>
+                                        <a href="javascript:;" data-id="{{ $customer->id }}" id="editButton" class="btn btn-primary"><i class="fa fa-cogs"></i> Edit</a>
+                                        
+                                        <!-- <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle"><i class="fa fa-cogs"></i> Actions <i class="fa fa-caret-down"></i></a>
                                         <div class="dropdown-menu">
                                             <a href="javascript:;" id="editButton" data-id="{{ $customer->id }}" class="dropdown-item">Edit</a>
                                             <div class="dropdown-divider"></div>
                                             <a href="javascript:;"  class="dropdown-item">Close</a>
-                                        </div>
+                                        </div> -->
                                         <!-- <a href="javascript:;" id="editButton" data-id="{{ $customer->id }}"
                                             class="btn btn-primary">Edit</a> -->
                                         <!-- <a href="javascript:;" id="deleteButton" data-id="{{ $customer->id }}"
@@ -47,16 +58,17 @@
                                             <input class="form-check-input statusCheck" data-id="{{ $customer->id }}"
                                                 {{ $customer->status == 1 ? 'checked' : '' }} type="checkbox" role="switch"
                                                 id="flexSwitchCheckDefault" />
+                                                
                                             <label class="form-check-label" for="flexSwitchCheckDefault"></label>
                                         </div>
                                     </td>
                                     <td>{{ $customer->customer_name }}</td>
-                                    <td>{{ $customer->address }}</td>
+                                    <td>{{ $customer->address }}, {{ $customer->address2 }} {{ $customer->city}}, {{ $customer->postcode}}, {{ $customer->state}} ,{{ $customer->country}}</td>
                                     <td>{{ $customer->phoneNo }}</td>
                                     <td>{{ $customer->email }}</td>
                                     <td>{{ $customer->addedBy }}</td>
                                     <td>{{ $customer->created_at }}</td>
-                                    <td>{{ $customer->update_by ? getEmployeeUsername($customer->update_by) : '-' }}</td>
+                                    <td>{{ $customer->update_by ? getEmployeeName($customer->update_by) : '-' }}</td>
                                     <td>{{ $customer->update_by ? $customer->updated_at : '-' }}</td>
                                 </tr>
                             @endforeach

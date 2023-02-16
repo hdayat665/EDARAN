@@ -254,18 +254,18 @@ var handleScheduleCalendar = function() {
 	});
 };
 
-var handleDashboardGritterNotification = function() {
-	setTimeout(function() {
-		$.gritter.add({
-			title: 'Welcome back, Admin!',
-			text: 'You have 3 notification',
-			image: '../assets/img/user/user-12.jpg',
-			sticky: true,
-			time: '',
-			class_name: 'my-sticky-class'
-		});
-	}, 1000);
-};
+// var handleDashboardGritterNotification = function() {
+// 	setTimeout(function() {
+// 		$.gritter.add({
+// 			// title: 'Welcome back, Admin!',
+// 			// text: 'You have 3 notification',
+// 			image: '../assets/img/user/user-12.jpg',
+// 			sticky: true,
+// 			time: '',
+// 			class_name: 'my-sticky-class'
+// 		});
+// 	}, 1000);
+// };
 
 var DashboardV2 = function () {
 	"use strict";

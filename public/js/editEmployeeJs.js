@@ -1716,23 +1716,23 @@ $(document).ready(function () {
             },
 
             messages: {
-                firstName: "PLEASE INSERT FIRST NAME",
-                lastName: "PLEASE INSERT LAST NAME",
-                DOB: "PLEASE INSERT DATE OF BIRTH",
-                gender: "PLEASE CHOOSE GENDER",
+                firstName: "Please Insert First Name",
+                lastName: "Please Insert Last Name",
+                DOB: "Please Insert Date Of Birth",
+                gender: "Please Choose Gender",
                 contactNo: {
-                    required: "PLEASE INSERT CONTACT NUMBER",
-                    digits: "PLEASE INSERT VALID CONTACT NUMBER WITHOUT ' - ' AND SPACE",
+                    required: "Please Insert Contact Number",
+                    digits: "Please Insert Valid Contact Number Without ' - ' And Space",
                 },
-                relationship: "PLEASE CHOOSE RELATIONSHIP",
-                address1: "PLEASE INSERT ADDRESS",
+                relationship: "Please Choose Relationship",
+                address1: "Please insert Address",
                 postcode: {
-                    required: "PLEASE INSERT YOUR POSTCODE",
-                    digits: "PLEASE ENTER VALID POSTCODE",
-                    rangelength: "PLEASE ENTER VALID POSTCODE",
+                    required: "Please Insert Postcode",
+                    digits: "Please Insert Valid Postcode",
+                    rangelength: "Please Enter Valid Postcode",
                 },
-                city: "PLEASE INSERT CITY",
-                state: "PLEASE CHOOSE STATE",
+                city: "Please Insert City",
+                state: "Please Choose State",
             },
             submitHandler: function(form) {
 
@@ -2131,6 +2131,177 @@ $(document).ready(function () {
                     }
                 });
             });
+        });
+    });
+    ///////
+    
+    $("#buttonhierarchy").click(function (e) {
+        var id = $("#hierarchyid").val();
+        
+        $("#updatehierarchy").validate({
+            
+            // Specify validation rules
+            rules: {
+                eclaimrecommender: "required",
+                eclaimapprover: "required",
+                
+                
+            },
+
+            messages: {
+                eclaimrecommender: "Please Choose Recommender",
+                eclaimapprover: "Please Choose Approver",
+            },
+
+            submitHandler: function (form) {
+                requirejs(["sweetAlert2"], function (swal) {
+                    var data = new FormData(
+                        document.getElementById("updatehierarchy")
+                    );
+                    var id = $("#hierarchyid").val();
+                    //console.log(id);
+                    // return false;
+
+                    $.ajax({
+                        type: "POST",
+                        url: "/updateclaimhierarchy/" + id,
+                        data: data,
+                        dataType: "json",
+                        async: false,
+                        processData: false,
+                        contentType: false,
+                    }).done(function (data) {
+                        swal({
+                            title: data.title,
+                            text: data.msg,
+                            type: data.type,
+                            confirmButtonColor: "#3085d6",
+                            confirmButtonText: "OK",
+                            allowOutsideClick: false,
+                            allowEscapeKey: false,
+                        }).then(function () {
+                            if (data.type == "error") {
+                            } else {
+                                location.reload();
+                            }
+                        });
+                    });
+                });
+            },
+        });
+    });
+    
+    $("#cahierarchybutton").click(function (e) {
+        var id = $("#hierarchyid").val();
+        //console.log(id);
+        $("#updatecashhierarchy").validate({
+            
+            // Specify validation rules
+            rules: {
+                
+                caapprover: "required",
+                
+                
+            },
+
+            messages: {
+                
+                caapprover: "Pleace Choose Approver",
+            },
+
+            submitHandler: function (form) {
+                requirejs(["sweetAlert2"], function (swal) {
+                    var data = new FormData(
+                        document.getElementById("updatecashhierarchy")
+                    );
+                    var id = $("#hierarchyid").val();
+                    //console.log(id);
+                    // return false;
+
+                    $.ajax({
+                        type: "POST",
+                        url: "/updatecashhierarchy/" + id,
+                        data: data,
+                        dataType: "json",
+                        async: false,
+                        processData: false,
+                        contentType: false,
+                    }).done(function (data) {
+                        swal({
+                            title: data.title,
+                            text: data.msg,
+                            type: data.type,
+                            confirmButtonColor: "#3085d6",
+                            confirmButtonText: "OK",
+                            allowOutsideClick: false,
+                            allowEscapeKey: false,
+                        }).then(function () {
+                            if (data.type == "error") {
+                            } else {
+                                location.reload();
+                            }
+                        });
+                    });
+                });
+            },
+        });
+    });
+
+    $("#eleavehierarchy").click(function (e) {
+        var id = $("#hierarchyid").val();
+        //console.log(id);
+        $("#updateeleavehierarchy").validate({
+            
+            // Specify validation rules
+            rules: {
+                
+                eleaverecommender: "required",
+                eleaveapprover: "required",
+                
+                
+            },
+
+            messages: {
+                
+                eleaverecommender: "Please Choose Recommender",
+                eleaveapprover: "Please Choose Approver",
+            },
+
+            submitHandler: function (form) {
+                requirejs(["sweetAlert2"], function (swal) {
+                    var data = new FormData(
+                        document.getElementById("updateeleavehierarchy")
+                    );
+                    var id = $("#hierarchyid").val();
+                    //console.log(id);
+                    // return false;
+
+                    $.ajax({
+                        type: "POST",
+                        url: "/updateeleavehierarchy/" + id,
+                        data: data,
+                        dataType: "json",
+                        async: false,
+                        processData: false,
+                        contentType: false,
+                    }).done(function (data) {
+                        swal({
+                            title: data.title,
+                            text: data.msg,
+                            type: data.type,
+                            confirmButtonColor: "#3085d6",
+                            confirmButtonText: "OK",
+                            allowOutsideClick: false,
+                            allowEscapeKey: false,
+                        }).then(function () {
+                            if (data.type == "error") {
+                            } else {
+                                location.reload();
+                            }
+                        });
+                    });
+                });
+            },
         });
     });
 

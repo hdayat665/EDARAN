@@ -105,11 +105,11 @@ if (!function_exists('getMaritalStatus')) {
     {
         $data = [
 
-            '1' => 'Single',
-            '2' => 'Married',
-            '3' => 'Divorced',
-            '4' => 'Widowed',
-            '5' => 'Seperated',
+            '1' => 'SINGLE',
+            '2' => 'MARRIED',
+            '3' => 'DIVORCED',
+            '4' => 'WIDOWED',
+            '5' => 'SEPARATED',
         ];
 
         if ($id) {
@@ -124,8 +124,8 @@ if (!function_exists('gender')) {
     function gender()
     {
         $data = [
-            '1' => 'Male',
-            '2' => 'Female',
+            '1' => 'MALE',
+            '2' => 'FEMALE',
         ];
 
         return $data;
@@ -179,16 +179,16 @@ if (!function_exists('relationship')) {
     {
         $data = [
 
-            '1' => 'Grand Father',
-            '2' => 'Grand Mother',
-            '3' => 'Grand Father-In-Law',
-            '4' => 'Grand Mother-In-Law',
-            '5' => 'Father',
-            '6' => 'Mother',
-            '7' => 'Father-In-Law',
-            '8' => 'Mother-In-Law',
-            '9' => 'Sister',
-            '10' => 'Brother',
+            '1' => 'GRANDFATHER',
+            '2' => 'GRANDMOTHER',
+            '3' => 'GRANDFATHER-IN-LAW',
+            '4' => 'GRANDMOTHER-IN-LAW',
+            '5' => 'FATHER',
+            '6' => 'MOTHER',
+            '7' => 'FATHER-IN-LAW',
+            '8' => 'MOTHER-IN-LAW',
+            '9' => 'SISTER',
+            '10' => 'BROTHER',
         ];
 
         if ($id) {
@@ -227,59 +227,59 @@ if (!function_exists('americas')) {
     function americas()
     {
         $data = [
-            'AI' => "Anguilla",
-            'AG' => "Antigua and Barbuda",
-            'AR' => "Argentina",
-            'AW' => "Aruba",
-            'BS' => "Bahamas",
-            'BB' => "Barbados",
-            'BZ' => "Belize",
-            'BM' => "Bermuda",
-            'BO' => "Bolivia",
-            'BR' => "Brazil",
-            'VG' => "British Virgin Islands",
-            'CA' => "Canada",
-            'KY' => "Cayman Islands",
-            'CL' => "Chile",
-            'CO' => "Colombia",
-            'CR' => "Costa Rica",
-            'CU' => "Cuba",
-            'DM' => "Dominica",
-            'DO' => "Dominican Republic",
-            'EC' => "Ecuador",
-            'SV' => "El Salvador",
-            'FK' => "Falkland Islands",
-            'GF' => "French Guiana",
-            'GL' => "Greenland",
-            'GD' => "Grenada",
-            'GP' => "Guadeloupe",
-            'GT' => "Guatemala",
-            'GY' => "Guyana",
-            'HT' => "Haiti",
-            'HN' => "Honduras",
-            'JM' => "Jamaica",
-            'MQ' => "Martinique",
-            'MX' => "Mexico",
-            'MS' => "Montserrat",
-            'AN' => "Netherlands Antilles",
-            'NI' => "Nicaragua",
-            'PA' => "Panama",
-            'PY' => "Paraguay",
-            'PE' => "Peru",
-            'PR' => "Puerto Rico",
-            'BL' => "Saint Barthélemy",
-            'KN' => "Saint Kitts and Nevis",
-            'LC' => "Saint Lucia",
-            'MF' => "Saint Martin",
-            'PM' => "Saint Pierre and Miquelon",
-            'VC' => "Saint Vincent and the Grenadines",
-            'SR' => "Suriname",
-            'TT' => "Trinidad and Tobago",
-            'TC' => "Turks and Caicos Islands",
-            'VI' => "U.S. Virgin Islands",
-            'US' => "United States",
-            'UY' => "Uruguay",
-            'VE' => "Venezuela"
+            'AI' => "ANGUILLA",
+            'AG' => "ANTIGUA AND BARBUDA",
+            'AR' => "ARGENTINA",
+            'AW' => "ARUBA",
+            'BS' => "BAHAMAS",
+            'BB' => "BARBADOS",
+            'BZ' => "BELIZE",
+            'BM' => "BERMUDA",
+            'BO' => "BOLIVIA",
+            'BR' => "BRAZIL",
+            'VG' => "BRITISH VIRGIN ISLANDS",
+            'CA' => "CANADA",
+            'KY' => "CAYMAN ISLANDS",
+            'CL' => "CHILE",
+            'CO' => "COLOMBIA",
+            'CR' => "COSTA RICA",
+            'CU' => "CUBA",
+            'DM' => "DOMINICA",
+            'DO' => "DOMINICAN REPUBLIC",
+            'EC' => "ECUADOR",
+            'SV' => "EL SALVADOR",
+            'FK' => "FALKLAND ISLANDS",
+            'GF' => "FRENCH GUIANA",
+            'GL' => "GREENLAND",
+            'GD' => "GRENADA",
+            'GP' => "GUADELOUPE",
+            'GT' => "GUATEMALA",
+            'GY' => "GUYANA",
+            'HT' => "HAITI",
+            'HN' => "HONDURAS",
+            'JM' => "JAMAICA",
+            'MQ' => "MARTINIQUE",
+            'MX' => "MEXICO",
+            'MS' => "MONTSERRAT",
+            'AN' => "NETHERLANDS ANTILLES",
+            'NI' => "NICARAGUA",
+            'PA' => "PANAMA",
+            'PY' => "PARAGUAY",
+            'PE' => "PERU",
+            'PR' => "PUERTO RICO",
+            'BL' => "SAINT BARTHÉLEMY",
+            'KN' => "SAINT KITTS AND NEVIS",
+            'LC' => "SAINT LUCIA",
+            'MF' => "SAINT MARTIN",
+            'PM' => "SAINT PIERRE AND MIQUELON",
+            'VC' => "SAINT VINCENT AND THE GRENADINES",
+            'SR' => "SURINAME",
+            'TT' => "TRINIDAD AND TOBAGO",
+            'TC' => "TURKS AND CAICOS ISLANDS",
+            'VI' => "U.S. VIRGIN ISLANDS",
+            'US' => "UNITED STATES",
+            'UY' => "URUGUAY",
+            'VE' => "VENEZUELA"
         ];
 
         return $data;
@@ -290,58 +290,58 @@ if (!function_exists('asias')) {
     function asias()
     {
         $data = [
-            'AF' => "Afghanistan",
-            'AM' => "Armenia",
-            'AZ' => "Azerbaijan",
-            'BH' => "Bahrain",
-            'BD' => "Bangladesh",
-            'BT' => "Bhutan",
-            'BN' => "Brunei",
-            'KH' => "Cambodia",
-            'CN' => "China",
-            'GE' => "Georgia",
-            'HK' => "Hong Kong SAR China",
-            'IN' => "India",
-            'ID' => "Indonesia",
-            'IR' => "Iran",
-            'IQ' => "Iraq",
-            'IL' => "Israel",
-            'JP' => "Japan",
-            'JO' => "Jordan",
-            'KZ' => "Kazakhstan",
-            'KW' => "Kuwait",
-            'KG' => "Kyrgyzstan",
-            'LA' => "Laos",
-            'LB' => "Lebanon",
-            'MO' => "Macau SAR China",
-            'MY' => "Malaysia",
-            'MV' => "Maldives",
-            'MN' => "Mongolia",
-            'MM' => "Myanmar [Burma]",
-            'NP' => "Nepal",
-            'NT' => "Neutral Zone",
-            'KP' => "North Korea",
-            'OM' => "Oman",
-            'PK' => "Pakistan",
-            'PS' => "Palestinian Territories",
-            'YD' => "People's Democratic Republic of Yemen",
-            'PH' => "Philippines",
-            'QA' => "Qatar",
-            'SA' => "Saudi Arabia",
-            'SG' => "Singapore",
-            'KR' => "South Korea",
-            'LK' => "Sri Lanka",
-            'SY' => "Syria",
-            'TW' => "Taiwan",
-            'TJ' => "Tajikistan",
-            'TH' => "Thailand",
-            'TL' => "Timor-Leste",
-            'TR' => "Turkey",
-            'TM' => "Turkmenistan",
-            'AE' => "United Arab Emirates",
-            'UZ' => "Uzbekistan",
-            'VN' => "Vietnam",
-            'YE' => "Yemen"
+            'AFGHANISTAN' => "AFGHANISTAN",
+            'ARMENIA' => "ARMENIA",
+            'AZERBAIJAN' => "AZERBAIJAN",
+            'BAHRAIN' => "BAHRAIN",
+            'BANGLADESH' => "BANGLADESH",
+            'BHUTAN' => "BHUTAN",
+            'BRUNEI' => "BRUNEI",
+            'CAMBODIA' => "CAMBODIA",
+            'CHINA' => "CHINA",
+            'GEORGIA' => "GEORGIA",
+            'HONG KONG SAR CHINA' => "HONG KONG SAR CHINA",
+            'INDIA' => "INDIA",
+            'INDONESIA' => "INDONESIA",
+            'IRAN' => "IRAN",
+            'IRAQ' => "IRAQ",
+            'ISRAEL' => "ISRAEL",
+            'JAPAN' => "JAPAN",
+            'JORDAN' => "JORDAN",
+            'KAZAKHSTAN' => "KAZAKHSTAN",
+            'KUWAIT' => "KUWAIT",
+            'KYRGYZSTAN' => "KYRGYZSTAN",
+            'LAOS' => "LAOS",
+            'LEBANON' => "LEBANON",
+            'MACAU SAR CHINA' => "MACAU SAR CHINA",
+            'MALAYSIA' => "MALAYSIA",
+            'MALDIVES' => "MALDIVES",
+            'MONGOLIA' => "MONGOLIA",
+            'MYANMAR' => "MYANMAR [BURMA]",
+            'NEPAL' => "NEPAL",
+            'NEUTRAL ZONE' => "NEUTRAL ZONE",
+            'NORTH KOREA' => "NORTH KOREA",
+            'OMAN' => "OMAN",
+            'PAKISTAN' => "PAKISTAN",
+            'PALESTINIAN' => "PALESTINIAN TERRITORIES",
+            'YEMEN' => "PEOPLE'S DEMOCRATIC REPUBLIC OF YEMEN",
+            'PHILIPPINES' => "PHILIPPINES",
+            'QATAR' => "QATAR",
+            'SAUDI ARABIA' => "SAUDI ARABIA",
+            'SINGAPORE' => "SINGAPORE",
+            'SOUTH KOREA' => "SOUTH KOREA",
+            'SRI LANKA' => "SRI LANKA",
+            'SYRIA' => "SYRIA",
+            'TAIWAN' => "TAIWAN",
+            'TAJIKISTAN' => "TAJIKISTAN",
+            'THAILAND' => "THAILAND",
+            'TIMOR-LESTE' => "TIMOR-LESTE",
+            'TURKEY' => "TURKEY",
+            'TURKMENISTAN' => "TURKMENISTAN",
+            'UNITED ARAB EMIRATES' => "UNITED ARAB EMIRATES",
+            'UZBEKISTAN' => "UZBEKISTAN",
+            'VIETNAM' => "VIETNAM",
+            'YEMEN' => "YEMEN"
         ];
 
         return $data;
@@ -479,13 +479,39 @@ if (!function_exists('getCustomer')) {
     }
 }
 
+if (!function_exists('getState')) {
+    function getState()
+    {
+        $data = [
+            'JOHOR' => 'JOHOR',
+            'KEDAH' => 'KEDAH',
+            'KELANTAN' => 'KELANTAN',
+            'NEGERI SEMBILAN' => 'NEGERI SEMBILAN',
+            'PAHANG' => 'PAHANG',
+            'PENANG' => 'PENANG',
+            'PERAK' => 'PERAK',
+            'PERLIS' => 'PERLIS',
+            'SABAH' => 'SABAH',
+            'SARAWAK' => 'SARAWAK',
+            'SELANGOR' => 'SELANGOR',
+            'TERENGGANU' => 'TERENGGANU',
+            'KUALA LUMPUR' => 'KUALA LUMPUR',
+            'LABUAN' => 'LABUAN',
+            'PUTRAJAYA' => 'PUTRAJAYA',
+
+        ];
+
+        return $data;
+    }
+}
+
 if (!function_exists('getStatusProject')) {
     function getStatusProject()
     {
         $data = [
-            'Ongoing' => 'Ongoing',
-            'Warranty' => 'Warranty',
-            'Closed' => 'Closed',
+            'ONGOING' => 'ONGOING',
+            'WARRANTY' => 'WARRANTY',
+            'CLOSED' => 'CLOSED',
         ];
 
         return $data;
@@ -527,7 +553,7 @@ if (!function_exists('getFinancialYearForm')) {
             $next_year => $next_year,
         ];
 
-                $data = array_reverse($data);
+        $data = array_reverse($data);
 
         return $data;
     }
@@ -576,8 +602,8 @@ if (!function_exists('getVehicle')) {
     function getVehicle()
     {
         $data = [
-            '1' => 'Car',
-            '2' => 'Motorcycle',
+            '1' => 'CAR',
+            '2' => 'MOTORCYCLE',
         ];
 
         return $data;
@@ -589,11 +615,11 @@ if (!function_exists('religion')) {
     function religion()
     {
         $data = [
-            'Islam' => 'Islam',
-            'Buddhist' => 'Buddhist',
-            'Christian' => 'Christian',
-            'Hindu' => 'Hindu',
-            'Others' => 'Others',
+            'ISLAM' => 'ISLAM',
+            'BUDDHIST' => 'BUDDHIST',
+            'CHRISTIAN' => 'CHRISTIAN',
+            'HINDU' => 'HINDU',
+            'OTHERS' => 'OTHERS',
         ];
 
         return $data;
@@ -604,10 +630,10 @@ if (!function_exists('race')) {
     function race()
     {
         $data = [
-            'Malay' => 'Malay',
-            'Chinese' => 'Chinese',
-            'Indian' => 'Indian',
-            'Others' => 'Others',
+            'MALAY' => 'MALAY',
+            'CHINESE' => 'CHINESE',
+            'INDIAN' => 'INDIAN',
+            'OTHERS' => 'OTHERS',
         ];
 
         return $data;
@@ -618,21 +644,21 @@ if (!function_exists('state')) {
     function state()
     {
         $data = [
-            'Johor' => 'Johor',
-            'Kedah' => 'Kedah',
-            'Kelantan' => 'Kelantan',
-            'Negeri Sembilan' => 'Negeri Sembilan',
-            'Pahang' => 'Pahang',
-            'Penang' => 'Penang',
-            'Perak' => 'Perak',
-            'Perlis' => 'Perlis',
-            'Sabah' => 'Sabah',
-            'Sarawak' => 'Sarawak',
-            'Selangor' => 'Selangor',
-            'Terengganu' => 'Terengganu',
-            'Kuala Lumpur' => 'Kuala Lumpur',
-            'Labuan' => 'Labuan',
-            'Putrajaya' => 'Putrajaya'
+            'JOHOR' => 'JOHOR',
+            'KEDAH' => 'KEDAH',
+            'KELANTAN' => 'KELANTAN',
+            'NEGERI SEMBILAN' => 'NEGERI SEMBILAN',
+            'PAHANG' => 'PAHANG',
+            'PENANG' => 'PENANG',
+            'PERAK' => 'PERAK',
+            'PERLIS' => 'PERLIS',
+            'SABAH' => 'SABAH',
+            'SARAWAK' => 'SARAWAK',
+            'SELANGOR' => 'SELANGOR',
+            'TERENGGANU' => 'TERENGGANU',
+            'KUALA LUMPUR' => 'KUALA LUMPUR',
+            'LABUAN' => 'LABUAN',
+            'PUTRAJAYA' => 'PUTRAJAYA'
         ];
 
         return $data;
@@ -666,7 +692,13 @@ if (!function_exists('customeractive')) {
 if (!function_exists('projectLocation')) {
     function projectLocation($projectid = '')
     {
-        $data = ProjectLocation::where('tenant_id', Auth::user()->tenant_id)->get();
+        $query = ProjectLocation::where('tenant_id', Auth::user()->tenant_id);
+
+        if ($projectid) {
+            $query->where('project_id', $projectid);
+        }
+
+        $data = $query->get();
 
         if (!$data) {
             $data = [];
@@ -675,6 +707,8 @@ if (!function_exists('projectLocation')) {
         return $data;
     }
 }
+
+
 if (!function_exists('getBranch')) {
     function getBranch($id = '')
     {
@@ -704,7 +738,18 @@ if (!function_exists('getEmployee')) {
         return $data;
     }
 }
+if (!function_exists('getEmployeeexcept')) {
+    function getEmployeeexcept()
+    {
+        $data = Employee::where([['tenant_id', Auth::user()->tenant_id], ['employeeid', '!=', null]])->get();
 
+        if (!$data) {
+            $data = [];
+        }
+
+        return $data;
+    }
+}
 if (!function_exists('accManager')) {
     function accManager()
     {
@@ -812,18 +857,18 @@ if (!function_exists('month')) {
     function month($id = '')
     {
         $data = [
-            '01' => 'January',
-            '02' => 'February',
-            '03' => 'March',
-            '04' => 'April',
-            '05' => 'May',
-            '06' => 'Jun',
-            '07' => 'July',
-            '08' => 'August',
-            '09' => 'September',
-            '10' => 'October',
-            '11' => 'November',
-            '12' => 'December',
+            '01' => 'JANUARY',
+            '02' => 'FEBRUARY',
+            '03' => 'MARCH',
+            '04' => 'APRIL',
+            '05' => 'MAY',
+            '06' => 'JUNE',
+            '07' => 'JULY',
+            '08' => 'AUGUST',
+            '09' => 'SEPTEMBER',
+            '10' => 'OCTOBER',
+            '11' => 'NOVEMBER',
+            '12' => 'DECEMBER',
         ];
 
         if ($id) {
@@ -843,6 +888,7 @@ if (!function_exists('year')) {
             '2020' => '2020',
             '2021' => '2021',
             '2022' => '2022',
+            '2023' => '2023',
         ];
 
         return $data;
@@ -972,6 +1018,19 @@ if (!function_exists('getAllRole')) {
     }
 }
 
+if (!function_exists('getAllJobGrade')) {
+    function getAllJobGrade()
+    {
+        $data = JobGrade::where([['tenant_id', Auth::user()->tenant_id]])->get();
+
+        if (!$data) {
+            $data = [];
+        }
+
+        return $data;
+    }
+}
+
 if (!function_exists('getUserProfileByUserId')) {
     function getUserProfileByUserId($id = '')
     {
@@ -984,6 +1043,8 @@ if (!function_exists('getUserProfileByUserId')) {
         return $data;
     }
 }
+
+
 
 if (!function_exists('getUserByRole')) {
     function getUserByRole($id = '')
@@ -1068,10 +1129,10 @@ if (!function_exists('getCashAdvanceType')) {
     function getCashAdvanceType($id = '')
     {
         $data = [
-            '1' => 'Project ( Outstation )',
-            '2' => 'Project ( Non Outstation )',
-            '3' => 'Other ( Outstation )',
-            '4' => 'Other ( Non Outstation )',
+            '1' => 'PROJECT ( OUTSTATION )',
+            '2' => 'PROJECT ( NON OUTSTATION )',
+            '3' => 'OTHER ( OUTSTATION )',
+            '4' => 'OTHER ( NON OUTSTATION )',
         ];
 
         if ($id) {
@@ -1264,6 +1325,36 @@ if (!function_exists('checkingMonthlyClaim')) {
         } else {
             $data['month'] = $claim->month;
             $data['id'] = $claim->id;
+        }
+
+        return $data;
+    }
+}
+
+if (!function_exists('getRoleById')) {
+    function getRoleById($id = '')
+    {
+        $data = Role::where('id', $id)->first();
+
+        if (!$data) {
+            $data = [];
+        }
+
+        return $data;
+    }
+}
+
+if (!function_exists('getViewForClaimApproval')) {
+    function getViewForClaimApproval()
+    {
+
+        $employee = Employee::where('user_id', Auth::user()->id)->first();
+
+        // hod = 2 supervisor = 1
+        if ($employee->jobGrade == '1') {
+            $data = 'supervisorClaim';
+        } elseif ($employee->jobGrade == '2') {
+            $data = 'hodClaim';
         }
 
         return $data;

@@ -25,7 +25,7 @@
                         <a href="javascript:;" id="deleteProjectLocationButton" data-id="{{$projectLocation->id}}" class="btn btn-outline-danger"><i class="fa fa-trash"></i></a></td>
                     <td>{{$projectLocation->location_name}}</td>
                     <td>{{$projectLocation->address}}</td>
-                    <td><a href="#">https://www.google.com/maps/{{$projectLocation->location_google}}</a></td>
+                    <td><a href="https://www.google.com/maps/{{$projectLocation->location_google}}">https://www.google.com/maps/{{$projectLocation->location_google}}</a></td>
                 </tr>
                 @endforeach
                 @endif

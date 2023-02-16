@@ -28,7 +28,7 @@ class CustomerService
     public function customerView()
     {
         $tenant_id = Auth::user()->tenant_id;
-        $data = Customer::where('tenant_id', $tenant_id)->get();
+        $data = Customer::where('tenant_id', $tenant_id)->orderBy('id', 'desc')->get();
         if(!$data)
         {
             $data = [];
@@ -40,15 +40,30 @@ class CustomerService
     public function createCustomer($r)
     {
         $input = $r->input();
+
+        $etData = customer::where([['customer_name', $input['customer_name']], ['tenant_id', Auth::user()->tenant_id]])->first();
+        if ($etData) {
+            $data['msg'] = 'Customer already exists.';
+            $data['status'] = config('app.response.error.status');
+            $data['type'] = config('app.response.error.type');
+            $data['title'] = config('app.response.error.title');
+
+            return $data;
+        }
+
         $input['tenant_id'] = Auth::user()->tenant_id;
-        $input['addedBy'] = Auth::user()->username;
-
+        $input['addedBy'] = Employee::where('user_id', Auth::user()->id)->select('employeeName')->first()->employeeName;
+        $input['status'] = 1;
+        $address2 = $input['address2'] ?? null;
+        // $data = Employee::where('user_id', $id)->select('employeeName')->first()->employeeName;
+        
         Customer::create($input);
-
+        $data['americass'] = americas();
+        $data['asias'] = asias();
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success create customer';
+        $data['msg'] = 'Success Create Customer';
 
         return $data;
     }
@@ -57,14 +72,16 @@ class CustomerService
     {
         $input = $r->input();
         $input['update_by'] = Auth::user()->id;
+        $address2 = $input['address2'] ?? null;
 
         Customer::where('id', $id)->update($input);
 
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success update Customer';
-
+        $data['msg'] = 'Success Update Status';
+        $data['americass'] = americas();
+        $data['asias'] = asias();
         return $data;
     }
 
@@ -90,7 +107,7 @@ class CustomerService
             $data['status'] = config('app.response.success.status');
             $data['type'] = config('app.response.success.type');
             $data['title'] = config('app.response.success.title');
-            $data['msg'] = 'Success delete Customer';
+            $data['msg'] = 'Success Delete Customer';
         }
 
         return $data;
@@ -106,7 +123,7 @@ class CustomerService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success update Status';
+        $data['msg'] = 'Success Update Status';
 
         return $data;
     }

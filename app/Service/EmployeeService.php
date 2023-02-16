@@ -59,7 +59,7 @@ class EmployeeService
             $data['status'] = true;
             $data['title'] = 'Success';
             $data['type'] = 'success';
-            $data['msg'] = 'Success create user profile';
+            $data['msg'] = 'Success Create User Profile';
             $data['data'] = UserProfile::where('user_id', $user->id)->first();
         }
 
@@ -75,7 +75,7 @@ class EmployeeService
         $data['status'] = true;
         $data['title'] = 'Success';
         $data['type'] = 'success';
-        $data['msg'] = 'Success create address';
+        $data['msg'] = 'Success Create Address';
         $data['data'] = UserAddress::where('user_id', $input['user_id'])->first();
 
         return $data;
@@ -85,7 +85,7 @@ class EmployeeService
     {
         $data = [];
         $data['status'] = true;
-        $data['msg'] = 'Success get user employment';
+        $data['msg'] = 'Success Get User Employment';
         $data['data'] = Employee::where('tenant_id', Auth::user()->tenant_id)->get();
 
         return $data;
@@ -127,7 +127,7 @@ class EmployeeService
 
         $data = [];
         $data['status'] = true;
-        $data['msg'] = 'Success terminate user employment';
+        $data['msg'] = 'Success Terminate User Employment';
         $data['title'] = 'Success!';
         $data['type'] = 'success';
 
@@ -139,7 +139,7 @@ class EmployeeService
         $userId = Auth::user()->tenant_id;
         $data = [];
         $data['status'] = true;
-        $data['msg'] = 'Success get user employment';
+        $data['msg'] = 'Success Get User Employment';
         $data['data'] = DB::table('employment as a')
             ->leftjoin('userProfile as b', 'a.user_id', '=', 'b.user_id')
             ->leftjoin('department as c', 'a.department', '=', 'c.id')
@@ -257,7 +257,7 @@ class EmployeeService
             $data['status'] = config('app.response.success.status');
             $data['title'] = config('app.response.success.title');
             $data['type'] = config('app.response.success.type');
-            $data['msg'] = 'Success update Profile';
+            $data['msg'] = 'Success Update Profile';
         }
 
         return $data;
@@ -300,7 +300,7 @@ class EmployeeService
             $data['status'] = config('app.response.success.status');
             $data['type'] = config('app.response.success.type');
             $data['title'] = config('app.response.success.title');
-            $data['msg'] = 'Success update Address';
+            $data['msg'] = 'Success Update Address';
         }
 
         return $data;
@@ -329,7 +329,7 @@ class EmployeeService
             $data['status'] = config('app.response.success.status');
             $data['type'] = config('app.response.success.type');
             $data['title'] = config('app.response.success.title');
-            $data['msg'] = 'Success update Emergency Contact';
+            $data['msg'] = 'Success Update Emergency Contact';
         }
 
         return $data;
@@ -402,7 +402,7 @@ class EmployeeService
             $data['status'] = config('app.response.success.status');
             $data['type'] = config('app.response.success.type');
             $data['title'] = config('app.response.success.title');
-            $data['msg'] = 'Success update Companion';
+            $data['msg'] = 'Success Update Companion';
         }
 
         return $data;
@@ -486,7 +486,7 @@ class EmployeeService
             $data['status'] = config('app.response.success.status');
             $data['type'] = config('app.response.success.type');
             $data['title'] = config('app.response.success.title');
-            $data['msg'] = 'Success update Children';
+            $data['msg'] = 'Success Update Children';
         }
 
         return $data;
@@ -511,7 +511,7 @@ class EmployeeService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success add children';
+        $data['msg'] = 'Success add Children';
 
         return $data;
     }
@@ -521,7 +521,7 @@ class EmployeeService
         $user_id = Auth::user()->id;
 
         $data['data'] = UserSibling::where('user_id', $user_id)->get();
-        $data['msg'] = 'Success get sibling data';
+        $data['msg'] = 'Success Get Sibling Data';
 
         return $data;
     }
@@ -530,7 +530,7 @@ class EmployeeService
     {
         $user_id = Auth::user()->id;
         $data['data'] = UserParent::where('user_id', $user_id)->get();
-        $data['msg'] = 'Success get parent data';
+        $data['msg'] = 'Success Get Parent Data';
 
         return $data;
     }
@@ -581,7 +581,7 @@ class EmployeeService
             $data['status'] = config('app.response.success.status');
             $data['type'] = config('app.response.success.type');
             $data['title'] = config('app.response.success.title');
-            $data['msg'] = 'Success update Sibling';
+            $data['msg'] = 'Success Update Sibling';
         }
 
         return $data;
@@ -635,7 +635,7 @@ class EmployeeService
             $data['status'] = config('app.response.success.status');
             $data['type'] = config('app.response.success.type');
             $data['title'] = config('app.response.success.title');
-            $data['msg'] = 'Success update Parent';
+            $data['msg'] = 'Success Update Parent';
         }
 
         return $data;
@@ -697,7 +697,7 @@ class EmployeeService
             $data['status'] = config('app.response.success.status');
             $data['type'] = config('app.response.success.type');
             $data['title'] = config('app.response.success.title');
-            $data['msg'] = 'Success update Employee';
+            $data['msg'] = 'Success Update Employee';
         }
 
         return $data;
@@ -755,7 +755,7 @@ class EmployeeService
             $data['status'] = true;
             $data['title'] = 'Success';
             $data['type'] = 'success';
-            $data['msg'] = 'Success create user employment';
+            $data['msg'] = 'Success Create User Employment';
             $data['data'] = Employee::where('user_id', $input['user_id'])->first();
         }
 
@@ -783,7 +783,7 @@ class EmployeeService
             $data['status'] = config('app.response.success.status');
             $data['type'] = config('app.response.success.type');
             $data['title'] = config('app.response.success.title');
-            $data['msg'] = 'Success update Vehicle';
+            $data['msg'] = 'Success Update Vehicle';
         }
 
         return $data;
@@ -860,6 +860,74 @@ class EmployeeService
         $tenant_id = Auth::user()->tenant_id;
         $data = [];
         $data = Employee::where([['tenant_id', $tenant_id], ['department', $department_id]])->get();
+
+        return $data;
+    }
+
+    public function updateclaimhierarchy($r, $id)
+    {
+        $input = $r->input();
+
+        $data1 = $input['eclaimrecommender'];
+        $data2 = $input['eclaimapprover'];
+
+
+        $input = [
+            'eclaimrecommender' => $data1,
+            'eclaimapprover' => $data2
+        ];
+
+        Employee::where('user_id', $id)->update($input);
+
+        $data['status'] = config('app.response.success.status');
+        $data['type'] = config('app.response.success.type');
+        $data['title'] = config('app.response.success.title');
+        $data['msg'] = 'Success Update Claim Hierarchy';
+
+        return $data;
+    }
+
+    public function updatecashhierarchy($r, $id)
+    {
+        $input = $r->input();
+
+       
+        $data2 = $input['caapprover'];
+
+
+        $input = [
+            
+            'caapprover' => $data2
+        ];
+
+        Employee::where('user_id', $id)->update($input);
+
+        $data['status'] = config('app.response.success.status');
+        $data['type'] = config('app.response.success.type');
+        $data['title'] = config('app.response.success.title');
+        $data['msg'] = 'Success Update Cash Hierarchy';
+
+        return $data;
+    }
+    public function updateeleavehierarchy($r, $id)
+    {
+        $input = $r->input();
+
+        $data1 = $input['eleaverecommender'];
+        $data2 = $input['eleaveapprover'];
+
+
+        $input = [
+            'eleaverecommender' => $data1,
+            'eleaveapprover' => $data2
+        ];
+
+        Employee::where('user_id', $id)->update($input);
+
+        $data['status'] = config('app.response.success.status');
+        $data['type'] = config('app.response.success.type');
+        $data['title'] = config('app.response.success.title');
+        $data['msg'] = 'Success Update Eleave Hierarchy';
 
         return $data;
     }

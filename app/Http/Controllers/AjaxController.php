@@ -100,7 +100,7 @@ class AjaxController extends Controller
         $result = [];
         $result['msg'] = 'Your reset password link have been send';
         $result['title'] = 'Reset Password!';
-        $result['type'] = 'success';
+        $result['type'] = 'Success';
 
         echo json_encode($result);
     }
@@ -134,7 +134,7 @@ class AjaxController extends Controller
         $result = [];
         $result['msg'] = 'Your reset password link have been send';
         $result['title'] = 'Reset Password!';
-        $result['type'] = 'success';
+        $result['type'] = 'Success';
 
         echo json_encode($result);
     }

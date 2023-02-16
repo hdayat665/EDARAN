@@ -19,9 +19,11 @@ use Illuminate\Support\Facades\Mail;
 
 class myClaimService
 {
-    public function getClaimsData()
-    {
-        $data = GeneralClaim::where('tenant_id', Auth::user()->tenant_id)->get();
+    public function getClaimsData($user_id = '')
+    {   
+        $user_id = Auth::user()->id;
+
+        $data = GeneralClaim::where([['tenant_id', Auth::user()->tenant_id], ['user_id', $user_id]])->get();
 
         return $data;
     }
@@ -165,7 +167,7 @@ class myClaimService
             $data['status'] = config('app.response.success.status');
             $data['type'] = config('app.response.success.type');
             $data['title'] = config('app.response.success.title');
-            $data['msg'] = 'Success delete';
+            $data['msg'] = 'Success Delete';
         }
 
         return $data;

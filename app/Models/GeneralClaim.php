@@ -12,4 +12,9 @@ class GeneralClaim extends Model
     protected $table = 'general_claim';
 
     protected $guarded = [];
+
+    public function userProfile()
+    {
+        return $this->belongsTo(UserProfile::class, 'user_id', 'user_id');
+    }
 }

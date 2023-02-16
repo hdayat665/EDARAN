@@ -92,7 +92,7 @@
                                 @foreach ($projectLocations as $projectLocation)
                                 <option value="{{$projectLocation->id}}">{{$projectLocation->location_name}}</option>
                                 @endforeach
-                            </select>
+                            </select> 
                         </div>
                         <div class="col-sm-6" id="locationByProjectShow">
                             <label for="issuing-country" class="form-label">Project Location*</label>
