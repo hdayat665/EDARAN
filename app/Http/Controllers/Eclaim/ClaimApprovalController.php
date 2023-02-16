@@ -279,7 +279,14 @@ class ClaimApprovalController extends Controller
         return view('pages.eclaim.claimApproval.admin.recommender.' . $view, $data);
     }
 
+    public function HodCashApprovalView()
+    {
+        $mcs = new ClaimApprovalService;
 
+        $data['claims'] = $mcs->getGeneralClaim();
+
+        return view('pages.eclaim.claimApproval.cashAdvance.hodApproval', $data);
+    }
 
     public function getPersonalById($id = '')
     {
