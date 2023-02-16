@@ -6,16 +6,16 @@
     <div class="panel panel" id="timesheetApprovalJs">
         <div class="panel-heading">
             <div class="col-md-12" style="display: flex; justify-content: flex-end" >
-                <a href="javascript:;" id="approveAllButton" class="btn btn-primary">Approve All</a>	&nbsp;&nbsp;&nbsp;
+                <a href="javascript:;" id="approveAllButton" class="btn btn-primary"><i class="fa fa-check" aria-hidden="true"></i> Approve All</a>	&nbsp;&nbsp;&nbsp;
                 <a id="filter" class="btn btn-default btn-icon btn-lg">
                     <i class="fa fa-filter"></i>
                 </a>
             </div>
         </div>
         <div class="panel-body">
-            <div class="form-control" id="filterform" style="display:none">
+            {{-- <div class="form-control" id="filterform" style="display:none"> --}}
                 <form action="/searchTimesheet" method="POST">
-                    <div class="row p-2">
+                    <div class="row p-2" style="display: none" id="filterform">
                         <h4>Filter</h4>
                         <div class="col-sm-2">
                             <label for="emergency-firstname" class="form-label">Employer Name</label>
@@ -85,9 +85,9 @@
                         </div>
                     </div>
                 </form>
-            </div>
+            {{-- </div> --}}
             <br>
-            <div class="form-control">
+            {{-- <div class="form-control"> --}}
                 <div class="panel-body">
                     <form id="approveAllForm">
                         <table id="timesheetapproval" class="table table-striped table-bordered align-middle">
@@ -111,14 +111,14 @@
                                     <td>
                                         <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle"><i class="fa fa-cogs"></i> Actions <i class="fa fa-caret-down"></i></a>
                                         <div class="dropdown-menu">
-                                            @if ($timesheet->status == 'approve')
+                                            @if ($timesheet->status == 'approve' || $timesheet->status == 'amend')
                                             <div class="viewtimesheet">
                                                 <a href="/viewTimesheet/{{$timesheet->id}}/{{$timesheet->user_id}}" class="dropdown-item" data-id="{{$timesheet->id}}" id="viewtimesheet">View Timesheet</a>
                                             </div>
-                                            <div class="canceltimesheet">
+                                            {{-- <div class="canceltimesheet">
                                                 <div class="dropdown-divider "></div>
                                                 <a  class="dropdown-item" data-id="{{$timesheet->id}}" data-status="cancel" id="statusButton">Cancel Timesheet</a>
-                                            </div>
+                                            </div> --}}
                                             @else
                                             <div class="viewtimesheet">
                                                 <a href="/viewTimesheet/{{$timesheet->id}}/{{$timesheet->user_id}}" class="dropdown-item" data-id="{{$timesheet->id}}" id="viewtimesheet">View Timesheet</a>
@@ -128,16 +128,24 @@
                                                 <div class="approvetimesheet">
                                                     <a  class="dropdown-item" data-id="{{$timesheet->id}}" data-status="approve" id="statusButton">Approve Timesheet</a>
                                                 </div>
-                                                <div class="rejecttimesheet">
+                                                {{-- <div class="rejecttimesheet">
                                                     <a  class="dropdown-item" data-id="{{$timesheet->id}}" data-status="reject" id="statusButton">Reject Timesheet</a>
-                                                </div>
+                                                </div> --}}
                                             </div>
-                                            <div class="canceltimesheet">
+                                            <div class="amendtimesheet">
+                                                <div class="dropdown-divider "></div>
+                                                <div class="amendtimesheet">
+                                                    <a  class="dropdown-item" data-id="{{$timesheet->id}}" data-status="amend" id="amendreasonmodal" data-bs-toggle="modal"
+                                                        id="amendreasonmodal">Amend Timesheet</a>
+                                                </div>
+                                                {{-- <div class="rejecttimesheet">
+                                                    <a  class="dropdown-item" data-id="{{$timesheet->id}}" data-status="reject" id="statusButton">Reject Timesheet</a>
+                                                </div> --}}
+                                            </div>
+                                            {{-- <div class="canceltimesheet">
                                                 <div class="dropdown-divider "></div>
                                                 <a  class="dropdown-item" data-id="{{$timesheet->id}}" data-status="cancel" id="statusButton">Cancel Timesheet</a>
-                                            </div>
-                                            <a href="#" style="display: none" class="btn btn-primary btn-xs" data-bs-toggle="modal"
-                                            id="amendreasonmodal" data-id="{{$timesheet->id}}">Tesing for amend modal</a>
+                                            </div> --}}
                                             @endif
                                         </div>
                                     </td>
@@ -155,8 +163,12 @@
                                         <div id="approved"> <span class="badge bg-lime rounded-pill">Approved</span> </div>
                                         @endif
 
-                                        @if ($timesheet->status == 'reject')
+                                        {{-- @if ($timesheet->status == 'reject')
                                         <div id="rejected"> <span class="badge bg-danger rounded-pill">Rejected</span></div>
+                                        @endif --}}
+
+                                        @if ($timesheet->status == 'amend')
+                                        <div id="amended"> <span class="badge bg-danger rounded-pill" data-toggle="tooltipamend"  data-placement="bottom" title="{{$timesheet->amendreason}}">Amended</span> </div>
                                         @endif
                                     </td>
                                 </tr>
@@ -166,12 +178,7 @@
                         </table>
                     </form>
                 </div>
-            </div>
-            <div class="row p-2">
-				<div class="col align-self-start">
-					<a href="/claimapproval/supervisor" class="btn btn-light" style="color: black;" type="submit"><i class="fa fa-arrow-left"></i> Back</a>
-				</div>
-			</div>
+            {{-- </div> --}}
         </div>
     </div>
 </div>

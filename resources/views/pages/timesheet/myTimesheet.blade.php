@@ -8,7 +8,8 @@
 	<link href="../assets/plugins/timepicker/css/mdtimepicker.css" rel="stylesheet" type="text/css">
 
 <div id="content" class="app-content">
-    <h1 class="page-header">Calendar</h1>
+    {{-- <h1 class="page-header">Calendar</h1> --}}
+    <h1 class="page-header"> Timesheet <small>| My Timesheet  </small></h1>
     <div class="row" id="myTimesheetJs">
         <div class="col-lg">
             <div id="calendar" class="calendar"></div>

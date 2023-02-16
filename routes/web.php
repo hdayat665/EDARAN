@@ -375,11 +375,14 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('/searchRealtimeEventTimesheet', 'searchRealtimeEventTimesheet');
             Route::post('/deleteEvent/{id}', 'deleteEvent');
             Route::post('/deleteLog/{id}', 'deleteLog');
-            // Route::get('/getRequestTimesheetById123/{id}/{userId}', 'getRequestTimesheetById123');
             Route::get('/getTimesheetamendById/{id}', 'getTimesheetamendById');
+            // Route::get('/addamendreason/{id}/{status}', 'addamendreason');
+            Route::post('/updatereason', 'updatereason');
+            Route::get('/getParticipantNameById/{id}', 'getParticipantNameById');
         });
 
-        Route::controller(myClaimController::class)->group(function () {
+
+            Route::controller(myClaimController::class)->group(function () {
             Route::get('/myClaimView', 'myClaimView');
             Route::get('/generalClaimView', 'generalClaimView');
             Route::get('/cashAdvanceView', 'cashAdvanceView');
