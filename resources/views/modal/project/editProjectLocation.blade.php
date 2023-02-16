@@ -95,8 +95,8 @@
                     </div>
                     <div class="row">
                         <div id="map_2"></div>    
-                        <input type="text" class="form-control mb-5px" name="longitude_2" id="longitude_2" >
-                        <input type="text" class="form-control mb-5px" name="latitude_2" id="latitude_2">
+                        <input type="hidden" class="form-control mb-5px" name="longitude_2" id="longitude_2" >
+                        <input type="hidden" class="form-control mb-5px" name="latitude_2" id="latitude_2">
 
                     </div>
                     <div class="modal-footer">

@@ -32,13 +32,18 @@
 
                         <div class="col-md-6">
                             <select class="selectpicker form-control" id="employee_id" name="employee_id" style="text-transform: upppercase;">
-                                <option value="" label="PLEASE CHOOSE">PLEASE CHOOSE</option>
-                              @foreach ($employeeInfos as $employee)
-                                <option value="{{$employee->id}}">{{$employee->employeeName}}</option>
-                              @endforeach
+                                <?php $employees = getEmployee(); ?>
+                                <option value="" label="PLEASE CHOOSE" selected="selected"> </option>
+                                @if ($employees)
+
+                                @foreach ($employees as $employee)
+                                    <option value="{{$employee->id }}">{{$employee->employeeName}}</option>
+                                @endforeach
+                                @endif
+
                             </select>
                         </div>
-
+ 
 
                     </div>
 

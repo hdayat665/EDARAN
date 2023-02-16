@@ -30,11 +30,19 @@ $(document).ready(function() {
         search:true,
         
     });
-
+    
     $('#projectmember').picker({
         search:true,
     });
-
+    $('#employee_id').picker({
+        search:true,
+    });
+    $('#acc_manager2').picker({
+        search:true,
+    });
+    $('#project_manager2').picker({
+        search:true,
+    });
     $('#projectlocation').picker({
         search:true,
     }); 
