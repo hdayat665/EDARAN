@@ -5,7 +5,7 @@ $(document).ready(function() {
         autoclose: true,
         format: 'yyyy/mm/dd',
     });
-
+    
     $("#projectTable").DataTable({
         responsive: false,
         lengthMenu: [

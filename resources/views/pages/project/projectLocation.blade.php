@@ -6,6 +6,7 @@
     </div>
     <br>
     <div class="panel-body">
+        
         <table id="projectLocationTable" class="table table-striped table-bordered align-middle">
             <thead>
                 <tr>

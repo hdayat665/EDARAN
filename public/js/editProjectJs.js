@@ -503,7 +503,10 @@ $(document).ready(function() {
 
     });
 
+    
     $(document).on("click", "#editProjectMemberButton", function() {
+        
+
         var id = $(this).data('id');
         var vehicleData = getProjectMember(id);
 
@@ -518,6 +521,13 @@ $(document).ready(function() {
             $("#exit_project").prop('checked', data.exit_project);
             $("#exit_project_date").val(data.exit_project_date);
             $("#idPM").val(data.id);
+            // participants = data.location.split(",");
+            //     for (let i = 0; i < participants.length; i++) {
+            //         var participant = participants[i];
+                    
+
+            //     }
+            //     $("#location-search-edit").picker('set', participant);
         })
         $('#editProjectMemberModal').modal('show');
 

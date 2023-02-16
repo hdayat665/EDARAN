@@ -129,7 +129,7 @@
                             <select class="selectpicker form-control" name="location[]" id="location-search-edit" multiple >
                                 <?php $locations = projectLocation() ?>
                                 @foreach ($locations as $location)
-                                <option value="{{$location->id}}" >{{$location->location_name}}</option>
+                                <option value="{{$location->id}}" > {{$location->location_name}}</option>
                                 @endforeach
                             </select>
 
