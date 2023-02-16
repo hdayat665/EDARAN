@@ -15,6 +15,12 @@ $(document).ready(function() {
         scrollX:true,
     });
 
+    $('#acc_manager2').picker({
+        search:true,
+    });
+
+    
+
     $("#data-table-default2").DataTable({
         responsive: false,
         lengthMenu: [

@@ -98,7 +98,7 @@
                     </div>
                     <div class="row mb-15px">
                         <div class="col-md-4">
-                            <select class="form-select" name="acc_manager">
+                            <select class="selectpicker form-select" name="acc_manager" id="acc_manager2" >
                                 <option value="" label="PLEASE CHOOSE"></option>
                                 <?php $getEmployees = getEmployee(); ?>
                                 @foreach ($getEmployees as $getEmployee)
