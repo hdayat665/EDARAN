@@ -20,13 +20,13 @@ table{
         <div class="col-xl-15 bg-light"><br>
             <ul class="nav nav-tabs">
                 <li class="nav-item bg-light">
-                    <a href="#current-member" data-bs-toggle="tab" class="nav-link active">
+                    <a href="#current-member" data-bs-toggle="tab" id="current_mem" class="nav-link active">
                         <span class="d-sm-none">Tab 1</span>
                         <span class="d-sm-block d-none">Current Member</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#previous-member" data-bs-toggle="tab" class="nav-link">
+                    <a href="#previous-member" data-bs-toggle="tab" id="previous_mem" class="nav-link">
                         <span class="d-sm-none">Tab 2</span>
                         <span class="d-sm-block d-none">Previous Member</span>
                     </a>
@@ -126,7 +126,7 @@ table{
                                         <td>{{($projectMember->unit) ? getUnit($projectMember->unit)->unitName ?? '-' : '-'}}</td>
                                         <td>{{$projectMember->joined_date}}</td>
                                         <td>{{$projectMember->exit_project_date}}</td>
-                                        <td><a href="/projectAssignView/{{$projectMember->id}}">view</a></td>
+                                        <td><a href="/projectAssignView/{{$projectMember->id}}">View</a></td>
                                     </tr>
                                 @endforeach
                             @endif

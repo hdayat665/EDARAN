@@ -62,7 +62,12 @@ $(document).ready(function() {
         autoclose: true,
         format: 'yyyy/mm/dd',
     });
-
+    $( "#nav_pro_loc" ).on( "click", function() {
+        setTimeout(function() {
+          var general = $('#projectLocationTable').DataTable();
+          general.columns.adjust().draw();
+        }, 200); // Increase the delay to 1000 milliseconds
+          });
     $("#projectLocationTable").DataTable({
         responsive: false,
         lengthMenu: [
@@ -71,6 +76,27 @@ $(document).ready(function() {
         ],
         scrollX:true,
     });
+
+    $( "#nav_pre_pro" ).on( "click", function() {
+        setTimeout(function() {
+          var general = $('#data-table-prevproject').DataTable();
+          general.columns.adjust().draw();
+        }, 200); // Increase the delay to 1000 milliseconds
+      });
+
+$( "#current_mem" ).on( "click", function() {
+    setTimeout(function() {
+      var general = $('#projectMemberTable').DataTable();
+      general.columns.adjust().draw();
+    }, 200); // Increase the delay to 1000 milliseconds
+      });
+
+$( "#previous_mem" ).on( "click", function() {
+    setTimeout(function() {
+      var general = $('#projectMemberPrevTable').DataTable();
+      general.columns.adjust().draw();
+    }, 200); // Increase the delay to 1000 milliseconds
+      });
    
     $("#data-table-prevproject").DataTable({
         responsive: false,
@@ -97,6 +123,7 @@ $(document).ready(function() {
         ],
         scrollX:true,
     });
+    
 
     $("#data-table-default2").DataTable({
         responsive: false,
@@ -124,26 +151,23 @@ $(document).ready(function() {
                 contract_value: "required",
                 financial_year: "required",
                 LOA_date: "required",
-                project_manager: "required",
                 contract_start_date: "required",
                 contract_end_date: "required",
                 acc_manager: "required",
-                project_manager: "required",
                 status: "required",
             },
 
             messages: {
-                customer_id: "Please Select Customer Name",
-                project_code: "Please Enter Project Code",
-                project_name: "Please Enter Project Name",
-                contract_value: "Please Enter Contract Value",
-                financial_year: "Please Select Financial Year",
-                project_manager: "Please Select Project Manager",
-                LOA_date: "Please Enter LOA Date",
-                contract_start_date: "Please Select Specific Date",
-                contract_end_date: "Please Select Specific Date",
-                acc_manager: "Please Enter Account Manager",
-                status: "Please Enter Status",
+                customer_id: "Please Choose Customer Name",
+                project_code: "Please Insert Project Code",
+                project_name: "Please Insert Project Name",
+                contract_value: "Please Insert Contract Value",
+                financial_year: "Please Choose Financial Year",
+                LOA_date: "Please Insert LOA Date",
+                contract_start_date: "Please Choose Contract Start Date",
+                contract_end_date: "Please Choose Contract End Date",
+                acc_manager: "Please Insert Account Manager",
+                status: "Please Insert Status",
             },
             submitHandler: function(form) {
                 requirejs(['sweetAlert2'], function(swal) {
@@ -204,16 +228,16 @@ $(document).ready(function() {
             },
 
             messages: {
-                location_name: "Insert Location Name",
-                address: "Enter Address",
+                location_name: "Please Insert Location Name",
+                address: "Please Insert Address 1",
                 postcode: {
-                    required: "Enter Valid Postcode",
-                    digits: "Enter Valid Postcode",
-                    rangelength: "Enter Valid Postcode",
+                    required: "Please Insert Postcode",
+                    digits: "Please Insert Valid Postcode",
+                    rangelength: "Please Insert Valid Postcode",
                 },
-                city: "Enter City",
-                state: "Choose State",
-                location_google: "Selecet Location",
+                city: "Please Insert City",
+                state: "Please Choose State",
+                location_google: "Please Choose Location",
             },
             submitHandler: function(form) {
                 requirejs(['sweetAlert2'], function(swal) {
@@ -318,16 +342,16 @@ $(document).ready(function() {
             },
 
             messages: {
-                location_name: "Insert Location Name",
-                address: "Enter Address",
+                location_name: "Please Insert Location Name",
+                address: "Please Insert Address 1",
                 postcode: {
-                    required: "Enter Valid Postcode",
-                    digits: "Enter Valid Postcode",
-                    rangelength: "Enter Valid Postcode",
+                    required: "Please Insert Postcode",
+                    digits: "Please Insert Valid Postcode",
+                    rangelength: "Please Insert Valid Postcode",
                 },
-                city: "Enter City",
-                state: "Choose State",
-                location_google: "Selecet Location",
+                city: "Please Insert City",
+                state: "Please Choose State",
+                location_google: "Please Choose Location",
             },
             submitHandler: function(form) {
                 requirejs(['sweetAlert2'], function(swal) {
@@ -423,15 +447,19 @@ $(document).ready(function() {
             rules: {
                 joined_date: "required",
                 employee_id: "required",
+                designation: "required",
+                department:"required",
                 branch: "required",
                 unit:"required",
                 location_name: "required",
             },
 
             messages: {
-                joined_date: "Please Choose Date",
-                employee_id: "Please Choose Name",
+                joined_date: "Please Choose Joined Date",
+                employee_id: "Please Choose Project Member Name",
+                department:"Please Choose department",
                 branch: "Please Choose Branch",
+                designation: "Please Choose designation",
                 unit:"Please Choose Unit",
                 location_name:"Please Select Location",
             },

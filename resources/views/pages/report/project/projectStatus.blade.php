@@ -17,7 +17,7 @@
                     <div class="form-group col-md-4 ">
                         <label for="Menu1">View By : </label>
                         <select class="form-control" name="filter" id="select1" required
-                            oninvalid="this.setCustomValidity('Please select an item in the list')"
+                            oninvalid="this.setCustomValidity('Please Choose')"
                             oninput="setCustomValidity('')">
                             <option value="">PLEASE CHOOSE</option>
                             <option value="All">All</option>
@@ -33,9 +33,9 @@
                     <div class="form-group col-md-4 mt-3" id="menu2">
                         <label for="Menu2">Select Customer Name : </label>
                         <select class="form-control" name="customerName" id="select2"
-                            oninvalid="this.setCustomValidity('Please Select Customer Name')"
+                            oninvalid="this.setCustomValidity('Please Choose Customer Name')"
                             oninput="setCustomValidity('')">
-                            <option value="">Please Select ...</option>
+                            <option value="">PLEASE CHOOSE</option>
                             <?php $customers = customer(); ?>
                             @if ($customers)
                                 @foreach ($customers as $customer)
@@ -47,9 +47,9 @@
                     <div class="form-group col-md-4 mt-3" id="menu3">
                         <label for="Menu2">Select Financial Year : </label>
                         <select class="form-control" name="financialYear" id="select3"
-                            oninvalid="this.setCustomValidity('Please Select Financial Year')"
+                            oninvalid="this.setCustomValidity('Please Choose Financial Year')"
                             oninput="setCustomValidity('')">
-                            <option value="">Please Select ...</option>
+                            <option value="">PLEASE CHOOSE</option>
                             <?php $getFinancialYears = getFinancialYear(); ?>
                             @if ($getFinancialYears)
                                 @foreach ($getFinancialYears as $year)
@@ -62,9 +62,9 @@
                     <div class="form-group col-md-4 mt-3" id="menu4">
                         <label for="Menu2">Select Account Manager : </label>
                         <select class="form-control" name="accManager" id="select4"
-                            oninvalid="this.setCustomValidity('Please Select Account Manager')"
+                            oninvalid="this.setCustomValidity('Please Choose Account Manager')"
                             oninput="setCustomValidity('')">
-                            <option value="">Please Select ...</option>
+                            <option value="">PLEASE CHOOSE</option>
                             <?php $accManagers = accManager(); ?>
                             @if ($accManagers)
                                 @foreach ($accManagers as $manager)
@@ -76,9 +76,9 @@
                     <div class="form-group col-md-4 mt-3" id="menu5">
                         <label for="Menu2">Select Project Manager : </label>
                         <select class="form-control" name="projectManager" id="select5"
-                            oninvalid="this.setCustomValidity('Please Select Project Manager')"
+                            oninvalid="this.setCustomValidity('Please Choose Project Manager')"
                             oninput="setCustomValidity('')">
-                            <option value="">Please Select ...</option>
+                            <option value="">PLEASE CHOOSE</option>
                             <?php $prjManagers = prjManager(); ?>
                             @if ($prjManagers)
                                 @foreach ($prjManagers as $manager)
@@ -90,8 +90,8 @@
                     <div class="form-group col-md-4 mt-3" id="menu6">
                         <label for="Menu2">Select Status : </label>
                         <select class="form-control" name="statusProject" id="select6"
-                            oninvalid="this.setCustomValidity('Please Select Status')" oninput="setCustomValidity('')">
-                            <option value="">Please Select ...</option>
+                            oninvalid="this.setCustomValidity('Please Choose Status')" oninput="setCustomValidity('')">
+                            <option value="">PLEASE CHOOSE</option>
                             <?php $getStatusProjects = getStatusProject(); ?>
                             @if ($getStatusProjects)
                                 @foreach ($getStatusProjects as $key => $name)
@@ -103,7 +103,7 @@
                     <div class="form-group col-md-4 mt-3" id="menu7">
                         <label for="Menu2">Select Customer Name : </label>
                         <select class="form-control" name="customerNameProject" id="select7"
-                            oninvalid="this.setCustomValidity('Please Select Customer Name')"
+                            oninvalid="this.setCustomValidity('Please Choose Customer Name')"
                             oninput="setCustomValidity('')">
                             <option></option>
                             <?php $customers = customer(); ?>
@@ -121,7 +121,7 @@
                                 <option label="PLEASE CHOOSE" selected="selected"> </option>
 
                             </select>
-                            {{-- <select class="form-control" name="projectName" id="select8"  oninvalid="this.setCustomValidity('Please Select Project Name')" oninput="setCustomValidity('')">
+                            {{-- <select class="form-control" name="projectName" id="select8"  oninvalid="this.setCustomValidity('Please Choose Project Name')" oninput="setCustomValidity('')">
                     <?php $projects = project(); ?>
                     @if ($projects)
                     @foreach ($projects as $project)
@@ -135,7 +135,7 @@
                     <div class="form-group col-md-4 mt-3" id="menu9">
                         <label for="Menu2">Select Department : </label>
                         <select class="form-control" name="department" id="select9"
-                            oninvalid="this.setCustomValidity('Please Select Department')"
+                            oninvalid="this.setCustomValidity('Please Choose Department')"
                             oninput="setCustomValidity('')">
                             <option></option>
                             <?php $getDepartments = getDepartment(); ?>
