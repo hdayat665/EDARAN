@@ -899,6 +899,13 @@ class SettingController extends Controller
         return response()->json($result);
     }
 
+    public function getUserByJobGrade($id = '')
+    {
+        $result = getUserByJobGrade($id);
+        // pr($result->userProfile->id);
+        return response()->json($result);
+    }
+
     public function createDomainList(Request $r)
     {
         $ss = new SettingService;
@@ -1103,6 +1110,5 @@ class SettingController extends Controller
 
         //return view('pages.setting.timesheet.settingtimesheetperiod', $result);
         return view('pages.setting.timesheet.settingtimesheetperiod');
-
     }
 }

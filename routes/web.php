@@ -106,6 +106,8 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('/adminApprovalDetail/{id}', 'adminApprovalDetail');
             Route::get('/adminRecView', 'adminRecView');
             Route::get('/adminRecDetailView/{id}', 'adminRecDetailView');
+            Route::get('/HodCashApprovalView', 'HodCashApprovalView');
+
 
             // Route::get('/dashboardHost', 'dashboardHost')->name('dashboardHost');
         });
@@ -280,6 +282,7 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('/claimCatById/{id}', 'claimCatById');
             Route::post('/createGeneralApprover', 'createGeneralApprover');
             Route::get('/getUserByRole/{id}', 'getUserByRole');
+            Route::get('/getUserByJobGrade/{id}', 'getUserByJobGrade');
             Route::post('/createDomainList', 'createDomainList');
             Route::get('/getClaimCategoryContent/{id}', 'getClaimCategoryContent');
             Route::get('/getClaimCategoryById/{id}', 'getClaimCategoryById');

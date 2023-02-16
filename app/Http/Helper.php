@@ -1059,6 +1059,21 @@ if (!function_exists('getUserByRole')) {
     }
 }
 
+if (!function_exists('getUserByJobGrade')) {
+    function getUserByJobGrade($id = '')
+    {
+        $data = Employee::where([['tenant_id', Auth::user()->tenant_id], ['jobGrade', $id]])->with('userProfile')->get();
+
+        if (!$data) {
+            $data = [];
+        }
+
+        return $data;
+    }
+}
+
+
+
 
 if (!function_exists('getClaimCategory')) {
     function getClaimCategory($id = '')
