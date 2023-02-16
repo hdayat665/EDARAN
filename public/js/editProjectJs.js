@@ -34,9 +34,9 @@ $(document).ready(function() {
     $('#projectmember').picker({
         search:true,
     });
-    $('#employee_id').picker({
-        search:true,
-    });
+    // $('#employee_id').picker({
+    //     search:true,
+    // });
     $('#acc_manager2').picker({
         search:true,
     });
