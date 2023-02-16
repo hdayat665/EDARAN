@@ -485,7 +485,7 @@
                                         </a>
                                         <div class="menu-submenu">
                                             <div class="menu-item">
-                                                <a href="#" class="menu-link highlight">
+                                                <a href="/adminApprovalView" class="menu-link highlight">
                                                     <div class="menu-icon">
                                                         <i class="fa fa-list-check text-gray"></i>
                                                     </div>
@@ -494,7 +494,7 @@
                                                 </a>
                                             </div>
                                             <div class="menu-item">
-                                                <a href="/claimApprovalView" class="menu-link highlight">
+                                                <a href="/adminRecView" class="menu-link highlight">
                                                     <div class="menu-icon">
                                                         <i class="fa fa-list-check text-gray"></i>
                                                     </div>
@@ -503,7 +503,7 @@
                                                 </a>
                                             </div>
                                             <div class="menu-item">
-                                                <a href="#" class="menu-link highlight">
+                                                <a href="/adminCheckerView" class="menu-link highlight">
                                                     <div class="menu-icon">
                                                         <i class="fa fa-list-check text-gray"></i>
                                                     </div>
