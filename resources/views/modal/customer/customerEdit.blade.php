@@ -87,31 +87,29 @@
                         <?php
                         $customers = getCustomer(); // assuming this function returns a collection of customer objects
                         $state = state();
+
+                        $americass = americas();
+                        $asias = asias();
                         ?>
                         @if($customers->isNotEmpty())
-                            @foreach ($customers as $customer)
-                                <select class="form-select" name="country">
-                                    <option value="" label="PLEASE CHOOSE"></option>
+                            <select class="form-select" name="country">
+                                <option value="" label="PLEASE CHOOSE"></option>
 
-                                    <?php
-                                    $americass = americas();
-                                    $asias = asias();
-                                    ?>
-                                    <optgroup id="country-optgroup-Americas" label="Americas">
-                                        @foreach ($americass as $key => $america)
-                                            <option value="{{$key}}" <?php echo ($key == $customer->country) ? 'selected="selected"' : '' ?> >{{$america}}</option>
-                                        @endforeach
-                                    </optgroup>
-                                    <optgroup id="country-optgroup-Asia" label="Asia">
-                                        @foreach ($asias as $key => $asia)
-                                            <option value="{{$key}}" <?php echo ($key == $customer->country) ? 'selected="selected"' : '' ?> >{{$asia}}</option>
-                                        @endforeach
-                                    </optgroup>
-                                </select>
-                            @endforeach
+                                <optgroup id="country-optgroup-Americas" label="Americas">
+                                    @foreach ($americass as $key => $america)
+                                        <option value="{{$key}}" <?php echo ($key == $customer->country) ? 'selected="selected"' : '' ?> >{{$america}}</option>
+                                    @endforeach
+                                </optgroup>
+                                <optgroup id="country-optgroup-Asia" label="Asia">
+                                    @foreach ($asias as $key => $asia)
+                                        <option value="{{$key}}" <?php echo ($key == $customer->country) ? 'selected="selected"' : '' ?> >{{$asia}}</option>
+                                    @endforeach
+                                </optgroup>
+                            </select>
                         @else
                             <p>No customers found</p>
                         @endif
+
 
 
 
