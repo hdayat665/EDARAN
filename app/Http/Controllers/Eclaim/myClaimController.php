@@ -100,7 +100,7 @@ class myClaimController extends Controller
     {
         $mcs = new myClaimService;
 
-        $data = $mcs->updateStatusMonthlyClaim($id, 'paid');
+        $data = $mcs->updateStatusMonthlyClaim($id, 'active');
 
         return response()->json($data);
     }

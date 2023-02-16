@@ -902,7 +902,7 @@ class SettingController extends Controller
     public function getUserByJobGrade($id = '')
     {
         $result = getUserByJobGrade($id);
-        // pr($result->userProfile->id);
+
         return response()->json($result);
     }
 

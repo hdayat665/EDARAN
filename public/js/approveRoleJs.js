@@ -99,11 +99,11 @@ $(document).ready(function () {
         $("#checker1").find("option").end();
 
         var user = getUserByJobGrade(roleId);
-
+        console.log(user);
         user.done(function (data) {
-            // console.log(data.user_profile.id);
             for (let i = 0; i < data.length; i++) {
                 const user = data[i];
+                console.log(data[i]);
                 var opt = document.createElement("option");
                 document.getElementById("checker1").innerHTML +=
                     '<option value="' +
