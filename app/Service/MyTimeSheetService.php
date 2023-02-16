@@ -407,9 +407,27 @@ class MyTimeSheetService
         return $data;
     }
 
+    // public function getLogs()
+    // {
+    //     $data = TimesheetLog::where([['tenant_id', Auth::user()->tenant_id], ['user_id', Auth::user()->id]])->get();
+
+    //     return $data;
+    // }
+
+
     public function getLogs()
     {
-        $data = TimesheetLog::where([['tenant_id', Auth::user()->tenant_id], ['user_id', Auth::user()->id]])->get();
+        $data = DB::table('timesheet_log as a')
+        ->leftjoin('project as b', 'a.project_id', '=', 'b.id')
+        ->leftjoin('activity_logs as c', 'a.activity_name', '=', 'c.id')
+        ->select('a.*', 'b.project_name','c.activity_name as activitynameas')
+            // ->whereNotIn('a.id', $projectId)
+           -> where([['a.tenant_id', Auth::user()->tenant_id], ['a.user_id', Auth::user()->id]])
+            ->get();
+
+        if (!$data) {
+            $data = [];
+        }
 
         return $data;
     }
@@ -682,17 +700,10 @@ class MyTimeSheetService
     public function gettimesheetid($id)
     {
 
-        // $data = TimesheetApproval::where('tenant_id', Auth::user()->tenant_id)->orderBy('created_at', 'DESC')->get();
 
-        // return $data;
-
-
-        //
         $tenant_id = Auth::user()->tenant_id;
 
         $data = DB::table('timesheet_approval as a')
-            // ->leftJoin('customer as b', 'a.customer_id', '=', 'b.id')
-            // ->leftJoin('employment as c', 'a.project_manager', '=', 'c.id')
             ->select('a.*')
             ->where([['a.tenant_id', $tenant_id], ['a.id', $id]])
             ->first();
@@ -705,4 +716,50 @@ class MyTimeSheetService
         return $data;
         
     }
+
+
+    public function addamendreasons($r)
+    {
+        $input = $r->input();
+
+
+        $id = $input['id'];
+        $new_reason = $input['amendreason'];
+        $input = [
+            'status' => 'amend',
+            'amendreason' => $new_reason
+        ];
+        
+
+        $user = TimesheetApproval::where('id', $id)->first();
+
+        
+        if (!$user) {
+            $data['status'] = config('app.response.error.status');
+            $data['type'] = config('app.response.error.type');
+            $data['title'] = config('app.response.error.title');
+            $data['msg'] = 'user not found';
+        } else {
+
+            TimesheetApproval::where('id', $id)->update($input);
+
+            $data['status'] = config('app.response.success.status');
+            $data['type'] = config('app.response.success.type');
+            $data['title'] = config('app.response.success.title');
+            $data['msg'] = 'Success save reason';
+        }
+
+        return $data;
+    }
+
+    // public function getParticipantNameById($id)
+    // {
+    //     $data = Employee::find($id);
+
+    //     return $data;
+    // }
+
+    
+
+
 }
