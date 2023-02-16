@@ -169,15 +169,51 @@ $(document).ready(function () {
             rules: {
                 customer_name: "required",
                 address: "required",
-                phoneNo: "required",
-                email: "required",
+                postcode: {
+                    required: true,
+                    digits: true,
+                    rangelength: [5, 5]
+                },
+                city: "required",
+                state: "required",
+                country: "required",
+                phoneNo:  {
+                    required: true,
+                    digits: true,
+                    rangelength: [10, 11]
+                    
+                },
+
+                email:{
+                    required: true,
+                    email: true
+                },
+
             },
 
             messages: {
                 customer_name: "Please Insert Customer Name",
-                address: "Please Insert Address",
-                phoneNo: "Please Insert Phone Number",
-                email: "Please Enter Email Address",
+                address: "Please Insert Address 1",
+                phoneNo: {
+                    required: "Please Insert Phone Number",
+                    digits: "Please Insert Correct Phone Number Without ' - ' or Space",
+                    rangelength: "Please Insert Valid Phone Number"
+                    
+                },
+                postcode:  {
+                    required: "Please Insert Postcode",
+                    digits: "Please Insert Valid Postcode",
+                    rangelength: "Please Insert Valid Postcode"
+                },
+                city: "Please Insert City",
+                state: "Please Insert State",
+                country: "Please insert Country",
+                email: {
+                    required: "Please Insert Email Customer",
+                    email: "Please Insert Valid Email Address",
+                    
+                },
+
             },
             submitHandler: function (form) {
                 requirejs(["sweetAlert2"], function (swal) {
@@ -217,15 +253,51 @@ $(document).ready(function () {
             rules: {
                 customer_name: "required",
                 address: "required",
-                phoneNo: "required",
-                email: "required",
+                postcode: {
+                    required: true,
+                    digits: true,
+                    rangelength: [5, 5]
+                },
+                city: "required",
+                state: "required",
+                country: "required",
+                phoneNo:  {
+                    required: true,
+                    digits: true,
+                    rangelength: [10, 11]
+                    
+                },
+
+                email:{
+                    required: true,
+                    email: true
+                },
+
             },
 
             messages: {
                 customer_name: "Please Insert Customer Name",
-                address: "Please Insert Address",
-                phoneNo: "Please Insert Phone Number",
-                email: "Please Enter Email Address",
+                address: "Please Insert Address 1",
+                phoneNo: {
+                    required: "Please Insert Phone Number",
+                    digits: "Please Insert Correct Phone Number Without ' - ' or Space",
+                    rangelength: "Please Insert Valid Phone Number"
+                    
+                },
+                postcode:  {
+                    required: "Please Insert Postcode",
+                    digits: "Please Insert Valid Postcode",
+                    rangelength: "Please Insert Valid Postcode"
+                },
+                city: "Please Insert City",
+                state: "Please Insert State",
+                country: "Please insert Country",
+                email: {
+                    required: "Please Insert Email Customer",
+                    email: "Please Insert Valid Email Address",
+                    
+                },
+
             },
 
             submitHandler: function (form) {
