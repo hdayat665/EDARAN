@@ -126,7 +126,8 @@ class ProjectService
         $status2 =("approve");
         $assign2 =("account manager");
         $createdat2= date('Y-m-d h:m:s');
-
+        
+        
         $projectmem2 = [
             'tenant_id' => $tenant_id2,
             'project_id' => $project_id2,
@@ -140,6 +141,7 @@ class ProjectService
             'status' => $status2,
             'assign_as' => $assign2,
             'created_at' => $createdat2,
+            
         ];
 
         ProjectMember::create($projectmem2);

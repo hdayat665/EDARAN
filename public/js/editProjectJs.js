@@ -286,7 +286,9 @@ $(document).ready(function() {
             $('#idPL').val(data.id);
             $('#city').val(data.city);
             $('#state').val(data.state);
-            $('#location_google').val(data.location_google);
+            $('#location_google_2').val(data.location_google);
+            $('#latitude_2').val(data.latitude);
+            $('#longitude_2').val(data.longitude);
         })
         $('#editProjectLocationModal').modal('show');
 
