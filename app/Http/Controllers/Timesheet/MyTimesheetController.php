@@ -127,7 +127,8 @@ class MyTimesheetController extends Controller
 
         $result['events'] = $ss->getEvents();
         $result['logs'] = $ss->getLogs();
-
+        // dd($result['logs'] );
+        
         return response()->json($result);
     }
 
@@ -312,5 +313,22 @@ class MyTimesheetController extends Controller
     }
 
 
+    public function updatereason(Request $r)
+    {
+        $ps = new MyTimeSheetService;
+
+        $result = $ps->addamendreasons($r);
+
+        return response()->json($result);
+    }
+
+    // public function getParticipantNameById($participant = '')
+    // {
+    //     $ss = new MyTimeSheetService;
+
+    //     $result = $ss->getParticipantNameById($participant);
+
+    //     return response()->json($result);
+    // }
 
 }

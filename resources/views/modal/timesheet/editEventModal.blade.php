@@ -397,10 +397,10 @@
                                 <option class="form-label" value="">Please Select</option>
                                 <option class="form-label" value="1">5 Minute Before</option>
                                 <option class="form-label" value="2">10 Minute Before</option>
-                                <option class="form-label" value="1">15 Minute Before</option>
-                                <option class="form-label" value="2">20 Minute Before</option>
-                                <option class="form-label" value="1">30 Minute Before</option>
-                                <option class="form-label" value="1">1 Hour Before</option>
+                                <option class="form-label" value="3">15 Minute Before</option>
+                                <option class="form-label" value="4">20 Minute Before</option>
+                                <option class="form-label" value="5">30 Minute Before</option>
+                                <option class="form-label" value="6">1 Hour Before</option>
                             </select>
                         </div>
                         <div class="col-sm-4" id="attendHide">

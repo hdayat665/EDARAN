@@ -144,29 +144,59 @@ $(document).ready(function() {
                 .remove()
                 .end();
 
+            // var locationOffice = getLocationByProjectId(projectId);
+
+            // locationOffice.done(function(data) {
+            //     // console.log(data);
+            //     for (let i = 0; i < data.length; i++) {
+            //         const locations = data[i];
+            //         var opt = document.createElement("option");
+            //         document.getElementById("projectLocationOffice").innerHTML +=
+            //             '<option value="' + locations['id'] + '">' + locations['location_name'] + "</option>";
+            //     }
+            // })
+
             var locationOffice = getLocationByProjectId(projectId);
 
             locationOffice.done(function(data) {
-                // console.log(data);
+                var select = document.getElementById("projectLocationOffice");
+                select.innerHTML = '<option value="">Please Choose</option>';
                 for (let i = 0; i < data.length; i++) {
-                    const locations = data[i];
+                    const location = data[i];
                     var opt = document.createElement("option");
-                    document.getElementById("projectLocationOffice").innerHTML +=
-                        '<option value="' + locations['id'] + '">' + locations['location_name'] + "</option>";
+                    opt.value = location['id'];
+                    opt.text = location['location_name'];
+                    select.appendChild(opt);
                 }
-            })
+            });
+
+
+            // var activityOffice = getActivityByProjectId(projectId);
+
+            // activityOffice.done(function(data) {
+            //     // console.log(data);
+            //     for (let i = 0; i < data.length; i++) {
+            //         const locations = data[i];
+            //         var opt = document.createElement("option");
+            //         document.getElementById("activityOffice").innerHTML +=
+            //             '<option value="' + locations['id'] + '">' + locations['activity_name'] + "</option>";
+            //     }
+            // })
 
             var activityOffice = getActivityByProjectId(projectId);
 
             activityOffice.done(function(data) {
-                // console.log(data);
+                var select = document.getElementById("activityOffice");
+                select.innerHTML = '<option value="">Please Choose</option>';
                 for (let i = 0; i < data.length; i++) {
-                    const locations = data[i];
+                    const activity = data[i];
                     var opt = document.createElement("option");
-                    document.getElementById("activityOffice").innerHTML +=
-                        '<option value="' + locations['id'] + '">' + locations['activity_name'] + "</option>";
+                    opt.value = activity['id'];
+                    opt.text = activity['activity_name'];
+                    select.appendChild(opt);
                 }
-            })
+            });
+
         }
 
         if (type = 'editLog') {
@@ -185,29 +215,57 @@ $(document).ready(function() {
                 .remove()
                 .end();
 
+            // var locationOffice = getLocationByProjectId(projectId);
+
+            // locationOffice.done(function(data) {
+            //     // console.log(data);
+            //     for (let i = 0; i < data.length; i++) {
+            //         const locations = data[i];
+            //         var opt = document.createElement("option");
+            //         document.getElementById("projectLocationOfficeEdit").innerHTML +=
+            //             '<option value="' + locations['id'] + '">' + locations['location_name'] + "</option>";
+            //     }
+            // })
+
             var locationOffice = getLocationByProjectId(projectId);
 
             locationOffice.done(function(data) {
-                // console.log(data);
+                var select = document.getElementById("projectLocationOfficeEdit");
+                select.innerHTML = '<option value="">Please Choose</option>';
                 for (let i = 0; i < data.length; i++) {
-                    const locations = data[i];
+                    const location = data[i];
                     var opt = document.createElement("option");
-                    document.getElementById("projectLocationOfficeEdit").innerHTML +=
-                        '<option value="' + locations['id'] + '">' + locations['location_name'] + "</option>";
+                    opt.value = location['id'];
+                    opt.text = location['location_name'];
+                    select.appendChild(opt);
                 }
-            })
+            });
+
+            // var activityOffice = getActivityByProjectId(projectId);
+
+            // activityOffice.done(function(data) {
+            //     // console.log(data);
+            //     for (let i = 0; i < data.length; i++) {
+            //         const locations = data[i];
+            //         var opt = document.createElement("option");
+            //         document.getElementById("activityOfficeEdit").innerHTML +=
+            //             '<option value="' + locations['id'] + '">' + locations['activity_name'] + "</option>";
+            //     }
+            // })
 
             var activityOffice = getActivityByProjectId(projectId);
 
             activityOffice.done(function(data) {
-                // console.log(data);
+                var select = document.getElementById("activityOfficeEdit");
+                select.innerHTML = '<option value="">Please Choose</option>';
                 for (let i = 0; i < data.length; i++) {
-                    const locations = data[i];
+                    const activity = data[i];
                     var opt = document.createElement("option");
-                    document.getElementById("activityOfficeEdit").innerHTML +=
-                        '<option value="' + locations['id'] + '">' + locations['activity_name'] + "</option>";
+                    opt.value = activity['id'];
+                    opt.text = activity['activity_name'];
+                    select.appendChild(opt);
                 }
-            })
+            });
         }
     }
 
@@ -289,16 +347,16 @@ $(document).ready(function() {
             messages: {
                 event_name: 'Please insert event name',
                 type_of_log: "Please Choose Type of Log",
-                date: "Please Choose Specific Date",
+                date: "Please Choose  Date",
                 office_log: "Please Choose Office Log",
                 project_id: "Please Choose",
                 office_log_project: "Please Choose",
                 activity_name: "Please Choose Activity Name",
                 activity_office: "Please Choose",
-                start_time: "Please Enter Start Time",
+                start_time: "Please Choose Start Time",
                 project_location: "Please Enter Location",
                 project_location_office: "Please Enter Location",
-                end_time: "Please Enter End Time",
+                end_time: "Please Choose End Time",
             },
             submitHandler: function(form) {
                 requirejs(['sweetAlert2'], function(swal) {
@@ -358,16 +416,16 @@ $(document).ready(function() {
 
             messages: {
                 type_of_log: "Please Choose Type of Log",
-                date: "Please choose spesific date",
+                date: "Please Choose  Date",
                 office_log: "Please Choose Office Log",
                 project_id: "Please Choose",
                 office_log_project: "Please Choose",
                 activity_name: "Please Choose Activity Name",
                 activity_office: "Please Choose",
-                start_time: "Please  choose start time",
+                start_time: "Please  Choose Start Time",
                 project_location: "Please Enter Location",
                 project_location_office: "Please Enter Location",
-                end_time: "Please choose end time",
+                end_time: "Please Choose End Time",
             },
             submitHandler: function(form) {
                 requirejs(['sweetAlert2'], function(swal) {
@@ -461,18 +519,20 @@ $(document).ready(function() {
                 recurring: "required",
                 location: "required",
                 location_by_project: "required",
+                participant: "required",
             },
 
             messages: {
                 event_name: "Please Insert Event Name",
-                start_date: "Please choose start date",
-                end_date: "Please choose end Date",
-                start_time: "Please Choose Date",
-                end_time: "Please Choose Date",
+                start_date: "Please Choose Start Date",
+                end_date: "Please Choose End Date",
+                start_time: "Please Choose Start Time",
+                end_time: "Please Choose End Time",
                 duration: "Please Choose Duration",
                 recurring: "Please Select",
-                location: "Please Enter Specific Location",
+                location: "Please Insert Location",
                 location_by_project: "Please Enter Specific Location",
+                participant: 'required',
             },
             submitHandler: function(form) {
                 requirejs(['sweetAlert2'], function(swal) {
@@ -529,14 +589,14 @@ $(document).ready(function() {
 
             messages: {
                 event_name: "Please Insert Event Name",
-                start_date: "Please choose start Date",
-                end_date: "Please choose start Date",
-                start_time: "Please Choose start time",
-                end_time: "Please Choose end time",
+                start_date: "Please Choose Start Date",
+                end_date: "Please Choose End Date",
+                start_time: "Please Choose Start Time",
+                end_time: "Please Choose End Time",
                 duration: "Please Choose Duration",
                 recurring: "Please Select",
-                location: "Please Enter Specific Location",
-                location_by_project: "Please Enter Specific Location",
+                location: "Please Enter  Location",
+                location_by_project: "Please Enter  Location",
             },
             submitHandler: function(form) {
                 requirejs(['sweetAlert2'], function(swal) {
@@ -715,8 +775,7 @@ $(document).ready(function() {
                 }
 
                 log.push({
-                    // title: events['type_of_log'],
-                title: type_of_log(logs['type_of_log']) + ' ' + logs['start_time'],
+                    title: (logs['project_name'] ? logs['project_name'] + ' ' : '') + (logs['activitynameas'] ? logs['activitynameas'] + ' ' : '') + ' from ' + logs['start_time'] + ' to ' + logs['end_time'],
                     // start: startYear + '-' + startMonth + '-' + startDay + 'T' + startTime + ':00',
                     start: startYear + '-' + startMonth + '-' + startDay,
                     color: app.color.primary,
@@ -838,9 +897,9 @@ $(document).ready(function() {
                             $("#typeoflogedit").val(data.type_of_log);
                             $("#officelog2edit").val(data.office_log);
                             $("#dateaddlogedit").val(data.date);
-                            $("#project_id").val(data.project_id);
+                            $("#project_id_edit").val(data.project_id);
                             $("#officeLogProjectEdit").val(data.project_id);
-                            $("#activity_name").val(data.activity_name);
+                            $("#activity_name_edit1").val(data.activity_name);
                             $("#starttimeedit").val(data.start_time);
                             $('#projectlocsearchedit').picker('set', data.project_location);
                             $('#projectlocsearchedit').picker('set', data.project_location);
@@ -1299,7 +1358,10 @@ $(document).ready(function() {
         autoclose: true,
         format: 'yyyy/mm/dd'
     });
+    
+    $('#activity_name_edit').picker({ search: true });
     $('#projectlocsearch').picker({ search: true });
+    $('#activity_names').picker({ search: true });
     $('#addneweventprojectlocsearch').picker({ search: true });
     $('#addneweventparticipant').picker({ search: true });
     $('#addneweventselectproject').picker({ search: true });

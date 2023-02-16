@@ -28,6 +28,13 @@ function getActivityNameById(id) {
     });
 }
 
+
+function getParticipantByidTimesheet(id) {
+    return $.ajax({
+        url: "/getParticipantNameById/" + id
+    });
+}
+
 $(document).on("click", "#buttonnViewParticipant", function() {
     var id = $(this).data('id');
     var eventData = getEvents(id);
@@ -42,16 +49,26 @@ $(document).on("click", "#buttonnViewParticipant", function() {
                 .remove()
                 .end();
             // console.log(dataAttendance);
-            for (let i = 0; i < dataAttendance.length; i++) {
-                const attendance = dataAttendance[i];
+            // for (let i = 0; i < dataAttendance.length; i++) {
+            //     const attendance = dataAttendance[i];
+            //     var opt = document.createElement("tr");
+            //     document.getElementById('tableRowParticipant').innerHTML +=
+            //         '<tr class="odd gradeX">' +
+            //         // '<td>' + i + '</td>' +
+            //         '<td>' + (i + 1) + '</td>'
+            //         '<td><span>' + attendance.employeeName + '</span></td>' +
+            //         '</tr>';
+            // }
+            for (let i = 1; i <= dataAttendance.length; i++) {
+                const attendance = dataAttendance[i - 1];
                 var opt = document.createElement("tr");
                 document.getElementById('tableRowParticipant').innerHTML +=
                     '<tr class="odd gradeX">' +
                     '<td>' + i + '</td>' +
                     '<td><span>' + attendance.employeeName + '</span></td>' +
                     '</tr>';
-
-            }
+              }
+              
         });
 
 
@@ -69,27 +86,39 @@ $(document).on("click", "#buttonViewEvent", function() {
 
         // var userId = $('#timesheetApprovalUserId').val();
 
+        // var attendanceEvent = getAttendance(data.id);
+        // attendanceEvent.done(function(dataAttendance) {
+        //     $('#tableRow')
+        //         .find('tr')
+        //         .remove()
+        //         .end();
+        //     // console.log(dataAttendance);
+        //     for (let i = 0; i < dataAttendance.length; i++) {
+        //         const attendance = dataAttendance[i];
+        //         // alert(attendance['employeeName'])
+        //         var opt = document.createElement("tr");
+        //         document.getElementById('tableRow').innerHTML +=
+        //             '<tr class="odd gradeX">' +
+        //             '<td>' + attendance.employeeName + '</td>' +
+        //             '<td><span class="badge bg-lime rounded-pill">' + attendance.status + '</span></td>' +
+        //             '</tr>';
+
+        //     }
+        // });
         var attendanceEvent = getAttendance(data.id);
         attendanceEvent.done(function(dataAttendance) {
-            $('#tableRow')
-                .find('tr')
-                .remove()
-                .end();
-            // console.log(dataAttendance);
-            for (let i = 0; i < dataAttendance.length; i++) {
-                const attendance = dataAttendance[i];
-                // alert(attendance['employeeName'])
-                var opt = document.createElement("tr");
-                document.getElementById('tableRow').innerHTML +=
-                    '<tr class="odd gradeX">' +
-                    '<td>' + attendance.employeeName + '</td>' +
-                    '<td><span class="badge bg-lime rounded-pill">' + attendance.status + '</span></td>' +
-                    '</tr>';
-
-            }
+        $('#statusparticipant').dataTable().fnClearTable(); // Clear existing data in the table
+        for (let i = 0; i < dataAttendance.length; i++) {
+            const attendance = dataAttendance[i];
+            $('#statusparticipant').dataTable().fnAddData([
+            attendance.employeeName,
+            '<span class="badge bg-lime rounded-pill">' + attendance.status + '</span>'
+            ]);
+        }
         });
 
-        $('#event_name').text(data.event_name);
+
+        $('#event_name').text(data.event_name || '-');
         $('#start_date').text(data.start_date);
         $('#end_date').text(data.end_date);
         $('#start_time_event').text(data.start_time);
@@ -99,20 +128,26 @@ $(document).on("click", "#buttonViewEvent", function() {
         $('#duration').text(data.duration);
         var location = getProjectLocationById(data.location);
         location.done(function(location) {
-            $('#location_event').text(location.location_name);
+            $('#location_event').text(location.location_name || '-');
 
         })
 
         var project = getProjectByidTimesheet(data.project_id);
         project.done(function(project) {
-            $('#project_event').text(project.project_name);
+            $('#project_event').text(project.project_name || '-');
 
         })
 
-        $('#priority').text(data.priority);
-        $('#recurring').text(data.recurring);
-        $('#desc_event').text(data.desc);
-        $('#reminder').text('None');
+
+
+        $('#priority').text(data.priority || '-');
+        $('#recurring').text(data.recurring || '-');
+        $('#desc_event').text(data.desc || '-');
+        // $('#nameparticipant').text(data.participant);
+        $('#reminder').text(data.reminder || '-');
+        $('#priority').text(data.priority || '-');
+        
+        
         $('#file_upload').html('<a class="form-label" target="_blank" href="/storage/' + data.file_upload + '">' + data.file_upload + '</a>');
         // $('#attend').text('attend');
 
@@ -287,6 +322,19 @@ $('#tableviewparticipant').DataTable({
     ],
     "lengthChange": false,
 });
+
+$('#statusparticipant').DataTable({
+    responsive: false,
+    "searching": false,
+    lengthMenu: [
+        [5, 10, 25, 50, -1],
+        [5, 10, 25, 50, "All"],
+    ],
+    
+});
+
+
+
 
 
 

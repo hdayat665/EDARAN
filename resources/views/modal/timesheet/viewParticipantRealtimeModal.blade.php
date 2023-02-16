@@ -12,7 +12,7 @@
                             <thead>
                                 <tr>
                                     <th class="text-nowrap">No</th>
-                                    <th class="text-nowrap">Participant</th>
+                                    <th class="text-nowrap">Participants</th>
                                 </tr>
                             </thead>
                             <tbody id="tableRowParticipant">
