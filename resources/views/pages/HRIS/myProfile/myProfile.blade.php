@@ -94,8 +94,8 @@
                             <div class="col-sm-6">
                                 <div class="row">
                                     <div class="col-sm-12 idnumber">
-                                        <label for="" class="form-label" style="color: red;">Old Identification Number </label>
-                                        <input type="text" class="form-control" placeholder="0000000">
+                                        <label for="" class="form-label">Old Identification Number </label>
+                                        <input type="text" value="{{$profile->oldIDNo ?? ''}}" name="oldIDNo" id="oldidnumber" class="form-control" placeholder="0000000">
                                     </div>
                                 </div>
                             </div>
@@ -223,7 +223,7 @@
                                 <div class="row">
                                     <div class="col-sm-6 ">
                                         <div class="form-check form-switch align-right">
-                                            <input class="form-check-input okuCheck" value="" type="checkbox" name=""  id="">
+                                            <input class="form-check-input okuCheck" {{($profile->okuStatus ?? '') ? 'checked' : ''}} type="checkbox" name="okuStatus"  id="OKU">
                                             <label class="form-label" for="OKU" style="color: red;">
                                                 OKU?
                                             </label>
@@ -257,8 +257,8 @@
                             {{-- new --}}
                             <div class="col-md-6">
                                 <div class="col p-2">
-                                    <label for="phone-number2" class="form-label" style="color: red;">Phone Number 2</label>
-                                    <input type="text" id="" name="" value="" class="form-control" aria-describedby="" placeholder="000-00000000">
+                                    <label for="phone-number2" class="form-label">Phone Number 2</label>
+                                    <input type="text" id="phone-number" name="phoneNo2" value="{{$profile->phoneNo2 ?? ''}}" class="form-control" aria-describedby="" placeholder="000-00000000">
                                 </div>
                             </div>
                         </div>
