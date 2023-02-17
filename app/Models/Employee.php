@@ -18,9 +18,12 @@ class Employee extends Authenticatable
      * @var array<int, string>
      */
 
-    protected $table ='employment';
+    protected $table = 'employment';
 
     protected $guarded = [];
+
+    public function userProfile()
+    {
+        return $this->belongsTo(UserProfile::class, 'user_id', 'user_id');
+    }
 }
-
-

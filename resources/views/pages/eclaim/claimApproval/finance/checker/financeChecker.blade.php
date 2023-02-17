@@ -48,15 +48,17 @@
                                         <li class="nav-item">
                                             <a href="#default-tab-2" data-bs-toggle="tab" class="nav-link ">Checked</a>
                                         </li>
-                                        <li class="nav-item">
-                                            <a href="#default-tab-3" data-bs-toggle="tab" class="nav-link ">Generate PV</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a href="#default-tab-7" data-bs-toggle="tab" class="nav-link ">Payment</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a href="#default-tab-4" data-bs-toggle="tab" class="nav-link ">Paid</a>
-                                        </li>
+                                        @if ($check == 'f1')
+                                            <li class="nav-item">
+                                                <a href="#default-tab-3" data-bs-toggle="tab" class="nav-link ">Generate PV</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a href="#default-tab-7" data-bs-toggle="tab" class="nav-link ">Payment</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a href="#default-tab-4" data-bs-toggle="tab" class="nav-link ">Paid</a>
+                                            </li>
+                                        @endif
                                         <li class="nav-item">
                                             <a href="#default-tab-5" data-bs-toggle="tab" class="nav-link ">Amend</a>
                                         </li>
@@ -148,6 +150,7 @@
                         </div>
                     </div>
                     <div class="tab-content panel p-3 rounded">
+                        <input type="hidden" value="{{ $check }}" id="checkers">
                         @include('pages.eclaim.claimApproval.finance.checker.fcTab1')
                         @include('pages.eclaim.claimApproval.finance.checker.fcTab2')
                         @include('pages.eclaim.claimApproval.finance.checker.fcTab3')

@@ -26,7 +26,6 @@ $(document).ready(function () {
     $(
         "#rejectModalButton, #rejectModalButton1, #rejectModalButton2, #rejectModalButton3, #rejectModalButton4"
     ).on("click", function () {
-        alert("ss");
         id = $(this).data("id");
 
         $("#rejectId").val(id);
@@ -45,10 +44,10 @@ $(document).ready(function () {
     $(
         "#approveButton, #approveButton1, #approveButton2, #approveButton3, #approveButton4"
     ).on("click", function () {
-        alert("ss");
+        // alert("ss");
         var id = $(this).data("id");
         var status = "recommend";
-        var stage = "f1";
+        var stage = $("#financeChecker").val();
 
         requirejs(["sweetAlert2"], function (swal) {
             $.ajax({
@@ -83,7 +82,7 @@ $(document).ready(function () {
         var id = $(this).data("id");
         // var id = $("#rejectId").val();
         var status = "reject";
-        var stage = "f1";
+        var stage = $("#financeChecker").val();
 
         $("#supervisorRejectForm").validate({
             // Specify validation rules
@@ -136,7 +135,7 @@ $(document).ready(function () {
         alert("ss");
         var id = $(this).data("id");
         var status = "amend";
-        var stage = "f1";
+        var stage = $("#financeChecker").val();
 
         $("#supervisorAmendForm").validate({
             // Specify validation rules
@@ -188,7 +187,7 @@ $(document).ready(function () {
     $("#checkButton").click(function (e) {
         var id = $("#checkId").val();
         var status = "check";
-        var stage = "f1";
+        var stage = $("#financeChecker").val();
 
         requirejs(["sweetAlert2"], function (swal) {
             $.ajax({

@@ -69,7 +69,7 @@ $(document).ready(function () {
         // alert("ss");
         var id = $(this).data("id");
         var status = "recommend";
-        var stage = "f1";
+        var stage = $("#checkers").val();
 
         requirejs(["sweetAlert2"], function (swal) {
             $.ajax({
@@ -99,7 +99,7 @@ $(document).ready(function () {
 
     $("#rejectButton").click(function (e) {
         var id = $("#rejectId").val();
-        var stage = "f1";
+        var stage = $("#checkers").val();
         var status = "reject";
 
         $("#hodRejectForm").validate({
@@ -151,7 +151,7 @@ $(document).ready(function () {
 
     $("#amendButton").click(function (e) {
         var id = $("#amendId").val();
-        var stage = "f1";
+        var stage = $("#checkers").val();
         var status = "amend";
 
         $("#hodAmendForm").validate({
@@ -198,6 +198,48 @@ $(document).ready(function () {
                     });
                 });
             },
+        });
+    });
+
+    $("#generatePv").on("click", function () {
+        // alert("ss");
+        var id = $(this).data("id");
+        // var status = "recommend";
+        // var stage = $("#checkers").val();
+
+        requirejs(["sweetAlert2"], function (swal) {
+            swal({
+                title: "Are you sure?",
+                type: "error",
+                confirmButtonClass: "btn-danger",
+                confirmButtonText: "Yes!",
+                showCancelButton: true,
+                allowOutsideClick: false,
+                allowEscapeKey: false,
+            }).then(function () {
+                $.ajax({
+                    type: "POST",
+                    url: "/createPvNumber/" + id,
+                    async: false,
+                    processData: false,
+                    contentType: false,
+                }).done(function (data) {
+                    swal({
+                        title: data.title,
+                        text: data.msg,
+                        type: data.type,
+                        confirmButtonColor: "#3085d6",
+                        confirmButtonText: "OK",
+                        allowOutsideClick: false,
+                        allowEscapeKey: false,
+                    }).then(function () {
+                        if (data.type == "error") {
+                        } else {
+                            location.reload();
+                        }
+                    });
+                });
+            });
         });
     });
 });

@@ -18,7 +18,7 @@ $(document).ready(function () {
         var id = $(this).data("id");
         // var id = $("#rejectId").val();
         var status = "reject";
-        var stage = "f1";
+        var stage = $("#financeChecker").val();
 
         $("#supervisorRejectForm").validate({
             // Specify validation rules
@@ -70,7 +70,7 @@ $(document).ready(function () {
     $("#amendButton").click(function (e) {
         var id = $(this).data("id");
         var status = "amend";
-        var stage = "f1";
+        var stage = $("#financeChecker").val();
 
         $("#supervisorAmendForm").validate({
             // Specify validation rules
@@ -199,7 +199,7 @@ $(document).ready(function () {
     $("#checkTravel").click(function (e) {
         var id = $("#travelId").val();
         var status = "check";
-        var stage = "f1";
+        var stage = $("#financeChecker").val();
 
         requirejs(["sweetAlert2"], function (swal) {
             $.ajax({
@@ -238,7 +238,7 @@ $(document).ready(function () {
     $("#checkSubs").click(function (e) {
         var id = $("#subsId").val();
         var status = "check";
-        var stage = "f1";
+        var stage = $("#financeChecker").val();
 
         requirejs(["sweetAlert2"], function (swal) {
             $.ajax({
@@ -277,7 +277,7 @@ $(document).ready(function () {
     $("#checkPersonal").click(function (e) {
         var id = $("#personalId").val();
         var status = "check";
-        var stage = "f1";
+        var stage = $("#financeChecker").val();
 
         requirejs(["sweetAlert2"], function (swal) {
             $.ajax({
@@ -329,7 +329,7 @@ $(document).ready(function () {
         // alert("ss");
         var id = $(this).data("id");
         var status = "recommend";
-        var stage = "f1";
+        var stage = $("#financeChecker").val();
 
         requirejs(["sweetAlert2"], function (swal) {
             $.ajax({
