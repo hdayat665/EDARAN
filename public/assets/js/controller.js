@@ -295,7 +295,7 @@ if ($("#editCashAdvanceJs").length > 0) {
 if ($("#monthlyClaimJs").length > 0) {
     requirejs(["monthlyClaimJs"]);
 }
-// eleave
+
 if ($("#eleaveentitlementJs").length > 0) {
     requirejs(["eleaveentitlementJs"]);
 }
@@ -316,6 +316,8 @@ if ($("#leaveApprJs").length > 0) {
 }
 if ($("#leaveHodJs").length > 0) {
     requirejs(["leaveHodJs"]);
+}
+
 if ($("#eclaimDateJs").length > 0) {
     requirejs(["eclaimDateJs"]);
 }
