@@ -8,6 +8,16 @@
         margin: 0 auto;
         align-items: center;
     }
+
+    .fc-h-event .fc-event-title {
+    display: inline-block;
+    vertical-align: top;
+    left: 0;
+    right: 0;
+    max-width: 100%;
+    overflow: hidden;
+    white-space: pre-line;
+}
 </style>
 
 <head>

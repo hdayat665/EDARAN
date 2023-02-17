@@ -138,10 +138,11 @@ $(document).on("click", "#buttonViewEvent", function() {
 
         })
 
-
-
+        
+        $('#recurring').text(data.set_reccuring || '-');
         $('#priority').text(data.priority || '-');
-        $('#recurring').text(data.recurring || '-');
+
+        // $('#recurring').text(data.recurring || '-');
         $('#desc_event').text(data.desc || '-');
         // $('#nameparticipant').text(data.participant);
         $('#reminder').text(data.reminder || '-');
