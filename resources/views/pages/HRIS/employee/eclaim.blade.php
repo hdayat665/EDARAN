@@ -35,10 +35,10 @@
                                                         <div class="mb-3">
                                                             <label for="holiday_title" class="form-label">Recommender </label>
                                                             <select class="form-select" name="eclaimrecommender">
-                                                                <?php $employees = getEmployeeexcept(); ?>
+                                                                <?php $employees = getEmployeeexcept(); ?> 
                                                                 <option value="" label="PLEASE CHOOSE"></option>
                                                                 @foreach ($employees as $employee)
-                                                                    <option value="{{ $employee->id }}" label="{{ $employee->employeeName }}"
+                                                                    <option value="{{ $employee->user_id }}" label="{{ $employee->employeeName }}"
                                                                     {{ $employment->eclaimrecommender == $employee->id ? "selected='selected'" : '' }}>
                                                                     </option>
                                                                 @endforeach
@@ -54,7 +54,7 @@
                                                                 <?php $employees = getEmployeeexcept(); ?>
                                                                 <option value="" label="PLEASE CHOOSE"></option>
                                                                 @foreach ($employees as $employee)
-                                                                    <option value="{{ $employee->id }}" label="{{ $employee->employeeName }}"
+                                                                    <option value="{{ $employee->user_id }}" label="{{ $employee->employeeName }}"
                                                                     {{ $employment->eclaimapprover == $employee->id ? "selected='selected'" : '' }}>
                                                                     </option>
                                                                 @endforeach
