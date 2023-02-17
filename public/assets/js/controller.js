@@ -57,7 +57,27 @@ requirejs.config({
         editCashAdvanceJs: assets + "/js/editCashAdvanceJs",
         monthlyClaimJs: assets + "/js/monthlyClaimJs",
         eclaimDateJs: assets + "/js/eclaimDateJs",
+        supervisorDepartmentJs: assets + "/js/supervisorDepartmentJs",
+        supervisorDetailClaimJs: assets + "/js/supervisorDetailClaimJs",
+        hodClaimJs: assets + "/js/hodClaimJs",
+        hodClaimDetailJs: assets + "/js/hodClaimDetailJs",
+        fcheckerJs: assets + "/js/fcheckerJs",
+        fcheckerGncJs: assets + "/js/fcheckerGncJs",
+        financeCheckerMtcJs: assets + "/js/financeCheckerMtcJs",
+        financeRecJs: assets + "/js/financeRecJs",
+        financeRecMtcJs: assets + "/js/financeRecMtcJs",
+        frecGncJs: assets + "/js/frecGncJs",
+        fapprovalJs: assets + "/js/fapprovalJs",
+        fapprovalDetailJs: assets + "/js/fapprovalDetailJs",
+        adminCheckerJs: assets + "/js/adminCheckerJs",
+        adminCheckerMtcJs: assets + "/js/adminCheckerMtcJs",
+        adminApprovalJs: assets + "/js/adminApprovalJs",
+        adminApprovalMtcJs: assets + "/js/adminApprovalMtcJs",
+        adminRecJs: assets + "/js/adminRecJs",
+        adminRecDetailJs: assets + "/js/adminRecDetailJs",
 
+        /// timesheet period
+        sheetPeriodJs: assets + "/js/sheetPeriodJs",
         // 'main': 'assets/backend/js/main',
         sweetAlert2: assets + "/assets/sweetalert2/sweetalert2",
 
@@ -320,6 +340,81 @@ if ($("#leaveHodJs").length > 0) {
 
 if ($("#eclaimDateJs").length > 0) {
     requirejs(["eclaimDateJs"]);
+}
+
+if ($("#supervisorDepartmentJs").length > 0) {
+    requirejs(["supervisorDepartmentJs"]);
+}
+if ($("#sheetPeriodJs").length > 0) {
+    requirejs(["sheetPeriodJs"]);
+}
+
+if ($("#supervisorDetailClaimJs").length > 0) {
+    requirejs(["supervisorDetailClaimJs"]);
+}
+
+if ($("#hodClaimJs").length > 0) {
+    requirejs(["hodClaimJs"]);
+}
+
+if ($("#hodClaimDetailJs").length > 0) {
+    requirejs(["hodClaimDetailJs"]);
+}
+
+if ($("#fcheckerGncJs").length > 0) {
+    requirejs(["fcheckerGncJs"]);
+}
+
+if ($("#fcheckerJs").length > 0) {
+    requirejs(["fcheckerJs"]);
+}
+
+if ($("#financeCheckerMtcJs").length > 0) {
+    requirejs(["financeCheckerMtcJs"]);
+}
+
+if ($("#financeRecJs").length > 0) {
+    requirejs(["financeRecJs"]);
+}
+
+if ($("#financeRecMtcJs").length > 0) {
+    requirejs(["financeRecMtcJs"]);
+}
+
+if ($("#frecGncJs").length > 0) {
+    requirejs(["frecGncJs"]);
+}
+
+if ($("#fapprovalJs").length > 0) {
+    requirejs(["fapprovalJs"]);
+}
+
+if ($("#fapprovalDetailJs").length > 0) {
+    requirejs(["fapprovalDetailJs"]);
+}
+
+if ($("#adminCheckerJs").length > 0) {
+    requirejs(["adminCheckerJs"]);
+}
+
+if ($("#adminCheckerMtcJs").length > 0) {
+    requirejs(["adminCheckerMtcJs"]);
+}
+
+if ($("#adminApprovalJs").length > 0) {
+    requirejs(["adminApprovalJs"]);
+}
+
+if ($("#adminApprovalMtcJs").length > 0) {
+    requirejs(["adminApprovalMtcJs"]);
+}
+
+if ($("#adminRecJs").length > 0) {
+    requirejs(["adminRecJs"]);
+}
+
+if ($("#adminRecDetailJs").length > 0) {
+    requirejs(["adminRecDetailJs"]);
 }
 
 // Global function

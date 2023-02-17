@@ -295,7 +295,7 @@ $("document").ready(function () {
                             if (data.type == "error") {
                             } else {
                                 window.location.href =
-                                    "/monthClaimEditView/edit/" + data.id;
+                                    "/monthClaimEditView/edit/month/" + data.id;
                                 // location.reload();
                             }
                         });
@@ -338,7 +338,50 @@ $("document").ready(function () {
                             if (data.type == "error") {
                             } else {
                                 window.location.href =
-                                    "/monthClaimEditView/edit/" + data.id;
+                                    "/monthClaimEditView/edit/month/" + data.id;
+                                // location.reload();
+                            }
+                        });
+                    });
+                });
+            },
+        });
+    });
+
+    $("#caButton").click(function (e) {
+        $("#subsForm").validate({
+            // Specify validation rules
+            rules: {},
+
+            messages: {},
+            submitHandler: function (form) {
+                requirejs(["sweetAlert2"], function (swal) {
+                    var data = new FormData(
+                        document.getElementById("subsForm")
+                    );
+
+                    $.ajax({
+                        type: "POST",
+                        url: "/submitCaClaim",
+                        data: data,
+                        dataType: "json",
+                        async: false,
+                        processData: false,
+                        contentType: false,
+                    }).done(function (data) {
+                        swal({
+                            title: data.title,
+                            text: data.msg,
+                            type: data.type,
+                            confirmButtonColor: "#3085d6",
+                            confirmButtonText: "OK",
+                            allowOutsideClick: false,
+                            allowEscapeKey: false,
+                        }).then(function () {
+                            if (data.type == "error") {
+                            } else {
+                                window.location.href =
+                                    "/monthClaimEditView/edit/month/" + data.id;
                                 // location.reload();
                             }
                         });
@@ -381,13 +424,46 @@ $("document").ready(function () {
                             if (data.type == "error") {
                             } else {
                                 window.location.href =
-                                    "/monthClaimEditView/edit/" + data.id;
+                                    "/monthClaimEditView/edit/month/" + data.id;
                                 // location.reload();
                             }
                         });
                     });
                 });
             },
+        });
+    });
+
+    $("#editSubmitButton").click(function (e) {
+        requirejs(["sweetAlert2"], function (swal) {
+            id = $("#generalId").val();
+            // var data = new FormData(document.getElementById("subsForm"));
+
+            $.ajax({
+                type: "POST",
+                url: "/submitMonthlyClaim/" + id,
+                // data: data,
+                dataType: "json",
+                async: false,
+                processData: false,
+                contentType: false,
+            }).done(function (data) {
+                swal({
+                    title: data.title,
+                    text: data.msg,
+                    type: data.type,
+                    confirmButtonColor: "#3085d6",
+                    confirmButtonText: "OK",
+                    allowOutsideClick: false,
+                    allowEscapeKey: false,
+                }).then(function () {
+                    if (data.type == "error") {
+                    } else {
+                        window.location.href = "/myClaimView";
+                        // location.reload();
+                    }
+                });
+            });
         });
     });
 });

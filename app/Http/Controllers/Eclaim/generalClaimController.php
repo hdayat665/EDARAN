@@ -12,7 +12,7 @@ class generalClaimController extends Controller
     {
         $mcs = new myClaimService;
 
-        $data = $mcs->createGeneralClaim($r, 'amend');
+        $data = $mcs->createGeneralClaim($r, 'draft');
 
         return response()->json($data);
     }
@@ -21,7 +21,7 @@ class generalClaimController extends Controller
     {
         $mcs = new myClaimService;
 
-        $data = $mcs->createGeneralClaim($r, 'paid');
+        $data = $mcs->createGeneralClaim($r, 'active');
 
         return response()->json($data);
     }

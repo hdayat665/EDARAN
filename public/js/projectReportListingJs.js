@@ -2,6 +2,7 @@ $(document).ready(function() {
 
     $('#projectReportListing').DataTable({
         responsive: false,
+        scrollX: true,
         lengthMenu: [
             [5,10, 15, 20, -1],
             [5,10, 15, 20, 'All'],

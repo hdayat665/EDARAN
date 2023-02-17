@@ -71,6 +71,11 @@
                     @endif
                 </tbody>
             </table>
+            <div class="row p-2">
+                <div class="col align-self-start">
+                    <a href="/setting" class="btn btn-light" style="color: black;" type="submit"><i class="fa fa-arrow-left"></i> Back</a>
+                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -90,7 +95,7 @@
                     <div class="mb-3">
                         <label class="form-label">Department Name* </label>
                         <select class="form-select" name="departmentId" style="text-transform: uppercase;">
-                            <option value="" label="Select Department Name " selected="selected">Select Department Name </option>
+                            <option value="" label="PLEASE CHOOSE" selected="selected">PLEASE CHOOSE </option>
                             <?php $departments = getDepartment() ?>
                             @foreach ($departments as $department)
                                 <option value="{{$department->id}}" >{{$department->departmentName}}</option>
@@ -99,11 +104,11 @@
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Unit Code* </label>
-                        <input type="text" class="form-control" name="unitCode" maxlength="100" placeholder="Unit Code" >
+                        <input type="text" class="form-control" name="unitCode" maxlength="100" placeholder="UNIT CODE" >
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Unit Name* </label>
-                        <input type="text" class="form-control" name="unitName" maxlength="100" placeholder="Unit Name" >
+                        <input type="text" class="form-control" name="unitName" maxlength="100" placeholder="UNIT NAME" >
                     </div>
             </div>
             <div class="modal-footer">
@@ -130,7 +135,7 @@
                     <div class="mb-3">
                         <label class="form-label"> Department Name* </label>
                         <select class="form-select" name="departmentId" id="departmentId" style="text-transform: uppercase;">
-                            <option value="" label="Select Department Name " selected="selected">Select Department Name </option>
+                            <option value="" label="PLEASE CHOOSE " selected="selected">PLEASE CHOOSE</option>
                             <?php $departments = getDepartment() ?>
                             @foreach ($departments as $department)
                                 <option value="{{$department->id}}" >{{$department->departmentName}}</option>
@@ -140,12 +145,12 @@
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Unit Code* </label>
-                        <input type="text" class="form-control" id="unitCode" name="unitCode" maxlength="100" placeholder="" >
-                        <input type="hidden" class="form-control" id="idU" name="id" maxlength="100" placeholder="" >
+                        <input type="text" class="form-control" id="unitCode" name="unitCode" maxlength="100" placeholder="UNIT CODE" >
+                        <input type="hidden" class="form-control" id="idU" name="id" maxlength="100" placeholder="UNIT CODE" >
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Unit Name* </label>
-                        <input type="text" class="form-control" id="unitName" name="unitName" maxlength="100" placeholder="" >
+                        <input type="text" class="form-control" id="unitName" name="unitName" maxlength="100" placeholder="UNIT NAME" >
                     </div>
             </div>
             <div class="modal-footer">

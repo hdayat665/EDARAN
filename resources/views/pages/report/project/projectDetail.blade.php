@@ -148,10 +148,13 @@
                     @endif
                 </tbody>
             </table>
+            <div class="row p-2">
+                <div class="col align-self-start">
+                    <a href="/projectListing" class="btn btn-light" style="color: black;" type="submit"><i class="fa fa-arrow-left"></i> Back</a>
+                </div>
+            </div>
         </div>
-        <div >
-            <a href="/projectListing"><button type="button" class="btn btn-secondary m-3">Back</button></a>
-        </div>
+       
     </div>
 </div>
 @endsection

@@ -9,6 +9,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\OrganizationController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\Eclaim\ClaimApprovalController;
 use App\Http\Controllers\Eclaim\cashAdvanceController;
 use App\Http\Controllers\Eclaim\generalClaimController;
 use App\Http\Controllers\Eclaim\myClaimController;
@@ -83,6 +84,37 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('/dashboardHost', 'dashboardHost')->name('dashboardHost');
         });
 
+        Route::controller(ClaimApprovalController::class)->group(function () {
+            Route::get('/claimApprovalView/{type}', 'claimApprovalView');
+            Route::post('/updateStatusClaim/{id}/{status}/{stage}', 'updateStatusClaim');
+            Route::get('/supervisorDetailClaimView/{id}', 'supervisorDetailClaimView');
+            Route::get('/getTravelById/{id}', 'getTravelById');
+            Route::get('/getPersonalById/{id}', 'getPersonalById');
+            Route::get('/hodDetailClaimView/{id}', 'hodDetailClaimView');
+            Route::get('/getGncById/{id}', 'getGncById');
+            Route::get('/financeCheckerView', 'financeCheckerView');
+            Route::get('/financeCheckerDetail/{id}', 'financeCheckerDetail');
+            Route::post('/updateStatusGncClaim/{id}/{status}/{stage}', 'updateStatusGncClaim');
+            Route::post('/updateStatusPersonalClaim/{id}/{status}/{stage}', 'updateStatusPersonalClaim');
+            Route::post('/updateStatusTravelClaim/{id}/{status}/{stage}', 'updateStatusTravelClaim');
+            Route::get('/financeRecView', 'financeRecView');
+            Route::get('/financeRecDetailClaimView/{id}', 'financeRecDetailClaimView');
+            Route::get('/financeApprovalView', 'financeApprovalView');
+            Route::get('/financeAppDetailClaimView/{id}', 'financeAppDetailClaimView');
+            Route::get('/adminCheckerView', 'adminCheckerView');
+            Route::get('/adminCheckerDetail/{id}', 'adminCheckerDetail');
+            Route::get('/adminApprovalView', 'adminApprovalView');
+            Route::get('/adminApprovalDetail/{id}', 'adminApprovalDetail');
+            Route::get('/adminRecView', 'adminRecView');
+            Route::get('/adminRecDetailView/{id}', 'adminRecDetailView');
+            Route::get('/HodCashApprovalView', 'HodCashApprovalView');
+            Route::post('/createPvNumber/{id}', 'createPvNumber');
+
+
+
+            // Route::get('/dashboardHost', 'dashboardHost')->name('dashboardHost');
+        });
+
         Route::controller(ProfileController::class)->group(function () {
             Route::get('/getProfileData', 'profileData');
             Route::post('/updateProfilePicture', 'updateProfilePicture');
@@ -97,6 +129,7 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('/addSibling', 'addSibling');
             Route::post('/updateSibling', 'updateSibling');
             Route::post('/addChildren', 'addChildren');
+            Route::post('/saveEducation', 'saveEducation');
             Route::get('/getParent/{id}', 'getParent');
             Route::get('/getSibling/{id}', 'getSibling');
             Route::post('/updatePass', 'updatePass');
@@ -143,6 +176,10 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('/updateEmployee', 'updateEmployee');
             Route::get('/getEmployeeById/{id}', 'getEmployeeById');
             Route::get('/getEmployeeByDepartmentId/{id}', 'getEmployeeByDepartmentId');
+            // hierarchy
+            Route::post('/updateclaimhierarchy/{id}', 'updateclaimhierarchy');
+            Route::post('/updatecashhierarchy/{id}', 'updatecashhierarchy');
+            Route::post('/updateeleavehierarchy/{id}', 'updateeleavehierarchy');
         });
 
         Route::controller(SettingController::class)->group(function () {
@@ -249,6 +286,7 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('/claimCatById/{id}', 'claimCatById');
             Route::post('/createGeneralApprover', 'createGeneralApprover');
             Route::get('/getUserByRole/{id}', 'getUserByRole');
+            Route::get('/getUserByJobGrade/{id}', 'getUserByJobGrade');
             Route::post('/createDomainList', 'createDomainList');
             Route::get('/getClaimCategoryContent/{id}', 'getClaimCategoryContent');
             Route::get('/getClaimCategoryById/{id}', 'getClaimCategoryById');
@@ -268,7 +306,7 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('/updateLeaveholiday/{id}', 'updateLeaveholiday');
             Route::delete('/deleteLeaveholiday/{id}', 'deleteLeaveholiday');
             Route::get('/updateStatusleaveholiday/{id}/{status}', 'updateStatusleaveholiday');
-            
+
             // eleave Leave Types
             Route::get('/leavetypes', 'leavetypesView');
             Route::post('/createtypes', 'createtypes');
@@ -276,7 +314,9 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('/updateLeaveleavetypes/{id}', 'updateLeaveleavetypes');
             Route::delete('/deleteLeavetypes/{id}', 'deleteLeavetypes');
             Route::get('/updateStatusleavetypes/{id}/{status}', 'updateStatusleavetypes');
-            
+
+            // timesheet period
+            Route::get('/timesheetperiod', 'timesheetperiodView');
         });
 
         Route::controller(OrganizationController::class)->group(function () {
@@ -377,17 +417,24 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('/searchRealtimeEventTimesheet', 'searchRealtimeEventTimesheet');
             Route::post('/deleteEvent/{id}', 'deleteEvent');
             Route::post('/deleteLog/{id}', 'deleteLog');
+            Route::get('/getTimesheetamendById/{id}', 'getTimesheetamendById');
+            // Route::get('/addamendreason/{id}/{status}', 'addamendreason');
+            Route::post('/updatereason', 'updatereason');
+            Route::get('/getParticipantNameById/{id}', 'getParticipantNameById');
         });
+
 
         Route::controller(myClaimController::class)->group(function () {
             Route::get('/myClaimView', 'myClaimView');
             Route::get('/generalClaimView', 'generalClaimView');
             Route::get('/cashAdvanceView', 'cashAdvanceView');
-            Route::get('/newMonthlyClaimView/{month}', 'newMonthlyClaimView');
+            Route::get('/newMonthlyClaimView/{month}/{year}', 'newMonthlyClaimView');
             Route::post('/submitPersonalClaim', 'submitPersonalClaim');
             Route::post('/submitTravelClaim', 'submitTravelClaim');
             Route::post('/submitSubsClaim', 'submitSubsClaim');
-            Route::get('/monthClaimEditView/edit/{id}', 'monthClaimEditView');
+            Route::get('/monthClaimEditView/edit/month/{id}', 'monthClaimEditView');
+            Route::post('/submitMonthlyClaim/{id}', 'submitMonthlyClaim');
+            Route::post('/submitCaClaim', 'submitCaClaim');
         });
 
         Route::controller(generalClaimController::class)->group(function () {

@@ -41,7 +41,7 @@ class SettingService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success get roles';
+        $data['msg'] = 'Success Get Roles';
 
         return $data;
     }
@@ -59,7 +59,7 @@ class SettingService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success create role';
+        $data['msg'] = 'Success Create Role';
 
         return $data;
     }
@@ -79,7 +79,7 @@ class SettingService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success update role';
+        $data['msg'] = 'Success Update Role';
 
         return $data;
     }
@@ -99,7 +99,7 @@ class SettingService
             $data['status'] = config('app.response.success.status');
             $data['type'] = config('app.response.success.type');
             $data['title'] = config('app.response.success.title');
-            $data['msg'] = 'Success delete Role';
+            $data['msg'] = 'Success Delete Role';
         }
 
         return $data;
@@ -112,7 +112,7 @@ class SettingService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success get roles';
+        $data['msg'] = 'Success Get Roles';
 
         return $data;
     }
@@ -141,7 +141,7 @@ class SettingService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success create company';
+        $data['msg'] = 'Success Create Company';
 
         return $data;
     }
@@ -161,7 +161,7 @@ class SettingService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success update company';
+        $data['msg'] = 'Success Update Company';
 
         return $data;
     }
@@ -181,7 +181,7 @@ class SettingService
             $data['status'] = config('app.response.success.status');
             $data['type'] = config('app.response.success.type');
             $data['title'] = config('app.response.success.title');
-            $data['msg'] = 'Success delete company';
+            $data['msg'] = 'Success Delete Company';
         }
 
         return $data;
@@ -194,7 +194,7 @@ class SettingService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success get department';
+        $data['msg'] = 'Success Get Department';
 
         return $data;
     }
@@ -222,7 +222,7 @@ class SettingService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success create department';
+        $data['msg'] = 'Success Create Department';
 
         return $data;
     }
@@ -242,7 +242,7 @@ class SettingService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success update department';
+        $data['msg'] = 'Success Update Department';
 
         return $data;
     }
@@ -262,7 +262,7 @@ class SettingService
             $data['status'] = config('app.response.success.status');
             $data['type'] = config('app.response.success.type');
             $data['title'] = config('app.response.success.title');
-            $data['msg'] = 'Success delete department';
+            $data['msg'] = 'Success Delete Department';
         }
 
         return $data;
@@ -273,7 +273,7 @@ class SettingService
         $data = [];
         $data['data'] = Unit::with('company')->get();
 
-        $data['msg'] = 'Success get unit';
+        $data['msg'] = 'Success Get Unit';
 
         return $data;
     }
@@ -302,7 +302,7 @@ class SettingService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success create unit';
+        $data['msg'] = 'Success Create Unit';
 
         return $data;
     }
@@ -322,7 +322,7 @@ class SettingService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success update unit';
+        $data['msg'] = 'Success Update Unit';
 
         return $data;
     }
@@ -342,7 +342,7 @@ class SettingService
             $data['status'] = config('app.response.success.status');
             $data['type'] = config('app.response.success.type');
             $data['title'] = config('app.response.success.title');
-            $data['msg'] = 'Success delete unit';
+            $data['msg'] = 'Success Delete Unit';
         }
 
         return $data;
@@ -353,7 +353,7 @@ class SettingService
         $data = [];
         $data['data'] = Branch::with('unit')->get();
         $data['status'] = true;
-        $data['msg'] = 'Success get Branch';
+        $data['msg'] = 'Success Get Branch';
 
         return $data;
     }
@@ -382,7 +382,7 @@ class SettingService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success create Branch';
+        $data['msg'] = 'Success Create Branch';
 
         return $data;
     }
@@ -402,7 +402,7 @@ class SettingService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success update Branch';
+        $data['msg'] = 'Success Update Branch';
 
         return $data;
     }
@@ -422,7 +422,7 @@ class SettingService
             $data['status'] = config('app.response.success.status');
             $data['type'] = config('app.response.success.type');
             $data['title'] = config('app.response.success.title');
-            $data['msg'] = 'Success delete Branch';
+            $data['msg'] = 'Success Delete Branch';
         }
 
         return $data;
@@ -433,7 +433,7 @@ class SettingService
         $data = [];
         $data['data'] = JobGrade::where('tenant_id', Auth::user()->tenant_id)->get();
         $data['status'] = true;
-        $data['msg'] = 'Success get Job Grade';
+        $data['msg'] = 'Success Get Job Grade';
 
         return $data;
     }
@@ -462,7 +462,7 @@ class SettingService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success create Job Grade';
+        $data['msg'] = 'Success Create Job Grade';
 
         return $data;
     }
@@ -481,7 +481,7 @@ class SettingService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success update Job Grade';
+        $data['msg'] = 'Success Update Job Grade';
 
         return $data;
     }
@@ -501,7 +501,7 @@ class SettingService
             $data['status'] = config('app.response.success.status');
             $data['type'] = config('app.response.success.type');
             $data['title'] = config('app.response.success.title');
-            $data['msg'] = 'Success delete Job Grade';
+            $data['msg'] = 'Success Delete Job Grade';
         }
 
         return $data;
@@ -512,7 +512,7 @@ class SettingService
         $data = [];
         $data['data'] = Designation::where('tenant_id', Auth::user()->tenant_id)->get();
         $data['status'] = true;
-        $data['msg'] = 'Success get Designation';
+        $data['msg'] = 'Success Get Designation';
 
         return $data;
     }
@@ -540,7 +540,7 @@ class SettingService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success create Designation';
+        $data['msg'] = 'Success Create Designation';
 
         return $data;
     }
@@ -559,7 +559,7 @@ class SettingService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success update Designation';
+        $data['msg'] = 'Success Update Designation';
 
         return $data;
     }
@@ -579,7 +579,7 @@ class SettingService
             $data['status'] = config('app.response.success.status');
             $data['type'] = config('app.response.success.type');
             $data['title'] = config('app.response.success.title');
-            $data['msg'] = 'Success delete Designation';
+            $data['msg'] = 'Success Delete Designation';
         }
 
         return $data;
@@ -590,7 +590,7 @@ class SettingService
         $data = [];
         $data['data'] = SOP::where('tenant_id', Auth::user()->tenant_id)->get();
         $data['status'] = true;
-        $data['msg'] = 'Success get SOP';
+        $data['msg'] = 'Success Get SOP';
 
         return $data;
     }
@@ -628,7 +628,7 @@ class SettingService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success create SOP';
+        $data['msg'] = 'Success Create SOP';
 
         return $data;
     }
@@ -655,7 +655,7 @@ class SettingService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success update SOP';
+        $data['msg'] = 'Success Update SOP';
 
         return $data;
     }
@@ -675,7 +675,7 @@ class SettingService
             $data['status'] = config('app.response.success.status');
             $data['type'] = config('app.response.success.type');
             $data['title'] = config('app.response.success.title');
-            $data['msg'] = 'Success delete SOP';
+            $data['msg'] = 'Success Delete SOP';
         }
 
         return $data;
@@ -688,7 +688,7 @@ class SettingService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success get Policy';
+        $data['msg'] = 'Success Get Policy';
 
         return $data;
     }
@@ -714,7 +714,7 @@ class SettingService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success create Policy';
+        $data['msg'] = 'Success Create Policy';
 
         return $data;
     }
@@ -740,7 +740,7 @@ class SettingService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success update Policy';
+        $data['msg'] = 'Success Update Policy';
 
         return $data;
     }
@@ -760,7 +760,7 @@ class SettingService
             $data['status'] = config('app.response.success.status');
             $data['type'] = config('app.response.success.type');
             $data['title'] = config('app.response.success.title');
-            $data['msg'] = 'Success delete Policy';
+            $data['msg'] = 'Success Delete Policy';
         }
 
         return $data;
@@ -773,7 +773,7 @@ class SettingService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success get News';
+        $data['msg'] = 'Success Get News';
 
         return $data;
     }
@@ -810,7 +810,7 @@ class SettingService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success create News';
+        $data['msg'] = 'Success Create News';
 
         return $data;
     }
@@ -839,7 +839,7 @@ class SettingService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success update News';
+        $data['msg'] = 'Success Update News';
 
         return $data;
     }
@@ -859,7 +859,7 @@ class SettingService
             $data['status'] = config('app.response.success.status');
             $data['type'] = config('app.response.success.type');
             $data['title'] = config('app.response.success.title');
-            $data['msg'] = 'Success delete News';
+            $data['msg'] = 'Success Delete News';
         }
 
         return $data;
@@ -872,7 +872,7 @@ class SettingService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success get EmploymentType';
+        $data['msg'] = 'Success Get EmploymentType';
 
         return $data;
     }
@@ -901,7 +901,7 @@ class SettingService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success create Employment Type';
+        $data['msg'] = 'Success Create Employment Type';
 
         return $data;
     }
@@ -920,7 +920,7 @@ class SettingService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success update Employment Type';
+        $data['msg'] = 'Success Update Employment Type';
 
         return $data;
     }
@@ -940,7 +940,7 @@ class SettingService
             $data['status'] = config('app.response.success.status');
             $data['type'] = config('app.response.success.type');
             $data['title'] = config('app.response.success.title');
-            $data['msg'] = 'Success delete Employment Type';
+            $data['msg'] = 'Success Delete Employment Type';
         }
 
         return $data;
@@ -948,14 +948,14 @@ class SettingService
 
     public function roleView()
     {
-        $data['roles'] = Role::where('tenant_id', Auth::user()->tenant_id)->get();
+        $data['roles'] = Role::where('tenant_id', Auth::user()->tenant_id)->orderBy('id', 'desc')->get();
 
         return $data;
     }
 
     public function companyView()
     {
-        $data['companies'] = Company::where('tenant_id', Auth::user()->tenant_id)->get();
+        $data['companies'] = Company::where('tenant_id', Auth::user()->tenant_id)->orderBy('id', 'desc')->get();
 
         return $data;
     }
@@ -966,6 +966,7 @@ class SettingService
             ->leftJoin('unit as b', 'a.unitId', '=', 'b.id')
             ->select('a.*', 'b.unitName')
             ->where('a.tenant_id', Auth::user()->tenant_id)
+            ->orderBy('id', 'desc')
             ->get();
 
         return $data;
@@ -977,6 +978,7 @@ class SettingService
             ->leftJoin('department as b', 'a.departmentId', '=', 'b.id')
             ->select('a.*', 'b.departmentCode', 'b.departmentName')
             ->where('a.tenant_id', Auth::user()->tenant_id)
+            ->orderBy('id', 'desc')
             ->get();
 
         return $data;
@@ -988,6 +990,7 @@ class SettingService
             ->leftJoin('company as b', 'a.companyId', '=', 'b.id')
             ->select('a.*', 'b.companyName', 'b.companyCode')
             ->where('a.tenant_id', Auth::user()->tenant_id)
+            ->orderBy('id', 'desc')
             ->get();
 
         return $data;
@@ -995,36 +998,36 @@ class SettingService
 
     public function sopView()
     {
-        $data['SOPs'] = SOP::where('tenant_id', Auth::user()->tenant_id)->get();
-        $data['policys'] = Policy::where('tenant_id', Auth::user()->tenant_id)->get();
+        $data['SOPs'] = SOP::where('tenant_id', Auth::user()->tenant_id)->orderBy('id', 'desc')->get();
+        $data['policys'] = Policy::where('tenant_id', Auth::user()->tenant_id)->orderBy('id', 'desc')->get();
 
         return $data;
     }
 
     public function jobGradeView()
     {
-        $data['jobGrades'] = JobGrade::where('tenant_id', Auth::user()->tenant_id)->get();
+        $data['jobGrades'] = JobGrade::where('tenant_id', Auth::user()->tenant_id)->orderBy('id', 'desc')->get();
 
         return $data;
     }
 
     public function designationView()
     {
-        $data['designations'] = Designation::where('tenant_id', Auth::user()->tenant_id)->get();
+        $data['designations'] = Designation::where('tenant_id', Auth::user()->tenant_id)->orderBy('id', 'desc')->get();
 
         return $data;
     }
 
     public function newsView()
     {
-        $data['news'] = News::where('tenant_id', Auth::user()->tenant_id)->get();
+        $data['news'] = News::where('tenant_id', Auth::user()->tenant_id)->orderBy('id', 'desc')->get();
 
         return $data;
     }
 
     public function employmentTypeView()
     {
-        $data['employmentTypes'] = EmploymentType::where('tenant_id', Auth::user()->tenant_id)->get();
+        $data['employmentTypes'] = EmploymentType::where('tenant_id', Auth::user()->tenant_id)->orderBy('id', 'desc')->get();
 
         return $data;
     }
@@ -1155,7 +1158,7 @@ class SettingService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Successfully create type of logs';
+        $data['msg'] = 'Success Create Type of Logs';
 
         return $data;
     }
@@ -1198,7 +1201,7 @@ class SettingService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success update type of log';
+        $data['msg'] = 'Success Update Type of Log';
 
         return $data;
     }
@@ -1206,19 +1209,23 @@ class SettingService
     public function deleteTypeOfLogs($id)
     {
         $logs = TypeOfLogs::find($id);
+        // $naim = TypeOfLogs::find($id);
+        $naim = ActivityLogs::where('logs_id', $id);
+        
 
-        if (!$logs) {
+        if (!$logs && !$naim) {
             $data['status'] = config('app.response.error.status');
             $data['type'] = config('app.response.error.type');
             $data['title'] = config('app.response.error.title');
             $data['msg'] = 'logs not found';
         } else {
             $logs->delete();
+            $naim ->delete();
 
             $data['status'] = config('app.response.success.status');
             $data['type'] = config('app.response.success.type');
             $data['title'] = config('app.response.success.title');
-            $data['msg'] = 'Successfully delete type of log';
+            $data['msg'] = 'Success Delete Type of Log';
         }
 
         return $data;
@@ -1300,7 +1307,7 @@ class SettingService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success create Subsistance';
+        $data['msg'] = 'Success Create Subsistance';
 
         return $data;
     }
@@ -1320,7 +1327,7 @@ class SettingService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success update Subsistance';
+        $data['msg'] = 'Success Update Subsistance';
 
         return $data;
     }
@@ -1382,7 +1389,7 @@ class SettingService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success create Claim Category';
+        $data['msg'] = 'Success Create Claim Category';
 
         return $data;
     }
@@ -1405,7 +1412,7 @@ class SettingService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success update Claim Category';
+        $data['msg'] = 'Success Update Claim Category';
 
         return $data;
     }
@@ -1432,7 +1439,7 @@ class SettingService
             $data['status'] = config('app.response.success.status');
             $data['type'] = config('app.response.success.type');
             $data['title'] = config('app.response.success.title');
-            $data['msg'] = 'Success delete Category';
+            $data['msg'] = 'Success Delete Category';
         }
 
         return $data;
@@ -1513,7 +1520,7 @@ class SettingService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success create Entitle Group';
+        $data['msg'] = 'Success Create Entitle Group';
 
         return $data;
     }
@@ -1582,7 +1589,7 @@ class SettingService
         $result['status'] = config('app.response.success.status');
         $result['type'] = config('app.response.success.type');
         $result['title'] = config('app.response.success.title');
-        $result['msg'] = 'Success update Entity Group';
+        $result['msg'] = 'Success Update Entitle Group';
 
         return $result;
     }
@@ -1596,7 +1603,7 @@ class SettingService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success update Status';
+        $data['msg'] = 'Success Update Status Entitlement Group';
 
         return $data;
     }
@@ -1616,7 +1623,7 @@ class SettingService
             $data['status'] = config('app.response.success.status');
             $data['type'] = config('app.response.success.type');
             $data['title'] = config('app.response.success.title');
-            $data['msg'] = 'Success delete Entitle Category';
+            $data['msg'] = 'Success Delete Entitle Category';
         }
 
         return $data;
@@ -1669,7 +1676,7 @@ class SettingService
 
     public function leaveEntitlementView()
     {
-        $data['leave'] = leaveEntitlementModel::where('tenant_id', Auth::user()->tenant_id)->get();
+        $data['leave'] = leaveEntitlementModel::where('tenant_id', Auth::user()->tenant_id)->orderBy('id', 'desc')->get();
 
         return $data;
     }
@@ -1719,7 +1726,7 @@ class SettingService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success create company';
+        $data['msg'] = 'Success Create Leave Entitlement';
 
         return $data;
     }
@@ -1763,14 +1770,14 @@ class SettingService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success update company';
+        $data['msg'] = 'Success Update Leave Entitlement';
 
         return $data;
     }
 
     public function holidaylistView()
     {
-        $data['holiday'] = holidayModel::where('tenant_id', Auth::user()->tenant_id)->get();
+        $data['holiday'] = holidayModel::where('tenant_id', Auth::user()->tenant_id)->orderBy('id', 'desc')->get();
 
         return $data;
     }
@@ -1799,7 +1806,7 @@ class SettingService
 
         $input = [
             'holiday_title' => $data1,
-            'start_date' => $data2,
+            'start_date' => $data2, 
             'end_date' => $data3,
             'annual_date' => $data4,
             'tenant_id' => $data5,
@@ -1812,7 +1819,7 @@ class SettingService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success create company';
+        $data['msg'] = 'Success Create Holiday';
 
         return $data;
     }
@@ -1848,7 +1855,7 @@ class SettingService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success update company';
+        $data['msg'] = 'Success Update Leave Holiday';
 
         return $data;
     }
@@ -1868,7 +1875,7 @@ class SettingService
             $data['status'] = config('app.response.success.status');
             $data['type'] = config('app.response.success.type');
             $data['title'] = config('app.response.success.title');
-            $data['msg'] = 'Success delete Leave holiday';
+            $data['msg'] = 'Success Delete Leave holiday';
         }
 
         return $data;
@@ -1883,7 +1890,7 @@ class SettingService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success update Status';
+        $data['msg'] = 'Success Update Status Leave Holiday';
 
         return $data;
     }
@@ -1891,7 +1898,7 @@ class SettingService
 
     public function leavetypesView()
     {
-        $data['types'] = leavetypesModel::where('tenant_id', Auth::user()->tenant_id)->get();
+        $data['types'] = leavetypesModel::where('tenant_id', Auth::user()->tenant_id)->orderBy('id', 'desc')->get();
 
         return $data;
     }
@@ -1930,7 +1937,7 @@ class SettingService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success create company';
+        $data['msg'] = 'Success Create Leave Type';
 
         return $data;
     }
@@ -1965,7 +1972,7 @@ class SettingService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success update company';
+        $data['msg'] = 'Success Update Leave Types';
 
         return $data;
     }
@@ -1985,7 +1992,7 @@ class SettingService
             $data['status'] = config('app.response.success.status');
             $data['type'] = config('app.response.success.type');
             $data['title'] = config('app.response.success.title');
-            $data['msg'] = 'Success delete Leave holiday';
+            $data['msg'] = 'Success Delete Leave holiday';
         }
 
         return $data;
@@ -2000,7 +2007,7 @@ class SettingService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success update Status';
+        $data['msg'] = 'Success Update Status Leave Types';
 
         return $data;
     }
@@ -2012,14 +2019,24 @@ class SettingService
         $ecData = ClaimDateSetting::where('tenant_id', Auth::user()->tenant_id)->first();
         $input['tenant_id'] = Auth::user()->tenant_id;
         $input['user_id'] = Auth::user()->id;
+
+        $data = getResponseSuccessAjax();
+
         if ($ecData) {
 
             ClaimDateSetting::where('id', $ecData->id)->update($input);
-            $data['msg'] = 'Success update claim date setting';
+            $data['msg'] = 'Success Update Claim Date Setting';
         } else {
             ClaimDateSetting::create($input);
-            $data['msg'] = 'Success update claim date setting';
+            $data['msg'] = 'Success Update Claim Date Setting';
         }
+
+        return $data;
+    }
+
+    public function getDateClaim()
+    {
+        $data = ClaimDateSetting::where('tenant_id', Auth::user()->tenant_id)->first();
 
         return $data;
     }

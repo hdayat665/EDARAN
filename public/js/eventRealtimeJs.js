@@ -28,6 +28,13 @@ function getActivityNameById(id) {
     });
 }
 
+
+function getParticipantByidTimesheet(id) {
+    return $.ajax({
+        url: "/getParticipantNameById/" + id
+    });
+}
+
 $(document).on("click", "#buttonnViewParticipant", function() {
     var id = $(this).data('id');
     var eventData = getEvents(id);
@@ -42,16 +49,26 @@ $(document).on("click", "#buttonnViewParticipant", function() {
                 .remove()
                 .end();
             // console.log(dataAttendance);
-            for (let i = 0; i < dataAttendance.length; i++) {
-                const attendance = dataAttendance[i];
+            // for (let i = 0; i < dataAttendance.length; i++) {
+            //     const attendance = dataAttendance[i];
+            //     var opt = document.createElement("tr");
+            //     document.getElementById('tableRowParticipant').innerHTML +=
+            //         '<tr class="odd gradeX">' +
+            //         // '<td>' + i + '</td>' +
+            //         '<td>' + (i + 1) + '</td>'
+            //         '<td><span>' + attendance.employeeName + '</span></td>' +
+            //         '</tr>';
+            // }
+            for (let i = 1; i <= dataAttendance.length; i++) {
+                const attendance = dataAttendance[i - 1];
                 var opt = document.createElement("tr");
                 document.getElementById('tableRowParticipant').innerHTML +=
                     '<tr class="odd gradeX">' +
                     '<td>' + i + '</td>' +
                     '<td><span>' + attendance.employeeName + '</span></td>' +
                     '</tr>';
-
-            }
+              }
+              
         });
 
 
@@ -69,27 +86,39 @@ $(document).on("click", "#buttonViewEvent", function() {
 
         // var userId = $('#timesheetApprovalUserId').val();
 
+        // var attendanceEvent = getAttendance(data.id);
+        // attendanceEvent.done(function(dataAttendance) {
+        //     $('#tableRow')
+        //         .find('tr')
+        //         .remove()
+        //         .end();
+        //     // console.log(dataAttendance);
+        //     for (let i = 0; i < dataAttendance.length; i++) {
+        //         const attendance = dataAttendance[i];
+        //         // alert(attendance['employeeName'])
+        //         var opt = document.createElement("tr");
+        //         document.getElementById('tableRow').innerHTML +=
+        //             '<tr class="odd gradeX">' +
+        //             '<td>' + attendance.employeeName + '</td>' +
+        //             '<td><span class="badge bg-lime rounded-pill">' + attendance.status + '</span></td>' +
+        //             '</tr>';
+
+        //     }
+        // });
         var attendanceEvent = getAttendance(data.id);
         attendanceEvent.done(function(dataAttendance) {
-            $('#tableRow')
-                .find('tr')
-                .remove()
-                .end();
-            // console.log(dataAttendance);
-            for (let i = 0; i < dataAttendance.length; i++) {
-                const attendance = dataAttendance[i];
-                // alert(attendance['employeeName'])
-                var opt = document.createElement("tr");
-                document.getElementById('tableRow').innerHTML +=
-                    '<tr class="odd gradeX">' +
-                    '<td>' + attendance.employeeName + '</td>' +
-                    '<td><span class="badge bg-lime rounded-pill">' + attendance.status + '</span></td>' +
-                    '</tr>';
-
-            }
+        $('#statusparticipant').dataTable().fnClearTable(); // Clear existing data in the table
+        for (let i = 0; i < dataAttendance.length; i++) {
+            const attendance = dataAttendance[i];
+            $('#statusparticipant').dataTable().fnAddData([
+            attendance.employeeName,
+            '<span class="badge bg-lime rounded-pill">' + attendance.status + '</span>'
+            ]);
+        }
         });
 
-        $('#event_name').text(data.event_name);
+
+        $('#event_name').text(data.event_name || '-');
         $('#start_date').text(data.start_date);
         $('#end_date').text(data.end_date);
         $('#start_time_event').text(data.start_time);
@@ -99,20 +128,27 @@ $(document).on("click", "#buttonViewEvent", function() {
         $('#duration').text(data.duration);
         var location = getProjectLocationById(data.location);
         location.done(function(location) {
-            $('#location_event').text(location.location_name);
+            $('#location_event').text(location.location_name || '-');
 
         })
 
         var project = getProjectByidTimesheet(data.project_id);
         project.done(function(project) {
-            $('#project_event').text(project.project_name);
+            $('#project_event').text(project.project_name || '-');
 
         })
 
-        $('#priority').text(data.priority);
-        $('#recurring').text(data.recurring);
-        $('#desc_event').text(data.desc);
-        $('#reminder').text('None');
+        
+        $('#recurring').text(data.set_reccuring || '-');
+        $('#priority').text(data.priority || '-');
+
+        // $('#recurring').text(data.recurring || '-');
+        $('#desc_event').text(data.desc || '-');
+        // $('#nameparticipant').text(data.participant);
+        $('#reminder').text(data.reminder || '-');
+        $('#priority').text(data.priority || '-');
+        
+        
         $('#file_upload').html('<a class="form-label" target="_blank" href="/storage/' + data.file_upload + '">' + data.file_upload + '</a>');
         // $('#attend').text('attend');
 
@@ -123,11 +159,23 @@ $(document).on("click", "#buttonViewEvent", function() {
 $('#saveEventButton').click(function(e) {
     $("#addEventForm").validate({
         rules: {
-            // bank_guarantee_amount: "required",
+            event_name: "required",
+            start_date: "required",
+            end_date: "required",
+            start_time: "required",
+            end_time: "required",
+            
+            
         },
 
         messages: {
-            // department: "",
+            event_name: "Please insert event name",
+            start_date: "Please choose start date",
+            end_date: "Please choose end date",
+            start_time: "Please choose start time",
+            end_time: "Please choose end time",
+           
+           
         },
         submitHandler: function(form) {
             requirejs(['sweetAlert2'], function(swal) {
@@ -151,7 +199,7 @@ $('#saveEventButton').click(function(e) {
                         confirmButtonColor: '#3085d6',
                         confirmButtonText: 'OK',
                         allowOutsideClick: false,
-                        allowEscapeKey: false
+                        allowEscapeKey: false,
                     }).then(function() {
                         if (data.type == 'error') {
 
@@ -167,7 +215,6 @@ $('#saveEventButton').click(function(e) {
         },
     });
 });
-
 function getLocationByProjectId(id) {
     return $.ajax({
         url: "/getLocationByProjectId/" + id
@@ -246,23 +293,49 @@ $("#daterange").daterangepicker({
 $('#timesheetapproval').DataTable({
     "searching": false,
     "lengthChange": true,
-    lengthMenu: [5, 10],
+    lengthMenu: [
+        [5, 10, 25, 50, -1],
+        [5, 10, 25, 50, "All"],
+    ],
     responsive: false,
+    scrollX: true,
 
-    dom: '<"row"<"col-sm-11"B><"col-sm-1"l>>t<"row"<"col-sm-5"i><"col-sm-7"p>>',
+    dom: '<"row"<"col-sm-10"B><"col-sm-1"l>>t<"row"<"col-sm-5"i><"col-sm-7"p>>',
     buttons: [
-        { extend: 'excel', className: 'btn-blue' },
-        { extend: 'pdf', className: 'btn-blue' },
-        { extend: 'print', className: 'btn-blue' }
+        { extend: 'excel', className: 'btn-blue', exportOptions: {
+            columns: [1,2,3,4,5]
+        }},
+        { extend: 'pdf', className: 'btn-blue', exportOptions: {
+            columns: [1,2,3,4,5]
+        }},
+        { extend: 'print', className: 'btn-blue', exportOptions: {
+            columns: [1,2,3,4,5]
+        }},
     ],
 });
 
 $('#tableviewparticipant').DataTable({
     responsive: false,
     "searching": false,
-    lengthMenu: [5, 10],
+    lengthMenu: [
+        [5, 10, 25, 50, -1],
+        [5, 10, 25, 50, "All"],
+    ],
     "lengthChange": false,
 });
+
+$('#statusparticipant').DataTable({
+    responsive: false,
+    "searching": false,
+    lengthMenu: [
+        [5, 10, 25, 50, -1],
+        [5, 10, 25, 50, "All"],
+    ],
+    
+});
+
+
+
 
 
 
@@ -276,21 +349,23 @@ $().ready = function() {
 }();
 $("#starteventdate").datepicker({
     todayHighlight: true,
-    autoclose: true
+    autoclose: true,
+    format: "yyyy/mm/dd"
 });
 $("#endeventdate").datepicker({
     todayHighlight: true,
-    autoclose: true
+    autoclose: true,
+    format: "yyyy/mm/dd"
 });
 $('#projectlocsearch').picker({ search: true });
 $('#addneweventprojectlocsearch').picker({ search: true });
 $('#addneweventparticipant').picker({ search: true });
 $('#addneweventselectproject').picker({ search: true });
 
-$("#starteventtime").timepicker({
+$("#starteventtime").mdtimepicker({
     showMeridian: false,
 });
-$("#endeventtime").timepicker({
+$("#endeventtime").mdtimepicker({
     showMeridian: false,
 });
 
@@ -431,3 +506,31 @@ $("#ontheyearlycheck").click(function() {
         $("#recurringontheof").hide();
     }
 });
+
+$("#durationrt,#starteventdate,#endeventdate,#starteventtime,#endeventtime").focus(function () {
+
+    var startdt = new Date($("#starteventdate").val() + " " + $("#starteventtime").val());
+    
+    var enddt = new Date($("#endeventdate").val() + " " + $("#endeventtime").val());
+
+    var diff = enddt - startdt;
+    
+    var days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    diff -=  days * (1000 * 60 * 60 * 24);
+    
+    var hours = Math.floor(diff / (1000 * 60 * 60));
+    diff -= hours * (1000 * 60 * 60);
+    
+    var mins = Math.floor(diff / (1000 * 60));
+    diff -= mins * (1000 * 60);
+    
+    $("#durationrt").val( days + " days : " + hours + " hours : " + mins + " minutes ");
+    
+
+     });
+
+     $("#reset").on("click", function () {
+        $("#employeesearch").val($("#employeesearch").data("default-value"));
+        $("#eventsearch").val($("#eventsearch").data("default-value"));
+        
+    });

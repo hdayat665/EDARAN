@@ -1,24 +1,33 @@
-$(document).ready(function() {
+$(document).ready(function() { 
 
     $("#datepicker-joindate").datepicker({
         todayHighlight: true,
         autoclose: true,
+        format: 'yyyy/mm/dd',
     });
 
     $("#projectTable").DataTable({
         responsive: false,
         lengthMenu: [
-            [5,10, 15, 20, -1],
-            [5,10, 15, 20, 'All'],
+            [5, 10, 25, 50, -1],
+            [5, 10, 25, 50, "All"],
         ],
+        scrollX:true,
     });
+
+    $('#acc_manager2').picker({
+        search:true,
+    });
+
+    
 
     $("#data-table-default2").DataTable({
         responsive: false,
         lengthMenu: [
-            [5,10, 15, 20, -1],
-            [5,10, 15, 20, 'All'],
+            [5, 10, 25, 50, -1],
+            [5, 10, 25, 50, "All"],
         ],
+        scrollX:true,
     });
 
     $(document).on("click", "#addButton", function() {
@@ -71,7 +80,7 @@ $(document).ready(function() {
         id = $(this).data('id');
         requirejs(['sweetAlert2'], function(swal) {
             swal({
-                title: "Are you sure!",
+                title: "Are you sure to delete Customer?",
                 type: "error",
                 confirmButtonClass: "btn-danger",
                 confirmButtonText: "Yes!",
@@ -134,16 +143,16 @@ $(document).ready(function() {
             },
 
             messages: {
-                customer_id: "Please Select Customer Name",
-                project_code: "Please Enter Project Code",
-                project_name: "Please Enter Project Name",
-                contract_value: "Please Enter Contract Value",
-                financial_year: "Please Select Financial Year",
-                LOA_date: "Please Enter LOA Date",
-                contract_start_date: "Please Select Specific Date",
-                contract_end_date: "Please Select Specific Date",
-                acc_manager: "Please Enter Account Manager",
-                status: "Please Enter Status",
+                customer_id: "Please Choose Customer Name",
+                project_code: "Please Insert Project Code",
+                project_name: "Please Insert Project Name",
+                contract_value: "Please Insert Contract Value",
+                financial_year: "Please Choose Financial Year",
+                LOA_date: "Please Insert LOA Date",
+                contract_start_date: "Please Choose Contract Start Date",
+                contract_end_date: "Please Choose Contract End Date",
+                acc_manager: "Please Insert Account Manager",
+                status: "Please Insert Status",
             },
             submitHandler: function(form) {
                 requirejs(['sweetAlert2'], function(swal) {
@@ -378,27 +387,33 @@ $(document).ready(function() {
 
     $("#datepicker-loa").datepicker({
         todayHighlight: true,
-        autoclose: true
+        autoclose: true,
+        format: 'yyyy/mm/dd',
     });
     $("#datepicker-start").datepicker({
         todayHighlight: true,
-        autoclose: true
+        autoclose: true,
+        format: 'yyyy/mm/dd',
     });
     $("#datepicker-end").datepicker({
         todayHighlight: true,
-        autoclose: true
+        autoclose: true,
+        format: 'yyyy/mm/dd',
     });
     $("#datepicker-warstart").datepicker({
         todayHighlight: true,
-        autoclose: true
+        autoclose: true,
+        format: 'yyyy/mm/dd',
     });
     $("#datepicker-warend").datepicker({
         todayHighlight: true,
-        autoclose: true
+        autoclose: true,
+        format: 'yyyy/mm/dd',
     });
     $("#datepicker-bankexpiry").datepicker({
         todayHighlight: true,
-        autoclose: true
+        autoclose: true,
+        format: 'yyyy/mm/dd',
     });
 
 

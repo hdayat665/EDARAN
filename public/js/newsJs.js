@@ -7,7 +7,10 @@ $(document).ready(function() {
 
     $("#tablenews").DataTable({
         responsive: false,
-        lengthMenu: [5, 10],
+        lengthMenu: [
+            [5, 10, 25, 50, -1],
+            [5, 10, 25, 50, "All"],
+        ],
     });
 
     $(document).on("click", "#addButton", function() {
@@ -45,7 +48,7 @@ $(document).ready(function() {
         id = $(this).data('id');
         requirejs(['sweetAlert2'], function(swal) {
             swal({
-                title: "Are you sure!",
+                title: "Are you sure to delete News?",
                 type: "error",
                 confirmButtonClass: "btn-danger",
                 confirmButtonText: "Yes!",
@@ -105,7 +108,7 @@ $(document).ready(function() {
 
                 title: "Please Insert Title",
                 content: "Please Insert Content",
-                file: "Upload Supporting Document",
+                file: "Please Upload Attachment",
 
             },
             submitHandler: function(form) {
@@ -168,7 +171,7 @@ $('#updateButton').click(function(e) {
             title: "Please Insert Title",
             sourceURL: "Please Insert URL",
             content: "Please Insert Content",
-            file: "Upload Supporting Document",
+            file: "Please Upload Attachment",
 
         },
         submitHandler: function(form) {

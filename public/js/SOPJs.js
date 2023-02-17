@@ -15,12 +15,18 @@ $(document).ready(function() {
 
     $("#tablesop").DataTable({
         responsive: false,
-        lengthMenu: [5, 10],
+        lengthMenu: [
+            [5, 10, 25, 50, -1],
+            [5, 10, 25, 50, "All"],
+        ],
 
     });
     $("#tablepolicy").DataTable({
         responsive: false,
-        lengthMenu: [5, 10],
+        lengthMenu: [
+            [5, 10, 25, 50, -1],
+            [5, 10, 25, 50, "All"],
+        ],
 
     });
     $(document).on("click", "#addButton1", function() {
@@ -51,7 +57,7 @@ $(document).ready(function() {
         id = $(this).data('id');
         requirejs(['sweetAlert2'], function(swal) {
             swal({
-                title: "Are you sure!",
+                title: "Are you sure to delete Policy?",
                 type: "error",
                 confirmButtonClass: "btn-danger",
                 confirmButtonText: "Yes!",
@@ -112,10 +118,10 @@ $(document).ready(function() {
 
             messages: {
 
-                code: "Please Insert Policy's Code",
-                policy: "Please Insert Policy's Name",
-                desc: "Please Insert Policy's Description",
-                file: "Please Upload Policy's Document",
+                code: "Please Insert Policy",
+                policy: "Please Insert Document Title",
+                desc: "Please Insert Description",
+                file: "Please Upload Attachment",
 
             },
             submitHandler: function(form) {
@@ -174,10 +180,10 @@ $(document).on("click", "#updateButton1", function() {
 
         messages: {
 
-            code: "Please Insert Policy's Code",
-            policy: "Please Insert Policy's Name",
-            desc: "Please Insert Policy's Description",
-            file: "Please Upload Policy's Document",
+            code: "Please Insert Policy's",
+            policy: "Please Insert Document Title",
+            desc: "Please Insert Description",
+            file: "Please Upload Document",
 
         },
         submitHandler: function(form) {
@@ -250,7 +256,7 @@ $(document).on("click", "#deleteButton2", function() {
     id = $(this).data('id');
     requirejs(['sweetAlert2'], function(swal) {
         swal({
-            title: "Are you sure!",
+            title: "Are you sure to delete SOP?",
             type: "error",
             confirmButtonClass: "btn-danger",
             confirmButtonText: "Yes!",
@@ -310,8 +316,8 @@ $('#saveButton2').click(function(e) {
 
             SOPCode: "Please Insert SOP's Code",
             SOPName: "Please Insert SOP's Name",
-            desc: "Please Insert SOP's Description",
-            file: "Please Upload SOP's Document",
+            desc: "Please Insert Description",
+            file: "Please Upload Attachment",
 
         },
         submitHandler: function(form) {
@@ -372,8 +378,8 @@ $(document).on("click", "#updateButton2", function() {
 
             SOPCode: "Please Insert SOP's Code",
             SOPName: "Please Insert SOP's Name",
-            desc: "Please Insert SOP's Description",
-            file: "load SOP's Document",
+            desc: "Please Insert Description",
+            file: "Please Upload Attachment",
 
         },
         submitHandler: function(form) {

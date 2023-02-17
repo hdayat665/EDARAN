@@ -2,14 +2,17 @@ $(document).ready(function() {
 
     $("#data-table-viewassigned").DataTable({
         responsive: true,
-        lengthMenu: [5, 10, 15],
+        lengthMenu: [
+            [5, 10, 25, 50, -1],
+            [5, 10, 25, 50, "All"],
+        ],
     });
     $(document).on("click", "#deleteButton", function() {
         id = $(this).data('id');
         member_id = $(this).data('member-id');
         requirejs(['sweetAlert2'], function(swal) {
             swal({
-                title: "Are you sure!",
+                title: "Are you sure to delete Assign Location?",
                 type: "error",
                 confirmButtonClass: "btn-danger",
                 confirmButtonText: "Yes!",

@@ -1,5 +1,22 @@
+
 $(document).ready(function() {
+
+    // google map
+
     
+    $(".partCheck").click(function(){
+        if ($(this).prop("checked")) {
+            $('#exitdatediv').show();
+           
+           
+            
+        } else {
+            
+            $('#exitdatediv').hide();
+            
+        }
+      });
+
     $("input[type=text]").keyup(function() {
         $(this).val($(this).val().toUpperCase());
     });
@@ -13,62 +30,108 @@ $(document).ready(function() {
         search:true,
         
     });
-
+    
     $('#projectmember').picker({
         search:true,
     });
-
+    // $('#employee_id').picker({
+    //     search:true,
+    // });
+    $('#acc_manager2').picker({
+        search:true,
+    });
+    $('#project_manager2').picker({
+        search:true,
+    });
     $('#projectlocation').picker({
         search:true,
     }); 
  
+    $("#joined_date").datepicker({
+        todayHighlight: true,
+        autoclose: true,
+        format: 'yyyy/mm/dd',
+    });
     $("#datepicker-joineddate").datepicker({
         todayHighlight: true,
         autoclose: true,
+        format: 'yyyy/mm/dd',
     });
-
     $("#datepicker-exitdate").datepicker({
         todayHighlight: true,
         autoclose: true,
+        format: 'yyyy/mm/dd',
     });
-
+    $( "#nav_pro_loc" ).on( "click", function() {
+        setTimeout(function() {
+          var general = $('#projectLocationTable').DataTable();
+          general.columns.adjust().draw();
+        }, 200); // Increase the delay to 1000 milliseconds
+          });
     $("#projectLocationTable").DataTable({
         responsive: false,
         lengthMenu: [
-            [5,10, 15, 20, -1],
-            [5,10, 15, 20, 'All'],
+            [5, 10, 25, 50, -1],
+            [5, 10, 25, 50, "All"],
         ],
+        scrollX:true,
     });
+
+    $( "#nav_pre_pro" ).on( "click", function() {
+        setTimeout(function() {
+          var general = $('#data-table-prevproject').DataTable();
+          general.columns.adjust().draw();
+        }, 200); // Increase the delay to 1000 milliseconds
+      });
+
+$( "#current_mem" ).on( "click", function() {
+    setTimeout(function() {
+      var general = $('#projectMemberTable').DataTable();
+      general.columns.adjust().draw();
+    }, 200); // Increase the delay to 1000 milliseconds
+      });
+
+$( "#previous_mem" ).on( "click", function() {
+    setTimeout(function() {
+      var general = $('#projectMemberPrevTable').DataTable();
+      general.columns.adjust().draw();
+    }, 200); // Increase the delay to 1000 milliseconds
+      });
    
     $("#data-table-prevproject").DataTable({
         responsive: false,
         lengthMenu: [
-            [5,10, 15, 20, -1],
-            [5,10, 15, 20, 'All'],
+            [5, 10, 25, 50, -1],
+            [5, 10, 25, 50, "All"],
         ],
+        scrollX:true,
     });
     $("#projectMemberTable").DataTable({
         responsive: false,
         lengthMenu: [
-            [5,10, 15, 20, -1],
-            [5,10, 15, 20, 'All'],
+            [5, 10, 25, 50, -1],
+            [5, 10, 25, 50, "All"],
         ],
+        scrollX:true,
     });
 
     $("#projectMemberPrevTable").DataTable({
         responsive: false,
         lengthMenu: [
-            [5,10, 15, 20, -1],
-            [5,10, 15, 20, 'All'],
+            [5, 10, 25, 50, -1],
+            [5, 10, 25, 50, "All"],
         ],
+        scrollX:true,
     });
+    
 
     $("#data-table-default2").DataTable({
         responsive: false,
         lengthMenu: [
-            [5,10, 15, 20, -1],
-            [5,10, 15, 20, 'All'],
+            [5, 10, 25, 50, -1],
+            [5, 10, 25, 50, "All"],
         ],
+        scrollX:true,
     });
 
     var hash = location.hash.replace(/^#/, '');  // ^ means starting, meaning only match the first hash
@@ -88,26 +151,23 @@ $(document).ready(function() {
                 contract_value: "required",
                 financial_year: "required",
                 LOA_date: "required",
-                project_manager: "required",
                 contract_start_date: "required",
                 contract_end_date: "required",
                 acc_manager: "required",
-                project_manager: "required",
                 status: "required",
             },
 
             messages: {
-                customer_id: "Please Select Customer Name",
-                project_code: "Please Enter Project Code",
-                project_name: "Please Enter Project Name",
-                contract_value: "Please Enter Contract Value",
-                financial_year: "Please Select Financial Year",
-                project_manager: "Please Select Project Manager",
-                LOA_date: "Please Enter LOA Date",
-                contract_start_date: "Please Select Specific Date",
-                contract_end_date: "Please Select Specific Date",
-                acc_manager: "Please Enter Account Manager",
-                status: "Please Enter Status",
+                customer_id: "Please Choose Customer Name",
+                project_code: "Please Insert Project Code",
+                project_name: "Please Insert Project Name",
+                contract_value: "Please Insert Contract Value",
+                financial_year: "Please Choose Financial Year",
+                LOA_date: "Please Insert LOA Date",
+                contract_start_date: "Please Choose Contract Start Date",
+                contract_end_date: "Please Choose Contract End Date",
+                acc_manager: "Please Insert Account Manager",
+                status: "Please Insert Status",
             },
             submitHandler: function(form) {
                 requirejs(['sweetAlert2'], function(swal) {
@@ -168,16 +228,16 @@ $(document).ready(function() {
             },
 
             messages: {
-                location_name: "Insert Location Name",
-                address: "Enter Address",
+                location_name: "Please Insert Location Name",
+                address: "Please Insert Address 1",
                 postcode: {
-                    required: "Enter Valid Postcode",
-                    digits: "Enter Valid Postcode",
-                    rangelength: "Enter Valid Postcode",
+                    required: "Please Insert Postcode",
+                    digits: "Please Insert Valid Postcode",
+                    rangelength: "Please Insert Valid Postcode",
                 },
-                city: "Enter City",
-                state: "Choose State",
-                location_google: "Selecet Location",
+                city: "Please Insert City",
+                state: "Please Choose State",
+                location_google: "Please Choose Location",
             },
             submitHandler: function(form) {
                 requirejs(['sweetAlert2'], function(swal) {
@@ -258,7 +318,9 @@ $(document).ready(function() {
             $('#idPL').val(data.id);
             $('#city').val(data.city);
             $('#state').val(data.state);
-            $('#location_google').val(data.location_google);
+            $('#location_google_2').val(data.location_google);
+            $('#latitude_2').val(data.latitude);
+            $('#longitude_2').val(data.longitude);
         })
         $('#editProjectLocationModal').modal('show');
 
@@ -280,16 +342,16 @@ $(document).ready(function() {
             },
 
             messages: {
-                location_name: "Insert Location Name",
-                address: "Enter Address",
+                location_name: "Please Insert Location Name",
+                address: "Please Insert Address 1",
                 postcode: {
-                    required: "Enter Valid Postcode",
-                    digits: "Enter Valid Postcode",
-                    rangelength: "Enter Valid Postcode",
+                    required: "Please Insert Postcode",
+                    digits: "Please Insert Valid Postcode",
+                    rangelength: "Please Insert Valid Postcode",
                 },
-                city: "Enter City",
-                state: "Choose State",
-                location_google: "Selecet Location",
+                city: "Please Insert City",
+                state: "Please Choose State",
+                location_google: "Please Choose Location",
             },
             submitHandler: function(form) {
                 requirejs(['sweetAlert2'], function(swal) {
@@ -335,7 +397,7 @@ $(document).ready(function() {
         id = $(this).data('id');
         requirejs(['sweetAlert2'], function(swal) {
             swal({
-                title: "Are you sure!",
+                title: "Are you sure to delete Project Location?",
                 type: "error",
                 confirmButtonClass: "btn-danger",
                 confirmButtonText: "Yes!",
@@ -385,15 +447,19 @@ $(document).ready(function() {
             rules: {
                 joined_date: "required",
                 employee_id: "required",
+                designation: "required",
+                department:"required",
                 branch: "required",
                 unit:"required",
                 location_name: "required",
             },
 
             messages: {
-                joined_date: "Please Choose Date",
-                employee_id: "Please Choose Name",
+                joined_date: "Please Choose Joined Date",
+                employee_id: "Please Choose Project Member Name",
+                department:"Please Choose department",
                 branch: "Please Choose Branch",
+                designation: "Please Choose designation",
                 unit:"Please Choose Unit",
                 location_name:"Please Select Location",
             },
@@ -461,7 +527,7 @@ $(document).ready(function() {
     }
 
     $(document).on("click", "#addProjectMemberButton", function() {
-        $('#addProjectMemberModal').modal('show');
+        $('#addProjectMemberModal').modal('show'); 
 
     });
 
@@ -673,7 +739,7 @@ $(document).ready(function() {
         id = $(this).data('id');
         requirejs(['sweetAlert2'], function(swal) {
             swal({
-                title: "Are you sure!",
+                title: "Are you sure to delete Customer?",
                 type: "error",
                 confirmButtonClass: "btn-danger",
                 confirmButtonText: "Yes!",
@@ -875,27 +941,34 @@ $(document).ready(function() {
 
     $("#datepicker-loa").datepicker({
         todayHighlight: true,
-        autoclose: true
+        autoclose: true,
+        format: 'yyyy/mm/dd',
+        
     });
     $("#datepicker-start").datepicker({
         todayHighlight: true,
-        autoclose: true
+        autoclose: true,
+        format: 'yyyy/mm/dd',
     });
     $("#datepicker-end").datepicker({
         todayHighlight: true,
-        autoclose: true
+        autoclose: true,
+        format: 'yyyy/mm/dd',
     });
     $("#datepicker-warstart").datepicker({
         todayHighlight: true,
-        autoclose: true
+        autoclose: true,
+        format: 'yyyy/mm/dd',
     });
     $("#datepicker-warend").datepicker({
         todayHighlight: true,
-        autoclose: true
+        autoclose: true,
+        format: 'yyyy/mm/dd',
     });
     $("#datepicker-bankexpiry").datepicker({
         todayHighlight: true,
-        autoclose: true
+        autoclose: true,
+        format: 'yyyy/mm/dd',
     });
 
 

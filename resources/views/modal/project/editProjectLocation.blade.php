@@ -1,3 +1,6 @@
+<script>
+    initMap2();
+    </script>
 <div class="modal fade" id="editProjectLocationModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -13,9 +16,9 @@
                     <div class="row mb-15px">
 
                         <div class="col-md-12">
-                            <input type="text" class="form-control mb-5px" id="location_name" name="location_name"  />
+                            <input type="text" class="form-control mb-5px" id="location_name" name="location_name" placeholder="LOCATION NAME" />
                             <input type="hidden" name="customer_id" value="{{$project->customer_id ?? ''}}">
-                            <input type="hidden" name="tenant_id" value="{{$project->tenant_id ?? ''}}">
+                            <input type="hidden" id="tenant_id" name="tenant_id" value="{{$project->tenant_id ?? ''}}">
                             <input type="hidden" name="project_id" value="{{$project->id ?? ''}}">
                             <input type="hidden" id="idPL">
                         </div>
@@ -30,10 +33,10 @@
                     </div>
                     <div class="row mb-15px">
                         <div class="col-md-6">
-                            <input type="text" class="form-control mb-5px" name="address" id="address"  />
+                            <input type="text" class="form-control mb-5px" name="address" id="address" placeholder="ADDRESS 1" />
                         </div>
                         <div class="col-md-6">
-                            <input type="text" class="form-control mb-5px" name="address2" id="address1" />
+                            <input type="text" class="form-control mb-5px" name="address2" id="address1"placeholder="ADDRESS 2" />
                         </div>
                     </div>
                     <div class="row">
@@ -46,10 +49,10 @@
                     </div>
                     <div class="row mb-15px">
                         <div class="col-md-6">
-                            <input type="text" class="form-control mb-5px" name="postcode" id="postcode"  />
+                            <input type="text" class="form-control mb-5px" name="postcode" id="postcode" placeholder="00000" />
                         </div>
                         <div class="col-md-6">
-                            <input type="text" class="form-control mb-5px" name="city" id="city" />
+                            <input type="text" class="form-control mb-5px" name="city" id="city" placeholder="CITY"/>
                         </div>
                     </div>
                     <div class="row">
@@ -64,14 +67,14 @@
                         <div class="col-md-6">
                             <?php $states = state(); ?>
                             <select class="form-select" name="state" id="state">
-                                <option label="Select State ">Select State </option>
+                                <option label="PLEASE CHOOSE">Select State </option>
                                 @foreach ($states as $key => $state)
                                 <option value="{{$key}}">{{$state}}</option>
                                 @endforeach
                             </select>
                         </div>
                         <div class="col-md-6">
-                            <select class="form-select" disabled>
+                            <select class="form-select" >
                                 <option value="Malaysia" label="Malaysia"></option>
                             </select>
                         </div>
@@ -81,11 +84,20 @@
                     </div>
                     <div class="row mb-15px">
                         <div class="col-md-12">
-                            <input type="text" class="form-control mb-5px" name="location_google" id="location_google" />
+                            
+                                <div style="position: relative;">
+                                    <input id="location_google_2" class="form-control mb-5px" type="text" name="location_google_2" placeholder="Enter a location">
+                                    <div id="autocomplete-dropdown-2"></div>
+                                    
+                                </div>
+                            
                         </div>
                     </div>
                     <div class="row">
-                        <div class="mapouter center"><div class="gmap_canvas"><iframe width="500" height="400" id="gmap_canvas" src="https://maps.google.com/maps?q=kuala%20lumpur&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe><a href="https://fmovies-online.net"></a><br><style>.mapouter{position:relative;text-align:right;height:500px;width:600px;}</style><a href="https://www.embedgooglemap.net">use google maps on website</a><style>.gmap_canvas {overflow:hidden;background:none!important;height:500px;width:600px;}</style></div></div>
+                        <div id="map_2"></div>    
+                        <input type="hidden" class="form-control mb-5px" name="longitude_2" id="longitude_2" >
+                        <input type="hidden" class="form-control mb-5px" name="latitude_2" id="latitude_2">
+
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -96,3 +108,7 @@
         </div>
     </div>
 </div>
+<script>
+console.log(document.getElementById("tenant_id").value);
+
+</script>

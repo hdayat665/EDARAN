@@ -36,7 +36,7 @@ $(document).ready(function () {
             },
 
             messages: {
-                reason: "",
+                reason: "Please Insert Reason",
             },
             submitHandler: function (form) {
                 requirejs(["sweetAlert2"], function (swal) {
@@ -150,10 +150,10 @@ $(document).ready(function () {
         var vehicleData = getRejectProject(id);
 
         vehicleData.done(function (data) {
-            // console.log(data);
+             console.log(data.reason);
             $("#reason").val(data.reason);
         });
-        $("#reasonProjectRejected").modal("show");
+        $("#reasonProjectRejected").modal("show"); 
     });
 
     $(document).on("click", "#deleteRequestProjectButton", function () {

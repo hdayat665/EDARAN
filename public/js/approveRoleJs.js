@@ -43,6 +43,42 @@ $(document).ready(function () {
         });
     });
 
+    $(document).on("change", "#recommenderGeneral", function () {
+        roleId = $(this).val();
+        $("#approverGeneralShow")
+            .find("option")
+            .remove()
+            .end()
+            .append(
+                '<option label="Please Choose" selected="selected"> </option>'
+            )
+            .val("");
+
+        function getUserByJobGrade(roleId) {
+            return $.ajax({
+                url: "/getUserByJobGrade/" + roleId,
+            });
+        }
+
+        $("#approverGeneralShow").find("option").end();
+
+        var user = getUserByJobGrade(roleId);
+
+        user.done(function (datas) {
+            // console.log(datas);
+            for (let i = 0; i < datas.length; i++) {
+                const userApprover = datas[i];
+                var opt = document.createElement("option");
+                document.getElementById("approverGeneralShow").innerHTML +=
+                    '<option value="' +
+                    userApprover["id"] +
+                    '">' +
+                    userApprover["user_profile"]["fullName"] +
+                    "</option>";
+            }
+        });
+    });
+
     $(document).on("change", "#roleId", function () {
         roleId = $(this).val();
         $("#checker1")
@@ -54,48 +90,48 @@ $(document).ready(function () {
             )
             .val("");
 
-        function getUserByRole(roleId) {
+        function getUserByJobGrade(roleId) {
             return $.ajax({
-                url: "/getUserByRole/" + roleId,
+                url: "/getUserByJobGrade/" + roleId,
             });
         }
 
         $("#checker1").find("option").end();
 
-        var user = getUserByRole(roleId);
-
+        var user = getUserByJobGrade(roleId);
+        console.log(user);
         user.done(function (data) {
-            // console.log(data.user_profile.id);
             for (let i = 0; i < data.length; i++) {
                 const user = data[i];
+                console.log(data[i]);
                 var opt = document.createElement("option");
                 document.getElementById("checker1").innerHTML +=
                     '<option value="' +
-                    user["id"] +
+                    user["user_id"] +
                     '">' +
                     user["user_profile"]["fullName"] +
                     "</option>";
                 document.getElementById("checker2").innerHTML +=
                     '<option value="' +
-                    user["id"] +
+                    user["user_id"] +
                     '">' +
                     user["user_profile"]["fullName"] +
                     "</option>";
                 document.getElementById("checker3").innerHTML +=
                     '<option value="' +
-                    user["id"] +
+                    user["user_id"] +
                     '">' +
                     user["user_profile"]["fullName"] +
                     "</option>";
                 document.getElementById("recommender").innerHTML +=
                     '<option value="' +
-                    user["id"] +
+                    user["user_id"] +
                     '">' +
                     user["user_profile"]["fullName"] +
                     "</option>";
                 document.getElementById("approver").innerHTML +=
                     '<option value="' +
-                    user["id"] +
+                    user["user_id"] +
                     '">' +
                     user["user_profile"]["fullName"] +
                     "</option>";
@@ -123,9 +159,9 @@ $(document).ready(function () {
                 )
                 .val("");
 
-            function getUserByRole(roleId) {
+            function getUserByJobGrade(roleId) {
                 return $.ajax({
-                    url: "/getUserByRole/" + roleId,
+                    url: "/getUserByJobGrade/" + roleId,
                 });
             }
             $("#" + inputs[i] + "")
@@ -133,7 +169,7 @@ $(document).ready(function () {
                 .end();
         }
 
-        var user = getUserByRole(roleId);
+        var user = getUserByJobGrade(roleId);
 
         user.done(function (data) {
             // console.log(data.user_profile.id);
@@ -143,31 +179,31 @@ $(document).ready(function () {
                 var opt = document.createElement("option");
                 document.getElementById("checker1C").innerHTML +=
                     '<option value="' +
-                    user["id"] +
+                    user["user_id"] +
                     '">' +
                     user["user_profile"]["fullName"] +
                     "</option>";
                 document.getElementById("checker2C").innerHTML +=
                     '<option value="' +
-                    user["id"] +
+                    user["user_id"] +
                     '">' +
                     user["user_profile"]["fullName"] +
                     "</option>";
                 document.getElementById("checker3C").innerHTML +=
                     '<option value="' +
-                    user["id"] +
+                    user["user_id"] +
                     '">' +
                     user["user_profile"]["fullName"] +
                     "</option>";
                 document.getElementById("recommenderC").innerHTML +=
                     '<option value="' +
-                    user["id"] +
+                    user["user_id"] +
                     '">' +
                     user["user_profile"]["fullName"] +
                     "</option>";
                 document.getElementById("approverC").innerHTML +=
                     '<option value="' +
-                    user["id"] +
+                    user["user_id"] +
                     '">' +
                     user["user_profile"]["fullName"] +
                     "</option>";
@@ -195,9 +231,9 @@ $(document).ready(function () {
                 )
                 .val("");
 
-            function getUserByRole(roleId) {
+            function getUserByJobGrade(roleId) {
                 return $.ajax({
-                    url: "/getUserByRole/" + roleId,
+                    url: "/getUserByJobGrade/" + roleId,
                 });
             }
             $("#" + inputs[i] + "")
@@ -205,7 +241,7 @@ $(document).ready(function () {
                 .end();
         }
 
-        var user = getUserByRole(roleId);
+        var user = getUserByJobGrade(roleId);
 
         user.done(function (data) {
             // console.log(data.user_profile.id);
@@ -215,31 +251,31 @@ $(document).ready(function () {
                 var opt = document.createElement("option");
                 document.getElementById("checker1F").innerHTML +=
                     '<option value="' +
-                    user["id"] +
+                    user["user_id"] +
                     '">' +
                     user["user_profile"]["fullName"] +
                     "</option>";
                 document.getElementById("checker2F").innerHTML +=
                     '<option value="' +
-                    user["id"] +
+                    user["user_id"] +
                     '">' +
                     user["user_profile"]["fullName"] +
                     "</option>";
                 document.getElementById("checker3F").innerHTML +=
                     '<option value="' +
-                    user["id"] +
+                    user["user_id"] +
                     '">' +
                     user["user_profile"]["fullName"] +
                     "</option>";
                 document.getElementById("recommenderF").innerHTML +=
                     '<option value="' +
-                    user["id"] +
+                    user["user_id"] +
                     '">' +
                     user["user_profile"]["fullName"] +
                     "</option>";
                 document.getElementById("approverF").innerHTML +=
                     '<option value="' +
-                    user["id"] +
+                    user["user_id"] +
                     '">' +
                     user["user_profile"]["fullName"] +
                     "</option>";
@@ -417,7 +453,7 @@ $(document).ready(function () {
         id = $(this).data("id");
         requirejs(["sweetAlert2"], function (swal) {
             swal({
-                title: "Are you sure!",
+                title: "Are you sure to delete Role?",
                 type: "error",
                 confirmButtonClass: "btn-danger",
                 confirmButtonText: "Yes!",

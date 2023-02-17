@@ -11,6 +11,7 @@ use App\Models\UserCompanion;
 use App\Models\UserEmergency;
 use App\Models\UserParent;
 use App\Models\UserProfile;
+use App\Models\UserQualification;
 use App\Models\Users;
 use App\Models\UsersDetails;
 use App\Models\UserSibling;
@@ -51,7 +52,7 @@ class ProfileService
             UsersDetails::where('user_id', $user_id)->update($updateData);
 
             $data['status'] = 404;
-            $data['msg'] = 'Success update Profile Picture';
+            $data['msg'] = 'Success Update Profile Picture';
         }
 
         return $data;
@@ -112,11 +113,25 @@ class ProfileService
             $data['status'] = config('app.response.success.status');
             $data['title'] = config('app.response.success.title');
             $data['type'] = config('app.response.success.type');
-            $data['msg'] = 'Success update Profile';
+            $data['msg'] = 'Success Update Profile';
         }
 
         return $data;
 
+    }
+
+    public function saveEducation($r)
+    {
+        $input = $r->input();
+        $input['user_id'] = Auth::user()->id;
+        UserQualification::create($input);
+
+        $data['status'] = config('app.response.success.status');
+        $data['type'] = config('app.response.success.type');
+        $data['title'] = config('app.response.success.title');
+        $data['msg'] = 'Success add education';
+
+        return $data;
     }
 
     public function updateAddress($input)
@@ -160,7 +175,7 @@ class ProfileService
             $data['status'] = config('app.response.success.status');
             $data['type'] = config('app.response.success.type');
             $data['title'] = config('app.response.success.title');
-            $data['msg'] = 'Success update Address';
+            $data['msg'] = 'Success Update Address';
 
         }
 
@@ -192,7 +207,7 @@ class ProfileService
             $data['status'] = config('app.response.success.status');
             $data['type'] = config('app.response.success.type');
             $data['title'] = config('app.response.success.title');
-            $data['msg'] = 'Success update Emergency Contact';
+            $data['msg'] = 'Success Update Emergency Contact';
 
         }
 
@@ -275,7 +290,7 @@ class ProfileService
             $data['status'] = config('app.response.success.status');
             $data['type'] = config('app.response.success.type');
             $data['title'] = config('app.response.success.title');
-            $data['msg'] = 'Success update Companion';
+            $data['msg'] = 'Success Update Companion';
         }
 
         return $data;
@@ -365,7 +380,7 @@ class ProfileService
             $data['status'] = config('app.response.success.status');
             $data['type'] = config('app.response.success.type');
             $data['title'] = config('app.response.success.title');
-            $data['msg'] = 'Success update Children';
+            $data['msg'] = 'Success Update Children';
         }
 
         return $data;
@@ -377,7 +392,7 @@ class ProfileService
         $user_id = Auth::user()->id;
 
         $data['data'] = UserSibling::where('user_id', $user_id)->get();
-        $data['msg'] = 'Success get sibling data';
+        $data['msg'] = 'Success Get Sibling Data';
 
         return $data;
     }
@@ -386,7 +401,7 @@ class ProfileService
     {
         $user_id = Auth::user()->id;
         $data['data'] = UserParent::where('user_id', $user_id)->get();
-        $data['msg'] = 'Success get parent data';
+        $data['msg'] = 'Success Get Parent Data';
 
         return $data;
     }
@@ -457,7 +472,7 @@ class ProfileService
             $data['status'] = config('app.response.success.status');
             $data['type'] = config('app.response.success.type');
             $data['title'] = config('app.response.success.title');
-            $data['msg'] = 'Success update Parent';
+            $data['msg'] = 'Success Update Parent';
         }
 
         return $data;
@@ -481,7 +496,7 @@ class ProfileService
             Employee::where('user_id', $user_id)->update($input);
 
             $data['status'] = 200;
-            $data['msg'] = 'Success update Employee';
+            $data['msg'] = 'Success Update Employee';
         }
 
         return $data;
@@ -509,7 +524,7 @@ class ProfileService
             $data['status'] = config('app.response.success.status');
             $data['type'] = config('app.response.success.type');
             $data['title'] = config('app.response.success.title');
-            $data['msg'] = 'Success update Vehicle';
+            $data['msg'] = 'Success Update Vehicle';
         }
 
         return $data;
@@ -546,7 +561,7 @@ class ProfileService
             $data['status'] = config('app.response.success.status');
             $data['type'] = config('app.response.success.type');
             $data['title'] = config('app.response.success.title');
-            $data['msg'] = 'Success delete Vehicle';
+            $data['msg'] = 'Success Delete Vehicle';
         }
 
         return $data;
@@ -557,7 +572,7 @@ class ProfileService
         $user_id = Auth::user()->id;
 
         $data['data'] = JobHistory::where('user_id', $user_id)->get();
-        $data['msg'] = 'Success get parent data';
+        $data['msg'] = 'Success Get Parent Data';
 
         return $data;
     }
@@ -569,7 +584,7 @@ class ProfileService
         JobHistory::create($input);
 
         $data['status'] = 200;
-        $data['msg'] = 'Success add job history';
+        $data['msg'] = 'Success add Job History';
 
         return $data;
     }
@@ -579,7 +594,7 @@ class ProfileService
         $user_id = Auth::user()->id;
 
         $data['data'] = Vehicle::where('user_id', $user_id)->get();
-        $data['msg'] = 'Success get vehicle data';
+        $data['msg'] = 'Success Get Vehicle Data';
 
         return $data;
     }
@@ -589,6 +604,7 @@ class ProfileService
         $data['user_id'] = Auth::user()->id;
 
         $data['profile'] = UserProfile::where('user_id', $data['user_id'])->first();
+        $data['qualification'] = UserQualification::where('user_id', $data['user_id'])->get();
         $data['address'] = UserAddress::where('user_id', $data['user_id'])->first();
         $data['emergency'] = UserEmergency::where('user_id', $data['user_id'])->first();
         $data['companions'] = UserCompanion::where('user_id', $data['user_id'])->get();
@@ -654,7 +670,7 @@ class ProfileService
     {
         $data['data'] = UserChildren::where('id', $id)->first();
         // pr(Storage::path($data['data']->supportDoc));
-        $data['msg'] = 'Success get children data';
+        $data['msg'] = 'Success Get Children Data';
 
         return $data;
     }
@@ -662,7 +678,7 @@ class ProfileService
     public function getParentById($id = '')
     {
         $data['data'] = UserParent::where('id', $id)->first();
-        $data['msg'] = 'Success get Parent data';
+        $data['msg'] = 'Success Get Parent Data';
 
         return $data;
     }
@@ -670,7 +686,7 @@ class ProfileService
     public function getSiblingById($id = '')
     {
         $data['data'] = UserSibling::where('id', $id)->first();
-        $data['msg'] = 'Success get sibling data';
+        $data['msg'] = 'Success Get Sibling Data';
 
         return $data;
     }
@@ -794,7 +810,7 @@ class ProfileService
             $data['status'] = config('app.response.success.status');
             $data['type'] = config('app.response.success.type');
             $data['title'] = config('app.response.success.title');
-            $data['msg'] = 'Success update Sibling';
+            $data['msg'] = 'Success Update Sibling';
         }
 
         return $data;
@@ -804,7 +820,7 @@ class ProfileService
     public function getVehicleById($id = '')
     {
         $data['data'] = Vehicle::where('id', $id)->first();
-        $data['msg'] = 'Success get Vehicle data';
+        $data['msg'] = 'Success Get Vehicle Data';
 
         return $data;
     }

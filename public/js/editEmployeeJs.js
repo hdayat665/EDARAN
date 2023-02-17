@@ -633,11 +633,29 @@ $(document).ready(function () {
                     digits: "Please Insert Correct Identification Number Without ' - ' or Space",
                 },
             },
-            submitHandler: function (form) {
-                requirejs(["sweetAlert2"], function (swal) {
-                    var data = new FormData(
-                        document.getElementById("formProfile")
-                    );
+    submitHandler: function(form) {
+
+        // requirejs(['sweetAlert2'], function(swal,swal1) {
+
+            Swal.fire({
+                allowOutsideClick: false,
+                showCancelButton: true,
+                cancelButtonColor: '#d33',
+                confirmButtonColor: '#3085d6',
+                title: 'Declaration.',
+                icon: 'info',
+                html: '<h5> <input type="checkbox" class="form-check-input" name="t11" id="t1"  />  I hereby certify the above information as provided by me is true and correct. I also undertake to keep the Company informed of any changes covering such information of my personal details as and when it occurs. If any information given above is subsequently found to be incorrect or incomplete or untrue, the Company may terminate my employment without notice or compensation.</h5><br>' +
+                        '<h5> <input type="checkbox" class="form-check-input" name="t22" id="t2"  />  I hereby state that I may be liable to summary dismissal if any of the particulars has been misrepresented or omitted. I acknowledge that the Company has the right to recover any salaries and monetary benefits paid out to me during the course of my employment in the event of any misrepresentation or omission on my personal data.</h5><br>' +
+                        '<h5> <input type="checkbox" class="form-check-input" name="t33" id="t3"  />  I hereby give consent for Company to process and keep my personal data for employment purposes.</h5>',
+                confirmButtonText: 'Yes',
+                
+                preConfirm: () => {
+                    if (!$('#t1').prop('checked') || !$('#t2').prop('checked') || !$('#t3').prop('checked'))  {
+                        Swal.showValidationMessage('<i class="fa fa-info-circle"></i> Please check all term to proceed')
+                    
+                }
+                else if ($('#t1').prop('checked') || $('#t2').prop('checked') || $('#t3').prop('checked')){
+                    var data = new FormData(document.getElementById("formProfile"));
 
                     $.ajax({
                         type: "POST",
@@ -647,24 +665,40 @@ $(document).ready(function () {
                         async: false,
                         processData: false,
                         contentType: false,
-                    }).done(function (data) {
+                    }).done(function(data) {
                         console.log(data);
-                        swal({
+                        Swal.fire({
                             title: data.title,
+                            icon: 'success',
                             text: data.msg,
                             type: data.type,
-                            confirmButtonColor: "#3085d6",
-                            confirmButtonText: "OK",
-                        }).then(function () {
-                            if (data.type == "error") {
+                                confirmButtonColor: '#3085d6',
+                            confirmButtonText: 'OK',
+                            allowOutsideClick: false,
+                            allowEscapeKey: false,
+                        }).then(function() {
+                            if (data.type == 'error') {
+        
                             } else {
                                 location.reload();
                                 // window.location.href = "/myProfile";
+        
                             }
+        
+        
                         });
                     });
-                });
+                }
+                else {
+                    Swal.showValidationMessage('<i class="fa fa-info-circle"></i> error')
+                }
             },
+                }).then((result) => {
+            
+                })
+
+                // });
+            }
         });
     });
 
@@ -755,9 +789,11 @@ $(document).ready(function () {
             rules: {
                 firstName: "required",
                 lastName: "required",
+                relationship: "required",
                 contactNo: {
                     required: true,
                     digits: true,
+                    rangelength: [10, 11]
                 },
                 relationship: "required",
                 address1: "required",
@@ -773,25 +809,45 @@ $(document).ready(function () {
             messages: {
                 firstName: "Please Insert First Name",
                 lastName: "Please Insert Last Name",
+                relationship: "Please Choose Relationship",
                 contactNo: {
                     required: "Please Insert Contact Number",
-                    digits: "Please Enter Correct Contact Number",
+                    digits: "Please Insert Valid Contact Number",
+                    rangelength: "Please Insert Valid Contact Number"
                 },
                 relationship: "Please Insert Relationship",
                 address1: "Please Insert Address",
                 postcode: {
                     required: "Please Insert Your Postcode",
-                    digits: "Please Enter Valid Postcode",
-                    rangelength: "Please Enter Valid Postcode",
+                    digits: "Please Insert Valid Postcode",
+                    rangelength: "Please Insert Valid Postcode",
                 },
                 city: "Please Insert City",
                 state: "Please Choose State",
             },
-            submitHandler: function (form) {
-                requirejs(["sweetAlert2"], function (swal) {
-                    var data = new FormData(
-                        document.getElementById("formEmergency")
-                    );
+    submitHandler: function(form) {
+
+        // requirejs(['sweetAlert2'], function(swal,swal1) {
+
+            Swal.fire({
+                allowOutsideClick: false,
+                showCancelButton: true,
+                cancelButtonColor: '#d33',
+                confirmButtonColor: '#3085d6',
+                title: 'Declaration.',
+                icon: 'info',
+                html: '<h5> <input type="checkbox" class="form-check-input" name="t11" id="t1"  />  I hereby certify the above information as provided by me is true and correct. I also undertake to keep the Company informed of any changes covering such information of my personal details as and when it occurs. If any information given above is subsequently found to be incorrect or incomplete or untrue, the Company may terminate my employment without notice or compensation.</h5><br>' +
+                        '<h5> <input type="checkbox" class="form-check-input" name="t22" id="t2"  />  I hereby state that I may be liable to summary dismissal if any of the particulars has been misrepresented or omitted. I acknowledge that the Company has the right to recover any salaries and monetary benefits paid out to me during the course of my employment in the event of any misrepresentation or omission on my personal data.</h5><br>' +
+                        '<h5> <input type="checkbox" class="form-check-input" name="t33" id="t3"  />  I hereby give consent for Company to process and keep my personal data for employment purposes.</h5>',
+                confirmButtonText: 'Yes',
+                
+                preConfirm: () => {
+                    if (!$('#t1').prop('checked') || !$('#t2').prop('checked') || !$('#t3').prop('checked'))  {
+                        Swal.showValidationMessage('<i class="fa fa-info-circle"></i> Please check all term to proceed')
+                    
+                }
+                else if ($('#t1').prop('checked') || $('#t2').prop('checked') || $('#t3').prop('checked')){
+                    var data = new FormData(document.getElementById("formEmergency"));
 
                     $.ajax({
                         type: "POST",
@@ -801,26 +857,40 @@ $(document).ready(function () {
                         async: false,
                         processData: false,
                         contentType: false,
-                    }).done(function (data) {
-                        // console.log(data);
-                        swal({
+                    }).done(function(data) {
+                        console.log(data);
+                        Swal.fire({
                             title: data.title,
+                            icon: 'success',
                             text: data.msg,
                             type: data.type,
-                            confirmButtonColor: "#3085d6",
-                            confirmButtonText: "OK",
+                                confirmButtonColor: '#3085d6',
+                            confirmButtonText: 'OK',
                             allowOutsideClick: false,
                             allowEscapeKey: false,
-                        }).then(function () {
-                            if (data.type == "error") {
+                        }).then(function() {
+                            if (data.type == 'error') {
+        
                             } else {
-                                // window.location.href = "/dashboardTenant";
                                 location.reload();
+                                // window.location.href = "/myProfile";
+        
                             }
+        
+        
                         });
                     });
-                });
+                }
+                else {
+                    Swal.showValidationMessage('<i class="fa fa-info-circle"></i> error')
+                }
             },
+                }).then((result) => {
+            
+                })
+
+                // });
+            }
         });
     });
 
@@ -859,7 +929,7 @@ $(document).ready(function () {
                 idNo: {
                     required: "Please Insert Identification Number",
                     digits: "Please Insert Correct Identification Number Without ' - ' or Space",
-                    rangelength: "Please Provide Valid Identification Number",
+                    rangelength: "Please Insert Valid Identification Number",
                 },
                 contactNo: {
                     digits: "Please Insert Correct Contact Number Without ' - ' or Space",
@@ -878,11 +948,29 @@ $(document).ready(function () {
                     rangelength: "Please Enter Valid Postcode",
                 },
             },
-            submitHandler: function (form) {
-                requirejs(["sweetAlert2"], function (swal) {
-                    var data = new FormData(
-                        document.getElementById("addCompanionForm")
-                    );
+    submitHandler: function(form) {
+
+        // requirejs(['sweetAlert2'], function(swal,swal1) {
+
+            Swal.fire({
+                allowOutsideClick: false,
+                showCancelButton: true,
+                cancelButtonColor: '#d33',
+                confirmButtonColor: '#3085d6',
+                title: 'Declaration.',
+                icon: 'info',
+                html: '<h5> <input type="checkbox" class="form-check-input" name="t11" id="t1"  />  I hereby certify the above information as provided by me is true and correct. I also undertake to keep the Company informed of any changes covering such information of my personal details as and when it occurs. If any information given above is subsequently found to be incorrect or incomplete or untrue, the Company may terminate my employment without notice or compensation.</h5><br>' +
+                        '<h5> <input type="checkbox" class="form-check-input" name="t22" id="t2"  />  I hereby state that I may be liable to summary dismissal if any of the particulars has been misrepresented or omitted. I acknowledge that the Company has the right to recover any salaries and monetary benefits paid out to me during the course of my employment in the event of any misrepresentation or omission on my personal data.</h5><br>' +
+                        '<h5> <input type="checkbox" class="form-check-input" name="t33" id="t3"  />  I hereby give consent for Company to process and keep my personal data for employment purposes.</h5>',
+                confirmButtonText: 'Yes',
+                
+                preConfirm: () => {
+                    if (!$('#t1').prop('checked') || !$('#t2').prop('checked') || !$('#t3').prop('checked'))  {
+                        Swal.showValidationMessage('<i class="fa fa-info-circle"></i> Please check all term to proceed')
+                    
+                }
+                else if ($('#t1').prop('checked') || $('#t2').prop('checked') || $('#t3').prop('checked')){
+                    var data = new FormData(document.getElementById("addCompanionForm"));
 
                     $.ajax({
                         type: "POST",
@@ -892,26 +980,40 @@ $(document).ready(function () {
                         async: false,
                         processData: false,
                         contentType: false,
-                    }).done(function (data) {
-                        // console.log(data);
-                        swal({
+                    }).done(function(data) {
+                        console.log(data);
+                        Swal.fire({
                             title: data.title,
+                            icon: 'success',
                             text: data.msg,
                             type: data.type,
-                            confirmButtonColor: "#3085d6",
-                            confirmButtonText: "OK",
+                                confirmButtonColor: '#3085d6',
+                            confirmButtonText: 'OK',
                             allowOutsideClick: false,
                             allowEscapeKey: false,
-                        }).then(function () {
-                            if (data.type == "error") {
+                        }).then(function() {
+                            if (data.type == 'error') {
+        
                             } else {
                                 location.reload();
-                                // window.location.href = "/dashboardTenant";
+                                // window.location.href = "/myProfile";
+        
                             }
+        
+        
                         });
                     });
-                });
+                }
+                else {
+                    Swal.showValidationMessage('<i class="fa fa-info-circle"></i> error')
+                }
             },
+                }).then((result) => {
+            
+                })
+
+                // });
+            }
         });
     });
 
@@ -920,37 +1022,70 @@ $(document).ready(function () {
     for (let i = 0; i < companion.length; i++) {
         const no = companion[i];
         $("#updateCompanion" + no).click(function (e) {
-            requirejs(["sweetAlert2"], function (swal) {
-                var data = new FormData(
-                    document.getElementById("updateCompanionForm" + no)
-                );
+            // requirejs(['sweetAlert2'], function(swal) {
+                Swal.fire({
+                    allowOutsideClick: false,
+                    showCancelButton: true,
+                    cancelButtonColor: '#d33',
+                    confirmButtonColor: '#3085d6',
+                    title: 'Declaration.',
+                    icon: 'info',
+                    html: '<h5> <input type="checkbox" class="form-check-input" name="t11" id="t1"  />  I hereby certify the above information as provided by me is true and correct. I also undertake to keep the Company informed of any changes covering such information of my personal details as and when it occurs. If any information given above is subsequently found to be incorrect or incomplete or untrue, the Company may terminate my employment without notice or compensation.</h5><br>' +
+                            '<h5> <input type="checkbox" class="form-check-input" name="t22" id="t2"  />  I hereby state that I may be liable to summary dismissal if any of the particulars has been misrepresented or omitted. I acknowledge that the Company has the right to recover any salaries and monetary benefits paid out to me during the course of my employment in the event of any misrepresentation or omission on my personal data.</h5><br>' +
+                            '<h5> <input type="checkbox" class="form-check-input" name="t33" id="t3"  />  I hereby give consent for Company to process and keep my personal data for employment purposes.</h5>',
+                    confirmButtonText: 'Yes',
+                    
+                    preConfirm: () => {
+                        if (!$('#t1').prop('checked') || !$('#t2').prop('checked') || !$('#t3').prop('checked'))  {
+                            Swal.showValidationMessage('<i class="fa fa-info-circle"></i> Please check all term to proceed')
+                        
+                    }
+                    else if ($('#t1').prop('checked') || $('#t2').prop('checked') || $('#t3').prop('checked')){
+                        var data = new FormData(
+                            document.getElementById("updateCompanionForm" + no)
+                        );
+    
+                        $.ajax({
+                            type: "POST",
+                            url: "/updateEmployeeCompanion",
+                            data: data,
+                            dataType: "json",
+                            async: false,
+                            processData: false,
+                            contentType: false,
+                        }).done(function(data) {
+                            console.log(data);
+                            Swal.fire({
+                                title: data.title,
+                                icon: 'success',
+                                text: data.msg,
+                                type: data.type,
+                                    confirmButtonColor: '#3085d6',
+                                confirmButtonText: 'OK',
+                                allowOutsideClick: false,
+                                allowEscapeKey: false,
+                            }).then(function() {
+                                if (data.type == 'error') {
+            
+                                } else {
+                                    location.reload();
+                                    // window.location.href = "/myProfile";
+            
+                                }
+            
+            
+                            });
+                        });
+                    }
+                    else {
+                        Swal.showValidationMessage('<i class="fa fa-info-circle"></i> error')
+                    }
+                },
+                    }).then((result) => {
+                
+                    })
 
-                $.ajax({
-                    type: "POST",
-                    url: "/updateEmployeeCompanion",
-                    data: data,
-                    dataType: "json",
-                    async: false,
-                    processData: false,
-                    contentType: false,
-                }).done(function (data) {
-                    // console.log(data);
-                    swal({
-                        title: data.title,
-                        text: data.msg,
-                        type: data.type,
-                        confirmButtonColor: "#3085d6",
-                        confirmButtonText: "OK",
-                        allowOutsideClick: false,
-                        allowEscapeKey: false,
-                    }).then(function () {
-                        if (data.type == "error") {
-                        } else {
-                            location.reload();
-                        }
-                    });
-                });
-            });
+            // });
         });
     }
 
@@ -992,11 +1127,29 @@ $(document).ready(function () {
                 maritalStatus: "Please Choose Marital Status",
                 DOBChild: "Please Enter Date Of Birth",
             },
-            submitHandler: function (form) {
-                requirejs(["sweetAlert2"], function (swal) {
-                    var data = new FormData(
-                        document.getElementById("addChildrenForm")
-                    );
+    submitHandler: function(form) {
+
+        // requirejs(['sweetAlert2'], function(swal,swal1) {
+
+            Swal.fire({
+                allowOutsideClick: false,
+                showCancelButton: true,
+                cancelButtonColor: '#d33',
+                confirmButtonColor: '#3085d6',
+                title: 'Declaration.',
+                icon: 'info',
+                html: '<h5> <input type="checkbox" class="form-check-input" name="t11" id="t1"  />  I hereby certify the above information as provided by me is true and correct. I also undertake to keep the Company informed of any changes covering such information of my personal details as and when it occurs. If any information given above is subsequently found to be incorrect or incomplete or untrue, the Company may terminate my employment without notice or compensation.</h5><br>' +
+                        '<h5> <input type="checkbox" class="form-check-input" name="t22" id="t2"  />  I hereby state that I may be liable to summary dismissal if any of the particulars has been misrepresented or omitted. I acknowledge that the Company has the right to recover any salaries and monetary benefits paid out to me during the course of my employment in the event of any misrepresentation or omission on my personal data.</h5><br>' +
+                        '<h5> <input type="checkbox" class="form-check-input" name="t33" id="t3"  />  I hereby give consent for Company to process and keep my personal data for employment purposes.</h5>',
+                confirmButtonText: 'Yes',
+                
+                preConfirm: () => {
+                    if (!$('#t1').prop('checked') || !$('#t2').prop('checked') || !$('#t3').prop('checked'))  {
+                        Swal.showValidationMessage('<i class="fa fa-info-circle"></i> Please check all term to proceed')
+                    
+                }
+                else if ($('#t1').prop('checked') || $('#t2').prop('checked') || $('#t3').prop('checked')){
+                    var data = new FormData(document.getElementById("addChildrenForm"));
 
                     $.ajax({
                         type: "POST",
@@ -1006,60 +1159,106 @@ $(document).ready(function () {
                         async: false,
                         processData: false,
                         contentType: false,
-                    }).done(function (data) {
-                        swal({
+                    }).done(function(data) {
+                        console.log(data);
+                        Swal.fire({
                             title: data.title,
+                            icon: 'success',
                             text: data.msg,
                             type: data.type,
-                            confirmButtonColor: "#3085d6",
-                            confirmButtonText: "OK",
+                                confirmButtonColor: '#3085d6',
+                            confirmButtonText: 'OK',
                             allowOutsideClick: false,
                             allowEscapeKey: false,
-                        }).then(function () {
-                            if (data.type == "error") {
+                        }).then(function() {
+                            if (data.type == 'error') {
+        
                             } else {
                                 location.reload();
-                                // $('#tableChildren').DataTable()  .ajax.reload()
+                                // window.location.href = "/myProfile";
+        
                             }
+        
+        
                         });
                     });
-                });
+                }
+                else {
+                    Swal.showValidationMessage('<i class="fa fa-info-circle"></i> error')
+                }
             },
+                }).then((result) => {
+            
+                })
+
+                // });
+            }
         });
     });
 
     $("#editChildren").click(function (e) {
-        requirejs(["sweetAlert2"], function (swal) {
-            var data = new FormData(
-                document.getElementById("editChildrenForm")
-            );
+        // requirejs(['sweetAlert2'], function(swal) {
+            Swal.fire({
+                allowOutsideClick: false,
+                showCancelButton: true,
+                cancelButtonColor: '#d33',
+                confirmButtonColor: '#3085d6',
+                title: 'Declaration.',
+                icon: 'info',
+                html: '<h5> <input type="checkbox" class="form-check-input" name="t11" id="t1"  />  I hereby certify the above information as provided by me is true and correct. I also undertake to keep the Company informed of any changes covering such information of my personal details as and when it occurs. If any information given above is subsequently found to be incorrect or incomplete or untrue, the Company may terminate my employment without notice or compensation.</h5><br>' +
+                        '<h5> <input type="checkbox" class="form-check-input" name="t22" id="t2"  />  I hereby state that I may be liable to summary dismissal if any of the particulars has been misrepresented or omitted. I acknowledge that the Company has the right to recover any salaries and monetary benefits paid out to me during the course of my employment in the event of any misrepresentation or omission on my personal data.</h5><br>' +
+                        '<h5> <input type="checkbox" class="form-check-input" name="t33" id="t3"  />  I hereby give consent for Company to process and keep my personal data for employment purposes.</h5>',
+                confirmButtonText: 'Yes',
+                
+                preConfirm: () => {
+                    if (!$('#t1').prop('checked') || !$('#t2').prop('checked') || !$('#t3').prop('checked'))  {
+                        Swal.showValidationMessage('<i class="fa fa-info-circle"></i> Please check all term to proceed')
+                    
+                }
+                else if ($('#t1').prop('checked') || $('#t2').prop('checked') || $('#t3').prop('checked')){
+                    var data = new FormData(document.getElementById("editChildrenForm"));
 
-            $.ajax({
-                type: "POST",
-                url: "/updateEmployeeChildren",
-                data: data,
-                dataType: "json",
-                async: false,
-                processData: false,
-                contentType: false,
-            }).done(function (data) {
-                // console.log(data);
-                swal({
-                    title: data.title,
-                    text: data.msg,
-                    type: data.type,
-                    confirmButtonColor: "#3085d6",
-                    confirmButtonText: "OK",
-                    allowOutsideClick: false,
-                    allowEscapeKey: false,
-                }).then(function () {
-                    if (data.type == "error") {
-                    } else {
-                        location.reload();
-                    }
-                });
-            });
-        });
+                    $.ajax({
+                        type: "POST",
+                        url: "/updateEmployeeChildren",
+                        data: data,
+                        dataType: "json",
+                        async: false,
+                        processData: false,
+                        contentType: false,
+                    }).done(function(data) {
+                        console.log(data);
+                        Swal.fire({
+                            title: data.title,
+                            icon: 'success',
+                            text: data.msg,
+                            type: data.type,
+                                confirmButtonColor: '#3085d6',
+                            confirmButtonText: 'OK',
+                            allowOutsideClick: false,
+                            allowEscapeKey: false,
+                        }).then(function() {
+                            if (data.type == 'error') {
+        
+                            } else {
+                                location.reload();
+                                // window.location.href = "/myProfile";
+        
+                            }
+        
+        
+                        });
+                    });
+                }
+                else {
+                    Swal.showValidationMessage('<i class="fa fa-info-circle"></i> error')
+                }
+            },
+                }).then((result) => {
+            
+                })
+
+        // });
     });
 
     childId = $("#childId").val();
@@ -1145,7 +1344,7 @@ $(document).ready(function () {
             id = $(this).data("id");
             requirejs(["sweetAlert2"], function (swal) {
                 swal({
-                    title: "Are you sure!",
+                    title: "Are you sure to delete Children?",
                     type: "error",
                     confirmButtonClass: "btn-danger",
                     confirmButtonText: "Yes!",
@@ -1438,7 +1637,7 @@ $(document).ready(function () {
             id = $(this).data("id");
             requirejs(["sweetAlert2"], function (swal) {
                 swal({
-                    title: "Are you sure!",
+                    title: "Are you sure to delete Sibling?",
                     type: "error",
                     confirmButtonClass: "btn-danger",
                     confirmButtonText: "Yes!",
@@ -1517,30 +1716,47 @@ $(document).ready(function () {
             },
 
             messages: {
-                firstName: "PLEASE INSERT FIRST NAME",
-                lastName: "PLEASE INSERT LAST NAME",
-                DOB: "PLEASE INSERT DATE OF BIRTH",
-                gender: "PLEASE CHOOSE GENDER",
+                firstName: "Please Insert First Name",
+                lastName: "Please Insert Last Name",
+                DOB: "Please Insert Date Of Birth",
+                gender: "Please Choose Gender",
                 contactNo: {
-                    required: "PLEASE INSERT CONTACT NUMBER",
-                    digits: "PLEASE INSERT VALID CONTACT NUMBER WITHOUT ' - ' AND SPACE",
+                    required: "Please Insert Contact Number",
+                    digits: "Please Insert Valid Contact Number Without ' - ' And Space",
                 },
-                relationship: "PLEASE CHOOSE RELATIONSHIP",
-                address1: "PLEASE INSERT ADDRESS",
+                relationship: "Please Choose Relationship",
+                address1: "Please insert Address",
                 postcode: {
-                    required: "PLEASE INSERT YOUR POSTCODE",
-                    digits: "PLEASE ENTER VALID POSTCODE",
-                    rangelength: "PLEASE ENTER VALID POSTCODE",
+                    required: "Please Insert Postcode",
+                    digits: "Please Insert Valid Postcode",
+                    rangelength: "Please Enter Valid Postcode",
                 },
-                city: "PLEASE INSERT CITY",
-                state: "PLEASE CHOOSE STATE",
+                city: "Please Insert City",
+                state: "Please Choose State",
             },
+            submitHandler: function(form) {
 
-            submitHandler: function (form) {
-                requirejs(["sweetAlert2"], function (swal) {
-                    var data = new FormData(
-                        document.getElementById("addParentForm")
-                    );
+        // requirejs(['sweetAlert2'], function(swal,swal1) {
+
+            Swal.fire({
+                allowOutsideClick: false,
+                showCancelButton: true,
+                cancelButtonColor: '#d33',
+                confirmButtonColor: '#3085d6',
+                title: 'Declaration.',
+                icon: 'info',
+                html: '<h5> <input type="checkbox" class="form-check-input" name="t11" id="t1"  />  I hereby certify the above information as provided by me is true and correct. I also undertake to keep the Company informed of any changes covering such information of my personal details as and when it occurs. If any information given above is subsequently found to be incorrect or incomplete or untrue, the Company may terminate my employment without notice or compensation.</h5><br>' +
+                        '<h5> <input type="checkbox" class="form-check-input" name="t22" id="t2"  />  I hereby state that I may be liable to summary dismissal if any of the particulars has been misrepresented or omitted. I acknowledge that the Company has the right to recover any salaries and monetary benefits paid out to me during the course of my employment in the event of any misrepresentation or omission on my personal data.</h5><br>' +
+                        '<h5> <input type="checkbox" class="form-check-input" name="t33" id="t3"  />  I hereby give consent for Company to process and keep my personal data for employment purposes.</h5>',
+                confirmButtonText: 'Yes',
+                
+                preConfirm: () => {
+                    if (!$('#t1').prop('checked') || !$('#t2').prop('checked') || !$('#t3').prop('checked'))  {
+                        Swal.showValidationMessage('<i class="fa fa-info-circle"></i> Please check all term to proceed')
+                    
+                }
+                else if ($('#t1').prop('checked') || $('#t2').prop('checked') || $('#t3').prop('checked')){
+                    var data = new FormData(document.getElementById("addParentForm"));
 
                     $.ajax({
                         type: "POST",
@@ -1550,58 +1766,107 @@ $(document).ready(function () {
                         async: false,
                         processData: false,
                         contentType: false,
-                    }).done(function (data) {
-                        swal({
+                    }).done(function(data) {
+                        console.log(data);
+                        Swal.fire({
                             title: data.title,
+                            icon: 'success',
                             text: data.msg,
                             type: data.type,
-                            confirmButtonColor: "#3085d6",
-                            confirmButtonText: "OK",
+                                confirmButtonColor: '#3085d6',
+                            confirmButtonText: 'OK',
                             allowOutsideClick: false,
                             allowEscapeKey: false,
-                        }).then(function () {
-                            if (data.type == "error") {
+                        }).then(function() {
+                            if (data.type == 'error') {
+        
                             } else {
                                 location.reload();
-                                // $('#tableParent').DataTable()  .ajax.reload()
+                                // window.location.href = "/myProfile";
+        
                             }
+        
+        
                         });
                     });
-                });
+                }
+                else {
+                    Swal.showValidationMessage('<i class="fa fa-info-circle"></i> error')
+                }
             },
+                }).then((result) => {
+            
+                })
+
+                // });
+            }
+
         });
     });
 
     $("#editParent").click(function (e) {
-        requirejs(["sweetAlert2"], function (swal) {
-            var data = new FormData(document.getElementById("editParentForm"));
+        // requirejs(['sweetAlert2'], function(swal) {
+            Swal.fire({
+                allowOutsideClick: false,
+                showCancelButton: true,
+                cancelButtonColor: '#d33',
+                confirmButtonColor: '#3085d6',
+                title: 'Declaration.',
+                icon: 'info',
+                html: '<h5> <input type="checkbox" class="form-check-input" name="t11" id="t1"  />  I hereby certify the above information as provided by me is true and correct. I also undertake to keep the Company informed of any changes covering such information of my personal details as and when it occurs. If any information given above is subsequently found to be incorrect or incomplete or untrue, the Company may terminate my employment without notice or compensation.</h5><br>' +
+                        '<h5> <input type="checkbox" class="form-check-input" name="t22" id="t2"  />  I hereby state that I may be liable to summary dismissal if any of the particulars has been misrepresented or omitted. I acknowledge that the Company has the right to recover any salaries and monetary benefits paid out to me during the course of my employment in the event of any misrepresentation or omission on my personal data.</h5><br>' +
+                        '<h5> <input type="checkbox" class="form-check-input" name="t33" id="t3"  />  I hereby give consent for Company to process and keep my personal data for employment purposes.</h5>',
+                confirmButtonText: 'Yes',
+                
+                preConfirm: () => {
+                    if (!$('#t1').prop('checked') || !$('#t2').prop('checked') || !$('#t3').prop('checked'))  {
+                        Swal.showValidationMessage('<i class="fa fa-info-circle"></i> Please check all term to proceed')
+                    
+                }
+                else if ($('#t1').prop('checked') || $('#t2').prop('checked') || $('#t3').prop('checked')){
+                    var data = new FormData(document.getElementById("editParentForm"));
 
-            $.ajax({
-                type: "POST",
-                url: "/updateEmployeeParent",
-                data: data,
-                dataType: "json",
-                async: false,
-                processData: false,
-                contentType: false,
-            }).done(function (data) {
-                // console.log(data);
-                swal({
-                    title: data.title,
-                    text: data.msg,
-                    type: data.type,
-                    confirmButtonColor: "#3085d6",
-                    confirmButtonText: "OK",
-                    allowOutsideClick: false,
-                    allowEscapeKey: false,
-                }).then(function () {
-                    if (data.type == "error") {
-                    } else {
-                        location.reload();
-                    }
-                });
-            });
-        });
+                    $.ajax({
+                        type: "POST",
+                        url: "/updateEmployeeParent",
+                        data: data,
+                        dataType: "json",
+                        async: false,
+                        processData: false,
+                        contentType: false,
+                    }).done(function(data) {
+                        console.log(data);
+                        Swal.fire({
+                            title: data.title,
+                            icon: 'success',
+                            text: data.msg,
+                            type: data.type,
+                                confirmButtonColor: '#3085d6',
+                            confirmButtonText: 'OK',
+                            allowOutsideClick: false,
+                            allowEscapeKey: false,
+                        }).then(function() {
+                            if (data.type == 'error') {
+        
+                            } else {
+                                location.reload();
+                                // window.location.href = "/myProfile";
+        
+                            }
+        
+        
+                        });
+                    });
+                }
+                else {
+                    Swal.showValidationMessage('<i class="fa fa-info-circle"></i> error')
+                }
+            },
+                }).then((result) => {
+            
+                })
+
+        // });
     });
 
     parentId = $("#parentId").val();
@@ -1673,7 +1938,7 @@ $(document).ready(function () {
             id = $(this).data("id");
             requirejs(["sweetAlert2"], function (swal) {
                 swal({
-                    title: "Are you sure!",
+                    title: "Are you sure to delete Parent?",
                     type: "error",
                     confirmButtonClass: "btn-danger",
                     confirmButtonText: "Yes!",
@@ -1763,7 +2028,7 @@ $(document).ready(function () {
         id = $(this).data("id");
         requirejs(["sweetAlert2"], function (swal) {
             swal({
-                title: "Are you sure!",
+                title: "Are you sure to delete Vehicle?",
                 type: "error",
                 confirmButtonClass: "btn-danger",
                 confirmButtonText: "Yes!",
@@ -1866,6 +2131,177 @@ $(document).ready(function () {
                     }
                 });
             });
+        });
+    });
+    ///////
+    
+    $("#buttonhierarchy").click(function (e) {
+        var id = $("#hierarchyid").val();
+        
+        $("#updatehierarchy").validate({
+            
+            // Specify validation rules
+            rules: {
+                eclaimrecommender: "required",
+                eclaimapprover: "required",
+                
+                
+            },
+
+            messages: {
+                eclaimrecommender: "Please Choose Recommender",
+                eclaimapprover: "Please Choose Approver",
+            },
+
+            submitHandler: function (form) {
+                requirejs(["sweetAlert2"], function (swal) {
+                    var data = new FormData(
+                        document.getElementById("updatehierarchy")
+                    );
+                    var id = $("#hierarchyid").val();
+                    //console.log(id);
+                    // return false;
+
+                    $.ajax({
+                        type: "POST",
+                        url: "/updateclaimhierarchy/" + id,
+                        data: data,
+                        dataType: "json",
+                        async: false,
+                        processData: false,
+                        contentType: false,
+                    }).done(function (data) {
+                        swal({
+                            title: data.title,
+                            text: data.msg,
+                            type: data.type,
+                            confirmButtonColor: "#3085d6",
+                            confirmButtonText: "OK",
+                            allowOutsideClick: false,
+                            allowEscapeKey: false,
+                        }).then(function () {
+                            if (data.type == "error") {
+                            } else {
+                                location.reload();
+                            }
+                        });
+                    });
+                });
+            },
+        });
+    });
+    
+    $("#cahierarchybutton").click(function (e) {
+        var id = $("#hierarchyid").val();
+        //console.log(id);
+        $("#updatecashhierarchy").validate({
+            
+            // Specify validation rules
+            rules: {
+                
+                caapprover: "required",
+                
+                
+            },
+
+            messages: {
+                
+                caapprover: "Pleace Choose Approver",
+            },
+
+            submitHandler: function (form) {
+                requirejs(["sweetAlert2"], function (swal) {
+                    var data = new FormData(
+                        document.getElementById("updatecashhierarchy")
+                    );
+                    var id = $("#hierarchyid").val();
+                    //console.log(id);
+                    // return false;
+
+                    $.ajax({
+                        type: "POST",
+                        url: "/updatecashhierarchy/" + id,
+                        data: data,
+                        dataType: "json",
+                        async: false,
+                        processData: false,
+                        contentType: false,
+                    }).done(function (data) {
+                        swal({
+                            title: data.title,
+                            text: data.msg,
+                            type: data.type,
+                            confirmButtonColor: "#3085d6",
+                            confirmButtonText: "OK",
+                            allowOutsideClick: false,
+                            allowEscapeKey: false,
+                        }).then(function () {
+                            if (data.type == "error") {
+                            } else {
+                                location.reload();
+                            }
+                        });
+                    });
+                });
+            },
+        });
+    });
+
+    $("#eleavehierarchy").click(function (e) {
+        var id = $("#hierarchyid").val();
+        //console.log(id);
+        $("#updateeleavehierarchy").validate({
+            
+            // Specify validation rules
+            rules: {
+                
+                eleaverecommender: "required",
+                eleaveapprover: "required",
+                
+                
+            },
+
+            messages: {
+                
+                eleaverecommender: "Please Choose Recommender",
+                eleaveapprover: "Please Choose Approver",
+            },
+
+            submitHandler: function (form) {
+                requirejs(["sweetAlert2"], function (swal) {
+                    var data = new FormData(
+                        document.getElementById("updateeleavehierarchy")
+                    );
+                    var id = $("#hierarchyid").val();
+                    //console.log(id);
+                    // return false;
+
+                    $.ajax({
+                        type: "POST",
+                        url: "/updateeleavehierarchy/" + id,
+                        data: data,
+                        dataType: "json",
+                        async: false,
+                        processData: false,
+                        contentType: false,
+                    }).done(function (data) {
+                        swal({
+                            title: data.title,
+                            text: data.msg,
+                            type: data.type,
+                            confirmButtonColor: "#3085d6",
+                            confirmButtonText: "OK",
+                            allowOutsideClick: false,
+                            allowEscapeKey: false,
+                        }).then(function () {
+                            if (data.type == "error") {
+                            } else {
+                                location.reload();
+                            }
+                        });
+                    });
+                });
+            },
         });
     });
 

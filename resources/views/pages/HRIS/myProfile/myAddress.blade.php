@@ -103,21 +103,21 @@
         <div class="row p-2">
             <div class="col-sm-6">
                 <label for="address-1" class="form-label">Address 1*</label>
-                <input type="text" id="" name="" value="" class="form-control" aria-describedby="address-1" style="text-transform:uppercase">
+                <input type="text" id="" name="" value="" class="form-control" aria-describedby="address-1" placeholder="ADDRESS 1" style="text-transform:uppercase">
             </div>
             <div class="col-sm-6">
                 <label for="address-2" class="form-label">Address 2</label>
-                <input type="text" id="" class="form-control" name="" value="" aria-describedby="address-2" style="text-transform:uppercase">
+                <input type="text" id="" class="form-control" name="" value="" aria-describedby="address-2" placeholder="ADDRESS 2" style="text-transform:uppercase">
             </div>
         </div>
         <div class="row p-2">
             <div class="col-sm-6">
                 <label for="postcode" class="form-label">Postcode*</label>
-                <input type="text" id="postcode" name="" value="" class="form-control" aria-describedby="postcode">
+                <input type="text" id="postcode" name="" value="" class="form-control" placeholder="POSTCODE" aria-describedby="00000">
             </div>
             <div class="col-sm-6">
                 <label for="city" class="form-label">City*</label>
-                <input type="text" class="form-control" name="" id="" value="" style="text-transform:uppercase">
+                <input type="text" class="form-control" name="" id="" value="" placeholder="CITY" style="text-transform:uppercase">
             </div>
         </div>
         <div class="row p-2">
@@ -125,7 +125,7 @@
                 <label for="state" class="form-label">State*</label>
                 <select class="form-select" name="state" id="state" value="" style="text-transform:uppercase">
                     <?php $state = state() ?>
-                    <option value="" label="Please Choose"  ></option>
+                    <option value="" label="PLEASE CHOOSE"  ></option>
                     @foreach ($state as $key => $status)
                     <option value="{{$key}}"  >{{$status}}</option>
                     @endforeach
@@ -156,11 +156,11 @@
             <div class="col-sm-6">
                 <label for="Addresstype" class="form-label">Address Type</label>
                 <select class="form-select" >
-                    <option class="form-label" value="" selected>Please Select</option>
-                    <option class="form-label" value="" >Correspondence</option>
-                    <option class="form-label" value="" >Permanent</option>
-                    <option class="form-label" value="" >Both</option>
-                    <option class="form-label" value="" >None</option>
+                    <option class="form-label" value="" selected>PLEASE SELECT</option>
+                    <option class="form-label" value="" >CORREDPONDENCE</option>
+                    <option class="form-label" value="" >PERMANENT</option>
+                    <option class="form-label" value="" >BOTH</option>
+                    <option class="form-label" value="" >NONE</option>
                     
                 </select>
             </div>
@@ -190,21 +190,21 @@
         <div class="row p-2">
             <div class="col-sm-6">
                 <label for="address-1" class="form-label">Address 1*</label>
-                <input type="text" id="" name="" value="" class="form-control" aria-describedby="address-1" style="text-transform:uppercase">
+                <input type="text" id="" name="" value="" class="form-control" aria-describedby="address-1" placeholder="ADDRESS 1" style="text-transform:uppercase">
             </div>
             <div class="col-sm-6">
                 <label for="address-2" class="form-label">Address 2</label>
-                <input type="text" id="" class="form-control" name="" value="" aria-describedby="address-2" style="text-transform:uppercase">
+                <input type="text" id="" class="form-control" name="" value="" aria-describedby="address-2" placeholder="ADDRESS 2" style="text-transform:uppercase">
             </div>
         </div>
         <div class="row p-2">
             <div class="col-sm-6">
                 <label for="postcode" class="form-label">Postcode*</label>
-                <input type="text" id="" name="postcode" value="" class="form-control" aria-describedby="postcode">
+                <input type="text" id="" name="postcode" value="" class="form-control" placeholder="00000" aria-describedby="postcode">
             </div>
             <div class="col-sm-6">
                 <label for="city" class="form-label">City*</label>
-                <input type="text" class="form-control" name="" id="" value="" style="text-transform:uppercase">
+                <input type="text" class="form-control" name="" id="" value="" placeholder="CITY" style="text-transform:uppercase">
             </div>
         </div>
         <div class="row p-2">
@@ -212,7 +212,7 @@
                 <label for="state" class="form-label">State*</label>
                 <select class="form-select" name="" id="" value="" style="text-transform:uppercase">
                     <?php $state = state() ?>
-                    <option value="" label="Please Choose"  ></option>
+                    <option value="" label="PLEASE CHOOSE"  ></option>
                     @foreach ($state as $key => $status)
                     <option value="{{$key}}" >{{$status}}</option>
                     @endforeach
@@ -243,11 +243,11 @@
             <div class="col-sm-6">
                 <label for="Addresstype" class="form-label">Address Type</label>
                 <select class="form-select" >
-                    <option class="form-label" value="" selected>Please Select</option>
-                    <option class="form-label" value="" >Correspondence</option>
-                    <option class="form-label" value="" >Permanent</option>
-                    <option class="form-label" value="" >Both</option>
-                    <option class="form-label" value="" >None</option>
+                    <option class="form-label" value="" selected>PLEASE SELECT</option>
+                    <option class="form-label" value="" >CORRESPONDENCE</option>
+                    <option class="form-label" value="" >PERMANENT</option>
+                    <option class="form-label" value="" >BOTH</option>
+                    <option class="form-label" value="" >NONE</option>
                     
                 </select>
             </div>

@@ -29,7 +29,7 @@
                         <td>
                             <div class="btn-group me-1 mb-1">
                                 @if ($claim->claim_type == 'GNC')
-                                    @if ($claim->status == 'amend')
+                                    @if ($claim->status == 'amend' || $claim->status == 'draft')
                                         <a href="javascript:;" class="btn btn-primary btn-sm">Action</a>
                                         <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle btn-sm"><i class="fa fa-caret-down"></i></a>
                                         <div class="dropdown-menu dropdown-menu-end">
@@ -50,7 +50,7 @@
                                         <a href="javascript:;" class="btn btn-primary btn-sm">Action</a>
                                         <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle btn-sm"><i class="fa fa-caret-down"></i></a>
                                         <div class="dropdown-menu dropdown-menu-end">
-                                            <a href="/monthClaimEditView/edit/{{ $claim->id }}" class="dropdown-item">Update Claim</a>
+                                            <a href="/monthClaimEditView/edit/month/{{ $claim->id }}" class="dropdown-item">Update Claim</a>
                                             <div class="dropdown-divider"></div>
                                             <a href="javascript:;" class="dropdown-item">Cancel Claim</a>
                                         </div>
@@ -80,7 +80,7 @@
                         <td>{{ $claim->total_amount }}</td>
                         @if ($claim->status == 'amend')
                             <td><span class="badge bg-success" data-toggle="amendc" title="Amend">Amend</span></td>
-                        @elseif ($claim->status == 'paid')
+                        @elseif ($claim->status == 'paid' || $claim->status == 'recommend')
                             <td><span class="badge bg-secondary" data-toggle="paidc" title="Paid">Paid</span>
                             @elseif ($claim->status == 'draft')
                             <td><span class="badge bg-warning" data-toggle="drafc" title="Draft">Draft</span></td>

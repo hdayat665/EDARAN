@@ -32,5 +32,8 @@ class ProjectLocation extends Authenticatable
         'state',
         'country',
         'location_google',
+        'latitude',
+        'longitude',
+        
     ];
 }

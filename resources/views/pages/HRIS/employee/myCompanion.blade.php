@@ -23,12 +23,12 @@
                         <div class="row p-2">
                             <div class="col-sm-6">
                                 <label for="firstname" class="form-label">First Name*</label>
-                                <input type="text" id="firstnamemc" name="firstName" value="{{ $companion->firstName ?? '' }}" class="form-control" aria-describedby="firstname">
+                                <input type="text" id="firstnamemc" name="firstName" value="{{ $companion->firstName ?? '' }}" placeholder="FIRST NAME" class="form-control" aria-describedby="firstname">
                                 <input type="hidden" name="user_id" value="{{$user_id}}">
                             </div>
                             <div class="col-sm-6">
                                 <label for="lastname" class="form-label">Last Name*</label>
-                                <input type="text" id="lastnamemc" name="lastName" value="{{ $companion->lastName ?? '' }}" class="form-control" aria-describedby="lastname">
+                                <input type="text" id="lastnamemc" name="lastName" value="{{ $companion->lastName ?? '' }}" placeholder="LAST NAME" class="form-control" aria-describedby="lastname">
                             </div>
                         </div>
                         <div class="row p-2">
@@ -38,7 +38,7 @@
                             </div>
                             <div class="col-sm-6">
                                 <label for="oldic" class="form-label" style="color: red">Old Identification Number</label>
-                                <input type="text" id="" name=""  value="" class="form-control" aria-describedby="oldic">
+                                <input type="text" id="" name=""  value="" class="form-control" aria-describedby="oldic" placeholder="0000000">
                             </div>
                         </div>
                         <div class="row p-2">
@@ -52,7 +52,7 @@
                                     </div>
                                     <div class="col-sm-6">
                                         <label for="passport-number" class="form-label">New Identification Number*</label>
-                                        <input type="text"name="idNo" value="{{ $companion->idNo ?? '' }}" id="idnumber2" class="form-control" aria-describedby="passport-number">
+                                        <input type="text"name="idNo" value="{{ $companion->idNo ?? '' }}" id="idnumber2" placeholder="000000-00-0000" class="form-control" aria-describedby="passport-number">
                                     </div>
                                 </div>
                             </div>
@@ -66,17 +66,17 @@
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <label for="passport" class="form-label">Passport Number</label>
-                                        <input type="text" id="passportmc" name="passport" value="{{ $companion->passport ?? '' }}" class="form-control" aria-describedby="passport">
+                                        <input type="text" id="passportmc" name="passport" value="{{ $companion->passport ?? '' }}" placeholder="A00000000" class="form-control" aria-describedby="passport">
                                     </div>
                                     <div class="col-sm-6">
-                                        <label for="expirydate" class="form-label">Expiry Date</label>
-                                        <input type="text" id="expirydatemc" name="expiryDate" value="{{ $companion->expiryDate ?? '' }}" class="form-control" aria-describedby="expirydate" style= "pointer-events: none;" readonly>
+                                        <label for="expirydate" class="form-label">Expiry Date*</label>
+                                        <input type="text" id="expirydatemc" name="expiryDate" value="{{ $companion->expiryDate ?? '' }}" placeholder="YYYY/MM/DD" class="form-control" aria-describedby="expirydate" style= "pointer-events: none;" readonly>
                                     </div>
                                 </div>
                             </div>
                             
                             <div class="col-sm-3">
-                                <label for="issuing-country" class="form-label">Issuing Country</label>
+                                <label for="issuing-country" class="form-label">Issuing Country*</label>
                                 <select class="form-select" name="issuingCountry" value="{{ $companion->issuingCountry ?? '' }}">
                                 <option value="MY" label="Malaysia" selected ></option>
                                     <optgroup id="country-optgroup-Americas" label="Americas">
@@ -92,18 +92,18 @@
                                 </select>
                             </div>
                             <div class="col-sm-3">
-                                <label for="dob" class="form-label">Date Birth</label>
-                                <input type="text" id="dobmc" name="DOB" value="{{ $companion->DOB ?? '' }}" class="form-control" aria-describedby="dob" readonly>
+                                <label for="dob" class="form-label">Date Of Birth</label>
+                                <input type="text" id="dobmc" name="DOB" value="{{ $companion->DOB ?? '' }}" class="form-control" aria-describedby="dob" readonly placeholder="YYYY/MM/DD">
                             </div>
                         </div>
                         <div class="row p-2">
                                 <div class="col-sm-3">
                                     <label for="age" class="form-label">Age</label>
-                                    <input type="text" id="age" name="age" value="{{ $companion->age ?? '' }}" class="form-control" aria-describedby="age" readonly>
+                                    <input type="text" id="age" name="age" value="{{ $companion->age ?? '' }}" class="form-control" aria-describedby="age" readonly placeholder="AGE">
                                 </div>
                                 <div class="col-sm-3">
                                     <label for="dom" class="form-label">Date Marriage</label>
-                                    <input type="txt " id="dommc" name="DOM" value="{{ $companion->DOM ?? '' }}" class="form-control" aria-describedby="dom">
+                                    <input type="txt " id="dommc" name="DOM" value="{{ $companion->DOM ?? '' }}" class="form-control" aria-describedby="dom" placeholder="YYYY/MM/DD">
                                 </div>
                                 <div class="col-sm-3">
                                     <label for="marriage-cert col-md-6" class="form-label">Marriage Certificate</label>
@@ -113,7 +113,7 @@
                                     <label for="marriage-status" class="form-label">Marriage Status</label>
                                     <select class="form-select" name="marrigeStatus" >
                                         <?php $maritialStatus = getMaritalStatus() ?>
-                                        <option value="0" label="Please Choose"  ></option>
+                                        <option value="0" label="PLEASE CHOOSE"  ></option>
                                         @foreach ($maritialStatus as $key => $status)
                                         <option value="{{$key}}" >{{$status}}</option>
                                         @endforeach
@@ -133,7 +133,7 @@
                                     </div>
                                     <div class="col-sm-6">
                                         <label for="" class="form-label" style="color: red">OKU Card Number*</label>
-                                        <input type="number" id="okucard1" name="" value="" class="form-control" readonly >
+                                        <input type="number" id="okucard1" name="" value="" class="form-control" readonly placeholder="OKU CARD NUMBER">
                                         
                                     </div>
                                 </div>
@@ -141,7 +141,7 @@
                             <div class="col-sm-6">
                                 <div class="row">
                                     <div class="col-sm-6">
-                                        <label for="dob" class="form-label" style="color: red">OKU Attachment</label>
+                                        <label for="dob" class="form-label" style="color: red">OKU Attachment*</label>
                                         <input type="file" id="okuattach1" name="" class="form-control" aria-describedby="" style="pointer-events: none">
                                     </div>
                                 </div>
@@ -150,11 +150,11 @@
                         <div class="row p-2">
                             <div class="col-sm-6">
                                 <label for="contact-number" class="form-label">Contact Number</label>
-                                <input type="text" id="contact-number" name="contactNo" value="{{ $companion->contactNo ?? '' }}" class="form-control" aria-describedby="contact-number">
+                                <input type="text" id="contact-number" name="contactNo" value="{{ $companion->contactNo ?? '' }}" placeholder="000-00000000" class="form-control" aria-describedby="contact-number">
                             </div>
                             <div class="col-sm-6">
                                 <label for="contact-number" class="form-label" style="color: red">Home Number</label>
-                                <input type="text" id="" name="" value="" class="form-control" aria-describedby="">
+                                <input type="text" id="" name="" value="" class="form-control" aria-describedby="" placeholder="00-0000000">
                             </div>
                         </div>
                         <br>
@@ -171,36 +171,37 @@
                         <div class="row p-2">
                             <div class="col-sm-6">
                                 <label for="address1" class="form-label">Address 1*</label>
-                                <input type="text" id="address1" name="address1" value="{{ $companion->address1 ?? '' }}" class="form-control" aria-describedby="address1">
+                                <input type="text" id="address1" name="address1" value="{{ $companion->address1 ?? '' }}" placeholder="ADDRESS 1" class="form-control" aria-describedby="address1">
                             </div>
                             <div class="col-sm-6">
                                 <label for="address2" class="form-label">Address 2</label>
-                                <input type="text" id="address2" name="address2" value="{{ $companion->address2 ?? '' }}" class="form-control" aria-describedby="address2">
+                                <input type="text" id="address2" name="address2" value="{{ $companion->address2 ?? '' }}" class="form-control" placeholder="ADDRESS 2" aria-describedby="address2">
                             </div>
                         </div>
                         <div class="row p-2">
                             <div class="col-sm-6">
-                                <label for="firstname" class="form-label">City*</label>
-                                <input type="text" id="firstname" name="city" value="{{ $companion->city ?? '' }}" class="form-control" aria-describedby="firstname">
+                                <label for="lastname" class="form-label">Postcode*</label>
+                                <input type="text" id="lastname" name="postcode" value="{{ $companion->postcode ?? '' }}" placeholder="00000" class="form-control" aria-describedby="lastname">
                             </div>
                             <div class="col-sm-6">
-                                <label for="lastname" class="form-label">Postcode*</label>
-                                <input type="text" id="lastname" name="postcode" value="{{ $companion->postcode ?? '' }}" class="form-control" aria-describedby="lastname">
+                                <label for="firstname" class="form-label">City*</label>
+                                <input type="text" id="firstname" name="city" value="{{ $companion->city ?? '' }}" placeholder="CITY" class="form-control" aria-describedby="firstname">
                             </div>
+                            
                         </div>
                         <div class="row p-2">
                             <div class="col-sm-6">
                                 <label for="state" class="form-label">State*</label>
                                 <select class="form-select" name="state" value="{{ $companion->state ?? '' }}">
                                     <?php $state = state() ?>
-                                    <option value="" label="Please Choose"  ></option>
+                                    <option value="" label="PLEASE CHOOSE" ></option>
                                     @foreach ($state as $key => $status)
                                     <option value="{{$key}}" >{{$status}}</option>
                                     @endforeach
                                 </select>
                             </div>
                             <div class="col-sm-6">
-                                <label for="country" class="form-label">Country</label>
+                                <label for="country" class="form-label">Country*</label>
                                 <select class="form-select" name="country" value="{{ $companion->country ?? '' }}">
                                     <option value="MY" label="Malaysia" selected ></option>
                                     <optgroup id="country-optgroup-Americas" label="Americas">
@@ -230,63 +231,64 @@
                         </div>
                         <div class="row p-2">
                             <div class="col-sm-6">
-                                <label for="Designation-name" class="form-label">Designation</label>
-                                <input type="text" id="designationmc" readonly name=""  class="form-control"  style="text-transform:uppercase">
+                                <label for="Designation-name" class="form-label">Designation*</label>
+                                <input type="text" id="designationmc" readonly name=""  class="form-control" placeholder="DESIGNATION"  style="text-transform:uppercase">
                             </div>
                             <div class="col-sm-6">
                                 <label for="company-name" class="form-label">Company Name</label>
-                                <input type="text" id="companyNamemc" readonly name="companyName" value="{{ $companion->companyName ?? '' }}" class="form-control" aria-describedby="company-name">
+                                <input type="text" id="companyNamemc" readonly name="companyName" value="{{ $companion->companyName ?? '' }}" placeholder="COMPANY NAME" class="form-control" aria-describedby="company-name">
                             </div>
                             
                         </div>
                         <div class="row p-2">
                             <div class="col-sm-6">
                                 <label for="date-joined-company" class="form-label">Date Joined Company</label>
-                                <input type="text" readonly  id="dateJoinedmc" name="dateJoined" value="{{ $companion->dateJoined ?? '' }}" class="form-control" aria-describedby="date-joined-company">
+                                <input type="text" readonly  id="dateJoinedmc" name="dateJoined" value="{{ $companion->dateJoined ?? '' }}" class="form-control" placeholder="YYYY/MM/DD" aria-describedby="date-joined-company">
                             </div>
                             <div class="col-sm-6">
-                                <label for="income-tax-number" class="form-label">Income Tax Number*</label>
-                                <input type="text" readonly id="income-tax-number" name="incomeTax" value="{{ $companion->incomeTax ?? '' }}" class="form-control" aria-describedby="income-tax-number">
+                                <label for="income-tax-number" class="form-label">Income Tax Number</label>
+                                <input type="text" readonly id="income-tax-number" name="incomeTax" value="{{ $companion->incomeTax ?? '' }}" class="form-control" placeholder="000000000000" aria-describedby="income-tax-number">
                             </div>
                             
                         </div>
                         <div class="row p-2">
                             <div class="col-sm-6">
                                 <label for="extension-number" class="form-label">Monthly Salary</label>
-                                <input type="text" readonly id="payslipmc" name="payslip"  class="form-control" >
+                                <input type="text" readonly id="payslipmc" name="payslip"  class="form-control" placeholder="MONTHLY SALARY">
                                 <input type="file" name="payslip"  hidden aria-describedby="dob">
                             </div>
                             <div class="col-sm-6">
                                 <label for="income-tax-number" class="form-label">Office Number</label>
-                                <input type="text" readonly id="officeNomc" name="officeNo" value="{{ $companion->officeNo ?? '' }}" class="form-control" aria-describedby="income-tax-number">
+                                <input type="text" readonly id="officeNomc" name="officeNo" value="{{ $companion->officeNo ?? '' }}" placeholder="00-0000000" class="form-control" aria-describedby="income-tax-number">
                             </div>
                         </div>
                         <div class="row p-2">
                             <div class="col-sm-6">
-                                <label for="address1" class="form-label">Address 1*</label>
-                                <input type="text" readonly id="address1mc" name="address1E" value="{{ $companion->address1E ?? '' }}" class="form-control" aria-describedby="address1">
+                                <label for="address1" class="form-label">Address 1</label>
+                                <input type="text" readonly id="address1mc" name="address1E" value="{{ $companion->address1E ?? '' }}" class="form-control" placeholder="ADDRESS 1" aria-describedby="address1">
                             </div>
                             <div class="col-sm-6">
                                 <label for="address2" class="form-label">Address 2</label>
-                                <input type="text" readonly id="address2mc" name="address2E" value="{{ $companion->address2E ?? '' }}" class="form-control" aria-describedby="address2">
+                                <input type="text" readonly id="address2mc" name="address2E" value="{{ $companion->address2E ?? '' }}" class="form-control" placeholder="ADDRESS 2" aria-describedby="address2">
                             </div>
                         </div>
                         <div class="row p-2">
                             <div class="col-sm-6">
-                                <label for="firstname" class="form-label">City*</label>
-                                <input type="text" readonly id="cityEmc" name="cityE" value="{{ $companion->cityE ?? '' }}" class="form-control" aria-describedby="firstname">
+                                <label for="lastname" class="form-label">Postcode</label>
+                                <input type="text" readonly id="postcodeEmc" name="postcodeE" value="{{ $companion->postcodeE ?? '' }}" class="form-control" placeholder="00000" aria-describedby="lastname">
                             </div>
                             <div class="col-sm-6">
-                                <label for="lastname" class="form-label">Postcode*</label>
-                                <input type="text" readonly id="postcodeEmc" name="postcodeE" value="{{ $companion->postcodeE ?? '' }}" class="form-control" aria-describedby="lastname">
+                                <label for="firstname" class="form-label">City</label>
+                                <input type="text" readonly id="cityEmc" name="cityE" value="{{ $companion->cityE ?? '' }}" class="form-control" placeholder="CITY" aria-describedby="firstname">
                             </div>
+                            
                         </div>
                         <div class="row p-2">
                             <div class="col-sm-6">
-                                <label for="state" class="form-label">State*</label>
+                                <label for="state" class="form-label">State</label>
                                 <select class="form-select" id="stateEmc" name="stateE" value="{{ $companion->stateE ?? '' }}">
                                     <?php $state = state() ?>
-                                    <option value="0" label="Please Choose"  ></option>
+                                    <option value="0" label="PLEASE CHOOSE"  ></option>
                                     @foreach ($state as $key => $status)
                                     <option value="{{$key}}" >{{$status}}</option>
                                     @endforeach
@@ -345,21 +347,21 @@
                         <div class="row p-2">
                             <div class="col-sm-6">
                                 <label for="firstname" class="form-label">First Name*</label>
-                                <input type="text" id="firstname" name="firstName" value="{{ $companion->firstName ?? '' }}" class="form-control" aria-describedby="firstname">
+                                <input type="text" id="firstname" name="firstName" value="{{ $companion->firstName ?? '' }}" placeholder="FIRST NAME" class="form-control" aria-describedby="firstname">
                             </div>
                             <div class="col-sm-6">
                                 <label for="lastname" class="form-label">Last Name*</label>
-                                <input type="text" id="lastname" name="lastName" value="{{ $companion->lastName ?? '' }}" class="form-control" aria-describedby="lastname">
+                                <input type="text" id="lastname" name="lastName" value="{{ $companion->lastName ?? '' }}" class="form-control" placeholder="LAST NAME" aria-describedby="lastname">
                             </div>
                         </div>
                         <div class="row p-2">
                             <div class="col-sm-6">
                                 <label for="fullname" class="form-label">Full Name</label>
-                                <input type="text" id="fullname" name="fullName" value="{{ $companion->fullName ?? '' }}" class="form-control" aria-describedby="fullname">
+                                <input type="text" id="fullname" name="fullName" value="{{ $companion->fullName ?? '' }}" class="form-control" placeholder="FULL NAME" aria-describedby="fullname">
                             </div>
                             <div class="col-sm-6">
                                 <label for="fullname" class="form-label" style="color: red">Old Identification Number</label>
-                                <input type="text" id="" name="" value="" class="form-control" aria-describedby="">
+                                <input type="text" id="" name="" value="" class="form-control" aria-describedby="" placeholder="000000000">
                             </div>
                         </div>
                         <div class="row p-2">
@@ -373,7 +375,7 @@
                                     </div>
                                     <div class="col-sm-6">
                                         <label for="passport-number" class="form-label">New Identification Number*</label>
-                                        <input type="text"name="idNo" value="{{ $companion->idNo ?? '' }}" id="idnumber2" class="form-control" aria-describedby="passport-number">
+                                        <input type="text"name="idNo" value="{{ $companion->idNo ?? '' }}" id="idnumber2" class="form-control"placeholder="000000-00-0000" aria-describedby="passport-number">
                                     </div>
                                 </div>
                             </div>
@@ -387,17 +389,17 @@
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <label for="passport" class="form-label">Passport Number</label>
-                                        <input type="text" id="passport" name="passport" value="{{ $companion->passport ?? '' }}" class="form-control" aria-describedby="passport">
+                                        <input type="text" id="passport" name="passport" value="{{ $companion->passport ?? '' }}" class="form-control" placeholder="A00000000" aria-describedby="passport">
                                     </div>
                                     <div class="col-sm-6">
-                                        <label for="expirydate" class="form-label">Expiry Date</label>
-                                        <input type="text" id="expirydate" name="expiryDate" value="{{ date_format(date_create($companion->expiryDate), 'Y-m-d') }}" class="form-control" aria-describedby="expirydate">
+                                        <label for="expirydate" class="form-label">Expiry Date*</label>
+                                        <input type="text" id="expirydate" name="expiryDate" value="{{ date_format(date_create($companion->expiryDate), 'Y-m-d') }}" class="form-control" placeholder="YYYY/MM/DD" aria-describedby="expirydate">
                                     </div>
                                 </div>
                             </div>
                             
                             <div class="col-sm-3">
-                                <label for="issuing-country" class="form-label">Issuing Country</label>
+                                <label for="issuing-country" class="form-label">Issuing Country*</label>
                                 <select class="form-select" name="issuingCountry" value="{{ $companion->issuingCountry ?? '' }}">
                                     <optgroup id="country-optgroup-Americas" label="Americas">
                                         @foreach ($americass as $key => $america)
@@ -413,7 +415,7 @@
                             </div>
                             <div class="col-sm-3">
                                 <label for="dob" class="form-label">Date of Birth</label>
-                                <input type="text" id="dob" name="DOB" value="{{ date_format(date_create($companion->DOB), 'Y-m-d') }}" class="form-control" aria-describedby="dob">
+                                <input type="text" id="dob" name="DOB" value="{{ date_format(date_create($companion->DOB), 'Y-m-d') }}" class="form-control" aria-describedby="dob" placeholder="YYYY/MM/DD">
                             </div>
                         </div>
                         <div class="row p-2">
@@ -421,11 +423,11 @@
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <label for="age" class="form-label">Age</label>
-                                        <input type="text" id="age" name="age" value="{{ $companion->age ?? '' }}" class="form-control" aria-describedby="age">
+                                        <input type="text" id="age" name="age" value="{{ $companion->age ?? '' }}" class="form-control" aria-describedby="age" placeholder="AGE">
                                     </div>
                                     <div class="col-sm-6">
                                         <label for="dom" class="form-label">Date of Marriage</label>
-                                       <input type="text" id="dom" name="DOM" value="{{ date_format(date_create($companion->DOM), 'Y-m-d') }}" class="form-control" aria-describedby="dom">
+                                       <input type="text" id="dom" name="DOM" value="{{ date_format(date_create($companion->DOM), 'Y-m-d') }}" class="form-control" aria-describedby="dom" placeholder="YYYY/MM/DD">
                                    </div>
                                 </div>
                             </div>
@@ -440,10 +442,10 @@
                                         @endif
                                     </div>
                                     <div class="col-sm-6">
-                                        <label for="marriage-status" class="form-label">Marriage Status</label>
+                                        <label for="marriage-status" class="form-label">Marital Status</label>
                                         <select class="form-select" name="marrigeStatus" >
                                             <?php $maritialStatus = getMaritalStatus() ?>
-                                            <option value="0" label="Please Choose"  ></option>
+                                            <option value="0" label="PLEASE CHOOSE"  ></option>
                                             @foreach ($maritialStatus as $key => $status)
                                             <option value="{{$key}}" <?php echo ($key == $companion->marrigeStatus) ? 'selected="selected"' : '' ?>>{{$status}}</option>
                                             @endforeach
@@ -465,7 +467,7 @@
                                     </div>
                                     <div class="col-sm-6">
                                         <label for="" class="form-label" style="color: red">OKU Card Number*</label>
-                                        <input type="number" id="okucard1" name="" value="" class="form-control" readonly >
+                                        <input type="number" id="okucard1" name="" value="" class="form-control" readonly placeholder="OKU CARD NUMBER">
                                         
                                     </div>
                                 </div>
@@ -473,7 +475,7 @@
                             <div class="col-sm-6">
                                 <div class="row">
                                     <div class="col-sm-6">
-                                        <label for="dob" class="form-label" style="color: red">OKU Attachment</label>
+                                        <label for="dob" class="form-label" style="color: red">OKU Attachment*</label>
                                         <input type="file" id="okuattach1" name="" class="form-control" aria-describedby="" style="pointer-events: none">
                                     </div>
                                 </div>
@@ -482,11 +484,11 @@
                         <div class="row p-2">
                              <div class="col-sm-6">
                                 <label for="contact-number" class="form-label">Phone Number</label>
-                                <input type="text" id="contact-number" name="contactNo" value="{{ $companion->contactNo ?? '' }}" class="form-control" aria-describedby="contact-number">
+                                <input type="text" id="contact-number" name="contactNo" value="{{ $companion->contactNo ?? '' }}" class="form-control" placeholder="000-00000000" aria-describedby="contact-number">
                             </div>
                             <div class="col-sm-6" style="color: red">
                                 <label for="" class="form-label">Home Number</label>
-                                <input type="text" id="" name="" value="" class="form-control" aria-describedby="">
+                                <input type="text" id="" name="" value="" class="form-control" aria-describedby="" placeholder="00-000000">
                             </div>
                         </div>
                         <br>
@@ -503,21 +505,21 @@
                         <div class="row p-2">
                             <div class="col-sm-6">
                                 <label for="address1" class="form-label">Address 1*</label>
-                                <input type="text" id="address1" name="address1" value="{{ $companion->address1 ?? '' }}" class="form-control" aria-describedby="address1">
+                                <input type="text" id="address1" name="address1" value="{{ $companion->address1 ?? '' }}" class="form-control" placeholder="ADDRESS 1" aria-describedby="address1">
                             </div>
                             <div class="col-sm-6">
                                 <label for="address2" class="form-label">Address 2</label>
-                                <input type="text" id="address2" name="address2" value="{{ $companion->address2 ?? '' }}" class="form-control" aria-describedby="address2">
+                                <input type="text" id="address2" name="address2" value="{{ $companion->address2 ?? '' }}" class="form-control" placeholder="ADDRESS 2" aria-describedby="address2">
                             </div>
                         </div>
                         <div class="row p-2">
                             <div class="col-sm-6">
-                                <label for="firstname" class="form-label">City*</label>
-                                <input type="text" id="firstname" name="city" value="{{ $companion->city ?? '' }}" class="form-control" aria-describedby="firstname">
+                                <label for="lastname" class="form-label">Postcode*</label>
+                                <input type="text" id="lastname" name="postcode" value="{{ $companion->postcode ?? '' }}" class="form-control" placeholder="00000" aria-describedby="lastname">
                             </div>
                             <div class="col-sm-6">
-                                <label for="lastname" class="form-label">Postcode*</label>
-                                <input type="text" id="lastname" name="postcode" value="{{ $companion->postcode ?? '' }}" class="form-control" aria-describedby="lastname">
+                                <label for="firstname" class="form-label">City*</label>
+                                <input type="text" id="firstname" name="city" value="{{ $companion->city ?? '' }}" class="form-control" placeholder="CITY" aria-describedby="firstname">
                             </div>
                         </div>
                         <div class="row p-2">
@@ -525,14 +527,14 @@
                                 <label for="state" class="form-label">State*</label>
                                 <select class="form-select" name="state" value="{{ $companion->state ?? '' }}">
                                     <?php $state = state() ?>
-                                    <option value="0" label="Please Choose"  ></option>
+                                    <option value="0" label="PLEASE CHOOSE"  ></option>
                                     @foreach ($state as $key => $status)
                                     <option value="{{$key}}"  <?php echo ($key == $companion->state) ? 'selected="selected"' : '' ?>>{{$status}}</option>
                                     @endforeach
                                 </select>
                             </div>
                             <div class="col-sm-6">
-                                <label for="country" class="form-label">Country</label>
+                                <label for="country" class="form-label">Country*</label>
                                 <select class="form-select" name="country" value="{{ $companion->country ?? '' }}">
                                     <optgroup id="country-optgroup-Americas" label="Americas">
                                         @foreach ($americass as $key => $america)
@@ -561,64 +563,65 @@
                         </div>
                         <div class="row p-2">
                             <div class="col-sm-6">
-                                <label for="Designation-name" class="form-label">Designation</label>
-                                <input type="text" id="designationmc" readonly name=""  class="form-control mcdetail"  style="text-transform:uppercase">
+                                <label for="Designation-name" class="form-label">Designation*</label>
+                                <input type="text" id="designationmc" readonly name=""  class="form-control mcdetail"  placeholder="DESIGNATION" style="text-transform:uppercase">
                             </div>
                             <div class="col-sm-6">
                                 <label for="company-name" class="form-label">Company Name</label>
-                                <input type="text" id="phone-number" readonly name="companyName" value="{{ $companion->companyName ?? '' }}" class="form-control mcdetail" aria-describedby="company-name">
+                                <input type="text" id="phone-number" readonly name="companyName" value="{{ $companion->companyName ?? '' }}" placeholder="COMPANY NAME" class="form-control mcdetail" aria-describedby="company-name">
                             </div>
                            
                         </div>
                         <div class="row p-2">
                          <div class="col-sm-6">
                                 <label for="date-joined-company" class="form-label">Date Joined Company</label>
-                                <input type="text" id="date-joined-company" readonly name="dateJoined" value="{{ date_format(date_create($companion->dateJoined), 'd-m-Y') }}" class="form-control mcdetail" aria-describedby="date-joined-company">
+                                <input type="text" id="date-joined-company" readonly name="dateJoined" value="{{ date_format(date_create($companion->dateJoined), 'd-m-Y') }}" class="form-control mcdetail" placeholder="YYYY/MM/DD" aria-describedby="date-joined-company">
                             </div>
                             <div class="col-sm-6">
-                                <label for="income-tax-number" class="form-label">Income Tax Number*</label>
-                                <input type="text" id="income-tax-number" readonly name="incomeTax" value="{{ $companion->incomeTax ?? '' }}" class="form-control mcdetail" aria-describedby="income-tax-number">
+                                <label for="income-tax-number" class="form-label">Income Tax Number</label>
+                                <input type="text" id="income-tax-number" readonly name="incomeTax" value="{{ $companion->incomeTax ?? '' }}" class="form-control mcdetail" aria-describedby="income-tax-number" placeholder="000000000000">
                             </div>
                             
                         </div>
                         <div class="row p-2">
                             <div class="col-sm-6">
                                 <label for="extension-number" class="form-label">Monthly Salary</label>
-                                <input type="text" readonly id="payslipmc" readonly name="payslip"  class="form-control mcdetail" >
-                                <input type="file" id="extension-number" name="payslip" value="{{ $companion->payslip ?? '' }}" class="form-control" hidden aria-describedby="extension-number">
+                                <input type="text" readonly id="payslipmc" readonly name="payslip"  class="form-control mcdetail" placeholder="MONTHLY SALARY">
+                                <input type="file" id="extension-number" name="payslip" value="{{ $companion->payslip ?? '' }}" class="form-control" hidden aria-describedby="0000">
                                
                             </div>
                             <div class="col-sm-6">
                                 <label for="income-tax-number" class="form-label">Office Number</label>
-                                <input type="text" id="income-tax-number" readonly name="officeNo" value="{{ $companion->officeNo ?? '' }}" class="form-control mcdetail" aria-describedby="income-tax-number">
+                                <input type="text" id="income-tax-number" readonly name="officeNo" value="{{ $companion->officeNo ?? '' }}" placeholder="00-0000000" class="form-control mcdetail" aria-describedby="income-tax-number">
                             </div>
                         </div>
                         <div class="row p-2">
                             <div class="col-sm-6">
-                                <label for="address1" class="form-label">Address 1*</label>
-                                <input type="text" id="address1" readonly name="address1E" value="{{ $companion->address1E ?? '' }}" class="form-control mcdetail" aria-describedby="address1">
+                                <label for="address1" class="form-label">Address 1</label>
+                                <input type="text" id="address1" readonly name="address1E" value="{{ $companion->address1E ?? '' }}" placeholder="ADDRESS 1" class="form-control mcdetail" aria-describedby="address1">
                             </div>
                             <div class="col-sm-6">
                                 <label for="address2" class="form-label">Address 2</label>
-                                <input type="text" id="address2" readonly name="address2E" value="{{ $companion->address2E ?? '' }}" class="form-control mcdetail" aria-describedby="address2">
+                                <input type="text" id="address2" readonly name="address2E" value="{{ $companion->address2E ?? '' }}" class="form-control mcdetail" placeholder="ADDRES 2" aria-describedby="address2">
                             </div>
                         </div>
                         <div class="row p-2">
                             <div class="col-sm-6">
-                                <label for="firstname" class="form-label">City*</label>
-                                <input type="text" id="firstname" readonly name="cityE" value="{{ $companion->cityE ?? '' }}" class="form-control mcdetail" aria-describedby="firstname">
+                                <label for="lastname" class="form-label">Postcode</label>
+                                <input type="text" id="lastname" readonly name="postcodeE" value="{{ $companion->postcodeE ?? '' }}" class="form-control mcdetail" placeholder="00000" aria-describedby="lastname">
                             </div>
                             <div class="col-sm-6">
-                                <label for="lastname" class="form-label">Postcode*</label>
-                                <input type="text" id="lastname" readonly name="postcodeE" value="{{ $companion->postcodeE ?? '' }}" class="form-control mcdetail" aria-describedby="lastname">
+                                <label for="firstname" class="form-label">City</label>
+                                <input type="text" id="firstname" readonly name="cityE" value="{{ $companion->cityE ?? '' }}" class="form-control mcdetail" placeholder="CITY" aria-describedby="firstname">
                             </div>
+                           
                         </div>
                         <div class="row p-2">
                             <div class="col-sm-6">
-                                <label for="state" class="form-label">State*</label>
+                                <label for="state" class="form-label">State</label>
                                 <select class="form-select mcdetaildrop" name="stateE" value="{{ $companion->stateE ?? '' }}">
                                     <?php $state = state() ?>
-                                    <option value="0" label="Please Choose"  ></option>
+                                    <option value="0" label="PLEASE CHOOSE"></option>
                                     @foreach ($state as $key => $status)
                                     <option value="{{$key}}"  <?php echo ($key == $companion->stateE) ? 'selected="selected"' : '' ?>>{{$status}}</option>
                                     @endforeach

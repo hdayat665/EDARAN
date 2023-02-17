@@ -1,16 +1,81 @@
-$(document).ready(function () {
+$(document).ready(function () { 
     $("#datepicker-joindate").datepicker({
         todayHighlight: true,
         autoclose: true,
     });
 
-    $("#customerTable").DataTable({
-        responsive: false,
-        lengthMenu: [
-            [5, 10, 15, 20, -1],
-            [5, 10, 15, 20, "All"],
-        ],
-    });
+    $(document).ready(function () {
+        var table = $("#customerTable").DataTable({
+          responsive: false,
+          lengthMenu: [
+            [5, 10, 25, 50, -1],
+            [5, 10, 25, 50, "All"],
+          ],
+          scrollX:true,
+          columnDefs: [
+            {
+              targets: 1, // Column index of the "Action" column
+              orderable: false, // Set orderable to false
+            }, 
+            {
+              targets: 4, width: '200px'
+            },
+            {
+              targets: 1, width: '80px'
+            },
+          ],
+          
+          
+        });
+      
+        table.on("draw.dt", function () {
+          $(".statusCheck").off("change").on("change", function () {
+            var id = $(this).data("id");
+            var status;
+      
+            if ($(this).is(":checked")) {
+              status = 1;
+            } else {
+              status = 2;
+            }
+      
+            requirejs(["sweetAlert2"], function (swal) {
+                $.ajax({
+                    type: "POST",
+                    url: "/updateStatusCustomer/" + id + "/" + status,
+                    async: false,
+                    processData: false,
+                    contentType: false,
+                }).done(function (data) {
+                    swal({
+                        title: data.title,
+                        text: data.msg,
+                        type: data.type,
+                        confirmButtonColor: "#3085d6",
+                        confirmButtonText: "OK",
+                        allowOutsideClick: false,
+                        allowEscapeKey: false,
+                    }).then(function () {
+                        if (data.type == "error") {
+                        } else {
+                            location.reload();
+                        }
+                    });
+                });
+            });
+          });
+        });
+      
+        $("#customerTable").on("responsive-display", function (e, datatable, row, showHide, update) {
+          if (showHide) {
+            $(row.child()[0]).find("input.statusCheck").prop("checked", $(row.node()).find("input.statusCheck").prop("checked"));
+            $(row.child()[0]).find("input.statusCheck").off("change").on("change", function () {
+              $(".statusCheck").trigger("change");
+            });
+          }
+        });
+      });
+      
 
     $(document).on("click", "#addButton", function () {
         $("#addModal").modal("show");
@@ -24,6 +89,9 @@ $(document).ready(function () {
             console.log(data);
             $("#customer_name").val(data.customer_name);
             $("#address").val(data.address);
+            $("#address2").val(data.address2);
+            $("#postcode").val(data.postcode);
+            $("#city").val(data.city);
             $("#phoneNo").val(data.phoneNo);
             $("#idC").val(data.id);
             $("#email").val(data.email);
@@ -54,7 +122,7 @@ $(document).ready(function () {
         id = $(this).data("id");
         requirejs(["sweetAlert2"], function (swal) {
             swal({
-                title: "Are you sure!",
+                title: "Are you sure to delete Customer?",
                 type: "error",
                 confirmButtonClass: "btn-danger",
                 confirmButtonText: "Yes!",
@@ -101,15 +169,51 @@ $(document).ready(function () {
             rules: {
                 customer_name: "required",
                 address: "required",
-                phoneNo: "required",
-                email: "required",
+                postcode: {
+                    required: true,
+                    digits: true,
+                    rangelength: [5, 5]
+                },
+                city: "required",
+                state: "required",
+                country: "required",
+                phoneNo:  {
+                    required: true,
+                    digits: true,
+                    rangelength: [10, 11]
+                    
+                },
+
+                email:{
+                    required: true,
+                    email: true
+                },
+
             },
 
             messages: {
                 customer_name: "Please Insert Customer Name",
-                address: "Please Insert Address",
-                phoneNo: "Please Insert Phone Number",
-                email: "Please Enter Email Address",
+                address: "Please Insert Address 1",
+                phoneNo: {
+                    required: "Please Insert Phone Number",
+                    digits: "Please Insert Correct Phone Number Without ' - ' or Space",
+                    rangelength: "Please Insert Valid Phone Number"
+                    
+                },
+                postcode:  {
+                    required: "Please Insert Postcode",
+                    digits: "Please Insert Valid Postcode",
+                    rangelength: "Please Insert Valid Postcode"
+                },
+                city: "Please Insert City",
+                state: "Please Insert State",
+                country: "Please insert Country",
+                email: {
+                    required: "Please Insert Email Customer",
+                    email: "Please Insert Valid Email Address",
+                    
+                },
+
             },
             submitHandler: function (form) {
                 requirejs(["sweetAlert2"], function (swal) {
@@ -149,15 +253,51 @@ $(document).ready(function () {
             rules: {
                 customer_name: "required",
                 address: "required",
-                phoneNo: "required",
-                email: "required",
+                postcode: {
+                    required: true,
+                    digits: true,
+                    rangelength: [5, 5]
+                },
+                city: "required",
+                state: "required",
+                country: "required",
+                phoneNo:  {
+                    required: true,
+                    digits: true,
+                    rangelength: [10, 11]
+                    
+                },
+
+                email:{
+                    required: true,
+                    email: true
+                },
+
             },
 
             messages: {
                 customer_name: "Please Insert Customer Name",
-                address: "Please Insert Address",
-                phoneNo: "Please Insert Phone Number",
-                email: "Please Enter Email Address",
+                address: "Please Insert Address 1",
+                phoneNo: {
+                    required: "Please Insert Phone Number",
+                    digits: "Please Insert Correct Phone Number Without ' - ' or Space",
+                    rangelength: "Please Insert Valid Phone Number"
+                    
+                },
+                postcode:  {
+                    required: "Please Insert Postcode",
+                    digits: "Please Insert Valid Postcode",
+                    rangelength: "Please Insert Valid Postcode"
+                },
+                city: "Please Insert City",
+                state: "Please Insert State",
+                country: "Please insert Country",
+                email: {
+                    required: "Please Insert Email Customer",
+                    email: "Please Insert Valid Email Address",
+                    
+                },
+
             },
 
             submitHandler: function (form) {
@@ -198,13 +338,15 @@ $(document).ready(function () {
     });
 
     $(".statusCheck").on("change", function () {
-        var checkedValue = $(".statusCheck:checked").val();
-        var id = $(this).data("id");
+        
 
-        if (checkedValue) {
-            var status = 1;
+        var id = $(this).data("id");
+        var status;
+
+        if ($(this).is(":checked")) {
+            status = 1;
         } else {
-            var status = 2;
+            status = 2;
         }
         requirejs(["sweetAlert2"], function (swal) {
             $.ajax({

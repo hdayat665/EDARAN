@@ -52,19 +52,24 @@
                         </table>
                     </div>
                     <div class="row p-2">
-                        <div class="col-sm-4">
+                        <div class="col-sm-6">
                             <label for="firstname" class="form-label">Participant*</label>
-                            <table id="statusparticipant" >
+                            <table id="statusparticipant"  class="table table-striped table-bordered align-middle">
                                 <thead >
                                     <tr>
                                         <th style="min-width: 80px">Name</th>
                                         <th style="min-width: 80px">Status </th>
                                     </tr>
                                 </thead>
-                                <tbody id="tableRow"></tbody>
+                                <tbody id="tableRow">
+                                    <tr class="odd gradeX">
+                                        <td id="event_name"></td>
+                                        <td id="start_date"></td>
+                                    </tr>
+                                </tbody>
                             </table>
                         </div>
-                        <div class="col-sm-8">
+                        <div class="col-sm-6">
                             <label for="issuing-country" class="form-label">Description*</label>
                             <textarea class="form-control" rows="8" id="desc_event" readonly></textarea>
                         </div>

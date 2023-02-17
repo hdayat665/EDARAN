@@ -169,7 +169,7 @@
 									<label for="lapsed date" class="form-label">Employee Name: </label>
 									{{-- <input type="text" class="form-control col-sm-2" name="employerName"> --}}
                                     <select class="form-select" name="employerName" id="employerName">
-                                        <option value="" label="Please Choose "></option>
+                                        <option value="" label="PLEASE CHOOSE"></option>
                                         @foreach($nameStaff as $nf)
                                             <option value="{{ $nf->user_id }}" {{ old('employerName') == $nf->user_id ? 'selected' : '' }}>{{ $nf->fullname }}</option>
                                          @endforeach

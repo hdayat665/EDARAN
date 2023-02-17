@@ -29,6 +29,7 @@ class ProjectService
             ->leftJoin('employment as c', 'a.acc_manager', '=', 'c.id')
             ->select('a.*', 'b.customer_name', 'c.employeeName as acc_manager_name')
             ->where($cond)
+            ->orderBy('id', 'desc')
             ->get();
 
         if (!$data) {
@@ -55,7 +56,7 @@ class ProjectService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success create Project';
+        $data['msg'] = 'Success Create Project';
 
         return $data;
     }
@@ -91,7 +92,7 @@ class ProjectService
             $previousManager['project_id'] = $id;
             $previousManager['user_id'] = $projectManager->project_manager;
             $previousManager['tenant_id'] = Auth::user()->tenant_id;
-            $previousManager['join_date'] = $input['contract_start_date'];
+            $previousManager['join_date'] = date_format(date_create(), 'Y-m-d');
             $previousManager['exit_date'] = now();
             // pr($previousManager);
             PreviousProjectManager::create($previousManager);
@@ -110,10 +111,88 @@ class ProjectService
 
         Project::where('id', $id)->update($input);
 
+        $acc_m = $input['acc_manager'];
+        $data2 = Employee::where([['tenant_id', Auth::user()->tenant_id], ['id', $acc_m]])->first();
+       
+
+        $tenant_id2 = Auth::user()->tenant_id;
+        $project_id2 = $id;
+        $customer_id2 = $input['customer_id'];
+        $employeeid2 = $data2['id'];
+        $designation2 = $data2['designation'];
+        $department2 = $data2['department'];
+        $branch2 = $data2['branch'];
+        $unit2 = $data2['unit'];
+        $joineddate2 = date_format(date_create(), 'Y-m-d');
+        $status2 =("approve");
+        $assign2 =("account manager");
+        $createdat2= date('Y-m-d h:m:s');
+        
+        
+        $projectmem2 = [
+            'tenant_id' => $tenant_id2,
+            'project_id' => $project_id2,
+            'customer_id' => $customer_id2,
+            'employee_id' => $employeeid2,
+            'designation' => $designation2,
+            'department' => $department2,
+            'branch' => $branch2,
+            'unit' => $unit2,
+            'joined_date' => $joineddate2,
+            'status' => $status2,
+            'assign_as' => $assign2,
+            'created_at' => $createdat2,
+            
+        ];
+
+        ProjectMember::create($projectmem2);
+
+        ///
+        $pm = $input['project_manager'];
+        $data3 = Employee::where([['tenant_id', Auth::user()->tenant_id], ['id', $pm]])->first();
+       
+        $tenant_id3 = Auth::user()->tenant_id;
+        $project_id3 = $id;
+        $customer_id3 = $input['customer_id'];
+        $employeeid3 = $data3['id'];
+        $designation3 = $data3['designation'];
+        $department3 = $data3['department'];
+        $branch3 = $data3['branch'];
+        $unit3 = $data3['unit'];
+        $joineddate3 = date_format(date_create(), 'Y-m-d');
+        $status3 =("approve");
+        $assign3 =("project manager");
+        $createdat3= date('Y-m-d h:m:s');
+
+        $projectmem3 = [
+            'tenant_id' => $tenant_id3,
+            'project_id' => $project_id3,
+            'customer_id' => $customer_id3,
+            'employee_id' => $employeeid3,
+            'designation' => $designation3,
+            'department' => $department3,
+            'branch' => $branch3,
+            'unit' => $unit3,
+            'joined_date' => $joineddate3,
+            'status' => $status3,
+            'assign_as' => $assign3,
+            'created_at' => $createdat3,
+        ];
+
+        ProjectMember::create($projectmem3);
+        
+
+
+        // $acc_m = $input['acc_manager'];
+        // $data2 = Employee::where([['tenant_id', Auth::user()->tenant_id], ['id', $acc_m]])->first();
+        // $companyName = $data2['company'];
+
+        // dd($createdat2);
+
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success update Project';
+        $data['msg'] = 'Success Update Project';
 
         return $data;
     }
@@ -137,7 +216,7 @@ class ProjectService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success create Project Location';
+        $data['msg'] = 'Success Create Project Location';
 
         return $data;
     }
@@ -151,7 +230,7 @@ class ProjectService
             $cond[1] = ['project_id', $id];
         }
 
-        $data = ProjectLocation::where($cond)->get();
+        $data = ProjectLocation::where($cond)->orderBy('id', 'desc')->get();
 
         if (!$data) {
             $data = [];
@@ -184,7 +263,7 @@ class ProjectService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success update Project Location';
+        $data['msg'] = 'Success Update Project Location';
 
         return $data;
     }
@@ -205,7 +284,7 @@ class ProjectService
             $data['status'] = config('app.response.success.status');
             $data['type'] = config('app.response.success.type');
             $data['title'] = config('app.response.success.title');
-            $data['msg'] = 'Success delete Project Location';
+            $data['msg'] = 'Success Delete Project Location';
         }
 
         return $data;
@@ -234,7 +313,7 @@ class ProjectService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success create Project Member';
+        $data['msg'] = 'Success Create Project Member';
 
         return $data;
     }
@@ -300,7 +379,7 @@ class ProjectService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success update Project Member';
+        $data['msg'] = 'Success Update Project Member';
 
         return $data;
     }
@@ -319,7 +398,7 @@ class ProjectService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Successfully Save Project Member Location';
+        $data['msg'] = 'Success Save Project Member Location';
 
         return $data;
     }
@@ -344,6 +423,13 @@ class ProjectService
             $input['project_id'] = $project_id;
             $input['status'] = 'pending';
             $input['requested_date'] = date_format(date_create(), 'Y-m-d');
+            
+            $input['designation'] = $employee['designation'];
+            $input['department'] = $employee['department'];
+            $input['branch'] = $employee['branch'];
+            $input['unit'] = $employee['unit'];
+            $input['joined_date'] = date_format(date_create(), 'Y-m-d');
+
 
             ProjectMember::create($input);
 
@@ -375,7 +461,7 @@ class ProjectService
             $data['status'] = config('app.response.success.status');
             $data['type'] = config('app.response.success.type');
             $data['title'] = config('app.response.success.title');
-            $data['msg'] = 'Successfully Submit Project Request';
+            $data['msg'] = 'Success Submit Project Request';
         }
 
         return $data;
@@ -510,7 +596,13 @@ class ProjectService
     {
         $employee = Employee::where('user_id', Auth::user()->id)->first();
 
-        $projectMember = ProjectMember::select('id', 'project_id', 'status', 'created_at')->where([['employee_id', '=', $employee->id]])->whereIn('status', ['pending', 'approve', 'reject'])->groupBy('project_id')->get();
+        $projectMember = ProjectMember::select('id', 'project_id', 'status', 'created_at')
+            ->where([['employee_id', '=', $employee->id]])
+            ->whereIn('status', ['pending', 'approve', 'reject'])
+            ->groupBy('project_id')
+            ->orderBy('id', 'desc')
+            ->get();
+
         // dd($projectMember);
         $projectId['approve'] = [];
         foreach ($projectMember as $project) {
@@ -704,7 +796,8 @@ class ProjectService
     }
     public function getRejectProject($id)
     {
-        $data = ProjectMember::where([['project_id', $id], ['tenant_id', Auth::user()->tenant_id], ['employee_id', Auth::user()->id], ['status', 'reject']])->first();
+        //$data = ProjectMember::where([['project_id', $id], ['tenant_id', Auth::user()->tenant_id], ['employee_id', Auth::user()->id], ['status', 'reject']])->first();
+        $data = ProjectMember::where([['project_id', $id], ['tenant_id', Auth::user()->tenant_id], ['status', 'reject']])->first();
 
         if (!$data) {
             $data = [];

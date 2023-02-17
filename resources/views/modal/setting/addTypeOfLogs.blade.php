@@ -24,6 +24,7 @@
                             <option class="form-label" value="Non-Project" >Non-Project</option>
                             <option class="form-label" value="Project" >Project</option>
                             <option class="form-label" value="Office" >Office</option>
+                            <option class="form-label" value="Home" >Home</option>
                             <option class="form-label" value="Others" >Others</option>
                         </select>
                     </div>

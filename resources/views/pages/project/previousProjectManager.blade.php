@@ -9,7 +9,7 @@
                     <th class="text-nowrap">Department</th>
                     <th class="text-nowrap">Branch</th>
                     <th class="text-nowrap">Unit</th>
-                    <th class="text-nowrap">Join Date</th>
+                    <th class="text-nowrap">Joined Date</th>
                     <th class="text-nowrap">Exit Date</th>
                 </tr>
             </thead>

@@ -1,4 +1,8 @@
+
+
 $(document).ready(function() {
+
+    
 
     $("#datepicker-joindate").datepicker({
         todayHighlight: true,
@@ -38,7 +42,7 @@ $(document).ready(function() {
         id = $(this).data('id');
         requirejs(['sweetAlert2'], function(swal) {
             swal({
-                title: "Are you sure!",
+                title: "Are you sure to delete Event?",
                 type: "error",
                 confirmButtonClass: "btn-danger",
                 confirmButtonText: "Yes!",
@@ -140,29 +144,59 @@ $(document).ready(function() {
                 .remove()
                 .end();
 
+            // var locationOffice = getLocationByProjectId(projectId);
+
+            // locationOffice.done(function(data) {
+            //     // console.log(data);
+            //     for (let i = 0; i < data.length; i++) {
+            //         const locations = data[i];
+            //         var opt = document.createElement("option");
+            //         document.getElementById("projectLocationOffice").innerHTML +=
+            //             '<option value="' + locations['id'] + '">' + locations['location_name'] + "</option>";
+            //     }
+            // })
+
             var locationOffice = getLocationByProjectId(projectId);
 
             locationOffice.done(function(data) {
-                // console.log(data);
+                var select = document.getElementById("projectLocationOffice");
+                select.innerHTML = '<option value="">Please Choose</option>';
                 for (let i = 0; i < data.length; i++) {
-                    const locations = data[i];
+                    const location = data[i];
                     var opt = document.createElement("option");
-                    document.getElementById("projectLocationOffice").innerHTML +=
-                        '<option value="' + locations['id'] + '">' + locations['location_name'] + "</option>";
+                    opt.value = location['id'];
+                    opt.text = location['location_name'];
+                    select.appendChild(opt);
                 }
-            })
+            });
+
+
+            // var activityOffice = getActivityByProjectId(projectId);
+
+            // activityOffice.done(function(data) {
+            //     // console.log(data);
+            //     for (let i = 0; i < data.length; i++) {
+            //         const locations = data[i];
+            //         var opt = document.createElement("option");
+            //         document.getElementById("activityOffice").innerHTML +=
+            //             '<option value="' + locations['id'] + '">' + locations['activity_name'] + "</option>";
+            //     }
+            // })
 
             var activityOffice = getActivityByProjectId(projectId);
 
             activityOffice.done(function(data) {
-                // console.log(data);
+                var select = document.getElementById("activityOffice");
+                select.innerHTML = '<option value="">Please Choose</option>';
                 for (let i = 0; i < data.length; i++) {
-                    const locations = data[i];
+                    const activity = data[i];
                     var opt = document.createElement("option");
-                    document.getElementById("activityOffice").innerHTML +=
-                        '<option value="' + locations['id'] + '">' + locations['activity_name'] + "</option>";
+                    opt.value = activity['id'];
+                    opt.text = activity['activity_name'];
+                    select.appendChild(opt);
                 }
-            })
+            });
+
         }
 
         if (type = 'editLog') {
@@ -181,29 +215,57 @@ $(document).ready(function() {
                 .remove()
                 .end();
 
+            // var locationOffice = getLocationByProjectId(projectId);
+
+            // locationOffice.done(function(data) {
+            //     // console.log(data);
+            //     for (let i = 0; i < data.length; i++) {
+            //         const locations = data[i];
+            //         var opt = document.createElement("option");
+            //         document.getElementById("projectLocationOfficeEdit").innerHTML +=
+            //             '<option value="' + locations['id'] + '">' + locations['location_name'] + "</option>";
+            //     }
+            // })
+
             var locationOffice = getLocationByProjectId(projectId);
 
             locationOffice.done(function(data) {
-                // console.log(data);
+                var select = document.getElementById("projectLocationOfficeEdit");
+                select.innerHTML = '<option value="">Please Choose</option>';
                 for (let i = 0; i < data.length; i++) {
-                    const locations = data[i];
+                    const location = data[i];
                     var opt = document.createElement("option");
-                    document.getElementById("projectLocationOfficeEdit").innerHTML +=
-                        '<option value="' + locations['id'] + '">' + locations['location_name'] + "</option>";
+                    opt.value = location['id'];
+                    opt.text = location['location_name'];
+                    select.appendChild(opt);
                 }
-            })
+            });
+
+            // var activityOffice = getActivityByProjectId(projectId);
+
+            // activityOffice.done(function(data) {
+            //     // console.log(data);
+            //     for (let i = 0; i < data.length; i++) {
+            //         const locations = data[i];
+            //         var opt = document.createElement("option");
+            //         document.getElementById("activityOfficeEdit").innerHTML +=
+            //             '<option value="' + locations['id'] + '">' + locations['activity_name'] + "</option>";
+            //     }
+            // })
 
             var activityOffice = getActivityByProjectId(projectId);
 
             activityOffice.done(function(data) {
-                // console.log(data);
+                var select = document.getElementById("activityOfficeEdit");
+                select.innerHTML = '<option value="">Please Choose</option>';
                 for (let i = 0; i < data.length; i++) {
-                    const locations = data[i];
+                    const activity = data[i];
                     var opt = document.createElement("option");
-                    document.getElementById("activityOfficeEdit").innerHTML +=
-                        '<option value="' + locations['id'] + '">' + locations['activity_name'] + "</option>";
+                    opt.value = activity['id'];
+                    opt.text = activity['activity_name'];
+                    select.appendChild(opt);
                 }
-            })
+            });
         }
     }
 
@@ -268,6 +330,7 @@ $(document).ready(function() {
     $('#saveLogButton').click(function(e) {
         $("#addLogForm").validate({
             rules: {
+                event_name: 'required',
                 type_of_log: "required",
                 date: "required",
                 office_log: "required",
@@ -282,17 +345,18 @@ $(document).ready(function() {
             },
 
             messages: {
+                event_name: 'Please insert event name',
                 type_of_log: "Please Choose Type of Log",
-                date: "Please Choose Specific Date",
+                date: "Please Choose  Date",
                 office_log: "Please Choose Office Log",
                 project_id: "Please Choose",
                 office_log_project: "Please Choose",
                 activity_name: "Please Choose Activity Name",
                 activity_office: "Please Choose",
-                start_time: "Please Enter Start Time",
+                start_time: "Please Choose Start Time",
                 project_location: "Please Enter Location",
                 project_location_office: "Please Enter Location",
-                end_time: "Please Enter End Time",
+                end_time: "Please Choose End Time",
             },
             submitHandler: function(form) {
                 requirejs(['sweetAlert2'], function(swal) {
@@ -352,16 +416,16 @@ $(document).ready(function() {
 
             messages: {
                 type_of_log: "Please Choose Type of Log",
-                date: "",
+                date: "Please Choose  Date",
                 office_log: "Please Choose Office Log",
                 project_id: "Please Choose",
                 office_log_project: "Please Choose",
                 activity_name: "Please Choose Activity Name",
                 activity_office: "Please Choose",
-                start_time: "",
+                start_time: "Please  Choose Start Time",
                 project_location: "Please Enter Location",
                 project_location_office: "Please Enter Location",
-                end_time: "",
+                end_time: "Please Choose End Time",
             },
             submitHandler: function(form) {
                 requirejs(['sweetAlert2'], function(swal) {
@@ -406,7 +470,7 @@ $(document).ready(function() {
         var id = $('#id').val();
         requirejs(['sweetAlert2'], function(swal) {
             swal({
-                title: "Are you sure!",
+                title: "Are you sure to delete Log?",
                 type: "error",
                 confirmButtonClass: "btn-danger",
                 confirmButtonText: "Yes!",
@@ -455,18 +519,21 @@ $(document).ready(function() {
                 recurring: "required",
                 location: "required",
                 location_by_project: "required",
+                participant: "required",
+                
             },
 
             messages: {
                 event_name: "Please Insert Event Name",
-                start_date: "Choose Date",
-                end_date: "Choose Date",
-                start_time: "Please Choose Date",
-                end_time: "Please Choose Date",
+                start_date: "Please Choose Start Date",
+                end_date: "Please Choose End Date",
+                start_time: "Please Choose Start Time",
+                end_time: "Please Choose End Time",
                 duration: "Please Choose Duration",
                 recurring: "Please Select",
-                location: "Please Enter Specific Location",
+                location: "Please Insert Location",
                 location_by_project: "Please Enter Specific Location",
+                participant: 'required',
             },
             submitHandler: function(form) {
                 requirejs(['sweetAlert2'], function(swal) {
@@ -523,14 +590,14 @@ $(document).ready(function() {
 
             messages: {
                 event_name: "Please Insert Event Name",
-                start_date: "Choose Date",
-                end_date: "Choose Date",
-                start_time: "Please Choose Date",
-                end_time: "Please Choose Date",
+                start_date: "Please Choose Start Date",
+                end_date: "Please Choose End Date",
+                start_time: "Please Choose Start Time",
+                end_time: "Please Choose End Time",
                 duration: "Please Choose Duration",
                 recurring: "Please Select",
-                location: "Please Enter Specific Location",
-                location_by_project: "Please Enter Specific Location",
+                location: "Please Enter  Location",
+                location_by_project: "Please Enter  Location",
             },
             submitHandler: function(form) {
                 requirejs(['sweetAlert2'], function(swal) {
@@ -575,7 +642,7 @@ $(document).ready(function() {
         var id = $('#idEvent').val();
         requirejs(['sweetAlert2'], function(swal) {
             swal({
-                title: "Are you sure!",
+                title: "Are you sure to delete Event?",
                 type: "error",
                 confirmButtonClass: "btn-danger",
                 confirmButtonText: "Yes!",
@@ -659,7 +726,8 @@ $(document).ready(function() {
                 endDay = endDay < 10 ? "0" + endDay : endDay;
 
                 event.push({
-                    title: events['event_name'],
+                    // title: "Event: " + events['event_name'],
+                    title: "Event: " + events['event_name'] +  ' ' + events['project_id'],
                     start: startYear + '-' + startMonth + '-' + startDay,
                     end: endYear + '-' + endMonth + '-' + endDay,
                     color: app.color.red,
@@ -668,7 +736,11 @@ $(document).ready(function() {
                         eventId: events['id']
                     }
 
+                    
+                    
+
                 });
+                
             }
 
             var log = [];
@@ -704,8 +776,9 @@ $(document).ready(function() {
                 }
 
                 log.push({
-                    title: type_of_log(logs['type_of_log']),
-                    start: startYear + '-' + startMonth + '-' + startDay + 'T' + startTime + ':00',
+                    title: (logs['project_name'] ? logs['project_name'] + ' ' : '') + "\n" + (logs['activitynameas'] ? logs['activitynameas'] + ' ' : '') + ' from ' + logs['start_time'] + ' to ' + logs['end_time'],
+                    // start: startYear + '-' + startMonth + '-' + startDay + 'T' + startTime + ':00',
+                    start: startYear + '-' + startMonth + '-' + startDay,
                     color: app.color.primary,
                     extendedProps: {
                         type: 'log',
@@ -745,6 +818,7 @@ $(document).ready(function() {
 
                     $("#dateaddlog").val(formatedDate);
                 },
+          
                 eventClick: function(info) {
 
                     info.jsEvent.preventDefault();
@@ -825,9 +899,9 @@ $(document).ready(function() {
                             $("#typeoflogedit").val(data.type_of_log);
                             $("#officelog2edit").val(data.office_log);
                             $("#dateaddlogedit").val(data.date);
-                            $("#project_id").val(data.project_id);
+                            $("#project_id_edit").val(data.project_id);
                             $("#officeLogProjectEdit").val(data.project_id);
-                            $("#activity_name").val(data.activity_name);
+                            $("#activity_name_edit1").val(data.activity_name);
                             $("#starttimeedit").val(data.start_time);
                             $('#projectlocsearchedit').picker('set', data.project_location);
                             $('#projectlocsearchedit').picker('set', data.project_location);
@@ -1200,6 +1274,10 @@ $(document).ready(function() {
                             $("#addneweventprojectlocsearchedit").val(data.location);
                             $("#addneweventselectprojectedit").picker('set', data.project_id);
 
+
+                            $("#durationeditevent").val(data.duration);
+                            
+
                             // $("#addneweventparticipantedit").picker('remove', 114);
                             // $("#addneweventparticipantedit").picker('remove', 113);
                             // $("#addneweventparticipantedit").picker('remove', 112);
@@ -1270,34 +1348,51 @@ $(document).ready(function() {
     $("#dateaddlog").datepicker({
         todayHighlight: true,
         autoclose: true,
-        format: 'dd-mm-yyyy'
+        format: 'yyyy-mm-dd'
     });
     $("#starteventdate").datepicker({
         todayHighlight: true,
-        autoclose: true
+        autoclose: true,
+        format: 'yyyy/mm/dd'
     });
     $("#endeventdate").datepicker({
         todayHighlight: true,
-        autoclose: true
+        autoclose: true,
+        format: 'yyyy/mm/dd'
     });
+    
+    $('#activity_name_edit').picker({ search: true });
     $('#projectlocsearch').picker({ search: true });
+    $('#activity_names').picker({ search: true });
     $('#addneweventprojectlocsearch').picker({ search: true });
     $('#addneweventparticipant').picker({ search: true });
     $('#addneweventselectproject').picker({ search: true });
     $(function() {
-        $("#starttime").timepicker({
+        $("#starttime").mdtimepicker({
             showMeridian: false,
         });
-        $("#endtime").timepicker({
+        $("#endtime").mdtimepicker({
             showMeridian: false,
         });
-        starteventtime
-        $("#starteventtime").timepicker({
-            showMeridian: false,
+
+        $('#daystart,#dayend').datepicker({
+            format:'yyyy/mm/dd',
+        }).datepicker("setDate",'now');
+
+        $('#daystartedit,#dayendedit').datepicker({
+            format:'yyyy/mm/dd',
+        }).datepicker("setDate",'now');
+
+        
+        $('#starteventtime,#endeventtime').mdtimepicker({
+       
         });
-        $("#endeventtime").timepicker({
-            showMeridian: false,
-        });
+        // $("#starteventtime").timepicker({
+        //     showMeridian: false,
+        // });
+        // $("#endeventtime").timepicker({
+        //     showMeridian: false,
+        // });
     })
 
     $(document).on('change', "#typeoflog", function() {
@@ -1312,9 +1407,12 @@ $(document).ready(function() {
     $(document).on('change', "#typeoflog", function() {
         if ($(this).val() == "3") {
             $("#myproject").show();
+            $("#activity_locationadd").show();
+            
         } else {
             $("#myproject").hide();
             $("#listproject").hide();
+            $("#activity_locationadd").hide();
         }
     });
     $(document).on('change', "#officelog2", function() {
@@ -1458,11 +1556,12 @@ $(document).ready(function() {
     //  START EDIT MODAL LOG AND EVENT JS
     $("#dateaddlogedit").datepicker({
         todayHighlight: true,
-        autoclose: true
+        autoclose: true,
+        format: 'yyyy-mm-dd'
     });
     $("#starteventdateedit").datepicker({
         todayHighlight: true,
-        autoclose: true
+        autoclose: true,
     });
     $("#endeventdateedit").datepicker({
         todayHighlight: true,
@@ -1472,17 +1571,18 @@ $(document).ready(function() {
     $('#addneweventprojectlocsearchedit').picker({ search: true });
     $('#addneweventparticipantedit').picker({ search: true });
     $('#addneweventselectprojectedit').picker({ search: true });
-    $("#starttimeedit").timepicker({
+
+    $("#starttimeedit").mdtimepicker({
         showMeridian: false,
     });
-    $("#endtimeedit").timepicker({
+    $("#endtimeedit").mdtimepicker({
         showMeridian: false,
     });
-    starteventtime
-    $("#starteventtimeedit").timepicker({
+    
+    $("#starteventtimeedit").mdtimepicker({
         showMeridian: false,
     });
-    $("#endeventtimeedit").timepicker({
+    $("#endeventtimeedit").mdtimepicker({
         showMeridian: false,
     });
     $(document).on('change', "#typeoflogedit", function() {
@@ -1497,9 +1597,12 @@ $(document).ready(function() {
     $(document).on('change', "#typeoflogedit", function() {
         if ($(this).val() == "3") {
             $("#myprojectedit").show();
+            $("#typeoflogedit").show();
+            
         } else {
             $("#myprojectedit").hide();
             $("#listprojectedit").hide();
+            $("#typeoflogedit").hide();
         }
     });
     $(document).on('change', "#officelog2edit", function() {
@@ -1679,4 +1782,97 @@ $(document).ready(function() {
     });
 
 });
+    $("#duration,#starteventdate,#starteventtime,#endeventdate,#endeventtime").focus(function () {
+
+    var startdt = new Date($("#starteventdate").val() + " " + $("#starteventtime").val());
+    
+    var enddt = new Date($("#endeventdate").val() + " " + $("#endeventtime").val());
+
+    var diff = enddt - startdt;
+    
+    var days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    diff -=  days * (1000 * 60 * 60 * 24);
+    
+    var hours = Math.floor(diff / (1000 * 60 * 60));
+    diff -= hours * (1000 * 60 * 60);
+    
+    var mins = Math.floor(diff / (1000 * 60));
+    diff -= mins * (1000 * 60);
+    
+    $("#duration").val(days + " days : " + hours + " hours : " + mins + " minutes ");
+    
+
+     });
+
+    
+
+     $("#logduration,#daystart,#dayend,#starttime,#endtime").focus(function () {
+
+        var startdt = new Date($("#daystart").val() + " " + $("#starttime").val());
+        
+        var enddt = new Date($("#dayend").val() + " " + $("#endtime").val());
+    
+        var diff = enddt - startdt;
+        
+        var days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        diff -=  days * (1000 * 60 * 60 * 24);
+        
+        var hours = Math.floor(diff / (1000 * 60 * 60));
+        diff -= hours * (1000 * 60 * 60);
+        
+        var mins = Math.floor(diff / (1000 * 60));
+        diff -= mins * (1000 * 60);
+        
+        $("#logduration").val( days + " days : " + hours + " hours : " + mins + " minutes ");
+        
+    
+         });
+
+         //update total duration
+         $("#total_hour,#daystartedit,#dayendedit,#starttimeedit,#endtimeedit").focus(function () {
+
+            var startdt = new Date($("#daystartedit").val() + " " + $("#starttimeedit").val());
+            
+            var enddt = new Date($("#dayendedit").val() + " " + $("#endtimeedit").val());
+        
+            var diff = enddt - startdt;
+            
+            var days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            diff -=  days * (1000 * 60 * 60 * 24);
+            
+            var hours = Math.floor(diff / (1000 * 60 * 60));
+            diff -= hours * (1000 * 60 * 60);
+            
+            var mins = Math.floor(diff / (1000 * 60));
+            diff -= mins * (1000 * 60);
+            
+            console.log(days + ':' + hours)
+            $("#total_hour").val( days + " days : " + hours + " hours : " + mins + " minutes ");
+            
+        
+             });
+
+            //edit event modal mytimesheet
+         $("#durationeditevent,#starteventdateedit,#endeventdateedit,#starteventtimeedit,#endeventtimeedit").focus(function () {
+
+            var startdt = new Date($("#starteventdateedit").val() + " " + $("#starteventtimeedit").val());
+            
+            var enddt = new Date($("#endeventdateedit").val() + " " + $("#endeventtimeedit").val());
+        
+            var diff = enddt - startdt;
+            
+            var days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            diff -=  days * (1000 * 60 * 60 * 24);
+            
+            var hours = Math.floor(diff / (1000 * 60 * 60));
+            diff -= hours * (1000 * 60 * 60);
+            
+            var mins = Math.floor(diff / (1000 * 60));
+            diff -= mins * (1000 * 60);
+            
+            console.log(days + ':' + hours)
+            $("#durationeditevent").val( days + " days : " + hours + " hours : " + mins + " minutes ");
+            
+        
+             });
 // });// });

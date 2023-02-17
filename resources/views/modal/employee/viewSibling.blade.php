@@ -25,7 +25,7 @@
                         <div class="col-sm-6">
                             <label for="gender" class="form-label">Gender</label>
                             <select class="form-select" id="genderS1" name="gender">
-                                <option value="0" label="Please Choose"  ></option>
+                                <option value="0" label="PLEASE CHOOSE"  ></option>
                                 @foreach ($gender as $key => $status)
                                 <option value="{{$key}}"  >{{$status}}</option>
                                 @endforeach
@@ -40,7 +40,7 @@
                         <div class="col-sm-6">
                             <label for="lastname" class="form-label">Relationship</label>
                             <select class="form-select" name="relationship" id="relationshipS1">
-                                <option value="0" label="Please Choose" ></option>
+                                <option value="0" label="PLEASE CHOOSE" ></option>
                                 @foreach ($relationships as $key => $relationship)
                                 <option value="{{$key}}"  >{{$relationship}}</option>
                                 @endforeach
@@ -76,7 +76,7 @@
                         <div class="col-sm-6">
                             <label for="city" class="form-label">City*</label>
                             <select class="form-select" name="city" id="cityS1">
-                                <option value="0" label="Please Choose"  ></option>
+                                <option value="0" label="PLEASE CHOOSE"  ></option>
                                 @foreach ($citys as $key => $city)
                                 <option value="{{$key}}"  >{{$city}}</option>
                                 @endforeach
@@ -87,7 +87,7 @@
                         <div class="col-sm-6">
                             <label for="state" class="form-label">State*</label>
                             <select class="form-select" name="state" id="stateS1">
-                                <option value="0" label="Please Choose"  ></option>
+                                <option value="0" label="PLEASE CHOOSE"  ></option>
                                 @foreach ($states as $key => $state)
                                 <option value="{{$key}}"  >{{$state}}</option>
                                 @endforeach
@@ -96,7 +96,7 @@
                         <div class="col-sm-6">
                             <label for="country" class="form-label">Country</label>
                             <select class="form-select" name="country" id="countryS1">
-                                <option value="0" label="Please Choose"  ></option>
+                                <option value="0" label="PLEASE CHOOSE"  ></option>
                                 <optgroup id="country-optgroup-Americas" label="Americas">
                                     @foreach ($americass as $key => $america)
                                     <option value="{{$key}}"  >{{$america}}</option>

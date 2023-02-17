@@ -9,22 +9,22 @@
                 <form>
                     <div class="row p-2">
                         <div class="col-sm-6">
-                            <label for="firstname" class="form-label">First Name</label>
-                            <input type="text" id="firstNameP" name="firstName" class="form-control" aria-describedby="firstname">
+                            <label for="firstname" class="form-label">First Name*</label>
+                            <input type="text" id="firstNameP" name="firstName" class="form-control" aria-describedby="firstname" placeholder="FIRST NAME">
                         </div>
                         <div class="col-sm-6">
-                            <label for="lastname" class="form-label">Last Name</label>
-                            <input type="text" id="lastNameP" name="lastName" class="form-control" aria-describedby="lastname">
+                            <label for="lastname" class="form-label">Last Name*</label>
+                            <input type="text" id="lastNameP" name="lastName" class="form-control" aria-describedby="lastname" placeholder="LAST NAME">
                         </div>
                     </div>
                     <div class="row p-2">
                         <div class="col-sm-6">
                             <label for="firstname" class="form-label" style="color: red">Full Name</label>
-                            <input type="text" id="" name="" class="form-control" aria-describedby="firstname">
+                            <input type="text" id="" name="" class="form-control" aria-describedby="firstname" placeholder="FULL NAME">
                         </div>
                         <div class="col-sm-6">
                             <label for="lastname" class="form-label" style="color: red">Old Identification Number</label>
-                            <input type="text" id="" name="" class="form-control" aria-describedby="lastname">
+                            <input type="text" id="" name="" class="form-control" aria-describedby="lastname" placeholder="0000000">
                         </div>
                     </div>
                     <div class="row p-2">
@@ -39,8 +39,8 @@
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
-                                    <label for="lastname" class="form-label" style="color: red">New Identification Number</label>
-                                    <input type="number" id="idNoaddChild" name="idNo" value="" class="form-control" >
+                                    <label for="lastname" class="form-label" style="color: red">New Identification Number*</label>
+                                    <input type="number" id="idNoaddChild" name="idNo" value="" class="form-control" placeholder="000000-00-0000" >
                                     
                                 </div>
                             </div>
@@ -60,7 +60,7 @@
                                 <div class="col-sm-12">
                                     <label for="passport" class="form-label" style="color: red">Passport Number</label>
                                   
-                                    <input type="text" id="" name=""  class="form-control" aria-describedby="">
+                                    <input type="text" id="" name=""  class="form-control" aria-describedby="" placeholder="A00000000">
                                 </div>
                             </div>
                         </div>
@@ -88,17 +88,17 @@
                     </div>
                     <div class="row p-2">
                         <div class="col-sm-3">
-                            <label for="dob" class="form-label">Date Birth</label>
-                            <input type="date" id="DOBP" name="DOB" class="form-control" aria-describedby="dob">
+                            <label for="dob" class="form-label">Date Of Birth</label>
+                            <input type="date" id="DOBP" name="DOB" class="form-control" aria-describedby="dob" placeholder="YYYY/MM/DD">
                         </div>
                         <div class="col-sm-3">
                             <label for="dob" class="form-label" style="color: red">Age</label>
-                            <input type="text" id="" name="" class="form-control" aria-describedby="">
+                            <input type="text" id="" name="" class="form-control" aria-describedby="" placeholder="AGE">
                         </div>
                         <div class="col-sm-6">
                             <label for="age" class="form-label">Gender</label>
                             <select class="form-select" name="gender" id="genderP">
-                                <option value="0" label="Please Choose "></option>
+                                <option value="0" label="PLEASE CHOOSE"></option>
                                 @foreach ($gender as $key => $status)
                                 <option value="{{$key}}">{{$status}}</option>
                                 @endforeach
@@ -108,13 +108,13 @@
                     <div class="row p-2">
                         <div class="col-sm-6">
                             <label for="passport" class="form-label">Contact Number</label>
-                            <input type="text" id="contactNoP" name="contactNo" class="form-control" aria-describedby="passport">
+                            <input type="text" id="contactNoP" name="contactNo" class="form-control" aria-describedby="passport" placeholder="000-00000000">
                         </div>
                         <div class="col-sm-6">
                             <label for="expirydate" class="form-label">Relationship</label>
                             <select class="form-select" name="relationship" id="relationshipP">
                                     <?php $relationship = relationship() ?>
-                                    <option value="0" label="Please Choose"  ></option>
+                                    <option value="0" label="PLEASE CHOOSE"  ></option>
                                     @foreach ($relationship as $key => $status)
                                     <option value="{{$key}}"> {{$status}}</option>
                                     @endforeach
@@ -133,8 +133,8 @@
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
-                                    <label for="lastname" class="form-label" style="color: red">OKU Card Number</label>
-                                    <input type="number" id="okucard6" name="" value="" class="form-control" readonly >
+                                    <label for="lastname" class="form-label" style="color: red">OKU Card Number*</label>
+                                    <input type="number" id="okucard6" name="" value="" class="form-control" readonly placeholder="OKU CARD NUMBER">
                                     
                                 </div>
                             </div>
@@ -142,8 +142,8 @@
                         <div class="col-sm-6">
                             <div class="row">
                                 <div class="col-sm-6">
-                                    <label for="dob" class="form-label" style="color: red">OKU Attachment</label>
-                                    <input type="file" id="okuattach6" name="" class="form-control" style="pointer-events: none" aria-describedby="">
+                                    <label for="dob" class="form-label" style="color: red">OKU Attachment*</label>
+                                    <input type="file" id="okuattach6" name="" class="form-control" style="pointer-events: none" aria-describedby="" >
                                 </div>
                             </div>
                         </div>
@@ -162,21 +162,21 @@
                     <div class="row p-2">
                         <div class="col-sm-6">
                             <label for="address-1" class="form-label">Address 1</label>
-                            <input type="text" id="address1P" name="address1" class="form-control" aria-describedby="address-1">
+                            <input type="text" id="address1P" name="address1" class="form-control" aria-describedby="address-1" placeholder="ADDRESS 1">
                         </div>
                         <div class="col-sm-6">
                             <label for="address-2" class="form-label">Address 2</label>
-                            <input type="text" id="address2P" name="address2" class="form-control" aria-describedby="address-2">
+                            <input type="text" id="address2P" name="address2" class="form-control" aria-describedby="address-2" placeholder="ADDRESS 2">
                         </div>
                     </div>
                     <div class="row p-2">
                         <div class="col-sm-6">
                             <label for="postcode" class="form-label">Postcode</label>
-                            <input type="text" id="postcodeP" name="postcode" class="form-control" aria-describedby="postcode">
+                            <input type="text" id="postcodeP" name="postcode" class="form-control" aria-describedby="postcode" placeholder="00000">
                         </div>
                         <div class="col-sm-6">
                             <label for="city" class="form-label">City</label>
-                            <input type="text" class="form-select" name="city" id="cityP">
+                            <input type="text" class="form-select" name="city" id="cityP" placeholder="CITY">
                         </div>
                     </div>
                     <div class="row p-2">
@@ -184,7 +184,7 @@
                             <label for="state" class="form-label">State</label>
                             <select class="form-select" id="stateP" name="state">
                                 <?php $state = state() ?>
-                                <option value="0" label="Please Choose"  ></option>
+                                <option value="0" label="PLEASE CHOOSE"  ></option>
                                 @foreach ($state as $key => $status)
                                 <option value="{{$key}}"> {{$status}}</option>
                                 @endforeach

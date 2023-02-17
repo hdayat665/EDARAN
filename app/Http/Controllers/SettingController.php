@@ -806,7 +806,7 @@ class SettingController extends Controller
     {
         $ss = new SettingService;
 
-        $result['datas'] = $ss->eclaimGeneralView();
+        $result['data'] = $ss->getDateClaim();
 
         return view('pages.setting.eclaim.eclaimDate', $result);
     }
@@ -896,6 +896,13 @@ class SettingController extends Controller
     {
         $result = getUserByRole($id);
         // pr($result->userProfile->id);
+        return response()->json($result);
+    }
+
+    public function getUserByJobGrade($id = '')
+    {
+        $result = getUserByJobGrade($id);
+
         return response()->json($result);
     }
 
@@ -1092,5 +1099,16 @@ class SettingController extends Controller
 
         $result = $dlh->deleteLeaveholiday($id);
         return response()->json($result);
+    }
+
+    // timesheet period
+    public function timesheetperiodView()
+    {
+        // $ltv = new SettingService;
+
+        // $result = $ltv->timesheetperiodView();
+
+        //return view('pages.setting.timesheet.settingtimesheetperiod', $result);
+        return view('pages.setting.timesheet.settingtimesheetperiod');
     }
 }

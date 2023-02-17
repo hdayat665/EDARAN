@@ -271,18 +271,18 @@ var handleDashboardTodolist = function() {
 	});
 };
 
-var handleDashboardGritterNotification = function() {
-	setTimeout(function() {
-		$.gritter.add({
-			title: 'Welcome back !!',
-			text: 'You have 1 Notification',
-			image: '../assets/img/user/user-2.jpg',
-			sticky: true,
-			time: '',
-			class_name: 'my-sticky-class'
-		});
-	}, 1000);
-};
+// var handleDashboardGritterNotification = function() {
+// 	setTimeout(function() {
+// 		$.gritter.add({
+// 			// title: 'Welcome back !!',
+// 			// text: 'You have 1 Notification',
+// 			image: '../assets/img/user/user-2.jpg',
+// 			sticky: true,
+// 			time: '',
+// 			class_name: 'my-sticky-class'
+// 		});
+// 	}, 1000);
+// };
 
 var Dashboard = function () {
 	"use strict";

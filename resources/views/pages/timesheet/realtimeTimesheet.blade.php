@@ -15,14 +15,14 @@
                         </a>
                     </div>
                 </div><br>
-                <div class="form-control" id="filterform" style="display:none">
+                {{-- <div class="form-control" id="filterform" style="display:none"> --}}
                     <form action="/searchRealtimeEventTimesheet" method="POST">
                         @csrf
-                        <div class="row p-2">
+                        <div class="row p-2" id="filterform" style="display:none">
                             <h4>Filter</h4>
                             <div class="col-sm-2">
                                 <label for="emergency-firstname" class="form-label">Employee Name</label>
-                                <select class="form-select" id="" name="employee_name">
+                                <select class="form-select" id="employeesearch" name="employee_name" data-default-value="">
                                     <option class="form-label" value="">Please Select</option>
                                     <?php $employees = getEmployee(); ?>
                                     @foreach ($employees as $employee)
@@ -32,7 +32,7 @@
                             </div>
                             <div class="col-sm-2">
                                 <label for="emergency-firstname" class="form-label">Event Name</label>
-                                <select class="form-select" id="" name="event_name">
+                                <select class="form-select" id="eventsearch" name="event_name" data-default-value="">
                                     <option class="form-label" value="">Please Select</option>
                                     <?php $timesheets = getEventTimesheet(); ?>
                                     @foreach ($timesheets as $timesheet)
@@ -45,21 +45,21 @@
                                 <input type="text" id="daterange" class="form-control" name="date_range" value=""
                                     placeholder="click to select the date range" />
                             </div>
-                            <div class="col-sm-1">
+                            <div class="col-sm-2">
                                 <label for="emergency-firstname" class="form-label">&nbsp;</label>
                                 <button class="btn btn-primary form-control" type="submit"> <i
                                         class="fas fa-magnifying-glass"></i> Search</button>
                             </div>
-                            <div class="col-sm-1">
+                            <div class="col-sm-2">
                                 <label for="emergency-firstname" class="form-label">&nbsp;</label>
-                                <a href="#" class="btn btn-primary form-control"> <i class="fas fa-repeat"></i>
+                                <a href="#" class="btn btn-primary form-control" id="reset"> <i class="fas fa-repeat"></i>
                                     Reset</a>
                             </div>
                         </div>
                     </form>
                 </div>
                 <br>
-                <div class="form-control">
+                {{-- <div class="form-control"> --}}
                     <div class="panel-body">
                         <table id="timesheetapproval" class="table table-striped table-bordered align-middle">
                             <thead>
@@ -77,26 +77,31 @@
                                 @if ($events)
                                     @foreach ($events as $event)
                                         <tr class="odd gradeX">
-                                            <td width="5%"><a href="javascript:;" data-bs-toggle="modal"
+                                            <td style="text-align: center" width="7%"><a href="javascript:;" data-bs-toggle="modal"
                                                     data-id="{{ $event->id }}" id="buttonViewEvent"
-                                                    class="btn btn-primary">View</a></td>
+                                                    class="btn btn-primary"></i> View</a></td>
                                             <td>{{ $event->event_name }}</td>
                                             <td>{{ $event->start_date }} - {{ $event->end_date }}</td>
                                             <td>{{ $event->start_time }} - {{ $event->end_time }}</td>
                                             <td>{{ $event->location ? getProjectLocation($event->location)->location_name : '-' }}
                                             </td>
-                                            <td>{{ $event->desc }}</td>
-                                            <td width="5%"><a href="javascript:;" data-bs-toggle="modal"
-                                                    data-id="{{ $event->id }}" id="buttonnViewParticipant">view</a></td>
+                                            <td>{{ $event->desc ? $event->desc : '-' }}</td>
+                                            {{-- @php
+                                                $names = explode(',', $event->participant);
+                                            @endphp --}}
+                                            <td style="text-align: center" width="7%"><a class="btn btn-primary" href="javascript:;" data-bs-toggle="modal"
+                                                    {{-- data-id="{{ $event->id }}" id="buttonnViewParticipant"></i> ({{ count($names) }}) view</a></td> --}}
+                                                    data-id="{{ $event->id }}" id="buttonnViewParticipant"></i> view</a></td>
+                        
                                         </tr>
                                     @endforeach
                                 @endif
                             </tbody>
                         </table>
                     </div>
-                </div>
+                {{-- </div> --}}
             </div>
-            @include('modal.timesheet.addEventRealtimeModal');
-            @include('modal.timesheet.viewEventRealtimeModal');
-            @include('modal.timesheet.viewParticipantRealtimeModal');
+            @include('modal.timesheet.addEventRealtimeModal')
+            @include('modal.timesheet.viewEventRealtimeModal')
+            @include('modal.timesheet.viewParticipantRealtimeModal')    
         @endsection

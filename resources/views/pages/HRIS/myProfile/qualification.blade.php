@@ -23,7 +23,7 @@
                 <button class="btn btn-primary col-md-2" data-bs-toggle="modal" data-bs-target="#modalladded">Add Education</button>
             </div>
             <div class="row p-2">
-                <table  id=""  class="table table-striped table-bordered align-middle">
+                <table id="" class="table table-striped table-bordered align-middle">
                     <thead>
                     <tr>
                         <th data-orderable="false">No</th>	
@@ -36,8 +36,9 @@
                         <th class="text-nowrap">Education Attachments</th>
                     </tr>
                     </thead>
+                    
                     <tbody>
-                    <tr>
+                    {{-- <tr>
                         <td>1</td>
                         <td>
                             <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle"><i class="fa fa-cogs"></i> Action <i class="fa fa-caret-down"></i></a>
@@ -72,7 +73,33 @@
                         <td>MASTER'S DEGREE</td>
                         <td>PASS</td>
                         <td>Master.pdf</td>
-                    </tr>
+                    </tr> --}}
+                    <?php $id = 0 ?>
+                    @if ($childrens)
+                        @foreach ($childrens as $education)
+                        <?php $id++ ?>
+                        <tr>
+                            <td> {{$id}} </td>
+                            <td>
+                                <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle"><i class="fa fa-cogs"></i> Actions <i class="fa fa-caret-down"></i></a>
+                                <div class="dropdown-menu">
+                                    <a href="javascript:;" data-bs-toggle="modal" id="addEducation{{$education->id}}" data-id="{{$education->id}}"> Edit</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a href="javascript:;" id="" data-id="" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#modalreject"> Delete</a>
+                                    <div class="dropdown-divider"></div>
+                                </div>
+                            </td>
+
+                            <td> {{ $education->fromDate }} </td>
+                            <td> {{ $education->toDate }} </td>
+                            <td style="text-transform: uppercase;"> {{ $education->instituteName }} </td>
+                            <td style="text-transform: uppercase;"> {{ $education->highestLevelAttained }} </td>
+                            <td style="text-transform: uppercase;"> {{ $education->result }} </td>
+
+                            {{-- {{dd($education)}} --}}
+                        </tr>
+                        @endforeach
+                    @endif
                     </tbody>
                 </table>
             </div>
@@ -148,17 +175,18 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
+            <form id="addEducation">
             <div class="row p-2">
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="" class="form-label">From Date</label>
-                        <input type="text" class="form-control" id="datepicker-fromdate">
+                        <input type="text" class="form-control" id="datepicker-fromdate" placeholder="YYYY/MM/DD" name="fromDate" value="{{$education->fromDate ?? ''}}">
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="" class="form-label">To Date</label>
-                        <input type="text" class="form-control" id="datepicker-todate">
+                        <input type="text" class="form-control" id="datepicker-todate" placeholder="YYYY/MM/DD" name="toDate" value="{{$education->toDate ?? ''}}">
                     </div>
                 </div>
             </div>
@@ -166,13 +194,13 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="" class="form-label">Institute Name</label>
-                        <input type="text" class="form-control" id="">
+                        <input type="text" class="form-control" id="instituteName" placeholder="INSTITUTE NAME" name="instituteName" value="{{$education->instituteName ?? ''}}">
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="" class="form-label">Highest Level Attained</label>
-                        <input type="text" class="form-control" id="">
+                        <input type="text" class="form-control" id="highestLevelAttained" placeholder="HIGHEST LEVEL ATTAINED" name="highestLevelAttained" value="{{$education->highestLevelAttained ?? ''}}">
                     </div>
                 </div>
             </div>
@@ -180,7 +208,7 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="" class="form-label">Result</label>
-                        <input type="text" class="form-control" id="">
+                        <input type="text" class="form-control" id="result" placeholder="RESULT" name="result" value="{{$education->result ?? ''}}">
                     </div>
                 </div>
                 <div class="col-md-6">
@@ -193,8 +221,9 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
+          <button class="btn btn-primary" id="saveEducation">Save changes</button>
         </div>
+    </form>
       </div>
     </div>
   </div>
@@ -214,13 +243,13 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="" class="form-label">From Date</label>
-                        <input type="text" class="form-control" id="datepicker-fromdateu">
+                        <input type="text" class="form-control" id="datepicker-fromdateu" placeholder="YYYY/MM/DD">
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="" class="form-label">To Date</label>
-                        <input type="text" class="form-control" id="datepicker-todateu">
+                        <input type="text" class="form-control" id="datepicker-todateu" placeholder="YYYY/MM/DD">
                     </div>
                 </div>
             </div>
@@ -228,13 +257,13 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="" class="form-label">Institute Name</label>
-                        <input type="text" class="form-control" id="">
+                        <input type="text" class="form-control" id="" placeholder="INSTITUTE NAME">
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="" class="form-label">Highest Level Attained</label>
-                        <input type="text" class="form-control" id="">
+                        <input type="text" class="form-control" id="" placeholder="HIGHEST LEVEL ATTAINED">
                     </div>
                 </div>
             </div>
@@ -242,7 +271,7 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="" class="form-label">Result</label>
-                        <input type="text" class="form-control" id="">
+                        <input type="text" class="form-control" id="" placeholder="RESULT">
                     </div>
                 </div>
                 <div class="col-md-6">
@@ -276,7 +305,7 @@
                 <div class="form-group row">
                     <label for="staticEmail" class="col-sm-4 col-form-label">Date</label>
                     <div class="col-sm-8">
-                        <input type="text" class="form-control" id="datepicker-others">
+                        <input type="text" class="form-control" id="datepicker-others" placeholder="YYYY/MM/DD">
                     </div>
                 </div>
            </div>
@@ -284,7 +313,7 @@
                 <div class="form-group row">
                     <label for="staticEmail" class="col-sm-4 col-form-label">Professional Qualification Details</label>
                     <div class="col-sm-8">
-                        <input type="text" class="form-control">
+                        <input type="text" class="form-control" placeholder="PROFESSIONAL QUALIFICATION DETAILS">
                     </div>
                 </div>
             </div>
@@ -320,7 +349,7 @@
                 <div class="form-group row">
                     <label for="staticEmail" class="col-sm-4 col-form-label">Date</label>
                     <div class="col-sm-8">
-                        <input type="text" class="form-control" id="datepicker-othersu">
+                        <input type="text" class="form-control" id="datepicker-othersu" placeholder="YYYY/MM/DD">
                     </div>
                 </div>
            </div>
@@ -328,7 +357,7 @@
                 <div class="form-group row">
                     <label for="staticEmail" class="col-sm-4 col-form-label">Professional Qualification Details</label>
                     <div class="col-sm-8">
-                        <input type="text" class="form-control">
+                        <input type="text" class="form-control" placeholder="PROFESSIONAL QUALIFICATION DETAILS">
                     </div>
                 </div>
             </div>

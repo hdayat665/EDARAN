@@ -21,9 +21,9 @@
                                     <input type="hidden" name="category_role" value="admin">
                                     <select class="form-select" id="roleId" name="role">
                                         <option class="form-label" value="">Please Select</option>
-                                        <?php $roles = getAllRole(); ?>
+                                        <?php $roles = getAllJobGrade(); ?>
                                         @foreach ($roles as $role)
-                                            <option value="{{ $role->id }}">{{ $role->roleName }}</option>
+                                            <option value="{{ $role->id }}">{{ $role->jobGradeName }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -96,7 +96,7 @@
                     </div>
                     <br>
                     <div class="form-control">
-                        <form id="claimFinanaceForm">
+                        <form id="claimFinanceForm">
                             <div class="row p-2">
                                 <div class="col-md-2">
                                     <h5>FINANCE</h5>
@@ -107,11 +107,11 @@
                                 <div class="col-md-6">
                                     <input type="hidden" name="type" value="monthlyClaim">
                                     <input type="hidden" name="category_role" value="finance">
-                                    <select class="form-select" id="roleIdF">
+                                    <select class="form-select" id="roleIdF" name="role">
                                         <option class="form-label" value="">Please Select</option>
-                                        <?php $roles = getAllRole(); ?>
+                                        <?php $roles = getAllJobGrade(); ?>
                                         @foreach ($roles as $role)
-                                            <option value="{{ $role->id }}">{{ $role->roleName }}</option>
+                                            <option value="{{ $role->id }}">{{ $role->jobGradeName }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -122,7 +122,7 @@
                                     <label class="form-label">Checker 1</label>
                                 </div>
                                 <div class="col-md-6">
-                                    <select class="form-select" id="checker1F">
+                                    <select class="form-select" id="checker1F" name="checker1">
                                         <option class="form-label" value="" selected>Please
                                             Select</option>
                                     </select>
@@ -134,7 +134,7 @@
                                     <label class="form-label">Checker 2</label>
                                 </div>
                                 <div class="col-md-6">
-                                    <select class="form-select" id="checker2F">
+                                    <select class="form-select" id="checker2F" name="checker2">
                                         <option class="form-label" value="" selected>Please
                                             Select</option>
                                     </select>
@@ -146,7 +146,7 @@
                                     <label class="form-label">Checker 3</label>
                                 </div>
                                 <div class="col-md-6">
-                                    <select class="form-select" id="checker3F">
+                                    <select class="form-select" id="checker3F" name="checker3">
                                         <option class="form-label" value="" selected>Please
                                             Select</option>
                                     </select>
@@ -158,7 +158,7 @@
                                     <label class="form-label">Recommender</label>
                                 </div>
                                 <div class="col-md-6">
-                                    <select class="form-select" id="recommenderF">
+                                    <select class="form-select" id="recommenderF" name="recommender">
                                         <option class="form-label" value="" selected>Please
                                             Select</option>
                                     </select>
@@ -170,7 +170,7 @@
                                     <label class="form-label">Approver</label>
                                 </div>
                                 <div class="col-md-6">
-                                    <select class="form-select" id="approverF">
+                                    <select class="form-select" id="approverF" name="approver">
                                         <option class="form-label" value="" selected>Please
                                             Select</option>
                                     </select>
@@ -201,12 +201,12 @@
                                 </div>
                                 <div class="col-md-6">
                                     <input type="hidden" name="type" value="cashAdvance">
-                                    <input type="hidden" name="category_role" value="admin">
-                                    <select class="form-select" id="roleIdC">
+                                    <input type="hidden" name="category_role" value="cash_advance">
+                                    <select class="form-select" id="roleIdC" name="role">
                                         <option class="form-label" value="">Please Select</option>
-                                        <?php $roles = getAllRole(); ?>
+                                        <?php $roles = getAllJobGrade(); ?>
                                         @foreach ($roles as $role)
-                                            <option value="{{ $role->id }}">{{ $role->roleName }}</option>
+                                            <option value="{{ $role->id }}">{{ $role->jobGradeName }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -217,7 +217,7 @@
                                     <label class="form-label">Checker 1</label>
                                 </div>
                                 <div class="col-md-6">
-                                    <select class="form-select" id="checker1C">
+                                    <select class="form-select" id="checker1C" name="checker1">
                                         <option class="form-label" value="" selected>Please
                                             Select</option>
                                     </select>
@@ -229,7 +229,7 @@
                                     <label class="form-label">Checker 2</label>
                                 </div>
                                 <div class="col-md-6">
-                                    <select class="form-select" id="checker2C">
+                                    <select class="form-select" id="checker2C" name="checker2">
                                         <option class="form-label" value="" selected>Please
                                             Select</option>
                                     </select>
@@ -241,7 +241,7 @@
                                     <label class="form-label">Checker 3</label>
                                 </div>
                                 <div class="col-md-6">
-                                    <select class="form-select" id="checker3C">
+                                    <select class="form-select" id="checker3C" name="checker3">
                                         <option class="form-label" value="" selected>Please
                                             Select</option>
                                     </select>
@@ -253,7 +253,7 @@
                                     <label class="form-label">Recommender</label>
                                 </div>
                                 <div class="col-md-6">
-                                    <select class="form-select" id="recommenderC">
+                                    <select class="form-select" id="recommenderC" name="recommender">
                                         <option class="form-label" value="" selected>Please
                                             Select</option>
                                     </select>
@@ -265,7 +265,7 @@
                                     <label class="form-label">Approver</label>
                                 </div>
                                 <div class="col-md-6">
-                                    <select class="form-select" id="approverC">
+                                    <select class="form-select" id="approverC" name="approver">
                                         <option class="form-label" value="" selected>Please
                                             Select</option>
                                     </select>

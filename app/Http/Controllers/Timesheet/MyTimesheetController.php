@@ -127,7 +127,8 @@ class MyTimesheetController extends Controller
 
         $result['events'] = $ss->getEvents();
         $result['logs'] = $ss->getLogs();
-
+        // dd($result['logs'] );
+        
         return response()->json($result);
     }
 
@@ -158,6 +159,7 @@ class MyTimesheetController extends Controller
         $data['departmentId'] = '';
         $data['deisgnationId'] = '';
         $data['employeeId'] = '';
+        $data['months'] = '';
 
         return view('pages.timesheet.timesheetApproval', $data);
     }
@@ -181,6 +183,9 @@ class MyTimesheetController extends Controller
         $data['departmentId'] = $input['department'];
         $data['deisgnationId'] = $input['designation'];
         $data['employeeId'] = $input['employee_name'];
+        $data['employee_id'] = $input['employee_name'];
+
+        $data['months'] = $input['month'];
 
         return view('pages.timesheet.timesheetApproval', $data);
     }
@@ -297,5 +302,33 @@ class MyTimesheetController extends Controller
         return view('pages.timesheet.employeeRealtime', $data);
     }
 
+
+    public function getTimesheetamendById($id)
+    {
+        $ss = new MyTimeSheetService;
+
+        $data = $ss->gettimesheetid($id);
+
+        return response()->json($data);
+    }
+
+
+    public function updatereason(Request $r)
+    {
+        $ps = new MyTimeSheetService;
+
+        $result = $ps->addamendreasons($r);
+
+        return response()->json($result);
+    }
+
+    // public function getParticipantNameById($participant = '')
+    // {
+    //     $ss = new MyTimeSheetService;
+
+    //     $result = $ss->getParticipantNameById($participant);
+
+    //     return response()->json($result);
+    // }
 
 }

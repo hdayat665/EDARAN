@@ -41,6 +41,11 @@
                 </tbody>
             </table>
         </div>
+        <div class="row p-2">
+                <div class="col align-self-start">
+                    <a href="" class="btn btn-light" style="color: black;" type="submit"><i class="fa fa-arrow-left"></i> Back</a>
+                </div>
+            </div>
     </div>
     @include('modal.setting.addTypeOfLogs')
     @include('modal.setting.editTypeOfLogs')

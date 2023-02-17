@@ -6,21 +6,21 @@
     <div class="panel panel" id="timesheetApprovalJs">
         <div class="panel-heading">
             <div class="col-md-12" style="display: flex; justify-content: flex-end" >
-                <a href="javascript:;" id="approveAllButton" class="btn btn-primary">Approve All</a>	&nbsp;&nbsp;&nbsp;
+                <a href="javascript:;" id="approveAllButton" class="btn btn-primary"><i class="fa fa-check" aria-hidden="true"></i> Approve All</a>	&nbsp;&nbsp;&nbsp;
                 <a id="filter" class="btn btn-default btn-icon btn-lg">
                     <i class="fa fa-filter"></i>
                 </a>
             </div>
         </div>
         <div class="panel-body">
-            <div class="form-control" id="filterform" style="display:none">
+            {{-- <div class="form-control" id="filterform" style="display:none"> --}}
                 <form action="/searchTimesheet" method="POST">
-                    <div class="row p-2">
+                    <div class="row p-2" style="display: none" id="filterform">
                         <h4>Filter</h4>
                         <div class="col-sm-2">
                             <label for="emergency-firstname" class="form-label">Employer Name</label>
-                            <select class="form-select" id="" name="employee_name">
-                                <option class="form-label" value="">Please Select</option>
+                            <select class="form-select" id="employeesearch" name="employee_name"  data-default-value="">
+                                <option class="form-label" value="" >Please Select</option>
                                 <?php $employees = getEmployee() ?>
                                 @foreach ($employees as $employee)
                                 <option value="{{$employee->id}}" {{($employeeId == $employee->id) ? 'selected="selected"' : ''}}>{{$employee->employeeName}}</option>
@@ -29,13 +29,26 @@
                         </div>
                         <div class="col-sm-2">
                             <label for="emergency-lastname" class="form-label">Month</label>
-                            <select class="form-select" id=""  name="month">
+                            <select class="form-select" id="monthsearch"  name="month" data-default-value="">
                                 <option class="form-label" value="">Please Select</option>
+                                <option class="form-label" {{($months == 'jan') ? 'selected="selected"' : ''}} value="jan">JANUARY</option>
+                                <option class="form-label" {{($months == 'feb') ? 'selected="selected"' : ''}} value="feb">FEBRUARY</option>
+                                <option class="form-label" {{($months == 'mac') ? 'selected="selected"' : ''}} value="mac">MARCH</option>
+                                <option class="form-label" {{($months == 'april') ? 'selected="selected"' : ''}} value="april">APRIL</option>
+                                <option class="form-label" {{($months == 'may') ? 'selected="selected"' : ''}} value="may">MAY</option>
+                                <option class="form-label" {{($months == 'june') ? 'selected="selected"' : ''}} value="june">JUNE</option>
+                                <option class="form-label" {{($months == 'july') ? 'selected="selected"' : ''}} value="july">JULY</option>
+                                <option class="form-label" {{($months == 'aug') ? 'selected="selected"' : ''}} value="aug">AUGUST</option>
+                                <option class="form-label" {{($months == 'sept') ? 'selected="selected"' : ''}} value="sept">SEPTEMBER</option>
+                                <option class="form-label" {{($months == 'oct') ? 'selected="selected"' : ''}} value="oct">OCTOBER</option>
+                                <option class="form-label" {{($months == 'nov') ? 'selected="selected"' : ''}} value="nov">NOVEMBER</option>
+                                <option class="form-label" {{($months == 'dec') ? 'selected="selected"' : ''}} value="dec">DECEMBER</option>
+                               
                             </select>
                         </div>
                         <div class="col-sm-2">
                             <label for="emergency-firstname" class="form-label">Designation</label>
-                            <select class="form-select" id=""  name="designation">
+                            <select class="form-select" id="designsearch"  name="designation" data-default-value="">
                                 <option class="form-label" value="">Please Select</option>
                                 <?php $designations = getDesignation() ?>
                                 @foreach ($designations as $designation)
@@ -45,7 +58,7 @@
                         </div>
                         <div class="col-sm-2">
                             <label for="emergency-firstname" class="form-label">Department</label>
-                            <select class="form-select" id="" name="department">
+                            <select class="form-select" id="departmentsearch" name="department" data-default-value="">
                                 <option class="form-label" value="">Please Select</option>
                                 <?php $departments = getDepartment() ?>
                                 @foreach ($departments as $department)
@@ -55,11 +68,11 @@
                         </div>
                         <div class="col-sm-2">
                             <label for="emergency-firstname" class="form-label">Status</label>
-                            <select class="form-select" id="" name="status">
+                            <select class="form-select" id="statussearch" name="status" data-default-value="">
                                 <option class="form-label" value="">Please Select</option>
-                                <option class="form-label" {{($statusId == 'cancel') ? 'selected="selected"' : ''}} value="cancel">Cancel</option>
-                                <option class="form-label" {{($statusId == 'approve') ? 'selected="selected"' : ''}} value="approve">Approve</option>
-                                <option class="form-label" {{($statusId == 'reject') ? 'selected="selected"' : ''}} value="reject">Reject</option>
+                                <option class="form-label" {{($statusId == 'cancel') ? 'selected="selected"' : ''}} value="cancel">CANCEL</option>
+                                <option class="form-label" {{($statusId == 'approve') ? 'selected="selected"' : ''}} value="approve">APPROVE</option>
+                                <option class="form-label" {{($statusId == 'reject') ? 'selected="selected"' : ''}} value="reject">REJECT</option>
                             </select>
                         </div>
                         <div class="col-sm-1">
@@ -68,13 +81,13 @@
                         </div>
                         <div class="col-sm-1">
                             <label for="emergency-firstname" class="form-label">&nbsp;</label>
-                            <a href="#" class="btn btn-primary form-control"> <i class="fas fa-repeat"></i> Reset</a>
+                            <a href="#" class="btn btn-primary form-control" id="reset"> <i class="fas fa-repeat"></i> Reset</a>
                         </div>
                     </div>
                 </form>
-            </div>
+            {{-- </div> --}}
             <br>
-            <div class="form-control">
+            {{-- <div class="form-control"> --}}
                 <div class="panel-body">
                     <form id="approveAllForm">
                         <table id="timesheetapproval" class="table table-striped table-bordered align-middle">
@@ -98,14 +111,14 @@
                                     <td>
                                         <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle"><i class="fa fa-cogs"></i> Actions <i class="fa fa-caret-down"></i></a>
                                         <div class="dropdown-menu">
-                                            @if ($timesheet->status == 'approve')
+                                            @if ($timesheet->status == 'approve' || $timesheet->status == 'amend')
                                             <div class="viewtimesheet">
                                                 <a href="/viewTimesheet/{{$timesheet->id}}/{{$timesheet->user_id}}" class="dropdown-item" data-id="{{$timesheet->id}}" id="viewtimesheet">View Timesheet</a>
                                             </div>
-                                            <div class="canceltimesheet">
+                                            {{-- <div class="canceltimesheet">
                                                 <div class="dropdown-divider "></div>
                                                 <a  class="dropdown-item" data-id="{{$timesheet->id}}" data-status="cancel" id="statusButton">Cancel Timesheet</a>
-                                            </div>
+                                            </div> --}}
                                             @else
                                             <div class="viewtimesheet">
                                                 <a href="/viewTimesheet/{{$timesheet->id}}/{{$timesheet->user_id}}" class="dropdown-item" data-id="{{$timesheet->id}}" id="viewtimesheet">View Timesheet</a>
@@ -115,14 +128,24 @@
                                                 <div class="approvetimesheet">
                                                     <a  class="dropdown-item" data-id="{{$timesheet->id}}" data-status="approve" id="statusButton">Approve Timesheet</a>
                                                 </div>
-                                                <div class="rejecttimesheet">
+                                                {{-- <div class="rejecttimesheet">
                                                     <a  class="dropdown-item" data-id="{{$timesheet->id}}" data-status="reject" id="statusButton">Reject Timesheet</a>
-                                                </div>
+                                                </div> --}}
                                             </div>
-                                            <div class="canceltimesheet">
+                                            <div class="amendtimesheet">
+                                                <div class="dropdown-divider "></div>
+                                                <div class="amendtimesheet">
+                                                    <a  class="dropdown-item" data-id="{{$timesheet->id}}" data-status="amend" id="amendreasonmodal" data-bs-toggle="modal"
+                                                        id="amendreasonmodal">Amend Timesheet</a>
+                                                </div>
+                                                {{-- <div class="rejecttimesheet">
+                                                    <a  class="dropdown-item" data-id="{{$timesheet->id}}" data-status="reject" id="statusButton">Reject Timesheet</a>
+                                                </div> --}}
+                                            </div>
+                                            {{-- <div class="canceltimesheet">
                                                 <div class="dropdown-divider "></div>
                                                 <a  class="dropdown-item" data-id="{{$timesheet->id}}" data-status="cancel" id="statusButton">Cancel Timesheet</a>
-                                            </div>
+                                            </div> --}}
                                             @endif
                                         </div>
                                     </td>
@@ -140,8 +163,12 @@
                                         <div id="approved"> <span class="badge bg-lime rounded-pill">Approved</span> </div>
                                         @endif
 
-                                        @if ($timesheet->status == 'reject')
+                                        {{-- @if ($timesheet->status == 'reject')
                                         <div id="rejected"> <span class="badge bg-danger rounded-pill">Rejected</span></div>
+                                        @endif --}}
+
+                                        @if ($timesheet->status == 'amend')
+                                        <div id="amended"> <span class="badge bg-danger rounded-pill" data-toggle="tooltipamend"  data-placement="bottom" title="{{$timesheet->amendreason}}">Amended</span> </div>
                                         @endif
                                     </td>
                                 </tr>
@@ -151,8 +178,9 @@
                         </table>
                     </form>
                 </div>
-            </div>
+            {{-- </div> --}}
         </div>
     </div>
 </div>
+@include('modal.timesheet.amendreasonmodal')
 @endsection

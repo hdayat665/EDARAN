@@ -6,7 +6,7 @@
             <div class="col-md-5">
                 <select class="form-select" name="company"  id="companyForEmployment">
                 <?php $companys = getCompany(); ?>
-                <option label="Please Choose" selected="selected"> </option>
+                <option label="PLEASE CHOOSE" selected="selected"> </option>
                 @if ($companys)
 
                 @foreach ($companys as $company)
@@ -24,7 +24,7 @@
 
                 <select class="form-select" name="departmentId"  id="departmentShow">
                     
-                <option label="Please Choose" selected="selected"> </option>
+                <option label="PLEASE CHOOSE" selected="selected"> </option>
                
                 </select>
             </div>
@@ -37,7 +37,7 @@
 
                 <select class="form-select" name="unitId"  id="unitShow">
                     
-                <option label="Please Choose" selected="selected"> </option>
+                <option label="PLEASE CHOOSE" selected="selected"> </option>
                 
                 </select>
 
@@ -48,7 +48,7 @@
 
                 <select class="form-select" name="branchId"  id="branchShow">
                    
-                <option label="Please Choose" selected="selected"> </option>
+                <option label="PLEASE CHOOSE" selected="selected"> </option>
                 
                 </select>
 
@@ -60,7 +60,7 @@
             <div class="col-md-5">
                 <select class="form-select" name="jobGrade" >
                     <?php $jobGrades = getJobGrade(); ?>
-                    <option label="Please Choose" selected="selected"> </option>
+                    <option label="PLEASE CHOOSE" selected="selected"> </option>
                     @if ($jobGrades)
 
                     @foreach ($jobGrades as $jobGrade)
@@ -75,7 +75,7 @@
             <div class="col-md-5">
                 <select class="form-select" name="designation" >
                     <?php $designations = getDesignation(); ?>
-                    <option label="Please Choose" selected="selected"> </option>
+                    <option label="PLEASE CHOOSE" selected="selected"> </option>
                     @if ($designations)
 
                     @foreach ($designations as $designation)
@@ -93,7 +93,7 @@
             <div class="col-md-5">
                 <select class="form-select" name="employmentType" >
                     <?php $employmentTypes = getEmploymentType(); ?>
-                    <option label="Please Choose" selected="selected"> </option>
+                    <option label="PLEASE CHOOSE" selected="selected"> </option>
                     @if ($employmentTypes)
 
                     @foreach ($employmentTypes as $employmentType)
@@ -109,7 +109,7 @@
                 <select class="form-select" name="report_to" >
 
                     <?php $employees = getEmployee(); ?>
-                    <option value="" label="Please Choose" selected="selected"> </option>
+                    <option value="" label="PLEASE CHOOSE" selected="selected"> </option>
                     @if ($employees)
 
                     @foreach ($employees as $employee)
