@@ -20,11 +20,11 @@
                     <div class="row p-2">
                         {{-- full name --}}
                         <div class="col-sm-6">
-                            <label for="firstname" class="form-label" style="color: red">Full Name</label>
+                            <label for="firstname" class="form-label" >Full Name</label>
                             <input type="text" id="" name="" class="form-control" aria-describedby="" readonly style="text-transform:uppercase" placeholder="FULL NAME">
                         </div>
                         <div class="col-sm-6">
-                            <label for="lastname" class="form-label" style="color: red;">Old Identification Number</label>
+                            <label for="lastname" class="form-label" >Old Identification Number</label>
                             <input type="text" id="" name="" class="form-control" aria-describedby="" style="text-transform:uppercase" placeholder="0000000">
                         </div>
                     </div>
@@ -34,13 +34,13 @@
                                 <div class="col-sm-6 ">
                                     <div class="form-check form-switch align-right">
                                         <input class="form-check-input partCheck8" value="" type="checkbox" name=""  id="">
-                                        <label class="form-check-label" for="citizen" style="color: red">
+                                        <label class="form-check-label" for="citizen" >
                                             Non-Citizen
                                         </label>
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
-                                    <label for="lastname" class="form-label" style="color: red">New Identification Number*</label>
+                                    <label for="lastname" class="form-label" >New Identification Number*</label>
                                     <input type="number" id="idnumber6" name="idNo" value="" class="form-control" placeholder="000000-00-0000" >
                                     
                                 </div>
@@ -93,7 +93,7 @@
                             <label for="dob" class="form-label">Date Of Birth*</label>
                             <input type="text" id="dob6" name="DOB" class="form-control" aria-describedby="dob" readonly placeholder="YYYY/MM/DD">
                         </div>
-                        <div class="col-sm-3" style="color: red">
+                        <div class="col-sm-3" >
                             <label for="dob" class="form-label">Age</label>
                             <input type="text" id="age6" name="" class="form-control" aria-describedby="" readonly placeholder="AGE">
                         </div>
