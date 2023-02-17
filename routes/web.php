@@ -107,6 +107,8 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('/adminRecView', 'adminRecView');
             Route::get('/adminRecDetailView/{id}', 'adminRecDetailView');
             Route::get('/HodCashApprovalView', 'HodCashApprovalView');
+            Route::post('/createPvNumber/{id}', 'createPvNumber');
+
 
 
             // Route::get('/dashboardHost', 'dashboardHost')->name('dashboardHost');

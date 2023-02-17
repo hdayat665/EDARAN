@@ -244,4 +244,22 @@ class ClaimApprovalService
 
         return $data;
     }
+
+    public function createPvNumber($id = '')
+    {
+        $claim = GeneralClaim::where('id', $id)->first();
+
+        $pvNo = [
+            'pv_number' => 'PV-' . $claim->claim_type . '-' . $claim->id
+        ];
+
+        GeneralClaim::where('id', $id)->update($pvNo);
+
+        $data['status'] = config('app.response.success.status');
+        $data['type'] = config('app.response.success.type');
+        $data['title'] = config('app.response.success.title');
+        $data['msg'] = 'Success Generate PV Number';
+
+        return $data;
+    }
 }
