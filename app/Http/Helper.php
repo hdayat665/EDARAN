@@ -743,7 +743,8 @@ if (!function_exists('getEmployee')) {
 if (!function_exists('getEmployeeexcept')) {
     function getEmployeeexcept($id = '')
     {
-        $data = Employee::where([['tenant_id', Auth::user()->tenant_id], ['employeeid', '!=', null], ['jobGrade', $id]])->get();
+        //$data = Employee::where([['tenant_id', Auth::user()->tenant_id], ['employeeid', '!=', null], ['jobGrade', $id]])->get();
+        $data = Employee::where([['tenant_id', Auth::user()->tenant_id], ['employeeid', '!=', null]])->get();
 
         if (!$data) {
             $data = [];
