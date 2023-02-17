@@ -23,11 +23,10 @@
                             </select>
                         </div>
                         <div class="col-md-4">
-                            <input type="text" name="project_code" class="form-control mb-5px" />
+                            <input type="text" name="project_code" class="form-control mb-5px" placeholder="PROJECT CODE"/>
                         </div>
                         <div class="col-md-4">
-                            <input type="text" name="project_name" class="form-control mb-5px "
-                                style="text-transform: uppercase;" />
+                            <input type="text" name="project_name" class="form-control mb-5px " style="text-transform: uppercase;" placeholder="PROJECT NAME"/>
                         </div>
                     </div>
                     <div class="row">
@@ -35,7 +34,7 @@
                     </div>
                     <div class="row mb-15px">
                         <div class="col-md-12">
-                            <textarea type="text" class="form-control " rows="5" name="desc" style="text-transform: uppercase;"></textarea>
+                            <textarea type="text" class="form-control " rows="5" name="desc" style="text-transform: uppercase;" placeholder="DESCRIPTION"></textarea>
                         </div>
                     </div>
                     <div class="row">
@@ -51,10 +50,10 @@
                     </div>
                     <div class="row mb-15px">
                         <div class="col-md-4">
-                            <input type="number" name="contract_value" class="form-control mb-5px" />
+                            <input type="number" name="contract_value" class="form-control mb-5px" placeholder="CONTRACT VALUE" />
                         </div>
                         <div class="col-md-4">
-                            <select class="form-select" name="contract_type">
+                            <select class="form-select" name="contract_type" placeholder="CONTRACT VALUE">
                                 <option label="PLEASE CHOOSE"></option>
                                 <?php $types = getContractType(); ?>
                                 @foreach ($types as $key => $type)
@@ -80,15 +79,15 @@
                     <div class="row mb-15px">
                         <div class="col-md-4">
                             <input type="text" class="form-control" name="LOA_date" id="datepicker-loa"
-                                placeholder="yyyy/mm/dd" />
+                                placeholder="YYYY/MM/DD" />
                         </div>
                         <div class="col-md-4">
                             <input type="text" class="form-control" name="contract_start_date" id="datepicker-start"
-                                placeholder="yyyy/mm/dd" />
+                                placeholder="YYYY/MM/DD" />
                         </div>
                         <div class="col-md-4">
                             <input type="text" class="form-control" name="contract_end_date" id="datepicker-end"
-                                placeholder="yyyy/mm/dd" />
+                                placeholder="YYYY/MM/DD" />
                         </div>
                     </div>
                     <div class="row">
@@ -108,11 +107,11 @@
                         </div>
                         <div class="col-md-4">
                             <input type="text" class="form-control" name="warranty_start_date"
-                                id="datepicker-warstart" placeholder="yyyy/mm/dd" />
+                                id="datepicker-warstart" placeholder="YYYY/MM/DD" />
                         </div>
                         <div class="col-md-4">
                             <input type="text" class="form-control" id="datepicker-warend"
-                                name="warranty_end_date" placeholder="yyyy/mm/dd" />
+                                name="warranty_end_date" placeholder="YYYY/MM/DD" />
                         </div>
                     </div>
                     <div class="row">
@@ -122,11 +121,11 @@
                     </div>
                     <div class="row mb-15px">
                         <div class="col-md-4">
-                            <input type="number" class="form-control mb-5px" name="bank_guarantee_amount" />
+                            <input type="number" class="form-control mb-5px" name="bank_guarantee_amount" placeholder="BANK GUARANTEE AMOUNT"/>
                         </div>
                         <div class="col-md-4">
                             <input type="text" class="form-control" id="datepicker-bankexpiry"
-                                name="bank_guarantee_expiry_date" placeholder="yyyy/mm/dd" />
+                                name="bank_guarantee_expiry_date" placeholder="YYYY/MM/DD" />
                         </div>
                         <div class="col-md-4">
                             <select class="form-select" name="status">

@@ -36,7 +36,7 @@ $(document).ready(function () {
             },
 
             messages: {
-                reason: "",
+                reason: "Please Insert Reason",
             },
             submitHandler: function (form) {
                 requirejs(["sweetAlert2"], function (swal) {

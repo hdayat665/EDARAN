@@ -29,6 +29,7 @@ class ProjectService
             ->leftJoin('employment as c', 'a.acc_manager', '=', 'c.id')
             ->select('a.*', 'b.customer_name', 'c.employeeName as acc_manager_name')
             ->where($cond)
+            ->orderBy('id', 'desc')
             ->get();
 
         if (!$data) {
@@ -229,7 +230,7 @@ class ProjectService
             $cond[1] = ['project_id', $id];
         }
 
-        $data = ProjectLocation::where($cond)->get();
+        $data = ProjectLocation::where($cond)->orderBy('id', 'desc')->get();
 
         if (!$data) {
             $data = [];
@@ -595,7 +596,13 @@ class ProjectService
     {
         $employee = Employee::where('user_id', Auth::user()->id)->first();
 
-        $projectMember = ProjectMember::select('id', 'project_id', 'status', 'created_at')->where([['employee_id', '=', $employee->id]])->whereIn('status', ['pending', 'approve', 'reject'])->groupBy('project_id')->get();
+        $projectMember = ProjectMember::select('id', 'project_id', 'status', 'created_at')
+            ->where([['employee_id', '=', $employee->id]])
+            ->whereIn('status', ['pending', 'approve', 'reject'])
+            ->groupBy('project_id')
+            ->orderBy('id', 'desc')
+            ->get();
+
         // dd($projectMember);
         $projectId['approve'] = [];
         foreach ($projectMember as $project) {

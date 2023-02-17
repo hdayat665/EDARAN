@@ -143,16 +143,16 @@ $(document).ready(function() {
             },
 
             messages: {
-                customer_id: "Please Select Customer Name",
-                project_code: "Please Enter Project Code",
-                project_name: "Please Enter Project Name",
-                contract_value: "Please Enter Contract Value",
-                financial_year: "Please Select Financial Year",
-                LOA_date: "Please Enter LOA Date",
-                contract_start_date: "Please Select Specific Date",
-                contract_end_date: "Please Select Specific Date",
-                acc_manager: "Please Enter Account Manager",
-                status: "Please Enter Status",
+                customer_id: "Please Choose Customer Name",
+                project_code: "Please Insert Project Code",
+                project_name: "Please Insert Project Name",
+                contract_value: "Please Insert Contract Value",
+                financial_year: "Please Choose Financial Year",
+                LOA_date: "Please Insert LOA Date",
+                contract_start_date: "Please Choose Contract Start Date",
+                contract_end_date: "Please Choose Contract End Date",
+                acc_manager: "Please Insert Account Manager",
+                status: "Please Insert Status",
             },
             submitHandler: function(form) {
                 requirejs(['sweetAlert2'], function(swal) {

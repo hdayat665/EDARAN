@@ -113,6 +113,11 @@
                 @endif
             </tbody>
         </table>
+        <div class="row p-2">
+                <div class="col align-self-start">
+                    <a href="/projectFilter" class="btn btn-light" style="color: black;" type="submit"><i class="fa fa-arrow-left"></i> Back</a>
+                </div>
+            </div>
     </div>
 </div>
 <div class="modal fade" id="1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -185,8 +190,5 @@
         </div>
     </div>
 </div>
-<div class="modal-footer">
-
 </div>
-<a href="/projectFilter"><button type="button" class="btn btn-primary">Back</button></a>
 @endsection
