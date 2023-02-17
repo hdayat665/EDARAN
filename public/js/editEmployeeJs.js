@@ -595,7 +595,9 @@ $(document).ready(function () {
                     rangelength: [12, 12],
                 },
                 phoneNo: {
+                    required: true,
                     digits: true,
+                    rangelength: [10, 11],
                 },
                 homeNo: {
                     digits: true,
@@ -619,18 +621,20 @@ $(document).ready(function () {
                 religion: "Please Choose Your Religion",
                 race: "Please Choose Your Race",
                 idNo: {
-                    required: "Please Insert Identification Number",
+                    required: "Please Insert New Identification Number",
                     digits: "Please Insert Correct Identification Number Without ' - ' or Space",
-                    rangelength: "Please Provide Valid Identification Number",
+                    rangelength: "Please Insert Valid Identification Number",
                 },
                 phoneNo: {
-                    digits: "Please Insert Correct Identification Number Without ' - ' or Space",
+                    required: "Please Insert New Phone Number",
+                    digits: "Please Insert Correct Phone Number Without ' - ' or Space",
+                    rangelength: "Please Insert Valid Phone Number",
                 },
                 homeNo: {
-                    digits: "Please Insert Correct Identification Number Without ' - ' or Space",
+                    digits: "Please Insert Correct Home Number Without ' - ' or Space",
                 },
                 extensionNo: {
-                    digits: "Please Insert Correct Identification Number Without ' - ' or Space",
+                    digits: "Please Insert Correct Extension Number Without ' - ' or Space",
                 },
             },
     submitHandler: function(form) {
@@ -727,23 +731,23 @@ $(document).ready(function () {
             },
 
             messages: {
-                address1: "Please Insert Your Address",
-                city: "Please Insert Your City",
-                state: "Please Choose Your State",
+                address1: "Please Insert Address",
+                city: "Please Insert City",
+                state: "Please Choose State",
                 country: "required",
                 postcode: {
-                    required: "Please Insert Your Postcode",
-                    digits: "Please Enter Valid Postcode",
-                    rangelength: "Please Enter Valid Postcode",
+                    required: "Please Insert Postcode",
+                    digits: "Please Insert Valid Postcode",
+                    rangelength: "Please Insert Valid Postcode",
                 },
-                address1c: "Please Insert Your Address",
-                cityc: "Please Insert Your City",
-                statec: "Please Choose Your State",
+                address1c: "Please Insert Address",
+                cityc: "Please Insert City",
+                statec: "Please Choose State",
                 countryc: "required",
                 postcodec: {
-                    required: "Please Insert Your Postcode",
-                    digits: "Please Enter Valid Postcode",
-                    rangelength: "Please Enter Valid Postcode",
+                    required: "Please Insert Postcode",
+                    digits: "Please Insert Valid Postcode",
+                    rangelength: "Please Insert Valid Postcode",
                 },
             },
             submitHandler: function (form) {
@@ -927,7 +931,7 @@ $(document).ready(function () {
                 firstName: "Please Insert First Name",
                 lastName: "Please Insert Last Name",
                 idNo: {
-                    required: "Please Insert Identification Number",
+                    required: "Please Insert New Identification Number",
                     digits: "Please Insert Correct Identification Number Without ' - ' or Space",
                     rangelength: "Please Insert Valid Identification Number",
                 },
@@ -938,14 +942,14 @@ $(document).ready(function () {
                     required: "Please Insert Age",
                     digits: "Please Insert Correct Age",
                 },
-                address1: "Please Insert Your Address",
-                city: "Please Insert Your City",
-                state: "Please Choose Your State",
+                address1: "Please Insert Address",
+                city: "Please Insert City",
+                state: "Please Choose State",
                 country: "required",
                 postcode: {
-                    required: "Please Insert Your Postcode",
-                    digits: "Please Enter Valid Postcode",
-                    rangelength: "Please Enter Valid Postcode",
+                    required: "Please Insert Postcode",
+                    digits: "Please Insert Valid Postcode",
+                    rangelength: "Please Insert Valid Postcode",
                 },
             },
     submitHandler: function(form) {
@@ -1120,7 +1124,7 @@ $(document).ready(function () {
                 firstName: "Please Insert First Name",
                 lastName: "Please Insert Last Name",
                 idNo: {
-                    required: "Please Insert Identification Number",
+                    required: "Please Insert New Identification Number",
                     digits: "Please Insert Correct Identification Number Without ' - ' or Space",
                     rangelength: "Please Provide Valid Identification Number",
                 },

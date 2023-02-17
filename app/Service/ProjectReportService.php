@@ -20,6 +20,7 @@ class ProjectReportService
             ->select('a.*', 'b.customer_name')
             // ->whereNotIn('a.id', $projectId)
             ->where('a.tenant_id', Auth::user()->tenant_id)
+            ->orderBy('id', 'desc')
             ->get();
 
         if (!$data) {

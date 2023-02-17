@@ -206,7 +206,7 @@ $(document).ready(function() {
                 username: "Please insert username",
                 firstName: "Please insert first name",
                 lastName: "Please insert last namee",
-                idNo: "Please insert identification number",
+                idNo: "Please insert New identification number",
                 expiryDate: "Please insert expiry date",
                 issuingCountry: "Please insert issuing country",
                 DOB: "Please insert date of birth",
@@ -313,23 +313,23 @@ $(document).ready(function() {
             },
 
             messages: {
-                address1: "Please Insert Your Address",
-                city: "Please Insert Your City",
-                state: "Please Choose Your State",
+                address1: "Please Insert Address",
+                city: "Please Insert City",
+                state: "Please Choose State",
                 country: "required",
                 postcode: {
-                    required: "Please Insert Your Postcode",
-                    digits: "Please Enter Valid Postcode",
-                    rangelength: "Please Enter Valid Postcode"
+                    required: "Please Insert Postcode",
+                    digits: "Please Insert Valid Postcode",
+                    rangelength: "Please Insert Valid Postcode"
                 },
-                address1c: "Please Insert Your Address",
-                cityc: "Please Insert Your City",
-                statec: "Please Choose Your State",
+                address1c: "Please Insert Address",
+                cityc: "Please Insert City",
+                statec: "Please Choose State",
                 countryc: "required",
                 postcodec: {
-                    required: "Please Insert Your Postcode",
-                    digits: "Please Enter Valid Postcode",
-                    rangelength: "Please Enter Valid Postcode"
+                    required: "Please Insert Postcode",
+                    digits: "Please Insert Valid Postcode",
+                    rangelength: "Please Insert Valid Postcode"
                 },
 
 

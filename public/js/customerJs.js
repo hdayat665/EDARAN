@@ -207,7 +207,7 @@ $(document).ready(function () {
                 },
                 city: "Please Insert City",
                 state: "Please Insert State",
-                country: "Please insert Country",
+                country: "Please Insert Country",
                 email: {
                     required: "Please Insert Email Customer",
                     email: "Please Insert Valid Email Address",
