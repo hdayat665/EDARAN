@@ -18,6 +18,7 @@ use App\Http\Controllers\Project\CustomerController;
 use App\Http\Controllers\Project\ProjectController;
 use App\Http\Controllers\Report\ProjectReportController;
 use App\Http\Controllers\Report\TimesheetReportController;
+use App\Http\Controllers\MYLeave\MyleaveController;
 use App\Http\Controllers\Eleave\EleaveController;
 
 /*
@@ -406,6 +407,38 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('/editCashAdvance/{id}', 'editCashAdvance');
             Route::post('/updateCashAdvance', 'updateCashAdvance');
             Route::post('/submitUpdateCashAdvance', 'submitUpdateCashAdvance');
+        });
+
+        // MYLEAVE
+
+        Route::controller(MyleaveController::class)->group(function () {
+            Route::get('/myleave', 'myleaveView');
+            Route::post('/createtmyleave', 'createtmyleave');
+            Route::get('/getcreatemyleave/{id}', 'getcreatemyleave');
+            Route::delete('/deletemyleave/{id}', 'deletemyleave');
+
+            Route::get('/getusermyleave/{id}', 'getusermyleave');
+            // Route::post('/updateLeaveleavetypes/{id}', 'updateLeaveleavetypes');
+            // Route::delete('/deleteLeavetypes/{id}', 'deleteLeavetypes');
+            // Route::get('/updateStatusleavetypes/{id}/{status}', 'updateStatusleavetypes');
+
+            //supervisor
+            Route::get('/leaveAppr', 'leaveApprView');
+            Route::post('/updatesupervisor/{id}', 'updatesupervisor');
+            Route::post('/updatesupervisorreject/{id}', 'updatesupervisorreject');
+
+
+            //hod
+            Route::get('/leaveApprhod', 'leaveApprhodView');
+            Route::post('/updatehod/{id}', 'updatehod');
+            Route::post('/updatehodreject/{id}', 'updatehodreject');
+
+
+
+
+            Route::get('/approvemyleave/{id}', 'approvemyleave');
+            Route::get('/approvemyleaveby/{id}', 'approvemyleaveby');
+            
         });
     });
 });

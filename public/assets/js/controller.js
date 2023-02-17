@@ -64,6 +64,11 @@ requirejs.config({
         eleaveentitlementJs: assets + "/js/eleaveentitlementJs",
         eleaveholidayJs: assets + "/js/eleaveholidayJs",
         eleavetypesJs: assets + "/js/eleavetypesJs",
+
+        // myleave
+        myleaveJs: assets + "/js/myleaveJs",
+        leaveApprJs: assets + "/js/leaveApprJs",
+        leaveHodJs: assets + "/js/leaveHodJs",
     },
 });
 
@@ -300,6 +305,16 @@ if ($("#eleaveholidayJs").length > 0) {
 
 if ($("#eleavetypesJs").length > 0) {
     requirejs(["eleavetypesJs"]);
+}
+
+if ($("#myleaveJs").length > 0) {
+    requirejs(["myleaveJs"]);
+}
+if ($("#leaveApprJs").length > 0) {
+    requirejs(["leaveApprJs"]);
+}
+if ($("#leaveHodJs").length > 0) {
+    requirejs(["leaveHodJs"]);
 }
 
 // Global function
