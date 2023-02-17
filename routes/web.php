@@ -128,6 +128,7 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('/addSibling', 'addSibling');
             Route::post('/updateSibling', 'updateSibling');
             Route::post('/addChildren', 'addChildren');
+            Route::post('/saveEducation', 'saveEducation');
             Route::get('/getParent/{id}', 'getParent');
             Route::get('/getSibling/{id}', 'getSibling');
             Route::post('/updatePass', 'updatePass');

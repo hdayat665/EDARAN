@@ -304,6 +304,9 @@ $(document).ready(function() {
                     rangelength: [4, 4]
                     
                 },
+                // okuChecked: {
+                //     required: true
+                // },
 
 
                 
@@ -322,6 +325,7 @@ $(document).ready(function() {
                 maritialStatus:"Please Choose Marital Status",
                 religion:"Please Choose Religion",
                 race:"Please Choose Race",
+                //okuChecked: "Please Insert Valid OKU Card Number",
                 idNo: {
                     required: "Please Insert New Identification Number",
                     digits: "Please Insert Correct Identification Number Without ' - ' or Space",
@@ -341,6 +345,7 @@ $(document).ready(function() {
                     digits: "Please Insert Correct Extension Number Without ' - ' or Space",
                     rangelength: "Please Insert Valid Extension Number"
                 },
+                
             },
             submitHandler: function(form) {
 
@@ -365,6 +370,8 @@ $(document).ready(function() {
                 }
                 else if ($('#t1').prop('checked') || $('#t2').prop('checked') || $('#t3').prop('checked')){
                     var data = new FormData(document.getElementById("formProfile"));
+
+                    //data.append('okuStatus', okuStatus);
 
                     $.ajax({
                         type: "POST",
@@ -419,6 +426,97 @@ $(document).ready(function() {
         window.location.hash = e.target.hash;
     })
     
+    //ADD EDUCATION QUALIFICATIONS
+    $('#saveEducation').click(function(e) {
+        // $.validator.addMethod("greaterThan", function(value, element, param) {
+        //     var from = $(param).val();
+        //     if (value && from) {
+        //       return new Date(value) >= new Date(from);
+        //     }
+        //     return true;
+        //   }, "Please enter a valid date");
+
+          $("#addEducation").validate({
+            // Specify validation rules
+            rules: {
+                fromDate: "required",
+                toDate: "required",
+                instituteName: "required",
+                highestLevelAttained: "required",
+                result: "required"       
+            },
+
+            messages: {
+                fromDate: "Please insert From Date",
+                toDate: "Please insert To Date",
+                instituteName: "Please insert Institute Name",
+                highestLevelAttained: "Please insert Highest Level Attained",
+                result: "Please insert Result"
+                
+            },
+
+            submitHandler: function(form) {
+
+            Swal.fire({
+                allowOutsideClick: false,
+                showCancelButton: true,
+                cancelButtonColor: '#d33',
+                confirmButtonColor: '#3085d6',
+                title: 'Declaration.',
+                icon: 'info',
+                html: '<h5> <input type="checkbox" class="form-check-input" name="t11" id="t1"  />  I hereby certify the above information as provided by me is true and correct. I also undertake to keep the Company informed of any changes covering such information of my personal details as and when it occurs. If any information given above is subsequently found to be incorrect or incomplete or untrue, the Company may terminate my employment without notice or compensation.</h5><br>' +
+                        '<h5> <input type="checkbox" class="form-check-input" name="t22" id="t2"  />  I hereby state that I may be liable to summary dismissal if any of the particulars has been misrepresented or omitted. I acknowledge that the Company has the right to recover any salaries and monetary benefits paid out to me during the course of my employment in the event of any misrepresentation or omission on my personal data.</h5><br>' +
+                        '<h5> <input type="checkbox" class="form-check-input" name="t33" id="t3"  />  I hereby give consent for Company to process and keep my personal data for employment purposes.</h5>',
+                confirmButtonText: 'Yes',
+                
+                preConfirm: () => {
+                    if (!$('#t1').prop('checked') || !$('#t2').prop('checked') || !$('#t3').prop('checked'))  {
+                        Swal.showValidationMessage('<i class="fa fa-info-circle"></i> Please check all term to proceed')
+                    
+                }
+                else if ($('#t1').prop('checked') || $('#t2').prop('checked') || $('#t3').prop('checked')){
+                    var data = new FormData(document.getElementById("addEducation"));
+
+                    $.ajax({
+                        type: "POST",
+                        url: "/saveEducation",
+                        data: data,
+                        dataType: "json",
+                        async: false,
+                        processData: false,
+                        contentType: false,
+                    }).done(function(data) {
+                        console.log(data);
+                        Swal.fire({
+                            title: data.title,
+                            icon: 'success',
+                            text: data.msg,
+                            type: data.type,
+                                confirmButtonColor: '#3085d6',
+                            confirmButtonText: 'OK',
+                            allowOutsideClick: false,
+                            allowEscapeKey: false,
+                        }).then(function() {
+                            if (data.type == 'error') {
+        
+                            } else {
+                                location.reload();
+                            }
+                        });
+                    });
+                }
+                else {
+                    Swal.showValidationMessage('<i class="fa fa-info-circle"></i> error')
+                }
+            },
+                }).then((result) => {
+            
+                })
+            }
+
+        });
+        });
+        
     $('#saveAddress').click(function(e) {
 
         $("#formAddress").validate({
@@ -509,9 +607,9 @@ $(document).ready(function() {
         });
     });
 
-    $('#saveEmergency').click(function(e) {
+    $('#saveEmergency, #saveEmergency2').click(function(e) {
         
-        $("#formEmergency").validate({
+        $("#formEmergency, #formEmergency2").validate({
             // Specify validation rules
             rules: {
                 
@@ -578,6 +676,12 @@ $(document).ready(function() {
                 }
                 else if ($('#t1').prop('checked') || $('#t2').prop('checked') || $('#t3').prop('checked')){
                     var data = new FormData(document.getElementById("formEmergency"));
+                    var data2 = new FormData(document.getElementById("formEmergency2"));
+
+                    // Append additional data to FormData object
+                    for (var pair of data2.entries()){
+                        data.append(pair[0], pair[1]);
+                    }
 
                     $.ajax({
                         type: "POST",
@@ -2152,14 +2256,30 @@ $("#same-address").change(function() {
 
     //   oku checkbox myprofile
     $(".okuCheck").click(function(){
+        var okuStatus = 0;
         if ($(this).prop("checked")) {
-              
+
             $('#okucard').prop('readonly', false);
             $('#okuattach').css('pointer-events', 'auto');
+            okuStatus = 1;
+            
         } else {
             $('#okucard').prop('readonly', true);
             $('#okuattach').css('pointer-events', 'none');
         }
+
+        // $.ajax({
+        //     url: '{{ route("saveOkuData") }}',
+        //     type: 'POST',
+        //     data: {okuChecked: okuChecked},
+        //     success: function(response) {
+        //         // Handle the response from the server if needed
+        //     },
+        //     error: function(xhr, status, error) {
+        //         // Handle errors if needed
+        //     }
+        // });
+        
       });
 
       //oku check companion
