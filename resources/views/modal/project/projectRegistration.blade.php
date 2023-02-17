@@ -16,7 +16,7 @@
                         <div class="col-md-4">
                             <select class="form-select" name="customer_id">
                                 <option label="Please Choose "></option>
-                                <?php $customers = customer(); ?>
+                                <?php $customers = customeractive(); ?>
                                 @foreach ($customers as $customer)
                                     <option value="{{ $customer->id }}">{{ $customer->customer_name }}</option>
                                 @endforeach

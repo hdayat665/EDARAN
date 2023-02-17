@@ -1,6 +1,6 @@
 <div class="tab-pane fade" id="default-tab-3">
     <div class="row p-2">
-        <button class="btn btn-primary col-md-2" data-bs-toggle="modal" data-bs-target="#modaladdaddress">Add New Address</button>
+        <button class="btn btn-primary col-md-3" data-bs-toggle="modal" data-bs-target="#modaladdaddress">Add New Address</button>
     </div>
     <div class="row p-2">
         <table id="" class="table table-striped table-bordered align-middle">
@@ -79,6 +79,13 @@
                 </tr>
             </tbody>
         </table>
+    </div>
+    <div class="row p-2">
+        <div class="modal-footer">
+            <a class="btn btn-white me-5px btnPrevious">Previous</a>
+            
+            <a class="btn btn-white me-5px btnNext">Next</a>
+        </div>
     </div>
 </div>
 
@@ -247,9 +254,9 @@
         </div>
         <div class="row p-2">
             <div class="modal-footer">
-            <a class="btn btn-white me-5px btnPrevious">Previous</a>
+            {{-- <a class="btn btn-white me-5px btnPrevious">Previous</a> --}}
             <button type="submit" id="saveAddress" class="btn btn-primary">Update</button>
-            <a class="btn btn-white me-5px btnNext">Next</a>
+            {{-- <a class="btn btn-white me-5px btnNext">Next</a> --}}
             </div>
         </div> 
     

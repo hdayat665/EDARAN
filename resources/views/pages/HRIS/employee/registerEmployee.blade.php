@@ -15,19 +15,19 @@
             <!-- BEGIN nav-tabs -->
             <ul class="nav nav-tabs">
                 <li class="nav-item">
-                    <a href="#default-tab-1" id="nav-prof" data-bs-toggle="tab" class="nav-link active">
+                    <a href="#default-tab-1" id="nav-prof" data-bs-toggle="tab" class="nav-link active" style="pointer-events: none;">
                         <span class="d-sm-none">Tab 1</span>
                         <span class="d-sm-block d-none">Employee Profile</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#default-tab-2" id="nav-addr" data-bs-toggle="tab" class="nav-link">
+                    <a href="#default-tab-2" id="nav-addr" data-bs-toggle="tab" class="nav-link" style="pointer-events: none;">
                         <span class="d-sm-none">Tab 2</span>
                         <span class="d-sm-block d-none">Address Details</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#default-tab-3" id="nav-det" data-bs-toggle="tab" class="nav-link">
+                    <a href="#default-tab-3" id="nav-det" data-bs-toggle="tab" class="nav-link" style="pointer-events: none;">
                         <span class="d-sm-none">Tab 3</span>
                         <span class="d-sm-block d-none">Employment Details</span>
                     </a>

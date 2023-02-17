@@ -1,4 +1,4 @@
-<div class="tab-pane fade" id="v-pills-eleave" role="tabpanel" aria-labelledby="v-pills-eleave-tab">
+<div class="tab-pane fade" id="v-pills-entitlement" role="tabpanel" aria-labelledby="v-pills-entitlement-tab">
     <div class="accordion" id="accordionExample">
         <div class="accordion-item">
             <h2 class="accordion-header" id="headingOne">
@@ -13,60 +13,42 @@
                             <div class="card">
                                 <div class="card-header bg-white bg-gray-100">
                                     <h4 class="fw-bold">
-                                        eLeave
+                                        Entitlement
                                     </h4>
-                                    <p class="fw-light">
+                                    {{-- <p class="fw-light">
                                         Approval Hierarchy
-                                    </p>
+                                    </p> --}}
                                     </div>
                                 <div class="card-body">
                                     <div class="row p-2">
-                                        <label for="firstname" class="form-label">Employee Name</label>
-                                        <input type="text" id="text" class="form-control" aria-describedby="password">
+                                        <label for="firstname" class="form-label">Approver*</label>
+                                        <input type="text" class="form-control" name="" id="" readonly value="RM">
                                     </div>
-                                    <div class="row p-2">
-                                        <label for="firstname" class="form-label">Recommender*</label>
-                                        <select class="form-select">
-                                            <option value="0" label="Please Choose " selected="selected"></option>
-                                        </select>
+                                    <div class=" form-check-inline">
+                                        <p class="form-label">Status</p>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                                        <label class="form-check-label" for="inlineRadio1">Yes</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                                        <label class="form-check-label" for="inlineRadio2">No</label>
                                     </div>
                                     <div class="row p-2">
                                         <label for="firstname" class="form-label">Approver*</label>
-                                        <select class="form-select">
-                                            <option value="0" label="Please Choose " selected="selected"></option>
-                                        </select>
+                                        <input type="text" class="form-control" name="" id="" readonly value="RM">
                                     </div>
-                                    <br>
-                                    <div class="row p-2">
-                                        <div class="col-md-4">
-                                            <p class="form-label">User Roles :</p>
-                                        </div>
-                                        <div class="col-md-8">
-                                            <div class="row p-2">
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="" id="">
-                                                    <label class="form-check-label" for="flexCheckDefault">
-                                                      Recommender
-                                                    </label>
-                                                  </div>
-                                            </div>
-                                            <div class="row p-2">
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="" id="" >
-                                                    <label class="form-check-label" for="flexCheckChecked">
-                                                      Approver
-                                                    </label>
-                                                  </div>
-                                            </div>
-                                            <div class="row p-2">
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="" id="" >
-                                                    <label class="form-check-label" for="flexCheckChecked">
-                                                      HR Administrator
-                                                    </label>
-                                                  </div>
-                                            </div>
-                                        </div>
+                                    <div class=" form-check-inline">
+                                        <p class="form-label">Status</p>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="inlineRadioOptions1" id="inlineRadio3" value="option3">
+                                        <label class="form-check-label" for="inlineRadio3">Yes</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="inlineRadioOptions1" id="inlineRadio4" value="option4">
+                                        <label class="form-check-label" for="inlineRadio4">No</label>
                                     </div>
                                     {{-- <button type="button" class="btn btn-primary float-end mt-3">
                                         Save
@@ -128,7 +110,7 @@
                                 </div>
                             </div>
                         </div>
-                        <button type="button" class="btn btn-primary float-end mt-3 col-md-2">
+                         <button type="button" class="btn btn-primary float-end mt-3 col-md-2">
                             Save
                         </button>
                     </div>
@@ -149,60 +131,42 @@
                         <div class="card">
                             <div class="card-header bg-white bg-gray-100">
                                 <h4 class="fw-bold">
-                                    eLeave
+                                    Entitlement
                                 </h4>
-                                <p class="fw-light">
+                                {{-- <p class="fw-light">
                                     Approval Hierarchy
-                                </p>
+                                </p> --}}
                                 </div>
                             <div class="card-body">
                                 <div class="row p-2">
-                                    <label for="firstname" class="form-label">Employee Name</label>
-                                    <input type="text" id="text" class="form-control" aria-describedby="password">
+                                    <label for="firstname" class="form-label">Approver*</label>
+                                    <input type="text" class="form-control" name="" id="" readonly value="RM">
                                 </div>
-                                <div class="row p-2">
-                                    <label for="firstname" class="form-label">Recommender*</label>
-                                    <select class="form-select">
-                                        <option value="0" label="Please Choose " selected="selected"></option>
-                                    </select>
+                                <div class=" form-check-inline">
+                                    <p class="form-label">Status</p>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                                    <label class="form-check-label" for="inlineRadio1">Yes</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                                    <label class="form-check-label" for="inlineRadio2">No</label>
                                 </div>
                                 <div class="row p-2">
                                     <label for="firstname" class="form-label">Approver*</label>
-                                    <select class="form-select">
-                                        <option value="0" label="Please Choose " selected="selected"></option>
-                                    </select>
+                                    <input type="text" class="form-control" name="" id="" readonly value="RM">
                                 </div>
-                                <br>
-                                <div class="row p-2">
-                                    <div class="col-md-4">
-                                        <p class="form-label">User Roles :</p>
-                                    </div>
-                                    <div class="col-md-8">
-                                        <div class="row p-2">
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" value="" id="">
-                                                <label class="form-check-label" for="flexCheckDefault">
-                                                  Recommender
-                                                </label>
-                                              </div>
-                                        </div>
-                                        <div class="row p-2">
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" value="" id="" >
-                                                <label class="form-check-label" for="flexCheckChecked">
-                                                  Approver
-                                                </label>
-                                              </div>
-                                        </div>
-                                        <div class="row p-2">
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" value="" id="" >
-                                                <label class="form-check-label" for="flexCheckChecked">
-                                                  HR Administrator
-                                                </label>
-                                              </div>
-                                        </div>
-                                    </div>
+                                <div class=" form-check-inline">
+                                    <p class="form-label">Status</p>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="inlineRadioOptions1" id="inlineRadio3" value="option3">
+                                    <label class="form-check-label" for="inlineRadio3">Yes</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="inlineRadioOptions1" id="inlineRadio4" value="option4">
+                                    <label class="form-check-label" for="inlineRadio4">No</label>
                                 </div>
                                 {{-- <button type="button" class="btn btn-primary float-end mt-3">
                                     Save
@@ -264,7 +228,7 @@
                             </div>
                         </div>
                     </div>
-                    <button type="button" class="btn btn-primary float-end mt-3 col-md-2">
+                     <button type="button" class="btn btn-primary float-end mt-3 col-md-2">
                         Save
                     </button>
                 </div>
@@ -273,36 +237,3 @@
     </div>
 </div>
 
-{{-- 
-    <div class="card">
-        <div class="card-header bg-white bg-gray-100">
-            <h4 class="fw-bold">
-                eLeave
-            </h4>
-            <p class="fw-light">
-                Approval Hierarchy
-            </p>
-         </div>
-        <div class="card-body">
-            <div class="row p-2">
-                <label for="firstname" class="form-label">Employee Name</label>
-                <input type="text" id="text" class="form-control" aria-describedby="password">
-            </div>
-            <div class="row p-2">
-                <label for="firstname" class="form-label">Recommender*</label>
-                <select class="form-select">
-                    <option value="0" label="Please Choose " selected="selected"></option>
-                </select>
-            </div>
-            <div class="row p-2">
-                <label for="firstname" class="form-label">Approver*</label>
-                <select class="form-select">
-                    <option value="0" label="Please Choose " selected="selected"></option>
-                </select>
-            </div>
-            <button type="button" class="btn btn-primary float-end mt-3">
-                Save
-            </button>
-        </div>
-    </div>
-</div> --}}

@@ -4,6 +4,7 @@ use App\Models\ActivityLogs;
 use App\Models\Branch;
 use App\Models\ClaimCategory;
 use App\Models\ClaimCategoryContent;
+use App\Models\ClaimDateSetting;
 use App\Models\Company;
 use App\Models\Customer;
 use App\Models\Department;
@@ -622,7 +623,7 @@ if (!function_exists('customer')) {
     function customer()
     {
         $data = Customer::where([['tenant_id', Auth::user()->tenant_id]])->get();
-
+            
         if (!$data) {
             $data = [];
         }
@@ -630,7 +631,18 @@ if (!function_exists('customer')) {
         return $data;
     }
 }
+if (!function_exists('customeractive')) {
+    function customeractive()
+    {
+        $data = Customer::where([['tenant_id', Auth::user()->tenant_id],['status', '=', 1]])->get();
+            
+        if (!$data) {
+            $data = [];
+        }
 
+        return $data;
+    }
+}
 if (!function_exists('projectLocation')) {
     function projectLocation()
     {
@@ -647,7 +659,7 @@ if (!function_exists('projectLocation')) {
 if (!function_exists('getEmployee')) {
     function getEmployee()
     {
-        $data = Employee::where('tenant_id', Auth::user()->tenant_id)->get();
+        $data = Employee::where([['tenant_id', Auth::user()->tenant_id],['employeeid', '!=', null]])->get();
 
         if (!$data) {
             $data = [];
@@ -761,7 +773,7 @@ if (!function_exists('getEventTimesheet')) {
 }
 
 if (!function_exists('month')) {
-    function month()
+    function month($id = '')
     {
         $data = [
             '01' => 'January',
@@ -777,6 +789,10 @@ if (!function_exists('month')) {
             '11' => 'November',
             '12' => 'December',
         ];
+
+        if ($id) {
+            return $data[$id];
+        }
 
         return $data;
     }
@@ -1055,6 +1071,19 @@ if (!function_exists('typeOfLog')) {
     function typeOfLog()
     {
         $data = TypeOfLogs::where('tenant_id', Auth::user()->tenant_id)->get();
+
+        if (!$data) {
+            $data = [];
+        }
+
+        return $data;
+    }
+}
+
+if (!function_exists('claimDateSetting')) {
+    function claimDateSetting()
+    {
+        $data = ClaimDateSetting::where('tenant_id', Auth::user()->tenant_id)->first();
 
         if (!$data) {
             $data = [];

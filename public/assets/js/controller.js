@@ -56,6 +56,7 @@ requirejs.config({
         viewGNSJs: assets + "/js/viewGNSJs",
         editCashAdvanceJs: assets + "/js/editCashAdvanceJs",
         monthlyClaimJs: assets + "/js/monthlyClaimJs",
+        eclaimDateJs: assets + "/js/eclaimDateJs",
 
         // 'main': 'assets/backend/js/main',
         sweetAlert2: assets + "/assets/sweetalert2/sweetalert2",
@@ -315,6 +316,8 @@ if ($("#leaveApprJs").length > 0) {
 }
 if ($("#leaveHodJs").length > 0) {
     requirejs(["leaveHodJs"]);
+if ($("#eclaimDateJs").length > 0) {
+    requirejs(["eclaimDateJs"]);
 }
 
 // Global function

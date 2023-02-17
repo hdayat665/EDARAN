@@ -20,11 +20,11 @@
                     <div class="row p-2">
                         {{-- full name --}}
                         <div class="col-sm-6">
-                            <label for="firstname" class="form-label">Full Name</label>
+                            <label for="firstname" class="form-label" style="color: red">Full Name</label>
                             <input type="text" id="" name="" class="form-control" aria-describedby="" readonly style="text-transform:uppercase" >
                         </div>
                         <div class="col-sm-6">
-                            <label for="lastname" class="form-label">Old Identification Number</label>
+                            <label for="lastname" class="form-label" style="color: red;">Old Identification Number</label>
                             <input type="text" id="" name="lastName" class="form-control" aria-describedby="lastname" style="text-transform:uppercase" >
                         </div>
                     </div>
@@ -34,13 +34,13 @@
                                 <div class="col-sm-6 ">
                                     <div class="form-check form-switch align-right">
                                         <input class="form-check-input partCheck8" value="" type="checkbox" name=""  id="">
-                                        <label class="form-check-label" for="citizen">
+                                        <label class="form-check-label" for="citizen" style="color: red">
                                             Non-Citizen
                                         </label>
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
-                                    <label for="lastname" class="form-label">New Identification Number*</label>
+                                    <label for="lastname" class="form-label" style="color: red">New Identification Number*</label>
                                     <input type="number" id="idnumber6" name="idNo" value="" class="form-control" >
                                     
                                 </div>
@@ -50,7 +50,7 @@
                             {{-- new --}}
                             <div class="row">
                                 <div class="col-sm-6">
-                                    <label for="dob" class="form-label">ID Attachment</label>
+                                    <label for="dob" class="form-label" style="color: red;">ID Attachment</label>
                                     <input type="file" id="" name="" class="form-control" aria-describedby="">
                                 </div>
                             </div>
@@ -90,10 +90,10 @@
                     </div>
                     <div class="row p-2">
                         <div class="col-sm-3">
-                            <label for="dob" class="form-label">Date of Birth*</label>
+                            <label for="dob" class="form-label">Date Birth*</label>
                             <input type="text" id="dob6" name="DOB" class="form-control" aria-describedby="dob" readonly>
                         </div>
-                        <div class="col-sm-3">
+                        <div class="col-sm-3" style="color: red">
                             <label for="dob" class="form-label">Age</label>
                             <input type="text" id="age6" name="" class="form-control" aria-describedby="" readonly>
                         </div>
@@ -114,7 +114,6 @@
                             <input type="text" id="contactNoparent" name="contactNo" class="form-control" aria-describedby="passport">
                         </div>
                         <div class="col-sm-6">
-                            <label for="expirydate" class="form-label">Gender</label>
                             <label for="age" class="form-label">Gender*</label>
                             <select class="form-select" name="gender" id=""  style="text-transform:uppercase">
                                 <option value="" label="Please Choose "></option>
@@ -131,13 +130,13 @@
                                 <div class="col-sm-6 ">
                                     <div class="form-check form-switch align-right">
                                         <input class="form-check-input okuCheck5 " value="" type="checkbox" name=""  id="">
-                                        <label class="form-check-label" for="citizen">
+                                        <label class="form-check-label" for="citizen" style="color: red;">
                                             OKU?
                                         </label>
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
-                                    <label for="lastname" class="form-label">OKU Card Number*</label>
+                                    <label for="lastname" class="form-label" style="color: red;">OKU Card Number*</label>
                                     <input type="number" id="okucard5" name="" value="" class="form-control" readonly >
                                     
                                 </div>
@@ -146,7 +145,7 @@
                         <div class="col-sm-6">
                             <div class="row">
                                 <div class="col-sm-6">
-                                    <label for="dob" class="form-label">OKU Attachment</label>
+                                    <label for="dob" class="form-label" style="color: red;">OKU Attachment</label>
                                     <input type="file" id="okuattach4" name="" class="form-control" style="pointer-events: none" aria-describedby="" >
                                 </div>
                             </div>

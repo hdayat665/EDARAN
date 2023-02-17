@@ -933,6 +933,9 @@ $(document).ready(function () {
             id = $(this).data("id");
             var childrenData = getChildren(id);
 
+            $("input").prop("disabled", true);
+            $("select").prop("disabled", true);
+
             childrenData.done(function (data) {
                 console.log(data);
                 $("#viewChildren").hide();
@@ -948,7 +951,7 @@ $(document).ready(function () {
                 $("#expiryDate").val(child.expiryDate);
                 $("#firstName").val(child.firstName);
                 $("#fullName").val(child.fullName);
-                $("#gender").prop("selectedIndex", child.gender);
+                $("#genderview").prop("selectedIndex", child.gender);
                 $("#id").val(child.id);
                 $("#idNo").val(child.idNo);
                 $("#instituition").val(child.instituition);
@@ -1414,6 +1417,8 @@ $(document).ready(function () {
                 $("#stateP1").val(parent.state);
                 $("#countryP1").val(parent.country);
                 $("#contactNoP1").val(parent.contactNo);
+                $("#passportparentedit").val(parent.passport);
+
                 $("#genderP1").val(parent.gender);
                 $("#firstNames1").val(parent.firstName);
                 $("#postcodeP1").val(parent.postcode);
@@ -1445,6 +1450,7 @@ $(document).ready(function () {
                 $("#firstNameP").val(parent.firstName);
                 $("#genderP").val(parent.gender);
                 $("#countryP").val(parent.country);
+                $("#passportview").val(parent.passport);
                 $("#postcodeP").val(parent.postcode);
                 $("#lastNameP").val(parent.lastName);
                 $("#relationshipP").val(parent.relationship);
