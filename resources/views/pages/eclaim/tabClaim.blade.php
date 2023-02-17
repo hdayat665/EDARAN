@@ -80,7 +80,7 @@
                         <td>{{ $claim->total_amount }}</td>
                         @if ($claim->status == 'amend')
                             <td><span class="badge bg-success" data-toggle="amendc" title="Amend">Amend</span></td>
-                        @elseif ($claim->status == 'paid')
+                        @elseif ($claim->status == 'paid' || $claim->status == 'recommend')
                             <td><span class="badge bg-secondary" data-toggle="paidc" title="Paid">Paid</span>
                             @elseif ($claim->status == 'draft')
                             <td><span class="badge bg-warning" data-toggle="drafc" title="Draft">Draft</span></td>

@@ -320,4 +320,13 @@ class ClaimApprovalController extends Controller
 
         return response()->json($data);
     }
+
+    public function createPvNumber($id = '')
+    {
+        $msc = new ClaimApprovalService;
+
+        $data = $msc->createPvNumber($id);
+
+        return response()->json($data);
+    }
 }
