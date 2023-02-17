@@ -27,15 +27,13 @@
                         </div>
                         <div class="col-sm-6">
                             <label for="emergency-relationship" class="form-label">Relationship*</label>
-                            <select class="form-select" name="" value="" id="" style="text-transform:uppercase">
-                                            <?php $relationship = relationship() ?>
-                                            <option value="0" label="PLEASE CHOOSE"  ></option>
-                                            @foreach ($relationship as $key => $status)
-                                            <option value="{{$key}}"<?php echo ($key == $emergency->relationship) ? 'selected="selected"' : '' ?>> {{$status}}</option>
-                                            <option value="{{$key}}"> {{$status}}</option>
-                                            @endforeach
+                            <select class="form-select" name="relationship" value="" id="" style="text-transform:uppercase">
+                                <?php $relationship = relationship() ?>
+                                <option value="" label="PLEASE CHOOSE"  ></option>
+                                @foreach ($relationship as $key => $status)
+                                <option value="{{$key}}" <?php echo ($key == $emergency->relationship) ? 'selected="selected"' : '' ?>>{{$status}}</option>
+                                @endforeach
                             </select>
-            
                          </div>
                     </div> 
                     <div class="row p-2">
@@ -105,79 +103,78 @@
             </h2>
             <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                 <div class="accordion-body bg-white">
-                    <form id="formEmergency">
+                    <form id="formEmergency2">
                         <div class="row p-2">
                             <div class="col-sm-6">
                                 <label for="emergency-firstname" class="form-label">First Name*</label>
-                                <input type="text" id="" name="" value="" class="form-control" aria-describedby="emergency-firstname" style="text-transform:uppercase" placeholder="FIRST NAME">
+                                <input type="text" id="emergency-firstname" name="firstName_2" value="{{ $emergency->firstName_2 ?? '' }}" class="form-control" aria-describedby="emergency-firstname" style="text-transform:uppercase" placeholder="FIRST NAME">
                             </div>
                             <div class="col-sm-6">
                                 <label for="emergency-lastname" class="form-label">Last Name*</label>
-                                <input type="text" id="" name="" value="" class="form-control" aria-describedby="emergency-lastname" style="text-transform:uppercase" placeholder="LAST NAME">
-                                <input type="hidden" name="id" value="">
+                                <input type="text" id="emergency-lastname" name="lastName_2" value="{{ $emergency->lastName_2 ?? '' }}" class="form-control" aria-describedby="emergency-lastname" style="text-transform:uppercase" placeholder="LAST NAME">
+                                <input type="hidden" name="id" value="{{$emergency->id ?? ''}}">
                             </div>
                         </div>
                         <div class="row p-2">
                             <div class="col-sm-6">
                                 <label for="emergency-contactnumber" class="form-label">Contact Number*</label>
-                                <input type="text" id="" name="contactNo" value="" class="form-control" aria-describedby="emergency-contactnumber" placeholder="CONTACT NUMBER">
+                                <input type="text" id="emergency-contactnumber" name="contactNo_2" value="{{ $emergency->contactNo_2 ?? '' }}" class="form-control" aria-describedby="emergency-contactnumber" placeholder="CONTACT NUMBER">
                             </div>
                             <div class="col-sm-6">
                                 <label for="emergency-relationship" class="form-label">Relationship*</label>
-                                <select class="form-select" name="relationship" id="emergency-relationship" style="text-transform:uppercase">
-                                                <?php $relationship = relationship() ?>
-                                                <option value="" label="PLEASE CHOOSE"  ></option>
-                                                @foreach ($relationship as $key => $status)
-                                                <option value="{{$key}}"> {{$status}}</option>
-                                                @endforeach
+                                <select class="form-select" name="relationship_2" value="" id="" style="text-transform:uppercase">
+                                    <?php $relationship = relationship() ?>
+                                    <option value="" label="PLEASE CHOOSE"  ></option>
+                                    @foreach ($relationship as $key => $status)
+                                    <option value="{{$key}}" <?php echo ($key == $emergency->relationship_2) ? 'selected="selected"' : '' ?>>{{$status}}</option>
+                                    @endforeach
                                 </select>
-                
                             </div>
                         </div> 
                         <div class="row p-2">
                             <div class="col-sm-6">
                                 <label for="emergency-address1" class="form-label">Address 1*</label>
-                                <input type="text" id="" name="address1" value="" class="form-control" aria-describedby="emergency-address1" placeholder="ADDRESS 1" style="text-transform:uppercase">
+                                <input type="text" id="emergency-address1" name="address1_2" value="{{ $emergency->address1_2 ?? '' }}" class="form-control" aria-describedby="emergency-address1" placeholder="ADDRESS 1" style="text-transform:uppercase">
                             </div>
                             <div class="col-sm-6">
                                 <label for="emergency-address1" class="form-label">Address 2</label>
-                                <input type="text" id="" name="address2" value="" class="form-control" aria-describedby="emergency-address2" placeholder="ADDRESS 2" style="text-transform:uppercase">
+                                <input type="text" id="emergency-address2" name="address2_2" value="{{ $emergency->address2_2 ?? '' }}" class="form-control" aria-describedby="emergency-address2" placeholder="ADDRESS 2" style="text-transform:uppercase">
                             </div>
                 
                         </div>
                         <div class="row p-2">
                             <div class="col-sm-6">
                                 <label for="emergency-postcode" class="form-label">Postcode*</label>
-                                <input type="number" id="" name="postcode" value="" class="form-control" aria-describedby="emergency-postcode" placeholder="POSTCODE">
+                                <input type="number" id="emergency-postcode" name="postcode_2" value="{{ $emergency->postcode_2 ?? '' }}" class="form-control" aria-describedby="emergency-postcode" placeholder="POSTCODE">
                             </div>
                             <div class="col-sm-6">
                                 <label for="emergency-city" class="form-label">City*</label>
-                                <input type="text" class="form-control" name="" value="" style="text-transform:uppercase" placeholder="CITY">
+                                <input type="text" class="form-control" name="city_2" value="{{ $emergency->city_2 ?? '' }}" style="text-transform:uppercase" placeholder="CITY">
                             </div>
                         </div>
                         <div class="row p-2">
                             <div class="col-sm-6">
                                 <label for="emergency-state" class="form-label">State*</label>
-                                <select class="form-select" name="" value="" style="text-transform:uppercase">
+                                <select class="form-select" name="state_2" value="{{ $emergency->state_2 ?? '' }}" style="text-transform:uppercase">
                                     <?php $state = state() ?>
                                     <option value="" label="PLEASE CHOOSE"></option>
                                     @foreach ($state as $key => $status)
-                                    <option value="{{$key}}"  <?php echo ($key == $emergency->state) ? 'selected="selected"' : '' ?>>{{$status}}</option>
+                                    <option value="{{$key}}"  <?php echo ($key == $emergency->state_2) ? 'selected="selected"' : '' ?>>{{$status}}</option>
                                     @endforeach
                                 </select>
                             </div>
                             <div class="col-sm-6">
                                 <label for="emergency-country" class="form-label">Country*</label>
-                                <select class="form-select" name="" value="" style="text-transform:uppercase">
+                                <select class="form-select" name="country_2" value="{{ $emergency->country_2 ?? '' }}" style="text-transform:uppercase">
                                     <optgroup id="country-optgroup-Americas" label="Americas">
                                         @foreach ($americass as $key => $america)
-                                        <option value="{{$key}}" <?php echo ($key == $emergency->country) ? 'selected="selected"' : '' ?> >{{$america}}</option>
+                                        <option value="{{$key}}" <?php echo ($key == $emergency->country_2) ? 'selected="selected"' : '' ?> >{{$america}}</option>
                                         @endforeach
                                     </optgroup>
                                     <optgroup id="country-optgroup-Asia" label="Asia">
                                     <option value="MY" label="Malaysia" selected ></option>
                                         @foreach ($asias as $key => $asia)
-                                        <option value="{{$key}}" <?php echo ($key == $emergency->country) ? 'selected="selected"' : '' ?> >{{$asia}}</option>
+                                        <option value="{{$key}}" <?php echo ($key == $emergency->country_2) ? 'selected="selected"' : '' ?> >{{$asia}}</option>
                                         @endforeach
                                     </optgroup>
                                 </select>
@@ -186,7 +183,7 @@
                         <div class="row p-2">
                             <div class="modal-footer">
                                 {{-- <a  class="btn btn-white me-5px btnPrevious">Previous</a> --}}
-                                <button type="submit" id="" class="btn btn-primary">Update</button>
+                                <button type="submit" id="saveEmergency2" class="btn btn-primary">Update</button>
                                 {{-- <a class="btn btn-white me-5px btnNext">Next</a> --}}
                             </div>
                         </div>

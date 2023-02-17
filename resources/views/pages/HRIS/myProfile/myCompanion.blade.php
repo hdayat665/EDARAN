@@ -40,7 +40,7 @@
                                  <div class="row">
                                      <div class="col-sm-12">
                                         <label for="passport-number" class="form-label" style="color: red;">Old Identification Number</label>
-                                        <input type="text" name="" value="" id="" class="form-control" aria-describedby="" placeholder="0000000">
+                                        <input type="text" name="oldIDNo" value="{{ $companion->oldIDNo ?? '' }}" id="oldidnomc" class="form-control" aria-describedby="" placeholder="0000000">
                                     </div>
                                 </div>
                             </div>
@@ -56,7 +56,7 @@
                                     </div> 
                                 <div class="col-sm-6">
                                         <label for="passport-number" class="form-label">New Identification Number*</label>
-                                        <input type="text" name="idNo" value="{{ $companion->idNo ?? '' }}" id="idnumber2" class="form-control" placeholder="000000-00-0000' aria-describedby="passport-number">
+                                        <input type="text" name="idNo" value="{{ $companion->idNo ?? '' }}" id="idnumber2" class="form-control" placeholder="000000-00-0000" aria-describedby="passport-number">
                                     </div>
                                    
                                 </div>
@@ -126,7 +126,7 @@
                                 <div class="row">
                                     <div class="col-sm-6 ">
                                         <div class="form-check form-switch align-right">
-                                            <input class="form-check-input okuCheck1 "  id="" value="" type="checkbox" name=""  >
+                                            <input class="form-check-input okuCheck1"  id="okuStatus1" value="{{ $companion->okuStatus ?? '' }}" type="checkbox" name="okuStatus">
                                             <label class="form-check-label" for="citizen" style="color: red;">
                                                 OKU?
                                             </label>
@@ -156,7 +156,7 @@
                             {{-- new --}}
                             <div class="col-sm-6">
                                 <label for="contact-number" class="form-label" style="color: red;">Home Number</label>
-                                <input type="text" id="" name="" value="" class="form-control" aria-describedby="" placeholder="00-0000000">
+                                <input type="text" id="home-number" name="homeNo" value="{{ $companion->homeNo ?? '' }}" class="form-control" aria-describedby="" placeholder="00-0000000">
                             </div>
                         </div>
                         <br>
@@ -360,13 +360,13 @@
                         <div class="row p-2">
                             <div class="col-sm-6">
                                 <label for="fullname" class="form-label">Full Name</label>
-                                <input type="text" id="fullname" name="fullName" value="{{ $companion->fullName ?? '' }}" placeholder="FULL NAME' class="form-control" aria-describedby="fullname">
+                                <input type="text" id="fullname" name="fullName" value="{{ $companion->fullName ?? '' }}" placeholder="FULL NAME" class="form-control" aria-describedby="fullname">
                             </div>
                             {{-- new --}}
                             <div class="col-sm-6">
                                 <div class="col-sm-12">
                                     <label for="fullname" class="form-label" style="color: red;">Old Identification Number</label>
-                                    <input type="text" id="" name="" value="" class="form-control" aria-describedby="" placeholder="0000000">
+                                    <input type="text" name="oldIDNo" value="{{ $companion->oldIDNo ?? '' }}" id="oldidnomc" class="form-control" aria-describedby="" placeholder="0000000">
                                 </div>
                             </div>
                         </div>
@@ -441,7 +441,7 @@
                             <div class="col-sm-6">
                                 <div class="row">
                                     <div class="col-sm-6">
-                                        <label for="marriage-cert" class="form-label">Marriage Certificatee</label>
+                                        <label for="marriage-cert" class="form-label">Marriage Certificate</label>
                                         <input type="file" name="marrigeCert" id="marriage-cert" class="form-control" aria-describedby="dob">
                                         @if ($companion->marrigeCert)
                                         Click <a href="/storage/app/file/{{$companion->marrigeCert}}" target="_blank">here</a> to see marriage cert.
@@ -466,7 +466,7 @@
                                 <div class="row">
                                     <div class="col-sm-6 ">
                                         <div class="form-check form-switch align-right">
-                                            <input class="form-check-input okuCheck2 " value="" type="checkbox" name=""  id="">
+                                            <input class="form-check-input okuCheck2" id="okuStatus2" value="{{ $companion->okuStatus ?? '' }}" type="checkbox" name="okuStatus">
                                             <label class="form-check-label" for="citizen" style="color: red;">
                                                 OKU?
                                             </label>
@@ -474,8 +474,7 @@
                                     </div>
                                     <div class="col-sm-6">
                                         <label for="lastname" class="form-label" style="color: red;">OKU Card Number*</label>
-                                        <input type="number" id="okucard2" name="" value="" class="form-control" readonly placeholder="OKU CARD NUMBER">
-                                        
+                                        <input type="number" id="okucard2" name="okuID" value="{{ $companion->okuID ?? '' }}" class="form-control" readonly placeholder="OKU CARD NUMBER">
                                     </div>
                                 </div>
                             </div>
@@ -496,7 +495,7 @@
                             {{-- new --}}
                             <div class="col-sm-6">
                                 <label for="contact-number" class="form-label" style="color: red;">Home Number</label>
-                                <input type="text" id="" name="" value="" class="form-control" aria-describedby="contact-number" placeholder="00-0000000">
+                                <input type="text" id="home-number" name="homeNo" value="{{ $companion->homeNo ?? '' }}" class="form-control" aria-describedby="contact-number" placeholder="00-0000000">
                             </div>
                         </div>
                         <div class="row p-2">
@@ -601,7 +600,7 @@
                         <div class="row p-2">
                             <div class="col-sm-6">
                                 <label for="lastname" class="form-label">Postcode</label>
-                                <input type="text" id="lastname" name="postcodeE" value="{{ $companion->postcodeE ?? '' }}" class="form-control" placeholder="00000' aria-describedby="lastname">
+                                <input type="text" id="lastname" name="postcodeE" value="{{ $companion->postcodeE ?? '' }}" class="form-control" placeholder="00000" aria-describedby="lastname">
                             </div>
                             <div class="col-sm-6">
                                 <label for="firstname" class="form-label">City</label>

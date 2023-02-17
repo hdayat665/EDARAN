@@ -25,7 +25,7 @@
                         {{-- new --}}
                         <div class="col-md-3">
                             <label for="" class="form-label" style="color: red;">Old Identification Number</label>
-                            <input type="text" id=""  name="" value=""  class="form-control" style="text-transform:uppercase" placeholder="0000000">
+                            <input type="text" id="oldIdNumber"  name="oldIDNo" value="{{$profile->oldIDNo ?? ''}}"  class="form-control" style="text-transform:uppercase" placeholder="0000000">
                         </div>
                         {{-- new --}}
                         <div class="col-md-3">

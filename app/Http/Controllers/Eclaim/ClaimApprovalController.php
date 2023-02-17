@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Eclaim;
 use App\Http\Controllers\Controller;
 use App\Service\ClaimApprovalService;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Auth;
 class ClaimApprovalController extends Controller
 {
     public function claimApprovalView($type = '')

@@ -7,6 +7,13 @@
 
 	<link href="../assets/plugins/timepicker/css/mdtimepicker.css" rel="stylesheet" type="text/css">
 
+
+    {{-- <style>
+    .event-title {
+        white-space: pre-line !important;
+    }
+    </style> --}}
+
 <div id="content" class="app-content">
     {{-- <h1 class="page-header">Calendar</h1> --}}
     <h1 class="page-header"> Timesheet <small>| My Timesheet  </small></h1>

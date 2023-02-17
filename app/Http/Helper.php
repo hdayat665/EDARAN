@@ -743,7 +743,8 @@ if (!function_exists('getEmployee')) {
 if (!function_exists('getEmployeeexcept')) {
     function getEmployeeexcept($id = '')
     {
-        $data = Employee::where([['tenant_id', Auth::user()->tenant_id], ['employeeid', '!=', null], ['jobGrade', $id]])->get();
+        //$data = Employee::where([['tenant_id', Auth::user()->tenant_id], ['employeeid', '!=', null], ['jobGrade', $id]])->get();
+        $data = Employee::where([['tenant_id', Auth::user()->tenant_id], ['employeeid', '!=', null]])->get();
 
         if (!$data) {
             $data = [];
@@ -819,6 +820,7 @@ if (!function_exists('project_member')) {
             ->leftJoin('project_member as b', 'a.id', '=', 'b.employee_id')
             ->leftJoin('project as c', 'b.project_id', '=', 'c.id')
             ->select('c.id', 'c.project_name', 'c.project_code')
+            ->groupBy('c.id')
             ->where($cond)
             ->get();
 
@@ -836,8 +838,8 @@ if (!function_exists('activityName')) {
         $cond[1] = ['tenant_id', Auth::user()->tenant_id];
         // $cond[1] = ['tenant_id', ];
         $cond[2] = ['department', $departmentId];
-        // $cond[3] = ['project_id', null];
-        $data = ActivityLogs::where($cond)->get();
+        // $cond[3] = ['project_id', $projectId];
+        $data = ActivityLogs::where($cond)->groupBy('activity_name')->get();
         if (!$data) {
             $data = [];
         }

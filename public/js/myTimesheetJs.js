@@ -520,6 +520,7 @@ $(document).ready(function() {
                 location: "required",
                 location_by_project: "required",
                 participant: "required",
+                
             },
 
             messages: {
@@ -775,7 +776,7 @@ $(document).ready(function() {
                 }
 
                 log.push({
-                    title: (logs['project_name'] ? logs['project_name'] + ' ' : '') + (logs['activitynameas'] ? logs['activitynameas'] + ' ' : '') + ' from ' + logs['start_time'] + ' to ' + logs['end_time'],
+                    title: (logs['project_name'] ? logs['project_name'] + ' ' : '') + "\n" + (logs['activitynameas'] ? logs['activitynameas'] + ' ' : '') + ' from ' + logs['start_time'] + ' to ' + logs['end_time'],
                     // start: startYear + '-' + startMonth + '-' + startDay + 'T' + startTime + ':00',
                     start: startYear + '-' + startMonth + '-' + startDay,
                     color: app.color.primary,
@@ -817,6 +818,7 @@ $(document).ready(function() {
 
                     $("#dateaddlog").val(formatedDate);
                 },
+          
                 eventClick: function(info) {
 
                     info.jsEvent.preventDefault();
@@ -1405,9 +1407,12 @@ $(document).ready(function() {
     $(document).on('change', "#typeoflog", function() {
         if ($(this).val() == "3") {
             $("#myproject").show();
+            $("#activity_locationadd").show();
+            
         } else {
             $("#myproject").hide();
             $("#listproject").hide();
+            $("#activity_locationadd").hide();
         }
     });
     $(document).on('change', "#officelog2", function() {
@@ -1592,9 +1597,12 @@ $(document).ready(function() {
     $(document).on('change', "#typeoflogedit", function() {
         if ($(this).val() == "3") {
             $("#myprojectedit").show();
+            $("#typeoflogedit").show();
+            
         } else {
             $("#myprojectedit").hide();
             $("#listprojectedit").hide();
+            $("#typeoflogedit").hide();
         }
     });
     $(document).on('change', "#officelog2edit", function() {
