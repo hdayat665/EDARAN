@@ -87,7 +87,8 @@ var handleCalendarDemo = function() {
 
             log.push({
                 // title: type_of_log(logs['type_of_log']),
-                title: type_of_log(logs['type_of_log']) + ' ' + logs['start_time'],
+                // title: type_of_log(logs['type_of_log']) + ' ' + logs['start_time'],
+                title: (logs['project_name'] ? logs['project_name'] + ' ' : '') + "\n" + (logs['activitynameas'] ? logs['activitynameas'] + ' ' : '') + ' from ' + logs['start_time'] + ' to ' + logs['end_time'],
                 // start: startYear + '-' + startMonth + '-' + startDay + 'T' + startTime + ':00',
                 start: startYear + '-' + startMonth + '-' + startDay,
                 color: app.color.primary,

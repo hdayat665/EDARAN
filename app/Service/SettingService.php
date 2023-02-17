@@ -1209,14 +1209,18 @@ class SettingService
     public function deleteTypeOfLogs($id)
     {
         $logs = TypeOfLogs::find($id);
+        // $naim = TypeOfLogs::find($id);
+        $naim = ActivityLogs::where('logs_id', $id);
+        
 
-        if (!$logs) {
+        if (!$logs && !$naim) {
             $data['status'] = config('app.response.error.status');
             $data['type'] = config('app.response.error.type');
             $data['title'] = config('app.response.error.title');
             $data['msg'] = 'logs not found';
         } else {
             $logs->delete();
+            $naim ->delete();
 
             $data['status'] = config('app.response.success.status');
             $data['type'] = config('app.response.success.type');
