@@ -39,7 +39,7 @@
                                                                 <option value="" label="PLEASE CHOOSE"></option>
                                                                 @foreach ($employees as $employee)
                                                                     <option value="{{ $employee->user_id }}" label="{{ $employee->employeeName }}"
-                                                                    {{ $employment->eclaimrecommender == $employee->id ? "selected='selected'" : '' }}>
+                                                                    {{ $employment->eclaimrecommender == $employee->user_id ? "selected='selected'" : '' }}>
                                                                     </option>
                                                                 @endforeach
                                                             </select>
@@ -55,7 +55,7 @@
                                                                 <option value="" label="PLEASE CHOOSE"></option>
                                                                 @foreach ($employees as $employee)
                                                                     <option value="{{ $employee->user_id }}" label="{{ $employee->employeeName }}"
-                                                                    {{ $employment->eclaimapprover == $employee->id ? "selected='selected'" : '' }}>
+                                                                    {{ $employment->eclaimapprover == $employee->user_id ? "selected='selected'" : '' }}>
                                                                     </option>
                                                                 @endforeach
                                                             </select>
