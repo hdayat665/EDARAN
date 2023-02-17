@@ -808,30 +808,17 @@ $(document).ready(function() {
                         }
                     }
                 },
-                // dateClick: function(info) {
-
-                //     $('#addLogModal').modal('show');
-
-                //     const formatedDate = dayjs(info.dateStr).format("DD-MM-YYYY")
-                //         // console.log(formatedDate);
-                //         // console.log(info.dateStr);
-
-                //     $("#dateaddlog").val(formatedDate);
-                // },
                 dateClick: function(info) {
-                    // check if the clicked date is today
-                    if (dayjs(info.date).isSame(dayjs(), 'day')) {
-                      // prevent the default action of the click event
-                      info.jsEvent.preventDefault();
-                      return;
-                    }
-                  
-                    // show the modal and set the date
+
                     $('#addLogModal').modal('show');
-                    const formatedDate = dayjs(info.dateStr).format("DD-MM-YYYY");
+
+                    const formatedDate = dayjs(info.dateStr).format("DD-MM-YYYY")
+                        // console.log(formatedDate);
+                        // console.log(info.dateStr);
+
                     $("#dateaddlog").val(formatedDate);
-                  },
-                  
+                },
+          
                 eventClick: function(info) {
 
                     info.jsEvent.preventDefault();
