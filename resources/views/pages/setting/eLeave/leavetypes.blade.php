@@ -79,7 +79,7 @@
 							<div class="mb-3">
 								<div class="row g-3 align-items-center">
 									<div class="col-auto">
-										<input class="form-check-input" type="checkbox" value="" id="checkallowrequest"> 
+										<input class="form-check-input" type="checkbox"  id="checkallowrequest"> 
 									</div>
 									
 										<div class="col-auto">
