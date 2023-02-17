@@ -148,6 +148,7 @@
                         </div>
                     </div>
                     <div class="tab-content panel p-3 rounded">
+                        <input type="hidden" value="{{ $check }}" id="checkers">
                         @include('pages.eclaim.claimApproval.finance.checker.fcTab1')
                         @include('pages.eclaim.claimApproval.finance.checker.fcTab2')
                         @include('pages.eclaim.claimApproval.finance.checker.fcTab3')

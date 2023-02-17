@@ -54,15 +54,15 @@ $(document).ready(function () {
             )
             .val("");
 
-        function getUserByRole(roleId) {
+        function getUserByJobGrade(roleId) {
             return $.ajax({
-                url: "/getUserByRole/" + roleId,
+                url: "/getUserByJobGrade/" + roleId,
             });
         }
 
         $("#approverGeneralShow").find("option").end();
 
-        var user = getUserByRole(roleId);
+        var user = getUserByJobGrade(roleId);
 
         user.done(function (datas) {
             // console.log(datas);
@@ -90,20 +90,20 @@ $(document).ready(function () {
             )
             .val("");
 
-        function getUserByRole(roleId) {
+        function getUserByJobGrade(roleId) {
             return $.ajax({
-                url: "/getUserByRole/" + roleId,
+                url: "/getUserByJobGrade/" + roleId,
             });
         }
 
         $("#checker1").find("option").end();
 
-        var user = getUserByRole(roleId);
-
+        var user = getUserByJobGrade(roleId);
+        console.log(user);
         user.done(function (data) {
-            // console.log(data.user_profile.id);
             for (let i = 0; i < data.length; i++) {
                 const user = data[i];
+                console.log(data[i]);
                 var opt = document.createElement("option");
                 document.getElementById("checker1").innerHTML +=
                     '<option value="' +
@@ -159,9 +159,9 @@ $(document).ready(function () {
                 )
                 .val("");
 
-            function getUserByRole(roleId) {
+            function getUserByJobGrade(roleId) {
                 return $.ajax({
-                    url: "/getUserByRole/" + roleId,
+                    url: "/getUserByJobGrade/" + roleId,
                 });
             }
             $("#" + inputs[i] + "")
@@ -169,7 +169,7 @@ $(document).ready(function () {
                 .end();
         }
 
-        var user = getUserByRole(roleId);
+        var user = getUserByJobGrade(roleId);
 
         user.done(function (data) {
             // console.log(data.user_profile.id);
@@ -231,9 +231,9 @@ $(document).ready(function () {
                 )
                 .val("");
 
-            function getUserByRole(roleId) {
+            function getUserByJobGrade(roleId) {
                 return $.ajax({
-                    url: "/getUserByRole/" + roleId,
+                    url: "/getUserByJobGrade/" + roleId,
                 });
             }
             $("#" + inputs[i] + "")
@@ -241,7 +241,7 @@ $(document).ready(function () {
                 .end();
         }
 
-        var user = getUserByRole(roleId);
+        var user = getUserByJobGrade(roleId);
 
         user.done(function (data) {
             // console.log(data.user_profile.id);

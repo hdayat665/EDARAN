@@ -16,6 +16,7 @@
                                     <label class="form-label col-form-label">Claim ID :</label>
                                 </div>
                                 <div class="col-md-4">
+                                    <input type="hidden" id="financeChecker" value="{{ $checkers }}">
                                     <input readonly type="text" value="{{ $general->id ?? '-' }}" class="form-control">
                                 </div>
                                 <div class="col-md-2">
@@ -63,7 +64,7 @@
                                                     <td>
                                                         <input type="checkbox" {{ $gnc->f1 == 'check' ? 'checked' : '' }} class="form-check-input" disabled /> &nbsp;
                                                         <input type="checkbox" {{ $gnc->f2 == 'check' ? 'checked' : '' }} class="form-check-input" disabled /> &nbsp;
-                                                        <input type="checkbox" {{ $gnc->f3 == 'check' ? 'checked' : '' }}class="form-check-input" disabled />
+                                                        <input type="checkbox" {{ $gnc->f3 == 'check' ? 'checked' : '' }} class="form-check-input" disabled />
                                                     </td>
                                                     <td>{{ $gnc->created_at ?? '-' }}</td>
                                                     <td>{{ $gnc->claim_category ?? '-' }}</td>
@@ -126,7 +127,9 @@
                         <a class="btn btn-secondary" style="color: black" type="submit"> Cancel</a> &nbsp;
                         <a href="javascript:;" class="btn btn-warning" style="color: black" data-bs-toggle="modal" data-bs-target="#modalamend">Amend</a> &nbsp;
                         <a href="javascript:;" class="btn btn-danger" style="color: black" data-bs-toggle="modal" data-bs-target="#modalreject"> Reject</a> &nbsp;
-                        <a class="btn btn-lime" id="approveButton" data-id="{{ $general->id }}" style="color: black" type="submit"> Approve</a>
+                        @if ($checkers == 'f1')
+                            <a class="btn btn-lime" id="approveButton" data-id="{{ $general->id }}" style="color: black" type="submit"> Approve</a>
+                        @endif
                     </div>
                 </div>
             </div>

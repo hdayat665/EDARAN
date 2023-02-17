@@ -29,7 +29,7 @@
                         <td>
                             <div class="btn-group me-1 mb-1">
                                 @if ($claim->claim_type == 'GNC')
-                                    @if ($claim->status == 'amend')
+                                    @if ($claim->status == 'amend' || $claim->status == 'draft')
                                         <a href="javascript:;" class="btn btn-primary btn-sm">Action</a>
                                         <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle btn-sm"><i class="fa fa-caret-down"></i></a>
                                         <div class="dropdown-menu dropdown-menu-end">

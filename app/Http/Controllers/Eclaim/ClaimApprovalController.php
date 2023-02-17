@@ -8,13 +8,13 @@ use Illuminate\Http\Request;
 
 class ClaimApprovalController extends Controller
 {
-    public function claimApprovalView()
+    public function claimApprovalView($type = '')
     {
         $mcs = new ClaimApprovalService;
 
-        $data['claims'] = $mcs->getGeneralClaim();
+        $data['claims'] = $mcs->getGeneralClaim($type);
 
-        $view = getViewForClaimApproval();
+        $view = getViewForClaimApproval($type);
 
         return view('pages.eclaim.claimApproval.' . $view, $data);
     }
@@ -94,6 +94,7 @@ class ClaimApprovalController extends Controller
 
         $result = $mcs->supervisorDetailClaimView($id);
 
+        $data['checkers'] = getFinanceChecker();
         $data['general'] = $result['claim'];
         $data['travels'] = $result['travel'];
         $data['personals'] = $result['personal'];
@@ -114,6 +115,7 @@ class ClaimApprovalController extends Controller
 
         $result = $mcs->supervisorDetailClaimView($id);
 
+        $data['checkers'] = getAdminChecker();
         $data['general'] = $result['claim'];
         $data['travels'] = $result['travel'];
         $data['personals'] = $result['personal'];
@@ -174,7 +176,9 @@ class ClaimApprovalController extends Controller
     {
         $mcs = new ClaimApprovalService;
 
-        $data['claims'] = $mcs->getGeneralClaim();
+        $result = $mcs->financeCheckerView();
+        $data['check'] = $result['check'];
+        $data['claims'] = $result['general'];
 
         $view = 'financeChecker';
 
@@ -185,7 +189,9 @@ class ClaimApprovalController extends Controller
     {
         $mcs = new ClaimApprovalService;
 
-        $data['claims'] = $mcs->getGeneralClaim();
+        $result = $mcs->adminCheckerView();
+        $data['check'] = $result['check'];
+        $data['claims'] = $result['general'];
 
         $view = 'adminChecker';
 
@@ -198,7 +204,7 @@ class ClaimApprovalController extends Controller
     {
         $mcs = new ClaimApprovalService;
 
-        $data['claims'] = $mcs->getGeneralClaim();
+        $data['claims'] = $mcs->financeRecView();
 
         $view = 'financeRec';
 
@@ -209,7 +215,7 @@ class ClaimApprovalController extends Controller
     {
         $mcs = new ClaimApprovalService;
 
-        $data['claims'] = $mcs->getGeneralClaim();
+        $data['claims'] = $mcs->adminRecView();
 
         $view = 'adminRec';
 
@@ -221,7 +227,7 @@ class ClaimApprovalController extends Controller
     {
         $mcs = new ClaimApprovalService;
 
-        $data['claims'] = $mcs->getGeneralClaim();
+        $data['claims'] = $mcs->financeRecView();
 
         $view = 'fapproval';
 
@@ -232,7 +238,7 @@ class ClaimApprovalController extends Controller
     {
         $mcs = new ClaimApprovalService;
 
-        $data['claims'] = $mcs->getGeneralClaim();
+        $data['claims'] = $mcs->adminRecView();
 
         $view = 'adminApproval';
 
@@ -279,7 +285,14 @@ class ClaimApprovalController extends Controller
         return view('pages.eclaim.claimApproval.admin.recommender.' . $view, $data);
     }
 
+    public function HodCashApprovalView()
+    {
+        $mcs = new ClaimApprovalService;
 
+        $data['claims'] = $mcs->getGeneralClaim();
+
+        return view('pages.eclaim.claimApproval.cashAdvance.hodApproval', $data);
+    }
 
     public function getPersonalById($id = '')
     {
