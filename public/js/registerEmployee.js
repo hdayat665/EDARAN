@@ -173,6 +173,11 @@ $(document).ready(function() {
         }
       });
     
+      $.validator.addMethod("noSpecialChars", function(value, element) {
+        return this.optional(element) || /^[^A-Za-z0-9!@#$%^&*()\-_+={}[\]\\|<>"'\/~`,.;: ]*$/.test(value);
+      }, "Special characters, spaces, and alphabet characters are not allowed.");
+      
+
     $('#profileForm').click(function(e) {
 
         $('#profileForm').validate({
@@ -180,7 +185,10 @@ $(document).ready(function() {
             // Specify validation rules
             rules: {
 
-                employee_id: "required",
+                employee_id: {
+                    required: true,
+                    noSpecialChars: true
+                  },
                 username: "required",
                 firstName: "required",
                 lastName: "required",
@@ -202,23 +210,26 @@ $(document).ready(function() {
             },
 
             messages: {
-                employee_id: "Please insert employee ID",
-                username: "Please insert username",
-                firstName: "Please insert first name",
-                lastName: "Please insert last namee",
-                idNo: "Please insert New identification number",
-                expiryDate: "Please insert expiry date",
-                issuingCountry: "Please insert issuing country",
-                DOB: "Please insert date of birth",
-                gender: "Please insert gender",
-                maritialStatus: "Please insert marital status",
-                religion: "Please insert religion",
+                employee_id: {
+                    required: "Please Insert Employee ID",
+                    noSpecialChars: "Special characters, spaces, and alphabet characters are not allowed."
+                },
+                username: "Please Insert Username",
+                firstName: "Please Insert First Name",
+                lastName: "Please Insert Last Name",
+                idNo: "Please Insert Identification Number",
+                expiryDate: "Please Insert Expiry Date",
+                issuingCountry: "Please Insert Issuing Country",
+                DOB: "Please Insert Date Of Birth",
+                gender: "Please Insert Gender",
+                maritialStatus: "Please Insert Marital Status",
+                religion: "Please Insert Religion",
                 personalEmail: {
-                    required: "Please insert personal email",
-                    email: "Please insert valid email"
+                    required: "Please Insert Personal Email",
+                    email: "Please Insert Valid Email"
                 },
                 phoneNo: {
-                    required: "Please insert Phone Number",
+                    required: "Please Insert Phone Number",
                     digits: "Please Insert Correct Identification Number Without ' - ' or Space",
 
                 },
