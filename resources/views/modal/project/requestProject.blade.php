@@ -42,7 +42,7 @@
                     </div>
                     <div class="row">
                         <div class="col-md-4">
-                            <label class="form-label col-md-6">Reason</label>
+                            <label class="form-label col-md-6">Reason*</label>
                         </div>
                     </div>
                     <div class="row">

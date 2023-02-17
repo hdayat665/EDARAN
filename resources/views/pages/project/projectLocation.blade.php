@@ -9,7 +9,7 @@
         <table id="projectLocationTable" class="table table-striped table-bordered align-middle">
             <thead>
                 <tr>
-                    <th width="6%" data-orderable="false" class="align-middle">Action</th>
+                    <th width="6%" class="align-middle">Action</th>
                     <th class="text-nowrap">Location Name</th>
                     <th class="text-nowrap">Address</th>
                     <th class="text-nowrap">Location</th>
