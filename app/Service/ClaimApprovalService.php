@@ -2,6 +2,8 @@
 
 namespace App\Service;
 
+use App\Models\ApprovelRoleGeneral;
+use App\Models\DomainList;
 use App\Models\Employee;
 use App\Models\EmploymentType;
 use App\Models\GeneralClaim;
@@ -13,19 +15,106 @@ use Illuminate\Support\Facades\Auth;
 class ClaimApprovalService
 {
 
-    public function getGeneralClaim()
+    public function getGeneralClaim($type = '')
     {
-        $employee = Employee::where('user_id', Auth::user()->id)->first();
+        // type 1 approval 2 recommender
 
-        // hod = 2 supervisor = 1
-        if ($employee->jobGrade == '1') {
-            $cond[1] = ['claim_type', 'MTC'];
-        } elseif ($employee->jobGrade == '2') {
-            // $cond[1] = ['claim_type', 'GNC'];
+        if ($type == 1) {
+            $cond[0] = ['eclaimapprover', Auth::user()->id];
+        } else {
+            $cond[0] = ['eclaimrecommender', Auth::user()->id];
         }
-        $cond[0] = ['tenant_id', Auth::user()->tenant_id];
 
-        $data = GeneralClaim::where($cond)->get();
+        $employees = Employee::where($cond)->get();
+
+        $userId = [];
+        foreach ($employees as $key => $employee) {
+            $userId[] = $employee->user_id;
+        }
+
+        $claim[0] = ['tenant_id', Auth::user()->tenant_id];
+
+        $data = GeneralClaim::where($claim)->whereIn('user_id', $userId)->get();
+
+        return $data;
+    }
+
+    public function financeCheckerView()
+    {
+        // find checker 
+        $domainList = DomainList::where([['tenant_id', Auth::user()->tenant_id], ['category_role', 'finance']])->orderBy('created_at', 'DESC')->first();
+        $userId = Auth::user()->id;
+        // pr($domainList);
+        $data['check'] = '';
+        if ($domainList->checker1 == $userId) {
+            $data['check'] = 'f1';
+        } else if ($domainList->checker2 == $userId) {
+            $data['check'] = 'f2';
+        } else if ($domainList->checker3 == $userId) {
+            $data['check'] = 'f3';
+        }
+
+        $claim[0] = ['tenant_id', Auth::user()->tenant_id];
+        $claim[1] = ['status', '!=', 'draft'];
+
+        $data['general'] = GeneralClaim::where($claim)->get();
+
+        return $data;
+    }
+
+    public function adminCheckerView()
+    {
+        // find checker 
+        $domainList = DomainList::where([['tenant_id', Auth::user()->tenant_id], ['category_role', 'admin']])->orderBy('created_at', 'DESC')->first();
+        $userId = Auth::user()->id;
+        // pr($domainList);
+        $data['check'] = '';
+        if ($domainList->checker1 == $userId) {
+            $data['check'] = 'a1';
+        } else if ($domainList->checker2 == $userId) {
+            $data['check'] = 'a2';
+        } else if ($domainList->checker3 == $userId) {
+            $data['check'] = 'a3';
+        }
+
+        $claim[0] = ['tenant_id', Auth::user()->tenant_id];
+        $claim[1] = ['status', '!=', 'draft'];
+
+        $data['general'] = GeneralClaim::where($claim)->get();
+
+        return $data;
+    }
+
+    public function financeRecView()
+    {
+        // find checker 
+        // $domainList = DomainList::where([['tenant_id', Auth::user()->tenant_id], ['category_role', 'finance']])->orderBy('created_at', 'DESC')->first();
+        // $userId = Auth::user()->id;
+        // // pr($domainList);
+        // $data['check'] = '';
+        // if ($domainList->checker1 == $userId) {
+        //     $data['check'] = 'f1';
+        // } else if ($domainList->checker2 == $userId) {
+        //     $data['check'] = 'f2';
+        // } else if ($domainList->checker3 == $userId) {
+        //     $data['check'] = 'f3';
+        // }
+
+        $claim[0] = ['tenant_id', Auth::user()->tenant_id];
+        $claim[1] = ['status', '!=', 'draft'];
+
+        $data = GeneralClaim::where($claim)->get();
+
+        return $data;
+    }
+
+    public function adminRecView()
+    {
+
+        $claim[0] = ['tenant_id', Auth::user()->tenant_id];
+        $claim[1] = ['status', '!=', 'draft'];
+
+        $data = GeneralClaim::where($claim)->get();
 
         return $data;
     }
@@ -59,7 +148,7 @@ class ClaimApprovalService
         //     $input['status'] = $status;
         // }
 
-        $input['status'] = $status;
+        // $input['status'] = $status;
         $input[$stage] = $status;
 
         GeneralClaimDetail::where('id', $id)->update($input);
@@ -80,7 +169,7 @@ class ClaimApprovalService
         //     $input['status'] = $status;
         // }
 
-        $input['status'] = $status;
+        // $input['status'] = $status;
         $input[$stage] = $status;
 
         PersonalClaim::where('id', $id)->update($input);
@@ -100,7 +189,7 @@ class ClaimApprovalService
         // if (in_array($status, ['reject', 'amend'])) {
         // }
 
-        $input['status'] = $status;
+        // $input['status'] = $status;
         $input[$stage] = $status;
 
         TravelClaim::where('id', $id)->update($input);
@@ -152,6 +241,24 @@ class ClaimApprovalService
     public function getGncById($id = '')
     {
         $data = GeneralClaimDetail::where('id', $id)->first();
+
+        return $data;
+    }
+
+    public function createPvNumber($id = '')
+    {
+        $claim = GeneralClaim::where('id', $id)->first();
+
+        $pvNo = [
+            'pv_number' => 'PV-' . $claim->claim_type . '-' . $claim->id
+        ];
+
+        GeneralClaim::where('id', $id)->update($pvNo);
+
+        $data['status'] = config('app.response.success.status');
+        $data['type'] = config('app.response.success.type');
+        $data['title'] = config('app.response.success.title');
+        $data['msg'] = 'Success Generate PV Number';
 
         return $data;
     }

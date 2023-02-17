@@ -20,7 +20,7 @@ use Illuminate\Support\Facades\Mail;
 class myClaimService
 {
     public function getClaimsData($user_id = '')
-    {   
+    {
         $user_id = Auth::user()->id;
 
         $data = GeneralClaim::where([['tenant_id', Auth::user()->tenant_id], ['user_id', $user_id]])->get();
@@ -176,7 +176,7 @@ class myClaimService
     public function updateStatusGeneralClaims($id)
     {
         $update = [
-            'status' => 'paid'
+            'status' => 'active'
         ];
 
         GeneralClaim::where('id', $id)->update($update);

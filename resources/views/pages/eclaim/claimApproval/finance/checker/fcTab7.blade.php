@@ -14,7 +14,7 @@
         </thead>
         <tbody>
             @foreach ($claims as $claim)
-                @if ($claim->status == 'reject')
+                @if ($claim->pv_number != '')
                     <tr>
                         <td><input type="checkbox" id="" name="" value=""></td>
                         <td>
@@ -46,7 +46,7 @@
                         <td>{{ $claim->claim_type ?? '-' }}</td>
                         <td>{{ $claim->month ?? '-' }}</td>
                         <td>{{ $claim->total_amount ?? '-' }}</td>
-                        <td>{{ '-' }}</td>
+                        <td>{{ $claim->pv_number ?? '-' }}</td>
                     </tr>
                 @endif
             @endforeach

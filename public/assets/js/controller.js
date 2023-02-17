@@ -69,6 +69,12 @@ requirejs.config({
         frecGncJs: assets + "/js/frecGncJs",
         fapprovalJs: assets + "/js/fapprovalJs",
         fapprovalDetailJs: assets + "/js/fapprovalDetailJs",
+        adminCheckerJs: assets + "/js/adminCheckerJs",
+        adminCheckerMtcJs: assets + "/js/adminCheckerMtcJs",
+        adminApprovalJs: assets + "/js/adminApprovalJs",
+        adminApprovalMtcJs: assets + "/js/adminApprovalMtcJs",
+        adminRecJs: assets + "/js/adminRecJs",
+        adminRecDetailJs: assets + "/js/adminRecDetailJs",
 
         /// timesheet period
         sheetPeriodJs: assets + "/js/sheetPeriodJs",
@@ -370,6 +376,30 @@ if ($("#fapprovalJs").length > 0) {
 
 if ($("#fapprovalDetailJs").length > 0) {
     requirejs(["fapprovalDetailJs"]);
+}
+
+if ($("#adminCheckerJs").length > 0) {
+    requirejs(["adminCheckerJs"]);
+}
+
+if ($("#adminCheckerMtcJs").length > 0) {
+    requirejs(["adminCheckerMtcJs"]);
+}
+
+if ($("#adminApprovalJs").length > 0) {
+    requirejs(["adminApprovalJs"]);
+}
+
+if ($("#adminApprovalMtcJs").length > 0) {
+    requirejs(["adminApprovalMtcJs"]);
+}
+
+if ($("#adminRecJs").length > 0) {
+    requirejs(["adminRecJs"]);
+}
+
+if ($("#adminRecDetailJs").length > 0) {
+    requirejs(["adminRecDetailJs"]);
 }
 
 // Global function

@@ -156,11 +156,10 @@
 
 <script> 
       
-
 </script>
 <script 
-  $apiKey = env('GOOGLE_API_KEY');
-  src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_API_KEY') }}&libraries=places&callback=initMap"
+
+  src="https://maps.googleapis.com/maps/api/js?key={{ ('GOOGLE_API_KEY') }}&libraries=places&callback=initMap"
   async defer>
 </script>
 

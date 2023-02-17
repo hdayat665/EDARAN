@@ -54,7 +54,7 @@
                     <div class="row mb-3">
                         <label for="inputEmail3" class="col-sm-2 col-form-label">State Reason</label><br>
                         <div class="col-sm-10">
-                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="input reason"></textarea>
+                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="remark" placeholder="input reason"></textarea>
                         </div>
                     </div>
                 </form>
@@ -83,7 +83,7 @@
                     <div class="row mb-3">
                         <label for="inputEmail3" class="col-sm-2 col-form-label">State reason</label><br>
                         <div class="col-sm-10">
-                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="input reason"></textarea>
+                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="remark" placeholder="input reason"></textarea>
                         </div>
                     </div>
                 </form>

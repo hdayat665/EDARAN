@@ -21,9 +21,9 @@
                                     <input type="hidden" name="category_role" value="admin">
                                     <select class="form-select" id="roleId" name="role">
                                         <option class="form-label" value="">Please Select</option>
-                                        <?php $roles = getAllRole(); ?>
+                                        <?php $roles = getAllJobGrade(); ?>
                                         @foreach ($roles as $role)
-                                            <option value="{{ $role->id }}">{{ $role->roleName }}</option>
+                                            <option value="{{ $role->id }}">{{ $role->jobGradeName }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -109,9 +109,9 @@
                                     <input type="hidden" name="category_role" value="finance">
                                     <select class="form-select" id="roleIdF" name="role">
                                         <option class="form-label" value="">Please Select</option>
-                                        <?php $roles = getAllRole(); ?>
+                                        <?php $roles = getAllJobGrade(); ?>
                                         @foreach ($roles as $role)
-                                            <option value="{{ $role->id }}">{{ $role->roleName }}</option>
+                                            <option value="{{ $role->id }}">{{ $role->jobGradeName }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -204,9 +204,9 @@
                                     <input type="hidden" name="category_role" value="cash_advance">
                                     <select class="form-select" id="roleIdC" name="role">
                                         <option class="form-label" value="">Please Select</option>
-                                        <?php $roles = getAllRole(); ?>
+                                        <?php $roles = getAllJobGrade(); ?>
                                         @foreach ($roles as $role)
-                                            <option value="{{ $role->id }}">{{ $role->roleName }}</option>
+                                            <option value="{{ $role->id }}">{{ $role->jobGradeName }}</option>
                                         @endforeach
                                     </select>
                                 </div>

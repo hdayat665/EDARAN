@@ -84,7 +84,7 @@ Route::group(['middleware' => ['web']], function () {
         });
 
         Route::controller(ClaimApprovalController::class)->group(function () {
-            Route::get('/claimApprovalView', 'claimApprovalView');
+            Route::get('/claimApprovalView/{type}', 'claimApprovalView');
             Route::post('/updateStatusClaim/{id}/{status}/{stage}', 'updateStatusClaim');
             Route::get('/supervisorDetailClaimView/{id}', 'supervisorDetailClaimView');
             Route::get('/getTravelById/{id}', 'getTravelById');
@@ -100,6 +100,15 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('/financeRecDetailClaimView/{id}', 'financeRecDetailClaimView');
             Route::get('/financeApprovalView', 'financeApprovalView');
             Route::get('/financeAppDetailClaimView/{id}', 'financeAppDetailClaimView');
+            Route::get('/adminCheckerView', 'adminCheckerView');
+            Route::get('/adminCheckerDetail/{id}', 'adminCheckerDetail');
+            Route::get('/adminApprovalView', 'adminApprovalView');
+            Route::get('/adminApprovalDetail/{id}', 'adminApprovalDetail');
+            Route::get('/adminRecView', 'adminRecView');
+            Route::get('/adminRecDetailView/{id}', 'adminRecDetailView');
+            Route::get('/HodCashApprovalView', 'HodCashApprovalView');
+            Route::post('/createPvNumber/{id}', 'createPvNumber');
+
 
 
             // Route::get('/dashboardHost', 'dashboardHost')->name('dashboardHost');
@@ -275,6 +284,7 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('/claimCatById/{id}', 'claimCatById');
             Route::post('/createGeneralApprover', 'createGeneralApprover');
             Route::get('/getUserByRole/{id}', 'getUserByRole');
+            Route::get('/getUserByJobGrade/{id}', 'getUserByJobGrade');
             Route::post('/createDomainList', 'createDomainList');
             Route::get('/getClaimCategoryContent/{id}', 'getClaimCategoryContent');
             Route::get('/getClaimCategoryById/{id}', 'getClaimCategoryById');
@@ -412,7 +422,7 @@ Route::group(['middleware' => ['web']], function () {
         });
 
 
-            Route::controller(myClaimController::class)->group(function () {
+        Route::controller(myClaimController::class)->group(function () {
             Route::get('/myClaimView', 'myClaimView');
             Route::get('/generalClaimView', 'generalClaimView');
             Route::get('/cashAdvanceView', 'cashAdvanceView');

@@ -103,7 +103,7 @@
             </div>
             <div class="row mb-15px">
                 <div class="col-md-4">
-                    <select class="form-select" name="acc_manager">
+                    <select class="form-select" name="acc_manager" id="acc_manager2">
                         <option value="" label="PLEASE CHOOSE"></option>
                         <?php $Employees = getEmployee(); ?>
                         @foreach ($Employees as $Employee)
@@ -114,7 +114,7 @@
                     </select>
                 </div>
                 <div class="col-md-4">
-                    <select class="form-select" name="project_manager">
+                    <select class="form-select" name="project_manager" id="project_manager2">
                         <option value="" label="PLEASE CHOOSE"></option>
                         <?php $Employees = getEmployee(); ?>
                         @foreach ($Employees as $Employee)

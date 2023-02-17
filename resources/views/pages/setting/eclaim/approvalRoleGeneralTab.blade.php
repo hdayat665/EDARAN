@@ -19,10 +19,9 @@
                                 <div class="col-md-6">
                                     <select class="form-select" name="recommender" id="recommenderGeneral">
                                         <option class="form-label" value="">Please Select</option>
-                                        <?php $roles = getAllRole(); ?>
+                                        <?php $roles = getAllJobGrade(); ?>
                                         @foreach ($roles as $role)
-                                            <option value="{{ $role->id }}" label="{{ $role->roleName }}"
-                                            {{ $role->roleName == $role->id ? "selected='selected'" : '' }}>
+                                            <option value="{{ $role->id }}" label="{{ $role->jobGradeName }}">
                                             </option>
                                         @endforeach
 
@@ -35,8 +34,13 @@
                                     <label class="form-label">Approver</label>
                                 </div>
                                 <div class="col-md-6">
-                                    <select class="form-select" name="approver" id="approverGeneralShow">
+                                    <select class="form-select" name="approver" id="approverGenralShow">
                                         <option class="form-label" value="">Please Select</option>
+                                        <?php $roles = getAllJobGrade(); ?>
+                                        @foreach ($roles as $role)
+                                            <option value="{{ $role->id }}" label="{{ $role->jobGradeName }}">
+                                            </option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
@@ -63,9 +67,9 @@
                                             <li class="timeline-item mb-5 ">
                                                 <div class="card p-3 bg-white">
                                                     <p class="fw-bold">Recommender and Approver has change <br>
-                                                    Recommender : {{ getRoleById($data->recommender)->roleName }}<br>
-                                                    Approver : {{ optional(getUserProfileByUserId($data->approver))->fullName ?? 'Unable to retrieve approver information.' }}<br>
-                                                    updated by {{ optional(getUserProfileByUserId($data->user_id))->fullName ?? 'Unable to retrieve updater information.' }}
+                                                        Recommender : {{ getJobGradeById($data->recommender)->jobGradeName ?? '-' }}<br>
+                                                        Approver : {{ getJobGradeById($data->approver)->jobGradeName ?? 'Unable to retrieve approver information.' }}<br>
+                                                        updated by {{ optional(getUserProfileByUserId($data->user_id))->fullName ?? 'Unable to retrieve updater information.' }}
 
 
                                                     <p class="text-muted mb-2 fw-bold">11 March 2020
