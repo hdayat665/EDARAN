@@ -314,23 +314,44 @@
                             <div class="menu-caret text-gray"></div>
                         </a>
                         <div class="menu-submenu">
-                            <div class="menu-item">
-                                <a href="#" class="menu-link highlight">
+                            <div class="menu-item has-sub">
+                                <a href="/myleave" class="menu-link highlight">
                                     <div class="menu-icon">
-                                        <i class="fa fa-clipboard text-gray"></i>
-                                    </div>
-                                    <div class="menu-text text-gray">My Leave</div>
-                                </a>
+							    	    <i class="fa fa-clipboard text-gray"></i>
+							        </div>
+                                    <div class="menu-text text-gray">My Leave</i></div>
+                                    <!-- <div class="menu-caret text-gray"></div> -->
+                                </a>   
                             </div>
-                            <div class="menu-item">
+                            <div class="menu-item has-sub">
                                 <a href="#" class="menu-link highlight">
-                                    <div class="menu-icon">
-                                        <i class="fa fa-list-check text-gray"></i>
-                                    </div>
+                                <div class="menu-icon">
+								    <i class="fa fa-list-check text-gray"></i>
+							    </div>
                                     <div class="menu-text text-gray">Leave Approval</div>
+                                    <div class="menu-caret text-gray"></div>
+                                </a><div class="menu-submenu">
+                                <div class="menu-item">
+                                    <a href="leaveAppr" class="menu-link highlight">
+                                        <div class="menu-icon">
+								             <i class="fa fa-user-pen text-gray"></i>
+							            </div>
+                                        <div class="menu-text text-gray">Supervisor</div>
+                                    </a>
+                                    </div>
+                                    <div class="menu-item">
+                                <a href="leaveApprhod" class="menu-link highlight">
+                                <div class="menu-icon">
+								    <i class="fa fa-users-gear text-gray"></i>
+							    </div>
+                                    <div class="menu-text text-gray">HOD</div>
                                 </a>
                             </div>
-
+                            
+                        </div>
+                                
+                                
+                            </div>
                         </div>
                     </div>
 
