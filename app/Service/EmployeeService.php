@@ -931,4 +931,20 @@ class EmployeeService
 
         return $data;
     }
+    public function updateProfile_Picture($r, $id)
+    {
+        $input = $r->input();
+        
+        dd($input);
+        
+        UserProfile::where('user_id', $id)->update($input);
+
+        $data['status'] = true;
+        $data['title'] = 'Success';
+        $data['type'] = 'success';
+        $data['msg'] = 'Success Create Address';
+        $data['data'] = UserProfile::where('user_id', $input['user_id'])->first();
+
+        return $data;
+    }
 }

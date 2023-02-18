@@ -56,7 +56,7 @@ table{
                             </thead>
                             <tbody>
 
-                            @if ($projectMembers)
+                            <!-- @if ($projectMembers)
                                     @foreach ($projectMembers as $projectMember)
                                         <tr>
                                             <td width="1%"><a data-bs-toggle="modal" data-id="{{$projectMember->id}}" id="editProjectMemberButton" class="btn btn-primary"><i class="fa fa-cogs"></i> Edit</a></td>
@@ -65,14 +65,15 @@ table{
                                             <td>{{($projectMember->department) ? getDepartment($projectMember->department)->departmentName ?? '-' : '-'}}</td>
                                             <td>{{($projectMember->branch) ? getBranch($projectMember->branch)->branchName ?? '-' : '-'}}</td>
                                             <td>{{($projectMember->unit) ? getUnit($projectMember->unit)->unitName ?? '-' : '-'}}</td>
-                                            <td>{{$projectMember->joined_date}}</td>
+                                            <td>{{$projectMember->joined_date}}</td> -->
                                             <!-- <td><a href="/projectAssignView/{{$projectMember->id}}">view</a></td> -->
-                                            <td><a href="/projectAssignView/{{$projectMember->id}}" class="btn btn-primary"> View </a></td>
+                                            <!-- <td><a href="/projectAssignView/{{$projectMember->id}}" class="btn btn-primary"> View </a></td>
 
                                         </tr>
                                     @endforeach
-                                @endif
-                            <!-- if dont want duplicate    
+                                @endif -->
+                                
+                            if dont want duplicate    
                             @if ($projectMembers)
                                 @foreach ($projectMembers->unique('employee_id') as $projectMember)
                                     <tr>
@@ -90,7 +91,7 @@ table{
                                         <td><a href="/projectAssignView/{{$projectMember->id}}" class="btn btn-primary"> View </a></td>
                                     </tr>
                                 @endforeach
-                            @endif -->
+                            @endif
 
 
 

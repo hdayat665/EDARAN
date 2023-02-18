@@ -31,7 +31,7 @@
                     <tr>
                         <td>{{$new->title}}</td>
                         <td>{{$new->content}}</td>
-                        <td>{{$new->file}}</td>
+                        <td><a href="{{ route('download', ['filename' => $new->file]) }}">{{$new->file}}</a></td>  
                         <td>{{$new->addedBy}}</td>
                         <td>{{$new->created_at}}</td>
                         <td>{{$new->modifiedBy}}</td>

@@ -141,7 +141,7 @@ class ProjectService
             'unit' => $unit2,
             'joined_date' => $joineddate2,
             'status' => $status2,
-            'assign_as' => $assign2,
+            'assign_as' => $assign2, 
             'created_at' => $createdat2,
             
         ];
@@ -544,7 +544,7 @@ class ProjectService
             )
             ->where('a.id', $id)
             ->first();
-        // pr($projectMember);
+        pr($projectMember);
         $receiver = $projectMember->manager_email ?? 'admin@edaran.com';
 
         $response['typeEmail'] = 'projectCancelReq';
@@ -628,12 +628,15 @@ class ProjectService
         // dd($projectId);
 
         $data = DB::table('project as a')
-            ->leftJoin('customer as b', 'a.customer_id', '=', 'b.id')
-            ->leftJoin('employment as c', 'a.project_manager', '=', 'c.id')
-            ->select('a.*', 'b.customer_name', 'c.employeeName')
-            ->where([['a.tenant_id', Auth::user()->tenant_id], ['project_manager', '!=', '']])
-            ->whereNotIn('a.id', $projectId['approve'])
-            ->get();
+        ->leftJoin('customer as b', 'a.customer_id', '=', 'b.id')
+        ->leftJoin('employment as c', 'a.project_manager', '=', 'c.id')
+        ->leftJoin('project_member as d', 'a.id', '=', 'd.project_id')
+        ->select('a.*', 'b.customer_name', 'c.employeeName', 'd.id as project_member_id')
+        ->where([['a.tenant_id', Auth::user()->tenant_id], ['project_manager', '!=', '']])
+        ->whereNotIn('a.id', $projectId['approve'])
+        ->groupBy('a.id')
+        ->get();
+
 
         if (!$data) {
             $data = [];
@@ -701,7 +704,7 @@ class ProjectService
     {
         $data['projectMember'] = DB::table('project_member as a')
             ->leftJoin('employment as b', 'a.employee_id', '=', 'b.id')
-            ->select('a.id', 'a.location', 'b.employeeName')
+            ->select('a.id', 'a.location','a.project_id', 'b.employeeName')
             ->where([['a.id', '=', $id]])
             ->first();
 
