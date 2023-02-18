@@ -23,16 +23,24 @@
 
                     <div class="row mb-15px">
 
-                        <div class="col-md-6">
+                        <div class="col-md-6"> 
                             <input type="hidden" value="{{$project->id}}" name="project_id" style="text-transform: upppercase;">
                             <input type="hidden" value="{{$project->tenant_id}}" name="tenant_id">
                             <input type="text" class="form-control" name="joined_date" id="datepicker-joineddate" placeholder="YYYY/MM/DD" />
 
                         </div>
-
+                        
                         <div class="col-md-6">
                             <select class="selectpicker form-control" id="employee_id" name="employee_id" style="text-transform: upppercase;">
-                                <?php $employees = getEmployee(); ?>
+                            
+                            <?php
+                                $id = $project->id;
+                                $employees = getEmployeeNotInProject($id);
+                                ?>
+
+
+                                
+
                                 <option value="" label="PLEASE CHOOSE" selected="selected"> </option>
                                 @if ($employees)
 
