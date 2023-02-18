@@ -322,6 +322,16 @@ class MyTimesheetController extends Controller
         return response()->json($result);
     }
 
+
+    public function getConfirmSubmitById($id)
+    {
+        $ss = new MyTimeSheetService;
+
+        $data = $ss->getConfirmSubmitById($id);
+
+        return response()->json($data);
+    }
+
     // public function getParticipantNameById($participant = '')
     // {
     //     $ss = new MyTimeSheetService;

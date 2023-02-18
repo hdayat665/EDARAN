@@ -7,12 +7,14 @@
 
 	<link href="../assets/plugins/timepicker/css/mdtimepicker.css" rel="stylesheet" type="text/css">
 
+    <style>
+/* .fc-disabled-day {
+    background-color: #eee !important;
+    color: #888 !important;
+} */
 
-    {{-- <style>
-    .event-title {
-        white-space: pre-line !important;
-    }
-    </style> --}}
+    </style>
+
 
 <div id="content" class="app-content">
     {{-- <h1 class="page-header">Calendar</h1> --}}
@@ -25,7 +27,8 @@
    <div style="height: 80px; display: flex; align-items: center; justify-content: center;">
         <div class="d-grid gap-2 col-6 mx-auto">
             <input type="hidden" id="userIdForApproval" value="{{$user_id}}">
-             <button class="btn btn-primary" type="button" id="submitTimesheetApproval">Submit</button>
+             {{-- <button class="btn btn-primary" type="button" id="submitTimesheetApproval">Submit</button> --}}
+             <button class="btn btn-primary" type="button" id="confirmsubmitb" data-bs-toggle="modal">Submit</button>
         </div>
     </div>
     <div style="height: 80px; display: flex; align-items: center; justify-content: center; visibility: hidden;">
@@ -42,4 +45,5 @@
 @include('modal.timesheet.editEventModal')
 @include('modal.timesheet.addLogModal')
 @include('modal.timesheet.editLogModal')
+@include('modal.timesheet.confirmsubmitmodal')
 @endsection

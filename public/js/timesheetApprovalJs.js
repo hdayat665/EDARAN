@@ -170,6 +170,7 @@ $(document).on("click", "#amendreasonmodal", function () {
         // console.log('')
         $("#employeename").val(data.employee_name);
         $("#idtv").val(data.id);
+        
     });
     $("#reasonmodal").modal("show");
 });
@@ -186,4 +187,8 @@ function getRequesttimesheet(id) {
 $('[data-toggle="tooltipamend"]').tooltip(); 
 
 });
+
+
+
+
 

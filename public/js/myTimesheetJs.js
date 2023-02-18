@@ -2,8 +2,6 @@
 
 $(document).ready(function() {
 
-    
-
     $("#datepicker-joindate").datepicker({
         todayHighlight: true,
         autoclose: true,
@@ -727,7 +725,7 @@ $(document).ready(function() {
 
                 event.push({
                     // title: "Event: " + events['event_name'],
-                    title: "Event: " + events['event_name'] +  ' ' + events['project_id'],
+                    title: "Event: " + events['event_name'],
                     start: startYear + '-' + startMonth + '-' + startDay,
                     end: endYear + '-' + endMonth + '-' + endDay,
                     color: app.color.red,
@@ -808,16 +806,68 @@ $(document).ready(function() {
                         }
                     }
                 },
+                // dateClick: function(info) {
+
+                //     $('#addLogModal').modal('show');
+
+                //     const formatedDate = dayjs(info.dateStr).format("DD-MM-YYYY")
+                //         // console.log(formatedDate);
+                //         // console.log(info.dateStr);
+
+                //     $("#dateaddlog").val(formatedDate);
+                // },
+
                 dateClick: function(info) {
-
+                    const today = dayjs();
+                    const minDate = today.subtract(2, 'day'); // Set the minimum date to 2 days ago
+                  
+                    // check if the clicked date is earlier than the minimum date
+                    if (dayjs(info.date).isBefore(minDate, 'day')) {
+                        alert("You can only select dates up to 48 hours from now.");
+                        return;
+                    }
+                    
+                  
+                    // show the modal and set the date
                     $('#addLogModal').modal('show');
+                    const formattedDate = dayjs(info.dateStr).format('DD-MM-YYYY');
+                    $("#dateaddlog").val(formattedDate);
+                  },
 
-                    const formatedDate = dayjs(info.dateStr).format("DD-MM-YYYY")
-                        // console.log(formatedDate);
-                        // console.log(info.dateStr);
 
-                    $("#dateaddlog").val(formatedDate);
-                },
+                // dateClick: function(info) {
+                //     const selectedDate = dayjs(info.date);
+                //     const currentDate = dayjs();
+                
+                //     // Check if the selected date is not more than 2 days from the current date
+                //     if (selectedDate.diff(currentDate, 'day') > 2) {
+                //         alert("You can only select dates up to 2 days from today.");
+                //         return;
+                //     }
+                
+                //     // Check if the selected date is not in the past
+                //     if (selectedDate.diff(currentDate, 'hour') < -48) {
+                //         alert("You cannot select a date that is 48 hours in the past.");
+                //         return;
+                //     }
+                
+                //     $('#addLogModal').modal('show');
+                
+                //     const formattedDate = selectedDate.format("DD-MM-YYYY");
+                //     $("#dateaddlog").val(formattedDate);
+                // },
+                
+                // dayRender: function(info) {
+                //     const currentDate = dayjs();
+                //     const selectedDate = dayjs(info.date);
+                //     const daysDiff = selectedDate.diff(currentDate, 'day');
+                
+                //     // Disable dates more than 2 days in the future or more than 48 hours in the past
+                //     if (daysDiff > 2 || daysDiff < -3 || daysDiff === -3 && selectedDate.hour() < currentDate.hour()) {
+                //         info.el.classList.add('fc-disabled-day');
+                //     }
+                // },
+                
           
                 eventClick: function(info) {
 
@@ -1345,11 +1395,35 @@ $(document).ready(function() {
     });
 
     //  FOR MODAL LOG AND EVENT
-    $("#dateaddlog").datepicker({
-        todayHighlight: true,
-        autoclose: true,
-        format: 'yyyy-mm-dd'
-    });
+    // $("#dateaddlog").datepicker({
+    //     todayHighlight: true,
+    //     autoclose: true,
+    //     format: 'yyyy-mm-dd'
+    // });
+
+    $(function() {
+        // Initialize Datepicker
+        $("#dateaddlog").datepicker({
+          todayHighlight: true,
+          autoclose: true,
+          format: 'yyyy-mm-dd',
+          startDate: new Date(new Date().getTime() - (2 * 24 * 60 * 60 * 1000)), // one days ago
+          endDate: null // No end date
+        });
+      
+        // Set the minimum and maximum dates to restrict the date range that can be selected
+        $("#dateaddlog").datepicker('setStartDate', new Date(new Date().getTime() - (2 * 24 * 60 * 60 * 1000)));
+        $("#dateaddlog").datepicker('setEndDate', null);
+      });
+      
+
+
+
+
+      
+
+      
+      
     $("#starteventdate").datepicker({
         todayHighlight: true,
         autoclose: true,
@@ -1557,7 +1631,9 @@ $(document).ready(function() {
     $("#dateaddlogedit").datepicker({
         todayHighlight: true,
         autoclose: true,
-        format: 'yyyy-mm-dd'
+        format: 'yyyy-mm-dd',
+        startDate: new Date(new Date().getTime() - (2 * 24 * 60 * 60 * 1000)), // one days ago
+        endDate: null // No end date
     });
     $("#starteventdateedit").datepicker({
         todayHighlight: true,
@@ -1876,3 +1952,51 @@ $(document).ready(function() {
         
              });
 // });// });
+
+$(document).on("click", "#confirmsubmitb", function () {
+    var id = $(this).data("id");
+    var vehicleData = getConfirmSubmit(id);
+
+    vehicleData.done(function (data) {
+        // console.log(data.id);
+        // console.log(data.fullName);
+        // console.log('')
+        var year = data.date.substr(0, 4);
+        var month = data.date.substr(5, 2); 
+        $("#fullname").val(data.fullName);
+        $("#year").val(year);
+        $("#month").val(month);
+        $("#idtv").val(data.id);
+    });
+    $("#confirmsubmit").modal("show");
+});
+
+function getConfirmSubmit(id) {
+    return $.ajax({
+        url: "/getConfirmSubmitById/" + id,
+    });
+}
+
+
+
+    function toggleVenueLocation() {
+        var venue = document.getElementById("venueaddpehal");
+        var location = document.getElementById("locationaddevent1");
+        if (venue.style.display === "block") {
+            location.style.display = "none";
+        } else {
+            location.style.display = "block";
+        }
+    }
+
+    // call toggleVenueLocation on page load to initialize the visibility of the elements
+    toggleVenueLocation();
+
+    // call toggleVenueLocation whenever #venueaddpehal's display property changes
+    var venue = document.getElementById("venueaddpehal");
+    var observer = new MutationObserver(toggleVenueLocation);
+    observer.observe(venue, {attributes: true, attributeFilter: ['style']});
+
+
+
+

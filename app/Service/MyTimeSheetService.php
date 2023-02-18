@@ -616,7 +616,21 @@ class MyTimeSheetService
     {
         $ids = explode(',', $id);
 
-        $data = TimesheetLog::whereIn('id', $ids)->get();
+        // $data = TimesheetLog::whereIn('id', $ids)->get();
+
+        // return $data;
+
+        $data = DB::table('timesheet_log as a')
+        ->leftjoin('project as b', 'a.project_id', '=', 'b.id')
+        ->leftjoin('activity_logs as c', 'a.activity_name', '=', 'c.id')
+        ->select('a.*', 'b.project_name','c.activity_name as activitynameas')
+            // ->whereNotIn('a.id', $projectId)
+           -> where([['a.tenant_id', Auth::user()->tenant_id], ['a.user_id', Auth::user()->id]])
+            ->get();
+
+        if (!$data) {
+            $data = [];
+        }
 
         return $data;
     }
@@ -751,6 +765,32 @@ class MyTimeSheetService
 
         return $data;
     }
+
+    public function getConfirmSubmitById($id)
+    {
+        $tenant_id = Auth::user()->tenant_id;
+
+        $data = DB::table('timesheet_log as a')
+            ->leftJoin('userprofile as b', 'a.user_id', '=', 'b.user_id')
+            ->select('a.*', 'b.*')
+            ->where([['a.tenant_id', $tenant_id]])
+            ->first();
+
+        if (!$data) {
+            $data = [];
+        }
+
+
+        return $data;
+        
+    }
+
+
+
+
+
+
+    
 
     // public function getParticipantNameById($id)
     // {
