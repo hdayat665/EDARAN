@@ -507,7 +507,7 @@ class ProjectService
         ProjectMember::where('id', $id)->update($input);
 
         if ($status == 'cancel') {
-            // $this->cancelProjectEmail($id);
+            $this->cancelProjectEmail($id);
         } else {
             $this->updateStatusProjectEmail($id, $status);
         }
@@ -544,25 +544,25 @@ class ProjectService
             )
             ->where('a.id', $id)
             ->first();
-        // pr($projectMember);
-        // $receiver = $projectMember->manager_email ?? 'admin@edaran.com';
+        pr($projectMember);
+        $receiver = $projectMember->manager_email ?? 'admin@edaran.com';
 
-        // $response['typeEmail'] = 'projectCancelReq';
-        // $response['project_manager'] = $projectMember->manager_name;
-        // $response['customer_name'] = $projectMember->customer_name;
-        // $response['project_code'] = $projectMember->project_code;
-        // $response['project_name'] = $projectMember->project_name;
-        // $response['employeeName'] = $projectMember->employeeName;
-        // $response['departmentName'] = $projectMember->departmentName;
+        $response['typeEmail'] = 'projectCancelReq';
+        $response['project_manager'] = $projectMember->manager_name;
+        $response['customer_name'] = $projectMember->customer_name;
+        $response['project_code'] = $projectMember->project_code;
+        $response['project_name'] = $projectMember->project_name;
+        $response['employeeName'] = $projectMember->employeeName;
+        $response['departmentName'] = $projectMember->departmentName;
 
-        // $response['resetPassLink'] = env('APP_URL') . '/myProject';
-        // $response['from'] = env('MAIL_FROM_ADDRESS');
-        // $response['nameFrom'] = Auth::user()->username;
-        // $response['subject'] = 'Orbit Project Request Application Status        ';
-        // // $response['typeAttachment'] = "application/pdf";
-        // //  $response['file'] = \public_path()."/assets/frontend/docs/gambar.jpg";
+        $response['resetPassLink'] = env('APP_URL') . '/myProject';
+        $response['from'] = env('MAIL_FROM_ADDRESS');
+        $response['nameFrom'] = Auth::user()->username;
+        $response['subject'] = 'Orbit Project Request Application Status        ';
+        // $response['typeAttachment'] = "application/pdf";
+        //  $response['file'] = \public_path()."/assets/frontend/docs/gambar.jpg";
 
-        // Mail::to($receiver)->send(new MailMail($response));
+        Mail::to($receiver)->send(new MailMail($response));
     }
 
     public function updateStatusProjectEmail($id = '', $status = '')
