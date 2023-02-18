@@ -30,7 +30,7 @@ class MyTimeSheetService
         // ->get();
 
         $data['employee'] = Employee::where([['tenant_id', Auth::user()->tenant_id], ['user_id', Auth::user()->id]])->first();
-
+        
         return $data;
     }
 
@@ -773,7 +773,7 @@ class MyTimeSheetService
         $data = DB::table('timesheet_log as a')
             ->leftJoin('userprofile as b', 'a.user_id', '=', 'b.user_id')
             ->select('a.*', 'b.*')
-            ->where([['a.tenant_id', $tenant_id]])
+            ->where([['a.tenant_id', $tenant_id]]) 
             ->first();
 
         if (!$data) {
