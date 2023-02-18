@@ -420,6 +420,7 @@ Route::group(['middleware' => ['web']], function () {
             // Route::get('/addamendreason/{id}/{status}', 'addamendreason');
             Route::post('/updatereason', 'updatereason');
             Route::get('/getParticipantNameById/{id}', 'getParticipantNameById');
+            Route::get('/getConfirmSubmitById/{id}', 'getConfirmSubmitById');
         });
 
 

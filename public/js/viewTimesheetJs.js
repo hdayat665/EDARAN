@@ -41,7 +41,7 @@ var handleCalendarDemo = function() {
 
             event.push({
                 // title: events['event_name'],
-                title: "Event: " + events['event_name'] +  ' ' + events['project_id'],
+                title: "Event: " + events['event_name'],
                 start: startYear + '-' + startMonth + '-' + startDay,
                 end: endYear + '-' + endMonth + '-' + endDay,
                 color: app.color.red,
@@ -255,18 +255,19 @@ var handleCalendarDemo = function() {
                         $('#duration').text(data.duration);
                         var location = getProjectLocationById(data.location);
                         location.done(function(location) {
-                            $('#location_event').text(location.location_name);
+                            $('#location_event').text(location.location_name ? location.location_name : '-');
 
                         })
 
                         var project = getProjectByidTimesheet(data.project_id);
                         project.done(function(project) {
-                            $('#project_event').text(project.project_name);
+                            $('#project_event').text(project.project_name ? project.project_name : '-' );
 
                         })
 
-                        $('#priority').text(data.priority);
-                        $('#recurring').text(data.recurring);
+                        $('#priority').text(data.priority ? data.priority : '-');
+                        $('#recurring').text(data.recurring ? data.recurring : '-');
+
                         $('#desc_event').text(data.desc);
                         $('#reminder').text('None');
                         $('#file_upload').html('<a class="form-label" target="_blank" href="/storage/' + data.file_upload + '">' + data.file_upload + '</a>');

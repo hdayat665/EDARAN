@@ -18,7 +18,13 @@
     overflow: hidden;
     white-space: pre-line;
 }
-</style>
+
+.my-calendar .fc-disabled-day {
+    background-color: rgba(156, 18, 18, 0.815) !important;
+    color: rgb(201, 0, 0) !important;
+}
+    </style>
+
 
 <head>
     <meta charset="utf-8" />
