@@ -71,6 +71,7 @@ class ProjectService
             ->leftJoin('employment as c', 'a.project_manager', '=', 'c.id')
             ->select('a.*', 'b.customer_name', 'c.employeeName')
             ->where([['a.tenant_id', $tenant_id], ['a.id', $id]])
+            ->orderBy('id', 'desc')
             ->first();
 
         if (!$data) {
@@ -337,6 +338,7 @@ class ProjectService
             ->leftJoin('employment as b', 'a.employee_id', '=', 'b.id')
             ->select('a.*', 'b.employeeName')
             ->where($cond)
+            ->orderBy('id', 'desc')
             ->get();
 
         if (!$data) {
@@ -747,6 +749,7 @@ class ProjectService
             ->leftJoin('employment as b', 'a.user_id', '=', 'b.id')
             ->select('b.*', 'a.join_date', 'a.exit_date')
             ->where([['a.project_id', $projectId], ['a.tenant_id', Auth::user()->tenant_id]])
+            ->orderBy('id', 'desc')
             ->get();
 
         if (!$data) {
