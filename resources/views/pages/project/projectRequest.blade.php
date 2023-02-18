@@ -18,14 +18,14 @@
                             <th class="text-nowrap">Status</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody> 
                         @if ($projectInfos)
                             @foreach ($projectInfos as $project)
                                 <tr class="odd gradeX">
                                     <td>
                                         @if (in_array($project->id, $projectIdPending))
                                             <a href="#" class="btn btn-warning btn-xs" id="cancelRequestButton"
-                                                data-id="{{ $project->id }}">Cancel</a>
+                                                data-id="{{ $project->project_member_id }}">Cancel</a>
                                         @elseif(in_array($project->id, $projectIdReject))
                                             <button class="btn btn-primary btn-xs" disabled>Request</button>
                                             <button class="btn btn-warning btn-xs" id="viewReasonButton"

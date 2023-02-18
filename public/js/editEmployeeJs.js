@@ -7,15 +7,16 @@ $(document).ready(function () {
             reader.onload = function (e) {
                 $("#croppie img").attr("src", e.target.result);
                 croppie = new Croppie($("#croppie img")[0], {
-                    boundary: { width: 200, height: 200 },
-                    viewport: { width: 100, height: 100, type: "square" },
+                    boundary: { width: 400, height: 400 },
+                    viewport: { width: 300, height: 300, type: "square" ,name: "profilePicture"},
                 });
             };
+
             $("#showImage").show();
             $("#crop").on("click", function () {
                 $("#showCroppedImage").show();
-                croppie
-                    .result({ type: "base64", circle: false })
+                
+                croppie.result({ type: "base64", circle: false })
                     .then(function (dataImg) {
                         var data = [
                             { image: dataImg },
@@ -24,6 +25,7 @@ $(document).ready(function () {
                         // use ajax to send data to php
                         $("#result_image img").attr("src", dataImg);
                     });
+                    $("#showImage").hide();
             });
             reader.readAsDataURL(this.files[0]);
         }
@@ -2558,6 +2560,53 @@ $(document).ready(function () {
             var ww = (year > cutoff ? "19" : "20") + year;
             var currentAge = new Date().getFullYear() - ww;
             $("#age7").val(currentAge);
+        }
+    });
+});
+$(document).on("click", "#uploadpicture", function() {
+    
+    $("#profilepicform").validate({
+        // Specify validation rules
+        rules: {
+        },
+
+        messages: {
+        },
+        submitHandler: function(form) {
+
+            requirejs(['sweetAlert2'], function(swal) {
+                
+                var data = new FormData(document.getElementById("profilepicform"));
+                var id = $('#user_id').val();
+                console.log(id );
+                $.ajax({
+                    type: "POST",
+                    url: "/updateProfile_Picture/" + id,
+                    data: data,
+                    dataType: "json",
+                    async: false,
+                    processData: false,
+                    contentType: false,
+                }).done(function(data) {
+                    swal({
+                        title: data.title,
+                        text: data.msg,
+                        type: data.type,
+                       confirmButtonColor: '#3085d6',
+                        confirmButtonText: 'OK',
+                        allowOutsideClick: false,
+                        allowEscapeKey: false,
+                    }).then(function() {
+                        if (data.type == 'error') {
+
+                        } else {
+                            location.reload();
+                        }
+
+                    });
+                });
+
+            });
         }
     });
 });
