@@ -12,7 +12,8 @@
                     <label for="inputPassword6" class="col-form-label">Name</label>
                 </div>
                 <div class="col-sm-5">
-                    <input type="text" id="" value="{{$profile->fullName ?? ''}}" class="form-control" aria-describedby="passwordHelpInline" readonly>
+                    {{-- <input type="text" id="" value="{{$profile->fullName ?? ''}}" class="form-control" aria-describedby="passwordHelpInline" readonly> --}}
+                    <input type="text" id="fullname" value="" class="form-control" aria-describedby="passwordHelpInline" readonly>
                 </div>
             </div>
             <div class="row p-2">

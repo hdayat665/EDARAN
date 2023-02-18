@@ -773,7 +773,7 @@ class MyTimeSheetService
         $data = DB::table('timesheet_log as a')
             ->leftJoin('userprofile as b', 'a.user_id', '=', 'b.user_id')
             ->select('a.*', 'b.*')
-            ->where([['a.tenant_id', $tenant_id], ['a.id', $id]])
+            ->where([['a.tenant_id', $tenant_id]])
             ->first();
 
         if (!$data) {
