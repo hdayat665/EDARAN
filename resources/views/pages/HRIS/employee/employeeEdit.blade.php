@@ -140,7 +140,7 @@
                                                         <input type="text" id="fullname" name="fullName" value="{{$profile->fullName ?? ''}}" class="form-control" aria-describedby="firstname" readonly placeholder="FULL NAME">
                                                     </div>
                                                     <div class="col-sm-6">
-                                                        <label for="firstname" class="form-label" style="color: red">Old Identification Number</label>
+                                                        <label for="firstname" class="form-label">Old Identification Number</label>
                                                         <input type="text" id="" name="" value="" class="form-control" aria-describedby="" placeholder="0000000">
                                                     </div>
                                                 </div>
@@ -162,7 +162,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="col-sm-3">
-                                                        <label for="idattach" class="form-label" style="color: red">ID Attachment</label>
+                                                        <label for="idattach" class="form-label" >ID Attachment</label>
                                                         <input type="file" value="" name="" id="" class="form-control" aria-describedby="">
                                                     </div>
                                                 </div>
@@ -289,7 +289,7 @@
                                                         <input type="text" id="phone-number" name="phoneNo" value="{{$profile->phoneNo ?? ''}}" class="form-control" aria-describedby="phone-number" placeholder="000-00000000">
                                                     </div>
                                                     <div class="col-sm-6">
-                                                        <label for="phone-number2" class="form-label" style="color: red">Phone Number 2</label>
+                                                        <label for="phone-number2" class="form-label" >Phone Number 2</label>
                                                         <input type="text" id="" name="" value="" class="form-control" aria-describedby="phone-number2" placeholder="000-00000000">
                                                     </div>
                                                 </div>

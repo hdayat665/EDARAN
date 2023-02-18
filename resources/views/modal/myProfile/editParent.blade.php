@@ -20,13 +20,13 @@
                     </div>
                     <div class="row p-2">
                         <div class="col-sm-6">
-                            <label for="firstname" class="form-label" style="color: red">Full Name*</label>
+                            <label for="firstname" class="form-label" >Full Name*</label>
                             <input type="text" id="" name="" class="form-control" aria-describedby="" placeholder="FULL NAME">
                             <input type="hidden" id="" name="" class="form-control" aria-describedby="">
                         </div>
                         {{-- new --}}
                         <div class="col-sm-6">
-                            <label for="lastname" class="form-label" style="color: red">Old Identification Number</label>
+                            <label for="lastname" class="form-label">Old Identification Number</label>
                             <input type="text" id="" name="" class="form-control" aria-describedby="" placeholder="0000000">
                         </div>
                     </div>
@@ -36,13 +36,13 @@
                                 <div class="col-sm-6 ">
                                     <div class="form-check form-switch align-right">
                                         <input class="form-check-input " value="" type="checkbox" name=""  id="">
-                                        <label class="form-check-label" for="citizen" style="color: red">
+                                        <label class="form-check-label" for="citizen">
                                             Non-Citizen
                                         </label>
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
-                                    <label for="lastname" class="form-label" style="color: red">New Identification Number*</label>
+                                    <label for="lastname" class="form-label">New Identification Number*</label>
                                     <input type="number" id="idnumber7" name="idNo" value="" class="form-control" placeholder="000000-00-0000">
                                     
                                 </div>
@@ -52,7 +52,7 @@
                         <div class="col-sm-6">
                             <div class="row">
                                 <div class="col-sm-6">
-                                    <label for="dob" class="form-label" style="color: red">ID Attachment</label>
+                                    <label for="dob" class="form-label" >ID Attachment</label>
                                     <input type="file" id="" name="" class="form-control" aria-describedby="">
                                 </div>
                             </div>
@@ -96,7 +96,7 @@
                             <input type="date" id="DOBP1" name="DOB" class="form-control" aria-describedby="dob" placeholder="YYYY/MM/DD">
                         </div>
                         <div class="col-sm-3">
-                            <label for="dob" class="form-label" style="color: red">Age</label>
+                            <label for="dob" class="form-label" >Age</label>
                             <input type="text" id="age7" name="" class="form-control" aria-describedby="" readonly placeholder="AGE">
                         </div>
                         <div class="col-sm-6">
@@ -117,13 +117,13 @@
                                 <div class="col-sm-6 ">
                                     <div class="form-check form-switch align-right">
                                         <input class="form-check-input okuCheck6 " value="" type="checkbox" name=""  id="">
-                                        <label class="form-check-label" for="citizen" style="color: red">
+                                        <label class="form-check-label" for="citizen" >
                                             OKU?
                                         </label>
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
-                                    <label for="lastname" class="form-label" style="color: red">OKU Card Number*</label>
+                                    <label for="lastname" class="form-label" >OKU Card Number*</label>
                                     <input type="number" id="okucard6" name="" value="" class="form-control" readonly placeholder="OKU CARD NUMBER">
                                     
                                 </div>
@@ -132,7 +132,7 @@
                         <div class="col-sm-6">
                             <div class="row">
                                 <div class="col-sm-6">
-                                    <label for="dob" class="form-label" style="color: red">OKU Attachment</label>
+                                    <label for="dob" class="form-label" >OKU Attachment</label>
                                     <input type="file" id="okuattach6" name="" class="form-control" style="pointer-events: none" aria-describedby="">
                                 </div>
                             </div>

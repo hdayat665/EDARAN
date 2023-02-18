@@ -139,12 +139,12 @@ if (!function_exists('educationLevel')) {
     {
         $data = [
 
-            '1' => 'primary school',
-            '2' => 'lower secondary school',
-            '3' => 'upper secondary school',
-            '4' => 'pre-university',
-            '5' => 'matriculation/foundation',
-            '6' => 'higher education',
+            '1' => 'PRIMARY SCHOOL',
+            '2' => 'LOWER SECONDARY SCHOOL',
+            '3' => 'UPPER SECONDARY SCHOOL',
+            '4' => 'PRE-UNIVERSITY',
+            '5' => 'MATRICULATION/FOUNDATION',
+            '6' => 'HIGHER EDUCATION',
         ];
 
         if ($id) {
@@ -160,12 +160,12 @@ if (!function_exists('educationType')) {
     {
         $data = [
 
-            '1' => 'primary school (year 6-12)',
-            '2' => 'lower secondary school (form 1-3)',
-            '3' => 'upper secondary school (form 4 & 5)',
-            '4' => 'pre-university (STMP / STAM)',
-            '5' => 'matriculation/foundation ',
-            '6' => 'higher education Diploma/ Bachelor Degree/ Master Degree/ Doctoral Degree',
+            '1' => 'PRIMARY SCHOOL (YEAR 6-12)',
+            '2' => 'LOWER SECONDARY SCHOOL (FORM 1-3)',
+            '3' => 'UPPER SECONDARY SCHOOL (FORM 4 & 5)',
+            '4' => 'PRE-UNIVERSITY (STMP / STAM)',
+            '5' => 'MATRICULATION/FOUNDATION ',
+            '6' => 'HIGHER EDUCATION DIPLOMA/ BACHELOR DEGREE/ MASTER DEGREE/ DOCTORAL DEGREE',
         ];
 
         if ($id) {

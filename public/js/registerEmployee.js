@@ -173,9 +173,13 @@ $(document).ready(function() {
         }
       });
     
-      $.validator.addMethod("noSpecialChars", function(value, element) {
-        return this.optional(element) || /^[^A-Za-z0-9!@#$%^&*()\-_+={}[\]\\|<>"'\/~`,.;: ]*$/.test(value);
-      }, "Special characters, spaces, and alphabet characters are not allowed.");
+    $.validator.addMethod("noSpecialChars", function(value, element) {
+        return this.optional(element) || /^[^A-Za-z!@#$%^&*()\-_+={}[\]\\|<>"'\/~`,.;: ]*$/.test(value);
+    }, "Special Characters, Spaces, and Alphabet Characters Are Not Allowed.");      
+    $.validator.addMethod("email", function(value, element) {
+        // Email validation regex pattern
+        return this.optional(element) || /^[^\s@]+@[^\s@]+\.(?:com|net|org|edu|gov|mil|biz|info|name|museum|coop|aero|[a-z]{2})$/.test(value);
+    }, "Please Insert Valid Email Address");
       
 
     $('#profileForm').click(function(e) {
@@ -192,7 +196,11 @@ $(document).ready(function() {
                 username: "required",
                 firstName: "required",
                 lastName: "required",
-                idNo: "required",
+                idNo: {
+                    required: true,
+                    digits: true,
+                    rangelength: [12, 12],
+                },
                 issuingCountry: "required",
                 DOB: "required",
                 gender: "required",
@@ -200,11 +208,12 @@ $(document).ready(function() {
                 religion: "required",
                 personalEmail: {
                     required: true,
-                    email: true
+                    email: true // Use the email validation method
                 },
                 phoneNo: {
                     required: true,
                     digits: true,
+                    rangelength: [10,11]
 
                 },
             },
@@ -217,7 +226,11 @@ $(document).ready(function() {
                 username: "Please Insert Username",
                 firstName: "Please Insert First Name",
                 lastName: "Please Insert Last Name",
-                idNo: "Please Insert Identification Number",
+                idNo: {
+                    required: "Please Insert Identification Number",
+                    digits: "Please Insert correct Identification Number without '-' or space",
+                    rangelength: "Please Insert Valid Identification Number",
+                  },
                 expiryDate: "Please Insert Expiry Date",
                 issuingCountry: "Please Insert Issuing Country",
                 DOB: "Please Insert Date Of Birth",
@@ -230,8 +243,8 @@ $(document).ready(function() {
                 },
                 phoneNo: {
                     required: "Please Insert Phone Number",
-                    digits: "Please Insert Correct Identification Number Without ' - ' or Space",
-
+                    digits: "Please Insert Correct Phone Number Without ' - ' or Space",
+                    rangelength: "Please Insert Valid Phone Number"
                 },
             },
             submitHandler: function(form) {
@@ -324,7 +337,7 @@ $(document).ready(function() {
             },
 
             messages: {
-                address1: "Please Insert Address",
+                address1: "Please Insert Address 1",
                 city: "Please Insert City",
                 state: "Please Choose State",
                 country: "required",
@@ -333,10 +346,10 @@ $(document).ready(function() {
                     digits: "Please Insert Valid Postcode",
                     rangelength: "Please Insert Valid Postcode"
                 },
-                address1c: "Please Insert Address",
+                address1c: "Please Insert Address 1",
                 cityc: "Please Insert City",
                 statec: "Please Choose State",
-                countryc: "required",
+                countryc: "Please Choose Country",
                 postcodec: {
                     required: "Please Insert Postcode",
                     digits: "Please Insert Valid Postcode",
@@ -432,19 +445,19 @@ $(document).ready(function() {
 
             messages: {
 
-                company: "Please Insert Your Company",
-                departmentId: "Please Insert Your Department",
-                unitId: "Please Insert Your Unit",
-                branchId: "Please Insert Your Branch",
-                jobGrade: "Please Insert Your Job Grade",
-                designation: "Please Insert Your Designation",
-                employmentType: "Please Insert Your Employment Type",
+                company: "Please Insert Company",
+                departmentId: "Please Insert Department",
+                unitId: "Please Insert Unit",
+                branchId: "Please Insert Branch",
+                jobGrade: "Please Insert Job Grade",
+                designation: "Please Insert Designation",
+                employmentType: "Please Insert Employment Type",
                 // supervisor: "Please Insert Your Supervisor",
                 workingEmail: {
-                    required: "Please Insert Your Working Email",
-                    email: "Please Insert Correct Email"
+                    required: "Please Insert Working Email",
+                    email: "Please Insert Valid Email"
                 },
-                joinedDate: "Please Insert Your Joined Date",
+                joinedDate: "Please Choose Joined Date",
 
             },
             submitHandler: function(form) {
