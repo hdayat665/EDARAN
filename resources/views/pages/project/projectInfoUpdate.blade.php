@@ -65,15 +65,23 @@
                     </select>
                 </div>
                 <div class="col-md-4">
-                    <select class="form-select" name="financial_year">
-                        <option label="PLEASE CHOOSE"></option>
-                        <?php $FinancialYear = getFinancialYearFormold(); ?>
-                        @foreach ($FinancialYear as $key => $value)
-                            <option value="{{ $key }}"
-                                {{ $key == $project->financial_year ? 'selected="selected"' : '' }}>
-                                {{ $value }}</option>
-                        @endforeach
-                    </select>
+                <select class="form-select" name="financial_year">
+                    <option label="PLEASE CHOOSE"></option>
+                    <?php $financialYears = getFinancialYearFormold(); ?>
+                    @foreach ($financialYears as $financialYear)
+                        <?php 
+                            // Calculate the starting and ending years of the financial year
+                            $startingYear = $financialYear;
+                            $endingYear = $financialYear + 1;
+                        ?>
+                        <option value="{{ $financialYear }}"
+                            {{ $financialYear == $project->financial_year ? 'selected="selected"' : '' }}>
+                            {{ $startingYear }}
+                        </option>
+                    @endforeach
+                </select>
+
+
                 </div>
             </div>
             <div class="row">
