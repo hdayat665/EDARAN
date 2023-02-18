@@ -59,7 +59,7 @@ table{
                             @if ($projectMembers)
                                     @foreach ($projectMembers as $projectMember)
                                         <tr>
-                                            <td width="1%"><a data-bs-toggle="modal" data-id="{{$projectMember->id}}" id="editProjectMemberButton" class="btn btn-outline-green"><i class="fa fa-pencil-alt"></i></a></td>
+                                            <td width="1%"><a data-bs-toggle="modal" data-id="{{$projectMember->id}}" id="editProjectMemberButton" class="btn btn-primary"><i class="fa fa-cogs"></i> Edit</a></td>
                                             <td>{{$projectMember->employeeName}}</td>
                                             <td>{{($projectMember->designation) ? getDesignation($projectMember->designation)->designationName ?? '-' : '-'}}</td>
                                             <td>{{($projectMember->department) ? getDepartment($projectMember->department)->departmentName ?? '-' : '-'}}</td>
