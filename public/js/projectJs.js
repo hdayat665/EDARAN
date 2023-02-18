@@ -148,7 +148,7 @@ $(document).ready(function() {
                 project_name: "Please Insert Project Name",
                 contract_value: "Please Insert Contract Value",
                 financial_year: "Please Choose Financial Year",
-                LOA_date: "Please Insert LOA Date",
+                LOA_date: "Please Choose LOA Date",
                 contract_start_date: "Please Choose Contract Start Date",
                 contract_end_date: "Please Choose Contract End Date",
                 acc_manager: "Please Insert Account Manager",
@@ -190,6 +190,17 @@ $(document).ready(function() {
             },
         });
     });
+
+
+    $.validator.addMethod("noSpecialChars", function(value, element) {
+        return this.optional(element) || /^[^A-Za-z!@#$%^&*()\-_+={}[\]\\|<>"'\/~`,.;: ]*$/.test(value);
+      }, "Special Characters, Spaces, and Alphabet Characters Are Not Allowed.");      
+      
+    $.validator.addMethod("email", function(value, element) {
+        // Email validation regex pattern
+        return this.optional(element) || /^[^\s@]+@[^\s@]+\.(?:com|net|org|edu|gov|mil|biz|info|name|museum|coop|aero|[a-z]{2})$/.test(value);
+      }, "Please Insert Valid Email Address");
+
 
     $('#updateButton').click(function(e) {
         

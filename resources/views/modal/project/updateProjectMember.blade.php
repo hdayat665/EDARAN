@@ -142,11 +142,11 @@
                         <div class="col-md-2">
                             <div class="form-check form-switch">
                                 <input type="checkbox" name="exit_project" id="exit_project" class="form-check-input partCheck"></input>
-                                <label class="form-label" for="checkbox1">Exit Date?</label><br>
+                                <label class="form-label" for="checkbox1">Exit Project?</label><br>
                             </div>
                         </div>
                             <div class="col-md-4" id="exitdatediv" style="display: none;">
-                                <input type="text" class="form-control" id="datepicker-exitdate" name="exit_project_date" placeholder="yyyy/mm/dd" />
+                                <input type="text" class="form-control" id="datepicker-exitdate" name="exit_project_date" placeholder="YYYY/MM/DD" />
                             </div>
                         
                     </div>

@@ -164,6 +164,16 @@ $(document).ready(function () {
         });
     }
 
+    $.validator.addMethod("noSpecialChars", function(value, element) {
+        return this.optional(element) || /^[^A-Za-z!@#$%^&*()\-_+={}[\]\\|<>"'\/~`,.;: ]*$/.test(value);
+      }, "Special Characters, Spaces, and Alphabet Characters Are Not Allowed.");      
+      
+    $.validator.addMethod("email", function(value, element) {
+        // Email validation regex pattern
+        return this.optional(element) || /^[^\s@]+@[^\s@]+\.(?:com|net|org|edu|gov|mil|biz|info|name|museum|coop|aero|[a-z]{2})$/.test(value);
+      }, "Please Insert Valid Email Address");
+
+
     $("#saveButton").click(function (e) {
         $("#addForm").validate({
             rules: {
@@ -207,7 +217,7 @@ $(document).ready(function () {
                 },
                 city: "Please Insert City",
                 state: "Please Insert State",
-                country: "Please insert Country",
+                country: "Please Insert Country",
                 email: {
                     required: "Please Insert Email Customer",
                     email: "Please Insert Valid Email Address",

@@ -4,6 +4,15 @@ $(document).ready(function() {
         $.validator.addMethod("password",function(value,element){
             return this.optional(element) || /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/i.test(value);
         },"Passwords must contain minimum 8 characters, at least one uppercase letter, one lowercase letter, one number and one special character");
+        $.validator.addMethod("noSpecialChars", function(value, element) {
+            return this.optional(element) || /^[^A-Za-z!@#$%^&*()\-_+={}[\]\\|<>"'\/~`,.;: ]*$/.test(value);
+          }, "Special Characters, Spaces, and Alphabet Characters Are Not Allowed.");      
+          
+        $.validator.addMethod("email", function(value, element) {
+            // Email validation regex pattern
+            return this.optional(element) || /^[^\s@]+@[^\s@]+\.(?:com|net|org|edu|gov|mil|biz|info|name|museum|coop|aero|[a-z]{2})$/.test(value);
+          }, "Please Insert Valid Email Address");
+    
 
         $("#form-register").validate({
             // Specify validation rules
@@ -19,10 +28,11 @@ $(document).ready(function() {
                 },
                 phoneNo: {
                     required: true,
-                    number: true,
+                    digits: true,
+                    rangelength: [10, 11]
                     
-                    // minlength: "Your password must be at least 5 characters long"
                 },
+
                 password: {
                     required: true,
                     
@@ -53,15 +63,16 @@ $(document).ready(function() {
                 lastName: "Please Insert Last Name",
                 workingEmail: {
                     required: "Please Insert Email Address",
-                    email: "Please Provide Valid Email Address",
+                    email: "Please Insert Valid Email Address",
                     
                 },
                 phoneNo: {
                     required: "Please Insert Phone Number",
-                    number: "Enter Valid Phone Number Without ' - ' And Space ",
+                    digits: "Please Insert Correct Phone Number Without ' - ' or Space",
+                    rangelength: "Please Insert Valid Phone Number"
                     
-                    // minlength: "Your password must be at least 5 characters long"
                 },
+
                 password: {
                     required: "Please Insert Password"
                 },
@@ -69,7 +80,7 @@ $(document).ready(function() {
                     required: "Please Insert Email Address",
                     // Specify that email should be validated
                     // by the built-in "email" rule
-                    email: "Enter Correct Email Address"
+                    email: "Please Insert Correct Email Address"
                 },
                 confirm_password: {
                     required: "Please Insert Password",

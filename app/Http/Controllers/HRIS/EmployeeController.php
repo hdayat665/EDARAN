@@ -8,7 +8,15 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 
 class EmployeeController extends Controller
-{
+{   
+    public function updateProfile_Picture(Request $r, $id)
+    {
+        $ps = new EmployeeService;
+
+        $result = $ps->updateProfile_Picture($r, $id);
+        
+        return response()->json($result);
+    }
     public function addProfile(Request $r)
     {
         $ps = new EmployeeService;

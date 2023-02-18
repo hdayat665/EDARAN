@@ -5,12 +5,12 @@
         <div class="row mb-15px">
             <label class="form-label col-form-label col-md-1">Address 1*</label>
             <div class="col-md-5">
-                <input type="text" name="address1" id="address1" class="form-control mb-10px" placeholder="Address 1" />
+                <input type="text" name="address1" id="address1" class="form-control mb-10px" placeholder="ADDRESS 1" />
                 <input type="hidden" name="user_id" id="user_id" class="form-control mb-10px" />
 
             </div><label class="form-label col-form-label col-md-1">Address 2</label>
             <div class="col-md-5">
-                <input type="text" name="address2" id="address2" class="form-control mb-5px" placeholder="Address 2"/>
+                <input type="text" name="address2" id="address2" class="form-control mb-5px" placeholder="ADDRESS 2"/>
 
             </div>
         </div>
@@ -18,11 +18,11 @@
         <div class="row mb-15px">
             <label class="form-label col-form-label col-md-1">Postcode*</label>
             <div class="col-md-5">
-                <input type="text" name="postcode" id="postcode" class="form-control mb-10px" placeholder="Postcode"  />
+                <input type="text" name="postcode" id="postcode" class="form-control mb-10px" placeholder="00000"  />
 
             </div><label class="form-label col-form-label col-md-1">City*</label>
             <div class="col-md-5">
-                <input type="text" name="city" id="city" class="form-control mb-5px" placeholder="City" />
+                <input type="text" name="city" id="city" class="form-control mb-5px" placeholder="CITY" />
 
             </div>
         </div>
@@ -31,9 +31,9 @@
             <label class="form-label col-form-label col-md-1">State*</label>
             <div class="col-md-5">
                 <select class="form-select" name="state" id="state">
-                    <option label="Select State " selected="selected"></option>
-                    <option value="Johor" label="Johor">Johor</option>
-                    <option value="Kedah" label="Kedah">Kedah</option>
+                    <option label="PLEASE CHOOSE" selected="selected"></option>
+                    <option value="JOHOR" label="JOHOR">JOHOR</option>
+                    <option value="KEDAH" label="KEDAH">Kedah</option>
                     <option value="Kelantan" label="Kelantan">Kelantan</option>
                     <option value="Negeri Sembilan" label="Negeri Sembilan">Negeri Sembilan</option>
                     <option value="Pahang" label="Pahang">Pahang</option>
@@ -52,7 +52,7 @@
             <label class="form-label col-form-label col-md-1">Country*</label>
             <div class="col-md-5">
             <select class="form-select" name="country" id="country" >
-                    <option label="Select a country ... " disabled></option>
+                    <option label="PLEASE CHOOSE " disabled></option>
                     <optgroup id="country-optgroup-Africa" label="Africa">
                         <option value="DZ" label="Algeria">Algeria</option>
                         <option value="AO" label="Angola">Angola</option>
@@ -239,11 +239,11 @@
         <div class="row mb-15px">
             <label class="form-label col-form-label col-md-1">Address 1*</label>
             <div class="col-md-5">
-                <input type="text" name="address1c" id="address1c" class="form-control mb-10px" placeholder="Address 1" />
+                <input type="text" name="address1c" id="address1c" class="form-control mb-10px" placeholder="ADDRESS 1" />
 
             </div><label class="form-label col-form-label col-md-1">Address 2</label>
             <div class="col-md-5">
-                <input type="text" name="address2c" id="address2c" class="form-control mb-5px" placeholder="Address 2" />
+                <input type="text" name="address2c" id="address2c" class="form-control mb-5px" placeholder="ADDRESS 2" />
 
             </div>
         </div>
@@ -251,11 +251,11 @@
         <div class="row mb-15px">
             <label class="form-label col-form-label col-md-1">Postcode*</label>
             <div class="col-md-5">
-                <input type="text" name="postcodec" id="postcodec" class="form-control mb-10px" placeholder="Postcode" />
+                <input type="text" name="postcodec" id="postcodec" class="form-control mb-10px" placeholder="00000" />
 
             </div><label class="form-label col-form-label col-md-1">City*</label>
             <div class="col-md-5">
-                <input type="text" name="cityc" id="cityc" class="form-control mb-5px" placeholder="City" />
+                <input type="text" name="cityc" id="cityc" class="form-control mb-5px" placeholder="CITY" />
 
             </div>
         </div>
@@ -263,7 +263,7 @@
             <label class="form-label col-form-label col-md-1">State*</label>
             <div class="col-md-5">
                 <select class="form-select" name="statec" id="statec" >
-                    <option label="Select State " selected="selected"></option>
+                    <option label="PLEASE CHOOSE" selected="selected"></option>
                     <option value="Johor" label="Johor">Johor</option>
                     <option value="Kedah" label="Kedah">Kedah</option>
                     <option value="Kelantan" label="Kelantan">Kelantan</option>
@@ -284,7 +284,7 @@
             <label class="form-label col-form-label col-md-1">Country*</label>
             <div class="col-md-5">
             <select class="form-select" name="countryc" id="countryc" >
-                    <option label="Select a country ... " disabled></option>
+                    <option label="PLEASE CHOOSE" disabled></option>
                     <optgroup id="country-optgroup-Africa" label="Africa">
                         <option value="DZ" label="Algeria">Algeria</option>
                         <option value="AO" label="Angola">Angola</option>

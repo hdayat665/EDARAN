@@ -19,6 +19,7 @@ use App\Http\Controllers\Project\CustomerController;
 use App\Http\Controllers\Project\ProjectController;
 use App\Http\Controllers\Report\ProjectReportController;
 use App\Http\Controllers\Report\TimesheetReportController;
+use App\Http\Controllers\MYLeave\MyleaveController;
 use App\Http\Controllers\Eleave\EleaveController;
 
 /*
@@ -116,7 +117,7 @@ Route::group(['middleware' => ['web']], function () {
 
         Route::controller(ProfileController::class)->group(function () {
             Route::get('/getProfileData', 'profileData');
-            Route::post('/updateProfilePicture', 'updateProfilePicture');
+            //Route::post('/updateProfilePicture', 'updateProfilePicture');
             Route::post('/updateMyProfile', 'updateMyProfile');
             Route::post('/updateAddress', 'updateAddress');
             Route::post('/updateEmergency', 'updateEmergency');
@@ -175,6 +176,8 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('/updateEmployee', 'updateEmployee');
             Route::get('/getEmployeeById/{id}', 'getEmployeeById');
             Route::get('/getEmployeeByDepartmentId/{id}', 'getEmployeeByDepartmentId');
+            //
+            Route::post('/updateProfile_Picture/{id}', 'updateProfile_Picture');
             // hierarchy
             Route::post('/updateclaimhierarchy/{id}', 'updateclaimhierarchy');
             Route::post('/updatecashhierarchy/{id}', 'updatecashhierarchy');
@@ -207,6 +210,15 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('/createDesignation', 'createDesignation');
             Route::delete('/deleteDesignation/{id}', 'deleteDesignation');
             Route::get('/getSOP', 'getSOP');
+
+            Route::get('/download/{filename}', function ($filename) {
+                $path = 'public/' . $filename;
+                if (!Storage::disk('local')->exists($path)) {
+                    abort(404);
+                }
+                return Storage::download($path);
+            })->name('download');
+            
             Route::post('/updateSOP/{id}', 'updateSOP');
             Route::post('/createSOP', 'createSOP');
             Route::delete('/deleteSOP/{id}', 'deleteSOP');
@@ -456,6 +468,38 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('/editCashAdvance/{id}', 'editCashAdvance');
             Route::post('/updateCashAdvance', 'updateCashAdvance');
             Route::post('/submitUpdateCashAdvance', 'submitUpdateCashAdvance');
+        });
+
+        // MYLEAVE
+
+        Route::controller(MyleaveController::class)->group(function () {
+            Route::get('/myleave', 'myleaveView');
+            Route::post('/createtmyleave', 'createtmyleave');
+            Route::get('/getcreatemyleave/{id}', 'getcreatemyleave');
+            Route::delete('/deletemyleave/{id}', 'deletemyleave');
+
+            Route::get('/getusermyleave/{id}', 'getusermyleave');
+            // Route::post('/updateLeaveleavetypes/{id}', 'updateLeaveleavetypes');
+            // Route::delete('/deleteLeavetypes/{id}', 'deleteLeavetypes');
+            // Route::get('/updateStatusleavetypes/{id}/{status}', 'updateStatusleavetypes');
+
+            //supervisor
+            Route::get('/leaveAppr', 'leaveApprView');
+            Route::post('/updatesupervisor/{id}', 'updatesupervisor');
+            Route::post('/updatesupervisorreject/{id}', 'updatesupervisorreject');
+
+
+            //hod
+            Route::get('/leaveApprhod', 'leaveApprhodView');
+            Route::post('/updatehod/{id}', 'updatehod');
+            Route::post('/updatehodreject/{id}', 'updatehodreject');
+
+
+
+
+            Route::get('/approvemyleave/{id}', 'approvemyleave');
+            Route::get('/approvemyleaveby/{id}', 'approvemyleaveby');
+            
         });
     });
 });

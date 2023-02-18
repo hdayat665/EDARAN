@@ -62,68 +62,120 @@ $(document).ready(function() {
         autoclose: true,
         format: 'yyyy/mm/dd',
     });
-    $( "#nav_pro_loc" ).on( "click", function() {
-        setTimeout(function() {
-          var general = $('#projectLocationTable').DataTable();
-          general.columns.adjust().draw();
-        }, 200); // Increase the delay to 1000 milliseconds
-          });
-    $("#projectLocationTable").DataTable({
+
+
+    $(document).ready(function() {
+        var general = $("#projectLocationTable").DataTable({
         responsive: false,
         lengthMenu: [
             [5, 10, 25, 50, -1],
             [5, 10, 25, 50, "All"],
         ],
-        scrollX:true,
-    });
-
-    $( "#nav_pre_pro" ).on( "click", function() {
-        setTimeout(function() {
-          var general = $('#data-table-prevproject').DataTable();
-          general.columns.adjust().draw();
-        }, 200); // Increase the delay to 1000 milliseconds
-      });
-
-$( "#current_mem" ).on( "click", function() {
-    setTimeout(function() {
-      var general = $('#projectMemberTable').DataTable();
-      general.columns.adjust().draw();
-    }, 200); // Increase the delay to 1000 milliseconds
-      });
-
-$( "#previous_mem" ).on( "click", function() {
-    setTimeout(function() {
-      var general = $('#projectMemberPrevTable').DataTable();
-      general.columns.adjust().draw();
-    }, 200); // Increase the delay to 1000 milliseconds
-      });
-   
-    $("#data-table-prevproject").DataTable({
-        responsive: false,
-        lengthMenu: [
-            [5, 10, 25, 50, -1],
-            [5, 10, 25, 50, "All"],
+        order: [],
+        drawCallback: function(settings) {
+            // Apply scrollX after the table is fully rendered
+            $("#projectLocationTable").DataTable().columns.adjust().draw();
+        },
+        columnDefs: [
+            {
+            targets: "_all",
+            orderable: false,
+            },
         ],
-        scrollX:true,
-    });
-    $("#projectMemberTable").DataTable({
-        responsive: false,
-        lengthMenu: [
-            [5, 10, 25, 50, -1],
-            [5, 10, 25, 50, "All"],
-        ],
-        scrollX:true,
-    });
-
-    $("#projectMemberPrevTable").DataTable({
-        responsive: false,
-        lengthMenu: [
-            [5, 10, 25, 50, -1],
-            [5, 10, 25, 50, "All"],
-        ],
-        scrollX:true,
-    });
+        });
     
+        $("#nav_pro_loc").on("click", function() {
+        setTimeout(function() {
+            general.columns.adjust().draw();
+        }, 200);
+        });
+    });
+
+   
+    $(document).ready(function() {
+        var general = $("#data-table-prevproject").DataTable({
+          responsive: false,
+          lengthMenu: [
+            [5, 10, 25, 50, -1],
+            [5, 10, 25, 50, "All"],
+          ],
+          order: [], // Disable sorting
+          drawCallback: function(settings) {
+            // Apply scrollX after the table is fully rendered
+            requestAnimationFrame(function() {
+              $("#data-table-prevproject").DataTable().columns.adjust().draw();
+            });
+          },
+          columnDefs: [
+            {
+              targets: "_all",
+              orderable: false,
+            },
+          ],
+        });
+      
+        $("#nav_pre_pro").on("click", function() {
+          requestAnimationFrame(function() {
+            general.columns.adjust().draw();
+          });
+        });
+      });
+      
+
+    $(document).ready(function() {
+        var general = $("#projectMemberTable").DataTable({
+          responsive: false,
+          lengthMenu: [
+            [5, 10, 25, 50, -1],
+            [5, 10, 25, 50, "All"],
+          ],
+          drawCallback: function(settings) {
+            // Apply scrollX after the table is fully rendered
+            $("#projectMemberTable").DataTable().columns.adjust().draw();
+          },
+          order: [],
+          columnDefs: [
+            {
+              targets: "_all",
+              orderable: false,
+            },
+          ],
+        });
+      
+        $("#current_mem").on("click", function() {
+          setTimeout(function() {
+            general.columns.adjust().draw();
+          }, 200);
+        });
+      });
+    
+    $(document).ready(function() {
+        var general = $("#projectMemberPrevTable").DataTable({
+          responsive: false,
+          lengthMenu: [
+            [5, 10, 25, 50, -1],
+            [5, 10, 25, 50, "All"],
+          ],
+          drawCallback: function(settings) {
+            // Apply scrollX after the table is fully rendered
+            $("#projectMemberPrevTable").DataTable().columns.adjust().draw();
+          },
+          order: [],
+          columnDefs: [
+            {
+              targets: "_all",
+              orderable: false,
+            },
+          ],
+        });
+      
+        $("#previous_mem").on("click", function() {
+          setTimeout(function() {
+            general.columns.adjust().draw();
+          }, 200);
+        });
+    });
+     
 
     $("#data-table-default2").DataTable({
         responsive: false,
@@ -163,7 +215,7 @@ $( "#previous_mem" ).on( "click", function() {
                 project_name: "Please Insert Project Name",
                 contract_value: "Please Insert Contract Value",
                 financial_year: "Please Choose Financial Year",
-                LOA_date: "Please Insert LOA Date",
+                LOA_date: "Please Choose LOA Date",
                 contract_start_date: "Please Choose Contract Start Date",
                 contract_end_date: "Please Choose Contract End Date",
                 acc_manager: "Please Insert Account Manager",
@@ -841,20 +893,44 @@ $( "#previous_mem" ).on( "click", function() {
         });
     }); 
 
+    $.validator.addMethod("noSpecialChars", function(value, element) {
+        return this.optional(element) || /^[^A-Za-z!@#$%^&*()\-_+={}[\]\\|<>"'\/~`,.;: ]*$/.test(value);
+      }, "Special Characters, Spaces, and Alphabet Characters Are Not Allowed.");      
+      
+    $.validator.addMethod("email", function(value, element) {
+        // Email validation regex pattern
+        return this.optional(element) || /^[^\s@]+@[^\s@]+\.(?:com|net|org|edu|gov|mil|biz|info|name|museum|coop|aero|[a-z]{2})$/.test(value);
+      }, "Please Insert Valid Email Address");
+
+
     $('#updateButton').click(function(e) {
         $("#editForm").validate({
             rules: {
                 customer_name: "required",
                 address: "required",
-                phoneNo: "required",
-                email: "required",
+                phoneNo: {
+                    required: true,
+                    digits: true,
+                    rangelength: [10, 11]
+                },
+                email: {
+                    required: true,
+                    email: true // Use the email validation method
+                  },
             },
 
             messages: {
                 customer_name: "Please Insert Name",
-                address: "Please Insert Address",
-                phoneNo: "Please Inser Phone Number",
-                email: "Please Inser a Valid Email Address",
+                address: "Please Insert Address 1",
+                phoneNo: {
+                    required: "Please Insert Phone Number",
+                    digits: "Please Insert Correct Phone Number Without ' - ' or Space",
+                    rangelength: "Please Insert Valid Phone Number",
+                },
+                email: {
+                    required: "Please Insert Email Address",
+                    email: "Please Insert Valid Email Address"
+                  },
             },
             submitHandler: function(form) {
                 requirejs(['sweetAlert2'], function(swal) {

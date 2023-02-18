@@ -173,6 +173,15 @@ $(document).ready(function() {
         }
       });
     
+    $.validator.addMethod("noSpecialChars", function(value, element) {
+        return this.optional(element) || /^[^A-Za-z!@#$%^&*()\-_+={}[\]\\|<>"'\/~`,.;: ]*$/.test(value);
+    }, "Special Characters, Spaces, and Alphabet Characters Are Not Allowed.");      
+    $.validator.addMethod("email", function(value, element) {
+        // Email validation regex pattern
+        return this.optional(element) || /^[^\s@]+@[^\s@]+\.(?:com|net|org|edu|gov|mil|biz|info|name|museum|coop|aero|[a-z]{2})$/.test(value);
+    }, "Please Insert Valid Email Address");
+      
+
     $('#profileForm').click(function(e) {
 
         $('#profileForm').validate({
@@ -180,11 +189,18 @@ $(document).ready(function() {
             // Specify validation rules
             rules: {
 
-                employee_id: "required",
+                employee_id: {
+                    required: true,
+                    noSpecialChars: true
+                  },
                 username: "required",
                 firstName: "required",
                 lastName: "required",
-                idNo: "required",
+                idNo: {
+                    required: true,
+                    digits: true,
+                    rangelength: [12, 12],
+                },
                 issuingCountry: "required",
                 DOB: "required",
                 gender: "required",
@@ -192,35 +208,43 @@ $(document).ready(function() {
                 religion: "required",
                 personalEmail: {
                     required: true,
-                    email: true
+                    email: true // Use the email validation method
                 },
                 phoneNo: {
                     required: true,
                     digits: true,
+                    rangelength: [10,11]
 
                 },
             },
 
             messages: {
-                employee_id: "Please insert employee ID",
-                username: "Please insert username",
-                firstName: "Please insert first name",
-                lastName: "Please insert last namee",
-                idNo: "Please insert identification number",
-                expiryDate: "Please insert expiry date",
-                issuingCountry: "Please insert issuing country",
-                DOB: "Please insert date of birth",
-                gender: "Please insert gender",
-                maritialStatus: "Please insert marital status",
-                religion: "Please insert religion",
+                employee_id: {
+                    required: "Please Insert Employee ID",
+                    noSpecialChars: "Special characters, spaces, and alphabet characters are not allowed."
+                },
+                username: "Please Insert Username",
+                firstName: "Please Insert First Name",
+                lastName: "Please Insert Last Name",
+                idNo: {
+                    required: "Please Insert Identification Number",
+                    digits: "Please Insert correct Identification Number without '-' or space",
+                    rangelength: "Please Insert Valid Identification Number",
+                  },
+                expiryDate: "Please Insert Expiry Date",
+                issuingCountry: "Please Insert Issuing Country",
+                DOB: "Please Insert Date Of Birth",
+                gender: "Please Insert Gender",
+                maritialStatus: "Please Insert Marital Status",
+                religion: "Please Insert Religion",
                 personalEmail: {
-                    required: "Please insert personal email",
-                    email: "Please insert valid email"
+                    required: "Please Insert Personal Email",
+                    email: "Please Insert Valid Email"
                 },
                 phoneNo: {
-                    required: "Please insert Phone Number",
-                    digits: "Please Insert Correct Identification Number Without ' - ' or Space",
-
+                    required: "Please Insert Phone Number",
+                    digits: "Please Insert Correct Phone Number Without ' - ' or Space",
+                    rangelength: "Please Insert Valid Phone Number"
                 },
             },
             submitHandler: function(form) {
@@ -313,23 +337,23 @@ $(document).ready(function() {
             },
 
             messages: {
-                address1: "Please Insert Your Address",
-                city: "Please Insert Your City",
-                state: "Please Choose Your State",
+                address1: "Please Insert Address 1",
+                city: "Please Insert City",
+                state: "Please Choose State",
                 country: "required",
                 postcode: {
-                    required: "Please Insert Your Postcode",
-                    digits: "Please Enter Valid Postcode",
-                    rangelength: "Please Enter Valid Postcode"
+                    required: "Please Insert Postcode",
+                    digits: "Please Insert Valid Postcode",
+                    rangelength: "Please Insert Valid Postcode"
                 },
-                address1c: "Please Insert Your Address",
-                cityc: "Please Insert Your City",
-                statec: "Please Choose Your State",
-                countryc: "required",
+                address1c: "Please Insert Address 1",
+                cityc: "Please Insert City",
+                statec: "Please Choose State",
+                countryc: "Please Choose Country",
                 postcodec: {
-                    required: "Please Insert Your Postcode",
-                    digits: "Please Enter Valid Postcode",
-                    rangelength: "Please Enter Valid Postcode"
+                    required: "Please Insert Postcode",
+                    digits: "Please Insert Valid Postcode",
+                    rangelength: "Please Insert Valid Postcode"
                 },
 
 
@@ -421,19 +445,19 @@ $(document).ready(function() {
 
             messages: {
 
-                company: "Please Insert Your Company",
-                departmentId: "Please Insert Your Department",
-                unitId: "Please Insert Your Unit",
-                branchId: "Please Insert Your Branch",
-                jobGrade: "Please Insert Your Job Grade",
-                designation: "Please Insert Your Designation",
-                employmentType: "Please Insert Your Employment Type",
+                company: "Please Insert Company",
+                departmentId: "Please Insert Department",
+                unitId: "Please Insert Unit",
+                branchId: "Please Insert Branch",
+                jobGrade: "Please Insert Job Grade",
+                designation: "Please Insert Designation",
+                employmentType: "Please Insert Employment Type",
                 // supervisor: "Please Insert Your Supervisor",
                 workingEmail: {
-                    required: "Please Insert Your Working Email",
-                    email: "Please Insert Correct Email"
+                    required: "Please Insert Working Email",
+                    email: "Please Insert Valid Email"
                 },
-                joinedDate: "Please Insert Your Joined Date",
+                joinedDate: "Please Choose Joined Date",
 
             },
             submitHandler: function(form) {

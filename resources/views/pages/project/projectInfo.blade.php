@@ -54,8 +54,8 @@
                                 <?php $id = 1 ?>
                                 @foreach ($projectInfos as $projectInfo)
                                 <tr class="odd gradeX">
-                                    <td width="1%"><a href="/projectInfoEdit/{{$projectInfo->id}}" class="btn btn-outline-green">
-                                        <i class="fa fa-pencil-alt"></i>
+                                    <td>
+                                        <a href="/projectInfoEdit/{{$projectInfo->id}}" class="btn btn-primary"><i class="fa fa-cogs"></i> Edit</a>
                                     </td>
                                     <td width="1%" class="fw-bold text-dark">{{$id++}}</td>
                                     <td>{{$projectInfo->LOA_date}}</td>

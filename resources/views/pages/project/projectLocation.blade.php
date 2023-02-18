@@ -9,7 +9,7 @@
         <table id="projectLocationTable" class="table table-striped table-bordered align-middle">
             <thead>
                 <tr>
-                    <th width="6%" data-orderable="false" class="align-middle">Action</th>
+                    <th width="6%" class="align-middle">Action</th>
                     <th class="text-nowrap">Location Name</th>
                     <th class="text-nowrap">Address</th>
                     <th class="text-nowrap">Location</th>
@@ -20,7 +20,7 @@
                 @foreach ($projectLocations as $projectLocation )
                 <tr>
                     <td width="6%">
-                        <a href="javascript:;"data-bs-toggle="modal" id="editProjectLocationButton" data-id="{{$projectLocation->id}}" class="btn btn-outline-green"><i class="fa fa-pencil-alt"></i>
+                        <a href="javascript:;"data-bs-toggle="modal" id="editProjectLocationButton" data-id="{{$projectLocation->id}}" class="btn btn-primary"><i class="fa fa-cogs"></i> Edit</a>
                         </a>
                         <a href="javascript:;" id="deleteProjectLocationButton" data-id="{{$projectLocation->id}}" class="btn btn-outline-danger"><i class="fa fa-trash"></i></a></td>
                     <td>{{$projectLocation->location_name}}</td>
