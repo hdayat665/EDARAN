@@ -579,7 +579,12 @@ $(document).ready(function() {
     }
 
     $(document).on("click", "#addProjectMemberButton", function() {
-        $('#addProjectMemberModal').modal('show'); 
+        // Get the data-id value from the button
+        var id = $(this).data('id');
+        // Add the id value to the modal as a data attribute
+        console.log(id);
+        
+        $('#addProjectMemberModal').data('id', id).modal('show');
 
     });
 

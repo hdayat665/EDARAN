@@ -27,16 +27,10 @@
                                     <a href="/financeCheckerDetail/{{ $claim->id }}" id="" data-id="" class="dropdown-item"><i class="fa fa-eye" aria-hidden="true"></i> View
                                         GNC</a>
                                 @endif
-                                <div class="dropdown-divider"></div>
-                                <a href="javascript:;" id="approveButton7" data-id="{{ $claim->id }}" class="dropdown-item"><i class="fa fa-check" aria-hidden="true"></i> Approve</a>
-                                <div class="dropdown-divider"></div>
-                                <a href="javascript:;" id="rejectButton7" data-id="{{ $claim->id }}" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#modalreject"><i class="fa fa-ban"
+                                
+                                <a href="javascript:;" id="rejectButton7" data-id="{{ $claim->id }}" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#chequeModal"><i class="fa fa-ban"
                                         aria-hidden="true"></i>
-                                    Reject</a>
-                                <div class="dropdown-divider"></div>
-                                <a href="javascript:;" id="amendButton7" data-id="{{ $claim->id }}" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#modalamend"><i class="fa fa-reply"
-                                        aria-hidden="true"></i>
-                                    Amend</a>
+                                    Cheque Number</a>
                                 <div class="dropdown-divider"></div>
                                 <a href="javascript:;" id="" data-id="" class="dropdown-item"><i class="fa fa-times" aria-hidden="true"></i> Cancel</a>
                             </div>

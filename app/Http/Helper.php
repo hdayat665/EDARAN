@@ -755,6 +755,28 @@ if (!function_exists('getEmployee')) {
         return $data;
     }
 }
+
+if (!function_exists('getEmployeeNotInProject')) {
+    function getEmployeeNotInProject($id = '')
+    {   
+        $data = DB::table('employment')
+            ->select('*')
+            ->whereNotIn('id', function($query) use ($id) {
+                $query->select('employee_id')
+                      ->from('project_member')
+                      ->where('project_id', '=', $id);
+            })
+            ->get();
+    
+        if (!$data) {
+            $data = [];
+        }
+
+        return $data;
+    }
+}
+
+
 if (!function_exists('getEmployeeexcept')) {
     function getEmployeeexcept($id = '')
     {
