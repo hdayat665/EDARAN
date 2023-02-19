@@ -21,7 +21,7 @@
                     <div class="row p-2">
                         <div class="col-sm-6">
                             <label for="firstname" class="form-label">Full Name*</label>
-                            <input type="text" id="" name="" class="form-control" aria-describedby="" placeholder="FULL NAME">
+                            <input type="text" id="fullNameP1" name="" class="form-control" aria-describedby="" readonly placeholder="FULL NAME">
                             
                         </div>
                         <div class="col-sm-6">

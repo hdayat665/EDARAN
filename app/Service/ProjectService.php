@@ -559,6 +559,7 @@ class ProjectService
             ->leftJoin('department as c', 'e.department', '=', 'c.id')
             ->select('a.*', 'b.project_name', 'b.project_code', 'd.customer_name', 'c.departmentName', 'e.employeeName', 'e.employeeId', 'e.workingEmail')
             ->where($cond)
+            ->orderBy('id', 'desc')
             ->get();
 
         if (!$data) {
