@@ -21,6 +21,7 @@ use App\Http\Controllers\Report\ProjectReportController;
 use App\Http\Controllers\Report\TimesheetReportController;
 use App\Http\Controllers\MYLeave\MyleaveController;
 use App\Http\Controllers\Eleave\EleaveController;
+use Illuminate\Support\Facades\Storage;
 
 /*
 |--------------------------------------------------------------------------
@@ -107,8 +108,18 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('/adminApprovalDetail/{id}', 'adminApprovalDetail');
             Route::get('/adminRecView', 'adminRecView');
             Route::get('/adminRecDetailView/{id}', 'adminRecDetailView');
-            Route::get('/HodCashApprovalView', 'HodCashApprovalView');
+            Route::get('/cashAdvanceApproverView', 'cashAdvanceApproverView');
             Route::post('/createPvNumber/{id}', 'createPvNumber');
+            Route::get('/cashAdvanceApproverDetail/{id}/{type}', 'cashAdvanceApproverDetail');
+            Route::post('/updateStatusCashAdvance/{id}/{status}/{stage}', 'updateStatusCashAdvance');
+            Route::get('/cashAdvanceFcheckerView', 'cashAdvanceFcheckerView');
+            Route::get('/cashAdvanceFcheckerDetail/{id}/{type}', 'cashAdvanceFcheckerDetail');
+            Route::get('/cashAdvanceFapproverDetail/{id}/{type}', 'cashAdvanceFapproverDetail');
+            Route::get('/cashAdvanceFrecommenderDetail/{id}/{type}', 'cashAdvanceFrecommenderDetail');
+
+            Route::get('/cashAdvanceFrecommenderView', 'cashAdvanceFrecommenderView');
+            Route::get('/cashAdvanceFapproverView', 'cashAdvanceFapproverView');
+
 
 
 
@@ -218,7 +229,7 @@ Route::group(['middleware' => ['web']], function () {
                 }
                 return Storage::download($path);
             })->name('download');
-            
+
             Route::post('/updateSOP/{id}', 'updateSOP');
             Route::post('/createSOP', 'createSOP');
             Route::delete('/deleteSOP/{id}', 'deleteSOP');
@@ -499,7 +510,6 @@ Route::group(['middleware' => ['web']], function () {
 
             Route::get('/approvemyleave/{id}', 'approvemyleave');
             Route::get('/approvemyleaveby/{id}', 'approvemyleaveby');
-            
         });
     });
 });

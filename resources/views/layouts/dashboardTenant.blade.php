@@ -10,20 +10,20 @@
     }
 
     .fc-h-event .fc-event-title {
-    display: inline-block;
-    vertical-align: top;
-    left: 0;
-    right: 0;
-    max-width: 100%;
-    overflow: hidden;
-    white-space: pre-line;
-}
+        display: inline-block;
+        vertical-align: top;
+        left: 0;
+        right: 0;
+        max-width: 100%;
+        overflow: hidden;
+        white-space: pre-line;
+    }
 
-.my-calendar .fc-disabled-day {
-    background-color: rgba(156, 18, 18, 0.815) !important;
-    color: rgb(201, 0, 0) !important;
-}
-    </style>
+    .my-calendar .fc-disabled-day {
+        background-color: rgba(156, 18, 18, 0.815) !important;
+        color: rgb(201, 0, 0) !important;
+    }
+</style>
 
 
 <head>
@@ -323,40 +323,41 @@
                             <div class="menu-item has-sub">
                                 <a href="/myleave" class="menu-link highlight">
                                     <div class="menu-icon">
-							    	    <i class="fa fa-clipboard text-gray"></i>
-							        </div>
+                                        <i class="fa fa-clipboard text-gray"></i>
+                                    </div>
                                     <div class="menu-text text-gray">My Leave</i></div>
                                     <!-- <div class="menu-caret text-gray"></div> -->
-                                </a>   
+                                </a>
                             </div>
                             <div class="menu-item has-sub">
                                 <a href="#" class="menu-link highlight">
-                                <div class="menu-icon">
-								    <i class="fa fa-list-check text-gray"></i>
-							    </div>
+                                    <div class="menu-icon">
+                                        <i class="fa fa-list-check text-gray"></i>
+                                    </div>
                                     <div class="menu-text text-gray">Leave Approval</div>
                                     <div class="menu-caret text-gray"></div>
-                                </a><div class="menu-submenu">
-                                <div class="menu-item">
-                                    <a href="leaveAppr" class="menu-link highlight">
-                                        <div class="menu-icon">
-								             <i class="fa fa-user-pen text-gray"></i>
-							            </div>
-                                        <div class="menu-text text-gray">Supervisor</div>
-                                    </a>
+                                </a>
+                                <div class="menu-submenu">
+                                    <div class="menu-item">
+                                        <a href="leaveAppr" class="menu-link highlight">
+                                            <div class="menu-icon">
+                                                <i class="fa fa-user-pen text-gray"></i>
+                                            </div>
+                                            <div class="menu-text text-gray">Supervisor</div>
+                                        </a>
                                     </div>
                                     <div class="menu-item">
-                                <a href="leaveApprhod" class="menu-link highlight">
-                                <div class="menu-icon">
-								    <i class="fa fa-users-gear text-gray"></i>
-							    </div>
-                                    <div class="menu-text text-gray">HOD</div>
-                                </a>
-                            </div>
-                            
-                        </div>
-                                
-                                
+                                        <a href="leaveApprhod" class="menu-link highlight">
+                                            <div class="menu-icon">
+                                                <i class="fa fa-users-gear text-gray"></i>
+                                            </div>
+                                            <div class="menu-text text-gray">HOD</div>
+                                        </a>
+                                    </div>
+
+                                </div>
+
+
                             </div>
                         </div>
                     </div>
@@ -552,13 +553,88 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="menu-item">
-                                <a href="/HodCashApprovalView" class="menu-link highlight">
+                            <div class="menu-item has-sub">
+                                <a href="javascript:;" class="menu-link highlight">
                                     <div class="menu-icon">
                                         <i class="fa fa-envelope-open-text text-gray"></i>
                                     </div>
                                     <div class="menu-text text-gray">Cash Advance</div>
+                                    <div class="menu-caret text-gray">
+                                    </div>
                                 </a>
+                                <div class="menu-submenu">
+                                    <div class="menu-item has-sub">
+                                        <a href="javascript:;" class="menu-link highlight">
+                                            <div class="menu-icon">
+                                                <i class="fa fa-user text-gray"></i>
+                                            </div>
+                                            <div class="menu-text text-gray">Department</i>
+                                            </div>
+                                            <div class="menu-caret text-gray">
+                                            </div>
+                                        </a>
+                                        <div class="menu-submenu">
+                                            <div class="menu-item">
+                                                <a href="/cashAdvanceApproverView" class="menu-link highlight">
+                                                    <div class="menu-icon">
+                                                        <i class="fa fa-list-check text-gray"></i>
+                                                    </div>
+                                                    <div class="menu-text text-gray">Approver
+                                                    </div>
+                                                </a>
+                                            </div>
+                                            {{-- <div class="menu-item">
+                                                <a href="/claimApprovalView/2" class="menu-link highlight">
+                                                    <div class="menu-icon">
+                                                        <i class="fa fa-list-check text-gray"></i>
+                                                    </div>
+                                                    <div class="menu-text text-gray">Recommender
+                                                    </div>
+                                                </a>
+                                            </div> --}}
+                                        </div>
+                                    </div>
+                                    <div class="menu-item has-sub">
+                                        <a href="#" class="menu-link highlight">
+                                            <div class="menu-icon">
+                                                <i class="fa fa-user-tie text-gray"></i>
+                                            </div>
+                                            <div class="menu-text text-gray">Finance
+                                            </div>
+                                            <div class="menu-caret text-gray">
+                                            </div>
+                                        </a>
+                                        <div class="menu-submenu">
+                                            <div class="menu-item">
+                                                <a href="/cashAdvanceFapproverView" class="menu-link highlight">
+                                                    <div class="menu-icon">
+                                                        <i class="fa fa-list-check text-gray"></i>
+                                                    </div>
+                                                    <div class="menu-text text-gray">Approver
+                                                    </div>
+                                                </a>
+                                            </div>
+                                            <div class="menu-item">
+                                                <a href="/cashAdvanceFrecommenderView" class="menu-link highlight">
+                                                    <div class="menu-icon">
+                                                        <i class="fa fa-list-check text-gray"></i>
+                                                    </div>
+                                                    <div class="menu-text text-gray">Recommender
+                                                    </div>
+                                                </a>
+                                            </div>
+                                            <div class="menu-item">
+                                                <a href="/cashAdvanceFcheckerView" class="menu-link highlight">
+                                                    <div class="menu-icon">
+                                                        <i class="fa fa-list-check text-gray"></i>
+                                                    </div>
+                                                    <div class="menu-text text-gray">Checker
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
