@@ -2,7 +2,7 @@
 @section('content')
     <div id="content" class="app-content">
         <h1 class="page-header">eClaim <small>| Head of Department | View Cash Advance | Others ( Non-Outstation )</small></h1>
-        <div class="panel panel">
+        <div class="panel panel" id="projectOutsideJs">
             <div class="panel-body">
                 <div class="row p-2">
                     <div class="col-md-7">
@@ -16,7 +16,7 @@
                                     <label class="form-label col-form-label">Type of Cash Advance :</label>
                                 </div>
                                 <div class="col-md-9">
-                                    <input readonly type="text" class="form-control">
+                                    <input readonly type="text" class="form-control" value="{{ getCashAdvanceType($ca->type) ?? '-' }}">
                                 </div>
                             </div>
                             <div class="row p-2">
@@ -25,7 +25,7 @@
 
                                 </div>
                                 <div class="col-md-9">
-                                    <input readonly type="text" class="form-control">
+                                    <input readonly type="text" class="form-control" value="{{ $ca->id ?? '-' }}">
                                 </div>
                             </div>
                             <div class="row p-2">
@@ -33,7 +33,7 @@
                                     <label class="form-label col-form-label">Claim Type :</label>
                                 </div>
                                 <div class="col-md-9">
-                                    <input readonly type="text" class="form-control">
+                                    <input readonly type="text" class="form-control" value="Cash Advances">
                                 </div>
                             </div>
 
@@ -43,7 +43,7 @@
 
                                 </div>
                                 <div class="col-md-9">
-                                    <input readonly type="text" class="form-control">
+                                    <input readonly type="text" class="form-control" value="{{ $ca->date_require_cash ?? '-' }}">
                                 </div>
                             </div>
                             <div class="row p-2">
@@ -51,7 +51,7 @@
                                     <label class="form-label col-form-label">Purpose :</label>
                                 </div>
                                 <div class="col-md-9">
-                                    <textarea type="text" readonly class="form-control" rows="3" maxlength="255"></textarea>
+                                    <textarea type="text" readonly class="form-control" rows="3" maxlength="255">{{ $ca->purpose ?? '-' }}</textarea>
                                 </div>
                             </div>
                             <div class="row p-2">
@@ -60,7 +60,7 @@
 
                                 </div>
                                 <div class="col-md-9">
-                                    <input readonly type="text" class="form-control">
+                                    <input readonly type="text" class="form-control" value="{{ $ca->value ?? '-' }}">
                                 </div>
                             </div>
                             <div class="row p-2">
@@ -68,7 +68,7 @@
                                     <label class="form-label col-form-label">Supporting Document :</label>
                                 </div>
                                 <div class="col-md-9">
-                                    <input readonly type="text" class="form-control">
+                                    <input readonly type="text" class="form-control" value="{{ $ca->fiel_upload ?? '-' }}">
                                 </div>
                             </div>
                         </div>
@@ -113,13 +113,13 @@
             </div>
             <div class="row p-2">
                 <div class="col align-self-start">
-                    <a href="/claimapproval/supervisor" class="btn btn-light" style="color: black;" type="submit"><i class="fa fa-arrow-left"></i> Back</a>
+                    <a href="/cashAdvanceApproverView" class="btn btn-light" style="color: black;" type="submit"><i class="fa fa-arrow-left"></i> Back</a>
                 </div>
                 <div class="col d-flex justify-content-end">
                     <a class="btn btn-secondary" style="color: black" type="submit"> Cancel</a> &nbsp;
                     <a href="javascript:;" class="btn btn-warning" style="color: black" data-bs-toggle="modal" data-bs-target="#modalamend">Amend</a> &nbsp;
                     <a href="javascript:;" class="btn btn-danger" style="color: black" data-bs-toggle="modal" data-bs-target="#modalreject"> Reject</a> &nbsp;
-                    <a class="btn btn-lime" style="color: black" type="submit"> Approve</a>
+                    <a class="btn btn-lime" id="approveButton" data-id="{{ $ca->id }}" style="color: black" type="submit"> Approve</a>
                 </div>
             </div>
         </div>

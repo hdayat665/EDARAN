@@ -77,6 +77,10 @@ requirejs.config({
         adminRecDetailJs: assets + "/js/adminRecDetailJs",
         cashAdvanceApproverJs: assets + "/js/cashAdvanceApproverJs",
         projectOutsideJs: assets + "/js/projectOutsideJs",
+        proejctNonOutsiteJs: assets + "/js/proejctNonOutsiteJs",
+        financeCheckerCaJs: assets + "/js/financeCheckerCaJs",
+        financeApprocerCaJs: assets + "/js/financeApprocerCaJs",
+        financeRecommenderCaJs: assets + "/js/financeRecommenderCaJs",
 
         /// timesheet period
         sheetPeriodJs: assets + "/js/sheetPeriodJs",
@@ -425,6 +429,22 @@ if ($("#cashAdvanceApproverJs").length > 0) {
 
 if ($("#projectOutsideJs").length > 0) {
     requirejs(["projectOutsideJs"]);
+}
+
+if ($("#proejctNonOutsiteJs").length > 0) {
+    requirejs(["proejctNonOutsiteJs"]);
+}
+
+if ($("#financeCheckerCaJs").length > 0) {
+    requirejs(["financeCheckerCaJs"]);
+}
+
+if ($("#financeApprocerCaJs").length > 0) {
+    requirejs(["financeApprocerCaJs"]);
+}
+
+if ($("#financeRecommenderCaJs").length > 0) {
+    requirejs(["financeRecommenderCaJs"]);
 }
 
 // Global function

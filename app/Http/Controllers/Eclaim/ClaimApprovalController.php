@@ -362,4 +362,39 @@ class ClaimApprovalController extends Controller
 
         return response()->json($data);
     }
+
+    public function cashAdvanceFcheckerView()
+    {
+        $mcs = new ClaimApprovalService;
+
+        $result = $mcs->cashAdvanceFcheckerView();
+        $data['check'] = $result['check'];
+        $data['cas'] = $result['general'];
+
+        $view = 'financeChecker';
+
+        return view('pages.eclaim.claimApproval.cashAdvance.finance.checker.' . $view, $data);
+    }
+
+    public function cashAdvanceFapproverView()
+    {
+        $mcs = new ClaimApprovalService;
+
+        $data['cas'] = $mcs->cashAdvanceFapproverView();
+
+        $view = 'financeApprover';
+
+        return view('pages.eclaim.claimApproval.cashAdvance.finance.approver.' . $view, $data);
+    }
+
+    public function cashAdvanceFrecommenderView()
+    {
+        $mcs = new ClaimApprovalService;
+
+        $data['cas'] = $mcs->cashAdvanceFapproverView();
+
+        $view = 'financeRecommender';
+
+        return view('pages.eclaim.claimApproval.cashAdvance.finance.recommender.' . $view, $data);
+    }
 }

@@ -21,6 +21,7 @@ use App\Http\Controllers\Report\ProjectReportController;
 use App\Http\Controllers\Report\TimesheetReportController;
 use App\Http\Controllers\MYLeave\MyleaveController;
 use App\Http\Controllers\Eleave\EleaveController;
+use Illuminate\Support\Facades\Storage;
 
 /*
 |--------------------------------------------------------------------------
@@ -111,6 +112,10 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('/createPvNumber/{id}', 'createPvNumber');
             Route::get('/cashAdvanceApproverDetail/{id}/{type}', 'cashAdvanceApproverDetail');
             Route::post('/updateStatusCashAdvance/{id}/{status}/{stage}', 'updateStatusCashAdvance');
+            Route::get('/cashAdvanceFcheckerView', 'cashAdvanceFcheckerView');
+            Route::get('/cashAdvanceFrecommenderView', 'cashAdvanceFrecommenderView');
+            Route::get('/cashAdvanceFapproverView', 'cashAdvanceFapproverView');
+
 
 
 
@@ -220,7 +225,7 @@ Route::group(['middleware' => ['web']], function () {
                 }
                 return Storage::download($path);
             })->name('download');
-            
+
             Route::post('/updateSOP/{id}', 'updateSOP');
             Route::post('/createSOP', 'createSOP');
             Route::delete('/deleteSOP/{id}', 'deleteSOP');

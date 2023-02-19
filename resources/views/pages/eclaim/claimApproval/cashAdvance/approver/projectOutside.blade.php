@@ -79,7 +79,7 @@
                                     <textarea type="text" readonly class="form-control" rows="3" maxlength="255">{{ $ca->purpose ?? '-' }}</textarea>
                                 </div>
                             </div>
-                            <div class="row p-2">
+                            {{-- <div class="row p-2">
                                 <table id="claimtable" class="table table-striped table-bordered align-middle">
                                     <thead>
                                         <tr>
@@ -98,7 +98,7 @@
                                         </tr>
                                     </tbody>
                                 </table>
-                            </div>
+                            </div> --}}
 
                         </div>
                         <br>
@@ -111,13 +111,13 @@
                                     <label class="form-label col-form-label">Subsistence Allowance :</label>
                                 </div>
                                 <div class="col-md-3">
-                                    <input readonly type="text" class="form-control">
+                                    <input readonly type="text" class="form-control" value="{{ $ca->mode_of_transport->subs_allowance_total ?? 0 }}">
                                 </div>
                                 <div class="col-md-3">
                                     <label class="form-label col-form-label">Accommodation :</label>
                                 </div>
                                 <div class="col-md-3">
-                                    <input readonly type="text" class="form-control">
+                                    <input readonly type="text" class="form-control" value="{{ $ca->mode_of_transport->accommadation_total ?? 0 }}">
                                 </div>
                             </div>
                             <div class="row p-2">
@@ -131,7 +131,7 @@
                                     <label class="form-label col-form-label">Fuel Parking :</label>
                                 </div>
                                 <div class="col-md-3">
-                                    <input readonly type="text" class="form-control">
+                                    <input readonly type="text" class="form-control" value="{{ $ca->mode_of_transport->fuel ?? 0 }}">
                                 </div>
                             </div>
                             <div class="row p-2">
@@ -145,7 +145,7 @@
                                     <label class="form-label col-form-label">Toll/Parking :</label>
                                 </div>
                                 <div class="col-md-3">
-                                    <input readonly type="text" class="form-control">
+                                    <input readonly type="text" class="form-control" {{ $ca->mode_of_transport->toll ?? 0 }}>
                                 </div>
                             </div>
                             <div class="row p-2">
@@ -159,7 +159,7 @@
                                     <label class="form-label col-form-label">Entertainment :</label>
                                 </div>
                                 <div class="col-md-3">
-                                    <input readonly type="text" class="form-control">
+                                    <input readonly type="text" class="form-control" value="{{ $ca->mode_of_transport->entertainment ?? 0 }}">
                                 </div>
                             </div>
                             <div class="row p-2">
@@ -176,7 +176,7 @@
                                     <label class="form-label col-form-label">Total :</label>
                                 </div>
                                 <div class="col-md-3">
-                                    <input readonly type="text" class="form-control">
+                                    <input readonly type="text" class="form-control" value="{{ $ca->mode_of_transport->total ?? 0 }}">
                                 </div>
                             </div>
                             <div class="row p-2">
@@ -190,7 +190,7 @@
                                     <label class="form-label col-form-label">Maximum Paid Out (75%) :</label>
                                 </div>
                                 <div class="col-md-3">
-                                    <input readonly type="text" class="form-control">
+                                    <input readonly type="text" class="form-control" value="{{ $ca->mode_of_transport->max_total ?? 0 }}">
                                 </div>
                             </div>
                         </div>
@@ -235,13 +235,13 @@
             </div>
             <div class="row p-2">
                 <div class="col align-self-start">
-                    <a href="/claimapproval/supervisor" class="btn btn-light" style="color: black;" type="submit"><i class="fa fa-arrow-left"></i> Back</a>
+                    <a href="/cashAdvanceApproverView" class="btn btn-light" style="color: black;" type="submit"><i class="fa fa-arrow-left"></i> Back</a>
                 </div>
                 <div class="col d-flex justify-content-end">
                     <a class="btn btn-secondary" style="color: black" type="submit"> Cancel</a> &nbsp;
                     <a href="javascript:;" class="btn btn-warning" style="color: black" data-bs-toggle="modal" data-bs-target="#modalamend">Amend</a> &nbsp;
                     <a href="javascript:;" class="btn btn-danger" style="color: black" data-bs-toggle="modal" data-bs-target="#modalreject"> Reject</a> &nbsp;
-                    <a class="btn btn-lime" id="approveButton" style="color: black" type="submit"> Approve</a>
+                    <a class="btn btn-lime" id="approveButton" data-id="{{ $ca->id }}" style="color: black" type="submit"> Approve</a>
                 </div>
             </div>
         </div>

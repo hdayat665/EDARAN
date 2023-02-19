@@ -606,7 +606,7 @@
                                         </a>
                                         <div class="menu-submenu">
                                             <div class="menu-item">
-                                                <a href="/financeApprovalView" class="menu-link highlight">
+                                                <a href="/cashAdvanceFapproverView" class="menu-link highlight">
                                                     <div class="menu-icon">
                                                         <i class="fa fa-list-check text-gray"></i>
                                                     </div>
@@ -615,7 +615,7 @@
                                                 </a>
                                             </div>
                                             <div class="menu-item">
-                                                <a href="/financeRecView" class="menu-link highlight">
+                                                <a href="/cashAdvanceFrecommenderView" class="menu-link highlight">
                                                     <div class="menu-icon">
                                                         <i class="fa fa-list-check text-gray"></i>
                                                     </div>
@@ -624,7 +624,7 @@
                                                 </a>
                                             </div>
                                             <div class="menu-item">
-                                                <a href="/financeCheckerView" class="menu-link highlight">
+                                                <a href="/cashAdvanceFapproverView" class="menu-link highlight">
                                                     <div class="menu-icon">
                                                         <i class="fa fa-list-check text-gray"></i>
                                                     </div>

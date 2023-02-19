@@ -1,36 +1,41 @@
 $(document).ready(function () {
-    $("#claimtable").DataTable({
-        responsive: false,
-        lengthMenu: [
-            [5, 10, 15, 20, -1],
-            [5, 10, 15, 20, "All"],
-        ],
+    $("#tableactive").dataTable({
+        // "responsive": true,
+        bLengthChange: false,
+        bFilter: false,
+    });
+
+    $("#buckettable").dataTable({
+        // "responsive": true,
+        bLengthChange: false,
+        bFilter: false,
+    });
+
+    $("#rejectedtable").dataTable({
+        // "responsive": true,
+        bLengthChange: false,
+        bFilter: false,
     });
 
     $("#filter").click(function () {
         $("#filteronoff").toggle();
     });
 
-    $("#rejectModalButton").on("click", function () {
+    $(
+        "#rejectButton1, #rejectButton2, #rejectButton3, #rejectButton4, #rejectButton5"
+    ).on("click", function () {
         id = $(this).data("id");
 
         $("#rejectId").val(id);
         $("#modalreject").modal("show");
     });
 
-    $("#amendButton").on("click", function () {
-        id = $(this).data("id");
-
-        $("#amendId").val(id);
-        $("#modalamend").modal("show");
-    });
-
     $(
-        "#approveButton, #approveButton1, #approveButton2, #approveButton3, #approveButton4"
+        "#approveButton, #approveButton1, #approveButton2, #approveButton3, #approveButton4, #approveButton5"
     ).on("click", function () {
         // alert("ss");
         var id = $(this).data("id");
-        var stage = "approver";
+        var stage = "f_approver";
         var status = "recommend";
 
         requirejs(["sweetAlert2"], function (swal) {
@@ -70,9 +75,8 @@ $(document).ready(function () {
 
     $("#rejectButton").on("click", function () {
         // alert("ss");
-        var id = $(this).data("id");
-        // alert(id);
-        var stage = "approver";
+        var id = $("#rejectId").val();
+        var stage = "f_approver";
         var status = "reject";
         $("#rejectForm").validate({
             // Specify validation rules
@@ -119,60 +123,6 @@ $(document).ready(function () {
         // updating checked attribute of change event occurred element, this.checked returns current state
         // $(".wrapper").val($(".container").html());
         // updating the value of textarea
-    });
-
-    $("#amendButton").click(function (e) {
-        var id = $(this).data("id");
-        // var id = $("#amendId").val();
-        var stage = "approver";
-        var status = "amend";
-        // alert(id);
-
-        $("#amendForm").validate({
-            // Specify validation rules
-            rules: {},
-
-            messages: {},
-            submitHandler: function (form) {
-                requirejs(["sweetAlert2"], function (swal) {
-                    var data = new FormData(
-                        document.getElementById("amendForm")
-                    );
-
-                    $.ajax({
-                        type: "POST",
-                        url:
-                            "/updateStatusCashAdvance/" +
-                            id +
-                            "/" +
-                            status +
-                            "/" +
-                            stage,
-                        data: data,
-                        dataType: "json",
-                        async: false,
-                        processData: false,
-                        contentType: false,
-                    }).done(function (data) {
-                        console.log(data);
-                        swal({
-                            title: data.title,
-                            text: data.msg,
-                            type: data.type,
-                            confirmButtonColor: "#3085d6",
-                            confirmButtonText: "OK",
-                            allowOutsideClick: false,
-                            allowEscapeKey: false,
-                        }).then(function () {
-                            if (data.type == "error") {
-                            } else {
-                                location.reload();
-                            }
-                        });
-                    });
-                });
-            },
-        });
     });
 
     // personal

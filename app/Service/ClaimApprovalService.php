@@ -266,18 +266,6 @@ class ClaimApprovalService
 
     public function cashAdvanceApprovalView()
     {
-        // find checker 
-        // $domainList = DomainList::where([['tenant_id', Auth::user()->tenant_id], ['category_role', 'finance']])->orderBy('created_at', 'DESC')->first();
-        // $userId = Auth::user()->id;
-        // // pr($domainList);
-        // $data['check'] = '';
-        // if ($domainList->checker1 == $userId) {
-        //     $data['check'] = 'f1';
-        // } else if ($domainList->checker2 == $userId) {
-        //     $data['check'] = 'f2';
-        // } else if ($domainList->checker3 == $userId) {
-        //     $data['check'] = 'f3';
-        // }
 
         $ca[0] = ['tenant_id', Auth::user()->tenant_id];
         $ca[1] = ['status', '!=', 'draft'];
@@ -298,8 +286,6 @@ class ClaimApprovalService
         return $data;
     }
 
-
-
     public function updateStatusCashAdvance($r, $id, $status, $stage)
     {
         $input = $r->input();
@@ -313,6 +299,40 @@ class ClaimApprovalService
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
         $data['msg'] = 'Success Update Status Cash Advance';
+
+        return $data;
+    }
+
+    public function cashAdvanceFcheckerView()
+    {
+        // find checker 
+        $domainList = DomainList::where([['tenant_id', Auth::user()->tenant_id], ['category_role', 'cash_advance']])->orderBy('created_at', 'DESC')->first();
+        $userId = Auth::user()->id;
+
+        $data['check'] = '';
+        if ($domainList->checker1 == $userId) {
+            $data['check'] = 'f1';
+        } else if ($domainList->checker2 == $userId) {
+            $data['check'] = 'f2';
+        } else if ($domainList->checker3 == $userId) {
+            $data['check'] = 'f3';
+        }
+
+        $ca[0] = ['tenant_id', Auth::user()->tenant_id];
+        $ca[1] = ['status', '!=', 'draft'];
+
+        $data['general'] = CashAdvanceDetail::where($ca)->get();
+
+        return $data;
+    }
+
+    public function cashAdvanceFapproverView()
+    {
+
+        $ca[0] = ['tenant_id', Auth::user()->tenant_id];
+        $ca[1] = ['status', '!=', 'draft'];
+
+        $data = CashAdvanceDetail::where($ca)->get();
 
         return $data;
     }

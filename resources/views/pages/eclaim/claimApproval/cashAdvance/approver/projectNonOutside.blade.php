@@ -1,8 +1,8 @@
 @extends('layouts.dashboardTenant')
 @section('content')
     <div id="content" class="app-content">
-        <h1 class="page-header">eClaim <small>| Head of Department | View Cash Advance | Others ( Outstation )</small></h1>
-        <div class="panel panel" id="projectOutsideJs">
+        <h1 class="page-header">eClaim <small>| Head of Department | View Cash Advance | Project ( Non-Outstation )</small></h1>
+        <div class="panel panel" id="proejctNonOutsiteJs">
             <div class="panel-body">
                 <div class="row p-2">
                     <div class="col-md-7">
@@ -245,9 +245,6 @@
                 </div>
             </div>
         </div>
-
-
-        <!-- END row -->
-        @include('modal.eclaimApproval.cashAdvance.otherOutsideApproverModal')
     </div>
+    @include('modal.eclaimApproval.cashAdvance.projectNonOutsideModal')
 @endsection
