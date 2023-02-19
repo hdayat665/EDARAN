@@ -1,8 +1,8 @@
 @extends('layouts.dashboardTenant')
 @section('content')
     <div id="content" class="app-content">
-        <h1 class="page-header">eClaim <small>| Head of Department | View Cash Advance | Project ( Outstation )</small></h1>
-        <div class="panel panel" id="projectOutsideJs">
+        <h1 class="page-header">eClaim <small>| Recommender | View Cash Advance | Project ( Outstation )</small></h1>
+        <div class="panel panel" id="frecDetailCaJs">
             <div class="panel-body">
                 <div class="row p-2">
                     <div class="col-md-7">

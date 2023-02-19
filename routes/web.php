@@ -113,6 +113,10 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('/cashAdvanceApproverDetail/{id}/{type}', 'cashAdvanceApproverDetail');
             Route::post('/updateStatusCashAdvance/{id}/{status}/{stage}', 'updateStatusCashAdvance');
             Route::get('/cashAdvanceFcheckerView', 'cashAdvanceFcheckerView');
+            Route::get('/cashAdvanceFcheckerDetail/{id}/{type}', 'cashAdvanceFcheckerDetail');
+            Route::get('/cashAdvanceFapproverDetail/{id}/{type}', 'cashAdvanceFapproverDetail');
+            Route::get('/cashAdvanceFrecommenderDetail/{id}/{type}', 'cashAdvanceFrecommenderDetail');
+
             Route::get('/cashAdvanceFrecommenderView', 'cashAdvanceFrecommenderView');
             Route::get('/cashAdvanceFapproverView', 'cashAdvanceFapproverView');
 

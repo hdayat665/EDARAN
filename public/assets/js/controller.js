@@ -81,6 +81,9 @@ requirejs.config({
         financeCheckerCaJs: assets + "/js/financeCheckerCaJs",
         financeApprocerCaJs: assets + "/js/financeApprocerCaJs",
         financeRecommenderCaJs: assets + "/js/financeRecommenderCaJs",
+        fcheckerDetailJs: assets + "/js/fcheckerDetailJs",
+        frecDetailCaJs: assets + "/js/frecDetailCaJs",
+        fapprovalCaJs: assets + "/js/fapprovalCaJs",
 
         /// timesheet period
         sheetPeriodJs: assets + "/js/sheetPeriodJs",
@@ -445,6 +448,18 @@ if ($("#financeApprocerCaJs").length > 0) {
 
 if ($("#financeRecommenderCaJs").length > 0) {
     requirejs(["financeRecommenderCaJs"]);
+}
+
+if ($("#fcheckerDetailJs").length > 0) {
+    requirejs(["fcheckerDetailJs"]);
+}
+
+if ($("#frecDetailCaJs").length > 0) {
+    requirejs(["frecDetailCaJs"]);
+}
+
+if ($("#fapprovalCaJs").length > 0) {
+    requirejs(["fapprovalCaJs"]);
 }
 
 // Global function

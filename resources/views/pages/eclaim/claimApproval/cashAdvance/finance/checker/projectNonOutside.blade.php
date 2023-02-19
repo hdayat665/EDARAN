@@ -1,8 +1,8 @@
 @extends('layouts.dashboardTenant')
 @section('content')
     <div id="content" class="app-content">
-        <h1 class="page-header">eClaim <small>| Head of Department | View Cash Advance | Project ( Outstation )</small></h1>
-        <div class="panel panel" id="projectOutsideJs">
+        <h1 class="page-header">eClaim <small>| Finance Checker | View Cash Advance | Project ( Non-Outstation )</small></h1>
+        <div class="panel panel" id="fcheckerDetailJs">
             <div class="panel-body">
                 <div class="row p-2">
                     <div class="col-md-7">
@@ -79,27 +79,41 @@
                                     <textarea type="text" readonly class="form-control" rows="3" maxlength="255">{{ $ca->purpose ?? '-' }}</textarea>
                                 </div>
                             </div>
-                            {{-- <div class="row p-2">
-                                <table id="claimtable" class="table table-striped table-bordered align-middle">
-                                    <thead>
-                                        <tr>
-                                            <th class="text-nowrap">Travel Date</th>
-                                            <th class="text-nowrap">Project</th>
-                                            <th class="text-nowrap">Destination</th>
-                                            <th class="text-nowrap">Purpose</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>1/1/2022</td>
-                                            <td>Orbit</td>
-                                            <td>Kuala Lumpur</td>
-                                            <td>Meeting</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div> --}}
+                            <div class="row p-2">
+                                <div class="col-md-3">
+                                    <label class="form-label col-form-label">Mode of Transport :</label>
 
+                                </div>
+                                <div class="col-md-9">
+                                    <input readonly type="text" class="form-control" value="{{ $ca->mode_of_transport->tranport_type ?? '-' }}">
+                                </div>
+                            </div>
+                            <div class="row p-2">
+                                <div class="col-md-3">
+                                    <label class="form-label col-form-label">Checker :</label>
+                                </div>
+                                <div class="col-md-9">
+                                    <table class="table table-striped table-bordered align-middle">
+                                        <thead>
+                                            <tr>
+                                                <th>Action</th>
+                                                <th>Checker</th>
+
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td><button type="button" class="btn btn-lime" id="checked" data-id="{{ $ca->id }}" data-stage="{{ $check }}">Check</button></td>
+                                                <td>
+                                                    <input type="checkbox" {{ $ca->f1 == 'check' ? 'checked' : '' }} class="form-check-input" disabled /> &nbsp;
+                                                    <input type="checkbox" {{ $ca->f2 == 'check' ? 'checked' : '' }} class="form-check-input" disabled /> &nbsp;
+                                                    <input type="checkbox" {{ $ca->f3 == 'check' ? 'checked' : '' }} class="form-check-input" disabled />
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
                         </div>
                         <br>
                         <div class="form-control">
@@ -245,6 +259,6 @@
                 </div>
             </div>
         </div>
+        @include('modal.eclaimApproval.cashAdvance.pnoFchecker')
     </div>
-    @include('modal.eclaimApproval.cashAdvance.projectOutsideModal')
 @endsection

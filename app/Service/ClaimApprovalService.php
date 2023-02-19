@@ -326,6 +326,30 @@ class ClaimApprovalService
         return $data;
     }
 
+    public function cashAdvanceFcheckerDetail($id = '')
+    {
+        // find checker 
+        $domainList = DomainList::where([['tenant_id', Auth::user()->tenant_id], ['category_role', 'cash_advance']])->orderBy('created_at', 'DESC')->first();
+        $userId = Auth::user()->id;
+
+        $data['check'] = '';
+        if ($domainList->checker1 == $userId) {
+            $data['check'] = 'f1';
+        } else if ($domainList->checker2 == $userId) {
+            $data['check'] = 'f2';
+        } else if ($domainList->checker3 == $userId) {
+            $data['check'] = 'f3';
+        }
+
+        $ca[0] = ['tenant_id', Auth::user()->tenant_id];
+        $ca[1] = ['status', '!=', 'draft'];
+        $ca[2] = ['id', $id];
+
+        $data['general'] = CashAdvanceDetail::where($ca)->first();
+
+        return $data;
+    }
+
     public function cashAdvanceFapproverView()
     {
 

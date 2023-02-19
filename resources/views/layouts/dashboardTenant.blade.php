@@ -624,7 +624,7 @@
                                                 </a>
                                             </div>
                                             <div class="menu-item">
-                                                <a href="/cashAdvanceFapproverView" class="menu-link highlight">
+                                                <a href="/cashAdvanceFcheckerView" class="menu-link highlight">
                                                     <div class="menu-icon">
                                                         <i class="fa fa-list-check text-gray"></i>
                                                     </div>

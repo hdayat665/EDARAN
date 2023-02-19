@@ -376,6 +376,29 @@ class ClaimApprovalController extends Controller
         return view('pages.eclaim.claimApproval.cashAdvance.finance.checker.' . $view, $data);
     }
 
+    public function cashAdvanceFcheckerDetail($type = '', $id = '')
+    {
+        $mcs = new ClaimApprovalService;
+
+        $result = $mcs->cashAdvanceFcheckerDetail($id);
+        $data['ca'] = $result['general'];
+        $data['check'] = $result['check'];
+        // pr($data['check']);
+        // 1 other outside 2 other non outside 3 project outside 4 project non outside
+
+        if ($type == 1) {
+            $view = 'projectOutside';
+        } elseif ($type == 2) {
+            $view = 'projectNonOutside';
+        } elseif ($type == 3) {
+            $view = 'otherOutside';
+        } else {
+            $view = 'otherNonOutside';
+        }
+
+        return view('pages.eclaim.claimApproval.cashAdvance.finance.checker.' . $view, $data);
+    }
+
     public function cashAdvanceFapproverView()
     {
         $mcs = new ClaimApprovalService;
@@ -387,6 +410,29 @@ class ClaimApprovalController extends Controller
         return view('pages.eclaim.claimApproval.cashAdvance.finance.approver.' . $view, $data);
     }
 
+    public function cashAdvanceFapproverDetail($type = '', $id = '')
+    {
+        $mcs = new ClaimApprovalService;
+
+        $result = $mcs->cashAdvanceFcheckerDetail($id);
+        $data['ca'] = $result['general'];
+        $data['check'] = $result['check'];
+        // pr($data['check']);
+        // 1 other outside 2 other non outside 3 project outside 4 project non outside
+
+        if ($type == 1) {
+            $view = 'projectOutside';
+        } elseif ($type == 2) {
+            $view = 'projectNonOutside';
+        } elseif ($type == 3) {
+            $view = 'otherOutside';
+        } else {
+            $view = 'otherNonOutside';
+        }
+
+        return view('pages.eclaim.claimApproval.cashAdvance.finance.approver.' . $view, $data);
+    }
+
     public function cashAdvanceFrecommenderView()
     {
         $mcs = new ClaimApprovalService;
@@ -394,6 +440,29 @@ class ClaimApprovalController extends Controller
         $data['cas'] = $mcs->cashAdvanceFapproverView();
 
         $view = 'financeRecommender';
+
+        return view('pages.eclaim.claimApproval.cashAdvance.finance.recommender.' . $view, $data);
+    }
+
+    public function cashAdvanceFrecommenderDetail($type = '', $id = '')
+    {
+        $mcs = new ClaimApprovalService;
+
+        $result = $mcs->cashAdvanceFcheckerDetail($id);
+        $data['ca'] = $result['general'];
+        $data['check'] = $result['check'];
+        // pr($data['check']);
+        // 1 other outside 2 other non outside 3 project outside 4 project non outside
+
+        if ($type == 1) {
+            $view = 'projectOutside';
+        } elseif ($type == 2) {
+            $view = 'projectNonOutside';
+        } elseif ($type == 3) {
+            $view = 'otherOutside';
+        } else {
+            $view = 'otherNonOutside';
+        }
 
         return view('pages.eclaim.claimApproval.cashAdvance.finance.recommender.' . $view, $data);
     }
