@@ -75,6 +75,8 @@ requirejs.config({
         adminApprovalMtcJs: assets + "/js/adminApprovalMtcJs",
         adminRecJs: assets + "/js/adminRecJs",
         adminRecDetailJs: assets + "/js/adminRecDetailJs",
+        cashAdvanceApproverJs: assets + "/js/cashAdvanceApproverJs",
+        projectOutsideJs: assets + "/js/projectOutsideJs",
 
         /// timesheet period
         sheetPeriodJs: assets + "/js/sheetPeriodJs",
@@ -415,6 +417,14 @@ if ($("#adminRecJs").length > 0) {
 
 if ($("#adminRecDetailJs").length > 0) {
     requirejs(["adminRecDetailJs"]);
+}
+
+if ($("#cashAdvanceApproverJs").length > 0) {
+    requirejs(["cashAdvanceApproverJs"]);
+}
+
+if ($("#projectOutsideJs").length > 0) {
+    requirejs(["projectOutsideJs"]);
 }
 
 // Global function

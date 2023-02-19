@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Service\ClaimApprovalService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+
 class ClaimApprovalController extends Controller
 {
     public function claimApprovalView($type = '')
@@ -285,15 +286,6 @@ class ClaimApprovalController extends Controller
         return view('pages.eclaim.claimApproval.admin.recommender.' . $view, $data);
     }
 
-    public function HodCashApprovalView()
-    {
-        $mcs = new ClaimApprovalService;
-
-        $data['claims'] = $mcs->getGeneralClaim();
-
-        return view('pages.eclaim.claimApproval.cashAdvance.hodApproval', $data);
-    }
-
     public function getPersonalById($id = '')
     {
         $msc = new ClaimApprovalService;
@@ -326,6 +318,47 @@ class ClaimApprovalController extends Controller
         $msc = new ClaimApprovalService;
 
         $data = $msc->createPvNumber($id);
+
+        return response()->json($data);
+    }
+
+    public function cashAdvanceApproverView()
+    {
+        $mcs = new ClaimApprovalService;
+
+        $data['cas'] = $mcs->cashAdvanceApprovalView();
+
+        $view = 'cashAdvanceApprover';
+
+        return view('pages.eclaim.claimApproval.cashAdvance.approver.' . $view, $data);
+    }
+
+    public function cashAdvanceApproverDetail($type = '', $id = '')
+    {
+        $mcs = new ClaimApprovalService;
+
+        $data['ca'] = $mcs->cashAdvanceApproverDetail($id);
+
+        // 1 other outside 2 other non outside 3 project outside 4 project non outside
+
+        if ($type == 1) {
+            $view = 'projectOutside';
+        } elseif ($type == 2) {
+            $view = 'projectNonOutside';
+        } elseif ($type == 3) {
+            $view = 'otherOutside';
+        } else {
+            $view = 'otherNonOutside';
+        }
+
+        return view('pages.eclaim.claimApproval.cashAdvance.approver.' . $view, $data);
+    }
+
+    public function updateStatusCashAdvance(Request $r, $id = '', $status, $stage)
+    {
+        $msc = new ClaimApprovalService;
+
+        $data = $msc->updateStatusCashAdvance($r, $id, $status, $stage);
 
         return response()->json($data);
     }

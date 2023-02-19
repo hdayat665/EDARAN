@@ -107,8 +107,10 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('/adminApprovalDetail/{id}', 'adminApprovalDetail');
             Route::get('/adminRecView', 'adminRecView');
             Route::get('/adminRecDetailView/{id}', 'adminRecDetailView');
-            Route::get('/HodCashApprovalView', 'HodCashApprovalView');
+            Route::get('/cashAdvanceApproverView', 'cashAdvanceApproverView');
             Route::post('/createPvNumber/{id}', 'createPvNumber');
+            Route::get('/cashAdvanceApproverDetail/{id}/{type}', 'cashAdvanceApproverDetail');
+            Route::post('/updateStatusCashAdvance/{id}/{status}/{stage}', 'updateStatusCashAdvance');
 
 
 
@@ -487,7 +489,6 @@ Route::group(['middleware' => ['web']], function () {
 
             Route::get('/approvemyleave/{id}', 'approvemyleave');
             Route::get('/approvemyleaveby/{id}', 'approvemyleaveby');
-            
         });
     });
 });
