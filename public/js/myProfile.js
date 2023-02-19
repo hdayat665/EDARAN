@@ -236,6 +236,16 @@ $(document).ready(function () {
         }
     });
 
+    $.validator.addMethod("noSpecialChars", function(value, element) {
+        return this.optional(element) || /^[^A-Za-z!@#$%^&*()\-_+={}[\]\\|<>"'\/~`,.;: ]*$/.test(value);
+      }, "Special Characters, Spaces, and Alphabet Characters Are Not Allowed.");      
+      
+    $.validator.addMethod("email", function(value, element) {
+        // Email validation regex pattern
+        return this.optional(element) || /^[^\s@]+@[^\s@]+\.(?:com|net|org|edu|gov|mil|biz|info|name|museum|coop|aero|[a-z]{2})$/.test(value);
+      }, "Please Insert Valid Email Address");
+
+
     $("#saveProfile").click(function (e) {
         $("#formProfile").validate({
             // Specify validation rules
@@ -272,6 +282,7 @@ $(document).ready(function () {
                 //     required: true
                 // },
             },
+
 
             messages: {
                 personalEmail: {
@@ -511,7 +522,7 @@ $(document).ready(function () {
             },
 
             messages: {
-                address1: "Please Insert Address",
+                address1: "Please Insert Address 1",
                 city: "Please Insert City",
                 state: "Please Choose State",
                 country: "required",
@@ -520,7 +531,7 @@ $(document).ready(function () {
                     digits: "Please Insert Valid Postcode",
                     rangelength: "Please Insert Valid Postcode",
                 },
-                address1c: "Please Insert Address",
+                address1c: "Please Insert Address 1",
                 cityc: "Please Insert City",
                 statec: "Please Choose State",
                 countryc: "required",
@@ -596,10 +607,10 @@ $(document).ready(function () {
                 relationship: "Please Choose Relationship",
                 contactNo: {
                     required: "Please Insert Contact Number",
-                    digits: "Please Insert Correct Contact Number",
+                    digits: "Please Insert Valid Contact Number",
                 },
                 relationship: "Please Insert Relationship",
-                address1: "Please Insert Address",
+                address1: "Please Insert Address 1",
                 postcode: {
                     required: "Please Insert Postcode",
                     digits: "Please Insert Valid Postcode",
@@ -732,7 +743,7 @@ $(document).ready(function () {
                     rangelength: "Please Insert Valid Contact Number ",
                 },
 
-                address1: "Please Insert Address",
+                address1: "Please Insert Address 1",
                 city: "Please Insert City",
                 state: "Please Choose State",
                 country: "required",
@@ -1390,12 +1401,12 @@ $(document).ready(function () {
                 contactNo: {
                     digits: "Please Insert Correct Contact Number Without ' - ' or Space",
                     required: "Please Insert Contact Number",
-                    rangelength: "Please Enter Valid Contact Number",
+                    rangelength: "Please Insert Valid Contact Number",
                 },
                 relationship: "Please Choose Relationship",
-                address1: "Please Insert Address",
+                address1: "Please Insert Address 1",
                 postcode: {
-                    required: "Please Insert Your Postcode",
+                    required: "Please Insert Postcode",
                     digits: "Please Insert Valid Postcode",
                     rangelength: "Please Insert Valid Postcode",
                 },
@@ -1647,7 +1658,7 @@ $(document).ready(function () {
                     rangelength: "Please Insert Valid Contact Number",
                 },
                 relationship: "Please Choose Relationship",
-                address1: "Please Insert Address",
+                address1: "Please Insert Address 1",
                 postcode: {
                     required: "Please Insert Postcode",
                     digits: "Please Insert Valid Postcode",

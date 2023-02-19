@@ -65,7 +65,7 @@
                                         <td>{{$policy->code}}</td>
                                         <td>{{$policy->policy}}</td>
                                         <td>{{$policy->desc}}</td>
-                                        <td><a target="_blank" href="/storage/{{$policy->file}}" download>{{$policy->file}}</a></td>
+                                        <td><a href="{{ route('download', ['filename' => $policy->file]) }}">{{$policy->file}}</a></td>
                                         <td>{{$policy->addedBy}}</td>
                                         <td>{{$policy->created_at}}</td>
                                         <td>{{$policy->modifiedBy}}</td>
@@ -112,8 +112,7 @@
                                     <td>{{$SOP->SOPCode}}</td>
                                     <td>{{$SOP->SOPName}}</td>
                                     <td>{{$SOP->desc}}</td>
-                                    <td>{{$SOP->file}}</td>
-                                    <td>{{$SOP->addedBy}}</td>
+                                    <td><a href="{{ route('download', ['filename' => $SOP->file]) }}">{{$SOP->file}}</a></td>                                    <td>{{$SOP->addedBy}}</td>
                                     <td>{{$SOP->created_at}}</td>
                                     <td>{{$SOP->modifiedBy}}</td>
                                     <td>{{$SOP->modified_at}}</td>

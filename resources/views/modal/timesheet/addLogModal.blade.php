@@ -12,10 +12,10 @@
                             <label for="firstname" class="form-label">Type Of Log*</label>
                             <select class="form-select" id="typeoflog" name="type_of_log" aria-label="Default select example">
                                 <option class="form-label" value="5" selected>Please Choose</option>
-                                <option class="form-label" value="1">Home</option>
-                                <option class="form-label" value="2">Office</option>
-                                <option class="form-label" value="3">My Project</option>
-                                <option class="form-label" value="4">Others</option>
+                                <option class="form-label" value="Home">Home</option>
+                                <option class="form-label" value="Office">Office</option>
+                                <option class="form-label" value="My Project">My Project</option>
+                                <option class="form-label" value="Others">Others</option>
                             </select>
                         </div>
                         <div class="col-sm-6">

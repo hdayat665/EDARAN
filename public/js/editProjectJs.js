@@ -579,7 +579,12 @@ $(document).ready(function() {
     }
 
     $(document).on("click", "#addProjectMemberButton", function() {
-        $('#addProjectMemberModal').modal('show'); 
+        // Get the data-id value from the button
+        var id = $(this).data('id');
+        // Add the id value to the modal as a data attribute
+        console.log(id);
+        
+        $('#addProjectMemberModal').data('id', id).modal('show');
 
     });
 
@@ -893,20 +898,44 @@ $(document).ready(function() {
         });
     }); 
 
+    $.validator.addMethod("noSpecialChars", function(value, element) {
+        return this.optional(element) || /^[^A-Za-z!@#$%^&*()\-_+={}[\]\\|<>"'\/~`,.;: ]*$/.test(value);
+      }, "Special Characters, Spaces, and Alphabet Characters Are Not Allowed.");      
+      
+    $.validator.addMethod("email", function(value, element) {
+        // Email validation regex pattern
+        return this.optional(element) || /^[^\s@]+@[^\s@]+\.(?:com|net|org|edu|gov|mil|biz|info|name|museum|coop|aero|[a-z]{2})$/.test(value);
+      }, "Please Insert Valid Email Address");
+
+
     $('#updateButton').click(function(e) {
         $("#editForm").validate({
             rules: {
                 customer_name: "required",
                 address: "required",
-                phoneNo: "required",
-                email: "required",
+                phoneNo: {
+                    required: true,
+                    digits: true,
+                    rangelength: [10, 11]
+                },
+                email: {
+                    required: true,
+                    email: true // Use the email validation method
+                  },
             },
 
             messages: {
                 customer_name: "Please Insert Name",
-                address: "Please Insert Address",
-                phoneNo: "Please Inser Phone Number",
-                email: "Please Inser a Valid Email Address",
+                address: "Please Insert Address 1",
+                phoneNo: {
+                    required: "Please Insert Phone Number",
+                    digits: "Please Insert Correct Phone Number Without ' - ' or Space",
+                    rangelength: "Please Insert Valid Phone Number",
+                },
+                email: {
+                    required: "Please Insert Email Address",
+                    email: "Please Insert Valid Email Address"
+                  },
             },
             submitHandler: function(form) {
                 requirejs(['sweetAlert2'], function(swal) {
