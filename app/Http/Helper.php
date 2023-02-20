@@ -869,6 +869,34 @@ if (!function_exists('project_member')) {
     }
 }
 
+if (!function_exists('project_memberaddl')) {
+    function project_memberaddl($user_id = '')
+    {
+        $cond[1] = ['a.tenant_id', Auth::user()->tenant_id];
+
+        if ($user_id) {
+            $cond[2] = ['a.user_id', '=', $user_id];
+            $cond[3] = ['b.status', '=', 'approve'];
+        }
+
+        $data = DB::table('employment as a')
+            ->leftJoin('project_member as b', 'a.id', '=', 'b.employee_id')
+            ->leftJoin('project as c', 'b.project_id', '=', 'c.id')
+            ->select('c.id', 'c.project_name', 'c.project_code')
+            ->where($cond)
+            ->groupBy('c.project_name', 'c.project_code') // Add this line to group by the 'id' column of the 'project' table
+            ->get();
+
+        if (!$data) {
+            $data = [];
+        }
+
+        return $data;
+    }
+}
+
+
+
 if (!function_exists('activityName')) {
     function activityName($departmentId = '')
     {

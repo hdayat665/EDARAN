@@ -12,10 +12,10 @@
                             <label for="firstname" class="form-label">Type Of Log*</label>
                             <select class="form-select" id="typeoflogedit" name="type_of_log" aria-label="Default select example">
                                 <option class="form-label" value="" selected>Please Choose </option>
-                                <option class="form-label" value="Home">Home</option>
-                                <option class="form-label" value="Office">Office</option>
-                                <option class="form-label" value="My Project">My Project</option>
-                                <option class="form-label" value="Others">Others</option>
+                                <option class="form-label" value="1">Home</option>
+                                <option class="form-label" value="2">Office</option>
+                                <option class="form-label" value="3">My Project</option>
+                                <option class="form-label" value="4">Others</option>
                             </select>
                         </div>
                         <div class="col-sm-6">
@@ -31,7 +31,7 @@
                             <label for="Office-Log" class="form-label">My Project*</label>
                             <select class="form-select" id="project_id_edit" name="project_id" aria-label="Default select example">
                                 <option class="form-label" value="">Please Choose</option>
-                                <?php $projects = project_member($user_id) ?>
+                                <?php $projects = project_memberaddl($user_id) ?>
                                 @foreach ($projects as $project)
                                 <option value="{{$project->id}}">{{$project->project_name}} - {{$project->project_code}}</option>
                                 @endforeach
@@ -104,7 +104,7 @@
                             <label for="Office-Log" class="form-label">My Project*</label>
                             <select class="form-select" id="officeLogProjectEdit" name="office_log_project" aria-label="Default select example">
                                 <option class="form-label" value="">Please Choose</option>
-                                <?php $projects = project_member($user_id) ?>
+                                <?php $projects = project_memberaddl($user_id) ?>
                                 @foreach ($projects as $project)
                                 <option value="{{$project->id}}">{{$project->project_name}} - {{$project->project_code}}</option>
                                 @endforeach
