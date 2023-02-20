@@ -1707,11 +1707,14 @@ $(document).ready(function() {
         if ($(this).val() == "3") {
             $("#myprojectedit").show();
             $("#typeoflogedit").show();
+            $("#activity_location").show();
+            
             
         } else {
             $("#myprojectedit").hide();
             $("#listprojectedit").hide();
             $("#typeoflogedit").hide();
+            $("#activity_location").hide();
         }
     });
     $(document).on('change', "#officelog2edit", function() {

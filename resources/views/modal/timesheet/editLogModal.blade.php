@@ -62,7 +62,7 @@
                             <input type="text" readonly id="total_hour" name="total_hour" class="form-control" aria-describedby="dob">
                             <input type="hidden" readonly id="id" class="form-control" aria-describedby="dob">
                         </div>
-                        <div class="row p-2" id="activity_location">
+                        <div class="row p-2" id="activity_location" style="display: none">
                             <div class="col-sm-6" id="activityByProjectEditHide">
                                 <label for="issuing-country" class="form-label">Activity Name*</label>
                                 <select class="form-select" id="activity_name_edit1" name="activity_name">

@@ -72,10 +72,10 @@
                     <a class="mb-10px" href="/timesheetperiod"><i class="fas fa-calendar-days fa-4x text-blue"></i></a><br><br>
                     <h5 class="mb-5px">Timesheets Administrator and Timesheets Period</h5>
                 </div>
-                <div class="col-lg-2">
+                {{-- <div class="col-lg-2">
                     <a class="mb-10px" href="#"><i class="fas fa-user-group fa-4x text-blue"></i></a><br><br>
                     <h5 class="mb-5px">Timesheets Group</h5>
-                </div>
+                </div> --}}
                 <div class="col-lg-2">
                     <a class="mb-10px" href="/typeOfLogs"><i
                             class="fa fa-pen-to-square fa-4x text-blue"></i></a><br><br>
