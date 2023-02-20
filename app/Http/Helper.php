@@ -874,6 +874,7 @@ if (!function_exists('project_memberaddl')) {
 
         if ($user_id) {
             $cond[2] = ['a.user_id', '=', $user_id];
+            $cond[3] = ['b.status', '=', 'approve'];
         }
 
         $data = DB::table('employment as a')

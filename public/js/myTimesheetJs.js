@@ -1424,16 +1424,49 @@ $(document).ready(function() {
 
       
       
-    $("#starteventdate").datepicker({
-        todayHighlight: true,
-        autoclose: true,
-        format: 'yyyy/mm/dd'
-    });
-    $("#endeventdate").datepicker({
-        todayHighlight: true,
-        autoclose: true,
-        format: 'yyyy/mm/dd'
-    });
+    // $("#starteventdate").datepicker({
+    //     todayHighlight: true,
+    //     autoclose: true,
+    //     format: 'yyyy/mm/dd'
+    // });
+    // $("#endeventdate").datepicker({
+    //     // todayHighlight: true,
+    //     // autoclose: true,
+    //     // format: 'yyyy/mm/dd'
+
+        
+    // });
+    $(function() {
+        // Inisialisasi datepicker pertama
+        $('#starteventdate').datepicker({
+          format: 'yyyy/mm/dd',
+          todayHighlight: true,
+          autoclose: true,
+          onSelect: function(selectedDate) {
+            // Ketika tanggal dipilih pada datepicker pertama,
+            // atur opsi minDate pada datepicker kedua
+            $('#endeventdate').datepicker('option', 'minDate', selectedDate);
+          }
+        });
+      
+        // Inisialisasi datepicker kedua
+        $('#endeventdate').datepicker({
+          format: 'yyyy/mm/dd',
+          todayHighlight: true,
+          autoclose: true,
+          beforeShowDay: function(date) {
+            var startDate = $('#starteventdate').datepicker('getDate');
+            if (startDate) {
+              // Disable dates before the selected date on the first datepicker
+              return date.valueOf() >= startDate.valueOf() ? {} : {disabled: true};
+            }
+            return {};
+          }
+        });
+      });
+      
+    
+
     
     $('#activity_name_edit').picker({ search: true });
     $('#projectlocsearch').picker({ search: true });
