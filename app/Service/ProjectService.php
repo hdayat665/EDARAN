@@ -398,10 +398,13 @@ class ProjectService
 
         $cond[1] = ['a.tenant_id', '=', $tenant_id];
         $cond[2] = ['exit_project', '=', null];
+        $cond[4] = ['a.status', '=', 'approve'];
 
         if ($id) {
             $cond[3] = ['project_id', '=', $id];
         }
+
+
 
         if ($exit_project) {
             $cond[2] = ['exit_project', '=', $exit_project];
