@@ -65,7 +65,12 @@
                         <td>{{$unit->created_at}}</td>
                         <td>{{$unit->modifiedBy}}</td>
                         <td>{{$unit->modified_at}}</td>
-                        <td><a href="javascript:;" data-bs-toggle="modal" id="editButton" data-id="{{$unit->id}}" class="btn btn-outline-green"><i class="fa fa-pencil-alt"></i></a> <a href="javascript:;" id="deleteButton" data-id="{{$unit->id}}" class="btn btn-outline-danger"><i class="fa fa-trash"></i></a></td>
+                        <td>
+                            <a href="#" data-bs-toggle="dropdown" class="btn btn-primary btn-sm dropdown-toggle"></i> Actions <i class="fa fa-caret-down"></i></a>
+                            <div class="dropdown-menu">
+                            <a href="javascript:;" id="editButton" data-id="{{$unit->id}}" class="dropdown-item">Edit</a>
+                            <a href="javascript:;" id="deleteButton" data-id="{{$unit->id}}" class="dropdown-item">Delete</a>
+                        </td>
                     </tr>
                     @endforeach
                     @endif

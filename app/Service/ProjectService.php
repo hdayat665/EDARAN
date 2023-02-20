@@ -728,7 +728,7 @@ class ProjectService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success ' . $status . ' Project Member';
+        $data['msg'] = 'Success ' . $status . ' Project Request';
 
         return $data;
     }

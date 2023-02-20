@@ -70,7 +70,14 @@
                                         <td>{{$policy->created_at}}</td>
                                         <td>{{$policy->modifiedBy}}</td>
                                         <td>{{$policy->updated_at}}</td>
-                                        <td><a href="javascript:;" data-bs-toggle="modal" id="editButton1" data-id="{{$policy->id}}" class="btn btn-outline-green"><i class="fa fa-pencil-alt"></i></a> <a id="deleteButton1" data-id="{{$policy->id}}" class="btn btn-outline-danger"><i class="fa fa-trash"></i></a></td>
+                                        <td>
+                                            <a href="#" data-bs-toggle="dropdown" class="btn btn-primary btn-sm dropdown-toggle"></i> Actions <i class="fa fa-caret-down"></i></a>
+                                            <div class="dropdown-menu">
+                                            <a href="javascript:;" id="editButton1" data-id="{{$policy->id}}" class="dropdown-item"> Edit</a>
+                                            <div class="dropdown-divider"></div>
+                                            <a id="deleteButton1" data-id="{{$policy->id}}" class="dropdown-item"> Delete</a>
+
+                                        </td>
                                     </tr>
                                     @endforeach
                                 @endif
@@ -116,7 +123,13 @@
                                     <td>{{$SOP->created_at}}</td>
                                     <td>{{$SOP->modifiedBy}}</td>
                                     <td>{{$SOP->modified_at}}</td>
-                                    <td><a href="javascript:;" data-bs-toggle="modal" id="editButton2" data-id="{{$SOP->id}}" class="btn btn-outline-green"><i class="fa fa-pencil-alt"></i></a> <a id="deleteButton2" data-id="{{$SOP->id}}" class="btn btn-outline-danger"><i class="fa fa-trash"></i></a></td>
+                                    <td>
+                                        <a href="#" data-bs-toggle="dropdown" class="btn btn-primary btn-sm dropdown-toggle"></i> Actions <i class="fa fa-caret-down"></i></a>
+                                        <div class="dropdown-menu">
+                                        <a href="javascript:;" id="editButton2" data-id="{{$SOP->id}}" class="dropdown-item"> Edit</a>
+                                        <div class="dropdown-divider"></div>
+                                        <a id="deleteButton2" data-id="{{$SOP->id}}" class="dropdown-item"> Delete</a>
+                                    </td>
                                 </tr>
                                 @endforeach
                             @endif

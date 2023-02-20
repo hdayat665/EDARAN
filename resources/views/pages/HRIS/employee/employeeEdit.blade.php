@@ -113,7 +113,7 @@
                                                 <div class="row p-2">
                                                     <div class="col-sm-6">
                                                         <label for="username" class="form-label">Username*</label>
-                                                        <input type="text" id="username" name="username" value="{{$username ?? ''}}" class="form-control" aria-describedby="username">
+                                                        <input type="text" id="username" name="username" value="{{$username ?? ''}}" class="form-control" readonly aria-describedby="username">
                                                         <div class="form-text">
                                                             Cannot change the username of the admin.
                                                         </div>

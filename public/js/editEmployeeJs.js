@@ -46,19 +46,6 @@ $(document).ready(function () {
         "touch-action": "none",
         background: "#e9ecef",
     });
-
-    $("#firstNameP, #lastNameP").change(function () {
-        var a = $("#firstNameP").val();
-        var b = $("#lastNameP").val();
-        $("#fullNameP").val(a + " " + b);
-    });
-
-    $("#firstNames1, #lastNameP1").change(function () {
-        var a = $("#firstNames1").val();
-        var b = $("#lastNameP1").val();
-        $("#fullNameP1").val(a + " " + b);
-    });
-
     $("#gender1").css({
         "pointer-events": "none",
         "touch-action": "none",
@@ -1228,34 +1215,6 @@ $(document).ready(function () {
     });
 
     $("#editChildren").click(function (e) {
-
-        $("#addChildrenForm").validate({
-            // Specify validation rules
-            rules: {
-                firstName: "required",
-                lastName: "required",
-                idNo: {
-                    required: true,
-                    digits: true,
-                    rangelength: [12, 12],
-                },
-                maritalStatus: "required",
-                DOBChild: "required",
-            },
-
-            messages: {
-                firstName: "Please Insert First Name",
-                lastName: "Please Insert Last Name",
-                idNo: {
-                    required: "Please Insert New Identification Number",
-                    digits: "Please Insert Correct Identification Number Without ' - ' or Space",
-                    rangelength: "Please Provide Valid Identification Number",
-                },
-                maritalStatus: "Please Choose Marital Status",
-                DOBChild: "Please Enter Date Of Birth",
-            },
-    submitHandler: function(form) {
-
         // requirejs(['sweetAlert2'], function(swal) {
             Swal.fire({
                 allowOutsideClick: false,
@@ -1315,10 +1274,9 @@ $(document).ready(function () {
             },
                 }).then((result) => {
             
-                });
-            },
+                })
 
-        });
+        // });
     });
 
     childId = $("#childId").val();
