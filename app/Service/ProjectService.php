@@ -580,7 +580,9 @@ class ProjectService
         ProjectMember::where('id', $id)->update($input);
 
         if ($status == 'cancel') {
+
             // $this->cancelProjectEmail($id);
+            $this->deleteProjectMemberCancel($id);
         } else {
             $this->updateStatusProjectEmail($id, $status);
         }
@@ -589,6 +591,27 @@ class ProjectService
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
         $data['msg'] = 'Success ' . $status . ' Project Member';
+
+        return $data;
+    }
+    public function deleteProjectMemberCancel($id)
+    {
+
+        $projectMember = projectMember::find($id);
+
+        if (!$projectMember) {
+            $data['status'] = config('app.response.error.status');
+            $data['type'] = config('app.response.error.type');
+            $data['title'] = config('app.response.error.title');
+            $data['msg'] = 'ProjectLocation not found';
+        } else {
+            $projectMember->delete();
+
+            $data['status'] = config('app.response.success.status');
+            $data['type'] = config('app.response.success.type');
+            $data['title'] = config('app.response.success.title');
+            $data['msg'] = 'Success Delete Project Location';
+        }
 
         return $data;
     }
@@ -617,7 +640,7 @@ class ProjectService
             )
             ->where('a.id', $id)
             ->first();
-        pr($projectMember);
+        //pr($projectMember);
         // $receiver = $projectMember->manager_email ?? 'admin@edaran.com';
 
         // $response['typeEmail'] = 'projectCancelReq';
@@ -674,7 +697,6 @@ class ProjectService
         $projectMember = ProjectMember::select('id', 'project_id', 'status', 'created_at')
             ->where([['employee_id', '=', $employee->id]])
             ->whereIn('status', ['pending', 'approve', 'reject'])
-            ->groupBy('project_id')
             ->orderBy('id', 'desc')
             ->get();
 
