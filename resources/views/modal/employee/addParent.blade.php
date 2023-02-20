@@ -10,18 +10,18 @@
                     <div class="row p-2">
                         <div class="col-sm-6">
                             <label for="firstname" class="form-label">First Name*</label>
-                            <input type="text" id="" name="firstName" class="form-control" aria-describedby="firstname" placeholder="FIRST NAME">
+                            <input type="text" id="firstNameP" name="firstName" class="form-control" aria-describedby="firstname"  placeholder="FIRST NAME">
                             <input type="hidden" name="user_id" value="{{$user_id}}">
                         </div>
                         <div class="col-sm-6">
                             <label for="lastname" class="form-label">Last Name*</label>
-                            <input type="text" id="" name="lastName" class="form-control" aria-describedby="lastname" placeholder="LAST NAME">
+                            <input type="text" id="lastNameP" name="lastName" class="form-control" aria-describedby="lastname" placeholder="LAST NAME">
                         </div>
                     </div>
                     <div class="row p-2">
                         <div class="col-sm-6">
                             <label for="fullname" class="form-label" >Full Name</label>
-                            <input type="text" id="" name="" class="form-control" aria-describedby="fullname" placeholder="FULL NAME">
+                            <input type="text" id="fullNameP" name="fullName" class="form-control" aria-describedby="fullname" readonly placeholder="FULL NAME">
                         </div>
                         <div class="col-sm-6">
                             <label for="" class="form-label" >Old Identification Number</label>

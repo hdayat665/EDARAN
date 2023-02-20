@@ -59,7 +59,7 @@
             <label class="form-label col-form-label col-md-1">Issuing Country*</label>
             <div class="col-md-5">
                 <select class="form-select" name="issuingCountry" >
-                    <option label="Select a country ... " disabled></option>
+                    <option label="PLEASE CHOOSE" disabled></option>
                     <optgroup id="country-optgroup-Africa" label="Africa">
                         <option value="DZ" label="Algeria">Algeria</option>
                         <option value="AO" label="Angola">Angola</option>
@@ -250,7 +250,7 @@
             <label class="form-label col-form-label col-md-1">Marital Status*</label>
             <div class="col-md-5">
                 <select class="form-select" name="maritialStatus">
-                    <option label="Select Marital Status" disabled selected></option>
+                    <option label="PLEASE CHOOSE" disabled selected></option>
                     <option value="1" label="Single">Single</option>
                     <option value="2" label="married">married</option>
                     <option value="3" label="windowed">windowed</option>
@@ -265,7 +265,7 @@
             <label class="form-label col-form-label col-md-1">Religion*</label>
             <div class="col-md-5">
                 <select class="form-select" name="religion" >
-                    <option label="PLEESE CHOOSE" selected="selected" disabled></option>
+                    <option label="PLEASE CHOOSE" selected="selected" disabled></option>
                     <option value="Islam" label="Islam">Islam</option>
                     <option value="Buddhist" label="Buddhist">Buddhist</option>
                     <option value="Christian" label="Christian">Christian</option>

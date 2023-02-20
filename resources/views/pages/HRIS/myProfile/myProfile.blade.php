@@ -124,7 +124,7 @@
                             </div>
                             {{-- new --}}
                             <div class="col-sm-3 part">
-                                <label for="idattach" class="form-label" style="color: red;">ID Attachment</label>
+                                <label for="idattach" class="form-label" >ID Attachment</label>
                                 <input type="file" class="form-control-file" id="">
                             </div> 
                         </div>
@@ -224,7 +224,7 @@
                                     <div class="col-sm-6 ">
                                         <div class="form-check form-switch align-right">
                                             <input class="form-check-input okuCheck" {{($profile->okuStatus ?? '') ? 'checked' : ''}} type="checkbox" name="okuStatus"  id="OKU">
-                                            <label class="form-label" for="OKU" style="color: red;">
+                                            <label class="form-label" for="OKU" >
                                                 OKU?
                                             </label>
                                         </div>
@@ -233,7 +233,7 @@
                                     <div class="row">
 
                                     <div class="col-sm-12 idnumber">
-                                        <label for="" class="form-label" style="color: red;">OKU Card Number*</label>
+                                        <label for="" class="form-label" >OKU Card Number*</label>
                                         <input type="text" value="" name="" id="okucard" class="form-control" readonly placeholder="OKU CARD NUMBER">
                                     </div>
                                 </div>
@@ -241,7 +241,7 @@
                                 </div>
                             </div>
                             <div class="col-sm-3 part">
-                                <label for="idattach" class="form-label" style="color: red;">OKU Attachment*</label>
+                                <label for="idattach" class="form-label" >OKU Attachment*</label>
                                 <input type="file" class="form-control-file" id="okuattach" style="pointer-events: none">
                             </div> 
                         </div>

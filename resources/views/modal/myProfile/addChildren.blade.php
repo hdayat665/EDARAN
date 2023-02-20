@@ -24,12 +24,12 @@
                         </div>
                         {{-- new --}}
                         <div class="col-md-3">
-                            <label for="" class="form-label" style="color: red;">Old Identification Number</label>
+                            <label for="" class="form-label" >Old Identification Number</label>
                             <input type="text" id="oldIdNumber"  name="oldIDNo" value="{{$profile->oldIDNo ?? ''}}"  class="form-control" style="text-transform:uppercase" placeholder="0000000">
                         </div>
                         {{-- new --}}
                         <div class="col-md-3">
-                            <label for="" class="form-label" style="color: red;">Birth of Certificate</label>
+                            <label for="" class="form-label" >Birth of Certificate</label>
                             <input type="file" id=""  name="" value=""  class="form-control">
                         </div>
                     </div>
@@ -56,7 +56,7 @@
                             <div class="row">
                                 {{-- new --}}
                                 <div class="col-sm-6">
-                                    <label for="dob" class="form-label" style="color: red;">ID Attachment</label>
+                                    <label for="dob" class="form-label" >ID Attachment</label>
                                     <input type="file" id="" name="" class="form-control" aria-describedby="">
                                 </div>
                             </div>
@@ -137,13 +137,13 @@
                                     <div class="form-check form-switch align-right">
                                         <input class="form-check-input okuCheck3" type="checkbox" id="nonCitizen1" name="nonCitizen1" {{($children->nonCitizen1 ?? '') ? 'checked' : ''}}>
                                        
-                                        <label class="form-check-label" for="citizen" style="color: red;">
+                                        <label class="form-check-label" for="citizen" >
                                             OKU?
                                         </label>
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
-                                    <label for="lastname" class="form-label" style="color: red;">OKU Card Number*</label>
+                                    <label for="lastname" class="form-label" >OKU Card Number*</label>
                                     <input type="text" id="okucard3" name=""  value="" class="form-control" aria-describedby="" placeholder="OKU CARD NUMBER" readonly>
                                 </div>
                             </div>
@@ -151,7 +151,7 @@
                         <div class="col-sm-6">
                             <div class="row">
                                 <div class="col-sm-6">
-                                    <label for="dob" class="form-label" style="color: red;">OKU Attachment*</label>
+                                    <label for="dob" class="form-label" >OKU Attachment*</label>
                                     <input type="file" id="okuattach3" name="" class="form-control" style="pointer-events: none" aria-describedby="">
                                 </div>
                             </div>
@@ -193,28 +193,28 @@
 
                     <div class="row p-2">
                         <div class="col-sm-6">
-                            <label for="address1" class="form-label" style="color: red;">Address 1*</label>
+                            <label for="address1" class="form-label" >Address 1*</label>
                             <input type="text" id="" name="" value="" class="form-control" aria-describedby="address1" placeholder="ADDRESS 1" style="text-transform:uppercase">
                         </div>
                         <div class="col-sm-6">
-                            <label for="address2" class="form-label" style="color: red;">Address 2</label>
+                            <label for="address2" class="form-label" >Address 2</label>
                             <input type="text" id="" name="" value="" class="form-control" aria-describedby="address2" placeholder="ADDRESS 2" style="text-transform:uppercase">
                         </div>
                     </div>
                     <div class="row p-2">
                         <div class="col-sm-6">
-                            <label for="lastname" class="form-label" style="color: red;">Postcode*</label>
+                            <label for="lastname" class="form-label" >Postcode*</label>
                             <input type="number" id="" name="" value="" class="form-control" style="text-transform:uppercase" placeholder="00000">
                         </div>
                         <div class="col-sm-6">
-                            <label for="firstname" class="form-label" style="color: red;">City*</label>
+                            <label for="firstname" class="form-label" >City*</label>
                             <input type="text" id="" name="" value="" class="form-control" style="text-transform:uppercase" placeholder="CITY">
                         </div>
                         
                     </div>
                     <div class="row p-2">
                         <div class="col-sm-6">
-                            <label for="state" class="form-label" style="color: red;">State*</label>
+                            <label for="state" class="form-label" >State*</label>
                             <select class="form-select" name="state" id="statecom" value="{{ $companion->state ?? '' }}" style="text-transform:uppercase" >
                                 <?php $state = state() ?>
                                 <option value="" label="PLEASE CHOOSE"  ></option>
@@ -224,7 +224,7 @@
                             </select>
                         </div>
                         <div class="col-sm-6">
-                            <label for="country" class="form-label" style="color: red;">Country*</label>
+                            <label for="country" class="form-label" >Country*</label>
                             <select class="form-select" name="country" id="countrycom" value="{{ $companion->country ?? '' }}" style="text-transform:uppercase" >
                                 <option value="MY" label="Malaysia" selected ></option>
                                 <optgroup id="country-optgroup-Americas" label="Americas">
@@ -280,11 +280,11 @@
                             <input type="text" id="fullName1" name="fullName" value=""  class="form-control" placeholder="FULL NAME" aria-describedby="fullname" readonly>
                         </div>
                         <div class="col-md-3">
-                            <label for="" class="form-label" style="color: red;">Old Identification Number</label>
+                            <label for="" class="form-label" >Old Identification Number</label>
                             <input type="text" id="" name="" value=""  class="form-control" aria-describedby="" placeholder="0000000" >
                         </div>
                         <div class="col-md-3">
-                            <label for="" class="form-label" style="color: red;">Birth of Certificate</label>
+                            <label for="" class="form-label" >Birth of Certificate</label>
                             <input type="text" id="" name="" value=""  class="form-control" aria-describedby="" >
                         </div>
                     </div>
@@ -309,7 +309,7 @@
                         <div class="col-sm-6">
                             <div class="row">
                                 <div class="col-sm-6">
-                                    <label for="" class="form-label" style="color: red;">ID Attachment</label>
+                                    <label for="" class="form-label" >ID Attachment</label>
                                     <input type="file" id="" name="" value="" class="form-control" aria-describedby="">
                                 </div>
                             </div>
@@ -383,13 +383,13 @@
                                 <div class="col-sm-6 ">
                                     <div class="form-check form-switch align-right">
                                         <input class="form-check-input okuCheck4" type="checkbox" id="" name="">
-                                        <label class="form-check-label" for="citizen" style="color: red;">
+                                        <label class="form-check-label" for="citizen" >
                                             OKU?
                                         </label>
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
-                                    <label for="lastname" class="form-label" style="color: red;">OKU Card Number*</label>
+                                    <label for="lastname" class="form-label" >OKU Card Number*</label>
                                     <input type="text" id="okucard4" name="" value="" class="form-control" readonly aria-describedby="" placeholder="OKU CARD NUMBER" >
                                 </div>
                             </div>
@@ -397,7 +397,7 @@
                         <div class="col-sm-6">
                             <div class="row">
                                 <div class="col-sm-6">
-                                    <label for="dob" class="form-label" style="color: red;">OKU Attachment*</label>
+                                    <label for="dob" class="form-label" >OKU Attachment*</label>
                                     <input type="file" id="okuattach4" name="" class="form-control" style="pointer-events: none" aria-describedby="">
                                 </div>
                             </div>
@@ -436,28 +436,28 @@
                     </div>
                     <div class="row p-2">
                         <div class="col-sm-6">
-                            <label for="address1" class="form-label" style="color: red;">Address 1*</label>
+                            <label for="address1" class="form-label" >Address 1*</label>
                             <input type="text" id="" name="" value="" class="form-control" aria-describedby="address1" placeholder="ADDRESS 1" style="text-transform:uppercase">
                         </div>
                         <div class="col-sm-6">
-                            <label for="address2" class="form-label" style="color: red;">Address 2</label>
+                            <label for="address2" class="form-label" >Address 2</label>
                             <input type="text" id="" name="" value="" class="form-control" aria-describedby="address2" placeholder="ADDRESS 2" style="text-transform:uppercase">
                         </div>
                     </div>
                     <div class="row p-2">
                         <div class="col-sm-6">
-                            <label for="lastname" class="form-label" style="color: red;">Postcode*</label>
+                            <label for="lastname" class="form-label" >Postcode*</label>
                             <input type="number" id="" name="" value="" class="form-control" placeholder="00000" style="text-transform:uppercase">
                         </div>
                         <div class="col-sm-6">
-                            <label for="firstname" class="form-label" style="color: red;">City*</label>
+                            <label for="firstname" class="form-label" >City*</label>
                             <input type="text" id="citycom" name="" value="" class="form-control" placeholder="CITY" style="text-transform:uppercase">
                         </div>
                         
                     </div>
                     <div class="row p-2">
                         <div class="col-sm-6">
-                            <label for="state" class="form-label" style="color: red;">State*</label>
+                            <label for="state" class="form-label" >State*</label>
                             <select class="form-select" name="" id="" value="{{ $companion->state ?? '' }}" style="text-transform:uppercase" >
                                 <?php $state = state() ?>
                                 <option value="" label="PLEASE CHOOSE"  ></option>
@@ -467,7 +467,7 @@
                             </select>
                         </div>
                         <div class="col-sm-6">
-                            <label for="country" class="form-label" style="color: red;">Country*</label>
+                            <label for="country" class="form-label" >Country*</label>
                             <select class="form-select" name="" id="countrycom" value="{{ $companion->country ?? '' }}" style="text-transform:uppercase" >
                                 <option value="MY" label="Malaysia" selected ></option>
                                 <optgroup id="country-optgroup-Americas" label="Americas">
@@ -520,11 +520,11 @@
                             <input type="text" id="fullName" name="fullName" value=""  class="form-control" placeholder="FULL NAME" aria-describedby="fullname" readonly>
                         </div>
                         <div class="col-md-3">
-                            <label for="" class="form-label" style="color: red;">Old Identification Number</label>
+                            <label for="" class="form-label" >Old Identification Number</label>
                             <input type="text" id="" name="" value=""  class="form-control" aria-describedby="" placeholder="0000000" readonly>
                         </div>
                         <div class="col-md-3">
-                            <label for="" class="form-label" style="color: red;">Birth Of Certificate</label>
+                            <label for="" class="form-label" >Birth Of Certificate</label>
                             <input type="text" id="" name="" value=""  class="form-control" aria-describedby="" readonly>
                         </div>
                     </div>
@@ -549,7 +549,7 @@
                         <div class="col-sm-6">
                             <div class="row">
                                 <div class="col-sm-6">
-                                    <label for="lastname" class="form-label" style="color: red;">ID Attachment</label>
+                                    <label for="lastname" class="form-label" >ID Attachment</label>
                                     <input type="file" id="" name="" value="" class="form-control" aria-describedby="" readonly>
                                 </div>
                             </div>
@@ -620,13 +620,13 @@
                                     <div class="form-check form-switch align-right">
                                     <!-- <input class="form-check-input partCheck" value="door3" type="checkbox" name="nonNetizen" {{($profile->nonNetizen ?? '') ? 'checked' : ''}} id="citizen"> -->
                                         <input class="form-check-input partCheck4" value="" type="checkbox" name=""  id="citizen">
-                                        <label class="form-check-label" for="citizen" style="color: red;">
+                                        <label class="form-check-label" for="citizen" >
                                            OKU
                                         </label>
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
-                                    <label for="lastname" class="form-label" style="color: red;">OKU Card Number*</label>
+                                    <label for="lastname" class="form-label" >OKU Card Number*</label>
                                     <input type="number" id="" name="" value="" class="form-control" readonly placeholder="OKU CARD NUMBER">
                                     
                                 </div>
@@ -635,7 +635,7 @@
                         <div class="col-sm-6">
                             <div class="row">
                                 <div class="col-sm-6">
-                                    <label for="dob" class="form-label" style="color: red;">OKU Attachment*</label>
+                                    <label for="dob" class="form-label" >OKU Attachment*</label>
                                     <input type="file" id="" name="" class="form-control" aria-describedby="">
                                 </div>
                             </div>
@@ -674,28 +674,28 @@
                     </div>
                     <div class="row p-2">
                         <div class="col-sm-6">
-                            <label for="address1" class="form-label" style="color: red;">Address 1*</label>
+                            <label for="address1" class="form-label" >Address 1*</label>
                             <input type="text" id="" name="" value="" class="form-control" aria-describedby="" placeholder=" ADDRESS 1" readonly style="text-transform:uppercase">
                         </div>
                         <div class="col-sm-6">
-                            <label for="address2" class="form-label" style="color: red;">Address 2</label>
+                            <label for="address2" class="form-label" >Address 2</label>
                             <input type="text" id="" name="" value="" class="form-control" aria-describedby="" placeholder="ADDRESS 2" readonly style="text-transform:uppercase">
                         </div>
                     </div>
                     <div class="row p-2">
                          <div class="col-sm-6">
-                            <label for="" class="form-label" style="color: red;">Postcode*</label>
+                            <label for="" class="form-label" >Postcode*</label>
                             <input type="number" id="" name="" value="" class="form-control" readonly placeholder="00000" style="text-transform:uppercase">
                         </div>
                         <div class="col-sm-6">
-                            <label for="" class="form-label" style="color: red;">City*</label>
+                            <label for="" class="form-label" >City*</label>
                             <input type="text" id="" name="citycom" value="" class="form-control" placeholder="CITY" readonly style="text-transform:uppercase">
                         </div>
                        
                     </div>
                     <div class="row p-2">
                         <div class="col-sm-6">
-                            <label for="state" class="form-label" style="color: red;">State*</label>
+                            <label for="state" class="form-label" >State*</label>
                             <select class="form-select" name="state" id="" value="{{ $companion->state ?? '' }}"  style="pointer-events: none;" >
                                 <?php $state = state() ?>
                                 <option value="" label="PLEASE CHOOSE"  ></option>
@@ -705,7 +705,7 @@
                             </select>
                         </div>
                         <div class="col-sm-6">
-                            <label for="country" class="form-label" style="color: red;">Country*</label>
+                            <label for="country" class="form-label" >Country*</label>
                             <select class="form-select" name="country" id="" value="{{ $companion->country ?? '' }}"  style="pointer-events: none;" >
                                 <option value="MY" label="Malaysia" selected ></option>
                                 <optgroup id="country-optgroup-Americas" label="Americas">

@@ -113,7 +113,7 @@
                                                 <div class="row p-2">
                                                     <div class="col-sm-6">
                                                         <label for="username" class="form-label">Username*</label>
-                                                        <input type="text" id="username" name="username" value="{{$username ?? ''}}" class="form-control" aria-describedby="username">
+                                                        <input type="text" id="username" name="username" value="{{$username ?? ''}}" class="form-control" readonly aria-describedby="username">
                                                         <div class="form-text">
                                                             Cannot change the username of the admin.
                                                         </div>
@@ -260,7 +260,7 @@
                                                             <div class="col-sm-6 ">
                                                                 <div class="form-check form-switch align-right">
                                                                     <input class="form-check-input okuCheck" value="" type="checkbox" name=""  id="">
-                                                                    <label class="form-label" for="OKU" style="color: red;">
+                                                                    <label class="form-label" for="OKU" >
                                                                         OKU?
                                                                     </label>
                                                                 </div>
@@ -269,7 +269,7 @@
                                                             <div class="row">
                         
                                                             <div class="col-sm-12 idnumber">
-                                                                <label for="" class="form-label" style="color: red;">OKU Card Number*</label>
+                                                                <label for="" class="form-label" >OKU Card Number*</label>
                                                                 <input type="text" value="" name="" id="okucard" class="form-control" readonly placeholder="OKU CARD NUMBER">
                                                             </div>
                                                         </div>
@@ -277,7 +277,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="col-sm-3 part">
-                                                        <label for="idattach" class="form-label" style="color: red;">OKU Attachment</label>
+                                                        <label for="idattach" class="form-label" >OKU Attachment</label>
                                                         <input type="file" class="form-control-file" id="okuattach" style="pointer-events: none">
                                                     </div> 
                                                 </div>

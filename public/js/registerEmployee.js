@@ -173,9 +173,30 @@ $(document).ready(function() {
         }
       });
     
+    //   $.validator.addMethod("noSpecialChars", function(value, element) {
+    //     return this.optional(element) || /^[A-Za-z0-9!@#$%^&*()\-_+={}[\]\\|<>"'\/~`,.;: ]*$/.test(value);
+    // }, "Special Characters, Spaces, and Alphabet Characters Are Not Allowed.");      
+
     $.validator.addMethod("noSpecialChars", function(value, element) {
-        return this.optional(element) || /^[^A-Za-z!@#$%^&*()\-_+={}[\]\\|<>"'\/~`,.;: ]*$/.test(value);
-    }, "Special Characters, Spaces, and Alphabet Characters Are Not Allowed.");      
+        return this.optional(element) || /^[A-Za-z0-9\s]*$/.test(value);
+    }, "Special Characters and Spaces Are Not Allowed");
+
+    $(function() {
+            $("#empId").on("input", function() {
+                var sanitized = $(this).val().replace(/[~!@#$%^&*()_+{}|:"<>?`\-=[\]\\;',./\s]/g, '');
+                $(this).val(sanitized);
+            });
+    });
+    $.validator.addMethod("noSpecialChars", function(value, element) {
+        return this.optional(element) || /^[A-Za-z0-9\s]*$/.test(value);
+    }, "Special Characters and Spaces Are Not Allowed");
+
+    $(function() {
+            $("#uId").on("input", function() {
+                var sanitized = $(this).val().replace(/[~!@#$%^&*()_+{}|:"<>?`\-=[\]\\;',./\s]/g, '');
+                $(this).val(sanitized);
+            });
+    });
     $.validator.addMethod("email", function(value, element) {
         // Email validation regex pattern
         return this.optional(element) || /^[^\s@]+@[^\s@]+\.(?:com|net|org|edu|gov|mil|biz|info|name|museum|coop|aero|[a-z]{2})$/.test(value);

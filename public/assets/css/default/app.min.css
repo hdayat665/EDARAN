@@ -17649,6 +17649,14 @@ a:focus {
     position: relative
 }
 
+/* HIGHLIGHT MENU LINK */
+.app-sidebar .menu .menu-item .menu-link:focus,
+.app-sidebar .menu .menu-item .menu-link:hover {
+    background: #efeff0;
+    transition: 0.3s ease;
+    color: var(--app-sidebar-component-color)
+}
+
 .app-sidebar .menu .menu-item .menu-link {
     padding: 7px 20px;
     line-height: 20px;
@@ -17685,13 +17693,6 @@ a:focus {
 
 .app-gradient-enabled .app-sidebar .menu .menu-item .menu-link .menu-label {
     background-image: var(--bs-gradient)
-}
-
-.app-sidebar .menu .menu-item .menu-link:focus,
-.app-sidebar .menu .menu-item .menu-link:hover {
-    background: #efeff0;
-    transition: 0.3s ease;
-    color: var(--app-sidebar-component-color)
 }
 
 .app-sidebar .menu .menu-item .menu-icon {

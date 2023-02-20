@@ -562,6 +562,7 @@ class ProjectService
             ->leftJoin('department as c', 'e.department', '=', 'c.id')
             ->select('a.*', 'b.project_name', 'b.project_code', 'd.customer_name', 'c.departmentName', 'e.employeeName', 'e.employeeId', 'e.workingEmail')
             ->where($cond)
+            ->orderBy('id', 'desc')
             ->get();
 
         if (!$data) {
@@ -752,7 +753,7 @@ class ProjectService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success ' . $status . ' Project Member';
+        $data['msg'] = 'Success ' . $status . ' Project Request';
 
         return $data;
     }
