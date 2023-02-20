@@ -793,13 +793,15 @@ if (!function_exists('accManager')) {
     function accManager()
     {
         $data = DB::table('project as a')
-            ->leftJoin('userProfile as b', 'a.acc_manager', '=', 'b.user_id')
-            ->select('b.id', 'b.fullName as name')
+            ->leftJoin('employment as b', 'a.acc_manager', '=', 'b.id')
+            ->select('b.id', 'b.employeeName as name')
             ->groupBy('acc_manager')
             // ->whereNotIn('a.id', $projectId)
             ->where('a.tenant_id', Auth::user()->tenant_id)
             ->get();
-        if (!$data) {
+
+            
+        if (!$data) { 
             $data = [];
         }
 
@@ -811,8 +813,8 @@ if (!function_exists('prjManager')) {
     function prjManager()
     {
         $data = DB::table('project as a')
-            ->leftJoin('userProfile as b', 'a.project_manager', '=', 'b.user_id')
-            ->select('b.id', 'b.fullName as name')
+            ->leftJoin('employment as b', 'a.project_manager', '=', 'b.id')
+            ->select('b.id', 'b.employeeName as name')
             ->groupBy('project_manager')
             // ->whereNotIn('a.id', $projectId)
             ->where('a.tenant_id', Auth::user()->tenant_id)
