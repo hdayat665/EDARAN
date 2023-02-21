@@ -20,9 +20,12 @@
                 @foreach ($projectLocations as $projectLocation )
                 <tr>
                     <td width="6%">
-                        <a href="javascript:;"data-bs-toggle="modal" id="editProjectLocationButton" data-id="{{$projectLocation->id}}" class="btn btn-primary"><i class="fa fa-cogs"></i> Edit</a>
-                        </a>
-                        <a href="javascript:;" id="deleteProjectLocationButton" data-id="{{$projectLocation->id}}" class="btn btn-outline-danger"><i class="fa fa-trash"></i></a></td>
+                        <a href="#" data-bs-toggle="dropdown" class="btn btn-primary btn-sm dropdown-toggle"></i> Actions <i class="fa fa-caret-down"></i></a>
+                        <div class="dropdown-menu">
+                        <a href="javascript:;"data-bs-toggle="modal" id="editProjectLocationButton" data-id="{{$projectLocation->id}}" class="dropdown-item">Edit</a>                        
+                        <div class="dropdown-divider"></div>
+                        <a href="javascript:;" id="deleteProjectLocationButton" data-id="{{$projectLocation->id}}" class="dropdown-item"> Delete </a>
+                    </td>
                     <td>{{$projectLocation->location_name}}</td>
                     <td>{{$projectLocation->address}}</td>
                     <td><a href="https://www.google.com/maps/{{$projectLocation->location_google}}">https://www.google.com/maps/{{$projectLocation->location_google}}</a></td>

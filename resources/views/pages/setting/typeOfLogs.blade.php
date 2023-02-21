@@ -32,9 +32,15 @@
                         <td >{{$data->departmentName}}</td>
                         <td >{{$data->type_of_log}}</td>
                         <td >{{$data->project_name}}</td>
-                        <td ><a href="javascript:;" data-bs-toggle="modal" id="listActivityNames" data-id="{{$data->id}}">click here</a></td>
+                        <td >
+                            <a href="javascript:;" data-bs-toggle="modal" id="listActivityNames" data-id="{{$data->id}}">click here</a></td>
                         {{-- <td>1. Corrective Maintenance, <br> 2. Reviewing & Documenting, <br>3. Reporting </td> --}}
-                        <td><a href="javascript:;" data-bs-toggle="modal" id="editButton" data-id="{{$data->id}}" data-bs-target="#exampleModaledit" class="btn btn-outline-green"><i class="fa fa-pencil-alt"></i></a> <a href="javascript:;" id="deleteButton" data-id="{{$data->id}}" class="btn btn-outline-danger"><i class="fa fa-trash"></i></a></td>
+                        <td>
+                            <a href="#" data-bs-toggle="dropdown" class="btn btn-primary btn-sm dropdown-toggle"></i> Actions <i class="fa fa-caret-down"></i></a>
+                            <div class="dropdown-menu">
+                            <a href="javascript:;" id="editButton" data-id="{{$data->id}}" data-bs-target="#exampleModaledit" class="dropdown-item"> Edit</a>
+                            <div class="dropdown-divider"></div>
+                            <a href="javascript:;" id="deleteButton" data-id="{{$data->id}}" class="dropdown-item"> Delete</a>
                     </tr>
                     @endforeach
                     @endif

@@ -113,7 +113,7 @@
         <div class="row p-2">
             <div class="col-sm-6">
                 <label for="postcode" class="form-label">Postcode*</label>
-                <input type="text" id="postcode" name="" value="" class="form-control" placeholder="POSTCODE" aria-describedby="00000">
+                <input type="text" id="postcode" name="" value="" class="form-control" placeholder="00000" aria-describedby="00000">
             </div>
             <div class="col-sm-6">
                 <label for="city" class="form-label">City*</label>

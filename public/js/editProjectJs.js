@@ -176,15 +176,36 @@ $(document).ready(function() {
         });
     });
      
-
-    $("#data-table-default2").DataTable({
-        responsive: false,
-        lengthMenu: [
+    $(document).ready(function() {
+        var general = $("#data-table-default2").DataTable({
+          responsive: false,
+          lengthMenu: [
             [5, 10, 25, 50, -1],
             [5, 10, 25, 50, "All"],
-        ],
-        scrollX:true,
-    });
+          ],
+          order: [], // Disable sorting
+          drawCallback: function(settings) {
+            // Apply scrollX after the table is fully rendered
+            requestAnimationFrame(function() {
+              $("#data-table-default2").DataTable().columns.adjust().draw();
+            });
+          },
+          columnDefs: [
+            {
+              targets: "_all",
+              orderable: false,
+            },
+          ],
+        });
+      
+        $("#default-tab-2").on("click", function() {
+          requestAnimationFrame(function() {
+            general.columns.adjust().draw();
+          });
+        });
+      });
+
+   
 
     var hash = location.hash.replace(/^#/, '');  // ^ means starting, meaning only match the first hash
     if (hash) {

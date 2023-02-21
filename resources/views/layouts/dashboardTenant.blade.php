@@ -160,13 +160,18 @@
                 </div>
 
                 <div class="navbar-item navbar-user dropdown">
-                    <a href="#" class="navbar-link dropdown-toggle d-flex align-items-center" data-bs-toggle="dropdown">
-                        <img src="/assets/img/user/user-13.jpg" alt="" />
-                        <span>
-                            <span class="d-none d-md-inline">Admin</span>
-                            <b class="caret"></b>
-                        </span>
-                    </a>
+                    <?php if(Auth::check()): ?>
+                        <a href="#" class="navbar-link dropdown-toggle d-flex align-items-center" data-bs-toggle="dropdown">
+                            <img src="/assets/img/user/user-13.jpg" alt="" />
+                            <span>
+                                <span class="d-none d-md-inline">
+                                    <?php echo Auth::user()->username; ?> <!-- Display username here -->
+                                </span>
+                                <b class="caret"></b>
+                            </span>
+                        </a>
+                    <?php endif; ?>
+
                     <div class="dropdown-menu dropdown-menu-end me-1">
                         <a href="javascript:;" class="dropdown-item">Edit Profile</a>
                         <a href="javascript:;" class="dropdown-item d-flex align-items-center">
@@ -210,7 +215,7 @@
                             <div class="menu-icon">
                                 <i class="fa fa-commenting text-gray"></i>
                             </div>
-                            <div class="menu-text text-gray active">HRIS</div>
+                            <div class="menu-text text-gray">HRIS</div>
                             <div class="menu-caret text-gray"></div>
                         </a>
                         <div class="menu-submenu">
@@ -994,27 +999,37 @@
 </script>
 
 <script>
-    $(function() {
-        $('.highlight').each(function() {
-            if ($(this).prop('href') === window.location.href) {
-                $(this).parents().addClass('active');
-                $(this).css({
-                    "background": "linear-gradient(to left,#ececec 0, #ececec 66%, #ececec 100%)",
-                    "border-radius": "50px",
-                });
-            }
-        })
-    });
-</script>
+    // $(function() {
+    //     $('.menu-link').each(function() {
+    //         if ($(this).prop('href') === window.location.href ) {
+    //             $(this).parents().addClass('active');
+    //             $(this).css({
+    //                 "background": "linear-gradient(to left,#ececec 0, #ececec 66%, #ececec 100%)",
+    //                 "border-radius": "50px",
+    //             });
+    //         }
+    //     })
+    // });
 
-<!-- <script>
-    $(document).ready(function() {
-        $('.menu-item').click(function() {
-            $(this).next('.menu-submenu').slideToogle();
-            $(this).find('manu-caret').toggleClass('rotate');
-        });
+$(function() {
+    $('.menu-link').each(function() {
+        if ($(this).prop('href') === window.location.href ) {
+            $(this).parents().addClass('active');
+            $(this).css({
+                "background": "linear-gradient(to left,#ececec 0, #ececec 66%, #ececec 100%)",
+                "border-radius": "50px",
+            });
+            // add active class to the submenu
+            $(this).parent().siblings('.menu-submenu').addClass('active');
+        }
     });
-</script> -->
+    // // expand the active submenu on page load
+    // $('.menu-submenu.active').css('display', 'block');
+});
+
+
+
+</script>
 
 <script src="/assets/js/require.js" data-main="controller"></script>
 

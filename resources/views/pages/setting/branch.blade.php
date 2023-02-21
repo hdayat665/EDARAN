@@ -67,7 +67,13 @@
                         <td>{{$branch->created_at}}</td>
                         <td>{{$branch->modifiedBy}}</td>
                         <td>{{$branch->modified_at}}</td>
-                        <td><a href="javascript:;" data-toggle="modal" data-bs-toggle="modal" id="editButton" data-id="{{$branch->id}}" class="btn btn-outline-green" ><i class="fa fa-pencil-alt"></i></a> <a id="deleteButton" data-id="{{$branch->id}}" class="btn btn-outline-danger"><i class="fa fa-trash"></i></a></td>
+                        <td>
+                            <a href="#" data-bs-toggle="dropdown" class="btn btn-primary btn-sm dropdown-toggle"></i> Actions <i class="fa fa-caret-down"></i></a>
+                            <div class="dropdown-menu">
+                            <a href="javascript:;" id="editButton" data-id="{{$branch->id}}" class="dropdown-item"> Edit</a>
+                            <div class="dropdown-divider"></div>
+                            <a id="deleteButton" data-id="{{$branch->id}}" class="dropdown-item"> Edit</a>
+                        </td>
                     </tr>
                     @endforeach
                     @endif
