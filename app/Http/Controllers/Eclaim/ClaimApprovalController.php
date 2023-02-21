@@ -322,6 +322,16 @@ class ClaimApprovalController extends Controller
         return response()->json($data);
     }
 
+    public function createPvNumberCa($id = '')
+    {
+        $msc = new ClaimApprovalService;
+
+        $data = $msc->createPvNumberCa($id);
+
+        return response()->json($data);
+    }
+
+
     public function cashAdvanceApproverView()
     {
         $mcs = new ClaimApprovalService;
@@ -465,5 +475,23 @@ class ClaimApprovalController extends Controller
         }
 
         return view('pages.eclaim.claimApproval.cashAdvance.finance.recommender.' . $view, $data);
+    }
+
+    public function createChequeNumber(Request $r, $id = '')
+    {
+        $msc = new ClaimApprovalService;
+
+        $data = $msc->createChequeNumber($r, $id);
+
+        return response()->json($data);
+    }
+
+    public function createChequeNumberCa(Request $r, $id = '')
+    {
+        $msc = new ClaimApprovalService;
+
+        $data = $msc->createChequeNumberCa($r, $id);
+
+        return response()->json($data);
     }
 }

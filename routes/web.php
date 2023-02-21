@@ -120,6 +120,11 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('/cashAdvanceFrecommenderView', 'cashAdvanceFrecommenderView');
             Route::get('/cashAdvanceFapproverView', 'cashAdvanceFapproverView');
 
+            Route::post('/createChequeNumberCa/{id}', 'createChequeNumberCa');
+            Route::post('/createPvNumberCa/{id}', 'createPvNumberCa');
+
+
+
 
 
 
