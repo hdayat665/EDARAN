@@ -25,6 +25,7 @@ use App\Models\TypeOfLogs;
 use App\Models\Unit;
 use App\Models\leaveEntitlementModel;
 use App\Models\UserProfile;
+use App\Models\Userrole;
 use App\Models\holidayModel;
 use App\Models\leavetypesModel;
 use Illuminate\Support\Facades\Auth;
@@ -65,24 +66,40 @@ class SettingService
     }
 
     public function updateRole($r, $id)
-    {
-        $input = $r->input();
+{
+    $data1 = Auth::user()->username;
+    $data2 = date('Y-m-d h:m:s');
 
-        $user = Auth::user();
-        unset($input['id']);
+    $updateData = [
+        'modifiedBy' => $data1,
+        'modifiedTime' => $data2
+    ];
 
-        $input['modifiedBy'] = $user->username;
-        $input['modifiedTime'] = date('Y-m-d h:m:s');
+    Role::where('id', $id)->update($updateData);
 
-        Role::where('id', $id)->update($input);
+    if($r->input('userName')){
+        $data1 = $r->input('userName');
+        $data2 = date('Y-m-d h:m:s');
 
-        $data['status'] = config('app.response.success.status');
-        $data['type'] = config('app.response.success.type');
-        $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success Update Role';
+        $insertData = [
+            'tenant_id' => Auth::user()->tenant_id,
+            'up_user_id' => $data1,
+            'added_by' => Auth::user()->id,
+            'added_time' => $data2,
+            'modified_by' => '',
+            'modified_time' => ''
+        ];
 
-        return $data;
+        UserRole::create($insertData);
     }
+
+    $data['status'] = config('app.response.success.status');
+    $data['type'] = config('app.response.success.type');
+    $data['title'] = config('app.response.success.title');
+    $data['msg'] = 'Success Update Role';
+
+    return $data;
+}
 
     public function deleteRole($id)
     {
@@ -948,7 +965,29 @@ class SettingService
 
     public function roleView()
     {
-        $data['roles'] = Role::where('tenant_id', Auth::user()->tenant_id)->orderBy('id', 'desc')->get();
+        $data = Role::where('tenant_id', Auth::user()->tenant_id)->orderBy('id', 'desc')->get();
+
+        return $data;
+    }
+    public function myrolestaff()
+    {
+        $data = 
+         UserProfile::where('userprofile.tenant_id', Auth::user()->tenant_id)
+            ->leftJoin('employment', 'userprofile.user_id', '=', 'employment.user_id')
+            ->leftJoin('department', 'employment.department', '=', 'department.id')
+            ->select('userprofile.user_id', 'userprofile.fullname', 'department.departmentName')
+            ->get();
+
+        return $data;
+    }
+    public function listuserrole()
+    {
+        $data = UserRole::where('role_user.tenant_id', Auth::user()->tenant_id)
+            ->leftJoin('userprofile', 'role_user.up_user_id', '=', 'userprofile.user_id')
+            ->leftJoin('users as au', 'role_user.added_by', '=', 'au.id')
+            ->leftJoin('users as mu', 'role_user.modified_by', '=', 'mu.id')
+            ->select('role_user.*', 'userprofile.fullname', 'au.username as username1', 'mu.username as username2')
+            ->get();
 
         return $data;
     }
