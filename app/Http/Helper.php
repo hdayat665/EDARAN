@@ -776,11 +776,51 @@ if (!function_exists('getEmployeeNotInProject')) {
     }
 }
 
-
 if (!function_exists('getEmployeeexcept')) {
-    function getEmployeeexcept($id = '')
-    {
-        $data = Employee::where([['tenant_id', Auth::user()->tenant_id], ['employeeid', '!=', null], ['jobGrade', $id]])->get();
+    function getEmployeeexcept()
+    {   
+        
+        $data = DB::table('employment')
+        ->join(DB::raw('(SELECT recommender FROM approval_role_general ORDER BY id DESC LIMIT 1) AS ar'), 'employment.jobGrade', '=', 'ar.recommender')
+        ->select('employment.*', 'ar.recommender')
+        ->where([['tenant_id', Auth::user()->tenant_id]])
+        ->get();
+
+
+        if (!$data) {
+            $data = [];
+        }
+
+        return $data;
+    }
+}
+if (!function_exists('getEmployeerecommender')) {
+    function getEmployeerecommender()
+    {   
+        
+        $data = DB::table('employment')
+        ->join(DB::raw('(SELECT recommender FROM approval_role_general ORDER BY id DESC LIMIT 1) AS ar'), 'employment.jobGrade', '=', 'ar.recommender')
+        ->select('employment.*', 'ar.recommender')
+        ->where([['tenant_id', Auth::user()->tenant_id]])
+        ->get();
+
+
+        if (!$data) {
+            $data = [];
+        }
+
+        return $data;
+    }
+}
+if (!function_exists('getEmployeeapprover')) {
+    function getEmployeeapprover()
+    {   
+        
+        $data = DB::table('employment')
+        ->join(DB::raw('(SELECT approver FROM approval_role_general ORDER BY id DESC LIMIT 1) AS ar'), 'employment.jobGrade', '=', 'ar.approver')
+        ->select('employment.*', 'ar.approver')
+        ->where([['tenant_id', Auth::user()->tenant_id]])
+        ->get();
 
         if (!$data) {
             $data = [];
@@ -926,18 +966,18 @@ if (!function_exists('month')) {
     function month($id = '')
     {
         $data = [
-            '01' => 'JANUARY',
-            '02' => 'FEBRUARY',
-            '03' => 'MARCH',
-            '04' => 'APRIL',
-            '05' => 'MAY',
-            '06' => 'JUNE',
-            '07' => 'JULY',
-            '08' => 'AUGUST',
-            '09' => 'SEPTEMBER',
-            '10' => 'OCTOBER',
-            '11' => 'NOVEMBER',
-            '12' => 'DECEMBER',
+            '01' => 'January',
+            '02' => 'February',
+            '03' => 'March',
+            '04' => 'April',
+            '05' => 'May',
+            '06' => 'June',
+            '07' => 'July',
+            '08' => 'August',
+            '09' => 'September',
+            '10' => 'October',
+            '11' => 'November',
+            '12' => 'December',
         ];
 
         if ($id) {

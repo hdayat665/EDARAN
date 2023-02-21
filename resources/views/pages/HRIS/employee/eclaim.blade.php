@@ -35,7 +35,7 @@
                                                         <div class="mb-3">
                                                             <label for="holiday_title" class="form-label">Recommender </label>
                                                             <select class="form-select" name="eclaimrecommender">
-                                                                <?php $employees = getEmployeeexcept(); ?> 
+                                                                <?php $employees = getEmployeerecommender(); ?>  
                                                                 <option value="" label="PLEASE CHOOSE"></option>
                                                                 @foreach ($employees as $employee)
                                                                     <option value="{{ $employee->user_id }}" label="{{ $employee->employeeName }}"
@@ -51,7 +51,7 @@
                                                         <div class="mb-3">
                                                             <label for="holiday_title" class="form-label">Approver </label>
                                                             <select class="form-select" name="eclaimapprover" >
-                                                                <?php $employees = getEmployeeexcept(); ?>
+                                                                <?php $employees = getEmployeeapprover(); ?>
                                                                 <option value="" label="PLEASE CHOOSE"></option>
                                                                 @foreach ($employees as $employee)
                                                                     <option value="{{ $employee->user_id }}" label="{{ $employee->employeeName }}"
