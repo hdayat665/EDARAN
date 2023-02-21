@@ -1119,6 +1119,7 @@ class SettingService
             ->leftJoin('department as d', 'a.department', '=', 'd.id')
             ->select('a.*', 'b.project_name', 'd.departmentName')
             ->where('a.tenant_id', Auth::user()->tenant_id)
+            ->orderBy('a.id', 'desc')
             ->get();
         // pr($data);
         return $data;
