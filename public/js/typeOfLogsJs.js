@@ -263,7 +263,7 @@ $(document).ready(function() {
     });
 
     $(document).on('change', "#addtypeoflog", function() {
-        if ($(this).val() == "Project") {
+        if ($(this).val() == "PROJECT") {
             $("#addtypeoflogproject").show();
         } else {
             $("#addtypeoflogproject").hide();
@@ -272,7 +272,7 @@ $(document).ready(function() {
         }
     });
     $(document).on('change', "#addtypeoflogedit", function() {
-        if ($(this).val() == "Project") {
+        if ($(this).val() == "PROJECT") {
             $("#addtypeoflogprojectedit").show();
         } else {
             $("#addtypeoflogprojectedit").hide();

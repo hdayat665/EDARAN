@@ -953,6 +953,22 @@ if (!function_exists('activityName')) {
     }
 }
 
+// if (!function_exists('activityName1')) {
+//     function activityName1($departmentId = '', $logsid = '')
+//     {
+//         $cond[1] = ['tenant_id', Auth::user()->tenant_id];
+//         // $cond[1] = ['tenant_id', ];
+//         $cond[2] = ['department', $departmentId];
+//         $data = ActivityLogs::where($cond)->get();
+//         if (!$data) {
+//             $data = [];
+//         }
+
+//         return $data;
+//     }
+    
+// }
+
 if (!function_exists('getEventTimesheet')) {
     function getEventTimesheet()
     {

@@ -42,7 +42,7 @@
                         <td >{{$data->type_of_log ? $data->type_of_log : '-'}}</td>
                         <td >{{$data->project_name ? $data->project_name : '-'}}</td>
                         <td >
-                            <a href="javascript:;" data-bs-toggle="modal" id="listActivityNames" data-id="{{$data->id}}">click here</a></td>
+                            <a href="javascript:;" data-bs-toggle="modal" id="listActivityNames" data-id="{{$data->id}}">CLICK HERE</a></td>
                         {{-- <td>1. Corrective Maintenance, <br> 2. Reviewing & Documenting, <br>3. Reporting </td> --}}
                         
                     </tr>
@@ -53,7 +53,7 @@
         </div>
         <div class="row p-2">
                 <div class="col align-self-start">
-                    <a href="" class="btn btn-light" style="color: black;" type="submit"><i class="fa fa-arrow-left"></i> Back</a>
+                    <a href="/setting" class="btn btn-light" style="color: black;" type="submit"><i class="fa fa-arrow-left"></i> Back</a>
                 </div>
             </div>
     </div>
