@@ -297,7 +297,9 @@
                     <a class="btn btn-secondary" style="color: black" type="submit"> Cancel</a> &nbsp;
                     <a href="javascript:;" class="btn btn-warning" style="color: black" data-bs-toggle="modal" data-bs-target="#modalamend">Amend</a> &nbsp;
                     <a href="javascript:;" class="btn btn-danger" style="color: black" data-bs-toggle="modal" data-bs-target="#modalreject"> Reject</a> &nbsp;
-                    <a class="btn btn-lime" id="approveButton" data-id="{{ $ca->id }}" style="color: black" type="submit"> Approve</a>
+                    @if ($ca->f1 == 'check' && $ca->f2 == 'check' && ($ca->f2 == 'check' && $ca->f3 == 'check') && ($ca->f1 == 'check' && $ca->f3 == 'check') && $check == 'f1')
+                        <a class="btn btn-lime" style="color: black" type="submit"> Approve</a>
+                    @endif
                 </div>
             </div>
         </div>
