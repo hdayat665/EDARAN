@@ -68,8 +68,8 @@
                     </div>
                     
                     
-                    <div class="row p-2" id="activity_locationadd" style="display: none" >
-                        <div class="col-sm-6" id="activityByProjectHide">
+                    <div class="row p-2" id="activity_locationadd">
+                        <div class="col-sm-6" id="activityByProjectHide" style="display: none">
                             <label for="issuing-country" class="form-label">Activity Name*</label>
                             <select class="form-select" id="activity_names" name="activity_name">
                                 <option class="form-label" value="">Please Choose</option>
@@ -85,7 +85,7 @@
 
                             </select>
                         </div>
-                        <div class="col-sm-6" id="locationByProjectHide">
+                        <div class="col-sm-6" id="locationByProjectHide" style="display: none"> 
                             <label for="issuing-country" class="form-label">Project Location*</label>
                             <select class="selectpicker form-select" id="projectlocsearch" name="project_location" aria-label="Default select example">
                                 <option value="" selected>Please Choose</option>
