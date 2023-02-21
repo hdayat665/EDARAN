@@ -236,7 +236,7 @@
                             </li>
 
                         </ul>
-                        <form id="updateRoleForm">
+                    <form id="updateRoleForm">
                         <div class="tab-content panel m-0 rounded-0 p-3">
                             <!-- BEGIN tab-pane -->
                             <div class="tab-pane fade active show" id="default-tab-4">
@@ -288,17 +288,22 @@
 
                             <div class="tab-pane fade" id="default-tab-6">
                                 {{-- <blockquote class="blockquote"> --}}
-
-                                          
-                                          <select class="selectpicker form-control" id="multi" multiple>
-                                            {{-- <option class="form-label" value="">Select Employee Name</option> --}}
-                                            <option value="1" selected>Syakir</option>
-                                            <option value="2" selected>Marwar</option>
-                                            <option value="3">Zulfazli</option>
-                                            <option value="4">Sariza Ibrahim</option>
-                                            <option value="5">Zuliana</option>
-                                          </select>
-                                       
+                                <br>
+                                   <div class="col-md-9">
+                                        <div class="mb-2">
+                                            <label for="lapsed date" class="form-label">Employee Name: </label>
+                                            {{-- <input type="text" class="form-control col-sm-2" name="employerName"> --}}
+                                            <select class="form-select" name="userName" id="userName">
+                                                <option value="" label="PLEASE CHOOSE"></option>
+                                                @foreach($rolestaff as $rs)
+                                                    <option value="{{ $rs->user_id }}" {{ old('userName') == $rs->user_id ? 'selected' : '' }}>{{ $rs->fullname }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+							        </div>
+                                <br>
+                                <br>
+                                <br>
                                 {{-- </blockquote> --}}
                                 <div class="row p-2">
                                     <table id="" class="table table-striped table-bordered align-middle">
@@ -310,40 +315,34 @@
                                                 <th class="text-nowrap">Added Time</th>
                                                 <th class="text-nowrap">Modified By</th>
                                                 <th class="text-nowrap">Modified Time</th>
-                                                <th class="text-nowrap">Action</th>
+                                                {{-- <th class="text-nowrap">Action</th> --}}
                                                 
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            <?php $id = 1 ?>
+                                                @if ($listuserrole)
+                                                @foreach ($listuserrole as $h)
                                             
                                             <tr>
-                                                <td>1</td>
-                                                <td>Marwar</td>
-                                                <td>Sariza</td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
+                                                <td>{{ $id++ }}</td>
+                                                <td>{{$h->fullname}}</td>
+                                                <td>{{$h->username1}}</td>
+                                                <td>{{$h->added_time}}</td>
+                                                <td>{{$h->username2}}</td>
+                                                <td>{{$h->modified_time}}</td>
+                                                {{-- <td></td> --}}
                                             </tr>
-
-                                            <tr>
-                                                <td>2</td>
-                                                <td>Syakir</td>
-                                                <td>Sariza</td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                            </tr>
-                                           
+                                           @endforeach
+                                           @endif
                                         </tbody>
                                     </table>
                                 </div>
+                                    {{-- <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-primary" id="updateRole">Update</button>
+                                    </div> --}}
                             </div>
-                            <!-- END tab-pane -->
-                            <!-- BEGIN tab-pane -->
-
-                            <!-- END tab-pane -->
                         </div>
                     </form>
                     </div>
