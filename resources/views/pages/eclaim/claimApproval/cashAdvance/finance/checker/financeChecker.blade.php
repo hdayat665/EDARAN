@@ -48,6 +48,12 @@
                                                 <a href="#default-tab-2" data-bs-toggle="tab" class="nav-link ">In Process</a>
                                             </li>
                                             <li class="nav-item">
+                                                <a href="#default-tab-6" data-bs-toggle="tab" class="nav-link ">Generate PV</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a href="#default-tab-7" data-bs-toggle="tab" class="nav-link ">Payment</a>
+                                            </li>
+                                            <li class="nav-item">
                                                 <a href="#default-tab-3" data-bs-toggle="tab" class="nav-link ">Paid</a>
                                             </li>
                                             <li class="nav-item">
@@ -143,6 +149,8 @@
                             @include('pages.eclaim.claimApproval.cashAdvance.finance.checker.tab3')
                             @include('pages.eclaim.claimApproval.cashAdvance.finance.checker.tab4')
                             @include('pages.eclaim.claimApproval.cashAdvance.finance.checker.tab5')
+                            @include('pages.eclaim.claimApproval.cashAdvance.finance.checker.tab6')
+                            @include('pages.eclaim.claimApproval.cashAdvance.finance.checker.tab7')
                         </div>
 
                     </div>

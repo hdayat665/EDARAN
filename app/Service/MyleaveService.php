@@ -54,37 +54,52 @@ class MyleaveService
         $input = $r->input();
 
         // date_default_timezone_set("Asia/Kuala_Lumpur");
-        $etData = MyLeaveModel::where([['applied_date', $input['applied_date']], ['tenant_id', Auth::user()->tenant_id]])->first();
-        if ($etData) {
-            $data['msg'] = 'Date already exists in list hmyleave.';
-            $data['status'] = config('app.response.error.status');
-            $data['type'] = config('app.response.error.type');
-            $data['title'] = config('app.response.error.title');
+        // $etData = MyLeaveModel::where([['tenant_id', Auth::user()->tenant_id]])->first();
+        // if ($etData) {
+        //     $data['msg'] = 'Date already exists in list your apply.';
+        //     $data['status'] = config('app.response.error.status');
+        //     $data['type'] = config('app.response.error.type');
+        //     $data['title'] = config('app.response.error.title');
 
-            return $data;
+        //     return $data;
+        // }
+         // $data6 = $input['flexRadioDefault'];
+
+        // if($input['noofday'] == 1){
+        //     $data7 = $input['leave_date'];
+        //     $data8 = $input['leave_date'];
+        //     $data4 = 1;
+        // }else if ($input['noofday'] == 0.5){
+        //     $data7 = $input['leave_date'];
+        //     $data8 = $input['leave_date'];
+        //     $data4 = 0.5;
+        // }else{
+        //     $data7 = $input['start_date'];
+        //     $data8 = $input['end_date'];
+        //     $data4 = $input['total_day_appied'];
+        // }
+
+        if ($_FILES['file']['name']) {
+            $payslip = upload($r->file('file'));
+            $input['file'] = $payslip['filename'];
+
+            if (!$input['file']) {
+                unset($input['file']);
+            }
         }
+
+
 
         $data1 = $input['applied_date'];
         $data2 = $input['typeofleave'];
         $data3 = $input['noofday'];
+        $data4 = $input['total_day_appied'];
         $data5 = $input['leave_date'];
-        $data6 = $input['flexRadioDefault'];
-
-        if($input['noofday'] == 1){
-            $data7 = $input['leave_date'];
-            $data8 = $input['leave_date'];
-            $data4 = 1;
-        }else if ($input['noofday'] == 0.5){
-            $data7 = $input['leave_date'];
-            $data8 = $input['leave_date'];
-            $data4 = 0.5;
-        }else{
-            $data7 = $input['start_date'];
-            $data8 = $input['end_date'];
-            $data4 = $input['total_day_appied'];
-        }
-        
+        $data6 = $input['start_date'];
+        $data7 = $input['end_date'];
+        $data8 = $input['file'];
         $data9 = $input['reason'];
+
         
 
         $input = [
@@ -93,9 +108,9 @@ class MyleaveService
                 'day_applied' => $data3,
                 'total_day_applied' => $data4,
                 'leave_date' => $data5,
-                'leave_session' => $data6,
-                'start_date' => $data7,
-                'end_date' => $data8,
+                'start_date' => $data6,
+                'end_date' => $data7,
+                'file_document' => $data8,
                 'reason' => $data9,
                 'status_user' => '2',
                 'up_rec_status' => '2',

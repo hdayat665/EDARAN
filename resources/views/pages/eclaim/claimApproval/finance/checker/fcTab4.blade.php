@@ -16,7 +16,7 @@
         </thead>
         <tbody>
             @foreach ($claims as $claim)
-                @if ($claim->status == 'paid')
+                @if ($claim->status == 'paid' && $claim->cheque_number != '')
                     <tr>
                         <td><input type="checkbox" id="" name="" value=""></td>
                         <td>
@@ -49,8 +49,8 @@
                         <td>{{ $claim->created_at ?? '-' }}</td>
                         <td>{{ $claim->total_amount ?? '-' }}</td>
                         <td>{{ $claim->updated_at ?? '-' }}</td>
-                        <td>{{ '-' }}</td>
-                        <td>{{ '-' }}</td>
+                        <td>{{ $claim->pv_number ?? '-' }}</td>
+                        <td>{{ $claim->cheque_number ?? '-' }}</td>
                     </tr>
                 @endif
             @endforeach
