@@ -323,7 +323,7 @@
                                     <div class="col-sm-6">
                                         <div class="mb-3">
                                             <label for="exampleInputEmail1" class="form-label">Applied Date </label>
-                                            <input type="text" class="form-control" name= "applied_date" id="datepicker-applied" placeholder="yyyy-mm-dd">
+                                            <input type="text" class="form-control" name= "applied_date" id="datepicker-applied" placeholder="yyyy-mm-dd" readonly>
                                         </div>
 								    </div>
 
@@ -354,7 +354,7 @@
                                     <div class="col-sm-6" id="menu4">
                                         <label class="form-label" for="Menu4">Total Days Applied</label>
                                             <div class="input-group">
-                                                <input type="text" class="form-control" name="total_day_appied" id="select4"/>
+                                                <input type="text" class="form-control" name="total_day_appied" id="select4" readonly/>
                                             </div>
                                     </div>
                                 </div>
@@ -382,7 +382,7 @@
                                                     </label>
                                                 </div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                                 <div class="form-check">
-                                                    <input class="form-check-input" value="2" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+                                                    <input class="form-check-input" value="2" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
                                                     <label class="form-check-label" for="flexRadioDefault2">
                                                         Evening
                                                     </label>
@@ -416,7 +416,8 @@
                                     <div class="col-sm-6" id="menu9">
                                         <label class="form-label" for="Menu7">Supporting Document</label>
                                             <div class="input-group">
-                                                <input id="fileupload" type="file" multiple="multiple" ></input>
+                                                <input id="fileupload" type="file" multiple="multiple" name="file">
+                                                <span id="fileDownloadPolicy"></span>
                                             </div>
                                     </div>
                                     <div class="col-sm-6" id="menu10">
