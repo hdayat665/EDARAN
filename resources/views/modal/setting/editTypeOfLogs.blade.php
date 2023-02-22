@@ -29,6 +29,8 @@
                             <option class="form-label" value="PROJECT" >PROJECT</option>
                             <option class="form-label" value="OFFICE" >OFFICE</option>
                             <option class="form-label" value="OTHERS" >OTHERS</option>
+                            <option class="form-label" value="HOME" >HOME</option>
+                            {{-- <option class="form-label" value="OTHERS">OTHERS</option> --}}
                         </select>
                     </div>
                     <div class="mb-3" id="addtypeoflogprojectedit" style="display:none">
