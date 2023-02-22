@@ -94,20 +94,21 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
-                <form>
+            <form id="clearForm">
+                <div class="modal-body">
                     <div class="row mb-3">
                         <label for="inputEmail3" class="col-sm-4 col-form-label">Cleared Date</label><br>
                         <div class="col-sm-8">
-                            <Input class="form-control" id="cleareddate" placeholder="Cheque Number"></Input>
+                            <input type="hidden" id="clearId">
+                            <input class="form-control" id="cleareddate" name="clear_date" placeholder="Cheque Number">
                         </div>
                     </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-primary">Save</button>
-            </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" id="saveClearButton" class="btn btn-primary">Save</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>

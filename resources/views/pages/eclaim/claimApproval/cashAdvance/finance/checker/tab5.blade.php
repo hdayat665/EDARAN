@@ -17,7 +17,7 @@
         </thead>
         <tbody>
             @foreach ($cas as $ca)
-                @if ($ca->f1 == 'close')
+                @if ($ca->status == 'close')
                     <tr>
                         <td>
                             <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle"><i class="fa fa-cogs"></i> Action <i class="fa fa-caret-down"></i></a>
@@ -40,7 +40,7 @@
                         <td>{{ $ca->travel_date ?? '-' }}</td>
                         <td>{{ $ca->amount ?? '-' }}</td>
                         <td>{{ $ca->status ?? '-' }}</td>
-                        <td>{{ $ca->updated_at ?? '-' }}</td>
+                        <td>{{ $ca->clear_date ?? '-' }}</td>
                         <td>{{ $ca->pv_number ?? '-' }}</td>
                     </tr>
                 @endif
