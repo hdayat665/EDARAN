@@ -167,10 +167,10 @@ $(document).ready(function () {
             },
 
             messages: {
-                applied_date: "Please Insert applied date title",
-                typeofleave: "Please Insert type of leave",
-                noofday: "Please Insert no of day",
-                reason: "Please Insert reason",
+                applied_date: "Please Insert Applied Date Title",
+                typeofleave: "Please Insert Type of Leave",
+                noofday: "Please Insert No of Day",
+                reason: "Please Insert Reason",
             },
             submitHandler: function (form) {
                 requirejs(["sweetAlert2"], function (swal) {
