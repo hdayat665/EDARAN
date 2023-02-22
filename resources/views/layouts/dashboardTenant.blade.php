@@ -198,7 +198,7 @@
                     <!-- Sidenav Content Orbit -->
 
                     <div class="menu-item has-sub mt-3">
-                        <a href="/dashboardTenant" class="menu-link highlight">
+                        <a href="/dashboardTenant" class="menu-link active">
                             <div class="menu-icon">
                                 <i class="fa fa-clipboard-list text-gray"></i>
                             </div>
@@ -211,7 +211,7 @@
                     <!-- Sidenav Content Orbit -->
 
                     <div class="menu-item has-sub">
-                        <a href="javascript:;" class="menu-link highlight">
+                        <a href="javascript:;" class="menu-link">
                             <div class="menu-icon">
                                 <i class="fa fa-commenting text-gray"></i>
                             </div>
@@ -219,9 +219,8 @@
                             <div class="menu-caret text-gray"></div>
                         </a>
                         <div class="menu-submenu">
-
                             <div class="menu-item">
-                                <a href="/myProfile" class="menu-link highlight">
+                                <a href="/myProfile" class="menu-link">
                                     <div class="menu-icon">
                                         <i class="fa fa-address-card text-gray"></i>
                                     </div>
@@ -230,7 +229,7 @@
                             </div>
 
                             <div class="menu-item">
-                                <a href="/employeeInfoView" class="menu-link highlight">
+                                <a href="/employeeInfoView" class="menu-link">
                                     <div class="menu-icon">
                                         <i class="fa fa-indent text-gray"></i>
                                     </div>
@@ -245,7 +244,7 @@
                     <!-- Sidenav Content Orbit -->
 
                     <div class="menu-item has-sub">
-                        <a href="javascript:;" class="menu-link highlight">
+                        <a href="javascript:;" class="menu-link">
                             <div class="menu-icon">
                                 <i class="fa fa-business-time text-gray"></i>
                             </div>
@@ -254,7 +253,7 @@
                         </a>
                         <div class="menu-submenu">
                             <div class="menu-item">
-                                <a href="/myTimesheet" class="menu-link highlight">
+                                <a href="/myTimesheet" class="menu-link">
                                     <div class="menu-icon">
                                         <i class="fa fa-calendar-check text-gray"></i>
                                     </div>
@@ -262,7 +261,7 @@
                                 </a>
                             </div>
                             <div class="menu-item">
-                                <a href="/timesheetApproval" class="menu-link highlight">
+                                <a href="/timesheetApproval" class="menu-link">
                                     <div class="menu-icon">
                                         <i class="fa fa-receipt text-gray"></i>
                                     </div>
@@ -270,7 +269,7 @@
                                 </a>
                             </div>
                             <div class="menu-item">
-                                <a href="/realtimeEventTimesheet" class="menu-link highlight">
+                                <a href="/realtimeEventTimesheet" class="menu-link">
                                     <div class="menu-icon">
                                         <i class="fa fa-receipt text-gray"></i>
                                     </div>
@@ -285,7 +284,7 @@
                     <!-- Sidenav Content Orbit -->
 
                     <div class="menu-item has-sub">
-                        <a href="javascript:;" class="menu-link highlight">
+                        <a href="javascript:;" class="menu-link">
                             <div class="menu-icon">
                                 <i class="fa fa-user-edit text-gray"></i>
                             </div>
@@ -294,7 +293,7 @@
                         </a>
                         <div class="menu-submenu">
                             <div class="menu-item">
-                                <a href="#" class="menu-link highlight">
+                                <a href="#" class="menu-link">
                                     <div class="menu-icon">
                                         <i class="fa fa-bell text-gray"></i>
                                     </div>
@@ -302,7 +301,7 @@
                                 </a>
                             </div>
                             <div class="menu-item">
-                                <a href="#" class="menu-link highlight">
+                                <a href="#" class="menu-link">
                                     <div class="menu-icon">
                                         <i class="fa fa-list-check text-gray"></i>
                                     </div>
@@ -317,7 +316,7 @@
                     <!-- Sidenav Content Orbit -->
 
                     <div class="menu-item has-sub">
-                        <a href="javascript:;" class="menu-link highlight">
+                        <a href="javascript:;" class="menu-link">
                             <div class="menu-icon">
                                 <i class="fa fa-user-cog text-gray"></i>
                             </div>
@@ -326,7 +325,7 @@
                         </a>
                         <div class="menu-submenu">
                             <div class="menu-item has-sub">
-                                <a href="/myleave" class="menu-link highlight">
+                                <a href="/myleave" class="menu-link">
                                     <div class="menu-icon">
                                         <i class="fa fa-clipboard text-gray"></i>
                                     </div>
@@ -335,7 +334,7 @@
                                 </a>
                             </div>
                             <div class="menu-item has-sub">
-                                <a href="#" class="menu-link highlight">
+                                <a href="#" class="menu-link">
                                     <div class="menu-icon">
                                         <i class="fa fa-list-check text-gray"></i>
                                     </div>
@@ -344,7 +343,7 @@
                                 </a>
                                 <div class="menu-submenu">
                                     <div class="menu-item">
-                                        <a href="leaveAppr" class="menu-link highlight">
+                                        <a href="leaveAppr" class="menu-link">
                                             <div class="menu-icon">
                                                 <i class="fa fa-user-pen text-gray"></i>
                                             </div>
@@ -352,7 +351,7 @@
                                         </a>
                                     </div>
                                     <div class="menu-item">
-                                        <a href="leaveApprhod" class="menu-link highlight">
+                                        <a href="leaveApprhod" class="menu-link">
                                             <div class="menu-icon">
                                                 <i class="fa fa-users-gear text-gray"></i>
                                             </div>
@@ -371,7 +370,7 @@
                     <!-- Sidenav Content Orbit -->
 
                     <div class="menu-item has-sub">
-                        <a href="javascript:;" class="menu-link highlight">
+                        <a href="javascript:;" class="menu-link">
                             <div class="menu-icon">
                                 <i class="fa fa-diagram-project text-gray"></i>
                             </div>
@@ -380,7 +379,7 @@
                         </a>
                         <div class="menu-submenu">
                             <div class="menu-item">
-                                <a href="/customer" class="menu-link highlight">
+                                <a href="/customer" class="menu-link">
                                     <div class="menu-icon">
                                         <i class="fa fa-share-nodes text-gray"></i>
                                     </div>
@@ -388,7 +387,7 @@
                                 </a>
                             </div>
                             <div class="menu-item">
-                                <a href="/projectInfo" class="menu-link highlight">
+                                <a href="/projectInfo" class="menu-link">
                                     <div class="menu-icon">
                                         <i class="fa fa-book text-gray"></i>
                                     </div>
@@ -396,7 +395,7 @@
                                 </a>
                             </div>
                             <div class="menu-item">
-                                <a href="/myProject" class="menu-link highlight">
+                                <a href="/myProject" class="menu-link">
                                     <div class="menu-icon">
                                         <i class="fa fa-clipboard-list text-gray"></i>
                                     </div>
@@ -404,7 +403,7 @@
                                 </a>
                             </div>
                             <div class="menu-item">
-                                <a href="/projectRequest" class="menu-link highlight">
+                                <a href="/projectRequest" class="menu-link">
                                     <div class="menu-icon">
                                         <i class="fa fa-code-pull-request text-gray"></i>
                                     </div>
@@ -418,7 +417,7 @@
                     <!-- Sidenav Content Orbit -->
 
                     <div class="menu-item has-sub">
-                        <a href="javascript:;" class="menu-link highlight">
+                        <a href="javascript:;" class="menu-link">
                             <div class="menu-icon">
                                 <i class="fa fa-file-lines text-gray"></i>
                             </div>
@@ -427,7 +426,7 @@
                         </a>
                         <div class="menu-submenu">
                             <div class="menu-item">
-                                <a href="/myClaimView" class="menu-link highlight">
+                                <a href="/myClaimView" class="menu-link">
                                     <div class="menu-icon">
                                         <i class="fa fa-envelope-open-text text-gray"></i>
                                     </div>
@@ -436,7 +435,7 @@
                             </div>
                             <div class="menu-item has-sub">
 
-                                <a href="javascript:;" class="menu-link highlight">
+                                <a href="javascript:;" class="menu-link">
                                     <div class="menu-icon">
                                         <i class="fa fa-list-check text-gray"></i>
                                     </div>
@@ -447,7 +446,7 @@
                                 </a>
                                 <div class="menu-submenu">
                                     <div class="menu-item has-sub">
-                                        <a href="#" class="menu-link highlight">
+                                        <a href="#" class="menu-link">
                                             <div class="menu-icon">
                                                 <i class="fa fa-user text-gray"></i>
                                             </div>
@@ -458,7 +457,7 @@
                                         </a>
                                         <div class="menu-submenu">
                                             <div class="menu-item">
-                                                <a href="/claimApprovalView/1" class="menu-link highlight">
+                                                <a href="/claimApprovalView/1" class="menu-link">
                                                     <div class="menu-icon">
                                                         <i class="fa fa-list-check text-gray"></i>
                                                     </div>
@@ -467,7 +466,7 @@
                                                 </a>
                                             </div>
                                             <div class="menu-item">
-                                                <a href="/claimApprovalView/2" class="menu-link highlight">
+                                                <a href="/claimApprovalView/2" class="menu-link">
                                                     <div class="menu-icon">
                                                         <i class="fa fa-list-check text-gray"></i>
                                                     </div>
@@ -478,7 +477,7 @@
                                         </div>
                                     </div>
                                     <div class="menu-item has-sub">
-                                        <a href="#" class="menu-link highlight">
+                                        <a href="#" class="menu-link">
                                             <div class="menu-icon">
                                                 <i class="fa fa-user-tie text-gray"></i>
                                             </div>
@@ -489,7 +488,7 @@
                                         </a>
                                         <div class="menu-submenu">
                                             <div class="menu-item">
-                                                <a href="/financeApprovalView" class="menu-link highlight">
+                                                <a href="/financeApprovalView" class="menu-link">
                                                     <div class="menu-icon">
                                                         <i class="fa fa-list-check text-gray"></i>
                                                     </div>
@@ -498,7 +497,7 @@
                                                 </a>
                                             </div>
                                             <div class="menu-item">
-                                                <a href="/financeRecView" class="menu-link highlight">
+                                                <a href="/financeRecView" class="menu-link">
                                                     <div class="menu-icon">
                                                         <i class="fa fa-list-check text-gray"></i>
                                                     </div>
@@ -507,7 +506,7 @@
                                                 </a>
                                             </div>
                                             <div class="menu-item">
-                                                <a href="/financeCheckerView" class="menu-link highlight">
+                                                <a href="/financeCheckerView" class="menu-link">
                                                     <div class="menu-icon">
                                                         <i class="fa fa-list-check text-gray"></i>
                                                     </div>
@@ -518,7 +517,7 @@
                                         </div>
                                     </div>
                                     <div class="menu-item has-sub">
-                                        <a href="#" class="menu-link highlight">
+                                        <a href="#" class="menu-link">
                                             <div class="menu-icon">
                                                 <i class="fa fa-user-gear text-gray"></i>
                                             </div>
@@ -528,7 +527,7 @@
                                         </a>
                                         <div class="menu-submenu">
                                             <div class="menu-item">
-                                                <a href="/adminApprovalView" class="menu-link highlight">
+                                                <a href="/adminApprovalView" class="menu-link">
                                                     <div class="menu-icon">
                                                         <i class="fa fa-list-check text-gray"></i>
                                                     </div>
@@ -537,7 +536,7 @@
                                                 </a>
                                             </div>
                                             <div class="menu-item">
-                                                <a href="/adminRecView" class="menu-link highlight">
+                                                <a href="/adminRecView" class="menu-link">
                                                     <div class="menu-icon">
                                                         <i class="fa fa-list-check text-gray"></i>
                                                     </div>
@@ -546,7 +545,7 @@
                                                 </a>
                                             </div>
                                             <div class="menu-item">
-                                                <a href="/adminCheckerView" class="menu-link highlight">
+                                                <a href="/adminCheckerView" class="menu-link">
                                                     <div class="menu-icon">
                                                         <i class="fa fa-list-check text-gray"></i>
                                                     </div>
@@ -559,7 +558,7 @@
                                 </div>
                             </div>
                             <div class="menu-item has-sub">
-                                <a href="javascript:;" class="menu-link highlight">
+                                <a href="javascript:;" class="menu-link">
                                     <div class="menu-icon">
                                         <i class="fa fa-envelope-open-text text-gray"></i>
                                     </div>
@@ -569,7 +568,7 @@
                                 </a>
                                 <div class="menu-submenu">
                                     <div class="menu-item has-sub">
-                                        <a href="javascript:;" class="menu-link highlight">
+                                        <a href="javascript:;" class="menu-link">
                                             <div class="menu-icon">
                                                 <i class="fa fa-user text-gray"></i>
                                             </div>
@@ -580,7 +579,7 @@
                                         </a>
                                         <div class="menu-submenu">
                                             <div class="menu-item">
-                                                <a href="/cashAdvanceApproverView" class="menu-link highlight">
+                                                <a href="/cashAdvanceApproverView" class="menu-link">
                                                     <div class="menu-icon">
                                                         <i class="fa fa-list-check text-gray"></i>
                                                     </div>
@@ -589,7 +588,7 @@
                                                 </a>
                                             </div>
                                             {{-- <div class="menu-item">
-                                                <a href="/claimApprovalView/2" class="menu-link highlight">
+                                                <a href="/claimApprovalView/2" class="menu-link">
                                                     <div class="menu-icon">
                                                         <i class="fa fa-list-check text-gray"></i>
                                                     </div>
@@ -600,7 +599,7 @@
                                         </div>
                                     </div>
                                     <div class="menu-item has-sub">
-                                        <a href="#" class="menu-link highlight">
+                                        <a href="#" class="menu-link">
                                             <div class="menu-icon">
                                                 <i class="fa fa-user-tie text-gray"></i>
                                             </div>
@@ -611,7 +610,7 @@
                                         </a>
                                         <div class="menu-submenu">
                                             <div class="menu-item">
-                                                <a href="/cashAdvanceFapproverView" class="menu-link highlight">
+                                                <a href="/cashAdvanceFapproverView" class="menu-link">
                                                     <div class="menu-icon">
                                                         <i class="fa fa-list-check text-gray"></i>
                                                     </div>
@@ -620,7 +619,7 @@
                                                 </a>
                                             </div>
                                             <div class="menu-item">
-                                                <a href="/cashAdvanceFrecommenderView" class="menu-link highlight">
+                                                <a href="/cashAdvanceFrecommenderView" class="menu-link">
                                                     <div class="menu-icon">
                                                         <i class="fa fa-list-check text-gray"></i>
                                                     </div>
@@ -629,7 +628,7 @@
                                                 </a>
                                             </div>
                                             <div class="menu-item">
-                                                <a href="/cashAdvanceFcheckerView" class="menu-link highlight">
+                                                <a href="/cashAdvanceFcheckerView" class="menu-link">
                                                     <div class="menu-icon">
                                                         <i class="fa fa-list-check text-gray"></i>
                                                     </div>
@@ -648,7 +647,7 @@
                     <!-- Sidenav Content Orbit -->
 
                     <div class="menu-item has-sub">
-                        <a href="javascript:;" class="menu-link highlight">
+                        <a href="javascript:;" class="menu-link">
                             <div class="menu-icon">
                                 <i class="fa fa-user-group text-gray"></i>
                             </div>
@@ -658,7 +657,7 @@
 
                         <div class="menu-submenu">
                             <div class="menu-item">
-                                <a href="/phoneDirectory" class="menu-link highlight">
+                                <a href="/phoneDirectory" class="menu-link">
                                     <div class="menu-icon">
                                         <i class="fa fa-rectangle-list text-gray"></i>
                                     </div>
@@ -666,7 +665,7 @@
                                 </a>
                             </div>
                             <div class="menu-item">
-                                <a href="/organizationChart" class="menu-link highlight">
+                                <a href="/organizationChart" class="menu-link">
                                     <div class="menu-icon">
                                         <i class="fa fa-rectangle-list text-gray"></i>
                                     </div>
@@ -674,7 +673,7 @@
                                 </a>
                             </div>
                             {{-- <div class="menu-item">
-                                    <a href="/departmentTree" class="menu-link highlight">
+                                    <a href="/departmentTree" class="menu-link">
                                     <div class="menu-icon">
 								        <i class="fa fa-folder-tree text-gray"></i>
 							        </div>
@@ -689,7 +688,7 @@
                     <!-- Sidenav Content Orbit -->
 
                     <div class="menu-item has-sub">
-                        <a href="javascript:;" class="menu-link highlight">
+                        <a href="javascript:;" class="menu-link">
                             <div class="menu-icon">
                                 <i class="fa fa-pen-fancy text-gray"></i>
                             </div>
@@ -698,7 +697,7 @@
                         </a>
                         <div class="menu-submenu">
                             <div class="menu-item has-sub">
-                                <a href="#" class="menu-link highlight">
+                                <a href="#" class="menu-link">
                                     <div class="menu-icon">
                                         <i class="fa fa-file-signature text-gray"></i>
                                     </div>
@@ -708,7 +707,7 @@
 
                                 <div class="menu-submenu">
                                     <div class="menu-item">
-                                        <a href="/statusReport" class="menu-link highlight">
+                                        <a href="/statusReport" class="menu-link">
                                             <div class="menu-icon">
                                                 <i class="fa fa-address-card text-gray"></i>
                                             </div>
@@ -717,7 +716,7 @@
                                     </div>
 
                                     <div class="menu-item">
-                                        <a href="/employeeReport" class="menu-link highlight">
+                                        <a href="/employeeReport" class="menu-link">
                                             <div class="menu-icon">
                                                 <i class="fa fa-user-clock text-gray"></i>
                                             </div>
@@ -726,7 +725,7 @@
                                     </div>
 
                                     <div class="menu-item">
-                                        <a href="/overtimeReport" class="menu-link highlight">
+                                        <a href="/overtimeReport" class="menu-link">
                                             <div class="menu-icon">
                                                 <i class="fa fa-user-gear text-gray"></i>
                                             </div>
@@ -736,7 +735,7 @@
                                 </div>
                             </div>
                             <div class="menu-item has-sub">
-                                <a href="#" class="menu-link highlight">
+                                <a href="#" class="menu-link">
                                     <div class="menu-icon">
                                         <i class="fa fa-user-check text-gray"></i>
                                     </div>
@@ -745,7 +744,7 @@
                                 </a>
                                 <div class="menu-submenu">
                                     <div class="menu-item">
-                                        <a href="#" class="menu-link highlight">
+                                        <a href="#" class="menu-link">
                                             <div class="menu-icon">
                                                 <i class="fa fa-user-pen text-gray"></i>
                                             </div>
@@ -753,7 +752,7 @@
                                         </a>
                                     </div>
                                     <div class="menu-item">
-                                        <a href="#" class="menu-link highlight">
+                                        <a href="#" class="menu-link">
                                             <div class="menu-icon">
                                                 <i class="fa fa-users-gear text-gray"></i>
                                             </div>
@@ -766,7 +765,7 @@
 
                             </div>
                             <div class="menu-item">
-                                <a href="#" class="menu-link highlight">
+                                <a href="#" class="menu-link">
                                     <div class="menu-icon">
                                         <i class="fa fa-user-minus text-gray"></i>
                                     </div>
@@ -775,7 +774,7 @@
                             </div>
 
                             <div class="menu-item has-sub">
-                                <a href="#" class="menu-link highlight">
+                                <a href="#" class="menu-link">
                                     <div class="menu-icon">
                                         <i class="fa fa-keyboard text-gray"></i>
                                     </div>
@@ -784,7 +783,7 @@
                                 </a>
                                 <div class="menu-submenu">
                                     <div class="menu-item">
-                                        <a href="/projectListing" class="menu-link highlight">
+                                        <a href="/projectListing" class="menu-link">
                                             <div class="menu-icon">
                                                 <i class="fa fa-book text-gray"></i>
                                             </div>
@@ -792,7 +791,7 @@
                                         </a>
                                     </div>
                                     <div class="menu-item">
-                                        <a href="/projectFilter" class="menu-link highlight">
+                                        <a href="/projectFilter" class="menu-link">
                                             <div class="menu-icon">
                                                 <i class="fa fa-book-open text-gray"></i>
                                             </div>
@@ -804,7 +803,7 @@
 
                             </div>
                             <div class="menu-item has-sub">
-                                <a href="#" class="menu-link highlight">
+                                <a href="#" class="menu-link">
                                     <div class="menu-icon">
                                         <i class="fa fa-money-check text-gray"></i>
                                     </div>
@@ -813,7 +812,7 @@
                                 </a>
                                 <div class="menu-submenu">
                                     <div class="menu-item">
-                                        <a href="#" class="menu-link highlight">
+                                        <a href="#" class="menu-link">
                                             <div class="menu-icon">
                                                 <i class="fa fa-money-bill-wave text-gray"></i>
                                             </div>
@@ -821,7 +820,7 @@
                                         </a>
                                     </div>
                                     <div class="menu-item">
-                                        <a href="#" class="menu-link highlight">
+                                        <a href="#" class="menu-link">
                                             <div class="menu-icon">
                                                 <i class="fa fa-money-bill-1-wave text-gray"></i>
                                             </div>
@@ -838,7 +837,7 @@
                     <!-- Sidenav Content Orbit -->
 
                     <div class="menu-item has-sub">
-                        <a href="/setting" class="menu-link highlight">
+                        <a href="/setting" class="menu-link">
                             <div class="menu-icon">
                                 <i class="fa fa-gear text-gray"></i>
                             </div>
@@ -999,35 +998,87 @@
 </script>
 
 <script>
-    // $(function() {
-    //     $('.menu-link').each(function() {
-    //         if ($(this).prop('href') === window.location.href ) {
-    //             $(this).parents().addClass('active');
-    //             $(this).css({
-    //                 "background": "linear-gradient(to left,#ececec 0, #ececec 66%, #ececec 100%)",
-    //                 "border-radius": "50px",
-    //             });
-    //         }
-    //     })
-    // });
+var hash = location.hash.replace(/^#/, ""); // ^ means starting, meaning only match the first hash
+    if (hash) {
+        $('.nav-tabs a[href="#' + hash + '"]').tab("show");
+    }
+    $(".nav-tabs a").on("shown.bs.tab", function (e) {
+        window.location.hash = e.target.hash;
+    });
+</script>
+
+<script>
+// $(function() {
+//     $('.menu-link').each(function() {
+//         if ($(this).prop('href') === window.location.href ) {
+//             $(this).parents().addClass('active');
+//             $(this).css({
+//                 "background": "linear-gradient(to left,#ececec 0, #ececec 66%, #ececec 100%)",
+//                 "border-radius": "50px",
+//             });
+//         }
+//     })
+// });
 
 $(function() {
+    // Get current URL path and assign 'active' class to corresponding menu item
+    var pathname = window.location.pathname;
     $('.menu-link').each(function() {
-        if ($(this).prop('href') === window.location.href ) {
-            $(this).parents().addClass('active');
+        if ($(this).attr('href') === pathname) {
+            $(this).parents('.menu-item').addClass('active');
             $(this).css({
                 "background": "linear-gradient(to left,#ececec 0, #ececec 66%, #ececec 100%)",
                 "border-radius": "50px",
             });
-            // add active class to the submenu
-            $(this).parent().siblings('.menu-submenu').addClass('active');
         }
     });
-    // // expand the active submenu on page load
-    // $('.menu-submenu.active').css('display', 'block');
+
+    // Expand submenu of the currently active menu item
+    var activeMenuItem = $('.menu-item.active');
+    if (activeMenuItem.length > 0) {
+        activeMenuItem.find('.menu-submenu').addClass('show');
+    }
+
+    // Add click event listener to menu items
+    $('.menu-link').on('click', function() {
+        // Remove 'active' class from all menu items
+        $('.menu-item').removeClass('active');
+        $('.menu-link').css({
+            "background": "",
+            "border-radius": "",
+        });
+        // Add 'active' class to clicked menu item
+        $(this).parents('.menu-item').addClass('active');
+        $(this).css({
+            "background": "linear-gradient(to left,#ececec 0, #ececec 66%, #ececec 100%)",
+            "border-radius": "50px",
+        });
+
+        // Expand submenu of clicked menu item
+        $('.menu-submenu').removeClass('show');
+        var subMenu = $(this).siblings('.menu-submenu');
+        if (subMenu.length > 0) {
+            subMenu.addClass('show');
+            return false;
+        }
+    });
 });
 
-
+// $(function() {
+//     $('.menu-link').each(function() {
+//         if ($(this).prop('href') === window.location.href ) {
+//             $(this).parents().addClass('active');
+//             $(this).css({
+//                 "background": "linear-gradient(to left,#ececec 0, #ececec 66%, #ececec 100%)",
+//                 "border-radius": "50px",
+//             });
+//             // add active class to the submenu
+//             $(this).parent().siblings('.menu-submenu').addClass('active');
+//         }
+//     });
+//     // // expand the active submenu on page load
+//     // $('.menu-submenu.active').css('display', 'block');
+// });
 
 </script>
 

@@ -132,7 +132,7 @@ $(document).ready(function() {
     }
 
     $('#statusAll').DataTable({
-        scrollY: false,
+        // scrollY: false,
         scrollX: true,
         paging: true,
         lengthMenu: [
@@ -152,7 +152,7 @@ $(document).ready(function() {
     });
 
     $('#customerTable').DataTable({
-        scrollY: false,
+        // scrollY: false,
         scrollX: true,
         paging: true,
         lengthMenu: [
@@ -171,7 +171,7 @@ $(document).ready(function() {
     });
 
     $('#employeeTable').DataTable({
-        scrollY: false,
+        // scrollY: false,
         scrollX: true,
         paging: true,
         lengthMenu: [
@@ -190,7 +190,7 @@ $(document).ready(function() {
     });
 
     $('#projectMemberTable').DataTable({
-        scrollY: 50,
+        // scrollY: 50,
         scrollX: true,
         paging: true,
         lengthMenu: [
@@ -210,7 +210,7 @@ $(document).ready(function() {
     });
 
     $('#finYearTable').DataTable({
-        scrollY: 50,
+        // scrollY: 50,
         scrollX: true,
         paging: true,
         lengthMenu: [
@@ -229,7 +229,7 @@ $(document).ready(function() {
     });
 
     $('#accManagerTable').DataTable({
-        scrollY: 50,
+        // scrollY: 50,
         scrollX: true,
         paging: true,
         lengthMenu: [
@@ -248,7 +248,7 @@ $(document).ready(function() {
     });
 
     $('#projManagerTable').DataTable({
-        scrollY: 50,
+        // scrollY: 50,
         scrollX: true,
         paging: true,
         lengthMenu: [
@@ -268,7 +268,7 @@ $(document).ready(function() {
     });
 
     $('#statusTable').DataTable({
-        scrollY: 50,
+        // scrollY: 50,
         scrollX: true,
         paging: true,
         lengthMenu: [

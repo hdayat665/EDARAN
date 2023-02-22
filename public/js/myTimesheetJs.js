@@ -914,75 +914,45 @@ $(document).ready(function() {
                         var logData = getLogs(logId);
                         logData.done(function(data) {
                             // console.log(data);
-                            if (data.type_of_log == '3') {
 
-                                var display = $("#myprojectedit").css("display");
-                                var display1 = $("#activityByProjectEditHide").css("display");
-                                var display2 = $("#locationByProjectEditHide").css("display");
-                                
-                                
-                                if (display == 'none' && display1 && display2) {
-                                    $('#myprojectedit').css("display", 'block');
-                                    $('#activityByProjectEditHide').css("display", 'block');
-                                    $('#locationByProjectEditHide').css("display", 'block');
+
+
+                            if (data.type_of_log == '3') {
+                                $('#myprojectedit').css("display", 'block');
+                                $('#activityByProjectEditHide').css("display", 'block');
+                                $('#locationByProjectEditHide').css("display", 'block');
+                              } else if (data.type_of_log == '1' || data.type_of_log == '4') {
+                                $('#activityByProjectEditHide').css("display", 'block');
+                              } else if (data.type_of_log == '2') {
+                                var display10 = $("#officelogedit").css("display");
+                                var display11 = $("#activityByProjectEditHide").css("display");
+                                var display12 = $("#locationByProjectEditHide").css("display");
+                              
+                                // Add another condition
+                                if (data.office_log == '1') {
+                                    
+                                  $('#myprojectedit').css("display", 'block');
+                                  $('#activityByProjectEditHide').css("display", 'block');
+                                  $("#locationByProjectEditHide").css("display",'block');
                                 }
-                            } else {
+
+                                if (data.office_log == '2') {
+                                    $('#activityByProjectEditHide').css("display", 'block');
+                                    $('#officelogedit').css("display", 'block');
+                                    
+                                  }
+                              } else {
                                 $('#myprojectedit').css("display", 'none');
                                 $('#activityByProjectEditHide').css("display", 'none');
                                 $('#locationByProjectEditHide').css("display", 'none');
-                                
-                            }
-
-                            if (data.type_of_log == '2') {
-
-                                var display12345 = $("#officelogedit").css("display");
-                                var display123456 = $("#activityByProjectEditHide").css("display");
-                                
-                                // var projectOfficeDisplay = $("#listprojectedit").css("display");
-                                if (display12345 == 'none') {
-                                    $('#officelogedit').css("display", 'block');
-                                }
-
-                                if (display123456 == 'none') {
-                                    $('#activityByProjectEditHide').css("display", 'block');
-                                }
-                            } else {
-
                                 $('#officelogedit').css("display", 'none');
-                                $('#activityByProjectEditHide').css("display", 'none');
-                            }
+                              }
+                              
 
 
-                            if (data.type_of_log == '1') {
+                            // if (data.type_of_log == 2 && data.office_log == 1) {
 
-                                var display = $("#activityByProjectEditHide").css("display");
-                                // var projectOfficeDisplay = $("#listprojectedit").css("display");
-                                if (display == 'none') {
-                                    $('#activityByProjectEditHide').css("display", 'block');
-                                }
-
-                            } else {
-                                // $('#officelogedit').css("display", 'none');
-                                $('#listprojectedit').css("display", 'none');
-                            }
-
-                            if (data.type_of_log == '4') {
-
-                                var display = $("#activityByProjectEditHide").css("display");
-                                // var projectOfficeDisplay = $("#listprojectedit").css("display");
-                                if (display == 'none') {
-                                    $('#activityByProjectEditHide').css("display", 'block');
-                                }
-
-                            } else {
-                                $('#officelogedit').css("display", 'none');
-                                $('#listprojectedit').css("display", 'none');
-                            }
-                            
-
-                            if (data.type_of_log == 2 && data.office_log == 1) {
-
-                            }
+                            // }
 
                             $('#locationByProjectEditShow').hide();
                             $('#activityByProjectEditShow').hide();
@@ -1607,17 +1577,17 @@ $(document).ready(function() {
             $("#activityByProjectHide").hide();
             
             
-        // } else if ($(this).val() == "2") {
-        //     $("#activityByProjectHide").show();
-        //     $("#listproject").hide();
-            
-        }
-        else {
-            $("#listproject").hide();
+        } else if ($(this).val() == "2") {
             $("#activityByProjectHide").show();
-            $("#locationByProjectHide").hide();
+            $("#listproject").hide();
             
         }
+        // else {
+        //     $("#listproject").hide();
+        //     $("#activityByProjectHide").show();
+        //     $("#locationByProjectHide").hide();
+            
+        // }
     });
     
     $(document).on('change', "#addneweventselectrecurring", function() {
@@ -1789,14 +1759,14 @@ $(document).ready(function() {
     $(document).on('change', "#typeoflogedit", function() {
         if ($(this).val() == "2") {
             $("#officelogedit").show();
-            $("#project_id_edit").hide();
-            $("#locationByProjectEditHide").show();
+            // $("#project_id_edit").hide();
+            // $("#locationByProjectEditHide").show();
             
             
         } else {
             $("#officelogedit").hide();
             $("#listprojectedit").hide();
-            $("#locationByProjectEditHide").hide();
+            // $("#locationByProjectEditHide").hide();
 
         }
     });
@@ -1823,14 +1793,27 @@ $(document).ready(function() {
             
         }
     });
-    $(document).on('change', "#officelogedit", function() {
+    $(document).on('change', "#officelog2edit", function() {
         if ($(this).val() == "1") {
-            $("#listprojectedit").show();
-        } else {
-            $("#listprojectedit").hide();
+            $("#myprojectedit").show();
             $("#activityByProjectEditHide").hide();
             
+            // $("#activityByProjectEditShow").show();
+            // $("#locationByProjectEditHide").show();
+            
+        } else if ($(this).val() == "2") {
+            $("#activityByProjectEditHide").show();
+            $("#myprojectedit").hide();
+            // $("#myprojectedit").hide();
+            // $("#locationByProjectEditHide").hide();
+            
         }
+        // } else {
+        //     $("#myprojectedit").hide();
+        //     $("#activityByProjectEditHide").hide();
+        //     $("#locationByProjectEditHide").hide();
+            
+        // }
     });
 
     $(document).on('change', "#addneweventselectrecurringedit", function() {
