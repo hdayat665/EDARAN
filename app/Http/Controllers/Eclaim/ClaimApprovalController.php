@@ -74,12 +74,12 @@ class ClaimApprovalController extends Controller
         $mcs = new ClaimApprovalService;
 
         $result = $mcs->supervisorDetailClaimView($id);
-
+        
         $data['general'] = $result['claim'];
         $data['travels'] = $result['travel'];
         $data['personals'] = $result['personal'];
         $data['gncs'] = $result['general'];
-
+        
         if ($data['general']->claim_type == 'MTC') {
             $view = 'hodClaimDetailMtc';
         } else {

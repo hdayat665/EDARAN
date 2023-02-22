@@ -9,7 +9,47 @@ $(document).ready(function () {
         responsive: false,
         info: false,
     });
+    $(document).on("change", "#claimcategory", function () {
+        id = $(this).val();
+        const inputs = ["contentLabel"];
 
+        for (let i = 0; i < inputs.length; i++) {
+            $("#" + inputs[i] + "")
+                .find("option")
+                .remove()
+                .end()
+                .append(
+                    '<option label="Please Choose" selected="selected"> </option>'
+                )
+                .val("");
+
+            function getClaimCategoryContent(id) {
+                return $.ajax({
+                    url: "/getClaimCategoryContent/" + id,
+                });
+            }
+            $("#" + inputs[i] + "")
+                .find("option")
+                .end();
+        }
+
+        var user = getClaimCategoryContent(id);
+
+        user.done(function (data) {
+            $("#label").text(data[0].label);
+            // console.log(data[0].label);
+            for (let i = 0; i < data.length; i++) {
+                const user = data[i];
+                var opt = document.createElement("option");
+                document.getElementById("contentLabel").innerHTML +=
+                    '<option value="' +
+                    user["id"] +
+                    '">' +
+                    user["content"] +
+                    "</option>";
+            }
+        });
+    });
     $("#udatepicker")
         .datepicker({
             todayHighlight: true,

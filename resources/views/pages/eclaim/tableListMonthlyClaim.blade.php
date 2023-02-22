@@ -20,11 +20,11 @@
                         @foreach ($personalClaims as $personal)
                             <tr>
                                 <td><a data-bs-toggle="modal" id="btn-view" class="btn btn-primary btn-sm">Delete</a></td>
-                                <td>{{ $personal->applied_date ?? '-' }}</td>
+                                <td>{{ $personal->applied_date ? date('Y-m-d', strtotime($personal->applied_date)) : '-' }}</td>
                                 <td>{{ getClaimCategoryById($personal->claim_category)->claim_catagory ?? '-' }}</td>
                                 <td>{{ $personal->amount ?? '-' }}</td>
-                                <td>{{ $personal->desc ?? '-' }}</td>
-                                <td>{{ $personal->file_upload ?? '-' }}</td>
+                                <td>{{ $personal->claim_desc ?? '-' }}</td>
+                                <td><a href="{{ route('download', ['filename' => $personal->file_upload ?? '-']) }}">{{$personal->file_upload ?? '-'}}</a></td>
                             </tr>
                         @endforeach
                     @endif
@@ -55,13 +55,13 @@
                         @foreach ($travelClaims as $travel)
                             <tr>
                                 <td><a data-bs-toggle="modal" id="btn-view" class="btn btn-primary btn-sm">Delete</a></td>
-                                <td>{{ $travel->travel_date ?? '-' }}</td>
+                                <td>{{ $travel->travel_date ?? date('Y-m-d', strtotime($travel->start_date)) }}</td>
                                 <td>{{ getProjectById($travel->project_id)->project_name ?? '-' }}</td>
-                                <td>{{ $travel->claim_category ?? '-' }}</td>
+                                <td>{{ $travel->type_claim ?? '-' }}</td>
                                 <td>{{ $travel->amount ?? '-' }}</td>
                                 <td>{{ $travel->desc ?? '-' }}</td>
                                 <td>{{ $travel->file_upload ?? '-' }}</td>
-                            </tr>
+                            </tr> 
                         @endforeach
 
                     @endif

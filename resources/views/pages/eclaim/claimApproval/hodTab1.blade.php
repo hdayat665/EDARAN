@@ -45,14 +45,14 @@
                                     <a href="javascript:;" id="" data-id="" class="dropdown-item"><i class="fa fa-times" aria-hidden="true"></i> Cancel</a>
                                 </div>
                             </td>
-                            <td>{{ $claim->created_at ?? '-' }}</td>
+                            <td>{{ date('Y-m-d', strtotime($claim->created_at)) ?? '-' }}</td>
                             <td>{{ $claim->userProfile->fullName ?? '-' }}</td>
                             <td>{{ $claim->month ?? '-' }}</td>
                             <td>{{ $claim->id ?? '-' }}</td>
                             <td>{{ $claim->claim_type ?? '-' }}</td>
                             <td>{{ $claim->total_amount ?? '-' }}</td>
                             <td>{{ $claim->status ?? '-' }}</td>
-                            <td>{{ $claim->updated_at ?? '-' }}</td>
+                            <td>{{ date('Y-m-d', strtotime($claim->updated_at)) ?? '-' }}</td>
                         </tr>
                     @endif
                 @endforeach

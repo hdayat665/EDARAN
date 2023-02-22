@@ -12,7 +12,8 @@
             <label class="form-label">Travel Date</label>
         </div>
         <div class="col-md-8">
-            <input type="text" class="form-control" id="datefilter1" value="" name="travel_date">
+            <input type="text" class="form-control" id="datefilter1"  name="travel_date3">
+            
         </div>
     </div>
     <div class="row p-2">
@@ -43,7 +44,7 @@
             <label class="form-label">Purpose</label>
         </div>
         <div class="col-md-8">
-            <input type="text" class="form-control" name="purpose">
+            <input type="text" class="form-control" name="purpose3">
         </div>
     </div>
     {{-- <div class="row p-2">

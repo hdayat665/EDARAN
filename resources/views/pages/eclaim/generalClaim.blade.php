@@ -9,20 +9,26 @@
                         <div class="col-md-6">
                             <div class="form-control">
                                 <div class="row p-2">
-                                    <div class="col-md-3">
+                                    <!-- <div class="col-md-3">
                                         <label class="form-label">Claim ID</label>
                                     </div>
                                     <div class="col-md-3">
                                         <input readonly type="text" class="form-control">
-                                    </div>
+                                    </div> -->
                                     <div class="col-md-3">
                                         <label class="form-label">Claim Type</label>
                                     </div>
                                     <div class="col-md-3">
                                         <input readonly type="text" name="claim_type" value="GNC" class="form-control">
                                     </div>
+                                    <div class="col-md-3">
+                                        <label class="form-label">Status</label>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <input readonly type="text" value="Draft"class="form-control">
+                                    </div>
                                 </div>
-                                <div class="row p-2">
+                                <!-- <div class="row p-2">
                                     <div class="col-md-3">
                                         <label class="form-label">Status</label>
                                     </div>
@@ -35,7 +41,7 @@
                                     <div class="col-md-3">
                                         <input readonly type="text" class="form-control">
                                     </div>
-                                </div>
+                                </div> -->
                                 <div class="row p-2">
                                     <br>
                                 </div>
@@ -132,14 +138,14 @@
                                             <textarea class="form-control" rows="3" id="description"></textarea>
                                         </div>
                                     </div>
-                                    <div class="row p-2">
+                                    <!-- <div class="row p-2">
                                         <div class="col-md-3">
                                             <label class="form-label">Supporting Document</label>
                                         </div>
                                         <div class="col-md-9">
                                             <input type="file" class="form-control-file" id="supportdocument">
                                         </div>
-                                    </div>
+                                    </div> -->
                                 </div>
                                 <div class="row p-2">
                                     <div class="modal-footer"> <button type="button" class="btn btn-secondary">Reset</button>
@@ -216,10 +222,10 @@
                 user.done(function(data) {
                     // console.log(data.claim_catagory);
                     row.insertCell(0).innerHTML = "<a class='btn btn-primary btn-sm' onclick='deleteRow(this);' id='btnDelete'>Delete</a>";
-                    row.insertCell(1).innerHTML = "<input type='text' name='applied_date[]' class='form-control' value='" + applieddate.value + "' >";
-                    row.insertCell(2).innerHTML = "<input type='text' name='claim_category' class='form-control' value='" + data.claim_catagory + "' >";
-                    row.insertCell(3).innerHTML = "<input type='text' name='amount[]' class='form-control' value='" + amount.value + "' >";
-                    row.insertCell(4).innerHTML = "<input type='text' name='desc[]' class='form-control' value='" + description.value + "' >";
+                    row.insertCell(1).innerHTML = "<input type='text' name='applied_date[]' readonly class='form-control' value='" + applieddate.value + "' >";
+                    row.insertCell(2).innerHTML = "<input type='text' name='claim_category' readonly class='form-control' value='" + data.claim_catagory + " ' >";
+                    row.insertCell(3).innerHTML = "<input type='text' name='amount[]' readonly class='form-control' value='" + amount.value + "' >";
+                    row.insertCell(4).innerHTML = "<input type='text' name='desc[]' readonly class='form-control' value='" + description.value + "' >";
                     row.insertCell(5).innerHTML = "<input type='file' name='file_upload[]' class='form-control' >" +
                         // "<input type='hidden' name='year[]' class='form-control' value='" + year.value + "' >" +
                         // "<input type='hidden' name='month[]' class='form-control' value='" + month.value + "' >" +
