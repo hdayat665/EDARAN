@@ -14,8 +14,8 @@
         </thead>
         <tbody>
             @foreach ($claims as $claim)
-                @if ($claim->pv_number != '' && $claim->cheque_number == '')
-                    <tr>
+            @if ($claim->pv_number != '' && $claim->cheque_number =='')
+            <tr>
                         <td><input type="checkbox" id="" name="" value=""></td>
                         <td>
                             <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle"><i class="fa fa-cogs"></i> Action <i class="fa fa-caret-down"></i></a>

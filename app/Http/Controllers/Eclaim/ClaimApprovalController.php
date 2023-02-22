@@ -79,7 +79,7 @@ class ClaimApprovalController extends Controller
         $data['travels'] = $result['travel'];
         $data['personals'] = $result['personal'];
         $data['gncs'] = $result['general'];
-
+        
         if ($data['general']->claim_type == 'MTC') {
             $view = 'hodClaimDetailMtc';
         } else {

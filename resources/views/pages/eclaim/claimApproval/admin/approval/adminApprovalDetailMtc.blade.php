@@ -9,7 +9,7 @@
                         <div class="form-control">
                             <div class="row p-2">
                                 <h4>Claim Information</h4>
-                            </div>
+                            </div> 
 
                             <div class="row p-2">
                                 <div class="col-md-2">
@@ -59,10 +59,10 @@
                                             @foreach ($personals as $personal)
                                                 <tr>
                                                     <td><a data-bs-toggle="modal" data-id="{{ $personal->id }}" id="btn-view" class="btn btn-primary btn-sm">View</a></td>
-                                                    <td>{{ $personal->created_at ?? '-' }}</td>
-                                                    <td>{{ $personal->claim_category ?? '-' }}</td>
+                                                    <td>{{ date('Y-m-d', strtotime($personal->created_at)) ?? '-' }}</td>
+                                                    <td>{{ $personal->claim_catagory_name ?? '-' }}</td>
                                                     <td>{{ $personal->amount ?? '-' }}</td>
-                                                    <td>-</td>
+                                                    <td>{{ $personal->claim_desc ?? '-' }}</td>
                                                     <td><a href="/storage/{{ $personal->file_upload ?? '-' }}">{{ $personal->file_upload ?? '-' }}</a></td>
                                                 </tr>
                                             @endforeach
@@ -90,15 +90,15 @@
                                                 <tr>
                                                     <td>
                                                         @if ($travel->parking)
-                                                            <a data-bs-toggle="modal" data-id="{{ $travel->id }}" id="btn-view-claim" class="btn btn-primary btn-sm travel">View Travel</a>
+                                                            <a data-bs-toggle="modal" data-id="{{ $travel->id }}" id="btn-view-claim" class="btn btn-primary btn-sm travel">View</a>
                                                         @else
                                                             <a data-bs-toggle="modal" data-id="{{ $travel->id }}" id="btn-view-subsistence" class="btn btn-primary btn-sm travel">View
-                                                                Subsistence</a>
+                                                                </a>
                                                         @endif
                                                     </td>
                                                     <td>{{ $travel->travel_date ?? '-' }}</td>
                                                     <td>{{ $travel->project->project_name ?? '-' }}</td>
-                                                    <td>{{ $travel->claimCategory->claim_catagory_code ?? '-' }}</td>
+                                                    <td>{{ $travel->type_claim ?? '-' }}</td>
                                                     <td>{{ $travel->total ?? '-' }}</td>
                                                     <td>{{ $travel->desc ?? '-' }}</td>
                                                     <td><a href="/storage/{{ $travel->file_upload ?? '-' }}">{{ $travel->file_upload ?? '-' }}</a></td>
@@ -149,7 +149,7 @@
                 </div>
                 <div class="row p-2">
                     <div class="col align-self-start">
-                        <a href="/claimapproval/supervisor" class="btn btn-light" style="color: black;" type="submit"><i class="fa fa-arrow-left"></i> Back</a>
+                        <a href="/adminApprovalView" class="btn btn-light" style="color: black;" type="submit"><i class="fa fa-arrow-left"></i> Back</a>
                     </div>
                     <div class="col d-flex justify-content-end">
                         <a class="btn btn-secondary" style="color: black" type="submit"> Cancel</a> &nbsp;
