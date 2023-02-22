@@ -123,6 +123,8 @@ Route::group(['middleware' => ['web']], function () {
 
             Route::post('/createChequeNumberCa/{id}', 'createChequeNumberCa');
             Route::post('/createPvNumberCa/{id}', 'createPvNumberCa');
+            Route::post('/createClearCa/{id}', 'createClearCa');
+
 
 
 
