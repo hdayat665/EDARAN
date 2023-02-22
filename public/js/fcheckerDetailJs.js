@@ -184,7 +184,7 @@ $(document).ready(function () {
         var id = $(this).data("id");
         var stage = $(this).data("stage");
         var status = "check";
-
+        // alert(id);
         requirejs(["sweetAlert2"], function (swal) {
             $.ajax({
                 type: "POST",

@@ -14,7 +14,7 @@
         </thead>
         <tbody>
             @foreach ($claims as $claim)
-                @if ($claim->pv_number != '')
+                @if ($claim->pv_number = '')
                     <tr>
                         <td><input type="checkbox" id="" name="" value=""></td>
                         <td>
@@ -27,16 +27,15 @@
                                     <a href="/financeCheckerDetail/{{ $claim->id }}" id="" data-id="" class="dropdown-item"><i class="fa fa-eye" aria-hidden="true"></i> View
                                         GNC</a>
                                 @endif
-                                
-                                <a href="javascript:;" id="rejectButton7" data-id="{{ $claim->id }}" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#chequeModal"><i class="fa fa-ban"
-                                        aria-hidden="true"></i>
+
+                                <a href="javascript:;" id="checkModalButton" data-id="{{ $claim->id }}" class="dropdown-item" data-bs-toggle="modal"><i class="fa fa-ban" aria-hidden="true"></i>
                                     Cheque Number</a>
                                 <div class="dropdown-divider"></div>
                                 <a href="javascript:;" id="" data-id="" class="dropdown-item"><i class="fa fa-times" aria-hidden="true"></i> Cancel</a>
                             </div>
                         </td>
                         <td>{{ $claim->userProfile->fullName ?? '-' }}</td>
-                        <td>{{ $claim->created_at ?? '-' }}</td>
+                        <td>{{ date('Y-m-d', strtotime($claim->created_at)) ?? '-' }}</td>
                         <td>{{ $claim->claim_type ?? '-' }}</td>
                         <td>{{ $claim->month ?? '-' }}</td>
                         <td>{{ $claim->total_amount ?? '-' }}</td>

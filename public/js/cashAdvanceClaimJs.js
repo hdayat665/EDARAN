@@ -61,85 +61,88 @@ $(document).ready(function () {
         }
     });
 
-    $(document).on("change", "#SMOT", function () {
-        if (
-            $(this).val() == "2" ||
-            $(this).val() == "3" ||
-            $(this).val() == "5"
-        ) {
+    $(document).on('change', "#SMOT", function() {
+        if ($(this).val() == "2" || $(this).val() == '3' || $(this).val() == '5')  {
+            
             $(".SAC").show();
-            $(".TE").show();
-            $(".FF").show();
-            $(".TP").show();
-            $(".ENTT").show();
-            $(".TE").show();
-            $(".MPO").show();
-            $(".SV").show();
-            $("#day").val(0);
-            $("#night").val(0);
-            $("#fuelfare").val(0);
-            $("#tollparking").val(0);
-            $("#ent").val(0);
-            $("#totalexp").val(0);
-            $("#maxpaid").val(0);
-            $("#totalsubs").val(0);
-            $("#totalacco").val(0);
-        } else if ($(this).val() == "4") {
-            $(".SAC").show();
-            $(".TE").show();
-            $(".FF").show();
-            $(".TP").hide();
-            $(".ENTT").show();
-            $(".TE").show();
-            $(".MPO").show();
-            $(".SV").show();
-            $("#day").val(0);
-            $("#night").val(0);
-            $("#fuelfare").val(0);
-            $("#tollparking").val(0);
-            $("#ent").val(0);
-            $("#totalexp").val(0);
-            $("#maxpaid").val(0);
-            $("#totalsubs").val(0);
-            $("#totalacco").val(0);
-        } else if ($(this).val() == "6") {
-            $(".SAC").show();
-            $(".TE").show();
-            $(".FF").hide();
-            $(".TP").hide();
-            $(".ENTT").show();
-            $(".TE").show();
-            $(".MPO").show();
-            $(".SV").show();
-            $("#day").val(0);
-            $("#night").val(0);
-            $("#fuelfare").val(0);
-            $("#tollparking").val(0);
-            $("#ent").val(0);
-            $("#totalexp").val(0);
-            $("#maxpaid").val(0);
-            $("#totalsubs").val(0);
-            $("#totalacco").val(0);
-        } else {
+			$(".TE").show();
+			$(".FF").show(); 
+			$(".TP").show();
+			$(".ENTT").show();
+			$(".TE").show();
+			$(".MPO").show();
+			$(".SV").show();
+			$("#day").val(0);
+			$("#night").val(0);
+			$("#fuelfare").val(0);
+			$("#tollparking").val(0);
+			$("#ent").val(0);
+			$("#totalexp").val(0);
+			$("#maxpaid").val(0);
+			$("#totalsubs").val(0); 
+			$("#totalacco").val(0);
+			
+			
+			
+
+        } else if ($(this).val() == "4"){
+			$(".SAC").show();
+			$(".TE").show();
+			$(".FF").show();
+			$(".TP").hide();
+			$(".ENTT").show();
+			$(".TE").show();
+			$(".MPO").show();
+			$(".SV").show();
+			$("#day").val(0);
+			$("#night").val(0);
+			$("#fuelfare").val(0);
+			$("#tollparking").val(0);
+			$("#ent").val(0);
+			$("#totalexp").val(0);
+			$("#maxpaid").val(0);
+			$("#totalsubs").val(0); 
+			$("#totalacco").val(0);
+		}
+		else if ($(this).val() == "6"){
+			$(".SAC").show();
+			$(".TE").show();
+			$(".FF").hide();
+			$(".TP").hide();
+			$(".ENTT").show();
+			$(".TE").show();
+			$(".MPO").show();
+			$(".SV").show();
+			$("#day").val(0);
+			$("#night").val(0);
+			$("#fuelfare").val(0);
+			$("#tollparking").val(0);
+			$("#ent").val(0);
+			$("#totalexp").val(0);
+			$("#maxpaid").val(0);
+			$("#totalsubs").val(0); 
+			$("#totalacco").val(0);
+		}
+		else {
             $(".SAC").hide();
-            $(".TE").hide();
-            $(".FF").hide();
-            $(".TP").hide();
-            $(".ENTT").hide();
-            $(".TE").hide();
-            $(".MPO").hide();
-            $(".SV").hide();
-            $("#day").val(0);
-            $("#night").val(0);
-            $("#fuelfare").val(0);
-            $("#tollparking").val(0);
-            $("#ent").val(0);
-            $("#totalexp").val(0);
-            $("#maxpaid").val(0);
-            $("#totalsubs").val(0);
-            $("#totalacco").val(0);
+			$(".TE").hide();
+			$(".FF").hide();
+			$(".TP").hide();
+			$(".ENTT").hide();
+			$(".TE").hide();
+			$(".MPO").hide();
+			$(".SV").hide();
+			$("#day").val(0);
+			$("#night").val(0);
+			$("#fuelfare").val(0);
+			$("#tollparking").val(0);
+			$("#ent").val(0);
+			$("#totalexp").val(0);
+			$("#maxpaid").val(0);
+			$("#totalsubs").val(0); 
+			$("#totalacco").val(0);
         }
-    });
+    });	
 
     // cal mode transport
     $("#day,#subs").change(function () {
@@ -182,7 +185,7 @@ $(document).ready(function () {
     // end total transport
     $(function () {
         $("#datefilter1").daterangepicker({
-            autoUpdateInput: false,
+            autoUpdateInput: true,
             locale: {
                 cancelLabel: "Clear",
             },
@@ -205,7 +208,7 @@ $(document).ready(function () {
             $(this).val(
                 picker.startDate.format("DD/MM/YYYY") +
                     " - " +
-                    picker.endDate.format("DD/MM/YYYY")
+                    picker.endDate.format("DD/MM/YYYY") 
             );
         });
 

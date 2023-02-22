@@ -16,7 +16,7 @@
                                     <label class="form-label col-form-label">Type of Cash Advance :</label>
                                 </div>
                                 <div class="col-md-9">
-                                    <input readonly type="text" value="{{ $ca->type ?? '-' }}" class="form-control">
+                                    <input readonly type="text" value="{{ getCashAdvanceType($ca->type) ?? '-' }}" class="form-control">
                                 </div>
                             </div>
                             <div class="row p-2">
@@ -25,7 +25,7 @@
 
                                 </div>
                                 <div class="col-md-9">
-                                    <input readonly type="text" class="form-control" value="{{ getCashAdvanceType($ca->id) ?? '-' }}">
+                                    <input readonly type="text" class="form-control" value="{{ $ca->id ?? '-' }}">
                                 </div>
                             </div>
                             <div class="row p-2">
@@ -34,15 +34,6 @@
                                 </div>
                                 <div class="col-md-9">
                                     <input readonly type="text" class="form-control" value="Cash Advance">
-                                </div>
-                            </div>
-                            <div class="row p-2">
-                                <div class="col-md-3">
-                                    <label class="form-label col-form-label">Mode of Transport :</label>
-
-                                </div>
-                                <div class="col-md-9">
-                                    <input readonly type="text" class="form-control" value="{{ '-' }}">
                                 </div>
                             </div>
                             <div class="row p-2">
@@ -85,7 +76,7 @@
 
                                 </div>
                                 <div class="col-md-9">
-                                    <input readonly type="text" class="form-control" value="{{ $ca->mode_of_transport->tranport_type ?? '-' }}">
+                                    <input readonly type="text" class="form-control" value="{{ getModeOfTransport($ca->mode_of_transport->tranport_type) ?? '-' }}">
                                 </div>
                             </div>
                             <div class="row p-2">
@@ -255,7 +246,9 @@
                     <a class="btn btn-secondary" style="color: black" type="submit"> Cancel</a> &nbsp;
                     <a href="javascript:;" class="btn btn-warning" style="color: black" data-bs-toggle="modal" data-bs-target="#modalamend">Amend</a> &nbsp;
                     <a href="javascript:;" class="btn btn-danger" style="color: black" data-bs-toggle="modal" data-bs-target="#modalreject"> Reject</a> &nbsp;
-                    <a class="btn btn-lime" id="approveButton" data-id="{{ $ca->id }}" style="color: black" type="submit"> Approve</a>
+                    @if ($ca->f1 == 'check' && $ca->f2 == 'check' && ($ca->f2 == 'check' && $ca->f3 == 'check') && ($ca->f1 == 'check' && $ca->f3 == 'check') && $check == 'f1')
+                        <a class="btn btn-lime" style="color: black" type="submit"> Approve</a>
+                    @endif
                 </div>
             </div>
         </div>

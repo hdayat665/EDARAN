@@ -776,11 +776,62 @@ if (!function_exists('getEmployeeNotInProject')) {
     }
 }
 
-
 if (!function_exists('getEmployeeexcept')) {
-    function getEmployeeexcept($id = '')
-    {
-        $data = Employee::where([['tenant_id', Auth::user()->tenant_id], ['employeeid', '!=', null], ['jobGrade', $id]])->get();
+    function getEmployeeexcept()
+    {   
+        
+        $data = DB::table('employment')
+        ->join(DB::raw('(SELECT recommender FROM approval_role_general ORDER BY id DESC LIMIT 1) AS ar'), 'employment.jobGrade', '=', 'ar.recommender')
+        ->select('employment.*', 'ar.recommender')
+        ->where([['tenant_id', Auth::user()->tenant_id]])
+        ->get();
+
+
+        if (!$data) {
+            $data = [];
+        }
+
+        return $data;
+    }
+}
+if (!function_exists('getEmployeerecommender')) {
+    function getEmployeerecommender()
+    {   
+        
+        $data = DB::table('employment as e')
+            ->join('jobGrade as j', 'e.jobGrade', '=', 'j.id')
+            ->where('j.id', '<=', function ($query) {
+                $query->select('recommender')
+                    ->from('approval_role_general')
+                    ->orderBy('id', 'desc')
+                    ->limit(1);
+            })
+            ->select('e.*', 'j.jobgradename as job_grade_name')
+            ->get();
+
+
+
+        if (!$data) {
+            $data = [];
+        }
+
+        return $data;
+    }
+}
+if (!function_exists('getEmployeeapprover')) {
+    function getEmployeeapprover()
+    {   
+        
+        $data = DB::table('employment as e')
+        ->join('jobGrade as j', 'e.jobGrade', '=', 'j.id')
+        ->where('j.id', '<=', function ($query) {
+            $query->select('approver')
+                ->from('approval_role_general')
+                ->orderBy('id', 'desc')
+                ->limit(1);
+        })
+        ->select('e.*', 'j.jobgradename as job_grade_name')
+        ->get();
 
         if (!$data) {
             $data = [];
@@ -913,6 +964,22 @@ if (!function_exists('activityName')) {
     }
 }
 
+// if (!function_exists('activityName1')) {
+//     function activityName1($departmentId = '', $logsid = '')
+//     {
+//         $cond[1] = ['tenant_id', Auth::user()->tenant_id];
+//         // $cond[1] = ['tenant_id', ];
+//         $cond[2] = ['department', $departmentId];
+//         $data = ActivityLogs::where($cond)->get();
+//         if (!$data) {
+//             $data = [];
+//         }
+
+//         return $data;
+//     }
+    
+// }
+
 if (!function_exists('getEventTimesheet')) {
     function getEventTimesheet()
     {
@@ -926,18 +993,18 @@ if (!function_exists('month')) {
     function month($id = '')
     {
         $data = [
-            '01' => 'JANUARY',
-            '02' => 'FEBRUARY',
-            '03' => 'MARCH',
-            '04' => 'APRIL',
-            '05' => 'MAY',
-            '06' => 'JUNE',
-            '07' => 'JULY',
-            '08' => 'AUGUST',
-            '09' => 'SEPTEMBER',
-            '10' => 'OCTOBER',
-            '11' => 'NOVEMBER',
-            '12' => 'DECEMBER',
+            '01' => 'January',
+            '02' => 'February',
+            '03' => 'March',
+            '04' => 'April',
+            '05' => 'May',
+            '06' => 'June',
+            '07' => 'July',
+            '08' => 'August',
+            '09' => 'September',
+            '10' => 'October',
+            '11' => 'November',
+            '12' => 'December',
         ];
 
         if ($id) {
@@ -1186,7 +1253,11 @@ if (!function_exists('getClaimCategoryById')) {
 if (!function_exists('getGNCDetailByGeneralId')) {
     function getGNCDetailByGeneralId($id = '')
     {
-        $data = GeneralClaimDetail::where([['general_id', $id]])->get();
+        $data =  GeneralClaimDetail::select('general_claim_details.*', 'claim_category.claim_catagory')
+        ->leftJoin('claim_category', 'claim_category.id', '=', 'general_claim_details.claim_category')
+        ->where('general_claim_details.general_id', $id)
+        ->get();
+       //pr($data);
 
         if (!$data) {
             $data = [];

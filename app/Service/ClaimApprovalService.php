@@ -220,8 +220,22 @@ class ClaimApprovalService
         $data['claim'] = GeneralClaim::where($claim)->first();
         $data['travel'] = TravelClaim::where($travel)->get();
         $data['personal'] = PersonalClaim::where($personal)->get();
-        $data['general'] = GeneralClaimDetail::where($general)->get();
-
+        $data['general'] = GeneralClaimDetail::select(
+            'general_claim_details.*',
+            'general_claim_details.desc as gnc_desc',
+            'general_claim_details.file_upload as gnc_file_upload',
+            'claim_category.claim_catagory as claim_catagory_name',
+            'general_claim.claim_id',
+            'general_claim.year', 
+            'general_claim.month',      
+        )
+        ->leftJoin('claim_category', 'claim_category.id', '=', 'general_claim_details.claim_category')
+        ->leftJoin('general_claim', 'general_claim.claim_id', '=', 'general_claim_details.general_claim_id')
+        ->get();
+        
+       
+        //pr( $data['general']);
+        
         return $data;
     }
 
@@ -263,6 +277,25 @@ class ClaimApprovalService
 
         return $data;
     }
+
+    public function createPvNumberCa($id = '')
+    {
+        $claim = CashAdvanceDetail::where('id', $id)->first();
+
+        $pvNo = [
+            'pv_number' => 'PV-' . $claim->claim_type . '-' . $claim->id
+        ];
+
+        CashAdvanceDetail::where('id', $id)->update($pvNo);
+
+        $data['status'] = config('app.response.success.status');
+        $data['type'] = config('app.response.success.type');
+        $data['title'] = config('app.response.success.title');
+        $data['msg'] = 'Success Generate PV Number';
+
+        return $data;
+    }
+
 
     public function cashAdvanceApprovalView()
     {
@@ -357,6 +390,37 @@ class ClaimApprovalService
         $ca[1] = ['status', '!=', 'draft'];
 
         $data = CashAdvanceDetail::where($ca)->get();
+
+        return $data;
+    }
+
+    public function createChequeNumber($r, $id = '')
+    {
+        $input = $r->input();
+        
+        $input['status'] = 'paid';
+
+        GeneralClaim::where('id', $id)->update($input);
+
+        $data['status'] = config('app.response.success.status');
+        $data['type'] = config('app.response.success.type');
+        $data['title'] = config('app.response.success.title');
+        $data['msg'] = 'Success Create Cheque Number';
+
+        return $data;
+    }
+
+    public function createChequeNumberCa($r, $id = '')
+    {
+        $input = $r->input();
+        $input['status'] = 'paid';
+
+        CashAdvanceDetail::where('id', $id)->update($input);
+
+        $data['status'] = config('app.response.success.status');
+        $data['type'] = config('app.response.success.type');
+        $data['title'] = config('app.response.success.title');
+        $data['msg'] = 'Success Create Cheque Number';
 
         return $data;
     }

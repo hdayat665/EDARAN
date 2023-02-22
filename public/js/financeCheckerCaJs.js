@@ -229,6 +229,106 @@ $(document).ready(function () {
     //     });
     // });
 
+    $("#generatePv").on("click", function () {
+        // alert("ss");
+        var id = $(this).data("id");
+        // var status = "recommend";
+        // var stage = $("#checkers").val();
+
+        requirejs(["sweetAlert2"], function (swal) {
+            swal({
+                title: "Are you sure?",
+                type: "error",
+                confirmButtonClass: "btn-danger",
+                confirmButtonText: "Yes!",
+                showCancelButton: true,
+                allowOutsideClick: false,
+                allowEscapeKey: false,
+            }).then(function () {
+                $.ajax({
+                    type: "POST",
+                    url: "/createPvNumberCa/" + id,
+                    async: false,
+                    processData: false,
+                    contentType: false,
+                }).done(function (data) {
+                    swal({
+                        title: data.title,
+                        text: data.msg,
+                        type: data.type,
+                        confirmButtonColor: "#3085d6",
+                        confirmButtonText: "OK",
+                        allowOutsideClick: false,
+                        allowEscapeKey: false,
+                    }).then(function () {
+                        if (data.type == "error") {
+                        } else {
+                            location.reload();
+                        }
+                    });
+                });
+            });
+        });
+    });
+
+    $("#checkModalButton").on("click", function () {
+        // alert("ss");
+        id = $(this).data("id");
+
+        $("#chequeId").val(id);
+        $("#chequeModal").modal("show");
+        // var status = "recommend";
+        // var stage = $("#checkers").val();
+    });
+
+    $("#saveChequeButton").on("click", function () {
+        $("#chequeForm").validate({
+            // Specify validation rules
+            rules: {},
+
+            messages: {},
+            submitHandler: function (form) {
+                var data = new FormData(document.getElementById("chequeForm"));
+
+                requirejs(["sweetAlert2"], function (swal) {
+                    swal({
+                        title: "Are you sure?",
+                        type: "error",
+                        confirmButtonClass: "btn-danger",
+                        confirmButtonText: "Yes!",
+                        showCancelButton: true,
+                        allowOutsideClick: false,
+                        allowEscapeKey: false,
+                    }).then(function () {
+                        $.ajax({
+                            type: "POST",
+                            url: "/createChequeNumberCa/" + id,
+                            async: false,
+                            data: data,
+                            processData: false,
+                            contentType: false,
+                        }).done(function (data) {
+                            swal({
+                                title: data.title,
+                                text: data.msg,
+                                type: data.type,
+                                confirmButtonColor: "#3085d6",
+                                confirmButtonText: "OK",
+                                allowOutsideClick: false,
+                                allowEscapeKey: false,
+                            }).then(function () {
+                                if (data.type == "error") {
+                                } else {
+                                    location.reload();
+                                }
+                            });
+                        });
+                    });
+                });
+            },
+        });
+    });
+
     // personal
     $(document).on("click", "#btn-view", function () {
         var id = $(this).data("id");

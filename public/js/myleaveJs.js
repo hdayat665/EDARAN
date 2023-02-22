@@ -89,21 +89,51 @@ $(document).ready(function () {
         },
     });
 
-    $("#datepicker-applied").datepicker({
-        todayHighlight: true,
-        autoclose: true,
-        // format: "yyyy-mm-dd",
-    });
+    // $("#datepicker-applied").datepicker({
+    //     todayHighlight: true,
+    //     autoclose: true,
+    //     // // format: "yyyy-mm-dd",
+    // });
 
-    var dt = new Date();
-    document.getElementById("datepicker-applied").innerHTML = dt;
+    $("#datepicker-applied")
+        .datepicker({
+            todayHighlight: true,
+            autoclose: true,
+            format: "dd-mm-yyyy",
+        })
+        .datepicker("setDate", new Date());
+
+    $("#datepicker-applied")
+        .on("show", function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            return false;
+        })
+        .on("click", function (e) {
+            $(this).datepicker("hide");
+        });
+
+    // $("#datepicker-applied").datepicker("getDate");
+
+    // var dt = new Date();
+    // document.getElementById("datepicker-applied").innerHTML = dt;
 
     var dt = new Date();
     document.getElementById("datepicker-filter").innerHTML = dt;
 
+    // $("#datepicker-leave").datepicker({
+    //     todayHighlight: true,
+    //     autoclose: true,
+    //     format: "dd-mm-yyyy",
+    // });
     $("#datepicker-leave").datepicker({
         todayHighlight: true,
         autoclose: true,
+        format: "dd-mm-yyyy",
+        beforeShowDay: function (date) {
+            var day = date.getDay();
+            return [day != 0 && day != 6];
+        },
     });
 
     $("#datepicker-filter").datepicker({
@@ -114,11 +144,13 @@ $(document).ready(function () {
     $("#datepicker-start").datepicker({
         todayHighlight: true,
         autoclose: true,
+        format: "dd-mm-yyyy",
     });
 
     $("#datepicker-end").datepicker({
         todayHighlight: true,
         autoclose: true,
+        format: "dd-mm-yyyy",
     });
 
     $(document).ready(function () {
@@ -128,26 +160,70 @@ $(document).ready(function () {
         $("#menu8").hide();
     });
 
+    // $(document).on("change", "#select3", function () {
+    //     if ($(this).val() == "1") {
+    //         $("#menu5").show();
+    //         $("#select4").val(1);
+    //     } else if ($(this).val() == "0.5") {
+    //         $("#menu5").show();
+    //         $("#menu6").show();
+    //         $("#select4").val(0.5);
+    //     } else {
+    //         $("#menu5").hide();
+    //         $("#menu6").hide();
+    //     }
+    // });
+
+    // $(document).on("change", "#select3", function () {
+    //     if ($(this).val() == "-") {
+    //         $("#menu7").show();
+    //         $("#menu8").show();
+    //         $("#select4").val(0);
+    //         $("#datepicker-start").val("");
+    //         $("#datepicker-end").val("");
+    //         $("#datepicker-leave").val("");
+    //     } else {
+    //         $("#menu7").hide();
+    //         $("#menu8").hide();
+    //     }
+    // });
+
     $(document).on("change", "#select3", function () {
         if ($(this).val() == "1") {
             $("#menu5").show();
+            $("#select4").val(1);
         } else if ($(this).val() == "0.5") {
             $("#menu5").show();
             $("#menu6").show();
+            $("#select4").val(0.5);
+        } else if ($(this).val() == "-") {
+            $("#menu5").hide();
+            $("#menu6").hide();
+            $("#menu7").show();
+            $("#menu8").show();
+            $("#start-date").val("");
+            $("#end-date").val("");
+            $("#select4").val("");
         } else {
             $("#menu5").hide();
             $("#menu6").hide();
         }
     });
 
-    $(document).on("change", "#select3", function () {
-        if ($(this).val() == "-") {
-            $("#menu7").show();
-            $("#menu8").show();
-        } else {
-            $("#menu7").hide();
-            $("#menu8").hide();
+    $(document).on("change", "#datepicker-start, #datepicker-end", function () {
+        var startDate = $("#datepicker-start").val();
+        var endDate = $("#datepicker-end").val();
+        var totalDays = "";
+
+        if (startDate && endDate) {
+            var date1 = new Date(startDate.split("-").reverse().join("-"));
+            var date2 = new Date(endDate.split("-").reverse().join("-"));
+            var timeDiff = date2.getTime() - date1.getTime();
+            var dayDiff = Math.ceil(timeDiff / (1000 * 3600 * 24));
+            totalDays = dayDiff + 1;
         }
+
+        $("#select4").val(totalDays);
     });
 
     $(document).ready(function () {
@@ -243,6 +319,12 @@ $(document).ready(function () {
             } else {
                 // tampilkan pesan kesalahan jika status tidak valid
                 $("#status_display").text("Invalid status");
+            }
+
+            if (data.file) {
+                $("#fileDownloadPolicy").html(
+                    '<a href="/storage/' + data.file + '">Download File</a>'
+                );
             }
         });
     });

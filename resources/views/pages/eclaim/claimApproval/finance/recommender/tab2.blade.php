@@ -31,25 +31,25 @@
                                             GNC</a>
                                     @endif
                                     <div class="dropdown-divider"></div>
-                                    <a id="approveButton2" data-id="{{ $claim->id }}" class="dropdown-item"><i class="fa fa-check" aria-hidden="true"></i> Approve</a>
+                                    <!-- <a id="approveButton2" data-id="{{ $claim->id }}" class="dropdown-item"><i class="fa fa-check" aria-hidden="true"></i> Approve</a>
                                     <div class="dropdown-divider"></div>
                                     <a href="javascript:;" id="rejectModalButton2" data-id="{{ $claim->id }}" class="dropdown-item"><i class="fa fa-ban" aria-hidden="true"></i>
                                         Reject</a>
                                     <div class="dropdown-divider"></div>
                                     <a href="javascript:;" id="amendModalButton2" data-id="{{ $claim->id }}" class="dropdown-item"><i class="fa fa-reply" aria-hidden="true"></i>
                                         Amend</a>
-                                    <div class="dropdown-divider"></div>
+                                    <div class="dropdown-divider"></div> -->
                                     <a href="javascript:;" id="" data-id="{{ $claim->id }}" class="dropdown-item"><i class="fa fa-times" aria-hidden="true"></i> Close</a>
                                 </div>
                             </td>
-                            <td>{{ $claim->created_at ?? '-' }}</td>
+                            <td>{{ date('Y-m-d', strtotime($claim->created_at)) ?? '-' }}</td>
                             <td>{{ $claim->userProfile->fullName ?? '-' }}</td>
                             <td>{{ $claim->month ?? '-' }}</td>
                             <td>{{ $claim->id ?? '-' }}</td>
                             <td>{{ $claim->claim_type ?? '-' }}</td>
                             <td>{{ $claim->total_amount ?? '-' }}</td>
                             <td>{{ $claim->status ?? '-' }}</td>
-                            <td>{{ $claim->updated_at ?? '-' }}</td>
+                            <td>{{ date('Y-m-d', strtotime($claim->updated_at)) ?? '-' }}</td>
                         </tr>
                     @endif
                 @endforeach

@@ -62,8 +62,8 @@
                             <input type="text" readonly id="total_hour" name="total_hour" class="form-control" aria-describedby="dob">
                             <input type="hidden" readonly id="id" class="form-control" aria-describedby="dob">
                         </div>
-                        <div class="row p-2" id="activity_location">
-                            <div class="col-sm-6" id="activityByProjectEditHide">
+                        <div class="row p-2" id="activity_location_edit" >
+                            <div class="col-sm-6" id="activityByProjectEditHide" style="display: none">
                                 <label for="issuing-country" class="form-label">Activity Name*</label>
                                 <select class="form-select" id="activity_name_edit1" name="activity_name">
                                     <option class="form-label" value="">Please Choose </option>
@@ -80,7 +80,7 @@
                                 </select>
                             </div>
 
-                            <div class="col-sm-6" id="locationByProjectEditHide">
+                            <div class="col-sm-6" id="locationByProjectEditHide" style="display: none">
                                 <label for="issuing-country" class="form-label">Project Location*</label>
                                 <select class="form-select" id="projectlocsearchedit" name="project_location" aria-label="Default select example">
                                     <option class="form-label" value="">List All Project location</option>
@@ -96,7 +96,6 @@
     
                                 </select>
                             </div>
-                            
                         </div>
                     </div>
                     <div class="row p-2">

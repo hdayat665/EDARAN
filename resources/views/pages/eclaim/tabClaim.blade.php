@@ -37,7 +37,7 @@
                                                 Claim</a>
                                             <a href="/editGeneralClaimView/{{ $claim->id }}" class="dropdown-item">Update Claim</a>
                                         </div>
-                                    @elseif ($claim->status == 'paid' || $claim->status == 'rejected')
+                                    @elseif ($claim->status == 'paid' || $claim->status == 'rejected' || $claim->status == 'active')
                                         <a href="javascript:;" class="btn btn-primary btn-sm">Action</a>
                                         <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle btn-sm"><i class="fa fa-caret-down"></i></a>
                                         <div class="dropdown-menu dropdown-menu-end">
@@ -45,6 +45,7 @@
                                                 Claim</a>
                                         </div>
                                     @endif
+                                    
                                 @else
                                     @if ($claim->status == 'draft')
                                         <a href="javascript:;" class="btn btn-primary btn-sm">Action</a>
@@ -65,7 +66,7 @@
                                         <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle btn-sm"><i class="fa fa-caret-down"></i></a>
                                         <div class="dropdown-menu dropdown-menu-end">
                                             <a href="/eclaim/viewmyclaim" class="dropdown-item">View Claim</a>
-                                            <a href="javascript:;" class="dropdown-item">Update Claim</a>
+                                            <!-- <a href="javascript:;" class="dropdown-item">Update Claim</a> -->
                                             <div class="dropdown-divider"></div>
                                             <a href="javascript:;" class="dropdown-item">Cancel Claim</a>
                                         </div>
