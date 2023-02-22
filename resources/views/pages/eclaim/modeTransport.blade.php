@@ -8,13 +8,13 @@
                 <select class="form-select" id="SMOT" name="transport_type">
                     <option class="form-label" value="" selected>Please Select
                     </option>
-                    <option class="form-label" value="1">Personal Car</option>
-                    <option class="form-label" value="2">Personal Motorcycle</option>
-                    <option class="form-label" value="3">Public Transport </option>
-                    <option class="form-label" value="4">Company Car</option>
-                    <option class="form-label" value="5">Carpool</option>
+                    <option class="form-label" value="2">Personal Car</option>
+                    <option class="form-label" value="3">Personal Motorcycle</option>
+                    <option class="form-label" value="4">Public Transport </option>
+                    <option class="form-label" value="5">Company Car</option>
+                    <option class="form-label" value="6">Carpool</option>
                 </select>
-            </div>
+            </div> 
         </div>
         <!-- For Personal Car/Personal Motorcycle/Company Car -->
         <div class="SAC" style="display: none">
@@ -43,7 +43,7 @@
                         </select>
                     </div>
                     <div class="col-md-3">
-                        <input type="text" class="form-control" id="subs" value="60" readonly>
+                        <input type="text" class="form-control" id="subs" value="60" >
                     </div>
                 </div>
                 <div class="row p-2">
@@ -89,7 +89,7 @@
                         </select>
                     </div>
                     <div class="col-md-3">
-                        <input type="text" class="form-control" id="acco" value="350" readonly>
+                        <input type="text" class="form-control" id="acco" value="350" >
                     </div>
                 </div>
                 <div class="row p-2">

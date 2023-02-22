@@ -14,7 +14,7 @@
         </thead>
         <tbody>
             @foreach ($claims as $claim)
-                @if ($claim->pv_number != '')
+                @if ($claim->pv_number = '')
                     <tr>
                         <td><input type="checkbox" id="" name="" value=""></td>
                         <td>
@@ -35,7 +35,7 @@
                             </div>
                         </td>
                         <td>{{ $claim->userProfile->fullName ?? '-' }}</td>
-                        <td>{{ $claim->created_at ?? '-' }}</td>
+                        <td>{{ date('Y-m-d', strtotime($claim->created_at)) ?? '-' }}</td>
                         <td>{{ $claim->claim_type ?? '-' }}</td>
                         <td>{{ $claim->month ?? '-' }}</td>
                         <td>{{ $claim->total_amount ?? '-' }}</td>

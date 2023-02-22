@@ -62,15 +62,15 @@
                                                 <tr>
                                                     <td><a data-bs-toggle="modal" data-id="{{ $gnc->id }}" id="btn-view" class="btn btn-primary btn-sm">View</a></td>
                                                     <td>
-                                                        <input type="checkbox" {{ $gnc->f1 == 'check' ? 'checked' : '' }} class="form-check-input" disabled /> &nbsp;
-                                                        <input type="checkbox" {{ $gnc->f2 == 'check' ? 'checked' : '' }} class="form-check-input" disabled /> &nbsp;
-                                                        <input type="checkbox" {{ $gnc->f3 == 'check' ? 'checked' : '' }} class="form-check-input" disabled />
+                                                        <input type="checkbox" id="checker1" {{ $gnc->f1 == 'check' ? 'checked' : '' }} class="form-check-input" disabled /> &nbsp;
+                                                        <input type="checkbox" id="checker2" {{ $gnc->f2 == 'check' ? 'checked' : '' }} class="form-check-input" disabled /> &nbsp;
+                                                        <input type="checkbox" id="checker3" {{ $gnc->f3 == 'check' ? 'checked' : '' }} class="form-check-input" disabled />
                                                     </td>
                                                     <td>{{ $gnc->created_at ?? '-' }}</td>
                                                     <td>{{ $gnc->claim_category ?? '-' }}</td>
                                                     <td>{{ $gnc->amount ?? '-' }}</td>
                                                     <td>{{ $gnc->desc ?? '-' }}</td>
-                                                    <td>{{ $gnc->file_upload ?? '-' }}</td>
+                                                    <td><a href="/storage/{{ $gnc->file_upload ?? '-' }}">{{ $gnc->file_upload ?? '-' }}</a></td>
                                                 </tr>
                                             @endforeach
                                         @endif
@@ -121,15 +121,32 @@
                 </div>
                 <div class="row p-2">
                     <div class="col align-self-start">
-                        <a href="/claimapproval/supervisor" class="btn btn-light" style="color: black;" type="submit"><i class="fa fa-arrow-left"></i> Back</a>
+                        <a href="/financeCheckerView" class="btn btn-light" style="color: black;" type="submit"><i class="fa fa-arrow-left"></i> Back</a>
                     </div>
                     <div class="col d-flex justify-content-end">
-                        <a class="btn btn-secondary" style="color: black" type="submit"> Cancel</a> &nbsp;
-                        <a href="javascript:;" class="btn btn-warning" style="color: black" data-bs-toggle="modal" data-bs-target="#modalamend">Amend</a> &nbsp;
-                        <a href="javascript:;" class="btn btn-danger" style="color: black" data-bs-toggle="modal" data-bs-target="#modalreject"> Reject</a> &nbsp;
-                        @if ($checkers == 'f1')
-                            <a class="btn btn-lime" id="approveButton" data-id="{{ $general->id }}" style="color: black" type="submit"> Approve</a>
+                    @if ($gnc->pv_number)
+                        <!-- The pv_number is not null, so hide all buttons -->
+                    @else
+                        <!-- The pv_number is null, so show the buttons as before -->
+                        @if (($gnc->f1 == 'check' && $gnc->f2 == 'check' && $gnc->f3 == 'check'))
+                            <!-- All checkboxes are checked, so hide the Amend and Reject buttons -->
+                        @else
+                            <!-- At least one checkbox is not checked, so show the Amend and Reject buttons -->
+                            <a class="btn btn-secondary" style="color: black" type="submit"> Cancel</a> &nbsp;
+                            <a href="javascript:;" class="btn btn-warning" style="color: black" data-bs-toggle="modal" data-bs-target="#modalamend">Amend</a> &nbsp;
+                            <a href="javascript:;" class="btn btn-danger" style="color: black" data-bs-toggle="modal" data-bs-target="#modalreject"> Reject</a> &nbsp;
                         @endif
+
+                        @if (($gnc->f1 == 'check' && $gnc->f2 == 'check') || ($gnc->f1 == 'check' && $gnc->f3 == 'check') || ($gnc->f2 == 'check' && $gnc->f3 == 'check'))
+                            @if ($checkers == 'f1')
+                                <a class="btn btn-lime" id="approveButton" data-id="{{ $general->id }}" style="color: black" type="submit"> Approve</a>
+                            @endif
+                        @endif
+                    @endif
+
+
+
+                        
                     </div>
                 </div>
             </div>

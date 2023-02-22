@@ -32,14 +32,6 @@
                                             GNC</a>
                                     @endif
                                     <div class="dropdown-divider"></div>
-                                    <a id="approveButton2" data-id="{{ $claim->id }}" class="dropdown-item"><i class="fa fa-check" aria-hidden="true"></i> Approve</a>
-                                    <div class="dropdown-divider"></div>
-                                    <a href="javascript:;" id="rejectModalButton2" data-id="{{ $claim->id }}" class="dropdown-item"><i class="fa fa-ban" aria-hidden="true"></i>
-                                        Reject</a>
-                                    <div class="dropdown-divider"></div>
-                                    <a href="javascript:;" id="amendModalButton2" data-id="{{ $claim->id }}" class="dropdown-item"><i class="fa fa-reply" aria-hidden="true"></i>
-                                        Amend</a>
-                                    <div class="dropdown-divider"></div>
                                     <a href="javascript:;" id="" data-id="{{ $claim->id }}" class="dropdown-item"><i class="fa fa-times" aria-hidden="true"></i> Close</a>
                                 </div>
                             </td>

@@ -59,7 +59,7 @@
                                             @foreach ($personals as $personal)
                                                 <tr>
                                                     <td><a data-bs-toggle="modal" data-id="{{ $personal->id }}" id="btn-view" class="btn btn-primary btn-sm">View</a></td>
-                                                    <td>{{ $personal->created_at ?? '-' }}</td>
+                                                    <td>{{ date('Y-m-d', strtotime($personal->created_at)) ?? '-' }}</td>
                                                     <td>{{ $personal->claim_category ?? '-' }}</td>
                                                     <td>{{ $personal->amount ?? '-' }}</td>
                                                     <td>-</td>

@@ -798,11 +798,17 @@ if (!function_exists('getEmployeerecommender')) {
     function getEmployeerecommender()
     {   
         
-        $data = DB::table('employment')
-        ->join(DB::raw('(SELECT recommender FROM approval_role_general ORDER BY id DESC LIMIT 1) AS ar'), 'employment.jobGrade', '=', 'ar.recommender')
-        ->select('employment.*', 'ar.recommender')
-        ->where([['tenant_id', Auth::user()->tenant_id]])
-        ->get();
+        $data = DB::table('employment as e')
+            ->join('jobGrade as j', 'e.jobGrade', '=', 'j.id')
+            ->where('j.id', '<=', function ($query) {
+                $query->select('recommender')
+                    ->from('approval_role_general')
+                    ->orderBy('id', 'desc')
+                    ->limit(1);
+            })
+            ->select('e.*', 'j.jobgradename as job_grade_name')
+            ->get();
+
 
 
         if (!$data) {
@@ -816,10 +822,15 @@ if (!function_exists('getEmployeeapprover')) {
     function getEmployeeapprover()
     {   
         
-        $data = DB::table('employment')
-        ->join(DB::raw('(SELECT approver FROM approval_role_general ORDER BY id DESC LIMIT 1) AS ar'), 'employment.jobGrade', '=', 'ar.approver')
-        ->select('employment.*', 'ar.approver')
-        ->where([['tenant_id', Auth::user()->tenant_id]])
+        $data = DB::table('employment as e')
+        ->join('jobGrade as j', 'e.jobGrade', '=', 'j.id')
+        ->where('j.id', '<=', function ($query) {
+            $query->select('approver')
+                ->from('approval_role_general')
+                ->orderBy('id', 'desc')
+                ->limit(1);
+        })
+        ->select('e.*', 'j.jobgradename as job_grade_name')
         ->get();
 
         if (!$data) {
@@ -1242,7 +1253,11 @@ if (!function_exists('getClaimCategoryById')) {
 if (!function_exists('getGNCDetailByGeneralId')) {
     function getGNCDetailByGeneralId($id = '')
     {
-        $data = GeneralClaimDetail::where([['general_id', $id]])->get();
+        $data =  GeneralClaimDetail::select('general_claim_details.*', 'claim_category.claim_catagory')
+        ->leftJoin('claim_category', 'claim_category.id', '=', 'general_claim_details.claim_category')
+        ->where('general_claim_details.general_id', $id)
+        ->get();
+       //pr($data);
 
         if (!$data) {
             $data = [];

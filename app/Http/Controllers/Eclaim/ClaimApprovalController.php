@@ -494,4 +494,13 @@ class ClaimApprovalController extends Controller
 
         return response()->json($data);
     }
+
+    public function createClearCa(Request $r, $id = '')
+    {
+        $msc = new ClaimApprovalService;
+
+        $data = $msc->createClearCa($r, $id);
+
+        return response()->json($data);
+    }
 }

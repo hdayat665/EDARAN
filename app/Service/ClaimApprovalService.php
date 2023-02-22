@@ -220,7 +220,21 @@ class ClaimApprovalService
         $data['claim'] = GeneralClaim::where($claim)->first();
         $data['travel'] = TravelClaim::where($travel)->get();
         $data['personal'] = PersonalClaim::where($personal)->get();
-        $data['general'] = GeneralClaimDetail::where($general)->get();
+        $data['general'] = GeneralClaimDetail::select(
+            'general_claim_details.*',
+            'general_claim_details.desc as gnc_desc',
+            'general_claim_details.file_upload as gnc_file_upload',
+            'claim_category.claim_catagory as claim_catagory_name',
+            'general_claim.claim_id',
+            'general_claim.year',
+            'general_claim.month',
+        )
+            ->leftJoin('claim_category', 'claim_category.id', '=', 'general_claim_details.claim_category')
+            ->leftJoin('general_claim', 'general_claim.claim_id', '=', 'general_claim_details.general_claim_id')
+            ->get();
+
+
+        //pr( $data['general']);
 
         return $data;
     }
@@ -383,6 +397,7 @@ class ClaimApprovalService
     public function createChequeNumber($r, $id = '')
     {
         $input = $r->input();
+
         $input['status'] = 'paid';
 
         GeneralClaim::where('id', $id)->update($input);
@@ -406,6 +421,21 @@ class ClaimApprovalService
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
         $data['msg'] = 'Success Create Cheque Number';
+
+        return $data;
+    }
+
+    public function createClearCa($r, $id = '')
+    {
+        $input = $r->input();
+        $input['status'] = 'close';
+
+        CashAdvanceDetail::where('id', $id)->update($input);
+
+        $data['status'] = config('app.response.success.status');
+        $data['type'] = config('app.response.success.type');
+        $data['title'] = config('app.response.success.title');
+        $data['msg'] = 'Success Create Clear Date';
 
         return $data;
     }

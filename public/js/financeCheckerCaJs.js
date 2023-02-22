@@ -17,6 +17,11 @@ $(document).ready(function () {
         bFilter: false,
     });
 
+    $("#cleareddate").datepicker({
+        todayHighlight: true,
+        autoclose: true,
+    });
+
     $("#filter").click(function () {
         $("#filteronoff").toggle();
     });
@@ -125,110 +130,6 @@ $(document).ready(function () {
         // updating the value of textarea
     });
 
-    // $("#rejectButton").click(function (e) {
-    //     var id = $("#rejectId").val();
-    //     var stage = "a_approval";
-    //     var status = "reject";
-
-    //     $("#hodRejectForm").validate({
-    //         // Specify validation rules
-    //         rules: {},
-
-    //         messages: {},
-    //         submitHandler: function (form) {
-    //             requirejs(["sweetAlert2"], function (swal) {
-    //                 var data = new FormData(
-    //                     document.getElementById("hodRejectForm")
-    //                 );
-
-    //                 $.ajax({
-    //                     type: "POST",
-    //                     url:
-    //                         "/updateStatusClaim/" +
-    //                         id +
-    //                         "/" +
-    //                         status +
-    //                         "/" +
-    //                         stage,
-    //                     data: data,
-    //                     dataType: "json",
-    //                     async: false,
-    //                     processData: false,
-    //                     contentType: false,
-    //                 }).done(function (data) {
-    //                     console.log(data);
-    //                     swal({
-    //                         title: data.title,
-    //                         text: data.msg,
-    //                         type: data.type,
-    //                         confirmButtonColor: "#3085d6",
-    //                         confirmButtonText: "OK",
-    //                         allowOutsideClick: false,
-    //                         allowEscapeKey: false,
-    //                     }).then(function () {
-    //                         if (data.type == "error") {
-    //                         } else {
-    //                             location.reload();
-    //                         }
-    //                     });
-    //                 });
-    //             });
-    //         },
-    //     });
-    // });
-
-    // $("#amendButton").click(function (e) {
-    //     var id = $("#amendId").val();
-    //     var stage = "a_approval";
-    //     var status = "amend";
-
-    //     $("#hodAmendForm").validate({
-    //         // Specify validation rules
-    //         rules: {},
-
-    //         messages: {},
-    //         submitHandler: function (form) {
-    //             requirejs(["sweetAlert2"], function (swal) {
-    //                 var data = new FormData(
-    //                     document.getElementById("hodAmendForm")
-    //                 );
-
-    //                 $.ajax({
-    //                     type: "POST",
-    //                     url:
-    //                         "/updateStatusClaim/" +
-    //                         id +
-    //                         "/" +
-    //                         status +
-    //                         "/" +
-    //                         stage,
-    //                     data: data,
-    //                     dataType: "json",
-    //                     async: false,
-    //                     processData: false,
-    //                     contentType: false,
-    //                 }).done(function (data) {
-    //                     console.log(data);
-    //                     swal({
-    //                         title: data.title,
-    //                         text: data.msg,
-    //                         type: data.type,
-    //                         confirmButtonColor: "#3085d6",
-    //                         confirmButtonText: "OK",
-    //                         allowOutsideClick: false,
-    //                         allowEscapeKey: false,
-    //                     }).then(function () {
-    //                         if (data.type == "error") {
-    //                         } else {
-    //                             location.reload();
-    //                         }
-    //                     });
-    //                 });
-    //             });
-    //         },
-    //     });
-    // });
-
     $("#generatePv").on("click", function () {
         // alert("ss");
         var id = $(this).data("id");
@@ -279,6 +180,64 @@ $(document).ready(function () {
         $("#chequeModal").modal("show");
         // var status = "recommend";
         // var stage = $("#checkers").val();
+    });
+
+    $("#clearModalButton").on("click", function () {
+        // alert("ss");
+        id = $(this).data("id");
+
+        $("#clearId").val(id);
+        $("#modalcleared").modal("show");
+        // var status = "recommend";
+        // var stage = $("#checkers").val();
+    });
+
+    $("#saveClearButton").on("click", function () {
+        $("#clearForm").validate({
+            // Specify validation rules
+            rules: {},
+
+            messages: {},
+            submitHandler: function (form) {
+                var data = new FormData(document.getElementById("clearForm"));
+
+                requirejs(["sweetAlert2"], function (swal) {
+                    swal({
+                        title: "Are you sure?",
+                        type: "error",
+                        confirmButtonClass: "btn-danger",
+                        confirmButtonText: "Yes!",
+                        showCancelButton: true,
+                        allowOutsideClick: false,
+                        allowEscapeKey: false,
+                    }).then(function () {
+                        $.ajax({
+                            type: "POST",
+                            url: "/createClearCa/" + id,
+                            async: false,
+                            data: data,
+                            processData: false,
+                            contentType: false,
+                        }).done(function (data) {
+                            swal({
+                                title: data.title,
+                                text: data.msg,
+                                type: data.type,
+                                confirmButtonColor: "#3085d6",
+                                confirmButtonText: "OK",
+                                allowOutsideClick: false,
+                                allowEscapeKey: false,
+                            }).then(function () {
+                                if (data.type == "error") {
+                                } else {
+                                    location.reload();
+                                }
+                            });
+                        });
+                    });
+                });
+            },
+        });
     });
 
     $("#saveChequeButton").on("click", function () {

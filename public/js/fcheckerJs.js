@@ -247,7 +247,7 @@ $(document).ready(function () {
         // alert("ss");
         id = $(this).data("id");
 
-        $("#chequeId").val(id);
+        $("#chequeId").val(id); 
         $("#chequeModal").modal("show");
         // var status = "recommend";
         // var stage = $("#checkers").val();

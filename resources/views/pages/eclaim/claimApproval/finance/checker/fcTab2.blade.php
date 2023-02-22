@@ -16,7 +16,7 @@
         </thead>
         <tbody>
             @foreach ($claims as $claim)
-                @if ($claim->f1 == 'check' || $claim->f2 == 'check' || $claim->f3 == 'check')
+                
                     <tr>
                         <td><input type="checkbox" id="" name="" value=""></td>
                         <td>
@@ -29,7 +29,7 @@
                                     <a href="/financeCheckerDetail/{{ $claim->id }}" id="" data-id="" class="dropdown-item"><i class="fa fa-eye" aria-hidden="true"></i> View
                                         GNC</a>
                                 @endif
-                                <div class="dropdown-divider"></div>
+                                <!-- <div class="dropdown-divider"></div>
                                 <a href="javascript:;" id="approveButton2" data-id="{{ $claim->id }}" class="dropdown-item"><i class="fa fa-check" aria-hidden="true"></i> Approve</a>
                                 <div class="dropdown-divider"></div>
                                 <a href="javascript:;" id="rejectButton2" data-id="{{ $claim->id }}" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#modalreject"><i class="fa fa-ban"
@@ -40,7 +40,7 @@
                                         aria-hidden="true"></i>
                                     Amend</a>
                                 <div class="dropdown-divider"></div>
-                                <a href="javascript:;" id="" data-id="" class="dropdown-item"><i class="fa fa-times" aria-hidden="true"></i> Cancel</a>
+                                <a href="javascript:;" id="" data-id="" class="dropdown-item"><i class="fa fa-times" aria-hidden="true"></i> Cancel</a> -->
                             </div>
                         </td>
                         <td>{{ $claim->created_at ?? '-' }}</td>
@@ -52,7 +52,7 @@
                         <td>{{ $claim->status ?? '-' }}</td>
                         <td>{{ $claim->updated_at ?? '-' }}</td>
                     </tr>
-                @endif
+                
             @endforeach
         </tbody>
     </table>
