@@ -1,7 +1,7 @@
 @extends('layouts.dashboardTenant')
 @section('content')
     <div id="content" class="app-content">
-        <h1 class="page-header">eClaim <small>| My Claim | Apply Monthly Claim</small></h1> <!-- END page-header -->
+        <h1 class="page-header">eClaim <small>| My Claim | Update Monthly Claim</small></h1> <!-- END page-header -->
         <div class="panel panel" id="monthlyClaimJs">
             <div class="panel-body">
                 <div class="row p-2">
@@ -12,13 +12,14 @@
                                     <label class="form-label">Claim ID</label>
                                 </div>
                                 <div class="col-md-3">
-                                    <input readonly type="text" class="form-control">
+                                    <input readonly type="text" value="{{ $GNC->claim_id }}" name="claim-id" class="form-control">
+                                    <input type="hidden" id="idG" value="{{ $GNC->id }}">
                                 </div>
                                 <div class="col-md-3">
                                     <label class="form-label">Claim Type</label>
                                 </div>
                                 <div class="col-md-3">
-                                    <input readonly type="text" class="form-control">
+                                    <input readonly type="text" value="{{ $GNC->claim_type }}" name="claim_type" class="form-control">
                                 </div>
                             </div>
                             <div class="row p-2">
@@ -32,7 +33,7 @@
                                     <label class="form-label">Total Amount</label>
                                 </div>
                                 <div class="col-md-3">
-                                    <input readonly type="text" class="form-control">
+                                    <input readonly type="text" value="{{ $GNC->total_amount }}" name="claim_type" class="form-control">
                                 </div>
                             </div>
                             <div class="row p-2">
@@ -51,7 +52,7 @@
                     <a href="/myClaimView" class="btn btn-light" style="color: black;" type="submit"><i class="fa fa-arrow-left"></i> Back</a>
                 </div>
                 <div class="col d-flex justify-content-end">
-                    <input type="hidden" value="{{ Request::segment(4) }}" id="generalId">
+                    <input type="text" value="{{ Request::segment(4) }}" id="generalId">
                     <button class="btn btn-light" id="editSubmitButton" style="color: black" type="submit"><i class="fa fa-save"></i>
                         Submit</button>
                 </div>

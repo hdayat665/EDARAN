@@ -59,12 +59,12 @@
                                             @foreach ($gncs as $gnc)
                                                 <tr>
                                                     <td><a data-bs-toggle="modal" data-id="{{ $gnc->id }}" id="gnc_detail" class="btn btn-primary btn-sm">View</a></td>
-                                                    <td>{{ $gnc->created_at ?? '-' }}</td>
-                                                    <td>{{ $gnc->claim_category ?? '-' }}</td>
+                                                    <td>{{ date('Y-m-d', strtotime($gnc->created_at)) ?? '-' }}</td>
+                                                    <td>{{ $gnc->claim_catagory_name ?? $gnc->claim_catagory }}</td>
                                                     <td>{{ $gnc->amount ?? '-' }}</td>
                                                     <td>{{ $gnc->desc ?? '-' }}</td>
-                                                    <td>{{ $gnc->file_upload ?? '-' }}</td>
-                                                </tr>
+                                                    <td><a href="/storage/{{ $gnc->file_upload }}" download>{{ $gnc->file_upload ?? '-' }}</td>
+                                                </tr></a>
                                             @endforeach
                                         @endif
                                     </tbody>
@@ -90,13 +90,13 @@
                                                             <i class="fas fa-circle-plus text-primary fa-xl fa-fw"></i>
                                                         </div>
                                                         <div class="col-md-10">
-                                                            <p class="fw-bold">Siti Sarah Submitted claim</p>
+                                                            <p class="fw-bold">-</p>
                                                             <div class="row">
                                                                 <div class="col-md-6">
-                                                                    <p class="text-muted mb-2 fw-bold">01/03/2022</p>
+                                                                    <p class="text-muted mb-2 fw-bold">-</p>
                                                                 </div>
                                                                 <div class="col-md-6">
-                                                                    <p class="text-muted">10:24 AM</p>
+                                                                    <p class="text-muted">-</p>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -114,13 +114,18 @@
                 </div>
                 <div class="row p-2">
                     <div class="col align-self-start">
-                        <a href="/claimapproval/supervisor" class="btn btn-light" style="color: black;" type="submit"><i class="fa fa-arrow-left"></i> Back</a>
+                        <a href="/claimApprovalView/2" class="btn btn-light" style="color: black;" type="submit"><i class="fa fa-arrow-left"></i> Back</a>
                     </div>
                     <div class="col d-flex justify-content-end">
-                        <a class="btn btn-secondary" data-id="{{ $general->id }}" style="color: black" type="submit"> Cancel</a> &nbsp;
-                        <a href="javascript:;" class="btn btn-warning" style="color: black" data-bs-toggle="modal" data-bs-target="#modalamend">Amend</a> &nbsp;
-                        <a href="javascript:;" class="btn btn-danger" style="color: black" data-bs-toggle="modal" data-bs-target="#modalreject"> Reject</a> &nbsp;
-                        <a class="btn btn-lime" id="approveButton" data-id="{{ $general->id }}" style="color: black" type="submit"> Approve</a>
+                        @if ($general->status == 'recommend')
+                                    
+                                @else
+                                <a class="btn btn-secondary" data-id="{{ $general->id }}" style="color: black" type="submit"> Cancel</a> &nbsp;
+                                <a href="javascript:;" class="btn btn-warning" style="color: black" data-bs-toggle="modal" data-bs-target="#modalamend">Amend</a> &nbsp;
+                                <a href="javascript:;" class="btn btn-danger" style="color: black" data-bs-toggle="modal" data-bs-target="#modalreject"> Reject</a> &nbsp;
+                                <a class="btn btn-lime" id="approveButton" data-id="{{ $general->id }}" style="color: black" type="submit"> Approve</a>
+                                @endif
+                       
                     </div>
                 </div>
             </div>

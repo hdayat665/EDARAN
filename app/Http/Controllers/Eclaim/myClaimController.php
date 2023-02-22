@@ -59,6 +59,9 @@ class myClaimController extends Controller
     {
         $mcs = new myClaimService;
 
+        $data['GNC'] = $mcs->getGeneralClaimDataById($id);
+        $data['details'] = getGNCDetailByGeneralId($id);
+        
         $data['cashAdvances'] = $mcs->getCashAdvance();
         $data['travelClaims'] = $mcs->getTravelClaimByGeneralId($id);
         $data['personalClaims'] = $mcs->getPersonalClaimByGeneralId($id);

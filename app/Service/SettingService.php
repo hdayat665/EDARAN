@@ -80,9 +80,11 @@ class SettingService
     if($r->input('userName')){
         $data1 = $r->input('userName');
         $data2 = date('Y-m-d h:m:s');
-
+        $data3 = $r->input('id');
+        
         $insertData = [
             'tenant_id' => Auth::user()->tenant_id,
+            'role_id' => $data3,
             'up_user_id' => $data1,
             'added_by' => Auth::user()->id,
             'added_time' => $data2,
@@ -981,11 +983,12 @@ class SettingService
         return $data;
     }
     public function listuserrole()
-    {
+    {   
         $data = UserRole::where('role_user.tenant_id', Auth::user()->tenant_id)
             ->leftJoin('userprofile', 'role_user.up_user_id', '=', 'userprofile.user_id')
             ->leftJoin('users as au', 'role_user.added_by', '=', 'au.id')
             ->leftJoin('users as mu', 'role_user.modified_by', '=', 'mu.id')
+            ->leftJoin('role as rolee', 'rolee.id', '=', 'role_user.role_id')
             ->select('role_user.*', 'userprofile.fullname', 'au.username as username1', 'mu.username as username2')
             ->get();
 

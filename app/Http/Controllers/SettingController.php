@@ -261,7 +261,7 @@ class SettingController extends Controller
         return response()->json($result);
     }
 
-    public function getSOP()
+    public function getSOP(Request $r, $id)
     {
         $ss = new SettingService;
 

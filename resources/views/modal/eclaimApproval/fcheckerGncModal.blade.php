@@ -11,7 +11,7 @@
                         <label class="form-label">Year</label>
                     </div>
                     <div class="col-md-9">
-                        <input type="text" class="form-control" readonly id="year">
+                        <input type="text" class="form-control" readonly value="{{$gnc->year}}">
                     </div>
                 </div>
                 <div class="row p-2">
@@ -19,7 +19,7 @@
                         <label class="form-label">Month</label>
                     </div>
                     <div class="col-md-9">
-                        <input type="text" class="form-control" readonly id="month">
+                        <input type="text" class="form-control" readonly value="{{$gnc->month}}" >
 
                     </div>
                 </div>
@@ -29,7 +29,7 @@
                     </div>
                     <div class="col-md-9">
                         <div class="input-group">
-                            <input type="text" name="" class="form-control" id="created_at" readonly />
+                            <input type="text" name="" class="form-control" value="{{ date('Y-m-d', strtotime($gnc->created_at)) ?? '-' }}" readonly />
                             {{-- <div class="input-group-text"><i class="fa fa-calendar"></i></div> --}}
                         </div>
                     </div>
@@ -44,7 +44,7 @@
                     </div>
                 </div>
                 {{-- akan tarik data dari  labelling name dlam setting add claim --}}
-                <div class="row p-2">
+                <!-- <div class="row p-2">
                     <div class="col-md-3">
                         <input type="text" value="test" class="form-control" name="labellingname" id="label" readonly>
                     </div>
@@ -53,7 +53,7 @@
                             <option class="form-label" value="Please Select" selected>Please Select</option>
                         </select>
                     </div>
-                </div>
+                </div> -->
                 <div class="row p-2">
                     <div class="col-md-3">
                         <label class="form-label">Amount (MYR)</label>
@@ -76,7 +76,8 @@
                     </div>
                     <div class="col-md-9">
                         <input type="hidden" id="checkId">
-                        <input type="text" class="form-control" id="file_upload" readonly>
+                        <a href="/storage/{{ $gnc->file_upload ?? '-' }}">{{ $gnc->file_upload ?? '-' }}</a>
+                        <!-- <input type="text" class="form-control" id="file_upload" readonly> -->
                     </div>
                 </div>
             </div>

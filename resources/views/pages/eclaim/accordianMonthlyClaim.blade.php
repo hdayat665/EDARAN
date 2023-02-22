@@ -55,13 +55,13 @@
                             <div class="col-md-8">
                                 <input type="number" name="amount" class="form-control">
                             </div>
-                        </div>
+                        </div> 
                         <div class="row p-2">
                             <div class="col-md-4">
                                 <label class="form-label">Description</label>
                             </div>
                             <div class="col-md-8">
-                                <textarea class="form-control" id="" rows="3"></textarea>
+                                <textarea class="form-control" name="claim_desc" id="" rows="3"></textarea>
                             </div>
                         </div>
                         <div class="row p-2">

@@ -31,7 +31,7 @@ class myClaimService
     public function createGeneralClaim($r, $status = '')
     {
         $input = $r->input();
-
+        
         $generalClaimCount = GeneralClaim::where([['tenant_id', Auth::user()->tenant_id], ['type', 'GNC']])->count();
 
         if (!$generalClaimCount) {
@@ -82,7 +82,7 @@ class myClaimService
                 'updated_at' => date("Y-m-d H:i:s"),
             ];
         }
-
+        
         GeneralClaimDetail::insert($generalDetail);
 
         $data['status'] = config('app.response.success.status');
@@ -103,7 +103,7 @@ class myClaimService
     public function getGeneralClaimDataById($id = '')
     {
         $data = GeneralClaim::where([['tenant_id', Auth::user()->tenant_id], ['id', $id]])->first();
-
+        
         return $data;
     }
 
@@ -123,6 +123,8 @@ class myClaimService
         $generalDetail['user_id'] = Auth::user()->id;
         $generalDetail['general_id'] = $id;
         $generalDetail['general_claim_id'] = $generalClaimData->claim_id;
+        $generalDetail['claim_category'] = $input['claim_category'];
+        $generalDetail['claim_category_detail'] = $input['claim_category_detail'];
         $generalDetail['amount'] = $input['amount'];
         $generalDetail['desc'] = $input['desc'];
         $generalDetail['file_upload'] = $filenames ?? '';
@@ -192,14 +194,14 @@ class myClaimService
     public function createCashAdvance($r, $status = '')
     {
         $input = $r->input();
-
+       
         $cashAdvance['type'] = $input['type'] ?? '';
         $cashAdvance['tenant_id'] = Auth::user()->tenant_id ?? '';
         $cashAdvance['user_id'] = Auth::user()->id ?? '';
         $cashAdvance['project_id'] = $input['project_id'] ?? '';
         $cashAdvance['project_location_id'] = $input['project_location_id'] ?? '';
-        $cashAdvance['purpose'] = $input['purpose'] ?? '';
-        $cashAdvance['travel_date'] = $input['travel_date'] ?? '';
+        $cashAdvance['purpose'] = $input['purpose'] ?? $input['purpose3'] ?? '';
+        $cashAdvance['travel_date'] = $input['travel_date'] ?? $input['travel_date2'] ?? $input['travel_date3'] ?? '';
         $cashAdvance['destination'] = $input['destination'] ?? '';
         $cashAdvance['date_require_cash'] = $input['date_require_cash'] ?? '';
         $cashAdvance['status'] = $status ?? '';
@@ -419,7 +421,7 @@ class myClaimService
         $data['title'] = config('app.response.success.title');
         $data['id'] = $generalClaimData->id;
         $data['msg'] = 'Success';
-
+        
         return $data;
     }
 
@@ -583,7 +585,7 @@ class myClaimService
     public function getPersonalClaimByGeneralId($id = '')
     {
         $data = PersonalClaim::where('general_id', $id)->get();
-
+        
         return $data;
     }
 
