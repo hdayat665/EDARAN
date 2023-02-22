@@ -19,7 +19,7 @@
         </thead>
         <tbody>
             @foreach ($cas as $ca)
-                @if ($ca->pv_number != '' && $ca->status != 'paid')
+                @if ($ca->pv_number != '' && !in_array($ca->status, ['paid', 'clsoe']))
                     <tr>
                         <td>
                             <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle"><i class="fa fa-cogs"></i> Action <i class="fa fa-caret-down"></i></a>

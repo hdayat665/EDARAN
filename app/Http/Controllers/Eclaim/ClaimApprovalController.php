@@ -74,12 +74,12 @@ class ClaimApprovalController extends Controller
         $mcs = new ClaimApprovalService;
 
         $result = $mcs->supervisorDetailClaimView($id);
-        
+
         $data['general'] = $result['claim'];
         $data['travels'] = $result['travel'];
         $data['personals'] = $result['personal'];
         $data['gncs'] = $result['general'];
-        
+
         if ($data['general']->claim_type == 'MTC') {
             $view = 'hodClaimDetailMtc';
         } else {
@@ -491,6 +491,15 @@ class ClaimApprovalController extends Controller
         $msc = new ClaimApprovalService;
 
         $data = $msc->createChequeNumberCa($r, $id);
+
+        return response()->json($data);
+    }
+
+    public function createClearCa(Request $r, $id = '')
+    {
+        $msc = new ClaimApprovalService;
+
+        $data = $msc->createClearCa($r, $id);
 
         return response()->json($data);
     }
