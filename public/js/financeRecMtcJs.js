@@ -5,6 +5,8 @@ $(document).ready(function () {
             [5, 10, 15, 20, -1],
             [5, 10, 15, 20, "All"],
         ],
+        scrollX:true
+
     });
     $("#traveltable").DataTable({
         responsive: false,
@@ -12,6 +14,8 @@ $(document).ready(function () {
             [5, 10, 15, 20, -1],
             [5, 10, 15, 20, "All"],
         ],
+        scrollX:true
+
     });
     // travel
     $(document).on("click", "#btn-view-claim", function () {

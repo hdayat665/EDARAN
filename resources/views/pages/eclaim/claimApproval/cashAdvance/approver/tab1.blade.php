@@ -34,13 +34,14 @@
                                 <div class="dropdown-divider"></div>
                                 <a href="javascript:;" id="" data-id="" class="dropdown-item"><i class="fa fa-times" aria-hidden="true"></i> Cancel</a>
                             </div>
-                        <td>{{ $ca->id }}</td>
+                        <td>{{ $ca->id }}</td> 
                         <td>{{ $ca->userProfile->fullName ?? '-' }}</td>
                         <td>{{ getCashAdvanceType($ca->type) ?? '-' }}</td>
                         <td>{{ $ca->created_at ?? '-' }}</td>
+                        <td>{{ date('Y-m-d', strtotime($ca->created_at)) ?? '-' }}</td>
                         <td>{{ $ca->travel_date ?? '-' }}</td>
                         <td>{{ $ca->amount ?? '-' }}</td>
-                        <td>{{ $ca->updated_at ?? '-' }}</td>
+                        <td>{{ date('Y-m-d', strtotime($ca->updated_at)) ?? '-' }}</td>
                         <td>{{ $ca->status ?? '-' }}</td>
                     </tr>
                 @endif

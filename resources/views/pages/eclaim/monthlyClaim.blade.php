@@ -8,20 +8,26 @@
                     <div class="col-md-6">
                         <div class="form-control">
                             <div class="row p-2">
-                                <div class="col-md-3">
+                                <!-- <div class="col-md-3">
                                     <label class="form-label">Claim ID</label>
                                 </div>
                                 <div class="col-md-3">
                                     <input readonly type="text" class="form-control">
+                                </div> -->
+                                <div class="col-md-3">
+                                    <label class="form-label">Status</label>
+                                </div>
+                                <div class="col-md-3">
+                                    <input readonly type="text" value="Draft"class="form-control">
                                 </div>
                                 <div class="col-md-3">
                                     <label class="form-label">Claim Type</label>
                                 </div>
                                 <div class="col-md-3">
-                                    <input readonly type="text" class="form-control">
+                                    <input readonly type="text" value="MTC" class="form-control">
                                 </div>
                             </div>
-                            <div class="row p-2">
+                            <!-- <div class="row p-2">
                                 <div class="col-md-3">
                                     <label class="form-label">Status</label>
                                 </div>
@@ -34,7 +40,7 @@
                                 <div class="col-md-3">
                                     <input readonly type="text" class="form-control">
                                 </div>
-                            </div>
+                            </div> -->
                             <div class="row p-2">
                                 <br>
                             </div>

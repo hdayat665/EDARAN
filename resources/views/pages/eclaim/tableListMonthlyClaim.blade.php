@@ -60,7 +60,8 @@
                                 <td>{{ $travel->type_claim ?? '-' }}</td>
                                 <td>{{ $travel->amount ?? '-' }}</td>
                                 <td>{{ $travel->desc ?? '-' }}</td>
-                                <td>{{ $travel->file_upload ?? '-' }}</td>
+                                <td><a href="{{ route('download', ['filename' => $travel->file_upload ?? '-' ?? '-']) }}">{{$personal->file_upload ?? '-'}}</a></td>
+
                             </tr> 
                         @endforeach
 

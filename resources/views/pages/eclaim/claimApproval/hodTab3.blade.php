@@ -50,7 +50,7 @@
                             <td>{{ $claim->claim_type ?? '-' }}</td>
                             <td>{{ $claim->total_amount ?? '-' }}</td>
                             <td>{{ $claim->status ?? '-' }}</td>
-                            <td>{{ $claim->updated_at ?? '-' }}</td>
+                            <td>{{ date('Y-m-d', strtotime($claim->updated_at)) ?? '-' }}</td>
                             <td>{{ $claim->remark ?? '-' }}</td>
                         </tr>
                     @endif
