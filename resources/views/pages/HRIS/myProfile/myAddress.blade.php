@@ -39,7 +39,7 @@
                             {!! $address->country ? $address->country : '' !!}
                         </td>
                                                 
-                        <td style="text-transform: uppercase;"> {{ addressType($address->addressType) }} </td>
+                        <td style="text-transform: uppercase;"> {{ addressType($address->addressType) ?? '' }} </td>
                     </tr>
                     @endforeach
                 @endif
