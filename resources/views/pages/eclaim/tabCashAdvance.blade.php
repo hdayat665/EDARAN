@@ -30,7 +30,7 @@
                             <div class="btn-group me-1 mb-1">
                                 <a href="javascript:;" class="btn btn-primary btn-sm">Action</a>
                                 <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle btn-sm"><i class="fa fa-caret-down"></i></a>
-                                
+
                                 @if ($cashClaim->status == 'draft')
                                     <div class="dropdown-menu dropdown-menu-end">
                                         <a href="/viewCashAdvance/{{ $cashClaim->id }}" class="dropdown-item">Update Claim</a>
@@ -42,12 +42,12 @@
                                         <div class="dropdown-divider"></div>
                                         <a href="javascript:;" id="cancelCashButton" data-id="{{ $cashClaim->id }}" class="dropdown-item">Cancel Claim</a>
                                     </div>
-                                @elseif ($cashClaim->status == 'rejected' || $cashClaim->status == 'amend')
+                                @elseif ($cashClaim->status == 'amend')
                                     <div class="dropdown-menu dropdown-menu-end">
                                         <a href="/viewCashAdvance/{{ $cashClaim->id }}" class="dropdown-item">View Claim</a>
                                         <a href="/editCashAdvance/{{ $cashClaim->id }}" class="dropdown-item">Update Claim</a>
                                     </div>
-                                @elseif ($cashClaim->status == 'paid')
+                                @elseif ($cashClaim->status == 'paid' || $cashClaim->status == 'reject')
                                     <div class="dropdown-menu dropdown-menu-end">
                                         <a href="/viewCashAdvance/{{ $cashClaim->id }}" class="dropdown-item">View Claim</a>
                                     </div>
@@ -63,7 +63,7 @@
                             <td><span class="badge bg-warning" data-toggle="drafca" title="Draft">Draft</span></td>
                         @elseif ($cashClaim->status == 'active')
                             <td><span class="badge bg-lime" data-toggle="activeca" title="Active">Active</span></td>
-                        @elseif ($cashClaim->status == 'rejected')
+                        @elseif ($cashClaim->status == 'reject')
                             <td><span class="badge bg-danger" data-toggle="rejectedca" title="Rejected">Rejected</span></td>
                         @elseif ($cashClaim->status == 'amend')
                             <td><span class="badge bg-success" data-toggle="amendca" title="Amend">Amend</span></td>
