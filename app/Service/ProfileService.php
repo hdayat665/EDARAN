@@ -134,6 +134,75 @@ class ProfileService
         return $data;
     }
 
+    public function getEducation($id = '')
+    {
+        $data['data'] = UserQualification::where('id', $id)->first();
+        // pr(Storage::path($data['data']->supportDoc));
+        $data['msg'] = 'Success Get Education Data';
+
+        return $data;
+    }
+
+    public function updateEducation($r)
+    {
+        $input = $r->input();
+
+        $user_id = Auth::user()->id;
+        $id = $input['id'] ?? 1;
+
+        $user = UserQualification::where('id', $id)->first();
+
+        if(!$user)
+        {
+            $data['status'] = config('app.response.error.status');
+            $data['type'] = config('app.response.error.type');
+            $data['title'] = config('app.response.error.title');
+            $data['msg'] = 'user not found';
+        }else{
+
+            if ($_FILES['supportDoc']['name'])
+            {
+                $payslip = upload($r->file('supportDoc'));
+                $input['supportDoc'] = $payslip['filename'];
+
+                if (!$input['supportDoc']) {
+                    unset($input['supportDoc']);
+                }
+            }
+
+            UserQualification::where('id', $id)->update($input);
+
+            $data['status'] = config('app.response.success.status');
+            $data['type'] = config('app.response.success.type');
+            $data['title'] = config('app.response.success.title');
+            $data['msg'] = 'Success Update Education';
+        }
+
+        return $data;
+
+    }
+
+    public function deleteEducation($id = '')
+    {
+        $child = UserQualification::where('id',$id)->first();
+
+        if(!$child)
+        {
+            $data['status'] = config('app.response.error.status');
+            $data['type'] = config('app.response.error.type');
+            $data['title'] = config('app.response.error.title');
+            $data['msg'] = 'Education not found';
+        }else{
+            UserChildren::where('id',$id)->delete();
+            $data['status'] = config('app.response.success.status');
+            $data['type'] = config('app.response.success.type');
+            $data['title'] = config('app.response.success.title');
+            $data['msg'] = 'Education deleted';
+        }
+
+        return $data;
+    }
+
     public function updateAddress($input)
     {
         $user_id = Auth::user()->id;
@@ -145,7 +214,7 @@ class ProfileService
             $data['status'] = config('app.response.error.status');
             $data['type'] = config('app.response.error.type');
             $data['title'] = config('app.response.error.title');
-            $data['msg'] = 'user not found';
+            $data['msg'] = 'User not found';
         }else{
 
             if(!$input['address2'])
@@ -606,6 +675,7 @@ class ProfileService
         $data['profile'] = UserProfile::where('user_id', $data['user_id'])->first();
         $data['qualification'] = UserQualification::where('user_id', $data['user_id'])->get();
         $data['address'] = UserAddress::where('user_id', $data['user_id'])->first();
+        $data['addressDetails'] = UserAddress::where('user_id', $data['user_id'])->get();
         $data['emergency'] = UserEmergency::where('user_id', $data['user_id'])->first();
         $data['companions'] = UserCompanion::where('user_id', $data['user_id'])->get();
         $data['childrens'] = UserChildren::where('user_id', $data['user_id'])->get();
@@ -641,11 +711,20 @@ class ProfileService
             }
         }
 
+        $addressId[] = '';
+        if ($data['addressDetails']) {
+            foreach ($data['addressDetails'] as $address) {
+                $addressId[] = $address->id ?? null;
+            }
+        }
+
         $data['siblingId'] = implode(',', $siblingId);
 
         $data['parentId'] = implode(',', $parentId);
 
         $data['childId'] = implode(',', $childId);
+
+        $data['addressId'] = implode(',', $addressId);
 
         $data['idRun'] = 1;
 
@@ -662,6 +741,7 @@ class ProfileService
         $data['citys'] = city();
         $data['americass'] = americas();
         $data['asias'] = asias();
+        $data['addressType'] = addressType();
 
         return $data;
     }
@@ -821,6 +901,78 @@ class ProfileService
     {
         $data['data'] = Vehicle::where('id', $id)->first();
         $data['msg'] = 'Success Get Vehicle Data';
+
+        return $data;
+    }
+
+    public function getAddressDetails($id = '')
+    {
+        $data['data'] = UserAddress::where('id', $id)->first();
+        $data['msg'] = 'Success Get Address Data';
+
+        return $data;
+    }
+
+    public function addAddressDetails($r)
+    {
+        $input = $r->input();
+        $input['user_id'] = Auth::user()->id;
+        UserAddress::create($input);
+
+        $data['status'] = config('app.response.success.status');
+        $data['type'] = config('app.response.success.type');
+        $data['title'] = config('app.response.success.title');
+        $data['msg'] = 'Success add address';
+
+        return $data;
+    }
+
+    public function updateAddressDetails($r)
+    {
+        $input = $r->input();
+
+        $user_id = Auth::user()->id;
+        $id = $input['id'] ?? 1;
+
+        $user = UserAddress::find($id);
+
+        if(!$user)
+        {
+            $data['status'] = config('app.response.error.status');
+            $data['type'] = config('app.response.error.type');
+            $data['title'] = config('app.response.error.title');
+            $data['msg'] = 'Address not found';
+
+        } else {
+
+            UserAddress::where('id', $id)->update($input);
+
+            $data['status'] = config('app.response.success.status');
+            $data['type'] = config('app.response.success.type');
+            $data['title'] = config('app.response.success.title');
+            $data['msg'] = 'Success Update Address';
+        }
+
+        return $data;
+    }
+
+    public function deleteAddressDetails($id = '')
+    {
+        $addressDetails = UserAddress::where('id', $id)->first();
+
+        if(!$addressDetails)
+        {
+            $data['status'] = config('app.response.error.status');
+            $data['type'] = config('app.response.error.type');
+            $data['title'] = config('app.response.error.title');
+            $data['msg'] = 'Address not found';
+        }else{
+            UserAddress::where('id',$id)->delete();
+            $data['status'] = config('app.response.success.status');
+            $data['type'] = config('app.response.success.type');
+            $data['title'] = config('app.response.success.title');
+            $data['msg'] = 'Address deleted';
+        }
 
         return $data;
     }
