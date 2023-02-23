@@ -30,7 +30,7 @@
                     <div class="col-md-9">
                         <div class="input-group">
                             <input type="text" name="" class="form-control" value="{{ date('Y-m-d', strtotime($gnc->created_at)) ?? '-' }}" readonly />
-                            {{-- <div class="input-group-text"><i class="fa fa-calendar"></i></div> --}}
+                            <!-- {{-- <div class="input-group-text"><i class="fa fa-calendar"></i></div> --}} -->
                         </div>
                     </div>
                 </div>

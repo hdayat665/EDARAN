@@ -39,7 +39,7 @@
                         <label class="form-label">Claim Category</label>
                     </div>
                     <div class="col-md-9">
-                        <input type="text" class="form-control" readonly id="claim_category">
+                    <input type="text" class="form-control" readonly value="{{$gnc->claim_catagory_name}}" >
 
                     </div>
                 </div>
