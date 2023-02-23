@@ -32,6 +32,10 @@ $(document).ready(function() {
     });
 
     $(document).on("click", "#editButton", function() {
+        var table = $('#editactivityname tbody');
+    table.find('tr').each(function(index, row){
+        $(row).remove();
+    });
         var id = $(this).data('id');
         var vehicleData = getData(id);
 
@@ -317,7 +321,7 @@ $("#add-for-edit-row").click(function() {
         document.getElementById('edittypelogactivityName');
         return;
     } else {
-        addtypelogactivityName = addtypelogactivityName.toUpperCase();
+addtypelogactivityName = addtypelogactivityName.toUpperCase();
         let table = document.getElementById('editactivityname');
         // Insert a row at the end of the table
         let newRow = table.insertRow(-1);

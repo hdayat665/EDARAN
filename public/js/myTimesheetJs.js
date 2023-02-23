@@ -94,6 +94,12 @@ $(document).ready(function() {
         });
     }
 
+    function getActivityNamebyLogsId(id) {
+        return $.ajax({
+            url: "/getActivityNamebyLogsId/" + id
+        });
+    }
+
     var $elem = $('#addneweventselectprojectedit');
     $elem.picker({ search: true });
     $elem.on('sp-change', function() {
@@ -141,6 +147,11 @@ $(document).ready(function() {
                 .find('option')
                 .remove()
                 .end();
+
+            $('#activityLogs')
+            .find('option')
+            .remove()
+            .end();
 
             // var locationOffice = getLocationByProjectId(projectId);
 
@@ -194,6 +205,21 @@ $(document).ready(function() {
                     select.appendChild(opt);
                 }
             });
+
+            var activityLogs = getActivityNamebyLogsId(projectId);
+
+            activityLogs.done(function(data) {
+                var select = document.getElementById("activityLogs");
+                select.innerHTML = '<option value="">Please Choose</option>';
+                for (let i = 0; i < data.length; i++) {
+                    const activity = data[i];
+                    var opt = document.createElement("option");
+                    opt.value = activity['id'];
+                    opt.text = activity['activity_name'];
+                    select.appendChild(opt);
+                }
+            });
+
 
         }
 

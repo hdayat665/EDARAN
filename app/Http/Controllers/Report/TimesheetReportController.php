@@ -69,18 +69,24 @@ class TimesheetReportController extends Controller
 
             $view = 'pages.report.timesheet.employeeReportByDepartment';
         }else if($input['category'] == 'Employee'){
-            return app('App\Http\Controllers\Timesheet\MyTimesheetController')->viewTimesheet('1',$input['user_id']);
+            // return app('App\Http\Controllers\Timesheet\MyTimesheetController')->viewTimesheet('1',$input['user_id']);
+            $data['namepem'] = $trs->getdatabyemployee();
+            $view = 'pages.report.timesheet.employeeReportBySummary';
         }
 
         return view($view, $data);
     }
 
-    public function searchEmployeeReport(Request $r)
+    public function searchEmployeeReport()
     {
         $data = [];
 
+        // $trs = new TimesheetReportService;
+        // $data['logs'] = $trs->getReportTimesheetLog($r);
+
+        
         $trs = new TimesheetReportService;
-        $data['logs'] = $trs->getReportTimesheetLog($r);
+        $data['logs'] = $trs->employeeReportAll();
 
         return view('pages.report.timesheet.employeeReportAll', $data);
     }
@@ -107,6 +113,18 @@ class TimesheetReportController extends Controller
 
         return view('pages.report.timesheet.overtimeReport', $data);
     }
+
+
+    // public function employeeReportAll()
+    // {
+    //     $data = [];
+
+    //     $trs = new TimesheetReportService;
+    //     $data['logs'] = $trs->employeeReportAll();
+
+    //     return view('pages.report.timesheet.employeeReportAll', $data);
+    // }
+
 
 }
 
