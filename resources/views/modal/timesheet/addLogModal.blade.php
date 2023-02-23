@@ -11,7 +11,7 @@
                         <div class="col-sm-6">
                             <label for="firstname" class="form-label">Type Of Log*</label>
                             <select class="form-select" id="typeoflog" name="type_of_log" aria-label="Default select example">
-                                <option class="form-label" value="" selected>Please Choose</option>
+                                <option class="form-label" value="5" selected>Please Choose</option>
                                 <option class="form-label" value="1">Home</option>
                                 <option class="form-label" value="2">Office</option>
                                 <option class="form-label" value="3">My Project</option>
@@ -27,6 +27,16 @@
                         </div>
                     </div>
                     <div class="row p-2">
+                        <div class="col-sm-6" id="myproject" style="display:none">
+                            <label for="Office-Log" class="form-label">My Project*</label>
+                            <select class="form-select" id="myProject" name="project_id" aria-label="Default select example">
+                                <option class="form-label" value="">Please Choose</option>
+                                <?php $projects = project_memberaddl($user_id) ?>
+                                @foreach ($projects as $project)
+                                <option value="{{$project->id}}">{{$project->project_name}} - {{$project->project_code}}</option>
+                                @endforeach
+                            </select>
+                        </div>
                         <div class="col-sm-6" id="officelog" style="display:none">
                             <label for="Office-Log" class="form-label">Office Log*</label>
                             <select class="form-select" id="officelog2" name="office_log" aria-label="Default select example">
@@ -35,31 +45,31 @@
                                 <option class="form-label" value="2">Activity</option>
                             </select>
                         </div>
-                        <div class="col-sm-6" id="myproject" style="display:none">
-                            <label for="Office-Log" class="form-label">My Project*</label>
-                            <select class="form-select" id="myProject" name="project_id" aria-label="Default select example">
-                                <option class="form-label" value="">Please Choose</option>
-                                <?php $projects = project_member($user_id) ?>
-                                @foreach ($projects as $project)
-                                <option value="{{$project->id}}">{{$project->project_name}} - {{$project->project_code}}</option>
-                                @endforeach
-                            </select>
-                        </div>
                     </div>
                     <div class="row p-2">
-                        <div class="col-sm-6" id="listproject" style="display:none">
-                            <label for="Office-Log" class="form-label">My Project*</label>
-                            <select class="form-select" id="officeLogProject" name="office_log_project" aria-label="Default select example">
-                                <option class="form-label" value="">Please Choose</option>
-                                <?php $projects = project_member($user_id) ?>
-                                @foreach ($projects as $project)
-                                <option value="{{$project->id}}">{{$project->project_name}} - {{$project->project_code}}</option>
-                                @endforeach
-                            </select>
+                        <div class="col-sm-4">
+                            <label for="issuing-country" class="form-label">Start Time*</label>
+                            {{-- <div class="input-group"> --}}
+                                <input id="starttime" type="text" name="start_time" class="form-control" placeholder="START TIME" style=" background: #ffffff;" />
+                                <!-- <div class="input-group-text"><i class="fa fa-clock"></i></div> -->
+                            {{-- </div> --}}
+                        </div>
+                        <div class="col-sm-4 ">
+                            <label for="issuing-country" class="form-label">End Time*</label>
+                            {{-- <div class="input-group"> --}}
+                                <input id="endtime" type="text" name="end_time" class="form-control" placeholder="END TIME"  style=" background: #ffffff;"/>
+                                <!-- <div class="input-group-text"><i class="fa fa-clock"></i></div> -->
+                            {{-- </div> --}}
+                        </div>
+                        <div class="col-sm-4">
+                            <label for="issuing-country" class="form-label">Total Hours</label>
+                            <input type="text" readonly id="logduration" name="total_hours" value="" name="" class="form-control" aria-describedby="dob">
                         </div>
                     </div>
-                    <div class="row p-2">
-                        <div class="col-sm-6" id="activityByProjectHide">
+                    
+                    
+                    <div class="row p-2" id="activity_locationadd">
+                        <div class="col-sm-6" id="activityByProjectHide" style="display: none">
                             <label for="issuing-country" class="form-label">Activity Name*</label>
                             <select class="form-select" id="activity_names" name="activity_name">
                                 <option class="form-label" value="">Please Choose</option>
@@ -75,16 +85,7 @@
 
                             </select>
                         </div>
-                        <div class="col-sm-6">
-                            <label for="issuing-country" class="form-label">Start Time*</label>
-                            {{-- <div class="input-group"> --}}
-                                <input id="starttime" type="text" name="start_time" class="form-control" placeholder="START TIME" style=" background: #ffffff;" />
-                                <!-- <div class="input-group-text"><i class="fa fa-clock"></i></div> -->
-                            {{-- </div> --}}
-                        </div>
-                    </div>
-                    <div class="row p-2">
-                        <div class="col-sm-6" id="locationByProjectHide">
+                        <div class="col-sm-6" id="locationByProjectHide" style="display: none"> 
                             <label for="issuing-country" class="form-label">Project Location*</label>
                             <select class="selectpicker form-select" id="projectlocsearch" name="project_location" aria-label="Default select example">
                                 <option value="" selected>Please Choose</option>
@@ -100,14 +101,29 @@
                                 
                             </select>
                         </div>
-                        <div class="col-sm-6 ">
-                            <label for="issuing-country" class="form-label">End Time*</label>
-                            {{-- <div class="input-group"> --}}
-                                <input id="endtime" type="text" name="end_time" class="form-control" placeholder="END TIME"  style=" background: #ffffff;"/>
-                                <!-- <div class="input-group-text"><i class="fa fa-clock"></i></div> -->
-                            {{-- </div> --}}
+                    </div>
+                    
+                    <div class="row p-2">
+                        <div class="col-sm-6" id="listproject" style="display:none">
+                            <label for="Office-Log" class="form-label">My Project*</label>
+                            <select class="form-select" id="officeLogProject" name="office_log_project" aria-label="Default select example">
+                                <option class="form-label" value="">Please Choose</option>
+                                <?php $projects = project_memberaddl($user_id) ?>
+                                @foreach ($projects as $project)
+                                <option value="{{$project->id}}">{{$project->project_name}} - {{$project->project_code}}</option>
+                                @endforeach
+                            </select>
                         </div>
-                        {{-- duration purpose --}}
+                    </div>
+                    
+                    <div class="row p-2">
+                        <div class="col-sm-6">
+                          <label for="gender" class="form-label">Description</label>
+                          <textarea class="form-control" name="desc" rows="5"></textarea>
+                        </div>
+                    </div>
+                    {{-- only for total duration purpose --}}
+                    <div class="row p-2">
                         <div id="" style="display: none">
                             <div class="row p-2">
                                 <div class="col-md-4">
@@ -123,16 +139,6 @@
                                     <input  type="text" id="dayend" class=" form-control">
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="row p-2">
-                        <div class="col-sm-6">
-                            <label for="gender" class="form-label">Description</label>
-                            <textarea class="form-control" name="desc" rows="5"></textarea>
-                        </div>
-                        <div class="col-sm-6">
-                            <label for="issuing-country" class="form-label">Total Hours</label>
-                            <input type="text" readonly id="logduration" name="total_hours" value="" name="" class="form-control" aria-describedby="dob">
                         </div>
                     </div>
                     <div class="modal-footer">

@@ -17649,6 +17649,25 @@ a:focus {
     position: relative
 }
 
+/* HIGHLIGHT MENU LINK */
+
+.app-sidebar .menu .menu-item .menu-link:focus,
+.app-sidebar .menu .menu-item .menu-link:hover {
+    background: #efeff0;
+    transition: 0.3s ease;
+    color: var(--app-sidebar-component-color)
+}
+
+.menu-item.active > .menu-link {
+    color: rgba(var(--app-sidebar-component-color-rgb), 1);
+    background-color: rgba(var(--app-sidebar-active-color-rgb), 0.1);
+  }
+  
+.menu-submenu.show {
+display: block;
+}
+  
+
 .app-sidebar .menu .menu-item .menu-link {
     padding: 7px 20px;
     line-height: 20px;
@@ -17685,13 +17704,6 @@ a:focus {
 
 .app-gradient-enabled .app-sidebar .menu .menu-item .menu-link .menu-label {
     background-image: var(--bs-gradient)
-}
-
-.app-sidebar .menu .menu-item .menu-link:focus,
-.app-sidebar .menu .menu-item .menu-link:hover {
-    background: #efeff0;
-    transition: 0.3s ease;
-    color: var(--app-sidebar-component-color)
 }
 
 .app-sidebar .menu .menu-item .menu-icon {
@@ -17740,6 +17752,7 @@ a:focus {
     margin: 0 auto
 }
 
+/* HIGHLIGHT */
 .app-sidebar .menu .menu-item .menu-submenu {
     padding: 5px 0 10px 39px;
     margin: 0;
@@ -17828,7 +17841,9 @@ a:focus {
 .app-sidebar .menu .menu-item.active.has-sub>.menu-submenu {
     display: block
 }
+/* END HIGHLIGHT */
 
+/* HIGHLIGHT MENU link */
 .app-sidebar .menu .menu-item.active>.menu-link {
     position: relative;
     z-index: 10;
@@ -17862,6 +17877,7 @@ a:focus {
     color: #fff;
     background: rgba(0, 0, 0, .65)
 }
+/* END HIGHLIGHT */
 
 .app-sidebar .app-sidebar-content {
     position: relative

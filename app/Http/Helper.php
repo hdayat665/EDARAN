@@ -47,22 +47,38 @@ if (!function_exists('getCountryRegisterDomain')) {
     }
 }
 
+// if (!function_exists('upload')) {
+//     function upload($uploadedFile, $type = '')
+//     {
+//         // $filename = time() . $uploadedFile->getClientOriginalName();
+
+//         // Storage::disk('local')->putFileAs(
+//         //     'public/',
+//         //     $uploadedFile,
+//         //     $filename
+//         // );
+//         $filename = $uploadedFile->getClientOriginalName();
+//         //$filename = time() . $uploadedFile->getClientOriginalName();
+
+//         Storage::disk('local')->put(
+//             'public/' . $filename,
+//             file_get_contents($uploadedFile)
+//         );
+
+//         $data['filename'] = $filename;
+
+//         return $data;
+//     }
+// }
+   
 if (!function_exists('upload')) {
     function upload($uploadedFile, $type = '')
     {
-        // $filename = time() . $uploadedFile->getClientOriginalName();
-
-        // Storage::disk('local')->putFileAs(
-        //     'public/',
-        //     $uploadedFile,
-        //     $filename
-        // );
         $filename = $uploadedFile->getClientOriginalName();
-        //$filename = time() . $uploadedFile->getClientOriginalName();
 
         Storage::disk('local')->put(
             'public/' . $filename,
-            file_get_contents($uploadedFile),
+            file_get_contents($uploadedFile)
         );
 
         $data['filename'] = $filename;
@@ -70,7 +86,6 @@ if (!function_exists('upload')) {
         return $data;
     }
 }
-
 if (!function_exists('dateFormat')) {
     function dateFormat($date = '')
     {
@@ -139,12 +154,12 @@ if (!function_exists('educationLevel')) {
     {
         $data = [
 
-            '1' => 'primary school',
-            '2' => 'lower secondary school',
-            '3' => 'upper secondary school',
-            '4' => 'pre-university',
-            '5' => 'matriculation/foundation',
-            '6' => 'higher education',
+            '1' => 'PRIMARY SCHOOL',
+            '2' => 'LOWER SECONDARY SCHOOL',
+            '3' => 'UPPER SECONDARY SCHOOL',
+            '4' => 'PRE-UNIVERSITY',
+            '5' => 'MATRICULATION/FOUNDATION',
+            '6' => 'HIGHER EDUCATION',
         ];
 
         if ($id) {
@@ -160,12 +175,12 @@ if (!function_exists('educationType')) {
     {
         $data = [
 
-            '1' => 'primary school (year 6-12)',
-            '2' => 'lower secondary school (form 1-3)',
-            '3' => 'upper secondary school (form 4 & 5)',
-            '4' => 'pre-university (STMP / STAM)',
-            '5' => 'matriculation/foundation ',
-            '6' => 'higher education Diploma/ Bachelor Degree/ Master Degree/ Doctoral Degree',
+            '1' => 'PRIMARY SCHOOL (YEAR 6-12)',
+            '2' => 'LOWER SECONDARY SCHOOL (FORM 1-3)',
+            '3' => 'UPPER SECONDARY SCHOOL (FORM 4 & 5)',
+            '4' => 'PRE-UNIVERSITY (STMP / STAM)',
+            '5' => 'MATRICULATION/FOUNDATION ',
+            '6' => 'HIGHER EDUCATION DIPLOMA/ BACHELOR DEGREE/ MASTER DEGREE/ DOCTORAL DEGREE',
         ];
 
         if ($id) {
@@ -740,10 +755,83 @@ if (!function_exists('getEmployee')) {
         return $data;
     }
 }
+
+if (!function_exists('getEmployeeNotInProject')) {
+    function getEmployeeNotInProject($id = '')
+    {   
+        $data = DB::table('employment')
+            ->select('*')
+            ->whereNotIn('id', function($query) use ($id) {
+                $query->select('employee_id')
+                      ->from('project_member')
+                      ->where('project_id', '=', $id);
+            })
+            ->get();
+    
+        if (!$data) {
+            $data = [];
+        }
+
+        return $data;
+    }
+}
+
 if (!function_exists('getEmployeeexcept')) {
-    function getEmployeeexcept($id = '')
-    {
-        $data = Employee::where([['tenant_id', Auth::user()->tenant_id], ['employeeid', '!=', null], ['jobGrade', $id]])->get();
+    function getEmployeeexcept()
+    {   
+        
+        $data = DB::table('employment')
+        ->join(DB::raw('(SELECT recommender FROM approval_role_general ORDER BY id DESC LIMIT 1) AS ar'), 'employment.jobGrade', '=', 'ar.recommender')
+        ->select('employment.*', 'ar.recommender')
+        ->where([['tenant_id', Auth::user()->tenant_id]])
+        ->get();
+
+
+        if (!$data) {
+            $data = [];
+        }
+
+        return $data;
+    }
+}
+if (!function_exists('getEmployeerecommender')) {
+    function getEmployeerecommender()
+    {   
+        
+        $data = DB::table('employment as e')
+            ->join('jobGrade as j', 'e.jobGrade', '=', 'j.id')
+            ->where('j.id', '<=', function ($query) {
+                $query->select('recommender')
+                    ->from('approval_role_general')
+                    ->orderBy('id', 'desc')
+                    ->limit(1);
+            })
+            ->select('e.*', 'j.jobgradename as job_grade_name')
+            ->get();
+
+
+
+        if (!$data) {
+            $data = [];
+        }
+
+        return $data;
+    }
+}
+if (!function_exists('getEmployeeapprover')) {
+    function getEmployeeapprover()
+    {   
+        
+        $data = DB::table('employment as e')
+        ->join('jobGrade as j', 'e.jobGrade', '=', 'j.id')
+        ->where('j.id', '<=', function ($query) {
+            $query->select('approver')
+                ->from('approval_role_general')
+                ->orderBy('id', 'desc')
+                ->limit(1);
+        })
+        ->select('e.*', 'j.jobgradename as job_grade_name')
+        ->get();
 
         if (!$data) {
             $data = [];
@@ -756,13 +844,15 @@ if (!function_exists('accManager')) {
     function accManager()
     {
         $data = DB::table('project as a')
-            ->leftJoin('userProfile as b', 'a.acc_manager', '=', 'b.user_id')
-            ->select('b.id', 'b.fullName as name')
+            ->leftJoin('employment as b', 'a.acc_manager', '=', 'b.id')
+            ->select('b.id', 'b.employeeName as name')
             ->groupBy('acc_manager')
             // ->whereNotIn('a.id', $projectId)
             ->where('a.tenant_id', Auth::user()->tenant_id)
             ->get();
-        if (!$data) {
+
+            
+        if (!$data) { 
             $data = [];
         }
 
@@ -774,8 +864,8 @@ if (!function_exists('prjManager')) {
     function prjManager()
     {
         $data = DB::table('project as a')
-            ->leftJoin('userProfile as b', 'a.project_manager', '=', 'b.user_id')
-            ->select('b.id', 'b.fullName as name')
+            ->leftJoin('employment as b', 'a.project_manager', '=', 'b.id')
+            ->select('b.id', 'b.employeeName as name')
             ->groupBy('project_manager')
             // ->whereNotIn('a.id', $projectId)
             ->where('a.tenant_id', Auth::user()->tenant_id)
@@ -830,6 +920,34 @@ if (!function_exists('project_member')) {
     }
 }
 
+if (!function_exists('project_memberaddl')) {
+    function project_memberaddl($user_id = '')
+    {
+        $cond[1] = ['a.tenant_id', Auth::user()->tenant_id];
+
+        if ($user_id) {
+            $cond[2] = ['a.user_id', '=', $user_id];
+            $cond[3] = ['b.status', '=', 'approve'];
+        }
+
+        $data = DB::table('employment as a')
+            ->leftJoin('project_member as b', 'a.id', '=', 'b.employee_id')
+            ->leftJoin('project as c', 'b.project_id', '=', 'c.id')
+            ->select('c.id', 'c.project_name', 'c.project_code')
+            ->where($cond)
+            ->groupBy('c.project_name', 'c.project_code') // Add this line to group by the 'id' column of the 'project' table
+            ->get();
+
+        if (!$data) {
+            $data = [];
+        }
+
+        return $data;
+    }
+}
+
+
+
 if (!function_exists('activityName')) {
     function activityName($departmentId = '')
     {
@@ -846,6 +964,22 @@ if (!function_exists('activityName')) {
     }
 }
 
+// if (!function_exists('activityName1')) {
+//     function activityName1($departmentId = '', $logsid = '')
+//     {
+//         $cond[1] = ['tenant_id', Auth::user()->tenant_id];
+//         // $cond[1] = ['tenant_id', ];
+//         $cond[2] = ['department', $departmentId];
+//         $data = ActivityLogs::where($cond)->get();
+//         if (!$data) {
+//             $data = [];
+//         }
+
+//         return $data;
+//     }
+    
+// }
+
 if (!function_exists('getEventTimesheet')) {
     function getEventTimesheet()
     {
@@ -859,18 +993,18 @@ if (!function_exists('month')) {
     function month($id = '')
     {
         $data = [
-            '01' => 'JANUARY',
-            '02' => 'FEBRUARY',
-            '03' => 'MARCH',
-            '04' => 'APRIL',
-            '05' => 'MAY',
-            '06' => 'JUNE',
-            '07' => 'JULY',
-            '08' => 'AUGUST',
-            '09' => 'SEPTEMBER',
-            '10' => 'OCTOBER',
-            '11' => 'NOVEMBER',
-            '12' => 'DECEMBER',
+            '01' => 'January',
+            '02' => 'February',
+            '03' => 'March',
+            '04' => 'April',
+            '05' => 'May',
+            '06' => 'June',
+            '07' => 'July',
+            '08' => 'August',
+            '09' => 'September',
+            '10' => 'October',
+            '11' => 'November',
+            '12' => 'December',
         ];
 
         if ($id) {
@@ -1119,7 +1253,11 @@ if (!function_exists('getClaimCategoryById')) {
 if (!function_exists('getGNCDetailByGeneralId')) {
     function getGNCDetailByGeneralId($id = '')
     {
-        $data = GeneralClaimDetail::where([['general_id', $id]])->get();
+        $data =  GeneralClaimDetail::select('general_claim_details.*', 'claim_category.claim_catagory')
+        ->leftJoin('claim_category', 'claim_category.id', '=', 'general_claim_details.claim_category')
+        ->where('general_claim_details.general_id', $id)
+        ->get();
+       //pr($data);
 
         if (!$data) {
             $data = [];

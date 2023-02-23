@@ -333,33 +333,37 @@
                         </div>
                     </div>
                     <div class="row p-2">
-                        <div class="col-sm-6" id="locationByProjectAddEventHide">
-                            <label for="firstname" class="form-label">Location*</label>
-                            <select class="selectpicker form-select" name="location" id="addneweventprojectlocsearch" aria-label="Default select example">
-                                <option class="form-label" value="">Please Select</option>
-                                <?php $projectLocations = projectLocation() ?>
-                                @foreach ($projectLocations as $projectLocation)
-                                <option class="form-label" value="{{$projectLocation->id}}">{{$projectLocation->location_name}}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="col-sm-6" id="locationByProjectAddEventShow">
-                            <label for="issuing-country" class="form-label">Location*</label>
-                            <select class="selectpicker form-select" id="location_by_project_add" name="location_by_project" aria-label="Default select example">
-
-                            </select>
-                        </div>
                         <div class="col-sm-6">
                             <label for="issuing-country" class="form-label">Project</label>
                             <select class="selectpicker form-select" name="project_id" id="addneweventselectproject" aria-label="Default select example">
-                                <option class="form-label" value="">Please Select</option>
+                                <option class="form-label" value="">Please ty</option>
                                 <?php $projects = project() ?>
                                 @foreach ($projects as $project)
                                 <option class="form-label" value="{{$project->id}}">{{$project->project_name}}</option>
                                 @endforeach
                             </select>
                         </div>
+                        {{-- <div class="col-sm-6" id="venueaddpehal">
+                            <label class="form-label">Venue</label>
+                            <input type="text" class="form-control" id="" name="venue">
+                        </div> --}}
+                            <div class="col-sm-6" id="locationByProjectAddEventHide">
+                                <label for="firstname" class="form-label">Location*</label>
+                                <select class="selectpicker form-select" name="location" id="addneweventprojectlocsearch" aria-label="Default select example">
+                                    <option class="form-label" value="">Please Select</option>
+                                    <?php $projectLocations = projectLocation() ?>
+                                    @foreach ($projectLocations as $projectLocation)
+                                    <option class="form-label" value="{{$projectLocation->id}}">{{$projectLocation->location_name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="col-sm-6" id="locationByProjectAddEventShow">
+                                <label for="issuing-country" class="form-label">Location*</label>
+                                <select class="selectpicker form-select" id="location_by_project_add" name="location_by_project" aria-label="Default select example"></select>
+                            </div>
                     </div>
+                    
+                    
                     <div class="row p-2">
                         <div class="col-sm-6">
                             <label for="firstname" class="form-label">Participant*</label>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Eclaim;
 use App\Http\Controllers\Controller;
 use App\Service\ClaimApprovalService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ClaimApprovalController extends Controller
 {
@@ -78,7 +79,7 @@ class ClaimApprovalController extends Controller
         $data['travels'] = $result['travel'];
         $data['personals'] = $result['personal'];
         $data['gncs'] = $result['general'];
-
+        
         if ($data['general']->claim_type == 'MTC') {
             $view = 'hodClaimDetailMtc';
         } else {
@@ -285,15 +286,6 @@ class ClaimApprovalController extends Controller
         return view('pages.eclaim.claimApproval.admin.recommender.' . $view, $data);
     }
 
-    public function HodCashApprovalView()
-    {
-        $mcs = new ClaimApprovalService;
-
-        $data['claims'] = $mcs->getGeneralClaim();
-
-        return view('pages.eclaim.claimApproval.cashAdvance.hodApproval', $data);
-    }
-
     public function getPersonalById($id = '')
     {
         $msc = new ClaimApprovalService;
@@ -317,6 +309,198 @@ class ClaimApprovalController extends Controller
         $msc = new ClaimApprovalService;
 
         $data = $msc->getGncById($id);
+
+        return response()->json($data);
+    }
+
+    public function createPvNumber($id = '')
+    {
+        $msc = new ClaimApprovalService;
+
+        $data = $msc->createPvNumber($id);
+
+        return response()->json($data);
+    }
+
+    public function createPvNumberCa($id = '')
+    {
+        $msc = new ClaimApprovalService;
+
+        $data = $msc->createPvNumberCa($id);
+
+        return response()->json($data);
+    }
+
+
+    public function cashAdvanceApproverView()
+    {
+        $mcs = new ClaimApprovalService;
+
+        $data['cas'] = $mcs->cashAdvanceApprovalView();
+        
+        $view = 'cashAdvanceApprover';
+        
+        return view('pages.eclaim.claimApproval.cashAdvance.approver.' . $view, $data);
+    }
+
+    public function cashAdvanceApproverDetail($type = '', $id = '')
+    {
+        $mcs = new ClaimApprovalService;
+
+        $data['ca'] = $mcs->cashAdvanceApproverDetail($id);
+
+        // 1 other outside 2 other non outside 3 project outside 4 project non outside
+
+        if ($type == 1) {
+            $view = 'projectOutside';
+        } elseif ($type == 2) {
+            $view = 'projectNonOutside';
+        } elseif ($type == 3) {
+            $view = 'otherOutside';
+        } else {
+            $view = 'otherNonOutside';
+        }
+        
+        return view('pages.eclaim.claimApproval.cashAdvance.approver.' . $view, $data);
+    }
+
+    public function updateStatusCashAdvance(Request $r, $id = '', $status, $stage)
+    {
+        $msc = new ClaimApprovalService;
+
+        $data = $msc->updateStatusCashAdvance($r, $id, $status, $stage);
+
+        return response()->json($data);
+    }
+
+    public function cashAdvanceFcheckerView()
+    {
+        $mcs = new ClaimApprovalService;
+
+        $result = $mcs->cashAdvanceFcheckerView();
+        $data['check'] = $result['check'];
+        $data['cas'] = $result['general'];
+
+        $view = 'financeChecker';
+
+        return view('pages.eclaim.claimApproval.cashAdvance.finance.checker.' . $view, $data);
+    }
+
+    public function cashAdvanceFcheckerDetail($type = '', $id = '')
+    {
+        $mcs = new ClaimApprovalService;
+
+        $result = $mcs->cashAdvanceFcheckerDetail($id);
+        $data['ca'] = $result['general'];
+        $data['check'] = $result['check'];
+        // pr($data['check']);
+        // 1 other outside 2 other non outside 3 project outside 4 project non outside
+
+        if ($type == 1) {
+            $view = 'projectOutside';
+        } elseif ($type == 2) {
+            $view = 'projectNonOutside';
+        } elseif ($type == 3) {
+            $view = 'otherOutside';
+        } else {
+            $view = 'otherNonOutside';
+        }
+
+        return view('pages.eclaim.claimApproval.cashAdvance.finance.checker.' . $view, $data);
+    }
+
+    public function cashAdvanceFapproverView()
+    {
+        $mcs = new ClaimApprovalService;
+
+        $data['cas'] = $mcs->cashAdvanceFapproverView();
+
+        $view = 'financeApprover';
+
+        return view('pages.eclaim.claimApproval.cashAdvance.finance.approver.' . $view, $data);
+    }
+
+    public function cashAdvanceFapproverDetail($type = '', $id = '')
+    {
+        $mcs = new ClaimApprovalService;
+
+        $result = $mcs->cashAdvanceFcheckerDetail($id);
+        $data['ca'] = $result['general'];
+        
+        $data['check'] = $result['check'];
+        // pr($data['check']);
+        // 1 other outside 2 other non outside 3 project outside 4 project non outside
+
+        if ($type == 1) {
+            $view = 'projectOutside';
+        } elseif ($type == 2) {
+            $view = 'projectNonOutside';
+        } elseif ($type == 3) {
+            $view = 'otherOutside';
+        } else {
+            $view = 'otherNonOutside';
+        }
+
+        return view('pages.eclaim.claimApproval.cashAdvance.finance.approver.' . $view, $data);
+    }
+
+    public function cashAdvanceFrecommenderView()
+    {
+        $mcs = new ClaimApprovalService;
+
+        $data['cas'] = $mcs->cashAdvanceFapproverView();
+
+        $view = 'financeRecommender';
+
+        return view('pages.eclaim.claimApproval.cashAdvance.finance.recommender.' . $view, $data);
+    }
+
+    public function cashAdvanceFrecommenderDetail($type = '', $id = '')
+    {
+        $mcs = new ClaimApprovalService;
+
+        $result = $mcs->cashAdvanceFcheckerDetail($id);
+        $data['ca'] = $result['general'];
+        $data['check'] = $result['check'];
+        // pr($data['check']);
+        // 1 other outside 2 other non outside 3 project outside 4 project non outside
+
+        if ($type == 1) {
+            $view = 'projectOutside';
+        } elseif ($type == 2) {
+            $view = 'projectNonOutside';
+        } elseif ($type == 3) {
+            $view = 'otherOutside';
+        } else {
+            $view = 'otherNonOutside';
+        }
+
+        return view('pages.eclaim.claimApproval.cashAdvance.finance.recommender.' . $view, $data);
+    }
+
+    public function createChequeNumber(Request $r, $id = '')
+    {
+        $msc = new ClaimApprovalService;
+
+        $data = $msc->createChequeNumber($r, $id);
+
+        return response()->json($data);
+    }
+
+    public function createChequeNumberCa(Request $r, $id = '')
+    {
+        $msc = new ClaimApprovalService;
+
+        $data = $msc->createChequeNumberCa($r, $id);
+
+        return response()->json($data);
+    }
+
+    public function createClearCa(Request $r, $id = '')
+    {
+        $msc = new ClaimApprovalService;
+
+        $data = $msc->createClearCa($r, $id);
 
         return response()->json($data);
     }

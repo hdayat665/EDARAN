@@ -7,15 +7,16 @@ $(document).ready(function () {
             reader.onload = function (e) {
                 $("#croppie img").attr("src", e.target.result);
                 croppie = new Croppie($("#croppie img")[0], {
-                    boundary: { width: 200, height: 200 },
-                    viewport: { width: 100, height: 100, type: "square" },
+                    boundary: { width: 400, height: 400 },
+                    viewport: { width: 300, height: 300, type: "square" ,name: "profilePicture"},
                 });
             };
+
             $("#showImage").show();
             $("#crop").on("click", function () {
                 $("#showCroppedImage").show();
-                croppie
-                    .result({ type: "base64", circle: false })
+                
+                croppie.result({ type: "base64", circle: false })
                     .then(function (dataImg) {
                         var data = [
                             { image: dataImg },
@@ -24,6 +25,7 @@ $(document).ready(function () {
                         // use ajax to send data to php
                         $("#result_image img").attr("src", dataImg);
                     });
+                    $("#showImage").hide();
             });
             reader.readAsDataURL(this.files[0]);
         }
@@ -572,6 +574,16 @@ $(document).ready(function () {
         }
     });
 
+    $.validator.addMethod("noSpecialChars", function(value, element) {
+        return this.optional(element) || /^[^A-Za-z!@#$%^&*()\-_+={}[\]\\|<>"'\/~`,.;: ]*$/.test(value);
+      }, "Special Characters, Spaces, and Alphabet Characters Are Not Allowed.");      
+      
+    $.validator.addMethod("email", function(value, element) {
+        // Email validation regex pattern
+        return this.optional(element) || /^[^\s@]+@[^\s@]+\.(?:com|net|org|edu|gov|mil|biz|info|name|museum|coop|aero|[a-z]{2})$/.test(value);
+      }, "Please Insert Valid Email Address");
+
+
     $("#saveProfile").click(function (e) {
         $("#formProfile").validate({
             // Specify validation rules
@@ -595,10 +607,13 @@ $(document).ready(function () {
                     rangelength: [12, 12],
                 },
                 phoneNo: {
+                    required: true,
                     digits: true,
+                    rangelength: [10, 11],
                 },
                 homeNo: {
                     digits: true,
+                    rangelength: [9,9]
                 },
                 extensionNo: {
                     digits: true,
@@ -606,31 +621,34 @@ $(document).ready(function () {
             },
 
             messages: {
-                username: "Please insert username",
+                username: "Please Insert Username",
                 personalEmail: {
-                    required: "Please Insert Email Address",
-                    email: "Please Provide Valid Email Address",
+                    required: "Please Insert Personal Email",
+                    email: "Please Insert Valid Email",
                 },
-                firstName: "Please Insert Your First Name",
-                lastName: "Please Insert Your Last Name",
-                fullName: "Please Insert Your Full Name",
-                gender: "Please Choose Your Gender",
-                maritialStatus: "Please Choose Your Marital Status",
-                religion: "Please Choose Your Religion",
-                race: "Please Choose Your Race",
+                firstName: "Please Insert First Name",
+                lastName: "Please Insert Last Name",
+                fullName: "Please Insert Full Name",
+                gender: "Please Choose Gender",
+                maritialStatus: "Please Choose Marital Status",
+                religion: "Please Choose Religion",
+                race: "Please Choose Race",
                 idNo: {
-                    required: "Please Insert Identification Number",
+                    required: "Please Insert New Identification Number",
                     digits: "Please Insert Correct Identification Number Without ' - ' or Space",
-                    rangelength: "Please Provide Valid Identification Number",
+                    rangelength: "Please Insert Valid Identification Number",
                 },
                 phoneNo: {
-                    digits: "Please Insert Correct Identification Number Without ' - ' or Space",
+                    required: "Please Insert Phone Number",
+                    digits: "Please Insert Correct Phone Number Without ' - ' or Space",
+                    rangelength: "Please Insert Valid Phone Number",
                 },
                 homeNo: {
-                    digits: "Please Insert Correct Identification Number Without ' - ' or Space",
+                    digits: "Please Insert Correct Home Number Without ' - ' or Space",
+                    rangelength: "Please Inset Valid Home Number"
                 },
                 extensionNo: {
-                    digits: "Please Insert Correct Identification Number Without ' - ' or Space",
+                    digits: "Please Insert Correct Extension Number Without ' - ' or Space",
                 },
             },
     submitHandler: function(form) {
@@ -727,23 +745,23 @@ $(document).ready(function () {
             },
 
             messages: {
-                address1: "Please Insert Your Address",
-                city: "Please Insert Your City",
-                state: "Please Choose Your State",
+                address1: "Please Insert Address 1",
+                city: "Please Insert City",
+                state: "Please Choose State",
                 country: "required",
                 postcode: {
-                    required: "Please Insert Your Postcode",
-                    digits: "Please Enter Valid Postcode",
-                    rangelength: "Please Enter Valid Postcode",
+                    required: "Please Insert Postcode",
+                    digits: "Please Insert Valid Postcode",
+                    rangelength: "Please Insert Valid Postcode",
                 },
-                address1c: "Please Insert Your Address",
-                cityc: "Please Insert Your City",
-                statec: "Please Choose Your State",
+                address1c: "Please Insert Address 1",
+                cityc: "Please Insert City",
+                statec: "Please Choose State",
                 countryc: "required",
                 postcodec: {
-                    required: "Please Insert Your Postcode",
-                    digits: "Please Enter Valid Postcode",
-                    rangelength: "Please Enter Valid Postcode",
+                    required: "Please Insert Postcode",
+                    digits: "Please Insert Valid Postcode",
+                    rangelength: "Please Insert Valid Postcode",
                 },
             },
             submitHandler: function (form) {
@@ -816,9 +834,9 @@ $(document).ready(function () {
                     rangelength: "Please Insert Valid Contact Number"
                 },
                 relationship: "Please Insert Relationship",
-                address1: "Please Insert Address",
+                address1: "Please Insert Address 1",
                 postcode: {
-                    required: "Please Insert Your Postcode",
+                    required: "Please Insert Postcode",
                     digits: "Please Insert Valid Postcode",
                     rangelength: "Please Insert Valid Postcode",
                 },
@@ -927,7 +945,7 @@ $(document).ready(function () {
                 firstName: "Please Insert First Name",
                 lastName: "Please Insert Last Name",
                 idNo: {
-                    required: "Please Insert Identification Number",
+                    required: "Please Insert New Identification Number",
                     digits: "Please Insert Correct Identification Number Without ' - ' or Space",
                     rangelength: "Please Insert Valid Identification Number",
                 },
@@ -938,14 +956,14 @@ $(document).ready(function () {
                     required: "Please Insert Age",
                     digits: "Please Insert Correct Age",
                 },
-                address1: "Please Insert Your Address",
-                city: "Please Insert Your City",
-                state: "Please Choose Your State",
+                address1: "Please Insert Address 1",
+                city: "Please Insert City",
+                state: "Please Choose State",
                 country: "required",
                 postcode: {
-                    required: "Please Insert Your Postcode",
-                    digits: "Please Enter Valid Postcode",
-                    rangelength: "Please Enter Valid Postcode",
+                    required: "Please Insert Postcode",
+                    digits: "Please Insert Valid Postcode",
+                    rangelength: "Please Insert Valid Postcode",
                 },
             },
     submitHandler: function(form) {
@@ -1120,7 +1138,7 @@ $(document).ready(function () {
                 firstName: "Please Insert First Name",
                 lastName: "Please Insert Last Name",
                 idNo: {
-                    required: "Please Insert Identification Number",
+                    required: "Please Insert New Identification Number",
                     digits: "Please Insert Correct Identification Number Without ' - ' or Space",
                     rangelength: "Please Provide Valid Identification Number",
                 },
@@ -1477,14 +1495,14 @@ $(document).ready(function () {
                 gender: "Please Choose Gender",
                 contactNo: {
                     digits: "Please Insert Correct Contact Number Without ' - ' or Space",
-                    required: "please insert contact number",
+                    required: "please Insert Valid Contact Number",
                 },
                 relationship: "Please Choose Relationship",
-                address1: "Please Insert Address",
+                address1: "Please Insert Address 1",
                 postcode: {
-                    required: "Please Insert Your Postcode",
-                    digits: "Please Enter Valid Postcode",
-                    rangelength: "Please Enter Valid Postcode",
+                    required: "Please Insert Postcode",
+                    digits: "Please Insert Valid Postcode",
+                    rangelength: "Please Insert Valid Postcode",
                 },
                 city: "Please Insert City",
                 state: "Please Choose State",
@@ -1725,11 +1743,11 @@ $(document).ready(function () {
                     digits: "Please Insert Valid Contact Number Without ' - ' And Space",
                 },
                 relationship: "Please Choose Relationship",
-                address1: "Please insert Address",
+                address1: "Please Insert Address 1",
                 postcode: {
                     required: "Please Insert Postcode",
                     digits: "Please Insert Valid Postcode",
-                    rangelength: "Please Enter Valid Postcode",
+                    rangelength: "Please Insert Valid Postcode",
                 },
                 city: "Please Insert City",
                 state: "Please Choose State",
@@ -2558,6 +2576,53 @@ $(document).ready(function () {
             var ww = (year > cutoff ? "19" : "20") + year;
             var currentAge = new Date().getFullYear() - ww;
             $("#age7").val(currentAge);
+        }
+    });
+});
+$(document).on("click", "#uploadpicture", function() {
+    
+    $("#profilepicform").validate({
+        // Specify validation rules
+        rules: {
+        },
+
+        messages: {
+        },
+        submitHandler: function(form) {
+
+            requirejs(['sweetAlert2'], function(swal) {
+                
+                var data = new FormData(document.getElementById("profilepicform"));
+                var id = $('#user_id').val();
+                console.log(id );
+                $.ajax({
+                    type: "POST",
+                    url: "/updateProfile_Picture/" + id,
+                    data: data,
+                    dataType: "json",
+                    async: false,
+                    processData: false,
+                    contentType: false,
+                }).done(function(data) {
+                    swal({
+                        title: data.title,
+                        text: data.msg,
+                        type: data.type,
+                       confirmButtonColor: '#3085d6',
+                        confirmButtonText: 'OK',
+                        allowOutsideClick: false,
+                        allowEscapeKey: false,
+                    }).then(function() {
+                        if (data.type == 'error') {
+
+                        } else {
+                            location.reload();
+                        }
+
+                    });
+                });
+
+            });
         }
     });
 });

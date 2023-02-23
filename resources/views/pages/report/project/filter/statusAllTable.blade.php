@@ -66,10 +66,11 @@
                 @endif
             </tbody>
         </table>
-        
-        <a href="/projectFilter"><button type="button" class="btn btn-primary">Back</button></a>
-      
-
+        <div class="row p-2">
+                <div class="col align-self-start">
+                    <a href="/projectFilter" class="btn btn-light" style="color: black;" type="submit"><i class="fa fa-arrow-left"></i> Back</a>
+                </div>
+            </div>
     </div>
 </div>
 @endsection

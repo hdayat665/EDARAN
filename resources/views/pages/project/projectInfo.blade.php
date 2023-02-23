@@ -54,8 +54,8 @@
                                 <?php $id = 1 ?>
                                 @foreach ($projectInfos as $projectInfo)
                                 <tr class="odd gradeX">
-                                    <td width="1%"><a href="/projectInfoEdit/{{$projectInfo->id}}" class="btn btn-outline-green">
-                                        <i class="fa fa-pencil-alt"></i>
+                                    <td>
+                                        <a href="/projectInfoEdit/{{$projectInfo->id}}" class="btn btn-primary"><i class="fa fa-cogs"></i> Edit</a>
                                     </td>
                                     <td width="1%" class="fw-bold text-dark">{{$id++}}</td>
                                     <td>{{$projectInfo->LOA_date}}</td>
@@ -97,10 +97,12 @@
                                 @foreach ($projectApproval as $projectInfo)
                                 <tr class="odd gradeX">
                                     <td width="7%">
-                                        <a href="javascript:;" id="approveButton" data-id="{{$projectInfo->id}}" class="btn btn-outline-green">
-                                            <i class="fa fa-circle-check"></i>
-                                        </a>
-                                        <a href="javascript:;" id="rejectViewButton" data-id="{{$projectInfo->id}}" class="btn btn-outline-danger"><i class="fa fa-circle-xmark"></i></a>
+                                        <a href="#" data-bs-toggle="dropdown" class="btn btn-primary btn-sm dropdown-toggle"></i> Actions <i class="fa fa-caret-down"></i></a>
+                                        <div class="dropdown-menu">
+                                            <a href="javascript:;" id="approveButton" data-id="{{$projectInfo->id}}" class="dropdown-item"> Approve </a>
+                                        <div class="dropdown-divider"></div>
+                                            <a href="javascript:;" id="rejectViewButton" data-id="{{$projectInfo->id}}" class="dropdown-item"> Reject</a>
+                                        
                                     </td>
                                     <td>{{$projectInfo->requested_date}}</td>
                                     <td>{{$projectInfo->employeeName}}</td>

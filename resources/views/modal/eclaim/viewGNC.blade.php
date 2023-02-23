@@ -29,7 +29,7 @@
                     </div>
                     <div class="col-md-9">
                         <div class="input-group">
-                            <input type="text" name="" id="applied_date" class="form-control" value="" readonly />
+                            <input type="text" name="" id="created_at" value="{{ date('Y-m-d', strtotime($GNC->created_at)) }}" class="form-control" value="" readonly />
                             <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                         </div>
                     </div>
@@ -39,7 +39,7 @@
                         <label class="form-label">Claim Category</label>
                     </div>
                     <div class="col-md-9">
-                        <input type="text" class="form-control" id="claim_category" readonly>
+                        <input type="text" class="form-control" value="{{ $detail->claim_catagory }}" readonly>
                     </div>
                 </div>
                 {{-- akan tarik data dari  labelling name dlam setting add claim --}}

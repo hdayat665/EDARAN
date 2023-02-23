@@ -145,6 +145,7 @@ class EmployeeService
             ->leftjoin('department as c', 'a.department', '=', 'c.id')
             ->select('a.id', 'a.employeeId', 'a.user_id', 'b.firstName', 'b.lastName', 'b.personalEmail as email', 'b.phoneNo', 'c.departmentName as department', 'a.supervisor', 'a.report_to', 'a.status')
             ->where([['a.tenant_id', $userId], ['status', '!=', 'not complete']])
+            ->orderBy('id', 'desc')
             ->get();
 
 
@@ -928,6 +929,22 @@ class EmployeeService
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
         $data['msg'] = 'Success Update Eleave Hierarchy';
+
+        return $data;
+    }
+    public function updateProfile_Picture($r, $id)
+    {
+        $input = $r->input();
+        
+        dd($input);
+        
+        UserProfile::where('user_id', $id)->update($input);
+
+        $data['status'] = true;
+        $data['title'] = 'Success';
+        $data['type'] = 'success';
+        $data['msg'] = 'Success Create Address';
+        $data['data'] = UserProfile::where('user_id', $input['user_id'])->first();
 
         return $data;
     }

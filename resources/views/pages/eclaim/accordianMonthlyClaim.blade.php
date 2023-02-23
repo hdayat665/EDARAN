@@ -17,7 +17,7 @@
                             <div class="col-md-8">
                                 <input type="hidden" name="general_id" value="{{ Request::segment(4) }}">
                                 <input type="hidden" value="{{ isset($month_id) ? month($month_id) : $month }}" name="month">
-                                <input type="text" class="form-control" name="applied_date" id="datepickerpc">
+                                <input type="text" class="form-control" name="applied_date" readonly id="datepickerpc">
                                 <input type="hidden" value="{{ $year }}" name="year">
                             </div>
                         </div>
@@ -55,13 +55,13 @@
                             <div class="col-md-8">
                                 <input type="number" name="amount" class="form-control">
                             </div>
-                        </div>
+                        </div> 
                         <div class="row p-2">
                             <div class="col-md-4">
                                 <label class="form-label">Description</label>
                             </div>
                             <div class="col-md-8">
-                                <textarea class="form-control" id="" rows="3"></textarea>
+                                <textarea class="form-control" name="claim_desc" id="" rows="3"></textarea>
                             </div>
                         </div>
                         <div class="row p-2">
@@ -98,7 +98,7 @@
                                 <input type="hidden" name="general_id" value="{{ Request::segment(4) }}">
                                 <input type="hidden" value="{{ isset($month_id) ? month($month_id) : $month }}" name="month">
                                 <input type="hidden" value="{{ $year }}" name="year">
-                                <input type="hidden " class="form-control" id="datepickertc" name="travel_date">
+                                <input type="hidden " class="form-control" id="datepickertc" readonly name="travel_date">
                             </div>
                         </div>
                         <div class="row p-2">
@@ -484,7 +484,7 @@
                                     <label class="form-label">Breakfast</label>
                                 </div>
                                 <div class="col-md-2">
-                                    <input readonly type="text" class="form-control" value="15" id="BF">
+                                    <input  type="text" class="form-control" value="0" id="BF">
                                 </div>
                                 <div class="col-md-2">
                                     <label class="form-label">X day =</label>
@@ -499,7 +499,7 @@
                                     <label class="form-label">Lunch</label>
                                 </div>
                                 <div class="col-md-2">
-                                    <input readonly type="text" class="form-control" value="15" id="LH">
+                                    <input  type="text" class="form-control" value="0" id="LH">
                                 </div>
                                 <div class="col-md-2">
                                     <label class="form-label">X day =</label>
@@ -515,7 +515,7 @@
                                     <label class="form-label">Dinner</label>
                                 </div>
                                 <div class="col-md-2">
-                                    <input readonly type="text" class="form-control" value="15" id="DN">
+                                    <input  type="text" class="form-control" value="0" id="DN">
                                 </div>
                                 <div class="col-md-2">
                                     <label class="form-label">X day =</label>
@@ -545,10 +545,10 @@
                                     <label class="form-label">Hotel</label>
                                 </div>
                                 <div class="col-md-2">
-                                    <input readonly type="text" class="form-control" id="hotelcv">
+                                    <input  type="text" class="form-control" id="hotelcv">
                                 </div>
                                 <div class="col-md-2" style="display: none">
-                                    <input readonly type="text" class="form-control" id="hotelcv1" value="0">
+                                    <input  type="text" class="form-control" id="hotelcv1" value="0">
                                 </div>
                                 <div class="col-md-2">
                                     <label class="form-label">X Night =</label>
@@ -566,7 +566,7 @@
                                     <label class="form-label">Lodging</label>
                                 </div>
                                 <div class="col-md-2">
-                                    <input readonly type="text" class="form-control" id="lodgingcv">
+                                    <input  type="text" class="form-control" id="lodgingcv">
                                 </div>
                                 <div class="col-md-2" style="display: none">
                                     <input readonly type="text" class="form-control" id="lodgingcv1" value="0">

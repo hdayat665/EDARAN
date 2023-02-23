@@ -63,49 +63,149 @@ $(document).ready(function() {
         format: 'yyyy/mm/dd',
     });
 
-    $("#projectLocationTable").DataTable({
+
+    $(document).ready(function() {
+        var general = $("#projectLocationTable").DataTable({
         responsive: false,
         lengthMenu: [
             [5, 10, 25, 50, -1],
             [5, 10, 25, 50, "All"],
         ],
-        scrollX:true,
+        order: [],
+        drawCallback: function(settings) {
+            // Apply scrollX after the table is fully rendered
+            $("#projectLocationTable").DataTable().columns.adjust().draw();
+        },
+        columnDefs: [
+            {
+            targets: "_all",
+            orderable: false,
+            },
+        ],
+        });
+    
+        $("#nav_pro_loc").on("click", function() {
+        setTimeout(function() {
+            general.columns.adjust().draw();
+        }, 200);
+        });
     });
+
    
-    $("#data-table-prevproject").DataTable({
-        responsive: false,
-        lengthMenu: [
+    $(document).ready(function() {
+        var general = $("#data-table-prevproject").DataTable({
+          responsive: false,
+          lengthMenu: [
             [5, 10, 25, 50, -1],
             [5, 10, 25, 50, "All"],
-        ],
-        scrollX:true,
-    });
-    $("#projectMemberTable").DataTable({
-        responsive: false,
-        lengthMenu: [
-            [5, 10, 25, 50, -1],
-            [5, 10, 25, 50, "All"],
-        ],
-        scrollX:true,
-    });
+          ],
+          order: [], // Disable sorting
+          drawCallback: function(settings) {
+            // Apply scrollX after the table is fully rendered
+            requestAnimationFrame(function() {
+              $("#data-table-prevproject").DataTable().columns.adjust().draw();
+            });
+          },
+          columnDefs: [
+            {
+              targets: "_all",
+              orderable: false,
+            },
+          ],
+        });
+      
+        $("#nav_pre_pro").on("click", function() {
+          requestAnimationFrame(function() {
+            general.columns.adjust().draw();
+          });
+        });
+      });
+      
 
-    $("#projectMemberPrevTable").DataTable({
-        responsive: false,
-        lengthMenu: [
+    $(document).ready(function() {
+        var general = $("#projectMemberTable").DataTable({
+          responsive: false,
+          lengthMenu: [
             [5, 10, 25, 50, -1],
             [5, 10, 25, 50, "All"],
-        ],
-        scrollX:true,
+          ],
+          drawCallback: function(settings) {
+            // Apply scrollX after the table is fully rendered
+            $("#projectMemberTable").DataTable().columns.adjust().draw();
+          },
+          order: [],
+          columnDefs: [
+            {
+              targets: "_all",
+              orderable: false,
+            },
+          ],
+        });
+      
+        $("#current_mem").on("click", function() {
+          setTimeout(function() {
+            general.columns.adjust().draw();
+          }, 200);
+        });
+      });
+    
+    $(document).ready(function() {
+        var general = $("#projectMemberPrevTable").DataTable({
+          responsive: false,
+          lengthMenu: [
+            [5, 10, 25, 50, -1],
+            [5, 10, 25, 50, "All"],
+          ],
+          drawCallback: function(settings) {
+            // Apply scrollX after the table is fully rendered
+            $("#projectMemberPrevTable").DataTable().columns.adjust().draw();
+          },
+          order: [],
+          columnDefs: [
+            {
+              targets: "_all",
+              orderable: false,
+            },
+          ],
+        });
+      
+        $("#previous_mem").on("click", function() {
+          setTimeout(function() {
+            general.columns.adjust().draw();
+          }, 200);
+        });
     });
+     
+    $(document).ready(function() {
+        var general = $("#data-table-default2").DataTable({
+          responsive: false,
+          lengthMenu: [
+            [5, 10, 25, 50, -1],
+            [5, 10, 25, 50, "All"],
+          ],
+          order: [], // Disable sorting
+          drawCallback: function(settings) {
+            // Apply scrollX after the table is fully rendered
+            requestAnimationFrame(function() {
+              $("#data-table-default2").DataTable().columns.adjust().draw();
+            });
+          },
+          columnDefs: [
+            {
+              targets: "_all",
+              orderable: false,
+            },
+          ],
+        });
+      
+        $("#default-tab-2").on("click", function() {
+          requestAnimationFrame(function() {
+            general.columns.adjust().draw();
+          });
+        });
+      });
 
-    $("#data-table-default2").DataTable({
-        responsive: false,
-        lengthMenu: [
-            [5, 10, 25, 50, -1],
-            [5, 10, 25, 50, "All"],
-        ],
-        scrollX:true,
-    });
+   
 
     var hash = location.hash.replace(/^#/, '');  // ^ means starting, meaning only match the first hash
     if (hash) {
@@ -124,26 +224,23 @@ $(document).ready(function() {
                 contract_value: "required",
                 financial_year: "required",
                 LOA_date: "required",
-                project_manager: "required",
                 contract_start_date: "required",
                 contract_end_date: "required",
                 acc_manager: "required",
-                project_manager: "required",
                 status: "required",
             },
 
             messages: {
-                customer_id: "Please Select Customer Name",
-                project_code: "Please Enter Project Code",
-                project_name: "Please Enter Project Name",
-                contract_value: "Please Enter Contract Value",
-                financial_year: "Please Select Financial Year",
-                project_manager: "Please Select Project Manager",
-                LOA_date: "Please Enter LOA Date",
-                contract_start_date: "Please Select Specific Date",
-                contract_end_date: "Please Select Specific Date",
-                acc_manager: "Please Enter Account Manager",
-                status: "Please Enter Status",
+                customer_id: "Please Choose Customer Name",
+                project_code: "Please Insert Project Code",
+                project_name: "Please Insert Project Name",
+                contract_value: "Please Insert Contract Value",
+                financial_year: "Please Choose Financial Year",
+                LOA_date: "Please Choose LOA Date",
+                contract_start_date: "Please Choose Contract Start Date",
+                contract_end_date: "Please Choose Contract End Date",
+                acc_manager: "Please Insert Account Manager",
+                status: "Please Insert Status",
             },
             submitHandler: function(form) {
                 requirejs(['sweetAlert2'], function(swal) {
@@ -204,16 +301,16 @@ $(document).ready(function() {
             },
 
             messages: {
-                location_name: "Insert Location Name",
-                address: "Enter Address",
+                location_name: "Please Insert Location Name",
+                address: "Please Insert Address 1",
                 postcode: {
-                    required: "Enter Valid Postcode",
-                    digits: "Enter Valid Postcode",
-                    rangelength: "Enter Valid Postcode",
+                    required: "Please Insert Postcode",
+                    digits: "Please Insert Valid Postcode",
+                    rangelength: "Please Insert Valid Postcode",
                 },
-                city: "Enter City",
-                state: "Choose State",
-                location_google: "Selecet Location",
+                city: "Please Insert City",
+                state: "Please Choose State",
+                location_google: "Please Choose Location",
             },
             submitHandler: function(form) {
                 requirejs(['sweetAlert2'], function(swal) {
@@ -318,16 +415,16 @@ $(document).ready(function() {
             },
 
             messages: {
-                location_name: "Insert Location Name",
-                address: "Enter Address",
+                location_name: "Please Insert Location Name",
+                address: "Please Insert Address 1",
                 postcode: {
-                    required: "Enter Valid Postcode",
-                    digits: "Enter Valid Postcode",
-                    rangelength: "Enter Valid Postcode",
+                    required: "Please Insert Postcode",
+                    digits: "Please Insert Valid Postcode",
+                    rangelength: "Please Insert Valid Postcode",
                 },
-                city: "Enter City",
-                state: "Choose State",
-                location_google: "Selecet Location",
+                city: "Please Insert City",
+                state: "Please Choose State",
+                location_google: "Please Choose Location",
             },
             submitHandler: function(form) {
                 requirejs(['sweetAlert2'], function(swal) {
@@ -423,15 +520,19 @@ $(document).ready(function() {
             rules: {
                 joined_date: "required",
                 employee_id: "required",
+                designation: "required",
+                department:"required",
                 branch: "required",
                 unit:"required",
                 location_name: "required",
             },
 
             messages: {
-                joined_date: "Please Choose Date",
-                employee_id: "Please Choose Name",
+                joined_date: "Please Choose Joined Date",
+                employee_id: "Please Choose Project Member Name",
+                department:"Please Choose department",
                 branch: "Please Choose Branch",
+                designation: "Please Choose designation",
                 unit:"Please Choose Unit",
                 location_name:"Please Select Location",
             },
@@ -499,7 +600,12 @@ $(document).ready(function() {
     }
 
     $(document).on("click", "#addProjectMemberButton", function() {
-        $('#addProjectMemberModal').modal('show'); 
+        // Get the data-id value from the button
+        var id = $(this).data('id');
+        // Add the id value to the modal as a data attribute
+        console.log(id);
+        
+        $('#addProjectMemberModal').data('id', id).modal('show');
 
     });
 
@@ -823,20 +929,44 @@ $(document).ready(function() {
         });
     }); 
 
+    $.validator.addMethod("noSpecialChars", function(value, element) {
+        return this.optional(element) || /^[^A-Za-z!@#$%^&*()\-_+={}[\]\\|<>"'\/~`,.;: ]*$/.test(value);
+      }, "Special Characters, Spaces, and Alphabet Characters Are Not Allowed.");      
+      
+    $.validator.addMethod("email", function(value, element) {
+        // Email validation regex pattern
+        return this.optional(element) || /^[^\s@]+@[^\s@]+\.(?:com|net|org|edu|gov|mil|biz|info|name|museum|coop|aero|[a-z]{2})$/.test(value);
+      }, "Please Insert Valid Email Address");
+
+
     $('#updateButton').click(function(e) {
         $("#editForm").validate({
             rules: {
                 customer_name: "required",
                 address: "required",
-                phoneNo: "required",
-                email: "required",
+                phoneNo: {
+                    required: true,
+                    digits: true,
+                    rangelength: [10, 11]
+                },
+                email: {
+                    required: true,
+                    email: true // Use the email validation method
+                  },
             },
 
             messages: {
                 customer_name: "Please Insert Name",
-                address: "Please Insert Address",
-                phoneNo: "Please Inser Phone Number",
-                email: "Please Inser a Valid Email Address",
+                address: "Please Insert Address 1",
+                phoneNo: {
+                    required: "Please Insert Phone Number",
+                    digits: "Please Insert Correct Phone Number Without ' - ' or Space",
+                    rangelength: "Please Insert Valid Phone Number",
+                },
+                email: {
+                    required: "Please Insert Email Address",
+                    email: "Please Insert Valid Email Address"
+                  },
             },
             submitHandler: function(form) {
                 requirejs(['sweetAlert2'], function(swal) {

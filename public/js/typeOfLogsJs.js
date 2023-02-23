@@ -5,10 +5,13 @@ $(document).ready(function() {
         autoclose: true,
     });
     $('#typeOfLogsTable').DataTable({
-        lengthMenu: [5],
+        lengthMenu: [
+            [5, 10, 25, 50, -1],
+            [5, 10, 25, 50, "All"],
+        ],
         responsive: false,
         "searching": true,
-        "bLengthChange": false
+        "bLengthChange": true
     });
     $('#activityname').DataTable({
         lengthMenu: [5],
@@ -260,7 +263,7 @@ $(document).ready(function() {
     });
 
     $(document).on('change', "#addtypeoflog", function() {
-        if ($(this).val() == "Project") {
+        if ($(this).val() == "PROJECT") {
             $("#addtypeoflogproject").show();
         } else {
             $("#addtypeoflogproject").hide();
@@ -269,7 +272,7 @@ $(document).ready(function() {
         }
     });
     $(document).on('change', "#addtypeoflogedit", function() {
-        if ($(this).val() == "Project") {
+        if ($(this).val() == "PROJECT") {
             $("#addtypeoflogprojectedit").show();
         } else {
             $("#addtypeoflogprojectedit").hide();

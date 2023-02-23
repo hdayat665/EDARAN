@@ -25,10 +25,12 @@
                         <label class="form-label">Type of Log* </label>
                         <select class="form-select" id="addtypeoflogedit" name="type_of_log" aria-label="Default select example">
                             <option class="form-label" value="" selected>Select Type of Log</option>
-                            <option class="form-label" value="Non-Project" >Non-Project</option>
-                            <option class="form-label" value="Project" >Project</option>
-                            <option class="form-label" value="Office" >Office</option>
-                            <option class="form-label" value="Others" >Others</option>
+                            <option class="form-label" value="NON-PROJECT" >NON-PROJECT</option>
+                            <option class="form-label" value="PROJECT" >PROJECT</option>
+                            <option class="form-label" value="OFFICE" >OFFICE</option>
+                            <option class="form-label" value="OTHERS" >OTHERS</option>
+                            <option class="form-label" value="HOME" >HOME</option>
+                            {{-- <option class="form-label" value="OTHERS">OTHERS</option> --}}
                         </select>
                     </div>
                     <div class="mb-3" id="addtypeoflogprojectedit" style="display:none">
@@ -44,7 +46,7 @@
                     <div class="row p-2">
                         <div class="col-sm-10" id="" >
                             <label for="firstname" class="form-label">Activity Name*</label>
-                            <input type="text" id="edittypelogactivityName" placeholder="Name" class="form-control">
+                            <input type="text" id="edittypelogactivityName" placeholder="Name" class="form-control" style="text-transform: uppercase;>
 
 
                         </div>

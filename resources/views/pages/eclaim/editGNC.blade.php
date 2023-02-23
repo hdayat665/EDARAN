@@ -21,9 +21,7 @@
                                         <label class="form-label">Claim Type</label>
                                     </div>
                                     <div class="col-md-3">
-                                        <select class="form-select">
-                                            <option class="form-label" selected>Please Select</option>
-                                        </select>
+                                        <input readonly type="text" name="claim_type" value="GNC" class="form-control">
                                     </div>
                                 </div>
                                 <div class="row p-2">
@@ -79,8 +77,8 @@
                                             <label class="form-label">Applied Date</label>
                                         </div>
                                         <div class="col-md-9">
-                                            <div class="input-group" id="">
-                                                <input type="text" name="applied_date" class="form-control" value="{{ $GNC->created_at }}" id="udatepicker" />
+                                            <div class="input-group" id=""> 
+                                                <input type="text" name="applied_date" class="form-control" disabled value="{{ date('Y-m-d', strtotime($GNC->created_at))  }}" id="udatepicker" />
                                                 <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                             </div>
                                         </div>
@@ -90,9 +88,24 @@
                                             <label class="form-label">Claim Category</label>
                                         </div>
                                         <div class="col-md-9">
-                                            <select class="form-select" name="claim_categorys">
-                                                <option class="form-label" value="" selected>Please Select
-                                                </option>
+                                            <select class="form-select" id="claimcategory" name="claim_category">
+                                                <option class="form-label" value="Please Select" selected>Please
+                                                    Select</option>
+                                                {{ $categorys = getClaimCategory() }}
+                                                @foreach ($categorys as $category)
+                                                    <option value="{{ $category->id }}">{{ $category->claim_catagory }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="row p-2">
+                                        <div class="col-md-3">
+                                            <label class="form-label" id="label"></label>
+                                        </div>
+                                        <div class="col-md-9">
+                                            <select class="form-select" id="contentLabel" name="claim_category_detail">
+                                                <option class="form-label" value="Please Select" selected>Please
+                                                    Select</option>
                                             </select>
                                         </div>
                                     </div>
@@ -147,8 +160,8 @@
                                         @foreach ($details as $detail)
                                             <tr>
                                                 <td><a data-bs-toggle="modal" id="deleteButton" data-id="{{ $detail->id }}" class="btn btn-primary btn-sm">Delete</a></td>
-                                                <td>{{ $detail->created_at }}</td>
-                                                <td>{{ $detail->claim_category }}</td>
+                                                <td>{{ date('Y-m-d', strtotime($GNC->created_at))   }}</td>
+                                                <td>{{ $detail->claim_catagory ?? $detail->claim_category }}</td>
                                                 <td>{{ $detail->amount }}</td>
                                                 <td>{{ $detail->desc }}</td>
                                                 <td> <a href="/storage/{{ $detail->file_upload }}">{{ $detail->file_upload }}</a></td>

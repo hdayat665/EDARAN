@@ -107,31 +107,31 @@ $(document).ready(function () {
                 var opt = document.createElement("option");
                 document.getElementById("checker1").innerHTML +=
                     '<option value="' +
-                    user["id"] +
+                    user["user_id"] +
                     '">' +
                     user["user_profile"]["fullName"] +
                     "</option>";
                 document.getElementById("checker2").innerHTML +=
                     '<option value="' +
-                    user["id"] +
+                    user["user_id"] +
                     '">' +
                     user["user_profile"]["fullName"] +
                     "</option>";
                 document.getElementById("checker3").innerHTML +=
                     '<option value="' +
-                    user["id"] +
+                    user["user_id"] +
                     '">' +
                     user["user_profile"]["fullName"] +
                     "</option>";
                 document.getElementById("recommender").innerHTML +=
                     '<option value="' +
-                    user["id"] +
+                    user["user_id"] +
                     '">' +
                     user["user_profile"]["fullName"] +
                     "</option>";
                 document.getElementById("approver").innerHTML +=
                     '<option value="' +
-                    user["id"] +
+                    user["user_id"] +
                     '">' +
                     user["user_profile"]["fullName"] +
                     "</option>";
@@ -179,31 +179,31 @@ $(document).ready(function () {
                 var opt = document.createElement("option");
                 document.getElementById("checker1C").innerHTML +=
                     '<option value="' +
-                    user["id"] +
+                    user["user_id"] +
                     '">' +
                     user["user_profile"]["fullName"] +
                     "</option>";
                 document.getElementById("checker2C").innerHTML +=
                     '<option value="' +
-                    user["id"] +
+                    user["user_id"] +
                     '">' +
                     user["user_profile"]["fullName"] +
                     "</option>";
                 document.getElementById("checker3C").innerHTML +=
                     '<option value="' +
-                    user["id"] +
+                    user["user_id"] +
                     '">' +
                     user["user_profile"]["fullName"] +
                     "</option>";
                 document.getElementById("recommenderC").innerHTML +=
                     '<option value="' +
-                    user["id"] +
+                    user["user_id"] +
                     '">' +
                     user["user_profile"]["fullName"] +
                     "</option>";
                 document.getElementById("approverC").innerHTML +=
                     '<option value="' +
-                    user["id"] +
+                    user["user_id"] +
                     '">' +
                     user["user_profile"]["fullName"] +
                     "</option>";
@@ -251,31 +251,31 @@ $(document).ready(function () {
                 var opt = document.createElement("option");
                 document.getElementById("checker1F").innerHTML +=
                     '<option value="' +
-                    user["id"] +
+                    user["user_id"] +
                     '">' +
                     user["user_profile"]["fullName"] +
                     "</option>";
                 document.getElementById("checker2F").innerHTML +=
                     '<option value="' +
-                    user["id"] +
+                    user["user_id"] +
                     '">' +
                     user["user_profile"]["fullName"] +
                     "</option>";
                 document.getElementById("checker3F").innerHTML +=
                     '<option value="' +
-                    user["id"] +
+                    user["user_id"] +
                     '">' +
                     user["user_profile"]["fullName"] +
                     "</option>";
                 document.getElementById("recommenderF").innerHTML +=
                     '<option value="' +
-                    user["id"] +
+                    user["user_id"] +
                     '">' +
                     user["user_profile"]["fullName"] +
                     "</option>";
                 document.getElementById("approverF").innerHTML +=
                     '<option value="' +
-                    user["id"] +
+                    user["user_id"] +
                     '">' +
                     user["user_profile"]["fullName"] +
                     "</option>";

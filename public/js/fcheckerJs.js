@@ -47,7 +47,7 @@ $(document).ready(function () {
     $(
         "#rejectModalButton, #rejectModalButton1, #rejectModalButton2, #rejectModalButton3, #rejectModalButton4"
     ).on("click", function () {
-        alert("ss");
+        // /alert("ss");
         id = $(this).data("id");
 
         $("#rejectId").val(id);
@@ -194,6 +194,106 @@ $(document).ready(function () {
                             } else {
                                 location.reload();
                             }
+                        });
+                    });
+                });
+            },
+        });
+    });
+
+    $(document).on("click", "#generatePv", function () {
+        // alert("ss");
+        var id = $(this).data("id");
+        // var status = "recommend";
+        // var stage = $("#checkers").val();
+
+        requirejs(["sweetAlert2"], function (swal) {
+            swal({
+                title: "Are you sure?",
+                type: "error",
+                confirmButtonClass: "btn-danger",
+                confirmButtonText: "Yes!",
+                showCancelButton: true,
+                allowOutsideClick: false,
+                allowEscapeKey: false,
+            }).then(function () {
+                $.ajax({
+                    type: "POST",
+                    url: "/createPvNumber/" + id,
+                    async: false,
+                    processData: false,
+                    contentType: false,
+                }).done(function (data) {
+                    swal({
+                        title: data.title,
+                        text: data.msg,
+                        type: data.type,
+                        confirmButtonColor: "#3085d6",
+                        confirmButtonText: "OK",
+                        allowOutsideClick: false,
+                        allowEscapeKey: false,
+                    }).then(function () {
+                        if (data.type == "error") {
+                        } else {
+                            location.reload();
+                        }
+                    });
+                });
+            });
+        });
+    });
+
+    $(document).on("click", "#checkModalButton", function () {
+        // alert("ss");
+        id = $(this).data("id");
+
+        $("#chequeId").val(id);
+        $("#chequeModal").modal("show");
+        // var status = "recommend";
+        // var stage = $("#checkers").val();
+    });
+
+    $("#saveChequeButton").on("click", function () {
+        $("#chequeForm").validate({
+            // Specify validation rules
+            rules: {},
+
+            messages: {},
+            submitHandler: function (form) {
+                var data = new FormData(document.getElementById("chequeForm"));
+
+                requirejs(["sweetAlert2"], function (swal) {
+                    swal({
+                        title: "Are you sure?",
+                        type: "error",
+                        confirmButtonClass: "btn-danger",
+                        confirmButtonText: "Yes!",
+                        showCancelButton: true,
+                        allowOutsideClick: false,
+                        allowEscapeKey: false,
+                    }).then(function () {
+                        $.ajax({
+                            type: "POST",
+                            url: "/createChequeNumber/" + id,
+                            async: false,
+                            data: data,
+                            processData: false,
+                            contentType: false,
+                        }).done(function (data) {
+                            swal({
+                                title: data.title,
+                                text: data.msg,
+                                type: data.type,
+                                confirmButtonColor: "#3085d6",
+                                confirmButtonText: "OK",
+                                allowOutsideClick: false,
+                                allowEscapeKey: false,
+                            }).then(function () {
+                                if (data.type == "error") {
+                                } else {
+                                    location.reload();
+                                }
+                            });
                         });
                     });
                 });

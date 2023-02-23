@@ -261,7 +261,7 @@ class SettingController extends Controller
         return response()->json($result);
     }
 
-    public function getSOP()
+    public function getSOP(Request $r, $id)
     {
         $ss = new SettingService;
 
@@ -477,9 +477,13 @@ class SettingController extends Controller
     {
         $ss = new SettingService;
 
-        $result = $ss->roleView();
+        // $result = $ss->roleView();
+        $data['roles'] = $ss->roleView();
+        $data['rolestaff'] = $ss->myrolestaff();
+        $data['listuserrole'] = $ss->listuserrole();
 
-        return view('pages.setting.role', $result);
+
+        return view('pages.setting.role', $data);
     }
 
     public function sopView()

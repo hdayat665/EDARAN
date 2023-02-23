@@ -14,8 +14,8 @@
         </thead>
         <tbody>
             @foreach ($claims as $claim)
-                @if ($claim->status == 'reject')
-                    <tr>
+            @if ($claim->pv_number != '' && $claim->cheque_number =='')
+            <tr>
                         <td><input type="checkbox" id="" name="" value=""></td>
                         <td>
                             <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle"><i class="fa fa-cogs"></i> Action <i class="fa fa-caret-down"></i></a>
@@ -27,26 +27,19 @@
                                     <a href="/financeCheckerDetail/{{ $claim->id }}" id="" data-id="" class="dropdown-item"><i class="fa fa-eye" aria-hidden="true"></i> View
                                         GNC</a>
                                 @endif
-                                <div class="dropdown-divider"></div>
-                                <a href="javascript:;" id="approveButton7" data-id="{{ $claim->id }}" class="dropdown-item"><i class="fa fa-check" aria-hidden="true"></i> Approve</a>
-                                <div class="dropdown-divider"></div>
-                                <a href="javascript:;" id="rejectButton7" data-id="{{ $claim->id }}" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#modalreject"><i class="fa fa-ban"
-                                        aria-hidden="true"></i>
-                                    Reject</a>
-                                <div class="dropdown-divider"></div>
-                                <a href="javascript:;" id="amendButton7" data-id="{{ $claim->id }}" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#modalamend"><i class="fa fa-reply"
-                                        aria-hidden="true"></i>
-                                    Amend</a>
+
+                                <a href="javascript:;" id="checkModalButton" data-id="{{ $claim->id }}" class="dropdown-item" data-bs-toggle="modal"><i class="fa fa-ban" aria-hidden="true"></i>
+                                    Cheque Number</a>
                                 <div class="dropdown-divider"></div>
                                 <a href="javascript:;" id="" data-id="" class="dropdown-item"><i class="fa fa-times" aria-hidden="true"></i> Cancel</a>
                             </div>
                         </td>
                         <td>{{ $claim->userProfile->fullName ?? '-' }}</td>
-                        <td>{{ $claim->created_at ?? '-' }}</td>
+                        <td>{{ date('Y-m-d', strtotime($claim->created_at)) ?? '-' }}</td>
                         <td>{{ $claim->claim_type ?? '-' }}</td>
                         <td>{{ $claim->month ?? '-' }}</td>
                         <td>{{ $claim->total_amount ?? '-' }}</td>
-                        <td>{{ '-' }}</td>
+                        <td>{{ $claim->pv_number ?? '-' }}</td>
                     </tr>
                 @endif
             @endforeach

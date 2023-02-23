@@ -36,7 +36,7 @@ class ProfileController extends Controller
         return response()->json($data);
     }
 
-    public function updateProfilePicture(Request $r)
+    public function updateProfile_Picture(Request $r)
     {
         $input = $r->input();
 
@@ -331,5 +331,13 @@ class ProfileController extends Controller
         return response()->json($result);
     }
 
+    public function saveEducation(Request $r)
+    {
+        $ps = new ProfileService;
+
+        $result = $ps->saveEducation($r);
+
+        return response()->json($result);
+    }
 
 }

@@ -2,8 +2,6 @@
 
 $(document).ready(function() {
 
-    
-
     $("#datepicker-joindate").datepicker({
         todayHighlight: true,
         autoclose: true,
@@ -520,6 +518,7 @@ $(document).ready(function() {
                 location: "required",
                 location_by_project: "required",
                 participant: "required",
+                
             },
 
             messages: {
@@ -726,7 +725,7 @@ $(document).ready(function() {
 
                 event.push({
                     // title: "Event: " + events['event_name'],
-                    title: "Event: " + events['event_name'] +  ' ' + events['project_id'],
+                    title: "Event: " + events['event_name'],
                     start: startYear + '-' + startMonth + '-' + startDay,
                     end: endYear + '-' + endMonth + '-' + endDay,
                     color: app.color.red,
@@ -775,7 +774,7 @@ $(document).ready(function() {
                 }
 
                 log.push({
-                    title: (logs['project_name'] ? logs['project_name'] + ' ' : '') + (logs['activitynameas'] ? logs['activitynameas'] + ' ' : '') + ' from ' + logs['start_time'] + ' to ' + logs['end_time'],
+                    title: (logs['type_of_log'] ? type_of_log(logs['type_of_log']) + ' ' : '') + "\n" +  (logs['project_name'] ? logs['project_name'] + ' ' : '') + "\n" + (logs['activitynameas'] ? logs['activitynameas'] + ' ' : '') + ' from ' + logs['start_time'] + ' to ' + logs['end_time'],
                     // start: startYear + '-' + startMonth + '-' + startDay + 'T' + startTime + ':00',
                     start: startYear + '-' + startMonth + '-' + startDay,
                     color: app.color.primary,
@@ -807,16 +806,69 @@ $(document).ready(function() {
                         }
                     }
                 },
+                // dateClick: function(info) {
+
+                //     $('#addLogModal').modal('show');
+
+                //     const formatedDate = dayjs(info.dateStr).format("DD-MM-YYYY")
+                //         // console.log(formatedDate);
+                //         // console.log(info.dateStr);
+
+                //     $("#dateaddlog").val(formatedDate);
+                // },
+
                 dateClick: function(info) {
-
+                    const today = dayjs();
+                    const minDate = today.subtract(2, 'day'); // Set the minimum date to 2 days ago
+                  
+                    // check if the clicked date is earlier than the minimum date
+                    if (dayjs(info.date).isBefore(minDate, 'day')) {
+                        alert("You can only select dates up to 48 hours from now.");
+                        return;
+                    }
+                    
+                  
+                    // show the modal and set the date
                     $('#addLogModal').modal('show');
+                    const formattedDate = dayjs(info.dateStr).format('DD-MM-YYYY');
+                    $("#dateaddlog").val(formattedDate);
+                  },
 
-                    const formatedDate = dayjs(info.dateStr).format("DD-MM-YYYY")
-                        // console.log(formatedDate);
-                        // console.log(info.dateStr);
 
-                    $("#dateaddlog").val(formatedDate);
-                },
+                // dateClick: function(info) {
+                //     const selectedDate = dayjs(info.date);
+                //     const currentDate = dayjs();
+                
+                //     // Check if the selected date is not more than 2 days from the current date
+                //     if (selectedDate.diff(currentDate, 'day') > 2) {
+                //         alert("You can only select dates up to 2 days from today.");
+                //         return;
+                //     }
+                
+                //     // Check if the selected date is not in the past
+                //     if (selectedDate.diff(currentDate, 'hour') < -48) {
+                //         alert("You cannot select a date that is 48 hours in the past.");
+                //         return;
+                //     }
+                
+                //     $('#addLogModal').modal('show');
+                
+                //     const formattedDate = selectedDate.format("DD-MM-YYYY");
+                //     $("#dateaddlog").val(formattedDate);
+                // },
+                
+                // dayRender: function(info) {
+                //     const currentDate = dayjs();
+                //     const selectedDate = dayjs(info.date);
+                //     const daysDiff = selectedDate.diff(currentDate, 'day');
+                
+                //     // Disable dates more than 2 days in the future or more than 48 hours in the past
+                //     if (daysDiff > 2 || daysDiff < -3 || daysDiff === -3 && selectedDate.hour() < currentDate.hour()) {
+                //         info.el.classList.add('fc-disabled-day');
+                //     }
+                // },
+                
+          
                 eventClick: function(info) {
 
                     info.jsEvent.preventDefault();
@@ -862,35 +914,45 @@ $(document).ready(function() {
                         var logData = getLogs(logId);
                         logData.done(function(data) {
                             // console.log(data);
+
+
+
                             if (data.type_of_log == '3') {
-
-                                var display = $("#myprojectedit").css("display");
-                                if (display == 'none') {
-                                    $('#myprojectedit').css("display", 'block');
+                                $('#myprojectedit').css("display", 'block');
+                                $('#activityByProjectEditHide').css("display", 'block');
+                                $('#locationByProjectEditHide').css("display", 'block');
+                              } else if (data.type_of_log == '1' || data.type_of_log == '4') {
+                                $('#activityByProjectEditHide').css("display", 'block');
+                              } else if (data.type_of_log == '2') {
+                                var display10 = $("#officelogedit").css("display");
+                                var display11 = $("#activityByProjectEditHide").css("display");
+                                var display12 = $("#locationByProjectEditHide").css("display");
+                              
+                                // Add another condition
+                                if (data.office_log == '1') {
+                                    
+                                  $('#myprojectedit').css("display", 'block');
+                                  $('#activityByProjectEditHide').css("display", 'block');
+                                  $("#locationByProjectEditHide").css("display",'block');
                                 }
-                            } else {
-                                $('#myprojectedit').css("display", 'none');
-                            }
 
-                            if (data.type_of_log == '2') {
-
-                                var display = $("#officelogedit").css("display");
-                                var projectOfficeDisplay = $("#listprojectedit").css("display");
-                                if (display == 'none') {
+                                if (data.office_log == '2') {
+                                    $('#activityByProjectEditHide').css("display", 'block');
                                     $('#officelogedit').css("display", 'block');
-                                }
-
-                                if (projectOfficeDisplay == 'none') {
-                                    $('#listprojectedit').css("display", 'block');
-                                }
-                            } else {
+                                    
+                                  }
+                              } else {
+                                $('#myprojectedit').css("display", 'none');
+                                $('#activityByProjectEditHide').css("display", 'none');
+                                $('#locationByProjectEditHide').css("display", 'none');
                                 $('#officelogedit').css("display", 'none');
-                                $('#listprojectedit').css("display", 'none');
-                            }
+                              }
+                              
 
-                            if (data.type_of_log == 2 && data.office_log == 1) {
 
-                            }
+                            // if (data.type_of_log == 2 && data.office_log == 1) {
+
+                            // }
 
                             $('#locationByProjectEditShow').hide();
                             $('#activityByProjectEditShow').hide();
@@ -1343,21 +1405,78 @@ $(document).ready(function() {
     });
 
     //  FOR MODAL LOG AND EVENT
-    $("#dateaddlog").datepicker({
-        todayHighlight: true,
-        autoclose: true,
-        format: 'yyyy-mm-dd'
-    });
-    $("#starteventdate").datepicker({
-        todayHighlight: true,
-        autoclose: true,
-        format: 'yyyy/mm/dd'
-    });
-    $("#endeventdate").datepicker({
-        todayHighlight: true,
-        autoclose: true,
-        format: 'yyyy/mm/dd'
-    });
+    // $("#dateaddlog").datepicker({
+    //     todayHighlight: true,
+    //     autoclose: true,
+    //     format: 'yyyy-mm-dd'
+    // });
+
+    $(function() {
+        // Initialize Datepicker
+        $("#dateaddlog").datepicker({
+          todayHighlight: true,
+          autoclose: true,
+          format: 'yyyy-mm-dd',
+          startDate: new Date(new Date().getTime() - (2 * 24 * 60 * 60 * 1000)), // one days ago
+          endDate: null // No end date
+        });
+      
+        // Set the minimum and maximum dates to restrict the date range that can be selected
+        $("#dateaddlog").datepicker('setStartDate', new Date(new Date().getTime() - (2 * 24 * 60 * 60 * 1000)));
+        $("#dateaddlog").datepicker('setEndDate', null);
+      });
+      
+
+
+
+
+      
+
+      
+      
+    // $("#starteventdate").datepicker({
+    //     todayHighlight: true,
+    //     autoclose: true,
+    //     format: 'yyyy/mm/dd'
+    // });
+    // $("#endeventdate").datepicker({
+    //     // todayHighlight: true,
+    //     // autoclose: true,
+    //     // format: 'yyyy/mm/dd'
+
+        
+    // });
+    $(function() {
+        // Inisialisasi datepicker pertama
+        $('#starteventdate').datepicker({
+          format: 'yyyy/mm/dd',
+          todayHighlight: true,
+          autoclose: true,
+          onSelect: function(selectedDate) {
+            // Ketika tanggal dipilih pada datepicker pertama,
+            // atur opsi minDate pada datepicker kedua
+            $('#endeventdate').datepicker('option', 'minDate', selectedDate);
+          }
+        });
+      
+        // Inisialisasi datepicker kedua
+        $('#endeventdate').datepicker({
+          format: 'yyyy/mm/dd',
+          todayHighlight: true,
+          autoclose: true,
+          beforeShowDay: function(date) {
+            var startDate = $('#starteventdate').datepicker('getDate');
+            if (startDate) {
+              // Disable dates before the selected date on the first datepicker
+              return date.valueOf() >= startDate.valueOf() ? {} : {disabled: true};
+            }
+            return {};
+          }
+        });
+      });
+      
+    
+
     
     $('#activity_name_edit').picker({ search: true });
     $('#projectlocsearch').picker({ search: true });
@@ -1393,6 +1512,38 @@ $(document).ready(function() {
         // });
     })
 
+
+    // $(document).on('change', "#typeoflog", function() {
+    //     if ($(this).val() == "1") {
+    //         $("#activityByProjectHide").show();
+    //         $("#officelog").hide();
+    //         $("#myproject").hide();
+    //         $("#locationByProjectHide").hide();
+            
+        
+    //     } else if ($(this).val() == "2") {
+    //         $("#officelog").show();
+    //         $("#activityByProjectHide").hide();
+    //         $("#myproject").hide();
+
+    //     } else if ($(this).val() == "3") {
+    //         $("#myproject").show();
+    //         $("#activityByProjectHide").show();
+    //         $("#locationByProjectHide").show();
+            
+            
+    //     } else if ($(this).val() == "4") {
+    //         $("#activityByProjectHide").show();
+    //         $("#officelog").hide();
+    //         $("#myproject").hide();
+    //         $("#locationByProjectHide").hide();
+    //     // } else {
+    //     //     $("#activityByProjectHide").hide();
+    //     //     $("#officelog").hide();
+
+    //     }
+    // });
+
     $(document).on('change', "#typeoflog", function() {
         if ($(this).val() == "2") {
             $("#officelog").show();
@@ -1405,18 +1556,40 @@ $(document).ready(function() {
     $(document).on('change', "#typeoflog", function() {
         if ($(this).val() == "3") {
             $("#myproject").show();
+            $("#activityByProjectHide").show();
+            $("#locationByProjectHide").show();
+            
+            
+            // $("#activity_locationadd").show();
+            
         } else {
             $("#myproject").hide();
             $("#listproject").hide();
+            // $("#activity_locationadd").hide();
+            $("#activityByProjectHide").show();
+            $("#locationByProjectHide").hide();
         }
     });
+
     $(document).on('change', "#officelog2", function() {
         if ($(this).val() == "1") {
             $("#listproject").show();
-        } else {
+            $("#activityByProjectHide").hide();
+            
+            
+        } else if ($(this).val() == "2") {
+            $("#activityByProjectHide").show();
             $("#listproject").hide();
+            
         }
+        // else {
+        //     $("#listproject").hide();
+        //     $("#activityByProjectHide").show();
+        //     $("#locationByProjectHide").hide();
+            
+        // }
     });
+    
     $(document).on('change', "#addneweventselectrecurring", function() {
         if ($(this).val() == "1") {
             $("#addneweventsetreccurring").show();
@@ -1552,7 +1725,9 @@ $(document).ready(function() {
     $("#dateaddlogedit").datepicker({
         todayHighlight: true,
         autoclose: true,
-        format: 'yyyy-mm-dd'
+        format: 'yyyy-mm-dd',
+        startDate: new Date(new Date().getTime() - (2 * 24 * 60 * 60 * 1000)), // one days ago
+        endDate: null // No end date
     });
     $("#starteventdateedit").datepicker({
         todayHighlight: true,
@@ -1580,30 +1755,67 @@ $(document).ready(function() {
     $("#endeventtimeedit").mdtimepicker({
         showMeridian: false,
     });
+
     $(document).on('change', "#typeoflogedit", function() {
         if ($(this).val() == "2") {
             $("#officelogedit").show();
+            // $("#project_id_edit").hide();
+            // $("#locationByProjectEditHide").show();
+            
+            
         } else {
             $("#officelogedit").hide();
             $("#listprojectedit").hide();
+            // $("#locationByProjectEditHide").hide();
 
         }
     });
     $(document).on('change', "#typeoflogedit", function() {
         if ($(this).val() == "3") {
             $("#myprojectedit").show();
+            // $("#typeoflogedit").show();
+            // $("#activity_location_edit").show();
+            // $("#activityByProjectEditHide").hide();
+            $("#activityByProjectEditHide").show();
+            $("#locationByProjectEditHide").show();
+            
+            
+            
+            
         } else {
             $("#myprojectedit").hide();
             $("#listprojectedit").hide();
+            // $("#typeoflogedit").hide();
+            // $("#activity_location_edit").hide();
+            $("#activityByProjectEditHide").show();
+            $("#locationByProjectEditHide").hide();
+      
+            
         }
     });
     $(document).on('change', "#officelog2edit", function() {
         if ($(this).val() == "1") {
-            $("#listprojectedit").show();
-        } else {
-            $("#listprojectedit").hide();
+            $("#myprojectedit").show();
+            $("#activityByProjectEditHide").hide();
+            
+            // $("#activityByProjectEditShow").show();
+            // $("#locationByProjectEditHide").show();
+            
+        } else if ($(this).val() == "2") {
+            $("#activityByProjectEditHide").show();
+            $("#myprojectedit").hide();
+            // $("#myprojectedit").hide();
+            // $("#locationByProjectEditHide").hide();
+            
         }
+        // } else {
+        //     $("#myprojectedit").hide();
+        //     $("#activityByProjectEditHide").hide();
+        //     $("#locationByProjectEditHide").hide();
+            
+        // }
     });
+
     $(document).on('change', "#addneweventselectrecurringedit", function() {
         if ($(this).val() == "1") {
             $("#addneweventsetreccurringedit").show();
@@ -1868,3 +2080,51 @@ $(document).ready(function() {
         
              });
 // });// });
+
+$(document).on("click", "#confirmsubmitb", function () {
+    var id = $(this).data("id");
+    var vehicleData = getConfirmSubmit(id);
+
+    vehicleData.done(function (data) {
+        // console.log(data.id);
+        // console.log(data.fullName);
+        // console.log('')
+        var year = data.date.substr(0, 4);
+        var month = data.date.substr(5, 2); 
+        $("#fullname").val(data.fullName);
+        $("#year").val(year);
+        $("#month").val(month);
+        $("#idtv").val(data.id);
+    });
+    $("#confirmsubmit").modal("show");
+});
+
+function getConfirmSubmit(id) {
+    return $.ajax({
+        url: "/getConfirmSubmitById/" + id,
+    });
+}
+
+
+
+    function toggleVenueLocation() {
+        var venue = document.getElementById("venueaddpehal");
+        var location = document.getElementById("locationaddevent1");
+        if (venue.style.display === "block") {
+            location.style.display = "none";
+        } else {
+            location.style.display = "block";
+        }
+    }
+
+    // call toggleVenueLocation on page load to initialize the visibility of the elements
+    toggleVenueLocation();
+
+    // call toggleVenueLocation whenever #venueaddpehal's display property changes
+    var venue = document.getElementById("venueaddpehal");
+    var observer = new MutationObserver(toggleVenueLocation);
+    observer.observe(venue, {attributes: true, attributeFilter: ['style']});
+
+
+
+

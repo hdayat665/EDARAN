@@ -36,7 +36,7 @@ $(document).ready(function () {
             },
 
             messages: {
-                reason: "",
+                reason: "Please Insert Reason",
             },
             submitHandler: function (form) {
                 requirejs(["sweetAlert2"], function (swal) {
@@ -108,6 +108,8 @@ $(document).ready(function () {
 
     $(document).on("click", "#cancelRequestButton", function () {
         var id = $(this).data("id");
+        // console.log(id);
+        // return false;
         requirejs(["sweetAlert2"], function (swal) {
             swal({
                 title: "Are you sure!",

@@ -29,10 +29,11 @@
                                     @foreach ($claimCategorys as $data)
                                         <tr>
                                             <td>
-                                                <a href="/setting/editClaimView/{{ $data->id }}"
-                                                    class="btn btn-outline-green"><i class="fa fa-edit"></i></a>
-                                                <button class="btn btn-outline-red" id="deleteButton"
-                                                    data-id="{{ $data->id }}"><i class="fa fa-trash"></i></button>
+                                                <a href="#" data-bs-toggle="dropdown" class="btn btn-primary btn-sm dropdown-toggle"></i> Actions <i class="fa fa-caret-down"></i></a>
+                                                <div class="dropdown-menu">
+                                                <a href="/setting/editClaimView/{{ $data->id }}" class="dropdown-item"> Edit</a>
+                                                <div class="dropdown-divider"></div>
+                                                <button id="deleteButton" data-id="{{ $data->id }}" class="dropdown-item"> Delete </button>
                                             </td>
                                             <td>
                                                 <div class="form-check form-switch">

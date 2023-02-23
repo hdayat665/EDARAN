@@ -10,21 +10,41 @@
         </thead>
         <tbody>
             @foreach ($claims as $claim)
-                {{-- @if ($claim->f_approval == 'recommend') --}}
-                <tr>
-                    <td>
-                        <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle"><i class="fa fa-cogs"></i> Action <i class="fa fa-caret-down"></i></a>
-                        <div class="dropdown-menu">
-                            <a href="javascript:;" id="" data-id="" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#modalpv"><i class="fa fa-bill" aria-hidden="true"></i>
-                                Generate PV</a>
-                            <div class="dropdown-divider"></div>
-                            <a href="javascript:;" id="" data-id="" class="dropdown-item"><i class="fa fa-times" aria-hidden="true"></i> Close</a>
-                        </div>
-                    </td>
-                    <td>{{ $claim->id }}</td>
-                    <td>{{ $claim->userProfile->fullName ?? '-' }}</td>
-                </tr>
-                {{-- @endif --}}
+                @if ($claim->claim_type == 'GNC')
+                    @if ($claim->f_approval == 'recommend' && $claim->pv_number == '')
+                        <tr>
+                            <td>
+                                <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle"><i class="fa fa-cogs"></i> Action <i class="fa fa-caret-down"></i></a>
+                                <div class="dropdown-menu">
+                                    {{-- <a href="javascript:;" id="generatePv" data-id="{{ $claim->id }}" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#modalpv"><i class="fa fa-bill" --}}
+                                    <a href="javascript:;" id="generatePv" data-id="{{ $claim->id }}" class="dropdown-item"><i class="fa fa-bill" aria-hidden="true"></i>
+                                        Generate PV</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a href="javascript:;" id="" data-id="" class="dropdown-item"><i class="fa fa-times" aria-hidden="true"></i> Close</a>
+                                </div>
+                            </td>
+                            <td>{{ $claim->id }}</td>
+                            <td>{{ $claim->userProfile->fullName ?? '-' }}</td>
+                        </tr>
+                    @endif
+                @elseif($claim->claim_type == 'MTC')
+                    @if ($claim->a_approval == 'recommend' && $claim->pv_number == '')
+                        <tr>
+                            <td>
+                                <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle"><i class="fa fa-cogs"></i> Action <i class="fa fa-caret-down"></i></a>
+                                <div class="dropdown-menu">
+                                    {{-- <a href="javascript:;" id="generatePv" data-id="{{ $claim->id }}" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#modalpv"><i class="fa fa-bill" --}}
+                                    <a href="javascript:;" id="generatePv" data-id="{{ $claim->id }}" class="dropdown-item"><i class="fa fa-bill" aria-hidden="true"></i>
+                                        Generate PV</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a href="javascript:;" id="" data-id="" class="dropdown-item"><i class="fa fa-times" aria-hidden="true"></i> Close</a>
+                                </div>
+                            </td>
+                            <td>{{ $claim->id }}</td>
+                            <td>{{ $claim->userProfile->fullName ?? '-' }}</td>
+                        </tr>
+                    @endif
+                @endif
             @endforeach
 
         </tbody>

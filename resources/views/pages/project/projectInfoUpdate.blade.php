@@ -21,11 +21,11 @@
                 </div>
                 <div class="col-md-4">
                     <input type="hidden" id="idP" value="{{ $project->id }}">
-                    <input type="text" class="form-control mb-5px" name="project_code"
+                    <input type="text" class="form-control mb-5px" name="project_code" placeholder="PROJECT CODE"
                         value="{{ $project->project_code ?? '' }}" />
                 </div>
                 <div class="col-md-4">
-                    <input type="text" class="form-control mb-5px " style="text-transform: uppercase;"
+                    <input type="text" class="form-control mb-5px " style="text-transform: uppercase;" placeholder="PROJECT NAME"
                         name="project_name" value="{{ $project->project_name ?? '' }}" />
                 </div>
             </div>
@@ -34,7 +34,7 @@
             </div>
             <div class="row mb-15px">
                 <div class="col-md-12">
-                    <textarea type="text" class="form-control " rows="5" style="text-transform: uppercase;"name="desc">{{ $project->desc ?? '' }}</textarea>
+                    <textarea type="text" class="form-control " rows="5" placeholder="DESCRIPTION" style="text-transform: uppercase;"name="desc">{{ $project->desc ?? '' }}</textarea>
                 </div>
             </div>
             <div class="row">
@@ -50,7 +50,7 @@
             </div>
             <div class="row mb-15px">
                 <div class="col-md-4">
-                    <input type="number" class="form-control mb-5px" name="contract_value"
+                    <input type="number" class="form-control mb-5px" name="contract_value" placeholder="CONTRACT VALUE"
                         value="{{ $project->contract_value ?? '' }}" />
                 </div>
                 <div class="col-md-4">
@@ -65,15 +65,23 @@
                     </select>
                 </div>
                 <div class="col-md-4">
-                    <select class="form-select" name="financial_year">
-                        <option label="PLEASE CHOOSE"></option>
-                        <?php $FinancialYear = getFinancialYearFormold(); ?>
-                        @foreach ($FinancialYear as $key => $value)
-                            <option value="{{ $key }}"
-                                {{ $key == $project->financial_year ? 'selected="selected"' : '' }}>
-                                {{ $value }}</option>
-                        @endforeach
-                    </select>
+                <select class="form-select" name="financial_year">
+                    <option label="PLEASE CHOOSE"></option>
+                    <?php $financialYears = getFinancialYearFormold(); ?>
+                    @foreach ($financialYears as $financialYear)
+                        <?php 
+                            // Calculate the starting and ending years of the financial year
+                            $startingYear = $financialYear;
+                            $endingYear = $financialYear + 1;
+                        ?>
+                        <option value="{{ $financialYear }}"
+                            {{ $financialYear == $project->financial_year ? 'selected="selected"' : '' }}>
+                            {{ $startingYear }}
+                        </option>
+                    @endforeach
+                </select>
+
+
                 </div>
             </div>
             <div class="row">
@@ -84,16 +92,16 @@
             <div class="row mb-15px">
                 <div class="col-md-4">
                     <input type="text" class="form-control" name="LOA_date" value="{{ $project->LOA_date ?? '' }}"
-                        id="datepicker-loa" placeholder="dd/mm/yyyy" />
+                        id="datepicker-loa" placeholder="YYYY/MM/DD" />
                 </div>
                 <div class="col-md-4">
                     <input type="text" class="form-control" name="contract_start_date"
                         value="{{ $project->contract_start_date ?? '' }}" id="datepicker-start"
-                        placeholder="dd/mm/yyyy" />
+                        placeholder="YYYY/MM/DD" />
                 </div>
                 <div class="col-md-4">
                     <input type="text" class="form-control" name="contract_end_date"
-                        value="{{ $project->contract_end_date ?? '' }}" id="datepicker-end" placeholder="dd/mm/yyyy" />
+                        value="{{ $project->contract_end_date ?? '' }}" id="datepicker-end" placeholder="YYYY/MM/DD" />
                 </div>
             </div>
             <div class="row">
@@ -126,7 +134,7 @@
                 </div>
                 <div class="col-md-4">
                     <input type="text" class="form-control" id="datepicker-warstart" name="warranty_start_date"
-                        value="{{ $project->warranty_start_date ?? '' }}" placeholder="dd/mm/yyyy" />
+                        value="{{ $project->warranty_start_date ?? '' }}" placeholder="YYYY/MM/DD" />
                 </div>
             </div>
             <div class="row">
@@ -137,7 +145,7 @@
             <div class="row mb-15px">
                 <div class="col-md-4">
                     <input type="text" class="form-control" id="datepicker-warend" name="warranty_end_date"
-                        value="{{ $project->warranty_end_date ?? '' }}" placeholder="dd/mm/yyyy" />
+                        value="{{ $project->warranty_end_date ?? '' }}" placeholder="YYYY/MM/DD" />
                 </div>
                 <div class="col-md-4">
                     <input type="number" class="form-control" name="bank_guarantee_amount"
@@ -146,7 +154,7 @@
                 <div class="col-md-4">
                     <input type="text" class="form-control" name="bank_guarantee_expiry_date"
                         value="{{ $project->bank_guarantee_expiry_date ?? '' }}" id="datepicker-bankexpiry"
-                        placeholder="dd/mm/yyyy" />
+                        placeholder="YYYY/MM/DD" />
                 </div>
             </div>
             <div class="row">

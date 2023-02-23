@@ -42,12 +42,12 @@
                     </div>
                     <div class="row">
                         <div class="col-md-4">
-                            <label class="form-label col-md-6">Reason</label>
+                            <label class="form-label col-md-6">Reason*</label>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-12">
-                            <textarea class="form-control " name="reason" rows="5" type="text" placeholder="Please State Your Reason"></textarea>
+                            <textarea class="form-control " name="reason" rows="5" type="text" placeholder="Reason"></textarea>
                         </div>
                     </div>
                     <div class="modal-footer">

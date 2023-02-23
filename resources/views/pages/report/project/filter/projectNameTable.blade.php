@@ -50,7 +50,7 @@
             </div>
             <div class="row mb-15px">
                 <div class="col-md-4">
-                    <input type="contract-value" readonly class="form-control mb-5px" value="{{$projName->project_manager ?? ''}}" />
+                    <input type="project-manager" readonly class="form-control mb-5px" value="{{($projName->project_manager) ? getEmployeeNameById($projName->project_manager)->employeeName ?? '-' : '-'}}" />
                 </div>
                 <div class="col-md-4">
                     <input type="contract-type" readonly class="form-control mb-5px" value="{{$projName->project_manager_department ?? ''}}"  />
@@ -69,10 +69,11 @@
             </div>
             <div class="row mb-15px">
                 <div class="col-md-4">
-                    <input type="LOA-date" readonly class="form-control mb-5px" value="{{$projName->acc_manager ?? ''}}" />
+                    <input type="account-manager" readonly class="form-control mb-5px" value="{{($projName->acc_manager) ? getEmployeeNameById($projName->acc_manager)->employeeName ?? '-' : '-'}}" />
                 </div>
                 <div class="col-md-4">
                     <input type="contract-start-date" readonly class="form-control mb-5px" value="{{$projName->acc_manager_department ?? ''}}" />
+
                 </div>
                 <div class="col-md-4">
                     <input type="contract-end-date" readonly class="form-control mb-5px" value="{{$projName->acc_manager_branch ?? ''}}" />
@@ -113,6 +114,11 @@
                 @endif
             </tbody>
         </table>
+        <div class="row p-2">
+                <div class="col align-self-start">
+                    <a href="/projectFilter" class="btn btn-light" style="color: black;" type="submit"><i class="fa fa-arrow-left"></i> Back</a>
+                </div>
+            </div>
     </div>
 </div>
 <div class="modal fade" id="1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -185,8 +191,5 @@
         </div>
     </div>
 </div>
-<div class="modal-footer">
-
 </div>
-<a href="/projectFilter"><button type="button" class="btn btn-primary">Back</button></a>
 @endsection

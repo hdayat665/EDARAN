@@ -5,12 +5,12 @@
         <div class="row mb-15px">
             <label class="form-label col-form-label col-md-1">Employee ID*</label>
             <div class="col-md-5">
-                <input type="text" name="employee_id" id="empId" class="form-control mb-10px" placeholder="Employee ID"/>
+                <input type="text" name="employee_id" id="empId" class="form-control mb-10px" placeholder="EMPLOYEE ID"/>
 
             </div>
             <label class="form-label col-form-label col-md-1">Username*</label>
             <div class="col-md-5">
-                <input type="text" name="username" id="uId" class="form-control mb-5px" placeholder="Username"  />
+                <input type="text" name="username" id="uId" class="form-control mb-5px" placeholder="USERNAME"  />
 
             </div>
         </div>
@@ -18,19 +18,19 @@
         <div class="row mb-15px">
             <label class="form-label col-form-label col-md-1">First Name*</label>
             <div class="col-md-5">
-                <input type="text" id="firstName" name="firstName" class="form-control mb-10px" placeholder="First Name" />
+                <input type="text" id="firstName" name="firstName" class="form-control mb-10px" placeholder="FIRST NAME" />
 
             </div>
             <label class="form-label col-form-label col-md-1">Last Name*</label>
             <div class="col-md-5">
-                <input type="text" id="lastName" name="lastName" class="form-control mb-5px" placeholder="Last Name" />
+                <input type="text" id="lastName" name="lastName" class="form-control mb-5px" placeholder="LAST NAME" />
             </div>
         </div>
 
         <div class="row mb-5px">
             <label class="form-label col-form-label col-md-1">Full Name*</label>
             <div class="col-md-5">
-                <input type="text" name="fullName" id="fullName" class="form-control mb-10px" placeholder="Full Name" readonly/>
+                <input type="text" name="fullName" id="fullName" class="form-control mb-10px" placeholder="FULL NAME" readonly/>
             </div>
 
             <div class="col-md-3">
@@ -43,23 +43,23 @@
             <label class="form-label col-form-label col-md-1">Identification Number*</label>
             
             <div class="col-md-2 idnumber">
-                <input type="number" name="idNo" id="idnumber" class="form-control mb-1px" placeholder="Identification Number" />
+                <input type="number" name="idNo" id="idnumber" class="form-control mb-1px" placeholder="000000-00-0000" />
             </div>
         </div>
         <div class="row mb-15px">
             <label class="form-label col-form-label col-md-1">Passport Number</label>
             <div class="col-md-2">
-                <input type="text" name="passport" id="passport" class="form-control mb-10px" placeholder="Passport Number"/>
+                <input type="text" name="passport" id="passport" class="form-control mb-10px" placeholder="A00000000"/>
 
             </div>
             <label class="form-label col-form-label col-md-1">Expiry Date*</label>
             <div class="col-md-2">
-                <input type="text" name="expiryDate" id="datepicker-expiryDate" class="form-control"  placeholder="dd/mm/yyyy" style="pointer-events: none" readonly/>
+                <input type="text" name="expiryDate" id="datepicker-expiryDate" class="form-control"  placeholder="YYYY/MM/DD" style="pointer-events: none" readonly/>
             </div>
             <label class="form-label col-form-label col-md-1">Issuing Country*</label>
             <div class="col-md-5">
                 <select class="form-select" name="issuingCountry" >
-                    <option label="Select a country ... " disabled></option>
+                    <option label="PLEASE CHOOSE" disabled></option>
                     <optgroup id="country-optgroup-Africa" label="Africa">
                         <option value="DZ" label="Algeria">Algeria</option>
                         <option value="AO" label="Angola">Angola</option>
@@ -235,7 +235,7 @@
 
             <label class="form-label col-form-label col-md-1">Date of Birth*</label>
             <div class="col-md-2">
-                <input type="text" name="DOB" class="form-control" id="datepicker-birth" placeholder="dd/mm/yyyy" style="pointer-events: none" readonly />
+                <input type="text" name="DOB" class="form-control" id="datepicker-birth" placeholder="YYYY/MM/DD" style="pointer-events: none" readonly />
             </div>
             <label class="form-label col-form-label col-md-1">Gender*</label>
             <div class="col-md-2">
@@ -250,7 +250,7 @@
             <label class="form-label col-form-label col-md-1">Marital Status*</label>
             <div class="col-md-5">
                 <select class="form-select" name="maritialStatus">
-                    <option label="Select Marital Status" disabled selected></option>
+                    <option label="PLEASE CHOOSE" disabled selected></option>
                     <option value="1" label="Single">Single</option>
                     <option value="2" label="married">married</option>
                     <option value="3" label="windowed">windowed</option>
@@ -265,7 +265,7 @@
             <label class="form-label col-form-label col-md-1">Religion*</label>
             <div class="col-md-5">
                 <select class="form-select" name="religion" >
-                    <option label="Select Religion " selected="selected" disabled></option>
+                    <option label="PLEASE CHOOSE" selected="selected" disabled></option>
                     <option value="Islam" label="Islam">Islam</option>
                     <option value="Buddhist" label="Buddhist">Buddhist</option>
                     <option value="Christian" label="Christian">Christian</option>
@@ -278,7 +278,7 @@
             <label class="form-label col-form-label col-md-1">Race</label>
             <div class="col-md-5">
                 <select class="form-select" name="race" >
-                    <option label="Select Race " selected="selected" disabled></option>
+                    <option label="PLEASE CHOOSE" selected="selected" disabled></option>
                     <option value="Malay" label="Malay">Malay</option>
                     <option value="Chinese" label="Chinese">Chinese</option>
                     <option value="Indian" label="Indian">Indian</option>
@@ -294,12 +294,12 @@
         <div class="row mb-15px">
             <label class="form-label col-form-label col-md-1">Home Number</label>
             <div class="col-md-5">
-                <input type="text" name="homeNo" class="form-control mb-10px" placeholder="Home Number" />
+                <input type="text" name="homeNo" class="form-control mb-10px" placeholder="00-0000000" />
 
             </div>
             <label class="form-label col-form-label col-md-1">Extension Number</label>
             <div class="col-md-5">
-                <input type="text" name="extensionNo" class="form-control mb-5px" placeholder="Extension Number" />
+                <input type="text" name="extensionNo" class="form-control mb-5px" placeholder="0000" />
 
             </div>
         </div>
@@ -307,12 +307,12 @@
         <div class="row mb-15px">
             <label class="form-label col-form-label col-md-1">Phone Number*</label>
             <div class="col-md-5">
-                <input type="text" name="phoneNo" id="phoneNo" class="form-control mb-10px" placeholder="Phone Number" />
+                <input type="text" name="phoneNo" id="phoneNo" class="form-control mb-10px" placeholder="000-00000000" />
 
             </div>
             <label class="form-label col-form-label col-md-1">Personal Email*</label>
             <div class="col-md-5">
-                <input type="email" name="personalEmail" id="personalEmail" class="form-control mb-5px" placeholder="Personal Email"  />
+                <input type="email" name="personalEmail" id="personalEmail" class="form-control mb-5px" placeholder="email@gmail.com"  />
 
             </div>
         </div>

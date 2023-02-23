@@ -16,7 +16,7 @@
                     <div class="row mb-15px">
 
                         <div class="col-md-12">
-                            <input type="text" class="form-control mb-5px" id="location_name" name="location_name"  />
+                            <input type="text" class="form-control mb-5px" id="location_name" name="location_name" placeholder="LOCATION NAME" />
                             <input type="hidden" name="customer_id" value="{{$project->customer_id ?? ''}}">
                             <input type="hidden" id="tenant_id" name="tenant_id" value="{{$project->tenant_id ?? ''}}">
                             <input type="hidden" name="project_id" value="{{$project->id ?? ''}}">
@@ -33,10 +33,10 @@
                     </div>
                     <div class="row mb-15px">
                         <div class="col-md-6">
-                            <input type="text" class="form-control mb-5px" name="address" id="address"  />
+                            <input type="text" class="form-control mb-5px" name="address" id="address" placeholder="ADDRESS 1" />
                         </div>
                         <div class="col-md-6">
-                            <input type="text" class="form-control mb-5px" name="address2" id="address1" />
+                            <input type="text" class="form-control mb-5px" name="address2" id="address1"placeholder="ADDRESS 2" />
                         </div>
                     </div>
                     <div class="row">
@@ -49,10 +49,10 @@
                     </div>
                     <div class="row mb-15px">
                         <div class="col-md-6">
-                            <input type="text" class="form-control mb-5px" name="postcode" id="postcode"  />
+                            <input type="text" class="form-control mb-5px" name="postcode" id="postcode" placeholder="00000" />
                         </div>
                         <div class="col-md-6">
-                            <input type="text" class="form-control mb-5px" name="city" id="city" />
+                            <input type="text" class="form-control mb-5px" name="city" id="city" placeholder="CITY"/>
                         </div>
                     </div>
                     <div class="row">
@@ -67,7 +67,7 @@
                         <div class="col-md-6">
                             <?php $states = state(); ?>
                             <select class="form-select" name="state" id="state">
-                                <option label="Select State ">Select State </option>
+                                <option label="PLEASE CHOOSE">Select State </option>
                                 @foreach ($states as $key => $state)
                                 <option value="{{$key}}">{{$state}}</option>
                                 @endforeach

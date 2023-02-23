@@ -161,6 +161,7 @@ class ProjectController extends Controller
         $ps = new ProjectService;
 
         $data['projectInfos'] = $ps->projectRequestView();
+        //  dd($data['projectInfos']);
         $data['projectIdPending'] = $ps->projectPendingRequest('pending');
         $data['projectIdApprove'] = $ps->projectPendingRequest('approve');
         $data['projectIdReject'] = $ps->projectPendingRequest('reject');

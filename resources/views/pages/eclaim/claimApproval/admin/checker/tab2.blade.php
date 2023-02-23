@@ -17,7 +17,7 @@
         </thead>
         <tbody>
             @foreach ($claims as $claim)
-                @if ($claim->a1 == 'check' && $claim->claim_type == 'MTC')
+                @if ($claim->a1 == 'recommend' && $claim->claim_type == 'MTC')
                     <tr>
                         <td>
                             <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle"><i class="fa fa-cogs"></i> Action <i class="fa fa-caret-down"></i></a>

@@ -54,9 +54,9 @@
                                         @if ($details)
                                             @foreach ($details as $detail)
                                                 <tr>
-                                                    <td><a data-bs-toggle="modal" id="buttonView" data-id="{{ $detail->id }}" class="btn btn-primary btn-sm">View</a></td>
-                                                    <td>{{ $detail->applied_date }}</td>
-                                                    <td>{{ $detail->claim_category }}</td>
+                                                    <td><a data-bs-toggle="modal" id="buttonView" data-id="{{ $detail->id }}" class="btn btn-primary btn-sm">View</a></td> 
+                                                    <td>{{ date('Y-m-d', strtotime($detail->created_at)) }}</td>
+                                                    <td>{{ $detail->claim_catagory }}</td>
                                                     <td>{{ $detail->amount }}</td>
                                                     <td>{{ $detail->desc }}</td>
                                                     <td><a href="/storage/{{ $detail->file_upload }}">{{ $detail->file_upload }}</a></td>

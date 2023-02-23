@@ -11,6 +11,7 @@ use App\Models\UserCompanion;
 use App\Models\UserEmergency;
 use App\Models\UserParent;
 use App\Models\UserProfile;
+use App\Models\UserQualification;
 use App\Models\Users;
 use App\Models\UsersDetails;
 use App\Models\UserSibling;
@@ -117,6 +118,20 @@ class ProfileService
 
         return $data;
 
+    }
+
+    public function saveEducation($r)
+    {
+        $input = $r->input();
+        $input['user_id'] = Auth::user()->id;
+        UserQualification::create($input);
+
+        $data['status'] = config('app.response.success.status');
+        $data['type'] = config('app.response.success.type');
+        $data['title'] = config('app.response.success.title');
+        $data['msg'] = 'Success add education';
+
+        return $data;
     }
 
     public function updateAddress($input)
@@ -589,6 +604,7 @@ class ProfileService
         $data['user_id'] = Auth::user()->id;
 
         $data['profile'] = UserProfile::where('user_id', $data['user_id'])->first();
+        $data['qualification'] = UserQualification::where('user_id', $data['user_id'])->get();
         $data['address'] = UserAddress::where('user_id', $data['user_id'])->first();
         $data['emergency'] = UserEmergency::where('user_id', $data['user_id'])->first();
         $data['companions'] = UserCompanion::where('user_id', $data['user_id'])->get();

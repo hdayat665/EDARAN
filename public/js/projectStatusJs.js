@@ -132,126 +132,158 @@ $(document).ready(function() {
     }
 
     $('#statusAll').DataTable({
-
-        scrollY: false,
+        // scrollY: false,
         scrollX: true,
         paging: true,
         lengthMenu: [
             [5, 10, 15, 20, -1],
             [5, 10, 15, 20, 'All'],
         ],
-        dom: '<"row"<"col-sm-5"B><"col-sm-7"fr>>t<"row"<"col-sm-5"l><"col-sm-7"p>>',
         buttons: [
             { extend: 'excel', text: 'Excel', className: 'btn-sm' },
-
         ],
+        responsive: false,
+        dom:
+            "<'row'<'col-sm-4'B><'col-sm-4 text-center'l><'col-sm-4'f>>" +
+            "<'row'<'col-sm-12'tr>>" +
+            "<'row'<'col-sm-4'i><'col-sm-4 text-center'><'col-sm-4'p>>",
+        autoWidth: true,
 
     });
 
     $('#customerTable').DataTable({
-        scrollY: false,
+        // scrollY: false,
         scrollX: true,
         paging: true,
         lengthMenu: [
             [5, 10, 15, 20, -1],
             [5, 10, 15, 20, 'All'],
         ],
-        dom: '<"row"<"col-sm-5"B><"col-sm-7"fr>>t<"row"<"col-sm-5"l><"col-sm-7"p>>',
         buttons: [
             { extend: 'excel', text: 'Excel', className: 'btn-sm' },
-
         ],
-
+        responsive: false,
+        dom:
+            "<'row'<'col-sm-4'B><'col-sm-4 text-center'l><'col-sm-4'f>>" +
+            "<'row'<'col-sm-12'tr>>" +
+            "<'row'<'col-sm-4'i><'col-sm-4 text-center'><'col-sm-4'p>>",
+        autoWidth: true,
     });
 
     $('#employeeTable').DataTable({
-        scrollY: false,
+        // scrollY: false,
         scrollX: true,
         paging: true,
         lengthMenu: [
             [5, 10, 15, 20, -1],
             [5, 10, 15, 20, 'All'],
         ],
-        dom: '<"row"<"col-sm-5"B><"col-sm-7"fr>>t<"row"<"col-sm-5"l><"col-sm-7"p>>',
         buttons: [
             { extend: 'excel', text: 'Excel', className: 'btn-sm' },
-
         ],
-
-
+        responsive: false,
+        dom:
+            "<'row'<'col-sm-4'B><'col-sm-4 text-center'l><'col-sm-4'f>>" +
+            "<'row'<'col-sm-12'tr>>" +
+            "<'row'<'col-sm-4'i><'col-sm-4 text-center'><'col-sm-4'p>>",
+        autoWidth: true,
     });
 
     $('#projectMemberTable').DataTable({
-        scrollY: 170,
+        // scrollY: 50,
         scrollX: true,
-        paging: false,
-        dom: '<"row"<"col-sm-5"B><"col-sm-7"fr>>t<"row"<"col-sm-5"i><"col-sm-7"p>>',
+        paging: true,
+        lengthMenu: [
+            [5, 10, 15, 20, -1],
+            [5, 10, 15, 20, 'All'],
+        ],
         buttons: [
             { extend: 'excel', text: 'Excel', className: 'btn-sm' },
-
         ],
+        responsive: false,
+        dom:
+            "<'row'<'col-sm-4'B><'col-sm-4 text-center'l><'col-sm-4'f>>" +
+            "<'row'<'col-sm-12'tr>>" +
+            "<'row'<'col-sm-4'i><'col-sm-4 text-center'><'col-sm-4'p>>",
+        autoWidth: true,
 
     });
 
     $('#finYearTable').DataTable({
-        scrollY: false,
+        // scrollY: 50,
         scrollX: true,
         paging: true,
         lengthMenu: [
             [5, 10, 15, 20, -1],
             [5, 10, 15, 20, 'All'],
         ],
-        dom: '<"row"<"col-sm-5"B><"col-sm-7"fr>>t<"row"<"col-sm-5"l><"col-sm-7"p>>',
         buttons: [
             { extend: 'excel', text: 'Excel', className: 'btn-sm' },
-
         ],
+        responsive: false,
+        dom:
+            "<'row'<'col-sm-4'B><'col-sm-4 text-center'l><'col-sm-4'f>>" +
+            "<'row'<'col-sm-12'tr>>" +
+            "<'row'<'col-sm-4'i><'col-sm-4 text-center'><'col-sm-4'p>>",
+        autoWidth: true,
     });
 
     $('#accManagerTable').DataTable({
-        scrollY: false,
+        // scrollY: 50,
         scrollX: true,
         paging: true,
         lengthMenu: [
             [5, 10, 15, 20, -1],
             [5, 10, 15, 20, 'All'],
         ],
-        dom: '<"row"<"col-sm-5"B><"col-sm-7"fr>>t<"row"<"col-sm-5"l><"col-sm-7"p>>',
         buttons: [
             { extend: 'excel', text: 'Excel', className: 'btn-sm' },
-
         ],
+        responsive: false,
+        dom:
+            "<'row'<'col-sm-4'B><'col-sm-4 text-center'l><'col-sm-4'f>>" +
+            "<'row'<'col-sm-12'tr>>" +
+            "<'row'<'col-sm-4'i><'col-sm-4 text-center'><'col-sm-4'p>>",
+        autoWidth: true,
     });
 
     $('#projManagerTable').DataTable({
-        scrollY: false,
+        // scrollY: 50,
         scrollX: true,
         paging: true,
         lengthMenu: [
             [5, 10, 15, 20, -1],
             [5, 10, 15, 20, 'All'],
         ],
-        dom: '<"row"<"col-sm-5"B><"col-sm-7"fr>>t<"row"<"col-sm-5"l><"col-sm-7"p>>',
         buttons: [
             { extend: 'excel', text: 'Excel', className: 'btn-sm' },
-
         ],
+        responsive: false,
+        dom:
+            "<'row'<'col-sm-4'B><'col-sm-4 text-center'l><'col-sm-4'f>>" +
+            "<'row'<'col-sm-12'tr>>" +
+            "<'row'<'col-sm-4'i><'col-sm-4 text-center'><'col-sm-4'p>>",
+        autoWidth: true,
 
     });
 
     $('#statusTable').DataTable({
-        scrollY: false,
+        // scrollY: 50,
         scrollX: true,
         paging: true,
         lengthMenu: [
             [5, 10, 15, 20, -1],
             [5, 10, 15, 20, 'All'],
         ],
-        dom: '<"row"<"col-sm-5"B><"col-sm-7"fr>>t<"row"<"col-sm-5"l><"col-sm-7"p>>',
         buttons: [
             { extend: 'excel', text: 'Excel', className: 'btn-sm' },
-
         ],
+        responsive: false,
+        dom:
+            "<'row'<'col-sm-4'B><'col-sm-4 text-center'l><'col-sm-4'f>>" +
+            "<'row'<'col-sm-12'tr>>" +
+            "<'row'<'col-sm-4'i><'col-sm-4 text-center'><'col-sm-4'p>>",
+        autoWidth: true,
     });
 
 
