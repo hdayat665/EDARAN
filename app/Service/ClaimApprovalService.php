@@ -210,30 +210,36 @@ class ClaimApprovalService
 
         // $travel[0] = ['tenant_id', Auth::user()->tenant_id];
         // $travel[1] = ['general_id', $id];
-        $travel = [    ['travel_claim.tenant_id', '=', Auth::user()->tenant_id],
-                        ['travel_claim.general_id', '=', $id],];
-                        
-        $personal = [   ['personal_claim.tenant_id', '=', Auth::user()->tenant_id],
-                        ['personal_claim.general_id', '=', $id],];
+        $travel = [
+            ['travel_claim.tenant_id', '=', Auth::user()->tenant_id],
+            ['travel_claim.general_id', '=', $id],
+        ];
+
+        $personal = [
+            ['personal_claim.tenant_id', '=', Auth::user()->tenant_id],
+            ['personal_claim.general_id', '=', $id],
+        ];
         // $personal[0] = ['tenant_id', Auth::user()->tenant_id];
         // $personal[1] = ['general_id', $id];
-        
 
-        $general = [    ['general_claim_details.tenant_id', '=', Auth::user()->tenant_id],
-                        ['general_claim_details.general_id', '=', $id],];
+
+        $general = [
+            ['general_claim_details.tenant_id', '=', Auth::user()->tenant_id],
+            ['general_claim_details.general_id', '=', $id],
+        ];
 
         // $general[0] = ['tenant_id', Auth::user()->tenant_id];
         // $general[1] = ['general_id', $id];
 
         $data['claim'] = GeneralClaim::where($claim)->first();
-        
-        
+
+
         $data['travel'] = TravelClaim::select(
             'travel_claim.*',
             'travel_claim.type_transport AS travel_claim_type_transport',
         )
-        ->where($travel)
-        ->get();
+            ->where($travel)
+            ->get();
 
         //pr($data['travel']);
 
@@ -249,35 +255,35 @@ class ClaimApprovalService
 
 
         // pr($data['travel']); 
-        
+
         $data['personal'] = PersonalClaim::select(
             'personal_claim.*',
             'claim_category.claim_catagory as claim_catagory_name',
 
         )
-        ->leftJoin('claim_category', 'claim_category.id', '=', 'personal_claim.claim_category')
-        ->where($personal)
-        ->get();
-        
+            ->leftJoin('claim_category', 'claim_category.id', '=', 'personal_claim.claim_category')
+            ->where($personal)
+            ->get();
+
 
         //pr($data['personal']);
 
         $data['general'] = GeneralClaimDetail::select(
             'general_claim_details.*',
             'general_claim_details.desc as gnc_desc',
-            'general_claim.year', 
+            'general_claim.year',
             'general_claim.month',
             'claim_category.claim_catagory as claim_catagory_name',
 
         )
-        ->leftJoin('claim_category', 'claim_category.id', '=', 'general_claim_details.claim_category')
-        ->leftJoin('general_claim', 'general_claim_details.general_id', '=', 'general_claim.id')
-        ->where('general_claim_details.tenant_id', '=', Auth::user()->tenant_id)
-        ->where('general_claim_details.general_id', '=', $id)
-        ->get();
-    
-    
-        
+            ->leftJoin('claim_category', 'claim_category.id', '=', 'general_claim_details.claim_category')
+            ->leftJoin('general_claim', 'general_claim_details.general_id', '=', 'general_claim.id')
+            ->where('general_claim_details.tenant_id', '=', Auth::user()->tenant_id)
+            ->where('general_claim_details.general_id', '=', $id)
+            ->get();
+
+
+
         //pr( $data['general']);
 
         return $data;
@@ -369,6 +375,15 @@ class ClaimApprovalService
 
         $input['status'] = $status;
         $input[$stage] = $status;
+
+        if ($status == 'amend') {
+            $input['approver'] = '';
+            $input['f1'] = '';
+            $input['f2'] = '';
+            $input['f3'] = '';
+            $input['f_approver'] = '';
+            $input['f_recommender'] = '';
+        }
 
         CashAdvanceDetail::where('id', $id)->update($input);
 
