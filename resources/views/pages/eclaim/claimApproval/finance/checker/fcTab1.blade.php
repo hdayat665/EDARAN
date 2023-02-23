@@ -19,7 +19,7 @@
             @foreach ($claims as $claim)
                 @if ($claim->hod == 'recommend' && $claim->f1 == '')
                     <tr>
-                        <td><input type="checkbox" id="" name="" value=""></td>
+                        <td style="text-align: center"><input class="form-check-input" type="checkbox" />
                         <td>
                             <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle"><i class="fa fa-cogs"></i> Action <i class="fa fa-caret-down"></i></a>
                             <div class="dropdown-menu">

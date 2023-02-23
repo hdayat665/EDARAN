@@ -842,6 +842,15 @@ class SettingController extends Controller
         return response()->json($result);
     }
 
+    public function deleteSubsistance($id)
+    {
+        $ss = new SettingService;
+
+        $result = $ss->deleteSubsistance($id);
+
+        return response()->json($result);
+    }
+
     public function deleteClaimCategory($id)
     {
         $ss = new SettingService;

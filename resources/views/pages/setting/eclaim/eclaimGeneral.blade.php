@@ -1,5 +1,11 @@
 @extends('layouts.dashboardTenant')
 @section('content')
+<style>
+    .modal {
+    z-index: 9999;
+}
+
+    </style>
     <div id="content" class="app-content">
         <h1 class="page-header">Setting <small> | eClaim | General </small></h1>
         <div class="panel panel" id="eclaimGenearalJs">
@@ -71,7 +77,12 @@
                                     @foreach ($subsistances as $subsistance)
                                         <tr>
                                             <td><button class="btn btn-primary btn-xs" data-id="{{ $subsistance->id }}"
-                                                    id="editModalButton">Edit</button>
+                                                    id="editModalButton">Edit
+                                                </button>
+                                                &nbsp;
+                                                <button class="btn btn-danger btn-xs" data-id="{{ $subsistance->id }}"
+                                                    id="deleteButton">Delete
+                                                </button>
                                             </td>
                                             <td>{{ $subsistance->area_name }}</td>
                                         </tr>
@@ -97,7 +108,7 @@
         </div>
 
     </div>
+    @include('modal.setting.eclaim.editSubsistence')
 
     @include('modal.setting.eclaim.addSubsistence')
-    @include('modal.setting.eclaim.editSubsistence')
 @endsection

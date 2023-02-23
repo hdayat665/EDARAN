@@ -162,7 +162,7 @@
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td><input type="checkbox" id="" name="" value=""></td>
+                                        <td style="text-align: center"><input class="form-check-input" type="checkbox" />
                                             <td>
                                                 <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle"><i class="fa fa-cogs"></i> Action <i
                                                         class="fa fa-caret-down"></i></a>
@@ -187,7 +187,7 @@
                                             <td>21/7/2022</td>
                                         </tr>
                                         <tr>
-                                            <td><input type="checkbox" id="" name="" value=""></td>
+                                        <td style="text-align: center"><input class="form-check-input" type="checkbox" />
                                             <td>
                                                 <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle"><i class="fa fa-cogs"></i> Action <i
                                                         class="fa fa-caret-down"></i></a>
@@ -213,7 +213,7 @@
                                             <td>21/07/2022</td>
                                         </tr>
                                         <tr>
-                                            <td><input type="checkbox" id="" name="" value=""></td>
+                                        <td style="text-align: center"><input class="form-check-input" type="checkbox" />
                                             <td>
                                                 <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle"><i class="fa fa-cogs"></i> Action <i
                                                         class="fa fa-caret-down"></i></a>
@@ -239,7 +239,7 @@
                                             <td>21/07/2022</td>
                                         </tr>
                                         <tr>
-                                            <td><input type="checkbox" id="" name="" value=""></td>
+                                        <td style="text-align: center"><input class="form-check-input" type="checkbox" />
                                             <td>
                                                 <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle"><i class="fa fa-cogs"></i> Action <i
                                                         class="fa fa-caret-down"></i></a>

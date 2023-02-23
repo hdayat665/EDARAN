@@ -313,6 +313,7 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('/updateStatusEntitleGroup/{id}/{status}', 'updateStatusEntitleGroup');
             Route::delete('/deleteEntitleGroup/{id}', 'deleteEntitleGroup');
             Route::post('/updateSubsistance/{id}', 'updateSubsistance');
+            Route::delete('/deleteSubsistance/{id}', 'deleteSubsistance');
             Route::get('/claimCatById/{id}', 'claimCatById');
             Route::post('/createGeneralApprover', 'createGeneralApprover');
             Route::get('/getUserByRole/{id}', 'getUserByRole');
