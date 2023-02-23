@@ -67,7 +67,7 @@ var handleCalendarDemo = function() {
             var time = startTime.split(":");
             startTime = time[0] < 10 ? "0" + startTime : startTime;
 
-            var endDate = new Date(events['end_date']);
+            var endDate = new Date(logs['end_time']);
             var endMonth = endDate.getMonth();
             endMonth = endMonth < 10 ? "0" + endMonth : endMonth;
             var endYear = endDate.getFullYear();

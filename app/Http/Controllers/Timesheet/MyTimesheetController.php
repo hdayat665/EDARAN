@@ -150,6 +150,15 @@ class MyTimesheetController extends Controller
         return response()->json($result);
     }
 
+    public function getActivityNamebyLogsId($project_id = '')
+    {
+        $ss = new MyTimeSheetService;
+
+        $result = $ss->getActivityNamebyLogsId($project_id);
+
+        return response()->json($result);
+    }
+
     public function timesheetApprovalView()
     {
         $ss = new MyTimeSheetService;
@@ -332,6 +341,8 @@ class MyTimesheetController extends Controller
         return response()->json($data);
     }
 
+
+
     // public function getParticipantNameById($participant = '')
     // {
     //     $ss = new MyTimeSheetService;
@@ -340,5 +351,6 @@ class MyTimesheetController extends Controller
 
     //     return response()->json($result);
     // }
+
 
 }

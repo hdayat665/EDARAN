@@ -8,6 +8,7 @@ use App\Models\PhoneDirectory;
 use App\Models\Project;
 use App\Models\TimesheetApproval;
 use App\Models\TimesheetLog;
+use App\Models\Employee;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -90,29 +91,65 @@ class TimesheetReportService
         return $data;
     }
 
-    public function getReportTimesheetLog($r)
+    public function employeeReportAll()
     {
-        $input = $r->input();
+        $cond[1] = ['a.tenant_id', Auth::user()->tenant_id];
+        $data = DB::table('employment as a')
+            ->leftJoin('timesheet_log as b', 'a.user_id', '=', 'b.user_id')
+            ->leftJoin('designation as c', 'a.designation', '=', 'c.id')
+            ->select('a.employeeName', 'c.designationName as designationNameas','a.status','b.date','b.total_hour')
+            ->where($cond)
+            ->groupBy('a.user_id','b.date','b.total_hour')
+            ->get();
+    
+        $pivotedData = $data->groupBy('employeeName')->map(function ($employeeLogs) {
+            $result = ['employeeName' => $employeeLogs->first()->employeeName];
+            foreach ($employeeLogs as $log) {
+                $day = date('d', strtotime($log->date));
+                $result['day_'.$day] = $log->total_hour;
+            }
+            return (object) $result;
+        })->values();
+    
+        return $pivotedData;
+    }
+    
 
-        $cond[1] = ['employeeName', '!=', null];
+    public function getdatabyemployee()
+    {
+        $cond[1] = ['a.tenant_id', Auth::user()->tenant_id];
+        $cond[2] = ['c.project_name', '!=', null];
 
-        if (isset($input['department2'])) {
-            $cond[2] = ['departmentName', $input['department2']];
-        }
-
-        if (isset($input['employeeName2'])) {
-            $cond[3] = ['employeeName', $input['employeeName2']];
-        }
-
-        $data = DB::table('timesheet_log_report')
-        ->whereMonth('date', $input['month2'] ?? now('m'))
-        ->whereYear('date', $input['year2'] ?? now('y'))
+        $data = DB::table('timesheet_log as a')
+        ->leftJoin('employment as b', 'a.user_id', '=', 'b.user_id')
+        ->leftJoin('project as c', 'a.project_id', '=', 'c.id')
+        ->select('a.date','a.total_hour','c.project_name as projectnameas','b.COR','b.employeeName')
         ->where($cond)
-        // ->whereYear('a.date', $year)
+        // ->groupBy('c.project_name')
         ->get();
 
         return $data;
     }
+
+    
+
+
+    // public function employeeReportAll()
+    // {
+    //     $cond[1] = ['a.tenant_id', Auth::user()->tenant_id];
+    //     $data = DB::table('employment as a')
+    //         ->leftJoin('timesheet_log as b', 'a.user_id', '=', 'b.user_id')
+    //         ->select('a.*', 'b.*', DB::raw('SEC_TO_TIME(SUM(TIME_TO_SEC(b.duration))) as total_duration'))
+    //         ->where($cond)
+    //         // ->whereBetween('date', [$startDate, $endDate])
+    //         // ->whereMonth('a.date', $month)
+    //         // ->whereYear('a.date', $year)
+    //         ->groupBy('a.user_id')
+    //         ->get();
+    
+    //     return $data;
+    // }
+    
 
 
 }

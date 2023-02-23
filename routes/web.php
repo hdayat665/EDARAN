@@ -426,6 +426,7 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('/searchEmployeeTimesheetReport', 'searchEmployeeTimesheetReport');
             Route::post('/searchEmployeeReport', 'searchEmployeeReport');
             Route::post('/searchOvertimeReport', 'searchOvertimeReport');
+            // Route::get('/getReportAllEmployee', 'getReportAllEmployee');
         });
 
         Route::controller(MyTimesheetController::class)->group(function () {
@@ -441,6 +442,7 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('/updateTimesheetEvent/{id}', 'updateTimesheetEvent');
             Route::get('/getLocationByProjectId/{id}', 'getLocationByProjectId');
             Route::get('/getActivityByProjectId/{id}', 'getActivityByProjectId');
+            Route::get('/getActivityNamebyLogsId/{id}', 'getActivityNamebyLogsId');
             Route::get('/timesheetApproval', 'timesheetApprovalView');
             Route::get('/updateStatusTimesheet/{id}/{status}', 'updateStatusTimesheet');
             Route::post('/submitForApproval/{userId}', 'submitForApproval');
@@ -463,6 +465,7 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('/updatereason', 'updatereason');
             Route::get('/getParticipantNameById/{id}', 'getParticipantNameById');
             Route::get('/getConfirmSubmitById/{id}', 'getConfirmSubmitById');
+            
         });
 
 
