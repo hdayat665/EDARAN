@@ -1612,3 +1612,22 @@ if (!function_exists('getAdminChecker')) {
         return $data;
     }
 }
+
+if (!function_exists('addressType')) {
+    function addressType($id = '')
+    {
+        $data = [
+
+            '1' => 'CORRESPONDENCE',
+            '2' => 'PERMANENT',
+            '3' => 'BOTH',
+            '4' => 'NONE',
+        ];
+
+        if ($id) {
+            $data = $data[$id];
+        }
+
+        return $data;
+    }
+}

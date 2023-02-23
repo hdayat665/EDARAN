@@ -148,7 +148,17 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('/addSibling', 'addSibling');
             Route::post('/updateSibling', 'updateSibling');
             Route::post('/addChildren', 'addChildren');
+
             Route::post('/saveEducation', 'saveEducation');
+            Route::post('/updateEducation', 'updateEducation');
+            Route::get('/getEducation/{id}', 'getEducation');
+            Route::delete('/deleteEducation/{id}', 'deleteEducation');
+
+            Route::post('/addAddressDetails', 'addAddressDetails');
+            Route::get('/getAddressDetails/{id}', 'getAddressDetails');
+            Route::post('/updateAddressDetails', 'updateAddressDetails');
+            Route::delete('/deleteAddressDetails/{id}', 'deleteAddressDetails');
+
             Route::get('/getParent/{id}', 'getParent');
             Route::get('/getSibling/{id}', 'getSibling');
             Route::post('/updatePass', 'updatePass');

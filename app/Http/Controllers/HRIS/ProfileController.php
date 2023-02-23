@@ -340,4 +340,66 @@ class ProfileController extends Controller
         return response()->json($result);
     }
 
+    public function getEducation($id = '')
+    {
+        $ps = new ProfileService;
+
+        $result = $ps->getEducation($id);
+
+        return response()->json($result);
+    }
+
+    public function updateEducation(Request $r)
+    {
+        $ps = new ProfileService;
+
+        $result = $ps->updateEducation($r);
+
+        return response()->json($result);
+    }
+
+    public function deleteEducation($id = '')
+    {
+        $ps = new ProfileService;
+
+        $result = $ps->deleteEducation($id);
+
+        return response()->json($result);
+    }
+
+    public function getAddressDetails(Request $request)
+    {
+        $ps = new ProfileService;
+
+        $result = $ps->getAddressDetails($request->id);
+
+        return response()->json($result);
+    }
+
+    public function addAddressDetails(Request $r)
+    {
+        $ps = new ProfileService;
+
+        $result = $ps->addAddressDetails($r);
+
+        return response()->json($result);
+    }
+
+    public function updateAddressDetails(Request $r)
+    {
+        $ps = new ProfileService;
+
+        $result = $ps->updateAddressDetails($r);
+
+        return response()->json($result);
+    }
+
+    public function deleteAddressDetails($id = '')
+    {
+        $ps = new ProfileService;
+
+        $result = $ps->deleteAddressDetails($id);
+
+        return response()->json($result);
+    }
 }

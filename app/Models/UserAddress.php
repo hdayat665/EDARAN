@@ -34,6 +34,7 @@ class UserAddress extends Authenticatable
         'cityc',
         'statec',
         'countryc',
+        'addressType',
     ];
 }
 
