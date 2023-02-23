@@ -58,7 +58,7 @@
                 </div>
                 <div class="col-md-9">
                     <a href="/storage/{{ $cashClaim->file_upload }}">{{ $cashClaim->file_upload }}</a>
-                    <input readonly type="text" class="form-control">
+                    <!-- <input readonly type="text" class="form-control"> -->
                 </div>
             </div>
         </div>

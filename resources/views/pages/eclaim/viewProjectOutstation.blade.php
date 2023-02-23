@@ -57,7 +57,7 @@
                     <label class="form-label col-form-label">Destination :</label>
                 </div>
                 <div class="col-md-9">
-                    <input readonly type="text" class="form-control" name="cash['destination']" value="{{ $cashClaim->destination ?? '' }}">
+                    <input readonly type="text" class="form-control" name="cash['destination']" value="{{ getProjectLocation($cashClaim->project_location_id)->location_name ?? '-' }}">
                 </div>
             </div>
             <div class="row p-2">
@@ -85,7 +85,7 @@
                     <label class="form-label col-form-label">Accommodation :</label>
                 </div>
                 <div class="col-md-3">
-                    <input readonly type="text" class="form-control" name="mot['accomodation_total']" value="{{ $cashClaim->mode_of_transport->accomodation_total }}">
+                    <input readonly type="text" class="form-control" name="mot['accomodation_total']" value="{{ $cashClaim->mode_of_transport->accommadation_total }}">
                 </div>
             </div>
             <div class="row p-2">

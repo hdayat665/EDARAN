@@ -38,54 +38,18 @@
                     </thead>
                     
                     <tbody>
-                    {{-- <tr>
-                        <td>1</td>
-                        <td>
-                            <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle"><i class="fa fa-cogs"></i> Action <i class="fa fa-caret-down"></i></a>
-                            <div class="dropdown-menu">
-                                <a href="javascript:;" id="" data-id="" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#editmodaledd" > Edit</a>
-                                <div class="dropdown-divider"></div>
-                                <a href="javascript:;" id="" data-id="" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#modalreject"> Delete</a>
-                                <div class="dropdown-divider"></div>
-                            </div>
-                        </td>
-                        <td>01/04/2019</td>
-                        <td>31/08/2021</td>
-                        <td>UNIVERSITI MALAYA</td>
-                        <td>BACHELOR OF DEGREE</td>
-                        <td>3.25</td>
-                        <td>Degree.pdf</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>
-                            <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle"><i class="fa fa-cogs"></i> Action <i class="fa fa-caret-down"></i></a>
-                            <div class="dropdown-menu">
-                                <a href="javascript:;" id="" data-id="" class="dropdown-item" > Edit</a>
-                                <div class="dropdown-divider"></div>
-                                <a href="javascript:;" id="" data-id="" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#modalreject"> Delete</a>
-                                <div class="dropdown-divider"></div>
-                            </div>
-                        </td>
-                        <td>03/02/2022</td>
-                        <td>31/08/2021</td>
-                        <td>UNIVERSITI MALAYA</td>
-                        <td>MASTER'S DEGREE</td>
-                        <td>PASS</td>
-                        <td>Master.pdf</td>
-                    </tr> --}}
                     <?php $id = 0 ?>
-                    @if ($childrens)
-                        @foreach ($childrens as $education)
+                    @if ($qualification)
+                        @foreach ($qualification as $education)
                         <?php $id++ ?>
                         <tr>
                             <td> {{$id}} </td>
                             <td>
                                 <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle"><i class="fa fa-cogs"></i> Actions <i class="fa fa-caret-down"></i></a>
                                 <div class="dropdown-menu">
-                                    <a href="javascript:;" data-bs-toggle="modal" id="addEducation{{$education->id}}" data-id="{{$education->id}}"> Edit</a>
+                                    <a href="javascript:;" id="educationModalEdit{{$education->id}}" data-id="{{$education->id}}" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#editmodaledd"> Edit</a>
                                     <div class="dropdown-divider"></div>
-                                    <a href="javascript:;" id="" data-id="" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#modalreject"> Delete</a>
+                                    <a href="javascript:;" id="" data-id="" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#deleteEducation"> Delete</a>
                                     <div class="dropdown-divider"></div>
                                 </div>
                             </td>
@@ -95,8 +59,6 @@
                             <td style="text-transform: uppercase;"> {{ $education->instituteName }} </td>
                             <td style="text-transform: uppercase;"> {{ $education->highestLevelAttained }} </td>
                             <td style="text-transform: uppercase;"> {{ $education->result }} </td>
-
-                            {{-- {{dd($education)}} --}}
                         </tr>
                         @endforeach
                     @endif
@@ -121,7 +83,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
+                    {{-- <tr>
                         <td>1</td>
                         <td>
                             <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle"><i class="fa fa-cogs"></i> Action <i class="fa fa-caret-down"></i></a>
@@ -150,7 +112,30 @@
                         <td>17/09/2022</td>
                         <td>Architect</td>
                         <td>Architect.pdf</td>
-                    </tr>
+                    </tr> --}}
+
+                    <?php $id = 0 ?>
+                    @if ($qualification)
+                        @foreach ($qualification as $others)
+                        <?php $id++ ?>
+                        <tr>
+                            <td> {{$id}} </td>
+                            <td>
+                                <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle"><i class="fa fa-cogs"></i> Actions <i class="fa fa-caret-down"></i></a>
+                                <div class="dropdown-menu">
+                                    <a href="javascript:;" id="educationModalEdit{{$others->id}}" data-id="{{$others->id}}" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#addmodalothers"> Edit</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a href="javascript:;" id="" data-id="" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#deleteEducation"> Delete</a>
+                                    <div class="dropdown-divider"></div>
+                                </div>
+                            </td>
+
+                            <td> {{ $others->otherDate }} </td>
+                            <td style="text-transform: uppercase;"> {{ $others->otherPQDetails }} </td>
+                            <td> {{ $others->supportOtherDoc }} </td>
+                        </tr>
+                        @endforeach
+                    @endif
                     </tbody>
                 </table>
             </div>
@@ -180,13 +165,13 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="" class="form-label">From Date</label>
-                        <input type="text" class="form-control" id="datepicker-fromdate" placeholder="YYYY/MM/DD" name="fromDate" value="{{$education->fromDate ?? ''}}">
+                        <input type="text" class="form-control" id="datepicker-fromdate" placeholder="YYYY/MM/DD" name="fromDate" value="">
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="" class="form-label">To Date</label>
-                        <input type="text" class="form-control" id="datepicker-todate" placeholder="YYYY/MM/DD" name="toDate" value="{{$education->toDate ?? ''}}">
+                        <input type="text" class="form-control" id="datepicker-todate" placeholder="YYYY/MM/DD" name="toDate" value="">
                     </div>
                 </div>
             </div>
@@ -194,13 +179,13 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="" class="form-label">Institute Name</label>
-                        <input type="text" class="form-control" id="instituteName" placeholder="INSTITUTE NAME" name="instituteName" value="{{$education->instituteName ?? ''}}">
+                        <input type="text" class="form-control" id="instituteName" placeholder="INSTITUTE NAME" name="instituteName" value="">
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="" class="form-label">Highest Level Attained</label>
-                        <input type="text" class="form-control" id="highestLevelAttained" placeholder="HIGHEST LEVEL ATTAINED" name="highestLevelAttained" value="{{$education->highestLevelAttained ?? ''}}">
+                        <input type="text" class="form-control" id="highestLevelAttained" placeholder="HIGHEST LEVEL ATTAINED" name="highestLevelAttained" value="">
                     </div>
                 </div>
             </div>
@@ -208,7 +193,7 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="" class="form-label">Result</label>
-                        <input type="text" class="form-control" id="result" placeholder="RESULT" name="result" value="{{$education->result ?? ''}}">
+                        <input type="text" class="form-control" id="result" placeholder="RESULT" name="result" value="">
                     </div>
                 </div>
                 <div class="col-md-6">
@@ -239,17 +224,18 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
+            <form id="educationModalEdit">
             <div class="row p-2">
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="" class="form-label">From Date</label>
-                        <input type="text" class="form-control" id="datepicker-fromdateu" placeholder="YYYY/MM/DD">
+                        <input type="text" class="form-control" id="educationFromDate1" value="{{ $education->fromDate }}" placeholder="YYYY/MM/DD">
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="" class="form-label">To Date</label>
-                        <input type="text" class="form-control" id="datepicker-todateu" placeholder="YYYY/MM/DD">
+                        <input type="text" class="form-control" id="educationToDate1" value="{{ $education->toDate ?? '' }}" placeholder="YYYY/MM/DD">
                     </div>
                 </div>
             </div>
@@ -257,13 +243,13 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="" class="form-label">Institute Name</label>
-                        <input type="text" class="form-control" id="" placeholder="INSTITUTE NAME">
+                        <input type="text" class="form-control" id="educationinstituteName1" value="{{ $education->instituteName ?? '' }}" placeholder="INSTITUTE NAME">
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="" class="form-label">Highest Level Attained</label>
-                        <input type="text" class="form-control" id="" placeholder="HIGHEST LEVEL ATTAINED">
+                        <input type="text" class="form-control" id="educationhighestLevelAttained1" value="{{ $education->highestLevelAttained ?? '' }}" placeholder="HIGHEST LEVEL ATTAINED">
                     </div>
                 </div>
             </div>
@@ -271,7 +257,7 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="" class="form-label">Result</label>
-                        <input type="text" class="form-control" id="" placeholder="RESULT">
+                        <input type="text" class="form-control" id="educationResult1" value="{{ $education->result ?? '' }}" placeholder="RESULT">
                     </div>
                 </div>
                 <div class="col-md-6">
@@ -284,8 +270,9 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
+          <button type="button" class="btn btn-primary" id="editEducation">Save changes</button>
         </div>
+    </form>
       </div>
     </div>
   </div>

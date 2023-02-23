@@ -57,7 +57,7 @@
                     <label class="form-label col-form-label">Destination :</label>
                 </div>
                 <div class="col-md-9">
-                    <input readonly type="text" class="form-control" value="{{ $cashClaim->destination ?? '' }}">
+                    <input readonly type="text" class="form-control" value="{{ getProjectLocation($cashClaim->project_location_id)->location_name ?? '-' }}">
                 </div>
             </div>
             <div class="row p-2">

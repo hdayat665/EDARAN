@@ -27,11 +27,11 @@
                                     View PO
                                 </a>
                                 <div class="dropdown-divider"></div>
-                                <a href="javascript:;" id="approveButton5" data-id="{{ $ca->id }}" class="dropdown-item"><i class="fa fa-check" aria-hidden="true"></i> Approve</a>
+                                <!-- <a href="javascript:;" id="approveButton5" data-id="{{ $ca->id }}" class="dropdown-item"><i class="fa fa-check" aria-hidden="true"></i> Approve</a>
                                 <div class="dropdown-divider"></div>
                                 <a href="javascript:;" id="rejectButton5" data-id="{{ $ca->id }}" class="dropdown-item"><i class="fa fa-ban" aria-hidden="true"></i> Reject</a>
                                 <div class="dropdown-divider"></div>
-                                <a href="javascript:;" id="" data-id="" class="dropdown-item"><i class="fa fa-times" aria-hidden="true"></i> Cancel</a>
+                                <a href="javascript:;" id="" data-id="" class="dropdown-item"><i class="fa fa-times" aria-hidden="true"></i> Cancel</a> -->
                             </div>
                         <td>{{ $ca->id }}</td>
                         <td>{{ $ca->userProfile->fullName ?? '-' }}</td>

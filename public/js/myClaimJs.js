@@ -11,6 +11,7 @@ $("document").ready(function () {
     $("#claimtable").dataTable({
         searching: true,
         lengthChange: false,
+        scrollX:true,
         lengthMenu: [5, 10],
         responsive: false,
         info: false,
@@ -18,6 +19,8 @@ $("document").ready(function () {
     });
     //Get a reference to the new datatable
     var table = $("#claimtable").DataTable();
+
+    
     //Take the category filter drop down and append it to the datatables_filter div.
     //You can use this same idea to move the filter anywhere withing the datatable that you want.
     $("#claimtable_filter.dataTables_filter").append($("#Statusclaim"));
@@ -35,12 +38,18 @@ $("document").ready(function () {
     //Use the built in datatables API to filter the existing rows by the Category column
     $.fn.dataTable.ext.search.push(function (settings, data, dataIndex) {
         var selectedItem = $("#Statusclaim").val();
-        var category = data[categoryIndex];
-        if (selectedItem === "" || category.includes(selectedItem)) {
+        var category = data[6];
+        if (selectedItem === "") {
+            return true;
+        } else if (category === selectedItem) {
             return true;
         }
         return false;
+        
     });
+    
+    
+    
     //Set the change event for the Category Filter dropdown to redraw the datatable each time
     //a user selects a new filter.
     $("#Statusclaim").change(function (e) {
@@ -70,14 +79,17 @@ $("document").ready(function () {
             return false;
         }
     });
-    //Use the built in datatables API to filter the existing rows by the Category column
+    
     $.fn.dataTable.ext.search.push(function (settings, data, dataIndex) {
         var selectedItem2 = $("#Statuscash").val();
-        var category2 = data[categoryIndex2];
-        if (selectedItem2 === "" || category2.includes(selectedItem2)) {
+        var category2 = data[6];
+        if (selectedItem2 === "") {
+            return true;
+        } else if (selectedItem2 === category2) {
             return true;
         }
         return false;
+        
     });
     $("#Statuscash").change(function (e) {
         table2.draw();

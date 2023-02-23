@@ -148,7 +148,17 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('/addSibling', 'addSibling');
             Route::post('/updateSibling', 'updateSibling');
             Route::post('/addChildren', 'addChildren');
+
             Route::post('/saveEducation', 'saveEducation');
+            Route::post('/updateEducation', 'updateEducation');
+            Route::get('/getEducation/{id}', 'getEducation');
+            Route::delete('/deleteEducation/{id}', 'deleteEducation');
+
+            Route::post('/addAddressDetails', 'addAddressDetails');
+            Route::get('/getAddressDetails/{id}', 'getAddressDetails');
+            Route::post('/updateAddressDetails', 'updateAddressDetails');
+            Route::delete('/deleteAddressDetails/{id}', 'deleteAddressDetails');
+
             Route::get('/getParent/{id}', 'getParent');
             Route::get('/getSibling/{id}', 'getSibling');
             Route::post('/updatePass', 'updatePass');
@@ -313,6 +323,7 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('/updateStatusEntitleGroup/{id}/{status}', 'updateStatusEntitleGroup');
             Route::delete('/deleteEntitleGroup/{id}', 'deleteEntitleGroup');
             Route::post('/updateSubsistance/{id}', 'updateSubsistance');
+            Route::delete('/deleteSubsistance/{id}', 'deleteSubsistance');
             Route::get('/claimCatById/{id}', 'claimCatById');
             Route::post('/createGeneralApprover', 'createGeneralApprover');
             Route::get('/getUserByRole/{id}', 'getUserByRole');

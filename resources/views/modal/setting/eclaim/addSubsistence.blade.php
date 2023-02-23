@@ -1,4 +1,4 @@
-<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+<div class="modal fade" id="addSubsistence" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
     aria-hidden="true">
     <form id="addForm">
         <div class="modal-dialog modal-dialog-centered" role="document">
@@ -15,6 +15,7 @@
                             <label for="inputEmail3" class="col-sm-2 col-form-label">Area*</label><br>
                             <div class="col-sm-6">
                                 <input type="text" class="form-control" id="Area" name="area_name">
+                            </div>
                     </form>
                 </div>
             </div>

@@ -24,7 +24,7 @@
                             <div class="dropdown-menu">
                                 <a href="/cashAdvanceFcheckerDetail/{{ $ca->type }}/{{ $ca->id }}" id="" data-id="" class="dropdown-item"><i class="fa fa-eye"
                                         aria-hidden="true"></i>
-                                    View PO
+                                    View
                                 </a>
                                 <div class="dropdown-divider"></div>
                                 <a href="javascript:;" id="approveButton1" data-id="{{ $ca->id }}" class="dropdown-item"><i class="fa fa-check" aria-hidden="true"></i> Approve</a>
