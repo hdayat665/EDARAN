@@ -25,11 +25,11 @@
                         <label class="form-label">Type of Log* </label>
                         <select class="form-select" id="addtypeoflogedit" name="type_of_log" aria-label="Default select example">
                             <option class="form-label" value="" selected>Select Type of Log</option>
-                            <option class="form-label" value="NON-PROJECT" >NON-PROJECT</option>
-                            <option class="form-label" value="PROJECT" >PROJECT</option>
-                            <option class="form-label" value="OFFICE" >OFFICE</option>
-                            <option class="form-label" value="OTHERS" >OTHERS</option>
-                            <option class="form-label" value="HOME" >HOME</option>
+                            {{-- <option class="form-label" value="NON-PROJECT" >NON-PROJECT</option> --}}
+                            <option class="form-label" value="1" >HOME</option>
+                            <option class="form-label" value="2" >OFFICE</option>
+                            <option class="form-label" value="3" >PROJECT</option>
+                            <option class="form-label" value="4" >OTHERS</option>
                             {{-- <option class="form-label" value="OTHERS">OTHERS</option> --}}
                         </select>
                     </div>

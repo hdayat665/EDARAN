@@ -103,7 +103,8 @@ var handleCalendarDemo = function() {
             headerToolbar: {
                 left: 'prev,today,next',
                 center: 'title',
-                right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
+                right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek',
+                
             },
             customButtons: {
                 logButton: {

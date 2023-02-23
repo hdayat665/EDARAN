@@ -263,7 +263,7 @@ $(document).ready(function() {
     });
 
     $(document).on('change', "#addtypeoflog", function() {
-        if ($(this).val() == "PROJECT") {
+        if ($(this).val() == "3") {
             $("#addtypeoflogproject").show();
         } else {
             $("#addtypeoflogproject").hide();
@@ -272,7 +272,7 @@ $(document).ready(function() {
         }
     });
     $(document).on('change', "#addtypeoflogedit", function() {
-        if ($(this).val() == "PROJECT") {
+        if ($(this).val() == "3") {
             $("#addtypeoflogprojectedit").show();
         } else {
             $("#addtypeoflogprojectedit").hide();
@@ -292,7 +292,7 @@ $("#add-row").click(function() {
         document.getElementById('addtypelogactivityName');
         return;
     } else {
-
+        addtypelogactivityName = addtypelogactivityName.toUpperCase();
         let table = document.getElementById('activityname');
         // Insert a row at the end of the table
         let newRow = table.insertRow(-1);
@@ -317,7 +317,7 @@ $("#add-for-edit-row").click(function() {
         document.getElementById('edittypelogactivityName');
         return;
     } else {
-
+        addtypelogactivityName = addtypelogactivityName.toUpperCase();
         let table = document.getElementById('editactivityname');
         // Insert a row at the end of the table
         let newRow = table.insertRow(-1);
