@@ -337,9 +337,9 @@ class ClaimApprovalController extends Controller
         $mcs = new ClaimApprovalService;
 
         $data['cas'] = $mcs->cashAdvanceApprovalView();
-
+        
         $view = 'cashAdvanceApprover';
-
+        
         return view('pages.eclaim.claimApproval.cashAdvance.approver.' . $view, $data);
     }
 
@@ -360,7 +360,7 @@ class ClaimApprovalController extends Controller
         } else {
             $view = 'otherNonOutside';
         }
-
+        
         return view('pages.eclaim.claimApproval.cashAdvance.approver.' . $view, $data);
     }
 
@@ -426,6 +426,7 @@ class ClaimApprovalController extends Controller
 
         $result = $mcs->cashAdvanceFcheckerDetail($id);
         $data['ca'] = $result['general'];
+        
         $data['check'] = $result['check'];
         // pr($data['check']);
         // 1 other outside 2 other non outside 3 project outside 4 project non outside

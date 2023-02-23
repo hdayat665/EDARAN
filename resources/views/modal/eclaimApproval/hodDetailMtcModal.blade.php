@@ -353,7 +353,7 @@
             <div class="modal-body">
                 <div class="row p-2">
                     <div class="col-md-6">
-                        <label class="form-label col-form-label">Appslied Date</label>
+                        <label class="form-label col-form-label">Applied Date</label>
                     </div>
                     <div class="col-md-6">
                         <input type="text" readonly class="form-control" id="" value="{{ date('Y-m-d', strtotime($personal->created_at)) ?? '-' }}">
