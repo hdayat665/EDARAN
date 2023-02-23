@@ -287,6 +287,20 @@ $(document).ready(function () {
             $("#reasonreject1").val(data[0].reason);
             // console.log(data[0]);
 
+            if (data[0].day_applied === "1") {
+                $("#menu01").show();
+                $("#menu02").hide();
+                $("#menu03").hide();
+            } else if (data[0].day_applied === "0.5") {
+                $("#menu01").show();
+                $("#menu02").show();
+                $("#menu03").hide();
+            } else {
+                $("#menu01").hide();
+                $("#menu02").hide();
+                $("#menu03").show();
+            }
+
             if (data[0].username1) {
                 $("#recommended_by").text(data[0].username1);
             } else {
