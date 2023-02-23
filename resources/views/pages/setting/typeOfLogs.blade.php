@@ -37,9 +37,19 @@
                             <a href="javascript:;" id="deleteButton" data-id="{{$data->id}}" class="dropdown-item"> Delete</a>
                             </div>
                         </td>
+
                         <td >{{$no++}}</td>
                         <td >{{$data->departmentName}}</td>
-                        <td >{{$data->type_of_log ? $data->type_of_log : '-'}}</td>
+                        @php
+                            $typeOfLogNames = [
+                                1 => 'HOME',
+                                2 => 'OFFICE',
+                                3 => 'PROJECT',
+                                4 => 'OTHERS',
+                                // add more mappings as needed
+                            ];
+                        @endphp
+                       <td>{{ isset($typeOfLogNames[$data->type_of_log]) ? $typeOfLogNames[$data->type_of_log] : '-' }}</td>
                         <td >{{$data->project_name ? $data->project_name : '-'}}</td>
                         <td >
                             <a href="javascript:;" data-bs-toggle="modal" id="listActivityNames" data-id="{{$data->id}}">CLICK HERE</a></td>
