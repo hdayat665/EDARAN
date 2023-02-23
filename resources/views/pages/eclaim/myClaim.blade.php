@@ -1,5 +1,14 @@
 @extends('layouts.dashboardTenant')
 @section('content')
+<style>
+   #claimtable {
+    width: 100% !important;
+    }
+    
+    #cashadvancetable {
+    width: 100% !important;
+    }
+    </style>
     <div id="content" class="app-content">
         <h1 class="page-header">eClaim <small>| My Claim </small></h1>
         <div class="panel panel" id="myClaimJs">

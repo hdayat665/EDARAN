@@ -1359,7 +1359,7 @@ class SettingService
     {
 
         $input = $r->input();
-
+        
         // $user = Auth::user();
         // $input['modifiedBy'] = $user->username;
         // date_default_timezone_set("Asia/Kuala_Lumpur");
@@ -1374,7 +1374,26 @@ class SettingService
 
         return $data;
     }
+    public function deleteSubsistance($id)
+    {
+        $logs = EclaimGeneral::find($id);
 
+        if (!$logs) {
+            $data['status'] = config('app.response.error.status');
+            $data['type'] = config('app.response.error.type');
+            $data['title'] = config('app.response.error.title');
+            $data['msg'] = 'Category not found';
+        } else {
+            $logs->delete();
+
+            $data['status'] = config('app.response.success.status');
+            $data['type'] = config('app.response.success.type');
+            $data['title'] = config('app.response.success.title');
+            $data['msg'] = 'Success Delete Category';
+        }
+
+        return $data;
+    }
     public function eclaimCategoryView()
     {
         $data = ClaimCategory::where([['tenant_id', Auth::user()->tenant_id]])->get();

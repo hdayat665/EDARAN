@@ -5,8 +5,8 @@
             <option value="Draft">Draft</option>
             <option value="Active">Active</option>
             <option value="Rejected">Rejected</option>
-            <option value="Rejected">Amend</option>
-            <option value="Jazz">Paid</option>
+            <option value="Amend">Amend</option>
+            <option value="Paid">Paid</option>
         </select>
     </div>
     <table id="cashadvancetable" class="table table-striped table-bordered align-middle">
@@ -33,19 +33,19 @@
 
                                 @if ($cashClaim->status == 'draft')
                                     <div class="dropdown-menu dropdown-menu-end">
-                                        <a href="/viewCashAdvance/{{ $cashClaim->id }}" class="dropdown-item">Update Claim</a>
+                                        <!-- <a href="/viewCashAdvance/{{ $cashClaim->id }}" class="dropdown-item">Update Claim</a> -->
                                     </div>
                                 @elseif ($cashClaim->status == 'active')
                                     <div class="dropdown-menu dropdown-menu-end">
                                         <a href="/viewCashAdvance/{{ $cashClaim->id }}" class="dropdown-item">View Claim</a>
-                                        <a href="/editCashAdvance/{{ $cashClaim->id }}" class="dropdown-item">Update Claim</a>
+                                        <!-- <a href="/editCashAdvance/{{ $cashClaim->id }}" class="dropdown-item">Update Claim</a> -->
                                         <div class="dropdown-divider"></div>
                                         <a href="javascript:;" id="cancelCashButton" data-id="{{ $cashClaim->id }}" class="dropdown-item">Cancel Claim</a>
                                     </div>
                                 @elseif ($cashClaim->status == 'amend')
                                     <div class="dropdown-menu dropdown-menu-end">
                                         <a href="/viewCashAdvance/{{ $cashClaim->id }}" class="dropdown-item">View Claim</a>
-                                        <a href="/editCashAdvance/{{ $cashClaim->id }}" class="dropdown-item">Update Claim</a>
+                                        <!-- <a href="/editCashAdvance/{{ $cashClaim->id }}" class="dropdown-item">Update Claim</a> -->
                                     </div>
                                 @elseif ($cashClaim->status == 'paid' || $cashClaim->status == 'reject')
                                     <div class="dropdown-menu dropdown-menu-end">
@@ -57,8 +57,8 @@
                         <td>{{ $cashClaim->id }}</td>
                         <td>{{ getCashAdvanceType($cashClaim->type) }}</td>
                         <td>{{ date_format(date_create($cashClaim->created_at), 'd/m/Y') }}</td>
-                        <td>{{ $cashClaim->travel_date ? $cashClaim->travel_date : '-' }}</td>
-                        <td>MYR {{ $cashClaim->amount }}</td>
+                        <td>{{ $cashClaim->travel_date ? $cashClaim->travel_date : 'N/A' }}</td>
+                        <td>MYR {{  $cashClaim->mode_of_transport->accommadation_total ?? $cashClaim->amount }}</td>
                         @if ($cashClaim->status == 'draft')
                             <td><span class="badge bg-warning" data-toggle="drafca" title="Draft">Draft</span></td>
                         @elseif ($cashClaim->status == 'active')

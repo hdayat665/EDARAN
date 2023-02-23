@@ -44,14 +44,13 @@
                     <input readonly type="text" class="form-control" value="{{ $cashClaim->travel_date }}">
                 </div>
             </div>
-            <div class="row p-2">
+            <!-- <div class="row p-2">
                 <div class="col-md-3">
                     <label class="form-label col-form-label">Project :</label>
                 </div>
                 <div class="col-md-9">
-                    <input readonly type="text" class="form-control" value="{{ getProjectById($cashClaim->project_id)->project_name }}">
                 </div>
-            </div>
+            </div> -->
             <div class="row p-2">
                 <div class="col-md-3">
                     <label class="form-label col-form-label">Destination :</label>

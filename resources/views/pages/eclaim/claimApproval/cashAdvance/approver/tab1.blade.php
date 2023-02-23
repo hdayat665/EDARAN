@@ -19,13 +19,13 @@
             @foreach ($cas as $ca)
                 @if ($ca->status == 'active' && $ca->approver == '')
                     <tr>
-                        <td><input type="checkbox" id="" name="" value=""></td>
+                        <td style="text-align: center"><input class="form-check-input" type="checkbox" />
                         <td>
                             <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle"><i class="fa fa-cogs"></i> Action <i class="fa fa-caret-down"></i></a>
                             <div class="dropdown-menu">
                                 <a href="/cashAdvanceFapproverDetail/{{ $ca->type }}/{{ $ca->id }}" id="" data-id="" class="dropdown-item"><i class="fa fa-eye"
                                         aria-hidden="true"></i>
-                                    View PO
+                                    View
                                 </a>
                                 <div class="dropdown-divider"></div>
                                 <a href="javascript:;" id="approveButton1" data-id="{{ $ca->id }}" class="dropdown-item"><i class="fa fa-check" aria-hidden="true"></i> Approve</a>
@@ -36,11 +36,10 @@
                             </div>
                         <td>{{ $ca->id }}</td>
                         <td>{{ $ca->userProfile->fullName ?? '-' }}</td>
-                        <td>{{ getCashAdvanceType($ca->type) ?? '-' }}</td>
-                        <td>{{ $ca->created_at ?? '-' }}</td>
-                        <td>{{ date('Y-m-d', strtotime($ca->created_at)) ?? '-' }}</td>
-                        <td>{{ $ca->travel_date ?? '-' }}</td>
-                        <td>{{ $ca->amount ?? '-' }}</td>
+                        <td>{{ getCashAdvanceType($ca->type) ?? 'N/A' }}</td>
+                        <td>{{ date('Y-m-d', strtotime($ca->created_at)) ?? 'N/A' }}</td>
+                        <td>{{ $ca->travel_date ?? 'N/A' }}</td>
+                        <td>MYR {{  $ca->mode_of_transport->accommadation_total ?? $ca->amount }}</td>
                         <td>{{ date('Y-m-d', strtotime($ca->updated_at)) ?? '-' }}</td>
                         <td>{{ $ca->status ?? '-' }}</td>
                     </tr>

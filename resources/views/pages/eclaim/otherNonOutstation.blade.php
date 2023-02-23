@@ -1,12 +1,12 @@
 <div class="OTHERSNO" style="display:none">
-    <div class="row p-2">
+    <!-- <div class="row p-2">
         <div class="col-md-4">
             <label class="form-label">Cash Advance ID</label>
         </div>
         <div class="col-md-8">
             <input readonly type="text" class="form-control">
         </div>
-    </div>
+    </div> -->
     <div class="row p-2">
         <div class="col-md-4">
             <label class="form-label">Date of Required Cash</label>

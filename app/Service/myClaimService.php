@@ -197,10 +197,10 @@ class myClaimService
        
         $cashAdvance['type'] = $input['type'] ?? '';
         $cashAdvance['tenant_id'] = Auth::user()->tenant_id ?? '';
-        $cashAdvance['user_id'] = Auth::user()->id ?? '';
-        $cashAdvance['project_id'] = $input['project_id'] ?? '';
-        $cashAdvance['project_location_id'] = $input['project_location_id'] ?? '';
-        $cashAdvance['purpose'] = $input['purpose'] ?? $input['purpose3'] ?? '';
+        $cashAdvance['user_id'] = Auth::user()->id ?? ''; 
+        $cashAdvance['project_id'] = $input['project_id'] ?? $input['project_id2'] ?? $input['project_id3'] ?? $input['project_id4'] ?? '';
+        $cashAdvance['project_location_id'] = $input['project_location_id'] ?? $input['project_location_id2'] ?? $input['project_location_id3'] ?? $input['project_location_id4'] ?? '';
+        $cashAdvance['purpose'] = $input['purpose'] ?? $input['purpose2'] ?? $input['purpose3'] ?? $input['purpose4'] ?? '';
         $cashAdvance['travel_date'] = $input['travel_date'] ?? $input['travel_date2'] ?? $input['travel_date3'] ?? '';
         $cashAdvance['destination'] = $input['destination'] ?? '';
         $cashAdvance['date_require_cash'] = $input['date_require_cash'] ?? '';

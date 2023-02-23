@@ -25,7 +25,7 @@
                             <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle"><i class="fa fa-cogs"></i> Action <i class="fa fa-caret-down"></i></a>
                             <div class="dropdown-menu">
                                 <a href="/cashAdvanceFcheckerDetail/{{ $ca->type }}/{{ $ca->id }}" id="" data-id="" class="dropdown-item"><i class="fa fa-eye"
-                                        aria-hidden="true"></i> View PO</a>
+                                        aria-hidden="true"></i> View</a>
                                 <div class="dropdown-divider"></div>
                                 <a href="javascript:;" id="checkModalButton" data-id="{{ $ca->id }}" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#chequeModal"><i
                                         class="fa fa-reply" aria-hidden="true"></i>

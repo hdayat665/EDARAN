@@ -6,7 +6,7 @@
             <option value="Active">Active</option>
             <option value="Rejected">Rejected</option>
             <option value="Amend">Amend</option>
-            <option value="Paid">Paid</option>
+            <option value="paid">Paid</option>
         </select>
     </div>
     <table id="claimtable" class="table table-striped table-bordered align-middle">
@@ -82,7 +82,7 @@
                         @if ($claim->status == 'amend')
                             <td><span class="badge bg-success" data-toggle="amendc" title="Amend">Amend</span></td>
                         @elseif ($claim->status == 'paid' || $claim->status == 'recommend')
-                            <td><span class="badge bg-secondary" data-toggle="paidc" title="Paid">Paid</span>
+                            <td><span class="badge bg-secondary" data-toggle="paidc" title="Paid">Paid</span></td>
                             @elseif ($claim->status == 'draft')
                             <td><span class="badge bg-warning" data-toggle="drafc" title="Draft">Draft</span></td>
                         @elseif ($claim->status == 'rejected')
