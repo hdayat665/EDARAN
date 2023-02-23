@@ -124,29 +124,29 @@
                         <a href="/financeCheckerView" class="btn btn-light" style="color: black;" type="submit"><i class="fa fa-arrow-left"></i> Back</a>
                     </div>
                     <div class="col d-flex justify-content-end">
-                    @if ($gnc->pv_number)
-                        <!-- The pv_number is not null, so hide all buttons -->
-                    @else
-                        <!-- The pv_number is null, so show the buttons as before -->
-                        @if (($gnc->f1 == 'check' && $gnc->f2 == 'check' && $gnc->f3 == 'check'))
-                            <!-- All checkboxes are checked, so hide the Amend and Reject buttons -->
+                        @if ($gnc->pv_number)
+                            <!-- The pv_number is not null, so hide all buttons -->
                         @else
-                            <!-- At least one checkbox is not checked, so show the Amend and Reject buttons -->
-                            <a class="btn btn-secondary" style="color: black" type="submit"> Cancel</a> &nbsp;
-                            <a href="javascript:;" class="btn btn-warning" style="color: black" data-bs-toggle="modal" data-bs-target="#modalamend">Amend</a> &nbsp;
-                            <a href="javascript:;" class="btn btn-danger" style="color: black" data-bs-toggle="modal" data-bs-target="#modalreject"> Reject</a> &nbsp;
-                        @endif
+                            <!-- The pv_number is null, so show the buttons as before -->
+                            @if ($gnc->f1 == 'check' && $gnc->f2 == 'check' && $gnc->f3 == 'check')
+                                <!-- All checkboxes are checked, so hide the Amend and Reject buttons -->
+                            @else
+                                <!-- At least one checkbox is not checked, so show the Amend and Reject buttons -->
+                                <a class="btn btn-secondary" style="color: black" type="submit"> Cancel</a> &nbsp;
+                                <a href="javascript:;" class="btn btn-warning" style="color: black" data-bs-toggle="modal" data-bs-target="#modalamend">Amend</a> &nbsp;
+                                <a href="javascript:;" class="btn btn-danger" style="color: black" data-bs-toggle="modal" data-bs-target="#modalreject"> Reject</a> &nbsp;
+                            @endif
 
-                        @if (($gnc->f1 == 'check' && $gnc->f2 == 'check') || ($gnc->f1 == 'check' && $gnc->f3 == 'check') || ($gnc->f2 == 'check' && $gnc->f3 == 'check'))
-                            @if ($checkers == 'f1')
-                                <a class="btn btn-lime" id="approveButton" data-id="{{ $general->id }}" style="color: black" type="submit"> Approve</a>
+                            @if (($gnc->f1 == 'check' && $gnc->f2 == 'check') || ($gnc->f1 == 'check' && $gnc->f3 == 'check') || ($gnc->f2 == 'check' && $gnc->f3 == 'check'))
+                                @if ($checkers == 'f1')
+                                    <a class="btn btn-lime" id="approveButton" data-id="{{ $general->id }}" style="color: black" type="submit"> Approve</a>
+                                @endif
                             @endif
                         @endif
-                    @endif
 
 
 
-                        
+
                     </div>
                 </div>
             </div>

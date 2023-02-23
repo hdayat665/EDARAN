@@ -14,7 +14,7 @@
         </thead>
         <tbody>
             @foreach ($claims as $claim)
-                @if ($claim->pv_number = '')
+                @if ($claim->pv_number != '' && $claim->cheque_number == '')
                     <tr>
                         <td><input type="checkbox" id="" name="" value=""></td>
                         <td>

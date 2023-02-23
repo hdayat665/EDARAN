@@ -145,6 +145,7 @@ class EmployeeService
             ->leftjoin('department as c', 'a.department', '=', 'c.id')
             ->select('a.id', 'a.employeeId', 'a.user_id', 'b.firstName', 'b.lastName', 'b.personalEmail as email', 'b.phoneNo', 'c.departmentName as department', 'a.supervisor', 'a.report_to', 'a.status')
             ->where([['a.tenant_id', $userId], ['status', '!=', 'not complete']])
+            ->orderBy('id', 'desc')
             ->get();
 
 
