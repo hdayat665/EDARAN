@@ -34,7 +34,7 @@
                                 <div class="dropdown-divider"></div>
                                 <a href="javascript:;" id="" data-id="" class="dropdown-item"><i class="fa fa-times" aria-hidden="true"></i> Cancel</a>
                             </div>
-                        <td>{{ $ca->id }}</td> 
+                        <td>{{ $ca->id }}</td>
                         <td>{{ $ca->userProfile->fullName ?? '-' }}</td>
                         <td>{{ getCashAdvanceType($ca->type) ?? '-' }}</td>
                         <td>{{ $ca->created_at ?? '-' }}</td>

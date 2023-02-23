@@ -35,7 +35,7 @@ $(document).ready(function () {
     ).on("click", function () {
         // alert("ss");
         var id = $(this).data("id");
-        var stage = "f1";
+        var stage = "f_approver";
         var status = "recommend";
 
         requirejs(["sweetAlert2"], function (swal) {
@@ -76,7 +76,7 @@ $(document).ready(function () {
     $("#rejectButton").on("click", function () {
         // alert("ss");
         var id = $("#rejectId").val();
-        var stage = "f1";
+        var stage = "f_approver";
         var status = "reject";
         $("#rejectForm").validate({
             // Specify validation rules

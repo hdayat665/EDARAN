@@ -376,7 +376,7 @@
                                         <label class="form-label" for="Menu6">Leave Session*</label>
                                             <div class="input-group" name="name6" id="select6">
                                                 <div class="form-check">
-                                                    <input class="form-check-input" value="1" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                                                    <input class="form-check-input" value="1" type="radio" name="flexRadioDefault" id="flexRadioDefault1" checked>
                                                     <label class="form-check-label" for="flexRadioDefault1">
                                                         Morning
                                                     </label>
@@ -463,7 +463,7 @@
                                     <div class="col-sm-6">
                                         <label class="form-label">Type of Leave</label>
                                         <div class="input-group">
-                                            <select class="form-select" name="typeofleave" id="typeofleave1">
+                                            <select class="form-select" name="typeofleave" id="typeofleave1" disabled> 
                                                 <option value="" label="Please Choose"></option>
                                                 @foreach($types as $dt)
                                                     <option value="{{ $dt->id }}" {{ old('typeofleave') == $dt->id ? 'selected' : '' }}>{{ $dt->leave_types }}</option>
@@ -477,28 +477,23 @@
                                     <div class="col-sm-6">
                                         <label class="form-label">No of Day(s) Applied</label>
                                             <div class="input-group">
-                                                <select class="form-select" name="dayApply" id="dayApplied" style="pointer-events: none; touch-action: none; background:#e9ecef;">
-                                                    <option value="0" label="Select Day(s) Applied" selected="selected"></option>
-                                                    <option value="1" label="One Days">2025</option>
-                                                    <option value="2" label="Half Days">2024</option>
-                                                    <option value="3" label="Others">2023</option>
-                                                </select>
+                                                <input type="text" class="form-control" id="dayApplied1"  readonly/>
                                             </div>
                                     </div>
 
                                     <div class="col-sm-6">
                                         <label class="form-label">Total Days Applied</label>
                                             <div class="input-group">
-                                                <input type="text" class="form-control" id="totalapply" readonly/>
+                                                <input type="text" class="form-control" id="totalapply1" readonly/>
                                             </div>
                                     </div>
                                 </div>
                                         
                                 <div class="row p-2">
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-6" id="menu01">
                                         <label class="form-label">Leave Date</label>
                                             <div class="input-group">
-                                                <input type="text" class="form-control" id="datepicker-leave" placeholder="dd/mm/yyyy" readonly/>
+                                                <input type="text" class="form-control" id="datepicker-leave1" readonly/>
                                                     <div class="input-group-text">
                                                         <i class="fa fa-calendar"></i>
                                                     </div>
@@ -507,18 +502,18 @@
                                 </div>
 
                                 <div class="row p-2">
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-6" id="menu02">
                                         <label class="form-label">Leave Session</label>
                                             <div class="input-group">
                                                 <div class="form-check">
-                                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" disabled>
-                                                    <label class="form-check-label" for="flexRadioDefault1">
+                                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefaulta">
+                                                    <label class="form-check-label" for="flexRadioDefaulta">
                                                         Morning
                                                     </label>
                                                 </div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                                 <div class="form-check">
-                                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" disabled>
-                                                    <label class="form-check-label" for="flexRadioDefault2">
+                                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefaultb">
+                                                    <label class="form-check-label" for="flexRadioDefaultb">
                                                         Evening
                                                     </label>
                                                 </div>
@@ -526,11 +521,11 @@
                                     </div>
                                 </div>
                                         
-                                <div class="row p-2">
+                                <div class="row p-2" id="menu03">
                                     <div class="col-sm-6">
                                         <label class="form-label">Start Date</label>
                                             <div class="input-group">
-                                                <input type="text" class="form-control" id="datepicker-start" placeholder="dd/mm/yyyy" readonly/>
+                                                <input type="text" class="form-control" id="datepicker-start1"  readonly/>
                                                     <div class="input-group-text">
                                                         <i class="fa fa-calendar"></i>
                                                     </div>
@@ -539,7 +534,7 @@
                                     <div class="col-sm-6">
                                         <label class="form-label">End Date</label>
                                             <div class="input-group">
-                                                <input type="text" class="form-control" id="datepicker-end" placeholder="dd/mm/yyyy" readonly/>
+                                                <input type="text" class="form-control" id="datepicker-end1"  readonly/>
                                                     <div class="input-group-text">
                                                         <i class="fa fa-calendar"></i>
                                                     </div>
@@ -551,13 +546,14 @@
                                     <div class="col-sm-6">
                                         <label class="form-label">Supporting Document</label>
                                             <div class="input-group">
-                                            <a href="" target="_blank">Download.pdf</a>
+                                                <span id="fileDownloadPolicya"></span>
+                                            {{-- <a href="" target="_blank">Download.pdf</a> --}}
                                             </div>
                                     </div>
                                     <div class="col-sm-6">
                                         <label class="form-label">Reason</label>
                                             <div class="input-group">
-                                                <textarea class="form-control" id="reason" readonly></textarea>
+                                                <textarea class="form-control" id="reason1" readonly></textarea>
                                             </div>
                                     </div>
                                 </div>
@@ -566,28 +562,27 @@
                                     <div class="col-sm-12">
                                         <div class="form-control">
                                             <div class="row">
-                                                <div class="col-sm-4">Recommended By: 
-                                                    <div id="recommended_by">Najmi Abdullah <br> Head of SAU</div>
+                                                <div class="col-sm-6">Recommended By: 
+                                                    <div id="recommended_by"></div>
                                                     {{-- <div>Najmi Abdullah <br> Head of SAU</div> --}}
                                                 </div>
-                                                <div class="col-sm-4">Approved By:
+                                                <div class="col-sm-6">Approved By:
                                                     {{-- <div>Najmi Abdullah <br> Head of SAU</div> --}}
-                                                    <div id="approved_by">Najmi Abdullah <br> Head of SAU</div>
+                                                    <div id="approved_by"></div>
                                                 </div>
-                                                <div class="col-sm-4">Reason of Rejection: 
-                                                    <div id="reasonReject">Leave is rejected due to high demand and short of staff on that day</div>
-                                                </div>
+                                                {{-- <div class="col-sm-4">Reason of Rejection: 
+                                                    <div id="reasonReject"></div>
+                                                </div> --}}
                                             </div>
+                                            <br>
+                                            <br>
 
                                             <div class="row">
-                                                <div class="col-sm-4">Status: 
-                                                    <div id="status_1">Approved</div>
+                                                <div class="col-sm-6">Status: 
+                                                    <div id="status_1">Pending</div>
                                                 </div>
-                                                <div class="col-sm-4"> 
-                                                    
-                                                </div>
-                                                <div class="col-sm-4">Status:
-                                                    <div id="status_1" >Rejected</div>
+                                                <div class="col-sm-6">Status:
+                                                    <div id="status_2">Pending</div>
                                                 </div>
                                             </div>
                                         </div>
