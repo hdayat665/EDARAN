@@ -218,6 +218,17 @@ class MyTimesheetController extends Controller
         return view('pages.timesheet.viewTimesheet', $data);
     }
 
+    //SUMMARRY TIMESHEET
+    public function summarytimesheetView()
+    {
+        // $ss = new MyTimeSheetService;
+
+        // $data['id'] = $id;
+        // $data['userId'] = $userId;
+
+        return view('pages.timesheet.summarytimesheet');
+    }
+
     public function getTimesheetById($id = '', $userId = '')
     {
         // pr($id);

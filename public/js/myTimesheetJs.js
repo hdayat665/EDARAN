@@ -814,7 +814,7 @@ $(document).ready(function() {
             // console.log(dataEvent);
             var calendar = new FullCalendar.Calendar(calendarElm, {
                 headerToolbar: {
-                    left: 'logButton EventButton',
+                    left: 'logButton EventButton SumButton',
                     center: 'title',
                     right: 'prev,today,next dayGridMonth,timeGridWeek,timeGridDay,listWeek'
                 },
@@ -830,7 +830,14 @@ $(document).ready(function() {
                         click: function(event, jsEvent, view) {
                             $('#neweventmodal').modal('show');
                         }
+                    },
+                    SumButton: {
+                        text: 'Summary',
+                        click: function() {
+                            window.location.href = 'summarytimesheet';
+                        }
                     }
+                    
                 },
                 // dateClick: function(info) {
 
