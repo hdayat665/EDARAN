@@ -2,7 +2,8 @@
 
 @section('content')
 <style>
-   #tableBody {
+  /* Default styles for the table */
+#tableBody {
     font-family: Arial, sans-serif;
     font-size: 12px;
     border-collapse: collapse;
@@ -35,6 +36,21 @@
     border-bottom: none;
 }
 
+/* Media query for small screens */
+@media (max-width: 600px) {
+    #tableBody {
+        font-size: 10px;
+        width: 100%;
+    }
+    
+    #tableBody th {
+        padding: 8px;
+    }
+    
+    #tableBody td {
+        padding: 8px;
+    }
+}
 
 </style>
 

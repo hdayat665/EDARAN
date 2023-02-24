@@ -513,6 +513,15 @@ class SettingController extends Controller
         return $result;
     }
 
+    public function getRoleBy($id = '')
+    {
+        $ss = new SettingService;
+
+        $result = $ss->getRoleBy($id);
+
+        return $result;
+    }
+
     public function getCompanyById($id = '')
     {
         $ss = new SettingService;

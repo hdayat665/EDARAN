@@ -274,6 +274,7 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('/sop', 'sopView');
             Route::get('/unit', 'unitView');
             Route::get('/getRoleById/{id}', 'getRoleById');
+            Route::get('/getRoleBy/{id}', 'getRoleBy');
             Route::get('/getCompanyById/{id}', 'getCompanyById');
             Route::get('/getDepartmentById/{id}', 'getDepartmentById');
             Route::get('/getUnitById/{id}', 'getUnitById');

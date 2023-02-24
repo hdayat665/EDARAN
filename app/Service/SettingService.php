@@ -1088,6 +1088,13 @@ class SettingService
         return $data;
     }
 
+     public function getRoleBy($id)
+    {
+        $data1 = Role::find($id);
+
+        return $data1;
+    }
+
     public function getCompanyById($id)
     {
         $data = Company::find($id);

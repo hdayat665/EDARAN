@@ -21,13 +21,19 @@ $(document).ready(function () {
     $(document).on("click", "#editRoleButton", function () {
         var id = $(this).data("id");
         var roleData = getRole(id);
+        var updateRoleForm = getRo(id);
+
         $("input").prop("disabled", false);
         $("select").prop("disabled", false);
 
+        updateRoleForm.done(function (data1) {
+            $("#roleName").val(data1.roleName);
+            $("#idR").val(data1.id);
+            // console.log(data1);
+        });
+
         roleData.done(function (data) {
-            $("#roleName").val(data[0].rolename);
-            $("#idR").val(data[0].roleeid);
-            console.log(data);
+            // console.log(data);
             var tableBody = $("#tableBody"); // Assuming the table has an ID of "tableBody"
             tableBody.find("tbody").empty(); // Clear the table body before populating it
 
@@ -70,6 +76,12 @@ $(document).ready(function () {
     function getRole(id) {
         return $.ajax({
             url: "/getRoleById/" + id,
+        });
+    }
+
+    function getRo(id) {
+        return $.ajax({
+            url: "/getRoleBy/" + id,
         });
     }
 
