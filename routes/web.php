@@ -358,6 +358,8 @@ Route::group(['middleware' => ['web']], function () {
 
             // timesheet period
             Route::get('/timesheetperiod', 'timesheetperiodView');
+            
+            
         });
 
         Route::controller(OrganizationController::class)->group(function () {
@@ -465,6 +467,8 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('/updatereason', 'updatereason');
             Route::get('/getParticipantNameById/{id}', 'getParticipantNameById');
             Route::get('/getConfirmSubmitById/{id}', 'getConfirmSubmitById');
+            //SUMMARY TIMESHEET
+            Route::get('/summarytimesheet', 'summarytimesheetView');
             
         });
 
