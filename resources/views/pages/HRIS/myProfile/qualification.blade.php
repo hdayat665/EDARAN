@@ -229,7 +229,7 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="" class="form-label">From Date</label>
-                        <input type="text" class="form-control" id="educationFromDate1" value="{{ $education->fromDate }}" placeholder="YYYY/MM/DD">
+                        <input type="text" class="form-control" id="educationFromDate1" value="{{ $education->fromDate ??''}}" placeholder="YYYY/MM/DD">
                     </div>
                 </div>
                 <div class="col-md-6">
