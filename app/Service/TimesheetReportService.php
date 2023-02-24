@@ -97,13 +97,13 @@ class TimesheetReportService
         $data = DB::table('employment as a')
             ->leftJoin('timesheet_log as b', 'a.user_id', '=', 'b.user_id')
             ->leftJoin('designation as c', 'a.designation', '=', 'c.id')
-            ->select('a.employeeName', 'c.designationName as designationNameas','a.status','b.date','b.total_hour')
+            ->select('a.employeeName', 'c.designationName', 'a.status', 'b.date', 'b.total_hour')
             ->where($cond)
-            ->groupBy('a.user_id','b.date','b.total_hour')
+            ->groupBy('a.user_id', 'b.date', 'b.total_hour')
             ->get();
     
         $pivotedData = $data->groupBy('employeeName')->map(function ($employeeLogs) {
-            $result = ['employeeName' => $employeeLogs->first()->employeeName];
+            $result = ['employeeName' => $employeeLogs->first()->employeeName, 'designationName' => $employeeLogs->first()->designationName, 'status' => $employeeLogs->first()->status];
             foreach ($employeeLogs as $log) {
                 $day = date('d', strtotime($log->date));
                 $result['day_'.$day] = $log->total_hour;
