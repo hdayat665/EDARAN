@@ -17,7 +17,7 @@
         </thead>
         <tbody>
             @foreach ($claims as $claim)
-                @if ($claim->a1 == 'check' && $claim->claim_type == 'MTC')
+                @if ($claim->a1 == 'recommend' && $claim->claim_type == 'MTC')
                     <tr>
                         <td>
                             <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle"><i class="fa fa-cogs"></i> Action <i class="fa fa-caret-down"></i></a>
@@ -25,7 +25,7 @@
                                 <a href="/adminCheckerDetail/{{ $claim->id }}" id="" data-id="" class="dropdown-item"><i class="fa fa-eye" aria-hidden="true"></i> View
                                     MTC</a>
                                 <div class="dropdown-divider"></div>
-                                <a href="javascript:;" id="approveButton1" data-id="{{ $claim->id }}" class="dropdown-item"><i class="fa fa-check" aria-hidden="true"></i> Approve</a>
+                                <!-- <a href="javascript:;" id="approveButton1" data-id="{{ $claim->id }}" class="dropdown-item"><i class="fa fa-check" aria-hidden="true"></i> Approve</a>
                                 <div class="dropdown-divider"></div>
                                 <a href="javascript:;" id="rejectButton1" data-id="{{ $claim->id }}" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#modalreject"><i class="fa fa-ban"
                                         aria-hidden="true"></i>
@@ -35,7 +35,7 @@
                                         aria-hidden="true"></i>
                                     Amend</a>
                                 <div class="dropdown-divider"></div>
-                                <a href="javascript:;" id="" data-id="" class="dropdown-item"><i class="fa fa-times" aria-hidden="true"></i> Cancel</a>
+                                <a href="javascript:;" id="" data-id="" class="dropdown-item"><i class="fa fa-times" aria-hidden="true"></i> Cancel</a> -->
                             </div>
                         </td>
                         <td>{{ $claim->created_at ?? '-' }}</td>

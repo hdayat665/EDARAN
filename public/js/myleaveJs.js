@@ -160,42 +160,25 @@ $(document).ready(function () {
         $("#menu8").hide();
     });
 
-    // $(document).on("change", "#select3", function () {
-    //     if ($(this).val() == "1") {
-    //         $("#menu5").show();
-    //         $("#select4").val(1);
-    //     } else if ($(this).val() == "0.5") {
-    //         $("#menu5").show();
-    //         $("#menu6").show();
-    //         $("#select4").val(0.5);
-    //     } else {
-    //         $("#menu5").hide();
-    //         $("#menu6").hide();
-    //     }
-    // });
-
-    // $(document).on("change", "#select3", function () {
-    //     if ($(this).val() == "-") {
-    //         $("#menu7").show();
-    //         $("#menu8").show();
-    //         $("#select4").val(0);
-    //         $("#datepicker-start").val("");
-    //         $("#datepicker-end").val("");
-    //         $("#datepicker-leave").val("");
-    //     } else {
-    //         $("#menu7").hide();
-    //         $("#menu8").hide();
-    //     }
-    // });
-
     $(document).on("change", "#select3", function () {
         if ($(this).val() == "1") {
             $("#menu5").show();
+            $("#menu6").hide();
+            $("#menu7").hide();
+            $("#menu8").hide();
             $("#select4").val(1);
+            $("#start-date").val("");
+            $("#end-date").val("");
+            $("#flexRadioDefault1").val("");
+            $("#flexRadioDefault2").val("");
         } else if ($(this).val() == "0.5") {
             $("#menu5").show();
             $("#menu6").show();
+            $("#menu7").hide();
+            $("#menu8").hide();
             $("#select4").val(0.5);
+            $("#start-date").val("");
+            $("#end-date").val("");
         } else if ($(this).val() == "-") {
             $("#menu5").hide();
             $("#menu6").hide();
@@ -204,6 +187,8 @@ $(document).ready(function () {
             $("#start-date").val("");
             $("#end-date").val("");
             $("#select4").val("");
+            $("#flexRadioDefault1").val("");
+            $("#flexRadioDefault2").val("");
         } else {
             $("#menu5").hide();
             $("#menu6").hide();
@@ -288,43 +273,98 @@ $(document).ready(function () {
     $(document).on("click", "#editButton", function () {
         var id = $(this).data("id");
         var myleaveData = myleave(id);
-        console.log(myleaveData);
+        // console.log(myleaveData);
 
         myleaveData.done(function (data) {
-            $("#datepicker-applied1").val(data.applied_date);
-            $("#typeofleave1").val(data.lt_type_id);
-            $("#dayApplied").val(data.day_applied);
-            $("#totalapply").val(data.total_day_applied);
-            $("#datepicker-leave").val(data.leave_date);
-            $("#datepicker-start").val(data.start_date);
-            $("#datepicker-end").val(data.start_date);
-            $("#reason").val(data.reason);
-            $("#reasonreject").val(data.reason);
+            $("#datepicker-applied1").val(data[0].applied_date);
+            $("#typeofleave1").val(data[0].lt_type_id);
+            $("#dayApplied1").val(data[0].day_applied);
+            $("#totalapply1").val(data[0].total_day_applied);
+            $("#datepicker-leave1").val(data[0].leave_date);
+            $("#datepicker-start1").val(data[0].start_date);
+            $("#datepicker-end1").val(data[0].end_date);
+            $("#reason1").val(data[0].reason);
+            $("#reasonreject1").val(data[0].reason);
+            // console.log(data[0]);
 
-            if (data.leave_session == "1") {
-                $("#flexRadioDefault1").prop("checked", true);
-            } else if (data.leave_session == "2") {
-                $("#flexRadioDefault2").prop("checked", true);
+            if (data[0].day_applied === "1") {
+                $("#menu01").show();
+                $("#menu02").hide();
+                $("#menu03").hide();
+            } else if (data[0].day_applied === "0.5") {
+                $("#menu01").show();
+                $("#menu02").show();
+                $("#menu03").hide();
             } else {
-                $("#flexRadioDefault1").prop("checked", false);
-                $("#flexRadioDefault2").prop("checked", false);
+                $("#menu01").hide();
+                $("#menu02").hide();
+                $("#menu03").show();
             }
 
-            if (data.status === 1) {
-                // tampilkan status "Approved"
-                $("#status_display").text($("#status_1").text());
-            } else if (data.status === 2) {
-                // tampilkan status "Rejected"
-                $("#status_display").text($("#status_2").text());
+            if (data[0].username1) {
+                $("#recommended_by").text(data[0].username1);
             } else {
-                // tampilkan pesan kesalahan jika status tidak valid
-                $("#status_display").text("Invalid status");
+                $("#recommended_by").text("");
             }
 
-            if (data.file) {
-                $("#fileDownloadPolicy").html(
-                    '<a href="/storage/' + data.file + '">Download File</a>'
+            if (data[0].username2) {
+                $("#approved_by").text(data[0].username2);
+            } else {
+                $("#approved_by").text("");
+            }
+
+            if (data[0].leave_session === "1") {
+                $("#flexRadioDefaulta").prop("checked", true);
+            } else if (data[0].leave_session === "2") {
+                $("#flexRadioDefaultb").prop("checked", true);
+            } else {
+                $("#flexRadioDefaulta").prop("checked", false);
+                $("#flexRadioDefaultb").prop("checked", false);
+            }
+
+            if (data[0].up_rec_status === "1") {
+                $("#status_1").text("Pending");
+            } else if (data[0].up_rec_status === "2") {
+                $("#status_1").text("Pending");
+            } else if (data[0].up_rec_status === "3") {
+                $("#status_1").text("Reject");
+            } else if (data[0].up_rec_status === "4") {
+                $("#status_1").text("Approved");
+            }
+
+            if (data[0].up_app_status === "1") {
+                $("#status_2").text("Pending");
+            } else if (data[0].up_app_status === "2") {
+                $("#status_2").text("Pending");
+            } else if (data[0].up_app_status === "3") {
+                $("#status_2").text("Reject");
+            } else if (data[0].up_app_status === "4") {
+                $("#status_2").text("Approved");
+            }
+
+            if (data[0].up_app_status === "1") {
+                $("#status_2").text("Pending");
+            } else if (data[0].up_app_status === "2") {
+                $("#status_2").text("Pending");
+            } else if (data[0].up_app_status === "3") {
+                $("#status_2").text("Reject");
+            } else if (data[0].up_app_status === "4") {
+                $("#status_2").text("Approved");
+            }
+
+            if (data[0].file_document) {
+                var filename = data[0].file_document.split("/").pop();
+                $("#fileDownloadPolicya").html(
+                    '<a href="/storage/' +
+                        data[0].file_document +
+                        '" download="' +
+                        filename +
+                        '">Download : ' +
+                        filename +
+                        "</a>"
                 );
+            } else {
+                $("#fileDownloadPolicya").html("No File Upload");
             }
         });
     });

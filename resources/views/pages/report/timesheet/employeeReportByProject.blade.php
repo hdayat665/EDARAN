@@ -40,6 +40,13 @@
                     @endif
 				</tbody>
 			</table>
+			<div class="row p-2">
+				<div class="col align-self-start">
+					<a href="/setting" class="btn btn-primary"  type="submit"><i class="fa fa-arrow-left"></i> Back</a>
+				</div>
+			</div>
 		</div>
+		
+</div>
 	</div>
 @endsection

@@ -60,10 +60,10 @@
                                                 <tr>
                                                     <td><a data-bs-toggle="modal" data-id="{{ $gnc->id }}" id="gnc_detail" class="btn btn-primary btn-sm">View</a></td>
                                                     <td>{{ date('Y-m-d', strtotime($gnc->updated_at)) ?? '-' }}</td>
-                                                    <td>{{ $gnc->claim_category ?? '-' }}</td>
+                                                    <td>{{ $gnc->claim_catagory_name ?? '-' }}</td>
                                                     <td>{{ $gnc->amount ?? '-' }}</td>
                                                     <td>{{ $gnc->desc ?? '-' }}</td>
-                                                    <td>{{ $gnc->file_upload ?? '-' }}</td>
+                                                    <td><a href="/storage/{{ $gnc->file_upload }}" download>{{ $gnc->file_upload ?? '-' }}</a></td>
                                                 </tr>
                                             @endforeach
                                         @endif
@@ -117,12 +117,13 @@
                         <a href="/financeApprovalView" class="btn btn-light" style="color: black;" type="submit"><i class="fa fa-arrow-left"></i> Back</a>
                     </div>
                     <div class="col d-flex justify-content-end">
-                    @if (($gnc->f_approval == 'recommend' ))
+                    
                         <a class="btn btn-secondary" data-id="{{ $general->id }}" style="color: black" type="submit"> Cancel</a> &nbsp;
                         <a href="javascript:;" class="btn btn-warning" style="color: black" data-bs-toggle="modal" data-bs-target="#modalamend">Amend</a> &nbsp;
                         <a href="javascript:;" class="btn btn-danger" style="color: black" data-bs-toggle="modal" data-bs-target="#modalreject"> Reject</a> &nbsp;
                         <a class="btn btn-lime" id="approveButton" data-id="{{ $general->id }}" style="color: black" type="submit"> Approve</a>
-                        @endif
+                       
+                    
                     </div>
                 </div>
             </div>

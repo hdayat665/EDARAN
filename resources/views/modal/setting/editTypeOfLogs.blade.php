@@ -25,10 +25,12 @@
                         <label class="form-label">Type of Log* </label>
                         <select class="form-select" id="addtypeoflogedit" name="type_of_log" aria-label="Default select example">
                             <option class="form-label" value="" selected>Select Type of Log</option>
-                            <option class="form-label" value="NON-PROJECT" >NON-PROJECT</option>
-                            <option class="form-label" value="PROJECT" >PROJECT</option>
-                            <option class="form-label" value="OFFICE" >OFFICE</option>
-                            <option class="form-label" value="OTHERS" >OTHERS</option>
+                            {{-- <option class="form-label" value="NON-PROJECT" >NON-PROJECT</option> --}}
+                            <option class="form-label" value="1" >HOME</option>
+                            <option class="form-label" value="2" >OFFICE</option>
+                            <option class="form-label" value="3" >PROJECT</option>
+                            <option class="form-label" value="4" >OTHERS</option>
+                            {{-- <option class="form-label" value="OTHERS">OTHERS</option> --}}
                         </select>
                     </div>
                     <div class="mb-3" id="addtypeoflogprojectedit" style="display:none">
@@ -64,12 +66,12 @@
                                         <th width="1%" data-orderable="false" class="align-middle">Action</th>
                                     </tr>
                                 </thead>
-                                <tbody id="testkit">
+                                {{-- <tbody id="testkit">
                                     <tr>
                                         <th style="display:none"></th>
                                         <th width="1%" style="display:none"></th>
                                     </tr>
-                                </tbody>
+                                </tbody> --}}
                             </table>
                         </div>
                     </div>

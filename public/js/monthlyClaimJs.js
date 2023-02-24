@@ -206,7 +206,7 @@ $("document").ready(function () {
         if (this.checked) {
             $("#hn").prop("disabled", false); // If checked enable item
         } else {
-            $("#hn").prop("disabled", true); // If checked disable item
+            $("#hn").prop("disabled", false); // If checked disable item
             $("#hn").val(0);
         }
     });
@@ -215,7 +215,7 @@ $("document").ready(function () {
         if (this.checked) {
             $("#ln").prop("disabled", false); // If checked enable item
         } else {
-            $("#ln").prop("disabled", true); // If checked disable item
+            $("#ln").prop("disabled", false); // If checked disable item
             $("#ln").val(0);
         }
     });

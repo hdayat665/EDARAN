@@ -457,6 +457,13 @@ class MyTimeSheetService
         return $data;
     }
 
+    public function getActivityNamebyLogsId($logs_id = '')
+    {
+        $data = ActivityLogs::where([['tenant_id', Auth::user()->tenant_id], ['logs_id', $logs_id]])->get();
+
+        return $data;
+    }
+
     public function submitForApproval($userId = '')
     {
         $cond[1] = ['user_id', $userId];
@@ -784,6 +791,7 @@ class MyTimeSheetService
         return $data;
         
     }
+
 
 
 

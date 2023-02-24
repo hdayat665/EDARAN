@@ -20,7 +20,7 @@
                 @foreach ($claims as $claim)
                     @if ($claim->a1 == 'recommend' && $claim->a_approval == '' && $claim->claim_type == 'MTC')
                         <tr>
-                            <td><input type="checkbox" id="" name="" value=""></td>
+                        <td style="text-align: center"><input class="form-check-input" type="checkbox" />
                             <td>
                                 <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle"><i class="fa fa-cogs"></i> Action <i class="fa fa-caret-down"></i></a>
                                 <div class="dropdown-menu">
@@ -40,14 +40,14 @@
                                     <a href="javascript:;" id="" data-id="" class="dropdown-item"><i class="fa fa-times" aria-hidden="true"></i> Cancel</a>
                                 </div>
                             </td>
-                            <td>{{ $claim->created_at ?? '-' }}</td>
+                            <td>{{ date('Y-m-d', strtotime($claim->created_at)) ?? '-' }}</td>
                             <td>{{ $claim->userProfile->fullName ?? '-' }}</td>
                             <td>{{ $claim->month ?? '-' }}</td>
                             <td>{{ $claim->id ?? '-' }}</td>
                             <td>{{ $claim->claim_type ?? '-' }}</td>
                             <td>{{ $claim->total_amount ?? '-' }}</td>
                             <td>{{ $claim->status ?? '-' }}</td>
-                            <td>{{ $claim->updated_at ?? '-' }}</td>
+                            <td>{{ date('Y-m-d', strtotime($claim->updated_at)) ?? '-' }}</td>
                         </tr>
                     @endif
                 @endforeach

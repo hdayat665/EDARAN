@@ -150,6 +150,15 @@ class MyTimesheetController extends Controller
         return response()->json($result);
     }
 
+    public function getActivityNamebyLogsId($project_id = '')
+    {
+        $ss = new MyTimeSheetService;
+
+        $result = $ss->getActivityNamebyLogsId($project_id);
+
+        return response()->json($result);
+    }
+
     public function timesheetApprovalView()
     {
         $ss = new MyTimeSheetService;
@@ -207,6 +216,17 @@ class MyTimesheetController extends Controller
         $data['userId'] = $userId;
 
         return view('pages.timesheet.viewTimesheet', $data);
+    }
+
+    //SUMMARRY TIMESHEET
+    public function summarytimesheetView()
+    {
+        // $ss = new MyTimeSheetService;
+
+        // $data['id'] = $id;
+        // $data['userId'] = $userId;
+
+        return view('pages.timesheet.summarytimesheet');
     }
 
     public function getTimesheetById($id = '', $userId = '')
@@ -332,6 +352,8 @@ class MyTimesheetController extends Controller
         return response()->json($data);
     }
 
+
+
     // public function getParticipantNameById($participant = '')
     // {
     //     $ss = new MyTimeSheetService;
@@ -340,5 +362,6 @@ class MyTimesheetController extends Controller
 
     //     return response()->json($result);
     // }
+
 
 }

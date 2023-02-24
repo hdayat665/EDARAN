@@ -148,7 +148,17 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('/addSibling', 'addSibling');
             Route::post('/updateSibling', 'updateSibling');
             Route::post('/addChildren', 'addChildren');
+
             Route::post('/saveEducation', 'saveEducation');
+            Route::post('/updateEducation', 'updateEducation');
+            Route::get('/getEducation/{id}', 'getEducation');
+            Route::delete('/deleteEducation/{id}', 'deleteEducation');
+
+            Route::post('/addAddressDetails', 'addAddressDetails');
+            Route::get('/getAddressDetails/{id}', 'getAddressDetails');
+            Route::post('/updateAddressDetails', 'updateAddressDetails');
+            Route::delete('/deleteAddressDetails/{id}', 'deleteAddressDetails');
+
             Route::get('/getParent/{id}', 'getParent');
             Route::get('/getSibling/{id}', 'getSibling');
             Route::post('/updatePass', 'updatePass');
@@ -313,6 +323,7 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('/updateStatusEntitleGroup/{id}/{status}', 'updateStatusEntitleGroup');
             Route::delete('/deleteEntitleGroup/{id}', 'deleteEntitleGroup');
             Route::post('/updateSubsistance/{id}', 'updateSubsistance');
+            Route::delete('/deleteSubsistance/{id}', 'deleteSubsistance');
             Route::get('/claimCatById/{id}', 'claimCatById');
             Route::post('/createGeneralApprover', 'createGeneralApprover');
             Route::get('/getUserByRole/{id}', 'getUserByRole');
@@ -347,6 +358,8 @@ Route::group(['middleware' => ['web']], function () {
 
             // timesheet period
             Route::get('/timesheetperiod', 'timesheetperiodView');
+            
+            
         });
 
         Route::controller(OrganizationController::class)->group(function () {
@@ -415,6 +428,7 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('/searchEmployeeTimesheetReport', 'searchEmployeeTimesheetReport');
             Route::post('/searchEmployeeReport', 'searchEmployeeReport');
             Route::post('/searchOvertimeReport', 'searchOvertimeReport');
+            // Route::get('/getReportAllEmployee', 'getReportAllEmployee');
         });
 
         Route::controller(MyTimesheetController::class)->group(function () {
@@ -430,6 +444,7 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('/updateTimesheetEvent/{id}', 'updateTimesheetEvent');
             Route::get('/getLocationByProjectId/{id}', 'getLocationByProjectId');
             Route::get('/getActivityByProjectId/{id}', 'getActivityByProjectId');
+            Route::get('/getActivityNamebyLogsId/{id}', 'getActivityNamebyLogsId');
             Route::get('/timesheetApproval', 'timesheetApprovalView');
             Route::get('/updateStatusTimesheet/{id}/{status}', 'updateStatusTimesheet');
             Route::post('/submitForApproval/{userId}', 'submitForApproval');
@@ -452,6 +467,9 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('/updatereason', 'updatereason');
             Route::get('/getParticipantNameById/{id}', 'getParticipantNameById');
             Route::get('/getConfirmSubmitById/{id}', 'getConfirmSubmitById');
+            //SUMMARY TIMESHEET
+            Route::get('/summarytimesheet', 'summarytimesheetView');
+            
         });
 
 

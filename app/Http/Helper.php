@@ -149,6 +149,8 @@ if (!function_exists('gender')) {
     }
 }
 
+
+
 if (!function_exists('educationLevel')) {
     function educationLevel($id = '')
     {
@@ -949,11 +951,13 @@ if (!function_exists('project_memberaddl')) {
 
 
 if (!function_exists('activityName')) {
-    function activityName($departmentId = '')
+    function activityName( $departmentId = '')
     {
         $cond[1] = ['tenant_id', Auth::user()->tenant_id];
         // $cond[1] = ['tenant_id', ];
         $cond[2] = ['department', $departmentId];
+        // $cond[3] = ['logs_id', $logsid];
+        
         // $cond[3] = ['project_id', null];
         $data = ActivityLogs::where($cond)->get();
         if (!$data) {
@@ -964,13 +968,20 @@ if (!function_exists('activityName')) {
     }
 }
 
+
 // if (!function_exists('activityName1')) {
-//     function activityName1($departmentId = '', $logsid = '')
+//     function activityName1()
 //     {
-//         $cond[1] = ['tenant_id', Auth::user()->tenant_id];
-//         // $cond[1] = ['tenant_id', ];
-//         $cond[2] = ['department', $departmentId];
-//         $data = ActivityLogs::where($cond)->get();
+//         $cond[1] = ['a.tenant_id', Auth::user()->tenant_id];
+//         // $cond[2] = ['department', $departmentId];
+
+//         $data = DB::table('activity_logs as a')
+//         ->leftJoin('type_of_logs as b', 'a.logs_id', '=', 'b.id')
+//         // ->leftJoin('project as c', 'b.project_id', '=', 'c.id')
+//         ->select('a.*','b.*')
+//         ->where($cond)
+//         ->get();
+
 //         if (!$data) {
 //             $data = [];
 //         }
@@ -979,6 +990,31 @@ if (!function_exists('activityName')) {
 //     }
     
 // }
+
+if (!function_exists('project_member')) {
+    function project_member($user_id = '')
+    {
+        $cond[1] = ['a.tenant_id', Auth::user()->tenant_id];
+
+        if ($user_id) {
+            $cond[2] = ['a.user_id', '=', $user_id];
+        }
+
+        $data = DB::table('employment as a')
+            ->leftJoin('project_member as b', 'a.id', '=', 'b.employee_id')
+            ->leftJoin('project as c', 'b.project_id', '=', 'c.id')
+            ->select('c.id', 'c.project_name', 'c.project_code')
+            ->where($cond)
+            ->get();
+
+        if (!$data) {
+            $data = [];
+        }
+
+        return $data;
+    }
+}
+
 
 if (!function_exists('getEventTimesheet')) {
     function getEventTimesheet()
@@ -1571,6 +1607,25 @@ if (!function_exists('getAdminChecker')) {
 
         if (!$data) {
             $data = [];
+        }
+
+        return $data;
+    }
+}
+
+if (!function_exists('addressType')) {
+    function addressType($id = '')
+    {
+        $data = [
+
+            '1' => 'CORRESPONDENCE',
+            '2' => 'PERMANENT',
+            '3' => 'BOTH',
+            '4' => 'NONE',
+        ];
+
+        if ($id) {
+            $data = $data[$id];
         }
 
         return $data;

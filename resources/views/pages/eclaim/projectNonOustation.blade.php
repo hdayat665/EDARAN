@@ -1,12 +1,12 @@
 <div class="PNO" style="display:none">
-    <div class="row p-2">
+    <!-- <div class="row p-2">
         <div class="col-md-4">
             <label class="form-label">Cash Advance ID</label>
         </div>
         <div class="col-md-8">
             <input readonly type="text" class="form-control">
         </div>
-    </div>
+    </div> -->
     <div class="row p-2">
         <div class="col-md-4">
             <label class="form-label">Travel Date</label>
@@ -43,7 +43,7 @@
             <label class="form-label">Purpose</label>
         </div>
         <div class="col-md-8">
-            <input type="text" class="form-control" name="purpose2">
+            <textarea type="text" class="form-control" name="purpose2" rows="3" maxlength="255"> </textarea>
         </div>
     </div>
     {{-- <div class="row p-2">

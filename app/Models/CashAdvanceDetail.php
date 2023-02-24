@@ -28,4 +28,8 @@ class CashAdvanceDetail extends Model
     {
         return $this->belongsTo(Project::class, 'project_id', 'id');
     }
+    public function projectLoction()
+    {
+        return $this->belongsTo(ProjectLocation::class, 'project_location_id', 'id');
+    }
 }

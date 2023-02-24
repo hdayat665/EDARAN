@@ -4,6 +4,7 @@ namespace App\Service;
 
 use App\Models\MyLeaveModel;
 use App\Models\leavetypesModel;
+use App\Models\Employee;
 use App\Models\ActivityLogs;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -51,55 +52,51 @@ class MyleaveService
 
       public function createtmyleave($r)
     {
-        $input = $r->input();
+       $input = $r->input();
 
-        // date_default_timezone_set("Asia/Kuala_Lumpur");
-        // $etData = MyLeaveModel::where([['tenant_id', Auth::user()->tenant_id]])->first();
-        // if ($etData) {
-        //     $data['msg'] = 'Date already exists in list your apply.';
-        //     $data['status'] = config('app.response.error.status');
-        //     $data['type'] = config('app.response.error.type');
-        //     $data['title'] = config('app.response.error.title');
+       $getdata = 
+       Employee::where('tenant_id', Auth::user()->tenant_id)
+                        ->where('user_id', '=', Auth::user()->id)
+                        ->first(); 
 
-        //     return $data;
-        // }
-         // $data6 = $input['flexRadioDefault'];
-
-        // if($input['noofday'] == 1){
-        //     $data7 = $input['leave_date'];
-        //     $data8 = $input['leave_date'];
-        //     $data4 = 1;
-        // }else if ($input['noofday'] == 0.5){
-        //     $data7 = $input['leave_date'];
-        //     $data8 = $input['leave_date'];
-        //     $data4 = 0.5;
-        // }else{
-        //     $data7 = $input['start_date'];
-        //     $data8 = $input['end_date'];
-        //     $data4 = $input['total_day_appied'];
-        // }
-
-        if ($_FILES['file']['name']) {
-            $payslip = upload($r->file('file'));
-            $input['file'] = $payslip['filename'];
-
-            if (!$input['file']) {
-                unset($input['file']);
-            }
+        if (isset($_FILES['file']) && $_FILES['file']['error'] === UPLOAD_ERR_OK && $_FILES['file']['size'] > 0) {
+            $myleave = upload($r->file('file'));
+            $input['file'] = $myleave['filename'];
+        } else {
+            
+            $input['file'] = null;
         }
-
 
 
         $data1 = $input['applied_date'];
         $data2 = $input['typeofleave'];
         $data3 = $input['noofday'];
-        $data4 = $input['total_day_appied'];
         $data5 = $input['leave_date'];
-        $data6 = $input['start_date'];
-        $data7 = $input['end_date'];
         $data8 = $input['file'];
         $data9 = $input['reason'];
 
+        if($r->input('noofday') == 1){
+            $data3 = $input['noofday'];
+            $data4 = $input['total_day_appied'];
+            $data6 = $input['leave_date'];
+            $data7 = $input['leave_date'];
+        }else if ($r->input('noofday') == 0.5){
+            $data3 = $input['noofday'];
+            $data4 = $input['total_day_appied'];
+            $data6 = $input['leave_date'];
+            $data7 = $input['leave_date'];
+        }else{
+            $data3 = $input['total_day_appied'];
+            $data4 = $input['total_day_appied'];
+            $data6 = $input['start_date'];
+            $data7 = $input['end_date'];
+        }
+
+        if($r->input('flexRadioDefault')){
+            $data10 = $input['flexRadioDefault'];
+        }else{
+            $data10 = null;
+        }
         
 
         $input = [
@@ -112,6 +109,9 @@ class MyleaveService
                 'end_date' => $data7,
                 'file_document' => $data8,
                 'reason' => $data9,
+                'leave_session' => $data10,
+                'up_recommendedby_id' => $getdata->eleaverecommender,
+                'up_approvedby_id' => $getdata->eleaveapprover,
                 'status_user' => '2',
                 'up_rec_status' => '2',
                 'up_app_status' => '2',
@@ -125,17 +125,25 @@ class MyleaveService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success create company';
+        $data['msg'] = 'Success create myleave';
 
         return $data;
+
     }
 
 
     public function getcreatemyleave($id)
     {
-        $data = MyLeaveModel::find($id);
+        $data = MyLeaveModel::where('myleave.tenant_id', Auth::user()->tenant_id)
+            ->where('myleave.id', '=', $id)
+            ->leftJoin('userprofile as au', 'myleave.up_recommendedby_id', '=', 'au.id')
+            ->leftJoin('userprofile as mu', 'myleave.up_approvedby_id', '=', 'mu.id')
+            ->select('myleave.*', 'au.fullName as username1', 'mu.fullName as username2')
+            ->get();
 
         return $data;
+
+       
     }
 
     public function deletemyleave($id)
@@ -146,14 +154,14 @@ class MyleaveService
             $data['status'] = config('app.response.error.status');
             $data['type'] = config('app.response.error.type');
             $data['title'] = config('app.response.error.title');
-            $data['msg'] = 'Leave holiday not found';
+            $data['msg'] = 'your leave not found';
         } else {
             $logs->delete();
 
             $data['status'] = config('app.response.success.status');
             $data['type'] = config('app.response.success.type');
             $data['title'] = config('app.response.success.title');
-            $data['msg'] = 'Success delete Leave holiday';
+            $data['msg'] = 'Success delete your leave';
         }
 
         return $data;
