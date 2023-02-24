@@ -133,7 +133,9 @@
                 <thead>
                     <tr>
                         <th>No</th>
-                        <th>Name</th>
+                        <th>Employee Name</th>
+                        <th>Designation</th>
+                        <th>Status</th>
                         <th>1hb</th>
                         <th>2hb</th>
                         <th>3hb</th>
@@ -173,6 +175,8 @@
                         <tr>
                             <td>{{ $key + 1 }}</td>
                             <td>{{ $row->employeeName }}</td>
+                            <td>{{ $row->designationName }}</td>
+                            <td>{{ $row->status }}</td>
                             <td style="{{ isset($row->day_01) ? 'background-color: #00FF00;' : '' }}">{{ isset($row->day_01) ? $row->day_01 : '-' }}</td>
                             <td style="{{ isset($row->day_02) ? 'background-color: #00FF00;' : '' }}">{{ isset($row->day_02) ? $row->day_02 : '-' }}</td>
                             <td style="{{ isset($row->day_03) ? 'background-color: #00FF00;' : '' }}">{{ isset($row->day_03) ? $row->day_03 : '-' }}</td>
