@@ -17,7 +17,7 @@
         </thead>
         <tbody>
             @foreach ($cas as $ca)
-                @if ($ca->approver == 'recommend' && $ca->f1 == '')
+                @if ($ca->approver == 'recommend' && ($ca->f1 == '' || $ca->f1 == 'check' || $ca->f2 == 'check' || $ca->f3 == 'check') && $ca->f1 != 'recommend')
                     <tr>
                         <td>
                             <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle"><i class="fa fa-cogs"></i> Action <i class="fa fa-caret-down"></i></a>
