@@ -1,8 +1,45 @@
 @extends('layouts.dashboardTenant')
 
 @section('content')
+<style>
+   #tableBody {
+    font-family: Arial, sans-serif;
+    font-size: 12px;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+#tableBody th {
+    background-color: #f2f2f2;
+    color: #444444;
+    font-weight: bold;
+    text-align: left;
+    padding: 10px;
+    border-bottom: 1px solid #dddddd;
+}
+
+#tableBody td {
+    padding: 10px;
+    border-bottom: 1px solid #dddddd;
+}
+
+#tableBody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+#tableBody tr:hover {
+    background-color: #eaeaea;
+}
+
+#tableBody tbody tr:last-child td {
+    border-bottom: none;
+}
+
+
+</style>
 
 <div id="content" class="app-content">
+    
     <!-- BEGIN breadcrumb -->
     <!-- BEGIN breadcrumb -->
 
@@ -304,9 +341,9 @@
                                 <br>
                                 <br>
                                 <br>
-                                {{-- </blockquote> --}}
+
                                 <div class="row p-2">
-                                    <table id="" class="table table-striped table-bordered align-middle">
+                                    <table id="tableBody" class="table table-striped table-bordered align-middle">
                                         <thead>
                                             <tr>
                                                 <th class="text-nowrap">No</th>
@@ -315,33 +352,12 @@
                                                 <th class="text-nowrap">Added Time</th>
                                                 <th class="text-nowrap">Modified By</th>
                                                 <th class="text-nowrap">Modified Time</th>
-                                                {{-- <th class="text-nowrap">Action</th> --}}
-                                                
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <?php $id = 1 ?>
-                                                @if ($listuserrole)
-                                                @foreach ($listuserrole as $h)
-                                            
-                                            <tr>
-                                                <td>{{ $id++ }}</td>
-                                                <td>{{$h->fullname}}</td>
-                                                <td>{{$h->username1}}</td>
-                                                <td>{{$h->added_time}}</td>
-                                                <td>{{$h->username2}}</td>
-                                                <td>{{$h->modified_time}}</td>
-                                                {{-- <td></td> --}}
-                                            </tr>
-                                           @endforeach
-                                           @endif
                                         </tbody>
                                     </table>
                                 </div>
-                                    {{-- <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                        <button type="button" class="btn btn-primary" id="updateRole">Update</button>
-                                    </div> --}}
                             </div>
                         </div>
                     </form>
@@ -359,5 +375,7 @@
 
     <!-- END row -->
 </div>
+
+
 
 @endsection

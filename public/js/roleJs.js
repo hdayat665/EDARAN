@@ -20,26 +20,58 @@ $(document).ready(function () {
 
     $(document).on("click", "#editRoleButton", function () {
         var id = $(this).data("id");
-        var vehicleData = getRole(id);
+        var roleData = getRole(id);
         $("input").prop("disabled", false);
         $("select").prop("disabled", false);
 
-        vehicleData.done(function (data) {
-            // $('input').val('');
-            // console.log(data);
-            $("#roleName").val(data.roleName);
-            $("#idR").val(data.id);
-            // $('#idV').val(vdata.id);
-            // var select = document.getElementById('vehicleType');
+        roleData.done(function (data) {
+            $("#roleName").val(data[0].rolename);
+            $("#idR").val(data[0].roleeid);
+            console.log(data);
+            var tableBody = $("#tableBody"); // Assuming the table has an ID of "tableBody"
+            tableBody.find("tbody").empty(); // Clear the table body before populating it
 
-            // const options = Array.from(select.options);
-            // options.forEach((option, i) => {
-            //     if (option.value === vdata.vehicle_type) select.selectedIndex = i;
-            // });
-            // $('#plateNo').val(vdata.plate_no);
+            if (data.length > 0) {
+                // Loop through the data and append rows to the table
+                $.each(data, function (i, item) {
+                    var row =
+                        "<tr>" +
+                        "<td>" +
+                        (i + 1) +
+                        "</td>" +
+                        "<td>" +
+                        (item.fullname ? item.fullname : "") +
+                        "</td>" +
+                        "<td>" +
+                        (item.username1 ? item.username1 : "") +
+                        "</td>" +
+                        "<td>" +
+                        (item.added_time ? item.added_time : "") +
+                        "</td>" +
+                        "<td>" +
+                        (item.username2 ? item.username2 : "") +
+                        "</td>" +
+                        "<td>" +
+                        (item.modified_time ? item.modified_time : "") +
+                        "</td>" +
+                        "</tr>";
+                    tableBody.append(row);
+                });
+            } else {
+                // Display a message if there are no results
+                tableBody.append(
+                    '<tr class=""><td colspan="6">No results found</td></tr>'
+                );
+            }
         });
         $("#editRoleModal").modal("show");
     });
+
+    function getRole(id) {
+        return $.ajax({
+            url: "/getRoleById/" + id,
+        });
+    }
 
     $(document).on("click", "#viewVehicleView", function () {
         var id = $(this).data("id");
@@ -96,11 +128,11 @@ $(document).ready(function () {
         });
     });
 
-    function getRole(id) {
-        return $.ajax({
-            url: "/getRoleById/" + id,
-        });
-    }
+    // function getRole(id) {
+    //     return $.ajax({
+    //         url: "/getRoleById/" + id,
+    //     });
+    // }
 
     $("#saveRoleButton").click(function (e) {
         requirejs(["sweetAlert2"], function (swal) {
@@ -554,12 +586,11 @@ $(document).ready(function () {
     $(".checkbox-dropdown").click(function () {
         $(this).toggleClass("is-active");
     });
-    
-    $(".checkbox-dropdown ul").click(function(e) {
+
+    $(".checkbox-dropdown ul").click(function (e) {
         e.stopPropagation();
     });
 
-    $('#ex-search').picker({ search: true });
-    $('#multi').picker({ search: true });
-    
+    $("#ex-search").picker({ search: true });
+    $("#multi").picker({ search: true });
 });

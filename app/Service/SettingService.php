@@ -982,18 +982,18 @@ class SettingService
 
         return $data;
     }
-    public function listuserrole()
-    {   
-        $data = UserRole::where('role_user.tenant_id', Auth::user()->tenant_id)
-            ->leftJoin('userprofile', 'role_user.up_user_id', '=', 'userprofile.user_id')
-            ->leftJoin('users as au', 'role_user.added_by', '=', 'au.id')
-            ->leftJoin('users as mu', 'role_user.modified_by', '=', 'mu.id')
-            ->leftJoin('role as rolee', 'rolee.id', '=', 'role_user.role_id')
-            ->select('role_user.*', 'userprofile.fullname', 'au.username as username1', 'mu.username as username2')
-            ->get();
+    // public function listuserrole()
+    // {   
+    //     $data = UserRole::where('role_user.tenant_id', Auth::user()->tenant_id)
+    //         ->leftJoin('userprofile', 'role_user.up_user_id', '=', 'userprofile.user_id')
+    //         ->leftJoin('users as au', 'role_user.added_by', '=', 'au.id')
+    //         ->leftJoin('users as mu', 'role_user.modified_by', '=', 'mu.id')
+    //         ->leftJoin('role as rolee', 'rolee.id', '=', 'role_user.role_id')
+    //         ->select('role_user.*', 'userprofile.fullname', 'au.username as username1', 'mu.username as username2')
+    //         ->get();
 
-        return $data;
-    }
+    //     return $data;
+    // }
 
     public function companyView()
     {
@@ -1076,7 +1076,14 @@ class SettingService
 
     public function getRoleById($id)
     {
-        $data = Role::find($id);
+          $data = UserRole::where('role_user.tenant_id', Auth::user()->tenant_id)
+            ->leftJoin('userprofile', 'role_user.up_user_id', '=', 'userprofile.user_id')
+            ->leftJoin('users as au', 'role_user.added_by', '=', 'au.id')
+            ->leftJoin('users as mu', 'role_user.modified_by', '=', 'mu.id')
+            ->leftJoin('role as rolee', 'role_user.role_id', '=', 'rolee.id')
+            ->select('role_user.*', 'userprofile.fullname', 'au.username as username1', 'mu.username as username2', 'rolee.id as roleeid', 'rolee.roleName as rolename')
+		    ->where('role_user.role_id', '=', $id)
+            ->get();
 
         return $data;
     }

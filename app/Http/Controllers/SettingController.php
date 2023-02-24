@@ -480,7 +480,7 @@ class SettingController extends Controller
         // $result = $ss->roleView();
         $data['roles'] = $ss->roleView();
         $data['rolestaff'] = $ss->myrolestaff();
-        $data['listuserrole'] = $ss->listuserrole();
+        // $data['listuserrole'] = $ss->listuserrole();
 
 
         return view('pages.setting.role', $data);
