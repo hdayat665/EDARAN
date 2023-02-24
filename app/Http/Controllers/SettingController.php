@@ -480,7 +480,7 @@ class SettingController extends Controller
         // $result = $ss->roleView();
         $data['roles'] = $ss->roleView();
         $data['rolestaff'] = $ss->myrolestaff();
-        $data['listuserrole'] = $ss->listuserrole();
+        // $data['listuserrole'] = $ss->listuserrole();
 
 
         return view('pages.setting.role', $data);
@@ -509,6 +509,15 @@ class SettingController extends Controller
         $ss = new SettingService;
 
         $result = $ss->getRoleById($id);
+
+        return $result;
+    }
+
+    public function getRoleBy($id = '')
+    {
+        $ss = new SettingService;
+
+        $result = $ss->getRoleBy($id);
 
         return $result;
     }
