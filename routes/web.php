@@ -274,6 +274,7 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('/sop', 'sopView');
             Route::get('/unit', 'unitView');
             Route::get('/getRoleById/{id}', 'getRoleById');
+            Route::get('/getRoleBy/{id}', 'getRoleBy');
             Route::get('/getCompanyById/{id}', 'getCompanyById');
             Route::get('/getDepartmentById/{id}', 'getDepartmentById');
             Route::get('/getUnitById/{id}', 'getUnitById');
@@ -358,6 +359,8 @@ Route::group(['middleware' => ['web']], function () {
 
             // timesheet period
             Route::get('/timesheetperiod', 'timesheetperiodView');
+            
+            
         });
 
         Route::controller(OrganizationController::class)->group(function () {
@@ -465,6 +468,8 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('/updatereason', 'updatereason');
             Route::get('/getParticipantNameById/{id}', 'getParticipantNameById');
             Route::get('/getConfirmSubmitById/{id}', 'getConfirmSubmitById');
+            //SUMMARY TIMESHEET
+            Route::get('/summarytimesheet', 'summarytimesheetView');
             
         });
 
