@@ -58,8 +58,8 @@ class TimesheetReportService
             $cond[5] = ['e.designationName', $input['designation']];
         }
 
-        if (isset($input['employeeName'])) {
-            $cond[6] = ['a.user_id', $input['employeeName']];
+        if (isset($input['user_id'])) {
+            $cond[6] = ['c.user_id', $input['user_id']];
         }
 
         $startDate = date_format(date_create(now()), 'Y').'-01-01';
@@ -119,6 +119,8 @@ class TimesheetReportService
     {
         $cond[1] = ['a.tenant_id', Auth::user()->tenant_id];
         $cond[2] = ['c.project_name', '!=', null];
+
+        
 
         $data = DB::table('timesheet_log as a')
         ->leftJoin('employment as b', 'a.user_id', '=', 'b.user_id')

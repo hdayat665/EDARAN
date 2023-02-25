@@ -44,7 +44,7 @@
                 </tbody>
             </table> --}}
 
-            <table id="" class="table table-striped table-bordered align-middle">
+            <table id="tablereportemployee" class="table table-striped table-bordered align-middle">
                 <thead>
                     <tr>
                         <th width="1%">NO</th>

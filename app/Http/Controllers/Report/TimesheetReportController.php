@@ -45,10 +45,12 @@ class TimesheetReportController extends Controller
         $data = [];
         $trs = new TimesheetReportService;
         $input = $r->input();
+        
 
         if ($input['category'] == 'Summary') {
-            $data['summarys'] = $trs->getDataEmployeeSummary();
-            $data['date_range'] = $input['date_range'];
+            // $data['summarys'] = $trs->getdatabyemployee();
+            $data['namepem'] = $trs->getdatabyemployee();
+            // $data['date_range'] = $input['date_range'];
             $view = 'pages.report.timesheet.employeeReportBySummary';
         }else if($input['category'] == 'Project'){
             $data['projects'] = $trs->getDataEmployeeSummary($input);
@@ -70,8 +72,16 @@ class TimesheetReportController extends Controller
             $view = 'pages.report.timesheet.employeeReportByDepartment';
         }else if($input['category'] == 'Employee'){
             // return app('App\Http\Controllers\Timesheet\MyTimesheetController')->viewTimesheet('1',$input['user_id']);
-            $data['namepem'] = $trs->getdatabyemployee();
-            $view = 'pages.report.timesheet.employeeReportBySummary';
+            $data['employees'] = $trs->getDataEmployeeSummary($input);
+            $data['date_range'] = $input['date_range'];
+
+            $data['employee'] = '';
+            if (isset($input['employee'])) {
+                $data['employee'] = getEmployee($input['employee'])->employeeName;
+                pr( $data['employee']);
+            }
+
+            $view = 'pages.report.timesheet.employeeReportByName';
         }
 
         return view($view, $data);
@@ -79,7 +89,7 @@ class TimesheetReportController extends Controller
 
     public function searchEmployeeReport()
     {
-        $data = [];
+        // $data = [];
 
         // $trs = new TimesheetReportService;
         // $data['logs'] = $trs->getReportTimesheetLog($r);
