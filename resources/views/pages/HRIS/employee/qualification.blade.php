@@ -37,42 +37,31 @@
                      </tr>
                      </thead>
                      <tbody>
-                     <tr>
-                         <td>1</td>
-                         <td>
-                             <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle"><i class="fa fa-cogs"></i> Action <i class="fa fa-caret-down"></i></a>
-                             <div class="dropdown-menu">
-                                 <a href="javascript:;" id="" data-id="" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#editmodaledd" > Edit</a>
-                                 <div class="dropdown-divider"></div>
-                                 <a href="javascript:;" id="" data-id="" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#modalreject"> Delete</a>
-                                 <div class="dropdown-divider"></div>
-                             </div>
-                         </td>
-                         <td>01/04/2019</td>
-                         <td>31/08/2021</td>
-                         <td>UNIVERSITI MALAYA</td>
-                         <td>BACHELOR OF DEGREE</td>
-                         <td>3.25</td>
-                         <td>Degree.pdf</td>
-                     </tr>
-                     <tr>
-                         <td>2</td>
-                         <td>
-                             <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle"><i class="fa fa-cogs"></i> Action <i class="fa fa-caret-down"></i></a>
-                             <div class="dropdown-menu">
-                                 <a href="javascript:;" id="" data-id="" class="dropdown-item" > Edit</a>
-                                 <div class="dropdown-divider"></div>
-                                 <a href="javascript:;" id="" data-id="" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#modalreject"> Delete</a>
-                                 <div class="dropdown-divider"></div>
-                             </div>
-                         </td>
-                         <td>03/02/2022</td>
-                         <td>31/08/2021</td>
-                         <td>UNIVERSITI MALAYA</td>
-                         <td>MASTER'S DEGREE</td>
-                         <td>PASS</td>
-                         <td>Master.pdf</td>
-                     </tr>
+                        <?php $id = 0 ?>
+                        @if ($qualification)
+                            @foreach ($qualification as $education)
+                            <?php $id++ ?>
+                            <tr>
+                                <td> {{$id}} </td>
+                                <td>
+                                    <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle"><i class="fa fa-cogs"></i> Actions <i class="fa fa-caret-down"></i></a>
+                                    <div class="dropdown-menu">
+                                        <a href="javascript:;" id="educationModalEdit{{$education->id}}" data-id="{{$education->id}}" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#editmodaledd"> Edit</a>
+                                        <div class="dropdown-divider"></div>
+                                        <a href="javascript:;" id="deleteEducation{{$education->id}}" data-id="{{$education->id}}" class="dropdown-item" data-bs-toggle="modal"> Delete</a>
+                                        <div class="dropdown-divider"></div>
+                                    </div>
+                                </td>
+    
+                                <td> {{ $education->fromDate }} </td>
+                                <td> {{ $education->toDate }} </td>
+                                <td style="text-transform: uppercase;"> {{ $education->instituteName }} </td>
+                                <td style="text-transform: uppercase;"> {{ $education->highestLevelAttained }} </td>
+                                <td style="text-transform: uppercase;"> {{ $education->result }} </td>
+                            </tr>
+                            @endforeach
+                        @endif
+                        <span style="display: none"><input type="text" id="educationId" value="{{$educationId}}"></span>
                      </tbody>
                  </table>
              </div>
@@ -94,36 +83,29 @@
                      </tr>
                      </thead>
                      <tbody>
-                     <tr>
-                         <td>1</td>
-                         <td>
-                             <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle"><i class="fa fa-cogs"></i> Action <i class="fa fa-caret-down"></i></a>
-                             <div class="dropdown-menu">
-                                 <a href="javascript:;" id="" data-id="" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#editmodalothers" editmodalothers > Edit</a>
-                                 <div class="dropdown-divider"></div>
-                                 <a href="javascript:;" id="" data-id="" class="dropdown-item"> Delete</a>
-                                 <div class="dropdown-divider"></div>
-                             </div>
-                         </td>
-                         <td>16/09/2022</td>
-                         <td>laravel Training</td>
-                         <td>laravel.pdf</td>
-                     </tr>
-                     <tr>
-                         <td>2</td>
-                         <td>
-                             <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle"><i class="fa fa-cogs"></i> Action <i class="fa fa-caret-down"></i></a>
-                             <div class="dropdown-menu">
-                                 <a href="javascript:;" id="" data-id="" class="dropdown-item" > Edit</a>
-                                 <div class="dropdown-divider"></div>
-                                 <a href="javascript:;" id="" data-id="" class="dropdown-item"> Delete</a>
-                                 <div class="dropdown-divider"></div>
-                             </div>
-                         </td>
-                         <td>17/09/2022</td>
-                         <td>Architect</td>
-                         <td>Architect.pdf</td>
-                     </tr>
+                        <?php $id = 0 ?>
+                        @if ($qualification)
+                            @foreach ($qualification as $others)
+                            <?php $id++ ?>
+                            <tr>
+                                <td> {{$id}} </td>
+                                <td>
+                                    <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle"><i class="fa fa-cogs"></i> Actions <i class="fa fa-caret-down"></i></a>
+                                    <div class="dropdown-menu">
+                                        <a href="javascript:;" id="othersQualificationModalEdit{{$others->id}}" data-id="{{$others->id}}" class="dropdown-item" data-bs-toggle="modal"> Edit</a>
+                                        <div class="dropdown-divider"></div>
+                                        <a href="javascript:;" id="" data-id="" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#deleteOthers"> Delete</a>
+                                        <div class="dropdown-divider"></div>
+                                    </div>
+                                </td>
+    
+                                <td> {{ $others->otherDate }} </td>
+                                <td style="text-transform: uppercase;"> {{ $others->otherPQDetails }} </td>
+                                <td> {{ $others->supportOtherDoc }} </td>
+                            </tr>
+                            @endforeach
+                        @endif
+                        <span style="display: none"><input type="text" id="othersId" value="{{$othersId}}"></span>
                      </tbody>
                  </table>
              </div>
@@ -137,216 +119,8 @@
          </div>
      </div>
  </div>
- 
- 
- {{-- modal add education --}}
- <div class="modal fade " id="modalladded" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-     <div class="modal-dialog">
-       <div class="modal-content">
-         <div class="modal-header">
-           <h1 class="modal-title fs-5" id="exampleModalLabel">Add Education</h1>
-           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-         </div>
-         <div class="modal-body">
-             <div class="row p-2">
-                 <div class="col-md-6">
-                     <div class="form-group">
-                         <label for="" class="form-label">From Date</label>
-                         <input type="text" class="form-control" id="datepicker-fromdate" placeholder="YYYY/MM/DD">
-                     </div>
-                 </div>
-                 <div class="col-md-6">
-                     <div class="form-group">
-                         <label for="" class="form-label">To Date</label>
-                         <input type="text" class="form-control" id="datepicker-todate" placeholder="YYYY/MM/DD">
-                     </div>
-                 </div>
-             </div>
-             <div class="row p-2">
-                 <div class="col-md-6">
-                     <div class="form-group">
-                         <label for="" class="form-label">Institute Name</label>
-                         <input type="text" class="form-control" id="" placeholder="INSTITUTE NAME">
-                     </div>
-                 </div>
-                 <div class="col-md-6">
-                     <div class="form-group">
-                         <label for="" class="form-label">Highest Level Attained</label>
-                         <input type="text" class="form-control" id="" placeholder="HISGHEST LEVEL ATTAINED">
-                     </div>
-                 </div>
-             </div>
-             <div class="row p-2">
-                 <div class="col-md-6">
-                     <div class="form-group">
-                         <label for="" class="form-label">Result</label>
-                         <input type="text" class="form-control" id="" placeholder="RESULT">
-                     </div>
-                 </div>
-                 <div class="col-md-6">
-                     <div class="form-group">
-                         <label for="" class="form-label">Education Attachments</label>
-                         <input type="file" class="form-control-file" id="">
-                     </div>
-                 </div>
-             </div>
-         </div>
-         <div class="modal-footer">
-           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-           <button type="button" class="btn btn-primary">Save changes</button>
-         </div>
-       </div>
-     </div>
-   </div>
-   
- {{-- end modal add education --}}
- 
- {{-- start modal edit education --}}
- <div class="modal fade " id="editmodaledd" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-     <div class="modal-dialog">
-       <div class="modal-content">
-         <div class="modal-header">
-           <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Education</h1>
-           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-         </div>
-         <div class="modal-body">
-             <div class="row p-2">
-                 <div class="col-md-6">
-                     <div class="form-group">
-                         <label for="" class="form-label">From Date</label>
-                         <input type="text" class="form-control" id="datepicker-fromdateu" placeholder="YYYY/MM/DD">
-                     </div>
-                 </div>
-                 <div class="col-md-6">
-                     <div class="form-group">
-                         <label for="" class="form-label">To Date</label>
-                         <input type="text" class="form-control" id="datepicker-todateu" placeholder="YYYY/MM/DD">
-                     </div>
-                 </div>
-             </div>
-             <div class="row p-2">
-                 <div class="col-md-6">
-                     <div class="form-group">
-                         <label for="" class="form-label">Institute Name</label>
-                         <input type="text" class="form-control" id="" placeholder="INSTITUTE NAME">
-                     </div>
-                 </div>
-                 <div class="col-md-6">
-                     <div class="form-group">
-                         <label for="" class="form-label">Highest Level Attained</label>
-                         <input type="text" class="form-control" id="" placeholder="HIGHEST LEVEL ATTAINED">
-                     </div>
-                 </div>
-             </div>
-             <div class="row p-2">
-                 <div class="col-md-6">
-                     <div class="form-group">
-                         <label for="" class="form-label">Result</label>
-                         <input type="text" class="form-control" id="" placeholder="RESULT">
-                     </div>
-                 </div>
-                 <div class="col-md-6">
-                     <div class="form-group">
-                         <label for="" class="form-label">Education Attachments</label>
-                         <input type="file" class="form-control-file" id="">
-                     </div>
-                 </div>
-             </div>
-         </div>
-         <div class="modal-footer">
-           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-           <button type="button" class="btn btn-primary">Save changes</button>
-         </div>
-       </div>
-     </div>
-   </div>
-   
- {{-- end modal add education --}}
- 
- {{-- start modal others education --}}
- <div class="modal fade " id="addmodalothers" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-     <div class="modal-dialog">
-       <div class="modal-content">
-         <div class="modal-header">
-           <h1 class="modal-title fs-5" id="exampleModalLabel">Add Others Education</h1>
-           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-         </div>
-         <div class="modal-body">
-            <div class="row p-2">
-                 <div class="form-group row">
-                     <label for="staticEmail" class="col-sm-4 col-form-label">Date</label>
-                     <div class="col-sm-8">
-                         <input type="text" class="form-control" id="datepicker-others" placeholder="YYYY/MM/DD">
-                     </div>
-                 </div>
-            </div>
-            <div class="row p-2">
-                 <div class="form-group row">
-                     <label for="staticEmail" class="col-sm-4 col-form-label">Professional Qualification Details</label>
-                     <div class="col-sm-8">
-                         <input type="text" class="form-control" placeholder="PROFESSIONAL QUALIFICATION DETAILS">
-                     </div>
-                 </div>
-             </div>
-             <div class="row p-2">
-                 <div class="form-group row">
-                     <label for="staticEmail" class="col-sm-4 col-form-label">Attachments</label>
-                     <div class="col-sm-8">
-                         <input type="file" class="form-control-file" id="">
-                     </div>
-                 </div>
-             </div>
-         </div>
-         <div class="modal-footer">
-           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-           <button type="button" class="btn btn-primary">Save changes</button>
-         </div>
-       </div>
-     </div>
-   </div>
-   
- {{-- end modal add education --}}
- 
- {{-- start modal edit others education --}}
- <div class="modal fade " id="editmodalothers" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-     <div class="modal-dialog">
-       <div class="modal-content">
-         <div class="modal-header">
-           <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Others Education</h1>
-           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-         </div>
-         <div class="modal-body">
-            <div class="row p-2">
-                 <div class="form-group row">
-                     <label for="staticEmail" class="col-sm-4 col-form-label">Date</label>
-                     <div class="col-sm-8">
-                         <input type="text" class="form-control" id="datepicker-othersu" placeholder="YYYY/MM/DD">
-                     </div>
-                 </div>
-            </div>
-            <div class="row p-2">
-                 <div class="form-group row">
-                     <label for="staticEmail" class="col-sm-4 col-form-label">Professional Qualification Details</label>
-                     <div class="col-sm-8">
-                         <input type="text" class="form-control" placeholder="PROFESSIONAL QUALIFICATION DETAILS">
-                     </div>
-                 </div>
-             </div>
-             <div class="row p-2">
-                 <div class="form-group row">
-                     <label for="staticEmail" class="col-sm-4 col-form-label">Attachments</label>
-                     <div class="col-sm-8">
-                         <input type="file" class="form-control-file" id="">
-                     </div>
-                 </div>
-             </div>
-         </div>
-         <div class="modal-footer">
-           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-           <button type="button" class="btn btn-primary">Save changes</button>
-         </div>
-       </div>
-     </div>
-   </div>
-   
- {{-- end modal edit education --}}
+
+@include('modal.employee.addEducation')
+@include('modal.employee.editEducation')
+@include('modal.employee.addOthers')
+@include('modal.employee.editOthers')
