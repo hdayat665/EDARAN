@@ -53,8 +53,6 @@
                         <th class="text-nowrap">Project</th>
                         <th class="text-nowrap">Total Hours</th>
                         <th class="text-nowrap">Amount (MYR)</th>
-
-
                     </tr>
                 </thead>
                 <tbody>

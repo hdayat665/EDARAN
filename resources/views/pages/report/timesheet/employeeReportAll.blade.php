@@ -133,6 +133,8 @@
                 <thead>
                     <tr>
                         <th>No</th>
+                        {{-- <th>Department</th> --}}
+                        <th>Department Name</th>
                         <th>Employee Name</th>
                         <th>Designation</th>
                         <th>Status</th>
@@ -174,6 +176,8 @@
                     @foreach ($logs as $key => $row)
                         <tr>
                             <td>{{ $key + 1 }}</td>
+                            {{-- <td>{{ $row->departmentName }}</td> --}}
+                            <td>{{ $row->departmentName }}</td>
                             <td>{{ $row->employeeName }}</td>
                             <td>{{ $row->designationName }}</td>
                             <td>{{ $row->status }}</td>
@@ -217,7 +221,7 @@
             
             <style>
                 .has-data {
-                    background-color: #AED6F1; /* set your desired background color here */
+                    background-color: #AED6F1; 
                 }
             </style>
             

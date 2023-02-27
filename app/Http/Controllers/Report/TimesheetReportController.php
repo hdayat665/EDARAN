@@ -74,12 +74,13 @@ class TimesheetReportController extends Controller
             // return app('App\Http\Controllers\Timesheet\MyTimesheetController')->viewTimesheet('1',$input['user_id']);
             $data['employees'] = $trs->getDataEmployeeSummary($input);
             $data['date_range'] = $input['date_range'];
+            pr( $data['employees']);
 
-            $data['employee'] = '';
-            if (isset($input['employee'])) {
-                $data['employee'] = getEmployee($input['employee'])->employeeName;
-                pr( $data['employee']);
-            }
+            // $data['employee'] = '';
+            // if (isset($input['employee'])) {
+            //     $data['employee'] = getEmployee($input['employee'])->employeeName;
+            //     pr( $data['employee']);
+            // }
 
             $view = 'pages.report.timesheet.employeeReportByName';
         }
@@ -87,18 +88,33 @@ class TimesheetReportController extends Controller
         return view($view, $data);
     }
 
-    public function searchEmployeeReport()
+    public function searchEmployeeReport(Request $r)
     {
+
+        $data = [];
+        $trs = new TimesheetReportService;
+        $input = $r->input();
+        
+
         // $data = [];
 
         // $trs = new TimesheetReportService;
         // $data['logs'] = $trs->getReportTimesheetLog($r);
 
         
-        $trs = new TimesheetReportService;
-        $data['logs'] = $trs->employeeReportAll();
+        // $trs = new TimesheetReportService;
+        $data['logs'] = $trs->employeeReportAll($input);
+        // pr( $data['logs']);
 
-        return view('pages.report.timesheet.employeeReportAll', $data);
+        // $data['employee'] = '';
+        // if (isset($input['employee'])) {
+        //     $data['employee'] = getEmployee($input['employee'])->employeeName;
+        //     // pr( $data['employee']);
+        // }
+
+        // return view('pages.report.timesheet.employeeReportAll', $data);
+        $view = 'pages.report.timesheet.employeeReportAll';
+        return view($view, $data);
     }
 
 
