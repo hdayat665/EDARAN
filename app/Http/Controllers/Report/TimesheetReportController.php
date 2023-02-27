@@ -46,11 +46,18 @@ class TimesheetReportController extends Controller
         $trs = new TimesheetReportService;
         $input = $r->input();
         
+        $requiredKeys = ['category', 'date_range'];
+        if(array_diff($requiredKeys, array_keys($input))) {
+            return redirect()->back()->withErrors(['message' => 'Please select all dropdown values']);
+        }
+    
 
         if ($input['category'] == 'Summary') {
-            // $data['summarys'] = $trs->getdatabyemployee();
-            $data['namepem'] = $trs->getdatabyemployee();
-            // $data['date_range'] = $input['date_range'];
+            $data['summary'] = $trs->getdatabyemployee();
+            $view = 'pages.report.timesheet.employeeReportBySummary';
+        }
+        else if ($input['category'] == '') {  
+            $data['summary'] = $trs->getdatabyemployee();
             $view = 'pages.report.timesheet.employeeReportBySummary';
         }else if($input['category'] == 'Project'){
             $data['projects'] = $trs->getDataEmployeeSummary($input);
@@ -74,14 +81,6 @@ class TimesheetReportController extends Controller
             // return app('App\Http\Controllers\Timesheet\MyTimesheetController')->viewTimesheet('1',$input['user_id']);
             $data['employees'] = $trs->getDataEmployeeSummary($input);
             $data['date_range'] = $input['date_range'];
-            pr( $data['employees']);
-
-            // $data['employee'] = '';
-            // if (isset($input['employee'])) {
-            //     $data['employee'] = getEmployee($input['employee'])->employeeName;
-            //     pr( $data['employee']);
-            // }
-
             $view = 'pages.report.timesheet.employeeReportByName';
         }
 
@@ -94,25 +93,8 @@ class TimesheetReportController extends Controller
         $data = [];
         $trs = new TimesheetReportService;
         $input = $r->input();
-        
-
-        // $data = [];
-
-        // $trs = new TimesheetReportService;
-        // $data['logs'] = $trs->getReportTimesheetLog($r);
-
-        
-        // $trs = new TimesheetReportService;
         $data['logs'] = $trs->employeeReportAll($input);
-        // pr( $data['logs']);
-
-        // $data['employee'] = '';
-        // if (isset($input['employee'])) {
-        //     $data['employee'] = getEmployee($input['employee'])->employeeName;
-        //     // pr( $data['employee']);
-        // }
-
-        // return view('pages.report.timesheet.employeeReportAll', $data);
+    
         $view = 'pages.report.timesheet.employeeReportAll';
         return view($view, $data);
     }

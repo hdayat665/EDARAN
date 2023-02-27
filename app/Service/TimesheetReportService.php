@@ -71,11 +71,6 @@ class TimesheetReportService
             $endDate = date_format(date_create($dateRange[1]), 'Y-m-d');
         }
 
-        // if (isset($input['year'])) {
-        //     $year = $input['year'];
-        // }
-
-
         $data = DB::table('timesheet_log as a')
             ->leftJoin('project as b', 'a.project_id', '=', 'b.id')
             ->leftJoin('employment as c', 'a.user_id', '=', 'c.user_id')
@@ -90,45 +85,44 @@ class TimesheetReportService
 
         return $data;
     }
-
+                             
     public function employeeReportAll($input = [])
     {
         $cond[1] = ['a.tenant_id', Auth::user()->tenant_id];
-        
- 
-        // if (isset($input['project'])) {
-        //     $cond[2] = ['a.project_id', $input['project']];
-        // }
 
         if (isset($input['department2'])) {
             $cond[2] = ['d.departmentName', $input['department2']];
         }
 
-        // if (isset($input['designation'])) {
-        //     $cond[5] = ['e.designationName', $input['designation']];
-        // }
-
         if (isset($input['user_id'])) {
-            $cond[3] = ['C.user_id', $input['user_id']];
+            $cond[3] = ['a.user_id', $input['user_id']];
         }
 
+        if (isset($input['year2'])) {
+            $year = $input['year2'];
+            $cond[4] = [DB::raw('YEAR(b.date)'), '=', $year];
+        }
 
-        // $data = DB::table('employment as a')
-        //     ->leftJoin('timesheet_log as b', 'a.user_id', '=', 'b.user_id')
-        //     ->leftJoin('designation as c', 'a.designation', '=', 'c.id')
-        //     ->select('a.employeeName', 'c.designationName', 'a.status', 'b.date', 'b.total_hour')
-        $data = DB::table('timesheet_log as a')
-            ->leftJoin('project as b', 'a.project_id', '=', 'b.id')
-            ->leftJoin('employment as c', 'a.user_id', '=', 'c.user_id')
-            ->leftJoin('department as d', 'c.department', '=', 'd.id')
-            ->leftJoin('designation as e', 'c.designation', '=', 'e.id')
-            ->select('a.*', 'b.project_name', 'c.employeeName', 'd.departmentName', 'e.designationName')
+        if (isset($input['month2'])) {
+            $cond[5] = [DB::raw('MONTH(b.date)'), $input['month2']];
+        }
+
+        $data = DB::table('employment as a')
+            ->leftJoin('timesheet_log as b', 'a.user_id', '=', 'b.user_id')
+            ->leftJoin('designation as c', 'a.designation', '=', 'c.id')
+            ->leftJoin('department as d', 'a.department', '=', 'd.id')
+            ->select('a.employeeName', 'c.designationName', 'a.status', 'b.date', 'b.total_hour', 'd.departmentName')
             ->where($cond)
-            // ->groupBy('b.user_id')
+            // ->groupBy('c.employeeName')
             ->get();
 
         $pivotedData = $data->groupBy('employeeName')->map(function ($employeeLogs) {
-            $result = ['employeeName' => $employeeLogs->first()->employeeName, 'designationName' => $employeeLogs->first()->designationName, 'status' => $employeeLogs->first()->status, 'departmentName' => $employeeLogs->first()->departmentName];
+            $result = ['employeeName' => $employeeLogs->first()->employeeName, 
+                        'designationName' => $employeeLogs->first()->designationName, 
+                        'status' => $employeeLogs->first()->status,
+                        'departmentName' => $employeeLogs->first()->departmentName,
+                        'date' => $employeeLogs->first()->date
+                       ];
             foreach ($employeeLogs as $log) {
                 $day = date('d', strtotime($log->date));
                 $result['day_'.$day] = $log->total_hour;
