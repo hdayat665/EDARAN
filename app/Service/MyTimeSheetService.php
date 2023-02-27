@@ -220,8 +220,8 @@ class MyTimeSheetService
         TimesheetEvent::create($input);
 
         $eventDetails = TimesheetEvent::where('tenant_id', $user->tenant_id)->orderBy('created_at', 'DESC')->first();
-        $departmentName = getDepartmentName($user->id)->departmentName;
-        $employeeName = getDepartmentName($user->id)->employeeName;
+        $departmentName = getDepartmentName($user->id);
+        $employeeName = getEmployeeName($user->id);
         $venue = projectLocationById($eventDetails->location);
 
         $participants = explode(',', $eventDetails->participant);
