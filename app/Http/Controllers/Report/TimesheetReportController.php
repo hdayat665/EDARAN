@@ -45,10 +45,19 @@ class TimesheetReportController extends Controller
         $data = [];
         $trs = new TimesheetReportService;
         $input = $r->input();
+        
+        $requiredKeys = ['category', 'date_range'];
+        if(array_diff($requiredKeys, array_keys($input))) {
+            return redirect()->back()->withErrors(['message' => 'Please select all dropdown values']);
+        }
+    
 
         if ($input['category'] == 'Summary') {
-            $data['summarys'] = $trs->getDataEmployeeSummary();
-            $data['date_range'] = $input['date_range'];
+            $data['summary'] = $trs->getdatabyemployee();
+            $view = 'pages.report.timesheet.employeeReportBySummary';
+        }
+        else if ($input['category'] == '') {  
+            $data['summary'] = $trs->getdatabyemployee();
             $view = 'pages.report.timesheet.employeeReportBySummary';
         }else if($input['category'] == 'Project'){
             $data['projects'] = $trs->getDataEmployeeSummary($input);
@@ -70,25 +79,24 @@ class TimesheetReportController extends Controller
             $view = 'pages.report.timesheet.employeeReportByDepartment';
         }else if($input['category'] == 'Employee'){
             // return app('App\Http\Controllers\Timesheet\MyTimesheetController')->viewTimesheet('1',$input['user_id']);
-            $data['namepem'] = $trs->getdatabyemployee();
-            $view = 'pages.report.timesheet.employeeReportBySummary';
+            $data['employees'] = $trs->getDataEmployeeSummary($input);
+            $data['date_range'] = $input['date_range'];
+            $view = 'pages.report.timesheet.employeeReportByName';
         }
 
         return view($view, $data);
     }
 
-    public function searchEmployeeReport()
+    public function searchEmployeeReport(Request $r)
     {
+
         $data = [];
-
-        // $trs = new TimesheetReportService;
-        // $data['logs'] = $trs->getReportTimesheetLog($r);
-
-        
         $trs = new TimesheetReportService;
-        $data['logs'] = $trs->employeeReportAll();
-
-        return view('pages.report.timesheet.employeeReportAll', $data);
+        $input = $r->input();
+        $data['logs'] = $trs->employeeReportAll($input);
+    
+        $view = 'pages.report.timesheet.employeeReportAll';
+        return view($view, $data);
     }
 
 
