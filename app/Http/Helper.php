@@ -1103,7 +1103,7 @@ if (!function_exists('getSupervisor')) {
     }
 }
 
-if (!function_exists('getEmployeeName')) {
+if (!function_exists('getEmployeeName')) { 
     function getEmployeeName($id = '')
     {
         $data = Employee::where('user_id', $id)->select('employeeName')->first()->employeeName;
@@ -1149,14 +1149,14 @@ if (!function_exists('getWorkingEmail')) {
 
 if (!function_exists('getDepartmentName')) {
     function getDepartmentName($user_id = '')
-    {
+    { 
         $cond[1] = ['user_id', $user_id];
         $data = DB::table('employment as a')
             ->leftJoin('department as b', 'a.department', '=', 'b.id')
             ->select('b.departmentName', 'a.employeeName')
             ->where($cond)
             ->first();
-        return $data;
+        return $data->departmentName;
     }
 }
 
