@@ -24,7 +24,7 @@
         <div class="panel-body">
             <div class="row p-2">
                 <div class="col-sm-12">
-                    <h5>Year : 2022</h5>
+                    <h5>Year : 2021</h5>
                 </div>
             </div>
             <div class="row p-2">
@@ -221,6 +221,7 @@
             </table>
             
             
+            
             <style>
                 .has-data {
                     background-color: #AED6F1; 
@@ -231,14 +232,14 @@
 
            </div>
 
-
-
-
-            <div class="row p-2">
-                <div class="col align-self-start">
-                    <a href="/setting" class="btn btn-primary"  type="submit"><i class="fa fa-arrow-left"></i> Back</a>
-                </div>
+           <div class="row p-2">
+            <div class="col align-self-start">
+                <a href="javascript:history.back()"  class="btn btn-primary"  type="submit"><i class="fa fa-arrow-left"></i> Back</a>
             </div>
+        </div>
+
+
+            
         </div>
        
 </div>

@@ -74,7 +74,7 @@
                                 <div class="col-sm-3">
                                     <label for="emergency-firstname" class="form-label">Employee Name</label>
                                     <select class="form-select" name="user_id">
-                                        <option class="form-label" value="" >Please Select1</option>
+                                        <option class="form-label" value="" >Please Select</option>
                                         <?php $employees = getEmployee() ?>
                                         @foreach ($employees as $employee)
                                         <option value="{{$employee->user_id}}">{{$employee->employeeName}}</option>
