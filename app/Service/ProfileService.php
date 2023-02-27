@@ -120,7 +120,7 @@ class ProfileService
 
     }
 
-    public function saveEducation($r)
+    public function addEducation($r)
     {
         $input = $r->input();
         $input['user_id'] = Auth::user()->id;
@@ -152,30 +152,33 @@ class ProfileService
 
         $user = UserQualification::where('id', $id)->first();
 
-        if(!$user)
+        if($user)
         {
-            $data['status'] = config('app.response.error.status');
-            $data['type'] = config('app.response.error.type');
-            $data['title'] = config('app.response.error.title');
-            $data['msg'] = 'user not found';
-        }else{
-
-            if ($_FILES['supportDoc']['name'])
-            {
-                $payslip = upload($r->file('supportDoc'));
-                $input['supportDoc'] = $payslip['filename'];
-
-                if (!$input['supportDoc']) {
-                    unset($input['supportDoc']);
-                }
-            }
-
             UserQualification::where('id', $id)->update($input);
 
             $data['status'] = config('app.response.success.status');
             $data['type'] = config('app.response.success.type');
             $data['title'] = config('app.response.success.title');
             $data['msg'] = 'Success Update Education';
+
+            // $data['status'] = config('app.response.error.status');
+            // $data['type'] = config('app.response.error.type');
+            // $data['title'] = config('app.response.error.title');
+            // $data['msg'] = 'user not found';
+
+        }else{
+
+            // if ($_FILES['supportDoc']['name'])
+            // {
+            //     $payslip = upload($r->file('supportDoc'));
+            //     $input['supportDoc'] = $payslip['filename'];
+
+            //     if (!$input['supportDoc']) {
+            //         unset($input['supportDoc']);
+            //     }
+            // }
+
+            
         }
 
         return $data;
@@ -184,16 +187,16 @@ class ProfileService
 
     public function deleteEducation($id = '')
     {
-        $child = UserQualification::where('id',$id)->first();
+        $user = UserQualification::where('id',$id)->first();
 
-        if(!$child)
+        if(!$user)
         {
             $data['status'] = config('app.response.error.status');
             $data['type'] = config('app.response.error.type');
             $data['title'] = config('app.response.error.title');
             $data['msg'] = 'Education not found';
         }else{
-            UserChildren::where('id',$id)->delete();
+            UserQualification::where('id',$id)->delete();
             $data['status'] = config('app.response.success.status');
             $data['type'] = config('app.response.success.type');
             $data['title'] = config('app.response.success.title');
@@ -202,6 +205,94 @@ class ProfileService
 
         return $data;
     }
+
+
+    public function addOthers($r)
+    {
+        $input = $r->input();
+        $input['user_id'] = Auth::user()->id;
+        UserQualification::create($input);
+
+        $data['status'] = config('app.response.success.status');
+        $data['type'] = config('app.response.success.type');
+        $data['title'] = config('app.response.success.title');
+        $data['msg'] = 'Success add others qualification';
+
+        return $data;
+    }
+
+    public function getOthers($id = '')
+    {
+        $data['data'] = UserQualification::where('id', $id)->first();
+        // pr(Storage::path($data['data']->supportDoc));
+        $data['msg'] = 'Success Get Others Qualification';
+
+        return $data;
+    }
+
+    public function updateOthers($r)
+    {
+        $input = $r->input();
+
+        $user_id = Auth::user()->id;
+        $id = $input['id'] ?? 1;
+
+        $user = UserQualification::where('id', $id)->first();
+
+        if($user)
+        {
+            UserQualification::where('id', $id)->update($input);
+
+            $data['status'] = config('app.response.success.status');
+            $data['type'] = config('app.response.success.type');
+            $data['title'] = config('app.response.success.title');
+            $data['msg'] = 'Success Update Others Qualification';
+
+            // $data['status'] = config('app.response.error.status');
+            // $data['type'] = config('app.response.error.type');
+            // $data['title'] = config('app.response.error.title');
+            // $data['msg'] = 'user not found';
+
+        }else{
+
+            // if ($_FILES['supportDoc']['name'])
+            // {
+            //     $payslip = upload($r->file('supportDoc'));
+            //     $input['supportDoc'] = $payslip['filename'];
+
+            //     if (!$input['supportDoc']) {
+            //         unset($input['supportDoc']);
+            //     }
+            // }
+
+            
+        }
+
+        return $data;
+
+    }
+
+    public function deleteOthers($id = '')
+    {
+        $user = UserQualification::where('id',$id)->first();
+
+        if(!$user)
+        {
+            $data['status'] = config('app.response.error.status');
+            $data['type'] = config('app.response.error.type');
+            $data['title'] = config('app.response.error.title');
+            $data['msg'] = 'Others Qualification not found';
+        }else{
+            UserQualification::where('id',$id)->delete();
+            $data['status'] = config('app.response.success.status');
+            $data['type'] = config('app.response.success.type');
+            $data['title'] = config('app.response.success.title');
+            $data['msg'] = 'Others Qualification deleted';
+        }
+
+        return $data;
+    }
+
 
     public function updateAddress($input)
     {
@@ -718,6 +809,20 @@ class ProfileService
             }
         }
 
+        $educationId[] = '';
+        if ($data['qualification']) {
+            foreach ($data['qualification'] as $education) {
+                $educationId[] = $education->id ?? null;
+            }
+        }
+
+        $othersId[] = '';
+        if ($data['qualification']) {
+            foreach ($data['qualification'] as $others) {
+                $othersId[] = $others->id ?? null;
+            }
+        }
+
         $data['siblingId'] = implode(',', $siblingId);
 
         $data['parentId'] = implode(',', $parentId);
@@ -725,6 +830,10 @@ class ProfileService
         $data['childId'] = implode(',', $childId);
 
         $data['addressId'] = implode(',', $addressId);
+
+        $data['educationId'] = implode(',', $educationId);
+
+        $data['othersId'] = implode(',', $othersId);
 
         $data['idRun'] = 1;
 
@@ -934,7 +1043,7 @@ class ProfileService
         $user_id = Auth::user()->id;
         $id = $input['id'] ?? 1;
 
-        $user = UserAddress::find($id);
+        $user = UserAddress::where('user_id', $id)->first();
 
         if(!$user)
         {
@@ -945,7 +1054,7 @@ class ProfileService
 
         } else {
 
-            UserAddress::where('id', $id)->update($input);
+            $user->update($input);
 
             $data['status'] = config('app.response.success.status');
             $data['type'] = config('app.response.success.type');

@@ -149,10 +149,14 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('/updateSibling', 'updateSibling');
             Route::post('/addChildren', 'addChildren');
 
-            Route::post('/saveEducation', 'saveEducation');
+            Route::post('/addEducation', 'addEducation');
             Route::post('/updateEducation', 'updateEducation');
             Route::get('/getEducation/{id}', 'getEducation');
             Route::delete('/deleteEducation/{id}', 'deleteEducation');
+            Route::post('/addOthers', 'addOthers');
+            Route::post('/updateOthers', 'updateOthers');
+            Route::get('/getOthers/{id}', 'getOthers');
+            Route::delete('/deleteOthers/{id}', 'deleteOthers');
 
             Route::post('/addAddressDetails', 'addAddressDetails');
             Route::get('/getAddressDetails/{id}', 'getAddressDetails');
@@ -211,6 +215,20 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('/updateclaimhierarchy/{id}', 'updateclaimhierarchy');
             Route::post('/updatecashhierarchy/{id}', 'updatecashhierarchy');
             Route::post('/updateeleavehierarchy/{id}', 'updateeleavehierarchy');
+
+            Route::post('/addEmployeeEducation', 'addEmployeeEducation');
+            Route::post('/updateEmployeeEducation', 'updateEmployeeEducation');
+            Route::get('/getEmployeeEducation/{id}', 'getEmployeeEducation');
+            Route::delete('/deleteEmployeeEducation/{id}', 'deleteEmployeeEducation');
+            Route::post('/addEmployeeOthers', 'addEmployeeOthers');
+            Route::post('/updateEmployeeOthers', 'updateEmployeeOthers');
+            Route::get('/getEmployeeOthers/{id}', 'getEmployeeOthers');
+            Route::delete('/deleteEmployeeOthers/{id}', 'deleteEmployeeOthers');
+
+            Route::post('/addEmployeeAddressDetails', 'addEmployeeAddressDetails');
+            Route::get('/getEmployeeAddressDetails/{id}', 'getEmployeeAddressDetails');
+            Route::post('/updateEmployeeAddressDetails', 'updateEmployeeAddressDetails');
+            Route::delete('/deleteEmployeeAddressDetails/{id}', 'deleteEmployeeAddressDetails');
         });
 
         Route::controller(SettingController::class)->group(function () {
