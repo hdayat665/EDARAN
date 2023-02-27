@@ -31,6 +31,7 @@ requirejs.config({
         viewAssignLocation: assets + "/js/viewAssignLocation",
         myProjectJs: assets + "/js/myProjectJs",
         projectReportListingJs: assets + "/js/projectReportListingJs",
+        eclaimReportJs: assets + "/js/eclaimReportJs",
         projectStatusJs: assets + "/js/projectStatusJs",
         typeOfLogsJs: assets + "/js/typeOfLogsJs",
         myTimesheetJs: assets + "/js/myTimesheetJs",
@@ -224,7 +225,9 @@ if ($("#myProjectJs").length > 0) {
 if ($("#projectReportListingJs").length > 0) {
     requirejs(["projectReportListingJs"]);
 }
-
+if ($("#eclaimReportJs").length > 0) {
+    requirejs(["eclaimReportJs"]);
+}
 if ($("#projectStatusJs").length > 0) {
     requirejs(["projectStatusJs"]);
 }

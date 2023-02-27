@@ -19,6 +19,7 @@ use App\Http\Controllers\Project\CustomerController;
 use App\Http\Controllers\Project\ProjectController;
 use App\Http\Controllers\Report\ProjectReportController;
 use App\Http\Controllers\Report\TimesheetReportController;
+use App\Http\Controllers\Report\EclaimReportController;
 use App\Http\Controllers\MYLeave\MyleaveController;
 use App\Http\Controllers\Eleave\EleaveController;
 use Illuminate\Support\Facades\Storage;
@@ -449,7 +450,11 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('/searchOvertimeReport', 'searchOvertimeReport');
             // Route::get('/getReportAllEmployee', 'getReportAllEmployee');
         });
-
+        Route::controller(EclaimReportController::class)->group(function () {
+            Route::get('/eclaimListing', 'eclaimListingView');
+            Route::get('/eclaim/searchAllReport', 'reportAllView');
+           
+        });
         Route::controller(MyTimesheetController::class)->group(function () {
             Route::get('/myTimesheet', 'myTimesheetView');
             Route::post('/createLog', 'createLog');

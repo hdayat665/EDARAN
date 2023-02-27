@@ -812,7 +812,7 @@
                                 </a>
                                 <div class="menu-submenu">
                                     <div class="menu-item">
-                                        <a href="#" class="menu-link">
+                                        <a href="/eclaimListing" class="menu-link">
                                             <div class="menu-icon">
                                                 <i class="fa fa-money-bill-wave text-gray"></i>
                                             </div>
