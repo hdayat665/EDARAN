@@ -23,7 +23,7 @@ class CashAdvanceDetail extends Model
     {
         return $this->belongsTo(UserProfile::class, 'user_id', 'user_id');
     }
-
+    
     public function project()
     {
         return $this->belongsTo(Project::class, 'project_id', 'id');
