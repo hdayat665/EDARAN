@@ -54,6 +54,7 @@ class TimesheetReportController extends Controller
 
         if ($input['category'] == 'Summary') {
             $data['summary'] = $trs->getdatabyemployee();
+            // pr($data['summary']);
             $view = 'pages.report.timesheet.employeeReportBySummary';
         }
         else if ($input['category'] == '') {  
@@ -106,7 +107,7 @@ class TimesheetReportController extends Controller
         $data = [];
         $trs = new TimesheetReportService;
 
-        $data['overtimes'] = $trs->getDataEmployeeSummary();
+        $data['overtimes'] = $trs->getDataEmployeeSummaryOvertime();
 
         return view('pages.report.timesheet.overtimeReport', $data);
     }

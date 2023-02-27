@@ -51,7 +51,7 @@ class TimesheetReportService
         }
 
         if (isset($input['department'])) {
-            $cond[3] = ['d.departmentName', $input['department']];
+            $cond[3] = ['d.id', $input['department']];
         }
 
         if (isset($input['designation'])) {
@@ -85,6 +85,50 @@ class TimesheetReportService
 
         return $data;
     }
+
+    public function getDataEmployeeSummaryOvertime($input = [])
+    {
+        $cond[1] = ['a.tenant_id', Auth::user()->tenant_id];
+    
+        if (isset($input['project'])) {
+            $cond[2] = ['a.project_id', $input['project']];
+        }
+    
+        if (isset($input['department'])) {
+            $cond[3] = ['d.id', $input['department']];
+        }
+    
+        if (isset($input['designation'])) {
+            $cond[5] = ['e.designationName', $input['designation']];
+        }
+    
+        if (isset($input['user_id'])) {
+            $cond[6] = ['c.user_id', $input['user_id']];
+        }
+    
+        $startDate = date_format(date_create(now()), 'Y').'-01-01';
+        $endDate = date_format(date_create(now()), 'Y').'-12-31';
+    
+        if (isset($input['date_range'])) {
+            $dateRange = \explode(' - ', $input['date_range']);
+            $startDate = date_format(date_create($dateRange[0]), 'Y-m-d');
+            $endDate = date_format(date_create($dateRange[1]), 'Y-m-d');
+        }
+    
+        $data = DB::table('timesheet_log as a')
+            ->leftJoin('project as b', 'a.project_id', '=', 'b.id')
+            ->leftJoin('employment as c', 'a.user_id', '=', 'c.user_id')
+            ->leftJoin('department as d', 'c.department', '=', 'd.id')
+            ->leftJoin('designation as e', 'c.designation', '=', 'e.id')
+            ->select('a.*', 'b.project_name', 'c.employeeName', 'd.departmentName', 'e.designationName')
+            ->where($cond)
+            ->whereBetween('date', [$startDate, $endDate])
+            ->whereRaw('SEC_TO_TIME(TIME_TO_SEC(a.total_hour)) > "09:00:00"')
+            ->get();
+    
+        return $data;
+    }
+    
                              
     public function employeeReportAll($input = [])
     {

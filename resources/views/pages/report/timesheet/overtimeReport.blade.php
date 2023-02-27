@@ -90,6 +90,7 @@
                                 <th class="text-nowrap">Employee Name</th>
                                 <th class="text-nowrap">Designation</th>
                                 <th class="text-nowrap">Department</th>
+                                {{-- <th class="text-nowrap">Total Overtime Hours</th> --}}
                                 <th class="text-nowrap">Total Overtime Hours</th>
                             </tr>
                         </thead>
@@ -102,7 +103,14 @@
                                 <td>{{$overtime->employeeName}}</td>
                                 <td>{{$overtime->designationName}}</td>
                                 <td>{{$overtime->departmentName}}</td>
-                                <td>{{$overtime->total_hour}}</td>
+                                {{-- <td>{{$overtime->total_hour}}</td> --}}
+                                <td>
+                                    <?php
+                                        $diff = date_create('00:00:00')->diff(date_create($overtime->total_hour));
+                                        $excess = max($diff->h - 9, 0) . ':' . $diff->format('%I:%S');
+                                        echo $excess;
+                                    ?>
+                                </td>
                             </tr>
                             @endforeach
                             @endif
