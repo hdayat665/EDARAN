@@ -38,6 +38,12 @@ class UserChildren extends Authenticatable
         'educationLevel',
         'instituition',
         'supportDoc',
+        'address1',
+        'address2',
+        'postcode',
+        'city',
+        'state',
+        'country',
     ];
 }
 

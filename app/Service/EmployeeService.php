@@ -15,6 +15,7 @@ use App\Models\UserProfile;
 use App\Models\Users;
 use App\Models\UsersDetails;
 use App\Models\UserSibling;
+use App\Models\UserQualification;
 use App\Models\Vehicle;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Mail\Attachment;
@@ -69,6 +70,13 @@ class EmployeeService
     public function addAddress($r)
     {
         $input = $r->input();
+
+        // Check if the "permanent same as correspondent address" checkbox is checked
+        if(isset($input['sameAsPermenant']) && $input['sameAsPermenant'] == 'on') {
+            $input['addressType'] = 3; //BOTH
+        } else {
+            $input['addressType'] = 1; //PERMANENT
+        }
 
         UserAddress::create($input);
 
@@ -158,7 +166,9 @@ class EmployeeService
 
         $data['user'] = Users::where('id', $data['user_id'])->first();
         $data['profile'] = UserProfile::where('user_id', $data['user_id'])->first();
+        $data['qualification'] = UserQualification::where('user_id', $data['user_id'])->get();
         $data['address'] = UserAddress::where('user_id', $data['user_id'])->first();
+        $data['addressDetails'] = UserAddress::where('user_id', $data['user_id'])->get();
         $data['emergency'] = UserEmergency::where('user_id', $data['user_id'])->first();
         $data['companions'] = UserCompanion::where('user_id', $data['user_id'])->get();
         $data['childrens'] = UserChildren::where('user_id', $data['user_id'])->get();
@@ -189,11 +199,38 @@ class EmployeeService
             }
         }
 
+        $addressId[] = '';
+        if ($data['addressDetails']) {
+            foreach ($data['addressDetails'] as $address) {
+                $addressId[] = $address->id ?? null;
+            }
+        }
+
+        $educationId[] = '';
+        if ($data['qualification']) {
+            foreach ($data['qualification'] as $education) {
+                $educationId[] = $education->id ?? null;
+            }
+        }
+
+        $othersId[] = '';
+        if ($data['qualification']) {
+            foreach ($data['qualification'] as $others) {
+                $othersId[] = $others->id ?? null;
+            }
+        }
+
         $data['siblingId'] = implode(',', $siblingId);
 
         $data['parentId'] = implode(',', $parentId);
 
         $data['childId'] = implode(',', $childId);
+
+        $data['addressId'] = implode(',', $addressId);
+
+        $data['educationId'] = implode(',', $educationId);
+
+        $data['othersId'] = implode(',', $othersId);
 
         $data['idRun'] = 1;
 
@@ -210,6 +247,7 @@ class EmployeeService
         $data['citys'] = city();
         $data['americass'] = americas();
         $data['asias'] = asias();
+        $data['addressType'] = addressType();
 
         return $data;
     }
@@ -945,6 +983,251 @@ class EmployeeService
         $data['type'] = 'success';
         $data['msg'] = 'Success Create Address';
         $data['data'] = UserProfile::where('user_id', $input['user_id'])->first();
+
+        return $data;
+    }
+
+    public function getEmployeeAddressDetails($id = '')
+    {
+        $data['data'] = UserAddress::where('id', $id)->first();
+        $data['msg'] = 'Success Get Address Data';
+
+        return $data;
+    }
+
+    public function addEmployeeAddressDetails($r)
+    {
+        $input = $r->input();
+        $input['user_id'] = Auth::user()->id;
+        UserAddress::create($input);
+
+        $data['status'] = config('app.response.success.status');
+        $data['type'] = config('app.response.success.type');
+        $data['title'] = config('app.response.success.title');
+        $data['msg'] = 'Success add address';
+
+        return $data;
+    }
+
+    public function updateEmployeeAddressDetails($r)
+    {
+        $input = $r->input();
+
+        $user_id = Auth::user()->id;
+        $id = $input['id'] ?? 1;
+
+        $user = UserAddress::where('user_id', $id)->first();
+
+        if(!$user)
+        {
+            $data['status'] = config('app.response.error.status');
+            $data['type'] = config('app.response.error.type');
+            $data['title'] = config('app.response.error.title');
+            $data['msg'] = 'Address not found';
+
+        } else {
+
+            $user->update($input);
+
+            $data['status'] = config('app.response.success.status');
+            $data['type'] = config('app.response.success.type');
+            $data['title'] = config('app.response.success.title');
+            $data['msg'] = 'Success Update Address';
+        }
+
+        return $data;
+    }
+
+    public function deleteEmployeeAddressDetails($id = '')
+    {
+        $addressDetails = UserAddress::where('id', $id)->first();
+
+        if(!$addressDetails)
+        {
+            $data['status'] = config('app.response.error.status');
+            $data['type'] = config('app.response.error.type');
+            $data['title'] = config('app.response.error.title');
+            $data['msg'] = 'Address not found';
+        }else{
+            UserAddress::where('id',$id)->delete();
+            $data['status'] = config('app.response.success.status');
+            $data['type'] = config('app.response.success.type');
+            $data['title'] = config('app.response.success.title');
+            $data['msg'] = 'Address deleted';
+        }
+
+        return $data;
+    }
+
+    public function addEmployeeEducation($r)
+    {
+        $input = $r->input();
+        $input['user_id'] = Auth::user()->id;
+        UserQualification::create($input);
+
+        $data['status'] = config('app.response.success.status');
+        $data['type'] = config('app.response.success.type');
+        $data['title'] = config('app.response.success.title');
+        $data['msg'] = 'Success add education';
+
+        return $data;
+    }
+
+    public function getEmployeeEducation($id = '')
+    {
+        $data['data'] = UserQualification::where('id', $id)->first();
+        // pr(Storage::path($data['data']->supportDoc));
+        $data['msg'] = 'Success Get Education Data';
+
+        return $data;
+    }
+
+    public function updateEmployeeEducation($r)
+    {
+        $input = $r->input();
+
+        $user_id = Auth::user()->id;
+        $id = $input['id'] ?? 1;
+
+        $user = UserQualification::where('id', $id)->first();
+
+        if($user)
+        {
+            UserQualification::where('id', $id)->update($input);
+
+            $data['status'] = config('app.response.success.status');
+            $data['type'] = config('app.response.success.type');
+            $data['title'] = config('app.response.success.title');
+            $data['msg'] = 'Success Update Education';
+
+            // $data['status'] = config('app.response.error.status');
+            // $data['type'] = config('app.response.error.type');
+            // $data['title'] = config('app.response.error.title');
+            // $data['msg'] = 'user not found';
+
+        }else{
+
+            // if ($_FILES['supportDoc']['name'])
+            // {
+            //     $payslip = upload($r->file('supportDoc'));
+            //     $input['supportDoc'] = $payslip['filename'];
+
+            //     if (!$input['supportDoc']) {
+            //         unset($input['supportDoc']);
+            //     }
+            // }
+
+            
+        }
+
+        return $data;
+
+    }
+
+    public function deleteEmployeeEducation($id = '')
+    {
+        $user = UserQualification::where('id',$id)->first();
+
+        if(!$user)
+        {
+            $data['status'] = config('app.response.error.status');
+            $data['type'] = config('app.response.error.type');
+            $data['title'] = config('app.response.error.title');
+            $data['msg'] = 'Education not found';
+        }else{
+            UserQualification::where('id',$id)->delete();
+            $data['status'] = config('app.response.success.status');
+            $data['type'] = config('app.response.success.type');
+            $data['title'] = config('app.response.success.title');
+            $data['msg'] = 'Education deleted';
+        }
+
+        return $data;
+    }
+
+
+    public function addEmployeeOthers($r)
+    {
+        $input = $r->input();
+        $input['user_id'] = Auth::user()->id;
+        UserQualification::create($input);
+
+        $data['status'] = config('app.response.success.status');
+        $data['type'] = config('app.response.success.type');
+        $data['title'] = config('app.response.success.title');
+        $data['msg'] = 'Success add others qualification';
+
+        return $data;
+    }
+
+    public function getEmployeeOthers($id = '')
+    {
+        $data['data'] = UserQualification::where('id', $id)->first();
+        // pr(Storage::path($data['data']->supportDoc));
+        $data['msg'] = 'Success Get Others Qualification';
+
+        return $data;
+    }
+
+    public function updateEmployeeOthers($r)
+    {
+        $input = $r->input();
+
+        $user_id = Auth::user()->id;
+        $id = $input['id'] ?? 1;
+
+        $user = UserQualification::where('id', $id)->first();
+
+        if($user)
+        {
+            UserQualification::where('id', $id)->update($input);
+
+            $data['status'] = config('app.response.success.status');
+            $data['type'] = config('app.response.success.type');
+            $data['title'] = config('app.response.success.title');
+            $data['msg'] = 'Success Update Others Qualification';
+
+            // $data['status'] = config('app.response.error.status');
+            // $data['type'] = config('app.response.error.type');
+            // $data['title'] = config('app.response.error.title');
+            // $data['msg'] = 'user not found';
+
+        }else{
+
+            // if ($_FILES['supportDoc']['name'])
+            // {
+            //     $payslip = upload($r->file('supportDoc'));
+            //     $input['supportDoc'] = $payslip['filename'];
+
+            //     if (!$input['supportDoc']) {
+            //         unset($input['supportDoc']);
+            //     }
+            // }
+
+            
+        }
+
+        return $data;
+
+    }
+
+    public function deleteEmployeeOthers($id = '')
+    {
+        $user = UserQualification::where('id',$id)->first();
+
+        if(!$user)
+        {
+            $data['status'] = config('app.response.error.status');
+            $data['type'] = config('app.response.error.type');
+            $data['title'] = config('app.response.error.title');
+            $data['msg'] = 'Others Qualification not found';
+        }else{
+            UserQualification::where('id',$id)->delete();
+            $data['status'] = config('app.response.success.status');
+            $data['type'] = config('app.response.success.type');
+            $data['title'] = config('app.response.success.title');
+            $data['msg'] = 'Others Qualification deleted';
+        }
 
         return $data;
     }

@@ -15,8 +15,6 @@
             </li>
         </ul>
    </div>
-
-
     <div class="tab-content panel m-0 rounded-0 p-3">
         <div class="tab-pane fade active show" id="quali-tab-1">
             <div class="row p-2">
@@ -49,7 +47,7 @@
                                 <div class="dropdown-menu">
                                     <a href="javascript:;" id="educationModalEdit{{$education->id}}" data-id="{{$education->id}}" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#editmodaledd"> Edit</a>
                                     <div class="dropdown-divider"></div>
-                                    <a href="javascript:;" id="" data-id="" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#deleteEducation"> Delete</a>
+                                    <a href="javascript:;" id="deleteEducation{{$education->id}}" data-id="{{$education->id}}" class="dropdown-item" data-bs-toggle="modal"> Delete</a>
                                     <div class="dropdown-divider"></div>
                                 </div>
                             </td>
@@ -62,6 +60,7 @@
                         </tr>
                         @endforeach
                     @endif
+                    <span style="display: none"><input type="text" id="educationId" value="{{$educationId}}"></span>
                     </tbody>
                 </table>
             </div>
@@ -69,10 +68,10 @@
         </div>
         <div class="tab-pane fade show" id="quali-tab-2">
             <div class="row p-2">
-                <button class="btn btn-primary col-md-2" data-bs-toggle="modal" data-bs-target="#addmodalothers"  >Add Others</button>
+                <button class="btn btn-primary col-md-2" data-bs-toggle="modal" data-bs-target="#addmodalothers">Add Others</button>
             </div>
             <div class="row p-2">
-                <table  id=""  class="table table-striped table-bordered align-middle">
+                <table id=""  class="table table-striped table-bordered align-middle">
                     <thead>
                     <tr>
                         <th data-orderable="false">No</th>	
@@ -123,9 +122,9 @@
                             <td>
                                 <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle"><i class="fa fa-cogs"></i> Actions <i class="fa fa-caret-down"></i></a>
                                 <div class="dropdown-menu">
-                                    <a href="javascript:;" id="educationModalEdit{{$others->id}}" data-id="{{$others->id}}" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#addmodalothers"> Edit</a>
+                                    <a href="javascript:;" id="othersQualificationModalEdit{{$others->id}}" data-id="{{$others->id}}" class="dropdown-item" data-bs-toggle="modal"> Edit</a>
                                     <div class="dropdown-divider"></div>
-                                    <a href="javascript:;" id="" data-id="" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#deleteEducation"> Delete</a>
+                                    <a href="javascript:;" id="" data-id="" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#deleteOthers"> Delete</a>
                                     <div class="dropdown-divider"></div>
                                 </div>
                             </td>
@@ -136,6 +135,7 @@
                         </tr>
                         @endforeach
                     @endif
+                    <span style="display: none"><input type="text" id="othersId" value="{{$othersId}}"></span>
                     </tbody>
                 </table>
             </div>
@@ -150,219 +150,7 @@
     </div>
 </div>
 
-
-{{-- modal add education --}}
-<div class="modal fade " id="modalladded" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="exampleModalLabel">Add Education</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-            <form id="addEducation">
-            <div class="row p-2">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="" class="form-label">From Date</label>
-                        <input type="text" class="form-control" id="datepicker-fromdate" placeholder="YYYY/MM/DD" name="fromDate" value="">
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="" class="form-label">To Date</label>
-                        <input type="text" class="form-control" id="datepicker-todate" placeholder="YYYY/MM/DD" name="toDate" value="">
-                    </div>
-                </div>
-            </div>
-            <div class="row p-2">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="" class="form-label">Institute Name</label>
-                        <input type="text" class="form-control" id="instituteName" placeholder="INSTITUTE NAME" name="instituteName" value="">
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="" class="form-label">Highest Level Attained</label>
-                        <input type="text" class="form-control" id="highestLevelAttained" placeholder="HIGHEST LEVEL ATTAINED" name="highestLevelAttained" value="">
-                    </div>
-                </div>
-            </div>
-            <div class="row p-2">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="" class="form-label">Result</label>
-                        <input type="text" class="form-control" id="result" placeholder="RESULT" name="result" value="">
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="" class="form-label">Education Attachments</label>
-                        <input type="file" class="form-control-file" id="">
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button class="btn btn-primary" id="saveEducation">Save changes</button>
-        </div>
-    </form>
-      </div>
-    </div>
-  </div>
-  
-{{-- end modal add education --}}
-
-{{-- start modal edit education --}}
-<div class="modal fade " id="editmodaledd" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Education</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-            <form id="educationModalEdit">
-            <div class="row p-2">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="" class="form-label">From Date</label>
-                        <input type="text" class="form-control" id="educationFromDate1" value="{{ $education->fromDate ??''}}" placeholder="YYYY/MM/DD">
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="" class="form-label">To Date</label>
-                        <input type="text" class="form-control" id="educationToDate1" value="{{ $education->toDate ?? '' }}" placeholder="YYYY/MM/DD">
-                    </div>
-                </div>
-            </div>
-            <div class="row p-2">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="" class="form-label">Institute Name</label>
-                        <input type="text" class="form-control" id="educationinstituteName1" value="{{ $education->instituteName ?? '' }}" placeholder="INSTITUTE NAME">
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="" class="form-label">Highest Level Attained</label>
-                        <input type="text" class="form-control" id="educationhighestLevelAttained1" value="{{ $education->highestLevelAttained ?? '' }}" placeholder="HIGHEST LEVEL ATTAINED">
-                    </div>
-                </div>
-            </div>
-            <div class="row p-2">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="" class="form-label">Result</label>
-                        <input type="text" class="form-control" id="educationResult1" value="{{ $education->result ?? '' }}" placeholder="RESULT">
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="" class="form-label">Education Attachments</label>
-                        <input type="file" class="form-control-file" id="">
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary" id="editEducation">Save changes</button>
-        </div>
-    </form>
-      </div>
-    </div>
-  </div>
-  
-{{-- end modal add education --}}
-
-{{-- start modal others education --}}
-<div class="modal fade " id="addmodalothers" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="exampleModalLabel">Add Others Education</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-           <div class="row p-2">
-                <div class="form-group row">
-                    <label for="staticEmail" class="col-sm-4 col-form-label">Date</label>
-                    <div class="col-sm-8">
-                        <input type="text" class="form-control" id="datepicker-others" placeholder="YYYY/MM/DD">
-                    </div>
-                </div>
-           </div>
-           <div class="row p-2">
-                <div class="form-group row">
-                    <label for="staticEmail" class="col-sm-4 col-form-label">Professional Qualification Details</label>
-                    <div class="col-sm-8">
-                        <input type="text" class="form-control" placeholder="PROFESSIONAL QUALIFICATION DETAILS">
-                    </div>
-                </div>
-            </div>
-            <div class="row p-2">
-                <div class="form-group row">
-                    <label for="staticEmail" class="col-sm-4 col-form-label">Attachments</label>
-                    <div class="col-sm-8">
-                        <input type="file" class="form-control-file" id="">
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
-        </div>
-      </div>
-    </div>
-  </div>
-  
-{{-- end modal add education --}}
-
-{{-- start modal edit others education --}}
-<div class="modal fade " id="editmodalothers" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Others Education</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-           <div class="row p-2">
-                <div class="form-group row">
-                    <label for="staticEmail" class="col-sm-4 col-form-label">Date</label>
-                    <div class="col-sm-8">
-                        <input type="text" class="form-control" id="datepicker-othersu" placeholder="YYYY/MM/DD">
-                    </div>
-                </div>
-           </div>
-           <div class="row p-2">
-                <div class="form-group row">
-                    <label for="staticEmail" class="col-sm-4 col-form-label">Professional Qualification Details</label>
-                    <div class="col-sm-8">
-                        <input type="text" class="form-control" placeholder="PROFESSIONAL QUALIFICATION DETAILS">
-                    </div>
-                </div>
-            </div>
-            <div class="row p-2">
-                <div class="form-group row">
-                    <label for="staticEmail" class="col-sm-4 col-form-label">Attachments</label>
-                    <div class="col-sm-8">
-                        <input type="file" class="form-control-file" id="">
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
-        </div>
-      </div>
-    </div>
-  </div>
-  
-{{-- end modal edit education --}}
+@include('modal.myProfile.addEducation')
+@include('modal.myProfile.editEducation')
+@include('modal.myProfile.addOthers')
+@include('modal.myProfile.editOthers')

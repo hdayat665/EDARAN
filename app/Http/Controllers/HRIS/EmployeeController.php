@@ -301,4 +301,115 @@ class EmployeeController extends Controller
 
         return response()->json($result);
     }
+
+    public function addEmployeeEducation(Request $r)
+    {
+        $ps = new EmployeeService;
+
+        $result = $ps->addEmployeeEducation($r);
+
+        return response()->json($result);
+    }
+
+    public function getEmployeeEducation($id = '')
+    {
+        $ps = new EmployeeService;
+
+        $result = $ps->getEmployeeEducation($id);
+
+        return response()->json($result);
+    }
+
+    public function updateEmployeeEducation(Request $r)
+    {
+        $ps = new EmployeeService;
+
+        $result = $ps->updateEmployeeEducation($r);
+
+        return response()->json($result);
+    }
+
+    public function deleteEmployeeEducation($id = '')
+    {
+        $ps = new EmployeeService;
+
+        $result = $ps->deleteEmployeeEducation($id);
+
+        return response()->json($result);
+    }
+
+
+    public function addEmployeeOthers(Request $r)
+    {
+        $ps = new EmployeeService;
+
+        $result = $ps->addEmployeeOthers($r);
+
+        return response()->json($result);
+    }
+
+    public function getEmployeeOthers($id = '')
+    {
+        $ps = new EmployeeService;
+
+        $result = $ps->getEmployeeOthers($id);
+
+        return response()->json($result);
+    }
+
+    public function updateEmployeeOthers(Request $r)
+    {
+        $ps = new EmployeeService;
+
+        $result = $ps->updateEmployeeOthers($r);
+
+        return response()->json($result);
+    }
+
+    public function deleteEmployeeOthers($id = '')
+    {
+        $ps = new EmployeeService;
+
+        $result = $ps->deleteEmployeeOthers($id);
+
+        return response()->json($result);
+    }
+
+
+
+    public function getEmployeeAddressDetails(Request $request)
+    {
+        $ps = new EmployeeService;
+
+        $result = $ps->getEmployeeAddressDetails($request->id);
+
+        return response()->json($result);
+    }
+
+    public function addEmployeeAddressDetails(Request $r)
+    {
+        $ps = new EmployeeService;
+
+        $result = $ps->addEmployeeAddressDetails($r);
+
+        return response()->json($result);
+    }
+
+    public function updateEmployeeAddressDetails(Request $r)
+    {
+        $ps = new EmployeeService;
+
+        $result = $ps->updateEmployeeAddressDetails($r);
+
+        return response()->json($result);
+    }
+
+    public function deleteEmployeeAddressDetails($id = '')
+    {
+        $ps = new EmployeeService;
+
+        $result = $ps->deleteEmployeeAddressDetails($id);
+
+        return response()->json($result);
+    }
 }

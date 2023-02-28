@@ -156,12 +156,26 @@ if (!function_exists('educationLevel')) {
     {
         $data = [
 
-            '1' => 'PRIMARY SCHOOL',
-            '2' => 'LOWER SECONDARY SCHOOL',
-            '3' => 'UPPER SECONDARY SCHOOL',
-            '4' => 'PRE-UNIVERSITY',
-            '5' => 'MATRICULATION/FOUNDATION',
-            '6' => 'HIGHER EDUCATION',
+            '1' => 'NONE',
+            '2' => 'YEAR 1',
+            '3' => 'YEAR 2',
+            '4' => 'YEAR 3',
+            '5' => 'YEAR 4',
+            '6' => 'YEAR 5',
+            '7' => 'YEAR 6',
+            '8' => 'FORM 1',
+            '9' => 'FORM 2',
+            '10' => 'FORM 3',
+            '11' => 'FORM 4',
+            '12' => 'FORM 5',
+            '13' => 'STPM',
+            '14' => 'STAM',
+            '15' => 'MATRICULATION',
+            '16' => 'FOUNDATION',
+            '17' => 'DIPLOMA',
+            '18' => "BACHELOR'S DEGREE",
+            '19' => "MASTER'S DEGREE",
+            '20' => "DOCTORATE'S DEGREE",
         ];
 
         if ($id) {
@@ -177,12 +191,14 @@ if (!function_exists('educationType')) {
     {
         $data = [
 
-            '1' => 'PRIMARY SCHOOL (YEAR 6-12)',
-            '2' => 'LOWER SECONDARY SCHOOL (FORM 1-3)',
-            '3' => 'UPPER SECONDARY SCHOOL (FORM 4 & 5)',
-            '4' => 'PRE-UNIVERSITY (STMP / STAM)',
-            '5' => 'MATRICULATION/FOUNDATION ',
-            '6' => 'HIGHER EDUCATION DIPLOMA/ BACHELOR DEGREE/ MASTER DEGREE/ DOCTORAL DEGREE',
+            '1' => 'PRE-SCHOOL',
+            '2' => 'PRIMARY SCHOOL',
+            '3' => 'LOWER SECONDARY SCHOOL',
+            '4' => 'UPPER SECONDARY SCHOOL',
+            '5' => 'PRE-UNIVERSITY',
+            '6' => 'MATRICULATION/FOUNDATION',
+            '7' => 'CERTIFICATE',
+            '8' => 'HIGHER EDUCATION',
         ];
 
         if ($id) {
@@ -206,8 +222,16 @@ if (!function_exists('relationship')) {
             '6' => 'MOTHER',
             '7' => 'FATHER-IN-LAW',
             '8' => 'MOTHER-IN-LAW',
-            '9' => 'SISTER',
-            '10' => 'BROTHER',
+            '9' => 'BROTHER',
+            '10' => 'SISTER',
+            '11' => 'BROTHER-IN-LAW',
+            '12' => 'SISTER-IN-LAW',
+            '13' => 'GUARDIAN',
+            '14' => 'STEP-FATHER',
+            '15' => 'STEP-MOTHER',
+            '16' => 'SPOUSE',
+            '17' => 'GUARDIAN',
+
         ];
 
         if ($id) {
@@ -1079,7 +1103,7 @@ if (!function_exists('getSupervisor')) {
     }
 }
 
-if (!function_exists('getEmployeeName')) {
+if (!function_exists('getEmployeeName')) { 
     function getEmployeeName($id = '')
     {
         $data = Employee::where('user_id', $id)->select('employeeName')->first()->employeeName;
@@ -1125,14 +1149,14 @@ if (!function_exists('getWorkingEmail')) {
 
 if (!function_exists('getDepartmentName')) {
     function getDepartmentName($user_id = '')
-    {
+    { 
         $cond[1] = ['user_id', $user_id];
         $data = DB::table('employment as a')
             ->leftJoin('department as b', 'a.department', '=', 'b.id')
             ->select('b.departmentName', 'a.employeeName')
             ->where($cond)
             ->first();
-        return $data;
+        return $data->departmentName;
     }
 }
 

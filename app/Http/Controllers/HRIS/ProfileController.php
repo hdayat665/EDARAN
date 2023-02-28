@@ -331,11 +331,11 @@ class ProfileController extends Controller
         return response()->json($result);
     }
 
-    public function saveEducation(Request $r)
+    public function addEducation(Request $r)
     {
         $ps = new ProfileService;
 
-        $result = $ps->saveEducation($r);
+        $result = $ps->addEducation($r);
 
         return response()->json($result);
     }
@@ -366,6 +366,45 @@ class ProfileController extends Controller
 
         return response()->json($result);
     }
+
+
+    public function addOthers(Request $r)
+    {
+        $ps = new ProfileService;
+
+        $result = $ps->addOthers($r);
+
+        return response()->json($result);
+    }
+
+    public function getOthers($id = '')
+    {
+        $ps = new ProfileService;
+
+        $result = $ps->getOthers($id);
+
+        return response()->json($result);
+    }
+
+    public function updateOthers(Request $r)
+    {
+        $ps = new ProfileService;
+
+        $result = $ps->updateOthers($r);
+
+        return response()->json($result);
+    }
+
+    public function deleteOthers($id = '')
+    {
+        $ps = new ProfileService;
+
+        $result = $ps->deleteOthers($id);
+
+        return response()->json($result);
+    }
+
+
 
     public function getAddressDetails(Request $request)
     {

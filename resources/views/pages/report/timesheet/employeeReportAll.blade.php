@@ -24,7 +24,7 @@
         <div class="panel-body">
             <div class="row p-2">
                 <div class="col-sm-12">
-                    <h5>Year : 2022</h5>
+                    <h5>Year : 2021</h5>
                 </div>
             </div>
             <div class="row p-2">
@@ -133,9 +133,12 @@
                 <thead>
                     <tr>
                         <th>No</th>
+                        {{-- <th>Department</th> --}}
+                        <th>Department Name</th>
                         <th>Employee Name</th>
                         <th>Designation</th>
                         <th>Status</th>
+                        <th>Date</th>
                         <th>1hb</th>
                         <th>2hb</th>
                         <th>3hb</th>
@@ -174,9 +177,12 @@
                     @foreach ($logs as $key => $row)
                         <tr>
                             <td>{{ $key + 1 }}</td>
+                            {{-- <td>{{ $row->departmentName }}</td> --}}
+                            <td>{{ $row->departmentName }}</td>
                             <td>{{ $row->employeeName }}</td>
                             <td>{{ $row->designationName }}</td>
                             <td>{{ $row->status }}</td>
+                            <td>{{ $row->date }}</td>
                             <td style="{{ isset($row->day_01) ? 'background-color: #00FF00;' : '' }}">{{ isset($row->day_01) ? $row->day_01 : '-' }}</td>
                             <td style="{{ isset($row->day_02) ? 'background-color: #00FF00;' : '' }}">{{ isset($row->day_02) ? $row->day_02 : '-' }}</td>
                             <td style="{{ isset($row->day_03) ? 'background-color: #00FF00;' : '' }}">{{ isset($row->day_03) ? $row->day_03 : '-' }}</td>
@@ -215,9 +221,10 @@
             </table>
             
             
+            
             <style>
                 .has-data {
-                    background-color: #AED6F1; /* set your desired background color here */
+                    background-color: #AED6F1; 
                 }
             </style>
             
@@ -225,14 +232,14 @@
 
            </div>
 
-
-
-
-            <div class="row p-2">
-                <div class="col align-self-start">
-                    <a href="/setting" class="btn btn-primary"  type="submit"><i class="fa fa-arrow-left"></i> Back</a>
-                </div>
+           <div class="row p-2">
+            <div class="col align-self-start">
+                <a href="javascript:history.back()"  class="btn btn-primary"  type="submit"><i class="fa fa-arrow-left"></i> Back</a>
             </div>
+        </div>
+
+
+            
         </div>
        
 </div>

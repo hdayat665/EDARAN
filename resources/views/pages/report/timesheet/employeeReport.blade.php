@@ -51,7 +51,7 @@
                                         <option class="form-label" value="">Please Select</option>
                                         <?php $projects = project() ?>
                                         @foreach ($projects as $project)
-                                        <option value="{{$project->id}}">{{$project->project_name}}</option>
+                                        <option value="">{{$project->project_name}}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -131,17 +131,24 @@
                                         <option value="{{$department->departmentName}}">{{$department->departmentName}}</option>
                                         @endforeach
                                     </select>
+                                    {{-- <select class="form-select" name="department">
+                                        <option class="form-label" value="">Please Select</option>
+                                        <?php $departments = getDepartment() ?>
+                                        @foreach ($departments as $department)
+                                        <option value="{{$department->id}}">{{$department->departmentName}}</option>
+                                        @endforeach
+                                    </select> --}}
                                 </div>
                             </div>
 
                             <div class="row p-2" >
                                 <div class="col-sm-3">
                                     <label for="emergency-firstname" class="form-label">Select Employee Name</label>
-                                    <select class="form-select" name="employeeName2">
+                                    <select class="form-select" name="user_id">
                                         <option class="form-label" value="" >Please Select</option>
                                         <?php $employees = getEmployee() ?>
                                         @foreach ($employees as $employee)
-                                        <option value="{{$employee->employeeName}}">{{$employee->employeeName}}</option>
+                                        <option value="{{$employee->user_id}}">{{$employee->employeeName}}</option>
                                         @endforeach
                                     </select>
                                 </div>
