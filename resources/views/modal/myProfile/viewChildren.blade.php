@@ -46,7 +46,7 @@
                                 
                                 <div class="col-sm-6">
                                     <label for="lastname" class="form-label">New Identification Number*</label>
-                                    <input type="text" id="idnumber5" name="idNo" value="{{$children->idNo ?? ''}}" class="form-control" placeholder="000000-00-0000" aria-describedby="lastname" readonly>
+                                    <input type="text" id="idnumber5" name="idNo" value="{{$children->idNo ?? ''}}" class="form-control" placeholder="000000000000" aria-describedby="lastname" readonly>
                                 </div>
                             </div>
                         </div>
@@ -64,7 +64,7 @@
                             <div class="row">
                                 <div class="col-sm-12">
                                     <label for="passport" class="form-label">Passport Number</label>
-                                    <input type="text" id="passports" name="passport" class="form-control" placeholder="A00000000" aria-describedby="passport" readonly>
+                                    <input type="text" id="passports" name="passport" class="form-control" placeholder="PASSPORT NUMBER" aria-describedby="passport" readonly>
                                 </div>
                             </div>
                         </div>
@@ -178,7 +178,7 @@
                     </div>
                     <div class="row p-2">
                         <div class="col-sm-6">
-                            <label for="address1" class="form-label" >Address 1*</label>
+                            <label for="address1" class="form-label" >Address 1</label>
                             <input type="text" id="" name="" value="" class="form-control" aria-describedby="" placeholder=" ADDRESS 1" readonly style="text-transform:uppercase">
                         </div>
                         <div class="col-sm-6">
@@ -188,18 +188,18 @@
                     </div>
                     <div class="row p-2">
                          <div class="col-sm-6">
-                            <label for="" class="form-label" >Postcode*</label>
+                            <label for="" class="form-label" >Postcode</label>
                             <input type="number" id="" name="" value="" class="form-control" readonly placeholder="00000" style="text-transform:uppercase">
                         </div>
                         <div class="col-sm-6">
-                            <label for="" class="form-label" >City*</label>
+                            <label for="" class="form-label" >City</label>
                             <input type="text" id="" name="citycom" value="" class="form-control" placeholder="CITY" readonly style="text-transform:uppercase">
                         </div>
                        
                     </div>
                     <div class="row p-2">
                         <div class="col-sm-6">
-                            <label for="state" class="form-label" >State*</label>
+                            <label for="state" class="form-label" >State</label>
                             <select class="form-select" name="state" id="" value="{{ $companion->state ?? '' }}"  style="pointer-events: none;" >
                                 <?php $state = state() ?>
                                 <option value="" label="PLEASE CHOOSE"  ></option>
@@ -209,7 +209,7 @@
                             </select>
                         </div>
                         <div class="col-sm-6">
-                            <label for="country" class="form-label" >Country*</label>
+                            <label for="country" class="form-label" >Country</label>
                             <select class="form-select" name="country" id="" value="{{ $companion->country ?? '' }}"  style="pointer-events: none;" >
                                 <option value="MY" label="Malaysia" selected ></option>
                                 <optgroup id="country-optgroup-Americas" label="Americas">

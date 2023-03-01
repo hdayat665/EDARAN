@@ -1,13 +1,13 @@
 <div class="tab-pane fade" id="default-tab-3">
     <div class="row p-2">
-        <button class="btn btn-primary col-md-3" data-bs-toggle="modal" data-bs-target="#modaladdaddress">Add New Address</button>
+        <button class="btn btn-primary col-md-3" data-bs-toggle="modal" data-bs-target="#modaladdaddress"><i class="fa fa-plus"></i> New Address</button>
     </div>
     <div class="row p-2">
         <table id="" class="table table-striped table-bordered align-middle">
             <thead>
                 <tr>
-                    <th class="text-nowrap">Action</th>
                     <th class="text-nowrap">No</th>
+                    <th class="text-nowrap">Action</th>
                     <th class="text-nowrap">Address</th>
                     <th class="text-nowrap">Address Type</th>
                 </tr>
@@ -18,18 +18,18 @@
                     @foreach ($addressDetails as $address)
                     <?php $id++ ?>
                     <tr>
+                        <td> {{$id}} </td>
                         <td>
                             <div class="btn-group me-1 mb-1">
-                                <a href="javascript:;" class="btn btn-primary btn-sm">Action</a>
-                                <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle btn-sm"><i class="fa fa-caret-down"></i></a>
-                                <div class="dropdown-menu dropdown-menu-end">
-                                    <a href="javascript:;" data-bs-toggle="modal" id="updateAddressDetails{{$address->id}}" data-id="{{$address->id}}" data-type="edit" class="dropdown-item">Update</a>
+                                <a href="javascript:;" class="btn btn-primary btn-sm dropdown-toggle"></i> Actions <i class="fa fa-caret-down"></i></a>
+                                    <div class="dropdown-menu">
+                                    <a href="javascript:;" data-bs-toggle="modal" id="updateAddressDetails{{$address->id}}" data-id="{{$address->id}}" data-type="edit" class="dropdown-item">Edit</a>
                                     <div class="dropdown-divider"></div>
-                                    <a href="javascript:;" id="deleteAddressDetails{{$address->id}}" data-id="{{$address->id}}" data-bs-toggle="modal" class="dropdown-item">Delete</a>
+                                    <a href="javascript:;" id="deleteAddressDetails{{$address->id}}" data-id="{{$address->id}}" data-bs-toggle="modal" class="dropdown-item"> Delete</a>
                                 </div>
                             </div>
                         </td>
-                        <td> {{$id}} </td>
+                        
                         <td style="text-transform: uppercase;">
                             {!! $address->address1 ?? '' !!}
                             {!! $address->address2 ? ', ' . $address->address2 . ',<br>' : '' !!}

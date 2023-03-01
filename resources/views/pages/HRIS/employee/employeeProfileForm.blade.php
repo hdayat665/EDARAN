@@ -43,13 +43,13 @@
             <label class="form-label col-form-label col-md-1">Identification Number*</label>
             
             <div class="col-md-2 idnumber">
-                <input type="number" name="idNo" id="idnumber" class="form-control mb-1px" placeholder="000000-00-0000" />
+                <input type="number" name="idNo" id="idnumber" class="form-control mb-1px" placeholder="000000000000" />
             </div>
         </div>
         <div class="row mb-15px">
             <label class="form-label col-form-label col-md-1">Passport Number</label>
             <div class="col-md-2">
-                <input type="text" name="passport" id="passport" class="form-control mb-10px" placeholder="A00000000"/>
+                <input type="text" name="passport" id="passport" class="form-control mb-10px" placeholder="PASSPORT NUMBER"/>
 
             </div>
             <label class="form-label col-form-label col-md-1">Expiry Date*</label>
@@ -241,8 +241,8 @@
             <div class="col-md-2">
                 <select class="form-select" name="gender" id="gender">
                     <option value="" label="PLEASE CHOOSE" selected="selected" ></option>
-                    <option value="1" label="Male">Male</option>
-                    <option value="2" label="Female">Female</option>
+                    <option value="1" label="MALE">MALE</option>
+                    <option value="2" label="FEMALE">FEMALE</option>
                     
                 </select>
                 
@@ -251,11 +251,11 @@
             <div class="col-md-5">
                 <select class="form-select" name="maritialStatus">
                     <option label="PLEASE CHOOSE" disabled selected></option>
-                    <option value="1" label="Single">Single</option>
-                    <option value="2" label="married">married</option>
-                    <option value="3" label="windowed">windowed</option>
-                    <option value="4" label="divorced">divorced</option>
-                    <option value="5" label="separated">separated</option>
+                    <option value="1" label="SINGLE">SINGLE</option>
+                    <option value="2" label="MARRIED">MARRIED</option>
+                    <option value="3" label="WIDOWED">WIDOWED</option>
+                    <option value="4" label="DIVORCED">DIVORCED</option>
+                    <option value="5" label="SEPARATED">SEPARATED</option>
 
                 </select>
             </div>
@@ -294,7 +294,7 @@
         <div class="row mb-15px">
             <label class="form-label col-form-label col-md-1">Home Number</label>
             <div class="col-md-5">
-                <input type="text" name="homeNo" class="form-control mb-10px" placeholder="00-0000000" />
+                <input type="text" name="homeNo" class="form-control mb-10px" placeholder="000000000" />
 
             </div>
             <label class="form-label col-form-label col-md-1">Extension Number</label>
@@ -307,7 +307,7 @@
         <div class="row mb-15px">
             <label class="form-label col-form-label col-md-1">Phone Number*</label>
             <div class="col-md-5">
-                <input type="text" name="phoneNo" id="phoneNo" class="form-control mb-10px" placeholder="000-00000000" />
+                <input type="text" name="phoneNo" id="phoneNo" class="form-control mb-10px" placeholder="00000000000" />
 
             </div>
             <label class="form-label col-form-label col-md-1">Personal Email*</label>

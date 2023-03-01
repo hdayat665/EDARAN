@@ -47,7 +47,7 @@
                                 </div>
                                 <div class="col-sm-6">
                                     <label for="lastname" class="form-label">New Identification Number*</label>
-                                    <input type="number" id="idnumber4" name="idNo" value="" class="form-control" placeholder="000000-00-0000">
+                                    <input type="number" id="idnumber4" name="idNo" value="" class="form-control" placeholder="000000000000">
                                     
                                 </div>
                             </div>
@@ -83,7 +83,7 @@
                                   
                                 </div>
                         <div class="col-sm-3">
-                            <label for="issuing-country" class="form-label">Issuing Country</label>
+                            <label for="issuing-country" class="form-label">Issuing Country*</label>
                             <select class="form-select" name="issuingCountry" id="" style="text-transform:uppercase">
                             <option value="MY" label="Malaysia" selected ></option>
                                 <optgroup id="country-optgroup-Americas" label="Americas">
@@ -193,7 +193,7 @@
 
                     <div class="row p-2">
                         <div class="col-sm-6">
-                            <label for="address1" class="form-label" >Address 1*</label>
+                            <label for="address1" class="form-label" >Address 1</label>
                             <input type="text" id="" name="address1" value="" class="form-control" aria-describedby="address1" placeholder="ADDRESS 1" style="text-transform:uppercase">
                         </div>
                         <div class="col-sm-6">
@@ -203,18 +203,18 @@
                     </div>
                     <div class="row p-2">
                         <div class="col-sm-6">
-                            <label for="lastname" class="form-label" >Postcode*</label>
+                            <label for="lastname" class="form-label" >Postcode</label>
                             <input type="number" id="" name="postcode" value="" class="form-control" style="text-transform:uppercase" placeholder="00000">
                         </div>
                         <div class="col-sm-6">
-                            <label for="firstname" class="form-label" >City*</label>
+                            <label for="firstname" class="form-label" >City</label>
                             <input type="text" id="" name="city" value="" class="form-control" style="text-transform:uppercase" placeholder="CITY">
                         </div>
                         
                     </div>
                     <div class="row p-2">
                         <div class="col-sm-6">
-                            <label for="state" class="form-label" >State*</label>
+                            <label for="state" class="form-label" >State</label>
                             <select class="form-select" name="state" id="statecom" value="{{ $companion->state ?? '' }}" style="text-transform:uppercase" >
                                 <?php $state = state() ?>
                                 <option value="" label="PLEASE CHOOSE"  ></option>
@@ -224,7 +224,7 @@
                             </select>
                         </div>
                         <div class="col-sm-6">
-                            <label for="country" class="form-label" >Country*</label>
+                            <label for="country" class="form-label" >Country</label>
                             <select class="form-select" name="country" id="countrycom" value="{{ $companion->country ?? '' }}" style="text-transform:uppercase" >
                                 <option value="MY" label="Malaysia" selected ></option>
                                 <optgroup id="country-optgroup-Americas" label="Americas">
