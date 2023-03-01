@@ -49,7 +49,7 @@
         <div class="row mb-15px">
             <label class="form-label col-form-label col-md-1">Passport Number</label>
             <div class="col-md-2">
-                <input type="text" name="passport" id="passport" class="form-control mb-10px" placeholder="A00000000"/>
+                <input type="text" name="passport" id="passport" class="form-control mb-10px" placeholder="PASSPORT NUMBER"/>
 
             </div>
             <label class="form-label col-form-label col-md-1">Expiry Date*</label>
@@ -294,7 +294,7 @@
         <div class="row mb-15px">
             <label class="form-label col-form-label col-md-1">Home Number</label>
             <div class="col-md-5">
-                <input type="text" name="homeNo" class="form-control mb-10px" placeholder="00-0000000" />
+                <input type="text" name="homeNo" class="form-control mb-10px" placeholder="000000000" />
 
             </div>
             <label class="form-label col-form-label col-md-1">Extension Number</label>

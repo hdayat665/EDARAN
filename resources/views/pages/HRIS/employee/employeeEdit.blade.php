@@ -173,7 +173,7 @@
                                                         <div class="row">
                                                             <div class="col-sm-12">
                                                                 <label for="passport" class="form-label">Passport Number</label>
-                                                                <input type="text" id="passport" name="passport" value="{{ $profile->passport ?? '' }}" class="form-control" aria-describedby="passport" readonly placeholder="A00000000">
+                                                                <input type="text" id="passport" name="passport" value="{{ $profile->passport ?? '' }}" class="form-control" aria-describedby="passport" readonly placeholder="PASSPORT NUMBER">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -298,7 +298,7 @@
                                                 <div class="row p-2">
                                                     <div class="col-sm-6">
                                                         <label for="home-number" class="form-label">Home Number</label>
-                                                        <input type="text" id="home-number" name="homeNo" value="{{$profile->homeNo ?? ''}}" class="form-control" aria-describedby="home-number" placeholder="00-0000000">
+                                                        <input type="text" id="home-number" name="homeNo" value="{{$profile->homeNo ?? ''}}" class="form-control" aria-describedby="home-number" placeholder="000000000">
                                                     </div>
                                                     <div class="col-sm-6">
                                                         <label for="extension-number" class="form-label">Extension Number</label>

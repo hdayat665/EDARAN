@@ -60,7 +60,7 @@
                                 <div class="col-sm-12">
                                     <label for="passport" class="form-label" >Passport Number</label>
                                   
-                                    <input type="text" id="" name=""  class="form-control" aria-describedby="" placeholder="A00000000">
+                                    <input type="text" id="" name=""  class="form-control" aria-describedby="" placeholder="PASSPORT NUMBER">
                                 </div>
                             </div>
                         </div>

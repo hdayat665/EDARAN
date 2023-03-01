@@ -62,7 +62,7 @@
                                 <div class="col-sm-12">
                                     <label for="passport" class="form-label">Passport Number</label>
                                   
-                                    <input type="text" id="passportparent" name="passport"  class="form-control" aria-describedby="passport" placeholder="A00000000">
+                                    <input type="text" id="passportparent" name="passport"  class="form-control" aria-describedby="passport" placeholder="PASSPORT NUMBER">
                                 </div>
                             </div>
                         </div>
@@ -94,7 +94,7 @@
                             <input type="text" id="dob6" name="DOB" class="form-control" aria-describedby="dob" readonly placeholder="YYYY/MM/DD">
                         </div>
                         <div class="col-sm-3" >
-                            <label for="dob" class="form-label">Age</label>
+                            <label for="dob" class="form-label">Age*</label>
                             <input type="text" id="age6" name="" class="form-control" aria-describedby="" readonly placeholder="AGE">
                         </div>
                         <div class="col-sm-6">

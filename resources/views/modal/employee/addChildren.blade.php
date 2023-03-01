@@ -59,7 +59,7 @@
                             <div class="row">
                                 <div class="col-sm-12">
                                     <label for="passport" class="form-label">Passport Number</label>
-                                    <input type="text" id="passportChild" name="passport" class="form-control" aria-describedby="passport" placeholder="A00000000">
+                                    <input type="text" id="passportChild" name="passport" class="form-control" aria-describedby="passport" placeholder="PASSPORT NUMBER">
                                 </div>
                             </div>
                         </div>
@@ -177,7 +177,7 @@
                     </div>
                     <div class="row p-2">
                         <div class="col-sm-6">
-                            <label for="address1" class="form-label" >Address 1*</label>
+                            <label for="address1" class="form-label" >Address 1</label>
                             <input type="text" id="" name="" value="" class="form-control" aria-describedby="address1" style="text-transform:uppercase" placeholder="ADDRESS 1">
                         </div>
                         <div class="col-sm-6">
@@ -187,18 +187,18 @@
                     </div>
                     <div class="row p-2">
                         <div class="col-sm-6">
-                            <label for="lastname" class="form-label">Postcode*</label>
+                            <label for="lastname" class="form-label">Postcode</label>
                             <input type="number" id="" name="" value="" class="form-control" style="text-transform:uppercase" placeholder="00000">
                         </div>
                         <div class="col-sm-6">
-                            <label for="firstname" class="form-label">City*</label>
+                            <label for="firstname" class="form-label">City</label>
                             <input type="text" id="" name="" value="" class="form-control" style="text-transform:uppercase" placeholder="CITY">
                         </div>
                         
                     </div>
                     <div class="row p-2">
                         <div class="col-sm-6">
-                            <label for="state" class="form-label">State*</label>
+                            <label for="state" class="form-label">State</label>
                             <select class="form-select" name="" id="" value="" style="text-transform:uppercase" >
                                 <?php $state = state() ?>
                                 <option value="" label="PLEASE CHOOSE"  ></option>
@@ -208,7 +208,7 @@
                             </select>
                         </div>
                         <div class="col-sm-6">
-                            <label for="country" class="form-label" >Country*</label>
+                            <label for="country" class="form-label" >Country</label>
                             <select class="form-select" name="" id="" value="" style="text-transform:uppercase" >
                                 <option value="MY" label="Malaysia" selected ></option>
                                 <optgroup id="country-optgroup-Americas" label="Americas">
@@ -298,7 +298,7 @@
                             <div class="row">
                                 <div class="col-sm-12">
                                     <label for="passport" class="form-label">Passport Number</label>
-                                    <input type="text" id="passports1" name="passport" class="form-control" aria-describedby="passport" placeholder=A00000000">
+                                    <input type="text" id="passports1" name="passport" class="form-control" aria-describedby="passport" placeholder=PASSPORT NUMBER">
                                 </div>
                             </div>
                         </div>
@@ -411,7 +411,7 @@
                     </div>
                     <div class="row p-2">
                         <div class="col-sm-6">
-                            <label for="address1" class="form-label" >Address 1*</label>
+                            <label for="address1" class="form-label" >Address 1</label>
                             <input type="text" id="" name="" value="" class="form-control" aria-describedby="address1" style="text-transform:uppercase" placeholder="ADDRESS 1">
                         </div>
                         <div class="col-sm-6">
@@ -421,18 +421,18 @@
                     </div>
                     <div class="row p-2">
                         <div class="col-sm-6">
-                            <label for="lastname" class="form-label" >Postcode*</label>
+                            <label for="lastname" class="form-label" >Postcode</label>
                             <input type="number" id="" name="" value="" class="form-control" style="text-transform:uppercase" placeholder="00000">
                         </div>
                         <div class="col-sm-6">
-                            <label for="firstname" class="form-label">City*</label>
+                            <label for="firstname" class="form-label">City</label>
                             <input type="text" id="" name="" value="" class="form-control" style="text-transform:uppercase" placeholder="CITY">
                         </div>
                         
                     </div>
                     <div class="row p-2">
                         <div class="col-sm-6">
-                            <label for="state" class="form-label" >State*</label>
+                            <label for="state" class="form-label" >State</label>
                             <select class="form-select" name="" id="" value="" style="text-transform:uppercase" >
                                 <?php $state = state() ?>
                                 <option value="" label="PLEASE CHOOSE"  ></option>
@@ -532,7 +532,7 @@
                             <div class="row">
                                 <div class="col-sm-12">
                                     <label for="passport" class="form-label">Passport Number</label>
-                                    <input type="text" id="passports" name="passport" class="form-control" aria-describedby="passport" readonly placeholder="A00000000">
+                                    <input type="text" id="passports" name="passport" class="form-control" aria-describedby="passport" readonly placeholder="PASSPORT NUMBER">
                                 </div>
                             </div>
                         </div>
@@ -541,7 +541,7 @@
                             <input type="date" id="expiryDate" name="expiryDate" class="form-control" aria-describedby="expirydate" readonly placeholder="YYYY/MM/DD">
                         </div>
                         <div class="col-sm-3">
-                            <label for="issuing-country" class="form-label">Issuing Country</label>
+                            <label for="issuing-country" class="form-label">Issuing Country*</label>
                             <select class="form-select" name="issuingCountry" id="issuingCountry" disabled>
                                 <optgroup id="country-optgroup-Americas" label="Americas">
                                     @foreach ($americass as $key => $america)

@@ -1,4 +1,4 @@
-<div class="modal fade" id="add-parent" tabindex="-1" aria-labelledby="add-parent" aria-hidden="true">
+<div class="modal fade" id="add-parent" tabindex="-1" aria-labelledby="add-parent" ariaissuing-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
@@ -56,7 +56,7 @@
                                 <div class="col-sm-12">
                                     <label for="passport" class="form-label" >Passport Number</label>
                                   
-                                    <input type="text" id="passport6" name=""  class="form-control" aria-describedby="passport" placeholder="A00000000">
+                                    <input type="text" id="passport6" name=""  class="form-control" aria-describedby="passport" placeholder="PASSPORT NUMBER">
                                 </div>
                             </div>
                         </div>
@@ -88,7 +88,7 @@
                             <input type="text" id="DOBaddparent" name="DOB" readonly class="form-control" aria-describedby="dob" placeholder="YYYY/MM/DD">
                         </div>
                         <div class="col-sm-3">
-                            <label for="" class="form-label" >Age</label>
+                            <label for="" class="form-label" >Age*</label>
                             <input type="text" id="age6" name="" readonly class="form-control" aria-describedby="" placeholder="AGE">
                         </div>
                         <div class="col-sm-6">

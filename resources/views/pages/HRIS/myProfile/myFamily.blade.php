@@ -1,8 +1,10 @@
 <div class="tab-pane fade" id="default-tab-7">
     <div class="container">
-        <h4 class="mt-3 mb-3">Family information</h4>
-        <button type="button"  data-bs-toggle="modal" id="parentModalAdd" class="btn btn-white mt-3 mb-3"><i class="fa fa-plus"></i> New Family</button>
-        <table id="tableParent" style="width: 100%" class="table table-striped align-middle">
+        <!-- <h4 class="mt-3 mb-3">Family information</h4> -->
+        <div class="row p-2">
+            <button type="button"  data-bs-toggle="modal" id="parentModalAdd" class="btn btn-primary col-sm-2"><i class="fa fa-plus"></i> New Family</button>
+        </div>
+            <table id="tableParent" style="width: 100%" class="table table-striped align-middle">
             <thead>
                 <th width="1%">No</th>
                 <th width="1%" data-orderable="false">Action</th>
@@ -22,8 +24,8 @@
                     <td>
                         <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle btn-sm"><i class="fa fa-cogs"></i> Actions <i class="fa fa-caret-down"></i></a>
                         <div class="dropdown-menu">
-                            <a href="javascript:;" class="dropdown-item" id="parentModalView{{$parent->id}}" data-id="{{$parent->id}}">View</a>
-                            <div class="dropdown-divider"></div>
+                            <!-- <a href="javascript:;" class="dropdown-item" id="parentModalView{{$parent->id}}" data-id="{{$parent->id}}">View</a>
+                            <div class="dropdown-divider"></div> -->
                             <a href="javascript:;" class="dropdown-item" id="parentModalEdit{{$parent->id}}" data-id="{{$parent->id}}">Edit</a>
                             <div class="dropdown-divider"></div>    
                             <a href="javascript:;" class="dropdown-item" id="deleteParent{{$parent->id}}" data-id="{{$parent->id}}">Delete</a>

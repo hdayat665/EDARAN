@@ -65,7 +65,7 @@
                             <div class="row">
                                 <div class="col-sm-12">
                                     <label for="passport" class="form-label">Passport Number</label>
-                                    <input type="text" id="passports1" name="passport" value="{{ $children->passport ?? '' }}" class="form-control" placeholder="A00000000" aria-describedby="passport">
+                                    <input type="text" id="passports1" name="passport" value="{{ $children->passport ?? '' }}" class="form-control" placeholder="PASSPORT NUMBER" aria-describedby="passport">
                                 </div>
                                
                             </div>
@@ -181,7 +181,7 @@
                     </div>
                     <div class="row p-2">
                         <div class="col-sm-6">
-                            <label for="address1" class="form-label" >Address 1*</label>
+                            <label for="address1" class="form-label" >Address 1</label>
                             <input type="text" id="address1_1" name="address1_1" value="" class="form-control" aria-describedby="address1" placeholder="ADDRESS 1" style="text-transform:uppercase">
                         </div>
                         <div class="col-sm-6">
@@ -191,18 +191,18 @@
                     </div>
                     <div class="row p-2">
                         <div class="col-sm-6">
-                            <label for="lastname" class="form-label" >Postcode*</label>
+                            <label for="lastname" class="form-label" >Postcode</label>
                             <input type="number" id="postcode1" name="postcode1" value="" class="form-control" placeholder="00000" style="text-transform:uppercase">
                         </div>
                         <div class="col-sm-6">
-                            <label for="firstname" class="form-label" >City*</label>
+                            <label for="firstname" class="form-label" >City</label>
                             <input type="text" id="city1" name="city1" value="" class="form-control" placeholder="CITY" style="text-transform:uppercase">
                         </div>
                         
                     </div>
                     <div class="row p-2">
                         <div class="col-sm-6">
-                            <label for="state" class="form-label" >State*</label>
+                            <label for="state" class="form-label" >State</label>
                             <select class="form-select" name="state1" id="state1" value="{{ $companion->state ?? '' }}" style="text-transform:uppercase" >
                                 <?php $state = state() ?>
                                 <option value="" label="PLEASE CHOOSE"  ></option>
@@ -212,7 +212,7 @@
                             </select>
                         </div>
                         <div class="col-sm-6">
-                            <label for="country" class="form-label" >Country*</label>
+                            <label for="country" class="form-label" >Country</label>
                             <select class="form-select" name="country1" id="country1" value="{{ $companion->country ?? '' }}" style="text-transform:uppercase" >
                                 <option value="MY" label="Malaysia" selected ></option>
                                 <optgroup id="country-optgroup-Americas" label="Americas">
