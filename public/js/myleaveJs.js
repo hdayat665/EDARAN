@@ -224,6 +224,9 @@ $(document).ready(function () {
                 applied_date: "required",
                 typeofleave: "required",
                 noofday: "required",
+                leave_date: "required",
+                start_date: "required",
+                end_date: "required",
                 reason: "required",
             },
 
@@ -232,6 +235,9 @@ $(document).ready(function () {
                 typeofleave: "Please Insert Type of Leave",
                 noofday: "Please Insert No of Day",
                 reason: "Please Insert Reason",
+                leave_date: "Please Insert leave date",
+                start_date: "Please Insert start date",
+                end_date: "Please Insert end date",
             },
             submitHandler: function (form) {
                 requirejs(["sweetAlert2"], function (swal) {

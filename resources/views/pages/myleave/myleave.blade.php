@@ -362,11 +362,8 @@
                                 <div class="row p-2">
                                     <div class="col-sm-6" id="menu5">
                                         <label class="form-label" for="Menu5">Leave Date*</label>
-                                            <div class="input-group">
+                                            <div class="">
                                                 <input type="text" class="form-control" name="leave_date" id="datepicker-leave" placeholder="dd/mm/yyyy"/>
-                                                    <div class="input-group-text">
-                                                        <i class="fa fa-calendar"></i>
-                                                    </div>
                                             </div>
                                     </div>
                                 </div>
@@ -394,20 +391,16 @@
                                 <div class="row p-2">
                                     <div class="col-sm-6" id="menu7">
                                         <label class="form-label" for="Menu5">Start Date*</label>
-                                            <div class="input-group">
+                                            <div class="">
                                                 <input type="text" class="form-control" name="start_date" id="datepicker-start" placeholder="dd/mm/yyyy"/>
-                                                    <div class="input-group-text">
-                                                        <i class="fa fa-calendar"></i>
-                                                    </div>
+                                                   
                                             </div>
                                     </div>
                                     <div class="col-sm-6" id="menu8">
                                         <label class="form-label" for="Menu6">End Date*</label>
-                                            <div class="input-group">
+                                            <div class="">
                                                 <input type="text" class="form-control" name="end_date" id="datepicker-end" placeholder="dd/mm/yyyy"/>
-                                                    <div class="input-group-text">
-                                                        <i class="fa fa-calendar"></i>
-                                                    </div>
+                                                    
                                             </div>
                                     </div>
                                 </div>
