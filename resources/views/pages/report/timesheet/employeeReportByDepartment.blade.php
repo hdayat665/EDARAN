@@ -23,8 +23,6 @@
                         <th class="text-nowrap">Project</th>
                         <th class="text-nowrap">Total Hours</th>
                         <th class="text-nowrap">Amount (MYR)</th>
-
-
                     </tr>
                 </thead>
                 <tbody>
@@ -35,12 +33,26 @@
                             <td width="1%" class="fw-bold text-dark">{{$no++}}</td>
                             <td>{{$department->employeeName}}</td>
                             <td>{{$department->project_name}}</td>
-                            <td>{{$department->total_hour ?? '00:00'}}</td>
-                            <td>321</td>
+                            <td>{{ str_replace(':', '.', substr($department->total_hour, 0, -2)) }}</td>
+                            <td>{{ number_format(floatval(str_replace(':', '.', substr($department->total_hour, 0, -2))) * floatval($department->COR), 2) }}</td>
                         </tr>
                         @endforeach
                     @endif
                 </tbody>
+                <tfoot>
+                    <tr>
+                        <th colspan="4">Total:</th>
+                        <td>
+                            @if ($departments)
+                                {{ number_format($departments->sum(function($department) {
+                                    return floatval(str_replace(':', '.', substr($department->total_hour, 0, -2))) * floatval($department->COR);
+                                }), 2) }}
+                            @endif
+                        </td>
+                    </tr>
+                </tfoot>
+                
+                
             </table>
             <div class="row p-2">
                 <div class="col align-self-start">

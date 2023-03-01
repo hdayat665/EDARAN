@@ -22,6 +22,7 @@
                         <th width="1%">NO</th>
                         <th class="text-nowrap">Employee Name</th>
                         <th class="text-nowrap">Date</th>
+                        <th class="text-nowrap">Department</th>
                         <th class="text-nowrap">Project</th>
                         <th class="text-nowrap">Total Hours</th>
                         <th class="text-nowrap">Amount (MYR)</th>
@@ -35,6 +36,7 @@
                                 {{-- <td>{{ $loop->iteration }}</td> --}}
                                 <td>{{ $row->employeeName }}</td>
                                 <td>{{ $row->date }}</td>
+                                <td>{{ $row->departmentName }}</td>
                                 <td>{{ $row->projectnameas }}</td>
                                 <td>{{ str_replace(':', '.', substr($row->total_hour, 0, -2)) }}</td>
                                 <td>{{ number_format(floatval(str_replace(':', '.', substr($row->total_hour, 0, -2))) * floatval($row->COR), 2) }}</td>
@@ -42,6 +44,18 @@
                         {{-- @endif --}}
                     @endforeach 
                 </tbody>
+                <tfoot>
+                    <tr>
+                        <th colspan="6">Total:</th>
+                        <td>
+                            @if ($summary)
+                                {{ number_format($summary->sum(function($summary) {
+                                    return floatval(str_replace(':', '.', substr($summary->total_hour, 0, -2))) * floatval($summary->COR);
+                                }), 2) }}
+                            @endif
+                        </td>
+                    </tr>
+                </tfoot>
             </table>
 
 

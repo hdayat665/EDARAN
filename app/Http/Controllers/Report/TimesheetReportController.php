@@ -54,7 +54,6 @@ class TimesheetReportController extends Controller
 
         if ($input['category'] == 'Summary') {
             $data['summary'] = $trs->getdatabyemployee();
-            // pr($data['summary']);
             $view = 'pages.report.timesheet.employeeReportBySummary';
         }
         else if ($input['category'] == '') {  
@@ -72,10 +71,10 @@ class TimesheetReportController extends Controller
             $data['departments'] = $trs->getDataEmployeeSummary($input);
             $data['date_range'] = $input['date_range'];
 
-            $data['department'] = '';
-            if (isset($input['department'])) {
-                $data['department'] = getDepartment($input['department'])->departmentName;
-            }
+            // $data['department'] = '';
+            // if (isset($input['department'])) {
+            //     $data['department'] = getDepartment($input['department'])->departmentName;
+            // }
 
             $view = 'pages.report.timesheet.employeeReportByDepartment';
         }else if($input['category'] == 'Employee'){

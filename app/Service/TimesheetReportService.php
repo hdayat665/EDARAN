@@ -47,7 +47,7 @@ class TimesheetReportService
 
 
         if (isset($input['project'])) {
-            $cond[2] = ['a.project_id', $input['project']];
+            $cond[2] = ['b.id', $input['project']];
         }
 
         if (isset($input['department'])) {
@@ -76,7 +76,7 @@ class TimesheetReportService
             ->leftJoin('employment as c', 'a.user_id', '=', 'c.user_id')
             ->leftJoin('department as d', 'c.department', '=', 'd.id')
             ->leftJoin('designation as e', 'c.designation', '=', 'e.id')
-            ->select('a.*', 'b.project_name', 'c.employeeName', 'd.departmentName', 'e.designationName')
+            ->select('a.*', 'b.project_name', 'c.employeeName', 'd.departmentName', 'e.designationName','c.COR')
             ->where($cond)
             ->whereBetween('date', [$startDate, $endDate])
             // ->whereMonth('a.date', $month)
@@ -188,7 +188,8 @@ class TimesheetReportService
         $data = DB::table('timesheet_log as a')
         ->leftJoin('employment as b', 'a.user_id', '=', 'b.user_id')
         ->leftJoin('project as c', 'a.project_id', '=', 'c.id')
-        ->select('a.date','a.total_hour','c.project_name as projectnameas','b.COR','b.employeeName')
+        ->leftJoin('department as d', 'b.department', '=', 'd.id')
+        ->select('a.date','a.total_hour','c.project_name as projectnameas','b.COR','b.employeeName','d.departmentName')
         ->where($cond)
         // ->groupBy('c.project_name')
         ->get();

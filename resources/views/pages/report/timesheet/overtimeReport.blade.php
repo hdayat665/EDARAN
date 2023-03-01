@@ -90,6 +90,7 @@
                                 <th class="text-nowrap">Employee Name</th>
                                 <th class="text-nowrap">Designation</th>
                                 <th class="text-nowrap">Department</th>
+                                <th class="text-nowrap">Date</th>
                                 {{-- <th class="text-nowrap">Total Overtime Hours</th> --}}
                                 <th class="text-nowrap">Total Overtime Hours</th>
                             </tr>
@@ -103,6 +104,7 @@
                                 <td>{{$overtime->employeeName}}</td>
                                 <td>{{$overtime->designationName}}</td>
                                 <td>{{$overtime->departmentName}}</td>
+                                <td>{{$overtime->date}}</td>
                                 {{-- <td>{{$overtime->total_hour}}</td> --}}
                                 <td>
                                     <?php

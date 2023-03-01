@@ -39,12 +39,18 @@
                         <td width="1%" class="fw-bold text-dark">{{$no++}}</td>
                         <td>{{$employee->employeeName}}</td>
                         <td>{{$employee->project_name}}</td>
-                        <td>{{$employee->total_hour ?? '00:00'}}</td>
-                        <td>321</td>
+                        <td>{{ str_replace(':', '.', substr($employee->total_hour, 0, -2)) }}</td>
+                        <td>{{ number_format(floatval(str_replace(':', '.', substr($employee->total_hour, 0, -2))) * floatval($employee->COR), 2) }}</td>
                     </tr>
                     @endforeach
                 @endif
             </tbody>
+            <tfoot>
+                <tr>
+                    <th colspan="4">Total:</th>
+                    <th></th>
+                </tr>
+            </tfoot>
         </table>
             <div class="row p-2">
                 <div class="col align-self-start">
