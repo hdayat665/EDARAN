@@ -158,7 +158,7 @@
                                                             </div>
                                                             <div class="col-sm-6">
                                                                 <label for="lastname" class="form-label">New Identification Number*</label>
-                                                                <input type="text" value="{{$profile->idNo ?? ''}}" name="idNo" id="idNo" class="form-control" aria-describedby="lastname" placeholder="000000-00-0000">
+                                                                <input type="text" value="{{$profile->idNo ?? ''}}" name="idNo" id="idNo" class="form-control" aria-describedby="lastname" placeholder="000000000000">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -287,11 +287,11 @@
                                                 <div class="row p-2">
                                                     <div class="col-sm-6">
                                                         <label for="phone-number" class="form-label">Phone Number*</label>
-                                                        <input type="text" id="phone-number" name="phoneNo" value="{{$profile->phoneNo ?? ''}}" class="form-control" aria-describedby="phone-number" placeholder="000-00000000">
+                                                        <input type="text" id="phone-number" name="phoneNo" value="{{$profile->phoneNo ?? ''}}" class="form-control" aria-describedby="phone-number" placeholder="00000000000">
                                                     </div>
                                                     <div class="col-sm-6">
                                                         <label for="phone-number2" class="form-label" >Phone Number 2</label>
-                                                        <input type="text" id="" name="" value="" class="form-control" aria-describedby="phone-number2" placeholder="000-00000000">
+                                                        <input type="text" id="" name="" value="" class="form-control" aria-describedby="phone-number2" placeholder="00000000000">
                                                     </div>
                                                 </div>
 

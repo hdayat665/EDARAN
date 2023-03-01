@@ -46,7 +46,7 @@
                                 
                                 <div class="col-sm-6">
                                     <label for="lastname" class="form-label">New Identification Number*</label>
-                                    <input type="text" id="idnumber5" name="idNo" value="{{$children->idNo ?? ''}}" class="form-control" placeholder="000000-00-0000" aria-describedby="lastname" readonly>
+                                    <input type="text" id="idnumber5" name="idNo" value="{{$children->idNo ?? ''}}" class="form-control" placeholder="000000000000" aria-describedby="lastname" readonly>
                                 </div>
                             </div>
                         </div>

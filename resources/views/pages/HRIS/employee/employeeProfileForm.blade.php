@@ -43,7 +43,7 @@
             <label class="form-label col-form-label col-md-1">Identification Number*</label>
             
             <div class="col-md-2 idnumber">
-                <input type="number" name="idNo" id="idnumber" class="form-control mb-1px" placeholder="000000-00-0000" />
+                <input type="number" name="idNo" id="idnumber" class="form-control mb-1px" placeholder="000000000000" />
             </div>
         </div>
         <div class="row mb-15px">
@@ -307,7 +307,7 @@
         <div class="row mb-15px">
             <label class="form-label col-form-label col-md-1">Phone Number*</label>
             <div class="col-md-5">
-                <input type="text" name="phoneNo" id="phoneNo" class="form-control mb-10px" placeholder="000-00000000" />
+                <input type="text" name="phoneNo" id="phoneNo" class="form-control mb-10px" placeholder="00000000000" />
 
             </div>
             <label class="form-label col-form-label col-md-1">Personal Email*</label>

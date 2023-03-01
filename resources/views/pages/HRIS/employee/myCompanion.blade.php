@@ -52,7 +52,7 @@
                                     </div>
                                     <div class="col-sm-6">
                                         <label for="passport-number" class="form-label">New Identification Number*</label>
-                                        <input type="text"name="idNo" value="{{ $companion->idNo ?? '' }}" id="idnumber2" placeholder="000000-00-0000" class="form-control" aria-describedby="passport-number">
+                                        <input type="text"name="idNo" value="{{ $companion->idNo ?? '' }}" id="idnumber2" placeholder="000000000000" class="form-control" aria-describedby="passport-number">
                                     </div>
                                 </div>
                             </div>
@@ -150,7 +150,7 @@
                         <div class="row p-2">
                             <div class="col-sm-6">
                                 <label for="contact-number" class="form-label">Contact Number</label>
-                                <input type="text" id="contact-number" name="contactNo" value="{{ $companion->contactNo ?? '' }}" placeholder="000-00000000" class="form-control" aria-describedby="contact-number">
+                                <input type="text" id="contact-number" name="contactNo" value="{{ $companion->contactNo ?? '' }}" placeholder="00000000000" class="form-control" aria-describedby="contact-number">
                             </div>
                             <div class="col-sm-6">
                                 <label for="contact-number" class="form-label" >Home Number</label>
@@ -375,7 +375,7 @@
                                     </div>
                                     <div class="col-sm-6">
                                         <label for="passport-number" class="form-label">New Identification Number*</label>
-                                        <input type="text"name="idNo" value="{{ $companion->idNo ?? '' }}" id="idnumber2" class="form-control"placeholder="000000-00-0000" aria-describedby="passport-number">
+                                        <input type="text"name="idNo" value="{{ $companion->idNo ?? '' }}" id="idnumber2" class="form-control"placeholder="000000000000" aria-describedby="passport-number">
                                     </div>
                                 </div>
                             </div>
@@ -484,7 +484,7 @@
                         <div class="row p-2">
                              <div class="col-sm-6">
                                 <label for="contact-number" class="form-label">Phone Number</label>
-                                <input type="text" id="contact-number" name="contactNo" value="{{ $companion->contactNo ?? '' }}" class="form-control" placeholder="000-00000000" aria-describedby="contact-number">
+                                <input type="text" id="contact-number" name="contactNo" value="{{ $companion->contactNo ?? '' }}" class="form-control" placeholder="00000000000" aria-describedby="contact-number">
                             </div>
                             <div class="col-sm-6" >
                                 <label for="" class="form-label">Home Number</label>
