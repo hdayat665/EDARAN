@@ -147,72 +147,82 @@
                             </div>
                             <div class="modal-body">
                                 <form id="updateForm">
-                                    <div class="row row-cols-lg-auto g-3 mb-3">
-                                        <div class="col-12" style="width:50%">
-                                            <label>Applied Date</label><br>
-                                            <input type="text" readonly class="form-control-plaintext" id="applieddate" value="">
-                                            <input type="hidden" readonly class="form-control-plaintext" id="iddata" >
-                                        </div>
-                                        <div class="col-12" style="width:50%">
-                                            <label>Type of Leave*</label><br>
-                                            <input type="text" readonly class="form-control-plaintext" id="type1">
-                                        </div> 
-                                        <div class="col-12" style="width:50%">
-                                            <label>Number of Day(s) Applied</label><br>
-                                            <input type="text" readonly class="form-control-plaintext" id="dayapplied">
-                                        </div>
-                                        <div class="col-12" style="width:50%">
-                                            <label>Total Days Applied*</label><br>
-                                            <input type="text" readonly class="form-control-plaintext" id="totaldayapplied">
-                                        </div>
-                                        <div class="col-12" style="width:50%">
-                                            <label>Leave Date</label><br>
-                                            <input type="text" readonly class="form-control-plaintext" id="leavedate">
-                                        </div>
-                                        <div class="col-12" style="width:50%">
-                                            <label>Reason*</label><br>
-                                            <input type="text" readonly class="form-control-plaintext" id="reason1">
-                                        </div>
-                                        <div class="col-12" style="width:50%">
-                                            <label>Leave Session</label><br>
-                                            <div></div>
-                                            <div class="form-check form-check-inline">
-                                                <input class="form-check-input" value="1" type="radio" name="flexRadioDefault" id="radioyes">
-                                                <label class="form-check-label" for="radioyes">
-                                                    Morning
-                                                </label>
+                                        <div class="row row-cols-lg-auto g-3 mb-3">
+                                            <div class="col-12" style="width:50%">
+                                                <label>Applied Date</label><br>
+                                                <input type="text" style="pointer-events: none;" readonly class="form-control-plaintext" id="applieddate" value="">
+                                                <input type="hidden" readonly class="form-control-plaintext" id="iddata" >
                                             </div>
-                                            <div class="form-check form-check-inline">
-                                                <input class="form-check-input" value="2" type="radio" name="flexRadioDefault" id="radiono" checked>
-                                                <label class="form-check-label" for="radiono">
-                                                    Evening
-                                                </label>
+                                            <div class="col-12" style="width:50%">
+                                                <label>Type of Leave*</label><br>
+                                                <input type="text" style="pointer-events: none;" readonly class="form-control-plaintext" id="type1">
+                                            </div> 
+                                            <div class="col-12" style="width:50%">
+                                                <label>Number of Day(s) Applied</label><br>
+                                                <input type="text" style="pointer-events: none;" readonly class="form-control-plaintext" id="dayapplied">
+                                            </div>
+                                            <div class="col-12" style="width:50%">
+                                                <label>Total Days Applied*</label><br>
+                                                <input type="text" style="pointer-events: none;" readonly class="form-control-plaintext" id="totaldayapplied">
+                                            </div>
+                                            <div class="col-12" style="width:50%">
+                                                <label>Leave Date</label><br>
+                                                <input type="text" style="pointer-events: none;" readonly class="form-control-plaintext" id="leavedate">
+                                            </div>
+                                            <div class="col-12" style="width:50%">
+                                                <label>Reason*</label><br>
+                                                <input type="text" style="pointer-events: none;" readonly class="form-control-plaintext" id="reason1">
+                                            </div>
+                                            <div class="col-12" style="width:50%" id="menu01">
+                                                <label>Leave Session</label><br>
+                                                <div></div>
+                                                <div id="leavesession" style="font-weight: lighter;"></div>
+                                            </div>
+                                            <div class="col-12" style="width:50%">
+                                                <label>Supporting Document*</label><br>
+                                                 <span id="fileDownloadPolicya" style="font-weight: lighter;"></span>
                                             </div>
                                         </div>
-                                        <div class="col-12" style="width:50%">
-                                            <label>Supporting Document*</label><br>
-                                            <a href="#" class="link-primary">example.pdf</a>
+                                        <div class="form-group">
+                                            <div class="form-control">
+                                                <div class="row p-2">
+                                                    <div class = col-md-4>
+                                                        <label for="text" >Recommended By:</label><br>
+                                                        <div id="recommended_by" style="font-weight: lighter;"></div>
+                                                    </div>
+                                                    <div class = col-md-2>
+                                                    </div>
+                                                    <div class = col-md-4>
+                                                        <label for="text" >Approved By:</label><br>
+                                                        <div id="approved_by" style="font-weight: lighter;"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="row p-2">
+                                                    <div class = col-md-4>
+                                                        <label for="text">Status:</label><br>
+                                                    <div id="status_1" style="font-weight: lighter;"></div>
+                                                    </div>
+                                                    <div class = col-md-2>
+                                                    </div>
+                                                    <div class = col-md-4>
+                                                        <label for="text">Status:</label><br>
+                                                    <div id="status_2" style="font-weight: lighter;"></div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="row p-2">
+                                                </div>
+                                                <div class="row p-2">
+                                                    
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="form-control">
-                                            <div class="row p-2">
-                                                <label for="text" style="color:blue">Recommended By:</label><br>
-                                            </div>
-                                            <div class="row p-2">
-                                               
-                                            </div>
-                                            <div class="row p-2">
-                                               
-                                            </div>
+                                        <div class="modal-footer">
+                                            <button class="btn btn-primary" id="updateButton">Approve</button>
+                                            {{-- <button type="button" class="btn btn-primary" data-bs-dismiss="modal" >Approve</button> --}}
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" >Close</button>
                                         </div>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button class="btn btn-primary" id="updateButton">Approve</button>
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" >Close</button>
-                                        <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
-                                    </div>
-                                </form>
+                                    </form>
                             </div>
                         </div>
                     </div>
@@ -228,68 +238,77 @@
                             </div>
                             <div class="modal-body">
                                 <form id="updatereject">
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <label class="form-label row-md-6">Employee Name:</label>
-                                              <input type="text" readonly class="form-control-plaintext" id="datafullname2" value="">
-                                                <input type="hidden" readonly class="form-control-plaintext" id="iddata3" >			
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <label class="form-label row-md-6">Employee Name:</label>
+                                                <input type="text" style="pointer-events: none;" class="form-control-plaintext" id="datafullname2" value="" readonly>
+                                                <input type="hidden" readonly class="form-control-plaintext" id="iddata2" >		
+                                            </div>
+                                            
                                         </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <label class="form-label row-md-6">Submitted Date:</label>
-                                            <input type="text" readonly class="form-control-plaintext" id="applieddate2" value="">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <label class="form-label row-md-6">Submitted Date:</label>
+                                                <input type="text" style="pointer-events: none;" readonly class="form-control-plaintext" id="applieddate2" value="">
+                                            </div>
+                                          
                                         </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <label class="form-label row-md-6">Type of Leave:</label>
-                                            <input type="text" readonly class="form-control-plaintext" id="type3" value="">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <label class="form-label row-md-6">Type of Leave:</label>
+                                                <input type="text" style="pointer-events: none;" readonly class="form-control-plaintext" id="type2" value="">
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <label class="form-label row-md-6">No of Day(s) Applied:</label>
-                                            <input type="text" readonly class="form-control-plaintext" id="dayapplied2" value="">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <label class="form-label row-md-6">No of Day(s) Applied:</label>
+                                                <input type="text" style="pointer-events: none;" readonly class="form-control-plaintext" id="dayapplied2" value="">
+                                            </div>
+                                           
                                         </div>
-                                    </div>
-                                    
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <label class="form-label row-md-6">Start Date:</label>
-                                            <input type="text" readonly class="form-control-plaintext" id="startdate2" value="">
+                                        {{-- <div class="row">
+                                            <div class="col-md-4">
+                                                <label class="form-label row-md-6">Duration:</label>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <label class="form-label row-md-6"> </label>			
+                                            </div>
+                                        </div> --}}
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <label class="form-label row-md-6">Start Date:</label>
+                                                <input type="text" style="pointer-events: none;" readonly class="form-control-plaintext" id="startdate2" value="">
+                                            </div>
+                                            
                                         </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <label class="form-label row-md-6">End Date:</label>
-                                            <input type="text" readonly class="form-control-plaintext" id="enddate2" value="">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <label class="form-label row-md-6">End Date:</label>
+                                                <input type="text" style="pointer-events: none;" readonly class="form-control-plaintext" id="enddate2" value="">
+                                            </div>
                                         </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <label class="form-label row-md-6">Total Days Applied:</label>
-                                            <input type="text" readonly class="form-control-plaintext" id="totaldayapplied2" value="">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <label class="form-label row-md-6">Total Days Applied:</label>
+                                                <input type="text" style="pointer-events: none;" readonly class="form-control-plaintext" id="totaldayapplied2" value="">
+                                            </div>
                                         </div>
-                                    </div>
-
-                                    <div class="row">
+                                         <div class="row">
                                         <div class="col-md-4">
                                             <label class="form-label row-md-6">Reason:</label>
-                                        </div>
+                                            </div>
 
-                                        <div class="col-md-8">
-                                            <input type="text" class="form-control row p-5" value="" name="reasonreject">
+                                            <div class="col-md-8">
+                                                <textarea class="form-control" id="reasonreject" name="reasonreject"></textarea>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <br>
-                                    <div class="modal-footer">
-                                        <button class="btn btn-primary" id="updateButtonreject">Reject</button>
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" >Close</button>
-                                    </div>
-                                </form>
+                            
+                                        <br>
+                                        <div class="modal-footer">
+                                            <button class="btn btn-primary" id="updateButtonreject">Reject</button>
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" >Close</button>
+                                        </div>
+                                    </form>
                             </div>
                         </div>
                     </div>

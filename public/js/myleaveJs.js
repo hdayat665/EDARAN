@@ -9,7 +9,7 @@ $(document).ready(function () {
 
     $("#table-leave").DataTable({
         responsive: false,
-        bFilter: false,
+        bFilter: true,
         paging: false,
     });
 
@@ -99,7 +99,7 @@ $(document).ready(function () {
         .datepicker({
             todayHighlight: true,
             autoclose: true,
-            format: "dd-mm-yyyy",
+            format: "yyyy-mm-dd",
         })
         .datepicker("setDate", new Date());
 
@@ -129,7 +129,7 @@ $(document).ready(function () {
     $("#datepicker-leave").datepicker({
         todayHighlight: true,
         autoclose: true,
-        format: "dd-mm-yyyy",
+        format: "yyyy-mm-dd",
         beforeShowDay: function (date) {
             var day = date.getDay();
             return [day != 0 && day != 6];
@@ -144,13 +144,13 @@ $(document).ready(function () {
     $("#datepicker-start").datepicker({
         todayHighlight: true,
         autoclose: true,
-        format: "dd-mm-yyyy",
+        format: "yyyy-mm-dd",
     });
 
     $("#datepicker-end").datepicker({
         todayHighlight: true,
         autoclose: true,
-        format: "dd-mm-yyyy",
+        format: "yyyy-mm-dd",
     });
 
     $(document).ready(function () {
@@ -201,8 +201,8 @@ $(document).ready(function () {
         var totalDays = "";
 
         if (startDate && endDate) {
-            var date1 = new Date(startDate.split("-").reverse().join("-"));
-            var date2 = new Date(endDate.split("-").reverse().join("-"));
+            var date1 = new Date(startDate);
+            var date2 = new Date(endDate);
             var timeDiff = date2.getTime() - date1.getTime();
             var dayDiff = Math.ceil(timeDiff / (1000 * 3600 * 24));
             totalDays = dayDiff + 1;
@@ -228,6 +228,7 @@ $(document).ready(function () {
                 start_date: "required",
                 end_date: "required",
                 reason: "required",
+                flexRadioDefault: "required",
             },
 
             messages: {
@@ -238,6 +239,7 @@ $(document).ready(function () {
                 leave_date: "Please Insert leave date",
                 start_date: "Please Insert start date",
                 end_date: "Please Insert end date",
+                flexRadioDefault: "Please select morning or evening",
             },
             submitHandler: function (form) {
                 requirejs(["sweetAlert2"], function (swal) {
@@ -378,6 +380,111 @@ $(document).ready(function () {
     function myleave(id) {
         return $.ajax({
             url: "/getcreatemyleave/" + id,
+        });
+    }
+    $(document).on("click", "#editButton2", function () {
+        var id = $(this).data("id");
+        var myleaveData = myleave(id);
+        // console.log(myleaveData);
+
+        myleaveData.done(function (data) {
+            $("#datafullname2").val(data[0].username);
+            $("#datepicker-applied2").val(data[0].applied_date);
+            $("#typeofleave2").val(data[0].lt_type_id);
+            $("#dayApplied2").val(data[0].day_applied);
+            $("#totalapply2").val(data[0].total_day_applied);
+            $("#datepicker-leave2").val(data[0].leave_date);
+            $("#datepicker-start2").val(data[0].start_date);
+            $("#datepicker-end2").val(data[0].end_date);
+            $("#reason2").val(data[0].reason);
+            $("#reasonreject2").val(data[0].reason);
+            // console.log(data[0]);
+
+            if (data[0].day_applied === "1") {
+                $("#menu10").show();
+                $("#menu20").hide();
+                $("#menu30").hide();
+            } else if (data[0].day_applied === "0.5") {
+                $("#menu10").show();
+                $("#menu20").show();
+                $("#menu30").hide();
+            } else {
+                $("#menu10").hide();
+                $("#menu20").hide();
+                $("#menu30").show();
+            }
+
+            if (data[0].username1) {
+                $("#recommended_by2").text(data[0].username1);
+            } else {
+                $("#recommended_by2").text("");
+            }
+
+            if (data[0].username2) {
+                $("#approved_by2").text(data[0].username2);
+            } else {
+                $("#approved_by2").text("");
+            }
+
+            if (data[0].leave_session === "1") {
+                $("#flexRadioDefaulta2").prop("checked", true);
+            } else if (data[0].leave_session === "2") {
+                $("#flexRadioDefaultb2").prop("checked", true);
+            } else {
+                $("#flexRadioDefaulta2").prop("checked", false);
+                $("#flexRadioDefaultb2").prop("checked", false);
+            }
+
+            if (data[0].up_rec_status === "1") {
+                $("#status_10").text("Pending");
+            } else if (data[0].up_rec_status === "2") {
+                $("#status_10").text("Pending");
+            } else if (data[0].up_rec_status === "3") {
+                $("#status_10").text("Reject");
+            } else if (data[0].up_rec_status === "4") {
+                $("#status_10").text("Approved");
+            }
+
+            if (data[0].up_app_status === "1") {
+                $("#status_20").text("Pending");
+            } else if (data[0].up_app_status === "2") {
+                $("#status_20").text("Pending");
+            } else if (data[0].up_app_status === "3") {
+                $("#status_20").text("Reject");
+            } else if (data[0].up_app_status === "4") {
+                $("#status_20").text("Approved");
+            }
+
+            if (data[0].up_app_status === "1") {
+                $("#status_20").text("Pending");
+            } else if (data[0].up_app_status === "2") {
+                $("#status_20").text("Pending");
+            } else if (data[0].up_app_status === "3") {
+                $("#status_20").text("Reject");
+            } else if (data[0].up_app_status === "4") {
+                $("#status_20").text("Approved");
+            }
+
+            if (data[0].file_document) {
+                var filename = data[0].file_document.split("/").pop();
+                $("#fileDownloadPolicya2").html(
+                    '<a href="/storage/' +
+                        data[0].file_document +
+                        '" download="' +
+                        filename +
+                        '">Download : ' +
+                        filename +
+                        "</a>"
+                );
+            } else {
+                $("#fileDownloadPolicya2").html("No File Upload");
+            }
+        });
+    });
+
+    function myleave(id) {
+        return $.ajax({
+            url: "/getusermyleave/" + id,
         });
     }
 
