@@ -177,26 +177,32 @@ $(document).ready(function() {
     //     return this.optional(element) || /^[A-Za-z0-9!@#$%^&*()\-_+={}[\]\\|<>"'\/~`,.;: ]*$/.test(value);
     // }, "Special Characters, Spaces, and Alphabet Characters Are Not Allowed.");      
 
+    $.validator.addMethod("noNumbers", function(value, element) {
+        return this.optional(element) || /^[a-zA-Z]+$/.test(value);
+    }, "Please Insert Alphabet Only");
+
     $.validator.addMethod("noSpecialChars", function(value, element) {
         return this.optional(element) || /^[A-Za-z0-9\s]*$/.test(value);
     }, "Special Characters and Spaces Are Not Allowed");
 
     $(function() {
-            $("#empId").on("input", function() {
-                var sanitized = $(this).val().replace(/[~!@#$%^&*()_+{}|:"<>?`\-=[\]\\;',./\s]/g, '');
-                $(this).val(sanitized);
-            });
+        $("#empId, #uId").on("input", function() {
+            var sanitized = $(this).val().replace(/[~!@#$%^&*()_+{}|:"<>?`\-=[\]\\;',./\s]/g, '');
+            $(this).val(sanitized);
+        });
     });
+    
     $.validator.addMethod("noSpecialChars", function(value, element) {
-        return this.optional(element) || /^[A-Za-z0-9\s]*$/.test(value);
-    }, "Special Characters and Spaces Are Not Allowed");
-
+        return this.optional(element) || /^[A-Za-z\s!@#$%^&*(),.?":{}|<>+_=;\-[\]\\/'`~]*$/.test(value);
+    }, "Numbers Are Not Allowed");
+    
     $(function() {
-            $("#uId").on("input", function() {
-                var sanitized = $(this).val().replace(/[~!@#$%^&*()_+{}|:"<>?`\-=[\]\\;',./\s]/g, '');
-                $(this).val(sanitized);
-            });
-    });
+        $("#firstName, #lastName").on("input", function() {
+            var sanitized = $(this).val().replace(/[\d]/g, ''); // remove numbers
+            $(this).val(sanitized);
+        });
+    });    
+
     $.validator.addMethod("email", function(value, element) {
         // Email validation regex pattern
         return this.optional(element) || /^[^\s@]+@[^\s@]+\.(?:com|net|org|edu|gov|mil|biz|info|name|museum|coop|aero|[a-z]{2})$/.test(value);
@@ -215,8 +221,14 @@ $(document).ready(function() {
                     noSpecialChars: true
                   },
                 username: "required",
-                firstName: "required",
-                lastName: "required",
+                firstName: {
+                    required: true,
+                    noNumbers: true
+                  },
+                lastName: {
+                    required: true,
+                    noNumbers: true
+                  },
                 idNo: {
                     required: true,
                     digits: true,
@@ -245,8 +257,12 @@ $(document).ready(function() {
                     noSpecialChars: "Special characters, spaces, and alphabet characters are not allowed."
                 },
                 username: "Please Insert Username",
-                firstName: "Please Insert First Name",
-                lastName: "Please Insert Last Name",
+                firstName: {
+                    required: "Please Insert First Name",
+                },
+                lastName: {
+                    required: "Please Insert Last Name",
+                },
                 idNo: {
                     required: "Please Insert Identification Number",
                     digits: "Please Insert correct Identification Number without '-' or space",
