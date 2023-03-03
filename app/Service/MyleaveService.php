@@ -15,11 +15,10 @@ class MyleaveService
 {
    public function myleaveView(){
         
-         $data = MyLeaveModel::where('myleave.tenant_id', 1)
+         $data = MyLeaveModel::where('myleave.tenant_id', Auth::user()->tenant_id)
             ->leftJoin('leave_types', 'myleave.lt_type_id', '=', 'leave_types.id')
             ->where('myleave.up_user_id', '=', Auth::user()->id)
             ->where('myleave.leave_date', '>=', Carbon::now()->format('Y-m-d'))
-            ->orWhere('myleave.start_date', '>=', Carbon::now()->format('Y-m-d') and 'myleave.leave_date', '=', null)
             ->select('myleave.*', 'leave_types.leave_types as type')
             ->orderBy('myleave.applied_date', 'desc')
             ->get();
@@ -29,7 +28,7 @@ class MyleaveService
 
     public function myleaveHistoryView(){
      
-        $data = MyLeaveModel::where('myleave.tenant_id', 1)
+        $data = MyLeaveModel::where('myleave.tenant_id', Auth::user()->tenant_id)
             ->leftJoin('leave_types', 'myleave.lt_type_id', '=', 'leave_types.id')
             ->where('myleave.up_user_id', '=', Auth::user()->id)
             ->where('myleave.leave_date', '<', Carbon::now()->format('Y-m-d'))
