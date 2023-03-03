@@ -343,7 +343,7 @@
                                 </a>
                                 <div class="menu-submenu">
                                     <div class="menu-item">
-                                        <a href="leaveAppr" class="menu-link">
+                                        <a href="/leaveAppr" class="menu-link">
                                             <div class="menu-icon">
                                                 <i class="fa fa-user-pen text-gray"></i>
                                             </div>
@@ -351,7 +351,7 @@
                                         </a>
                                     </div>
                                     <div class="menu-item">
-                                        <a href="leaveApprhod" class="menu-link">
+                                        <a href="/leaveApprhod" class="menu-link">
                                             <div class="menu-icon">
                                                 <i class="fa fa-users-gear text-gray"></i>
                                             </div>

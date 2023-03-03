@@ -534,32 +534,26 @@ Route::group(['middleware' => ['web']], function () {
         // MYLEAVE
 
         Route::controller(MyleaveController::class)->group(function () {
+
+            //myleave
             Route::get('/myleave', 'myleaveView');
             Route::post('/createtmyleave', 'createtmyleave');
             Route::get('/getcreatemyleave/{id}', 'getcreatemyleave');
             Route::delete('/deletemyleave/{id}', 'deletemyleave');
-
             Route::get('/getusermyleave/{id}', 'getusermyleave');
-            // Route::post('/updateLeaveleavetypes/{id}', 'updateLeaveleavetypes');
-            // Route::delete('/deleteLeavetypes/{id}', 'deleteLeavetypes');
-            // Route::get('/updateStatusleavetypes/{id}/{status}', 'updateStatusleavetypes');
 
             //supervisor
             Route::get('/leaveAppr', 'leaveApprView');
+            Route::get('/getuserleaveAppr/{id}', 'getuserleaveAppr');
             Route::post('/updatesupervisor/{id}', 'updatesupervisor');
             Route::post('/updatesupervisorreject/{id}', 'updatesupervisorreject');
 
-
             //hod
             Route::get('/leaveApprhod', 'leaveApprhodView');
+            Route::get('/getuserleaveApprhod/{id}', 'getuserleaveApprhod');
             Route::post('/updatehod/{id}', 'updatehod');
             Route::post('/updatehodreject/{id}', 'updatehodreject');
 
-
-
-
-            Route::get('/approvemyleave/{id}', 'approvemyleave');
-            Route::get('/approvemyleaveby/{id}', 'approvemyleaveby');
         });
     });
 });

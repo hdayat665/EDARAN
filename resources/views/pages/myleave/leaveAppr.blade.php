@@ -107,10 +107,10 @@
                                         <?php
                                             switch ($i) {
                                                 case 1:
-                                                    $status = 'Pending for approve';
+                                                    $status = 'Pending';
                                                     break;
                                                 case 2:
-                                                    $status = 'Pending for approve';
+                                                    $status = 'Pending';
                                                     break;
                                                 case 3:
                                                     $status = 'Rejected';
@@ -140,7 +140,7 @@
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Apply Leave</h5>
+                                    <h5 class="modal-title" id="exampleModalLabel">Appproved by Supervisor</h5>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
@@ -148,59 +148,50 @@
                                         <div class="row row-cols-lg-auto g-3 mb-3">
                                             <div class="col-12" style="width:50%">
                                                 <label>Applied Date</label><br>
-                                                <input type="text" readonly class="form-control-plaintext" id="applieddate" value="">
+                                                <input type="text" style="pointer-events: none;" readonly class="form-control-plaintext" id="applieddate" value="">
                                                 <input type="hidden" readonly class="form-control-plaintext" id="iddata" >
                                             </div>
                                             <div class="col-12" style="width:50%">
                                                 <label>Type of Leave*</label><br>
-                                                <input type="text" readonly class="form-control-plaintext" id="type1">
+                                                <input type="text" style="pointer-events: none;" readonly class="form-control-plaintext" id="type1">
                                             </div> 
                                             <div class="col-12" style="width:50%">
                                                 <label>Number of Day(s) Applied</label><br>
-                                                <input type="text" readonly class="form-control-plaintext" id="dayapplied">
+                                                <input type="text" style="pointer-events: none;" readonly class="form-control-plaintext" id="dayapplied">
                                             </div>
                                             <div class="col-12" style="width:50%">
                                                 <label>Total Days Applied*</label><br>
-                                                <input type="text" readonly class="form-control-plaintext" id="totaldayapplied">
+                                                <input type="text" style="pointer-events: none;" readonly class="form-control-plaintext" id="totaldayapplied">
                                             </div>
                                             <div class="col-12" style="width:50%">
                                                 <label>Leave Date</label><br>
-                                                <input type="text" readonly class="form-control-plaintext" id="leavedate">
+                                                <input type="text" style="pointer-events: none;" readonly class="form-control-plaintext" id="leavedate">
                                             </div>
                                             <div class="col-12" style="width:50%">
                                                 <label>Reason*</label><br>
-                                                <input type="text" readonly class="form-control-plaintext" id="reason1">
+                                                <input type="text" style="pointer-events: none;" readonly class="form-control-plaintext" id="reason1">
                                             </div>
-                                            <div class="col-12" style="width:50%">
+                                            <div class="col-12" style="width:50%" id="menu01">
                                                 <label>Leave Session</label><br>
                                                 <div></div>
-                                                <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" value="1" type="radio" name="flexRadioDefault1" id="radioyes">
-                                                    <label class="form-check-label" for="radioyes">
-                                                        Morning
-                                                    </label>
-                                                </div>
-                                                <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" value="2" type="radio" name="flexRadioDefault2" id="radiono">
-                                                    <label class="form-check-label" for="radiono">
-                                                        Evening
-                                                    </label>
-                                                </div>
+                                                <div id="leavesession" style="font-weight: lighter;"></div>
                                             </div>
                                             <div class="col-12" style="width:50%">
                                                 <label>Supporting Document*</label><br>
-                                                <a href="#" class="link-primary">example.pdf</a>
+                                                 <span id="fileDownloadPolicya" style="font-weight: lighter;"></span>
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <div class="form-control">
                                                 <div class="row p-2">
-                                                    <label for="text" style="color:blue">Recommended By:</label><br>
+                                                    <label for="text" >Recommended By:</label><br>
+                                                    <div id="recommended_by" style="font-weight: lighter;"></div>
                                                 </div>
                                                 <div class="row p-2">
                                                 </div>
                                                 <div class="row p-2">
                                                     <label for="text">Status:</label><br>
+                                                    <div id="status_1" style="font-weight: lighter;"></div>
                                                 </div>
                                             </div>
                                         </div>
@@ -228,28 +219,28 @@
                                         <div class="row">
                                             <div class="col-md-4">
                                                 <label class="form-label row-md-6">Employee Name:</label>
-                                                <input type="text" readonly class="form-control-plaintext" id="datafullname2" value="">
-                                                <input type="hidden" readonly class="form-control-plaintext" id="iddata3" >		
+                                                <input type="text" style="pointer-events: none;" class="form-control-plaintext" id="datafullname2" value="" readonly>
+                                                <input type="hidden" readonly class="form-control-plaintext" id="iddata2" >		
                                             </div>
                                             
                                         </div>
                                         <div class="row">
                                             <div class="col-md-4">
                                                 <label class="form-label row-md-6">Submitted Date:</label>
-                                                <input type="text" readonly class="form-control-plaintext" id="applieddate2" value="">
+                                                <input type="text" style="pointer-events: none;" readonly class="form-control-plaintext" id="applieddate2" value="">
                                             </div>
                                           
                                         </div>
                                         <div class="row">
                                             <div class="col-md-4">
                                                 <label class="form-label row-md-6">Type of Leave:</label>
-                                                <input type="text" readonly class="form-control-plaintext" id="type3" value="">
+                                                <input type="text" style="pointer-events: none;" readonly class="form-control-plaintext" id="type2" value="">
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-md-4">
                                                 <label class="form-label row-md-6">No of Day(s) Applied:</label>
-                                                <input type="text" readonly class="form-control-plaintext" id="dayapplied2" value="">
+                                                <input type="text" style="pointer-events: none;" readonly class="form-control-plaintext" id="dayapplied2" value="">
                                             </div>
                                            
                                         </div>
@@ -264,20 +255,20 @@
                                         <div class="row">
                                             <div class="col-md-4">
                                                 <label class="form-label row-md-6">Start Date:</label>
-                                                <input type="text" readonly class="form-control-plaintext" id="startdate2" value="">
+                                                <input type="text" style="pointer-events: none;" readonly class="form-control-plaintext" id="startdate2" value="">
                                             </div>
                                             
                                         </div>
                                         <div class="row">
                                             <div class="col-md-4">
                                                 <label class="form-label row-md-6">End Date:</label>
-                                                <input type="text" readonly class="form-control-plaintext" id="enddate2" value="">
+                                                <input type="text" style="pointer-events: none;" readonly class="form-control-plaintext" id="enddate2" value="">
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-md-4">
                                                 <label class="form-label row-md-6">Total Days Applied:</label>
-                                                <input type="text" readonly class="form-control-plaintext" id="totaldayapplied2" value="">
+                                                <input type="text" style="pointer-events: none;" readonly class="form-control-plaintext" id="totaldayapplied2" value="">
                                             </div>
                                         </div>
                                          <div class="row">
@@ -286,7 +277,7 @@
                                             </div>
 
                                             <div class="col-md-8">
-                                                <input type="text" class="form-control row p-5" value="" name="reasonreject">
+                                                <textarea class="form-control" id="reasonreject" name="reasonreject"></textarea>
                                             </div>
                                         </div>
                             
