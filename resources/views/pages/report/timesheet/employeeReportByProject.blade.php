@@ -34,11 +34,23 @@
                             <td>{{$project->employeeName}}</td>
                             <td>{{$project->departmentName}}</td>
                             <td>{{$project->total_hour ?? '00:00'}}</td>
-                            <td>321</td>
+							<td>{{ number_format(floatval(str_replace(':', '.', substr($project->total_hour, 0, -2))) * floatval($project->COR), 2) }}</td>
                         </tr>
                         @endforeach
                     @endif
 				</tbody>
+				<tfoot>
+                    <tr>
+                        <th colspan="4">Total:</th>
+						<td>
+                            @if ($projects)
+                                {{ number_format($projects->sum(function($projects) {
+                                    return floatval(str_replace(':', '.', substr($projects->total_hour, 0, -2))) * floatval($projects->COR);
+                                }), 2) }}
+                            @endif
+                        </td>
+                    </tr>
+                </tfoot>
 			</table>
 			<div class="row p-2">
 				<div class="col align-self-start">
