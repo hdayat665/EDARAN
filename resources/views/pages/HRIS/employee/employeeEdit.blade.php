@@ -158,7 +158,7 @@
                                                             </div>
                                                             <div class="col-sm-6">
                                                                 <label for="lastname" class="form-label">New Identification Number*</label>
-                                                                <input type="text" value="{{$profile->idNo ?? ''}}" name="idNo" id="idNo" class="form-control" aria-describedby="lastname" placeholder="000000-00-0000">
+                                                                <input type="text" value="{{$profile->idNo ?? ''}}" name="idNo" id="idNo" class="form-control" aria-describedby="lastname" placeholder="000000000000">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -173,7 +173,7 @@
                                                         <div class="row">
                                                             <div class="col-sm-12">
                                                                 <label for="passport" class="form-label">Passport Number</label>
-                                                                <input type="text" id="passport" name="passport" value="{{ $profile->passport ?? '' }}" class="form-control" aria-describedby="passport" readonly placeholder="A00000000">
+                                                                <input type="text" id="passport" name="passport" value="{{ $profile->passport ?? '' }}" class="form-control" aria-describedby="passport" readonly placeholder="PASSPORT NUMBER">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -287,18 +287,18 @@
                                                 <div class="row p-2">
                                                     <div class="col-sm-6">
                                                         <label for="phone-number" class="form-label">Phone Number*</label>
-                                                        <input type="text" id="phone-number" name="phoneNo" value="{{$profile->phoneNo ?? ''}}" class="form-control" aria-describedby="phone-number" placeholder="000-00000000">
+                                                        <input type="text" id="phone-number" name="phoneNo" value="{{$profile->phoneNo ?? ''}}" class="form-control" aria-describedby="phone-number" placeholder="00000000000">
                                                     </div>
                                                     <div class="col-sm-6">
                                                         <label for="phone-number2" class="form-label" >Phone Number 2</label>
-                                                        <input type="text" id="" name="" value="" class="form-control" aria-describedby="phone-number2" placeholder="000-00000000">
+                                                        <input type="text" id="" name="" value="" class="form-control" aria-describedby="phone-number2" placeholder="00000000000">
                                                     </div>
                                                 </div>
 
                                                 <div class="row p-2">
                                                     <div class="col-sm-6">
                                                         <label for="home-number" class="form-label">Home Number</label>
-                                                        <input type="text" id="home-number" name="homeNo" value="{{$profile->homeNo ?? ''}}" class="form-control" aria-describedby="home-number" placeholder="00-0000000">
+                                                        <input type="text" id="home-number" name="homeNo" value="{{$profile->homeNo ?? ''}}" class="form-control" aria-describedby="home-number" placeholder="000000000">
                                                     </div>
                                                     <div class="col-sm-6">
                                                         <label for="extension-number" class="form-label">Extension Number</label>

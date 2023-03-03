@@ -52,8 +52,8 @@
             </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button class="btn btn-primary" id="saveEducation">Save changes</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancle</button>
+          <button class="btn btn-primary" id="saveEducation">Save</button>
         </div>
     </form>
       </div>

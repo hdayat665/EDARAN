@@ -47,13 +47,13 @@ $(document).ready(function () {
     $(document).on("click", "#editButton2", function () {
         var id = $(this).data("id");
         // console.log(id);
-        var myleavesecond = myleave2(id);
+        var myleaveget = myleave(id);
         // console.log(myleaveData2);
 
-        myleavesecond.done(function (data) {
+        myleaveget.done(function (data) {
             $("#datafullname").val(data[0].fullName);
             $("#applieddate").val(data[0].applied_date);
-            $("#type1").val(data[0].type);
+            $("#type1").val(data[0].leave_types);
             $("#dayapplied").val(data[0].day_applied);
             $("#leavedate").val(data[0].leave_date);
             $("#startdate").val(data[0].start_date);
@@ -61,32 +61,58 @@ $(document).ready(function () {
             $("#totaldayapplied").val(data[0].total_day_applied);
             $("#reason1").val(data[0].reason);
             $("#iddata").val(data[0].id);
+            console.log(data[0]);
 
-            if (data[0].leave_session === "1") {
-                $("#flexRadioDefault1").prop("checked", true);
-            } else if (data[0].leave_session === "2") {
-                $("#flexRadioDefault2").prop("checked", true);
-            } else {
-                $("#flexRadioDefault1").prop("checked", false);
-                $("#flexRadioDefault2").prop("checked", false);
+            if (data[0].up_rec_status === "1") {
+                $("#status_1").text("Pending");
+            } else if (data[0].up_rec_status === "2") {
+                $("#status_1").text("Pending");
+            } else if (data[0].up_rec_status === "3") {
+                $("#status_1").text("Reject");
+            } else if (data[0].up_rec_status === "4") {
+                $("#status_1").text("Approved");
             }
 
-            if (data.status === 1) {
-                // tampilkan status "Approved"
-                $("#status_display").text($("#status_1").text());
-            } else if (data.status === 2) {
-                // tampilkan status "Rejected"
-                $("#status_display").text($("#status_2").text());
+            if (data[0].leave_session === "1") {
+                $("#leavesession").text("Morning");
+            } else if (data[0].leave_session === "2") {
+                $("#leavesession").text("Evening");
             } else {
-                // tampilkan pesan kesalahan jika status tidak valid
-                $("#status_display").text("Invalid status");
+                $("#menu01").hide();
+            }
+
+            if (data[0].username1) {
+                $("#recommended_by").text(data[0].username1);
+            } else {
+                $("#recommended_by").text("");
+            }
+
+            if (data[0].username2) {
+                $("#approved_by").text(data[0].username2);
+            } else {
+                $("#approved_by").text("");
+            }
+
+            if (data[0].file_document) {
+                var filename = data[0].file_document.split("/").pop();
+                $("#fileDownloadPolicya").html(
+                    '<a href="/storage/' +
+                        data[0].file_document +
+                        '" download="' +
+                        filename +
+                        '">Download : ' +
+                        filename +
+                        "</a>"
+                );
+            } else {
+                $("#fileDownloadPolicya").html("No File Upload");
             }
         });
     });
 
-    function myleave2(id) {
+    function myleave(id) {
         return $.ajax({
-            url: "/getusermyleave/" + id,
+            url: "/getuserleaveAppr/" + id,
         });
     }
 
@@ -217,42 +243,68 @@ $(document).ready(function () {
         // console.log(myleaveData2);
 
         myleavesecond.done(function (data) {
-            $("#datafullname2").val(data[0].fullName);
+            $("#datafullname2").val(data[0].username);
             $("#applieddate2").val(data[0].applied_date);
-            $("#type3").val(data[0].type);
+            $("#type2").val(data[0].leave_types);
             $("#dayapplied2").val(data[0].day_applied);
             $("#leavedate2").val(data[0].leave_date);
             $("#startdate2").val(data[0].start_date);
             $("#enddate2").val(data[0].end_date);
             $("#totaldayapplied2").val(data[0].total_day_applied);
             $("#reason2").val(data[0].reason);
-            $("#iddata3").val(data[0].id);
+            $("#iddata2").val(data[0].id);
+            console.log(data[0]);
 
-            if (data[0].leave_session === "1") {
-                $("#flexRadioDefault1").prop("checked", true);
-            } else if (data[0].leave_session === "2") {
-                $("#flexRadioDefault2").prop("checked", true);
-            } else {
-                $("#flexRadioDefault1").prop("checked", false);
-                $("#flexRadioDefault2").prop("checked", false);
+            if (data[0].up_rec_status === "1") {
+                $("#status_2").text("Pending");
+            } else if (data[0].up_rec_status === "2") {
+                $("#status_2").text("Pending");
+            } else if (data[0].up_rec_status === "3") {
+                $("#status_2").text("Reject");
+            } else if (data[0].up_rec_status === "4") {
+                $("#status_2").text("Approved");
             }
 
-            if (data.status === 1) {
-                // tampilkan status "Approved"
-                $("#status_display").text($("#status_1").text());
-            } else if (data.status === 2) {
-                // tampilkan status "Rejected"
-                $("#status_display").text($("#status_2").text());
+            if (data[0].leave_session === "1") {
+                $("#leavesession2").text("Morning");
+            } else if (data[0].leave_session === "2") {
+                $("#leavesession2").text("Evening");
             } else {
-                // tampilkan pesan kesalahan jika status tidak valid
-                $("#status_display").text("Invalid status");
+                $("#menu10").hide();
+            }
+
+            if (data[0].username1) {
+                $("#recommended_by2").text(data[0].username1);
+            } else {
+                $("#recommended_by2").text("");
+            }
+
+            if (data[0].username2) {
+                $("#approved_by2").text(data[0].username2);
+            } else {
+                $("#approved_by2").text("");
+            }
+
+            if (data[0].file_document) {
+                var filename = data[0].file_document.split("/").pop();
+                $("#fileDownloadPolicya2").html(
+                    '<a href="/storage/' +
+                        data[0].file_document +
+                        '" download="' +
+                        filename +
+                        '">Download : ' +
+                        filename +
+                        "</a>"
+                );
+            } else {
+                $("#fileDownloadPolicya2").html("No File Upload");
             }
         });
     });
 
     function myleave2(id) {
         return $.ajax({
-            url: "/getusermyleave/" + id,
+            url: "/getuserleaveAppr/" + id,
         });
     }
 
@@ -271,8 +323,8 @@ $(document).ready(function () {
                     var data = new FormData(
                         document.getElementById("updatereject")
                     );
-                    var id = $("#iddata3").val();
-                    // console.log(id);
+                    var id = $("#iddata2").val();
+                    console.log(id);
                     // return false;
 
                     $.ajax({

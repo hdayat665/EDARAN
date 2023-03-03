@@ -127,7 +127,7 @@
                     </div>
                     <div class="row ">
                         <div class="col-md-6">
-                            <input type="number" class="form-control" name="phoneNo" id="phoneNo" placeholder="000-0000000">
+                            <input type="number" class="form-control" name="phoneNo" id="phoneNo" placeholder="0000000000">
                         </div>
                         <div class="col-md-6">
                             <input type="email" class="form-control" name="email" id="email" placeholder="email@gmail.com">

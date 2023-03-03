@@ -975,10 +975,12 @@ class SettingService
     {
         $data = 
          UserProfile::where('userprofile.tenant_id', Auth::user()->tenant_id)
+            ->whereNull('role_user.up_user_id')
             ->leftJoin('employment', 'userprofile.user_id', '=', 'employment.user_id')
-            ->leftJoin('department', 'employment.department', '=', 'department.id')
-            ->select('userprofile.user_id', 'userprofile.fullname', 'department.departmentName')
+            ->leftJoin('role_user', 'userprofile.user_id', '=', 'role_user.up_user_id')
+            ->select('userprofile.user_id', 'userprofile.fullname')
             ->get();
+                
 
         return $data;
     }

@@ -57,6 +57,25 @@ class MyleaveController extends Controller
 
         return $result;
     }
+    public function getuserleaveAppr($id = '')
+    {
+        $ms = new MyleaveService;
+
+        $result = $ms->getuserleaveAppr($id);
+        // dd($result);
+
+        return $result;
+    }
+
+    public function getuserleaveApprhod($id = '')
+    {
+        $ms = new MyleaveService;
+
+        $result = $ms->getuserleaveApprhod($id);
+        // dd($result);
+
+        return $result;
+    }
 
 
     //supervisor

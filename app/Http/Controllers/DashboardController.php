@@ -12,13 +12,18 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
+use App\Service\DashboardService;
 
 class DashboardController extends Controller
 {
 
     public function dashboardTenant()
     {
-        return view('pages.dashboard.tenant');
+        $ss = new DashboardService;
+        $result = $ss->newsView();
+        $result2= $ss->eventView();
+        
+        return view('pages.dashboard.tenant',$result, $result2);
     }
 
     public function dashboardHost()

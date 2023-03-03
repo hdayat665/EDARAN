@@ -1,5 +1,7 @@
 <div class="tab-pane fade" id="default-tab-6">
-    <button type="button"  data-bs-toggle="modal" id="childModalAdd" data-type="add" class="btn btn-white mt-3 mb-3"><i class="fa fa-plus"></i> New children</button>
+    <div class="row p-2">
+        <button type="button"  data-bs-toggle="modal" id="childModalAdd" data-type="add" class="btn btn-primary col-sm-2"><i class="fa fa-plus"></i> New children</button>
+    </div>
     <table id="tableChildren" style="width: 100%" class="table table-striped align-middle">
         <thead>
             <th width="1%">No</th>

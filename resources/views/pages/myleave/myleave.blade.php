@@ -75,12 +75,12 @@
                                 <div class="row p-2">
                                     <div class="form-control">
                                     <h4> My Leave </h4>
-                                        <div class="input-group rounded">
+                                        {{-- <div class="input-group rounded">
                                             <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
                                                 <span type="button" class="input-group-text border-0" id="search-addon">
                                                     <i class="fas fa-search"></i>
                                                 </span>
-                                        </div>
+                                        </div> --}}
                                         <table id="table-leave" class="table table-striped table-bordered align-middle">
                                             <thead>
                                                 <tr>
@@ -97,7 +97,12 @@
                                                 <?php $id = 0 ?>
                                                     @if ($myleave)
                                                     @foreach ($myleave as $m)
-                                                <?php $id++ ?>
+                                                <?php 
+                                                    $id++;
+                                                    $applied_date = new DateTime($m->applied_date);
+                                                    $start_date = new DateTime($m->start_date);
+                                                    $end_date = new DateTime($m->end_date);
+                                                ?>
                                                 <tr class="odd gradeX">
                                                     <td>
                                                         <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle">
@@ -113,19 +118,19 @@
                                                                 </div>
                                                             </div>
                                                     </td>
-                                                    <td>{{$m->applied_date}}</td>
+                                                    <td>{{$applied_date->format('Y-m-d') }}</td>
                                                     <td>{{$m->type}}</td>
-                                                    <td>{{$m->start_date}}</td>
-                                                    <td>{{$m->end_date}}</td>
+                                                    <td>{{$start_date->format('Y-m-d') }}</td>
+                                                    <td>{{$end_date->format('Y-m-d') }}</td>
                                                     <td>{{$m->total_day_applied. ' day'}}</td>
                                                     <td>@for ($i = 1; $i <= 4; $i++)
                                                             <?php
                                                                 switch ($i) {
                                                                     case 1:
-                                                                        $status = 'Pending for approve';
+                                                                        $status = 'Pending';
                                                                         break;
                                                                     case 2:
-                                                                        $status = 'Pending';
+                                                                        $status = 'Pending for approve';
                                                                         break;
                                                                     case 3:
                                                                         $status = 'Rejected';
@@ -137,7 +142,7 @@
                                                                         $status = 'Unknown';
                                                                 }
                                                             ?>
-                                                            @if ($m->status_user == $i)
+                                                            @if ($m->status_final == $i)
                                                                 @php
                                                                     echo $status;
                                                                     break;
@@ -180,7 +185,7 @@
                                                     <div class="col-md-2">
                                                         <label class="form-label">Date</label>
                                                         <div class="input-group">
-                                                            <input type="text" class="form-control" name="name1" id="datepicker-filter" placeholder="dd/mm/yyyy"/>
+                                                            <input type="text" class="form-control" name="name1" id="datepicker-filter" placeholder="yyyy-mm-dd"/>
                                                                 <div class="input-group-text">
                                                                     <i class="fa fa-calendar"></i>
                                                                 </div>
@@ -244,7 +249,12 @@
                                                 <?php $id = 0 ?>
                                                     @if ($myleaveHistory)
                                                     @foreach ($myleaveHistory as $mh)
-                                                <?php $id++ ?>
+                                                <?php 
+                                                    $id++;
+                                                    $applied_date = new DateTime($m->applied_date);
+                                                    $start_date = new DateTime($m->start_date);
+                                                    $end_date = new DateTime($m->end_date); 
+                                                ?>
                                                 <tr class="odd gradeX">
                                                     <td>
                                                         <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle">
@@ -264,19 +274,19 @@
                                                             </div> --}}
                                                         </div>
                                                     </td>
-                                                    <td>{{$mh->applied_date}}</td>
-                                                    <td>{{$mh->type}}</td>
-                                                    <td>{{$mh->start_date}}</td>
-                                                    <td>{{$mh->end_date}}</td>
-                                                    <td>{{$mh->total_day_applied. ' day'}}</td>
+                                                    <td>{{$applied_date->format('Y-m-d') }}</td>
+                                                    <td>{{$m->type}}</td>
+                                                    <td>{{$start_date->format('Y-m-d') }}</td>
+                                                    <td>{{$end_date->format('Y-m-d') }}</td>
+                                                    <td>{{$m->total_day_applied. ' day'}}</td>
                                                     <td>@for ($i = 1; $i <= 4; $i++)
                                                             <?php
                                                                 switch ($i) {
                                                                     case 1:
-                                                                        $status = 'Pending for approve';
+                                                                        $status = 'Pending';
                                                                         break;
                                                                     case 2:
-                                                                        $status = 'Pending';
+                                                                        $status = 'Pending for approve';
                                                                         break;
                                                                     case 3:
                                                                         $status = 'Rejected';
@@ -288,7 +298,7 @@
                                                                         $status = 'Unknown';
                                                                 }
                                                             ?>
-                                                            @if ($mh->status_user == $i)
+                                                            @if ($mh->status_final == $i)
                                                                 @php
                                                                     echo $status;
                                                                     break;
@@ -298,6 +308,9 @@
                                                     </td>
                                                 </tr>
                                                 @endforeach
+                                                    {{-- <tr>
+                                                        <td colspan="7">No data found</td>
+                                                    </tr> --}}
                                                 @endif
                                             </tbody>
                                         </table>
@@ -362,11 +375,8 @@
                                 <div class="row p-2">
                                     <div class="col-sm-6" id="menu5">
                                         <label class="form-label" for="Menu5">Leave Date*</label>
-                                            <div class="input-group">
-                                                <input type="text" class="form-control" name="leave_date" id="datepicker-leave" placeholder="dd/mm/yyyy"/>
-                                                    <div class="input-group-text">
-                                                        <i class="fa fa-calendar"></i>
-                                                    </div>
+                                            <div class="">
+                                                <input type="text" class="form-control" name="leave_date" id="datepicker-leave" placeholder="yyyy-mm-dd"/>
                                             </div>
                                     </div>
                                 </div>
@@ -394,20 +404,16 @@
                                 <div class="row p-2">
                                     <div class="col-sm-6" id="menu7">
                                         <label class="form-label" for="Menu5">Start Date*</label>
-                                            <div class="input-group">
-                                                <input type="text" class="form-control" name="start_date" id="datepicker-start" placeholder="dd/mm/yyyy"/>
-                                                    <div class="input-group-text">
-                                                        <i class="fa fa-calendar"></i>
-                                                    </div>
+                                            <div class="">
+                                                <input type="text" class="form-control" name="start_date" id="datepicker-start" placeholder="yyyy-mm-dd"/>
+                                                   
                                             </div>
                                     </div>
                                     <div class="col-sm-6" id="menu8">
                                         <label class="form-label" for="Menu6">End Date*</label>
-                                            <div class="input-group">
-                                                <input type="text" class="form-control" name="end_date" id="datepicker-end" placeholder="dd/mm/yyyy"/>
-                                                    <div class="input-group-text">
-                                                        <i class="fa fa-calendar"></i>
-                                                    </div>
+                                            <div class="">
+                                                <input type="text" class="form-control" name="end_date" id="datepicker-end" placeholder="yyyy-mm-dd"/>
+                                                    
                                             </div>
                                     </div>
                                 </div>
@@ -453,7 +459,7 @@
                                     <div class="col-sm-6">
                                         <label class="form-label">Applied Date</label>
                                         <div class="input-group">
-                                            <input type="text" class="form-control" id="datepicker-applied1" placeholder="dd/mm/yyyy" readonly/>
+                                            <input type="text" class="form-control" id="datepicker-applied1" placeholder="yyyy-mm-dd" readonly/>
                                                 <div class="input-group-text">
                                                 <i class="fa fa-calendar"></i>
                                                 </div>
@@ -526,7 +532,7 @@
                                         <label class="form-label">Start Date</label>
                                             <div class="input-group">
                                                 <input type="text" class="form-control" id="datepicker-start1"  readonly/>
-                                                    <div class="input-group-text">
+                                                    <div class="input-group-text">7
                                                         <i class="fa fa-calendar"></i>
                                                     </div>
                                             </div>
@@ -564,15 +570,10 @@
                                             <div class="row">
                                                 <div class="col-sm-6">Recommended By: 
                                                     <div id="recommended_by"></div>
-                                                    {{-- <div>Najmi Abdullah <br> Head of SAU</div> --}}
                                                 </div>
                                                 <div class="col-sm-6">Approved By:
-                                                    {{-- <div>Najmi Abdullah <br> Head of SAU</div> --}}
                                                     <div id="approved_by"></div>
                                                 </div>
-                                                {{-- <div class="col-sm-4">Reason of Rejection: 
-                                                    <div id="reasonReject"></div>
-                                                </div> --}}
                                             </div>
                                             <br>
                                             <br>
@@ -596,108 +597,162 @@
                     </div>
                 </div>
             </div>
-
-    
             <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">View Leave</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">History</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
                             <form>
-                                <div class="row p-2">
-                                    <div class="col-sm-6">
-                                        <label class="form-label">Employee Name:</label>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <input type="text" class="form-control" id = "datafullname" placeholder="" readonly>
-                                    </div>
-                                </div>
 
                                 <div class="row p-2">
                                     <div class="col-sm-6">
-                                        <label class="form-label">Submitted Date:</label>
+                                        <label class="form-label">Applied Date</label>
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" id="datepicker-applied2" placeholder="yyyy-mm-dd" readonly/>
+                                                <div class="input-group-text">
+                                                <i class="fa fa-calendar"></i>
+                                                </div>
+                                        </div>
                                     </div>
+
                                     <div class="col-sm-6">
-                                        <input class="form-control" id="applieddate" readonly>
+                                        <label class="form-label">Type of Leave</label>
+                                        <div class="input-group">
+                                            <select class="form-select" name="typeofleave" id="typeofleave2" disabled> 
+                                                <option value="" label="Please Choose"></option>
+                                                @foreach($types as $dt)
+                                                    <option value="{{ $dt->id }}" {{ old('typeofleave') == $dt->id ? 'selected' : '' }}>{{ $dt->leave_types }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
                                     </div>
                                 </div>
 
-                                <div class="row p-2">
-                                    <div class="col-sm-6">
-                                        <label class="form-label">Type of Leave:</label>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <input class="form-control" id="type1" readonly>
-                                    </div>
-                                </div>
-                                        
+                                
+
                                 <div class="row p-2">
                                     <div class="col-sm-6">
                                         <label class="form-label">No of Day(s) Applied</label>
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" id="dayApplied2"  readonly/>
+                                            </div>
                                     </div>
+
                                     <div class="col-sm-6">
-                                        <input class="form-control" id="dayapplied" readonly>
+                                        <label class="form-label">Total Days Applied</label>
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" id="totalapply2" readonly/>
+                                            </div>
                                     </div>
                                 </div>
-
-                                {{-- <div class="row p-2">
-                                    <div class="col-sm-6">
-                                        <label class="form-label">Duration:</label>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <input class="form-control" id="datafullname" readonly>
-                                    </div>
-                                </div> --}}
                                         
                                 <div class="row p-2">
-                                    <div class="col-sm-6">
-                                        <label class="form-label">Start Date:</label>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <input class="form-control" id="startdate" readonly>
+                                    <div class="col-sm-6" id="menu10">
+                                        <label class="form-label">Leave Date</label>
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" id="datepicker-leave2" readonly/>
+                                                    <div class="input-group-text">
+                                                        <i class="fa fa-calendar"></i>
+                                                    </div>
+                                            </div>
                                     </div>
                                 </div>
 
                                 <div class="row p-2">
+                                    <div class="col-sm-6" id="menu20">
+                                        <label class="form-label">Leave Session</label>
+                                            <div class="input-group">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefaulta2">
+                                                    <label class="form-check-label" for="flexRadioDefaulta">
+                                                        Morning
+                                                    </label>
+                                                </div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefaultb2">
+                                                    <label class="form-check-label" for="flexRadioDefaultb">
+                                                        Evening
+                                                    </label>
+                                                </div>
+                                            </div>
+                                    </div>
+                                </div>
+                                        
+                                <div class="row p-2" id="menu30">
+                                    <div class="col-sm-6">
+                                        <label class="form-label">Start Date</label>
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" id="datepicker-start2"  readonly/>
+                                                    <div class="input-group-text">7
+                                                        <i class="fa fa-calendar"></i>
+                                                    </div>
+                                            </div>
+                                    </div>
                                     <div class="col-sm-6">
                                         <label class="form-label">End Date</label>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <input class="form-control" id="enddate" readonly>
-                                    </div>
-                                </div>
-
-                                <div class="row p-2">
-                                    <div class="col-sm-6">
-                                        <label class="form-label">Total Day(s) Applies</label>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <input class="form-control" id="totaldayapplied" readonly>
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" id="datepicker-end2"  readonly/>
+                                                    <div class="input-group-text">
+                                                        <i class="fa fa-calendar"></i>
+                                                    </div>
+                                            </div>
                                     </div>
                                 </div>
 
                                 <div class="row p-2">
-                                    <div class="col-sm-3">
-                                        <label class="form-label">Reason:</label>
+                                    <div class="col-sm-6">
+                                        <label class="form-label">Supporting Document</label>
+                                            <div class="input-group">
+                                                <span id="fileDownloadPolicya2"></span>
+                                            {{-- <a href="" target="_blank">Download.pdf</a> --}}
+                                            </div>
                                     </div>
-                                    <div class="col-sm-9">
-                                        <div class="input-group">
-                                            <textarea class="form-control" id="reason1" rows="3" readonly></textarea>
+                                    <div class="col-sm-6">
+                                        <label class="form-label">Reason</label>
+                                            <div class="input-group">
+                                                <textarea class="form-control" id="reason2" readonly></textarea>
+                                            </div>
+                                    </div>
+                                </div>
+
+                                <div class="row p-2">
+                                    <div class="col-sm-12">
+                                        <div class="form-control">
+                                            <div class="row">
+                                                <div class="col-sm-6">Recommended By: 
+                                                    <div id="recommended_by2"></div>
+                                                </div>
+                                                <div class="col-sm-6">Approved By:
+                                                    <div id="approved_by2"></div>
+                                                </div>
+                                            </div>
+                                            <br>
+                                            <br>
+
+                                            <div class="row">
+                                                <div class="col-sm-6">Status: 
+                                                    <div id="status_10">Pending</div>
+                                                </div>
+                                                <div class="col-sm-6">Status:
+                                                    <div id="status_20">Pending</div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </form>
                         </div>
                         <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                {{-- <button type="button" class="btn btn-primary">Submit</button> --}}
-                            </div>
+                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+                        </div>
                     </div>
                 </div>
             </div>
+
+    
 
             <!-- BEGIN scroll-top-btn -->
             <a href="javascript:;" class="btn btn-icon btn-circle btn-success btn-scroll-to-top" data-toggle="scroll-to-top">

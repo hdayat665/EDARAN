@@ -83,100 +83,31 @@
 							<h4 class="panel-title"> <i class="fas fa-message fa-fw me-3"></i>Announcements</h4>
 				</div>
 				<div class="panel-body">
-						<table id="data-table-default-announcement" class="table table-striped table-bordered align-middle">
-				<thead>
-					<tr>
-						<th width="1%"></th>
-						<th class="text-nowrap">Date</th>
-						<th class="text-nowrap">Time</th>
-						<th class="text-nowrap">Title</th>
-						<th class="text-nowrap">Content</th>
-						<th class="text-nowrap">Supporting Document</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr class="odd gradeX">
-						<td width="1%" class="fw-bold text-dark">1</td>
-						<td>1/1/2022</td>
-						<td>09.25 am</td>
-						<td>Title A</td>
-						<td>Content 2</td>
-						<td><a href="#">example.png</a></td>
-					</tr>
-					<tr class="even gradeC">
-						<td class="fw-bold text-dark">2</td>
-						<td>13/1/2022</td>
-						<td>01.25 am</td>
-						<td>Title B</td>
-						<td>Content F</td>
-						<td><a href="#">example.png</a></td>
-					</tr>
-					<tr class="odd gradeA">
-						<td class="fw-bold text-dark">3</td>
-						<td>16/1/2022</td>
-						<td>07.25 am</td>
-						<td>Title C</td>
-						<td>Content A</td>
-						<td><a href="#">example.png</a></td>
-					</tr>
-					<tr class="even gradeA">
-						<td class="fw-bold text-dark">4</td>
-						<td>1/2/2022</td>
-						<td>09.22 am</td>
-						<td>Title D</td>
-						<td>Content D</td>
-						<td><a href="#">example.png</a></td>
-					</tr>
-					<tr class="odd gradeA">
-						<td class="fw-bold text-dark">5</td>
-						<td>1/6/2022</td>
-						<td>09.25 pm</td>
-						<td>Title E</td>
-						<td>Content A</td>
-						<td><a href="#">example.png</a></td>
-					</tr>
-					<tr class="even gradeA">
-						<td class="fw-bold text-dark">6</td>
-						<td>1/8/2022</td>
-						<td>02.25 pm</td>
-						<td>Title E</td>
-						<td>Content A</td>
-						<td><a href="#">example.png</a></td>
-					</tr>
-					<tr class="gradeA">
-						<td class="fw-bold text-dark">7</td>
-						<td>12/12/2022</td>
-						<td>01.25 am</td>
-						<td>Title A</td>
-						<td>Content A</td>
-						<td><a href="#">example.png</a></td>
-					</tr>
-					<tr class="gradeA">
-						<td class="fw-bold text-dark">8</td>
-						<td>1/1/2023</td>
-						<td>06.25 am</td>
-						<td>Title A</td>
-						<td>Content A</td>
-						<td><a href="#">example.png</a></td>
-					</tr>
-					<tr class="gradeA">
-						<td class="fw-bold text-dark">9</td>
-						<td>12/11/2023</td>
-						<td>03.25 am</td>
-						<td>Title A</td>
-						<td>Content A</td>
-						<td><a href="#">example.png</a></td>
-					</tr>
-					<tr class="gradeA">
-						<td class="fw-bold text-dark">10</td>
-						<td>1/1/2025</td>
-						<td>05.25 am</td>
-						<td>Title A</td>
-						<td>Content A</td>
-						<td><a href="#">example.png</a></td>
-					</tr>
+				<table id="tablenews" class="table table-striped table-bordered align-middle">
+                <thead>
+				<tr>
+					<th class="text-nowrap">No.</th>
+					<th class="text-nowrap">Title</th>
+					<th class="text-nowrap">Content</th>
+					<th class="text-nowrap">Link</th>
+					<th class="text-nowrap">Attachment</th>
+				</tr>
+                </thead>
+                <tbody>
+					@if ($news)
+						@foreach ($news as $index => $new)
+							<tr>
+								<td>{{$index+1}}</td>
+								<td>{{$new->title}}</td>
+								<td>{{$new->content}}</td>
+								<td><a href= "{{$new->sourceURL}}">{{$new->sourceURL}}</a></td>
+								<td><a href="{{ route('download', ['filename' => $new->file]) }}">{{$new->file}}</a></td>  
+							</tr>
+						@endforeach
+					@endif
 				</tbody>
-			</table>
+
+            </table>
 
 						
 				</div>
@@ -191,114 +122,41 @@
 				</div>
 				
 				<div class="panel-body">
-				
-						<table id="data-table-default-events" class="table table-striped table-bordered align-middle">
-					<thead>
+				<table id="timesheetapproval" class="table table-striped table-bordered align-middle">
+				<thead>
 					<tr>
-						<th width="1%"></th>
+						<th class="text-nowrap">No.</th>
 						<th class="text-nowrap">Event Name</th>
 						<th class="text-nowrap">Date</th>
 						<th class="text-nowrap">Time</th>
 						<th class="text-nowrap">Location</th>
 						<th class="text-nowrap">Description</th>
-						<th class="text-nowrap">Participants</th>
+						<th class="text-nowrap">Participant</th>
 					</tr>
-				</thead>
-				<tbody>
-					<tr class="odd gradeX">
-						<td class="fw-bold text-dark">1</td>
-						<td>Event A</td>
-						<td>1/1/2021-1/2/2021</td>
-						<td>05.25 am - 010.25 am</td>
-						<td>location A</td>
-						<td>Description A</td>
-						<td> 423 </td>
-					</tr>
-					<tr class="even gradeC">
-						<td class="fw-bold text-dark">2</td>
-						<td>Event A</td>
-						<td>1/1/2021-1/2/2021</td>
-						<td>05.25 am - 010.25 am</td>
-						<td>location A</td>
-						<td>Description A</td>
-						<td> 23 </td>
-					</tr>
-					<tr class="odd gradeA">
-						<td class="fw-bold text-dark">3</td>
-						<td>Event A</td>
-						<td>1/1/2021-1/2/2021</td>
-						<td>05.25 am - 010.25 am</td>
-						<td>location A</td>
-						<td>Description A</td>
-						<td> 12 </td>
-					</tr>
-					<tr class="even gradeA">
-						<td class="fw-bold text-dark">4</td>
-						<td>Event A</td>
-						<td>1/1/2021-1/2/2021</td>
-						<td>05.25 am - 010.25 am</td>
-						<td>location A</td>
-						<td>Description A</td>
-						<td> 43 </td>
-					</tr>
-					<tr class="odd gradeA">
-						<td class="fw-bold text-dark">5</td>
-						<td>Event A</td>
-						<td>1/1/2021-1/2/2021</td>
-						<td>05.25 am - 010.25 am</td>
-						<td>location A</td>
-						<td>Description A</td>
-						<td> 123 </td>
-					</tr>
-					<tr class="even gradeA">
-						<td class="fw-bold text-dark">6</td>
-						<td>Event A</td>
-						<td>1/1/2021-1/2/2021</td>
-						<td>05.25 am - 010.25 am</td>
-						<td>location A</td>
-						<td>Description A</td>
-						<td> 23 </td>
-					</tr>
-					<tr class="gradeA">
-						<td class="fw-bold text-dark">7</td>
-						<td>Event A</td>
-						<td>1/1/2021-1/2/2021</td>
-						<td>05.25 am - 010.25 am</td>
-						<td>location A</td>
-						<td>Description A</td>
-						<td> 5 </td>
-					</tr>
-					<tr class="gradeA">
-						<td class="fw-bold text-dark">8</td>
-						<td>Event A</td>
-						<td>1/1/2021-1/2/2021</td>
-						<td>05.25 am - 010.25 am</td>
-						<td>location A</td>
-						<td>Description A</td>
-						<td> 36 </td>
-					</tr>
-					<tr class="gradeA">
-						<td class="fw-bold text-dark">9</td>
-						<td>Event A</td>
-						<td>1/1/2021-1/2/2021</td>
-						<td>05.25 am - 010.25 am</td>
-						<td>location A</td>
-						<td>Description A</td>
-						<td> 25 </td>
-					</tr>
-					<tr class="gradeA">
-						<td class="fw-bold text-dark">10</td>
-						<td>Event A</td>
-						<td>1/1/2021-1/2/2021</td>
-						<td>05.25 am - 010.25 am</td>
-						<td>location A</td>
-						<td>Description A</td>
-						<td> 423 </td>
-					</tr>
-				</tbody>
-			</table>
+					</thead>
+					<tbody>
+						@if ($events)
+							@foreach ($events as $index => $event)
+								<tr class="odd gradeX">
+									<td>{{$index+1}}</td>
+									<td>{{ $event->event_name }}</td>
+									<td>{{ $event->start_date }} - {{ $event->end_date }}</td>
+									<td>{{ $event->start_time }} - {{ $event->end_time }}</td>
+									<td>{{ $event->location ? getProjectLocation($event->location)->location_name : '-' }}
+									</td>
+									<td>{{ $event->desc ? $event->desc : '-' }}</td>
+									{{-- @php
+										$names = explode(',', $event->participant);
+									@endphp --}}
+									<td style="text-align: center" width="7%"><a class="btn btn-primary" href="javascript:;" data-bs-toggle="modal"
+											{{-- data-id="{{ $event->id }}" id="buttonnViewParticipant"></i> ({{ count($names) }}) view</a></td> --}}
+											data-id="{{ $event->id }}" id="buttonnViewParticipant"></i> view</a></td>
+								</tr>
+							@endforeach
+						@endif
+					</tbody>
 
-						
+				</table>
 				</div>
 					
 			</div>

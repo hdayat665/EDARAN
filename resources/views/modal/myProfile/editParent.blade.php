@@ -43,7 +43,7 @@
                                 </div>
                                 <div class="col-sm-6">
                                     <label for="lastname" class="form-label">New Identification Number*</label>
-                                    <input type="number" id="idnumber7" name="idNo" value="" class="form-control" placeholder="000000-00-0000">
+                                    <input type="number" id="idnumber7" name="idNo" value="" class="form-control" placeholder="000000000000">
                                     
                                 </div>
                             </div>
@@ -64,7 +64,7 @@
                                 <div class="col-sm-12">
                                     <label for="passport" class="form-label">Passport Number</label>
                                   
-                                    <input type="text" id="passportparentedit" name="passport"  class="form-control" aria-describedby="passport" placeholder="A00000000">
+                                    <input type="text" id="passportparentedit" name="passport"  class="form-control" aria-describedby="passport" placeholder="PASSPORT NUMBER">
                                 </div>
                             </div>
                         </div>
@@ -143,7 +143,7 @@
                     <div class="row p-2">
                         <div class="col-sm-6">
                             <label for="passport" class="form-label">Contact Number</label>
-                            <input type="text" id="contactNoP1" name="contactNo" class="form-control" aria-describedby="passport" placeholder="000-00000000">
+                            <input type="text" id="contactNoP1" name="contactNo" class="form-control" aria-describedby="passport" placeholder="00000000000">
                         </div>
                         <div class="col-sm-6">
                             <label for="age" class="form-label">Gender*</label>
