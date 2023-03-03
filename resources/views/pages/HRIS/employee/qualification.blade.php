@@ -37,31 +37,32 @@
                      </tr>
                      </thead>
                      <tbody>
-                        <?php $id = 0 ?>
-                        @if ($qualification)
-                            @foreach ($qualification as $education)
-                            <?php $id++ ?>
-                            <tr>
-                                <td> {{$id}} </td>
-                                <td>
-                                    <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle"><i class="fa fa-cogs"></i> Actions <i class="fa fa-caret-down"></i></a>
-                                    <div class="dropdown-menu">
-                                        <a href="javascript:;" id="educationModalEdit{{$education->id}}" data-id="{{$education->id}}" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#editmodaledd"> Edit</a>
-                                        <div class="dropdown-divider"></div>
-                                        <a href="javascript:;" id="deleteEducation{{$education->id}}" data-id="{{$education->id}}" class="dropdown-item" data-bs-toggle="modal"> Delete</a>
-                                        <!-- <div class="dropdown-divider"></div> -->
-                                    </div>
-                                </td>
-    
-                                <td> {{ $education->fromDate }} </td>
-                                <td> {{ $education->toDate }} </td>
-                                <td style="text-transform: uppercase;"> {{ $education->instituteName }} </td>
-                                <td style="text-transform: uppercase;"> {{ $education->highestLevelAttained }} </td>
-                                <td style="text-transform: uppercase;"> {{ $education->result }} </td>
-                            </tr>
-                            @endforeach
-                        @endif
-                        <span style="display: none"><input type="text" id="educationId" value="{{$educationId}}"></span>
+                    <?php $id = 0 ?>
+                    @if ($educations)
+                        @foreach ($educations as $education)
+                        <?php $id++ ?>
+                        <tr>
+                            <td> {{$id}} </td>
+                            <td>
+                                <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle"><i class="fa fa-cogs"></i> Actions <i class="fa fa-caret-down"></i></a>
+                                <div class="dropdown-menu">
+                                    <a href="javascript:;" id="educationModalEdit{{$education->id}}" data-id="{{$education->id}}" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#editmodaledd"> Edit</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a href="javascript:;" id="deleteEducation{{$education->id}}" data-id="{{$education->id}}" class="dropdown-item" data-bs-toggle="modal"> Delete</a>
+                                    <!-- <div class="dropdown-divider"></div> -->
+                                </div>
+                            </td>
+
+                            <td> {{ $education->fromDate }} </td>
+                            <td> {{ $education->toDate }} </td>
+                            <td style="text-transform: uppercase;"> {{ $education->instituteName }} </td>
+                            <td style="text-transform: uppercase;"> {{ $education->highestLevelAttained }} </td>
+                            <td style="text-transform: uppercase;"> {{ $education->result }} </td>
+                            <td><a href="{{ route('download', ['filename' => $education->file]) }}">{{$education->file}}</a></td>
+                        </tr>
+                        @endforeach
+                    @endif
+                    <span style="display: none"><input type="text" id="educationId" value="{{$educationId}}"></span>
                      </tbody>
                  </table>
              </div>
@@ -84,24 +85,24 @@
                      </thead>
                      <tbody>
                         <?php $id = 0 ?>
-                        @if ($qualification)
-                            @foreach ($qualification as $others)
+                        @if ($others)
+                            @foreach ($others as $other)
                             <?php $id++ ?>
                             <tr>
                                 <td> {{$id}} </td>
                                 <td>
                                     <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle"><i class="fa fa-cogs"></i> Actions <i class="fa fa-caret-down"></i></a>
                                     <div class="dropdown-menu">
-                                        <a href="javascript:;" id="othersQualificationModalEdit{{$others->id}}" data-id="{{$others->id}}" class="dropdown-item" data-bs-toggle="modal"> Edit</a>
+                                        <a href="javascript:;" id="othersQualificationModalEdit{{$other->id}}" data-id="{{$other->id}}" class="dropdown-item" data-bs-toggle="modal"> Edit</a>
                                         <div class="dropdown-divider"></div>
                                         <a href="javascript:;" id="" data-id="" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#deleteOthers"> Delete</a>
                                         <!-- <div class="dropdown-divider"></div> -->
                                     </div>
                                 </td>
-    
-                                <td> {{ $others->otherDate }} </td>
-                                <td style="text-transform: uppercase;"> {{ $others->otherPQDetails }} </td>
-                                <td> {{ $others->supportOtherDoc }} </td>
+
+                                <td> {{ $other->otherDate }} </td>
+                                <td style="text-transform: uppercase;"> {{ $other->otherPQDetails }} </td>
+                                <td><a href="{{ route('download', ['filename' => $other->file]) }}">{{$other->file}}</a></td>
                             </tr>
                             @endforeach
                         @endif

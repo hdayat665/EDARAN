@@ -37,8 +37,8 @@
                     
                     <tbody>
                     <?php $id = 0 ?>
-                    @if ($qualification)
-                        @foreach ($qualification as $education)
+                    @if ($educations)
+                        @foreach ($educations as $education)
                         <?php $id++ ?>
                         <tr>
                             <td> {{$id}} </td>
@@ -57,6 +57,7 @@
                             <td style="text-transform: uppercase;"> {{ $education->instituteName }} </td>
                             <td style="text-transform: uppercase;"> {{ $education->highestLevelAttained }} </td>
                             <td style="text-transform: uppercase;"> {{ $education->result }} </td>
+                            <td><a href="{{ route('download', ['filename' => $education->file]) }}">{{$education->file}}</a></td>
                         </tr>
                         @endforeach
                     @endif
@@ -81,57 +82,27 @@
                         <th class="text-nowrap">Attachments</th>
                     </tr>
                     </thead>
-                    <tbody>
-                    {{-- <tr>
-                        <td>1</td>
-                        <td>
-                            <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle"><i class="fa fa-cogs"></i> Action <i class="fa fa-caret-down"></i></a>
-                            <div class="dropdown-menu">
-                                <a href="javascript:;" id="" data-id="" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#editmodalothers" editmodalothers > Edit</a>
-                                <div class="dropdown-divider"></div>
-                                <a href="javascript:;" id="" data-id="" class="dropdown-item"> Delete</a>
-                                <div class="dropdown-divider"></div>
-                            </div>
-                        </td>
-                        <td>16/09/2022</td>
-                        <td>laravel Training</td>
-                        <td>laravel.pdf</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>
-                            <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle"><i class="fa fa-cogs"></i> Action <i class="fa fa-caret-down"></i></a>
-                            <div class="dropdown-menu">
-                                <a href="javascript:;" id="" data-id="" class="dropdown-item" > Edit</a>
-                                <div class="dropdown-divider"></div>
-                                <a href="javascript:;" id="" data-id="" class="dropdown-item"> Delete</a>
-                                <div class="dropdown-divider"></div>
-                            </div>
-                        </td>
-                        <td>17/09/2022</td>
-                        <td>Architect</td>
-                        <td>Architect.pdf</td>
-                    </tr> --}}
 
+                    <tbody>
                     <?php $id = 0 ?>
-                    @if ($qualification)
-                        @foreach ($qualification as $others)
+                    @if ($others)
+                        @foreach ($others as $other)
                         <?php $id++ ?>
                         <tr>
                             <td> {{$id}} </td>
                             <td>
                                 <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle"><i class="fa fa-cogs"></i> Actions <i class="fa fa-caret-down"></i></a>
                                 <div class="dropdown-menu">
-                                    <a href="javascript:;" id="othersQualificationModalEdit{{$others->id}}" data-id="{{$others->id}}" class="dropdown-item" data-bs-toggle="modal"> Edit</a>
+                                    <a href="javascript:;" id="othersQualificationModalEdit{{$other->id}}" data-id="{{$other->id}}" class="dropdown-item" data-bs-toggle="modal"> Edit</a>
                                     <div class="dropdown-divider"></div>
                                     <a href="javascript:;" id="" data-id="" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#deleteOthers"> Delete</a>
                                     <!-- <div class="dropdown-divider"></div> -->
                                 </div>
                             </td>
 
-                            <td> {{ $others->otherDate }} </td>
-                            <td style="text-transform: uppercase;"> {{ $others->otherPQDetails }} </td>
-                            <td> {{ $others->supportOtherDoc }} </td>
+                            <td> {{ $other->otherDate }} </td>
+                            <td style="text-transform: uppercase;"> {{ $other->otherPQDetails }} </td>
+                            <td><a href="{{ route('download', ['filename' => $other->file]) }}">{{$other->file}}</a></td>
                         </tr>
                         @endforeach
                     @endif

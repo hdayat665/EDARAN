@@ -70,11 +70,39 @@ if (!function_exists('getCountryRegisterDomain')) {
 //         return $data;
 //     }
 // }
-   
+
+// if (!function_exists('upload')) {
+//     function upload($uploadedFile, $type = '')
+//     {
+//         $filename = $uploadedFile->getClientOriginalName();
+
+//         Storage::disk('local')->put(
+//             'public/' . $filename,
+//             file_get_contents($uploadedFile)
+//         );
+
+//         $data['filename'] = $filename;
+
+//         return $data;
+//     }
+// }
+
 if (!function_exists('upload')) {
     function upload($uploadedFile, $type = '')
     {
+        $allowedTypes = ['pdf'];
+        $maxSize = 5120; // 5MB
+
         $filename = $uploadedFile->getClientOriginalName();
+        $extension = $uploadedFile->getClientOriginalExtension();
+
+        if (!in_array($extension, $allowedTypes)) {
+            throw new Exception("Invalid file type. Only PDF files are allowed.");
+        }
+
+        if ($uploadedFile->getSize() > $maxSize * 1024) {
+            throw new Exception("File size exceeds the maximum allowed limit of 5 MB.");
+        }
 
         Storage::disk('local')->put(
             'public/' . $filename,
@@ -86,6 +114,8 @@ if (!function_exists('upload')) {
         return $data;
     }
 }
+
+
 if (!function_exists('dateFormat')) {
     function dateFormat($date = '')
     {

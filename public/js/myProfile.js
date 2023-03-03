@@ -456,6 +456,7 @@ $.validator.addMethod("noSpecialChars", function(value, element) {
                 instituteName: "required",
                 highestLevelAttained: "required",
                 result: "required",
+                file:"required",
             },
 
             messages: {
@@ -464,6 +465,7 @@ $.validator.addMethod("noSpecialChars", function(value, element) {
                 instituteName: "Please insert Institute Name",
                 highestLevelAttained: "Please insert Highest Level Attained",
                 result: "Please insert Result",
+                file: "Please upload valid file",
             },
 
             submitHandler: function (form) {
@@ -608,11 +610,20 @@ $.validator.addMethod("noSpecialChars", function(value, element) {
     
             educationData.done(function(data) {
                 education = data.data;
-                $('#educationFromDate1').val(education.FromDate);
-                $('#educationToDate1').val(education.ToDate);
+                console.log(data.data);
+                //var fromDateFormatted = moment(education.FromDate).format('DD-MM-YYYY');
+                //var toDateFormatted = moment(education.ToDate).format('DD-MM-YYYY');
+
+                //$('#educationFromDate1').val(fromDateFormatted);
+                //$('#educationToDate1').val(toDateFormatted);
+                $('#educationFromDate1').val(education.fromDate);
+                $('#educationToDate1').val(education.toDate);
                 $('#educationinstituteName1').val(education.instituteName);
                 $('#educationhighestLevelAttained1').val(education.highestLevelAttained);
                 $('#educationResult1').val(education.result);
+                if (data.file) {
+                    $('#fileDownloadOthers').html('<a href="/storage/' + data.file + '">Download File</a>')
+                }
             });
             $('#editmodaledd').modal('show');
         });
@@ -655,7 +666,7 @@ $.validator.addMethod("noSpecialChars", function(value, element) {
     
         function getEducation(id) {
             return $.ajax({
-                url: "/getEducation/" + id
+                url: "/getEducationById/" + id,
             });
         }
     }
@@ -669,6 +680,7 @@ $.validator.addMethod("noSpecialChars", function(value, element) {
               instituteName: "required",
               highestLevelAttained: "required",
               result: "required",
+              file: "required"
           },
 
           messages: {
@@ -677,6 +689,7 @@ $.validator.addMethod("noSpecialChars", function(value, element) {
               instituteName: "Please insert Institute Name",
               highestLevelAttained: "Please insert Highest Level Attained",
               result: "Please insert Result",
+              file: "Please upload valid file",
           },
 
           submitHandler: function (form) {
@@ -1109,6 +1122,9 @@ $.validator.addMethod("noSpecialChars", function(value, element) {
                 $("#stateEdit").val(address.state);
                 $("#countryEdit").val(address.country);
                 $("#addressTypeEdit").val(address.addressType);
+                if (data.file) {
+                    $('#fileDownloadEdu').html('<a href="/storage/' + data.file + '">Download File</a>')
+                }
             });
             $("#modaleditaddress").modal("show");
         });
