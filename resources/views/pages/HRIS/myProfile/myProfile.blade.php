@@ -125,7 +125,11 @@
                             {{-- new --}}
                             <div class="col-sm-3 part">
                                 <label for="idattach" class="form-label" >ID Attachment</label>
-                                <input type="file" class="form-control-file" id="">
+                                <input id="fileupload" type="file" multiple="multiple" name="fileID" value="">
+                                @if ($profile->fileID)
+                                    <a href="{{ route('download', ['filename' => $profile->fileID]) }}">{{$profile->fileID}}</a>
+                                @endif
+
                             </div> 
                         </div>
 

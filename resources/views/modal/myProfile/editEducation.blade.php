@@ -12,13 +12,13 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="" class="form-label">From Date</label>
-                        <input type="text" class="form-control" id="educationFromDate1" name="fromDate" value="" placeholder="YYYY/MM/DD">
+                        <input type="text" class="form-control" id="datepicker-fromdate" name="fromDate" placeholder="DD/MM/YYYY" value="$educationToDate1">
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="" class="form-label">To Date</label>
-                        <input type="text" class="form-control" id="educationToDate1" name="toDate" value="" placeholder="YYYY/MM/DD">
+                        <input type="text" class="form-control" id="educationToDate1" name="toDate" placeholder="DD/MM/YYYY">
                     </div>
                 </div>
             </div>
@@ -46,7 +46,7 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="" class="form-label">Education Attachments</label>
-                        <input type="file" class="form-control-file" id="">
+                        <input id="fileupload" type="file" name="file" multiple="multiple" >
                     </div>
                 </div>
             </div>
