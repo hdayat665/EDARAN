@@ -17,7 +17,7 @@ class MyleaveService
         
          $data = MyLeaveModel::where('myleave.tenant_id', Auth::user()->tenant_id)
             ->leftJoin('leave_types', 'myleave.lt_type_id', '=', 'leave_types.id')
-            ->where('myleave.up_user_id', '=', '. Auth::user()->id .')
+            ->where('myleave.up_user_id', '=', Auth::user()->id)
             ->where('myleave.leave_date', '>=', Carbon::now()->format('Y-m-d'))
             ->select('myleave.*', 'leave_types.leave_types as type')
             ->orderBy('myleave.applied_date', 'desc')
