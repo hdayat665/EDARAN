@@ -1,3 +1,18 @@
+<style>
+    /* Set the size and position of the autocomplete input field */
+    #autocomplete {
+      height: 30px;
+      width: 100%;
+      margin-top: 10px;
+    }
+    #autocomplete2 {
+      height: 30px;
+      width: 100%;
+      margin-top: 10px;
+    }
+    
+</style>
+
 <div class="">
     <div class="accordion" id="accordionExample">
         <div class="accordion-item">
@@ -215,8 +230,8 @@
                             <div class="col-md-4">
                                 <label class="form-label">Address Start</label>
                             </div>
-                            <div class="col-md-8">
-                                <input type="text" class="form-control" name="address_start">
+                            <div class="col-md-8"> 
+                                <input type="text" class="form-control" name="address_start" id="autocomplete" placeholder="Enter a location">
                             </div>
                         </div>
                         <div class="row p-2">
@@ -274,9 +289,62 @@
                                 <label class="form-label">Destination Address</label>
                             </div>
                             <div class="col-md-8">
-                                <input type="text" class="form-control" name="location_address">
+                                <input type="text" class="form-control" name="location_address" id="autocomplete2" placeholder="Enter a location">
+
+                            </div>
+                            <div id="result"></div>
+                        </div>
+                        <!-- <div class="row p-2">
+                            <div class="col-md-4">
+                                <label class="form-label">TOTAL DISTANCE</label>
+                            </div>
+                            <div class="col-md-3">
+                                <input type="text" class="form-control" name="">
+                            </div>
+                            
+                        </div>
+                        <div class="row p-2">
+                            <div class="col-md-4">
+                                <label class="form-label">Distance</label>
+                            </div>
+                            <div class="col-md-3">
+                                <input type="text" class="form-control" name="">
+                            </div>
+                            <div class="col-md-2">
+                                <label class="form-label">entitlement</label>
+                            </div>
+                            <div class="col-md-3">
+                                <input type="number" class="form-control" name="">
                             </div>
                         </div>
+                        <div class="row p-2">
+                            <div class="col-md-4">
+                                <label class="form-label">Distance</label>
+                            </div>
+                            <div class="col-md-3">
+                                <input type="text" class="form-control" name="">
+                            </div>
+                            <div class="col-md-2">
+                                <label class="form-label">entitlement</label>
+                            </div>
+                            <div class="col-md-3">
+                                <input type="number" class="form-control" name="">
+                            </div>
+                        </div>
+                        <div class="row p-2">
+                            <div class="col-md-4">
+                                <label class="form-label">Distance</label>
+                            </div>
+                            <div class="col-md-3">
+                                <input type="text" class="form-control" name="">
+                            </div>
+                            <div class="col-md-2">
+                                <label class="form-label">entitlement</label>
+                            </div>
+                            <div class="col-md-3">
+                                <input type="number" class="form-control" name="">
+                            </div>
+                        </div> -->
                         <div class="row p-2">
                             <div class="col-md-4">
                                 <label class="form-label">Mileage</label>
@@ -616,3 +684,59 @@
         </div>
     </div>
 </div>
+<script src="https://maps.googleapis.com/maps/api/js?key=keyapi&libraries=places"></script>
+
+<script>
+  function initAutocomplete() {
+    // Create a new instance of the Autocomplete object, and set the input field as its search box.
+    var input = document.getElementById('autocomplete');
+    var autocomplete = new google.maps.places.Autocomplete(input);
+
+    // Set the types of results to display (in this case, addresses).
+    autocomplete.setTypes(['address']);
+    initAutocomplete2()
+  }
+
+  function initAutocomplete2() {
+    // Create a new instance of the Autocomplete object, and set the input field as its search box.
+    var input2 = document.getElementById('autocomplete2');
+    var autocomplete2 = new google.maps.places.Autocomplete(input2);
+
+    // Set the types of results to display (in this case, addresses).
+    autocomplete2.setTypes(['address']);
+
+    autocomplete2.addListener('place_changed', function() {
+          calculateDistance();
+        });
+
+  }
+
+  // Call the initAutocomplete() function on page load
+  document.addEventListener("DOMContentLoaded", function() {
+    initAutocomplete();
+  });
+
+//   $("#autocomplete,#autocomplete2").focus(function () {
+//         calculateDistance()
+//     });
+  function calculateDistance() {
+        var startAddress = document.getElementById('autocomplete').value;
+        var endAddress = document.getElementById('autocomplete2').value;
+        
+        var service = new google.maps.DistanceMatrixService();
+
+        service.getDistanceMatrix({
+          origins: [startAddress],
+          destinations: [endAddress],
+          travelMode: 'DRIVING',
+          unitSystem: google.maps.UnitSystem.METRIC,
+        }, function(response, status) {
+          if (status !== 'OK') {
+            alert('Error: ' + status);
+          } else {
+            var distance = response.rows[0].elements[0].distance.text;
+            document.getElementById('result').innerHTML = 'The distance between the two addresses is ' + distance + '.';
+          }
+        });
+      }
+</script>
