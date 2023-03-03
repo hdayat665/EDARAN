@@ -380,7 +380,7 @@ class SettingService
     public function createBranch($r)
     {
         $input = $r->input();
-
+        //pr($input);
         date_default_timezone_set("Asia/Kuala_Lumpur");
         $etData = Branch::where([['branchName', $input['branchName']], ['tenant_id', Auth::user()->tenant_id]])->first();
         if ($etData) {

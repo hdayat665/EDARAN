@@ -51,7 +51,7 @@
                                         <option class="form-label" value="">Please Select</option>
                                         <?php $projects = project() ?>
                                         @foreach ($projects as $project)
-                                        <option value="">{{$project->project_name}}</option>
+                                        <option value= {{$project->id}}>{{$project->project_name}}</option>
                                         @endforeach
                                     </select>
                                 </div>
