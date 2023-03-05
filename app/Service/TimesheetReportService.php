@@ -116,18 +116,20 @@ class TimesheetReportService
         }
     
         $data = DB::table('timesheet_log as a')
-            ->leftJoin('project as b', 'a.project_id', '=', 'b.id')
-            ->leftJoin('employment as c', 'a.user_id', '=', 'c.user_id')
-            ->leftJoin('department as d', 'c.department', '=', 'd.id')
-            ->leftJoin('designation as e', 'c.designation', '=', 'e.id')
-            ->select('a.*', 'b.project_name', 'c.employeeName', 'd.departmentName', 'e.designationName')
-            ->where($cond)
-            ->whereBetween('date', [$startDate, $endDate])
-            ->whereRaw('SEC_TO_TIME(TIME_TO_SEC(a.total_hour)) > "09:00:00"')
-            ->get();
+        ->leftJoin('project as b', 'a.project_id', '=', 'b.id')
+        ->leftJoin('employment as c', 'a.user_id', '=', 'c.user_id')
+        ->leftJoin('department as d', 'c.department', '=', 'd.id')
+        ->leftJoin('designation as e', 'c.designation', '=', 'e.id')
+        ->select('a.date', DB::raw('SEC_TO_TIME(SUM(TIME_TO_SEC(a.total_hour))) as total_hour'), 'b.project_name', 'c.employeeName', 'd.departmentName', 'e.designationName')
+        ->where($cond)
+        ->whereBetween('date', [$startDate, $endDate])
+        ->groupBy('a.date')
+        ->get();
+    
     
         return $data;
     }
+    
     
                              
     public function employeeReportAll($input = [])
