@@ -237,22 +237,22 @@ $(document).ready(function () {
     });
     $("#expiryDateChild").datepicker({
         todayHighlight: true,
-        format: "yyyy-mm-dd",
+        format: "yyyy/mm/dd",
         autoclose: true,
     });
     $("#DOBChild").datepicker({
         todayHighlight: true,
-        format: "yyyy-mm-dd",
+        format: "yyyy/mm/dd",
         autoclose: true,
     });
     $("#dobsibling").datepicker({
         todayHighlight: true,
-        format: "yyyy-mm-dd",
+        format: "yyyy/mm/dd",
         autoclose: true,
     });
     $("#DOBS").datepicker({
         todayHighlight: true,
-        format: "yyyy-mm-dd",
+        format: "yyyy/mm/dd",
         autoclose: true,
     });
 
@@ -298,12 +298,12 @@ $(document).ready(function () {
 
     $("#expirydatemc").datepicker({
         todayHighlight: true,
-        format: "yyyy-mm-dd",
+        format: "yyyy/mm/dd",
         autoclose: true,
     });
     $("#dommc").datepicker({
         todayHighlight: true,
-        format: "yyyy-mm-dd",
+        format: "yyyy/mm/dd",
         autoclose: true,
     });
     $(".partCheck3").click(function () {
@@ -379,19 +379,19 @@ $(document).ready(function () {
     $("#datepicker-fromdate").datepicker({
         todayHighlight: true,
         autoclose: true,
-        format: "dd/mm/yyyy",
+        format: "yyyy/mm/dd",
     });
     
     $("#datepicker-todate").datepicker({
         todayHighlight: true,
         autoclose: true,
-        format: "dd/mm/yyyy",
+        format: "yyyy/mm/dd",
     });
 
     $("#datepicker-others").datepicker({
         todayHighlight: true,
         autoclose: true,
-        format: "dd/mm/yyyy",
+        format: "yyyy/mm/dd",
     });
 
     var hash = location.hash.replace(/^#/, ""); // ^ means starting, meaning only match the first hash
@@ -425,31 +425,31 @@ $(document).ready(function () {
 
     $("#effective-from").datepicker({
         todayHighlight: true,
-        format: "yyyy-mm-dd",
+        format: "yyyy/mm/dd",
         autoclose: true,
     });
 
     $("#datepicker-joindate").datepicker({
         todayHighlight: true,
-        format: "yyyy-mm-dd",
+        format: "yyyy/mm/dd",
         autoclose: true,
     });
 
     $("#dob").datepicker({
         todayHighlight: true,
-        format: "yyyy-mm-dd",
+        format: "yyyy/mm/dd",
         autoclose: true,
     });
 
     $("#expirydate").datepicker({
         todayHighlight: true,
-        format: "yyyy-mm-dd",
+        format: "yyyy/mm/dd",
         autoclose: true,
     });
 
     $("#DOBaddparent").datepicker({
         todayHighlight: true,
-        format: "yyyy-mm-dd",
+        format: "yyyy/mm/dd",
         autoclose: true,
     });
 
@@ -592,6 +592,10 @@ $(document).ready(function () {
         }
     });
 
+    $.validator.addMethod("noNumbers", function(value, element) {
+        return this.optional(element) || /^[a-zA-Z]+$/.test(value);
+    }, "Please Insert Alphabet Only");
+
     $.validator.addMethod("noSpecialChars", function(value, element) {
         return this.optional(element) || /^[^A-Za-z!@#$%^&*()\-_+={}[\]\\|<>"'\/~`,.;: ]*$/.test(value);
       }, "Special Characters, Spaces, and Alphabet Characters Are Not Allowed.");      
@@ -601,6 +605,35 @@ $(document).ready(function () {
         return this.optional(element) || /^[^\s@]+@[^\s@]+\.(?:com|net|org|edu|gov|mil|biz|info|name|museum|coop|aero|[a-z]{2})$/.test(value);
       }, "Please Insert Valid Email Address");
 
+    // Custom validation method to check for special characters
+$.validator.addMethod("noSpecialChars", function(value, element) {
+    return this.optional(element) || /^[A-Za-z\s!@#$%^&*(),.?":{}|<>+_=;\-[\]\\/'`~]*$/.test(value);
+  }, "Numbers Are Not Allowed");
+  
+  // Function to remove numbers from input fields
+  function sanitizeInputField(fieldId) {
+    $(fieldId).on("input", function() {
+      var sanitized = $(this).val().replace(/[\d]/g, ''); // remove numbers
+      $(this).val(sanitized);
+    });
+  }
+  
+  // Call sanitizeInputField for each input field that needs it
+  sanitizeInputField("#firstname");
+  sanitizeInputField("#lastname");
+  sanitizeInputField("#emergency-firstname");
+  sanitizeInputField("#emergency-lastname");
+  sanitizeInputField("#firstnamemc");
+  sanitizeInputField("#lastnamemc");
+  sanitizeInputField("#firstNameChild");
+  sanitizeInputField("#lastNameChild");
+  sanitizeInputField("#firstName1");
+  sanitizeInputField("#lastName1");
+  sanitizeInputField("#firstNameP");
+  sanitizeInputField("#lastNameP");
+  sanitizeInputField("#firstNames1");
+  sanitizeInputField("#lastNameP1");
+  
 
     $("#saveProfile").click(function (e) {
         $("#formProfile").validate({
@@ -612,9 +645,18 @@ $(document).ready(function () {
                     email: true,
                 },
 
-                firstName: "required",
-                lastName: "required",
-                fullName: "required",
+                firstName: {
+                    required: true,
+                    noNumbers: true
+                  },
+                lastName: {
+                    required: true,
+                    noNumbers: true
+                  },
+                fullName: {
+                    required: true,
+                    noNumbers: true
+                  },
                 gender: "required",
                 maritialStatus: "required",
                 religion: "required",
@@ -644,9 +686,15 @@ $(document).ready(function () {
                     required: "Please Insert Personal Email",
                     email: "Please Insert Valid Email",
                 },
-                firstName: "Please Insert First Name",
-                lastName: "Please Insert Last Name",
-                fullName: "Please Insert Full Name",
+                firstName: {
+                    required: "Please Insert First Name",
+                },
+                lastName: {
+                    required: "Please Insert Last Name",
+                },
+                fullName: {
+                    required: "Please Insert Full Name",
+                },
                 gender: "Please Choose Gender",
                 maritialStatus: "Please Choose Marital Status",
                 religion: "Please Choose Religion",
@@ -1449,8 +1497,14 @@ $(document).ready(function () {
         $("#formEmergency").validate({
             // Specify validation rules
             rules: {
-                firstName: "required",
-                lastName: "required",
+                firstName: {
+                    required: true,
+                    noNumbers: true
+                  },
+                lastName: {
+                    required: true,
+                    noNumbers: true
+                  },
                 relationship: "required",
                 contactNo: {
                     required: true,
@@ -1469,8 +1523,12 @@ $(document).ready(function () {
             },
 
             messages: {
-                firstName: "Please Insert First Name",
-                lastName: "Please Insert Last Name",
+                firstName: {
+                    required: "Please Insert First Name",
+                },
+                lastName: {
+                    required: "Please Insert Last Name",
+                },
                 relationship: "Please Choose Relationship",
                 contactNo: {
                     required: "Please Insert Contact Number",
@@ -1571,8 +1629,14 @@ $(document).ready(function () {
         $("#formEmergency2").validate({
             // Specify validation rules
             rules: {
-                firstName_2: "required",
-                lastName_2: "required",
+                firstName_2: {
+                    required: true,
+                    noNumbers: true
+                  },
+                lastName_2: {
+                    required: true,
+                    noNumbers: true
+                  },
                 relationship_2: "required",
                 contactNo_2: {
                     required: true,
@@ -1591,8 +1655,12 @@ $(document).ready(function () {
             },
 
             messages: {
-                firstName_2: "Please Insert First Name",
-                lastName_2: "Please Insert Last Name",
+                firstName_2: {
+                    required: "Please Insert First Name",
+                },
+                lastName_2: {
+                    required: "Please Insert Last Name",
+                },
                 relationship_2: "Please Choose Relationship",
                 contactNo_2: {
                     required: "Please Insert Contact Number",
@@ -1695,8 +1763,14 @@ $(document).ready(function () {
         $("#addCompanionForm").validate({
             // Specify validation rules
             rules: {
-                firstName: "required",
-                lastName: "required",
+                firstName: {
+                    required: true,
+                    noNumbers: true
+                  },
+                lastName: {
+                    required: true,
+                    noNumbers: true
+                  },
                 idNo: {
                     required: true,
                     digits: true,
@@ -1721,8 +1795,12 @@ $(document).ready(function () {
             },
 
             messages: {
-                firstName: "Please Insert First Name",
-                lastName: "Please Insert Last Name",
+                firstName: {
+                    required: "Please Insert First Name",
+                },
+                lastName: {
+                    required: "Please Insert Last Name",
+                },
                 idNo: {
                     required: "Please Insert New Identification Number",
                     digits: "Please Insert Correct Identification Number Without ' - ' or Space",
@@ -1902,8 +1980,14 @@ $(document).ready(function () {
         $("#addChildrenForm").validate({
             // Specify validation rules
             rules: {
-                firstName: "required",
-                lastName: "required",
+                firstName: {
+                    required: true,
+                    noNumbers: true
+                  },
+                lastName: {
+                    required: true,
+                    noNumbers: true
+                  },
                 idNo: {
                     required: true,
                     digits: true,
@@ -1914,8 +1998,12 @@ $(document).ready(function () {
             },
 
             messages: {
-                firstName: "Please Insert First Name",
-                lastName: "Please Insert Last Name",
+                firstName: {
+                    required: "Please Insert First Name",
+                },
+                lastName: {
+                    required: "Please Insert Last Name",
+                },
                 idNo: {
                     required: "Please Insert New Identification Number",
                     digits: "Please Insert Correct Identification Number Without ' - ' or Space",
@@ -2248,8 +2336,14 @@ $(document).ready(function () {
         $("#addSiblingForm").validate({
             // Specify validation rules
             rules: {
-                firstName: "required",
-                lastName: "required",
+                firstName: {
+                    required: true,
+                    noNumbers: true
+                  },
+                lastName: {
+                    required: true,
+                    noNumbers: true
+                  },
                 DOB: "required",
                 gender: "required",
                 contactNo: {
@@ -2268,8 +2362,12 @@ $(document).ready(function () {
             },
 
             messages: {
-                firstName: "Please Insert First Name",
-                lastName: "Please Insert Last Name",
+                firstName: {
+                    required: "Please Insert First Name",
+                },
+                lastName: {
+                    required: "Please Insert Last Name",
+                },
                 DOB: "Please Insert Date of Birth",
                 gender: "Please Choose Gender",
                 contactNo: {
@@ -2493,8 +2591,14 @@ $(document).ready(function () {
         $("#addParentForm").validate({
             // Specify validation rules
             rules: {
-                firstName: "required",
-                lastName: "required",
+                firstName: {
+                    required: true,
+                    noNumbers: true
+                  },
+                lastName: {
+                    required: true,
+                    noNumbers: true
+                  },
                 DOB: "required",
                 gender: "required",
                 contactNo: {
@@ -2513,8 +2617,12 @@ $(document).ready(function () {
             },
 
             messages: {
-                firstName: "Please Insert First Name",
-                lastName: "Please Insert Last Name",
+                firstName: {
+                    required: "Please Insert First Name",
+                },
+                lastName: {
+                    required: "Please Insert Last Name",
+                },
                 DOB: "Please Insert Date Of Birth",
                 gender: "Please Choose Gender",
                 contactNo: {

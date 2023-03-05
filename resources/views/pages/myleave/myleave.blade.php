@@ -251,9 +251,9 @@
                                                     @foreach ($myleaveHistory as $mh)
                                                 <?php 
                                                     $id++;
-                                                    $applied_date = new DateTime($m->applied_date);
-                                                    $start_date = new DateTime($m->start_date);
-                                                    $end_date = new DateTime($m->end_date); 
+                                                    $applied_date = new DateTime($mh->applied_date);
+                                                    $start_date = new DateTime($mh->start_date);
+                                                    $end_date = new DateTime($mh->end_date); 
                                                 ?>
                                                 <tr class="odd gradeX">
                                                     <td>
@@ -262,7 +262,7 @@
                                                         </a>
                                                         <div class="dropdown-menu">
                                                             <div class="viewleave">
-                                                                <a href="javascript:;" id="editButton2" data-id="{{ $m->id }}" data-bs-toggle="modal" data-bs-target="#exampleModal2" class="dropdown-item">View Leave</a>
+                                                                <a href="javascript:;" id="editButton2" data-id="{{ $mh->id }}" data-bs-toggle="modal" data-bs-target="#exampleModal2" class="dropdown-item">View Leave</a>
                                                             </div>
                                                             {{-- <div class="dropdown-divider "></div> --}}
                                                             {{-- <div class="cancelleave">	
@@ -275,10 +275,10 @@
                                                         </div>
                                                     </td>
                                                     <td>{{$applied_date->format('Y-m-d') }}</td>
-                                                    <td>{{$m->type}}</td>
+                                                    <td>{{$mh->type}}</td>
                                                     <td>{{$start_date->format('Y-m-d') }}</td>
                                                     <td>{{$end_date->format('Y-m-d') }}</td>
-                                                    <td>{{$m->total_day_applied. ' day'}}</td>
+                                                    <td>{{$mh->total_day_applied. ' day'}}</td>
                                                     <td>@for ($i = 1; $i <= 4; $i++)
                                                             <?php
                                                                 switch ($i) {
