@@ -340,7 +340,16 @@ class ProfileController extends Controller
         return response()->json($result);
     }
 
-    public function getEducation($id = '')
+    public function getEducation($user_id = '')
+    {
+        $ps = new ProfileService;
+
+        $result = $ps->$this->getEducation($user_id);
+
+        return response()->json($result);
+    }
+
+    public function getEducationById($id = '')
     {
         $ps = new ProfileService;
 

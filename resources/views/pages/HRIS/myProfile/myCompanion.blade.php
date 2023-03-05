@@ -109,7 +109,7 @@
                                 <label for="marriage-cert" class="form-label">Marriage Certificate</label>
                                 <input type="file" name="marrigeCert" id="marrige-cert" class="form-control" aria-describedby="dob">
                             </div>
-                            <div class="col-sm-3">
+                            {{-- <div class="col-sm-3">
                                 <label for="marriage-status" class="form-label">Marital Status</label>
                                 <select class="form-select" name="marrigeStatus" style="text-transform:uppercase">
                                     <?php $maritialStatus = getMaritalStatus() ?>
@@ -118,7 +118,7 @@
                                     <option value="{{$key}}" >{{$status}}</option>
                                     @endforeach
                                 </select>
-                            </div>
+                            </div> --}}
                         </div>
                         {{-- new --}}
                         <div class="row p-2">

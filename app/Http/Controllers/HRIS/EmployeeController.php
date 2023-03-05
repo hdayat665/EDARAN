@@ -311,11 +311,20 @@ class EmployeeController extends Controller
         return response()->json($result);
     }
 
-    public function getEmployeeEducation($id = '')
+    public function getEmployeeEducation($user_id = '')
     {
         $ps = new EmployeeService;
 
-        $result = $ps->getEmployeeEducation($id);
+        $result = $ps->$this->getEmployeeEducation($user_id);
+
+        return response()->json($result);
+    }
+
+    public function getEmployeeEducationById($id = '')
+    {
+        $ps = new EmployeeService;
+
+        $result = $ps->getEmployeeEducationById($id);
 
         return response()->json($result);
     }
