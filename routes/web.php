@@ -380,8 +380,10 @@ Route::group(['middleware' => ['web']], function () {
 
             // timesheet period
             Route::get('/timesheetperiod', 'timesheetperiodView');
-            
-            
+
+            Route::post('/updateEclaimSettingGeneral', 'updateEclaimSettingGeneral');
+            Route::delete('/deleteClaimCategoryContent/{id}', 'deleteClaimCategoryContent');
+            Route::post('/updateStatusClaimCategory/{id}/{status}', 'updateStatusClaimCategory');
         });
 
         Route::controller(OrganizationController::class)->group(function () {
@@ -455,7 +457,6 @@ Route::group(['middleware' => ['web']], function () {
         Route::controller(EclaimReportController::class)->group(function () {
             Route::get('/eclaimListing', 'eclaimListingView');
             Route::get('/eclaim/searchAllReport', 'reportAllView');
-           
         });
         Route::controller(MyTimesheetController::class)->group(function () {
             Route::get('/myTimesheet', 'myTimesheetView');
@@ -495,8 +496,8 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('/getParticipantNameById/{id}', 'getParticipantNameById');
             Route::get('/getConfirmSubmitById/{id}', 'getConfirmSubmitById');
             //SUMMARY TIMESHEET
+            Route::get('/summarytimesheet', 'summarytimesheetView');
             Route::get('/summarytimesheet', 'timesheetSummaryView');
-            
         });
 
 
@@ -556,7 +557,6 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('/getuserleaveApprhod/{id}', 'getuserleaveApprhod');
             Route::post('/updatehod/{id}', 'updatehod');
             Route::post('/updatehodreject/{id}', 'updatehodreject');
-
         });
     });
 });

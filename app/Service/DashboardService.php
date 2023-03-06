@@ -6,7 +6,8 @@ use App\Models\News;
 use App\Models\TimesheetEvent;
 use Illuminate\Support\Facades\Auth;
 
-class DashboardService {
+class DashboardService
+{
 
     public function newsView()
     {
@@ -19,5 +20,4 @@ class DashboardService {
         $data['events'] = TimesheetEvent::where('tenant_id', Auth::user()->tenant_id)->orderBy('id', 'desc')->get();
         return $data;
     }
-
 }

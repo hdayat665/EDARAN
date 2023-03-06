@@ -8,8 +8,7 @@
                     <div class="row" id="claimCategoryJs">
                         <h3>Claim Category List</h3>
                         <div class="form-check">
-                            <a href="/setting/addClaimView" type="button" class="btn btn-white mt-3 mb-3" name=""
-                                id=""><i class="fa fa-plus"></i> Claim Category</a>
+                            <a href="/setting/addClaimView" type="button" class="btn btn-white mt-3 mb-3" name="" id=""><i class="fa fa-plus"></i> Claim Category</a>
                         </div>
                     </div>
                     <div class="row p-2">
@@ -31,14 +30,14 @@
                                             <td>
                                                 <a href="#" data-bs-toggle="dropdown" class="btn btn-primary btn-sm dropdown-toggle"></i> Actions <i class="fa fa-caret-down"></i></a>
                                                 <div class="dropdown-menu">
-                                                <a href="/setting/editClaimView/{{ $data->id }}" class="dropdown-item"> Edit</a>
-                                                <div class="dropdown-divider"></div>
-                                                <button id="deleteButton" data-id="{{ $data->id }}" class="dropdown-item"> Delete </button>
+                                                    <a href="/setting/editClaimView/{{ $data->id }}" class="dropdown-item"> Edit</a>
+                                                    <div class="dropdown-divider"></div>
+                                                    <button id="deleteButton" data-id="{{ $data->id }}" class="dropdown-item"> Delete </button>
                                             </td>
                                             <td>
                                                 <div class="form-check form-switch">
-                                                    <input class="form-check-input" name="" type="checkbox"
-                                                        role="switch" id="" checked>
+                                                    <input class="form-check-input" {{ $data->status == 1 ? 'checked' : '' }} name="" type="checkbox" role="switch" data-id="{{ $data->id }}"
+                                                        id="statusClaim" checked>
                                                 </div>
                                             </td>
                                             <td>{{ $data->claim_catagory_code }}</td>
@@ -59,8 +58,7 @@
                 <br>
                 <div class="row">
                     <div class="col align-self-start">
-                        <a href="/setting" class="btn btn-light" style="color: black" type="submit"><i
-                                class="fa fa-arrow-left"></i> Back</a>
+                        <a href="/setting" class="btn btn-light" style="color: black" type="submit"><i class="fa fa-arrow-left"></i> Back</a>
                     </div>
                 </div>
             </div>

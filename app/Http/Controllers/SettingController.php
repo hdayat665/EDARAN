@@ -697,7 +697,9 @@ class SettingController extends Controller
     {
         $ss = new SettingService;
 
-        $result['subsistances'] = $ss->eclaimGeneralView();
+        $data = $ss->eclaimGeneralView();
+        $result['subsistances'] = $data['subs'];
+        $result['general'] = $data['general'];
 
         return view('pages.setting.eclaim.eclaimGeneral', $result);
     }
@@ -716,6 +718,8 @@ class SettingController extends Controller
         $ss = new SettingService;
 
         $result['entitles'] = $ss->eclaimEntitleGroupView();
+        $result['subsistances'] = $ss->eclaimGeneralView();
+        $result['claimCategorys'] = $ss->eclaimCategoryView();
 
         return view('pages.setting.eclaim.eclaimEntitleGroup', $result);
     }
@@ -1132,5 +1136,32 @@ class SettingController extends Controller
 
         //return view('pages.setting.timesheet.settingtimesheetperiod', $result);
         return view('pages.setting.timesheet.settingtimesheetperiod');
+    }
+
+    public function updateEclaimSettingGeneral(Request $r)
+    {
+        $chl = new SettingService;
+
+        $result = $chl->updateEclaimSettingGeneral($r);
+
+        return response()->json($result);
+    }
+
+    public function deleteClaimCategoryContent($id)
+    {
+        $dlh = new SettingService;
+
+        $result = $dlh->deleteClaimCategoryContent($id);
+
+        return response()->json($result);
+    }
+
+    public function updateStatusClaimCategory($id = '', $status = '')
+    {
+        $dlh = new SettingService;
+
+        $result = $dlh->updateStatusClaimCategory($id, $status);
+
+        return response()->json($result);
     }
 }

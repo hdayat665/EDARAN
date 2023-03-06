@@ -17,21 +17,16 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>MALAYSIA</td>
-                            <td>60</td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>MIDDLE EAST</td>
-                            <td>170</td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>SINGAPORE/BRUNEI</td>
-                            <td>80</td>
-                        </tr>
+                        @if ($subsistances['subs'])
+                            <?php $no = 1; ?>
+                            @foreach ($subsistances['subs'] as $data)
+                                <tr>
+                                    <td>{{ $no++ }}</td>
+                                    <td>{{ $data->area_name ?? '-' }}</td>
+                                    <td>{{ $data->value ?? '-' }}</td>
+                                </tr>
+                            @endforeach
+                        @endif
                     </tbody>
                 </table>
             </div>
