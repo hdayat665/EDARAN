@@ -524,6 +524,13 @@ class MyTimeSheetService
 
         return $data;
     }
+    //TIMESHEET SUMMARY
+    public function timesheetSummaryView()
+    {
+        $data = TimesheetApproval::where('tenant_id', Auth::user()->tenant_id)->orderBy('created_at', 'DESC')->get();
+
+        return $data;
+    }
 
     public function updateStatusTimesheet($id = '', $status = '')
     {
