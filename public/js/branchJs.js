@@ -1,3 +1,6 @@
+
+
+
 $(document).ready(function() {
    
     $("#address,#address2,#postcode,#city,#state,#country").focus(function () {
@@ -110,11 +113,12 @@ $(document).ready(function() {
         var city = $("#city").val();
         var state = $("#state").val();
         var country = $("#country").val();
-        var address = address1 + ", " + address2 + ", " + postcode + " " + city + ", " + state + ", " + country;
+        var address = address1 + ", " + address2 + " " + postcode + " " + city + ", " + state + ", " + country;
+
         var geocodingAPI =
           "https://maps.googleapis.com/maps/api/geocode/json?address=" +
           encodeURIComponent(address) +
-          "&key=keyapi";
+          "&key=API_FOR_GOOGLE";
       
         $.getJSON(geocodingAPI, function (json) {
           if (json.status === "OK") {
@@ -122,6 +126,7 @@ $(document).ready(function() {
             var longitude = json.results[0].geometry.location.lng;
             $("#latitude").val(latitude);
             $("#longitude").val(longitude);
+            $("#fulladdress").val(address);
           } else {
             alert("Geocode was not successful for the following reason: " + json.status);
           }

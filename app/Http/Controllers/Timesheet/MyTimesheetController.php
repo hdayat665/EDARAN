@@ -175,12 +175,22 @@ class MyTimesheetController extends Controller
 
     //TIMESHEET SUMMARY
     public function timesheetSummaryView()
-    {
+    {   
+        
         $ss = new MyTimeSheetService;
-
+        
         $data['timesheets'] = $ss->timesheetSummaryView();
 
         return view('pages.timesheet.summarytimesheet', $data);
+    }
+
+    public function deleteTimesheet($id)
+    {
+        $ss = new MyTimeSheetService;
+
+        $result = $ss->deleteTimesheet($id);
+
+        return response()->json($result);
     }
 
     public function updateStatusTimesheet($id = '', $status = '')

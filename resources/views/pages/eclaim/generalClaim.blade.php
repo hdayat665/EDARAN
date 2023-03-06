@@ -54,10 +54,9 @@
                                             <select class="form-select" id="year" name="year">
                                                 <option class="form-label" value="Please Select" selected>Please
                                                     Select</option>
-                                                <option class="form-label" value="2022">2022</option>
                                                 <option class="form-label" value="2023">2023</option>
                                                 <option class="form-label" value="2024">2024</option>
-                                                <option class="form-label" value="2025">2025</option>
+                                                
                                             </select>
                                         </div>
                                     </div>
@@ -111,7 +110,7 @@
                                         </div>
                                     </div>
                                     {{-- akan tarik data dari  labelling name dlam setting add claim --}}
-                                    <div class="row p-2">
+                                    <div class="row p-2" id="labelcategory" style="display: none">
                                         <div class="col-md-3">
                                             <label class="form-label" id="label"></label>
                                         </div>

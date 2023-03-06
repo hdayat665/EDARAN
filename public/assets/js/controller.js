@@ -88,6 +88,7 @@ requirejs.config({
 
         /// timesheet period
         sheetPeriodJs: assets + "/js/sheetPeriodJs",
+        timesheetSummaryJs: assets + "/js/timesheetSummaryJs",
         // 'main': 'assets/backend/js/main',
         sweetAlert2: assets + "/assets/sweetalert2/sweetalert2",
 
@@ -243,7 +244,9 @@ if ($("#myTimesheetJs").length > 0) {
 if ($("#timesheetApprovalJs").length > 0) {
     requirejs(["timesheetApprovalJs"]);
 }
-
+if ($("#timesheetSummaryJs").length > 0) {
+    requirejs(["timesheetSummaryJs"]);
+}
 if ($("#viewTimesheetJs").length > 0) {
     requirejs(["viewTimesheetJs"]);
 }

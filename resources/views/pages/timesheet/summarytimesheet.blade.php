@@ -5,7 +5,7 @@
             <h1 class="page-header">My Timesheet <small>| Summary</small></h1>
             
             <!-- BEGIN panel -->
-            <div class="panel panel">
+            <div class="panel panel" id="timesheetSummaryJs">
                 
                 <!-- BEGIN panel-heading -->              
                 <div class="panel-heading">
@@ -52,13 +52,9 @@
                     <table id="timesheetapproval" class="table table-striped table-bordered align-middle">
                         <thead>
                             <tr>
-                                <th width="1%">&nbsp;</th>
-                                <th class="text-nowrap">Action</th>
-                                <th class="text-nowrap">Submitted Date</th>
-                                <th class="text-nowrap">Employee Name</th>
+                                <th width="8%" class="text-nowrap">Action</th>
+                                <th class="text-nowrap">Year</th>
                                 <th class="text-nowrap">Month</th>
-                                <th class="text-nowrap">Designation</th>
-                                <th class="text-nowrap">Department</th>
                                 <th width="9%" data-orderable="false" class="align-middle">Status</th>
                             </tr>
                         </thead>
@@ -66,53 +62,27 @@
                             @if ($timesheets)
                             @foreach ($timesheets as $timesheet)
                             <tr class="odd gradeX">
-                                <td width="1%" class="fw-bold text-dark"><input class="form-check-input" value="{{$timesheet->id}}" name="id[]" type="checkbox" id="checkbox1" /></td>
                                 <td>
                                     <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle"><i class="fa fa-cogs"></i> Actions <i class="fa fa-caret-down"></i></a>
                                     <div class="dropdown-menu">
                                         @if ($timesheet->status == 'approve' || $timesheet->status == 'amend')
-                                        <div class="viewtimesheet">
-                                            <a href="/viewTimesheet/{{$timesheet->id}}/{{$timesheet->user_id}}" class="dropdown-item" data-id="{{$timesheet->id}}" id="viewtimesheet">View Timesheet</a>
-                                        </div>
-                                        {{-- <div class="canceltimesheet">
-                                            <div class="dropdown-divider "></div>
-                                            <a  class="dropdown-item" data-id="{{$timesheet->id}}" data-status="cancel" id="statusButton">Cancel Timesheet</a>
-                                        </div> --}}
-                                        @else
-                                        <div class="viewtimesheet">
-                                            <a href="/viewTimesheet/{{$timesheet->id}}/{{$timesheet->user_id}}" class="dropdown-item" data-id="{{$timesheet->id}}" id="viewtimesheet">View Timesheet</a>
-                                        </div>
-                                        <div class="approvereject">
-                                            <div class="dropdown-divider "></div>
-                                            <div class="approvetimesheet">
-                                                <a  class="dropdown-item" data-id="{{$timesheet->id}}" data-status="approve" id="statusButton">Approve Timesheet</a>
+                                            <div class="viewtimesheet">
+                                                <a href="/viewTimesheet/{{$timesheet->id}}/{{$timesheet->user_id}}" class="dropdown-item" data-id="{{$timesheet->id}}" id="viewtimesheet">View Timesheet</a>
                                             </div>
-                                            {{-- <div class="rejecttimesheet">
-                                                <a  class="dropdown-item" data-id="{{$timesheet->id}}" data-status="reject" id="statusButton">Reject Timesheet</a>
-                                            </div> --}}
-                                        </div>
-                                        <div class="amendtimesheet">
-                                            <div class="dropdown-divider "></div>
-                                            <div class="amendtimesheet">
-                                                <a  class="dropdown-item" data-id="{{$timesheet->id}}" data-status="amend" id="amendreasonmodal" data-bs-toggle="modal"
-                                                    id="amendreasonmodal">Amend Timesheet</a>
+                                        @else 
+                                            <div class="viewtimesheet">
+                                                <a href="/viewTimesheet/{{$timesheet->id}}/{{$timesheet->user_id}}" class="dropdown-item" data-id="{{$timesheet->id}}" id="viewtimesheet">View Timesheet</a>
                                             </div>
-                                            {{-- <div class="rejecttimesheet">
-                                                <a  class="dropdown-item" data-id="{{$timesheet->id}}" data-status="reject" id="statusButton">Reject Timesheet</a>
-                                            </div> --}}
-                                        </div>
-                                        {{-- <div class="canceltimesheet">
-                                            <div class="dropdown-divider "></div>
-                                            <a  class="dropdown-item" data-id="{{$timesheet->id}}" data-status="cancel" id="statusButton">Cancel Timesheet</a>
-                                        </div> --}}
+                                            <div class="canceltimesheet">
+                                                <div class="dropdown-divider "></div>
+                                                <a class="dropdown-item" data-id="{{$timesheet->id}}" id="cancelTimesheet">Cancel Timesheet</a>
+                                            </div>
                                         @endif
+
                                     </div>
                                 </td>
-                                <td>{{$timesheet->created_at}}</td>
-                                <td>{{$timesheet->employee_name ?? '-'}}</td>
+                                <td>{{ \Carbon\Carbon::parse($timesheet->created_at)->format('Y') }}</td>
                                 <td>{{$timesheet->month}}</td>
-                                <td>{{$timesheet->designation ?? '-'}}</td>
-                                <td>{{$timesheet->department}}</td>
                                 <td>
                                     @if ($timesheet->status == 'pending')
                                     <div id="awaitingapproval"> <span class="badge bg-warning rounded-pill">Awaiting Approval</span> </div>

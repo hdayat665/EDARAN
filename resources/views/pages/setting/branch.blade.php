@@ -171,9 +171,11 @@
                         <div class="mb-2">
                             <label class="form-label">Country*</label>
                             <select class="form-select" name="country" id="country" style="text-transform: uppercase;">
+                            
                                 <option type="text" value="MALAYSIA" label="MALAYSIA" selected="selected">MALAYSIA</option>
                             </select>
                         </div>
+                        <input type="hidden" class="form-control" name="fulladdress" id="fulladdress" />
                 </div>
 
                 <div class="modal-footer">
@@ -238,6 +240,8 @@
                         <div class="mb-2">
                             <label class="form-label">City*</label>
                             <input type="text" class="form-control" name="city" id="city" placeholder="CITY" >
+                            <input type="hidden" class="form-control" name="latitude" id="latitude" />
+                            <input type="hidden" class="form-control" name="longitude" id="longitude" />
                         </div>
                         <div class="mb-2">
                             <label class="form-label">State*</label>
