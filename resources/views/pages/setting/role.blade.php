@@ -79,7 +79,7 @@
             <div class="col-md-6">
                 <p>
 
-                </p><a href="javascript:;" data-bs-toggle="modal" id="addRoleButton" class="btn btn-primary">+ New Role</a>
+                </p><a href="javascript:;" data-bs-toggle="modal" id="addRoleButton" class="btn btn-primary"><i class="fa fa-plus"></i> New Role</a>
             </div>
             <div class="modal fade" id="modal-dialog">
                 <div class="modal-dialog">
@@ -137,7 +137,13 @@
                         <td>{{$role->addedTime}}</td>
                         <td>{{$role->modifiedBy}}</td>
                         <td>{{$role->modifiedTime}}</td>
-                        <td><a href="javascript:;" data-bs-toggle="modal" id="editRoleButton" data-id="{{$role->id}}" class="btn btn-outline-green"><i class="fa fa-pencil-alt"></i></a><a href="javascript:;" id="deleteRoleButton" data-id="{{$role->id}}" class="btn btn-outline-danger"><i class="fa fa-trash"></i></a></td>
+                        <td>
+                            <a href="#" data-bs-toggle="dropdown" class="btn btn-primary btn-sm dropdown-toggle"></i> Actions <i class="fa fa-caret-down"></i></a>
+                                <div class="dropdown-menu">
+                            <a href="javascript:;" data-bs-toggle="modal" id="editRoleButton" data-id="{{$role->id}}" class="dropdown-item"> Edit</a>
+                                <div class="dropdown-divider"></div>
+                            <a href="javascript:;" id="deleteRoleButton" data-id="{{$role->id}}" class="dropdown-item"> Delete</a>
+                        </td>
                     </tr>
                     @endforeach
                     @endif

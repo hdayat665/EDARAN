@@ -24,7 +24,7 @@
 
         <div class="panel-heading" id="branchJs">
             <div class="col-md-6">
-                <a href="javascript:;" data-bs-toggle="modal" id="addButton" class="btn btn-primary">+ New Branch</a>
+                <a href="javascript:;" data-bs-toggle="modal" id="addButton" class="btn btn-primary"><i class="fa fa-plus"></i> New Branch</a>
             </div>
 
             <h4 class="panel-title"></h4>
@@ -72,7 +72,7 @@
                             <div class="dropdown-menu">
                             <a href="javascript:;" id="editButton" data-id="{{$branch->id}}" class="dropdown-item"> Edit</a>
                             <div class="dropdown-divider"></div>
-                            <a id="deleteButton" data-id="{{$branch->id}}" class="dropdown-item"> Edit</a>
+                            <a id="deleteButton" data-id="{{$branch->id}}" class="dropdown-item"> Delete</a>
                         </td>
                     </tr>
                     @endforeach

@@ -24,7 +24,7 @@
 
         <div class="panel-heading" id="jobGradeJs">
             <div class="col-md-6">
-                <a href="javascript:;" data-bs-toggle="modal" id="addButton" class="btn btn-primary">+ New Job Grade</a>
+                <a href="javascript:;" data-bs-toggle="modal" id="addButton" class="btn btn-primary"><i class="fa fa-plus"></i> New Job Grade</a>
             </div>
 
             <h4 class="panel-title"></h4>
