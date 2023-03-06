@@ -90,14 +90,14 @@ if (!function_exists('getCountryRegisterDomain')) {
 if (!function_exists('upload')) {
     function upload($uploadedFile, $type = '')
     {
-        $allowedTypes = ['pdf'];
+        $allowedTypes = ['pdf', 'jpeg', 'jpg', 'png'];
         $maxSize = 5120; // 5MB
 
         $filename = $uploadedFile->getClientOriginalName();
         $extension = $uploadedFile->getClientOriginalExtension();
 
         if (!in_array($extension, $allowedTypes)) {
-            throw new Exception("Invalid file type. Only PDF files are allowed.");
+            throw new Exception("Invalid file type. Only PDF, JPEG, PNG, and JPG files are allowed.");
         }
 
         if ($uploadedFile->getSize() > $maxSize * 1024) {
@@ -782,21 +782,16 @@ if (!function_exists('projectLocation')) {
 }
 
 
-if (!function_exists('getBranch')) {
-    function getBranch($id = '')
-    {
-
-        if ($id) {
-            $data = Branch::find($id);
-        } else {
-            $data = Branch::where('tenant_id', Auth::user()->tenant_id)->get();
-        }
-
-        if (!$data) {
-            $data = [];
-        }
-
-        return $data;
+if (!function_exists('getBranchFullAddress')) {
+    function getBranchFullAddress($user_id = '')
+    { 
+        $cond[1] = ['user_id', $user_id];
+        $data = DB::table('employment as a')
+            ->leftJoin('branch as b', 'a.branch', '=', 'b.id')
+            ->select('b.fulladdress', 'a.employeeName')
+            ->where($cond)
+            ->first();
+        return $data->fulladdress;
     }
 }
 if (!function_exists('getEmployee')) {

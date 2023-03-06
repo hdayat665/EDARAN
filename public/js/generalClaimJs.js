@@ -133,6 +133,7 @@ $(document).ready(function () {
     });
 
     $(document).on("change", "#claimcategory", function () {
+        $("#labelcategory").show();
         id = $(this).val();
         const inputs = ["contentLabel"];
 
@@ -179,7 +180,8 @@ $(document).ready(function () {
             setDate: new Date(),
             todayHighlight: true,
             autoclose: true,
-            format: "dd/mm/yyyy",
+            format: "yyyy/mm/dd",
         })
         .datepicker("setDate", "now");
 });
+ 

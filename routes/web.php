@@ -472,6 +472,7 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('/getActivityByProjectId/{id}', 'getActivityByProjectId');
             Route::get('/getActivityNamebyLogsId/{id}', 'getActivityNamebyLogsId');
             Route::get('/timesheetApproval', 'timesheetApprovalView');
+            Route::delete('/deleteTimesheet/{id}', 'deleteTimesheet');
             Route::get('/updateStatusTimesheet/{id}/{status}', 'updateStatusTimesheet');
             Route::post('/submitForApproval/{userId}', 'submitForApproval');
             Route::post('/searchTimesheet', 'searchTimesheet');

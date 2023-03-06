@@ -526,12 +526,35 @@ class MyTimeSheetService
     }
     //TIMESHEET SUMMARY
     public function timesheetSummaryView()
-    {
-        $data = TimesheetApproval::where('tenant_id', Auth::user()->tenant_id)->orderBy('created_at', 'DESC')->get();
+    {   
+        $user = Auth::user();
+        $data = TimesheetApproval::where('tenant_id', $user->tenant_id)
+                ->where('user_id', $user->id) // Add this line to filter by user ID
+                ->orderBy('created_at', 'DESC')
+                ->get();
 
         return $data;
     }
+    public function deleteTimesheet($id)
+    {
+        $timesheetApproval = TimesheetApproval::find($id);
 
+        if (!$timesheetApproval) {
+            $data['status'] = config('app.response.error.status');
+            $data['type'] = config('app.response.error.type');
+            $data['title'] = config('app.response.error.title');
+            $data['msg'] = 'Timesheet not found';
+        } else {
+            $timesheetApproval->delete();
+
+            $data['status'] = config('app.response.success.status');
+            $data['type'] = config('app.response.success.type');
+            $data['title'] = config('app.response.success.title');
+            $data['msg'] = 'Success Cancel Timesheet';
+        }
+
+        return $data;
+    }
     public function updateStatusTimesheet($id = '', $status = '')
     {
         $input['status'] = $status;

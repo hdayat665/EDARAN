@@ -50,10 +50,16 @@ $("document").ready(function () {
     $(document).on("change", "#ls", function () {
         if ($(this).val() == "My Project") {
             $("#project").show();
+        } else if ($(this).val() == "Office") {
+            var officeValue = $("#office").val() || "-";
+            $("#autocomplete").val(officeValue);
         } else {
             $("#project").hide();
         }
     });
+    
+    
+    
 
     //
     $(document).on("change", "#dest", function () {
@@ -63,7 +69,10 @@ $("document").ready(function () {
         } else if ($(this).val() == "Others") {
             $("#projectdest").hide();
             $("#logname").show();
-        } else {
+        } else if ($(this).val() == "Office") {
+            var officeValue = $("#office").val() || "-";
+            $("#autocomplete2").val(officeValue);
+        }else {
             $("#projectdest").hide();
             $("#logname").hide();
         }
@@ -123,9 +132,48 @@ $("document").ready(function () {
         });
     });
 
-    //  calculate time duration un travelling
+    
+    function calculate(total) {
+        var result = 0;
 
-    //
+        if (total > 300) {
+          result += 300 * 0.7;
+          total -= 300;
+
+          if (total > 500) {
+            result += 500 * 0.5;
+            total -= 500;
+
+            result += total * 0.3;
+          } else {
+            result += total * 0.5;
+          }
+        } else {
+          result = total * 0.7;
+        }
+
+        return result;
+      }
+
+      var resultInput = document.getElementById("result");
+      $("#result,#toll,#parking,#petrol").focus(function () {
+
+     
+        var total = parseInt(resultInput.value);
+
+        // call the calculate function with the input value
+        var result = calculate(total);
+
+        // display the result in a <div> element
+        $("#millage").val(
+            result
+        );
+        
+      });
+
+    
+    
+//  calculate time duration un travelling
     $("#totalduration,#daystart,#timestart,#dayend,#timeend").focus(
         function () {
             var startdt = new Date(
@@ -158,9 +206,17 @@ $("document").ready(function () {
             })
             .get()
             .join(",");
-        $("#hotelcv").val(s.length > 0 ? s : "");
-        $("#hotelcv1").val(s.length > 0 ? s : "0");
+        if (s.length > 0) {
+            $("#hotelcv").val(s);
+            $('#hotelcv').prop('readonly', false);
+            $("#hotelcv1").val(s);
+        } else {
+            $("#hotelcv").val("");
+            $('#hotelcv').prop('readonly', true);
+            $("#hotelcv1").val("0");
+        }
     });
+    
 
     $("#lodgingc").change(function () {
         var s = $("#lodgingc input:checked")
@@ -169,9 +225,17 @@ $("document").ready(function () {
             })
             .get()
             .join(",");
-        $("#lodgingcv").val(s.length > 0 ? s : "");
-        $("#lodgingcv1").val(s.length > 0 ? s : "0");
+        if (s.length > 0) {
+            $("#lodgingcv").val(s);
+            $('#lodgingcv').prop('readonly', false);
+            $("#lodgingcv1").val(s);
+        } else {
+            $("#lodgingcv").val("");
+            $('#lodgingcv').prop('readonly', true);
+            $("#lodgingcv1").val("0");
+        }
     });
+    
 
     // calculate total subsistence & accomadation
     $("#BF,#DBF,#LH,#DLH,#DN,#DDN,#TS").change(function () {
@@ -222,6 +286,7 @@ $("document").ready(function () {
     });
 
     $(document).on("change", "#claimcategory", function () {
+        $("#labelCategory").show();
         id = $(this).val();
         const inputs = ["contentLabel"];
 
