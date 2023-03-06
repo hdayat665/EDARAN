@@ -84,28 +84,31 @@ $(document).ready(function() {
 
     $(document).on("click", "#listActivityNames", function() {
         var id = $(this).data('id');
-
+    
         $('#testkit1')
             .find('tr')
             .remove()
             .end();
-
+    
         var activity = getActivityNames(id);
-
+    
         activity.done(function(data) {
-
+    
             var table = document.getElementById("listActivityName").getElementsByTagName('tbody')[0];
-
+    
             for (let i = 0; i < data.length; i++) {
                 var row = table.insertRow(-1);
                 var l = table.rows.length - 1;
                 table.rows[l].insertCell(0);
-                table.rows[l].cells[0].innerHTML = data[i]['activity_name'];
+                table.rows[l].cells[0].innerHTML = i + 1; // Add the number column
+                table.rows[l].insertCell(1);
+                table.rows[l].cells[1].innerHTML = data[i]['activity_name'];
             }
         });
         $('#listingActivityNames').modal('show');
-
+    
     });
+    
 
 
     $(document).on("click", "#deleteButton", function() {
