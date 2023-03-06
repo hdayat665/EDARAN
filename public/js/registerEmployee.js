@@ -172,36 +172,27 @@ $(document).ready(function() {
             $('#datepicker-birth').css('pointer-events', 'none');
         }
       });
-    
-    //   $.validator.addMethod("noSpecialChars", function(value, element) {
-    //     return this.optional(element) || /^[A-Za-z0-9!@#$%^&*()\-_+={}[\]\\|<>"'\/~`,.;: ]*$/.test(value);
-    // }, "Special Characters, Spaces, and Alphabet Characters Are Not Allowed.");      
-
-    $.validator.addMethod("noNumbers", function(value, element) {
-        return this.optional(element) || /^[a-zA-Z]+$/.test(value);
-    }, "Please Insert Alphabet Only");
 
     $.validator.addMethod("noSpecialChars", function(value, element) {
-        return this.optional(element) || /^[A-Za-z0-9\s]*$/.test(value);
-    }, "Special Characters and Spaces Are Not Allowed");
-
+        return this.optional(element) || /^[A-Za-z0-9]*$/.test(value);
+    }, "Special Characters Are Not Allowed");
     $(function() {
         $("#empId, #uId").on("input", function() {
-            var sanitized = $(this).val().replace(/[~!@#$%^&*()_+{}|:"<>?`\-=[\]\\;',./\s]/g, '');
+            var sanitized = $(this).val().replace(/[^A-Za-z0-9]/g, '');
             $(this).val(sanitized);
         });
     });
     
     $.validator.addMethod("noSpecialChars", function(value, element) {
-        return this.optional(element) || /^[A-Za-z\s!@#$%^&*(),.?":{}|<>+_=;\-[\]\\/'`~]*$/.test(value);
-    }, "Numbers Are Not Allowed");
-    
+        return this.optional(element) || /^[A-Za-z\s\-\.\',]+$/.test(value);
+    }, "Numeric Characters Are Not Allowed");
     $(function() {
         $("#firstName, #lastName").on("input", function() {
-            var sanitized = $(this).val().replace(/[\d]/g, ''); // remove numbers
+            var sanitized = $(this).val().replace(/[^A-Za-z\s\-\.\',]/g, '');
             $(this).val(sanitized);
         });
-    });    
+    });
+    
 
     $.validator.addMethod("email", function(value, element) {
         // Email validation regex pattern
@@ -218,16 +209,13 @@ $(document).ready(function() {
 
                 employee_id: {
                     required: true,
-                    noSpecialChars: true
                   },
                 username: "required",
                 firstName: {
                     required: true,
-                    noNumbers: true
                   },
                 lastName: {
                     required: true,
-                    noNumbers: true
                   },
                 idNo: {
                     required: true,
@@ -254,7 +242,6 @@ $(document).ready(function() {
             messages: {
                 employee_id: {
                     required: "Please Insert Employee ID",
-                    noSpecialChars: "Special characters, spaces, and alphabet characters are not allowed."
                 },
                 username: "Please Insert Username",
                 firstName: {

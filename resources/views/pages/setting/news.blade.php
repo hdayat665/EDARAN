@@ -7,7 +7,7 @@
     <div class="panel panel">
         <div class="panel-heading">
             <div class="col-md-6">
-                <a href="javascript:;" data-bs-toggle="modal" id="addButton" class="btn btn-primary">+ New News</a>
+                <a href="javascript:;" data-bs-toggle="modal" id="addButton" class="btn btn-primary"><i class="fa fa-plus"></i> New News</a>
             </div>
             <h4 class="panel-title"></h4>
         </div>

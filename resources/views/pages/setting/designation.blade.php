@@ -28,7 +28,7 @@
 
         <div class="panel-heading">
             <div class="col-md-6">
-                <a href="javascript:;" data-bs-toggle="modal" id="addButton" class="btn btn-primary">+ New Designation</a>
+                <a href="javascript:;" data-bs-toggle="modal" id="addButton" class="btn btn-primary"><i class="fa fa-plus"></i> New Designation</a>
             </div>
 
             <h4 class="panel-title"></h4>
