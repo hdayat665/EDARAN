@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Eclaim;
 use App\Service\myClaimService;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class myClaimController extends Controller
 {
@@ -42,6 +43,7 @@ class myClaimController extends Controller
         $data['personalClaims'] = [];
         $data['month_id'] = $month;
         $data['year'] = $year;
+        $data['user_id'] = Auth::user()->id;
 
         return view('pages.eclaim.monthlyClaim', $data);
     }
@@ -68,6 +70,7 @@ class myClaimController extends Controller
         $generalClaim = $mcs->getGeneralClaimById($id);
         $data['month'] = $generalClaim->month ?? '';
         $data['year'] = $generalClaim->year ?? '';
+        $data['user_id'] = Auth::user()->id ?? '';
 
         return view('pages.eclaim.monthClaimEditView', $data);
     }

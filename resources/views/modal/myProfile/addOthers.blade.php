@@ -12,7 +12,7 @@
                 <div class="form-group row">
                     <label for="staticEmail" class="col-sm-4 col-form-label">Date</label>
                     <div class="col-sm-8">
-                        <input type="text" class="form-control" id="datepicker-others" placeholder="YYYY/MM/DD" name="otherDate" value="">
+                        <input type="text" class="form-control" id="datepicker-others" placeholder="DD/MM/YYYY" name="otherDate" value="">
                     </div>
                 </div>
            </div>
@@ -28,7 +28,7 @@
                 <div class="form-group row">
                     <label for="staticEmail" class="col-sm-4 col-form-label">Attachments</label>
                     <div class="col-sm-8">
-                        <input type="file" class="form-control-file" id="" name="supportOtherDoc">
+                      <input id="fileupload" type="file" name="file" multiple="multiple">
                     </div>
                 </div>
             </div>

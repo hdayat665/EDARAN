@@ -11,7 +11,8 @@ use App\Models\UserCompanion;
 use App\Models\UserEmergency;
 use App\Models\UserParent;
 use App\Models\UserProfile;
-use App\Models\UserQualification;
+use App\Models\UserQualificationEducation;
+use App\Models\UserQualificationOthers;
 use App\Models\Users;
 use App\Models\UsersDetails;
 use App\Models\UserSibling;
@@ -108,6 +109,15 @@ class ProfileService
                 Users::where('id', $user_id)->update($username);
             }
 
+            if ($_FILES['fileID']['name']) {
+                $payslip = upload($input->file('fileID'));
+                $input['fileID'] = $payslip['filename'];
+    
+                if (!$input['fileID']) {
+                    unset($input['fileID']);
+                }
+            }
+
             UserProfile::where('user_id', $user_id)->update($input);
 
             $data['status'] = config('app.response.success.status');
@@ -123,8 +133,18 @@ class ProfileService
     public function addEducation($r)
     {
         $input = $r->input();
+
+        if ($_FILES['file']['name']) {
+            $payslip = upload($r->file('file'));
+            $input['file'] = $payslip['filename'];
+
+            if (!$input['file']) {
+                unset($input['file']);
+            }
+        }
+
         $input['user_id'] = Auth::user()->id;
-        UserQualification::create($input);
+        UserQualificationEducation::create($input);
 
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
@@ -136,7 +156,7 @@ class ProfileService
 
     public function getEducation($id = '')
     {
-        $data['data'] = UserQualification::where('id', $id)->first();
+        $data['data'] = UserQualificationEducation::where('id', $id)->first();
         // pr(Storage::path($data['data']->supportDoc));
         $data['msg'] = 'Success Get Education Data';
 
@@ -147,38 +167,35 @@ class ProfileService
     {
         $input = $r->input();
 
+        if ($_FILES['file']['name']) {
+            $payslip = upload($r->file('file'));
+            $input['file'] = $payslip['filename'];
+
+            if (!$input['file']) {
+                unset($input['file']);
+            }
+        }
+
         $user_id = Auth::user()->id;
         $id = $input['id'] ?? 1;
 
-        $user = UserQualification::where('id', $id)->first();
+        $user = UserQualificationEducation::where('id', $id)->first();
 
-        if($user)
+        if(!$user)
         {
-            UserQualification::where('id', $id)->update($input);
+            $data['status'] = config('app.response.error.status');
+            $data['type'] = config('app.response.error.type');
+            $data['title'] = config('app.response.error.title');
+            $data['msg'] = 'user not found';
+
+        }else{
+
+            UserQualificationEducation::where('id', $id)->update($input);
 
             $data['status'] = config('app.response.success.status');
             $data['type'] = config('app.response.success.type');
             $data['title'] = config('app.response.success.title');
             $data['msg'] = 'Success Update Education';
-
-            // $data['status'] = config('app.response.error.status');
-            // $data['type'] = config('app.response.error.type');
-            // $data['title'] = config('app.response.error.title');
-            // $data['msg'] = 'user not found';
-
-        }else{
-
-            // if ($_FILES['supportDoc']['name'])
-            // {
-            //     $payslip = upload($r->file('supportDoc'));
-            //     $input['supportDoc'] = $payslip['filename'];
-
-            //     if (!$input['supportDoc']) {
-            //         unset($input['supportDoc']);
-            //     }
-            // }
-
-            
         }
 
         return $data;
@@ -187,7 +204,7 @@ class ProfileService
 
     public function deleteEducation($id = '')
     {
-        $user = UserQualification::where('id',$id)->first();
+        $user = UserQualificationEducation::where('id',$id)->first();
 
         if(!$user)
         {
@@ -196,7 +213,7 @@ class ProfileService
             $data['title'] = config('app.response.error.title');
             $data['msg'] = 'Education not found';
         }else{
-            UserQualification::where('id',$id)->delete();
+            UserQualificationEducation::where('id',$id)->delete();
             $data['status'] = config('app.response.success.status');
             $data['type'] = config('app.response.success.type');
             $data['title'] = config('app.response.success.title');
@@ -210,8 +227,18 @@ class ProfileService
     public function addOthers($r)
     {
         $input = $r->input();
+
+        if ($_FILES['file']['name']) {
+            $payslip = upload($r->file('file'));
+            $input['file'] = $payslip['filename'];
+
+            if (!$input['file']) {
+                unset($input['file']);
+            }
+        }
+
         $input['user_id'] = Auth::user()->id;
-        UserQualification::create($input);
+        UserQualificationOthers::create($input);
 
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
@@ -223,7 +250,7 @@ class ProfileService
 
     public function getOthers($id = '')
     {
-        $data['data'] = UserQualification::where('id', $id)->first();
+        $data['data'] = UserQualificationOthers::where('id', $id)->first();
         // pr(Storage::path($data['data']->supportDoc));
         $data['msg'] = 'Success Get Others Qualification';
 
@@ -234,14 +261,23 @@ class ProfileService
     {
         $input = $r->input();
 
+        if ($_FILES['file']['name']) {
+            $payslip = upload($r->file('file'));
+            $input['file'] = $payslip['filename'];
+
+            if (!$input['file']) {
+                unset($input['file']);
+            }
+        }
+
         $user_id = Auth::user()->id;
         $id = $input['id'] ?? 1;
 
-        $user = UserQualification::where('id', $id)->first();
+        $user = UserQualificationOthers::where('id', $id)->first();
 
         if($user)
         {
-            UserQualification::where('id', $id)->update($input);
+            UserQualificationOthers::where('id', $id)->update($input);
 
             $data['status'] = config('app.response.success.status');
             $data['type'] = config('app.response.success.type');
@@ -274,7 +310,7 @@ class ProfileService
 
     public function deleteOthers($id = '')
     {
-        $user = UserQualification::where('id',$id)->first();
+        $user = UserQualificationOthers::where('id',$id)->first();
 
         if(!$user)
         {
@@ -283,7 +319,7 @@ class ProfileService
             $data['title'] = config('app.response.error.title');
             $data['msg'] = 'Others Qualification not found';
         }else{
-            UserQualification::where('id',$id)->delete();
+            UserQualificationOthers::where('id',$id)->delete();
             $data['status'] = config('app.response.success.status');
             $data['type'] = config('app.response.success.type');
             $data['title'] = config('app.response.success.title');
@@ -764,7 +800,8 @@ class ProfileService
         $data['user_id'] = Auth::user()->id;
 
         $data['profile'] = UserProfile::where('user_id', $data['user_id'])->first();
-        $data['qualification'] = UserQualification::where('user_id', $data['user_id'])->get();
+        $data['educations'] = UserQualificationEducation::where('user_id', $data['user_id'])->get();
+        $data['others'] = UserQualificationOthers::where('user_id', $data['user_id'])->get();
         $data['address'] = UserAddress::where('user_id', $data['user_id'])->first();
         $data['addressDetails'] = UserAddress::where('user_id', $data['user_id'])->get();
         $data['emergency'] = UserEmergency::where('user_id', $data['user_id'])->first();
@@ -810,15 +847,15 @@ class ProfileService
         }
 
         $educationId[] = '';
-        if ($data['qualification']) {
-            foreach ($data['qualification'] as $education) {
+        if ($data['educations']) {
+            foreach ($data['educations'] as $education) {
                 $educationId[] = $education->id ?? null;
             }
         }
 
         $othersId[] = '';
-        if ($data['qualification']) {
-            foreach ($data['qualification'] as $others) {
+        if ($data['others']) {
+            foreach ($data['others'] as $others) {
                 $othersId[] = $others->id ?? null;
             }
         }

@@ -173,6 +173,26 @@ class MyTimesheetController extends Controller
         return view('pages.timesheet.timesheetApproval', $data);
     }
 
+    //TIMESHEET SUMMARY
+    public function timesheetSummaryView()
+    {   
+        
+        $ss = new MyTimeSheetService;
+        
+        $data['timesheets'] = $ss->timesheetSummaryView();
+
+        return view('pages.timesheet.summarytimesheet', $data);
+    }
+
+    public function deleteTimesheet($id)
+    {
+        $ss = new MyTimeSheetService;
+
+        $result = $ss->deleteTimesheet($id);
+
+        return response()->json($result);
+    }
+
     public function updateStatusTimesheet($id = '', $status = '')
     {
         $ss = new MyTimeSheetService;
@@ -219,15 +239,7 @@ class MyTimesheetController extends Controller
     }
 
     //SUMMARRY TIMESHEET
-    public function summarytimesheetView()
-    {
-        // $ss = new MyTimeSheetService;
-
-        // $data['id'] = $id;
-        // $data['userId'] = $userId;
-
-        return view('pages.timesheet.summarytimesheet');
-    }
+   
 
     public function getTimesheetById($id = '', $userId = '')
     {

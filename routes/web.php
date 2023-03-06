@@ -153,6 +153,7 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('/addEducation', 'addEducation');
             Route::post('/updateEducation', 'updateEducation');
             Route::get('/getEducation/{id}', 'getEducation');
+            Route::get('/getEducationById/{id}', 'getEducationById');
             Route::delete('/deleteEducation/{id}', 'deleteEducation');
             Route::post('/addOthers', 'addOthers');
             Route::post('/updateOthers', 'updateOthers');
@@ -220,6 +221,7 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('/addEmployeeEducation', 'addEmployeeEducation');
             Route::post('/updateEmployeeEducation', 'updateEmployeeEducation');
             Route::get('/getEmployeeEducation/{id}', 'getEmployeeEducation');
+            Route::get('/getEmployeeEducationById/{id}', 'getEmployeeEducationById');
             Route::delete('/deleteEmployeeEducation/{id}', 'deleteEmployeeEducation');
             Route::post('/addEmployeeOthers', 'addEmployeeOthers');
             Route::post('/updateEmployeeOthers', 'updateEmployeeOthers');
@@ -471,6 +473,7 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('/getActivityByProjectId/{id}', 'getActivityByProjectId');
             Route::get('/getActivityNamebyLogsId/{id}', 'getActivityNamebyLogsId');
             Route::get('/timesheetApproval', 'timesheetApprovalView');
+            Route::delete('/deleteTimesheet/{id}', 'deleteTimesheet');
             Route::get('/updateStatusTimesheet/{id}/{status}', 'updateStatusTimesheet');
             Route::post('/submitForApproval/{userId}', 'submitForApproval');
             Route::post('/searchTimesheet', 'searchTimesheet');
@@ -494,6 +497,7 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('/getConfirmSubmitById/{id}', 'getConfirmSubmitById');
             //SUMMARY TIMESHEET
             Route::get('/summarytimesheet', 'summarytimesheetView');
+            Route::get('/summarytimesheet', 'timesheetSummaryView');
         });
 
 

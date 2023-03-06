@@ -1,3 +1,18 @@
+<style>
+    /* Set the size and position of the autocomplete input field */
+    #autocomplete {
+      height: 30px;
+      width: 100%;
+      margin-top: 10px;
+    }
+    #autocomplete2 {
+      height: 30px;
+      width: 100%;
+      margin-top: 10px;
+    }
+    
+</style>
+
 <div class="">
     <div class="accordion" id="accordionExample">
         <div class="accordion-item">
@@ -37,7 +52,7 @@
                             </div>
                         </div>
                         {{-- akan tarik data dari  labelling name dlam setting add claim --}}
-                        <div class="row p-2">
+                        <div class="row p-2" id="labelCategory" style="display: none">
                             <div class="col-md-4">
                                 <label class="form-label" id="label"></label>
                             </div>
@@ -215,8 +230,8 @@
                             <div class="col-md-4">
                                 <label class="form-label">Address Start</label>
                             </div>
-                            <div class="col-md-8">
-                                <input type="text" class="form-control" name="address_start">
+                            <div class="col-md-8"> 
+                                <input type="text" class="form-control" name="address_start" id="autocomplete" placeholder="Enter a location">
                             </div>
                         </div>
                         <div class="row p-2">
@@ -237,6 +252,14 @@
                                     <option class="form-label">Others
                                     </option>
                                 </select>
+                            </div>
+                        </div>
+                        <div class="row p-2" style="display: none">
+                            <div class="col-md-4">
+                                <label class="form-label">Office</label>
+                            </div>
+                            <div class="col-md-3">
+                                <input id="office" type="text" value="{{ getBranchFullAddress($user_id) ?? '-' }}"  class="form-control" name="">
                             </div>
                         </div>
                         <div class="row p-2" id="projectdest" style="display: none">
@@ -274,21 +297,74 @@
                                 <label class="form-label">Destination Address</label>
                             </div>
                             <div class="col-md-8">
-                                <input type="text" class="form-control" name="location_address">
+                                <input type="text" class="form-control" name="location_address" id="autocomplete2" placeholder="Enter a location">
+
+                            </div>
+                            
+                        </div>
+                        <div class="row p-2" style="display: none">
+                            <div class="col-md-4">
+                                <label class="form-label">TOTAL DISTANCE</label>
+                            </div>
+                            <div class="col-md-3">
+                                <input id="result" type="text" class="form-control" name="">
+                            </div>
+                            
+                        </div>
+                        <!-- <div class="row p-2">
+                            <div class="col-md-4">
+                                <label class="form-label">Distance</label>
+                            </div>
+                            <div class="col-md-3">
+                                <input type="text" class="form-control" name="">
+                            </div>
+                            <div class="col-md-2">
+                                <label class="form-label">entitlement</label>
+                            </div>
+                            <div class="col-md-3">
+                                <input type="number" class="form-control" name="">
                             </div>
                         </div>
+                        <div class="row p-2">
+                            <div class="col-md-4">
+                                <label class="form-label">Distance</label>
+                            </div>
+                            <div class="col-md-3">
+                                <input type="text" class="form-control" name="">
+                            </div>
+                            <div class="col-md-2">
+                                <label class="form-label">entitlement</label>
+                            </div>
+                            <div class="col-md-3">
+                                <input type="number" class="form-control" name="">
+                            </div>
+                        </div>
+                        <div class="row p-2">
+                            <div class="col-md-4">
+                                <label class="form-label">Distance</label>
+                            </div>
+                            <div class="col-md-3">
+                                <input type="text" class="form-control" name="">
+                            </div>
+                            <div class="col-md-2">
+                                <label class="form-label">entitlement</label>
+                            </div>
+                            <div class="col-md-3">
+                                <input type="number" class="form-control" name="">
+                            </div>
+                        </div> -->
                         <div class="row p-2">
                             <div class="col-md-4">
                                 <label class="form-label">Mileage</label>
                             </div>
                             <div class="col-md-3">
-                                <input type="text" class="form-control" name="millage">
+                                <input type="text" class="form-control" readonly id="millage" name="millage">
                             </div>
                             <div class="col-md-2">
                                 <label class="form-label">Petrol/Fares</label>
                             </div>
                             <div class="col-md-3">
-                                <input type="number" class="form-control" name="petrol">
+                                <input type="number" class="form-control" id="petrol" name="petrol">
                             </div>
                         </div>
                         <div class="row p-2">
@@ -296,13 +372,13 @@
                                 <label class="form-label">Toll</label>
                             </div>
                             <div class="col-md-3">
-                                <input type="number" class="form-control" name="toll">
+                                <input type="number" class="form-control" id="toll" name="toll">
                             </div>
                             <div class="col-md-2">
                                 <label class="form-label">Parking</label>
                             </div>
                             <div class="col-md-3">
-                                <input type="number" class="form-control" name="parking">
+                                <input type="number" class="form-control" id="parking" name="parking">
                             </div>
                         </div>
                         <div class="row p-2">
@@ -545,7 +621,7 @@
                                     <label class="form-label">Hotel</label>
                                 </div>
                                 <div class="col-md-2">
-                                    <input  type="text" class="form-control" id="hotelcv">
+                                    <input  type="text" readonly class="form-control" id="hotelcv">
                                 </div>
                                 <div class="col-md-2" style="display: none">
                                     <input  type="text" class="form-control" id="hotelcv1" value="0">
@@ -566,7 +642,7 @@
                                     <label class="form-label">Lodging</label>
                                 </div>
                                 <div class="col-md-2">
-                                    <input  type="text" class="form-control" id="lodgingcv">
+                                    <input  type="text" readonly class="form-control" id="lodgingcv">
                                 </div>
                                 <div class="col-md-2" style="display: none">
                                     <input readonly type="text" class="form-control" id="lodgingcv1" value="0">
@@ -616,3 +692,60 @@
         </div>
     </div>
 </div>
+<script src="https://maps.googleapis.com/maps/api/js?key=API_FOR_GOOGLE&libraries=places"></script>
+
+<script>
+  function initAutocomplete() {
+    // Create a new instance of the Autocomplete object, and set the input field as its search box.
+    var input = document.getElementById('autocomplete');
+    var autocomplete = new google.maps.places.Autocomplete(input);
+
+    // Set the types of results to display (in this case, addresses).
+    autocomplete.setTypes(['address']);
+    initAutocomplete2()
+  }
+
+  function initAutocomplete2() {
+    // Create a new instance of the Autocomplete object, and set the input field as its search box.
+    var input2 = document.getElementById('autocomplete2');
+    var autocomplete2 = new google.maps.places.Autocomplete(input2);
+
+    // Set the types of results to display (in this case, addresses).
+    autocomplete2.setTypes(['address']);
+
+    autocomplete2.addListener('place_changed', function() {
+          calculateDistance();
+        });
+
+  }
+
+  // Call the initAutocomplete() function on page load
+  document.addEventListener("DOMContentLoaded", function() {
+    initAutocomplete();
+  });
+
+//   $("#autocomplete,#autocomplete2").focus(function () {
+//         calculateDistance()
+//     });
+  function calculateDistance() {
+        var startAddress = document.getElementById('autocomplete').value;
+        var endAddress = document.getElementById('autocomplete2').value;
+        
+        var service = new google.maps.DistanceMatrixService();
+
+        service.getDistanceMatrix({
+          origins: [startAddress],
+          destinations: [endAddress],
+          travelMode: 'DRIVING',
+          unitSystem: google.maps.UnitSystem.METRIC,
+        }, function(response, status) {
+          if (status !== 'OK') {
+            alert('Error: ' + status);
+          } else {
+            var distance = response.rows[0].elements[0].distance.value;
+            var distanceInKm = (distance / 1000);
+            document.getElementById('result').value =  distanceInKm;
+          }
+        });
+      }
+</script>

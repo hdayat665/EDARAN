@@ -9,7 +9,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
 
-class UserQualification extends Authenticatable
+class UserQualificationOthers extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
@@ -19,18 +19,12 @@ class UserQualification extends Authenticatable
      * @var array<int, string>
      */
 
-    protected $table ='qualification';
+    protected $table ='qualification_others';
 
     protected $fillable = [
         'user_id',
-        'fromDate',
-        'toDate',
-        'instituteName',
-        'highestLevelAttained',
-        'result',
         'otherDate',
         'otherPQDetails',
-        'supportDoc',
-        'supportOtherDoc',
+        'file',
     ];
 }

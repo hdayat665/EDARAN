@@ -836,8 +836,7 @@ $(document).ready(function() {
                         click: function() {
                             window.location.href = 'summarytimesheet';
                         }
-                    }
-                    
+                    }  
                 },
                 // dateClick: function(info) {
 

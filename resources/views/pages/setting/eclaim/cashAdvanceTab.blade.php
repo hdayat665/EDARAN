@@ -6,7 +6,7 @@
                     <tr>
                         <th width="1%">&nbsp;</th>
                         <th>&nbsp;</th>
-                        <th colspan="6">&nbsp;</th>
+                        <th colspan="5">&nbsp;</th>
                         <th colspan="4" style="text-align: center">CHECKER 1</th>
                         <th colspan="4" style="text-align: center">CHECKER 2</th>
                         <th colspan="4" style="text-align: center">CHECKER 3</th>
@@ -15,7 +15,6 @@
                         <th>NO</th>
                         <th style="width:180px;text-align: center;">ROLE</th>
                         <th style="width:180px;text-align: center;">STATUS</th>
-                        <th style="text-align: center">ACTIVE</th>
                         <th style="text-align: center">APPROVE</th>
                         <th style="text-align: center">REJECT</th>
                         <th style="text-align: center">AMEND</th>
@@ -36,9 +35,8 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td colspan="19" style="text-align: center"><label class="form-label">Level
-                                1</label></td>
-                        <td style="display: none"></td>
+                        <td colspan="19" style="text-align: center"><label class="form-label">LEVEL
+                                DEPARTMENT</label></td>
                         <td style="display: none"></td>
                         <td style="display: none"></td>
                         <td style="display: none"></td>
@@ -65,12 +63,11 @@
                                 <input class="form-check-input"   name="mainCompanion"  type="checkbox" role="" id=""  checked>
                             </div>
                         </td>
-                        <td style="text-align: center"><input class="form-check-input" type="checkbox" />
                         </td>
-                        <td style="text-align: center"><input class="form-check-input" type="checkbox" />
-                        </td>
-                        <td style="text-align: center"><input class="form-check-input" type="checkbox" />
-                        </td>
+                        <td style="text-align: center;background-color:MediumSpringGreen!important;"><input class="form-check-input"
+                                type="checkbox" disabled /></td>
+                        <td style="text-align: center;background-color:MediumSpringGreen!important;"><input class="form-check-input"
+                                type="checkbox" disabled /></td>
                         <td style="text-align: center"><input class="form-check-input" type="checkbox" />
                         </td>
                         <td style="text-align: center"><input class="form-check-input" type="checkbox" />
@@ -101,9 +98,8 @@
                                 class="form-check-input" type="checkbox" disabled /></td>
                     </tr>
                     <tr>
-                        <td colspan="19" style="text-align: center"><label class="form-label">Level
-                                3</label></td>
-                        <td style="display: none"></td>
+                        <td colspan="19" style="text-align: center"><label class="form-label">LEVEL
+                                FINANCE</label></td>
                         <td style="display: none"></td>
                         <td style="display: none"></td>
                         <td style="display: none"></td>
@@ -130,24 +126,34 @@
                                 <input class="form-check-input"   name="mainCompanion"  type="checkbox" role="" id=""  checked>
                             </div>
                         </td>
-                        <td style="text-align: center"><input class="form-check-input" type="checkbox" checked /></td>
+                        <td style="text-align: center;background-color:MediumSpringGreen!important;"><input class="form-check-input"
+                                type="checkbox" disabled /></td>
                         <td style="text-align: center;background-color:darkgray!important;"><input
                                 class="form-check-input" type="checkbox" disabled /></td>
                         <td style="text-align: center"><input class="form-check-input" type="checkbox" checked /></td>
                         <td style="text-align: center"><input class="form-check-input" type="checkbox" checked /></td>
+                        <td style="text-align: center;background-color:MediumSpringGreen!important;"><input class="form-check-input"
+                                type="checkbox" disabled /></td>
+                        <td style="text-align: center;background-color:MediumSpringGreen!important;"><input class="form-check-input"
+                        type="checkbox" disabled /></td>
+                        <td style="text-align: center;background-color:MediumSpringGreen!important;"><input class="form-check-input"
+                        type="checkbox" disabled /></td>
+                        <td style="text-align: center;background-color:MediumSpringGreen!important;"><input class="form-check-input"
+                        type="checkbox" disabled /></td>
                         <td style="text-align: center"><input class="form-check-input" type="checkbox" checked /></td>
+                        <td style="text-align: center;background-color:darkgray!important;"><input
+                                class="form-check-input" type="checkbox" disabled /></td>
+                        <td style="text-align: center;background-color:darkgray!important;"><input
+                        class="form-check-input" type="checkbox" disabled /></td>
+                        <td style="text-align: center;background-color:darkgray!important;"><input
+                        class="form-check-input" type="checkbox" disabled /></td>
                         <td style="text-align: center"><input class="form-check-input" type="checkbox" checked /></td>
-                        <td style="text-align: center"><input class="form-check-input" type="checkbox" checked /></td>
-                        <td style="text-align: center"><input class="form-check-input" type="checkbox" checked /></td>
-                        <td style="text-align: center"><input class="form-check-input" type="checkbox" checked /></td>
-                        <td style="text-align: center"><input class="form-check-input" type="checkbox" checked /></td>
-                        <td style="text-align: center"><input class="form-check-input" type="checkbox" checked /></td>
-                        <td style="text-align: center"><input class="form-check-input" type="checkbox" checked /></td>
-                        <td style="text-align: center"><input class="form-check-input" type="checkbox" checked /></td>
-                        <td style="text-align: center"><input class="form-check-input" type="checkbox" checked /></td>
-                        <td style="text-align: center"><input class="form-check-input" type="checkbox" checked /></td>
-                        <td style="text-align: center"><input class="form-check-input" type="checkbox" checked /></td>
-                        <td style="text-align: center"><input class="form-check-input" type="checkbox" checked /></td>
+                        <td style="text-align: center;background-color:darkgray!important;"><input
+                                class="form-check-input" type="checkbox" disabled /></td>
+                        <td style="text-align: center;background-color:darkgray!important;"><input
+                        class="form-check-input" type="checkbox" disabled /></td>
+                        <td style="text-align: center;background-color:darkgray!important;"><input
+                        class="form-check-input" type="checkbox" disabled /></td>
                     </tr>
                     <tr>
                         <td>3</td>
@@ -157,12 +163,10 @@
                                 <input class="form-check-input"   name="mainCompanion"  type="checkbox" role="" id=""  checked>
                             </div>
                         </td>
-                        <td style="text-align: center"><input class="form-check-input" type="checkbox" />
-                        </td>
-                        <td style="text-align: center"><input class="form-check-input" type="checkbox" />
-                        </td>
-                        <td style="text-align: center"><input class="form-check-input" type="checkbox" />
-                        </td>
+                        <td style="text-align: center;background-color:MediumSpringGreen!important;"><input class="form-check-input"
+                                type="checkbox" disabled /></td>
+                        <td style="text-align: center;background-color:MediumSpringGreen!important;"><input class="form-check-input"
+                                type="checkbox" disabled /></td>
                         <td style="text-align: center"><input class="form-check-input" type="checkbox" />
                         </td>
                         <td style="text-align: center"><input class="form-check-input" type="checkbox" />
@@ -200,9 +204,10 @@
                                 <input class="form-check-input"   name="mainCompanion"  type="checkbox" role="" id=""  checked>
                             </div>
                         </td>
-                        <td style="text-align: center"><input class="form-check-input" type="checkbox" checked /></td>
-                        <td style="text-align: center"><input class="form-check-input" type="checkbox" checked /></td>
-                        <td style="text-align: center"><input class="form-check-input" type="checkbox" checked /></td>
+                        <td style="text-align: center;background-color:MediumSpringGreen!important;"><input class="form-check-input"
+                                type="checkbox" disabled /></td>
+                        <td style="text-align: center;background-color:MediumSpringGreen!important;"><input class="form-check-input"
+                                type="checkbox" disabled /></td>
                         <td style="text-align: center"><input class="form-check-input" type="checkbox" checked /></td>
                         <td style="text-align: center"><input class="form-check-input" type="checkbox" checked /></td>
                         <td style="text-align: center;background-color:darkgray!important;"><input

@@ -24,7 +24,7 @@
 
         <div class="panel-heading" id="branchJs">
             <div class="col-md-6">
-                <a href="javascript:;" data-bs-toggle="modal" id="addButton" class="btn btn-primary">+ New Branch</a>
+                <a href="javascript:;" data-bs-toggle="modal" id="addButton" class="btn btn-primary"><i class="fa fa-plus"></i> New Branch</a>
             </div>
 
             <h4 class="panel-title"></h4>
@@ -72,7 +72,7 @@
                             <div class="dropdown-menu">
                             <a href="javascript:;" id="editButton" data-id="{{$branch->id}}" class="dropdown-item"> Edit</a>
                             <div class="dropdown-divider"></div>
-                            <a id="deleteButton" data-id="{{$branch->id}}" class="dropdown-item"> Edit</a>
+                            <a id="deleteButton" data-id="{{$branch->id}}" class="dropdown-item"> Delete</a>
                         </td>
                     </tr>
                     @endforeach
@@ -130,11 +130,11 @@
                         </div>
                         <div class="mb-2">
                             <label class="form-label">Address 1*</label>
-                            <input type="text" class="form-control" name="address" maxlength="100" placeholder="ADDRESS 1" >
+                            <input type="text" class="form-control" name="address" id="address" maxlength="100" placeholder="ADDRESS 1" >
                         </div>
                         <div class="mb-2">
-                            <label class="form-label">Address 2</label>
-                            <input type="text" class="form-control" name="address2" maxlength="100" placeholder="ADDRESS 2" >
+                            <label class="form-label">Address 2</label>  
+                            <input type="text" class="form-control" name="address2" id="address2" placeholder="ADDRESS 2" >
                         </div>
                         <div class="mb-2">
                             <label class="form-label">Postcode*</label>
@@ -142,11 +142,14 @@
                         </div>
                         <div class="mb-2">
                             <label class="form-label">City*</label>
-                            <input type="text" class="form-control" name="city" placeholder="CITY" >
+                            <input type="text" class="form-control" name="city" id="city" placeholder="CITY" >
+                            <input type="hidden" class="form-control" name="latitude" id="latitude" />
+                            <input type="hidden" class="form-control" name="longitude" id="longitude" />
+
                         </div>
                         <div class="mb-2">
                             <label class="form-label">State*</label>
-                            <select class="form-select" name="state" style="text-transform: uppercase;">
+                            <select class="form-select" name="state" id="state" style="text-transform: uppercase;">
                                 <option type="text"type="text" value="" label="Select State " selected="selected">SELECT STATE</option>
                                 <option type="text"value="Johor" label="Johor">JOHOR</option>
                                 <option type="text"value="Kedah" label="Kedah">KEDAH</option>
@@ -167,10 +170,12 @@
                         </div>
                         <div class="mb-2">
                             <label class="form-label">Country*</label>
-                            <select class="form-select" name="country" style="text-transform: uppercase;">
-                                <option type="text"value="MALAYSIA" label="MALAYSIA" selected="selected">MALAYSIA</option>
+                            <select class="form-select" name="country" id="country" style="text-transform: uppercase;">
+                            
+                                <option type="text" value="MALAYSIA" label="MALAYSIA" selected="selected">MALAYSIA</option>
                             </select>
                         </div>
+                        <input type="hidden" class="form-control" name="fulladdress" id="fulladdress" />
                 </div>
 
                 <div class="modal-footer">
@@ -235,6 +240,8 @@
                         <div class="mb-2">
                             <label class="form-label">City*</label>
                             <input type="text" class="form-control" name="city" id="city" placeholder="CITY" >
+                            <input type="hidden" class="form-control" name="latitude" id="latitude" />
+                            <input type="hidden" class="form-control" name="longitude" id="longitude" />
                         </div>
                         <div class="mb-2">
                             <label class="form-label">State*</label>

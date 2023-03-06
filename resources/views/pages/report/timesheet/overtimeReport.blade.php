@@ -90,27 +90,35 @@
                                 <th class="text-nowrap">Employee Name</th>
                                 <th class="text-nowrap">Designation</th>
                                 <th class="text-nowrap">Department</th>
+                                <th class="text-nowrap">Date</th>
+                                {{-- <th class="text-nowrap">Total Overtime Hours</th> --}}
                                 <th class="text-nowrap">Total Overtime Hours</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php $no = 1 ?>
                             @if ($overtimes)
-                            @foreach ($overtimes as $overtime)
-                            <tr class="odd gradeX">
-                                <td width="1%" class="fw-bold text-dark">{{$no++}}</td>
-                                <td>{{$overtime->employeeName}}</td>
-                                <td>{{$overtime->designationName}}</td>
-                                <td>{{$overtime->departmentName}}</td>
-                                <td>{{$overtime->total_hour}}</td>
-                            </tr>
-                            @endforeach
+                                @foreach ($overtimes as $item)
+                                    <?php
+                                        $total_hour = explode(':', $item->total_hour);
+                                        $remaining_hour = ($total_hour[0] > 9) ? $total_hour[0] - 9 : 0;
+                                        $remaining_time = $remaining_hour . ':' . $total_hour[1] . ':' . $total_hour[2];
+                                    ?>
+                                    @if ($remaining_hour > 0)
+                                        <tr>
+                                            <td>{{ $loop->iteration }}</td>
+                                            <td>{{ $item->employeeName }}</td>
+                                            <td>{{ $item->designationName }}</td>
+                                            <td>{{ $item->departmentName }}</td>
+                                            <td>{{ $item->date }}</td>
+                                            <td>{{ $remaining_time }}</td>
+                                        </tr>
+                                    @endif
+                                @endforeach
                             @endif
                         </tbody>
                     </table>
-                   
                 </div>
-                
             </div>
         </div>
         <div class="row p-2">

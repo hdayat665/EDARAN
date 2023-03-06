@@ -24,7 +24,7 @@
 
         <div class="panel-heading" id="unitJs">
             <div class="col-md-6">
-                <a href="javascript:;" data-bs-toggle="modal" id="addButton" class="btn btn-primary">+ New Unit</a>
+                <a href="javascript:;" data-bs-toggle="modal" id="addButton" class="btn btn-primary"><i class="fa fa-plus"></i> New Unit</a>
             </div>
 
             <h4 class="panel-title"></h4>
@@ -69,6 +69,7 @@
                             <a href="#" data-bs-toggle="dropdown" class="btn btn-primary btn-sm dropdown-toggle"></i> Actions <i class="fa fa-caret-down"></i></a>
                             <div class="dropdown-menu">
                             <a href="javascript:;" id="editButton" data-id="{{$unit->id}}" class="dropdown-item">Edit</a>
+                            <div class="dropdown-divider"></div>
                             <a href="javascript:;" id="deleteButton" data-id="{{$unit->id}}" class="dropdown-item">Delete</a>
                         </td>
                     </tr>
