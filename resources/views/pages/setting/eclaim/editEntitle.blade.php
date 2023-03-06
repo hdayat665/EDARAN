@@ -15,9 +15,7 @@
                                     <label for="entitlementgroupname" class="col-sm col-form-label">Entitlement Group
                                         Name*</label>
                                     <div class="col">
-                                        <input type="text" class="form-control" name="group_name"
-                                            value="{{ $entitys['group_name'] }}" id="entitlement_groupname"
-                                            placeholder="Entitlement Group Name">
+                                        <input type="text" class="form-control" name="group_name" value="{{ $entitys['group_name'] }}" id="entitlement_groupname" placeholder="Entitlement Group Name">
                                         <input type="hidden" id="idEG" value="{{ $entitys['id'] }}">
                                     </div>
                                 </div>
@@ -25,13 +23,11 @@
                                 <div class="row">
                                     <label for="jobgrade" class="col-sm col-form-label">Job Grade*</label>
                                     <div class="col">
-                                        <select class="form-select" name="job_grade" id=""
-                                            aria-label="Disabled select example" id="">
+                                        <select class="form-select" name="job_grade" id="" aria-label="Disabled select example" id="">
                                             <option value="">Please Select</option>
                                             <?php $jobGrades = getJobGrade(); ?>
                                             @foreach ($jobGrades as $jobGrade)
-                                                <option {{ $entitys['job_grade'] == $jobGrade->id ? 'selected' : '' }}
-                                                    value="{{ $jobGrade->id }}">{{ $jobGrade->jobGradeName }}</option>
+                                                <option {{ $entitys['job_grade'] == $jobGrade->id ? 'selected' : '' }} value="{{ $jobGrade->id }}">{{ $jobGrade->jobGradeName }}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -43,25 +39,20 @@
                                     </div>
                                     <div class="col">
                                         <div class="form-check">
-                                            <input class="form-check-input"
-                                                {{ $entitys['local_travel'] == 'F' ? 'checked' : '' }} type="radio"
-                                                name="local_travel" id="flexRadioF" value="F" checked>
+                                            <input class="form-check-input" {{ $entitys['local_travel'] == 'F' ? 'checked' : '' }} type="radio" name="local_travel" id="flexRadioF" value="F"
+                                                checked>
                                             <label class="form-check-label" for="flexRadioF">
                                                 F- First Class
                                             </label>
                                         </div>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio"
-                                                {{ $entitys['local_travel'] == 'C' ? 'checked' : '' }} value="C"
-                                                name="local_travel" id="flexRadioC">
+                                            <input class="form-check-input" type="radio" {{ $entitys['local_travel'] == 'C' ? 'checked' : '' }} value="C" name="local_travel" id="flexRadioC">
                                             <label class="form-check-label" for="flexRadioC">
                                                 C- Business Class
                                             </label>
                                         </div>
                                         <div class="form-check">
-                                            <input class="form-check-input"
-                                                type="radio"{{ $entitys['local_travel'] == 'Y' ? 'checked' : '' }}
-                                                value="Y" name="local_travel" id="flexRadioY">
+                                            <input class="form-check-input" type="radio"{{ $entitys['local_travel'] == 'Y' ? 'checked' : '' }} value="Y" name="local_travel" id="flexRadioY">
                                             <label class="form-check-label" for="flexRadioY">
                                                 Y - First Class
                                             </label>
@@ -75,25 +66,20 @@
                                     </div>
                                     <div class="col">
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" value="F"
-                                                {{ $entitys['oversea_travel'] == 'F' ? 'checked' : '' }}
-                                                name="oversea_travel" id="flexRadioOF">
+                                            <input class="form-check-input" type="radio" value="F" {{ $entitys['oversea_travel'] == 'F' ? 'checked' : '' }} name="oversea_travel" id="flexRadioOF">
                                             <label class="form-check-label" for="flexRadioOF">
                                                 F- First Class
                                             </label>
                                         </div>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" value="C"
-                                                {{ $entitys['oversea_travel'] == 'C' ? 'checked' : '' }}
-                                                name="oversea_travel" id="flexRadioOC" checked>
+                                            <input class="form-check-input" type="radio" value="C" {{ $entitys['oversea_travel'] == 'C' ? 'checked' : '' }} name="oversea_travel" id="flexRadioOC"
+                                                checked>
                                             <label class="form-check-label" for="flexRadioOC">
                                                 C- Business Class
                                             </label>
                                         </div>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" value="Y"
-                                                {{ $entitys['oversea_travel'] == 'Y' ? 'checked' : '' }}
-                                                name="oversea_travel" id="flexRadioOY">
+                                            <input class="form-check-input" type="radio" value="Y" {{ $entitys['oversea_travel'] == 'Y' ? 'checked' : '' }} name="oversea_travel" id="flexRadioOY">
                                             <label class="form-check-label" for="flexRadioOY">
                                                 Y - First Class
                                             </label>
@@ -106,43 +92,30 @@
                                     <label for="localhotela" class="col-sm-3 col-form-label">Local Hotel
                                         Allowance</label>
                                     <div class="col-sm-3">
-                                        <select class="form-select" name="local_hotel_allowance" id="ulocalhotela"
-                                            aria-label="Disabled select example">
+                                        <select class="form-select" name="local_hotel_allowance" id="ulocalhotela" aria-label="Disabled select example">
                                             <option value="0">None</option>
-                                            <option {{ $entitys['local_hotel_allowance'] == '1' ? 'selected' : '' }}
-                                                value="1">Actual</option>
-                                            <option {{ $entitys['local_hotel_allowance'] == '2' ? 'selected' : '' }}
-                                                value="2">Input Value</option>
+                                            <option {{ $entitys['local_hotel_allowance'] == '1' ? 'selected' : '' }} value="1">Actual</option>
+                                            <option {{ $entitys['local_hotel_allowance'] == '2' ? 'selected' : '' }} value="2">Input Value</option>
                                         </select>
                                     </div>
-                                    <div class="col-sm-3"
-                                        {{ $entitys['local_hotel_allowance'] == 1 ? 'style=display:none' : '' }}
-                                        id="ulocalhoteli">
-                                        <input type="text" value="{{ $entitys['local_hotel_value'] }}"
-                                            class="form-control" id="ulocalhotelval" name="local_hotel_value"
+                                    <div class="col-sm-3" {{ $entitys['local_hotel_allowance'] == 1 ? 'style=display:none' : '' }} id="ulocalhoteli">
+                                        <input type="text" value="{{ $entitys['local_hotel_value'] }}" class="form-control" id="ulocalhotelval" name="local_hotel_value"
                                             value="{{ $entitys['local_hotel_value'] }}">
                                     </div>
                                 </div>
                                 <br>
-                                <div class="row"> <label for="lodgingallowance"
-                                        class="col-sm-3 col-form-label">Lodging
+                                <div class="row"> <label for="lodgingallowance" class="col-sm-3 col-form-label">Lodging
                                         Allowance</label>
                                     <div class="col-sm-3">
-                                        <select class="form-select" name="lodging_allowance" id="ulodginghotela"
-                                            aria-label="Disabled select example">
+                                        <select class="form-select" name="lodging_allowance" id="ulodginghotela" aria-label="Disabled select example">
                                             <option value="0">None</option>
-                                            <option {{ $entitys['lodging_allowance'] == '1' ? 'selected' : '' }}
-                                                value="1">Actual</option>
-                                            <option {{ $entitys['lodging_allowance'] == '2' ? 'selected' : '' }}
-                                                value="2">Input Value</option>
+                                            <option {{ $entitys['lodging_allowance'] == '1' ? 'selected' : '' }} value="1">Actual</option>
+                                            <option {{ $entitys['lodging_allowance'] == '2' ? 'selected' : '' }} value="2">Input Value</option>
                                         </select>
                                     </div>
-                                    <div class="col-sm-3"
-                                        {{ $entitys['lodging_allowance'] == 1 ? 'style=display:none' : '' }}
-                                        id="ulodginghoteli">
-                                        <input type="text" class="form-control" id="lodging_allowance_val"
-                                            value="{{ $entitys['lodging_allowance_value'] }}"
-                                            name="lodging_allowance_value" value="">
+                                    <div class="col-sm-3" {{ $entitys['lodging_allowance'] == 1 ? 'style=display:none' : '' }} id="ulodginghoteli">
+                                        <input type="text" class="form-control" id="lodging_allowance_val" value="{{ $entitys['lodging_allowance_value'] }}" name="lodging_allowance_value"
+                                            value="">
                                     </div>
                                 </div>
                                 <br>
@@ -152,18 +125,14 @@
                                             @if ($item['type'] == 'car')
                                                 <label for="carmileage" class="col-sm-3 col-form-label">Car Mileage
                                                     Claim*
-                                                    <i class="fa fa-question-circle" style="color:rgba(0, 81, 255, 0.904)"
-                                                        data-toggle="tooltip1"
-                                                        title="{{ config('app.entitle-group.car') }}">
+                                                    <i class="fa fa-question-circle" style="color:rgba(0, 81, 255, 0.904)" data-toggle="tooltip1" title="{{ config('app.entitle-group.car') }}">
                                                     </i></label>
                                                 <div class="col-sm-3">
-                                                    <input type="text" class="form-control" id="car_mileagecharge"
-                                                        name="car_price[]" value="{{ $item['price'] }}">
+                                                    <input type="text" class="form-control" id="car_mileagecharge" name="car_price[]" value="{{ $item['price'] }}">
                                                     <input type="hidden" name="car_id[]" value="{{ $item['id'] }}">
                                                 </div>
                                                 <div class="col-sm-3">
-                                                    <input type="text" class="form-control" id="car_mileagekm"
-                                                        name="car_km[]" value="{{ $item['km'] }}">
+                                                    <input type="text" class="form-control" id="car_mileagekm" name="car_km[]" value="{{ $item['km'] }}">
                                                 </div>
                                                 <div class="col">
                                                     <h5 class="form-control" id="km1" aria-readonly="true">KM
@@ -183,18 +152,15 @@
                                         @foreach ($transports as $item)
                                             @if ($item['type'] == 'motor')
                                                 <label for="staticEmail" class="col-sm-3 col-form-label">Motorcycle
-                                                    Mileage <i class="fa fa-question-circle"
-                                                        style="color:rgba(0, 81, 255, 0.904)" data-toggle="tooltip2"
+                                                    Mileage <i class="fa fa-question-circle" style="color:rgba(0, 81, 255, 0.904)" data-toggle="tooltip2"
                                                         title="{{ config('app.entitle-group.motor') }}"></i>
                                                     claim* </label>
                                                 <div class="col-sm-3">
-                                                    <input type="text" class="form-control" name="motor_price[]"
-                                                        id="mileagemcharge" value="{{ $item['price'] }}">
+                                                    <input type="text" class="form-control" name="motor_price[]" id="mileagemcharge" value="{{ $item['price'] }}">
                                                     <input type="hidden" name="motor_id[]" value="{{ $item['id'] }}">
                                                 </div>
                                                 <div class="col-sm-3">
-                                                    <input type="text" class="form-control" name="motor_km[]"
-                                                        id="mileagemkm" value="{{ $item['km'] }}">
+                                                    <input type="text" class="form-control" name="motor_km[]" id="mileagemkm" value="{{ $item['km'] }}">
                                                 </div>
                                                 <div class="col">
                                                     <h5 class="form-control" id="mkm1" aria-readonly="true">KM
@@ -318,16 +284,13 @@
                                 <div class="row">
                                     <div class="col-sm-3"> </div>
                                     <div class="col-sm-3">
-                                        <input type="text" class="form-control" id=""
-                                            value="{{ $entitys['breakfast'] }}" name="breakfast">
+                                        <input type="text" class="form-control" id="" value="{{ $entitys['breakfast'] }}" name="breakfast">
                                     </div>
                                     <div class="col-sm-3">
-                                        <input type="text" class="form-control" id="" name="dinner"
-                                            value="{{ $entitys['dinner'] }}">
+                                        <input type="text" class="form-control" id="" name="dinner" value="{{ $entitys['dinner'] }}">
                                     </div>
                                     <div class="col-sm-3">
-                                        <input type="text" class="form-control" name="lunch" id=""
-                                            value="{{ $entitys['lunch'] }}">
+                                        <input type="text" class="form-control" name="lunch" id="" value="{{ $entitys['lunch'] }}">
                                     </div>
                                 </div>
                             </div>
@@ -347,13 +310,11 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @if ($subsistances)
-                                            @foreach ($subsistances as $data)
+                                        @if ($subsistances['subs'])
+                                            @foreach ($subsistances['subs'] as $data)
                                                 <tr>
                                                     <td>
-                                                        <a href="javascript:;" id="viewSubsAddButton"
-                                                            class="btn btn-outline-blue" data-id="{{ $data->id }}"><i
-                                                                class="fa fa-edit"></i></a>
+                                                        <a href="javascript:;" id="viewSubsAddButton" class="btn btn-outline-blue" data-id="{{ $data->id }}"><i class="fa fa-edit"></i></a>
                                                     </td>
                                                     <td>{{ $data->area_name }}</td>
                                                     <td>{{ $data->value }}</td>
@@ -380,9 +341,7 @@
                                             @foreach ($claimCategorys as $item)
                                                 <tr>
                                                     <td>
-                                                        <a href="javascript:;" id="viewClaimAddButton"
-                                                            class="btn btn-outline-blue" data-id="{{ $item->id }}"><i
-                                                                class="fa fa-edit"></i></a>
+                                                        <a href="javascript:;" id="viewClaimAddButton" class="btn btn-outline-blue" data-id="{{ $item->id }}"><i class="fa fa-edit"></i></a>
                                                     </td>
                                                     <td>{{ $item->claim_catagory }}</td>
                                                     <td>{{ $item->claim_value }}</td>
@@ -398,12 +357,10 @@
                     <div class="row p-2">
                         <div class="modal-footer">
                             <div class="col align-self-start">
-                                <a href="/setting/eclaimEntitleGroupView" class="btn btn-light" style="color: black"
-                                    type="submit"><i class="fa fa-arrow-left"></i> Back</a>
+                                <a href="/setting/eclaimEntitleGroupView" class="btn btn-light" style="color: black" type="submit"><i class="fa fa-arrow-left"></i> Back</a>
                             </div>
                             <div class="col d-flex justify-content-end">
-                                <button class="btn btn-light" style="color: black" type="submit" id="editButton"><i
-                                        class="fa fa-save"></i>
+                                <button class="btn btn-light" style="color: black" type="submit" id="editButton"><i class="fa fa-save"></i>
                                     Update</button>
                             </div>
                         </div>

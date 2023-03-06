@@ -12,4 +12,9 @@ class ClaimCategory extends Model
     protected $table = 'claim_category';
 
     protected $guarded = [];
+
+    public function categoryContent()
+    {
+        return $this->hasMany(ClaimCategoryContent::class, 'category_id', 'id');
+    }
 }

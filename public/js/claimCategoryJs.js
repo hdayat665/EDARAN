@@ -87,6 +87,46 @@ $(document).ready(function () {
         });
     });
 
+    $(document).on("click", "#contentDeleteButton", function () {
+        id = $(this).data("id");
+        requirejs(["sweetAlert2"], function (swal) {
+            swal({
+                title: "Are you sure to delete Claim Category?",
+                type: "error",
+                confirmButtonClass: "btn-danger",
+                confirmButtonText: "Yes!",
+                showCancelButton: true,
+                allowOutsideClick: false,
+                allowEscapeKey: false,
+            }).then(function () {
+                $.ajax({
+                    type: "POST",
+                    url: "/deleteClaimCategoryContent/" + id,
+                    // dataType: "json",
+                    data: { _method: "DELETE" },
+                    // async: false,
+                    // processData: false,
+                    // contentType: false,
+                }).done(function (data) {
+                    swal({
+                        title: data.title,
+                        text: data.msg,
+                        type: data.type,
+                        confirmButtonColor: "#3085d6",
+                        confirmButtonText: "OK",
+                        allowOutsideClick: false,
+                        allowEscapeKey: false,
+                    }).then(function () {
+                        if (data.type == "error") {
+                        } else {
+                            location.reload();
+                        }
+                    });
+                });
+            });
+        });
+    });
+
     $(document).on("click", "#deleteButton", function () {
         id = $(this).data("id");
         requirejs(["sweetAlert2"], function (swal) {
@@ -170,7 +210,42 @@ $(document).ready(function () {
             $(".labelu").hide();
         }
     });
+    $(document).on("change", "#statusClaim", function () {
+        var id = $(this).data("id");
+        var status;
+
+        if ($(this).is(":checked")) {
+            status = 1;
+        } else {
+            status = 2;
+        }
+        requirejs(["sweetAlert2"], function (swal) {
+            $.ajax({
+                type: "POST",
+                url: "/updateStatusClaimCategory/" + id + "/" + status,
+                async: false,
+                processData: false,
+                contentType: false,
+            }).done(function (data) {
+                swal({
+                    title: data.title,
+                    text: data.msg,
+                    type: data.type,
+                    confirmButtonColor: "#3085d6",
+                    confirmButtonText: "OK",
+                    allowOutsideClick: false,
+                    allowEscapeKey: false,
+                }).then(function () {
+                    if (data.type == "error") {
+                    } else {
+                        location.reload();
+                    }
+                });
+            });
+        });
+    });
 });
+
 function delRow(btn) {
     var row = btn.parentNode.parentNode;
     row.parentNode.removeChild(row);

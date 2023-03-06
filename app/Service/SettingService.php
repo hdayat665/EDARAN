@@ -13,6 +13,7 @@ use App\Models\Department;
 use App\Models\Designation;
 use App\Models\DomainList;
 use App\Models\EclaimGeneral;
+use App\Models\EclaimGeneralSetting;
 use App\Models\EmploymentType;
 use App\Models\EntitleGroup;
 use App\Models\JobGrade;
@@ -66,42 +67,42 @@ class SettingService
     }
 
     public function updateRole($r, $id)
-{
-    $data1 = Auth::user()->username;
-    $data2 = date('Y-m-d h:m:s');
-
-    $updateData = [
-        'modifiedBy' => $data1,
-        'modifiedTime' => $data2
-    ];
-
-    Role::where('id', $id)->update($updateData);
-
-    if($r->input('userName')){
-        $data1 = $r->input('userName');
+    {
+        $data1 = Auth::user()->username;
         $data2 = date('Y-m-d h:m:s');
-        $data3 = $r->input('id');
-        
-        $insertData = [
-            'tenant_id' => Auth::user()->tenant_id,
-            'role_id' => $data3,
-            'up_user_id' => $data1,
-            'added_by' => Auth::user()->id,
-            'added_time' => $data2,
-            'modified_by' => '',
-            'modified_time' => ''
+
+        $updateData = [
+            'modifiedBy' => $data1,
+            'modifiedTime' => $data2
         ];
 
-        UserRole::create($insertData);
+        Role::where('id', $id)->update($updateData);
+
+        if ($r->input('userName')) {
+            $data1 = $r->input('userName');
+            $data2 = date('Y-m-d h:m:s');
+            $data3 = $r->input('id');
+
+            $insertData = [
+                'tenant_id' => Auth::user()->tenant_id,
+                'role_id' => $data3,
+                'up_user_id' => $data1,
+                'added_by' => Auth::user()->id,
+                'added_time' => $data2,
+                'modified_by' => '',
+                'modified_time' => ''
+            ];
+
+            UserRole::create($insertData);
+        }
+
+        $data['status'] = config('app.response.success.status');
+        $data['type'] = config('app.response.success.type');
+        $data['title'] = config('app.response.success.title');
+        $data['msg'] = 'Success Update Role';
+
+        return $data;
     }
-
-    $data['status'] = config('app.response.success.status');
-    $data['type'] = config('app.response.success.type');
-    $data['title'] = config('app.response.success.title');
-    $data['msg'] = 'Success Update Role';
-
-    return $data;
-}
 
     public function deleteRole($id)
     {
@@ -973,14 +974,14 @@ class SettingService
     }
     public function myrolestaff()
     {
-        $data = 
-         UserProfile::where('userprofile.tenant_id', Auth::user()->tenant_id)
+        $data =
+            UserProfile::where('userprofile.tenant_id', Auth::user()->tenant_id)
             ->whereNull('role_user.up_user_id')
             ->leftJoin('employment', 'userprofile.user_id', '=', 'employment.user_id')
             ->leftJoin('role_user', 'userprofile.user_id', '=', 'role_user.up_user_id')
             ->select('userprofile.user_id', 'userprofile.fullname')
             ->get();
-                
+
 
         return $data;
     }
@@ -1078,19 +1079,19 @@ class SettingService
 
     public function getRoleById($id)
     {
-          $data = UserRole::where('role_user.tenant_id', Auth::user()->tenant_id)
+        $data = UserRole::where('role_user.tenant_id', Auth::user()->tenant_id)
             ->leftJoin('userprofile', 'role_user.up_user_id', '=', 'userprofile.user_id')
             ->leftJoin('users as au', 'role_user.added_by', '=', 'au.id')
             ->leftJoin('users as mu', 'role_user.modified_by', '=', 'mu.id')
             ->leftJoin('role as rolee', 'role_user.role_id', '=', 'rolee.id')
             ->select('role_user.*', 'userprofile.fullname', 'au.username as username1', 'mu.username as username2', 'rolee.id as roleeid', 'rolee.roleName as rolename')
-		    ->where('role_user.role_id', '=', $id)
+            ->where('role_user.role_id', '=', $id)
             ->get();
 
         return $data;
     }
 
-     public function getRoleBy($id)
+    public function getRoleBy($id)
     {
         $data1 = Role::find($id);
 
@@ -1270,7 +1271,7 @@ class SettingService
         $logs = TypeOfLogs::find($id);
         // $naim = TypeOfLogs::find($id);
         $naim = ActivityLogs::where('logs_id', $id);
-        
+
 
         if (!$logs && !$naim) {
             $data['status'] = config('app.response.error.status');
@@ -1279,7 +1280,7 @@ class SettingService
             $data['msg'] = 'logs not found';
         } else {
             $logs->delete();
-            $naim ->delete();
+            $naim->delete();
 
             $data['status'] = config('app.response.success.status');
             $data['type'] = config('app.response.success.type');
@@ -1326,7 +1327,8 @@ class SettingService
 
     public function eclaimGeneralView()
     {
-        $data = EclaimGeneral::where([['tenant_id', Auth::user()->tenant_id]])->get();
+        $data['subs'] = EclaimGeneral::where([['tenant_id', Auth::user()->tenant_id]])->get();
+        $data['general'] = EclaimGeneralSetting::where([['tenant_id', Auth::user()->tenant_id]])->orderBy('id', 'DESC')->first();
 
         if (!$data) {
             $data = [];
@@ -1375,7 +1377,7 @@ class SettingService
     {
 
         $input = $r->input();
-        
+
         // $user = Auth::user();
         // $input['modifiedBy'] = $user->username;
         // date_default_timezone_set("Asia/Kuala_Lumpur");
@@ -1474,13 +1476,21 @@ class SettingService
 
     public function updateClaimCategory($r, $id)
     {
-
         $input = $r->input();
 
-        // $user = Auth::user();
-        // $input['modifiedBy'] = $user->username;
-        // date_default_timezone_set("Asia/Kuala_Lumpur");
-        // $input['modified_at'] = date('Y-m-d H:i:s');
+        // insert content data
+        if (!empty($input['content'])) {
+            foreach ($input['content'] as $content) {
+                $contentData = [
+                    'content' => $content,
+                    'category_id' => $id,
+                ];
+
+                ClaimCategoryContent::create($contentData);
+            }
+            unset($input['content']);
+        }
+
         if ($input['claim_type']) {
             $input['claim_type'] = implode(',', $input['claim_type']);
         }
@@ -1560,7 +1570,7 @@ class SettingService
         $entitleData['tenant_id'] = Auth::user()->tenant_id;
         EntitleGroup::create($entitleData);
 
-        $entitle = EntitleGroup::where('tenant_id', Auth::user()->tenant_id)->orderBy('created_at')->first();
+        $entitle = EntitleGroup::where('tenant_id', Auth::user()->tenant_id)->orderBy('created_at', 'DESC')->first();
 
         if ($input['car_price']) {
             foreach ($input['car_price'] as $key => $data) {
@@ -1568,6 +1578,7 @@ class SettingService
                     $car[] = [
                         'price' => $input['car_price'][$key],
                         'km' => $input['car_km'][$key],
+                        'order_km' => $input['order_km'][$key],
                         'type' => 'car',
                         'entitle_id' => $entitle->id,
                         'tenant_id' => Auth::user()->tenant_id,
@@ -1583,6 +1594,7 @@ class SettingService
                     $motor[] = [
                         'price' => $input['motor_price'][$key],
                         'km' => $input['motor_km'][$key],
+                        'order_km' => $input['order_km'][$key],
                         'type' => 'motor',
                         'entitle_id' => $entitle->id,
                         'tenant_id' => Auth::user()->tenant_id,
@@ -1595,12 +1607,12 @@ class SettingService
         TransportMillage::insert($car);
         TransportMillage::insert($motor);
 
-        $data['status'] = config('app.response.success.status');
-        $data['type'] = config('app.response.success.type');
-        $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success Create Entitle Group';
+        $return['status'] = config('app.response.success.status');
+        $return['type'] = config('app.response.success.type');
+        $return['title'] = config('app.response.success.title');
+        $return['msg'] = 'Success Create Entitle Group';
 
-        return $data;
+        return $return;
     }
 
     public function eclaimEntitleGroupEditView($id = '')
@@ -1884,7 +1896,7 @@ class SettingService
 
         $input = [
             'holiday_title' => $data1,
-            'start_date' => $data2, 
+            'start_date' => $data2,
             'end_date' => $data3,
             'annual_date' => $data4,
             'tenant_id' => $data5,
@@ -2115,6 +2127,83 @@ class SettingService
     public function getDateClaim()
     {
         $data = ClaimDateSetting::where('tenant_id', Auth::user()->tenant_id)->first();
+
+        return $data;
+    }
+
+    public function updateEclaimSettingGeneral($r)
+    {
+        $input = $r->input();
+
+        $input['general_setting']['tenant_id'] = Auth::user()->tenant_id;
+        $input['general_setting']['user_id'] = Auth::user()->id;
+        if ($input['general_id']) {
+            EclaimGeneralSetting::where('id', $input['general_id'])->update($input['general_setting']);
+        } else {
+            EclaimGeneralSetting::create($input['general_setting']);
+        }
+
+        $generalData = EclaimGeneralSetting::orderBy('id', 'DESC')->first();
+
+        // insert general id in subs setting
+        foreach ($input['subs_id'] as $subs_id) {
+            $subsData = [
+                'general_setting_id' => $generalData->id
+            ];
+
+            EclaimGeneral::where('id', $subs_id)->update($subsData);
+        }
+
+        $data['status'] = config('app.response.success.status');
+        $data['type'] = config('app.response.success.type');
+        $data['title'] = config('app.response.success.title');
+        $data['msg'] = 'Success update eclaim general setting';
+
+        return $data;
+    }
+
+    public function deleteClaimCategoryContent($id)
+    {
+        $logs = ClaimCategoryContent::find($id);
+
+        if (!$logs) {
+            $data['status'] = config('app.response.error.status');
+            $data['type'] = config('app.response.error.type');
+            $data['title'] = config('app.response.error.title');
+            $data['msg'] = 'data not found';
+        } else {
+            $logs->delete();
+
+            $data['status'] = config('app.response.success.status');
+            $data['type'] = config('app.response.success.type');
+            $data['title'] = config('app.response.success.title');
+            $data['msg'] = 'Success Delete Content';
+        }
+
+        return $data;
+    }
+
+    public function updateStatusClaimCategory($id, $status)
+    {
+        $logs = ClaimCategory::find($id);
+
+        if (!$logs) {
+            $data['status'] = config('app.response.error.status');
+            $data['type'] = config('app.response.error.type');
+            $data['title'] = config('app.response.error.title');
+            $data['msg'] = 'data not found';
+        } else {
+            $contentData = [
+                'status' => $status,
+            ];
+
+            $logs->update($contentData);
+
+            $data['status'] = config('app.response.success.status');
+            $data['type'] = config('app.response.success.type');
+            $data['title'] = config('app.response.success.title');
+            $data['msg'] = 'Success Update Content';
+        }
 
         return $data;
     }
