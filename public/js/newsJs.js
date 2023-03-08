@@ -7,11 +7,17 @@ $(document).ready(function() {
 
     $("#tablenews").DataTable({
         responsive: false,
+        // scrollX: true,
         lengthMenu: [
             [5, 10, 25, 50, -1],
             [5, 10, 25, 50, "All"],
         ],
     });
+    $("#tablenews-dashboard").DataTable({
+        responsive: false,
+        scrollX: true,
+        lengthMenu: [[5], [5]],
+      });      
 
     $(document).on("click", "#addButton", function() {
         $('#addModal').modal('show');

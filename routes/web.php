@@ -391,6 +391,7 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('/getOrganizationChart', 'getOrganizationChart');
             Route::get('/getDepartmentTree', 'getDepartmentTree');
             Route::get('/phoneDirectory', 'phoneDirectoryView');
+            Route::get('/policysop', 'policysopView');
             Route::get('/organizationChart', 'chartView');
             Route::get('/departmentTree', 'treeView');
         });
@@ -572,7 +573,6 @@ Route::group(['middleware' => ['web']], function () {
 Route::get('org/chartchild', function () {
     return view('pages.org.chartchild');
 });
-
 
 Route::get('org/charthumanresource', function () {
     return view('pages.org.childChartHumanResource');

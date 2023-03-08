@@ -83,7 +83,7 @@
 							<h4 class="panel-title"> <i class="fas fa-message fa-fw me-3"></i>Announcements</h4>
 				</div>
 				<div class="panel-body">
-				<table id="tablenews" class="table table-striped table-bordered align-middle">
+				<table id="tablenews-dashboard" style="width: 100%;" class="table table-striped table-bordered align-middle">
                 <thead>
 				<tr>
 					<th class="text-nowrap">No.</th>
@@ -122,7 +122,7 @@
 				</div>
 				
 				<div class="panel-body">
-				<table id="timesheetapproval" class="table table-striped table-bordered align-middle">
+				<table id="timesheetapproval-dashboard" style="width: 100%;"  class="table table-striped table-bordered align-middle">
 				<thead>
 					<tr>
 						<th class="text-nowrap">No.</th>
