@@ -46,7 +46,7 @@
                             </div>
                             <br>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary">Reset</button>
+                                <!-- <button type="button" class="btn btn-secondary">Reset</button> -->
                                 <button type="submit" class="btn btn-primary" id="generalButton">Save</button>
                             </div>
                         </div>

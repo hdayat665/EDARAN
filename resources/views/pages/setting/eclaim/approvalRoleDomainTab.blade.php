@@ -21,16 +21,17 @@
                                     <input type="hidden" name="category_role" value="admin">
                                     <select class="form-select" id="roleId" name="role">
                                         <option class="form-label" value="">Please Select</option>
-                                        <?php $roles = getAllJobGrade(); ?>
+                                        <?php $roles = getAllRole(); ?>
                                         @foreach ($roles as $role)
-                                            <option value="{{ $role->id }}">{{ $role->jobGradeName }}</option>
+                                            <option value="{{ $role->id }}">{{ $role->roleName }}</option>
                                         @endforeach
                                     </select>
                                 </div>
                             </div>
+
                             <div class="row p-2">
                                 <div class="col-md-2"> </div>
-                                <div class="col-md-2">
+                                <div class="col-md-2"> 
                                     <label class="form-label">Checker 1</label>
                                 </div>
                                 <div class="col-md-6">
@@ -89,7 +90,7 @@
                             </div>
                             <br>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary">Reset</button>
+                                <!-- <button type="button" class="btn btn-secondary">Reset</button> -->
                                 <button type="submit" class="btn btn-primary" id="claimAdminButton">Save</button>
                             </div>
                         </form>
@@ -109,9 +110,9 @@
                                     <input type="hidden" name="category_role" value="finance">
                                     <select class="form-select" id="roleIdF" name="role">
                                         <option class="form-label" value="">Please Select</option>
-                                        <?php $roles = getAllJobGrade(); ?>
+                                        <?php $roles = getAllRole(); ?>
                                         @foreach ($roles as $role)
-                                            <option value="{{ $role->id }}">{{ $role->jobGradeName }}</option>
+                                            <option value="{{ $role->id }}">{{ $role->roleName }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -178,7 +179,7 @@
                             </div>
                             <br>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary">Reset</button>
+                                <!-- <button type="button" class="btn btn-secondary">Reset</button> -->
                                 <button type="submit" id="claimFinanceButton" class="btn btn-primary">Save</button>
                             </div>
                         </form>
@@ -204,9 +205,9 @@
                                     <input type="hidden" name="category_role" value="cash_advance">
                                     <select class="form-select" id="roleIdC" name="role">
                                         <option class="form-label" value="">Please Select</option>
-                                        <?php $roles = getAllJobGrade(); ?>
+                                        <?php $roles = getAllRole(); ?>
                                         @foreach ($roles as $role)
-                                            <option value="{{ $role->id }}">{{ $role->jobGradeName }}</option>
+                                            <option value="{{ $role->id }}">{{ $role->roleName }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -273,7 +274,7 @@
                             </div>
                             <br>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary">Reset</button>
+                                <!-- <button type="button" class="btn btn-secondary">Reset</button> -->
                                 <button type="submit" id="cashAdminButton" class="btn btn-primary">Save</button>
                             </div>
                         </form>

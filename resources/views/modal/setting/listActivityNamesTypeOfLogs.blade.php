@@ -11,12 +11,13 @@
                         <table id="listActivityName" class="table table-striped table-bordered align-middle">
                             <thead>
                                 <tr>
+                                    <th class="text-nowrap">No</th>
                                     <th class="text-nowrap">Activity Name</th>
                                 </tr>
                             </thead>
                             <tbody id="testkit1">
                                 <tr>
-                                    <th style="display:none"></th>
+                                    <th style="display:none">Activity Name</th>
                                 </tr>
                             </tbody>
                         </table>

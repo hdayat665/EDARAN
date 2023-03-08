@@ -350,6 +350,7 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('/createGeneralApprover', 'createGeneralApprover');
             Route::get('/getUserByRole/{id}', 'getUserByRole');
             Route::get('/getUserByJobGrade/{id}', 'getUserByJobGrade');
+            Route::get('/getUserByUserRole/{id}', 'getUserByUserRole');
             Route::post('/createDomainList', 'createDomainList');
             Route::get('/getClaimCategoryContent/{id}', 'getClaimCategoryContent');
             Route::get('/getClaimCategoryById/{id}', 'getClaimCategoryById');
@@ -512,6 +513,7 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('/monthClaimEditView/edit/month/{id}', 'monthClaimEditView');
             Route::post('/submitMonthlyClaim/{id}', 'submitMonthlyClaim');
             Route::post('/submitCaClaim', 'submitCaClaim');
+            Route::get('/appealMtcView', 'appealMtcView');
         });
 
         Route::controller(generalClaimController::class)->group(function () {
