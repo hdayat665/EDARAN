@@ -682,6 +682,14 @@
                                     <div class="menu-text text-gray">Organization Chart</div>
                                 </a>
                             </div>
+                            <div class="menu-item">
+                                <a href="/policysop" class="menu-link">
+                                    <div class="menu-icon">
+                                        <i class="fa fa-rectangle-list text-gray"></i>
+                                    </div>
+                                    <div class="menu-text text-gray">Policy & SOP</div>
+                                </a>
+                            </div>
                             {{-- <div class="menu-item">
                                     <a href="/departmentTree" class="menu-link">
                                     <div class="menu-icon">
@@ -973,30 +981,30 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.1/dist/sweetalert2.all.min.js"></script>
 
 <script>
-    $('#data-table-default-announcement').DataTable({
-        responsive: true,
-        lengthMenu: [
-            [5, 10, 25, 50, -1],
-            [5, 10, 25, 50, "All"],
-        ],
+    $('#tablenews-dashboard').DataTable({
+        scrollX: true,
+        dom: '<"top"i>rt<"bottom"p><"clear">',
+        scrollY: 150,
+        responsive: false,
+        paging: false
     });
 </script>
 <script>
-    $('#data-table-default-events').DataTable({
-        responsive: true,
-        lengthMenu: [
-            [5, 10, 25, 50, -1],
-            [5, 10, 25, 50, "All"],
-        ],
+    $('#timesheetapproval-dashboard').DataTable({
+        scrollX: true,
+        dom: '<"top"i>rt<"bottom"p><"clear">',
+        scrollY: 150,
+        responsive: false,
+        paging: false
     });
 </script>
 <script>
     $('#data-table-default-clocks').DataTable({
-        responsive: true,
-        lengthMenu: [
-            [5, 10, 25, 50, -1],
-            [5, 10, 25, 50, "All"],
-        ],
+        scrollX: true,
+        dom: '<"top"i>rt<"bottom"p><"clear">',
+        scrollY: 150,
+        responsive: false,
+        paging: false
     });
 </script>
 <script type="text/javascript">
