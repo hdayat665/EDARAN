@@ -592,10 +592,6 @@ $(document).ready(function () {
         }
     });
 
-    $.validator.addMethod("noNumbers", function(value, element) {
-        return this.optional(element) || /^[a-zA-Z]+$/.test(value);
-    }, "Please Insert Alphabet Only");
-
     $.validator.addMethod("noSpecialChars", function(value, element) {
         return this.optional(element) || /^[^A-Za-z!@#$%^&*()\-_+={}[\]\\|<>"'\/~`,.;: ]*$/.test(value);
       }, "Special Characters, Spaces, and Alphabet Characters Are Not Allowed.");      
@@ -647,15 +643,15 @@ $.validator.addMethod("noSpecialChars", function(value, element) {
 
                 firstName: {
                     required: true,
-                    noNumbers: true
+                    
                   },
                 lastName: {
                     required: true,
-                    noNumbers: true
+                    
                   },
                 fullName: {
                     required: true,
-                    noNumbers: true
+                    
                   },
                 gender: "required",
                 maritialStatus: "required",
@@ -1499,11 +1495,11 @@ $.validator.addMethod("noSpecialChars", function(value, element) {
             rules: {
                 firstName: {
                     required: true,
-                    noNumbers: true
+                    
                   },
                 lastName: {
                     required: true,
-                    noNumbers: true
+                    
                   },
                 relationship: "required",
                 contactNo: {
@@ -1631,11 +1627,11 @@ $.validator.addMethod("noSpecialChars", function(value, element) {
             rules: {
                 firstName_2: {
                     required: true,
-                    noNumbers: true
+                    
                   },
                 lastName_2: {
                     required: true,
-                    noNumbers: true
+                    
                   },
                 relationship_2: "required",
                 contactNo_2: {
@@ -1765,11 +1761,11 @@ $.validator.addMethod("noSpecialChars", function(value, element) {
             rules: {
                 firstName: {
                     required: true,
-                    noNumbers: true
+                    
                   },
                 lastName: {
                     required: true,
-                    noNumbers: true
+                    
                   },
                 idNo: {
                     required: true,
@@ -1982,11 +1978,11 @@ $.validator.addMethod("noSpecialChars", function(value, element) {
             rules: {
                 firstName: {
                     required: true,
-                    noNumbers: true
+                    
                   },
                 lastName: {
                     required: true,
-                    noNumbers: true
+                    
                   },
                 idNo: {
                     required: true,
@@ -2338,11 +2334,11 @@ $.validator.addMethod("noSpecialChars", function(value, element) {
             rules: {
                 firstName: {
                     required: true,
-                    noNumbers: true
+                    
                   },
                 lastName: {
                     required: true,
-                    noNumbers: true
+                    
                   },
                 DOB: "required",
                 gender: "required",
@@ -2593,11 +2589,11 @@ $.validator.addMethod("noSpecialChars", function(value, element) {
             rules: {
                 firstName: {
                     required: true,
-                    noNumbers: true
+                    
                   },
                 lastName: {
                     required: true,
-                    noNumbers: true
+                    
                   },
                 DOB: "required",
                 gender: "required",

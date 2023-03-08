@@ -54,6 +54,16 @@ class OrganizationController extends Controller
         return view('pages.org.phone',$data);
     }
 
+    public function policysopView()
+    {
+        $ss = new OrganizationService;
+
+        $result = $ss->sopView();
+
+        // return view('pages.setting.sop', $result);
+        return view('pages.org.soppolicy', $result);
+    }
+
     public function chartView()
     {
         return view('pages.org.chart');
