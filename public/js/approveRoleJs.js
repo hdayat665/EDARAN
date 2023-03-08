@@ -81,7 +81,7 @@ $(document).ready(function () {
 
     $(document).on("change", "#roleId", function () {
         roleId = $(this).val();
-        $("#checker1")
+        $("#checker1") 
             .find("option")
             .remove()
             .end()
@@ -90,15 +90,16 @@ $(document).ready(function () {
             )
             .val("");
 
-        function getUserByJobGrade(roleId) {
+        function getUserByUserRole(roleId) {
             return $.ajax({
-                url: "/getUserByJobGrade/" + roleId,
+                url: "/getUserByUserRole/" + roleId,
             });
         }
 
         $("#checker1").find("option").end();
 
-        var user = getUserByJobGrade(roleId);
+        var user = getUserByUserRole(roleId);
+
         console.log(user);
         user.done(function (data) {
             for (let i = 0; i < data.length; i++) {
@@ -159,9 +160,9 @@ $(document).ready(function () {
                 )
                 .val("");
 
-            function getUserByJobGrade(roleId) {
+            function getUserByUserRole(roleId) {
                 return $.ajax({
-                    url: "/getUserByJobGrade/" + roleId,
+                    url: "/getUserByUserRole/" + roleId,
                 });
             }
             $("#" + inputs[i] + "")
@@ -169,7 +170,7 @@ $(document).ready(function () {
                 .end();
         }
 
-        var user = getUserByJobGrade(roleId);
+        var user = getUserByUserRole(roleId);
 
         user.done(function (data) {
             // console.log(data.user_profile.id);
@@ -231,9 +232,9 @@ $(document).ready(function () {
                 )
                 .val("");
 
-            function getUserByJobGrade(roleId) {
+            function getUserByUserRole(roleId) {
                 return $.ajax({
-                    url: "/getUserByJobGrade/" + roleId,
+                    url: "/getUserByUserRole/" + roleId,
                 });
             }
             $("#" + inputs[i] + "")
@@ -241,7 +242,7 @@ $(document).ready(function () {
                 .end();
         }
 
-        var user = getUserByJobGrade(roleId);
+        var user = getUserByUserRole(roleId);
 
         user.done(function (data) {
             // console.log(data.user_profile.id);

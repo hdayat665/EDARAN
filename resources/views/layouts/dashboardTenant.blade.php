@@ -433,6 +433,7 @@
                                     <div class="menu-text text-gray">My Claim</div>
                                 </a>
                             </div>
+                            
                             <div class="menu-item has-sub">
 
                                 <a href="javascript:;" class="menu-link">
@@ -555,6 +556,7 @@
                                             </div>
                                         </div>
                                     </div>
+                                    
                                 </div>
                             </div>
                             <div class="menu-item has-sub">
@@ -639,6 +641,14 @@
                                         </div>
                                     </div>
                                 </div>
+                            </div>
+                            <div class="menu-item">
+                                <a href="/appealMtcView" class="menu-link">
+                                    <div class="menu-icon">
+                                        <i class="fa fa-envelope-open-text text-gray"></i>
+                                    </div>
+                                    <div class="menu-text text-gray">Appeal Approval</div>
+                                </a>
                             </div>
                         </div>
                     </div>

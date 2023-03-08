@@ -21,13 +21,13 @@
                     <table id="data-table-default" class="table table-striped table-bordered">
                         <tr>
                             <th>Total Days of This Month</th>
-                            <td>31 Days</td>
+                            <td><label id="totalDayMonth"></label></td>
                             <th>Weekdays</th>
-                            <td>22 Days</td>
+                            <td><label id="weekdays"></label></td>
                         </tr>
                         <tr>
                             <th >Weekend</th>
-                            <td>9 Days</td>
+                            <td><label id="weekend"></label></td>
                             <th>Working Days</th>
                             <td>19 Days</td>
                         </tr>
