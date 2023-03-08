@@ -21,7 +21,7 @@
                         <td> {{$id}} </td>
                         <td>
                             <div class="btn-group me-1 mb-1">
-                                <a href="javascript:;" class="btn btn-primary btn-sm dropdown-toggle"></i> Actions <i class="fa fa-caret-down"></i></a>
+                                <a href="javascript:;" data-bs-toggle="dropdown" class="btn btn-primary btn-sm dropdown-toggle"></i> Actions <i class="fa fa-caret-down"></i></a>
                                     <div class="dropdown-menu">
                                     <a href="javascript:;" data-bs-toggle="modal" id="updateAddressDetails{{$address->id}}" data-id="{{$address->id}}" data-type="edit" class="dropdown-item">Edit</a>
                                     <div class="dropdown-divider"></div>

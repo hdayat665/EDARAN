@@ -604,11 +604,7 @@ $.validator.addMethod("noSpecialChars", function(value, element) {
             educationData.done(function(data) {
                 education = data.data;
                 console.log(data.data);
-                //var fromDateFormatted = moment(education.FromDate).format('DD-MM-YYYY');
-                //var toDateFormatted = moment(education.ToDate).format('DD-MM-YYYY');
-
-                //$('#educationFromDate1').val(fromDateFormatted);
-                //$('#educationToDate1').val(toDateFormatted);
+                $("#idEdu").val(education.id);
                 $('#educationFromDate1').val(education.fromDate);
                 $('#educationToDate1').val(education.toDate);
                 $('#educationinstituteName1').val(education.instituteName);
@@ -1103,11 +1099,14 @@ $.validator.addMethod("noSpecialChars", function(value, element) {
 
         $("#updateAddressDetails" + type).click(function (e){
             id = $(this).data("id");
+            console.log(id)
             var addressData = getAddressDetails(id);
 
             addressData.done(function (data){
                 console.log(data)
                 address = data.data;
+                console.log(data.data);
+                $("#id1").val(address.id);
                 $("#address1Edit").val(address.address1);
                 $("#address2Edit").val(address.address2);
                 $("#postcodeEdit").val(address.postcode);
@@ -1115,9 +1114,6 @@ $.validator.addMethod("noSpecialChars", function(value, element) {
                 $("#stateEdit").val(address.state);
                 $("#countryEdit").val(address.country);
                 $("#addressTypeEdit").val(address.addressType);
-                if (data.file) {
-                    $('#fileDownloadEdu').html('<a href="/storage/' + data.file + '">Download File</a>')
-                }
             });
             $("#modaleditaddress").modal("show");
         });
@@ -1164,6 +1160,69 @@ $.validator.addMethod("noSpecialChars", function(value, element) {
             });
         }
     }
+
+    $('input[name="address_type[]"]').click(function() {
+        var addressId = $(this).data('address-id');
+        var addressType = $(this).data('address-type');
+        var checked = $(this).is(':checked');
+        id = $(this).data("id");
+    
+        $.ajax({
+            url: '/updateAddressDetails',
+            type: 'POST',
+            data: {
+                id: addressId,
+                addressType: addressType,
+                checked: checked
+            },
+            success: function(data) {
+                // Update the UI to reflect the new address type
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                console.error(errorThrown);
+            }
+        });
+    });
+
+    // $('input[name="address_type[]"]').click(function() {
+    //     var addressId = $(this).data('address-id');
+    //     var addressType = $(this).data('address-type');
+    //     var checked = $(this).is(':checked');
+    //     id = $(this).data("id");
+        
+    //     $.ajax({
+    //         type: 'POST',
+    //         url: '/updateAddressDetails',
+    //         data: {
+    //             id: addressId,
+    //             addressType: addressType,
+    //             checked: checked
+    //         },
+    //         dataType: "json",
+    //         async: false,
+    //         processData: false,
+    //         contentType: false,
+    //     }).done(function (data) {
+    //         console.log(data)
+    //         Swal.fire({
+    //             title: data.title,
+    //             icon: "success",
+    //             text: data.msg,
+    //             type: data.type,
+    //             confirmButtonColor: "#3085d6",
+    //             confirmButtonText: "OK",
+    //             allowOutsideClick: false,
+    //             allowEscapeKey: false,
+    //         }).then (function (){
+    //             if(data.type == "error"){
+    //             } else {
+    //                 location.reload();
+    //             }
+    //         });
+    //     });
+    // });
+    
+    
 
     $("#saveEmergency, #saveEmergency2").click(function (e) {
         $("#formEmergency").validate({
@@ -2767,6 +2826,155 @@ $.validator.addMethod("noSpecialChars", function(value, element) {
             },
         });
     });
+
+
+    function isCPSelected() {
+        var correspondentChecked = $('input[name="address_type[]"][value="correspondent"]:checked').length;
+        var permanentChecked = $('input[name="address_type[]"][value="permanent"]:checked').length;
+        return correspondentChecked || permanentChecked;
+      }
+      
+      $('input[name="address_type[]"][value="correspondent"], input[name="address_type[]"][value="permanent"]').click(function() {
+        var type = $(this).val();
+        var checked = $(this).is(':checked');
+        var tableRow = $(this).closest('tr');
+      
+        if (checked) {
+          $('input[name="address_type[]"][value="' + type + '"]').not(this).prop('checked', false);
+          $('tr').removeClass('selected-row');
+          tableRow.addClass('selected-row');
+        } else {
+          tableRow.removeClass('selected-row');
+        }
+      
+        if (!isCPSelected()) {
+          swal({
+            title: "Error",
+            text: "Please select Correspondent or Permanent.",
+            icon: "error",
+            button: "OK",
+          });
+          $(this).prop('checked', true);
+        }
+      });
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // function isCPSelected() {
+    //     var correspondentChecked = $('input[name="address_type[]"][value="correspondent"]:checked').length;
+    //     var permanentChecked = $('input[name="address_type[]"][value="permanent"]:checked').length;
+    //     return correspondentChecked || permanentChecked;
+    //   }
+
+    //   function updateCurrentAddressType() {
+    //     // Get the IDs of all addresses except the current one
+    //     var addressIds = $('input[name="address_id[]"]').map(function() {
+    //         return $(this).val();
+    //     }).get();
+    //     addressIds.splice(currentAddressIndex, 1);
+    
+    //     // Get the address types of all addresses except the current one
+    //     var addressTypes = $('input[name="address_type[]"]:checked').map(function() {
+    //         return $(this).val();
+    //     }).get();
+    
+    //     // Send an AJAX request to the server to update the current address type
+    //     $.ajax({
+    //         type: 'POST',
+    //         url: '/updateCurrentAddressType',
+    //         data: {
+    //             addressIds: addressIds,
+    //             addressTypes: addressTypes
+    //         },
+    //         dataType: "json",
+    //         async: false,
+    //         processData: false,
+    //         contentType: false,
+    //     }).done(function (data) {
+    //         console.log(data)
+    //         if (data.status == 'success') {
+    //             // Update the current address type in the UI
+    //             $('#current-address-type').text(data.addressType);
+    //         }
+    //     });
+    // }
+    
+      
+    //   $('input[name="address_type[]"][value="correspondent"], input[name="address_type[]"][value="permanent"]').click(function() {
+    //     var type = $(this).val();
+    //     var checked = $(this).is(':checked');
+    //     var tableRow = $(this).closest('tr');
+    //     var correspondentChecked = $('input[name="address_type[]"][value="correspondent"]:checked').length;
+    //     var permanentChecked = $('input[name="address_type[]"][value="permanent"]:checked').length;
+    //     var addressType;
+      
+    //     if (checked) {
+    //       $('input[name="address_type[]"][value="' + type + '"]').not(this).prop('checked', false);
+    //       $('tr').removeClass('selected-row');
+    //       tableRow.addClass('selected-row');
+    //     } else {
+    //       tableRow.removeClass('selected-row');
+    //     }
+      
+    //     if (!isCPSelected()) {
+    //       swal({
+    //         title: "Error",
+    //         text: "Please select Correspondent or Permanent.",
+    //         icon: "error",
+    //         button: "OK",
+    //       });
+    //       $(this).prop('checked', true);
+    //     } else if (correspondentChecked && permanentChecked) {
+    //       addressType = 3;
+    //     } else {
+    //       addressType = 4;
+    //     }
+      
+    //     // Make the AJAX request to update the address type
+    //     var addressId = $(this).data('address-id');
+    //     $.ajax({
+    //       type: 'POST',
+    //       url: '/updateAddressDetails',
+    //       data: {
+    //         id: addressId,
+    //         addressType: addressType,
+    //       },
+    //       dataType: "json",
+    //       success: function(data) {
+    //         if (data.status == 'success') {
+    //           swal({
+    //             title: data.title,
+    //             text: data.msg,
+    //             icon: data.type,
+    //             confirmButtonColor: "#3085d6",
+    //             confirmButtonText: "OK",
+    //             allowOutsideClick: false,
+    //             allowEscapeKey: false,
+    //           }).then(function() {
+    //             location.reload();
+    //           });
+    //         } else {
+    //           swal({
+    //             title: data.title,
+    //             text: data.msg,
+    //             icon: data.type,
+    //             confirmButtonColor: "#3085d6",
+    //             confirmButtonText: "OK",
+    //             allowOutsideClick: false,
+    //             allowEscapeKey: false,
+    //           });
+    //         }
+    //       },
+    //       error: function(xhr, status, error) {
+    //         console.log(xhr.responseText);
+    //       }
+    //     });
+
+    //     updateCurrentAddressType();
+    //   });
+      
+      
+      
+              
 });
 
 $("#same-address").change(function () {
