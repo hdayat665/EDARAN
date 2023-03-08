@@ -1679,8 +1679,8 @@ if (!function_exists('addressType')) {
     {
         $data = [
 
-            '1' => 'CORRESPONDENCE',
-            '2' => 'PERMANENT',
+            '1' => 'PERMANENT',
+            '2' => 'CORRESPONDENCE',
             '3' => 'BOTH',
             '4' => 'NONE',
         ];
