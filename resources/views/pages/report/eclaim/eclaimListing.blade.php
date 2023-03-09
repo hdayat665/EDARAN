@@ -116,12 +116,11 @@
                     <div class="col-md-7">
                         <label class="form-label col-form-label col-md-4"></label>
                     </div>
-                    {{-- <div class="col-md-4"> 
-                        <a type="button" href="/eclaim/searchAllReport" class="btn btn-primary">Submit</a>
-                    </div> --}}
-                    <button type="submit" class="btn btn-primary mt-3">
-                        Submit
-                    </button>
+                    <div class="row-p-2">
+                        <button type="submit" class="btn btn-primary col-sm-2">
+                            Submit
+                        </button>
+                    </div>
                 </div>
                 
             </div>
