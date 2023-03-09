@@ -11,7 +11,7 @@
             </div>
         </div>
         <div class="panel-body" id="employeeInfo">
-            <table id="tableemployeeinfo" class="table table-striped table-bordered align-middle">
+            <table id="tableemployeeinfo" class="table table-striped table-bordered align-middle" style="width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch;">
                 <thead>
                     <tr>
                         <th width="1%" data-orderable="false">No</th>

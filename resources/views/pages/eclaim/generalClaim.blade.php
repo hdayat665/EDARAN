@@ -155,7 +155,7 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-control">
-                                <table id="applyclaimtable" class="table table-striped table-bordered align-middle">
+                                <table id="applyclaimtable" class="table table-striped table-bordered align-middle" style="overflow-x: auto; width: 100%;">
                                     <thead>
                                         <tr>
                                             <th>Action</th>
