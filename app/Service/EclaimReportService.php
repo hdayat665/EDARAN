@@ -15,31 +15,58 @@ use Illuminate\Support\Facades\DB;
 class EclaimReportService
 
 {
-    public function searchReportAll()
+    public function searchReportAll($input = [])
+    
 {
-    $data = [];
+   
+    $cond = [];
 
-    $data['general_claims'] = GeneralClaim::where('tenant_id', Auth::user()->tenant_id)->get();
-
-    $data['cash_advance'] = CashAdvanceDetail::where('tenant_id', Auth::user()->tenant_id)->get();
-    //pr($data['cash_advance']);
-    if (!$data['general_claims']) {
-        $data['general_claims'] = [];
+    if (isset($input['project'])) {
+        $cond[1] = ['b.project_id', $input['project']];
     }
 
-    if (!$data['cash_advance']) {
-        $data['cash_advance'] = [];
+    if (isset($input['department'])) {
+        $cond[2] = ['d.id', $input['department']];
     }
 
-    //pr($data);
+    if (isset($input['user_id'])) {
+        $cond[3] = ['a.user_id', $input['user_id']];
+    }
+
+    if (isset($input['department'])) {
+        $cond[4] = ['d.id', $input['department']];
+    }
+
+    if (isset($input['reference'])) {
+        $cond[5] = ['a.cheque_number', $input['reference']];
+    }
+
+    
+
+    $startDate = date_format(date_create(now()), 'Y').'-01-01';
+    $endDate = date_format(date_create(now()), 'Y').'-12-31';
+
+    if (isset($input['default-date'])) {
+        $dateRange = \explode(' - ', $input['default-date']);
+        $startDate = date_format(date_create($dateRange[0]), 'Y-m-d');
+        $endDate = date_format(date_create($dateRange[1]), 'Y-m-d');
+    }
+
+
+    $data['general_claims'] = DB::table('general_claim as a')
+    ->leftJoin('travel_claim as b', 'a.id', '=', 'b.general_id')
+    ->leftJoin('employment as c', 'a.user_id', '=', 'c.user_id')
+    ->leftJoin('department as d', 'c.department', '=', 'd.id')
+    ->select('a.*','b.project_id','d.id', 'a.user_id')
+    ->where('a.tenant_id', Auth::user()->tenant_id)
+    ->where($cond)
+    ->whereBetween('a.created_at', [$startDate, $endDate])
+    ->get();
+
 
     return $data;
-}
-
-
-
-
-
-
+    }
 
 }
+
+

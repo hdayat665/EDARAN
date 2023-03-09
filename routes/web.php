@@ -454,7 +454,8 @@ Route::group(['middleware' => ['web']], function () {
         });
         Route::controller(EclaimReportController::class)->group(function () {
             Route::get('/eclaimListing', 'eclaimListingView');
-            Route::get('/eclaim/searchAllReport', 'reportAllView');
+            // Route::get('/eclaim/searchAllReport', 'reportAllView');
+            Route::post('/eclaim/searchAllReport', 'reportAllView');
            
         });
         Route::controller(MyTimesheetController::class)->group(function () {

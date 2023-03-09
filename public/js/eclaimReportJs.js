@@ -5,10 +5,18 @@ $(document).ready(function() {
     $("#hideEmpName").hide();
     $("#hideRefNum").hide();
 
-    $("#datepicker-autoClose").datepicker({
-        todayHighlight: true,
-        autoclose: true,
-        format: 'yyyy-mm-dd'
+    // $("#datepicker-autoClose").datepicker({
+    //     todayHighlight: true,
+    //     autoclose: true,
+    //     format: 'yyyy-mm-dd'
+    // });
+
+    $("#datepicker-autoClose").daterangepicker({
+        opens: "right",
+        format: "MM/DD/YYYY",
+        separator: " to ",
+        startDate: moment().subtract("days", 29),
+        endDate: moment(),
     });
     
 
