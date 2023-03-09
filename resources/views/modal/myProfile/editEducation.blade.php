@@ -8,17 +8,18 @@
         </div>
         <div class="modal-body">
             <form id="educationModalEdit">
+                <input type="hidden" id="idEdu" name="id" >
             <div class="row p-2">
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="" class="form-label">From Date</label>
-                        <input type="text" class="form-control" id="datepicker-fromdate" name="fromDate" placeholder="DD/MM/YYYY" value="$educationToDate1">
+                        <input type="text" class="form-control" id="educationFromDate1" name="fromDate" placeholder="YYYY/MM/DD">
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="" class="form-label">To Date</label>
-                        <input type="text" class="form-control" id="educationToDate1" name="toDate" placeholder="DD/MM/YYYY">
+                        <input type="text" class="form-control" id="educationToDate1" name="toDate" placeholder="YYYY/MM/DD">
                     </div>
                 </div>
             </div>

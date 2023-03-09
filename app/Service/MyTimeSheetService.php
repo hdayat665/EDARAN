@@ -355,8 +355,10 @@ class MyTimeSheetService
             $data['msg'] = 'timesheet event not found';
         } else {
             $eventDetails = TimesheetEvent::where('id', $id)->orderBy('created_at', 'DESC')->first();
-            $departmentName = getDepartmentName($user->id)->departmentName;
-            $employeeName = getEmployeeName($user->id)->employeeName;
+            
+            $departmentName = getDepartmentName($user->id);
+            
+            $employeeName = getEmployeeName($user->id);
             $venue = projectLocationById($eventDetails->location);
 
             $participants = explode(',', $eventDetails->participant);

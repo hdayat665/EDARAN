@@ -47,6 +47,45 @@ $(document).ready(function() {
             });
         });
 
+        function getTotalDaysInCurrentMonth() {
+            const now = new Date();
+            const year = now.getFullYear();
+            const month = now.getMonth() + 1; // add 1 because getMonth() returns zero-based index
+            const lastDay = new Date(year, month, 0).getDate();
+            let totalDays = lastDay;
+            let totalWeekdays = 0;
+            let totalWeekendDays = 0;
+          
+            for (let i = 1; i <= lastDay; i++) {
+              const date = new Date(year, month - 1, i);
+              const dayOfWeek = date.getDay();
+          
+              if (dayOfWeek === 0 || dayOfWeek === 6) {
+                totalWeekendDays++;
+              } else {
+                totalWeekdays++;
+              }
+            }
+          
+            return { totalDays, totalWeekdays, totalWeekendDays };
+          }
+            
+          const { totalDays, totalWeekdays, totalWeekendDays } = getTotalDaysInCurrentMonth();
+
+          const totalDayMonthLabel = document.getElementById("totalDayMonth");
+            totalDayMonthLabel.textContent = totalDays + " Days";
+            
+            const weekdaysLabel = document.getElementById("weekdays");
+            weekdaysLabel.textContent = totalWeekdays + " Day";
+
+            const weekendLabel = document.getElementById("weekend");
+            weekendLabel.textContent = totalWeekendDays + " Day";
+
+            console.log(`Total days: ${totalDays}`);
+            console.log(`Total weekdays: ${totalWeekdays}`);
+            console.log(`Total weekend days: ${totalWeekendDays}`);
+
+
 });
 
 

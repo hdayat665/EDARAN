@@ -21,9 +21,9 @@ class DashboardController extends Controller
     {
         $ss = new DashboardService;
         $result = $ss->newsView();
-        $result2= $ss->eventView();
-        
-        return view('pages.dashboard.tenant',$result, $result2);
+        $result2 = $ss->eventView();
+
+        return view('pages.dashboard.tenant', $result, $result2);
     }
 
     public function dashboardHost()

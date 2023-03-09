@@ -25,6 +25,7 @@ use App\Models\TypeOfLogs;
 use App\Models\Unit;
 use App\Models\UserProfile;
 use App\Models\Users;
+use App\Models\UserRole;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -1253,7 +1254,7 @@ if (!function_exists('getAllRole')) {
     function getAllRole()
     {
         $data = Role::where([['tenant_id', Auth::user()->tenant_id]])->get();
-
+        
         if (!$data) {
             $data = [];
         }
@@ -1307,7 +1308,7 @@ if (!function_exists('getUserByJobGrade')) {
     function getUserByJobGrade($id = '')
     {
         $data = Employee::where([['tenant_id', Auth::user()->tenant_id], ['jobGrade', $id]])->with('userProfile')->get();
-
+        
         if (!$data) {
             $data = [];
         }
@@ -1316,7 +1317,18 @@ if (!function_exists('getUserByJobGrade')) {
     }
 }
 
+if (!function_exists('getUserByUserRole')) {
+    function getUserByUserRole($id = '')
+    {
+        $data = UserRole::where([['tenant_id', Auth::user()->tenant_id], ['role_id', $id]])->with('userProfile')->get();
+        
+        if (!$data) {
+            $data = [];
+        }
 
+        return $data;
+    }
+}
 
 
 if (!function_exists('getClaimCategory')) {
@@ -1703,8 +1715,8 @@ if (!function_exists('addressType')) {
     {
         $data = [
 
-            '1' => 'CORRESPONDENCE',
-            '2' => 'PERMANENT',
+            '1' => 'PERMANENT',
+            '2' => 'CORRESPONDENCE',
             '3' => 'BOTH',
             '4' => 'NONE',
         ];

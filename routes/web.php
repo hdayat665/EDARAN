@@ -350,6 +350,7 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('/createGeneralApprover', 'createGeneralApprover');
             Route::get('/getUserByRole/{id}', 'getUserByRole');
             Route::get('/getUserByJobGrade/{id}', 'getUserByJobGrade');
+            Route::get('/getUserByUserRole/{id}', 'getUserByUserRole');
             Route::post('/createDomainList', 'createDomainList');
             Route::get('/getClaimCategoryContent/{id}', 'getClaimCategoryContent');
             Route::get('/getClaimCategoryById/{id}', 'getClaimCategoryById');
@@ -380,8 +381,11 @@ Route::group(['middleware' => ['web']], function () {
 
             // timesheet period
             Route::get('/timesheetperiod', 'timesheetperiodView');
+
             
-            
+            Route::post('/updateEclaimSettingGeneral', 'updateEclaimSettingGeneral');
+            Route::delete('/deleteClaimCategoryContent/{id}', 'deleteClaimCategoryContent');
+            Route::post('/updateStatusClaimCategory/{id}/{status}', 'updateStatusClaimCategory');
         });
 
         Route::controller(OrganizationController::class)->group(function () {
@@ -389,6 +393,7 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('/getOrganizationChart', 'getOrganizationChart');
             Route::get('/getDepartmentTree', 'getDepartmentTree');
             Route::get('/phoneDirectory', 'phoneDirectoryView');
+            Route::get('/policysop', 'policysopView');
             Route::get('/organizationChart', 'chartView');
             Route::get('/departmentTree', 'treeView');
         });
@@ -496,8 +501,8 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('/getParticipantNameById/{id}', 'getParticipantNameById');
             Route::get('/getConfirmSubmitById/{id}', 'getConfirmSubmitById');
             //SUMMARY TIMESHEET
+            Route::get('/summarytimesheet', 'summarytimesheetView');
             Route::get('/summarytimesheet', 'timesheetSummaryView');
-            
         });
 
 
@@ -512,6 +517,7 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('/monthClaimEditView/edit/month/{id}', 'monthClaimEditView');
             Route::post('/submitMonthlyClaim/{id}', 'submitMonthlyClaim');
             Route::post('/submitCaClaim', 'submitCaClaim');
+            Route::get('/appealMtcView', 'appealMtcView');
         });
 
         Route::controller(generalClaimController::class)->group(function () {
@@ -557,7 +563,6 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('/getuserleaveApprhod/{id}', 'getuserleaveApprhod');
             Route::post('/updatehod/{id}', 'updatehod');
             Route::post('/updatehodreject/{id}', 'updatehodreject');
-
         });
     });
 });
@@ -573,7 +578,6 @@ Route::group(['middleware' => ['web']], function () {
 Route::get('org/chartchild', function () {
     return view('pages.org.chartchild');
 });
-
 
 Route::get('org/charthumanresource', function () {
     return view('pages.org.childChartHumanResource');

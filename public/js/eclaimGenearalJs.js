@@ -8,7 +8,7 @@ $(document).ready(function () {
             url: "/getEclaimGeneralById/" + id,
         });
     }
-    
+
     $(document).on("click", "#editModalButton", function () {
         var id = $(this).data("id");
         var vehicleData = getEclaimGeneralById(id);
@@ -66,12 +66,53 @@ $(document).ready(function () {
             submitHandler: function (form) {
                 console.log("asddsa");
                 requirejs(["sweetAlert2"], function (swal) {
-                    var data = new FormData(document.getElementById("editAreaForm"));
+                    var data = new FormData(
+                        document.getElementById("editAreaForm")
+                    );
                     var id = $("#idE").val();
 
                     $.ajax({
                         type: "POST",
                         url: "/updateSubsistance/" + id,
+                        data: data,
+                        dataType: "json",
+                        async: false,
+                        processData: false,
+                        contentType: false,
+                    }).done(function (data) {
+                        swal({
+                            title: data.title,
+                            text: data.msg,
+                            type: data.type,
+                            confirmButtonColor: "#3085d6",
+                            confirmButtonText: "OK",
+                            allowOutsideClick: false,
+                            allowEscapeKey: false,
+                        }).then(function () {
+                            if (data.type == "error") {
+                            } else {
+                                location.reload();
+                            }
+                        });
+                    });
+                });
+            },
+        });
+    });
+
+    $("#generalButton").click(function (e) {
+        $("#generalForm").validate({
+            rules: {},
+            messages: {},
+            submitHandler: function (form) {
+                requirejs(["sweetAlert2"], function (swal) {
+                    var data = new FormData(
+                        document.getElementById("generalForm")
+                    );
+
+                    $.ajax({
+                        type: "POST",
+                        url: "/updateEclaimSettingGeneral",
                         data: data,
                         dataType: "json",
                         async: false,
