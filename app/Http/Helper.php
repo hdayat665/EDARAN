@@ -1141,6 +1141,29 @@ if (!function_exists('getEmployeeName')) {
     }
 }
 
+
+
+if (!function_exists('getChequekNo')) {
+    function getChequekNo($id = '')
+    {
+        if ($id) {
+            $data = GeneralClaim::find($id);
+        } else {
+            $data = GeneralClaim::where('tenant_id', Auth::user()->tenant_id)->get();
+        }
+
+        if (!$data) {
+            $data = [];
+        }
+
+        return $data;
+    }
+}
+
+
+
+
+
 if (!function_exists('getEmployeeUsername')) {
     function getEmployeeUsername($id = '')
     {
@@ -1399,6 +1422,19 @@ if (!function_exists('getProjectById')) {
     function getProjectById($id = '')
     {
         $data = Project::where('id', $id)->first();
+
+        if (!$data) {
+            $data = [];
+        }
+
+        return $data;
+    }
+}
+
+if (!function_exists('getDepartmentById')) {
+    function getDepartmentById($id = '')
+    {
+        $data = Department::where('id', $id)->first();
 
         if (!$data) {
             $data = [];

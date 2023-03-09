@@ -22,4 +22,9 @@ class GeneralClaim extends Model
     {
         return $this->belongsTo(TravelClaim::class, 'id', 'general_id');
     }
+
+    public function Department()
+    {
+        return $this->belongsTo(Department::class, 'id', 'general_id');
+    }
 }
