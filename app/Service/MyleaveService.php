@@ -6,10 +6,12 @@ use App\Models\MyLeaveModel;
 use App\Models\leavetypesModel;
 use App\Models\Employee;
 use App\Models\ActivityLogs;
+use App\Models\leaveEntitlementModel;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Symfony\Component\Console\Input\Input;
 use Carbon\Carbon;
+
 
 class MyleaveService
 {
@@ -40,12 +42,61 @@ class MyleaveService
 
     }
 
+    public function searcmyleavehistory($r)
+    {
+       $input = $r->input();
+        $query = MyLeaveModel::where('myleave.tenant_id', Auth::user()->tenant_id)
+                    ->leftJoin('leave_types', 'myleave.lt_type_id', '=', 'leave_types.id')
+                    ->where('myleave.up_user_id', '=', Auth::user()->id)
+                    ->where('myleave.leave_date', '<', Carbon::now()->format('Y-m-d'))
+                    ->select('myleave.*', 'leave_types.leave_types as type')
+                    ->orderBy('myleave.applied_date', 'desc');
+
+        if ($input['applydate']) {
+            $applydate = $input['applydate'];
+            $query->where('myleave.applied_date', '=', $applydate);
+        }
+
+        if ($input['typelist']) {
+            $typelist = $input['typelist'];
+            $query->where('leave_types.id', '=', $typelist);
+        }
+
+        if ($input['status']) {
+            $status = $input['status'];
+            $query->where('myleave.status_final', '=', $status);
+        }
+
+        $data = $query->get();
+        return $data;
+    }
+
     public function datatype(){
 
         $data = 
         leavetypesModel::where('tenant_id', Auth::user()->tenant_id)
                         ->where('status', '=', 1)
                         ->get();
+        return $data;
+
+    }
+
+    public function datapie(){
+
+        // $data = 
+        // leavetypesModel::where('tenant_id', Auth::user()->tenant_id)
+        //                 ->where('status', '=', 1)
+        //                 ->get();
+        // return $data;
+
+        $data = leaveEntitlementModel::where('leave_Entitlement.tenant_id', Auth::user()->tenant_id)
+            ->rightJoin('myleave', 'leave_entitlement.id_userprofile', '=', 'myleave.up_user_id')
+            ->where('up_rec_status', '4')
+            ->where('up_app_status', '4')
+            ->where('up_user_id', Auth::user()->id)
+            ->select('current_entitlement', 'current_entitlement_balance', DB::raw('SUM(total_day_applied) as total_day_applied'))
+            ->first();
+
         return $data;
 
     }
@@ -313,6 +364,62 @@ class MyleaveService
             ->get();
 
         return $data;
+    }
+    public function getpieleave()
+    {
+        $currentYear = date('Y');
+        $datapie = 
+        leaveEntitlementModel::where('leave_Entitlement.tenant_id', Auth::user()->tenant_id)
+        ->rightJoin('myleave', 'leave_entitlement.id_userprofile', '=', 'myleave.up_user_id')
+        ->where('myleave.up_rec_status', '!=', '3')
+        ->where('myleave.up_app_status', '!=', '3')
+        ->where('myleave.up_user_id', Auth::user()->id)
+        ->where('leave_entitlement.le_year', '=', $currentYear) 
+        ->whereYear('myleave.applied_date', '=', $currentYear) 
+        ->select('leave_entitlement.current_entitlement', 'leave_entitlement.current_entitlement_balance', DB::raw('SUM(myleave.total_day_applied) as total_day_applied'))
+        ->first();
+
+        if(isset($datapie) && isset($datapie->total_day_applied)) {
+            return $datapie;
+        } else {
+
+            $currentYear = date('Y');
+            $datapie = leaveEntitlementModel::where('tenant_id', Auth::user()->tenant_id)
+                ->where('le_year', '=', $currentYear) 
+                ->where('id_userprofile', Auth::user()->id)
+                ->select('current_entitlement', 'current_entitlement_balance', DB::raw('"0" as total_day_applied'))
+                ->first();
+                return $datapie;
+        }
+    }
+    public function getpieleave2()
+    {
+        $endYear = date('Y') - 1;
+        $datapie2 = 
+        leaveEntitlementModel::where('leave_Entitlement.tenant_id', Auth::user()->tenant_id)
+        ->rightJoin('myleave', 'leave_entitlement.id_userprofile', '=', 'myleave.up_user_id')
+        ->where('myleave.up_rec_status', '!=', '3')
+        ->where('myleave.up_app_status', '!=', '3')
+        ->where('myleave.up_user_id', Auth::user()->id)
+        ->where('leave_entitlement.le_year', '=', $endYear)
+        ->whereYear('myleave.applied_date', '=', $endYear) 
+        ->select('leave_entitlement.current_entitlement', 'leave_entitlement.current_entitlement_balance', DB::raw('SUM(myleave.total_day_applied) as total_day_applied'))
+        ->first();
+
+        if(isset($datapie2) && isset($datapie2->total_day_applied)) {
+            return $datapie2;
+        } else {
+
+            $endYear = date('Y') - 1;
+            $datapie2 = leaveEntitlementModel::where('tenant_id', Auth::user()->tenant_id)
+                ->where('le_year', '=', $endYear) 
+                ->where('id_userprofile', Auth::user()->id)
+                ->select('current_entitlement', 'current_entitlement_balance', DB::raw('"0" as total_day_applied'))
+                ->first();
+                return $datapie2;
+        }
+
+        
     }
 
     public function getuserleaveAppr($id)

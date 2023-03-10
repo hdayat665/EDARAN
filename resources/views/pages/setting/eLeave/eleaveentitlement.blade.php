@@ -19,18 +19,17 @@
                         <button class="btn btn-primary col-2" data-bs-toggle="modal" id="myModal1" data-bs-target="#updatelapse"> <i class="fa fa-calendar" aria-hidden="true"></i> Lapsed Date</button>
                     </div>
                     <div class="row p-2">
-                        <table  id="tableeleave"  class="table table-striped table-bordered align-middle">
+                        <table  id="tableentitlement"  class="table table-striped table-bordered align-middle">
                             <thead>
                                 <tr>	
-                                <th  data-orderable="false"></th>
                                 <th class="text-nowrap">Action</th>
                                 <th class="text-nowrap">Employee Name</th>
                                 <th class="text-nowrap">Department</th>
-                                <th class="text-nowrap">Current Entitlement(2022)</th>
+                                <th class="text-nowrap">Current Entitlement</th>
                                 <th class="text-nowrap">Current Entitlement Balance</th>
                                 <th class="text-nowrap">Sick Leave Entitlement</th>
                                 <th class="text-nowrap">Sick Leave Entitlement Balance</th>
-                                <th class="text-nowrap">Carry Forward(2021)</th>
+                                <th class="text-nowrap">Carry Forward</th>
                                 <th class="text-nowrap">Carry Forward Balance</th>
                                 <th class="text-nowrap">Lapsed Date</th>
                                 <th class="text-nowrap">Lapse</th>
@@ -42,7 +41,6 @@
                                 @foreach ($leave as $l)
                                 <?php $id++ ?>
                             <tr>
-                                <td><input class="form-check-input" type="checkbox" value="" id="" checked></td>
                                 {{-- <td>
                                     <a href="javascript:;" data-bs-toggle="modal" id="editButton" data-id="{{$company->id}}" class="btn btn-outline-green"><i class="fa fa-pencil-alt"></i></a>
                                 </td> --}}
@@ -50,8 +48,8 @@
                                     <a href="javascript:;" data-bs-toggle="modal" id="editButton" data-id="{{$l->id}}" data-bs-target="#editleave" class="btn btn-outline-blue">edit
                                     </a>
                                 </td>
-                                <td>{{$l->id_employment}}</td>
-                                <td>{{$l->id_department}}</td>
+                                <td>{{$l->fullname}}</td>
+                                <td>{{$l->departmentName}}</td>
                                 <td>{{$l->current_entitlement}}</td>
                                 <td>{{$l->current_entitlement_balance}}</td>
                                 <td>{{$l->sick_leave_entitlement}}</td>
@@ -99,6 +97,12 @@
                     </div>
 
                     <div class="row mb-3">
+                        <label class="form-label col-form-label col-md-3">Current Entitlement:</label>
+                        <div class="col-md-7">
+                        <input type="text" class="form-control" id="CurrentEntitlement" name="CurrentEntitlement" placeholder=""   />
+                        </div>
+                    </div>
+                    <div class="row mb-3">
                         <label class="form-label col-form-label col-md-3">Current Entitlement Balance :</label>
                         <div class="col-md-7">
                         <input type="text" class="form-control" id="CurrentEntitlementBalance" name="CurrentEntitlementBalance" placeholder=""   />
@@ -111,9 +115,15 @@
                         <input type="text" class="form-control" id="SickLeaveEntitlement" name="SickLeaveEntitlement" placeholder=""/>
                         </div>
                     </div>
+                    <div class="row mb-3">
+                        <label class="form-label col-form-label col-md-3">Sick Leave Entitlement Balance :</label>
+                        <div class="col-md-7">
+                        <input type="text" class="form-control" id="SickLeaveEntitlementBalance" name="SickLeaveEntitlementBalance" placeholder=""/>
+                        </div>
+                    </div>
 
                     <div class="row mb-3">
-                        <label class="form-label col-form-label col-md-3">Carry Forward(2021) :</label>
+                        <label class="form-label col-form-label col-md-3">Carry Forward:</label>
                         <div class="col-md-7">
                         <input type="text" class="form-control" id="CarryForward" name="CarryForward" placeholder=""  />
                         </div>
@@ -171,7 +181,7 @@
                                     <select class="form-select" name="employerName" id="employerName">
                                         <option value="" label="PLEASE CHOOSE"></option>
                                         @foreach($nameStaff as $nf)
-                                            <option value="{{ $nf->user_id }}" {{ old('employerName') == $nf->user_id ? 'selected' : '' }}>{{ $nf->fullname }}</option>
+                                            <option value="{{ $nf->user_id . ',' . $nf->id }}" {{ old('employerName') == $nf->user_id ? 'selected' : '' }}>{{ $nf->fullname }}</option>
                                          @endforeach
                                     </select>
 								</div>
