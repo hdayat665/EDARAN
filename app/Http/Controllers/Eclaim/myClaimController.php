@@ -45,6 +45,75 @@ class myClaimController extends Controller
         $data['year'] = $year;
         $data['user_id'] = Auth::user()->id;
 
+        $data['car'] = $mcs->getEntitlementByJobGradeCar($data['user_id']);
+
+        $entitlementArr = json_decode($data['car'], true);
+
+        $firstkmcar = null;
+        $firstpricecar = null;
+        $secondkmcar = null;
+        $secondpricecar = null;
+        $thirdkmcar = null;
+        $thirdpricecar = null;
+
+        foreach ($entitlementArr as $item) {
+            switch ($item['order_km']) {
+                case 1:
+                    $firstkmcar = $item['km'];
+                    $firstpricecar = $item['price'];
+                    break;
+                case 2:
+                    $secondkmcar = $item['km'];
+                    $secondpricecar = $item['price'];
+                    break;
+                case 3:
+                    $thirdkmcar = $item['km'];
+                    $thirdpricecar = $item['price'];
+                    break;
+            }
+        }
+
+        $data['firstkmcar'] = $firstkmcar;
+        $data['firstpricecar'] = $firstpricecar;
+        $data['secondkmcar'] = $secondkmcar;
+        $data['secondpricecar'] = $secondpricecar;
+        $data['thirdkmcar'] = $thirdkmcar;
+        $data['thirdpricecar'] = $thirdpricecar;
+
+        $data['motor'] = $mcs->getEntitlementByJobGradeMotor($data['user_id']);
+        $entitlementArr = json_decode($data['motor'], true);
+
+        $firstkmmotor = null;
+        $firstpricemotor = null;
+        $secondkmmotor = null;
+        $secondpricemotor = null;
+        $thirdkmmotor = null;
+        $thirdpricemotor = null;
+
+        foreach ($entitlementArr as $item) {
+            switch ($item['order_km']) {
+                case 1:
+                    $firstkmmotor = $item['km'];
+                    $firstpricemotor = $item['price'];
+                    break;
+                case 2:
+                    $secondkmmotor = $item['km'];
+                    $secondpricemotor = $item['price'];
+                    break;
+                case 3:
+                    $thirdkmmotor = $item['km'];
+                    $thirdpricemotor = $item['price'];
+                    break;
+            }
+        }
+
+        $data['firstkmmotor'] = $firstkmmotor;
+        $data['firstpricemotor'] = $firstpricemotor;
+        $data['secondkmmotor'] = $secondkmmotor;
+        $data['secondpricemotor'] = $secondpricemotor;
+        $data['thirdkmmotor'] = $thirdkmmotor;
+        $data['thirdpricemotor'] = $thirdpricemotor;
+        
         return view('pages.eclaim.monthlyClaim', $data);
     }
 
@@ -72,6 +141,78 @@ class myClaimController extends Controller
         $data['year'] = $generalClaim->year ?? '';
         $data['user_id'] = Auth::user()->id ?? '';
 
+        $data['car'] = $mcs->getEntitlementByJobGradeCar($data['user_id']);
+
+        $entitlementArr = json_decode($data['car'], true);
+
+        $firstkmcar = null;
+        $firstpricecar = null;
+        $secondkmcar = null;
+        $secondpricecar = null;
+        $thirdkmcar = null;
+        $thirdpricecar = null;
+
+        foreach ($entitlementArr as $item) {
+            switch ($item['order_km']) {
+                case 1:
+                    $firstkmcar = $item['km'];
+                    $firstpricecar = $item['price'];
+                    break;
+                case 2:
+                    $secondkmcar = $item['km'];
+                    $secondpricecar = $item['price'];
+                    break;
+                case 3:
+                    $thirdkmcar = $item['km'];
+                    $thirdpricecar = $item['price'];
+                    break;
+            }
+        }
+
+        $data['firstkmcar'] = $firstkmcar;
+        $data['firstpricecar'] = $firstpricecar;
+        $data['secondkmcar'] = $secondkmcar;
+        $data['secondpricecar'] = $secondpricecar;
+        $data['thirdkmcar'] = $thirdkmcar;
+        $data['thirdpricecar'] = $thirdpricecar;
+
+        $data['motor'] = $mcs->getEntitlementByJobGradeMotor($data['user_id']);
+        $entitlementArr = json_decode($data['motor'], true);
+
+        $firstkmmotor = null;
+        $firstpricemotor = null;
+        $secondkmmotor = null;
+        $secondpricemotor = null;
+        $thirdkmmotor = null;
+        $thirdpricemotor = null;
+
+        foreach ($entitlementArr as $item) {
+            switch ($item['order_km']) {
+                case 1:
+                    $firstkmmotor = $item['km'];
+                    $firstpricemotor = $item['price'];
+                    break;
+                case 2:
+                    $secondkmmotor = $item['km'];
+                    $secondpricemotor = $item['price'];
+                    break;
+                case 3:
+                    $thirdkmmotor = $item['km'];
+                    $thirdpricemotor = $item['price'];
+                    break;
+            }
+        }
+
+        $data['firstkmmotor'] = $firstkmmotor;
+        $data['firstpricemotor'] = $firstpricemotor;
+        $data['secondkmmotor'] = $secondkmmotor;
+        $data['secondpricemotor'] = $secondpricemotor;
+        $data['thirdkmmotor'] = $thirdkmmotor;
+        $data['thirdpricemotor'] = $thirdpricemotor;
+
+
+        
+        // pr($data['entitlement']);
         return view('pages.eclaim.monthClaimEditView', $data);
     }
 
@@ -110,4 +251,15 @@ class myClaimController extends Controller
 
         return response()->json($data);
     }
+
+    public function appealMtcView()
+    {
+        // $mcs = new myClaimService;
+
+        // $data['claims'] = $mcs->getClaimsData();
+        // $data['cashClaims'] = $mcs->getCashClaimsData();
+
+        return view('pages.eclaim.appealMtc');
+    }
+
 }

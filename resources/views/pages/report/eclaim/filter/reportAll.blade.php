@@ -31,6 +31,7 @@
                 <th>Project Code</th>
                 <th>Employee Name</th>
                 <th>Department</th>
+                <th>Department id</th>
                 <th>PV No</th>
                 <th>Ref No</th>
                 <th>Date</th>
@@ -55,6 +56,7 @@
                     <td>{{($allClaim->TravelClaim->project_id) ?? '' ? getProjectById($allClaim->TravelClaim->project_id)->project_code : '-' ?? ''}}</td>
                     <td>{{($allClaim->user_id) ? getEmployeeName($allClaim->user_id) : '-'}}</td>
                     <td>{{($allClaim->user_id) ? getDepartmentName($allClaim->user_id) : '-'}}</td>
+                    {{-- <td>{{($allClaim->user_id) ? getDepartmentById($allClaim->user_id) : '-'}}</td> --}}
                     <td>{{$allClaim->pv_number ?? '-'}}</td>
                     <td>{{$allClaim->cheque_number ?? '-'}}</td>
                     <td>{{$allClaim->created_at ?? '-'}}</td>
@@ -70,7 +72,7 @@
                 @endforeach
                 @endif
 
-                <!-- @if ($cash_advance)
+                {{-- <!-- @if ($cash_advance)
                 @foreach ($cash_advance as $ca)
                 <tr>
                     <td>{{$no++}}</td>
@@ -92,7 +94,7 @@
                     <td></td>
                 </tr>
                 @endforeach
-                @endif -->
+                @endif --> --}}
 
             </tbody>
         </table>

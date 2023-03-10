@@ -88,7 +88,7 @@
                         <div class="row p-2">
                             <div class="col-sm-6">
                                 <label for="firstname" class="form-label">Full Name</label>
-                                <input type="text" readonly id="fullName" name="fullName" value="{{$profile->fullName ?? ''}}" class="form-control" aria-describedby="firstname" placeholder="FULL NAME" style="text-transform:uppercase">
+                                <input type="text" id="fullName" name="fullName" value="{{$profile->fullName ?? ''}}" class="form-control" aria-describedby="firstname" placeholder="FULL NAME" style="text-transform:uppercase">
                             </div>
                             {{-- new --}}
                             <div class="col-sm-6">

@@ -931,6 +931,12 @@ class SettingController extends Controller
 
         return response()->json($result);
     }
+    public function getUserByUserRole($id = '')
+    {
+        $result = getUserByUserRole($id);
+
+        return response()->json($result);
+    }
 
     public function createDomainList(Request $r)
     {

@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\DB;
 use App\Models\DepartmentTree;
 use App\Models\OrganizationChart;
 use App\Models\PhoneDirectory;
+use App\Models\Policy;
+use App\Models\SOP;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
@@ -39,6 +41,14 @@ class OrganizationService
         $data['data'] = DepartmentTree::all();
         $data['status'] = true;
         $data['msg'] = 'Success Get DepartmentTree';
+
+        return $data;
+    }
+
+    public function sopView()
+    {
+        $data['SOPs'] = SOP::where('tenant_id', Auth::user()->tenant_id)->orderBy('id', 'desc')->get();
+        $data['policys'] = Policy::where('tenant_id', Auth::user()->tenant_id)->orderBy('id', 'desc')->get();
 
         return $data;
     }

@@ -1,5 +1,34 @@
 $("document").ready(function () {
     
+    $("#type_transport").change(function() {
+        var selectedOption = $("#type_transport").val();
+        if (selectedOption == "Personal Car") {
+            $("#first_km").val($("#first_km").data("firstkmcar"));
+            $("#first_price").val($("#first_price").data("firstpricecar"));
+            $("#second_km").val($("#second_km").data("secondkmcar"));
+            $("#second_price").val($("#second_price").data("secondpricecar"));
+            $("#third_km").val($("#third_km").data("thirdkmcar"));
+            $("#third_price").val($("#third_price").data("thirdpricecar"));
+        } else if (selectedOption == "Personal Motocycle") {
+            $("#first_km").val($("#first_km").data("firstkmmotor"));
+            $("#first_price").val($("#first_price").data("firstpricemotor"));
+            $("#second_km").val($("#second_km").data("secondkmmotor"));
+            $("#second_price").val($("#second_price").data("secondpricemotor"));
+            $("#third_km").val($("#third_km").data("thirdkmmotor"));
+            $("#third_price").val($("#third_price").data("thirdpricemotor"));
+        } else {
+            $("#first_km").val("");
+            $("#first_price").val("");
+            $("#second_km").val("");
+            $("#second_price").val("");
+            $("#third_km").val("");
+            $("#third_price").val("");
+        }
+    });
+    
+
+
+    
     $("#claimtable1").DataTable({
         searching: false,
         lengthChange: true,
@@ -135,25 +164,31 @@ $("document").ready(function () {
     
     function calculate(total) {
         var result = 0;
-
-        if (total > 300) {
-          result += 300 * 0.7;
-          total -= 300;
-
-          if (total > 500) {
-            result += 500 * 0.5;
-            total -= 500;
-
-            result += total * 0.3;
+        var firstKm = document.getElementById("first_km").value;
+        var firstPrice = document.getElementById("first_price").value;
+        var secondKm = document.getElementById("second_km").value;
+        var secondPrice = document.getElementById("second_price").value;
+        var thirdPrice = document.getElementById("third_price").value;
+      
+        if (total > firstKm) {
+          result += firstKm * firstPrice;
+          total -= firstKm;
+      
+          if (total > secondKm) {
+            result += secondKm * secondPrice;
+            total -= secondKm;
+      
+            result += total * thirdPrice;
           } else {
-            result += total * 0.5;
+            result += total * secondPrice;
           }
         } else {
-          result = total * 0.7;
+          result = total * firstPrice;
         }
-
+      
         return result;
       }
+      
 
       var resultInput = document.getElementById("result");
       $("#result,#toll,#parking,#petrol").focus(function () {

@@ -10,6 +10,9 @@ use App\Models\GeneralClaimDetail;
 use App\Models\ModeOfTransport;
 use App\Models\PersonalClaim;
 use App\Models\TravelClaim;
+use App\Models\EntitleGroup;
+use App\Models\TransportMillage;
+use App\Models\Employee;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
@@ -584,6 +587,35 @@ class myClaimService
         $data = TravelClaim::where('general_id', $id)->get();
 
         return $data;
+    }
+
+    public function getEntitlementByJobGradeCar($id = '')
+    {
+        
+        $jobGrade = Employee::where('user_id', $id)->value('jobGrade');
+        $entitle = EntitleGroup::where('job_grade', $jobGrade)->value('id');
+        $car = TransportMillage::where('entitle_id', $entitle)
+                                    ->where('type', 'car')
+                                    ->get();
+
+        //pr($car);
+
+        
+        return $car;
+    }
+    public function getEntitlementByJobGradeMotor($id = '')
+    {
+        
+        $jobGrade = Employee::where('user_id', $id)->value('jobGrade');
+        $entitle = EntitleGroup::where('job_grade', $jobGrade)->value('id');
+        $motor = TransportMillage::where('entitle_id', $entitle)
+                                    ->where('type', 'motor')
+                                    ->get();
+
+        //pr($car);
+
+        
+        return $motor;
     }
 
     public function getPersonalClaimByGeneralId($id = '')
