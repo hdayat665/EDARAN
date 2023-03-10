@@ -87,7 +87,7 @@ class myClaimService
 
         // get supervisor detail to send email
         $ms = new MailService;
-        $ms->emailToSupervisorClaimGNC();
+        $ms->emailToSupervisorClaimGNC($generalClaimData);
 
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
