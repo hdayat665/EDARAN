@@ -11,7 +11,7 @@
     <br>
     <br>
     <p>To : {{ $supervisor ?? '-' }}</p>
-    <p>I hereby submit my general claim for your kind review.</p>
+    <p>I hereby submit my monthly claim for your kind review.</p>
     <p>The details are :-</p>
     <br>
     <br>

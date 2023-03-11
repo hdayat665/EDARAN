@@ -10,8 +10,8 @@
     {{-- {{ dd($data['data']) }} --}}
     <br>
     <br>
-    <p>To : {{ $supervisor ?? '-' }}</p>
-    <p>I hereby submit my general claim for your kind review.</p>
+    <p>To : {{ $employeeName ?? '-' }}</p>
+    <p>Please be advised that your claim is approved as follows :- </p>
     <p>The details are :-</p>
     <br>
     <br>
@@ -28,7 +28,7 @@
     <p>
         Best regards,<br>
         {{-- {{ dd(getEmployeeDetail(Auth::user()->id)) }} --}}
-        {{ getEmployeeDetail(Auth::user()->id)->employeeName ?? '-' }} <br>
+        {{ $supervisor ?? '-' }} <br>
         {{ getEmployeeDetail(Auth::user()->id)->designation->designationName ?? '-' }} <br>
         {{ getEmployeeDetail(Auth::user()->id)->department->departmentName ?? '-' }} <br>
     </p>

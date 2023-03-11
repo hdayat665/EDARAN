@@ -10,8 +10,8 @@
     {{-- {{ dd($data['data']) }} --}}
     <br>
     <br>
-    <p>To : {{ $supervisor ?? '-' }}</p>
-    <p>I hereby submit my general claim for your kind review.</p>
+    <p>To : {{ $employeeName ?? '-' }}</p>
+    <p>Please be advised that your claim is paid as follows :- </p>
     <p>The details are :-</p>
     <br>
     <br>
@@ -20,15 +20,16 @@
     <p><strong>Claim for the month </strong> : {{ $data['data']->month ?? '-' }} </p>
     <p><strong>Applied Date & Time </strong> : {{ $data['data']->created_at ?? '-' }} </p>
     <p><strong>Total Claim </strong> : {{ $data['data']->total_amount ?? '0' }} </p>
+    <p><strong>Remark </strong> : {{ $data['data']->remark ?? '' }} </p>
 
     <p>Please click the link button for further action </p>
-    <a href="{{ env('APP_URL') . '/claimApprovalView/2' }}"><button>Click Here</button></a>
+    <a href="{{ env('APP_URL') . '/myClaimView' }}"><button>Click Here</button></a>
     <br>
     <br>
     <p>
         Best regards,<br>
         {{-- {{ dd(getEmployeeDetail(Auth::user()->id)) }} --}}
-        {{ getEmployeeDetail(Auth::user()->id)->employeeName ?? '-' }} <br>
+        {{ $employeeName ?? '-' }} <br>
         {{ getEmployeeDetail(Auth::user()->id)->designation->designationName ?? '-' }} <br>
         {{ getEmployeeDetail(Auth::user()->id)->department->departmentName ?? '-' }} <br>
     </p>

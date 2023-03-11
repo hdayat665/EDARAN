@@ -74,7 +74,7 @@
                         <label class="form-label col-form-label">Project</label>
                     </div>
                     <div class="col-md-3">
-                    <input type="text" class="form-control" placeholder="Date" id="" value="{{ $travel->project_name ?? '-' }}" readonly>
+                        <input type="text" class="form-control" placeholder="Date" id="" value="{{ $travel->project_name ?? '-' }}" readonly>
                     </div>
                     <div class="col-md-3">
                         <label class="form-label col-form-label">Log Name</label>
@@ -142,7 +142,7 @@
                         <label class="form-label col-form-label">Supporting Documents</label>
                     </div>
                     <div class="col-md-3">
-                    <a href="/storage/{{ $travel->file_upload ?? '-' }}">{{ $travel->file_upload ?? '-' }}</a>
+                        <a href="/storage/{{ $travel->file_upload ?? '-' }}">{{ $travel->file_upload ?? '-' }}</a>
                     </div>
                 </div>
             </div>
@@ -175,7 +175,7 @@
                         <label class="form-label col-form-label">Supporting Document</label>
                     </div>
                     <div class="col-md-4">
-                    <a href="/storage/{{ $travel->file_upload ?? '-' }}">{{ $travel->file_upload ?? '-' }}</a>
+                        <a href="/storage/{{ $travel->file_upload ?? '-' }}">{{ $travel->file_upload ?? '-' }}</a>
                     </div>
                 </div>
                 <div class="row p-2">
@@ -188,7 +188,7 @@
                                         <label class="form-label">Start Date</label>
                                     </div>
                                     <div class="col">
-                                    <input type="text" class="form-control" placeholder="Date" id="" value="{{ date('Y-m-d', strtotime($travel->start_date)) ?? '-' }}" readonly>
+                                        {{-- <input type="text" class="form-control" placeholder="Date" id="" value="{{ $travel->start_date ? date('Y-m-d', strtotime($travel->start_date)) : '-' }}" readonly> --}}
                                     </div>
                                 </div>
                                 <div class="row p-2">
@@ -196,7 +196,7 @@
                                         <label class="form-label">Start Time</label>
                                     </div>
                                     <div class="col">
-                                    <input type="text" class="form-control" placeholder="Date" id="" value="{{ $travel->start_time ?? '-' }}" readonly>
+                                        <input type="text" class="form-control" placeholder="Date" id="" value="{{ $travel->start_time ?? '-' }}" readonly>
                                     </div>
                                 </div>
                             </div>
@@ -210,7 +210,7 @@
                                         <label class="form-label">End Date</label>
                                     </div>
                                     <div class="col">
-                                    <input type="text" class="form-control" placeholder="Date" id="" value="{{ date('Y-m-d', strtotime($travel->end_date)) ?? '-' }}" readonly>
+                                        {{-- <input type="text" class="form-control" placeholder="Date" id="" value="{{ date('Y-m-d', strtotime($travel->end_date)) ?? '-' }}" readonly> --}}
                                     </div>
                                 </div>
                                 <div class="row p-2">
@@ -218,7 +218,7 @@
                                         <label class="form-label">End Time</label>
                                     </div>
                                     <div class="col">
-                                    <input type="text" class="form-control" placeholder="Time" id="time2" readonly>
+                                        <input type="text" class="form-control" placeholder="Time" id="time2" readonly>
                                     </div>
                                 </div>
                             </div>
@@ -230,7 +230,7 @@
                         <label class="form-label col-form-label">Project</label>
                     </div>
                     <div class="col-md-10">
-                    <input type="text" class="form-control" placeholder="Date" id="" value="{{ $travel->project_name ?? '-' }}" readonly>
+                        <input type="text" class="form-control" placeholder="Date" id="" value="{{ $travel->project_name ?? '-' }}" readonly>
                     </div>
                 </div>
                 <div class="row p-2">
@@ -238,7 +238,7 @@
                         <label class="form-label col-form-label">Description</label>
                     </div>
                     <div class="col-md-10">
-                    <textarea class="form-control" rows="3" readonly>{{ $travel->desc ?? '-' }}</textarea>
+                        <textarea class="form-control" rows="3" readonly>{{ $travel->desc ?? '-' }}</textarea>
                     </div>
                 </div>
                 <div class="row p-2">
@@ -360,7 +360,7 @@
                         <label class="form-label col-form-label">Applied Date</label>
                     </div>
                     <div class="col-md-6">
-                    <input type="text" readonly class="form-control" id="" value="{{ date('Y-m-d', strtotime($personal->created_at)) ?? '-' }}" >
+                        <input type="text" readonly class="form-control" id="" value="{{ date('Y-m-d', strtotime($personal->created_at)) ?? '-' }}">
                         <input type="hidden" class="form-control" id="personalId">
                     </div>
                 </div>
@@ -369,7 +369,7 @@
                         <label class="form-label col-form-label">Claim Category</label>
                     </div>
                     <div class="col-md-6">
-                    <input type="text" readonly class="form-control" id="" value="{{ $personal->claim_catagory_name ?? '-' }}">
+                        <input type="text" readonly class="form-control" id="" value="{{ $personal->claim_catagory_name ?? '-' }}">
                     </div>
                 </div>
                 <!-- <div class="row p-2">
@@ -401,7 +401,7 @@
                         <label class="form-label col-form-label">Supporting Document</label>
                     </div>
                     <div class="col-md-6">
-                    <a href="/storage/{{ $personal->file_upload ?? '-' }}">{{ $personal->file_upload ?? '-' }}</a>
+                        <a href="/storage/{{ $personal->file_upload ?? '-' }}">{{ $personal->file_upload ?? '-' }}</a>
                     </div>
 
 

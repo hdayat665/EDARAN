@@ -54,7 +54,23 @@ class Mail extends Mailable
             $view = 'emails.eventDeleteEmail';
         } else if ($data['typeEmail'] == 'GNCSubmit') {
             $view = 'emails.claim.GNCSubmitEmail';
+        } else if ($data['typeEmail'] == 'MTCSubmit') {
+            $view = 'emails.claim.MTCSubmitEmail';
+        } else if ($data['typeEmail'] == 'MTCApproval') {
+            $view = 'emails.claim.MTCApprovalEmail';
+        } else if ($data['typeEmail'] == 'AdminMonthlyClaim') {
+            $view = 'emails.claim.AdminMTC';
+        } else if ($data['typeEmail'] == 'rejectMtcEmail') {
+            $view = 'emails.claim.rejectMtcEmail';
+        } else if ($data['typeEmail'] == 'amendMtcEmail') {
+            $view = 'emails.claim.amendMtcEmail';
+        } else if ($data['typeEmail'] == 'paidEmailMTC') {
+            $view = 'emails.claim.paidEmailMTC';
         }
+
+
+
+
 
         // $address = 'janeexampexample@example.com';
         // $subject = 'This is a demo!';
