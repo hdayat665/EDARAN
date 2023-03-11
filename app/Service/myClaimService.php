@@ -5,6 +5,7 @@ namespace App\Service;
 use App\Http\Controllers\Eclaim\generalClaimController;
 use App\Mail\Mail as MailMail;
 use App\Models\CashAdvanceDetail;
+use App\Models\EclaimGeneralSetting;
 use App\Models\GeneralClaim;
 use App\Models\GeneralClaimDetail;
 use App\Models\ModeOfTransport;
@@ -88,9 +89,12 @@ class myClaimService
 
         GeneralClaimDetail::insert($generalDetail);
 
-        // get supervisor detail to send email
-        $ms = new MailService;
-        $ms->emailToSupervisorClaimGNC($generalClaimData);
+        // email notification
+        $setting = EclaimGeneralSetting::where('tenant_id', Auth::user()->tenant_id)->first();
+        if ($setting->notify_user) {
+            $ms = new MailService;
+            $ms->emailToSupervisorClaimGNC($generalClaimData);
+        }
 
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
@@ -236,6 +240,13 @@ class myClaimService
         $modeOfTransport['total'] = $input['total'];
         $modeOfTransport['max_total'] = $input['max_total'];
         ModeOfTransport::create($modeOfTransport);
+
+        // email notification
+        $setting = EclaimGeneralSetting::where('tenant_id', Auth::user()->tenant_id)->first();
+        if ($setting->notify_user) {
+            $ms = new MailService;
+            $ms->submitCAEmail($cashAdvanceData);
+        }
 
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
