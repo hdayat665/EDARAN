@@ -785,7 +785,7 @@ if (!function_exists('projectLocation')) {
 
 if (!function_exists('getBranchFullAddress')) {
     function getBranchFullAddress($user_id = '')
-    { 
+    {
         $cond[1] = ['user_id', $user_id];
         $data = DB::table('employment as a')
             ->leftJoin('branch as b', 'a.branch', '=', 'b.id')
@@ -810,16 +810,16 @@ if (!function_exists('getEmployee')) {
 
 if (!function_exists('getEmployeeNotInProject')) {
     function getEmployeeNotInProject($id = '')
-    {   
+    {
         $data = DB::table('employment')
             ->select('*')
-            ->whereNotIn('id', function($query) use ($id) {
+            ->whereNotIn('id', function ($query) use ($id) {
                 $query->select('employee_id')
-                      ->from('project_member')
-                      ->where('project_id', '=', $id);
+                    ->from('project_member')
+                    ->where('project_id', '=', $id);
             })
             ->get();
-    
+
         if (!$data) {
             $data = [];
         }
@@ -830,13 +830,13 @@ if (!function_exists('getEmployeeNotInProject')) {
 
 if (!function_exists('getEmployeeexcept')) {
     function getEmployeeexcept()
-    {   
-        
+    {
+
         $data = DB::table('employment')
-        ->join(DB::raw('(SELECT recommender FROM approval_role_general ORDER BY id DESC LIMIT 1) AS ar'), 'employment.jobGrade', '=', 'ar.recommender')
-        ->select('employment.*', 'ar.recommender')
-        ->where([['tenant_id', Auth::user()->tenant_id]])
-        ->get();
+            ->join(DB::raw('(SELECT recommender FROM approval_role_general ORDER BY id DESC LIMIT 1) AS ar'), 'employment.jobGrade', '=', 'ar.recommender')
+            ->select('employment.*', 'ar.recommender')
+            ->where([['tenant_id', Auth::user()->tenant_id]])
+            ->get();
 
 
         if (!$data) {
@@ -848,8 +848,8 @@ if (!function_exists('getEmployeeexcept')) {
 }
 if (!function_exists('getEmployeerecommender')) {
     function getEmployeerecommender()
-    {   
-        
+    {
+
         $data = DB::table('employment as e')
             ->join('jobGrade as j', 'e.jobGrade', '=', 'j.id')
             ->where('j.id', '<=', function ($query) {
@@ -872,18 +872,18 @@ if (!function_exists('getEmployeerecommender')) {
 }
 if (!function_exists('getEmployeeapprover')) {
     function getEmployeeapprover()
-    {   
-        
+    {
+
         $data = DB::table('employment as e')
-        ->join('jobGrade as j', 'e.jobGrade', '=', 'j.id')
-        ->where('j.id', '<=', function ($query) {
-            $query->select('approver')
-                ->from('approval_role_general')
-                ->orderBy('id', 'desc')
-                ->limit(1);
-        })
-        ->select('e.*', 'j.jobgradename as job_grade_name')
-        ->get();
+            ->join('jobGrade as j', 'e.jobGrade', '=', 'j.id')
+            ->where('j.id', '<=', function ($query) {
+                $query->select('approver')
+                    ->from('approval_role_general')
+                    ->orderBy('id', 'desc')
+                    ->limit(1);
+            })
+            ->select('e.*', 'j.jobgradename as job_grade_name')
+            ->get();
 
         if (!$data) {
             $data = [];
@@ -903,8 +903,8 @@ if (!function_exists('accManager')) {
             ->where('a.tenant_id', Auth::user()->tenant_id)
             ->get();
 
-            
-        if (!$data) { 
+
+        if (!$data) {
             $data = [];
         }
 
@@ -1001,13 +1001,13 @@ if (!function_exists('project_memberaddl')) {
 
 
 if (!function_exists('activityName')) {
-    function activityName( $departmentId = '')
+    function activityName($departmentId = '')
     {
         $cond[1] = ['tenant_id', Auth::user()->tenant_id];
         // $cond[1] = ['tenant_id', ];
         $cond[2] = ['department', $departmentId];
         // $cond[3] = ['logs_id', $logsid];
-        
+
         // $cond[3] = ['project_id', null];
         $data = ActivityLogs::where($cond)->get();
         if (!$data) {
@@ -1038,7 +1038,7 @@ if (!function_exists('activityName')) {
 
 //         return $data;
 //     }
-    
+
 // }
 
 if (!function_exists('project_member')) {
@@ -1129,7 +1129,7 @@ if (!function_exists('getSupervisor')) {
     }
 }
 
-if (!function_exists('getEmployeeName')) { 
+if (!function_exists('getEmployeeName')) {
     function getEmployeeName($id = '')
     {
         $data = Employee::where('user_id', $id)->select('employeeName')->first()->employeeName;
@@ -1198,7 +1198,7 @@ if (!function_exists('getWorkingEmail')) {
 
 if (!function_exists('getDepartmentName')) {
     function getDepartmentName($user_id = '')
-    { 
+    {
         $cond[1] = ['user_id', $user_id];
         $data = DB::table('employment as a')
             ->leftJoin('department as b', 'a.department', '=', 'b.id')
@@ -1374,10 +1374,10 @@ if (!function_exists('getGNCDetailByGeneralId')) {
     function getGNCDetailByGeneralId($id = '')
     {
         $data =  GeneralClaimDetail::select('general_claim_details.*', 'claim_category.claim_catagory')
-        ->leftJoin('claim_category', 'claim_category.id', '=', 'general_claim_details.claim_category')
-        ->where('general_claim_details.general_id', $id)
-        ->get();
-       //pr($data);
+            ->leftJoin('claim_category', 'claim_category.id', '=', 'general_claim_details.claim_category')
+            ->where('general_claim_details.general_id', $id)
+            ->get();
+        //pr($data);
 
         if (!$data) {
             $data = [];
@@ -1723,6 +1723,19 @@ if (!function_exists('addressType')) {
 
         if ($id) {
             $data = $data[$id];
+        }
+
+        return $data;
+    }
+}
+
+if (!function_exists('getEmployeeDetail')) {
+    function getEmployeeDetail($id = '')
+    {
+        $data = Employee::where([['tenant_id', Auth::user()->tenant_id], ['user_id', $id]])->first();
+
+        if (!$data) {
+            $data = [];
         }
 
         return $data;

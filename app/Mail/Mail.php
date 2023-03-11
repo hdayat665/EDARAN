@@ -34,52 +34,61 @@ class Mail extends Mailable
 
         if ($data['typeEmail'] == 'register') {
             $view = 'emails.register';
-        }else if($data['typeEmail'] == 'forgotPass')
-        {
+        } else if ($data['typeEmail'] == 'forgotPass') {
             $view = 'emails.forgotPass';
-        }else if ($data['typeEmail'] == 'activateAcc') {
+        } else if ($data['typeEmail'] == 'activateAcc') {
             $view = 'emails.activationEmail';
-
-        }else if ($data['typeEmail'] == 'tempPass') {
+        } else if ($data['typeEmail'] == 'tempPass') {
             $view = 'emails.temparoryPasswordEmail';
-
-        }else if ($data['typeEmail'] == 'projectReqEmail') {
+        } else if ($data['typeEmail'] == 'projectReqEmail') {
             $view = 'emails.projectRequestEmail';
-
-        }else if ($data['typeEmail'] == 'projectReqStatus') {
+        } else if ($data['typeEmail'] == 'projectReqStatus') {
             $view = 'emails.projectRequestStatusEmail';
-
-        }else if ($data['typeEmail'] == 'projectCancelReq') {
+        } else if ($data['typeEmail'] == 'projectCancelReq') {
             $view = 'emails.projectCancelRequestEmail';
-
-        }else if ($data['typeEmail'] == 'eventInviation') {
+        } else if ($data['typeEmail'] == 'eventInviation') {
             $view = 'emails.eventInvitationEmail';
-
-        }else if ($data['typeEmail'] == 'eventUpdate') {
+        } else if ($data['typeEmail'] == 'eventUpdate') {
             $view = 'emails.eventUpdateEmail';
-
-        }else if ($data['typeEmail'] == 'eventDelete') {
+        } else if ($data['typeEmail'] == 'eventDelete') {
             $view = 'emails.eventDeleteEmail';
-
+        } else if ($data['typeEmail'] == 'GNCSubmit') {
+            $view = 'emails.claim.GNCSubmitEmail';
+        } else if ($data['typeEmail'] == 'MTCSubmit') {
+            $view = 'emails.claim.MTCSubmitEmail';
+        } else if ($data['typeEmail'] == 'MTCApproval') {
+            $view = 'emails.claim.MTCApprovalEmail';
+        } else if ($data['typeEmail'] == 'AdminMonthlyClaim') {
+            $view = 'emails.claim.AdminMTC';
+        } else if ($data['typeEmail'] == 'rejectMtcEmail') {
+            $view = 'emails.claim.rejectMtcEmail';
+        } else if ($data['typeEmail'] == 'amendMtcEmail') {
+            $view = 'emails.claim.amendMtcEmail';
+        } else if ($data['typeEmail'] == 'paidEmailMTC') {
+            $view = 'emails.claim.paidEmailMTC';
         }
+
+
+
+
+
         // $address = 'janeexampexample@example.com';
         // $subject = 'This is a demo!';
         // $name = 'Jane Doe';
 
         if (isset($data['file'])) {
             return $this->view($view)
-            ->from($data['from'], $data['nameFrom'])
-            ->subject($data['subject'])
-            ->cc($data['cc'])
-            ->attach($data['file'], ['mime' => $data['typeAttachment']])
-            ->with($data);
-        }else {
+                ->from($data['from'], $data['nameFrom'])
+                ->subject($data['subject'])
+                ->cc($data['cc'])
+                ->attach($data['file'], ['mime' => $data['typeAttachment']])
+                ->with($data);
+        } else {
             return $this->view($view)
-            ->from($data['from'], $data['nameFrom'])
-            ->subject($data['subject'])
-            ->cc($data['cc'] ?? null)
-            ->with($data);
+                ->from($data['from'], $data['nameFrom'])
+                ->subject($data['subject'])
+                ->cc($data['cc'] ?? null)
+                ->with($data);
         }
-
     }
 }

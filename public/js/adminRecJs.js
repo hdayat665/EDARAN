@@ -45,7 +45,7 @@ $(document).ready(function () {
     ).on("click", function () {
         // alert("ss");
         var id = $(this).data("id");
-        var stage = "f_recommender";
+        var stage = "a_recommender";
         var status = "recommend";
 
         requirejs(["sweetAlert2"], function (swal) {
@@ -79,7 +79,7 @@ $(document).ready(function () {
 
     $("#rejectButton").click(function (e) {
         var id = $("#rejectId").val();
-        var stage = "f_recommender";
+        var stage = "a_recommender";
         var status = "reject";
 
         $("#hodRejectForm").validate({
@@ -131,7 +131,7 @@ $(document).ready(function () {
 
     $("#amendButton").click(function (e) {
         var id = $("#amendId").val();
-        var stage = "f_recommender";
+        var stage = "a_recommender";
         var status = "amend";
 
         $("#hodAmendForm").validate({
