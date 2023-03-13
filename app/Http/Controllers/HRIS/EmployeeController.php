@@ -61,7 +61,15 @@ class EmployeeController extends Controller
 
         return response()->json($result);
     }
+    public function cancelTerminateEmployment($id)
+    {
+        $ss = new EmployeeService;
 
+        $result = $ss->cancelTerminateEmployment($id);
+
+        return response()->json($result);
+    }
+    
     public function employeeInfoView()
     {
         $ps = new EmployeeService;

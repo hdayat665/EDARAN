@@ -3,10 +3,11 @@
     <div id="content" class="app-content">
         <h1 class="page-header">eClaim <small>| My Claim | Apply General Claim</small></h1>
         <div class="panel panel" id="generalClaimJs">
-            <form id="addForm">
+            <!-- <form id="addForm"> -->
                 <div class="panel-body">
                     <div class="row p-2">
                         <div class="col-md-6">
+                            <form id="createForm">
                             <div class="form-control">
                                 <div class="row p-2">
                                     <!-- <div class="col-md-3">
@@ -54,8 +55,8 @@
                                             <select class="form-select" id="year" name="year">
                                                 <option class="form-label" value="Please Select" selected>Please
                                                     Select</option>
+                                                <option class="form-label" value="2022">2022</option>
                                                 <option class="form-label" value="2023">2023</option>
-                                                <option class="form-label" value="2024">2024</option>
                                                 
                                             </select>
                                         </div>
@@ -89,7 +90,7 @@
                                         </div>
                                         <div class="col-md-9">
                                             <div class="input-group" id="">
-                                                <input type="text" name="" class="form-control" value="" id="applieddate" />
+                                                <input type="text" name="applied_date" class="form-control" value="" id="applieddate" />
                                                 <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                             </div>
                                         </div>
@@ -99,7 +100,7 @@
                                             <label class="form-label">Claim Category</label>
                                         </div>
                                         <div class="col-md-9">
-                                            <select class="form-select" id="claimcategory">
+                                            <select class="form-select" id="claimcategory" name="claim_category">
                                                 <option class="form-label" value="Please Select" selected>Please
                                                     Select</option>
                                                 {{ $categorys = getClaimCategory() }}
@@ -115,7 +116,7 @@
                                             <label class="form-label" id="label"></label>
                                         </div>
                                         <div class="col-md-9">
-                                            <select class="form-select" id="contentLabel">
+                                            <select class="form-select" id="contentLabel" name="claim_category_detail">
                                                 <option class="form-label" value="Please Select" selected>Please
                                                     Select</option>
                                             </select>
@@ -126,7 +127,7 @@
                                             <label class="form-label">Amount (MYR)</label>
                                         </div>
                                         <div class="col-md-9">
-                                            <input type="number" class="form-control" id="amount">
+                                            <input type="number" class="form-control" name="amount" id="amount">
                                         </div>
                                     </div>
                                     <div class="row p-2">
@@ -134,25 +135,28 @@
                                             <label class="form-label">Description</label>
                                         </div>
                                         <div class="col-md-9">
-                                            <textarea class="form-control" rows="3" id="description"></textarea>
+                                            <textarea class="form-control" rows="3" id="description" name="desc"></textarea>
                                         </div>
                                     </div>
-                                    <!-- <div class="row p-2">
+                                    <div class="row p-2">
                                         <div class="col-md-3">
                                             <label class="form-label">Supporting Document</label>
                                         </div>
                                         <div class="col-md-9">
-                                            <input type="file" class="form-control-file" id="supportdocument">
+                                            <input type="file" class="form-control-file" name="file_upload" id="supportdocument">
                                         </div>
-                                    </div> -->
+                                    </div>
                                 </div>
                                 <div class="row p-2">
                                     <div class="modal-footer"> <button type="button" class="btn btn-secondary">Reset</button>
-                                        <button onclick="addTableRow()" type="button" class="btn btn-primary">Save</button>
+                                        <button type="submit" id="createGnc" class="btn btn-primary">Savsce</button>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
+                            
                         </div>
+
                         <div class="col-md-6">
                             <div class="form-control">
                                 <table id="applyclaimtable" class="table table-striped table-bordered align-middle" style="overflow-x: auto; width: 100%;">
@@ -190,10 +194,10 @@
                         <button class="btn btn-light" id="submitButton" style="color: black" type="submit"><i class="fa fa-save"></i> Submit</button>
                     </div>
                 </div>
-            </form>
+            <!-- </form> -->
         </div>
     </div>
-    <script>
+    <!-- <script>
         function addTableRow() {
             // var year = document.getElementById("year");
             // var month = document.getElementById("month");
@@ -241,5 +245,5 @@
             var i = row.parentNode.parentNode.rowIndex;
             document.getElementById('applyclaimtable').deleteRow(i);
         }
-    </script>
+    </script> -->
 @endsection

@@ -329,13 +329,13 @@
                                 <label class="form-label">Distance</label>
                             </div>
                             <div class="col-md-3">
-                                <input type="text" class="form-control" value="" name="second_km" id="second_km" data-secondkmcar="{{ $secondkmcar }}" data-secondkmmotor="{{ $secondkmmotor }}">
+                                <input type="text" class="form-control" value="" id="second_km" data-secondkmcar="{{ $secondkmcar }}" data-secondkmmotor="{{ $secondkmmotor }}">
                             </div>
                             <div class="col-md-2">
                                 <label class="form-label">entitlement</label>
                             </div>
                             <div class="col-md-3">
-                                <input type="number" class="form-control" value="" name="second_price" id="second_price" data-secondpricecar="{{ $secondpricecar }}" data-secondpricemotor="{{ $secondpricemotor }}">
+                                <input type="number" class="form-control" value="" id="second_price" data-secondpricecar="{{ $secondpricecar }}" data-secondpricemotor="{{ $secondpricemotor }}">
                             </div>
                         </div>
                         <div class="row p-2" style="display: none">
@@ -343,13 +343,13 @@
                                 <label class="form-label">Distance</label>
                             </div>
                             <div class="col-md-3">
-                                <input type="text" class="form-control" value="" name="third_km" id="third_km" data-thirdkmcar="{{ $thirdkmcar }}" data-thirdkmmotor="{{ $thirdkmmotor }}">
+                                <input type="text" class="form-control" value="" id="third_km" data-thirdkmcar="{{ $thirdkmcar }}" data-thirdkmmotor="{{ $thirdkmmotor }}">
                             </div>
                             <div class="col-md-2">
                                 <label class="form-label">entitlement</label>
                             </div>
                             <div class="col-md-3">
-                                <input type="number" class="form-control" value="" name="third_price" id="third_price" data-thirdpricecar="{{ $thirdpricecar }}" data-thirdpricemotor="{{ $thirdpricemotor }}">
+                                <input type="number" class="form-control" value="" id="third_price" data-thirdpricecar="{{ $thirdpricecar }}" data-thirdpricemotor="{{ $thirdpricemotor }}">
                             </div>
                         </div>
                         <div class="row p-2" >
@@ -559,7 +559,7 @@
                                     <label class="form-label">Breakfast</label>
                                 </div>
                                 <div class="col-md-2">
-                                    <input  type="text" class="form-control" value="0" id="BF">
+                                    <input  type="text" class="form-control" readonly value="{{ $food[0]['breakfast'] }}" id="BF">
                                 </div>
                                 <div class="col-md-2">
                                     <label class="form-label">X day =</label>
@@ -574,7 +574,7 @@
                                     <label class="form-label">Lunch</label>
                                 </div>
                                 <div class="col-md-2">
-                                    <input  type="text" class="form-control" value="0" id="LH">
+                                    <input  type="text" class="form-control" readonly value="{{ $food[0]['lunch'] }}" id="LH">
                                 </div>
                                 <div class="col-md-2">
                                     <label class="form-label">X day =</label>
@@ -590,7 +590,7 @@
                                     <label class="form-label">Dinner</label>
                                 </div>
                                 <div class="col-md-2">
-                                    <input  type="text" class="form-control" value="0" id="DN">
+                                    <input  type="text" class="form-control" readonly value="{{ $food[0]['dinner'] }}" id="DN">
                                 </div>
                                 <div class="col-md-2">
                                     <label class="form-label">X day =</label>
@@ -616,11 +616,18 @@
                                     <label class="form-label">Accommodation:</label>
                                 </div>
                                 <div class="col-md-2" id="hotelc">
-                                    <input class="form-check-input" type="checkbox" value="85" id="htv" />
+                                    <?php
+                                    if ($food[0]['local_hotel_allowance'] == 1) {
+                                    echo '<input class="form-check-input" type="checkbox" value="100" id="htv" />';
+                                    } else {
+                                    echo '<input class="form-check-input" readonly type="checkbox" value="' . $food[0]['local_hotel_value'] . '" id="htv"/>';
+                                    }
+                                    ?>
                                     <label class="form-label">Hotel</label>
+
                                 </div>
                                 <div class="col-md-2">
-                                    <input  type="text" readonly class="form-control" id="hotelcv">
+                                    <input  type="text" readonly class="form-control" id="hotelcv">  
                                 </div>
                                 <div class="col-md-2" style="display: none">
                                     <input  type="text" class="form-control" id="hotelcv1" value="0">
@@ -629,7 +636,7 @@
                                     <label class="form-label">X Night =</label>
                                 </div>
                                 <div class="col-md-2">
-                                    <input type="text" name="hotel" class="form-control" id="hn" disabled value="0">
+                                    <input type="text" name="hotel" class="form-control" id="hn" readonly value="0">
                                 </div>
                             </div>
                             <div class="row p-2">
@@ -637,7 +644,14 @@
                                     <label class="form-label"></label>
                                 </div>
                                 <div class="col-md-2" id="lodgingc">
-                                    <input class="form-check-input" type="checkbox" value="100" id="ldgv" />
+                                    <?php
+                                        if ($food[0]['lodging_allowance'] == 1) {
+                                        echo '<input class="form-check-input" type="checkbox" value="100" id="ldgv" />';
+                                        } else {
+                                        echo '<input class="form-check-input" type="checkbox" value="' . $food[0]['lodging_allowance_value'] . '" id="ldgv"/>';
+                                        }
+                                    ?>
+                                    
                                     <label class="form-label">Lodging</label>
                                 </div>
                                 <div class="col-md-2">
@@ -650,7 +664,7 @@
                                     <label class="form-label">X Night =</label>
                                 </div>
                                 <div class="col-md-2">
-                                    <input type="text" name="lodging" class="form-control" value="0" id="ln" disabled>
+                                    <input type="text" name="lodging" class="form-control" value="0" id="ln" readonly>
                                 </div>
                             </div>
                             <div class="row p-2">
@@ -691,7 +705,7 @@
         </div>
     </div>
 </div>
-<script src="https://maps.googleapis.com/maps/api/js?key=API_FOR_GOOGLE&libraries=places"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDhySfXJwwoMVqbaiioEs38eOi8UkN7_ow&libraries=places"></script>
 
 <script>
   function initAutocomplete() {

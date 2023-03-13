@@ -191,6 +191,7 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('/addEmployment', 'addEmployment');
             Route::get('/getEmployee', 'getEmployee');
             Route::post('/terminateEmployment', 'terminateEmployment');
+            Route::post('/cancelTerminateEmployment/{id}', 'cancelTerminateEmployment');
             Route::get('/employeeInfoView', 'employeeInfoView');
             Route::get('/registerEmployee', 'registerEmployeeView');
             Route::get('/editEmployee/{user_id}', 'editEmployeeView');
@@ -522,6 +523,9 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('/submitMonthlyClaim/{id}', 'submitMonthlyClaim');
             Route::post('/submitCaClaim', 'submitCaClaim');
             Route::get('/appealMtcView', 'appealMtcView');
+            Route::post('/appealMtc', 'createAppealMtc');
+            Route::post('/approveAppealMtc/{id}', 'approveAppealMtc');
+            Route::post('/rejectAppealMtc/{id}', 'rejectAppealMtc');
         });
 
         Route::controller(generalClaimController::class)->group(function () {
@@ -530,6 +534,8 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('/editGeneralClaimView/{id}', 'editGeneralClaimView');
             Route::post('/updateGeneralClaim/{id}', 'updateGeneralClaim');
             Route::delete('/deleteGNCDetail/{id}', 'deleteGNCDetail');
+            Route::delete('/deletePersonalDetail/{id}', 'deletePersonalDetail');
+            Route::delete('/deleteTravelDetail/{id}', 'deleteTravelDetail');
             Route::post('/updateStatusGeneralClaims/{id}', 'updateStatusGeneralClaims');
             Route::get('/viewGeneralClaim/{id}', 'viewGeneralClaim');
             Route::get('/getClaimContentById/{id}', 'getClaimContentById');

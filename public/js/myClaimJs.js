@@ -8,6 +8,50 @@ $("document").ready(function () {
         info: false,
     });
 
+    $(document).on('click', '[data-bs-target="#exampleModal"]', function (event) {
+        var button = $(this); // Button that triggered the modal
+        var year = button.data('year'); // Extract year value from data-* attributes
+        var month = button.data('month'); // Extract month value from data-* attributes
+        var general = button.data('general');
+        //console.log(year);
+        // Update year and month input fields in the modal
+        $('#appeal-year').val(year);
+        $('#appeal-month').val(month);
+        $('#general-id').val(general);
+    });
+    
+    $("#saveAppeal").click(function (e) {
+        requirejs(["sweetAlert2"], function (swal) {
+            var data = new FormData(document.getElementById("addAppealForm"));
+            
+            console.log(data);
+            $.ajax({
+                type: "POST",
+                url: "/appealMtc",
+                data: data,
+                dataType: "json",
+                async: false,
+                processData: false,
+                contentType: false,
+            }).done(function (data) {
+                swal({
+                    title: data.title,
+                    text: data.msg,
+                    type: data.type,
+                    confirmButtonColor: "#3085d6",
+                    confirmButtonText: "OK",
+                    allowOutsideClick: false,
+                    allowEscapeKey: false,
+                }).then(function () {
+                    if (data.type == "error") {
+                    } else {
+                        location.reload();
+                    }
+                });
+            });
+        });
+    });
+
     function initializeDataTable(tableSelector, statusSelector) {
         const table = $(tableSelector).DataTable({
             searching: true,

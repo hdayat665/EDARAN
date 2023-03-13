@@ -8,8 +8,17 @@
             <div class="card"> 
                 <div class="card-body">
                     <div class="profile-pic m-3"> 
-                    <img src="../assets/img/user/user-13.jpg" width="100px" class="rounded d-block" alt="Profile Picture" data-bs-toggle="modal" data-bs-target="#modal-dialog">
-                    <!-- <img src="{{ asset('storage/images.jpeg') }}" width="100%" class="rounded d-block" alt="Profile Picture" data-bs-toggle="modal" data-bs-target="#modal-dialog"> -->
+                    @php
+                        $profilePicUrl = asset('storage/profilePic/' . $user_id . '.jpg');
+                    @endphp
+
+                    @if ($user_id && file_exists(public_path('storage/profilePic/' . $user_id . '.jpg')))
+                        <img src="{{ $profilePicUrl }}" width="100%" class="rounded d-block" alt="Profile Picture" data-bs-toggle="modal" data-bs-target="#modal-dialog">
+                    @else
+                        <img src="{{ asset('../assets/img/user/user-13.jpg') }}" width="100%" class="rounded d-block" alt="Profile Picture" data-bs-toggle="modal" data-bs-target="#modal-dialog">
+                    @endif
+
+                    <!-- <img src="{{ asset('storage/profilePic/' . $user_id . '.jpg') }}" width="100%" class="rounded d-block" alt="Profile Picture" data-bs-toggle="modal" data-bs-target="#modal-dialog"> -->
                         <h4 class="mt-3 mb-0 fw-bold">{{$profile->fullName ?? 'Admin Tenant'}}</h4>
                         <p>{{$username ?? ''}}</p> 
                         <span class="badge bg-success d-block p-2">Active</span>
@@ -361,7 +370,7 @@
         </div>
         <div class="modal-body">
         <div class="col-sm-12">
-            <form id="profilepicform">
+            <form id="profilepicform" enctype="multipart/form-data">
                 <input type="hidden" value="{{$user_id}}" name="user_id" id="user_id">
                 <input class="form-check-input" type="checkbox" id="Gravatar" />
                 
@@ -375,7 +384,7 @@
                     <div id="croppie" class="mt-2">
                         
                             <img src="" alt="">
-                                                        
+                                                         
                     </div>
                     <a href="javascript:;" class="btn btn-primary" id="crop">Crop</a>
                     </div>

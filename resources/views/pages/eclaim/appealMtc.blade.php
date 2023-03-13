@@ -1,10 +1,10 @@
 @extends('layouts.dashboardTenant')
 @section('content')
-<div id="content" class="app-content">
+<div id="content" class="app-content" >
 
 	<h1 class="page-header">Eclaim | Appeal Claim</h1>
 	
-	<div class="row">
+	<div class="row" id="appealMtcJs">
 		<!-- BEGIN col-6 -->
 		<div class="col-xl-15">
 			<!-- BEGIN nav-tabs -->
@@ -31,7 +31,8 @@
 				<h3 class="mt-10px"></i> Appeal's List </h3>
 					
 					<div class="panel-body">
-			<table id="data-table-default" class="table table-striped table-bordered align-middle">
+						
+			<table id="appealTable" class="table table-striped table-bordered align-middle">
 				<thead>
 					<tr>
 						<th width="9%" data-orderable="false" class="align-middle">Action</th>
@@ -40,57 +41,29 @@
 						<th class="text-nowrap">Month</th>
 						<th class="text-nowrap">Reason</th>
 						<th class="text-nowrap">File Name</th>
-						
-						
-
-
 					</tr>
-				</thead>                                    
-                
+				</thead>   
 					<tbody>
-                        <td>
-                            <a href="#" data-bs-toggle="dropdown" class="btn btn-primary btn-sm dropdown-toggle"></i> Actions <i class="fa fa-caret-down"></i></a>
-                            <div class="dropdown-menu">
-                            <a href="javascript:;" id="editButton1" data-id="" class="dropdown-item"> Approve</a>
-                            <div class="dropdown-divider"></div>
-                            <a data-bs-toggle="modal" data-bs-target="#exampleModal3" class="dropdown-item"> Reject</a>
-                        </td>	
-                        <td>ahmad</td>
-						<td>2023</td>
-						<td>February</td>
-						<td>Sick</td>
-						<td>filename.pdf</td>
-						
-						
-					</tr>
-                        <td>
-                            <a href="#" data-bs-toggle="dropdown" class="btn btn-primary btn-sm dropdown-toggle"></i> Actions <i class="fa fa-caret-down"></i></a>
-                            <div class="dropdown-menu">
-                            <a href="javascript:;" id="editButton1" data-id="" class="dropdown-item"> Approve</a>
-                            <div class="dropdown-divider"></div>
-                            <a data-bs-toggle="modal" data-bs-target="#exampleModal3" class="dropdown-item"> Reject</a>
-                        </td>
-						<td>Naim</td>
-						<td>2023</td>
-						<td>February</td>
-						<td>Tired</td>
-						<td>filename.pdf</td>
-						
-						
-					</tr>
-                        <td>
-                            <a href="#" data-bs-toggle="dropdown" class="btn btn-primary btn-sm dropdown-toggle"></i> Actions <i class="fa fa-caret-down"></i></a>
-                            <div class="dropdown-menu">
-                            <a href="javascript:;" id="editButton1" data-id="" class="dropdown-item"> Approve</a>
-                            <div class="dropdown-divider"></div>
-                            <a data-bs-toggle="modal" data-bs-target="#exampleModal3" class="dropdown-item"> Reject</a>
-                        </td>	
-						<td>Wan</td>
-						<td>2023</td>
-						<td>February</td>
-						<td>Sick</td>
-						<td>filename.pdf</td>
-					</tr>
+						@if ($appealMtc)
+                        @foreach ($appealMtc as $data)
+						<tr>
+							<td>
+								<a href="#" data-bs-toggle="dropdown" class="btn btn-primary btn-sm dropdown-toggle"></i> Actions <i class="fa fa-caret-down"></i></a>
+								<div class="dropdown-menu">
+									<a href="javascript:;" data-id="{{ $data->id }}" class="dropdown-item approveButton"> Approve</a>
+								<div class="dropdown-divider"></div>
+									<a href="javascript:;" data-id="{{ $data->id }}" class="dropdown-item rejectButton"> Reject</a>
+								<!-- <a data-bs-toggle="modal" data-bs-target="#exampleModal3" class="dropdown-item"> Reject</a> -->
+							</td>	
+							<td>{{ getEmployeeName($data->user_id) ?? '-' }}</td>
+							<td>{{ $data->year ?? '-' }}</td>
+							<td>{{ $data->month ?? '-' }}</td>
+							<td>{{ $data->reason ?? '-' }}</td>
+							<td>{{ $data->uploadFile ?? '-' }}</td>
+						</tr>
+						@endforeach
+
+                    @endif
                 </tbody>
             </table>
         </div>
@@ -104,7 +77,7 @@
 					<h3 class="mt-10px"></i> Appeal Claim History </h3>
 					
 					<div class="panel-body">
-                        <table id="data-table-default" class="table table-striped table-bordered align-middle">
+                        <table id="historyTable" class="table table-striped table-bordered align-middle">
                             <thead>
                                 <tr>
                                     <th class="text-nowrap">Employee Name</th>
@@ -115,28 +88,18 @@
                                     <th class="text-nowrap">Status</th>
                                 </tr>
                             </thead>
+							@if ($historyAppeal)
+                        	@foreach ($historyAppeal as $data)
                                 <tbody>
-                                    <td>ahmad</td>
-                                    <td>2023</td>
-                                    <td>February</td>
-                                    <td>Sick</td>
-                                    <td>filename.pdf</td>
-                                    <td>Approve</td>
+									<td>{{ getEmployeeName($data->user_id) ?? '-' }}</td>
+									<td>{{ $data->year ?? '-' }}</td>
+									<td>{{ $data->month ?? '-' }}</td>
+									<td>{{ $data->reason ?? '-' }}</td>
+									<td>{{ $data->uploadFile ?? '-' }}</td>
+									<td>{{ $data->status ?? '-' }}</td>
                                 </tr>
-                                    <td>Naim</td>
-                                    <td>2023</td>
-                                    <td>February</td>
-                                    <td>Tired</td>
-                                    <td>filename.pdf</td>
-                                    <td>Approve</td>
-                                </tr>
-                                    <td>Wan</td>
-                                    <td>2023</td>
-                                    <td>February</td>
-                                    <td>Sick</td>
-                                    <td>filename.pdf</td>
-                                    <td>Reject</td>
-                                </tr>
+								@endforeach
+                    		@endif
                             </tbody>
                         </table>
                     </div>
