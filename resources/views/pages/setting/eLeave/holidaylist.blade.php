@@ -1,21 +1,6 @@
 @extends('layouts.dashboardTenant')
 
 @section('content')
-<style>
-   .swal2-modal .swal2-title {
-    color: #595959;
-    font-size: 20px !important;
-    text-align: center;
-    font-weight: 600;
-    text-transform: none;
-    position: relative;
-    margin: 0 0 0.4em;
-    padding: 0;
-    display: block;
-    word-wrap: break-word;
-}
-</style>
-
 	<div id="content" class="app-content">
 		<h1 class="page-header" id="eleaveholidayJs">Setting | Holiday</h1>
 		<div class="panel panel">
@@ -31,7 +16,7 @@
 						</div>
 					</div>
 					<div class="row p-2">
-						<table  id="tableholiday"  class="table table-striped table-bordered align-middle">
+						<table  id="tabletype"  class="table table-striped table-bordered align-middle">
 							<thead>
 								<tr>	
 								<th width="1%" class="text-nowrap">Action</th>
@@ -93,7 +78,7 @@
 								<div class="col md-6">
 									<div class="mb-3">
 										<label for="holidaytitle" class="form-label">Holiday Title* </label>
-										<input type="text" class="form-control" name="holiday_title" id="holiday_title" style="text-transform:uppercase">
+										<input type="text" class="form-control" name="holiday_title" id="holiday_title">
 									</div>
 								</div>
 								<div class="col md-6">

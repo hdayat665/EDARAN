@@ -965,13 +965,12 @@ class SettingController extends Controller
     {
         $ss = new SettingService;
 
-        $data['leave'] = $ss->leaveEntitlementView();
-        $data['nameStaff'] = $ss->leaveNameStaff();
-        // dd($data['nameStaff']);
-        // die;
+        $result = $ss->leaveEntitlementView();
+        $resultName = $ss->leaveNameStaff();
 
+        // dd($result,$resultName);
 
-        return view('pages.setting.eleave.eleaveentitlement', $data);
+        return view('pages.setting.eleave.eleaveentitlement', $result, $resultName);
     }
 
     public function createLeaveEntitlement(Request $r)

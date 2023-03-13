@@ -10,26 +10,22 @@ $(document).ready(function () {
     $("#datepickerstart").datepicker({
         todayHighlight: true,
         autoclose: true,
-        format: "yyyy-mm-dd",
     });
 
     $("#datepickerend").datepicker({
         todayHighlight: true,
         autoclose: true,
-        format: "yyyy-mm-dd",
     });
 
     //
     $("#udatepickerstart").datepicker({
         todayHighlight: true,
         autoclose: true,
-        format: "yyyy-mm-dd",
     });
 
     $("#udatepickerend").datepicker({
         todayHighlight: true,
         autoclose: true,
-        format: "yyyy-mm-dd",
     });
 
     $("#saveButton").click(function (e) {
@@ -166,7 +162,7 @@ $(document).ready(function () {
         id = $(this).data("id");
         requirejs(["sweetAlert2"], function (swal) {
             swal({
-                title: "Are you sure to delete holiday?",
+                title: "Are you sure to delete Leave Holiday?",
                 type: "error",
                 confirmButtonClass: "btn-danger",
                 confirmButtonText: "Yes!",
@@ -238,15 +234,5 @@ $(document).ready(function () {
         // updating checked attribute of change event occurred element, this.checked returns current state
         // $(".wrapper").val($(".container").html());
         // updating the value of textarea
-    });
-
-    $("#tableholiday").DataTable({
-        searching: true,
-        lengthChange: true,
-        lengthMenu: [
-            [5, 10, 25, 50, -1],
-            [5, 10, 25, 50, "All"],
-        ],
-        responsive: false,
     });
 });

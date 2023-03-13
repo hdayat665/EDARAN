@@ -70,7 +70,6 @@ $(document).ready(function () {
             $("#leavetypes").val(data.leave_types);
             $("#idtypes").val(data.id);
             $("#uallowrequest").val(data.day);
-            $("#uallowrequest").prop("disabled", false);
         });
     });
 
@@ -206,15 +205,5 @@ $(document).ready(function () {
         // updating checked attribute of change event occurred element, this.checked returns current state
         // $(".wrapper").val($(".container").html());
         // updating the value of textarea
-    });
-
-    $("#tabletypes").DataTable({
-        searching: true,
-        lengthChange: true,
-        lengthMenu: [
-            [5, 10, 25, 50, -1],
-            [5, 10, 25, 50, "All"],
-        ],
-        responsive: false,
     });
 });

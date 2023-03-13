@@ -9,50 +9,15 @@ use Illuminate\Routing\Controller;
 
 class MyleaveController extends Controller
 {
-    public function myleaveView(Request $r)
+    public function myleaveView()
     {
         $ms = new MyleaveService;
 
         $data['myleave'] = $ms->myleaveView();
         $data['myleaveHistory'] = $ms->myleaveHistoryView();
-        $data['applydate'] = '';
-        $data['typelist'] = '';
-        $data['status_searching'] = '';
         $data['types'] = $ms->datatype();
-        // $data['mypie'] = $ms->datapie();
-
-        $input = $r->input();
-        if($input){
-            $data['myleaveHistory'] = $ms->searcmyleavehistory($r);
-            $data['applydate'] = $input['applydate'];
-            $data['typelist'] = $input['typelist'];
-            $data['status_searching'] = $input['status'];
-
-            // dd($data);
-            // die;
-        }
-        
         
         return view('pages.myleave.myleave',$data);
-    }
-
-     public function searchmyleavehistory(Request $r)
-    {
-        // $ms = new MyleaveService;
-        // $input = $r->input();
-        // $data['myleave'] = $ms->myleaveView();
-        // $data['types'] = $ms->datatype();
-        // $data['myleaveHistory'] = $ms->searcmyleavehistory($r);
-        // $data['applydate'] = $input['applydate'];
-        // $data['typelist'] = $input['typelist'];
-        // $data['status'] = $input['status'];
-
-
-        // // dd($data);
-        // // die;
-
-
-        // return view('pages.myleave.myleave', $data);
     }
 
      public function createtmyleave(Request $r)
@@ -88,25 +53,6 @@ class MyleaveController extends Controller
         $ms = new MyleaveService;
 
         $result = $ms->getusermyleave($id);
-        // dd($result);
-
-        return $result;
-    }
-
-    public function getpieleave()
-    {
-        $ms = new MyleaveService;
-
-        $result = $ms->getpieleave();
-        // dd($result);
-
-        return $result;
-    }
-    public function getpieleave2()
-    {
-        $ms = new MyleaveService;
-
-        $result = $ms->getpieleave2();
         // dd($result);
 
         return $result;

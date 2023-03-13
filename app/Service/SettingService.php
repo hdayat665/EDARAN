@@ -14,7 +14,6 @@ use App\Models\Designation;
 use App\Models\DomainList;
 use App\Models\EclaimGeneral;
 use App\Models\EclaimGeneralSetting;
-use App\Models\Employee;
 use App\Models\EmploymentType;
 use App\Models\EntitleGroup;
 use App\Models\JobGrade;
@@ -1767,26 +1766,18 @@ class SettingService
 
     public function leaveEntitlementView()
     {
-        $data = 
-        leaveEntitlementModel::where('leave_entitlement.tenant_id', Auth::user()->tenant_id)
-        ->leftJoin('userprofile', 'leave_entitlement.id_userprofile', '=', 'userprofile.user_id')
-        ->leftJoin('employment', 'leave_entitlement.id_employment', '=', 'employment.user_id')
-        ->leftJoin('department', 'leave_entitlement.id_department', '=', 'department.id')
-        ->select('leave_entitlement.*', 'userprofile.fullname', 'department.departmentName')
-        ->orderBy('id', 'desc')->get();
+        $data['leave'] = leaveEntitlementModel::where('tenant_id', Auth::user()->tenant_id)->orderBy('id', 'desc')->get();
+
         return $data;
     }
 
     public function leaveNameStaff()
     {
-        $data= 
-        Employee::where('employment.tenant_id', Auth::user()->tenant_id)
-        ->whereNull('leave_entitlement.id_employment')
-        ->leftJoin('userprofile', 'employment.user_id', '=', 'userprofile.user_id')
-        ->leftJoin('department', 'employment.department', '=', 'department.id')
-        ->leftJoin('leave_entitlement', 'employment.user_id', '=', 'leave_entitlement.id_employment')
-        ->select('userprofile.user_id', 'userprofile.fullname', 'department.id')
-        ->get();
+        $data['nameStaff'] = UserProfile::where('userprofile.tenant_id', Auth::user()->tenant_id)
+            ->leftJoin('employment', 'userprofile.user_id', '=', 'employment.user_id')
+            ->leftJoin('department', 'employment.department', '=', 'department.id')
+            ->select('userprofile.user_id', 'userprofile.fullname', 'department.departmentName')
+            ->get();
         return $data;
     }
 
@@ -1805,11 +1796,9 @@ class SettingService
             return $data;
         }
 
-        $employerName = $input['employerName'];
-        $ids = explode(',', $employerName);
-        $data1 = $ids[0];
-        $data2 = $ids[0];
-        $data3 = $ids[1];
+        $data1 = $input['employerName'];
+        $data2 = $input['employerName'];
+        $data3 = $input['employerName'];
         $data4 = Auth::user()->tenant_id;
         $data5 = $input['lapsed'];
 
@@ -1827,25 +1816,15 @@ class SettingService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Successfully save entitlement';
+        $data['msg'] = 'Success Create Leave Entitlement';
 
         return $data;
     }
 
     public function getcreateLeaveEntitlement($id)
     {
-        // $data = leaveEntitlementModel::find($id);
+        $data = leaveEntitlementModel::find($id);
 
-        // return $data;
-
-         $data = 
-        leaveEntitlementModel::where('leave_entitlement.tenant_id', Auth::user()->tenant_id)
-        ->where('leave_entitlement.id', '=', $id)
-        ->leftJoin('userprofile', 'leave_entitlement.id_userprofile', '=', 'userprofile.user_id')
-        ->leftJoin('employment', 'leave_entitlement.id_employment', '=', 'employment.user_id')
-        ->leftJoin('department', 'leave_entitlement.id_department', '=', 'department.id')
-        ->select('leave_entitlement.*', 'userprofile.fullname', 'department.departmentName')
-        ->orderBy('id', 'desc')->first();
         return $data;
     }
 
@@ -1855,25 +1834,25 @@ class SettingService
 
         date_default_timezone_set("Asia/Kuala_Lumpur");
 
-        $data1 = $input['CurrentEntitlement'];
-        $data2 = $input['CurrentEntitlementBalance'];
-        $data3 = $input['SickLeaveEntitlement'];
-        $data4 = $input['SickLeaveEntitlementBalance'];
-        $data5 = $input['CarryForward'];
-        $data6 = $input['CurrentForwardBalance'];
-        $data7 = date('Y-m-d', strtotime($input['LapsedDate']));
-        $data8 = date('Y-m-d', strtotime($input['Lapsed']));
+        // $input['modified_at'] = date('Y-m-d H:i:s');
+        // $user = Auth::user();
+        // $input['modifiedBy'] = $user->username;
+
+        $data1 = $input['CurrentEntitlementBalance'];
+        $data2 = $input['SickLeaveEntitlement'];
+        $data3 = $input['CarryForward'];
+        $data4 = $input['CurrentForwardBalance'];
+        $data5 = $input['LapsedDate'];
+        $data6 = $input['Lapsed'];
 
 
         $input = [
-            'current_entitlement' => $data1,
-            'current_entitlement_balance' => $data2,
-            'sick_leave_entitlement' => $data3,
-            'sick_leave_entitlement_balance' => $data4,
-            'carry_forward' => $data5,
-            'carry_forward_balance' => $data6,
-            'lapsed_date' => $data7,
-            'lapse' => $data8
+            'current_entitlement_balance' => $data1,
+            'sick_leave_entitlement' => $data2,
+            'carry_forward' => $data3,
+            'carry_forward_balance' => $data4,
+            'lapsed_date' => $data5,
+            'lapse' => $data6
         ];
 
         leaveEntitlementModel::where('id', $id)->update($input);
@@ -1881,7 +1860,7 @@ class SettingService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Successfully update entitlement';
+        $data['msg'] = 'Success Update Leave Entitlement';
 
         return $data;
     }
@@ -1907,9 +1886,10 @@ class SettingService
 
             return $data;
         }
-        $data1 = strtoupper($input['holiday_title']);
-        $data2 = date('Y-m-d', strtotime($input['start_date']));
-        $data3 = date('Y-m-d', strtotime($input['end_date']));
+
+        $data1 = $input['holiday_title'];
+        $data2 = $input['start_date'];
+        $data3 = $input['end_date'];
         $data4 = $input['annual_date'];
         $data5 = Auth::user()->tenant_id;
         $data6 = 1;
@@ -1929,7 +1909,7 @@ class SettingService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Successfully save holiday';
+        $data['msg'] = 'Success Create Holiday';
 
         return $data;
     }
@@ -1965,7 +1945,7 @@ class SettingService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Successfully update holiday';
+        $data['msg'] = 'Success Update Leave Holiday';
 
         return $data;
     }
@@ -1985,7 +1965,7 @@ class SettingService
             $data['status'] = config('app.response.success.status');
             $data['type'] = config('app.response.success.type');
             $data['title'] = config('app.response.success.title');
-            $data['msg'] = 'Successfully delete holiday';
+            $data['msg'] = 'Success Delete Leave holiday';
         }
 
         return $data;
@@ -2000,7 +1980,7 @@ class SettingService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Successfully update holiday';
+        $data['msg'] = 'Success Update Status Leave Holiday';
 
         return $data;
     }
@@ -2029,22 +2009,16 @@ class SettingService
             return $data;
         }
 
-        $data1 = strtoupper($input['leave_types_code']);
-        $data2 = strtoupper($input['leave_types']);
-        
-        if($input = $r->input('day')){
-            $data3 = $input['day'];
-        }else{
-            $data3 = 0;
-        }
+        $data1 = $input['leave_types_code'];
+        $data2 = $input['leave_types'];
+        $data3 = $input['day'];
         $data5 = Auth::user()->tenant_id;
 
         $input = [
             'leave_types_code' => $data1,
             'leave_types' => $data2,
             'day' => $data3,
-            'tenant_id' => $data5,
-            'status' => 1
+            'tenant_id' => $data5
         ];
 
         leavetypesModel::create($input);
@@ -2053,7 +2027,7 @@ class SettingService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Successfully create leave type';
+        $data['msg'] = 'Success Create Leave Type';
 
         return $data;
     }
@@ -2071,10 +2045,12 @@ class SettingService
         $input = $r->input();
 
         date_default_timezone_set("Asia/Kuala_Lumpur");
-        $data1 = strtoupper($input['leavetypescode']);
-        $data2 = strtoupper($input['leavetypes']);
+
+        $data1 = $input['leavetypescode'];
+        $data2 = $input['leavetypes'];
         $data3 = $input['day'];
-        
+
+
         $input = [
             'leave_types_code' => $data1,
             'leave_types' => $data2,
@@ -2086,7 +2062,7 @@ class SettingService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Successfully update leave type';
+        $data['msg'] = 'Success Update Leave Types';
 
         return $data;
     }
@@ -2099,14 +2075,14 @@ class SettingService
             $data['status'] = config('app.response.error.status');
             $data['type'] = config('app.response.error.type');
             $data['title'] = config('app.response.error.title');
-            $data['msg'] = 'Leave type not found';
+            $data['msg'] = 'Leave holiday not found';
         } else {
             $logs->delete();
 
             $data['status'] = config('app.response.success.status');
             $data['type'] = config('app.response.success.type');
             $data['title'] = config('app.response.success.title');
-            $data['msg'] = 'Successfully delete leave type';
+            $data['msg'] = 'Success Delete Leave holiday';
         }
 
         return $data;
@@ -2121,7 +2097,7 @@ class SettingService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Successfully update leave type';
+        $data['msg'] = 'Success Update Status Leave Types';
 
         return $data;
     }
