@@ -547,10 +547,16 @@ Route::group(['middleware' => ['web']], function () {
 
             //myleave
             Route::get('/myleave', 'myleaveView');
+            Route::post('/myleave', 'myleaveView');
             Route::post('/createtmyleave', 'createtmyleave');
             Route::get('/getcreatemyleave/{id}', 'getcreatemyleave');
             Route::delete('/deletemyleave/{id}', 'deletemyleave');
             Route::get('/getusermyleave/{id}', 'getusermyleave');
+            Route::get('/getpieleave', 'getpieleave');
+            Route::get('/getpieleave2', 'getpieleave2');
+
+            //seaching myleave
+            Route::post('/searchmyleavehistory', 'searchmyleavehistory');
 
             //supervisor
             Route::get('/leaveAppr', 'leaveApprView');

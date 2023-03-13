@@ -1,6 +1,20 @@
 @extends('layouts.dashboardTenant')
 
 @section('content')
+<style>
+   .swal2-modal .swal2-title {
+    color: #595959;
+    font-size: 20px !important;
+    text-align: center;
+    font-weight: 600;
+    text-transform: none;
+    position: relative;
+    margin: 0 0 0.4em;
+    padding: 0;
+    display: block;
+    word-wrap: break-word;
+}
+</style>
 	<div id="content" class="app-content">
 		<h1 class="page-header" id="eleavetypesJs" >Setting | Leave Types</h1>
 		<div class="panel panel">
@@ -10,10 +24,10 @@
 						<h3>Leave Types List</h3>
 					</div>
 					<div class="row p-2 ">
-						<button class="btn btn-primary col-2" data-bs-toggle="modal" id="myModal1" data-bs-target="#addleave"> <i class="fa fa-plus" aria-hidden="true"></i> Lapsed Date</button>
+						<button class="btn btn-primary col-2" data-bs-toggle="modal" id="myModal1" data-bs-target="#addleave"> <i class="fa fa-plus" aria-hidden="true"></i> Leave Types</button>
 					</div>
 					<div class="row p-2">
-						<table  id="tabletype"  class="table table-striped table-bordered align-middle">
+						<table  id="tabletypes"  class="table table-striped table-bordered align-middle">
 							<thead>
 							<tr>	
 								<th class="text-nowrap">Action</th>
@@ -69,11 +83,11 @@
 						<form id="addForm">
 							<div class="mb-3">
 							<label for="leavetype" class="form-label">Leave Type Code*</label>
-							<input type="text" class="form-control" name="leave_types_code" id="leave_types_code" placeholder="Input Leave Code">
+							<input type="text" class="form-control" name="leave_types_code" id="leave_types_code" placeholder="Input Leave Code" style="text-transform:uppercase">
 							</div>
 							<div class="mb-3">
 							<label for="Leavetype" class="form-label">Leave Type*</label>
-							<input type="text" class="form-control" id="leave_types" name="leave_types" placeholder="Input Leave type">
+							<input type="text" class="form-control" id="leave_types" name="leave_types" placeholder="Input Leave type" style="text-transform:uppercase">
 							</div>
 
 							<div class="mb-3">
@@ -86,7 +100,7 @@
 											<p class="col-form-label">To be Applied</p>
 										</div>
 										<div class="col-md-2">
-											<input type="text" id="allowrequest" name="day" class="form-control"  disabled>
+											<input type="text" id="allowrequest" value="" name="day" class="form-control"  disabled>
 										</div>
 										<div class="col-auto">
 											<p class="col-form-label">days in advanced</p>
@@ -130,14 +144,14 @@
 							<div class="mb-3">
 								<div class="row g-3 align-items-center">
 									<div class="col-auto">
-										<input class="form-check-input" type="checkbox" value="" id="ucheckallowrequest"> 
+										<input class="form-check-input" type="checkbox" value="" id="ucheckallowrequest" checked> 
 									</div>
 									
 										<div class="col-auto">
 											<p class="col-form-label">To be Applied</p>
 										</div>
 										<div class="col-md-2">
-											<input type="text" id="uallowrequest" name="day" class="form-control"  disabled>
+											<input type="text" id="uallowrequest" name="day" value="" class="form-control"  disabled>
 										</div>
 										<div class="col-auto">
 											<p class="col-form-label">days in advanced</p>

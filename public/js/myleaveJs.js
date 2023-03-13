@@ -13,80 +13,110 @@ $(document).ready(function () {
         paging: false,
     });
 
-    Chart.defaults.color = "rgba(" + app.color.componentColorRgb + ", .65)";
-    Chart.defaults.font.family = app.font.family;
-    Chart.defaults.font.weight = 500;
-    Chart.defaults.scale.grid.color =
-        "rgba(" + app.color.componentColorRgb + ", .15)";
-    Chart.defaults.scale.ticks.backdropColor =
-        "rgba(" + app.color.componentColorRgb + ", 0)";
+    var mypie1 = mypie1();
 
-    var ctx5 = document.getElementById("myChart").getContext("2d");
+    function mypie1() {
+        return $.ajax({
+            url: "/getpieleave/",
+        });
+    }
 
-    window.myPie = new Chart(ctx5, {
-        type: "pie",
-        data: {
-            labels: ["Total Entitlement", "Total Balance", "Total Token"],
-            datasets: [
-                {
-                    data: [14, 6, 8],
-                    backgroundColor: [
-                        "rgba(52, 143, 226)",
-                        "rgb(73, 182, 214)",
-                        "rgba(255, 99, 71, 0.5)",
-                    ],
-                    borderColor: [
-                        app.color.red,
-                        app.color.orange,
-                        app.color.gray500,
-                        app.color.gray300,
-                        app.color.gray900,
-                    ],
-                    borderWidth: 1,
-                },
-            ],
-        },
-        options: {
-            responsive: true,
-        },
+    mypie1.done(function (datapie) {
+        Chart.defaults.color = "rgba(" + app.color.componentColorRgb + ", .65)";
+        Chart.defaults.font.family = app.font.family;
+        Chart.defaults.font.weight = 500;
+        Chart.defaults.scale.grid.color =
+            "rgba(" + app.color.componentColorRgb + ", .15)";
+        Chart.defaults.scale.ticks.backdropColor =
+            "rgba(" + app.color.componentColorRgb + ", 0)";
+
+        var ctx5 = document.getElementById("myChart").getContext("2d");
+
+        var total_balance =
+            datapie.current_entitlement - datapie.total_day_applied;
+        var total_token = datapie.total_day_applied;
+        console.log(datapie);
+
+        window.myPie = new Chart(ctx5, {
+            type: "pie",
+            data: {
+                labels: ["Total Balance", "Total Token"],
+                datasets: [
+                    {
+                        data: [total_balance, total_token],
+                        backgroundColor: [
+                            "rgba(52, 143, 226)",
+                            "rgb(73, 182, 214)",
+                            "rgba(255, 99, 71, 0.5)",
+                        ],
+                        borderColor: [
+                            app.color.red,
+                            app.color.orange,
+                            app.color.gray500,
+                            app.color.gray300,
+                            app.color.gray900,
+                        ],
+                        borderWidth: 1,
+                    },
+                ],
+            },
+            options: {
+                responsive: true,
+            },
+        });
     });
 
-    Chart.defaults.color = "rgba(" + app.color.componentColorRgb + ", .65)";
-    Chart.defaults.font.family = app.font.family;
-    Chart.defaults.font.weight = 500;
-    Chart.defaults.scale.grid.color =
-        "rgba(" + app.color.componentColorRgb + ", .15)";
-    Chart.defaults.scale.ticks.backdropColor =
-        "rgba(" + app.color.componentColorRgb + ", 0)";
+    var mypie2 = mypie2();
 
-    var ctx5 = document.getElementById("myChart2").getContext("2d");
+    function mypie2() {
+        return $.ajax({
+            url: "/getpieleave2/",
+        });
+    }
 
-    window.myPie = new Chart(ctx5, {
-        type: "pie",
-        data: {
-            labels: ["Total Carried foward", "Total Balance", "Total Token"],
-            datasets: [
-                {
-                    data: [5, 1, 4],
-                    backgroundColor: [
-                        "rgba(52, 143, 226)",
-                        "rgb(73, 182, 214)",
-                        "rgba(255, 99, 71, 0.5)",
-                    ],
-                    borderColor: [
-                        app.color.red,
-                        app.color.orange,
-                        app.color.gray500,
-                        app.color.gray300,
-                        app.color.gray900,
-                    ],
-                    borderWidth: 1,
-                },
-            ],
-        },
-        options: {
-            responsive: true,
-        },
+    mypie2.done(function (datapie2) {
+        Chart.defaults.color = "rgba(" + app.color.componentColorRgb + ", .65)";
+        Chart.defaults.font.family = app.font.family;
+        Chart.defaults.font.weight = 500;
+        Chart.defaults.scale.grid.color =
+            "rgba(" + app.color.componentColorRgb + ", .15)";
+        Chart.defaults.scale.ticks.backdropColor =
+            "rgba(" + app.color.componentColorRgb + ", 0)";
+
+        var ctx5 = document.getElementById("myChart2").getContext("2d");
+
+        var total_balance =
+            datapie2.current_entitlement - datapie2.total_day_applied;
+        var total_token = datapie2.total_day_applied;
+        console.log(datapie2);
+
+        window.myPie = new Chart(ctx5, {
+            type: "pie",
+            data: {
+                labels: ["Total Balance", "Total Token"],
+                datasets: [
+                    {
+                        data: [total_balance, total_token],
+                        backgroundColor: [
+                            "rgba(52, 143, 226)",
+                            "rgb(73, 182, 214)",
+                            "rgba(255, 99, 71, 0.5)",
+                        ],
+                        borderColor: [
+                            app.color.red,
+                            app.color.orange,
+                            app.color.gray500,
+                            app.color.gray300,
+                            app.color.gray900,
+                        ],
+                        borderWidth: 1,
+                    },
+                ],
+            },
+            options: {
+                responsive: true,
+            },
+        });
     });
 
     // $("#datepicker-applied").datepicker({
@@ -139,6 +169,7 @@ $(document).ready(function () {
     $("#datepicker-filter").datepicker({
         todayHighlight: true,
         autoclose: true,
+        format: "yyyy-mm-dd",
     });
 
     $("#datepicker-start").datepicker({
@@ -212,9 +243,29 @@ $(document).ready(function () {
     });
 
     $(document).ready(function () {
+        if (
+            $("#datepicker-filter").val() ||
+            $("#typelist").val() ||
+            $("#status_searching").val()
+        ) {
+            $("#filterleave").show();
+        } else {
+            $("#filterleave").hide();
+        }
+
         $("#filter").click(function () {
             $("#filterleave").toggle();
         });
+    });
+
+    $("#reset").on("click", function () {
+        $("#datepicker-filter").val(
+            $("#datepicker-filter").data("default-value")
+        );
+        $("#typelist").val($("#typelist").data("default-value"));
+        $("#status_searching").val(
+            $("#status_searching").data("default-value")
+        );
     });
 
     $("#saveButton").click(function (e) {
