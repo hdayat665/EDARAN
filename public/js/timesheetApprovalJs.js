@@ -186,6 +186,11 @@ function getRequesttimesheet(id) {
 
 $('[data-toggle="tooltipamend"]').tooltip(); 
 
+$('#employeesearch').picker({ search: true });
+$('#designsearch').picker({ search: true });
+$('#departmentsearch').picker({ search: true });
+
+
 });
 
 

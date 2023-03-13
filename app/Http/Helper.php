@@ -763,6 +763,7 @@ if (!function_exists('customeractive')) {
         return $data;
     }
 }
+
 if (!function_exists('projectLocation')) {
     function projectLocation($projectid = '')
     {
@@ -774,6 +775,32 @@ if (!function_exists('projectLocation')) {
 
         $data = $query->get();
 
+        if (!$data) {
+            $data = [];
+        }
+
+        // $cond[1] = ['tenant_id', Auth::user()->tenant_id];
+        // $cond[2] = ['project_id', $projectid];
+
+        // $data = ProjectLocation::where($cond)->get();
+
+        // if (!$data) {
+        //     $data = [];
+        // }
+        return $data;
+    }
+}
+
+if (!function_exists('activityName')) {
+    function activityName( $departmentId = '')
+    {
+        $cond[1] = ['tenant_id', Auth::user()->tenant_id];
+        // $cond[1] = ['tenant_id', ];
+        $cond[2] = ['department', $departmentId];
+        // $cond[3] = ['logs_id', $logsid];
+        
+        $cond[3] = ['project_id', null];
+        $data = ActivityLogs::where($cond)->get();
         if (!$data) {
             $data = [];
         }
@@ -1008,7 +1035,7 @@ if (!function_exists('activityName')) {
         $cond[2] = ['department', $departmentId];
         // $cond[3] = ['logs_id', $logsid];
         
-        // $cond[3] = ['project_id', null];
+        $cond[3] = ['project_id', null];
         $data = ActivityLogs::where($cond)->get();
         if (!$data) {
             $data = [];
@@ -1017,6 +1044,22 @@ if (!function_exists('activityName')) {
         return $data;
     }
 }
+
+if (!function_exists('activityName1')) {
+    function activityName1($departmentId = '')
+    {
+        $data = ActivityLogs::where('tenant_id', Auth::user()->tenant_id)
+                            ->whereNotNull('project_id')
+                            ->where('department', $departmentId)
+                            ->get();
+        if (!$data) {
+            $data = [];
+        }
+
+        return $data;
+    }
+}
+
 
 
 // if (!function_exists('activityName1')) {

@@ -20,7 +20,7 @@
                     <label for="inputPassword6" class="col-form-label">Year</label>
                 </div>
                 <div class="col-sm-5">
-                    <input type="text" id="year" class="form-control" aria-describedby="passwordHelpInline" readonly>
+                    <input type="text" id="yearsub" class="form-control" aria-describedby="passwordHelpInline" readonly>
                 </div>
             </div>
             <div class="row p-2">
@@ -28,7 +28,7 @@
                     <label for="inputPassword6" class="col-form-label">Month</label>
                 </div>
                 <div class="col-sm-5">
-                    <input type="text" id="month" class="form-control" aria-describedby="passwordHelpInline" readonly>
+                    <input type="text" id="monthsub" class="form-control" aria-describedby="passwordHelpInline" readonly>
                     <input type="hidden"  class="form-control" id="idtv" name="id" />
                 </div>
             </div>
