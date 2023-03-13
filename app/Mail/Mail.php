@@ -66,11 +66,13 @@ class Mail extends Mailable
             $view = 'emails.claim.amendMtcEmail';
         } else if ($data['typeEmail'] == 'paidEmailMTC') {
             $view = 'emails.claim.paidEmailMTC';
+        } else if ($data['typeEmail'] == 'submitEmailCA') {
+            $view = 'emails.claim.submitEmailCA';
+        } else if ($data['typeEmail'] == 'CAApproval') {
+            $view = 'emails.claim.CAApproval';
+        } else if ($data['typeEmail'] == 'approvalCAFinanceApproval') {
+            $view = 'emails.claim.approvalCAFinanceApproval';
         }
-
-
-
-
 
         // $address = 'janeexampexample@example.com';
         // $subject = 'This is a demo!';

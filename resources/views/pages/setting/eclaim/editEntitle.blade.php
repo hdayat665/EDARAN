@@ -310,13 +310,13 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @if ($subsistances['subs'])
-                                            @foreach ($subsistances['subs'] as $data)
+                                        @if ($subsistances)
+                                            @foreach ($subsistances as $data)
                                                 <tr>
                                                     <td>
-                                                        <a href="javascript:;" id="viewSubsAddButton" class="btn btn-outline-blue" data-id="{{ $data->id }}"><i class="fa fa-edit"></i></a>
+                                                        <a href="javascript:;" id="viewSubsEditButton" class="btn btn-outline-blue" data-id="{{ $data->id }}"><i class="fa fa-edit"></i></a>
                                                     </td>
-                                                    <td>{{ $data->area_name }}</td>
+                                                    <td>{{ $data->area }}</td>
                                                     <td>{{ $data->value }}</td>
                                                 </tr>
                                             @endforeach
@@ -341,10 +341,10 @@
                                             @foreach ($claimCategorys as $item)
                                                 <tr>
                                                     <td>
-                                                        <a href="javascript:;" id="viewClaimAddButton" class="btn btn-outline-blue" data-id="{{ $item->id }}"><i class="fa fa-edit"></i></a>
+                                                        <a href="javascript:;" id="viewClaimEditButton" class="btn btn-outline-blue" data-id="{{ $item->id }}"><i class="fa fa-edit"></i></a>
                                                     </td>
-                                                    <td>{{ $item->claim_catagory }}</td>
-                                                    <td>{{ $item->claim_value }}</td>
+                                                    <td>{{ $item->area }}</td>
+                                                    <td>{{ $item->value }}</td>
                                                 </tr>
                                             @endforeach
                                         @endif

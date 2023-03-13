@@ -279,8 +279,15 @@
                                             <td>
                                                 <a href="javascript:;" id="viewSubsAddButton" class="btn btn-outline-blue" data-id="{{ $data->id }}"><i class="fa fa-edit"></i></a>
                                             </td>
-                                            <td>{{ $data->area_name }}</td>
-                                            <td>{{ $data->value }}</td>
+                                            <td>
+                                                <input type="hidden" value="{{ $data->area_name }}" name="subs[area][]">
+                                                {{ $data->area_name }}
+                                            </td>
+                                            <td>
+                                                <input type="hidden" value="{{ $data->value }}" name="subs[value][]">
+                                                <input type="hidden" value="subs" name="subs[type][]">
+                                                {{ $data->value }}
+                                            </td>
                                         </tr>
                                     @endforeach
                                 @endif
@@ -306,8 +313,15 @@
                                             <td>
                                                 <a href="javascript:;" id="viewClaimAddButton" class="btn btn-outline-blue" data-id="{{ $item->id }}"><i class="fa fa-edit"></i></a>
                                             </td>
-                                            <td>{{ $item->claim_catagory }}</td>
-                                            <td>{{ $item->claim_value }}</td>
+                                            <td>
+                                                <input type="hidden" value="{{ $item->claim_catagory }}" name="subs[area][]">
+                                                {{ $item->claim_catagory }}
+                                            </td>
+                                            <td>
+                                                <input type="hidden" value="{{ $item->claim_value }}" name="subs[value][]">
+                                                <input type="hidden" value="category" name="subs[type][]">
+                                                {{ $item->claim_value }}
+                                            </td>
                                         </tr>
                                     @endforeach
                                 @endif
