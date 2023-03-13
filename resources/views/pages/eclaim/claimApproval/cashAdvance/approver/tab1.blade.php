@@ -21,7 +21,8 @@
                     <tr>
                         <td style="text-align: center"><input class="form-check-input" type="checkbox" />
                         <td>
-                            <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle"><i class="fa fa-cogs"></i> Action <i class="fa fa-caret-down"></i></a>
+                            <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle" data-button-spinner="processing" id="spinner"><i class="fa fa-cogs"></i> Action <i
+                                    class="fa fa-caret-down"></i></a>
                             <div class="dropdown-menu">
                                 <a href="/cashAdvanceFapproverDetail/{{ $ca->type }}/{{ $ca->id }}" id="" data-id="" class="dropdown-item"><i class="fa fa-eye"
                                         aria-hidden="true"></i>
@@ -39,7 +40,7 @@
                         <td>{{ getCashAdvanceType($ca->type) ?? 'N/A' }}</td>
                         <td>{{ date('Y-m-d', strtotime($ca->created_at)) ?? 'N/A' }}</td>
                         <td>{{ $ca->travel_date ?? 'N/A' }}</td>
-                        <td>MYR {{  $ca->mode_of_transport->accommadation_total ?? $ca->amount }}</td>
+                        <td>MYR {{ $ca->mode_of_transport->accommadation_total ?? $ca->amount }}</td>
                         <td>{{ date('Y-m-d', strtotime($ca->updated_at)) ?? '-' }}</td>
                         <td>{{ $ca->status ?? '-' }}</td>
                     </tr>
