@@ -467,58 +467,70 @@ class MyTimeSheetService
     }
 
     public function submitForApproval($userId = '')
-    {
-        $cond[1] = ['user_id', $userId];
+{
+    $cond[1] = ['user_id', $userId];
 
-        $logs = TimesheetLog::where($cond)->whereMonth('date', date('m'))->select('id')->get();
+    $logs = TimesheetLog::where($cond)->whereMonth('date', date('m'))->select('id')->get();
 
-        $events = TimesheetEvent::where($cond)
-            ->whereMonth('end_date', date('m'))
-            ->orWhere([['participant', 'like', '%' . Auth::user()->id . '%']])
-            ->select('id')
-            ->get();
+    $events = TimesheetEvent::where($cond)
+        ->whereMonth('end_date', date('m'))
+        ->orWhere([['participant', 'like', '%' . Auth::user()->id . '%']])
+        ->select('id')
+        ->get();
 
-        $log_id = [];
-        foreach ($logs as $log) {
-            $log_id[] = $log->id;
-        }
+    $log_id = [];
+    foreach ($logs as $log) {
+        $log_id[] = $log->id;
+    }
 
-        $event_id = [];
-        foreach ($events as $event) {
-            $event_id[] = $event->id;
-        }
+    $event_id = [];
+    foreach ($events as $event) {
+        $event_id[] = $event->id;
+    }
 
-        $employee =  DB::table('employment as a')
-            ->leftJoin('designation as b', 'a.designation', '=', 'b.id')
-            ->leftJoin('department as c', 'a.department', '=', 'c.id')
-            ->select('a.id', 'c.departmentName', 'b.designationName', 'a.employeeName')
-            ->where([['user_id', $userId]])
-            ->first();
+    $employee =  DB::table('employment as a')
+        ->leftJoin('designation as b', 'a.designation', '=', 'b.id')
+        ->leftJoin('department as c', 'a.department', '=', 'c.id')
+        ->select('a.id', 'c.departmentName', 'b.designationName', 'a.employeeName')
+        ->where([['user_id', $userId]])
+        ->first();
 
-        $input['tenant_id'] = Auth::user()->tenant_id;
-        $input['user_id'] = $userId;
-        $input['month'] = date('M');
-        if (isset($log_id)) {
-            $input['log_id'] = implode(',', $log_id);
-        }
-        if (isset($event_id)) {
-            $input['event_id'] = implode(',', $event_id);
-        }
-        $input['employee_id'] = $employee->id;
-        $input['employee_name'] = $employee->employeeName;
-        $input['department'] = $employee->departmentName;
-        $input['designation'] = $employee->designationName;
-        $input['status'] = 'pending';
-
-        TimesheetApproval::create($input);
-
-        $data['status'] = config('app.response.success.status');
-        $data['type'] = config('app.response.success.type');
-        $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success Sumbit Log';
-
+    $input['tenant_id'] = Auth::user()->tenant_id;
+    $input['user_id'] = $userId;
+    $input['month'] = date('M');
+    if (isset($log_id)) {
+        $input['log_id'] = implode(',', $log_id);
+    }
+    if (isset($event_id)) {
+        $input['event_id'] = implode(',', $event_id);
+    }
+    $input['employee_id'] = $employee->id;
+    $input['employee_name'] = $employee->employeeName;
+    $input['department'] = $employee->departmentName;
+    $input['designation'] = $employee->designationName;
+    
+    // Add a check for existing data in TimesheetApproval with the same month
+    $existing_approval = TimesheetApproval::where('user_id', $userId)->where('month', date('M'))->first();
+    if ($existing_approval) {
+        $data['status'] = config('app.response.error.status');
+        $data['type'] = config('app.response.error.type');
+        $data['title'] = config('app.response.error.title');
+        $data['msg'] = 'You already submit log for this month';
         return $data;
     }
+    
+    // If there is no existing data, create a new one
+    $input['status'] = 'pending';
+    TimesheetApproval::create($input);
+
+    $data['status'] = config('app.response.success.status');
+    $data['type'] = config('app.response.success.type');
+    $data['title'] = config('app.response.success.title');
+    $data['msg'] = 'Success Sumbit Log';
+
+    return $data;
+}
+
 
     public function timesheetApprovalView()
     {
