@@ -1,9 +1,73 @@
 $(document).ready(function () {
     $(document).on("click", "#viewClaimButton", function () {
+        $("#UpdateClaimCatButton").hide();
+        var id = $(this).data("id");
+
+        function getClaimEntitleById(id) {
+            return $.ajax({
+                url: "/getClaimEntitleById/" + id + "/category",
+            });
+        }
+        var vehicleData = getClaimEntitleById(id);
+
+        vehicleData.done(function (data) {
+            var html = '<tbody class="btgccolor">';
+            for (let index = 0; index < data.length; index++) {
+                const element = data[index];
+
+                html +=
+                    "<tr>" +
+                    "<td>" +
+                    element.id +
+                    "</td>" +
+                    "<td>" +
+                    element.area +
+                    "</td>" +
+                    "<td>" +
+                    element.value +
+                    "</td>" +
+                    "</tr>";
+            }
+            html += "</tbody>";
+            console.log(html);
+            document.getElementById("claimTabless").innerHTML = html;
+        });
+
         $("#claimBenefit").modal("show");
     });
 
     $(document).on("click", "#viewSubsButton", function () {
+        var id = $(this).data("id");
+
+        function getClaimEntitleById(id) {
+            return $.ajax({
+                url: "/getClaimEntitleById/" + id + "/subs",
+            });
+        }
+        var vehicleData = getClaimEntitleById(id);
+
+        vehicleData.done(function (data) {
+            var html = '<tbody class="btgccolor">';
+            for (let index = 0; index < data.length; index++) {
+                const element = data[index];
+
+                html +=
+                    "<tr>" +
+                    "<td>" +
+                    element.id +
+                    "</td>" +
+                    "<td>" +
+                    element.area +
+                    "</td>" +
+                    "<td>" +
+                    element.value +
+                    "</td>" +
+                    "</tr>";
+            }
+            html += "</tbody>";
+            console.log(html);
+            document.getElementById("claimSubss").innerHTML = html;
+        });
         $("#subsModal").modal("show");
     });
 
@@ -17,6 +81,8 @@ $(document).ready(function () {
 
     $(document).on("click", "#viewSubsAddButton", function () {
         var id = $(this).data("id");
+        $("#UpdateSubs").hide();
+        $("#addUpdateSubs").show();
         var vehicleData = getEclaimGeneralById(id);
 
         vehicleData.done(function (data) {
@@ -28,6 +94,8 @@ $(document).ready(function () {
     });
 
     $(document).on("click", "#viewClaimAddButton", function () {
+        $("#addUpdateClaimCatButton").show();
+        $("#UpdateClaimCatButton").hide();
         var id = $(this).data("id");
         var vehicleData = getClaimCategoryById(id);
 
@@ -416,6 +484,7 @@ $(document).ready(function () {
             },
         });
     });
+
     $("#addUpdateClaimCatButton").click(function (e) {
         $("#addUpdateClaimCatForm").validate({
             // Specify validation rules
@@ -432,6 +501,125 @@ $(document).ready(function () {
                     $.ajax({
                         type: "POST",
                         url: "/updateClaimCategory/" + id,
+                        data: data,
+                        dataType: "json",
+                        async: false,
+                        processData: false,
+                        contentType: false,
+                    }).done(function (data) {
+                        swal({
+                            title: data.title,
+                            text: data.msg,
+                            type: data.type,
+                            confirmButtonColor: "#3085d6",
+                            confirmButtonText: "OK",
+                            allowOutsideClick: false,
+                            allowEscapeKey: false,
+                        }).then(function () {
+                            if (data.type == "error") {
+                            } else {
+                                location.reload();
+                            }
+                        });
+                    });
+                });
+            },
+        });
+    });
+
+    function getEntitleClaimDetailById(id) {
+        return $.ajax({
+            url: "/getEntitleClaimDetailById/" + id,
+        });
+    }
+
+    $(document).on("click", "#viewSubsEditButton", function () {
+        $("#UpdateSubs").show();
+        $("#addUpdateSubs").hide();
+        var id = $(this).data("id");
+        var vehicleData = getEntitleClaimDetailById(id);
+
+        vehicleData.done(function (data) {
+            $("#area_name").val(data.area);
+            $("#idAddSubs").val(data.id);
+            $("#valuesubsistence").val(data.value);
+        });
+        $("#editSubsModal").modal("show");
+    });
+
+    $(document).on("click", "#viewClaimEditButton", function () {
+        $("#addUpdateClaimCatButton").hide();
+        $("#UpdateClaimCatButton").show();
+        var id = $(this).data("id");
+        var vehicleData = getEntitleClaimDetailById(id);
+
+        vehicleData.done(function (data) {
+            // console.log(data);
+            $("#claim_catagory").val(data.area);
+            $("#idAddClaim").val(data.id);
+            $("#valueclaim").val(data.claim_value);
+        });
+        $("#editClaimModal").modal("show");
+    });
+
+    $("#UpdateSubs").click(function (e) {
+        $("#addUpdateForm").validate({
+            // Specify validation rules
+            rules: {},
+
+            messages: {},
+            submitHandler: function (form) {
+                requirejs(["sweetAlert2"], function (swal) {
+                    var data = new FormData(
+                        document.getElementById("addUpdateForm")
+                    );
+                    var id = $("#idAddSubs").val();
+
+                    $.ajax({
+                        type: "POST",
+                        url: "/updateEntitleDetail/" + id,
+                        data: data,
+                        dataType: "json",
+                        async: false,
+                        processData: false,
+                        contentType: false,
+                    }).done(function (data) {
+                        swal({
+                            title: data.title,
+                            text: data.msg,
+                            type: data.type,
+                            confirmButtonColor: "#3085d6",
+                            confirmButtonText: "OK",
+                            allowOutsideClick: false,
+                            allowEscapeKey: false,
+                        }).then(function () {
+                            if (data.type == "error") {
+                            } else {
+                                location.reload();
+                            }
+                        });
+                    });
+                });
+            },
+        });
+    });
+
+    $("#UpdateClaimCatButton").click(function (e) {
+        $("#addUpdateClaimCatForm").validate({
+            // Specify validation rules
+            rules: {},
+
+            messages: {},
+            submitHandler: function (form) {
+                requirejs(["sweetAlert2"], function (swal) {
+                    var data = new FormData(
+                        document.getElementById("addUpdateClaimCatForm")
+                    );
+                    var id = $("#idAddClaim").val();
+
+                    $.ajax({
+                        type: "POST",
+                        url: "/updateEntitleDetail/" + id,
                         data: data,
                         dataType: "json",
                         async: false,

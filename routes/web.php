@@ -382,10 +382,15 @@ Route::group(['middleware' => ['web']], function () {
             // timesheet period
             Route::get('/timesheetperiod', 'timesheetperiodView');
 
-            
+
             Route::post('/updateEclaimSettingGeneral', 'updateEclaimSettingGeneral');
             Route::delete('/deleteClaimCategoryContent/{id}', 'deleteClaimCategoryContent');
             Route::post('/updateStatusClaimCategory/{id}/{status}', 'updateStatusClaimCategory');
+
+
+            Route::get('/getClaimEntitleById/{id}/{type}', 'getClaimEntitleById');
+            Route::get('/getEntitleClaimDetailById/{id}', 'getEntitleClaimDetailById');
+            Route::post('/updateEntitleDetail/{id}', 'updateEntitleDetail');
         });
 
         Route::controller(OrganizationController::class)->group(function () {
@@ -461,7 +466,6 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('/eclaimListing', 'eclaimListingView');
             // Route::get('/eclaim/searchAllReport', 'reportAllView');
             Route::post('/eclaim/searchAllReport', 'reportAllView');
-           
         });
         Route::controller(MyTimesheetController::class)->group(function () {
             Route::get('/myTimesheet', 'myTimesheetView');

@@ -16,18 +16,7 @@
                             <th class="text-nowrap">Value</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        @if ($subsistances['subs'])
-                            <?php $no = 1; ?>
-                            @foreach ($subsistances['subs'] as $data)
-                                <tr>
-                                    <td>{{ $no++ }}</td>
-                                    <td>{{ $data->area_name ?? '-' }}</td>
-                                    <td>{{ $data->value ?? '-' }}</td>
-                                </tr>
-                            @endforeach
-                        @endif
-                    </tbody>
+                    <tbody id="claimSubss"></tbody>
                 </table>
             </div>
             <div class="modal-footer">
