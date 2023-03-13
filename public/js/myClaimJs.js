@@ -8,93 +8,45 @@ $("document").ready(function () {
         info: false,
     });
 
-    $("#claimtable").dataTable({
-        searching: true,
-        lengthChange: false,
-        scrollX:true,
-        lengthMenu: [5, 10],
-        responsive: false,
-        info: false,
-        dom: '<"top">rt<"bottom"p><"clear">',
-    });
-    //Get a reference to the new datatable
-    var table = $("#claimtable").DataTable();
-
+    function initializeDataTable(tableSelector, statusSelector) {
+        const table = $(tableSelector).DataTable({
+            searching: true,
+            lengthChange: false,
+            scrollX: true,
+            scrollY: 200,
+            lengthMenu: [5, 10],
+            responsive: false,
+            info: false,
+            dom: '<"top">rt<"bottom"p><"clear">',
+        });
     
-    //Take the category filter drop down and append it to the datatables_filter div.
-    //You can use this same idea to move the filter anywhere withing the datatable that you want.
-    $("#claimtable_filter.dataTables_filter").append($("#Statusclaim"));
-
-    //Get the column index for the Category column to be used in the method below ($.fn.dataTable.ext.search.push)
-    //This tells datatables what column to filter on when a user selects a value from the dropdown.
-    //It's important that the text used here (Category) is the same for used in the header of the column to filter
-    var categoryIndex = 0;
-    $("#claimtable th").each(function (i) {
-        if ($($(this)).html() == "Status") {
-            categoryIndex = i;
+        $(tableSelector + '_filter.dataTables_filter').append($(statusSelector));
+    
+        let categoryIndex = 0;
+        $(tableSelector + ' th').each((i, th) => {
+            if ($(th).html() === 'Status') {
+                categoryIndex = i;
+                return false;
+            }
+        });
+    
+        $.fn.dataTable.ext.search.push((settings, data, dataIndex) => {
+            const selectedItem = $(statusSelector).val();
+            const category = data[categoryIndex];
+            if (!selectedItem) {
+                return true;
+            } else if (category === selectedItem) {
+                return true;
+            }
             return false;
-        }
-    });
-    //Use the built in datatables API to filter the existing rows by the Category column
-    $.fn.dataTable.ext.search.push(function (settings, data, dataIndex) {
-        var selectedItem = $("#Statusclaim").val();
-        var category = data[6];
-        if (selectedItem === "") {
-            return true;
-        } else if (category === selectedItem) {
-            return true;
-        }
-        return false;
-        
-    });
+        });
     
-    
-    
-    //Set the change event for the Category Filter dropdown to redraw the datatable each time
-    //a user selects a new filter.
-    $("#Statusclaim").change(function (e) {
+        $(statusSelector).change(() => table.draw());
         table.draw();
-    });
-    table.draw();
-
-    $("#cashadvancetable").dataTable({
-        searching: true,
-        lengthChange: false,
-        scrollX: true,
-        lengthMenu: [5, 10],
-        responsive: false,
-        info: false,
-        dom: '<"top">rt<"bottom"p><"clear">',
-    });
-
-    var table2 = $("#cashadvancetable").DataTable();
-    //Take the category filter drop down and append it to the datatables_filter div.
-    //You can use this same idea to move the filter anywhere withing the datatable that you want.
-    $("#cashadvancetable_filter.dataTables_filter").append($("#Statuscash"));
-
-    var categoryIndex2 = 0;
-    $("#cashadvancetable th").each(function (i) {
-        if ($($(this)).html() == "Status") {
-            categoryIndex2 = i;
-            return false;
-        }
-    });
+    }
     
-    $.fn.dataTable.ext.search.push(function (settings, data, dataIndex) {
-        var selectedItem2 = $("#Statuscash").val();
-        var category2 = data[6];
-        if (selectedItem2 === "") {
-            return true;
-        } else if (selectedItem2 === category2) {
-            return true;
-        }
-        return false;
-        
-    });
-    $("#Statuscash").change(function (e) {
-        table2.draw();
-    });
-    table2.draw();
+    initializeDataTable('#claimtable', '#Statusclaim');
+    initializeDataTable('#cashadvancetable', '#Statuscash');    
 
     //   $( "#cashnav" ).on( "click", function () {
     // 	setTimeout(function () {
