@@ -5,6 +5,7 @@ namespace App\Service;
 use App\Models\ApprovelRoleGeneral;
 use App\Models\CashAdvanceDetail;
 use App\Models\DomainList;
+use App\Models\EclaimGeneralSetting;
 use App\Models\Employee;
 use App\Models\EmploymentType;
 use App\Models\GeneralClaim;
@@ -133,6 +134,38 @@ class ClaimApprovalService
 
         GeneralClaim::where('id', $id)->update($input);
 
+        $generalClaimData = GeneralClaim::find($id);
+
+        // email notification
+        $setting = EclaimGeneralSetting::where('tenant_id', Auth::user()->tenant_id)->first();
+        if ($setting->notify_user) {
+
+            $ms = new MailService;
+            if ($stage == 'supervisor' && $status == 'recommend') {
+                $ms->approvalEmailMTC($generalClaimData);
+                $ms->approvalEmailMTCForAdmin($generalClaimData);
+            }
+
+            if ($stage == 'a_approval' && $status == 'recommend') {
+                $ms->approvalEmailMTC($generalClaimData);
+                $ms->approvalEmailMTCForAdmin($generalClaimData);
+            }
+
+            if ($stage == 'f_approval' && $status == 'recommend') {
+                $ms->approvalEmailMTC($generalClaimData);
+            }
+
+            if (in_array($stage, ['supervisor', 'f_approval', 'a_approval']) && $status == 'reject') {
+                $ms->rejectEmailMTC($generalClaimData);
+                // $ms->approvalEmailMTCForAdmin($generalClaimData);
+
+            }
+            if (in_array($stage, ['supervisor', 'f_approval', 'a_approval']) && $status == 'amend') {
+                $ms->amendEmailMTC($generalClaimData);
+                // $ms->approvalEmailMTCForAdmin($generalClaimData);
+            }
+        }
+
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
@@ -153,6 +186,37 @@ class ClaimApprovalService
         $input[$stage] = $status;
 
         GeneralClaimDetail::where('id', $id)->update($input);
+
+        // email notification
+        $setting = EclaimGeneralSetting::where('tenant_id', Auth::user()->tenant_id)->first();
+        if ($setting->notify_user) {
+            $generalClaimData = GeneralClaim::find($id);
+
+            $ms = new MailService;
+            if ($stage == 'supervisor' && $status == 'recommend') {
+                $ms->approvalEmailMTC($generalClaimData);
+                $ms->approvalEmailMTCForAdmin($generalClaimData);
+            }
+
+            if ($stage == 'a_approval' && $status == 'recommend') {
+                $ms->approvalEmailMTC($generalClaimData);
+                $ms->approvalEmailMTCForAdmin($generalClaimData);
+            }
+
+            if ($stage == 'f_approval' && $status == 'recommend') {
+                $ms->approvalEmailMTC($generalClaimData);
+            }
+
+            if (in_array($stage, ['supervisor', 'f_approval', 'a_approval']) && $status == 'reject') {
+                $ms->rejectEmailMTC($generalClaimData);
+                // $ms->approvalEmailMTCForAdmin($generalClaimData);
+
+            }
+            if (in_array($stage, ['supervisor', 'f_approval', 'a_approval']) && $status == 'amend') {
+                $ms->amendEmailMTC($generalClaimData);
+                // $ms->approvalEmailMTCForAdmin($generalClaimData);
+            }
+        }
 
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
@@ -460,6 +524,15 @@ class ClaimApprovalService
         $input['status'] = 'paid';
 
         GeneralClaim::where('id', $id)->update($input);
+
+        // email notification
+        $setting = EclaimGeneralSetting::where('tenant_id', Auth::user()->tenant_id)->first();
+        if ($setting->notify_user) {
+            $generalClaimData = GeneralClaim::find($id);
+
+            $ms = new MailService;
+            $ms->paidEmailMTC($generalClaimData);
+        }
 
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');

@@ -90,7 +90,7 @@ class myClaimService
 
         // get supervisor detail to send email
         $ms = new MailService;
-        $ms->emailToSupervisorClaimGNC();
+        $ms->emailToSupervisorClaimGNC($generalClaimData);
 
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
@@ -591,30 +591,30 @@ class myClaimService
 
     public function getEntitlementByJobGradeCar($id = '')
     {
-        
+
         $jobGrade = Employee::where('user_id', $id)->value('jobGrade');
         $entitle = EntitleGroup::where('job_grade', $jobGrade)->value('id');
         $car = TransportMillage::where('entitle_id', $entitle)
-                                    ->where('type', 'car')
-                                    ->get();
+            ->where('type', 'car')
+            ->get();
 
         //pr($car);
 
-        
+
         return $car;
     }
     public function getEntitlementByJobGradeMotor($id = '')
     {
-        
+
         $jobGrade = Employee::where('user_id', $id)->value('jobGrade');
         $entitle = EntitleGroup::where('job_grade', $jobGrade)->value('id');
         $motor = TransportMillage::where('entitle_id', $entitle)
-                                    ->where('type', 'motor')
-                                    ->get();
+            ->where('type', 'motor')
+            ->get();
 
         //pr($car);
 
-        
+
         return $motor;
     }
 
@@ -638,6 +638,12 @@ class myClaimService
         $claim['status'] = $status;
 
         GeneralClaim::where([['tenant_id', Auth::user()->tenant_id], ['id', $id]])->update($claim);
+
+        $generalClaimData = GeneralClaim::find($id);
+
+        // get supervisor detail to send email
+        $ms = new MailService;
+        $ms->emailToSupervisorClaimGNC($generalClaimData);
 
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');

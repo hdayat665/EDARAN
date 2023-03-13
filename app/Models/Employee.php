@@ -26,4 +26,14 @@ class Employee extends Authenticatable
     {
         return $this->belongsTo(UserProfile::class, 'user_id', 'user_id');
     }
+
+    public function designation()
+    {
+        return $this->belongsTo(Designation::class, 'designation', 'id');
+    }
+
+    public function department()
+    {
+        return $this->belongsTo(Department::class, 'department', 'id');
+    }
 }
