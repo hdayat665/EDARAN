@@ -344,7 +344,7 @@
                         </div>
                     </div>
                     <div class="row p-2">
-                        {{-- <div class="col-sm-6" id="locationByProjectEditEventHide">
+                        <div class="col-sm-6" id="locationByProjectEditEventHide">
                             <label for="firstname" class="form-label">Location*</label>
                             <select class="selectpicker form-select" id="addneweventprojectlocsearchedit" name="location" aria-label="Default select example">
                                 <option class="form-label" value="">Please Select</option>
@@ -359,8 +359,7 @@
                             <select class="selectpicker form-select" id="location_by_project" name="location_by_project" aria-label="Default select example">
 
                             </select>
-                        </div> --}}
-                        
+                        </div>
                         <div class="col-sm-6">
                             <label for="issuing-country" class="form-label">Project</label>
                             <select class="selectpicker form-select" id="addneweventselectprojectedit" aria-label="Default select example" name="project_id">
@@ -370,10 +369,6 @@
                                 <option class="form-label" value="{{$project->id}}">{{$project->project_name}}</option>
                                 @endforeach
                             </select>
-                        </div>
-                        <div class="col-sm-6" id="venueaddpehal">
-                            <label class="form-label">Venue</label>
-                            <input type="text" class="form-control" id="editvenue" name="venue">
                         </div>
                     </div>
                     <div class="row p-2">

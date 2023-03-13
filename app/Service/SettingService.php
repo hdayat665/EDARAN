@@ -1271,17 +1271,17 @@ class SettingService
     {
         $logs = TypeOfLogs::find($id);
         // $naim = TypeOfLogs::find($id);
-        $logsid = ActivityLogs::where('logs_id', $id);
+        $naim = ActivityLogs::where('logs_id', $id);
 
 
-        if (!$logs && !$logsid) {
+        if (!$logs && !$naim) {
             $data['status'] = config('app.response.error.status');
             $data['type'] = config('app.response.error.type');
             $data['title'] = config('app.response.error.title');
             $data['msg'] = 'logs not found';
         } else {
             $logs->delete();
-            $logsid->delete();
+            $naim->delete();
 
             $data['status'] = config('app.response.success.status');
             $data['type'] = config('app.response.success.type');

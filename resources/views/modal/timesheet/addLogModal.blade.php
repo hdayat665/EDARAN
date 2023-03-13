@@ -21,7 +21,7 @@
                         <div class="col-sm-6">
                             <label for="lastname" class="form-label" >Date*</label>
                             <div class="">
-                                <input type="text" class="form-control" placeholder="YYYY-MM-DD" name="date" id="dateaddlog" value="<?php echo date('Y-m-d'); ?>" />
+                                <input type="text" class="form-control" placeholder="YYYY-MM-DD" name="date" id="dateaddlog" />
                                 <!-- <div class="input-group-text"><i class="fa fa-calendar"></i></div> -->
                             </div>
                         </div>
@@ -45,18 +45,6 @@
                                 <option class="form-label" value="2">Activity</option>
                             </select>
                         </div>
-                        
-                            <div class="col-sm-6" id="listproject" style="display:none">
-                                <label for="Office-Log" class="form-label">My Project*</label>
-                                <select class="form-select" id="officeLogProject" name="office_log_project" aria-label="Default select example">
-                                    <option class="form-label" value="">Please Choose</option>
-                                    <?php $projects = project_memberaddl($user_id) ?>
-                                    @foreach ($projects as $project)
-                                    <option value="{{$project->id}}">{{$project->project_name}} - {{$project->project_code}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        
                     </div>
                     <div class="row p-2">
                         <div class="col-sm-4">
@@ -114,13 +102,27 @@
                                 @endforeach
                             </select> 
                         </div>
-                        <div class="col-sm-6" id="locationByProjectShow" style="display: none">
+                        <div class="col-sm-6" id="locationByProjectShow">
                             <label for="issuing-country" class="form-label">Project Location*</label>
                             <select class="selectpicker form-select" id="projectLocationOffice" name="project_location_office" aria-label="Default select example">
                                 
                             </select>
                         </div>
                     </div>
+                    
+                    <div class="row p-2">
+                        <div class="col-sm-6" id="listproject" style="display:none">
+                            <label for="Office-Log" class="form-label">My Project*</label>
+                            <select class="form-select" id="officeLogProject" name="office_log_project" aria-label="Default select example">
+                                <option class="form-label" value="">Please Choose</option>
+                                <?php $projects = project_memberaddl($user_id) ?>
+                                @foreach ($projects as $project)
+                                <option value="{{$project->id}}">{{$project->project_name}} - {{$project->project_code}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    
                     <div class="row p-2">
                         <div class="col-sm-6">
                           <label for="gender" class="form-label">Description</label>

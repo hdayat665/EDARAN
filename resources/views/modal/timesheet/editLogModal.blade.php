@@ -10,7 +10,7 @@
                     <div class="row p-2">
                         <div class="col-sm-6">
                             <label for="firstname" class="form-label">Type Of Log*</label>
-                            <select class="form-select" id="typeoflogedit" name="type_of_log" aria-label="Default select example" style="pointer-events:none;background:#e9ecef;">
+                            <select class="form-select" id="typeoflogedit" name="type_of_log" aria-label="Default select example">
                                 <option class="form-label" value="" selected>Please Choose </option>
                                 <option class="form-label" value="1">Home</option>
                                 <option class="form-label" value="2">Office</option>
@@ -27,14 +27,6 @@
                         </div>
                     </div>
                     <div class="row p-2">
-                        <div class="col-sm-6" id="officelogedit" style="display:none">
-                            <label for="Office-Log" class="form-label">Office Log*</label>
-                            <select class="form-select" id="officelog2edit" name="office_log" aria-label="Default select example" style="pointer-events:none;background:#e9ecef;">
-                                <option class="form-label" value="" selected>Please Choose*</option>
-                                <option class="form-label" value="1">My Project</option>
-                                <option class="form-label" value="2">Activity</option>
-                            </select>
-                        </div>
                         <div class="col-sm-6" id="myprojectedit" style="display:none">
                             <label for="Office-Log" class="form-label">My Project*</label>
                             <select class="form-select" id="project_id_edit" name="project_id" aria-label="Default select example">
@@ -45,7 +37,14 @@
                                 @endforeach
                             </select>
                         </div>
-                        
+                        <div class="col-sm-6" id="officelogedit" style="display:none">
+                            <label for="Office-Log" class="form-label">Office Log*</label>
+                            <select class="form-select" id="officelog2edit" name="office_log" aria-label="Default select example">
+                                <option class="form-label" value="" selected>Please Choose*</option>
+                                <option class="form-label" value="1">My Project</option>
+                                <option class="form-label" value="2">Activity</option>
+                            </select>
+                        </div>
                     </div>
                     <div class="row p-2">
                         <div class="col-sm-4">
@@ -63,7 +62,7 @@
                             <input type="text" readonly id="total_hour" name="total_hour" class="form-control" aria-describedby="dob">
                             <input type="hidden" readonly id="id" class="form-control" aria-describedby="dob">
                         </div>
-                        <div class="row p-2" id="activity_location_edit">
+                        <div class="row p-2" id="activity_location_edit" >
                             <div class="col-sm-6" id="activityByProjectEditHide" style="display: none">
                                 <label for="issuing-country" class="form-label">Activity Name*</label>
                                 <select class="form-select" id="activity_name_edit1" name="activity_name">
@@ -73,28 +72,16 @@
                                     <option value="{{$activity->id}}">{{$activity->activity_name}}</option>
                                     @endforeach
                                 </select>
-                                
                             </div>
-                            <div class="col-sm-6" id="activityByProjectEditHide1" style="display: none">
-                                <label for="issuing-country" class="form-label">Activity Name*</label>
-                                <select class="form-select" id="activity_name_edit2" name="activity_name">
-                                    <option class="form-label" value="">Please Choose by project123 </option>
-                                    <?php $activitys = activityName1($department_id) ?> 
-                                    @foreach ($activitys as $activity)
-                                    <option value="{{$activity->id}}">{{$activity->activity_name}}</option>
-                                    @endforeach
-                                </select>
-                                
-                            </div>
-                            {{-- <div class="col-sm-6" id="activityByProjectEditShow">
+                            <div class="col-sm-6" id="activityByProjectEditShow">
                                 <label for="issuing-country" class="form-label">Activity Name*</label>
                                 <select class="form-select" id="activityOfficeEdit" name="activity_office" >
     
                                 </select>
-                            </div> --}}
+                            </div>
 
                             <div class="col-sm-6" id="locationByProjectEditHide" style="display: none">
-                                <label for="issuing-country" class="form-label">Project Location</label>
+                                <label for="issuing-country" class="form-label">Project Location*</label>
                                 <select class="form-select" id="projectlocsearchedit" name="project_location" aria-label="Default select example">
                                     <option class="form-label" value="">List All Project location</option>
                                     <?php $projectLocations = projectLocation() ?>
@@ -103,7 +90,7 @@
                                     @endforeach
                                 </select>
                             </div>
-                            <div class="col-sm-6" id="locationByProjectEditShow" style="display: none">
+                            <div class="col-sm-6" id="locationByProjectEditShow">
                                 <label for="issuing-country" class="form-label">Project Location*</label>
                                 <select class="selectpicker form-select" id="projectLocationOfficeEdit" name="project_location_office" aria-label="Default select example">
     
@@ -124,9 +111,11 @@
                         </div>
                     </div>
                     
-                    <div class="row p-2" style="display: none">
+                    <div class="row p-2">
+                        
+                        
                             {{-- duration purpose --}}
-                            <div id="" >
+                            <div id="" style="display: none">
                                 <div class="row p-2">
                                     <div class="col-md-4">
                                         <label class="form-label" >Start date</label>

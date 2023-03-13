@@ -2,12 +2,6 @@
 
 $(document).ready(function() {
 
-    document.getElementById("yearsub").value = new Date().getFullYear();
-
-  var monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-  var d = new Date();
-  document.getElementById("monthsub").value = monthNames[d.getMonth()];
-
     $("#datepicker-joindate").datepicker({
         todayHighlight: true,
         autoclose: true,
@@ -261,21 +255,6 @@ $(document).ready(function() {
 
             locationOffice.done(function(data) {
                 var select = document.getElementById("projectLocationOfficeEdit");
-                select.innerHTML = '<option value="">Please Choose</option>';
-                for (let i = 0; i < data.length; i++) {
-                    const location = data[i];
-                    var opt = document.createElement("option");
-                    opt.value = location['id'];
-                    opt.text = location['location_name'];
-                    select.appendChild(opt);
-                }
-            });
-
-
-            var locationOffice = getLocationByProjectId(projectId);
-
-            locationOffice.done(function(data) {
-                var select = document.getElementById("projectlocsearchedit");
                 select.innerHTML = '<option value="">Please Choose</option>';
                 for (let i = 0; i < data.length; i++) {
                     const location = data[i];
@@ -968,56 +947,37 @@ $(document).ready(function() {
                         logData.done(function(data) {
                             // console.log(data);
 
-                            
-                            
+
+
                             if (data.type_of_log == '3') {
-                                $('#officelogedit').css("display", 'none');
                                 $('#myprojectedit').css("display", 'block');
-                                $('#activityByProjectEditHide1').css("display", 'block');
-                                $('#activityByProjectEditHide').css("display", 'none');
-                                $('#locationByProjlocationByProjectEditShowectEditHide').css("display", 'block');
-                                $('#projectLocationOfficeEdit').css("display", 'block');
-                                $('#locationByProjectEditShow').css("display", 'block');
-                                $('#locationByProjectEditHide').css("display", 'block');
-                                $('#locationByProjectEditShow').css("display", 'block');
-                                
-                                
-                                
-                              } else if (data.type_of_log == '1' || data.type_of_log == '4') {
-                                $('#officelogedit').css("display", 'none');
                                 $('#activityByProjectEditHide').css("display", 'block');
-                                $('#activityByProjectEditHide1').css("display", 'none');
-                                $('#myprojectedit').css("display", 'none');
-                                
+                                $('#locationByProjectEditHide').css("display", 'block');
+                              } else if (data.type_of_log == '1' || data.type_of_log == '4') {
+                                $('#activityByProjectEditHide').css("display", 'block');
                               } else if (data.type_of_log == '2') {
-                                $('#officelogedit').css("display", 'block');
-                                // var display11 = $("#activityByProjectEditHide").css("display");
-                                $('#activityByProjectEditHide1').css("display", 'block');
-                                $('#projectLocationOfficeEdit').css("display", 'block');
+                                var display10 = $("#officelogedit").css("display");
+                                var display11 = $("#activityByProjectEditHide").css("display");
+                                var display12 = $("#locationByProjectEditHide").css("display");
                               
                                 // Add another condition
                                 if (data.office_log == '1') {
                                     
                                   $('#myprojectedit').css("display", 'block');
-                                  $('#activityByProjectEditHide1').css("display", 'block');
+                                  $('#activityByProjectEditHide').css("display", 'block');
                                   $("#locationByProjectEditHide").css("display",'block');
-                                  $('#officelogedit').css("display", 'block');
-                                  $('#activityByProjectEditHide').css("display", 'none');
                                 }
 
                                 if (data.office_log == '2') {
                                     $('#activityByProjectEditHide').css("display", 'block');
                                     $('#officelogedit').css("display", 'block');
-                                    $('#myprojectedit').css("display", 'none');
-                                    $('#activityByProjectEditHide1').css("display", 'none');
                                     
                                   }
                               } else {
                                 $('#myprojectedit').css("display", 'none');
                                 $('#activityByProjectEditHide').css("display", 'none');
                                 $('#locationByProjectEditHide').css("display", 'none');
-                                // $('#officelogedit').css("display", 'none');
-                                $('#locationByProjectEditHide1').css("display", 'none');
+                                $('#officelogedit').css("display", 'none');
                               }
                               
 
@@ -1033,16 +993,10 @@ $(document).ready(function() {
                             $("#dateaddlogedit").val(data.date);
                             $("#project_id_edit").val(data.project_id);
                             $("#officeLogProjectEdit").val(data.project_id);
-                            
-                            // $('#projectlocsearchedit').val(data.project_location);
-                            // projectlocsearchedit
-                            $("#activity_name_edit2").val(data.activity_name);
                             $("#activity_name_edit1").val(data.activity_name);
                             $("#starttimeedit").val(data.start_time);
-                            
-                            // $('#projectLocationOfficeEdit').picker('set', data.project_location);
                             $('#projectlocsearchedit').picker('set', data.project_location);
-                            // $('#projectlocsearchedit').picker('set', data.project_location);
+                            $('#projectlocsearchedit').picker('set', data.project_location);
                             // $("#projectlocsearchedit").val(data.project_location);
                             $("#exit_project").prop('checked', data.exit_project);
                             $("#endtimeedit").val(data.end_time);
@@ -1564,41 +1518,11 @@ $(document).ready(function() {
     $('#addneweventselectproject').picker({ search: true });
     $(function() {
         $("#starttime").mdtimepicker({
-            showMeridian: true,
+            showMeridian: false,
         });
-        
-        var now = new Date();
-        var hours = now.getHours();
-        var meridian = hours >= 12 ? "PM" : "AM";
-        hours = hours % 12;
-        hours = hours ? hours : 12; // convert 0 to 12
-        var minutes = now.getMinutes();
-        
-       
-        if (minutes < 10) {
-            minutes = "0" + minutes;
-        }
-        
-        $("#starttime").val(hours + ":" + minutes + " " + meridian);
-        
-          
-          
-          $("#endtime").mdtimepicker({
-            showMeridian: true,
-          });
-          
-          var now = new Date();
-          now.setHours(now.getHours() + 1);
-          var hours = now.getHours();
-          var meridian = hours >= 12 ? "PM" : "AM";
-          hours = hours % 12;
-          hours = hours ? hours : 12; // convert 0 to 12
-          var minutes = now.getMinutes();
-          if (minutes < 10) {
-            minutes = "0" + minutes;
-        }
-          $("#endtime").val(hours + ":" + minutes + " " + meridian);
-          
+        $("#endtime").mdtimepicker({
+            showMeridian: false,
+        });
 
         $('#daystart,#dayend').datepicker({
             format:'yyyy/mm/dd',
@@ -1658,7 +1582,6 @@ $(document).ready(function() {
         } else {
             $("#officelog").hide();
             $("#listproject").hide();
-            
 
         }
     });
@@ -1667,25 +1590,16 @@ $(document).ready(function() {
             $("#myproject").show();
             $("#activityByProjectHide").show();
             $("#locationByProjectHide").show();
-            $("#locationByProjectHide").show();
-            
             
             
             // $("#activity_locationadd").show();
             
         } else {
-            $("#activityByProjectEditHide1").show();
             $("#myproject").hide();
             $("#listproject").hide();
             // $("#activity_locationadd").hide();
             $("#activityByProjectHide").show();
             $("#locationByProjectHide").hide();
-            // $("#activityLogs").show();
-            $("#activityByProjectShow").hide();
-            $("#locationByProjectShow").hide();
-            
-            
-            
         }
     });
 
@@ -1879,7 +1793,7 @@ $(document).ready(function() {
             $("#officelogedit").show();
             // $("#project_id_edit").hide();
             // $("#locationByProjectEditHide").show();
-            locationByProjectEditShow
+            
             
         } else {
             $("#officelogedit").hide();
@@ -1896,11 +1810,6 @@ $(document).ready(function() {
             // $("#activityByProjectEditHide").hide();
             $("#activityByProjectEditHide").show();
             $("#locationByProjectEditHide").show();
-            $("#activityByProjectEditHide1").show();
-            $("#locationByProjectEditShow").show();
-            
-            
-            
             
             
             
@@ -2108,26 +2017,6 @@ $(document).ready(function() {
         });
     });
 
-    $("#logduration,#daystart,#dayend,#starttime,#endtime").change(function() {
-        var startdt = new Date($("#daystart").val() + " " + $("#starttime").val());
-        var enddt = new Date($("#dayend").val() + " " + $("#endtime").val());
-        var diff = enddt - startdt;
-        var days = Math.floor(diff / (1000 * 60 * 60 * 24));
-        diff -= days * (1000 * 60 * 60 * 24);
-        var hours = Math.floor(diff / (1000 * 60 * 60));
-        diff -= hours * (1000 * 60 * 60);
-        var mins = Math.floor(diff / (1000 * 60));
-        diff -= mins * (1000 * 60);
-        $("#logduration").val(hours + " : " + mins + " : " + "0" );
-      });
-      
-      // Trigger the change event on page load to update the duration initially
-      $(document).ready(function() {
-        $("#logduration").trigger("change");
-      });
-      
-      
-
 });
     $("#duration,#starteventdate,#starteventtime,#endeventdate,#endeventtime").focus(function () {
 
@@ -2153,7 +2042,27 @@ $(document).ready(function() {
 
     
 
+     $("#logduration,#daystart,#dayend,#starttime,#endtime").focus(function () {
 
+        var startdt = new Date($("#daystart").val() + " " + $("#starttime").val());
+        
+        var enddt = new Date($("#dayend").val() + " " + $("#endtime").val());
+    
+        var diff = enddt - startdt;
+        
+        var days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        diff -=  days * (1000 * 60 * 60 * 24);
+        
+        var hours = Math.floor(diff / (1000 * 60 * 60));
+        diff -= hours * (1000 * 60 * 60);
+        
+        var mins = Math.floor(diff / (1000 * 60));
+        diff -= mins * (1000 * 60);
+        
+        $("#logduration").val( days + " days : " + hours + " hours : " + mins + " minutes ");
+        
+    
+         });
 
          //update total duration
          $("#total_hour,#daystartedit,#dayendedit,#starttimeedit,#endtimeedit").focus(function () {
@@ -2214,10 +2123,10 @@ $(document).on("click", "#confirmsubmitb", function () {
         // console.log('')
         var year = data.date.substr(0, 4);
         var month = data.date.substr(5, 2); 
-        // $("#fullname").val(data.fullName);
-        // $("#year").val(year);
-        // $("#month").val(month);
-        // $("#idtv").val(data.id);
+        $("#fullname").val(data.fullName);
+        $("#year").val(year);
+        $("#month").val(month);
+        $("#idtv").val(data.id);
     });
     $("#confirmsubmit").modal("show");
 });

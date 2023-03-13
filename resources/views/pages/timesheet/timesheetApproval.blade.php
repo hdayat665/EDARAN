@@ -18,7 +18,7 @@
                     <div class="row p-2" style="display: none" id="filterform">
                         <h4>Filter</h4>
                         <div class="col-sm-2">
-                            <label for="emergency-firstname" class="form-label">Employee Name</label>
+                            <label for="emergency-firstname" class="form-label">Employer Name</label>
                             <select class="form-select" id="employeesearch" name="employee_name"  data-default-value="">
                                 <option class="form-label" value="" >Please Select</option>
                                 <?php $employees = getEmployee() ?>
@@ -70,9 +70,9 @@
                             <label for="emergency-firstname" class="form-label">Status</label>
                             <select class="form-select" id="statussearch" name="status" data-default-value="">
                                 <option class="form-label" value="">Please Select</option>
-                                <option class="form-label" {{($statusId == 'pending') ? 'selected="selected"' : ''}} value="pending">AWAITING APPROVAL</option>
+                                <option class="form-label" {{($statusId == 'cancel') ? 'selected="selected"' : ''}} value="cancel">CANCEL</option>
                                 <option class="form-label" {{($statusId == 'approve') ? 'selected="selected"' : ''}} value="approve">APPROVE</option>
-                                <option class="form-label" {{($statusId == 'amend') ? 'selected="selected"' : ''}} value="amend">AMENDED</option>
+                                <option class="form-label" {{($statusId == 'reject') ? 'selected="selected"' : ''}} value="reject">REJECT</option>
                             </select>
                         </div>
                         <div class="col-sm-1">

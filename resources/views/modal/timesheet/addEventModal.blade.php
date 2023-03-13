@@ -343,11 +343,11 @@
                                 @endforeach
                             </select>
                         </div>
-                        <div class="col-sm-6" id="venueaddpehal">
+                        {{-- <div class="col-sm-6" id="venueaddpehal">
                             <label class="form-label">Venue</label>
                             <input type="text" class="form-control" id="" name="venue">
-                        </div>
-                            {{-- <div class="col-sm-6" id="locationByProjectAddEventHide">
+                        </div> --}}
+                            <div class="col-sm-6" id="locationByProjectAddEventHide">
                                 <label for="firstname" class="form-label">Location*</label>
                                 <select class="selectpicker form-select" name="location" id="addneweventprojectlocsearch" aria-label="Default select example">
                                     <option class="form-label" value="">Please Select</option>
@@ -360,7 +360,7 @@
                             <div class="col-sm-6" id="locationByProjectAddEventShow">
                                 <label for="issuing-country" class="form-label">Location*</label>
                                 <select class="selectpicker form-select" id="location_by_project_add" name="location_by_project" aria-label="Default select example"></select>
-                            </div> --}}
+                            </div>
                     </div>
                     
                     
