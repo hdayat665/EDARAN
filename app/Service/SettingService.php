@@ -17,6 +17,7 @@ use App\Models\EclaimGeneralSetting;
 use App\Models\Employee;
 use App\Models\EmploymentType;
 use App\Models\EntitleGroup;
+use App\Models\EntitleSubsBenefit;
 use App\Models\JobGrade;
 use App\Models\News;
 use App\Models\Policy;
@@ -1546,8 +1547,8 @@ class SettingService
         $input = $r->input();
 
         date_default_timezone_set("Asia/Kuala_Lumpur");
-        $newsData = EntitleGroup::where([['tenant_id', Auth::user()->tenant_id], ['group_name', $input['group_name']]])->first();
-        if ($newsData) {
+        $entitle = EntitleGroup::where([['tenant_id', Auth::user()->tenant_id], ['group_name', $input['group_name']]])->first();
+        if ($entitle) {
             $data['msg'] = 'Entitle Group already exists.';
             $data['status'] = config('app.response.error.status');
             $data['type'] = config('app.response.error.type');
@@ -1576,7 +1577,7 @@ class SettingService
         if ($input['car_price']) {
             foreach ($input['car_price'] as $key => $data) {
                 if ($input['car_price'][$key] || $input['car_km'][$key]) {
-                    $car[] = [
+                    $car = [
                         'price' => $input['car_price'][$key],
                         'km' => $input['car_km'][$key],
                         'order_km' => $input['order_km'][$key],
@@ -1585,6 +1586,7 @@ class SettingService
                         'tenant_id' => Auth::user()->tenant_id,
                         'user_id' => Auth::user()->id,
                     ];
+                    TransportMillage::create($car);
                 }
             }
         }
@@ -1592,7 +1594,7 @@ class SettingService
         if ($input['motor_price']) {
             foreach ($input['motor_price'] as $key => $data) {
                 if ($input['motor_price'][$key] || $input['motor_km'][$key]) {
-                    $motor[] = [
+                    $motor = [
                         'price' => $input['motor_price'][$key],
                         'km' => $input['motor_km'][$key],
                         'order_km' => $input['order_km'][$key],
@@ -1601,12 +1603,27 @@ class SettingService
                         'tenant_id' => Auth::user()->tenant_id,
                         'user_id' => Auth::user()->id,
                     ];
+                    TransportMillage::create($motor);
                 }
             }
         }
 
-        TransportMillage::insert($car);
-        TransportMillage::insert($motor);
+        if ($input['subs']) {
+            foreach ($input['subs']['area'] as $key => $subs) {
+                $subssData = [
+                    'tenant_id' => Auth::user()->tenant_id,
+                    'user_id' => Auth::user()->id,
+                    'entitle_id' => $entitle->id,
+                    'area' => $subs,
+                    'value' => $input['subs']['value'][$key],
+                    'type' => $input['subs']['type'][$key],
+                ];
+
+                EntitleSubsBenefit::create($subssData);
+            }
+        }
+
+
 
         $return['status'] = config('app.response.success.status');
         $return['type'] = config('app.response.success.type');
@@ -1640,7 +1657,7 @@ class SettingService
 
         $input = $r->input();
 
-        if ($input['car_price']) {
+        if (!empty($input['car_price'])) {
             foreach ($input['car_price'] as $key => $data) {
                 if ($input['car_price'][$key] || $input['car_km'][$key]) {
                     $car = [
@@ -1656,7 +1673,7 @@ class SettingService
             }
         }
 
-        if ($input['motor_price']) {
+        if (!empty($input['motor_price'])) {
             foreach ($input['motor_price'] as $key => $data) {
                 if ($input['motor_price'][$key] || $input['motor_km'][$key]) {
                     $motor = [
@@ -2233,6 +2250,39 @@ class SettingService
             $data['title'] = config('app.response.success.title');
             $data['msg'] = 'Success Update Content';
         }
+
+        return $data;
+    }
+
+    public function getClaimEntitleById($id = '', $type = '')
+    {
+        $data = EntitleSubsBenefit::where([['tenant_id', Auth::user()->tenant_id], ['type', $type], ['entitle_id', $id]])->get();
+
+        return $data;
+    }
+
+    public function getEntitleClaimDetailById($id = '')
+    {
+        $data = EntitleSubsBenefit::find($id);
+
+        return $data;
+    }
+
+    public function updateEntitleDetail($r, $id = '')
+    {
+        $input = $r->input();
+
+        $detailData = [
+            'area' => $input['area_name'] ?? $input['claim_catagory'],
+            'value' => $input['value'] ?? $input['claim_catagory'],
+        ];
+
+        EntitleSubsBenefit::find($id)->update($detailData);
+
+        $data['status'] = config('app.response.success.status');
+        $data['type'] = config('app.response.success.type');
+        $data['title'] = config('app.response.success.title');
+        $data['msg'] = 'Success update eclaim general setting';
 
         return $data;
     }

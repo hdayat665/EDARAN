@@ -451,6 +451,22 @@ class ClaimApprovalService
 
         CashAdvanceDetail::where('id', $id)->update($input);
 
+        // email notification
+        $setting = EclaimGeneralSetting::where('tenant_id', Auth::user()->tenant_id)->first();
+        if ($setting->notify_user) {
+            $cashAdvanceData = CashAdvanceDetail::find($id);
+
+            $ms = new MailService;
+            if ($stage == 'approver' && $status == 'recommend') {
+                $ms->approvalEmailCA($cashAdvanceData);
+                $ms->approvalEmailCAFinanceApprover($cashAdvanceData);
+            }
+
+            if ($stage == 'f_approval' && $status == 'recommend') {
+                $ms->approvalEmailCA($cashAdvanceData);
+            }
+        }
+
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');

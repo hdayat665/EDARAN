@@ -744,8 +744,8 @@ class SettingController extends Controller
 
         $result['entitys'] = $ss->eclaimEntitleGroupEditView($id);
         $result['transports'] = $ss->getTransportMillage($id);
-        $result['claimCategorys'] = $ss->eclaimCategoryView();
-        $result['subsistances'] = $ss->eclaimGeneralView();
+        $result['claimCategorys'] = $ss->getClaimEntitleById($id, 'category');
+        $result['subsistances'] = $ss->getClaimEntitleById($id, 'subs');
 
         return view('pages.setting.eclaim.editEntitle', $result);
     }
@@ -1171,6 +1171,33 @@ class SettingController extends Controller
         $dlh = new SettingService;
 
         $result = $dlh->updateStatusClaimCategory($id, $status);
+
+        return response()->json($result);
+    }
+
+    public function getClaimEntitleById($id = '', $status = '')
+    {
+        $dlh = new SettingService;
+
+        $result = $dlh->getClaimEntitleById($id, $status);
+
+        return response()->json($result);
+    }
+
+    public function getEntitleClaimDetailById($id = '')
+    {
+        $dlh = new SettingService;
+
+        $result = $dlh->getEntitleClaimDetailById($id);
+
+        return response()->json($result);
+    }
+
+    public function updateEntitleDetail(Request $r, $id = '')
+    {
+        $dlh = new SettingService;
+
+        $result = $dlh->updateEntitleDetail($r, $id);
 
         return response()->json($result);
     }

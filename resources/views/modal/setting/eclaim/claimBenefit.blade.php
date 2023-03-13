@@ -16,18 +16,7 @@
                             <th class="text-nowrap">Value</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        @if ($claimCategorys)
-                            <?php $no = 1; ?>
-                            @foreach ($claimCategorys as $data)
-                                <tr>
-                                    <td>{{ $no++ }}</td>
-                                    <td>{{ $data->claim_catagory ?? '-' }}</td>
-                                    <td>{{ $data->claim_value ?? '-' }}</td>
-                                </tr>
-                            @endforeach
-                        @endif
-                    </tbody>
+                    <tbody id="claimTabless"></tbody>
                 </table>
             </div>
             <div class="modal-footer">

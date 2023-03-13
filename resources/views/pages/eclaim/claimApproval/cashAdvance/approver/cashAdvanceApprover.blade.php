@@ -146,6 +146,36 @@
                 </div>
             </div>
         </div>
+        <style>
+            body {
+                background: radial-gradient(ellipse at center, #fff 0%, #c7c7c7 100%);
+                min-height: 600px;
+            }
+
+            .btn {
+                svg {
+                    vertical-align: inherit;
+                    margin-bottom: -0.15em;
+                }
+
+                rect {
+                    fill: currentcolor;
+                }
+            }
+        </style>
+
+        <div class="container">
+            <div class="row mb-3">
+                <div class="col">
+
+                    <button id="myBtn" class="btn btn-primary" data-button-spinner="getting the banana!">
+                        Monkey Pants
+                    </button>
+                    <button id="myReset" class="btn btn-outline-danger">Stop Spinning</button>
+                </div>
+            </div>
+        </div>
+
     </div>
     @include('modal.eclaimApproval.cashAdvance.caApprover')
 @endsection

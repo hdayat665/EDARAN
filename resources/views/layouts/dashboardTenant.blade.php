@@ -441,7 +441,7 @@
                                     <div class="menu-text text-gray">My Claim</div>
                                 </a>
                             </div>
-                            
+
                             <div class="menu-item has-sub">
 
                                 <a href="javascript:;" class="menu-link">
@@ -564,7 +564,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    
+
                                 </div>
                             </div>
                             <div class="menu-item has-sub">
@@ -1024,88 +1024,87 @@
 </script>
 
 <script>
-var hash = location.hash.replace(/^#/, ""); // ^ means starting, meaning only match the first hash
+    var hash = location.hash.replace(/^#/, ""); // ^ means starting, meaning only match the first hash
     if (hash) {
         $('.nav-tabs a[href="#' + hash + '"]').tab("show");
     }
-    $(".nav-tabs a").on("shown.bs.tab", function (e) {
+    $(".nav-tabs a").on("shown.bs.tab", function(e) {
         window.location.hash = e.target.hash;
     });
 </script>
 
 <script>
-// $(function() {
-//     $('.menu-link').each(function() {
-//         if ($(this).prop('href') === window.location.href ) {
-//             $(this).parents().addClass('active');
-//             $(this).css({
-//                 "background": "linear-gradient(to left,#ececec 0, #ececec 66%, #ececec 100%)",
-//                 "border-radius": "50px",
-//             });
-//         }
-//     })
-// });
+    // $(function() {
+    //     $('.menu-link').each(function() {
+    //         if ($(this).prop('href') === window.location.href ) {
+    //             $(this).parents().addClass('active');
+    //             $(this).css({
+    //                 "background": "linear-gradient(to left,#ececec 0, #ececec 66%, #ececec 100%)",
+    //                 "border-radius": "50px",
+    //             });
+    //         }
+    //     })
+    // });
 
-$(function() {
-    // Get current URL path and assign 'active' class to corresponding menu item
-    var pathname = window.location.pathname;
-    $('.menu-link').each(function() {
-        if ($(this).attr('href') === pathname) {
+    $(function() {
+        // Get current URL path and assign 'active' class to corresponding menu item
+        var pathname = window.location.pathname;
+        $('.menu-link').each(function() {
+            if ($(this).attr('href') === pathname) {
+                $(this).parents('.menu-item').addClass('active');
+                $(this).css({
+                    "background": "linear-gradient(to left,#ececec 0, #ececec 66%, #ececec 100%)",
+                    "border-radius": "50px",
+                });
+            }
+        });
+
+        // Expand submenu of the currently active menu item
+        var activeMenuItem = $('.menu-item.active');
+        if (activeMenuItem.length > 0) {
+            activeMenuItem.find('.menu-submenu').addClass('show');
+        }
+
+        // Add click event listener to menu items
+        $('.menu-link').on('click', function() {
+            // Remove 'active' class from all menu items
+            $('.menu-item').removeClass('active');
+            $('.menu-link').css({
+                "background": "",
+                "border-radius": "",
+            });
+            // Add 'active' class to clicked menu item
             $(this).parents('.menu-item').addClass('active');
             $(this).css({
                 "background": "linear-gradient(to left,#ececec 0, #ececec 66%, #ececec 100%)",
                 "border-radius": "50px",
             });
-        }
+
+            // Expand submenu of clicked menu item
+            $('.menu-submenu').removeClass('show');
+            var subMenu = $(this).siblings('.menu-submenu');
+            if (subMenu.length > 0) {
+                subMenu.addClass('show');
+                return false;
+            }
+        });
     });
 
-    // Expand submenu of the currently active menu item
-    var activeMenuItem = $('.menu-item.active');
-    if (activeMenuItem.length > 0) {
-        activeMenuItem.find('.menu-submenu').addClass('show');
-    }
-
-    // Add click event listener to menu items
-    $('.menu-link').on('click', function() {
-        // Remove 'active' class from all menu items
-        $('.menu-item').removeClass('active');
-        $('.menu-link').css({
-            "background": "",
-            "border-radius": "",
-        });
-        // Add 'active' class to clicked menu item
-        $(this).parents('.menu-item').addClass('active');
-        $(this).css({
-            "background": "linear-gradient(to left,#ececec 0, #ececec 66%, #ececec 100%)",
-            "border-radius": "50px",
-        });
-
-        // Expand submenu of clicked menu item
-        $('.menu-submenu').removeClass('show');
-        var subMenu = $(this).siblings('.menu-submenu');
-        if (subMenu.length > 0) {
-            subMenu.addClass('show');
-            return false;
-        }
-    });
-});
-
-// $(function() {
-//     $('.menu-link').each(function() {
-//         if ($(this).prop('href') === window.location.href ) {
-//             $(this).parents().addClass('active');
-//             $(this).css({
-//                 "background": "linear-gradient(to left,#ececec 0, #ececec 66%, #ececec 100%)",
-//                 "border-radius": "50px",
-//             });
-//             // add active class to the submenu
-//             $(this).parent().siblings('.menu-submenu').addClass('active');
-//         }
-//     });
-//     // // expand the active submenu on page load
-//     // $('.menu-submenu.active').css('display', 'block');
-// });
-
+    // $(function() {
+    //     $('.menu-link').each(function() {
+    //         if ($(this).prop('href') === window.location.href ) {
+    //             $(this).parents().addClass('active');
+    //             $(this).css({
+    //                 "background": "linear-gradient(to left,#ececec 0, #ececec 66%, #ececec 100%)",
+    //                 "border-radius": "50px",
+    //             });
+    //             // add active class to the submenu
+    //             $(this).parent().siblings('.menu-submenu').addClass('active');
+    //         }
+    //     });
+    //     // // expand the active submenu on page load
+    //     // $('.menu-submenu.active').css('display', 'block');
+    // });
 </script>
 
 <script src="/assets/js/require.js" data-main="controller"></script>

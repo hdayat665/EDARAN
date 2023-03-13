@@ -1,4 +1,21 @@
 $(document).ready(function () {
+    // spinner version without timeout
+    // $("[data-button-spinner]").on("click", function () {
+    //     var $this = $(this);
+    //     $this.data("ohtml", $this.html());
+    //     var nhtml =
+    //         "<span class='spinner-border spinner-border-sm' role='status' aria-hidden='true'></span> " +
+    //         this.dataset.buttonSpinner;
+    //     $this.html(nhtml);
+    //     $this.attr("disabled", true);
+    // });
+
+    // Uses data on the element 'ohtml' to reset button back to original state
+    // $("#myReset").on("click", function () {
+    //     $("#myBtn").html($("#myBtn").data("ohtml"));
+    //     $("#myBtn").attr("disabled", false);
+    // });
+
     $("#activetable").dataTable({
         // "responsive": true,
         bLengthChange: false,
@@ -34,6 +51,14 @@ $(document).ready(function () {
     $(
         "#approveButton, #approveButton1, #approveButton2, #approveButton3, #approveButton4"
     ).on("click", function () {
+        var $this = $("[data-button-spinner]");
+        console.log($this.html);
+        $this.data("ohtml", $this.html());
+        var nhtml =
+            "<span class='spinner-border spinner-border-sm' role='status' aria-hidden='true'></span> " +
+            this.dataset.buttonSpinner;
+        $this.html(nhtml);
+        $this.attr("disabled", true);
         // alert("ss");
         var id = $(this).data("id");
         var stage = "approver";
@@ -53,6 +78,8 @@ $(document).ready(function () {
                 processData: false,
                 contentType: false,
             }).done(function (data) {
+                $("#spinner").html($("#approveButton1").data("ohtml"));
+                $("#spinner").attr("disabled", false);
                 swal({
                     title: data.title,
                     text: data.msg,
