@@ -13,6 +13,7 @@ use App\Models\TravelClaim;
 use App\Models\EntitleGroup;
 use App\Models\TransportMillage;
 use App\Models\Employee;
+use App\Models\AppealMtc;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
@@ -30,10 +31,14 @@ class myClaimService
 
         return $data;
     }
-
     public function createGeneralClaim($r, $status = '')
     {
         $input = $r->input();
+
+        if ($_FILES['file_upload']['name']) {
+            $filename = upload($r->file('file_upload'));
+            $filenames = $filename['filename'];
+        }
 
         $generalClaimCount = GeneralClaim::where([['tenant_id', Auth::user()->tenant_id], ['type', 'GNC']])->count();
 
@@ -49,49 +54,63 @@ class myClaimService
         $generalClaim['status'] = $status;
         $generalClaim['year'] = $input['year'];
         $generalClaim['month'] = $input['month'];
-        $generalClaim['total_amount'] = array_sum($input['amount']) ?? '';
+        $generalClaim['total_amount'] = ($input['amount']) ?? '';
 
         GeneralClaim::create($generalClaim);
+
+        $findId = GeneralClaim::where('tenant_id', Auth::user()->tenant_id)
+                                ->orderBy('id', 'DESC')
+                                ->first();
+        
+        
+
         $generalClaimData = GeneralClaim::where('tenant_id', Auth::user()->tenant_id)->orderBy('created_at', 'DESC')->first();
+        
+        $generalDetail = [];
+        $generalDetail['tenant_id'] = Auth::user()->tenant_id;
+        $generalDetail['user_id'] = Auth::user()->id;
+        $generalDetail['general_id'] = $generalClaimData->id;
+        $generalDetail['general_claim_id'] = $generalClaimData->claim_id;
+        $generalDetail['claim_category'] = $input['claim_category'];
+        $generalDetail['applied_date'] = $input['applied_date'];
+        $generalDetail['claim_category_detail'] = $input['claim_category_detail'];
+        $generalDetail['amount'] = $input['amount'];
+        $generalDetail['desc'] = $input['desc'];
+        $generalDetail['file_upload'] = $filenames ?? '';
 
-        $filenames = [];
-        if ($_FILES['file_upload']['name'][0]) {
-            foreach ($r->file('file_upload') as $file) {
-                $filename = upload($file);
-                $filenames[] = $filename['filename'];
-            }
-        }
+        GeneralClaimDetail::create($generalDetail);
 
-        // add to general claim detail
-        foreach ($input['applied_date'] as $key => $value) {
-            if ($filenames) {
-                $file_upload = $filenames[$key];
-            } else {
-                $file_upload = '';
-            }
+        // // add to general claim detail
+        // foreach ($input['applied_date'] as $key => $value) {
+        //     if ($filenames) {
+        //         $file_upload = $filenames[$key];
+        //     } else {
+        //         $file_upload = '';
+        //     }
 
-            $generalDetail[] = [
-                'tenant_id' => Auth::user()->tenant_id,
-                'user_id' => Auth::user()->id,
-                'general_id' => $generalClaimData->id,
-                'general_claim_id' => 'GNC' . $generalClaimCount + 1,
-                'applied_date' => $input['applied_date'][$key],
-                'claim_category' => $input['claim_category'],
-                'claim_category_detail' => $input['claim_category_detail'][$key],
-                'amount' => $input['amount'][$key],
-                'desc' => $input['desc'][$key],
-                'file_upload' => $file_upload,
-                'created_at' => date("Y-m-d H:i:s"),
-                'updated_at' => date("Y-m-d H:i:s"),
-            ];
-        }
+        //     $generalDetail[] = [
+        //         'tenant_id' => Auth::user()->tenant_id,
+        //         'user_id' => Auth::user()->id,
+        //         'general_id' => $generalClaimData->id,
+        //         'general_claim_id' => 'GNC' . $generalClaimCount + 1,
+        //         'applied_date' => $input['applied_date'][$key],
+        //         'claim_category' => $input['claim_category'],
+        //         'claim_category_detail' => $input['claim_category_detail'][$key],
+        //         'amount' => $input['amount'][$key],
+        //         'desc' => $input['desc'][$key],
+        //         'file_upload' => $file_upload,
+        //         'created_at' => date("Y-m-d H:i:s"),
+        //         'updated_at' => date("Y-m-d H:i:s"),
+        //     ];
+        // }
 
-        GeneralClaimDetail::insert($generalDetail);
+        // GeneralClaimDetail::insert($generalDetail);
 
         // get supervisor detail to send email
-        $ms = new MailService;
-        $ms->emailToSupervisorClaimGNC($generalClaimData);
+        // $ms = new MailService;
+        // $ms->emailToSupervisorClaimGNC($generalClaimData);
 
+        $data['id'] = $findId->id;
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
@@ -99,7 +118,7 @@ class myClaimService
 
         return $data;
     }
-
+    
     public function getGeneralDetailData()
     {
         $data = GeneralClaimDetail::where('tenant_id', Auth::user()->tenant_id)->get();
@@ -159,7 +178,6 @@ class myClaimService
 
         return $data;
     }
-
     public function deleteGNCDetail($id)
     {
         $GNCDetail = GeneralClaimDetail::find($id);
@@ -181,7 +199,49 @@ class myClaimService
 
         return $data;
     }
+    
+    public function deletePersonalDetail($id)
+    {
+        $PersonalDetail = PersonalClaim::find($id);
 
+        if (!$PersonalDetail) {
+            $data['status'] = config('app.response.error.status');
+            $data['type'] = config('app.response.error.type');
+            $data['title'] = config('app.response.error.title');
+            $data['msg'] = 'Detail not found';
+        } else {
+            // DB::query("DELETE FROM general_claim_detail WHERE id = $id");
+            $PersonalDetail->delete($id);
+
+            $data['status'] = config('app.response.success.status');
+            $data['type'] = config('app.response.success.type');
+            $data['title'] = config('app.response.success.title');
+            $data['msg'] = 'Success Delete';
+        }
+
+        return $data;
+    }
+    public function deleteTravelDetail($id)
+    {
+        $TravelDetail = TravelClaim::find($id);
+
+        if (!$TravelDetail) {
+            $data['status'] = config('app.response.error.status');
+            $data['type'] = config('app.response.error.type');
+            $data['title'] = config('app.response.error.title');
+            $data['msg'] = 'Detail not found';
+        } else {
+            // DB::query("DELETE FROM general_claim_detail WHERE id = $id");
+            $TravelDetail->delete($id);
+
+            $data['status'] = config('app.response.success.status');
+            $data['type'] = config('app.response.success.type');
+            $data['title'] = config('app.response.success.title');
+            $data['msg'] = 'Success Delete';
+        }
+
+        return $data;
+    }
     public function updateStatusGeneralClaims($id)
     {
         $update = [
@@ -588,6 +648,18 @@ class myClaimService
 
         return $data;
     }
+    public function getFoodByJobGrade($id = '')
+    {
+        
+        $jobGrade = Employee::where('user_id', $id)->value('jobGrade');
+        $entitle = EntitleGroup::where('job_grade', $jobGrade)
+                                ->get();
+
+        //pr($entitle);
+
+        
+        return $entitle;
+    }
 
     public function getEntitlementByJobGradeCar($id = '')
     {
@@ -652,4 +724,91 @@ class myClaimService
 
         return $data;
     }
+    public function createAppealMtc($r)
+    {
+        $input = $r->input();
+        
+        $input['tenant_id'] = Auth::user()->tenant_id;
+        $input['user_id'] = Auth::user()->id;
+        $input['status'] = 'Pending';
+        
+        if ($_FILES['uploadFile']['name']) {
+            $payslip = uploadAppeal($r->file('uploadFile'));
+            $input['uploadFile'] = $payslip['filename'];
+
+            if (!$input['uploadFile']) {
+                unset($input['uploadFile']);
+            }
+        }
+        $existing_appeal = AppealMtc::where('user_id', $input['user_id'])
+        ->where('year', $input['year'])
+        ->where('month', $input['month'])
+        ->first();
+        if ($existing_appeal) {
+            $data['status'] = config('app.response.error.status');
+            $data['type'] = config('app.response.error.type');
+            $data['title'] = config('app.response.error.title');
+            $data['msg'] = 'You already submit this appeal for this month';
+            return $data;
+        }
+
+        AppealMtc::create($input);
+
+        $data['status'] = config('app.response.success.status');
+        $data['type'] = config('app.response.success.type');
+        $data['title'] = config('app.response.success.title');
+        $data['msg'] = 'Success add Vehicle';
+
+        return $data;
+    }
+    
+    public function getAppealData()
+    {
+        $data = AppealMtc::where([
+            ['tenant_id', Auth::user()->tenant_id],
+            ['status', '=', 'pending']
+        ])->get();
+        
+
+        return $data;
+    }
+    public function getHistoryAppealData()
+    {
+        $data = AppealMtc::where([
+            ['tenant_id', Auth::user()->tenant_id],
+            ['status', '!=', 'pending']
+        ])->get();
+        
+
+        return $data;
+    }
+    public function approveAppealMtc($id = '')
+    {
+
+        $claim['status'] = "approved";
+
+        AppealMtc::where([['tenant_id', Auth::user()->tenant_id], ['id', $id]])->update($claim);
+
+        $data['status'] = config('app.response.success.status');
+        $data['type'] = config('app.response.success.type');
+        $data['title'] = config('app.response.success.title');
+        $data['msg'] = 'Success';
+
+        return $data;
+    }
+    public function rejectAppealMtc($id = '')
+    {
+
+        $claim['status'] = "rejected";
+
+        AppealMtc::where([['tenant_id', Auth::user()->tenant_id], ['id', $id]])->update($claim);
+
+        $data['status'] = config('app.response.success.status');
+        $data['type'] = config('app.response.success.type');
+        $data['title'] = config('app.response.success.title');
+        $data['msg'] = 'Success';
+
+        return $data;
+    }
+    
 }

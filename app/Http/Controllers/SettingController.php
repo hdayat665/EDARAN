@@ -718,9 +718,12 @@ class SettingController extends Controller
         $ss = new SettingService;
 
         $result['entitles'] = $ss->eclaimEntitleGroupView();
+
+        $result['transports'] = $ss->getAllTransportMillage();
+        
         $result['subsistances'] = $ss->eclaimGeneralView();
         $result['claimCategorys'] = $ss->eclaimCategoryView();
-
+        //pr($result);
         return view('pages.setting.eclaim.eclaimEntitleGroup', $result);
     }
 

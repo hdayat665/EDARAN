@@ -1629,7 +1629,12 @@ class SettingService
 
         return $data;
     }
+    public function getAllTransportMillage()
+    {
+        $data = TransportMillage::where([['tenant_id', Auth::user()->tenant_id]])->get();
 
+        return $data;
+    }
     public function updateEntitleGroup($r, $id)
     {
 

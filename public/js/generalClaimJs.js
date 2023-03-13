@@ -1,6 +1,88 @@
 $(document).ready(function () {
     $("#cashAdvanceTable").DataTable({});
 
+    $("#createGnc").click(function (e) {
+        $("#createForm").validate({
+            // Specify validation rules
+            rules: {},
+
+            messages: {},
+            submitHandler: function (form) {
+                requirejs(["sweetAlert2"], function (swal) {
+                    var data = new FormData(
+                        document.getElementById("createForm")
+                    );
+
+                    $.ajax({
+                        type: "POST",
+                        url: "/createGeneralClaim",
+                        data: data,
+                        dataType: "json",
+                        async: false,
+                        processData: false,
+                        contentType: false,
+                    }).done(function (data) {
+                        swal({
+                            title: data.title, 
+                            text: data.msg,
+                            type: data.type,
+                            confirmButtonColor: "#3085d6",
+                            confirmButtonText: "OK",
+                            allowOutsideClick: false,
+                            allowEscapeKey: false,
+                        }).then(function () {
+                            if (data.type == "error") {
+                            } else {
+                                window.location.href = "/editGeneralClaimView/" + data.id;
+                            }
+                        });
+                    });
+                });
+            },
+        });
+    });
+
+    // $("#createGnc").click(function (e) {
+    //     $("#createForm").validate({
+    //         // Specify validation rules
+    //         rules: {},
+
+    //         messages: {},
+    //         submitHandler: function (form) {
+    //             requirejs(["sweetAlert2"], function (swal) {
+    //                 var data = new FormData(
+    //                     document.getElementById("createForm")
+    //                 );
+                    
+    //                 $.ajax({
+    //                     type: "POST",
+    //                     url: "/createGeneralClaim",
+    //                     data: data,
+    //                     dataType: "json",
+    //                     async: false,
+    //                     processData: false,
+    //                     contentType: false,
+    //                 }).done(function (data) {
+    //                     swal({
+    //                         title: data.title,
+    //                         text: data.msg,
+    //                         type: data.type,
+    //                         confirmButtonColor: "#3085d6",
+    //                         confirmButtonText: "OK",
+    //                         allowOutsideClick: false,
+    //                         allowEscapeKey: false,
+    //                     }).then(function () {
+    //                         if (data.type == "error") {
+    //                         } else {
+    //                             location.reload();
+    //                         }
+    //                     });
+    //                 });
+    //             });
+    //         },
+    //     });
+    // });
+
     $("#saveButton").click(function (e) {
         $("#addForm").validate({
             // Specify validation rules
@@ -16,7 +98,7 @@ $(document).ready(function () {
                         url: "/createGeneralClaim",
                         data: data,
                         dataType: "json",
-                        async: false,
+                        async: false, 
                         processData: false,
                         contentType: false,
                     }).done(function (data) {
@@ -52,7 +134,7 @@ $(document).ready(function () {
                     var data = new FormData(document.getElementById("addForm"));
 
                     $.ajax({
-                        type: "POST",
+                        type: "POST", 
                         url: "/submitGeneralClaim",
                         data: data,
                         dataType: "json",

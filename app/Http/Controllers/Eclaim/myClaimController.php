@@ -44,9 +44,9 @@ class myClaimController extends Controller
         $data['month_id'] = $month;
         $data['year'] = $year;
         $data['user_id'] = Auth::user()->id;
-
         $data['car'] = $mcs->getEntitlementByJobGradeCar($data['user_id']);
-
+        $data['food'] = $mcs->getFoodByJobGrade($data['user_id']);
+        
         $entitlementArr = json_decode($data['car'], true);
 
         $firstkmcar = null;
@@ -141,6 +141,8 @@ class myClaimController extends Controller
         $data['year'] = $generalClaim->year ?? '';
         $data['user_id'] = Auth::user()->id ?? '';
 
+        $data['food'] = $mcs->getFoodByJobGrade($data['user_id']);
+
         $data['car'] = $mcs->getEntitlementByJobGradeCar($data['user_id']);
 
         $entitlementArr = json_decode($data['car'], true);
@@ -212,7 +214,7 @@ class myClaimController extends Controller
 
 
         
-        // pr($data['entitlement']);
+        //pr($data['food']);
         return view('pages.eclaim.monthClaimEditView', $data);
     }
 
@@ -254,12 +256,36 @@ class myClaimController extends Controller
 
     public function appealMtcView()
     {
-        // $mcs = new myClaimService;
+        $mcs = new myClaimService;
 
-        // $data['claims'] = $mcs->getClaimsData();
-        // $data['cashClaims'] = $mcs->getCashClaimsData();
-
-        return view('pages.eclaim.appealMtc');
+        $data['appealMtc'] = $mcs->getAppealData();
+        $data['historyAppeal'] = $mcs->getHistoryAppealData();
+        // pr($data);
+        return view('pages.eclaim.appealMtc', $data);
     }
 
+    public function createAppealMtc(Request $r)
+    {
+        $ps = new myClaimService;
+
+        $result = $ps->createAppealMtc($r);
+
+        return response()->json($result);
+    }
+    public function approveAppealMtc($id = '')
+    {
+        $mcs = new myClaimService;
+
+        $data = $mcs->approveAppealMtc($id);
+
+        return response()->json($data);
+    }
+    public function rejectAppealMtc($id = '')
+    {
+        $mcs = new myClaimService;
+
+        $data = $mcs->rejectAppealMtc($id);
+
+        return response()->json($data);
+    }
 }

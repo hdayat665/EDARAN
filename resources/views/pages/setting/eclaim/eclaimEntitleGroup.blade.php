@@ -27,7 +27,7 @@
                                 <th class="text-nowrap">Lodging <BR> Allowance</th>
                                 <th class="text-nowrap">Local Hotel</th>
                                 <th class="text-nowrap">Car<BR> Mileage</th>
-                                <th class="text-nowrap">Mcycle<BR> Mileage</th>
+                                <th class="text-nowrap">Motorcycle<BR> Mileage</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -48,9 +48,9 @@
                                         </td>
                                         <td>
                                             <div class="form-check form-switch">
-                                                <input class="form-check-input statusCheck" name="mainCompanion"
-                                                    type="checkbox" data-id="{{ $data->id }}" id="updateStatus"
-                                                    {{ $data->status == '1' ? 'checked' : '' }}>
+          
+                                                <input class="form-check-input" {{ $data->status == 1 ? 'checked' : '' }} name="mainCompanion" type="checkbox" role="switch" data-id="{{ $data->id }}"
+                                                    id="updateStatus">
                                             </div>
                                         </td>
                                         <td><button class="btn btn-primary" id="viewClaimButton"
@@ -66,8 +66,8 @@
                                         {{-- <td>{{ $data->local_hotel_allowance }}</td> --}}
                                         <td>{{ $data->lodging_allowance == 1 ? 'Actual' : 'Input Value' }}</td>
                                         <td>{{ $data->local_hotel_allowance == 1 ? 'Actual' : 'Input Value' }}</td>
-                                        <td>{{ $data->car_millage }}</td>
-                                        <td>{{ $data->motor_millage }}</td>
+                                        <td>{{ getFirstCarMileagebyid($data->id) ?? ''}}</td>
+                                        <td>{{ getFirstMotorMileagebyid($data->id) ?? ''}}</td>
                                     </tr>
                                 @endforeach
                             @endif

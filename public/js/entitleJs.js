@@ -20,7 +20,7 @@ $(document).ready(function () {
         var vehicleData = getEclaimGeneralById(id);
 
         vehicleData.done(function (data) {
-            $("#area_name").val(data.area_name);
+            $("#area_name").val(data.area_name); 
             $("#idAddSubs").val(data.id);
             $("#valuesubsistence").val(data.value);
         });
@@ -338,15 +338,16 @@ $(document).ready(function () {
         }
     });
 
-    $(".statusCheck").on("change", function () {
-        var checkedValue = $(".statusCheck:checked").val();
+    
+    $(document).on("change", "#updateStatus", function () {
         var id = $(this).data("id");
+        var status;
 
-        if (checkedValue) {
-            var status = 1;
+        if ($(this).is(":checked")) {
+            status = 1;
         } else {
-            var status = 2;
-        }
+            status = 2;
+        } 
         console.log(status);
         requirejs(["sweetAlert2"], function (swal) {
             $.ajax({

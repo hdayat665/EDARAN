@@ -73,24 +73,50 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        <?php $monthData = getMyClaimMonth(); ?>
-                                                        @foreach ($monthData as $data)
-                                                            <tr class="odd gradeX">
+                                                    <?php $monthData = getMyClaimMonth(); ?>
+                                                    @foreach ($monthData as $key => $data)
+                                                    <tr class="odd gradeX"> 
+                                                        <?php 
+                                                            $checkMonth = checkingMonthlyClaim($data['year'], $data['month']);
+                                                            $status = checkAppeal($data['year'], $data['month']);
+                                                        ?>
+                                                        @if ($key >= claimDateSetting()->open_claim_duration)
+                                                            @if ($status['status'] == 'approved' && $status['year'] == $data['year'] && $status['month'] == $data['month']) 
                                                                 <td>{{ $data['year'] }}</td>
                                                                 <td>{{ $data['month'] }}</td>
                                                                 <td><span class="badge bg-lime">Open</span></td>
-                                                                <?php $checkMonth = checkingMonthlyClaim($data['year'], $data['month']); ?>
-                                                                @if ($data['month'] == $checkMonth['month'])
-                                                                    <td><a href="/monthClaimEditView/edit/month/{{ $checkMonth['id'] }}" type="button" class="btn btn-primary btn-sm">Update</a></td>
+                                                                <td><a href="/newMonthlyClaimView/{{ $data['value'] }}/{{ $data['year'] }}" type="button" class="btn btn-primary btn-sm">+ Apply</a></td>
+                                                            @else 
+                                                                <td>{{ $data['year'] }}</td>
+                                                                <td>{{ $data['month'] }}</td>
+                                                                <td><span class="badge bg-danger">Expired</span></td>
+                                                                <td><a type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal" data-general="{{ $checkMonth['id']}}" data-year="{{ $data['year'] }}" data-month="{{ $data['month'] }}">Appeal</a></td>
+                                                            @endif
+                                                        @else
+                                                            @if ($data['month'] == $checkMonth['month'])
+                                                                @if ($checkMonth['status'] == 'active')
+                                                                    <td>{{ $data['year'] }}</td>
+                                                                    <td>{{ $data['month'] }}</td>
+                                                                    <td><span class="badge bg-lime">Open</span></td>
+                                                                    <td></td>
                                                                 @else
-                                                                    <td><a href="/newMonthlyClaimView/{{ $data['value'] }}/{{ $data['year'] }}" type="button" class="btn btn-primary btn-sm">+ Apply</a>
-                                                                    </td>
+                                                                    <td>{{ $data['year'] }}</td>
+                                                                    <td>{{ $data['month'] }}</td>
+                                                                    <td><span class="badge bg-lime">Open</span></td>
+                                                                    <td><a href="/monthClaimEditView/edit/month/{{ $checkMonth['id'] }}" type="button" class="btn btn-primary btn-sm">Update</a></td>
                                                                 @endif
-                                                                {{-- <td><button type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal">+ --}}
-                                                                {{-- Appeal</button></td> --}}
-                                                            </tr>
-                                                        @endforeach
-                                                    </tbody>
+                                                            @else
+                                                                <td>{{ $data['year'] }}</td>
+                                                                <td>{{ $data['month'] }}</td>
+                                                                <td><span class="badge bg-lime">Open</span></td>
+                                                                <td><a href="/newMonthlyClaimView/{{ $data['value'] }}/{{ $data['year'] }}" type="button" class="btn btn-primary btn-sm">+ Apply</a></td>
+                                                            @endif
+                                                        @endif
+                                                    </tr>
+                                                @endforeach
+
+                                                </tbody>
+
                                                 </table>
                                             </div>
                                         </div>

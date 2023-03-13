@@ -158,8 +158,49 @@ $("document").ready(function () {
             $("#result1").val(
                 days + " days : " + hours + " hours : " + mins + " minutes "
             );
+            $("#DBF").val(days);
+            $("#DLH").val(days);
+            $("#DDN").val(days);
+            $("#hn").val(days);
+            $("#ln").val(days);
+
+             var a = parseFloat($("#BF").val()); //float
+            var b = parseInt($("#DBF").val());
+            var c = parseFloat($("#LH").val()); //float
+            var d = parseInt($("#DLH").val());
+            var e = parseFloat($("#DN").val()); //float
+            var f = parseInt($("#DDN").val());
+            $("#TS").val(a * b + c * d + e * f);
+
         });
     });
+
+    //  calculate time duration un travelling
+    $("#totalduration,#daystart,#timestart,#dayend,#timeend").focus(
+        function () {
+            var startdt = new Date(
+                $("#daystart").val() + " " + $("#timestart").val()
+            );
+
+            var enddt = new Date(
+                $("#dayend").val() + " " + $("#timeend").val()
+            );
+
+            var diff = enddt - startdt;
+
+            var days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            diff -= days * (1000 * 60 * 60 * 24);
+
+            var hours = Math.floor(diff / (1000 * 60 * 60));
+            diff -= hours * (1000 * 60 * 60);
+
+            var mins = Math.floor(diff / (1000 * 60));
+            diff -= mins * (1000 * 60);
+
+            $("#totalduration").val(hours + " hours : " + mins + " minutes ");
+            
+        }
+    );
 
     
     function calculate(total) {
@@ -208,31 +249,6 @@ $("document").ready(function () {
 
     
     
-//  calculate time duration un travelling
-    $("#totalduration,#daystart,#timestart,#dayend,#timeend").focus(
-        function () {
-            var startdt = new Date(
-                $("#daystart").val() + " " + $("#timestart").val()
-            );
-
-            var enddt = new Date(
-                $("#dayend").val() + " " + $("#timeend").val()
-            );
-
-            var diff = enddt - startdt;
-
-            var days = Math.floor(diff / (1000 * 60 * 60 * 24));
-            diff -= days * (1000 * 60 * 60 * 24);
-
-            var hours = Math.floor(diff / (1000 * 60 * 60));
-            diff -= hours * (1000 * 60 * 60);
-
-            var mins = Math.floor(diff / (1000 * 60));
-            diff -= mins * (1000 * 60);
-
-            $("#totalduration").val(hours + " hours : " + mins + " minutes ");
-        }
-    );
 
     $("#hotelc").change(function () {
         var s = $("#hotelc input:checked")
@@ -242,13 +258,24 @@ $("document").ready(function () {
             .get()
             .join(",");
         if (s.length > 0) {
+            var ss = "100"; // this is the value to check against
+
+            if ($("#htv").val() == ss) {
+                $('#hotelcv').prop('readonly', false);
+            } else {
+                $('#hotelcv').prop('readonly', true);
+            }
+
             $("#hotelcv").val(s);
-            $('#hotelcv').prop('readonly', false);
             $("#hotelcv1").val(s);
+            $('#hn').prop('readonly', false);
+
+            
         } else {
             $("#hotelcv").val("");
             $('#hotelcv').prop('readonly', true);
             $("#hotelcv1").val("0");
+            $('#hn').prop('readonly', true);
         }
     });
     
@@ -261,19 +288,29 @@ $("document").ready(function () {
             .get()
             .join(",");
         if (s.length > 0) {
+            var ss = "100"; // this is the value to check against
+
+            if ($("#ldgv").val() == ss) {
+                $('#lodgingcv').prop('readonly', false);
+            } else {
+                $('#lodgingcv').prop('readonly', true);
+            }
+
             $("#lodgingcv").val(s);
-            $('#lodgingcv').prop('readonly', false);
             $("#lodgingcv1").val(s);
+            $('#ln').prop('readonly', false);
         } else {
             $("#lodgingcv").val("");
             $('#lodgingcv').prop('readonly', true);
             $("#lodgingcv1").val("0");
+            $('#ln').prop('readonly', true);
+
         }
     });
     
 
     // calculate total subsistence & accomadation
-    $("#BF,#DBF,#LH,#DLH,#DN,#DDN,#TS").change(function () {
+    $("#BF,#DBF,#LH,#DLH,#DN,#DDN,#TS").focus(function () {
         var a = parseFloat($("#BF").val()); //float
         var b = parseInt($("#DBF").val());
         var c = parseFloat($("#LH").val()); //float
@@ -562,6 +599,87 @@ $("document").ready(function () {
                     } else {
                         window.location.href = "/myClaimView";
                         // location.reload();
+                    }
+                });
+            });
+        });
+    });
+});
+ 
+$(document).on("click", "#deleteButtonPersonal", function () {
+    id = $(this).data("id");
+    //console.log(id);
+    requirejs(["sweetAlert2"], function (swal) {
+        swal({
+            title: "Are you sure!",
+            type: "error",
+            confirmButtonClass: "btn-danger",
+            confirmButtonText: "Yes!",
+            showCancelButton: true,
+            allowOutsideClick: false,
+            allowEscapeKey: false,
+        }).then(function () {
+            $.ajax({
+                type: "POST",
+                url: "/deletePersonalDetail/" + id,
+                // dataType: "json",
+                data: { _method: "DELETE" },
+                // async: false,
+                // processData: false,
+                // contentType: false,
+            }).done(function (data) {
+                swal({
+                    title: data.title,
+                    text: data.msg,
+                    type: data.type,
+                    confirmButtonColor: "#3085d6",
+                    confirmButtonText: "OK",
+                    allowOutsideClick: false,
+                    allowEscapeKey: false,
+                }).then(function () {
+                    if (data.type == "error") {
+                    } else {
+                        location.reload();
+                    }
+                });
+            });
+        });
+    });
+});
+$(document).on("click", "#deleteButtonTravel", function () {
+    id = $(this).data("id");
+    //console.log(id);
+    requirejs(["sweetAlert2"], function (swal) {
+        swal({
+            title: "Are you sure!",
+            type: "error",
+            confirmButtonClass: "btn-danger",
+            confirmButtonText: "Yes!",
+            showCancelButton: true,
+            allowOutsideClick: false,
+            allowEscapeKey: false,
+        }).then(function () {
+            $.ajax({
+                type: "POST",
+                url: "/deleteTravelDetail/" + id,
+                // dataType: "json",
+                data: { _method: "DELETE" },
+                // async: false,
+                // processData: false,
+                // contentType: false,
+            }).done(function (data) {
+                swal({
+                    title: data.title,
+                    text: data.msg,
+                    type: data.type,
+                    confirmButtonColor: "#3085d6",
+                    confirmButtonText: "OK",
+                    allowOutsideClick: false,
+                    allowEscapeKey: false,
+                }).then(function () {
+                    if (data.type == "error") {
+                    } else {
+                        location.reload();
                     }
                 });
             });

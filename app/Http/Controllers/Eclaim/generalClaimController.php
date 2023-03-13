@@ -13,10 +13,10 @@ class generalClaimController extends Controller
         $mcs = new myClaimService;
 
         $data = $mcs->createGeneralClaim($r, 'draft');
-
+        
         return response()->json($data);
     }
-
+    
     public function submitGeneralClaim(request $r)
     {
         $mcs = new myClaimService;
@@ -53,7 +53,22 @@ class generalClaimController extends Controller
 
         return response()->json($data);
     }
+    public function deletePersonalDetail($id = '')
+    {
+        $mcs = new myClaimService;
 
+        $data = $mcs->deletePersonalDetail($id);
+
+        return response()->json($data);
+    }
+    public function deleteTravelDetail($id = '')
+    {
+        $mcs = new myClaimService;
+
+        $data = $mcs->deleteTravelDetail($id);
+
+        return response()->json($data);
+    }
     public function updateStatusGeneralClaims($id = '')
     {
         $mcs = new myClaimService;

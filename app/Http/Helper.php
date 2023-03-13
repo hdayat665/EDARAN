@@ -6,6 +6,7 @@ use App\Models\Branch;
 use App\Models\ClaimCategory;
 use App\Models\ClaimCategoryContent;
 use App\Models\ClaimDateSetting;
+use App\Models\AppealMtc;
 use App\Models\Company;
 use App\Models\Customer;
 use App\Models\Department;
@@ -26,6 +27,7 @@ use App\Models\Unit;
 use App\Models\UserProfile;
 use App\Models\Users;
 use App\Models\UserRole;
+use App\Models\TransportMillage;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -115,7 +117,60 @@ if (!function_exists('upload')) {
         return $data;
     }
 }
+if (!function_exists('uploadAppeal')) {
+    function uploadAppeal($uploadedFile, $type = '')
+    {
+        $allowedTypes = ['pdf', 'jpeg', 'jpg', 'png'];
+        $maxSize = 5120; // 5MB
 
+        $filename = $uploadedFile->getClientOriginalName();
+        $extension = $uploadedFile->getClientOriginalExtension();
+
+        if (!in_array($extension, $allowedTypes)) {
+            throw new Exception("Invalid file type. Only PDF, JPEG, PNG, and JPG files are allowed.");
+        }
+
+        if ($uploadedFile->getSize() > $maxSize * 1024) {
+            throw new Exception("File size exceeds the maximum allowed limit of 5 MB.");
+        }
+
+        Storage::disk('local')->put(
+            'public/Appeal/' . $filename,
+            file_get_contents($uploadedFile)
+        );
+
+        $data['filename'] = $filename;
+
+        return $data;
+    }
+}
+if (!function_exists('uploadPic')) {
+    function uploadPic($uploadedFile, $type = '')
+    {
+        $allowedTypes = ['pdf', 'jpeg', 'jpg', 'png'];
+        $maxSize = 5120; // 5MB
+
+        $filename = $uploadedFile->getClientOriginalName();
+        $extension = $uploadedFile->getClientOriginalExtension();
+
+        if (!in_array($extension, $allowedTypes)) {
+            throw new Exception("Invalid file type. Only PDF, JPEG, PNG, and JPG files are allowed.");
+        }
+
+        if ($uploadedFile->getSize() > $maxSize * 1024) {
+            throw new Exception("File size exceeds the maximum allowed limit of 5 MB.");
+        }
+
+        Storage::disk('local')->put(
+            'public/profilePic/' . $filename,
+            file_get_contents($uploadedFile)
+        );
+
+        $data['filename'] = $filename;
+
+        return $data;
+    }
+}
 
 if (!function_exists('dateFormat')) {
     function dateFormat($date = '')
@@ -1251,7 +1306,18 @@ if (!function_exists('getDepartmentName')) {
         return $data->departmentName;
     }
 }
-
+if (!function_exists('getDesignationName')) {
+    function getDesignationName($user_id = '')
+    { 
+        $cond[1] = ['user_id', $user_id];
+        $data = DB::table('employment as a')
+            ->leftJoin('designation as b', 'a.designation', '=', 'b.id')
+            ->select('b.designationName', 'a.employeeName')
+            ->where($cond)
+            ->first();
+        return $data->designationName;
+    }
+}
 if (!function_exists('projectLocationById')) {
     function projectLocationById($id = '')
     {
@@ -1332,6 +1398,43 @@ if (!function_exists('getUserProfileByUserId')) {
     }
 }
 
+if (!function_exists('getFirstCarMileagebyid')) {
+    function getFirstCarMileagebyid($id = '')
+    {
+        $data = TransportMillage::where([
+                ['tenant_id', Auth::user()->tenant_id], 
+                ['entitle_id', $id],
+                ['type', 'car'] // New condition for type
+            ])->first();
+        
+        $price = $data->price;
+        //pr($price);
+        if (!$price) {
+            $price = [];
+        }
+
+        return $price;
+    }
+}
+
+if (!function_exists('getFirstMotorMileagebyid')) {
+    function getFirstMotorMileagebyid($id = '')
+    {
+        $data = TransportMillage::where([
+                ['tenant_id', Auth::user()->tenant_id], 
+                ['entitle_id', $id],
+                ['type', 'motor'] // New condition for type
+            ])->first();
+        
+        $price = $data->price;
+        //pr($price);
+        if (!$price) {
+            $price = [];
+        }
+
+        return $price;
+    }
+}
 
 
 if (!function_exists('getUserByRole')) {
@@ -1532,6 +1635,33 @@ if (!function_exists('claimDateSetting')) {
         return $data;
     }
 }
+if (!function_exists('checkAppeal')) {
+    function checkAppeal($year = '', $month = '')
+    {   
+        $cond[0] = ['tenant_id', Auth::user()->tenant_id];
+        $cond[1] = ['user_id', Auth::user()->id];
+        $cond[3] = ['year', $year];
+        $cond[4] = ['month', $month];
+
+        $data = AppealMtc::where($cond)->first();
+
+        $status = null;
+        $data_year = null;
+        $data_month = null;
+
+        if ($data) {
+            $status = $data->status;
+            $data_year = $data->year;
+            $data_month = $data->month;
+        }
+
+        return [
+            'status' => $status,
+            'year' => $data_year,
+            'month' => $data_month,
+        ];
+    }
+}
 
 if (!function_exists('getDaysInMonth')) {
     function getDaysInMonth()
@@ -1635,6 +1765,7 @@ if (!function_exists('getMyClaimMonth')) {
             $data = [];
         }
 
+        //pr($data);
         return $data;
     }
 }
@@ -1649,15 +1780,16 @@ if (!function_exists('checkingMonthlyClaim')) {
         $cond[4] = ['month', $month];
 
         $claim = GeneralClaim::where($cond)->first();
-
+        
         if (!$claim) {
             $data['month'] = '-';
             $data['id'] = '-';
         } else {
             $data['month'] = $claim->month;
             $data['id'] = $claim->id;
+            $data['status'] = $claim->status;
         }
-
+        //pr($data);
         return $data;
     }
 }

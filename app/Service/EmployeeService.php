@@ -101,7 +101,7 @@ class EmployeeService
     }
 
     public function terminateEmployment($r)
-    {
+    { 
         $input = $r->input();
 
         $status['status'] = 'terminate';
@@ -804,6 +804,32 @@ class EmployeeService
         return $data;
     }
 
+    public function cancelTerminateEmployment($id)
+    {
+        $update = [
+            'status' => 'active'
+        ];
+
+        $user = Employee::where('user_id',$id)->get();
+
+        
+        if (!$user) {
+            $data['status'] = config('app.response.error.status');
+            $data['type'] = config('app.response.error.type');
+            $data['title'] = config('app.response.error.title');
+            $data['msg'] = 'Cancel Termination not found';
+        } else {
+            Employee::where('user_id', $id)->update($update);
+            Users::where('id', $id)->update($update);
+
+            $data['status'] = config('app.response.success.status');
+            $data['type'] = config('app.response.success.type');
+            $data['title'] = config('app.response.success.title');
+            $data['msg'] = 'Success Cancel Termination user';
+        }
+
+        return $data;
+    }
     public function updateVehicle($r)
     {
         $input = $r->input();
@@ -975,8 +1001,16 @@ class EmployeeService
     public function updateProfile_Picture($r, $id)
     {
         $input = $r->input();
-        
-        dd($input);
+
+        if ($_FILES['uploadFile']['name']) {
+            $payslip = uploadPic($r->file('uploadFile'));
+            $input['uploadFile'] = $payslip['filename'];
+
+            if (!$input['uploadFile']) {
+                unset($input['uploadFile']);
+            }
+        }
+        //dd($input);
         
         UserProfile::where('user_id', $id)->update($input);
 
@@ -987,7 +1021,7 @@ class EmployeeService
         $data['data'] = UserProfile::where('user_id', $input['user_id'])->first();
 
         return $data;
-    }
+    } 
 
     public function getEmployeeAddressDetails($id = '')
     {

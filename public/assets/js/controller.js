@@ -49,6 +49,7 @@ requirejs.config({
         entitleJs: assets + "/js/entitleJs",
         cashAdvanceJs: assets + "/js/cashAdvanceJs",
         approvalConfigJs: assets + "/js/approvalConfigJs",
+        appealMtcJs: assets + "/js/appealMtcJs",
         approveRoleJs: assets + "/js/approveRoleJs",
         cashAdvanceClaimJs: assets + "/js/cashAdvanceClaimJs",
         generalClaimJs: assets + "/js/generalClaimJs",
@@ -348,6 +349,9 @@ if ($("#myleaveJs").length > 0) {
 }
 if ($("#leaveApprJs").length > 0) {
     requirejs(["leaveApprJs"]);
+}
+if ($("#appealMtcJs").length > 0) {
+    requirejs(["appealMtcJs"]);
 }
 if ($("#leaveHodJs").length > 0) {
     requirejs(["leaveHodJs"]);

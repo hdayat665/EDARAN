@@ -3462,28 +3462,55 @@ $.validator.addMethod("noSpecialChars", function(value, element) {
         }
     });
 });
-$(document).on("click", "#uploadpicture", function() {
+function dataURLtoFile(dataurl, filename) {
+    var arr = dataurl.split(','),
+        mime = arr[0].match(/:(.*?);/)[1],
+        bstr = atob(arr[1]), 
+        n = bstr.length, 
+        u8arr = new Uint8Array(n);
+        
+    while(n--){
+        u8arr[n] = bstr.charCodeAt(n);
+    }
     
+    return new File([u8arr], filename, {type:mime});
+}
+//console.log(file);
+
+$(document).on("click", "#uploadpicture", function() {
+    var user_id = $("#user_id").val();
+    var fileExtension = ".jpg";
+    var filename = user_id + fileExtension;
+    var fileUpload = dataURLtoFile($("#result_image img").attr('src'), filename);
+
+
     $("#profilepicform").validate({
         // Specify validation rules
         rules: {
+            // Add validation rules for each form field
+            profile_picture: {
+                required: true,
+                // Add any additional validation rules for the profile picture field
+            },
         },
 
         messages: {
+            // Add custom error messages for each form field
         },
-        submitHandler: function(form) {
 
+        submitHandler: function(form) {
             requirejs(['sweetAlert2'], function(swal) {
-                
                 var data = new FormData(document.getElementById("profilepicform"));
+                data.append('uploadFile', fileUpload)
+                console.log($("#result_image img").attr('src'))
                 var id = $('#user_id').val();
-                console.log(id );
+                console.log(id);
                 $.ajax({
                     type: "POST",
                     url: "/updateProfile_Picture/" + id,
                     data: data,
                     dataType: "json",
-                    async: false,
+                    async: true,
                     processData: false,
                     contentType: false,
                 }).done(function(data) {
@@ -3491,20 +3518,18 @@ $(document).on("click", "#uploadpicture", function() {
                         title: data.title,
                         text: data.msg,
                         type: data.type,
-                       confirmButtonColor: '#3085d6',
+                        confirmButtonColor: '#3085d6',
                         confirmButtonText: 'OK',
                         allowOutsideClick: false,
                         allowEscapeKey: false,
                     }).then(function() {
                         if (data.type == 'error') {
-
+                            // Handle error condition
                         } else {
                             location.reload();
                         }
-
                     });
                 });
-
             });
         }
     });
