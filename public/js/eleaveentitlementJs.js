@@ -11,6 +11,17 @@ $(document).ready(function () {
     $("#datepickerlapse").datepicker({
         todayHighlight: true,
         autoclose: true,
+        format: "yyyy-mm-dd",
+    });
+    $("#LapsedDate").datepicker({
+        todayHighlight: true,
+        autoclose: true,
+        format: "yyyy-mm-dd",
+    });
+    $("#Lapsed").datepicker({
+        todayHighlight: true,
+        autoclose: true,
+        format: "yyyy-mm-dd",
     });
 
     $(document).on("click", "#addButton", function () {
@@ -72,12 +83,16 @@ $(document).ready(function () {
         var vehicleData = geteleaveEntitlement(id);
 
         vehicleData.done(function (data) {
-            $("#nameEmployer").val(data.id_userprofile);
-            $("#department").val(data.id_department);
+            $("#nameEmployer").val(data.fullname);
+            $("#department").val(data.departmentName);
+            $("#CurrentEntitlement").val(data.current_entitlement);
             $("#CurrentEntitlementBalance").val(
                 data.current_entitlement_balance
             );
-            $("#SickLeaveEntitlement").val(data.sick_leave_entitlement_balance);
+            $("#SickLeaveEntitlement").val(data.sick_leave_entitlement);
+            $("#SickLeaveEntitlementBalance").val(
+                data.sick_leave_entitlement_balance
+            );
             $("#CarryForward").val(data.carry_forward);
             $("#CurrentForwardBalance").val(data.carry_forward_balance);
             $("#LapsedDate").val(data.lapsed_date);
@@ -140,5 +155,15 @@ $(document).ready(function () {
                 });
             },
         });
+    });
+
+    $("#tableentitlement").DataTable({
+        searching: true,
+        lengthChange: true,
+        lengthMenu: [
+            [5, 10, 25, 50, -1],
+            [5, 10, 25, 50, "All"],
+        ],
+        responsive: false,
     });
 });

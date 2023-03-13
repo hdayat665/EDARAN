@@ -534,3 +534,7 @@ $("#durationrt,#starteventdate,#endeventdate,#starteventtime,#endeventtime").foc
         $("#eventsearch").val($("#eventsearch").data("default-value"));
         
     });
+
+    $('#employeesearch').picker({ search: true });
+    $('#eventsearch').picker({ search: true });
+    

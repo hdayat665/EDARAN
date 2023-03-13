@@ -179,57 +179,60 @@
                                     </div>
 
                                     <div class="row">
-                                        <div id="filterleave" style="display: none">
-                                            <div class="form-control">						
-                                                <div class="row p-2">
-                                                    <div class="col-md-2">
-                                                        <label class="form-label">Date</label>
-                                                        <div class="input-group">
-                                                            <input type="text" class="form-control" name="name1" id="datepicker-filter" placeholder="yyyy-mm-dd"/>
-                                                                <div class="input-group-text">
-                                                                    <i class="fa fa-calendar"></i>
-                                                                </div>
+                                        <form action="/myleave#default-tab-2" method="POST">
+                                            <div id="filterleave" style="display: none">
+                                                <div class="form-control">						
+                                                    <div class="row p-2">
+                                                        <div class="col-md-2">
+                                                            <label class="form-label">Date</label>
+                                                            <div class="input-group">
+                                                                <input type="text" class="form-control" name="applydate" value="<?php echo $applydate; ?>" id="datepicker-filter" placeholder="yyyy-mm-dd"/>
+                                                                    
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="col-md-2">	
-                                                        <label class="form-label">Type of Leave</label>
-                                                        <select class="form-select form-select-lg mb-2" aria-label=".form-select-lg example">
-                                                            <option>All</option>
-                                                        </select>			
-                                                    </div>
-                                                    <div class="col-md-2">
-                                                        <label class="form-label">Status</label>
-                                                        <select class="form-select form-select-lg mb-2" aria-label=".form-select-lg example">
-                                                            <option  selected value="">Select Status</option>
-                                                            <option value="0">Approved</option>
-                                                            <option value="1">Rejected</option>
-                                                            <option value="2">Cancel</option>
-                                                        </select>
-                                                    </div>
-                                                    <div class="col-md-2"></div>
-                                                    <!-- <div class="col-md-2"></div> -->
+                                                        <div class="col-md-2">	
+                                                            <label class="form-label">Type of Leave</label>
+                                                            <select class="form-select" name="typelist" id = "typelist">
+                                                                <option value="">Please Choose</option>
+                                                                @foreach($types as $dt)
+                                                                    <option value="{{ $dt->id }}" {{ old('typelist') == $dt->id ? 'selected' : ($typelist == $dt->id ? 'selected' : '') }}>{{ $dt->leave_types }}</option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                            <label class="form-label">Status</label>
+                                                            <select class="form-select" id = "status_searching" name="status">
+                                                                <option value="">Select Status</option>
+                                                                <option value="4" {{ old('status') == '4' || $status_searching == '4' ? 'selected' : '' }}>Approved</option>
+                                                                <option value="3" {{ old('status') == '3' || $status_searching == '3' ? 'selected' : '' }}>Rejected</option>
+                                                            </select>
+                                                        </div>
 
-                                                    <div class="col">
-                                                        <div class="row-p-2">
-                                                            <label for="test"></label>
+                                                        <div class="col-md-2"></div>
+                                                        <!-- <div class="col-md-2"></div> -->
+
+                                                        <div class="col">
+                                                            <div class="row-p-2">
+                                                                <label for="test"></label>
+                                                            </div>
+                                                            <div class="row">
+                                                                <button class="btn btn-primary" type="submit" ><i class="fa fa-search" aria-hidden="true"></i> Search</button>
+                                                            </div>
+                                                        </div>&nbsp;
+                                                        <div class="col">
+                                                            <div class="row-p-2">
+                                                                <label for="test"></label>
+                                                            </div>
+                                                            <div class="row">
+                                                                <a href="#" class="btn btn-primary form-control" id="reset"> <i class="fas fa-repeat"></i> Reset</a>
+                                                            </div>
                                                         </div>
-                                                        <div class="row">
-                                                            <button class="btn btn-primary"><i class="fa fa-search" aria-hidden="true"></i> Search</button>
-                                                        </div>
-                                                    </div>&nbsp;
-                                                    <div class="col">
-                                                        <div class="row-p-2">
-                                                            <label for="test"></label>
-                                                        </div>
-                                                        <div class="row">
-                                                            <button class="btn btn-primary">Reset</button>
-                                                        </div>
+                                                        <div class="col-md-2"></div>
+                                                        <div class="col-md-2"></div>
                                                     </div>
-                                                    <div class="col-md-2"></div>
-                                                    <div class="col-md-2"></div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </form>
                                     </div>
 
                                     <div class="row p-2">
