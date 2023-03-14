@@ -59,6 +59,7 @@
                     <table id="timesheetapproval" class="table table-striped table-bordered align-middle">
                         <thead>
                             <tr>
+                                
                                 <th class="text-nowrap">Action</th>
                                 <th class="text-nowrap">Image</th>
                                 <th class="text-nowrap">Employee</th>

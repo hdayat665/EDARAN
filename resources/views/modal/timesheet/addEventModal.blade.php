@@ -10,21 +10,21 @@
                     <div class="row p-2">
                         <div class="col-sm-12">
                             <label for="firstname" class="form-label">Event Name*</label>
-                            <input type="text" class="form-control" name="event_name" id="" />
+                            <input type="text" class="form-control" name="event_name" id="" placeholder="Event Name" />
                         </div>
                     </div>
                     <div class="row p-2">
                         <div class="col-sm-6">
                             <label for="lastname" class="form-label">Start Date*</label>
                             <div class="">
-                                <input type="text" class="form-control" name="start_date" id="starteventdate" />
+                                <input type="text" class="form-control" name="start_date" id="starteventdate" placeholder="Start Date" />
                                 <!-- <div class="input-group-text"><i class="fa fa-calendar"></i></div> -->
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <label for="lastname" class="form-label">End Date*</label>
                             <div class="">
-                                <input type="text" class="form-control" name="end_date" id="endeventdate" />
+                                <input type="text" class="form-control" name="end_date" id="endeventdate" placeholder="End Date"/>
                                 <!-- <div class="input-group-text"><i class="fa fa-calendar"></i></div> -->
                             </div>
                         </div>

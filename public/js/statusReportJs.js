@@ -36,3 +36,21 @@
       });
 
   }();
+
+
+  $("#reset").on("click", function () {
+    $("#employeesearch").val($("#employeesearch").data("default-value"));
+    $("#yearsearch").val($("#yearsearch").data("default-value"));
+    $("#monthsearch").val($("#monthsearch").data("default-value"));
+    $("#designationsearch").val($("#designationsearch").data("default-value"));
+    $("#departmentsearch").val($("#departmentsearch").data("default-value"));
+    $("#statussearch").val($("#statussearch").data("default-value"));
+    
+});
+
+$('#employeesearch').picker({ search: true });
+$('#designationsearch').picker({ search: true });
+$('#departmentsearch').picker({ search: true });
+
+
+

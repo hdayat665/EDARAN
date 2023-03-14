@@ -222,11 +222,11 @@
             
             
             
-            <style>
+            {{-- <style>
                 .has-data {
                     background-color: #AED6F1; 
                 }
-            </style>
+            </style> --}}
             
             
 
