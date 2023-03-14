@@ -37,7 +37,7 @@
                                             <td>
                                                 <div class="form-check form-switch">
                                                     <input class="form-check-input" {{ $data->status == 1 ? 'checked' : '' }} name="" type="checkbox" role="switch" data-id="{{ $data->id }}"
-                                                        id="statusClaim" checked>
+                                                        id="statusClaim">
                                                 </div>
                                             </td>
                                             <td>{{ $data->claim_catagory_code }}</td>

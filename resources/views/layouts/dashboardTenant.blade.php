@@ -161,16 +161,23 @@
 
                 <div class="navbar-item navbar-user dropdown">
                     <?php if(Auth::check()): ?>
-                    <a href="#" class="navbar-link dropdown-toggle d-flex align-items-center" data-bs-toggle="dropdown">
-                        <img src="/assets/img/user/user-13.jpg" alt="" />
-                        <span>
-                            <span class="d-none d-md-inline">
-                                <?php echo Auth::user()->username; ?>
-                                <!-- Display username here -->
+                        <a href="#" class="navbar-link dropdown-toggle d-flex align-items-center" data-bs-toggle="dropdown">
+                            @php
+                            $profilePicUrl = asset('storage/profilePic/' . (Auth::user()->id) . '.jpg');
+                            @endphp
+
+                            @if ((Auth::user()->id) && file_exists(public_path('storage/profilePic/' . (Auth::user()->id) . '.jpg')))
+                                <img src="{{ $profilePicUrl }}" width="100%" class="rounded d-block" alt="Profile Picture">
+                            @else
+                                <img src="{{ asset('../assets/img/user/user-13.jpg') }}" width="100%" class="rounded d-block" alt="Profile Picture">
+                            @endif
+                            <span>
+                                <span class="d-none d-md-inline">
+                                    <?php echo Auth::user()->username; ?> <!-- Display username here -->
+                                </span>
+                                <b class="caret"></b>
                             </span>
-                            <b class="caret"></b>
-                        </span>
-                    </a>
+                        </a>
                     <?php endif; ?>
 
                     <div class="dropdown-menu dropdown-menu-end me-1">

@@ -39,17 +39,18 @@ $(document).ready(function() {
 
         vehicleData.done(function(data) {
             console.log(data);
-            $('#unitId').val(data.unitId);
-            $('#branchName').val(data.branchName);
-            $('#branchCode').val(data.branchCode);
-            $('#branchType').val(data.branchType);
-            // $('#branchType').prop('selectedIndex', data.branchType);
-            $('#postcodeD').val(data.postcode);
-            $('#address').val(data.address);
-            $('#address2').val(data.address2);
-            $('#city').val(data.city);
-            $('#state').val(data.state);
-            $('#country').val(data.country);
+            $('#unitIdE').val(data.unitId);
+            $('#branchNameE').val(data.branchName);
+            $('#branchCodeE').val(data.branchCode);
+            //$('#branchTypeE').val(data.branchType);
+            $('#branchTypeE').prop('selectedIndex', data.branchType);
+            $('#postcodeE').val(data.postcode);
+            $('#addressE').val(data.address);
+            $('#address2E').val(data.address2);
+            $('#cityE').val(data.city);
+            $('#stateE').val(data.state);
+            $('#countryE').prop('selectedIndex', data.branchType);
+            //$('#countryE').val(data.country);
             $('#idB').val(data.id);
         })
         $('#editModal').modal('show');

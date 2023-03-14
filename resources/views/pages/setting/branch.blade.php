@@ -24,7 +24,7 @@
 
         <div class="panel-heading" id="branchJs">
             <div class="col-md-6">
-                <a href="javascript:;" data-bs-toggle="modal" id="addButton" class="btn btn-primary"><i class="fa fa-plus"></i> New Branch</a>
+                <a href="javascript:;" data-bs-toggle="modal" id="addButton" class="btn btn-primary">+ New Branch</a>
             </div>
 
             <h4 class="panel-title"></h4>
@@ -171,11 +171,9 @@
                         <div class="mb-2">
                             <label class="form-label">Country*</label>
                             <select class="form-select" name="country" id="country" style="text-transform: uppercase;">
-                            
                                 <option type="text" value="MALAYSIA" label="MALAYSIA" selected="selected">MALAYSIA</option>
                             </select>
                         </div>
-                        <input type="hidden" class="form-control" name="fulladdress" id="fulladdress" />
                 </div>
 
                 <div class="modal-footer">
@@ -199,12 +197,12 @@
 
                         <div class="mb-3">
                             <label class="form-label">Branch Code*</label>
-                            <input type="text" class="form-control" name="branchCode" id="branchCode" maxlength="100" placeholder="BRANCH CODE" >
+                            <input type="text" class="form-control" name="branchCode" id="branchCodeE" maxlength="100" placeholder="BRANCH CODE" >
                             <input type="hidden" class="form-control" name="id" id="idB" placeholder="">
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Branch Name*</label>
-                            <input type="text" class="form-control" name="branchName" id="branchName" maxlength="100" placeholder="BRANCH NAME" >
+                            <input type="text" class="form-control" name="branchName" id="branchNameE" maxlength="100" placeholder="BRANCH NAME" >
                         </div>
                         <div class="mb-2">
                             <label class="form-label">Branch Type</label>
@@ -216,7 +214,7 @@
                         </div>
                         <div class="mb-2">
                             <label class="form-label">Unit Name*</label>
-                            <select class="form-select" name="unitId" id="unitId" style="text-transform: uppercase;">
+                            <select class="form-select" name="unitId" id="unitIdE" style="text-transform: uppercase;">
                                 <option type="text"value="" label="SELECT UNIT">SELECT UNIT </option>
                                 <?php $units = getUnit() ?>
                                 @foreach ($units as $unit)
@@ -227,25 +225,23 @@
                         </div>
                         <div class="mb-2">
                             <label class="form-label">Address 1*</label>
-                            <input type="text" class="form-control" name="address" id="address"  maxlength="100" placeholder="ADDRESS 1" >
+                            <input type="text" class="form-control" name="address" id="addressE"  maxlength="100" placeholder="ADDRESS 1" >
                         </div>
                         <div class="mb-2">
                             <label class="form-label">Address 2</label>
-                            <input type="text" class="form-control" name="address2" id="address2" maxlength="100" placeholder="ADDRESS 2" >
+                            <input type="text" class="form-control" name="address2" id="address2E" maxlength="100" placeholder="ADDRESS 2" >
                         </div>
                         <div class="mb-2">
                             <label class="form-label">Postcode</label>
-                            <input type="text" class="form-control" name="postcode" id="postcodeD" placeholder="POSTCODE" aria-describedby="postcode">
+                            <input type="text" class="form-control" name="postcode" id="postcodeE" placeholder="POSTCODE" aria-describedby="postcode">
                         </div>
                         <div class="mb-2">
                             <label class="form-label">City*</label>
-                            <input type="text" class="form-control" name="city" id="city" placeholder="CITY" >
-                            <input type="hidden" class="form-control" name="latitude" id="latitude" />
-                            <input type="hidden" class="form-control" name="longitude" id="longitude" />
+                            <input type="text" class="form-control" name="city" id="cityE" placeholder="CITY" >
                         </div>
                         <div class="mb-2">
                             <label class="form-label">State*</label>
-                            <select type="text" class="form-select" name="state" id="state" style="text-transform: uppercase;">
+                            <select type="text" class="form-select" name="state" id="stateE" style="text-transform: uppercase;">
                                 <option type="text"value="" label="Select State " selected="selected">Select State </option>
                                 <option type="text"value="Johor" label="Johor">JOHOR</option>
                                 <option type="text"value="Kedah" label="Kedah">KEDAH</option>
@@ -266,7 +262,7 @@
                         </div>
                         <div class="mb-2">
                             <label class="form-label">Country*</label>
-                            <select class="form-select" name="country" style="text-transform: uppercase;">
+                            <select class="form-select" name="country" id="countryE" style="text-transform: uppercase;">
                                 <option type="text"value="" label="malaysia" selected="selected">Select Country</option>
                             </select>
                         </div>

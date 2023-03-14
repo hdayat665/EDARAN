@@ -39,8 +39,7 @@ class ProfileController extends Controller
     public function updateProfile_Picture(Request $r)
     {
         $input = $r->input();
-
-        $input['uploadFile'] = upload($r, 'uploadFile');
+        
 
         $ps = new ProfileService;
 

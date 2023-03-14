@@ -47,7 +47,7 @@
                                             <label class="form-label">Year</label>
                                         </div>
                                         <div class="col-md-9">
-                                            <select class="form-select" name="year">
+                                            <select class="form-select" name="year" style="pointer-events:none;background:#e9ecef;">
                                                 <option class="form-label" value="" selected>Please Select
                                                 </option>
                                                 <?php $years = year(); ?>
@@ -62,7 +62,7 @@
                                             <label class="form-label">Month</label>
                                         </div>
                                         <div class="col-md-9">
-                                            <select class="form-select" name="month">
+                                            <select class="form-select" name="month" style="pointer-events:none;background:#e9ecef;">
                                                 <option class="form-label" value="" selected>Please Select
                                                 </option>
                                                 <?php $months = month(); ?>
@@ -160,7 +160,7 @@
                                         @foreach ($details as $detail)
                                             <tr>
                                                 <td><a data-bs-toggle="modal" id="deleteButton" data-id="{{ $detail->id }}" class="btn btn-primary btn-sm">Delete</a></td>
-                                                <td>{{ date('Y-m-d', strtotime($GNC->created_at))   }}</td>
+                                                <td>{{ date('Y-m-d', strtotime($GNC->created_at))   }}</td> 
                                                 <td>{{ $detail->claim_catagory ?? $detail->claim_category }}</td>
                                                 <td>{{ $detail->amount }}</td>
                                                 <td>{{ $detail->desc }}</td>

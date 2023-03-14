@@ -87,7 +87,7 @@ $(document).ready(function () {
                         contentType: false,
                     }).done(function (data) {
                         swal({
-                            title: data.title,
+                            title: data.title, 
                             text: data.msg,
                             type: data.type,
                             confirmButtonColor: "#3085d6",
@@ -138,6 +138,7 @@ $(document).ready(function () {
 
     $(document).on("click", "#deleteButton", function () {
         id = $(this).data("id");
+        //console.log(id);
         requirejs(["sweetAlert2"], function (swal) {
             swal({
                 title: "Are you sure!",
@@ -157,7 +158,7 @@ $(document).ready(function () {
                     // processData: false,
                     // contentType: false,
                 }).done(function (data) {
-                    swal({
+                    swal({ 
                         title: data.title,
                         text: data.msg,
                         type: data.type,

@@ -67,8 +67,12 @@
                             <td><span class="badge bg-danger" data-toggle="rejectedca" title="Rejected">Rejected</span></td>
                         @elseif ($cashClaim->status == 'amend')
                             <td><span class="badge bg-success" data-toggle="amendca" title="Amend">Amend</span></td>
-                        @elseif ($cashClaim->status == 'paid')
+                        @elseif ($cashClaim->status == 'close')
                             <td><span class="badge bg-secondary" data-toggle="paidca" title="Paid">Paid</span></td>
+                        @elseif ($cashClaim->status == 'recommend')
+                            <td><span class="badge bg-info" data-toggle="paidca" title="Pending">Pending</span></td>
+                        @elseif ($cashClaim->status == 'cancelled')
+                            <td><span class="badge bg-danger" data-toggle="paidca" title="Pending">cancelled</span></td>
                         @endif
                         <td>{{ date_format(date_create($cashClaim->updated_at), 'd/m/Y') }}</td>
                     </tr>

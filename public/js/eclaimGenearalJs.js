@@ -1,4 +1,5 @@
 $(document).ready(function () {
+    
     $(document).on("click", "#addModalButton", function () {
         $("#addSubsistence").modal("show");
     });
@@ -17,6 +18,7 @@ $(document).ready(function () {
             $("#area_name").val(data.area_name);
             $("#idE").val(data.id);
         });
+        
         $("#editSubsistence").modal("show");
     });
 

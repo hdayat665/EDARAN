@@ -73,12 +73,12 @@
                                     @if ($subsistances)
                                         @foreach ($subsistances as $subsistance)
                                             <tr>
-                                                <td><button class="btn btn-primary btn-xs" data-id="{{ $subsistance->id }}" id="editModalButton">Edit
-                                                    </button>
+                                                <td><a class="btn btn-primary btn-xs" data-id="{{ $subsistance->id }}" id="editModalButton">Edit
+                                                    </a>
                                                     &nbsp;
-                                                    <button class="btn btn-danger btn-xs" data-id="{{ $subsistance->id }}" id="deleteButton">Delete
-                                                    </button>
-                                                </td>
+                                                    <a class="btn btn-danger btn-xs" data-id="{{ $subsistance->id }}" id="deleteButton">Delete
+                                                    </a>
+                                                </td> 
                                                 <td>
                                                     <input type="hidden" name="subs_id[]" value="{{ $subsistance->id }}">
                                                     {{ $subsistance->area_name }}

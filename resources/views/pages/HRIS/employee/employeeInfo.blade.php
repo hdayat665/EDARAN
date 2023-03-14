@@ -33,13 +33,26 @@
                     <tr class="odd gradeX">
                         <td width="1%" class="fw-bold text-dark">{{$no++}}</td>
                         <td>
-                            <a href="#" data-bs-toggle="dropdown" class="btn btn-primary btn-sm dropdown-toggle"></i> Actions <i class="fa fa-caret-down"></i></a>
-                            <div class="dropdown-menu">
-                                <a href="/editEmployee/{{$employeeInfo->user_id}}" class="dropdown-item">Edit Employee </a>
-                                <div class="dropdown-divider"></div>
-                                <a href="register_v3.html" data-bs-toggle="modal" id="terminate" data-employee="{{$employeeInfo->id}}" data-id="{{$employeeInfo->user_id}}" class="dropdown-item"> Terminate Employee</a>
-                                <a href="register_v3.html" class="dropdown-item" style="display:none"> Cancel Termination</a>
-                            </div>
+                            @if ($employeeInfo->status == 'active')
+                                <a href="#" data-bs-toggle="dropdown" class="btn btn-primary btn-sm dropdown-toggle">
+                                    Actions <i class="fa fa-caret-down"></i>
+                                </a>
+                                <div class="dropdown-menu">
+                                    <a href="/editEmployee/{{$employeeInfo->user_id}}" class="dropdown-item">Edit Employee </a>
+                                    <div class="dropdown-divider"></div>
+                                    <a href="register_v3.html" data-bs-toggle="modal" id="terminate" data-employee="{{$employeeInfo->id}}" data-id="{{$employeeInfo->user_id}}" class="dropdown-item">Terminate Employee</a>
+                                </div>
+                            @else
+                                <a href="#" data-bs-toggle="dropdown" class="btn btn-primary btn-sm dropdown-toggle">
+                                    Actions <i class="fa fa-caret-down"></i>
+                                </a>
+                                <div class="dropdown-menu">
+                                    <a href="/editEmployee/{{$employeeInfo->user_id}}" class="dropdown-item">Edit Employee </a>
+                                    <div class="dropdown-divider"></div>
+                                    <a id="cancelButton" data-id="{{$employeeInfo->user_id}}" class="dropdown-item"> Cancel Termination</a>
+                                </div>
+                            @endif
+
                         </td>
                         <td>{{$employeeInfo->employeeId}}</td>
                         <td>{{$employeeInfo->firstName}}</td>

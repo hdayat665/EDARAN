@@ -18,8 +18,8 @@
                 <tbody>
                     @if ($personalClaims)
                         @foreach ($personalClaims as $personal)
-                            <tr>
-                                <td><a data-bs-toggle="modal" id="btn-view" class="btn btn-primary btn-sm">Delete</a></td>
+                            <tr>    
+                                <td><a data-bs-toggle="modal" id="deleteButtonPersonal" data-id="{{ $personal->id }}" class="btn btn-primary btn-sm">Delete</a></td>
                                 <td>{{ $personal->applied_date ? date('Y-m-d', strtotime($personal->applied_date)) : '-' }}</td>
                                 <td>{{ getClaimCategoryById($personal->claim_category)->claim_catagory ?? '-' }}</td>
                                 <td>{{ $personal->amount ?? '-' }}</td>
@@ -30,7 +30,7 @@
                     @endif
                 </tbody>
             </table>
-        </div>
+        </div> 
     </div>
     <br>
     <div class="row p-2">
@@ -54,7 +54,7 @@
                     @if ($travelClaims)
                         @foreach ($travelClaims as $travel)
                             <tr>
-                                <td><a data-bs-toggle="modal" id="btn-view" class="btn btn-primary btn-sm">Delete</a></td>
+                                <td><a data-bs-toggle="modal" id="deleteButtonTravel" data-id="{{ $travel->id }}" class="btn btn-primary btn-sm">Delete</a></td>
                                 <td>{{ $travel->travel_date ?? date('Y-m-d', strtotime($travel->start_date)) }}</td>
                                 <td>{{ getProjectById($travel->project_id)->project_name ?? '-' }}</td>
                                 <td>{{ $travel->type_claim ?? '-' }}</td>
