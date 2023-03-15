@@ -253,6 +253,18 @@ class myClaimService
             'supervisor' => 'recommend'
         ];
 
+        $checkDisabled = EclaimGeneralSetting::where('tenant_id', Auth::user()->tenant_id)
+            ->first();
+            
+        if (($checkDisabled->disable_user) == 1) {
+            $data['msg'] = 'Unable to submit, claim is under maintenance';
+            $data['status'] = config('app.response.error.status');
+            $data['type'] = config('app.response.error.type');
+            $data['title'] = config('app.response.error.title');
+
+            return $data;
+        }
+
         GeneralClaim::where('id', $id)->update($update);
 
         $generalClaimData = GeneralClaim::where('id', $id)
@@ -734,6 +746,18 @@ class myClaimService
 
         $claim['status'] = $status;
 
+        $checkDisabled = EclaimGeneralSetting::where('tenant_id', Auth::user()->tenant_id)
+            ->first();
+
+        if (($checkDisabled->disable_user) == 1) {
+            $data['msg'] = 'Unable to submit, claim is under maintenance';
+            $data['status'] = config('app.response.error.status');
+            $data['type'] = config('app.response.error.type');
+            $data['title'] = config('app.response.error.title');
+
+            return $data;
+        }
+        
         GeneralClaim::where([['tenant_id', Auth::user()->tenant_id], ['id', $id]])->update($claim);
 
         $generalClaimData = GeneralClaim::find($id);
