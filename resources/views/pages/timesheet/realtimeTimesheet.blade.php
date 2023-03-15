@@ -64,6 +64,7 @@
                         <table id="timesheetapproval" class="table table-striped table-bordered align-middle">
                             <thead>
                                 <tr>
+                                    <th class="text-nowrap">No</th>
                                     <th class="text-nowrap">Action</th>
                                     <th class="text-nowrap">Event Name</th>
                                     <th class="text-nowrap">Date</th>
@@ -74,9 +75,12 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                <?php $no = 1 ?>
+                               
                                 @if ($events)
                                     @foreach ($events as $event)
                                         <tr class="odd gradeX">
+                                            <td>{{ $no++ }}</td>
                                             <td style="text-align: center" width="7%"><a href="javascript:;" data-bs-toggle="modal"
                                                     data-id="{{ $event->id }}" id="buttonViewEvent"
                                                     class="btn btn-primary"></i> View</a></td>
@@ -86,12 +90,12 @@
                                             <td>{{ $event->location ? getProjectLocation($event->location)->location_name : '-' }}
                                             </td>
                                             <td>{{ $event->desc ? $event->desc : '-' }}</td>
-                                            {{-- @php
+                                            @php
                                                 $names = explode(',', $event->participant);
-                                            @endphp --}}
+                                            @endphp
                                             <td style="text-align: center" width="7%"><a class="btn btn-primary" href="javascript:;" data-bs-toggle="modal"
-                                                    {{-- data-id="{{ $event->id }}" id="buttonnViewParticipant"></i> ({{ count($names) }}) view</a></td> --}}
-                                                    data-id="{{ $event->id }}" id="buttonnViewParticipant"></i> view</a></td>
+                                                    data-id="{{ $event->id }}" id="buttonnViewParticipant"></i>  {{ count($names) }} Participants  </a></td>
+                                                    {{-- data-id="{{ $event->id }}" id="buttonnViewParticipant"></i> view</a></td> --}}
                         
                                         </tr>
                                     @endforeach

@@ -106,7 +106,7 @@
                                     ?>
                                     @if ($remaining_hour > 0)
                                         <tr>
-                                            <td>{{ $loop->iteration }}</td>
+                                            <td>{{ $no++ }}</td>
                                             <td>{{ $item->employeeName }}</td>
                                             <td>{{ $item->designationName }}</td>
                                             <td>{{ $item->departmentName }}</td>

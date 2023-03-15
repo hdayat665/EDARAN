@@ -94,9 +94,11 @@
                             <thead>
                                 <tr>
                                     <th width="1%">&nbsp;</th>
+                                    <th class="text-nowrap">No</th>
                                     <th class="text-nowrap">Action</th>
                                     <th class="text-nowrap">Submitted Date</th>
                                     <th class="text-nowrap">Employee Name</th>
+                                    <th class="text-nowrap">Year</th>
                                     <th class="text-nowrap">Month</th>
                                     <th class="text-nowrap">Designation</th>
                                     <th class="text-nowrap">Department</th>
@@ -104,10 +106,12 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                <?php $no = 1 ?>
                                 @if ($timesheets)
                                 @foreach ($timesheets as $timesheet)
                                 <tr class="odd gradeX">
                                     <td width="1%" class="fw-bold text-dark"><input class="form-check-input" value="{{$timesheet->id}}" name="id[]" type="checkbox" id="checkbox1" /></td>
+                                    <td>{{ $no++ }}</td>
                                     <td>
                                         <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle"><i class="fa fa-cogs"></i> Actions <i class="fa fa-caret-down"></i></a>
                                         <div class="dropdown-menu">
@@ -151,6 +155,7 @@
                                     </td>
                                     <td>{{$timesheet->created_at}}</td>
                                     <td>{{$timesheet->employee_name ?? '-'}}</td>
+                                    <td>{{date('Y', strtotime($timesheet->created_at))}}</td>
                                     <td>{{$timesheet->month}}</td>
                                     <td>{{$timesheet->designation ?? '-'}}</td>
                                     <td>{{$timesheet->department}}</td>
