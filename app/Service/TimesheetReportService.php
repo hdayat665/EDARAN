@@ -32,11 +32,25 @@ class TimesheetReportService
             $cond[4] = ['department', $input['department']];
         }
 
-        if (isset($input['status'])) {
-            $cond[5] = ['status', $input['status']];
+        if (isset($input['year'])) {
+            $year = $input['year'];
+            $cond[5] = [DB::raw('YEAR(created_at)'), $year];
         }
 
+        if (isset($input['month'])) {
+            $month = $input['month'];
+            $cond[6] = [DB::raw('MONTH(created_at)'), $month];
+        }
+
+        
+
         $data = TimesheetApproval::where($cond)->get();
+
+        // $data = DB::table('timesheet_approval as a')
+        //     ->select('a.*')
+        //     ->where($cond)
+        //     ->get();
+
 
         return $data;
     }
@@ -152,15 +166,18 @@ class TimesheetReportService
         if (isset($input['month2'])) {
             $cond[5] = [DB::raw('MONTH(b.date)'), $input['month2']];
         }
+ 
+    $data = DB::table('employment as a')
+    ->leftJoin('timesheet_log as b', 'a.user_id', '=', 'b.user_id')
+    ->leftJoin('designation as c', 'a.designation', '=', 'c.id')
+    ->leftJoin('department as d', 'a.department', '=', 'd.id')
+    ->select('a.employeeName', 'c.designationName', 'a.status', DB::raw('DATE(b.date) AS date'), DB::raw('TIME_FORMAT(SEC_TO_TIME(SUM(TIME_TO_SEC(b.total_hour))), "%k:%i:%s") AS total_hour'), 'd.departmentName')
+    ->where($cond)
+    ->groupBy('a.employeeName', 'c.designationName', 'a.status', 'd.departmentName', 'date')
+    ->get();
 
-        $data = DB::table('employment as a')
-            ->leftJoin('timesheet_log as b', 'a.user_id', '=', 'b.user_id')
-            ->leftJoin('designation as c', 'a.designation', '=', 'c.id')
-            ->leftJoin('department as d', 'a.department', '=', 'd.id')
-            ->select('a.employeeName', 'c.designationName', 'a.status', 'b.date', 'b.total_hour', 'd.departmentName')
-            ->where($cond)
-            // ->groupBy('c.employeeName')
-            ->get();
+
+    
 
         $pivotedData = $data->groupBy('employeeName')->map(function ($employeeLogs) {
             $result = ['employeeName' => $employeeLogs->first()->employeeName, 

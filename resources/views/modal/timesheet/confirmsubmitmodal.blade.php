@@ -11,7 +11,7 @@
                 <div class="col-sm-3">
                     <label for="inputPassword6" class="col-form-label">Name</label>
                 </div>
-                <div class="col-sm-5">
+                <div class="col-sm-9">
                      <input type="text" id="" value="{{$employee->employeeName ?? ''}}" class="form-control" aria-describedby="passwordHelpInline" readonly> 
                 </div>
             </div>
@@ -19,7 +19,7 @@
                 <div class="col-sm-3">
                     <label for="inputPassword6" class="col-form-label">Year</label>
                 </div>
-                <div class="col-sm-5">
+                <div class="col-sm-9">
                     <input type="text" id="yearsub" class="form-control" aria-describedby="passwordHelpInline" readonly>
                 </div>
             </div>
@@ -27,15 +27,15 @@
                 <div class="col-sm-3">
                     <label for="inputPassword6" class="col-form-label">Month</label>
                 </div>
-                <div class="col-sm-5">
+                <div class="col-sm-9">
                     <input type="text" id="monthsub" class="form-control" aria-describedby="passwordHelpInline" readonly>
                     <input type="hidden"  class="form-control" id="idtv" name="id" />
                 </div>
             </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" id="submitTimesheetApproval" class="btn btn-primary">Submit</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">CANCEL</button>
+          <button type="button" id="submitTimesheetApproval" class="btn btn-primary">SUBMIT</button>
         </div>
       </div>
     </div>

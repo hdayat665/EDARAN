@@ -2,7 +2,7 @@
 
 $(document).ready(function() {
 
-    document.getElementById("yearsub").value = new Date().getFullYear();
+ document.getElementById("yearsub").value = new Date().getFullYear();
 
   var monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
   var d = new Date();
@@ -183,6 +183,7 @@ $(document).ready(function() {
                     opt.text = location['location_name'];
                     select.appendChild(opt);
                 }
+                $('#projectLocationOffice').picker({ search: true });
             });
 
 
@@ -210,6 +211,8 @@ $(document).ready(function() {
                     opt.text = activity['activity_name'];
                     select.appendChild(opt);
                 }
+                $('#activityOffice').picker({ search: true });
+                
             });
 
             var activityLogs = getActivityNamebyLogsId(projectId);
@@ -224,6 +227,7 @@ $(document).ready(function() {
                     opt.text = activity['activity_name'];
                     select.appendChild(opt);
                 }
+                $('#activityLogs').picker({ search: true });
             });
 
 
@@ -269,6 +273,7 @@ $(document).ready(function() {
                     opt.text = location['location_name'];
                     select.appendChild(opt);
                 }
+                $('#projectLocationOfficeEdit').picker({ search: true });
             });
 
 
@@ -284,6 +289,7 @@ $(document).ready(function() {
                     opt.text = location['location_name'];
                     select.appendChild(opt);
                 }
+                $('#projectlocsearchedit').picker({ search: true });
             });
 
             // var activityOffice = getActivityByProjectId(projectId);
@@ -310,6 +316,7 @@ $(document).ready(function() {
                     opt.text = activity['activity_name'];
                     select.appendChild(opt);
                 }
+                $('#activityOfficeEdit').picker({ search: true });
             });
         }
     }
@@ -375,7 +382,7 @@ $(document).ready(function() {
     $('#saveLogButton').click(function(e) {
         $("#addLogForm").validate({
             rules: {
-                event_name: 'required',
+                // event_name: 'required',
                 type_of_log: "required",
                 date: "required",
                 office_log: "required",
@@ -390,12 +397,12 @@ $(document).ready(function() {
             },
 
             messages: {
-                event_name: 'Please insert event name',
+                // event_name: 'Please insert event name',
                 type_of_log: "Please Choose Type of Log",
                 date: "Please Choose  Date",
                 office_log: "Please Choose Office Log",
-                project_id: "Please Choose",
-                office_log_project: "Please Choose",
+                project_id: "Please Choose Project",
+                office_log_project: "Please Choose Project",
                 activity_name: "Please Choose Activity Name",
                 activity_office: "Please Choose",
                 start_time: "Please Choose Start Time",
@@ -560,7 +567,7 @@ $(document).ready(function() {
                 end_date: "required",
                 start_time: "required",
                 end_time: "required",
-                duration: "required",
+                // duration: "required",
                 recurring: "required",
                 location: "required",
                 location_by_project: "required",
@@ -574,7 +581,7 @@ $(document).ready(function() {
                 end_date: "Please Choose End Date",
                 start_time: "Please Choose Start Time",
                 end_time: "Please Choose End Time",
-                duration: "Please Choose Duration",
+                // duration: "Please Choose Duration",
                 recurring: "Please Select",
                 location: "Please Insert Location",
                 location_by_project: "Please Enter Specific Location",
@@ -627,7 +634,7 @@ $(document).ready(function() {
                 end_date: "required",
                 start_time: "required",
                 end_time: "required",
-                duration: "required",
+                // duration: "required",
                 recurring: "required",
                 location: "required",
                 location_by_project: "required",
@@ -639,7 +646,7 @@ $(document).ready(function() {
                 end_date: "Please Choose End Date",
                 start_time: "Please Choose Start Time",
                 end_time: "Please Choose End Time",
-                duration: "Please Choose Duration",
+                // duration: "Please Choose Duration",
                 recurring: "Please Select",
                 location: "Please Enter  Location",
                 location_by_project: "Please Enter  Location",
@@ -772,7 +779,7 @@ $(document).ready(function() {
 
                 event.push({
                     // title: "Event: " + events['event_name'],
-                    title: "Event: " + events['event_name'],
+                    title: "Event: " + events['event_name'] + "\n" + "from " + events['start_time'] + " to " + events['end_time'],
                     start: startYear + '-' + startMonth + '-' + startDay,
                     end: endYear + '-' + endMonth + '-' + endDay,
                     color: app.color.red,
@@ -821,7 +828,7 @@ $(document).ready(function() {
                 }
 
                 log.push({
-                    title: (logs['type_of_log'] ? type_of_log(logs['type_of_log']) + ' ' : '') + "\n" +  (logs['project_name'] ? logs['project_name'] + ' ' : '') + "\n" + (logs['activitynameas'] ? logs['activitynameas'] + ' ' : '') + ' from ' + logs['start_time'] + ' to ' + logs['end_time'],
+                    title: (logs['type_of_log'] ? type_of_log(logs['type_of_log']) + ' ' : '') + "\n" +  (logs['project_name'] ? logs['project_name'] + ' ' : '') + "\n" + (logs['activitynameas'] ? logs['activitynameas'] + ' ' : '') + "\n" +' from ' + logs['start_time'] + ' to ' + logs['end_time'],
                     // start: startYear + '-' + startMonth + '-' + startDay + 'T' + startTime + ':00',
                     start: startYear + '-' + startMonth + '-' + startDay,
                     color: app.color.primary,
@@ -1116,6 +1123,7 @@ $(document).ready(function() {
                             });
 
                             $("#event_name").val(data.event_name);
+                            $("#editvenue").val(data.venue);
                             $("#starteventdateedit").val(data.start_date);
                             $("#endeventdateedit").val(data.end_date);
                             $("#starteventtimeedit").val(data.start_time);
@@ -1554,8 +1562,10 @@ $(document).ready(function() {
       });
       
     
-
-    
+      
+     
+    $('#projectLocationOffice').picker({ search: true });
+    $('#activityOffice').picker({ search: true });
     $('#activity_name_edit').picker({ search: true });
     $('#projectlocsearch').picker({ search: true });
     $('#activity_names').picker({ search: true });
@@ -2118,7 +2128,7 @@ $(document).ready(function() {
         diff -= hours * (1000 * 60 * 60);
         var mins = Math.floor(diff / (1000 * 60));
         diff -= mins * (1000 * 60);
-        $("#logduration").val(hours + " : " + mins + " : " + "0" );
+        $("#logduration").val(days + " days : " + hours + " hours : " + mins + " minutes ");
       });
       
       // Trigger the change event on page load to update the duration initially

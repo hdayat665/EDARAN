@@ -115,40 +115,55 @@ $(document).ready(function() {
 
 
     $('#addamendreasonb').click(function(e) {
-        requirejs(['sweetAlert2'], function(swal) {
+        $("#reasonamendform").validate({
+            rules: {
+                amendreason: 'required',
+              
+            },
 
-            var data = new FormData(document.getElementById("reasonamendform"));
+            messages: {
+                amendreason: 'Please Insert Reason',
+                
+            },
+            submitHandler: function(form) {
+                requirejs(['sweetAlert2'], function(swal) {
 
-            $.ajax({
-                type: "POST",
-                url: "/updatereason",
-                data: data,
-                dataType: "json",
-                async: false,
-                processData: false,
-                contentType: false,
-            }).done(function(data) {
-                swal({
-                    title: data.title,
-                    text: data.msg,
-                    type: data.type,
-                     confirmButtonColor: '#3085d6',
-                    confirmButtonText: 'OK',
-                    allowOutsideClick: false,
-                    allowEscapeKey: false,
-                }).then(function() {
-                    if (data.type == 'error') {
+                    var data = new FormData(document.getElementById("reasonamendform"));
+                    // var data = $('#tree').jstree("get_selected");
 
-                    } else {
-                        location.reload();
-                    }
+                    $.ajax({
+                        type: "POST",
+                        url: "/updatereason",
+                        data: data,
+                        dataType: "json",
+                        async: false,
+                        processData: false,
+                        contentType: false,
+                    }).done(function(data) {
+                        swal({
+                            title: data.title,
+                            text: data.msg,
+                            type: data.type,
+                            confirmButtonColor: '#3085d6',
+                            confirmButtonText: 'OK',
+                            allowOutsideClick: false,
+                            allowEscapeKey: false,
+                        }).then(function() {
+                            if (data.type == 'error') {
 
+                            } else {
+                                location.reload();
+                            }
+
+
+                        });
+                    });
 
                 });
-            });
-
+            },
         });
     });
+
 
 
     $("#reset").on("click", function () {
