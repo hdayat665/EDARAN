@@ -11,7 +11,7 @@
                                 <div class="row p-2">
                                     <h4>Claim Information</h4>
                                 </div>
-
+ 
                                 <div class="row p-2">
                                     <div class="col-md-2">
                                         <label class="form-label col-form-label">Claim ID :</label>
@@ -151,10 +151,13 @@
                             <a href="/claimApprovalView/1" class="btn btn-light" style="color: black;" type="submit"><i class="fa fa-arrow-left"></i> Back</a>
                         </div>
                         <div class="col d-flex justify-content-end">
+                        @if ($general->hod == 'recommend')
+                        @else
                             <a class="btn btn-secondary" data-id="{{ $general->id }}" style="color: black" type="submit"> Cancel</a> &nbsp;
                             <a href="javascript:;" class="btn btn-warning" style="color: black" data-bs-toggle="modal" data-bs-target="#modalamend">Amend</a> &nbsp;
                             <a href="javascript:;" class="btn btn-danger" style="color: black" data-bs-toggle="modal" data-bs-target="#modalreject"> Reject</a> &nbsp;
                             <a class="btn btn-lime" id="approveButton" data-id="{{ $general->id }}" style="color: black" type="submit"> Approve</a>
+                            @endif
                         </div> 
                     </div> 
                 </form>

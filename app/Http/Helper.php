@@ -235,6 +235,22 @@ if (!function_exists('gender')) {
     }
 }
 
+if (!function_exists('reminder')) {
+    function reminder()
+    {
+        $data = [
+            '1' => '5 Minute Before',
+            '2' => '10 Minute Before',
+            '3' => '15 Minute Before',
+            '4' => '20 Minute Before',
+            '5' => '30 Minute Before',
+            '6' => '1 Hour Before',
+        ];
+
+        return $data;
+    }
+}
+
 
 
 if (!function_exists('educationLevel')) {
@@ -1806,7 +1822,7 @@ if (!function_exists('getRoleById')) {
         return $data;
     }
 }
-
+ 
 if (!function_exists('getViewForClaimApproval')) {
     function getViewForClaimApproval($type = '')
     {

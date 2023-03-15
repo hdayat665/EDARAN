@@ -45,7 +45,7 @@ $(document).ready(function () {
     ).on("click", function () {
         // alert("ss");
         var id = $(this).data("id");
-        var stage = "hod";
+        var stage = "supervisor";
         var status = "recommend";
 
         requirejs(["sweetAlert2"], function (swal) {

@@ -130,7 +130,7 @@ $(document).ready(function () {
         // alert("ss");
         var id = $(this).data("id");
         var status = "recommend";
-        var stage = "hod";
+        var stage = "supervisor";
 
         requirejs(["sweetAlert2"], function (swal) {
             $.ajax({
