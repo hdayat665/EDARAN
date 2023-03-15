@@ -1,7 +1,7 @@
 <div class="tab-pane fade" id="default-tab-2">
     <div class="panel-body">
-       <div style="overflow-x:auto;">
-        <table id="table-general"  class="table table-bordered align-middle">
+        <div style="overflow-x:auto;">
+            <table id="table-general" class="table table-bordered align-middle">
                 <thead>
                     <tr>
                         <th width="1%">&nbsp;</th>
@@ -34,209 +34,187 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td colspan="19" style="text-align: center"><label class="form-label">LEVEL
-                                DEPARTMENT</label></td>
-                        <td style="display: none"></td>
-                        <td style="display: none"></td>
-                        <td style="display: none"></td>
-                        <td style="display: none"></td>
-                        <td style="display: none"></td>
-                        <td style="display: none"></td>
-                        <td style="display: none"></td>
-                        <td style="display: none"></td>
-                        <td style="display: none"></td>
-                        <td style="display: none"></td>
-                        <td style="display: none"></td>
-                        <td style="display: none"></td>
-                        <td style="display: none"></td>
-                        <td style="display: none"></td>
-                        <td style="display: none"></td>
-                        <td style="display: none"></td>
-                        <td style="display: none"></td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td width="40%">HOD / CEO - APPROVER</td>
-                        <td>
-                            <div class="form-check form-switch d-flex justify-content-center" >
-                                <input class="form-check-input"   name="mainCompanion"  type="checkbox" role="" id=""  checked>
-                            </div>
-                        </td>
-                        </td>
-                        <td style="text-align: center;background-color:MediumSpringGreen!important;"><input class="form-check-input"
-                                type="checkbox" disabled /></td>
-                        <td style="text-align: center;background-color:MediumSpringGreen!important;"><input class="form-check-input"
-                                type="checkbox" disabled /></td>
-                        <td style="text-align: center"><input class="form-check-input" type="checkbox" />
-                        </td>
-                        <td style="text-align: center"><input class="form-check-input" type="checkbox" />
-                        </td>
-                        <td style="text-align: center;background-color:darkgray!important;"><input class="form-check-input"
-                                type="checkbox" disabled /></td>
-                        <td style="text-align: center;background-color:darkgray!important;"><input class="form-check-input"
-                                type="checkbox" disabled /></td>
-                        <td style="text-align: center;background-color:darkgray!important;"><input class="form-check-input"
-                                type="checkbox" disabled /></td>
-                        <td style="text-align: center;background-color:darkgray!important;"><input class="form-check-input"
-                                type="checkbox" disabled /></td>
-                        <td style="text-align: center;background-color:darkgray!important;"><input class="form-check-input"
-                                type="checkbox" disabled /></td>
-                        <td style="text-align: center;background-color:darkgray!important;"><input class="form-check-input"
-                                type="checkbox" disabled /></td>
-                        <td style="text-align: center;background-color:darkgray!important;"><input class="form-check-input"
-                                type="checkbox" disabled /></td>
-                        <td style="text-align: center;background-color:darkgray!important;"><input class="form-check-input"
-                                type="checkbox" disabled /></td>
-                        <td style="text-align: center;background-color:darkgray!important;"><input class="form-check-input"
-                                type="checkbox" disabled /></td>
-                        <td style="text-align: center;background-color:darkgray!important;"><input class="form-check-input"
-                                type="checkbox" disabled /></td>
-                        <td style="text-align: center;background-color:darkgray!important;"><input class="form-check-input"
-                                type="checkbox" disabled /></td>
-                        <td style="text-align: center;background-color:darkgray!important;"><input
-                                class="form-check-input" type="checkbox" disabled /></td>
-                    </tr>
-                    <tr>
-                        <td colspan="19" style="text-align: center"><label class="form-label">LEVEL
-                                FINANCE</label></td>
-                        <td style="display: none"></td>
-                        <td style="display: none"></td>
-                        <td style="display: none"></td>
-                        <td style="display: none"></td>
-                        <td style="display: none"></td>
-                        <td style="display: none"></td>
-                        <td style="display: none"></td>
-                        <td style="display: none"></td>
-                        <td style="display: none"></td>
-                        <td style="display: none"></td>
-                        <td style="display: none"></td>
-                        <td style="display: none"></td>
-                        <td style="display: none"></td>
-                        <td style="display: none"></td>
-                        <td style="display: none"></td>
-                        <td style="display: none"></td>
-                        <td style="display: none"></td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td width="40%"> FINANCE - CHECKER</td>
-                        <td>
-                            <div class="form-check form-switch d-flex justify-content-center" >
-                                <input class="form-check-input"   name="mainCompanion"  type="checkbox" role="" id=""  checked>
-                            </div>
-                        </td>
-                        <td style="text-align: center;background-color:MediumSpringGreen!important;"><input class="form-check-input"
-                                type="checkbox" disabled /></td>
-                        <td style="text-align: center;background-color:darkgray!important;"><input
-                                class="form-check-input" type="checkbox" disabled /></td>
-                        <td style="text-align: center"><input class="form-check-input" type="checkbox" checked /></td>
-                        <td style="text-align: center"><input class="form-check-input" type="checkbox" checked /></td>
-                        <td style="text-align: center;background-color:MediumSpringGreen!important;"><input class="form-check-input"
-                                type="checkbox" disabled /></td>
-                        <td style="text-align: center;background-color:MediumSpringGreen!important;"><input class="form-check-input"
-                        type="checkbox" disabled /></td>
-                        <td style="text-align: center;background-color:MediumSpringGreen!important;"><input class="form-check-input"
-                        type="checkbox" disabled /></td>
-                        <td style="text-align: center;background-color:MediumSpringGreen!important;"><input class="form-check-input"
-                        type="checkbox" disabled /></td>
-                        <td style="text-align: center"><input class="form-check-input" type="checkbox" checked /></td>
-                        <td style="text-align: center;background-color:darkgray!important;"><input
-                                class="form-check-input" type="checkbox" disabled /></td>
-                        <td style="text-align: center;background-color:darkgray!important;"><input
-                        class="form-check-input" type="checkbox" disabled /></td>
-                        <td style="text-align: center;background-color:darkgray!important;"><input
-                        class="form-check-input" type="checkbox" disabled /></td>
-                        <td style="text-align: center"><input class="form-check-input" type="checkbox" checked /></td>
-                        <td style="text-align: center;background-color:darkgray!important;"><input
-                                class="form-check-input" type="checkbox" disabled /></td>
-                        <td style="text-align: center;background-color:darkgray!important;"><input
-                        class="form-check-input" type="checkbox" disabled /></td>
-                        <td style="text-align: center;background-color:darkgray!important;"><input
-                        class="form-check-input" type="checkbox" disabled /></td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td width="40%">FINANCE - RECOMMENDER</td>
-                        <td>
-                            <div class="form-check form-switch d-flex justify-content-center" >
-                                <input class="form-check-input"   name="mainCompanion"  type="checkbox" role="" id=""  checked>
-                            </div>
-                        </td>
-                        <td style="text-align: center;background-color:MediumSpringGreen!important;"><input class="form-check-input"
-                                type="checkbox" disabled /></td>
-                        <td style="text-align: center;background-color:MediumSpringGreen!important;"><input class="form-check-input"
-                                type="checkbox" disabled /></td>
-                        <td style="text-align: center"><input class="form-check-input" type="checkbox" />
-                        </td>
-                        <td style="text-align: center"><input class="form-check-input" type="checkbox" />
-                        </td>
-                        <td style="text-align: center;background-color:darkgray!important;"><input
-                                class="form-check-input" type="checkbox" disabled /></td>
-                        <td style="text-align: center;background-color:darkgray!important;"><input
-                                class="form-check-input" type="checkbox" disabled /></td>
-                        <td style="text-align: center;background-color:darkgray!important;"><input
-                                class="form-check-input" type="checkbox" disabled /></td>
-                        <td style="text-align: center;background-color:darkgray!important;"><input
-                                class="form-check-input" type="checkbox" disabled /></td>
-                        <td style="text-align: center;background-color:darkgray!important;"><input
-                                class="form-check-input" type="checkbox" disabled /></td>
-                        <td style="text-align: center;background-color:darkgray!important;"><input
-                                class="form-check-input" type="checkbox" disabled /></td>
-                        <td style="text-align: center;background-color:darkgray!important;"><input
-                                class="form-check-input" type="checkbox" disabled /></td>
-                        <td style="text-align: center;background-color:darkgray!important;"><input
-                                class="form-check-input" type="checkbox" disabled /></td>
-                        <td style="text-align: center;background-color:darkgray!important;"><input
-                                class="form-check-input" type="checkbox" disabled /></td>
-                        <td style="text-align: center;background-color:darkgray!important;"><input
-                                class="form-check-input" type="checkbox" disabled /></td>
-                        <td style="text-align: center;background-color:darkgray!important;"><input
-                                class="form-check-input" type="checkbox" disabled /></td>
-                        <td style="text-align: center;background-color:darkgray!important;"><input
-                                class="form-check-input" type="checkbox" disabled /></td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td width="40%">FINANCE - APPROVER</td>
-                        <td>
-                            <div class="form-check form-switch d-flex justify-content-center" >
-                                <input class="form-check-input"   name="mainCompanion"  type="checkbox" role="" id=""  checked>
-                            </div>
-                        </td>
-                        <td style="text-align: center;background-color:MediumSpringGreen!important;"><input class="form-check-input"
-                                type="checkbox" disabled /></td>
-                        <td style="text-align: center;background-color:MediumSpringGreen!important;"><input class="form-check-input"
-                                type="checkbox" disabled /></td>
-                        <td style="text-align: center"><input class="form-check-input" type="checkbox" checked /></td>
-                        <td style="text-align: center"><input class="form-check-input" type="checkbox" checked /></td>
-                        <td style="text-align: center;background-color:darkgray!important;"><input
-                                class="form-check-input" type="checkbox" disabled /></td>
-                        <td style="text-align: center;background-color:darkgray!important;"><input
-                                class="form-check-input" type="checkbox" disabled /></td>
-                        <td style="text-align: center;background-color:darkgray!important;"><input
-                                class="form-check-input" type="checkbox" disabled /></td>
-                        <td style="text-align: center;background-color:darkgray!important;"><input
-                                class="form-check-input" type="checkbox" disabled /></td>
-                        <td style="text-align: center;background-color:darkgray!important;"><input
-                                class="form-check-input" type="checkbox" disabled /></td>
-                        <td style="text-align: center;background-color:darkgray!important;"><input
-                                class="form-check-input" type="checkbox" disabled /></td>
-                        <td style="text-align: center;background-color:darkgray!important;"><input
-                                class="form-check-input" type="checkbox" disabled /></td>
-                        <td style="text-align: center;background-color:darkgray!important;"><input
-                                class="form-check-input" type="checkbox" disabled /></td>
-                        <td style="text-align: center;background-color:darkgray!important;"><input
-                                class="form-check-input" type="checkbox" disabled /></td>
-                        <td style="text-align: center;background-color:darkgray!important;"><input
-                                class="form-check-input" type="checkbox" disabled /></td>
-                        <td style="text-align: center;background-color:darkgray!important;"><input
-                                class="form-check-input" type="checkbox" disabled /></td>
-                        <td style="text-align: center;background-color:darkgray!important;"><input
-                                class="form-check-input" type="checkbox" disabled /></td>
-                    </tr>
+                    @if ($configs)
+                        @foreach ($configs as $config)
+                            @if ($config->type_claim == 'general')
+                                <tr>
+                                    <td>1</td>
+                                    <td width="40%">{{ $config->role ?? '-' }}</td>
+                                    <td>
+                                        <div class="form-check form-switch d-flex justify-content-center">
+                                            <input class="form-check-input" name="mainCompanion" id="statusCheck" data-id="{{ $config->id }}" data-role="{{ $config->role }}" type="checkbox"
+                                                {{ $config->status ? 'checked' : '' }} role="" id="">
+                                        </div>
+                                    </td>
+                                    @if (in_array($config->role, ['SUPERVISOR - RECOMMENDER', 'HOD / CEO - APPROVER', 'ADMIN - RECOMMENDER', 'ADMIN - APPROVER', 'FINANCE - RECOMMENDER', 'FINANCE - APPROVER']))
+                                        <td style="text-align: center;background-color:MediumSpringGreen!important;">
+                                            <input class="form-check-input" {{ $config->approve ? 'checked' : '' }} type="checkbox" disabled />
+                                        </td>
+                                        <td style="text-align: center;background-color:MediumSpringGreen!important;">
+                                            <input class="form-check-input" {{ $config->reject ? 'checked' : '' }} type="checkbox" disabled />
+                                        </td>
+                                        <td style="text-align: center">
+                                            <input class="form-check-input" id="amendCheck" data-role="{{ $config->role }}" data-id="{{ $config->id }}" type="checkbox"
+                                                {{ $config->amend ? 'checked' : '' }} />
+                                        </td>
+                                        <td style="text-align: center">
+                                            <input class="form-check-input" id="cancelCheck" data-role="{{ $config->role }}" data-id="{{ $config->id }}" type="checkbox"
+                                                {{ $config->cancel ? 'checked' : '' }} />
+                                        </td>
+                                        <td style="text-align: center;background-color:darkgray!important;">
+                                            <input class="form-check-input" type="checkbox" {{ $config->check1 ? 'checked' : '' }} disabled />
+                                        </td>
+                                        <td style="text-align: center;background-color:darkgray!important;">
+                                            <input class="form-check-input" type="checkbox" disabled {{ $config->generate_pv1 ? 'checked' : '' }} />
+                                        </td>
+                                        <td style="text-align: center;background-color:darkgray!important;">
+                                            <input class="form-check-input" type="checkbox" disabled {{ $config->payment1 ? 'checked' : '' }} />
+                                        </td>
+                                        <td style="text-align: center;background-color:darkgray!important;">
+                                            <input class="form-check-input" type="checkbox" disabled {{ $config->paid1 ? 'checked' : '' }} />
+                                        </td>
+                                        <td style="text-align: center;background-color:darkgray!important;">
+                                            <input class="form-check-input" type="checkbox" {{ $config->check2 ? 'checked' : '' }} disabled />
+                                        </td>
+                                        <td style="text-align: center;background-color:darkgray!important;">
+                                            <input class="form-check-input" type="checkbox" disabled {{ $config->generate_pv2 ? 'checked' : '' }} />
+                                        </td>
+                                        <td style="text-align: center;background-color:darkgray!important;">
+                                            <input class="form-check-input" type="checkbox" disabled {{ $config->payment2 ? 'checked' : '' }} />
+                                        </td>
+                                        <td style="text-align: center;background-color:darkgray!important;">
+                                            <input class="form-check-input" type="checkbox" disabled {{ $config->paid2 ? 'checked' : '' }} />
+                                        </td>
+                                        <td style="text-align: center;background-color:darkgray!important;">
+                                            <input class="form-check-input" type="checkbox" {{ $config->check3 ? 'checked' : '' }} disabled />
+                                        </td>
+                                        <td style="text-align: center;background-color:darkgray!important;">
+                                            <input class="form-check-input" type="checkbox" disabled {{ $config->generate_pv3 ? 'checked' : '' }} />
+                                        </td>
+                                        <td style="text-align: center;background-color:darkgray!important;">
+                                            <input class="form-check-input" type="checkbox" disabled {{ $config->payment3 ? 'checked' : '' }} />
+                                        </td>
+                                        <td style="text-align: center;background-color:darkgray!important;">
+                                            <input class="form-check-input" type="checkbox" disabled {{ $config->paid3 ? 'checked' : '' }} />
+                                        </td>
+                                    @endif
+
+                                    @if ($config->role == 'ADMIN - CHECKER')
+                                        <td style="text-align: center;background-color:MediumSpringGreen!important;">
+                                            <input class="form-check-input" {{ $config->approve ? 'checked' : '' }} type="checkbox" disabled />
+                                        </td>
+                                        <td style="text-align: center;background-color:darkgray!important;">
+                                            <input class="form-check-input" type="checkbox" disabled />
+                                        </td>
+                                        <td style="text-align: center">
+                                            <input class="form-check-input" id="amendCheck" data-role="{{ $config->role }}" data-id="{{ $config->id }}" type="checkbox"
+                                                {{ $config->amend ? 'checked' : '' }} />
+                                        </td>
+                                        <td style="text-align: center">
+                                            <input class="form-check-input" id="cancelCheck" data-role="{{ $config->role }}" data-id="{{ $config->id }}" type="checkbox"
+                                                {{ $config->cancel ? 'checked' : '' }} />
+                                        </td>
+                                        <td style="text-align: center;background-color:MediumSpringGreen!important;">
+                                            <input class="form-check-input" type="checkbox" {{ $config->check1 ? 'checked' : '' }} disabled />
+                                        </td>
+                                        <td style="text-align: center;background-color:darkgray!important;">
+                                            <input class="form-check-input" type="checkbox" disabled {{ $config->generate_pv1 ? 'checked' : '' }} />
+                                        </td>
+                                        <td style="text-align: center;background-color:darkgray!important;">
+                                            <input class="form-check-input" type="checkbox" disabled {{ $config->payment1 ? 'checked' : '' }} />
+                                        </td>
+                                        <td style="text-align: center;background-color:darkgray!important;">
+                                            <input class="form-check-input" type="checkbox" disabled {{ $config->paid1 ? 'checked' : '' }} />
+                                        </td>
+                                        <td style="text-align: center;">
+                                            <input class="form-check-input" id="check2Check" data-role="{{ $config->role }}" data-id="{{ $config->id }}" type="checkbox"
+                                                {{ $config->check2 ? 'checked' : '' }} />
+                                        </td>
+                                        <td style="text-align: center;background-color:darkgray!important;">
+                                            <input class="form-check-input" type="checkbox" disabled {{ $config->generate_pv2 ? 'checked' : '' }} />
+                                        </td>
+                                        <td style="text-align: center;background-color:darkgray!important;">
+                                            <input class="form-check-input" type="checkbox" disabled {{ $config->payment2 ? 'checked' : '' }} />
+                                        </td>
+                                        <td style="text-align: center;background-color:darkgray!important;">
+                                            <input class="form-check-input" type="checkbox" disabled {{ $config->paid2 ? 'checked' : '' }} />
+                                        </td>
+                                        <td style="text-align: center;">
+                                            <input class="form-check-input" id="check3Check" data-role="{{ $config->role }}" data-id="{{ $config->id }}" type="checkbox"
+                                                {{ $config->check3 ? 'checked' : '' }} />
+                                        </td>
+                                        <td style="text-align: center;background-color:darkgray!important;">
+                                            <input class="form-check-input" type="checkbox" disabled {{ $config->generate_pv3 ? 'checked' : '' }} />
+                                        </td>
+                                        <td style="text-align: center;background-color:darkgray!important;">
+                                            <input class="form-check-input" type="checkbox" disabled {{ $config->payment3 ? 'checked' : '' }} />
+                                        </td>
+                                        <td style="text-align: center;background-color:darkgray!important;">
+                                            <input class="form-check-input" type="checkbox" disabled {{ $config->paid3 ? 'checked' : '' }} />
+                                        </td>
+                                    @endif
+
+                                    @if ($config->role == 'FINANCE - CHECKER')
+                                        <td style="text-align: center;background-color:MediumSpringGreen!important;">
+                                            <input class="form-check-input" {{ $config->approve ? 'checked' : '' }} type="checkbox" disabled />
+                                        </td>
+                                        <td style="text-align: center;background-color:darkgray!important;">
+                                            <input class="form-check-input" {{ $config->reject ? 'checked' : '' }} type="checkbox" disabled />
+                                        </td>
+                                        <td style="text-align: center">
+                                            <input class="form-check-input" id="amendCheck" data-role="{{ $config->role }}" data-id="{{ $config->id }}" type="checkbox"
+                                                {{ $config->amend ? 'checked' : '' }} />
+                                        </td>
+                                        <td style="text-align: center">
+                                            <input class="form-check-input" id="cancelCheck" data-role="{{ $config->role }}" data-id="{{ $config->id }}" type="checkbox"
+                                                {{ $config->cancel ? 'checked' : '' }} />
+                                        </td>
+                                        <td style="text-align: center;background-color:MediumSpringGreen!important;">
+                                            <input class="form-check-input" type="checkbox" {{ $config->check1 ? 'checked' : '' }} disabled />
+                                        </td>
+                                        <td style="text-align: center;background-color:MediumSpringGreen!important;">
+                                            <input class="form-check-input" type="checkbox" disabled {{ $config->generate_pv1 ? 'checked' : '' }} />
+                                        </td>
+                                        <td style="text-align: center;background-color:MediumSpringGreen!important;">
+                                            <input class="form-check-input" type="checkbox" disabled {{ $config->payment1 ? 'checked' : '' }} />
+                                        </td>
+                                        <td style="text-align: center;background-color:MediumSpringGreen!important;">
+                                            <input class="form-check-input" type="checkbox" disabled {{ $config->paid1 ? 'checked' : '' }} />
+                                        </td>
+                                        <td style="text-align: center;">
+                                            <input class="form-check-input" id="check2Check" data-role="{{ $config->role }}" data-id="{{ $config->id }}" type="checkbox"
+                                                {{ $config->check2 ? 'checked' : '' }} />
+                                        </td>
+                                        <td style="text-align: center;background-color:darkgray!important;">
+                                            <input class="form-check-input" type="checkbox" disabled {{ $config->generate_pv2 ? 'checked' : '' }} />
+                                        </td>
+                                        <td style="text-align: center;background-color:darkgray!important;">
+                                            <input class="form-check-input" type="checkbox" disabled {{ $config->payment2 ? 'checked' : '' }} />
+                                        </td>
+                                        <td style="text-align: center;background-color:darkgray!important;">
+                                            <input class="form-check-input" type="checkbox" disabled {{ $config->paid2 ? 'checked' : '' }} />
+                                        </td>
+                                        <td style="text-align: center;">
+                                            <input class="form-check-input" id="check3Check" data-role="{{ $config->role }}" data-id="{{ $config->id }}" type="checkbox"
+                                                {{ $config->check3 ? 'checked' : '' }} />
+                                        </td>
+                                        <td style="text-align: center;background-color:darkgray!important;">
+                                            <input class="form-check-input" type="checkbox" disabled {{ $config->generate_pv3 ? 'checked' : '' }} />
+                                        </td>
+                                        <td style="text-align: center;background-color:darkgray!important;">
+                                            <input class="form-check-input" type="checkbox" disabled {{ $config->payment3 ? 'checked' : '' }} />
+                                        </td>
+                                        <td style="text-align: center;background-color:darkgray!important;">
+                                            <input class="form-check-input" type="checkbox" disabled {{ $config->paid3 ? 'checked' : '' }} />
+                                        </td>
+                                    @endif
+
+                                </tr>
+                            @endif
+                        @endforeach
+                    @endif
                 </tbody>
             </table>
-       </div>
+        </div>
     </div>
 </div>
