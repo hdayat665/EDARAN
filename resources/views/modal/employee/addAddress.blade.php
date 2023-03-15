@@ -7,6 +7,7 @@
         </div>
         <div class="modal-body">
             <form id="formAddressDetails">
+                <input type="hidden" name="user_id" value="{{$user_id}}">
                 <div class="row p-2">
                     <div class="col-sm-6">
                         <label for="address-1" class="form-label">Address 1*</label>
@@ -59,7 +60,7 @@
                         </select>
                     </div>
                 </div>
-                <div class="row p-2">
+                {{-- <div class="row p-2">
                     <div class="col-sm-6">
                         <label for="Addresstype" class="form-label">Address Type*</label>
                         <select class="form-select" name="addressType" id="addressType" style="text-transform:uppercase">
@@ -69,7 +70,7 @@
                             @endforeach
                         </select>
                     </div>
-                </div>
+                </div> --}}
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>

@@ -95,7 +95,7 @@
                                 <div class="dropdown-menu">
                                     <a href="javascript:;" id="othersQualificationModalEdit{{$other->id}}" data-id="{{$other->id}}" class="dropdown-item" data-bs-toggle="modal"> Edit</a>
                                     <div class="dropdown-divider"></div>
-                                    <a href="javascript:;" id="" data-id="" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#deleteOthers"> Delete</a>
+                                    <a href="javascript:;" id="deleteOthers{{$other->id}}" data-id="{{$other->id}}" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#deleteOthers"> Delete</a>
                                     <!-- <div class="dropdown-divider"></div> -->
                                 </div>
                             </td>
