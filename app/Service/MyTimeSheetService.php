@@ -252,18 +252,18 @@ class MyTimeSheetService
             FacadesMail::to($receiver)->send(new Mail($response));
         }
 
-        // $eventoid = $eventDetails->id;
-        // $eventpaerr= $eventDetails->participant;
-        // $explode = explode(',', $eventpaerr);
+        $eventid = $eventDetails->id;
+        $eventpaerr= $eventDetails->participant;
+        $explode = explode(',', $eventpaerr);
 
-        // foreach ($explode as $key => $participant) {
-        //     $input = [
-        //         'event_id' => $eventoid,
-        //         'user_id' => $participant,
-        //         'status' => 'pending',
-        //     ];
-        //     AttendanceEvent::create($input);
-        // }
+        foreach ($explode as $key => $participant) {
+            $input = [
+                'event_id' => $eventid,
+                'user_id' => $participant,
+                'status' => 'no response',
+            ];
+            AttendanceEvent::create($input);
+        }
 
         
        

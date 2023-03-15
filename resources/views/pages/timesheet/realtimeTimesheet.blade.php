@@ -64,7 +64,7 @@
                         <table id="timesheetapproval" class="table table-striped table-bordered align-middle">
                             <thead>
                                 <tr>
-                                    <th class="text-nowrap">No</th>
+                                    <th>No</th>
                                     <th class="text-nowrap">Action</th>
                                     <th class="text-nowrap">Event Name</th>
                                     <th class="text-nowrap">Date</th>
