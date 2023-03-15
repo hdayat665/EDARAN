@@ -35,46 +35,89 @@ function getParticipantByidTimesheet(id) {
     });
 }
 
+// $(document).on("click", "#buttonnViewParticipant", function() {
+//     var id = $(this).data('id');
+//     var eventData = getEvents(id);
+//     eventData.done(function(data) {
+//         // console.log(data);
+//         // console.log(data.id)
+
+//         var attendanceEvent = getAttendance(data.id);
+//         attendanceEvent.done(function(dataAttendance) {
+//             $('#tableRowParticipant')
+//                 .find('tr')
+//                 .remove()
+//                 .end();
+//             // console.log(dataAttendance);
+//             // for (let i = 0; i < dataAttendance.length; i++) {
+//             //     const attendance = dataAttendance[i];
+//             //     var opt = document.createElement("tr");
+//             //     document.getElementById('tableRowParticipant').innerHTML +=
+//             //         '<tr class="odd gradeX">' +
+//             //         // '<td>' + i + '</td>' +
+//             //         '<td>' + (i + 1) + '</td>'
+//             //         '<td><span>' + attendance.employeeName + '</span></td>' +
+//             //         '</tr>';
+//             // }
+            
+//             for (let i = 1; i <= dataAttendance.length; i++) {
+//                 const attendance = dataAttendance[i - 1];
+//                 var opt = document.createElement("tr");
+//                 document.getElementById('tableRowParticipant').innerHTML +=
+//                     '<tr class="odd gradeX">' +
+//                     '<td>' + i + '</td>' +
+//                     '<td><span>' + attendance.employeeName + '</span></td>' +
+//                     '</tr>';
+//               }
+              
+//         });
+
+
+//     });
+//     $('#modalparticipant').modal('show');
+
+// });
+
 $(document).on("click", "#buttonnViewParticipant", function() {
     var id = $(this).data('id');
     var eventData = getEvents(id);
     eventData.done(function(data) {
-        // console.log(data);
-        // console.log(data.id)
-
         var attendanceEvent = getAttendance(data.id);
         attendanceEvent.done(function(dataAttendance) {
-            $('#tableRowParticipant')
-                .find('tr')
-                .remove()
-                .end();
-            // console.log(dataAttendance);
-            // for (let i = 0; i < dataAttendance.length; i++) {
-            //     const attendance = dataAttendance[i];
-            //     var opt = document.createElement("tr");
-            //     document.getElementById('tableRowParticipant').innerHTML +=
-            //         '<tr class="odd gradeX">' +
-            //         // '<td>' + i + '</td>' +
-            //         '<td>' + (i + 1) + '</td>'
-            //         '<td><span>' + attendance.employeeName + '</span></td>' +
-            //         '</tr>';
-            // }
-            for (let i = 1; i <= dataAttendance.length; i++) {
-                const attendance = dataAttendance[i - 1];
-                var opt = document.createElement("tr");
-                document.getElementById('tableRowParticipant').innerHTML +=
-                    '<tr class="odd gradeX">' +
-                    '<td>' + i + '</td>' +
-                    '<td><span>' + attendance.employeeName + '</span></td>' +
-                    '</tr>';
-              }
-              
+            // Check if the DataTable is already initialized
+            var table = $('#tableviewparticipant').DataTable();
+            if (table) {
+                // The DataTable is already initialized, so we can just update the data
+                table.clear();
+                for (let i = 0; i < dataAttendance.length; i++) {
+                    const attendance = dataAttendance[i];
+                    table.row.add([
+                        i + 1,
+                        attendance.employeeName
+                    ]);
+                }
+                table.draw();
+            } else {
+                // The DataTable is not yet initialized, so we need to initialize it
+                $('#tableviewparticipant').DataTable({
+                    "paging": true,
+                    "columns": [
+                        { "title": "No" },
+                        { "title": "Participants" }
+                    ]
+                });
+                for (let i = 0; i < dataAttendance.length; i++) {
+                    const attendance = dataAttendance[i];
+                    table.row.add([
+                        i + 1,
+                        attendance.employeeName
+                    ]);
+                }
+            }
         });
-
-
     });
+    
     $('#modalparticipant').modal('show');
-
 });
 
 
@@ -107,15 +150,28 @@ $(document).on("click", "#buttonViewEvent", function() {
         // });
         var attendanceEvent = getAttendance(data.id);
         attendanceEvent.done(function(dataAttendance) {
-        $('#statusparticipant').dataTable().fnClearTable(); // Clear existing data in the table
-        for (let i = 0; i < dataAttendance.length; i++) {
-            const attendance = dataAttendance[i];
-            $('#statusparticipant').dataTable().fnAddData([
-            attendance.employeeName,
-            '<span class="badge bg-lime rounded-pill">' + attendance.status + '</span>'
-            ]);
-        }
+            $('#statusparticipant').dataTable().fnClearTable(); // Clear existing data in the table
+            for (let i = 0; i < dataAttendance.length; i++) {
+                const attendance = dataAttendance[i];
+                let badgeColor;
+                switch (attendance.status) {
+                    case 'no response':
+                        badgeColor = 'bg-yellow';
+                        break;
+                    case 'not attend':
+                        badgeColor = 'bg-red';
+                        break;
+                    default:
+                        badgeColor = 'bg-lime';
+                        break;
+                }
+                $('#statusparticipant').dataTable().fnAddData([
+                    attendance.employeeName,
+                    '<span class="badge ' + badgeColor + ' rounded-pill">' + attendance.status + '</span>'
+                ]);
+            }
         });
+
 
 
         $('#event_name').text(data.event_name || '-');
@@ -145,7 +201,17 @@ $(document).on("click", "#buttonViewEvent", function() {
         // $('#recurring').text(data.recurring || '-');
         $('#desc_event').text(data.desc || '-');
         // $('#nameparticipant').text(data.participant);
-        $('#reminder').text(data.reminder || '-');
+        const testLibrary = {
+            1: '5 Minute Before',
+            2: '10 Minute Before',
+            3: '15 Minute Before',
+            4: '20 Minute Before',
+            5: '25 Minute Before',
+            6: '30 Minute Before',
+            7: '1 Hour Before',
+            // add more mappings here if needed
+          };
+          $('#reminder').text(testLibrary[data.reminder] || '-');
         $('#priority').text(data.priority || '-');
         
         
