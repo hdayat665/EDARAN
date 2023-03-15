@@ -392,6 +392,8 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('/getClaimEntitleById/{id}/{type}', 'getClaimEntitleById');
             Route::get('/getEntitleClaimDetailById/{id}', 'getEntitleClaimDetailById');
             Route::post('/updateEntitleDetail/{id}', 'updateEntitleDetail');
+            Route::post('/updateApprovalConfig/{id}', 'updateApprovalConfig');
+            Route::post('/updateApprovalConfigDetail/{id}', 'updateApprovalConfigDetail');
         });
 
         Route::controller(OrganizationController::class)->group(function () {

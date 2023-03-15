@@ -720,7 +720,7 @@ class SettingController extends Controller
         $result['entitles'] = $ss->eclaimEntitleGroupView();
 
         $result['transports'] = $ss->getAllTransportMillage();
-        
+
         $result['subsistances'] = $ss->eclaimGeneralView();
         $result['claimCategorys'] = $ss->eclaimCategoryView();
         //pr($result);
@@ -763,7 +763,7 @@ class SettingController extends Controller
     {
         $ss = new SettingService;
 
-        $result['datas'] = $ss->eclaimGeneralView();
+        $result['configs'] = $ss->eclaimApprovalConfig();
 
         return view('pages.setting.eclaim.eclaimApprovalConfig', $result);
     }
@@ -1198,6 +1198,24 @@ class SettingController extends Controller
         $dlh = new SettingService;
 
         $result = $dlh->updateEntitleDetail($r, $id);
+
+        return response()->json($result);
+    }
+
+    public function updateApprovalConfig(Request $r, $id = '')
+    {
+        $dlh = new SettingService;
+
+        $result = $dlh->updateApprovalConfig($r, $id);
+
+        return response()->json($result);
+    }
+
+    public function updateApprovalConfigDetail(Request $r, $id = '')
+    {
+        $dlh = new SettingService;
+
+        $result = $dlh->updateApprovalConfigDetail($r, $id);
 
         return response()->json($result);
     }
