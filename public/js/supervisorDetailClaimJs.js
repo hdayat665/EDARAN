@@ -104,11 +104,11 @@ $(document).ready(function () {
         // alert("ss");
         var id = $(this).data("id");
         var status = "recommend";
-
+        var stage = "hod";
         requirejs(["sweetAlert2"], function (swal) {
             $.ajax({
                 type: "POST",
-                url: "/updateStatusClaim/" + id + "/" + status,
+                url: "/updateStatusClaim/" + id + "/" + status + "/" + stage,
                 async: false,
                 processData: false,
                 contentType: false,

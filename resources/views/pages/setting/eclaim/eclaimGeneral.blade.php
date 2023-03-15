@@ -20,6 +20,7 @@
                                     <div class="form-check form-switch">
                                         <input class="form-check-input" value="1" {{ $general ? ($general->notify_user ? 'checked' : '') : '' }} type="checkbox" name="general_setting[notify_user]"
                                             role="switch" id="set-main">
+                                        <input type="hidden" id="notify_user" name="general_setting[notify_user]" value="{{$general->notify_user}}">
                                         <input type="hidden" name="general_id" value="{{ $general->id ?? '' }}">
                                         <label class="form-check-label" for="set-main">Send notification
                                             email</label>
@@ -32,8 +33,9 @@
                                 <h5>Disable user request ?</h5>
                                 <div class="col-sm-6">
                                     <div class="form-check form-switch">
-                                        <input class="form-check-input" value="1" {{ $general ? ($general->disable_user ? 'checked' : '') : '' }} type="checkbox" name="general_setting[disable_user]"
-                                            role="switch" id="set-main1">
+                                    <input class="form-check-input" {{ $general ? ($general->disable_user ? 'checked' : '') : '' }} type="checkbox" name="general_setting[disable_user]" role="switch" id="set-main1" value="1">
+                                        <input type="hidden" id="disable_user" name="general_setting[disable_user]" value="{{$general->disable_user}}">
+
                                         <label class="form-check-label" for="set-main1">Disable user request
                                             ?</label>
                                         <i class="fa fa-question-circle" style="color:rgba(0, 81, 255, 0.904)" data-toggle="tooltipdisableuser"
@@ -73,12 +75,12 @@
                                     @if ($subsistances)
                                         @foreach ($subsistances as $subsistance)
                                             <tr>
-                                                <td><a class="btn btn-primary btn-xs" data-id="{{ $subsistance->id }}" id="editModalButton">Edit
-                                                    </a>
+                                                <td><button class="btn btn-primary btn-xs" data-id="{{ $subsistance->id }}" id="editModalButton">Edit
+                                                    </button>
                                                     &nbsp;
-                                                    <a class="btn btn-danger btn-xs" data-id="{{ $subsistance->id }}" id="deleteButton">Delete
-                                                    </a>
-                                                </td> 
+                                                    <button class="btn btn-danger btn-xs" data-id="{{ $subsistance->id }}" id="deleteButton">Delete
+                                                    </button>
+                                                </td>
                                                 <td>
                                                     <input type="hidden" name="subs_id[]" value="{{ $subsistance->id }}">
                                                     {{ $subsistance->area_name }}

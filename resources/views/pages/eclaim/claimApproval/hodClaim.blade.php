@@ -43,7 +43,7 @@
                                             <a href="#default-tab-1" data-bs-toggle="tab" class="nav-link active">Active</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a href="#default-tab-4" data-bs-toggle="tab" class="nav-link ">Approved</a>
+                                            <a href="#default-tab-4" data-bs-toggle="tab" class="nav-link ">Recommended</a>
                                         </li>
                                         <!-- <li class="nav-item">
                                             <a href="#default-tab-2" data-bs-toggle="tab" class="nav-link ">Bucket</a>

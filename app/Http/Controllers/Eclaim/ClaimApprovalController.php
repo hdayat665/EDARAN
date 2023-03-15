@@ -18,7 +18,7 @@ class ClaimApprovalController extends Controller
         $view = getViewForClaimApproval($type);
 
         return view('pages.eclaim.claimApproval.' . $view, $data);
-    }
+    } 
 
     public function updateStatusClaim(Request $r, $id = '', $status, $stage)
     {
@@ -256,8 +256,9 @@ class ClaimApprovalController extends Controller
         $data['travels'] = $result['travel'];
         $data['personals'] = $result['personal'];
         $data['gncs'] = $result['general'];
-
-        if ($data['general']->claim_type == 'MTC') {
+        
+        // pr($data['gncs']);
+        if ($data['general'] != null && $data['general']->claim_type == 'MTC') {
             $view = 'financeRecMtc';
         } else {
             $view = 'financeRecGnc';

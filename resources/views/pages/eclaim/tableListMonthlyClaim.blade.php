@@ -48,7 +48,7 @@
                         <th class="text-nowrap">Amount</th>
                         <th class="text-nowrap">Description</th>
                         <th class="text-nowrap">Attachment</th>
-                    </tr>
+                    </tr> 
                 </thead>
                 <tbody>
                     @if ($travelClaims)

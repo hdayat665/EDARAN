@@ -18,7 +18,7 @@
         <tbody>
             @if ($claims)
                 @foreach ($claims as $claim)
-                    @if ($claim->status == 'active')
+                    @if ($claim->status == 'active' && $claim->claim_type == 'MTC')
                         <tr>
                         <td style="text-align: center"><input class="form-check-input" type="checkbox" />
                             <td>
