@@ -34,6 +34,7 @@ use App\Models\leavetypesModel;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Symfony\Component\Console\Input\Input;
+use Carbon\Carbon;
 
 class SettingService
 {
@@ -1833,14 +1834,15 @@ class SettingService
         $data2 = $ids[0];
         $data3 = $ids[1];
         $data4 = Auth::user()->tenant_id;
-        $data5 = $input['lapsed'];
-
+        $data5 = date('Y-m-d', strtotime($input['lapsed']));
+        $data6 = Carbon::now()->format('Y-m-d');
         $input = [
             'id_userprofile' => $data1,
             'id_employment' => $data2,
             'id_department' => $data3,
             'tenant_id' => $data4,
-            'lapse' => $data5
+            'lapse' => $data5,
+            'le_year' => $data6
         ];
 
         leaveEntitlementModel::create($input);
@@ -1883,7 +1885,13 @@ class SettingService
         $data4 = $input['SickLeaveEntitlementBalance'];
         $data5 = $input['CarryForward'];
         $data6 = $input['CurrentForwardBalance'];
-        $data7 = date('Y-m-d', strtotime($input['LapsedDate']));
+
+        if($r->input('LapsedDate')){
+            $data7 = date('Y-m-d', strtotime($input['LapsedDate']));
+        }else{
+            $data7 = null;
+        }
+        
         $data8 = date('Y-m-d', strtotime($input['Lapsed']));
 
 
