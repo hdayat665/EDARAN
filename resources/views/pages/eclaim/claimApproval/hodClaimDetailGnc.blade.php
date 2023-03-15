@@ -114,7 +114,7 @@
                 </div>
                 <div class="row p-2">
                     <div class="col align-self-start">
-                        <a href="/claimApprovalView/2" class="btn btn-light" style="color: black;" type="submit"><i class="fa fa-arrow-left"></i> Back</a>
+                        <a href="/claimApprovalView/1" class="btn btn-light" style="color: black;" type="submit"><i class="fa fa-arrow-left"></i> Back</a>
                     </div>
                     <div class="col d-flex justify-content-end">
                         @if ($general->status == 'recommend')

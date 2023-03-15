@@ -108,11 +108,11 @@ class myClaimService
         // GeneralClaimDetail::insert($generalDetail);
 
         // email notification
-        $setting = EclaimGeneralSetting::where('tenant_id', Auth::user()->tenant_id)->first();
-        if ($setting->notify_user) {
-            $ms = new MailService;
-            $ms->emailToSupervisorClaimGNC($generalClaimData);
-        }
+        // $setting = EclaimGeneralSetting::where('tenant_id', Auth::user()->tenant_id)->first();
+        // if ($setting->notify_user) {
+        //     $ms = new MailService;
+        //     $ms->emailToSupervisorClaimGNC($generalClaimData);
+        // }
 
         $data['id'] = $findId->id;
         $data['status'] = config('app.response.success.status');
@@ -249,10 +249,24 @@ class myClaimService
     public function updateStatusGeneralClaims($id)
     {
         $update = [
-            'status' => 'active'
+            'status' => 'active',
+            'supervisor' => 'recommend'
         ];
 
         GeneralClaim::where('id', $id)->update($update);
+
+        $generalClaimData = GeneralClaim::where('id', $id)
+        ->where('tenant_id', Auth::user()->tenant_id)
+        ->orderBy('created_at', 'DESC')
+        ->first();   
+        
+        // pr($generalClaimData);
+
+        $setting = EclaimGeneralSetting::where('tenant_id', Auth::user()->tenant_id)->first();
+        if ($setting->notify_user) {
+            $ms = new MailService;
+            $ms->emailToSupervisorClaimGNC($generalClaimData);
+        }
 
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');

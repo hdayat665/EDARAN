@@ -118,14 +118,15 @@
                         <a href="/financeRecView" class="btn btn-light" style="color: black;" type="submit"><i class="fa fa-arrow-left"></i> Back</a>
                     </div>
                     <div class="col d-flex justify-content-end">
-                    @if (!is_null($gnc->f_recommender))
-                        <a class="btn btn-secondary" data-id="{{ $general->id }}" style="color: black" type="submit"> Cancel</a> &nbsp;
-                        <a href="javascript:;" class="btn btn-warning" style="color: black" data-bs-toggle="modal" data-bs-target="#modalamend">Amend</a> &nbsp;
-                        <a href="javascript:;" class="btn btn-danger" style="color: black" data-bs-toggle="modal" data-bs-target="#modalreject"> Reject</a> &nbsp;
-                        <a class="btn btn-lime" id="approveButton" data-id="{{ $general->id }}" style="color: black" type="submit"> Approve</a>
+                    @if ($general->f_recommender == 'recommend')
+                        <!-- <p>This item has already been recommended.</p> -->
                     @else
-                        
+                        <a class="btn btn-secondary" data-id="{{ $general->id }}" style="color: black" type="submit">Cancel</a> &nbsp;
+                        <a href="javascript:;" class="btn btn-warning" style="color: black" data-bs-toggle="modal" data-bs-target="#modalamend">Amend</a> &nbsp;
+                        <a href="javascript:;" class="btn btn-danger" style="color: black" data-bs-toggle="modal" data-bs-target="#modalreject">Reject</a> &nbsp;
+                        <a class="btn btn-lime" id="approveButton" data-id="{{ $general->id }}" style="color: black" type="submit">Approve</a>
                     @endif
+
                     
                     </div>
                 </div>

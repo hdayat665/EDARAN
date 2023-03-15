@@ -124,7 +124,7 @@
                         <a href="/financeCheckerView" class="btn btn-light" style="color: black;" type="submit"><i class="fa fa-arrow-left"></i> Back</a>
                     </div>
                     <div class="col d-flex justify-content-end">
-                        @if ($gnc->pv_number)
+                        @if ($general->pv_number != '')
                             <!-- The pv_number is not null, so hide all buttons -->
                         @else
                             <!-- The pv_number is null, so show the buttons as before -->

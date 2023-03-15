@@ -168,9 +168,24 @@ class SettingService
         return $data;
     }
 
-    public function updateCompany($r, $id)
+        public function updateCompany($r, $id)
     {
         $input = $r->input();
+        $companyCode = $input['companyCode'];
+        
+        $existingCompany = Company::where('companyCode', $companyCode)
+            ->where('id', '!=', $id)
+            ->where('tenant_id', Auth::user()->tenant_id)
+            ->first();
+        
+        if ($existingCompany) {
+            $data['msg'] = 'Company code already exists.';
+            $data['status'] = config('app.response.error.status');
+            $data['type'] = config('app.response.error.type');
+            $data['title'] = config('app.response.error.title');
+
+            return $data;
+        }
 
         date_default_timezone_set("Asia/Kuala_Lumpur");
 
@@ -187,6 +202,7 @@ class SettingService
 
         return $data;
     }
+
 
     public function deleteCompany($id)
     {
@@ -248,10 +264,24 @@ class SettingService
 
         return $data;
     }
-
     public function updateDepartment($r, $id)
     {
         $input = $r->input();
+        $departmentCode = $input['departmentCode'];
+        
+        $existingDepartment = Department::where('departmentCode', $departmentCode)
+            ->where('id', '!=', $id)
+            ->where('tenant_id', Auth::user()->tenant_id)
+            ->first();
+        
+        if ($existingDepartment) {
+            $data['msg'] = 'Company code already exists.';
+            $data['status'] = config('app.response.error.status');
+            $data['type'] = config('app.response.error.type');
+            $data['title'] = config('app.response.error.title');
+
+            return $data;
+        }
 
         date_default_timezone_set("Asia/Kuala_Lumpur");
 
@@ -268,7 +298,7 @@ class SettingService
 
         return $data;
     }
-
+    
     public function deleteDepartment($id)
     {
         $department = Department::find($id);
@@ -328,10 +358,24 @@ class SettingService
 
         return $data;
     }
-
     public function updateUnit($r, $id)
     {
         $input = $r->input();
+        $unitCode = $input['unitCode'];
+        
+        $existingUnit = Unit::where('unitCode', $unitCode)
+            ->where('id', '!=', $id)
+            ->where('tenant_id', Auth::user()->tenant_id)
+            ->first();
+        
+        if ($existingUnit) {
+            $data['msg'] = 'Unit code already exists.';
+            $data['status'] = config('app.response.error.status');
+            $data['type'] = config('app.response.error.type');
+            $data['title'] = config('app.response.error.title');
+
+            return $data;
+        }
 
         date_default_timezone_set("Asia/Kuala_Lumpur");
 
@@ -408,10 +452,24 @@ class SettingService
 
         return $data;
     }
-
     public function updateBranch($r, $id)
     {
         $input = $r->input();
+        $branchName = $input['branchName'];
+        
+        $existingBranch = Branch::where('branchName', $branchName)
+            ->where('id', '!=', $id)
+            ->where('tenant_id', Auth::user()->tenant_id)
+            ->first();
+        
+        if ($existingBranch) {
+            $data['msg'] = 'Branch name already exists.';
+            $data['status'] = config('app.response.error.status');
+            $data['type'] = config('app.response.error.type');
+            $data['title'] = config('app.response.error.title');
+
+            return $data;
+        }
 
         date_default_timezone_set("Asia/Kuala_Lumpur");
 
@@ -428,7 +486,6 @@ class SettingService
 
         return $data;
     }
-
     public function deleteBranch($id)
     {
         $Branch = Branch::find($id);
@@ -492,21 +549,38 @@ class SettingService
     public function updateJobGrade($r, $id)
     {
         $input = $r->input();
+        $jobGradeCode = $input['jobGradeCode'];
+        
+        $existingJobGrade = JobGrade::where('jobGradeCode', $jobGradeCode)
+            ->where('id', '!=', $id)
+            ->where('tenant_id', Auth::user()->tenant_id)
+            ->first();
+        
+        if ($existingJobGrade) {
+            $data['msg'] = 'JobGrade Code already exists.';
+            $data['status'] = config('app.response.error.status');
+            $data['type'] = config('app.response.error.type');
+            $data['title'] = config('app.response.error.title');
+
+            return $data;
+        }
 
         date_default_timezone_set("Asia/Kuala_Lumpur");
 
         $input['modified_at'] = date('Y-m-d H:i:s');
         $user = Auth::user();
         $input['modifiedBy'] = $user->username;
+
         JobGrade::where('id', $id)->update($input);
 
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success Update Job Grade';
+        $data['msg'] = 'Success Update JobGrade';
 
         return $data;
     }
+    
 
     public function deleteJobGrade($id)
     {
@@ -566,17 +640,32 @@ class SettingService
 
         return $data;
     }
-
     public function updateDesignation($r, $id)
     {
         $input = $r->input();
-        $user = Auth::user();
+        $designationCode = $input['designationCode'];
+        
+        $existingdesignationCode = Designation::where('designationCode', $designationCode)
+            ->where('id', '!=', $id)
+            ->where('tenant_id', Auth::user()->tenant_id)
+            ->first();
+        
+        if ($existingdesignationCode) {
+            $data['msg'] = 'Designation Code already exists.';
+            $data['status'] = config('app.response.error.status');
+            $data['type'] = config('app.response.error.type');
+            $data['title'] = config('app.response.error.title');
+
+            return $data;
+        }
+
         date_default_timezone_set("Asia/Kuala_Lumpur");
 
         $input['modified_at'] = date('Y-m-d H:i:s');
+        $user = Auth::user();
         $input['modifiedBy'] = $user->username;
-        Designation::where('id', $id)->update($input);
 
+        Designation::where('id', $id)->update($input);
 
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
@@ -585,6 +674,7 @@ class SettingService
 
         return $data;
     }
+    
 
     public function deleteDesignation($id)
     {
@@ -931,10 +1021,26 @@ class SettingService
     public function updateEmploymentType($r, $id)
     {
         $input = $r->input();
+        $type = $input['type'];
+        
+        $existingtype = EmploymentType::where('type', $type)
+            ->where('id', '!=', $id)
+            ->where('tenant_id', Auth::user()->tenant_id)
+            ->first();
+        
+        if ($existingtype) {
+            $data['msg'] = 'Employment Type already exists.';
+            $data['status'] = config('app.response.error.status');
+            $data['type'] = config('app.response.error.type');
+            $data['title'] = config('app.response.error.title');
+
+            return $data;
+        }
 
         date_default_timezone_set("Asia/Kuala_Lumpur");
-        $user = Auth::user();
+
         $input['modified_at'] = date('Y-m-d H:i:s');
+        $user = Auth::user();
         $input['modifiedBy'] = $user->username;
 
         EmploymentType::where('id', $id)->update($input);
@@ -946,7 +1052,7 @@ class SettingService
 
         return $data;
     }
-
+    
     public function deleteEmploymentType($id)
     {
         $EmploymentType = EmploymentType::find($id);
@@ -1374,23 +1480,37 @@ class SettingService
 
         return $data;
     }
-
     public function updateSubsistance($r, $id)
     {
-
         $input = $r->input();
+        $area_name = $input['area_name'];
+        
+        $existingAreaName = EclaimGeneral::where('area_name', $area_name)
+            ->where('id', '!=', $id)
+            ->where('tenant_id', Auth::user()->tenant_id)
+            ->first();
+        
+        if ($existingAreaName) {
+            $data['msg'] = 'Area Name already exists.';
+            $data['status'] = config('app.response.error.status');
+            $data['type'] = config('app.response.error.type');
+            $data['title'] = config('app.response.error.title');
 
-        // $user = Auth::user();
-        // $input['modifiedBy'] = $user->username;
-        // date_default_timezone_set("Asia/Kuala_Lumpur");
-        // $input['modified_at'] = date('Y-m-d H:i:s');
+            return $data;
+        }
+
+        date_default_timezone_set("Asia/Kuala_Lumpur");
+
+        $input['modified_at'] = date('Y-m-d H:i:s');
+        $user = Auth::user();
+        $input['modifiedBy'] = $user->username;
 
         EclaimGeneral::where('id', $id)->update($input);
 
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success Update Subsistance';
+        $data['msg'] = 'Success Update Area Name';
 
         return $data;
     }

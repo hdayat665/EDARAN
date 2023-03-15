@@ -149,7 +149,7 @@
                                 </div>
                                 <div class="row p-2">
                                     <div class="modal-footer"> <button type="button" class="btn btn-secondary">Reset</button>
-                                        <button type="submit" id="createGnc" class="btn btn-primary">Savsce</button>
+                                        <button type="submit" id="createGnc" class="btn btn-primary">Save</button>
                                         </form>
                                     </div>
                                 </div>
@@ -189,10 +189,10 @@
                     <div class="col align-self-start">
                         <a href="/myClaimView" class="btn btn-light" style="color: black;" type="submit"><i class="fa fa-arrow-left"></i> Back</a>
                     </div>
-                    <div class="col d-flex justify-content-end">
+                    <!-- <div class="col d-flex justify-content-end">
                         <button class="btn btn-light" id="saveButton" style="color: black" type="submit"><i class="fa fa-save"></i> Save Draft</button>
                         <button class="btn btn-light" id="submitButton" style="color: black" type="submit"><i class="fa fa-save"></i> Submit</button>
-                    </div>
+                    </div> -->
                 </div>
             <!-- </form> -->
         </div>

@@ -1806,7 +1806,7 @@ if (!function_exists('getRoleById')) {
         return $data;
     }
 }
-
+ 
 if (!function_exists('getViewForClaimApproval')) {
     function getViewForClaimApproval($type = '')
     {

@@ -229,7 +229,7 @@ $(document).ready(function () {
         function () {
             // alert("ss");
             var id = $(this).data("id");
-            var stage = "supervisor";
+            var stage = "hod";
             var status = "recommend";
 
             requirejs(["sweetAlert2"], function (swal) {
