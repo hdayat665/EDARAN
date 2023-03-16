@@ -3,7 +3,7 @@
         <button data-bs-toggle="modal" data-bs-target="#modaladdaddress"data-type="add" class="btn btn-primary col-sm-2"><i class="fa fa-plus"></i> New Address</button>
     </div>
     <div class="row p-2">
-        <table id="" class="table table-striped table-bordered align-middle">
+        <table id="profileAddress" class="table table-striped table-bordered align-middle">
             <thead>
                 <tr>
                     <th class="text-nowrap">No</th>

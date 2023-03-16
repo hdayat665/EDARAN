@@ -2338,6 +2338,27 @@ $('input[name="address_type[]"]').on('change', function() {
             [5, 10, 15, 20, "All"],
         ],
     });
+    $("#employeeEducation").DataTable({
+        responsive: false,
+        lengthMenu: [
+            [5, 10, 15, 20, -1],
+            [5, 10, 15, 20, "All"],
+        ],
+    });
+    $("#employeeOthers").DataTable({
+        responsive: false,
+        lengthMenu: [
+            [5, 10, 15, 20, -1],
+            [5, 10, 15, 20, "All"],
+        ],
+    });
+    $("#employeeAddress").DataTable({
+        responsive: false,
+        lengthMenu: [
+            [5, 10, 15, 20, -1],
+            [5, 10, 15, 20, "All"],
+        ],
+    });
 
     $("#siblingModalAdd").click(function (e) {
         $("input").prop("disabled", false);
