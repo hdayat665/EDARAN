@@ -83,7 +83,7 @@ class MyTimeSheetService
         $data['status'] = config('app.response.error.status');
         $data['type'] = config('app.response.error.type');
         $data['title'] = config('app.response.error.title');
-        $data['msg'] = 'Error: Timesheet log for the same time range already exists for this date';
+        $data['msg'] = 'Unable to add log due to overlapped time';
         return $data;
     }
 
@@ -162,7 +162,7 @@ class MyTimeSheetService
         $data['status'] = config('app.response.error.status');
         $data['type'] = config('app.response.error.type');
         $data['title'] = config('app.response.error.title');
-        $data['msg'] = 'Error: Timesheet log for the same time range already exists for this date';
+        $data['msg'] = 'Unable to update log due to overlapped time';
         return $data;
     }
 
