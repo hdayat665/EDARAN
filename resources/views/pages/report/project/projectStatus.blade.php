@@ -15,7 +15,7 @@
             <div class="panel-body">
                 <form id="searchForm" action="/searchReportProject">
                     <div class="form-group col-md-4 ">
-                        <label for="Menu1">View By : </label>
+                        <label for="Menu1">Select By : </label>
                         <select class="form-control" name="filter" id="select1" required
                             oninvalid="this.setCustomValidity('Please Choose')"
                             oninput="setCustomValidity('')">
@@ -105,7 +105,7 @@
                         <select class="form-control" name="customerNameProject" id="select7"
                             oninvalid="this.setCustomValidity('Please Choose Customer Name')"
                             oninput="setCustomValidity('')">
-                            <option></option>
+                            <option value="">PLEASE CHOOSE</option>
                             <?php $customers = customer(); ?>
                             @if ($customers)
                                 @foreach ($customers as $customer)
@@ -137,7 +137,7 @@
                         <select class="form-control" name="department" id="select9"
                             oninvalid="this.setCustomValidity('Please Choose Department')"
                             oninput="setCustomValidity('')">
-                            <option></option>
+                            <option value="">PLEASE CHOOSE</option>
                             <?php $getDepartments = getDepartment(); ?>
                             @if ($getDepartments)
                                 @foreach ($getDepartments as $getDepartment)
@@ -149,7 +149,7 @@
                         <div class="form-group mt-3" id="menu10">
                             <label for="Menu3">Select Employee Name : </label>
                             <select class="form-control" name="employee" id="select10">
-
+                                <option value="">PLEASE CHOOSE</option>
                             </select>
                         </div>
 
