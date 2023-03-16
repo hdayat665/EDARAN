@@ -17,7 +17,7 @@
         <tbody>
             @if ($claims)
                 @foreach ($claims as $claim)
-                    @if ($claim->supervisor == 'recommend')
+                    @if ($claim->hod == 'recommend')
                         <tr>
                         <td style="text-align: center"><input class="form-check-input" type="checkbox" />
                             <td>

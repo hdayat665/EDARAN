@@ -1,7 +1,7 @@
 @extends('layouts.dashboardTenant')
 @section('content')
     <div id="content" class="app-content">
-        <h1 class="page-header">eClaim | Claim Approval | Supervisor</h1>
+        <h1 class="page-header">eClaim | Claim Approval | Approver</h1>
         <div class="panel panel" id="supervisorDepartmentJs">
             <div class="panel-body">
                 <div class="form-control">
@@ -36,7 +36,7 @@
                                             <a href="#default-tab-1" data-bs-toggle="tab" class="nav-link active">Active</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a href="#default-tab-2" data-bs-toggle="tab" class="nav-link ">Recommended</a>
+                                            <a href="#default-tab-2" data-bs-toggle="tab" class="nav-link ">Approved</a>
                                         </li>
                                         <li class="nav-item">
                                             <a href="#default-tab-3" data-bs-toggle="tab" class="nav-link ">Amend</a>

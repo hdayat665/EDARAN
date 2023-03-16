@@ -358,8 +358,8 @@ class MyleaveService
         $data = MyLeaveModel::where('myleave.tenant_id', Auth::user()->tenant_id)
             ->where('myleave.id', '=', $id)
             ->leftJoin('userprofile as ap', 'myleave.up_user_id', '=', 'ap.id')
-            ->leftJoin('userprofile as au', 'myleave.up_recommendedby_id', '=', 'au.id')
-            ->leftJoin('userprofile as mu', 'myleave.up_approvedby_id', '=', 'mu.id')
+            ->leftJoin('userprofile as au', 'myleave.up_recommendedby_id', '=', 'au.user_id')
+            ->leftJoin('userprofile as mu', 'myleave.up_approvedby_id', '=', 'mu.user_id')
             ->select('myleave.*','ap.fullName as username', 'au.fullName as username1', 'mu.fullName as username2')
             ->get();
 
@@ -374,10 +374,11 @@ class MyleaveService
         ->where('myleave.up_rec_status', '!=', '3')
         ->where('myleave.up_app_status', '!=', '3')
         ->where('myleave.up_user_id', Auth::user()->id)
-        ->where('leave_entitlement.le_year', '=', $currentYear) 
+        ->whereYear('leave_entitlement.le_year', '=', $currentYear) 
         ->whereYear('myleave.applied_date', '=', $currentYear) 
         ->select('leave_entitlement.current_entitlement', 'leave_entitlement.current_entitlement_balance', DB::raw('SUM(myleave.total_day_applied) as total_day_applied'))
         ->first();
+        
 
         if(isset($datapie) && isset($datapie->total_day_applied)) {
             return $datapie;
@@ -385,7 +386,7 @@ class MyleaveService
 
             $currentYear = date('Y');
             $datapie = leaveEntitlementModel::where('tenant_id', Auth::user()->tenant_id)
-                ->where('le_year', '=', $currentYear) 
+                ->whereYear('le_year', '=', $currentYear) 
                 ->where('id_userprofile', Auth::user()->id)
                 ->select('current_entitlement', 'current_entitlement_balance', DB::raw('"0" as total_day_applied'))
                 ->first();
@@ -401,7 +402,7 @@ class MyleaveService
         ->where('myleave.up_rec_status', '!=', '3')
         ->where('myleave.up_app_status', '!=', '3')
         ->where('myleave.up_user_id', Auth::user()->id)
-        ->where('leave_entitlement.le_year', '=', $endYear)
+        ->whereYear('leave_entitlement.le_year', '=', $endYear)
         ->whereYear('myleave.applied_date', '=', $endYear) 
         ->select('leave_entitlement.current_entitlement', 'leave_entitlement.current_entitlement_balance', DB::raw('SUM(myleave.total_day_applied) as total_day_applied'))
         ->first();
@@ -410,13 +411,17 @@ class MyleaveService
             return $datapie2;
         } else {
 
-            $endYear = date('Y') - 1;
-            $datapie2 = leaveEntitlementModel::where('tenant_id', Auth::user()->tenant_id)
-                ->where('le_year', '=', $endYear) 
-                ->where('id_userprofile', Auth::user()->id)
-                ->select('current_entitlement', 'current_entitlement_balance', DB::raw('"0" as total_day_applied'))
-                ->first();
-                return $datapie2;
+            $defaultCurrentEntitlement = '14';
+            $defaultCurrentEntitlementBalance = '14';
+            $defaultTotalDayApplied = '0';
+            $datapie2 = new leaveEntitlementModel;
+            $datapie2->fill([
+                'current_entitlement' => $defaultCurrentEntitlement,
+                'current_entitlement_balance' => $defaultCurrentEntitlementBalance,
+                'total_day_applied' => $defaultTotalDayApplied
+            ]);
+            return $datapie2;
+
         }
 
         

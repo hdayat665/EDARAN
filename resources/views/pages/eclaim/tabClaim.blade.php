@@ -59,13 +59,13 @@
                                         <a href="javascript:;" class="btn btn-primary btn-sm">Action</a>
                                         <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle btn-sm"><i class="fa fa-caret-down"></i></a>
                                         <div class="dropdown-menu dropdown-menu-end">
-                                            <a href="/eclaim/viewmyclaim" class="dropdown-item">View Claim</a>
+                                            <!-- <a href="/eclaim/viewmyclaim" class="dropdown-item">View Claim</a> -->
                                         </div>
                                     @elseif ($claim->status == 'active')
                                         <a href="javascript:;" class="btn btn-primary btn-sm">Action</a>
                                         <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle btn-sm"><i class="fa fa-caret-down"></i></a>
                                         <div class="dropdown-menu dropdown-menu-end">
-                                            <a href="/eclaim/viewmyclaim" class="dropdown-item">View Claim</a>
+                                            <!-- <a href="/eclaim/viewmyclaim" class="dropdown-item">View Claim</a> -->
                                             <!-- <a href="javascript:;" class="dropdown-item">Update Claim</a> -->
                                             <div class="dropdown-divider"></div>
                                             <a href="javascript:;" class="dropdown-item">Cancel Claim</a>
@@ -81,9 +81,11 @@
                         <td>{{ $claim->total_amount }}</td>
                         @if ($claim->status == 'amend')
                             <td><span class="badge bg-success" data-toggle="amendc" title="Amend">Amend</span></td>
-                        @elseif ($claim->status == 'paid' || $claim->status == 'recommend')
+                        @elseif ($claim->status == 'recommend')
+                            <td><span class="badge bg-warning" data-toggle="paidc" title="Paid">Pending</span></td>
+                        @elseif ($claim->status == 'paid' )
                             <td><span class="badge bg-secondary" data-toggle="paidc" title="Paid">Paid</span></td>
-                            @elseif ($claim->status == 'draft')
+                        @elseif ($claim->status == 'draft')
                             <td><span class="badge bg-warning" data-toggle="drafc" title="Draft">Draft</span></td>
                         @elseif ($claim->status == 'rejected')
                             <td><span class="badge bg-danger" data-toggle="rejectedc" title="Rejected">Rejected</span></td>

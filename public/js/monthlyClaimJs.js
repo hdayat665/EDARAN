@@ -159,7 +159,7 @@ $("document").ready(function () {
                 days + " days : " + hours + " hours : " + mins + " minutes "
             );
             $("#DBF").val(days);
-            $("#DLH").val(days);
+            $("#DLH").val(days); 
             $("#DDN").val(days);
             $("#hn").val(days);
             $("#ln").val(days);
@@ -233,8 +233,6 @@ $("document").ready(function () {
 
       var resultInput = document.getElementById("result");
       $("#result,#toll,#parking,#petrol").focus(function () {
-
-     
         var total = parseInt(resultInput.value);
 
         // call the calculate function with the input value

@@ -51,9 +51,9 @@
                                         <li class="nav-item">
                                             <a href="#default-tab-4" data-bs-toggle="tab" class="nav-link ">Rejected</a>
                                         </li>
-                                        <li class="nav-item">
+                                        <!-- <li class="nav-item">
                                             <a href="#default-tab-5" data-bs-toggle="tab" class="nav-link ">Paid</a>
-                                        </li>
+                                        </li> -->
 
                                     </ul>
                                 </div>

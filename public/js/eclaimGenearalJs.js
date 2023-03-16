@@ -1,5 +1,27 @@
 $(document).ready(function () {
-    
+
+    const checkbox = document.querySelector('#set-main1');
+    const input = document.querySelector('#disable_user');
+
+    checkbox.addEventListener('change', function() {
+        if (this.checked) {
+            input.value = '1';
+        } else {
+            input.value = '0';
+        }
+    });
+
+    const checkbox1 = document.querySelector('#set-main');
+    const input1 = document.querySelector('#notify_user');
+
+    checkbox1.addEventListener('change', function() {
+        if (this.checked) {
+            input1.value = '1';
+        } else {
+            input1.value = '0';
+        }
+    });
+
     $(document).on("click", "#addModalButton", function () {
         $("#addSubsistence").modal("show");
     });
@@ -101,7 +123,7 @@ $(document).ready(function () {
             },
         });
     });
-
+    
     $("#generalButton").click(function (e) {
         $("#generalForm").validate({
             rules: {},

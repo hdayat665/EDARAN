@@ -17,7 +17,7 @@
         <tbody>
             @if ($claims)
                 @foreach ($claims as $claim)
-                    @if ($claim->hod == 'recommend' && $claim->supervisor == '')
+                    @if ($claim->supervisor == 'recommend' && $claim->hod == '')
                         <tr>
                         <td style="text-align: center"><input class="form-check-input" type="checkbox" />
                             <td>
@@ -27,7 +27,7 @@
                                         <a href="/supervisorDetailClaimView/{{ $claim->id }}" id="" data-id="" class="dropdown-item"><i class="fa fa-eye" aria-hidden="true"></i> View
                                             MTC</a>
                                     @else
-                                        <a href="" id="" data-id="" class="dropdown-item"><i class="fa fa-eye" aria-hidden="true"></i> View
+                                        <a href="/hodDetailClaimView/{{ $claim->id }}" id="" data-id="" class="dropdown-item"><i class="fa fa-eye" aria-hidden="true"></i> View
                                             GNC</a>
                                     @endif
 
