@@ -121,14 +121,7 @@
                                 <option label="PLEASE CHOOSE" selected="selected"> </option>
 
                             </select>
-                            {{-- <select class="form-control" name="projectName" id="select8"  oninvalid="this.setCustomValidity('Please Choose Project Name')" oninput="setCustomValidity('')">
-                    <?php $projects = project(); ?>
-                    @if ($projects)
-                    @foreach ($projects as $project)
-                    <option value="{{$project->id}}">{{$project->project_name}}</option>
-                    @endforeach
-                    @endif
-                    </select> --}}
+                            
                         </div>
 
                     </div>
@@ -149,7 +142,7 @@
                         <div class="form-group mt-3" id="menu10">
                             <label for="Menu3">Select Employee Name : </label>
                             <select class="form-control" name="employee" id="select10">
-                                <option value="">PLEASE CHOOSE</option>
+                            <option value="">PLEASE CHOOSE</option>
                             </select>
                         </div>
 

@@ -79,14 +79,14 @@
                             <label class="form-label col-md-6">Reason*</label>
                         </div>
                         <div class="col-md-9">
-                            <textarea class="form-control" rows="5" style="text-transform: uppercase;" name="reason" placeholder="Reason"></textarea>
+                            <textarea class="form-control" rows="5" style="text-transform: uppercase;" maxlength="255" name="reason" placeholder="Reason"></textarea>
                         </div>
                     </div>
 
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                 <button type="button" id="rejectButton" class="btn btn-danger">Reject</button>
             </div>
         </div>

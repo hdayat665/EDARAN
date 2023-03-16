@@ -681,7 +681,8 @@ if (!function_exists('getFinancialYear')) {
     {
         $data = [];
 
-        $data = Project::where([['tenant_id', Auth::user()->tenant_id]])->select('financial_year')->groupBy('financial_year')->get();
+        $data = Project::where([['tenant_id', Auth::user()->tenant_id]])->select('financial_year')->groupBy('financial_year')->orderBy('DESC')->get();
+        
 
         return $data;
     }
