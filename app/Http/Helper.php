@@ -1909,7 +1909,6 @@ if (!function_exists('addressType')) {
             '1' => 'PERMANENT',
             '2' => 'CORRESPONDENCE',
             '3' => 'BOTH',
-            '4' => 'NONE',
         ];
 
         if ($id) {

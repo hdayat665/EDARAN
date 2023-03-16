@@ -50,11 +50,6 @@
                                 data-address-id="{{ $address->id }}" data-address-type="2"/>
                                 <label class="form-check-label" for="correspondent">Correspondent</label>
                             </div>
-                            {{-- <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" name="address_type[]" 
-                                    value="none" {{ $address->addressType == '4' ? 'checked' : '' }} />
-                                <label class="form-check-label" for="none">None</label>
-                            </div>                                                           --}}
                         </td>
                         {{-- <td style="text-transform: uppercase;"> {{ addressType($address->addressType) ?? '' }} </td> --}}
                     </tr>

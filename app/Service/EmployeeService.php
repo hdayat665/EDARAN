@@ -1034,25 +1034,27 @@ class EmployeeService
     public function addEmployeeAddressDetails($r)
     {
         $input = $r->input();
-        $input['user_id'] = Auth::user()->id;
+        $input['addressType'] = '0';
+
         UserAddress::create($input);
 
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success add address';
+        $data['msg'] = 'Success add Address';
 
         return $data;
     }
+
+    
 
     public function updateEmployeeAddressDetails($r)
     {
         $input = $r->input();
 
-        $user_id = Auth::user()->id;
         $id = $input['id'] ?? 1;
 
-        $user = UserAddress::where('user_id', $id)->first();
+        $user = UserAddress::where('id', $id)->first();
 
         if(!$user)
         {
@@ -1094,6 +1096,20 @@ class EmployeeService
 
         return $data;
     }
+
+    public function updateAddressType($r)
+{
+    $addressId = $r->input('addressId');
+    $addressType = $r->input('addressType');
+
+    // Update the address type in the database
+    $address = UserAddress::find($addressId);
+    $address->addressType = $addressType;
+    $address->save();
+
+    return response()->json(['success' => true]);
+}
+
 
     public function addEmployeeEducation($r)
     {

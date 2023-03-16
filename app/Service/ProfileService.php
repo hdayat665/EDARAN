@@ -22,6 +22,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Http\Request;
 
 class ProfileService
 {
@@ -109,14 +110,14 @@ class ProfileService
                 Users::where('id', $user_id)->update($username);
             }
 
-            if ($_FILES['fileID']['name']) {
-                $payslip = upload($input->file('fileID'));
-                $input['fileID'] = $payslip['filename'];
-    
-                if (!$input['fileID']) {
-                    unset($input['fileID']);
+            if ($_FILES['file']['name']) {
+                $payslip = upload(request()->file('file'));
+                $input['file'] = $payslip['filename'];
+            
+                if (!$input['file']) {
+                    unset($input['file']);
                 }
-            }
+            }                        
 
             UserProfile::where('user_id', $user_id)->update($input);
 
@@ -539,6 +540,27 @@ class ProfileService
             $data['type'] = config('app.response.success.type');
             $data['title'] = config('app.response.success.title');
             $data['msg'] = 'Success add Companion';
+        }
+
+        return $data;
+    }
+
+    public function deleteCompanion($id = '')
+    {
+        $user = UserCompanion::where('id', $id)->first();
+
+        if(!$user)
+        {
+            $data['status'] = config('app.response.error.status');
+            $data['type'] = config('app.response.error.type');
+            $data['title'] = config('app.response.error.title');
+            $data['msg'] = 'Companion not found';
+        }else{
+            UserCompanion::where('id',$id)->delete();
+            $data['status'] = config('app.response.success.status');
+            $data['type'] = config('app.response.success.type');
+            $data['title'] = config('app.response.success.title');
+            $data['msg'] = 'Companion deleted';
         }
 
         return $data;
@@ -1063,7 +1085,7 @@ class ProfileService
     {
         $input = $r->input();
         $input['user_id'] = Auth::user()->id;
-        $input['addressType'] = '4';
+        $input['addressType'] = '0';
         UserAddress::create($input);
 
         $data['status'] = config('app.response.success.status');
@@ -1256,4 +1278,31 @@ class ProfileService
 
         return $data;
     }
+
+    public function getAddressforCompanion($userId, $addressType)
+    {
+        $addressDetails = UserAddress::where('user_id', $userId)
+            ->whereIn('addressType', $addressType)
+            ->select('address1', 'address2', 'postcode', 'city', 'state', 'country')
+            ->first();
+
+        if(!$addressDetails)
+        {
+            $data['status'] = config('app.response.error.status');
+            $data['type'] = config('app.response.error.type');
+            $data['title'] = config('app.response.error.title');
+            $data['msg'] = 'Address not found';
+        }else{
+            $data['data'] = $addressDetails;
+            $data['status'] = config('app.response.success.status');
+            $data['type'] = config('app.response.success.type');
+            $data['title'] = config('app.response.success.title');
+            $data['msg'] = 'Success Get Address Data';
+        }
+
+        return $data;
+    }
+
+
+
 }

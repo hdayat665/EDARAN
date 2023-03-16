@@ -58,7 +58,7 @@
                 @include('pages.HRIS.myProfile.myEmployment')
                 @include('pages.HRIS.myProfile.changePassword')
                 @include('pages.HRIS.myProfile.myVehicle')
-                @include('pages.HRIS.myProfile.eLeave')
+                {{-- @include('pages.HRIS.myProfile.eLeave') --}}
             </div>
         </div>
     </div>
