@@ -35,53 +35,65 @@ class MyTimeSheetService
     }
 
     public function createLog($r)
-    {
-        $input = $r->input();
-        $user = Auth::user();
+{
+    $input = $r->input();
+    $user = Auth::user();
 
-        $input['user_id'] = $user->id;
-        $input['tenant_id'] = $user->tenant_id;
-        $input['date'] = date_format(date_create($input['date']), 'Y/m/d');
+    $input['user_id'] = $user->id;
+    $input['tenant_id'] = $user->tenant_id;
+    $input['date'] = date_format(date_create($input['date']), 'Y/m/d');
 
-        $start_time = strtotime($input['start_time']);
-        $end_time = strtotime($input['end_time']);
-        $totaltime = $end_time - $start_time;
+    $startTime = date('Y-m-d H:i:s', strtotime($input['start_time']));
+    $endTime = date('Y-m-d H:i:s', strtotime($input['end_time']));
 
-        if (isset($input['office_log_project'])) {
-            $input['project_id'] = $input['office_log_project'];
-        }
+    if (isset($input['office_log_project'])) {
+        $input['project_id'] = $input['office_log_project'];
+    }
 
-        if (isset($input['activity_office'])) {
-            $input['activity_name'] = $input['activity_office'];
-        }
+    if (isset($input['activity_office'])) {
+        $input['activity_name'] = $input['activity_office'];
+    }
 
-        if (isset($input['project_location_office'])) {
-            $input['project_location'] = $input['project_location_office'];
-        }
+    if (isset($input['project_location_office'])) {
+        $input['project_location'] = $input['project_location_office'];
+    }
 
-        $h = intval($totaltime / 3600);
+    $totaltime = strtotime($input['end_time']) - strtotime($input['start_time']);
 
-        $totaltime = $totaltime - ($h * 3600);
+    $h = intval($totaltime / 3600);
+    $totaltime = $totaltime - ($h * 3600);
+    $m = intval($totaltime / 60);
+    $s = $totaltime - ($m * 60);
+    $input['total_hour'] = "$h:$m:$s";
 
-        // Minutes is obtained by dividing
-        // remaining total time with 60
-        $m = intval($totaltime / 60);
+    $existingLogs = TimesheetLog::where('user_id', $user->id)
+        ->where('date', $input['date'])
+        ->where(function ($query) use ($startTime, $endTime) {
+            $query->where(function ($query) use ($startTime, $endTime) {
+                $query->whereRaw("STR_TO_DATE(start_time, '%h:%i %p') >= ? AND STR_TO_DATE(start_time, '%h:%i %p') < ?", [$startTime, $endTime]);
+            })->orWhere(function ($query) use ($startTime, $endTime) {
+                $query->whereRaw("STR_TO_DATE(end_time, '%h:%i %p') > ? AND STR_TO_DATE(end_time, '%h:%i %p') <= ?", [$startTime, $endTime]);
+            })->orWhere(function ($query) use ($startTime, $endTime) {
+                $query->whereRaw("STR_TO_DATE(start_time, '%h:%i %p') < ? AND STR_TO_DATE(end_time, '%h:%i %p') > ?", [$startTime, $endTime]);
+            });
+        })
+        ->get();
 
-        // Remaining value is seconds
-        $s = $totaltime - ($m * 60);
-
-        // Printing the result
-        $input['total_hour'] = "$h:$m:$s";
-
-        TimesheetLog::create($input);
-
-        $data['status'] = config('app.response.success.status');
-        $data['type'] = config('app.response.success.type');
-        $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success Create Timesheet Logs';
-
+    if ($existingLogs->isNotEmpty()) {
+        $data['status'] = config('app.response.error.status');
+        $data['type'] = config('app.response.error.type');
+        $data['title'] = config('app.response.error.title');
+        $data['msg'] = 'Error: Timesheet log for the same time range already exists for this date';
         return $data;
     }
+
+    TimesheetLog::create($input);
+    $data['status'] = config('app.response.success.status');
+    $data['type'] = config('app.response.success.type');
+    $data['title'] = config('app.response.success.title');
+    $data['msg'] = 'Success Create Timesheet Logs';
+    return $data;
+}
 
     public function updateLog($r, $id)
     {
@@ -92,9 +104,13 @@ class MyTimeSheetService
         $input['tenant_id'] = $user->tenant_id;
         $input['date'] = date_format(date_create($input['date']), 'Y/m/d');
 
-        $start_time = strtotime($input['start_time']);
-        $end_time = strtotime($input['end_time']);
-        $totaltime = $end_time - $start_time;
+        // $start_time = strtotime($input['start_time']);
+        // $end_time = strtotime($input['end_time']);
+        // $totaltime = $end_time - $start_time;
+
+
+        $startTime = date('Y-m-d H:i:s', strtotime($input['start_time']));
+        $endTime = date('Y-m-d H:i:s', strtotime($input['end_time']));
 
         if (isset($input['office_log_project'])) {
             $input['project_id'] = $input['office_log_project'];
@@ -112,10 +128,13 @@ class MyTimeSheetService
             unset($input['project_location_office']);
         }
 
+       
+
+        // $totaltime = $totaltime - ($h * 3600);
+        $totaltime = strtotime($input['end_time']) - strtotime($input['start_time']);
         $h = intval($totaltime / 3600);
-
         $totaltime = $totaltime - ($h * 3600);
-
+        
         // Minutes is obtained by dividing
         // remaining total time with 60
         $m = intval($totaltime / 60);
@@ -125,6 +144,27 @@ class MyTimeSheetService
 
         // Printing the result
         $input['total_hour'] = "$h:$m:$s";
+
+        $existingLogs = TimesheetLog::where('user_id', $user->id)
+        ->where('date', $input['date'])
+        ->where(function ($query) use ($startTime, $endTime) {
+            $query->where(function ($query) use ($startTime, $endTime) {
+                $query->whereRaw("STR_TO_DATE(start_time, '%h:%i %p') >= ? AND STR_TO_DATE(start_time, '%h:%i %p') < ?", [$startTime, $endTime]);
+            })->orWhere(function ($query) use ($startTime, $endTime) {
+                $query->whereRaw("STR_TO_DATE(end_time, '%h:%i %p') > ? AND STR_TO_DATE(end_time, '%h:%i %p') <= ?", [$startTime, $endTime]);
+            })->orWhere(function ($query) use ($startTime, $endTime) {
+                $query->whereRaw("STR_TO_DATE(start_time, '%h:%i %p') < ? AND STR_TO_DATE(end_time, '%h:%i %p') > ?", [$startTime, $endTime]);
+            });
+        })
+        ->get();
+
+    if ($existingLogs->isNotEmpty()) {
+        $data['status'] = config('app.response.error.status');
+        $data['type'] = config('app.response.error.type');
+        $data['title'] = config('app.response.error.title');
+        $data['msg'] = 'Error: Timesheet log for the same time range already exists for this date';
+        return $data;
+    }
 
         TimesheetLog::where('id', $id)->update($input);
 

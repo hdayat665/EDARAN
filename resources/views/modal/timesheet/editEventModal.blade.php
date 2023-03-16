@@ -68,10 +68,10 @@
                                     <input class="form-check-input"  type="checkbox"  name="type_recurring[]" id="addeventalldayedit" value="allday" >
                                     <label class="form-label" >All Day</label>
                                 </div>
-                                <div class="form-check form-check-inline">
+                                {{-- <div class="form-check form-check-inline">
                                     <input class="form-check-input" id="addeventrecurringedit" type="checkbox"  name="type_recurring[]" value="recurring" >
                                     <label class="form-label" >Recurring*</label>
-                                </div>
+                                </div> --}}
                             </div>
                         </div>
                         <div class="col-sm-6 ">
