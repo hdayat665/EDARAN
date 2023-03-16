@@ -1671,6 +1671,28 @@ $(document).ready(function () {
             [5, 10, 15, 20, "All"],
         ],
     });
+    $("#education").DataTable({
+        responsive: false,
+        lengthMenu: [
+            [5, 10, 15, 20, -1],
+            [5, 10, 15, 20, "All"],
+        ],
+    }); 
+
+    $("#qualificationOthers").DataTable({
+        responsive: false,
+        lengthMenu: [
+            [5, 10, 15, 20, -1],
+            [5, 10, 15, 20, "All"],
+        ],
+    });
+    $("#profileAddress").DataTable({
+        responsive: false,
+        lengthMenu: [
+            [5, 10, 15, 20, -1],
+            [5, 10, 15, 20, "All"],
+        ],
+    });
     $("#xName1,#lastName1").change(function () {
         var a = $("#firstName1").val();
         var b = $("#lastName1").val();
