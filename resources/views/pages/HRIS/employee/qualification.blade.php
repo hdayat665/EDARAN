@@ -23,7 +23,7 @@
                  <button class="btn btn-primary col-md-2" data-bs-toggle="modal" data-bs-target="#modalladded"><i class="fa fa-plus"></i> Add Education</button>
              </div>
              <div class="row p-2">
-                 <table  id=""  class="table table-striped table-bordered align-middle">
+                <table id="" style="width: 100%" class="table table-striped align-middle">
                      <thead>
                      <tr>
                          <th data-orderable="false">No</th>	
@@ -73,7 +73,7 @@
                  <button class="btn btn-primary col-md-2" data-bs-toggle="modal" data-bs-target="#addmodalothers"><i class="fa fa-plus"></i> Add Others</button>
              </div>
              <div class="row p-2">
-                 <table  id=""  class="table table-striped table-bordered align-middle">
+                <table id="" style="width: 100%" class="table table-striped align-middle">
                      <thead>
                      <tr>
                          <th data-orderable="false">No</th>	

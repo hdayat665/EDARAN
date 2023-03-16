@@ -206,7 +206,7 @@ $(document).ready(function () {
     $("#applyclaimtable").DataTable({
         searching: false,
         scrollX: true,
-        scrollY: 150,
+        // scrollY: 150,
         lengthChange: true,
         lengthMenu: [
             [5, 10, 25, 50, -1],

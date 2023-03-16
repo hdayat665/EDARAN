@@ -57,7 +57,7 @@ $("document").ready(function () {
             searching: true,
             lengthChange: false,
             scrollX: true,
-            scrollY: 200,
+            // scrollY: 200,
             lengthMenu: [5, 10],
             responsive: false,
             info: false,
