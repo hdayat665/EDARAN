@@ -329,13 +329,13 @@
                                 <label class="form-label">Distance</label>
                             </div>
                             <div class="col-md-3">
-                                <input type="text" class="form-control" value="" name="second_km" id="second_km" data-secondkmcar="{{ $secondkmcar }}" data-secondkmmotor="{{ $secondkmmotor }}">
+                                <input type="text" class="form-control" value="" name="" id="second_km" data-secondkmcar="{{ $secondkmcar }}" data-secondkmmotor="{{ $secondkmmotor }}">
                             </div>
                             <div class="col-md-2">
                                 <label class="form-label">entitlement</label>
                             </div>
                             <div class="col-md-3">
-                                <input type="number" class="form-control" value="" name="second_price" id="second_price" data-secondpricecar="{{ $secondpricecar }}" data-secondpricemotor="{{ $secondpricemotor }}">
+                                <input type="number" class="form-control" value="" name="" id="second_price" data-secondpricecar="{{ $secondpricecar }}" data-secondpricemotor="{{ $secondpricemotor }}">
                             </div>
                         </div>
                         <div class="row p-2" style="display: none">
@@ -343,13 +343,13 @@
                                 <label class="form-label">Distance</label>
                             </div>
                             <div class="col-md-3">
-                                <input type="text" class="form-control" value="" name="third_km" id="third_km" data-thirdkmcar="{{ $thirdkmcar }}" data-thirdkmmotor="{{ $thirdkmmotor }}">
+                                <input type="text" class="form-control" value="" name="" id="third_km" data-thirdkmcar="{{ $thirdkmcar }}" data-thirdkmmotor="{{ $thirdkmmotor }}">
                             </div>
                             <div class="col-md-2">
                                 <label class="form-label">entitlement</label>
                             </div>
                             <div class="col-md-3">
-                                <input type="number" class="form-control" value="" name="third_price" id="third_price" data-thirdpricecar="{{ $thirdpricecar }}" data-thirdpricemotor="{{ $thirdpricemotor }}">
+                                <input type="number" class="form-control" value="" name="" id="third_price" data-thirdpricecar="{{ $thirdpricecar }}" data-thirdpricemotor="{{ $thirdpricemotor }}">
                             </div>
                         </div>
                         <div class="row p-2" >
