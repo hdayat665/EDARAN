@@ -385,11 +385,11 @@ class ProfileController extends Controller
         return response()->json($result);
     }
 
-    public function getOthers($id = '')
+    public function getOthers($user_id = '')
     {
         $ps = new ProfileService;
 
-        $result = $ps->getOthers($id);
+        $result = $ps->getOthers($user_id);
 
         return response()->json($result);
     }
@@ -449,4 +449,27 @@ class ProfileController extends Controller
 
         return response()->json($result);
     }
+
+    public function getAddressforCompanion(Request $request)
+    {
+        $ps = new ProfileService;
+
+        $userId = Auth::user()->id;
+        $addressType = [1, 3];
+
+        $result = $ps->getAddressforCompanion($userId, $addressType);
+
+        return response()->json($result);
+    }
+
+    public function deleteCompanion(Request $r)
+    {
+        $ps = new ProfileService;
+
+        $result = $ps->deleteCompanion($r);
+
+        return response()->json($result);
+    }
+
+
 }

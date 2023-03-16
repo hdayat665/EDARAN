@@ -32,6 +32,13 @@ $("#addneweventprojectlocsearch").picker({ search: true });
 $("#addneweventparticipant").picker({ search: true });
 $("#addneweventselectproject").picker({ search: true });
 
+
+
+$("#employeenamesearch").picker({ search: true });
+$("#designationsearch").picker({ search: true });
+$("#departmentsearch").picker({ search: true });
+
+
 $("#starteventtime").timepicker({
     showMeridian: false,
 });
@@ -159,4 +166,12 @@ $("#ontheyearlycheck").click(function() {
         $("#recurringonthemonthyearly").hide();
         $("#recurringontheof").hide();
     }
+});
+
+$("#reset").on("click", function () {
+    $("#employeesearch").val($("#employeesearch").data("default-value"));
+    $("#yearsearch").val($("#yearsearch").data("default-value"));
+    $("#monthsearch").val($("#monthsearch").data("default-value"));
+    $("#designationsearch").val($("#designationsearch").data("default-value"));
+    $("#departmentsearch").val($("#departmentsearch").data("default-value"));
 });

@@ -1287,9 +1287,7 @@ $.validator.addMethod("noSpecialChars", function(value, element) {
             });
         }
     }
-  
-
-  $('#addAddressDetails').click(function(e) {
+    $('#addAddressDetails').click(function(e) {
       $("#formAddressDetails").validate({
           // Specify validation rules
           rules: {
@@ -1332,6 +1330,7 @@ $.validator.addMethod("noSpecialChars", function(value, element) {
                       processData: false,
                       contentType: false,
                   }).done(function (data) {
+                    console.log(data);
                       swal({
                           title: data.title,
                           text: data.msg,
@@ -1423,7 +1422,7 @@ $.validator.addMethod("noSpecialChars", function(value, element) {
 
   addressIds = addressId.split(",");
 
-  for (let i = 1; i < addressIds.length; i++){
+  for (let i = 0; i < addressIds.length; i++){
       const type = addressIds[i];
 
       $("#updateAddressDetails" + type).click(function (e){
@@ -1431,8 +1430,8 @@ $.validator.addMethod("noSpecialChars", function(value, element) {
           var addressData = getAddressDetails(id);
 
           addressData.done(function (data){
-              console.log(data)
               address = data.data;
+              $("#id1").val(address.id);
               $("#address1Edit").val(address.address1);
               $("#address2Edit").val(address.address2);
               $("#postcodeEdit").val(address.postcode);
@@ -1457,7 +1456,7 @@ $.validator.addMethod("noSpecialChars", function(value, element) {
               }).then(function () {
                   $.ajax({
                       type: "POST",
-                      url: "/deleteEmployeeAddressDetails/" + id,
+                      url: "/deleteAddressDetails/" + id,
                       data: { _method: "DELETE" },
                   }).done(function (data) {
                       console.log(data)
@@ -1486,6 +1485,72 @@ $.validator.addMethod("noSpecialChars", function(value, element) {
           });
       }
   }
+
+$('input[name="address_type[]"]').on('change', function() {
+    var checkboxes = $('input[name="address_type[]"]');
+    var permanentChecked = false;
+    var correspondentChecked = false;
+    var addressId = $(this).data('address-id');
+    var addressType = $(this).is(':checked') ? $(this).data('address-type') : '0';
+
+    checkboxes.each(function() {
+        if ($(this).is(':checked')) {
+            if ($(this).val() === 'permanent') {
+                permanentChecked = true;
+            } else if ($(this).val() === 'correspondent') {
+                correspondentChecked = true;
+            }
+        }
+    });
+
+    if (permanentChecked && correspondentChecked) {
+        checkboxes.not(':checked').prop('disabled', true);
+        // if both checkboxes are checked and have the same address ID, set addressType to 3
+        if (checkboxes.filter('[data-address-id="' + addressId + '"]:checked').length === 2) {
+            addressType = '3';
+        }
+    } else if (permanentChecked) {
+        // if only permanent checkbox is checked, set addressType to 1
+        addressType = '1';
+        // disable all other permanent checkboxes
+        checkboxes.filter('[value="permanent"]:not(:checked)').prop('disabled', true);
+        // enable all correspondent checkboxes
+        checkboxes.filter('[value="correspondent"]').prop('disabled', false);
+    } else if (correspondentChecked) {
+        // if only correspondent checkbox is checked, set addressType to 2
+        addressType = '2';
+        // disable all other correspondent checkboxes
+        checkboxes.filter('[value="correspondent"]:not(:checked)').prop('disabled', true);
+        // enable all permanent checkboxes
+        checkboxes.filter('[value="permanent"]').prop('disabled', false);
+    } else {
+        checkboxes.prop('disabled', false);
+    }
+
+    // send an AJAX request to update the address type status
+    $.ajax({
+        url: '/updateAddressDetails',
+        type: 'POST',
+        data: {
+            id: addressId,
+            addressType: addressType,
+        },
+        success: function(data) {
+            // Update the UI to reflect the new address type
+            Swal.fire({
+                icon: 'success',
+                title: 'Address type updated successfully!',
+                confirmButtonColor: "#3085d6",
+                confirmButtonText: "OK",
+                allowOutsideClick: false,
+                allowEscapeKey: false,
+            });
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            console.error(errorThrown);
+        }
+    });
+});
 
     /////////////////////////////////////////////
 

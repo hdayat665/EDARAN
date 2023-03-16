@@ -82,21 +82,21 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <?php $id = 0 ?>
-                        @if ($others)
-                            @foreach ($others as $other)
-                            <?php $id++ ?>
-                            <tr>
-                                <td> {{$id}} </td>
-                                <td>
-                                    <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle"><i class="fa fa-cogs"></i> Actions <i class="fa fa-caret-down"></i></a>
-                                    <div class="dropdown-menu">
-                                        <a href="javascript:;" id="othersQualificationModalEdit{{$other->id}}" data-id="{{$other->id}}" class="dropdown-item" data-bs-toggle="modal"> Edit</a>
-                                        <div class="dropdown-divider"></div>
-                                        <a href="javascript:;" id="" data-id="" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#deleteOthers"> Delete</a>
-                                        <!-- <div class="dropdown-divider"></div> -->
-                                    </div>
-                                </td>
+                    <?php $id = 0 ?>
+                    @if ($others)
+                        @foreach ($others as $other)
+                        <?php $id++ ?>
+                        <tr>
+                            <td> {{$id}} </td>
+                            <td>
+                                <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle"><i class="fa fa-cogs"></i> Actions <i class="fa fa-caret-down"></i></a>
+                                <div class="dropdown-menu">
+                                    <a href="javascript:;" id="othersQualificationModalEdit{{$other->id}}" data-id="{{$other->id}}" class="dropdown-item" data-bs-toggle="modal"> Edit</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a href="javascript:;" id="deleteOthers{{$other->id}}" data-id="{{$other->id}}" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#deleteOthers"> Delete</a>
+                                    <!-- <div class="dropdown-divider"></div> -->
+                                </div>
+                            </td>
 
                                 <td> {{ $other->otherDate }} </td>
                                 <td style="text-transform: uppercase;"> {{ $other->otherPQDetails }} </td>

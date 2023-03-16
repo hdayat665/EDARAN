@@ -1193,18 +1193,18 @@ if (!function_exists('month')) {
     function month($id = '')
     {
         $data = [
-            '01' => 'January',
-            '02' => 'February',
-            '03' => 'March',
-            '04' => 'April',
-            '05' => 'May',
-            '06' => 'June',
-            '07' => 'July',
-            '08' => 'August',
-            '09' => 'September',
-            '10' => 'October',
-            '11' => 'November',
-            '12' => 'December',
+            '01' => 'JANUARY',
+            '02' => 'FEBRUARY',
+            '03' => 'MARCH',
+            '04' => 'APRIL',
+            '05' => 'MAY',
+            '06' => 'JUNE',
+            '07' => 'JULY',
+            '08' => 'AUGUST',
+            '09' => 'SEPTEMBER',
+            '10' => 'OCTOBER',
+            '11' => 'NOVEMBER',
+            '12' => 'DECEMBER',
         ];
 
         if ($id) {
@@ -1219,12 +1219,14 @@ if (!function_exists('year')) {
     function year()
     {
         $data = [
-            '2018' => '2018',
-            '2019' => '2019',
+            
+            '2023' => '2023',
+            '2022' => '2022',
             '2020' => '2020',
             '2021' => '2021',
-            '2022' => '2022',
-            '2023' => '2023',
+            '2019' => '2019',
+            '2018' => '2018', 
+            
         ];
 
         return $data;
@@ -1909,7 +1911,6 @@ if (!function_exists('addressType')) {
             '1' => 'PERMANENT',
             '2' => 'CORRESPONDENCE',
             '3' => 'BOTH',
-            '4' => 'NONE',
         ];
 
         if ($id) {

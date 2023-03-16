@@ -54,6 +54,7 @@ class UserCompanion extends Authenticatable
         'payslip',
         'officeNo',
         'mainCompanion',
+        'idFile',
     ];
 }
 

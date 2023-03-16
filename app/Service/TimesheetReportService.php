@@ -106,18 +106,29 @@ class TimesheetReportService
     
         if (isset($input['project'])) {
             $cond[2] = ['a.project_id', $input['project']];
+            
         }
     
         if (isset($input['department'])) {
-            $cond[3] = ['d.id', $input['department']];
+            $cond[3] = ['d.departmentName', $input['department']];
         }
     
         if (isset($input['designation'])) {
-            $cond[5] = ['e.designationName', $input['designation']];
+            $cond[4] = ['e.designationName', $input['designation']];
         }
     
-        if (isset($input['user_id'])) {
-            $cond[6] = ['c.user_id', $input['user_id']];
+        if (isset($input['employeeName'])) {
+            $cond[5] = ['c.user_id', $input['employeeName']];
+        }
+
+        if (isset($input['year'])) {
+            $year = $input['year'];
+            $cond[6] = [DB::raw('YEAR(a.created_at)'), $year];
+        }
+
+        if (isset($input['month'])) {
+            $month = $input['month'];
+            $cond[7] = [DB::raw('MONTH(a.created_at)'), $month];
         }
     
         $startDate = date_format(date_create(now()), 'Y').'-01-01';
@@ -134,7 +145,7 @@ class TimesheetReportService
         ->leftJoin('employment as c', 'a.user_id', '=', 'c.user_id')
         ->leftJoin('department as d', 'c.department', '=', 'd.id')
         ->leftJoin('designation as e', 'c.designation', '=', 'e.id')
-        ->select('a.date', DB::raw('SEC_TO_TIME(SUM(TIME_TO_SEC(a.total_hour))) as total_hour'), 'b.project_name', 'c.employeeName', 'd.departmentName', 'e.designationName')
+        ->select('a.date', DB::raw('SEC_TO_TIME(SUM(TIME_TO_SEC(a.total_hour))) as total_hour'), 'b.project_name', 'c.employeeName', 'd.departmentName', 'e.designationName', 'd.id')
         ->where($cond)
         ->whereBetween('date', [$startDate, $endDate])
         ->groupBy('a.date')
