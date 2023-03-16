@@ -125,12 +125,15 @@
                             {{-- new --}}
                             <div class="col-sm-3 part">
                                 <label for="idattach" class="form-label" >ID Attachment</label>
-                                <input id="fileupload" type="file" multiple="multiple" name="fileID" value="">
-                                @if ($profile->fileID)
-                                    <a href="{{ route('download', ['filename' => $profile->fileID]) }}">{{$profile->fileID}}</a>
+                                <input id="fileupload" type="file" multiple="multiple" name="file" value="">
+                                @if ($profile->file)
+                                    <span class="file-link">
+                                        <a href="{{ route('download', ['filename' => $profile->file]) }}">{{$profile->file}}</a>
+                                    </span>
                                 @endif
-
-                            </div> 
+                            </div>
+                            
+                                                        
                         </div>
 
                         <div class="row p-2">
@@ -238,7 +241,7 @@
 
                                     <div class="col-sm-12 idnumber">
                                         <label for="" class="form-label" >OKU Card Number*</label>
-                                        <input type="text" value="" name="" id="okucard" class="form-control" readonly placeholder="OKU CARD NUMBER">
+                                        <input type="text" value="{{$profile->okuCardNum ?? ''}}" name="okuCardNum" id="okucard" class="form-control" readonly placeholder="OKU CARD NUMBER">
                                     </div>
                                 </div>
                             </div>

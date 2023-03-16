@@ -7,12 +7,14 @@ $(document).ready(function() {
     $(".partCheck").click(function(){
         if ($(this).prop("checked")) {
             $('#exitdatediv').show();
+            $('#exitdatediv1').show();
            
            
             
         } else {
             
             $('#exitdatediv').hide();
+            $('#exitdatediv1').hide();
             
         }
       });
@@ -57,7 +59,7 @@ $(document).ready(function() {
         autoclose: true,
         format: 'yyyy/mm/dd',
     });
-    $("#datepicker-exitdate").datepicker({
+    $("#datepicker_exitdate").datepicker({
         todayHighlight: true,
         autoclose: true,
         format: 'yyyy/mm/dd',
@@ -644,6 +646,7 @@ $(document).ready(function() {
                 branch: "required",
                 unit:"required",
                 location_name: "required",
+                exit_project_date: "required",
             },
 
             messages: {
@@ -653,6 +656,7 @@ $(document).ready(function() {
                 branch: "Please Choose Branch",
                 unit:"Please Choose Unit",
                 location_name:"Please Select Location",
+                exit_project_date: "Please Choose Date",
             },
             submitHandler: function(form) {
                 requirejs(['sweetAlert2'], function(swal) {

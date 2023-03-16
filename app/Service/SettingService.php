@@ -3,6 +3,7 @@
 namespace App\Service;
 
 use App\Models\ActivityLogs;
+use App\Models\ApprovalConfig;
 use App\Models\ApprovelRoleGeneral;
 use App\Models\Branch;
 use App\Models\ClaimCategory;
@@ -1910,26 +1911,26 @@ class SettingService
 
     public function leaveEntitlementView()
     {
-        $data = 
-        leaveEntitlementModel::where('leave_entitlement.tenant_id', Auth::user()->tenant_id)
-        ->leftJoin('userprofile', 'leave_entitlement.id_userprofile', '=', 'userprofile.user_id')
-        ->leftJoin('employment', 'leave_entitlement.id_employment', '=', 'employment.user_id')
-        ->leftJoin('department', 'leave_entitlement.id_department', '=', 'department.id')
-        ->select('leave_entitlement.*', 'userprofile.fullname', 'department.departmentName')
-        ->orderBy('id', 'desc')->get();
+        $data =
+            leaveEntitlementModel::where('leave_entitlement.tenant_id', Auth::user()->tenant_id)
+            ->leftJoin('userprofile', 'leave_entitlement.id_userprofile', '=', 'userprofile.user_id')
+            ->leftJoin('employment', 'leave_entitlement.id_employment', '=', 'employment.user_id')
+            ->leftJoin('department', 'leave_entitlement.id_department', '=', 'department.id')
+            ->select('leave_entitlement.*', 'userprofile.fullname', 'department.departmentName')
+            ->orderBy('id', 'desc')->get();
         return $data;
     }
 
     public function leaveNameStaff()
     {
-        $data= 
-        Employee::where('employment.tenant_id', Auth::user()->tenant_id)
-        ->whereNull('leave_entitlement.id_employment')
-        ->leftJoin('userprofile', 'employment.user_id', '=', 'userprofile.user_id')
-        ->leftJoin('department', 'employment.department', '=', 'department.id')
-        ->leftJoin('leave_entitlement', 'employment.user_id', '=', 'leave_entitlement.id_employment')
-        ->select('userprofile.user_id', 'userprofile.fullname', 'department.id')
-        ->get();
+        $data =
+            Employee::where('employment.tenant_id', Auth::user()->tenant_id)
+            ->whereNull('leave_entitlement.id_employment')
+            ->leftJoin('userprofile', 'employment.user_id', '=', 'userprofile.user_id')
+            ->leftJoin('department', 'employment.department', '=', 'department.id')
+            ->leftJoin('leave_entitlement', 'employment.user_id', '=', 'leave_entitlement.id_employment')
+            ->select('userprofile.user_id', 'userprofile.fullname', 'department.id')
+            ->get();
         return $data;
     }
 
@@ -1982,14 +1983,14 @@ class SettingService
 
         // return $data;
 
-         $data = 
-        leaveEntitlementModel::where('leave_entitlement.tenant_id', Auth::user()->tenant_id)
-        ->where('leave_entitlement.id', '=', $id)
-        ->leftJoin('userprofile', 'leave_entitlement.id_userprofile', '=', 'userprofile.user_id')
-        ->leftJoin('employment', 'leave_entitlement.id_employment', '=', 'employment.user_id')
-        ->leftJoin('department', 'leave_entitlement.id_department', '=', 'department.id')
-        ->select('leave_entitlement.*', 'userprofile.fullname', 'department.departmentName')
-        ->orderBy('id', 'desc')->first();
+        $data =
+            leaveEntitlementModel::where('leave_entitlement.tenant_id', Auth::user()->tenant_id)
+            ->where('leave_entitlement.id', '=', $id)
+            ->leftJoin('userprofile', 'leave_entitlement.id_userprofile', '=', 'userprofile.user_id')
+            ->leftJoin('employment', 'leave_entitlement.id_employment', '=', 'employment.user_id')
+            ->leftJoin('department', 'leave_entitlement.id_department', '=', 'department.id')
+            ->select('leave_entitlement.*', 'userprofile.fullname', 'department.departmentName')
+            ->orderBy('id', 'desc')->first();
         return $data;
     }
 
@@ -2181,10 +2182,10 @@ class SettingService
 
         $data1 = strtoupper($input['leave_types_code']);
         $data2 = strtoupper($input['leave_types']);
-        
-        if($input = $r->input('day')){
+
+        if ($input = $r->input('day')) {
             $data3 = $input['day'];
-        }else{
+        } else {
             $data3 = 0;
         }
         $data5 = Auth::user()->tenant_id;
@@ -2224,7 +2225,7 @@ class SettingService
         $data1 = strtoupper($input['leavetypescode']);
         $data2 = strtoupper($input['leavetypes']);
         $data3 = $input['day'];
-        
+
         $input = [
             'leave_types_code' => $data1,
             'leave_types' => $data2,
@@ -2411,6 +2412,104 @@ class SettingService
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
         $data['msg'] = 'Success update eclaim general setting';
+
+        return $data;
+    }
+
+    public function eclaimApprovalConfig()
+    {
+        $data = ApprovalConfig::where([['tenant_id', Auth::user()->tenant_id]])->get();
+
+        return $data;
+    }
+
+    public function updateApprovalConfig($r, $id)
+    {
+        $input = $r->input();
+        $status = $input['status'];
+        $logs = ApprovalConfig::find($id);
+
+        if (!$logs) {
+            $data['status'] = config('app.response.error.status');
+            $data['type'] = config('app.response.error.type');
+            $data['title'] = config('app.response.error.title');
+            $data['msg'] = 'data not found';
+        } else {
+
+            if (in_array($input['role'], ['SUPERVISOR - RECOMMENDER', 'HOD / CEO - APPROVER', 'ADMIN - RECOMMENDER', 'ADMIN - APPROVER', 'FINANCE - RECOMMENDER', 'FINANCE - APPROVER'])) {
+                $contentData = [
+                    'status' => $status,
+                    'approve' => $status,
+                    'reject' => $status,
+                    'amend' => $status,
+                    'cancel' => $status,
+
+                ];
+            }
+
+            if ($input['role'] == 'ADMIN - CHECKER') {
+                $contentData = [
+                    'status' => $status,
+                    'approve' => $status,
+                    'amend' => $status,
+                    'cancel' => $status,
+                    'check1' => $status,
+                    'check2' => $status,
+                    'check3' => $status,
+                ];
+            }
+
+            if ($input['role'] == 'FINANCE - CHECKER') {
+                $contentData = [
+                    'status' => $status,
+                    'approve' => $status,
+                    'amend' => $status,
+                    'cancel' => $status,
+                    'check1' => $status,
+                    'generate_pv1' => $status,
+                    'payment1' => $status,
+                    'paid1' => $status,
+                    'check2' => $status,
+                    'check3' => $status,
+                ];
+            }
+
+            $logs->update($contentData);
+
+            $data['status'] = config('app.response.success.status');
+            $data['type'] = config('app.response.success.type');
+            $data['title'] = config('app.response.success.title');
+            $data['msg'] = 'Success Update Status';
+        }
+
+        return $data;
+    }
+
+    public function updateApprovalConfigDetail($r, $id)
+    {
+        $input = $r->input();
+        $status = $input['status'];
+        $field = $input['field'];
+        $logs = ApprovalConfig::find($id);
+
+        if (!$logs) {
+            $data['status'] = config('app.response.error.status');
+            $data['type'] = config('app.response.error.type');
+            $data['title'] = config('app.response.error.title');
+            $data['msg'] = 'data not found';
+        } else {
+
+            $contentData = [
+                $field => $status,
+            ];
+
+            $logs->update($contentData);
+
+            $data['status'] = config('app.response.success.status');
+            $data['type'] = config('app.response.success.type');
+            $data['title'] = config('app.response.success.title');
+            $data['msg'] = 'Success Update Status';
+        }
 
         return $data;
     }

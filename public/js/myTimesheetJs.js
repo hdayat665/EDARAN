@@ -866,6 +866,7 @@ $(document).ready(function() {
                         }
                     }  
                 },
+                // original code
                 // dateClick: function(info) {
 
                 //     $('#addLogModal').modal('show');
@@ -877,22 +878,63 @@ $(document).ready(function() {
                 //     $("#dateaddlog").val(formatedDate);
                 // },
 
+                //new
+                // dateClick: function(info) {
+                //     const today = dayjs();
+                  
+                //     // check if the clicked date is not the current date
+                //     if (!dayjs(info.date).isSame(today, 'day')) {
+                //       Swal.fire({
+                //         icon: 'error',
+                //         title: 'Error',
+                //         text: 'You can only select the current date and 48 hours before.'
+                //       });
+                //       return;
+                //     }
+                  
+                //     // show the modal and set the date
+                //     $('#addLogModal').modal('show');
+                //     const formattedDate = dayjs(info.dateStr).format('DD-MM-YYYY');
+                //     $("#dateaddlog").val(formattedDate);
+                //   },
+
                 dateClick: function(info) {
                     const today = dayjs();
-                    const minDate = today.subtract(2, 'day'); // Set the minimum date to 2 days ago
+                    const clickedDate = dayjs(info.date);
                   
-                    // check if the clicked date is earlier than the minimum date
-                    if (dayjs(info.date).isBefore(minDate, 'day')) {
-                        alert("You can only select dates up to 48 hours from now.");
-                        return;
+                    // check if the clicked date is within the last 2 days before the current date
+                    if (clickedDate.diff(today, 'day') < -2 || clickedDate.isAfter(today, 'day')) {
+                      Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: 'You can only select the current date and 48 hours before.'
+                      });
+                      return;
                     }
-                    
                   
                     // show the modal and set the date
                     $('#addLogModal').modal('show');
-                    const formattedDate = dayjs(info.dateStr).format('DD-MM-YYYY');
+                    const formattedDate = clickedDate.format('DD-MM-YYYY');
                     $("#dateaddlog").val(formattedDate);
                   },
+                  
+
+                //     dateClick: function(info) {
+                //     const today = dayjs();
+                //     const minDate = today.subtract(2, 'day'); // Set the minimum date to 2 days ago
+                  
+                //     // check if the clicked date is earlier than the minimum date
+                //     if (dayjs(info.date).isBefore(minDate, 'day')) {
+                //         alert("You can only select dates up to 48 hours from now.");
+                //         return;
+                //     }
+                    
+                  
+                //     // show the modal and set the date
+                //     $('#addLogModal').modal('show');
+                //     const formattedDate = dayjs(info.dateStr).format('DD-MM-YYYY');
+                //     $("#dateaddlog").val(formattedDate);
+                //   },
 
 
                 // dateClick: function(info) {
@@ -1503,14 +1545,15 @@ $(document).ready(function() {
           todayHighlight: true,
           autoclose: true,
           format: 'yyyy-mm-dd',
-          startDate: new Date(new Date().getTime() - (2 * 24 * 60 * 60 * 1000)), // one days ago
-          endDate: null // No end date
+          startDate: new Date(new Date().getTime() - (2 * 24 * 60 * 60 * 1000)), // two days ago
+          endDate: new Date() // Disable future dates
         });
       
         // Set the minimum and maximum dates to restrict the date range that can be selected
         $("#dateaddlog").datepicker('setStartDate', new Date(new Date().getTime() - (2 * 24 * 60 * 60 * 1000)));
-        $("#dateaddlog").datepicker('setEndDate', null);
+        $("#dateaddlog").datepicker('setEndDate', new Date());
       });
+      
       
 
 

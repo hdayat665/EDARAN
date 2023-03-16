@@ -1,9 +1,9 @@
 <div class="tab-pane fade" id="default-tab-3">
     <div class="row p-2">
-        <button class="btn btn-primary col-md-3" data-bs-toggle="modal" data-bs-target="#modaladdaddress"><i class="fa fa-plus"></i> New Address</button>
+        <button data-bs-toggle="modal" data-bs-target="#modaladdaddress"data-type="add" class="btn btn-primary col-sm-2"><i class="fa fa-plus"></i> New Address</button>
     </div>
     <div class="row p-2">
-        <table id="" class="table table-striped table-bordered align-middle">
+        <table id="profileAddress" class="table table-striped table-bordered align-middle">
             <thead>
                 <tr>
                     <th class="text-nowrap">No</th>
@@ -50,11 +50,6 @@
                                 data-address-id="{{ $address->id }}" data-address-type="2"/>
                                 <label class="form-check-label" for="correspondent">Correspondent</label>
                             </div>
-                            {{-- <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" name="address_type[]" 
-                                    value="none" {{ $address->addressType == '4' ? 'checked' : '' }} />
-                                <label class="form-check-label" for="none">None</label>
-                            </div>                                                           --}}
                         </td>
                         {{-- <td style="text-transform: uppercase;"> {{ addressType($address->addressType) ?? '' }} </td> --}}
                     </tr>

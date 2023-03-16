@@ -165,6 +165,8 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('/updateAddressDetails', 'updateAddressDetails');
             Route::delete('/deleteAddressDetails/{id}', 'deleteAddressDetails');
 
+            Route::get('/getAddressforCompanion/{id}', 'getAddressforCompanion');
+
             Route::get('/getParent/{id}', 'getParent');
             Route::get('/getSibling/{id}', 'getSibling');
             Route::post('/updatePass', 'updatePass');
@@ -182,7 +184,9 @@ Route::group(['middleware' => ['web']], function () {
             Route::delete('/deleteChildren/{id}', 'deleteChildren');
             Route::delete('/deleteParent/{id}', 'deleteParent');
             Route::delete('/deleteSibling/{id}', 'deleteSibling');
+            Route::delete('/deleteCompanion/{id}', 'deleteCompanion');
             Route::post('/resetPassword', 'resetPassword');
+            Route::get('/getCompanionById/{id}', 'getCompanionById');
         });
 
         Route::controller(EmployeeController::class)->group(function () {
@@ -392,6 +396,8 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('/getClaimEntitleById/{id}/{type}', 'getClaimEntitleById');
             Route::get('/getEntitleClaimDetailById/{id}', 'getEntitleClaimDetailById');
             Route::post('/updateEntitleDetail/{id}', 'updateEntitleDetail');
+            Route::post('/updateApprovalConfig/{id}', 'updateApprovalConfig');
+            Route::post('/updateApprovalConfigDetail/{id}', 'updateApprovalConfigDetail');
         });
 
         Route::controller(OrganizationController::class)->group(function () {
