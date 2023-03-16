@@ -21,7 +21,7 @@
                         <h4>Filter</h4>
                         <div class="col-sm-2">
                             <label for="emergency-firstname" class="form-label">Employer Name</label>
-                            <select class="form-select" id="" name="employeeName">
+                            <select class="form-select" id="employeenamesearch" name="employeeName" data-default-value="">
                                 <option class="form-label" value="" >Please Select</option>
                                 <?php $employees = getEmployee() ?>
                                 @foreach ($employees as $employee)
@@ -31,7 +31,7 @@
                         </div>
                         <div class="col-sm-2">
                             <label for="emergency-firstname" class="form-label">Year</label>
-                            <select class="form-select" id="" name="year">
+                            <select class="form-select" id="yearsearch" name="year" data-default-value="">
                                 <option class="form-label" value="">Please Select</option>
                                 <?php $years = year() ?>
                                 @foreach ($years as $year => $key)
@@ -41,7 +41,7 @@
                         </div>
                         <div class="col-sm-2">
                             <label for="emergency-firstname" class="form-label">Month</label>
-                            <select class="form-select" id="" name="month">
+                            <select class="form-select" id="monthsearch" name="month" data-default-value="">
                                 <option class="form-label" value="">Please Select</option>
                                 <?php $months = month() ?>
                                 @foreach ($months as $month => $key)
@@ -51,7 +51,7 @@
                         </div>
                         <div class="col-sm-2">
                             <label for="emergency-firstname" class="form-label">Designation</label>
-                            <select class="form-select" id="" name="designation">
+                            <select class="form-select" id="designationsearch" name="designation" data-default-value="">
                                 <option class="form-label" value="">Please Select</option>
                                 <?php $designations = getDesignation() ?>
                                 @foreach ($designations as $designation)
@@ -61,7 +61,7 @@
                         </div>
                         <div class="col-sm-2">
                             <label for="emergency-firstname" class="form-label">Department</label>
-                            <select class="form-select" id="" name="department">
+                            <select class="form-select" id="departmentsearch" name="department" data-default-value="">
                                 <option class="form-label" value="">Please Select</option>
                                 <?php $departments = getDepartment() ?>
                                 @foreach ($departments as $department)
@@ -111,7 +111,7 @@
                                             <td>{{ $item->designationName }}</td>
                                             <td>{{ $item->departmentName }}</td>
                                             <td>{{ $item->date }}</td>
-                                            <td>{{ $remaining_time }}</td>
+                                            <td>{{ date_format(date_create($remaining_time), 'H:i:s') }}</td>
                                         </tr>
                                     @endif
                                 @endforeach
@@ -121,11 +121,11 @@
                 </div>
             </div>
         </div>
-        <div class="row p-2">
+        {{-- <div class="row p-2">
             <div class="col align-self-start">
                 <a href="/setting" class="btn btn-primary"  type="submit"><i class="fa fa-arrow-left"></i> Back</a>
             </div>
-        </div>
+        </div> --}}
     </div>
     
 </div>
