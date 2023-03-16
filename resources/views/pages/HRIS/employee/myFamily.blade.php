@@ -1,5 +1,5 @@
 <div class="tab-pane fade" id="default-tab-7"> 
-    <div class="container">
+    <!-- <div class="container"> -->
         <h4 class="mt-3 mb-3">Parents information</h4>
         <div class="row p-2">
             <button type="button"  data-bs-toggle="modal" id="parentModalAdd" class="btn btn-primary col-sm-2"><i class="fa fa-plus"></i> New Parent</button>
@@ -43,7 +43,7 @@
                 <span style="display: none"><input type="text" id="parentId" value="{{$parentId}}"></span>
             </tbody>
         </table>
-    </div>
+    <!-- </div> -->
     <div class="container" style="display: none">
         <h4 class="mt-3 mb-3">Siblings Information</h4>
         <button type="button"  data-bs-toggle="modal" id="siblingModalAdd"  class="btn btn-white mt-3 mb-3"><i class="fa fa-plus"></i> New Sibling</button>

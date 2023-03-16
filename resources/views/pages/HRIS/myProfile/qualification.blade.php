@@ -20,69 +20,67 @@
             <div class="row p-2">
                 <button class="btn btn-primary col-md-2" data-bs-toggle="modal" data-bs-target="#modalladded"><i class="fa fa-plus"></i> Add Education</button>
             </div>
-            <div class="row p-2">
-                <table id="" class="table table-striped table-bordered align-middle">
+            <!-- <div class="row p-2"> -->
+                <table id="education" style="width: 100%"  class="table table-striped align-middle">
                     <thead>
-                    <tr>
-                        <th data-orderable="false">No</th>	
-                        <th data-orderable="false">Action</th>
-                        <th class="text-nowrap">From Date</th>
-                        <th class="text-nowrap">To Date</th>
-                        <th class="text-nowrap">Institute Name</th>
-                        <th class="text-nowrap">Highest Level Attained</th>
-                        <th class="text-nowrap">Result</th>
-                        <th class="text-nowrap">Education Attachments</th>
-                    </tr>
-                    </thead>
-                    
-                    <tbody>
-                    <?php $id = 0 ?>
-                    @if ($educations)
-                        @foreach ($educations as $education)
-                        <?php $id++ ?>
                         <tr>
-                            <td> {{$id}} </td>
-                            <td>
-                                <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle"><i class="fa fa-cogs"></i> Actions <i class="fa fa-caret-down"></i></a>
-                                <div class="dropdown-menu">
-                                    <a href="javascript:;" id="educationModalEdit{{$education->id}}" data-id="{{$education->id}}" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#editmodaledd"> Edit</a>
-                                    <div class="dropdown-divider"></div>
-                                    <a href="javascript:;" id="deleteEducation{{$education->id}}" data-id="{{$education->id}}" class="dropdown-item" data-bs-toggle="modal"> Delete</a>
-                                    <!-- <div class="dropdown-divider"></div> -->
-                                </div>
-                            </td>
-
-                            <td> {{ $education->fromDate }} </td>
-                            <td> {{ $education->toDate }} </td>
-                            <td style="text-transform: uppercase;"> {{ $education->instituteName }} </td>
-                            <td style="text-transform: uppercase;"> {{ $education->highestLevelAttained }} </td>
-                            <td style="text-transform: uppercase;"> {{ $education->result }} </td>
-                            <td><a href="{{ route('download', ['filename' => $education->file]) }}">{{$education->file}}</a></td>
+                            <th data-orderable="false">No</th>	
+                            <th data-orderable="false">Action</th>
+                            <th class="text-nowrap">From Date</th>
+                            <th class="text-nowrap">To Date</th>
+                            <th class="text-nowrap">Institute Name</th>
+                            <th class="text-nowrap">Highest Level Attained</th>
+                            <th class="text-nowrap">Result</th>
+                            <th class="text-nowrap">Education Attachments</th>
                         </tr>
-                        @endforeach
-                    @endif
-                    <span style="display: none"><input type="text" id="educationId" value="{{$educationId}}"></span>
+                    </thead>
+                    <tbody>
+                        <?php $id = 0 ?>
+                        @if ($educations)
+                            @foreach ($educations as $education)
+                            <?php $id++ ?>
+                            <tr>
+                                <td> {{$id}} </td>
+                                <td>
+                                    <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle"><i class="fa fa-cogs"></i> Actions <i class="fa fa-caret-down"></i></a>
+                                    <div class="dropdown-menu">
+                                        <a href="javascript:;" id="educationModalEdit{{$education->id}}" data-id="{{$education->id}}" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#editmodaledd"> Edit</a>
+                                        <div class="dropdown-divider"></div>
+                                        <a href="javascript:;" id="deleteEducation{{$education->id}}" data-id="{{$education->id}}" class="dropdown-item" data-bs-toggle="modal"> Delete</a>
+                                        <!-- <div class="dropdown-divider"></div> -->
+                                    </div>
+                                </td>
+
+                                <td> {{ $education->fromDate }} </td>
+                                <td> {{ $education->toDate }} </td>
+                                <td style="text-transform: uppercase;"> {{ $education->instituteName }} </td>
+                                <td style="text-transform: uppercase;"> {{ $education->highestLevelAttained }} </td>
+                                <td style="text-transform: uppercase;"> {{ $education->result }} </td>
+                                <td><a href="{{ route('download', ['filename' => $education->file]) }}">{{$education->file}}</a></td>
+                            </tr>
+                            @endforeach
+                        @endif
+                        <span style="display: none"><input type="text" id="educationId" value="{{$educationId}}"></span>
                     </tbody>
                 </table>
-            </div>
+            <!-- </div> -->
             
         </div>
         <div class="tab-pane fade show" id="quali-tab-2">
             <div class="row p-2">
                 <button class="btn btn-primary col-md-2" data-bs-toggle="modal" data-bs-target="#addmodalothers"><i class="fa fa-plus"></i> Add Others</button>
             </div>
-            <div class="row p-2">
-                <table id=""  class="table table-striped table-bordered align-middle">
+            <!-- <div class="row p-2"> -->
+                <table id="qualificationOthers" style="width: 100%"  class="table table-striped align-middle">
                     <thead>
-                    <tr>
-                        <th data-orderable="false">No</th>	
-                        <th data-orderable="false">Action</th>
-                        <th class="text-nowrap"> Date</th>
-                        <th class="text-nowrap">Professional Qualification Details</th>
-                        <th class="text-nowrap">Attachments</th>
-                    </tr>
+                        <tr>
+                            <th data-orderable="false">No</th>	
+                            <th data-orderable="false">Action</th>
+                            <th class="text-nowrap"> Date</th>
+                            <th class="text-nowrap">Professional Qualification Details</th>
+                            <th class="text-nowrap">Attachments</th>
+                        </tr>
                     </thead>
-
                     <tbody>
                     <?php $id = 0 ?>
                     @if ($others)
@@ -100,16 +98,16 @@
                                 </div>
                             </td>
 
-                            <td> {{ $other->otherDate }} </td>
-                            <td style="text-transform: uppercase;"> {{ $other->otherPQDetails }} </td>
-                            <td><a href="{{ route('download', ['filename' => $other->file]) }}">{{$other->file}}</a></td>
-                        </tr>
-                        @endforeach
-                    @endif
-                    <span style="display: none"><input type="text" id="othersId" value="{{$othersId}}"></span>
+                                <td> {{ $other->otherDate }} </td>
+                                <td style="text-transform: uppercase;"> {{ $other->otherPQDetails }} </td>
+                                <td><a href="{{ route('download', ['filename' => $other->file]) }}">{{$other->file}}</a></td>
+                            </tr>
+                            @endforeach
+                        @endif
+                        <span style="display: none"><input type="text" id="othersId" value="{{$othersId}}"></span>
                     </tbody>
                 </table>
-            </div>
+            <!-- </div> -->
         </div>
     </div>
     <div class="row p-2">
