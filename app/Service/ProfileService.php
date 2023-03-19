@@ -509,15 +509,15 @@ class ProfileService
             $data['msg'] = 'Max Companion can add only 4';
         }else{
 
-            if ($_FILES['payslip']['name'])
-            {
-                $payslip = upload($r->file('payslip'));
-                $input['payslip'] = $payslip['filename'];
+            // if ($_FILES['payslip']['name'])
+            // {
+            //     $payslip = upload($r->file('payslip'));
+            //     $input['payslip'] = $payslip['filename'];
 
-                if (!$input['payslip']) {
-                    unset($input['payslip']);
-                }
-            }
+            //     if (!$input['payslip']) {
+            //         unset($input['payslip']);
+            //     }
+            // }
 
             if ($_FILES['marrigeCert']['name'])
             {
@@ -545,9 +545,9 @@ class ProfileService
         return $data;
     }
 
-    public function deleteCompanion($id = '')
+    public function deleteCompanion($no)
     {
-        $user = UserCompanion::where('id', $id)->first();
+        $user = UserCompanion::where('user_id', $no)->first();
 
         if(!$user)
         {
@@ -556,7 +556,7 @@ class ProfileService
             $data['title'] = config('app.response.error.title');
             $data['msg'] = 'Companion not found';
         }else{
-            UserCompanion::where('id',$id)->delete();
+            UserCompanion::where('id',$no)->delete();
             $data['status'] = config('app.response.success.status');
             $data['type'] = config('app.response.success.type');
             $data['title'] = config('app.response.success.title');
@@ -583,15 +583,15 @@ class ProfileService
             $data['msg'] = 'user not found';
         }else{
 
-            if ($_FILES['supportDoc']['name'])
-            {
-                $payslip = upload($r->file('supportDoc'));
-                $input['supportDoc'] = $payslip['filename'];
+            // if ($_FILES['supportDoc']['name'])
+            // {
+            //     $payslip = upload($r->file('supportDoc'));
+            //     $input['supportDoc'] = $payslip['filename'];
 
-                if (!$input['supportDoc']) {
-                    unset($input['supportDoc']);
-                }
-            }
+            //     if (!$input['supportDoc']) {
+            //         unset($input['supportDoc']);
+            //     }
+            // }
 
             UserChildren::where('id', $id)->update($input);
 

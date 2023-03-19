@@ -22,11 +22,14 @@ class UserCompanion extends Authenticatable
 
     protected $fillable = [
         'user_id',
+        'mainCompanion',
         'firstName',
         'lastName',
         'fullName',
         'nonNetizen',
         'idNo',
+        'oldIDNo',
+        'nonCitizen',
         'passport',
         'expiryDate',
         'issuingCountry',
@@ -51,10 +54,16 @@ class UserCompanion extends Authenticatable
         'employment',
         'companyName',
         'incomeTax',
-        'payslip',
+        'salary',
         'officeNo',
-        'mainCompanion',
         'idFile',
+        'okuStatus',
+        'okuNumber',
+        'okuID',
+        'homeNo',
+        'sameAsPermanent',
+        'designation',
+        'dateJoined',
     ];
 }
 

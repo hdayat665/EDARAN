@@ -462,11 +462,11 @@ class ProfileController extends Controller
         return response()->json($result);
     }
 
-    public function deleteCompanion(Request $r)
+    public function deleteCompanion($id)
     {
         $ps = new ProfileService;
 
-        $result = $ps->deleteCompanion($r);
+        $result = $ps->deleteCompanion($id);
 
         return response()->json($result);
     }
