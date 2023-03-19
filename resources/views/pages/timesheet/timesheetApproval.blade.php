@@ -94,7 +94,7 @@
                             <thead>
                                 <tr>
                                     <th width="1%">&nbsp;</th>
-                                    <th class="text-nowrap">No</th>
+                                    <th width="1%">No</th>
                                     <th class="text-nowrap">Action</th>
                                     <th class="text-nowrap">Submitted Date</th>
                                     <th class="text-nowrap">Employee Name</th>

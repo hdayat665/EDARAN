@@ -357,7 +357,7 @@ $("#daterange").daterangepicker({
 });
 
 $('#timesheetapproval').DataTable({
-    "searching": false,
+    "searching": true,
     "lengthChange": true,
     lengthMenu: [
         [5, 10, 25, 50, -1],
@@ -366,7 +366,7 @@ $('#timesheetapproval').DataTable({
     responsive: false,
     scrollX: true,
 
-    dom: '<"row"<"col-sm-10"B><"col-sm-1"l>>t<"row"<"col-sm-5"i><"col-sm-7"p>>',
+    dom: "<'row'<'col-sm-3'l><'col-sm-6 text-center'B><'col-sm-3'f>>tp",
     buttons: [
         { extend: 'excel', className: 'btn-blue', exportOptions: {
             columns: [1,2,3,4,5]
