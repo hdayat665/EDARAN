@@ -20,7 +20,6 @@ $(document).ready(function() {
     });
 
     
-
     $("#data-table-default2").DataTable({
         responsive: false,
         lengthMenu: [
@@ -152,7 +151,7 @@ $(document).ready(function() {
                 contract_start_date: "Please Choose Contract Start Date",
                 contract_end_date: "Please Choose Contract End Date",
                 acc_manager: "Please Insert Account Manager",
-                status: "Please Insert Status",
+                status: "Please Choose Status",
             },
             submitHandler: function(form) {
                 requirejs(['sweetAlert2'], function(swal) {
