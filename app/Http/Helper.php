@@ -28,6 +28,7 @@ use App\Models\UserProfile;
 use App\Models\Users;
 use App\Models\UserRole;
 use App\Models\TransportMillage;
+use App\Models\EclaimGeneral;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -620,6 +621,15 @@ if (!function_exists('getCustomer')) {
     {
         $data = Customer::where('tenant_id', Auth::user()->tenant_id)->get();
 
+        return $data;
+    }
+}
+
+if (!function_exists('getArea')) {
+    function getArea()
+    {
+        $data = EclaimGeneral::where('tenant_id', Auth::user()->tenant_id)->get();
+        
         return $data;
     }
 }
@@ -1499,7 +1509,9 @@ if (!function_exists('getUserByUserRole')) {
 if (!function_exists('getClaimCategory')) {
     function getClaimCategory($id = '')
     {
-        $data = ClaimCategory::where('tenant_id', Auth::user()->tenant_id)->get();
+        $data = ClaimCategory::where('tenant_id', Auth::user()->tenant_id)
+                     ->where('status','=', '1')
+                     ->get();
 
         if (!$data) {
             $data = [];

@@ -62,14 +62,7 @@
                                             <label class="form-label">Month</label>
                                         </div>
                                         <div class="col-md-9">
-                                            <select class="form-select" name="month" style="pointer-events:none;background:#e9ecef;">
-                                                <option class="form-label" value="" selected>Please Select
-                                                </option>
-                                                <?php $months = month(); ?>
-                                                @foreach ($months as $month => $data)
-                                                    <option class="form-label" {{ $GNC->month == $data ? 'selected' : '' }} value="{{ $data }}">{{ $data }}</option>
-                                                @endforeach
-                                            </select>
+                                            <input readonly name="month" value="{{ $GNC->month }}" class="form-control">
                                         </div>
                                     </div>
                                     <div class="row p-2">
@@ -174,7 +167,7 @@
                     </div>
                 </div>
             </div>
-            <div class="row p-2">
+            <div class="row p-2"> 
                 <div class="col align-self-start">
                     <a href="/myClaimView" class="btn btn-light" style="color: black;" type="submit"><i class="fa fa-arrow-left"></i> Back</a>
                 </div>

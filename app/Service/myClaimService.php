@@ -41,8 +41,9 @@ class myClaimService
             $filenames = $filename['filename'];
         }
 
-        $generalClaimCount = GeneralClaim::where([['tenant_id', Auth::user()->tenant_id], ['type', 'GNC']])->count();
-
+        $generalClaimCount = GeneralClaim::where([['tenant_id', Auth::user()->tenant_id], ['claim_type', 'GNC']])->count();
+        
+        
         if (!$generalClaimCount) {
             $generalClaimCount = 0;
         }
@@ -185,6 +186,8 @@ class myClaimService
     public function deleteGNCDetail($id)
     {
         $GNCDetail = GeneralClaimDetail::find($id);
+        $GNCId = $GNCDetail->general_id;
+       
 
         if (!$GNCDetail) {
             $data['status'] = config('app.response.error.status');
@@ -193,7 +196,21 @@ class myClaimService
             $data['msg'] = 'Detail not found';
         } else {
             // DB::query("DELETE FROM general_claim_detail WHERE id = $id");
+            
             $GNCDetail->delete($id);
+
+            $generalDetailData = GeneralClaimDetail::where([['tenant_id', Auth::user()->tenant_id], ['general_id', $GNCId]])->get();
+
+            foreach ($generalDetailData as $generalClaimDetail) {
+                $total[] = $generalClaimDetail['amount'];
+            }
+            
+            $totalAmount = array_sum($total);
+
+            $generalClaim = [];
+            $generalClaim['total_amount'] = $totalAmount;
+            GeneralClaim::where([['tenant_id', Auth::user()->tenant_id], ['id', $GNCId]])->update($generalClaim);
+        
 
             $data['status'] = config('app.response.success.status');
             $data['type'] = config('app.response.success.type');
@@ -712,6 +729,17 @@ class myClaimService
 
         return $car;
     }
+
+    public function getEntitlementAreaByJobGrade($id = '')
+    {
+        $jobGrade = Employee::where('user_id', $id)->value('jobGrade');
+        $entitle = EntitleGroup::where('job_grade', $jobGrade)->get();
+
+        //pr($entitle);
+
+        return $entitle;
+    }
+
     public function getEntitlementByJobGradeMotor($id = '')
     {
 

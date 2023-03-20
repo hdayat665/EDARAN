@@ -478,7 +478,7 @@
                                             <div class="card-body">
                                                 <div class="row p-2">
                                                     <div class="col-md-3">
-                                                        <label class="form-label">Start</label>
+                                                        <label class="form-label">Start Date</label>
                                                     </div>
                                                     <div class="col">
                                                         <input type="text" class="form-control" name="start_date" placeholder="Date" id="date1">
@@ -486,7 +486,7 @@
                                                 </div>
                                                 <div class="row p-2">
                                                     <div class="col-md-3">
-                                                        <label class="form-label">Start</label>
+                                                        <label class="form-label">Start Time</label>
                                                     </div>
                                                     <div class="col">
                                                         <input type="text" class="form-control" name="end_date" placeholder="Time" id="time1">
@@ -500,7 +500,7 @@
                                             <div class="card-body">
                                                 <div class="row p-2">
                                                     <div class="col-md-3">
-                                                        <label class="form-label">End</label>
+                                                        <label class="form-label">End Date</label>
                                                     </div>
                                                     <div class="col">
                                                         <input type="text" class="form-control" name="start_time" placeholder="Date" id="date2">
@@ -508,7 +508,7 @@
                                                 </div>
                                                 <div class="row p-2">
                                                     <div class="col-md-3">
-                                                        <label class="form-label">End</label>
+                                                        <label class="form-label">End Time</label>
                                                     </div>
                                                     <div class="col">
                                                         <input type="text" class="form-control" name="end_time" placeholder="Time" id="time2">
@@ -559,12 +559,12 @@
                                     <label class="form-label">Breakfast</label>
                                 </div>
                                 <div class="col-md-2">
-                                    <input  type="text" class="form-control" value="0" id="BF">
+                                    <input  type="text" class="form-control" readonly value="{{ $food[0]['breakfast'] }}" id="BF">
                                 </div>
                                 <div class="col-md-2">
                                     <label class="form-label">X day =</label>
                                 </div>
-                                <div class="col-md-2">
+                                <div class="col-md-2"> 
                                     <input type="text" class="form-control" name="breakfast" value="0" id="DBF">
                                 </div>
                             </div>
@@ -574,7 +574,7 @@
                                     <label class="form-label">Lunch</label>
                                 </div>
                                 <div class="col-md-2">
-                                    <input  type="text" class="form-control" value="0" id="LH">
+                                    <input  type="text" class="form-control" readonly value="{{ $food[0]['lunch'] }}" id="LH">
                                 </div>
                                 <div class="col-md-2">
                                     <label class="form-label">X day =</label>
@@ -590,7 +590,7 @@
                                     <label class="form-label">Dinner</label>
                                 </div>
                                 <div class="col-md-2">
-                                    <input  type="text" class="form-control" value="0" id="DN">
+                                    <input  type="text" class="form-control" readonly value="{{ $food[0]['dinner'] }}" id="DN">
                                 </div>
                                 <div class="col-md-2">
                                     <label class="form-label">X day =</label>
@@ -616,14 +616,14 @@
                                     <label class="form-label">Accommodation:</label>
                                 </div>
                                 <div class="col-md-2" id="hotelc">
-                                    <input class="form-check-input" type="checkbox" value="85" id="htv" />
+                                    <input class="form-check-input" type="checkbox" value="{{ $food[0]['local_hotel_value'] }}" id="htv" />
                                     <label class="form-label">Hotel</label>
                                 </div>
                                 <div class="col-md-2">
                                     <input  type="text" readonly class="form-control" id="hotelcv">
                                 </div>
                                 <div class="col-md-2" style="display: none">
-                                    <input  type="text" class="form-control" id="hotelcv1" value="0">
+                                    <input  type="text" class="form-control"  id="hotelcv1" value="0">
                                 </div>
                                 <div class="col-md-2">
                                     <label class="form-label">X Night =</label>
@@ -637,7 +637,7 @@
                                     <label class="form-label"></label>
                                 </div>
                                 <div class="col-md-2" id="lodgingc">
-                                    <input class="form-check-input" type="checkbox" value="100" id="ldgv" />
+                                    <input class="form-check-input" type="checkbox" value="{{ $food[0]['lodging_allowance_value'] }}" id="ldgv" />
                                     <label class="form-label">Lodging</label>
                                 </div>
                                 <div class="col-md-2">
