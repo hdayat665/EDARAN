@@ -10,22 +10,22 @@
         </div>
         <div class="panel-body">
             <table id="projectReportListing" class="table table-striped table-bordered align-middle">
-            <thead>
-                <tr>
-                    <th>No.</th>
-                    <th data-orderable="false" class="align-middle">Action</th>
-                    <th width="5%" class="text-nowrap">LOA Date</th>
-                    <th width="1%" class="text-nowrap">Customer Name</th>
-                    <th width="1%" >Project Code</th>
-                    <th width="1%" class="text-nowrap">Project Name</th>
-                    <th class="text-nowrap">Account Manager</th>
-                    <th class="text-nowrap">Project Manager</th>
-                    <th class="text-nowrap">Contract Value</th>
-                    <th class="text-nowrap">Contract Start Date</th>
-                    <th class="text-nowrap">Contract End Date</th>
-                    <th class="text-nowrap">Status</th>
-                </tr>
-            </thead>
+                <thead>
+                    <tr>
+                        <th>No.</th>
+                        <th data-orderable="false" class="align-middle">Action</th>
+                        <th width="5%" class="text-nowrap">LOA Date</th>
+                        <th width="1%" class="text-nowrap">Customer Name</th>
+                        <th width="1%" >Project Code</th>
+                        <th width="1%" class="text-nowrap">Project Name</th>
+                        <th class="text-nowrap">Account Manager</th>
+                        <th class="text-nowrap">Project Manager</th>
+                        <th class="text-nowrap">Contract Value</th>
+                        <th class="text-nowrap">Contract Start Date</th>
+                        <th class="text-nowrap">Contract End Date</th>
+                        <th class="text-nowrap">Status</th>
+                    </tr>
+                </thead>
             <tbody>
                 @if ($projectListings)
                     @php($counter = 1)

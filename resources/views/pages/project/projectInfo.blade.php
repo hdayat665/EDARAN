@@ -82,7 +82,8 @@
                         <table id="data-table-default2" style="width: 100% !important" class="table table-striped table-bordered align-middle">
                             <thead>
                                 <tr>
-                                    <th width="6%" data-orderable="false" class="align-middle">Action</th>
+                                    <th width="4%" data-orderable="false" class="align-middle text-center">No.</th>
+                                    <th width="6%" class="align-middle">Action</th>
                                     <th class="text-nowrap">Requested Date</th>
                                     <th class="text-nowrap">Employee Name</th>
                                     <th class="text-nowrap">Department</th>
@@ -94,15 +95,16 @@
                             </thead>
                             <tbody>
                                 @if ($projectApproval)
-                                @foreach ($projectApproval as $projectInfo)
+                                @foreach ($projectApproval as $key => $projectInfo)
                                 <tr class="odd gradeX">
+                                    <td>{{$key + 1}}</td>
                                     <td width="7%">
                                         <a href="#" data-bs-toggle="dropdown" class="btn btn-primary btn-sm dropdown-toggle"></i> Actions <i class="fa fa-caret-down"></i></a>
                                         <div class="dropdown-menu">
                                             <a href="javascript:;" id="approveButton" data-id="{{$projectInfo->id}}" class="dropdown-item"> Approve </a>
-                                        <div class="dropdown-divider"></div>
+                                            <div class="dropdown-divider"></div>
                                             <a href="javascript:;" id="rejectViewButton" data-id="{{$projectInfo->id}}" class="dropdown-item"> Reject</a>
-                                        
+                                        </div>
                                     </td>
                                     <td>{{$projectInfo->requested_date}}</td>
                                     <td>{{$projectInfo->employeeName}}</td>

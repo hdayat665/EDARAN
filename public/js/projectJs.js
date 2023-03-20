@@ -18,7 +18,6 @@ $(document).ready(function() {
     $('#acc_manager2').picker({
         search:true,
     });
-
     
     $("#data-table-default2").DataTable({
         responsive: false,
@@ -26,7 +25,6 @@ $(document).ready(function() {
             [5, 10, 25, 50, -1],
             [5, 10, 25, 50, "All"],
         ],
-        scrollX:true,
     });
 
     $(document).on("click", "#addButton", function() {
@@ -151,7 +149,7 @@ $(document).ready(function() {
                 contract_start_date: "Please Choose Contract Start Date",
                 contract_end_date: "Please Choose Contract End Date",
                 acc_manager: "Please Insert Account Manager",
-                status: "Please Choose Status",
+                status: "Please Insert Status",
             },
             submitHandler: function(form) {
                 requirejs(['sweetAlert2'], function(swal) {
