@@ -336,7 +336,7 @@
                         <div class="col-sm-6">
                             <label for="issuing-country" class="form-label">Project</label>
                             <select class="selectpicker form-select" name="project_id" id="addneweventselectproject" aria-label="Default select example">
-                                <option class="form-label" value="">Please ty</option>
+                                <option class="form-label" value="">Please Choose</option>
                                 <?php $projects = project() ?>
                                 @foreach ($projects as $project)
                                 <option class="form-label" value="{{$project->id}}">{{$project->project_name}}</option>
@@ -367,8 +367,8 @@
                     <div class="row p-2">
                         <div class="col-sm-6">
                             <label for="firstname" class="form-label">Participant*</label>
-                            <select class="selectpicker form-select" name="participant[]" id="addneweventparticipant" aria-label="Default select example" multiple>
-                                <option class="form-label" value="">Please Select</option>
+                            <select class="selectpicker form-select" name="participant[]" id="addneweventparticipant" aria-label="Default select example"   multiple>
+                                {{-- <option class="form-label" value="">Please Choose</option> --}}
                                 <?php $employees = getEmployee() ?>
                                 @foreach ($employees as $employee)
                                 <option class="form-label" value="{{$employee->user_id}}">{{$employee->employeeName}}</option>
@@ -377,7 +377,7 @@
                         </div>
                         <div class="col-sm-6">
                             <label for="issuing-country" class="form-label">Description</label>
-                            <textarea class="form-control" rows="3" name="desc"></textarea>
+                            <textarea class="form-control" rows="3" name="desc" placeholder="Description"></textarea>
                         </div>
                     </div>
                     <div class="row p-2">

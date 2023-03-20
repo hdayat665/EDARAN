@@ -1,19 +1,18 @@
-$("#timesheetapproval").DataTable({
-    searching: false,
-    lengthChange: true,
-    responsive: false,
+$('#timesheetapproval').DataTable({
     lengthMenu: [
-        [5,10, 15, 20, -1],
-        [5,10, 15, 20, 'All'],
+        [5, 10, 25, 50, -1],
+        [5, 10, 25, 50, "All"],
     ],
-
-    dom: '<"row"<"col-sm-11"B><"col-sm-1"l>>t<"row"<"col-sm-5"i><"col-sm-7"p>>',
+    responsive: false,
+    searching: true,
+    dom: "<'row'<'col-sm-3'l><'col-sm-6 text-center'B><'col-sm-3'f>>tp",
     buttons: [
-        { extend: "excel", className: "btn-blue" },
-        { extend: "pdf", className: "btn-blue" },
-        { extend: "print", className: "btn-blue" },
+        { extend: 'excel', className: 'btn-sm' },
+        { extend: 'pdf', className: 'btn-sm' },
+        { extend: 'print', className: 'btn-sm' }
     ],
 });
+// 
 $().ready = (function() {
     $("#filter").click(function() {
         $("#filterform").toggle();

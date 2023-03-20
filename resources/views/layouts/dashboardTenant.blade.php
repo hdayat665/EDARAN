@@ -23,6 +23,14 @@
         background-color: rgba(156, 18, 18, 0.815) !important;
         color: rgb(201, 0, 0) !important;
     }
+
+
+
+    .bg-blue {
+   background-color: blue;
+}
+
+
 </style>
 
 
