@@ -15,9 +15,9 @@
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-check form-switch">
-                                    <input class="form-check-input" {{ ($companion->mainCompanion ?? '') ? 'checked' : '' }} name="mainCompanion" value="{{ $companion->mainCompanion ?? '' }}" type="checkbox" role="switch" id="set-main" checked>
+                                    <input class="form-check-input" type="checkbox" name="mainCompanion" id="set-main" value="1" {{ ($companion->mainCompanion ?? 0) ? 'checked' : '' }}>
                                     <label class="form-check-label" for="set-main">Set as Main Companion</label>
-                                </div>
+                                </div>                                
                             </div>
                         </div>
                         <div class="row p-2">
@@ -62,8 +62,8 @@
                                 </div>
                             </div>
                             <div class="col-sm-3">
-                                <label for="" class="form-label" >ID Attachment</label>
-                                <input type="file" id="" name="idFile" value=""  class="form-control" aria-describedby="" >
+                                <label for="id-attachment" class="form-label" >ID Attachment</label>
+                                <input type="file" id="id-attachment" name="idFile" class="form-control" aria-describedby="idAttachment" >
                             </div>
                         </div>
                         <div class="row p-2">
@@ -388,9 +388,9 @@
                             </div>
                             <div class="col-sm-3 part">
                                 <label for="marriage-cert" class="form-label" >ID Attachment</label>
-                                <input type="file" name="idFile" id="" class="form-control" aria-describedby="">
+                                <input type="file" name="idFile" id="id-attachment" class="form-control" aria-describedby="">
                                 @if ($companion->idFile)
-                                    Click <a href="{{ route('download', ['filename' => $companion->idFile]) }}" >here</a> to see ID Attachment.
+                                    Click <a href="{{ route('download', ['filename' => $companion->idFile]) }}">here</a> to see ID Attachment.
                                 @endif
                             </div>
                         </div>
@@ -447,7 +447,7 @@
                                         <label for="marriage-cert" class="form-label">Marriage Certificate</label>
                                         <input type="file" name="marrigeCert" id="marriage-cert" class="form-control" aria-describedby="dob">
                                         @if ($companion->marrigeCert)
-                                        Click <a href="/storage/app/file/{{$companion->marrigeCert}}" target="_blank">here</a> to see marriage cert.
+                                        Click <a href="{{ route('download', ['filename' => $companion->marrigeCert]) }}">here</a> to see marriage cert.
                                         @endif
                                     </div>
                                     {{-- <div class="col-sm-6">
@@ -486,6 +486,9 @@
                                     <div class="col-sm-6">
                                         <label for="dob" class="form-label"  >OKU Attachment*</label>
                                         <input type="file" id="okuattach2" name="okuID" class="form-control" aria-describedby="" style="pointer-events: none">
+                                        @if ($companion->okuID)
+                                            Click <a href="{{ route('download', ['filename' => $companion->okuID]) }}">here</a> to see OKU ID.
+                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -591,7 +594,7 @@
                         <div class="row p-2">
                             <div class="col-sm-6">
                                 <label for="extension-number" class="form-label">Monthly Salary</label>
-                                <input type="text" id="payslipmc" name="payslip" value="{{ $companion->payslip ?? '' }}" class="form-control" placeholder="MONTHLY SALARY">
+                                <input type="text" id="payslipmc" name="salary" value="{{ $companion->salary ?? '' }}" class="form-control" placeholder="MONTHLY SALARY">
                             </div>
                             <div class="col-sm-6">
                                 <label for="income-tax-number" class="form-label">Office Number</label>
@@ -648,8 +651,8 @@
                         </div>
                     
                     <p class="text-end mb-0 mt-3">
-                        <a href="javascript:;" id="deleteCompanion{{$no}}" class="btn btn-danger">Delete</a>
-                        <a href="javascript:;" id="updateCompanion{{$no}}" class="btn btn-primary">Save</a>
+                        <a href="javascript:;" id="deleteCompanion" data-id="{{ $companion->id }}" class="btn btn-danger">Delete</a>
+                        <a href="javascript:;" id="updateCompanion{{$companion->id}}" class="btn btn-primary">Save</a>
                     </p>
                     </form>
                 </div>

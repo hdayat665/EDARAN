@@ -22,6 +22,7 @@ class UserCompanion extends Authenticatable
 
     protected $fillable = [
         'user_id',
+        'id',
         'mainCompanion',
         'firstName',
         'lastName',
