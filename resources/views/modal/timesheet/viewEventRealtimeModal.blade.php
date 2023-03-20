@@ -35,10 +35,10 @@
                         <table id="" class="table table-striped table-bordered align-middle">
                             <thead>
                                 <tr>
-                                    <th class="text-nowrap">Location</th>
+                                    <th class="text-nowrap">Venue</th>
                                     <th class="text-nowrap">Project</th>
                                     <th class="text-nowrap">Priority</th>
-                                    <th class="text-nowrap">Recurring</th>
+                                    {{-- <th class="text-nowrap">Recurring</th> --}}
                                 </tr>
                             </thead>
                             <tbody>
@@ -46,7 +46,7 @@
                                     <td id="location_event"></td>
                                     <td id="project_event"></td>
                                     <td id="priority"></td>
-                                    <td id="recurring"></td>
+                                    {{-- <td id="recurring"></td> --}}
                                 </tr>
                             </tbody>
                         </table>
@@ -89,7 +89,7 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
             </div>
         </div>
     </div>

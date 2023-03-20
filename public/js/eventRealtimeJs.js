@@ -182,12 +182,12 @@ $(document).on("click", "#buttonViewEvent", function() {
         // duration = +data.end_time - +data.start_time;
         // alert(duration);
         $('#duration').text(data.duration);
-        var location = getProjectLocationById(data.location);
-        location.done(function(location) {
-            $('#location_event').text(location.location_name || '-');
+        // var location = getProjectLocationById(data.location);
+        // location.done(function(location) {
+        //     $('#location_event').text(location.location_name || '-');
 
-        })
-
+        // })
+        $('#location_event').text(data.venue || '-');
         var project = getProjectByidTimesheet(data.project_id);
         project.done(function(project) {
             $('#project_event').text(project.project_name || '-');

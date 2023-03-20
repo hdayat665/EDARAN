@@ -38,9 +38,26 @@ $(document).ready(function() {
        ]
     });
 
+    if ($('#employeesearch').val() || $('#monthsearch').val() || $('#designsearch').val() || $('#departmentsearch').val() || $('#statussearch').val()) {
+        $('#filterform').show();
+    }
+
     $("#filter").click(function() {
         $('#filterform').toggle();
     });
+
+    // $(document).ready(function() {
+    //     // Check if any dropdown has a selected value
+    //     if ($('#employeesearch').val() || $('#monthsearch').val() || $('#designsearch').val() || $('#departmentsearch').val() || $('#statussearch').val()) {
+    //         $('#filterform').show();
+    //     }
+    
+    //     // Toggle filter form visibility when the filter button is clicked
+    //     $('#filter').click(function() {
+    //         $('#filterform').toggle();
+    //     });
+    // });
+    
 
     $(document).on("click", "#statusButton", function() {
         var id = $(this).data('id');
