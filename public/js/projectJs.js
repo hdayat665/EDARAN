@@ -18,16 +18,13 @@ $(document).ready(function() {
     $('#acc_manager2').picker({
         search:true,
     });
-
     
-
     $("#data-table-default2").DataTable({
         responsive: false,
         lengthMenu: [
             [5, 10, 25, 50, -1],
             [5, 10, 25, 50, "All"],
         ],
-        scrollX:true,
     });
 
     $(document).on("click", "#addButton", function() {
