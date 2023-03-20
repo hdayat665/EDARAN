@@ -102,6 +102,9 @@ requirejs.config({
         myleaveJs: assets + "/js/myleaveJs",
         leaveApprJs: assets + "/js/leaveApprJs",
         leaveHodJs: assets + "/js/leaveHodJs",
+
+        // myleave Report
+        eleavereportjs: assets + "/js/eleavereportjs",
     },
 });
 
@@ -470,6 +473,10 @@ if ($("#frecDetailCaJs").length > 0) {
 
 if ($("#fapprovalCaJs").length > 0) {
     requirejs(["fapprovalCaJs"]);
+}
+
+if ($("#eleavereportjs").length > 0) {
+    requirejs(["eleavereportjs"]);
 }
 
 // Global function
