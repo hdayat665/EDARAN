@@ -220,10 +220,10 @@ class MyTimeSheetService
         if (isset($input['participant'])) {
             $input['participant'] = implode(',', $input['participant']);
         }
-        if (isset($input['location_by_project'])) {
-            $input['location'] = $input['location_by_project'];
-            unset($input['location_by_project']);
-        }
+        // if (isset($input['location_by_project'])) {
+        //     $input['location'] = $input['location_by_project'];
+        //     unset($input['location_by_project']);
+        // }
 
         $input['start_date'] = date_format(date_create($input['start_date']), 'Y/m/d');
         $input['end_date'] = date_format(date_create($input['end_date']), 'Y/m/d');
@@ -338,10 +338,10 @@ class MyTimeSheetService
         $input['end_date'] = date_format(date_create($input['end_date']), 'Y/m/d');
         unset($input['inlineRadioOptions']);
 
-        if ($input['location_by_project']) {
-            $input['location'] = $input['location_by_project'];
-            unset($input['location_by_project']);
-        }
+        // if ($input['location_by_project']) {
+        //     $input['location'] = $input['location_by_project'];
+        //     unset($input['location_by_project']);
+        // }
 
         if ($_FILES['file_upload']['name']) {
             $file_upload = upload($r->file('file_upload'));
