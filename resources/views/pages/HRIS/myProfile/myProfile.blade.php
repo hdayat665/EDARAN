@@ -123,14 +123,20 @@
                                 </div>
                             </div>
                             {{-- new --}}
-                            <div class="col-sm-3 part">
+                            <div class="col-sm-3">
                                 <label for="idattach" class="form-label" >ID Attachment</label>
-                                <input id="fileupload" type="file" multiple="multiple" name="file" value="">
+                                <input id="fileupload" type="file" multiple="multiple" name="file" value="{{$profile->file}}">
+                                
+                            </div>
+                            <div class="col-sm-3 ">
+                                <div class="row p-2"></div>
+                               <div class="row p-2">
                                 @if ($profile->file)
-                                    <span class="file-link">
-                                        <a href="{{ route('download', ['filename' => $profile->file]) }}">{{$profile->file}}</a>
-                                    </span>
-                                @endif
+                                <span class="file-link">
+                                    <a href="{{ route('download', ['filename' => $profile->file]) }}">{{$profile->file}}</a>
+                                </span>
+                            @endif
+                               </div>
                             </div>
                             
                                                         

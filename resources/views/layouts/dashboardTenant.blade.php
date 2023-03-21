@@ -801,7 +801,7 @@
 
                             </div>
                             <div class="menu-item">
-                                <a href="#" class="menu-link">
+                                <a href="/leaveReport" class="menu-link">
                                     <div class="menu-icon">
                                         <i class="fa fa-user-minus text-gray"></i>
                                     </div>
@@ -856,7 +856,7 @@
                                         </a>
                                     </div>
                                     <div class="menu-item">
-                                        <a href="#" class="menu-link">
+                                        <a href="/cashadvanceListing" class="menu-link">
                                             <div class="menu-icon">
                                                 <i class="fa fa-money-bill-1-wave text-gray"></i>
                                             </div>

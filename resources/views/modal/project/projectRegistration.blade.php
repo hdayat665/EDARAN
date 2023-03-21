@@ -104,7 +104,7 @@
                     </div>
                     <div class="row mb-15px">
                         <div class="col-md-4">
-                            <select class="selectpicker form-select" name="acc_manager" id="acc_manager2" >
+                            <select class="selectpicker form-select" name="acc_manager" id="acc_manager2">
                                 <option value="" label="PLEASE CHOOSE"></option>
                                 <?php $getEmployees = getEmployee(); ?>
                                 @foreach ($getEmployees as $getEmployee)
@@ -144,7 +144,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                         <button type="submit" class="btn btn-primary" id="saveButton">Save</button>
                     </div>
                 </form>
