@@ -41,6 +41,8 @@ class UserParent extends Authenticatable
         'city',
         'state',
         'country',
+        'idFile',
+        'okuFile',
     ];
 }
 

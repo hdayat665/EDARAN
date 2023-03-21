@@ -22,11 +22,18 @@
                             <h4>Filter</h4>
                             <div class="col-sm-2">
                                 <label for="emergency-firstname" class="form-label">Employee Name</label>
-                                <select class="form-select" id="employeesearch" name="employee_name" data-default-value="">
+                                {{-- <select class="form-select" id="employeesearch" name="employee_name" data-default-value="">
                                     <option class="form-label" value="">Please Select</option>
                                     <?php $employees = getEmployee(); ?>
                                     @foreach ($employees as $employee)
                                         <option value="{{ $employee->user_id }}">{{ $employee->employeeName }}</option>
+                                    @endforeach
+                                </select> --}}
+                                <select class="form-select" id="employeesearch" name="employee_name"  data-default-value="">
+                                    <option class="form-label" value="" >Please Select</option>
+                                    <?php $employees = getEmployee() ?>
+                                    @foreach ($employees as $employee)
+                                    <option value="{{$employee->user_id}}" {{($employeeId == $employee->user_id) ? 'selected="selected"' : ''}}>{{$employee->employeeName}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -36,7 +43,8 @@
                                     <option class="form-label" value="">Please Select</option>
                                     <?php $timesheets = getEventTimesheet(); ?>
                                     @foreach ($timesheets as $timesheet)
-                                        <option value="{{ $timesheet->event_name }}">{{ $timesheet->event_name }}</option>
+                                        {{-- <option value="{{ $timesheet->event_name }}">{{ $timesheet->event_name }}</option> --}}
+                                        <option value="{{$timesheet->event_name}}" {{($eventId == $timesheet->event_name) ? 'selected="selected"' : ''}}>{{$timesheet->event_name}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -64,7 +72,7 @@
                         <table id="timesheetapproval" class="table table-striped table-bordered align-middle">
                             <thead>
                                 <tr>
-                                    <th>No</th>
+                                    <th width="1%">No</th>
                                     <th class="text-nowrap">Action</th>
                                     <th class="text-nowrap">Event Name</th>
                                     <th class="text-nowrap">Date</th>

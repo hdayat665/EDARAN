@@ -427,13 +427,13 @@ class ProfileService
             $data['msg'] = 'user not found';
         }else{
 
-            if ($_FILES['payslip']['name'])
+            if ($_FILES['idFile']['name'])
             {
-                $payslip = upload($r->file('payslip'));
-                $input['payslip'] = $payslip['filename'];
+                $idAttachment = upload($r->file('idFile'));
+                $input['idFile'] = $idAttachment['filename'];
 
-                if (!$input['payslip']) {
-                    unset($input['payslip']);
+                if (!$input['idFile']) {
+                    unset($input['idFile']);
                 }
             }
 
@@ -444,6 +444,16 @@ class ProfileService
 
                 if (!$input['marrigeCert']) {
                     unset($input['marrigeCert']);
+                }
+            }
+
+            if ($_FILES['okuID']['name'])
+            {
+                $idOKU = upload($r->file('okuID'));
+                $input['okuID'] = $idOKU['filename'];
+
+                if (!$input['okuID']) {
+                    unset($input['okuID']);
                 }
             }
 
@@ -495,68 +505,89 @@ class ProfileService
     }
 
     public function addCompanion($r)
-    {
-        $input = $r->input();
+{
+    $input = $r->input();
 
-        $id = Auth::user()->id;
+    $id = Auth::user()->id;
 
-        $companion = UserCompanion::where('user_id', $id)->count();
+    $companion = UserCompanion::where('user_id', $id)->count();
 
-        if ($companion >= 4) {
-            $data['status'] = config('app.response.error.status');
-            $data['type'] = config('app.response.error.type');
-            $data['title'] = config('app.response.error.title');
-            $data['msg'] = 'Max Companion can add only 4';
-        }else{
+    if ($companion >= 4) {
+        $data['status'] = config('app.response.error.status');
+        $data['type'] = config('app.response.error.type');
+        $data['title'] = config('app.response.error.title');
+        $data['msg'] = 'Max Companion can add only 4';
+    } else {
+        if ($_FILES['idFile']['name']) {
+            $idAttachment = upload($r->file('idFile'));
+            $input['idFile'] = $idAttachment['filename'];
 
-            if ($_FILES['payslip']['name'])
-            {
-                $payslip = upload($r->file('payslip'));
-                $input['payslip'] = $payslip['filename'];
-
-                if (!$input['payslip']) {
-                    unset($input['payslip']);
-                }
+            if (!$input['idFile']) {
+                unset($input['idFile']);
             }
-
-            if ($_FILES['marrigeCert']['name'])
-            {
-                $marrigeCert = upload($r->file('marrigeCert'));
-                $input['marrigeCert'] = $marrigeCert['filename'];
-
-                if (!$input['marrigeCert']) {
-                    unset($input['marrigeCert']);
-                }
-            }
-
-            $input['user_id'] = $id;
-            $input['dateJoined'] = dateFormat($input['dateJoined']);
-            $input['expiryDate'] = dateFormat($input['expiryDate']);
-            $input['DOM'] = dateFormat($input['DOM']);
-            $input['DOB'] = dateFormat($input['DOB']);
-            UserCompanion::create($input);
-
-            $data['status'] = config('app.response.success.status');
-            $data['type'] = config('app.response.success.type');
-            $data['title'] = config('app.response.success.title');
-            $data['msg'] = 'Success add Companion';
         }
 
-        return $data;
+        if ($_FILES['marrigeCert']['name']) {
+            $marrigeCert = upload($r->file('marrigeCert'));
+            $input['marrigeCert'] = $marrigeCert['filename'];
+
+            if (!$input['marrigeCert']) {
+                unset($input['marrigeCert']);
+            }
+        }
+
+        if ($_FILES['okuID']['name']) {
+            $idOKU = upload($r->file('okuID'));
+            $input['okuID'] = $idOKU['filename'];
+
+            if (!$input['okuID']) {
+                unset($input['okuID']);
+            }
+        }
+
+        $input['user_id'] = $id;
+        $input['dateJoined'] = dateFormat($input['dateJoined']);
+        $input['expiryDate'] = dateFormat($input['expiryDate']);
+        $input['DOM'] = dateFormat($input['DOM']);
+        $input['DOB'] = dateFormat($input['DOB']);
+        $input['mainCompanion'] = isset($input['mainCompanion']) ? 1 : 0;
+        $companion = UserCompanion::create($input);
+
+        // Set the main companion if the checkbox is checked
+        if ($r->input('mainCompanion')) {
+            // Set the mainCompanion attribute of the new companion to 1
+            $companion->mainCompanion = 1;
+            $companion->save();
+
+            // Set the mainCompanion attribute of all other companions to 0
+            UserCompanion::where('user_id', $id)
+                ->where('id', '<>', $companion->id)
+                ->update(['mainCompanion' => 0]);
+        }
+
+        $data['status'] = config('app.response.success.status');
+        $data['type'] = config('app.response.success.type');
+        $data['title'] = config('app.response.success.title');
+        $data['msg'] = 'Success add Companion';
     }
+
+    return $data;
+}
+
 
     public function deleteCompanion($id = '')
     {
-        $user = UserCompanion::where('id', $id)->first();
+        $companion = UserCompanion::where('id', $id)->first();
+        //dd($companion);
 
-        if(!$user)
+        if(!$companion)
         {
             $data['status'] = config('app.response.error.status');
             $data['type'] = config('app.response.error.type');
             $data['title'] = config('app.response.error.title');
             $data['msg'] = 'Companion not found';
         }else{
-            UserCompanion::where('id',$id)->delete();
+            UserCompanion::where('id', $id)->delete();
             $data['status'] = config('app.response.success.status');
             $data['type'] = config('app.response.success.type');
             $data['title'] = config('app.response.success.title');
@@ -583,15 +614,15 @@ class ProfileService
             $data['msg'] = 'user not found';
         }else{
 
-            if ($_FILES['supportDoc']['name'])
-            {
-                $payslip = upload($r->file('supportDoc'));
-                $input['supportDoc'] = $payslip['filename'];
+            // if ($_FILES['supportDoc']['name'])
+            // {
+            //     $payslip = upload($r->file('supportDoc'));
+            //     $input['supportDoc'] = $payslip['filename'];
 
-                if (!$input['supportDoc']) {
-                    unset($input['supportDoc']);
-                }
-            }
+            //     if (!$input['supportDoc']) {
+            //         unset($input['supportDoc']);
+            //     }
+            // }
 
             UserChildren::where('id', $id)->update($input);
 
@@ -643,18 +674,38 @@ class ProfileService
     public function addParent($r)
     {
         $input = $r->input();
-        $sameAddress = $input['sameAddress'] ?? null;
-        $input['address1'] = $input['address1'] . ' ' . $input['address2'] . '' . $input['city'] . ' ' . $input['postcode'] .' '. $input['state'] . ' ' . $input['country'];
-        if ($sameAddress) {
-            $userProfile = UserProfile::where('user_id', Auth::user()->id)->first();
+        // $sameAddress = $input['sameAddress'] ?? null;
+        // $input['address1'] = $input['address1'] . ' ' . $input['address2'] . '' . $input['city'] . ' ' . $input['postcode'] .' '. $input['state'] . ' ' . $input['country'];
+        // if ($sameAddress) {
+        //     $userProfile = UserProfile::where('user_id', Auth::user()->id)->first();
 
-            $input['address1'] = $userProfile->address1 . ' ' . $userProfile->address2 . '' . $userProfile->city . ' ' . $userProfile->state . ' ' . $userProfile->country;
-            $input['address2'] = $userProfile->address2;
-            $input['city'] = $userProfile->city;
-            $input['state'] = $userProfile->state;
-            $input['postcode'] = $userProfile->postcode;
-            $input['country'] = $userProfile->country;
-            unset($input['sameAddress']);
+        //     $input['address1'] = $userProfile->address1 . ' ' . $userProfile->address2 . '' . $userProfile->city . ' ' . $userProfile->state . ' ' . $userProfile->country;
+        //     $input['address2'] = $userProfile->address2;
+        //     $input['city'] = $userProfile->city;
+        //     $input['state'] = $userProfile->state;
+        //     $input['postcode'] = $userProfile->postcode;
+        //     $input['country'] = $userProfile->country;
+        //     unset($input['sameAddress']);
+        // }
+
+        if ($_FILES['idFile']['name'])
+        {
+            $idAttachment = upload($r->file('idFile'));
+            $input['idFile'] = $idAttachment['filename'];
+
+            if (!$input['idFile']) {
+                unset($input['idFile']);
+            }
+        }
+
+        if ($_FILES['okuFile']['name'])
+        {
+            $idOKU = upload($r->file('okuFile'));
+            $input['okuFile'] = $idOKU['filename'];
+
+            if (!$input['okuFile']) {
+                unset($input['okuFile']);
+            }
         }
 
         $input['user_id'] = Auth::user()->id;
@@ -673,6 +724,26 @@ class ProfileService
         $input = $r->input();
 
         $id = $input['id'] ?? 1;
+
+        if ($_FILES['idFile']['name'])
+        {
+            $idAttachment = upload($r->file('idFile'));
+            $input['idFile'] = $idAttachment['filename'];
+
+            if (!$input['idFile']) {
+                unset($input['idFile']);
+            }
+        }
+
+        if ($_FILES['okuFile']['name'])
+        {
+            $idOKU = upload($r->file('okuFile'));
+            $input['okuFile'] = $idOKU['filename'];
+
+            if (!$input['okuFile']) {
+                unset($input['okuFile']);
+            }
+        }
 
         $user = UserParent::where('id', $id)->first();
 
@@ -828,6 +899,8 @@ class ProfileService
         $data['addressDetails'] = UserAddress::where('user_id', $data['user_id'])->get();
         $data['emergency'] = UserEmergency::where('user_id', $data['user_id'])->first();
         $data['companions'] = UserCompanion::where('user_id', $data['user_id'])->get();
+        // dd($data['companions']);
+        // die;
         $data['childrens'] = UserChildren::where('user_id', $data['user_id'])->get();
         $data['parents'] = UserParent::where('user_id', $data['user_id'])->get();
         $data['siblings'] = UserSibling::where('user_id', $data['user_id'])->get();

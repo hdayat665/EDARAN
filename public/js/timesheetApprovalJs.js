@@ -13,14 +13,14 @@ $(document).ready(function() {
     //       $(".approvereject").hide();
 
     //   }
-
+    
     $('#timesheetapproval').DataTable({
-        "searching": false,
+        "searching": true,
         "lengthChange": true,
         lengthMenu: [ [5, 10, 25, 50, -1], [5, 10, 25,50, "All"] ],
         responsive: false,
 
-        dom: '<"row"<"col-sm-10"B><"col-sm-1"l>>t<"row"<"col-sm-5"i><"col-sm-7"p>>',
+        dom: "<'row'<'col-sm-3'l><'col-sm-6 text-center'B><'col-sm-3'f>>tp",
         buttons: [
             { extend: 'excel', className: 'btn-blue', exportOptions: {
               columns: [2,3,4,5,6,7]
@@ -38,9 +38,14 @@ $(document).ready(function() {
        ]
     });
 
+    if ($('#employeesearch').val() || $('#monthsearch').val() || $('#designsearch').val() || $('#departmentsearch').val() || $('#statussearch').val()) {
+        $('#filterform').show();
+    }
+
     $("#filter").click(function() {
         $('#filterform').toggle();
     });
+    
 
     $(document).on("click", "#statusButton", function() {
         var id = $(this).data('id');
@@ -167,11 +172,16 @@ $(document).ready(function() {
 
 
     $("#reset").on("click", function () {
+      $("#employeesearch").picker('destroy');
       $("#employeesearch").val($("#employeesearch").data("default-value"));
       $("#monthsearch").val($("#monthsearch").data("default-value"));
+      $("#monthsearch").picker('destroy');
       $("#designsearch").val($("#designsearch").data("default-value"));
+      $("#designsearch").picker('destroy');
       $("#departmentsearch").val($("#departmentsearch").data("default-value"));
+      $("#departmentsearch").picker('destroy');
       $("#statussearch").val($("#statussearch").data("default-value"));
+      $("#statussearch").picker('destroy');
   });
 
 
