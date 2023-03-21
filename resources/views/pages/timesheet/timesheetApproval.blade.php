@@ -20,7 +20,7 @@
                         <div class="col-sm-2">
                             <label for="emergency-firstname" class="form-label">Employee Name</label>
                             <select class="form-select" id="employeesearch" name="employee_name"  data-default-value="">
-                                <option class="form-label" value="" >Please Select</option>
+                                <option class="form-label" value="" >Please Choose</option>
                                 <?php $employees = getEmployee() ?>
                                 @foreach ($employees as $employee)
                                 <option value="{{$employee->id}}" {{($employeeId == $employee->id) ? 'selected="selected"' : ''}}>{{$employee->employeeName}}</option>
@@ -30,36 +30,35 @@
                         <div class="col-sm-2">
                             <label for="emergency-lastname" class="form-label">Month</label>
                             <select class="form-select" id="monthsearch"  name="month" data-default-value="">
-                                <option class="form-label" value="">Please Select</option>
-                                <option class="form-label" {{($months == 'jan') ? 'selected="selected"' : ''}} value="jan">JANUARY</option>
-                                <option class="form-label" {{($months == 'feb') ? 'selected="selected"' : ''}} value="feb">FEBRUARY</option>
-                                <option class="form-label" {{($months == 'mac') ? 'selected="selected"' : ''}} value="mac">MARCH</option>
-                                <option class="form-label" {{($months == 'april') ? 'selected="selected"' : ''}} value="april">APRIL</option>
-                                <option class="form-label" {{($months == 'may') ? 'selected="selected"' : ''}} value="may">MAY</option>
-                                <option class="form-label" {{($months == 'june') ? 'selected="selected"' : ''}} value="june">JUNE</option>
-                                <option class="form-label" {{($months == 'july') ? 'selected="selected"' : ''}} value="july">JULY</option>
-                                <option class="form-label" {{($months == 'aug') ? 'selected="selected"' : ''}} value="aug">AUGUST</option>
-                                <option class="form-label" {{($months == 'sept') ? 'selected="selected"' : ''}} value="sept">SEPTEMBER</option>
-                                <option class="form-label" {{($months == 'oct') ? 'selected="selected"' : ''}} value="oct">OCTOBER</option>
-                                <option class="form-label" {{($months == 'nov') ? 'selected="selected"' : ''}} value="nov">NOVEMBER</option>
-                                <option class="form-label" {{($months == 'dec') ? 'selected="selected"' : ''}} value="dec">DECEMBER</option>
-                               
+                                <option class="form-label" value="">Please Choose</option>
+                                <option class="form-label" {{($months == 'Jan') ? 'selected="selected"' : ''}} value="jan">JANUARY</option>
+                                <option class="form-label" {{($months == 'Feb') ? 'selected="selected"' : ''}} value="feb">FEBRUARY</option>
+                                <option class="form-label" {{($months == 'Mar') ? 'selected="selected"' : ''}} value="Mar">MARCH</option>
+                                <option class="form-label" {{($months == 'April') ? 'selected="selected"' : ''}} value="April">APRIL</option>
+                                <option class="form-label" {{($months == 'May') ? 'selected="selected"' : ''}} value="May">MAY</option>
+                                <option class="form-label" {{($months == 'June') ? 'selected="selected"' : ''}} value="June">JUNE</option>
+                                <option class="form-label" {{($months == 'July') ? 'selected="selected"' : ''}} value="July">JULY</option>
+                                <option class="form-label" {{($months == 'Aug') ? 'selected="selected"' : ''}} value="Aug">AUGUST</option>
+                                <option class="form-label" {{($months == 'Sept') ? 'selected="selected"' : ''}} value="Sept">SEPTEMBER</option>
+                                <option class="form-label" {{($months == 'Oct') ? 'selected="selected"' : ''}} value="Oct">OCTOBER</option>
+                                <option class="form-label" {{($months == 'Nov') ? 'selected="selected"' : ''}} value="Nov">NOVEMBER</option>
+                                <option class="form-label" {{($months == 'Dec') ? 'selected="selected"' : ''}} value="Dec">DECEMBER</option>
                             </select>
                         </div>
                         <div class="col-sm-2">
                             <label for="emergency-firstname" class="form-label">Designation</label>
                             <select class="form-select" id="designsearch"  name="designation" data-default-value="">
-                                <option class="form-label" value="">Please Select</option>
+                                <option class="form-label" value="">Please Choose</option>
                                 <?php $designations = getDesignation() ?>
                                 @foreach ($designations as $designation)
-                                <option value="{{$designation->designationName}}" {{($designation == $designation->designationName) ? 'selected="selected"' : ''}}>{{$designation->designationName}}</option>
+                                <option value="{{$designation->designationName}}" {{($deisgnationId == $designation->designationName) ? 'selected="selected"' : ''}}>{{$designation->designationName}}</option>
                                 @endforeach
                             </select>
                         </div>
                         <div class="col-sm-2">
                             <label for="emergency-firstname" class="form-label">Department</label>
                             <select class="form-select" id="departmentsearch" name="department" data-default-value="">
-                                <option class="form-label" value="">Please Select</option>
+                                <option class="form-label" value="">Please Choose</option>
                                 <?php $departments = getDepartment() ?>
                                 @foreach ($departments as $department)
                                 <option value="{{$department->departmentName}}"  {{($departmentId == $department->departmentName) ? 'selected="selected"' : ''}}>{{$department->departmentName}}</option>
@@ -69,7 +68,7 @@
                         <div class="col-sm-2">
                             <label for="emergency-firstname" class="form-label">Status</label>
                             <select class="form-select" id="statussearch" name="status" data-default-value="">
-                                <option class="form-label" value="">Please Select</option>
+                                <option class="form-label" value="">Please Choose</option>
                                 <option class="form-label" {{($statusId == 'pending') ? 'selected="selected"' : ''}} value="pending">AWAITING APPROVAL</option>
                                 <option class="form-label" {{($statusId == 'approve') ? 'selected="selected"' : ''}} value="approve">APPROVE</option>
                                 <option class="form-label" {{($statusId == 'amend') ? 'selected="selected"' : ''}} value="amend">AMENDED</option>
@@ -94,7 +93,7 @@
                             <thead>
                                 <tr>
                                     <th width="1%">&nbsp;</th>
-                                    <th class="text-nowrap">No</th>
+                                    <th width="1%">No</th>
                                     <th class="text-nowrap">Action</th>
                                     <th class="text-nowrap">Submitted Date</th>
                                     <th class="text-nowrap">Employee Name</th>

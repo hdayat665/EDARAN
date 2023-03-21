@@ -32,6 +32,9 @@ requirejs.config({
         myProjectJs: assets + "/js/myProjectJs",
         projectReportListingJs: assets + "/js/projectReportListingJs",
         eclaimReportJs: assets + "/js/eclaimReportJs",
+        //cashadvancelisting.blade.php
+        cashadvancelistingReportJs: assets + "/js/cashadvancelistingReportJs",
+
         projectStatusJs: assets + "/js/projectStatusJs",
         typeOfLogsJs: assets + "/js/typeOfLogsJs",
         myTimesheetJs: assets + "/js/myTimesheetJs",
@@ -86,6 +89,7 @@ requirejs.config({
         fcheckerDetailJs: assets + "/js/fcheckerDetailJs",
         frecDetailCaJs: assets + "/js/frecDetailCaJs",
         fapprovalCaJs: assets + "/js/fapprovalCaJs",
+        reportcorJs: assets + "/js/reportcorJs",
 
         /// timesheet period
         sheetPeriodJs: assets + "/js/sheetPeriodJs",
@@ -102,6 +106,9 @@ requirejs.config({
         myleaveJs: assets + "/js/myleaveJs",
         leaveApprJs: assets + "/js/leaveApprJs",
         leaveHodJs: assets + "/js/leaveHodJs",
+
+        // myleave Report
+        eleavereportjs: assets + "/js/eleavereportjs",
     },
 });
 
@@ -229,6 +236,9 @@ if ($("#projectReportListingJs").length > 0) {
 }
 if ($("#eclaimReportJs").length > 0) {
     requirejs(["eclaimReportJs"]);
+}
+if ($("#cashadvancelistingReportJs").length > 0) {
+    requirejs(["cashadvancelistingReportJs"]);
 }
 if ($("#projectStatusJs").length > 0) {
     requirejs(["projectStatusJs"]);
@@ -470,6 +480,14 @@ if ($("#frecDetailCaJs").length > 0) {
 
 if ($("#fapprovalCaJs").length > 0) {
     requirejs(["fapprovalCaJs"]);
+}
+
+if ($("#reportcorJs").length > 0) {
+    requirejs(["reportcorJs"]);
+}
+
+if ($("#eleavereportjs").length > 0) {
+    requirejs(["eleavereportjs"]);
 }
 
 // Global function
