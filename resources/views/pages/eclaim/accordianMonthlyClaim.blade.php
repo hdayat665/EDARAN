@@ -44,7 +44,7 @@
                                 <select class="form-select" id="claimcategory" name="claim_category">
                                     <option class="form-label" value="Please Select" selected>Please
                                         Select</option>
-                                    {{ $categorys = getClaimCategory() }}
+                                    {{ $categorys = getClaimCategoryMtc() }}
                                     @foreach ($categorys as $category)
                                         <option value="{{ $category->id }}">{{ $category->claim_catagory }}</option>
                                     @endforeach
@@ -84,7 +84,7 @@
                                 <label class="form-label">Supporting Document</label>
                             </div>
                             <div class="col-md-8"> <input type="file" name="file_upload" class="form-control-file" id="">
-                            </div>
+                            </div> 
                         </div>
                         <div class="row p-2">
                             <div class="modal-footer"> <button type="button" class="btn btn-secondary">Reset</button>

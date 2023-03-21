@@ -1521,6 +1521,21 @@ if (!function_exists('getClaimCategory')) {
     }
 }
 
+if (!function_exists('getClaimCategoryMtc')) {
+    function getClaimCategoryMtc($id = '')
+    {
+        $data = ClaimCategory::where('tenant_id', Auth::user()->tenant_id)
+                     ->where('status','=', '1')
+                     ->where('claim_type', '=', 'MTC')
+                     ->get();
+
+        if (!$data) {
+            $data = [];
+        }
+
+        return $data;
+    }
+}
 if (!function_exists('getClaimCategoryContentByClaimId')) {
     function getClaimCategoryContentByClaimId($id = '')
     {

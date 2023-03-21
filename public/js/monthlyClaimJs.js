@@ -326,7 +326,7 @@ $("document").ready(function () {
         var d = parseInt($("#ln").val());
         var e = parseFloat(a * b + c * d).toFixed(2);
         $("#TAV").val(e);
-    });
+    }); 
 
     $(
         "#hotelcv,#hotelcv1,#hn,#lodgingcv,#hotelcv1,#ln,#htv,#ldgv,#TS,#TAV,#DBF,#DLH,#DDN"

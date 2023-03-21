@@ -16,7 +16,7 @@ $(document).ready(function () {
     //     $("#myBtn").attr("disabled", false);
     // });
 
-    $("#activetable").dataTable({
+    $("#activetable").dataTable({ 
         // "responsive": true,
         bLengthChange: false,
         bFilter: false,
@@ -256,7 +256,39 @@ $(document).ready(function () {
     //         },
     //     });
     // });
+    $('#approveAllButton').click(function(e) {
+        requirejs(['sweetAlert2'], function(swal) {
 
+            var data = new FormData(document.getElementById("approveAllForm"));
+
+            $.ajax({
+                type: "POST",
+                url: "/approveAllCa",
+                data: data,
+                dataType: "json",
+                async: false,
+                processData: false,
+                contentType: false,
+            }).done(function(data) {
+                swal({
+                    title: data.title,
+                    text: data.msg,
+                    type: data.type,
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'OK'
+                }).then(function() {
+                    if (data.type == 'error') {
+
+                    } else {
+                        location.reload();
+                    }
+
+
+                });
+            });
+
+        });
+    });
     // personal
     $(document).on("click", "#btn-view", function () {
         var id = $(this).data("id");
