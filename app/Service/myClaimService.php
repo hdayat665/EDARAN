@@ -49,6 +49,7 @@ class myClaimService
         }
 
         // add to general claim
+        
         $generalClaim['user_id'] = Auth::user()->id;
         $generalClaim['tenant_id'] = Auth::user()->tenant_id;
         $generalClaim['claim_id'] = 'GNC' . $generalClaimCount + 1;

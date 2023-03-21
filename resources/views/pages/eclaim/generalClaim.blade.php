@@ -90,7 +90,7 @@
                                         </div>
                                         <div class="col-md-9">
                                             <div class="input-group" id="">
-                                                <input type="text" name="applied_date" class="form-control" value="" id="applieddate" />
+                                                <input readonly type="text" style="pointer-events: none;" name="applied_date" class="form-control" value="" id="applieddate" />
                                                 <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                             </div>
                                         </div>

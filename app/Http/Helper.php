@@ -1511,6 +1511,7 @@ if (!function_exists('getClaimCategory')) {
     {
         $data = ClaimCategory::where('tenant_id', Auth::user()->tenant_id)
                      ->where('status','=', '1')
+                     ->where('claim_type', '=', 'GC')
                      ->get();
 
         if (!$data) {
@@ -1536,6 +1537,7 @@ if (!function_exists('getClaimCategoryMtc')) {
         return $data;
     }
 }
+
 if (!function_exists('getClaimCategoryContentByClaimId')) {
     function getClaimCategoryContentByClaimId($id = '')
     {
