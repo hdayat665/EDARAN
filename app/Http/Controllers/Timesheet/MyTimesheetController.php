@@ -307,11 +307,13 @@ class MyTimesheetController extends Controller
 
     public function realtimeEventTimesheetView()
     {
-        $data = [];
+        // $data = [];
         $input = [];
         $ss = new MyTimeSheetService;
         $data['events'] = $ss->getRealtimeEvents($input);
 
+        $data['employeeId'] = '';
+        $data['eventId'] = '';
         return view('pages.timesheet.realtimeTimesheet',$data);
 
     }
@@ -322,7 +324,9 @@ class MyTimesheetController extends Controller
         $input = $r->input();
         $ss = new MyTimeSheetService;
         $data['events'] = $ss->getRealtimeEvents($input);
-
+        $data['employeeId'] = $input['employee_name'];
+        $data['eventId'] = $input['event_name'];
+        
         return view('pages.timesheet.realtimeTimesheet',$data);
 
     }

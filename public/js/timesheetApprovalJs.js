@@ -45,18 +45,6 @@ $(document).ready(function() {
     $("#filter").click(function() {
         $('#filterform').toggle();
     });
-
-    // $(document).ready(function() {
-    //     // Check if any dropdown has a selected value
-    //     if ($('#employeesearch').val() || $('#monthsearch').val() || $('#designsearch').val() || $('#departmentsearch').val() || $('#statussearch').val()) {
-    //         $('#filterform').show();
-    //     }
-    
-    //     // Toggle filter form visibility when the filter button is clicked
-    //     $('#filter').click(function() {
-    //         $('#filterform').toggle();
-    //     });
-    // });
     
 
     $(document).on("click", "#statusButton", function() {
@@ -184,11 +172,16 @@ $(document).ready(function() {
 
 
     $("#reset").on("click", function () {
+      $("#employeesearch").picker('destroy');
       $("#employeesearch").val($("#employeesearch").data("default-value"));
       $("#monthsearch").val($("#monthsearch").data("default-value"));
+      $("#monthsearch").picker('destroy');
       $("#designsearch").val($("#designsearch").data("default-value"));
+      $("#designsearch").picker('destroy');
       $("#departmentsearch").val($("#departmentsearch").data("default-value"));
+      $("#departmentsearch").picker('destroy');
       $("#statussearch").val($("#statussearch").data("default-value"));
+      $("#statussearch").picker('destroy');
   });
 
 

@@ -32,7 +32,14 @@
 
                     <td style="text-transform: uppercase;">{{$parent->firstName}}</td>
                     <td style="text-transform: uppercase;">{{$parent->lastName}}</td>
-                    <td style="text-transform: uppercase;">{{$parent->address1}}</td>
+                    <td style="text-transform: uppercase;">
+                        {!! $parent->address1 ?? '' !!}
+                        {!! $parent->address2 ? ', ' . $parent->address2 . ',<br>' : '' !!}
+                        {!! $parent->postcode ? $parent->postcode . ', ' : '' !!}
+                        {!! $parent->city ? $parent->city . ', ' : '' !!}
+                        {!! $parent->state ? $parent->state . ', ' : '' !!}
+                        {!! $parent->country ? $parent->country : '' !!}
+                    </td>
                     <td style="text-transform: uppercase;">{{ ($parent->relationship) ? relationship($parent->relationship) : ''}}</td>
                     <td>{{$parent->DOB}}</td>
                     <td>{{$parent->contactNo}}</td>

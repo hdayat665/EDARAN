@@ -89,6 +89,7 @@ requirejs.config({
         fcheckerDetailJs: assets + "/js/fcheckerDetailJs",
         frecDetailCaJs: assets + "/js/frecDetailCaJs",
         fapprovalCaJs: assets + "/js/fapprovalCaJs",
+        reportcorJs: assets + "/js/reportcorJs",
 
         /// timesheet period
         sheetPeriodJs: assets + "/js/sheetPeriodJs",
@@ -105,6 +106,9 @@ requirejs.config({
         myleaveJs: assets + "/js/myleaveJs",
         leaveApprJs: assets + "/js/leaveApprJs",
         leaveHodJs: assets + "/js/leaveHodJs",
+
+        // myleave Report
+        eleavereportjs: assets + "/js/eleavereportjs",
     },
 });
 
@@ -476,6 +480,14 @@ if ($("#frecDetailCaJs").length > 0) {
 
 if ($("#fapprovalCaJs").length > 0) {
     requirejs(["fapprovalCaJs"]);
+}
+
+if ($("#reportcorJs").length > 0) {
+    requirejs(["reportcorJs"]);
+}
+
+if ($("#eleavereportjs").length > 0) {
+    requirejs(["eleavereportjs"]);
 }
 
 // Global function

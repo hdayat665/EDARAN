@@ -19,7 +19,9 @@ use App\Http\Controllers\Project\CustomerController;
 use App\Http\Controllers\Project\ProjectController;
 use App\Http\Controllers\Report\ProjectReportController;
 use App\Http\Controllers\Report\TimesheetReportController;
+use App\Http\Controllers\Report\EleaveReportController;
 use App\Http\Controllers\Report\EclaimReportController;
+use App\Http\Controllers\COR\CORReportController;
 use App\Http\Controllers\MYLeave\MyleaveController;
 use App\Http\Controllers\Eleave\EleaveController;
 use Illuminate\Support\Facades\Storage;
@@ -469,6 +471,22 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('/searchOvertimeReport', 'searchOvertimeReport');
             // Route::get('/getReportAllEmployee', 'getReportAllEmployee');
         });
+
+        Route::controller(EleaveReportController::class)->group(function () {
+            //Route::get('/statusReport', 'statusReportView');
+            Route::get('/leaveReport', 'leaveReportView');
+            // Route::get('/overtimeReport', 'overtimeReportView');
+            // Route::get('/getProjectByCustomerId/{customer_id}', 'getProjectByCustomerId');
+            // Route::get('/searchReport', 'searchReport');
+            // Route::post('/updateStatus/{id}/{status}', 'updateStatus');
+            // Route::post('/searchStatusReport', 'searchStatusReport');
+            Route::post('/searchEleaveReport', 'searchEleaveReport');
+            // Route::post('/searchEmployeeReport', 'searchEmployeeReport');
+            // Route::post('/searchOvertimeReport', 'searchOvertimeReport');
+            // Route::get('/getReportAllEmployee', 'getReportAllEmployee');
+        });
+
+
         Route::controller(EclaimReportController::class)->group(function () {
             Route::get('/eclaimListing', 'eclaimListingView');
             Route::get('/cashadvanceListing', 'cashadvanceListingView');
@@ -587,6 +605,11 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('/getuserleaveApprhod/{id}', 'getuserleaveApprhod');
             Route::post('/updatehod/{id}', 'updatehod');
             Route::post('/updatehodreject/{id}', 'updatehodreject');
+        });
+
+        Route::controller(CORReportController::class)->group(function () {
+            Route::get('/corlisting', 'corlisting');
+            Route::post('/searchcor', 'searchcor');
         });
     });
 });
