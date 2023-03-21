@@ -15,9 +15,9 @@
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-check form-switch">
-                                    <input class="form-check-input" {{ ($companion->mainCompanion ?? '') ? 'checked' : '' }} name="mainCompanion" value="{{ $companion->mainCompanion ?? '' }}" type="checkbox" role="switch" id="set-main" checked>
+                                    <input class="form-check-input" type="checkbox" name="mainCompanion" id="set-main" value="1" {{ ($companion->mainCompanion ?? 0) ? 'checked' : '' }}>
                                     <label class="form-check-label" for="set-main">Set as Main Companion</label>
-                                </div>
+                                </div>                                
                             </div>
                         </div>
                         <div class="row p-2">
@@ -62,8 +62,8 @@
                                 </div>
                             </div>
                             <div class="col-sm-3">
-                                <label for="" class="form-label" >ID Attachment</label>
-                                <input type="file" id="" name="idFile" value=""  class="form-control" aria-describedby="" >
+                                <label for="id-attachment" class="form-label" >ID Attachment</label>
+                                <input type="file" id="id-attachment" name="idFile" class="form-control" aria-describedby="idAttachment" >
                             </div>
                         </div>
                         <div class="row p-2">
@@ -256,8 +256,8 @@
                         <div class="row p-2">
                             <div class="col-sm-6">
                                 <label for="extension-number" class="form-label">Monthly Salary</label>
-                                <input type="text" readonly id="payslipmc" name="payslip"  class="form-control" placeholder="MONTHLY SALARY">
-                                <input type="file" name="payslip"  hidden aria-describedby="dob">
+                                <input type="text" readonly id="payslipmc" name="salary"  class="form-control" placeholder="MONTHLY SALARY">
+                                {{-- <input type="file" name="payslip"  hidden aria-describedby="dob"> --}}
                             </div>
                             <div class="col-sm-6">
                                 <label for="income-tax-number" class="form-label">Office Number</label>
@@ -388,9 +388,9 @@
                             </div>
                             <div class="col-sm-3 part">
                                 <label for="marriage-cert" class="form-label" >ID Attachment</label>
-                                <input type="file" name="idFile" id="" class="form-control" aria-describedby="">
+                                <input type="file" name="idFile" id="id-attachment" class="form-control" aria-describedby="">
                                 @if ($companion->idFile)
-                                    Click <a href="{{ route('download', ['filename' => $companion->idFile]) }}" >here</a> to see ID Attachment.
+                                    Click <a href="{{ route('download', ['filename' => $companion->idFile]) }}">here</a> to see ID Attachment.
                                 @endif
                             </div>
                         </div>
@@ -447,7 +447,7 @@
                                         <label for="marriage-cert" class="form-label">Marriage Certificate</label>
                                         <input type="file" name="marrigeCert" id="marriage-cert" class="form-control" aria-describedby="dob">
                                         @if ($companion->marrigeCert)
-                                        Click <a href="/storage/app/file/{{$companion->marrigeCert}}" target="_blank">here</a> to see marriage cert.
+                                        Click <a href="{{ route('download', ['filename' => $companion->marrigeCert]) }}">here</a> to see marriage cert.
                                         @endif
                                     </div>
                                     {{-- <div class="col-sm-6">
@@ -486,6 +486,9 @@
                                     <div class="col-sm-6">
                                         <label for="dob" class="form-label"  >OKU Attachment*</label>
                                         <input type="file" id="okuattach2" name="okuID" class="form-control" aria-describedby="" style="pointer-events: none">
+                                        @if ($companion->okuID)
+                                            Click <a href="{{ route('download', ['filename' => $companion->okuID]) }}">here</a> to see OKU ID.
+                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -525,7 +528,7 @@
                         <div class="row p-2">
                             <div class="col-sm-6">
                                 <label for="state" class="form-label">State*</label>
-                                <select class="form-select" name="state" value="{{ $companion->state ?? '' }}">
+                                <select class="form-select" name="state" value="{{ $companion->state ?? '' }}" style="text-transform:uppercase">
                                     <?php $state = state() ?>
                                     <option value="0" label="PLEASE CHOOSE" ></option>
                                     @foreach ($state as $key => $status)
@@ -563,31 +566,39 @@
                         </div>
                         <div class="row p-2">
                             <div class="col-sm-6">
-                                <label for="company-name" class="form-label">Company Name</label>
-                                <input type="text" id="phone-number" name="companyName" value="{{ $companion->companyName ?? '' }}" placeholder="COMPANY NAME" class="form-control" aria-describedby="company-name">
+                                <label for="company-name" class="form-label">Designation*</label>
+                                <input type="text" id="designationmc" name="designation"  class="form-control" placeholder="DESIGNATION" value="{{ $companion->designation ?? '' }}" style="text-transform:uppercase">
                             </div>
                             <div class="col-sm-6">
-                                <label for="date-joined-company" class="form-label">Date Joined Company</label>
-                                <input type="text" id="date-joined-company" name="dateJoined" value="{{ date_format(date_create($companion->dateJoined), 'Y-m-d') }}" class="form-control" placeholder="YYYY/MM/DD" aria-describedby="date-joined-company">
+                                <label for="company-name" class="form-label">Company Name</label>
+                                <input type="text" id="companyNamemc" name="companyName" placeholder="COMPANY NAME" value="{{ $companion->companyName ?? '' }}" class="form-control" aria-describedby="company-name" style="text-transform:uppercase">
                             </div>
                         </div>
                         <div class="row p-2">
                             <div class="col-sm-6">
-                                <label for="income-tax-number" class="form-label">Income Tax Number</label>
-                                <input type="text" id="income-tax-number" name="incomeTax" value="{{ $companion->incomeTax ?? '' }}" placeholder="00000000000" class="form-control" aria-describedby="income-tax-number">
+                                <label for="date-joined-company" class="form-label">Date Joined Company</label>
+                                <input type="text" id="dateJoinedmc" name="dateJoined" value="{{ $companion->dateJoined ?? '' }}" placeholder="YYYY/MM/DD" class="form-control" aria-describedby="date-joined-company" >
                             </div>
                             <div class="col-sm-6">
+                                <label for="income-tax-number" class="form-label">Income Tax Number</label>
+                                <input type="text" id="income-tax-number" name="incomeTax" value="{{ $companion->incomeTax ?? '' }}" placeholder="000000000000" class="form-control" aria-describedby="income-tax-number">
+                            </div>
+                            {{-- <div class="col-sm-6">
                                 <label for="extension-number" class="form-label">Payslip</label>
                                 <input type="file" id="extension-number" name="payslip" value="{{ $companion->payslip ?? '' }}" class="form-control" placeholder="PAYSLIP" aria-describedby="extension-number">
                                 @if ($companion->payslip)
                                 Click <a href="/storage/app/file/{{$companion->payslip}}" target="_blank">here</a> to see marriage cert.
                                 @endif
-                            </div>
+                            </div> --}}
                         </div>
                         <div class="row p-2">
                             <div class="col-sm-6">
+                                <label for="extension-number" class="form-label">Monthly Salary</label>
+                                <input type="text" id="payslipmc" name="salary" value="{{ $companion->salary ?? '' }}" class="form-control" placeholder="MONTHLY SALARY">
+                            </div>
+                            <div class="col-sm-6">
                                 <label for="income-tax-number" class="form-label">Office Number</label>
-                                <input type="text" id="income-tax-number" name="officeNo" value="{{ $companion->officeNo ?? '' }}" placeholder="000000000" class="form-control" aria-describedby="income-tax-number">
+                                <input type="text" id="officeNomc" name="officeNo" value="{{ $companion->officeNo ?? '' }}" placeholder="000000000" class="form-control" aria-describedby="income-tax-number">
                             </div>
                         </div>
                         <div class="row p-2">
@@ -614,7 +625,7 @@
                         <div class="row p-2">
                             <div class="col-sm-6">
                                 <label for="state" class="form-label">State</label>
-                                <select class="form-select" name="stateE" value="{{ $companion->stateE ?? '' }}">
+                                <select class="form-select" name="stateE" value="{{ $companion->stateE ?? '' }}" style="text-transform:uppercase">
                                     <?php $state = state() ?>
                                     <option value="0" label="PLEASE CHOOSE" ></option>
                                     @foreach ($state as $key => $status)
@@ -640,8 +651,8 @@
                         </div>
                     
                     <p class="text-end mb-0 mt-3">
-                        <a href="javascript:;" id="deleteCompanion{{$no}}" class="btn btn-danger">Delete</a>
-                        <a href="javascript:;" id="updateCompanion{{$no}}" class="btn btn-primary">Save</a>
+                        <a href="javascript:;" id="deleteCompanion" data-id="{{ $companion->id }}" class="btn btn-danger">Delete</a>
+                        <a href="javascript:;" id="updateCompanion{{$companion->id}}" class="btn btn-primary">Save</a>
                     </p>
                     </form>
                 </div>

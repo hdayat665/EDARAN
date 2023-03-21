@@ -1625,44 +1625,45 @@ $(document).ready(function () {
                 },
             }).then((result) => {});
         });
+    }
 
-        $('#deleteCompanion' + no).click(function(e) {
-            requirejs(['sweetAlert2'], function(swal) {
-                swal({
-                    title: "Are you sure to delete Companion?",
-                    type: "error",
-                    confirmButtonClass: "btn-danger",
-                    confirmButtonText: "Yes!",
-                    showCancelButton: true,
-                }).then(function() {
-                    $.ajax({
-                        type: "POST",
-                        url: "/deleteCompanion/" + no,
-                        data: { _method: "DELETE" },
-                        
-                    }).done(function(data) {
-                        console.log(no);
-                        console.log(data);
-                        swal({
-                            title: data.title,
-                            text: data.msg,
-                            type: data.type,
-                            confirmButtonColor: '#3085d6',
-                            confirmButtonText: 'OK',
-                            allowOutsideClick: false,
-                            allowEscapeKey: false,
-                        }).then(function() {
-                            if (data.type == 'error') {
-    
-                            } else {
-                                location.reload();
-                            }
-                        });
+    $(document).on("click", "#deleteCompanion", function () {
+        no = $(this).data("id");
+        requirejs(['sweetAlert2'], function(swal) {
+            swal({
+                title: "Are you sure to delete Companion?",
+                type: "error",
+                confirmButtonClass: "btn-danger",
+                confirmButtonText: "Yes!",
+                showCancelButton: true,
+            }).then(function() {
+                $.ajax({
+                    type: "POST",
+                    url: "/deleteCompanion/" + no,
+                    data: { _method: "DELETE" },
+                    
+                }).done(function(data) {
+                    console.log(no);
+                    console.log(data);
+                    swal({
+                        title: data.title,
+                        text: data.msg,
+                        type: data.type,
+                        confirmButtonColor: '#3085d6',
+                        confirmButtonText: 'OK',
+                        allowOutsideClick: false,
+                        allowEscapeKey: false,
+                    }).then(function() {
+                        if (data.type == 'error') {
+
+                        } else {
+                            location.reload();
+                        }
                     });
                 });
             });
         });
-    }
+    });
 
     $("#tableChildren").DataTable({
         responsive: false,
@@ -1707,6 +1708,17 @@ $(document).ready(function () {
         var a = $("#firstnamemc").val();
         var b = $("#lastnamemc").val();
         $("#fullnamemc").val(a + " " + b);
+    });
+    $("#firstNameParent,#lastNameParent").change(function () {
+        var a = $("#firstNameParent").val();
+        var b = $("#lastNameParent").val();
+        $("#fullNameParent").val(a + " " + b);
+    });
+
+    $("#firstNamesP1,#lastNamesP1").change(function () {
+        var a = $("#firstNamesP1").val();
+        var b = $("#lastNamesP1").val();
+        $("#fullNameP1").val(a + " " + b);
     });
 
     $(".partCheck").click(function () {
@@ -1834,6 +1846,11 @@ $(document).ready(function () {
         autoclose: true,
     });
     $("#dateJoinedmc").datepicker({
+        todayHighlight: true,
+        format: "yyyy/mm/dd",
+        autoclose: true,
+    });
+    $("#expiryDateParent").datepicker({
         todayHighlight: true,
         format: "yyyy/mm/dd",
         autoclose: true,
@@ -2409,6 +2426,8 @@ $(document).ready(function () {
         }
     }
 
+
+    ///// PARENT INFORMATION /////
     $("#tableParent").DataTable({
         responsive: false,
         lengthMenu: [
@@ -2427,6 +2446,17 @@ $(document).ready(function () {
         todayHighlight: true,
         format: "yyyy/mm/dd",
         autoclose: true,
+    });
+
+    $("#passportParent").change(function () {
+        if ($("#expiryDateParent").prop("readonly")) {
+            $("#expiryDateParent").prop("readonly", false);
+            $("#expiryDateParent").css("pointer-events", "auto");
+        } else {
+            $("#expiryDateParent").prop("readonly", true);
+            $("#expiryDateParent").css("pointer-events", "none");
+            $("#expiryDateParent").val("");
+        }
     });
 
     $("#addParent").click(function (e) {
@@ -2656,6 +2686,8 @@ $(document).ready(function () {
                 $("#firstNamesP1").val(parent.firstName);
                 $("#postcodeP1").val(parent.postcode);
                 $("#lastNamesP1").val(parent.lastName);
+                $("#fullNameP1").val(parent.fullName);
+                $("#idNoP1").val(parent.idNo);
                 $("#relationshipP1").val(parent.relationship);
                 if (parent.nonCitizen == "on") {
                     $("#nonCitizenP1").prop("checked", true);
@@ -2934,12 +2966,6 @@ $("#same-address").change(function () {
     }
 });
 
-function getAddressforCompanion(id){
-    return $.ajax({
-        url: "/getAddressforCompanion/" + id,
-    });
-}
-
 $("#same-address2").change(function () {
     if (this.checked) {
         $("#address1parent").val($("#address-1").val()).prop("readonly", true);
@@ -2948,6 +2974,31 @@ $("#same-address2").change(function () {
         $("#cityparent").val($("#city").val()).prop("readonly", true);
         $("#stateparent").val($("#state").val()).prop("disabled", true);
         $("#countryparent").val($("#country").val()).prop("disabled", true);
+
+        // Fetch permanent address from userAddress table if available
+        var id = "{{ $user->id }}";
+        getAddressforCompanion(id).done(function (data) {
+            if (data) {
+                var permanentAddress1 = data.data.address1;
+                var permanentAddress2 = data.data.address2;
+                var permanentPostcode = data.data.postcode;
+                var permanentCity = data.data.city;
+                var permanentState = data.data.state;
+                var permanentCountry = data.data.country;
+                console.log(data);
+
+                if (permanentAddress1 && permanentAddress2 && permanentPostcode && permanentCity && permanentState && permanentCountry) {
+                    $("#address1parent").val(permanentAddress1);
+                    $("#address2parent").val(permanentAddress2);
+                    $("#postcodeparent").val(permanentPostcode);
+                    $("#cityparent").val(permanentCity);
+                    $("#stateparent").val(permanentState);
+                    $("#countryparent").val(permanentCountry);
+                }
+            }
+        }).fail(function (xhr, status, error) {
+            console.log("Error fetching permanent address: " + error);
+        });
     } else {
         $("#address1parent").val($("").val()).prop("readonly", false);
         $("#address2parent").val($("").val()).prop("readonly", false);
@@ -3076,6 +3127,12 @@ $("#same-address5").change(function () {
 //     }
 
 // });
+
+function getAddressforCompanion(id){
+    return $.ajax({
+        url: "/getAddressforCompanion/" + id,
+    });
+}
 
 $("#datepicker-fromdate").datepicker({
     todayHighlight: true,
@@ -3397,7 +3454,7 @@ $(".partCheck8").click(function () {
         $("#idnumber6").prop("readonly", false);
         $("#dob6").prop("readonly", true);
         $("#dob6").css("pointer-events", "none");
-        $("#passportparent").val("");
+        $("#passportParent").val("");
         $("#expiryDateParent").val("");
         $("#expiryDateParent").prop("readonly", true);
         $("#expiryDateParent").css("pointer-events", "none");
