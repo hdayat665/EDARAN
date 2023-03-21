@@ -59,8 +59,8 @@
                     {{-- <td>{{($allClaim->user_id) ? getDepartmentById($allClaim->user_id) : '-'}}</td> --}}
                     <td>{{$allClaim->pv_number ?? '-'}}</td>
                     <td>{{$allClaim->cheque_number ?? '-'}}</td>
-                    <td>{{$allClaim->created_at ?? '-'}}</td>
-                    <td> </td>
+                    <td></td>
+                    <td> {{$allClaim->created_at ?? '-'}}</td>
                     <td></td>
                     <td></td>
                     <td></td>

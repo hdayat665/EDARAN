@@ -37,7 +37,7 @@
                         </div>
                         <div class="col-sm-6" id="myprojectedit" style="display:none">
                             <label for="Office-Log" class="form-label">My Project*</label>
-                            <select class="form-select" id="project_id_edit" name="project_id" aria-label="Default select example">
+                            <select class="form-select" id="project_id_edit" name="project_id" aria-label="Default select example" style="pointer-events:none;background:#e9ecef;>
                                 <option class="form-label" value="">Please Choose</option>
                                 <?php $projects = project_memberaddl($user_id) ?>
                                 @foreach ($projects as $project)
