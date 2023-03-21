@@ -9,6 +9,7 @@
         <table id="projectLocationTable" class="table table-striped table-bordered align-middle">
             <thead>
                 <tr>
+                    <th width="5%" class="align-middle">No.</th>
                     <th width="6%" class="align-middle">Action</th>
                     <th class="text-nowrap">Location Name</th>
                     <th class="text-nowrap">Address</th>
@@ -17,8 +18,9 @@
             </thead>
             <tbody>
                 @if ($projectLocations)
-                @foreach ($projectLocations as $projectLocation )
+                @foreach ($projectLocations as $key => $projectLocation )
                 <tr>
+                    <td width="1%">{{ $key + 1 }}</td>
                     <td width="6%">
                         <a href="#" data-bs-toggle="dropdown" class="btn btn-primary btn-sm dropdown-toggle"></i> Actions <i class="fa fa-caret-down"></i></a>
                         <div class="dropdown-menu">
@@ -37,7 +39,6 @@
     </div>
     <div class="modal-footer">
             <a class="btn btn-white me-5px btnPrevious">Previous</a>
-            
             <a class="btn btn-white me-5px btnNext">Next</a>
     </div>
 </div>

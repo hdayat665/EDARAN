@@ -34,8 +34,8 @@
                         <table id="projectTable" class="table table-striped table-bordered align-middle">
                             <thead>
                                 <tr>
-                                    <th width="1%" data-orderable="false" class="align-middle">Action</th>
                                     <th width="1%">No.</th>
+                                    <th data-orderable="false" class="align-middle">Action</th>
                                     <th class="text-nowrap">LOA Date</th>
                                     <th class="text-nowrap">Customer Name</th>
                                     <th class="text-nowrap">Project Code</th>
@@ -54,10 +54,10 @@
                                 <?php $id = 1 ?>
                                 @foreach ($projectInfos as $projectInfo)
                                 <tr class="odd gradeX">
+                                    <td width="1%">{{$id++}}</td>
                                     <td>
                                         <a href="/projectInfoEdit/{{$projectInfo->id}}" class="btn btn-primary"><i class="fa fa-cogs"></i> Edit</a>
                                     </td>
-                                    <td width="1%" class="fw-bold text-dark">{{$id++}}</td>
                                     <td>{{$projectInfo->LOA_date}}</td>
                                     <td>{{$projectInfo->customer_name}}</td>
                                     <td>{{$projectInfo->project_code}}</td>

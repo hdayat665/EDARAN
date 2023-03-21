@@ -2,20 +2,14 @@
 $(document).ready(function() {
 
     // google map
-
     
     $(".partCheck").click(function(){
         if ($(this).prop("checked")) {
             $('#exitdatediv').show();
             $('#exitdatediv1').show();
-           
-           
-            
         } else {
-            
             $('#exitdatediv').hide();
             $('#exitdatediv1').hide();
-            
         }
       });
 
@@ -25,7 +19,6 @@ $(document).ready(function() {
 
     $('#location-search').picker({
         search:true,
-        
     });
 
     $('#location-search-edit').picker({
@@ -42,9 +35,11 @@ $(document).ready(function() {
     $('#acc_manager2').picker({
         search:true,
     });
+
     $('#project_manager2').picker({
         search:true,
     });
+
     $('#projectlocation').picker({
         search:true,
     }); 
@@ -54,160 +49,72 @@ $(document).ready(function() {
         autoclose: true,
         format: 'yyyy/mm/dd',
     });
+
     $("#datepicker-joineddate").datepicker({
         todayHighlight: true,
         autoclose: true,
         format: 'yyyy/mm/dd',
     });
+
     $("#datepicker_exitdate").datepicker({
         todayHighlight: true,
         autoclose: true,
         format: 'yyyy/mm/dd',
     });
 
-
-    $(document).ready(function() {
-        var general = $("#projectLocationTable").DataTable({
+    $('#data-table-prevproject').DataTable({
+        // scrollX: true, 
         responsive: false,
         lengthMenu: [
             [5, 10, 25, 50, -1],
-            [5, 10, 25, 50, "All"],
-        ],
-        order: [],
-        drawCallback: function(settings) {
-            // Apply scrollX after the table is fully rendered
-            $("#projectLocationTable").DataTable().columns.adjust().draw();
+            [5, 10, 25, 50, "All"]
+        ], 
+        initComplete: function (settings, json) {  
+            $("#data-table-prevproject").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");            
         },
-        columnDefs: [
-            {
-            targets: "_all",
-            orderable: false,
-            },
-        ],
-        });
+    });      
+
+    $('#projectLocationTable').DataTable({
+        responsive: false,
+        lengthMenu: [
+            [5, 10, 25, 50, -1],
+            [5, 10, 25, 50, "All"]
+        ], 
+        initComplete: function (settings, json) {  
+            $("#projectLocationTable").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");            
+        },
+    });   
+
+    $('#projectMemberTable').DataTable({
+        responsive: false,
+        lengthMenu: [
+            [5, 10, 25, 50, -1],
+            [5, 10, 25, 50, "All"]
+        ], 
+        initComplete: function (settings, json) {  
+            $("#projectMemberTable").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");            
+        },
+    }); 
     
-        $("#nav_pro_loc").on("click", function() {
-        setTimeout(function() {
-            general.columns.adjust().draw();
-        }, 200);
-        });
-    });
-
-   
-    $(document).ready(function() {
-        var general = $("#data-table-prevproject").DataTable({
-          responsive: false,
-          lengthMenu: [
+    $('#projectMemberPrevTable').DataTable({
+        responsive: false,
+        lengthMenu: [
             [5, 10, 25, 50, -1],
-            [5, 10, 25, 50, "All"],
-          ],
-          order: [], // Disable sorting
-          drawCallback: function(settings) {
-            // Apply scrollX after the table is fully rendered
-            requestAnimationFrame(function() {
-              $("#data-table-prevproject").DataTable().columns.adjust().draw();
-            });
-          },
-          columnDefs: [
-            {
-              targets: "_all",
-              orderable: false,
-            },
-          ],
-        });
-      
-        $("#nav_pre_pro").on("click", function() {
-          requestAnimationFrame(function() {
-            general.columns.adjust().draw();
-          });
-        });
-      });
-      
-
-    $(document).ready(function() {
-        var general = $("#projectMemberTable").DataTable({
-          responsive: false,
-          lengthMenu: [
-            [5, 10, 25, 50, -1],
-            [5, 10, 25, 50, "All"],
-          ],
-          drawCallback: function(settings) {
-            // Apply scrollX after the table is fully rendered
-            $("#projectMemberTable").DataTable().columns.adjust().draw();
-          },
-          order: [],
-          columnDefs: [
-            {
-              targets: "_all",
-              orderable: false,
-            },
-          ],
-        });
-      
-        $("#current_mem").on("click", function() {
-          setTimeout(function() {
-            general.columns.adjust().draw();
-          }, 200);
-        });
-      });
+            [5, 10, 25, 50, "All"]
+        ], 
+        initComplete: function (settings, json) {  
+            $("#projectMemberPrevTable").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");            
+        },
+    }); 
     
-    $(document).ready(function() {
-        var general = $("#projectMemberPrevTable").DataTable({
+    $("#data-table-default2").DataTable({
           responsive: false,
           lengthMenu: [
             [5, 10, 25, 50, -1],
             [5, 10, 25, 50, "All"],
           ],
-          drawCallback: function(settings) {
-            // Apply scrollX after the table is fully rendered
-            $("#projectMemberPrevTable").DataTable().columns.adjust().draw();
-          },
-          order: [],
-          columnDefs: [
-            {
-              targets: "_all",
-              orderable: false,
-            },
-          ],
-        });
-      
-        $("#previous_mem").on("click", function() {
-          setTimeout(function() {
-            general.columns.adjust().draw();
-          }, 200);
-        });
-    });
-     
-    $(document).ready(function() {
-        var general = $("#data-table-default2").DataTable({
-          responsive: false,
-          lengthMenu: [
-            [5, 10, 25, 50, -1],
-            [5, 10, 25, 50, "All"],
-          ],
-          order: [], // Disable sorting
-          drawCallback: function(settings) {
-            // Apply scrollX after the table is fully rendered
-            requestAnimationFrame(function() {
-              $("#data-table-default2").DataTable().columns.adjust().draw();
-            });
-          },
-          columnDefs: [
-            {
-              targets: "_all",
-              orderable: false,
-            },
-          ],
-        });
-      
-        $("#default-tab-2").on("click", function() {
-          requestAnimationFrame(function() {
-            general.columns.adjust().draw();
-          });
-        });
+          scrollX:true,
       });
-
-   
 
     var hash = location.hash.replace(/^#/, '');  // ^ means starting, meaning only match the first hash
     if (hash) {
@@ -522,21 +429,21 @@ $(document).ready(function() {
             rules: {
                 joined_date: "required",
                 employee_id: "required",
-                designation: "required",
-                department:"required",
-                branch: "required",
-                unit:"required",
-                location_name: "required",
+                // designation: "required",
+                // department:"required",
+                // branch: "required",
+                // unit:"required",
+                // location_name: "required",
             },
 
             messages: {
                 joined_date: "Please Choose Joined Date",
                 employee_id: "Please Choose Project Member Name",
-                department:"Please Choose department",
-                branch: "Please Choose Branch",
-                designation: "Please Choose designation",
-                unit:"Please Choose Unit",
-                location_name:"Please Select Location",
+                // department:"Please Choose department",
+                // branch: "Please Choose Branch",
+                // designation: "Please Choose designation",
+                // unit:"Please Choose Unit",
+                // location_name:"Please Select Location",
             },
             submitHandler: function(form) {
                 requirejs(['sweetAlert2'], function(swal) {

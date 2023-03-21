@@ -20,7 +20,7 @@
             <table id="data-table-viewassigned" class="table table-striped table-bordered align-middle">
                 <thead>
                     <tr>
-                        <th width="1%">No</th>
+                        <th width="1%">No.</th>
                         <th width="1%" data-orderable="false" class="align-middle">Action</th>
                         <th class="text-nowrap">Project Location</th>
                     </tr>

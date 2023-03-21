@@ -16,6 +16,7 @@ $(document).ready(function() {
             [5, 10, 15, 20, 'All'],
         ],
     });
+    
     $("#data-table-default1").DataTable({
         responsive: false,
         lengthMenu: [
