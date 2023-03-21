@@ -33,7 +33,7 @@
                                 <option class="form-label" value="">Please Select</option>
                                 <option class="form-label" {{($months == 'jan') ? 'selected="selected"' : ''}} value="jan">JANUARY</option>
                                 <option class="form-label" {{($months == 'feb') ? 'selected="selected"' : ''}} value="feb">FEBRUARY</option>
-                                <option class="form-label" {{($months == 'mac') ? 'selected="selected"' : ''}} value="mac">MARCH</option>
+                                <option class="form-label" {{($months == 'mac') ? 'selected="selected"' : ''}} value="mar">MARCH</option>
                                 <option class="form-label" {{($months == 'april') ? 'selected="selected"' : ''}} value="april">APRIL</option>
                                 <option class="form-label" {{($months == 'may') ? 'selected="selected"' : ''}} value="may">MAY</option>
                                 <option class="form-label" {{($months == 'june') ? 'selected="selected"' : ''}} value="june">JUNE</option>
@@ -94,7 +94,7 @@
                             <thead>
                                 <tr>
                                     <th width="1%">&nbsp;</th>
-                                    <th class="text-nowrap">No</th>
+                                    <th width="1%">No</th>
                                     <th class="text-nowrap">Action</th>
                                     <th class="text-nowrap">Submitted Date</th>
                                     <th class="text-nowrap">Employee Name</th>

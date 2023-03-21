@@ -21,7 +21,7 @@
                         </div>
                         <div class="col-md-8">
                             {{-- <input type="text"  class="form-control" id="reason" name="amendreason" /> --}}
-                            <textarea class="form-control" id="reason" name="amendreason" rows="3" placeholder="Reason"></textarea>
+                            <textarea class="form-control" id="reason" name="amendreason" rows="3" placeholder="Please Insert Reason"></textarea>
                             {{-- <input type="hidden" id="idV" name="id" class="form-control" aria-describedby="lastname"> --}}
                         </div>
                     </div>

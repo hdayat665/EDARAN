@@ -3,7 +3,7 @@
 @section('content')
 <div id="content" class="app-content">
     <h1 class="page-header">Reporting <small>| Timesheet | Employee Report </small></h1>
-    <div class="panel panel">
+    <div class="panel panel" id="employeeReportByJs">
         <div class="panel-body">
             <div class="row p-2">
                 <div class="col-sm-12">
@@ -15,7 +15,7 @@
                     <h5> Date : {{$date_range}}</h5>
                 </div>
             </div>
-            <table id="departmenttable" class="table table-striped table-bordered align-middle">
+            <table id="tablebydepartment" class="table table-striped table-bordered align-middle">
                 <thead>
                     <tr>
                         <th width="1%">NO</th>

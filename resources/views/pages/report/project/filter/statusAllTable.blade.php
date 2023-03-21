@@ -47,7 +47,18 @@
                     <td class="text-nowrap">{{$project->customer_name}}</td>
                     <td class="text-nowrap">{{$project->project_code}}</td>
                     <td class="text-nowrap">{{$project->project_name}}</td>
-                    <td class="text-nowrap">{{$project->desc}}</td>
+                    <td class="text-nowrap" style="white-space: normal;">
+                    <?php
+                        $desc = $project->desc;
+                        $desc_words = explode(" ", $desc);
+                        $line_length = 5;
+                        for ($i = 0; $i < count($desc_words); $i += $line_length) {
+                        $line_words = array_slice($desc_words, $i, $line_length);
+                        $line = implode(" ", $line_words);
+                        echo $line . "<br>";
+                        }
+                    ?>
+                    </td>
                     <td class="text-nowrap">{{$project->contract_value}}</td>
                     <td class="text-nowrap">{{$project->contract_type}}</td>
                     <td class="text-nowrap">{{$project->financial_year}}</td>

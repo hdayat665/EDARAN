@@ -2,7 +2,7 @@ $(document).ready(function() {
 
     $('#projectReportListing').DataTable({
         responsive: false,
-        scrollX: true,
+        // scrollX: true,
         lengthMenu: [
             [5,10, 15, 20, -1],
             [5,10, 15, 20, 'All'],
@@ -13,7 +13,6 @@ $(document).ready(function() {
             { extend: 'pdf', className: 'btn-sm', orientation: 'landscape' ,exportOptions: {columns:[1,2,3,4,5,6,7,8,9,10]}},
             { extend: 'print', className: 'btn-sm' ,exportOptions: {columns:[1,2,3,4,5,6,7,8,9,10]}}
         ],
-
     });
 
     $('#projectMemberTable').DataTable({

@@ -1613,7 +1613,11 @@ $(document).ready(function() {
     $('#projectlocsearch').picker({ search: true });
     $('#activity_names').picker({ search: true });
     $('#addneweventprojectlocsearch').picker({ search: true });
-    $('#addneweventparticipant').picker({ search: true });
+    // $('#addneweventparticipant').picker({ search: true });
+    // $('#addneweventparticipant').selectpicker();
+    // $('#addneweventparticipant').chosen({
+    //     placeholder_text_multiple: 'Select participants'
+    // });
     $('#addneweventselectproject').picker({ search: true });
     $(function() {
         $("#starttime").mdtimepicker({

@@ -23,6 +23,14 @@
         background-color: rgba(156, 18, 18, 0.815) !important;
         color: rgb(201, 0, 0) !important;
     }
+
+
+
+    .bg-blue {
+   background-color: blue;
+}
+
+
 </style>
 
 
@@ -846,7 +854,7 @@
                                         </a>
                                     </div>
                                     <div class="menu-item">
-                                        <a href="#" class="menu-link">
+                                        <a href="/cashadvanceListing" class="menu-link">
                                             <div class="menu-icon">
                                                 <i class="fa fa-money-bill-1-wave text-gray"></i>
                                             </div>

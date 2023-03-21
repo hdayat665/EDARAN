@@ -34,3 +34,59 @@ $(document).on('change', "#reportby", function() {
         $("#rowemployee").hide();
     }
 });
+
+
+
+
+function validateForm() {
+    const selectedOption = document.getElementById("reportby").value;
+    if (selectedOption === "") {
+        document.getElementById("report_by").innerHTML = "Please Choose Report By:";
+        return false;
+    }
+    return true;
+}
+
+
+
+function validateForm1() {
+  const selectedYear = document.getElementById("yearv").value;
+  const selectedMonth = document.getElementById("monthv").value;
+  const selectedDepartment = document.getElementById("departmentv").value;
+  const selectedEmployee = document.getElementById("employeev").value;
+  if (selectedYear === "") {
+    document.getElementById("year_v").innerHTML = "Please Choose Year";
+    return false;
+  } else {
+    document.getElementById("year_v").innerHTML = "";
+  }
+  if (selectedMonth === "") {
+    document.getElementById("month_v").innerHTML = "Please Choose Month";
+    return false;
+  } else {
+    document.getElementById("month_v").innerHTML = "";
+  }
+  if (selectedDepartment === "") {
+    document.getElementById("department_v").innerHTML = "Please Choose Department";
+    return false;
+  } else {
+    document.getElementById("department_v").innerHTML = "";
+  }
+  if (selectedEmployee === "") {
+    document.getElementById("employee_v").innerHTML = "Please choose Employee Name";
+    return false;
+  } else {
+    document.getElementById("employee_v").innerHTML = "";
+  }
+  return true;
+}
+
+$('#projectid').picker({ search: true });
+$('#departmentid').picker({ search: true });
+$('#employeeid').picker({ search: true });
+
+
+$('#departmentv').picker({ search: true });
+$('#employeev').picker({ search: true });
+
+
