@@ -1611,9 +1611,9 @@ $(document).ready(function() {
     $('#activityOffice').picker({ search: true });
     $('#activity_name_edit').picker({ search: true });
     $('#projectlocsearch').picker({ search: true });
-    $('#activity_names').picker({ search: true });
+    // $('#activity_names').picker({ search: true });
     $('#addneweventprojectlocsearch').picker({ search: true });
-    // $('#addneweventparticipant').picker({ search: true });
+    $('#addneweventparticipant').picker({ search: true });
     // $('#addneweventparticipant').selectpicker();
     // $('#addneweventparticipant').chosen({
     //     placeholder_text_multiple: 'Select participants'

@@ -20,6 +20,7 @@ use App\Http\Controllers\Project\ProjectController;
 use App\Http\Controllers\Report\ProjectReportController;
 use App\Http\Controllers\Report\TimesheetReportController;
 use App\Http\Controllers\Report\EclaimReportController;
+use App\Http\Controllers\COR\CORReportController;
 use App\Http\Controllers\MYLeave\MyleaveController;
 use App\Http\Controllers\Eleave\EleaveController;
 use Illuminate\Support\Facades\Storage;
@@ -585,6 +586,11 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('/getuserleaveApprhod/{id}', 'getuserleaveApprhod');
             Route::post('/updatehod/{id}', 'updatehod');
             Route::post('/updatehodreject/{id}', 'updatehodreject');
+        });
+
+        Route::controller(CORReportController::class)->group(function () {
+            Route::get('/corlisting', 'corlisting');
+            Route::post('/searchcor', 'searchcor');
         });
     });
 });

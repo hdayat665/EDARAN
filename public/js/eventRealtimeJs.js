@@ -407,6 +407,9 @@ $('#statusparticipant').DataTable({
 
 $().ready = function() {
 
+    if ($('#employeesearch').val() || $('#eventsearch').val()) {
+        $('#filterform').show();
+    }
 
     $("#filter").click(function() {
         $('#filterform').toggle();
@@ -597,7 +600,9 @@ $("#durationrt,#starteventdate,#endeventdate,#starteventtime,#endeventtime").foc
 
      $("#reset").on("click", function () {
         $("#employeesearch").val($("#employeesearch").data("default-value"));
+        $("#employeesearch").picker('destroy');
         $("#eventsearch").val($("#eventsearch").data("default-value"));
+        $("#eventsearch").picker('destroy');
         
     });
 
