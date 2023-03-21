@@ -50,10 +50,10 @@
                     </div>
                     <div class="row mb-15px">
                         <div class="col-md-4">
-                            <input type="number" name="contract_value" class="form-control mb-5px" placeholder="CONTRACT VALUE" />
+                            <input type="number" name="contract_value" class="form-control mb-5px" placeholder="CONTRACT VALUE" step="0.01" oninput="formatDecimal(this)"/>
                         </div>
                         <div class="col-md-4">
-                            <select class="form-select" name="contract_type" placeholder="CONTRACT VALUE">
+                            <select class="form-select" name="contract_type">
                                 <option label="PLEASE CHOOSE"></option>
                                 <?php $types = getContractType(); ?>
                                 @foreach ($types as $key => $type)
