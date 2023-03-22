@@ -61,27 +61,29 @@ class TimesheetReportController extends Controller
             $view = 'pages.report.timesheet.employeeReportBySummary';
         }else if($input['category'] == 'Project'){
             $data['projects'] = $trs->getDataEmployeeSummary($input);
-            // if (empty($data['projects'])) {
-            //     // $data['project_name'] = $data['projects'][0]->project_name;
-            //     $data['project_name'] = $trs->getDataEmployeeSummary($input);
-            // }
             $data['date_range'] = $input['date_range'];
+
+            if (isset($input['project'])) {
+                $data['projectname'] = $input['project'];
+            }
+            // $data['employeeName'] = $input['user_id'];
 
             $view = 'pages.report.timesheet.employeeReportByProject';
         }else if($input['category'] == 'Department'){
             $data['departments'] = $trs->getDataEmployeeSummary($input);
             $data['date_range'] = $input['date_range'];
 
-            // $data['department'] = '';
-            // if (isset($input['department'])) {
-            //     $data['department'] = getDepartment($input['department'])->departmentName;
-            // }
-
+            if (isset($input['department'])) {
+                $data['departmentName'] = $input['department'];
+            }
             $view = 'pages.report.timesheet.employeeReportByDepartment';
         }else if($input['category'] == 'Employee'){
             // return app('App\Http\Controllers\Timesheet\MyTimesheetController')->viewTimesheet('1',$input['user_id']);
             $data['employees'] = $trs->getDataEmployeeSummary($input);
             $data['date_range'] = $input['date_range'];
+            if (isset($input['user_id'])) {
+                $data['employeeName'] = $input['user_id'];
+            }
             $view = 'pages.report.timesheet.employeeReportByName';
         }
 
@@ -95,9 +97,21 @@ class TimesheetReportController extends Controller
         $trs = new TimesheetReportService;
         $input = $r->input();
         $data['logs'] = $trs->employeeReportAll($input);
+
+        //to display value on table what user select in menu
+        if (isset($input['department2'])) {
+            $data['departmentName'] = $input['department2'];
+        }
+
+        if (isset($input['year2'])) {
+            $data['year'] = $input['year2'];
+        }
+
+        if (isset($input['month2'])) {
+            $data['month'] = $input['month2'];
+        }
     
         $view = 'pages.report.timesheet.employeeReportAll';
-        // $view = 'pages.report.timesheet.testingreport';
         return view($view, $data);
     }
 

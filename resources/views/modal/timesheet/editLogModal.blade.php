@@ -11,7 +11,7 @@
                         <div class="col-sm-6">
                             <label for="firstname" class="form-label">Type Of Log*</label>
                             <select class="form-select" id="typeoflogedit" name="type_of_log" aria-label="Default select example" style="pointer-events:none;background:#e9ecef;">
-                                <option class="form-label" value="" selected>Please Choose </option>
+                                <option class="form-label" value="" selected>PLEASE CHOOSE </option>
                                 <option class="form-label" value="1">Home</option>
                                 <option class="form-label" value="2">Office</option>
                                 <option class="form-label" value="3">My Project</option>
@@ -30,15 +30,15 @@
                         <div class="col-sm-6" id="officelogedit" style="display:none">
                             <label for="Office-Log" class="form-label">Office Log*</label>
                             <select class="form-select" id="officelog2edit" name="office_log" aria-label="Default select example" style="pointer-events:none;background:#e9ecef;">
-                                <option class="form-label" value="" selected>Please Choose*</option>
+                                <option class="form-label" value="" selected>PLEASE CHOOSE*</option>
                                 <option class="form-label" value="1">My Project</option>
                                 <option class="form-label" value="2">Activity</option>
                             </select>
                         </div>
                         <div class="col-sm-6" id="myprojectedit" style="display:none">
                             <label for="Office-Log" class="form-label">My Project*</label>
-                            <select class="form-select" id="project_id_edit" name="project_id" aria-label="Default select example" style="pointer-events:none;background:#e9ecef;>
-                                <option class="form-label" value="">Please Choose</option>
+                            <select class="form-select" id="project_id_edit" name="project_id" aria-label="Default select example" style="pointer-events:none;background:#e9ecef;">
+                                <option class="form-label" value="">PLEASE CHOOSE</option>
                                 <?php $projects = project_memberaddl($user_id) ?>
                                 @foreach ($projects as $project)
                                 <option value="{{$project->id}}">{{$project->project_name}} - {{$project->project_code}}</option>
@@ -67,7 +67,7 @@
                             <div class="col-sm-6" id="activityByProjectEditHide" style="display: none">
                                 <label for="issuing-country" class="form-label">Activity Name*</label>
                                 <select class="form-select" id="activity_name_edit1" name="activity_name">
-                                    <option class="form-label" value="">Please Choose </option>
+                                    <option class="form-label" value="">PLEASE CHOOSE </option>
                                     <?php $activitys = activityName($department_id) ?> 
                                     @foreach ($activitys as $activity)
                                     <option value="{{$activity->id}}">{{$activity->activity_name}}</option>
@@ -78,7 +78,7 @@
                             <div class="col-sm-6" id="activityByProjectEditHide1" style="display: none">
                                 <label for="issuing-country" class="form-label">Activity Name*</label>
                                 <select class="form-select" id="activity_name_edit2" name="activity_name">
-                                    <option class="form-label" value="">Please Choose by project123 </option>
+                                    <option class="form-label" value="">PLEASE CHOOSE </option>
                                     <?php $activitys = activityName1($department_id) ?> 
                                     @foreach ($activitys as $activity)
                                     <option value="{{$activity->id}}">{{$activity->activity_name}}</option>
@@ -115,7 +115,7 @@
                         <div class="col-sm-6" id="listprojectedit" style="display:none">
                             <label for="Office-Log" class="form-label">My Project*</label>
                             <select class="form-select" id="officeLogProjectEdit" name="office_log_project" aria-label="Default select example">
-                                <option class="form-label" value="">Please Choose</option>
+                                <option class="form-label" value="">PLEASE CHOOSE</option>
                                 <?php $projects = project_memberaddl($user_id) ?>
                                 @foreach ($projects as $project)
                                 <option value="{{$project->id}}">{{$project->project_name}} - {{$project->project_code}}</option>

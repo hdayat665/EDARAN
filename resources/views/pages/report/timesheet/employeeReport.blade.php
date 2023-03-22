@@ -35,7 +35,7 @@
                                 <div class="col-sm-3">
                                     <label for="emergency-firstname" class="form-label">Timesheet Report By :</label>
                                     <select class="form-select" id="reportby" name="category" >
-                                        <option class="form-label" value="" selected>Please Choose</option>
+                                        <option class="form-label" value="" selected>PLEASE CHOOSE</option>
                                         <option class="form-label" value="Summary">SUMMARY</option>
                                         <option class="form-label" value="Project">PROJECT</option>
                                         <option class="form-label" value="Department">DEPARTMENT</option>
@@ -49,7 +49,7 @@
                                 <div class="col-sm-3">
                                     <label for="emergency-firstname" class="form-label">Project</label>
                                     <select class="form-select" id="projectid" name="project">
-                                        <option class="form-label" value="">Please Choose</option>
+                                        <option class="form-label" value="">PLEASE CHOOSE</option>
                                         <?php $projects = project() ?>
                                         @foreach ($projects as $project)
                                         <option value= {{$project->id}}>{{$project->project_name}}</option>
@@ -62,7 +62,7 @@
                                 <div class="col-sm-3">
                                     <label for="emergency-firstname" class="form-label">Department</label>
                                     <select class="form-select" id="departmentid" name="department">
-                                        <option class="form-label" value="">Please Choose</option>
+                                        <option class="form-label" value="">PLEASE CHOOSE</option>
                                         <?php $departments = getDepartment() ?>
                                         @foreach ($departments as $department)
                                         <option value="{{$department->id}}">{{$department->departmentName}}</option>
@@ -75,7 +75,7 @@
                                 <div class="col-sm-3">
                                     <label for="emergency-firstname" class="form-label">Employee Name</label>
                                     <select class="form-select" id="employeeid" name="user_id">
-                                        <option class="form-label" value="" >Please Choose</option>
+                                        <option class="form-label" value="" >PLEASE CHOOSE</option>
                                         <?php $employees = getEmployee() ?>
                                         @foreach ($employees as $employee)
                                         <option value="{{$employee->user_id}}">{{$employee->employeeName}}</option>
@@ -101,7 +101,7 @@
                                 <div class="col-sm-3">
                                     <label for="emergency-firstname" class="form-label">Select Year</label>
                                     <select class="form-select" id="yearv" name="year2">
-                                        <option class="form-label" value="" >Please Choose</option>
+                                        <option class="form-label" value="" >PLEASE CHOOSE</option>
                                         <?php $years = year() ?>
                                         @foreach ($years as $year => $value)
                                         <option value="{{$value}}">{{$value}}</option>
@@ -114,7 +114,7 @@
                                 <div class="col-sm-3">
                                     <label for="emergency-firstname" class="form-label">Select Month</label>
                                     <select class="form-select" id="monthv" name="month2">
-                                        <option class="form-label" value="">Please Choose</option>
+                                        <option class="form-label" value="">PLEASE CHOOSE</option>
                                         <?php $months = month() ?>
                                         @foreach ($months as $month => $value)
                                         <option value="{{$month}}">{{$value}}</option>
@@ -128,7 +128,7 @@
                                 <div class="col-sm-3">
                                     <label for="emergency-firstname" class="form-label">Select Department</label>
                                     <select class="form-select" id="departmentv" name="department2">
-                                        <option class="form-label" value="">Please Choose</option>
+                                        <option class="form-label" value="">PLEASE CHOOSE</option>
                                         <?php $departments = getDepartment() ?>
                                         @foreach ($departments as $department)
                                         <option value="{{$department->departmentName}}">{{$department->departmentName}}</option>
@@ -136,7 +136,7 @@
                                     </select>
                                     <div id="department_v" style="color: red;"></div>
                                     {{-- <select class="form-select" name="department">
-                                        <option class="form-label" value="">Please Choose</option>
+                                        <option class="form-label" value="">PLEASE CHOOSE</option>
                                         <?php $departments = getDepartment() ?>
                                         @foreach ($departments as $department)
                                         <option value="{{$department->id}}">{{$department->departmentName}}</option>
@@ -149,7 +149,7 @@
                                 <div class="col-sm-3">
                                     <label for="emergency-firstname" class="form-label">Select Employee Name</label>
                                     <select class="form-select" id="employeev" name="user_id">
-                                        <option class="form-label" value="" >Please Choose</option>
+                                        <option class="form-label" value="" >PLEASE CHOOSE</option>
                                         <?php $employees = getEmployee() ?>
                                         @foreach ($employees as $employee)
                                         <option value="{{$employee->user_id}}">{{$employee->employeeName}}</option>

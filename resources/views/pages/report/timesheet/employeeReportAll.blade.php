@@ -24,17 +24,17 @@
         <div class="panel-body">
             <div class="row p-2">
                 <div class="col-sm-12">
-                    <h5>Year : 2021</h5>
+                    <h5>Year: {{ $year }}</h5>
                 </div>
             </div>
             <div class="row p-2">
                 <div class="col-sm-12">
-                    <h5> Month : September</h5>
+                    <h5>Month: {{ date('F', mktime(0, 0, 0, $month, 1)) }}</h5>
                 </div>
             </div>
             <div class="row p-2">
                 <div class="col-sm-12">
-                    <h5> Department : Service Delivery Department</h5>
+                    <h5>Department Name: {{ $departmentName }}</h5>
                 </div>
             </div>
             {{-- <table id="summarytable" class="table table-striped table-bordered align-middle">

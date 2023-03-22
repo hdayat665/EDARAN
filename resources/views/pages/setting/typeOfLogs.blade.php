@@ -45,8 +45,8 @@
                                 1 => 'HOME',
                                 2 => 'OFFICE',
                                 3 => 'PROJECT',
-                                4 => 'OTHERS',
-                                // add more mappings as needed
+                                4 => 'NON PROJECT',
+                               
                             ];
                         @endphp
                        <td>{{ isset($typeOfLogNames[$data->type_of_log]) ? $typeOfLogNames[$data->type_of_log] : '-' }}</td>
