@@ -38,8 +38,8 @@
                                                         <?php $employees = getEmployee(); ?>
                                                         <option value="" label="PLEASE CHOOSE"></option>
                                                         @foreach ($employees as $employee)
-                                                            <option value="{{ $employee->id }}" label="{{ $employee->employeeName }}"
-                                                            {{ $employment->eleaverecommender == $employee->id ? "selected='selected'" : '' }}>
+                                                            <option value="{{ $employee->user_id }}" label="{{ $employee->employeeName }}"
+                                                            {{ $employment->eleaverecommender == $employee->user_id ? "selected='selected'" : '' }}>
                                                             </option>
                                                         @endforeach
                                                     </select>
@@ -54,8 +54,8 @@
                                                         <?php $employees = getEmployee(); ?>
                                                         <option value="" label="PLEASE CHOOSE"></option>
                                                         @foreach ($employees as $employee)
-                                                            <option value="{{ $employee->id }}" label="{{ $employee->employeeName }}"
-                                                            {{ $employment->eleaveapprover == $employee->id ? "selected='selected'" : '' }}>
+                                                            <option value="{{ $employee->user_id }}" label="{{ $employee->employeeName }}"
+                                                            {{ $employment->eleaveapprover == $employee->user_id ? "selected='selected'" : '' }}>
                                                             </option>
                                                         @endforeach
                                                     </select>
