@@ -20,7 +20,7 @@
                         <div class="col-sm-2">
                             <label for="emergency-firstname" class="form-label">Employee Name</label>
                             <select class="form-select" id="employeesearch" name="employee_name"  data-default-value="">
-                                <option class="form-label" value="" >Please Choose</option>
+                                <option class="form-label" value="" >PLEASE CHOOSE</option>
                                 <?php $employees = getEmployee() ?>
                                 @foreach ($employees as $employee)
                                 <option value="{{$employee->id}}" {{($employeeId == $employee->id) ? 'selected="selected"' : ''}}>{{$employee->employeeName}}</option>
@@ -30,7 +30,7 @@
                         <div class="col-sm-2">
                             <label for="emergency-lastname" class="form-label">Month</label>
                             <select class="form-select" id="monthsearch"  name="month" data-default-value="">
-                                <option class="form-label" value="">Please Choose</option>
+                                <option class="form-label" value="">PLEASE CHOOSE</option>
                                 <option class="form-label" {{($months == 'Jan') ? 'selected="selected"' : ''}} value="jan">JANUARY</option>
                                 <option class="form-label" {{($months == 'Feb') ? 'selected="selected"' : ''}} value="feb">FEBRUARY</option>
                                 <option class="form-label" {{($months == 'Mar') ? 'selected="selected"' : ''}} value="Mar">MARCH</option>
@@ -48,7 +48,7 @@
                         <div class="col-sm-2">
                             <label for="emergency-firstname" class="form-label">Designation</label>
                             <select class="form-select" id="designsearch"  name="designation" data-default-value="">
-                                <option class="form-label" value="">Please Choose</option>
+                                <option class="form-label" value="">PLEASE CHOOSE</option>
                                 <?php $designations = getDesignation() ?>
                                 @foreach ($designations as $designation)
                                 <option value="{{$designation->designationName}}" {{($deisgnationId == $designation->designationName) ? 'selected="selected"' : ''}}>{{$designation->designationName}}</option>
@@ -58,7 +58,7 @@
                         <div class="col-sm-2">
                             <label for="emergency-firstname" class="form-label">Department</label>
                             <select class="form-select" id="departmentsearch" name="department" data-default-value="">
-                                <option class="form-label" value="">Please Choose</option>
+                                <option class="form-label" value="">PLEASE CHOOSE</option>
                                 <?php $departments = getDepartment() ?>
                                 @foreach ($departments as $department)
                                 <option value="{{$department->departmentName}}"  {{($departmentId == $department->departmentName) ? 'selected="selected"' : ''}}>{{$department->departmentName}}</option>
@@ -68,7 +68,7 @@
                         <div class="col-sm-2">
                             <label for="emergency-firstname" class="form-label">Status</label>
                             <select class="form-select" id="statussearch" name="status" data-default-value="">
-                                <option class="form-label" value="">Please Choose</option>
+                                <option class="form-label" value="">PLEASE CHOOSE</option>
                                 <option class="form-label" {{($statusId == 'pending') ? 'selected="selected"' : ''}} value="pending">AWAITING APPROVAL</option>
                                 <option class="form-label" {{($statusId == 'approve') ? 'selected="selected"' : ''}} value="approve">APPROVE</option>
                                 <option class="form-label" {{($statusId == 'amend') ? 'selected="selected"' : ''}} value="amend">AMENDED</option>

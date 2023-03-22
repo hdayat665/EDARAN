@@ -60,7 +60,8 @@ class EclaimReportService
     ->select('a.*','b.project_id','d.id', 'a.user_id')
     ->where('a.tenant_id', Auth::user()->tenant_id)
     ->where($cond)
-    ->whereBetween('a.created_at', [$startDate, $endDate])
+    // ->whereBetween('a.created_at', [$startDate, $endDate])
+    ->whereBetween('a.created_at', [$startDate, date('Y-m-d', strtotime($endDate. ' + 1 day'))])
     ->get();
 
 
