@@ -3,7 +3,7 @@
 @section('content')
 
 <div id="content" class="app-content">
-    <h1 class="page-header">Reporting <small>| Timesheet | Report Status </small></h1>
+    <h1 class="page-header">Reporting <small>| Timesheet | Status Report </small></h1>
     <div class="panel panel" id="statusReportJs">
 
         <!-- BEGIN panel-heading -->
