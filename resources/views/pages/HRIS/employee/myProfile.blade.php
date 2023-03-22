@@ -117,10 +117,10 @@
                                 <label for="issuing-country" class="form-label">Issuing Country</label>
                                 <select class="form-select" name="issuingCountry">
                                     <option value="0" label="PLEASE CHOOSE"  ></option>
-                                    <?php
-                                        $americass = americas();
-                                        $asias = asias();
-                                    ?>
+                                        <?php
+                                            $americass = americas();
+                                            $asias = asias();
+                                        ?>
                                     <optgroup id="country-optgroup-Americas" label="Americas">
                                         @foreach ($americass as $key => $america)
                                         <option value="{{$key}}" <?php echo ($key == $profile->issuingCountry) ? 'selected="selected"' : '' ?> >{{$america}}</option>

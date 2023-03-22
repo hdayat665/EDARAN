@@ -24,7 +24,7 @@
 						<h3>Leave Types List</h3>
 					</div>
 					<div class="row p-2 ">
-						<button class="btn btn-primary col-2" data-bs-toggle="modal" id="myModal1" data-bs-target="#addleave"> <i class="fa fa-plus" aria-hidden="true"></i> Leave Types</button>
+						<button class="btn btn-primary col-2" data-bs-toggle="modal" id="myModal1" data-bs-target="#addleave"> <i class="fa fa-plus" aria-hidden="true"></i> New Leave Types</button>
 					</div>
 					<div class="row p-2">
 						<table  id="tabletypes"  class="table table-striped table-bordered align-middle">
@@ -109,7 +109,7 @@
 							</div>
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
 						<button class="btn btn-primary" id="saveButton">Save</button>
 					</form>
 					</div>

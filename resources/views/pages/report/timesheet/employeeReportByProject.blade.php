@@ -7,8 +7,7 @@
 		<div class="panel-body">
 			<div class="row p-2">
 				<div class="col-sm-12">
-					<h5>Project Name : @if(!empty($projects) && isset($projects[0])){{$projects[0]->project_name}}@endif
-						{{-- <h5>Project Name : user select</h5> --}}
+					<h5>Project Name: {{ $projects->first()->project_name ?? '-' }}</h5>
 					</h5>
 				</div>
 			</div>

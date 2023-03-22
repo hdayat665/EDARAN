@@ -294,6 +294,7 @@ class EmployeeService
             }
 
             UserProfile::where('user_id', $user_id)->update($input);
+           
 
             $data['status'] = config('app.response.success.status');
             $data['title'] = config('app.response.success.title');

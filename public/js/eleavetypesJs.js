@@ -25,8 +25,8 @@ $(document).ready(function () {
             },
 
             messages: {
-                leave_type_codes: "Please select leave tyoe code",
-                leave_types: "Please Insert leave type",
+                leave_type_codes: "Please Select Leave Type Code",
+                leave_types: "Please Insert Leave Type",
             },
             submitHandler: function (form) {
                 requirejs(["sweetAlert2"], function (swal) {
@@ -89,8 +89,8 @@ $(document).ready(function () {
             },
 
             messages: {
-                leavetypescode: "Please Insert leave types code",
-                leavetypes: "Please Insert leave types",
+                leavetypescode: "Please Insert Leave Types Code",
+                leavetypes: "Please Insert Leave Types",
             },
             submitHandler: function (form) {
                 requirejs(["sweetAlert2"], function (swal) {

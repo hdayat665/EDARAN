@@ -7,12 +7,8 @@
     <div class="panel panel" id="employeeReportByJs">
         <div class="panel-body">
             <div class="row p-2">
-                {{-- @if ($employees)
-                @foreach ($employees->groupBy('employeeName') as $group)
-                    <h5>Filter Option: {{ $group->first()->employeeName }}</h5>
-                @endforeach
-            @endif --}}
-            <h5>Filter Option: Employee Names</h5>
+                <h5> Employee Name : {{$employees->first()->employeeName ?? '-'}}</h5>
+                </h5>
             </div>
             <div class="row p-2">
                 <div class="col-sm-12">

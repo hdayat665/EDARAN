@@ -10,6 +10,7 @@
                 <table id="myProjectTable" class="table table-striped table-bordered align-middle">
                     <thead>
                         <tr>
+                            <th>No.</th>
                             <th class="text-nowrap">Customer Name</th>
                             <th class="text-nowrap">Project Code</th>
                             <th class="text-nowrap">Project Name</th>
@@ -22,8 +23,9 @@
                     </thead>
                     <tbody>
                         @if ($datas)
-                        @foreach ($datas as $myProject)
+                        @foreach ($datas as $key => $myProject)
                         <tr>
+                            <td>{{ $key + 1 }}</td>
                             <td>{{$myProject->customer_name}}</td> 
                             <td>{{$myProject->project_code}}</td>
                             <td>{{$myProject->project_name}}</td>
@@ -122,7 +124,7 @@
                         <table id="data-table-default1" class="table table-striped table-bordered align-middle" style="width:100%">
                             <thead>
                                 <tr>
-                                    <th class="text-nowrap">No.</th>
+                                    <th width="1%" class="text-nowrap">No.</th>
                                     <th class="text-nowrap">Location Name</th>
                                 </tr>
                             </thead>

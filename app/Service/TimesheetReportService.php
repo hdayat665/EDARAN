@@ -93,6 +93,7 @@ class TimesheetReportService
             ->select('a.*', 'b.project_name', 'c.employeeName', 'd.departmentName', 'e.designationName','c.COR')
             ->where($cond)
             ->whereBetween('date', [$startDate, $endDate])
+            // ->whereBetween('date', [$startDate, date('Y-m-d', strtotime($endDate. ' + 1 day'))])
             // ->whereMonth('a.date', $month)
             // ->whereYear('a.date', $year)
             ->get();

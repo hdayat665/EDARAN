@@ -34,7 +34,7 @@
                     </div>
                     <div class="row mb-15px">
                         <div class="col-md-12">
-                            <textarea type="text" class="form-control " rows="5" name="desc" style="text-transform: uppercase;" placeholder="DESCRIPTION"></textarea>
+                            <textarea type="text" class="form-control " rows="5" name="desc" style="text-transform: uppercase;" placeholder="DESCRIPTION" maxlength="225"></textarea>
                         </div>
                     </div>
                     <div class="row">
@@ -50,10 +50,10 @@
                     </div>
                     <div class="row mb-15px">
                         <div class="col-md-4">
-                            <input type="number" name="contract_value" class="form-control mb-5px" placeholder="CONTRACT VALUE" />
+                            <input type="number" name="contract_value" class="form-control mb-5px" placeholder="CONTRACT VALUE"  onchange="this.value=parseFloat(this.value).toFixed(2);" />
                         </div>
                         <div class="col-md-4">
-                            <select class="form-select" name="contract_type" placeholder="CONTRACT VALUE">
+                            <select class="form-select" name="contract_type">
                                 <option label="PLEASE CHOOSE"></option>
                                 <?php $types = getContractType(); ?>
                                 @foreach ($types as $key => $type)

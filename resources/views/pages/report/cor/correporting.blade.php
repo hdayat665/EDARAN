@@ -14,7 +14,7 @@
                <div class="mb-3 row">
                    <label for="staticEmail" class="col-sm-2 col-form-label">Select Date</label>
                    <div class="col-sm-3">
-                     <input type="text" class="form-control" id="datepickercor" value="">
+                     <input type="text" class="form-control" id="datepickercor" name="date_range" value="">
                    </div>
                </div>
                <div class="mb-3 row">
@@ -36,11 +36,11 @@
                            <option class="form-label" value="" >Aliya</option>
                            <option class="form-label" value="" >Nurul Ikhlas</option>
                        </select> --}}
-                       <select class="form-select" id="employeesearch" name="employee_name"  data-default-value="">
+                       <select class="form-select" id="employeeid" name="user_id">
                         <option class="form-label" value="" >Please Choose</option>
                         <?php $employees = getEmployee() ?>
                         @foreach ($employees as $employee)
-                        <option value="{{$employee->id}}" {{($employeeId == $employee->id) ? 'selected="selected"' : ''}}>{{$employee->employeeName}}</option>
+                        <option value="{{$employee->user_id}}">{{$employee->employeeName}}</option>
                         @endforeach
                     </select>
                    </div>
