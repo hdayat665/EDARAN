@@ -2128,13 +2128,13 @@ $(document).ready(function() {
       
     // $('#hidestart, #hideend').hide();
 
-    $('#alldayc').change(function() {
-        if (this.checked) {
-            $('#hidestart, #hideend').hide();
-        } else {
-            $('#hidestart, #hideend').show();
-        }
-    });
+    // $('#alldayc').change(function() {
+    //     if (this.checked) {
+    //         $('#hidestart, #hideend').hide();
+    //     } else {
+    //         $('#hidestart, #hideend').show();
+    //     }
+    // });
     
     
 
