@@ -11,6 +11,7 @@ $(document).ready(function () {
     });
     $(document).on("change", "#claimcategory", function () {
         id = $(this).val();
+        $("#labelcategory").show();
         const inputs = ["contentLabel"];
 
         for (let i = 0; i < inputs.length; i++) {

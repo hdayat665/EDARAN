@@ -90,6 +90,31 @@ if (!function_exists('getCountryRegisterDomain')) {
 //         return $data;
 //     }
 // }
+function manyFile($filename, $uploadedFile)
+{
+    $allowedTypes = ['pdf', 'jpeg', 'jpg', 'png'];
+    $maxSize = 5120; // 5MB
+
+    $extension = pathinfo($filename, PATHINFO_EXTENSION);
+
+    if (!in_array($extension, $allowedTypes)) {
+        throw new Exception("Invalid file type. Only PDF, JPEG, PNG, and JPG files are allowed.");
+    }
+
+    if (filesize($uploadedFile) > $maxSize * 1024) {
+        throw new Exception("File size exceeds the maximum allowed limit of 5 MB.");
+    }
+
+    $newFilename = uniqid() . '.' . $extension;
+    Storage::disk('local')->put(
+        'public/' . $newFilename,
+        file_get_contents($uploadedFile)
+    );
+
+    $data['filename'] = $newFilename;
+
+    return $data;
+}
 
 if (!function_exists('upload')) {
     function upload($uploadedFile, $type = '')
@@ -118,6 +143,7 @@ if (!function_exists('upload')) {
         return $data;
     }
 }
+
 if (!function_exists('uploadAppeal')) {
     function uploadAppeal($uploadedFile, $type = '')
     {
@@ -668,6 +694,31 @@ if (!function_exists('getStatusProject')) {
             'WARRANTY' => 'WARRANTY',
             'CLOSED' => 'CLOSED',
         ];
+
+        return $data;
+    }
+}
+if (!function_exists('myProjectOnly')) {
+    function myProjectOnly()
+    {
+        $employee = Employee::where('user_id', Auth::user()->id)->first();
+        // pr(Auth::user()->id);
+        $projectMember = ProjectMember::select('project_id')->where('employee_id', '=', $employee->id)->groupBy('project_id')->get();
+
+        foreach ($projectMember as $project) {
+            $projectId[] = $project->project_id;
+        } 
+
+        $data = DB::table('project_member as a')
+            ->leftJoin('project as b', 'a.project_id', '=', 'b.id')
+            ->leftJoin('customer as c', 'b.customer_id', '=', 'c.id')
+            ->select('a.id as member_id', 'a.status as request_status', 'a.location', 'a.id as memberId', 'b.*', 'c.customer_name')
+            ->where([['a.employee_id', '=', $employee->id], ['a.status', 'approve']])
+            ->get();
+        // pr($data);
+        if (!$data) {
+            $data = [];
+        }
 
         return $data;
     }
@@ -1511,7 +1562,10 @@ if (!function_exists('getClaimCategory')) {
     {
         $data = ClaimCategory::where('tenant_id', Auth::user()->tenant_id)
                      ->where('status','=', '1')
-                     ->where('claim_type', '=', 'GC')
+                     ->where(function($query) {
+                         $query->where('claim_type', '=', 'GC')
+                               ->orWhere('claim_type', '=', 'MTC,GC');
+                     })
                      ->get();
 
         if (!$data) {
@@ -1522,13 +1576,17 @@ if (!function_exists('getClaimCategory')) {
     }
 }
 
+
 if (!function_exists('getClaimCategoryMtc')) {
     function getClaimCategoryMtc($id = '')
     {
         $data = ClaimCategory::where('tenant_id', Auth::user()->tenant_id)
                      ->where('status','=', '1')
-                     ->where('claim_type', '=', 'MTC')
-                     ->get();
+                     ->where(function($query) {
+                        $query->where('claim_type', '=', 'MTC')
+                              ->orWhere('claim_type', '=', 'MTC,GC');
+                    })
+                    ->get();
 
         if (!$data) {
             $data = [];

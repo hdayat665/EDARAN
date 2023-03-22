@@ -32,7 +32,7 @@
                             <div class="col-md-8">
                                 <input type="hidden" name="general_id" value="{{ Request::segment(4) }}">
                                 <input type="hidden" value="{{ isset($month_id) ? month($month_id) : $month }}" name="month">
-                                <input type="text" class="form-control" name="applied_date" readonly id="datepickerpc">
+                                <input type="text" style="pointer-events: none;" class="form-control" name="applied_date" readonly id="datepickerpc">
                                 <input type="hidden" value="{{ $year }}" name="year">
                             </div>
                         </div>
@@ -113,7 +113,7 @@
                                 <input type="hidden" name="general_id" value="{{ Request::segment(4) }}">
                                 <input type="hidden" value="{{ isset($month_id) ? month($month_id) : $month }}" name="month">
                                 <input type="hidden" value="{{ $year }}" name="year">
-                                <input type="hidden " class="form-control" id="datepickertc" readonly name="travel_date">
+                                <input type="hidden " class="form-control" id="datepickertc"  name="travel_date">
                             </div>
                         </div>
                         <div class="row p-2">
@@ -121,13 +121,13 @@
                                 <label class="form-label">Start Time</label>
                             </div>
                             <div class="col-md-3">
-                                <input type="text" id="timestart" name="start_time" class=" form-control" value="" placeholder="choose time">
+                                <input type="text" id="timestart" name="start_time" style=" background: #ffffff;" class=" form-control" value="" placeholder="choose time">
                             </div>
                             <div class="col-md-2">
                                 <label class="form-label">End Time</label>
                             </div>
                             <div class="col-md-3">
-                                <input type="text" id="timeend" name="end_time" class=" form-control" placeholder="choose time">
+                                <input type="text" id="timeend" name="end_time" class=" form-control" style=" background: #ffffff;" placeholder="choose time">
                             </div>
                         </div>
                         <div id="" style="display: none">
@@ -218,7 +218,7 @@
                                 <select class="form-select" id="" name="project_id">
                                     <option class="form-label" value="" selected>
                                         Please Select</option>
-                                    <?php $projects = project(); ?>
+                                    <?php $projects = myProjectOnly(); ?>
                                     @foreach ($projects as $project)
                                         <option class="form-label" value="{{ $project->id }}">{{ $project->project_name }}</option>
                                     @endforeach
@@ -270,7 +270,7 @@
                                 <select class="form-select" id="dest" name="project_id">
                                     <option class="form-label" value="" selected>
                                         Please Select</option>
-                                    <?php $projects = project(); ?>
+                                    <?php $projects = myProjectOnly(); ?>
                                     @foreach ($projects as $project)
                                         <option class="form-label" value="{{ $project->id }}">{{ $project->project_name }}</option>
                                     @endforeach
@@ -363,7 +363,7 @@
                                 <label class="form-label">Petrol/Fares</label>
                             </div>
                             <div class="col-md-3">
-                                <input type="number" class="form-control" id="petrol" name="petrol">
+                                <input type="number" class="form-control" id="petrol" name="petrol" step="0.01">
                             </div>
                         </div>
                         <div class="row p-2">
@@ -489,7 +489,7 @@
                                                         <label class="form-label">Start Time</label>
                                                     </div>
                                                     <div class="col">
-                                                        <input type="text" class="form-control" name="end_date" placeholder="Time" id="time1">
+                                                        <input type="text" class="form-control" name="end_date" style=" background: #ffffff;" placeholder="Time" id="time1">
                                                     </div>
                                                 </div>
                                             </div>
@@ -511,7 +511,7 @@
                                                         <label class="form-label">End Time</label>
                                                     </div>
                                                     <div class="col">
-                                                        <input type="text" class="form-control" name="end_time" placeholder="Time" id="time2">
+                                                        <input type="text" class="form-control" name="end_time" style=" background: #ffffff;" placeholder="Time" id="time2">
                                                     </div>
                                                 </div>
                                             </div>
@@ -535,7 +535,7 @@
                                     <select class="form-select" name="project_id">
                                         <option class="form-label" value="" selected>
                                             Please Select</option>
-                                        <?php $projects = project(); ?>
+                                        <?php $projects = myProjectOnly(); ?>
                                         @foreach ($projects as $project)
                                             <option class="form-label" value="{{ $project->id }}">{{ $project->project_name }}</option>
                                         @endforeach
@@ -562,7 +562,7 @@
                                     <input  type="text" class="form-control" readonly value="{{ $food[0]['breakfast'] }}" id="BF">
                                 </div>
                                 <div class="col-md-2">
-                                    <label class="form-label">X day =</label>
+                                    <label class="form-label">X day</label>
                                 </div>
                                 <div class="col-md-2"> 
                                     <input type="text" class="form-control" name="breakfast" value="0" id="DBF">
@@ -577,7 +577,7 @@
                                     <input  type="text" class="form-control" readonly value="{{ $food[0]['lunch'] }}" id="LH">
                                 </div>
                                 <div class="col-md-2">
-                                    <label class="form-label">X day =</label>
+                                    <label class="form-label">X day</label>
                                 </div>
                                 <div class="col-md-2">
                                     <input type="text" name="lunch" class="form-control" value="0" id="DLH">
@@ -593,7 +593,7 @@
                                     <input  type="text" class="form-control" readonly value="{{ $food[0]['dinner'] }}" id="DN">
                                 </div>
                                 <div class="col-md-2">
-                                    <label class="form-label">X day =</label>
+                                    <label class="form-label">X day</label>
                                 </div>
                                 <div class="col-md-2">
                                     <input type="text" name="dinner" class="form-control" value="0" id="DDN">
@@ -605,7 +605,7 @@
                                 <div class="col-md-2"> </div>
                                 <div class="col-md-2"> </div>
                                 <div class="col-md-2">
-                                    Total Subsistence
+                                    (A) Total Subsistence
                                 </div>
                                 <div class="col-md-2">
                                     <input readonly type="text" name="total_subs" class="form-control" value="0" id="TS">
@@ -626,7 +626,7 @@
                                     <input  type="text" class="form-control"  id="hotelcv1" value="0">
                                 </div>
                                 <div class="col-md-2">
-                                    <label class="form-label">X Night =</label>
+                                    <label class="form-label">X Night</label>
                                 </div>
                                 <div class="col-md-2">
                                     <input type="text" name="hotel" class="form-control" id="hn" disabled value="0">
@@ -647,7 +647,7 @@
                                     <input readonly type="text" class="form-control" id="lodgingcv1" value="0">
                                 </div>
                                 <div class="col-md-2">
-                                    <label class="form-label">X Night =</label>
+                                    <label class="form-label">X Night</label>
                                 </div>
                                 <div class="col-md-2">
                                     <input type="text" name="lodging" class="form-control" value="0" id="ln" disabled>
@@ -661,7 +661,7 @@
                                 </div>
                                 <div class="col-md-2"> </div>
                                 <div class="col-md-2">
-                                    <label class="form-label">Total Accomodation</label>
+                                    <label class="form-label">(B) Total Accomodation</label>
                                 </div>
                                 <div class="col-md-2">
                                     <input readonly type="text" name="total_acc" class="form-control" value="0" id="TAV">
@@ -675,7 +675,7 @@
                                 </div>
                                 <div class="col-md-2"> </div>
                                 <div class="col-md-2">
-                                    <label class="form-label">TOTAL</label>
+                                    <label class="form-label">(A+B) TOTAL</label>
                                 </div>
                                 <div class="col-md-2">
                                     <input readonly type="text" name="total" class="form-control" value="" id="total2">

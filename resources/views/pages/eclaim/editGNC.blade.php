@@ -76,7 +76,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="row p-2">
+                                    <div class="row p-2" >
                                         <div class="col-md-3">
                                             <label class="form-label">Claim Category</label>
                                         </div>
@@ -91,7 +91,7 @@
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="row p-2">
+                                    <div class="row p-2" id="labelcategory" style="display: none">
                                         <div class="col-md-3">
                                             <label class="form-label" id="label"></label>
                                         </div>
@@ -123,7 +123,7 @@
                                             <label class="form-label">Supporting Document</label>
                                         </div>
                                         <div class="col-md-9">
-                                            <input type="file" name="file_upload" class="form-control-file" id="">
+                                            <input type="file" class="form-control-file" name="file_upload[]" id="supportdocument" multiple>
                                         </div>
                                     </div>
                                 </div>
@@ -157,7 +157,16 @@
                                                 <td>{{ $detail->claim_catagory ?? $detail->claim_category }}</td>
                                                 <td>{{ $detail->amount }}</td>
                                                 <td>{{ $detail->desc }}</td>
-                                                <td> <a href="/storage/{{ $detail->file_upload }}">{{ $detail->file_upload }}</a></td>
+                                                <td>
+                                                @if(!empty($detail->file_upload))
+                                                    @php
+                                                    $filenames = explode(',', $detail->file_upload);
+                                                    @endphp
+                                                    @foreach($filenames as $filename)
+                                                    <a href="/storage/{{ $filename }}" target="_blank">{{ $filename }}</a><br>
+                                                    @endforeach
+                                                @endif
+                                                </td>
                                             </tr>
                                         @endforeach
                                     @endif

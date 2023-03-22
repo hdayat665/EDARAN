@@ -37,9 +37,14 @@ class myClaimService
         $input = $r->input();
 
         if ($_FILES['file_upload']['name']) {
-            $filename = upload($r->file('file_upload'));
-            $filenames = $filename['filename'];
+            $filenames = array();
+            foreach ($_FILES['file_upload']['tmp_name'] as $key => $tmp_name) {
+                $filename = manyFile($_FILES['file_upload']['name'][$key], $tmp_name);
+                $filenames[] = $filename['filename'];
+            }
         }
+        $fileString = implode(',', $filenames);
+        
 
         $generalClaimCount = GeneralClaim::where([['tenant_id', Auth::user()->tenant_id], ['claim_type', 'GNC']])->count();
         
@@ -49,7 +54,6 @@ class myClaimService
         }
 
         // add to general claim
-        
         $generalClaim['user_id'] = Auth::user()->id;
         $generalClaim['tenant_id'] = Auth::user()->tenant_id;
         $generalClaim['claim_id'] = 'GNC' . $generalClaimCount + 1;
@@ -79,7 +83,7 @@ class myClaimService
         $generalDetail['claim_category_detail'] = $input['claim_category_detail'];
         $generalDetail['amount'] = $input['amount'];
         $generalDetail['desc'] = $input['desc'];
-        $generalDetail['file_upload'] = $filenames ?? '';
+        $generalDetail['file_upload'] = $fileString ?? '';
 
         GeneralClaimDetail::create($generalDetail);
 
@@ -144,10 +148,14 @@ class myClaimService
         $input = $r->input();
         // pr($input);
         if ($_FILES['file_upload']['name']) {
-            $filename = upload($r->file('file_upload'));
-            $filenames = $filename['filename'];
+            $filenames = array();
+            foreach ($_FILES['file_upload']['tmp_name'] as $key => $tmp_name) {
+                $filename = manyFile($_FILES['file_upload']['name'][$key], $tmp_name);
+                $filenames[] = $filename['filename'];
+            }
         }
-
+        $fileString = implode(',', $filenames);
+ 
         $generalClaimData = GeneralClaim::where([['tenant_id', Auth::user()->tenant_id], ['id', $id]])->first();
 
         $generalDetail = [];
@@ -159,7 +167,7 @@ class myClaimService
         $generalDetail['claim_category_detail'] = $input['claim_category_detail'];
         $generalDetail['amount'] = $input['amount'];
         $generalDetail['desc'] = $input['desc'];
-        $generalDetail['file_upload'] = $filenames ?? '';
+        $generalDetail['file_upload'] = $fileString ?? '';
 
         GeneralClaimDetail::create($generalDetail);
 

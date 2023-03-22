@@ -111,7 +111,7 @@
                                         </div>
                                     </div>
                                     {{-- akan tarik data dari  labelling name dlam setting add claim --}}
-                                    <div class="row p-2" id="labelcategory" style="display: none">
+                                    <div class="row p-2" id="labelcategory" style="display: none"> 
                                         <div class="col-md-3">
                                             <label class="form-label" id="label"></label>
                                         </div>
@@ -143,7 +143,7 @@
                                             <label class="form-label">Supporting Document</label>
                                         </div>
                                         <div class="col-md-9">
-                                            <input type="file" class="form-control-file" name="file_upload" id="supportdocument">
+                                            <input type="file" class="form-control-file" name="file_upload[]" id="supportdocument" multiple>
                                         </div>
                                     </div>
                                 </div>
