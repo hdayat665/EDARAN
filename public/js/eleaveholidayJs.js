@@ -42,7 +42,7 @@ $(document).ready(function () {
             },
 
             messages: {
-                holiday_title: "Please select holiday title",
+                holiday_title: "Please Insert Holiday Title",
                 start_date: "Please Insert start date",
                 end_date: "Please Insert end date",
             },
