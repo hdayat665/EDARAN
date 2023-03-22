@@ -2051,7 +2051,7 @@ class SettingService
         // date_default_timezone_set("Asia/Kuala_Lumpur");
         $etData = holidayModel::where([['holiday_title', $input['holiday_title']], ['tenant_id', Auth::user()->tenant_id]])->first();
         if ($etData) {
-            $data['msg'] = 'Title already exists in list holiday.';
+            $data['msg'] = 'Title Already Exists';
             $data['status'] = config('app.response.error.status');
             $data['type'] = config('app.response.error.type');
             $data['title'] = config('app.response.error.title');
@@ -2116,7 +2116,7 @@ class SettingService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Successfully update holiday';
+        $data['msg'] = 'Holiday Is Deactivated';
 
         return $data;
     }
@@ -2172,7 +2172,7 @@ class SettingService
         // date_default_timezone_set("Asia/Kuala_Lumpur");
         $etData = leavetypesModel::where([['leave_types_code', $input['leave_types_code']], ['tenant_id', Auth::user()->tenant_id]])->first();
         if ($etData) {
-            $data['msg'] = 'Title already exists in list holiday.';
+            $data['msg'] = 'Leave Type Code Already Exists';
             $data['status'] = config('app.response.error.status');
             $data['type'] = config('app.response.error.type');
             $data['title'] = config('app.response.error.title');

@@ -284,8 +284,8 @@ $(document).ready(function () {
 
             messages: {
                 applied_date: "Please Insert Applied Date Title",
-                typeofleave: "Please Insert Type of Leave",
-                noofday: "Please Insert No of Day",
+                typeofleave: "Please Select Type of Leave",
+                noofday: "Please Select No of Day(s) Applied",
                 reason: "Please Insert Reason",
                 leave_date: "Please Insert leave date",
                 start_date: "Please Insert start date",

@@ -34,7 +34,7 @@
             </div>
             <div class="row mb-15px">
                 <div class="col-md-12">
-                    <textarea type="text" class="form-control " rows="5" placeholder="DESCRIPTION" style="text-transform: uppercase;"name="desc">{{ $project->desc ?? '' }}</textarea>
+                    <textarea type="text" class="form-control " rows="5" placeholder="DESCRIPTION" style="text-transform: uppercase;" name="desc" maxlength="225">{{ $project->desc ?? '' }}</textarea>
                 </div>
             </div>
             <div class="row">
@@ -49,10 +49,10 @@
                 </div>
             </div>
             <div class="row mb-15px">
-                <div class="col-md-4">
-                    <input type="number" class="form-control mb-5px" name="contract_value" placeholder="CONTRACT VALUE"
-                        value="{{ $project->contract_value ?? '' }}" />
-                </div>
+            <div class="col-md-4">
+                <input type="number" step="0.01" class="form-control mb-5px" name="contract_value" placeholder="CONTRACT VALUE"
+                    value="{{ $project->contract_value ?? '' }}" onchange="this.value=parseFloat(this.value).toFixed(2);" />
+            </div>
                 <div class="col-md-4">
                     <select class="form-select" name="contract_type">
                         <option label="PLEASE CHOOSE"></option>
@@ -97,7 +97,7 @@
                 <div class="col-md-4">
                     <input type="text" class="form-control" name="contract_start_date"
                         value="{{ $project->contract_start_date ?? '' }}" id="datepicker-start"
-                        placeholder="YYYY/MM/DD" />
+                        placeholder="YYYY/MM/DD"/>
                 </div>
                 <div class="col-md-4">
                     <input type="text" class="form-control" name="contract_end_date"
