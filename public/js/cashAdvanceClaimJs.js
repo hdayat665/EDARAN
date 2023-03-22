@@ -15,7 +15,7 @@ $(document).ready(function () {
             $("#btnOO").hide();
             $("#btnONO").hide();
         } else if ($(this).val() == "2") {
-            $(".PO").hide();
+            $(".PO").hide(); 
             $(".PNO").show();
             $(".MOT").show();
             $(".OTHERSNO").hide();
@@ -160,7 +160,7 @@ $(document).ready(function () {
     //
     $(
         "#day,#subs,#night,#acco,#totalsubs,#totalacco,#fuelfare,#tollparking,#ent"
-    ).change(function () {
+    ).focus(function () {
         var a = parseFloat($("#totalsubs").val());
         var b = parseFloat($("#totalacco").val());
         var c = parseFloat($("#fuelfare").val());

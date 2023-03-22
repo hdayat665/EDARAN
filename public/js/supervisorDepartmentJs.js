@@ -216,9 +216,9 @@ $(document).ready(function () {
         $("#modalamend").modal("show");
     });
 
-    // $("#filter").click(function(){
-    // $("#filteronoff").toggle();
-    // });
+    $("#filter").click(function(){ 
+    $("#filteronoff").toggle();
+    });
 
     $("tfoot").each(function () {
         $(this).insertAfter($(this).siblings("thead"));
@@ -315,6 +315,39 @@ $(document).ready(function () {
         });
     });
 
+    $('#approveAllButton').click(function(e) {
+        requirejs(['sweetAlert2'], function(swal) {
+
+            var data = new FormData(document.getElementById("approveAllForm"));
+
+            $.ajax({
+                type: "POST",
+                url: "/approveAllClaim",
+                data: data,
+                dataType: "json",
+                async: false,
+                processData: false,
+                contentType: false,
+            }).done(function(data) {
+                swal({
+                    title: data.title,
+                    text: data.msg,
+                    type: data.type,
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'OK'
+                }).then(function() {
+                    if (data.type == 'error') {
+
+                    } else {
+                        location.reload();
+                    }
+
+
+                });
+            });
+
+        });
+    });
     $("#amendButton").click(function (e) {
         var id = $("#amendId").val();
         var stage = "supervisor";
