@@ -7,6 +7,7 @@
                 <table id="data-table-projectrequest" class="table table-striped table-bordered align-middle">
                     <thead>
                         <tr>
+                            <th>No.</th>
                             <th class="text-nowrap">Action</th>
                             <th class="text-nowrap">Customer Name</th>
                             <th class="text-nowrap">Project Code</th>
@@ -20,8 +21,9 @@
                     </thead>
                     <tbody> 
                         @if ($projectInfos)
-                            @foreach ($projectInfos as $project)
+                            @foreach ($projectInfos as $key => $project) <!-- add $key variable -->
                                 <tr class="odd gradeX">
+                                    <td>{{ $key + 1 }}</td> <!-- display sequential number -->
                                     <td>
                                         @if (in_array($project->id, $projectIdPending))
                                             <a href="#" class="btn btn-warning btn-xs" id="cancelRequestButton"

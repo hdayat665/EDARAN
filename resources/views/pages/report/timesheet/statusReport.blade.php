@@ -3,7 +3,7 @@
 @section('content')
 
 <div id="content" class="app-content">
-    <h1 class="page-header">Reporting <small>| Timesheet | Report Status </small></h1>
+    <h1 class="page-header">Reporting <small>| Timesheet | Status Report </small></h1>
     <div class="panel panel" id="statusReportJs">
 
         <!-- BEGIN panel-heading -->
@@ -27,7 +27,7 @@
                         <div class="col-sm-3">
                             <label for="emergency-firstname" class="form-label">Employer Name</label>
                             <select class="form-select" id="employeesearch" name="employeeName" data-default-value="">
-                                <option class="form-label" value="" >Please Select</option>
+                                <option class="form-label" value="" >PLEASE CHOOSE</option>
                                 <?php $employees = getEmployee() ?>
                                 @foreach ($employees as $employee)
                                 <option value="{{$employee->employeeName}}">{{$employee->employeeName}}</option>
@@ -38,7 +38,7 @@
                         <div class="col-sm-3">
                             <label for="emergency-firstname" class="form-label">Year</label>
                             <select class="form-select" id="yearsearch" name="year" data-default-value="">
-                                <option class="form-label" value="" >Please Select</option>
+                                <option class="form-label" value="" >PLEASE CHOOSE</option>
                                 <?php $years = year() ?>
                                 @foreach ($years as $year => $value)
                                 <option value="{{$value}}">{{$value}}</option>
@@ -48,7 +48,7 @@
                         <div class="col-sm-3">
                             <label for="emergency-firstname" class="form-label">Month</label>
                             <select class="form-select" id="monthsearch"  name="month" data-default-value="">
-                                <option class="form-label" value="">Please Select</option>
+                                <option class="form-label" value="">PLEASE CHOOSE</option>
                                 <?php $months = month() ?>
                                 @foreach ($months as $month => $value)
                                 <option value="{{$month}}">{{$value}}</option>
@@ -58,7 +58,7 @@
                         <div class="col-sm-3">
                             <label for="emergency-firstname" class="form-label">Designation</label>
                             <select class="form-select" id="designationsearch" name="designation" data-default-value="">
-                                <option class="form-label" value="">Please Select</option>
+                                <option class="form-label" value="">PLEASE CHOOSE</option>
                                 <?php $designations = getDesignation() ?>
                                 @foreach ($designations as $designation)
                                 <option value="{{$designation->designationName}}">{{$designation->designationName}}</option>
@@ -71,7 +71,7 @@
                         <div class="col-sm-3">
                             <label for="emergency-firstname" class="form-label">Department</label>
                             <select class="form-select" id="departmentsearch" name="department" data-default-value="">
-                                <option class="form-label" value="">Please Select</option>
+                                <option class="form-label" value="">PLEASE CHOOSE</option>
                                 <?php $departments = getDepartment() ?>
                                 @foreach ($departments as $department)
                                 <option value="{{$department->departmentName}}">{{$department->departmentName}}</option>
@@ -81,7 +81,7 @@
                         <div class="col-sm-3">
                             <label for="emergency-firstname" class="form-label">Status</label>
                             <select class="form-select" id="statussearch" name="status" data-default-value="">
-                                <option class="form-label" value="">Please Select</option>
+                                <option class="form-label" value="">PLEASE CHOOSE</option>
                                 <option class="form-label" value="approve">APPROVE</option>
                                 <option class="form-label" value="pending">AWAITING APPROVAL</option>
                                 <option class="form-label" value="amend">AMENDED</option>

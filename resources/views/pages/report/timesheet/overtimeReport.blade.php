@@ -22,7 +22,7 @@
                         <div class="col-sm-2">
                             <label for="emergency-firstname" class="form-label">Employer Name</label>
                             <select class="form-select" id="employeenamesearch" name="employeeName" data-default-value="">
-                                <option class="form-label" value="" >Please Select</option>
+                                <option class="form-label" value="" >PLEASE CHOOSE</option>
                                 <?php $employees = getEmployee() ?>
                                 @foreach ($employees as $employee)
                                 <option value="{{$employee->user_id}}">{{$employee->employeeName}}</option>
@@ -32,7 +32,7 @@
                         <div class="col-sm-2">
                             <label for="emergency-firstname" class="form-label">Year</label>
                             <select class="form-select" id="yearsearch" name="year" data-default-value="">
-                                <option class="form-label" value="">Please Select</option>
+                                <option class="form-label" value="">PLEASE CHOOSE</option>
                                 <?php $years = year() ?>
                                 @foreach ($years as $year => $key)
                                 <option value="{{$key}}">{{$year}}</option>
@@ -42,7 +42,7 @@
                         <div class="col-sm-2">
                             <label for="emergency-firstname" class="form-label">Month</label>
                             <select class="form-select" id="monthsearch" name="month" data-default-value="">
-                                <option class="form-label" value="">Please Select</option>
+                                <option class="form-label" value="">PLEASE CHOOSE</option>
                                 <?php $months = month() ?>
                                 @foreach ($months as $month => $key)
                                 <option value="{{$month}}">{{$key}}</option>
@@ -52,7 +52,7 @@
                         <div class="col-sm-2">
                             <label for="emergency-firstname" class="form-label">Designation</label>
                             <select class="form-select" id="designationsearch" name="designation" data-default-value="">
-                                <option class="form-label" value="">Please Select</option>
+                                <option class="form-label" value="">PLEASE CHOOSE</option>
                                 <?php $designations = getDesignation() ?>
                                 @foreach ($designations as $designation)
                                 <option value="{{$designation->designationName}}">{{$designation->designationName}}</option>
@@ -62,7 +62,7 @@
                         <div class="col-sm-2">
                             <label for="emergency-firstname" class="form-label">Department</label>
                             <select class="form-select" id="departmentsearch" name="department" data-default-value="">
-                                <option class="form-label" value="">Please Select</option>
+                                <option class="form-label" value="">PLEASE CHOOSE</option>
                                 <?php $departments = getDepartment() ?>
                                 @foreach ($departments as $department)
                                 <option value="{{$department->departmentName}}">{{$department->departmentName}}</option>

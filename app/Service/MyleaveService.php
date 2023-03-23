@@ -180,7 +180,7 @@ class MyleaveService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success create myleave';
+        $data['msg'] = 'Leave Application is Applied';
 
         return $data;
 
@@ -216,7 +216,7 @@ class MyleaveService
             $data['status'] = config('app.response.success.status');
             $data['type'] = config('app.response.success.type');
             $data['title'] = config('app.response.success.title');
-            $data['msg'] = 'Success delete your leave';
+            $data['msg'] = 'Leave Application Is Cancelled';
         }
 
         return $data;

@@ -36,7 +36,8 @@ class cashAdvanceController extends Controller
     }
 
     public function cashAdvanceView()
-    {
+    {   
+        
         return view('pages.eclaim.cashAdvance');
     }
 

@@ -19,7 +19,7 @@
                 <table id="customerTable" class="table table-striped table-bordered align-middle">
                     <thead>
                         <tr>
-                            <th class="text-nowrap">No</th>
+                            <th class="text-nowrap">No.</th>
                             <th width="8%" data-orderable="false" class="align-middle">Action</th>
                             <th class="text-nowrap">Status</th>
                             <th class="text-nowrap">Customer Name</th>

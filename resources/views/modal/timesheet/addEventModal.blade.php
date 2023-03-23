@@ -30,17 +30,17 @@
                         </div>
                     </div>
                     <div class="row p-2">
-                        <div class="col-sm-6">
+                        <div class="col-sm-6" id="hidestart">
                             <label for="issuing-country" class="form-label">Start Time*</label>
                             <div class="">
                                 <input id="starteventtime" type="text" name="start_time" class="form-control" value="00:00 AM" style=" background: #ffffff;"/>
                                 <!-- <div class="input-group-text"><i class="fa fa-clock"></i></div> -->
                             </div>
                         </div>
-                        <div class="col-sm-6">
+                        <div class="col-sm-6" id="hideend">
                             <label for="issuing-country" class="form-label">End Time*</label>
                             <div class="">
-                                <input id="endeventtime" type="text" name="end_time" class="form-control" value="00:00 AM" style=" background: #ffffff;"/>
+                                <input id="endeventtime" type="text" name="end_time" class="form-control" value="11:59 PM" style=" background: #ffffff;"/>
                                 <!-- <div class="input-group-text"><i class="fa fa-clock"></i></div> -->
                             </div>
                         </div>
@@ -54,7 +54,7 @@
                         <div class="col-sm-2">
                             <div style="padding-top:20px;">
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" name="type_recurring[]" value="allday" type="checkbox"  name="inlineRadioOptions" >
+                                    <input class="form-check-input" name="type_recurring[]" value="allday" type="checkbox" id="alldayc"  name="inlineRadioOptions" >
                                     <label class="form-label" id="addeventallday">All Day</label>
                                 </div>
                                 {{-- <div class="form-check form-check-inline">
@@ -81,7 +81,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row p-2">
+                    <div class="row p-2" style="display:none">
                         <div class="col-sm-6" id="addneweventrecurring" style="display:none">
                             <label for="firstname" class="form-label">Recurring*</label>
                             <select class="form-select" name="recurring" id="addneweventselectrecurring" aria-label="Default select example">
@@ -336,7 +336,7 @@
                         <div class="col-sm-6">
                             <label for="issuing-country" class="form-label">Project</label>
                             <select class="selectpicker form-select" name="project_id" id="addneweventselectproject" aria-label="Default select example">
-                                <option class="form-label" value="">Please Choose</option>
+                                <option class="form-label" value="">PLEASE CHOOSE</option>
                                 <?php $projects = project() ?>
                                 @foreach ($projects as $project)
                                 <option class="form-label" value="{{$project->id}}">{{$project->project_name}}</option>
@@ -368,7 +368,7 @@
                         <div class="col-sm-6">
                             <label for="firstname" class="form-label">Participant*</label>
                             <select class="selectpicker form-select" name="participant[]" id="addneweventparticipant" aria-label="Default select example"   multiple>
-                                {{-- <option class="form-label" value="">Please Choose</option> --}}
+                                {{-- <option class="form-label" value="">PLEASE CHOOSE</option> --}}
                                 <?php $employees = getEmployee() ?>
                                 @foreach ($employees as $employee)
                                 <option class="form-label" value="{{$employee->user_id}}">{{$employee->employeeName}}</option>
