@@ -288,8 +288,8 @@ $(document).ready(function () {
                 noofday: "Please Select No of Day(s) Applied",
                 reason: "Please Insert Reason",
                 leave_date: "Please Insert leave date",
-                start_date: "Please Insert start date",
-                end_date: "Please Insert end date",
+                start_date: "Please Insert Start Date",
+                end_date: "Please Insert End Date",
                 flexRadioDefault: "Please select morning or evening",
             },
             submitHandler: function (form) {
