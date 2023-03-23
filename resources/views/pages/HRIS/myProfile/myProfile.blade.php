@@ -70,7 +70,7 @@
                                 </div>
                             </div>
                             <div class="col-sm-6">
-                                <label for="email" class="form-label">Personal Email*</label>
+                                <label for="email" class="form-label">Personal Email</label>
                                 <input type="email" id="email" name="personalEmail" value="{{$profile->personalEmail ?? ''}}" class="form-control" aria-describedby="email" placeholder="email@gmail.com">
                             </div>
 
@@ -123,11 +123,14 @@
                                 </div>
                             </div>
                             {{-- new --}}
-                            <div class="col-sm-3">
+                            <div class="col-sm-6">
                                 <label for="idattach" class="form-label" >ID Attachment</label>
-                                <input id="fileupload" type="file" multiple="multiple" name="file" value="{{$profile->file}}">
-                                
+                                <input id="fileupload" type="file" name="fileID" class="form-control">
+                                @if ($profile->fileID)
+                                    Click <a href="{{ route('download', ['filename' => $profile->fileID]) }}">here</a> to see ID Attachment.
+                                @endif
                             </div>
+                            {{-- </div>
                             <div class="col-sm-3 ">
                                 <div class="row p-2"></div>
                                <div class="row p-2">
@@ -137,9 +140,7 @@
                                 </span>
                             @endif
                                </div>
-                            </div>
-                            
-                                                        
+                            </div> --}}                      
                         </div>
 
                         <div class="row p-2">
@@ -153,7 +154,7 @@
                             </div>
                             <div class="col-sm-3 part">
                                 <label for="expirydate" class="form-label">Expiry Date*</label>
-                                <input type="text" id="expirydatemyprofile" name="expiryDate" value="{{ date_format(date_create($profile->expiryDate ?? null), 'Y-m-d') ?? '' }}" placeholder="YYYY-MM-DD" class="form-control" aria-describedby="expirydate" style="pointer-events: none;" readonly>
+                                <input type="text" id="expirydatemyprofile" name="expiryDate" value="{{ ($profile->expiryDate !== null) ? date_format(date_create($profile->expiryDate), 'Y-m-d') : '' }}" placeholder="YYYY-MM-DD" class="form-control" aria-describedby="expirydate" style="pointer-events: none;" readonly>
                             </div>
                             <div class="col-sm-3">
                                 <label for="issuing-country" class="form-label">Issuing Country*</label>
@@ -253,9 +254,12 @@
                             </div>
                                 </div>
                             </div>
-                            <div class="col-sm-3 part">
+                            <div class="col-sm-6 part">
                                 <label for="idattach" class="form-label" >OKU Attachment*</label>
-                                <input type="file" class="form-control-file" id="okuattach" style="pointer-events: none">
+                                <input type="file" class="form-control" id="okuattach" name="okuFile" style="pointer-events: none">
+                                @if ($profile->okuFile)
+                                    Click <a href="{{ route('download', ['filename' => $profile->okuFile]) }}">here</a> to see ID Attachment.
+                                @endif
                             </div> 
                         </div>
                         <hr class="mt-5">

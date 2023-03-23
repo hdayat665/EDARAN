@@ -179,6 +179,7 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('/getJobHistory', 'getJobHistory');
             Route::get('/getVehicle', 'getVehicle');
             Route::get('/getChildren/{id}', 'getChildren');
+            Route::get('/getChildrenById/{id}', 'getChildrenById');
             Route::get('/getSiblingById/{id}', 'getSiblingById');
             Route::get('/getParentById/{id}', 'getParentById');
             Route::get('/getVehicleById/{id}', 'getVehicleById');

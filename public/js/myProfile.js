@@ -607,7 +607,6 @@ $(document).ready(function () {
     for (let i = 0; i < educationIds.length; i++) {
         const type = educationIds[i];
         $('#educationModalEdit' + type).click(function(e) {
-    
             id = $(this).data('id');
             var educationData = getEducation(id);
     
@@ -1586,9 +1585,7 @@ $(document).ready(function () {
                         $("#t2").prop("checked") ||
                         $("#t3").prop("checked")
                     ) {
-                        var data = new FormData(
-                            document.getElementById("updateCompanionForm" + no)
-                        );
+                        var data = new FormData(document.getElementById("updateCompanionForm" + no));
 
                         $.ajax({
                             type: "POST",
@@ -2042,7 +2039,9 @@ $(document).ready(function () {
             var childrenData = getChildren(id);
 
             childrenData.done(function (data) {
+                console.log(data.data);
                 child = data.data;
+                $("#idChildren").val(child.id);
                 $("#DOB1").val(child.DOB);
                 $("#age1").val(child.age);
                 $("#created_at1").val(child.created_at);
@@ -2057,6 +2056,7 @@ $(document).ready(function () {
                 $("#gender1").prop("selectedIndex", child.gender);
                 $("#id1").val(child.id);
                 $("#idNo1").val(child.idNo);
+                $("#oldIdNumber1").val(child.oldIDNo);
                 $("#instituition1").val(child.instituition);
                 $("#issuingCountry1").val(child.issuingCountry);
                 $("#supportDoc123").html(
@@ -3134,17 +3134,44 @@ function getAddressforCompanion(id){
     });
 }
 
+// $("#datepicker-fromdate").datepicker({
+//     todayHighlight: true,
+//     autoclose: true,
+//     format: "yyyy/mm/dd",
+// });
+
+// $("#datepicker-todate").datepicker({
+//     todayHighlight: true,
+//     autoclose: true,
+//     format: "yyyy/mm/dd",
+// });
+
+// Initialize the datepicker for the from date
 $("#datepicker-fromdate").datepicker({
     todayHighlight: true,
     autoclose: true,
     format: "yyyy/mm/dd",
 });
 
+// Initialize the datepicker for the to date
 $("#datepicker-todate").datepicker({
     todayHighlight: true,
     autoclose: true,
     format: "yyyy/mm/dd",
+}).on("changeDate", function(e) {
+    // Get the from date
+    var fromDate = $("#datepicker-fromdate").datepicker("getDate");
+
+    // Get the to date
+    var toDate = e.date;
+
+    // Compare the dates
+    if (toDate < fromDate) {
+        alert("To date cannot be before from date!");
+        $(this).datepicker("setDate", fromDate);
+    }
 });
+
 
 $("#datepicker-fromdateu").datepicker({
     todayHighlight: true,
