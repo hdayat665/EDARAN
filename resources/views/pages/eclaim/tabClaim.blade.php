@@ -41,8 +41,10 @@
                                         <a href="javascript:;" class="btn btn-primary btn-sm">Action</a>
                                         <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle btn-sm"><i class="fa fa-caret-down"></i></a>
                                         <div class="dropdown-menu dropdown-menu-end">
-                                            <a href="/viewGeneralClaim/{{ $claim->id }}"class="dropdown-item">View General
+                                            <a href="/viewGeneralClaim/{{ $claim->id }}" class="dropdown-item">View General
                                                 Claim</a>
+                                                <div class="dropdown-divider"></div>
+                                            <a data-id="{{ $claim->id }}" class="dropdown-item cancelButton">Cancel Claim</a>
                                         </div>
                                     @endif
                                     

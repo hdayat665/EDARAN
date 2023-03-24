@@ -31,7 +31,8 @@
                             </div>
                             <div class="col-md-8">
                                 <input type="hidden" name="general_id" value="{{ Request::segment(4) }}">
-                                <input type="hidden" value="{{ isset($month_id) ? month($month_id) : $month }}" name="month">
+                                <input type="hidden" value="{{ isset($month_id) ? monthMTC($month_id) : $month }}" name="month">
+
                                 <input type="text" style="pointer-events: none;" class="form-control" name="applied_date" readonly id="datepickerpc">
                                 <input type="hidden" value="{{ $year }}" name="year">
                             </div>

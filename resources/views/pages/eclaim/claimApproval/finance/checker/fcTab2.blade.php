@@ -16,7 +16,7 @@
         </thead>
         <tbody>
             @foreach ($claims as $claim)
-                
+                @if ($claim->hod == 'recommend' && $claim->f1 == 'recommend')
                     <tr>
                         <td style="text-align: center"><input class="form-check-input" type="checkbox" />
                         <td>
@@ -52,7 +52,7 @@
                         <td>{{ $claim->status ?? '-' }}</td>
                         <td>{{ $claim->updated_at ?? '-' }}</td>
                     </tr>
-                
+                @endif
             @endforeach
         </tbody>
     </table>
