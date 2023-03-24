@@ -22,16 +22,19 @@ $(document).ready(function () {
             url: "/getClaimContentById/" + id,
         });
     }
-
+    
     $(document).on("click", "#buttonView", function () {
         var id = $(this).data("id");
-        var contentData = getClaimContent(id);
+        var contentData = getClaimContent(id); 
+
         contentData.done(function (data) {
-            console.log(data.claim_category_content);
+            //console.log(contentData);
+            
             // $("#year").val(data.year);
             // $("#month").val(data.month);
+            
             $("#applied_date").val(data.applied_date);
-            $("#claim_category").val(data.claim_category);
+            $("#claim_category").val(data.claim_category_name);
             $("#label").text(data.claim_category_content.label);
             $("#contents").val(data.claim_category_content.content);
             $("#amount").val(data.amount);
@@ -44,7 +47,10 @@ $(document).ready(function () {
                     "</a>"
             );
         });
+        // Get the claim category ID from the input field
+
         $("#viewModal").modal("show");
+
     });
 
     $(document).on("click", "#btn-view-subsistence", function () {

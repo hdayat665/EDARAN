@@ -1276,7 +1276,31 @@ if (!function_exists('month')) {
         return $data;
     }
 }
+if (!function_exists('monthMTC')) {
+    function monthMTC($id = '')
+    {
+        $data = [
+            '01' => 'January',
+            '02' => 'February',
+            '03' => 'March',
+            '04' => 'April',
+            '05' => 'May',
+            '06' => 'June',
+            '07' => 'July',
+            '08' => 'August',
+            '09' => 'September',
+            '10' => 'October',
+            '11' => 'November',
+            '12' => 'December',
+        ];
 
+        if ($id) {
+            return $data[$id];
+        }
+
+        return $data;
+    }
+}
 if (!function_exists('year')) {
     function year()
     {
@@ -1622,6 +1646,21 @@ if (!function_exists('getClaimCategoryById')) {
     }
 }
 
+// if (!function_exists('getClaimCategoryNameById')) {
+//     function getClaimCategoryNameById($id = '')
+//     {
+//         $data = ClaimCategory::where([['id', $id]])->first();
+
+//         if (!$data) {
+//             $data = [];
+//         }
+        
+//         // pr($data);
+
+//         return $data->claim_catagory;
+//     }
+// }
+
 if (!function_exists('getGNCDetailByGeneralId')) {
     function getGNCDetailByGeneralId($id = '')
     {
@@ -1642,12 +1681,16 @@ if (!function_exists('getGNCDetailByGeneralId')) {
 if (!function_exists('getClaimContentById')) {
     function getClaimContentById($id = '')
     {
-        $data = GeneralClaimDetail::where([['id', $id]])->with('claim_category_content')->first();
+        $data = GeneralClaimDetail::where('general_claim_details.id', $id)
+        ->leftJoin('claim_category', 'general_claim_details.claim_category', '=', 'claim_category.id')
+        ->select('general_claim_details.*', 'claim_category.claim_catagory as claim_category_name')
+        ->with('claim_category_content')
+        ->first();
 
         if (!$data) {
             $data = [];
         }
-
+        
         return $data;
     }
 }
@@ -1870,7 +1913,7 @@ if (!function_exists('getMyClaimMonth')) {
         if (!$data) {
             $data = [];
         }
-
+        
         //pr($data);
         return $data;
     }
@@ -1895,7 +1938,7 @@ if (!function_exists('checkingMonthlyClaim')) {
             $data['id'] = $claim->id;
             $data['status'] = $claim->status;
         }
-        //pr($data);
+        
         return $data;
     }
 }

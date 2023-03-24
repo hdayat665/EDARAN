@@ -39,7 +39,7 @@
                         <label class="form-label">Claim Category</label>
                     </div>
                     <div class="col-md-9">
-                        <input type="text" class="form-control" value="{{ $detail->claim_catagory }}" readonly>
+                        <input type="text" class="form-control" id="claim_category"  readonly>
                     </div>
                 </div>
                 {{-- akan tarik data dari  labelling name dlam setting add claim --}}
@@ -72,7 +72,16 @@
                         <label class="form-label">Supporting Document</label>
                     </div>
                     <div class="col-md-9">
-                        <div id="file_upload"></div>
+                        <div>
+                            @if(!empty($detail->file_upload))
+                                @php
+                                $filenames = explode(',', $detail->file_upload);
+                                @endphp
+                                @foreach($filenames as $filename)
+                                <a href="/storage/{{ $filename }}" target="_blank">{{ $filename }}</a><br>
+                                @endforeach
+                            @endif
+                        </div>
                     </div>
                 </div>
             </div>

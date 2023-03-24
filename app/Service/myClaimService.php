@@ -142,6 +142,19 @@ class myClaimService
 
         return $data;
     }
+    public function getClaimCategoryNameById($id = '')
+    {
+        $data = ClaimCategory::where([['id', $id]])->first();
+
+        if (!$data) {
+            $data = [];
+        }
+        
+        // pr($data);
+
+        return $data->claim_catagory;
+    }
+    
 
     public function updateGeneralClaim($r, $id = '')
     {
