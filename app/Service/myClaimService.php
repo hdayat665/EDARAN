@@ -909,5 +909,20 @@ class myClaimService
 
         return $data;
     }
-    
+    public function cancelGNC($id)
+    {
+
+        $claim['status'] = "draft";
+        $claim['supervisor'] = "";
+        
+        GeneralClaim::where([['tenant_id', Auth::user()->tenant_id], ['id', $id]])->update($claim);
+
+        $data['status'] = config('app.response.success.status');
+        $data['type'] = config('app.response.success.type');
+        $data['title'] = config('app.response.success.title');
+        $data['msg'] = 'Success';
+
+        return $data;
+    }
+
 }
