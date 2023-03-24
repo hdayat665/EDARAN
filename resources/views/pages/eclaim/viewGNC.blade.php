@@ -59,7 +59,16 @@
                                                     <td>{{ $detail->claim_catagory }}</td>
                                                     <td>{{ $detail->amount }}</td>
                                                     <td>{{ $detail->desc }}</td>
-                                                    <td><a href="/storage/{{ $detail->file_upload }}">{{ $detail->file_upload }}</a></td>
+                                                    <td>
+                                                    @if(!empty($detail->file_upload))
+                                                    @php
+                                                    $filenames = explode(',', $detail->file_upload);
+                                                    @endphp
+                                                    @foreach($filenames as $filename)
+                                                    <a href="/storage/{{ $filename }}" target="_blank">{{ $filename }}</a><br>
+                                                    @endforeach
+                                                        @endif
+                                                    </td>
                                                 </tr>
                                             @endforeach
                                         @endif
@@ -80,4 +89,5 @@
         </div>
         @include('modal.eclaim.viewGNC')
     </div>
+    
 @endsection

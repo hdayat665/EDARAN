@@ -75,7 +75,7 @@ class ProjectReportService
         $tenant_id = Auth::user()->tenant_id;
 
         $data = Project::where([['tenant_id', $tenant_id], ['customer_id', $customer_id]])->get();
-
+        
         if (!$data) {
             $data = [];
         }

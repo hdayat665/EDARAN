@@ -156,7 +156,7 @@ $("document").ready(function () {
             diff -= mins * (1000 * 60);
 
             $("#result1").val(
-                days + " days : " + hours + " hours : " + mins + " minutes "
+                days + " nights : " + hours + " hours : " + mins + " minutes "
             );
             $("#DBF").val(days);
             $("#DLH").val(days); 
@@ -259,7 +259,7 @@ $("document").ready(function () {
             var ss = "100"; // this is the value to check against
 
             if ($("#htv").val() == ss) {
-                $('#hotelcv').prop('readonly', false);
+                $('#hotelcv').prop('readonly', true);
             } else {
                 $('#hotelcv').prop('readonly', true);
             }
@@ -289,7 +289,7 @@ $("document").ready(function () {
             var ss = "100"; // this is the value to check against
 
             if ($("#ldgv").val() == ss) {
-                $('#lodgingcv').prop('readonly', false);
+                $('#lodgingcv').prop('readonly', true);
             } else {
                 $('#lodgingcv').prop('readonly', true);
             }
@@ -326,11 +326,11 @@ $("document").ready(function () {
         var d = parseInt($("#ln").val());
         var e = parseFloat(a * b + c * d).toFixed(2);
         $("#TAV").val(e);
-    });
+    }); 
 
     $(
         "#hotelcv,#hotelcv1,#hn,#lodgingcv,#hotelcv1,#ln,#htv,#ldgv,#TS,#TAV,#DBF,#DLH,#DDN"
-    ).change(function () {
+    ).focus(function () {
         var a = parseFloat($("#TS").val());
         var b = parseFloat($("#TAV").val());
         var c = parseFloat(a + b).toFixed(2);

@@ -127,8 +127,8 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('/createChequeNumberCa/{id}', 'createChequeNumberCa');
             Route::post('/createPvNumberCa/{id}', 'createPvNumberCa');
             Route::post('/createClearCa/{id}', 'createClearCa');
-
-
+            Route::post('/approveAllClaim', 'approveAllClaim');
+            Route::post('/approveAllCa', 'approveAllCa');
 
 
 
@@ -552,6 +552,7 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('/appealMtc', 'createAppealMtc');
             Route::post('/approveAppealMtc/{id}', 'approveAppealMtc');
             Route::post('/rejectAppealMtc/{id}', 'rejectAppealMtc');
+            Route::post('/cancelGNC/{id}', 'cancelGNC');
         });
 
         Route::controller(generalClaimController::class)->group(function () {

@@ -37,12 +37,18 @@ class myClaimService
         $input = $r->input();
 
         if ($_FILES['file_upload']['name']) {
-            $filename = upload($r->file('file_upload'));
-            $filenames = $filename['filename'];
+            $filenames = array();
+            foreach ($_FILES['file_upload']['tmp_name'] as $key => $tmp_name) {
+                $filename = manyFile($_FILES['file_upload']['name'][$key], $tmp_name);
+                $filenames[] = $filename['filename'];
+            }
         }
+        $fileString = implode(',', $filenames);
+        
 
-        $generalClaimCount = GeneralClaim::where([['tenant_id', Auth::user()->tenant_id], ['type', 'GNC']])->count();
-
+        $generalClaimCount = GeneralClaim::where([['tenant_id', Auth::user()->tenant_id], ['claim_type', 'GNC']])->count();
+        
+        
         if (!$generalClaimCount) {
             $generalClaimCount = 0;
         }
@@ -77,7 +83,7 @@ class myClaimService
         $generalDetail['claim_category_detail'] = $input['claim_category_detail'];
         $generalDetail['amount'] = $input['amount'];
         $generalDetail['desc'] = $input['desc'];
-        $generalDetail['file_upload'] = $filenames ?? '';
+        $generalDetail['file_upload'] = $fileString ?? '';
 
         GeneralClaimDetail::create($generalDetail);
 
@@ -136,16 +142,33 @@ class myClaimService
 
         return $data;
     }
+    public function getClaimCategoryNameById($id = '')
+    {
+        $data = ClaimCategory::where([['id', $id]])->first();
+
+        if (!$data) {
+            $data = [];
+        }
+        
+        // pr($data);
+
+        return $data->claim_catagory;
+    }
+    
 
     public function updateGeneralClaim($r, $id = '')
     {
         $input = $r->input();
         // pr($input);
         if ($_FILES['file_upload']['name']) {
-            $filename = upload($r->file('file_upload'));
-            $filenames = $filename['filename'];
+            $filenames = array();
+            foreach ($_FILES['file_upload']['tmp_name'] as $key => $tmp_name) {
+                $filename = manyFile($_FILES['file_upload']['name'][$key], $tmp_name);
+                $filenames[] = $filename['filename'];
+            }
         }
-
+        $fileString = implode(',', $filenames);
+ 
         $generalClaimData = GeneralClaim::where([['tenant_id', Auth::user()->tenant_id], ['id', $id]])->first();
 
         $generalDetail = [];
@@ -157,7 +180,7 @@ class myClaimService
         $generalDetail['claim_category_detail'] = $input['claim_category_detail'];
         $generalDetail['amount'] = $input['amount'];
         $generalDetail['desc'] = $input['desc'];
-        $generalDetail['file_upload'] = $filenames ?? '';
+        $generalDetail['file_upload'] = $fileString ?? '';
 
         GeneralClaimDetail::create($generalDetail);
 
@@ -185,6 +208,8 @@ class myClaimService
     public function deleteGNCDetail($id)
     {
         $GNCDetail = GeneralClaimDetail::find($id);
+        $GNCId = $GNCDetail->general_id;
+       
 
         if (!$GNCDetail) {
             $data['status'] = config('app.response.error.status');
@@ -193,7 +218,21 @@ class myClaimService
             $data['msg'] = 'Detail not found';
         } else {
             // DB::query("DELETE FROM general_claim_detail WHERE id = $id");
+            
             $GNCDetail->delete($id);
+
+            $generalDetailData = GeneralClaimDetail::where([['tenant_id', Auth::user()->tenant_id], ['general_id', $GNCId]])->get();
+
+            foreach ($generalDetailData as $generalClaimDetail) {
+                $total[] = $generalClaimDetail['amount'];
+            }
+            
+            $totalAmount = array_sum($total);
+
+            $generalClaim = [];
+            $generalClaim['total_amount'] = $totalAmount;
+            GeneralClaim::where([['tenant_id', Auth::user()->tenant_id], ['id', $GNCId]])->update($generalClaim);
+        
 
             $data['status'] = config('app.response.success.status');
             $data['type'] = config('app.response.success.type');
@@ -712,6 +751,17 @@ class myClaimService
 
         return $car;
     }
+
+    public function getEntitlementAreaByJobGrade($id = '')
+    {
+        $jobGrade = Employee::where('user_id', $id)->value('jobGrade');
+        $entitle = EntitleGroup::where('job_grade', $jobGrade)->get();
+
+        //pr($entitle);
+
+        return $entitle;
+    }
+
     public function getEntitlementByJobGradeMotor($id = '')
     {
 
@@ -859,5 +909,20 @@ class myClaimService
 
         return $data;
     }
-    
+    public function cancelGNC($id)
+    {
+
+        $claim['status'] = "draft";
+        $claim['supervisor'] = "";
+        
+        GeneralClaim::where([['tenant_id', Auth::user()->tenant_id], ['id', $id]])->update($claim);
+
+        $data['status'] = config('app.response.success.status');
+        $data['type'] = config('app.response.success.type');
+        $data['title'] = config('app.response.success.title');
+        $data['msg'] = 'Success';
+
+        return $data;
+    }
+
 }

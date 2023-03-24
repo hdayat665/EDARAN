@@ -1,5 +1,7 @@
 <div class="tab-pane fade active show" id="default-tab-1">
     <!-- {{-- claim approval --}} -->
+    <form id="approveAllForm">
+
     <table id="active" class="table table-striped table-bordered align-middle">
         <thead>
             <tr>
@@ -19,7 +21,8 @@
             @foreach ($cas as $ca)
                 @if ($ca->status == 'active' && $ca->approver == '')
                     <tr>
-                        <td style="text-align: center"><input class="form-check-input" type="checkbox" />
+                        <td width="1%" class="fw-bold text-dark" style="text-align: center"><input class="form-check-input" value="{{$ca->id}}" name="id[]" type="checkbox" id="checkbox1" /></td>
+
                         <td>
                             <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle" data-button-spinner="processing" id="spinner"><i class="fa fa-cogs"></i> Action <i
                                     class="fa fa-caret-down"></i></a>
@@ -48,4 +51,5 @@
             @endforeach
         </tbody>
     </table>
+    </form>
 </div>

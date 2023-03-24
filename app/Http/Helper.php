@@ -28,6 +28,7 @@ use App\Models\UserProfile;
 use App\Models\Users;
 use App\Models\UserRole;
 use App\Models\TransportMillage;
+use App\Models\EclaimGeneral;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -89,6 +90,31 @@ if (!function_exists('getCountryRegisterDomain')) {
 //         return $data;
 //     }
 // }
+function manyFile($filename, $uploadedFile)
+{
+    $allowedTypes = ['pdf', 'jpeg', 'jpg', 'png'];
+    $maxSize = 5120; // 5MB
+
+    $extension = pathinfo($filename, PATHINFO_EXTENSION);
+
+    if (!in_array($extension, $allowedTypes)) {
+        throw new Exception("Invalid file type. Only PDF, JPEG, PNG, and JPG files are allowed.");
+    }
+
+    if (filesize($uploadedFile) > $maxSize * 1024) {
+        throw new Exception("File size exceeds the maximum allowed limit of 5 MB.");
+    }
+
+    $newFilename = uniqid() . '.' . $extension;
+    Storage::disk('local')->put(
+        'public/' . $newFilename,
+        file_get_contents($uploadedFile)
+    );
+
+    $data['filename'] = $newFilename;
+
+    return $data;
+}
 
 if (!function_exists('upload')) {
     function upload($uploadedFile, $type = '')
@@ -117,6 +143,7 @@ if (!function_exists('upload')) {
         return $data;
     }
 }
+
 if (!function_exists('uploadAppeal')) {
     function uploadAppeal($uploadedFile, $type = '')
     {
@@ -624,6 +651,15 @@ if (!function_exists('getCustomer')) {
     }
 }
 
+if (!function_exists('getArea')) {
+    function getArea()
+    {
+        $data = EclaimGeneral::where('tenant_id', Auth::user()->tenant_id)->get();
+        
+        return $data;
+    }
+}
+
 if (!function_exists('getState')) {
     function getState()
     {
@@ -658,6 +694,31 @@ if (!function_exists('getStatusProject')) {
             'WARRANTY' => 'WARRANTY',
             'CLOSED' => 'CLOSED',
         ];
+
+        return $data;
+    }
+}
+if (!function_exists('myProjectOnly')) {
+    function myProjectOnly()
+    {
+        $employee = Employee::where('user_id', Auth::user()->id)->first();
+        // pr(Auth::user()->id);
+        $projectMember = ProjectMember::select('project_id')->where('employee_id', '=', $employee->id)->groupBy('project_id')->get();
+
+        foreach ($projectMember as $project) {
+            $projectId[] = $project->project_id;
+        } 
+
+        $data = DB::table('project_member as a')
+            ->leftJoin('project as b', 'a.project_id', '=', 'b.id')
+            ->leftJoin('customer as c', 'b.customer_id', '=', 'c.id')
+            ->select('a.id as member_id', 'a.status as request_status', 'a.location', 'a.id as memberId', 'b.*', 'c.customer_name')
+            ->where([['a.employee_id', '=', $employee->id], ['a.status', 'approve']])
+            ->get();
+        // pr($data);
+        if (!$data) {
+            $data = [];
+        }
 
         return $data;
     }
@@ -1215,7 +1276,31 @@ if (!function_exists('month')) {
         return $data;
     }
 }
+if (!function_exists('monthMTC')) {
+    function monthMTC($id = '')
+    {
+        $data = [
+            '01' => 'January',
+            '02' => 'February',
+            '03' => 'March',
+            '04' => 'April',
+            '05' => 'May',
+            '06' => 'June',
+            '07' => 'July',
+            '08' => 'August',
+            '09' => 'September',
+            '10' => 'October',
+            '11' => 'November',
+            '12' => 'December',
+        ];
 
+        if ($id) {
+            return $data[$id];
+        }
+
+        return $data;
+    }
+}
 if (!function_exists('year')) {
     function year()
     {
@@ -1499,7 +1584,33 @@ if (!function_exists('getUserByUserRole')) {
 if (!function_exists('getClaimCategory')) {
     function getClaimCategory($id = '')
     {
-        $data = ClaimCategory::where('tenant_id', Auth::user()->tenant_id)->get();
+        $data = ClaimCategory::where('tenant_id', Auth::user()->tenant_id)
+                     ->where('status','=', '1')
+                     ->where(function($query) {
+                         $query->where('claim_type', '=', 'GC')
+                               ->orWhere('claim_type', '=', 'MTC,GC');
+                     })
+                     ->get();
+
+        if (!$data) {
+            $data = [];
+        }
+
+        return $data;
+    }
+}
+
+
+if (!function_exists('getClaimCategoryMtc')) {
+    function getClaimCategoryMtc($id = '')
+    {
+        $data = ClaimCategory::where('tenant_id', Auth::user()->tenant_id)
+                     ->where('status','=', '1')
+                     ->where(function($query) {
+                        $query->where('claim_type', '=', 'MTC')
+                              ->orWhere('claim_type', '=', 'MTC,GC');
+                    })
+                    ->get();
 
         if (!$data) {
             $data = [];
@@ -1535,6 +1646,21 @@ if (!function_exists('getClaimCategoryById')) {
     }
 }
 
+// if (!function_exists('getClaimCategoryNameById')) {
+//     function getClaimCategoryNameById($id = '')
+//     {
+//         $data = ClaimCategory::where([['id', $id]])->first();
+
+//         if (!$data) {
+//             $data = [];
+//         }
+        
+//         // pr($data);
+
+//         return $data->claim_catagory;
+//     }
+// }
+
 if (!function_exists('getGNCDetailByGeneralId')) {
     function getGNCDetailByGeneralId($id = '')
     {
@@ -1555,12 +1681,16 @@ if (!function_exists('getGNCDetailByGeneralId')) {
 if (!function_exists('getClaimContentById')) {
     function getClaimContentById($id = '')
     {
-        $data = GeneralClaimDetail::where([['id', $id]])->with('claim_category_content')->first();
+        $data = GeneralClaimDetail::where('general_claim_details.id', $id)
+        ->leftJoin('claim_category', 'general_claim_details.claim_category', '=', 'claim_category.id')
+        ->select('general_claim_details.*', 'claim_category.claim_catagory as claim_category_name')
+        ->with('claim_category_content')
+        ->first();
 
         if (!$data) {
             $data = [];
         }
-
+        
         return $data;
     }
 }
@@ -1783,7 +1913,7 @@ if (!function_exists('getMyClaimMonth')) {
         if (!$data) {
             $data = [];
         }
-
+        
         //pr($data);
         return $data;
     }
@@ -1808,7 +1938,7 @@ if (!function_exists('checkingMonthlyClaim')) {
             $data['id'] = $claim->id;
             $data['status'] = $claim->status;
         }
-        //pr($data);
+        
         return $data;
     }
 }

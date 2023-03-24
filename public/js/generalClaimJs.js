@@ -4,7 +4,7 @@ $(document).ready(function () {
     $("#createGnc").click(function (e) {
         $("#createForm").validate({
             // Specify validation rules
-            rules: {},
+            rules: {}, 
 
             messages: {},
             submitHandler: function (form) {

@@ -26,7 +26,7 @@
 					</div>
 					<div class="row p-2 ">
 						<div class="col align-self-start">                    
-							<button class="btn btn-primary" data-bs-toggle="modal" id="myModal1" data-bs-target="#addleave"> <i class="fa fa-plus" aria-hidden="true"></i> Holiday </button>
+							<button class="btn btn-primary" data-bs-toggle="modal" id="myModal1" data-bs-target="#addleave"> <i class="fa fa-plus" aria-hidden="true"></i> New Holiday </button>
 							<button class="btn btn-primary " data-bs-toggle="modal" id="myModal1" data-bs-target="#uploadbulk"> <i class="fa fa-upload" aria-hidden="true"></i></i> Bulk Upload</button>
 						</div>
 					</div>
@@ -52,7 +52,7 @@
 									<td>
 										<a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle"><i class="fa fa-cogs"></i> Action <i class="fa fa-caret-down"></i></a>
 										<div class="dropdown-menu">
-											<a href="javascript:;" id="editButton" data-id="{{ $h->id }}" class="dropdown-item" data-bs-toggle="modal" id="myModal1" data-bs-target="#updateleave"  ><i class="fa fa-edit" aria-hidden="true"></i> Update</a>
+											<a href="javascript:;" id="editButton" data-id="{{ $h->id }}" class="dropdown-item" data-bs-toggle="modal" id="myModal1" data-bs-target="#updateleave"  ><i class="fa fa-edit" aria-hidden="true"></i> Edit</a>
 											<div class="dropdown-divider"></div>
 											<a href="javascript:;" id="deleteButton" data-id="{{ $h->id }}" class="dropdown-item" ><i class="fa fa-trash" aria-hidden="true"></i> Delete</a>
 										</div>
@@ -134,7 +134,7 @@
 							</div>
 					</div>
 							<div class="modal-footer">
-							<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+							<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
 							<button class="btn btn-primary" id="saveButton">Save</button>
 						</form>
 					</div>
@@ -201,7 +201,7 @@
 							
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
 						<button class="btn btn-primary" id="updateButton">Update</button>
 					</form>
 					</div>
@@ -242,7 +242,7 @@
 							</div> --}}
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel/button>
 						<button type="button" class="btn btn-primary">Save</button>
 					</form>
 					</div>

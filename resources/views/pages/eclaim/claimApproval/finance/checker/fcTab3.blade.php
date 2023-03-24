@@ -16,7 +16,7 @@
                             <td>
                                 <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle"><i class="fa fa-cogs"></i> Action <i class="fa fa-caret-down"></i></a>
                                 <div class="dropdown-menu">
-                                    {{-- <a href="javascript:;" id="generatePv" data-id="{{ $claim->id }}" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#modalpv"><i class="fa fa-bill" --}}
+                                    <!-- {{-- <a href="javascript:;" id="generatePv" data-id="{{ $claim->id }}" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#modalpv"><i class="fa fa-bill" --}} -->
                                     <a href="javascript:;" id="generatePv" data-id="{{ $claim->id }}" class="dropdown-item"><i class="fa fa-bill" aria-hidden="true"></i>
                                         Generate PV</a>
                                     <div class="dropdown-divider"></div>
@@ -28,7 +28,7 @@
                         </tr>
                     @endif
                 @elseif($claim->claim_type == 'MTC')
-                    @if ($claim->a_approval == 'recommend' && $claim->pv_number == '')
+                    @if ($claim->f_approval == 'recommend' && $claim->pv_number == '')
                         <tr>
                             <td>
                                 <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle"><i class="fa fa-cogs"></i> Action <i class="fa fa-caret-down"></i></a>

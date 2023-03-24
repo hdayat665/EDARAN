@@ -755,7 +755,7 @@ class SettingController extends Controller
         $ss = new SettingService;
 
         $result['datas'] = $ss->eclaimGeneralView();
-
+        
         return view('pages.setting.eclaim.eclaimCashAdvance', $result);
     }
 

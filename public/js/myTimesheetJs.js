@@ -878,26 +878,6 @@ $(document).ready(function() {
                 //     $("#dateaddlog").val(formatedDate);
                 // },
 
-                //new
-                // dateClick: function(info) {
-                //     const today = dayjs();
-                  
-                //     // check if the clicked date is not the current date
-                //     if (!dayjs(info.date).isSame(today, 'day')) {
-                //       Swal.fire({
-                //         icon: 'error',
-                //         title: 'Error',
-                //         text: 'You can only select the current date and 48 hours before.'
-                //       });
-                //       return;
-                //     }
-                  
-                //     // show the modal and set the date
-                //     $('#addLogModal').modal('show');
-                //     const formattedDate = dayjs(info.dateStr).format('DD-MM-YYYY');
-                //     $("#dateaddlog").val(formattedDate);
-                //   },
-
                 dateClick: function(info) {
                     const today = dayjs();
                     const clickedDate = dayjs(info.date);
@@ -1024,7 +1004,6 @@ $(document).ready(function() {
                                 $('#myprojectedit').css("display", 'block');
                                 $('#activityByProjectEditHide1').css("display", 'block');
                                 $('#activityByProjectEditHide').css("display", 'none');
-                                $('#locationByProjlocationByProjectEditShowectEditHide').css("display", 'block');
                                 $('#projectLocationOfficeEdit').css("display", 'block');
                                 $('#locationByProjectEditShow').css("display", 'block');
                                 $('#locationByProjectEditHide').css("display", 'block');
@@ -1555,57 +1534,17 @@ $(document).ready(function() {
       });
       
       
-
-
-
-
-      
-
-      
-      
-    // $("#starteventdate").datepicker({
-    //     todayHighlight: true,
-    //     autoclose: true,
-    //     format: 'yyyy/mm/dd'
-    // });
-    // $("#endeventdate").datepicker({
-    //     // todayHighlight: true,
-    //     // autoclose: true,
-    //     // format: 'yyyy/mm/dd'
-
-        
-    // });
-    $(function() {
-        // Inisialisasi datepicker pertama
-        $('#starteventdate').datepicker({
-          format: 'yyyy/mm/dd',
-          todayHighlight: true,
-          autoclose: true,
-          onSelect: function(selectedDate) {
-            // Ketika tanggal dipilih pada datepicker pertama,
-            // atur opsi minDate pada datepicker kedua
-            $('#endeventdate').datepicker('option', 'minDate', selectedDate);
-          }
-        });
-      
-        // Inisialisasi datepicker kedua
-        $('#endeventdate').datepicker({
-          format: 'yyyy/mm/dd',
-          todayHighlight: true,
-          autoclose: true,
-          beforeShowDay: function(date) {
-            var startDate = $('#starteventdate').datepicker('getDate');
-            if (startDate) {
-              // Disable dates before the selected date on the first datepicker
-              return date.valueOf() >= startDate.valueOf() ? {} : {disabled: true};
-            }
-            return {};
-          }
-        });
-      });
-      
+    $('#starteventdate').datepicker({
+        format: 'yyyy/mm/dd',
+        todayHighlight: true,
+        autoclose: true,
+    }).datepicker('setDate', new Date());
     
-      
+    $('#endeventdate').datepicker({
+        format: 'yyyy/mm/dd',
+        todayHighlight: true,
+        autoclose: true,
+    }).datepicker('setDate', new Date());
      
     $('#projectLocationOffice').picker({ search: true });
     $('#activityOffice').picker({ search: true });
@@ -2183,41 +2122,36 @@ $(document).ready(function() {
         $("#logduration").trigger("change");
       });
       
+      calculateDuration();
+
+
       
+    // $('#hidestart, #hideend').hide();
+
+    // $('#alldayc').change(function() {
+    //     if (this.checked) {
+    //         $('#hidestart, #hideend').hide();
+    //     } else {
+    //         $('#hidestart, #hideend').show();
+    //     }
+    // });
+    
+    
 
 });
-    $("#duration,#starteventdate,#starteventtime,#endeventdate,#endeventtime").focus(function () {
-
-    var startdt = new Date($("#starteventdate").val() + " " + $("#starteventtime").val());
     
-    var enddt = new Date($("#endeventdate").val() + " " + $("#endeventtime").val());
-
-    var diff = enddt - startdt;
-    
-    var days = Math.floor(diff / (1000 * 60 * 60 * 24));
-    diff -=  days * (1000 * 60 * 60 * 24);
-    
-    var hours = Math.floor(diff / (1000 * 60 * 60));
-    diff -= hours * (1000 * 60 * 60);
-    
-    var mins = Math.floor(diff / (1000 * 60));
-    diff -= mins * (1000 * 60);
-    
-    $("#duration").val(days + " days : " + hours + " hours : " + mins + " minutes ");
-    
-
-     });
 
     
 
-
+$("#duration,#starteventdate,#starteventtime,#endeventdate,#endeventtime").focus(function () {
+    calculateDuration();
+});
 
          //update total duration
-         $("#total_hour,#daystartedit,#dayendedit,#starttimeedit,#endtimeedit").focus(function () {
-
-            var startdt = new Date($("#daystartedit").val() + " " + $("#starttimeedit").val());
+         function calculateDuration() {
+            var startdt = new Date($("#starteventdate").val() + " " + $("#starteventtime").val());
             
-            var enddt = new Date($("#dayendedit").val() + " " + $("#endtimeedit").val());
+            var enddt = new Date($("#endeventdate").val() + " " + $("#endeventtime").val());
         
             var diff = enddt - startdt;
             
@@ -2230,14 +2164,11 @@ $(document).ready(function() {
             var mins = Math.floor(diff / (1000 * 60));
             diff -= mins * (1000 * 60);
             
-            console.log(days + ':' + hours)
-            $("#total_hour").val( days + " days : " + hours + " hours : " + mins + " minutes ");
-            
-        
-             });
+            $("#duration").val(days + " days : " + hours + " hours : " + mins + " minutes ");
+        }
 
             //edit event modal mytimesheet
-         $("#durationeditevent,#starteventdateedit,#endeventdateedit,#starteventtimeedit,#endeventtimeedit").focus(function () {
+         $("#durationeditevent,#starteventdateedit,#endeventdateedit,#starteventtimeedit,#endeventtimeedit").change(function () {
 
             var startdt = new Date($("#starteventdateedit").val() + " " + $("#starteventtimeedit").val());
             

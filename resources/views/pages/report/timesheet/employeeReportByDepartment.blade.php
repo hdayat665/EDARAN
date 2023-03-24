@@ -7,7 +7,9 @@
         <div class="panel-body">
             <div class="row p-2">
                 <div class="col-sm-12">
-                    <h5>Department : {{$department ?? '-'}}</h5>
+                    {{-- <h5>Department : {{$department ?? '-'}}</h5> --}}
+                    <h5>Department Name : @if(!empty($departments) && isset($departments[0])){{$departments[0]->departmentName}}@endif
+					</h5>
                 </div>
             </div>
             <div class="row p-2">

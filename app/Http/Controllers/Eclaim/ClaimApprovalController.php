@@ -505,4 +505,20 @@ class ClaimApprovalController extends Controller
 
         return response()->json($data);
     }
+    public function approveAllClaim(Request $r)
+    {
+        $ss = new ClaimApprovalService;
+
+        $result = $ss->approveAllClaim($r);
+
+        return response()->json($result);
+    }
+    public function approveAllCa(Request $r)
+    {
+        $ss = new ClaimApprovalService;
+
+        $result = $ss->approveAllCa($r);
+
+        return response()->json($result);
+    }
 }

@@ -16,7 +16,7 @@
                         <h3>Leave Entitlement List</h3>
                     </div>
                     <div class="row p-2 ">
-                        <button class="btn btn-primary col-2" data-bs-toggle="modal" id="myModal1" data-bs-target="#updatelapse"> <i class="fa fa-calendar" aria-hidden="true"></i> Lapsed Date</button>
+                        <button class="btn btn-primary col-2" data-bs-toggle="modal" id="myModal1" data-bs-target="#updatelapse"> <i class="fa fa-calendar" aria-hidden="true"></i> New Entitlement</button>
                     </div>
                     <div class="row p-2">
                         <table  id="tableentitlement"  class="table table-striped table-bordered align-middle">
