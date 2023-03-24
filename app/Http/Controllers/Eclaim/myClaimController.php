@@ -294,4 +294,13 @@ class myClaimController extends Controller
 
         return response()->json($data);
     }
+    public function cancelGNC($id = '')
+    {
+        $ps = new myClaimService;
+
+        $result = $ps->cancelGNC($id);
+
+        return response()->json($result);
+    }
+    
 }
