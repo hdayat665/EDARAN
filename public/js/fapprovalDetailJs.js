@@ -13,7 +13,7 @@ $(document).ready(function () {
             [5, 10, 15, 20, -1],
             [5, 10, 15, 20, "All"],
         ],
-        scrollX:true
+        scrollX:true 
 
     });
     // travel
@@ -30,17 +30,23 @@ $(document).ready(function () {
             $("#total_hour").val(data.total_hour);
             $("#desc").val(data.desc);
             $("#reason").val(data.reason);
-            $("#type_of_transport").val(data.type_of_transport);
+            $("#log").val(data.log_id === 0 ? null : data.log_id);
+            $("#type_transport").val(data.type_transport);
             $("#location_start").val(data.location_start);
-            $("#project").val(data.project);
+            $("#project").val(data.project_name);
             $("#address_start").val(data.address_start);
-            $("#location_address").val(data.location_address);
+            $("#location_address").val(data.location_end);
             $("#destination_address").val(data.location_address);
-            $("#millage").val(data.millage);
-            $("#toll").val(data.toll);
-            $("#petrol").val(data.petrol);
-            $("#parking").val(data.parking);
-            $("#file_upload").val(data.file_upload);
+            $("#millage").val("RM " + Number(data.millage).toFixed(2));
+            $("#toll").val("RM " + data.toll);
+            $("#petrol").val("RM " + data.petrol);
+            $("#parking").val("RM " + data.parking);
+            var fileNames = data.file_upload.split(',');
+            var html = '';
+            for(var i=0; i<fileNames.length; i++){
+                html += "<a href='/storage/TravelFile/" + fileNames[i] + "' target='_blank'>" + fileNames[i] + "</a><br>";
+            }
+            $("#file_upload").html(html);
         });
         $("#modal-view-claim").modal("show");
     });
@@ -53,22 +59,28 @@ $(document).ready(function () {
 
         vehicleData.done(function (data) {
             console.log(data);
-            $("#claim_for").val(data.claim_for);
+            $("#claim_for").val(data.claim_for == 2 ? "Without Cash Advance" : "With Cash Advance");
             $("#file_upload_Subs").val(data.file_upload);
             $("#date1").val(data.start_date);
             $("#time1").val(data.start_time);
             $("#date2").val(data.end_date);
             $("#time2").val(data.end_time);
-            $("#project").val(data.project_id);
+            $("#project1").val(data.project_name);
             $("#desc").val(data.desc);
-            $("#breakfast").val(data.breakfast);
-            $("#lunch").val(data.lunch);
-            $("#dinner").val(data.dinner);
-            $("#total_subs").val(data.total_subs);
-            $("#hotel").val(data.hotel);
-            $("#lodging").val(data.lodging);
-            $("#total_acc").val(data.total_acc);
-            $("#total").val(data.total);
+            $("#breakfast").val(data.breakfast + " days");
+            $("#lunch").val(data.lunch + " days");
+            $("#dinner").val(data.dinner + " days");
+            $("#total_subs").val("RM " + data.total_subs);
+            $("#hotel").val(data.hotel ? data.hotel + " days" : "0 days");
+            $("#lodging").val(data.lodging ? data.lodging + " days" : "0 days");
+            $("#total_acc").val("RM " + data.total_acc);
+            $("#total").val("RM " + data.total);
+            var fileNames = data.file_upload.split(',');
+            var html = '';
+            for(var i=0; i<fileNames.length; i++){
+                html += "<a href='/storage/SubFile/" + fileNames[i] + "' target='_blank'>" + fileNames[i] + "</a><br>";
+            }
+            $("#file_upload1").html(html);
         });
         $("#modal-view-subsistence").modal("show");
     });
@@ -80,12 +92,19 @@ $(document).ready(function () {
         var vehicleData = getPersonalById(id);
 
         vehicleData.done(function (data) {
-            console.log(data);
-            $("#created_At").val(data.applied_date);
-            $("#claim_category").val(data.claim_category);
-            $("#amount").val(data.amount);
-            $("#desc").val(data.desc);
-            $("#file_upload").val(data.file_upload);
+            //console.log(data);
+            $("#created_At").val(moment(data.applied_date).format('YYYY-MM-DD'));
+            $("#claim_category").val(data.claim_category_name);
+            $("#label").text(data.claim_category_content.label);
+            $("#contents").val(data.claim_category_content.content);
+            $("#amount").val("RM " + data.amount);
+            $("#claim_desc").val(data.claim_desc);
+            var fileNames = data.file_upload.split(',');
+            var html = '';
+            for(var i=0; i<fileNames.length; i++){
+                html += "<a href='/storage/PersonalFile/" + fileNames[i] + "' target='_blank'>" + fileNames[i] + "</a><br>";
+            }
+            $("#file_upload2").html(html);
         });
         $("#modal-view").modal("show");
     });
@@ -98,13 +117,18 @@ $(document).ready(function () {
 
         vehicleData.done(function (data) {
             console.log(data);
-            $("#year").val(data.year);
-            $("#month").val(data.month);
-            $("#created_at").val(data.created_at);
-            $("#claim_category").val(data.claim_category);
+            $("#applied_date").val(moment(data.applied_date).format('YYYY-MM-DD'));
+            $("#claim_category").val(data.claim_category_name);
+            $("#label").text(data.claim_category_content.label);
+            $("#contents").val(data.claim_category_content.content);
             $("#amount").val(data.amount);
             $("#desc").val(data.desc);
-            $("#file_upload").val(data.file_upload);
+            var fileNames = data.file_upload.split(',');
+            var html = '';
+            for(var i=0; i<fileNames.length; i++){
+                html += "<a href='/storage/" + fileNames[i] + "' target='_blank'>" + fileNames[i] + "</a><br>";
+            }
+            $("#file_upload").html(html);
         });
         $("#modal-gnc-view").modal("show");
     });

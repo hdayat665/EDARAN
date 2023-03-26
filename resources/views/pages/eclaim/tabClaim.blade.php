@@ -37,7 +37,7 @@
                                                 Claim</a>
                                             <a href="/editGeneralClaimView/{{ $claim->id }}" class="dropdown-item">Update Claim</a>
                                         </div>
-                                    @elseif ($claim->status == 'paid' || $claim->status == 'rejected' || $claim->status == 'active')
+                                    @elseif ($claim->status == 'active')
                                         <a href="javascript:;" class="btn btn-primary btn-sm">Action</a>
                                         <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle btn-sm"><i class="fa fa-caret-down"></i></a>
                                         <div class="dropdown-menu dropdown-menu-end">
@@ -46,10 +46,17 @@
                                                 <div class="dropdown-divider"></div>
                                             <a data-id="{{ $claim->id }}" class="dropdown-item cancelButton">Cancel Claim</a>
                                         </div>
+                                    @elseif ($claim->status == 'paid' || $claim->status == 'rejected')
+                                        <a href="javascript:;" class="btn btn-primary btn-sm">Action</a>
+                                        <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle btn-sm"><i class="fa fa-caret-down"></i></a>
+                                        <div class="dropdown-menu dropdown-menu-end">
+                                            <a href="/viewGeneralClaim/{{ $claim->id }}" class="dropdown-item">View General
+                                                Claim</a>
+                                        </div>
                                     @endif
                                     
                                 @else
-                                    @if ($claim->status == 'draft')
+                                    @if ($claim->status == 'draft') 
                                         <a href="javascript:;" class="btn btn-primary btn-sm">Action</a>
                                         <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle btn-sm"><i class="fa fa-caret-down"></i></a>
                                         <div class="dropdown-menu dropdown-menu-end">
@@ -63,6 +70,7 @@
                                         <div class="dropdown-menu dropdown-menu-end">
                                             <!-- <a href="/eclaim/viewmyclaim" class="dropdown-item">View Claim</a> -->
                                         </div>
+                                        
                                     @elseif ($claim->status == 'active')
                                         <a href="javascript:;" class="btn btn-primary btn-sm">Action</a>
                                         <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle btn-sm"><i class="fa fa-caret-down"></i></a>
@@ -71,6 +79,13 @@
                                             <!-- <a href="javascript:;" class="dropdown-item">Update Claim</a> -->
                                             <div class="dropdown-divider"></div>
                                             <a href="javascript:;" class="dropdown-item">Cancel Claim</a>
+                                        </div>
+                                    @elseif ($claim->status == 'paid')
+                                        <a href="javascript:;" class="btn btn-primary btn-sm">Action</a>
+                                        <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle btn-sm"><i class="fa fa-caret-down"></i></a>
+                                        <div class="dropdown-menu dropdown-menu-end">
+                                            <a href="/viewMtcClaim/{{ $claim->id }}" id="" data-id="" class="dropdown-item"><i class="fa fa-eye" aria-hidden="true"></i> View
+                                                MTC</a>
                                         </div>
                                     @endif
                                 @endif

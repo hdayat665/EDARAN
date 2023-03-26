@@ -59,7 +59,7 @@
                             </div>
                         </div>
                         <br>
-                        <h5>Subsistence Allowence</h5>
+                        <h5>Subsistence Allowance</h5>
                         <br>
                         <button type="button" class="btn btn-white mt-3 mb-3" id="addModalButton"><i class="fa fa-plus"></i>
                             Area</button>
@@ -67,14 +67,18 @@
                             <table id="tableSaveArea" class="table table-striped table-bordered align-middle">
                                 <thead>
                                     <tr>
+                                        <th class="text-nowrap">No</th>
                                         <th data-orderable="false">Action</th>
                                         <th class="text-nowrap">Area</th>
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    <?php $id = 0 ?>
                                     @if ($subsistances)
                                         @foreach ($subsistances as $subsistance)
+                                        <?php $id++ ?>
                                             <tr>
+                                                <td width="1%" class="fw-bold text-dark">{{$id}}</td>
                                                 <td><a class="btn btn-primary btn-xs" data-id="{{ $subsistance->id }}" id="editModalButton">Edit
                                                     </a>
                                                     &nbsp;
@@ -84,7 +88,7 @@
                                                 <td>
                                                     <input type="hidden" name="subs_id[]" value="{{ $subsistance->id }}">
                                                     {{ $subsistance->area_name }}
-                                                </td>
+                                                </td> 
                                             </tr>
                                         @endforeach
                                     @endif

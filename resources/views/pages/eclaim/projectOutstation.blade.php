@@ -21,7 +21,7 @@
             <label class="form-label">Project</label>
         </div>
         <div class="col-md-8">
-            <select class="form-select" id="project" readonly name="project_id">
+            <select class="form-select" id="project" readonly name="project_id1">
                 <?php $projects = project(); ?>
                 <option class="form-label" value="">Please Select</option>
                 @foreach ($projects as $project)

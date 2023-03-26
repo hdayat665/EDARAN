@@ -66,7 +66,7 @@
                                                         <input type="checkbox" id="checker2" {{ $gnc->f2 == 'check' ? 'checked' : '' }} class="form-check-input" disabled /> &nbsp;
                                                         <input type="checkbox" id="checker3" {{ $gnc->f3 == 'check' ? 'checked' : '' }} class="form-check-input" disabled />
                                                     </td>
-                                                    <td>{{ date('Y-m-d', strtotime($gnc->created_at)) ?? '-' }}</td>
+                                                    <td>{{ date('Y-m-d', strtotime($gnc->applied_date)) ?? '-' }}</td>
                                                     <td>{{ $gnc->claim_catagory_name ?? '-' }}</td>
                                                     <td>{{ $gnc->amount ?? '-' }}</td>
                                                     <td>{{ $gnc->desc ?? '-' }}</td>

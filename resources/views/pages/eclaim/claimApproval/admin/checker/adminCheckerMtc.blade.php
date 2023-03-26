@@ -66,11 +66,20 @@
                                                     <input type="checkbox" {{ $personal->a2 == 'check' ? 'checked' : '' }} disabled class="form-check-input" name="" id="adddropdown" /> &nbsp;
                                                     <input type="checkbox" {{ $personal->a3 == 'check' ? 'checked' : '' }} disabled class="form-check-input" name="" id="adddropdown" />
                                                 </td>
-                                                <td>{{ date('Y-m-d', strtotime($personal->created_at)) ?? '-' }}</td>
+                                                <td>{{ date('Y-m-d', strtotime($personal->applied_date)) ?? '-' }}</td>
                                                 <td>{{ $personal->claim_catagory_name ?? '-' }}</td>
                                                 <td>{{ $personal->amount ?? '-' }}</td>
                                                 <td>{{ $personal->claim_desc ?? '-' }}</td>
-                                                <td><a href="/storage/{{ $personal->file_upload ?? '-' }}">{{ $personal->file_upload ?? '-' }}</a></td>
+                                                <td>
+                                                    @if(!empty($personal->file_upload))
+                                                    @php
+                                                    $filenames = explode(',', $personal->file_upload);
+                                                    @endphp
+                                                    @foreach($filenames as $filename)
+                                                    <a href="/storage/PersonalFile/{{ $filename }}" target="_blank">{{ $filename }}</a><br>
+                                                    @endforeach
+                                                    @endif
+                                                </td>
                                             </tr>
                                         @endforeach
                                     @endif
@@ -109,12 +118,32 @@
                                                     <input type="checkbox" {{ $travel->a2 == 'check' ? 'checked' : '' }} disabled class="form-check-input" name="" id="adddropdown" /> &nbsp;
                                                     <input type="checkbox" {{ $travel->a3 == 'check' ? 'checked' : '' }} disabled class="form-check-input" name="" id="adddropdown" />
                                                 </td>
-                                                <td>{{ $travel->travel_date ?? '-' }}</td>
-                                                <td>{{ getProjectById($travel->project_id)->project_name ?? '-' }}</td>
+                                                <td>{{ isset($travel->travel_date) ? $travel->travel_date : date('Y-m-d', strtotime($travel->start_date)) }}</td>
+                                                <td>{{ $travel->project->project_name ?? '-' }}</td>
                                                 <td>{{ $travel->type_claim ?? '-' }}</td>
-                                                <td>{{ $travel->total ?? '-' }}</td>
+                                                <td>{{ $travel->total ??$travel->amount ??  '-' }}</td>
                                                 <td>{{ $travel->desc ?? '-' }}</td>
-                                                <td><a href="/storage/{{ $travel->file_upload ?? '-' }}">{{ $travel->file_upload ?? '-' }}</a></td>
+                                                <td>
+                                                    @if ($travel->type_claim === 'travel')
+                                                        @if(!empty($travel->file_upload))
+                                                            @php
+                                                            $filenames = explode(',', $travel->file_upload);
+                                                            @endphp
+                                                            @foreach($filenames as $filename)
+                                                                <a href="/storage/TravelFile/{{ $filename }}" target="_blank">{{ $filename }}</a><br>
+                                                            @endforeach
+                                                        @endif
+                                                    @else
+                                                        @if(!empty($travel->file_upload))
+                                                            @php
+                                                            $filenames = explode(',', $travel->file_upload);
+                                                            @endphp
+                                                            @foreach($filenames as $filename)
+                                                                <a href="/storage/SubFile/{{ $filename }}" target="_blank">{{ $filename }}</a><br>
+                                                            @endforeach
+                                                        @endif
+                                                    @endif
+                                                </td>
                                             </tr>
                                         @endforeach
                                     @endif
@@ -163,25 +192,32 @@
                     <a href="/adminCheckerView" class="btn btn-light" style="color: black;" type="submit"><i class="fa fa-arrow-left"></i> Back</a>
                 </div>
                 <div class="col d-flex justify-content-end">
+                    @if ( $general->a1 != 'recommend')
+                        @if ($general->pv_number != '')
+                            <!-- The pv_number is not null, so hide all buttons -->
+                        @else
+                            <!-- The pv_number is null, so show the buttons as before -->
+                            @if ((($personal->a1 == 'check' && $personal->a2 == 'check') || ($personal->a1 == 'check' && $personal->a3 == 'check') || ($personal->a2 == 'check' && $personal->a3 == 'check'))
+                                && (($travel->a1 == 'check' && $travel->a2 == 'check') || ($travel->a1 == 'check' && $travel->a3 == 'check') || ($travel->a2 == 'check' && $travel->a3 == 'check')))
+                                <!-- All checkboxes are checked, so hide the Amend and Reject buttons -->
+                            @else
+                                <!-- At least one checkbox is not checked, so show the Amend and Reject buttons -->
+                                <a class="btn btn-secondary" style="color: black" type="submit">Cancel</a> &nbsp;
+                                <a href="javascript:;" class="btn btn-warning" style="color: black" data-bs-toggle="modal" data-bs-target="#modalamend">Amend</a> &nbsp;
+                                <a href="javascript:;" class="btn btn-danger" style="color: black" data-bs-toggle="modal" data-bs-target="#modalreject">Reject</a> &nbsp;
+                            @endif
 
+                            @if ((($personal->a1 == 'check' && $personal->a2 == 'check') || ($personal->a1 == 'check' && $personal->a3 == 'check') || ($personal->a2 == 'check' && $personal->a3 == 'check'))
+                                && (($travel->a1 == 'check' && $travel->a2 == 'check') || ($travel->a1 == 'check' && $travel->a3 == 'check') || ($travel->a2 == 'check' && $travel->a3 == 'check')))
+                                @if ($checkers == 'a1')
+                                    <a class="btn btn-lime" id="approveButton" data-id="{{ $general->id }}" style="color: black" type="submit">Approve</a>
+                                @endif
+                            @endif
 
-                @if (($personal->a1 == 'check' && $personal->a2 == 'check') || ($personal->a1 == 'check' && $personal->a3 == 'check') || ($personal->a2 == 'check' && $personal->a3 == 'check'))
-                    @if ($checkers == 'a1')
-                        <a class="btn btn-lime" id="approveButton" data-id="{{ $general->id }}" style="color: black" type="submit">Approve</a>
-                    @elseif ($checkers == 'a2' || $checkers == 'a3')
-                        @if ($personal->a1 == 'check' && $personal->a2 == 'check' && $personal->a3 == 'check')
-                            <div style="display: none;">
-                        @endif
-                        <a class="btn btn-secondary" style="color: black" type="submit">Cancel</a> &nbsp;
-                        <a href="javascript:;" class="btn btn-warning" style="color: black" data-bs-toggle="modal" data-bs-target="#modalamend">Amend</a> &nbsp;
-                        <a href="javascript:;" class="btn btn-danger" style="color: black" data-bs-toggle="modal" data-bs-target="#modalreject">Reject</a> &nbsp;
-                        @if ($personal->a1 == 'check' && $personal->a2 == 'check' && $personal->a3 == 'check')
-                            </div>
                         @endif
                     @endif
-                @endif
 
-                   
+                
                 </div>
             </div>
         </div>

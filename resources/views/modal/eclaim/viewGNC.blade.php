@@ -29,8 +29,7 @@
                     </div>
                     <div class="col-md-9">
                         <div class="input-group">
-                            <input type="text" name="" id="created_at" value="{{ date('Y-m-d', strtotime($GNC->created_at)) }}" class="form-control" value="" readonly />
-                            <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                            <input type="text" class="form-control" readonly  id="applied_date">
                         </div>
                     </div>
                 </div>
@@ -72,16 +71,7 @@
                         <label class="form-label">Supporting Document</label>
                     </div>
                     <div class="col-md-9">
-                        <div>
-                            @if(!empty($detail->file_upload))
-                                @php
-                                $filenames = explode(',', $detail->file_upload);
-                                @endphp
-                                @foreach($filenames as $filename)
-                                <a href="/storage/{{ $filename }}" target="_blank">{{ $filename }}</a><br>
-                                @endforeach
-                            @endif
-                        </div>
+                        <a id="file_upload" ></a>
                     </div>
                 </div>
             </div>

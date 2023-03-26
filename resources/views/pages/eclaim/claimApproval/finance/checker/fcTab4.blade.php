@@ -2,7 +2,7 @@
     <table id="paidtable" class="table table-striped table-bordered align-middle">
         <thead>
             <tr>
-                <th data-orderable="false"></th>
+                
                 <th data-orderable="false">Action</th>
                 <th class="text-nowrap">Claim Type</th>
                 <th class="text-nowrap">Employee Name</th>
@@ -18,7 +18,7 @@
             @foreach ($claims as $claim)
                 @if ($claim->status == 'paid' && $claim->cheque_number != '')
                     <tr>
-                        <td style="text-align: center"><input class="form-check-input" type="checkbox" />
+                        
                         <td>
                             <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle"><i class="fa fa-cogs"></i> Action <i class="fa fa-caret-down"></i></a>
                             <div class="dropdown-menu">

@@ -4,7 +4,7 @@
         <h1 class="page-header">eClaim | Claim Approval | Approver</h1>
         <div class="panel panel" id="supervisorDepartmentJs">
             <div class="panel-body">
-                <div class="form-control">
+                <!-- <div class="form-control">
                     <h3>Claim Overview</h3>
                     <div class="row p-2">
                         <div class="col-sm-3">
@@ -24,7 +24,7 @@
                             <h3 class="text-center text-primary">0</h3>
                         </div>
                     </div>
-                </div>
+                </div> -->
                 <br>
                 <div class="form-control">
                     <div class="row p-2">
