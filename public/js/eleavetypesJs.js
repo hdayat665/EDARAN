@@ -7,6 +7,30 @@ $(document).ready(function () {
         });
     });
 
+    // Membuat variabel untuk input pertama
+    const input1 = document.getElementById("allowrequest");
+
+    // Membuat fungsi untuk memvalidasi input pertama
+    function validateInput1(event) {
+        const regex = /[^0-9]/gi; // Regular expression untuk mencocokkan karakter selain angka
+        input1.value = input1.value.replace(regex, ""); // Menghapus karakter selain angka
+    }
+
+    // Menambahkan event listener ke input pertama
+    input1.addEventListener("input", validateInput1);
+
+    // Membuat variabel untuk input kedua
+    const input2 = document.getElementById("uallowrequest");
+
+    // Membuat fungsi untuk memvalidasi input kedua
+    function validateInput2(event) {
+        const regex = /[^0-9]/gi; // Regular expression untuk mencocokkan karakter selain angka
+        input2.value = input2.value.replace(regex, ""); // Menghapus karakter selain angka
+    }
+
+    // Menambahkan event listener ke input kedua
+    input2.addEventListener("input", validateInput2);
+
     // enable/disable allow request
     document.getElementById("checkallowrequest").onchange = function () {
         document.getElementById("allowrequest").disabled = !this.checked;

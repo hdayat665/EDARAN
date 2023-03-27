@@ -2083,7 +2083,7 @@ class SettingService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Successfully save holiday';
+        $data['msg'] = 'Holiday is created';
 
         return $data;
     }
@@ -2101,7 +2101,7 @@ class SettingService
 
         date_default_timezone_set("Asia/Kuala_Lumpur");
 
-        $data1 = $input['holidaytitle'];
+        $data1 = strtoupper($input['holidaytitle']);
         $data2 = $input['start_date'];
         $data3 = $input['enddate'];
         $data4 = $input['flexRadioDefault'];
@@ -2119,7 +2119,7 @@ class SettingService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Holiday Is Deactivated';
+        $data['msg'] = 'Holiday is updated';
 
         return $data;
     }
@@ -2151,12 +2151,21 @@ class SettingService
 
         holidayModel::where('id', $id)->update($update);
 
-        $data['status'] = config('app.response.success.status');
-        $data['type'] = config('app.response.success.type');
-        $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Successfully update holiday';
+        if($status == 1){
+            $data['status'] = config('app.response.success.status');
+            $data['type'] = config('app.response.success.type');
+            $data['title'] = config('app.response.success.title');
+            $data['msg'] = 'Holiday is activated';
+            return $data;
 
-        return $data;
+        }else{
+
+            $data['status'] = config('app.response.success.status');
+            $data['type'] = config('app.response.success.type');
+            $data['title'] = config('app.response.success.title');
+            $data['msg'] = 'Holiday is deactivated';
+            return $data;
+        }  
     }
 
 
@@ -2175,7 +2184,7 @@ class SettingService
         // date_default_timezone_set("Asia/Kuala_Lumpur");
         $etData = leavetypesModel::where([['leave_types_code', $input['leave_types_code']], ['tenant_id', Auth::user()->tenant_id]])->first();
         if ($etData) {
-            $data['msg'] = 'Leave Type Code Already Exists';
+            $data['msg'] = 'Leave type code already exists';
             $data['status'] = config('app.response.error.status');
             $data['type'] = config('app.response.error.type');
             $data['title'] = config('app.response.error.title');
@@ -2185,12 +2194,8 @@ class SettingService
 
         $data1 = strtoupper($input['leave_types_code']);
         $data2 = strtoupper($input['leave_types']);
-
-        if ($input = $r->input('day')) {
-            $data3 = $input['day'];
-        } else {
-            $data3 = 0;
-        }
+        $data3 = $input['day'];
+    
         $data5 = Auth::user()->tenant_id;
 
         $input = [
@@ -2272,12 +2277,21 @@ class SettingService
 
         leavetypesModel::where('id', $id)->update($update);
 
-        $data['status'] = config('app.response.success.status');
-        $data['type'] = config('app.response.success.type');
-        $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Successfully update leave type';
+        if($status == 1){
+            $data['status'] = config('app.response.success.status');
+            $data['type'] = config('app.response.success.type');
+            $data['title'] = config('app.response.success.title');
+            $data['msg'] = 'Leave type status is actived';
+            return $data;
+        }else{
+            $data['status'] = config('app.response.success.status');
+            $data['type'] = config('app.response.success.type');
+            $data['title'] = config('app.response.success.title');
+            $data['msg'] = 'Leave type status is deactivated';
+            return $data;
+        }
 
-        return $data;
+        
     }
 
     public function updateClaimDate($r)
