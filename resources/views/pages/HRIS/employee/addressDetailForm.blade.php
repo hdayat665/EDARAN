@@ -32,8 +32,8 @@
             <div class="col-md-5">
                 <select class="form-select" name="state" id="state">
                     <option label="PLEASE CHOOSE" selected="selected"></option>
-                    <option value="JOHOR" label="JOHOR">JOHOR</option>
-                    <option value="KEDAH" label="KEDAH">Kedah</option>
+                    <option value="Johor" label="Johor">Johor</option>
+                    <option value="Kedah" label="Kedah">Kedah</option>
                     <option value="Kelantan" label="Kelantan">Kelantan</option>
                     <option value="Negeri Sembilan" label="Negeri Sembilan">Negeri Sembilan</option>
                     <option value="Pahang" label="Pahang">Pahang</option>

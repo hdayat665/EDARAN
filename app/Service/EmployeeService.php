@@ -392,22 +392,34 @@ class EmployeeService
             $data['msg'] = 'user not found';
         } else {
 
-            if ($_FILES['payslip']['name']) {
-                // $payslip = upload($r->file('payslip'));
-                // $input['payslip'] = $payslip['filename'];
+            if ($_FILES['idFile']['name'])
+            {
+                $idAttachment = upload($r->file('idFile'));
+                $input['idFile'] = $idAttachment['filename'];
 
-                // if (!$input['payslip']) {
-                //     unset($input['payslip']);
-                // }
+                if (!$input['idFile']) {
+                    unset($input['idFile']);
+                }
             }
 
-            if ($_FILES['marrigeCert']['name']) {
-                // $marrigeCert = upload($r->file('marrigeCert'));
-                // $input['marrigeCert'] = $marrigeCert['filename'];
+            if ($_FILES['marrigeCert']['name'])
+            {
+                $marrigeCert = upload($r->file('marrigeCert'));
+                $input['marrigeCert'] = $marrigeCert['filename'];
 
-                // if (!$input['marrigeCert']) {
-                //     unset($input['marrigeCert']);
-                // }
+                if (!$input['marrigeCert']) {
+                    unset($input['marrigeCert']);
+                }
+            }
+
+            if ($_FILES['okuID']['name'])
+            {
+                $idOKU = upload($r->file('okuID'));
+                $input['okuID'] = $idOKU['filename'];
+
+                if (!$input['okuID']) {
+                    unset($input['okuID']);
+                }
             }
 
             if (!$input['DOM']) {
@@ -465,21 +477,30 @@ class EmployeeService
             $data['msg'] = 'Max Companion can add only 4';
         } else {
 
-            if ($_FILES['payslip']['name']) {
-                $payslip = upload($r->file('payslip'));
-                $input['payslip'] = $payslip['filename'];
-
-                if (!$input['payslip']) {
-                    unset($input['payslip']);
+            if ($_FILES['idFile']['name']) {
+                $idAttachment = upload($r->file('idFile'));
+                $input['idFile'] = $idAttachment['filename'];
+    
+                if (!$input['idFile']) {
+                    unset($input['idFile']);
                 }
             }
-
+    
             if ($_FILES['marrigeCert']['name']) {
                 $marrigeCert = upload($r->file('marrigeCert'));
                 $input['marrigeCert'] = $marrigeCert['filename'];
-
+    
                 if (!$input['marrigeCert']) {
                     unset($input['marrigeCert']);
+                }
+            }
+    
+            if ($_FILES['okuID']['name']) {
+                $idOKU = upload($r->file('okuID'));
+                $input['okuID'] = $idOKU['filename'];
+    
+                if (!$input['okuID']) {
+                    unset($input['okuID']);
                 }
             }
 
@@ -1124,8 +1145,7 @@ class EmployeeService
                 unset($input['file']);
             }
         }
-
-        $input['user_id'] = Auth::user()->id;
+        $input['user_id'] = $input['user_id'];
         UserQualificationEducation::create($input);
 
         $data['status'] = config('app.response.success.status');

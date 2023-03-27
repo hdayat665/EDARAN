@@ -34,8 +34,8 @@
 						<table  id="tableholiday"  class="table table-striped table-bordered align-middle">
 							<thead>
 								<tr>	
-								<th width="1%" class="text-nowrap">Action</th>
-								<th class="text-nowrap">Status</th>
+								<th width="1%" class="text-nowrap" data-orderable="false">Action</th>
+								<th class="text-nowrap" data-orderable="false">Status</th>
 								<th class="text-nowrap">Holiday Title</th>
 								<th class="text-nowrap">Start Date</th>
 								<th class="text-nowrap">End Date</th>
@@ -158,8 +158,8 @@
 								<div class="col md-6">
 									<div class="mb-3">
 										<label for="holiday_title" class="form-label">Holiday Title* </label>
-										<input type="text" class="form-control" id="holidaytitle" name="holidaytitle">
-										<input type="hidden" id="idholiday" class="form-control" name="idholiday" placeholder="">
+										<input type="text" class="form-control" id="holidaytitle" name="holidaytitle" style="text-transform:uppercase">
+										<input type="hidden" id="idholiday" class="form-control" name="idholiday" placeholder="" >
 									</div>
 								</div>
 								<div class="col md-6">
