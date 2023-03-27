@@ -173,7 +173,10 @@
                                                     </div>
                                                     <div class="col-sm-3">
                                                         <label for="idattach" class="form-label" >ID Attachment</label>
-                                                        <input type="file" value="" name="" id="" class="form-control" aria-describedby="">
+                                                        <input type="file" value="" name="fileID" id="fileupload" class="form-control" aria-describedby="">
+                                                        @if ($profile->fileID)
+                                                            Click <a href="{{ route('download', ['filename' => $profile->fileID]) }}">here</a> to see ID Attachment.
+                                                        @endif
                                                     </div>
                                                 </div>
                             

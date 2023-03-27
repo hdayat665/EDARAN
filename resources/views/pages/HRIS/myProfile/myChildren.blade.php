@@ -26,10 +26,10 @@
                 <td>
                     <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle btn-sm"><i class="fa fa-cogs"></i> Actions <i class="fa fa-caret-down"></i></a>
                     <div class="dropdown-menu">
-                        <a href="javascript:;" data-bs-toggle="modal" id="childModalEdit{{$children->id}}" data-id="{{$children->id}}" data-type="edit" class="dropdown-item">Edit</a>
+                        <a href="javascript:;" data-bs-toggle="modal" id="childModalEdit{{$children->id}}" data-id="{{$children->id}}" class="dropdown-item" >Edit</a>
                         <div class="dropdown-divider"></div>
-                        <a href="javascript:;" data-bs-toggle="modal" id="childModalView{{$children->id}}" data-type="view" data-id="{{$children->id}}" class="dropdown-item">View</a>
-                        <div class="dropdown-divider"></div>
+                        {{-- <a href="javascript:;" data-bs-toggle="modal" id="childModalView{{$children->id}}" data-type="view" data-id="{{$children->id}}" class="dropdown-item">View</a> --}}
+                        {{-- <div class="dropdown-divider"></div> --}}
                         <a href="javascript:;" data-bs-toggle="modal" id="deleteChildren{{$children->id}}" data-id="{{$children->id}}" class="dropdown-item">Delete</a>
                     </div>
                 </td>
@@ -39,7 +39,11 @@
                 <td>{{ $children->age }}</td>
                 <td style="text-transform: uppercase;">{{ ($children->educationLevel == "0") ? '-' : educationLevel($children->educationLevel) }}</td>
                 <td style="text-transform: uppercase;">{{ $children->instituition }}</td>
-                <td style="text-transform: uppercase;">{{ ($children->maritalStatus == "0") ? '-' : getMaritalStatus($children->maritalStatus) }}</td>
+                {{-- <td style="text-transform: uppercase;">{{ ($children->maritalStatus == "0") ? '-' : getMaritalStatus($children->maritalStatus) }}</td> --}}
+                <td style="text-transform: uppercase;">
+                    {{ ($children->maritalStatus !== null) ? getMaritalStatus($children->maritalStatus) : '' }}
+                </td>
+                
             </tr>
             @endforeach
             @endif
