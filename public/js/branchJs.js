@@ -119,7 +119,7 @@ $(document).ready(function() {
         var geocodingAPI =
           "https://maps.googleapis.com/maps/api/geocode/json?address=" +
           encodeURIComponent(address) +
-          "&key=AIzaSyDhySfXJwwoMVqbaiioEs38eOi8UkN7_ow";
+          "&key=API_FOR_GOOGLE";
       
         $.getJSON(geocodingAPI, function (json) {
           if (json.status === "OK") {
