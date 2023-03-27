@@ -73,43 +73,60 @@ class ProfileService
             $data['title'] = config('app.response.error.title');
             $data['type'] = config('app.response.error.type');
             $data['msg'] = 'Profile not found';
-        }else{
-            if(!$input['religion'])
+
+        } else {
+
+            if(!isset($input['nonNetizen']))
             {
-                unset($input['religion']);
+                $input['nonNetizen'] = null;
             }
 
-            if(!$input['race'])
+            if(!isset($input['okuStatus']))
             {
-                unset($input['race']);
-
+                $input['okuStatus'] = null;
+                $input['okuCardNum'] = null;
+                $input['okuFile'] = null;
             }
 
-            if(!$input['phoneNo'])
+            if(!isset($input['passport']))
             {
-                unset($input['phoneNo']);
-
+                $input['passport'] = null;
+                $input['expiryDate'] = null;
+                $input['issuingCountry'] = null;
             }
 
-            if(!$input['homeNo'])
-            {
-                unset($input['homeNo']);
+            // if(!$input['religion'])
+            // {
+            //     unset($input['religion']);
+            // }
 
-            }
+            // if(!$input['race'])
+            // {
+            //     unset($input['race']);
+            // }
 
-            if(!$input['extensionNo'])
-            {
-                unset($input['extensionNo']);
+            // if(!$input['phoneNo'])
+            // {
+            //     unset($input['phoneNo']);
+            // }
 
-            }
+            // if(!$input['homeNo'])
+            // {
+            //     unset($input['homeNo']);
+            // }
 
-            if(!$input['passport'])
-            {
-                unset($input['passport']);
-                unset($input['expiryDate']);
-                unset($input['issuingCountry']);
+            // if(!$input['extensionNo'])
+            // {
+            //     unset($input['extensionNo']);
+            // }
 
-            }
+            // if(!$input['passport'])
+            // {
+            //     unset($input['passport']);
+            //     unset($input['expiryDate']);
+            //     unset($input['issuingCountry']);
+
+            // }
 
             if ($input['username']) {
 
@@ -136,12 +153,16 @@ class ProfileService
                 }
             }
 
+            if(isset($input['nonNetizen']) && $input['nonNetizen'] == 'on') {
+                $input['idNo'] = null;
+            }
+
             UserProfile::where('user_id', $user_id)->update($input);
 
             $data['status'] = config('app.response.success.status');
             $data['title'] = config('app.response.success.title');
             $data['type'] = config('app.response.success.type');
-            $data['msg'] = 'Success Update Profile';
+            $data['msg'] = 'My Profile is updated';
         }
 
         return $data;

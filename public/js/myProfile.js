@@ -23,10 +23,15 @@ $(document).ready(function () {
         if ($("#expirydatemyprofile").prop("readonly")) {
             $("#expirydatemyprofile").prop("readonly", false);
             $("#expirydatemyprofile").css("pointer-events", "auto");
+            $("#passportcountrymyprofile").prop("disabled", false);
+            $("#passportcountrymyprofile").css("pointer-events", "auto");
         } else {
             $("#expirydatemyprofile").prop("readonly", true);
             $("#expirydatemyprofile").css("pointer-events", "none");
             $("#expirydatemyprofile").val("");
+            $("#passportcountrymyprofile").prop("disabled", false);
+            $("#passportcountrymyprofile").css("pointer-events", "auto");
+            $("#passportcountrymyprofile").val("");
         }
     });
 
@@ -50,6 +55,21 @@ $(document).ready(function () {
             lastTab.show();
         });
     });
+
+    // var nonCitizenCheckbox = $('#nonNetizen');
+    // var idInput = $('#idnumber');
+    
+    // if (nonCitizenCheckbox.prop('checked')) {
+    //     idInput.prop('disabled', true);
+    // }
+
+    // nonCitizenCheckbox.change(function() {
+    //     if (this.checked) {
+    //     idInput.prop('disabled', true);
+    //     } else {
+    //     idInput.prop('disabled', false);
+    //     }
+    // });
 
     $("#idnumber").change(function () {
         if ($(this).val().length == 12) {
@@ -283,6 +303,22 @@ $(document).ready(function () {
         return this.optional(element) || /^[^\s@]+@[^\s@]+\.(?:com|net|org|edu|gov|mil|biz|info|name|museum|coop|aero|[a-z]{2})$/.test(value);
       }, "Please Insert Valid Email Address");
 
+    $('input[name="nonNetizen"]').click(function() {
+        if ($(this).is(':checked')) {
+            $('#idnumber').val('').prop('disabled', true);
+        } else {
+            $('#idnumber').prop('disabled', false);
+        }
+    });
+
+    // $('input[name="okuStatus"]').click(function() {
+    //     if ($(this).is(':checked')) {
+    //         $('#okucard').val('').prop('disabled', true);
+    //     } else {
+    //         $('#okucard').prop('disabled', false);
+    //     }
+    // });
+
     $("#saveProfile").click(function (e) {
         $("#formProfile").validate({
             // Specify validation rules
@@ -291,7 +327,6 @@ $(document).ready(function () {
                     required: true,
                     email: true,
                 },
-
                 firstName: {
                     required: true,
                   },
@@ -313,6 +348,14 @@ $(document).ready(function () {
                     digits: true,
                     rangelength: [10, 11],
                 },
+                phoneNo2: {
+                    digits: true,
+                    rangelength: [10, 11],
+                },
+                oldIDNo: {
+                    digits: true,
+                    rangelength: [7, 7],
+                },
                 homeNo: {
                     digits: true,
                     rangelength: [9, 9],
@@ -321,11 +364,9 @@ $(document).ready(function () {
                     digits: true,
                     rangelength: [4, 4],
                 },
-                // okuChecked: {
-                //     required: true
-                // },
+                //okuFile: "required",
+                
             },
-
 
             messages: {
                 personalEmail: {
@@ -345,9 +386,12 @@ $(document).ready(function () {
                 maritialStatus: "Please Choose Marital Status",
                 religion: "Please Choose Religion",
                 race: "Please Choose Race",
-                //okuChecked: "Please Insert Valid OKU Card Number",
                 idNo: {
                     required: "Please Insert New Identification Number",
+                    digits: "Please Insert Correct Identification Number Without ' - ' or Space",
+                    rangelength: "Please Insert Valid Identification Number",
+                },
+                oldIDNo: {
                     digits: "Please Insert Correct Identification Number Without ' - ' or Space",
                     rangelength: "Please Insert Valid Identification Number",
                 },
@@ -356,18 +400,21 @@ $(document).ready(function () {
                     digits: "Please Insert Correct Phone Number Without ' - ' or Space",
                     rangelength: "Please Insert Valid Phone Number",
                 },
+                phoneNo2: {
+                    digits: "Please Insert Correct Phone Number Without ' - ' or Space",
+                    rangelength: "Please Insert Valid Phone Number",
+                },
                 homeNo: {
                     digits: "Please Insert Correct Home Number Without ' - ' or Space",
-                    rangelength: "Please Insert Valid Homee Number",
+                    rangelength: "Please Insert Valid Home Number",
                 },
                 extensionNo: {
                     digits: "Please Insert Correct Extension Number Without ' - ' or Space",
                     rangelength: "Please Insert Valid Extension Number",
                 },
+                //okuFile: "Please Input Valid File",
             },
             submitHandler: function (form) {
-                // requirejs(['sweetAlert2'], function(swal,swal1) {
-
                 Swal.fire({
                     allowOutsideClick: false,
                     showCancelButton: true,
@@ -399,8 +446,6 @@ $(document).ready(function () {
                                 document.getElementById("formProfile")
                             );
 
-                            //data.append('okuStatus', okuStatus);
-
                             $.ajax({
                                 type: "POST",
                                 url: "/updateMyProfile",
@@ -424,7 +469,6 @@ $(document).ready(function () {
                                     if (data.type == "error") {
                                     } else {
                                         location.reload();
-                                        // window.location.href = "/myProfile";
                                     }
                                 });
                             });
@@ -435,8 +479,6 @@ $(document).ready(function () {
                         }
                     },
                 }).then((result) => {});
-
-                // });
             },
         });
     });
@@ -3199,28 +3241,16 @@ $("#datepicker-othersu").datepicker({
 
 //   oku checkbox myprofile
 $(".okuCheck").click(function () {
-    var okuStatus = 0;
     if ($(this).prop("checked")) {
-        $("#okucard").prop("readonly", false);
+        $("#okucard").val('').prop("readonly", false);
+        $("#okuattach").css("readonly", false);      
         $("#okuattach").css("pointer-events", "auto");
-        okuStatus = 1;
     } else {
-        $("#okucard").prop("readonly", true);
+        $("#okucard").val('').prop("readonly", true);
+        $("#okuattach").css("readony", true);
         $("#okuattach").css("pointer-events", "none");
-        okuStatus = 0;
     }
-
-    // $.ajax({
-    //     url: '{{ route("saveOkuData") }}',
-    //     type: 'POST',
-    //     data: {okuChecked: okuChecked},
-    //     success: function(response) {
-    //         // Handle the response from the server if needed
-    //     },
-    //     error: function(xhr, status, error) {
-    //         // Handle errors if needed
-    //     }
-    // });
+    $(this).data('okuStatus', okuStatus);
 });
 
 //oku check companion
@@ -3228,9 +3258,11 @@ $(".okuCheck1").click(function () {
     if ($(this).prop("checked")) {
         $("#okucard1").prop("readonly", false);
         $("#okuattach1").css("pointer-events", "auto");
+        okuStatus = 1;
     } else {
         $("#okucard1").prop("readonly", true);
         $("#okuattach1").css("pointer-events", "none");
+        okuStatus = 0;
     }
 });
 
@@ -3239,9 +3271,11 @@ $(".okuCheck2").click(function () {
     if ($(this).prop("checked")) {
         $("#okucard2").prop("readonly", false);
         $("#okuattach2").css("pointer-events", "auto");
+        okuStatus = 1;
     } else {
         $("#okucard2").prop("readonly", true);
         $("#okuattach2").css("pointer-events", "none");
+        okuStatus = 0;
     }
 });
 
@@ -3250,9 +3284,11 @@ $(".okuCheck3").click(function () {
     if ($(this).prop("checked")) {
         $("#okucard3").prop("readonly", false);
         $("#okuattach3").css("pointer-events", "auto");
+        okuStatus = 1;
     } else {
         $("#okucard3").prop("readonly", true);
         $("#okuattach3").css("pointer-events", "none");
+        okuStatus = 0;
     }
 });
 
@@ -3261,9 +3297,11 @@ $(".okuCheck4").click(function () {
     if ($(this).prop("checked")) {
         $("#okucard4").prop("readonly", false);
         $("#okuattach4").css("pointer-events", "auto");
+        okuStatus = 1;
     } else {
         $("#okucard4").prop("readonly", true);
         $("#okuattach4").css("pointer-events", "none");
+        okuStatus = 0;
     }
 });
 
@@ -3272,9 +3310,11 @@ $(".okuCheck5").click(function () {
     if ($(this).prop("checked")) {
         $("#okucard5").prop("readonly", false);
         $("#okuattach5").css("pointer-events", "auto");
+        okuStatus = 1;
     } else {
         $("#okucard5").prop("readonly", true);
         $("#okuattach5").css("pointer-events", "none");
+        okuStatus = 0;
     }
 });
 
@@ -3283,9 +3323,11 @@ $(".okuCheck6").click(function () {
     if ($(this).prop("checked")) {
         $("#okucard6").prop("readonly", false);
         $("#okuattach6").css("pointer-events", "auto");
+        okuStatus = 1;
     } else {
         $("#okucard6").prop("readonly", true);
         $("#okuattach6").css("pointer-events", "none");
+        okuStatus = 0;
     }
 });
 

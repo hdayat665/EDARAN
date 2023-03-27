@@ -105,7 +105,7 @@
                                 <div class="row">
                                     <div class="col-sm-6 ">
                                         <div class="form-check form-switch align-right">
-                                            <input class="form-check-input partCheck" value="door3" type="checkbox" name="nonNetizen" {{($profile->nonNetizen ?? '') ? 'checked' : ''}} id="citizen">
+                                            <input class="form-check-input partCheck" value="on" type="checkbox" name="nonNetizen" {{($profile->nonNetizen ?? '') ? 'checked' : ''}} id="citizen">
                                             <label class="form-label" for="citizen">
                                                 Non-Citizen
                                             </label>
@@ -158,7 +158,8 @@
                             </div>
                             <div class="col-sm-3">
                                 <label for="issuing-country" class="form-label">Issuing Country*</label>
-                                <select class="form-select" name="issuingCountry" style="text-transform:uppercase">
+                                <select class="form-select" name="issuingCountry" id="passportcountrymyprofile" style="text-transform:uppercase" disabled>
+                                    <option value="" label="PLEASE CHOOSE"></option>
                                     <option value="MY" label="Malaysia" selected></option>
                                         <?php
                                             $americass = americas();
@@ -237,7 +238,7 @@
                                 <div class="row">
                                     <div class="col-sm-6 ">
                                         <div class="form-check form-switch align-right">
-                                            <input class="form-check-input okuCheck" {{($profile->okuStatus ?? '') ? 'checked' : ''}} type="checkbox" name="okuStatus"  id="OKU">
+                                            <input class="form-check-input okuCheck" value="on" {{($profile->okuStatus ?? '') ? 'checked' : ''}} type="checkbox" name="okuStatus" id="OKU">
                                             <label class="form-label" for="OKU" >
                                                 OKU?
                                             </label>
@@ -248,7 +249,7 @@
 
                                     <div class="col-sm-12 idnumber">
                                         <label for="" class="form-label" >OKU Card Number*</label>
-                                        <input type="text" value="{{$profile->okuCardNum ?? ''}}" name="okuCardNum" id="okucard" class="form-control" readonly placeholder="OKU CARD NUMBER">
+                                        <input type="text" value="{{$profile->okuCardNum ?? ''}}" name="okuCardNum" id="okucard" class="form-control" readonly placeholder="OKU CARD NUMBER" readonly>
                                     </div>
                                 </div>
                             </div>
