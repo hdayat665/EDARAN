@@ -491,12 +491,14 @@ class myClaimService
     }
 
     public function getCashClaimsData()
-    {
-        $data = CashAdvanceDetail::where('tenant_id', Auth::user()->tenant_id)->get();
+    {   
+        $user_id = Auth::user()->id;
+
+        $data = CashAdvanceDetail::where([['tenant_id', Auth::user()->tenant_id], ['user_id', $user_id]])->get();
 
         return $data;
     }
-
+    
     public function getCashAdvanceById($id = '')
     {
         $data = CashAdvanceDetail::where([['tenant_id', Auth::user()->tenant_id], ['id', $id]])->first();

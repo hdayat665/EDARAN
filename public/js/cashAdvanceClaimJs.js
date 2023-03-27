@@ -9,7 +9,7 @@ $(document).ready(function () {
             $(".PNO").hide();
             $(".OTHERSNO").hide();
             $(".OTHERSO").hide();
-            $(".subacco").show();
+            $(".subacco").show(); 
             $("#btnPO").show();
             $("#btnPNO").hide();
             $("#btnOO").hide();
@@ -75,8 +75,8 @@ $(document).ready(function () {
             $(".TE").show();
             $(".MPO").show();
             $(".SV").show();
-            $("#day").val(0);
-            $("#night").val(0);
+            $("#day").val();
+            $("#night").val();
             $("#fuelfare").val(0);
             $("#tollparking").val(0);
             $("#ent").val(0);
@@ -93,8 +93,8 @@ $(document).ready(function () {
             $(".TE").show();
             $(".MPO").show();
             $(".SV").show();
-            $("#day").val(0);
-            $("#night").val(0);
+            $("#day").val();
+            $("#night").val();
             $("#fuelfare").val(0);
             $("#tollparking").val(0);
             $("#ent").val(0);
@@ -111,8 +111,8 @@ $(document).ready(function () {
             $(".TE").show();
             $(".MPO").show();
             $(".SV").show();
-            $("#day").val(0);
-            $("#night").val(0);
+            $("#day").val();
+            $("#night").val();
             $("#fuelfare").val(0);
             $("#tollparking").val(0);
             $("#ent").val(0);
@@ -129,8 +129,8 @@ $(document).ready(function () {
             $(".TE").hide();
             $(".MPO").hide();
             $(".SV").hide();
-            $("#day").val(0);
-            $("#night").val(0);
+            $("#day").val();
+            $("#night").val();
             $("#fuelfare").val(0);
             $("#tollparking").val(0);
             $("#ent").val(0);
@@ -182,25 +182,47 @@ $(document).ready(function () {
     // end total transport
     $(function () {
         $("#datefilter1").daterangepicker({
-            autoUpdateInput: true,
-            locale: {
-                cancelLabel: "Clear",
-            },
-        });
-
-        $("#datefilter2").daterangepicker({
             autoUpdateInput: false,
             locale: {
-                cancelLabel: "Clear",
-            },
-        });
-
-        $("#datefilter3").daterangepicker({
+              cancelLabel: "Clear"
+            }
+          }, function(start, end, label) {
+            // Calculate the difference in days between the start and end dates
+            var diffInDays = end.diff(start, 'days');
+          
+            // Update the value of the input with the difference in days
+            $('#day').val(diffInDays);
+            $('#night').val(diffInDays-1);
+          });
+          
+          $("#datefilter2").daterangepicker({
             autoUpdateInput: false,
             locale: {
-                cancelLabel: "Clear",
-            },
-        });
+              cancelLabel: "Clear"
+            }
+          }, function(start, end, label) {
+            // Calculate the difference in days between the start and end dates
+            var diffInDays = end.diff(start, 'days');
+          
+            // Update the value of the input with the difference in days
+            $('#day').val(diffInDays);
+            $('#night').val(diffInDays-1);
+          });
+
+          $("#datefilter3").daterangepicker({
+            autoUpdateInput: false,
+            locale: {
+              cancelLabel: "Clear"
+            }
+          }, function(start, end, label) {
+            // Calculate the difference in days between the start and end dates
+            var diffInDays = end.diff(start, 'days');
+          
+            // Update the value of the input with the difference in days
+            $('#day').val(diffInDays);
+            $('#night').val(diffInDays-1);
+          });
+
         $("#datefilter1").on("apply.daterangepicker", function (ev, picker) {
             $(this).val(
                 picker.startDate.format("DD/MM/YYYY") +

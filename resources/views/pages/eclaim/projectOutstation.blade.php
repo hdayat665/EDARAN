@@ -13,7 +13,6 @@
         </div>
         <div class="col-md-8">
             <input type="text" class="form-control" id="datefilter1"  name="travel_date3">
-            
         </div>
     </div>
     <div class="row p-2">

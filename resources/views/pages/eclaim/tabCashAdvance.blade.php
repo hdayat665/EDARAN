@@ -58,7 +58,7 @@
                         <td>{{ getCashAdvanceType($cashClaim->type) }}</td>
                         <td>{{ date_format(date_create($cashClaim->created_at), 'd/m/Y') }}</td>
                         <td>{{ $cashClaim->travel_date ? $cashClaim->travel_date : 'N/A' }}</td>
-                        <td>MYR {{  $cashClaim->mode_of_transport->accommadation_total ?? $cashClaim->amount }}</td>
+                        <td>MYR {{  $cashClaim->mode_of_transport->max_total ?? $cashClaim->amount }}</td>
                         @if ($cashClaim->status == 'draft')
                             <td><span class="badge bg-warning" data-toggle="drafca" title="Draft">Draft</span></td>
                         @elseif ($cashClaim->status == 'active')
