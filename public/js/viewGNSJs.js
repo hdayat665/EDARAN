@@ -33,19 +33,18 @@ $(document).ready(function () {
             // $("#year").val(data.year);
             // $("#month").val(data.month);
             
-            $("#applied_date").val(data.applied_date);
+            $("#applied_date").val(moment(data.applied_date).format('YYYY-MM-DD'));
             $("#claim_category").val(data.claim_category_name);
             $("#label").text(data.claim_category_content.label);
             $("#contents").val(data.claim_category_content.content);
             $("#amount").val(data.amount);
-            $("#desc").val(data.desc);
-            $("#file_upload").html(
-                "<a href='/storage/" +
-                    data.file_upload +
-                    "'>" +
-                    data.file_upload +
-                    "</a>"
-            );
+            $("#desc").val(data.desc); 
+            var fileNames = data.file_upload.split(',');
+            var html = '';
+            for(var i=0; i<fileNames.length; i++){
+                html += "<a href='/storage/" + fileNames[i] + "' target='_blank'>" + fileNames[i] + "</a><br>";
+            }
+            $("#file_upload").html(html);
         });
         // Get the claim category ID from the input field
 

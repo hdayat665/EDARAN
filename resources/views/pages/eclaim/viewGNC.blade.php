@@ -55,7 +55,7 @@
                                             @foreach ($details as $detail)
                                                 <tr>
                                                     <td><a data-bs-toggle="modal" id="buttonView" data-id="{{ $detail->id }}" class="btn btn-primary btn-sm">View</a></td> 
-                                                    <td>{{ date('Y-m-d', strtotime($detail->created_at)) }}</td>
+                                                    <td>{{ date('Y-m-d', strtotime($detail->applied_date)) }}</td>
                                                     <td>{{ $detail->claim_catagory }}</td>
                                                     <td>{{ $detail->amount }}</td>
                                                     <td>{{ $detail->desc }}</td>

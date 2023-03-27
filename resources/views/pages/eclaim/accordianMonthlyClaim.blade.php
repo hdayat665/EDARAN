@@ -84,7 +84,8 @@
                             <div class="col-md-4">
                                 <label class="form-label">Supporting Document</label>
                             </div>
-                            <div class="col-md-8"> <input type="file" name="file_upload" class="form-control-file" id="">
+                            <div class="col-md-8">
+                                <input type="file" class="form-control-file" name="file_upload[]" id="supportdocument" multiple>
                             </div> 
                         </div>
                         <div class="row p-2">
@@ -217,9 +218,10 @@
                             </div>
                             <div class="col-md-8">
                                 <select class="form-select" id="" name="project_id">
-                                    <option class="form-label" value="" selected>
-                                        Please Select</option>
+                                   
                                     <?php $projects = myProjectOnly(); ?>
+                                    <option class="form-label" value="">
+                                        Please Select</option>
                                     @foreach ($projects as $project)
                                         <option class="form-label" value="{{ $project->id }}">{{ $project->project_name }}</option>
                                     @endforeach
@@ -240,9 +242,9 @@
                                 <label class="form-label">Destination</label>
                             </div>
                             <div class="col-md-8">
-                                {{-- <input readonly type="text" class="form-control"> --}}
-                                <select class="form-select" id="dest">
-                                    <option class="form-label" selected>
+                                
+                                <select class="form-select" id="dest" name="location_end">
+                                    <option class="form-label">
                                         Please Select</option>
                                     <option class="form-label">Home
                                     </option>
@@ -268,10 +270,9 @@
                                 <label class="form-label">Project</label>
                             </div>
                             <div class="col-md-8">
-                                <select class="form-select" id="dest" name="project_id">
-                                    <option class="form-label" value="" selected>
-                                        Please Select</option>
+                                <select class="form-select" id="" name="project_id2">
                                     <?php $projects = myProjectOnly(); ?>
+                                    <option class="form-label" value="">Select Project</option>
                                     @foreach ($projects as $project)
                                         <option class="form-label" value="{{ $project->id }}">{{ $project->project_name }}</option>
                                     @endforeach
@@ -386,7 +387,7 @@
                                 <label class="form-label">Supporting Document</label>
                             </div>
                             <div class="col-md-8">
-                                <input type="file" class="form-control-file" id="" name="file_upload" file_upload>
+                                <input type="file" class="form-control-file" name="file_upload[]" id="supportdocument" multiple>
                             </div>
                         </div>
                         <div class="row p-2">
@@ -429,7 +430,7 @@
                                 <label class="form-label">Supporting Document</label>
                             </div>
                             <div class="col-md-8">
-                                <input type="file" class="form-control-file" id="" name="file_upload">
+                                <input type="file" class="form-control-file" name="file_upload[]" id="supportdocument" multiple>
                                 <input type="hidden" name="general_id" value="{{ Request::segment(4) }}">
                                 <input type="hidden" value="{{ isset($month_id) ? month($month_id) : $month }}" name="month">
 
@@ -490,7 +491,7 @@
                                                         <label class="form-label">Start Time</label>
                                                     </div>
                                                     <div class="col">
-                                                        <input type="text" class="form-control" name="end_date" style=" background: #ffffff;" placeholder="Time" id="time1">
+                                                        <input type="text" class="form-control" name="start_time" style=" background: #ffffff;" placeholder="Time" id="time1">
                                                     </div>
                                                 </div>
                                             </div>
@@ -504,7 +505,7 @@
                                                         <label class="form-label">End Date</label>
                                                     </div>
                                                     <div class="col">
-                                                        <input type="text" class="form-control" name="start_time" placeholder="Date" id="date2">
+                                                        <input type="text" class="form-control" name="end_date" placeholder="Date" id="date2">
                                                     </div>
                                                 </div>
                                                 <div class="row p-2">

@@ -542,6 +542,7 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('/myClaimView', 'myClaimView');
             Route::get('/generalClaimView', 'generalClaimView');
             Route::get('/cashAdvanceView', 'cashAdvanceView');
+            Route::get('/viewMtcClaim/{id}', 'viewMtcClaim');
             Route::get('/newMonthlyClaimView/{month}/{year}', 'newMonthlyClaimView');
             Route::post('/submitPersonalClaim', 'submitPersonalClaim');
             Route::post('/submitTravelClaim', 'submitTravelClaim');

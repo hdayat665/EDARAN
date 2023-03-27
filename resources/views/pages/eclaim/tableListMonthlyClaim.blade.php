@@ -24,8 +24,17 @@
                                 <td>{{ getClaimCategoryById($personal->claim_category)->claim_catagory ?? '-' }}</td>
                                 <td>{{ $personal->amount ?? '-' }}</td>
                                 <td>{{ $personal->claim_desc ?? '-' }}</td>
-                                <td><a href="{{ route('download', ['filename' => $personal->file_upload ?? '-']) }}">{{$personal->file_upload ?? '-'}}</a></td>
-                            </tr>
+                                <td>
+                                    @if(!empty($personal->file_upload))
+                                    @php
+                                    $filenames = explode(',', $personal->file_upload);
+                                    @endphp
+                                    @foreach($filenames as $filename)
+                                    <a href="/storage/PersonalFile/{{ $filename }}" target="_blank">{{ $filename }}</a><br>
+                                    @endforeach
+                                        @endif
+                                </td>
+                            </tr> 
                         @endforeach
                     @endif
                 </tbody>
@@ -60,7 +69,16 @@
                                 <td>{{ $travel->type_claim ?? '-' }}</td>
                                 <td>{{ $travel->amount ?? '-' }}</td>
                                 <td>{{ $travel->desc ?? '-' }}</td>
-                                <td><a href="{{ route('download', ['filename' => $travel->file_upload ?? '-' ?? '-']) }}">{{$personal->file_upload ?? '-'}}</a></td>
+                                <td>
+                                    @if(!empty($travel->file_upload))
+                                    @php
+                                    $filenames = explode(',', $travel->file_upload);
+                                    @endphp
+                                    @foreach($filenames as $filename)
+                                    <a href="/storage/TravelFile/{{ $filename }}" target="_blank">{{ $filename }}</a><br>
+                                    @endforeach
+                                    @endif
+                                </td>
 
                             </tr> 
                         @endforeach

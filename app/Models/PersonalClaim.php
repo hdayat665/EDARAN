@@ -11,4 +11,9 @@ class PersonalClaim extends Model
     protected $table = 'personal_claim';
 
     protected $guarded = [];
+    
+    public function claim_category_content()
+    {
+        return $this->belongsTo(ClaimCategoryContent::class, 'claim_category_detail', 'id');
+    }
 }

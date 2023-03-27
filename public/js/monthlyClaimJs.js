@@ -318,7 +318,7 @@ $("document").ready(function () {
         $("#TS").val(a * b + c * d + e * f); //float
     });
 
-    $("#htv,#hotelcv1,#hn,#lodgingcv1,#ln,#ldgv").change(function () {
+    $("#htv,#hotelcv1,#hn,#lodgingcv1,#ln,#ldgv").focus(function () {
         var a = parseFloat($("#hotelcv1").val()); //float
         var b = parseInt($("#hn").val());
 

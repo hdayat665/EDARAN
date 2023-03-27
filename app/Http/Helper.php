@@ -115,6 +115,106 @@ function manyFile($filename, $uploadedFile)
 
     return $data;
 }
+// function PersonalFile($filename, $uploadedFile)
+// {
+//     $allowedTypes = ['pdf', 'jpeg', 'jpg', 'png'];
+//     $maxSize = 5120; // 5MB
+
+//     $extension = pathinfo($filename, PATHINFO_EXTENSION);
+
+//     if (!in_array($extension, $allowedTypes)) {
+//         throw new Exception("Invalid file type. Only PDF, JPEG, PNG, and JPG files are allowed.");
+//     }
+
+//     if (filesize($uploadedFile) > $maxSize * 1024) {
+//         throw new Exception("File size exceeds the maximum allowed limit of 5 MB.");
+//     }
+
+//     $newFilename = uniqid() . '.' . $extension;
+//     Storage::disk('local')->put(
+//         'public/PersonalFile/' . $newFilename,
+//         file_get_contents($uploadedFile)
+//     );
+
+//     $data['filename'] = $newFilename;
+
+//     return $data;
+// }
+// function TravelFile($filename, $uploadedFile)
+// {
+//     $allowedTypes = ['pdf', 'jpeg', 'jpg', 'png'];
+//     $maxSize = 5120; // 5MB
+
+//     $extension = pathinfo($filename, PATHINFO_EXTENSION);
+
+//     if (!in_array($extension, $allowedTypes)) {
+//         throw new Exception("Invalid file type. Only PDF, JPEG, PNG, and JPG files are allowed.");
+//     }
+
+//     if (filesize($uploadedFile) > $maxSize * 1024) {
+//         throw new Exception("File size exceeds the maximum allowed limit of 5 MB.");
+//     }
+
+//     $newFilename = uniqid() . '.' . $extension;
+//     Storage::disk('local')->put(
+//         'public/TravelFile/' . $newFilename,
+//         file_get_contents($uploadedFile)
+//     );
+
+//     $data['filename'] = $newFilename;
+
+//     return $data;
+// }
+// function SubFile($filename, $uploadedFile)
+// {
+//     $allowedTypes = ['pdf', 'jpeg', 'jpg', 'png'];
+//     $maxSize = 5120; // 5MB
+
+//     $extension = pathinfo($filename, PATHINFO_EXTENSION);
+
+//     if (!in_array($extension, $allowedTypes)) {
+//         throw new Exception("Invalid file type. Only PDF, JPEG, PNG, and JPG files are allowed.");
+//     }
+
+//     if (filesize($uploadedFile) > $maxSize * 1024) {
+//         throw new Exception("File size exceeds the maximum allowed limit of 5 MB.");
+//     }
+
+//     $newFilename = uniqid() . '.' . $extension;
+//     Storage::disk('local')->put(
+//         'public/SubFile/' . $newFilename,
+//         file_get_contents($uploadedFile)
+//     );
+
+//     $data['filename'] = $newFilename;
+
+//     return $data;
+// }
+function uploadFile($filename, $uploadedFile, $fileType, $destinationDir)
+{
+    $allowedTypes = ['pdf', 'jpeg', 'jpg', 'png'];
+    $maxSize = 5120; // 5MB
+
+    $extension = pathinfo($filename, PATHINFO_EXTENSION);
+
+    if (!in_array($extension, $allowedTypes)) {
+        throw new Exception("Invalid file type. Only PDF, JPEG, PNG, and JPG files are allowed.");
+    }
+
+    if (filesize($uploadedFile) > $maxSize * 1024) {
+        throw new Exception("File size exceeds the maximum allowed limit of 5 MB.");
+    }
+
+    $newFilename = uniqid() . '.' . $extension;
+    Storage::disk('local')->put(
+        'public/' . $destinationDir . '/' . $newFilename,
+        file_get_contents($uploadedFile)
+    );
+
+    $data['filename'] = $newFilename;
+
+    return $data;
+}
 
 if (!function_exists('upload')) {
     function upload($uploadedFile, $type = '')
