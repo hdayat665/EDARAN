@@ -47,7 +47,7 @@
         </thead>
             <tbody>
                 <?php $no = 1 ?>
-                @if ($allClaims)
+                <!-- @if ($allClaims)
                 @foreach ($allClaims as $allClaim)
                 <tr>
                     <td>{{$no++}}</td>
@@ -70,10 +70,10 @@
                     <td></td>
                 </tr>
                 @endforeach
-                @endif
+                @endif -->
 
-                {{-- <!-- @if ($cash_advance)
-                @foreach ($cash_advance as $ca)
+                @if ($allClaims)
+                @foreach ($allClaims as $ca)
                 <tr>
                     <td>{{$no++}}</td>
                     <td>CA{{$ca->id ?? '-'}}</td>
@@ -94,7 +94,7 @@
                     <td></td>
                 </tr>
                 @endforeach
-                @endif --> --}}
+                @endif 
 
             </tbody>
         </table>
