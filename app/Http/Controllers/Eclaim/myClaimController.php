@@ -39,6 +39,20 @@ class myClaimController extends Controller
         return view('pages.eclaim.cashAdvance');
     }
 
+    public function viewMtcClaim($id = '')
+    {
+        $mcs = new myClaimService;
+
+        $result = $mcs->viewMtcClaim($id);
+
+        $data['general'] = $result['claim'];
+        $data['travels'] = $result['travel'];
+        $data['personals'] = $result['personal'];
+        $data['gncs'] = $result['general'];
+
+        return view('pages.eclaim.ViewClaimDetailMtc', $data);
+    }
+
     public function newMonthlyClaimView($month = '', $year = '')
     {
         $mcs = new myClaimService;

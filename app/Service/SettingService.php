@@ -1515,7 +1515,7 @@ class SettingService
         $data['msg'] = 'Success Update Area Name';
 
         return $data;
-    }
+    } 
     public function deleteSubsistance($id)
     {
         $logs = EclaimGeneral::find($id);
@@ -1573,10 +1573,12 @@ class SettingService
         $claimCategory['claim_catagory'] = $input['claim_catagory'];
 
         ClaimCategory::create($claimCategory);
-
+        
         $category = ClaimCategory::where('tenant_id', $user->tenant_id)->orderBy('created_at', 'DESC')->first();
-
-        if ($input['content']) {
+        
+        
+        if (isset($input['content']) && isset($input['label'])) {
+            $dataContent = [];
             foreach ($input['content'] as $content) {
                 $dataContent[] = [
                     'content' => $content,
@@ -1586,10 +1588,11 @@ class SettingService
                     'created_at' => date_format(date_create(date("Y-m-d H:i:s")), "Y-m-d H:i:s"),
                 ];
             }
-
+        
             ClaimCategoryContent::insert($dataContent);
-        }
+        } 
 
+        
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');

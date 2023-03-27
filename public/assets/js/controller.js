@@ -66,6 +66,7 @@ requirejs.config({
         supervisorDetailClaimJs: assets + "/js/supervisorDetailClaimJs",
         hodClaimJs: assets + "/js/hodClaimJs",
         hodClaimDetailJs: assets + "/js/hodClaimDetailJs",
+        mtcClaimDetailJs: assets + "/js/mtcClaimDetailJs",
         fcheckerJs: assets + "/js/fcheckerJs",
         fcheckerGncJs: assets + "/js/fcheckerGncJs",
         financeCheckerMtcJs: assets + "/js/financeCheckerMtcJs",
@@ -389,7 +390,9 @@ if ($("#hodClaimJs").length > 0) {
 if ($("#hodClaimDetailJs").length > 0) {
     requirejs(["hodClaimDetailJs"]);
 }
-
+if ($("#mtcClaimDetailJs").length > 0) {
+    requirejs(["mtcClaimDetailJs"]);
+}
 if ($("#fcheckerGncJs").length > 0) {
     requirejs(["fcheckerGncJs"]);
 }

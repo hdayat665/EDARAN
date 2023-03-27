@@ -63,8 +63,17 @@
                                                     <td>{{ $gnc->claim_catagory_name ?? $gnc->claim_catagory }}</td>
                                                     <td>{{ $gnc->amount ?? '-' }}</td>
                                                     <td>{{ $gnc->desc ?? '-' }}</td>
-                                                    <td><a href="/storage/{{ $gnc->file_upload }}" download>{{ $gnc->file_upload ?? '-' }}</td>
-                                                </tr></a>
+                                                    <td>
+                                                        @if(!empty($gnc->file_upload))
+                                                        @php
+                                                        $filenames = explode(',', $gnc->file_upload);
+                                                        @endphp
+                                                        @foreach($filenames as $filename)
+                                                        <a href="/storage/{{ $filename }}" target="_blank">{{ $filename }}</a><br>
+                                                        @endforeach
+                                                        @endif
+                                                    </td>
+                                                </tr>
                                             @endforeach
                                         @endif
                                     </tbody>

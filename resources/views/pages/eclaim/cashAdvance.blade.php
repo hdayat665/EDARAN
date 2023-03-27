@@ -12,7 +12,7 @@
                         <div class="col-md-7">
                             <div class="form-control">
                                 <div class="row p-2">
-                                    <div class="col-md-4">
+                                    <div class="col-md-4"> 
                                         <label class="form-label">Type of Cash Advance</label>
                                     </div>
                                     <div class="col-md-8">

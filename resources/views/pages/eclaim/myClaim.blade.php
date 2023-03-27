@@ -16,10 +16,10 @@
         <h1 class="page-header">eClaim <small>| My Claim </small></h1>
         <div class="panel panel" id="myClaimJs">
             <div class="panel-body">
-                <div class="form-control">
+                <!-- <div class="form-control">
                     <h3>Claim Overview</h3>
                     <br>
-                    <!-- <div class="row p-2">
+                    <div class="row p-2">
                         <div class="col-sm-2">
                             <h3 class="text-center">Total Pending Claim Approval:</h3>
                             <h3 class="text-center text-primary ">2</h3>
@@ -44,8 +44,8 @@
                             <h3 class="text-center">Total Amount Cash Advance:</h3>
                             <h3 class="text-center text-primary">MYR 0.00</h3>
                         </div>
-                    </div> -->
-                </div>
+                    </div>
+                </div> -->
                 <br>
                 <div class="form-control">
                     <div class="panel-body">

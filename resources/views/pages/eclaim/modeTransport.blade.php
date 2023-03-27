@@ -30,7 +30,7 @@
                         <label class="form-label">Day</label>
                     </div>
                     <div class="col-md-2">
-                        <input type="text" class="form-control" name="subs_allowance_day" id="day" value="0">
+                        <input type="text" class="form-control" readonly name="subs_allowance_day" id="day" value="0">
                     </div>
                     <div class="col-md-1">
                         <label class="form-label">X</label>
@@ -80,7 +80,7 @@
                         <label class="form-label">Night</label>
                     </div>
                     <div class="col-md-2">
-                        <input type="text" class="form-control" name="accommadation_night" id="night" value="0">
+                        <input type="text" class="form-control" readonly name="accommadation_night" id="night" value="0">
                     </div>
                     <div class="col-md-1">
                         <label class="form-label">X</label>
