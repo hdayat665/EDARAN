@@ -53,7 +53,7 @@
                                         </div>
                                         <div class="col-md-9">
                                             <select class="form-select" id="year" name="year">
-                                                <option class="form-label" value="Please Select" selected>Please
+                                                <option class="form-label" value="" selected>Please
                                                     Select</option>
                                                 <option class="form-label" value="2022">2022</option>
                                                 <option class="form-label" value="2023">2023</option>
@@ -101,7 +101,7 @@
                                         </div>
                                         <div class="col-md-9">
                                             <select class="form-select" id="claimcategory" name="claim_category">
-                                                <option class="form-label" value="Please Select" selected>Please
+                                                <option class="form-label" value="" selected>Please
                                                     Select</option>
                                                 {{ $categorys = getClaimCategory() }}
                                                 @foreach ($categorys as $category)
@@ -127,9 +127,10 @@
                                             <label class="form-label">Amount (MYR)</label>
                                         </div>
                                         <div class="col-md-9">
-                                            <input type="number" class="form-control" name="amount" id="amount">
+                                            <input type="number" class="form-control" name="amount" id="amount" placeholder="0.00">
                                         </div>
                                     </div>
+
                                     <div class="row p-2">
                                         <div class="col-md-3">
                                             <label class="form-label">Description</label>
@@ -197,6 +198,26 @@
             <!-- </form> -->
         </div>
     </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+        $('#amount').on('input', function() {
+            var value = $(this).val();
+            var decimalCount = (value.split('.')[1] || []).length;
+            if (decimalCount > 2) {
+            $(this).val(parseFloat(value).toFixed(2));
+            } 
+        });
+
+        $('#amount').blur(function() {
+            var value = $(this).val();
+            var decimalCount = (value.split('.')[1] || []).length;
+            if (decimalCount == 0) {
+            $(this).val(value + '.00');
+            }
+        });
+        });
+    </script>
     <!-- <script>
         function addTableRow() {
             // var year = document.getElementById("year");

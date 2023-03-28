@@ -4,9 +4,23 @@ $(document).ready(function () {
     $("#createGnc").click(function (e) {
         $("#createForm").validate({
             // Specify validation rules
-            rules: {}, 
+            rules: {
+                year: "required",
+                month: "required",
+                claim_category: "required",
+                amount: "required",
+                'file_upload[]': "required",
+                claim_category_detail: "required",
+            }, 
 
-            messages: {},
+            messages: {
+                year: "Please Select Year",
+                month: "Please Select Month",
+                claim_category: "Please Select Claim Category",
+                amount: "Please Fill Out Amount",
+                'file_upload[]': "Please Upload Attachment",
+                claim_category_detail: "Please Insert Category Detail",
+            },
             submitHandler: function (form) {
                 requirejs(["sweetAlert2"], function (swal) {
                     var data = new FormData(
@@ -41,7 +55,7 @@ $(document).ready(function () {
             },
         });
     });
-
+    
     // $("#createGnc").click(function (e) {
     //     $("#createForm").validate({
     //         // Specify validation rules
@@ -227,7 +241,7 @@ $(document).ready(function () {
                 .remove()
                 .end()
                 .append(
-                    '<option label="Please Choose" selected="selected"> </option>'
+                    '<option label="Please Choose" value="" selected="selected"> </option>'
                 )
                 .val("");
 
