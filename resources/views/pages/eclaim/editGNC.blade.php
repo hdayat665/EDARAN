@@ -82,7 +82,7 @@
                                         </div>
                                         <div class="col-md-9">
                                             <select class="form-select" id="claimcategory" name="claim_category">
-                                                <option class="form-label" value="Please Select" selected>Please
+                                                <option class="form-label" value="" selected>Please
                                                     Select</option>
                                                 {{ $categorys = getClaimCategory() }}
                                                 @foreach ($categorys as $category)
@@ -107,7 +107,7 @@
                                             <label class="form-label">Amount (MYR)</label>
                                         </div>
                                         <div class="col-md-9">
-                                            <input type="number" name="amount" class="form-control">
+                                            <input type="number" name="amount" class="form-control" placeholder="0.00">
                                         </div>
                                     </div>
                                     <div class="row p-2">
