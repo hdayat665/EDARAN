@@ -21,12 +21,12 @@
         </div>
         <div class="col-md-8">
             <select class="form-select" id="project2" readonly name="project_id2">
-                <?php $projects = project(); ?>
-                <option class="form-label" value="">Please Select</option>
+                <option class="form-label" value="" selected>
+                    Please Select</option>
+                <?php $projects = myProjectOnly(); ?>
                 @foreach ($projects as $project)
                     <option class="form-label" value="{{ $project->id }}">{{ $project->project_name }}</option>
                 @endforeach
-
             </select>
         </div>
     </div>
