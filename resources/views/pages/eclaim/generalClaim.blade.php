@@ -198,26 +198,7 @@
             <!-- </form> -->
         </div>
     </div>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-        $(document).ready(function() {
-        $('#amount').on('input', function() {
-            var value = $(this).val();
-            var decimalCount = (value.split('.')[1] || []).length;
-            if (decimalCount > 2) {
-            $(this).val(parseFloat(value).toFixed(2));
-            } 
-        });
-
-        $('#amount').blur(function() {
-            var value = $(this).val();
-            var decimalCount = (value.split('.')[1] || []).length;
-            if (decimalCount == 0) {
-            $(this).val(value + '.00');
-            }
-        });
-        });
-    </script>
+    
     <!-- <script>
         function addTableRow() {
             // var year = document.getElementById("year");
