@@ -338,6 +338,16 @@ $(document).ready(function () {
                     text: "HRIS",
                     children: [
                         {
+                            text: "My Profile",
+                            state: { selected: false },
+                            children: [
+                                { text: "Register Employee" },
+                                { text: "Update Employee" },
+                                { text: "Terminate Employee" },
+                                { text: "Activate Employee" },
+                            ],
+                        },
+                        {
                             text: "Employee Info",
                             state: { selected: false },
                             children: [
@@ -471,6 +481,7 @@ $(document).ready(function () {
                 {
                     text: "HRIS",
                     children: [
+                        
                         {
                             text: "Employee Info",
                             state: { selected: false },
@@ -491,11 +502,11 @@ $(document).ready(function () {
                             children: [{ text: "Create Event" }],
                         },
                         {
-                            text: "Timesheet Report",
+                            text: "Timesheet Approval",
                             children: [
-                                { text: "Approve TSR" },
-                                { text: "Decline TSR" },
-                                { text: "View TSR" },
+                                { text: "Approve Timesheet" },
+                                { text: "Reject Timesheet" },
+                                
                             ],
                         },
                     ],
@@ -519,9 +530,12 @@ $(document).ready(function () {
                             text: "Leave Approval",
                             state: { selected: false },
                             children: [
-                                { text: "Approve Leave" },
-                                { text: "Reject Leave" },
-                                { text: "View Leave" },
+                                { text: "Department" ,
+                                children: [{ text: "Approve" }],
+                                },
+                                { text: "Head Of Department" ,
+                                children: [{ text: "Approve" }],
+                                }
                             ],
                         },
                     ],
@@ -529,6 +543,15 @@ $(document).ready(function () {
                 {
                     text: "Project",
                     children: [
+                        {
+                            text: "Customer",
+                            state: { selected: false },
+                            children: [
+                                { text: "Add Customer" },
+                                { text: "Edit Customer" },
+                                { text: "Delete Customer" }
+                            ],
+                        },
                         {
                             text: "Project Info",
                             state: { selected: false },
@@ -556,11 +579,32 @@ $(document).ready(function () {
                             text: "Claim Approval",
                             state: { selected: false },
                             children: [
-                                { text: "Approve Claim" },
-                                { text: "Recommend Claim" },
-                                { text: "Check Claim" },
-                                { text: "Amend Claim" },
-                                { text: "Cancel Claim" },
+                                { text: "Department",
+                                  children: [
+                                    {
+                                        text: "Approve",
+                                        state: { selected: false },
+                                    },
+                                ]
+                                },
+
+                                {   text: "Finance" ,
+                                    children: [
+                                    {
+                                        text: "Approve ",
+                                        state: { selected: false },
+                                    },
+                                    ]
+                                },
+
+                                {   text: "Admin" ,
+                                    children: [
+                                    {
+                                        text: "Approve",
+                                        state: { selected: false },
+                                    },
+                                    ]},
+                                
                             ],
                         },
                     ],
@@ -569,8 +613,10 @@ $(document).ready(function () {
                     text: "Settings",
                     children: [
                         { text: "General Settings" },
+                        { text: "Attendance Settings" },
                         { text: "Timesheet Settings" },
                         { text: "Leave Settings" },
+                        { text: "Claim Settings" },
                     ],
                 },
                 {
@@ -581,6 +627,7 @@ $(document).ready(function () {
                         { text: "Leave" },
                         { text: "Project" },
                         { text: "Claim" },
+                        { text: "Charge Out Rate" },
                     ],
                 },
             ],
