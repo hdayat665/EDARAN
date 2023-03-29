@@ -16,8 +16,57 @@ use Illuminate\Support\Facades\Session;
 
 class TimesheetReportService
 {
-    public function statusReportView($input = [])
+    // public function statusReportView($input = [])
+    // {
+    //     $cond[1] = ['tenant_id', Auth::user()->tenant_id];
+
+    //     if (isset($input['employeeName'])) {
+    //         $cond[2] = ["employee_name", $input["employeeName"]];
+    //     }
+
+    //     if (isset($input['designation'])) {
+    //         $cond[3] = ['designation', $input['designation']];
+    //     }
+
+    //     if (isset($input['department'])) {
+    //         $cond[4] = ['department', $input['department']];
+    //     }
+
+    //     if (isset($input['year'])) {
+    //         $year = $input['year'];
+    //         $cond[5] = [DB::raw('YEAR(created_at)'), $year];
+    //     }
+
+    //     if (isset($input['month'])) {
+    //         $month = $input['month'];
+    //         $cond[6] = [DB::raw('MONTH(created_at)'), $month];
+    //     }
+
+        
+
+    //     $data = TimesheetApproval::where($cond)->get();
+
+    //     // $data = DB::table('timesheet_approval as a')
+    //     //     ->select('a.*')
+    //     //     ->where($cond)
+    //     //     ->get();
+
+
+    //     return $data;
+    // }
+
+    public function statusReportView()
     {
+        
+        $data = TimesheetApproval::where('tenant_id', Auth::user()->tenant_id)->orderBy('created_at', 'DESC')->get();
+
+        return $data;
+    }
+
+    public function statusReportView1($r)
+    {
+        $input = $r->input();
+
         $cond[1] = ['tenant_id', Auth::user()->tenant_id];
 
         if (isset($input['employeeName'])) {
@@ -32,15 +81,22 @@ class TimesheetReportService
             $cond[4] = ['department', $input['department']];
         }
 
+
         if (isset($input['year'])) {
             $year = $input['year'];
             $cond[5] = [DB::raw('YEAR(created_at)'), $year];
         }
 
-        if (isset($input['month'])) {
-            $month = $input['month'];
-            $cond[6] = [DB::raw('MONTH(created_at)'), $month];
+
+        if ($input['month']) {
+            $cond[6] = ['month', $input['month']];
         }
+
+
+        if ($input['status']) {
+            $cond[7] = ['status', $input['status']];
+        }
+
 
         
 
@@ -54,6 +110,7 @@ class TimesheetReportService
 
         return $data;
     }
+
 
     public function getDataEmployeeSummary($input = [])
     {
@@ -101,45 +158,65 @@ class TimesheetReportService
         return $data;
     }
 
-    public function getDataEmployeeSummaryOvertime($input = [])
+    // public function getDataEmployeeSummaryOvertime($input = [])
+    // {
+    //     $cond[1] = ['a.tenant_id', Auth::user()->tenant_id];
+    
+    //     if (isset($input['project'])) {
+    //         $cond[2] = ['a.project_id', $input['project']];
+            
+    //     }
+    
+    //     if (isset($input['department'])) {
+    //         $cond[3] = ['d.departmentName', $input['department']];
+    //     }
+    
+    //     if (isset($input['designation'])) {
+    //         $cond[4] = ['e.designationName', $input['designation']];
+    //     }
+    
+    //     if (isset($input['employeeName'])) {
+    //         $cond[5] = ['c.user_id', $input['employeeName']];
+    //     }
+
+    //     if (isset($input['year'])) {
+    //         $year = $input['year'];
+    //         $cond[6] = [DB::raw('YEAR(a.created_at)'), $year];
+    //     }
+
+    //     if (isset($input['month'])) {
+    //         $month = $input['month'];
+    //         $cond[7] = [DB::raw('MONTH(a.created_at)'), $month];
+    //     }
+    
+    //     $startDate = date_format(date_create(now()), 'Y').'-01-01';
+    //     $endDate = date_format(date_create(now()), 'Y').'-12-31';
+    
+    //     if (isset($input['date_range'])) {
+    //         $dateRange = \explode(' - ', $input['date_range']);
+    //         $startDate = date_format(date_create($dateRange[0]), 'Y-m-d');
+    //         $endDate = date_format(date_create($dateRange[1]), 'Y-m-d');
+    //     }
+    
+    //     $data = DB::table('timesheet_log as a')
+    //     ->leftJoin('project as b', 'a.project_id', '=', 'b.id')
+    //     ->leftJoin('employment as c', 'a.user_id', '=', 'c.user_id')
+    //     ->leftJoin('department as d', 'c.department', '=', 'd.id')
+    //     ->leftJoin('designation as e', 'c.designation', '=', 'e.id')
+    //     ->select('a.date', DB::raw('SEC_TO_TIME(SUM(TIME_TO_SEC(a.total_hour))) as total_hour'), 'b.project_name', 'c.employeeName', 'd.departmentName', 'e.designationName', 'd.id')
+    //     ->where($cond)
+    //     ->whereBetween('date', [$startDate, $endDate])
+    //     ->groupBy('a.date')
+    //     ->get();
+    
+    
+    //     return $data;
+    // }
+
+    public function getDataEmployeeSummaryOvertime()
     {
         $cond[1] = ['a.tenant_id', Auth::user()->tenant_id];
     
-        if (isset($input['project'])) {
-            $cond[2] = ['a.project_id', $input['project']];
-            
-        }
-    
-        if (isset($input['department'])) {
-            $cond[3] = ['d.departmentName', $input['department']];
-        }
-    
-        if (isset($input['designation'])) {
-            $cond[4] = ['e.designationName', $input['designation']];
-        }
-    
-        if (isset($input['employeeName'])) {
-            $cond[5] = ['c.user_id', $input['employeeName']];
-        }
-
-        if (isset($input['year'])) {
-            $year = $input['year'];
-            $cond[6] = [DB::raw('YEAR(a.created_at)'), $year];
-        }
-
-        if (isset($input['month'])) {
-            $month = $input['month'];
-            $cond[7] = [DB::raw('MONTH(a.created_at)'), $month];
-        }
-    
-        $startDate = date_format(date_create(now()), 'Y').'-01-01';
-        $endDate = date_format(date_create(now()), 'Y').'-12-31';
-    
-        if (isset($input['date_range'])) {
-            $dateRange = \explode(' - ', $input['date_range']);
-            $startDate = date_format(date_create($dateRange[0]), 'Y-m-d');
-            $endDate = date_format(date_create($dateRange[1]), 'Y-m-d');
-        }
     
         $data = DB::table('timesheet_log as a')
         ->leftJoin('project as b', 'a.project_id', '=', 'b.id')
@@ -148,8 +225,63 @@ class TimesheetReportService
         ->leftJoin('designation as e', 'c.designation', '=', 'e.id')
         ->select('a.date', DB::raw('SEC_TO_TIME(SUM(TIME_TO_SEC(a.total_hour))) as total_hour'), 'b.project_name', 'c.employeeName', 'd.departmentName', 'e.designationName', 'd.id')
         ->where($cond)
-        ->whereBetween('date', [$startDate, $endDate])
-        ->groupBy('a.date')
+        // ->whereBetween('date', [$startDate, $endDate])
+        // ->groupBy('a.date')
+        ->get();
+    
+    
+        return $data;
+    }
+
+    public function getDataEmployeeSummaryOvertime1($r)
+    {
+        $input = $r->input();
+        $cond[1] = ['a.tenant_id', Auth::user()->tenant_id];
+    
+        // if (isset($input['project'])) {
+        //     $cond[2] = ['a.project_id', $input['project']];
+            
+        // }
+    
+        // if (isset($input['department'])) {
+        //     $cond[3] = ['d.departmentName', $input['department']];
+        // }
+    
+        // if (isset($input['designation'])) {
+        //     $cond[4] = ['e.designationName', $input['designation']];
+        // }
+    
+        if (isset($input['employeeName'])) {
+            $cond[2] = ['c.user_id', $input['employeeName']];
+        }
+
+
+        if (isset($input['year'])) {
+            $year = $input['year'];
+            $cond[6] = [DB::raw('YEAR(a.created_at)'), $year];
+        }
+
+        // if (isset($input['month'])) {
+        //     $month = $input['month'];
+        //     $cond[7] = [DB::raw('MONTH(a.created_at)'), $month];
+        // }
+
+        if (array_key_exists('month', $input)) {
+            $month = date("m", strtotime($input['month']));
+            $cond[4] = [DB::raw('MONTH(a.created_at)'), $month];
+        }
+        
+        
+
+        $data = DB::table('timesheet_log as a')
+        ->leftJoin('project as b', 'a.project_id', '=', 'b.id')
+        ->leftJoin('employment as c', 'a.user_id', '=', 'c.user_id')
+        ->leftJoin('department as d', 'c.department', '=', 'd.id')
+        ->leftJoin('designation as e', 'c.designation', '=', 'e.id')
+        ->select('a.date', DB::raw('SEC_TO_TIME(SUM(TIME_TO_SEC(a.total_hour))) as total_hour'), 'b.project_name', 'c.employeeName', 'd.departmentName', 'e.designationName', 'd.id')
+        ->where($cond)
+        // ->whereBetween('date', [$startDate, $endDate])
+        // ->groupBy('a.date')
         ->get();
     
     
@@ -212,7 +344,7 @@ class TimesheetReportService
     public function getdatabyemployee()
     {
         $cond[1] = ['a.tenant_id', Auth::user()->tenant_id];
-        $cond[2] = ['c.project_name', '!=', null];
+        // $cond[2] = ['c.project_name', '!=', null];
 
         
 

@@ -27,7 +27,7 @@
 					</tr>
 				</thead>
 				<tbody>
-                    <?php $no = 1 ?>
+                    {{-- <?php $no = 1 ?> --}}
                     @if ($projects)
                         @foreach ($projects as $project)
                         <tr class="odd gradeX">

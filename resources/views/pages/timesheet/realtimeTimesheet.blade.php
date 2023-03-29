@@ -75,7 +75,7 @@
                                     <th width="1%">No</th>
                                     <th class="text-nowrap">Action</th>
                                     <th class="text-nowrap">Event Name</th>
-                                    <th class="text-nowrap">Date</th>
+                                    <th width="10%">Date</th>
                                     <th class="text-nowrap">Time</th>
                                     <th class="text-nowrap">Location</th>
                                     <th class="text-nowrap">Description</th>
@@ -102,7 +102,7 @@
                                                 $names = explode(',', $event->participant);
                                             @endphp
                                             <td style="text-align: center" width="7%"><a class="btn btn-primary" href="javascript:;" data-bs-toggle="modal"
-                                                    data-id="{{ $event->id }}" id="buttonnViewParticipant"></i>  {{ count($names) }} Participants  </a></td>
+                                                    data-id="{{ $event->id }}" id="buttonnViewParticipant"></i>  {{ count($names) }}</a></td>
                                                     {{-- data-id="{{ $event->id }}" id="buttonnViewParticipant"></i> view</a></td> --}}
                         
                                         </tr>

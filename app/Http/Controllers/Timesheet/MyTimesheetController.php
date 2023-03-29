@@ -238,6 +238,21 @@ class MyTimesheetController extends Controller
         return view('pages.timesheet.viewTimesheet', $data);
     }
 
+    // public function viewTimesheet($id = '', $userId = '')
+    // {
+    //     // Retrieve the employee name using the provided userId
+    //     $employee = Employee::where('userId', $userId)->first();
+    //     $employeeName = $employee->name;
+    
+    //     $data['id'] = $id;
+    //     $data['userId'] = $userId;
+    //     $data['employeeName'] = $employeeName;
+    
+    //     return view('pages.timesheet.viewTimesheet', $data);
+    // }
+    
+
+
     //SUMMARRY TIMESHEET
    
 
