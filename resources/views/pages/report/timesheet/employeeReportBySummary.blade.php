@@ -37,7 +37,7 @@
                                 <td>{{ $row->employeeName }}</td>
                                 <td>{{ $row->date }}</td>
                                 <td>{{ $row->departmentName }}</td>
-                                <td>{{ $row->projectnameas }}</td>
+                                <td>{{ $row->projectnameas ?? '-' }}</td>
                                 <td>{{ str_replace(':', '.', substr($row->total_hour, 0, -2)) }}</td>
                                 <td>{{ number_format(floatval(str_replace(':', '.', substr($row->total_hour, 0, -2))) * floatval($row->COR), 2) }}</td>
                             </tr>

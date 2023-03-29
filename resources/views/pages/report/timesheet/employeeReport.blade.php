@@ -84,7 +84,7 @@
                                 </div>
                             </div>
                             <div class="row p-2">
-                                <div class="col-sm-12" style="display: flex; justify-content: flex-end" >
+                                <div class="col-sm-12" >
                                     <button type="submit" class="btn btn-primary mt-3">
                                         Submit
                                     </button>
@@ -160,7 +160,7 @@
                             </div>
 
                             <div class="row p-2">
-                                <div class="col-sm-12" style="display: flex; justify-content: flex-end" >
+                                <div class="col-sm-12">
                                     <button type="submit" class="btn btn-primary mt-3">Submit</button>
                                 </div>
                             </div>
@@ -169,11 +169,6 @@
                     
                 </div>
             </div>
-        </div>
-    </div>
-    <div class="row p-2">
-        <div class="col align-self-start">
-            <a href="/setting" class="btn btn-primary"  type="submit"><i class="fa fa-arrow-left"></i> Back</a>
         </div>
     </div>
 

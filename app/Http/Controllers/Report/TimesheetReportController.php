@@ -13,24 +13,44 @@ use Illuminate\Http\Request;
 
 class TimesheetReportController extends Controller
 {
+    // public function statusReportView()
+    // {
+    //     $data = [];
+    //     $trs = new TimesheetReportService;
+    //     $input = [];
+    //     $data['statusReports'] = $trs->statusReportView($input);
+
+    //     return view('pages.report.timesheet.statusReport', $data);
+    // }
+
     public function statusReportView()
     {
-        $data = [];
+        // $data = [];
         $trs = new TimesheetReportService;
-        $input = [];
-        $data['statusReports'] = $trs->statusReportView($input);
-
+        // $input = [];
+        $data['statusReports'] = $trs->statusReportView();
+        $data['statusId'] = '';
+        $data['departmentId'] = '';
+        $data['deisgnationId'] = '';
+        $data['employeeId'] = '';
+        $data['monthId'] = '';
+        $data['yearId'] = '';
         return view('pages.report.timesheet.statusReport', $data);
     }
 
     public function searchStatusReport(Request $r)
     {
-        $data = [];
+        // $data = [];
         $input = $r->input();
         $trs = new TimesheetReportService;
 
-        $data['statusReports'] = $trs->statusReportView($input);
-
+        $data['statusReports'] = $trs->statusReportView1($r);
+        $data['departmentId'] = $input['department'];
+        $data['deisgnationId'] = $input['designation'];
+        $data['employeeId'] = $input['employeeName'];
+        $data['statusId'] = $input['status'];
+        $data['yearId'] = $input['year'];
+        $data['monthId'] = $input['month'];
         return view('pages.report.timesheet.statusReport', $data);
     }
 
@@ -119,24 +139,47 @@ class TimesheetReportController extends Controller
 
     public function overtimeReportView()
     {
-        $data = [];
+        // $data = [];
         $trs = new TimesheetReportService;
 
         $data['overtimes'] = $trs->getDataEmployeeSummaryOvertime();
+        $data['employeeId'] = '';
+        $data['yearsId'] = '';
+        $data['monthId'] = '';
+        $data['designationsId'] = '';
+        $data['departmenstId'] = '';
         
         return view('pages.report.timesheet.overtimeReport', $data);
     }
 
+    // public function searchOvertimeReport(Request $r)
+    // {
+    //     $data = [];
+    //     $input = $r->input();
+    //     $trs = new TimesheetReportService;
+
+    //     $data['overtimes'] = $trs->getDataEmployeeSummaryOvertime($input);
+    //     $data['employeeId'] = $input['employeeName'];
+    //     return view('pages.report.timesheet.overtimeReport', $data);
+    // }
+
     public function searchOvertimeReport(Request $r)
     {
-        $data = [];
+        // $data = [];
         $input = $r->input();
         $trs = new TimesheetReportService;
 
-        $data['overtimes'] = $trs->getDataEmployeeSummaryOvertime($input);
-
+        $data['overtimes'] = $trs->getDataEmployeeSummaryOvertime1($r);
+        $data['employeeId'] = $input['employeeName'];
+        $data['yearsId'] = $input['year'];
+        $data['designationsId'] = $input['designation'];
+        $data['monthId'] = $input['month'];
+        $data['departmenstId'] = $input['department'];
+        
+        
         return view('pages.report.timesheet.overtimeReport', $data);
     }
+
 
 
     // public function employeeReportAll()

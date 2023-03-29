@@ -46,8 +46,8 @@
                         <th colspan="4">Total:</th>
                         <td>
                             @if ($departments)
-                                {{ number_format($departments->sum(function($department) {
-                                    return floatval(str_replace(':', '.', substr($department->total_hour, 0, -2))) * floatval($department->COR);
+                                {{ number_format($departments->sum(function($departments) {
+                                    return floatval(str_replace(':', '.', substr($departments->total_hour, 0, -2))) * floatval($departments->COR);
                                 }), 2) }}
                             @endif
                         </td>

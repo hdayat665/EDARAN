@@ -1,3 +1,6 @@
+
+$(document).ready(function() {
+
 $('#timesheetapproval').DataTable({
     lengthMenu: [
         [5, 10, 25, 50, -1],
@@ -5,19 +8,51 @@ $('#timesheetapproval').DataTable({
     ],
     responsive: false,
     searching: true,
-    dom: "<'row'<'col-sm-3'l><'col-sm-6 text-center'B><'col-sm-3'f>>tp",
-    buttons: [
-        { extend: 'excel', className: 'btn-sm' },
-        { extend: 'pdf', className: 'btn-sm' },
-        { extend: 'print', className: 'btn-sm' }
+    "dom": '<"row"<"col-sm-4"l><"col-sm-4 text-center"B><"col-sm-4"f>>t<"row"<"col-sm-12"ip>>',
+        "buttons": [
+            { extend: 'excel', className: 'btn-blue', exportOptions: {
+                columns: [1,2,3,4,5]
+            }},
+            { extend: 'pdf', className: 'btn-blue',  exportOptions: {
+                columns:  [1,2,3,4,5]
+            }},
+            { extend: 'print', className: 'btn-blue',  exportOptions: {
+                columns:  [1,2,3,4,5]
+            }},
     ],
 });
-// 
-$().ready = (function() {
-    $("#filter").click(function() {
-        $("#filterform").toggle();
-    });
-})();
+
+
+if ($('#employeenamesearch').val() || $('#monthsearch').val() || $('#yearsearch').val() || $('#designationsearch').val() || $('#departmentsearch').val()) {
+    $('#filterform').show();
+}
+
+$("#filter").click(function() {
+    $('#filterform').toggle();
+});
+
+$("#reset").on("click", function () {
+    $("#employeenamesearch").val($("#employeenamesearch").data("default-value"));
+    $("#employeenamesearch").picker('destroy');
+    
+    $("#yearsearch").val($("#yearsearch").data("default-value"));
+    // $("#yearsearch").picker('destroy');
+    
+    $("#monthsearch").val($("#monthsearch").data("default-value"));
+    // $("#monthsearch").picker('destroy');
+    
+    $("#designationsearch").val($("#designationsearch").data("default-value"));
+    $("#designationsearch").picker('destroy');
+    
+    $("#departmentsearch").val($("#departmentsearch").data("default-value"));
+    $("#departmentsearch").picker('destroy');
+    
+   
+});
+
+
+
+
 $("#starteventdate").datepicker({
     todayHighlight: true,
     autoclose: true,
@@ -173,4 +208,6 @@ $("#reset").on("click", function () {
     $("#monthsearch").val($("#monthsearch").data("default-value"));
     $("#designationsearch").val($("#designationsearch").data("default-value"));
     $("#departmentsearch").val($("#departmentsearch").data("default-value"));
+});
+
 });
