@@ -677,12 +677,26 @@ class ProfileService
                 }
             }
 
+            if(!isset($input['okuStatus']))
+            {
+                $input['okuStatus'] = null;
+                $input['okuNo'] = null;
+                $input['okuFile'] = null;
+            }
+
+            if(!isset($input['passport']))
+            {
+                $input['passport'] = null;
+                $input['expiryDate'] = null;
+                $input['issuingCountry'] = null;
+            }
+
             UserChildren::where('id', $id)->update($input);
 
             $data['status'] = config('app.response.success.status');
             $data['type'] = config('app.response.success.type');
             $data['title'] = config('app.response.success.title');
-            $data['msg'] = 'Success Update Children';
+            $data['msg'] = 'Children is updated.';
         }
 
         return $data;
@@ -767,7 +781,7 @@ class ProfileService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success add Parent';
+        $data['msg'] = 'New Family is created.';
 
         return $data;
     }
@@ -814,7 +828,7 @@ class ProfileService
             $data['status'] = config('app.response.success.status');
             $data['type'] = config('app.response.success.type');
             $data['title'] = config('app.response.success.title');
-            $data['msg'] = 'Success Update Parent';
+            $data['msg'] = 'Family is updated.';
         }
 
         return $data;
@@ -1111,7 +1125,7 @@ class ProfileService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success add children';
+        $data['msg'] = 'New Children is created.';
 
         return $data;
     }
@@ -1131,7 +1145,7 @@ class ProfileService
             $data['status'] = config('app.response.success.status');
             $data['type'] = config('app.response.success.type');
             $data['title'] = config('app.response.success.title');
-            $data['msg'] = 'Children deleted';
+            $data['msg'] = 'Children is deleted.';
         }
 
         return $data;
@@ -1152,7 +1166,7 @@ class ProfileService
             $data['status'] = config('app.response.success.status');
             $data['type'] = config('app.response.success.type');
             $data['title'] = config('app.response.success.title');
-            $data['msg'] = 'Parent deleted';
+            $data['msg'] = 'Family is deleted.';
         }
 
         return $data;

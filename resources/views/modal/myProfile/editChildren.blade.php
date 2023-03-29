@@ -135,7 +135,7 @@
                             <div class="row">
                                 <div class="col-sm-6 ">
                                     <div class="form-check form-switch align-right">
-                                        <input class="form-check-input okuCheck4" type="checkbox" id="" name="">
+                                        <input class="form-check-input okuCheck4" type="checkbox" value="on" {{($children->okuStatus ?? '') ? 'checked' : ''}} id="OKUchildren1" name="okuStatus">
                                         <label class="form-check-label" for="citizen" >
                                             OKU?
                                         </label>
@@ -143,7 +143,7 @@
                                 </div>
                                 <div class="col-sm-6">
                                     <label for="lastname" class="form-label" >OKU Card Number*</label>
-                                    <input type="text" id="okucard4" name="" value="" class="form-control" readonly aria-describedby="" placeholder="OKU CARD NUMBER" >
+                                    <input type="text" id="okucard4" name="okuNo" value="{{$children->okuNo ?? ''}}" class="form-control" readonly placeholder="OKU CARD NUMBER" >
                                 </div>
                             </div>
                         </div>

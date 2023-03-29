@@ -159,8 +159,7 @@
                             <div class="col-sm-3">
                                 <label for="issuing-country" class="form-label">Issuing Country*</label>
                                 <select class="form-select" name="issuingCountry" id="passportcountrymyprofile" style="text-transform:uppercase" disabled>
-                                    <option value="" label="PLEASE CHOOSE"></option>
-                                    <option value="MY" label="Malaysia" selected></option>
+                                    <option value="" label="PLEASE CHOOSE" selected></option>
                                         <?php
                                             $americass = americas();
                                             $asias = asias();
