@@ -57,7 +57,6 @@ $("document").ready(function () {
         requirejs(["sweetAlert2"], function (swal) {
             var data = new FormData(document.getElementById("addAppealForm"));
             
-            console.log(data);
             $.ajax({
                 type: "POST",
                 url: "/appealMtc",

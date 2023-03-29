@@ -401,9 +401,19 @@ $("document").ready(function () {
     $("#personalSaveButton").click(function (e) {
         $("#personalForm").validate({
             // Specify validation rules
-            rules: {},
+            rules: {
+                claim_category: "required",
+                claim_category_detail: "required",
+                amount: "required",
+                'file_upload[]': "required",
+            },
 
-            messages: {},
+            messages: {
+                claim_category: "Please Select Claim Category",
+                claim_category_detail: "Please Select Claim Category",
+                amount: "Please Fill Out Amount",
+                'file_upload[]': "Please Upload Attachment",
+            },
             submitHandler: function (form) {
                 requirejs(["sweetAlert2"], function (swal) {
                     var data = new FormData(
@@ -444,9 +454,35 @@ $("document").ready(function () {
     $("#travelSaveButton").click(function (e) {
         $("#travelForm").validate({
             // Specify validation rules
-            rules: {},
+            rules: {
+                general_id: "required",
+                start_time: "required",
+                end_time: "required",
+                desc: "required",
+                reason: "required",
+                type_transport: "required",
+                location_start: "required",
+                project_id: "required",
+                address_start: "required",
+                location_end: "required",
+                location_address: "required",
+                'file_upload[]': "required",
+            },
 
-            messages: {},
+            messages: {
+                general_id: "Please Select Travel Date",
+                start_time: "Please Select Start Time",
+                end_time: "Please Select End Time",
+                desc: "Please Insert Description",
+                reason: "Please Insert Reason",
+                type_transport: "Please Select Type of Transport",
+                location_start: "Please Select Start Location",
+                project_id: "Please Select Project",
+                address_start: "Please Select Start Address",
+                location_end: "Please Select Destination",
+                location_address: "Please Select Destination Address",
+                'file_upload[]': "Please Upload Attachment",
+            },
             submitHandler: function (form) {
                 requirejs(["sweetAlert2"], function (swal) {
                     var data = new FormData(
@@ -487,9 +523,13 @@ $("document").ready(function () {
     $("#caButton").click(function (e) {
         $("#subsForm").validate({
             // Specify validation rules
-            rules: {},
+            rules: {
+                'file_upload[]': "required",
+            },
 
-            messages: {},
+            messages: {
+                'file_upload[]': "Please Upload Attachment",
+            },
             submitHandler: function (form) {
                 requirejs(["sweetAlert2"], function (swal) {
                     var data = new FormData(
@@ -530,9 +570,25 @@ $("document").ready(function () {
     $("#subsSaveButton").click(function (e) {
         $("#subsForm").validate({
             // Specify validation rules
-            rules: {},
+            rules: {
+                'file_upload[]': "required",
+                start_date: "required",
+                end_date: "required",
+                start_time: "required",
+                end_time: "required",
+                project_id: "required",
+                desc: "required",
+            },
 
-            messages: {},
+            messages: {
+                'file_upload[]': "Please Upload Attachment",
+                start_date: "Please Select Start Date",
+                end_date: "Please Select End Date",
+                start_time: "Please Select Start Time",
+                end_time: "Please Select End Time",
+                project_id: "Please Select Project",
+                desc: "Please Insert Description",
+            },
             submitHandler: function (form) {
                 requirejs(["sweetAlert2"], function (swal) {
                     var data = new FormData(

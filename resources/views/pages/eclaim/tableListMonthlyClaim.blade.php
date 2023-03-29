@@ -1,6 +1,6 @@
 <div class="form-control">
     <div class="row p-2">
-        <h4>Personal Claims Table List:</h4>
+        <h4>Others Claim Table List:</h4>
     </div>
     <div class="row">
         <div class="">
@@ -43,7 +43,7 @@
     </div>
     <br>
     <div class="row p-2">
-        <h4>Travelling & Subsistence & Accomodation Table List:</h4>
+        <h4>Travelling, Subsistence & Accommodation Table List:</h4>
     </div>
     <div class="row">
         <div class="">
