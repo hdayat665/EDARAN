@@ -7,11 +7,11 @@
         </div>
         <div class="modal-body">
             <form id="formEditAddressDetails">
+                <input type="hidden" id="id1" name="id" >
                 <div class="row p-2">
                     <div class="col-sm-6">
                         <label for="address-1" class="form-label">Address 1*</label>
                         <input type="text" id="address1Edit" name="address1" value="" class="form-control" aria-describedby="address-1" placeholder="ADDRESS 1" style="text-transform:uppercase">
-                        <input type="hidden" id="id1" name="id" value="{{$user_id}}" >
                     </div>
                     <div class="col-sm-6">
                         <label for="address-2" class="form-label">Address 2</label>
@@ -60,7 +60,7 @@
                         </select>
                     </div>
                 </div>
-                <div class="row p-2">
+                {{-- <div class="row p-2">
                     <div class="col-sm-6">
                         <label for="Addresstype" class="form-label">Address Type*</label>
                         <select class="form-select" name="addressType" id="addressTypeEdit" value="">
@@ -72,7 +72,7 @@
                             
                         </select>
                     </div>
-                </div>
+                </div> --}}
             </form>
         </div>
         <div class="modal-footer">

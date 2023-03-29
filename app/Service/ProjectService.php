@@ -274,17 +274,20 @@ class ProjectService
     public function createProjectLocation($r)
     {
         $input = $r->input();
-
-        $projectLocation = ProjectLocation::where('location_name', $input['location_name'])->first();
-
+        
+        $projectLocation = ProjectLocation::where('project_id', $input['project_id'])
+                                  ->where('location_name', $input['location_name'])
+                                  ->first();
+        
         if ($projectLocation) {
             $data['status'] = config('app.response.error.status');
             $data['type'] = config('app.response.error.type');
             $data['title'] = config('app.response.error.title');
-            $data['msg'] = 'Error create Project Location. Project location name duplicate';
+            $data['msg'] = 'Error create Project Location. Project location name already exists for this project';
 
             return $data;
         }
+
         ProjectLocation::create($input);
 
         $data['status'] = config('app.response.success.status');
@@ -332,7 +335,21 @@ class ProjectService
     {
         $input = $r->input();
 
-        ProjectLocation::where('id', $id)->update($input);
+        $input2['location_name'] = $input['location_name'];
+        $input2['customer_id'] = $input['customer_id'];
+        $input2['tenant_id'] = $input['tenant_id'];
+        $input2['project_id'] = $input['project_id'];
+        $input2['project_id'] = $input['project_id'];
+        $input2['address'] = $input['address'];
+        $input2['address2'] = $input['address2'];
+        $input2['postcode'] = $input['postcode'];
+        $input2['city'] = $input['city'];
+        $input2['state'] = $input['state'];
+        $input2['location_google'] = $input['location_google_2'];
+        $input2['longitude'] = $input['longitude_2'];
+        $input2['latitude'] = $input['latitude_2'];
+
+        ProjectLocation::where('id', $id)->update($input2);
 
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
@@ -370,9 +387,13 @@ class ProjectService
         $input = $r->input();
         $input['joined_date'] = date_format(date_create($input['joined_date']), 'Y-m-d');
         $exit = $input['exit_project'] ?? '';
-        if ($input['location']) {
+
+        if (empty($input['location'])) {
+        $input['location'] = null;
+        } else {
             $input['location'] = implode(',', $input['location']);
         }
+
 
         $input['assign_as'] = 'project member';
 

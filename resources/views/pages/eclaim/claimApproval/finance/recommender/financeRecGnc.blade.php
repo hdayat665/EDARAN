@@ -60,11 +60,20 @@
                                             @foreach ($gncs as $gnc)
                                                 <tr>
                                                     <td><a data-bs-toggle="modal" data-id="{{ $gnc->id }}" id="gnc_detail" class="btn btn-primary btn-sm">View</a></td>
-                                                    <td>{{ date('Y-m-d', strtotime($gnc->created_at)) ?? '-' }}</td>
+                                                    <td>{{ date('Y-m-d', strtotime($gnc->applied_date)) ?? '-' }}</td>
                                                     <td>{{ $gnc->claim_catagory_name ?? '-' }}</td>
                                                     <td>{{ $gnc->amount ?? '-' }}</td>
                                                     <td>{{ $gnc->desc ?? '-' }}</td>
-                                                    <td><a href="/storage/{{ $gnc->file_upload }}" download>{{ $gnc->file_upload ?? '-' }}</a></td>
+                                                    <td>
+                                                        @if(!empty($gnc->file_upload))
+                                                        @php
+                                                        $filenames = explode(',', $gnc->file_upload);
+                                                        @endphp
+                                                        @foreach($filenames as $filename)
+                                                        <a href="/storage/{{ $filename }}" target="_blank">{{ $filename }}</a><br>
+                                                        @endforeach
+                                                        @endif
+                                                    </td>
                                                 </tr>
                                             @endforeach
                                         @endif

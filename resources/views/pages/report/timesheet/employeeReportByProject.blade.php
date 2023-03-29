@@ -7,7 +7,8 @@
 		<div class="panel-body">
 			<div class="row p-2">
 				<div class="col-sm-12">
-					<h5>Filter Option : {{$project_name ?? '-'}}</h5>
+					<h5>Project Name: {{ $projects->first()->project_name ?? '-' }}</h5>
+					</h5>
 				</div>
 			</div>
 			<div class="row p-2">
@@ -26,7 +27,7 @@
 					</tr>
 				</thead>
 				<tbody>
-                    <?php $no = 1 ?>
+                    {{-- <?php $no = 1 ?> --}}
                     @if ($projects)
                         @foreach ($projects as $project)
                         <tr class="odd gradeX">

@@ -13,6 +13,7 @@ use App\Models\GeneralClaim;
 use App\Models\GeneralClaimDetail;
 use App\Models\PersonalClaim;
 use App\Models\TravelClaim;
+use App\Models\ModeOfTransport;
 use Illuminate\Support\Facades\Auth;
 
 class ClaimApprovalService
@@ -178,6 +179,7 @@ class ClaimApprovalService
     public function updateStatusGncClaim($r, $id, $status, $stage)
     {
         $input = $r->input();
+
 
         // if (in_array($status, ['reject', 'amend'])) {
         //     $input['status'] = $status;
@@ -356,21 +358,36 @@ class ClaimApprovalService
 
     public function getPersonalById($id = '')
     {
-        $data = PersonalClaim::where('id', $id)->first();
+        $data = PersonalClaim::where('personal_claim.id', $id)
+            ->leftJoin('claim_category', 'personal_claim.claim_category', '=', 'claim_category.id')
+            ->select('personal_claim.*', 'claim_category.claim_catagory as claim_category_name')
+            ->with('claim_category_content')
+            ->first();
 
         return $data;
     }
 
     public function getTravelById($id = '')
     {
-        $data = TravelClaim::where('id', $id)->first();
+        $data = TravelClaim::where('travel_claim.id', $id)
+            ->leftJoin('project', 'travel_claim.project_id', '=', 'project.id')
+            ->select('travel_claim.*', 'project.project_name')
+            ->first();
 
         return $data;
     }
 
     public function getGncById($id = '')
     {
-        $data = GeneralClaimDetail::where('id', $id)->first();
+        $data = GeneralClaimDetail::where('general_claim_details.id', $id)
+            ->leftJoin('claim_category', 'general_claim_details.claim_category', '=', 'claim_category.id')
+            ->select('general_claim_details.*', 'claim_category.claim_catagory as claim_category_name')
+            ->with('claim_category_content')
+            ->first();
+
+        if (!$data) {
+            $data = [];
+        }
 
         return $data;
     }
@@ -398,7 +415,7 @@ class ClaimApprovalService
         $claim = CashAdvanceDetail::where('id', $id)->first();
 
         $pvNo = [
-            'pv_number' => 'PV-' . $claim->claim_type . '-' . $claim->id
+            'pv_number' => 'PV-' . 'CA' . '-' . $claim->id
         ];
 
         CashAdvanceDetail::where('id', $id)->update($pvNo);
@@ -433,7 +450,15 @@ class ClaimApprovalService
 
         return $data;
     }
+    public function cashAdvanceApproverModeTransport($id = '')
+    {
+        $ca[0] = ['tenant_id', Auth::user()->tenant_id];
+        $ca[2] = ['cash_advance_id', $id];
 
+        $data = ModeOfTransport::where($ca)->first();
+
+        return $data;
+    }
     public function updateStatusCashAdvance($r, $id, $status, $stage)
     {
         $input = $r->input();
@@ -588,22 +613,59 @@ class ClaimApprovalService
 
         return $data;
     }
-
-    public function getApprovalConfig($type = '', $claimType = '')
+    public function approveAllClaim($r)
     {
-        if ($type == 1) {
-            $role = 'SUPERVISOR - RECOMMENDER';
+        $input = $r->input();
+
+        if (!isset($input['id'])) {
+            $data['status'] = config('app.response.error.status');
+            $data['type'] = config('app.response.error.type');
+            $data['title'] = config('app.response.error.title');
+            $data['msg'] = 'Please select the claim submission first!';
+
+            return $data;
         }
 
-        if ($type == 2) {
-            $role = 'HOD / CEO - APPROVER';
+        $ids = $input['id'];
+        $status['hod'] = 'recommend';
+        $status['status'] = 'pending';
+
+        $cond[1] = ['tenant_id', Auth::user()->tenant_id];
+
+        GeneralClaim::where($cond)->whereIn('id', $ids)->update($status);
+
+        $data['status'] = config('app.response.success.status');
+        $data['type'] = config('app.response.success.type');
+        $data['title'] = config('app.response.success.title');
+        $data['msg'] = 'Success Approve Timesheet';
+
+        return $data;
+    }
+    public function approveAllCa($r)
+    {
+        $input = $r->input();
+
+        if (!isset($input['id'])) {
+            $data['status'] = config('app.response.error.status');
+            $data['type'] = config('app.response.error.type');
+            $data['title'] = config('app.response.error.title');
+            $data['msg'] = 'Please select the cash advance submission first!';
+
+            return $data;
         }
 
-        $cond[0] = ['tenant_id', Auth::user()->tenant_id];
-        $cond[1] = ['role', $role];
-        $cond[2] = ['type_claim', $claimType];
+        $ids = $input['id'];
+        $status['approver'] = 'recommend';
+        $status['status'] = 'pending';
 
-        $data = ApprovalConfig::where($cond)->first();
+        $cond[1] = ['tenant_id', Auth::user()->tenant_id];
+
+        CashAdvanceDetail::where($cond)->whereIn('id', $ids)->update($status);
+
+        $data['status'] = config('app.response.success.status');
+        $data['type'] = config('app.response.success.type');
+        $data['title'] = config('app.response.success.title');
+        $data['msg'] = 'Success Approve Timesheet';
 
         return $data;
     }

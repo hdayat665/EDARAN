@@ -19,7 +19,9 @@ use App\Http\Controllers\Project\CustomerController;
 use App\Http\Controllers\Project\ProjectController;
 use App\Http\Controllers\Report\ProjectReportController;
 use App\Http\Controllers\Report\TimesheetReportController;
+use App\Http\Controllers\Report\EleaveReportController;
 use App\Http\Controllers\Report\EclaimReportController;
+use App\Http\Controllers\COR\CORReportController;
 use App\Http\Controllers\MYLeave\MyleaveController;
 use App\Http\Controllers\Eleave\EleaveController;
 use Illuminate\Support\Facades\Storage;
@@ -125,8 +127,8 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('/createChequeNumberCa/{id}', 'createChequeNumberCa');
             Route::post('/createPvNumberCa/{id}', 'createPvNumberCa');
             Route::post('/createClearCa/{id}', 'createClearCa');
-
-
+            Route::post('/approveAllClaim', 'approveAllClaim');
+            Route::post('/approveAllCa', 'approveAllCa');
 
 
 
@@ -165,6 +167,8 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('/updateAddressDetails', 'updateAddressDetails');
             Route::delete('/deleteAddressDetails/{id}', 'deleteAddressDetails');
 
+            Route::get('/getAddressforCompanion/{id}', 'getAddressforCompanion');
+
             Route::get('/getParent/{id}', 'getParent');
             Route::get('/getSibling/{id}', 'getSibling');
             Route::post('/updatePass', 'updatePass');
@@ -175,6 +179,7 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('/getJobHistory', 'getJobHistory');
             Route::get('/getVehicle', 'getVehicle');
             Route::get('/getChildren/{id}', 'getChildren');
+            Route::get('/getChildrenById/{id}', 'getChildrenById');
             Route::get('/getSiblingById/{id}', 'getSiblingById');
             Route::get('/getParentById/{id}', 'getParentById');
             Route::get('/getVehicleById/{id}', 'getVehicleById');
@@ -182,7 +187,9 @@ Route::group(['middleware' => ['web']], function () {
             Route::delete('/deleteChildren/{id}', 'deleteChildren');
             Route::delete('/deleteParent/{id}', 'deleteParent');
             Route::delete('/deleteSibling/{id}', 'deleteSibling');
+            Route::delete('/deleteCompanion/{id}', 'deleteCompanion');
             Route::post('/resetPassword', 'resetPassword');
+            Route::get('/getCompanionById/{id}', 'getCompanionById');
         });
 
         Route::controller(EmployeeController::class)->group(function () {
@@ -465,10 +472,28 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('/searchOvertimeReport', 'searchOvertimeReport');
             // Route::get('/getReportAllEmployee', 'getReportAllEmployee');
         });
+
+        Route::controller(EleaveReportController::class)->group(function () {
+            //Route::get('/statusReport', 'statusReportView');
+            Route::get('/leaveReport', 'leaveReportView');
+            // Route::get('/overtimeReport', 'overtimeReportView');
+            // Route::get('/getProjectByCustomerId/{customer_id}', 'getProjectByCustomerId');
+            // Route::get('/searchReport', 'searchReport');
+            // Route::post('/updateStatus/{id}/{status}', 'updateStatus');
+            // Route::post('/searchStatusReport', 'searchStatusReport');
+            Route::post('/searchEleaveReport', 'searchEleaveReport');
+            // Route::post('/searchEmployeeReport', 'searchEmployeeReport');
+            // Route::post('/searchOvertimeReport', 'searchOvertimeReport');
+            // Route::get('/getReportAllEmployee', 'getReportAllEmployee');
+        });
+
+
         Route::controller(EclaimReportController::class)->group(function () {
             Route::get('/eclaimListing', 'eclaimListingView');
+            Route::get('/cashadvanceListing', 'cashadvanceListingView');
             // Route::get('/eclaim/searchAllReport', 'reportAllView');
             Route::post('/eclaim/searchAllReport', 'reportAllView');
+            Route::post('/eclaim/cashadvanceReport', 'cashadvanceReportView');
         });
         Route::controller(MyTimesheetController::class)->group(function () {
             Route::get('/myTimesheet', 'myTimesheetView');
@@ -517,6 +542,7 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('/myClaimView', 'myClaimView');
             Route::get('/generalClaimView', 'generalClaimView');
             Route::get('/cashAdvanceView', 'cashAdvanceView');
+            Route::get('/viewMtcClaim/{id}', 'viewMtcClaim');
             Route::get('/newMonthlyClaimView/{month}/{year}', 'newMonthlyClaimView');
             Route::post('/submitPersonalClaim', 'submitPersonalClaim');
             Route::post('/submitTravelClaim', 'submitTravelClaim');
@@ -528,6 +554,8 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('/appealMtc', 'createAppealMtc');
             Route::post('/approveAppealMtc/{id}', 'approveAppealMtc');
             Route::post('/rejectAppealMtc/{id}', 'rejectAppealMtc');
+            Route::post('/cancelGNC/{id}', 'cancelGNC');
+            Route::post('/cancelMTC/{id}', 'cancelMTC');
         });
 
         Route::controller(generalClaimController::class)->group(function () {
@@ -581,6 +609,11 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('/getuserleaveApprhod/{id}', 'getuserleaveApprhod');
             Route::post('/updatehod/{id}', 'updatehod');
             Route::post('/updatehodreject/{id}', 'updatehodreject');
+        });
+
+        Route::controller(CORReportController::class)->group(function () {
+            Route::get('/corlisting', 'corlisting');
+            Route::post('/searchcor', 'searchcor');
         });
     });
 });

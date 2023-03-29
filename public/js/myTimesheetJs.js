@@ -2,6 +2,15 @@
 
 $(document).ready(function() {
 
+    // $("#addeventalldayedit").change(function() {
+    //     if ($(this).is(":checked")) {
+    //       $(this).val("allday");
+    //     } else {
+    //       $(this).val("test");
+    //     }
+    //   });
+      
+
  document.getElementById("yearsub").value = new Date().getFullYear();
 
   var monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
@@ -866,6 +875,7 @@ $(document).ready(function() {
                         }
                     }  
                 },
+                // original code
                 // dateClick: function(info) {
 
                 //     $('#addLogModal').modal('show');
@@ -879,20 +889,41 @@ $(document).ready(function() {
 
                 dateClick: function(info) {
                     const today = dayjs();
-                    const minDate = today.subtract(2, 'day'); // Set the minimum date to 2 days ago
+                    const clickedDate = dayjs(info.date);
                   
-                    // check if the clicked date is earlier than the minimum date
-                    if (dayjs(info.date).isBefore(minDate, 'day')) {
-                        alert("You can only select dates up to 48 hours from now.");
-                        return;
+                    // check if the clicked date is within the last 2 days before the current date
+                    if (clickedDate.diff(today, 'day') < -2 || clickedDate.isAfter(today, 'day')) {
+                      Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: 'You can only select the current date and 48 hours before.'
+                      });
+                      return;
                     }
-                    
                   
                     // show the modal and set the date
                     $('#addLogModal').modal('show');
-                    const formattedDate = dayjs(info.dateStr).format('DD-MM-YYYY');
+                    const formattedDate = clickedDate.format('DD-MM-YYYY');
                     $("#dateaddlog").val(formattedDate);
                   },
+                  
+
+                //     dateClick: function(info) {
+                //     const today = dayjs();
+                //     const minDate = today.subtract(2, 'day'); // Set the minimum date to 2 days ago
+                  
+                //     // check if the clicked date is earlier than the minimum date
+                //     if (dayjs(info.date).isBefore(minDate, 'day')) {
+                //         alert("You can only select dates up to 48 hours from now.");
+                //         return;
+                //     }
+                    
+                  
+                //     // show the modal and set the date
+                //     $('#addLogModal').modal('show');
+                //     const formattedDate = dayjs(info.dateStr).format('DD-MM-YYYY');
+                //     $("#dateaddlog").val(formattedDate);
+                //   },
 
 
                 // dateClick: function(info) {
@@ -958,6 +989,19 @@ $(document).ready(function() {
                         });
                     }
 
+                    
+                    function getAttendance1(eventId) {
+                        return $.ajax({
+                            url: "/getAttendanceByEventId/" + eventId
+                        });
+                    }
+
+                    function getEvents1(id) {
+                        return $.ajax({
+                            url: "/getEventById/" + id
+                        });
+                    }
+
                     employeeData = getEmployee();
                     employeeData.done(function(data) {
                         // console.log(data.data);
@@ -982,7 +1026,6 @@ $(document).ready(function() {
                                 $('#myprojectedit').css("display", 'block');
                                 $('#activityByProjectEditHide1').css("display", 'block');
                                 $('#activityByProjectEditHide').css("display", 'none');
-                                $('#locationByProjlocationByProjectEditShowectEditHide').css("display", 'block');
                                 $('#projectLocationOfficeEdit').css("display", 'block');
                                 $('#locationByProjectEditShow').css("display", 'block');
                                 $('#locationByProjectEditHide').css("display", 'block');
@@ -1130,13 +1173,33 @@ $(document).ready(function() {
                             $("#endeventtimeedit").val(data.end_time);
                             $("#duration").val(data.duration);
                             $('#addneweventprojectlocsearchedit').picker('set', data.location);
+                            $('#hideshowstarttimee').show();
+                            $('#hideshowendtimee').show();
+                            $("#addeventalldayedit").prop('checked', false);
                             if (data.type_recurring) {
 
                                 if (data.type_recurring == 'allday') {
                                     $("#addeventalldayedit").prop('checked', true);
+                                    $('#hideshowstarttimee').css("display", 'none');
+                                    $('#hideshowendtimee').css("display", 'none');
+                                    $("#addeventalldayedit").val("allday");
+
+                                }else if (data.type_recurring == '') {
+                                    $("#addeventalldayedit").prop('checked', false);
+                                    $('#hideshowstarttimee').css("display", 'block');
+                                    $('#hideshowendtimee').css("display", 'block');
+                                    $("#addeventalldayedit").val("");
+                                    
+                                    
+                                
+                                    
                                 } else if (data.type_recurring == 'recurring') {
+                                    $("#addeventalldayedit").prop('checked', false);
                                     // $("#addeventalldayedit").prop('checked', true);
                                     $("#addeventrecurringedit").prop('checked', true);
+                                    $('#hideshowstarttimee').css("display");
+                                    $('#hideshowendtimee').css("display");
+                                   
 
                                     var recurringDisplay = $("#addneweventrecurringedit").css("display");
 
@@ -1235,6 +1298,9 @@ $(document).ready(function() {
                                 } else {
                                     $("#addeventalldayedit").prop('checked', true);
                                     $("#addeventrecurringedit").prop('checked', true);
+                                    
+                                    
+                                   
 
                                     var recurringDisplay = $("#addneweventrecurringedit").css("display");
 
@@ -1446,6 +1512,38 @@ $(document).ready(function() {
 
                         });
 
+                       
+                        // var id = $('#buttonnViewParticipant').data('id');  // kena ubah sini
+                        // var eventData = getEvents1(id);
+                        // eventData.done(function(data) {
+                        //     var attendanceEvent = getAttendance1(data.id);
+                        //     attendanceEvent.done(function(dataAttendance) {
+                        //         // Check if the DataTable is already initialized
+                        //         var table = $('#tableviewparticipant').DataTable();
+                        //         if (table && table.destroy) {
+                        //             // The DataTable is already initialized, so we need to destroy it before initializing again
+                        //             table.destroy();
+                        //         }
+                        //         // Initialize the DataTable
+                        //         $('#tableviewparticipant').DataTable({
+                        //             "paging": true,
+                        //             "columns": [
+                        //                 { "title": "No" },
+                        //                 { "title": "Participants" }
+                        //             ]
+                        //         });
+                        //         // Populate the DataTable with data
+                        //         for (let i = 0; i < dataAttendance.length; i++) {
+                        //             const attendance = dataAttendance[i];
+                        //             table.row.add([
+                        //                 i + 1,
+                        //                 attendance.employeeName
+                        //             ]);
+                        //         }
+                        //         table.draw();
+                        //     });
+                        // });
+
                         $('#editeventmodal').modal('show');
                     }
 
@@ -1503,74 +1601,39 @@ $(document).ready(function() {
           todayHighlight: true,
           autoclose: true,
           format: 'yyyy-mm-dd',
-          startDate: new Date(new Date().getTime() - (2 * 24 * 60 * 60 * 1000)), // one days ago
-          endDate: null // No end date
+          startDate: new Date(new Date().getTime() - (2 * 24 * 60 * 60 * 1000)), // two days ago
+          endDate: new Date() // Disable future dates
         });
       
         // Set the minimum and maximum dates to restrict the date range that can be selected
         $("#dateaddlog").datepicker('setStartDate', new Date(new Date().getTime() - (2 * 24 * 60 * 60 * 1000)));
-        $("#dateaddlog").datepicker('setEndDate', null);
+        $("#dateaddlog").datepicker('setEndDate', new Date());
       });
       
-
-
-
-
       
-
-      
-      
-    // $("#starteventdate").datepicker({
-    //     todayHighlight: true,
-    //     autoclose: true,
-    //     format: 'yyyy/mm/dd'
-    // });
-    // $("#endeventdate").datepicker({
-    //     // todayHighlight: true,
-    //     // autoclose: true,
-    //     // format: 'yyyy/mm/dd'
-
-        
-    // });
-    $(function() {
-        // Inisialisasi datepicker pertama
-        $('#starteventdate').datepicker({
-          format: 'yyyy/mm/dd',
-          todayHighlight: true,
-          autoclose: true,
-          onSelect: function(selectedDate) {
-            // Ketika tanggal dipilih pada datepicker pertama,
-            // atur opsi minDate pada datepicker kedua
-            $('#endeventdate').datepicker('option', 'minDate', selectedDate);
-          }
-        });
-      
-        // Inisialisasi datepicker kedua
-        $('#endeventdate').datepicker({
-          format: 'yyyy/mm/dd',
-          todayHighlight: true,
-          autoclose: true,
-          beforeShowDay: function(date) {
-            var startDate = $('#starteventdate').datepicker('getDate');
-            if (startDate) {
-              // Disable dates before the selected date on the first datepicker
-              return date.valueOf() >= startDate.valueOf() ? {} : {disabled: true};
-            }
-            return {};
-          }
-        });
-      });
-      
+    $('#starteventdate').datepicker({
+        format: 'yyyy/mm/dd',
+        todayHighlight: true,
+        autoclose: true,
+    }).datepicker('setDate', new Date());
     
-      
+    $('#endeventdate').datepicker({
+        format: 'yyyy/mm/dd',
+        todayHighlight: true,
+        autoclose: true,
+    }).datepicker('setDate', new Date());
      
     $('#projectLocationOffice').picker({ search: true });
     $('#activityOffice').picker({ search: true });
     $('#activity_name_edit').picker({ search: true });
     $('#projectlocsearch').picker({ search: true });
-    $('#activity_names').picker({ search: true });
+    // $('#activity_names').picker({ search: true });
     $('#addneweventprojectlocsearch').picker({ search: true });
     $('#addneweventparticipant').picker({ search: true });
+    // $('#addneweventparticipant').selectpicker();
+    // $('#addneweventparticipant').chosen({
+    //     placeholder_text_multiple: 'Select participants'
+    // });
     $('#addneweventselectproject').picker({ search: true });
     $(function() {
         $("#starttime").mdtimepicker({
@@ -1665,11 +1728,18 @@ $(document).ready(function() {
     $(document).on('change', "#typeoflog", function() {
         if ($(this).val() == "2") {
             $("#officelog").show();
+            $("#activity_names").val("");
+            $("#activityOffice").val("");
+            $("#projectlocsearch").val("");
+            $("#projectLocationOffice").val("");
+            
         } else {
             $("#officelog").hide();
             $("#listproject").hide();
-            
-
+            $("#activity_names").val("");
+            $("#activityOffice").val("");
+            $("#projectlocsearch").val("");
+            $("#projectLocationOffice").val("");
         }
     });
     $(document).on('change', "#typeoflog", function() {
@@ -1678,8 +1748,10 @@ $(document).ready(function() {
             $("#activityByProjectHide").show();
             $("#locationByProjectHide").show();
             $("#locationByProjectHide").show();
-            
-            
+            $("#activity_names").val("");
+            $("#activityOffice").val("");
+            $("#projectlocsearch").val("");
+            $("#projectLocationOffice").val("");
             
             // $("#activity_locationadd").show();
             
@@ -1693,21 +1765,46 @@ $(document).ready(function() {
             // $("#activityLogs").show();
             $("#activityByProjectShow").hide();
             $("#locationByProjectShow").hide();
-            
-            
-            
+            $("#activity_names").val("");
+            $("#activityOffice").val("");
+            $("#projectlocsearch").val("");
+            $("#projectLocationOffice").val("");
         }
     });
+
+    // $(document).on('change', "#typeoflog", function() {
+    //     if ($(this).val() == "1" || $(this).val() == "4") {
+            
+    //         $("#activity_locationadd").show();
+    //     } else {
+    //         $("#activity_locationadd").show();
+            
+            
+    //     }
+    // });
 
     $(document).on('change', "#officelog2", function() {
         if ($(this).val() == "1") {
             $("#listproject").show();
             $("#activityByProjectHide").hide();
+            $("#activityByProjectShow").show();
+            $("#locationByProjectShow").show();
+            $("#activity_names").val("");
+            $("#activityOffice").val("");
+            $("#projectlocsearch").val("");
+            $("#projectLocationOffice").val("");
             
             
         } else if ($(this).val() == "2") {
             $("#activityByProjectHide").show();
             $("#listproject").hide();
+            $("#activityByProjectShow").hide();
+            $("#locationByProjectShow").hide();
+            $("#activity_names").val("");
+            $("#activityOffice").val("");
+            $("#projectlocsearch").val("");
+            $("#projectLocationOffice").val("");
+            
             
         }
         // else {
@@ -2136,41 +2233,52 @@ $(document).ready(function() {
         $("#logduration").trigger("change");
       });
       
+      calculateDuration();
+
+
       
+    // $('#hidestart, #hideend').hide();
+
+    // $('#alldayc').change(function() {
+    //     if (this.checked) {
+    //         $('#hidestart, #hideend').hide();
+    //         $('#starteventtime').val("00:00 AM");
+    //         $('#endeventtime').val("11:59 PM");
+    //     } else {
+    //         $('#hidestart, #hideend').show();
+    //         $('#starteventtime').val("00:00 AM");
+    //         $('#endeventtime').val("11:59 PM");
+    //     }
+    // });
+    
+    $('#addeventalldayedit').change(function() {
+        if (this.checked) {
+            $('#hideshowstarttimee, #hideshowendtimee').hide();
+            $('#starteventtimeedit').val("00:00 AM");
+            $('#endeventtimeedit').val("11:59 PM");
+        } else {
+            $('#hideshowstarttimee, #hideshowendtimee').show();
+            // $('#starteventtimeedit').val("00:00 AM");
+            // $('#endeventtimeedit').val("11:59 PM");
+        }
+    });
+    
+    
 
 });
-    $("#duration,#starteventdate,#starteventtime,#endeventdate,#endeventtime").focus(function () {
-
-    var startdt = new Date($("#starteventdate").val() + " " + $("#starteventtime").val());
     
-    var enddt = new Date($("#endeventdate").val() + " " + $("#endeventtime").val());
-
-    var diff = enddt - startdt;
-    
-    var days = Math.floor(diff / (1000 * 60 * 60 * 24));
-    diff -=  days * (1000 * 60 * 60 * 24);
-    
-    var hours = Math.floor(diff / (1000 * 60 * 60));
-    diff -= hours * (1000 * 60 * 60);
-    
-    var mins = Math.floor(diff / (1000 * 60));
-    diff -= mins * (1000 * 60);
-    
-    $("#duration").val(days + " days : " + hours + " hours : " + mins + " minutes ");
-    
-
-     });
 
     
 
-
+$("#duration,#starteventdate,#starteventtime,#endeventdate,#endeventtime").focus(function () {
+    calculateDuration();
+});
 
          //update total duration
-         $("#total_hour,#daystartedit,#dayendedit,#starttimeedit,#endtimeedit").focus(function () {
-
-            var startdt = new Date($("#daystartedit").val() + " " + $("#starttimeedit").val());
+         function calculateDuration() {
+            var startdt = new Date($("#starteventdate").val() + " " + $("#starteventtime").val());
             
-            var enddt = new Date($("#dayendedit").val() + " " + $("#endtimeedit").val());
+            var enddt = new Date($("#endeventdate").val() + " " + $("#endeventtime").val());
         
             var diff = enddt - startdt;
             
@@ -2183,14 +2291,11 @@ $(document).ready(function() {
             var mins = Math.floor(diff / (1000 * 60));
             diff -= mins * (1000 * 60);
             
-            console.log(days + ':' + hours)
-            $("#total_hour").val( days + " days : " + hours + " hours : " + mins + " minutes ");
-            
-        
-             });
+            $("#duration").val(days + " days : " + hours + " hours : " + mins + " minutes ");
+        }
 
             //edit event modal mytimesheet
-         $("#durationeditevent,#starteventdateedit,#endeventdateedit,#starteventtimeedit,#endeventtimeedit").focus(function () {
+         $("#durationeditevent,#starteventdateedit,#endeventdateedit,#starteventtimeedit,#endeventtimeedit").change(function () {
 
             var startdt = new Date($("#starteventdateedit").val() + " " + $("#starteventtimeedit").val());
             
@@ -2260,4 +2365,4 @@ function getConfirmSubmit(id) {
 
 
 
-
+    

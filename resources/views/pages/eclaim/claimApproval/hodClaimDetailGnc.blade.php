@@ -63,8 +63,17 @@
                                                     <td>{{ $gnc->claim_catagory_name ?? $gnc->claim_catagory }}</td>
                                                     <td>{{ $gnc->amount ?? '-' }}</td>
                                                     <td>{{ $gnc->desc ?? '-' }}</td>
-                                                    <td><a href="/storage/{{ $gnc->file_upload }}" download>{{ $gnc->file_upload ?? '-' }}</td>
-                                                </tr></a>
+                                                    <td>
+                                                        @if(!empty($gnc->file_upload))
+                                                        @php
+                                                        $filenames = explode(',', $gnc->file_upload);
+                                                        @endphp
+                                                        @foreach($filenames as $filename)
+                                                        <a href="/storage/{{ $filename }}" target="_blank">{{ $filename }}</a><br>
+                                                        @endforeach
+                                                        @endif
+                                                    </td>
+                                                </tr>
                                             @endforeach
                                         @endif
                                     </tbody>
@@ -123,8 +132,8 @@
                                 <a class="btn btn-secondary" data-id="{{ $general->id }}" style="color: black" type="submit"> Cancel</a> &nbsp;
                                 <a href="javascript:;" class="btn btn-warning" style="color: black" data-bs-toggle="modal" data-bs-target="#modalamend">Amend</a> &nbsp;
                                 <a href="javascript:;" class="btn btn-danger" style="color: black" data-bs-toggle="modal" data-bs-target="#modalreject"> Reject</a> &nbsp;
-                                <a class="btn btn-lime" id="approveButton" data-id="{{ $general->id }}" style="color: black" type="submit"> Approve</a>
-                                @endif
+                                <a class="btn btn-lime" id="approveButtonGNC" data-id="{{ $general->id }}" style="color: black" type="submit"> Approve</a>
+                                @endif 
                        
                     </div>
                 </div>

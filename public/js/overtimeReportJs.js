@@ -1,24 +1,58 @@
-$("#timesheetapproval").DataTable({
-    searching: false,
-    lengthChange: true,
-    responsive: false,
-    lengthMenu: [
-        [5,10, 15, 20, -1],
-        [5,10, 15, 20, 'All'],
-    ],
 
-    dom: '<"row"<"col-sm-11"B><"col-sm-1"l>>t<"row"<"col-sm-5"i><"col-sm-7"p>>',
-    buttons: [
-        { extend: "excel", className: "btn-blue" },
-        { extend: "pdf", className: "btn-blue" },
-        { extend: "print", className: "btn-blue" },
+$(document).ready(function() {
+
+$('#timesheetapproval').DataTable({
+    lengthMenu: [
+        [5, 10, 25, 50, -1],
+        [5, 10, 25, 50, "All"],
+    ],
+    responsive: false,
+    searching: true,
+    "dom": '<"row"<"col-sm-4"l><"col-sm-4 text-center"B><"col-sm-4"f>>t<"row"<"col-sm-12"ip>>',
+        "buttons": [
+            { extend: 'excel', className: 'btn-blue', exportOptions: {
+                columns: [1,2,3,4,5]
+            }},
+            { extend: 'pdf', className: 'btn-blue',  exportOptions: {
+                columns:  [1,2,3,4,5]
+            }},
+            { extend: 'print', className: 'btn-blue',  exportOptions: {
+                columns:  [1,2,3,4,5]
+            }},
     ],
 });
-$().ready = (function() {
-    $("#filter").click(function() {
-        $("#filterform").toggle();
-    });
-})();
+
+
+if ($('#employeenamesearch').val() || $('#monthsearch').val() || $('#yearsearch').val() || $('#designationsearch').val() || $('#departmentsearch').val()) {
+    $('#filterform').show();
+}
+
+$("#filter").click(function() {
+    $('#filterform').toggle();
+});
+
+$("#reset").on("click", function () {
+    $("#employeenamesearch").val($("#employeenamesearch").data("default-value"));
+    $("#employeenamesearch").picker('destroy');
+    
+    $("#yearsearch").val($("#yearsearch").data("default-value"));
+    // $("#yearsearch").picker('destroy');
+    
+    $("#monthsearch").val($("#monthsearch").data("default-value"));
+    // $("#monthsearch").picker('destroy');
+    
+    $("#designationsearch").val($("#designationsearch").data("default-value"));
+    $("#designationsearch").picker('destroy');
+    
+    $("#departmentsearch").val($("#departmentsearch").data("default-value"));
+    $("#departmentsearch").picker('destroy');
+    
+   
+});
+
+
+
+
 $("#starteventdate").datepicker({
     todayHighlight: true,
     autoclose: true,
@@ -31,6 +65,13 @@ $("#projectlocsearch").picker({ search: true });
 $("#addneweventprojectlocsearch").picker({ search: true });
 $("#addneweventparticipant").picker({ search: true });
 $("#addneweventselectproject").picker({ search: true });
+
+
+
+$("#employeenamesearch").picker({ search: true });
+$("#designationsearch").picker({ search: true });
+$("#departmentsearch").picker({ search: true });
+
 
 $("#starteventtime").timepicker({
     showMeridian: false,
@@ -159,4 +200,14 @@ $("#ontheyearlycheck").click(function() {
         $("#recurringonthemonthyearly").hide();
         $("#recurringontheof").hide();
     }
+});
+
+$("#reset").on("click", function () {
+    $("#employeesearch").val($("#employeesearch").data("default-value"));
+    $("#yearsearch").val($("#yearsearch").data("default-value"));
+    $("#monthsearch").val($("#monthsearch").data("default-value"));
+    $("#designationsearch").val($("#designationsearch").data("default-value"));
+    $("#departmentsearch").val($("#departmentsearch").data("default-value"));
+});
+
 });

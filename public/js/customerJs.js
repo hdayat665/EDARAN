@@ -4,30 +4,17 @@ $(document).ready(function () {
         autoclose: true,
     });
 
-    $(document).ready(function () {
-        var table = $("#customerTable").DataTable({
+    
+  $("#customerTable").DataTable({
           responsive: false,
           lengthMenu: [
             [5, 10, 25, 50, -1],
             [5, 10, 25, 50, "All"],
           ],
-          scrollX:true,
-          columnDefs: [
-            {
-              targets: 1, // Column index of the "Action" column
-              orderable: false, // Set orderable to false
-            }, 
-            {
-              targets: 4, width: '200px'
-            },
-            {
-              targets: 1, width: '80px'
-            },
-          ],
-          
-          
+        // scrollX:true,
         });
-      
+        
+        $(document).ready(function () {
         table.on("draw.dt", function () {
           $(".statusCheck").off("change").on("change", function () {
             var id = $(this).data("id");
@@ -258,6 +245,7 @@ $(document).ready(function () {
             },
         });
     });
+    
     $("#updateButton").click(function (e) {
         $("#editForm").validate({
             rules: {

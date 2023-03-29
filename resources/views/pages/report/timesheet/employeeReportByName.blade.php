@@ -7,12 +7,8 @@
     <div class="panel panel" id="employeeReportByJs">
         <div class="panel-body">
             <div class="row p-2">
-                {{-- @if ($employees)
-                @foreach ($employees->groupBy('employeeName') as $group)
-                    <h5>Filter Option: {{ $group->first()->employeeName }}</h5>
-                @endforeach
-            @endif --}}
-            <h5>Filter Option: Employee Names</h5>
+                <h5> Employee Name : {{$employees->first()->employeeName ?? '-'}}</h5>
+                </h5>
             </div>
             <div class="row p-2">
                 <div class="col-sm-12">
@@ -27,8 +23,6 @@
                     <th class="text-nowrap">Project</th>
                     <th class="text-nowrap">Total Hours</th>
                     <th class="text-nowrap">Amount (MYR)</th>
-
-
                 </tr>
             </thead>
             <tbody>
@@ -48,7 +42,13 @@
             <tfoot>
                 <tr>
                     <th colspan="4">Total:</th>
-                    <th></th>
+                    <td>
+                        @if ($employees)
+                            {{ number_format($employees->sum(function($employees) {
+                                return floatval(str_replace(':', '.', substr($employees->total_hour, 0, -2))) * floatval($employees->COR);
+                            }), 2) }}
+                        @endif
+                    </td>
                 </tr>
             </tfoot>
         </table>

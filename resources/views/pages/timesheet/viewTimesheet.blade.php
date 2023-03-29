@@ -1,6 +1,7 @@
 @extends('layouts.dashboardTenant')@section('content')
 <div id="content" class="app-content">
     <h1 class="page-header">Calendar</h1>
+    <h1 class="page-header">{{ $userId }}</h1>
     <div class="row" id="viewTimesheetJs">
         <div class="col-lg">
             <div id="calendar" class="calendar"></div>

@@ -127,11 +127,11 @@
                     <div class="row mb-15px">
                         <div class="col-md-12">
                             <select class="selectpicker form-control" name="location[]" id="location-search-edit" multiple >
-                                <?php $locations = projectLocation() ?>
-                                @foreach ($locations as $location)
-                                <option value="{{$location->id}}" >{{$location->location_name}}</option>
-                                @endforeach
-                            </select>
+                            <?php $projectLocations = projectLocation($project->id) ?>
+                            @foreach ($projectLocations as $projectLocation)
+                                <option value="{{$projectLocation->id}}">{{$projectLocation->location_name}}</option>
+                            @endforeach
+                            </select> 
 
                         </div>
 
@@ -144,23 +144,20 @@
                                 <input type="checkbox" name="exit_project" id="exit_project" class="form-check-input partCheck"></input>
                                 <label class="form-label" for="checkbox1">Exit Project?</label><br>
                             </div>
-                        </div>
-                            <div class="col-md-4" id="exitdatediv" style="display: none;">
-                                <input type="text" class="form-control" id="datepicker-exitdate" name="exit_project_date" placeholder="YYYY/MM/DD" />
-                            </div>
-                        
+                        </div>   
                     </div>
-                    <div >
-                    <!-- <div class="row">
-                        <div class="col-md-6">
-
-                            <input type="text" class="form-control" id="datepicker-exitdate" name="exit_project_date" placeholder="dd/mm/yyyy" />
+                    <br>
+                    <div class="row">
+                        <div class="col-md-2" id="exitdatediv" style="display: none;">
+                            <label class="form-label">Exit Date*</label>
                         </div>
-                    </div> -->
+                        <div class="col-md-4" id="exitdatediv1" style="display: none;">
+                            <input type="text" class="form-control" id="datepicker_exitdate" name="exit_project_date" placeholder="YYYY/MM/DD">
+                        </div>
                     </div>
                     <br>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                         <button type="submit" class="btn btn-primary" id="updateProjectMember">Update</button>
                     </div>
                 </form>

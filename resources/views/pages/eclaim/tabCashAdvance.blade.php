@@ -47,6 +47,11 @@
                                         <a href="/viewCashAdvance/{{ $cashClaim->id }}" class="dropdown-item">View Claim</a>
                                         <!-- <a href="/editCashAdvance/{{ $cashClaim->id }}" class="dropdown-item">Update Claim</a> -->
                                     </div>
+                                @elseif ($cashClaim->status == 'cancelled')
+                                    <div class="dropdown-menu dropdown-menu-end">
+                                        <a href="/viewCashAdvance/{{ $cashClaim->id }}" class="dropdown-item">View Claim</a>
+                                        <!-- <a href="/editCashAdvance/{{ $cashClaim->id }}" class="dropdown-item">Update Claim</a> -->
+                                    </div>
                                 @elseif ($cashClaim->status == 'paid' || $cashClaim->status == 'reject')
                                     <div class="dropdown-menu dropdown-menu-end">
                                         <a href="/viewCashAdvance/{{ $cashClaim->id }}" class="dropdown-item">View Claim</a>
@@ -58,7 +63,7 @@
                         <td>{{ getCashAdvanceType($cashClaim->type) }}</td>
                         <td>{{ date_format(date_create($cashClaim->created_at), 'd/m/Y') }}</td>
                         <td>{{ $cashClaim->travel_date ? $cashClaim->travel_date : 'N/A' }}</td>
-                        <td>MYR {{  $cashClaim->mode_of_transport->accommadation_total ?? $cashClaim->amount }}</td>
+                        <td>MYR {{  $cashClaim->mode_of_transport->max_total ?? $cashClaim->amount }}</td>
                         @if ($cashClaim->status == 'draft')
                             <td><span class="badge bg-warning" data-toggle="drafca" title="Draft">Draft</span></td>
                         @elseif ($cashClaim->status == 'active')

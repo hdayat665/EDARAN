@@ -153,13 +153,9 @@
     </div>
 </div>
 
-
-<script> 
-      
-</script>
 <script 
 
-  src="https://maps.googleapis.com/maps/api/js?key={{ ('google api') }}&libraries=places&callback=initMap"
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDhySfXJwwoMVqbaiioEs38eOi8UkN7_ow&libraries=places&callback=initMap"
   async defer>
 </script>
 

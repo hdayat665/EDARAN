@@ -55,11 +55,20 @@
                                             @foreach ($details as $detail)
                                                 <tr>
                                                     <td><a data-bs-toggle="modal" id="buttonView" data-id="{{ $detail->id }}" class="btn btn-primary btn-sm">View</a></td> 
-                                                    <td>{{ date('Y-m-d', strtotime($detail->created_at)) }}</td>
+                                                    <td>{{ date('Y-m-d', strtotime($detail->applied_date)) }}</td>
                                                     <td>{{ $detail->claim_catagory }}</td>
                                                     <td>{{ $detail->amount }}</td>
                                                     <td>{{ $detail->desc }}</td>
-                                                    <td><a href="/storage/{{ $detail->file_upload }}">{{ $detail->file_upload }}</a></td>
+                                                    <td>
+                                                    @if(!empty($detail->file_upload))
+                                                    @php
+                                                    $filenames = explode(',', $detail->file_upload);
+                                                    @endphp
+                                                    @foreach($filenames as $filename)
+                                                    <a href="/storage/{{ $filename }}" target="_blank">{{ $filename }}</a><br>
+                                                    @endforeach
+                                                        @endif
+                                                    </td>
                                                 </tr>
                                             @endforeach
                                         @endif
@@ -80,4 +89,5 @@
         </div>
         @include('modal.eclaim.viewGNC')
     </div>
+    
 @endsection

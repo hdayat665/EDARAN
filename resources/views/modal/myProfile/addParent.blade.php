@@ -2,7 +2,7 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="add-parent">Add Parent Details</h5>
+                <h5 class="modal-title" id="add-parent">New Family</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -10,22 +10,22 @@
                     <div class="row p-2">
                         <div class="col-sm-6">
                             <label for="firstname" class="form-label">First Name*</label>
-                            <input type="text" id="" name="firstName" class="form-control" aria-describedby="firstname" style="text-transform:uppercase" placeholder="FIRST NAME">
+                            <input type="text" id="firstNameParent" name="firstName" class="form-control" aria-describedby="firstname" style="text-transform:uppercase" placeholder="FIRST NAME">
                         </div>
                         <div class="col-sm-6">
                             <label for="lastname" class="form-label">Last Name*</label>
-                            <input type="text" id="" name="lastName" class="form-control" aria-describedby="lastname" style="text-transform:uppercase" placeholder="LAST NAME">
+                            <input type="text" id="lastNameParent" name="lastName" class="form-control" aria-describedby="lastname" style="text-transform:uppercase" placeholder="LAST NAME">
                         </div>
                     </div>
                     <div class="row p-2">
                         {{-- full name --}}
                         <div class="col-sm-6">
                             <label for="firstname" class="form-label" >Full Name</label>
-                            <input type="text" id="" name="" class="form-control" aria-describedby="" readonly style="text-transform:uppercase" placeholder="FULL NAME">
+                            <input type="text" id="fullNameParent" name="fullName" class="form-control" aria-describedby="" readonly style="text-transform:uppercase" placeholder="FULL NAME">
                         </div>
                         <div class="col-sm-6">
                             <label for="lastname" class="form-label" >Old Identification Number</label>
-                            <input type="text" id="" name="" class="form-control" aria-describedby="" style="text-transform:uppercase" placeholder="0000000">
+                            <input type="text" id="" name="oldIDNo" class="form-control" aria-describedby="" style="text-transform:uppercase" placeholder="0000000">
                         </div>
                     </div>
                     <div class="row p-2">
@@ -50,8 +50,8 @@
                             {{-- new --}}
                             <div class="row">
                                 <div class="col-sm-6">
-                                    <label for="dob" class="form-label" style="color: red;">ID Attachment</label>
-                                    <input type="file" id="" name="" class="form-control" aria-describedby="">
+                                    <label for="dob" class="form-label">ID Attachment</label>
+                                    <input type="file" id="idAttachment" name="idFile" class="form-control" aria-describedby="">
                                 </div>
                             </div>
                         </div>
@@ -62,14 +62,13 @@
                                 <div class="col-sm-12">
                                     <label for="passport" class="form-label">Passport Number</label>
                                   
-                                    <input type="text" id="passportparent" name="passport"  class="form-control" aria-describedby="passport" placeholder="PASSPORT NUMBER">
+                                    <input type="text" id="passportParent" name="passport"  class="form-control" aria-describedby="passport" placeholder="PASSPORT NUMBER">
                                 </div>
                             </div>
                         </div>
                           <div class="col-sm-3">
                                     <label for="expirydate" class="form-label">Expiry Date</label>
-                                    <input type="text" id="expiryDateChild" name="expiryDate"  placeholder="YYYY-MM-DD" class="form-control" aria-describedby="expirydate" style="pointer-events: none;" readonly>
-                                  
+                                    <input type="text" id="expiryDateParent" name="expiryDate" placeholder="YYYY-MM-DD" class="form-control" aria-describedby="expirydate" style="pointer-events: none;" readonly>
                                 </div>
                         <div class="col-sm-3">
                             <label for="issuing-country" class="form-label">Issuing Country</label>
@@ -95,7 +94,7 @@
                         </div>
                         <div class="col-sm-3" >
                             <label for="dob" class="form-label">Age*</label>
-                            <input type="text" id="age6" name="" class="form-control" aria-describedby="" readonly placeholder="AGE">
+                            <input type="text" id="age6" name="age" class="form-control" aria-describedby="" readonly placeholder="AGE">
                         </div>
                         <div class="col-sm-6">
                             <label for="" class="form-label">Relationship</label>
@@ -112,7 +111,7 @@
                     </div>
                     <div class="row p-2">
                         <div class="col-sm-6">
-                            <label for="passport" class="form-label">Contact Number</label>
+                            <label for="passport" class="form-label">Phone Number</label>
                             <input type="text" id="contactNoparent" name="contactNo" class="form-control" aria-describedby="passport" placeholder="00000000000">
                         </div>
                         <div class="col-sm-6">
@@ -132,14 +131,14 @@
                                 <div class="col-sm-6 ">
                                     <div class="form-check form-switch align-right">
                                         <input class="form-check-input okuCheck5 " value="" type="checkbox" name=""  id="">
-                                        <label class="form-check-label" for="citizen" style="color: red;">
+                                        <label class="form-check-label" for="citizen">
                                             OKU?
                                         </label>
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
-                                    <label for="lastname" class="form-label" style="color: red;">OKU Card Number*</label>
-                                    <input type="number" id="okucard5" name="" value="" class="form-control" readonly placeholder="OKU CARD NUMBER">
+                                    <label for="lastname" class="form-label">OKU Card Number*</label>
+                                    <input type="number" id="okucard5" name="okuNo" value="" class="form-control" readonly placeholder="OKU CARD NUMBER">
                                     
                                 </div>
                             </div>
@@ -147,8 +146,8 @@
                         <div class="col-sm-6">
                             <div class="row">
                                 <div class="col-sm-6">
-                                    <label for="dob" class="form-label" style="color: red;">OKU Attachment*</label>
-                                    <input type="file" id="okuattach4" name="" class="form-control" style="pointer-events: none" aria-describedby="" >
+                                    <label for="dob" class="form-label">OKU Attachment*</label>
+                                    <input type="file" id="okuattach5" name="okuFile" class="form-control" style="pointer-events: none" aria-describedby="" >
                                 </div>
                             </div>
                         </div>
@@ -188,7 +187,7 @@
                     <div class="row p-2">
                         <div class="col-sm-6">
                             <label for="state" class="form-label">State*</label>
-                            <select class="form-select" id="stateparent" name="state" style="text-transform:uppercase">
+                            <select class="form-select" id="stateparent" name="state" value="{{ $parent->state ?? '' }}" style="text-transform:uppercase">
                                 <?php $state = state() ?>
                                 <option value="" label="PLEASE CHOOSE"></option>
                                 @foreach ($state as $key => $status)
@@ -198,7 +197,7 @@
                         </div>
                         <div class="col-sm-6">
                             <label for="country" class="form-label">Country</label>
-                            <select class="form-select" name="country" id="countryparent" style="text-transform:uppercase">
+                            <select class="form-select" name="country" id="countryparent" value="{{ $parent->country ?? '' }}" style="text-transform:uppercase">
                                 <option value="MY" label="Malaysia" Selected></option>
                                 <optgroup id="country-optgroup-Americas" label="Americas">
                                     @foreach ($americass as $key => $america)

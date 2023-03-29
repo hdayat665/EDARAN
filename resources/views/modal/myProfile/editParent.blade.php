@@ -2,7 +2,7 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="add-parent">Update Parent Details</h5>
+                <h5 class="modal-title" id="add-parent">Update Family</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -10,19 +10,18 @@
                     <div class="row p-2">
                         <div class="col-sm-6">
                             <label for="firstname" class="form-label">First Name*</label>
-                            <input type="text" id="firstNamesP1" name="firstName" class="form-control" aria-describedby="firstname" placeholder="FIRST NAME">
+                            <input type="text" id="firstNamesP1" name="firstName" class="form-control" aria-describedby="firstname" style="text-transform:uppercase" placeholder="FIRST NAME">
                             <input type="hidden" id="idP" name="id" class="form-control" aria-describedby="firstname">
                         </div>
                         <div class="col-sm-6">
                             <label for="lastname" class="form-label">Last Name*</label>
-                            <input type="text" id="lastNamesP1" name="lastName" class="form-control" aria-describedby="lastname" placeholder="LAST NAME">
+                            <input type="text" id="lastNamesP1" name="lastName" class="form-control" aria-describedby="lastname" style="text-transform:uppercase" placeholder="LAST NAME">
                         </div>
                     </div>
                     <div class="row p-2">
                         <div class="col-sm-6">
                             <label for="firstname" class="form-label" >Full Name*</label>
-                            <input type="text" id="" name="" class="form-control" aria-describedby="" placeholder="FULL NAME">
-                            <input type="hidden" id="" name="" class="form-control" aria-describedby="">
+                            <input type="text" id="fullNameP1" name="fullName" class="form-control" aria-describedby="" readonly style="text-transform:uppercase" placeholder="FULL NAME">
                         </div>
                         {{-- new --}}
                         <div class="col-sm-6">
@@ -43,7 +42,7 @@
                                 </div>
                                 <div class="col-sm-6">
                                     <label for="lastname" class="form-label">New Identification Number*</label>
-                                    <input type="number" id="idnumber7" name="idNo" value="" class="form-control" placeholder="000000000000">
+                                    <input type="text" id="idnumber7" name="idNo" value="{{ $parent->idNo ?? '' }}" class="form-control" placeholder="000000000000">
                                     
                                 </div>
                             </div>
@@ -53,7 +52,10 @@
                             <div class="row">
                                 <div class="col-sm-6">
                                     <label for="dob" class="form-label" >ID Attachment</label>
-                                    <input type="file" id="" name="" class="form-control" aria-describedby="">
+                                    <input type="file" id="idAttachment" name="idFile" class="form-control" aria-describedby="">
+                                    @if ($parent->idFile ?? '')
+                                        Click <a href="{{ route('download', ['filename' => $parent->idFile]) }}">here</a> to see ID Attachment.
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -97,7 +99,7 @@
                         </div>
                         <div class="col-sm-3">
                             <label for="dob" class="form-label" >Age</label>
-                            <input type="text" id="age7" name="" class="form-control" aria-describedby="" readonly placeholder="AGE">
+                            <input type="text" id="age7" name="age" class="form-control" value="{{ $parent->age ?? '' }}" aria-describedby="" readonly placeholder="AGE">
                         </div>
                         <div class="col-sm-6">
                             <label for="expirydate" class="form-label">Relationship</label>
@@ -135,18 +137,21 @@
                             <div class="row">
                                 <div class="col-sm-6">
                                     <label for="dob" class="form-label" >OKU Attachment</label>
-                                    <input type="file" id="okuattach6" name="" class="form-control" style="pointer-events: none" aria-describedby="">
+                                    <input type="file" id="okuattach6" name="okuFile" class="form-control" style="pointer-events: none" aria-describedby="">
+                                    @if ($parent->okuFile ?? '')
+                                        Click <a href="{{ route('download', ['filename' => $parent->okuFile]) }}">here</a> to see OKU ID.
+                                    @endif
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="row p-2">
                         <div class="col-sm-6">
-                            <label for="passport" class="form-label">Contact Number</label>
+                            <label for="passport" class="form-label">Phone Number</label>
                             <input type="text" id="contactNoP1" name="contactNo" class="form-control" aria-describedby="passport" placeholder="00000000000">
                         </div>
                         <div class="col-sm-6">
-                            <label for="age" class="form-label">Gender*</label>
+                            <label for="gender" class="form-label">Gender*</label>
                             <select class="form-select" name="gender" id="genderP1">
                                 <option value="0" label=" PLEASE CHOOSE"></option>
                                 @foreach ($gender as $key => $status)
@@ -218,7 +223,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-primary" id="editParent">Save</button>
+                <button type="button" class="btn btn-primary" id="editParent">Update</button>
             </div>
         </div>
     </div>

@@ -70,7 +70,7 @@
                                 </div>
                             </div>
                             <div class="col-sm-6">
-                                <label for="email" class="form-label">Personal Email*</label>
+                                <label for="email" class="form-label">Personal Email</label>
                                 <input type="email" id="email" name="personalEmail" value="{{$profile->personalEmail ?? ''}}" class="form-control" aria-describedby="email" placeholder="email@gmail.com">
                             </div>
 
@@ -105,7 +105,7 @@
                                 <div class="row">
                                     <div class="col-sm-6 ">
                                         <div class="form-check form-switch align-right">
-                                            <input class="form-check-input partCheck" value="door3" type="checkbox" name="nonNetizen" {{($profile->nonNetizen ?? '') ? 'checked' : ''}} id="citizen">
+                                            <input class="form-check-input partCheck" value="on" type="checkbox" name="nonNetizen" {{($profile->nonNetizen ?? '') ? 'checked' : ''}} id="citizen">
                                             <label class="form-label" for="citizen">
                                                 Non-Citizen
                                             </label>
@@ -123,14 +123,24 @@
                                 </div>
                             </div>
                             {{-- new --}}
-                            <div class="col-sm-3 part">
+                            <div class="col-sm-6">
                                 <label for="idattach" class="form-label" >ID Attachment</label>
-                                <input id="fileupload" type="file" multiple="multiple" name="fileID" value="">
+                                <input id="fileupload" type="file" name="fileID" class="form-control">
                                 @if ($profile->fileID)
-                                    <a href="{{ route('download', ['filename' => $profile->fileID]) }}">{{$profile->fileID}}</a>
+                                    Click <a href="{{ route('download', ['filename' => $profile->fileID]) }}">here</a> to see ID Attachment.
                                 @endif
-
-                            </div> 
+                            </div>
+                            {{-- </div>
+                            <div class="col-sm-3 ">
+                                <div class="row p-2"></div>
+                               <div class="row p-2">
+                                @if ($profile->file)
+                                <span class="file-link">
+                                    <a href="{{ route('download', ['filename' => $profile->file]) }}">{{$profile->file}}</a>
+                                </span>
+                            @endif
+                               </div>
+                            </div> --}}                      
                         </div>
 
                         <div class="row p-2">
@@ -144,16 +154,16 @@
                             </div>
                             <div class="col-sm-3 part">
                                 <label for="expirydate" class="form-label">Expiry Date*</label>
-                                <input type="text" id="expirydatemyprofile" name="expiryDate" value="{{ date_format(date_create($profile->expiryDate ?? null), 'Y-m-d') ?? '' }}" placeholder="YYYY-MM-DD" class="form-control" aria-describedby="expirydate" style="pointer-events: none;" readonly>
+                                <input type="text" id="expirydatemyprofile" name="expiryDate" value="{{ ($profile->expiryDate !== null) ? date_format(date_create($profile->expiryDate), 'Y-m-d') : '' }}" placeholder="YYYY-MM-DD" class="form-control" aria-describedby="expirydate" style="pointer-events: none;" readonly>
                             </div>
                             <div class="col-sm-3">
                                 <label for="issuing-country" class="form-label">Issuing Country*</label>
-                                <select class="form-select" name="issuingCountry" style="text-transform:uppercase">
-                                    <option value="MY" label="Malaysia" selected></option>
-                                    <?php
-                                    $americass = americas();
-                                    $asias = asias();
-                                    ?>
+                                <select class="form-select" name="issuingCountry" id="passportcountrymyprofile" style="text-transform:uppercase" disabled>
+                                    <option value="" label="PLEASE CHOOSE" selected></option>
+                                        <?php
+                                            $americass = americas();
+                                            $asias = asias();
+                                        ?>
                                     <optgroup id="country-optgroup-Americas" label="Americas">
                                         @foreach ($americass as $key => $america)
                                         <option value="{{$key}}" <?php echo ($key == $profile->issuingCountry) ? 'selected="selected"' : '' ?>>{{$america}}</option>
@@ -227,7 +237,7 @@
                                 <div class="row">
                                     <div class="col-sm-6 ">
                                         <div class="form-check form-switch align-right">
-                                            <input class="form-check-input okuCheck" {{($profile->okuStatus ?? '') ? 'checked' : ''}} type="checkbox" name="okuStatus"  id="OKU">
+                                            <input class="form-check-input okuCheck" value="on" {{($profile->okuStatus ?? '') ? 'checked' : ''}} type="checkbox" name="okuStatus" id="OKU">
                                             <label class="form-label" for="OKU" >
                                                 OKU?
                                             </label>
@@ -238,15 +248,18 @@
 
                                     <div class="col-sm-12 idnumber">
                                         <label for="" class="form-label" >OKU Card Number*</label>
-                                        <input type="text" value="" name="" id="okucard" class="form-control" readonly placeholder="OKU CARD NUMBER">
+                                        <input type="text" value="{{$profile->okuCardNum ?? ''}}" name="okuCardNum" id="okucard" class="form-control" readonly placeholder="OKU CARD NUMBER" readonly>
                                     </div>
                                 </div>
                             </div>
                                 </div>
                             </div>
-                            <div class="col-sm-3 part">
+                            <div class="col-sm-6 part">
                                 <label for="idattach" class="form-label" >OKU Attachment*</label>
-                                <input type="file" class="form-control-file" id="okuattach" style="pointer-events: none">
+                                <input type="file" class="form-control" id="okuattach" name="okuFile" style="pointer-events: none">
+                                @if ($profile->okuFile)
+                                    Click <a href="{{ route('download', ['filename' => $profile->okuFile]) }}">here</a> to see ID Attachment.
+                                @endif
                             </div> 
                         </div>
                         <hr class="mt-5">

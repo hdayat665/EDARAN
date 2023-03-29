@@ -23,10 +23,15 @@ $(document).ready(function () {
         if ($("#expirydatemyprofile").prop("readonly")) {
             $("#expirydatemyprofile").prop("readonly", false);
             $("#expirydatemyprofile").css("pointer-events", "auto");
+            $("#passportcountrymyprofile").prop("disabled", false);
+            $("#passportcountrymyprofile").css("pointer-events", "auto");
         } else {
             $("#expirydatemyprofile").prop("readonly", true);
             $("#expirydatemyprofile").css("pointer-events", "none");
             $("#expirydatemyprofile").val("");
+            $("#passportcountrymyprofile").prop("disabled", false);
+            $("#passportcountrymyprofile").css("pointer-events", "auto");
+            $("#passportcountrymyprofile").val("");
         }
     });
 
@@ -50,6 +55,21 @@ $(document).ready(function () {
             lastTab.show();
         });
     });
+
+    // var nonCitizenCheckbox = $('#nonNetizen');
+    // var idInput = $('#idnumber');
+    
+    // if (nonCitizenCheckbox.prop('checked')) {
+    //     idInput.prop('disabled', true);
+    // }
+
+    // nonCitizenCheckbox.change(function() {
+    //     if (this.checked) {
+    //     idInput.prop('disabled', true);
+    //     } else {
+    //     idInput.prop('disabled', false);
+    //     }
+    // });
 
     $("#idnumber").change(function () {
         if ($(this).val().length == 12) {
@@ -120,6 +140,16 @@ $(document).ready(function () {
         }
     });
 
+    // $('#fileupload').on('change', function() {
+    //     var files = $(this).get(0).files;
+    //     if (files.length > 0) {
+    //         var filename = files[0].name;
+    //         $('#filename').html(filename);
+    //     } else {
+    //         $('#filename').empty();
+    //     }
+    // });
+
     //ADD CHILDREN DETAILS
     $("#idNoaddChild").change(function () {
         if ($(this).val().length == 12) {
@@ -140,13 +170,26 @@ $(document).ready(function () {
         $(this).val($(this).val().toUpperCase());
     });
 
+    $('input[name="nonCitizen"]').click(function() {
+        if ($(this).is(':checked')) {
+            $('#idNoaddChild').val('').prop('disabled', true);
+            $('#age4').val('').prop('readonly', false);
+            $('#dob4').val('');
+
+        } else {
+            $('#idNoaddChild').prop('disabled', false);
+            $('#age4').val('').prop('readonly', true);
+            $('#dob4').val('');
+        }
+    });
+
     $("#idNoaddChild").change(function () {
         if ($(this).val().length == 12) {
-            var idn = $(this).val();
+            var idnChild = $(this).val();
 
-            var lastIc = idn.substring(10, 12);
+            var lastIcChild = idnChild.substring(10, 12);
 
-            if (lastIc % 2 == 0) {
+            if (lastIcChild % 2 == 0) {
                 $("#childgender").val(2);
             } else {
                 $("#childgender").val(1);
@@ -173,10 +216,15 @@ $(document).ready(function () {
         if ($("#expiryDateChild").prop("readonly")) {
             $("#expiryDateChild").prop("readonly", false);
             $("#expiryDateChild").css("pointer-events", "auto");
+            $("#passportcountrychildren").prop("disabled", false);
+            $("#passportcountrychildren").css("pointer-events", "auto")
         } else {
             $("#expiryDateChild").prop("readonly", true);
             $("#expiryDateChild").css("pointer-events", "none");
             $("#expiryDateChild").val("");
+            $("#passportcountrychildren").prop("disabled", true);
+            $("#passportcountrychildren").css("pointer-events", "auto")
+            $("#passportcountrychildren").val("");
         }
     });
 
@@ -241,9 +289,9 @@ $(document).ready(function () {
       }, "Special Characters, Spaces, and Alphabet Characters Are Not Allowed.");      
     
     // Custom validation method to check for special characters
-$.validator.addMethod("noSpecialChars", function(value, element) {
-    return this.optional(element) || /^[A-Za-z\s!@#$%^&*(),.?":{}|<>+_=;\-[\]\\/'`~]*$/.test(value);
-  }, "Numbers Are Not Allowed");
+    $.validator.addMethod("noSpecialChars", function(value, element) {
+        return this.optional(element) || /^[A-Za-z\s!@#$%^&*(),.?":{}|<>+_=;\-[\]\\/'`~]*$/.test(value);
+    }, "Numbers Are Not Allowed");
   
   // Function to remove numbers from input fields
   function sanitizeInputField(fieldId) {
@@ -262,6 +310,8 @@ $.validator.addMethod("noSpecialChars", function(value, element) {
   sanitizeInputField("#lastnamemc");
   sanitizeInputField("#firstNameChild");
   sanitizeInputField("#lastNameChild");
+  sanitizeInputField("#firstNameParent");
+  sanitizeInputField("#lastNameParent");
   sanitizeInputField("#firstName1");
   sanitizeInputField("#lastName1");
   sanitizeInputField("#firstNamesP1");
@@ -273,6 +323,22 @@ $.validator.addMethod("noSpecialChars", function(value, element) {
         return this.optional(element) || /^[^\s@]+@[^\s@]+\.(?:com|net|org|edu|gov|mil|biz|info|name|museum|coop|aero|[a-z]{2})$/.test(value);
       }, "Please Insert Valid Email Address");
 
+    $('input[name="nonNetizen"]').click(function() {
+        if ($(this).is(':checked')) {
+            $('#idnumber').val('').prop('disabled', true);
+        } else {
+            $('#idnumber').prop('disabled', false);
+        }
+    });
+
+    // $('input[name="okuStatus"]').click(function() {
+    //     if ($(this).is(':checked')) {
+    //         $('#okucard').val('').prop('disabled', true);
+    //     } else {
+    //         $('#okucard').prop('disabled', false);
+    //     }
+    // });
+
     $("#saveProfile").click(function (e) {
         $("#formProfile").validate({
             // Specify validation rules
@@ -281,7 +347,6 @@ $.validator.addMethod("noSpecialChars", function(value, element) {
                     required: true,
                     email: true,
                 },
-
                 firstName: {
                     required: true,
                   },
@@ -303,6 +368,14 @@ $.validator.addMethod("noSpecialChars", function(value, element) {
                     digits: true,
                     rangelength: [10, 11],
                 },
+                phoneNo2: {
+                    digits: true,
+                    rangelength: [10, 11],
+                },
+                oldIDNo: {
+                    digits: true,
+                    rangelength: [7, 7],
+                },
                 homeNo: {
                     digits: true,
                     rangelength: [9, 9],
@@ -311,11 +384,12 @@ $.validator.addMethod("noSpecialChars", function(value, element) {
                     digits: true,
                     rangelength: [4, 4],
                 },
-                // okuChecked: {
-                //     required: true
-                // },
+                okuCardNum: {
+                    digits: true,
+                }
+                //okuFile: "required",
+                
             },
-
 
             messages: {
                 personalEmail: {
@@ -335,9 +409,12 @@ $.validator.addMethod("noSpecialChars", function(value, element) {
                 maritialStatus: "Please Choose Marital Status",
                 religion: "Please Choose Religion",
                 race: "Please Choose Race",
-                //okuChecked: "Please Insert Valid OKU Card Number",
                 idNo: {
                     required: "Please Insert New Identification Number",
+                    digits: "Please Insert Correct Identification Number Without ' - ' or Space",
+                    rangelength: "Please Insert Valid Identification Number",
+                },
+                oldIDNo: {
                     digits: "Please Insert Correct Identification Number Without ' - ' or Space",
                     rangelength: "Please Insert Valid Identification Number",
                 },
@@ -346,18 +423,24 @@ $.validator.addMethod("noSpecialChars", function(value, element) {
                     digits: "Please Insert Correct Phone Number Without ' - ' or Space",
                     rangelength: "Please Insert Valid Phone Number",
                 },
+                phoneNo2: {
+                    digits: "Please Insert Correct Phone Number Without ' - ' or Space",
+                    rangelength: "Please Insert Valid Phone Number",
+                },
                 homeNo: {
                     digits: "Please Insert Correct Home Number Without ' - ' or Space",
-                    rangelength: "Please Insert Valid Homee Number",
+                    rangelength: "Please Insert Valid Home Number",
                 },
                 extensionNo: {
                     digits: "Please Insert Correct Extension Number Without ' - ' or Space",
                     rangelength: "Please Insert Valid Extension Number",
                 },
+                okuCardNum: {
+                    digits: "Please Insert Correct OKU Card Number Number Without ' - ' or Space",
+                },
+                //okuFile: "Please Input Valid File",
             },
             submitHandler: function (form) {
-                // requirejs(['sweetAlert2'], function(swal,swal1) {
-
                 Swal.fire({
                     allowOutsideClick: false,
                     showCancelButton: true,
@@ -389,8 +472,6 @@ $.validator.addMethod("noSpecialChars", function(value, element) {
                                 document.getElementById("formProfile")
                             );
 
-                            //data.append('okuStatus', okuStatus);
-
                             $.ajax({
                                 type: "POST",
                                 url: "/updateMyProfile",
@@ -414,7 +495,6 @@ $.validator.addMethod("noSpecialChars", function(value, element) {
                                     if (data.type == "error") {
                                     } else {
                                         location.reload();
-                                        // window.location.href = "/myProfile";
                                     }
                                 });
                             });
@@ -425,8 +505,6 @@ $.validator.addMethod("noSpecialChars", function(value, element) {
                         }
                     },
                 }).then((result) => {});
-
-                // });
             },
         });
     });
@@ -597,13 +675,11 @@ $.validator.addMethod("noSpecialChars", function(value, element) {
     for (let i = 0; i < educationIds.length; i++) {
         const type = educationIds[i];
         $('#educationModalEdit' + type).click(function(e) {
-    
             id = $(this).data('id');
             var educationData = getEducation(id);
     
             educationData.done(function(data) {
                 education = data.data;
-                console.log(data.data);
                 $("#idEdu").val(education.id);
                 $('#educationFromDate1').val(education.fromDate);
                 $('#educationToDate1').val(education.toDate);
@@ -664,20 +740,14 @@ $.validator.addMethod("noSpecialChars", function(value, element) {
         $("#addOthers").validate({
           // Specify validation rules
           rules: {
-              fromDate: "required",
-              toDate: "required",
-              instituteName: "required",
-              highestLevelAttained: "required",
-              result: "required",
+              otherDate: "required",
+              otherPQDetails: "required",
               file: "required"
           },
 
           messages: {
-              fromDate: "Please insert From Date",
-              toDate: "Please insert To Date",
-              instituteName: "Please insert Institute Name",
-              highestLevelAttained: "Please insert Highest Level Attained",
-              result: "Please insert Result",
+              otherDate: "Please insert Date",
+              otherPQDetails: "Please insert Professional Qualification Details",
               file: "Please upload valid file",
           },
 
@@ -770,7 +840,7 @@ $.validator.addMethod("noSpecialChars", function(value, element) {
               
           }
           else if ($('#t1').prop('checked') || $('#t2').prop('checked') || $('#t3').prop('checked')){
-              var data = new FormData(document.getElementById("educationModalEdit"));
+              var data = new FormData(document.getElementById("othersModalEdit"));
 
               $.ajax({
                   type: "POST",
@@ -814,7 +884,7 @@ $.validator.addMethod("noSpecialChars", function(value, element) {
 
   othersIds = othersId.split(',');
       
-  for (let i = 1; i < othersIds.length; i++) {
+  for (let i = 0; i < othersIds.length; i++) {
       const type = othersIds[i];
       $('#othersQualificationModalEdit' + type).click(function(e) {
   
@@ -823,6 +893,7 @@ $.validator.addMethod("noSpecialChars", function(value, element) {
   
           othersData.done(function(data) {
               othersQualification = data.data;
+              $("#idOthers").val(othersQualification.id);
               $('#othersDate1').val(othersQualification.otherDate);
               $('#othersPQDetails1').val(othersQualification.otherPQDetails);
               $('#othersDoc1').val(othersQualification.supportOtherDoc);
@@ -1099,13 +1170,10 @@ $.validator.addMethod("noSpecialChars", function(value, element) {
 
         $("#updateAddressDetails" + type).click(function (e){
             id = $(this).data("id");
-            console.log(id)
             var addressData = getAddressDetails(id);
 
             addressData.done(function (data){
-                console.log(data)
                 address = data.data;
-                console.log(data.data);
                 $("#id1").val(address.id);
                 $("#address1Edit").val(address.address1);
                 $("#address2Edit").val(address.address2);
@@ -1159,71 +1227,7 @@ $.validator.addMethod("noSpecialChars", function(value, element) {
                 url: "/getAddressDetails/" + id,
             });
         }
-    }
-
-    $('input[name="address_type[]"]').click(function() {
-        var addressId = $(this).data('address-id');
-        var addressType = $(this).data('address-type');
-        var checked = $(this).is(':checked');
-        id = $(this).data("id");
-    
-        $.ajax({
-            url: '/updateAddressDetails',
-            type: 'POST',
-            data: {
-                id: addressId,
-                addressType: addressType,
-                checked: checked
-            },
-            success: function(data) {
-                // Update the UI to reflect the new address type
-            },
-            error: function(jqXHR, textStatus, errorThrown) {
-                console.error(errorThrown);
-            }
-        });
-    });
-
-    // $('input[name="address_type[]"]').click(function() {
-    //     var addressId = $(this).data('address-id');
-    //     var addressType = $(this).data('address-type');
-    //     var checked = $(this).is(':checked');
-    //     id = $(this).data("id");
-        
-    //     $.ajax({
-    //         type: 'POST',
-    //         url: '/updateAddressDetails',
-    //         data: {
-    //             id: addressId,
-    //             addressType: addressType,
-    //             checked: checked
-    //         },
-    //         dataType: "json",
-    //         async: false,
-    //         processData: false,
-    //         contentType: false,
-    //     }).done(function (data) {
-    //         console.log(data)
-    //         Swal.fire({
-    //             title: data.title,
-    //             icon: "success",
-    //             text: data.msg,
-    //             type: data.type,
-    //             confirmButtonColor: "#3085d6",
-    //             confirmButtonText: "OK",
-    //             allowOutsideClick: false,
-    //             allowEscapeKey: false,
-    //         }).then (function (){
-    //             if(data.type == "error"){
-    //             } else {
-    //                 location.reload();
-    //             }
-    //         });
-    //     });
-    // });
-    
-    
-
+    }    
     $("#saveEmergency, #saveEmergency2").click(function (e) {
         $("#formEmergency").validate({
             // Specify validation rules
@@ -1649,9 +1653,7 @@ $.validator.addMethod("noSpecialChars", function(value, element) {
                         $("#t2").prop("checked") ||
                         $("#t3").prop("checked")
                     ) {
-                        var data = new FormData(
-                            document.getElementById("updateCompanionForm" + no)
-                        );
+                        var data = new FormData(document.getElementById("updateCompanionForm" + no));
 
                         $.ajax({
                             type: "POST",
@@ -1687,12 +1689,70 @@ $.validator.addMethod("noSpecialChars", function(value, element) {
                     }
                 },
             }).then((result) => {});
-
-            // });
         });
     }
 
+    $(document).on("click", "#deleteCompanion", function () {
+        no = $(this).data("id");
+        requirejs(['sweetAlert2'], function(swal) {
+            swal({
+                title: "Are you sure to delete Companion?",
+                type: "error",
+                confirmButtonClass: "btn-danger",
+                confirmButtonText: "Yes!",
+                showCancelButton: true,
+            }).then(function() {
+                $.ajax({
+                    type: "POST",
+                    url: "/deleteCompanion/" + no,
+                    data: { _method: "DELETE" },
+                    
+                }).done(function(data) {
+                    console.log(no);
+                    console.log(data);
+                    swal({
+                        title: data.title,
+                        text: data.msg,
+                        type: data.type,
+                        confirmButtonColor: '#3085d6',
+                        confirmButtonText: 'OK',
+                        allowOutsideClick: false,
+                        allowEscapeKey: false,
+                    }).then(function() {
+                        if (data.type == 'error') {
+
+                        } else {
+                            location.reload();
+                        }
+                    });
+                });
+            });
+        });
+    });
+
     $("#tableChildren").DataTable({
+        responsive: false,
+        lengthMenu: [
+            [5, 10, 15, 20, -1],
+            [5, 10, 15, 20, "All"],
+        ],
+    });
+    $("#education").DataTable({
+        responsive: false,
+        lengthMenu: [
+            [5, 10, 15, 20, -1],
+            [5, 10, 15, 20, "All"],
+        ],
+    }); 
+
+    $("#qualificationOthers").DataTable({
+        responsive: false,
+        lengthMenu: [
+            [5, 10, 15, 20, -1],
+            [5, 10, 15, 20, "All"],
+        ],
+    });
+    $("#profileAddress").DataTable({
         responsive: false,
         lengthMenu: [
             [5, 10, 15, 20, -1],
@@ -1713,6 +1773,17 @@ $.validator.addMethod("noSpecialChars", function(value, element) {
         var a = $("#firstnamemc").val();
         var b = $("#lastnamemc").val();
         $("#fullnamemc").val(a + " " + b);
+    });
+    $("#firstNameParent,#lastNameParent").change(function () {
+        var a = $("#firstNameParent").val();
+        var b = $("#lastNameParent").val();
+        $("#fullNameParent").val(a + " " + b);
+    });
+
+    $("#firstNamesP1,#lastNamesP1").change(function () {
+        var a = $("#firstNamesP1").val();
+        var b = $("#lastNamesP1").val();
+        $("#fullNameP1").val(a + " " + b);
     });
 
     $(".partCheck").click(function () {
@@ -1753,12 +1824,12 @@ $.validator.addMethod("noSpecialChars", function(value, element) {
     $(".partCheck4").click(function () {
         if ($(this).prop("checked")) {
             $("#idNoaddChild").prop("readonly", true);
-            $("#DOBChild").prop("readonly", false);
+            $("#DOBChild").prop("disabled", false);
             $("#DOBChild").css("pointer-events", "auto");
             $("#idNoaddChild").val("");
         } else {
             $("#idNoaddChild").prop("readonly", false);
-            $("#DOBChild").prop("readonly", true);
+            $("#DOBChild").prop("disabled", true);
             $("#DOBChild").css("pointer-events", "none");
             $("#passportChild").val("");
             $("#expiryDateChild").val("");
@@ -1804,6 +1875,11 @@ $.validator.addMethod("noSpecialChars", function(value, element) {
         format: "yyyy/mm/dd",
         autoclose: true,
     });
+    $("#dob4").datepicker({
+        todayHighlight: true,
+        format: "yyyy/mm/dd",
+        autoclose: true,
+    });
     $("#expirydatemyprofile").datepicker({
         //todayHighlight: true,
         format: "yyyy/mm/dd",
@@ -1844,6 +1920,11 @@ $.validator.addMethod("noSpecialChars", function(value, element) {
         format: "yyyy/mm/dd",
         autoclose: true,
     });
+    $("#expiryDateParent").datepicker({
+        todayHighlight: true,
+        format: "yyyy/mm/dd",
+        autoclose: true,
+    });
 
     $("#addChildren").click(function (e) {
         $("#addChildrenForm").validate({
@@ -1860,6 +1941,12 @@ $.validator.addMethod("noSpecialChars", function(value, element) {
                     digits: true,
                     rangelength: [12, 12],
                 },
+                oldIDNo: {
+                    digits: true,
+                    rangelength: [7, 7],
+                },
+                gender: "required",
+                maritalStatus: "required",
             },
 
             messages: {
@@ -1874,6 +1961,12 @@ $.validator.addMethod("noSpecialChars", function(value, element) {
                     digits: "Please Insert Correct Identification Number Without ' - ' or Space",
                     rangelength: "Please Insert Valid Identification Number",
                 },
+                oldIDNo: {
+                    digits: "Please Insert Correct Identification Number Without ' - ' or Space",
+                    rangelength: "Please Insert Valid Identification Number",
+                },
+                gender: "Please Choose Gender",
+                maritalStatus: "Please Choose Marital Status",
             },
             submitHandler: function (form) {
                 // requirejs(['sweetAlert2'], function(swal,swal1) {
@@ -2031,7 +2124,9 @@ $.validator.addMethod("noSpecialChars", function(value, element) {
             var childrenData = getChildren(id);
 
             childrenData.done(function (data) {
+                console.log(data.data);
                 child = data.data;
+                $("#idChildren").val(child.id);
                 $("#DOB1").val(child.DOB);
                 $("#age1").val(child.age);
                 $("#created_at1").val(child.created_at);
@@ -2046,6 +2141,7 @@ $.validator.addMethod("noSpecialChars", function(value, element) {
                 $("#gender1").prop("selectedIndex", child.gender);
                 $("#id1").val(child.id);
                 $("#idNo1").val(child.idNo);
+                $("#oldIdNumber1").val(child.oldIDNo);
                 $("#instituition1").val(child.instituition);
                 $("#issuingCountry1").val(child.issuingCountry);
                 $("#supportDoc123").html(
@@ -2067,6 +2163,10 @@ $.validator.addMethod("noSpecialChars", function(value, element) {
                 $("#city1").val(child.city);
                 $("#state1").val(child.state);
                 $("#country1").val(child.country);
+                if (child.okuStatus == "on") {
+                    $("#OKUchildren1").prop("checked", true);
+                }
+                $("#okucard4").val(child.okuNo);
             });
             $("#edit-children").modal("show");
         });
@@ -2415,6 +2515,8 @@ $.validator.addMethod("noSpecialChars", function(value, element) {
         }
     }
 
+
+    ///// PARENT INFORMATION /////
     $("#tableParent").DataTable({
         responsive: false,
         lengthMenu: [
@@ -2433,6 +2535,17 @@ $.validator.addMethod("noSpecialChars", function(value, element) {
         todayHighlight: true,
         format: "yyyy/mm/dd",
         autoclose: true,
+    });
+
+    $("#passportParent").change(function () {
+        if ($("#expiryDateParent").prop("readonly")) {
+            $("#expiryDateParent").prop("readonly", false);
+            $("#expiryDateParent").css("pointer-events", "auto");
+        } else {
+            $("#expiryDateParent").prop("readonly", true);
+            $("#expiryDateParent").css("pointer-events", "none");
+            $("#expiryDateParent").val("");
+        }
     });
 
     $("#addParent").click(function (e) {
@@ -2662,6 +2775,8 @@ $.validator.addMethod("noSpecialChars", function(value, element) {
                 $("#firstNamesP1").val(parent.firstName);
                 $("#postcodeP1").val(parent.postcode);
                 $("#lastNamesP1").val(parent.lastName);
+                $("#fullNameP1").val(parent.fullName);
+                $("#idNoP1").val(parent.idNo);
                 $("#relationshipP1").val(parent.relationship);
                 if (parent.nonCitizen == "on") {
                     $("#nonCitizenP1").prop("checked", true);
@@ -2827,155 +2942,75 @@ $.validator.addMethod("noSpecialChars", function(value, element) {
         });
     });
 
-
-    function isCPSelected() {
-        var correspondentChecked = $('input[name="address_type[]"][value="correspondent"]:checked').length;
-        var permanentChecked = $('input[name="address_type[]"][value="permanent"]:checked').length;
-        return correspondentChecked || permanentChecked;
-      }
-      
-      $('input[name="address_type[]"][value="correspondent"], input[name="address_type[]"][value="permanent"]').click(function() {
-        var type = $(this).val();
-        var checked = $(this).is(':checked');
-        var tableRow = $(this).closest('tr');
-      
-        if (checked) {
-          $('input[name="address_type[]"][value="' + type + '"]').not(this).prop('checked', false);
-          $('tr').removeClass('selected-row');
-          tableRow.addClass('selected-row');
+    $('input[name="address_type[]"]').on('change', function() {
+        var checkboxes = $('input[name="address_type[]"]');
+        var permanentChecked = false;
+        var correspondentChecked = false;
+        var addressId = $(this).data('address-id');
+        var addressType = $(this).is(':checked') ? $(this).data('address-type') : '0';
+    
+        checkboxes.each(function() {
+            if ($(this).is(':checked')) {
+                if ($(this).val() === 'permanent') {
+                    permanentChecked = true;
+                } else if ($(this).val() === 'correspondent') {
+                    correspondentChecked = true;
+                }
+            }
+        });
+    
+        if (permanentChecked && correspondentChecked) {
+            checkboxes.not(':checked').prop('disabled', true);
+            // if both checkboxes are checked and have the same address ID, set addressType to 3
+            if (checkboxes.filter('[data-address-id="' + addressId + '"]:checked').length === 2) {
+                addressType = '3';
+            }
+        } else if (permanentChecked) {
+            // if only permanent checkbox is checked, set addressType to 1
+            addressType = '1';
+            // disable all other permanent checkboxes
+            checkboxes.filter('[value="permanent"]:not(:checked)').prop('disabled', true);
+            // enable all correspondent checkboxes
+            checkboxes.filter('[value="correspondent"]').prop('disabled', false);
+        } else if (correspondentChecked) {
+            // if only correspondent checkbox is checked, set addressType to 2
+            addressType = '2';
+            // disable all other correspondent checkboxes
+            checkboxes.filter('[value="correspondent"]:not(:checked)').prop('disabled', true);
+            // enable all permanent checkboxes
+            checkboxes.filter('[value="permanent"]').prop('disabled', false);
         } else {
-          tableRow.removeClass('selected-row');
+            checkboxes.prop('disabled', false);
         }
-      
-        if (!isCPSelected()) {
-          swal({
-            title: "Error",
-            text: "Please select Correspondent or Permanent.",
-            icon: "error",
-            button: "OK",
-          });
-          $(this).prop('checked', true);
-        }
-      });
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    // function isCPSelected() {
-    //     var correspondentChecked = $('input[name="address_type[]"][value="correspondent"]:checked').length;
-    //     var permanentChecked = $('input[name="address_type[]"][value="permanent"]:checked').length;
-    //     return correspondentChecked || permanentChecked;
-    //   }
-
-    //   function updateCurrentAddressType() {
-    //     // Get the IDs of all addresses except the current one
-    //     var addressIds = $('input[name="address_id[]"]').map(function() {
-    //         return $(this).val();
-    //     }).get();
-    //     addressIds.splice(currentAddressIndex, 1);
     
-    //     // Get the address types of all addresses except the current one
-    //     var addressTypes = $('input[name="address_type[]"]:checked').map(function() {
-    //         return $(this).val();
-    //     }).get();
-    
-    //     // Send an AJAX request to the server to update the current address type
-    //     $.ajax({
-    //         type: 'POST',
-    //         url: '/updateCurrentAddressType',
-    //         data: {
-    //             addressIds: addressIds,
-    //             addressTypes: addressTypes
-    //         },
-    //         dataType: "json",
-    //         async: false,
-    //         processData: false,
-    //         contentType: false,
-    //     }).done(function (data) {
-    //         console.log(data)
-    //         if (data.status == 'success') {
-    //             // Update the current address type in the UI
-    //             $('#current-address-type').text(data.addressType);
-    //         }
-    //     });
-    // }
-    
-      
-    //   $('input[name="address_type[]"][value="correspondent"], input[name="address_type[]"][value="permanent"]').click(function() {
-    //     var type = $(this).val();
-    //     var checked = $(this).is(':checked');
-    //     var tableRow = $(this).closest('tr');
-    //     var correspondentChecked = $('input[name="address_type[]"][value="correspondent"]:checked').length;
-    //     var permanentChecked = $('input[name="address_type[]"][value="permanent"]:checked').length;
-    //     var addressType;
-      
-    //     if (checked) {
-    //       $('input[name="address_type[]"][value="' + type + '"]').not(this).prop('checked', false);
-    //       $('tr').removeClass('selected-row');
-    //       tableRow.addClass('selected-row');
-    //     } else {
-    //       tableRow.removeClass('selected-row');
-    //     }
-      
-    //     if (!isCPSelected()) {
-    //       swal({
-    //         title: "Error",
-    //         text: "Please select Correspondent or Permanent.",
-    //         icon: "error",
-    //         button: "OK",
-    //       });
-    //       $(this).prop('checked', true);
-    //     } else if (correspondentChecked && permanentChecked) {
-    //       addressType = 3;
-    //     } else {
-    //       addressType = 4;
-    //     }
-      
-    //     // Make the AJAX request to update the address type
-    //     var addressId = $(this).data('address-id');
-    //     $.ajax({
-    //       type: 'POST',
-    //       url: '/updateAddressDetails',
-    //       data: {
-    //         id: addressId,
-    //         addressType: addressType,
-    //       },
-    //       dataType: "json",
-    //       success: function(data) {
-    //         if (data.status == 'success') {
-    //           swal({
-    //             title: data.title,
-    //             text: data.msg,
-    //             icon: data.type,
-    //             confirmButtonColor: "#3085d6",
-    //             confirmButtonText: "OK",
-    //             allowOutsideClick: false,
-    //             allowEscapeKey: false,
-    //           }).then(function() {
-    //             location.reload();
-    //           });
-    //         } else {
-    //           swal({
-    //             title: data.title,
-    //             text: data.msg,
-    //             icon: data.type,
-    //             confirmButtonColor: "#3085d6",
-    //             confirmButtonText: "OK",
-    //             allowOutsideClick: false,
-    //             allowEscapeKey: false,
-    //           });
-    //         }
-    //       },
-    //       error: function(xhr, status, error) {
-    //         console.log(xhr.responseText);
-    //       }
-    //     });
-
-    //     updateCurrentAddressType();
-    //   });
-      
-      
-      
-              
+        // send an AJAX request to update the address type status
+        $.ajax({
+            url: '/updateAddressDetails',
+            type: 'POST',
+            data: {
+                id: addressId,
+                addressType: addressType,
+            },
+            success: function(data) {
+                // Update the UI to reflect the new address type
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Address type updated successfully!',
+                    confirmButtonColor: "#3085d6",
+                    confirmButtonText: "OK",
+                    allowOutsideClick: false,
+                    allowEscapeKey: false,
+                });
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                console.error(errorThrown);
+            }
+        });
+    });          
 });
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 $("#same-address").change(function () {
     if (this.checked) {
@@ -2985,6 +3020,31 @@ $("#same-address").change(function () {
         $("#cityc").val($("#city").val()).prop("readonly", true);
         $("#statec").val($("#state").val()).prop("disabled", true);
         $("#countryc").val($("#country").val()).prop("disabled", true);
+
+        // Fetch permanent address from userAddress table if available
+        var id = "{{ $user->id }}";
+        getAddressforCompanion(id).done(function (data) {
+            if (data) {
+                var permanentAddress1 = data.data.address1;
+                var permanentAddress2 = data.data.address2;
+                var permanentPostcode = data.data.postcode;
+                var permanentCity = data.data.city;
+                var permanentState = data.data.state;
+                var permanentCountry = data.data.country;
+                console.log(data);
+
+                if (permanentAddress1 && permanentAddress2 && permanentPostcode && permanentCity && permanentState && permanentCountry) {
+                    $("#address-1c").val(permanentAddress1);
+                    $("#address-2c").val(permanentAddress2);
+                    $("#postcodec").val(permanentPostcode);
+                    $("#cityc").val(permanentCity);
+                    $("#statec").val(permanentState);
+                    $("#countryc").val(permanentCountry);
+                }
+            }
+        }).fail(function (xhr, status, error) {
+            console.log("Error fetching permanent address: " + error);
+        });
     } else {
         $("#address-1c").prop("readonly", false);
         $("#address-2c").prop("readonly", false);
@@ -2994,6 +3054,7 @@ $("#same-address").change(function () {
         $("#countryc").prop("disabled", false);
     }
 });
+
 $("#same-address2").change(function () {
     if (this.checked) {
         $("#address1parent").val($("#address-1").val()).prop("readonly", true);
@@ -3002,6 +3063,31 @@ $("#same-address2").change(function () {
         $("#cityparent").val($("#city").val()).prop("readonly", true);
         $("#stateparent").val($("#state").val()).prop("disabled", true);
         $("#countryparent").val($("#country").val()).prop("disabled", true);
+
+        // Fetch permanent address from userAddress table if available
+        var id = "{{ $user->id }}";
+        getAddressforCompanion(id).done(function (data) {
+            if (data) {
+                var permanentAddress1 = data.data.address1;
+                var permanentAddress2 = data.data.address2;
+                var permanentPostcode = data.data.postcode;
+                var permanentCity = data.data.city;
+                var permanentState = data.data.state;
+                var permanentCountry = data.data.country;
+                console.log(data);
+
+                if (permanentAddress1 && permanentAddress2 && permanentPostcode && permanentCity && permanentState && permanentCountry) {
+                    $("#address1parent").val(permanentAddress1);
+                    $("#address2parent").val(permanentAddress2);
+                    $("#postcodeparent").val(permanentPostcode);
+                    $("#cityparent").val(permanentCity);
+                    $("#stateparent").val(permanentState);
+                    $("#countryparent").val(permanentCountry);
+                }
+            }
+        }).fail(function (xhr, status, error) {
+            console.log("Error fetching permanent address: " + error);
+        });
     } else {
         $("#address1parent").val($("").val()).prop("readonly", false);
         $("#address2parent").val($("").val()).prop("readonly", false);
@@ -3131,17 +3217,50 @@ $("#same-address5").change(function () {
 
 // });
 
+function getAddressforCompanion(id){
+    return $.ajax({
+        url: "/getAddressforCompanion/" + id,
+    });
+}
+
+// $("#datepicker-fromdate").datepicker({
+//     todayHighlight: true,
+//     autoclose: true,
+//     format: "yyyy/mm/dd",
+// });
+
+// $("#datepicker-todate").datepicker({
+//     todayHighlight: true,
+//     autoclose: true,
+//     format: "yyyy/mm/dd",
+// });
+
+// Initialize the datepicker for the from date
 $("#datepicker-fromdate").datepicker({
     todayHighlight: true,
     autoclose: true,
     format: "yyyy/mm/dd",
 });
 
+// Initialize the datepicker for the to date
 $("#datepicker-todate").datepicker({
     todayHighlight: true,
     autoclose: true,
     format: "yyyy/mm/dd",
+}).on("changeDate", function(e) {
+    // Get the from date
+    var fromDate = $("#datepicker-fromdate").datepicker("getDate");
+
+    // Get the to date
+    var toDate = e.date;
+
+    // Compare the dates
+    if (toDate < fromDate) {
+        alert("To date cannot be before from date!");
+        $(this).datepicker("setDate", fromDate);
+    }
 });
+
 
 $("#datepicker-fromdateu").datepicker({
     todayHighlight: true,
@@ -3169,27 +3288,16 @@ $("#datepicker-othersu").datepicker({
 
 //   oku checkbox myprofile
 $(".okuCheck").click(function () {
-    var okuStatus = 0;
     if ($(this).prop("checked")) {
-        $("#okucard").prop("readonly", false);
+        $("#okucard").val('').prop("readonly", false);
+        $("#okuattach").css("readonly", false);      
         $("#okuattach").css("pointer-events", "auto");
-        okuStatus = 1;
     } else {
-        $("#okucard").prop("readonly", true);
+        $("#okucard").val('').prop("readonly", true);
+        $("#okuattach").css("readony", true);
         $("#okuattach").css("pointer-events", "none");
     }
-
-    // $.ajax({
-    //     url: '{{ route("saveOkuData") }}',
-    //     type: 'POST',
-    //     data: {okuChecked: okuChecked},
-    //     success: function(response) {
-    //         // Handle the response from the server if needed
-    //     },
-    //     error: function(xhr, status, error) {
-    //         // Handle errors if needed
-    //     }
-    // });
+    $(this).data('okuStatus', okuStatus);
 });
 
 //oku check companion
@@ -3197,9 +3305,11 @@ $(".okuCheck1").click(function () {
     if ($(this).prop("checked")) {
         $("#okucard1").prop("readonly", false);
         $("#okuattach1").css("pointer-events", "auto");
+        okuStatus = 1;
     } else {
         $("#okucard1").prop("readonly", true);
         $("#okuattach1").css("pointer-events", "none");
+        okuStatus = 0;
     }
 });
 
@@ -3208,9 +3318,11 @@ $(".okuCheck2").click(function () {
     if ($(this).prop("checked")) {
         $("#okucard2").prop("readonly", false);
         $("#okuattach2").css("pointer-events", "auto");
+        okuStatus = 1;
     } else {
         $("#okucard2").prop("readonly", true);
         $("#okuattach2").css("pointer-events", "none");
+        okuStatus = 0;
     }
 });
 
@@ -3219,9 +3331,11 @@ $(".okuCheck3").click(function () {
     if ($(this).prop("checked")) {
         $("#okucard3").prop("readonly", false);
         $("#okuattach3").css("pointer-events", "auto");
+        okuStatus = 1;
     } else {
         $("#okucard3").prop("readonly", true);
         $("#okuattach3").css("pointer-events", "none");
+        okuStatus = 0;
     }
 });
 
@@ -3230,9 +3344,11 @@ $(".okuCheck4").click(function () {
     if ($(this).prop("checked")) {
         $("#okucard4").prop("readonly", false);
         $("#okuattach4").css("pointer-events", "auto");
+        okuStatus = 1;
     } else {
         $("#okucard4").prop("readonly", true);
         $("#okuattach4").css("pointer-events", "none");
+        okuStatus = 0;
     }
 });
 
@@ -3241,9 +3357,11 @@ $(".okuCheck5").click(function () {
     if ($(this).prop("checked")) {
         $("#okucard5").prop("readonly", false);
         $("#okuattach5").css("pointer-events", "auto");
+        okuStatus = 1;
     } else {
         $("#okucard5").prop("readonly", true);
         $("#okuattach5").css("pointer-events", "none");
+        okuStatus = 0;
     }
 });
 
@@ -3252,9 +3370,11 @@ $(".okuCheck6").click(function () {
     if ($(this).prop("checked")) {
         $("#okucard6").prop("readonly", false);
         $("#okuattach6").css("pointer-events", "auto");
+        okuStatus = 1;
     } else {
         $("#okucard6").prop("readonly", true);
         $("#okuattach6").css("pointer-events", "none");
+        okuStatus = 0;
     }
 });
 
@@ -3287,8 +3407,8 @@ $("#idnumber3").change(function () {
     }
 });
 
-//children add info
-$("#idnumber4").change(function () {
+//CHILDREN ADD INFO
+$("#idNoaddChild").change(function () {
     if ($(this).val().length == 12) {
         var idn = $(this).val();
         var year = idn.substring(0, 2);
@@ -3303,7 +3423,7 @@ $("#idnumber4").change(function () {
     }
 });
 
-$("#idnumber4").change(function () {
+$("#idNoaddChild").change(function () {
     if ($(this).val().length == 12) {
         var idn = $(this).val();
         var year = idn.substring(0, 2);
@@ -3424,12 +3544,12 @@ $(".partCheck6").click(function () {
 //ADD CHILDREN DETAILS
 $(".partCheck7").click(function () {
     if ($(this).prop("checked")) {
-        $("#idnumber4").prop("readonly", true);
+        $("#idNoaddChild").prop("readonly", true);
         $("#dob4").prop("readonly", false);
         $("#dob4").css("pointer-events", "auto");
-        $("#idnumber4").val("");
+        $("#idNoaddChild").val("");
     } else {
-        $("#idnumber4").prop("readonly", false);
+        $("#idNoaddChild").prop("readonly", false);
         $("#dob4").prop("readonly", true);
         $("#dob4").css("pointer-events", "none");
         $("#passportChild").val("");
@@ -3450,7 +3570,7 @@ $(".partCheck8").click(function () {
         $("#idnumber6").prop("readonly", false);
         $("#dob6").prop("readonly", true);
         $("#dob6").css("pointer-events", "none");
-        $("#passportparent").val("");
+        $("#passportParent").val("");
         $("#expiryDateParent").val("");
         $("#expiryDateParent").prop("readonly", true);
         $("#expiryDateParent").css("pointer-events", "none");

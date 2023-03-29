@@ -4,7 +4,7 @@
         <h1 class="page-header">eClaim | Claim Approval | Supervisor</h1>
         <div class="panel panel" id="hodClaimJs">
             <div class="panel-body">
-                <div class="form-control">
+                <!-- <div class="form-control">
                     <h3>Claim Overview</h3>
                     <div class="row p-2">
                         <div class="col-sm-3">
@@ -31,7 +31,7 @@
                         </div>
                     </div>
                 </div>
-                <br>
+                <br> -->
 
                 <div class="form-control">
                     <div class="row p-2">
@@ -57,12 +57,12 @@
                                         </li>
                                     </ul>
                                 </div>
-                                <div class="col d-flex justify-content-end">
+                                <!-- <div class="col d-flex justify-content-end">
                                     <button class="btn btn-primary" type="button">Skip the Queue</button>&nbsp;
                                     <button class="btn btn-primary" type="button">Approve All</button>&nbsp;
                                     <button class="btn btn-primary" type="button" id="filter"> <i class="fa fa-filter" aria-hidden="true"></i></button>&nbsp;
                                     <button class="btn btn-primary" type="button"> <i class='far fa-file-pdf'></i></button>&nbsp;
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                     </div>

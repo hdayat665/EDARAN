@@ -1515,7 +1515,7 @@ class SettingService
         $data['msg'] = 'Success Update Area Name';
 
         return $data;
-    }
+    } 
     public function deleteSubsistance($id)
     {
         $logs = EclaimGeneral::find($id);
@@ -1573,10 +1573,12 @@ class SettingService
         $claimCategory['claim_catagory'] = $input['claim_catagory'];
 
         ClaimCategory::create($claimCategory);
-
+        
         $category = ClaimCategory::where('tenant_id', $user->tenant_id)->orderBy('created_at', 'DESC')->first();
-
-        if ($input['content']) {
+        
+        
+        if (isset($input['content']) && isset($input['label'])) {
+            $dataContent = [];
             foreach ($input['content'] as $content) {
                 $dataContent[] = [
                     'content' => $content,
@@ -1586,10 +1588,11 @@ class SettingService
                     'created_at' => date_format(date_create(date("Y-m-d H:i:s")), "Y-m-d H:i:s"),
                 ];
             }
-
+        
             ClaimCategoryContent::insert($dataContent);
-        }
+        } 
 
+        
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
@@ -2051,7 +2054,7 @@ class SettingService
         // date_default_timezone_set("Asia/Kuala_Lumpur");
         $etData = holidayModel::where([['holiday_title', $input['holiday_title']], ['tenant_id', Auth::user()->tenant_id]])->first();
         if ($etData) {
-            $data['msg'] = 'Title already exists in list holiday.';
+            $data['msg'] = 'Title Already Exists';
             $data['status'] = config('app.response.error.status');
             $data['type'] = config('app.response.error.type');
             $data['title'] = config('app.response.error.title');
@@ -2080,7 +2083,7 @@ class SettingService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Successfully save holiday';
+        $data['msg'] = 'Holiday is created';
 
         return $data;
     }
@@ -2098,7 +2101,7 @@ class SettingService
 
         date_default_timezone_set("Asia/Kuala_Lumpur");
 
-        $data1 = $input['holidaytitle'];
+        $data1 = strtoupper($input['holidaytitle']);
         $data2 = $input['start_date'];
         $data3 = $input['enddate'];
         $data4 = $input['flexRadioDefault'];
@@ -2116,7 +2119,7 @@ class SettingService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Successfully update holiday';
+        $data['msg'] = 'Holiday is updated';
 
         return $data;
     }
@@ -2148,12 +2151,21 @@ class SettingService
 
         holidayModel::where('id', $id)->update($update);
 
-        $data['status'] = config('app.response.success.status');
-        $data['type'] = config('app.response.success.type');
-        $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Successfully update holiday';
+        if($status == 1){
+            $data['status'] = config('app.response.success.status');
+            $data['type'] = config('app.response.success.type');
+            $data['title'] = config('app.response.success.title');
+            $data['msg'] = 'Holiday is activated';
+            return $data;
 
-        return $data;
+        }else{
+
+            $data['status'] = config('app.response.success.status');
+            $data['type'] = config('app.response.success.type');
+            $data['title'] = config('app.response.success.title');
+            $data['msg'] = 'Holiday is deactivated';
+            return $data;
+        }  
     }
 
 
@@ -2172,7 +2184,7 @@ class SettingService
         // date_default_timezone_set("Asia/Kuala_Lumpur");
         $etData = leavetypesModel::where([['leave_types_code', $input['leave_types_code']], ['tenant_id', Auth::user()->tenant_id]])->first();
         if ($etData) {
-            $data['msg'] = 'Title already exists in list holiday.';
+            $data['msg'] = 'Leave type code already exists';
             $data['status'] = config('app.response.error.status');
             $data['type'] = config('app.response.error.type');
             $data['title'] = config('app.response.error.title');
@@ -2182,12 +2194,8 @@ class SettingService
 
         $data1 = strtoupper($input['leave_types_code']);
         $data2 = strtoupper($input['leave_types']);
-
-        if ($input = $r->input('day')) {
-            $data3 = $input['day'];
-        } else {
-            $data3 = 0;
-        }
+        $data3 = $input['day'];
+    
         $data5 = Auth::user()->tenant_id;
 
         $input = [
@@ -2269,12 +2277,21 @@ class SettingService
 
         leavetypesModel::where('id', $id)->update($update);
 
-        $data['status'] = config('app.response.success.status');
-        $data['type'] = config('app.response.success.type');
-        $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Successfully update leave type';
+        if($status == 1){
+            $data['status'] = config('app.response.success.status');
+            $data['type'] = config('app.response.success.type');
+            $data['title'] = config('app.response.success.title');
+            $data['msg'] = 'Leave type status is actived';
+            return $data;
+        }else{
+            $data['status'] = config('app.response.success.status');
+            $data['type'] = config('app.response.success.type');
+            $data['title'] = config('app.response.success.title');
+            $data['msg'] = 'Leave type status is deactivated';
+            return $data;
+        }
 
-        return $data;
+        
     }
 
     public function updateClaimDate($r)

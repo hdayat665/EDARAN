@@ -4,9 +4,23 @@ $(document).ready(function () {
     $("#createGnc").click(function (e) {
         $("#createForm").validate({
             // Specify validation rules
-            rules: {},
+            rules: {
+                year: "required",
+                month: "required",
+                claim_category: "required",
+                amount: "required",
+                'file_upload[]': "required",
+                claim_category_detail: "required",
+            }, 
 
-            messages: {},
+            messages: {
+                year: "Please Select Year",
+                month: "Please Select Month",
+                claim_category: "Please Select Claim Category",
+                amount: "Please Fill Out Amount",
+                'file_upload[]': "Please Upload Attachment",
+                claim_category_detail: "Please Insert Category Detail",
+            },
             submitHandler: function (form) {
                 requirejs(["sweetAlert2"], function (swal) {
                     var data = new FormData(
@@ -41,7 +55,26 @@ $(document).ready(function () {
             },
         });
     });
+        
+        $(document).ready(function() {
+        $('#amount').on('input', function() {
+            var value = $(this).val();
+            var decimalCount = (value.split('.')[1] || []).length;
+            if (decimalCount > 2) {
+            $(this).val(parseFloat(value).toFixed(2));
+            } 
+        });
 
+        $('#amount').blur(function() {
+            var value = $(this).val();
+            var decimalCount = (value.split('.')[1] || []).length;
+            if (decimalCount == 0) {
+            $(this).val(value + '.00');
+            }
+        });
+        });
+ 
+    
     // $("#createGnc").click(function (e) {
     //     $("#createForm").validate({
     //         // Specify validation rules
@@ -206,7 +239,7 @@ $(document).ready(function () {
     $("#applyclaimtable").DataTable({
         searching: false,
         scrollX: true,
-        scrollY: 150,
+        // scrollY: 150,
         lengthChange: true,
         lengthMenu: [
             [5, 10, 25, 50, -1],
@@ -227,7 +260,7 @@ $(document).ready(function () {
                 .remove()
                 .end()
                 .append(
-                    '<option label="Please Choose" selected="selected"> </option>'
+                    '<option label="Please Choose" value="" selected="selected"> </option>'
                 )
                 .val("");
 

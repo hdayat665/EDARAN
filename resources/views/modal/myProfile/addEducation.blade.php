@@ -3,7 +3,7 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h1 class="modal-title fs-5" id="exampleModalLabel">Add Education</h1>
+          <h1 class="modal-title fs-5" id="exampleModalLabel">New Education</h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
@@ -12,13 +12,13 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="" class="form-label">From Date</label>
-                        <input type="text" class="form-control" id="datepicker-fromdate" placeholder="DD/MM/YYYY" name="fromDate" value="">
+                        <input type="text" class="form-control" id="datepicker-fromdate" placeholder="YYYY/MM/DD" name="fromDate" value="">
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="" class="form-label">To Date</label>
-                        <input type="text" class="form-control" id="datepicker-todate" placeholder="DD/MM/YYYY" name="toDate" value="">
+                        <input type="text" class="form-control" id="datepicker-todate" placeholder="YYYY/MM/DD" name="toDate" value="">
                     </div>
                 </div>
             </div>

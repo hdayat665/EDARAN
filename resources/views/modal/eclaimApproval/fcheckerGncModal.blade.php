@@ -29,31 +29,28 @@
                     </div>
                     <div class="col-md-9">
                         <div class="input-group">
-                            <input type="text" name="" class="form-control" value="{{ date('Y-m-d', strtotime($gnc->created_at)) ?? '-' }}" readonly />
-                            {{-- <div class="input-group-text"><i class="fa fa-calendar"></i></div> --}}
+                            <input type="text" class="form-control" readonly  id="applied_date">
                         </div>
                     </div>
                 </div>
                 <div class="row p-2">
-                    <div class="col-md-3">
+                    <div class="col-md-3"> 
                         <label class="form-label">Claim Category</label>
                     </div>
                     <div class="col-md-9">
-                    <input type="text" class="form-control" readonly value="{{$gnc->claim_catagory_name}}" >
+                        <input type="text" class="form-control" readonly  id="claim_category">
 
                     </div>
                 </div>
                 {{-- akan tarik data dari  labelling name dlam setting add claim --}}
-                <!-- <div class="row p-2">
+                <div class="row p-2">
                     <div class="col-md-3">
-                        <input type="text" value="test" class="form-control" name="labellingname" id="label" readonly>
+                        <label class="form-label" id="label"></label>
                     </div>
                     <div class="col-md-9">
-                        <select class="form-select" disabled>
-                            <option class="form-label" value="Please Select" selected>Please Select</option>
-                        </select>
+                        <input type="text" class="form-control" id="contents" readonly>
                     </div>
-                </div> -->
+                </div>
                 <div class="row p-2">
                     <div class="col-md-3">
                         <label class="form-label">Amount (MYR)</label>
@@ -76,14 +73,15 @@
                     </div>
                     <div class="col-md-9">
                         <input type="hidden" id="checkId">
-                        <a href="/storage/{{ $gnc->file_upload ?? '-' }}">{{ $gnc->file_upload ?? '-' }}</a>
-                        <!-- <input type="text" class="form-control" id="file_upload" readonly> -->
+                        <a id="file_upload" ></a>
                     </div>
                 </div>
             </div>
             <div class="row p-2">
                 <div class="modal-footer">
+                @if ( $general->f1 != 'recommend')
                     <button type="button" id="checkButton" class="btn btn-lime">Check</button>
+                @endif
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 </div>
             </div>

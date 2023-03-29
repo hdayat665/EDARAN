@@ -12,7 +12,7 @@
                 <div class="form-group row">
                     <label for="staticEmail" class="col-sm-4 col-form-label">Date</label>
                     <div class="col-sm-8">
-                        <input type="text" class="form-control" id="datepicker-others" placeholder="DD/MM/YYYY" name="otherDate" value="">
+                        <input type="text" class="form-control" id="datepicker-others" placeholder="YYYY/MM/DD" name="otherDate">
                     </div>
                 </div>
            </div>

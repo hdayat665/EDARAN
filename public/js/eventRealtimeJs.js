@@ -182,12 +182,12 @@ $(document).on("click", "#buttonViewEvent", function() {
         // duration = +data.end_time - +data.start_time;
         // alert(duration);
         $('#duration').text(data.duration);
-        var location = getProjectLocationById(data.location);
-        location.done(function(location) {
-            $('#location_event').text(location.location_name || '-');
+        // var location = getProjectLocationById(data.location);
+        // location.done(function(location) {
+        //     $('#location_event').text(location.location_name || '-');
 
-        })
-
+        // })
+        $('#location_event').text(data.venue || '-');
         var project = getProjectByidTimesheet(data.project_id);
         project.done(function(project) {
             $('#project_event').text(project.project_name || '-');
@@ -357,16 +357,17 @@ $("#daterange").daterangepicker({
 });
 
 $('#timesheetapproval').DataTable({
-    "searching": false,
+    "searching": true,
     "lengthChange": true,
+    "paging": true,
     lengthMenu: [
         [5, 10, 25, 50, -1],
         [5, 10, 25, 50, "All"],
     ],
-    responsive: false,
+    responsive: true,
     scrollX: true,
 
-    dom: '<"row"<"col-sm-10"B><"col-sm-1"l>>t<"row"<"col-sm-5"i><"col-sm-7"p>>',
+    "dom": '<"row"<"col-sm-4"l><"col-sm-4 text-center"B><"col-sm-4"f>>t<"row"<"col-sm-12"ip>>',
     buttons: [
         { extend: 'excel', className: 'btn-blue', exportOptions: {
             columns: [1,2,3,4,5]
@@ -378,6 +379,7 @@ $('#timesheetapproval').DataTable({
             columns: [1,2,3,4,5]
         }},
     ],
+    
 });
 
 $('#tableviewparticipant').DataTable({
@@ -407,6 +409,9 @@ $('#statusparticipant').DataTable({
 
 $().ready = function() {
 
+    if ($('#employeesearch').val() || $('#eventsearch').val()) {
+        $('#filterform').show();
+    }
 
     $("#filter").click(function() {
         $('#filterform').toggle();
@@ -597,7 +602,9 @@ $("#durationrt,#starteventdate,#endeventdate,#starteventtime,#endeventtime").foc
 
      $("#reset").on("click", function () {
         $("#employeesearch").val($("#employeesearch").data("default-value"));
+        $("#employeesearch").picker('destroy');
         $("#eventsearch").val($("#eventsearch").data("default-value"));
+        $("#eventsearch").picker('destroy');
         
     });
 

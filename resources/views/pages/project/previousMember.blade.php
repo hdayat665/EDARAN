@@ -44,6 +44,7 @@ table{
                         <table id="projectMemberTable" class="table table-striped table-bordered align-middle">
                             <thead>
                                 <tr>
+                                    <th>No.</th>
                                     <th width="1%" data-orderable="false" class="align-middle">Action</th>
                                     <th class="text-nowrap">Project Member Name</th>
                                     <th class="text-nowrap">Designation</th>
@@ -55,21 +56,21 @@ table{
                                 </tr>
                             </thead>
                             <tbody>
+                                @if ($projectMembers)
+                                @foreach ($projectMembers as $key => $projectMember)
+                                <tr>
+                                    <td>{{ $key + 1 }}</td>
+                                    <td width="1%"><a data-bs-toggle="modal" data-id="{{$projectMember->id}}" id="editProjectMemberButton" class="btn btn-primary"><i class="fa fa-cogs"></i> Edit</a></td>
+                                    <td>{{$projectMember->employeeName}}</td>
+                                    <td>{{($projectMember->designation) ? getDesignation($projectMember->designation)->designationName ?? '-' : '-'}}</td>
+                                    <td>{{($projectMember->department) ? getDepartment($projectMember->department)->departmentName ?? '-' : '-'}}</td>
+                                    <td>{{($projectMember->branch) ? getBranch($projectMember->branch)->branchName ?? '-' : '-'}}</td>
+                                    <td>{{($projectMember->unit) ? getUnit($projectMember->unit)->unitName ?? '-' : '-'}}</td>
+                                    <td>{{$projectMember->joined_date}}</td>
+                                    <!-- <td><a href="/projectAssignView/{{$projectMember->id}}">view</a></td> -->
+                                    <td><a href="/projectAssignView/{{$projectMember->id}}" class="btn btn-primary"> View </a></td>
 
-                            @if ($projectMembers)
-                                    @foreach ($projectMembers as $projectMember)
-                                        <tr>
-                                            <td width="1%"><a data-bs-toggle="modal" data-id="{{$projectMember->id}}" id="editProjectMemberButton" class="btn btn-primary"><i class="fa fa-cogs"></i> Edit</a></td>
-                                            <td>{{$projectMember->employeeName}}</td>
-                                            <td>{{($projectMember->designation) ? getDesignation($projectMember->designation)->designationName ?? '-' : '-'}}</td>
-                                            <td>{{($projectMember->department) ? getDepartment($projectMember->department)->departmentName ?? '-' : '-'}}</td>
-                                            <td>{{($projectMember->branch) ? getBranch($projectMember->branch)->branchName ?? '-' : '-'}}</td>
-                                            <td>{{($projectMember->unit) ? getUnit($projectMember->unit)->unitName ?? '-' : '-'}}</td>
-                                            <td>{{$projectMember->joined_date}}</td>
-                                            <!-- <td><a href="/projectAssignView/{{$projectMember->id}}">view</a></td> -->
-                                            <td><a href="/projectAssignView/{{$projectMember->id}}" class="btn btn-primary"> View </a></td>
-
-                                        </tr>
+                                </tr>
                                     @endforeach
                                 @endif
                                 
@@ -92,9 +93,6 @@ table{
                                     </tr>
                                 @endforeach
                             @endif -->
-
-
-
                             </tbody>
                         </table>
                     </div>
@@ -106,6 +104,7 @@ table{
                         <table id="projectMemberPrevTable" class="table table-striped table-bordered align-middle">
                             <thead>
                                 <tr>
+                                    <th>No.</th>
                                     <th class="text-nowrap">Project Member Name</th>
                                     <th class="text-nowrap">Designation</th>
                                     <th class="text-nowrap">Department</th>
@@ -118,8 +117,9 @@ table{
                             </thead>
                             <tbody>
                                 @if ($previousProjectMembers)
-                                @foreach ($previousProjectMembers as $projectMember)
+                                @foreach ($previousProjectMembers as $key => $projectMember)
                                     <tr>
+                                        <td>{{$key+1}}</td>
                                         <td>{{$projectMember->employeeName}}</td>
                                         <td>{{($projectMember->designation) ? getDesignation($projectMember->designation)->designationName ?? '-' : '-'}}</td>
                                         <td>{{($projectMember->department) ? getDepartment($projectMember->department)->departmentName ?? '-' : '-'}}</td>
@@ -130,7 +130,7 @@ table{
                                         <td><a href="/projectAssignView/{{$projectMember->id}}">View</a></td>
                                     </tr>
                                 @endforeach
-                            @endif
+                                @endif
                             </tbody>
                         </table>
                     </div>

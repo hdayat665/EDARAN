@@ -3,11 +3,13 @@
 @section('content')
 <div id="content" class="app-content">
     <h1 class="page-header">Reporting <small>| Timesheet | Employee Report </small></h1>
-    <div class="panel panel">
+    <div class="panel panel" id="employeeReportByJs">
         <div class="panel-body">
             <div class="row p-2">
                 <div class="col-sm-12">
-                    <h5>Department : {{$department ?? '-'}}</h5>
+                    {{-- <h5>Department : {{$department ?? '-'}}</h5> --}}
+                    <h5>Department Name : @if(!empty($departments) && isset($departments[0])){{$departments[0]->departmentName}}@endif
+					</h5>
                 </div>
             </div>
             <div class="row p-2">
@@ -15,7 +17,7 @@
                     <h5> Date : {{$date_range}}</h5>
                 </div>
             </div>
-            <table id="departmenttable" class="table table-striped table-bordered align-middle">
+            <table id="tablebydepartment" class="table table-striped table-bordered align-middle">
                 <thead>
                     <tr>
                         <th width="1%">NO</th>
@@ -44,8 +46,8 @@
                         <th colspan="4">Total:</th>
                         <td>
                             @if ($departments)
-                                {{ number_format($departments->sum(function($department) {
-                                    return floatval(str_replace(':', '.', substr($department->total_hour, 0, -2))) * floatval($department->COR);
+                                {{ number_format($departments->sum(function($departments) {
+                                    return floatval(str_replace(':', '.', substr($departments->total_hour, 0, -2))) * floatval($departments->COR);
                                 }), 2) }}
                             @endif
                         </td>

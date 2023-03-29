@@ -31,14 +31,14 @@
                                         class="fa fa-reply" aria-hidden="true"></i>
                                     Generate Cheque</a>
                             </div>
-                        <td>{{ $ca->id ?? '-' }}</td>
+                        <td>CA-{{ $ca->id }}</td>
                         <td>{{ $ca->userProfile->fullName ?? '-' }}</td>
-                        <td>{{ getCashAdvanceType($ca->type) ?? '-' }}</td>
-                        <td>{{ $ca->created_at ?? '-' }}</td>
+                        <td>{{ getCashAdvanceType($ca->type) ?? 'N/A' }}</td>
+                        <td>{{ date('Y-m-d', strtotime($ca->created_at)) ?? 'N/A' }}</td>
                         <td>{{ $ca->travel_date ?? '-' }}</td>
-                        <td>{{ $ca->amount ?? '-' }}</td>
+                        <td>MYR {{  $ca->mode_of_transport->max_total ?? $ca->amount }}</td>
                         <td>{{ $ca->status ?? '-' }}</td>
-                        <td>{{ $ca->updated_at ?? '-' }}</td>
+                        <td>{{ date('Y-m-d', strtotime($ca->updated_at)) ?? 'N/A' }}</td>
                         <td>{{ $ca->pv_number ?? '-' }}</td>
                     </tr>
                 @endif

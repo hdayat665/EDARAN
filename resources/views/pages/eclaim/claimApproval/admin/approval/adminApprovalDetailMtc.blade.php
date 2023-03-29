@@ -55,15 +55,24 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @if ($personals)
+                                        @if ($personals) 
                                             @foreach ($personals as $personal)
                                                 <tr>
                                                     <td><a data-bs-toggle="modal" data-id="{{ $personal->id }}" id="btn-view" class="btn btn-primary btn-sm">View</a></td>
-                                                    <td>{{ date('Y-m-d', strtotime($personal->created_at)) ?? '-' }}</td>
+                                                    <td>{{ date('Y-m-d', strtotime($personal->applied_date)) ?? '-' }}</td>
                                                     <td>{{ $personal->claim_catagory_name ?? '-' }}</td>
                                                     <td>{{ $personal->amount ?? '-' }}</td>
                                                     <td>{{ $personal->claim_desc ?? '-' }}</td>
-                                                    <td><a href="/storage/{{ $personal->file_upload ?? '-' }}">{{ $personal->file_upload ?? '-' }}</a></td>
+                                                    <td>
+                                                        @if(!empty($personal->file_upload))
+                                                        @php
+                                                        $filenames = explode(',', $personal->file_upload);
+                                                        @endphp
+                                                        @foreach($filenames as $filename)
+                                                        <a href="/storage/PersonalFile/{{ $filename }}" target="_blank">{{ $filename }}</a><br>
+                                                        @endforeach
+                                                        @endif
+                                                    </td>
                                                 </tr>
                                             @endforeach
                                         @endif
@@ -96,12 +105,32 @@
                                                                 </a>
                                                         @endif
                                                     </td>
-                                                    <td>{{ $travel->travel_date ?? '-' }}</td>
+                                                    <td>{{ isset($travel->travel_date) ? $travel->travel_date : date('Y-m-d', strtotime($travel->start_date)) }}</td>
                                                     <td>{{ $travel->project->project_name ?? '-' }}</td>
                                                     <td>{{ $travel->type_claim ?? '-' }}</td>
-                                                    <td>{{ $travel->total ?? '-' }}</td>
+                                                    <td>{{ $travel->total ??$travel->amount ??  '-' }}</td>
                                                     <td>{{ $travel->desc ?? '-' }}</td>
-                                                    <td><a href="/storage/{{ $travel->file_upload ?? '-' }}">{{ $travel->file_upload ?? '-' }}</a></td>
+                                                    <td>
+                                                        @if ($travel->type_claim === 'travel')
+                                                            @if(!empty($travel->file_upload))
+                                                                @php
+                                                                $filenames = explode(',', $travel->file_upload);
+                                                                @endphp
+                                                                @foreach($filenames as $filename)
+                                                                    <a href="/storage/TravelFile/{{ $filename }}" target="_blank">{{ $filename }}</a><br>
+                                                                @endforeach
+                                                            @endif
+                                                        @else
+                                                            @if(!empty($travel->file_upload))
+                                                                @php
+                                                                $filenames = explode(',', $travel->file_upload);
+                                                                @endphp
+                                                                @foreach($filenames as $filename)
+                                                                    <a href="/storage/SubFile/{{ $filename }}" target="_blank">{{ $filename }}</a><br>
+                                                                @endforeach
+                                                            @endif
+                                                        @endif
+                                                    </td>
                                                 </tr>
                                             @endforeach
                                         @endif
@@ -152,10 +181,13 @@
                         <a href="/adminApprovalView" class="btn btn-light" style="color: black;" type="submit"><i class="fa fa-arrow-left"></i> Back</a>
                     </div>
                     <div class="col d-flex justify-content-end">
+                        @if ($general->a_approval == 'recommend')
+                        @else
                         <a class="btn btn-secondary" style="color: black" type="submit"> Cancel</a> &nbsp;
                         <a href="javascript:;" class="btn btn-warning" style="color: black" data-bs-toggle="modal" data-bs-target="#modalamend">Amend</a> &nbsp;
                         <a href="javascript:;" class="btn btn-danger" style="color: black" data-bs-toggle="modal" data-bs-target="#modalreject"> Reject</a> &nbsp;
                         <a class="btn btn-lime" data-id="{{ $general->id }}" id="approveButton" style="color: black" type="submit"> Approve</a>
+                        @endif
                     </div>
                 </div>
             </div>

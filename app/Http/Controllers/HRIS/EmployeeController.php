@@ -328,14 +328,14 @@ class EmployeeController extends Controller
         return response()->json($result);
     }
 
-    public function getEmployeeEducationById($id = '')
-    {
-        $ps = new EmployeeService;
+    // public function getEmployeeEducationById($id = '')
+    // {
+    //     $ps = new EmployeeService;
 
-        $result = $ps->getEmployeeEducationById($id);
+    //     $result = $ps->getEmployeeEducationById($id);
 
-        return response()->json($result);
-    }
+    //     return response()->json($result);
+    // }
 
     public function updateEmployeeEducation(Request $r)
     {
@@ -393,12 +393,11 @@ class EmployeeController extends Controller
     }
 
 
-
-    public function getEmployeeAddressDetails(Request $request)
+    public function getEmployeeAddressDetails($user_id = '')
     {
         $ps = new EmployeeService;
 
-        $result = $ps->getEmployeeAddressDetails($request->id);
+        $result = $ps->getEmployeeAddressDetails($user_id);
 
         return response()->json($result);
     }
@@ -429,4 +428,14 @@ class EmployeeController extends Controller
 
         return response()->json($result);
     }
+
+    public function updateAddressType(Request $r)
+    {
+        $ps = new EmployeeService;
+
+            $result = $ps->updateAddressType($r);
+
+            return response()->json($result);
+    }
+
 }

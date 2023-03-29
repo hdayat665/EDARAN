@@ -17,6 +17,8 @@ var handleCalendarDemo = function() {
     var id = $('#timesheetApprovalId').val();
     var userId = $('#timesheetApprovalUserId').val();
 
+    
+
     var timesheetData = getTimesheet(id, userId);
 
     timesheetData.done(function(data) {

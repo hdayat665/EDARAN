@@ -7,6 +7,30 @@ $(document).ready(function () {
         });
     });
 
+    // Membuat variabel untuk input pertama
+    const input1 = document.getElementById("allowrequest");
+
+    // Membuat fungsi untuk memvalidasi input pertama
+    function validateInput1(event) {
+        const regex = /[^0-9]/gi; // Regular expression untuk mencocokkan karakter selain angka
+        input1.value = input1.value.replace(regex, ""); // Menghapus karakter selain angka
+    }
+
+    // Menambahkan event listener ke input pertama
+    input1.addEventListener("input", validateInput1);
+
+    // Membuat variabel untuk input kedua
+    const input2 = document.getElementById("uallowrequest");
+
+    // Membuat fungsi untuk memvalidasi input kedua
+    function validateInput2(event) {
+        const regex = /[^0-9]/gi; // Regular expression untuk mencocokkan karakter selain angka
+        input2.value = input2.value.replace(regex, ""); // Menghapus karakter selain angka
+    }
+
+    // Menambahkan event listener ke input kedua
+    input2.addEventListener("input", validateInput2);
+
     // enable/disable allow request
     document.getElementById("checkallowrequest").onchange = function () {
         document.getElementById("allowrequest").disabled = !this.checked;
@@ -25,8 +49,8 @@ $(document).ready(function () {
             },
 
             messages: {
-                leave_type_codes: "Please select leave tyoe code",
-                leave_types: "Please Insert leave type",
+                leave_type_codes: "Please Select Leave Type Code",
+                leave_types: "Please Insert Leave Type",
             },
             submitHandler: function (form) {
                 requirejs(["sweetAlert2"], function (swal) {
@@ -89,8 +113,8 @@ $(document).ready(function () {
             },
 
             messages: {
-                leavetypescode: "Please Insert leave types code",
-                leavetypes: "Please Insert leave types",
+                leavetypescode: "Please Insert Leave Types Code",
+                leavetypes: "Please Insert Leave Types",
             },
             submitHandler: function (form) {
                 requirejs(["sweetAlert2"], function (swal) {

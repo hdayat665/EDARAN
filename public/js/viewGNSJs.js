@@ -22,29 +22,34 @@ $(document).ready(function () {
             url: "/getClaimContentById/" + id,
         });
     }
-
+    
     $(document).on("click", "#buttonView", function () {
         var id = $(this).data("id");
-        var contentData = getClaimContent(id);
+        var contentData = getClaimContent(id); 
+
         contentData.done(function (data) {
-            console.log(data.claim_category_content);
+            //console.log(contentData);
+            
             // $("#year").val(data.year);
             // $("#month").val(data.month);
-            $("#applied_date").val(data.applied_date);
-            $("#claim_category").val(data.claim_category);
+            
+            $("#applied_date").val(moment(data.applied_date).format('YYYY-MM-DD'));
+            $("#claim_category").val(data.claim_category_name);
             $("#label").text(data.claim_category_content.label);
             $("#contents").val(data.claim_category_content.content);
             $("#amount").val(data.amount);
-            $("#desc").val(data.desc);
-            $("#file_upload").html(
-                "<a href='/storage/" +
-                    data.file_upload +
-                    "'>" +
-                    data.file_upload +
-                    "</a>"
-            );
+            $("#desc").val(data.desc); 
+            var fileNames = data.file_upload.split(',');
+            var html = '';
+            for(var i=0; i<fileNames.length; i++){
+                html += "<a href='/storage/" + fileNames[i] + "' target='_blank'>" + fileNames[i] + "</a><br>";
+            }
+            $("#file_upload").html(html);
         });
+        // Get the claim category ID from the input field
+
         $("#viewModal").modal("show");
+
     });
 
     $(document).on("click", "#btn-view-subsistence", function () {

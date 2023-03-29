@@ -20,7 +20,7 @@
             <table id="data-table-viewassigned" class="table table-striped table-bordered align-middle">
                 <thead>
                     <tr>
-                        <th width="1%">No</th>
+                        <th width="1%">No.</th>
                         <th width="1%" data-orderable="false" class="align-middle">Action</th>
                         <th class="text-nowrap">Project Location</th>
                     </tr>
@@ -41,8 +41,8 @@
             </table>
             <div class="row p-2">
                 <div class="col align-self-start"> 
-                    <a href="/projectInfoEdit/{{$projectMember->project_id}}#tab4" class="btn btn-light" style="color: black;" type="submit"><i class="fa fa-arrow-left"></i> Back</a>
-                </div>
+                    <a onclick="window.history.back();" class="btn btn-light" style="color: black;" type="submit"><i class="fa fa-arrow-left"></i> Back</a>
+                </div> 
             </div>
         </div>
     </div>

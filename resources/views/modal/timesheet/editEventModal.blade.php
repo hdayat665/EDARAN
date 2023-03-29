@@ -30,14 +30,14 @@
                         </div>
                     </div>
                     <div class="row p-2">
-                        <div class="col-sm-6">
+                        <div class="col-sm-6" id="hideshowstarttimee">
                             <label for="issuing-country" class="form-label">Start Time*</label>
                             <div class="">
                                 <input id="starteventtimeedit" name="start_time" type="text" class="form-control" value="00:00 AM" style="background: #ffffff;"/>
                                 <!-- <div class="input-group-text"><i class="fa fa-clock"></i></div> -->
                             </div>
                         </div>
-                        <div class="col-sm-6">
+                        <div class="col-sm-6" id="hideshowendtimee">
                             <label for="issuing-country" class="form-label">End Time*</label>
                             <div class="">
                                 <input id="endeventtimeedit" name="end_time" type="text" class="form-control" value="00:00 AM"  style="background: #ffffff;"/>
@@ -49,7 +49,7 @@
                         {{-- <div class="col-sm-3">
                             <label for="issuing-country" class="form-label">Duration*</label>
                             <select class="form-select" id="duration" name="duration" aria-label="Default select example">
-                                <option class="form-label" value="" selected>Please Select</option>
+                                <option class="form-label" value="" selected>PLEASE CHOOSE</option>
                                 <option class="form-label" value="1">30 Minute</option>
                                 <option class="form-label" value="2">1 Hour</option>
                                 <option class="form-label" value="3">1 Hour 30 Minute</option>
@@ -62,16 +62,16 @@
                             <label for="issuing-country" class="form-label">Duration*</label>
                             <input type="text"  class="form-control" name="duration" id="durationeditevent"   style="pointer-events: none; touch-action: none; background: #e9ecef;">
                         </div>
-                        <div class="col-sm-3">
+                        <div class="col-sm-3" style="pointer-events: none;">
                             <div style="padding-top:20px;">
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input"  type="checkbox"  name="type_recurring[]" id="addeventalldayedit" value="allday" >
                                     <label class="form-label" >All Day</label>
                                 </div>
-                                <div class="form-check form-check-inline">
+                                {{-- <div class="form-check form-check-inline">
                                     <input class="form-check-input" id="addeventrecurringedit" type="checkbox"  name="type_recurring[]" value="recurring" >
                                     <label class="form-label" >Recurring*</label>
-                                </div>
+                                </div> --}}
                             </div>
                         </div>
                         <div class="col-sm-6 ">
@@ -92,11 +92,11 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row p-2">
-                        <div class="col-sm-6" id="addneweventrecurringedit" style="display:none">
+                    <div class="row p-2" style="display:none">
+                        <div class="col-sm-6" id="addneweventrecurringedit" >
                             <label for="firstname" class="form-label">Recurring*</label>
                             <select class="form-select" name="recurring" id="addneweventselectrecurringedit" aria-label="Default select example">
-                                <option class="form-label" value="" selected>Please Select</option>
+                                <option class="form-label" value="" selected>PLEASE CHOOSE</option>
                                 <option class="form-label" value="1">Every Weekday</option>
                                 <option class="form-label" value="2">Daily</option>
                                 <option class="form-label" value="3">Weekly</option>
@@ -153,7 +153,7 @@
                         <div class="col-sm-3" id="ondayselectedit" style="display: none">
                             <label for="" class="form-label">&nbsp;</label>
                             <select class="form-select" aria-label="Default select example" id="set_reccuring_date_month" name="set_reccuring_date_month">
-                                <option class="form-label" value="" >Please Select</option>
+                                <option class="form-label" value="" >PLEASE CHOOSE</option>
                                 <option class="form-label" value="1">1 </option>
                                 <option class="form-label" value="2">2</option>
                                 <option class="form-label" value="3">3 </option>
@@ -201,7 +201,7 @@
                         <div class="col-sm-3" id="recurringmonthyearlyedit" style="display:none">
                             <label for="" class="form-label">Month</label>
                             <select class="form-select" id="set_reccuring_month_yearly" aria-label="Default select example" name="set_reccuring_month_yearly">
-                                <option class="form-label" value="" selected>Please Select</option>
+                                <option class="form-label" value="" selected>PLEASE CHOOSE</option>
                                 <option class="form-label" value="1">January</option>
                                 <option class="form-label" value="2">February</option>
                                 <option class="form-label" value="3">March</option>
@@ -219,7 +219,7 @@
                         <div class="col-sm-3" id="recurringdayyearlyedit" style="display:none">
                             <label for="" class="form-label">Day</label>
                             <select class="form-select" id="set_reccuring_date_yearly" aria-label="Default select example" name="set_reccuring_date_yearly">
-                                <option class="form-label" value="">Please Select</option>
+                                <option class="form-label" value="">PLEASE CHOOSE</option>
                                 <option class="form-label" value="1">1 </option>
                                 <option class="form-label" value="2">2</option>
                                 <option class="form-label" value="3">3</option>
@@ -267,7 +267,7 @@
                         <div class="col-sm-3" id="recurringselectyearlyedit" style="display:none">
                             <label for="" class="form-label">&nbsp;</label>
                             <select class="form-select" id="set_reccuring_week_yearly" aria-label="Default select example" name="set_reccuring_week_yearly">
-                                <option class="form-label" value="" selected>Please Select</option>
+                                <option class="form-label" value="" selected>PLEASE CHOOSE</option>
                                 <option class="form-label" value="1">First</option>
                                 <option class="form-label" value="2">Second</option>
                                 <option class="form-label" value="3">Third</option>
@@ -277,7 +277,7 @@
                         <div class="col-sm-2" id="recurringonthedayyearlyedit" style="display:none">
                             <label for="" class="form-label">&nbsp;</label>
                             <select class="form-select" id="set_reccuring_day_yearly" aria-label="Default select example" name="set_reccuring_day_yearly">
-                                <option class="form-label" value="" selected>Please Select</option>
+                                <option class="form-label" value="" selected>PLEASE CHOOSE</option>
                                 <option class="form-label" value="1">Sunday </option>
                                 <option class="form-label" value="2">Monday</option>
                                 <option class="form-label" value="3">Tuesday</option>
@@ -293,7 +293,7 @@
                         <div class="col-sm-3" id="recurringonthemonthyearlyedit" style="display:none">
                             <label for="" class="form-label">&nbsp;</label>
                             <select class="form-select" id="set_reccuring_month_yearly2" aria-label="Default select example" name="set_reccuring_month_yearly2">
-                                <option class="form-label" value="" selected>Please Select</option>
+                                <option class="form-label" value="" selected>PLEASE CHOOSE</option>
                                 <option class="form-label" value="1">January </option>
                                 <option class="form-label" value="2">February</option>
                                 <option class="form-label" value="3">March</option>
@@ -322,7 +322,7 @@
                         <div class="col-sm-3" id="recurringselectontheedit" style="display:none">
                             <label for="" class="form-label">&nbsp;</label>
                             <select class="form-select" id="set_reccuring_week_month" aria-label="Default select example" name="set_reccuring_week_month">
-                                <option class="form-label" value="">Please Select</option>
+                                <option class="form-label" value="">PLEASE CHOOSE</option>
                                 <option class="form-label" value="1">First </option>
                                 <option class="form-label" value="2">Second</option>
                                 <option class="form-label" value="3">Third</option>
@@ -332,7 +332,7 @@
                         <div class="col-sm-4" id="recurringselectwhatdayedit" style="display:none">
                             <label for="" class="form-label">&nbsp;</label>
                             <select class="form-select" id="set_reccuring_day_month" aria-label="Default select example" name="set_reccuring_day_month">
-                                <option class="form-label" value="">Please Select</option>
+                                <option class="form-label" value="">PLEASE CHOOSE</option>
                                 <option class="form-label" value="1">Sunday </option>
                                 <option class="form-label" value="2">Monday</option>
                                 <option class="form-label" value="3">Tuesday</option>
@@ -347,7 +347,7 @@
                         {{-- <div class="col-sm-6" id="locationByProjectEditEventHide">
                             <label for="firstname" class="form-label">Location*</label>
                             <select class="selectpicker form-select" id="addneweventprojectlocsearchedit" name="location" aria-label="Default select example">
-                                <option class="form-label" value="">Please Select</option>
+                                <option class="form-label" value="">PLEASE CHOOSE</option>
                                 <?php $projectLocations = projectLocation() ?>
                                 @foreach ($projectLocations as $projectLocation)
                                 <option class="form-label" value="{{$projectLocation->id}}">{{$projectLocation->location_name}}</option>
@@ -364,7 +364,7 @@
                         <div class="col-sm-6">
                             <label for="issuing-country" class="form-label">Project</label>
                             <select class="selectpicker form-select" id="addneweventselectprojectedit" aria-label="Default select example" name="project_id">
-                                <option class="form-label" value="">Please Select</option>
+                                <option class="form-label" value="">PLEASE CHOOSE</option>
                                 <?php $projects = project() ?>
                                 @foreach ($projects as $project)
                                 <option class="form-label" value="{{$project->id}}">{{$project->project_name}}</option>
@@ -380,7 +380,7 @@
                         <div class="col-sm-6">
                             <label for="firstname" class="form-label">Participant*</label>
                             <select class="selectpicker form-select" id="addneweventparticipantedit" aria-label="Default select example" multiple name="participant[]">
-                                <option class="form-label" value="">Please Select</option>
+                                <option class="form-label" value="">PLEASE CHOOSE</option>
                                 <?php $employees = getEmployee() ?>
                                 @foreach ($employees as $employee)
                                 <option class="form-label" value="{{$employee->user_id}}">{{$employee->employeeName}}</option>
@@ -392,6 +392,19 @@
                             <textarea class="form-control" id="descE" name="desc" rows="3"></textarea>
                         </div>
                     </div>
+                    {{-- <div class="row p-2">
+                        <table id="tableviewparticipant" class="table table-striped table-bordered align-middle">
+                            <thead>
+                                <tr>
+                                    <th class="text-nowrap">No</th>
+                                    <th class="text-nowrap">Participants</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tableRowParticipant">
+
+                            </tbody>
+                        </table>
+                    </div> --}}
                     <div class="row p-2">
                         <div class="col-sm-2">
                             <button type="button" id="addreminderedit" class="btn btn-primary btn-xs">Add Reminder</button>
@@ -399,7 +412,7 @@
                         <div class="col-sm-4">
                             <input type="hidden" id="idEvent" name="id">
                             <select class="form-select" id="addeventreminderedit" aria-label="Default select example" name="reminder" style="display: none">
-                                <option class="form-label" value="">Please Select</option>
+                                <option class="form-label" value="">PLEASE CHOOSE</option>
                                 <option class="form-label" value="1">5 Minute Before</option>
                                 <option class="form-label" value="2">10 Minute Before</option>
                                 <option class="form-label" value="3">15 Minute Before</option>

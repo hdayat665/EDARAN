@@ -24,14 +24,14 @@
 						<h3>Leave Types List</h3>
 					</div>
 					<div class="row p-2 ">
-						<button class="btn btn-primary col-2" data-bs-toggle="modal" id="myModal1" data-bs-target="#addleave"> <i class="fa fa-plus" aria-hidden="true"></i> Leave Types</button>
+						<button class="btn btn-primary col-2" data-bs-toggle="modal" id="myModal1" data-bs-target="#addleave"> <i class="fa fa-plus" aria-hidden="true"></i> New Leave Types</button>
 					</div>
 					<div class="row p-2">
 						<table  id="tabletypes"  class="table table-striped table-bordered align-middle">
 							<thead>
 							<tr>	
-								<th class="text-nowrap">Action</th>
-								<th class="text-nowrap">Status</th>
+								<th class="text-nowrap" data-orderable="false" >Action</th>
+								<th class="text-nowrap" data-orderable="false" >Status</th>
 								<th class="text-nowrap">Leave Types Code</th>
 								<th class="text-nowrap">Leave Types</th>
 							</tr>
@@ -93,14 +93,14 @@
 							<div class="mb-3">
 								<div class="row g-3 align-items-center">
 									<div class="col-auto">
-										<input class="form-check-input" type="checkbox"  id="checkallowrequest"> 
+										<input class="form-check-input" type="checkbox" value="" id="checkallowrequest" checked> 
 									</div>
 									
 										<div class="col-auto">
 											<p class="col-form-label">To be Applied</p>
 										</div>
 										<div class="col-md-2">
-											<input type="text" id="allowrequest" value="" name="day" class="form-control"  disabled>
+											<input type="text" id="allowrequest" value="0" name="day" class="form-control">
 										</div>
 										<div class="col-auto">
 											<p class="col-form-label">days in advanced</p>
@@ -109,7 +109,7 @@
 							</div>
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
 						<button class="btn btn-primary" id="saveButton">Save</button>
 					</form>
 					</div>
@@ -133,12 +133,12 @@
 						<form id="updateForm"> 
 							<div class="mb-3">
 							<label for="leavetype" class="form-label">Leave Type Code*</label>
-							<input type="text" class="form-control" id="leavetypescode"  name="leavetypescode" placeholder="Input Leave Code">
+							<input type="text" class="form-control" id="leavetypescode"  name="leavetypescode" placeholder="Input Leave Code" style="text-transform:uppercase">
 							<input type="hidden" id="idtypes" class="form-control" name="idtypes" placeholder="">
 							</div>
 							<div class="mb-3">
 							<label for="Leavetype" class="form-label">Leave Type*</label>
-							<input type="text" class="form-control" id="leavetypes"  name="leavetypes" placeholder="Input Leave type">
+							<input type="text" class="form-control" id="leavetypes"  name="leavetypes" placeholder="Input Leave type" style="text-transform:uppercase">
 							</div>
 
 							<div class="mb-3">
@@ -160,7 +160,7 @@
 							</div>
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
 						<button class="btn btn-primary" id="updateButton">Update</button>
 					</form>
 					</div>

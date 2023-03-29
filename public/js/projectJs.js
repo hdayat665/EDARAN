@@ -18,16 +18,13 @@ $(document).ready(function() {
     $('#acc_manager2').picker({
         search:true,
     });
-
     
-
     $("#data-table-default2").DataTable({
         responsive: false,
         lengthMenu: [
             [5, 10, 25, 50, -1],
             [5, 10, 25, 50, "All"],
         ],
-        scrollX:true,
     });
 
     $(document).on("click", "#addButton", function() {
@@ -126,6 +123,10 @@ $(document).ready(function() {
         });
     }
 
+    $.validator.addMethod("twoDecimalPlaces", function(value, element) {
+        return this.optional(element) || /^-?\d+(\.\d{1,2})?$/.test(value);
+    }, "Please Insert Value Up To 2 Decimal Places.");
+
 
     $('#saveButton').click(function(e) {
         $("#addForm").validate({
@@ -133,7 +134,10 @@ $(document).ready(function() {
                 customer_id: "required",
                 project_code: "required",
                 project_name: "required",
-                contract_value: "required",
+                contract_value: {
+                    required: true,
+                    twoDecimalPlaces: true
+                },
                 financial_year: "required",
                 LOA_date: "required",
                 contract_start_date: "required",
@@ -146,7 +150,9 @@ $(document).ready(function() {
                 customer_id: "Please Choose Customer Name",
                 project_code: "Please Insert Project Code",
                 project_name: "Please Insert Project Name",
-                contract_value: "Please Insert Contract Value",
+                contract_value: {
+                    required: "Please insert Contract Value"
+                },
                 financial_year: "Please Choose Financial Year",
                 LOA_date: "Please Choose LOA Date",
                 contract_start_date: "Please Choose Contract Start Date",

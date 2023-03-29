@@ -238,6 +238,21 @@ class MyTimesheetController extends Controller
         return view('pages.timesheet.viewTimesheet', $data);
     }
 
+    // public function viewTimesheet($id = '', $userId = '')
+    // {
+    //     // Retrieve the employee name using the provided userId
+    //     $employee = Employee::where('userId', $userId)->first();
+    //     $employeeName = $employee->name;
+    
+    //     $data['id'] = $id;
+    //     $data['userId'] = $userId;
+    //     $data['employeeName'] = $employeeName;
+    
+    //     return view('pages.timesheet.viewTimesheet', $data);
+    // }
+    
+
+
     //SUMMARRY TIMESHEET
    
 
@@ -307,11 +322,13 @@ class MyTimesheetController extends Controller
 
     public function realtimeEventTimesheetView()
     {
-        $data = [];
+        // $data = [];
         $input = [];
         $ss = new MyTimeSheetService;
         $data['events'] = $ss->getRealtimeEvents($input);
 
+        $data['employeeId'] = '';
+        $data['eventId'] = '';
         return view('pages.timesheet.realtimeTimesheet',$data);
 
     }
@@ -322,7 +339,9 @@ class MyTimesheetController extends Controller
         $input = $r->input();
         $ss = new MyTimeSheetService;
         $data['events'] = $ss->getRealtimeEvents($input);
-
+        $data['employeeId'] = $input['employee_name'];
+        $data['eventId'] = $input['event_name'];
+        
         return view('pages.timesheet.realtimeTimesheet',$data);
 
     }

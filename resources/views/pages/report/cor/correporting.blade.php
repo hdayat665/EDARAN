@@ -1,0 +1,98 @@
+@extends('layouts.dashboardTenant')
+
+@section('content')
+
+<div id="content" class="app-content">
+			
+    {{-- <h1 class="page-header" id="eclaimReportJs">Report | Claim Report </h1> --}}
+    
+    <h1 class="page-header" id="reportcorJs">Charge Out Rate History</h1>
+    <div class="panel panel">
+       <div class="panel-body">
+           <div class="row p-2">
+            <form action="/searchcor" onsubmit="return validateForm()" method="POST">
+               <div class="mb-3 row">
+                   <label for="staticEmail" class="col-sm-2 col-form-label">Select Date</label>
+                   <div class="col-sm-3">
+                     <input type="text" class="form-control" id="datepickercor" name="date_range" value="">
+                   </div>
+               </div>
+               <div class="mb-3 row">
+                   <label for="inputPassword" class="col-sm-2 col-form-label">Select By</label>
+                   <div class="col-sm-3">
+                       <select class="form-select" id="staffn" name="selectAS">
+                           <option class="form-label" value="1" selected>All</option>
+                           <option class="form-label" value="2" >Staff</option>
+                       </select>
+                   </div>
+               </div>
+               <div class="mb-3 row" id="staffname" style="display: none">
+                   <label for="inputPassword" class="col-sm-2 col-form-label">Staff Name</label>
+                   <div class="col-sm-3">
+                       {{-- <select class="form-select" id="">
+                           <option class="form-label" value="" selected>Ahmad Syakir</option>
+                           <option class="form-label" value="" >Puteri Balqish</option>
+                           <option class="form-label" value="" >Norlina</option>
+                           <option class="form-label" value="" >Aliya</option>
+                           <option class="form-label" value="" >Nurul Ikhlas</option>
+                       </select> --}}
+                       <select class="form-select" id="employeeid" name="user_id">
+                        <option class="form-label" value="" >Please Choose</option>
+                        <?php $employees = getEmployee() ?>
+                        @foreach ($employees as $employee)
+                        <option value="{{$employee->user_id}}">{{$employee->employeeName}}</option>
+                        @endforeach
+                    </select>
+                   </div>
+               </div>
+           </div>
+       </div>
+   </div>
+   <div class="row p-2">
+       <div class="col d-flex justify-content-end">
+           <a href="/reportingchargeoutratet"><button class="btn btn-primary" type="submit"><i class="fa fa-save"></i> Submit</button></a>
+         </div>
+        </form>
+   </div>
+    
+        
+                
+                
+        
+                
+        
+                
+        
+                
+                    
+            </div>
+            </div>   
+        </form>
+        </div>
+
+        <script>
+            $("#datepickercor").datepicker({
+           todayHighlight: true,
+           autoclose: true,
+           format: 'dd/mm/yyyy',
+         });
+        </script>
+        
+        <script>
+           $(document).on('change', "#staffn", function() {
+               if ($(this).val() == "2")  {
+                   $("#staffname").show();
+                   
+               
+                   
+        
+               } 
+               else {
+                   $("#staffname").hide();
+                   
+               }
+           });
+        </script>
+@endsection
+
+

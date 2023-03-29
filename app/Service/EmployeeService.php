@@ -294,6 +294,7 @@ class EmployeeService
             }
 
             UserProfile::where('user_id', $user_id)->update($input);
+           
 
             $data['status'] = config('app.response.success.status');
             $data['title'] = config('app.response.success.title');
@@ -391,22 +392,34 @@ class EmployeeService
             $data['msg'] = 'user not found';
         } else {
 
-            if ($_FILES['payslip']['name']) {
-                // $payslip = upload($r->file('payslip'));
-                // $input['payslip'] = $payslip['filename'];
+            if ($_FILES['idFile']['name'])
+            {
+                $idAttachment = upload($r->file('idFile'));
+                $input['idFile'] = $idAttachment['filename'];
 
-                // if (!$input['payslip']) {
-                //     unset($input['payslip']);
-                // }
+                if (!$input['idFile']) {
+                    unset($input['idFile']);
+                }
             }
 
-            if ($_FILES['marrigeCert']['name']) {
-                // $marrigeCert = upload($r->file('marrigeCert'));
-                // $input['marrigeCert'] = $marrigeCert['filename'];
+            if ($_FILES['marrigeCert']['name'])
+            {
+                $marrigeCert = upload($r->file('marrigeCert'));
+                $input['marrigeCert'] = $marrigeCert['filename'];
 
-                // if (!$input['marrigeCert']) {
-                //     unset($input['marrigeCert']);
-                // }
+                if (!$input['marrigeCert']) {
+                    unset($input['marrigeCert']);
+                }
+            }
+
+            if ($_FILES['okuID']['name'])
+            {
+                $idOKU = upload($r->file('okuID'));
+                $input['okuID'] = $idOKU['filename'];
+
+                if (!$input['okuID']) {
+                    unset($input['okuID']);
+                }
             }
 
             if (!$input['DOM']) {
@@ -464,21 +477,30 @@ class EmployeeService
             $data['msg'] = 'Max Companion can add only 4';
         } else {
 
-            if ($_FILES['payslip']['name']) {
-                $payslip = upload($r->file('payslip'));
-                $input['payslip'] = $payslip['filename'];
-
-                if (!$input['payslip']) {
-                    unset($input['payslip']);
+            if ($_FILES['idFile']['name']) {
+                $idAttachment = upload($r->file('idFile'));
+                $input['idFile'] = $idAttachment['filename'];
+    
+                if (!$input['idFile']) {
+                    unset($input['idFile']);
                 }
             }
-
+    
             if ($_FILES['marrigeCert']['name']) {
                 $marrigeCert = upload($r->file('marrigeCert'));
                 $input['marrigeCert'] = $marrigeCert['filename'];
-
+    
                 if (!$input['marrigeCert']) {
                     unset($input['marrigeCert']);
+                }
+            }
+    
+            if ($_FILES['okuID']['name']) {
+                $idOKU = upload($r->file('okuID'));
+                $input['okuID'] = $idOKU['filename'];
+    
+                if (!$input['okuID']) {
+                    unset($input['okuID']);
                 }
             }
 
@@ -1034,25 +1056,27 @@ class EmployeeService
     public function addEmployeeAddressDetails($r)
     {
         $input = $r->input();
-        $input['user_id'] = Auth::user()->id;
+        $input['addressType'] = '0';
+
         UserAddress::create($input);
 
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success add address';
+        $data['msg'] = 'Success add Address';
 
         return $data;
     }
+
+    
 
     public function updateEmployeeAddressDetails($r)
     {
         $input = $r->input();
 
-        $user_id = Auth::user()->id;
         $id = $input['id'] ?? 1;
 
-        $user = UserAddress::where('user_id', $id)->first();
+        $user = UserAddress::where('id', $id)->first();
 
         if(!$user)
         {
@@ -1095,6 +1119,20 @@ class EmployeeService
         return $data;
     }
 
+    public function updateAddressType($r)
+{
+    $addressId = $r->input('addressId');
+    $addressType = $r->input('addressType');
+
+    // Update the address type in the database
+    $address = UserAddress::find($addressId);
+    $address->addressType = $addressType;
+    $address->save();
+
+    return response()->json(['success' => true]);
+}
+
+
     public function addEmployeeEducation($r)
     {
         $input = $r->input();
@@ -1107,8 +1145,7 @@ class EmployeeService
                 unset($input['file']);
             }
         }
-
-        $input['user_id'] = Auth::user()->id;
+        $input['user_id'] = $input['user_id'];
         UserQualificationEducation::create($input);
 
         $data['status'] = config('app.response.success.status');

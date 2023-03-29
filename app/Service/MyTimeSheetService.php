@@ -35,53 +35,65 @@ class MyTimeSheetService
     }
 
     public function createLog($r)
-    {
-        $input = $r->input();
-        $user = Auth::user();
+{
+    $input = $r->input();
+    $user = Auth::user();
 
-        $input['user_id'] = $user->id;
-        $input['tenant_id'] = $user->tenant_id;
-        $input['date'] = date_format(date_create($input['date']), 'Y/m/d');
+    $input['user_id'] = $user->id;
+    $input['tenant_id'] = $user->tenant_id;
+    $input['date'] = date_format(date_create($input['date']), 'Y/m/d');
 
-        $start_time = strtotime($input['start_time']);
-        $end_time = strtotime($input['end_time']);
-        $totaltime = $end_time - $start_time;
+    $startTime = date('Y-m-d H:i:s', strtotime($input['start_time']));
+    $endTime = date('Y-m-d H:i:s', strtotime($input['end_time']));
 
-        if (isset($input['office_log_project'])) {
-            $input['project_id'] = $input['office_log_project'];
-        }
+    if (isset($input['office_log_project'])) {
+        $input['project_id'] = $input['office_log_project'];
+    }
 
-        if (isset($input['activity_office'])) {
-            $input['activity_name'] = $input['activity_office'];
-        }
+    if (isset($input['activity_office'])) {
+        $input['activity_name'] = $input['activity_office'];
+    }
 
-        if (isset($input['project_location_office'])) {
-            $input['project_location'] = $input['project_location_office'];
-        }
+    if (isset($input['project_location_office'])) {
+        $input['project_location'] = $input['project_location_office'];
+    }
 
-        $h = intval($totaltime / 3600);
+    $totaltime = strtotime($input['end_time']) - strtotime($input['start_time']);
 
-        $totaltime = $totaltime - ($h * 3600);
+    $h = intval($totaltime / 3600);
+    $totaltime = $totaltime - ($h * 3600);
+    $m = intval($totaltime / 60);
+    $s = $totaltime - ($m * 60);
+    $input['total_hour'] = "$h:$m:$s";
 
-        // Minutes is obtained by dividing
-        // remaining total time with 60
-        $m = intval($totaltime / 60);
+    $existingLogs = TimesheetLog::where('user_id', $user->id)
+        ->where('date', $input['date'])
+        ->where(function ($query) use ($startTime, $endTime) {
+            $query->where(function ($query) use ($startTime, $endTime) {
+                $query->whereRaw("STR_TO_DATE(start_time, '%h:%i %p') >= ? AND STR_TO_DATE(start_time, '%h:%i %p') < ?", [$startTime, $endTime]);
+            })->orWhere(function ($query) use ($startTime, $endTime) {
+                $query->whereRaw("STR_TO_DATE(end_time, '%h:%i %p') > ? AND STR_TO_DATE(end_time, '%h:%i %p') <= ?", [$startTime, $endTime]);
+            })->orWhere(function ($query) use ($startTime, $endTime) {
+                $query->whereRaw("STR_TO_DATE(start_time, '%h:%i %p') < ? AND STR_TO_DATE(end_time, '%h:%i %p') > ?", [$startTime, $endTime]);
+            });
+        })
+        ->get();
 
-        // Remaining value is seconds
-        $s = $totaltime - ($m * 60);
-
-        // Printing the result
-        $input['total_hour'] = "$h:$m:$s";
-
-        TimesheetLog::create($input);
-
-        $data['status'] = config('app.response.success.status');
-        $data['type'] = config('app.response.success.type');
-        $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success Create Timesheet Logs';
-
+    if ($existingLogs->isNotEmpty()) {
+        $data['status'] = config('app.response.error.status');
+        $data['type'] = config('app.response.error.type');
+        $data['title'] = config('app.response.error.title');
+        $data['msg'] = 'Unable to add log due to overlapped time';
         return $data;
     }
+
+    TimesheetLog::create($input);
+    $data['status'] = config('app.response.success.status');
+    $data['type'] = config('app.response.success.type');
+    $data['title'] = config('app.response.success.title');
+    $data['msg'] = 'Success Create Timesheet Logs';
+    return $data;
+}
 
     public function updateLog($r, $id)
     {
@@ -92,9 +104,13 @@ class MyTimeSheetService
         $input['tenant_id'] = $user->tenant_id;
         $input['date'] = date_format(date_create($input['date']), 'Y/m/d');
 
-        $start_time = strtotime($input['start_time']);
-        $end_time = strtotime($input['end_time']);
-        $totaltime = $end_time - $start_time;
+        // $start_time = strtotime($input['start_time']);
+        // $end_time = strtotime($input['end_time']);
+        // $totaltime = $end_time - $start_time;
+
+
+        $startTime = date('Y-m-d H:i:s', strtotime($input['start_time']));
+        $endTime = date('Y-m-d H:i:s', strtotime($input['end_time']));
 
         if (isset($input['office_log_project'])) {
             $input['project_id'] = $input['office_log_project'];
@@ -112,10 +128,13 @@ class MyTimeSheetService
             unset($input['project_location_office']);
         }
 
+       
+
+        // $totaltime = $totaltime - ($h * 3600);
+        $totaltime = strtotime($input['end_time']) - strtotime($input['start_time']);
         $h = intval($totaltime / 3600);
-
         $totaltime = $totaltime - ($h * 3600);
-
+        
         // Minutes is obtained by dividing
         // remaining total time with 60
         $m = intval($totaltime / 60);
@@ -125,6 +144,29 @@ class MyTimeSheetService
 
         // Printing the result
         $input['total_hour'] = "$h:$m:$s";
+
+        $existingLogs = TimesheetLog::where('user_id', $user->id)
+    ->where('date', $input['date'])
+    ->where(function ($query) use ($startTime, $endTime, $id) {
+        $query->where(function ($query) use ($startTime, $endTime) {
+            $query->whereRaw("STR_TO_DATE(start_time, '%h:%i %p') >= ? AND STR_TO_DATE(start_time, '%h:%i %p') < ?", [$startTime, $endTime]);
+        })->orWhere(function ($query) use ($startTime, $endTime) {
+            $query->whereRaw("STR_TO_DATE(end_time, '%h:%i %p') > ? AND STR_TO_DATE(end_time, '%h:%i %p') <= ?", [$startTime, $endTime]);
+        })->orWhere(function ($query) use ($startTime, $endTime) {
+            $query->whereRaw("STR_TO_DATE(start_time, '%h:%i %p') < ? AND STR_TO_DATE(end_time, '%h:%i %p') > ?", [$startTime, $endTime]);
+        });
+    })
+    ->where('id', '<>', $id)
+    ->get();
+
+if ($existingLogs->isNotEmpty()) {
+    $data['status'] = config('app.response.error.status');
+    $data['type'] = config('app.response.error.type');
+    $data['title'] = config('app.response.error.title');
+    $data['msg'] = 'Unable to update log due to overlapped time';
+    return $data;
+}
+
 
         TimesheetLog::where('id', $id)->update($input);
 
@@ -180,10 +222,10 @@ class MyTimeSheetService
         if (isset($input['participant'])) {
             $input['participant'] = implode(',', $input['participant']);
         }
-        if (isset($input['location_by_project'])) {
-            $input['location'] = $input['location_by_project'];
-            unset($input['location_by_project']);
-        }
+        // if (isset($input['location_by_project'])) {
+        //     $input['location'] = $input['location_by_project'];
+        //     unset($input['location_by_project']);
+        // }
 
         $input['start_date'] = date_format(date_create($input['start_date']), 'Y/m/d');
         $input['end_date'] = date_format(date_create($input['end_date']), 'Y/m/d');
@@ -298,10 +340,10 @@ class MyTimeSheetService
         $input['end_date'] = date_format(date_create($input['end_date']), 'Y/m/d');
         unset($input['inlineRadioOptions']);
 
-        if ($input['location_by_project']) {
-            $input['location'] = $input['location_by_project'];
-            unset($input['location_by_project']);
-        }
+        // if ($input['location_by_project']) {
+        //     $input['location'] = $input['location_by_project'];
+        //     unset($input['location_by_project']);
+        // }
 
         if ($_FILES['file_upload']['name']) {
             $file_upload = upload($r->file('file_upload'));
@@ -559,7 +601,7 @@ class MyTimeSheetService
     {   
         $user = Auth::user();
         $data = TimesheetApproval::where('tenant_id', $user->tenant_id)
-                ->where('user_id', $user->id) // Add this line to filter by user ID
+                ->where('user_id', $user->id) 
                 ->orderBy('created_at', 'DESC')
                 ->get();
 

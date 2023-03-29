@@ -1,6 +1,4 @@
 <div class="tab-pane fade" id="default-tab-7">
-    <div class="container">
-        <!-- <h4 class="mt-3 mb-3">Family information</h4> -->
         <div class="row p-2">
             <button type="button"  data-bs-toggle="modal" id="parentModalAdd" class="btn btn-primary col-sm-2"><i class="fa fa-plus"></i> New Family</button>
         </div>
@@ -34,7 +32,14 @@
 
                     <td style="text-transform: uppercase;">{{$parent->firstName}}</td>
                     <td style="text-transform: uppercase;">{{$parent->lastName}}</td>
-                    <td style="text-transform: uppercase;">{{$parent->address1}}</td>
+                    <td style="text-transform: uppercase;">
+                        {!! $parent->address1 ?? '' !!}
+                        {!! $parent->address2 ? ', ' . $parent->address2 . ',<br>' : '' !!}
+                        {!! $parent->postcode ? $parent->postcode . ', ' : '' !!}
+                        {!! $parent->city ? $parent->city . ', ' : '' !!}
+                        {!! $parent->state ? $parent->state . ', ' : '' !!}
+                        {!! $parent->country ? $parent->country : '' !!}
+                    </td>
                     <td style="text-transform: uppercase;">{{ ($parent->relationship) ? relationship($parent->relationship) : ''}}</td>
                     <td>{{$parent->DOB}}</td>
                     <td>{{$parent->contactNo}}</td>
@@ -43,7 +48,7 @@
                 <span style="display: none"><input type="text" id="parentId" value="{{$parentId}}"></span>
             </tbody>
         </table>
-    </div>
+    <!-- </div> -->
     {{-- dah tak guna sibling info --}}
     <div class="container" style="display: none">
         <h4 class="mt-3 mb-3">Siblings Information</h4>

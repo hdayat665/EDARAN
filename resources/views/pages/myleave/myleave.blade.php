@@ -82,78 +82,80 @@
                                                 </span>
                                         </div> --}}
                                         <table id="table-leave" class="table table-striped table-bordered align-middle">
-                                            <thead>
-                                                <tr>
-                                                    <th width="1%">Action</th>
-                                                    <th width="1%" data-orderable="false">Applied Date</th>
-                                                    <th>Type of Leave</th>
-                                                    <th>Start Date</th>
-                                                    <th>End Date</th>
-                                                    <th>Total Days Applied</th>
-                                                    <th>Status</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <?php $id = 0 ?>
-                                                    @if ($myleave)
-                                                    @foreach ($myleave as $m)
-                                                <?php 
-                                                    $id++;
-                                                    $applied_date = new DateTime($m->applied_date);
-                                                    $start_date = new DateTime($m->start_date);
-                                                    $end_date = new DateTime($m->end_date);
-                                                ?>
-                                                <tr class="odd gradeX">
-                                                    <td>
-                                                        <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle">
-                                                            <i class="fa fa-cogs"></i> Actions <i class="fa fa-caret-down"></i>
-                                                        </a>
-                                                            <div class="dropdown-menu">
-                                                                <div class="viewleave">
-                                                                    <a href="javascript:;" id="editButton" data-id="{{ $m->id }}" data-bs-toggle="modal" data-bs-target="#exampleModal1" class="dropdown-item">View Leave</a>
-                                                                </div>
-                                                                <div class="dropdown-divider "></div>
-                                                                <div class="cancelleave">	
-                                                                    <a href="javascript:;" id="deleteButton" data-id="{{ $m->id }}" class="dropdown-item" ><i class="fa fa-trash" aria-hidden="true"></i> Cancel Leave</a>
-                                                                </div>
-                                                            </div>
-                                                    </td>
-                                                    <td>{{$applied_date->format('Y-m-d') }}</td>
-                                                    <td>{{$m->type}}</td>
-                                                    <td>{{$start_date->format('Y-m-d') }}</td>
-                                                    <td>{{$end_date->format('Y-m-d') }}</td>
-                                                    <td>{{$m->total_day_applied. ' day'}}</td>
-                                                    <td>@for ($i = 1; $i <= 4; $i++)
-                                                            <?php
-                                                                switch ($i) {
-                                                                    case 1:
-                                                                        $status = 'Pending';
-                                                                        break;
-                                                                    case 2:
-                                                                        $status = 'Pending for approve';
-                                                                        break;
-                                                                    case 3:
-                                                                        $status = 'Rejected';
-                                                                        break;
-                                                                    case 4:
-                                                                        $status = 'Approved';
-                                                                        break;
-                                                                    default:
-                                                                        $status = 'Unknown';
-                                                                }
-                                                            ?>
-                                                            @if ($m->status_final == $i)
-                                                                @php
-                                                                    echo $status;
+                                        <thead>
+                                            <tr>
+                                                <th width="1%">No.</th>
+                                                <th width="1%">Action</th>
+                                                <th width="1%">Applied Date</th>
+                                                <th>Type of Leave</th>
+                                                <th>Start Date</th>
+                                                <th>End Date</th>
+                                                <th>Total Days Applied</th>
+                                                <th>Status</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php $id = 0 ?>
+                                            @if ($myleave)
+                                            @foreach ($myleave as $m)
+                                            <?php 
+                                                $id++;
+                                                $applied_date = new DateTime($m->applied_date);
+                                                $start_date = new DateTime($m->start_date);
+                                                $end_date = new DateTime($m->end_date);
+                                            ?>
+                                            <tr class="odd gradeX">
+                                                <td>{{ $id }}</td>
+                                                <td>
+                                                    <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle">
+                                                        <i class="fa fa-cogs"></i> Actions <i class="fa fa-caret-down"></i>
+                                                    </a>
+                                                    <div class="dropdown-menu">
+                                                        <div class="viewleave">
+                                                            <a href="javascript:;" id="editButton" data-id="{{ $m->id }}" data-bs-toggle="modal" data-bs-target="#exampleModal1" class="dropdown-item">View Leave</a>
+                                                        </div>
+                                                        <div class="dropdown-divider "></div>
+                                                        <div class="cancelleave">    
+                                                            <a href="javascript:;" id="deleteButton" data-id="{{ $m->id }}" class="dropdown-item" ><i class="fa fa-trash" aria-hidden="true"></i> Cancel Leave</a>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>{{$applied_date->format('Y-m-d') }}</td>
+                                                <td>{{$m->type}}</td>
+                                                <td>{{$start_date->format('Y-m-d') }}</td>
+                                                <td>{{$end_date->format('Y-m-d') }}</td>
+                                                <td>{{$m->total_day_applied. ' day'}}</td>
+                                                <td>@for ($i = 1; $i <= 4; $i++)
+                                                        <?php
+                                                            switch ($i) {
+                                                                case 1:
+                                                                    $status = 'Pending';
                                                                     break;
-                                                                @endphp
-                                                            @endif
-                                                        @endfor
-                                                    </td>
-                                                </tr>
-                                                @endforeach
-                                                @endif
-                                            </tbody>
+                                                                case 2:
+                                                                    $status = 'Pending for approve';
+                                                                    break;
+                                                                case 3:
+                                                                    $status = 'Rejected';
+                                                                    break;
+                                                                case 4:
+                                                                    $status = 'Approved';
+                                                                    break;
+                                                                default:
+                                                                    $status = 'Unknown';
+                                                            }
+                                                        ?>
+                                                        @if ($m->status_final == $i)
+                                                            @php
+                                                                echo $status;
+                                                                break;
+                                                            @endphp
+                                                        @endif
+                                                    @endfor
+                                                </td>
+                                            </tr>
+                                            @endforeach
+                                            @endif
+                                        </tbody>
                                         </table>
                                     </div>
                                 </div>
@@ -186,14 +188,14 @@
                                                         <div class="col-md-2">
                                                             <label class="form-label">Date</label>
                                                             <div class="input-group">
-                                                                <input type="text" class="form-control" name="applydate" value="<?php echo $applydate; ?>" id="datepicker-filter" placeholder="yyyy-mm-dd"/>
+                                                                <input type="text" class="form-control" name="applydate" value="<?php echo $applydate; ?>" id="datepicker-filter" placeholder="YYYY/MM/DD"/>
                                                                     
                                                             </div>
                                                         </div>
                                                         <div class="col-md-2">	
                                                             <label class="form-label">Type of Leave</label>
                                                             <select class="form-select" name="typelist" id = "typelist">
-                                                                <option value="">Please Choose</option>
+                                                                <option value="">PLEASE CHOOSE</option>
                                                                 @foreach($types as $dt)
                                                                     <option value="{{ $dt->id }}" {{ old('typelist') == $dt->id ? 'selected' : ($typelist == $dt->id ? 'selected' : '') }}>{{ $dt->leave_types }}</option>
                                                                 @endforeach
@@ -202,7 +204,7 @@
                                                         <div class="col-md-2">
                                                             <label class="form-label">Status</label>
                                                             <select class="form-select" id = "status_searching" name="status">
-                                                                <option value="">Select Status</option>
+                                                                <option value="">PLEASE CHOOSE</option>
                                                                 <option value="4" {{ old('status') == '4' || $status_searching == '4' ? 'selected' : '' }}>Approved</option>
                                                                 <option value="3" {{ old('status') == '3' || $status_searching == '3' ? 'selected' : '' }}>Rejected</option>
                                                             </select>
@@ -240,7 +242,7 @@
                                             <thead>
                                                 <tr>
                                                     <th width="1%">Action</th>
-                                                    <th width="1%" data-orderable="false">Applied Date</th>
+                                                    <th width="1%">Applied Date</th>
                                                     <th>Type of Leave</th>
                                                     <th>Start Date</th>
                                                     <th>End Date</th>
@@ -346,7 +348,7 @@
                                     <div class="col-sm-6" id="menu2">
                                         <label class="form-label" for="Menu2">Type of Leave*</label>
                                            <select class="form-select" name="typeofleave">
-                                                <option value="" label="Please Choose "></option>
+                                                <option value="" label="PLEASE CHOOSE "></option>
                                                     @foreach($types as $dt)
                                                         <option value="{{ $dt->id }}" {{ old('typeofleave') == $dt->id ? 'selected' : '' }}>{{ $dt->leave_types }}</option>
                                                     @endforeach
@@ -359,9 +361,9 @@
                                         <label class="form-label" for="Menu3">No of Day(s) Applied*</label>
                                             <div class="">
                                                 <select class="form-select" name="noofday" id="select3">
-                                                    <option value="" label="Select Day(s) Applied"></option>
-                                                    <option value="1" label="One Days"></option>
-                                                    <option value="0.5" label="Half Days"></option>
+                                                    <option value="" label="PLEASE CHOOSE"></option>
+                                                    <option value="1" label="One Day"></option>
+                                                    <option value="0.5" label="Half Day"></option>
                                                     <option value="-" label="Others"></option>
                                                 </select>
                                             </div>
@@ -375,29 +377,33 @@
                                     </div>
                                 </div>
                                     
-                                <div class="row p-2">
-                                    <div class="col-sm-6" id="menu5">
+                                <div class="row p-2" id="menu5">
+                                    <div class="col-sm-6">
                                         <label class="form-label" for="Menu5">Leave Date*</label>
                                             <div class="">
-                                                <input type="text" class="form-control" name="leave_date" id="datepicker-leave" placeholder="yyyy-mm-dd"/>
+                                                <input type="text" class="form-control" name="leave_date" id="datepicker-leave" placeholder="YYYY/MM/DD"/>
                                             </div>
                                     </div>
                                 </div>
 
-                                <div class="row p-2">
-                                    <div class="col-sm-12" id="menu6">
+                                <div class="row p-2" id="menu6">
+                                    <div class="col-sm-12" >
                                         <label class="form-label" for="Menu6">Leave Session*</label>
                                             <div class="input-group" name="name6" id="select6">
                                                 <div class="form-check">
-                                                    <input class="form-check-input" value="1" type="radio" name="flexRadioDefault" id="flexRadioDefault1" checked>
+                                                    <input class="form-check-input" value="1" type="radio" name="flexRadioDefault" id="flexRadioDefault1" checked style="pointer-events: none">
                                                     <label class="form-check-label" for="flexRadioDefault1">
                                                         Morning
+                                                        <br>
+                                                        8AM - 1AM
                                                     </label>
                                                 </div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                                 <div class="form-check">
-                                                    <input class="form-check-input" value="2" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
+                                                    <input class="form-check-input" value="2" type="radio" name="flexRadioDefault" id="flexRadioDefault2" style="pointer-events: none">
                                                     <label class="form-check-label" for="flexRadioDefault2">
                                                         Evening
+                                                        <br>
+                                                        2PM - 5PM
                                                     </label>
                                                 </div>
                                             </div>
@@ -408,14 +414,14 @@
                                     <div class="col-sm-6" id="menu7">
                                         <label class="form-label" for="Menu5">Start Date*</label>
                                             <div class="">
-                                                <input type="text" class="form-control" name="start_date" id="datepicker-start" placeholder="yyyy-mm-dd"/>
+                                                <input type="text" class="form-control" name="start_date" id="datepicker-start" placeholder="YYYY/MM/DD"/>
                                                    
                                             </div>
                                     </div>
                                     <div class="col-sm-6" id="menu8">
                                         <label class="form-label" for="Menu6">End Date*</label>
                                             <div class="">
-                                                <input type="text" class="form-control" name="end_date" id="datepicker-end" placeholder="yyyy-mm-dd"/>
+                                                <input type="text" class="form-control" name="end_date" id="datepicker-end" placeholder="YYYY/MM/DD"/>
                                                     
                                             </div>
                                     </div>
@@ -424,10 +430,10 @@
                                 <div class="row p-2">
                                     <div class="col-sm-6" id="menu9">
                                         <label class="form-label" for="Menu7">Supporting Document</label>
-                                            <div class="input-group">
-                                                <input id="fileupload" type="file" multiple="multiple" name="file">
-                                                <span id="fileDownloadPolicy"></span>
-                                            </div>
+                                        <div class="input-group">
+                                            <input id="fileupload" type="file" accept=".pdf,.png,.jpeg,.jpg" name="file" max-size="5MB">
+                                            <span id="fileDownloadPolicy"></span>
+                                        </div>
                                     </div>
                                     <div class="col-sm-6" id="menu10">
                                         <label class="form-label" for="Menu8">Reason*</label>
@@ -439,7 +445,7 @@
                            
                         </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                                     <button class="btn btn-primary" id="saveButton">Save</button>
                                 </div>
                          </form>
@@ -473,7 +479,7 @@
                                         <label class="form-label">Type of Leave</label>
                                         <div class="input-group">
                                             <select class="form-select" name="typeofleave" id="typeofleave1" disabled> 
-                                                <option value="" label="Please Choose"></option>
+                                                <option value="" label="PLEASE CHOOSE"></option>
                                                 @foreach($types as $dt)
                                                     <option value="{{ $dt->id }}" {{ old('typeofleave') == $dt->id ? 'selected' : '' }}>{{ $dt->leave_types }}</option>
                                                 @endforeach
@@ -517,13 +523,18 @@
                                                 <div class="form-check">
                                                     <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefaulta">
                                                     <label class="form-check-label" for="flexRadioDefaulta">
-                                                        Morning
+                                                        Morning 
+                                                        <br>
+                                                        8AM - 1AM
+
                                                     </label>
                                                 </div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                                 <div class="form-check">
                                                     <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefaultb">
                                                     <label class="form-check-label" for="flexRadioDefaultb">
                                                         Evening
+                                                        <br>
+                                                        2PM - 5PM
                                                     </label>
                                                 </div>
                                             </div>
@@ -595,7 +606,7 @@
                             </form>
                         </div>
                         <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cancel</button>
                         </div>
                     </div>
                 </div>
@@ -625,7 +636,7 @@
                                         <label class="form-label">Type of Leave</label>
                                         <div class="input-group">
                                             <select class="form-select" name="typeofleave" id="typeofleave2" disabled> 
-                                                <option value="" label="Please Choose"></option>
+                                                <option value="" label="PLEASE CHOOSE"></option>
                                                 @foreach($types as $dt)
                                                     <option value="{{ $dt->id }}" {{ old('typeofleave') == $dt->id ? 'selected' : '' }}>{{ $dt->leave_types }}</option>
                                                 @endforeach
@@ -672,12 +683,16 @@
                                                     <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefaulta2">
                                                     <label class="form-check-label" for="flexRadioDefaulta">
                                                         Morning
+                                                        <br>
+                                                        8AM - 1PM
                                                     </label>
                                                 </div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                                 <div class="form-check">
                                                     <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefaultb2">
                                                     <label class="form-check-label" for="flexRadioDefaultb">
                                                         Evening
+                                                        <br>
+                                                        2PM - 5PM
                                                     </label>
                                                 </div>
                                             </div>
@@ -749,7 +764,7 @@
                             </form>
                         </div>
                         <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cancel</button>
                         </div>
                     </div>
                 </div>
