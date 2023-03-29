@@ -12,6 +12,7 @@ use App\Models\GeneralClaim;
 use App\Models\GeneralClaimDetail;
 use App\Models\PersonalClaim;
 use App\Models\TravelClaim;
+use App\Models\ModeOfTransport;
 use Illuminate\Support\Facades\Auth;
 
 class ClaimApprovalService
@@ -413,7 +414,7 @@ class ClaimApprovalService
         $claim = CashAdvanceDetail::where('id', $id)->first();
 
         $pvNo = [
-            'pv_number' => 'PV-' . $claim->claim_type . '-' . $claim->id
+            'pv_number' => 'PV-' . 'CA' . '-' . $claim->id
         ];
 
         CashAdvanceDetail::where('id', $id)->update($pvNo);
@@ -445,10 +446,18 @@ class ClaimApprovalService
         $ca[2] = ['id', $id];
 
         $data = CashAdvanceDetail::where($ca)->first();
-
+        
         return $data;
     }
+    public function cashAdvanceApproverModeTransport($id = '')
+    {
+        $ca[0] = ['tenant_id', Auth::user()->tenant_id];
+        $ca[2] = ['cash_advance_id', $id];
 
+        $data = ModeOfTransport::where($ca)->first();
+        
+        return $data;
+    }
     public function updateStatusCashAdvance($r, $id, $status, $stage)
     {
         $input = $r->input();

@@ -31,12 +31,11 @@ $(document).ready(function () {
         }
     );
 
-    $(
-        "#approveButton, #approveButton1, #approveButton2, #approveButton3, #approveButton4"
+    $("#approveButton, #approveButton1, #approveButton2, #approveButton3, #approveButton4"
     ).on("click", function () {
         // alert("ss");
         var id = $(this).data("id");
-        var stage = "f1";
+        var stage = "f_status";
         var status = "recommend";
 
         requirejs(["sweetAlert2"], function (swal) {
