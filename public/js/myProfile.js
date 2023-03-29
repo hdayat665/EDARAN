@@ -170,13 +170,26 @@ $(document).ready(function () {
         $(this).val($(this).val().toUpperCase());
     });
 
+    $('input[name="nonCitizen"]').click(function() {
+        if ($(this).is(':checked')) {
+            $('#idNoaddChild').val('').prop('disabled', true);
+            $('#age4').val('').prop('readonly', false);
+            $('#dob4').val('');
+
+        } else {
+            $('#idNoaddChild').prop('disabled', false);
+            $('#age4').val('').prop('readonly', true);
+            $('#dob4').val('');
+        }
+    });
+
     $("#idNoaddChild").change(function () {
         if ($(this).val().length == 12) {
-            var idn = $(this).val();
+            var idnChild = $(this).val();
 
-            var lastIc = idn.substring(10, 12);
+            var lastIcChild = idnChild.substring(10, 12);
 
-            if (lastIc % 2 == 0) {
+            if (lastIcChild % 2 == 0) {
                 $("#childgender").val(2);
             } else {
                 $("#childgender").val(1);
@@ -203,10 +216,15 @@ $(document).ready(function () {
         if ($("#expiryDateChild").prop("readonly")) {
             $("#expiryDateChild").prop("readonly", false);
             $("#expiryDateChild").css("pointer-events", "auto");
+            $("#passportcountrychildren").prop("disabled", false);
+            $("#passportcountrychildren").css("pointer-events", "auto")
         } else {
             $("#expiryDateChild").prop("readonly", true);
             $("#expiryDateChild").css("pointer-events", "none");
             $("#expiryDateChild").val("");
+            $("#passportcountrychildren").prop("disabled", true);
+            $("#passportcountrychildren").css("pointer-events", "auto")
+            $("#passportcountrychildren").val("");
         }
     });
 
@@ -292,6 +310,8 @@ $(document).ready(function () {
   sanitizeInputField("#lastnamemc");
   sanitizeInputField("#firstNameChild");
   sanitizeInputField("#lastNameChild");
+  sanitizeInputField("#firstNameParent");
+  sanitizeInputField("#lastNameParent");
   sanitizeInputField("#firstName1");
   sanitizeInputField("#lastName1");
   sanitizeInputField("#firstNamesP1");
@@ -364,6 +384,9 @@ $(document).ready(function () {
                     digits: true,
                     rangelength: [4, 4],
                 },
+                okuCardNum: {
+                    digits: true,
+                }
                 //okuFile: "required",
                 
             },
@@ -411,6 +434,9 @@ $(document).ready(function () {
                 extensionNo: {
                     digits: "Please Insert Correct Extension Number Without ' - ' or Space",
                     rangelength: "Please Insert Valid Extension Number",
+                },
+                okuCardNum: {
+                    digits: "Please Insert Correct OKU Card Number Number Without ' - ' or Space",
                 },
                 //okuFile: "Please Input Valid File",
             },
@@ -1798,12 +1824,12 @@ $(document).ready(function () {
     $(".partCheck4").click(function () {
         if ($(this).prop("checked")) {
             $("#idNoaddChild").prop("readonly", true);
-            $("#DOBChild").prop("readonly", false);
+            $("#DOBChild").prop("disabled", false);
             $("#DOBChild").css("pointer-events", "auto");
             $("#idNoaddChild").val("");
         } else {
             $("#idNoaddChild").prop("readonly", false);
-            $("#DOBChild").prop("readonly", true);
+            $("#DOBChild").prop("disabled", true);
             $("#DOBChild").css("pointer-events", "none");
             $("#passportChild").val("");
             $("#expiryDateChild").val("");
@@ -1845,6 +1871,11 @@ $(document).ready(function () {
         $("#add-children").modal("show");
     });
     $("#dob").datepicker({
+        todayHighlight: true,
+        format: "yyyy/mm/dd",
+        autoclose: true,
+    });
+    $("#dob4").datepicker({
         todayHighlight: true,
         format: "yyyy/mm/dd",
         autoclose: true,
@@ -1910,6 +1941,12 @@ $(document).ready(function () {
                     digits: true,
                     rangelength: [12, 12],
                 },
+                oldIDNo: {
+                    digits: true,
+                    rangelength: [7, 7],
+                },
+                gender: "required",
+                maritalStatus: "required",
             },
 
             messages: {
@@ -1924,6 +1961,12 @@ $(document).ready(function () {
                     digits: "Please Insert Correct Identification Number Without ' - ' or Space",
                     rangelength: "Please Insert Valid Identification Number",
                 },
+                oldIDNo: {
+                    digits: "Please Insert Correct Identification Number Without ' - ' or Space",
+                    rangelength: "Please Insert Valid Identification Number",
+                },
+                gender: "Please Choose Gender",
+                maritalStatus: "Please Choose Marital Status",
             },
             submitHandler: function (form) {
                 // requirejs(['sweetAlert2'], function(swal,swal1) {
@@ -2120,6 +2163,10 @@ $(document).ready(function () {
                 $("#city1").val(child.city);
                 $("#state1").val(child.state);
                 $("#country1").val(child.country);
+                if (child.okuStatus == "on") {
+                    $("#OKUchildren1").prop("checked", true);
+                }
+                $("#okucard4").val(child.okuNo);
             });
             $("#edit-children").modal("show");
         });
@@ -3360,8 +3407,8 @@ $("#idnumber3").change(function () {
     }
 });
 
-//children add info
-$("#idnumber4").change(function () {
+//CHILDREN ADD INFO
+$("#idNoaddChild").change(function () {
     if ($(this).val().length == 12) {
         var idn = $(this).val();
         var year = idn.substring(0, 2);
@@ -3376,7 +3423,7 @@ $("#idnumber4").change(function () {
     }
 });
 
-$("#idnumber4").change(function () {
+$("#idNoaddChild").change(function () {
     if ($(this).val().length == 12) {
         var idn = $(this).val();
         var year = idn.substring(0, 2);
@@ -3497,12 +3544,12 @@ $(".partCheck6").click(function () {
 //ADD CHILDREN DETAILS
 $(".partCheck7").click(function () {
     if ($(this).prop("checked")) {
-        $("#idnumber4").prop("readonly", true);
+        $("#idNoaddChild").prop("readonly", true);
         $("#dob4").prop("readonly", false);
         $("#dob4").css("pointer-events", "auto");
-        $("#idnumber4").val("");
+        $("#idNoaddChild").val("");
     } else {
-        $("#idnumber4").prop("readonly", false);
+        $("#idNoaddChild").prop("readonly", false);
         $("#dob4").prop("readonly", true);
         $("#dob4").css("pointer-events", "none");
         $("#passportChild").val("");

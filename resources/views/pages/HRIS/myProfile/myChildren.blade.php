@@ -10,7 +10,7 @@
             <th class="text-nowrap">ID/Passport Number</th>
             <th class="text-nowrap">Age</th>
             <th class="text-nowrap">Education</th>
-            <th class="text-nowrap">Institution</th>
+            <th class="text-nowrap">Institution Name</th>
             <th class="text-nowrap">Marital Status</th>
         </thead>
 
@@ -35,14 +35,17 @@
                 </td>
 
                 <td style="text-transform: uppercase;">{{ $children->fullName }}</td>
-                <td>{{ $children->idNo }}</td>
+                
+                @if($children->nonCitizen == 'on')
+                    <td>{{ $children->passport }}</td>
+                @else
+                    <td>{{ $children->idNo }}</td>
+                @endif
+
                 <td>{{ $children->age }}</td>
                 <td style="text-transform: uppercase;">{{ ($children->educationLevel == "0") ? '-' : educationLevel($children->educationLevel) }}</td>
-                <td style="text-transform: uppercase;">{{ $children->instituition }}</td>
-                {{-- <td style="text-transform: uppercase;">{{ ($children->maritalStatus == "0") ? '-' : getMaritalStatus($children->maritalStatus) }}</td> --}}
-                <td style="text-transform: uppercase;">
-                    {{ ($children->maritalStatus !== null) ? getMaritalStatus($children->maritalStatus) : '' }}
-                </td>
+                <td style="text-transform: uppercase;">{{ $children->instituition ?? '-' }}</td>
+                <td style="text-transform: uppercase;">{{ ($children->maritalStatus == "0") ? '-' : getMaritalStatus($children->maritalStatus) }}</td>
                 
             </tr>
             @endforeach
