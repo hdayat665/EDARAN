@@ -16,10 +16,14 @@
         </thead>
         <tbody>
             @if ($claims)
+                <?php $condByPass = ' $claim->id != "" && $claim->status == "active"'; ?>
+                @if ($config->status)
+                    <?php $condByPass = ' $claim->supervisor == "recommend"'; ?>
+                @endif
                 @foreach ($claims as $claim)
-                    @if ($claim->supervisor == 'recommend' && $claim->hod == '')
+                    @if ($claim->hod == '' && eval("return $condByPass;"))
                         <tr>
-                        <td style="text-align: center"><input class="form-check-input" type="checkbox" />
+                            <td style="text-align: center"><input class="form-check-input" type="checkbox" />
                             <td>
                                 <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle"><i class="fa fa-cogs"></i> Action <i class="fa fa-caret-down"></i></a>
                                 <div class="dropdown-menu">

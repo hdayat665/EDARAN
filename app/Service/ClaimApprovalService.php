@@ -2,6 +2,7 @@
 
 namespace App\Service;
 
+use App\Models\ApprovalConfig;
 use App\Models\ApprovelRoleGeneral;
 use App\Models\CashAdvanceDetail;
 use App\Models\DomainList;
@@ -584,6 +585,25 @@ class ClaimApprovalService
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
         $data['msg'] = 'Success Create Clear Date';
+
+        return $data;
+    }
+
+    public function getApprovalConfig($type = '', $claimType = '')
+    {
+        if ($type == 1) {
+            $role = 'SUPERVISOR - RECOMMENDER';
+        }
+
+        if ($type == 2) {
+            $role = 'HOD / CEO - APPROVER';
+        }
+
+        $cond[0] = ['tenant_id', Auth::user()->tenant_id];
+        $cond[1] = ['role', $role];
+        $cond[2] = ['type_claim', $claimType];
+
+        $data = ApprovalConfig::where($cond)->first();
 
         return $data;
     }
