@@ -471,6 +471,7 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('/searchEmployeeReport', 'searchEmployeeReport');
             Route::post('/searchOvertimeReport', 'searchOvertimeReport');
             // Route::get('/getReportAllEmployee', 'getReportAllEmployee');
+            Route::get('/getEmployeeNamebyDepartment/{id}', 'getEmployeeNamebyDepartment');
         });
 
         Route::controller(EleaveReportController::class)->group(function () {

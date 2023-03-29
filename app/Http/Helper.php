@@ -2164,3 +2164,16 @@ if (!function_exists('getEmployeeDetail')) {
         return $data;
     }
 }
+
+if (!function_exists('getEmployeeNamebyDepartments')) {
+    function getEmployeeNamebyDepartments($id = '')
+    {
+        $data = Employee::where([['department', $id]])->get();
+
+        if (!$data) {
+            $data = [];
+        }
+
+        return $data;
+    }
+}
