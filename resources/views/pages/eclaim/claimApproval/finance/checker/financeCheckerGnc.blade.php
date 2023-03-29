@@ -66,11 +66,20 @@
                                                         <input type="checkbox" id="checker2" {{ $gnc->f2 == 'check' ? 'checked' : '' }} class="form-check-input" disabled /> &nbsp;
                                                         <input type="checkbox" id="checker3" {{ $gnc->f3 == 'check' ? 'checked' : '' }} class="form-check-input" disabled />
                                                     </td>
-                                                    <td>{{ date('Y-m-d', strtotime($gnc->created_at)) ?? '-' }}</td>
+                                                    <td>{{ date('Y-m-d', strtotime($gnc->applied_date)) ?? '-' }}</td>
                                                     <td>{{ $gnc->claim_catagory_name ?? '-' }}</td>
                                                     <td>{{ $gnc->amount ?? '-' }}</td>
                                                     <td>{{ $gnc->desc ?? '-' }}</td>
-                                                    <td><a href="/storage/{{ $gnc->file_upload ?? '-' }}">{{ $gnc->file_upload ?? '-' }}</a></td>
+                                                    <td>
+                                                        @if(!empty($gnc->file_upload))
+                                                            @php
+                                                            $filenames = explode(',', $gnc->file_upload);
+                                                            @endphp
+                                                            @foreach($filenames as $filename)
+                                                            <a href="/storage/{{ $filename }}" target="_blank">{{ $filename }}</a><br>
+                                                            @endforeach
+                                                        @endif
+                                                    </td>
                                                 </tr>
                                             @endforeach
                                         @endif
@@ -124,6 +133,7 @@
                         <a href="/financeCheckerView" class="btn btn-light" style="color: black;" type="submit"><i class="fa fa-arrow-left"></i> Back</a>
                     </div>
                     <div class="col d-flex justify-content-end">
+                    @if ( $general->f1 != 'recommend')
                         @if ($general->pv_number != '')
                             <!-- The pv_number is not null, so hide all buttons -->
                         @else
@@ -143,7 +153,7 @@
                                 @endif
                             @endif
                         @endif
-
+                    @endif
 
 
 

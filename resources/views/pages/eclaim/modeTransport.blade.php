@@ -30,16 +30,21 @@
                         <label class="form-label">Day</label>
                     </div>
                     <div class="col-md-2">
-                        <input type="text" class="form-control" name="subs_allowance_day" id="day" value="0">
+                        <input type="text" class="form-control" readonly name="subs_allowance_day" id="day" value="0">
                     </div>
                     <div class="col-md-1">
                         <label class="form-label">X</label>
                     </div>
                     <div class="col-md-3">
                         {{-- <input readonly value="Malaysia" type="text" class="form-control"> --}}
-                        <select class="form-select">
-                            <option class="form-label" value="" selected>Malaysia
-                            </option>
+                        <select class="form-select" id="" name="project_id">
+                            <option class="form-label" value="" selected>
+                                Please Select</option>
+                            <?php $getAreas = getArea(); ?>
+                            @foreach ($getAreas as $area)
+                                <option class="form-label" value="{{ $area->area_name }}">{{ $area->area_name }}</option>
+                            @endforeach
+
                         </select>
                     </div>
                     <div class="col-md-3">
@@ -50,7 +55,7 @@
                     <div class="col-md-2">
                         <label class="form-label"></label>
                     </div>
-                    <div class="col-md-2">
+                    <div class="col-md-2"> 
                         <label class="form-label"></label>
                     </div>
                     <div class="col-md-2"> </div>
@@ -75,7 +80,7 @@
                         <label class="form-label">Night</label>
                     </div>
                     <div class="col-md-2">
-                        <input type="text" class="form-control" name="accommadation_night" id="night" value="0">
+                        <input type="text" class="form-control" readonly name="accommadation_night" id="night" value="0">
                     </div>
                     <div class="col-md-1">
                         <label class="form-label">X</label>

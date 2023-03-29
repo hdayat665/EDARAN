@@ -25,12 +25,12 @@
                         {{-- new --}}
                         <div class="col-md-3">
                             <label for="" class="form-label" >Old Identification Number</label>
-                            <input type="text" id="oldIdNumber"  name="oldIDNo" value="{{$profile->oldIDNo ?? ''}}"  class="form-control" style="text-transform:uppercase" placeholder="0000000">
+                            <input type="text" id="oldIdNumber"  name="oldIDNo" class="form-control" style="text-transform:uppercase" placeholder="0000000">
                         </div>
                         {{-- new --}}
                         <div class="col-md-3">
                             <label for="" class="form-label" >Birth of Certificate</label>
-                            <input type="file" id=""  name="" value=""  class="form-control">
+                            <input type="file" id="birthCert"  name="birthID" class="form-control">
                         </div>
                     </div>
                     <div class="row p-2">
@@ -55,9 +55,9 @@
                         <div class="col-sm-6">
                             <div class="row">
                                 {{-- new --}}
-                                <div class="col-sm-6">
+                                <div class="col-sm-12">
                                     <label for="dob" class="form-label" >ID Attachment</label>
-                                    <input type="file" id="" name="" class="form-control" aria-describedby="">
+                                    <input type="file" id="" name="idFile" class="form-control" aria-describedby="">
                                 </div>
                             </div>
                         </div>
@@ -67,7 +67,6 @@
                             <div class="row">
                                 <div class="col-sm-12">
                                     <label for="passport" class="form-label">Passport Number</label>
-                                  
                                     <input type="text" id="passportChild" name="passport"  class="form-control" aria-describedby="passport" placeholder="PASSPORT NUMBER">
                                 </div>
                                 {{-- <div class="col-sm-6">
@@ -150,9 +149,9 @@
                         </div>
                         <div class="col-sm-6">
                             <div class="row">
-                                <div class="col-sm-6">
+                                <div class="col-sm-12">
                                     <label for="dob" class="form-label" >OKU Attachment*</label>
-                                    <input type="file" id="okuattach3" name="" class="form-control" style="pointer-events: none" aria-describedby="">
+                                    <input type="file" id="okuattach3" name="okuFile" class="form-control" style="pointer-events: none" aria-describedby="">
                                 </div>
                             </div>
                         </div>
@@ -185,7 +184,7 @@
                         </div>
                         <div class="col-md-6">
                             <label for="" class="form-label">Supporting Documents</label>
-                            <input type="file"  class="form-control" name="supportDoc">
+                            <input type="file" class="form-control" name="supportDoc">
                         </div>
                     </div>
                     

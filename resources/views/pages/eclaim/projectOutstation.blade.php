@@ -13,21 +13,20 @@
         </div>
         <div class="col-md-8">
             <input type="text" class="form-control" id="datefilter1"  name="travel_date3">
-            
         </div>
     </div>
     <div class="row p-2">
         <div class="col-md-4">
             <label class="form-label">Project</label>
         </div>
-        <div class="col-md-8">
-            <select class="form-select" id="project" readonly name="project_id">
-                <?php $projects = project(); ?>
-                <option class="form-label" value="">Please Select</option>
+        <div class="col-md-8"> 
+            <select class="form-select" id="project" readonly name="project_id1">
+                <option class="form-label" value="" selected>
+                    Please Select</option>
+                <?php $projects = myProjectOnly(); ?>
                 @foreach ($projects as $project)
                     <option class="form-label" value="{{ $project->id }}">{{ $project->project_name }}</option>
                 @endforeach
-
             </select>
         </div>
     </div>

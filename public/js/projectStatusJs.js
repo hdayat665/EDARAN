@@ -76,7 +76,7 @@ $(document).ready(function() {
                 for (let i = 0; i < data.length; i++) {
                     const option = data[i];
                     console.log(option['id'])
-                    html.push("<option value='" + option['id'] + "'>" + option['project_name'] + "</option>")
+                    html.push("<option value='" + option['id'] + "'>" + option['project_code'] + " - " + option['project_name'] + "</option>");
                 }
                 document.getElementById("select8").innerHTML = html.join("");
                 $("#menu8").show();

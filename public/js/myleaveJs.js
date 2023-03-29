@@ -1,4 +1,14 @@
 $(document).ready(function () {
+    const fileInput = document.getElementById("fileupload");
+    fileInput.addEventListener("change", validateFile);
+
+    function validateFile() {
+        const fileSize = fileInput.files[0].size / 1024 / 1024; // ukuran file dalam MB
+        if (fileSize > 5) {
+            alert("File size exceeds the maximum limit of 5 M");
+            fileInput.value = ""; // reset input file
+        }
+    }
     var hash = location.hash.replace(/^#/, ""); // ^ means starting, meaning only match the first hash
     if (hash) {
         $('.nav-tabs a[href="#' + hash + '"]').tab("show");
@@ -288,8 +298,8 @@ $(document).ready(function () {
                 noofday: "Please Select No of Day(s) Applied",
                 reason: "Please Insert Reason",
                 leave_date: "Please Insert leave date",
-                start_date: "Please Insert start date",
-                end_date: "Please Insert end date",
+                start_date: "Please Insert Start Date",
+                end_date: "Please Insert End Date",
                 flexRadioDefault: "Please select morning or evening",
             },
             submitHandler: function (form) {
@@ -337,7 +347,7 @@ $(document).ready(function () {
         myleaveData.done(function (data) {
             $("#datepicker-applied1").val(data[0].applied_date);
             $("#typeofleave1").val(data[0].lt_type_id);
-            $("#dayApplied1").val(data[0].day_applied);
+            // $("#dayApplied1").val(data[0].day_applied);
             $("#totalapply1").val(data[0].total_day_applied);
             $("#datepicker-leave1").val(data[0].leave_date);
             $("#datepicker-start1").val(data[0].start_date);
@@ -345,6 +355,13 @@ $(document).ready(function () {
             $("#reason1").val(data[0].reason);
             $("#reasonreject1").val(data[0].reason);
             // console.log(data[0]);
+            if (data[0].day_applied == 1) {
+                $("#dayApplied1").val("One Day");
+            } else if (data[0].day_applied == 0.5) {
+                $("#dayApplied1").val("Half Day");
+            } else {
+                $("#dayApplied1").val(data[0].day_applied + " Day");
+            }
 
             if (data[0].day_applied === "1") {
                 $("#menu01").show();
@@ -442,7 +459,7 @@ $(document).ready(function () {
             $("#datafullname2").val(data[0].username);
             $("#datepicker-applied2").val(data[0].applied_date);
             $("#typeofleave2").val(data[0].lt_type_id);
-            $("#dayApplied2").val(data[0].day_applied);
+            // $("#dayApplied2").val(data[0].day_applied);
             $("#totalapply2").val(data[0].total_day_applied);
             $("#datepicker-leave2").val(data[0].leave_date);
             $("#datepicker-start2").val(data[0].start_date);
@@ -450,6 +467,13 @@ $(document).ready(function () {
             $("#reason2").val(data[0].reason);
             $("#reasonreject2").val(data[0].reason);
             // console.log(data[0]);
+            if (data[0].day_applied == 1) {
+                $("#dayApplied2").val("One Day");
+            } else if (data[0].day_applied == 0.5) {
+                $("#dayApplied2").val("Half Day");
+            } else {
+                $("#dayApplied2").val(data[0].day_applied + " Day");
+            }
 
             if (data[0].day_applied === "1") {
                 $("#menu10").show();
@@ -592,11 +616,19 @@ $(document).ready(function () {
             console.log(data[0]);
             $("#applieddate").val(data[0].applied_date);
             $("#type1").val(data[0].type);
-            $("#dayapplied").val(data[0].day_applied);
+            // $("#dayapplied").val(data[0].day_applied);
             $("#startdate").val(data[0].start_date);
             $("#enddate").val(data[0].end_date);
             $("#totaldayapplied").val(data[0].total_day_applied);
             $("#reason1").val(data[0].reason);
+
+            if (data[0].day_applied == 1) {
+                $("#dayApplied").val("One Day");
+            } else if (data[0].day_applied == 0.5) {
+                $("#dayApplied").val("Half Day");
+            } else {
+                $("#dayApplied").val(data[0].day_applied + " Day");
+            }
 
             if (data.leave_session == "1") {
                 $("#flexRadioDefault1").prop("checked", true);

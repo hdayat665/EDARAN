@@ -16,9 +16,12 @@
                             <td>
                                 <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle"><i class="fa fa-cogs"></i> Action <i class="fa fa-caret-down"></i></a>
                                 <div class="dropdown-menu">
-                                    {{-- <a href="javascript:;" id="generatePv" data-id="{{ $claim->id }}" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#modalpv"><i class="fa fa-bill" --}}
-                                    <a href="javascript:;" id="generatePv" data-id="{{ $claim->id }}" class="dropdown-item"><i class="fa fa-bill" aria-hidden="true"></i>
-                                        Generate PV</a>
+                                    <!-- {{-- <a href="javascript:;" id="generatePv" data-id="{{ $claim->id }}" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#modalpv"><i class="fa fa-bill" --}} -->
+                                    <a href="/financeCheckerDetail/{{ $claim->id }}" id="" data-id="" class="dropdown-item">View
+                                        GNC</a>
+                                    <div class="dropdown-divider"></div>  
+                                    <a href="javascript:;" id="generatePv" data-id="{{ $claim->id }}" class="dropdown-item">Generate PV</a> 
+                                        
                                     <div class="dropdown-divider"></div>
                                     <a href="javascript:;" id="" data-id="" class="dropdown-item"><i class="fa fa-times" aria-hidden="true"></i> Close</a>
                                 </div>
@@ -28,14 +31,18 @@
                         </tr>
                     @endif
                 @elseif($claim->claim_type == 'MTC')
-                    @if ($claim->a_approval == 'recommend' && $claim->pv_number == '')
+                    @if ($claim->f_approval == 'recommend' && $claim->pv_number == '')
                         <tr>
                             <td>
                                 <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle"><i class="fa fa-cogs"></i> Action <i class="fa fa-caret-down"></i></a>
                                 <div class="dropdown-menu">
                                     <!-- {{-- <a href="javascript:;" id="generatePv" data-id="{{ $claim->id }}" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#modalpv"><i class="fa fa-bill" --}} -->
-                                    <a href="javascript:;" id="generatePv" data-id="{{ $claim->id }}" class="dropdown-item"><i class="fa fa-bill" aria-hidden="true"></i>
-                                        Generate PV</a>
+                                    <a href="/financeCheckerDetail/{{ $claim->id }}" id="" data-id="" class="dropdown-item"> View
+                                        MTC</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a href="javascript:;" id="generatePv" data-id="{{ $claim->id }}" class="dropdown-item">Generate PV</a>
+                                    
+                                    
                                     <div class="dropdown-divider"></div>
                                     <a href="javascript:;" id="" data-id="" class="dropdown-item"><i class="fa fa-times" aria-hidden="true"></i> Close</a>
                                 </div>

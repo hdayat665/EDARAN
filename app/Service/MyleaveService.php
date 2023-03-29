@@ -23,6 +23,7 @@ class MyleaveService
             ->where('myleave.leave_date', '>=', Carbon::now()->format('Y-m-d'))
             ->select('myleave.*', 'leave_types.leave_types as type')
             ->orderBy('myleave.applied_date', 'desc')
+            ->orderBy('myleave.created_at', 'desc')
             ->get();
 
         return $data;
@@ -36,6 +37,7 @@ class MyleaveService
             ->where('myleave.leave_date', '<', Carbon::now()->format('Y-m-d'))
             ->select('myleave.*', 'leave_types.leave_types as type')
             ->orderBy('myleave.applied_date', 'desc')
+            ->orderBy('myleave.created_at', 'desc')
             ->get();
 
         return $data;
@@ -50,7 +52,10 @@ class MyleaveService
                     ->where('myleave.up_user_id', '=', Auth::user()->id)
                     ->where('myleave.leave_date', '<', Carbon::now()->format('Y-m-d'))
                     ->select('myleave.*', 'leave_types.leave_types as type')
-                    ->orderBy('myleave.applied_date', 'desc');
+                    ->orderBy('myleave.applied_date', 'desc')
+                    ->orderBy('myleave.created_at', 'desc')
+                    ;
+                    
 
         if ($input['applydate']) {
             $applydate = $input['applydate'];
@@ -191,8 +196,8 @@ class MyleaveService
     {
         $data = MyLeaveModel::where('myleave.tenant_id', Auth::user()->tenant_id)
             ->where('myleave.id', '=', $id)
-            ->leftJoin('userprofile as au', 'myleave.up_recommendedby_id', '=', 'au.id')
-            ->leftJoin('userprofile as mu', 'myleave.up_approvedby_id', '=', 'mu.id')
+            ->leftJoin('userprofile as au', 'myleave.up_recommendedby_id', '=', 'au.user_id')
+            ->leftJoin('userprofile as mu', 'myleave.up_approvedby_id', '=', 'mu.user_id')
             ->select('myleave.*', 'au.fullName as username1', 'mu.fullName as username2')
             ->get();
 
@@ -234,6 +239,7 @@ class MyleaveService
                         ->where('myleave.up_recommendedby_id', '=', Auth::user()->id)
                         ->select('myleave.*','leave_types.leave_types as type', 'userprofile.fullName')
                         ->orderBy('myleave.applied_date', 'desc')
+                        ->orderBy('myleave.created_at', 'desc')
                         ->get();
         return $data;
     }
@@ -292,6 +298,7 @@ class MyleaveService
                         ->where('myleave.up_rec_status', '=', 4)
                         ->select('myleave.*','leave_types.leave_types as type', 'userprofile.fullName')
                         ->orderBy('myleave.applied_date', 'desc')
+                        ->orderBy('myleave.created_at', 'desc')
                         ->get();
         return $data;
     }
@@ -357,7 +364,7 @@ class MyleaveService
     {
         $data = MyLeaveModel::where('myleave.tenant_id', Auth::user()->tenant_id)
             ->where('myleave.id', '=', $id)
-            ->leftJoin('userprofile as ap', 'myleave.up_user_id', '=', 'ap.id')
+            ->leftJoin('userprofile as ap', 'myleave.up_user_id', '=', 'ap.user_id')
             ->leftJoin('userprofile as au', 'myleave.up_recommendedby_id', '=', 'au.user_id')
             ->leftJoin('userprofile as mu', 'myleave.up_approvedby_id', '=', 'mu.user_id')
             ->select('myleave.*','ap.fullName as username', 'au.fullName as username1', 'mu.fullName as username2')
@@ -431,9 +438,9 @@ class MyleaveService
     {
         $data = MyLeaveModel::where('myleave.tenant_id', Auth::user()->tenant_id)
             ->where('myleave.id', '=', $id)
-            ->leftJoin('userprofile as ap', 'myleave.up_user_id', '=', 'ap.id')
-            ->leftJoin('userprofile as au', 'myleave.up_recommendedby_id', '=', 'au.id')
-            ->leftJoin('userprofile as mu', 'myleave.up_approvedby_id', '=', 'mu.id')
+            ->leftJoin('userprofile as ap', 'myleave.up_user_id', '=', 'ap.user_id')
+            ->leftJoin('userprofile as au', 'myleave.up_recommendedby_id', '=', 'au.user_id')
+            ->leftJoin('userprofile as mu', 'myleave.up_approvedby_id', '=', 'mu.user_id')
             ->leftJoin('leave_types as lt', 'myleave.lt_type_id', '=', 'lt.id')
             ->select('myleave.*','ap.fullName as username', 'au.fullName as username1', 'mu.fullName as username2', 'lt.leave_types as leave_types')
             ->get();
@@ -444,9 +451,9 @@ class MyleaveService
     {
         $data = MyLeaveModel::where('myleave.tenant_id', Auth::user()->tenant_id)
             ->where('myleave.id', '=', $id)
-            ->leftJoin('userprofile as ap', 'myleave.up_user_id', '=', 'ap.id')
-            ->leftJoin('userprofile as au', 'myleave.up_recommendedby_id', '=', 'au.id')
-            ->leftJoin('userprofile as mu', 'myleave.up_approvedby_id', '=', 'mu.id')
+            ->leftJoin('userprofile as ap', 'myleave.up_user_id', '=', 'ap.user_id')
+            ->leftJoin('userprofile as au', 'myleave.up_recommendedby_id', '=', 'au.user_id')
+            ->leftJoin('userprofile as mu', 'myleave.up_approvedby_id', '=', 'mu.user_id')
             ->leftJoin('leave_types as lt', 'myleave.lt_type_id', '=', 'lt.id')
             ->select('myleave.*','ap.fullName as username', 'au.fullName as username1', 'mu.fullName as username2', 'lt.leave_types as leave_types')
             ->get();

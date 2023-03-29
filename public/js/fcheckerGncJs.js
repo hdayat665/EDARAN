@@ -10,7 +10,7 @@ $(document).ready(function () {
         responsive: false,
         lengthMenu: [
             [5, 10, 15, 20, -1],
-            [5, 10, 15, 20, "All"],
+            [5, 10, 15, 20, "All"], 
         ],
     });
     // $(document).on("click", "#btn-view-claim", function () {
@@ -225,14 +225,19 @@ $(document).ready(function () {
 
         vehicleData.done(function (data) {
             console.log(data);
-            $("#year").val(data.year);
-            $("#month").val(data.month);
-            $("#created_at").val(data.created_at);
-            $("#claim_category").val(data.claim_category);
+            $("#applied_date").val(moment(data.applied_date).format('YYYY-MM-DD'));
+            $("#claim_category").val(data.claim_category_name);
+            $("#label").text(data.claim_category_content.label);
+            $("#contents").val(data.claim_category_content.content);
             $("#amount").val(data.amount);
-            $("#desc").val(data.desc);
             $("#checkId").val(data.id);
-            $("#file_upload").val(data.file_upload);
+            $("#desc").val(data.desc);
+            var fileNames = data.file_upload.split(',');
+            var html = '';
+            for(var i=0; i<fileNames.length; i++){
+                html += "<a href='/storage/" + fileNames[i] + "' target='_blank'>" + fileNames[i] + "</a><br>";
+            }
+            $("#file_upload").html(html);
         });
         $("#modal-gnc-view").modal("show");
     });

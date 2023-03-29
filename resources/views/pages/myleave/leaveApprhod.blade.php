@@ -6,7 +6,7 @@
     <h1 class="page-header" id="leaveHodJs">E-Leave <small>| Leave Approval | Head Of Department</small></h1>
     <!-- END page-header -->
     <!-- BEGIN panel -->
-    <div class="panel panel">s
+    <div class="panel panel">
         <!-- BEGIN panel-heading -->
         <div class="panel-body">
             <div class="form-control">

@@ -29,8 +29,28 @@ class myClaimController extends Controller
     }
 
     public function cashAdvanceView()
-    {
+    {   
+        $mcs = new myClaimService;
+
+        $data['user_id'] = Auth::user()->id;
+        $data['food'] = $mcs->getFoodByJobGrade($data['user_id']);
+        $data['area'] = $mcs->getEntitlementAreaByJobGrade($data['user_id']);
+        //pr($data['area']);
         return view('pages.eclaim.cashAdvance');
+    }
+
+    public function viewMtcClaim($id = '')
+    {
+        $mcs = new myClaimService;
+
+        $result = $mcs->viewMtcClaim($id);
+
+        $data['general'] = $result['claim'];
+        $data['travels'] = $result['travel'];
+        $data['personals'] = $result['personal'];
+        $data['gncs'] = $result['general'];
+
+        return view('pages.eclaim.ViewClaimDetailMtc', $data);
     }
 
     public function newMonthlyClaimView($month = '', $year = '')
@@ -142,7 +162,7 @@ class myClaimController extends Controller
         $data['user_id'] = Auth::user()->id ?? '';
 
         $data['food'] = $mcs->getFoodByJobGrade($data['user_id']);
-
+        //pr($data['food']);
         $data['car'] = $mcs->getEntitlementByJobGradeCar($data['user_id']);
 
         $entitlementArr = json_decode($data['car'], true);
@@ -288,4 +308,13 @@ class myClaimController extends Controller
 
         return response()->json($data);
     }
+    public function cancelGNC($id = '')
+    {
+        $ps = new myClaimService;
+
+        $result = $ps->cancelGNC($id);
+
+        return response()->json($result);
+    }
+    
 }

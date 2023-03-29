@@ -53,7 +53,7 @@
                                         </div>
                                         <div class="col-md-9">
                                             <select class="form-select" id="year" name="year">
-                                                <option class="form-label" value="Please Select" selected>Please
+                                                <option class="form-label" value="" selected>Please
                                                     Select</option>
                                                 <option class="form-label" value="2022">2022</option>
                                                 <option class="form-label" value="2023">2023</option>
@@ -90,7 +90,7 @@
                                         </div>
                                         <div class="col-md-9">
                                             <div class="input-group" id="">
-                                                <input type="text" name="applied_date" class="form-control" value="" id="applieddate" />
+                                                <input readonly type="text" style="pointer-events: none;" name="applied_date" class="form-control" value="" id="applieddate" />
                                                 <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                             </div>
                                         </div>
@@ -101,7 +101,7 @@
                                         </div>
                                         <div class="col-md-9">
                                             <select class="form-select" id="claimcategory" name="claim_category">
-                                                <option class="form-label" value="Please Select" selected>Please
+                                                <option class="form-label" value="" selected>Please
                                                     Select</option>
                                                 {{ $categorys = getClaimCategory() }}
                                                 @foreach ($categorys as $category)
@@ -111,7 +111,7 @@
                                         </div>
                                     </div>
                                     {{-- akan tarik data dari  labelling name dlam setting add claim --}}
-                                    <div class="row p-2" id="labelcategory" style="display: none">
+                                    <div class="row p-2" id="labelcategory" style="display: none"> 
                                         <div class="col-md-3">
                                             <label class="form-label" id="label"></label>
                                         </div>
@@ -127,9 +127,10 @@
                                             <label class="form-label">Amount (MYR)</label>
                                         </div>
                                         <div class="col-md-9">
-                                            <input type="number" class="form-control" name="amount" id="amount">
+                                            <input type="number" class="form-control" name="amount" id="amount" placeholder="0.00">
                                         </div>
                                     </div>
+
                                     <div class="row p-2">
                                         <div class="col-md-3">
                                             <label class="form-label">Description</label>
@@ -143,7 +144,7 @@
                                             <label class="form-label">Supporting Document</label>
                                         </div>
                                         <div class="col-md-9">
-                                            <input type="file" class="form-control-file" name="file_upload" id="supportdocument">
+                                            <input type="file" class="form-control-file" name="file_upload[]" id="supportdocument" multiple>
                                         </div>
                                     </div>
                                 </div>
@@ -197,6 +198,7 @@
             <!-- </form> -->
         </div>
     </div>
+    
     <!-- <script>
         function addTableRow() {
             // var year = document.getElementById("year");

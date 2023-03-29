@@ -43,8 +43,8 @@ $(document).ready(function () {
 
             messages: {
                 holiday_title: "Please Insert Holiday Title",
-                start_date: "Please Insert start date",
-                end_date: "Please Insert end date",
+                start_date: "Please Insert Start Date",
+                end_date: "Please Insert End Date",
             },
             submitHandler: function (form) {
                 requirejs(["sweetAlert2"], function (swal) {
@@ -121,8 +121,8 @@ $(document).ready(function () {
 
             messages: {
                 holidaytitle: "Please Insert holiday title",
-                start_date: "Please Insert start date",
-                enddate: "Please Insert end date",
+                start_date: "Please Insert Start Date",
+                enddate: "Please Insert End Date",
             },
             submitHandler: function (form) {
                 requirejs(["sweetAlert2"], function (swal) {

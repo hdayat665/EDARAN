@@ -127,11 +127,11 @@
                     <div class="row mb-15px">
                         <div class="col-md-12">
                             <select class="selectpicker form-control" name="location[]" id="location-search-edit" multiple >
-                                <?php $locations = projectLocation() ?>
-                                @foreach ($locations as $location)
-                                <option value="{{$location->id}}" >{{$location->location_name}}</option>
-                                @endforeach
-                            </select>
+                            <?php $projectLocations = projectLocation($project->id) ?>
+                            @foreach ($projectLocations as $projectLocation)
+                                <option value="{{$projectLocation->id}}">{{$projectLocation->location_name}}</option>
+                            @endforeach
+                            </select> 
 
                         </div>
 

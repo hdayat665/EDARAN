@@ -41,19 +41,19 @@
                                         <div class="form-check">
                                             <input class="form-check-input" value="F" type="radio" name="local_travel" id="flexRadioF" checked>
                                             <label class="form-check-label" for="flexRadioF">
-                                                F- First Class
+                                                F - First Class
                                             </label>
                                         </div>
                                         <div class="form-check">
                                             <input class="form-check-input" value="C" type="radio" name="local_travel" id="flexRadioC">
                                             <label class="form-check-label" for="flexRadioC">
-                                                C- Business Class
+                                                C - Business Class
                                             </label>
                                         </div>
                                         <div class="form-check">
                                             <input class="form-check-input" value="Y" type="radio" name="local_travel" id="flexRadioY">
                                             <label class="form-check-label" for="flexRadioY">
-                                                Y - First Class
+                                                Y - Economy Class
                                             </label>
                                         </div>
                                     </div>
@@ -67,7 +67,7 @@
                                         <div class="form-check">
                                             <input class="form-check-input" value="F" type="radio" name="oversea_travel" id="flexRadioOF">
                                             <label class="form-check-label" for="flexRadioOF">
-                                                F- First Class
+                                                F - First Class
                                             </label>
                                         </div>
                                         <div class="form-check">
@@ -79,7 +79,7 @@
                                         <div class="form-check">
                                             <input class="form-check-input" value="Y" type="radio" name="oversea_travel" id="flexRadioOY">
                                             <label class="form-check-label" for="flexRadioOY">
-                                                Y - First Class
+                                                Y - Economy Class
                                             </label>
                                         </div>
                                     </div>

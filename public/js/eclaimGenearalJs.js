@@ -44,7 +44,13 @@ $(document).ready(function () {
         $("#editSubsistence").modal("show");
     });
 
-    $("#tableSaveArea").DataTable({});
+    $("#tableSaveArea").DataTable({
+        responsive: true,
+        lengthMenu: [
+            [5, 10, 25, 50, -1],
+            [5, 10, 25, 50, "All"],
+        ],
+    });
 
     $("#saveButton").click(function (e) {
         $("#addForm").validate({
@@ -76,13 +82,13 @@ $(document).ready(function () {
                             } else {
                                 location.reload();
                             }
-                        });
+                        }); 
                     });
                 });
             },
         });
     });
-
+ 
     $("#editButton").click(function (e) {
         $("#editAreaForm").validate({
             rules: {},

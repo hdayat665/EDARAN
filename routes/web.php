@@ -127,8 +127,8 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('/createChequeNumberCa/{id}', 'createChequeNumberCa');
             Route::post('/createPvNumberCa/{id}', 'createPvNumberCa');
             Route::post('/createClearCa/{id}', 'createClearCa');
-
-
+            Route::post('/approveAllClaim', 'approveAllClaim');
+            Route::post('/approveAllCa', 'approveAllCa');
 
 
 
@@ -179,6 +179,7 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('/getJobHistory', 'getJobHistory');
             Route::get('/getVehicle', 'getVehicle');
             Route::get('/getChildren/{id}', 'getChildren');
+            Route::get('/getChildrenById/{id}', 'getChildrenById');
             Route::get('/getSiblingById/{id}', 'getSiblingById');
             Route::get('/getParentById/{id}', 'getParentById');
             Route::get('/getVehicleById/{id}', 'getVehicleById');
@@ -541,6 +542,7 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('/myClaimView', 'myClaimView');
             Route::get('/generalClaimView', 'generalClaimView');
             Route::get('/cashAdvanceView', 'cashAdvanceView');
+            Route::get('/viewMtcClaim/{id}', 'viewMtcClaim');
             Route::get('/newMonthlyClaimView/{month}/{year}', 'newMonthlyClaimView');
             Route::post('/submitPersonalClaim', 'submitPersonalClaim');
             Route::post('/submitTravelClaim', 'submitTravelClaim');
@@ -552,6 +554,7 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('/appealMtc', 'createAppealMtc');
             Route::post('/approveAppealMtc/{id}', 'approveAppealMtc');
             Route::post('/rejectAppealMtc/{id}', 'rejectAppealMtc');
+            Route::post('/cancelGNC/{id}', 'cancelGNC');
         });
 
         Route::controller(generalClaimController::class)->group(function () {

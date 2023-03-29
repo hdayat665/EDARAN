@@ -16,7 +16,7 @@
         <h1 class="page-header">eClaim <small>| My Claim </small></h1>
         <div class="panel panel" id="myClaimJs">
             <div class="panel-body">
-                <div class="form-control">
+                <!-- <div class="form-control">
                     <h3>Claim Overview</h3>
                     <br>
                     <div class="row p-2">
@@ -45,7 +45,7 @@
                             <h3 class="text-center text-primary">MYR 0.00</h3>
                         </div>
                     </div>
-                </div>
+                </div> -->
                 <br>
                 <div class="form-control">
                     <div class="panel-body">
@@ -78,14 +78,31 @@
                                                     <tr class="odd gradeX"> 
                                                         <?php 
                                                             $checkMonth = checkingMonthlyClaim($data['year'], $data['month']);
+                                                            
                                                             $status = checkAppeal($data['year'], $data['month']);
+                                                            
                                                         ?>
                                                         @if ($key >= claimDateSetting()->open_claim_duration)
                                                             @if ($status['status'] == 'approved' && $status['year'] == $data['year'] && $status['month'] == $data['month']) 
-                                                                <td>{{ $data['year'] }}</td>
-                                                                <td>{{ $data['month'] }}</td>
-                                                                <td><span class="badge bg-lime">Open</span></td>
-                                                                <td><a href="/newMonthlyClaimView/{{ $data['value'] }}/{{ $data['year'] }}" type="button" class="btn btn-primary btn-sm">+ Apply</a></td>
+                                                                @if ($data['month'] == $checkMonth['month'])
+                                                                    @if ($checkMonth['status'] == 'active')
+                                                                        <td>{{ $data['year'] }}</td>
+                                                                        <td>{{ $data['month'] }}</td>
+                                                                        <td><span class="badge bg-lime">Open</span></td>
+                                                                        <td></td>
+                                                                    @else
+                                                                        <td>{{ $data['year'] }}</td>
+                                                                        <td>{{ $data['month'] }}</td>
+                                                                        <td><span class="badge bg-lime">Open</span></td>
+                                                                        <td><a href="/monthClaimEditView/edit/month/{{ $checkMonth['id'] }}" type="button" class="btn btn-primary btn-sm">Update</a></td>
+                                                                    @endif
+                                                                @else
+                                                                    <td>{{ $data['year'] }}</td>
+                                                                    <td>{{ $data['month'] }}</td>
+                                                                    <td><span class="badge bg-lime">Open</span></td>
+                                                                    <td><a href="/newMonthlyClaimView/{{ $data['value'] }}/{{ $data['year'] }}" type="button" class="btn btn-primary btn-sm">+ Apply</a></td>
+                                                                @endif    
+                                                            
                                                             @else 
                                                                 <td>{{ $data['year'] }}</td>
                                                                 <td>{{ $data['month'] }}</td>

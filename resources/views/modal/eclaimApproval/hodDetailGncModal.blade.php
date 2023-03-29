@@ -13,7 +13,7 @@
                     <div class="col-md-9">
                         <input type="text" class="form-control" readonly value="{{ $gnc->year ?? '-' }}">
                     </div>
-                </div>
+                </div> 
                 <div class="row p-2">
                     <div class="col-md-3">
                         <label class="form-label">Month</label>
@@ -39,26 +39,25 @@
                         <label class="form-label">Claim Category</label>
                     </div>
                     <div class="col-md-9">
-                        <input type="text" class="form-control" readonly value="{{ $gnc->claim_catagory_name ?? '-' }}" id="">
+                        <input type="text" class="form-control" readonly  id="claim_category">
 
                     </div>
                 </div>
                 {{-- akan tarik data dari  labelling name dlam setting add claim --}}
-                <!-- <div class="row p-2">
+                <div class="row p-2">
                     <div class="col-md-3">
-                        <input type="text" value="test" class="form-control" name="labellingname" id="label" readonly>
+                        <label class="form-label" id="label"></label>
                     </div>
                     <div class="col-md-9">
-                    
-                        <input type="text" class="form-control" readonly value="{{ $gnc->claim_category ?? '-' }}" id="">
+                        <input type="text" class="form-control" id="contents" readonly>
                     </div>
-                </div> -->
+                </div>
                 <div class="row p-2">
                     <div class="col-md-3">
                         <label class="form-label">Amount (MYR)</label>
                     </div>
                     <div class="col-md-9">
-                        <input type="number" class="form-control" value="{{ $gnc->amount ?? '-' }}" readonly>
+                        <input type="number" class="form-control" id="amount"  readonly>
                     </div>
                 </div>
                 <div class="row p-2">
@@ -66,7 +65,7 @@
                         <label class="form-label">Description</label>
                     </div>
                     <div class="col-md-9">
-                        <textarea class="form-control" rows="3" readonly>{{ $gnc->gnc_desc ?? '-' }}</textarea>
+                        <textarea class="form-control" rows="3" id="desc" readonly></textarea>
                     </div>
                 </div>
                 <div class="row p-2">
@@ -74,7 +73,7 @@
                         <label class="form-label">Supporting Document</label>
                     </div>
                     <div class="col-md-9">
-                        <a href="/storage/{{ $gnc->file_upload }}" download>{{ $gnc->file_upload ?? '-' }}</a>
+                        <a id="file_upload" ></a>
                     </div>
                 </div>
             </div>

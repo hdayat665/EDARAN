@@ -86,7 +86,7 @@
                                             <tr>
                                                 <th width="1%">No.</th>
                                                 <th width="1%">Action</th>
-                                                <th width="1%" data-orderable="false">Applied Date</th>
+                                                <th width="1%">Applied Date</th>
                                                 <th>Type of Leave</th>
                                                 <th>Start Date</th>
                                                 <th>End Date</th>
@@ -242,7 +242,7 @@
                                             <thead>
                                                 <tr>
                                                     <th width="1%">Action</th>
-                                                    <th width="1%" data-orderable="false">Applied Date</th>
+                                                    <th width="1%">Applied Date</th>
                                                     <th>Type of Leave</th>
                                                     <th>Start Date</th>
                                                     <th>End Date</th>
@@ -377,8 +377,8 @@
                                     </div>
                                 </div>
                                     
-                                <div class="row p-2">
-                                    <div class="col-sm-6" id="menu5">
+                                <div class="row p-2" id="menu5">
+                                    <div class="col-sm-6">
                                         <label class="form-label" for="Menu5">Leave Date*</label>
                                             <div class="">
                                                 <input type="text" class="form-control" name="leave_date" id="datepicker-leave" placeholder="YYYY/MM/DD"/>
@@ -386,20 +386,24 @@
                                     </div>
                                 </div>
 
-                                <div class="row p-2">
-                                    <div class="col-sm-12" id="menu6">
+                                <div class="row p-2" id="menu6">
+                                    <div class="col-sm-12" >
                                         <label class="form-label" for="Menu6">Leave Session*</label>
                                             <div class="input-group" name="name6" id="select6">
                                                 <div class="form-check">
                                                     <input class="form-check-input" value="1" type="radio" name="flexRadioDefault" id="flexRadioDefault1" checked style="pointer-events: none">
                                                     <label class="form-check-label" for="flexRadioDefault1">
                                                         Morning
+                                                        <br>
+                                                        8AM - 1AM
                                                     </label>
                                                 </div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                                 <div class="form-check">
                                                     <input class="form-check-input" value="2" type="radio" name="flexRadioDefault" id="flexRadioDefault2" style="pointer-events: none">
                                                     <label class="form-check-label" for="flexRadioDefault2">
                                                         Evening
+                                                        <br>
+                                                        2PM - 5PM
                                                     </label>
                                                 </div>
                                             </div>
@@ -426,10 +430,10 @@
                                 <div class="row p-2">
                                     <div class="col-sm-6" id="menu9">
                                         <label class="form-label" for="Menu7">Supporting Document</label>
-                                            <div class="input-group">
-                                                <input id="fileupload" type="file" multiple="multiple" name="file">
-                                                <span id="fileDownloadPolicy"></span>
-                                            </div>
+                                        <div class="input-group">
+                                            <input id="fileupload" type="file" accept=".pdf,.png,.jpeg,.jpg" name="file" max-size="5MB">
+                                            <span id="fileDownloadPolicy"></span>
+                                        </div>
                                     </div>
                                     <div class="col-sm-6" id="menu10">
                                         <label class="form-label" for="Menu8">Reason*</label>
@@ -519,13 +523,18 @@
                                                 <div class="form-check">
                                                     <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefaulta">
                                                     <label class="form-check-label" for="flexRadioDefaulta">
-                                                        Morning
+                                                        Morning 
+                                                        <br>
+                                                        8AM - 1AM
+
                                                     </label>
                                                 </div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                                 <div class="form-check">
                                                     <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefaultb">
                                                     <label class="form-check-label" for="flexRadioDefaultb">
                                                         Evening
+                                                        <br>
+                                                        2PM - 5PM
                                                     </label>
                                                 </div>
                                             </div>
@@ -597,7 +606,7 @@
                             </form>
                         </div>
                         <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cancel</button>
                         </div>
                     </div>
                 </div>
@@ -674,12 +683,16 @@
                                                     <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefaulta2">
                                                     <label class="form-check-label" for="flexRadioDefaulta">
                                                         Morning
+                                                        <br>
+                                                        8AM - 1PM
                                                     </label>
                                                 </div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                                 <div class="form-check">
                                                     <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefaultb2">
                                                     <label class="form-check-label" for="flexRadioDefaultb">
                                                         Evening
+                                                        <br>
+                                                        2PM - 5PM
                                                     </label>
                                                 </div>
                                             </div>
@@ -751,7 +764,7 @@
                             </form>
                         </div>
                         <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cancel</button>
                         </div>
                     </div>
                 </div>

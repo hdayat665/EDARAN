@@ -1,7 +1,7 @@
 @extends('layouts.dashboardTenant')
 @section('content')
     <div id="content" class="app-content">
-        <h1 class="page-header">eClaim <small>| Claim Approval | Head of Department | View Monthly Claim </small></h1>
+        <h1 class="page-header">eClaim <small>| Claim Approval | Supervisor | View Monthly Claim </small></h1>
         <div class="panel panel">
             <div class="panel-body" id="hodClaimDetailJs">
                 <div class="row p-2">
@@ -59,11 +59,20 @@
                                             @foreach ($personals as $personal)
                                                 <tr>
                                                     <td><a data-bs-toggle="modal" data-id="{{ $personal->id }}" id="btn-view" class="btn btn-primary btn-sm">View</a></td>
-                                                    <td>{{ date('Y-m-d', strtotime($personal->created_at)) ?? '-' }}</td>
+                                                    <td>{{ date('Y-m-d', strtotime($personal->applied_date)) ?? '-' }}</td>
                                                     <td>{{ $personal->claim_catagory_name ?? '-' }}</td>
                                                     <td>{{ $personal->amount ?? '-' }}</td>
                                                     <td>{{ $personal->claim_desc ?? '-' }}</td>
-                                                    <td><a href="/storage/{{ $personal->file_upload ?? '-' }}">{{ $personal->file_upload ?? '-' }}</a></td>
+                                                    <td>
+                                                        @if(!empty($personal->file_upload))
+                                                        @php
+                                                        $filenames = explode(',', $personal->file_upload);
+                                                        @endphp
+                                                        @foreach($filenames as $filename)
+                                                        <a href="/storage/PersonalFile/{{ $filename }}" target="_blank">{{ $filename }}</a><br>
+                                                        @endforeach
+                                                        @endif
+                                                    </td>
                                                 </tr>
                                             @endforeach
                                         @endif
@@ -92,19 +101,39 @@
                                                         @if ($travel->parking)
                                                             <a data-bs-toggle="modal" data-id="{{ $travel->id }}" id="btn-view-claim" class="btn btn-primary btn-sm travel">View</a>
                                                         @else
-                                                            <a data-bs-toggle="modal" data-id="{{ $travel->id }}" id="btn-view-subsistence" class="btn btn-primary btn-sm travel">View
-                                                            </a>
+                                                            <a data-bs-toggle="modal" data-id="{{ $travel->id }}" id="btn-view-subsistence" class="btn btn-primary btn-sm travel">View</a>
                                                         @endif
                                                     </td>
-                                                    <td>{{ $travel->travel_date ?? '-' }}</td>
+                                                    <td>{{ isset($travel->travel_date) ? $travel->travel_date : date('Y-m-d', strtotime($travel->start_date)) }}</td>
                                                     <td>{{ $travel->project->project_name ?? '-' }}</td>
                                                     <td>{{ $travel->type_claim ?? '-' }}</td>
-                                                    <td>{{ $travel->total ?? '-' }}</td>
+                                                    <td>{{ $travel->total ??$travel->amount ??  '-' }}</td>
                                                     <td>{{ $travel->desc ?? '-' }}</td>
-                                                    <td><a href="/storage/{{ $travel->file_upload ?? '-' }}">{{ $travel->file_upload ?? '-' }}</a></td>
+                                                    <td>
+                                                        @if ($travel->type_claim === 'travel')
+                                                            @if(!empty($travel->file_upload))
+                                                                @php
+                                                                $filenames = explode(',', $travel->file_upload);
+                                                                @endphp
+                                                                @foreach($filenames as $filename)
+                                                                    <a href="/storage/TravelFile/{{ $filename }}" target="_blank">{{ $filename }}</a><br>
+                                                                @endforeach
+                                                            @endif
+                                                        @else
+                                                            @if(!empty($travel->file_upload))
+                                                                @php
+                                                                $filenames = explode(',', $travel->file_upload);
+                                                                @endphp
+                                                                @foreach($filenames as $filename)
+                                                                    <a href="/storage/SubFile/{{ $filename }}" target="_blank">{{ $filename }}</a><br>
+                                                                @endforeach
+                                                            @endif
+                                                        @endif
+                                                    </td>
                                                 </tr>
                                             @endforeach
                                         @endif
+
                                     </tbody>
                                 </table>
                             </div>

@@ -1,4 +1,5 @@
 <div class="tab-pane fade active show" id="default-tab-1">
+<form id="approveAllForm">
     <table id="activeTable" class="table table-striped table-bordered align-middle">
         <thead>
             <tr>
@@ -19,7 +20,8 @@
                 @foreach ($claims as $claim)
                     @if ($claim->supervisor == 'recommend' && $claim->hod == '')
                         <tr>
-                        <td style="text-align: center"><input class="form-check-input" type="checkbox" />
+                        <td width="1%" class="fw-bold text-dark" style="text-align: center"><input class="form-check-input" value="{{$claim->id}}" name="id[]" type="checkbox" id="checkbox1" /></td>
+
                             <td>
                                 <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle"><i class="fa fa-cogs"></i> Action <i class="fa fa-caret-down"></i></a>
                                 <div class="dropdown-menu">
@@ -71,4 +73,5 @@
             </tr>
         </tfoot>
     </table>
+    </form>
 </div>
