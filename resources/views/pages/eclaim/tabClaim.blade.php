@@ -62,7 +62,7 @@
                                         <div class="dropdown-menu dropdown-menu-end">
                                             <a href="/monthClaimEditView/edit/month/{{ $claim->id }}" class="dropdown-item">Update Claim</a>
                                             <div class="dropdown-divider"></div>
-                                            <a href="javascript:;" class="dropdown-item">Cancel Claim</a>
+                                            <!-- <a data-id="{{ $claim->id }}" class="dropdown-item buttonCancel">Cancel Claim</a> -->
                                         </div>
                                     @elseif ($claim->status == 'rejected')
                                         <a href="javascript:;" class="btn btn-primary btn-sm">Action</a>
@@ -78,7 +78,7 @@
                                             <!-- <a href="/eclaim/viewmyclaim" class="dropdown-item">View Claim</a> -->
                                             <!-- <a href="javascript:;" class="dropdown-item">Update Claim</a> -->
                                             <div class="dropdown-divider"></div>
-                                            <a href="javascript:;" class="dropdown-item">Cancel Claim</a>
+                                            <a data-id="{{ $claim->id }}" class="dropdown-item buttonCancel">Cancel Claim</a>
                                         </div>
                                     @elseif ($claim->status == 'paid')
                                         <a href="javascript:;" class="btn btn-primary btn-sm">Action</a>

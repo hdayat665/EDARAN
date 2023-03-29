@@ -25,7 +25,7 @@
 
                                 </div>
                                 <div class="col-md-9">
-                                    <input readonly type="text" class="form-control" value="{{ $ca->id ?? '-' }}">
+                                    <input readonly type="text" class="form-control" value="CA-{{ $ca->id ?? '-' }}">
                                 </div>
                             </div>
                             <div class="row p-2">
@@ -42,7 +42,7 @@
 
                                 </div>
                                 <div class="col-md-9">
-                                    <input readonly type="text" class="form-control" value="{{ '-' }}">
+                                    <input readonly type="text" class="form-control" value="{{ getModeOfTransport($ca->mode_of_transport->tranport_type) ?? '-' }}">
                                 </div>
                             </div>
                             <div class="row p-2">
@@ -68,7 +68,7 @@
 
                                 </div>
                                 <div class="col-md-9">
-                                    <input readonly type="text" class="form-control" value="{{ $ca->destination ?? '-' }}">
+                                    <input readonly type="text" class="form-control" value="{{ getProjectLocation($ca->project_location_id)->location_name ?? $ca->destination ?? '-' }}">
                                 </div>
                             </div>
                             <div class="row p-2">
@@ -145,7 +145,7 @@
                                     <label class="form-label col-form-label">Toll/Parking :</label>
                                 </div>
                                 <div class="col-md-3">
-                                    <input readonly type="text" class="form-control" {{ $ca->mode_of_transport->toll ?? 0 }}>
+                                    <input readonly type="text" class="form-control" value="{{ $ca->mode_of_transport->toll ?? 0 }}">
                                 </div>
                             </div>
                             <div class="row p-2">
@@ -235,13 +235,16 @@
             </div>
             <div class="row p-2">
                 <div class="col align-self-start">
-                    <a href="/cashAdvanceApproverView" class="btn btn-light" style="color: black;" type="submit"><i class="fa fa-arrow-left"></i> Back</a>
+                    <a href="javascript:history.back()" class="btn btn-light" style="color: black;" type="submit"><i class="fa fa-arrow-left"></i> Back</a>
                 </div>
                 <div class="col d-flex justify-content-end">
+                @if ($ca->f_recommender == 'recommend')
+                    @else
                     <a class="btn btn-secondary" style="color: black" type="submit"> Cancel</a> &nbsp;
                     <a href="javascript:;" class="btn btn-warning" style="color: black" data-bs-toggle="modal" data-bs-target="#modalamend">Amend</a> &nbsp;
                     <a href="javascript:;" class="btn btn-danger" style="color: black" data-bs-toggle="modal" data-bs-target="#modalreject"> Reject</a> &nbsp;
                     <a class="btn btn-lime" id="approveButton" data-id="{{ $ca->id }}" style="color: black" type="submit"> Approve</a>
+                    @endif 
                 </div>
             </div>
         </div>

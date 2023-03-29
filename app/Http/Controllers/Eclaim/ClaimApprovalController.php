@@ -349,9 +349,9 @@ class ClaimApprovalController extends Controller
         $mcs = new ClaimApprovalService;
 
         $data['ca'] = $mcs->cashAdvanceApproverDetail($id);
-
+        $data['mode'] = $mcs->cashAdvanceApproverModeTransport($id);
         // 1 other outside 2 other non outside 3 project outside 4 project non outside
-
+        //pr($data['mode']);
         if ($type == 1) {
             $view = 'projectOutside';
         } elseif ($type == 2) {
@@ -392,6 +392,7 @@ class ClaimApprovalController extends Controller
         $mcs = new ClaimApprovalService;
 
         $result = $mcs->cashAdvanceFcheckerDetail($id);
+        $data['checkers'] = getFinanceChecker();
         $data['ca'] = $result['general'];
         $data['check'] = $result['check'];
         // pr($data['check']);

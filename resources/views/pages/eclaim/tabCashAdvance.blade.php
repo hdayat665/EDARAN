@@ -47,6 +47,11 @@
                                         <a href="/viewCashAdvance/{{ $cashClaim->id }}" class="dropdown-item">View Claim</a>
                                         <!-- <a href="/editCashAdvance/{{ $cashClaim->id }}" class="dropdown-item">Update Claim</a> -->
                                     </div>
+                                @elseif ($cashClaim->status == 'cancelled')
+                                    <div class="dropdown-menu dropdown-menu-end">
+                                        <a href="/viewCashAdvance/{{ $cashClaim->id }}" class="dropdown-item">View Claim</a>
+                                        <!-- <a href="/editCashAdvance/{{ $cashClaim->id }}" class="dropdown-item">Update Claim</a> -->
+                                    </div>
                                 @elseif ($cashClaim->status == 'paid' || $cashClaim->status == 'reject')
                                     <div class="dropdown-menu dropdown-menu-end">
                                         <a href="/viewCashAdvance/{{ $cashClaim->id }}" class="dropdown-item">View Claim</a>

@@ -33,15 +33,17 @@
                                 <div class="dropdown-divider"></div>
                                 <a href="javascript:;" id="" data-id="" class="dropdown-item"><i class="fa fa-times" aria-hidden="true"></i> Cancel</a> -->
                             </div>
-                        <td>{{ $ca->id }}</td>
+                        <td>CA-{{ $ca->id }}</td>
+
                         <td>{{ $ca->userProfile->fullName ?? '-' }}</td>
-                        <td>{{ getCashAdvanceType($ca->type) ?? '-' }}</td>
-                        <td>{{ $ca->created_at ?? '-' }}</td>
+                        <td>{{ getCashAdvanceType($ca->type) ?? 'N/A' }}</td>
+                        <td>{{ date('Y-m-d', strtotime($ca->created_at)) ?? 'N/A' }}</td>
                         <td>{{ $ca->travel_date ?? '-' }}</td>
-                        <td>{{ $ca->amount ?? '-' }}</td>
+                        <td>MYR {{  $ca->mode_of_transport->max_total ?? $ca->amount }}</td>
                         <td>{{ $ca->status ?? '-' }}</td>
-                        <td>{{ $ca->clear_date ?? '-' }}</td>
+                        <td>{{ date('Y-m-d', strtotime($ca->clear_date)) ?? 'N/A' }}</td>
                         <td>{{ $ca->pv_number ?? '-' }}</td>
+
                     </tr>
                 @endif
             @endforeach

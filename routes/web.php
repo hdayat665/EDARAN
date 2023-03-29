@@ -555,6 +555,7 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('/approveAppealMtc/{id}', 'approveAppealMtc');
             Route::post('/rejectAppealMtc/{id}', 'rejectAppealMtc');
             Route::post('/cancelGNC/{id}', 'cancelGNC');
+            Route::post('/cancelMTC/{id}', 'cancelMTC');
         });
 
         Route::controller(generalClaimController::class)->group(function () {

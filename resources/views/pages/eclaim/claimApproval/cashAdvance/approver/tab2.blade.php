@@ -17,7 +17,7 @@
             @foreach ($cas as $ca)
                 @if ($ca->approver == 'recommend')
                     <tr>
-                        <td style="text-align: center"><input class="form-check-input" type="checkbox" />
+                        
                         <td>
                             <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle"><i class="fa fa-cogs"></i> Action <i class="fa fa-caret-down"></i></a>
                             <div class="dropdown-menu">
@@ -32,12 +32,13 @@
                                 <div class="dropdown-divider"></div>
                                 <a href="javascript:;" id="" data-id="" class="dropdown-item"><i class="fa fa-times" aria-hidden="true"></i> Cancel</a> -->
                             </div>
+                        <td>CA-{{ $ca->id }}</td>
                         <td>{{ $ca->userProfile->fullName ?? '-' }}</td>
-                        <td>{{ getCashAdvanceType($ca->type) ?? '-' }}</td>
-                        <td>{{ $ca->created_at ?? '-' }}</td>
-                        <td>{{ $ca->travel_date ?? '-' }}</td>
-                        <td>{{ $ca->amount ?? '-' }}</td>
-                        <td>{{ $ca->updated_at ?? '-' }}</td>
+                        <td>{{ getCashAdvanceType($ca->type) ?? 'N/A' }}</td>
+                        <td>{{ date('Y-m-d', strtotime($ca->created_at)) ?? 'N/A' }}</td>
+                        <td>{{ $ca->travel_date ?? 'N/A' }}</td>
+                        <td>MYR {{  $ca->mode_of_transport->max_total ?? $ca->amount }}</td>
+                        <td>{{ date('Y-m-d', strtotime($ca->updated_at)) ?? '-' }}</td>
                         <td>{{ $ca->status ?? '-' }}</td>
                     </tr>
                 @endif

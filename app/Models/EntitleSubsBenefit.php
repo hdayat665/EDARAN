@@ -12,4 +12,9 @@ class EntitleSubsBenefit extends Model
     protected $table = 'entitle_subs_benefit';
 
     protected $guarded = [];
+
+    public function EntitleGroup()
+    {
+        return $this->belongsTo(EntitleGroup::class, 'entitle_id', 'id');
+    }
 }

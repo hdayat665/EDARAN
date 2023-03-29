@@ -22,7 +22,7 @@
                                 <div class="dropdown-divider"></div>
                                 <a href="javascript:;" id="generatePv" data-id="{{ $ca->id }}" class="dropdown-item"><i class="fa fa-check" aria-hidden="true"></i> Generate PV </a>
                             </div>
-                        <td>{{ $ca->id ?? '-' }}</td>
+                        <td>CA-{{ $ca->id }}</td>
                         <td>{{ $ca->userProfile->fullName ?? '-' }}</td>
                         <td>{{ getCashAdvanceType($ca->type) ?? '-' }}</td>
                     </tr>
