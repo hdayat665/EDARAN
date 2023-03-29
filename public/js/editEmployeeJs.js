@@ -2637,14 +2637,14 @@ $('input[name="address_type[]"]').on('change', function() {
             
             // Specify validation rules
             rules: {
-                //eclaimrecommender: "required",
+                eclaimrecommender: "required",
                 eclaimapprover: "required",
                 
                 
             },
 
             messages: {
-                //eclaimrecommender: "Please Choose Recommender",
+                eclaimrecommender: "Please Choose Recommender",
                 eclaimapprover: "Please Choose Approver",
             },
 
@@ -2750,7 +2750,7 @@ $('input[name="address_type[]"]').on('change', function() {
             // Specify validation rules
             rules: {
                 
-                //eleaverecommender: "required",
+                eleaverecommender: "required",
                 eleaveapprover: "required",
                 
                 
@@ -2758,7 +2758,7 @@ $('input[name="address_type[]"]').on('change', function() {
 
             messages: {
                 
-                //eleaverecommender: "Please Choose Recommender",
+                eleaverecommender: "Please Choose Recommender",
                 eleaveapprover: "Please Choose Approver",
             },
 
