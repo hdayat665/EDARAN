@@ -53,8 +53,7 @@
                                         </div>
                                         <div class="col-md-9">
                                             <select class="form-select" id="year" name="year">
-                                                <option class="form-label" value="" selected>Please
-                                                    Select</option>
+                                                <option class="form-label" value="" selected>PLEASE CHOOSE</option>
                                                 <option class="form-label" value="2022">2022</option>
                                                 <option class="form-label" value="2023">2023</option>
                                                 
@@ -67,8 +66,7 @@
                                         </div>
                                         <div class="col-md-9">
                                             <select class="form-select" id="month" name="month">
-                                                <option class="form-label" value="" selected>Please
-                                                    Select</option>
+                                                <option class="form-label" value="" selected>PLEASE CHOOSE</option>
                                                 <option class="form-label" value="January">January</option>
                                                 <option class="form-label" value="February">February</option>
                                                 <option class="form-label" value="March">March</option>
@@ -101,8 +99,7 @@
                                         </div>
                                         <div class="col-md-9">
                                             <select class="form-select" id="claimcategory" name="claim_category">
-                                                <option class="form-label" value="" selected>Please
-                                                    Select</option>
+                                                <option class="form-label" value="" selected>PLEASE CHOOSE</option>
                                                 {{ $categorys = getClaimCategory() }}
                                                 @foreach ($categorys as $category)
                                                     <option value="{{ $category->id }}">{{ $category->claim_catagory }}</option>
@@ -117,8 +114,7 @@
                                         </div>
                                         <div class="col-md-9">
                                             <select class="form-select" id="contentLabel" name="claim_category_detail">
-                                                <option class="form-label" value="Please Select" selected>Please
-                                                    Select</option>
+                                                <option class="form-label" value="Please Select" selected>PLEASE CHOOSE</option>
                                             </select>
                                         </div>
                                     </div>

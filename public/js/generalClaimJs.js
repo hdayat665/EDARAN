@@ -55,7 +55,7 @@ $(document).ready(function () {
             },
         });
     });
-
+        
         $(document).ready(function() {
         $('#amount').on('input', function() {
             var value = $(this).val();
