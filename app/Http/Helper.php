@@ -29,6 +29,7 @@ use App\Models\Users;
 use App\Models\UserRole;
 use App\Models\TransportMillage;
 use App\Models\EclaimGeneral;
+use App\Models\PermissionRole;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -2156,6 +2157,20 @@ if (!function_exists('getEmployeeDetail')) {
     function getEmployeeDetail($id = '')
     {
         $data = Employee::where([['tenant_id', Auth::user()->tenant_id], ['user_id', $id]])->first();
+
+        if (!$data) {
+            $data = [];
+        }
+
+        return $data;
+    }
+}
+
+
+if (!function_exists('getPermissionByRoleId')) {
+    function getPermissionByRoleId($id = '')
+    {
+        $data = PermissionRole::select('permission_code')->where([['tenant_id', Auth::user()->tenant_id], ['role_id', $id]])->get();
 
         if (!$data) {
             $data = [];

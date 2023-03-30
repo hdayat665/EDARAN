@@ -29,9 +29,11 @@ use App\Models\TypeOfLogs;
 use App\Models\Unit;
 use App\Models\leaveEntitlementModel;
 use App\Models\UserProfile;
-use App\Models\Userrole;
+use App\Models\UserRole;
 use App\Models\holidayModel;
 use App\Models\leavetypesModel;
+use App\Models\PermissionRole;
+use App\Models\Users;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Symfony\Component\Console\Input\Input;
@@ -72,15 +74,36 @@ class SettingService
 
     public function updateRole($r, $id)
     {
-        $data1 = Auth::user()->username;
-        $data2 = date('Y-m-d h:m:s');
+        $modifiedBy = Auth::user()->username;
+        $modifiedTime = date('Y-m-d h:m:s');
+
+        $input = $r->input();
 
         $updateData = [
-            'modifiedBy' => $data1,
-            'modifiedTime' => $data2
+            'modifiedBy' => $modifiedBy,
+            'modifiedTime' => $modifiedTime
         ];
 
         Role::where('id', $id)->update($updateData);
+
+        if (!empty($input['permissions'])) {
+
+            PermissionRole::where('role_id', $id)->delete();
+
+            $permissions = explode(',', $input['permissions']);
+
+            foreach ($permissions as $permission) {
+                $permissionRole = [
+                    'tenant_id' => Auth::user()->tenant_id,
+                    'role_id' => $id,
+                    'permission_code' => $permission,
+                    'modified_by' => $modifiedBy,
+                    'modified_time' => $modifiedTime
+                ];
+
+                PermissionRole::create($permissionRole);
+            }
+        }
 
         if ($r->input('userName')) {
             $data1 = $r->input('userName');
@@ -89,15 +112,21 @@ class SettingService
 
             $insertData = [
                 'tenant_id' => Auth::user()->tenant_id,
-                'role_id' => $data3,
                 'up_user_id' => $data1,
-                'added_by' => Auth::user()->id,
                 'added_time' => $data2,
+                'role_id' => $data3,
+                'added_by' => Auth::user()->id,
                 'modified_by' => '',
                 'modified_time' => ''
             ];
 
             UserRole::create($insertData);
+
+            $usersData = [
+                'role_id' => $data3,
+            ];
+
+            Users::where('id', $data1)->update($usersData);
         }
 
         $data['status'] = config('app.response.success.status');
@@ -1085,11 +1114,11 @@ class SettingService
     public function myrolestaff()
     {
         $data =
-            UserProfile::where('userprofile.tenant_id', Auth::user()->tenant_id)
+            UserProfile::where('userProfile.tenant_id', Auth::user()->tenant_id)
             ->whereNull('role_user.up_user_id')
-            ->leftJoin('employment', 'userprofile.user_id', '=', 'employment.user_id')
-            ->leftJoin('role_user', 'userprofile.user_id', '=', 'role_user.up_user_id')
-            ->select('userprofile.user_id', 'userprofile.fullname')
+            ->leftJoin('employment', 'userProfile.user_id', '=', 'employment.user_id')
+            ->leftJoin('role_user', 'userProfile.user_id', '=', 'role_user.up_user_id')
+            ->select('userProfile.user_id', 'userProfile.fullname')
             ->get();
 
 
@@ -2554,6 +2583,20 @@ class SettingService
             $data['title'] = config('app.response.success.title');
             $data['msg'] = 'Success Update Status';
         }
+
+        return $data;
+    }
+
+    public function getUserByRoleId($id = '')
+    {
+        $data = UserRole::with('userProfile', 'addedBy', 'modifydBy')->where([['tenant_id', Auth::user()->tenant_id], ['role_id', $id]])->get();
+
+        return $data;
+    }
+
+    public function getPermissionByRoleId($id = '')
+    {
+        $data = PermissionRole::where([['tenant_id', Auth::user()->tenant_id], ['role_id', $id]])->get();
 
         return $data;
     }

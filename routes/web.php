@@ -401,6 +401,8 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('/updateEntitleDetail/{id}', 'updateEntitleDetail');
             Route::post('/updateApprovalConfig/{id}', 'updateApprovalConfig');
             Route::post('/updateApprovalConfigDetail/{id}', 'updateApprovalConfigDetail');
+            Route::get('/getUserByRoleId/{id}', 'getUserByRoleId');
+            Route::get('/getPermissionByRoleId/{id}', 'getPermissionByRoleId');
         });
 
         Route::controller(OrganizationController::class)->group(function () {
