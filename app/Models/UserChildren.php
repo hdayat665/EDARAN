@@ -48,6 +48,8 @@ class UserChildren extends Authenticatable
         'birthID',
         'idFile',
         'okuFile',
+        'okuStatus',
+        'okuNo',
     ];
 }
 

@@ -35,10 +35,10 @@
                             </div>
                         <td>{{ $ca->userProfil4e->fullName ?? '-' }}</td>
                         <td>{{ getCashAdvanceType($ca->type) ?? '-' }}</td>
-                        <td>{{ $ca->created_at ?? '-' }}</td>
-                        <td>{{ $ca->travel_date ?? '-' }}</td>
-                        <td>{{ $ca->amount ?? '-' }}</td>
-                        <td>{{ $ca->updated_at ?? '-' }}</td>
+                        <td>{{ date('Y-m-d', strtotime($ca->created_at)) ?? 'N/A' }}</td>
+                        <td>{{ $ca->travel_date ?? 'N/A' }}</td>
+                        <td>MYR {{  $ca->mode_of_transport->max_total ?? $ca->amount }}</td>
+                        <td>{{ date('Y-m-d', strtotime($ca->updated_at)) ?? '-' }}</td>
                         <td>{{ $ca->status ?? '-' }}</td>
                         <td>{{ $ca->remark ?? '-' }}</td>
                     </tr>

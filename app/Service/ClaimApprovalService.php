@@ -2,6 +2,7 @@
 
 namespace App\Service;
 
+use App\Models\ApprovalConfig;
 use App\Models\ApprovelRoleGeneral;
 use App\Models\CashAdvanceDetail;
 use App\Models\DomainList;
@@ -12,10 +13,11 @@ use App\Models\GeneralClaim;
 use App\Models\GeneralClaimDetail;
 use App\Models\PersonalClaim;
 use App\Models\TravelClaim;
+use App\Models\ModeOfTransport;
 use Illuminate\Support\Facades\Auth;
 
 class ClaimApprovalService
-{ 
+{
 
     public function getGeneralClaim($type = '')
     {
@@ -178,7 +180,7 @@ class ClaimApprovalService
     {
         $input = $r->input();
 
-        
+
         // if (in_array($status, ['reject', 'amend'])) {
         //     $input['status'] = $status;
         // }
@@ -357,36 +359,36 @@ class ClaimApprovalService
     public function getPersonalById($id = '')
     {
         $data = PersonalClaim::where('personal_claim.id', $id)
-        ->leftJoin('claim_category', 'personal_claim.claim_category', '=', 'claim_category.id')
-        ->select('personal_claim.*', 'claim_category.claim_catagory as claim_category_name')
-        ->with('claim_category_content')
-        ->first();
-        
+            ->leftJoin('claim_category', 'personal_claim.claim_category', '=', 'claim_category.id')
+            ->select('personal_claim.*', 'claim_category.claim_catagory as claim_category_name')
+            ->with('claim_category_content')
+            ->first();
+
         return $data;
     }
 
     public function getTravelById($id = '')
     {
         $data = TravelClaim::where('travel_claim.id', $id)
-        ->leftJoin('project', 'travel_claim.project_id', '=', 'project.id')
-        ->select('travel_claim.*', 'project.project_name')
-        ->first();
-        
+            ->leftJoin('project', 'travel_claim.project_id', '=', 'project.id')
+            ->select('travel_claim.*', 'project.project_name')
+            ->first();
+
         return $data;
     }
 
     public function getGncById($id = '')
     {
         $data = GeneralClaimDetail::where('general_claim_details.id', $id)
-        ->leftJoin('claim_category', 'general_claim_details.claim_category', '=', 'claim_category.id')
-        ->select('general_claim_details.*', 'claim_category.claim_catagory as claim_category_name')
-        ->with('claim_category_content')
-        ->first();
+            ->leftJoin('claim_category', 'general_claim_details.claim_category', '=', 'claim_category.id')
+            ->select('general_claim_details.*', 'claim_category.claim_catagory as claim_category_name')
+            ->with('claim_category_content')
+            ->first();
 
         if (!$data) {
             $data = [];
         }
-        
+
         return $data;
     }
 
@@ -413,7 +415,7 @@ class ClaimApprovalService
         $claim = CashAdvanceDetail::where('id', $id)->first();
 
         $pvNo = [
-            'pv_number' => 'PV-' . $claim->claim_type . '-' . $claim->id
+            'pv_number' => 'PV-' . 'CA' . '-' . $claim->id
         ];
 
         CashAdvanceDetail::where('id', $id)->update($pvNo);
@@ -448,7 +450,15 @@ class ClaimApprovalService
 
         return $data;
     }
+    public function cashAdvanceApproverModeTransport($id = '')
+    {
+        $ca[0] = ['tenant_id', Auth::user()->tenant_id];
+        $ca[2] = ['cash_advance_id', $id];
 
+        $data = ModeOfTransport::where($ca)->first();
+
+        return $data;
+    }
     public function updateStatusCashAdvance($r, $id, $status, $stage)
     {
         $input = $r->input();

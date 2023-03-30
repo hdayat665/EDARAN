@@ -2,7 +2,7 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="add-parent">Add Family Details</h5>
+                <h5 class="modal-title" id="add-parent">New Family</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -50,7 +50,7 @@
                             {{-- new --}}
                             <div class="row">
                                 <div class="col-sm-6">
-                                    <label for="dob" class="form-label" style="color: red;">ID Attachment</label>
+                                    <label for="dob" class="form-label">ID Attachment</label>
                                     <input type="file" id="idAttachment" name="idFile" class="form-control" aria-describedby="">
                                 </div>
                             </div>
@@ -111,7 +111,7 @@
                     </div>
                     <div class="row p-2">
                         <div class="col-sm-6">
-                            <label for="passport" class="form-label">Contact Number</label>
+                            <label for="passport" class="form-label">Phone Number</label>
                             <input type="text" id="contactNoparent" name="contactNo" class="form-control" aria-describedby="passport" placeholder="00000000000">
                         </div>
                         <div class="col-sm-6">
@@ -131,13 +131,13 @@
                                 <div class="col-sm-6 ">
                                     <div class="form-check form-switch align-right">
                                         <input class="form-check-input okuCheck5 " value="" type="checkbox" name=""  id="">
-                                        <label class="form-check-label" for="citizen" style="color: red;">
+                                        <label class="form-check-label" for="citizen">
                                             OKU?
                                         </label>
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
-                                    <label for="lastname" class="form-label" style="color: red;">OKU Card Number*</label>
+                                    <label for="lastname" class="form-label">OKU Card Number*</label>
                                     <input type="number" id="okucard5" name="okuNo" value="" class="form-control" readonly placeholder="OKU CARD NUMBER">
                                     
                                 </div>
@@ -146,7 +146,7 @@
                         <div class="col-sm-6">
                             <div class="row">
                                 <div class="col-sm-6">
-                                    <label for="dob" class="form-label" style="color: red;">OKU Attachment*</label>
+                                    <label for="dob" class="form-label">OKU Attachment*</label>
                                     <input type="file" id="okuattach5" name="okuFile" class="form-control" style="pointer-events: none" aria-describedby="" >
                                 </div>
                             </div>

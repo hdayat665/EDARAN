@@ -316,5 +316,13 @@ class myClaimController extends Controller
 
         return response()->json($result);
     }
+    public function cancelMTC($id = '')
+    {
+        $ps = new myClaimService;
+
+        $result = $ps->cancelMTC($id);
+
+        return response()->json($result);
+    }
     
 }

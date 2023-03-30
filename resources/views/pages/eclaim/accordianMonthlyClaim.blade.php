@@ -1,4 +1,4 @@
-<style>
+<style>personal
     /* Set the size and position of the autocomplete input field */
     #autocomplete {
       height: 30px;
@@ -19,7 +19,7 @@
             <h2 class="accordion-header" id="headingOne">
                 <button class="accordion-button bg-white-500 text-black px-3 py-10px pointer-cursor " type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true"
                     aria-controls="collapseOne">
-                    <label class="form-label">Personal Claims</label>
+                    <label class="form-label">Others Claim</label>
                 </button>
             </h2>
             <form id="personalForm">
@@ -43,8 +43,7 @@
                             </div>
                             <div class="col-md-8">
                                 <select class="form-select" id="claimcategory" name="claim_category">
-                                    <option class="form-label" value="Please Select" selected>Please
-                                        Select</option>
+                                    <option class="form-label" value="" selected>PLEASE CHOOSE</option>
                                     {{ $categorys = getClaimCategoryMtc() }}
                                     @foreach ($categorys as $category)
                                         <option value="{{ $category->id }}">{{ $category->claim_catagory }}</option>
@@ -59,7 +58,7 @@
                             </div>
                             <div class="col-md-8">
                                 <select class="form-select" id="contentLabel" name="claim_category_detail">
-                                    <option class="form-label" value="Please Select" selected>Please
+                                    <option class="form-label" value="" selected>Please
                                         Select</option>
                                 </select>
                             </div>
@@ -179,7 +178,7 @@
                             <div class="col-md-8">
                                 <select class="form-select" id="type_transport" name="type_transport">
                                     <option class="form-label" value="" selected>
-                                        Please Select</option>
+                                        PLEASE CHOOSE</option>
                                     <option class="form-label" value="Personal Car"> Personal
                                         Car</option>
                                     <option class="form-label" value="Personal Motocycle">Personal
@@ -195,12 +194,12 @@
                         </div>
                         <div class="row p-2">
                             <div class="col-md-4">
-                                <label class="form-label">Location Start</label>
+                                <label class="form-label">Start Location</label>
                             </div>
                             <div class="col-md-8">
                                 <select class="form-select" id="ls" name="location_start">
                                     <option class="form-label" value="" selected>
-                                        Please Select</option>
+                                    PLEASE CHOOSE</option>
                                     <option class="form-label">Home
                                     </option>
                                     <option class="form-label">Office
@@ -231,10 +230,10 @@
                         </div>
                         <div class="row p-2">
                             <div class="col-md-4">
-                                <label class="form-label">Address Start</label>
+                                <label class="form-label">Start Address</label>
                             </div>
                             <div class="col-md-8"> 
-                                <input type="text" class="form-control" name="address_start" id="autocomplete" placeholder="Enter a location">
+                                <input type="text" class="form-control" name="address_start" id="autocomplete" placeholder="Enter a Location">
                             </div>
                         </div>
                         <div class="row p-2">
@@ -244,8 +243,7 @@
                             <div class="col-md-8">
                                 
                                 <select class="form-select" id="dest" name="location_end">
-                                    <option class="form-label">
-                                        Please Select</option>
+                                    <option class="form-label" value="">PLEASE CHOOSE</option>
                                     <option class="form-label">Home
                                     </option>
                                     <option class="form-label">Office
@@ -299,7 +297,7 @@
                                 <label class="form-label">Destination Address</label>
                             </div>
                             <div class="col-md-8">
-                                <input type="text" class="form-control" name="location_address" id="autocomplete2" placeholder="Enter a location">
+                                <input type="text" class="form-control" name="location_address" id="autocomplete2" placeholder="Enter a Location">
 
                             </div>
                             
@@ -404,8 +402,7 @@
                 <h2 class="accordion-header" id="headingThree">
                     <button class="accordion-button bg-white-500 text-black px-3 py-10px pointer-cursor collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree"
                         aria-expanded="false" aria-controls="collapseThree">
-                        <label class="form-label">Subsistence Allowance &
-                            Accommodation</label>
+                        <label class="form-label">Subsistence Allowance & Accommodation</label>
                     </button>
                 </h2>
                 <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
@@ -417,7 +414,7 @@
                             <div class="col-md-8">
                                 <select class="form-select" id="ca" name="claim_for">
                                     <option class="form-label" value="" selected>
-                                        Please Select</option>
+                                        PLEASE CHOOSE</option>
                                     <option class="form-label" value="1">With Cash
                                         Advance</option>
                                     <option class="form-label" value="2">Without Cash
@@ -536,7 +533,7 @@
                                 <div class="col-md-8">
                                     <select class="form-select" name="project_id">
                                         <option class="form-label" value="" selected>
-                                            Please Select</option>
+                                            PLEASE CHOOSE</option>
                                         <?php $projects = myProjectOnly(); ?>
                                         @foreach ($projects as $project)
                                             <option class="form-label" value="{{ $project->id }}">{{ $project->project_name }}</option>
@@ -693,7 +690,7 @@
         </div>
     </div>
 </div>
-<script src="https://maps.googleapis.com/maps/api/js?key=API_FOR_GOOGLE&libraries=places"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDhySfXJwwoMVqbaiioEs38eOi8UkN7_ow&libraries=places"></script>
 
 <script>
   function initAutocomplete() {

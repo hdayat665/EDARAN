@@ -2,7 +2,7 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="add-parent">Update Parent Details</h5>
+                <h5 class="modal-title" id="add-parent">Update Family</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -147,7 +147,7 @@
                     </div>
                     <div class="row p-2">
                         <div class="col-sm-6">
-                            <label for="passport" class="form-label">Contact Number</label>
+                            <label for="passport" class="form-label">Phone Number</label>
                             <input type="text" id="contactNoP1" name="contactNo" class="form-control" aria-describedby="passport" placeholder="00000000000">
                         </div>
                         <div class="col-sm-6">
@@ -223,7 +223,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-primary" id="editParent">Save</button>
+                <button type="button" class="btn btn-primary" id="editParent">Update</button>
             </div>
         </div>
     </div>

@@ -2,7 +2,7 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="add-children">Add Children Details</h5>
+                <h5 class="modal-title" id="add-children">New Children</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -38,8 +38,7 @@
                             <div class="row">
                                 <div class="col-sm-6 ">
                                     <div class="form-check form-switch align-right">
-                                    <!-- <input class="form-check-input partCheck" value="door3" type="checkbox" name="nonNetizen" {{($profile->nonNetizen ?? '') ? 'checked' : ''}} id="citizen"> -->
-                                        <input class="form-check-input partCheck7" value="" type="checkbox" name="nonCitizen" {{($children->nonCitizen ?? '') ? 'checked' : ''}} id="citizen">
+                                        <input class="form-check-input partCheck7" value="on" type="checkbox" name="nonCitizen"  id="citizen">
                                         <label class="form-check-label" for="citizen">
                                             Non-Citizen?
                                         </label>
@@ -47,7 +46,7 @@
                                 </div>
                                 <div class="col-sm-6">
                                     <label for="lastname" class="form-label">New Identification Number*</label>
-                                    <input type="number" id="idnumber4" name="idNo" value="" class="form-control" placeholder="000000000000">
+                                    <input type="number" id="idNoaddChild" name="idNo" value="" class="form-control" placeholder="000000000000">
                                     
                                 </div>
                             </div>
@@ -83,8 +82,8 @@
                                 </div>
                         <div class="col-sm-3">
                             <label for="issuing-country" class="form-label">Issuing Country*</label>
-                            <select class="form-select" name="issuingCountry" id="" style="text-transform:uppercase">
-                            <option value="MY" label="Malaysia" selected ></option>
+                            <select class="form-select" name="issuingCountry" id="passportcountrychildren" style="text-transform:uppercase" disabled>
+                            <option value="" label="PLEASE CHOOSE" selected></option>
                                 <optgroup id="country-optgroup-Americas" label="Americas">
                                     @foreach ($americass as $key => $america)
                                     <option value="{{$key}}">{{$america}}</option>
@@ -101,7 +100,7 @@
                     <div class="row p-2">
                          <div class="col-sm-3">
                             <label for="dob" class="form-label">Date Of Birth</label>
-                            <input type="text" id="dob4" name="DOB" class="form-control" aria-describedby="dob" readonly placeholder="YYYY/MM/DD">
+                            <input type="text" id="dob4" name="DOB" class="form-control" value="" aria-describedby="dob" readonly placeholder="YYYY/MM/DD">
                         </div>
                         <div class="col-sm-3">
                             <label for="age" class="form-label">Age</label>
@@ -110,7 +109,7 @@
 
                         <div class="col-sm-3">
                             <label for="gender" class="form-label">Gender</label>
-                            <select class="form-select" name="gender" id="childgender" style="text-transform:uppercase">
+                            <select class="form-select" name="gender" id="childgender" style="text-transform:uppercase" >
                             <?php $childgender = gender() ?>
                                 <option value="" label="PLEASE CHOOSE" selected="selected"></option>
                                 @foreach ($childgender as $key => $status)
@@ -121,7 +120,8 @@
                         <div class="col-sm-3">
                             <label for="issuing-country" class="form-label">Marital Status</label>
                             <select class="form-select" name="maritalStatus" id="" style="text-transform:uppercase">
-                                <option value="" label="PLEASE CHOOSE"></option>
+                                <?php $maritalStatus = getMaritalStatus() ?>
+                                <option value="" label="PLEASE CHOOSE" selected="selected"></option>
                                 @foreach ($maritalStatus as $key => $status)
                                 <option value="{{$key}}">{{$status}}</option>
                                 @endforeach
@@ -134,16 +134,15 @@
                             <div class="row">
                                 <div class="col-sm-6 ">
                                     <div class="form-check form-switch align-right">
-                                        <input class="form-check-input okuCheck3" type="checkbox" id="nonCitizen1" name="nonCitizen1" {{($children->nonCitizen1 ?? '') ? 'checked' : ''}}>
-                                       
-                                        <label class="form-check-label" for="citizen" >
+                                        <input class="form-check-input okuCheck3" type="checkbox" value="on" id="nonCitizen1" name="okuStatus">
+                                        <label class="form-check-label" for="OKU" >
                                             OKU?
                                         </label>
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <label for="lastname" class="form-label" >OKU Card Number*</label>
-                                    <input type="text" id="okucard3" name=""  value="" class="form-control" aria-describedby="" placeholder="OKU CARD NUMBER" readonly>
+                                    <input type="text" id="okucard3" name="okuNo"  value="" class="form-control" aria-describedby="" placeholder="OKU CARD NUMBER" readonly>
                                 </div>
                             </div>
                         </div>
