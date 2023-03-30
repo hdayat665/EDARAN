@@ -1165,6 +1165,27 @@ $(document).ready(function() {
                                 }
                             });
 
+                            var eventData = getEvents(eventId);
+                                eventData.done(function(data) {
+                                    var participants = data.participant.split(",");
+                                    var participantNames = data.participantNames.split(",");
+
+                                    var tableBody = $("#tableRowParticipant");
+                                    tableBody.empty(); // clear any existing rows in the table
+
+                                    for (var i = 0; i < participants.length; i++) {
+                                        var participantId = participants[i];
+                                        var participantName = participantNames[i];
+
+                                        var row = $("<tr></tr>");
+                                        row.append($("<td></td>").text(i + 1));
+                                        row.append($("<td></td>").text(participantName));
+
+                                        tableBody.append(row);
+                                    }
+                                });
+                            
+                            $("#participantlist").val(data.participantNames );
                             $("#event_name").val(data.event_name);
                             $("#editvenue").val(data.venue);
                             $("#starteventdateedit").val(data.start_date);
@@ -1495,6 +1516,7 @@ $(document).ready(function() {
                             // $("#addneweventparticipantedit").picker('remove', 112);
 
                             // console.log(data.participant);
+
                             participants = data.participant.split(",");
                             for (let i = 0; i < participants.length; i++) {
                                 const participant = participants[i];

@@ -1068,6 +1068,7 @@ if (!function_exists('getEmployee')) {
     }
 }
 
+
 if (!function_exists('getEmployeeNotInProject')) {
     function getEmployeeNotInProject($id = '')
     {
