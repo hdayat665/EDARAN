@@ -469,9 +469,6 @@
                                         <label class="form-label">Applied Date</label>
                                         <div class="input-group">
                                             <input type="text" class="form-control" id="datepicker-applied1" placeholder="yyyy-mm-dd" readonly/>
-                                                <div class="input-group-text">
-                                                <i class="fa fa-calendar"></i>
-                                                </div>
                                         </div>
                                     </div>
 
@@ -509,9 +506,6 @@
                                         <label class="form-label">Leave Date</label>
                                             <div class="input-group">
                                                 <input type="text" class="form-control" id="datepicker-leave1" readonly/>
-                                                    <div class="input-group-text">
-                                                        <i class="fa fa-calendar"></i>
-                                                    </div>
                                             </div>
                                     </div>
                                 </div>
@@ -546,18 +540,12 @@
                                         <label class="form-label">Start Date</label>
                                             <div class="input-group">
                                                 <input type="text" class="form-control" id="datepicker-start1"  readonly/>
-                                                    <div class="input-group-text">7
-                                                        <i class="fa fa-calendar"></i>
-                                                    </div>
                                             </div>
                                     </div>
                                     <div class="col-sm-6">
                                         <label class="form-label">End Date</label>
                                             <div class="input-group">
                                                 <input type="text" class="form-control" id="datepicker-end1"  readonly/>
-                                                    <div class="input-group-text">
-                                                        <i class="fa fa-calendar"></i>
-                                                    </div>
                                             </div>
                                     </div>
                                 </div>
@@ -625,10 +613,7 @@
                                     <div class="col-sm-6">
                                         <label class="form-label">Applied Date</label>
                                         <div class="input-group">
-                                            <input type="text" class="form-control" id="datepicker-applied2" placeholder="yyyy-mm-dd" readonly/>
-                                                <div class="input-group-text">
-                                                <i class="fa fa-calendar"></i>
-                                                </div>
+                                            <input type="text" class="form-control" id="datepicker-applied2" placeholder="yyyy-mm-dd" readonly/>              
                                         </div>
                                     </div>
 
@@ -668,9 +653,6 @@
                                         <label class="form-label">Leave Date</label>
                                             <div class="input-group">
                                                 <input type="text" class="form-control" id="datepicker-leave2" readonly/>
-                                                    <div class="input-group-text">
-                                                        <i class="fa fa-calendar"></i>
-                                                    </div>
                                             </div>
                                     </div>
                                 </div>
@@ -704,18 +686,12 @@
                                         <label class="form-label">Start Date</label>
                                             <div class="input-group">
                                                 <input type="text" class="form-control" id="datepicker-start2"  readonly/>
-                                                    <div class="input-group-text">7
-                                                        <i class="fa fa-calendar"></i>
-                                                    </div>
                                             </div>
                                     </div>
                                     <div class="col-sm-6">
                                         <label class="form-label">End Date</label>
                                             <div class="input-group">
                                                 <input type="text" class="form-control" id="datepicker-end2"  readonly/>
-                                                    <div class="input-group-text">
-                                                        <i class="fa fa-calendar"></i>
-                                                    </div>
                                             </div>
                                     </div>
                                 </div>

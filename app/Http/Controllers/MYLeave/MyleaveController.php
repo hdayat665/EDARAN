@@ -120,6 +120,15 @@ class MyleaveController extends Controller
 
         return $result;
     }
+    public function getuserleaveApprview($id = '')
+    {
+        $ms = new MyleaveService;
+
+        $result = $ms->getuserleaveApprview($id);
+        // dd($result);
+
+        return $result;
+    }
 
     public function getuserleaveApprhod($id = '')
     {
@@ -130,22 +139,40 @@ class MyleaveController extends Controller
 
         return $result;
     }
+    public function getuserleaveApprhodview($id = '')
+    {
+        $ms = new MyleaveService;
+
+        $result = $ms->getuserleaveApprhodview($id);
+        // dd($result);
+
+        return $result;
+    }
 
 
     //supervisor
 
 
-     public function leaveApprView()
+     public function leaveApprView(Request $r)
     {
-         $ms = new MyleaveService;
-
+        $ms = new MyleaveService;
         $data['leaveApprView'] = $ms->leaveApprview();
-        // $data['myleaveHistory'] = $ms->myleaveHistoryView();
-        // $data['types'] = $ms->datatype();
-        // dd($data['leaveApprView']);
+        $data['employer'] = $ms->idemployer();
+        $data['types'] = $ms->datatype();
+        $data['applydate'] = '';
+        $data['idemployer'] = '';
+        $data['type'] = '';
+
+        $input = $r->input();
+
+        if($input){
+            $data['leaveApprView'] = $ms->searleavaappr($r);
+            $data['applydate'] = $input['applydate'];
+            $data['idemployer'] = $input['idemployer'];
+            $data['type'] = $input['type'];
+        }
+
         return view('pages.myleave.leaveAppr',$data);
-       
-        
     }
 
     public function updatesupervisor(Request $r, $id)
@@ -170,17 +197,26 @@ class MyleaveController extends Controller
 
 
     //hod
-      public function leaveApprhodView()
+      public function leaveApprhodView(Request $r)
     {
-         $ms = new MyleaveService;
-
+        $ms = new MyleaveService;
         $data['leaveApprhodView'] = $ms->leaveApprhodView();
-        // $data['myleaveHistory'] = $ms->myleaveHistoryView();
-        // $data['types'] = $ms->datatype();
-        // dd($data['leaveApprView']);
+        $data['employer'] = $ms->idemployerhod();
+        $data['types'] = $ms->datatype();
+        $data['applydate'] = '';
+        $data['idemployer'] = '';
+        $data['type'] = '';
+
+        $input = $r->input();
+
+        if($input){
+            $data['leaveApprhodView'] = $ms->searApprhod($r);
+            $data['applydate'] = $input['applydate'];
+            $data['idemployer'] = $input['idemployer'];
+            $data['type'] = $input['type'];
+        }
+
         return view('pages.myleave.leaveApprhod',$data);
-       
-        
     }
 
      public function updatehod(Request $r, $id)

@@ -249,7 +249,12 @@ $(document).ready(function () {
             totalDays = dayDiff + 1;
         }
 
-        $("#select4").val(totalDays);
+        if (totalDays <= 0) {
+            $("#datepicker-end").val("");
+            $("#select4").val("");
+        } else {
+            $("#select4").val(totalDays);
+        }
     });
 
     $(document).ready(function () {
