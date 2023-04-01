@@ -29,7 +29,7 @@
                                 <div class="col-sm-3">
                                     <label for="emergency-firstname" class="form-label">Select Type of Leave</label>
                                     <select class="form-select" name="typelist">
-                                        <option value="" label="Please Choose "></option>
+                                        <option value="" label="PLEASE CHOOSE "></option>
                                             @foreach($types as $dt)
                                                 <option value="{{ $dt->id }}" {{ old('typeofleave') == $dt->id ? 'selected' : '' }}>{{ $dt->leave_types }}</option>
                                             @endforeach
@@ -40,7 +40,7 @@
                                 <div class="col-sm-3">
                                     <label for="emergency-firstname" class="form-label">Select By :</label>
                                     <select class="form-select" id="reportby" name="">
-                                        <option value="" selected>Please Select</option>
+                                        <option value="" selected>PLEASE CHOOSE</option>
                                         <option value="1">Department</option>
                                         <option value="2">Employee Name</option>
                                     </select>
@@ -50,7 +50,7 @@
                                 <div class="col-sm-3" >
                                     <label for="emergency-firstname" class="form-label">Department</label>
                                     <select class="form-select" name="department" id="department">
-                                        <option value="" label="Please Choose "></option>
+                                        <option value="" label="PLEASE CHOOSE "></option>
                                             @foreach($department as $d)
                                                 <option value="{{ $d->id }}" {{ old('department') == $d->id ? 'selected' : '' }}>{{ $d->departmentName }}</option>
                                             @endforeach
@@ -61,7 +61,7 @@
                                 <div class="col-sm-3">
                                     <label for="emergency-firstname" class="form-label">Select Employer</label>
                                     <select class="form-select" name="employer" id="employer">
-                                        <option value="" label="Please Choose "></option>
+                                        <option value="" label="PLEASE CHOOSE "></option>
                                             @foreach($employer as $de)
                                                 <option value="{{ $de->user_id }}" {{ old('employer') == $de->user_id ? 'selected' : '' }}>{{ $de->fullName }}</option>
                                             @endforeach
@@ -72,7 +72,7 @@
                                 <div class="col-sm-3">
                                     <label for="emergency-firstname" class="form-label">Select Status: </label>
                                     <select class="form-select" name="status">
-                                        <option value="">Please Select</option>
+                                        <option value="">PLEASE CHOOSE</option>
                                         <option value="1">Pending</option>
                                         <option value="2">Pending To Approved</option>
                                         <option value="3">Reject</option>
