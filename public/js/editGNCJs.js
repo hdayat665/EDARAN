@@ -20,7 +20,7 @@ $(document).ready(function () {
                 .remove()
                 .end()
                 .append(
-                    '<option label="Please Choose" selected="selected"> </option>'
+                    '<option label="PLEASE CHOOSE" selected="selected"> </option>'
                 )
                 .val("");
 
@@ -72,18 +72,20 @@ $(document).ready(function () {
                 year: "required",
                 month: "required",
                 claim_category: "required",
+                claim_category_detail: "required",
                 amount: "required",
                 'file_upload[]': "required",
-                claim_category_detail: "required",
+                
             }, 
 
             messages: {
                 year: "Please Select Year",
                 month: "Please Select Month",
                 claim_category: "Please Select Claim Category",
+                claim_category_detail: "Please Select Category Detail",
                 amount: "Please Fill Out Amount",
                 'file_upload[]': "Please Upload Attachment",
-                claim_category_detail: "Please Insert Category Detail",
+                
             },
             submitHandler: function (form) {
                 requirejs(["sweetAlert2"], function (swal) {
@@ -120,7 +122,9 @@ $(document).ready(function () {
             },
         });
     });
-       
+    document.getElementById("resetupdateButton").addEventListener("click", function() {
+        document.getElementById("updateForm").reset();
+      });
 
     $("#submitButton").click(function (e) {
         requirejs(["sweetAlert2"], function (swal) {

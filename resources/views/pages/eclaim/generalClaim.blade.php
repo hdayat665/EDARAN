@@ -120,7 +120,7 @@
                                     </div>
                                     <div class="row p-2">
                                         <div class="col-md-3">
-                                            <label class="form-label">Amount (MYR)</label>
+                                            <label class="form-label">Amount</label>
                                         </div>
                                         <div class="col-md-9">
                                             <input type="number" class="form-control" name="amount" id="amount" placeholder="0.00">
@@ -139,7 +139,7 @@
                                         <div class="col-md-3">
                                             <label class="form-label">Supporting Document</label>
                                         </div>
-                                        <div class="col-md-9">
+                                        <div class="col-md-6">
                                             <input type="file" class="form-control-file" name="file_upload[]" id="supportdocument" multiple>
                                         </div>
                                     </div>
