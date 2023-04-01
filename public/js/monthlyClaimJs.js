@@ -366,7 +366,7 @@ $("document").ready(function () {
                 .remove()
                 .end()
                 .append(
-                    '<option label="Please Choose" selected="selected"> </option>'
+                    '<option label="PLEASE CHOOSE" selected="selected"> </option>'
                 )
                 .val("");
 
@@ -448,6 +448,23 @@ $("document").ready(function () {
                     });
                 });
             },
+        });
+    });
+    $(document).ready(function() {
+        $('#amount').on('input', function() {
+            var value = $(this).val();
+            var decimalCount = (value.split('.')[1] || []).length;
+            if (decimalCount > 2) {
+            $(this).val(parseFloat(value).toFixed(2));
+            } 
+        });
+
+        $('#amount').blur(function() {
+            var value = $(this).val();
+            var decimalCount = (value.split('.')[1] || []).length;
+            if (decimalCount == 0) {
+            $(this).val(value + '.00');
+            }
         });
     });
 

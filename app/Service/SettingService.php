@@ -29,9 +29,11 @@ use App\Models\TypeOfLogs;
 use App\Models\Unit;
 use App\Models\leaveEntitlementModel;
 use App\Models\UserProfile;
-use App\Models\Userrole;
+use App\Models\UserRole;
 use App\Models\holidayModel;
 use App\Models\leavetypesModel;
+use App\Models\PermissionRole;
+use App\Models\Users;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Symfony\Component\Console\Input\Input;
@@ -72,15 +74,36 @@ class SettingService
 
     public function updateRole($r, $id)
     {
-        $data1 = Auth::user()->username;
-        $data2 = date('Y-m-d h:m:s');
+        $modifiedBy = Auth::user()->username;
+        $modifiedTime = date('Y-m-d h:m:s');
+
+        $input = $r->input();
 
         $updateData = [
-            'modifiedBy' => $data1,
-            'modifiedTime' => $data2
+            'modifiedBy' => $modifiedBy,
+            'modifiedTime' => $modifiedTime
         ];
 
         Role::where('id', $id)->update($updateData);
+
+        if (!empty($input['permissions'])) {
+
+            PermissionRole::where('role_id', $id)->delete();
+
+            $permissions = explode(',', $input['permissions']);
+
+            foreach ($permissions as $permission) {
+                $permissionRole = [
+                    'tenant_id' => Auth::user()->tenant_id,
+                    'role_id' => $id,
+                    'permission_code' => $permission,
+                    'modified_by' => $modifiedBy,
+                    'modified_time' => $modifiedTime
+                ];
+
+                PermissionRole::create($permissionRole);
+            }
+        }
 
         if ($r->input('userName')) {
             $data1 = $r->input('userName');
@@ -89,15 +112,21 @@ class SettingService
 
             $insertData = [
                 'tenant_id' => Auth::user()->tenant_id,
-                'role_id' => $data3,
                 'up_user_id' => $data1,
-                'added_by' => Auth::user()->id,
                 'added_time' => $data2,
+                'role_id' => $data3,
+                'added_by' => Auth::user()->id,
                 'modified_by' => '',
                 'modified_time' => ''
             ];
 
             UserRole::create($insertData);
+
+            $usersData = [
+                'role_id' => $data3,
+            ];
+
+            Users::where('id', $data1)->update($usersData);
         }
 
         $data['status'] = config('app.response.success.status');
@@ -170,16 +199,16 @@ class SettingService
         return $data;
     }
 
-        public function updateCompany($r, $id)
+    public function updateCompany($r, $id)
     {
         $input = $r->input();
         $companyCode = $input['companyCode'];
-        
+
         $existingCompany = Company::where('companyCode', $companyCode)
             ->where('id', '!=', $id)
             ->where('tenant_id', Auth::user()->tenant_id)
             ->first();
-        
+
         if ($existingCompany) {
             $data['msg'] = 'Company code already exists.';
             $data['status'] = config('app.response.error.status');
@@ -270,12 +299,12 @@ class SettingService
     {
         $input = $r->input();
         $departmentCode = $input['departmentCode'];
-        
+
         $existingDepartment = Department::where('departmentCode', $departmentCode)
             ->where('id', '!=', $id)
             ->where('tenant_id', Auth::user()->tenant_id)
             ->first();
-        
+
         if ($existingDepartment) {
             $data['msg'] = 'Company code already exists.';
             $data['status'] = config('app.response.error.status');
@@ -300,7 +329,7 @@ class SettingService
 
         return $data;
     }
-    
+
     public function deleteDepartment($id)
     {
         $department = Department::find($id);
@@ -364,12 +393,12 @@ class SettingService
     {
         $input = $r->input();
         $unitCode = $input['unitCode'];
-        
+
         $existingUnit = Unit::where('unitCode', $unitCode)
             ->where('id', '!=', $id)
             ->where('tenant_id', Auth::user()->tenant_id)
             ->first();
-        
+
         if ($existingUnit) {
             $data['msg'] = 'Unit code already exists.';
             $data['status'] = config('app.response.error.status');
@@ -458,12 +487,12 @@ class SettingService
     {
         $input = $r->input();
         $branchName = $input['branchName'];
-        
+
         $existingBranch = Branch::where('branchName', $branchName)
             ->where('id', '!=', $id)
             ->where('tenant_id', Auth::user()->tenant_id)
             ->first();
-        
+
         if ($existingBranch) {
             $data['msg'] = 'Branch name already exists.';
             $data['status'] = config('app.response.error.status');
@@ -552,12 +581,12 @@ class SettingService
     {
         $input = $r->input();
         $jobGradeCode = $input['jobGradeCode'];
-        
+
         $existingJobGrade = JobGrade::where('jobGradeCode', $jobGradeCode)
             ->where('id', '!=', $id)
             ->where('tenant_id', Auth::user()->tenant_id)
             ->first();
-        
+
         if ($existingJobGrade) {
             $data['msg'] = 'JobGrade Code already exists.';
             $data['status'] = config('app.response.error.status');
@@ -582,7 +611,7 @@ class SettingService
 
         return $data;
     }
-    
+
 
     public function deleteJobGrade($id)
     {
@@ -646,12 +675,12 @@ class SettingService
     {
         $input = $r->input();
         $designationCode = $input['designationCode'];
-        
+
         $existingdesignationCode = Designation::where('designationCode', $designationCode)
             ->where('id', '!=', $id)
             ->where('tenant_id', Auth::user()->tenant_id)
             ->first();
-        
+
         if ($existingdesignationCode) {
             $data['msg'] = 'Designation Code already exists.';
             $data['status'] = config('app.response.error.status');
@@ -676,7 +705,7 @@ class SettingService
 
         return $data;
     }
-    
+
 
     public function deleteDesignation($id)
     {
@@ -1024,12 +1053,12 @@ class SettingService
     {
         $input = $r->input();
         $type = $input['type'];
-        
+
         $existingtype = EmploymentType::where('type', $type)
             ->where('id', '!=', $id)
             ->where('tenant_id', Auth::user()->tenant_id)
             ->first();
-        
+
         if ($existingtype) {
             $data['msg'] = 'Employment Type already exists.';
             $data['status'] = config('app.response.error.status');
@@ -1054,7 +1083,7 @@ class SettingService
 
         return $data;
     }
-    
+
     public function deleteEmploymentType($id)
     {
         $EmploymentType = EmploymentType::find($id);
@@ -1085,11 +1114,11 @@ class SettingService
     public function myrolestaff()
     {
         $data =
-            UserProfile::where('userprofile.tenant_id', Auth::user()->tenant_id)
+            UserProfile::where('userProfile.tenant_id', Auth::user()->tenant_id)
             ->whereNull('role_user.up_user_id')
-            ->leftJoin('employment', 'userprofile.user_id', '=', 'employment.user_id')
-            ->leftJoin('role_user', 'userprofile.user_id', '=', 'role_user.up_user_id')
-            ->select('userprofile.user_id', 'userprofile.fullname')
+            ->leftJoin('employment', 'userProfile.user_id', '=', 'employment.user_id')
+            ->leftJoin('role_user', 'userProfile.user_id', '=', 'role_user.up_user_id')
+            ->select('userProfile.user_id', 'userProfile.fullname')
             ->get();
 
 
@@ -1475,6 +1504,21 @@ class SettingService
 
         EclaimGeneral::create($input);
 
+        // update data subs tied to entitile group
+        $entitleData = EntitleGroup::where('tenant_id', Auth::user()->tenant_id)->get();
+
+        foreach ($entitleData as $entitle) {
+            $subsData = [
+                'tenant_id' => Auth::user()->tenant_id,
+                'user_id' => Auth::user()->id,
+                'entitle_id' => $entitle->id,
+                'type' => 'subs',
+                'area' => $input['area_name'],
+            ];
+
+            EntitleSubsBenefit::create($subsData);
+        }
+
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
@@ -1486,12 +1530,12 @@ class SettingService
     {
         $input = $r->input();
         $area_name = $input['area_name'];
-        
+
         $existingAreaName = EclaimGeneral::where('area_name', $area_name)
             ->where('id', '!=', $id)
             ->where('tenant_id', Auth::user()->tenant_id)
             ->first();
-        
+
         if ($existingAreaName) {
             $data['msg'] = 'Area Name already exists.';
             $data['status'] = config('app.response.error.status');
@@ -1515,7 +1559,7 @@ class SettingService
         $data['msg'] = 'Success Update Area Name';
 
         return $data;
-    } 
+    }
     public function deleteSubsistance($id)
     {
         $logs = EclaimGeneral::find($id);
@@ -1573,10 +1617,10 @@ class SettingService
         $claimCategory['claim_catagory'] = $input['claim_catagory'];
 
         ClaimCategory::create($claimCategory);
-        
+
         $category = ClaimCategory::where('tenant_id', $user->tenant_id)->orderBy('created_at', 'DESC')->first();
-        
-        
+
+
         if (isset($input['content']) && isset($input['label'])) {
             $dataContent = [];
             foreach ($input['content'] as $content) {
@@ -1588,11 +1632,26 @@ class SettingService
                     'created_at' => date_format(date_create(date("Y-m-d H:i:s")), "Y-m-d H:i:s"),
                 ];
             }
-        
-            ClaimCategoryContent::insert($dataContent);
-        } 
 
-        
+            ClaimCategoryContent::insert($dataContent);
+        }
+
+        // update data subs tied to entitile group
+        $entitleData = EntitleGroup::where('tenant_id', Auth::user()->tenant_id)->get();
+
+        foreach ($entitleData as $entitle) {
+            $subsData = [
+                'tenant_id' => Auth::user()->tenant_id,
+                'user_id' => Auth::user()->id,
+                'entitle_id' => $entitle->id,
+                'type' => 'category',
+                'area' => $input['claim_catagory'],
+            ];
+
+            EntitleSubsBenefit::create($subsData);
+        }
+
+
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
@@ -2010,12 +2069,12 @@ class SettingService
         $data5 = $input['CarryForward'];
         $data6 = $input['CurrentForwardBalance'];
 
-        if($r->input('LapsedDate')){
+        if ($r->input('LapsedDate')) {
             $data7 = date('Y-m-d', strtotime($input['LapsedDate']));
-        }else{
+        } else {
             $data7 = null;
         }
-        
+
         $data8 = date('Y-m-d', strtotime($input['Lapsed']));
 
 
@@ -2151,21 +2210,20 @@ class SettingService
 
         holidayModel::where('id', $id)->update($update);
 
-        if($status == 1){
+        if ($status == 1) {
             $data['status'] = config('app.response.success.status');
             $data['type'] = config('app.response.success.type');
             $data['title'] = config('app.response.success.title');
             $data['msg'] = 'Holiday is activated';
             return $data;
-
-        }else{
+        } else {
 
             $data['status'] = config('app.response.success.status');
             $data['type'] = config('app.response.success.type');
             $data['title'] = config('app.response.success.title');
             $data['msg'] = 'Holiday is deactivated';
             return $data;
-        }  
+        }
     }
 
 
@@ -2195,7 +2253,7 @@ class SettingService
         $data1 = strtoupper($input['leave_types_code']);
         $data2 = strtoupper($input['leave_types']);
         $data3 = $input['day'];
-    
+
         $data5 = Auth::user()->tenant_id;
 
         $input = [
@@ -2277,21 +2335,19 @@ class SettingService
 
         leavetypesModel::where('id', $id)->update($update);
 
-        if($status == 1){
+        if ($status == 1) {
             $data['status'] = config('app.response.success.status');
             $data['type'] = config('app.response.success.type');
             $data['title'] = config('app.response.success.title');
             $data['msg'] = 'Leave type status is actived';
             return $data;
-        }else{
+        } else {
             $data['status'] = config('app.response.success.status');
             $data['type'] = config('app.response.success.type');
             $data['title'] = config('app.response.success.title');
             $data['msg'] = 'Leave type status is deactivated';
             return $data;
         }
-
-        
     }
 
     public function updateClaimDate($r)
@@ -2420,7 +2476,7 @@ class SettingService
 
         $detailData = [
             'area' => $input['area_name'] ?? $input['claim_catagory'],
-            'value' => $input['value'] ?? $input['claim_catagory'],
+            'value' => $input['value'] ?? $input['claim_value'],
         ];
 
         EntitleSubsBenefit::find($id)->update($detailData);
@@ -2527,6 +2583,20 @@ class SettingService
             $data['title'] = config('app.response.success.title');
             $data['msg'] = 'Success Update Status';
         }
+
+        return $data;
+    }
+
+    public function getUserByRoleId($id = '')
+    {
+        $data = UserRole::with('userProfile', 'addedBy', 'modifydBy')->where([['tenant_id', Auth::user()->tenant_id], ['role_id', $id]])->get();
+
+        return $data;
+    }
+
+    public function getPermissionByRoleId($id = '')
+    {
+        $data = PermissionRole::where([['tenant_id', Auth::user()->tenant_id], ['role_id', $id]])->get();
 
         return $data;
     }

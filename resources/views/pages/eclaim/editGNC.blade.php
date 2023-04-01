@@ -82,8 +82,7 @@
                                         </div>
                                         <div class="col-md-9">
                                             <select class="form-select" id="claimcategory" name="claim_category">
-                                                <option class="form-label" value="" selected>Please
-                                                    Select</option>
+                                                <option class="form-label" value="" selected>PLEASE CHOOSE</option>
                                                 {{ $categorys = getClaimCategory() }}
                                                 @foreach ($categorys as $category)
                                                     <option value="{{ $category->id }}">{{ $category->claim_catagory }}</option>
@@ -97,14 +96,13 @@
                                         </div>
                                         <div class="col-md-9">
                                             <select class="form-select" id="contentLabel" name="claim_category_detail">
-                                                <option class="form-label" value="Please Select" selected>Please
-                                                    Select</option>
+                                                <option class="form-label" value="" selected>PLEASE CHOOSE</option>
                                             </select>
                                         </div>
                                     </div>
                                     <div class="row p-2">
                                         <div class="col-md-3">
-                                            <label class="form-label">Amount (MYR)</label>
+                                            <label class="form-label">Amount</label>
                                         </div>
                                         <div class="col-md-9">
                                             <input type="number" name="amount" class="form-control" placeholder="0.00">
@@ -122,13 +120,13 @@
                                         <div class="col-md-3">
                                             <label class="form-label">Supporting Document</label>
                                         </div>
-                                        <div class="col-md-9">
+                                        <div class="col-md-6">
                                             <input type="file" class="form-control-file" name="file_upload[]" id="supportdocument" multiple>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row p-2">
-                                    <div class="modal-footer"> <button type="button" class="btn btn-secondary">Reset</button>
+                                    <div class="modal-footer"> <button type="button" class="btn btn-secondary" id="resetupdateButton">Reset</button>
                                         <button type="submit" id="updateButton" class="btn btn-primary">Save</button>
                                     </div>
                                 </div>

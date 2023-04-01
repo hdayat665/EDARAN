@@ -29,6 +29,7 @@ use App\Models\Users;
 use App\Models\UserRole;
 use App\Models\TransportMillage;
 use App\Models\EclaimGeneral;
+use App\Models\PermissionRole;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -755,7 +756,7 @@ if (!function_exists('getArea')) {
     function getArea()
     {
         $data = EclaimGeneral::where('tenant_id', Auth::user()->tenant_id)->get();
-        
+
         return $data;
     }
 }
@@ -807,7 +808,7 @@ if (!function_exists('myProjectOnly')) {
 
         foreach ($projectMember as $project) {
             $projectId[] = $project->project_id;
-        } 
+        }
 
         $data = DB::table('project_member as a')
             ->leftJoin('project as b', 'a.project_id', '=', 'b.id')
@@ -843,7 +844,7 @@ if (!function_exists('getFinancialYear')) {
         $data = [];
 
         $data = Project::where([['tenant_id', Auth::user()->tenant_id]])->select('financial_year')->groupBy('financial_year')->orderBy('DESC')->get();
-        
+
 
         return $data;
     }
@@ -1025,13 +1026,13 @@ if (!function_exists('projectLocation')) {
 }
 
 if (!function_exists('activityName')) {
-    function activityName( $departmentId = '')
+    function activityName($departmentId = '')
     {
         $cond[1] = ['tenant_id', Auth::user()->tenant_id];
         // $cond[1] = ['tenant_id', ];
         $cond[2] = ['department', $departmentId];
         // $cond[3] = ['logs_id', $logsid];
-        
+
         $cond[3] = ['project_id', null];
         $data = ActivityLogs::where($cond)->get();
         if (!$data) {
@@ -1282,9 +1283,9 @@ if (!function_exists('activityName1')) {
     function activityName1($departmentId = '')
     {
         $data = ActivityLogs::where('tenant_id', Auth::user()->tenant_id)
-                            ->whereNotNull('project_id')
-                            ->where('department', $departmentId)
-                            ->get();
+            ->whereNotNull('project_id')
+            ->where('department', $departmentId)
+            ->get();
         if (!$data) {
             $data = [];
         }
@@ -1405,14 +1406,14 @@ if (!function_exists('year')) {
     function year()
     {
         $data = [
-            
+
             '2023' => '2023',
             '2022' => '2022',
             '2020' => '2020',
             '2021' => '2021',
             '2019' => '2019',
-            '2018' => '2018', 
-            
+            '2018' => '2018',
+
         ];
 
         return $data;
@@ -1512,7 +1513,7 @@ if (!function_exists('getDepartmentName')) {
 }
 if (!function_exists('getDesignationName')) {
     function getDesignationName($user_id = '')
-    { 
+    {
         $cond[1] = ['user_id', $user_id];
         $data = DB::table('employment as a')
             ->leftJoin('designation as b', 'a.designation', '=', 'b.id')
@@ -1567,7 +1568,7 @@ if (!function_exists('getAllRole')) {
     function getAllRole()
     {
         $data = Role::where([['tenant_id', Auth::user()->tenant_id]])->get();
-        
+
         if (!$data) {
             $data = [];
         }
@@ -1606,12 +1607,12 @@ if (!function_exists('getFirstCarMileagebyid')) {
     function getFirstCarMileagebyid($id = '')
     {
         $data = TransportMillage::where([
-                ['tenant_id', Auth::user()->tenant_id], 
-                ['entitle_id', $id],
-                ['type', 'car'] // New condition for type
-            ])->first();
-        
-        $price = $data->price;
+            ['tenant_id', Auth::user()->tenant_id],
+            ['entitle_id', $id],
+            // ['type', 'car'] // New condition for type
+        ])->first();
+
+        $price = $data->price ?? '';
         //pr($price);
         if (!$price) {
             $price = [];
@@ -1625,12 +1626,12 @@ if (!function_exists('getFirstMotorMileagebyid')) {
     function getFirstMotorMileagebyid($id = '')
     {
         $data = TransportMillage::where([
-                ['tenant_id', Auth::user()->tenant_id], 
-                ['entitle_id', $id],
-                ['type', 'motor'] // New condition for type
-            ])->first();
-        
-        $price = $data->price;
+            ['tenant_id', Auth::user()->tenant_id],
+            ['entitle_id', $id],
+            // ['type', 'motor'] // New condition for type
+        ])->first();
+
+        $price = $data->price ?? '';
         //pr($price);
         if (!$price) {
             $price = [];
@@ -1658,7 +1659,7 @@ if (!function_exists('getUserByJobGrade')) {
     function getUserByJobGrade($id = '')
     {
         $data = Employee::where([['tenant_id', Auth::user()->tenant_id], ['jobGrade', $id]])->with('userProfile')->get();
-        
+
         if (!$data) {
             $data = [];
         }
@@ -1671,7 +1672,7 @@ if (!function_exists('getUserByUserRole')) {
     function getUserByUserRole($id = '')
     {
         $data = UserRole::where([['tenant_id', Auth::user()->tenant_id], ['role_id', $id]])->with('userProfile')->get();
-        
+
         if (!$data) {
             $data = [];
         }
@@ -1685,12 +1686,12 @@ if (!function_exists('getClaimCategory')) {
     function getClaimCategory($id = '')
     {
         $data = ClaimCategory::where('tenant_id', Auth::user()->tenant_id)
-                     ->where('status','=', '1')
-                     ->where(function($query) {
-                         $query->where('claim_type', '=', 'GC')
-                               ->orWhere('claim_type', '=', 'MTC,GC');
-                     })
-                     ->get();
+            ->where('status', '=', '1')
+            ->where(function ($query) {
+                $query->where('claim_type', '=', 'GC')
+                    ->orWhere('claim_type', '=', 'MTC,GC');
+            })
+            ->get();
 
         if (!$data) {
             $data = [];
@@ -1705,12 +1706,12 @@ if (!function_exists('getClaimCategoryMtc')) {
     function getClaimCategoryMtc($id = '')
     {
         $data = ClaimCategory::where('tenant_id', Auth::user()->tenant_id)
-                     ->where('status','=', '1')
-                     ->where(function($query) {
-                        $query->where('claim_type', '=', 'MTC')
-                              ->orWhere('claim_type', '=', 'MTC,GC');
-                    })
-                    ->get();
+            ->where('status', '=', '1')
+            ->where(function ($query) {
+                $query->where('claim_type', '=', 'MTC')
+                    ->orWhere('claim_type', '=', 'MTC,GC');
+            })
+            ->get();
 
         if (!$data) {
             $data = [];
@@ -1754,7 +1755,7 @@ if (!function_exists('getClaimCategoryById')) {
 //         if (!$data) {
 //             $data = [];
 //         }
-        
+
 //         // pr($data);
 
 //         return $data->claim_catagory;
@@ -1782,15 +1783,15 @@ if (!function_exists('getClaimContentById')) {
     function getClaimContentById($id = '')
     {
         $data = GeneralClaimDetail::where('general_claim_details.id', $id)
-        ->leftJoin('claim_category', 'general_claim_details.claim_category', '=', 'claim_category.id')
-        ->select('general_claim_details.*', 'claim_category.claim_catagory as claim_category_name')
-        ->with('claim_category_content')
-        ->first();
+            ->leftJoin('claim_category', 'general_claim_details.claim_category', '=', 'claim_category.id')
+            ->select('general_claim_details.*', 'claim_category.claim_catagory as claim_category_name')
+            ->with('claim_category_content')
+            ->first();
 
         if (!$data) {
             $data = [];
         }
-        
+
         return $data;
     }
 }
@@ -1886,7 +1887,7 @@ if (!function_exists('claimDateSetting')) {
 }
 if (!function_exists('checkAppeal')) {
     function checkAppeal($year = '', $month = '')
-    {   
+    {
         $cond[0] = ['tenant_id', Auth::user()->tenant_id];
         $cond[1] = ['user_id', Auth::user()->id];
         $cond[3] = ['year', $year];
@@ -2013,7 +2014,7 @@ if (!function_exists('getMyClaimMonth')) {
         if (!$data) {
             $data = [];
         }
-        
+
         //pr($data);
         return $data;
     }
@@ -2029,7 +2030,7 @@ if (!function_exists('checkingMonthlyClaim')) {
         $cond[4] = ['month', $month];
 
         $claim = GeneralClaim::where($cond)->first();
-        
+
         if (!$claim) {
             $data['month'] = '-';
             $data['id'] = '-';
@@ -2038,7 +2039,7 @@ if (!function_exists('checkingMonthlyClaim')) {
             $data['id'] = $claim->id;
             $data['status'] = $claim->status;
         }
-        
+
         return $data;
     }
 }
@@ -2055,7 +2056,7 @@ if (!function_exists('getRoleById')) {
         return $data;
     }
 }
- 
+
 if (!function_exists('getViewForClaimApproval')) {
     function getViewForClaimApproval($type = '')
     {
@@ -2156,6 +2157,20 @@ if (!function_exists('getEmployeeDetail')) {
     function getEmployeeDetail($id = '')
     {
         $data = Employee::where([['tenant_id', Auth::user()->tenant_id], ['user_id', $id]])->first();
+
+        if (!$data) {
+            $data = [];
+        }
+
+        return $data;
+    }
+}
+
+
+if (!function_exists('getPermissionByRoleId')) {
+    function getPermissionByRoleId($id = '')
+    {
+        $data = PermissionRole::select('permission_code')->where([['tenant_id', Auth::user()->tenant_id], ['role_id', $id]])->get();
 
         if (!$data) {
             $data = [];
