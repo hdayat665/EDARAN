@@ -35,7 +35,7 @@
                                     <label class="form-label col-form-label">Total Amount :</label>
                                 </div>
                                 <div class="col-md-4">
-                                    <input readonly type="text" class="form-control" value="{{ $GNC->total_amount }}">
+                                    <input readonly type="text" class="form-control" value="MYR {{ $GNC->total_amount }}">
                                 </div>
                             </div>
                             <div class="row p-2">
@@ -57,7 +57,7 @@
                                                     <td><a data-bs-toggle="modal" id="buttonView" data-id="{{ $detail->id }}" class="btn btn-primary btn-sm">View</a></td> 
                                                     <td>{{ date('Y-m-d', strtotime($detail->applied_date)) }}</td>
                                                     <td>{{ $detail->claim_catagory }}</td>
-                                                    <td>{{ $detail->amount }}</td>
+                                                    <td>MYR {{ $detail->amount }}</td>
                                                     <td>{{ $detail->desc }}</td>
                                                     <td>
                                                     @if(!empty($detail->file_upload))

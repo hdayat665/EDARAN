@@ -16,7 +16,7 @@
                 <th class="text-nowrap">Cash Advance ID</th>
                 <th class="text-nowrap">Type of Cash Advance</th>
                 <th class="text-nowrap">Request Date</th>
-                <th class="text-nowrap">Travel Date</th>
+                <th class="text-nowrap">Travel Date</th> 
                 <th class="text-nowrap">Amount</th>
                 <th class="text-nowrap">Status</th>
                 <th class="text-nowrap">Status Date</th>
@@ -59,7 +59,7 @@
                                 @endif
                             </div>
                         </td>
-                        <td>{{ $cashClaim->id }}</td>
+                        <td>CA-{{ $cashClaim->id }}</td>
                         <td>{{ getCashAdvanceType($cashClaim->type) }}</td>
                         <td>{{ date_format(date_create($cashClaim->created_at), 'd/m/Y') }}</td>
                         <td>{{ $cashClaim->travel_date ? $cashClaim->travel_date : 'N/A' }}</td>

@@ -17,7 +17,7 @@
                     <label class="form-label col-form-label">Cash Advance ID:</label>
                 </div>
                 <div class="col-md-9">
-                    <input readonly type="text" class="form-control" value="{{ $cashClaim->id }}">
+                    <input readonly type="text" class="form-control" value="CA-{{ $cashClaim->id }}">
                 </div>
             </div>
             <div class="row p-2">
