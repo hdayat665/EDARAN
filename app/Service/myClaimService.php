@@ -398,9 +398,10 @@ class myClaimService
     {
         $update = [
             'status' => 'active',
-            'supervisor' => 'recommend'
+            'supervisor' => 'recommend',
+            'hod' => null,
         ];
-
+ 
         $checkDisabled = EclaimGeneralSetting::where('tenant_id', Auth::user()->tenant_id)
             ->first();
             
@@ -1008,10 +1009,12 @@ class myClaimService
                 unset($input['uploadFile']);
             }
         }
+
         $existing_appeal = AppealMtc::where('user_id', $input['user_id'])
         ->where('year', $input['year'])
         ->where('month', $input['month'])
         ->first();
+
         if ($existing_appeal) {
             $data['status'] = config('app.response.error.status');
             $data['type'] = config('app.response.error.type');
@@ -1029,17 +1032,30 @@ class myClaimService
 
         return $data;
     }
-    
     public function getAppealData()
     {
-        $data = AppealMtc::where([
-            ['tenant_id', Auth::user()->tenant_id],
-            ['status', '=', 'pending']
-        ])->get();
+        // type 1 approval 2 recommender
+
         
+        $cond[0] = ['eclaimapprover', Auth::user()->id];
+
+        $employees = Employee::where($cond)->get();
+
+        $userId = [];
+        foreach ($employees as $key => $employee) {
+            $userId[] = $employee->user_id;
+        }
+
+        $claim[0] = ['tenant_id', Auth::user()->tenant_id];
+        $claim[1] = ['status', '=', 'pending'];
+
+        $data = AppealMtc::where($claim)->whereIn('user_id', $userId)->get();
 
         return $data;
+        
     }
+
+    
     public function getHistoryAppealData()
     {
         $data = AppealMtc::where([

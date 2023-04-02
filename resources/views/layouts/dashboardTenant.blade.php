@@ -206,12 +206,18 @@
                             </div>
                             <div class="menu-text text-gray">Dashboard</div>
                         </a>
-                    </div> <?php
-                    $permissions = getPermissionByRoleId(Auth::user()->role_id);
-                    foreach ($permissions as $permission) {
-                        $role_permission[] = $permission->permission_code;
-                    }
-                    ?> <div class="menu-item has-sub">
+                    </div> 
+                    <?php
+                        $permissions = getPermissionByRoleId(Auth::user()->role_id);
+                        $role_permission = []; 
+                        foreach ($permissions as $permission) {
+                            $role_permission[] = $permission->permission_code;
+                        }
+                        if (!$role_permission) { 
+                            $role_permission = []; 
+                        }
+                    ?>
+                    <div class="menu-item has-sub">
                         <a href="javascript:;" class="menu-link">
                             <div class="menu-icon">
                                 <i class="fa fa-commenting text-gray"></i>
