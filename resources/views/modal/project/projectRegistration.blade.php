@@ -5,7 +5,7 @@
                 <h5 class="modal-title" id="exampleModalLabel">Project Register | Register Project</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body">
+            <div class="modal-body"> 
                 <form id="addForm">
                     <div class="row">
                         <label class="form-label col-form-label col-md-4">Customer Name*</label>
@@ -104,7 +104,7 @@
                     </div>
                     <div class="row mb-15px">
                         <div class="col-md-4">
-                            <select class="selectpicker form-select" name="acc_manager" id="acc_manager2">
+                            <select class="form-select" name="acc_manager" >
                                 <option value="" label="PLEASE CHOOSE"></option>
                                 <?php $getEmployees = getEmployee(); ?>
                                 @foreach ($getEmployees as $getEmployee)
