@@ -1,45 +1,158 @@
 $(document).ready(function () {
-    $("#activetable").dataTable({
-        // "responsive": true,
-        bLengthChange: false,
-        bFilter: false,
+    
+    $('#activetable').DataTable({
+        "searching": true,
+        "lengthChange": true,
+        "paging": true,
+        "lengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
+        "dom": '<"row"<"col-sm-4"l><"col-sm-4 text-center"B><"col-sm-4"f>>t<"row"<"col-sm-12"ip>>',
+        "buttons": [
+            { extend: 'excel', className: 'btn-blue', exportOptions: {
+                columns: [2,3,4,5,6,7]
+            }},
+            { extend: 'pdf', className: 'btn-blue',  exportOptions: {
+                columns: [2,3,4,5,6,7]
+            }},
+            { extend: 'print', className: 'btn-blue',  exportOptions: {
+                columns: [2,3,4,5,6,7]
+            }},
+        ],
+        columnDefs: [
+                  { orderable: false, targets: [0] }
+               ]
+    });
+    $('#checkedtable').DataTable({
+        "searching": true,
+        "lengthChange": true,
+        "paging": true,
+        "lengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
+        "dom": '<"row"<"col-sm-4"l><"col-sm-4 text-center"B><"col-sm-4"f>>t<"row"<"col-sm-12"ip>>',
+        "buttons": [
+            { extend: 'excel', className: 'btn-blue', exportOptions: {
+                columns: [2,3,4,5,6,7]
+            }},
+            { extend: 'pdf', className: 'btn-blue',  exportOptions: {
+                columns: [2,3,4,5,6,7]
+            }},
+            { extend: 'print', className: 'btn-blue',  exportOptions: {
+                columns: [2,3,4,5,6,7]
+            }},
+        ],
+        columnDefs: [
+                  { orderable: false, targets: [0] }
+               ]
     });
 
-    $("#checkedtable").dataTable({
-        // "responsive": true,
-        bLengthChange: false,
-        bFilter: false,
+    $('#pvtable').DataTable({
+        "searching": true,
+        "lengthChange": true,
+        "paging": true,
+        "lengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
+        "dom": '<"row"<"col-sm-4"l><"col-sm-4 text-center"B><"col-sm-4"f>>t<"row"<"col-sm-12"ip>>',
+        "buttons": [
+            { extend: 'excel', className: 'btn-blue', exportOptions: {
+                columns: [2,3,4,5,6,7]
+            }},
+            { extend: 'pdf', className: 'btn-blue',  exportOptions: {
+                columns: [2,3,4,5,6,7]
+            }},
+            { extend: 'print', className: 'btn-blue',  exportOptions: {
+                columns: [2,3,4,5,6,7]
+            }},
+        ],
+        columnDefs: [
+                  { orderable: false, targets: [0] }
+               ]
+    });
+    $('#paidtable').DataTable({
+        "searching": true,
+        "lengthChange": true,
+        "paging": true,
+        "lengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
+        "dom": '<"row"<"col-sm-4"l><"col-sm-4 text-center"B><"col-sm-4"f>>t<"row"<"col-sm-12"ip>>',
+        "buttons": [
+            { extend: 'excel', className: 'btn-blue', exportOptions: {
+                columns: [2,3,4,5,6,7]
+            }},
+            { extend: 'pdf', className: 'btn-blue',  exportOptions: {
+                columns: [2,3,4,5,6,7]
+            }},
+            { extend: 'print', className: 'btn-blue',  exportOptions: {
+                columns: [2,3,4,5,6,7]
+            }},
+        ],
+        columnDefs: [
+                  { orderable: false, targets: [0] }
+               ]
     });
 
-    $("#pvtable").dataTable({
-        // "responsive": true,
-        bLengthChange: false,
-        bFilter: false,
+    $('#amendtable').DataTable({
+        "searching": true,
+        "lengthChange": true,
+        "paging": true,
+        "lengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
+        "dom": '<"row"<"col-sm-4"l><"col-sm-4 text-center"B><"col-sm-4"f>>t<"row"<"col-sm-12"ip>>',
+        "buttons": [
+            { extend: 'excel', className: 'btn-blue', exportOptions: {
+                columns: [2,3,4,5,6,7]
+            }},
+            { extend: 'pdf', className: 'btn-blue',  exportOptions: {
+                columns: [2,3,4,5,6,7]
+            }},
+            { extend: 'print', className: 'btn-blue',  exportOptions: {
+                columns: [2,3,4,5,6,7]
+            }},
+        ],
+        columnDefs: [
+                  { orderable: false, targets: [0] }
+               ]
     });
 
-    $("#paidtable").dataTable({
-        // "responsive": true,
-        bLengthChange: false,
-        bFilter: false,
+    $('#rejectedtable').DataTable({
+        "searching": true,
+        "lengthChange": true,
+        "paging": true,
+        "lengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
+        "dom": '<"row"<"col-sm-4"l><"col-sm-4 text-center"B><"col-sm-4"f>>t<"row"<"col-sm-12"ip>>',
+        "buttons": [
+            { extend: 'excel', className: 'btn-blue', exportOptions: {
+                columns: [2,3,4,5,6,7]
+            }},
+            { extend: 'pdf', className: 'btn-blue',  exportOptions: {
+                columns: [2,3,4,5,6,7]
+            }},
+            { extend: 'print', className: 'btn-blue',  exportOptions: {
+                columns: [2,3,4,5,6,7]
+            }},
+        ],
+        columnDefs: [
+                  { orderable: false, targets: [0] }
+               ]
     });
 
-    $("#amendtable").dataTable({
-        // "responsive": true,
-        bLengthChange: false,
-        bFilter: false,
+    $('#paymenttable').DataTable({
+        "searching": true,
+        "lengthChange": true,
+        "paging": true,
+        "lengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
+        "dom": '<"row"<"col-sm-4"l><"col-sm-4 text-center"B><"col-sm-4"f>>t<"row"<"col-sm-12"ip>>',
+        "buttons": [
+            { extend: 'excel', className: 'btn-blue', exportOptions: {
+                columns: [2,3,4,5,6,7]
+            }},
+            { extend: 'pdf', className: 'btn-blue',  exportOptions: {
+                columns: [2,3,4,5,6,7]
+            }},
+            { extend: 'print', className: 'btn-blue',  exportOptions: {
+                columns: [2,3,4,5,6,7]
+            }},
+        ],
+        columnDefs: [
+                  { orderable: false, targets: [0] }
+               ]
     });
 
-    $("#rejectedtable").dataTable({
-        // "responsive": true,
-        bLengthChange: false,
-        bFilter: false,
-    });
-    $("#paymenttable").dataTable({
-        // "responsive": true,
-        bLengthChange: false,
-        bFilter: false,
-    });
-
+    
     $("#filter").click(function () {
         $("#filteronoff").toggle();
     });
