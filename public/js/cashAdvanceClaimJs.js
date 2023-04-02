@@ -185,57 +185,108 @@ $(document).ready(function () {
             autoUpdateInput: false,
             locale: {
               cancelLabel: "Clear"
+            },
+            isInvalidDate: function(date) {
+              // Disable dates in the past
+              return date.isBefore(moment(), 'day');
             }
           }, function(start, end, label) {
-            // Calculate the difference in days between the start and end dates
-            var diffInDays = end.diff(start, 'days');
+            // Calculate the difference in milliseconds between the start and end dates
+            var diffInMs = end - start;
           
-            // Update the value of the input with the difference in days
+            // Convert the difference to days
+            var diffInDays = Math.ceil(diffInMs / (1000 * 60 * 60 * 24));
+          
+            // Update the value of the input with the total number of days
             $('#day').val(diffInDays);
-            $('#night').val(diffInDays-1);
+            $('#night').val(diffInDays - 1);
           });
           
           $("#datefilter2").daterangepicker({
             autoUpdateInput: false,
             locale: {
               cancelLabel: "Clear"
+            },
+            isInvalidDate: function(date) {
+              // Disable dates in the past
+              return date.isBefore(moment(), 'day');
             }
           }, function(start, end, label) {
-            // Calculate the difference in days between the start and end dates
-            var diffInDays = end.diff(start, 'days');
+            // Calculate the difference in milliseconds between the start and end dates
+            var diffInMs = end - start;
           
-            // Update the value of the input with the difference in days
+            // Convert the difference to days
+            var diffInDays = Math.ceil(diffInMs / (1000 * 60 * 60 * 24));
+          
+            // Update the value of the input with the total number of days
             $('#day').val(diffInDays);
-            $('#night').val(diffInDays-1);
+            $('#night').val(diffInDays - 1);
           });
-
+          
           $("#datefilter3").daterangepicker({
             autoUpdateInput: false,
             locale: {
               cancelLabel: "Clear"
+            },
+            isInvalidDate: function(date) {
+              // Disable dates in the past
+              return date.isBefore(moment(), 'day');
             }
           }, function(start, end, label) {
-            // Calculate the difference in days between the start and end dates
-            var diffInDays = end.diff(start, 'days');
+            // Calculate the difference in milliseconds between the start and end dates
+            var diffInMs = end - start;
           
-            // Update the value of the input with the difference in days
+            // Convert the difference to days
+            var diffInDays = Math.ceil(diffInMs / (1000 * 60 * 60 * 24));
+          
+            // Update the value of the input with the total number of days
             $('#day').val(diffInDays);
-            $('#night').val(diffInDays-1);
+            $('#night').val(diffInDays - 1);
           });
-
+        //   $("#datefilter1").daterangepicker({
+        //     isInvalidDate: function(date) {
+        //         // Disable dates in the past
+        //         return date.isBefore(moment(), 'day');
+        //     }
+        // });
+        
         $("#datefilter1").on("apply.daterangepicker", function (ev, picker) {
+            var currentDate = moment();
+            if (picker.startDate < currentDate) {
+                picker.setStartDate(currentDate);
+            }
+            if (picker.endDate < currentDate) {
+                picker.setEndDate(currentDate);
+            }
             $(this).val(
                 picker.startDate.format("DD/MM/YYYY") +
                     " - " +
                     picker.endDate.format("DD/MM/YYYY")
             );
         });
+        
+        
 
         $("#datefilter1").on("cancel.daterangepicker", function (ev, picker) {
             $(this).val("");
         });
 
+
+        // $("#datefilter2").daterangepicker({
+        //     isInvalidDate: function(date) {
+        //         // Disable dates in the past
+        //         return date.isBefore(moment(), 'day');
+        //     }
+        // });
+        
         $("#datefilter2").on("apply.daterangepicker", function (ev, picker) {
+            var currentDate = moment();
+            if (picker.startDate < currentDate) {
+                picker.setStartDate(currentDate);
+            }
+            if (picker.endDate < currentDate) {
+                picker.setEndDate(currentDate);
+            }
             $(this).val(
                 picker.startDate.format("DD/MM/YYYY") +
                     " - " +
@@ -243,20 +294,26 @@ $(document).ready(function () {
             );
         });
 
-        $("#datefilter2").on("cancel.daterangepicker", function (ev, picker) {
-            $(this).val("");
-        });
-
+        // $("#datefilter3").daterangepicker({
+        //     isInvalidDate: function(date) {
+        //         // Disable dates in the past
+        //         return date.isBefore(moment(), 'day');
+        //     }
+        // });
+        
         $("#datefilter3").on("apply.daterangepicker", function (ev, picker) {
+            var currentDate = moment();
+            if (picker.startDate < currentDate) {
+                picker.setStartDate(currentDate);
+            }
+            if (picker.endDate < currentDate) {
+                picker.setEndDate(currentDate);
+            }
             $(this).val(
                 picker.startDate.format("DD/MM/YYYY") +
                     " - " +
                     picker.endDate.format("DD/MM/YYYY")
             );
-        });
-
-        $("#datefilter3").on("cancel.daterangepicker", function (ev, picker) {
-            $(this).val("");
         });
 
         $("#datefilter4").datepicker({
@@ -264,7 +321,14 @@ $(document).ready(function () {
             autoclose: true,
             format: "dd/mm/yyyy",
             orientation: "bottom",
+            startDate: new Date(), // Set the start date to the current date
+            beforeShowDay: function(date) {
+                // Disable past dates
+                var currentDate = new Date();
+                return date < currentDate.setHours(0,0,0,0) ? 'disabled' : '';
+            }
         });
+        
     });
 
     $(document).on("change", "#project", function () {

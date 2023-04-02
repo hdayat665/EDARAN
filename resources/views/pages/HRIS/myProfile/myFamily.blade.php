@@ -42,7 +42,7 @@
                     </td>
                     <td style="text-transform: uppercase;">{{ ($parent->relationship) ? relationship($parent->relationship) : ''}}</td>
                     <td>{{$parent->DOB}}</td>
-                    <td>{{$parent->contactNo}}</td>
+                    <td>{{$parent->contactNo ?? '-'}}</td>
                 </tr>
                 @endforeach
                 <span style="display: none"><input type="text" id="parentId" value="{{$parentId}}"></span>

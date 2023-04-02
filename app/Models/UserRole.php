@@ -18,4 +18,14 @@ class UserRole extends Model
     {
         return $this->belongsTo(UserProfile::class, 'up_user_id', 'user_id');
     }
+
+    public function addedBy()
+    {
+        return $this->belongsTo(UserProfile::class, 'added_by', 'user_id');
+    }
+
+    public function modifydBy()
+    {
+        return $this->belongsTo(UserProfile::class, 'added_by', 'user_id');
+    }
 }

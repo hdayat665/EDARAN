@@ -18,7 +18,7 @@ class Role extends Authenticatable
      * @var array<int, string>
      */
 
-    protected $table ='role';
+    protected $table = 'role';
 
     protected $fillable = [
         'roleName',
@@ -29,5 +29,3 @@ class Role extends Authenticatable
         'modifiedTime',
     ];
 }
-
-

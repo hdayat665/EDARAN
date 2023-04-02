@@ -95,7 +95,7 @@
                     <div class="row p-2">
                         <div class="col-sm-3">
                             <label for="dob" class="form-label">Date Of Birth*</label>
-                            <input type="date" id="DOBP1" name="DOB" class="form-control" aria-describedby="dob" placeholder="YYYY/MM/DD">
+                            <input type="text" id="DOBP1" name="DOB" class="form-control" aria-describedby="dob" placeholder="YYYY/MM/DD">
                         </div>
                         <div class="col-sm-3">
                             <label for="dob" class="form-label" >Age</label>
@@ -165,8 +165,8 @@
                         <h4 class="col-sm-6 p-2">Address</h4>
                         <div class="col-sm-6">
                             <br><div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="same-address2" name="sameaspermanent" style="text-transform:uppercase">
-                                <label class="form-check-label" for="same-address2">
+                                <input class="form-check-input" type="checkbox" id="same-addressEditParent" style="text-transform:uppercase">
+                                <label class="form-check-label" for="same-addressEditParent">
                                     Same as Permanent Address
                                 </label>
                             </div>
@@ -189,23 +189,29 @@
                         </div>
                         <div class="col-sm-6">
                             <label for="city" class="form-label">City*</label>
-                            <input type="text" class="form-select" name="city" id="cityP1" placeholder="CITY">
+                            <input type="text" class="form-control" name="city" id="cityP1" placeholder="CITY">
                         </div>
                     </div>
                     <div class="row p-2">
                         <div class="col-sm-6">
                             <label for="state" class="form-label">State*</label>
-                            <select class="form-select" id="stateP1" name="state">
+                            <select class="form-select" id="stateP1" name="state" value="{{ $parent->state ?? '' }}">
                                 <?php $state = state() ?>
-                                <option value="0" label="PLEASE CHOOSE"  ></option>
+                                <option value="" label="PLEASE CHOOSE"></option>
                                 @foreach ($state as $key => $status)
                                 <option value="{{$key}}"> {{$status}}</option>
                                 @endforeach
                             </select>
+                            <input type="hidden" name="state" id="stateeditparenthidden">
                         </div>
                         <div class="col-sm-6">
                             <label for="country" class="form-label">Country</label>
-                            <select class="form-select" name="country" id="countryP1">
+                            <select class="form-select" name="country" id="countryP1" value="{{ $parent->country ?? '' }}">
+                                <?php 
+                                    $americass = americas();
+                                    $asias = asias();
+                                ?>
+                                <option value="" label="PLEASE CHOOSE" selected></option>
                                 <optgroup id="country-optgroup-Americas" label="Americas">
                                     @foreach ($americass as $key => $america)
                                     <option value="{{$key}}" >{{$america}}</option>
@@ -217,6 +223,7 @@
                                     @endforeach
                                 </optgroup>
                             </select>
+                            <input type="hidden" name="country" id="countryeditparenthidden">
                         </div>
                     </div>
                 </form>

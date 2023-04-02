@@ -68,7 +68,7 @@
                                 <label class="form-label">Amount</label>
                             </div>
                             <div class="col-md-8">
-                                <input type="number" name="amount" class="form-control">
+                                <input type="number" name="amount" id="amount"class="form-control" placeholder="0.00">
                             </div>
                         </div> 
                         <div class="row p-2">
@@ -83,7 +83,7 @@
                             <div class="col-md-4">
                                 <label class="form-label">Supporting Document</label>
                             </div>
-                            <div class="col-md-8">
+                            <div class="col-md-6">
                                 <input type="file" class="form-control-file" name="file_upload[]" id="supportdocument" multiple>
                             </div> 
                         </div>
@@ -384,7 +384,7 @@
                             <div class="col-md-4">
                                 <label class="form-label">Supporting Document</label>
                             </div>
-                            <div class="col-md-8">
+                            <div class="col-md-6">
                                 <input type="file" class="form-control-file" name="file_upload[]" id="supportdocument" multiple>
                             </div>
                         </div>
@@ -426,7 +426,7 @@
                             <div class="col-md-4">
                                 <label class="form-label">Supporting Document</label>
                             </div>
-                            <div class="col-md-8">
+                            <div class="col-md-6">
                                 <input type="file" class="form-control-file" name="file_upload[]" id="supportdocument" multiple>
                                 <input type="hidden" name="general_id" value="{{ Request::segment(4) }}">
                                 <input type="hidden" value="{{ isset($month_id) ? month($month_id) : $month }}" name="month">

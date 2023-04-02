@@ -29,6 +29,7 @@ use App\Models\Users;
 use App\Models\UserRole;
 use App\Models\TransportMillage;
 use App\Models\EclaimGeneral;
+use App\Models\PermissionRole;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -562,63 +563,64 @@ if (!function_exists('asias')) {
     function asias()
     {
         $data = [
-            'AFGHANISTAN' => "AFGHANISTAN",
-            'ARMENIA' => "ARMENIA",
-            'AZERBAIJAN' => "AZERBAIJAN",
-            'BAHRAIN' => "BAHRAIN",
-            'BANGLADESH' => "BANGLADESH",
-            'BHUTAN' => "BHUTAN",
-            'BRUNEI' => "BRUNEI",
-            'CAMBODIA' => "CAMBODIA",
-            'CHINA' => "CHINA",
-            'GEORGIA' => "GEORGIA",
-            'HONG KONG SAR CHINA' => "HONG KONG SAR CHINA",
-            'INDIA' => "INDIA",
-            'INDONESIA' => "INDONESIA",
-            'IRAN' => "IRAN",
-            'IRAQ' => "IRAQ",
-            'ISRAEL' => "ISRAEL",
-            'JAPAN' => "JAPAN",
-            'JORDAN' => "JORDAN",
-            'KAZAKHSTAN' => "KAZAKHSTAN",
-            'KUWAIT' => "KUWAIT",
-            'KYRGYZSTAN' => "KYRGYZSTAN",
-            'LAOS' => "LAOS",
-            'LEBANON' => "LEBANON",
-            'MACAU SAR CHINA' => "MACAU SAR CHINA",
-            'MALAYSIA' => "MALAYSIA",
-            'MALDIVES' => "MALDIVES",
-            'MONGOLIA' => "MONGOLIA",
-            'MYANMAR' => "MYANMAR [BURMA]",
-            'NEPAL' => "NEPAL",
-            'NEUTRAL ZONE' => "NEUTRAL ZONE",
-            'NORTH KOREA' => "NORTH KOREA",
-            'OMAN' => "OMAN",
-            'PAKISTAN' => "PAKISTAN",
-            'PALESTINIAN' => "PALESTINIAN TERRITORIES",
-            'YEMEN' => "PEOPLE'S DEMOCRATIC REPUBLIC OF YEMEN",
-            'PHILIPPINES' => "PHILIPPINES",
-            'QATAR' => "QATAR",
-            'SAUDI ARABIA' => "SAUDI ARABIA",
-            'SINGAPORE' => "SINGAPORE",
-            'SOUTH KOREA' => "SOUTH KOREA",
-            'SRI LANKA' => "SRI LANKA",
-            'SYRIA' => "SYRIA",
-            'TAIWAN' => "TAIWAN",
-            'TAJIKISTAN' => "TAJIKISTAN",
-            'THAILAND' => "THAILAND",
-            'TIMOR-LESTE' => "TIMOR-LESTE",
-            'TURKEY' => "TURKEY",
-            'TURKMENISTAN' => "TURKMENISTAN",
-            'UNITED ARAB EMIRATES' => "UNITED ARAB EMIRATES",
-            'UZBEKISTAN' => "UZBEKISTAN",
-            'VIETNAM' => "VIETNAM",
-            'YEMEN' => "YEMEN"
+            'AF' => "AFGHANISTAN",
+            'AM' => "ARMENIA",
+            'AZ' => "AZERBAIJAN",
+            'BH' => "BAHRAIN",
+            'BD' => "BANGLADESH",
+            'BT' => "BHUTAN",
+            'BN' => "BRUNEI",
+            'KH' => "CAMBODIA",
+            'CN' => "CHINA",
+            'GE' => "GEORGIA",
+            'HK' => "HONG KONG SAR CHINA",
+            'IN' => "INDIA",
+            'ID' => "INDONESIA",
+            'IR' => "IRAN",
+            'IQ' => "IRAQ",
+            'IL' => "ISRAEL",
+            'JP' => "JAPAN",
+            'JO' => "JORDAN",
+            'KZ' => "KAZAKHSTAN",
+            'KW' => "KUWAIT",
+            'KG' => "KYRGYZSTAN",
+            'LA' => "LAOS",
+            'LB' => "LEBANON",
+            'MO' => "MACAU SAR CHINA",
+            'MY' => "MALAYSIA",
+            'MV' => "MALDIVES",
+            'MN' => "MONGOLIA",
+            'MM' => "MYANMAR [BURMA]",
+            'NP' => "NEPAL",
+            'NZ' => "NEUTRAL ZONE",
+            'KP' => "NORTH KOREA",
+            'OM' => "OMAN",
+            'PK' => "PAKISTAN",
+            'PS' => "PALESTINIAN TERRITORIES",
+            'YE' => "PEOPLE'S DEMOCRATIC REPUBLIC OF YEMEN",
+            'PH' => "PHILIPPINES",
+            'QA' => "QATAR",
+            'SA' => "SAUDI ARABIA",
+            'SG' => "SINGAPORE",
+            'KR' => "SOUTH KOREA",
+            'LK' => "SRI LANKA",
+            'SY' => "SYRIA",
+            'TW' => "TAIWAN",
+            'TJ' => "TAJIKISTAN",
+            'TH' => "THAILAND",
+            'TL' => "TIMOR-LESTE",
+            'TR' => "TURKEY",
+            'TM' => "TURKMENISTAN",
+            'AE' => "UNITED ARAB EMIRATES",
+            'UZ' => "UZBEKISTAN",
+            'VN' => "VIETNAM",
+            'YE' => "YEMEN"
         ];
 
         return $data;
     }
 }
+
 
 
 if (!function_exists('getCompany')) {
@@ -779,7 +781,7 @@ if (!function_exists('getState')) {
             'KUALA LUMPUR' => 'KUALA LUMPUR',
             'LABUAN' => 'LABUAN',
             'PUTRAJAYA' => 'PUTRAJAYA',
-
+            'OTHERS' => 'OTHERS',
         ];
 
         return $data;
@@ -965,7 +967,8 @@ if (!function_exists('state')) {
             'TERENGGANU' => 'TERENGGANU',
             'KUALA LUMPUR' => 'KUALA LUMPUR',
             'LABUAN' => 'LABUAN',
-            'PUTRAJAYA' => 'PUTRAJAYA'
+            'PUTRAJAYA' => 'PUTRAJAYA',
+            'OTHERS' => 'OTHERS',
         ];
 
         return $data;
@@ -2165,6 +2168,21 @@ if (!function_exists('getEmployeeDetail')) {
         return $data;
     }
 }
+
+
+if (!function_exists('getPermissionByRoleId')) {
+    function getPermissionByRoleId($id = '')
+    {
+        $data = PermissionRole::select('permission_code')->where([['tenant_id', Auth::user()->tenant_id], ['role_id', $id]])->get();
+
+        if (!$data) {
+            $data = [];
+        }
+
+        return $data;
+    }
+}
+
 
 if (!function_exists('getEmployeeNamebyDepartments')) {
     function getEmployeeNamebyDepartments($id = '')

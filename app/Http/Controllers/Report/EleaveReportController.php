@@ -25,30 +25,10 @@ class EleaveReportController extends Controller
     public function searchEleaveReport(Request $r)
     {
         $ms = new EleaveReportService;
-        //$data = [];
-        // return view('pages.report.myleave.myleaveReport', $data);
-
-        // $data['myleave'] = $ms->myleaveView();
-        // $data['myleaveHistory'] = $ms->myleaveHistoryView();
-        // $data['applydate'] = '';
-        // $data['typelist'] = '';
-        // $data['status_searching'] = '';
-        // $data['types'] = $ms->datatype();
-        // // $data['mypie'] = $ms->datapie();
-
         $input = $r->input();
         if($input){
             $data['myleavereport'] = $ms->searchEleaveReport($r);
-            // $data['applydate'] = $input['applydate'];
-            // $data['typelist'] = $input['typelist'];
-            // $data['typelist'] = $input['typelist'];
-            // $data['department'] = $input['department'];
-            // $data['status_searching'] = $input['status'];
-
-            // dd($data);
-            // die;
         }
-        
         
         return view('pages.report.myleave.resultEleaveReport',$data);
     }

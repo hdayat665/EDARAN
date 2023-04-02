@@ -24,15 +24,10 @@
         color: rgb(201, 0, 0) !important;
     }
 
-
-
     .bg-blue {
-   background-color: blue;
-}
-
-
+        background-color: blue;
+    }
 </style>
-
 
 <head>
     <meta charset="utf-8" />
@@ -40,7 +35,6 @@
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
     <meta content="" name="description" />
     <meta content="" name="author" />
-
     <link rel="shortcut icon" href="/assets/img/logo/orbit-sm.png">
     <!-- ================== BEGIN core-css ================== -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -50,14 +44,12 @@
     <link href="/assets/css/vendor.min.css" rel="stylesheet" />
     <link href="/assets/css/default/app.min.css" rel="stylesheet" />
     <!-- ================== END core-css ================== -->
-
     <!-- ================== BEGIN page-css ================== -->
     <link href="/assets/plugins/jvectormap-next/jquery-jvectormap.css" rel="stylesheet" />
     <link href="/assets/plugins/gritter/css/jquery.gritter.css" rel="stylesheet" />
     <link href="/assets/plugins/nvd3/build/nv.d3.css" rel="stylesheet" />
     <link href="/assets/plugins/simple-calendar/dist/simple-calendar.css" rel="stylesheet" />
     <link href="/assets/plugins/jstree/dist/themes/default/style.min.css" rel="stylesheet" />
-
     <link href="/assets/plugins/@fullcalendar/common/main.min.css" rel="stylesheet" />
     <link href="/assets/plugins/@fullcalendar/daygrid/main.min.css" rel="stylesheet" />
     <link href="/assets/plugins/@fullcalendar/timegrid/main.min.css" rel="stylesheet" />
@@ -88,7 +80,6 @@
         <span class="spinner"></span>
     </div>
     <!-- END #loader -->
-
     <!-- BEGIN #app -->
     <div id="app" class="app app-header-fixed app-sidebar-fixed">
         <!-- BEGIN #header -->
@@ -105,7 +96,6 @@
             <!-- END navbar-header -->
             <!-- BEGIN header-nav -->
             <div class="navbar-nav">
-
                 <div class="navbar-item dropdown">
                     <a href="#" data-bs-toggle="dropdown" class="navbar-link dropdown-toggle icon">
                         <i class="fa fa-bell"></i>
@@ -168,29 +158,25 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="navbar-item navbar-user dropdown">
                     <?php if(Auth::check()): ?>
-                        <a href="#" class="navbar-link dropdown-toggle d-flex align-items-center" data-bs-toggle="dropdown">
-                            @php
-                            $profilePicUrl = asset('storage/profilePic/' . (Auth::user()->id) . '.jpg');
-                            @endphp
-
-                            @if ((Auth::user()->id) && file_exists(public_path('storage/profilePic/' . (Auth::user()->id) . '.jpg')))
-                                <img src="{{ $profilePicUrl }}" width="100%" class="rounded d-block" alt="Profile Picture">
-                            @else
-                                <img src="{{ asset('../assets/img/user/user-13.jpg') }}" width="100%" class="rounded d-block" alt="Profile Picture">
-                            @endif
-                            <span>
-                                <span class="d-none d-md-inline">
-                                    <?php echo Auth::user()->username; ?> <!-- Display username here -->
-                                </span>
-                                <b class="caret"></b>
+                    <a href="#" class="navbar-link dropdown-toggle d-flex align-items-center" data-bs-toggle="dropdown">
+                        @php
+                            $profilePicUrl = asset('storage/profilePic/' . Auth::user()->id . '.jpg');
+                        @endphp @if (Auth::user()->id && file_exists(public_path('storage/profilePic/' . Auth::user()->id . '.jpg')))
+                            <img src="{{ $profilePicUrl }}" width="100%" class="rounded d-block" alt="Profile Picture">
+                        @else
+                            <img src="{{ asset('../assets/img/user/user-13.jpg') }}" width="100%" class="rounded d-block" alt="Profile Picture">
+                        @endif
+                        <span>
+                            <span class="d-none d-md-inline">
+                                <?php echo Auth::user()->username; ?>
+                                <!-- Display username here -->
                             </span>
-                        </a>
-                    <?php endif; ?>
-
-                    <div class="dropdown-menu dropdown-menu-end me-1">
+                            <b class="caret"></b>
+                        </span>
+                    </a>
+                    <?php endif; ?> <div class="dropdown-menu dropdown-menu-end me-1">
                         <a href="javascript:;" class="dropdown-item">Edit Profile</a>
                         <a href="javascript:;" class="dropdown-item d-flex align-items-center">
                             Inbox
@@ -206,7 +192,6 @@
             <!-- END header-nav -->
         </div>
         <!-- END #header -->
-
         <!-- BEGIN #sidebar -->
         <div id="sidebar" class="app-sidebar bg-gradient-gray">
             <!-- BEGIN scrollbar -->
@@ -214,7 +199,6 @@
                 <!-- BEGIN menu -->
                 <div class="menu">
                     <!-- Sidenav Content Orbit -->
-
                     <div class="menu-item has-sub mt-3">
                         <a href="/dashboardTenant" class="menu-link active">
                             <div class="menu-icon">
@@ -222,12 +206,17 @@
                             </div>
                             <div class="menu-text text-gray">Dashboard</div>
                         </a>
-                    </div>
-
-                    <!-- End Sidenav Content Orbit -->
-
-                    <!-- Sidenav Content Orbit -->
-
+                    </div> 
+                    <?php
+                        $permissions = getPermissionByRoleId(Auth::user()->role_id);
+                        $role_permission = []; 
+                        foreach ($permissions as $permission) {
+                            $role_permission[] = $permission->permission_code;
+                        }
+                        if (!$role_permission) { 
+                            $role_permission = []; 
+                        }
+                    ?>
                     <div class="menu-item has-sub">
                         <a href="javascript:;" class="menu-link">
                             <div class="menu-icon">
@@ -245,22 +234,20 @@
                                     <div class="menu-text text-gray">My Profile </div>
                                 </a>
                             </div>
-
-                            <div class="menu-item">
-                                <a href="/employeeInfoView" class="menu-link">
-                                    <div class="menu-icon">
-                                        <i class="fa fa-indent text-gray"></i>
-                                    </div>
-                                    <div class="menu-text text-gray">Employee Information</div>
-                                </a>
-                            </div>
-
+                            <?php $target = ['hris_register_employee', 'hris_update_employee', 'hris_terminate_employee', 'hris_activate_employee', 'employee_info']; ?>
+                            @if (array_intersect($role_permission, $target))
+                                <div class="menu-item">
+                                    <a href="/employeeInfoView" class="menu-link">
+                                        <div class="menu-icon">
+                                            <i class="fa fa-indent text-gray"></i>
+                                        </div>
+                                        <div class="menu-text text-gray">Employee Information </div>
+                                    </a>
+                                </div>
+                            @endif
                         </div>
-                    </div>
-
-                    <!-- End Sidenav Content Orbit -->
+                    </div> <!-- End Sidenav Content Orbit -->
                     <!-- Sidenav Content Orbit -->
-
                     <div class="menu-item has-sub">
                         <a href="javascript:;" class="menu-link">
                             <div class="menu-icon">
@@ -270,22 +257,27 @@
                             <div class="menu-caret text-gray"></div>
                         </a>
                         <div class="menu-submenu">
-                            <div class="menu-item">
-                                <a href="/myTimesheet" class="menu-link">
-                                    <div class="menu-icon">
-                                        <i class="fa fa-calendar-check text-gray"></i>
-                                    </div>
-                                    <div class="menu-text text-gray">My Timesheets</div>
-                                </a>
-                            </div>
-                            <div class="menu-item">
-                                <a href="/timesheetApproval" class="menu-link">
-                                    <div class="menu-icon">
-                                        <i class="fa fa-receipt text-gray"></i>
-                                    </div>
-                                    <div class="menu-text text-gray">Timesheets Approval</div>
-                                </a>
-                            </div>
+                            <?php $target = ['my_timesheet', 'tsr_timesheet_create_event']; ?>
+                            @if (array_intersect($role_permission, $target))
+                                <div class="menu-item">
+                                    <a href="/myTimesheet" class="menu-link">
+                                        <div class="menu-icon">
+                                            <i class="fa fa-calendar-check text-gray"></i>
+                                        </div>
+                                        <div class="menu-text text-gray">My Timesheets</div>
+                                    </a>
+                                </div>
+                            @endif <?php $target = ['timesheet_approval', 'tsr_timesheet_approval', 'tsr_timesheet_reject']; ?>
+                            @if (array_intersect($role_permission, $target))
+                                <div class="menu-item">
+                                    <a href="/timesheetApproval" class="menu-link">
+                                        <div class="menu-icon">
+                                            <i class="fa fa-receipt text-gray"></i>
+                                        </div>
+                                        <div class="menu-text text-gray">Timesheets Approval</div>
+                                    </a>
+                                </div>
+                            @endif
                             <div class="menu-item">
                                 <a href="/realtimeEventTimesheet" class="menu-link">
                                     <div class="menu-icon">
@@ -294,13 +286,9 @@
                                     <div class="menu-text text-gray">Realtime Activities</div>
                                 </a>
                             </div>
-
                         </div>
-                    </div>
-
-                    <!-- End Sidenav Content Orbit -->
+                    </div> <!-- End Sidenav Content Orbit -->
                     <!-- Sidenav Content Orbit -->
-
                     <div class="menu-item has-sub">
                         <a href="javascript:;" class="menu-link">
                             <div class="menu-icon">
@@ -310,29 +298,30 @@
                             <div class="menu-caret text-gray"></div>
                         </a>
                         <div class="menu-submenu">
-                            <div class="menu-item">
-                                <a href="#" class="menu-link">
-                                    <div class="menu-icon">
-                                        <i class="fa fa-bell text-gray"></i>
-                                    </div>
-                                    <div class="menu-text text-gray">My Attendance</div>
-                                </a>
-                            </div>
-                            <div class="menu-item">
-                                <a href="#" class="menu-link">
-                                    <div class="menu-icon">
-                                        <i class="fa fa-list-check text-gray"></i>
-                                    </div>
-                                    <div class="menu-text text-gray">Attendance Information</div>
-                                </a>
-                            </div>
-
+                            <?php $target = ['my_attendance', 'attendance_view_action_log']; ?>
+                            @if (array_intersect($role_permission, $target))
+                                <div class="menu-item">
+                                    <a href="#" class="menu-link">
+                                        <div class="menu-icon">
+                                            <i class="fa fa-bell text-gray"></i>
+                                        </div>
+                                        <div class="menu-text text-gray">My Attendance</div>
+                                    </a>
+                                </div>
+                            @endif <?php $target = ['attendance_info']; ?>
+                            @if (array_intersect($role_permission, $target))
+                                <div class="menu-item">
+                                    <a href="#" class="menu-link">
+                                        <div class="menu-icon">
+                                            <i class="fa fa-list-check text-gray"></i>
+                                        </div>
+                                        <div class="menu-text text-gray">Attendance Information</div>
+                                    </a>
+                                </div>
+                            @endif
                         </div>
-                    </div>
-
-                    <!-- End Sidenav Content Orbit -->
+                    </div> <!-- End Sidenav Content Orbit -->
                     <!-- Sidenav Content Orbit -->
-
                     <div class="menu-item has-sub">
                         <a href="javascript:;" class="menu-link">
                             <div class="menu-icon">
@@ -360,33 +349,32 @@
                                     <div class="menu-caret text-gray"></div>
                                 </a>
                                 <div class="menu-submenu">
-                                    <div class="menu-item">
-                                        <a href="/leaveAppr" class="menu-link">
-                                            <div class="menu-icon">
-                                                <i class="fa fa-user-pen text-gray"></i>
-                                            </div>
-                                            <div class="menu-text text-gray">Supervisor</div>
-                                        </a>
-                                    </div>
-                                    <div class="menu-item">
-                                        <a href="/leaveApprhod" class="menu-link">
-                                            <div class="menu-icon">
-                                                <i class="fa fa-users-gear text-gray"></i>
-                                            </div>
-                                            <div class="menu-text text-gray">HOD</div>
-                                        </a>
-                                    </div>
-
+                                    <?php $target = ['leave', 'leave_department_approve', 'departments', 'leave_approval']; ?>
+                                    @if (array_intersect($role_permission, $target))
+                                        <div class="menu-item">
+                                            <a href="/leaveAppr" class="menu-link">
+                                                <div class="menu-icon">
+                                                    <i class="fa fa-user-pen text-gray"></i>
+                                                </div>
+                                                <div class="menu-text text-gray">Supervisor</div>
+                                            </a>
+                                        </div>
+                                    @endif <?php $target = ['leave', 'leave_hod_approve', 'HOD', 'leave_approval']; ?>
+                                    @if (array_intersect($role_permission, $target))
+                                        <div class="menu-item">
+                                            <a href="/leaveApprhod" class="menu-link">
+                                                <div class="menu-icon">
+                                                    <i class="fa fa-users-gear text-gray"></i>
+                                                </div>
+                                                <div class="menu-text text-gray">HOD</div>
+                                            </a>
+                                        </div>
+                                    @endif
                                 </div>
-
-
                             </div>
                         </div>
-                    </div>
-
-                    <!-- End Sidenav Content Orbit -->
+                    </div> <!-- End Sidenav Content Orbit -->
                     <!-- Sidenav Content Orbit -->
-
                     <div class="menu-item has-sub">
                         <a href="javascript:;" class="menu-link">
                             <div class="menu-icon">
@@ -396,22 +384,27 @@
                             <div class="menu-caret text-gray"></div>
                         </a>
                         <div class="menu-submenu">
-                            <div class="menu-item">
-                                <a href="/customer" class="menu-link">
-                                    <div class="menu-icon">
-                                        <i class="fa fa-share-nodes text-gray"></i>
-                                    </div>
-                                    <div class="menu-text text-gray">Customer</i></div>
-                                </a>
-                            </div>
-                            <div class="menu-item">
-                                <a href="/projectInfo" class="menu-link">
-                                    <div class="menu-icon">
-                                        <i class="fa fa-book text-gray"></i>
-                                    </div>
-                                    <div class="menu-text text-gray">Project Information</div>
-                                </a>
-                            </div>
+                            <?php $target = ['project', 'add_customer', 'edit_customer', 'delete_customer']; ?>
+                            @if (array_intersect($role_permission, $target))
+                                <div class="menu-item">
+                                    <a href="/customer" class="menu-link">
+                                        <div class="menu-icon">
+                                            <i class="fa fa-share-nodes text-gray"></i>
+                                        </div>
+                                        <div class="menu-text text-gray">Customer</i></div>
+                                    </a>
+                                </div>
+                            @endif <?php $target = ['project', 'register_project', 'view_project', 'update_status', 'update_project', 'project_info']; ?>
+                            @if (array_intersect($role_permission, $target))
+                                <div class="menu-item">
+                                    <a href="/projectInfo" class="menu-link">
+                                        <div class="menu-icon">
+                                            <i class="fa fa-book text-gray"></i>
+                                        </div>
+                                        <div class="menu-text text-gray">Project Information</div>
+                                    </a>
+                                </div>
+                            @endif
                             <div class="menu-item">
                                 <a href="/myProject" class="menu-link">
                                     <div class="menu-icon">
@@ -419,21 +412,21 @@
                                     </div>
                                     <div class="menu-text text-gray">My Project</div>
                                 </a>
-                            </div>
-                            <div class="menu-item">
-                                <a href="/projectRequest" class="menu-link">
-                                    <div class="menu-icon">
-                                        <i class="fa fa-code-pull-request text-gray"></i>
-                                    </div>
-                                    <div class="menu-text text-gray">Project Request</div>
-                                </a>
-                            </div>
-
+                            </div> <?php $target = ['project', 'view_project_request', 'approve_project_request', 'reject_project_request', 'project_approval']; ?>
+                            @if (array_intersect($role_permission, $target))
+                                <div class="menu-item">
+                                    <a href="/projectRequest" class="menu-link">
+                                        <div class="menu-icon">
+                                            <i class="fa fa-code-pull-request text-gray"></i>
+                                        </div>
+                                        <div class="menu-text text-gray">Project Request</div>
+                                    </a>
+                                </div>
+                            @endif
                         </div>
                     </div>
                     <!-- End Sidenav Content Orbit -->
                     <!-- Sidenav Content Orbit -->
-
                     <div class="menu-item has-sub">
                         <a href="javascript:;" class="menu-link">
                             <div class="menu-icon">
@@ -451,10 +444,7 @@
                                     <div class="menu-text text-gray">My Claim</div>
                                 </a>
                             </div>
-
-                            <div class="menu-item has-sub">
-
-                                <a href="javascript:;" class="menu-link">
+                            <div class="menu-item has-sub"> <a href="javascript:;" class="menu-link">
                                     <div class="menu-icon">
                                         <i class="fa fa-list-check text-gray"></i>
                                     </div>
@@ -465,116 +455,124 @@
                                 </a>
                                 <div class="menu-submenu">
                                     <div class="menu-item has-sub">
-                                        <a href="#" class="menu-link">
-                                            <div class="menu-icon">
-                                                <i class="fa fa-user text-gray"></i>
+                                        <?php $target = ['claim', 'claim_department_approve', 'department', 'claim_approval']; ?>
+                                        @if (array_intersect($role_permission, $target))
+                                            <a href="#" class="menu-link">
+                                                <div class="menu-icon">
+                                                    <i class="fa fa-user text-gray"></i>
+                                                </div>
+                                                <div class="menu-text text-gray">Department</i>
+                                                </div>
+                                                <div class="menu-caret text-gray">
+                                                </div>
+                                            </a>
+                                            <div class="menu-submenu">
+                                                <div class="menu-item">
+                                                    <a href="/claimApprovalView/1" class="menu-link">
+                                                        <div class="menu-icon">
+                                                            <i class="fa fa-list-check text-gray"></i>
+                                                        </div>
+                                                        <div class="menu-text text-gray">Approver
+                                                        </div>
+                                                    </a>
+                                                </div>
+                                                <div class="menu-item">
+                                                    <a href="/claimApprovalView/2" class="menu-link">
+                                                        <div class="menu-icon">
+                                                            <i class="fa fa-list-check text-gray"></i>
+                                                        </div>
+                                                        <div class="menu-text text-gray">Recommender
+                                                        </div>
+                                                    </a>
+                                                </div>
                                             </div>
-                                            <div class="menu-text text-gray">Department</i>
-                                            </div>
-                                            <div class="menu-caret text-gray">
-                                            </div>
-                                        </a>
-                                        <div class="menu-submenu">
-                                            <div class="menu-item">
-                                                <a href="/claimApprovalView/1" class="menu-link">
-                                                    <div class="menu-icon">
-                                                        <i class="fa fa-list-check text-gray"></i>
-                                                    </div>
-                                                    <div class="menu-text text-gray">Approver
-                                                    </div>
-                                                </a>
-                                            </div>
-                                            <div class="menu-item">
-                                                <a href="/claimApprovalView/2" class="menu-link">
-                                                    <div class="menu-icon">
-                                                        <i class="fa fa-list-check text-gray"></i>
-                                                    </div>
-                                                    <div class="menu-text text-gray">Recommender
-                                                    </div>
-                                                </a>
-                                            </div>
-                                        </div>
+                                        @endif
                                     </div>
                                     <div class="menu-item has-sub">
-                                        <a href="#" class="menu-link">
-                                            <div class="menu-icon">
-                                                <i class="fa fa-user-tie text-gray"></i>
+                                        <?php $target = ['claim', 'claim_finance_approve', 'finance', 'claim_approval']; ?>
+                                        @if (array_intersect($role_permission, $target))
+                                            <a href="#" class="menu-link">
+                                                <div class="menu-icon">
+                                                    <i class="fa fa-user-tie text-gray"></i>
+                                                </div>
+                                                <div class="menu-text text-gray">Finance
+                                                </div>
+                                                <div class="menu-caret text-gray">
+                                                </div>
+                                            </a>
+                                            <div class="menu-submenu">
+                                                <div class="menu-item">
+                                                    <a href="/financeApprovalView" class="menu-link">
+                                                        <div class="menu-icon">
+                                                            <i class="fa fa-list-check text-gray"></i>
+                                                        </div>
+                                                        <div class="menu-text text-gray">Approver
+                                                        </div>
+                                                    </a>
+                                                </div>
+                                                <div class="menu-item">
+                                                    <a href="/financeRecView" class="menu-link">
+                                                        <div class="menu-icon">
+                                                            <i class="fa fa-list-check text-gray"></i>
+                                                        </div>
+                                                        <div class="menu-text text-gray">Recommender
+                                                        </div>
+                                                    </a>
+                                                </div>
+                                                <div class="menu-item">
+                                                    <a href="/financeCheckerView" class="menu-link">
+                                                        <div class="menu-icon">
+                                                            <i class="fa fa-list-check text-gray"></i>
+                                                        </div>
+                                                        <div class="menu-text text-gray">Checker
+                                                        </div>
+                                                    </a>
+                                                </div>
                                             </div>
-                                            <div class="menu-text text-gray">Finance
-                                            </div>
-                                            <div class="menu-caret text-gray">
-                                            </div>
-                                        </a>
-                                        <div class="menu-submenu">
-                                            <div class="menu-item">
-                                                <a href="/financeApprovalView" class="menu-link">
-                                                    <div class="menu-icon">
-                                                        <i class="fa fa-list-check text-gray"></i>
-                                                    </div>
-                                                    <div class="menu-text text-gray">Approver
-                                                    </div>
-                                                </a>
-                                            </div>
-                                            <div class="menu-item">
-                                                <a href="/financeRecView" class="menu-link">
-                                                    <div class="menu-icon">
-                                                        <i class="fa fa-list-check text-gray"></i>
-                                                    </div>
-                                                    <div class="menu-text text-gray">Recommender
-                                                    </div>
-                                                </a>
-                                            </div>
-                                            <div class="menu-item">
-                                                <a href="/financeCheckerView" class="menu-link">
-                                                    <div class="menu-icon">
-                                                        <i class="fa fa-list-check text-gray"></i>
-                                                    </div>
-                                                    <div class="menu-text text-gray">Checker
-                                                    </div>
-                                                </a>
-                                            </div>
-                                        </div>
+                                        @endif
                                     </div>
                                     <div class="menu-item has-sub">
-                                        <a href="#" class="menu-link">
-                                            <div class="menu-icon">
-                                                <i class="fa fa-user-gear text-gray"></i>
+                                        <?php $target = ['claim', 'claim_admin_approve', 'admin', 'claim_approval']; ?>
+                                        @if (array_intersect($role_permission, $target))
+                                            <a href="#" class="menu-link">
+                                                <div class="menu-icon">
+                                                    <i class="fa fa-user-gear text-gray"></i>
+                                                </div>
+                                                <div class="menu-text text-gray">Admin</i></div>
+                                                <div class="menu-caret text-gray">
+                                                </div>
+                                            </a>
+                                            <div class="menu-submenu">
+                                                <div class="menu-item">
+                                                    <a href="/adminApprovalView" class="menu-link">
+                                                        <div class="menu-icon">
+                                                            <i class="fa fa-list-check text-gray"></i>
+                                                        </div>
+                                                        <div class="menu-text text-gray">Approver
+                                                        </div>
+                                                    </a>
+                                                </div>
+                                                <div class="menu-item">
+                                                    <a href="/adminRecView" class="menu-link">
+                                                        <div class="menu-icon">
+                                                            <i class="fa fa-list-check text-gray"></i>
+                                                        </div>
+                                                        <div class="menu-text text-gray">Recommender
+                                                        </div>
+                                                    </a>
+                                                </div>
+                                                <div class="menu-item">
+                                                    <a href="/adminCheckerView" class="menu-link">
+                                                        <div class="menu-icon">
+                                                            <i class="fa fa-list-check text-gray"></i>
+                                                        </div>
+                                                        <div class="menu-text text-gray">Checker
+                                                        </div>
+                                                    </a>
+                                                </div>
                                             </div>
-                                            <div class="menu-text text-gray">Admin</i></div>
-                                            <div class="menu-caret text-gray">
-                                            </div>
-                                        </a>
-                                        <div class="menu-submenu">
-                                            <div class="menu-item">
-                                                <a href="/adminApprovalView" class="menu-link">
-                                                    <div class="menu-icon">
-                                                        <i class="fa fa-list-check text-gray"></i>
-                                                    </div>
-                                                    <div class="menu-text text-gray">Approver
-                                                    </div>
-                                                </a>
-                                            </div>
-                                            <div class="menu-item">
-                                                <a href="/adminRecView" class="menu-link">
-                                                    <div class="menu-icon">
-                                                        <i class="fa fa-list-check text-gray"></i>
-                                                    </div>
-                                                    <div class="menu-text text-gray">Recommender
-                                                    </div>
-                                                </a>
-                                            </div>
-                                            <div class="menu-item">
-                                                <a href="/adminCheckerView" class="menu-link">
-                                                    <div class="menu-icon">
-                                                        <i class="fa fa-list-check text-gray"></i>
-                                                    </div>
-                                                    <div class="menu-text text-gray">Checker
-                                                    </div>
-                                                </a>
-                                            </div>
-                                        </div>
+                                        @endif
                                     </div>
-
                                 </div>
                             </div>
                             <div class="menu-item has-sub">
@@ -669,11 +667,8 @@
                                 </a>
                             </div>
                         </div>
-                    </div>
-
-                    <!-- End Sidenav Content Orbit -->
+                    </div> <!-- End Sidenav Content Orbit -->
                     <!-- Sidenav Content Orbit -->
-
                     <div class="menu-item has-sub">
                         <a href="javascript:;" class="menu-link">
                             <div class="menu-icon">
@@ -682,7 +677,6 @@
                             <div class="menu-text text-gray">Organization</div>
                             <div class="menu-caret text-gray"></div>
                         </a>
-
                         <div class="menu-submenu">
                             <div class="menu-item">
                                 <a href="/phoneDirectory" class="menu-link">
@@ -717,12 +711,8 @@
                                     </a>
                                 </div> --}}
                         </div>
-
-                    </div>
-
-                    <!-- End Sidenav Content Orbit -->
+                    </div> <!-- End Sidenav Content Orbit -->
                     <!-- Sidenav Content Orbit -->
-
                     <div class="menu-item has-sub">
                         <a href="javascript:;" class="menu-link">
                             <div class="menu-icon">
@@ -733,167 +723,166 @@
                         </a>
                         <div class="menu-submenu">
                             <div class="menu-item has-sub">
-                                <a href="#" class="menu-link">
-                                    <div class="menu-icon">
-                                        <i class="fa fa-file-signature text-gray"></i>
+                                <?php $target = ['reporting', 'report_tsr']; ?>
+                                @if (array_intersect($role_permission, $target))
+                                    <a href="#" class="menu-link">
+                                        <div class="menu-icon">
+                                            <i class="fa fa-file-signature text-gray"></i>
+                                        </div>
+                                        <div class="menu-text text-gray">Timesheet</i></div>
+                                        <div class="menu-caret text-gray"></div>
+                                    </a>
+                                    <div class="menu-submenu">
+                                        <div class="menu-item">
+                                            <a href="/statusReport" class="menu-link">
+                                                <div class="menu-icon">
+                                                    <i class="fa fa-address-card text-gray"></i>
+                                                </div>
+                                                <div class="menu-text text-gray">Status Report</div>
+                                            </a>
+                                        </div>
+                                        <div class="menu-item">
+                                            <a href="/employeeReport" class="menu-link">
+                                                <div class="menu-icon">
+                                                    <i class="fa fa-user-clock text-gray"></i>
+                                                </div>
+                                                <div class="menu-text text-gray">Employee Report</div>
+                                            </a>
+                                        </div>
+                                        <div class="menu-item">
+                                            <a href="/overtimeReport" class="menu-link">
+                                                <div class="menu-icon">
+                                                    <i class="fa fa-user-gear text-gray"></i>
+                                                </div>
+                                                <div class="menu-text text-gray">Overtime Report</div>
+                                            </a>
+                                        </div>
                                     </div>
-                                    <div class="menu-text text-gray">Timesheet</i></div>
-                                    <div class="menu-caret text-gray"></div>
-                                </a>
-
-                                <div class="menu-submenu">
-                                    <div class="menu-item">
-                                        <a href="/statusReport" class="menu-link">
-                                            <div class="menu-icon">
-                                                <i class="fa fa-address-card text-gray"></i>
-                                            </div>
-                                            <div class="menu-text text-gray">Status Report</div>
-                                        </a>
-                                    </div>
-
-                                    <div class="menu-item">
-                                        <a href="/employeeReport" class="menu-link">
-                                            <div class="menu-icon">
-                                                <i class="fa fa-user-clock text-gray"></i>
-                                            </div>
-                                            <div class="menu-text text-gray">Employee Report</div>
-                                        </a>
-                                    </div>
-
-                                    <div class="menu-item">
-                                        <a href="/overtimeReport" class="menu-link">
-                                            <div class="menu-icon">
-                                                <i class="fa fa-user-gear text-gray"></i>
-                                            </div>
-                                            <div class="menu-text text-gray">Overtime Report</div>
-                                        </a>
-                                    </div>
-                                </div>
+                                @endif
                             </div>
                             <div class="menu-item has-sub">
-                                <a href="#" class="menu-link">
-                                    <div class="menu-icon">
-                                        <i class="fa fa-user-check text-gray"></i>
+                                <?php $target = ['reporting', 'report_attendance']; ?>
+                                @if (array_intersect($role_permission, $target))
+                                    <a href="#" class="menu-link">
+                                        <div class="menu-icon">
+                                            <i class="fa fa-user-check text-gray"></i>
+                                        </div>
+                                        <div class="menu-text text-gray">E-Attendance</div>
+                                        <div class="menu-caret text-gray"></div>
+                                    </a>
+                                    <div class="menu-submenu">
+                                        <div class="menu-item">
+                                            <a href="#" class="menu-link">
+                                                <div class="menu-icon">
+                                                    <i class="fa fa-user-pen text-gray"></i>
+                                                </div>
+                                                <div class="menu-text text-gray">Daily Report</div>
+                                            </a>
+                                        </div>
+                                        <div class="menu-item">
+                                            <a href="#" class="menu-link">
+                                                <div class="menu-icon">
+                                                    <i class="fa fa-users-gear text-gray"></i>
+                                                </div>
+                                                <div class="menu-text text-gray">Status Report</div>
+                                            </a>
+                                        </div>
                                     </div>
-                                    <div class="menu-text text-gray">E-Attendance</div>
-                                    <div class="menu-caret text-gray"></div>
-                                </a>
-                                <div class="menu-submenu">
-                                    <div class="menu-item">
-                                        <a href="#" class="menu-link">
-                                            <div class="menu-icon">
-                                                <i class="fa fa-user-pen text-gray"></i>
-                                            </div>
-                                            <div class="menu-text text-gray">Daily Report</div>
-                                        </a>
-                                    </div>
-                                    <div class="menu-item">
-                                        <a href="#" class="menu-link">
-                                            <div class="menu-icon">
-                                                <i class="fa fa-users-gear text-gray"></i>
-                                            </div>
-                                            <div class="menu-text text-gray">Status Report</div>
-                                        </a>
-                                    </div>
-
-                                </div>
-
-
+                                @endif
                             </div>
                             <div class="menu-item">
-                                <a href="/leaveReport" class="menu-link">
-                                    <div class="menu-icon">
-                                        <i class="fa fa-user-minus text-gray"></i>
-                                    </div>
-                                    <div class="menu-text text-gray">E-Leave</div>
-                                </a>
-                            </div>
-
-                            <div class="menu-item has-sub">
-                                <a href="#" class="menu-link">
-                                    <div class="menu-icon">
-                                        <i class="fa fa-keyboard text-gray"></i>
-                                    </div>
-                                    <div class="menu-text text-gray">Project</div>
-                                    <div class="menu-caret text-gray"></div>
-                                </a>
-                                <div class="menu-submenu">
-                                    <div class="menu-item">
-                                        <a href="/projectListing" class="menu-link">
-                                            <div class="menu-icon">
-                                                <i class="fa fa-book text-gray"></i>
-                                            </div>
-                                            <div class="menu-text text-gray">Project Listing</div>
-                                        </a>
-                                    </div>
-                                    <div class="menu-item">
-                                        <a href="/projectFilter" class="menu-link">
-                                            <div class="menu-icon">
-                                                <i class="fa fa-book-open text-gray"></i>
-                                            </div>
-                                            <div class="menu-text text-gray">Project Report</div>
-                                        </a>
-                                    </div>
-
-                                </div>
-
+                                <?php $target = ['reporting', 'report_leave']; ?>
+                                @if (array_intersect($role_permission, $target))
+                                    <a href="/leaveReport" class="menu-link">
+                                        <div class="menu-icon">
+                                            <i class="fa fa-user-minus text-gray"></i>
+                                        </div>
+                                        <div class="menu-text text-gray">E-Leave</div>
+                                    </a>
+                                @endif
                             </div>
                             <div class="menu-item has-sub">
-                                <a href="#" class="menu-link">
-                                    <div class="menu-icon">
-                                        <i class="fa fa-money-check text-gray"></i>
+                                <?php $target = ['reporting', 'report_project']; ?>
+                                @if (array_intersect($role_permission, $target))
+                                    <a href="#" class="menu-link">
+                                        <div class="menu-icon">
+                                            <i class="fa fa-keyboard text-gray"></i>
+                                        </div>
+                                        <div class="menu-text text-gray">Project</div>
+                                        <div class="menu-caret text-gray"></div>
+                                    </a>
+                                    <div class="menu-submenu">
+                                        <div class="menu-item">
+                                            <a href="/projectListing" class="menu-link">
+                                                <div class="menu-icon">
+                                                    <i class="fa fa-book text-gray"></i>
+                                                </div>
+                                                <div class="menu-text text-gray">Project Listing</div>
+                                            </a>
+                                        </div>
+                                        <div class="menu-item">
+                                            <a href="/projectFilter" class="menu-link">
+                                                <div class="menu-icon">
+                                                    <i class="fa fa-book-open text-gray"></i>
+                                                </div>
+                                                <div class="menu-text text-gray">Project Report</div>
+                                            </a>
+                                        </div>
                                     </div>
-                                    <div class="menu-text text-gray">Claim</div>
-                                    <div class="menu-caret text-gray"></div>
-                                </a>
-                                <div class="menu-submenu">
-                                    <div class="menu-item">
-                                        <a href="/eclaimListing" class="menu-link">
-                                            <div class="menu-icon">
-                                                <i class="fa fa-money-bill-wave text-gray"></i>
-                                            </div>
-                                            <div class="menu-text text-gray">Claim</div>
-                                        </a>
+                                @endif
+                            </div>
+                            <div class="menu-item has-sub">
+                                <?php $target = ['reporting', 'report_claim']; ?>
+                                @if (array_intersect($role_permission, $target))
+                                    <a href="#" class="menu-link">
+                                        <div class="menu-icon">
+                                            <i class="fa fa-money-check text-gray"></i>
+                                        </div>
+                                        <div class="menu-text text-gray">Claim</div>
+                                        <div class="menu-caret text-gray"></div>
+                                    </a>
+                                    <div class="menu-submenu">
+                                        <div class="menu-item">
+                                            <a href="/eclaimListing" class="menu-link">
+                                                <div class="menu-icon">
+                                                    <i class="fa fa-money-bill-wave text-gray"></i>
+                                                </div>
+                                                <div class="menu-text text-gray">Claim</div>
+                                            </a>
+                                        </div>
+                                        <div class="menu-item">
+                                            <a href="/cashadvanceListing" class="menu-link">
+                                                <div class="menu-icon">
+                                                    <i class="fa fa-money-bill-1-wave text-gray"></i>
+                                                </div>
+                                                <div class="menu-text text-gray">Cash Advance</div>
+                                            </a>
+                                        </div>
                                     </div>
-                                    <div class="menu-item">
-                                        <a href="/cashadvanceListing" class="menu-link">
-                                            <div class="menu-icon">
-                                                <i class="fa fa-money-bill-1-wave text-gray"></i>
-                                            </div>
-                                            <div class="menu-text text-gray">Cash Advance</div>
-                                        </a>
-                                    </div>
-
-                                </div>
+                                @endif
                             </div>
                             <div class="menu-item">
-                                <a href="/corlisting" class="menu-link">
-                                    <div class="menu-icon">
-                                        <i class="fa fa-user-minus text-gray"></i>
-                                    </div>
-                                    <div class="menu-text text-gray">Charge Out Rate</div>
-                                </a>
+                                <?php $target = ['reporting', 'report_cor']; ?>
+                                @if (array_intersect($role_permission, $target))
+                                    <a href="/corlisting" class="menu-link">
+                                        <div class="menu-icon">
+                                            <i class="fa fa-user-minus text-gray"></i>
+                                        </div>
+                                        <div class="menu-text text-gray">Charge Out Rate</div>
+                                    </a>
+                                @endif
                             </div>
                         </div>
-                    </div>
-
-                    <!-- End Sidenav Content Orbit -->
+                    </div> <!-- End Sidenav Content Orbit -->
                     <!-- Sidenav Content Orbit -->
-
                     <div class="menu-item has-sub">
                         <a href="/setting" class="menu-link">
                             <div class="menu-icon">
                                 <i class="fa fa-gear text-gray"></i>
                             </div>
                             <div class="menu-text text-gray">Settings</div>
-
                         </a>
-
-                    </div>
-
-                    <!-- End Sidenav Content Orbit -->
-
-
+                    </div> <!-- End Sidenav Content Orbit -->
                     <!-- BEGIN minify-button -->
                     <!-- <div class="menu-item d-flex text-gray">
                         <a href="javascript:;" class="app-sidebar-minify-btn ms-auto text-gray" data-toggle="app-sidebar-minify"><i class="fa fa-angle-double-left"></i></a>
@@ -909,15 +898,11 @@
         <!-- END #sidebar -->
         @yield('content')
         <!-- BEGIN #content -->
-        <a href="javascript:;" class="btn btn-icon btn-circle btn-success btn-scroll-to-top" data-toggle="scroll-to-top"><i class="fa fa-angle-up"></i></a>
-
-        <!-- END #app -->
-
+        <a href="javascript:;" class="btn btn-icon btn-circle btn-success btn-scroll-to-top" data-toggle="scroll-to-top"><i class="fa fa-angle-up"></i></a> <!-- END #app -->
         <!-- ================== BEGIN core-js ================== -->
         <script src="/assets/js/vendor.min.js"></script>
         <script src="/assets/js/app.min.js"></script>
         <!-- ================== END core-js ================== -->
-
         <!-- ================== BEGIN page-js ================== -->
         <script src="/assets/plugins/d3/d3.min.js"></script>
         <script src="/assets/plugins/nvd3/build/nv.d3.min.js"></script>
@@ -932,9 +917,7 @@
         <script src="/assets/plugins/@fullcalendar/timegrid/main.global.js"></script>
         <script src="/assets/plugins/@fullcalendar/interaction/main.global.js"></script>
         <script src="/assets/plugins/@fullcalendar/list/main.global.js"></script>
-        <script src="/assets/plugins/@fullcalendar/bootstrap/main.global.js"></script>
-
-        <!-- required files -->
+        <script src="/assets/plugins/@fullcalendar/bootstrap/main.global.js"></script> <!-- required files -->
         <link href="/assets/plugins/bootstrap-timepicker/css/bootstrap-timepicker.min.css" rel="stylesheet" />
         <script src="/assets/plugins/bootstrap-timepicker/js/bootstrap-timepicker.min.js"></script>
         <!-- required files -->
@@ -975,7 +958,6 @@
 <link href="/assets/plugins/blueimp-gallery/css/blueimp-gallery.min.css" rel="stylesheet" />
 <link href="/assets/plugins/blueimp-file-upload/css/jquery.fileupload.css" rel="stylesheet" />
 <link href="/assets/plugins/blueimp-file-upload/css/jquery.fileupload-ui.css" rel="stylesheet" />
-
 <script src="/assets/plugins/blueimp-file-upload/js/vendor/jquery.ui.widget.js"></script>
 <script src="/assets/plugins/blueimp-tmpl/js/tmpl.js"></script>
 <script src="/assets/plugins/blueimp-load-image/js/load-image.all.min.js"></script>
@@ -1001,11 +983,7 @@
 <script src="/assets/plugins/nvd3/build/nv.d3.min.js"></script>
 <script src="/assets/plugins/chart.js/dist/chart.min.js"></script>
 <script src="/assets/plugins/timepicker/js/mdtimepicker.js"></script>
-
-
-
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.1/dist/sweetalert2.all.min.js"></script>
-
 <script>
     $('#tablenews-dashboard').DataTable({
         scrollX: true,
@@ -1040,7 +1018,6 @@
         urlArgs: "bust=10"
     };
 </script>
-
 <script>
     var hash = location.hash.replace(/^#/, ""); // ^ means starting, meaning only match the first hash
     if (hash) {
@@ -1050,7 +1027,6 @@
         window.location.hash = e.target.hash;
     });
 </script>
-
 <script>
     // $(function() {
     //     $('.menu-link').each(function() {
@@ -1062,53 +1038,43 @@
     //             });
     //         }
     //     })
-    // });
-
-    $(function() {
-        // Get current URL path and assign 'active' class to corresponding menu item
-        var pathname = window.location.pathname;
-        $('.menu-link').each(function() {
-            if ($(this).attr('href') === pathname) {
-                $(this).parents('.menu-item').addClass('active');
-                $(this).css({
-                    "background": "linear-gradient(to left,#ececec 0, #ececec 66%, #ececec 100%)",
-                    "border-radius": "50px",
-                });
-            }
-        });
-
-        // Expand submenu of the currently active menu item
-        var activeMenuItem = $('.menu-item.active');
-        if (activeMenuItem.length > 0) {
-            activeMenuItem.find('.menu-submenu').addClass('show');
-        }
-
-        // Add click event listener to menu items
-        $('.menu-link').on('click', function() {
-            // Remove 'active' class from all menu items
-            $('.menu-item').removeClass('active');
-            $('.menu-link').css({
-                "background": "",
-                "border-radius": "",
-            });
-            // Add 'active' class to clicked menu item
+    // });    $(function() {
+    // Get current URL path and assign 'active' class to corresponding menu item
+    var pathname = window.location.pathname;
+    $('.menu-link').each(function() {
+        if ($(this).attr('href') === pathname) {
             $(this).parents('.menu-item').addClass('active');
             $(this).css({
                 "background": "linear-gradient(to left,#ececec 0, #ececec 66%, #ececec 100%)",
                 "border-radius": "50px",
             });
-
-            // Expand submenu of clicked menu item
-            $('.menu-submenu').removeClass('show');
-            var subMenu = $(this).siblings('.menu-submenu');
-            if (subMenu.length > 0) {
-                subMenu.addClass('show');
-                return false;
-            }
-        });
+        }
+    }); // Expand submenu of the currently active menu item
+    var activeMenuItem = $('.menu-item.active');
+    if (activeMenuItem.length > 0) {
+        activeMenuItem.find('.menu-submenu').addClass('show');
+    } // Add click event listener to menu items
+    $('.menu-link').on('click', function() {
+    // Remove 'active' class from all menu items
+    $('.menu-item').removeClass('active');
+    $('.menu-link').css({
+        "background": "",
+        "border-radius": "",
     });
-
-    // $(function() {
+    // Add 'active' class to clicked menu item
+    $(this).parents('.menu-item').addClass('active');
+    $(this).css({
+        "background": "linear-gradient(to left,#ececec 0, #ececec 66%, #ececec 100%)",
+        "border-radius": "50px",
+    }); // Expand submenu of clicked menu item
+    $('.menu-submenu').removeClass('show');
+    var subMenu = $(this).siblings('.menu-submenu');
+    if (subMenu.length > 0) {
+        subMenu.addClass('show');
+        return false;
+    }
+    });
+    }); // $(function() {
     //     $('.menu-link').each(function() {
     //         if ($(this).prop('href') === window.location.href ) {
     //             $(this).parents().addClass('active');
@@ -1124,19 +1090,14 @@
     //     // $('.menu-submenu.active').css('display', 'block');
     // });
 </script>
-
 <script src="/assets/js/require.js" data-main="controller"></script>
-
 <script>
     Chart.defaults.color = 'rgba(' + app.color.componentColorRgb + ', .65)';
     Chart.defaults.font.family = app.font.family;
     Chart.defaults.font.weight = 500;
     Chart.defaults.scale.grid.color = 'rgba(' + app.color.componentColorRgb + ', .15)';
     Chart.defaults.scale.ticks.backdropColor = 'rgba(' + app.color.componentColorRgb + ', 0)';
-
     var ctx5 = document.getElementById('pie-chart').getContext('2d');
-
-
     window.myPie = new Chart(ctx5, {
         type: 'pie',
         data: {
@@ -1158,20 +1119,15 @@
         }
     });
 </script>
-
-
-
 <script>
     Chart.defaults.color = 'rgba(' + app.color.componentColorRgb + ', .65)';
     Chart.defaults.font.family = app.font.family;
     Chart.defaults.font.weight = 500;
     Chart.defaults.scale.grid.color = 'rgba(' + app.color.componentColorRgb + ', .15)';
     Chart.defaults.scale.ticks.backdropColor = 'rgba(' + app.color.componentColorRgb + ', 0)';
-
     var randomScalingFactor = function() {
         return Math.round(Math.random() * 100)
     };
-
     var ctx2 = document.getElementById('bar-chart').getContext('2d');
     var barChart = new Chart(ctx2, {
         type: 'bar',

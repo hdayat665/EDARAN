@@ -145,7 +145,6 @@ $(document).ready(function() {
                 acc_manager: "required",
                 status: "required",
             },
-
             messages: {
                 customer_id: "Please Choose Customer Name",
                 project_code: "Please Insert Project Code",
@@ -162,7 +161,6 @@ $(document).ready(function() {
             },
             submitHandler: function(form) {
                 requirejs(['sweetAlert2'], function(swal) {
-
                     var data = new FormData(document.getElementById("addForm"));
                     // var data = $('#tree').jstree("get_selected");
 
@@ -187,11 +185,8 @@ $(document).ready(function() {
                             } else {
                                 location.reload();
                             }
-
-
                         });
                     });
-
                 });
             },
         });
@@ -360,48 +355,70 @@ $(document).ready(function() {
 
     });
 
-    $(document).on("click", "#rejectButton", function() {
-        id = $('#idReject').val();
-        requirejs(['sweetAlert2'], function(swal) {
-            swal({
-                title: "Are you sure!",
-                type: "error",
-                confirmButtonClass: "btn-danger",
-                confirmButtonText: "Yes!",
-                showCancelButton: true,
-                allowOutsideClick: false,
-                allowEscapeKey: false
-            }).then(function() {
-                var data = new FormData(document.getElementById("rejectForm"));
-
-                $.ajax({
-                    type: "POST",
-                    url: "/rejectProjectMember/" + id,
-                    dataType: "json",
-                    data: data,
-                    async: false,
-                    processData: false,
-                    contentType: false,
-                }).done(function(data) {
+    $(document).ready(function() {
+        $('#rejectForm').validate({
+            rules: {
+                reason: {
+                    required: true,
+                    maxlength: 255
+                }
+            },
+            messages: {
+                reason: {
+                    required: "Please Insert Reason",
+                    maxlength: "Maximum 255 Characters Allowed"
+                }
+            },
+            submitHandler: function(form) {
+                id = $('#idReject').val();
+                requirejs(['sweetAlert2'], function(swal) {
                     swal({
-                        title: data.title,
-                        text: data.msg,
-                        type: data.type,
-                        confirmButtonColor: '#3085d6',
-                        confirmButtonText: 'OK'
+                        title: "Are you sure!",
+                        type: "error",
+                        confirmButtonClass: "btn-danger",
+                        confirmButtonText: "Yes!",
+                        showCancelButton: true,
+                        allowOutsideClick: false,
+                        allowEscapeKey: false
                     }).then(function() {
-                        if (data.type == 'error') {
-
-                        } else {
-                            location.reload();
-                        }
+                        var data = new FormData(document.getElementById("rejectForm"));
+    
+                        $.ajax({
+                            type: "POST",
+                            url: "/rejectProjectMember/" + id,
+                            dataType: "json",
+                            data: data,
+                            async: false,
+                            processData: false,
+                            contentType: false,
+                        }).done(function(data) {
+                            swal({
+                                title: data.title,
+                                text: data.msg,
+                                type: data.type,
+                                confirmButtonColor: '#3085d6',
+                                confirmButtonText: 'OK'
+                            }).then(function() {
+                                if (data.type == 'error') {
+    
+                                } else {
+                                    location.reload();
+                                }
+                            });
+                        });
                     });
                 });
-            });
+            }
+        });
+        
+        $(document).on("click", "#rejectButton", function() {
+            $('#rejectForm').submit();
         });
     });
-
-
+    
+    
+    
+    
     $("#datepicker-loa").datepicker({
         todayHighlight: true,
         autoclose: true,

@@ -70,10 +70,12 @@ class EleaveReportService
 
         if ($input['date_range']) {
             $dateRange = explode(' - ', $input['date_range']);
-            $startDate = Carbon::createFromFormat('d/m/Y', $dateRange[0])->format('Y-m-d');
-            $endDate = Carbon::createFromFormat('d/m/Y', $dateRange[1])->format('Y-m-d');
+            $startDate = date("Y-m-d", strtotime( $dateRange[0]));
+            $endDate = date("Y-m-d", strtotime( $dateRange[1]));
             $query->whereBetween('myleave.start_date', [$startDate, $endDate])
-            ->whereBetween('myleave.end_date', [$startDate, $endDate]);
+            ->whereBetween('myleave.end_date', [$startDate, $endDate])
+            ->whereRaw('myleave.start_date <= myleave.end_date');
+
         }
 
 

@@ -79,7 +79,7 @@
                             <label class="form-label col-md-6">Reason*</label>
                         </div>
                         <div class="col-md-9">
-                            <textarea class="form-control" rows="5" style="text-transform: uppercase;" maxlength="255" name="reason" placeholder="Reason"></textarea>
+                        <textarea class="form-control" rows="5" style="text-transform: uppercase;" maxlength="255" name="reason" placeholder="Reason"></textarea>
                         </div>
                     </div>
 
