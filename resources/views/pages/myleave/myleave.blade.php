@@ -391,7 +391,7 @@
                                         <label class="form-label" for="Menu6">Leave Session*</label>
                                             <div class="input-group" name="name6" id="select6">
                                                 <div class="form-check">
-                                                    <input class="form-check-input" value="1" type="radio" name="flexRadioDefault" id="flexRadioDefault1" checked>
+                                                    <input class="form-check-input" value="1" type="radio" name="flexRadioDefault" id="flexRadioDefault1" checked style="pointer-events: none">
                                                     <label class="form-check-label" for="flexRadioDefault1">
                                                         Morning
                                                         <br>
@@ -399,7 +399,7 @@
                                                     </label>
                                                 </div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                                 <div class="form-check">
-                                                    <input class="form-check-input" value="2" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
+                                                    <input class="form-check-input" value="2" type="radio" name="flexRadioDefault" id="flexRadioDefault2" style="pointer-events: none">
                                                     <label class="form-check-label" for="flexRadioDefault2">
                                                         Evening
                                                         <br>

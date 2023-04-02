@@ -85,7 +85,7 @@
                                                         @if ($key >= claimDateSetting()->open_claim_duration)
                                                             @if ($status['status'] == 'approved' && $status['year'] == $data['year'] && $status['month'] == $data['month']) 
                                                                 @if ($data['month'] == $checkMonth['month'])
-                                                                    @if ($checkMonth['status'] == 'active')
+                                                                    @if ($checkMonth['status'] == 'active' || $checkMonth['status'] == 'paid')
                                                                         <td>{{ $data['year'] }}</td>
                                                                         <td>{{ $data['month'] }}</td>
                                                                         <td><span class="badge bg-lime">Open</span></td>
@@ -111,7 +111,7 @@
                                                             @endif
                                                         @else
                                                             @if ($data['month'] == $checkMonth['month'])
-                                                                @if ($checkMonth['status'] == 'active')
+                                                                @if ($checkMonth['status'] == 'active' || $checkMonth['status'] == 'paid')
                                                                     <td>{{ $data['year'] }}</td>
                                                                     <td>{{ $data['month'] }}</td>
                                                                     <td><span class="badge bg-lime">Open</span></td>

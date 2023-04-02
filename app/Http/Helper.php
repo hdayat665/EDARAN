@@ -29,6 +29,7 @@ use App\Models\Users;
 use App\Models\UserRole;
 use App\Models\TransportMillage;
 use App\Models\EclaimGeneral;
+use App\Models\PermissionRole;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -562,63 +563,64 @@ if (!function_exists('asias')) {
     function asias()
     {
         $data = [
-            'AFGHANISTAN' => "AFGHANISTAN",
-            'ARMENIA' => "ARMENIA",
-            'AZERBAIJAN' => "AZERBAIJAN",
-            'BAHRAIN' => "BAHRAIN",
-            'BANGLADESH' => "BANGLADESH",
-            'BHUTAN' => "BHUTAN",
-            'BRUNEI' => "BRUNEI",
-            'CAMBODIA' => "CAMBODIA",
-            'CHINA' => "CHINA",
-            'GEORGIA' => "GEORGIA",
-            'HONG KONG SAR CHINA' => "HONG KONG SAR CHINA",
-            'INDIA' => "INDIA",
-            'INDONESIA' => "INDONESIA",
-            'IRAN' => "IRAN",
-            'IRAQ' => "IRAQ",
-            'ISRAEL' => "ISRAEL",
-            'JAPAN' => "JAPAN",
-            'JORDAN' => "JORDAN",
-            'KAZAKHSTAN' => "KAZAKHSTAN",
-            'KUWAIT' => "KUWAIT",
-            'KYRGYZSTAN' => "KYRGYZSTAN",
-            'LAOS' => "LAOS",
-            'LEBANON' => "LEBANON",
-            'MACAU SAR CHINA' => "MACAU SAR CHINA",
-            'MALAYSIA' => "MALAYSIA",
-            'MALDIVES' => "MALDIVES",
-            'MONGOLIA' => "MONGOLIA",
-            'MYANMAR' => "MYANMAR [BURMA]",
-            'NEPAL' => "NEPAL",
-            'NEUTRAL ZONE' => "NEUTRAL ZONE",
-            'NORTH KOREA' => "NORTH KOREA",
-            'OMAN' => "OMAN",
-            'PAKISTAN' => "PAKISTAN",
-            'PALESTINIAN' => "PALESTINIAN TERRITORIES",
-            'YEMEN' => "PEOPLE'S DEMOCRATIC REPUBLIC OF YEMEN",
-            'PHILIPPINES' => "PHILIPPINES",
-            'QATAR' => "QATAR",
-            'SAUDI ARABIA' => "SAUDI ARABIA",
-            'SINGAPORE' => "SINGAPORE",
-            'SOUTH KOREA' => "SOUTH KOREA",
-            'SRI LANKA' => "SRI LANKA",
-            'SYRIA' => "SYRIA",
-            'TAIWAN' => "TAIWAN",
-            'TAJIKISTAN' => "TAJIKISTAN",
-            'THAILAND' => "THAILAND",
-            'TIMOR-LESTE' => "TIMOR-LESTE",
-            'TURKEY' => "TURKEY",
-            'TURKMENISTAN' => "TURKMENISTAN",
-            'UNITED ARAB EMIRATES' => "UNITED ARAB EMIRATES",
-            'UZBEKISTAN' => "UZBEKISTAN",
-            'VIETNAM' => "VIETNAM",
-            'YEMEN' => "YEMEN"
+            'AF' => "AFGHANISTAN",
+            'AM' => "ARMENIA",
+            'AZ' => "AZERBAIJAN",
+            'BH' => "BAHRAIN",
+            'BD' => "BANGLADESH",
+            'BT' => "BHUTAN",
+            'BN' => "BRUNEI",
+            'KH' => "CAMBODIA",
+            'CN' => "CHINA",
+            'GE' => "GEORGIA",
+            'HK' => "HONG KONG SAR CHINA",
+            'IN' => "INDIA",
+            'ID' => "INDONESIA",
+            'IR' => "IRAN",
+            'IQ' => "IRAQ",
+            'IL' => "ISRAEL",
+            'JP' => "JAPAN",
+            'JO' => "JORDAN",
+            'KZ' => "KAZAKHSTAN",
+            'KW' => "KUWAIT",
+            'KG' => "KYRGYZSTAN",
+            'LA' => "LAOS",
+            'LB' => "LEBANON",
+            'MO' => "MACAU SAR CHINA",
+            'MY' => "MALAYSIA",
+            'MV' => "MALDIVES",
+            'MN' => "MONGOLIA",
+            'MM' => "MYANMAR [BURMA]",
+            'NP' => "NEPAL",
+            'NZ' => "NEUTRAL ZONE",
+            'KP' => "NORTH KOREA",
+            'OM' => "OMAN",
+            'PK' => "PAKISTAN",
+            'PS' => "PALESTINIAN TERRITORIES",
+            'YE' => "PEOPLE'S DEMOCRATIC REPUBLIC OF YEMEN",
+            'PH' => "PHILIPPINES",
+            'QA' => "QATAR",
+            'SA' => "SAUDI ARABIA",
+            'SG' => "SINGAPORE",
+            'KR' => "SOUTH KOREA",
+            'LK' => "SRI LANKA",
+            'SY' => "SYRIA",
+            'TW' => "TAIWAN",
+            'TJ' => "TAJIKISTAN",
+            'TH' => "THAILAND",
+            'TL' => "TIMOR-LESTE",
+            'TR' => "TURKEY",
+            'TM' => "TURKMENISTAN",
+            'AE' => "UNITED ARAB EMIRATES",
+            'UZ' => "UZBEKISTAN",
+            'VN' => "VIETNAM",
+            'YE' => "YEMEN"
         ];
 
         return $data;
     }
 }
+
 
 
 if (!function_exists('getCompany')) {
@@ -755,7 +757,7 @@ if (!function_exists('getArea')) {
     function getArea()
     {
         $data = EclaimGeneral::where('tenant_id', Auth::user()->tenant_id)->get();
-        
+
         return $data;
     }
 }
@@ -779,7 +781,7 @@ if (!function_exists('getState')) {
             'KUALA LUMPUR' => 'KUALA LUMPUR',
             'LABUAN' => 'LABUAN',
             'PUTRAJAYA' => 'PUTRAJAYA',
-
+            'OTHERS' => 'OTHERS',
         ];
 
         return $data;
@@ -807,7 +809,7 @@ if (!function_exists('myProjectOnly')) {
 
         foreach ($projectMember as $project) {
             $projectId[] = $project->project_id;
-        } 
+        }
 
         $data = DB::table('project_member as a')
             ->leftJoin('project as b', 'a.project_id', '=', 'b.id')
@@ -843,7 +845,7 @@ if (!function_exists('getFinancialYear')) {
         $data = [];
 
         $data = Project::where([['tenant_id', Auth::user()->tenant_id]])->select('financial_year')->groupBy('financial_year')->orderBy('DESC')->get();
-        
+
 
         return $data;
     }
@@ -965,7 +967,8 @@ if (!function_exists('state')) {
             'TERENGGANU' => 'TERENGGANU',
             'KUALA LUMPUR' => 'KUALA LUMPUR',
             'LABUAN' => 'LABUAN',
-            'PUTRAJAYA' => 'PUTRAJAYA'
+            'PUTRAJAYA' => 'PUTRAJAYA',
+            'OTHERS' => 'OTHERS',
         ];
 
         return $data;
@@ -1025,13 +1028,13 @@ if (!function_exists('projectLocation')) {
 }
 
 if (!function_exists('activityName')) {
-    function activityName( $departmentId = '')
+    function activityName($departmentId = '')
     {
         $cond[1] = ['tenant_id', Auth::user()->tenant_id];
         // $cond[1] = ['tenant_id', ];
         $cond[2] = ['department', $departmentId];
         // $cond[3] = ['logs_id', $logsid];
-        
+
         $cond[3] = ['project_id', null];
         $data = ActivityLogs::where($cond)->get();
         if (!$data) {
@@ -1282,9 +1285,9 @@ if (!function_exists('activityName1')) {
     function activityName1($departmentId = '')
     {
         $data = ActivityLogs::where('tenant_id', Auth::user()->tenant_id)
-                            ->whereNotNull('project_id')
-                            ->where('department', $departmentId)
-                            ->get();
+            ->whereNotNull('project_id')
+            ->where('department', $departmentId)
+            ->get();
         if (!$data) {
             $data = [];
         }
@@ -1405,14 +1408,14 @@ if (!function_exists('year')) {
     function year()
     {
         $data = [
-            
+
             '2023' => '2023',
             '2022' => '2022',
             '2020' => '2020',
             '2021' => '2021',
             '2019' => '2019',
-            '2018' => '2018', 
-            
+            '2018' => '2018',
+
         ];
 
         return $data;
@@ -1512,7 +1515,7 @@ if (!function_exists('getDepartmentName')) {
 }
 if (!function_exists('getDesignationName')) {
     function getDesignationName($user_id = '')
-    { 
+    {
         $cond[1] = ['user_id', $user_id];
         $data = DB::table('employment as a')
             ->leftJoin('designation as b', 'a.designation', '=', 'b.id')
@@ -1567,7 +1570,7 @@ if (!function_exists('getAllRole')) {
     function getAllRole()
     {
         $data = Role::where([['tenant_id', Auth::user()->tenant_id]])->get();
-        
+
         if (!$data) {
             $data = [];
         }
@@ -1606,12 +1609,12 @@ if (!function_exists('getFirstCarMileagebyid')) {
     function getFirstCarMileagebyid($id = '')
     {
         $data = TransportMillage::where([
-                ['tenant_id', Auth::user()->tenant_id], 
-                ['entitle_id', $id],
-                ['type', 'car'] // New condition for type
-            ])->first();
-        
-        $price = $data->price;
+            ['tenant_id', Auth::user()->tenant_id],
+            ['entitle_id', $id],
+            // ['type', 'car'] // New condition for type
+        ])->first();
+
+        $price = $data->price ?? '';
         //pr($price);
         if (!$price) {
             $price = [];
@@ -1625,12 +1628,12 @@ if (!function_exists('getFirstMotorMileagebyid')) {
     function getFirstMotorMileagebyid($id = '')
     {
         $data = TransportMillage::where([
-                ['tenant_id', Auth::user()->tenant_id], 
-                ['entitle_id', $id],
-                ['type', 'motor'] // New condition for type
-            ])->first();
-        
-        $price = $data->price;
+            ['tenant_id', Auth::user()->tenant_id],
+            ['entitle_id', $id],
+            // ['type', 'motor'] // New condition for type
+        ])->first();
+
+        $price = $data->price ?? '';
         //pr($price);
         if (!$price) {
             $price = [];
@@ -1658,7 +1661,7 @@ if (!function_exists('getUserByJobGrade')) {
     function getUserByJobGrade($id = '')
     {
         $data = Employee::where([['tenant_id', Auth::user()->tenant_id], ['jobGrade', $id]])->with('userProfile')->get();
-        
+
         if (!$data) {
             $data = [];
         }
@@ -1671,7 +1674,7 @@ if (!function_exists('getUserByUserRole')) {
     function getUserByUserRole($id = '')
     {
         $data = UserRole::where([['tenant_id', Auth::user()->tenant_id], ['role_id', $id]])->with('userProfile')->get();
-        
+
         if (!$data) {
             $data = [];
         }
@@ -1685,12 +1688,12 @@ if (!function_exists('getClaimCategory')) {
     function getClaimCategory($id = '')
     {
         $data = ClaimCategory::where('tenant_id', Auth::user()->tenant_id)
-                     ->where('status','=', '1')
-                     ->where(function($query) {
-                         $query->where('claim_type', '=', 'GC')
-                               ->orWhere('claim_type', '=', 'MTC,GC');
-                     })
-                     ->get();
+            ->where('status', '=', '1')
+            ->where(function ($query) {
+                $query->where('claim_type', '=', 'GC')
+                    ->orWhere('claim_type', '=', 'MTC,GC');
+            })
+            ->get();
 
         if (!$data) {
             $data = [];
@@ -1705,12 +1708,12 @@ if (!function_exists('getClaimCategoryMtc')) {
     function getClaimCategoryMtc($id = '')
     {
         $data = ClaimCategory::where('tenant_id', Auth::user()->tenant_id)
-                     ->where('status','=', '1')
-                     ->where(function($query) {
-                        $query->where('claim_type', '=', 'MTC')
-                              ->orWhere('claim_type', '=', 'MTC,GC');
-                    })
-                    ->get();
+            ->where('status', '=', '1')
+            ->where(function ($query) {
+                $query->where('claim_type', '=', 'MTC')
+                    ->orWhere('claim_type', '=', 'MTC,GC');
+            })
+            ->get();
 
         if (!$data) {
             $data = [];
@@ -1754,7 +1757,7 @@ if (!function_exists('getClaimCategoryById')) {
 //         if (!$data) {
 //             $data = [];
 //         }
-        
+
 //         // pr($data);
 
 //         return $data->claim_catagory;
@@ -1782,15 +1785,15 @@ if (!function_exists('getClaimContentById')) {
     function getClaimContentById($id = '')
     {
         $data = GeneralClaimDetail::where('general_claim_details.id', $id)
-        ->leftJoin('claim_category', 'general_claim_details.claim_category', '=', 'claim_category.id')
-        ->select('general_claim_details.*', 'claim_category.claim_catagory as claim_category_name')
-        ->with('claim_category_content')
-        ->first();
+            ->leftJoin('claim_category', 'general_claim_details.claim_category', '=', 'claim_category.id')
+            ->select('general_claim_details.*', 'claim_category.claim_catagory as claim_category_name')
+            ->with('claim_category_content')
+            ->first();
 
         if (!$data) {
             $data = [];
         }
-        
+
         return $data;
     }
 }
@@ -1886,7 +1889,7 @@ if (!function_exists('claimDateSetting')) {
 }
 if (!function_exists('checkAppeal')) {
     function checkAppeal($year = '', $month = '')
-    {   
+    {
         $cond[0] = ['tenant_id', Auth::user()->tenant_id];
         $cond[1] = ['user_id', Auth::user()->id];
         $cond[3] = ['year', $year];
@@ -2013,7 +2016,7 @@ if (!function_exists('getMyClaimMonth')) {
         if (!$data) {
             $data = [];
         }
-        
+
         //pr($data);
         return $data;
     }
@@ -2029,7 +2032,7 @@ if (!function_exists('checkingMonthlyClaim')) {
         $cond[4] = ['month', $month];
 
         $claim = GeneralClaim::where($cond)->first();
-        
+
         if (!$claim) {
             $data['month'] = '-';
             $data['id'] = '-';
@@ -2038,7 +2041,7 @@ if (!function_exists('checkingMonthlyClaim')) {
             $data['id'] = $claim->id;
             $data['status'] = $claim->status;
         }
-        
+
         return $data;
     }
 }
@@ -2055,7 +2058,7 @@ if (!function_exists('getRoleById')) {
         return $data;
     }
 }
- 
+
 if (!function_exists('getViewForClaimApproval')) {
     function getViewForClaimApproval($type = '')
     {
@@ -2156,6 +2159,20 @@ if (!function_exists('getEmployeeDetail')) {
     function getEmployeeDetail($id = '')
     {
         $data = Employee::where([['tenant_id', Auth::user()->tenant_id], ['user_id', $id]])->first();
+
+        if (!$data) {
+            $data = [];
+        }
+
+        return $data;
+    }
+}
+
+
+if (!function_exists('getPermissionByRoleId')) {
+    function getPermissionByRoleId($id = '')
+    {
+        $data = PermissionRole::select('permission_code')->where([['tenant_id', Auth::user()->tenant_id], ['role_id', $id]])->get();
 
         if (!$data) {
             $data = [];

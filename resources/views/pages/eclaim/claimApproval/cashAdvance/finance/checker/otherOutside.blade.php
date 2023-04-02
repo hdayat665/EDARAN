@@ -25,7 +25,7 @@
 
                                 </div>
                                 <div class="col-md-9">
-                                    <input readonly type="text" class="form-control" value="{{ $ca->id ?? '-' }}">
+                                    <input readonly type="text" class="form-control" value="CA-{{ $ca->id ?? '-' }}">
                                 </div>
                             </div>
                             <div class="row p-2">
@@ -59,7 +59,7 @@
 
                                 </div>
                                 <div class="col-md-9">
-                                    <input readonly type="text" class="form-control" value="{{ $ca->destination ?? '-' }}">
+                                    <input readonly type="text" class="form-control" value="{{ getProjectLocation($ca->project_location_id)->location_name ?? $ca->destination ?? '-' }}">
                                 </div>
                             </div>
                             <div class="row p-2">
@@ -150,7 +150,7 @@
                                     <label class="form-label col-form-label">Toll/Parking :</label>
                                 </div>
                                 <div class="col-md-3">
-                                    <input readonly type="text" class="form-control" {{ $ca->mode_of_transport->toll ?? 0 }}>
+                                    <input readonly type="text" class="form-control" value="{{ $ca->mode_of_transport->toll ?? 0 }}">
                                 </div>
                             </div>
                             <div class="row p-2">
@@ -240,14 +240,29 @@
             </div>
             <div class="row p-2">
                 <div class="col align-self-start">
-                    <a href="/cashAdvanceApproverView" class="btn btn-light" style="color: black;" type="submit"><i class="fa fa-arrow-left"></i> Back</a>
+                    <a href="#" onclick="window.history.back();" class="btn btn-light" style="color: black;" type="submit"><i class="fa fa-arrow-left"></i> Back</a>
                 </div>
                 <div class="col d-flex justify-content-end">
-                    <a class="btn btn-secondary" style="color: black" type="submit"> Cancel</a> &nbsp;
-                    <a href="javascript:;" class="btn btn-warning" style="color: black" data-bs-toggle="modal" data-bs-target="#modalamend">Amend</a> &nbsp;
-                    <a href="javascript:;" class="btn btn-danger" style="color: black" data-bs-toggle="modal" data-bs-target="#modalreject"> Reject</a> &nbsp;
-                    @if ($ca->f1 == 'check' && $ca->f2 == 'check' && ($ca->f2 == 'check' && $ca->f3 == 'check') && ($ca->f1 == 'check' && $ca->f3 == 'check') && $check == 'f1')
-                        <a class="btn btn-lime" style="color: black" type="submit"> Approve</a>
+                    @if ( $ca->f_status != 'recommend')
+                        @if ($ca->pv_number != '')
+                            <!-- The pv_number is not null, so hide all buttons -->
+                        @else
+                            <!-- The pv_number is null, so show the buttons as before -->
+                            @if ($ca->f1 == 'check' && $ca->f2 == 'check' && $ca->f3 == 'check')
+                                <!-- All checkboxes are checked, so hide the Amend and Reject buttons -->
+                            @else
+                                <!-- At least one checkbox is not checked, so show the Amend and Reject buttons -->
+                                <a class="btn btn-secondary" style="color: black" type="submit"> Cancel</a> &nbsp;
+                                <a href="javascript:;" class="btn btn-warning" style="color: black" data-bs-toggle="modal" data-bs-target="#modalamend">Amend</a> &nbsp;
+                                <a href="javascript:;" class="btn btn-danger" style="color: black" data-bs-toggle="modal" data-bs-target="#modalreject"> Reject</a> &nbsp;
+                            @endif
+
+                            @if (($ca->f1 == 'check' && $ca->f2 == 'check') || ($ca->f1 == 'check' && $ca->f3 == 'check') || ($ca->f2 == 'check' && $ca->f3 == 'check'))
+                                @if ($checkers == 'f1')
+                                    <a class="btn btn-lime" id="approveButton1" data-id="{{ $ca->id }}" style="color: black" type="submit"> Approve</a>
+                                @endif
+                            @endif
+                        @endif
                     @endif
                 </div>
             </div>

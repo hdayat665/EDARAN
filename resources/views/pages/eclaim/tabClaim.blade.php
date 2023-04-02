@@ -46,13 +46,14 @@
                                                 <div class="dropdown-divider"></div>
                                             <a data-id="{{ $claim->id }}" class="dropdown-item cancelButton">Cancel Claim</a>
                                         </div>
-                                    @elseif ($claim->status == 'paid' || $claim->status == 'rejected')
+                                    @elseif ($claim->status == 'paid' || $claim->status == 'reject')
                                         <a href="javascript:;" class="btn btn-primary btn-sm">Action</a>
                                         <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle btn-sm"><i class="fa fa-caret-down"></i></a>
                                         <div class="dropdown-menu dropdown-menu-end">
                                             <a href="/viewGeneralClaim/{{ $claim->id }}" class="dropdown-item">View General
                                                 Claim</a>
                                         </div>
+                                        
                                     @endif
                                     
                                 @else
@@ -62,7 +63,7 @@
                                         <div class="dropdown-menu dropdown-menu-end">
                                             <a href="/monthClaimEditView/edit/month/{{ $claim->id }}" class="dropdown-item">Update Claim</a>
                                             <div class="dropdown-divider"></div>
-                                            <a href="javascript:;" class="dropdown-item">Cancel Claim</a>
+                                            <!-- <a data-id="{{ $claim->id }}" class="dropdown-item buttonCancel">Cancel Claim</a> -->
                                         </div>
                                     @elseif ($claim->status == 'rejected')
                                         <a href="javascript:;" class="btn btn-primary btn-sm">Action</a>
@@ -78,7 +79,7 @@
                                             <!-- <a href="/eclaim/viewmyclaim" class="dropdown-item">View Claim</a> -->
                                             <!-- <a href="javascript:;" class="dropdown-item">Update Claim</a> -->
                                             <div class="dropdown-divider"></div>
-                                            <a href="javascript:;" class="dropdown-item">Cancel Claim</a>
+                                            <a data-id="{{ $claim->id }}" class="dropdown-item buttonCancel">Cancel Claim</a>
                                         </div>
                                     @elseif ($claim->status == 'paid')
                                         <a href="javascript:;" class="btn btn-primary btn-sm">Action</a>
@@ -95,7 +96,7 @@
                         <td>{{ $claim->month }}</td>
                         <td>{{ $claim->claim_id }}</td>
                         <td>{{ $claim->claim_type }}</td>
-                        <td>{{ $claim->total_amount }}</td>
+                        <td>MYR {{ $claim->total_amount }}</td>
                         @if ($claim->status == 'amend')
                             <td><span class="badge bg-success" data-toggle="amendc" title="Amend">Amend</span></td>
                         @elseif ($claim->status == 'recommend')
@@ -104,7 +105,7 @@
                             <td><span class="badge bg-secondary" data-toggle="paidc" title="Paid">Paid</span></td>
                         @elseif ($claim->status == 'draft')
                             <td><span class="badge bg-warning" data-toggle="drafc" title="Draft">Draft</span></td>
-                        @elseif ($claim->status == 'rejected')
+                        @elseif ($claim->status == 'reject')
                             <td><span class="badge bg-danger" data-toggle="rejectedc" title="Rejected">Rejected</span></td>
                         @elseif ($claim->status == 'active')
                             <td><span class="badge bg-lime" data-toggle="activec" title="Active">Active</span></td>

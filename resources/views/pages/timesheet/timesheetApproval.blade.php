@@ -70,7 +70,7 @@
                             <select class="form-select" id="statussearch" name="status" data-default-value="">
                                 <option class="form-label" value="">PLEASE CHOOSE</option>
                                 <option class="form-label" {{($statusId == 'pending') ? 'selected="selected"' : ''}} value="pending">AWAITING APPROVAL</option>
-                                <option class="form-label" {{($statusId == 'approve') ? 'selected="selected"' : ''}} value="approve">APPROVE</option>
+                                <option class="form-label" {{($statusId == 'approve') ? 'selected="selected"' : ''}} value="approve">APPROVED</option>
                                 <option class="form-label" {{($statusId == 'amend') ? 'selected="selected"' : ''}} value="amend">AMENDED</option>
                             </select>
                         </div>

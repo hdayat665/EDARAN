@@ -41,8 +41,8 @@
             </table>
             <div class="row p-2">
                 <div class="col align-self-start"> 
-                    <a href="/projectInfoEdit/{{$projectMember->project_id}}#tab4" class="btn btn-light" style="color: black;" type="submit"><i class="fa fa-arrow-left"></i> Back</a>
-                </div>
+                    <a onclick="window.history.back();" class="btn btn-light" style="color: black;" type="submit"><i class="fa fa-arrow-left"></i> Back</a>
+                </div> 
             </div>
         </div>
     </div>

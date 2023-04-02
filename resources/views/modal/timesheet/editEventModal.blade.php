@@ -30,14 +30,14 @@
                         </div>
                     </div>
                     <div class="row p-2">
-                        <div class="col-sm-6">
+                        <div class="col-sm-6" id="hideshowstarttimee">
                             <label for="issuing-country" class="form-label">Start Time*</label>
                             <div class="">
                                 <input id="starteventtimeedit" name="start_time" type="text" class="form-control" value="00:00 AM" style="background: #ffffff;"/>
                                 <!-- <div class="input-group-text"><i class="fa fa-clock"></i></div> -->
                             </div>
                         </div>
-                        <div class="col-sm-6">
+                        <div class="col-sm-6" id="hideshowendtimee">
                             <label for="issuing-country" class="form-label">End Time*</label>
                             <div class="">
                                 <input id="endeventtimeedit" name="end_time" type="text" class="form-control" value="00:00 AM"  style="background: #ffffff;"/>
@@ -62,7 +62,7 @@
                             <label for="issuing-country" class="form-label">Duration*</label>
                             <input type="text"  class="form-control" name="duration" id="durationeditevent"   style="pointer-events: none; touch-action: none; background: #e9ecef;">
                         </div>
-                        <div class="col-sm-3">
+                        <div class="col-sm-3" style="pointer-events: none;">
                             <div style="padding-top:20px;">
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input"  type="checkbox"  name="type_recurring[]" id="addeventalldayedit" value="allday" >
@@ -392,6 +392,19 @@
                             <textarea class="form-control" id="descE" name="desc" rows="3"></textarea>
                         </div>
                     </div>
+                    {{-- <div class="row p-2">
+                        <table id="tableviewparticipant" class="table table-striped table-bordered align-middle">
+                            <thead>
+                                <tr>
+                                    <th class="text-nowrap">No</th>
+                                    <th class="text-nowrap">Participants</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tableRowParticipant">
+
+                            </tbody>
+                        </table>
+                    </div> --}}
                     <div class="row p-2">
                         <div class="col-sm-2">
                             <button type="button" id="addreminderedit" class="btn btn-primary btn-xs">Add Reminder</button>

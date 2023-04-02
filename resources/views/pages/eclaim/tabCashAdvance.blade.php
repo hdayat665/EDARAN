@@ -16,7 +16,7 @@
                 <th class="text-nowrap">Cash Advance ID</th>
                 <th class="text-nowrap">Type of Cash Advance</th>
                 <th class="text-nowrap">Request Date</th>
-                <th class="text-nowrap">Travel Date</th>
+                <th class="text-nowrap">Travel Date</th> 
                 <th class="text-nowrap">Amount</th>
                 <th class="text-nowrap">Status</th>
                 <th class="text-nowrap">Status Date</th>
@@ -47,6 +47,11 @@
                                         <a href="/viewCashAdvance/{{ $cashClaim->id }}" class="dropdown-item">View Claim</a>
                                         <!-- <a href="/editCashAdvance/{{ $cashClaim->id }}" class="dropdown-item">Update Claim</a> -->
                                     </div>
+                                @elseif ($cashClaim->status == 'cancelled')
+                                    <div class="dropdown-menu dropdown-menu-end">
+                                        <a href="/viewCashAdvance/{{ $cashClaim->id }}" class="dropdown-item">View Claim</a>
+                                        <!-- <a href="/editCashAdvance/{{ $cashClaim->id }}" class="dropdown-item">Update Claim</a> -->
+                                    </div>
                                 @elseif ($cashClaim->status == 'paid' || $cashClaim->status == 'reject')
                                     <div class="dropdown-menu dropdown-menu-end">
                                         <a href="/viewCashAdvance/{{ $cashClaim->id }}" class="dropdown-item">View Claim</a>
@@ -54,7 +59,7 @@
                                 @endif
                             </div>
                         </td>
-                        <td>{{ $cashClaim->id }}</td>
+                        <td>CA-{{ $cashClaim->id }}</td>
                         <td>{{ getCashAdvanceType($cashClaim->type) }}</td>
                         <td>{{ date_format(date_create($cashClaim->created_at), 'd/m/Y') }}</td>
                         <td>{{ $cashClaim->travel_date ? $cashClaim->travel_date : 'N/A' }}</td>

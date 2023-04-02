@@ -53,8 +53,7 @@
                                         </div>
                                         <div class="col-md-9">
                                             <select class="form-select" id="year" name="year">
-                                                <option class="form-label" value="Please Select" selected>Please
-                                                    Select</option>
+                                                <option class="form-label" value="" selected>PLEASE CHOOSE</option>
                                                 <option class="form-label" value="2022">2022</option>
                                                 <option class="form-label" value="2023">2023</option>
                                                 
@@ -67,8 +66,7 @@
                                         </div>
                                         <div class="col-md-9">
                                             <select class="form-select" id="month" name="month">
-                                                <option class="form-label" value="" selected>Please
-                                                    Select</option>
+                                                <option class="form-label" value="" selected>PLEASE CHOOSE</option>
                                                 <option class="form-label" value="January">January</option>
                                                 <option class="form-label" value="February">February</option>
                                                 <option class="form-label" value="March">March</option>
@@ -101,8 +99,7 @@
                                         </div>
                                         <div class="col-md-9">
                                             <select class="form-select" id="claimcategory" name="claim_category">
-                                                <option class="form-label" value="Please Select" selected>Please
-                                                    Select</option>
+                                                <option class="form-label" value="" selected>PLEASE CHOOSE</option>
                                                 {{ $categorys = getClaimCategory() }}
                                                 @foreach ($categorys as $category)
                                                     <option value="{{ $category->id }}">{{ $category->claim_catagory }}</option>
@@ -117,19 +114,19 @@
                                         </div>
                                         <div class="col-md-9">
                                             <select class="form-select" id="contentLabel" name="claim_category_detail">
-                                                <option class="form-label" value="Please Select" selected>Please
-                                                    Select</option>
+                                                <option class="form-label" value="Please Select" selected>PLEASE CHOOSE</option>
                                             </select>
                                         </div>
                                     </div>
                                     <div class="row p-2">
                                         <div class="col-md-3">
-                                            <label class="form-label">Amount (MYR)</label>
+                                            <label class="form-label">Amount</label>
                                         </div>
                                         <div class="col-md-9">
-                                            <input type="number" class="form-control" name="amount" id="amount">
+                                            <input type="number" class="form-control" name="amount" id="amount" placeholder="0.00">
                                         </div>
                                     </div>
+
                                     <div class="row p-2">
                                         <div class="col-md-3">
                                             <label class="form-label">Description</label>
@@ -142,7 +139,7 @@
                                         <div class="col-md-3">
                                             <label class="form-label">Supporting Document</label>
                                         </div>
-                                        <div class="col-md-9">
+                                        <div class="col-md-6">
                                             <input type="file" class="form-control-file" name="file_upload[]" id="supportdocument" multiple>
                                         </div>
                                     </div>
@@ -197,6 +194,7 @@
             <!-- </form> -->
         </div>
     </div>
+    
     <!-- <script>
         function addTableRow() {
             // var year = document.getElementById("year");

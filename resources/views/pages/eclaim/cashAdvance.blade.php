@@ -17,7 +17,7 @@
                                     </div>
                                     <div class="col-md-8">
                                         <select class="form-select" id="toca" name="type">
-                                            <option class="form-label" value="" selected>Please Select</option>
+                                            <option class="form-label" value="" selected>PLEASE CHOOSE</option>
                                             <option class="form-label" value="1">Project ( Outstation )</option>
                                             <option class="form-label" value="2">Project ( Non-Outstation )
                                             </option>

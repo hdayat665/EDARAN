@@ -12,12 +12,12 @@
                 <th class="text-nowrap"> Amount</th>
                 <th class="text-nowrap">Status</th>
                 <th class="text-nowrap">Status Date</th>
-                <th class="text-nowrap">Category</th>
+                <!-- <th class="text-nowrap">Category</th> -->
             </tr>
         </thead>
         <tbody>
             @foreach ($cas as $ca)
-                @if ($ca->approver == 'recommend' && ($ca->f1 == '' || $ca->f1 == 'check' || $ca->f2 == 'check' || $ca->f3 == 'check') && $ca->f1 != 'recommend')
+                @if ($ca->approver == 'recommend' && ($ca->f1 == '' || $ca->f1 == 'check' || $ca->f2 == 'check' || $ca->f3 == 'check') && $ca->f_status != 'recommend')
                     <tr>
                         <td>
                             <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle"><i class="fa fa-cogs"></i> Action <i class="fa fa-caret-down"></i></a>
@@ -33,15 +33,15 @@
                                 <div class="dropdown-divider"></div>
                                 <a href="javascript:;" id="" data-id="" class="dropdown-item"><i class="fa fa-times" aria-hidden="true"></i> Cancel</a>
                             </div>
-                        <td>{{ $ca->id }}</td>
+                        <td>CA-{{ $ca->id }}</td>
                         <td>{{ $ca->userProfile->fullName ?? '-' }}</td>
-                        <td>{{ getCashAdvanceType($ca->type) ?? '-' }}</td>
-                        <td>{{ $ca->created_at ?? '-' }}</td>
+                        <td>{{ getCashAdvanceType($ca->type) ?? 'N/A' }}</td>
+                        <td>{{ date('Y-m-d', strtotime($ca->created_at)) ?? 'N/A' }}</td>
                         <td>{{ $ca->travel_date ?? '-' }}</td>
-                        <td>{{ $ca->amount ?? '-' }}</td>
+                        <td>MYR {{  $ca->mode_of_transport->max_total ?? $ca->amount }}</td>
                         <td>{{ $ca->status ?? '-' }}</td>
-                        <td>{{ $ca->updated_at ?? '-' }}</td>
-                        <td>{{ '-' }}</td>
+                        <td>{{ date('Y-m-d', strtotime($ca->updated_at)) ?? 'N/A' }}</td>
+                        <!-- <td>{{ '-' }}</td> -->
                     </tr>
                 @endif
             @endforeach

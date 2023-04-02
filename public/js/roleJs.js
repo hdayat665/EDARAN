@@ -21,6 +21,8 @@ $(document).ready(function () {
     $(document).on("click", "#editRoleButton", function () {
         var id = $(this).data("id");
         var roleData = getRole(id);
+        var userRoleData = getUserByRoleId(id);
+        var permissionData = getPermissionByRoleId(id);
         var updateRoleForm = getRo(id);
 
         $("input").prop("disabled", false);
@@ -30,6 +32,33 @@ $(document).ready(function () {
             $("#roleName").val(data1.roleName);
             $("#idR").val(data1.id);
             // console.log(data1);
+        });
+
+        permissionData.done(function (data) {
+            // console.log(data);
+            var tableBody = $("#permissionTable"); // Assuming the table has an ID of "tableBody"
+            tableBody.find("tbody").empty(); // Clear the table body before populating it
+
+            if (data.length > 0) {
+                // Loop through the data and append rows to the table
+                $.each(data, function (i, item) {
+                    var row =
+                        "<tr>" +
+                        "<td>" +
+                        (i + 1) +
+                        "</td>" +
+                        "<td>" +
+                        item.permission_code.replace(/_/g, " ").toUpperCase() +
+                        "</td>" +
+                        "</tr>";
+                    tableBody.append(row);
+                });
+            } else {
+                // Display a message if there are no results
+                tableBody.append(
+                    '<tr class=""><td colspan="6">No results found</td></tr>'
+                );
+            }
         });
 
         roleData.done(function (data) {
@@ -70,8 +99,60 @@ $(document).ready(function () {
                 );
             }
         });
+
+        userRoleData.done(function (data) {
+            console.log(data);
+            var tableBody = $("#tableBody"); // Assuming the table has an ID of "tableBody"
+            tableBody.find("tbody").empty(); // Clear the table body before populating it
+
+            if (data.length > 0) {
+                // Loop through the data and append rows to the table
+                $.each(data, function (i, item) {
+                    var row =
+                        "<tr>" +
+                        "<td>" +
+                        (i + 1) +
+                        "</td>" +
+                        "<td>" +
+                        item.user_profile.fullName +
+                        "</td>" +
+                        "<td>" +
+                        item.added_by.fullName +
+                        "</td>" +
+                        "<td>" +
+                        item.added_time +
+                        "</td>" +
+                        "<td>" +
+                        item.modifyd_by.fullName +
+                        "</td>" +
+                        "<td>" +
+                        item.modified_time +
+                        "</td>" +
+                        "</tr>";
+                    tableBody.append(row);
+                });
+            } else {
+                // Display a message if there are no results
+                tableBody.append(
+                    '<tr class=""><td colspan="6">No results found</td></tr>'
+                );
+            }
+        });
+
         $("#editRoleModal").modal("show");
     });
+
+    function getUserByRoleId(id) {
+        return $.ajax({
+            url: "/getUserByRoleId/" + id,
+        });
+    }
+
+    function getPermissionByRoleId(id) {
+        return $.ajax({
+            url: "/getPermissionByRoleId/" + id,
+        });
+    }
 
     function getRole(id) {
         return $.ajax({
@@ -180,7 +261,19 @@ $(document).ready(function () {
 
     $("#updateRole").click(function (e) {
         requirejs(["sweetAlert2"], function (swal) {
+            var selectedElms = $("#kt_docs_jstree_checkable3").jstree(
+                "get_checked",
+                true
+            );
+            moduleId = [];
+            $.each(selectedElms, function () {
+                moduleId.push(this.id);
+            });
+            console.log(moduleId);
             var data = new FormData(document.getElementById("updateRoleForm"));
+
+            data.append("permissions", moduleId);
+
             var id = $("#idR").val();
 
             $.ajax({
@@ -338,6 +431,16 @@ $(document).ready(function () {
                     text: "HRIS",
                     children: [
                         {
+                            text: "My Profile",
+                            state: { selected: false },
+                            children: [
+                                { text: "Register Employee" },
+                                { text: "Update Employee" },
+                                { text: "Terminate Employee" },
+                                { text: "Activate Employee" },
+                            ],
+                        },
+                        {
                             text: "Employee Info",
                             state: { selected: false },
                             children: [
@@ -470,117 +573,242 @@ $(document).ready(function () {
             data: [
                 {
                     text: "HRIS",
+                    id: "hris",
                     children: [
                         {
                             text: "Employee Info",
+                            id: "employee_info",
                             state: { selected: false },
                             children: [
-                                { text: "Register Employee" },
-                                { text: "Update Employee" },
-                                { text: "Terminate Employee" },
-                                { text: "Activate Employee" },
+                                {
+                                    text: "Register Employee",
+                                    id: "hris_register_employee",
+                                },
+                                {
+                                    text: "Update Employee",
+                                    id: "hris_update_employee",
+                                },
+                                {
+                                    text: "Terminate Employee",
+                                    id: "hris_terminate_employee",
+                                },
+                                {
+                                    text: "Activate Employee",
+                                    id: "hris_activate_employee",
+                                },
                             ],
                         },
                     ],
                 },
                 {
                     text: "TSR",
+                    id: "tsr",
                     children: [
                         {
                             text: "My Timesheet",
-                            children: [{ text: "Create Event" }],
+                            id: "my_timesheet",
+                            children: [
+                                {
+                                    text: "Create Event",
+                                    id: "tsr_timesheet_create_event",
+                                },
+                            ],
                         },
                         {
-                            text: "Timesheet Report",
+                            text: "Timesheet Approval",
+                            id: "timesheet_approval",
                             children: [
-                                { text: "Approve TSR" },
-                                { text: "Decline TSR" },
-                                { text: "View TSR" },
+                                {
+                                    text: "Approve Timesheet",
+                                    id: "tsr_timesheet_approval",
+                                },
+                                {
+                                    text: "Reject Timesheet",
+                                    id: "tsr_timesheet_reject",
+                                },
                             ],
                         },
                     ],
                 },
                 {
                     text: "Attendance",
+                    id: "attendance",
                     children: [
                         {
                             text: "My Attendance",
-                            children: [{ text: "View Action Log" }],
+                            id: "my_attendance",
+                            children: [
+                                {
+                                    text: "View Action Log",
+                                    id: "attendance_view_action_log",
+                                },
+                            ],
                         },
                         {
                             text: "Attendance Info",
+                            id: "attendance_info",
                         },
                     ],
                 },
                 {
                     text: "Leave",
+                    id: "leave",
                     children: [
                         {
                             text: "Leave Approval",
+                            id: "leave_approval",
                             state: { selected: false },
                             children: [
-                                { text: "Approve Leave" },
-                                { text: "Reject Leave" },
-                                { text: "View Leave" },
+                                {
+                                    text: "Departments",
+                                    id: "departments",
+                                    children: [
+                                        {
+                                            text: "Department Approve",
+                                            id: "leave_department_approve",
+                                        },
+                                    ],
+                                },
+                                {
+                                    text: "Head Of Department",
+                                    id: "HOD",
+                                    children: [
+                                        {
+                                            text: "HOD Approve",
+                                            id: "leave_hod_approve",
+                                        },
+                                    ],
+                                },
                             ],
                         },
                     ],
                 },
                 {
                     text: "Project",
+                    id: "project",
                     children: [
                         {
-                            text: "Project Info",
+                            text: "Customer",
+                            id: "customer",
                             state: { selected: false },
                             children: [
-                                { text: "Register Project" },
-                                { text: "View Project" },
-                                { text: "Update Status" },
-                                { text: "Update Project" },
+                                { text: "Add Customer", id: "add_customer" },
+                                { text: "Edit Customer", id: "edit_customer" },
+                                {
+                                    text: "Delete Customer",
+                                    id: "delete_customer",
+                                },
+                            ],
+                        },
+                        {
+                            text: "Project Info",
+                            id: "project_info",
+                            state: { selected: false },
+                            children: [
+                                {
+                                    text: "Register Project",
+                                    id: "register_project",
+                                },
+                                { text: "View Project", id: "view_project" },
+                                { text: "Update Status", id: "update_status" },
+                                {
+                                    text: "Update Project",
+                                    id: "update_project",
+                                },
                             ],
                         },
                         {
                             text: "Project Approval",
+                            id: "project_approval",
                             children: [
-                                { text: "View Project Request" },
-                                { text: "Approve Project Request" },
-                                { text: "Reject Project Request" },
+                                {
+                                    text: "View Project Request",
+                                    id: "view_project_request",
+                                },
+                                {
+                                    text: "Approve Project Request",
+                                    id: "approve_project_request",
+                                },
+                                {
+                                    text: "Reject Project Request",
+                                    id: "reject_project_request",
+                                },
                             ],
                         },
                     ],
                 },
                 {
                     text: "Claim",
+                    id: "claim",
                     children: [
                         {
                             text: "Claim Approval",
+                            id: "claim_approval",
                             state: { selected: false },
                             children: [
-                                { text: "Approve Claim" },
-                                { text: "Recommend Claim" },
-                                { text: "Check Claim" },
-                                { text: "Amend Claim" },
-                                { text: "Cancel Claim" },
+                                {
+                                    text: "Department",
+                                    id: "department",
+                                    children: [
+                                        {
+                                            text: "Approve",
+                                            id: "claim_department_approve",
+                                            state: { selected: false },
+                                        },
+                                    ],
+                                },
+
+                                {
+                                    text: "Finance",
+                                    id: "finance",
+                                    children: [
+                                        {
+                                            text: "Approve ",
+                                            id: "claim_finance_approve",
+                                            state: { selected: false },
+                                        },
+                                    ],
+                                },
+
+                                {
+                                    text: "Admin",
+                                    id: "admin",
+                                    children: [
+                                        {
+                                            text: "Approve",
+                                            id: "claim_admin_approve",
+                                            state: { selected: false },
+                                        },
+                                    ],
+                                },
                             ],
                         },
                     ],
                 },
                 {
                     text: "Settings",
+                    id: "settings",
                     children: [
-                        { text: "General Settings" },
-                        { text: "Timesheet Settings" },
-                        { text: "Leave Settings" },
+                        { text: "General Settings", id: "setting_general" },
+                        {
+                            text: "Attendance Settings",
+                            id: "setting_attendance",
+                        },
+                        { text: "Timesheet Settings", id: "setting_timesheet" },
+                        { text: "Leave Settings", id: "setting_leave" },
+                        { text: "Claim Settings", id: "setting_claim" },
                     ],
                 },
                 {
                     text: "Reporting",
+                    id: "reporting",
                     children: [
-                        { text: "TSR" },
-                        { text: "Attendance" },
-                        { text: "Leave" },
-                        { text: "Project" },
-                        { text: "Claim" },
+                        { text: "TSR", id: "report_tsr" },
+                        { text: "Attendance", id: "report_attendance" },
+                        { text: "Leave", id: "report_leave" },
+                        { text: "Project", id: "report_project" },
+                        { text: "Claim", id: "report_claim" },
+                        { text: "Charge Out Rate", id: "report_cor" },
                     ],
                 },
             ],

@@ -601,7 +601,7 @@ if ($existingLogs->isNotEmpty()) {
     {   
         $user = Auth::user();
         $data = TimesheetApproval::where('tenant_id', $user->tenant_id)
-                ->where('user_id', $user->id) // Add this line to filter by user ID
+                ->where('user_id', $user->id) 
                 ->orderBy('created_at', 'DESC')
                 ->get();
 

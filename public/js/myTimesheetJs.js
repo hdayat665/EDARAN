@@ -2,6 +2,15 @@
 
 $(document).ready(function() {
 
+    // $("#addeventalldayedit").change(function() {
+    //     if ($(this).is(":checked")) {
+    //       $(this).val("allday");
+    //     } else {
+    //       $(this).val("test");
+    //     }
+    //   });
+      
+
  document.getElementById("yearsub").value = new Date().getFullYear();
 
   var monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
@@ -980,6 +989,19 @@ $(document).ready(function() {
                         });
                     }
 
+                    
+                    function getAttendance1(eventId) {
+                        return $.ajax({
+                            url: "/getAttendanceByEventId/" + eventId
+                        });
+                    }
+
+                    function getEvents1(id) {
+                        return $.ajax({
+                            url: "/getEventById/" + id
+                        });
+                    }
+
                     employeeData = getEmployee();
                     employeeData.done(function(data) {
                         // console.log(data.data);
@@ -1151,13 +1173,33 @@ $(document).ready(function() {
                             $("#endeventtimeedit").val(data.end_time);
                             $("#duration").val(data.duration);
                             $('#addneweventprojectlocsearchedit').picker('set', data.location);
+                            $('#hideshowstarttimee').show();
+                            $('#hideshowendtimee').show();
+                            $("#addeventalldayedit").prop('checked', false);
                             if (data.type_recurring) {
 
                                 if (data.type_recurring == 'allday') {
                                     $("#addeventalldayedit").prop('checked', true);
+                                    $('#hideshowstarttimee').css("display", 'none');
+                                    $('#hideshowendtimee').css("display", 'none');
+                                    $("#addeventalldayedit").val("allday");
+
+                                }else if (data.type_recurring == '') {
+                                    $("#addeventalldayedit").prop('checked', false);
+                                    $('#hideshowstarttimee').css("display", 'block');
+                                    $('#hideshowendtimee').css("display", 'block');
+                                    $("#addeventalldayedit").val("");
+                                    
+                                    
+                                
+                                    
                                 } else if (data.type_recurring == 'recurring') {
+                                    $("#addeventalldayedit").prop('checked', false);
                                     // $("#addeventalldayedit").prop('checked', true);
                                     $("#addeventrecurringedit").prop('checked', true);
+                                    $('#hideshowstarttimee').css("display");
+                                    $('#hideshowendtimee').css("display");
+                                   
 
                                     var recurringDisplay = $("#addneweventrecurringedit").css("display");
 
@@ -1256,6 +1298,9 @@ $(document).ready(function() {
                                 } else {
                                     $("#addeventalldayedit").prop('checked', true);
                                     $("#addeventrecurringedit").prop('checked', true);
+                                    
+                                    
+                                   
 
                                     var recurringDisplay = $("#addneweventrecurringedit").css("display");
 
@@ -1467,6 +1512,38 @@ $(document).ready(function() {
 
                         });
 
+                       
+                        // var id = $('#buttonnViewParticipant').data('id');  // kena ubah sini
+                        // var eventData = getEvents1(id);
+                        // eventData.done(function(data) {
+                        //     var attendanceEvent = getAttendance1(data.id);
+                        //     attendanceEvent.done(function(dataAttendance) {
+                        //         // Check if the DataTable is already initialized
+                        //         var table = $('#tableviewparticipant').DataTable();
+                        //         if (table && table.destroy) {
+                        //             // The DataTable is already initialized, so we need to destroy it before initializing again
+                        //             table.destroy();
+                        //         }
+                        //         // Initialize the DataTable
+                        //         $('#tableviewparticipant').DataTable({
+                        //             "paging": true,
+                        //             "columns": [
+                        //                 { "title": "No" },
+                        //                 { "title": "Participants" }
+                        //             ]
+                        //         });
+                        //         // Populate the DataTable with data
+                        //         for (let i = 0; i < dataAttendance.length; i++) {
+                        //             const attendance = dataAttendance[i];
+                        //             table.row.add([
+                        //                 i + 1,
+                        //                 attendance.employeeName
+                        //             ]);
+                        //         }
+                        //         table.draw();
+                        //     });
+                        // });
+
                         $('#editeventmodal').modal('show');
                     }
 
@@ -1651,11 +1728,18 @@ $(document).ready(function() {
     $(document).on('change', "#typeoflog", function() {
         if ($(this).val() == "2") {
             $("#officelog").show();
+            $("#activity_names").val("");
+            $("#activityOffice").val("");
+            $("#projectlocsearch").val("");
+            $("#projectLocationOffice").val("");
+            
         } else {
             $("#officelog").hide();
             $("#listproject").hide();
-            
-
+            $("#activity_names").val("");
+            $("#activityOffice").val("");
+            $("#projectlocsearch").val("");
+            $("#projectLocationOffice").val("");
         }
     });
     $(document).on('change', "#typeoflog", function() {
@@ -1664,8 +1748,10 @@ $(document).ready(function() {
             $("#activityByProjectHide").show();
             $("#locationByProjectHide").show();
             $("#locationByProjectHide").show();
-            
-            
+            $("#activity_names").val("");
+            $("#activityOffice").val("");
+            $("#projectlocsearch").val("");
+            $("#projectLocationOffice").val("");
             
             // $("#activity_locationadd").show();
             
@@ -1679,21 +1765,46 @@ $(document).ready(function() {
             // $("#activityLogs").show();
             $("#activityByProjectShow").hide();
             $("#locationByProjectShow").hide();
-            
-            
-            
+            $("#activity_names").val("");
+            $("#activityOffice").val("");
+            $("#projectlocsearch").val("");
+            $("#projectLocationOffice").val("");
         }
     });
+
+    // $(document).on('change', "#typeoflog", function() {
+    //     if ($(this).val() == "1" || $(this).val() == "4") {
+            
+    //         $("#activity_locationadd").show();
+    //     } else {
+    //         $("#activity_locationadd").show();
+            
+            
+    //     }
+    // });
 
     $(document).on('change', "#officelog2", function() {
         if ($(this).val() == "1") {
             $("#listproject").show();
             $("#activityByProjectHide").hide();
+            $("#activityByProjectShow").show();
+            $("#locationByProjectShow").show();
+            $("#activity_names").val("");
+            $("#activityOffice").val("");
+            $("#projectlocsearch").val("");
+            $("#projectLocationOffice").val("");
             
             
         } else if ($(this).val() == "2") {
             $("#activityByProjectHide").show();
             $("#listproject").hide();
+            $("#activityByProjectShow").hide();
+            $("#locationByProjectShow").hide();
+            $("#activity_names").val("");
+            $("#activityOffice").val("");
+            $("#projectlocsearch").val("");
+            $("#projectLocationOffice").val("");
+            
             
         }
         // else {
@@ -2131,10 +2242,26 @@ $(document).ready(function() {
     // $('#alldayc').change(function() {
     //     if (this.checked) {
     //         $('#hidestart, #hideend').hide();
+    //         $('#starteventtime').val("00:00 AM");
+    //         $('#endeventtime').val("11:59 PM");
     //     } else {
     //         $('#hidestart, #hideend').show();
+    //         $('#starteventtime').val("00:00 AM");
+    //         $('#endeventtime').val("11:59 PM");
     //     }
     // });
+    
+    $('#addeventalldayedit').change(function() {
+        if (this.checked) {
+            $('#hideshowstarttimee, #hideshowendtimee').hide();
+            $('#starteventtimeedit').val("00:00 AM");
+            $('#endeventtimeedit').val("11:59 PM");
+        } else {
+            $('#hideshowstarttimee, #hideshowendtimee').show();
+            // $('#starteventtimeedit').val("00:00 AM");
+            // $('#endeventtimeedit').val("11:59 PM");
+        }
+    });
     
     
 
@@ -2238,4 +2365,4 @@ function getConfirmSubmit(id) {
 
 
 
-
+    

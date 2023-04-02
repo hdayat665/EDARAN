@@ -16,7 +16,7 @@ class MailService
     {
         // get supervisor detail
         $user = Employee::where('user_id', Auth::user()->id)->first()->toArray();
-        $supervisor = Employee::where('user_id', $user['eclaimrecommender'])->first()->toArray();
+        $supervisor = Employee::where('user_id', $user['eclaimapprover'])->first()->toArray();
 
         $receivers = array_merge_recursive($user, $supervisor);
         //  $user->merge($supervisor);

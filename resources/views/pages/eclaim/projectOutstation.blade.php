@@ -19,14 +19,14 @@
         <div class="col-md-4">
             <label class="form-label">Project</label>
         </div>
-        <div class="col-md-8">
+        <div class="col-md-8"> 
             <select class="form-select" id="project" readonly name="project_id1">
-                <?php $projects = project(); ?>
-                <option class="form-label" value="">Please Select</option>
+                <option class="form-label" value="" selected>
+                    Please Select</option>
+                <?php $projects = myProjectOnly(); ?>
                 @foreach ($projects as $project)
                     <option class="form-label" value="{{ $project->id }}">{{ $project->project_name }}</option>
                 @endforeach
-
             </select>
         </div>
     </div>

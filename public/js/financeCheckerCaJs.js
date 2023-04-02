@@ -14,12 +14,13 @@ $(document).ready(function () {
     $("#rejectedtable").dataTable({
         // "responsive": true,
         bLengthChange: false,
-        bFilter: false,
+        bFilter: false, 
     });
 
     $("#cleareddate").datepicker({
         todayHighlight: true,
         autoclose: true,
+        format: 'yyyy/mm/dd'
     });
 
     $("#filter").click(function () {

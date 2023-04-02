@@ -2,7 +2,7 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="add-parent">Add Parent Details</h5>
+                <h5 class="modal-title" id="add-parent">New Family</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -33,7 +33,7 @@
                             <div class="row">
                                 <div class="col-sm-6 ">
                                     <div class="form-check form-switch align-right">
-                                        <input class="form-check-input partCheck8" value="" type="checkbox" name=""  id="">
+                                        <input class="form-check-input partCheck8" value="on" type="checkbox" name="nonCitizen" id="citizen">
                                         <label class="form-check-label" for="citizen" >
                                             Non-Citizen
                                         </label>
@@ -41,7 +41,7 @@
                                 </div>
                                 <div class="col-sm-6">
                                     <label for="lastname" class="form-label" >New Identification Number*</label>
-                                    <input type="number" id="idnumber6" name="idNo" value="" class="form-control" placeholder="000000000000" >
+                                    <input type="number" id="idNoaddFamily" name="idNo" value="" class="form-control" placeholder="000000000000" >
                                     
                                 </div>
                             </div>
@@ -50,7 +50,7 @@
                             {{-- new --}}
                             <div class="row">
                                 <div class="col-sm-6">
-                                    <label for="dob" class="form-label" style="color: red;">ID Attachment</label>
+                                    <label for="dob" class="form-label">ID Attachment</label>
                                     <input type="file" id="idAttachment" name="idFile" class="form-control" aria-describedby="">
                                 </div>
                             </div>
@@ -72,8 +72,8 @@
                                 </div>
                         <div class="col-sm-3">
                             <label for="issuing-country" class="form-label">Issuing Country</label>
-                            <select class="form-select" name="issuingCountry" id="" style="text-transform:uppercase">
-                            <option value="MY" label="Malaysia" selected ></option>
+                            <select class="form-select" name="issuingCountry" id="passportcountryparent" style="text-transform:uppercase" disabled>
+                                <option value="" label="PLEASE CHOOSE" selected="selected"></option>
                                 <optgroup id="country-optgroup-Americas" label="Americas">
                                     @foreach ($americass as $key => $america)
                                     <option value="{{$key}}">{{$america}}</option>
@@ -97,7 +97,7 @@
                             <input type="text" id="age6" name="age" class="form-control" aria-describedby="" readonly placeholder="AGE">
                         </div>
                         <div class="col-sm-6">
-                            <label for="" class="form-label">Relationship</label>
+                            <label for="" class="form-label">Relationship*</label>
                             <select class="form-select" name="relationship" id="relationshipparent" style="text-transform:uppercase">
                                 <?php $relationship = relationship() ?>
                                 <option value="" label="PLEASE CHOOSE"  ></option>
@@ -111,13 +111,13 @@
                     </div>
                     <div class="row p-2">
                         <div class="col-sm-6">
-                            <label for="passport" class="form-label">Contact Number</label>
+                            <label for="passport" class="form-label">Phone Number</label>
                             <input type="text" id="contactNoparent" name="contactNo" class="form-control" aria-describedby="passport" placeholder="00000000000">
                         </div>
                         <div class="col-sm-6">
                             <label for="age" class="form-label">Gender*</label>
-                            <select class="form-select" name="gender" id=""  style="text-transform:uppercase">
-                                <option value="" label="PLEASE CHOOSE"></option>
+                            <select class="form-select" name="gender" id="genderFamily"  style="text-transform:uppercase">
+                                <option value="" label="PLEASE CHOOSE" selected></option>
                                 @foreach ($gender as $key => $status)
                                 <option value="{{$key}}">{{$status}}</option>
                                 @endforeach
@@ -131,13 +131,13 @@
                                 <div class="col-sm-6 ">
                                     <div class="form-check form-switch align-right">
                                         <input class="form-check-input okuCheck5 " value="" type="checkbox" name=""  id="">
-                                        <label class="form-check-label" for="citizen" style="color: red;">
+                                        <label class="form-check-label" for="citizen">
                                             OKU?
                                         </label>
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
-                                    <label for="lastname" class="form-label" style="color: red;">OKU Card Number*</label>
+                                    <label for="lastname" class="form-label">OKU Card Number*</label>
                                     <input type="number" id="okucard5" name="okuNo" value="" class="form-control" readonly placeholder="OKU CARD NUMBER">
                                     
                                 </div>
@@ -146,7 +146,7 @@
                         <div class="col-sm-6">
                             <div class="row">
                                 <div class="col-sm-6">
-                                    <label for="dob" class="form-label" style="color: red;">OKU Attachment*</label>
+                                    <label for="dob" class="form-label">OKU Attachment*</label>
                                     <input type="file" id="okuattach5" name="okuFile" class="form-control" style="pointer-events: none" aria-describedby="" >
                                 </div>
                             </div>
@@ -157,7 +157,7 @@
                         <h4 class="col-sm-6 p-2">Address</h4>
                         <div class="col-sm-6">
                             <br><div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="same-address2" name="sameaspermanent" style="text-transform:uppercase">
+                                <input class="form-check-input" type="checkbox" id="same-address2" style="text-transform:uppercase">
                                 <label class="form-check-label" for="same-address2">
                                     Same as Permanent Address
                                 </label>
@@ -194,11 +194,16 @@
                                 <option value="{{$key}}"> {{$status}}</option>
                                 @endforeach
                             </select>
+                            <input type="hidden" name="state" id="stateparenthidden">
                         </div>
                         <div class="col-sm-6">
-                            <label for="country" class="form-label">Country</label>
+                            <label for="country" class="form-label">Country*</label>
                             <select class="form-select" name="country" id="countryparent" value="{{ $parent->country ?? '' }}" style="text-transform:uppercase">
-                                <option value="MY" label="Malaysia" Selected></option>
+                                <?php 
+                                    $americass = americas();
+                                    $asias = asias();
+                                ?>
+                                <option value="" label="PLEASE CHOOSE" selected></option>
                                 <optgroup id="country-optgroup-Americas" label="Americas">
                                     @foreach ($americass as $key => $america)
                                     <option value="{{$key}}" >{{$america}}</option>
@@ -210,6 +215,7 @@
                                     @endforeach
                                 </optgroup>
                             </select>
+                            <input type="hidden" name="country" id="countryparenthidden">
                         </div>
                     </div>
 

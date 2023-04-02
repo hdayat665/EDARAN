@@ -23,8 +23,6 @@
                     <th class="text-nowrap">Project</th>
                     <th class="text-nowrap">Total Hours</th>
                     <th class="text-nowrap">Amount (MYR)</th>
-
-
                 </tr>
             </thead>
             <tbody>
@@ -44,7 +42,13 @@
             <tfoot>
                 <tr>
                     <th colspan="4">Total:</th>
-                    <th></th>
+                    <td>
+                        @if ($employees)
+                            {{ number_format($employees->sum(function($employees) {
+                                return floatval(str_replace(':', '.', substr($employees->total_hour, 0, -2))) * floatval($employees->COR);
+                            }), 2) }}
+                        @endif
+                    </td>
                 </tr>
             </tfoot>
         </table>

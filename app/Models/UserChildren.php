@@ -27,6 +27,7 @@ class UserChildren extends Authenticatable
         'fullName',
         'nonCitizen',
         'idNo',
+        'oldIDNo',
         'passport',
         'expiryDate',
         'issuingCountry',
@@ -44,6 +45,11 @@ class UserChildren extends Authenticatable
         'city',
         'state',
         'country',
+        'birthID',
+        'idFile',
+        'okuFile',
+        'okuStatus',
+        'okuNo',
     ];
 }
 
