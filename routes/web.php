@@ -476,17 +476,8 @@ Route::group(['middleware' => ['web']], function () {
         });
 
         Route::controller(EleaveReportController::class)->group(function () {
-            //Route::get('/statusReport', 'statusReportView');
             Route::get('/leaveReport', 'leaveReportView');
-            // Route::get('/overtimeReport', 'overtimeReportView');
-            // Route::get('/getProjectByCustomerId/{customer_id}', 'getProjectByCustomerId');
-            // Route::get('/searchReport', 'searchReport');
-            // Route::post('/updateStatus/{id}/{status}', 'updateStatus');
-            // Route::post('/searchStatusReport', 'searchStatusReport');
             Route::post('/searchEleaveReport', 'searchEleaveReport');
-            // Route::post('/searchEmployeeReport', 'searchEmployeeReport');
-            // Route::post('/searchOvertimeReport', 'searchOvertimeReport');
-            // Route::get('/getReportAllEmployee', 'getReportAllEmployee');
         });
 
 
@@ -602,13 +593,17 @@ Route::group(['middleware' => ['web']], function () {
 
             //supervisor
             Route::get('/leaveAppr', 'leaveApprView');
+            Route::post('/leaveAppr', 'leaveApprView');
             Route::get('/getuserleaveAppr/{id}', 'getuserleaveAppr');
+            Route::get('/getuserleaveApprview/{id}', 'getuserleaveApprview');
             Route::post('/updatesupervisor/{id}', 'updatesupervisor');
             Route::post('/updatesupervisorreject/{id}', 'updatesupervisorreject');
 
             //hod
             Route::get('/leaveApprhod', 'leaveApprhodView');
+            Route::post('/leaveApprhod', 'leaveApprhodView');
             Route::get('/getuserleaveApprhod/{id}', 'getuserleaveApprhod');
+            Route::get('/getuserleaveApprhodview/{id}', 'getuserleaveApprhodview');
             Route::post('/updatehod/{id}', 'updatehod');
             Route::post('/updatehodreject/{id}', 'updatehodreject');
         });
