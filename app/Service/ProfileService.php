@@ -513,6 +513,13 @@ class ProfileService
                 unset($input['address2E']);
             }
 
+            if(!isset($input['okuStatus']))
+            {
+                $input['okuStatus'] = null;
+                $input['okuNumber'] = null;
+                $input['okuID'] = null;
+            }
+
             // $input['dateJoined'] = "'".dateFormatInput($input['dateJoined'])."'";
             // $input['expiryDate'] = "'".dateFormatInput($input['expiryDate'])."'";
             // $input['DOM'] = "'".dateFormatInput($input['DOM'])."'";
@@ -523,7 +530,7 @@ class ProfileService
             $data['status'] = config('app.response.success.status');
             $data['type'] = config('app.response.success.type');
             $data['title'] = config('app.response.success.title');
-            $data['msg'] = 'Success Update Companion';
+            $data['msg'] = 'Companion is updated.';
         }
 
         return $data;
@@ -570,6 +577,11 @@ class ProfileService
                 unset($input['okuID']);
             }
         }
+          
+        if(!isset($input['dateJoined']))
+        {
+            $input['dateJoined'] = NULL;
+        }
 
         $input['user_id'] = $id;
         $input['dateJoined'] = dateFormat($input['dateJoined']);
@@ -594,7 +606,7 @@ class ProfileService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success add Companion';
+        $data['msg'] = 'New Companion is created.';
     }
 
     return $data;
@@ -617,7 +629,7 @@ class ProfileService
             $data['status'] = config('app.response.success.status');
             $data['type'] = config('app.response.success.type');
             $data['title'] = config('app.response.success.title');
-            $data['msg'] = 'Companion deleted';
+            $data['msg'] = 'Companion is deleted.';
         }
 
         return $data;
