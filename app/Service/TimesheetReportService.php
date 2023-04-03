@@ -295,11 +295,11 @@ class TimesheetReportService
         $cond[1] = ['a.tenant_id', Auth::user()->tenant_id];
 
         if (isset($input['department2'])) {
-            $cond[2] = ['d.departmentName', $input['department2']];
+            $cond[2] = ['d.id', $input['department2']];
         }
 
-        if (isset($input['user_id'])) {
-            $cond[3] = ['a.user_id', $input['user_id']];
+        if (isset($input['claim_category_detail'])) {
+            $cond[3] = ['a.user_id', $input['claim_category_detail']];
         }
 
         if (isset($input['year2'])) {

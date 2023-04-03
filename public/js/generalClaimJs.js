@@ -56,7 +56,7 @@ $(document).ready(function () {
         });
     });
         
-        $(document).ready(function() {
+    $(document).ready(function() {
         $('#amount').on('input', function() {
             var value = $(this).val();
             var decimalCount = (value.split('.')[1] || []).length;
@@ -72,7 +72,7 @@ $(document).ready(function () {
             $(this).val(value + '.00');
             }
         });
-        });
+    });
  
     
     // $("#createGnc").click(function (e) {

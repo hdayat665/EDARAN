@@ -34,7 +34,12 @@
             </div>
             <div class="row p-2">
                 <div class="col-sm-12">
-                    <h5>Department Name: {{ $departmentName }}</h5>
+                    @if(count($logs) > 0)
+                        <h5>Department Name: {{ $logs[0]->departmentName }}</h5>
+                    @else
+                    <h5>Department Name: No Result </h5>
+                    @endif
+
                 </div>
             </div>
             {{-- <table id="summarytable" class="table table-striped table-bordered align-middle">
