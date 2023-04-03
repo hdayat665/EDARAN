@@ -755,7 +755,7 @@ class SettingController extends Controller
         $ss = new SettingService;
 
         $result['datas'] = $ss->eclaimGeneralView();
-        
+
         return view('pages.setting.eclaim.eclaimCashAdvance', $result);
     }
 
@@ -1216,6 +1216,24 @@ class SettingController extends Controller
         $dlh = new SettingService;
 
         $result = $dlh->updateApprovalConfigDetail($r, $id);
+
+        return response()->json($result);
+    }
+
+    public function getUserByRoleId($id = '')
+    {
+        $dlh = new SettingService;
+
+        $result = $dlh->getUserByRoleId($id);
+
+        return response()->json($result);
+    }
+
+    public function getPermissionByRoleId($id = '')
+    {
+        $dlh = new SettingService;
+
+        $result = $dlh->getPermissionByRoleId($id);
 
         return response()->json($result);
     }
