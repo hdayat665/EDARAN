@@ -1071,6 +1071,7 @@ if (!function_exists('getEmployee')) {
     }
 }
 
+
 if (!function_exists('getEmployeeNotInProject')) {
     function getEmployeeNotInProject($id = '')
     {
@@ -2173,6 +2174,20 @@ if (!function_exists('getPermissionByRoleId')) {
     function getPermissionByRoleId($id = '')
     {
         $data = PermissionRole::select('permission_code')->where([['tenant_id', Auth::user()->tenant_id], ['role_id', $id]])->get();
+
+        if (!$data) {
+            $data = [];
+        }
+
+        return $data;
+    }
+}
+
+
+if (!function_exists('getEmployeeNamebyDepartments')) {
+    function getEmployeeNamebyDepartments($id = '')
+    {
+        $data = Employee::where([['department', $id]])->get();
 
         if (!$data) {
             $data = [];

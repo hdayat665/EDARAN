@@ -460,12 +460,32 @@ if ($existingLogs->isNotEmpty()) {
         return $data;
     }
 
+    // public function getEventById($id)
+    // {
+    //     $data = TimesheetEvent::find($id);
+
+    //     return $data;
+    // }
+
     public function getEventById($id)
     {
-        $data = TimesheetEvent::find($id);
-
-        return $data;
+        $event = TimesheetEvent::find($id);
+    
+        $participantIds = explode(',', $event->participant);
+    
+        $employees = DB::table('employment')
+                        ->whereIn('user_id', $participantIds)
+                        ->get();
+    
+        $employeeNames = $employees->pluck('employeeName')->toArray();
+    
+        $event->participantNames = implode(',', $employeeNames);
+    
+        return $event;
     }
+    
+    
+
 
     // public function getLogs()
     // {

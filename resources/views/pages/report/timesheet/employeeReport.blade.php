@@ -127,25 +127,39 @@
                             <div class="row p-2" >
                                 <div class="col-sm-3">
                                     <label for="emergency-firstname" class="form-label">Select Department</label>
-                                    <select class="form-select" id="departmentv" name="department2">
+                                    {{-- <select class="form-select" id="departmentv" name="department2">
                                         <option class="form-label" value="">PLEASE CHOOSE</option>
                                         <?php $departments = getDepartment() ?>
                                         @foreach ($departments as $department)
                                         <option value="{{$department->departmentName}}">{{$department->departmentName}}</option>
                                         @endforeach
-                                    </select>
-                                    <div id="department_v" style="color: red;"></div>
-                                    {{-- <select class="form-select" name="department">
+                                    </select> --}}
+                                   
+                                    <select class="form-select" name="department2" id="departmentv">
                                         <option class="form-label" value="">PLEASE CHOOSE</option>
                                         <?php $departments = getDepartment() ?>
                                         @foreach ($departments as $department)
                                         <option value="{{$department->id}}">{{$department->departmentName}}</option>
                                         @endforeach
-                                    </select> --}}
+                                    </select>
+                                    <div id="department_v" style="color: red;"></div>
+                                </div>
+                            </div>
+                            <div class="row p-2" id="labelcategory"> 
+                                <div class="col-md-3">
+                                    <label class="form-label" id="">Select Employee</label>
+                                {{-- </div> --}}
+                                {{-- <div class="col-md-9"> --}}
+                                    <select class="form-select" id="employeev" name="claim_category_detail" >
+                                        <option class="form-label" value="Please Select" selected>Please
+                                            Select</option>
+                                       
+                                    </select>
+                                     <div id="employee_v" style="color: red;"></div>
                                 </div>
                             </div>
 
-                            <div class="row p-2" >
+                            {{-- <div class="row p-2" >
                                 <div class="col-sm-3">
                                     <label for="emergency-firstname" class="form-label">Select Employee Name</label>
                                     <select class="form-select" id="employeev" name="user_id">
@@ -157,7 +171,7 @@
                                     </select>
                                     <div id="employee_v" style="color: red;"></div>
                                 </div>
-                            </div>
+                            </div> --}}
 
                             <div class="row p-2">
                                 <div class="col-sm-12">

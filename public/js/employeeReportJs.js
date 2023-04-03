@@ -86,7 +86,51 @@ $('#departmentid').picker({ search: true });
 $('#employeeid').picker({ search: true });
 
 
-$('#departmentv').picker({ search: true });
-$('#employeev').picker({ search: true });
+// $('#departmentv').picker({ search: true });
+// $('#employeev').picker({ search: true });
+
+
+$(document).on("change", "#departmentv", function () {
+  // $("#labelcategory").show();
+  id = $(this).val();
+  const inputs = ["employeev"];
+
+  for (let i = 0; i < inputs.length; i++) {
+      $("#" + inputs[i] + "")
+          .find("option")
+          .remove()
+          .end()
+          .append(
+              '<option label="Please Choose" value="" selected="selected"> </option>'
+          )
+          .val("");
+
+      function getEmployeeNamebyDepartment(id) {
+          return $.ajax({
+              url: "/getEmployeeNamebyDepartment/" + id,
+          });
+      }
+      $("#" + inputs[i] + "")
+          .find("option")
+          .end();
+  }
+
+  var user = getEmployeeNamebyDepartment(id);
+
+  user.done(function (data) {
+      // $("#label").text(data[0].label);
+      // console.log(data[0].label);
+      for (let i = 0; i < data.length; i++) {
+          const user = data[i];
+          var opt = document.createElement("option");
+          document.getElementById("employeev").innerHTML +=
+              '<option value="' +
+              user["user_id"] +
+              '">' +
+              user["employeeName"] +
+              "</option>";
+      }
+  });
+});
 
 

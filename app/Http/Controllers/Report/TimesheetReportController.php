@@ -118,10 +118,10 @@ class TimesheetReportController extends Controller
         $input = $r->input();
         $data['logs'] = $trs->employeeReportAll($input);
 
-        //to display value on table what user select in menu
-        if (isset($input['department2'])) {
-            $data['departmentName'] = $input['department2'];
-        }
+        // to display value on table what user select in menu
+        // if (isset($input['department2'])) {
+        //     $data['id'] = $input['department2'];
+        // }
 
         if (isset($input['year2'])) {
             $data['year'] = $input['year2'];
@@ -191,6 +191,14 @@ class TimesheetReportController extends Controller
 
     //     return view('pages.report.timesheet.employeeReportAll', $data);
     // }
+
+
+    public function getEmployeeNamebyDepartment($id = '')
+    {
+        $data = getEmployeeNamebyDepartments($id);
+
+        return response()->json($data);
+    }
 
 
 }
