@@ -224,7 +224,7 @@
                         <div class="col-sm-6">
                             <label for="country" class="form-label" >Country</label>
                             <select class="form-select" name="country" id="countrycom" value="{{ $companion->country ?? '' }}" style="text-transform:uppercase" >
-                                <option value="MY" label="Malaysia" selected ></option>
+                                <option value="" label="PLEASE CHOOSE"></option>
                                 <optgroup id="country-optgroup-Americas" label="Americas">
                                     @foreach ($americass as $key => $america)
                                     <option value="{{$key}}"  >{{$america}}</option>

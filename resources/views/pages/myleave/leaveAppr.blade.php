@@ -10,60 +10,63 @@
                         <div class="col">
                             <h3>Leave Approval</h3>
                         </div>
-                        <div class="col">
-                            <div class="panel-heading">
-                                <div class="col-md-12" style="display: flex; justify-content: flex-end" >
-                                    <button class="btn btn-default btn-icon btn-lg" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" >
-                                        <i class="fa fa-filter"></i>
-                                    </button>  
-                                </div>
+                        <div class="row p-2">
+                            <div class="row">
+                                <div class="col d-flex justify-content-end">
+                                    <button class="btn btn-primary" type="button" id="filter"><i class="fa fa-filter" aria-hidden="true"></i></button>&nbsp;
+                                </div>  
                             </div>
                         </div>
                     </div>
-                    <div id="collapseOne" class="form-control collapse hidden">
-                        <h5>Filter</h5><br>
-                        <table>
-                            <div class="row">
-                                <div class="col-md-3">
-                                    <div class="row p-1">
-                                        <label for="date">Date</label>
-                                        <input type="text" class="form-control" id="datepicker-date">
+                        
+                        <div class="row">
+                            <form action="/leaveAppr" method="POST">
+                                <div id="filterleave" style="display: none">
+                                    <h5>Filter</h5><br>
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <div class="row p-1">
+                                                <label for="date">Date</label>
+                                                <input type="text" class="form-control" name="applydate" value="<?php echo $applydate; ?>" id="datepicker-date">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="row p-1">
+                                                <label for="text">Employee Name</label>
+                                                <select class="form-select" name="idemployer" id="idemployer">
+                                                    <option value="">ALL</option>
+                                                    @foreach($employer as $idem)
+                                                        <option value="{{ $idem->user_id }}" {{ old('idemployer') == $idem->user_id ? 'selected' : ($idemployer == $idem->user_id ? 'selected' : '') }}>{{ $idem->fullName }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="row p-1">
+                                                <label for="text">Type of Leave</label>
+                                                <select class="form-select" name="type" id="type">
+                                                    <option value="">ALL</option>
+                                                    @foreach($types as $dt)
+                                                        <option value="{{ $dt->id }}" {{ old('typelist') == $dt->id ? 'selected' : ($type == $dt->id ? 'selected' : '') }}>{{ $dt->leave_types }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                        <br>
+                                            <!-- <div class="row"> -->
+                                                <button class="btn btn-primary" type="submit" ><i class="fa fa-search" aria-hidden="true"></i> Search</button>
+                                                &ensp;
+                                                <button  id="reset" class="btn btn-primary">Reset</button>
+                                            <!-- </div> -->
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="col-md-3">
-                                    <div class="row p-1">
-                                        <label for="text">Employee Name</label>
-                                        <select class="form-select" id="" >
-                                            <option class="form-label" value="" selected>All</option>
-                                        </select>
-                                    </div>
-                                    <!-- <div class="row">
-                                        <input type="text" class="form-control" placeholder="Employee Name">
-                                    </div> -->
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="row p-1">
-                                        <label for="text">Type of Leave</label>
-                                        <select class="form-select" id="" >
-                                            <option class="form-label" value="" selected>All</option>
-                                        </select>
-                                    </div>
-                                    <!-- <div class="row">
-                                        <input type="text" class="form-control" placeholder="Type of Leave">
-                                    </div> -->
-                                </div>
-                                <div class="col-md-3">
-                                <br>
-                                    <!-- <div class="row"> -->
-                                        <button type="search" class="btn btn-info">Search</button> &ensp;
-                                        <button type="reset" class="btn btn-info">Reset</button>
-                                    <!-- </div> -->
-                                </div>
-                            </div>
-                        </table>
-                    </div>
+                            </form>
+                        </div>
+                    
                     <br>
-                    <table class="table table-striped table-bordered align-middle">
+                    <table id="table-leave" class="table table-striped table-bordered align-middle">
                         <thead>
                             <tr>
                                 <th>Action</th>
@@ -87,13 +90,20 @@
                                         <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle"><i class="fa fa-cogs"></i> Action <i class="fa fa-caret-down"></i></a>
                                         <ul class="dropdown-menu">
                                             <a class="dropdown-item" href="/myTimesheet">View Calendar</a>
+
                                             <div class="dropdown-divider" style=""></div>
-                                            <!-- <a href="javascript:;" data-bs-toggle="modal" data-bs-target="#viewModal" class="btn">View Calendar</a> -->
-                                            <a href="javascript:;" id="editButton2" data-id="{{ $l->id }}" data-bs-toggle="modal" data-bs-target="#approveModal-tab-1" class="btn">Approve Leave</a>
-                                            <div class="dropdown-divider"></div>
-                                            <a href="javascript:;" id="editButton3" data-id="{{ $l->id }}"  data-bs-toggle="modal" data-bs-target="#rejectModal-tab-1" class="btn">Reject Leave</a>
-                                            {{-- <div class="dropdown-divider"></div>
-                                            <a href="javascript:;" id="approveButton" data-id="{{ $l->id }}"  class="btn">Cancel Leave</a> --}}
+                                            <a href="javascript:;" id="viewbutton" data-id="{{ $l->id }}" data-bs-toggle="modal" data-bs-target="#viewmodal" class="btn">View User</a>
+                                                
+                                            @if ($l->up_rec_status == '4')
+                                            @else
+                                                <div class="dropdown-divider" style=""></div>
+                                                <a href="javascript:;" id="editButton2" data-id="{{ $l->id }}" data-bs-toggle="modal" data-bs-target="#approveModal-tab-1" class="btn">Approve Leave</a>
+                                            @endif
+                                            @if ($l->up_rec_status == '3')
+                                            @else
+                                                <div class="dropdown-divider"></div>
+                                                <a href="javascript:;" id="editButton3" data-id="{{ $l->id }}"  data-bs-toggle="modal" data-bs-target="#rejectModal-tab-1" class="btn">Reject Leave</a>
+                                            @endif
                                         </ul>
                                     </div>
                                 </td>
@@ -135,7 +145,74 @@
                             @endif
                         </tbody>        
                     </table>
-                    <!-- TRIAL OF APPROVEMODAL-tab-1 -->
+                    <!-- View Model -->
+                    <div class="modal fade" id="viewmodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Appproved by Supervisor</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                        <div class="row row-cols-lg-auto g-3 mb-3">
+                                            <div class="col-12" style="width:50%">
+                                                <label>Applied Date</label><br>
+                                                <input type="text" style="pointer-events: none;" readonly class="form-control-plaintext" id="viewapplieddate" value="">
+                                                <input type="hidden" readonly class="form-control-plaintext" id="viewiddata" >
+                                            </div>
+                                            <div class="col-12" style="width:50%">
+                                                <label>Type of Leave*</label><br>
+                                                <input type="text" style="pointer-events: none;" readonly class="form-control-plaintext" id="viewtype1">
+                                            </div> 
+                                            <div class="col-12" style="width:50%">
+                                                <label>Number of Day(s) Applied</label><br>
+                                                <input type="text" style="pointer-events: none;" readonly class="form-control-plaintext" id="viewdayapplied">
+                                            </div>
+                                            <div class="col-12" style="width:50%">
+                                                <label>Total Days Applied*</label><br>
+                                                <input type="text" style="pointer-events: none;" readonly class="form-control-plaintext" id="viewtotaldayapplied">
+                                            </div>
+                                            <div class="col-12" style="width:50%">
+                                                <label>Leave Date</label><br>
+                                                <input type="text" style="pointer-events: none;" readonly class="form-control-plaintext" id="viewleavedate">
+                                            </div>
+                                            <div class="col-12" style="width:50%">
+                                                <label>Reason*</label><br>
+                                                <input type="text" style="pointer-events: none;" readonly class="form-control-plaintext" id="viewreason1">
+                                            </div>
+                                            <div class="col-12" style="width:50%" id="viewmenu01">
+                                                <label>Leave Session</label><br>
+                                                <div></div>
+                                                <div id="leavesession" style="font-weight: lighter;"></div>
+                                            </div>
+                                            <div class="col-12" style="width:50%">
+                                                <label>Supporting Document*</label><br>
+                                                 <span id="viewfileDownloadPolicya" style="font-weight: lighter;"></span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="form-control">
+                                                <div class="row p-2">
+                                                    <label for="text" >Recommended By:</label><br>
+                                                    <div id="viewrecommended_by" style="font-weight: lighter;"></div>
+                                                </div>
+                                                <div class="row p-2">
+                                                     <label for="text">Status:</label><br>
+                                                    <div id="viewstatus_1" style="font-weight: lighter;"></div>
+                                                </div>
+                                                <div class="row p-2" id="viewmenu02">
+                                                    <label for="text">Reason:</label><br>
+                                                    <div id="viewreasonsv" style="font-weight: lighter;"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" >Close</button>
+                                        </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div class="modal fade" id="approveModal-tab-1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">

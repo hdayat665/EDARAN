@@ -378,7 +378,7 @@
                     </div>
                     <div class="row p-2">
                         <div class="col-sm-6">
-                            <label for="firstname" class="form-label">Participant*</label>
+                            <label for="firstname" class="form-label">Add New Participant</label>
                             <select class="selectpicker form-select" id="addneweventparticipantedit" aria-label="Default select example" multiple name="participant[]">
                                 <option class="form-label" value="">PLEASE CHOOSE</option>
                                 <?php $employees = getEmployee() ?>
@@ -392,7 +392,7 @@
                             <textarea class="form-control" id="descE" name="desc" rows="3"></textarea>
                         </div>
                     </div>
-                    {{-- <div class="row p-2">
+                    <div class="row p-2">
                         <table id="tableviewparticipant" class="table table-striped table-bordered align-middle">
                             <thead>
                                 <tr>
@@ -401,10 +401,10 @@
                                 </tr>
                             </thead>
                             <tbody id="tableRowParticipant">
-
+                                <!-- This is where the table rows will be dynamically added by the JavaScript code -->
                             </tbody>
                         </table>
-                    </div> --}}
+                    </div>
                     <div class="row p-2">
                         <div class="col-sm-2">
                             <button type="button" id="addreminderedit" class="btn btn-primary btn-xs">Add Reminder</button>
