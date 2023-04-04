@@ -259,7 +259,7 @@ $(document).ready(function () {
         });
     });
 
-    $("#updateRole").click(function (e) {
+    $("#updateRole").click(function (e) { 
         requirejs(["sweetAlert2"], function (swal) {
             var selectedElms = $("#kt_docs_jstree_checkable3").jstree(
                 "get_checked",
@@ -432,7 +432,6 @@ $(document).ready(function () {
                     children: [
                         {
                             text: "My Profile",
-                            state: { selected: false },
                             children: [
                                 { text: "Register Employee" },
                                 { text: "Update Employee" },
@@ -442,7 +441,6 @@ $(document).ready(function () {
                         },
                         {
                             text: "Employee Info",
-                            state: { selected: false },
                             children: [
                                 { text: "Register Employee" },
                                 { text: "Update Employee" },
@@ -576,27 +574,34 @@ $(document).ready(function () {
                     id: "hris",
                     children: [
                         {
+                            text: "HRIS Tab",
+                            id: "hris_tab",
+                        },
+                        {
+                            text: "My Profile",
+                            id: "my_profile",
+                        },
+                        {
                             text: "Employee Info",
                             id: "employee_info",
-                            state: { selected: false },
-                            children: [
-                                {
-                                    text: "Register Employee",
-                                    id: "hris_register_employee",
-                                },
-                                {
-                                    text: "Update Employee",
-                                    id: "hris_update_employee",
-                                },
-                                {
-                                    text: "Terminate Employee",
-                                    id: "hris_terminate_employee",
-                                },
-                                {
-                                    text: "Activate Employee",
-                                    id: "hris_activate_employee",
-                                },
-                            ],
+                            // children: [
+                            //     {
+                            //         text: "Register Employee",
+                            //         id: "hris_register_employee",
+                            //     },
+                            //     {
+                            //         text: "Update Employee",
+                            //         id: "hris_update_employee",
+                            //     },
+                            //     {
+                            //         text: "Terminate Employee",
+                            //         id: "hris_terminate_employee",
+                            //     },
+                            //     {
+                            //         text: "Activate Employee",
+                            //         id: "hris_activate_employee",
+                            //     },
+                            // ],
                         },
                     ],
                 },
@@ -605,29 +610,37 @@ $(document).ready(function () {
                     id: "tsr",
                     children: [
                         {
+                            text: "TSR Tab",
+                            id: "tsr_tab",
+                        },
+                        {
                             text: "My Timesheet",
                             id: "my_timesheet",
-                            children: [
-                                {
-                                    text: "Create Event",
-                                    id: "tsr_timesheet_create_event",
-                                },
-                            ],
+                            // children: [
+                            //     {
+                            //         text: "Create Event",
+                            //         id: "tsr_timesheet_create_event",
+                            //     },
+                            // ],
                         },
                         {
                             text: "Timesheet Approval",
                             id: "timesheet_approval",
-                            children: [
-                                {
-                                    text: "Approve Timesheet",
-                                    id: "tsr_timesheet_approval",
-                                },
-                                {
-                                    text: "Reject Timesheet",
-                                    id: "tsr_timesheet_reject",
-                                },
-                            ],
+                            // children: [
+                            //     {
+                            //         text: "Approve Timesheet",
+                            //         id: "tsr_timesheet_approval",
+                            //     },
+                            //     {
+                            //         text: "Reject Timesheet",
+                            //         id: "tsr_timesheet_reject",
+                            //     },
+                            // ],
                         },
+                        {
+                            text: "Real Time Activities",
+                            id: "real_time_activities",
+                        }
                     ],
                 },
                 {
@@ -635,14 +648,18 @@ $(document).ready(function () {
                     id: "attendance",
                     children: [
                         {
+                            text: "Attendance Tab",
+                            id: "attendance_tab",
+                        },
+                        {
                             text: "My Attendance",
                             id: "my_attendance",
-                            children: [
-                                {
-                                    text: "View Action Log",
-                                    id: "attendance_view_action_log",
-                                },
-                            ],
+                            // children: [
+                            //     {
+                            //         text: "View Action Log",
+                            //         id: "attendance_view_action_log",
+                            //     },
+                            // ],
                         },
                         {
                             text: "Attendance Info",
@@ -655,29 +672,41 @@ $(document).ready(function () {
                     id: "leave",
                     children: [
                         {
+                            text: "Leave Tab",
+                            id: "leave_tab",
+                        },
+                        {
+                            text: "My Leave",
+                            id: "my_leave",
+                        },
+                        {
                             text: "Leave Approval",
                             id: "leave_approval",
                             state: { selected: false },
                             children: [
                                 {
-                                    text: "Departments",
-                                    id: "departments",
-                                    children: [
-                                        {
-                                            text: "Department Approve",
-                                            id: "leave_department_approve",
-                                        },
-                                    ],
+                                    text: "Leave Approval Menu",
+                                    id: "leave_menu",
                                 },
                                 {
-                                    text: "Head Of Department",
-                                    id: "HOD",
-                                    children: [
-                                        {
-                                            text: "HOD Approve",
-                                            id: "leave_hod_approve",
-                                        },
-                                    ],
+                                    text: "Recommender",
+                                    id: "leave_recommender",
+                                    // children: [
+                                    //     {
+                                    //         text: "Department Approve",
+                                    //         id: "leave_department_approve",
+                                    //     },
+                                    // ],
+                                },
+                                {
+                                    text: "Approver",
+                                    id: "leave_approver",
+                                    // children: [
+                                    //     {
+                                    //         text: "HOD Approve",
+                                    //         id: "leave_hod_approve",
+                                    //     },
+                                    // ],
                                 },
                             ],
                         },
@@ -688,52 +717,64 @@ $(document).ready(function () {
                     id: "project",
                     children: [
                         {
+                            text: "Project Tab",
+                            id: "project_tab",
+                        },
+                        {
                             text: "Customer",
                             id: "customer",
-                            state: { selected: false },
-                            children: [
-                                { text: "Add Customer", id: "add_customer" },
-                                { text: "Edit Customer", id: "edit_customer" },
-                                {
-                                    text: "Delete Customer",
-                                    id: "delete_customer",
-                                },
-                            ],
+                            // state: { selected: false },
+                            // children: [
+                            //     { text: "Add Customer", id: "add_customer" },
+                            //     { text: "Edit Customer", id: "edit_customer" },
+                            //     {
+                            //         text: "Delete Customer",
+                            //         id: "delete_customer",
+                            //     },
+                            // ],
                         },
                         {
-                            text: "Project Info",
+                            text: "Project Information",
                             id: "project_info",
-                            state: { selected: false },
-                            children: [
-                                {
-                                    text: "Register Project",
-                                    id: "register_project",
-                                },
-                                { text: "View Project", id: "view_project" },
-                                { text: "Update Status", id: "update_status" },
-                                {
-                                    text: "Update Project",
-                                    id: "update_project",
-                                },
-                            ],
+                            // state: { selected: false },
+                            // children: [
+                            //     {
+                            //         text: "Register Project",
+                            //         id: "register_project",
+                            //     },
+                            //     { text: "View Project", id: "view_project" },
+                            //     { text: "Update Status", id: "update_status" },
+                            //     {
+                            //         text: "Update Project",
+                            //         id: "update_project",
+                            //     },
+                            // ],
+                        },
+                        // {
+                        //     text: "Project Approval",
+                        //     id: "project_approval",
+                        //     children: [
+                        //         {
+                        //             text: "View Project Request",
+                        //             id: "view_project_request",
+                        //         },
+                        //         {
+                        //             text: "Approve Project Request",
+                        //             id: "approve_project_request",
+                        //         },
+                        //         {
+                        //             text: "Reject Project Request",
+                        //             id: "reject_project_request",
+                        //         },
+                        //     ],
+                        // },
+                        {
+                            text: "My Project",
+                            id: "my_project",
                         },
                         {
-                            text: "Project Approval",
-                            id: "project_approval",
-                            children: [
-                                {
-                                    text: "View Project Request",
-                                    id: "view_project_request",
-                                },
-                                {
-                                    text: "Approve Project Request",
-                                    id: "approve_project_request",
-                                },
-                                {
-                                    text: "Reject Project Request",
-                                    id: "reject_project_request",
-                                },
-                            ],
+                            text: "Project Request",
+                            id: "project_request",
                         },
                     ],
                 },
@@ -742,18 +783,36 @@ $(document).ready(function () {
                     id: "claim",
                     children: [
                         {
+                            text: "Claim Tab",
+                            id: "claim_tab",
+                        },
+                        {
+                            text: "My Claim",
+                            id: "my_claim",
+                        },
+                        {
                             text: "Claim Approval",
                             id: "claim_approval",
-                            state: { selected: false },
                             children: [
+                                {
+                                    text: "Claim Menu",
+                                    id: "claim_menu",
+                                },
                                 {
                                     text: "Department",
                                     id: "department",
                                     children: [
                                         {
-                                            text: "Approve",
-                                            id: "claim_department_approve",
-                                            state: { selected: false },
+                                            text: "Department Menu",
+                                            id: "eclaim_department_menu",
+                                        },
+                                        {
+                                            text: "Recommender",
+                                            id: "eclaim_department_recommender",
+                                        },
+                                        {
+                                            text: "Approver",
+                                            id: "eclaim_department_approver",
                                         },
                                     ],
                                 },
@@ -763,9 +822,20 @@ $(document).ready(function () {
                                     id: "finance",
                                     children: [
                                         {
-                                            text: "Approve ",
-                                            id: "claim_finance_approve",
-                                            state: { selected: false },
+                                            text: "Finance Menu",
+                                            id: "eclaim_finance_menu",
+                                        },
+                                        {
+                                            text: "Recommender",
+                                            id: "eclaim_finance_recommender",
+                                        },
+                                        {
+                                            text: "Approver",
+                                            id: "eclaim_finance_approver",
+                                        },
+                                        {
+                                            text: "Checker",
+                                            id: "eclaim_finance_checker",
                                         },
                                     ],
                                 },
@@ -775,40 +845,176 @@ $(document).ready(function () {
                                     id: "admin",
                                     children: [
                                         {
-                                            text: "Approve",
-                                            id: "claim_admin_approve",
-                                            state: { selected: false },
+                                            text: "Admin Menu",
+                                            id: "eclaim_admin_menu",
+                                        },
+                                        {
+                                            text: "Recommender",
+                                            id: "eclaim_admin_recommender",
+                                        },
+                                        {
+                                            text: "Approver",
+                                            id: "eclaim_admin_approver",
+                                        },
+                                        {
+                                            text: "Checker",
+                                            id: "eclaim_admin_checker",
                                         },
                                     ],
                                 },
                             ],
                         },
+                        {
+                            text: "Cash Advance",
+                            id: "cash_advance_approval",
+                            children: [
+                                {
+                                    text: "Cash Advance Menu",
+                                    id: "cash_menu",
+                                },
+                                {
+                                    text: "Department",
+                                    id: "cash_department",
+                                    children: [
+                                        {
+                                            text: "Department Menu",
+                                            id: "cash_deparment_menu",
+                                        },
+                                        {
+                                            text: "Approver",
+                                            id: "cash_deparment_approver",
+                                        }
+                                    ],
+                                },
+
+                                {
+                                    text: "Finance",
+                                    children: [
+                                        {
+                                            text: "Finance Menu",
+                                            id: "cash_finance_menu",
+                                        },
+                                        {
+                                            text: "Recommender",
+                                            id: "cash_finance_recommender",
+                                        },
+                                        {
+                                            text: "Approver",
+                                            id: "cash_finance_approver",
+                                        },
+                                        {
+                                            text: "Checker",
+                                            id: "cash_finance_checker",
+                                        },
+                                    ],
+                                },
+                            ],
+                        },
+                        {
+                            text: "Appeal Claim",
+                            id: "appeal_approval",
+                        }
+                    ],
+                },
+                
+                {
+                    text: "Reporting",
+                    id: "reporting",
+                    children: [
+                        { 
+                            text: "Reporting Tab", 
+                            id: "report_tab" 
+                        },
+                        {
+                            text: "Timesheet",
+                            id: "timesheet",
+                            children: [
+                                { 
+                                    text: "Timesheet Menu", 
+                                    id: "timesheet_menu" },
+                                {
+                                    text: "Status Report",
+                                    id: "status_report",
+                                },
+                                { 
+                                    text: "Employee Report", 
+                                    id: "employee_report" },
+                                { 
+                                    text: "Overtime Report", 
+                                    id: "overtime_report" },
+                            ],
+                        },
+                        {
+                            text: "E-Attendance",
+                            id: "eattendance",
+                            children: [
+                                { 
+                                    text: "E-Attendance Menu", 
+                                    id: "eattendance_menu" 
+                                },
+                                {
+                                    text: "Daily Report",
+                                    id: "daily_report",
+                                },
+                                { 
+                                    text: "Status Report", 
+                                    id: "status_report" 
+                                },
+                            ],
+                        },
+                        { text: "Leave", id: "report_leave" },
+                        {
+                            text: "Project",
+                            id: "project",
+                            children: [
+                                { 
+                                    text: "Project Menu", 
+                                    id: "project_menu" 
+                                },
+                                {
+                                    text: "Project Listing",
+                                    id: "project_listing",
+                                },
+                                { 
+                                    text: "Project Report", 
+                                    id: "project_report" 
+                                },
+                            ],
+                        },
+                        {
+                            text: "Claim",
+                            id: "claim",
+                            children: [
+                                { 
+                                    text: "Claim Menu", 
+                                    id: "claim_menu" 
+                                },
+                                {
+                                    text: "Claim Report",
+                                    id: "claim_report",
+                                },
+                                { 
+                                    text: "Cash Report", 
+                                    id: "cash_report" 
+                                },
+                            ],
+                        },
+                        { text: "Charge Out Rate", id: "report_cor" },
                     ],
                 },
                 {
                     text: "Settings",
                     id: "settings",
                     children: [
-                        { text: "General Settings", id: "setting_general" },
-                        {
-                            text: "Attendance Settings",
-                            id: "setting_attendance",
-                        },
-                        { text: "Timesheet Settings", id: "setting_timesheet" },
-                        { text: "Leave Settings", id: "setting_leave" },
-                        { text: "Claim Settings", id: "setting_claim" },
-                    ],
-                },
-                {
-                    text: "Reporting",
-                    id: "reporting",
-                    children: [
-                        { text: "TSR", id: "report_tsr" },
-                        { text: "Attendance", id: "report_attendance" },
-                        { text: "Leave", id: "report_leave" },
-                        { text: "Project", id: "report_project" },
-                        { text: "Claim", id: "report_claim" },
-                        { text: "Charge Out Rate", id: "report_cor" },
+                        { text: "Settings Tab", id: "setting_tab" },
+                        // { text: "General Settings", id: "setting_general" },
+                        // {
+                        //     text: "Attendance Settings",
+                        //     id: "setting_attendance",
+                        // },
+                        // { text: "Timesheet Settings", id: "setting_timesheet" },
+                        // { text: "Leave Settings", id: "setting_leave" },
+                        // { text: "Claim Settings", id: "setting_claim" },
                     ],
                 },
             ],
