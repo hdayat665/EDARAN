@@ -77,7 +77,7 @@
                                     <th class="text-nowrap">Event Name</th>
                                     <th width="10%">Date</th>
                                     <th class="text-nowrap">Time</th>
-                                    <th class="text-nowrap">Location</th>
+                                    <th class="text-nowrap">Venue</th>
                                     <th class="text-nowrap">Description</th>
                                     <th class="text-nowrap">Participant</th>
                                 </tr>
@@ -95,7 +95,8 @@
                                             <td>{{ $event->event_name }}</td>
                                             <td>{{ $event->start_date }} - {{ $event->end_date }}</td>
                                             <td>{{ $event->start_time }} - {{ $event->end_time }}</td>
-                                            <td>{{ $event->location ? getProjectLocation($event->location)->location_name : '-' }}
+                                            <td>{{ $event->venue }} - {{ $event->venue }}</td>
+                                            {{-- <td>{{ $event->location ? getProjectLocation($event->location)->location_name : '-' }} --}}
                                             </td>
                                             <td>{{ $event->desc ? $event->desc : '-' }}</td>
                                             @php

@@ -1071,6 +1071,35 @@ if (!function_exists('getEmployee')) {
     }
 }
 
+// if (!function_exists('getEmployee')) {
+//     function getEmployee()
+//     {
+//         $tenant_id = Auth::user()->tenant_id;
+
+//         $data = Employee::where([
+//             ['tenant_id', $tenant_id],
+//             ['employeeid', '!=', null]
+//         ])->get();
+
+//         $participants = TimesheetEvent::pluck('participant')->flatten()->unique();
+
+//         $data = $data->reject(function ($employee) use ($participants) {
+//             foreach ($participants as $participant) {
+//                 $participant_array = explode(',', $participant);
+//                 if (in_array($employee->user_id, $participant_array)) {
+//                     return true;
+//                 }
+//             }
+//             return false;
+//         });
+
+//         return $data;
+//     }
+// }
+
+
+
+
 
 if (!function_exists('getEmployeeNotInProject')) {
     function getEmployeeNotInProject($id = '')
