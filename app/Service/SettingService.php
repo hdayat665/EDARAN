@@ -58,7 +58,7 @@ class SettingService
     {
         $input = $r->input();
         $user = Auth::user();
-
+        //pr($input);
         $input['tenant_id'] = Auth::user()->tenant_id;
         $input['addedBy'] = $user->username;
         $input['addedTime'] = date('Y-m-d h:m:s');
