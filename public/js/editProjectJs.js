@@ -8,7 +8,7 @@ $(document).ready(function() {
             $('#exitdatediv').show();
             $('#exitdatediv1').show();
         } else {
-            $('#exitdatediv').hide();
+            $('#exitdatediv').hide(); 
             $('#exitdatediv1').hide();
         }
       });
@@ -32,9 +32,9 @@ $(document).ready(function() {
     // $('#employee_id').picker({
     //     search:true,
     // });
-    $('#acc_manager2').picker({
-        search:true,
-    });
+    // $('#acc_manager2').picker({
+    //     search:true,
+    // });
 
     $('#project_manager2').picker({
         search:true,
@@ -157,8 +157,8 @@ $(document).ready(function() {
                 LOA_date: "Please Choose LOA Date",
                 contract_start_date: "Please Choose Contract Start Date",
                 contract_end_date: "Please Choose Contract End Date",
-                acc_manager: "Please Insert Account Manager",
-                status: "Please Insert Status",
+                acc_manager: "Please Choose Account Manager",
+                status: "Please Choose Status",
             },
             submitHandler: function(form) {
                 requirejs(['sweetAlert2'], function(swal) {
@@ -797,7 +797,7 @@ $(document).ready(function() {
                 LOA_date: "Please Select Specific Date",
                 contract_start_date: "Please Select Specific Date",
                 contract_end_date: "Please Select Specific Date",
-                acc_manager: "Please Insert Account Manager",
+                acc_manager: "Please Choose Account Manager",
                 bank_guarantee_amount: "Pleaser Enter Amount",
             },
             submitHandler: function(form) {
