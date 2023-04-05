@@ -6,9 +6,9 @@
     <!-- BEGIN breadcrumb -->
     <!-- BEGIN breadcrumb -->
     <ol class="breadcrumb float-xl-end">
-        <li class="breadcrumb-item"><a href="javascript:;">Home</a></li>
-        <li class="breadcrumb-item"><a href="javascript:;">Dashboard</a></li>
-        <li class="breadcrumb-item active">Dashboard</li>
+        <!-- <li class="breadcrumb-item"><a href="javascript:;">Home</a></li> -->
+        <!-- <li class="breadcrumb-item"><a href="javascript:;">Dashboard</a></li> -->
+        <!-- <li class="breadcrumb-item active">Dashboard</li> -->
     </ol>
     <!-- END breadcrumb -->
     <!-- BEGIN page-header -->
@@ -162,7 +162,7 @@
 			</div>
 		</div>
 	<!--  -->
-	<div class="row">
+	<!-- <div class="row">
 		<div class="col-lg-12 panel panel-inverse" data-sortable-id="index-1">
 				<div class="panel-heading mt-15px">
 							<h4 class="panel-title"> <i class="fas fa-newspaper fa-fw me-3"></i>Live Clock In Activities</h4>
@@ -324,11 +324,11 @@
 			</div>
 		</div>
 
-	
+	 -->
     <!-- END col-8 -->
     <!-- BEGIN col-4 -->
     
-	<div class="row">
+	<!-- <div class="row">
 					<div class="col-lg-6 panel panel-inverse">
 						<div class="panel-heading mt-15px">
 								<h4 class="panel-title"><i class="fas fa-clipboard-check fa-fw me-3"></i>Leave Employee Report</h4>
@@ -347,7 +347,7 @@
 					<div class="panel-body">
 					<canvas id="bar-chart" style="width:100%;max-width:700px"></canvas>
 							</div></div>
-				</div>
+				</div> -->
 				
 					
 		

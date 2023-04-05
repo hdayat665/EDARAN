@@ -929,7 +929,7 @@
                                     </a>
                                 </div>
                             @endif
-                            <?php $target = ['project_menu']; ?>
+                            <?php $target = ['project_report_menu']; ?>
                             @if (array_intersect($role_permission, $target))
                             <div class="menu-item has-sub">
                                 
@@ -966,7 +966,7 @@
                                     </div>
                             </div>
                             @endif
-                            <?php $target = ['claim_menu']; ?>
+                            <?php $target = ['claim_report_menu']; ?>
                             @if (array_intersect($role_permission, $target))
                             <div class="menu-item has-sub">
                                 
