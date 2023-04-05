@@ -12,7 +12,7 @@
             <table id="projectReportListing" class="table table-striped table-bordered align-middle">
                 <thead>
                     <tr>
-                        <th>No.</th>
+                        <th width="1%">No.</th>
                         <th data-orderable="false" class="align-middle">Action</th>
                         <th width="5%" class="text-nowrap">LOA Date</th>
                         <th width="1%" class="text-nowrap">Customer Name</th>
@@ -31,7 +31,7 @@
                     @php($counter = 1)
                     @foreach ($projectListings as $projectListing)
                     <tr class="odd gradeX">
-                        <td>{{$counter++}}</td>
+                        <td width="1%">{{$counter++}}</td>
                         <td style="text-align:center" width="1%">
                             <a href ="/projectDetail/{{$projectListing->id}}" class="btn btn-primary">View</a>
                         </td>
