@@ -1517,12 +1517,12 @@ $(document).ready(function() {
 
                             // console.log(data.participant);
 
-                            participants = data.participant.split(",");
-                            for (let i = 0; i < participants.length; i++) {
-                                const participant = participants[i];
-                                $("#addneweventparticipantedit").picker('set', participant);
+                            // participants = data.participant.split(",");
+                            // for (let i = 0; i < participants.length; i++) {
+                            //     const participant = participants[i];
+                            //     $("#addneweventparticipantedit").picker('set', participant);
 
-                            }
+                            // }
 
                             
 
