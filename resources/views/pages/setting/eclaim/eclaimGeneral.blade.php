@@ -20,7 +20,7 @@
                                     <div class="form-check form-switch">
                                         <input class="form-check-input" value="1" {{ $general ? ($general->notify_user ? 'checked' : '') : '' }} type="checkbox" name="general_setting[notify_user]"
                                             role="switch" id="set-main">
-                                        <input type="hidden" id="notify_user" name="general_setting[notify_user]" value="{{ $general->notify_user }}">
+                                        <input type="hidden" id="notify_user" name="general_setting[notify_user]" value="{{ $general->notify_user ?? '' }}">
                                         <input type="hidden" name="general_id" value="{{ $general->id ?? '' }}">
                                         <label class="form-check-label" for="set-main">Send notification
                                             email</label>
