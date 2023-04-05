@@ -896,7 +896,7 @@ $(document).ready(function() {
                       Swal.fire({
                         icon: 'error',
                         title: 'Error',
-                        text: 'You can only select the current date and 48 hours before.'
+                        text: 'You can only select the current date and 2 days before.'
                       });
                       return;
                     }
@@ -1517,12 +1517,12 @@ $(document).ready(function() {
 
                             // console.log(data.participant);
 
-                            participants = data.participant.split(",");
-                            for (let i = 0; i < participants.length; i++) {
-                                const participant = participants[i];
-                                $("#addneweventparticipantedit").picker('set', participant);
+                            // participants = data.participant.split(",");
+                            // for (let i = 0; i < participants.length; i++) {
+                            //     const participant = participants[i];
+                            //     $("#addneweventparticipantedit").picker('set', participant);
 
-                            }
+                            // }
 
                             
 

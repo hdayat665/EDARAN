@@ -22,10 +22,10 @@
 				<div class="stats-icon"><i class="fa fa-calendar-days"></i></div>
 				<div class="stats-info">
 					<h4>MY TIMESHEET</h4>
-					<p>4</p>	
+					<p>0</p>	
 				</div>
 				<div class="stats-link">
-					<a ><i class="fa fa-calendar-days"></i></a>
+					<a href="/myTimesheet"><i class="fa fa-calendar-days"></i></a>
 				</div>
 			</div>
 		</div>
@@ -36,7 +36,7 @@
 				<div class="stats-icon"><i class="fa fa-bag-shopping"></i></div>
 				<div class="stats-info">
 					<h4>MY PROJECTS</h4>
-					<p>6</p>	
+					<p>0</p>	
 				</div>
 				<div class="stats-link">
 				<a ><i class="fa fa-bag-shopping"></i></a>
@@ -50,7 +50,7 @@
 				<div class="stats-icon"><i class="fa fa-money-check"></i></div>
 				<div class="stats-info">
 					<h4>COMPANY PROJECTS</h4>
-					<p>89</p>	
+					<p>0</p>	
 				</div>
 				<div class="stats-link">
 				<a ><i class="fa fa-money-check"></i></a>
@@ -64,7 +64,7 @@
 				<div class="stats-icon"><i class="fa fa-users"></i></div>
 				<div class="stats-info">
 					<h4>REGISTERED EMPLOYEE</h4>
-					<p>351</p>	
+					<p>304</p>	
 				</div>
 				<div class="stats-link">
 				<a ><i class="fa fa-users"></i></a>

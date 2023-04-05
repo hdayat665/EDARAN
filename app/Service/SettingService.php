@@ -1329,91 +1329,115 @@ class SettingService
     }
 
     public function createTypeOfLogs($r)
-    {
-        $input = $r->input();
-        $user = Auth::user();
+{
+    $input = $r->input();
+    $user = Auth::user();
 
-        if (isset($input['project_id'])) {
-            $logsData['project_id'] = $input['project_id'];
+    if (isset($input['project_id'])) {
+        $logsData['project_id'] = $input['project_id'];
+    }
+    $logsData['department'] = $input['department'];
+    $logsData['type_of_log'] = $input['type_of_log'];
+    $logsData['tenant_id'] = $user->tenant_id;
+    $logsData['activity_name'] = implode(', ', $input['activity_name']); // Convert the array into a string
+
+    TypeOfLogs::create($logsData);
+
+    $typeOfLog = TypeOfLogs::orderby('created_at', 'desc')->first();
+
+    if (isset($input['activity_name'])) {
+
+        foreach ($input['activity_name'] as $activity) {
+            $activityData['department'] = $input['department'];
+            $activityData['activity_name'] = $activity;
+            $activityData['project_id'] = $input['project_id'];
+            $activityData['logs_id'] = $typeOfLog->id;
+            $activityData['tenant_id'] = $user->tenant_id;
+
+            ActivityLogs::create($activityData);
         }
-        $logsData['department'] = $input['department'];
-        $logsData['type_of_log'] = $input['type_of_log'];
-        $logsData['tenant_id'] = $user->tenant_id;
-        // $logsData['activity_name'] = implode(', ', $input['activity_name']);
-        // pr($input);
+    }
 
-        TypeOfLogs::create($logsData);
+    $data['status'] = config('app.response.success.status');
+    $data['type'] = config('app.response.success.type');
+    $data['title'] = config('app.response.success.title');
+    $data['msg'] = 'Success Create Type of Logs';
 
-        $typeOfLog = TypeOfLogs::orderby('created_at', 'desc')->first();
+    return $data;
+}
 
-        if (isset($input['activity_name'])) {
 
-            foreach ($input['activity_name'] as $activity) {
-                $activityData['department'] = $input['department'];
-                $activityData['activity_name'] = $activity;
-                $activityData['project_id'] = $input['project_id'];
-                $activityData['logs_id'] = $typeOfLog->id;
-                $activityData['tenant_id'] = $user->tenant_id;
 
+
+public function updateTypeOfLogs($r, $id)
+{
+    $input = $r->input();
+    $user = Auth::user();
+
+    if (isset($input['project_id'])) {
+        $logsData['project_id'] = $input['project_id'];
+    }
+
+    if ($input['type_of_log'] == 'Non-Project') {
+        $logsData['project_id'] = null;
+    }
+
+    $logsData['department'] = $input['department'];
+    $logsData['type_of_log'] = $input['type_of_log'];
+    $logsData['tenant_id'] = $user->tenant_id;
+    $logsData['activity_name'] = implode(', ', $input['activity_name']);
+
+    TypeOfLogs::where('id', $id)->update($logsData);
+
+    if (isset($input['activity_name'])) {
+        foreach ($input['activity_name'] as $activity) {
+            $activityData['department'] = $input['department'];
+            $activityData['activity_name'] = $activity;
+            $activityData['project_id'] = $input['project_id'];
+            $activityData['logs_id'] = $id; // Use the $id variable instead of $typeOfLog->id
+            $activityData['tenant_id'] = $user->tenant_id;
+
+            // Check if a record with the same activity_name and logs_id exists
+            $existingActivity = ActivityLogs::where('activity_name', $activity)
+                ->where('logs_id', $id) // Use the $id variable instead of $typeOfLog->id
+                ->first();
+
+            if ($existingActivity) {
+                // If the record already exists, update its other fields
+                $existingActivity->update($activityData);
+            } else {
+                // Otherwise, create a new record
                 ActivityLogs::create($activityData);
             }
         }
 
-        $data['status'] = config('app.response.success.status');
-        $data['type'] = config('app.response.success.type');
-        $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success Create Type of Logs';
+        // Remove activity names that are not present in the updated type_of_logs record
+        $existingActivities = ActivityLogs::where('logs_id', $id)->get();
+        $existingActivityNames = $existingActivities->pluck('activity_name')->toArray();
+        $deletedActivities = array_diff($existingActivityNames, $input['activity_name']);
 
-        return $data;
+        if (!empty($deletedActivities)) {
+            ActivityLogs::where('logs_id', $id)
+                        ->whereIn('activity_name', $deletedActivities)
+                        ->delete();
+        }
     }
 
-    public function updateTypeOfLogs($r, $id)
-    {
-        $input = $r->input();
-        $user = Auth::user();
+    $data['status'] = config('app.response.success.status');
+    $data['type'] = config('app.response.success.type');
+    $data['title'] = config('app.response.success.title');
+    $data['msg'] = 'Success Update Type of Log';
 
-        if (isset($input['project_id'])) {
-            $logsData['project_id'] = $input['project_id'];
-        }
+    return $data;
+}
 
-        if ($input['type_of_log'] == 'Non-Project') {
-            $logsData['project_id'] = null;
-        }
 
-        $logsData['department'] = $input['department'];
-        $logsData['type_of_log'] = $input['type_of_log'];
-        $logsData['tenant_id'] = $user->tenant_id;
-        $logsData['activity_name'] = implode(', ', $input['activity_name']);
 
-        TypeOfLogs::where('id', $id)->update($logsData);
 
-        $typeOfLog = TypeOfLogs::orderby('created_at', 'desc')->first();
-
-        if (isset($input['activity_name'])) {
-
-            foreach ($input['activity_name'] as $activity) {
-                $activityData['department'] = $input['department'];
-                $activityData['activity_name'] = $activity;
-                $activityData['project_id'] = $input['project_id'];
-                $activityData['logs_id'] = $typeOfLog->id;
-                $activityData['tenant_id'] = $user->tenant_id;
-
-                ActivityLogs::create($activityData);
-            }
-        }
-
-        $data['status'] = config('app.response.success.status');
-        $data['type'] = config('app.response.success.type');
-        $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success Update Type of Log';
-
-        return $data;
-    }
 
     public function deleteTypeOfLogs($id)
     {
         $logs = TypeOfLogs::find($id);
-        // $naim = TypeOfLogs::find($id);
         $logsid = ActivityLogs::where('logs_id', $id);
 
 

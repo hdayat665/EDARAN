@@ -65,7 +65,7 @@ class OrganizationService
         ->leftjoin('department as c', 'a.department', '=', 'c.id')
         ->leftjoin('designation as d', 'd.id', '=', 'a.designation')
         ->select('a.id', 'a.employeeId', 'a.user_id', 'a.department', 'a.workingEmail', 'b.firstName', 'b.lastName', 'b.personalEmail as email', 'b.phoneNo', 'b.extensionNo', 'c.departmentName as department', 'a.supervisor', 'a.report_to', 'a.status', 'd.designationName')
-        ->where([['a.tenant_id', $userId], ['status', '!=', 'not complete']])
+        ->where([['a.tenant_id', $userId], ['status', '=', 'active']])
         ->get();
         return $data;
     }

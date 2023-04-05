@@ -13,14 +13,17 @@ class MyTimesheetController extends Controller
     public function myTimesheetView()
     {
         $mts = new MyTimeSheetService;
-
+    
         $data = $mts->myTimesheetView();
         $data['user_id'] = Auth::user()->id;
         $data['employee_id'] = $data['employee']->id;
         $data['department_id'] = $data['employee']->department;
 
+        // $data['employees'] = $mts->getTimesheetEvents();
+        
         return view('pages.timesheet.myTimesheet', $data);
     }
+    
 
     public function createLog(Request $r)
     {
