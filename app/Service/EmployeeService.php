@@ -266,6 +266,13 @@ class EmployeeService
             $data['type'] = config('app.response.error.type');
             $data['msg'] = 'Profile not found';
         } else {
+
+            if ($input['fullName']) {
+                $employee['employeeName'] = $input['fullName'];
+            
+                Employee::where('user_id', $user_id)->update($employee);
+            }   
+            
             if (!$input['religion']) {
                 unset($input['religion']);
             }

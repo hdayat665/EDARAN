@@ -76,6 +76,13 @@ class ProfileService
 
         } else {
 
+            if ($input['fullName']) {
+                $employee['employeeName'] = $input['fullName'];
+            
+                Employee::where('user_id', $user_id)->update($employee);
+            }
+            
+            
             if(!isset($input['nonNetizen']))
             {
                 $input['nonNetizen'] = null;
@@ -85,7 +92,6 @@ class ProfileService
             {
                 $input['okuStatus'] = null;
                 $input['okuCardNum'] = null;
-                $input['okuFile'] = null;
             }
 
             if(!isset($input['passport']))
@@ -94,39 +100,6 @@ class ProfileService
                 $input['expiryDate'] = null;
                 $input['issuingCountry'] = null;
             }
-
-            // if(!$input['religion'])
-            // {
-            //     unset($input['religion']);
-            // }
-
-            // if(!$input['race'])
-            // {
-            //     unset($input['race']);
-            // }
-
-            // if(!$input['phoneNo'])
-            // {
-            //     unset($input['phoneNo']);
-            // }
-
-            // if(!$input['homeNo'])
-            // {
-            //     unset($input['homeNo']);
-            // }
-
-            // if(!$input['extensionNo'])
-            // {
-            //     unset($input['extensionNo']);
-            // }
-
-            // if(!$input['passport'])
-            // {
-            //     unset($input['passport']);
-            //     unset($input['expiryDate']);
-            //     unset($input['issuingCountry']);
-
-            // }
 
             if ($input['username']) {
 
@@ -144,20 +117,21 @@ class ProfileService
                 }
             }  
 
-            if ($_FILES['okuFile']['name']) {
+            if (isset($_FILES['okuFile']['name'])) {
                 $payslip = upload(request()->file('okuFile'));
                 $input['okuFile'] = $payslip['filename'];
-    
-                if (!$input['okuFile']) {
-                    unset($input['okuFile']);
-                }
+            } else {
+                $input['okuFile'] = null;
             }
+            
 
             if(isset($input['nonNetizen']) && $input['nonNetizen'] == 'on') {
                 $input['idNo'] = null;
             }
 
             UserProfile::where('user_id', $user_id)->update($input);
+            // $profileEmployment->fill($input);
+            // $profileEmployment->save();
 
             $data['status'] = config('app.response.success.status');
             $data['title'] = config('app.response.success.title');
