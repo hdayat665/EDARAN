@@ -2,41 +2,48 @@ $(document).ready(function () {
     $("#activetable").dataTable({
         // "responsive": true,
         bLengthChange: false,
+        scrollX:true,
         bFilter: false,
     });
 
     $("#checkedtable").dataTable({
         // "responsive": true,
         bLengthChange: false,
+        scrollX:true,
         bFilter: false,
     });
 
     $("#pvtable").dataTable({
         // "responsive": true,
         bLengthChange: false,
+        scrollX:true,
         bFilter: false,
     });
 
     $("#paidtable").dataTable({
         // "responsive": true,
         bLengthChange: false,
+        scrollX:true,
         bFilter: false,
     });
 
     $("#amendtable").dataTable({
         // "responsive": true,
         bLengthChange: false,
+        scrollX:true,
         bFilter: false,
     });
 
     $("#rejectedtable").dataTable({
         // "responsive": true,
         bLengthChange: false,
+        scrollX:true,
         bFilter: false,
     });
     $("#paymenttable").dataTable({
         // "responsive": true,
         bLengthChange: false,
+        scrollX:true,
         bFilter: false,
     });
 

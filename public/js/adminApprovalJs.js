@@ -2,18 +2,21 @@ $(document).ready(function () {
     $("#activetable").dataTable({
         // "responsive": true,
         bLengthChange: false,
+        scrollX: true,
         bFilter: false,
     });
 
     $("#buckettable").dataTable({
         // "responsive": true,
         bLengthChange: false,
+        scrollX:true,
         bFilter: false,
     });
 
     $("#rejectedtable").dataTable({
         // "responsive": true,
         bLengthChange: false,
+        scrollX: true,
         bFilter: false,
     });
 
