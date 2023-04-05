@@ -14,7 +14,7 @@
                         <label class="form-label">Department* </label>
                         <select class="form-select" id="department" name="department" aria-label="Default select example">
                             <?php $departments = getDepartment() ?>
-                            <option class="form-label" value="">Select department</option>
+                            <option class="form-label" value="">PLEASE CHOOSE</option>
                             @foreach ($departments as $department)
                             <option value="{{$department->id}}">{{$department->departmentName}}</option>
                             @endforeach
@@ -24,7 +24,7 @@
                     <div class="mb-3">
                         <label class="form-label">Type of Log* </label>
                         <select class="form-select" id="addtypeoflogedit" name="type_of_log" aria-label="Default select example">
-                            <option class="form-label" value="" selected>Select Type of Log</option>
+                            <option class="form-label" value="" selected>PLEASE CHOOSE</option>
                             {{-- <option class="form-label" value="NON-PROJECT" >NON-PROJECT</option> --}}
                             {{-- <option class="form-label" value="1" >HOME</option>
                             <option class="form-label" value="2" >OFFICE</option> --}}
@@ -46,7 +46,7 @@
                     <div class="row p-2">
                         <div class="col-sm-10" id="" >
                             <label for="firstname" class="form-label">Activity Name*</label>
-                            <input type="text" id="edittypelogactivityName" placeholder="Name" class="form-control" style="text-transform: uppercase;>
+                            <input type="text" id="edittypelogactivityName" placeholder="Name" class="form-control" style="text-transform: uppercase;">
 
 
                         </div>
@@ -66,12 +66,12 @@
                                         <th width="1%" data-orderable="false" class="align-middle">Action</th>
                                     </tr>
                                 </thead>
-                                {{-- <tbody id="testkit">
+                                <tbody id="testkit">
                                     <tr>
                                         <th style="display:none"></th>
                                         <th width="1%" style="display:none"></th>
                                     </tr>
-                                </tbody> --}}
+                                </tbody>
                             </table>
                         </div>
                     </div>

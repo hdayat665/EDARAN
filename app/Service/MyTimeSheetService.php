@@ -34,6 +34,31 @@ class MyTimeSheetService
         return $data;
     }
 
+//     public function getTimesheetEvents()
+// {
+//     $employee = Employee::where([
+//         ['tenant_id', Auth::user()->tenant_id],
+//         ['user_id', Auth::user()->id]
+//     ])->first();
+
+//     $timesheet_events = TimesheetEvent::whereRaw("FIND_IN_SET($employee->user_id, participant) > 0")->get();
+
+//     $employees = Employee::where('tenant_id', Auth::user()->tenant_id)->get();
+
+//     $participant_ids = [];
+//     foreach ($timesheet_events as $event) {
+//         $ids = explode(",", $event->participant);
+//         $participant_ids = array_merge($participant_ids, $ids);
+//     }
+//     $participant_ids = array_unique($participant_ids);
+
+//     return collect([
+//         'employees' => $employees,
+//         'participant_ids' => $participant_ids
+//     ]);
+// }
+
+
     public function createLog($r)
 {
     $input = $r->input();

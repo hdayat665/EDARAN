@@ -162,11 +162,24 @@
                     @foreach ($phoneDirectoryInfos as $phoneInfo)
                     <tr class="odd gradeX">
                         <td width="1%" class="fw-bold text-dark">{{$no++}}</td>
-                        <td class="text-center"><img src="../assets/img/user/user-13.jpg" class="w-50px"></td>
+                        {{-- <td class="text-center"><img src="../assets/img/user/user-13.jpg" class="w-50px"></td> --}}
+                        @php
+                        $profilePicUrl = asset('storage/profilePic/' . $phoneInfo->user_id . '.jpg');
+                        @endphp
+
+                        @if ($phoneInfo->user_id && file_exists(public_path('storage/profilePic/' . $phoneInfo->user_id . '.jpg')))
+                        <td class="text-center"><img src="{{ $profilePicUrl }}" class="w-50px"></td>
+                        @else
+                            {{-- <img src="{{ asset('../assets/img/user/user-13.jpg') }}" width="1%" class="rounded d-block" alt="Profile Picture" data-bs-toggle="modal" data-bs-target="#modal-dialog"> --}}
+                            <td class="text-center"><img src="{{ asset('../assets/img/user/user-13.jpg') }}" class="w-50px"></td>
+                        @endif
+
+                      
+
                         <td>{{$phoneInfo->firstName}}</td>
                         <td>{{$phoneInfo->lastName}}</td>
                         <td>{{$phoneInfo->designationName}}</td>
-                        <td>{{$phoneInfo->extensionNo}}</td>
+                        <td>{{$phoneInfo->extensionNo ?? '-'}}</td>
                         <td>{{$phoneInfo->phoneNo}}</td>
                         <td>{{$phoneInfo->workingEmail}}</td>
                         <td>{{$phoneInfo->department}}</td>

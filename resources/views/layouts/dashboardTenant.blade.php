@@ -96,68 +96,6 @@
             <!-- END navbar-header -->
             <!-- BEGIN header-nav -->
             <div class="navbar-nav">
-                <div class="navbar-item dropdown">
-                    <a href="#" data-bs-toggle="dropdown" class="navbar-link dropdown-toggle icon">
-                        <i class="fa fa-bell"></i>
-                        <span class="badge">5</span>
-                    </a>
-                    <div class="dropdown-menu media-list dropdown-menu-end">
-                        <div class="dropdown-header">NOTIFICATIONS (5)</div>
-                        <a href="javascript:;" class="dropdown-item media">
-                            <div class="media-left">
-                                <i class="fa fa-bug media-object bg-gray-500"></i>
-                            </div>
-                            <div class="media-body">
-                                <h6 class="media-heading">Server Error Reports <i class="fa fa-exclamation-circle text-danger"></i></h6>
-                                <div class="text-muted fs-10px">3 minutes ago</div>
-                            </div>
-                        </a>
-                        <a href="javascript:;" class="dropdown-item media">
-                            <div class="media-left">
-                                <img src="/assets/img/user/user-1.jpg" class="media-object" alt="" />
-                                <i class="fab fa-facebook-messenger text-blue media-object-icon"></i>
-                            </div>
-                            <div class="media-body">
-                                <h6 class="media-heading">Elon Musk</h6>
-                                <p>I send new request through email</p>
-                                <div class="text-muted fs-10px">25 minutes ago</div>
-                            </div>
-                        </a>
-                        <a href="javascript:;" class="dropdown-item media">
-                            <div class="media-left">
-                                <img src="/assets/img/user/user-2.jpg" class="media-object" alt="" />
-                                <i class="fab fa-facebook-messenger text-blue media-object-icon"></i>
-                            </div>
-                            <div class="media-body">
-                                <h6 class="media-heading">Bill Gates</h6>
-                                <p>Do check weekly report</p>
-                                <div class="text-muted fs-10px">35 minutes ago</div>
-                            </div>
-                        </a>
-                        <a href="javascript:;" class="dropdown-item media">
-                            <div class="media-left">
-                                <i class="fa fa-plus media-object bg-gray-500"></i>
-                            </div>
-                            <div class="media-body">
-                                <h6 class="media-heading"> New User Registered</h6>
-                                <div class="text-muted fs-10px">1 hour ago</div>
-                            </div>
-                        </a>
-                        <a href="javascript:;" class="dropdown-item media">
-                            <div class="media-left">
-                                <i class="fa fa-envelope media-object bg-gray-500"></i>
-                                <i class="fab fa-google text-warning media-object-icon fs-14px"></i>
-                            </div>
-                            <div class="media-body">
-                                <h6 class="media-heading"> New Email From John</h6>
-                                <div class="text-muted fs-10px">2 hour ago</div>
-                            </div>
-                        </a>
-                        <div class="dropdown-footer text-center">
-                            <a href="javascript:;" class="text-decoration-none">View more</a>
-                        </div>
-                    </div>
-                </div>
                 <div class="navbar-item navbar-user dropdown">
                     <?php if(Auth::check()): ?>
                     <a href="#" class="navbar-link dropdown-toggle d-flex align-items-center" data-bs-toggle="dropdown">
@@ -177,13 +115,13 @@
                         </span>
                     </a>
                     <?php endif; ?> <div class="dropdown-menu dropdown-menu-end me-1">
-                        <a href="javascript:;" class="dropdown-item">Edit Profile</a>
-                        <a href="javascript:;" class="dropdown-item d-flex align-items-center">
+                        <a href="myProfile" class="dropdown-item">Edit Profile</a>
+                        {{-- <a href="javascript:;" class="dropdown-item d-flex align-items-center">
                             Inbox
                             <span class="badge bg-danger rounded-pill ms-auto pb-4px">2</span>
-                        </a>
-                        <a href="javascript:;" class="dropdown-item">Calendar</a>
-                        <a href="javascript:;" class="dropdown-item">Setting</a>
+                        </a> --}}
+                        <a href="myTimesheet" class="dropdown-item">Calendar</a>
+                        {{-- <a href="javascript:;" class="dropdown-item">Setting</a> --}}
                         <div class="dropdown-divider"></div>
                         <a href="/logout/tenant" class="dropdown-item">Log Out</a>
                     </div>

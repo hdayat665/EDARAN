@@ -64,10 +64,10 @@
                         </div>
                         <div class="col-sm-3" style="pointer-events: none;">
                             <div style="padding-top:20px;">
-                                <div class="form-check form-check-inline">
+                                {{-- <div class="form-check form-check-inline">
                                     <input class="form-check-input"  type="checkbox"  name="type_recurring[]" id="addeventalldayedit" value="allday" >
                                     <label class="form-label" >All Day</label>
-                                </div>
+                                </div> --}}
                                 {{-- <div class="form-check form-check-inline">
                                     <input class="form-check-input" id="addeventrecurringedit" type="checkbox"  name="type_recurring[]" value="recurring" >
                                     <label class="form-label" >Recurring*</label>
@@ -380,7 +380,7 @@
                         <div class="col-sm-6">
                             <label for="firstname" class="form-label">Participant*</label>
                             <select class="selectpicker form-select" id="addneweventparticipantedit" aria-label="Default select example" multiple name="participant[]">
-                                <option class="form-label" value="">PLEASE CHOOSE</option>
+                                <option class="form-label" value="">Please Choose</option>
                                 <?php $employees = getEmployee() ?>
                                 @foreach ($employees as $employee)
                                 <option class="form-label" value="{{$employee->user_id}}">{{$employee->employeeName}}</option>
