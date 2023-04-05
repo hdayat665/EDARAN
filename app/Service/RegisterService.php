@@ -10,6 +10,8 @@ use App\Models\UserEmergency;
 use App\Models\UserProfile;
 use App\Models\Users;
 use App\Models\UsersDetails;
+use App\Models\Role;
+use App\Models\PermissionRole;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 
@@ -76,10 +78,25 @@ class RegisterService
 
         $param['password'] = Hash::make($password);
         // print_r($password);
+        //create role for admin
+        $role['roleName'] = 'Admin';
+        $role['tenant_id'] = $param['tenant_id'];
+        $role['addedBy'] = $param['username'];
+        $role['addedTime'] = date('Y-m-d h:m:s');
+        Role::create($role);
+
+        $findId = Role::where('tenant_id', $param['tenant_id'])
+                        ->orderBy('id', 'DESC')
+                        ->first();
+
+        $param['role_id'] = $findId->id;
+
         Users::create($param);
 
         $user = Users::where([['tenant', '=', $r['tenant']]])
         ->first()->toArray();
+
+        
 
         $userP['user_id'] = $user['id'];
         $userP['tenant_id'] = $user['tenant_id'];
@@ -94,6 +111,7 @@ class RegisterService
         UserAddress::create($userProfile);
         UserEmergency::create($userProfile);
 
+
         $employee['workingEmail'] = $r['workingEmail'];
         $employee['user_id'] = $user['id'];
         $employee['tenant_id'] = $user['tenant_id'];
@@ -106,6 +124,14 @@ class RegisterService
 
 
         Tenant::create($userProfile);
+
+        $permissionRole['tenant_id'] = $user['tenant_id'];
+        $permissionRole['role_id'] = $param['role_id'];
+        $permissionRole['permission_code'] = 'setting_tab';
+        $permissionRole['modified_by'] = 'Admin';
+        $permissionRole['modified_time'] = date('Y-m-d h:m:s');
+
+        PermissionRole::create($permissionRole);
 
         $ls = new LoginService;
         $email['workingEmail'] = $r['workingEmail'];
