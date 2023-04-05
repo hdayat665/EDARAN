@@ -35,7 +35,7 @@
                                     <div class="form-check form-switch">
                                         <input class="form-check-input" {{ $general ? ($general->disable_user ? 'checked' : '') : '' }} type="checkbox" name="general_setting[disable_user]" role="switch"
                                             id="set-main1" value="1">
-                                        <input type="hidden" id="disable_user" name="general_setting[disable_user]" value="{{ $general->disable_user }}">
+                                        <input type="hidden" id="disable_user" name="general_setting[disable_user]" value="{{ $general->disable_user ?? '' }}">
 
                                         <label class="form-check-label" for="set-main1">Disable user request
                                             ?</label>
