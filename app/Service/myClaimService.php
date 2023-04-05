@@ -964,7 +964,7 @@ class myClaimService
     public function updateStatusMonthlyClaim($id = '', $status = '')
     {
 
-        $claim['status'] = $status;
+        $claim['status'] = $status; 
 
         $checkDisabled = EclaimGeneralSetting::where('tenant_id', Auth::user()->tenant_id)
             ->first();
@@ -977,7 +977,31 @@ class myClaimService
 
             return $data;
         }
+
+        $employees = Employee::where('user_id', Auth::user()->id)->value('eclaimrecommender');
+
+        if (is_null($employees)) {
+            
+            $claim['status'] = 'active'; 
+            $claim['supervisor'] = 'recommend'; 
+
+            GeneralClaim::where([['tenant_id', Auth::user()->tenant_id], ['id', $id]])->update($claim);
+
+            $generalClaimData = GeneralClaim::find($id);
+
+            // get supervisor detail to send email
+            $ms = new MailService;
+            $ms->emailToSupervisorClaimGNC($generalClaimData);
+
+            $data['status'] = config('app.response.success.status');
+            $data['type'] = config('app.response.success.type');
+            $data['title'] = config('app.response.success.title');
+            $data['msg'] = 'Success';
+
+            return $data;
+        }
         
+
         GeneralClaim::where([['tenant_id', Auth::user()->tenant_id], ['id', $id]])->update($claim);
 
         $generalClaimData = GeneralClaim::find($id);
@@ -993,6 +1017,7 @@ class myClaimService
 
         return $data;
     }
+
     public function createAppealMtc($r)
     {
         $input = $r->input();

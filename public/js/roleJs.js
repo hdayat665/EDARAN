@@ -965,11 +965,11 @@ $(document).ready(function () {
                         { text: "Leave", id: "report_leave" },
                         {
                             text: "Project",
-                            id: "project",
+                            
                             children: [
                                 { 
                                     text: "Project Menu", 
-                                    id: "project_menu" 
+                                    id: "project_report_menu" 
                                 },
                                 {
                                     text: "Project Listing",
@@ -983,11 +983,11 @@ $(document).ready(function () {
                         },
                         {
                             text: "Claim",
-                            id: "claim",
+                            
                             children: [
                                 { 
                                     text: "Claim Menu", 
-                                    id: "claim_menu" 
+                                    id: "claim_report_menu" 
                                 },
                                 {
                                     text: "Claim Report",
