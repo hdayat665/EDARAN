@@ -3,18 +3,36 @@ $(document).ready(function () {
         // "responsive": true,
         bLengthChange: false,
         bFilter: false,
-    });
+        initComplete: function (settings, json) {  
+            $("#activetable").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");            
+        },
+    });
 
-    $("#buckettable").dataTable({
+    $("#approvedtable").dataTable({
         // "responsive": true,
         bLengthChange: false,
         bFilter: false,
-    });
+        initComplete: function (settings, json) {  
+            $("#approvedtable").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");            
+        },
+    });
+
+    $("#amendtable").dataTable({
+        // "responsive": true,
+        bLengthChange: false,
+        bFilter: false,
+        initComplete: function (settings, json) {  
+            $("#amendtable").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");            
+          },
+    });
 
     $("#rejectedtable").dataTable({
         // "responsive": true,
         bLengthChange: false,
         bFilter: false,
+        initComplete: function (settings, json) {  
+            $("#rejectedtable").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");            
+          },
     });
 
     $("#filter").click(function () {

@@ -17,6 +17,9 @@ $(document).ready(function () {
                 columns: [2,3,4,5,6,7]
             }},
         ],
+        initComplete: function (settings, json) {  
+            $("#activetable").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");            
+        },
         columnDefs: [
                   { orderable: false, targets: [0] }
                ]
@@ -38,6 +41,10 @@ $(document).ready(function () {
                 columns: [2,3,4,5,6,7]
             }},
         ],
+        
+        initComplete: function (settings, json) {  
+            $("#checkedtable").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");            
+        },
         columnDefs: [
                   { orderable: false, targets: [0] }
                ]
@@ -102,7 +109,10 @@ $(document).ready(function () {
             { extend: 'print', className: 'btn-blue',  exportOptions: {
                 columns: [2,3,4,5,6,7]
             }},
-        ],
+        ],        
+        initComplete: function (settings, json) {  
+            $("#amendtable").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");            
+        },
         columnDefs: [
                   { orderable: false, targets: [0] }
                ]
@@ -124,7 +134,10 @@ $(document).ready(function () {
             { extend: 'print', className: 'btn-blue',  exportOptions: {
                 columns: [2,3,4,5,6,7]
             }},
-        ],
+        ],     
+        initComplete: function (settings, json) {  
+            $("#rejectedtable").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");            
+        },
         columnDefs: [
                   { orderable: false, targets: [0] }
                ]
