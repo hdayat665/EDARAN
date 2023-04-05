@@ -181,7 +181,7 @@ $(document).ready(function () {
         $("#view-vehicle").modal("show");
     });
 
-    $(document).on("click", "#deleteButton", function () {
+    $(document).on("click", "#deleteRoleButton", function () {
         id = $(this).data("id");
         requirejs(["sweetAlert2"], function (swal) {
             swal({
