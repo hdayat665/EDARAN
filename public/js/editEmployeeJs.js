@@ -918,13 +918,17 @@ $.validator.addMethod("noSpecialChars", function(value, element) {
         
     for (let i = 0; i < educationIds.length; i++) {
         const type = educationIds[i];
+        console.log(type);
         $('#educationModalEdit' + type).click(function(e) {
     
             id = $(this).data('id');
             var educationData = getEducation(id);
+            console.log(educationData);
     
             educationData.done(function(data) {
                 education = data.data;
+                console.log(education);
+                $('#educationId1').val(education.id);
                 $('#educationFromDate1').val(education.FromDate);
                 $('#educationToDate1').val(education.ToDate);
                 $('#educationinstituteName1').val(education.instituteName);
@@ -972,7 +976,7 @@ $.validator.addMethod("noSpecialChars", function(value, element) {
     
         function getEducation(id) {
             return $.ajax({
-                url: "/getEducation/" + id
+                url: "/getEmployeeEducationById/" + id,
             });
         }
     }

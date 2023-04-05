@@ -8,6 +8,7 @@
         </div>
         <div class="modal-body">
             <form id="educationModalEdit">
+                <input type="hidden" id="educationId1" name="id" >
             <div class="row p-2">
                 <div class="col-md-6">
                     <div class="form-group">

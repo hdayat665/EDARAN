@@ -217,78 +217,96 @@
                             $role_permission = []; 
                         }
                     ?>
-                    <div class="menu-item has-sub">
-                        <a href="javascript:;" class="menu-link">
-                            <div class="menu-icon">
-                                <i class="fa fa-commenting text-gray"></i>
-                            </div>
-                            <div class="menu-text text-gray">HRIS</div>
-                            <div class="menu-caret text-gray"></div>
-                        </a>
-                        <div class="menu-submenu">
-                            <div class="menu-item">
-                                <a href="/myProfile" class="menu-link">
-                                    <div class="menu-icon">
-                                        <i class="fa fa-address-card text-gray"></i>
+                    <?php $target = ['hris_tab']; ?>
+                    @if (array_intersect($role_permission, $target))
+                        <div class="menu-item has-sub">
+                            <a href="javascript:;" class="menu-link">
+                                <div class="menu-icon">
+                                    <i class="fa fa-commenting text-gray"></i>
+                                </div>
+                                <div class="menu-text text-gray">HRIS</div>
+                                <div class="menu-caret text-gray"></div>
+                            </a>
+                            <div class="menu-submenu">
+                                <?php $target = ['my_profile']; ?>
+                                @if (array_intersect($role_permission, $target))
+                                <div class="menu-item">
+                                    <a href="/myProfile" class="menu-link">
+                                        <div class="menu-icon">
+                                            <i class="fa fa-address-card text-gray"></i>
+                                        </div>
+                                        <div class="menu-text text-gray">My Profile </div>
+                                    </a>
+                                </div>
+                                @endif
+                                <?php $target = ['employee_info']; ?>
+                                @if (array_intersect($role_permission, $target))
+                                    <div class="menu-item">
+                                        <a href="/employeeInfoView" class="menu-link">
+                                            <div class="menu-icon">
+                                                <i class="fa fa-indent text-gray"></i>
+                                            </div>
+                                            <div class="menu-text text-gray">Employee Information </div>
+                                        </a>
                                     </div>
-                                    <div class="menu-text text-gray">My Profile </div>
-                                </a>
+                                @endif
                             </div>
-                            <?php $target = ['hris_register_employee', 'hris_update_employee', 'hris_terminate_employee', 'hris_activate_employee', 'employee_info']; ?>
-                            @if (array_intersect($role_permission, $target))
-                                <div class="menu-item">
-                                    <a href="/employeeInfoView" class="menu-link">
-                                        <div class="menu-icon">
-                                            <i class="fa fa-indent text-gray"></i>
-                                        </div>
-                                        <div class="menu-text text-gray">Employee Information </div>
-                                    </a>
-                                </div>
-                            @endif
                         </div>
-                    </div> <!-- End Sidenav Content Orbit -->
+                    @endif
+                    <!-- End Sidenav Content Orbit -->
                     <!-- Sidenav Content Orbit -->
-                    <div class="menu-item has-sub">
-                        <a href="javascript:;" class="menu-link">
-                            <div class="menu-icon">
-                                <i class="fa fa-business-time text-gray"></i>
-                            </div>
-                            <div class="menu-text text-gray">Timesheets</div>
-                            <div class="menu-caret text-gray"></div>
-                        </a>
-                        <div class="menu-submenu">
-                            <?php $target = ['my_timesheet', 'tsr_timesheet_create_event']; ?>
-                            @if (array_intersect($role_permission, $target))
-                                <div class="menu-item">
-                                    <a href="/myTimesheet" class="menu-link">
-                                        <div class="menu-icon">
-                                            <i class="fa fa-calendar-check text-gray"></i>
-                                        </div>
-                                        <div class="menu-text text-gray">My Timesheets</div>
-                                    </a>
+                    <?php $target = ['tsr_tab']; ?>
+                    @if (array_intersect($role_permission, $target))
+                        <div class="menu-item has-sub">
+                            <a href="javascript:;" class="menu-link">
+                                <div class="menu-icon">
+                                    <i class="fa fa-business-time text-gray"></i>
                                 </div>
-                            @endif <?php $target = ['timesheet_approval', 'tsr_timesheet_approval', 'tsr_timesheet_reject']; ?>
-                            @if (array_intersect($role_permission, $target))
+                                <div class="menu-text text-gray">Timesheets</div>
+                                <div class="menu-caret text-gray"></div>
+                            </a>
+
+                            <div class="menu-submenu">
+                                    <?php $target = ['my_timesheet']; ?>
+                                    @if (array_intersect($role_permission, $target))
+                                    <div class="menu-item">
+                                        <a href="/myTimesheet" class="menu-link">
+                                            <div class="menu-icon">
+                                                <i class="fa fa-calendar-check text-gray"></i>
+                                            </div>
+                                            <div class="menu-text text-gray">My Timesheets</div>
+                                        </a>
+                                    </div>
+                                    @endif
+                                <?php $target = ['timesheet_approval']; ?>
+                                @if (array_intersect($role_permission, $target))
+                                    <div class="menu-item">
+                                        <a href="/timesheetApproval" class="menu-link">
+                                            <div class="menu-icon">
+                                                <i class="fa fa-receipt text-gray"></i>
+                                            </div>
+                                            <div class="menu-text text-gray">Timesheets Approval</div>
+                                        </a>
+                                    </div>
+                                @endif
+                                <?php $target = ['real_time_activities']; ?>
+                                @if (array_intersect($role_permission, $target))
                                 <div class="menu-item">
-                                    <a href="/timesheetApproval" class="menu-link">
+                                    <a href="/realtimeEventTimesheet" class="menu-link">
                                         <div class="menu-icon">
                                             <i class="fa fa-receipt text-gray"></i>
                                         </div>
-                                        <div class="menu-text text-gray">Timesheets Approval</div>
+                                        <div class="menu-text text-gray">Realtime Activities</div>
                                     </a>
                                 </div>
-                            @endif
-                            <div class="menu-item">
-                                <a href="/realtimeEventTimesheet" class="menu-link">
-                                    <div class="menu-icon">
-                                        <i class="fa fa-receipt text-gray"></i>
-                                    </div>
-                                    <div class="menu-text text-gray">Realtime Activities</div>
-                                </a>
+                                @endif
                             </div>
-                        </div>
-                    </div> <!-- End Sidenav Content Orbit -->
+                        </div> 
+                    @endif
+                        <!-- End Sidenav Content Orbit -->
                     <!-- Sidenav Content Orbit -->
+                    <?php $target = ['attendance_tab']; ?>
+                    @if (array_intersect($role_permission, $target))
                     <div class="menu-item has-sub">
                         <a href="javascript:;" class="menu-link">
                             <div class="menu-icon">
@@ -298,7 +316,7 @@
                             <div class="menu-caret text-gray"></div>
                         </a>
                         <div class="menu-submenu">
-                            <?php $target = ['my_attendance', 'attendance_view_action_log']; ?>
+                            <?php $target = ['my_attendance']; ?>
                             @if (array_intersect($role_permission, $target))
                                 <div class="menu-item">
                                     <a href="#" class="menu-link">
@@ -308,7 +326,8 @@
                                         <div class="menu-text text-gray">My Attendance</div>
                                     </a>
                                 </div>
-                            @endif <?php $target = ['attendance_info']; ?>
+                            @endif 
+                            <?php $target = ['attendance_info']; ?>
                             @if (array_intersect($role_permission, $target))
                                 <div class="menu-item">
                                     <a href="#" class="menu-link">
@@ -320,144 +339,346 @@
                                 </div>
                             @endif
                         </div>
-                    </div> <!-- End Sidenav Content Orbit -->
-                    <!-- Sidenav Content Orbit -->
-                    <div class="menu-item has-sub">
-                        <a href="javascript:;" class="menu-link">
-                            <div class="menu-icon">
-                                <i class="fa fa-user-cog text-gray"></i>
-                            </div>
-                            <div class="menu-text text-gray">E-Leave</div>
-                            <div class="menu-caret text-gray"></div>
-                        </a>
-                        <div class="menu-submenu">
-                            <div class="menu-item has-sub">
-                                <a href="/myleave" class="menu-link">
-                                    <div class="menu-icon">
-                                        <i class="fa fa-clipboard text-gray"></i>
-                                    </div>
-                                    <div class="menu-text text-gray">My Leave</i></div>
-                                    <!-- <div class="menu-caret text-gray"></div> -->
-                                </a>
-                            </div>
-                            <div class="menu-item has-sub">
-                                <a href="#" class="menu-link">
-                                    <div class="menu-icon">
-                                        <i class="fa fa-list-check text-gray"></i>
-                                    </div>
-                                    <div class="menu-text text-gray">Leave Approval</div>
-                                    <div class="menu-caret text-gray"></div>
-                                </a>
-                                <div class="menu-submenu">
-                                    <?php $target = ['leave', 'leave_department_approve', 'departments', 'leave_approval']; ?>
-                                    @if (array_intersect($role_permission, $target))
-                                        <div class="menu-item">
-                                            <a href="/leaveAppr" class="menu-link">
-                                                <div class="menu-icon">
-                                                    <i class="fa fa-user-pen text-gray"></i>
-                                                </div>
-                                                <div class="menu-text text-gray">Supervisor</div>
-                                            </a>
-                                        </div>
-                                    @endif <?php $target = ['leave', 'leave_hod_approve', 'HOD', 'leave_approval']; ?>
-                                    @if (array_intersect($role_permission, $target))
-                                        <div class="menu-item">
-                                            <a href="/leaveApprhod" class="menu-link">
-                                                <div class="menu-icon">
-                                                    <i class="fa fa-users-gear text-gray"></i>
-                                                </div>
-                                                <div class="menu-text text-gray">HOD</div>
-                                            </a>
-                                        </div>
-                                    @endif
-                                </div>
-                            </div>
-                        </div>
-                    </div> <!-- End Sidenav Content Orbit -->
-                    <!-- Sidenav Content Orbit -->
-                    <div class="menu-item has-sub">
-                        <a href="javascript:;" class="menu-link">
-                            <div class="menu-icon">
-                                <i class="fa fa-diagram-project text-gray"></i>
-                            </div>
-                            <div class="menu-text text-gray">Project Registration</div>
-                            <div class="menu-caret text-gray"></div>
-                        </a>
-                        <div class="menu-submenu">
-                            <?php $target = ['project', 'add_customer', 'edit_customer', 'delete_customer']; ?>
-                            @if (array_intersect($role_permission, $target))
-                                <div class="menu-item">
-                                    <a href="/customer" class="menu-link">
-                                        <div class="menu-icon">
-                                            <i class="fa fa-share-nodes text-gray"></i>
-                                        </div>
-                                        <div class="menu-text text-gray">Customer</i></div>
-                                    </a>
-                                </div>
-                            @endif <?php $target = ['project', 'register_project', 'view_project', 'update_status', 'update_project', 'project_info']; ?>
-                            @if (array_intersect($role_permission, $target))
-                                <div class="menu-item">
-                                    <a href="/projectInfo" class="menu-link">
-                                        <div class="menu-icon">
-                                            <i class="fa fa-book text-gray"></i>
-                                        </div>
-                                        <div class="menu-text text-gray">Project Information</div>
-                                    </a>
-                                </div>
-                            @endif
-                            <div class="menu-item">
-                                <a href="/myProject" class="menu-link">
-                                    <div class="menu-icon">
-                                        <i class="fa fa-clipboard-list text-gray"></i>
-                                    </div>
-                                    <div class="menu-text text-gray">My Project</div>
-                                </a>
-                            </div> <?php $target = ['project', 'view_project_request', 'approve_project_request', 'reject_project_request', 'project_approval']; ?>
-                            @if (array_intersect($role_permission, $target))
-                                <div class="menu-item">
-                                    <a href="/projectRequest" class="menu-link">
-                                        <div class="menu-icon">
-                                            <i class="fa fa-code-pull-request text-gray"></i>
-                                        </div>
-                                        <div class="menu-text text-gray">Project Request</div>
-                                    </a>
-                                </div>
-                            @endif
-                        </div>
                     </div>
+                    @endif
                     <!-- End Sidenav Content Orbit -->
                     <!-- Sidenav Content Orbit -->
-                    <div class="menu-item has-sub">
-                        <a href="javascript:;" class="menu-link">
-                            <div class="menu-icon">
-                                <i class="fa fa-file-lines text-gray"></i>
-                            </div>
-                            <div class="menu-text text-gray">E-Claim</div>
-                            <div class="menu-caret text-gray"></div>
-                        </a>
-                        <div class="menu-submenu">
-                            <div class="menu-item">
-                                <a href="/myClaimView" class="menu-link">
-                                    <div class="menu-icon">
-                                        <i class="fa fa-envelope-open-text text-gray"></i>
-                                    </div>
-                                    <div class="menu-text text-gray">My Claim</div>
-                                </a>
-                            </div>
-                            <div class="menu-item has-sub"> <a href="javascript:;" class="menu-link">
-                                    <div class="menu-icon">
-                                        <i class="fa fa-list-check text-gray"></i>
-                                    </div>
-                                    <div class="menu-text text-gray">Claim Approval</i>
-                                    </div>
-                                    <div class="menu-caret text-gray">
-                                    </div>
-                                </a>
-                                <div class="menu-submenu">
-                                    <div class="menu-item has-sub">
-                                        <?php $target = ['claim', 'claim_department_approve', 'department', 'claim_approval']; ?>
+                    <?php $target = ['leave_tab']; ?>
+                    @if (array_intersect($role_permission, $target))
+                        <div class="menu-item has-sub">
+                            <a href="javascript:;" class="menu-link">
+                                <div class="menu-icon">
+                                    <i class="fa fa-user-cog text-gray"></i>
+                                </div>
+                                <div class="menu-text text-gray">E-Leave</div>
+                                <div class="menu-caret text-gray"></div>
+                            </a>
+                            <div class="menu-submenu">
+                                <?php $target = ['my_leave']; ?>
+                                @if (array_intersect($role_permission, $target))
+                                <div class="menu-item has-sub">
+                                    <a href="/myleave" class="menu-link">
+                                        <div class="menu-icon">
+                                            <i class="fa fa-clipboard text-gray"></i>
+                                        </div>
+                                        <div class="menu-text text-gray">My Leave</i></div>
+                                        <!-- <div class="menu-caret text-gray"></div> -->
+                                    </a>
+                                </div>
+                                @endif
+                                <?php $target = ['leave_menu']; ?>
+                                @if (array_intersect($role_permission, $target))
+                                <div class="menu-item has-sub">
+                                    
+                                    <a href="#" class="menu-link">
+                                        <div class="menu-icon">
+                                            <i class="fa fa-list-check text-gray"></i>
+                                        </div>
+                                        <div class="menu-text text-gray">Leave Approval</div>
+                                        <div class="menu-caret text-gray"></div>
+                                    </a>
+                                    <div class="menu-submenu">
+                                        <?php $target = ['leave_recommender']; ?>
                                         @if (array_intersect($role_permission, $target))
-                                            <a href="#" class="menu-link">
+                                            <div class="menu-item">
+                                                <a href="/leaveAppr" class="menu-link">
+                                                    <div class="menu-icon">
+                                                        <i class="fa fa-user-pen text-gray"></i>
+                                                    </div>
+                                                    <div class="menu-text text-gray">Recommender</div>
+                                                </a>
+                                            </div>
+                                        @endif 
+                                        <?php $target = ['leave_approver']; ?>
+                                        @if (array_intersect($role_permission, $target))
+                                            <div class="menu-item">
+                                                <a href="/leaveApprhod" class="menu-link">
+                                                    <div class="menu-icon">
+                                                        <i class="fa fa-users-gear text-gray"></i>
+                                                    </div>
+                                                    <div class="menu-text text-gray">Approver</div>
+                                                </a>
+                                            </div>
+                                        @endif
+                                    </div>
+                                </div>
+                                @endif
+                            </div>
+                        </div> 
+                    @endif
+                    <!-- End Sidenav Content Orbit -->
+                    <!-- Sidenav Content Orbit -->
+                    <?php $target = ['project_tab']; ?>
+                    @if (array_intersect($role_permission, $target))
+                        <div class="menu-item has-sub">
+                            <a href="javascript:;" class="menu-link">
+                                <div class="menu-icon">
+                                    <i class="fa fa-diagram-project text-gray"></i>
+                                </div>
+                                <div class="menu-text text-gray">Project Registration</div>
+                                <div class="menu-caret text-gray"></div>
+                            </a>
+                            <div class="menu-submenu">
+                                <?php $target = ['customer']; ?>
+                                @if (array_intersect($role_permission, $target))
+                                    <div class="menu-item">
+                                        <a href="/customer" class="menu-link">
+                                            <div class="menu-icon">
+                                                <i class="fa fa-share-nodes text-gray"></i>
+                                            </div>
+                                            <div class="menu-text text-gray">Customer</i></div>
+                                        </a>
+                                    </div>
+                                @endif 
+                                <?php $target = ['project_info']; ?>
+                                @if (array_intersect($role_permission, $target))
+                                    <div class="menu-item">
+                                        <a href="/projectInfo" class="menu-link">
+                                            <div class="menu-icon">
+                                                <i class="fa fa-book text-gray"></i>
+                                            </div>
+                                            <div class="menu-text text-gray">Project Information</div>
+                                        </a>
+                                    </div>
+                                @endif
+                                <?php $target = ['my_project']; ?>
+                                @if (array_intersect($role_permission, $target))
+                                <div class="menu-item">
+                                    <a href="/myProject" class="menu-link">
+                                        <div class="menu-icon">
+                                            <i class="fa fa-clipboard-list text-gray"></i>
+                                        </div>
+                                        <div class="menu-text text-gray">My Project</div>
+                                    </a>
+                                
+                                </div>
+                                @endif
+                                <?php $target = ['project_request']; ?>
+                                @if (array_intersect($role_permission, $target))
+                                    <div class="menu-item">
+                                        <a href="/projectRequest" class="menu-link">
+                                            <div class="menu-icon">
+                                                <i class="fa fa-code-pull-request text-gray"></i>
+                                            </div>
+                                            <div class="menu-text text-gray">Project Request</div>
+                                        </a>
+                                    </div>
+                                @endif
+                            </div>
+                        </div>
+                    @endif
+                    <!-- End Sidenav Content Orbit -->
+                    <!-- Sidenav Content Orbit -->
+                    <?php $target = ['claim_tab']; ?>
+                    @if (array_intersect($role_permission, $target))
+                        <div class="menu-item has-sub">
+                            <a href="javascript:;" class="menu-link">
+                                <div class="menu-icon">
+                                    <i class="fa fa-file-lines text-gray"></i>
+                                </div>
+                                <div class="menu-text text-gray">E-Claim</div>
+                                <div class="menu-caret text-gray"></div>
+                            </a>
+
+                            <div class="menu-submenu">
+                                <?php $target = ['my_claim']; ?>
+                                @if (array_intersect($role_permission, $target))
+                                    <div class="menu-item">
+                                        <a href="/myClaimView" class="menu-link">
+                                            <div class="menu-icon">
+                                                <i class="fa fa-envelope-open-text text-gray"></i>
+                                            </div>
+                                            <div class="menu-text text-gray">My Claim</div>
+                                        </a>
+                                    </div>
+                                @endif
+                                <?php $target = ['claim_menu']; ?>
+                                @if (array_intersect($role_permission, $target))
+                                <div class="menu-item has-sub"> 
+
+                                        <a href="javascript:;" class="menu-link">
+                                            <div class="menu-icon">
+                                                <i class="fa fa-list-check text-gray"></i>
+                                            </div>
+                                            <div class="menu-text text-gray">Claim Approval</i>
+                                            </div>
+                                            <div class="menu-caret text-gray">
+                                            </div>
+                                        </a>
+                                    
+                                    <div class="menu-submenu">
+                                        <?php $target = ['eclaim_department_menu']; ?>
+                                        @if (array_intersect($role_permission, $target))
+                                        <div class="menu-item has-sub">
+
+                                                <a href="#" class="menu-link">
+                                                    <div class="menu-icon">
+                                                        <i class="fa fa-user text-gray"></i>
+                                                    </div>
+                                                    <div class="menu-text text-gray">Department</i>
+                                                    </div>
+                                                    <div class="menu-caret text-gray">
+                                                    </div>
+                                                </a>
+
+                                                <div class="menu-submenu">
+                                                    <?php $target = ['eclaim_department_recommender']; ?>
+                                                    @if (array_intersect($role_permission, $target))
+                                                    <div class="menu-item">
+                                                        <a href="/claimApprovalView/2" class="menu-link">
+                                                            <div class="menu-icon">
+                                                                <i class="fa fa-list-check text-gray"></i>
+                                                            </div>
+                                                            <div class="menu-text text-gray">Recommender
+                                                            </div>
+                                                        </a>
+                                                    </div>
+                                                    @endif
+                                                    <?php $target = ['eclaim_department_approver']; ?>
+                                                    @if (array_intersect($role_permission, $target))
+                                                    <div class="menu-item">
+                                                        <a href="/claimApprovalView/1" class="menu-link">
+                                                            <div class="menu-icon">
+                                                                <i class="fa fa-list-check text-gray"></i>
+                                                            </div>
+                                                            <div class="menu-text text-gray">Approver
+                                                            </div>
+                                                        </a>
+                                                    </div>
+                                                    @endif
+                                                </div>
+                                            </div>
+                                            @endif
+                                            <?php $target = ['eclaim_finance_menu']; ?>
+                                            @if (array_intersect($role_permission, $target))
+                                            <div class="menu-item has-sub">
+
+                                                    <a href="#" class="menu-link">
+                                                        <div class="menu-icon">
+                                                            <i class="fa fa-user-tie text-gray"></i>
+                                                        </div>
+                                                        <div class="menu-text text-gray">Finance
+                                                        </div>
+                                                        <div class="menu-caret text-gray">
+                                                        </div>
+                                                    </a>
+
+                                                    <div class="menu-submenu">
+                                                            <?php $target = ['eclaim_finance_recommender']; ?>
+                                                            @if (array_intersect($role_permission, $target))
+                                                            <div class="menu-item">
+                                                                <a href="/financeRecView" class="menu-link">
+                                                                    <div class="menu-icon">
+                                                                        <i class="fa fa-list-check text-gray"></i>
+                                                                    </div>
+                                                                    <div class="menu-text text-gray">Recommender
+                                                                    </div>
+                                                                </a>
+                                                            </div>
+                                                            @endif
+                                                            <?php $target = ['eclaim_finance_approver']; ?>
+                                                            @if (array_intersect($role_permission, $target))
+                                                            <div class="menu-item">
+                                                                <a href="/financeApprovalView" class="menu-link">
+                                                                    <div class="menu-icon">
+                                                                        <i class="fa fa-list-check text-gray"></i>
+                                                                    </div>
+                                                                    <div class="menu-text text-gray">Approver
+                                                                    </div>
+                                                                </a>
+                                                            </div>
+                                                            @endif
+                                                            <?php $target = ['eclaim_finance_checker']; ?>
+                                                            @if (array_intersect($role_permission, $target))
+                                                            <div class="menu-item">
+                                                                <a href="/financeCheckerView" class="menu-link">
+                                                                    <div class="menu-icon">
+                                                                        <i class="fa fa-list-check text-gray"></i>
+                                                                    </div>
+                                                                    <div class="menu-text text-gray">Checker
+                                                                    </div>
+                                                                </a>
+                                                            </div>
+                                                            @endif
+                                                    </div>
+                                            </div>
+                                            @endif
+                                            <?php $target = ['eclaim_admin_menu']; ?>
+                                            @if (array_intersect($role_permission, $target))
+                                            <div class="menu-item has-sub">
+
+                                                <a href="#" class="menu-link">
+                                                    <div class="menu-icon">
+                                                        <i class="fa fa-user-gear text-gray"></i>
+                                                    </div>
+                                                    <div class="menu-text text-gray">Admin</i></div>
+                                                    <div class="menu-caret text-gray">
+                                                    </div>
+                                                </a>
+                        
+                                                <div class="menu-submenu">
+                                                    <?php $target = ['eclaim_admin_recommender']; ?>
+                                                    @if (array_intersect($role_permission, $target))
+                                                    <div class="menu-item">
+                                                        <a href="/adminRecView" class="menu-link">
+                                                            <div class="menu-icon">
+                                                                <i class="fa fa-list-check text-gray"></i>
+                                                            </div>
+                                                            <div class="menu-text text-gray">Recommender
+                                                            </div>
+                                                        </a>
+                                                    </div>
+                                                    @endif
+                                                    <?php $target = ['eclaim_admin_approver']; ?>
+                                                    @if (array_intersect($role_permission, $target))
+                                                    <div class="menu-item">
+                                                        <a href="/adminApprovalView" class="menu-link">
+                                                            <div class="menu-icon">
+                                                                <i class="fa fa-list-check text-gray"></i>
+                                                            </div>
+                                                            <div class="menu-text text-gray">Approver
+                                                            </div>
+                                                        </a>
+                                                    </div>
+                                                    @endif
+                                                    <?php $target = ['eclaim_admin_checker']; ?>
+                                                    @if (array_intersect($role_permission, $target))
+                                                    <div class="menu-item">
+                                                        <a href="/adminCheckerView" class="menu-link">
+                                                            <div class="menu-icon">
+                                                                <i class="fa fa-list-check text-gray"></i>
+                                                            </div>
+                                                            <div class="menu-text text-gray">Checker
+                                                            </div>
+                                                        </a>
+                                                    </div>
+                                                    @endif
+                                                </div>
+                                            </div>
+                                            @endif
+                                        </div>
+                                </div>
+                                @endif
+                                <?php $target = ['cash_menu']; ?>
+                                @if (array_intersect($role_permission, $target))
+                                <div class="menu-item has-sub">
+                                   
+                                    <a href="javascript:;" class="menu-link">
+                                        <div class="menu-icon">
+                                            <i class="fa fa-envelope-open-text text-gray"></i>
+                                        </div>
+                                        <div class="menu-text text-gray">Cash Advance</div>
+                                        <div class="menu-caret text-gray">
+                                        </div>
+                                    </a>
+
+                                    <div class="menu-submenu">
+                                        <?php $target = ['cash_menu']; ?>
+                                        @if (array_intersect($role_permission, $target))
+                                        <div class="menu-item has-sub">
+                                            <?php $target = ['cash_deparment_menu']; ?>
+                                            @if (array_intersect($role_permission, $target))
+                                            <a href="javascript:;" class="menu-link">
                                                 <div class="menu-icon">
                                                     <i class="fa fa-user text-gray"></i>
                                                 </div>
@@ -466,9 +687,11 @@
                                                 <div class="menu-caret text-gray">
                                                 </div>
                                             </a>
+                                            <?php $target = ['cash_deparment_approver']; ?>
+                                            @if (array_intersect($role_permission, $target))
                                             <div class="menu-submenu">
                                                 <div class="menu-item">
-                                                    <a href="/claimApprovalView/1" class="menu-link">
+                                                    <a href="/cashAdvanceApproverView" class="menu-link">
                                                         <div class="menu-icon">
                                                             <i class="fa fa-list-check text-gray"></i>
                                                         </div>
@@ -476,21 +699,15 @@
                                                         </div>
                                                     </a>
                                                 </div>
-                                                <div class="menu-item">
-                                                    <a href="/claimApprovalView/2" class="menu-link">
-                                                        <div class="menu-icon">
-                                                            <i class="fa fa-list-check text-gray"></i>
-                                                        </div>
-                                                        <div class="menu-text text-gray">Recommender
-                                                        </div>
-                                                    </a>
-                                                </div>
                                             </div>
-                                        @endif
-                                    </div>
-                                    <div class="menu-item has-sub">
-                                        <?php $target = ['claim', 'claim_finance_approve', 'finance', 'claim_approval']; ?>
+                                            @endif
+                                            @endif
+                                        </div>
+                                       @endif
+                                        <?php $target = ['cash_finance_menu']; ?>
                                         @if (array_intersect($role_permission, $target))
+                                        <div class="menu-item has-sub">
+
                                             <a href="#" class="menu-link">
                                                 <div class="menu-icon">
                                                     <i class="fa fa-user-tie text-gray"></i>
@@ -500,18 +717,12 @@
                                                 <div class="menu-caret text-gray">
                                                 </div>
                                             </a>
+                                            
                                             <div class="menu-submenu">
+                                                <?php $target = ['cash_finance_recommender']; ?>
+                                                @if (array_intersect($role_permission, $target))
                                                 <div class="menu-item">
-                                                    <a href="/financeApprovalView" class="menu-link">
-                                                        <div class="menu-icon">
-                                                            <i class="fa fa-list-check text-gray"></i>
-                                                        </div>
-                                                        <div class="menu-text text-gray">Approver
-                                                        </div>
-                                                    </a>
-                                                </div>
-                                                <div class="menu-item">
-                                                    <a href="/financeRecView" class="menu-link">
+                                                    <a href="/cashAdvanceFrecommenderView" class="menu-link">
                                                         <div class="menu-icon">
                                                             <i class="fa fa-list-check text-gray"></i>
                                                         </div>
@@ -519,32 +730,11 @@
                                                         </div>
                                                     </a>
                                                 </div>
+                                                @endif
+                                                <?php $target = ['cash_finance_approver']; ?>
+                                                @if (array_intersect($role_permission, $target))
                                                 <div class="menu-item">
-                                                    <a href="/financeCheckerView" class="menu-link">
-                                                        <div class="menu-icon">
-                                                            <i class="fa fa-list-check text-gray"></i>
-                                                        </div>
-                                                        <div class="menu-text text-gray">Checker
-                                                        </div>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        @endif
-                                    </div>
-                                    <div class="menu-item has-sub">
-                                        <?php $target = ['claim', 'claim_admin_approve', 'admin', 'claim_approval']; ?>
-                                        @if (array_intersect($role_permission, $target))
-                                            <a href="#" class="menu-link">
-                                                <div class="menu-icon">
-                                                    <i class="fa fa-user-gear text-gray"></i>
-                                                </div>
-                                                <div class="menu-text text-gray">Admin</i></div>
-                                                <div class="menu-caret text-gray">
-                                                </div>
-                                            </a>
-                                            <div class="menu-submenu">
-                                                <div class="menu-item">
-                                                    <a href="/adminApprovalView" class="menu-link">
+                                                    <a href="/cashAdvanceFapproverView" class="menu-link">
                                                         <div class="menu-icon">
                                                             <i class="fa fa-list-check text-gray"></i>
                                                         </div>
@@ -552,17 +742,11 @@
                                                         </div>
                                                     </a>
                                                 </div>
+                                                @endif
+                                                <?php $target = ['cash_finance_checker']; ?>
+                                                @if (array_intersect($role_permission, $target))
                                                 <div class="menu-item">
-                                                    <a href="/adminRecView" class="menu-link">
-                                                        <div class="menu-icon">
-                                                            <i class="fa fa-list-check text-gray"></i>
-                                                        </div>
-                                                        <div class="menu-text text-gray">Recommender
-                                                        </div>
-                                                    </a>
-                                                </div>
-                                                <div class="menu-item">
-                                                    <a href="/adminCheckerView" class="menu-link">
+                                                    <a href="/cashAdvanceFcheckerView" class="menu-link">
                                                         <div class="menu-icon">
                                                             <i class="fa fa-list-check text-gray"></i>
                                                         </div>
@@ -570,104 +754,28 @@
                                                         </div>
                                                     </a>
                                                 </div>
-                                            </div>
-                                        @endif
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="menu-item has-sub">
-                                <a href="javascript:;" class="menu-link">
-                                    <div class="menu-icon">
-                                        <i class="fa fa-envelope-open-text text-gray"></i>
-                                    </div>
-                                    <div class="menu-text text-gray">Cash Advance</div>
-                                    <div class="menu-caret text-gray">
-                                    </div>
-                                </a>
-                                <div class="menu-submenu">
-                                    <div class="menu-item has-sub">
-                                        <a href="javascript:;" class="menu-link">
-                                            <div class="menu-icon">
-                                                <i class="fa fa-user text-gray"></i>
-                                            </div>
-                                            <div class="menu-text text-gray">Department</i>
-                                            </div>
-                                            <div class="menu-caret text-gray">
-                                            </div>
-                                        </a>
-                                        <div class="menu-submenu">
-                                            <div class="menu-item">
-                                                <a href="/cashAdvanceApproverView" class="menu-link">
-                                                    <div class="menu-icon">
-                                                        <i class="fa fa-list-check text-gray"></i>
-                                                    </div>
-                                                    <div class="menu-text text-gray">Approver
-                                                    </div>
-                                                </a>
-                                            </div>
-                                            {{-- <div class="menu-item">
-                                                <a href="/claimApprovalView/2" class="menu-link">
-                                                    <div class="menu-icon">
-                                                        <i class="fa fa-list-check text-gray"></i>
-                                                    </div>
-                                                    <div class="menu-text text-gray">Recommender
-                                                    </div>
-                                                </a>
-                                            </div> --}}
-                                        </div>
-                                    </div>
-                                    <div class="menu-item has-sub">
-                                        <a href="#" class="menu-link">
-                                            <div class="menu-icon">
-                                                <i class="fa fa-user-tie text-gray"></i>
-                                            </div>
-                                            <div class="menu-text text-gray">Finance
-                                            </div>
-                                            <div class="menu-caret text-gray">
-                                            </div>
-                                        </a>
-                                        <div class="menu-submenu">
-                                            <div class="menu-item">
-                                                <a href="/cashAdvanceFapproverView" class="menu-link">
-                                                    <div class="menu-icon">
-                                                        <i class="fa fa-list-check text-gray"></i>
-                                                    </div>
-                                                    <div class="menu-text text-gray">Approver
-                                                    </div>
-                                                </a>
-                                            </div>
-                                            <div class="menu-item">
-                                                <a href="/cashAdvanceFrecommenderView" class="menu-link">
-                                                    <div class="menu-icon">
-                                                        <i class="fa fa-list-check text-gray"></i>
-                                                    </div>
-                                                    <div class="menu-text text-gray">Recommender
-                                                    </div>
-                                                </a>
-                                            </div>
-                                            <div class="menu-item">
-                                                <a href="/cashAdvanceFcheckerView" class="menu-link">
-                                                    <div class="menu-icon">
-                                                        <i class="fa fa-list-check text-gray"></i>
-                                                    </div>
-                                                    <div class="menu-text text-gray">Checker
-                                                    </div>
-                                                </a>
+                                                @endif
                                             </div>
                                         </div>
+                                       @endif
                                     </div>
                                 </div>
-                            </div>
-                            <div class="menu-item">
-                                <a href="/appealMtcView" class="menu-link">
-                                    <div class="menu-icon">
-                                        <i class="fa fa-envelope-open-text text-gray"></i>
-                                    </div>
-                                    <div class="menu-text text-gray">Appeal Approval</div>
-                                </a>
+                                @endif
+                                <?php $target = ['appeal_approval']; ?>
+                                @if (array_intersect($role_permission, $target))
+                                <div class="menu-item">
+                                    <a href="/appealMtcView" class="menu-link">
+                                        <div class="menu-icon">
+                                            <i class="fa fa-envelope-open-text text-gray"></i>
+                                        </div>
+                                        <div class="menu-text text-gray">Appeal Approval</div>
+                                    </a>
+                                </div>
+                               @endif
                             </div>
                         </div>
-                    </div> <!-- End Sidenav Content Orbit -->
+                    @endif
+                    <!-- End Sidenav Content Orbit -->
                     <!-- Sidenav Content Orbit -->
                     <div class="menu-item has-sub">
                         <a href="javascript:;" class="menu-link">
@@ -713,6 +821,8 @@
                         </div>
                     </div> <!-- End Sidenav Content Orbit -->
                     <!-- Sidenav Content Orbit -->
+                    <?php $target = ['report_tab']; ?>
+                    @if (array_intersect($role_permission, $target))
                     <div class="menu-item has-sub">
                         <a href="javascript:;" class="menu-link">
                             <div class="menu-icon">
@@ -722,9 +832,10 @@
                             <div class="menu-caret text-gray"></div>
                         </a>
                         <div class="menu-submenu">
+                            <?php $target = ['timesheet_menu']; ?>
+                            @if (array_intersect($role_permission, $target))
                             <div class="menu-item has-sub">
-                                <?php $target = ['reporting', 'report_tsr']; ?>
-                                @if (array_intersect($role_permission, $target))
+                               
                                     <a href="#" class="menu-link">
                                         <div class="menu-icon">
                                             <i class="fa fa-file-signature text-gray"></i>
@@ -732,7 +843,10 @@
                                         <div class="menu-text text-gray">Timesheet</i></div>
                                         <div class="menu-caret text-gray"></div>
                                     </a>
+
                                     <div class="menu-submenu">
+                                        <?php $target = ['status_report']; ?>
+                                        @if (array_intersect($role_permission, $target))
                                         <div class="menu-item">
                                             <a href="/statusReport" class="menu-link">
                                                 <div class="menu-icon">
@@ -741,6 +855,9 @@
                                                 <div class="menu-text text-gray">Status Report</div>
                                             </a>
                                         </div>
+                                        @endif
+                                        <?php $target = ['employee_report']; ?>
+                                        @if (array_intersect($role_permission, $target))
                                         <div class="menu-item">
                                             <a href="/employeeReport" class="menu-link">
                                                 <div class="menu-icon">
@@ -749,6 +866,9 @@
                                                 <div class="menu-text text-gray">Employee Report</div>
                                             </a>
                                         </div>
+                                        @endif
+                                        <?php $target = ['overtime_report']; ?>
+                                        @if (array_intersect($role_permission, $target))
                                         <div class="menu-item">
                                             <a href="/overtimeReport" class="menu-link">
                                                 <div class="menu-icon">
@@ -757,12 +877,14 @@
                                                 <div class="menu-text text-gray">Overtime Report</div>
                                             </a>
                                         </div>
+                                        @endif
                                     </div>
-                                @endif
-                            </div>
+                                </div>
+                            @endif
+                            <?php $target = ['eattendance_menu']; ?>
+                            @if (array_intersect($role_permission, $target))
                             <div class="menu-item has-sub">
-                                <?php $target = ['reporting', 'report_attendance']; ?>
-                                @if (array_intersect($role_permission, $target))
+                                
                                     <a href="#" class="menu-link">
                                         <div class="menu-icon">
                                             <i class="fa fa-user-check text-gray"></i>
@@ -771,6 +893,8 @@
                                         <div class="menu-caret text-gray"></div>
                                     </a>
                                     <div class="menu-submenu">
+                                        <?php $target = ['daily_report']; ?>
+                                        @if (array_intersect($role_permission, $target))
                                         <div class="menu-item">
                                             <a href="#" class="menu-link">
                                                 <div class="menu-icon">
@@ -779,6 +903,9 @@
                                                 <div class="menu-text text-gray">Daily Report</div>
                                             </a>
                                         </div>
+                                        @endif
+                                        <?php $target = ['status_report']; ?>
+                                        @if (array_intersect($role_permission, $target))
                                         <div class="menu-item">
                                             <a href="#" class="menu-link">
                                                 <div class="menu-icon">
@@ -787,23 +914,25 @@
                                                 <div class="menu-text text-gray">Status Report</div>
                                             </a>
                                         </div>
+                                        @endif
                                     </div>
-                                @endif
                             </div>
-                            <div class="menu-item">
-                                <?php $target = ['reporting', 'report_leave']; ?>
-                                @if (array_intersect($role_permission, $target))
+                            @endif
+                            <?php $target = ['report_leave']; ?>
+                            @if (array_intersect($role_permission, $target))
+                                <div class="menu-item">
                                     <a href="/leaveReport" class="menu-link">
                                         <div class="menu-icon">
                                             <i class="fa fa-user-minus text-gray"></i>
                                         </div>
                                         <div class="menu-text text-gray">E-Leave</div>
                                     </a>
-                                @endif
-                            </div>
+                                </div>
+                            @endif
+                            <?php $target = ['project_report_menu']; ?>
+                            @if (array_intersect($role_permission, $target))
                             <div class="menu-item has-sub">
-                                <?php $target = ['reporting', 'report_project']; ?>
-                                @if (array_intersect($role_permission, $target))
+                                
                                     <a href="#" class="menu-link">
                                         <div class="menu-icon">
                                             <i class="fa fa-keyboard text-gray"></i>
@@ -812,6 +941,8 @@
                                         <div class="menu-caret text-gray"></div>
                                     </a>
                                     <div class="menu-submenu">
+                                        <?php $target = ['project_listing']; ?>
+                                        @if (array_intersect($role_permission, $target))
                                         <div class="menu-item">
                                             <a href="/projectListing" class="menu-link">
                                                 <div class="menu-icon">
@@ -820,6 +951,9 @@
                                                 <div class="menu-text text-gray">Project Listing</div>
                                             </a>
                                         </div>
+                                        @endif
+                                        <?php $target = ['project_report']; ?>
+                                        @if (array_intersect($role_permission, $target))
                                         <div class="menu-item">
                                             <a href="/projectFilter" class="menu-link">
                                                 <div class="menu-icon">
@@ -828,12 +962,14 @@
                                                 <div class="menu-text text-gray">Project Report</div>
                                             </a>
                                         </div>
+                                        @endif
                                     </div>
-                                @endif
                             </div>
+                            @endif
+                            <?php $target = ['claim_report_menu']; ?>
+                            @if (array_intersect($role_permission, $target))
                             <div class="menu-item has-sub">
-                                <?php $target = ['reporting', 'report_claim']; ?>
-                                @if (array_intersect($role_permission, $target))
+                                
                                     <a href="#" class="menu-link">
                                         <div class="menu-icon">
                                             <i class="fa fa-money-check text-gray"></i>
@@ -842,6 +978,8 @@
                                         <div class="menu-caret text-gray"></div>
                                     </a>
                                     <div class="menu-submenu">
+                                        <?php $target = ['claim_report']; ?>
+                                        @if (array_intersect($role_permission, $target))
                                         <div class="menu-item">
                                             <a href="/eclaimListing" class="menu-link">
                                                 <div class="menu-icon">
@@ -850,6 +988,9 @@
                                                 <div class="menu-text text-gray">Claim</div>
                                             </a>
                                         </div>
+                                        @endif
+                                        <?php $target = ['cash_report']; ?>
+                                        @if (array_intersect($role_permission, $target))
                                         <div class="menu-item">
                                             <a href="/cashadvanceListing" class="menu-link">
                                                 <div class="menu-icon">
@@ -858,23 +999,29 @@
                                                 <div class="menu-text text-gray">Cash Advance</div>
                                             </a>
                                         </div>
+                                        @endif
                                     </div>
-                                @endif
+                                
                             </div>
+                            @endif
+                            <?php $target = ['report_cor']; ?>
+                            @if (array_intersect($role_permission, $target))
                             <div class="menu-item">
-                                <?php $target = ['reporting', 'report_cor']; ?>
-                                @if (array_intersect($role_permission, $target))
-                                    <a href="/corlisting" class="menu-link">
-                                        <div class="menu-icon">
-                                            <i class="fa fa-user-minus text-gray"></i>
-                                        </div>
-                                        <div class="menu-text text-gray">Charge Out Rate</div>
-                                    </a>
-                                @endif
+                                <a href="/corlisting" class="menu-link">
+                                    <div class="menu-icon">
+                                        <i class="fa fa-user-minus text-gray"></i>
+                                    </div>
+                                    <div class="menu-text text-gray">Charge Out Rate</div>
+                                </a>
                             </div>
+                            @endif
                         </div>
-                    </div> <!-- End Sidenav Content Orbit -->
+                    </div> 
+                    @endif
+                    <!-- End Sidenav Content Orbit -->
                     <!-- Sidenav Content Orbit -->
+                    <?php $target = ['setting_tab']; ?>
+                    @if (array_intersect($role_permission, $target))
                     <div class="menu-item has-sub">
                         <a href="/setting" class="menu-link">
                             <div class="menu-icon">
@@ -882,7 +1029,9 @@
                             </div>
                             <div class="menu-text text-gray">Settings</div>
                         </a>
-                    </div> <!-- End Sidenav Content Orbit -->
+                    </div> 
+                    @endif
+                    <!-- End Sidenav Content Orbit -->
                     <!-- BEGIN minify-button -->
                     <!-- <div class="menu-item d-flex text-gray">
                         <a href="javascript:;" class="app-sidebar-minify-btn ms-auto text-gray" data-toggle="app-sidebar-minify"><i class="fa fa-angle-double-left"></i></a>

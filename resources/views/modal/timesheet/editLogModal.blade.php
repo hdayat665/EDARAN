@@ -94,9 +94,9 @@
                             </div> --}}
 
                             <div class="col-sm-6" id="locationByProjectEditHide" style="display: none">
-                                <label for="issuing-country" class="form-label">Project Location</label>
+                                <label for="issuing-country" class="form-label">Project Location 12</label>
                                 <select class="form-select" id="projectlocsearchedit" name="project_location" aria-label="Default select example">
-                                    <option class="form-label" value="">Project location</option>
+                                    <option class="form-label" value="">PLEASE CHOOSE</option>
                                     <?php $projectLocations = projectLocation() ?>
                                     @foreach ($projectLocations as $projectLocation)
                                     <option value="{{$projectLocation->id}}">{{$projectLocation->location_name}}</option>
@@ -111,8 +111,8 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row p-2">
-                        <div class="col-sm-6" id="listprojectedit" style="display:none">
+                    <div class="row p-2" id="listprojectedit" style="display:none">
+                        <div class="col-sm-6" >
                             <label for="Office-Log" class="form-label">My Project*</label>
                             <select class="form-select" id="officeLogProjectEdit" name="office_log_project" aria-label="Default select example">
                                 <option class="form-label" value="">PLEASE CHOOSE</option>

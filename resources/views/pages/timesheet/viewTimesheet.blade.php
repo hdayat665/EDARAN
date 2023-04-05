@@ -1,7 +1,12 @@
 @extends('layouts.dashboardTenant')@section('content')
+<style>
+.fc-prev-button, .fc-next-button {
+    display: none;
+}
+</style>
+
 <div id="content" class="app-content">
-    <h1 class="page-header">Calendar</h1>
-    <h1 class="page-header">{{ $userId }}</h1>
+    <h4 class="">{{ $employee_name }}</h4>
     <div class="row" id="viewTimesheetJs">
         <div class="col-lg">
             <div id="calendar" class="calendar"></div>
