@@ -203,7 +203,17 @@ if ($existingLogs->isNotEmpty()) {
     {
         $data = TimesheetLog::find($id);
 
-        return $data;
+        return
+         $data;
+    }
+
+    public function employeeNamebyId($userId)
+    {
+        $employee = DB::table('employment')
+                        ->where('user_id', $userId)
+                        ->first();
+    
+        return $employee ? $employee->name : '';
     }
 
     public function createEvent($r)
@@ -332,8 +342,18 @@ if ($existingLogs->isNotEmpty()) {
             $input['set_reccuring'] = implode(',', $input['set_reccuring']);
         }
 
+        // if (isset($input['participant'])) {
+        //     $input['participant'] = implode(',', $input['participant']);
+        // }
+
+        $currentEvent = TimesheetEvent::find($id);
+        $currentParticipants = explode(',', $currentEvent->participant);
+
         if (isset($input['participant'])) {
-            $input['participant'] = implode(',', $input['participant']);
+            $newParticipants = $input['participant'];
+            $input['participant'] = implode(',', array_unique(array_merge($currentParticipants, $newParticipants)));
+        } else {
+            $input['participant'] = implode(',', $currentParticipants);
         }
 
         $input['start_date'] = date_format(date_create($input['start_date']), 'Y/m/d');
@@ -732,6 +752,24 @@ if ($existingLogs->isNotEmpty()) {
         return $data;
     }
 
+    // public function getemployeeNamelog($id)
+    // {
+
+    //     $data = TimesheetApproval::find($id);
+    //     return $data;
+    // }
+
+    public function getemployeeNamelog($id)
+    {
+        $timesheetApproval = TimesheetApproval::find($id);
+        if ($timesheetApproval) {
+            return $timesheetApproval->employee_name;
+        }
+        return '';
+    }
+
+
+
     public function getEventsByLotId($id)
     {
         $ids = explode(',', $id);
@@ -750,16 +788,11 @@ if ($existingLogs->isNotEmpty()) {
         // return $data;
 
         $data = DB::table('timesheet_log as a')
-        ->leftjoin('project as b', 'a.project_id', '=', 'b.id')
-        ->leftjoin('activity_logs as c', 'a.activity_name', '=', 'c.id')
-        ->select('a.*', 'b.project_name','c.activity_name as activitynameas')
-            // ->whereNotIn('a.id', $projectId)
-           -> where([['a.tenant_id', Auth::user()->tenant_id], ['a.user_id', Auth::user()->id]])
-            ->get();
-
-        if (!$data) {
-            $data = [];
-        }
+        ->leftJoin('project as b', 'a.project_id', '=', 'b.id')
+        ->leftJoin('activity_logs as c', 'a.activity_name', '=', 'c.id')
+        ->select('a.*', 'b.project_name', 'c.activity_name as activitynameas')
+        ->whereIn('a.id', $ids)
+        ->get();
 
         return $data;
     }
@@ -777,6 +810,13 @@ if ($existingLogs->isNotEmpty()) {
 
         return $data;
     }
+
+    // public function getEmployeeNameById($id,$userId)
+    // {
+    //     $employee = Employee::find($id,$userId);
+
+    //     return $employee->employeeName;
+    // }
 
     public function updateAttendStatus($id = '', $status = '')
     {

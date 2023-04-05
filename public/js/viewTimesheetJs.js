@@ -43,7 +43,7 @@ var handleCalendarDemo = function() {
 
             event.push({
                 // title: events['event_name'],
-                title: "Event: " + events['event_name'],
+                title: "Event: " + events['event_name'] + "\n" + "from " + events['start_time'] + " to " + events['end_time'],
                 start: startYear + '-' + startMonth + '-' + startDay,
                 end: endYear + '-' + endMonth + '-' + endDay,
                 color: app.color.red,
@@ -101,13 +101,23 @@ var handleCalendarDemo = function() {
             });
         }
         dataEvent = event.concat(log);
-        var calendar = new FullCalendar.Calendar(calendarElm, {
+        var calendar = new FullCalendar.Calendar(calendarElm, { 
+
+            datesSet: function(info) {
+                // Disable previous and next buttons
+                var prevButton = calendar.getPrevButton();
+                var nextButton = calendar.getNextButton();
+                prevButton.disabled = true;
+                nextButton.disabled = true;
+            },
+
             headerToolbar: {
-                left: 'prev,today,next',
+                left: 'prev,next',
                 center: 'title',
                 right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek',
                 
             },
+            navLinks: false, 
             customButtons: {
                 logButton: {
                     text: 'New Log',

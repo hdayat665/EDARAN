@@ -378,7 +378,7 @@
                     </div>
                     <div class="row p-2">
                         <div class="col-sm-6">
-                            <label for="firstname" class="form-label">Add New Participant</label>
+                            <label for="firstname" class="form-label">Participant*</label>
                             <select class="selectpicker form-select" id="addneweventparticipantedit" aria-label="Default select example" multiple name="participant[]">
                                 <option class="form-label" value="">PLEASE CHOOSE</option>
                                 <?php $employees = getEmployee() ?>

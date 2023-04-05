@@ -9,7 +9,12 @@ $(document).ready(function() {
     //       $(this).val("test");
     //     }
     //   });
+
+   
+
+    
       
+    
 
  document.getElementById("yearsub").value = new Date().getFullYear();
 
@@ -192,7 +197,7 @@ $(document).ready(function() {
                     opt.text = location['location_name'];
                     select.appendChild(opt);
                 }
-                $('#projectLocationOffice').picker({ search: true });
+                // $('#projectLocationOffice').picker({ search: true });
             });
 
 
@@ -220,7 +225,7 @@ $(document).ready(function() {
                     opt.text = activity['activity_name'];
                     select.appendChild(opt);
                 }
-                $('#activityOffice').picker({ search: true });
+                // $('#activityOffice').picker({ search: true });
                 
             });
 
@@ -236,7 +241,7 @@ $(document).ready(function() {
                     opt.text = activity['activity_name'];
                     select.appendChild(opt);
                 }
-                $('#activityLogs').picker({ search: true });
+                // $('#activityLogs').picker({ search: true });
             });
 
 
@@ -282,7 +287,7 @@ $(document).ready(function() {
                     opt.text = location['location_name'];
                     select.appendChild(opt);
                 }
-                $('#projectLocationOfficeEdit').picker({ search: true });
+                // $('#projectLocationOfficeEdit').picker({ search: true });
             });
 
 
@@ -298,7 +303,7 @@ $(document).ready(function() {
                     opt.text = location['location_name'];
                     select.appendChild(opt);
                 }
-                $('#projectlocsearchedit').picker({ search: true });
+                // $('#projectlocsearchedit').picker({ search: true });
             });
 
             // var activityOffice = getActivityByProjectId(projectId);
@@ -325,7 +330,7 @@ $(document).ready(function() {
                     opt.text = activity['activity_name'];
                     select.appendChild(opt);
                 }
-                $('#activityOfficeEdit').picker({ search: true });
+                // $('#activityOfficeEdit').picker({ search: true });
             });
         }
     }
@@ -391,7 +396,6 @@ $(document).ready(function() {
     $('#saveLogButton').click(function(e) {
         $("#addLogForm").validate({
             rules: {
-                // event_name: 'required',
                 type_of_log: "required",
                 date: "required",
                 office_log: "required",
@@ -406,7 +410,6 @@ $(document).ready(function() {
             },
 
             messages: {
-                // event_name: 'Please insert event name',
                 type_of_log: "Please Choose Type of Log",
                 date: "Please Choose  Date",
                 office_log: "Please Choose Office Log",
@@ -797,9 +800,6 @@ $(document).ready(function() {
                         eventId: events['id']
                     }
 
-                    
-                    
-
                 });
                 
             }
@@ -1084,14 +1084,14 @@ $(document).ready(function() {
                             $("#project_id_edit").val(data.project_id);
                             $("#officeLogProjectEdit").val(data.project_id);
                             
-                            // $('#projectlocsearchedit').val(data.project_location);
+                            $('#projectlocsearchedit').val(data.project_location);
                             // projectlocsearchedit
                             $("#activity_name_edit2").val(data.activity_name);
                             $("#activity_name_edit1").val(data.activity_name);
                             $("#starttimeedit").val(data.start_time);
                             
-                            // $('#projectLocationOfficeEdit').picker('set', data.project_location);
-                            $('#projectlocsearchedit').picker('set', data.project_location);
+                            $('#projectLocationOfficeEdit').picker('set', data.project_location);
+                            // $('#projectlocsearchedit').picker('set', data.project_location);
                             // $('#projectlocsearchedit').picker('set', data.project_location);
                             // $("#projectlocsearchedit").val(data.project_location);
                             $("#exit_project").prop('checked', data.exit_project);
@@ -1524,6 +1524,8 @@ $(document).ready(function() {
 
                             }
 
+                            
+
                             $("#descE").val(data.desc);
                             $("#addeventreminderedit").val(data.reminder);
                             if (data.file_upload) {
@@ -1533,38 +1535,6 @@ $(document).ready(function() {
 
 
                         });
-
-                       
-                        // var id = $('#buttonnViewParticipant').data('id');  // kena ubah sini
-                        // var eventData = getEvents1(id);
-                        // eventData.done(function(data) {
-                        //     var attendanceEvent = getAttendance1(data.id);
-                        //     attendanceEvent.done(function(dataAttendance) {
-                        //         // Check if the DataTable is already initialized
-                        //         var table = $('#tableviewparticipant').DataTable();
-                        //         if (table && table.destroy) {
-                        //             // The DataTable is already initialized, so we need to destroy it before initializing again
-                        //             table.destroy();
-                        //         }
-                        //         // Initialize the DataTable
-                        //         $('#tableviewparticipant').DataTable({
-                        //             "paging": true,
-                        //             "columns": [
-                        //                 { "title": "No" },
-                        //                 { "title": "Participants" }
-                        //             ]
-                        //         });
-                        //         // Populate the DataTable with data
-                        //         for (let i = 0; i < dataAttendance.length; i++) {
-                        //             const attendance = dataAttendance[i];
-                        //             table.row.add([
-                        //                 i + 1,
-                        //                 attendance.employeeName
-                        //             ]);
-                        //         }
-                        //         table.draw();
-                        //     });
-                        // });
 
                         $('#editeventmodal').modal('show');
                     }
@@ -1645,10 +1615,10 @@ $(document).ready(function() {
         autoclose: true,
     }).datepicker('setDate', new Date());
      
-    $('#projectLocationOffice').picker({ search: true });
-    $('#activityOffice').picker({ search: true });
-    $('#activity_name_edit').picker({ search: true });
-    $('#projectlocsearch').picker({ search: true });
+    // $('#projectLocationOffice').picker({ search: true });
+    // $('#activityOffice').picker({ search: true });
+    // $('#activity_name_edit').picker({ search: true });
+    // $('#projectlocsearch').picker({ search: true });
     // $('#activity_names').picker({ search: true });
     $('#addneweventprojectlocsearch').picker({ search: true });
     $('#addneweventparticipant').picker({ search: true });
@@ -1984,7 +1954,7 @@ $(document).ready(function() {
         todayHighlight: true,
         autoclose: true
     });
-    $('#projectlocsearchedit').picker({ search: true });
+    // $('#projectlocsearchedit').picker({ search: true });
     $('#addneweventprojectlocsearchedit').picker({ search: true });
     $('#addneweventparticipantedit').picker({ search: true });
     $('#addneweventselectprojectedit').picker({ search: true });
@@ -2008,7 +1978,6 @@ $(document).ready(function() {
             $("#officelogedit").show();
             // $("#project_id_edit").hide();
             // $("#locationByProjectEditHide").show();
-            locationByProjectEditShow
             
         } else {
             $("#officelogedit").hide();

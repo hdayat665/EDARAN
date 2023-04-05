@@ -370,13 +370,13 @@ $('#timesheetapproval').DataTable({
     "dom": '<"row"<"col-sm-4"l><"col-sm-4 text-center"B><"col-sm-4"f>>t<"row"<"col-sm-12"ip>>',
     buttons: [
         { extend: 'excel', className: 'btn-blue', exportOptions: {
-            columns: [1,2,3,4,5]
+            columns: [2,3,4,5,6]
         }},
         { extend: 'pdf', className: 'btn-blue', exportOptions: {
-            columns: [1,2,3,4,5]
+            columns: [2,3,4,5,6]
         }},
         { extend: 'print', className: 'btn-blue', exportOptions: {
-            columns: [1,2,3,4,5]
+            columns: [2,3,4,5,6]
         }},
     ],
     

@@ -1803,13 +1803,39 @@ $(document).ready(function () {
             [5, 10, 15, 20, "All"],
         ],
     });
+    // $("#education").DataTable({
+    //     responsive: false,
+    //     lengthMenu: [
+    //         [5, 10, 15, 20, -1],
+    //         [5, 10, 15, 20, "All"],
+    //     ],
+        
+    // }); 
+
     $("#education").DataTable({
         responsive: false,
-        lengthMenu: [
-            [5, 10, 15, 20, -1],
-            [5, 10, 15, 20, "All"],
+        dom:
+            "<'row'<'col-sm-4'B><'col-sm-4 text-center'l><'col-sm-4'f>>" +
+            "<'row'<'col-sm-12'tr>>" +
+            "<'row'<'col-sm-4 col-auto'i><'col-sm-4 text-center'><'col-sm-4'p>>", // add col-auto class to the search column
+        buttons: [
+            { 
+                extend: 'pdf', 
+                className: 'btn-sm', 
+                orientation: 'landscape',
+                pageSize: 'LEGAL',
+                exportOptions: {columns:[2,3,4,5,6,7,8,9]}
+            },
+            { 
+                extend: 'csv', 
+                className: 'btn-sm' ,
+                exportOptions: {columns:[2,3,4,5,6,7,8,9]}
+            },
         ],
-    }); 
+        autoWidth: true,
+        lengthMenu: [ [5, 10, 25, -1], [5, 10, 25, "All"] ],
+        // scrollX: true // enable horizontal scrolling if necessary
+    });
 
     $("#qualificationOthers").DataTable({
         responsive: false,

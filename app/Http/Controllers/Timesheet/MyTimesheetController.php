@@ -228,29 +228,27 @@ class MyTimesheetController extends Controller
         return response()->json($result);
     }
 
-    public function viewTimesheet($id = '', $userId = '')
-    {
-        // $ss = new MyTimeSheetService;
-
-        $data['id'] = $id;
-        $data['userId'] = $userId;
-
-        return view('pages.timesheet.viewTimesheet', $data);
-    }
-
     // public function viewTimesheet($id = '', $userId = '')
     // {
-    //     // Retrieve the employee name using the provided userId
-    //     $employee = Employee::where('userId', $userId)->first();
-    //     $employeeName = $employee->name;
-    
+    //     // $ss = new MyTimeSheetService;
+
     //     $data['id'] = $id;
     //     $data['userId'] = $userId;
-    //     $data['employeeName'] = $employeeName;
-    
+        
     //     return view('pages.timesheet.viewTimesheet', $data);
     // }
-    
+
+    public function viewTimesheet($id = '', $userId = '')
+{
+    $ss = new MyTimeSheetService;
+
+    $data['id'] = $id;
+    $data['userId'] = $userId;
+    $data['employee_name'] = $ss->getemployeeNamelog($id);
+
+
+    return view('pages.timesheet.viewTimesheet', $data);
+}
 
 
     //SUMMARRY TIMESHEET
