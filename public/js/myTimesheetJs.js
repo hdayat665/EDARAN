@@ -896,7 +896,7 @@ $(document).ready(function() {
                       Swal.fire({
                         icon: 'error',
                         title: 'Error',
-                        text: 'You can only select the current date and 48 hours before.'
+                        text: 'You can only select the current date and 2 days before.'
                       });
                       return;
                     }
