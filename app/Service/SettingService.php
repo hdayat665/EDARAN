@@ -78,11 +78,16 @@ class SettingService
         $modifiedTime = date('Y-m-d h:m:s');
 
         $input = $r->input();
+        
 
-        $updateData = [
-            'modifiedBy' => $modifiedBy,
-            'modifiedTime' => $modifiedTime
-        ];
+        $updateData['roleName'] = $r['roleName'];
+        $updateData['modifiedBy'] = $modifiedBy;
+        $updateData['modifiedTime'] = $modifiedTime;
+        //pr($updateData);
+        // $updateData = [
+        //     'modifiedBy' => $modifiedBy,
+        //     'modifiedTime' => $modifiedTime
+        // ];
 
         Role::where('id', $id)->update($updateData);
 
