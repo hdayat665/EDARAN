@@ -18,7 +18,7 @@
             <tbody>
                 @if ($claims)
                     <?php $condByPass = ' $claim->id != "" && $claim->status == "active"'; ?>
-                    @if ($config->status)
+                    @if (isset($config->status))
                         <?php $condByPass = ' $claim->supervisor == "recommend"'; ?>
                     @endif
                     @foreach ($claims as $claim)

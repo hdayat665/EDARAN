@@ -14,6 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('cash_advance_detail', function (Blueprint $table) {
+            $table->string('status')->nullable()->after('purpose');
             $table->string('date_require_cash', 100)->nullable()->after('status');
             $table->string('file_upload', 255)->nullable()->after('status');
         });

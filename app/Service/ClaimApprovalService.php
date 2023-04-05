@@ -45,7 +45,7 @@ class ClaimApprovalService
 
     public function financeCheckerView()
     {
-        // find checker 
+        // find checker
         $domainList = DomainList::where([['tenant_id', Auth::user()->tenant_id], ['category_role', 'finance']])->orderBy('created_at', 'DESC')->first();
         $userId = Auth::user()->id;
         // pr($domainList);
@@ -68,7 +68,7 @@ class ClaimApprovalService
 
     public function adminCheckerView()
     {
-        // find checker 
+        // find checker
         $domainList = DomainList::where([['tenant_id', Auth::user()->tenant_id], ['category_role', 'admin']])->orderBy('created_at', 'DESC')->first();
         $userId = Auth::user()->id;
         // pr($domainList);
@@ -91,7 +91,7 @@ class ClaimApprovalService
 
     public function financeRecView()
     {
-        // find checker 
+        // find checker
         // $domainList = DomainList::where([['tenant_id', Auth::user()->tenant_id], ['category_role', 'finance']])->orderBy('created_at', 'DESC')->first();
         // $userId = Auth::user()->id;
         // // pr($domainList);
@@ -321,7 +321,7 @@ class ClaimApprovalService
         //     ->get();
 
 
-        // pr($data['travel']); 
+        // pr($data['travel']);
 
         $data['personal'] = PersonalClaim::select(
             'personal_claim.*',
@@ -503,7 +503,7 @@ class ClaimApprovalService
 
     public function cashAdvanceFcheckerView()
     {
-        // find checker 
+        // find checker
         $domainList = DomainList::where([['tenant_id', Auth::user()->tenant_id], ['category_role', 'cash_advance']])->orderBy('created_at', 'DESC')->first();
         $userId = Auth::user()->id;
 
@@ -526,7 +526,7 @@ class ClaimApprovalService
 
     public function cashAdvanceFcheckerDetail($id = '')
     {
-        // find checker 
+        // find checker
         $domainList = DomainList::where([['tenant_id', Auth::user()->tenant_id], ['category_role', 'cash_advance']])->orderBy('created_at', 'DESC')->first();
         $userId = Auth::user()->id;
 
@@ -669,4 +669,12 @@ class ClaimApprovalService
 
         return $data;
     }
+
+    public function getApprovalConfig($type = '', $type_claim = '')
+    {
+        $data = ApprovalConfig::where([['type_claim', $type_claim], ['tenant_id', Auth::user()->tenant_id]])->get();
+
+        return $data;
+    }
+
 }
