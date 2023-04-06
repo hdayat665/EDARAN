@@ -6,6 +6,33 @@ $("document").ready(function () {
         lengthMenu: [5, 10],
         responsive: false,
         info: false,
+        initComplete: function (settings, json) {  
+            $("#generalclaim").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");            
+        },
+    });
+
+    $("#claimtable").DataTable({
+        searching: false,
+        lengthChange: false,
+        lengthMenu: [5, 10],
+        responsive: false,
+        info: false,
+        dom: '<"top">rt<"bottom"p><"clear">',
+        initComplete: function (settings, json) {  
+            $("#claimtable").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");            
+        },
+    });
+
+    $("#cashadvancetable").DataTable({
+        searching: false,
+        lengthChange: false,
+        lengthMenu: [5, 10],
+        responsive: false,
+        info: false,
+        dom: '<"top">rt<"bottom"p><"clear">',
+        initComplete: function (settings, json) {  
+            $("#cashadvancetable").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");            
+        },
     });
 
     $(document).on('click', '[data-bs-target="#exampleModal"]', function (event) {
@@ -116,57 +143,7 @@ $("document").ready(function () {
         });
     });
 
-    function initializeDataTable(tableSelector, statusSelector) {
-        const table = $(tableSelector).DataTable({
-            searching: true,
-            lengthChange: false,
-            scrollX: true,
-            // scrollY: 200,
-            lengthMenu: [5, 10],
-            responsive: false,
-            info: false,
-            dom: '<"top">rt<"bottom"p><"clear">',
-        });
     
-        $(tableSelector + '_filter.dataTables_filter').append($(statusSelector));
-    
-        let categoryIndex = 0;
-        $(tableSelector + ' th').each((i, th) => {
-            if ($(th).html() === 'Status') {
-                categoryIndex = i;
-                return false;
-            }
-        });
-    
-        $.fn.dataTable.ext.search.push((settings, data, dataIndex) => {
-            const selectedItem = $(statusSelector).val();
-            const category = data[categoryIndex];
-            if (!selectedItem) {
-                return true;
-            } else if (category === selectedItem) {
-                return true;
-            }
-            return false;
-        });
-    
-        $(statusSelector).change(() => table.draw());
-        table.draw();
-    }
-    
-    initializeDataTable('#claimtable', '#Statusclaim');
-    initializeDataTable('#cashadvancetable', '#Statuscash');    
-
-    //   $( "#cashnav" ).on( "click", function () {
-    // 	setTimeout(function () {
-    //     general.columns.adjust().draw();
-    // 	}, 200);
-    //   });
-
-    //   $( "#claimnav" ).on( "click", function () {
-    // 	setTimeout(function () {
-    //     general.columns.adjust().draw();
-    // 	}, 200);
-    //   });
 
     $('a[data-toggle="tab"]').on("shown.bs.tab", function (e) {
         $($.fn.dataTable.tables(true)).DataTable().columns.adjust();

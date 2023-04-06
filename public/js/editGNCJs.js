@@ -8,7 +8,11 @@ $(document).ready(function () {
         ],
         responsive: false,
         info: false,
-    });
+        initComplete: function (settings, json) {  
+            $("#applyclaimtable").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");            
+        },
+    });
+
     $(document).on("change", "#claimcategory", function () {
         id = $(this).val();
         $("#labelcategory").show();

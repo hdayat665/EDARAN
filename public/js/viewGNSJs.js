@@ -12,7 +12,10 @@ $(document).ready(function () {
             [5, 10, 15, 20, -1],
             [5, 10, 15, 20, "All"],
         ],
-    });
+        initComplete: function (settings, json) {  
+            $("#traveltable").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");            
+        },
+    });
     $(document).on("click", "#btn-view-claim", function () {
         $("#modal-view-claim").modal("show");
     });

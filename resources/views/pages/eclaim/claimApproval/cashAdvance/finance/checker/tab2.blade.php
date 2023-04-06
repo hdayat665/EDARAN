@@ -1,6 +1,6 @@
 <div class="tab-pane fade show" id="default-tab-2">
     <!-- {{-- claim approval --}} -->
-    <table id="tableprocess" class="table table-striped table-bordered align-middle">
+    <table id="inprocesstable" class="table table-striped table-bordered align-middle">
         <thead>
             <tr>
                 <th data-orderable="false">Action</th>
