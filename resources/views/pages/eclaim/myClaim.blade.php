@@ -1,6 +1,6 @@
 @extends('layouts.dashboardTenant')
 @section('content')
-<style>
+<!-- <style>
    #claimtable {
     width: 100% !important;
     }
@@ -11,7 +11,7 @@
     overflow: auto;
     max-height: 500px; 
     }
-</style>
+</style> -->
     <div id="content" class="app-content">
         <h1 class="page-header">eClaim <small>| My Claim </small></h1>
         <div class="panel panel" id="myClaimJs">

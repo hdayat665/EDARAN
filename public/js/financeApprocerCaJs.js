@@ -3,19 +3,46 @@ $(document).ready(function () {
         // "responsive": true,
         bLengthChange: false,
         bFilter: false,
-    });
+        initComplete: function (settings, json) {  
+            $("#tableactive").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");            
+        },
+    });
 
-    $("#buckettable").dataTable({
+    $("#tableprocess").dataTable({
         // "responsive": true,
         bLengthChange: false,
         bFilter: false,
-    });
+        initComplete: function (settings, json) {  
+            $("#tableprocess").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");            
+        },
+    });
 
-    $("#rejectedtable").dataTable({
+    $("#tablepaid").dataTable({
         // "responsive": true,
         bLengthChange: false,
         bFilter: false,
-    });
+        initComplete: function (settings, json) {  
+            $("#tablepaid").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");            
+        },
+    });
+
+    $("#tablerejected").dataTable({
+        // "responsive": true,
+        bLengthChange: false,
+        bFilter: false,
+        initComplete: function (settings, json) {  
+            $("#tablerejected").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");            
+          },
+        });
+
+    $("#tableclosed").dataTable({
+        // "responsive": true,
+        bLengthChange: false,
+        bFilter: false,
+        initComplete: function (settings, json) {  
+            $("#tableclosed").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");            
+          },
+        });
 
     $("#filter").click(function () {
         $("#filteronoff").toggle();

@@ -17,12 +17,15 @@ $(document).ready(function () {
                 columns: [2,3,4,5,6,7]
             }},
         ],
+        initComplete: function (settings, json) {  
+            $("#tableactive").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");            
+        },
         columnDefs: [
                   { orderable: false, targets: [0] }
                ]
     });
 
-    $('#buckettable').DataTable({
+    $('#inprocesstable').DataTable({
         "searching": true,
         "lengthChange": true,
         "paging": true,
@@ -39,6 +42,134 @@ $(document).ready(function () {
                 columns: [2,3,4,5,6,7]
             }},
         ],
+        initComplete: function (settings, json) {  
+            $("#inprocesstable").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");            
+        },
+        columnDefs: [
+                  { orderable: false, targets: [0] }
+               ]
+    });
+
+    $('#tablepaid').DataTable({
+        "searching": true,
+        "lengthChange": true,
+        "paging": true,
+        "lengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
+        "dom": '<"row"<"col-sm-4"l><"col-sm-4 text-center"B><"col-sm-4"f>>t<"row"<"col-sm-12"ip>>',
+        "buttons": [
+            { extend: 'excel', className: 'btn-blue', exportOptions: {
+                columns: [2,3,4,5,6,7]
+            }},
+            { extend: 'pdf', className: 'btn-blue',  exportOptions: {
+                columns: [2,3,4,5,6,7]
+            }},
+            { extend: 'print', className: 'btn-blue',  exportOptions: {
+                columns: [2,3,4,5,6,7]
+            }},
+        ],
+        initComplete: function (settings, json) {  
+            $("#tablepaid").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");            
+        },
+        columnDefs: [
+                  { orderable: false, targets: [0] }
+               ]
+    });
+
+    $('#tablerejected').DataTable({
+        "searching": true,
+        "lengthChange": true,
+        "paging": true,
+        "lengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
+        "dom": '<"row"<"col-sm-4"l><"col-sm-4 text-center"B><"col-sm-4"f>>t<"row"<"col-sm-12"ip>>',
+        "buttons": [
+            { extend: 'excel', className: 'btn-blue', exportOptions: {
+                columns: [2,3,4,5,6,7]
+            }},
+            { extend: 'pdf', className: 'btn-blue',  exportOptions: {
+                columns: [2,3,4,5,6,7]
+            }},
+            { extend: 'print', className: 'btn-blue',  exportOptions: {
+                columns: [2,3,4,5,6,7]
+            }},
+        ],
+        initComplete: function (settings, json) {  
+            $("#tablerejected").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");            
+        },
+        columnDefs: [
+                  { orderable: false, targets: [0] }
+               ]
+    });
+
+    $('#tableclosed').DataTable({
+        "searching": true,
+        "lengthChange": true,
+        "paging": true,
+        "lengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
+        "dom": '<"row"<"col-sm-4"l><"col-sm-4 text-center"B><"col-sm-4"f>>t<"row"<"col-sm-12"ip>>',
+        "buttons": [
+            { extend: 'excel', className: 'btn-blue', exportOptions: {
+                columns: [2,3,4,5,6,7]
+            }},
+            { extend: 'pdf', className: 'btn-blue',  exportOptions: {
+                columns: [2,3,4,5,6,7]
+            }},
+            { extend: 'print', className: 'btn-blue',  exportOptions: {
+                columns: [2,3,4,5,6,7]
+            }},
+        ],
+        initComplete: function (settings, json) {  
+            $("#tableclosed").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");            
+        },
+        columnDefs: [
+                  { orderable: false, targets: [0] }
+               ]
+    });
+
+    $('#tableprocess').DataTable({
+        "searching": true,
+        "lengthChange": true,
+        "paging": true,
+        "lengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
+        "dom": '<"row"<"col-sm-4"l><"col-sm-4 text-center"B><"col-sm-4"f>>t<"row"<"col-sm-12"ip>>',
+        "buttons": [
+            { extend: 'excel', className: 'btn-blue', exportOptions: {
+                columns: [2,3,4,5,6,7]
+            }},
+            { extend: 'pdf', className: 'btn-blue',  exportOptions: {
+                columns: [2,3,4,5,6,7]
+            }},
+            { extend: 'print', className: 'btn-blue',  exportOptions: {
+                columns: [2,3,4,5,6,7]
+            }},
+        ],
+        initComplete: function (settings, json) {  
+            $("#tableprocess").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");            
+        },
+        columnDefs: [
+                  { orderable: false, targets: [0] }
+               ]
+    });
+
+    $('#tablepayment').DataTable({
+        "searching": true,
+        "lengthChange": true,
+        "paging": true,
+        "lengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
+        "dom": '<"row"<"col-sm-4"l><"col-sm-4 text-center"B><"col-sm-4"f>>t<"row"<"col-sm-12"ip>>',
+        "buttons": [
+            { extend: 'excel', className: 'btn-blue', exportOptions: {
+                columns: [2,3,4,5,6,7]
+            }},
+            { extend: 'pdf', className: 'btn-blue',  exportOptions: {
+                columns: [2,3,4,5,6,7]
+            }},
+            { extend: 'print', className: 'btn-blue',  exportOptions: {
+                columns: [2,3,4,5,6,7]
+            }},
+        ],
+        initComplete: function (settings, json) {  
+            $("#tablepayment").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");            
+        },
         columnDefs: [
                   { orderable: false, targets: [0] }
                ]

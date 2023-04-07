@@ -2,48 +2,55 @@ $(document).ready(function () {
     $("#activetable").dataTable({
         // "responsive": true,
         bLengthChange: false,
-        scrollX:true,
         bFilter: false,
-    });
+        initComplete: function (settings, json) {  
+            $("#activetable").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");            
+        },
+    });
 
     $("#checkedtable").dataTable({
         // "responsive": true,
         bLengthChange: false,
-        scrollX:true,
         bFilter: false,
-    });
+        initComplete: function (settings, json) {  
+            $("#checkedtable").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");            
+        },
+    });
 
     $("#pvtable").dataTable({
         // "responsive": true,
         bLengthChange: false,
-        scrollX:true,
         bFilter: false,
     });
 
     $("#paidtable").dataTable({
         // "responsive": true,
         bLengthChange: false,
-        scrollX:true,
         bFilter: false,
     });
 
     $("#amendtable").dataTable({
         // "responsive": true,
         bLengthChange: false,
-        scrollX:true,
         bFilter: false,
-    });
+        initComplete: function (settings, json) {  
+            $("#amendtable").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");            
+        },
+    });
+
 
     $("#rejectedtable").dataTable({
         // "responsive": true,
         bLengthChange: false,
-        scrollX:true,
         bFilter: false,
-    });
+        initComplete: function (settings, json) {  
+            $("#rejectedtable").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");            
+        },
+    });
+
     $("#paymenttable").dataTable({
         // "responsive": true,
         bLengthChange: false,
-        scrollX:true,
         bFilter: false,
     });
 

@@ -34,6 +34,43 @@ $(document).ready(function () {
         bFilter: false,
     });
 
+
+    $("#active").dataTable({ 
+        // "responsive": true,
+        bLengthChange: false,
+        bFilter: false,
+        initComplete: function (settings, json) {  
+            $("#active").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");            
+        },
+    });
+
+    $("#approved").dataTable({ 
+        // "responsive": true,
+        bLengthChange: false,
+        bFilter: false,
+        initComplete: function (settings, json) {  
+            $("#approved").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");            
+          },
+        });
+
+    $("#rejected").dataTable({ 
+        // "responsive": true,
+        bLengthChange: false,
+        bFilter: false,
+        initComplete: function (settings, json) {  
+            $("#rejected").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");            
+          },
+        });
+
+    $("#closed").dataTable({ 
+        // "responsive": true,
+        bLengthChange: false,
+        bFilter: false,
+        initComplete: function (settings, json) {  
+            $("#closed").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");            
+          },
+        });
+
     $("#filter").click(function () {
         $("#filteronoff").toggle();
     });
