@@ -1241,6 +1241,26 @@ if (!function_exists('project')) {
     }
 }
 
+if (!function_exists('projectactive')) {
+    function projectactive($user_id = '')
+    {
+        $cond[1] = ['tenant_id', Auth::user()->tenant_id];
+
+        if ($user_id) {
+            $cond[2] = ['user_id', '=', $user_id];
+        }
+        $data = Project::where($cond)
+        ->where('status', '!=', 'closed')
+        ->get();
+
+        if (!$data) {
+            $data = [];
+        }
+
+        return $data;
+    }
+}
+
 if (!function_exists('project_member')) {
     function project_member($user_id = '')
     {
