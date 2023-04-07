@@ -36,8 +36,8 @@
                     <div class="mb-3" id="addtypeoflogprojectedit" style="display:none">
                         <label class="form-label">Project Name*</label>
                         <select class="form-select" id="project" name="project_id" aria-label="Default select example">
-                            <?php $projects = project() ?>
-                            <option class="form-label" value="">Select Project</option>
+                            <?php $projects = projectactive() ?>
+                            <option class="form-label" value="">PLEASE CHOOSE</option>
                             @foreach ($projects as $project)
                             <option value="{{$project->id}}">{{$project->project_name}}</option>
                             @endforeach
