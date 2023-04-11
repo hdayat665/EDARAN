@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="row bg-white " id="tenantLogin" style="min-height:98vh ;">
-    <div class="col-sm-6" style="display: flex; justify-content: center; align-items: center; height: 100vh; background-image: url(/assets/img/orbit/bh12.png);background-repeat: no-repeat; background-size: cover;">
+    <div class="col-sm-6" style="display: flex; justify-content: center; align-items: center; height: 100vh; background-image: url(/assets/img/orbit/bh13.png);background-repeat: no-repeat; background-size: cover;">
         <div class="mx-auto" style="width: 60rem;">
         <div class="text-center">
                 <img src="/assets/img/orbit/orbithrm-logo1.png"  width="250rem" alt="Orbit" class="img-fluid">
