@@ -8,11 +8,13 @@
         </div>
         <div class="modal-body">
             <form id="othersModalEdit">
+              <input type="hidden" id="idOthers" name="id" >
+
            <div class="row p-2">
                 <div class="form-group row">
                     <label for="staticEmail" class="col-sm-4 col-form-label">Date</label>
                     <div class="col-sm-8">
-                        <input type="text" class="form-control" id="datepicker-othersu" placeholder="YYYY/MM/DD" name="othersDate1" >
+                        <input type="date" class="form-control" id="othersDate1" placeholder="YYYY/MM/DD" name="otherDate" value="{{ date_format(date_create($other->otherDate ?? ''), 'Y-m-d') }}" >
                     </div>
                 </div>
            </div>
@@ -20,7 +22,7 @@
                 <div class="form-group row">
                     <label for="staticEmail" class="col-sm-4 col-form-label">Professional Qualification Details</label>
                     <div class="col-sm-8">
-                        <input type="text" class="form-control" placeholder="PROFESSIONAL QUALIFICATION DETAILS" id="othersPQDetails" name="othersPQDetails1">
+                        <input type="text" class="form-control" placeholder="PROFESSIONAL QUALIFICATION DETAILS" id="othersPQDetails1" name="otherPQDetails">
                     </div>
                 </div>
             </div>
@@ -28,7 +30,7 @@
                 <div class="form-group row">
                     <label for="staticEmail" class="col-sm-4 col-form-label">Attachments</label>
                     <div class="col-sm-8">
-                        <input type="file" class="form-control-file" id="othersDoc" name="othersDoc1">
+                        <input type="file" class="form-control-file" id="file" name="file">
                     </div>
                 </div>
             </div>

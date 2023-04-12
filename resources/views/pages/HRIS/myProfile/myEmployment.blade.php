@@ -179,8 +179,7 @@
 
                                         <div class="card p-3 bg-white">
                                             <p class="fw-bold">{{ $jobHistory->employmentDetail ?? '' }}</p>
-                                            <p class="text-muted mb-2 fw-bold">{{ $jobHistory->effectiveDate ?? '' }}
-                                            </p>
+                                            <p class="text-muted mb-2 fw-bold">{{ $jobHistory->effectiveDate ?? '' }}</p>
                                             <p class="text-muted">
                                                 Effective Date: {{ $jobHistory->effectiveDate ?? '' }}
                                             </p>

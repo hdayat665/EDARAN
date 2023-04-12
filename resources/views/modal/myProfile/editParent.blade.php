@@ -2,7 +2,7 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="add-parent">Update Family</h5>
+                <h5 class="modal-title" id="add-parent">Update Familyyyy</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -34,7 +34,7 @@
                             <div class="row">
                                 <div class="col-sm-6 ">
                                     <div class="form-check form-switch align-right">
-                                        <input class="form-check-input " value="" type="checkbox" name=""  id="">
+                                        <input class="form-check-input partCheck9" value="" type="checkbox" name=""  id="">
                                         <label class="form-check-label" for="citizen">
                                             Non-Citizen
                                         </label>
@@ -66,13 +66,13 @@
                                 <div class="col-sm-12">
                                     <label for="passport" class="form-label">Passport Number</label>
                                   
-                                    <input type="text" id="passportparentedit" name="passport"  class="form-control" aria-describedby="passport" placeholder="PASSPORT NUMBER">
+                                    <input type="text" id="passportparentedit" name="passportparent"  class="form-control" aria-describedby="passport" placeholder="PASSPORT NUMBER">
                                 </div>
                             </div>
                         </div>
                           <div class="col-sm-3">
                                     <label for="expirydate" class="form-label">Expiry Date</label>
-                                    <input type="text" id="expiryDateChild" name="expiryDate"  placeholder="YYYY-MM-DD" class="form-control" aria-describedby="expirydate" style="pointer-events: none;" readonly>
+                                    <input type="text" id="expiryDateChild" name="expiryDateParent"  placeholder="YYYY-MM-DD" class="form-control" aria-describedby="expirydate" readonly>
                                   
                                 </div>
                         <div class="col-sm-3">
@@ -95,7 +95,7 @@
                     <div class="row p-2">
                         <div class="col-sm-3">
                             <label for="dob" class="form-label">Date Of Birth*</label>
-                            <input type="text" id="DOBP1" name="DOB" class="form-control" aria-describedby="dob" placeholder="YYYY/MM/DD">
+                            <input type="text" id="DOBP1" name="dob7" class="form-control" readonly style="pointer-events, none"  aria-describedby="dob" placeholder="YYYY/MM/DD">
                         </div>
                         <div class="col-sm-3">
                             <label for="dob" class="form-label" >Age</label>
@@ -115,7 +115,22 @@
                         </div>
                     </div>
                     {{-- new --}}
-                     <div class="row p-2">
+                    <div class="row p-2">
+                        <div class="col-sm-6">
+                            <label for="passport" class="form-label">Phone Number</label>
+                            <input type="text" id="contactNoP1" name="contactNo" class="form-control" aria-describedby="passport" placeholder="00000000000">
+                        </div>
+                        <div class="col-sm-6">
+                            <label for="gender" class="form-label">Gender*</label>
+                            <select class="form-select" name="gender" id="genderP1">
+                                <option value="0" label=" PLEASE CHOOSE"></option>
+                                @foreach ($gender as $key => $status)
+                                <option value="{{$key}}">{{$status}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row p-2">
                         <div class="col-sm-6">
                             <div class="row">
                                 <div class="col-sm-6 ">
@@ -143,21 +158,6 @@
                                     @endif
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="row p-2">
-                        <div class="col-sm-6">
-                            <label for="passport" class="form-label">Phone Number</label>
-                            <input type="text" id="contactNoP1" name="contactNo" class="form-control" aria-describedby="passport" placeholder="00000000000">
-                        </div>
-                        <div class="col-sm-6">
-                            <label for="gender" class="form-label">Gender*</label>
-                            <select class="form-select" name="gender" id="genderP1">
-                                <option value="0" label=" PLEASE CHOOSE"></option>
-                                @foreach ($gender as $key => $status)
-                                <option value="{{$key}}">{{$status}}</option>
-                                @endforeach
-                            </select>
                         </div>
                     </div>
                     <br>

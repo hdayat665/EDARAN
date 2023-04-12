@@ -66,7 +66,7 @@
                             <div class="row">
                                 <div class="col-sm-12">
                                     <label for="passport" class="form-label">Passport Number</label>
-                                    <input type="text" id="passportChild" name="passport"  class="form-control" aria-describedby="passport" placeholder="PASSPORT NUMBER">
+                                    <input type="text" id="passportChild" name="passport"  class="form-control" aria-describedby="passport" readonly placeholder="PASSPORT NUMBER">
                                 </div>
                                 {{-- <div class="col-sm-6">
                                     <label for="expirydate" class="form-label">Expiry Date*</label>
@@ -142,7 +142,7 @@
                                 </div>
                                 <div class="col-sm-6">
                                     <label for="lastname" class="form-label" >OKU Card Number*</label>
-                                    <input type="text" id="okucard3" name="okuNo"  value="" class="form-control" aria-describedby="" placeholder="OKU CARD NUMBER" readonly>
+                                    <input type="text" id="okucard3" name="okuNo" disabled  value="" class="form-control" aria-describedby="" placeholder="OKU CARD NUMBER" readonly>
                                 </div>
                             </div>
                         </div>
@@ -150,7 +150,7 @@
                             <div class="row">
                                 <div class="col-sm-12">
                                     <label for="dob" class="form-label" >OKU Attachment*</label>
-                                    <input type="file" id="okuattach3" name="okuFile" class="form-control" style="pointer-events: none" aria-describedby="">
+                                    <input type="file" id="okuattach3" readonly disabled name="okuFile" class="form-control" style="pointer-events: none" aria-describedby="">
                                 </div>
                             </div>
                         </div>

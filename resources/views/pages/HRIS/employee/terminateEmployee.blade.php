@@ -2,10 +2,10 @@
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Terminate Employment</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Exit Employment</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body">
+            <div class="modal-body" >
                 <form id="submitForm">
                     <div class="mb-5">
                         <label for="recipient-name" class="col-form-label">Employee ID</label>
@@ -20,9 +20,9 @@
 
                     </div>
                     <div class="mb-5">
-                        <label for="recipient-name" class="col-form-label">Terminate Date*</label>
+                        <label for="recipient-name" class="col-form-label">Exit Date*</label>
                         <input type="text" name="effectiveFrom" class="form-control" id="datepicker-terminatedate" placeholder="YYYY/MM/DD" />
-                        <label for="recipient-name" class="col-form-label">Terminate Type*</label>
+                        <label for="recipient-name" class="col-form-label">Exit Type*</label>
                         <select class="form-select" name="employmentDetail">
                             <option value="0" label="PLEASE CHOOSE" selected="selected">PLEASE CHOOSE </option>
                             <option value="1" label="Deceased">Deceased</option>
@@ -34,10 +34,10 @@
                             <option value="2" label="Retirement">Retirement</option>
                             <option value="2" label="Others">Others</option>
                         </select>
-                        <label for="recipient-name" class="col-form-label">Remarks</label>
-                        <textarea class="form-control" name="remarks" rows="3"></textarea>
+                        <label for="recipient-name" class="col-form-label">Remarks*</label>
+                        <textarea class="form-control" name="remarks" placeholder="Remarks" rows="3"></textarea>
 
-                        <label for="recipient-name" class="col-form-label">Attachments</label><br>
+                        <label for="recipient-name" class="col-form-label">Attachments*</label><br>
                         <input type="file" name="file[]" multiple>
                         {{-- <form id="fileupload" action="https://jquery-file-upload.appspot.com/" method="POST" enctype="multipart/form-data">
                             <!-- BEGIN panel -->
@@ -113,7 +113,7 @@
                     </div>
                 </form>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                     <button type="button" id="submit" class="btn btn-primary">Submit</button>
                 </div>
             </div>

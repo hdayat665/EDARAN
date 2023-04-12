@@ -9,7 +9,7 @@
             </p>
          </div>
         <div class="card-body">
-            <button type="button"  data-bs-toggle="modal" id="addVehicleView"  class="btn btn-white mt-3 mb-3"><i class="fa fa-plus"></i> Add Vehicle</button>
+            <button type="button"  data-bs-toggle="modal" id="addVehicleView"  class="btn btn-white mt-3 mb-3"><i class="fa fa-plus"></i> New Vehicle</button>
             <table id="data-table-default" style="width: 100%" class="table table-striped align-middle">
                 <thead>
                         <th width="1%" data-orderable="false">Action</th>
