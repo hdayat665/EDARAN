@@ -138,7 +138,7 @@
                 <div class="menu">
                     <!-- Sidenav Content Orbit -->
                     <div class="menu-item has-sub mt-3">
-                        <a href="/dashboardTenant" class="menu-link active">
+                        <a href="/dashboardTenant" class="menu-link">
                             <div class="menu-icon">
                                 <i class="fa fa-clipboard-list text-gray"></i>
                             </div>
@@ -1115,67 +1115,22 @@
     });
 </script>
 <script>
-    // $(function() {
-    //     $('.menu-link').each(function() {
-    //         if ($(this).prop('href') === window.location.href ) {
-    //             $(this).parents().addClass('active');
-    //             $(this).css({
-    //                 "background": "linear-gradient(to left,#ececec 0, #ececec 66%, #ececec 100%)",
-    //                 "border-radius": "50px",
-    //             });
-    //         }
-    //     })
-    // });    $(function() {
-    // Get current URL path and assign 'active' class to corresponding menu item
-    var pathname = window.location.pathname;
+    $(function() {
+  // Get current URL path and assign 'active' class to corresponding menu item
+  var pathname = window.location.pathname.trim();
+  if (pathname !== '') {
     $('.menu-link').each(function() {
-        if ($(this).attr('href') === pathname) {
-            $(this).parents('.menu-item').addClass('active');
-            $(this).css({
-                "background": "linear-gradient(to left,#ececec 0, #ececec 66%, #ececec 100%)",
-                "border-radius": "50px",
-            });
-        }
-    }); // Expand submenu of the currently active menu item
-    var activeMenuItem = $('.menu-item.active');
-    if (activeMenuItem.length > 0) {
-        activeMenuItem.find('.menu-submenu').addClass('show');
-    } // Add click event listener to menu items
-    $('.menu-link').on('click', function() {
-    // Remove 'active' class from all menu items
-    $('.menu-item').removeClass('active');
-    $('.menu-link').css({
-        "background": "",
-        "border-radius": "",
+      if ($(this).attr('href').trim() === pathname) {
+        $(this).parents('.menu-item').addClass('active');
+        $(this).addClass('active');
+        $(this).css({
+            "background": "linear-gradient(to left,#ececec 0, #ececec 66%, #ececec 100%)",
+            "border-radius": "50px",
+        });
+      }
     });
-    // Add 'active' class to clicked menu item
-    $(this).parents('.menu-item').addClass('active');
-    $(this).css({
-        "background": "linear-gradient(to left,#ececec 0, #ececec 66%, #ececec 100%)",
-        "border-radius": "50px",
-    }); // Expand submenu of clicked menu item
-    $('.menu-submenu').removeClass('show');
-    var subMenu = $(this).siblings('.menu-submenu');
-    if (subMenu.length > 0) {
-        subMenu.addClass('show');
-        return false;
-    }
-    });
-    }); // $(function() {
-    //     $('.menu-link').each(function() {
-    //         if ($(this).prop('href') === window.location.href ) {
-    //             $(this).parents().addClass('active');
-    //             $(this).css({
-    //                 "background": "linear-gradient(to left,#ececec 0, #ececec 66%, #ececec 100%)",
-    //                 "border-radius": "50px",
-    //             });
-    //             // add active class to the submenu
-    //             $(this).parent().siblings('.menu-submenu').addClass('active');
-    //         }
-    //     });
-    //     // // expand the active submenu on page load
-    //     // $('.menu-submenu.active').css('display', 'block');
-    // });
+  }
+});
 </script>
 <script src="/assets/js/require.js" data-main="controller"></script>
 <script>
