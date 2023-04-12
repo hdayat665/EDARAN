@@ -7,6 +7,7 @@ use App\Models\ClaimCategory;
 use App\Models\ClaimCategoryContent;
 use App\Models\ClaimDateSetting;
 use App\Models\AppealMtc;
+use App\Models\ApprovalConfig;
 use App\Models\Company;
 use App\Models\Customer;
 use App\Models\Department;
@@ -1250,8 +1251,8 @@ if (!function_exists('projectactive')) {
             $cond[2] = ['user_id', '=', $user_id];
         }
         $data = Project::where($cond)
-        ->where('status', '!=', 'closed')
-        ->get();
+            ->where('status', '!=', 'closed')
+            ->get();
 
         if (!$data) {
             $data = [];
@@ -2237,6 +2238,20 @@ if (!function_exists('getEmployeeNamebyDepartments')) {
     function getEmployeeNamebyDepartments($id = '')
     {
         $data = Employee::where([['department', $id]])->get();
+
+        if (!$data) {
+            $data = [];
+        }
+
+        return $data;
+    }
+}
+
+if (!function_exists('getApprovalConfigClaim')) {
+    function getApprovalConfigClaim($role = '')
+    {
+
+        $data = ApprovalConfig::where('role', $role)->first();
 
         if (!$data) {
             $data = [];

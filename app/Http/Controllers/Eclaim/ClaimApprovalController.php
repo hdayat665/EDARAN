@@ -192,6 +192,7 @@ class ClaimApprovalController extends Controller
         $mcs = new ClaimApprovalService;
 
         $result = $mcs->adminCheckerView();
+        $data['config'] = $mcs->getApprovalConfig(3, 'monthly');
         $data['check'] = $result['check'];
         $data['claims'] = $result['general'];
 
