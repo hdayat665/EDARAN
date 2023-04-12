@@ -17,11 +17,20 @@
             </thead>
             <tbody>
                 @if ($claims)
+
+                    {{-- check if config approval status enable or disable for role before approver  --}}
+                    @php
+                        $configData = getApprovalConfigClaim('SUPERVISOR - RECOMMENDER');
+                        $condByPass = ' $claim->id != "" && $claim->status == "active"';
+                        if ($configData->status) {
+                            $condByPass = ' $claim->supervisor == "recommend"';
+                        }
+                    @endphp
+
                     @foreach ($claims as $claim)
                         {{-- check if config approval status enable or disable if enable supervisor can approve else supervisor cannot approve means byPass  --}}
                         @if (isset($config->status))
-                            {{-- eval("return $condByPass;") --}}
-                            @if ($claim->hod == '' && $claim->id != '' && $claim->status == 'active')
+                            @if ($claim->hod == '' && eval("return $condByPass;"))
                                 <tr>
                                     <td width="1%" class="fw-bold text-dark" style="text-align: center"><input class="form-check-input" value="{{ $claim->id }}" name="id[]" type="checkbox"
                                             id="checkbox1" /></td>
