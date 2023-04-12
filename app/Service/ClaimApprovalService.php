@@ -672,9 +672,14 @@ class ClaimApprovalService
 
     public function getApprovalConfig($type = '', $type_claim = '')
     {
-        $data = ApprovalConfig::where([['type_claim', $type_claim], ['tenant_id', Auth::user()->tenant_id]])->get();
+        if ($type == '1') {
+            $role = 'SUPERVISOR - RECOMMENDER';
+        } else {
+            $role = 'HOD / CEO - APPROVER';
+        }
+
+        $data = ApprovalConfig::where([['type_claim', $type_claim], ['tenant_id', Auth::user()->tenant_id], ['role', $role]])->first();
 
         return $data;
     }
-
 }
