@@ -153,6 +153,7 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('/addChildren', 'addChildren');
 
             Route::post('/addEducation', 'addEducation');
+            Route::post('/addEducation2', 'addEducation2');
             Route::post('/updateEducation', 'updateEducation');
             Route::get('/getEducation/{id}', 'getEducation');
             Route::get('/getEducationById/{id}', 'getEducationById');
@@ -225,6 +226,8 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('/updateclaimhierarchy/{id}', 'updateclaimhierarchy');
             Route::post('/updatecashhierarchy/{id}', 'updatecashhierarchy');
             Route::post('/updateeleavehierarchy/{id}', 'updateeleavehierarchy');
+            
+            Route::get('/getEmployeeAddressforCompanion/{id}', 'getEmployeeAddressforCompanion');
 
             Route::post('/addEmployeeEducation', 'addEmployeeEducation');
             Route::post('/updateEmployeeEducation', 'updateEmployeeEducation');

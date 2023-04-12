@@ -6,7 +6,7 @@
         <table id="employeeAddress" class="table table-striped table-bordered align-middle">
             <thead>
                 <tr>
-                    <th class="text-nowrap">No</th>
+                    <th class="text-nowrap">No1</th>
                     <th class="text-nowrap">Action</th>
                     <th class="text-nowrap">Address</th>
                     <th class="text-nowrap">Address Type</th>

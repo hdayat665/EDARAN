@@ -19,7 +19,7 @@
                     </div>
                     <div class="row p-2">
                         <label for="lastname" class="form-label">Plate Number*</label>
-                        <input type="text" id="plateNo" name="plate_no" class="form-control" aria-describedby="lastname" style="text-transform:uppercase">
+                        <input type="text" id="plateNo" name="plate_no" class="form-control" aria-describedby="lastname" placeholder="Plate Number">
                         <input type="hidden" id="idV" name="id" class="form-control" aria-describedby="lastname">
                     </div>
                 </form>

@@ -19,7 +19,7 @@
                     </div>
                     <div class="row p-2">
                         <label for="lastname" class="form-label">Plate Number*</label>
-                        <input type="text" id="lastname" name="plate_no" class="form-control" aria-describedby="lastname">
+                        <input type="text" id="lastname" name="plate_no" class="form-control" aria-describedby="lastname" placeholder="Plate Number">
                         <input type="hidden" name="user_id" value="{{$user_id}}">
                     </div>
                 </form>

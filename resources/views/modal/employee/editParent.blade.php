@@ -110,7 +110,7 @@
                     </div>
                     <div class="row p-2">
                         <div class="col-sm-6">
-                            <label for="passport" class="form-label">Contact Number</label>
+                            <label for="passport" class="form-label">Phone Number</label>
                             <input type="text" id="contactNoP1" name="contactNo" class="form-control" aria-describedby="passport" placeholder="00000000000">
                         </div>
                         <div class="col-sm-6">
@@ -129,7 +129,7 @@
                             <div class="row">
                                 <div class="col-sm-6 ">
                                     <div class="form-check form-switch align-right">
-                                        <input class="form-check-input  " value="" type="checkbox" name=""  id="">
+                                        <input class="form-check-input okuCheck6 " value="" type="checkbox" name=""  id="">
                                         <label class="form-check-label" for="citizen" >
                                             OKU?
                                         </label>

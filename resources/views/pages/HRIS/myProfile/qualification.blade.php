@@ -18,7 +18,7 @@
     <div class="tab-content panel m-0 rounded-0 p-3">
         <div class="tab-pane fade active show" id="quali-tab-1">
             <div class="row p-2">
-                <button class="btn btn-primary col-md-2" data-bs-toggle="modal" data-bs-target="#modalladded"><i class="fa fa-plus"></i> Add Education</button>
+                <button class="btn btn-primary col-md-2" data-bs-toggle="modal" data-bs-target="#modalladded"><i class="fa fa-plus"></i> New Education</button>
             </div>
             <!-- <div class="row p-2"> -->
                 <table id="education" style="width: 100%"  class="table table-striped align-middle">
@@ -68,7 +68,7 @@
         </div>
         <div class="tab-pane fade show" id="quali-tab-2">
             <div class="row p-2">
-                <button class="btn btn-primary col-md-2" data-bs-toggle="modal" data-bs-target="#addmodalothers"><i class="fa fa-plus"></i> Add Others</button>
+                <button class="btn btn-primary col-md-2" data-bs-toggle="modal" data-bs-target="#addmodalothers"><i class="fa fa-plus"></i> New Others</button>
             </div>
             <!-- <div class="row p-2"> -->
                 <table id="qualificationOthers" style="width: 100%"  class="table table-striped align-middle">

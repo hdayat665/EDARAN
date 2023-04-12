@@ -9,17 +9,18 @@
         <div class="modal-body">
             <form id="educationModalEdit">
                 <input type="hidden" id="educationId1" name="id" >
+            <input type="hidden" id="idEdu" name="id">
             <div class="row p-2">
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="" class="form-label">From Date</label>
-                        <input type="text" class="form-control" id="educationFromDate1" name="fromDate" value="" placeholder="YYYY/MM/DD">
+                        <input type="date" class="form-control" id="educationFromDate1" name="fromDate" value="{{ date_format(date_create($education->fromDate ?? ''), 'Y-m-d') }}"  placeholder="YYYY/MM/DD">
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="" class="form-label">To Date</label>
-                        <input type="text" class="form-control" id="educationToDate1" name="toDate" value="" placeholder="YYYY/MM/DD">
+                        <input type="date" class="form-control" id="educationToDate1" name="toDate" value="{{ date_format(date_create($education->toDate ?? ''), 'Y-m-d') }}" placeholder="YYYY/MM/DD">
                     </div>
                 </div>
             </div>
@@ -47,7 +48,7 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="" class="form-label">Education Attachments</label>
-                        <input type="file" class="form-control-file" id="">
+                        <input type="file" class="form-control-file" id="file" name="file">
                     </div>
                 </div>
             </div>

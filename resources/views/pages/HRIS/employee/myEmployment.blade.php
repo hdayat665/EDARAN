@@ -206,13 +206,13 @@
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <label for="effective-from" class="form-label">Effective From*</label>
-                                        <input type="text" id="effective-from" name="effectiveFrom" class="form-control"
+                                        <input type="text" id="effective-from" name="EffectiveFrom" class="form-control"
                                             value="{{ $employment->effectiveFrom ?? '' }}" placeholder="YYYY-MM-DD"
                                             aria-describedby="effective-from">
                                     </div>
                                     <div class="col-sm-6">
                                         <label for="firstname" class="form-label">Event*</label>
-                                        <select class="form-select" name="event">
+                                        <select class="form-select" name="Event">
                                             <option value="" label="PLEASE CHOOSE"></option>
                                             <?php $events = getEvent(); ?>
                                             @foreach ($events as $key => $event)
@@ -275,10 +275,32 @@
 
                                                     <div class="card p-3 bg-white">
                                                         <p class="fw-bold">{{ $jobHistory->employmentDetail ?? '' }}</p>
-                                                        <p class="text-muted mb-2 fw-bold">{{ $jobHistory->effectiveDate ?? '' }}</p>
+                                                        <p class="fw-bold">{{ $jobHistory->role ?? '' }}</p>
+                                                        <p class="fw-bold">{{ $jobHistory->company ?? '' }}</p>
+                                                        <p class="fw-bold">{{ $jobHistory->department ?? '' }}</p>
+                                                        <p class="fw-bold">{{ $jobHistory->unit ?? '' }}</p>
+                                                        <p class="fw-bold">{{ $jobHistory->branch ?? '' }}</p>
+                                                        <p class="fw-bold">{{ $jobHistory->jobGrade ?? '' }}</p>
+                                                        <p class="fw-bold">{{ $jobHistory->designation ?? '' }}</p>
+                                                        <p class="fw-bold">{{ $jobHistory->employmentType ?? '' }}</p>
+                                                        <p class="fw-bold">{{ $jobHistory->COR ?? '' }}</p>
+                                                        <p class="fw-bold">{{ $jobHistory->event ?? '' }}</p>
+
+
+
                                                         <p class="text-muted">
                                                             Effective Date: {{ $jobHistory->effectiveDate ?? '' }}
                                                         </p>
+
+                                                        <p class="text-muted">
+                                                            Event: {{ $jobHistory->event ?? '' }}
+                                                        </p>
+
+                                                        <p class="text-muted">
+                                                            Updated By: {{ $jobHistory->updatedBy ?? '' }}
+                                                        </p>
+
+                                                        
                                                     </div>
                                                 </li>
                                             @endforeach
@@ -322,7 +344,7 @@
                                         Update your employment information
                                     </p>
                                 </div>
-                                <form id="addEmpForm">
+                                <form id="addEmpForm2">
                                     <div class="card-body">
                                         <div class="row p-2">
                                             <label for="firstname" class="form-label">Role*</label>
@@ -457,13 +479,13 @@
                                     <div class="row">
                                         <div class="col-sm-6">
                                             <label for="effective-from" class="form-label">Effective From*</label>
-                                            <input type="text" id="effective-from" name="effectiveFrom" class="form-control"
+                                            <input type="text" id="effective-from" name="EffectiveFrom" class="form-control"
                                                 value="" placeholder="YYYY-MM-DD"
                                                 aria-describedby="effective-from">
                                         </div>
                                         <div class="col-sm-6">
                                             <label for="firstname" class="form-label">Event*</label>
-                                            <select class="form-select" name="event">
+                                            <select class="form-select" name="Event">
                                                 <option value="" label="PLEASE CHOOSE"></option>
                                                 
                                                 
@@ -472,7 +494,7 @@
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <button type="submit" class="btn btn-primary float-end" id="updateEmp">
+                                <button type="submit" class="btn btn-primary float-end" id="updateEmp2">
                                     Update
                                 </button>
                             </div>

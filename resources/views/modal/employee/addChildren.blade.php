@@ -2,7 +2,7 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="add-children">Add Children Details</h5>
+                <h5 class="modal-title" id="add-children">New Children</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -25,10 +25,10 @@
                         </div>
                         <div class="col-md-3">
                             <label for="fullname" class="form-label" >Old Identification Number</label>
-                            <input type="text" id=""  name="" value=""  class="form-control" aria-describedby="" placeholder="0000000">
+                            <input type="text" id=""  name="oldIDNo" value=""  class="form-control" aria-describedby="" placeholder="0000000">
                         </div>
                         <div class="col-md-3">
-                            <label for="fullname" class="form-label" >Birth Certificate</label>
+                            <label for="fullname" class="form-label" >Birth of Certificate</label>
                             <input type="file" id=""  name="" value=""  class="form-control" aria-describedby="">
                         </div>
                     </div>
@@ -37,15 +37,15 @@
                             <div class="row">
                                 <div class="col-sm-6 ">
                                     <div class="form-check form-switch align-right">
-                                        <input class="form-check-input partCheck4" value="" type="checkbox" name="nonCitizen" {{($children->nonCitizen ?? '') ? 'checked' : ''}} id="citizen">
+                                        <input class="form-check-input partCheck4" value="" type="checkbox" name="nonNetizen2" {{($children->nonCitizen ?? '') ? 'checked' : ''}} id="citizen">
                                         <label class="form-check-label" for="citizen">
-                                            Non-Citizen
+                                            Non-Citizennnn
                                         </label>
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <label for="lastname" class="form-label">New Identification Number*</label>
-                                    <input type="text" id="idNoaddChild" name="idNo" value="" class="form-control" aria-describedby="lastname" placeholder="000000000000">
+                                    <input type="text" id="idNoaddChild"  name="idNo" value="" class="form-control" aria-describedby="lastname" placeholder="000000000000">
                                 </div>
                             </div>
                         </div>
@@ -59,7 +59,7 @@
                             <div class="row">
                                 <div class="col-sm-12">
                                     <label for="passport" class="form-label">Passport Number</label>
-                                    <input type="text" id="passportChild" name="passport" class="form-control" aria-describedby="passport" placeholder="PASSPORT NUMBER">
+                                    <input type="text" readonly style="pointer-events: none;" id="passportChild" name="passport" class="form-control" aria-describedby="passport" placeholder="PASSPORT NUMBER">
                                 </div>
                             </div>
                         </div>
@@ -69,7 +69,7 @@
                         </div>
                         <div class="col-sm-3">
                             <label for="issuing-country" class="form-label">Issuing Country*</label>
-                            <select class="form-select" name="issuingCountry" id="">
+                            <select class="form-select" name="issuingCountry" id="issuingCountryChild" disabled>
                                 <option value="MY" label="Malaysia" selected ></option>
                                 <optgroup id="country-optgroup-Americas" label="Americas">
                                     @foreach ($americass as $key => $america)
@@ -121,16 +121,16 @@
                             <div class="row">
                                 <div class="col-sm-6 ">
                                     <div class="form-check form-switch align-right">
-                                        <input class="form-check-input okuCheck3" type="checkbox" id="nonCitizen1" name="nonCitizen1" {{($children->nonCitizen1 ?? '') ? 'checked' : ''}}>
+                                        <input class="form-check-input okuCheck3" type="checkbox" id="nonCitizen1" name="okuStatus2" {{($children->nonCitizen1 ?? '') ? 'checked' : ''}}>
                                        
-                                        <label class="form-check-label" for="citizen">
+                                        <label class="form-check-label" for="nonCitizen1">
                                             OKU?
                                         </label>
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <label for="lastname" class="form-label">OKU Card Number*</label>
-                                    <input type="text" id="okucard3" name=""  value="" class="form-control" aria-describedby="" readonly placeholder="OKU CARD NUMBER">
+                                    <input type="text" id="okucard3" disabled name="okuCardNum"  value="" class="form-control" aria-describedby="" readonly placeholder="OKU CARD NUMBER">
                                 </div>
                             </div>
                         </div>
@@ -138,7 +138,7 @@
                             <div class="row">
                                 <div class="col-sm-6">
                                     <label for="dob" class="form-label">OKU Attachment*</label>
-                                    <input type="file" id="okuattach3" name="" class="form-control" style="pointer-events: none" aria-describedby="">
+                                    <input type="file" id="okuattach3" disabled name="okuattach" class="form-control" style="pointer-events: none;" aria-describedby="">
                                 </div>
                             </div>
                         </div>
@@ -240,7 +240,7 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="add-children">Update Children Details</h5>
+                <h5 class="modal-title" id="add-children">Update Children</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -250,7 +250,7 @@
                             <label for="firstname" class="form-label">First Name*</label>
                             <input type="text" id="firstName1" name="firstName" value="" class="form-control" aria-describedby="firstname" placeholder="FIRST NAME">
                             <input type="hidden" name="user_id" value="{{$user_id}}">
-                            <input type="hidden" name="id" id="id1">
+                            <input type="hidden" name="id" id="idChildren">
                         </div>
                         <div class="col-sm-6">
                             <label for="lastname" class="form-label">Last Name*</label>
@@ -267,7 +267,7 @@
                             <input type="text" id="" name="" value=""   class="form-control" aria-describedby="" placeholder="0000000">
                         </div>
                         <div class="col-sm-3">
-                            <label for="" class="form-label" >Birth Certificate</label>
+                            <label for="" class="form-label" >Birth of Certificate</label>
                             <input type="file" id="" name="" value=""   class="form-control" aria-describedby="">
                         </div>
                     </div>

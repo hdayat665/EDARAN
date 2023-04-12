@@ -2,7 +2,7 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="add-parent">New Family</h5>
+                <h5 class="modal-title" id="add-parent">Update Family</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -67,12 +67,12 @@
                             </div>
                         </div>
                           <div class="col-sm-3">
-                                    <label for="expirydate" class="form-label">Expiry Date</label>
-                                    <input type="text" id="expiryDateParent" name="expiryDate" placeholder="YYYY-MM-DD" class="form-control" aria-describedby="expirydate" style="pointer-events: none;" readonly>
+                                    <label for="expirydate" class="form-label">Expiry Date*</label>
+                                    <input type="text" id="expiryDateParent" name="expiryDate" placeholder="YYYY-MM-DD" class="form-control" aria-describedby="expirydate" disabled style="pointer-events: none;" readonly>
                                 </div>
                         <div class="col-sm-3">
-                            <label for="issuing-country" class="form-label">Issuing Country</label>
-                            <select class="form-select" name="issuingCountry" id="passportcountryparent" style="text-transform:uppercase" disabled>
+                            <label for="issuing-country" class="form-label">Issuing Country****</label>
+                            <select class="form-select" name="issuingCountry" id="passportcountryparent" style="text-transform:uppercase" >
                                 <option value="" label="PLEASE CHOOSE" selected="selected"></option>
                                 <optgroup id="country-optgroup-Americas" label="Americas">
                                     @foreach ($americass as $key => $america)
@@ -111,11 +111,11 @@
                     </div>
                     <div class="row p-2">
                         <div class="col-sm-6">
-                            <label for="passport" class="form-label">Phone Number</label>
+                            <label for="passport" class="form-label">Phone Numberrr</label>
                             <input type="text" id="contactNoparent" name="contactNo" class="form-control" aria-describedby="passport" placeholder="00000000000">
                         </div>
                         <div class="col-sm-6">
-                            <label for="age" class="form-label">Gender*</label>
+                            <label for="age" class="form-label">Gender</label>
                             <select class="form-select" name="gender" id="genderFamily"  style="text-transform:uppercase">
                                 <option value="" label="PLEASE CHOOSE" selected></option>
                                 @foreach ($gender as $key => $status)
@@ -176,7 +176,7 @@
                     </div>
                     <div class="row p-2">
                         <div class="col-sm-6">
-                            <label for="postcode" class="form-label">Postcode*</label>
+                            <label for="postcode" class="form-label">Postcode</label>
                             <input type="text" id="postcodeparent" name="postcode" class="form-control" aria-describedby="postcode" placeholder="00000">
                         </div>
                         <div class="col-sm-6">
@@ -223,7 +223,7 @@
             </div>
             <div class="modal-footer"> 
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                <button href="javascript:;" id="addParent" class="btn btn-primary">Save</button>
+                <button href="javascript:;" id="addParent" class="btn btn-primary">Update</button>
             </div>
             </form>
         </div>

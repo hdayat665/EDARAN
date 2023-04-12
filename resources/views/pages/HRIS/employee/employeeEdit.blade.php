@@ -151,7 +151,7 @@
                                                     </div>
                                                     <div class="col-sm-6">
                                                         <label for="firstname" class="form-label">Old Identification Number</label>
-                                                        <input type="text" id="" name="" value="" class="form-control" aria-describedby="" placeholder="0000000">
+                                                        <input type="text" id="oldIDNo" name="oldIDNo" value="{{$profile->oldIDNo ?? ''}}" class="form-control" aria-describedby="" placeholder="0000000">
                                                     </div>
                                                 </div>
                                                 <div class="row p-2">
@@ -167,7 +167,7 @@
                                                             </div>
                                                             <div class="col-sm-6">
                                                                 <label for="lastname" class="form-label">New Identification Number*</label>
-                                                                <input type="text" value="{{$profile->idNo ?? ''}}" name="idNo" id="idNo" class="form-control" aria-describedby="lastname" placeholder="000000000000">
+                                                                <input type="text" value="{{$profile->idNo ?? ''}}" name="idNo" id="idnumber" class="form-control" aria-describedby="lastname" placeholder="000000000000">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -190,14 +190,13 @@
                                                         </div>
                                                     </div>
                                                      <div class="col-sm-3">
-                                                                <label for="expirydate" class="form-label">Expiry Date</label>
-                                                                <input type="text" id="expirydate" name="expiryDate" value="{{ date_format(date_create($profile->expiryDate ?? null), 'Y-m-d') ?? '' }}" class="form-control" placeholder="YYYY/MM/DD" style= "pointer-events: none;" readonly>
-                                                            </div>
+                                                        <label for="expirydate" class="form-label">Expiry Datrrre</label>
+                                                        <input type="text" id="expirydate" name="expiryDate" value="{{ date_format(date_create($profile->expiryDate ?? null), 'Y-m-d') ?? '' }}" class="form-control" placeholder="YYYY/MM/DD" style= "pointer-events: none;" readonly>
+                                                    </div>
                                                     <div class="col-sm-3">
                                                         <label for="issuing-country" class="form-label">Issuing Country</label>
-                                                        <select class="form-select" name="issuingCountry">
+                                                        <select class="form-select" name="issuingCountry" id="issuingCountry" style= "pointer-events: none;" >
                                                             <option value="" label="PLEASE CHOOSE" ></option>
-                                                            <option value="MY" label="Malaysia" selected ></option>
                                                             <?php
                                                             $americass = americas();
                                                             $asias = asias();
@@ -271,7 +270,8 @@
                                                         <div class="row">
                                                             <div class="col-sm-6 ">
                                                                 <div class="form-check form-switch align-right">
-                                                                    <input class="form-check-input okuCheck" value="" type="checkbox" name=""  id="">
+                                                                    <input class="form-check-input okuCheck" value="on" {{($profile->okuStatus ?? '') ? 'checked' : ''}}  type="checkbox" name="okuStatus"  id="OKU" readonly>
+
                                                                     <label class="form-label" for="OKU" >
                                                                         OKU?
                                                                     </label>
@@ -280,9 +280,9 @@
                                                              <div class="col-sm-6">
                                                             <div class="row">
                         
-                                                            <div class="col-sm-12 idnumber">
-                                                                <label for="" class="form-label" >OKU Card Number*</label>
-                                                                <input type="text" value="" name="" id="okucard" class="form-control" readonly placeholder="OKU CARD NUMBER">
+                                                            <div class="col-sm-12">
+                                                                <label for="" class="form-label" >OKU Card Numbereditt*</label>
+                                                                <input type="text" disabled value="{{$profile->okuCardNum ?? ''}}" name="okuCardNum" id="okucard" readonly class="form-control" placeholder="OKU CARD NUMBER">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -290,7 +290,10 @@
                                                     </div>
                                                     <div class="col-sm-3 part">
                                                         <label for="idattach" class="form-label" >OKU Attachment</label>
-                                                        <input type="file" class="form-control-file" id="okuattach" style="pointer-events: none">
+                                                        <input type="file" class="form-control"  name="okuFile"   id="okuattach" style= "pointer-events: none;" >
+                                                        @if ($profile->okuFile)
+                                                        Click <a href="{{ route('download', ['filename' => $profile->okuFile]) }}">here</a> to see ID Attachment.
+                                                        @endif
                                                     </div> 
                                                 </div>
                                                 <hr class="mt-5">
@@ -299,11 +302,11 @@
                                                 <div class="row p-2">
                                                     <div class="col-sm-6">
                                                         <label for="phone-number" class="form-label">Phone Number*</label>
-                                                        <input type="text" id="phone-number" name="phoneNo" value="{{$profile->phoneNo ?? ''}}" class="form-control" aria-describedby="phone-number" placeholder="00000000000">
+                                                        <input type="text" id="phoneNo" name="phoneNo" value="{{$profile->phoneNo ?? ''}}" class="form-control" aria-describedby="phone-number" placeholder="00000000000">
                                                     </div>
                                                     <div class="col-sm-6">
                                                         <label for="phone-number2" class="form-label" >Phone Number 2</label>
-                                                        <input type="text" id="" name="" value="" class="form-control" aria-describedby="phone-number2" placeholder="00000000000">
+                                                        <input type="text" id="phoneNo2" name="phoneNo2" value="{{$profile->phoneNo2 ?? ''}}" class="form-control" aria-describedby="phone-number2" placeholder="00000000000">
                                                     </div>
                                                 </div>
 
