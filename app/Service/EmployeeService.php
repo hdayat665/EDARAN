@@ -129,6 +129,8 @@ class EmployeeService
         $jobHistory = [];
         $jobHistory['user_id'] = $input['user_id'];
         $jobHistory['employmentDetail'] = $input['employmentDetail'];
+        // $jobHistory['role'] = $input['role'];
+
         $jobHistory['effectiveDate'] = date_format(date_create($input['effectiveFrom']), "Y/m/d H:i:s");
         $jobHistory['updatedBy'] = $input['updatedBy'];
 
@@ -136,7 +138,7 @@ class EmployeeService
 
         $data = [];
         $data['status'] = true;
-        $data['msg'] = 'Success Terminate User Employment';
+        $data['msg'] = 'User is Deactivated';
         $data['title'] = 'Success!';
         $data['type'] = 'success';
 
@@ -173,6 +175,7 @@ class EmployeeService
         $data['addressDetails'] = UserAddress::where('user_id', $data['user_id'])->get();
         $data['emergency'] = UserEmergency::where('user_id', $data['user_id'])->first();
         $data['companions'] = UserCompanion::where('user_id', $data['user_id'])->get();
+        
         $data['childrens'] = UserChildren::where('user_id', $data['user_id'])->get();
         $data['parents'] = UserParent::where('user_id', $data['user_id'])->get();
         $data['siblings'] = UserSibling::where('user_id', $data['user_id'])->get();
@@ -260,11 +263,13 @@ class EmployeeService
 
         $profile = UserProfile::where('user_id', $user_id)->first();
 
-        if (!$profile) {
+        if(!$profile)
+        {
             $data['status'] = config('app.response.error.status');;
             $data['title'] = config('app.response.error.title');
             $data['type'] = config('app.response.error.type');
             $data['msg'] = 'Profile not found';
+
         } else {
 
             if ($input['fullName']) {
@@ -277,21 +282,57 @@ class EmployeeService
                 unset($input['religion']);
             }
 
-            if (!$input['race']) {
-                unset($input['race']);
+            if(!isset($input['nonNetizen']))
+            {
+                $input['nonNetizen'] = null;
             }
 
-            if (!$input['phoneNo']) {
-                unset($input['phoneNo']);
+            if(!isset($input['okuStatus']))
+            {
+                $input['okuStatus'] = null;
+                $input['okuCardNum'] = null;
+                $input['okuFile'] = null;
             }
 
-            if (!$input['homeNo']) {
-                unset($input['homeNo']);
+            if(!isset($input['passport']))
+            {
+                $input['passport'] = null;
+                $input['expiryDate'] = null;
+                $input['issuingCountry'] = null;
             }
 
-            if (!$input['extensionNo']) {
-                unset($input['extensionNo']);
-            }
+            // if(!$input['religion'])
+            // {
+            //     unset($input['religion']);
+            // }
+
+            // if(!$input['race'])
+            // {
+            //     unset($input['race']);
+            // }
+
+            // if(!$input['phoneNo'])
+            // {
+            //     unset($input['phoneNo']);
+            // }
+
+            // if(!$input['homeNo'])
+            // {
+            //     unset($input['homeNo']);
+            // }
+
+            // if(!$input['extensionNo'])
+            // {
+            //     unset($input['extensionNo']);
+            // }
+
+            // if(!$input['passport'])
+            // {
+            //     unset($input['passport']);
+            //     unset($input['expiryDate']);
+            //     unset($input['issuingCountry']);
+
+            // }
 
             if ($input['username']) {
 
@@ -300,13 +341,34 @@ class EmployeeService
                 Users::where('id', $user_id)->update($username);
             }
 
+            if ($_FILES['fileID']['name']) {
+                $payslip = upload(request()->file('fileID'));
+                $input['fileID'] = $payslip['filename'];
+            
+                if (!$input['fileID']) {
+                    unset($input['fileID']);
+                }
+            }
+
+            if ($_FILES['okuFile']['name']) {
+                $payslip = upload(request()->file('okuFile'));
+                $input['okuFile'] = $payslip['filename'];
+    
+                if (!$input['okuFile']) {
+                    unset($input['okuFile']);
+                }
+            }
+
+            if(isset($input['nonNetizen']) && $input['nonNetizen'] == 'on') {
+                $input['idNo'] = null;
+            }
+
             UserProfile::where('user_id', $user_id)->update($input);
-           
 
             $data['status'] = config('app.response.success.status');
             $data['title'] = config('app.response.success.title');
             $data['type'] = config('app.response.success.type');
-            $data['msg'] = 'Success Update Profile';
+            $data['msg'] = 'My Profile is updated';
         }
 
         return $data;
@@ -502,12 +564,12 @@ class EmployeeService
                 }
             }
     
-            if ($_FILES['okuID']['name']) {
-                $idOKU = upload($r->file('okuID'));
-                $input['okuID'] = $idOKU['filename'];
+            if ($_FILES['idFile']['name']) {
+                $idOKU = upload($r->file('idFile'));
+                $input['idFile'] = $idOKU['filename'];
     
-                if (!$input['okuID']) {
-                    unset($input['okuID']);
+                if (!$input['idFile']) {
+                    unset($input['idFile']);
                 }
             }
 
@@ -556,7 +618,7 @@ class EmployeeService
             $data['status'] = config('app.response.success.status');
             $data['type'] = config('app.response.success.type');
             $data['title'] = config('app.response.success.title');
-            $data['msg'] = 'Success Update Children';
+            $data['msg'] = 'Children is updated';
         }
 
         return $data;
@@ -581,7 +643,7 @@ class EmployeeService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success add Children';
+        $data['msg'] = 'Children is created';
 
         return $data;
     }
@@ -680,7 +742,7 @@ class EmployeeService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success add Parent';
+        $data['msg'] = 'New family is Created';
 
         return $data;
     }
@@ -757,7 +819,7 @@ class EmployeeService
             $jobz['user_id'] = $input['user_id'];
             // $jobz['employmentDetail'] = $input['user_id'];
             // $jobz['event'] = $input['user_id'];
-            $jobz['effectiveDate'] = $input['effectiveFrom'];
+            $jobz['effectiveDate'] = $input['EffectiveFrom'];
             $jobz['tenant_id'] = $user->id;
             $jobz['updatedBy'] = $user->username;
             // pr($input);
@@ -879,7 +941,7 @@ class EmployeeService
             $data['status'] = config('app.response.success.status');
             $data['type'] = config('app.response.success.type');
             $data['title'] = config('app.response.success.title');
-            $data['msg'] = 'Success Update Vehicle';
+            $data['msg'] = 'Vehicle is updated';
         }
 
         return $data;
@@ -894,7 +956,7 @@ class EmployeeService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success add Vehicle';
+        $data['msg'] = 'Vehicle is created';
 
         return $data;
     }
@@ -1099,7 +1161,7 @@ class EmployeeService
             $data['status'] = config('app.response.success.status');
             $data['type'] = config('app.response.success.type');
             $data['title'] = config('app.response.success.title');
-            $data['msg'] = 'Success Update Address';
+            $data['msg'] = 'Address type is updated!';
         }
 
         return $data;
@@ -1152,16 +1214,19 @@ class EmployeeService
                 unset($input['file']);
             }
         }
+        
         $input['user_id'] = $input['user_id'];
         UserQualificationEducation::create($input);
 
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success add education';
+        $data['msg'] = 'New Education is created';
 
         return $data;
     }
+
+   
 
     public function getEmployeeEducation($id = '')
     {
@@ -1246,7 +1311,7 @@ class EmployeeService
             }
         }
 
-        $input['user_id'] = Auth::user()->id;
+        $input['user_id'] = $input['user_id'];
         UserQualificationOthers::create($input);
 
         $data['status'] = config('app.response.success.status');
@@ -1300,15 +1365,15 @@ class EmployeeService
 
         }else{
 
-            // if ($_FILES['supportDoc']['name'])
-            // {
-            //     $payslip = upload($r->file('supportDoc'));
-            //     $input['supportDoc'] = $payslip['filename'];
+             if ($_FILES['supportDoc']['name'])
+             {
+                 $payslip = upload($r->file('supportDoc'));
+                 $input['supportDoc'] = $payslip['filename'];
 
-            //     if (!$input['supportDoc']) {
-            //         unset($input['supportDoc']);
-            //     }
-            // }
+                if (!$input['supportDoc']) {
+                    unset($input['supportDoc']);
+                 }
+             }
 
             
         }
@@ -1333,6 +1398,32 @@ class EmployeeService
             $data['type'] = config('app.response.success.type');
             $data['title'] = config('app.response.success.title');
             $data['msg'] = 'Others Qualification deleted';
+        }
+
+        return $data;
+    }
+
+    public function getEmployeeAddressforCompanion($id)
+    {
+        
+        
+        $addressDetails = UserAddress::where('user_id', $id)
+            ->select('address1', 'address2', 'postcode', 'city', 'state', 'country')
+            ->first();
+            
+
+        if(!$addressDetails)
+        {
+            $data['status'] = config('app.response.error.status');
+            $data['type'] = config('app.response.error.type');
+            $data['title'] = config('app.response.error.title');
+            $data['msg'] = 'Address not found';
+        }else{
+            $data['data'] = $addressDetails;
+            $data['status'] = config('app.response.success.status');
+            $data['type'] = config('app.response.success.type');
+            $data['title'] = config('app.response.success.title');
+            $data['msg'] = 'Success Get Address Data';
         }
 
         return $data;

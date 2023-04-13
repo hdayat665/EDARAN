@@ -2,7 +2,7 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="add-parent">Add Family Details</h5>
+                <h5 class="modal-title" id="add-parent">New Family</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -33,7 +33,7 @@
                             <div class="row">
                                 <div class="col-sm-6 ">
                                     <div class="form-check form-switch align-right">
-                                        <input class="form-check-input partCheck6  " value="" type="checkbox" name="" id="">
+                                        <input class="form-check-input partCheck6  " value="" type="checkbox" name="nonNetizen3" id="">
                                         <label class="form-check-label" for="citizen" >
                                             Non-Citizen
                                         </label>
@@ -41,7 +41,7 @@
                                 </div>
                                 <div class="col-sm-6">
                                     <label for="lastname" class="form-label">New Identification Number*</label>
-                                    <input type="text" id="idno6" name="" value="" class="form-control" aria-describedby="" placeholder="000000000000">
+                                    <input type="text" id="idno6" name="idNo" value="" class="form-control" aria-describedby="" placeholder="000000000000">
                                 </div>
                             </div>
                         </div>
@@ -56,7 +56,7 @@
                                 <div class="col-sm-12">
                                     <label for="passport" class="form-label" >Passport Number</label>
                                   
-                                    <input type="text" id="passport6" name=""  class="form-control" aria-describedby="passport" placeholder="PASSPORT NUMBER">
+                                    <input type="text"  readonly style="pointer-events: none;" id="passport6" name=""  class="form-control" aria-describedby="passport" placeholder="PASSPORT NUMBER">
                                 </div>
                             </div>
                         </div>
@@ -108,9 +108,9 @@
                         </div>
                         <div class="col-sm-6">
                             <label for="expirydate" class="form-label">Relationship</label>
-                            <select class="form-select" name="relationship" id="">
+                            <select class="form-select" name="relationship1" id="relationship1">
                                 <?php $relationship = relationship() ?>
-                                <option value="0" label="PLEASE CHOOSE"  ></option>
+                                <option value="" label="PLEASE CHOOSE"  ></option>
                                 @foreach ($relationship as $key => $status)
                                 <option value="{{$key}}"> {{$status}}</option>
                                 @endforeach
@@ -122,24 +122,24 @@
                             <div class="row">
                                 <div class="col-sm-6 ">
                                     <div class="form-check form-switch align-right">
-                                        <input class="form-check-input okuCheck3" type="checkbox" id="nonCitizen1" name="nonCitizen1" {{($children->nonCitizen1 ?? '') ? 'checked' : ''}}>
+                                        <input class="form-check-input okuCheck5" type="checkbox" id="" name="okuStatus3" {{($children->nonCitizen1 ?? '') ? 'checked' : ''}}>
                                        
                                         <label class="form-check-label" for="citizen">
                                             OKU?
                                         </label>
                                     </div>
                                 </div>
-                                <div class="col-sm-6">
-                                    <label for="lastname" class="form-label" >OKU Card Number*</label>
-                                    <input type="text" id="okucard3" name=""  value="" class="form-control" aria-describedby="" readonly placeholder="OKU CARD NUMBER">
+                                <div class="col-sm-6 ">
+                                    <label for="lastname" class="form-label" >OKU Card Numbhher (testttt)*</label>
+                                    <input type="text" disabled readonly id="okucard5" name="okuCardNum" value="" class="form-control" aria-describedby="" placeholder="OKU CARD NUMBER">
                                 </div>
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="row">
                                 <div class="col-sm-6">
-                                    <label for="dob" class="form-label" >OKU Attachment*</label>
-                                    <input type="file" id="okuattach3" name="" class="form-control" style="pointer-events: none" aria-describedby="">
+                                    <label for="dob" class="form-label" >OKU Attachment* (test)</label>
+                                    <input type="file" id="okuattach5" name="okuattach" style="pointer-events: none"  class="form-control" aria-describedby="">
                                 </div>
                             </div>
                         </div>

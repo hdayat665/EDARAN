@@ -3,11 +3,12 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h1 class="modal-title fs-5" id="exampleModalLabel">Add Education</h1>
+          <h1 class="modal-title fs-5" id="exampleModalLabel">New Education</h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-            <form id="addEducation">
+            <form id="addEmployeeEducation">
+            <input type="hidden" name="user_id" value="{{$user_id}}">
             <div class="row p-2">
                 <div class="col-md-6">
                     <div class="form-group">
@@ -46,7 +47,7 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="" class="form-label">Education Attachments</label>
-                        <input type="file" class="form-control-file" id="" name="supportDoc">
+                        <input type="file" class="form-control-file" id="file" name="file" multiple="multiple">
                     </div>
                 </div>
             </div>

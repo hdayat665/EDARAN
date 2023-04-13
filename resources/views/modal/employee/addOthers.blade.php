@@ -3,11 +3,12 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h1 class="modal-title fs-5" id="exampleModalLabel">Add Others Education</h1>
+          <h1 class="modal-title fs-5" id="exampleModalLabel">New Others Education</h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
             <form id="addOthers">
+              <input type="hidden" name="user_id" value="{{$user_id}}">
            <div class="row p-2">
                 <div class="form-group row">
                     <label for="staticEmail" class="col-sm-4 col-form-label">Date</label>
@@ -28,7 +29,7 @@
                 <div class="form-group row">
                     <label for="staticEmail" class="col-sm-4 col-form-label">Attachments</label>
                     <div class="col-sm-8">
-                        <input type="file" class="form-control-file" id="" name="supportOtherDoc">
+                        <input type="file" class="form-control-file" id="fileupload" name="file">
                     </div>
                 </div>
             </div>

@@ -18,7 +18,7 @@ class UserAddress extends Authenticatable
      * @var array<int, string>
      */
 
-    protected $table ='userAddress';
+    protected $table ='useraddress';
 
     protected $fillable = [
         'user_id',

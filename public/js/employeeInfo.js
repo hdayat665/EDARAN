@@ -1,4 +1,10 @@
 $(document).ready(function() {
+    
+
+
+
+
+
     $("#tableemployeeinfo").DataTable({
         responsive: false,
         dom:
@@ -74,8 +80,10 @@ $(document).ready(function() {
         });
     });
 
-    $('#submit').click(function(e) {
 
+    
+    $('#submit').click(function(e) {
+       
         requirejs(['sweetAlert2'], function(swal) {
 
             var data = new FormData(document.getElementById("submitForm"));
@@ -112,6 +120,10 @@ $(document).ready(function() {
 
         });
     });
+
+
+   
+
 
     $(document).on("click", "#terminate", function() {
         $('#exampleModal').modal('show');

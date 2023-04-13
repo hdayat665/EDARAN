@@ -20,3 +20,4 @@ resources/.DS_Store
 resources/views/.DS_Store
 resources/views/pages/.DS_Store
 .DS_Store
+composer.lock

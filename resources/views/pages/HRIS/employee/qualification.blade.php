@@ -20,7 +20,7 @@
      <div class="tab-content panel m-0 rounded-0 p-3">
          <div class="tab-pane fade active show" id="quali-tab-1">
              <div class="row p-2">
-                 <button class="btn btn-primary col-md-2" data-bs-toggle="modal" data-bs-target="#modalladded"><i class="fa fa-plus"></i> Add Education</button>
+                 <button class="btn btn-primary col-md-2" data-bs-toggle="modal" data-bs-target="#modalladded"><i class="fa fa-plus"></i> New Education</button>
              </div>
              <div class="row p-2">
                 <table id="employeeEducation" style="width: 100%" class="table table-striped align-middle">
@@ -70,7 +70,7 @@
          </div>
          <div class="tab-pane fade show" id="quali-tab-2">
              <div class="row p-2">
-                 <button class="btn btn-primary col-md-2" data-bs-toggle="modal" data-bs-target="#addmodalothers"><i class="fa fa-plus"></i> Add Others</button>
+                 <button class="btn btn-primary col-md-2" data-bs-toggle="modal" data-bs-target="#addmodalothers"><i class="fa fa-plus"></i> New Others</button>
              </div>
              <div class="row p-2">
                 <table id="employeeOthers" style="width: 100%" class="table table-striped align-middle">
@@ -95,7 +95,7 @@
                                     <div class="dropdown-menu">
                                         <a href="javascript:;" id="othersQualificationModalEdit{{$other->id}}" data-id="{{$other->id}}" class="dropdown-item" data-bs-toggle="modal"> Edit</a>
                                         <div class="dropdown-divider"></div>
-                                        <a href="javascript:;" id="" data-id="" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#deleteOthers"> Delete</a>
+                                        <a href="javascript:;" id="deleteOthers{{$other->id}}" data-id="{{$other->id}}" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#deleteOthers"> Delete</a>
                                         <!-- <div class="dropdown-divider"></div> -->
                                     </div>
                                 </td>

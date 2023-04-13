@@ -501,7 +501,7 @@ if (!function_exists('americas')) {
     function americas()
     {
         $data = [
-            'AI' => "ANGUILLA",
+            'pI' => "ANGUILLA",
             'AG' => "ANTIGUA AND BARBUDA",
             'AR' => "ARGENTINA",
             'AW' => "ARUBA",

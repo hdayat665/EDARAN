@@ -93,7 +93,6 @@ class EmployeeController extends Controller
         $ps = new EmployeeService;
 
         $result = $ps->editEmployeeData($user_id);
-
         return view('pages.HRIS.employee.employeeEdit', $result);
     }
 
@@ -310,6 +309,7 @@ class EmployeeController extends Controller
         return response()->json($result);
     }
 
+  
     public function addEmployeeEducation(Request $r)
     {
         $ps = new EmployeeService;
@@ -328,14 +328,16 @@ class EmployeeController extends Controller
         return response()->json($result);
     }
 
-    public function getEmployeeEducationById($id = '')
-    {
+     public function getEmployeeEducationById($id = '')
+     {
         $ps = new EmployeeService;
 
+        $result = $ps->getEmployeeEducation($id);
         $result = $ps->getEmployeeEducation($id);
 
         return response()->json($result);
     }
+       
 
     public function updateEmployeeEducation(Request $r)
     {
@@ -428,6 +430,18 @@ class EmployeeController extends Controller
 
         return response()->json($result);
     }
+
+    public function getEmployeeAddressforCompanion($id = '')
+    {
+        $ps = new EmployeeService;
+
+    
+
+        $result = $ps->getEmployeeAddressforCompanion($id);
+
+        return response()->json($result);
+    }
+
 
     public function updateAddressType(Request $r)
     {

@@ -64,7 +64,7 @@ $(document).ready(function() {
 
     });
 
-    $('#deleteVehicle').click(function(e) {
+    $(document).on("click", "#deleteVehicle", function() {
         id = $(this).data('id');
         requirejs(['sweetAlert2'], function(swal) {
             swal({

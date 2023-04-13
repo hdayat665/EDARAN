@@ -115,7 +115,7 @@ class ProfileService
                 if (!$input['fileID']) {
                     unset($input['fileID']);
                 }
-            }  
+            }
 
             if (isset($_FILES['okuFile']['name'])) {
                 $payslip = upload(request()->file('okuFile'));
@@ -166,6 +166,8 @@ class ProfileService
 
         return $data;
     }
+
+  
 
     public function getEducation($id = '')
     {
@@ -866,7 +868,7 @@ class ProfileService
             $data['status'] = config('app.response.success.status');
             $data['type'] = config('app.response.success.type');
             $data['title'] = config('app.response.success.title');
-            $data['msg'] = 'Success Update Vehicle';
+            $data['msg'] = 'Vehicle is updated';
         }
 
         return $data;
@@ -882,7 +884,7 @@ class ProfileService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success add Vehicle';
+        $data['msg'] = 'Vehicle is created';
 
         return $data;
     }
@@ -903,7 +905,7 @@ class ProfileService
             $data['status'] = config('app.response.success.status');
             $data['type'] = config('app.response.success.type');
             $data['title'] = config('app.response.success.title');
-            $data['msg'] = 'Success Delete Vehicle';
+            $data['msg'] = 'Vehicle is Deleted';
         }
 
         return $data;
@@ -1086,15 +1088,12 @@ class ProfileService
             }
         }
 
-        if ($_FILES['okuFile']['name']) {
-            $payslip = upload($r->file('okuFile'));
+        if (isset($_FILES['okuFile']['name'])) {
+            $payslip = upload(request()->file('okuFile'));
             $input['okuFile'] = $payslip['filename'];
-
-            if (!$input['okuFile']) {
-                unset($input['okuFile']);
-            }
+        } else {
+            $input['okuFile'] = null;
         }
-
 
         if ($_FILES['supportDoc']['name']) {
             $payslip = upload($r->file('supportDoc'));
@@ -1111,7 +1110,7 @@ class ProfileService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'New Children is created.';
+        $data['msg'] = 'Children is created.';
 
         return $data;
     }
@@ -1244,7 +1243,7 @@ class ProfileService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success add address';
+        $data['msg'] = 'New address is created';
 
         return $data;
     }
@@ -1455,6 +1454,9 @@ class ProfileService
 
         return $data;
     }
+
+    
+
 
 
 
