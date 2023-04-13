@@ -31,7 +31,7 @@
         </div>
         <br>
         <div class="row mb-15px">
-            <label class="form-label col-form-label col-md-1">Unit*</label>
+            <label class="form-label col-form-label col-md-1">Unit</label>
             <div class="col-md-5">
                 
 

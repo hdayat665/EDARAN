@@ -217,6 +217,7 @@ $(document).ready(function() {
             [5, 10, 15, 20, -1],
             [5, 10, 15, 20, 'All'],
         ],
+        
         buttons: [
             { extend: 'excel', text: 'Excel', className: 'btn-sm' },
         ],

@@ -3,11 +3,11 @@
         <button data-bs-toggle="modal" data-bs-target="#modaladdaddress" class="btn btn-primary col-sm-2"><i class="fa fa-plus"></i> New Address</button>
     </div>
     <div class="row p-2">
-        <table id="employeeAddress" class="table table-striped table-bordered align-middle">
+        <table id="employeeAddress" style="width: 100%" class="table table-striped align-middle">
             <thead>
                 <tr>
-                    <th class="text-nowrap">No1</th>
-                    <th class="text-nowrap">Action</th>
+                    <th data-orderable="true" class="text-nowrap" >No</th>	
+                    <th data-orderable="true" class="text-nowrap" >Action</th>
                     <th class="text-nowrap">Address</th>
                     <th class="text-nowrap">Address Type</th>
                 </tr>
@@ -20,13 +20,13 @@
                     <tr>
                         <td> {{$id}} </td>
                         <td>
-                            <div class="btn-group me-1 mb-1">
+                            
                                 <a href="javascript:;" data-bs-toggle="dropdown" class="btn btn-primary btn-sm dropdown-toggle"><i class="fa fa-cogs"></i> Actions <i class="fa fa-caret-down"></i></a>
                                     <div class="dropdown-menu">
                                 <a href="javascript:;" id="updateAddressDetails{{$address->id}}" data-id="{{$address->id}}" data-type="edit"class="dropdown-item" name="userAddress" >Edit</a>
                                     <div class="dropdown-divider"></div>
                                 <a href="javascript:;" id="deleteAddressDetails{{$address->id}}" data-id="{{$address->id}}" class="dropdown-item">Delete</a>
-                            </div>
+                           
                         </td>
                         <td style="text-transform: uppercase;">
                             {!! $address->address1 ?? '' !!}

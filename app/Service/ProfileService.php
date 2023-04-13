@@ -258,7 +258,7 @@ class ProfileService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'New Others Qualification is created';
+        $data['msg'] = 'New Others Education is created';
 
         return $data;
     }

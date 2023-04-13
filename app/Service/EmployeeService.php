@@ -122,19 +122,19 @@ class EmployeeService
 
         Employee::where('user_id', $input['user_id'])->update($status);
 
-        // add data in jobHistory
-        $input['updatedBy'] = Auth::user()->username;
-        unset($input['status']);
+        // // add data in jobHistory
+        // $input['updatedBy'] = Auth::user()->username;
+        // unset($input['status']);
 
-        $jobHistory = [];
-        $jobHistory['user_id'] = $input['user_id'];
-        $jobHistory['employmentDetail'] = $input['employmentDetail'];
-        // $jobHistory['role'] = $input['role'];
+        // $jobHistory = [];
+        // $jobHistory['user_id'] = $input['user_id'];
+        // $jobHistory['employmentDetail'] = $input['employmentDetail'];
+        // // $jobHistory['role'] = $input['role'];
 
-        $jobHistory['effectiveDate'] = date_format(date_create($input['effectiveFrom']), "Y/m/d H:i:s");
-        $jobHistory['updatedBy'] = $input['updatedBy'];
+        // $jobHistory['effectiveDate'] = date_format(date_create($input['effectiveFrom']), "Y/m/d H:i:s");
+        // $jobHistory['updatedBy'] = $input['updatedBy'];
 
-        JobHistory::create($jobHistory);
+        // JobHistory::create($jobHistory);
 
         $data = [];
         $data['status'] = true;
@@ -1317,7 +1317,7 @@ class EmployeeService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success add others qualification';
+        $data['msg'] = 'New others Education is created';
 
         return $data;
     }
