@@ -95,7 +95,7 @@
                                             <td>{{ $event->event_name }}</td>
                                             <td>{{ $event->start_date }} - {{ $event->end_date }}</td>
                                             <td>{{ $event->start_time }} - {{ $event->end_time }}</td>
-                                            <td>{{ $event->venue }} - {{ $event->venue }}</td>
+                                            <td>{{ $event->venue ?? '-' }}</td>
                                             {{-- <td>{{ $event->location ? getProjectLocation($event->location)->location_name : '-' }} --}}
                                             </td>
                                             <td>{{ $event->desc ? $event->desc : '-' }}</td>

@@ -7,10 +7,13 @@ use App\Models\ActivityLogs;
 use App\Models\AttendanceEvent;
 use App\Models\Employee;
 use App\Models\Project;
+use App\Models\AppealTimesheets;
 use App\Models\ProjectLocation;
 use App\Models\TimesheetApproval;
 use App\Models\TimesheetEvent;
 use App\Models\TimesheetLog;
+use App\Models\MyLeaveModel;
+use App\Models\holidayModel;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail as FacadesMail;
@@ -30,6 +33,12 @@ class MyTimeSheetService
         // ->get();
 
         $data['employee'] = Employee::where([['tenant_id', Auth::user()->tenant_id], ['user_id', Auth::user()->id]])->first();
+        // $data['employee'] = Employee::join('appeal_timesheet', 'employment.user_id', '=', 'appeal_timesheet.user_id')
+        // ->where([
+        //     ['employment.tenant_id', Auth::user()->tenant_id],
+        //     ['employment.user_id', Auth::user()->id]
+        // ])
+        // ->first();
         
         return $data;
     }
@@ -539,6 +548,32 @@ if ($existingLogs->isNotEmpty()) {
     //     return $data;
     // }
 
+        public function getHolidays()
+    {
+        $data = holidayModel::where([['tenant_id', Auth::user()->tenant_id]])->get();
+
+        return $data;
+    }
+
+
+    public function getLeaves()
+    {
+    // $data = MyLeaveModel::where([['tenant_id', Auth::user()->tenant_id], ['up_user_id', Auth::user()->id]])->get();
+
+    $data = DB::table('myleave as a')
+    ->leftjoin('leave_types as b', 'a.lt_type_id', '=', 'b.id')
+    ->select('a.*', 'b.leave_types')
+        // ->whereNotIn('a.id', $projectId)
+       -> where([['a.tenant_id', Auth::user()->tenant_id], ['a.up_user_id', Auth::user()->id]])
+        ->get();
+
+    if (!$data) {
+        $data = [];
+    }
+
+    return $data;
+    }
+
 
     public function getLogs()
     {
@@ -601,6 +636,11 @@ if ($existingLogs->isNotEmpty()) {
         ->select('id')
         ->get();
 
+
+    $leaves = MyLeaveModel::where('up_user_id', $userId)->whereMonth('end_date', date('m'))->select('id')->get();
+    $holidays = holidayModel::whereMonth('end_date', date('m'))->select('id')->get();
+
+
     $log_id = [];
     foreach ($logs as $log) {
         $log_id[] = $log->id;
@@ -609,6 +649,16 @@ if ($existingLogs->isNotEmpty()) {
     $event_id = [];
     foreach ($events as $event) {
         $event_id[] = $event->id;
+    }
+
+    $leave_id = [];
+    foreach ($leaves as $leave) {
+        $leave_id[] = $leave->id;
+    }
+
+    $holiday_id = [];
+    foreach ($holidays as $holiday) {
+        $holiday_id[] = $holiday->id;
     }
 
     $employee =  DB::table('employment as a')
@@ -626,6 +676,12 @@ if ($existingLogs->isNotEmpty()) {
     }
     if (isset($event_id)) {
         $input['event_id'] = implode(',', $event_id);
+    }
+    if (isset($leave_id)) {
+        $input['leave_id'] = implode(',', $leave_id);
+    }
+    if (isset($holiday_id)) {
+        $input['holiday_id'] = implode(',', $holiday_id);
     }
     $input['employee_id'] = $employee->id;
     $input['employee_name'] = $employee->employeeName;
@@ -793,6 +849,23 @@ if ($existingLogs->isNotEmpty()) {
         return '';
     }
 
+    public function getLeavesByLotId($id)
+    {
+        $ids = explode(',', $id);
+
+        $data = MyLeaveModel::whereIn('id', $ids)->get();
+
+        return $data;
+    }
+
+    public function getHolidaysByLotId($id)
+    {
+        $ids = explode(',', $id);
+
+        $data = holidayModel::whereIn('id', $ids)->get();
+
+        return $data;
+    }
 
 
     public function getEventsByLotId($id)
@@ -979,13 +1052,24 @@ if ($existingLogs->isNotEmpty()) {
         
     }
 
-
-
-
-
-
-
+    public function createAppealTimesheet($r)
+    {
+        $input = $r->input();
+        $user = Auth::user();
     
+        $input['user_id'] = $user->id;
+
+        $input = [
+            'status' => 'approve',
+        ];
+    
+        AppealTimesheets::create($input);
+        $data['status'] = config('app.response.success.status');
+        $data['type'] = config('app.response.success.type');
+        $data['title'] = config('app.response.success.title');
+        $data['msg'] = 'Success Create Timesheet Logs';
+        return $data;
+    }
 
     // public function getParticipantNameById($id)
     // {

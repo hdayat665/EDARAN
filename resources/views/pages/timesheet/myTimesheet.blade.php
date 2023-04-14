@@ -13,6 +13,7 @@
     color: #888 !important;
 } */
 
+
     </style>
 
 
@@ -28,6 +29,10 @@
    <div style="height: 80px; display: flex; align-items: center; justify-content: center;">
         <div class="d-grid gap-2 col-6 mx-auto">
             <input type="hidden" id="userIdForApproval" value="{{$user_id}}">
+            <input type="hidden" id="idtesting" value="{{$eleaveapprover}}">
+            <input type="hidden" id="idtesting123" value="{{ isset($status_appeal) ? $status_appeal : '' }}">
+            <input type="hidden" id="appeal_Date" value="{{ isset($appeal_Date) ? $appeal_Date : '' }}">
+            
              {{-- <button class="btn btn-primary" type="button" id="submitTimesheetApproval">Submit</button> --}}
              <button class="btn btn-primary" type="button" id="confirmsubmitb" data-bs-toggle="modal">Submit</button>
         </div>
@@ -47,4 +52,5 @@
 @include('modal.timesheet.addLogModal')
 @include('modal.timesheet.editLogModal')
 @include('modal.timesheet.confirmsubmitmodal')
+@include('modal.timesheet.appealmodal')
 @endsection

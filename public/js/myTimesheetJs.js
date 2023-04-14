@@ -10,11 +10,6 @@ $(document).ready(function() {
     //     }
     //   });
 
-   
-
-    
-      
-    
 
  document.getElementById("yearsub").value = new Date().getFullYear();
 
@@ -570,6 +565,55 @@ $(document).ready(function() {
         });
     });
 
+    $('#addappealb').click(function(e) {
+        $("#addappeal").validate({
+            rules: {
+                
+            },
+
+            messages: {
+              
+            },
+            submitHandler: function(form) {
+                requirejs(['sweetAlert2'], function(swal) {
+
+                    var data = new FormData(document.getElementById("addappeal"));
+                    // var data = $('#tree').jstree("get_selected");
+
+                    $.ajax({
+                        type: "POST",
+                        url: "/createAppeal",
+                        data: data,
+                        dataType: "json",
+                        async: false,
+                        processData: false,
+                        contentType: false,
+                    }).done(function(data) {
+                        swal({
+                            title: data.title,
+                            text: data.msg,
+                            type: data.type,
+                            confirmButtonColor: '#3085d6',
+                            confirmButtonText: 'OK',
+                            allowOutsideClick: false,
+                            allowEscapeKey: false,
+                        }).then(function() {
+                            if (data.type == 'error') {
+
+                            } else {
+                                location.reload();
+                            }
+
+
+                        });
+                    });
+
+                });
+            },
+        });
+    });
+
+
     /////////////////////////////////////// EVENT ////////////////////////////////
     $('#saveEventButton').click(function(e) {
         $("#addEventForm").validate({
@@ -750,6 +794,7 @@ $(document).ready(function() {
 
         // fullcalendar
 
+
         var d = new Date();
         var month = d.getMonth() + 1;
         month = (month < 10) ? '0' + month : month;
@@ -789,6 +834,7 @@ $(document).ready(function() {
                 var endDay = endDate.getDate();
                 endDay = endDay < 10 ? "0" + endDay : endDay;
 
+               
                 event.push({
                     // title: "Event: " + events['event_name'],
                     title: "Event: " + events['event_name'] + "\n" + "from " + events['start_time'] + " to " + events['end_time'],
@@ -847,8 +893,86 @@ $(document).ready(function() {
                     }
                 });
             }
+
+            var leave = [];
+            for (let i = 0; i < data['leaves'].length; i++) {
+                var leaves = data['leaves'][i];
+
+                var startDate = new Date(leaves['start_date']);
+                var startMonth = startDate.getMonth() + 1;
+                startMonth = startMonth < 10 ? "0" + startMonth : startMonth;
+                var startYear = startDate.getFullYear();
+                var startDay = startDate.getDate();
+                startDay = startDay < 10 ? "0" + startDay : startDay;
+
+                var endDate = new Date(leaves['end_date']);
+                var endMonth = endDate.getMonth() + 1;
+                endMonth = endMonth < 10 ? "0" + endMonth : endMonth;
+                var endYear = endDate.getFullYear();
+                var endDay = endDate.getDate();
+                endDay = endDay < 10 ? "0" + endDay : endDay;
+
+                // console.log(leaves['reason'])
+                leave.push({
+                    title:  leaves['leave_types'] + " : " + "\n" + leaves['reason'],
+                    // title: "Event: " + events['event_name'] + "\n" + "from " + events['start_time'] + " to " + events['end_time'],
+                    start: startYear + '-' + startMonth + '-' + startDay,
+                    end: endYear + '-' + endMonth + '-' + endDay,
+                    // color: app.color.green,
+                    color: "#E0E0E0",
+                    textColor: "black",
+                    fontWeight: "bold",
+                    extendedProps: {
+                        type: 'leave',
+                        leaveId: leaves['id']
+                    }
+
+                });
+                
+            }
+
+            // var holiday = [];
+            // for (let i = 0; i < data['holidays'].length; i++) {
+            //     var holidays = data['holidays'][i];
+            //     // console.log(data['holidays']);
+
+            //     var startDate = new Date(holidays['start_date']);
+            //     var startMonth = startDate.getMonth() + 1;
+            //     startMonth = startMonth < 10 ? "0" + startMonth : startMonth;
+            //     var startYear = startDate.getFullYear();
+            //     var startDay = startDate.getDate();
+            //     startDay = startDay < 10 ? "0" + startDay : startDay;
+
+            //     var endDate = new Date(holidays['end_date']);
+            //     var endMonth = endDate.getMonth() + 1;
+            //     endMonth = endMonth < 10 ? "0" + endMonth : endMonth;
+            //     var endYear = endDate.getFullYear();
+            //     var endDay = endDate.getDate();
+            //     endDay = endDay < 10 ? "0" + endDay : endDay;
+
+            //     // console.log(holidays['holiday_title'])
+            //     holiday.push({
+            //         title:  holidays['holiday_title'],
+            //         start: startYear + '-' + startMonth + '-' + startDay,
+            //         end: endYear + '-' + endMonth + '-' + endDay,
+            //         color: app.color.yellow,
+            //         // color: "#E0E0E0",
+            //         textColor: "black",
+            //         fontWeight: "bold",
+            //         extendedProps: {
+            //             type: 'leave',
+            //             holidayId: leaves['id']
+            //         }
+
+            //     });
+                
+            // }
+
+            
             dataEvent = event.concat(log);
-            // console.log(dataEvent);
+            dataleave = dataEvent.concat(leave);
+            // dataHoliday = dataleave.concat(holiday);
+            console.log(dataleave);
             var calendar = new FullCalendar.Calendar(calendarElm, {
                 headerToolbar: {
                     left: 'logButton EventButton SumButton',
@@ -875,6 +999,29 @@ $(document).ready(function() {
                         }
                     }  
                 },
+                // example changing background color
+                // dayCellDidMount: function(info) {
+                //     var date = info.date;
+                //     var dateStr = date.getFullYear() + '-' + (date.getMonth()+1) + '-' + date.getDate();
+                //     console.log(dateStr); // Add this line to print the value of dateStr to the console
+                //     if (dateStr === '2023-4-17') {
+                //       $(info.el).css('background-color', '#ffcc00');
+                //     }
+                //   },
+
+                dayCellDidMount: function(info) {
+                    if (info.date.getDay() === 0) { // Sunday
+                    //   console.log(info.date.getDay()); 
+                      $(info.el).css('background-color', '#87CEEB'); 
+                    }
+                    if (info.date.getDay() === 6) { // Saturday
+                      $(info.el).css('background-color', '#87CEEB'); 
+                    }
+                  },
+
+
+                  
+                  
                 // original code
                 // dateClick: function(info) {
 
@@ -906,8 +1053,113 @@ $(document).ready(function() {
                     const formattedDate = clickedDate.format('DD-MM-YYYY');
                     $("#dateaddlog").val(formattedDate);
                   },
-                  
+                // retrieve the value of the hidden input field containing the user id
+               
 
+                // dateClick: function(info) {
+                //     const userId = $('#idtesting123').val();
+                //     const appealDate = $('#appeal_Date').val();
+                //     const today = dayjs();
+                //     const clickedDate = dayjs(info.date);
+                
+                //     if (userId === 'approve') {
+                //         // Only allow the clicked date that matches appealDate or is within the last two days before today
+                //         const allowedStartDate = today.subtract(2, 'day');
+                //         if (clickedDate.isBefore(allowedStartDate) || clickedDate.isAfter(today)) {
+                //             if (clickedDate.format('YYYY-MM-DD') !== appealDate) {
+                //                 $('#appealmodal').modal('show');
+                //                 return;
+                //             }
+                //         }
+                //         if (clickedDate.format('YYYY-MM-DD') === appealDate) {
+                //             $('#addLogModal').modal('show');
+                //             const formattedDate = clickedDate.format('DD-MM-YYYY');
+                //             $("#dateaddlog").val(formattedDate);
+                //         } else {
+                //             $('#addLogModal').modal('show');
+                //             const formattedDate = clickedDate.format('DD-MM-YYYY');
+                //             $("#dateaddlog").val(formattedDate);
+                //         }
+                //     } else {
+                //         // Check if the clicked date is within the allowed range
+                //         const allowedStartDate = today.subtract(2, 'day');
+                //         if (clickedDate.isBefore(allowedStartDate) || clickedDate.isAfter(today)) {
+                //             // Display an error message if the clicked date is outside the allowed range
+                //             Swal.fire({
+                //                 icon: 'error',
+                //                 title: 'Error',
+                //                 text: 'You can only select the current date and 2 days before.'
+                //             });
+                //             return;
+                //         } else if (clickedDate.isAfter(today)) {
+                //             // Display an error message if the clicked date is after the current date
+                //             Swal.fire({
+                //                 icon: 'error',
+                //                 title: 'Error',
+                //                 text: 'You can only select the current date and 2 days before.'
+                //             });
+                //             return;
+                //         } else {
+                //             // Show the modal and set the date if the clicked date is within the allowed range
+                //             $('#addLogModal').modal('show');
+                //             const formattedDate = clickedDate.format('DD-MM-YYYY');
+                //             $("#dateaddlog").val(formattedDate);
+                //         }
+                //     }
+                // },
+
+                // dateClick: function(info) {
+                //     const userId = $('#idtesting123').val();
+                //     const appealDate = $('#appeal_Date').val();
+                //     const today = dayjs();
+                //     const clickedDate = dayjs(info.date);
+                
+                //     if (userId === 'approve') {
+                //         // Only allow the clicked date that matches appealDate or is within the last two days before today
+                //         const allowedStartDate = today.subtract(2, 'day');
+                //         if (clickedDate.isBefore(allowedStartDate) || clickedDate.isAfter(today)) {
+                //             if (clickedDate.format('YYYY-MM-DD') !== appealDate) {
+                //                 $('#appealmodal').modal('show');
+                //                 return;
+                //             }
+                //         }
+                //         if (clickedDate.format('YYYY-MM-DD') === appealDate) {
+                //             $('#addLogModal').modal('show');
+                //             const formattedDate = clickedDate.format('DD-MM-YYYY');
+                //             $("#dateaddlog").val(formattedDate);
+                //         } else {
+                //             $('#addLogModal').modal('show');
+                //             const formattedDate = clickedDate.format('DD-MM-YYYY');
+                //             $("#dateaddlog").val(formattedDate);
+                //         }
+                //     } else {
+                //         // Check if the clicked date is within the allowed range
+                //         const allowedStartDate = today.subtract(2, 'day');
+                //         if (clickedDate.isBefore(allowedStartDate) || clickedDate.isAfter(today)) {
+                //             // Display an error message if the clicked date is outside the allowed range
+                //             Swal.fire({
+                //                 icon: 'error',
+                //                 title: 'Error',
+                //                 text: 'You can only select the current date and 2 days before.'
+                //             });
+                //             return;
+                //         } else if (clickedDate.isAfter(today)) {
+                //             // Display an error message if the clicked date is after the current date
+                //             Swal.fire({
+                //                 icon: 'error',
+                //                 title: 'Error',
+                //                 text: 'You can only select the current date and 2 days before.'
+                //             });
+                //             return;
+                //         } else {
+                //             // Show the modal and set the date if the clicked date is within the allowed range
+                //             $('#addLogModal').modal('show');
+                //             const formattedDate = clickedDate.format('DD-MM-YYYY');
+                //             $("#dateaddlog").val(formattedDate);
+                //         }
+                //     }
+                // },
+                
                 //     dateClick: function(info) {
                 //     const today = dayjs();
                 //     const minDate = today.subtract(2, 'day'); // Set the minimum date to 2 days ago
@@ -1013,7 +1265,11 @@ $(document).ready(function() {
                         }
                     })
 
-                    if (info.event.extendedProps.type == "log") {
+                    if(info.event.extendedProps.type == "leave") {
+                    
+                   
+                    } 
+                    else  if (info.event.extendedProps.type == "log") {
                         logId = info.event.extendedProps.logId;
                         var logData = getLogs(logId);
                         logData.done(function(data) {
@@ -1103,6 +1359,7 @@ $(document).ready(function() {
                         });
 
                         $('#editlogmodal').modal('show');
+                    
                     } else {
                         eventId = info.event.extendedProps.eventId;
 
@@ -1557,8 +1814,10 @@ $(document).ready(function() {
                         eventLimit: 6 // adjust to 6 only for timeGridWeek/timeGridDay
                     }
                 },
-                events: dataEvent,
+                
+                events: dataleave,
             });
+            
             calendar.render();
 
         });

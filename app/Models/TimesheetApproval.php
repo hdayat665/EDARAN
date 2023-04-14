@@ -31,6 +31,8 @@ class TimesheetApproval extends Authenticatable
         'status',
         'log_id',
         'event_id',
+        'leave_id',
+        'holiday_id',
         'amendreason',
     ];
 }
