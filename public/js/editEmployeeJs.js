@@ -3357,7 +3357,7 @@ $('input[name="address_type[]"]').on('change', function() {
             rules: {
                 company: "required",
                 departmentId: "required",
-                unitId: "required",
+                //unitId: "required",
                 branchId: "required",
                 jobGrade: "required",
                 designation: "required",
@@ -3374,7 +3374,7 @@ $('input[name="address_type[]"]').on('change', function() {
             messages: {
                 company: "Please Insert Employee Company",
                 departmentId: "Please Insert Employee Department",
-                unitId: "Please Insert Employee Unit",
+                //unitId: "Please Insert Employee Unit",
                 branchId: "Please Insert Employee Branch",
                 jobGrade: "Please Insert Employee Job Grade",
                 designation: "Please Insert Employee Designation",
@@ -3440,7 +3440,7 @@ $('input[name="address_type[]"]').on('change', function() {
             rules: {
                 company: "required",
                 departmentId: "required",
-                unitId: "required",
+                //unitId: "required",
                 branchId: "required",
                 jobGrade: "required",
                 designation: "required",
@@ -3457,7 +3457,7 @@ $('input[name="address_type[]"]').on('change', function() {
             messages: {
                 company: "Please Insert Employee Company",
                 departmentId: "Please Insert Employee Department",
-                unitId: "Please Insert Employee Unit",
+                //unitId: "Please Insert Employee Unit",
                 branchId: "Please Insert Employee Branch",
                 jobGrade: "Please Insert Employee Job Grade",
                 designation: "Please Insert Employee Designation",

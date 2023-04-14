@@ -69,7 +69,7 @@
                                         </select>
                                     </div>
                                     <div class="row p-2">
-                                        <label for="firstname" class="form-label">Unit*</label>
+                                        <label for="firstname" class="form-label">Unit</label>
                                         <select class="form-select" name="unitId" id="unitShow">
                                             <?php $Units = getUnit(); ?>
                                             <option value="" label="PLEASE CHOOSE"></option>
