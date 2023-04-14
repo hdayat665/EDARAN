@@ -10,16 +10,47 @@ use Illuminate\Http\Request;
 
 class MyTimesheetController extends Controller
 {
+    // public function myTimesheetView()
+    // {
+    //     $mts = new MyTimeSheetService;
+    
+    //     $data = $mts->myTimesheetView();
+    //     $data['user_id'] = Auth::user()->id;
+    //     $data['employee_id'] = $data['employee']->id;
+    //     $data['department_id'] = $data['employee']->department;
+    //     $data['eleaveapprover'] = $data['employee']->eleaveapprover;
+    //     $data['status_appeal'] = $data['employee']->status_appeal;
+
+    //     // $data['employees'] = $mts->getTimesheetEvents();
+        
+    //     return view('pages.timesheet.myTimesheet', $data);
+    // }
+
     public function myTimesheetView()
     {
         $mts = new MyTimeSheetService;
     
         $data = $mts->myTimesheetView();
         $data['user_id'] = Auth::user()->id;
-        $data['employee_id'] = $data['employee']->id;
-        $data['department_id'] = $data['employee']->department;
+        // $data['employee_id'] = $data['employee']->id;
+        // $data['department_id'] = $data['employee']->department;
+        // $data['eleaveapprover'] = $data['employee']->eleaveapprover;
+        // $data['status_appeal'] = $data['employee']->status_appeal;
 
         // $data['employees'] = $mts->getTimesheetEvents();
+
+        if ($data['employee'] !== null) {
+            $data['employee_id'] = $data['employee']->id;
+            $data['department_id'] = $data['employee']->department;
+            $data['eleaveapprover'] = $data['employee']->eleaveapprover;
+            $data['status_appeal'] = $data['employee']->status_appeal;
+            $data['appeal_Date'] = $data['employee']->appeal_date;
+        } else {
+            $data['employee_id'] = null;
+            $data['department_id'] = null;
+            $data['eleaveapprover'] = null;
+            $data['appeal_Date'] = null;
+        }
         
         return view('pages.timesheet.myTimesheet', $data);
     }
@@ -30,6 +61,15 @@ class MyTimesheetController extends Controller
         $ss = new MyTimeSheetService;
 
         $result = $ss->createLog($r);
+
+        return response()->json($result);
+    }
+
+    public function createAppeal(Request $r)
+    {
+        $ss = new MyTimeSheetService;
+
+        $result = $ss->createAppealTimesheet($r);
 
         return response()->json($result);
     }
@@ -130,7 +170,9 @@ class MyTimesheetController extends Controller
 
         $result['events'] = $ss->getEvents();
         $result['logs'] = $ss->getLogs();
-        // dd($result['logs'] );
+        $result['leaves'] = $ss->getLeaves();
+        $result['holidays'] = $ss->getHolidays();
+        // dd($result['holidays']);
         
         return response()->json($result);
     }
@@ -267,10 +309,15 @@ class MyTimesheetController extends Controller
 
         $result['events'] = [];
         $result['logs'] = [];
+        $result['leaves'] = [];
+        $result['holidays'] = [];
 
         if ($getIds) {
             $result['events'] = $ss->getEventsByLotId($getIds->event_id);
             $result['logs'] = $ss->getLogsByLotId($getIds->log_id);
+            $result['leaves'] = $ss->getLeavesByLotId($getIds->leave_id);
+            $result['holidays'] = $ss->getHolidaysByLotId($getIds->holiday_id);
+            // dd($result['holidays']);
         }
 
         return response()->json($result);
