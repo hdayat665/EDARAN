@@ -65,12 +65,12 @@
                         </div>
                         <div class="col-sm-3">
                             <label for="expirydate" class="form-label">Expiry Date*</label>
-                            <input type="text" id="expiryDateChild" name="expiryDate" class="form-control" aria-describedby="expirydate" style="pointer-events: none;" readonly>
+                            <input type="text" id="expiryDateChild" name="expiryDate" placeholder="YYYY-MM-DD" class="form-control" aria-describedby="expirydate" disabled style="pointer-events: none;" readonly>
                         </div>
                         <div class="col-sm-3">
                             <label for="issuing-country" class="form-label">Issuing Country*</label>
                             <select class="form-select" name="issuingCountry" id="issuingCountryChild" disabled>
-                                <option value="MY" label="Malaysia" selected ></option>
+                                <option  label="PLEASE CHOOSE" selected ></option>
                                 <optgroup id="country-optgroup-Americas" label="Americas">
                                     @foreach ($americass as $key => $america)
                                     <option value="{{$key}}">{{$america}}</option>
@@ -188,7 +188,7 @@
                     <div class="row p-2">
                         <div class="col-sm-6">
                             <label for="lastname" class="form-label">Postcode</label>
-                            <input type="number" id="" name="" value="" class="form-control" style="text-transform:uppercase" placeholder="00000">
+                            <input type="number" id="" name="postcode" value="" class="form-control" style="text-transform:uppercase" placeholder="00000">
                         </div>
                         <div class="col-sm-6">
                             <label for="firstname" class="form-label">City</label>
@@ -304,7 +304,7 @@
                         </div>
                         <div class="col-sm-3">
                             <label for="expirydate" class="form-label">Expiry Date*</label>
-                            <input type="text" id="expiryDate1" name="expiryDate" class="form-control" aria-describedby="expirydate" placeholder="YYYY/MM/DD">
+                            <input type="text" id="expiryDate1" name="expiryDate" class="form-control" aria-describedby="expirydate"  placeholder="YYYY/MM/DD">
                         </div>
                         <div class="col-sm-3">
                             <label for="issuing-country" class="form-label">Issuing Country*</label>

@@ -915,12 +915,17 @@ $.validator.addMethod("noSpecialChars", function(value, element) {
     $('input[name="nonNetizen2"]').click(function() {
         if ($(this).is(':checked')) {
             $('#idNoaddChild').val('').prop('disabled', true);
-
+            
             $("#issuingCountryChild").prop('disabled', false);
+            $("#expiryDateChild").prop('disabled', false);
+
         } else {
             $('#idNoaddChild').prop('disabled', false);
 
             $("#issuingCountryChild").prop('disabled', true);
+
+            $("#expiryDateChild").prop('disabled', true);
+
         }
     });
     
@@ -2176,6 +2181,16 @@ $('input[name="address_type[]"]').on('change', function() {
                     digits: true,
                     rangelength: [7, 7],
                 },
+                expiryDate: {
+                    required: true,
+                },
+                issuingCountry: {
+                    required: true,
+                },
+                postcode: {
+                    required: false,
+                    rangelength: [5,5],
+                }
             },
 
             messages: {
@@ -2208,6 +2223,15 @@ $('input[name="address_type[]"]').on('change', function() {
                     rangelength: "Please Insert Valid Identification Number",
 
                 },
+                expiryDate: {
+                    required: "Please Insert Expiry Date",
+                },
+                issuingCountry: {
+                    required: "Please Insert Issuing Country",
+                },
+                postcode: {
+                    rangelength: "Please Inset a valid postcode",
+                }
             },
         submitHandler: function(form) {
             var data = new FormData(document.getElementById("addChildrenForm"));
@@ -2420,12 +2444,19 @@ $('input[name="address_type[]"]').on('change', function() {
             [5, 10, 15, 20, "All"],
         ],
     });
-    $("#employeeAddress").DataTable({
+    $("#employeeAddress").removeAttr('width').DataTable({
         responsive: false,
         lengthMenu: [
             [5, 10, 15, 20, -1],
             [5, 10, 15, 20, "All"],
         ],
+        columnDefs: [{ width: 4, targets: 1 }
+
+        ],
+
+        fixedColumn: true,
+      
+        
     });
 
     $("#siblingModalAdd").click(function (e) {

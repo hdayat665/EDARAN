@@ -2,7 +2,7 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="add-parent">Update Familyyyy</h5>
+                <h5 class="modal-title" id="add-parent">Update Family</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -71,12 +71,12 @@
                             </div>
                         </div>
                           <div class="col-sm-3">
-                                    <label for="expirydate" class="form-label">Expiry Date</label>
+                                    <label for="expirydate" class="form-label">Expiry Date*</label>
                                     <input type="text" id="expiryDateChild" name="expiryDateParent"  placeholder="YYYY-MM-DD" class="form-control" aria-describedby="expirydate" readonly>
                                   
                                 </div>
                         <div class="col-sm-3">
-                            <label for="issuing-country" class="form-label">Issuing Country</label>
+                            <label for="issuing-country" class="form-label">Issuing Country*</label>
                             <select class="form-select" name="issuingCountry" id="" style="text-transform:uppercase">
                             <option value="MY" label="Malaysia" selected ></option>
                                 <optgroup id="country-optgroup-Americas" label="Americas">
@@ -102,7 +102,7 @@
                             <input type="text" id="age7" name="age" class="form-control" value="{{ $parent->age ?? '' }}" aria-describedby="" readonly placeholder="AGE">
                         </div>
                         <div class="col-sm-6">
-                            <label for="expirydate" class="form-label">Relationship</label>
+                            <label for="expirydate" class="form-label">Relationship*</label>
                             <select class="form-select" name="relationship" id="relationshipP1">
                                 <?php $relationship = relationship() ?>
                                 <option value="0" label="PLEASE CHOOSE"  ></option>
@@ -121,7 +121,7 @@
                             <input type="text" id="contactNoP1" name="contactNo" class="form-control" aria-describedby="passport" placeholder="00000000000">
                         </div>
                         <div class="col-sm-6">
-                            <label for="gender" class="form-label">Gender*</label>
+                            <label for="gender" class="form-label">Gender</label>
                             <select class="form-select" name="gender" id="genderP1">
                                 <option value="0" label=" PLEASE CHOOSE"></option>
                                 @foreach ($gender as $key => $status)
@@ -151,7 +151,7 @@
                         <div class="col-sm-6">
                             <div class="row">
                                 <div class="col-sm-6">
-                                    <label for="dob" class="form-label" >OKU Attachment</label>
+                                    <label for="dob" class="form-label" >OKU Attachment*</label>
                                     <input type="file" id="okuattach6" name="okuFile" class="form-control" style="pointer-events: none" aria-describedby="">
                                     @if ($parent->okuFile ?? '')
                                         Click <a href="{{ route('download', ['filename' => $parent->okuFile]) }}">here</a> to see OKU ID.

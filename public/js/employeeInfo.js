@@ -122,6 +122,84 @@ $(document).ready(function() {
     });
 
 
+    $('#submit').click(function(e) {
+        $("#submitForm").validate({
+            // Specify validation rules
+            rules: {
+                effectiveFrom: "required",
+                remarks: {
+                    required: true,
+                    digits: true,
+                    rangelength: [5, 5],
+                },
+                state: "required",
+                country: "required",
+                postcode: {
+                    required: true,
+                    digits: true,
+                    rangelength: [5, 5],
+                },
+                addressType: "required",
+            },
+  
+            messages: {
+                effectiveFrom: "Please Insert Address 1",
+                remarks: {
+                    required: "Please Insert Postcode",
+                    digits: "Please Insert Valid Postcode",
+                    rangelength: "Please Insert Valid Postcode",
+                },
+                state: "Please Choose State",
+                country: "required",
+                postcode: {
+                    required: "Please Insert Postcode",
+                    digits: "Please Insert Valid Postcode",
+                    rangelength: "Please Insert Valid Postcode",
+                },
+                addressType: "Please Choose Address Type",
+            },
+            submitHandler: function (form) {
+                requirejs(['sweetAlert2'], function(swal) {
+
+                    var data = new FormData(document.getElementById
+                    ("submitForm"));
+        
+                    $.ajax({
+                        type: "POST",
+                        url: "/terminateEmployment",
+                        data: data,
+                        dataType: "json",
+                        async: false,
+                        processData: false,
+                        contentType: false,
+                    }).done(function(data) {
+                        console.log(data);
+                        swal({
+                            title: data.title,
+                            text: data.msg,
+                            type: data.type,
+                             confirmButtonColor: '#3085d6',
+                            confirmButtonText: 'OK',
+                            allowOutsideClick: false,
+                            allowEscapeKey: false,
+                        }).then(function() {
+                            if (data.type == 'error') {
+        
+                            } else {
+                                window.location.href = "/employeeInfoView";
+        
+                            }
+        
+        
+                        });
+                    });
+        
+                });
+            },
+        });
+        
+    });
+
    
 
 

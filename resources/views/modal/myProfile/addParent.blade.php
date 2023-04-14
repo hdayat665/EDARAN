@@ -2,7 +2,7 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="add-parent">Update Family</h5>
+                <h5 class="modal-title" id="add-parent">New Family</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -71,7 +71,7 @@
                                     <input type="text" id="expiryDateParent" name="expiryDate" placeholder="YYYY-MM-DD" class="form-control" aria-describedby="expirydate" disabled style="pointer-events: none;" readonly>
                                 </div>
                         <div class="col-sm-3">
-                            <label for="issuing-country" class="form-label">Issuing Country****</label>
+                            <label for="issuing-country" class="form-label">Issuing Country*</label>
                             <select class="form-select" name="issuingCountry" id="passportcountryparent" style="text-transform:uppercase" >
                                 <option value="" label="PLEASE CHOOSE" selected="selected"></option>
                                 <optgroup id="country-optgroup-Americas" label="Americas">
@@ -111,7 +111,7 @@
                     </div>
                     <div class="row p-2">
                         <div class="col-sm-6">
-                            <label for="passport" class="form-label">Phone Numberrr</label>
+                            <label for="passport" class="form-label">Phone Number</label>
                             <input type="text" id="contactNoparent" name="contactNo" class="form-control" aria-describedby="passport" placeholder="00000000000">
                         </div>
                         <div class="col-sm-6">
@@ -223,7 +223,7 @@
             </div>
             <div class="modal-footer"> 
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                <button href="javascript:;" id="addParent" class="btn btn-primary">Update</button>
+                <button href="javascript:;" id="addParent" class="btn btn-primary">Save</button>
             </div>
             </form>
         </div>

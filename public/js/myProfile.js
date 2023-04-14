@@ -202,6 +202,7 @@ $(document).ready(function () {
             $('#ageAddCompanion').val('').prop('readonly', false);
             $('#dobAddCompanion').val('').prop('readonly', false);
 
+
         } else {
             $('#idnumber2').prop('disabled', false);
             $('#gendermyprofile').prop('disabled', true);
@@ -237,12 +238,17 @@ $(document).ready(function () {
             $('#dob4').val('');
             $("#passportcountrychildren").prop('disabled', false);
 
+            $("#expiryDateChild").prop('disabled', false);
+
+
         } else {
             $('#idNoaddChild').prop('disabled', false);
             $('#age4').val('').prop('readonly', true);
             $('#dob4').val('');
             
             $("#passportcountrychildren").prop('disabled', true);
+
+            $("#expiryDateChild").prop('disabled', true);
 
         }
     });
@@ -2090,8 +2096,7 @@ $(document).ready(function () {
                     digits: true,
                     rangelength: [7, 7],
                 },
-                gender: "required",
-                maritalStatus: "required",
+           
 
                 okuNo: {
                     required: true,
@@ -2103,6 +2108,18 @@ $(document).ready(function () {
                     required: true,
 
                 },
+                expiryDate: {
+                    required: true,
+
+                },
+                issuingCountry: {
+                    required: true, 
+                },
+                postcode: {
+                    required: false,
+                    rangelength: [5,5],
+                }
+
             },
 
             messages: {
@@ -2121,8 +2138,7 @@ $(document).ready(function () {
                     digits: "Please Insert Correct Identification Number Without ' - ' or Space",
                     rangelength: "Please Insert Valid Identification Number",
                 },
-                gender: "Please Choose Gender",
-                maritalStatus: "Please Choose Marital Status",
+
 
                 okuNo: {
                     required: "Please Insert OKU Card Number",
@@ -2134,6 +2150,19 @@ $(document).ready(function () {
                     required: "Please Insert OKU Attachment",
 
                 },
+
+                expiryDate: {
+                    required: "Please Insert Expiry Date",
+
+                },
+                issuingCountry: {
+                    required: "Please Insert Issuing Country", 
+                },
+                postcode: {
+                    rangelength: "Please Inset a valid postcode",
+
+
+                }
             },
             submitHandler: function (form) {
                 // requirejs(['sweetAlert2'], function(swal,swal1) {
@@ -2830,10 +2859,10 @@ $(document).ready(function () {
                     rangelength: [10, 11], 
                 },
                 expiryDate: {
-                    required: "Please Insert New Identification Number",
+                    required: "Please Insert Expiry Date",
                 },
                 issuingCountry: {
-                    required: "Please Insert New Identification Number",
+                    required: "Please Insert Issuing Country",
                 }
 
             },
@@ -3864,6 +3893,7 @@ $(".partCheck7").click(function () {
         $("#dob4").css("pointer-events", "auto");
         $("#idNoaddChild").val("");
         $("#passportChild").prop("readonly", false);
+        
         
     } else {
         $("#idNoaddChild").prop("readonly", false);

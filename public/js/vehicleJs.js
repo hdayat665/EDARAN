@@ -22,7 +22,7 @@ $(document).ready(function() {
         $('#add-vehicle').modal('show');
 
     });
-
+    
     $(document).on("click", "#editVehicleView", function() {
         var id = $(this).data('id');
         var vehicleData = getVehicle(id);
@@ -166,39 +166,60 @@ $(document).ready(function() {
     });
 
     $('#updateVehicle').click(function(e) {
-        requirejs(['sweetAlert2'], function(swal) {
+        $("#updateVehicleForm").validate({
+            // Specify validation rules
+            rules: {
+                // vehicle_type: "required",
+                plate_no: "required",
+                vehicle_type: "required"
+            },
 
-            var data = new FormData(document.getElementById("updateVehicleForm"));
+            messages: {
+                // vehicle_type: "required",
+                plate_no: "Please insert plate No",
+                vehicle_type: "Please insert vehicle type"
+            },
 
-            $.ajax({
-                type: "POST",
-                url: "/updateVehicle",
-                data: data,
-                dataType: "json",
-                async: false,
-                processData: false,
-                contentType: false,
-            }).done(function(data) {
-                swal({
-                    title: data.title,
-                    text: data.msg,
-                    type: data.type,
-                     confirmButtonColor: '#3085d6',
-                    confirmButtonText: 'OK',
-                    allowOutsideClick: false,
-                    allowEscapeKey: false,
-                }).then(function() {
-                    if (data.type == 'error') {
-
-                    } else {
-                        location.reload();
-                    }
+            submitHandler: function(form) {
 
 
+
+
+            requirejs(['sweetAlert2'], function(swal) {
+
+                var data = new FormData(document.getElementById("updateVehicleForm"));
+
+                $.ajax({
+                    type: "POST",
+                    url: "/updateVehiclee",
+                    data: data,
+                    dataType: "json",
+                    async: false,
+                    processData: false,
+                    contentType: false,
+                }).done(function(data) {
+                    swal({
+                        title: data.title,
+                        text: data.msg,
+                        type: data.type,
+                        confirmButtonColor: '#3085d6',
+                        confirmButtonText: 'OK',
+                        allowOutsideClick: false,
+                        allowEscapeKey: false,
+                    }).then(function() {
+                        if (data.type == 'error') {
+
+                        } else {
+                            location.reload();
+                        }
+
+
+                    });
                 });
-            });
 
-        });
+            });
+        }    
+    });
     });
 
 });

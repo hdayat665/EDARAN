@@ -453,7 +453,6 @@ $(document).ready(function() {
 
                 company: "required",
                 departmentId: "required",
-                unitId: "required",
                 branchId: "required",
                 jobGrade: "required",
                 designation: "required",
@@ -471,7 +470,6 @@ $(document).ready(function() {
 
                 company: "Please Insert Company",
                 departmentId: "Please Insert Department",
-                unitId: "Please Insert Unit",
                 branchId: "Please Insert Branch",
                 jobGrade: "Please Insert Job Grade",
                 designation: "Please Insert Designation",
