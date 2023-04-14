@@ -16,9 +16,35 @@
             </tr>
         </thead>
         <tbody>
-            @if ($claims)
-                @foreach ($claims as $claim)
-                    @if ($claim->f1 == 'recommend' && $claim->f_recommender == '')
+        @php
+                $roles = ['SUPERVISOR - RECOMMENDER', 'HOD / CEO - APPROVER', 'ADMIN - CHECKER', 'ADMIN - RECOMMENDER', 'ADMIN - APPROVER','FINANCE - CHECKER'];
+                $condByPass = '$claim->id != ""';
+                $configData = null;
+                foreach ($roles as $role) {
+                    $configData = getApprovalConfigClaim($role);
+                    if ($configData->status) {
+                        if ($role == 'SUPERVISOR - RECOMMENDER') {
+                            $condByPass = '$claim->supervisor == "recommend"';
+                        } elseif ($role == 'HOD / CEO - APPROVER') {
+                            $condByPass = '$claim->hod == "recommend"';
+                        } elseif ($role == 'ADMIN - CHECKER') {
+                            $condByPass = '$claim->a1 == "recommend"';
+                        } elseif ($role == 'ADMIN - RECOMMENDER') {
+                            $condByPass = '$claim->a_recommender == "recommend"';
+                        } elseif ($role == 'ADMIN - APPROVER') {
+                            $condByPass = '$claim->a_approval == "recommend"';
+                        } elseif ($role == 'FINANCE - CHECKER') {
+                            $condByPass = '$claim->f1 == "recommend"';
+                        }
+                        break;
+                    }
+                }
+            @endphp
+            
+            @foreach ($claims as $claim)
+                @if (isset($config->status))
+                    @if ( $claim->f1 == 'recommend' && $claim->f_recommender == '' && eval("return $condByPass;"))
+
                         <tr>
                         
                             <td>
@@ -55,8 +81,8 @@
                             <td>{{ date('Y-m-d', strtotime($claim->updated_at)) ?? '-' }}</td>
                         </tr>
                     @endif
-                @endforeach
-            @endif
+                @endif
+            @endforeach
         </tbody>
     </table>
 </div>

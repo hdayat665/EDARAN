@@ -584,24 +584,24 @@ $(document).ready(function () {
                         {
                             text: "Employee Info",
                             id: "employee_info",
-                            // children: [
-                            //     {
-                            //         text: "Register Employee",
-                            //         id: "hris_register_employee",
-                            //     },
-                            //     {
-                            //         text: "Update Employee",
-                            //         id: "hris_update_employee",
-                            //     },
-                            //     {
-                            //         text: "Terminate Employee",
-                            //         id: "hris_terminate_employee",
-                            //     },
-                            //     {
-                            //         text: "Activate Employee",
-                            //         id: "hris_activate_employee",
-                            //     },
-                            // ],
+                            children: [
+                                {
+                                    text: "Register Employee",
+                                    id: "hris_register_employee",
+                                },
+                                // {
+                                //     text: "Update Employee",
+                                //     id: "hris_update_employee",
+                                // },
+                                // {
+                                //     text: "Terminate Employee",
+                                //     id: "hris_terminate_employee",
+                                // },
+                                // {
+                                //     text: "Activate Employee",
+                                //     id: "hris_activate_employee",
+                                // },
+                            ],
                         },
                     ],
                 },

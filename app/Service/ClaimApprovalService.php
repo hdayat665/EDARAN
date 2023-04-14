@@ -678,6 +678,16 @@ class ClaimApprovalService
             $role = 'SUPERVISOR - RECOMMENDER';
         } elseif ($type == '3') {
             $role = 'ADMIN - CHECKER';
+        } elseif ($type == '4') {
+            $role = 'ADMIN - RECOMMENDER';
+        }elseif ($type == '5') {
+            $role = 'ADMIN - APPROVER';
+        }elseif ($type == '6') {
+            $role = 'FINANCE - CHECKER';
+        }elseif ($type == '7') {
+            $role = 'FINANCE - RECOMMENDER';
+        }elseif ($type == '8') {
+            $role = 'FINANCE - APPROVER';
         }
 
         $data = ApprovalConfig::where([['type_claim', $type_claim], ['tenant_id', Auth::user()->tenant_id], ['role', $role]])->first();
