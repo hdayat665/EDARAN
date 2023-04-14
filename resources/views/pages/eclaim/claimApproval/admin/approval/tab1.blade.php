@@ -16,9 +16,36 @@
             </tr>
         </thead>
         <tbody>
-            @if ($claims)
-                @foreach ($claims as $claim)
-                    @if ($claim->a1 == 'recommend' && $claim->a_approval == '' && $claim->claim_type == 'MTC')
+        {{-- check if config approval status enable or disable for role before approver  --}}
+            @php
+                $roles = ['SUPERVISOR - RECOMMENDER', 'HOD / CEO - APPROVER', 'ADMIN - CHECKER','ADMIN - RECOMMENDER'];
+                
+                $condByPass = ' $claim->id != ""';
+                foreach ($roles as $role) {
+                    $configData = getApprovalConfigClaim($role);
+                    
+                    if ($configData->status) {
+                        if ($role == 'SUPERVISOR - RECOMMENDER') {
+                            $condByPass = ' $claim->supervisor == "recommend"';
+                        }
+                
+                        if ($role == 'HOD / CEO - APPROVER') {
+                            $condByPass = ' $claim->hod == "recommend"';
+                        }
+                        
+                        if ($role == 'ADMIN - CHECKER') {
+                            $condByPass = ' $claim->a1 == "recommend"';
+                        }
+                        if ($role == 'ADMIN - RECOMMENDER') {
+                            $condByPass = ' $claim->a_recommender == "recommend"';
+                        }
+                    }
+                }
+            @endphp
+             {{-- {{ dd($configData->status) }} --}}
+            @foreach ($claims as $claim)
+                @if (isset($config->status))
+                    @if ( $claim->a_recommender == 'recommend' && $claim->a_approval == '' && $claim->claim_type == 'MTC' && eval("return $condByPass;"))
                         <tr>
                         
                             <td>
@@ -50,8 +77,8 @@
                             <td>{{ date('Y-m-d', strtotime($claim->updated_at)) ?? '-' }}</td>
                         </tr>
                     @endif
-                @endforeach
-            @endif
+                @endif
+            @endforeach
         </tbody>
     </table>
 </div>

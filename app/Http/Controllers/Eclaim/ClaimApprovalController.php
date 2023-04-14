@@ -181,7 +181,7 @@ class ClaimApprovalController extends Controller
         $result = $mcs->financeCheckerView();
         $data['check'] = $result['check'];
         $data['claims'] = $result['general'];
-
+        $data['config'] = $mcs->getApprovalConfig(6, 'monthly');
         $view = 'financeChecker';
 
         return view('pages.eclaim.claimApproval.finance.checker.' . $view, $data);
@@ -195,7 +195,7 @@ class ClaimApprovalController extends Controller
         $data['config'] = $mcs->getApprovalConfig(3, 'monthly');
         $data['check'] = $result['check'];
         $data['claims'] = $result['general'];
-
+        
         $view = 'adminChecker';
 
         return view('pages.eclaim.claimApproval.admin.checker.' . $view, $data);
@@ -206,7 +206,7 @@ class ClaimApprovalController extends Controller
     public function financeRecView()
     {
         $mcs = new ClaimApprovalService;
-
+        $data['config'] = $mcs->getApprovalConfig(7, 'monthly');
         $data['claims'] = $mcs->financeRecView();
 
         $view = 'financeRec';
@@ -217,9 +217,9 @@ class ClaimApprovalController extends Controller
     public function adminRecView()
     {
         $mcs = new ClaimApprovalService;
-
+        $data['config'] = $mcs->getApprovalConfig(4, 'monthly');
         $data['claims'] = $mcs->adminRecView();
-
+        
         $view = 'adminRec';
 
         return view('pages.eclaim.claimApproval.admin.recommender.' . $view, $data);
@@ -229,9 +229,9 @@ class ClaimApprovalController extends Controller
     public function financeApprovalView()
     {
         $mcs = new ClaimApprovalService;
-
+        $data['config'] = $mcs->getApprovalConfig(8, 'monthly');
         $data['claims'] = $mcs->financeRecView();
-
+        //pr($data['config']);
         $view = 'fapproval';
 
         return view('pages.eclaim.claimApproval.finance.approval.' . $view, $data);
@@ -240,7 +240,7 @@ class ClaimApprovalController extends Controller
     public function adminApprovalView()
     {
         $mcs = new ClaimApprovalService;
-
+        $data['config'] = $mcs->getApprovalConfig(5, 'monthly');
         $data['claims'] = $mcs->adminRecView();
 
         $view = 'adminApproval';
