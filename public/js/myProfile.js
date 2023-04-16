@@ -462,6 +462,7 @@ $(document).ready(function () {
                     rangelength: [4, 4],
                 },
                 okuCardNum: {
+                    required: true,
                     digits: true,
                 },
                 // issuingCountry: "required",
@@ -1594,7 +1595,8 @@ $(document).ready(function () {
                 city: "required",
                 state: "required",
                 country: "required",
-                age: "required",
+                expiryDate: "required",
+                issuingCountry: "required",
                 postcode: {
                     required: true,
                     digits: true,
@@ -1638,8 +1640,9 @@ $(document).ready(function () {
                 address1: "Please Insert Address 1",
                 city: "Please Insert City",
                 state: "Please Choose State",
-                age: "Please Insert Age",
                 country: "Please Choose Country",
+                expiryDate: "Please Insert Expiry Date",
+                issuingCountry: "Please Choose Issuing Country",
                 postcode: {
                     required: "Please Insert Postcode",
                     digits: "Please Insert Valid Postcode",

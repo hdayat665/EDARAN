@@ -6,9 +6,9 @@
                     <h4 class="fw-bold">
                         Employment Information
                     </h4>
-                    <p class="fw-light">
+                    {{-- <p class="fw-light">
                         Update your employment information
-                    </p>
+                    </p> --}}
                 </div>
 
                 <div class="card-body">
@@ -49,7 +49,7 @@
                         </select>
                     </div>
                     <div class="row p-2">
-                        <label for="firstname" class="form-label">Unit*</label>
+                        <label for="firstname" class="form-label">Unit</label>
                         <select class="form-select" name="unit" aria-label="Disabled select example" disabled>>
                             <?php $Units = getUnit(); ?>
                             <option value="0" label="PLEASE CHOOSE"></option>
@@ -74,8 +74,8 @@
                     </div>
                     <div class="row p-2">
                         <label for="firstname" class="form-label">Joined Date*</label>
-                        <input type="text" name="joinedDate" id="datepicker-joindate" placeholder="YYYY-MM-DD"
-                            class="form-control" aria-describedby="address-2" readonly>
+                        <input type="text" name="joinedDate" value="{{ $employment->joinedDate ?? '' }}" id="datepicker-joindate" placeholder="YYYY-MM-DD"
+                            class="form-control" aria-describedby="address-2" disabled>
                     </div>
                     <div class="row p-2">
                         <label for="firstname" class="form-label">Job Grade*</label>
@@ -115,6 +115,15 @@
                             @endforeach
                         </select>
                     </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <label for="employee-id" class="form-label">Charge Out Rate</label>
+                            <input type="number" id="" name="COR"
+                                value="{{ $employment->COR ?? '' }}" class="form-control"
+                                aria-describedby="employee-id" disabled>
+                        </div>
+                    </div>
                     <!-- <div class="row p-2">
                         <label class="form-label" for="supervisor">
                               User Role
@@ -130,6 +139,30 @@
                         </div>
                     </div> -->
                     <hr>
+                    <div class="row p-2">
+                        <div class="col-sm-6">
+                            <label for="employee-id" class="form-label">Employee ID</label>
+                            <input type="text" id="employee-id" name="employeeId"
+                                value="{{ $employment->employeeId ?? '' }}" class="form-control"
+                                aria-describedby="employee-id" disabled>
+                            <input type="hidden" value="{{ $employment->user_id ?? '' }}" name="user_id">
+                        </div>
+                        <div class="col-sm-6">
+                            <label for="employee-name" class="form-label">Employee Name</label>
+                            <input type="text" id="employee-name" name="employeeName" class="form-control"
+                                value="{{ $employment->employeeName ?? '' }}" aria-describedby="employee-name"
+                                disabled>
+                        </div>
+                    </div>
+                    <div class="row p-2">
+                        <div class="col-sm-6">
+                            <label for="employee-email" class="form-label">Employee Email</label>
+                            <input type="text" id="employee-email" name="employeeEmail" class="form-control"
+                                value="{{ $employment->workingEmail ?? '' }}" aria-describedby="employee-email"
+                                disabled>
+                        </div>
+                    </div>
+                    <hr>
                     {{-- <button type="button" class="btn btn-primary float-end" data-bs-toggle="modal" data-bs-target="#update-employment"">
                         Update
                     </button> --}}
@@ -144,9 +177,9 @@
                             <h4 class="fw-bold">
                                 Job History
                             </h4>
-                            <p class="fw-light">
+                            {{-- <p class="fw-light">
                                 Update your history information
-                            </p>
+                            </p> --}}
                         </div>
                         <div class="col">
                             <button class="btn btn-white float-end" data-bs-toggle="dropdown">
