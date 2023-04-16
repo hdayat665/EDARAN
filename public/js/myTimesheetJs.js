@@ -955,8 +955,8 @@ $(document).ready(function() {
                     title:  holidays['holiday_title'],
                     start: startYear + '-' + startMonth + '-' + startDay,
                     end: endYear + '-' + endMonth + '-' + endDay,
-                    color: app.color.yellow,
-                    // color: "#E0E0E0",
+                    // color: app.color.yellow,
+                    color: "#FFD580",
                     textColor: "black",
                     fontWeight: "bold",
                     extendedProps: {
@@ -973,7 +973,7 @@ $(document).ready(function() {
             dataleave = dataEvent.concat(leave);
             dataHoliday = dataleave.concat(holiday);
 
-            console.log(dataHoliday);
+            // console.log(dataHoliday);
             var calendar = new FullCalendar.Calendar(calendarElm, {
                 headerToolbar: {
                     left: 'logButton EventButton SumButton',
@@ -1000,25 +1000,65 @@ $(document).ready(function() {
                         }
                     }  
                 },
-                // example changing background color
+               
                 // dayCellDidMount: function(info) {
-                //     var date = info.date;
-                //     var dateStr = date.getFullYear() + '-' + (date.getMonth()+1) + '-' + date.getDate();
-                //     console.log(dateStr); // Add this line to print the value of dateStr to the console
-                //     if (dateStr === '2023-4-17') {
-                //       $(info.el).css('background-color', '#ffcc00');
+
+                //     var swtholiday = new Date(holidays['start_date']);
+                //     var switholiday = new Date(swtholiday.getFullYear(), swtholiday.getMonth(), swtholiday.getDate(), 0, 0, 0, 0);
+                
+                //     var ewtholiday = new Date(holidays['end_date']);
+                //     var ewitholiday = new Date(ewtholiday.getFullYear(), ewtholiday.getMonth(), ewtholiday.getDate(), 0, 0, 0, 0);
+                
+                //     var current = new Date(info.date);
+                
+                //     if (info.date.getDay() === 0) { // Sunday
+                //         $(info.el).css('background-color', '#87CEEB'); 
+                //     } else if (info.date.getDay() === 6) { // Saturday
+                //         $(info.el).css('background-color', '#87CEEB'); 
+                //     } else if (current >= switholiday && current <= ewitholiday) { 
+                //         $(info.el).css('background-color', 'green');
+                //     } else {
+                //         $(info.el).css('background-color', 'white');
                 //     }
-                //   },
+                // },
 
                 dayCellDidMount: function(info) {
-                    if (info.date.getDay() === 0) { // Sunday
-                    //   console.log(info.date.getDay()); 
-                      $(info.el).css('background-color', '#87CEEB'); 
+                
+                    var swtholiday = new Date(holidays['start_date']);
+                    var switholiday = new Date(swtholiday.getFullYear(), swtholiday.getMonth(), swtholiday.getDate(), 0, 0, 0, 0);
+                
+                    var ewtholiday = new Date(holidays['end_date']);
+                    var ewitholiday = new Date(ewtholiday.getFullYear(), ewtholiday.getMonth(), ewtholiday.getDate(), 0, 0, 0, 0);
+
+
+                    var swtleave = new Date(leaves['start_date']);
+                    var swileave = new Date(swtleave.getFullYear(), swtleave.getMonth(), swtleave.getDate(), 0, 0, 0, 0);
+                
+                    var ewtleave = new Date(leaves['end_date']);
+                    var ewleave = new Date(ewtleave.getFullYear(), ewtleave.getMonth(), ewtleave.getDate(), 0, 0, 0, 0);
+                
+                    var current = new Date(info.date);
+                
+                    if (current >= switholiday && current <= ewitholiday) { 
+                        $(info.el).css('background-color', '#FFD580');
+                    } else if (current >= swileave && current <= ewleave){
+                        $(info.el).css('background-color', '#E0E0E0');
+                    
+                    }else if (info.date.getDay() === 0) { // Sunday
+                        $(info.el).css('background-color', '#87CEEB'); 
+                    } else if (info.date.getDay() === 6) { // Saturday
+                        $(info.el).css('background-color', '#87CEEB'); 
+                    } else {
+                        $(info.el).css('background-color', 'white');
                     }
-                    if (info.date.getDay() === 6) { // Saturday
-                      $(info.el).css('background-color', '#87CEEB'); 
-                    }
-                  },
+                },
+                
+                
+                
+                
+                
+                
+                
 
 
                   
@@ -1266,7 +1306,7 @@ $(document).ready(function() {
                         }
                     })
 
-                    if(info.event.extendedProps.type == "leave") {
+                    if(info.event.extendedProps.type == "leave" || info.event.extendedProps.type == "holiday") {
                     
                    
                     } 
