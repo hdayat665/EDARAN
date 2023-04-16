@@ -1001,46 +1001,39 @@ $(document).ready(function() {
                     }  
                 },
                
-                // dayCellDidMount: function(info) {
-
-                //     var swtholiday = new Date(holidays['start_date']);
-                //     var switholiday = new Date(swtholiday.getFullYear(), swtholiday.getMonth(), swtholiday.getDate(), 0, 0, 0, 0);
-                
-                //     var ewtholiday = new Date(holidays['end_date']);
-                //     var ewitholiday = new Date(ewtholiday.getFullYear(), ewtholiday.getMonth(), ewtholiday.getDate(), 0, 0, 0, 0);
-                
-                //     var current = new Date(info.date);
-                
-                //     if (info.date.getDay() === 0) { // Sunday
-                //         $(info.el).css('background-color', '#87CEEB'); 
-                //     } else if (info.date.getDay() === 6) { // Saturday
-                //         $(info.el).css('background-color', '#87CEEB'); 
-                //     } else if (current >= switholiday && current <= ewitholiday) { 
-                //         $(info.el).css('background-color', 'green');
-                //     } else {
-                //         $(info.el).css('background-color', 'white');
-                //     }
-                // },
-
                 dayCellDidMount: function(info) {
                 
+                    var current = new Date(info.date);
+                    console.log(log)
+                    if (!holidays || !leaves || !log ) {
+                        
+                       if(info.date.getDay() === 0) {
+                        $(info.el).css('background-color', '#87CEEB'); 
+                       } else if(info.date.getDay() === 6) {
+                        $(info.el).css('background-color', '#87CEEB'); 
+                       }else {
+                        $(info.el).css('background-color', 'white');
+                       }
+                        return;
+                      }
+                    else {
+                    console.log(logs['start_time'])
+                    console.log(logs['end_time'])
+                    
                     var swtholiday = new Date(holidays['start_date']);
                     var switholiday = new Date(swtholiday.getFullYear(), swtholiday.getMonth(), swtholiday.getDate(), 0, 0, 0, 0);
                 
                     var ewtholiday = new Date(holidays['end_date']);
                     var ewitholiday = new Date(ewtholiday.getFullYear(), ewtholiday.getMonth(), ewtholiday.getDate(), 0, 0, 0, 0);
 
-
                     var swtleave = new Date(leaves['start_date']);
                     var swileave = new Date(swtleave.getFullYear(), swtleave.getMonth(), swtleave.getDate(), 0, 0, 0, 0);
-                
+
                     var ewtleave = new Date(leaves['end_date']);
                     var ewleave = new Date(ewtleave.getFullYear(), ewtleave.getMonth(), ewtleave.getDate(), 0, 0, 0, 0);
-                
-                    var current = new Date(info.date);
-                
+
                     if (current >= switholiday && current <= ewitholiday) { 
-                        $(info.el).css('background-color', '#FFD580');
+                    $(info.el).css('background-color', '#FFD580');
                     } else if (current >= swileave && current <= ewleave){
                         $(info.el).css('background-color', '#E0E0E0');
                     
@@ -1050,6 +1043,7 @@ $(document).ready(function() {
                         $(info.el).css('background-color', '#87CEEB'); 
                     } else {
                         $(info.el).css('background-color', 'white');
+                    }
                     }
                 },
                 
