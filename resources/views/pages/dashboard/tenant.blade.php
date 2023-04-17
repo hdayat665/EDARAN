@@ -100,7 +100,7 @@
 								<td>{{$index+1}}</td>
 								<td>{{$new->title}}</td>
 								<td>{{$new->content}}</td>
-								<td><a href= "{{$new->sourceURL}}">{{$new->sourceURL}}</a></td>
+								<td><a href="{{$new->sourceURL}}" target="_blank">{{$new->sourceURL}}</a></td>|
 								<td><a href="{{ route('download', ['filename' => $new->file]) }}">{{$new->file}}</a></td>  
 							</tr>
 						@endforeach
