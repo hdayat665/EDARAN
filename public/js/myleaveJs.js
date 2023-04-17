@@ -19,8 +19,18 @@ $(document).ready(function () {
 
     $("#table-leave").DataTable({
         responsive: false,
-        bFilter: true,
-        paging: false,
+        lengthMenu: [
+            [5, 10, 25, 50, -1],
+            [5, 10, 25, 50, "All"],
+        ],
+    });
+
+    $("#table-leave2").DataTable({
+        responsive: false,
+        lengthMenu: [
+            [5, 10, 25, 50, -1],
+            [5, 10, 25, 50, "All"],
+        ],
     });
 
     var mypie1 = mypie1();

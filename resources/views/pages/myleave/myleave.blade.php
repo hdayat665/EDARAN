@@ -74,7 +74,7 @@
 
                                 <div class="row p-2">
                                     <div class="form-control">
-                                    <h4> My Leave </h4>
+                                    <h4> My Leave </h4><br>
                                         {{-- <div class="input-group rounded">
                                             <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
                                                 <span type="button" class="input-group-text border-0" id="search-addon">
@@ -186,7 +186,7 @@
                                                 <div class="form-control">						
                                                     <div class="row p-2">
                                                         <div class="col-md-2">
-                                                            <label class="form-label">Date</label>
+                                                            <label class="form-label">Apply Date</label>
                                                             <div class="input-group">
                                                                 <input type="text" class="form-control" name="applydate" value="<?php echo $applydate; ?>" id="datepicker-filter" placeholder="YYYY/MM/DD"/>
                                                                     
