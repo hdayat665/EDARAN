@@ -66,7 +66,7 @@
                             <div class="row">
                                 <div class="col-sm-12">
                                     <label for="passport" class="form-label">Passport Number</label>
-                                    <input type="text" id="passportChild" name="passport"  class="form-control" aria-describedby="passport" readonly placeholder="PASSPORT NUMBER">
+                                    <input type="text" id="passportChild" name="passport"  class="form-control" aria-describedby="passport"  placeholder="PASSPORT NUMBER">
                                 </div>
                                 {{-- <div class="col-sm-6">
                                     <label for="expirydate" class="form-label">Expiry Date*</label>
@@ -121,7 +121,7 @@
                             <label for="issuing-country" class="form-label">Marital Status</label>
                             <select class="form-select" name="maritalStatus" id="" style="text-transform:uppercase">
                                 <?php $maritalStatus = getMaritalStatus() ?>
-                                <option value="" label="PLEASE CHOOSE" selected="selected"></option>
+                                <option value="0" label="PLEASE CHOOSE" selected="selected"></option>
                                 @foreach ($maritalStatus as $key => $status)
                                 <option value="{{$key}}">{{$status}}</option>
                                 @endforeach

@@ -564,13 +564,14 @@ class EmployeeService
                 }
             }
     
-            if ($_FILES['idFile']['name']) {
-                $idOKU = upload($r->file('idFile'));
-                $input['idFile'] = $idOKU['filename'];
-    
-                if (!$input['idFile']) {
-                    unset($input['idFile']);
-                }
+         
+
+
+            if (isset($_FILES['okuattach']['name'])) {
+                $idOku = upload(request()->file('okuattach'));
+                $input['okuattach'] = $idOku['filename'];
+            } else {
+                $input['okuattach'] = null;
             }
 
             $input['dateJoined'] = dateFormat($input['dateJoined']);
