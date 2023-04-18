@@ -374,7 +374,7 @@ class ProfileService
             $data['status'] = config('app.response.success.status');
             $data['type'] = config('app.response.success.type');
             $data['title'] = config('app.response.success.title');
-            $data['msg'] = 'Success Update Address';
+            $data['msg'] = 'Address Is Updated';
 
         }
 
@@ -1271,7 +1271,7 @@ class ProfileService
             $data['status'] = config('app.response.success.status');
             $data['type'] = config('app.response.success.type');
             $data['title'] = config('app.response.success.title');
-            $data['msg'] = 'Success Update Address';
+            $data['msg'] = 'Address Is Updated';
         }
 
         return $data;
@@ -1425,7 +1425,7 @@ class ProfileService
             $data['status'] = config('app.response.success.status');
             $data['type'] = config('app.response.success.type');
             $data['title'] = config('app.response.success.title');
-            $data['msg'] = 'Address deleted';
+            $data['msg'] = 'Address Is Deleted';
         }
 
         return $data;

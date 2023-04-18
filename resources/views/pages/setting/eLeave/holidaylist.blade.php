@@ -82,7 +82,7 @@
 			<div class="modal-dialog" role="document">
 				<div class="modal-content">
 					<div class="modal-header">
-						<h5 class="modal-title" id="exampleModalLabel">Add Holiday</h5>
+						<h5 class="modal-title" id="exampleModalLabel">New Holiday</h5>
 						<button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 						</button>
@@ -93,13 +93,13 @@
 								<div class="col md-6">
 									<div class="mb-3">
 										<label for="holidaytitle" class="form-label">Holiday Title* </label>
-										<input type="text" class="form-control" name="holiday_title" id="holiday_title" style="text-transform:uppercase">
+										<input type="text" class="form-control" name="holiday_title" id="holiday_title" placeholder="HOLIDAY TITLE" style="text-transform:uppercase">
 									</div>
 								</div>
 								<div class="col md-6">
 									<div class="mb-3">
 										<div class="row ">
-											<span class="form-label">Set as annual holiday</span>
+											<span class="form-label">Set as Annual Holiday</span>
 										</div>
 										<div></div>
 										<div class="form-check form-check-inline">
@@ -122,13 +122,13 @@
 								<div class="col md-6">
 									<div class="mb-3">
 										<label for="exampleInputEmail1" class="form-label">Start Date* </label>
-										<input type="text" class="form-control" name= "start_date" id="datepickerstart">
+										<input type="text" class="form-control" name= "start_date" placeholder="YYYY/MM/DD" id="datepickerstart">
 									</div>
 								</div>
 								<div class="col md-6">
 									<div class="mb-3">
 										<label for="" class="form-label">End Date* </label>
-										<input type="text" class="form-control" name= "end_date" id="datepickerend" />
+										<input type="text" class="form-control" name= "end_date" placeholder="YYYY/MM/DD" id="datepickerend" />
 									</div>
 								</div>
 							</div>
@@ -158,14 +158,14 @@
 								<div class="col md-6">
 									<div class="mb-3">
 										<label for="holiday_title" class="form-label">Holiday Title* </label>
-										<input type="text" class="form-control" id="holidaytitle" name="holidaytitle" style="text-transform:uppercase">
+										<input type="text" class="form-control" id="holidaytitle" name="holidaytitle" placeholder="HOLIDAY TITLE" style="text-transform:uppercase">
 										<input type="hidden" id="idholiday" class="form-control" name="idholiday" placeholder="" >
 									</div>
 								</div>
 								<div class="col md-6">
 									<div class="mb-3">
 										<div class="row ">
-											<span class="form-label">Set as annual holiday</span>
+											<span class="form-label">Set as Annual Holiday</span>
 										</div>
 										<div></div>
 										<div class="form-check form-check-inline">
@@ -188,13 +188,13 @@
 								<div class="col md-6">
 									<div class="mb-3">
 										<label for="exampleInputEmail1" class="form-label">Start Date* </label>
-										<input type="text" class="form-control" name="start_date" id="udatepickerstart">
+										<input type="text" class="form-control" name="start_date" placeholder="YYYY/MM/DD" id="udatepickerstart">
 									</div>
 								</div>
 								<div class="col md-6">
 									<div class="mb-3">
 										<label for="" class="form-label">End Date* </label>
-										<input type="text" class="form-control" name="enddate" id="udatepickerend" />
+										<input type="text" class="form-control" name="enddate" placeholder="YYYY/MM/DD" id="udatepickerend" />
 									</div>
 								</div>
 							</div>
