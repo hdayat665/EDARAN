@@ -29,8 +29,8 @@
                             <div class="row">
                                 <div class="col-md-3">
                                     <div class="row p-1">
-                                        <label for="date">Date</label>
-                                        <input type="text" class="form-control" name="applydate" value="<?php echo $applydate; ?>" id="datepicker-date">
+                                        <label for="date">Apply Date</label>
+                                        <input type="text" class="form-control" placeholder="YYYY/MM/DD" name="applydate" value="<?php echo $applydate; ?>" id="datepicker-date">
                                     </div>
                                 </div>
                                 <div class="col-md-3">
@@ -68,7 +68,7 @@
                     </form>
                 </div>
                 <br>
-                <table id="table-leave" class="table table-striped table-bordered align-middle">
+                <table id="leaveApprovalhod" class="table table-striped table-bordered align-middle">
                     <thead>
                         <tr>
                             <th>Action</th>
@@ -94,7 +94,7 @@
                                         <a class="dropdown-item" href="/myTimesheet">View Calendar</a>
 
                                          <div class="dropdown-divider" style=""></div>
-                                            <a href="javascript:;" id="viewbutton" data-id="{{ $l->id }}" data-bs-toggle="modal" data-bs-target="#viewmodal" class="btn">View User</a>
+                                            <a href="javascript:;" id="viewbutton" data-id="{{ $l->id }}" data-bs-toggle="modal" data-bs-target="#viewmodal" class="btn">View Leave</a>
                                         @if ($l->up_app_status == '4')
                                         @else
                                             <div class="dropdown-divider" style=""></div>
@@ -238,7 +238,7 @@
                                             </div>
                                         </div>
                                         <div class="modal-footer">
-                                            <button class="btn btn-primary" id="updateButton">Approve</button>
+                                            <!-- <button class="btn btn-primary" id="updateButton">Approve</button> -->
                                             {{-- <button type="button" class="btn btn-primary" data-bs-dismiss="modal" >Approve</button> --}}
                                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" >Close</button>
                                         </div>

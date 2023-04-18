@@ -114,11 +114,15 @@ class MyleaveService
 
 
 
-       $getdata = 
-       Employee::where('tenant_id', Auth::user()->tenant_id)
+       $getdata = Employee::where('tenant_id', Auth::user()->tenant_id)
                         ->where('user_id', '=', Auth::user()->id)
                         ->first(); 
         //  $etData = leavetypesModel::where([['leave_types_code', $input['leave_types_code']], ['tenant_id', Auth::user()->tenant_id]])->first();
+        
+        //pr($getdata->eleaverecommender);
+
+       
+
         if (!$getdata) {
             $data['msg'] = 'Please select the e-Leave approver';
             $data['status'] = config('app.response.error.status');
@@ -189,6 +193,39 @@ class MyleaveService
             $data10 = null;
         }
         
+        if (!$getdata->eleaverecommender) {
+            
+            $input = [
+                'applied_date' => $data1,
+                'lt_type_id' => $data2,
+                'day_applied' => $data3,
+                'total_day_applied' => $data4,
+                'leave_date' => $data5,
+                'start_date' => $data6,
+                'end_date' => $data7,
+                'file_document' => $data8,
+                'reason' => $data9,
+                'leave_session' => $data10,
+                'up_approvedby_id' => $getdata->eleaveapprover,
+                'status_user' => '2',
+                'up_rec_status' => '4',
+                'up_app_status' => '2',
+                'status_final' => '1',
+                'tenant_id' => Auth::user()->tenant_id,
+                'up_user_id' => Auth::user()->id 
+            ];
+
+        MyLeaveModel::create($input);
+        
+
+        $data['status'] = config('app.response.success.status');
+        $data['type'] = config('app.response.success.type');
+        $data['title'] = config('app.response.success.title');
+        $data['msg'] = 'Leave Application is Applied';
+
+        return $data;
+
+        }
 
         $input = [
                 'applied_date' => $data1,

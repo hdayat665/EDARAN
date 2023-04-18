@@ -3717,7 +3717,7 @@ $(document).ready(function () {
                 // Update the UI to reflect the new address type
                 Swal.fire({
                     icon: 'success',
-                    title: 'Address type updated successfully!',
+                    title: 'Address Type Is Updated!',
                     confirmButtonColor: "#3085d6",
                     confirmButtonText: "OK",
                     allowOutsideClick: false,

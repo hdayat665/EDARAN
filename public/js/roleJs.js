@@ -1,4 +1,5 @@
 $(document).ready(function () {
+    
     $("#datepicker-joindate").datepicker({
         todayHighlight: true,
         autoclose: true,

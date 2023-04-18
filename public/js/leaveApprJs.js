@@ -21,12 +21,14 @@ $(document).ready(function () {
         $("#type").val($("#type").data("default-value"));
     });
 
-    $("#table-leave").DataTable({
+    $("#leaveApprovalSv").DataTable({
         responsive: false,
-        bFilter: true,
-        paging: false,
+        lengthMenu: [
+            [5, 10, 25, 50, -1],
+            [5, 10, 25, 50, "All"],
+        ],
     });
-
+    
     $("#datepicker-date").datepicker({
         todayHighlight: true,
         autoclose: true,

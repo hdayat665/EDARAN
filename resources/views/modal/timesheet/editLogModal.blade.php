@@ -12,10 +12,10 @@
                             <label for="firstname" class="form-label">Type Of Log*</label>
                             <select class="form-select" id="typeoflogedit" name="type_of_log" aria-label="Default select example" style="pointer-events:none;background:#e9ecef;">
                                 <option class="form-label" value="" selected>PLEASE CHOOSE </option>
-                                <option class="form-label" value="1">Home</option>
-                                <option class="form-label" value="2">Office</option>
-                                <option class="form-label" value="3">My Project</option>
-                                <option class="form-label" value="4">Others</option>
+                                <option class="form-label" value="1">HOME</option>
+                                <option class="form-label" value="2">OFFICE</option>
+                                <option class="form-label" value="3">MY PROJECT</option>
+                                <option class="form-label" value="4">OTHERS</option>
                             </select>
                         </div>
                         <div class="col-sm-6">
@@ -31,8 +31,8 @@
                             <label for="Office-Log" class="form-label">Office Log*</label>
                             <select class="form-select" id="officelog2edit" name="office_log" aria-label="Default select example" style="pointer-events:none;background:#e9ecef;">
                                 <option class="form-label" value="" selected>PLEASE CHOOSE*</option>
-                                <option class="form-label" value="1">My Project</option>
-                                <option class="form-label" value="2">Activity</option>
+                                <option class="form-label" value="1">MY PROJECT</option>
+                                <option class="form-label" value="2">ACTIVITY</option>
                             </select>
                         </div>
                         <div class="col-sm-6" id="myprojectedit" style="display:none">
@@ -94,7 +94,7 @@
                             </div> --}}
 
                             <div class="col-sm-6" id="locationByProjectEditHide" style="display: none">
-                                <label for="issuing-country" class="form-label">Project Location 12</label>
+                                <label for="issuing-country" class="form-label">Project Location*</label>
                                 <select class="form-select" id="projectlocsearchedit" name="project_location" aria-label="Default select example">
                                     <option class="form-label" value="">PLEASE CHOOSE</option>
                                     <?php $projectLocations = projectLocation() ?>

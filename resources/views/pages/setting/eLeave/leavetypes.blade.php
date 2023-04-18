@@ -74,7 +74,7 @@
 			<div class="modal-dialog" role="document">
 				<div class="modal-content">
 					<div class="modal-header">
-						<h5 class="modal-title" id="exampleModalLabel">Add Leave Type</h5>
+						<h5 class="modal-title" id="exampleModalLabel">New Leave Type</h5>
 						<button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 						</button>
@@ -83,11 +83,11 @@
 						<form id="addForm">
 							<div class="mb-3">
 							<label for="leavetype" class="form-label">Leave Type Code*</label>
-							<input type="text" class="form-control" name="leave_types_code" id="leave_types_code" placeholder="Input Leave Code" style="text-transform:uppercase">
+							<input type="text" class="form-control" name="leave_types_code" id="leave_types_code" placeholder="LEAVE CODE" style="text-transform:uppercase">
 							</div>
 							<div class="mb-3">
 							<label for="Leavetype" class="form-label">Leave Type*</label>
-							<input type="text" class="form-control" id="leave_types" name="leave_types" placeholder="Input Leave type" style="text-transform:uppercase">
+							<input type="text" class="form-control" id="leave_types" name="leave_types" placeholder="LEAVE TYPE" style="text-transform:uppercase">
 							</div>
 
 							<div class="mb-3">
@@ -133,12 +133,12 @@
 						<form id="updateForm"> 
 							<div class="mb-3">
 							<label for="leavetype" class="form-label">Leave Type Code*</label>
-							<input type="text" class="form-control" id="leavetypescode"  name="leavetypescode" placeholder="Input Leave Code" style="text-transform:uppercase">
+							<input type="text" class="form-control" id="leavetypescode"  name="leavetypescode" placeholder="LEAVE CODE" style="text-transform:uppercase">
 							<input type="hidden" id="idtypes" class="form-control" name="idtypes" placeholder="">
 							</div>
 							<div class="mb-3">
 							<label for="Leavetype" class="form-label">Leave Type*</label>
-							<input type="text" class="form-control" id="leavetypes"  name="leavetypes" placeholder="Input Leave type" style="text-transform:uppercase">
+							<input type="text" class="form-control" id="leavetypes"  name="leavetypes" placeholder="LEAVE TYPE" style="text-transform:uppercase">
 							</div>
 
 							<div class="mb-3">

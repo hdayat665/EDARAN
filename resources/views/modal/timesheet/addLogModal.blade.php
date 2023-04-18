@@ -12,16 +12,16 @@
                             <label for="firstname" class="form-label">Type Of Log*</label>
                             <select class="form-select" id="typeoflog" name="type_of_log" aria-label="Default select example">
                                 <option class="form-label" value="" selected>PLEASE CHOOSE</option>
-                                <option class="form-label" value="1">Home</option>
-                                <option class="form-label" value="2">Office</option>
-                                <option class="form-label" value="3">My Project</option>
-                                <option class="form-label" value="4">Others</option>
+                                <option class="form-label" value="1">HOME</option>
+                                <option class="form-label" value="2">OFFICE</option>
+                                <option class="form-label" value="3">MY PROJECT</option>
+                                <option class="form-label" value="4">OTHERS</option>
                             </select>
                         </div>
                         <div class="col-sm-6">
                             <label for="lastname" class="form-label" >Date*</label>
                             <div class="">
-                                <input type="text" class="form-control" placeholder="YYYY-MM-DD" name="date" id="dateaddlog" value="<?php echo date('Y-m-d'); ?>" />
+                                <input type="text" class="form-control" placeholder="YYYY/MM/DD" name="date" id="dateaddlog" value="<?php echo date('Y-m-d'); ?>" />
                                 <!-- <div class="input-group-text"><i class="fa fa-calendar"></i></div> -->
                             </div>
                         </div>
@@ -41,8 +41,8 @@
                             <label for="Office-Log" class="form-label">Office Log*</label>
                             <select class="form-select" id="officelog2" name="office_log" aria-label="Default select example">
                                 <option class="form-label" value="" selected>PLEASE CHOOSE</option>
-                                <option class="form-label" value="1">My Project</option>
-                                <option class="form-label" value="2">Activity</option>
+                                <option class="form-label" value="1">MY PROJECT</option>
+                                <option class="form-label" value="2">ACTIVITYy</option>
                             </select>
                         </div>
                         
@@ -84,7 +84,7 @@
                         <div class="col-sm-6" id="activityByProjectHide" style="display: none">
                             <label for="issuing-country" class="form-label">Activity Name*</label>
                             <select class="form-select" id="activity_names" name="activity_name">
-                                <option class="form-label" value="">PLEASE CHOOSE</option>
+                                <option class="form-label" value="PLEASE CHOOSE"></option>
                                 <?php $activitys = activityName($department_id) ?>
                                 @foreach ($activitys as $activity)
                                 <option value="{{$activity->id}}">{{$activity->activity_name}}</option>
