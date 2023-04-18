@@ -481,14 +481,12 @@ class EmployeeService
                 }
             }
 
-            if ($_FILES['okuID']['name'])
-            {
-                $idOKU = upload($r->file('okuID'));
-                $input['okuID'] = $idOKU['filename'];
 
-                if (!$input['okuID']) {
-                    unset($input['okuID']);
-                }
+            if (isset($_FILES['okuID']['name'])) {
+                $idOKU = upload($r()->file('okuID'));
+                $input['okuID'] = $idOKU['filename'];
+            } else {
+                $input['okuID'] = null;
             }
 
             if (!$input['DOM']) {

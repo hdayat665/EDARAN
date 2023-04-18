@@ -23,7 +23,7 @@
                         </div>
                         <div class="row p-2">
                             <div class="col-sm-6">
-                                <label for="firstname" class="form-label">First Nameeee*</label>
+                                <label for="firstname" class="form-label">First Name*</label>
                                 <input type="text" id="firstnamemc" name="firstName" value="{{ $companion->firstName ?? '' }}" placeholder="FIRST NAME" class="form-control" aria-describedby="firstname">
                                 <input type="hidden" name="user_id" value="{{$user_id}}">
                             </div>
@@ -66,8 +66,8 @@
                             <div class="col-sm-6">
                                 <div class="row">
                                     <div class="col-sm-6">
-                                        <label for="passport" class="form-label">Passport Numberrr</label>
-                                        <input type="text" id="passportmc" name="passport" value="{{ $companion->passport ?? '' }}" placeholder="PASSPORT NUMBER" class="form-control" aria-describedby="passport" style= "pointer-events: none;" readonly >
+                                        <label for="passport" class="form-label">Passport Number</label>
+                                        <input type="text" id="passportmc" name="passport" value="{{ $companion->passport ?? '' }}" placeholder="PASSPORT NUMBER" class="form-control" aria-describedby="passport"   >
                                     </div>
                                     <div class="col-sm-6">
                                         <label for="expirydate" class="form-label">Expiry Date*</label>
@@ -100,7 +100,7 @@
                         <div class="row p-2">
                                 <div class="col-sm-3">
                                     <label for="age" class="form-label">Age</label>
-                                    <input type="text" id="age2" name="age" value="{{ $companion->age ?? '' }}" class="form-control" aria-describedby="age"  placeholder="AGE">
+                                    <input type="number" id="age2" name="age" value="{{ $companion->age ?? '' }}" class="form-control" aria-describedby="age"  placeholder="AGE">
                                 </div>
                                 <div class="col-sm-3">
                                     <label for="dom" class="form-label">Date Marriage</label>
@@ -126,7 +126,7 @@
                                 <div class="row">
                                     <div class="col-sm-6 ">
                                         <div class="form-check form-switch align-right">
-                                            <input class="form-check-input okuCheck1"  id="citizen" value="{{ $companion->okuStatus ?? '' }}" type="checkbox" name="okuStatus2"  >
+                                            <input class="form-check-input okuCheck1"  id="citizen" value="{{ $companion->okuStatus ?? '' }}" type="checkbox" name="okuStatusc"  >
                                             <label class="form-check-label" for="citizen" >
                                                 OKU?
                                             </label>
@@ -561,7 +561,7 @@
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-check form-switch align-right">
-                                    <input class="form-check-input partChecks" type="checkbox" role="switch" id="set-main">
+                                    <input class="form-check-input partChecks" type="checkbox" role="switch" id="set-main" >
                                     <label class="form-check-label" for="set-main">Working ?</label>
                                 </div>
                             </div>
@@ -569,7 +569,7 @@
                         <div class="row p-2">
                             <div class="col-sm-6">
                                 <label for="Designation-name" class="form-label">Designation*</label>
-                                <input type="text" id="designationmc" readonly name=""  class="form-control mcdetail"  placeholder="DESIGNATION" style="text-transform:uppercase">
+                                <input type="text" id="designationmc"   disabled name="designation"  class="form-control mcdetaildesignation"  placeholder="DESIGNATION" style="text-transform:uppercase">
                             </div>
                             <div class="col-sm-6">
                                 <label for="company-name" class="form-label">Company Name</label>
@@ -624,7 +624,7 @@
                         <div class="row p-2">
                             <div class="col-sm-6">
                                 <label for="state" class="form-label">State</label>
-                                <select class="form-select mcdetaildrop" name="stateE" value="{{ $companion->stateE ?? '' }}">
+                                <select class="form-select mcdetaildrop" name="state" value="{{ $companion->stateE ?? '' }}">
                                     <?php $state = state() ?>
                                     <option value="0" label="PLEASE CHOOSE"></option>
                                     @foreach ($state as $key => $status)
@@ -648,10 +648,11 @@
                                 </select>
                             </div>
                         </div>
-                    </form>
                     <p class="text-end mb-0 mt-3">
-                        <a href="javascript:;" id="updateCompanion{{$no}}" class="btn btn-primary">Save</a>
-                    </p>
+                        <button id="updateCompanion{{$no}}" class="btn btn-primary">Save</button>
+                    </p>                    
+                    </form>
+
                 </div>
             </div>
         </div> 

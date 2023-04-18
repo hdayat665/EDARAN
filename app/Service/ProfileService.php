@@ -657,13 +657,13 @@ class ProfileService
                 }
             }
     
-            if ($_FILES['okuFile']['name']) {
-                $payslip = upload($r->file('okuFile'));
+      
+
+            if (isset($_FILES['okuFile']['name'])) {
+                $payslip = upload($r()->file('okuFile'));
                 $input['okuFile'] = $payslip['filename'];
-    
-                if (!$input['okuFile']) {
-                    unset($input['okuFile']);
-                }
+            } else {
+                $input['okuFile'] = null;
             }
     
     

@@ -5,7 +5,7 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="add-children">Update Children Detailss</h5> 
+                <h5 class="modal-title" id="add-children">Update Children Details</h5> 
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -149,7 +149,7 @@
                                 </div>
                                 <div class="col-sm-6">
                                     <label for="lastname" class="form-label" >OKU Card Number*</label>
-                                    <input type="text" id="okucard4" name="okuNo" value="{{$children->okuNo ?? ''}}" class="form-control" readonly placeholder="OKU CARD NUMBER" >
+                                    <input type="text" id="okucard4" disabled name="okuNo" value="{{$children->okuNo ?? ''}}" class="form-control" readonly placeholder="OKU CARD NUMBER" >
                                 </div>
                             </div>
                         </div>
@@ -157,7 +157,7 @@
                             <div class="row">
                                 <div class="col-sm-12">
                                     <label for="dob" class="form-label" >OKU Attachment*</label>
-                                    <input type="file" id="okuattach4" name="okuFile" class="form-control" style="pointer-events: none" aria-describedby="">
+                                    <input type="file" id="okuattach4" disabled readonly name="okuFile" class="form-control" style="pointer-events: none" aria-describedby="">
                                     @if ($children->okuFile)
                                         Click <a href="{{ route('download', ['filename' => $children->okuFile]) }}">here</a> to see OKU ID Attachment.
                                     @endif
@@ -248,11 +248,12 @@
                             </select>
                         </div>
                     </div>
-                </form>
+                
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-primary" id="editChildren">Update</button>
+                <button  class="btn btn-primary" id="editChildren">Update</button>
+            </form>
             </div>
         </div>
     </div>

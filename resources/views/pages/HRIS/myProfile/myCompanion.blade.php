@@ -372,7 +372,7 @@
                                 <div class="col-sm-6">
                                     <div class="form-check form-switch">
                                         <label for="citizen" class="form-label">Non-Citizen ?</label>
-                                        <input class="form-check-input partCheck7" {{ ($companion->mainCompanion ?? '') ? 'checked' : '' }} name="nonCitizen" value="{{ $companion->nonCitizen ?? '' }}" type="checkbox" role="switch" id="citizen2">
+                                        <input class="form-check-input partCheck6" {{ ($companion->mainCompanion ?? '') ? 'checked' : '' }} name="nonCitizen" value="{{ $companion->nonCitizen ?? '' }}" type="checkbox" role="switch" id="citizen2">
                                     </div>
                                 </div> 
                                 <div class="col-sm-6">
@@ -406,7 +406,7 @@
                             
                             <div class="col-sm-3">
                                 <label for="issuing-country" class="form-label">Issuing Country*</label>
-                                <select class="form-select" name="issuingCountry" value="{{ $companion->issuingCountry ?? '' }}">
+                                <select class="form-select" name="issuingCountry" id="issuingCountryUpdateCompanion"  value="{{ $companion->issuingCountry ?? '' }}">
                                     <option value="" label="PLEASE CHOOSE" selected ></option>
                                     <optgroup id="country-optgroup-Americas" label="Americas">
                                         @foreach ($americass as $key => $america)
@@ -631,7 +631,7 @@
                     <p class="text-end mb-0 mt-3">
                         <a href="javascript:;" id="deleteCompanion" data-id="{{ $companion->id }}" class="btn btn-danger">Delete</a>
                         
-                        <button type="submit" id="updateCompanion{{$no}}" class="btn btn-primary">Save</button>
+                        <button id="updateCompanion{{$no}}" class="btn btn-primary">Save</button>
                     </p>
                     </form>
                 </div>
