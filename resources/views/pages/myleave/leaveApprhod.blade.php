@@ -238,7 +238,7 @@
                                             </div>
                                         </div>
                                         <div class="modal-footer">
-                                            <button class="btn btn-primary" id="updateButton">Approve</button>
+                                            <!-- <button class="btn btn-primary" id="updateButton">Approve</button> -->
                                             {{-- <button type="button" class="btn btn-primary" data-bs-dismiss="modal" >Approve</button> --}}
                                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" >Close</button>
                                         </div>
