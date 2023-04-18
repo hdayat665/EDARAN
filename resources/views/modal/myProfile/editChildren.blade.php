@@ -5,7 +5,7 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="add-children">Update Children</h5> 
+                <h5 class="modal-title" id="add-children">Update Children Detailss</h5> 
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -43,7 +43,7 @@
                             <div class="row">
                                 <div class="col-sm-6 ">
                                     <div class="form-check form-switch align-right">
-                                        <input class="form-check-input partCheck5" type="checkbox" id="nonCitizen1" name="nonCitizen1" {{($children->nonCitizen1 ?? '') ? 'checked' : ''}}>
+                                        <input class="form-check-input partCheck5" type="checkbox" id="nonCitizen1" name="nonCitizen" {{($children->nonCitizen ?? '') ? 'checked' : ''}}>
                                        
                                         <label class="form-check-label" for="citizen">
                                             Non-Citizen
@@ -84,7 +84,13 @@
                                 </div>
                         <div class="col-sm-3">
                             <label for="issuing-country" class="form-label">Issuing Country*</label>
-                            <select class="form-select" name="issuingCountry" id="issuingCountry1">
+                            <select class="form-select"  name="issuingCountry" id="issuingCountry1">
+                                <option value="" label="PLEASE CHOOSE" selected></option>
+                                        <?php
+                                            $americass = americas();
+                                            $asias = asias();
+                                        ?>
+                                
                                 <optgroup id="country-optgroup-Americas" label="Americas">
                                     @foreach ($americass as $key => $america)
                                     <option value="{{$key}}">{{$america}}</option>
@@ -228,7 +234,7 @@
                         <div class="col-sm-6">
                             <label for="country" class="form-label" >Country</label>
                             <select class="form-select" name="country" id="country1" value="{{ $companion->country ?? '' }}" style="text-transform:uppercase" >
-                                <option value="MY" label="Malaysia" selected ></option>
+                                <option value="" label="PLEASE CHOOSE" selected></option>
                                 <optgroup id="country-optgroup-Americas" label="Americas">
                                     @foreach ($americass as $key => $america)
                                     <option value="{{$key}}"  >{{$america}}</option>

@@ -545,14 +545,14 @@ class ProfileService
             }
         }
 
-        if ($_FILES['okuID']['name']) {
+
+        if (isset($_FILES['okuID']['name'])) {
             $idOKU = upload($r->file('okuID'));
             $input['okuID'] = $idOKU['filename'];
-
-            if (!$input['okuID']) {
-                unset($input['okuID']);
-            }
+        } else {
+            $input['okuID'] = null;
         }
+        
           
         if(!isset($input['dateJoined']))
         {
@@ -561,7 +561,18 @@ class ProfileService
 
         $input['user_id'] = $id;
         $input['dateJoined'] = dateFormat($input['dateJoined']);
-        $input['expiryDate'] = dateFormat($input['expiryDate']);
+
+
+        if(!isset($input['expiryDate']))
+        {
+            $input['expiryDate'] = NULL;
+        }else {
+            $input['expiryDate'] = dateFormat($input['expiryDate']);
+        }
+
+
+       
+
         $input['DOM'] = dateFormat($input['DOM']);
         $input['DOB'] = dateFormat($input['DOB']);
         $input['mainCompanion'] = isset($input['mainCompanion']) ? 1 : 0;
@@ -678,6 +689,17 @@ class ProfileService
                 $input['expiryDate'] = null;
                 $input['issuingCountry'] = null;
             }
+
+            if(!isset($input['idNo']))
+            {
+                $input['idNo'] = null;
+             
+            }
+
+           
+            
+
+
 
             UserChildren::where('id', $id)->update($input);
 

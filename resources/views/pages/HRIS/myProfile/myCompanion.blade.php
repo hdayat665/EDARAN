@@ -73,7 +73,7 @@
                             </div>
                             <div class="col-sm-3">
                                         <label for="expirydate" class="form-label">Expiry Date*</label>
-                                        <input type="text" id="expirydatemc" name="expiryDate" placeholder="YYYY-MM-DD" class="form-control" aria-describedby="expirydate" style= "pointer-events: none;" readonly>
+                                        <input type="text" id="expirydatemc" name="expiryDate" placeholder="YYYY-MM-DD" class="form-control" aria-describedby="expirydate" style= "pointer-events: none;" disabled readonly>
                                     </div>
                             <div class="col-sm-3">
                                 <label for="issuing-country" class="form-label">Issuing Country*</label>
@@ -124,14 +124,14 @@
                                     </div>
                                     <div class="col-sm-6">
                                         <label for="" class="form-label" > OKU Card Number*</label>
-                                        <input type="number" id="okucard1" name="okuNumber" value="" class="form-control" readonly placeholder="OKU CARD NUMBER">
+                                        <input type="number" id="okucard1" disabled name="okuNumber" value="" class="form-control" readonly  placeholder="OKU CARD NUMBER">
                                         
                                     </div>
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                         <label for="dob" class="form-label" > OKU Attachment*</label>
-                                        <input type="file" id="okuattach1" name="okuID" class="form-control" aria-describedby="" style="pointer-events: none">
+                                        <input type="file" id="okuattach1" disabled name="okuID" class="form-control" aria-describedby="" style="pointer-events: none">
                             </div>
                         </div>
                         <div class="row p-2">
@@ -630,7 +630,8 @@
                     
                     <p class="text-end mb-0 mt-3">
                         <a href="javascript:;" id="deleteCompanion" data-id="{{ $companion->id }}" class="btn btn-danger">Delete</a>
-                        <a href="javascript:;" id="updateCompanion{{$no}}" class="btn btn-primary">Save</a>
+                        
+                        <button type="submit" id="updateCompanion{{$no}}" class="btn btn-primary">Save</button>
                     </p>
                     </form>
                 </div>

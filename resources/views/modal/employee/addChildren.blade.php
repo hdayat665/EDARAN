@@ -39,7 +39,7 @@
                                     <div class="form-check form-switch align-right">
                                         <input class="form-check-input partCheck4" value="" type="checkbox" name="nonNetizen2" {{($children->nonCitizen ?? '') ? 'checked' : ''}} id="citizen">
                                         <label class="form-check-label" for="citizen">
-                                            Non-Citizennnn
+                                            Non-Citizen
                                         </label>
                                     </div>
                                 </div>
@@ -240,7 +240,7 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="add-children">Update Children</h5>
+                <h5 class="modal-title" id="add-children">Update Children Details</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
