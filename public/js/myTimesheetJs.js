@@ -895,6 +895,7 @@ $(document).ready(function() {
             }
 
             var leave = [];
+            var leavesdate = [];
             for (let i = 0; i < data['leaves'].length; i++) {
                 var leaves = data['leaves'][i];
 
@@ -928,51 +929,69 @@ $(document).ready(function() {
                     }
 
                 });
+
+                leavesdate.push({
+                    start: new Date(startYear, startMonth - 1, startDay),
+                    end: new Date(endYear, endMonth - 1, endDay)
+                });
                 
             }
 
-            // var holiday = [];
-            // for (let i = 0; i < data['holidays'].length; i++) {
-            //     var holidays = data['holidays'][i];
-            //     // console.log(data['holidays']);
+            var holiday = [];
+            var holidayDates = [];
+            for (let i = 0; i < data['holidays'].length; i++) {
+                var holidays = data['holidays'][i];
+                // console.log(data['holidays']);
 
-            //     var startDate = new Date(holidays['start_date']);
-            //     var startMonth = startDate.getMonth() + 1;
-            //     startMonth = startMonth < 10 ? "0" + startMonth : startMonth;
-            //     var startYear = startDate.getFullYear();
-            //     var startDay = startDate.getDate();
-            //     startDay = startDay < 10 ? "0" + startDay : startDay;
+                var startDate = new Date(holidays['start_date']);
+                var startMonth = startDate.getMonth() + 1;
+                startMonth = startMonth < 10 ? "0" + startMonth : startMonth;
+                var startYear = startDate.getFullYear();
+                var startDay = startDate.getDate();
+                startDay = startDay < 10 ? "0" + startDay : startDay;
 
-            //     var endDate = new Date(holidays['end_date']);
-            //     var endMonth = endDate.getMonth() + 1;
-            //     endMonth = endMonth < 10 ? "0" + endMonth : endMonth;
-            //     var endYear = endDate.getFullYear();
-            //     var endDay = endDate.getDate();
-            //     endDay = endDay < 10 ? "0" + endDay : endDay;
+                var endDate = new Date(holidays['end_date']);
+                var endMonth = endDate.getMonth() + 1;
+                endMonth = endMonth < 10 ? "0" + endMonth : endMonth;
+                var endYear = endDate.getFullYear();
+                var endDay = endDate.getDate();
+                endDay = endDay < 10 ? "0" + endDay : endDay;
 
-            //     // console.log(holidays['holiday_title'])
-            //     holiday.push({
-            //         title:  holidays['holiday_title'],
-            //         start: startYear + '-' + startMonth + '-' + startDay,
-            //         end: endYear + '-' + endMonth + '-' + endDay,
-            //         color: app.color.yellow,
-            //         // color: "#E0E0E0",
-            //         textColor: "black",
-            //         fontWeight: "bold",
-            //         extendedProps: {
-            //             type: 'leave',
-            //             holidayId: leaves['id']
-            //         }
+                console.log(holidays['holiday_title'])
 
-            //     });
+                // console.log(holidays['holiday_title'])
+                holiday.push({
+                    title:  holidays['holiday_title'],
+                    start: startYear + '-' + startMonth + '-' + startDay,
+                    end: endYear + '-' + endMonth + '-' + endDay,
+                    // color: app.color.yellow,
+                    color: "#FFD580",
+                    textColor: "black",
+                    fontWeight: "bold",
+                    extendedProps: {
+                        type: 'holiday',
+                        holidayId: holidays['id']
+                    }
+
+                });
+
+                holidayDates.push({
+                    title:  holidays['holiday_title'],
+                    start: new Date(startYear, startMonth - 1, startDay),
+                    end: new Date(endYear, endMonth - 1, endDay)
+
+                });
+
                 
-            // }
+                
+            }
 
             
             dataEvent = event.concat(log);
             dataleave = dataEvent.concat(leave);
-            // dataHoliday = dataleave.concat(holiday);
-            console.log(dataleave);
+            dataHoliday = dataleave.concat(holiday);
+            
+            // console.log(holiday);
             var calendar = new FullCalendar.Calendar(calendarElm, {
                 headerToolbar: {
                     left: 'logButton EventButton SumButton',
@@ -999,28 +1018,39 @@ $(document).ready(function() {
                         }
                     }  
                 },
-                // example changing background color
-                // dayCellDidMount: function(info) {
-                //     var date = info.date;
-                //     var dateStr = date.getFullYear() + '-' + (date.getMonth()+1) + '-' + date.getDate();
-                //     console.log(dateStr); // Add this line to print the value of dateStr to the console
-                //     if (dateStr === '2023-4-17') {
-                //       $(info.el).css('background-color', '#ffcc00');
-                //     }
-                //   },
-
+               
+               
+                
+                
                 dayCellDidMount: function(info) {
+                    var current = new Date(info.date);
+                    
+            
+                    for (let i = 0; i < holidayDates.length; i++) {
+                        console.log(holidayDates[i].title)
+                        // console.log(holidayDates[i].start)
+                        if (current >= holidayDates[i].start && current <= holidayDates[i].end) { 
+                            $(info.el).css('background-color', '#FFD580');
+                            return;
+                        }
+                    }
+
+                    for (let i = 0; i < leavesdate.length; i++) {
+                        // console.log(leavesdate[i].start)
+                        if (current >= leavesdate[i].start && current <= leavesdate[i].end) { 
+                            $(info.el).css('background-color', '#E0E0E0');
+                            return;
+                        }
+                    }
+            
                     if (info.date.getDay() === 0) { // Sunday
-                    //   console.log(info.date.getDay()); 
-                      $(info.el).css('background-color', '#87CEEB'); 
+                        $(info.el).css('background-color', '#87CEEB'); 
+                    } else if (info.date.getDay() === 6) { // Saturday
+                        $(info.el).css('background-color', '#87CEEB'); 
+                    } else {
+                        $(info.el).css('background-color', 'white');
                     }
-                    if (info.date.getDay() === 6) { // Saturday
-                      $(info.el).css('background-color', '#87CEEB'); 
-                    }
-                  },
-
-
-                  
+                },
                   
                 // original code
                 // dateClick: function(info) {
@@ -1265,7 +1295,7 @@ $(document).ready(function() {
                         }
                     })
 
-                    if(info.event.extendedProps.type == "leave") {
+                    if(info.event.extendedProps.type == "leave" || info.event.extendedProps.type == "holiday") {
                     
                    
                     } 
@@ -1815,7 +1845,7 @@ $(document).ready(function() {
                     }
                 },
                 
-                events: dataleave,
+                events: dataHoliday,
             });
             
             calendar.render();
