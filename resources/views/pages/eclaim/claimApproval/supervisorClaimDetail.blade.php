@@ -79,7 +79,7 @@
                                             @endif
                                         </tbody>
                                     </table>
-                                </div>
+                                </div><br>
                                 <div class="row p-2">
                                     <table id="claimtable" class="table table-striped table-bordered align-middle">
                                         <thead>
