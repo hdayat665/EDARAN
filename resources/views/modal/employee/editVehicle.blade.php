@@ -11,7 +11,7 @@
                         <label for="firstname" class="form-label">Vehicle Type*</label>
                         <select class="form-select" id="vehicleType" name="vehicle_type">
                             <?php $vehicleTypes = getVehicle() ?>
-                            <option value="0" label="PLEASE CHOOSE" selected="selected"></option>
+                            <option  label="PLEASE CHOOSE" selected="selected"></option>
                             @foreach ($vehicleTypes as $key => $vehicle)
                                 <option value="{{$key}}">{{$vehicle}}</option>
                             @endforeach
@@ -22,11 +22,12 @@
                         <input type="text" id="plateNo" name="plate_no" class="form-control" aria-describedby="lastname" placeholder="Plate Number">
                         <input type="hidden" id="idV" name="id" class="form-control" aria-describedby="lastname">
                     </div>
-                </form>
+                
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-primary" id="updateVehicle">Update</button>
+                <button class="btn btn-primary" id="updateVehicle">Update</button>
+            </form>
             </div>
         </div>
     </div>

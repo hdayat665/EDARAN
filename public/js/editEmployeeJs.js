@@ -1724,7 +1724,7 @@ $('input[name="address_type[]"]').on('change', function() {
             // Update the UI to reflect the new address type
             Swal.fire({
                 icon: 'success',
-                title: 'Address type updated successfully!',
+                title: 'Addesss Type Is Updated',
                 confirmButtonColor: "#3085d6",
                 confirmButtonText: "OK",
                 allowOutsideClick: false,
@@ -3112,68 +3112,110 @@ $('input[name="address_type[]"]').on('change', function() {
         });
     }
 
-    $("#saveVehicle").click(function (e) {
-        requirejs(["sweetAlert2"], function (swal) {
-            var data = new FormData(document.getElementById("addVehicleForm"));
 
-            $.ajax({
-                type: "POST",
-                url: "/addEmployeeVehicle",
-                data: data,
-                dataType: "json",
-                async: false,
-                processData: false,
-                contentType: false,
-            }).done(function (data) {
-                swal({
-                    title: data.title,
-                    text: data.msg,
-                    type: data.type,
-                    confirmButtonColor: "#3085d6",
-                    confirmButtonText: "OK",
-                    allowOutsideClick: false,
-                    allowEscapeKey: false,
-                }).then(function () {
-                    if (data.type == "error") {
-                    } else {
-                        location.reload();
-                    }
-                });
-            });
+    
+    $("#saveVehicle").click(function (e) {
+        $("#addVehicleForm").validate({
+              // Specify validation rules
+              rules: {
+                //eclaimrecommender: "required",
+                vehicle_type: "required",
+                plate_no: "required",
+                
+            },
+
+            messages: {
+                //eclaimrecommender: "Please Choose Recommender",
+                vehicle_type: "Please Choose Vehicle Type",
+                plate_no: "Please Insert Plate Number",
+            },
+
+            submitHandler: function (form) { 
+                requirejs(["sweetAlert2"], function (swal) {
+                    var data = new FormData(
+                        document.getElementById("addVehicleForm")
+                    );
+
+                    $.ajax({
+                        type: "POST",
+                        url: "/addEmployeeVehicle",
+                        data: data,
+                        dataType: "json",
+                        async: false,
+                        processData: false,
+                        contentType: false,
+                    }).done(function (data) {
+                        swal({
+                            title: data.title,
+                            text: data.msg,
+                            type: data.type,
+                            confirmButtonColor: "#3085d6",
+                            confirmButtonText: "OK",
+                            allowOutsideClick: false,
+                            allowEscapeKey: false,
+                        }).then(function () {
+                            if (data.type == "error") {
+                            } else {
+                                location.reload();
+                            }
+                        });
+                    });
+                });  
+             }
         });
+        
     });
 
-    $("#updateVehicle").click(function (e) {
-        requirejs(["sweetAlert2"], function (swal) {
-            var data = new FormData(
-                document.getElementById("updateVehicleForm")
-            );
+    
 
-            $.ajax({
-                type: "POST",
-                url: "/updateEmployeeVehicle",
-                data: data,
-                dataType: "json",
-                async: false,
-                processData: false,
-                contentType: false,
-            }).done(function (data) {
-                swal({
-                    title: data.title,
-                    text: data.msg,
-                    type: data.type,
-                    confirmButtonColor: "#3085d6",
-                    confirmButtonText: "OK",
-                    allowOutsideClick: false,
-                    allowEscapeKey: false,
-                }).then(function () {
-                    if (data.type == "error") {
-                    } else {
-                        location.reload();
-                    }
-                });
-            });
+    $("#updateVehicle").click(function (e) {
+        $("#updateVehicleForm").validate({
+              // Specify validation rules
+              rules: {
+                vehicle_type: "required",
+                plate_no: "required",
+                
+            },
+
+            messages: {
+                vehicle_type: "Please Choose Vehicle Type",
+                plate_no: "Please Insert Plate Number",
+            },
+
+            submitHandler: function (form) { 
+                requirejs(["sweetAlert2"], function (swal) {
+                    var data = new FormData(
+                        document.getElementById("updateVehicleForm")
+                    );
+
+                    $.ajax({
+                        type: "POST",
+                        url: "/updateEmployeeVehicle",
+                        data: data,
+                        dataType: "json",
+                        async: false,
+                        processData: false,
+                        contentType: false,
+                    }).done(function (data) {
+                        swal({
+                            title: data.title,
+                            text: data.msg,
+                            type: data.type,
+                            confirmButtonColor: "#3085d6",
+                            confirmButtonText: "OK",
+                            allowOutsideClick: false,
+                            allowEscapeKey: false,
+                        }).then(function () {
+                            if (data.type == "error") {
+                            } else {
+                                location.reload();
+                            }
+                        });
+                    });
+                });  
+             }
         });
+        
     });
     ///////
     

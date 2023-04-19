@@ -47,7 +47,7 @@
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <div class="form-check form-switch">
-                                            <label for="citizen" class="form-label">Non-Citizenv?</label>
+                                            <label for="citizen" class="form-label">Non-Citizen?</label>
                                             <input class="form-check-input partCheck2" {{ ($companion->mainCompanion ?? '') ? 'checked' : '' }} name="nonNetizen1" value="{{ $companion->nonCitizen ?? '' }}" type="checkbox" role="switch" id="citizen">
                                         </div>
                                     </div>
@@ -133,7 +133,7 @@
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
-                                        <label for="" class="form-label" >OKU Card Nssumber*</label>
+                                        <label for="" class="form-label" >OKU Card Number*</label>
                                         <input type="text" id="okucard1" disabled name="okuCardNum" value="" class="form-control" readonly placeholder="OKU CARD NUMBER">
                                         
                                     </div>

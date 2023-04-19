@@ -411,7 +411,7 @@ class EmployeeService
             $data['status'] = config('app.response.success.status');
             $data['type'] = config('app.response.success.type');
             $data['title'] = config('app.response.success.title');
-            $data['msg'] = 'Success Update Address';
+            $data['msg'] = 'Address Is Updated';
         }
 
         return $data;
@@ -564,13 +564,14 @@ class EmployeeService
                 }
             }
     
-            if ($_FILES['idFile']['name']) {
-                $idOKU = upload($r->file('idFile'));
-                $input['idFile'] = $idOKU['filename'];
-    
-                if (!$input['idFile']) {
-                    unset($input['idFile']);
-                }
+         
+
+
+            if (isset($_FILES['okuattach']['name'])) {
+                $idOku = upload(request()->file('okuattach'));
+                $input['okuattach'] = $idOku['filename'];
+            } else {
+                $input['okuattach'] = null;
             }
 
             $input['dateJoined'] = dateFormat($input['dateJoined']);
@@ -1132,7 +1133,7 @@ class EmployeeService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success add Address';
+        $data['msg'] = 'New Address Is Created';
 
         return $data;
     }
@@ -1182,7 +1183,7 @@ class EmployeeService
             $data['status'] = config('app.response.success.status');
             $data['type'] = config('app.response.success.type');
             $data['title'] = config('app.response.success.title');
-            $data['msg'] = 'Address deleted';
+            $data['msg'] = 'Address Is Deleted';
         }
 
         return $data;

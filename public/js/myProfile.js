@@ -26,6 +26,27 @@ $(document).ready(function () {
         $("#gendermyprofile").prop("disabled", true);
     }
 
+    if($(".partCheck5").is(":checked")){
+        $("#idNo1").prop("readonly", true);
+        $("#DOB1").prop("readonly", false);
+        $("#DOB1").css("pointer-events", "auto");
+        $("#idNo1").val("");
+        $("#nonCitizen1").prop("checked", true);
+
+       
+    } else {
+        $("#idNo1").prop("readonly", false);
+            $("#DOB1").prop("readonly", true);
+            $("#DOB1").css("pointer-events", "none");
+            $("#passports1").val("");
+            $("#expiryDate1").val("");
+            $("#expiryDate1").prop("readonly", true);
+            $("#expiryDate1").css("pointer-events", "none");
+            $("#nonCitizen1").prop("checked", false);
+    }
+
+ 
+
     if ($("#passportmyprofile").val() !== "") {
         // Enable expiration date and passport country fields
         $("#expirydatemyprofile").prop("disabled", false);
@@ -173,12 +194,15 @@ $(document).ready(function () {
         if ($("#expirydatemc").prop("readonly")) {
             $("#expirydatemc").prop("readonly", false);
             $("#expirydatemc").css("pointer-events", "auto");
+            $("#expirydatemc").prop("disabled", false);
             $("#issuingCountryAddCompanion").prop("disabled", false);
             $("#issuingCountryAddCompanion").css("pointer-events", "auto");
         } else {
             $("#expirydatemc").prop("readonly", true);
             $("#expirydatemc").css("pointer-events", "none");
             $("#expirydatemc").val("");
+            $("#expirydatemc").prop("disabled", false);
+
             $("#issuingCountryAddCompanion").prop("disabled", false);
             $("#issuingCountryAddCompanion").css("pointer-events", "auto");
             $("#issuingCountryAddCompanion").val("");
@@ -1610,6 +1634,15 @@ $(document).ready(function () {
                     rangelength: [9, 9],
                 },
                 designation: "required",
+                okuNumber: {
+                    required: true,
+                    digits: true,
+                    rangelength: [10, 11],
+                },
+                okuID: {
+                    required: true,
+
+                }
             },
 
             messages: {
@@ -1649,13 +1682,22 @@ $(document).ready(function () {
                     rangelength: "Please Insert Valid Postcode",
                 },
                 salary: {
-                    digits: "Please input valid monthly salary",
+                    digits: "Please Insert Valid Monthly Salary",
                 },
                 officeNo: {
-                    digits: 'Please Insert Correct Contact Number Without ' - ' or Space',
-                    rangelength: 'Please Insert Valid Office Number',
+                    
+                    digits: "Please Insert Correct Office Number Without ' - ' or Space",
+                    rangelength: "Please Insert Valid Office Number",
                 },
                 designation: "Please Insert Designation",
+                okuNumber: {
+                    required: "Please Insert OKU Card Number",
+                    rangelength: "Please Inset Valid Home Number"
+                },
+                okuID: {
+                    required: "Please Insert OKU Attachment",
+
+                }
             },
             submitHandler: function (form) {
                 Swal.fire({
@@ -1726,10 +1768,201 @@ $(document).ready(function () {
         });
     });
 
+
+    //  $("#addCompanion" , "#updateCompanion" + no).click(function (e) {
+    //     $("#addCompanionForm").validate({
+    //         // Specify validation rules
+    //         rules: {
+    //             firstName: {
+    //                 required: true,
+    //               },
+    //             lastName: {
+    //                 required: true,
+    //               },
+    //             idNo: {
+    //                 required: true,
+    //                 digits: true,
+    //                 rangelength: [12, 12],
+    //             },
+    //             oldIDNo: {
+    //                 digits: true,
+    //                 rangelength: [7, 7],
+    //             },
+    //             contactNo: {
+    //                 digits: true,
+    //                 rangelength: [10, 11],
+    //             },
+    //             homeNo: {
+    //                 digits: true,
+    //                 rangelength: [9, 9],
+    //             },
+    //             address1: "required",
+    //             city: "required",
+    //             state: "required",
+    //             country: "required",
+    //             expiryDate: "required",
+    //             issuingCountry: "required",
+    //             postcode: {
+    //                 required: true,
+    //                 digits: true,
+    //                 rangelength: [5, 5],
+    //             },
+    //             salary: {
+    //                 digits: true,
+    //             },
+    //             officeNo: {
+    //                 digits: true,
+    //                 rangelength: [9, 9],
+    //             },
+    //             designation: "required",
+    //             okuNumber: {
+    //                 required: true,
+    //                 digits: true,
+    //                 rangelength: [10, 11],
+    //             },
+    //             okuID: {
+    //                 required: true,
+
+    //             }
+    //         },
+
+    //         messages: {
+    //             firstName: {
+    //                 required:"Please Insert First Name",
+    //             },
+    //             lastName: {
+    //                 required:"Please Insert Last Name",
+    //             },
+    //             idNo: {
+    //                 required: "Please Insert New Identification Number",
+    //                 digits: "Please Insert Correct Identification Number Without ' - ' or Space",
+    //                 rangelength: "Please insert Valid Identification Number",
+    //             },
+    //             oldIDNo: {
+    //                 digits: "Please Insert Correct Identification Number Without ' - ' or Space",
+    //                 rangelength: "Please Insert Valid Identification Number",
+    //             },
+    //             contactNo: {
+    //                 required: "Please Insert Contact Number",
+    //                 digits: "Please Insert Correct Contact Number Without ' - ' or Space",
+    //                 rangelength: "Please Insert Valid Contact Number ",
+    //             },
+    //             homeNo: {
+    //                 digits: "Please Insert Correct Home Number Without ' - ' or Space",
+    //                 rangelength: "Please Insert Valid Home Number",
+    //             },
+    //             address1: "Please Insert Address 1",
+    //             city: "Please Insert City",
+    //             state: "Please Choose State",
+    //             country: "Please Choose Country",
+    //             expiryDate: "Please Insert Expiry Date",
+    //             issuingCountry: "Please Choose Issuing Country",
+    //             postcode: {
+    //                 required: "Please Insert Postcode",
+    //                 digits: "Please Insert Valid Postcode",
+    //                 rangelength: "Please Insert Valid Postcode",
+    //             },
+    //             salary: {
+    //                 digits: "Please Insert Valid Monthly Salary",
+    //             },
+    //             officeNo: {
+                    
+    //                 digits: "Please Insert Correct Office Number Without ' - ' or Space",
+    //                 rangelength: "Please Insert Valid Office Number",
+    //             },
+    //             designation: "Please Insert Designation",
+    //             okuNumber: {
+    //                 required: "Please Insert OKU Card Number",
+    //                 rangelength: "Please Inset Valid Home Number"
+    //             },
+    //             okuID: {
+    //                 required: "Please Insert OKU Attachment",
+
+    //             }
+    //         },
+    //         submitHandler: function (form) {
+    //             Swal.fire({
+    //                 allowOutsideClick: false,
+    //                 showCancelButton: true,
+    //                 cancelButtonColor: "#d33",
+    //                 confirmButtonColor: "#3085d6",
+    //                 title: "Declaration.",
+    //                 icon: "info",
+    //                 html:
+    //                     '<h5> <input type="checkbox" class="form-check-input" name="t11" id="t1"  />  I hereby certify the above information as provided by me is true and correct. I also undertake to keep the Company informed of any changes covering such information of my personal details as and when it occurs. If any information given above is subsequently found to be incorrect or incomplete or untrue, the Company may terminate my employment without notice or compensation.</h5><br>' +
+    //                     '<h5> <input type="checkbox" class="form-check-input" name="t22" id="t2"  />  I hereby state that I may be liable to summary dismissal if any of the particulars has been misrepresented or omitted. I acknowledge that the Company has the right to recover any salaries and monetary benefits paid out to me during the course of my employment in the event of any misrepresentation or omission on my personal data.</h5><br>' +
+    //                     '<h5> <input type="checkbox" class="form-check-input" name="t33" id="t3"  />  I hereby give consent for Company to process and keep my personal data for employment purposes.</h5>',
+    //                 confirmButtonText: "Yes",
+
+    //                 preConfirm: () => {
+    //                     if (
+    //                         !$("#t1").prop("checked") ||
+    //                         !$("#t2").prop("checked") ||
+    //                         !$("#t3").prop("checked")
+    //                     ) {
+    //                         Swal.showValidationMessage(
+    //                             '<i class="fa fa-info-circle"></i> Please check all term to proceed'
+    //                         );
+    //                     } else if (
+    //                         $("#t1").prop("checked") ||
+    //                         $("#t2").prop("checked") ||
+    //                         $("#t3").prop("checked")
+    //                     ) {
+    //                         var data = new FormData(
+    //                             document.getElementById("addCompanionForm")
+    //                         );
+
+    //                         $.ajax({
+    //                             type: "POST",
+    //                             url: "/addCompanion",
+    //                             data: data,
+    //                             dataType: "json",
+    //                             async: false,
+    //                             processData: false,
+    //                             contentType: false,
+    //                         }).done(function (data) {
+    //                             console.log(data);
+    //                             Swal.fire({
+    //                                 title: data.title,
+    //                                 icon: "success",
+    //                                 text: data.msg,
+    //                                 type: data.type,
+    //                                 confirmButtonColor: "#3085d6",
+    //                                 confirmButtonText: "OK",
+    //                                 allowOutsideClick: false,
+    //                                 allowEscapeKey: false,
+    //                             }).then(function () {
+    //                                 if (data.type == "error") {
+    //                                 } else {
+    //                                     location.reload();
+    //                                 }
+    //                             });
+    //                         });
+    //                     } else {
+    //                         Swal.showValidationMessage(
+    //                             '<i class="fa fa-info-circle"></i> error'
+    //                         );
+    //                     }
+    //                 },
+    //             }).then((result) => {});
+    //         },
+    //     });
+
+    //     $()
+    // });
+
+
+               
+
+
+    
+ 
     companion = ["1", "2", "3", "4"];
 
     for (let i = 0; i < companion.length; i++) {
         const no = companion[i];
+
+        
         $("#updateCompanion" + no).click(function (e) {
             e.preventDefault();
             Swal.fire({
@@ -1786,7 +2019,10 @@ $(document).ready(function () {
                 },
             }).then((result) => {});
         });        
-    }
+    };
+
+
+
     $(document).on("click", "#deleteCompanion", function () {
         no = $(this).data("id");
         requirejs(['sweetAlert2'], function(swal) {
@@ -1921,6 +2157,7 @@ $(document).ready(function () {
             $("#gendermyprofile").val("").prop("disabled", true);
         }
     });
+    
     //COMPANION INFORMATION
     $(".partCheck2").click(function () {
         if ($(this).prop("checked")) {
@@ -1928,6 +2165,9 @@ $(document).ready(function () {
             $("#dobmc").prop("readonly", false);
             $("#dobmc").css("pointer-events", "auto");
             $("#idnumber2").val("");
+            $("#expirydatemc").prop("disabled", true);
+            $("#issuingCountryAddCompanion").prop("disabled", true);
+
         } else {
             $("#idnumber2").prop("readonly", false);
             $("#dobmc").prop("readonly", true);
@@ -1936,6 +2176,9 @@ $(document).ready(function () {
             $("#expirydatemc").val("");
             $("#expirydatemc").prop("readonly", true);
             $("#expirydatemc").css("pointer-events", "none");
+            $("#expirydatemc").prop("disabled", true);
+            $("#issuingCountryAddCompanion").prop("disabled", true);
+
         }
     });
 
@@ -1965,6 +2208,7 @@ $(document).ready(function () {
             $("#DOB1").prop("readonly", false);
             $("#DOB1").css("pointer-events", "auto");
             $("#idNo1").val("");
+            nonCitizen1 = 1;
         } else {
             $("#idNo1").prop("readonly", false);
             $("#DOB1").prop("readonly", true);
@@ -1973,6 +2217,7 @@ $(document).ready(function () {
             $("#expiryDate1").val("");
             $("#expiryDate1").prop("readonly", true);
             $("#expiryDate1").css("pointer-events", "none");
+            nonCitizen1 = 0;
         }
     });
     $("#DOB1").datepicker({
@@ -2351,9 +2596,7 @@ $(document).ready(function () {
                 // $("#issuingCountry1").prop("selectedIndex", child.issuingCountry);
                 $("#lastName1").val(child.lastName);
                 $("#maritalStatus1").prop("selectedIndex", child.maritalStatus);
-                if (child.nonCitizen == "on") {
-                    $("#nonCitizen1").prop("checked", true);
-                }
+                
                 $("#passports1").val(child.passport);
                 $("#supportDoc1").val(child.supportDoc);
                 $("#address1_1").val(child.address1);
@@ -2772,6 +3015,23 @@ $(document).ready(function () {
             $('#dob6').val('');
         }
     });
+
+
+    // Update children details
+    $('input[name="nonCitizen"]').click(function() {
+        if ($(this).is(':checked')) {
+            $('#idNo1').val('').prop('disabled', true);
+            $('#age1').val('').prop('readonly', false);
+            $('#DOB1').val('');
+        } else {
+            $('#idNo1').prop('disabled', false);
+            $('#age1').val('').prop('readonly', true);
+            $('#DOB1').val('');
+        }
+    });
+
+
+
 
     $("#DOBparent").datepicker({
         todayHighlight: true,
@@ -3264,7 +3524,7 @@ $(document).ready(function () {
                 // Update the UI to reflect the new address type
                 Swal.fire({
                     icon: 'success',
-                    title: 'Address type updated successfully!',
+                    title: 'Address Type Is Updated!',
                     confirmButtonColor: "#3085d6",
                     confirmButtonText: "OK",
                     allowOutsideClick: false,
@@ -3649,10 +3909,17 @@ $(".okuCheck1").click(function () {
     if ($(this).prop("checked")) {
         $("#okucard1").prop("readonly", false);
         $("#okuattach1").css("pointer-events", "auto");
+        $('#okucard1').prop('disabled', false);
+
+        $('#okuattach1').prop('disabled', false);
         okuStatus = 1;
     } else {
         $("#okucard1").prop("readonly", true);
         $("#okuattach1").css("pointer-events", "none");
+
+        $('#okucard1').val('').prop('disabled', true);
+
+            $('#okuattach1').val('').prop('disabled', true);
         okuStatus = 0;
     }
 });
@@ -3903,7 +4170,7 @@ $(".partCheck7").click(function () {
         $("#dob4").prop("readonly", true);
         $("#dob4").css("pointer-events", "none");
         $("#passportChild").val("");
-        $("#passportChild").prop("readonly", true);
+        $("#passportChild").prop("readonly", false);
         $("#expiryDateChild").val("");
         $("#expiryDateChild").prop("readonly", true);
         $("#expiryDateChild").css("pointer-events", "none");
