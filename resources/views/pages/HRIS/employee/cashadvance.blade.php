@@ -34,12 +34,13 @@
                                                     <div class="col md-6">
                                                         <div class="mb-3">
                                                             <label for="" class="form-label">Approver* </label>
-                                                            <select class="form-select" name="caapprover" >
+                                                            <select class="form-select" name="caapprover"  id="caapprover" >
                                                                 <?php $employees = getEmployeeapprover(); ?>
                                                                 <option value="" label="PLEASE CHOOSE"></option>
                                                                 @foreach ($employees as $employee)
                                                                     <option value="{{ $employee->id }}" label="{{ $employee->employeeName }}"
                                                                     {{ $employment->caapprover == $employee->id ? "selected='selected'" : '' }}>
+                                                                    {{ $employee->employeeName }}
                                                                     </option>
                                                                 @endforeach
                                                             </select>

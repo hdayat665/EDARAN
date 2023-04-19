@@ -26,7 +26,7 @@
                         </div>
                         <div class="col-sm-6">
                             <label for="lastname" class="form-label">Old Identification Number</label>
-                            <input type="text" id="" name="" class="form-control" aria-describedby="" placeholder="0000000">
+                            <input type="text" id="oldIDNoP1" name="oldIDNo" class="form-control" aria-describedby="" placeholder="0000000">
                         </div>
                     </div>
                     <div class="row p-2">
@@ -63,19 +63,19 @@
                                 <div class="col-sm-12">
                                     <label for="passport" class="form-label">Passport Number</label>
                                   
-                                    <input type="text" id="passport7" name=""  class="form-control" aria-describedby="passport" placeholder="PASSPORT NUMBER">
+                                    <input type="text" id="passport7" name="passport"  class="form-control" aria-describedby="passport" placeholder="PASSPORT NUMBER">
                                 </div>
                             </div>
                         </div>
                           <div class="col-sm-3">
                                     <label for="expirydate" class="form-label" >Expiry Date</label>
-                                    <input type="text" id="expirydate7" name=""  placeholder="YYYY-MM-DD" class="form-control" aria-describedby="expirydate" style="pointer-events: none;" readonly>
+                                    <input type="text" id="expirydate7" value="{{ date_format(date_create($user->expiryDate), 'Y-m-d') }}" name="expiryDate"  placeholder="YYYY-MM-DD" class="form-control" aria-describedby="expirydate" >
                                   
-                                </div>
+                            </div>
                         <div class="col-sm-3">
                             <label for="issuing-country" class="form-label" >Issuing Country</label>
-                            <select class="form-select" name="issuingCountry" id="" style="text-transform:uppercase">
-                            <option value="MY" label="Malaysia" selected ></option>
+                            <select class="form-select" name="issuingCountry" id="issuingCountry7" style="text-transform:uppercase">
+                            <option value="" label="PLEASE CHOOSE" selected ></option>
                                 <optgroup id="country-optgroup-Americas" label="Americas">
                                     @foreach ($americass as $key => $america)
                                     <option value="{{$key}}">{{$america}}</option>
@@ -96,7 +96,7 @@
                         </div>
                         <div class="col-sm-3">
                             <label for="dob" class="form-label" >Age</label>
-                            <input type="text" id="age7" name="" readonly class="form-control" aria-describedby="" placeholder="AGE">
+                            <input type="text" id="age7" name="age" readonly class="form-control" aria-describedby="" placeholder="AGE">
                         </div>
                         <div class="col-sm-6">
                             <label for="age" class="form-label">Gender</label>

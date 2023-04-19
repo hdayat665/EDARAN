@@ -66,19 +66,19 @@
                                 <div class="col-sm-12">
                                     <label for="passport" class="form-label">Passport Number</label>
                                   
-                                    <input type="text" id="passportparentedit" name="passportparent"  class="form-control" aria-describedby="passport" placeholder="PASSPORT NUMBER">
+                                    <input type="text" id="passportparentedit" name="passport"  class="form-control" aria-describedby="passport" placeholder="PASSPORT NUMBER">
                                 </div>
                             </div>
                         </div>
                           <div class="col-sm-3">
                                     <label for="expirydate" class="form-label">Expiry Date*</label>
-                                    <input type="text" id="expiryDateChild" name="expiryDateParent"  placeholder="YYYY-MM-DD" class="form-control" aria-describedby="expirydate" readonly>
+                                    <input type="text" id="expiryDateChild" name="expiryDate"  placeholder="YYYY-MM-DD" class="form-control" aria-describedby="expirydate" readonly>
                                   
                                 </div>
                         <div class="col-sm-3">
                             <label for="issuing-country" class="form-label">Issuing Country*</label>
                             <select class="form-select" name="issuingCountry" id="" style="text-transform:uppercase">
-                            <option value="MY" label="Malaysia" selected ></option>
+                            <option value="" label="Please Choose" selected ></option>
                                 <optgroup id="country-optgroup-Americas" label="Americas">
                                     @foreach ($americass as $key => $america)
                                     <option value="{{$key}}">{{$america}}</option>
@@ -95,7 +95,7 @@
                     <div class="row p-2">
                         <div class="col-sm-3">
                             <label for="dob" class="form-label">Date Of Birth*</label>
-                            <input type="text" id="DOBP1" name="dob7" class="form-control" readonly style="pointer-events, none"  aria-describedby="dob" placeholder="YYYY/MM/DD">
+                            <input type="text" id="DOBP1" name="DOB" class="form-control" readonly style="pointer-events, none"  aria-describedby="dob" placeholder="YYYY/MM/DD">
                         </div>
                         <div class="col-sm-3">
                             <label for="dob" class="form-label" >Age</label>
@@ -195,23 +195,17 @@
                     <div class="row p-2">
                         <div class="col-sm-6">
                             <label for="state" class="form-label">State*</label>
-                            <select class="form-select" id="stateP1" name="state" value="{{ $parent->state ?? '' }}">
+                            <select class="form-select" id="stateP1" name="state" >
                                 <?php $state = state() ?>
                                 <option value="" label="PLEASE CHOOSE"></option>
                                 @foreach ($state as $key => $status)
                                 <option value="{{$key}}"> {{$status}}</option>
                                 @endforeach
                             </select>
-                            <input type="hidden" name="state" id="stateeditparenthidden">
                         </div>
                         <div class="col-sm-6">
                             <label for="country" class="form-label">Country</label>
-                            <select class="form-select" name="country" id="countryP1" value="{{ $parent->country ?? '' }}">
-                                <?php 
-                                    $americass = americas();
-                                    $asias = asias();
-                                ?>
-                                <option value="" label="PLEASE CHOOSE" selected></option>
+                            <select class="form-select" name="country" id="countryP1">
                                 <optgroup id="country-optgroup-Americas" label="Americas">
                                     @foreach ($americass as $key => $america)
                                     <option value="{{$key}}" >{{$america}}</option>
@@ -223,7 +217,6 @@
                                     @endforeach
                                 </optgroup>
                             </select>
-                            <input type="hidden" name="country" id="countryeditparenthidden">
                         </div>
                     </div>
                 </form>

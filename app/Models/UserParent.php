@@ -43,6 +43,7 @@ class UserParent extends Authenticatable
         'country',
         'idFile',
         'okuFile',
+        'oldIDNo',
     ];
 }
 
