@@ -190,7 +190,7 @@
                                                         </div>
                                                     </div>
                                                      <div class="col-sm-3">
-                                                        <label for="expirydate" class="form-label">Expiry Datrrre</label>
+                                                        <label for="expirydate" class="form-label">Expiry Date</label>
                                                         <input type="text" id="expirydate" name="expiryDate" value="{{ date_format(date_create($profile->expiryDate ?? null), 'Y-m-d') ?? '' }}" class="form-control" placeholder="YYYY/MM/DD" style= "pointer-events: none;" readonly>
                                                     </div>
                                                     <div class="col-sm-3">
