@@ -47,7 +47,7 @@
                                 <thead>
                                     <tr>
                                         <th>Action</th>
-                                        <th>Checker</th>
+                                        <th width="20%">Checker</th>
                                         <th class="text-nowrap">Applied Date</th>
                                         <th class="text-nowrap">Claim Category</th>
                                         <th class="text-nowrap">Amount</th>
@@ -61,7 +61,7 @@
                                         @foreach ($personals as $personal)
                                             <tr>
                                                 <td><a data-bs-toggle="modal" data-id="{{ $personal->id }}" id="btn-view" class="btn btn-primary btn-sm">View</a></td>
-                                                <td>
+                                                <td width="20%">
                                                     <input type="checkbox"{{ $personal->a1 == 'check' ? 'checked' : '' }} disabled class="form-check-input" name="" id="adddropdown" /> &nbsp;
                                                     <input type="checkbox" {{ $personal->a2 == 'check' ? 'checked' : '' }} disabled class="form-check-input" name="" id="adddropdown" /> &nbsp;
                                                     <input type="checkbox" {{ $personal->a3 == 'check' ? 'checked' : '' }} disabled class="form-check-input" name="" id="adddropdown" />
@@ -85,13 +85,13 @@
                                     @endif
                                 </tbody>
                             </table>
-                        </div>
+                        </div><br>
                         <div class="row p-2">
                             <table id="claimtable" class="table table-striped table-bordered align-middle">
                                 <thead>
                                     <tr>
                                         <th>Action</th>
-                                        <th>Checker</th>
+                                        <th width="20%">Checker</th>
                                         <th class="text-nowrap">Travel Date</th>
                                         <th class="text-nowrap">Project Name</th>
                                         <th class="text-nowrap">Claim Category</th>
@@ -113,7 +113,7 @@
                                                             </a>
                                                     @endif
                                                 </td>
-                                                <td>
+                                                <td width="20%">
                                                     <input type="checkbox"{{ $travel->a1 == 'check' ? 'checked' : '' }} disabled class="form-check-input" name="" id="adddropdown" /> &nbsp;
                                                     <input type="checkbox" {{ $travel->a2 == 'check' ? 'checked' : '' }} disabled class="form-check-input" name="" id="adddropdown" /> &nbsp;
                                                     <input type="checkbox" {{ $travel->a3 == 'check' ? 'checked' : '' }} disabled class="form-check-input" name="" id="adddropdown" />

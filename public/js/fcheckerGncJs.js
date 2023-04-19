@@ -2,15 +2,15 @@ $(document).ready(function () {
     $("#claimtable").DataTable({
         responsive: false,
         lengthMenu: [
-            [5, 10, 15, 20, -1],
-            [5, 10, 15, 20, "All"],
+            [5, 10, 25, 50, -1],
+            [5, 10, 25, 50, "All"],
         ],
     });
     $("#traveltable").DataTable({
         responsive: false,
         lengthMenu: [
-            [5, 10, 15, 20, -1],
-            [5, 10, 15, 20, "All"], 
+            [5, 10, 25, 50, -1],
+            [5, 10, 25, 50, "All"],
         ],
     });
     // $(document).on("click", "#btn-view-claim", function () {
