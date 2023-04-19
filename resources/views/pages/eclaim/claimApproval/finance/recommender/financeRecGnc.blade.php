@@ -16,7 +16,7 @@
                                     <label class="form-label col-form-label">Claim ID :</label>
                                 </div>
                                 <div class="col-md-4">
-                                    <input readonly type="text" value="{{ $general->id ?? '-' }}" class="form-control">
+                                    <input readonly type="text" value="GNC {{ $general->id ?? '-' }}" class="form-control">
                                 </div>
                                 <div class="col-md-2">
                                     <label class="form-label col-form-label">Claim Type :</label>
@@ -38,7 +38,7 @@
 
                                 </div>
                                 <div class="col-md-4">
-                                    <input readonly type="text" value="{{ $general->total_amount ?? '-' }}" class="form-control">
+                                    <input readonly type="text" value="MYR {{ $general->total_amount ?? '-' }}" class="form-control">
                                 </div>
                             </div>
                             <div class="row p-2">
@@ -85,7 +85,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-5">
+                    <!-- <div class="col-md-5">
 
                         <div class="form-control">
                             <div class="row p-2">
@@ -119,7 +119,7 @@
                             </div>
                         </div>
 
-                    </div>
+                    </div> -->
 
                 </div>
                 <div class="row p-2">

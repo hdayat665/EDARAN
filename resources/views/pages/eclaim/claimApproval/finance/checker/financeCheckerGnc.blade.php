@@ -17,7 +17,7 @@
                                 </div>
                                 <div class="col-md-4">
                                     <input type="hidden" id="financeChecker" value="{{ $checkers }}">
-                                    <input readonly type="text" value="{{ $general->id ?? '-' }}" class="form-control">
+                                    <input readonly type="text" value="GNC {{ $general->id ?? '-' }}" class="form-control">
                                 </div>
                                 <div class="col-md-2">
                                     <label class="form-label col-form-label">Claim Type :</label>
@@ -39,7 +39,7 @@
 
                                 </div>
                                 <div class="col-md-4">
-                                    <input readonly type="text" value="{{ $general->total_amount ?? '-' }}" class="form-control">
+                                    <input readonly type="text" value="MYR {{ $general->total_amount ?? '-' }}" class="form-control">
                                 </div>
                             </div>
                             <div class="row p-2">
@@ -47,7 +47,7 @@
                                     <thead>
                                         <tr>
                                             <th>Action</th>
-                                            <th>Checker</th>
+                                            <th width="20%">Checker</th>
                                             <th class="text-nowrap">Applied Date</th>
                                             <th class="text-nowrap">Claim Category</th>
                                             <th class="text-nowrap">Amount</th>
@@ -61,7 +61,7 @@
                                             @foreach ($gncs as $gnc)
                                                 <tr>
                                                     <td><a data-bs-toggle="modal" data-id="{{ $gnc->id }}" id="btn-view" class="btn btn-primary btn-sm">View</a></td>
-                                                    <td>
+                                                    <td width="20%">
                                                         <input type="checkbox" id="checker1" {{ $gnc->f1 == 'check' ? 'checked' : '' }} class="form-check-input" disabled /> &nbsp;
                                                         <input type="checkbox" id="checker2" {{ $gnc->f2 == 'check' ? 'checked' : '' }} class="form-check-input" disabled /> &nbsp;
                                                         <input type="checkbox" id="checker3" {{ $gnc->f3 == 'check' ? 'checked' : '' }} class="form-check-input" disabled />
@@ -91,7 +91,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-5">
+                    <!-- <div class="col-md-5">
 
                         <div class="form-control">
                             <div class="row p-2">
@@ -125,7 +125,7 @@
                             </div>
                         </div>
 
-                    </div>
+                    </div> -->
 
                 </div>
                 <div class="row p-2">

@@ -16,7 +16,7 @@
                                     <label class="form-label col-form-label">Type of Cash Advance :</label>
                                 </div>
                                 <div class="col-md-9">
-                                    <input readonly type="text" value="{{ getCashAdvanceType($ca->type) ?? '-' }}" class="form-control">
+                                    <input readonly type="text" value="MYR {{ getCashAdvanceType($ca->type) ?? '-' }}" class="form-control">
                                 </div>
                             </div>
                             <div class="row p-2">
@@ -42,7 +42,7 @@
 
                                 </div>
                                 <div class="col-md-9">
-                                    <input readonly type="text" class="form-control" value="{{ getModeOfTransport($mode->tranport_type) ?? '-' }}">
+                                    <input readonly type="text" class="form-control" value="MYR {{ getModeOfTransport($mode->tranport_type) ?? '-' }}">
                                 </div>
                             </div>
                             <div class="row p-2">
@@ -51,7 +51,7 @@
 
                                 </div>
                                 <div class="col-md-9">
-                                    <input readonly type="text" class="form-control" value="{{ $ca->travel_date ?? '-' }}">
+                                    <input readonly type="text" class="form-control" value="MYR {{ $ca->travel_date ?? '-' }}">
                                 </div>
                             </div>
                             <div class="row p-2">
@@ -59,7 +59,7 @@
                                     <label class="form-label col-form-label">Project :</label>
                                 </div>
                                 <div class="col-md-9">
-                                    <input readonly type="text" class="form-control" value="{{ $ca->project->project_name ?? '-' }}">
+                                    <input readonly type="text" class="form-control" value="MYR {{ $ca->project->project_name ?? '-' }}">
                                 </div>
                             </div>
                             <div class="row p-2">
@@ -68,7 +68,7 @@
 
                                 </div>
                                 <div class="col-md-9">
-                                    <input readonly type="text" class="form-control" value="{{ getProjectLocation($ca->project_location_id)->location_name ?? $ca->destination ?? '-' }}">
+                                    <input readonly type="text" class="form-control" value="MYR {{ getProjectLocation($ca->project_location_id)->location_name ?? $ca->destination ?? '-' }}">
                                 </div>
                             </div>
                             <div class="row p-2">
@@ -111,13 +111,13 @@
                                     <label class="form-label col-form-label">Subsistence Allowance :</label>
                                 </div>
                                 <div class="col-md-3">
-                                    <input readonly type="text" class="form-control" value="{{ $ca->mode_of_transport->subs_allowance_total ?? 0 }}">
+                                    <input readonly type="text" class="form-control" value="MYR {{ $ca->mode_of_transport->subs_allowance_total ?? 0 }}">
                                 </div>
                                 <div class="col-md-3">
                                     <label class="form-label col-form-label">Accommodation :</label>
                                 </div>
                                 <div class="col-md-3">
-                                    <input readonly type="text" class="form-control" value="{{ $ca->mode_of_transport->accommadation_total ?? 0 }}">
+                                    <input readonly type="text" class="form-control" value="MYR {{ $ca->mode_of_transport->accommadation_total ?? 0 }}">
                                 </div>
                             </div>
                             <div class="row p-2">
@@ -131,7 +131,7 @@
                                     <label class="form-label col-form-label">Fuel Parking :</label>
                                 </div>
                                 <div class="col-md-3">
-                                    <input readonly type="text" class="form-control" value="{{ $ca->mode_of_transport->fuel ?? 0 }}">
+                                    <input readonly type="text" class="form-control" value="MYR {{ $ca->mode_of_transport->fuel ?? 0 }}">
                                 </div>
                             </div>
                             <div class="row p-2">
@@ -145,7 +145,7 @@
                                     <label class="form-label col-form-label">Toll/Parking :</label>
                                 </div>
                                 <div class="col-md-3">
-                                    <input readonly type="text" class="form-control" value="{{ $ca->mode_of_transport->toll ?? 0 }}">
+                                    <input readonly type="text" class="form-control" value="MYR {{ $ca->mode_of_transport->toll ?? 0 }}">
                                 </div>
                             </div>
                             <div class="row p-2">
@@ -159,7 +159,7 @@
                                     <label class="form-label col-form-label">Entertainment :</label>
                                 </div>
                                 <div class="col-md-3">
-                                    <input readonly type="text" class="form-control" value="{{ $ca->mode_of_transport->entertainment ?? 0 }}">
+                                    <input readonly type="text" class="form-control" value="MYR {{ $ca->mode_of_transport->entertainment ?? 0 }}">
                                 </div>
                             </div>
                             <div class="row p-2">
@@ -176,7 +176,7 @@
                                     <label class="form-label col-form-label">Total :</label>
                                 </div>
                                 <div class="col-md-3">
-                                    <input readonly type="text" class="form-control" value="{{ $ca->mode_of_transport->total ?? 0 }}">
+                                    <input readonly type="text" class="form-control" value="MYR {{ $ca->mode_of_transport->total ?? 0 }}">
                                 </div>
                             </div>
                             <div class="row p-2">
@@ -190,12 +190,12 @@
                                     <label class="form-label col-form-label">Maximum Paid Out (75%) :</label>
                                 </div>
                                 <div class="col-md-3">
-                                    <input readonly type="text" class="form-control" value="{{ $ca->mode_of_transport->max_total ?? 0 }}">
+                                    <input readonly type="text" class="form-control" value="MYR {{ $ca->mode_of_transport->max_total ?? 0 }}">
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-5">
+                    <!-- <div class="col-md-5">
 
                         <div class="form-control">
                             <div class="row p-2">
@@ -229,7 +229,7 @@
                             </div>
                         </div>
 
-                    </div>
+                    </div> -->
 
                 </div>
             </div>

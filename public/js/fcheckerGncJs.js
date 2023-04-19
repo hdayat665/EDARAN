@@ -2,16 +2,24 @@ $(document).ready(function () {
     $("#claimtable").DataTable({
         responsive: false,
         lengthMenu: [
-            [5, 10, 25, 50, -1],
-            [5, 10, 25, 50, "All"],
+            [5, 10, 15, 20, -1],
+            [5, 10, 15, 20, "All"],
         ],
+        initComplete: function (settings, json) {  
+            $("#appealTable").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");            
+        },
+        scrollX: true,
     });
     $("#traveltable").DataTable({
         responsive: false,
         lengthMenu: [
-            [5, 10, 25, 50, -1],
-            [5, 10, 25, 50, "All"],
+            [5, 10, 15, 20, -1],
+            [5, 10, 15, 20, "All"], 
         ],
+        initComplete: function (settings, json) {  
+            $("#appealTable").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");            
+        },
+        scrollX: true,
     });
     // $(document).on("click", "#btn-view-claim", function () {
     //     $("#modal-view-claim").modal("show");
