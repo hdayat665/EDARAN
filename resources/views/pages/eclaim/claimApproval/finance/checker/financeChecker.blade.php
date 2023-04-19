@@ -4,7 +4,7 @@
         <h1 class="page-header">eClaim | Claim Approval | Finance Checker</h1>
         <div class="panel panel" id="fcheckerJs">
             <div class="panel-body">
-                <div class="row p-2">
+                <!-- <div class="row p-2">
                     <div class="form-control">
                         <h3>Claim Overview</h3>
                         <div class="row p-2">
@@ -32,7 +32,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
 
                 <br>
 
