@@ -71,15 +71,15 @@
                                     </div>
                                     <div class="col-sm-6">
                                         <label for="expirydate" class="form-label">Expiry Date*</label>
-                                        <input type="text" id="expirydatemc" name="expiryDate" value="{{ $companion->expiryDate ?? '' }}" placeholder="YYYY/MM/DD" class="form-control" aria-describedby="expirydate" style= "pointer-events: none;" readonly>
+                                        <input type="text" id="expirydatemc" name="expiryDate" value="{{ $companion->expiryDate ?? '' }}" placeholder="YYYY/MM/DD" class="form-control" aria-describedby="expirydate" style= "pointer-events: none;" disabled readonly>
                                     </div>
                                 </div>
                             </div>
                             
                             <div class="col-sm-3">
                                 <label for="issuing-country" class="form-label">Issuing Country* </label>
-                                <select class="form-select" name="issuingCountry" id="issuingCountry2" value="{{ $companion->issuingCountry ?? '' }}" style= "pointer-events: none;">
-                                <option value="MY" label="Malaysia" selected ></option>
+                                <select class="form-select" name="issuingCountry" id="issuingCountry2" value="{{ $companion->issuingCountry ?? '' }}" style= "pointer-events: none;" disabled readonly>
+                                <option value="" label="PLEASE CHOOSE" selected ></option>
                                     <optgroup id="country-optgroup-Americas" label="Americas">
                                         @foreach ($americass as $key => $america)
                                         <option value="{{$key}}"  >{{$america}}</option>
@@ -123,6 +123,16 @@
                         </div>
                         <div class="row p-2">
                             <div class="col-sm-6">
+                                <label for="contact-number" class="form-label">Phone Number</label>
+                                <input type="text" id="contact-number" name="contactNo" value="{{ $companion->contactNo ?? '' }}" placeholder="00000000000" class="form-control" aria-describedby="contact-number">
+                            </div>
+                            <div class="col-sm-6">
+                                <label for="contact-number" class="form-label" >Home Number</label>
+                                <input type="text" id="" name="homeNo" value="" class="form-control" aria-describedby="" placeholder="000000000">
+                            </div>
+                        </div>
+                        <div class="row p-2">
+                            <div class="col-sm-6">
                                 <div class="row">
                                     <div class="col-sm-6 ">
                                         <div class="form-check form-switch align-right">
@@ -148,16 +158,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row p-2">
-                            <div class="col-sm-6">
-                                <label for="contact-number" class="form-label">Phone Number</label>
-                                <input type="text" id="contact-number" name="contactNo" value="{{ $companion->contactNo ?? '' }}" placeholder="00000000000" class="form-control" aria-describedby="contact-number">
-                            </div>
-                            <div class="col-sm-6">
-                                <label for="contact-number" class="form-label" >Home Number</label>
-                                <input type="text" id="" name="homeNo" value="" class="form-control" aria-describedby="" placeholder="000000000">
-                            </div>
-                        </div>
+                        
                         <br>
                         <div class="row p-2">
                             <div class="col-sm-6">
@@ -403,6 +404,8 @@
                             <div class="col-sm-3">
                                 <label for="issuing-country" class="form-label">Issuing Country*</label>
                                 <select class="form-select" name="issuingCountry" id="issuingCountry2s" value="{{ $companion->issuingCountry ?? '' }}">
+                                    <option value="" label="PLEASE CHOOSE" selected ></option>
+
                                     <optgroup id="country-optgroup-Americas" label="Americas">
                                         @foreach ($americass as $key => $america)
                                         <option value="{{$key}}" <?php echo ($key == $companion->issuingCountry) ? 'selected="selected"' : '' ?> >{{$america}}</option>
@@ -456,6 +459,17 @@
                                 </div>
                             </div>
                         </div>
+                
+                        <div class="row p-2">
+                             <div class="col-sm-6">
+                                <label for="contact-number" class="form-label">Phone Number</label>
+                                <input type="text" id="contact-number" name="contactNo" value="{{ $companion->contactNo ?? '' }}" class="form-control" placeholder="00000000000" aria-describedby="contact-number">
+                            </div>
+                            <div class="col-sm-6" >
+                                <label for="" class="form-label">Home Number</label>
+                                <input type="text" id="" name="" value="" class="form-control" aria-describedby="" placeholder="000000000">
+                            </div>
+                        </div>
                         <div class="row p-2">
                             <div class="col-sm-6">
                                 <div class="row">
@@ -484,16 +498,6 @@
                                         @endif
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="row p-2">
-                             <div class="col-sm-6">
-                                <label for="contact-number" class="form-label">Phone Number</label>
-                                <input type="text" id="contact-number" name="contactNo" value="{{ $companion->contactNo ?? '' }}" class="form-control" placeholder="00000000000" aria-describedby="contact-number">
-                            </div>
-                            <div class="col-sm-6" >
-                                <label for="" class="form-label">Home Number</label>
-                                <input type="text" id="" name="" value="" class="form-control" aria-describedby="" placeholder="000000000">
                             </div>
                         </div>
                         <br>

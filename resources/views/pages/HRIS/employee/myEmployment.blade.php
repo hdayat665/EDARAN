@@ -34,13 +34,14 @@
                                 <div class="card-body">
                                     <div class="row p-2">
                                         <label for="firstname" class="form-label">Role*</label>
-                                        <select class="form-select" name="role">
+                                        <select class="form-select" name="role" id="role">
                                             <option value="" label="PLEASE CHOOSE"></option>
                                             <?php $roles = getAllRole(); ?>
                                             @foreach ($roles as $role)
                                                 <option value="{{ $role->id }}"
                                                     {{ $user->role_id == $role->id ? 'selected="selected"' : '' }}
-                                                    label="{{ $role->roleName }}"></option>
+                                                    label="{{ $role->roleName }}">{{ $role->roleName }}</option>
+                                                    
                                             @endforeach
                                         </select>
                                         <input type="hidden" name="id" value="{{ $employment->id }}">
@@ -52,7 +53,7 @@
                                             <?php $companys = getCompany(); ?>
                                             @foreach ($companys as $company)
                                                 <option value="{{ $company->id }}" <?php echo $employment->company == $company->id ? 'selected="selected"' : ''; ?>
-                                                    label="{{ $company->companyName }}"></option>
+                                                    label="{{ $company->companyName }}">{{ $company->companyName }}</option>
                                             @endforeach
                                         </select>
                                         <input type="hidden" name="id" value="{{ $employment->id }}">
@@ -64,7 +65,7 @@
                                             <option value="" label="PLEASE CHOOSE"></option>
                                             @foreach ($Departments as $Department)
                                                 <option value="{{ $Department->id ?? null }}" <?php echo $employment->department == $Department->id ? 'selected="selected"' : ''; ?>
-                                                    label="{{ $Department->departmentName }}"></option>
+                                                    label="{{ $Department->departmentName }}">{{ $Department->departmentName }}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -75,7 +76,7 @@
                                             <option value="" label="PLEASE CHOOSE"></option>
                                             @foreach ($Units as $Unit)
                                                 <option value="{{ $Unit->id }}" <?php echo $employment->unit == $Unit->id ? 'selected="selected"' : ''; ?>
-                                                    label="{{ $Unit->unitName }}"></option>
+                                                    label="{{ $Unit->unitName }}">{{ $Unit->unitName }}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -86,7 +87,7 @@
                                             <option value="" label="PLEASE CHOOSE"></option>
                                             @foreach ($Branchs as $Branch)
                                                 <option value="{{ $Branch->id }}" <?php echo $employment->branch == $Branch->id ? 'selected="selected"' : ''; ?>
-                                                    label="{{ $Branch->branchName }}"></option>
+                                                    label="{{ $Branch->branchName }}">{{ $Branch->branchName }}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -98,34 +99,35 @@
                                     </div>
                                     <div class="row p-2">
                                         <label for="firstname" class="form-label">Job Grade*</label>
-                                        <select class="form-select" name="jobGrade">
+                                        <select class="form-select" name="jobGrade"  id="jobGrade">
                                             <?php $JobGrades = getJobGrade(); ?>
                                             <option value="" label="PLEASE CHOOSE"></option>
                                             @foreach ($JobGrades as $JobGrade)
                                                 <option value="{{ $JobGrade->id }}" <?php echo $employment->jobGrade == $JobGrade->id ? 'selected="selected"' : ''; ?>
-                                                    label="{{ $JobGrade->jobGradeName }}"></option>
+                                                    label="{{ $JobGrade->jobGradeName }}">{{ $JobGrade->jobGradeName }}</option>
                                             @endforeach
                                         </select>
                                     </div>
                                     <div class="row p-2">
                                         <label for="firstname" class="form-label">Designation*</label>
-                                        <select class="form-select" name="designation">
+                                        <select class="form-select" name="designation" id="designation">
                                             <?php $Designations = getDesignation(); ?>
                                             <option value="" label="PLEASE CHOOSE"></option>
                                             @foreach ($Designations as $Designation)
                                                 <option value="{{ $Designation->id }}" <?php echo $employment->designation == $Designation->id ? 'selected="selected"' : ''; ?>
-                                                    label="{{ $Designation->designationName }}"></option>
+                                                    label="{{ $Designation->designationName }}">{{ $Designation->designationName }}</option>
                                             @endforeach
                                         </select>
                                     </div>
                                     <div class="row p-2">
                                         <label for="firstname" class="form-label">Employment Type*</label>
-                                        <select class="form-select" name="employmentType">
+                                        <select class="form-select" name="employmentType" id="employmentType">
                                             <?php $EmploymentTypes = getEmploymentType(); ?>
                                             <option value="" label="PLEASE CHOOSE"></option>
                                             @foreach ($EmploymentTypes as $EmploymentType)
                                                 <option value="{{ $EmploymentType->id }}" label="{{ $EmploymentType->type }}"
                                                     {{ $employment->employmentType == $EmploymentType->id ? "selected='selected'" : '' }}>
+                                                    {{ $EmploymentType->type }}
                                                 </option>
                                             @endforeach
                                         </select>

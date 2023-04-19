@@ -550,15 +550,15 @@ $(document).ready(function () {
             $("#passportmc").prop("readonly", false);
             $("#passportmc").css("pointer-events", "auto");
 
-            $("#expirydatemc").prop("readonly", false);
-            $("#expirydatemc").css("pointer-events", "auto");
-
            
-            $("#issuingCountry2").prop("readonly", false);
-            $("#issuingCountry2").css("pointer-events", "auto");
 
             $("#age2").prop("readonly", true);
             $("#age2").val("");
+
+
+            $("#expirydatemc").prop("disabled", true);
+            $("#issuingCountry2").prop("disabled", true);
+
         
         } else {
             $("#idnumber2").prop("readonly", false);
@@ -571,14 +571,11 @@ $(document).ready(function () {
             $("#passportmc").prop("readonly", false);
             $("#passportmc").css("pointer-events", "auto");
          
+            $("#expirydatemc").val("");
             $("#expirydatemc").prop("readonly", true);
             $("#expirydatemc").css("pointer-events", "none");
-            $("#expirydatemc").val("");
-
-     
-            $("#issuingCountry2").val("");
-            $("#issuingCountry2").prop("readonly", true);
-            $("#issuingCountry2").css("pointer-events", "none");
+            $("#expirydatemc").prop("disabled", true);
+            $("#issuingCountry2").prop("disabled", true);
 
             $("#age2").prop("readonly", false);
 
@@ -591,10 +588,18 @@ $(document).ready(function () {
         if ($("#expirydatemc").prop("readonly")) {
             $("#expirydatemc").prop("readonly", false);
             $("#expirydatemc").css("pointer-events", "auto");
+            $("#expirydatemc").prop("disabled", false);
+            $("#issuingCountry2").prop("disabled", false);
+            $("#issuingCountry2").css("pointer-events", "auto");
         } else {
             $("#expirydatemc").prop("readonly", true);
             $("#expirydatemc").css("pointer-events", "none");
             $("#expirydatemc").val("");
+            $("#expirydatemc").prop("disabled", false);
+
+            $("#issuingCountry2").prop("disabled", false);
+            $("#issuingCountry2").css("pointer-events", "auto");
+            $("#issuingCountry2").val("");
         }
     });
 
@@ -907,9 +912,9 @@ $(document).ready(function () {
         } else {
             $("#idnumber").prop("readonly", false);
 
-            $("#passport").prop("readonly", true);
+            $("#passport").prop("readonly", false);
 
-            $("#expirydate").prop("readonly", true);
+            $("#expirydate").prop("readonly", false);
             $("#expirydate").css("pointer-events", "none");
 
             $("#dob").prop("readonly", true);
@@ -1016,10 +1021,12 @@ $.validator.addMethod("noSpecialChars", function(value, element) {
             $('#age2').val('').prop('disabled', true);
 
             
+            
         } else {
             $('#idnumber2').prop('disabled', false);
             $('#age2').prop('disabled', false);
-
+          
+            
         }
     });
     
@@ -1172,6 +1179,10 @@ $.validator.addMethod("noSpecialChars", function(value, element) {
             $('#okuattach5').val('').prop('disabled', true);
         }
     });
+
+
+  
+    
 
     $("#saveProfile").click(function (e) {
         $("#formProfile").validate({
@@ -2202,6 +2213,12 @@ $('input[name="address_type[]"]').on('change', function() {
                     digits: true,
                     rangelength: [7,9]
                 },
+                expiryDate: {
+                    required: true,
+                },
+                issuingCountry: {
+                    required: true,
+                },
             },
 
             messages: {
@@ -2267,7 +2284,13 @@ $('input[name="address_type[]"]').on('change', function() {
                     digits: "Please Insert Valid Office Number",
                     rangelength: "Please Insert Valid Office Number"
 
-                }
+                },
+                expiryDate: {
+                    required: "Please Insert Expiry Date",
+                },
+                issuingCountry: {
+                    required: "Please Insert Issuing Country",
+                },
             },
         submitHandler: function(form) {
             var data = new FormData(document.getElementById("addCompanionForm"));
@@ -2778,38 +2801,7 @@ companion = ["1", "2", "3", "4"];
         });  
     });
 
-    // $("#editChildren").click(function (e) {
-    //     var data = new FormData(document.getElementById("editChildrenForm"));
-
-    //     $.ajax({
-    //         type: "POST",
-    //         url: "/updateEmployeeChildren",
-    //         data: data,
-    //         dataType: "json",
-    //         async: false,
-    //         processData: false,
-    //         contentType: false,
-    //     }).done(function(data) {
-    //         console.log(data);
-    //         Swal.fire({
-    //             title: data.title,
-    //             icon: 'success',
-    //             text: data.msg,
-    //             type: data.type,
-    //                 confirmButtonColor: '#3085d6',
-    //             confirmButtonText: 'OK',
-    //             allowOutsideClick: false,
-    //             allowEscapeKey: false,
-    //         }).then(function() {
-    //             if (data.type == 'error') {
-
-    //             } else {
-    //                 location.reload();
-    //             }
-    //         });
-    //     });
-    // });
-
+    
     childId = $("#childId").val();
 
     childIds = childId.split(",");
@@ -3453,6 +3445,10 @@ companion = ["1", "2", "3", "4"];
                 $("#contactNoP1").val(parent.contactNo);
                 $("#genderP1").val(parent.gender);
                 $("#firstNames1").val(parent.firstName);
+                $("#passport7").val(parent.passport);
+                $("#expirydate7").val(parent.expiryDate);
+                $("#issuingCountry7").val(parent.issuingCountry);
+                $("#oldIDNoP1").val(parent.oldIdNo);
                 $("#postcodeP1").val(parent.postcode);
                 $("#lastNameP1").val(parent.lastName);
                 $("#relationshipP1").val(parent.relationship);
@@ -4293,6 +4289,9 @@ companion = ["1", "2", "3", "4"];
             $("#idno7").prop("readonly", true);
             $("#DOBP1").prop("readonly", false);
             $("#DOBP1").css("pointer-events", "auto");
+
+            $("#expirydate7").prop("readonly", false);
+            $("#expirydate7").css("pointer-events", "auto");
             $("#idno7").val("");
             $("#age7").prop("readonly", false);
             $("#genderP1").css({
@@ -4300,6 +4299,8 @@ companion = ["1", "2", "3", "4"];
                 "touch-action": "auto",
                 background: "#ffffff",
             });
+            $("#issuingCountry7").css("pointer-events", "none");
+
         } else {
             $("#idno7").prop("readonly", false);
             $("#DOBP1").prop("readonly", true);
@@ -4314,8 +4315,31 @@ companion = ["1", "2", "3", "4"];
                 background: "#e9ecef",
             });
             $("#age7").prop("readonly", true);
+            $("#issuingCountry7").css("pointer-events", "none");
+
         }
     });
+
+    $("#passport7").change(function () {
+        if ($("#expirydate7").prop("readonly")) {
+            $("#expirydate7").prop("readonly", false);
+            $("#expirydate7").css("pointer-events", "auto");
+
+            $("#issuingCountry7").prop("readonly", false);
+            $("#issuingCountry7").css("pointer-events", "auto");
+        } else {
+            $("#expirydate7").prop("readonly", true);
+            $("#expirydate7").css("pointer-events", "none");
+            $("#expirydate7").val("");
+
+            $("#issuingCountry7").prop("readonly", true);
+            $("#issuingCountry7").css("pointer-events", "none");
+            $("#issuingCountry7").val("");
+        }
+    });
+
+
+    
 
     $("#idno7").change(function () {
         if ($(this).val().length == 12) {
@@ -4426,3 +4450,28 @@ $(document).on("click", "#uploadpicture", function() {
         }
     });
 });
+
+
+// search bar in select box (eleave)
+$('#eleaverecommender').picker({ search: true });
+$('#eleaveapprover').picker({ search: true });
+
+// search bar in select box (eleave)
+$('#eclaimrecommender').picker({ search: true });
+$('#eclaimapprover').picker({ search: true });
+
+// search bar in select box (Cash Advance)
+$('#caapprover').picker({ search: true });
+
+
+// search bar in select box (Employment Information)
+$('#role').picker({ search: true });
+$('#companyForEmployment').picker({ search: true });
+$('#departmentShow').picker({ search: true });
+$('#unitShow').picker({ search: true });
+$('#branchShow').picker({ search: true });
+$('#jobGrade').picker({ search: true });
+$('#designation').picker({ search: true });
+$('#employmentType').picker({ search: true });
+
+

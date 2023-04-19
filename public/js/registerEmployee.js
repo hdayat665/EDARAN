@@ -485,8 +485,8 @@ $(document).ready(function() {
             submitHandler: function(form) {
 
                 requirejs(['sweetAlert2'], function(swal) { 
-
                     var data = new FormData(document.getElementById("employmentForm"));
+
 
                     $.ajax({
                         type: "POST",

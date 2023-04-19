@@ -3837,7 +3837,7 @@ $("#same-address3").change(function () {
         $("#postcodeP1").val($("").val()).prop("readonly", false);
         $("#cityP1").val($("").val()).prop("readonly", false);
         $("#stateP1").val($("").val()).prop("disabled", false);
-        $("#countryP").val($("my").val()).prop("disabled", false);
+        $("#countryP").val($("").val()).prop("disabled", false);
     }
 });
 $("#stateEmc").css({ "pointer-events": "none", background: "#e9ecef" });
@@ -3969,8 +3969,11 @@ $("#same-addressEditParent").change(function () {
         $("#address2P1").val($("#address-2").val()).prop("readonly", true);
         $("#postcodeP1").val($("#postcode").val()).prop("readonly", true);
         $("#cityP1").val($("#city").val()).prop("readonly", true);
-        $("#stateP1").val($("#state").val()).prop("disabled", true);
-        $("#countryP1").val($("#country").val()).prop("disabled", true);
+        $("#stateP1").val($("#state").val()).prop("readonly", true);
+        $("#stateP1").css({ "pointer-events": "none", background: "#e9ecef" });
+
+        $("#countryP1").val($("#country").val()).prop("readonly", true);
+        $("#countryP1").css({ "pointer-events": "none", background: "#e9ecef" });
 
         // Fetch permanent address from userAddress table if available
         var id = "{{ $user->id }}";
@@ -4003,8 +4006,12 @@ $("#same-addressEditParent").change(function () {
         $("#address2P1").prop("readonly", false);
         $("#postcodeP1").prop("readonly", false);
         $("#cityP1").prop("readonly", false);
-        $("#stateP1").prop("disabled", false);
-        $("#countryP1").prop("disabled", false);
+        $("#stateP1").prop("readonly", false);
+        $("#countryP1").css({ "pointer-events": "auto", background: "" });
+
+        $("#countryP1").prop("readonly", false);
+        $("#countryP1").css({ "pointer-events": "auto", background: "" });
+
     }
 });
 

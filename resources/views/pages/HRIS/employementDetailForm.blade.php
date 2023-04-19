@@ -125,15 +125,15 @@
             <label class="form-label col-form-label col-md-1">Joined Date*</label>
             <div class="col-md-5">
                 <input type="text" name="joinedDate" class="form-control" id="datepicker-joindate" placeholder="dd/mm/yyyy" required />
-                <input type="text" name="user_id" id="user_id1" class="form-control mb-10px"" />
+                <input type="text" name="user_id" id="user_id1" class="form-control mb-10px" />
             </div>
 
         </div>
 
-    </form>
+    
     <p class="text-end mb-0">
         <a href="javascript:;" class="btn btn-white me-5px">Previous</a>
         {{-- <a href="javascript:;" class="btn btn-primary">Save</a> --}}
-        <buttin id="submitEmployment" class="btn btn-primary">Save</buttin>
-    </p>
+        <button id="submitEmployment" class="btn btn-primary">Save</button>
+    </p></form>
 </div>

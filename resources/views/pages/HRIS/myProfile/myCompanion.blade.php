@@ -113,6 +113,17 @@
                         {{-- new --}}
                         <div class="row p-2">
                             <div class="col-sm-6">
+                                <label for="contact-number" class="form-label">Phone Number</label>
+                                <input type="text" id="contact-number" name="contactNo" value="{{ $companion->contactNo ?? '' }}" placeholder="00000000000" class="form-control" aria-describedby="contact-number">
+                            </div>
+                            {{-- new --}}
+                            <div class="col-sm-6">
+                                <label for="contact-number" class="form-label" >Home Number</label>
+                                <input type="text" id="home-number" name="homeNo" value="{{ $companion->homeNo ?? '' }}" class="form-control" aria-describedby="" placeholder="000000000">
+                            </div>
+                        </div>
+                        <div class="row p-2">
+                            <div class="col-sm-6">
                                 <div class="row">
                                     <div class="col-sm-6 ">
                                         <div class="form-check form-switch align-right">
@@ -134,17 +145,7 @@
                                         <input type="file" id="okuattach1" disabled name="okuID" class="form-control" aria-describedby="" style="pointer-events: none">
                             </div>
                         </div>
-                        <div class="row p-2">
-                            <div class="col-sm-6">
-                                <label for="contact-number" class="form-label">Phone Number</label>
-                                <input type="text" id="contact-number" name="contactNo" value="{{ $companion->contactNo ?? '' }}" placeholder="00000000000" class="form-control" aria-describedby="contact-number">
-                            </div>
-                            {{-- new --}}
-                            <div class="col-sm-6">
-                                <label for="contact-number" class="form-label" >Home Number</label>
-                                <input type="text" id="home-number" name="homeNo" value="{{ $companion->homeNo ?? '' }}" class="form-control" aria-describedby="" placeholder="000000000">
-                            </div>
-                        </div>
+                        
                         <br>
                         <div class="row p-2">
                             <div class="col-sm-6">
@@ -448,6 +449,17 @@
                         </div>
                         {{-- new --}}
                         <div class="row p-2">
+                             <div class="col-sm-6">
+                                <label for="contact-number" class="form-label">Phone Number</label>
+                                <input type="text" id="contact-number" name="contactNo" value="{{ $companion->contactNo ?? '' }}" placeholder="00000000000" class="form-control" aria-describedby="contact-number">
+                            </div>
+                            {{-- new --}}
+                            <div class="col-sm-6">
+                                <label for="contact-number" class="form-label" >Home Number</label>
+                                <input type="text" id="home-number" name="homeNo" value="{{ $companion->homeNo ?? '' }}" class="form-control" aria-describedby="contact-number" placeholder="000000000">
+                            </div>
+                        </div>
+                        <div class="row p-2">
                             <div class="col-sm-6">
                                 <div class="row">
                                     <div class="col-sm-6 ">
@@ -476,17 +488,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row p-2">
-                             <div class="col-sm-6">
-                                <label for="contact-number" class="form-label">Phone Number</label>
-                                <input type="text" id="contact-number" name="contactNo" value="{{ $companion->contactNo ?? '' }}" placeholder="00000000000" class="form-control" aria-describedby="contact-number">
-                            </div>
-                            {{-- new --}}
-                            <div class="col-sm-6">
-                                <label for="contact-number" class="form-label" >Home Number</label>
-                                <input type="text" id="home-number" name="homeNo" value="{{ $companion->homeNo ?? '' }}" class="form-control" aria-describedby="contact-number" placeholder="000000000">
-                            </div>
-                        </div>
+                        
                         <div class="row p-2">
                             <div class="col-sm-6">
                                 <label for="address1" class="form-label">Address 1*</label>
