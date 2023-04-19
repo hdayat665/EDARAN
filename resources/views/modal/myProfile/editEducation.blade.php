@@ -13,13 +13,13 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="" class="form-label">From Date</label>
-                        <input type="date" class="form-control" id="educationFromDate1" name="fromDate" placeholder="YYYY/MM/DD" value="{{ date_format(date_create($education->fromDate ?? ''), 'Y-m-d') }}" >
+                        <input type="text" class="form-control" id="educationFromDate1" name="fromDate" placeholder="YYYY/MM/DD" value="{{ date_format(date_create($education->fromDate ?? ''), 'Y-m-d') }}" >
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="" class="form-label">To Date</label>
-                        <input type="date" class="form-control" id="educationToDate1" name="toDate" placeholder="YYYY/MM/DD" value="{{ date_format(date_create($education->toDate ?? ''), 'Y-m-d') }}" >
+                        <input type="text" class="form-control" id="educationToDate1" name="toDate" placeholder="YYYY/MM/DD" value="{{ date_format(date_create($education->toDate ?? ''), 'Y-m-d') }}" >
                     </div>
                 </div>
             </div>
@@ -54,7 +54,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-          <button type="button" class="btn btn-primary" id="editEducation">Save</button>
+          <button class="btn btn-primary" id="editEducation">Save</button>
         </div>
     </form>
       </div>

@@ -38,7 +38,7 @@
                 <thead>
                     <tr>
                         <th width="1%">NO</th>
-                        <th class="text-nowrap">Unit Name</th>
+                        <th class="text-nowrap">Company Name</th>
                         <th class="text-nowrap">Branch Type</th>
                         <th class="text-nowrap">Branch Name</th>
                         <th class="text-nowrap">State</th>
@@ -59,7 +59,7 @@
                     <?php $id++ ?>
                     <tr class="odd gradeX">
                         <td width="1%" class="fw-bold text-dark">{{$id}}</td>
-                        <td style="text-transform: uppercase;">{{$branch->unitName}}</td>
+                        <td style="text-transform: uppercase;">{{$branch->companyName}}</td>
                         <td>{{$branch->branchType}}</td>
                         <td>{{$branch->branchName}}</td>
                         <td style="text-transform: uppercase;">{{$branch->state}}</td>
@@ -118,13 +118,23 @@
                                 <option value="STATE ">STATE </option>
                             </select>
                         </div>
-                        <div class="mb-2">
+                        {{-- <div class="mb-2">
                             <label class="form-label">Unit Name*</label>
                             <select class="form-select" name="unitId" style="text-transform: uppercase;">
                                 <option type="text"value="" label="Select Unit" selected="selected">Select Unit </option>
                                 <?php $units = getUnit() ?>
                                 @foreach ($units as $unit)
                                 <option type="text"value="{{$unit->id}}" >{{$unit->unitName}}</option>
+                                @endforeach
+                            </select>
+                        </div> --}}
+                        <div class="mb-2">
+                            <label class="form-label">Company Name*</label>
+                            <select class="form-select" name="companyId" style="text-transform: uppercase;">
+                                <option type="text"value="" label="Select Company" selected="selected">Select Company </option>
+                                <?php $companys = getCompany() ?>
+                                @foreach ($companys as $company)
+                                <option type="text"value="{{$company->id}}" >{{$company->companyName}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -212,7 +222,7 @@
                                 <option value="STATE">STATE </option>
                             </select>
                         </div>
-                        <div class="mb-2">
+                        {{-- <div class="mb-2">
                             <label class="form-label">Unit Name*</label>
                             <select class="form-select" name="unitId" id="unitIdE" style="text-transform: uppercase;">
                                 <option type="text"value="" label="SELECT UNIT">SELECT UNIT </option>
@@ -221,6 +231,17 @@
                                 <option type="text"value="{{$unit->id}}" >{{$unit->unitName}}</option>
                                 @endforeach
 
+                            </select>
+                        </div> --}}
+
+                        <div class="mb-2">
+                            <label class="form-label">Company Name*</label>
+                            <select class="form-select" name="companyId" id="companyIdE" style="text-transform: uppercase;">
+                                <option type="text"value="" label="Select Company" selected="selected">Select Company </option>
+                                <?php $companys = getCompany() ?>
+                                @foreach ($companys as $company)
+                                <option type="text"value="{{$company->id}}" >{{$company->companyName}}</option>
+                                @endforeach
                             </select>
                         </div>
                         <div class="mb-2">

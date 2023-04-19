@@ -13,7 +13,7 @@
                 <div class="form-group row">
                     <label for="staticEmail" class="col-sm-4 col-form-label">Date</label>
                     <div class="col-sm-8">
-                        <input type="date" class="form-control" id="othersDate1" placeholder="YYYY/MM/DD" name="otherDate" value="{{ date_format(date_create($other->otherDate ?? ''), 'Y-m-d') }}" >
+                        <input type="text" class="form-control" id="othersDate1" placeholder="YYYY/MM/DD" name="otherDate" value="{{ date_format(date_create($other->otherDate ?? ''), 'Y-m-d') }}" >
                     </div>
                 </div>
            </div>
@@ -36,7 +36,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-          <button type="button" class="btn btn-primary" id="editOthers">Save</button>
+          <button class="btn btn-primary" id="editOthers">Save</button>
         </div>
     </form>
       </div>

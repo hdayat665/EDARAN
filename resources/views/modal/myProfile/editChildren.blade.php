@@ -43,7 +43,7 @@
                             <div class="row">
                                 <div class="col-sm-6 ">
                                     <div class="form-check form-switch align-right">
-                                        <input class="form-check-input partCheck5" type="checkbox" id="nonCitizen1" name="nonCitizen" {{($children->nonCitizen ?? '') ? 'checked' : ''}}>
+                                        <input class="form-check-input partCheck5" value="on" type="checkbox" id="nonCitizen1" name="nonCitizen" {{($children->nonCitizen ?? '') ? 'checked' : ''}}>
                                        
                                         <label class="form-check-label" for="citizen">
                                             Non-Citizen
@@ -157,7 +157,7 @@
                             <div class="row">
                                 <div class="col-sm-12">
                                     <label for="dob" class="form-label" >OKU Attachment*</label>
-                                    <input type="file" id="okuattach4" disabled readonly name="okuFile" class="form-control" style="pointer-events: none" aria-describedby="">
+                                    <input type="file" id="okuattach4" name="okuFile" class="form-control" style="pointer-events: none" aria-describedby="" disabled>
                                     @if ($children->okuFile)
                                         Click <a href="{{ route('download', ['filename' => $children->okuFile]) }}">here</a> to see OKU ID Attachment.
                                     @endif
@@ -255,6 +255,7 @@
                 <button  class="btn btn-primary" id="editChildren">Update</button>
             </form>
             </div>
+        </form>
         </div>
     </div>
 </div>

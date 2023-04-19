@@ -4,21 +4,21 @@ $(document).on('change', "#companyForEmployment", function() {
         .find('option')
         .remove()
         .end()
-        .append('<option label="Please Choose" value="" selected="selected"> </option>')
+        .append('<option label="PLEASE CHOOSE" value="" selected="selected"> </option>')
         .val('')
 
     $('#unitShow')
         .find('option')
         .remove()
         .end()
-        .append('<option label="Please Choose" value="" selected="selected"> </option>')
+        .append('<option label="PLEASE CHOOSE" value="" selected="selected"> </option>')
         .val('')
 
     $('#branchShow')
         .find('option')
         .remove()
         .end()
-        .append('<option label="Please Choose" value="" selected="selected"> </option>')
+        .append('<option label="PLEASE CHOOSE" value="" selected="selected"> </option>')
         .val('')
 
     function departmentByCompanyId(companyId) {
@@ -27,10 +27,18 @@ $(document).on('change', "#companyForEmployment", function() {
         });
     }
 
+    function branchByUnitId(companyId) {
+        return $.ajax({
+            url: "/branchByUnitId/" + companyId
+        });
+    }
+
     $('#departmentShow')
         .find('option')
         // .remove()
         .end();
+
+    console.log(companyId);
 
     var department = departmentByCompanyId(companyId);
 
@@ -43,6 +51,17 @@ $(document).on('change', "#companyForEmployment", function() {
                 '<option value="' + department['id'] + '">' + department['departmentName'] + "</option>";
         }
     })
+
+    var branch = branchByUnitId(companyId);
+
+    branch.done(function(dataBranch) {
+        for (let i = 0; i < dataBranch.length; i++) {
+            const branch = dataBranch[i];
+            var opt = document.createElement("option");
+            document.getElementById("branchShow").innerHTML +=
+                '<option value="' + branch['id'] + '">' + branch['branchName'] + "</option>";
+        }
+    })
 });
 
 $(document).on('change', "#departmentShow", function() {
@@ -51,15 +70,15 @@ $(document).on('change', "#departmentShow", function() {
         .find('option')
         .remove()
         .end()
-        .append('<option label="Please Choose" selected="selected"> </option>')
+        .append('<option label="PLEASE CHOOSE" selected="selected"> </option>')
         .val('')
 
-    $('#branchShow')
-        .find('option')
-        .remove()
-        .end()
-        .append('<option label="Please Choose" value="" selected="selected"> </option>')
-        .val('')
+    // $('#branchShow')
+    //     .find('option')
+    //     .remove()
+    //     .end()
+    //     .append('<option label="Please Choose" value="" selected="selected"> </option>')
+    //     .val('')
 
     function unitByDepartmentId(departmentId) {
         return $.ajax({
@@ -85,38 +104,38 @@ $(document).on('change', "#departmentShow", function() {
     })
 });
 
-$(document).on('change', "#unitShow", function() {
-    unitId = $(this).val();
-    $('#branchShow')
-        .find('option')
-        .remove()
-        .end()
-        .append('<option label="Please Choose" selected="selected"> </option>')
-        .val('')
+// $(document).on('change', "#unitShow", function() {
+//     unitId = $(this).val();
+//     $('#branchShow')
+//         .find('option')
+//         .remove()
+//         .end()
+//         .append('<option label="Please Choose" selected="selected"> </option>')
+//         .val('')
 
-    function branchByUnitId(unitId) {
-        return $.ajax({
-            url: "/branchByUnitId/" + unitId
-        });
-    }
+//     function branchByUnitId(unitId) {
+//         return $.ajax({
+//             url: "/branchByUnitId/" + unitId
+//         });
+//     }
 
-    // $('#branchHide').hide();
-    // $('#branchShow').show();
+//     // $('#branchHide').hide();
+//     // $('#branchShow').show();
 
-    $('#branchShow')
-        .find('option')
-        // .remove()
-        .end();
+//     $('#branchShow')
+//         .find('option')
+//         // .remove()
+//         .end();
 
-    var branch = branchByUnitId(unitId);
+//     var branch = branchByUnitId(unitId);
 
-    branch.done(function(data) {
-        // alert('ss');
-        for (let i = 0; i < data.length; i++) {
-            const branch = data[i];
-            var opt = document.createElement("option");
-            document.getElementById("branchShow").innerHTML +=
-                '<option value="' + branch['id'] + '">' + branch['branchName'] + "</option>";
-        }
-    })
-});
+//     branch.done(function(data) {
+//         // alert('ss');
+//         for (let i = 0; i < data.length; i++) {
+//             const branch = data[i];
+//             var opt = document.createElement("option");
+//             document.getElementById("branchShow").innerHTML +=
+//                 '<option value="' + branch['id'] + '">' + branch['branchName'] + "</option>";
+//         }
+//     })
+// });

@@ -328,7 +328,7 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('/updateTypeOfLogs/{id}', 'updateTypeOfLogs');
             Route::get('/departmentByCompanyId/{companyId}', 'departmentByCompanyId');
             Route::get('/unitByDepartmentId/{departmentId}', 'unitByDepartmentId');
-            Route::get('/branchByUnitId/{unitId}', 'branchByUnitId');
+            Route::get('/branchByUnitId/{companyId}', 'branchByUnitId');
             Route::get('/getActivityNamesById/{id}', 'getActivityNamesById');
 
             // eclaim

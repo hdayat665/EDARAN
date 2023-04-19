@@ -28,10 +28,10 @@ class Unit extends Authenticatable
     }
 
 
-    public function branch()
-    {
-        return $this->hasMany(Branch::class, 'id', 'unitId');
-    }
+    // public function branch()
+    // {
+    //     return $this->hasMany(Branch::class, 'id', 'unitId');
+    // }
 }
 
 
