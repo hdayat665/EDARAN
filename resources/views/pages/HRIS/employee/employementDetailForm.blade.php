@@ -37,7 +37,7 @@
 
                 <select class="form-select" name="unitId"  id="unitShow">
                     
-                <option label="PLEASE CHOOSE" selected="selected"> </option>
+                <option label="PLEASE CHOOSE" selected="selected" value=""> </option>
                 
                 </select>
 

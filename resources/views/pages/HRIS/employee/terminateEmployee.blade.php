@@ -24,7 +24,7 @@
                         <input type="text" name="effectiveFrom" class="form-control" id="datepicker-terminatedate" placeholder="YYYY/MM/DD" />
                         <label for="recipient-name" class="col-form-label">Exit Type*</label>
                         <select class="form-select" name="employmentDetail">
-                            <option value="0" label="PLEASE CHOOSE" selected="selected">PLEASE CHOOSE </option>
+                            <option value="" label="PLEASE CHOOSE" selected="selected">PLEASE CHOOSE </option>
                             <option value="1" label="Deceased">Deceased</option>
                             <option value="2" label="Dismissed">Dismissed</option>
                             <option value="3" label="Laid-Off">Laid-Off</option>
@@ -38,7 +38,7 @@
                         <textarea class="form-control" name="remarks" placeholder="Remarks" rows="3"></textarea>
 
                         <label for="recipient-name" class="col-form-label">Attachments*</label><br>
-                        <input type="file" name="file[]" multiple>
+                        <input type="file" name="file" multiple>
                         {{-- <form id="fileupload" action="https://jquery-file-upload.appspot.com/" method="POST" enctype="multipart/form-data">
                             <!-- BEGIN panel -->
                             <div class="panel panel-inverse">
@@ -111,11 +111,12 @@
                             <!-- END panel -->
                         </form> --}}
                     </div>
-                </form>
+                
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                     <button type="button" id="submit" class="btn btn-primary">Submit</button>
                 </div>
+            </form>
             </div>
         </div>
     </div>

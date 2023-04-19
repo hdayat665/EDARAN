@@ -22,6 +22,11 @@ class Company extends Authenticatable
 
     protected $guarded = [];
 
+    public function branch()
+    {
+        return $this->hasMany(Branch::class, 'id', 'companyId');
+    }
+
 }
 
 

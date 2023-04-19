@@ -701,6 +701,11 @@ class ProfileService
 
 
 
+            if(!isset($input['nonCitizen']))
+            {
+                $input['nonCitizen'] = null;
+            }
+
             UserChildren::where('id', $id)->update($input);
 
             $data['status'] = config('app.response.success.status');

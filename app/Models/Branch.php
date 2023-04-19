@@ -22,9 +22,9 @@ class Branch extends Authenticatable
 
     protected $guarded = [];
 
-    public function unit()
+    public function company()
     {
-        $this->belongsTo(Unit::class, 'id', 'unitId');
+        $this->belongsTo(Company::class, 'id', 'companyId');
     }
 }
 

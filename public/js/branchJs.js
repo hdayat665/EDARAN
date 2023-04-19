@@ -39,7 +39,7 @@ $(document).ready(function() {
 
         vehicleData.done(function(data) {
             console.log(data);
-            $('#unitIdE').val(data.unitId);
+            $('#companyIdE').val(data.companyId);
             $('#branchNameE').val(data.branchName);
             $('#branchCodeE').val(data.branchCode);
             //$('#branchTypeE').val(data.branchType);

@@ -1152,8 +1152,8 @@ class SettingService
     public function branchView()
     {
         $data['branchs'] = DB::table('branch as a')
-            ->leftJoin('unit as b', 'a.unitId', '=', 'b.id')
-            ->select('a.*', 'b.unitName')
+            ->leftJoin('company as b', 'a.companyId', '=', 'b.id')
+            ->select('a.*', 'b.companyName')
             ->where('a.tenant_id', Auth::user()->tenant_id)
             ->orderBy('id', 'desc')
             ->get();
@@ -1481,7 +1481,7 @@ public function updateTypeOfLogs($r, $id)
 
     public function branchByUnitId($id = '')
     {
-        $data = Branch::where([['tenant_id', Auth::user()->tenant_id], ['unitId', $id]])->get();
+        $data = Branch::where([['tenant_id', Auth::user()->tenant_id], ['companyId', $id]])->get();
 
         return $data;
     }
