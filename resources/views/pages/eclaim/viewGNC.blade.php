@@ -15,7 +15,7 @@
                                     <label class="form-label col-form-label">Claim ID :</label>
                                 </div>
                                 <div class="col-md-4">
-                                    <input type="text" value="{{ $GNC->claim_id }}" class="form-control"readonly>
+                                    <input type="text" value="GNC {{ $GNC->claim_id }}" class="form-control"readonly>
                                 </div>
                                 <div class="col-md-2">
                                     <label class="form-label col-form-label">Claim Type :</label>

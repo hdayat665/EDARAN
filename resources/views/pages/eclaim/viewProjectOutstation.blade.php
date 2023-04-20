@@ -9,7 +9,7 @@
                     <label class="form-label col-form-label">Type of Cash Advance :</label>
                 </div>
                 <div class="col-md-9">
-                    <input readonly type="text" class="form-control" name="cash['type']" value="{{ getCashAdvanceType($cashClaim->type) }}">
+                    <input readonly type="text" class="form-control" name="cash['type']" value="MYR {{ getCashAdvanceType($cashClaim->type) }}">
                 </div>
             </div>
             <div class="row p-2">
@@ -33,7 +33,7 @@
                     <label class="form-label col-form-label">Mode of Transport :</label>
                 </div>
                 <div class="col-md-9">
-                    <input readonly type="text" class="form-control" name="mot['transport_type']" value="{{ getModeOfTransport($cashClaim->mode_of_transport->tranport_type) }}">
+                    <input readonly type="text" class="form-control" name="mot['transport_type']" value="MYR {{ getModeOfTransport($cashClaim->mode_of_transport->tranport_type) }}">
                 </div>
             </div>
             <div class="row p-2">
@@ -41,7 +41,7 @@
                     <label class="form-label col-form-label">Travel Date :</label>
                 </div>
                 <div class="col-md-9">
-                    <input readonly type="text" class="form-control" name="cash['travel_date']" value="{{ $cashClaim->travel_date }}">
+                    <input readonly type="text" class="form-control" name="cash['travel_date']" value="MYR {{ $cashClaim->travel_date }}">
                 </div>
             </div>
             <div class="row p-2">
@@ -49,7 +49,7 @@
                     <label class="form-label col-form-label">Project :</label>
                 </div>
                 <div class="col-md-9">
-                    <input readonly type="text" class="form-control" name="cash['project_id']" value="{{ getProjectById($cashClaim->project_id)->project_name }}">
+                    <input readonly type="text" class="form-control" name="cash['project_id']" value="MYR {{ getProjectById($cashClaim->project_id)->project_name }}">
                 </div>
             </div>
             <div class="row p-2">
@@ -57,7 +57,7 @@
                     <label class="form-label col-form-label">Destination :</label>
                 </div>
                 <div class="col-md-9">
-                    <input readonly type="text" class="form-control" name="cash['destination']" value="{{ getProjectLocation($cashClaim->project_location_id)->location_name ?? '-' }}">
+                    <input readonly type="text" class="form-control" name="cash['destination']" value="MYR {{ getProjectLocation($cashClaim->project_location_id)->location_name ?? '-' }}">
                 </div>
             </div>
             <div class="row p-2">
@@ -79,13 +79,13 @@
                     <label class="form-label col-form-label">Subsistence Allowance :</label>
                 </div>
                 <div class="col-md-3">
-                    <input readonly type="text" class="form-control" name="mot['subs_allowance_total']" value="{{ $cashClaim->mode_of_transport->subs_allowance_total }}">
+                    <input readonly type="text" class="form-control" name="mot['subs_allowance_total']" value="MYR {{ $cashClaim->mode_of_transport->subs_allowance_total }}">
                 </div>
                 <div class="col-md-3">
                     <label class="form-label col-form-label">Accommodation :</label>
                 </div>
                 <div class="col-md-3">
-                    <input readonly type="text" class="form-control" name="mot['accomodation_total']" value="{{ $cashClaim->mode_of_transport->accommadation_total }}">
+                    <input readonly type="text" class="form-control" name="mot['accomodation_total']" value="MYR {{ $cashClaim->mode_of_transport->accommadation_total }}">
                 </div>
             </div>
             <div class="row p-2">
@@ -97,7 +97,7 @@
                     <label class="form-label col-form-label">Fuel Parking :</label>
                 </div>
                 <div class="col-md-3">
-                    <input readonly type="text" class="form-control" name="mot['fuel']" value="{{ $cashClaim->mode_of_transport->fuel }}">
+                    <input readonly type="text" class="form-control" name="mot['fuel']" value="MYR {{ $cashClaim->mode_of_transport->fuel }}">
                 </div>
             </div>
             <div class="row p-2">
@@ -107,7 +107,7 @@
                     <label class="form-label col-form-label">Toll/Parking :</label>
                 </div>
                 <div class="col-md-3">
-                    <input readonly type="text" class="form-control" name="mot['toll']" value="{{ $cashClaim->mode_of_transport->toll }}">
+                    <input readonly type="text" class="form-control" name="mot['toll']" value="MYR {{ $cashClaim->mode_of_transport->toll }}">
                 </div>
             </div>
             <div class="row p-2">
@@ -117,7 +117,7 @@
                     <label class="form-label col-form-label">Entertainment :</label>
                 </div>
                 <div class="col-md-3">
-                    <input readonly type="text" class="form-control" name="mot['entertainment']" value="{{ $cashClaim->mode_of_transport->entertainment }}">
+                    <input readonly type="text" class="form-control" name="mot['entertainment']" value="MYR {{ $cashClaim->mode_of_transport->entertainment }}">
                 </div>
             </div>
             <div class="row p-2"> </div>
@@ -128,7 +128,7 @@
                     <label class="form-label col-form-label">Total :</label>
                 </div>
                 <div class="col-md-3">
-                    <input readonly type="text" class="form-control" name="mot['total']" value="{{ $cashClaim->mode_of_transport->total }}">
+                    <input readonly type="text" class="form-control" name="mot['total']" value="MYR {{ $cashClaim->mode_of_transport->total }}">
                 </div>
             </div>
             <div class="row p-2">
@@ -138,12 +138,12 @@
                     <label class="form-label col-form-label">Maximum Paid Out (75%) :</label>
                 </div>
                 <div class="col-md-3">
-                    <input readonly type="text" class="form-control" name="mot['max_total']" value="{{ $cashClaim->mode_of_transport->max_total }}">
+                    <input readonly type="text" class="form-control" name="mot['max_total']" value="MYR {{ $cashClaim->mode_of_transport->max_total }}">
                 </div>
             </div>
         </div>
     </div>
-    <div class="col-md-5">
+    <!-- <div class="col-md-5">
         <div class="form-control">
             <div class="row p-2">
                 <h4>Cash Advance History</h4>
@@ -176,5 +176,5 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 </div>

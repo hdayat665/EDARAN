@@ -42,7 +42,7 @@
                                 Please Select</option>
                             <?php $getAreas = getArea(); ?>
                             @foreach ($getAreas as $area)
-                                <option class="form-label" value="{{ $area->area_name }}">{{ $area->area_name }}</option>
+                                <option class="form-label" value="MYR {{ $area->area_name }}">{{ $area->area_name }}</option>
                             @endforeach
 
                         </select>
