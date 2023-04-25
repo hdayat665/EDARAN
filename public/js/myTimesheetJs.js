@@ -817,36 +817,36 @@ $(document).ready(function() {
             // $('#userIdForApproval').val(data['events'][0]['user_id']);
             // console.log(data['events']);
             var event = [];
-for (let i = 0; i < data['events'].length; i++) {
-    var events = data['events'][i];
+        for (let i = 0; i < data['events'].length; i++) {
+            var events = data['events'][i];
 
-    var startDate = new Date(events['start_date']);
-    var startMonth = startDate.getMonth() + 1;
-    startMonth = startMonth < 10 ? "0" + startMonth : startMonth;
-    var startYear = startDate.getFullYear();
-    var startDay = startDate.getDate();
-    startDay = startDay < 10 ? "0" + startDay : startDay;
-    
-    var endDate = new Date(events['end_date']);
-    endDate.setDate(endDate.getDate() + 1); // add one day to end date
-    var endMonth = endDate.getMonth() + 1;
-    endMonth = endMonth < 10 ? "0" + endMonth : endMonth;
-    var endYear = endDate.getFullYear();
-    var endDay = endDate.getDate();
-    endDay = endDay < 10 ? "0" + endDay : endDay;
-    
-    event.push({
-        title: "Event: " + events['event_name'] + "\n" + "from " + events['start_time'] + " to " + events['end_time'],
-        start: startYear + '-' + startMonth + '-' + startDay,
-        end: endYear + '-' + endMonth + '-' + endDay,
-        color: '#2AAA8A',
-        extendedProps: {
-            type: 'event',
-            eventId: events['id']
+            var startDate = new Date(events['start_date']);
+            var startMonth = startDate.getMonth() + 1;
+            startMonth = startMonth < 10 ? "0" + startMonth : startMonth;
+            var startYear = startDate.getFullYear();
+            var startDay = startDate.getDate();
+            startDay = startDay < 10 ? "0" + startDay : startDay;
+            
+            var endDate = new Date(events['end_date']);
+            endDate.setDate(endDate.getDate() + 1); // add one day to end date
+            var endMonth = endDate.getMonth() + 1;
+            endMonth = endMonth < 10 ? "0" + endMonth : endMonth;
+            var endYear = endDate.getFullYear();
+            var endDay = endDate.getDate();
+            endDay = endDay < 10 ? "0" + endDay : endDay;
+            
+            event.push({
+                title: "Event: " + events['event_name'] + "\n" + "from " + events['start_time'] + " to " + events['end_time'],
+                start: startYear + '-' + startMonth + '-' + startDay,
+                end: endYear + '-' + endMonth + '-' + endDay,
+                color: '#2AAA8A',
+                extendedProps: {
+                    type: 'event',
+                    eventId: events['id']
+                }
+            });
+            
         }
-    });
-    
-}
 
 
             var log = [];
@@ -864,12 +864,15 @@ for (let i = 0; i < data['events'].length; i++) {
                 var time = startTime.split(":");
                 startTime = time[0] < 10 ? "0" + startTime : startTime;
 
-                var endDate = new Date(logs['end_date']);
-                var endMonth = endDate.getMonth();
+                var endDate = new Date(logs['date']);
+                var endMonth = endDate.getMonth() + 1;
                 endMonth = endMonth < 10 ? "0" + endMonth : endMonth;
                 var endYear = endDate.getFullYear();
                 var endDay = endDate.getDate();
                 endDay = endDay < 10 ? "0" + endDay : endDay;
+                var endTime = logs['end_time'];
+                time = endTime.split(":");
+                endTime = time[0] < 10 ? "0" + endTime : endTime;
                 // console.log(logs['total_hour']);
                
 
@@ -898,8 +901,9 @@ for (let i = 0; i < data['events'].length; i++) {
                 loghour.push({
                     start: new Date(startYear, startMonth - 1, startDay),
                     end: new Date(endYear, endMonth - 1, endDay),
-                    totalHour: logs['total_hour']
-                  });
+                    totalHour: logs['total_hour'],
+                    logid: logs['id']
+                });
 
                 
             }
@@ -996,6 +1000,7 @@ for (let i = 0; i < data['events'].length; i++) {
             dataEvent = event.concat(log);
             dataleave = dataEvent.concat(leave);
             dataHoliday = dataleave.concat(holiday);
+
             
             // console.log(holiday);
             var calendar = new FullCalendar.Calendar(calendarElm, {
@@ -1025,195 +1030,10 @@ for (let i = 0; i < data['events'].length; i++) {
                     }  
                 },
                
-               
-                // dayCellDidMount: function(info) {
-                //     var current = new Date(info.date);
-                //     var hasLog = false;
-                      
-                //     // Check if there is a log for the current date
-                //      // Check if there is a log for the current date
-                //     for (let i = 0; i < log.length; i++) {
-                //         var logDate = new Date(log[i].start);
-                //         if (current.getFullYear() === logDate.getFullYear() &&
-                //             current.getMonth() === logDate.getMonth() &&
-                //             current.getDate() === logDate.getDate()) {
-                //             hasLog = true;
-                //             break;
-                //         }
-                //     }
-                    
-                    
-                //     // If there is a log for the current date, check the log hour
-                //     if (hasLog) {
-                //       for (let i = 0; i < loghour.length; i++) {
-                //         var hourString = loghour[i].title;
-                //         var hourArray = hourString.split(':');
-                //         var hour = hourArray[0];
-                //         // console.log(hour);
-                //         if (hour < 8) { 
-                //           $(info.el).css('background-color', 'red');
-                //           return;
-                //         }
-                //       }
-                //     }
-                    
-                //     for (let i = 0; i < holidayDates.length; i++) {
-                //       if (current >= holidayDates[i].start && current <= holidayDates[i].end) { 
-                //         $(info.el).css('background-color', '#FFD580');
-                //         return;
-                //       }
-                //     }
-                    
-                //     for (let i = 0; i < leavesdate.length; i++) {
-                //       if (current >= leavesdate[i].start && current <= leavesdate[i].end) { 
-                //         $(info.el).css('background-color', '#E0E0E0');
-                //         return;
-                //       }
-                //     }
-                    
-                //     if (info.date.getDay() === 0) { // Sunday
-                //       $(info.el).css('background-color', '#87CEEB'); 
-                //     } else if (info.date.getDay() === 6) { // Saturday
-                //       $(info.el).css('background-color', '#87CEEB'); 
-                //     } else {
-                //       $(info.el).css('background-color', 'white');
-                //     }
-                //   },
 
+                
                 dayCellDidMount: function(info) {
-                    var current = new Date(info.date);
-                    var hasLog = false;
-                      
-                     // Check if there is a log for the current date
-                    // for (let i = 0; i < log.length; i++) {
-                    //     var logDate = new Date(log[i].start);
-                    //     if (current.getFullYear() === logDate.getFullYear() &&
-                    //         current.getMonth() === logDate.getMonth() &&
-                    //         current.getDate() === logDate.getDate()) {
-                    //         hasLog = true;
-                    //         break;
-                    //     }
-                    // }
-
-
-                    // if (hasLog) {
-                    //     var isViolation = false;
-                    //     for (let i = 0; i < loghour.length; i++) {
-                    //       var totalHour = loghour[i].totalHour;
-                    //       var hours = totalHour.split(':');
-                    //       var hours1 = parseInt(hours[0]);
-                    //       if (hours1 < 8) {
-                    //         isViolation = true;
-                    //         break;
-                    //       }
-                    //     }
-                    //     if (isViolation) {
-                    //         console.log('Changing color to red');
-                    //       $(info.el).css('background-color', 'red');
-                    //     } else {
-                    //         console.log('Changing color to green');
-                    //       $(info.el).css('background-color', 'green');
-                    //     }
-                    //   }
-
-                      
-                    //almost working
-                    //  if(hasLog) {
-                    //     for (let i = 0; i < loghour.length; i++) {
-                    //         var totalHour = loghour[i].totalHour;
-                    //         var hours = totalHour.split(':');
-                    //         var hours1 = parseInt(hours[0]);
-                    //         console.log(hours1)
-                    //         if (hours1 < 8) {
-                    //         // console.log(hours1);
-                    //         $(info.el).css('background-color', 'red');
-
-                    // if (hasLog) {
-                    //     var hasLowHours = false;
-                    //     for (let i = 0; i < loghour.length; i++) {
-                    //       var totalHour = loghour[i].totalHour;
-                    //       var hours = totalHour.split(':');
-                    //       var hours1 = parseInt(hours[0]);
-                    //       console.log("hours1: " + hours1);
-                    //       if (hours1 < 8) {
-                    //         // console.log('color to red');
-                    //         hasLowHours = true;
-                    //       }
-                    //     }
-                    //     console.log("hasLowHours: " + hasLowHours);
-                    //     if (hasLowHours) {  
-                    //       $(info.el).css('background-color', 'red');
-                    //       console.log('color to red');
-                    //     } else {
-                    //       console.log('setting color to green');
-                    //       $(info.el).css('background-color', 'green');
-                    //       console.log('color to green');
-                    //     }
-                    //     console.log("info.el: " + info.el);
-                    //     return;
-                    //   }
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                            
-                            
-                    //    }else {
-                    //     $(info.el).css('background-color', 'green');
-                    //    }
-                    //    return;
-                       
-                    //  }
-                    
-                    // }
-                    
-                    // If there is a log for the current date, check the log hour
-                    // if (hasLog) {
-                    //     for (let i = 0; i < loghour.length; i++) {
-                    //       var totalHour = loghour[i].totalHour;
-                    //       console.log(totalHour)
-                    //       var hours = totalHour.split(':'); // extract the number of hours from the totalHour string
-                    //       var hours1 = parseInt(hours[0]);
-                    //     //  console.log(hours)
-                    //       if (hours1 < 8) {
-                    //         // console.log(hours1);
-                    //         $(info.el).css('background-color', 'red');
-                    //       }else if (hours1 >= 8) {
-                    //             $(info.el).css('background-color', 'green');
-                    //         }
-                    //         else {
-                    //             $(info.el).css('background-color', 'white');
-                    //         }
-                    //         return; 
-                    //       }
-                    //     }
-                      
-                      
-                    // if (hasLog) {
-                    //     for (let i = 0; i < loghour.length; i++) {
-                    //         var hourString = loghour[i].totalHour;
-                    //         console.log(hourString);
-                    //         var hourArray = hourString.split(':');
-                    //         var hour = parseInt(hourArray[0]); // convert hour string to integer
-                    //         // console.log("hour" + hour);
-                    //         if (hour < 8) { 
-                    //             $(info.el).css('background-color', 'red');
-                    //          }else {
-                    //             $(info.el).css('background-color', 'green');
-                    //         }
-                    //             return;
-                    //         }
-                    //     }
-                    
-                    
-                    
+                var current = new Date(info.date);
                     for (let i = 0; i < holidayDates.length; i++) {
                       if (current >= holidayDates[i].start && current <= holidayDates[i].end) { 
                         $(info.el).css('background-color', '#FFD580');
@@ -1227,15 +1047,50 @@ for (let i = 0; i < data['events'].length; i++) {
                         return;
                       }
                     }
-                    
-                    if (info.date.getDay() === 0) { // Sunday
-                      $(info.el).css('background-color', '#87CEEB'); 
-                    } else if (info.date.getDay() === 6) { // Saturday
-                      $(info.el).css('background-color', '#87CEEB'); 
-                    } else {
-                      $(info.el).css('background-color', 'white');
+
+                    var totalHours = 0;
+                    var hasLog = false;
+                    for (var i = 0; i < loghour.length; i++) {
+                        if (current >= loghour[i].start && current <= loghour[i].end) { 
+                            hasLog = true;
+                            totalHours += parseInt(loghour[i].totalHour.split(":")[0]);
+                            var logid = loghour[i].logid;
+                           
+                        }
                     }
-                  },
+                    //later will be use to change button from appeal to view
+                    var currentDate = new Date(info.date);
+                    if (hasLog && totalHours >= 9 ) {
+                        // console.log("grreb" + ' ' + currentDate.toLocaleDateString());
+                        $(info.el).css('background-color', 'green');
+                    } else if(hasLog && totalHours <= 9) {
+                        // console.log("red" + ' ' + currentDate.toLocaleDateString());\
+                        console.log(logid);
+                        $(info.el).css('background-color', 'red');
+                        // Create a button element
+                        var button = $('<button/>', {
+                            text: 'Add Appeal',
+                            click: function () {
+                                // Code to add hours here
+                            }
+                        });
+
+                        // Add the button to the day cell
+                        $(info.el).append(button);
+                        $(button).css({
+                          
+                        });
+
+                    }else if (info.date.getDay() === 0) { // Sunday
+                        $(info.el).css('background-color', '#87CEEB'); 
+                      } else if (info.date.getDay() === 6) { // Saturday
+                        $(info.el).css('background-color', '#87CEEB'); 
+                      } else {
+                        $(info.el).css('background-color', 'white');
+                      }                     
+                    },
+                    
+                    
                   
                   
                   
