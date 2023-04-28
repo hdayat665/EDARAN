@@ -7,7 +7,8 @@ use App\Models\ActivityLogs;
 use App\Models\AttendanceEvent;
 use App\Models\Employee;
 use App\Models\Project;
-use App\Models\AppealTimesheets;
+// use App\Models\AppealTimesheets;
+use App\Models\TimesheetAppeals;
 use App\Models\ProjectLocation;
 use App\Models\TimesheetApproval;
 use App\Models\TimesheetEvent;
@@ -1052,24 +1053,94 @@ if ($existingLogs->isNotEmpty()) {
         
     }
 
+
+    // public function getAppealidList($id)
+    // {
+    //     $data = TimesheetAppeals::find($id);
+
+    //     return
+    //      $data;
+    // }
+
+    public function getAppealidList()
+    {
+
+        $tenant_id = Auth::user()->tenant_id;
+
+        $data = DB::table('timesheet_appeal as a')
+            ->select('a.*')
+            ->where([['a.tenant_id', $tenant_id]])
+            ->first();
+
+        if (!$data) {
+            $data = [];
+        }
+
+
+        return $data;
+        
+    }
+
+    public function getAppeals()
+    {
+    // $data = MyLeaveModel::where([['tenant_id', Auth::user()->tenant_id], ['up_user_id', Auth::user()->id]])->get();
+
+    $data = DB::table('timesheet_appeal as a')
+    // ->leftjoin('leave_types as b', 'a.lt_type_id', '=', 'b.id')
+    ->select('a.*')
+        // ->whereNotIn('a.id', $projectId)
+       -> where([['a.tenant_id', Auth::user()->tenant_id], ['a.user_id', Auth::user()->id]])
+        ->get();
+
+    if (!$data) {
+        $data = [];
+    }
+
+    return $data;
+    }
+
     public function createAppealTimesheet($r)
     {
         $input = $r->input();
         $user = Auth::user();
     
         $input['user_id'] = $user->id;
-
-        $input = [
-            'status' => 'approve',
-        ];
+        $input['tenant_id'] = $user->tenant_id;
     
-        AppealTimesheets::create($input);
+        $existingAppealdate = TimesheetAppeals::where('tenant_id', $user->tenant_id)
+            ->where('applied_date', $input['applied_date'])
+            ->first();
+
+        $existingAppeallogid = TimesheetAppeals::where('tenant_id', $user->tenant_id)
+        ->where('logid', $input['logid'])
+        ->first();
+    
+        if ($existingAppealdate) {
+            $data['status'] = config('app.response.error.status');
+            $data['type'] = config('app.response.error.type');
+            $data['title'] = config('app.response.error.title');
+            $data['msg'] = 'Timesheet appeal with the same applied date already exists';
+            return $data;
+        }
+
+        if ($existingAppeallogid) {
+            $data['status'] = config('app.response.error.status');
+            $data['type'] = config('app.response.error.type');
+            $data['title'] = config('app.response.error.title');
+            $data['msg'] = 'Timesheet appeal with the same logid already exists';
+            return $data;
+        }
+    
+        TimesheetAppeals::create($input);
+    
+        // Return success response
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
         $data['msg'] = 'Success Create Timesheet Logs';
         return $data;
     }
+    
 
     // public function getParticipantNameById($id)
     // {

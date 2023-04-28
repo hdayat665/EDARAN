@@ -172,7 +172,8 @@ class MyTimesheetController extends Controller
         $result['logs'] = $ss->getLogs();
         $result['leaves'] = $ss->getLeaves();
         $result['holidays'] = $ss->getHolidays();
-        // dd($result['holidays']);
+        $result['appeals'] = $ss->getAppeals();
+        // dd($result['appeals']);
         
         return response()->json($result);
     }
@@ -429,6 +430,16 @@ class MyTimesheetController extends Controller
         $data = $ss->getConfirmSubmitById($id);
 
         return response()->json($data);
+    }
+
+
+    public function getAppealidList()
+    {
+        $ss = new MyTimeSheetService;
+
+        $result = $ss->getAppealidList();
+
+        return $result;
     }
 
 
