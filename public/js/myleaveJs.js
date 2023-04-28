@@ -250,15 +250,25 @@ $(document).ready(function () {
         var startDate = $("#datepicker-start").val();
         var endDate = $("#datepicker-end").val();
         var totalDays = "";
-
+    
         if (startDate && endDate) {
             var date1 = new Date(startDate);
             var date2 = new Date(endDate);
             var timeDiff = date2.getTime() - date1.getTime();
             var dayDiff = Math.ceil(timeDiff / (1000 * 3600 * 24));
-            totalDays = dayDiff + 1;
+    
+            // Menghitung jumlah akhir pekan (Sabtu dan Minggu) antara dua tanggal
+            var weekends = 0;
+            for (var i = 0; i <= dayDiff; i++) {
+                var currentDate = new Date(date1.getTime() + (i * 24 * 60 * 60 * 1000));
+                if (currentDate.getDay() === 0 || currentDate.getDay() === 6) {
+                    weekends++;
+                }
+            }
+    
+            totalDays = dayDiff + 1 - weekends;
         }
-
+    
         if (totalDays <= 0) {
             $("#datepicker-end").val("");
             $("#select4").val("");
@@ -266,6 +276,7 @@ $(document).ready(function () {
             $("#select4").val(totalDays);
         }
     });
+    
 
     $(document).ready(function () {
         if (
