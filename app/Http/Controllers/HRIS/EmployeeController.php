@@ -210,6 +210,17 @@ class EmployeeController extends Controller
         return response()->json($result);
     }
 
+    public function getEmployeeAddressforParent($id = '')
+    {
+        $ps = new EmployeeService;
+
+    
+
+        $result = $ps->getEmployeeAddressforParent($id);
+
+        return response()->json($result);
+    }
+
     public function updateEmployeeParent(Request $r)
     {
         $ps = new EmployeeService;

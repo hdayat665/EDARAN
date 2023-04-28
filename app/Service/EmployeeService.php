@@ -721,6 +721,25 @@ class EmployeeService
     public function addEmployeeParent($r)
     {
         $input = $r->input();
+
+        if ($_FILES['idFile']['name']) {
+            $iDFile = upload($r->file('idFile'));
+            $input['idFile'] = $iDFile['filename'];
+
+            if (!$input['idFile']) {
+                unset($input['idFile']);
+            }
+        }
+
+        
+        if (isset($_FILES['okuFile']['name'])) {
+            $okuAttach = upload(request()->file('okuFile'));
+            $input['okuFile'] = $okuAttach['filename'];
+        } else {
+            $input['okuFile'] = null;
+        }
+
+
         $sameAddress = $input['sameAddress'] ?? null;
         $user_id = $input['user_id'];
         if ($sameAddress) {
@@ -734,6 +753,8 @@ class EmployeeService
             $input['country'] = $userProfile->country;
             unset($input['sameAddress']);
         }
+
+        
         // $input['user_id'] = Auth::user()->id;
         // pr($input);
         UserParent::create($input);
@@ -742,6 +763,33 @@ class EmployeeService
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
         $data['msg'] = 'New family is Created';
+
+        return $data;
+    }
+
+
+    public function getEmployeeAddressforParent($id)
+    {
+        
+        
+        $addressDetails = UserAddress::where('user_id', $id)
+            ->select('address1', 'address2', 'postcode', 'city', 'state', 'country')
+            ->first();
+            
+
+        if(!$addressDetails)
+        {
+            $data['status'] = config('app.response.error.status');
+            $data['type'] = config('app.response.error.type');
+            $data['title'] = config('app.response.error.title');
+            $data['msg'] = 'Address not found';
+        }else{
+            $data['data'] = $addressDetails;
+            $data['status'] = config('app.response.success.status');
+            $data['type'] = config('app.response.success.type');
+            $data['title'] = config('app.response.success.title');
+            $data['msg'] = 'Success Get Address Data';
+        }
 
         return $data;
     }

@@ -185,9 +185,9 @@
                     <div class="row p-2">
                         <div class="col-sm-6">
                             <label for="state" class="form-label">State*</label>
-                            <select class="form-select" id="stateP1" name="state">
+                            <select class="form-select" id="stateP1" name="state" >
                                 <?php $state = state() ?>
-                                <option value="0" label="PLEASE CHOOSE"  ></option>
+                                <option value="" label="PLEASE CHOOSE"></option>
                                 @foreach ($state as $key => $status)
                                 <option value="{{$key}}"> {{$status}}</option>
                                 @endforeach
