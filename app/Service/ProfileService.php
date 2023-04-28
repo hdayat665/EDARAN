@@ -780,14 +780,14 @@ class ProfileService
             }
         }
 
-
-
-        
-        if (isset($_FILES['okuFile']['name'])) {
-            $idOKU = upload(request()->file('okuFile'));
+        if ($_FILES['okuFile']['name'])
+        {
+            $idOKU = upload($r->file('okuFile'));
             $input['okuFile'] = $idOKU['filename'];
-        } else {
-            $input['okuFile'] = null;
+
+            if (!$input['okuFile']) {
+                unset($input['okuFile']);
+            }
         }
 
         $input['user_id'] = Auth::user()->id;
