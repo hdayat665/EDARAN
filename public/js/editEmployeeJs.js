@@ -4465,13 +4465,13 @@ $('#caapprover').picker({ search: true });
 
 
 // search bar in select box (Employment Information)
-$('#role').picker({ search: true });
-$('#companyForEmployment').picker({ search: true });
-$('#departmentShow').picker({ search: true });
-$('#unitShow').picker({ search: true });
-$('#branchShow').picker({ search: true });
-$('#jobGrade').picker({ search: true });
-$('#designation').picker({ search: true });
-$('#employmentType').picker({ search: true });
+// $('#role').picker({ search: true });
+// $('#companyForEmployment').picker({ search: true });
+// $('#departmentShow').picker({ search: true });
+// $('#unitShow').picker({ search: true });
+// $('#branchShow').picker({ search: true });
+// $('#jobGrade').picker({ search: true });
+// $('#designation').picker({ search: true });
+// $('#employmentType').picker({ search: true });
 
 
