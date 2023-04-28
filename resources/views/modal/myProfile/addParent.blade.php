@@ -72,7 +72,8 @@
                                 </div>
                         <div class="col-sm-3">
                             <label for="issuing-country" class="form-label">Issuing Country*</label>
-                            <select class="form-select" name="issuingCountry" id="passportcountryparent" style="text-transform:uppercase" >
+                            <select class="form-select" disabled name="issuingCountry" id="passportcountryparent"  style="pointer-events: none; text-transform:uppercase" readonly >
+                                                                
                                 <option value="" label="PLEASE CHOOSE" selected="selected"></option>
                                 <optgroup id="country-optgroup-Americas" label="Americas">
                                     @foreach ($americass as $key => $america)
@@ -130,7 +131,7 @@
                             <div class="row">
                                 <div class="col-sm-6 ">
                                     <div class="form-check form-switch align-right">
-                                        <input class="form-check-input okuCheck5 " value="" type="checkbox" name=""  id="">
+                                        <input class="form-check-input okuCheck5 " value="" type="checkbox" name="okuStatus2"  id="">                                        
                                         <label class="form-check-label" for="citizen">
                                             OKU?
                                         </label>
@@ -138,7 +139,7 @@
                                 </div>
                                 <div class="col-sm-6">
                                     <label for="lastname" class="form-label">OKU Card Number*</label>
-                                    <input type="number" id="okucard5" name="okuNo" value="" class="form-control" readonly placeholder="OKU CARD NUMBER">
+                                    <input type="number" id="okucard5" name="okuNo" value="" class="form-control" readonly disabled placeholder="OKU CARD NUMBER">
                                     
                                 </div>
                             </div>
@@ -147,7 +148,7 @@
                             <div class="row">
                                 <div class="col-sm-6">
                                     <label for="dob" class="form-label">OKU Attachment*</label>
-                                    <input type="file" id="okuattach5" name="okuFile" class="form-control" style="pointer-events: none" aria-describedby="" >
+                                    <input type="file" id="okuattach5" name="okuFile" class="form-control" readonly disabled style="pointer-events: none" aria-describedby="" >
                                 </div>
                             </div>
                         </div>
