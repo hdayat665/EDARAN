@@ -1,44 +1,104 @@
 $(document).ready(function () {
     $("#activetable").dataTable({
-        // "responsive": true,
-        bLengthChange: false,
-        // scrollX:true,
-        bFilter: false,
+        "searching": true,
+        "lengthChange": true,
+        "paging": true,
+        "lengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
+        "dom": '<"row"<"col-sm-4"l><"col-sm-4 text-center"B><"col-sm-4"f>>t<"row"<"col-sm-12"ip>>',
+        "buttons": [
+            { extend: 'excel', className: 'btn-blue', exportOptions: {
+                columns: [2,3,4,5,6,7]
+            }},
+            { extend: 'pdf', className: 'btn-blue',  exportOptions: {
+                columns: [2,3,4,5,6,7]
+            }},
+            { extend: 'print', className: 'btn-blue',  exportOptions: {
+                columns: [2,3,4,5,6,7]
+            }},
+        ],
         initComplete: function (settings, json) {  
             $("#activetable").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");            
         },
-    });
+        columnDefs: [
+                  { orderable: false, targets: [0] }
+               ]
+    });
 
     $("#checkedtable").dataTable({
-        // "responsive": true,
-        bLengthChange: false,
-        // scrollX:true,
-        bFilter: false,
+        "searching": true,
+        "lengthChange": true,
+        "paging": true,
+        "lengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
+        "dom": '<"row"<"col-sm-4"l><"col-sm-4 text-center"B><"col-sm-4"f>>t<"row"<"col-sm-12"ip>>',
+        "buttons": [
+            { extend: 'excel', className: 'btn-blue', exportOptions: {
+                columns: [2,3,4,5,6,7]
+            }},
+            { extend: 'pdf', className: 'btn-blue',  exportOptions: {
+                columns: [2,3,4,5,6,7]
+            }},
+            { extend: 'print', className: 'btn-blue',  exportOptions: {
+                columns: [2,3,4,5,6,7]
+            }},
+        ],
         initComplete: function (settings, json) {  
-            $("#checkedtable").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");            
-          },
-        });
+            $("#activetable").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");            
+        },
+        columnDefs: [
+                  { orderable: false, targets: [0] }
+               ]
+    });
 
 
     $("#amendtable").dataTable({
-        // "responsive": true,
-        bLengthChange: false,
-        // scrollX:true,
-        bFilter: false,
+        "searching": true,
+        "lengthChange": true,
+        "paging": true,
+        "lengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
+        "dom": '<"row"<"col-sm-4"l><"col-sm-4 text-center"B><"col-sm-4"f>>t<"row"<"col-sm-12"ip>>',
+        "buttons": [
+            { extend: 'excel', className: 'btn-blue', exportOptions: {
+                columns: [2,3,4,5,6,7]
+            }},
+            { extend: 'pdf', className: 'btn-blue',  exportOptions: {
+                columns: [2,3,4,5,6,7]
+            }},
+            { extend: 'print', className: 'btn-blue',  exportOptions: {
+                columns: [2,3,4,5,6,7]
+            }},
+        ],
         initComplete: function (settings, json) {  
-            $("#amendtable").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");            
-          },
-        });
+            $("#activetable").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");            
+        },
+        columnDefs: [
+                  { orderable: false, targets: [0] }
+               ]
+    });
 
     $("#rejectedtable").dataTable({
-        // "responsive": true,
-        bLengthChange: false,
-        // scrollX:true,
-        bFilter: false,
+        "searching": true,
+        "lengthChange": true,
+        "paging": true,
+        "lengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
+        "dom": '<"row"<"col-sm-4"l><"col-sm-4 text-center"B><"col-sm-4"f>>t<"row"<"col-sm-12"ip>>',
+        "buttons": [
+            { extend: 'excel', className: 'btn-blue', exportOptions: {
+                columns: [2,3,4,5,6,7]
+            }},
+            { extend: 'pdf', className: 'btn-blue',  exportOptions: {
+                columns: [2,3,4,5,6,7]
+            }},
+            { extend: 'print', className: 'btn-blue',  exportOptions: {
+                columns: [2,3,4,5,6,7]
+            }},
+        ],
         initComplete: function (settings, json) {  
-            $("#rejectedtable").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");            
-          },
-        });
+            $("#activetable").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");            
+        },
+        columnDefs: [
+                  { orderable: false, targets: [0] }
+               ]
+    });
 
     $("#filter").click(function () {
         $("#filteronoff").toggle();

@@ -673,13 +673,13 @@ if (!function_exists('getUnit')) {
 }
 
 if (!function_exists('getBranch')) {
-    function getBranch($id = '')
+    function getBranch($id = '', $companyId = '')
     {
 
         if ($id) {
             $data = Branch::find($id);
         } else {
-            $data = Branch::where('tenant_id', Auth::user()->tenant_id)->get();
+            $data = Branch::where(['tenant_id' => Auth::user()->tenant_id, 'companyId' => $companyId])->get();
         }
 
         if (!$data) {

@@ -139,7 +139,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-5">
+                    <!-- <div class="col-md-5">
 
                         <div class="form-control">
                             <div class="row p-2">
@@ -172,7 +172,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
                 <div class="row p-2">
                     <div class="col align-self-start">

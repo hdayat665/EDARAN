@@ -11,7 +11,7 @@
             <div class="panel-body">
                 <div class="form-control">
 
-                    <div class="form-control">
+                    <!-- <div class="form-control">
                         <div class="row p-2">
                             <h3>Cash Advance Overview</h3>
                             <div class="row p-2">
@@ -38,7 +38,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                     <br>
                     <div class="form-control">
                         <div class="row p-2">

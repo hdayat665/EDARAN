@@ -132,7 +132,7 @@ class MyleaveService
             return $data;
         }
 
-        $getDateSame = MyLeaveModel::where([['start_date', $input['leave_date']], ['tenant_id', Auth::user()->tenant_id]])->first();
+        $getDateSame = MyLeaveModel::where([['start_date', $input['leave_date']], ['tenant_id', Auth::user()->tenant_id]], ['up_user_id', Auth::user()->id])->first();
         if($getDateSame){
             $data['msg'] = 'There is an existing application for the date selected';
             $data['status'] = config('app.response.error.status');
