@@ -1055,29 +1055,31 @@ $(document).ready(function() {
 
                 
                 dayCellDidMount: function(info) {
-                var current = new Date(info.date);
-                var currentDate = new Date();
+                    var current = new Date(info.date);
+                    var currentDate = new Date();
+                
+                    var oneDayBefore = new Date();
+                    oneDayBefore.setDate(currentDate.getDate() - 1);
+                
+                    var twoDayBefore = new Date();
+                    twoDayBefore.setDate(currentDate.getDate() - 2);
 
-                var oneDayBefore = new Date();
-                oneDayBefore.setDate(currentDate.getDate() - 1);
-
-                var twoDayBefore = new Date();
-                twoDayBefore.setDate(currentDate.getDate() - 2);
+                    var datedefaultformat = dayjs(current).format('YYYY-MM-DD');
                 
                     for (let i = 0; i < holidayDates.length; i++) {
-                      if (current >= holidayDates[i].start && current <= holidayDates[i].end) { 
-                        $(info.el).css('background-color', '#FFD580');
-                        return;
-                      }
+                        if (current >= holidayDates[i].start && current <= holidayDates[i].end) { 
+                            $(info.el).css('background-color', '#FFD580');
+                            return;
+                        }
                     }
-                    
+                
                     for (let i = 0; i < leavesdate.length; i++) {
-                      if (current >= leavesdate[i].start && current <= leavesdate[i].end) { 
-                        $(info.el).css('background-color', '#E0E0E0');
-                        return;
-                      }
+                        if (current >= leavesdate[i].start && current <= leavesdate[i].end) { 
+                            $(info.el).css('background-color', '#E0E0E0');
+                            return;
+                        }
                     }
-
+                
                     var totalHours = 0;
                     var hasLog = false;
                     for (var i = 0; i < loghour.length; i++) {
@@ -1085,73 +1087,125 @@ $(document).ready(function() {
                             hasLog = true;
                             totalHours += parseInt(loghour[i].totalHour.split(":")[0]);
                             var logid = loghour[i].logid;
-                           
                         }
                     }
-
+                
                     var appliedDates = [];
+                    var reasons = [];
+                    var logsid = [];
+                    var statuss = [];
+                    var years = [];
+                    var months = [];
+                    var days = [];
                     for (let i = 0; i < data['appeals'].length; i++) {
                         var appeals = data['appeals'][i];
+
                         var appliedDate = appeals['applied_date'];
+                        var reason = appeals['reason'];
+                        var logid = appeals['logid'];
+                        var status = appeals['status'];
+                        var year = appeals['year'];
+                        var month = appeals['month'];
+                        var day = appeals['day'];
+
+
+
                         appliedDates.push(appliedDate);
+                        reasons.push(reason);
+                        logsid.push(logid);
+                        statuss.push(status);
+                        years.push(year);
+                        months.push(month);
+                        days.push(day);
                     }
-                    
-                   
-                    //later will be use to change button from appeal to view
-                    if (hasLog && totalHours >= 9 ) {
-                        
-                        // console.log("grreb" + ' ' + currentDate.toLocaleDateString());
+                    // console.log(reasons);
+                
+                    if (hasLog && totalHours >= 9) {
                         $(info.el).css('background-color', 'green');
                     } else if (hasLog && totalHours <= 9) {
-                        // console.log("red" + ' ' + currentDate.toLocaleDateString());\
                         if (current.getDate() === currentDate.getDate() || current.getDate() === oneDayBefore.getDate() || current.getDate() === twoDayBefore.getDate()) {
                             $(info.el).css('background-color', 'red');
-                          } else {
+                        } else if (appliedDates.includes(datedefaultformat)) {
+                            // var clickedDate = dayjs(info.date).format('YYYY-MM-DD');
+                            // alert("Clicked date: " + clickedDate);
                             $(info.el).css('background-color', 'red');
-                            console.log(appliedDates);
-                            // console.log(current.toLocaleDateString());
-                            // console.log("get list of applied date here")
-                             var button = $('<button/>', {
-                            text: 'Add Appeal',  
-                            click: function () {
-                                var year = info.date.getFullYear();
-                                var month = info.date.getMonth();
-                                var day = info.date.getDate();
-                                // alert("Clicked date: " + info.date.toLocaleDateString());
-                                $('#yearappeal').val(year);
-                                $('#monthappeal').val(new Date(info.date).toLocaleString('en-US', { month: 'long' }));
-                                $('#dayappeal').val(day);
-                                $('#log_id').val(nextLogId);
+                            var button = $('<button/>', {
+                              text: 'View Appeal',
+                              click: function () {
+                                // Get the logid for the corresponding appliedDate
+                                var index = appliedDates.indexOf(datedefaultformat);
+                                if (index !== -1) {
+                                    var logId = logsid[index];
+                                    var reason = reasons[index];
+                                    var status = statuss[index];
+                                    var year = years[index];
+                                    var month = months[index];
+                                    var day = days[index];
+                                    // console.log('Log ID:', logId);
+                                    // console.log('Reason:', reason);
+                                    $('#log_idv').val(logId);
+                                    $('#reasonappealv').val(reason);
+                                    $('#Statusv').val(status);
+                                    $('#yearappealv').val(year);
+                                    $('#monthappealv').val(month);
+                                    $('#dayappealv').val(day);
+                                    
+                                    $('#appealmodalview').modal('show');
+                                  }
+                              }
+                            });
 
-                                const clickedDate = dayjs(info.date);
-                                const formattedDate = clickedDate.format('YYYY-MM-DD');
-                                $("#applieddate").val(formattedDate);
-                                // $('#applieddate').val(currentDate);
-                                
-
-
-                               
-                                
-                                $('#appealmodal').modal('show');
-                            }
-                        });
-
-                        // Add the button to the day cell
-                        $(info.el).append(button);
-                        $(button).css({
-                          
-                        });
-                          }
-                        // $(info.el).css('background-color', 'purple');
                         
+                          
+                
+                            $(info.el).append(button);
+                            $(button).css({
+                            });
+                        } else {
+                            // console.log(datedefaultformat)
+                            $(info.el).css('background-color', 'red');
+                            // console.log(appliedDates);
+                            var button1 = $('<button/>', {
+                                text: 'Add Appeal',
+                                class: 'appeal-button',
+                                click: function () {
+                                    var year = info.date.getFullYear();
+                                    var month = info.date.getMonth();
+                                    var day = info.date.getDate();
+                                    $('#yearappeal').val(year);
+                                    $('#monthappeal').val(new Date(info.date).toLocaleString('en-US', { month: 'long' }));
+                                    $('#dayappeal').val(day);
+                                    $('#log_id').val(nextLogId);
+                
+                                    const clickedDate = dayjs(info.date);
+                                    const formattedDate = clickedDate.format('YYYY-MM-DD');
+                                    $("#applieddate").val(formattedDate);
 
-                       
-
-                    }else if (info.date.getDay() === 0) { // Sunday
+                                   
+                
+                                    $('#appealmodal').modal('show');
+                                }
+                            });
+                            $(info.el).append(button1);
+                            $(button1).css({
+                                position: 'absolute',
+                                top: '0',
+                                left: '50%',
+                                transform: 'translateX(-50%) translateY(-100%)'
+                              });
+                            
+                              // Set the date cell position to relative
+                              $(info.el).css({
+                                position: 'relative'
+                              });
+                            
+                        }
+                    } else if (info.date.getDay() === 0) { // Sunday
                         $(info.el).css('background-color', '#87CEEB'); 
-                      } else if (info.date.getDay() === 6) { // Saturday
+                    } else if (info.date.getDay() === 6) { // Saturday
                         $(info.el).css('background-color', '#87CEEB'); 
-                      } else {
+                    }
+                 else {
                         $(info.el).css('background-color', 'white');
                       }                     
                     },
@@ -2578,6 +2632,7 @@ $(document).on("click", "#confirmsubmitb", function () {
     });
     $("#confirmsubmit").modal("show");
 });
+
 
 function getConfirmSubmit(id) {
     return $.ajax({

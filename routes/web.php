@@ -534,6 +534,9 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('/summarytimesheet', 'timesheetSummaryView');
             Route::post('/createAppeal', 'createAppeal');
             Route::get('/getAppealidList', 'getAppealidList');
+            Route::get('/appealtimesheet', 'appealtimesheetview');
+            Route::get('/updateStatusappeal/{id}/{status}', 'updateStatusappeal');
+            
             
         });
 

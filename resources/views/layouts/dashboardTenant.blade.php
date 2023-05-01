@@ -56,6 +56,7 @@
     <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.1/dist/sweetalert2.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dayjs"></script>
     <style>
         .error {
             /* margin-top:2.4rem !important; */
@@ -234,6 +235,14 @@
                                     </a>
                                 </div>
                                 @endif
+                                <div class="menu-item">
+                                    <a href="/appealtimesheet" class="menu-link">
+                                        <div class="menu-icon">
+                                            <i class="fa fa-receipt text-gray"></i>
+                                        </div>
+                                        <div class="menu-text text-gray">Appeal Timesheet</div>
+                                    </a>
+                                </div>
                             </div>
                         </div> 
                     @endif

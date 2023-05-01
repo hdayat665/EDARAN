@@ -1141,6 +1141,24 @@ if ($existingLogs->isNotEmpty()) {
         return $data;
     }
     
+    public function timesheetApprovalappealView()
+    {
+        $data = TimesheetAppeals::where('tenant_id', Auth::user()->tenant_id)->orderBy('created_at', 'DESC')->get();
+
+        return $data;
+    }
+    public function updateStatusappeal($id = '', $status = '')
+    {
+        $input['status'] = $status;
+        TimesheetAppeals::where('id', $id)->update($input);
+
+        $data['status'] = config('app.response.success.status');
+        $data['type'] = config('app.response.success.type');
+        $data['title'] = config('app.response.success.title');
+        $data['msg'] = 'Success ' . $status . ' Timesheet';
+
+        return $data;
+    }
 
     // public function getParticipantNameById($id)
     // {
@@ -1148,6 +1166,8 @@ if ($existingLogs->isNotEmpty()) {
 
     //     return $data;
     // }
+
+    
 
     
 

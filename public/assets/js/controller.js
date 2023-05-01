@@ -91,6 +91,7 @@ requirejs.config({
         frecDetailCaJs: assets + "/js/frecDetailCaJs",
         fapprovalCaJs: assets + "/js/fapprovalCaJs",
         reportcorJs: assets + "/js/reportcorJs",
+        appealTimesheetsJs: assets + "/js/appealTimesheetsJs",
 
         /// timesheet period
         sheetPeriodJs: assets + "/js/sheetPeriodJs",
@@ -491,6 +492,10 @@ if ($("#reportcorJs").length > 0) {
 
 if ($("#eleavereportjs").length > 0) {
     requirejs(["eleavereportjs"]);
+}
+
+if ($("#appealTimesheetsJs").length > 0) {
+    requirejs(["appealTimesheetsJs"]);
 }
 
 // Global function

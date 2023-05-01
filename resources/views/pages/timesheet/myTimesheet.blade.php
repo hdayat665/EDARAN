@@ -53,4 +53,5 @@
 @include('modal.timesheet.editLogModal')
 @include('modal.timesheet.confirmsubmitmodal')
 @include('modal.timesheet.appealmodal')
+@include('modal.timesheet.appealmodalview')
 @endsection

@@ -442,6 +442,29 @@ class MyTimesheetController extends Controller
         return $result;
     }
 
+    public function appealtimesheetview()
+    {
+        // $data = [];
+        // $input = [];
+        $ss = new MyTimeSheetService;
+        $data['appealapprovers'] = $ss->timesheetApprovalappealView();
+        // $data['events'] = $ss->getRealtimeEvents($input);
+        // pr($data['appealapprovers']);
+        // $data['employeeId'] = '';
+        // $data['eventId'] = '';
+        return view('pages.timesheet.appealtimesheet',$data);
+
+    }
+
+    public function updateStatusappeal($id = '', $status = '')
+    {
+        $ss = new MyTimeSheetService;
+
+        $result = $ss->updateStatusappeal($id, $status);
+
+        return response()->json($result);
+    }
+
 
 
     // public function getParticipantNameById($participant = '')
