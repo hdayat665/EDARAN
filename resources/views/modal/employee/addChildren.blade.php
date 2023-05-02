@@ -121,7 +121,7 @@
                             <div class="row">
                                 <div class="col-sm-6 ">
                                     <div class="form-check form-switch align-right">
-                                        <input class="form-check-input okuCheck3" type="checkbox" id="nonCitizen1" name="okuStatus2" {{($children->nonCitizen1 ?? '') ? 'checked' : ''}}>
+                                        <input class="form-check-input okuCheck3" type="checkbox" id="" name="okuStatus2" {{($children->nonCitizen1 ?? '') ? 'checked' : ''}}>
                                        
                                         <label class="form-check-label" for="nonCitizen1">
                                             OKU?
@@ -138,7 +138,7 @@
                             <div class="row">
                                 <div class="col-sm-6">
                                     <label for="dob" class="form-label">OKU Attachment*</label>
-                                    <input type="file" id="okuattach3" disabled name="okuattach" class="form-control" style="pointer-events: none;" aria-describedby="">
+                                    <input type="file" id="okuattach3" disabled name="okuFile" class="form-control" style="pointer-events: none;" aria-describedby="">
                                 </div>
                             </div>
                         </div>
