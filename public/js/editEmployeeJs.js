@@ -1,13 +1,12 @@
 $(document).ready(function () {
     let croppie;
 
-    $('#data-table-default')
-    .dataTable({
-        "responsive": true,
-        "bLengthChange": false,
-        "bFilter": true,
+    $("#data-table-default").dataTable({
+        responsive: true,
+        bLengthChange: false,
+        bFilter: true,
     });
-    
+
     $("#edit-profile-picture").on("change", function () {
         if (this.files && this.files[0]) {
             let reader = new FileReader();
@@ -15,15 +14,21 @@ $(document).ready(function () {
                 $("#croppie img").attr("src", e.target.result);
                 croppie = new Croppie($("#croppie img")[0], {
                     boundary: { width: 400, height: 400 },
-                    viewport: { width: 300, height: 300, type: "square" ,name: "profilePicture"},
+                    viewport: {
+                        width: 300,
+                        height: 300,
+                        type: "square",
+                        name: "profilePicture",
+                    },
                 });
             };
 
             $("#showImage").show();
             $("#crop").on("click", function () {
                 $("#showCroppedImage").show();
-                
-                croppie.result({ type: "base64", circle: false })
+
+                croppie
+                    .result({ type: "base64", circle: false })
                     .then(function (dataImg) {
                         var data = [
                             { image: dataImg },
@@ -32,13 +37,12 @@ $(document).ready(function () {
                         // use ajax to send data to php
                         $("#result_image img").attr("src", dataImg);
                     });
-                    $("#showImage").hide();
+                $("#showImage").hide();
             });
             reader.readAsDataURL(this.files[0]);
         }
     });
 
-    
     $("#idNo").change(function () {
         if ($(this).val().length == 12) {
             var idn = $(this).val();
@@ -67,7 +71,6 @@ $(document).ready(function () {
         }
     });
 
- 
     $("#firstname,#lastname").change(function () {
         var a = $("#firstname").val();
         var b = $("#lastname").val();
@@ -95,7 +98,6 @@ $(document).ready(function () {
         $("#fullnamemc").val(a + " " + b);
     });
 
-   
     $("#firstNameChild,#lastNameChild").change(function () {
         var a = $("#firstNameChild").val();
         var b = $("#lastNameChild").val();
@@ -198,7 +200,6 @@ $(document).ready(function () {
             $("#DOBChild").prop("readonly", false);
             $("#DOBChild").css("pointer-events", "auto");
 
-
             $("#ageChild").prop("readonly", false);
 
             $("#passportChild").prop("readonly", false);
@@ -238,14 +239,7 @@ $(document).ready(function () {
         }
     });
 
-
-
-
-
-
-
-// Update Children Details
-
+    // Update Children Details
 
     $("#passports1").change(function () {
         if ($("#expiryDate1").prop("readonly")) {
@@ -258,9 +252,6 @@ $(document).ready(function () {
         }
     });
 
-
-    
-
     $(".partCheck5").click(function () {
         if ($(this).prop("checked")) {
             $("#idNo1").prop("readonly", true);
@@ -268,7 +259,6 @@ $(document).ready(function () {
 
             $("#DOB1").prop("readonly", false);
             $("#DOB1").css("pointer-events", "auto");
-
 
             $("#age1").prop("readonly", false);
 
@@ -309,13 +299,6 @@ $(document).ready(function () {
         }
     });
 
-
-
-
-
-
-
-
     $(".mcdetaildrop").css({ "pointer-events": "none", background: "#e9ecef" });
     $(".partChecks").click(function () {
         if ($(this).prop("checked")) {
@@ -325,11 +308,7 @@ $(document).ready(function () {
                 "pointer-events": "auto",
                 background: "#ffffff",
             });
-
-          
         } else {
-            
-            
             $(".mcdetail").prop("readonly", true);
             $(".mcdetaildesignation").prop("disabled", true);
 
@@ -337,15 +316,11 @@ $(document).ready(function () {
                 "pointer-events": "none",
                 background: "#e9ecef",
             });
-
         }
     });
 
-  
     $(".partChecks").click(function () {
         if ($(this).prop("checked")) {
-        
-
             $("#companyNamemc").prop("readonly", false);
 
             $("#dateJoinedmc").prop("readonly", false);
@@ -369,9 +344,6 @@ $(document).ready(function () {
             });
             $("#payslipmc").prop("readonly", false);
         } else {
-           
-          
-            
             $("#companyNamemc").prop("readonly", true);
             $("#dateJoinedmc").prop("readonly", true);
             $("#dateJoinedmc").prop("disabled", true);
@@ -395,7 +367,6 @@ $(document).ready(function () {
         }
     });
 
-    
     $("#expiryDateChild").datepicker({
         todayHighlight: true,
         format: "yyyy/mm/dd",
@@ -468,7 +439,6 @@ $(document).ready(function () {
         autoclose: true,
     });
 
-
     $("#expirydatemcs").datepicker({
         todayHighlight: true,
         format: "yyyy/mm/dd",
@@ -479,10 +449,6 @@ $(document).ready(function () {
         format: "yyyy/mm/dd",
         autoclose: true,
     });
-
-
-
-
 
     $(".partCheck3").click(function () {
         if ($(this).prop("checked")) {
@@ -536,33 +502,25 @@ $(document).ready(function () {
             $("#payslipmc").prop("readonly", true);
         }
     });
-   
+
     $(".partCheck2").click(function () {
         if ($(this).prop("checked")) {
             $("#idnumber2").prop("readonly", true);
-            $("#idnumber2").val("")
+            $("#idnumber2").val("");
 
-            
-            
             $("#dob").prop("readonly", false);
             $("#dob").css("pointer-events", "auto");
 
             $("#passportmc").prop("readonly", false);
             $("#passportmc").css("pointer-events", "auto");
 
-           
-
             $("#age2").prop("readonly", true);
             $("#age2").val("");
 
-
             $("#expirydatemc").prop("disabled", true);
             $("#issuingCountry2").prop("disabled", true);
-
-        
         } else {
             $("#idnumber2").prop("readonly", false);
-
 
             $("#dob").prop("readonly", true);
             $("#dob").css("pointer-events", "none");
@@ -570,7 +528,7 @@ $(document).ready(function () {
             $("#passportmc").val("");
             $("#passportmc").prop("readonly", false);
             $("#passportmc").css("pointer-events", "auto");
-         
+
             $("#expirydatemc").val("");
             $("#expirydatemc").prop("readonly", true);
             $("#expirydatemc").css("pointer-events", "none");
@@ -578,11 +536,8 @@ $(document).ready(function () {
             $("#issuingCountry2").prop("disabled", true);
 
             $("#age2").prop("readonly", false);
-
-    
         }
     });
-
 
     $("#passportmc").change(function () {
         if ($("#expirydatemc").prop("readonly")) {
@@ -603,16 +558,13 @@ $(document).ready(function () {
         }
     });
 
-    
-
-
     $(".partCheck2s").click(function () {
         if ($(this).prop("checked")) {
             $("#idnumber2s").prop("readonly", true);
-            $("#idnumber2s").val("")
+            $("#idnumber2s").val("");
 
             $("#passportmcs").prop("readonly", false);
-            
+
             $("#dobs").prop("readonly", false);
             $("#dobs").css("pointer-events", "auto");
 
@@ -622,7 +574,6 @@ $(document).ready(function () {
             $("#expirydatemcs").prop("readonly", false);
             $("#expirydatemcs").css("pointer-events", "auto");
 
-           
             $("#issuingCountry2s").prop("readonly", false);
             $("#issuingCountry2s").css("pointer-events", "auto");
 
@@ -631,32 +582,24 @@ $(document).ready(function () {
         } else {
             $("#idnumber2s").prop("readonly", false);
 
-
             $("#dobs").prop("readonly", true);
             $("#dobs").css("pointer-events", "none");
 
             $("#passportmcs").val("");
             $("#passportmcs").prop("readonly", true);
             $("#passportmcs").css("pointer-events", "none");
-         
+
             $("#expirydatemcs").prop("readonly", true);
             $("#expirydatemcs").css("pointer-events", "none");
             $("#expirydatemcs").val("");
 
-     
             $("#issuingCountry2s").val("");
             $("#issuingCountry2s").prop("readonly", true);
             $("#issuingCountry2s").css("pointer-events", "none");
 
             $("#age2s").prop("readonly", false);
-
         }
     });
-
-
-
-
-
 
     $("#gender").css({
         "pointer-events": "none",
@@ -669,26 +612,27 @@ $(document).ready(function () {
         autoclose: true,
         format: "yyyy/mm/dd",
     });
-    
-    $("#datepicker-todate").datepicker({
-        todayHighlight: true,
-        autoclose: true,
-        format: "yyyy/mm/dd",
-    }).on("changeDate", function(e) {
-    // Get the from date
-    var fromDate = $("#datepicker-fromdate").datepicker("getDate");
 
-    // Get the to date
-    var toDate = e.date;
+    $("#datepicker-todate")
+        .datepicker({
+            todayHighlight: true,
+            autoclose: true,
+            format: "yyyy/mm/dd",
+        })
+        .on("changeDate", function (e) {
+            // Get the from date
+            var fromDate = $("#datepicker-fromdate").datepicker("getDate");
 
-    // Compare the dates
-    if (toDate < fromDate) {
-        alert("To date cannot be before from date!");
-        $(this).datepicker("setDate", fromDate);
-    }
-});
+            // Get the to date
+            var toDate = e.date;
 
-    
+            // Compare the dates
+            if (toDate < fromDate) {
+                alert("To date cannot be before from date!");
+                $(this).datepicker("setDate", fromDate);
+            }
+        });
+
     $("#datepicker-others").datepicker({
         todayHighlight: true,
         autoclose: true,
@@ -757,54 +701,6 @@ $(document).ready(function () {
     //new add family address
     $("#same-address2").change(function () {
         if (this.checked) {
-            $("#address1parent").val($("#address-1").val()).prop("readonly", true);
-            $("#address2parent").val($("#address-2").val()).prop("readonly", true);
-            $("#postcodeparent").val($("#postcode").val()).prop("readonly", true);
-            $("#cityparent").val($("#city").val()).prop("readonly", true).css({
-                "pointer-events": "none",
-                "touch-action": "none",
-                background: "#e9ecef",
-            });
-            $("#stateparent").val($("#state").val()).prop("readonly", true).css({
-                "pointer-events": "none",
-                "touch-action": "none",
-                background: "#e9ecef",
-            });
-            $("#countryparent").val($("#country").val()).prop("readonly", true).css({
-                "pointer-events": "none",
-                "touch-action": "none",
-                background: "#e9ecef",
-            });
-
-            // Fetch permanent address from userAddress table if available
-        var id = document.getElementById("user_id").value;
-        // console.log(id);
-        // return false;
-        var getEmployeeAddressforParentx = getEmployeeAddressforParent(44);
-        //console.log(id);
-
-        getEmployeeAddressforParentx.done(function (data) {
-            if (data) {
-                var permanentAddress1 = data.data.address1;
-                var permanentAddress2 = data.data.address2;
-                var permanentPostcode = data.data.postcode;
-                var permanentCity = data.data.city;
-                var permanentState = data.data.state;
-                var permanentCountry = data.data.country;
-                console.log(data);
-
-                if (permanentAddress1 && permanentAddress2 && permanentPostcode && permanentCity && permanentState && permanentCountry) {
-                    $("#address1parent").val(permanentAddress1);
-                    $("#address2parent").val(permanentAddress2);
-                    $("#postcodeparent").val(permanentPostcode);
-                    $("#cityparent").val(permanentCity);
-                    $("#stateparent").val(permanentState);
-                    $("#countryparent").val(permanentCountry);
-                }
-            }
-        }).fail(function (xhr, status, error) {
-            console.log("Error fetching permanent address: " + error);
-        });
             $("#address1parent")
                 .val($("#address-1").val())
                 .prop("readonly", true);
@@ -814,15 +710,14 @@ $(document).ready(function () {
             $("#postcodeparent")
                 .val($("#postcode").val())
                 .prop("readonly", true);
-            $("#cityparent")
-                .val($("#city").val())
-                .css({
-                    "pointer-events": "none",
-                    "touch-action": "none",
-                    background: "#e9ecef",
-                });
+            $("#cityparent").val($("#city").val()).prop("readonly", true).css({
+                "pointer-events": "none",
+                "touch-action": "none",
+                background: "#e9ecef",
+            });
             $("#stateparent")
                 .val($("#state").val())
+                .prop("readonly", true)
                 .css({
                     "pointer-events": "none",
                     "touch-action": "none",
@@ -830,11 +725,75 @@ $(document).ready(function () {
                 });
             $("#countryparent")
                 .val($("#country").val())
+                .prop("readonly", true)
                 .css({
                     "pointer-events": "none",
                     "touch-action": "none",
                     background: "#e9ecef",
                 });
+
+            // Fetch permanent address from userAddress table if available
+            var id = document.getElementById("user_id").value;
+            // console.log(id);
+            // return false;
+            var getEmployeeAddressforParentx = getEmployeeAddressforParent(44);
+            //console.log(id);
+
+            getEmployeeAddressforParentx
+                .then(function (data) {
+                    if (data) {
+                        var permanentAddress1 = data.data.address1;
+                        var permanentAddress2 = data.data.address2;
+                        var permanentPostcode = data.data.postcode;
+                        var permanentCity = data.data.city;
+                        var permanentState = data.data.state;
+                        var permanentCountry = data.data.country;
+                        console.log(data);
+
+                        if (
+                            permanentAddress1 &&
+                            permanentAddress2 &&
+                            permanentPostcode &&
+                            permanentCity &&
+                            permanentState &&
+                            permanentCountry
+                        ) {
+                            $("#address1parent").val(permanentAddress1);
+                            $("#address2parent").val(permanentAddress2);
+                            $("#postcodeparent").val(permanentPostcode);
+                            $("#cityparent").val(permanentCity);
+                            $("#stateparent").val(permanentState);
+                            $("#countryparent").val(permanentCountry);
+                        }
+                    }
+                })
+                .fail(function (xhr, status, error) {
+                    console.log("Error fetching permanent address: " + error);
+                });
+            $("#address1parent")
+                .val($("#address-1").val())
+                .prop("readonly", true);
+            $("#address2parent")
+                .val($("#address-2").val())
+                .prop("readonly", true);
+            $("#postcodeparent")
+                .val($("#postcode").val())
+                .prop("readonly", true);
+            $("#cityparent").val($("#city").val()).css({
+                "pointer-events": "none",
+                "touch-action": "none",
+                background: "#e9ecef",
+            });
+            $("#stateparent").val($("#state").val()).css({
+                "pointer-events": "none",
+                "touch-action": "none",
+                background: "#e9ecef",
+            });
+            $("#countryparent").val($("#country").val()).css({
+                "pointer-events": "none",
+                "touch-action": "none",
+                background: "#e9ecef",
+            });
         } else {
             $("#address1parent").prop("readonly", false);
             $("#address2parent").prop("readonly", false);
@@ -863,38 +822,29 @@ $(document).ready(function () {
             $("#address1parent").val($("").val()).prop("readonly", false);
             $("#address2parent").val($("").val()).prop("readonly", false);
             $("#postcodeparent").val($("").val()).prop("readonly", false);
-            $("#cityparent")
-                .val($("").val())
-                .css({
-                    "pointer-events": "auto",
-                    "touch-action": "auto",
-                    background: "#ffffff",
-                });
-            $("#stateparent")
-                .val($("").val())
-                .css({
-                    "pointer-events": "auto",
-                    "touch-action": "auto",
-                    background: "#ffffff",
-                });
-            $("#countryparent")
-                .val($("my").val())
-                .css({
-                    "pointer-events": "auto",
-                    "touch-action": "auto",
-                    background: "#ffffff",
-                });
+            $("#cityparent").val($("").val()).css({
+                "pointer-events": "auto",
+                "touch-action": "auto",
+                background: "#ffffff",
+            });
+            $("#stateparent").val($("").val()).css({
+                "pointer-events": "auto",
+                "touch-action": "auto",
+                background: "#ffffff",
+            });
+            $("#countryparent").val($("my").val()).css({
+                "pointer-events": "auto",
+                "touch-action": "auto",
+                background: "#ffffff",
+            });
         }
     });
 
-    function getEmployeeAddressforParent(id){
+    function getEmployeeAddressforParent(id) {
         return $.ajax({
             url: "/getEmployeeAddressforParent/" + id,
         });
     }
-
-
-
 
     $("input[type=text]").keyup(function () {
         $(this).val($(this).val().toUpperCase());
@@ -947,47 +897,66 @@ $(document).ready(function () {
             });
 
             // Fetch permanent address from userAddress table if available
-        var id = document.getElementById("user_id").value;
-        // console.log(id);
-        // return false;
-        var getEmployeeAddressforCompanionx = getEmployeeAddressforCompanion(id);
-        //console.log(id);
+            var id = document.getElementById("user_id").value;
+            // console.log(id);
+            // return false;
+            var getEmployeeAddressforCompanionx =
+                getEmployeeAddressforCompanion(id);
+            //console.log(id);
 
-        getEmployeeAddressforCompanionx.done(function (data) {
-            if (data) {
-                var permanentAddress1 = data.data.address1;
-                var permanentAddress2 = data.data.address2;
-                var permanentPostcode = data.data.postcode;
-                var permanentCity = data.data.city;
-                var permanentState = data.data.state;
-                var permanentCountry = data.data.country;
-                console.log(data);
+            getEmployeeAddressforCompanionx
+                .then(function (data) {
+                    if (data) {
+                        var permanentAddress1 = data.data.address1;
+                        var permanentAddress2 = data.data.address2;
+                        var permanentPostcode = data.data.postcode;
+                        var permanentCity = data.data.city;
+                        var permanentState = data.data.state;
+                        var permanentCountry = data.data.country;
+                        console.log(data);
 
-                if (permanentAddress1 && permanentAddress2 && permanentPostcode && permanentCity && permanentState && permanentCountry) {
-                    $("#address-1c").val(permanentAddress1);
-                    $("#address-2c").val(permanentAddress2);
-                    $("#postcodec").val(permanentPostcode);
-                    $("#cityc").val($("").val()).prop("readonly", false).css({
-                        "pointer-events": "auto",
-                        "touch-action": "auto",
-                        background: "none",
-                    });
-        
-                    $("#statec").val($("").val()).prop("readonly", false).css({
-                        "pointer-events": "auto",
-                        "touch-action": "auto",
-                        background: "none",
-                    });
-                    $("#countryc").val($("1").val()).prop("readonly", false).css({
-                        "pointer-events": "auto",
-                        "touch-action": "auto",
-                        background: "none",
-                    });
-                }
-            }
-        }).fail(function (xhr, status, error) {
-            console.log("Error fetching permanent address: " + error);
-        });
+                        if (
+                            permanentAddress1 &&
+                            permanentAddress2 &&
+                            permanentPostcode &&
+                            permanentCity &&
+                            permanentState &&
+                            permanentCountry
+                        ) {
+                            $("#address-1c").val(permanentAddress1);
+                            $("#address-2c").val(permanentAddress2);
+                            $("#postcodec").val(permanentPostcode);
+                            $("#cityc")
+                                .val($("").val())
+                                .prop("readonly", false)
+                                .css({
+                                    "pointer-events": "auto",
+                                    "touch-action": "auto",
+                                    background: "none",
+                                });
+
+                            $("#statec")
+                                .val($("").val())
+                                .prop("readonly", false)
+                                .css({
+                                    "pointer-events": "auto",
+                                    "touch-action": "auto",
+                                    background: "none",
+                                });
+                            $("#countryc")
+                                .val($("1").val())
+                                .prop("readonly", false)
+                                .css({
+                                    "pointer-events": "auto",
+                                    "touch-action": "auto",
+                                    background: "none",
+                                });
+                        }
+                    }
+                })
+                .fail(function (xhr, status, error) {
+                    console.log("Error fetching permanent address: " + error);
+                });
         } else {
             $("#address-1c").val($("").val()).prop("readonly", false);
             $("#address-2c").val($("").val()).prop("readonly", false);
@@ -998,7 +967,7 @@ $(document).ready(function () {
         }
     });
 
-    function getEmployeeAddressforCompanion(id){
+    function getEmployeeAddressforCompanion(id) {
         return $.ajax({
             url: "/getEmployeeAddressforCompanion/" + id,
         });
@@ -1006,7 +975,7 @@ $(document).ready(function () {
     $(".partCheck").click(function () {
         if ($(this).prop("checked")) {
             $("#idnumber").prop("readonly", true);
-            $("#idnumber").val("")
+            $("#idnumber").val("");
 
             $("#passport").prop("readonly", false);
             $("#expirydate").prop("readonly", false);
@@ -1014,10 +983,9 @@ $(document).ready(function () {
 
             $("#dob").prop("readonly", false);
             $("#dob").css("pointer-events", "auto");
-           
+
             $("#issuingCountry").prop("readonly", false);
             $("#issuingCountry").css("pointer-events", "auto");
-
         } else {
             $("#idnumber").prop("readonly", false);
 
@@ -1036,12 +1004,9 @@ $(document).ready(function () {
             $("#issuingCountry").val("");
             $("#issuingCountry").prop("readonly", true);
             $("#issuingCountry").css("pointer-events", "none");
-
         }
     });
 
-   
-    
     $(".partCheck2").click(function () {
         if ($(this).prop("checked")) {
             $("#reportto").show();
@@ -1057,241 +1022,218 @@ $(document).ready(function () {
         }
     });
 
-    $.validator.addMethod("noSpecialChars", function(value, element) {
-        return this.optional(element) || /^[^A-Za-z!@#$%^&*()\-_+={}[\]\\|<>"'\/~`,.;: ]*$/.test(value);
-      }, "Special Characters, Spaces, and Alphabet Characters Are Not Allowed.");      
-      
-    $.validator.addMethod("email", function(value, element) {
-        // Email validation regex pattern
-        return this.optional(element) || /^[^\s@]+@[^\s@]+\.(?:com|net|org|edu|gov|mil|biz|info|name|museum|coop|aero|[a-z]{2})$/.test(value);
-      }, "Please Insert Valid Email Address");
+    $.validator.addMethod(
+        "noSpecialChars",
+        function (value, element) {
+            return (
+                this.optional(element) ||
+                /^[^A-Za-z!@#$%^&*()\-_+={}[\]\\|<>"'\/~`,.;: ]*$/.test(value)
+            );
+        },
+        "Special Characters, Spaces, and Alphabet Characters Are Not Allowed."
+    );
+
+    $.validator.addMethod(
+        "email",
+        function (value, element) {
+            // Email validation regex pattern
+            return (
+                this.optional(element) ||
+                /^[^\s@]+@[^\s@]+\.(?:com|net|org|edu|gov|mil|biz|info|name|museum|coop|aero|[a-z]{2})$/.test(
+                    value
+                )
+            );
+        },
+        "Please Insert Valid Email Address"
+    );
 
     // Custom validation method to check for special characters
-$.validator.addMethod("noSpecialChars", function(value, element) {
-    return this.optional(element) || /^[A-Za-z\s!@#$%^&*(),.?":{}|<>+_=;\-[\]\\/'`~]*$/.test(value);
-  }, "Numbers Are Not Allowed");
-  
-  // Function to remove numbers from input fields
-  function sanitizeInputField(fieldId) {
-    $(fieldId).on("input", function() {
-      var sanitized = $(this).val().replace(/[\d]/g, ''); // remove numbers
-      $(this).val(sanitized);
-    });
-  }
-  
-  // Call sanitizeInputField for each input field that needs it
-  sanitizeInputField("#firstname");
-  sanitizeInputField("#lastname");
-  sanitizeInputField("#emergency-firstname");
-  sanitizeInputField("#emergency-lastname");
-  sanitizeInputField("#firstnamemc");
-  sanitizeInputField("#lastnamemc");
-  sanitizeInputField("#firstNameChild");
-  sanitizeInputField("#lastNameChild");
-  sanitizeInputField("#firstName1");
-  sanitizeInputField("#lastName1");
-  sanitizeInputField("#firstNameP");
-  sanitizeInputField("#lastNameP");
-  sanitizeInputField("#firstNames1");
-  sanitizeInputField("#lastNameP1");
-  
-  // Status toggle button for non-citizen and oku
-    $('input[name="nonNetizen"]').click(function() {
-        if ($(this).is(':checked')) {
-            $('#idnumber').val('').prop('disabled', true);
+    $.validator.addMethod(
+        "noSpecialChars",
+        function (value, element) {
+            return (
+                this.optional(element) ||
+                /^[A-Za-z\s!@#$%^&*(),.?":{}|<>+_=;\-[\]\\/'`~]*$/.test(value)
+            );
+        },
+        "Numbers Are Not Allowed"
+    );
 
-            
+    // Function to remove numbers from input fields
+    function sanitizeInputField(fieldId) {
+        $(fieldId).on("input", function () {
+            var sanitized = $(this).val().replace(/[\d]/g, ""); // remove numbers
+            $(this).val(sanitized);
+        });
+    }
+
+    // Call sanitizeInputField for each input field that needs it
+    sanitizeInputField("#firstname");
+    sanitizeInputField("#lastname");
+    sanitizeInputField("#emergency-firstname");
+    sanitizeInputField("#emergency-lastname");
+    sanitizeInputField("#firstnamemc");
+    sanitizeInputField("#lastnamemc");
+    sanitizeInputField("#firstNameChild");
+    sanitizeInputField("#lastNameChild");
+    sanitizeInputField("#firstName1");
+    sanitizeInputField("#lastName1");
+    sanitizeInputField("#firstNameP");
+    sanitizeInputField("#lastNameP");
+    sanitizeInputField("#firstNames1");
+    sanitizeInputField("#lastNameP1");
+
+    // Status toggle button for non-citizen and oku
+    $('input[name="nonNetizen"]').click(function () {
+        if ($(this).is(":checked")) {
+            $("#idnumber").val("").prop("disabled", true);
         } else {
-            $('#idnumber').prop('disabled', false);
-        }
-    });
-    
-
-    
-    $('input[name="okuStatus"]').click(function() {
-        if ($(this).is(':checked')) {
-            
-            $('#okucard').prop('disabled', false);
-
-            $('#okuattach').prop('disabled', false);
-        } else {
-            $('#okucard').val('').prop('disabled', true);
-
-            $('#okuattach').val('').prop('disabled', true);
-
-            
+            $("#idnumber").prop("disabled", false);
         }
     });
 
+    $('input[name="okuStatus"]').click(function () {
+        if ($(this).is(":checked")) {
+            $("#okucard").prop("disabled", false);
 
-    $('input[name="nonNetizen1"]').click(function() {
-        if ($(this).is(':checked')) {
-            $('#idnumber2').val('').prop('disabled', true);
-            $('#age2').val('').prop('disabled', true);
-
-            
-            
+            $("#okuattach").prop("disabled", false);
         } else {
-            $('#idnumber2').prop('disabled', false);
-            $('#age2').prop('disabled', false);
-          
-            
-        }
-    });
-    
+            $("#okucard").val("").prop("disabled", true);
 
-    
-    $('input[name="okuStatus1"]').click(function() {
-        if ($(this).is(':checked')) {
-            
-            $('#okucard1').prop('disabled', false);
-
-            $('#okuattach1').prop('disabled', false);
-        } else {
-            $('#okucard1').val('').prop('disabled', true);
-
-            $('#okuattach1').val('').prop('disabled', true);
+            $("#okuattach").val("").prop("disabled", true);
         }
     });
 
-
-    
-    $('input[name="nonNetizen1s"]').click(function() {
-        if ($(this).is(':checked')) {
-            $('#idnumber2s').val('').prop('disabled', true);
-
-            
+    $('input[name="nonNetizen1"]').click(function () {
+        if ($(this).is(":checked")) {
+            $("#idnumber2").val("").prop("disabled", true);
+            $("#age2").val("").prop("disabled", true);
         } else {
-            $('#idnumber2s').prop('disabled', false);
+            $("#idnumber2").prop("disabled", false);
+            $("#age2").prop("disabled", false);
         }
     });
-    
 
-    
-    $('input[name="okuStatus1s"]').click(function() {
-        if ($(this).is(':checked')) {
-           $('#okucard1s').prop('disabled', false);
+    $('input[name="okuStatus1"]').click(function () {
+        if ($(this).is(":checked")) {
+            $("#okucard1").prop("disabled", false);
 
-            $('#okuattach1s').prop('disabled', false); 
-
+            $("#okuattach1").prop("disabled", false);
         } else {
-            
-            $('#okucard1s').val('').prop('disabled', true);
+            $("#okucard1").val("").prop("disabled", true);
 
-            $('#okuattach1s').val('').prop('disabled', true);
+            $("#okuattach1").val("").prop("disabled", true);
+        }
+    });
+
+    $('input[name="nonNetizen1s"]').click(function () {
+        if ($(this).is(":checked")) {
+            $("#idnumber2s").val("").prop("disabled", true);
+        } else {
+            $("#idnumber2s").prop("disabled", false);
+        }
+    });
+
+    $('input[name="okuStatus1s"]').click(function () {
+        if ($(this).is(":checked")) {
+            $("#okucard1s").prop("disabled", false);
+
+            $("#okuattach1s").prop("disabled", false);
+        } else {
+            $("#okucard1s").val("").prop("disabled", true);
+
+            $("#okuattach1s").val("").prop("disabled", true);
         }
     });
 
     //add Child
-    $('input[name="nonNetizen2"]').click(function() {
-        if ($(this).is(':checked')) {
-            $('#idNoaddChild').val('').prop('disabled', true);
-            
-            $("#issuingCountryChild").prop('disabled', false);
-            $("#expiryDateChild").prop('disabled', false);
+    $('input[name="nonNetizen2"]').click(function () {
+        if ($(this).is(":checked")) {
+            $("#idNoaddChild").val("").prop("disabled", true);
 
+            $("#issuingCountryChild").prop("disabled", false);
+            $("#expiryDateChild").prop("disabled", false);
         } else {
-            $('#idNoaddChild').prop('disabled', false);
+            $("#idNoaddChild").prop("disabled", false);
 
-            $("#issuingCountryChild").prop('disabled', true);
+            $("#issuingCountryChild").prop("disabled", true);
 
-            $("#expiryDateChild").prop('disabled', true);
-
-        }
-    });
-    
-    $('input[name="okuStatus2"]').click(function() {
-        if ($(this).is(':checked')) {
-           $('#okucard3').prop('disabled', false);
-
-            $('#okuattach3').prop('disabled', false); 
-
-        } else {
-            
-            $('#okucard3').val('').prop('disabled', true);
-
-            $('#okuattach3').val('').prop('disabled', true);
+            $("#expiryDateChild").prop("disabled", true);
         }
     });
 
-    
+    $('input[name="okuStatus2"]').click(function () {
+        if ($(this).is(":checked")) {
+            $("#okucard3").prop("disabled", false);
 
+            $("#okuattach3").prop("disabled", false);
+        } else {
+            $("#okucard3").val("").prop("disabled", true);
+
+            $("#okuattach3").val("").prop("disabled", true);
+        }
+    });
 
     //update Child
-    $('input[name="nonCitizen"]').click(function() {
-        if ($(this).is(':checked')) {
-            $('#idNo1').val('').prop('disabled', true);
-            
-            $("#issuingCountry1").prop('disabled', false);
-            $("#expiryDate1").prop('disabled', false);
+    $('input[name="nonCitizen"]').click(function () {
+        if ($(this).is(":checked")) {
+            $("#idNo1").val("").prop("disabled", true);
 
+            $("#issuingCountry1").prop("disabled", false);
+            $("#expiryDate1").prop("disabled", false);
         } else {
-            $('#idNo1').prop('disabled', false);
+            $("#idNo1").prop("disabled", false);
 
-            $("#issuingCountry1").prop('disabled', true);
+            $("#issuingCountry1").prop("disabled", true);
 
-            $("#expiryDate1").prop('disabled', true);
-
+            $("#expiryDate1").prop("disabled", true);
         }
     });
 
-    $('input[name="okuStatus"]').click(function() {
-        if ($(this).is(':checked')) {
-           $('#okucard4').prop('disabled', false);
+    $('input[name="okuStatus"]').click(function () {
+        if ($(this).is(":checked")) {
+            $("#okucard4").prop("disabled", false);
 
-            $('#okuattach4').prop('disabled', false); 
-
+            $("#okuattach4").prop("disabled", false);
         } else {
-            
-            $('#okucard4').val('').prop('disabled', true);
+            $("#okucard4").val("").prop("disabled", true);
 
-            $('#okuattach4').val('').prop('disabled', true);
-        }
-    });
- 
-
-// add companion
-      $('input[name="okuStatusc"]').click(function() {
-        if ($(this).is(':checked')) {
-           $('#okucard1').prop('disabled', false);
-
-            $('#okuattach1').prop('disabled', false); 
-
-        } else {
-            
-            $('#okucard1').val('').prop('disabled', true);
-
-            $('#okuattach1').val('').prop('disabled', true);
+            $("#okuattach4").val("").prop("disabled", true);
         }
     });
 
-    $('input[name="nonNetizen3"]').click(function() {
-        if ($(this).is(':checked')) {
-            $('#idno6').val('').prop('disabled', true);
+    // add companion
+    $('input[name="okuStatusc"]').click(function () {
+        if ($(this).is(":checked")) {
+            $("#okucard1").prop("disabled", false);
 
-            
+            $("#okuattach1").prop("disabled", false);
         } else {
-            $('#idno6').prop('disabled', false);
-        }
-    });
-    
-    $('input[name="okuStatus3"]').click(function() {
-        if ($(this).is(':checked')) {
-           $('#okucard5').prop('disabled', false);
+            $("#okucard1").val("").prop("disabled", true);
 
-            $('#okuattach5').prop('disabled', false); 
-
-        } else {
-            
-            $('#okucard5').val('').prop('disabled', true);
-
-            $('#okuattach5').val('').prop('disabled', true);
+            $("#okuattach1").val("").prop("disabled", true);
         }
     });
 
+    $('input[name="nonNetizen3"]').click(function () {
+        if ($(this).is(":checked")) {
+            $("#idno6").val("").prop("disabled", true);
+        } else {
+            $("#idno6").prop("disabled", false);
+        }
+    });
 
-  
-    
+    $('input[name="okuStatus3"]').click(function () {
+        if ($(this).is(":checked")) {
+            $("#okucard5").prop("disabled", false);
+
+            $("#okuattach5").prop("disabled", false);
+        } else {
+            $("#okucard5").val("").prop("disabled", true);
+
+            $("#okuattach5").val("").prop("disabled", true);
+        }
+    });
 
     $("#saveProfile").click(function (e) {
         $("#formProfile").validate({
@@ -1305,16 +1247,13 @@ $.validator.addMethod("noSpecialChars", function(value, element) {
 
                 firstName: {
                     required: true,
-                    
-                  },
+                },
                 lastName: {
                     required: true,
-                    
-                  },
+                },
                 fullName: {
                     required: true,
-                    
-                  },
+                },
                 oldIDNo: {
                     required: false,
                     digits: true,
@@ -1329,7 +1268,7 @@ $.validator.addMethod("noSpecialChars", function(value, element) {
                     digits: true,
                     rangelength: [12, 12],
                 },
-              
+
                 phoneNo: {
                     required: true,
                     digits: true,
@@ -1342,7 +1281,7 @@ $.validator.addMethod("noSpecialChars", function(value, element) {
                 },
                 homeNo: {
                     digits: true,
-                    rangelength: [9,9]
+                    rangelength: [9, 9],
                 },
                 extensionNo: {
                     digits: true,
@@ -1354,9 +1293,7 @@ $.validator.addMethod("noSpecialChars", function(value, element) {
                 },
                 okuattach: {
                     required: true,
-
                 },
-            
             },
 
             messages: {
@@ -1388,7 +1325,7 @@ $.validator.addMethod("noSpecialChars", function(value, element) {
                     digits: "Please Insert Correct Identification Number Without ' - ' or Space",
                     rangelength: "Please Insert Valid Identification Number",
                 },
-               
+
                 phoneNo: {
                     required: "Please Insert Phone Number",
                     digits: "Please Insert Correct Phone Number Without ' - ' or Space",
@@ -1401,52 +1338,49 @@ $.validator.addMethod("noSpecialChars", function(value, element) {
                 },
                 homeNo: {
                     digits: "Please Insert Correct Home Number Without ' - ' or Space",
-                    rangelength: "Please Inset Valid Home Number"
+                    rangelength: "Please Inset Valid Home Number",
                 },
                 extensionNo: {
                     digits: "Please Insert Correct Extension Number Without ' - ' or Space",
                 },
-                okuCardNum:{
+                okuCardNum: {
                     required: "Please Insert OKU Card Number",
                     rangelength: "Please Inset OKU Card Number",
-
                 },
                 okuattach: {
                     required: "Please Insert OKU Attachment",
-
                 },
             },
-            submitHandler: function(form) {
+            submitHandler: function (form) {
                 var data = new FormData(document.getElementById("formProfile"));
                 $.ajax({
                     type: "POST",
                     url: "/updateEmployeeProfile",
                     data: data,
                     dataType: "json",
-                    async: false,
+
                     processData: false,
                     contentType: false,
-                }).done(function(data) {
+                }).then(function (data) {
                     console.log(data);
                     Swal.fire({
                         title: data.title,
-                        icon: 'success',
+                        icon: "success",
                         text: data.msg,
                         type: data.type,
-                        confirmButtonColor: '#3085d6',
-                        confirmButtonText: 'OK',
+                        confirmButtonColor: "#3085d6",
+                        confirmButtonText: "OK",
                         allowOutsideClick: false,
                         allowEscapeKey: false,
-                    }).then(function() {
-                        if (data.type == 'error') {
-            
+                    }).then(function () {
+                        if (data.type == "error") {
                         } else {
                             location.reload();
                             // window.location.href = "/myProfile";
                         }
                     });
                 });
-            }
+            },
         });
     });
 
@@ -1505,10 +1439,10 @@ $.validator.addMethod("noSpecialChars", function(value, element) {
                         url: "/updateEmployeeAddress",
                         data: data,
                         dataType: "json",
-                        async: false,
+
                         processData: false,
                         contentType: false,
-                    }).done(function (data) {
+                    }).then(function (data) {
                         // console.log(data);
                         swal({
                             title: data.title,
@@ -1532,194 +1466,42 @@ $.validator.addMethod("noSpecialChars", function(value, element) {
     });
 
     /////////////////////////////////////////////
-    $('#saveEducation').click(function(e) {
+    $("#saveEducation").click(function (e) {
         $("#addEmployeeEducation").validate({
-          // Specify validation rules
-          rules: {
-              fromDate: "required",
-              toDate: "required",
-              instituteName: "required",
-              highestLevelAttained: "required",
-              result: "required",
-          },
-
-          messages: {
-              fromDate: "Please insert From Date",
-              toDate: "Please insert To Date",
-              instituteName: "Please insert Institute Name",
-              highestLevelAttained: "Please insert Highest Level Attained",
-              result: "Please insert Result",
-          },
-
-          submitHandler: function (form) {
-            var data = new FormData(document.getElementById("addEmployeeEducation"));
-            $.ajax({
-                type: "POST",
-                url: "/addEmployeeEducation",
-                data: data,
-                dataType: "json",
-                async: false,
-                processData: false,
-                contentType: false,
-            }).done(function (data) {
-                console.log(data);
-                Swal.fire({
-                    title: data.title,
-                    icon: "success",
-                    text: data.msg,
-                    type: data.type,
-                    confirmButtonColor: "#3085d6",
-                    confirmButtonText: "OK",
-                    allowOutsideClick: false,
-                    allowEscapeKey: false,
-                }).then(function () {
-                    if (data.type == "error") {
-                    } else {
-                        location.reload();
-                    }
-                });
-            });
-          }
-      });
-    });
-
-    $('#editEducation').click(function(e) {
-        var data = new FormData(document.getElementById("educationModalEdit"));
-
-        $.ajax({
-            type: "POST",
-            url: "/updateEmployeeEducation",
-            data: data,
-            dataType: "json",
-            async: false,
-            processData: false,
-            contentType: false,
-        }).done(function(data) {
-            console.log(data);
-            Swal.fire({
-                title: data.title,
-                icon: 'success',
-                text: data.msg,
-                type: data.type,
-                    confirmButtonColor: '#3085d6',
-                confirmButtonText: 'OK',
-                allowOutsideClick: false,
-                allowEscapeKey: false,
-            }).then(function() {
-                if (data.type == 'error') {
-
-                } else {
-                    location.reload();
-                }
-            });
-        });
-    });
-
-    educationId = $("#educationId").val();
-
-    educationIds = educationId.split(',');
-        
-    for (let i = 0; i < educationIds.length; i++) {
-        const type = educationIds[i];
-        console.log(type);
-        $('#educationModalEdit' + type).click(function(e) {
-    
-            id = $(this).data('id');
-            var educationData = getEducation(id);
-            console.log(educationData);
-            educationData.done(function(data) {
-                education = data.data;
-                console.log(education);
-                $('#educationId1').val(education.id);
-
-                $('#idEdu').val(education.id);
-
-                $('#educationFromDate1').val(education.fromDate);
-                $('#educationToDate1').val(education.toDate);
-                $('#educationinstituteName1').val(education.instituteName);
-                $('#educationhighestLevelAttained1').val(education.highestLevelAttained);
-                $('#educationResult1').val(education.result);
-                if (data.file) {
-                    $('#fileDownloadOthers').html('<a href="/storage/' + data.file + '">Download File</a>')
-                }
-            });
-            $('#editmodaledd').modal('show');
-        });
-    
-        $('#deleteEducation' + type).click(function(e) {
-            id = $(this).data('id');
-            requirejs(['sweetAlert2'], function(swal) {
-                swal({
-                    title: "Are you sure to delete Education?",
-                    type: "error",
-                    confirmButtonClass: "btn-danger",
-                    confirmButtonText: "Yes!",
-                    showCancelButton: true,
-                }).then(function() {
-                    $.ajax({
-                        type: "POST",
-                        url: "/deleteEmployeeEducation/" + id,
-                        data: { _method: "DELETE" },
-                        
-                    }).done(function(data) {
-                        swal({
-                            title: data.title,
-                            text: data.msg,
-                            type: data.type,
-                            confirmButtonColor: '#3085d6',
-                            confirmButtonText: 'OK',
-                            allowOutsideClick: false,
-                            allowEscapeKey: false,
-                        }).then(function() {
-                            if (data.type == 'error') {
-    
-                            } else {
-                                location.reload();
-                            }
-                        });
-                    });
-                });
-            });
-        });
-    
-        function getEducation(id) {
-            return $.ajax({
-                url: "/getEmployeeEducationById/" + id,
-                url: "/getEmployeeEducationById/" + id
-            });
-        }
-    }
-
-    $('#saveOthers').click(function(e) {
-        $("#addOthers").validate({
             // Specify validation rules
             rules: {
-                otherDate: "required",
-                otherPQDetails: "required",
-                file: "required"
+                fromDate: "required",
+                toDate: "required",
+                instituteName: "required",
+                highestLevelAttained: "required",
+                result: "required",
             },
 
             messages: {
-                otherDate: "Please insert Date",
-                otherPQDetails: "Please insert Professional Qualification Details",
-                file: "Please upload valid file",
+                fromDate: "Please insert From Date",
+                toDate: "Please insert To Date",
+                instituteName: "Please insert Institute Name",
+                highestLevelAttained: "Please insert Highest Level Attained",
+                result: "Please insert Result",
             },
 
             submitHandler: function (form) {
-                var data = new FormData(document.getElementById("addOthers"));
+                var data = new FormData(
+                    document.getElementById("addEmployeeEducation")
+                );
                 $.ajax({
                     type: "POST",
-                    url: "/addEmployeeOthers",
+                    url: "/addEmployeeEducation",
                     data: data,
                     dataType: "json",
-                    async: false,
+
                     processData: false,
                     contentType: false,
-                }).done(function (data) {
+                }).then(function (data) {
                     console.log(data);
                     Swal.fire({
                         title: data.title,
-                        icon: 'success',
+                        icon: "success",
                         text: data.msg,
                         type: data.type,
                         confirmButtonColor: "#3085d6",
@@ -1733,11 +1515,166 @@ $.validator.addMethod("noSpecialChars", function(value, element) {
                         }
                     });
                 });
-            }
+            },
         });
     });
 
-    $('#editOthers').click(function(e) {
+    $("#editEducation").click(function (e) {
+        var data = new FormData(document.getElementById("educationModalEdit"));
+
+        $.ajax({
+            type: "POST",
+            url: "/updateEmployeeEducation",
+            data: data,
+            dataType: "json",
+
+            processData: false,
+            contentType: false,
+        }).then(function (data) {
+            console.log(data);
+            Swal.fire({
+                title: data.title,
+                icon: "success",
+                text: data.msg,
+                type: data.type,
+                confirmButtonColor: "#3085d6",
+                confirmButtonText: "OK",
+                allowOutsideClick: false,
+                allowEscapeKey: false,
+            }).then(function () {
+                if (data.type == "error") {
+                } else {
+                    location.reload();
+                }
+            });
+        });
+    });
+
+    educationId = $("#educationId").val();
+
+    educationIds = educationId.split(",");
+
+    for (let i = 0; i < educationIds.length; i++) {
+        const type = educationIds[i];
+        console.log(type);
+        $("#educationModalEdit" + type).click(function (e) {
+            id = $(this).data("id");
+            var educationData = getEducation(id);
+            console.log(educationData);
+            educationData.then(function (data) {
+                education = data.data;
+                console.log(education);
+                $("#educationId1").val(education.id);
+
+                $("#idEdu").val(education.id);
+
+                $("#educationFromDate1").val(education.fromDate);
+                $("#educationToDate1").val(education.toDate);
+                $("#educationinstituteName1").val(education.instituteName);
+                $("#educationhighestLevelAttained1").val(
+                    education.highestLevelAttained
+                );
+                $("#educationResult1").val(education.result);
+                if (data.file) {
+                    $("#fileDownloadOthers").html(
+                        '<a href="/storage/' + data.file + '">Download File</a>'
+                    );
+                }
+            });
+            $("#editmodaledd").modal("show");
+        });
+
+        $("#deleteEducation" + type).click(function (e) {
+            id = $(this).data("id");
+            requirejs(["sweetAlert2"], function (swal) {
+                swal({
+                    title: "Are you sure to delete Education?",
+                    type: "error",
+                    confirmButtonClass: "btn-danger",
+                    confirmButtonText: "Yes!",
+                    showCancelButton: true,
+                }).then(function () {
+                    $.ajax({
+                        type: "POST",
+                        url: "/deleteEmployeeEducation/" + id,
+                        data: { _method: "DELETE" },
+                    }).then(function (data) {
+                        swal({
+                            title: data.title,
+                            text: data.msg,
+                            type: data.type,
+                            confirmButtonColor: "#3085d6",
+                            confirmButtonText: "OK",
+                            allowOutsideClick: false,
+                            allowEscapeKey: false,
+                        }).then(function () {
+                            if (data.type == "error") {
+                            } else {
+                                location.reload();
+                            }
+                        });
+                    });
+                });
+            });
+        });
+
+        function getEducation(id) {
+            return $.ajax({
+                url: "/getEmployeeEducationById/" + id,
+                url: "/getEmployeeEducationById/" + id,
+            });
+        }
+    }
+
+    $("#saveOthers").click(function (e) {
+        $("#addOthers").validate({
+            // Specify validation rules
+            rules: {
+                otherDate: "required",
+                otherPQDetails: "required",
+                file: "required",
+            },
+
+            messages: {
+                otherDate: "Please insert Date",
+                otherPQDetails:
+                    "Please insert Professional Qualification Details",
+                file: "Please upload valid file",
+            },
+
+            submitHandler: function (form) {
+                var data = new FormData(document.getElementById("addOthers"));
+                $.ajax({
+                    type: "POST",
+                    url: "/addEmployeeOthers",
+                    data: data,
+                    dataType: "json",
+
+                    processData: false,
+                    contentType: false,
+                }).then(function (data) {
+                    console.log(data);
+                    Swal.fire({
+                        title: data.title,
+                        icon: "success",
+                        text: data.msg,
+                        type: data.type,
+                        confirmButtonColor: "#3085d6",
+                        confirmButtonText: "OK",
+                        allowOutsideClick: false,
+                        allowEscapeKey: false,
+                    }).then(function () {
+                        if (data.type == "error") {
+                        } else {
+                            location.reload();
+                        }
+                    });
+                });
+            },
+        });
+    });
+
+    $("#editOthers").click(function (e) {
         var data = new FormData(document.getElementById("othersModalEdit"));
         console.log(data);
         $.ajax({
@@ -1745,23 +1682,22 @@ $.validator.addMethod("noSpecialChars", function(value, element) {
             url: "/updateEmployeeOthers",
             data: data,
             dataType: "json",
-            async: false,
+
             processData: false,
             contentType: false,
-        }).done(function(data) {
+        }).then(function (data) {
             console.log(data);
             Swal.fire({
                 title: data.title,
-                icon: 'success',
+                icon: "success",
                 text: data.msg,
                 type: data.type,
-                confirmButtonColor: '#3085d6',
-                confirmButtonText: 'OK',
+                confirmButtonColor: "#3085d6",
+                confirmButtonText: "OK",
                 allowOutsideClick: false,
                 allowEscapeKey: false,
-            }).then(function() {
-                if (data.type == 'error') {
-
+            }).then(function () {
+                if (data.type == "error") {
                 } else {
                     location.reload();
                 }
@@ -1771,53 +1707,50 @@ $.validator.addMethod("noSpecialChars", function(value, element) {
 
     othersId = $("#othersId").val();
 
-    othersIds = othersId.split(',');
-        
+    othersIds = othersId.split(",");
+
     for (let i = 1; i < othersIds.length; i++) {
         const type = othersIds[i];
-        $('#othersQualificationModalEdit' + type).click(function(e) {
-
-            id = $(this).data('id');
+        $("#othersQualificationModalEdit" + type).click(function (e) {
+            id = $(this).data("id");
             var othersData = getOthers(id);
 
-            othersData.done(function(data) {
+            othersData.then(function (data) {
                 othersQualification = data.data;
                 $("#idOthers").val(othersQualification.id);
 
-                $('#othersDate1').val(othersQualification.otherDate);
-                $('#othersPQDetails1').val(othersQualification.otherPQDetails);
-                $('#othersDoc1').val(othersQualification.supportOtherDoc);
+                $("#othersDate1").val(othersQualification.otherDate);
+                $("#othersPQDetails1").val(othersQualification.otherPQDetails);
+                $("#othersDoc1").val(othersQualification.supportOtherDoc);
             });
-            $('#editmodalothers').modal('show');
+            $("#editmodalothers").modal("show");
         });
 
-        $('#deleteOthers' + type).click(function(e) {
-            id = $(this).data('id');
-            requirejs(['sweetAlert2'], function(swal) {
+        $("#deleteOthers" + type).click(function (e) {
+            id = $(this).data("id");
+            requirejs(["sweetAlert2"], function (swal) {
                 swal({
                     title: "Are you sure to delete Other Qualification?",
                     type: "error",
                     confirmButtonClass: "btn-danger",
                     confirmButtonText: "Yes!",
                     showCancelButton: true,
-                }).then(function() {
+                }).then(function () {
                     $.ajax({
                         type: "POST",
                         url: "/deleteEmployeeOthers/" + id,
                         data: { _method: "DELETE" },
-                        
-                    }).done(function(data) {
+                    }).then(function (data) {
                         swal({
                             title: data.title,
                             text: data.msg,
                             type: data.type,
-                            confirmButtonColor: '#3085d6',
-                            confirmButtonText: 'OK',
+                            confirmButtonColor: "#3085d6",
+                            confirmButtonText: "OK",
                             allowOutsideClick: false,
                             allowEscapeKey: false,
-                        }).then(function() {
-                            if (data.type == 'error') {
-
+                        }).then(function () {
+                            if (data.type == "error") {
                             } else {
                                 location.reload();
                             }
@@ -1829,238 +1762,252 @@ $.validator.addMethod("noSpecialChars", function(value, element) {
 
         function getOthers(id) {
             return $.ajax({
-                url: "/getEmployeeOthers/" + id
+                url: "/getEmployeeOthers/" + id,
             });
         }
     }
-    $('#addAddressDetails').click(function(e) {
-      $("#formAddressDetails").validate({
-          // Specify validation rules
-          rules: {
-              address1: "required",
-              city: "required",
-              state: "required",
-              country: "required",
-              postcode: {
-                  required: true,
-                  digits: true,
-                  rangelength: [5, 5],
-              },
-              addressType: "required",
-          },
+    $("#addAddressDetails").click(function (e) {
+        $("#formAddressDetails").validate({
+            // Specify validation rules
+            rules: {
+                address1: "required",
+                city: "required",
+                state: "required",
+                country: "required",
+                postcode: {
+                    required: true,
+                    digits: true,
+                    rangelength: [5, 5],
+                },
+                addressType: "required",
+            },
 
-          messages: {
-              address1: "Please Insert Address 1",
-              city: "Please Insert City",
-              state: "Please Choose State",
-              country: "required",
-              postcode: {
-                  required: "Please Insert Postcode",
-                  digits: "Please Insert Valid Postcode",
-                  rangelength: "Please Insert Valid Postcode",
-              },
-              addressType: "Please Choose Address Type",
-          },
-          submitHandler: function (form) {
-              requirejs(["sweetAlert2"], function (swal) {
-                  var data = new FormData(
-                      document.getElementById("formAddressDetails")
-                  );
+            messages: {
+                address1: "Please Insert Address 1",
+                city: "Please Insert City",
+                state: "Please Choose State",
+                country: "required",
+                postcode: {
+                    required: "Please Insert Postcode",
+                    digits: "Please Insert Valid Postcode",
+                    rangelength: "Please Insert Valid Postcode",
+                },
+                addressType: "Please Choose Address Type",
+            },
+            submitHandler: function (form) {
+                requirejs(["sweetAlert2"], function (swal) {
+                    var data = new FormData(
+                        document.getElementById("formAddressDetails")
+                    );
 
-                  $.ajax({
-                      type: "POST",
-                      url: "/addEmployeeAddressDetails",
-                      data: data,
-                      dataType: "json",
-                      async: false,
-                      processData: false,
-                      contentType: false,
-                  }).done(function (data) {
-                    console.log(data);
-                      swal({
-                          title: data.title,
-                          text: data.msg,
-                          type: data.type,
-                          confirmButtonColor: "#3085d6",
-                          confirmButtonText: "OK",
-                          allowOutsideClick: false,
-                          allowEscapeKey: false,
-                      }).then(function () {
-                          if (data.type == "error") {
-                          } else {
-                              location.reload();
-                          }
-                      });
-                  });
-              });
-          },
-      });
-  });
+                    $.ajax({
+                        type: "POST",
+                        url: "/addEmployeeAddressDetails",
+                        data: data,
+                        dataType: "json",
 
-  $("#saveAddressDetailsBtn").click(function (e) {
-    var data = new FormData(document.getElementById("formEditAddressDetails"));
-
-    $.ajax({
-        type: "POST",
-        url: "/updateEmployeeAddressDetails",
-        data: data,
-        dataType: "json",
-        async: false,
-        processData: false,
-        contentType: false,
-    }).done(function (data) {
-        console.log(data)
-        Swal.fire({
-            title: data.title,
-            icon: "success",
-            text: data.msg,
-            type: data.type,
-            confirmButtonColor: "#3085d6",
-            confirmButtonText: "OK",
-            allowOutsideClick: false,
-            allowEscapeKey: false,
-        }).then(function () {
-            if (data.type == "error") {
-            } else {
-                location.reload();
-            }
+                        processData: false,
+                        contentType: false,
+                    }).then(function (data) {
+                        console.log(data);
+                        swal({
+                            title: data.title,
+                            text: data.msg,
+                            type: data.type,
+                            confirmButtonColor: "#3085d6",
+                            confirmButtonText: "OK",
+                            allowOutsideClick: false,
+                            allowEscapeKey: false,
+                        }).then(function () {
+                            if (data.type == "error") {
+                            } else {
+                                location.reload();
+                            }
+                        });
+                    });
+                });
+            },
         });
     });
-  });
-  
-  addressId = $("#addressId").val();
 
-  addressIds = addressId.split(",");
+    $("#saveAddressDetailsBtn").click(function (e) {
+        var data = new FormData(
+            document.getElementById("formEditAddressDetails")
+        );
 
-  for (let i = 0; i < addressIds.length; i++){
-      const type = addressIds[i];
+        $.ajax({
+            type: "POST",
+            url: "/updateEmployeeAddressDetails",
+            data: data,
+            dataType: "json",
 
-      $("#updateAddressDetails" + type).click(function (e){
-          id = $(this).data("id");
-          var addressData = getAddressDetails(id);
-
-          addressData.done(function (data){
-              address = data.data;
-              $("#id1").val(address.id);
-              $("#address1Edit").val(address.address1);
-              $("#address2Edit").val(address.address2);
-              $("#postcodeEdit").val(address.postcode);
-              $("#cityEdit").val(address.city);
-              $("#stateEdit").val(address.state);
-              $("#countryEdit").val(address.country);
-              $("#addressTypeEdit").val(address.addressType);
-          });
-          $("#modaleditaddress").modal("show");
-      });
-      
-      $("#deleteAddressDetails" + type).click(function (e){
-          id = $(this).data("id");
-
-          requirejs(["sweetAlert2"], function (swal) {
-              swal({
-                  title: "Are you sure to delete Address?",
-                  type: "error",
-                  confirmButtonClass: "btn-danger",
-                  confirmButtonText: "Yes!",
-                  showCancelButton: true,
-              }).then(function () {
-                  $.ajax({
-                      type: "POST",
-                      url: "/deleteAddressDetails/" + id,
-                      data: { _method: "DELETE" },
-                  }).done(function (data) {
-                      console.log(data)
-                      swal({
-                          title: data.title,
-                          text: data.msg,
-                          type: data.type,
-                          confirmButtonColor: "#3085d6",
-                          confirmButtonText: "OK",
-                          allowOutsideClick: false,
-                          allowEscapeKey: false,
-                      }).then(function () {
-                          if (data.type == "error"){
-                          } else {
-                              location.reload();
-                          }
-                      });
-                  });
-              });
-          });
-      });
-
-      function getAddressDetails(id){
-          return $.ajax({
-              url: "/getEmployeeAddressDetails/" + id,
-          });
-      }
-  }
-
-$('input[name="address_type[]"]').on('change', function() {
-    var checkboxes = $('input[name="address_type[]"]');
-    var permanentChecked = false;
-    var correspondentChecked = false;
-    var addressId = $(this).data('address-id');
-    var addressType = $(this).is(':checked') ? $(this).data('address-type') : '0';
-
-    checkboxes.each(function() {
-        if ($(this).is(':checked')) {
-            if ($(this).val() === 'permanent') {
-                permanentChecked = true;
-            } else if ($(this).val() === 'correspondent') {
-                correspondentChecked = true;
-            }
-        }
-    });
-
-    if (permanentChecked && correspondentChecked) {
-        checkboxes.not(':checked').prop('disabled', true);
-        // if both checkboxes are checked and have the same address ID, set addressType to 3
-        if (checkboxes.filter('[data-address-id="' + addressId + '"]:checked').length === 2) {
-            addressType = '3';
-        }
-    } else if (permanentChecked) {
-        // if only permanent checkbox is checked, set addressType to 1
-        addressType = '1';
-        // disable all other permanent checkboxes
-        checkboxes.filter('[value="permanent"]:not(:checked)').prop('disabled', true);
-        // enable all correspondent checkboxes
-        checkboxes.filter('[value="correspondent"]').prop('disabled', false);
-    } else if (correspondentChecked) {
-        // if only correspondent checkbox is checked, set addressType to 2
-        addressType = '2';
-        // disable all other correspondent checkboxes
-        checkboxes.filter('[value="correspondent"]:not(:checked)').prop('disabled', true);
-        // enable all permanent checkboxes
-        checkboxes.filter('[value="permanent"]').prop('disabled', false);
-    } else {
-        checkboxes.prop('disabled', false);
-    }
-
-    // send an AJAX request to update the address type status
-    $.ajax({
-        url: '/updateAddressDetails',
-        type: 'POST',
-        data: {
-            id: addressId,
-            addressType: addressType,
-        },
-        success: function(data) {
-            // Update the UI to reflect the new address type
+            processData: false,
+            contentType: false,
+        }).then(function (data) {
+            console.log(data);
             Swal.fire({
-                icon: 'success',
-                title: 'Addesss Type Is Updated',
+                title: data.title,
+                icon: "success",
+                text: data.msg,
+                type: data.type,
                 confirmButtonColor: "#3085d6",
                 confirmButtonText: "OK",
                 allowOutsideClick: false,
                 allowEscapeKey: false,
+            }).then(function () {
+                if (data.type == "error") {
+                } else {
+                    location.reload();
+                }
             });
-        },
-        error: function(jqXHR, textStatus, errorThrown) {
-            console.error(errorThrown);
-        }
+        });
     });
-});
+
+    addressId = $("#addressId").val();
+
+    addressIds = addressId.split(",");
+
+    for (let i = 0; i < addressIds.length; i++) {
+        const type = addressIds[i];
+
+        $("#updateAddressDetails" + type).click(function (e) {
+            id = $(this).data("id");
+            var addressData = getAddressDetails(id);
+
+            addressData.then(function (data) {
+                address = data.data;
+                $("#id1").val(address.id);
+                $("#address1Edit").val(address.address1);
+                $("#address2Edit").val(address.address2);
+                $("#postcodeEdit").val(address.postcode);
+                $("#cityEdit").val(address.city);
+                $("#stateEdit").val(address.state);
+                $("#countryEdit").val(address.country);
+                $("#addressTypeEdit").val(address.addressType);
+            });
+            $("#modaleditaddress").modal("show");
+        });
+
+        $("#deleteAddressDetails" + type).click(function (e) {
+            id = $(this).data("id");
+
+            requirejs(["sweetAlert2"], function (swal) {
+                swal({
+                    title: "Are you sure to delete Address?",
+                    type: "error",
+                    confirmButtonClass: "btn-danger",
+                    confirmButtonText: "Yes!",
+                    showCancelButton: true,
+                }).then(function () {
+                    $.ajax({
+                        type: "POST",
+                        url: "/deleteAddressDetails/" + id,
+                        data: { _method: "DELETE" },
+                    }).then(function (data) {
+                        console.log(data);
+                        swal({
+                            title: data.title,
+                            text: data.msg,
+                            type: data.type,
+                            confirmButtonColor: "#3085d6",
+                            confirmButtonText: "OK",
+                            allowOutsideClick: false,
+                            allowEscapeKey: false,
+                        }).then(function () {
+                            if (data.type == "error") {
+                            } else {
+                                location.reload();
+                            }
+                        });
+                    });
+                });
+            });
+        });
+
+        function getAddressDetails(id) {
+            return $.ajax({
+                url: "/getEmployeeAddressDetails/" + id,
+            });
+        }
+    }
+
+    $('input[name="address_type[]"]').on("change", function () {
+        var checkboxes = $('input[name="address_type[]"]');
+        var permanentChecked = false;
+        var correspondentChecked = false;
+        var addressId = $(this).data("address-id");
+        var addressType = $(this).is(":checked")
+            ? $(this).data("address-type")
+            : "0";
+
+        checkboxes.each(function () {
+            if ($(this).is(":checked")) {
+                if ($(this).val() === "permanent") {
+                    permanentChecked = true;
+                } else if ($(this).val() === "correspondent") {
+                    correspondentChecked = true;
+                }
+            }
+        });
+
+        if (permanentChecked && correspondentChecked) {
+            checkboxes.not(":checked").prop("disabled", true);
+            // if both checkboxes are checked and have the same address ID, set addressType to 3
+            if (
+                checkboxes.filter(
+                    '[data-address-id="' + addressId + '"]:checked'
+                ).length === 2
+            ) {
+                addressType = "3";
+            }
+        } else if (permanentChecked) {
+            // if only permanent checkbox is checked, set addressType to 1
+            addressType = "1";
+            // disable all other permanent checkboxes
+            checkboxes
+                .filter('[value="permanent"]:not(:checked)')
+                .prop("disabled", true);
+            // enable all correspondent checkboxes
+            checkboxes
+                .filter('[value="correspondent"]')
+                .prop("disabled", false);
+        } else if (correspondentChecked) {
+            // if only correspondent checkbox is checked, set addressType to 2
+            addressType = "2";
+            // disable all other correspondent checkboxes
+            checkboxes
+                .filter('[value="correspondent"]:not(:checked)')
+                .prop("disabled", true);
+            // enable all permanent checkboxes
+            checkboxes.filter('[value="permanent"]').prop("disabled", false);
+        } else {
+            checkboxes.prop("disabled", false);
+        }
+
+        // send an AJAX request to update the address type status
+        $.ajax({
+            url: "/updateAddressDetails",
+            type: "POST",
+            data: {
+                id: addressId,
+                addressType: addressType,
+            },
+            success: function (data) {
+                // Update the UI to reflect the new address type
+                Swal.fire({
+                    icon: "success",
+                    title: "Addesss Type Is Updated",
+                    confirmButtonColor: "#3085d6",
+                    confirmButtonText: "OK",
+                    allowOutsideClick: false,
+                    allowEscapeKey: false,
+                });
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                console.error(errorThrown);
+            },
+        });
+    });
 
     /////////////////////////////////////////////
 
@@ -2070,12 +2017,10 @@ $('input[name="address_type[]"]').on('change', function() {
             rules: {
                 firstName: {
                     required: true,
-                    
-                  },
+                },
                 lastName: {
                     required: true,
-                    
-                  },
+                },
                 relationship: "required",
                 contactNo: {
                     required: true,
@@ -2134,10 +2079,10 @@ $('input[name="address_type[]"]').on('change', function() {
                     url: "/updateEmployeeEmergency",
                     data: data,
                     dataType: "json",
-                    async: false,
+
                     processData: false,
                     contentType: false,
-                }).done(function (data) {
+                }).then(function (data) {
                     console.log(data);
                     Swal.fire({
                         title: data.title,
@@ -2164,12 +2109,10 @@ $('input[name="address_type[]"]').on('change', function() {
             rules: {
                 firstName_2: {
                     required: true,
-                    
-                  },
+                },
                 lastName_2: {
                     required: true,
-                    
-                  },
+                },
                 relationship_2: "required",
                 contactNo_2: {
                     required: true,
@@ -2228,10 +2171,10 @@ $('input[name="address_type[]"]').on('change', function() {
                     url: "/updateEmployeeEmergency",
                     data: data,
                     dataType: "json",
-                    async: false,
+
                     processData: false,
                     contentType: false,
-                }).done(function (data) {
+                }).then(function (data) {
                     console.log(data);
                     Swal.fire({
                         title: data.title,
@@ -2260,12 +2203,10 @@ $('input[name="address_type[]"]').on('change', function() {
             rules: {
                 firstName: {
                     required: true,
-                    
-                  },
+                },
                 lastName: {
                     required: true,
-                    
-                  },
+                },
                 oldIdNo: {
                     required: true,
                     digits: true,
@@ -2280,7 +2221,6 @@ $('input[name="address_type[]"]').on('change', function() {
                     required: false,
                     digits: true,
                     rangelength: [9, 9],
-
                 },
                 contactNo: {
                     digits: true,
@@ -2305,22 +2245,20 @@ $('input[name="address_type[]"]').on('change', function() {
                 },
                 okuattach: {
                     required: true,
-
                 },
                 homeNo: {
                     digits: true,
-                    rangelength: [9,9]
+                    rangelength: [9, 9],
                 },
                 designation: {
                     required: true,
-
                 },
                 payslip: {
                     digits: true,
                 },
                 officeNo: {
                     digits: true,
-                    rangelength: [7,9]
+                    rangelength: [7, 9],
                 },
                 expiryDate: {
                     required: true,
@@ -2340,7 +2278,8 @@ $('input[name="address_type[]"]').on('change', function() {
                 oldIdNo: {
                     required: "Please Insert Old Identification Number",
                     digits: "Please Insert Correct Old Identification Number",
-                    rangelength: "Please Insert Valid Old Identification Number",
+                    rangelength:
+                        "Please Insert Valid Old Identification Number",
                 },
                 idNo: {
                     required: "Please Insert New Identification Number",
@@ -2350,7 +2289,6 @@ $('input[name="address_type[]"]').on('change', function() {
                 passport: {
                     digits: "Please Insert Correct Passport Number",
                     rangelength: "Please Insert Valid Passport Number",
-
                 },
                 contactNo: {
                     digits: "Please Insert Correct Contact Number Without ' - ' or Space",
@@ -2368,31 +2306,26 @@ $('input[name="address_type[]"]').on('change', function() {
                     digits: "Please Insert Valid Postcode",
                     rangelength: "Please Insert Valid Postcode",
                 },
-                okuCardNum:{
+                okuCardNum: {
                     required: "Please Insert OKU Card Number",
-                    rangelength: "Please Inset Valid Home Number"
-
+                    rangelength: "Please Inset Valid Home Number",
                 },
                 okuattach: {
                     required: "Please Insert OKU Attachment",
-
                 },
                 homeNo: {
                     digits: "Please Insert Correct Home Number Without ' - ' or Space",
-                    rangelength: "Please Inset Valid Home Number"
+                    rangelength: "Please Inset Valid Home Number",
                 },
                 designation: {
                     required: "Please Insert Designation",
-
                 },
                 payslip: {
                     digits: "Please Insert Valid Monthly Salary",
-
                 },
                 officeNo: {
                     digits: "Please Insert Valid Office Number",
-                    rangelength: "Please Insert Valid Office Number"
-
+                    rangelength: "Please Insert Valid Office Number",
                 },
                 expiryDate: {
                     required: "Please Insert Expiry Date",
@@ -2401,200 +2334,20 @@ $('input[name="address_type[]"]').on('change', function() {
                     required: "Please Insert Issuing Country",
                 },
             },
-        submitHandler: function(form) {
-            var data = new FormData(document.getElementById("addCompanionForm"));
-
-            $.ajax({
-                type: "POST",
-                url: "/addEmployeeCompanion",
-                data: data,
-                dataType: "json",
-                async: false,
-                processData: false,
-                contentType: false,
-            }).done(function(data) {
-                console.log(data);
-                Swal.fire({
-                    title: data.title,
-                    icon: 'success',
-                    text: data.msg,
-                    type: data.type,
-                        confirmButtonColor: '#3085d6',
-                    confirmButtonText: 'OK',
-                    allowOutsideClick: false,
-                    allowEscapeKey: false,
-                }).then(function() {
-                    if (data.type == 'error') {
-
-                    } else {
-                        location.reload();
-                    }
-                });
-            });
-        }
-        });
-    });
-
-  
-companion = ["1", "2", "3", "4"];
-
-    for (let i = 0; i < companion.length; i++) {
-        const no = companion[i];
-
-    $("#updateCompanion" + no).click(function (e) {
-        $("#updateCompanionForm" + no).validate({
-            rules: {
-                firstName: {
-                    required: true,
-                    
-                  },
-                lastName: {
-                    required: true,
-                    
-                  },
-                oldIdNo: {
-                    required: true,
-                    digits: true,
-                    rangelength: [7, 7],
-                },
-                idNo: {
-                    required: true,
-                    digits: true,
-                    rangelength: [12, 12],
-                },
-                passport: {
-                    required: false,
-                    digits: true,
-                    rangelength: [9, 9],
-
-                },
-                contactNo: {
-                    digits: true,
-                },
-                age: {
-                    required: false,
-                    digits: true,
-                },
-                address1: "required",
-                city: "required",
-                state: "required",
-                country: "required",
-                postcode: {
-                    required: true,
-                    digits: true,
-                    rangelength: [5, 5],
-                },
-                okuNumber: {
-                    required: true,
-                    digits: true,
-                    rangelength: [10, 11],
-                },
-                okuID: {
-                    required: true,
-
-                },
-                homeNo: {
-                    digits: true,
-                    rangelength: [9,9]
-                },
-                designation: {
-                    required: true,
-
-                },
-                salary: {
-                    digits: true,
-                },
-                officeNo: {
-                    digits: true,
-                    rangelength: [7,9]
-                },
-                postcode: {
-                    required: true,
-                }
-              
-            },
-
-            messages: {
-                firstName: {
-                    required: "Please Insert First Name",
-                },
-                lastName: {
-                    required: "Please Insert Last Name",
-                },
-                oldIdNo: {
-                    required: "Please Insert Old Identification Number",
-                    digits: "Please Insert Correct Old Identification Number",
-                    rangelength: "Please Insert Valid Old Identification Number",
-                },
-                idNo: {
-                    required: "Please Insert New Identification Number",
-                    digits: "Please Insert Correct Identification Number Without ' - ' or Space",
-                    rangelength: "Please Insert Valid Identification Number",
-                },
-                passport: {
-                    digits: "Please Insert Correct Passport Number",
-                    rangelength: "Please Insert Valid Passport Number",
-
-                },
-                contactNo: {
-                    digits: "Please Insert Correct Contact Number Without ' - ' or Space",
-                },
-                age: {
-                    required: "Please Insert Age",
-                    digits: "Please Insert Correct Age",
-                },
-                address1: "Please Insert Address 1",
-                city: "Please Insert City",
-                state: "Please Choose State",
-                country: "required",
-                postcode: {
-                    required: "Please Insert Postcode",
-                    digits: "Please Insert Valid Postcode",
-                    rangelength: "Please Insert Valid Postcode",
-                },
-                okuNumber:{
-                    required: "Please Insert OKU Card Number",
-                    rangelength: "Please Inset Valid Home Number"
-
-                },
-                okuID: {
-                    required: "Please Insert OKU Attachment",
-
-                },
-                homeNo: {
-                    digits: "Please Insert Correct Home Number Without ' - ' or Space",
-                    rangelength: "Please Inset Valid Home Number"
-                },
-                designation: {
-                    required: "Please Insert Designation",
-
-                },
-                salary: {
-                    digits: "Please Insert Valid Monthly Salary",
-
-                },
-                officeNo: {
-                    digits: "Please Insert Valid Office Number",
-                    rangelength: "Please Insert Valid Office Number"
-
-                },
-                postcode: {
-                    required: true,
-                }
-              
-            },
-            submitHandler: function(form) {
-                var data = new FormData(document.getElementById("updateCompanionForm" + no));
+            submitHandler: function (form) {
+                var data = new FormData(
+                    document.getElementById("addCompanionForm")
+                );
 
                 $.ajax({
                     type: "POST",
-                    url: "/updateEmployeeCompanion",
+                    url: "/addEmployeeCompanion",
                     data: data,
                     dataType: "json",
-                    async: false,
+
                     processData: false,
                     contentType: false,
-                }).done(function (data) {
+                }).then(function (data) {
                     console.log(data);
                     Swal.fire({
                         title: data.title,
@@ -2612,44 +2365,212 @@ companion = ["1", "2", "3", "4"];
                         }
                     });
                 });
-
-            }
+            },
         });
-    }); };
-    
-        
-        // $("#updateCompanion" + no).click(function (e) {
-        //     var data = new FormData(document.getElementById("updateCompanionForm" + no));
+    });
 
-        //     $.ajax({
-        //         type: "POST",
-        //         url: "/updateEmployeeCompanion",
-        //         data: data,
-        //         dataType: "json",
-        //         async: false,
-        //         processData: false,
-        //         contentType: false,
-        //     }).done(function (data) {
-        //         console.log(data);
-        //         Swal.fire({
-        //             title: data.title,
-        //             icon: "success",
-        //             text: data.msg,
-        //             type: data.type,
-        //             confirmButtonColor: "#3085d6",
-        //             confirmButtonText: "OK",
-        //             allowOutsideClick: false,
-        //             allowEscapeKey: false,
-        //         }).then(function () {
-        //             if (data.type == "error") {
-        //             } else {
-        //                 location.reload();
-        //             }
-        //         });
-        //     });
-        // });        
-    
+    companion = ["1", "2", "3", "4"];
 
+    for (let i = 0; i < companion.length; i++) {
+        const no = companion[i];
+
+        $("#updateCompanion" + no).click(function (e) {
+            $("#updateCompanionForm" + no).validate({
+                rules: {
+                    firstName: {
+                        required: true,
+                    },
+                    lastName: {
+                        required: true,
+                    },
+                    oldIdNo: {
+                        required: true,
+                        digits: true,
+                        rangelength: [7, 7],
+                    },
+                    idNo: {
+                        required: true,
+                        digits: true,
+                        rangelength: [12, 12],
+                    },
+                    passport: {
+                        required: false,
+                        digits: true,
+                        rangelength: [9, 9],
+                    },
+                    contactNo: {
+                        digits: true,
+                    },
+                    age: {
+                        required: false,
+                        digits: true,
+                    },
+                    address1: "required",
+                    city: "required",
+                    state: "required",
+                    country: "required",
+                    postcode: {
+                        required: true,
+                        digits: true,
+                        rangelength: [5, 5],
+                    },
+                    okuNumber: {
+                        required: true,
+                        digits: true,
+                        rangelength: [10, 11],
+                    },
+                    okuID: {
+                        required: true,
+                    },
+                    homeNo: {
+                        digits: true,
+                        rangelength: [9, 9],
+                    },
+                    designation: {
+                        required: true,
+                    },
+                    salary: {
+                        digits: true,
+                    },
+                    officeNo: {
+                        digits: true,
+                        rangelength: [7, 9],
+                    },
+                    postcode: {
+                        required: true,
+                    },
+                },
+
+                messages: {
+                    firstName: {
+                        required: "Please Insert First Name",
+                    },
+                    lastName: {
+                        required: "Please Insert Last Name",
+                    },
+                    oldIdNo: {
+                        required: "Please Insert Old Identification Number",
+                        digits: "Please Insert Correct Old Identification Number",
+                        rangelength:
+                            "Please Insert Valid Old Identification Number",
+                    },
+                    idNo: {
+                        required: "Please Insert New Identification Number",
+                        digits: "Please Insert Correct Identification Number Without ' - ' or Space",
+                        rangelength:
+                            "Please Insert Valid Identification Number",
+                    },
+                    passport: {
+                        digits: "Please Insert Correct Passport Number",
+                        rangelength: "Please Insert Valid Passport Number",
+                    },
+                    contactNo: {
+                        digits: "Please Insert Correct Contact Number Without ' - ' or Space",
+                    },
+                    age: {
+                        required: "Please Insert Age",
+                        digits: "Please Insert Correct Age",
+                    },
+                    address1: "Please Insert Address 1",
+                    city: "Please Insert City",
+                    state: "Please Choose State",
+                    country: "required",
+                    postcode: {
+                        required: "Please Insert Postcode",
+                        digits: "Please Insert Valid Postcode",
+                        rangelength: "Please Insert Valid Postcode",
+                    },
+                    okuNumber: {
+                        required: "Please Insert OKU Card Number",
+                        rangelength: "Please Inset Valid Home Number",
+                    },
+                    okuID: {
+                        required: "Please Insert OKU Attachment",
+                    },
+                    homeNo: {
+                        digits: "Please Insert Correct Home Number Without ' - ' or Space",
+                        rangelength: "Please Inset Valid Home Number",
+                    },
+                    designation: {
+                        required: "Please Insert Designation",
+                    },
+                    salary: {
+                        digits: "Please Insert Valid Monthly Salary",
+                    },
+                    officeNo: {
+                        digits: "Please Insert Valid Office Number",
+                        rangelength: "Please Insert Valid Office Number",
+                    },
+                    postcode: {
+                        required: true,
+                    },
+                },
+                submitHandler: function (form) {
+                    var data = new FormData(
+                        document.getElementById("updateCompanionForm" + no)
+                    );
+
+                    $.ajax({
+                        type: "POST",
+                        url: "/updateEmployeeCompanion",
+                        data: data,
+                        dataType: "json",
+
+                        processData: false,
+                        contentType: false,
+                    }).then(function (data) {
+                        console.log(data);
+                        Swal.fire({
+                            title: data.title,
+                            icon: "success",
+                            text: data.msg,
+                            type: data.type,
+                            confirmButtonColor: "#3085d6",
+                            confirmButtonText: "OK",
+                            allowOutsideClick: false,
+                            allowEscapeKey: false,
+                        }).then(function () {
+                            if (data.type == "error") {
+                            } else {
+                                location.reload();
+                            }
+                        });
+                    });
+                },
+            });
+        });
+    }
+
+    // $("#updateCompanion" + no).click(function (e) {
+    //     var data = new FormData(document.getElementById("updateCompanionForm" + no));
+
+    //     $.ajax({
+    //         type: "POST",
+    //         url: "/updateEmployeeCompanion",
+    //         data: data,
+    //         dataType: "json",
+    //
+    //         processData: false,
+    //         contentType: false,
+    //     }).then(function (data) {
+    //         console.log(data);
+    //         Swal.fire({
+    //             title: data.title,
+    //             icon: "success",
+    //             text: data.msg,
+    //             type: data.type,
+    //             confirmButtonColor: "#3085d6",
+    //             confirmButtonText: "OK",
+    //             allowOutsideClick: false,
+    //             allowEscapeKey: false,
+    //         }).then(function () {
+    //             if (data.type == "error") {
+    //             } else {
+    //                 location.reload();
+    //             }
+    //         });
+    //     });
+    // });
 
     $("#tableChildren").DataTable({
         responsive: false,
@@ -2669,12 +2590,10 @@ companion = ["1", "2", "3", "4"];
             rules: {
                 firstName: {
                     required: true,
-                    
-                  },
+                },
                 lastName: {
                     required: true,
-                    
-                  },
+                },
                 idNo: {
                     required: true,
                     digits: true,
@@ -2689,8 +2608,6 @@ companion = ["1", "2", "3", "4"];
                 },
                 okuattach: {
                     required: true,
-                    
-
                 },
 
                 oldIDNo: {
@@ -2706,8 +2623,8 @@ companion = ["1", "2", "3", "4"];
                 },
                 postcode: {
                     required: false,
-                    rangelength: [5,5],
-                }
+                    rangelength: [5, 5],
+                },
             },
 
             messages: {
@@ -2724,21 +2641,18 @@ companion = ["1", "2", "3", "4"];
                 },
                 maritalStatus: "Please Choose Marital Status",
                 DOBChild: "Please Enter Date Of Birth",
-                okuCardNum:{
+                okuCardNum: {
                     required: "Please Insert OKU Card Number",
-                    rangelength: "Please Inset Valid Home Number"
-
+                    rangelength: "Please Inset Valid Home Number",
                 },
                 okuattach: {
                     required: "Please Insert OKU Attachment",
-
                 },
 
                 oldIDNo: {
                     required: "Please Insert Old Identification Number",
                     digits: "Please Insert Correct Identification Number Without ' - ' or Space",
                     rangelength: "Please Insert Valid Identification Number",
-
                 },
                 expiryDate: {
                     required: "Please Insert Expiry Date",
@@ -2748,51 +2662,52 @@ companion = ["1", "2", "3", "4"];
                 },
                 postcode: {
                     rangelength: "Please Inset a valid postcode",
-                }
+                },
             },
-        submitHandler: function(form) {
-            var data = new FormData(document.getElementById("addChildrenForm"));
-            $.ajax({
-                type: "POST",
-                url: "/addEmployeeChildren",
-                data: data,
-                dataType: "json",
-                async: false,
-                processData: false,
-                contentType: false,
-            }).done(function(data) {
-                console.log(data);
-                Swal.fire({
-                    title: data.title,
-                    icon: 'success',
-                    text: data.msg,
-                    type: data.type,
-                        confirmButtonColor: '#3085d6',
-                    confirmButtonText: 'OK',
-                    allowOutsideClick: false,
-                    allowEscapeKey: false,
-                }).then(function() {
-                    if (data.type == 'error') {
-                    } else {
-                        location.reload();
-                    }
+            submitHandler: function (form) {
+                var data = new FormData(
+                    document.getElementById("addChildrenForm")
+                );
+                $.ajax({
+                    type: "POST",
+                    url: "/addEmployeeChildren",
+                    data: data,
+                    dataType: "json",
+
+                    processData: false,
+                    contentType: false,
+                }).then(function (data) {
+                    console.log(data);
+                    Swal.fire({
+                        title: data.title,
+                        icon: "success",
+                        text: data.msg,
+                        type: data.type,
+                        confirmButtonColor: "#3085d6",
+                        confirmButtonText: "OK",
+                        allowOutsideClick: false,
+                        allowEscapeKey: false,
+                    }).then(function () {
+                        if (data.type == "error") {
+                        } else {
+                            location.reload();
+                        }
+                    });
                 });
-            });
-        }
+            },
         });
     });
-
 
     // edit children
     $("#editChildren").click(function (e) {
         $("#editChildrenForm").validate({
-             rules: {
+            rules: {
                 firstName: {
                     required: true,
-                  },
+                },
                 lastName: {
                     required: true,
-                  },
+                },
                 idNo: {
                     required: true,
                     digits: true,
@@ -2802,7 +2717,6 @@ companion = ["1", "2", "3", "4"];
                     digits: true,
                     rangelength: [7, 7],
                 },
-           
 
                 okuNo: {
                     required: true,
@@ -2812,29 +2726,25 @@ companion = ["1", "2", "3", "4"];
 
                 okuFile: {
                     required: true,
-
                 },
                 expiryDate: {
                     required: true,
-
                 },
                 issuingCountry: {
-                    required: true, 
+                    required: true,
                 },
                 postcode: {
                     required: false,
-                    rangelength: [5,5],
+                    rangelength: [5, 5],
                 },
                 postcode: {
                     required: false,
-                    rangelength: [5,5],
-                }
-
+                    rangelength: [5, 5],
+                },
             },
-        
 
             messages: {
-                firstName:{
+                firstName: {
                     required: "Please Insert First Name",
                 },
                 lastName: {
@@ -2850,67 +2760,60 @@ companion = ["1", "2", "3", "4"];
                     rangelength: "Please Insert Valid Identification Number",
                 },
 
-
                 okuNo: {
                     required: "Please Insert OKU Card Number",
                     rangelength: "Please Inset OKU Card Number",
-
                 },
 
                 okuFile: {
                     required: "Please Insert OKU Attachment",
-
                 },
 
                 expiryDate: {
                     required: "Please Insert Expiry Date",
-
                 },
                 issuingCountry: {
-                    required: "Please Insert Issuing Country", 
+                    required: "Please Insert Issuing Country",
                 },
                 postcode: {
                     rangelength: "Please Inset a valid postcode",
-
-
-                }
+                },
             },
 
-            submitHandler: function(form) {
-                var data = new FormData(document.getElementById("editChildrenForm"));
+            submitHandler: function (form) {
+                var data = new FormData(
+                    document.getElementById("editChildrenForm")
+                );
                 $.ajax({
                     type: "POST",
                     url: "/updateEmployeeChildren",
                     data: data,
                     dataType: "json",
-                    async: false,
+
                     processData: false,
                     contentType: false,
-                }).done(function(data) {
+                }).then(function (data) {
                     console.log(data);
                     Swal.fire({
                         title: data.title,
-                        icon: 'success',
+                        icon: "success",
                         text: data.msg,
                         type: data.type,
-                            confirmButtonColor: '#3085d6',
-                        confirmButtonText: 'OK',
+                        confirmButtonColor: "#3085d6",
+                        confirmButtonText: "OK",
                         allowOutsideClick: false,
                         allowEscapeKey: false,
-                    }).then(function() {
-                        if (data.type == 'error') {
+                    }).then(function () {
+                        if (data.type == "error") {
                         } else {
                             location.reload();
                         }
                     });
                 });
-
-
-            }
-        });  
+            },
+        });
     });
 
-    
     childId = $("#childId").val();
 
     childIds = childId.split(",");
@@ -2921,7 +2824,7 @@ companion = ["1", "2", "3", "4"];
             id = $(this).data("id");
             var childrenData = getChildren(id);
 
-            childrenData.done(function (data) {
+            childrenData.then(function (data) {
                 child = data.data;
                 $("#idChildren").val(child.id);
 
@@ -2957,10 +2860,10 @@ companion = ["1", "2", "3", "4"];
             id = $(this).data("id");
             var childrenData = getChildren(id);
 
-            $('input').prop('disabled', true);
-            $('select').prop('disabled', true);
+            $("input").prop("disabled", true);
+            $("select").prop("disabled", true);
 
-            childrenData.done(function (data) {
+            childrenData.then(function (data) {
                 $("#viewChildren").hide();
                 child = data.data;
                 $("#DOB").val(child.DOB);
@@ -3007,10 +2910,10 @@ companion = ["1", "2", "3", "4"];
                         url: "/deleteChildren/" + id,
                         // dataType: "json",
                         data: { _method: "DELETE" },
-                        // async: false,
+
                         // processData: false,
                         // contentType: false,
-                    }).done(function (data) {
+                    }).then(function (data) {
                         swal({
                             title: data.title,
                             text: data.msg,
@@ -3058,20 +2961,18 @@ companion = ["1", "2", "3", "4"];
             [5, 10, 15, 20, "All"],
         ],
     });
-    $("#employeeAddress").removeAttr('width').DataTable({
-        responsive: false,
-        lengthMenu: [
-            [5, 10, 15, 20, -1],
-            [5, 10, 15, 20, "All"],
-        ],
-        columnDefs: [{ width: 4, targets: 1 }
+    $("#employeeAddress")
+        .removeAttr("width")
+        .DataTable({
+            responsive: false,
+            lengthMenu: [
+                [5, 10, 15, 20, -1],
+                [5, 10, 15, 20, "All"],
+            ],
+            columnDefs: [{ width: 4, targets: 1 }],
 
-        ],
-
-        fixedColumn: true,
-      
-        
-    });
+            fixedColumn: true,
+        });
 
     $("#siblingModalAdd").click(function (e) {
         $("input").prop("disabled", false);
@@ -3091,39 +2992,31 @@ companion = ["1", "2", "3", "4"];
                 .val($("#postcode").val())
                 .prop("readonly", true);
             $("#citysibling").val($("#city").val()).prop("readonly", true);
-            $("#statesibling")
-                .val($("#state").val())
-                .css({
-                    "pointer-events": "none",
-                    "touch-action": "none",
-                    background: "#e9ecef",
-                });
-            $("#countrysibling")
-                .val($("#country").val())
-                .css({
-                    "pointer-events": "none",
-                    "touch-action": "none",
-                    background: "#e9ecef",
-                });
+            $("#statesibling").val($("#state").val()).css({
+                "pointer-events": "none",
+                "touch-action": "none",
+                background: "#e9ecef",
+            });
+            $("#countrysibling").val($("#country").val()).css({
+                "pointer-events": "none",
+                "touch-action": "none",
+                background: "#e9ecef",
+            });
         } else {
             $("#address1sibling").val($("").val()).prop("readonly", false);
             $("#address2sibling").val($("").val()).prop("readonly", false);
             $("#postcodesibling").val($("").val()).prop("readonly", false);
             $("#citysibling").val($("").val()).prop("readonly", false);
-            $("#statesibling")
-                .val($("").val())
-                .css({
-                    "pointer-events": "auto",
-                    "touch-action": "auto",
-                    background: "#ffffff",
-                });
-            $("#countrysibling")
-                .val($("my").val())
-                .css({
-                    "pointer-events": "auto",
-                    "touch-action": "auto",
-                    background: "#ffffff",
-                });
+            $("#statesibling").val($("").val()).css({
+                "pointer-events": "auto",
+                "touch-action": "auto",
+                background: "#ffffff",
+            });
+            $("#countrysibling").val($("my").val()).css({
+                "pointer-events": "auto",
+                "touch-action": "auto",
+                background: "#ffffff",
+            });
         }
     });
 
@@ -3133,12 +3026,10 @@ companion = ["1", "2", "3", "4"];
             rules: {
                 firstName: {
                     required: true,
-                    
-                  },
+                },
                 lastName: {
                     required: true,
-                    
-                  },
+                },
                 DOB: "required",
                 gender: "required",
                 contactNo: {
@@ -3190,10 +3081,10 @@ companion = ["1", "2", "3", "4"];
                         url: "/addEmployeeSibling",
                         data: data,
                         dataType: "json",
-                        async: false,
+
                         processData: false,
                         contentType: false,
-                    }).done(function (data) {
+                    }).then(function (data) {
                         swal({
                             title: data.title,
                             text: data.msg,
@@ -3223,10 +3114,10 @@ companion = ["1", "2", "3", "4"];
                 url: "/updateEmployeeSibling",
                 data: data,
                 dataType: "json",
-                async: false,
+
                 processData: false,
                 contentType: false,
-            }).done(function (data) {
+            }).then(function (data) {
                 // console.log(data);
                 swal({
                     title: data.title,
@@ -3258,7 +3149,7 @@ companion = ["1", "2", "3", "4"];
             $("select").prop("disabled", false);
             var SiblingData = getSibling(id);
 
-            SiblingData.done(function (data) {
+            SiblingData.then(function (data) {
                 sibling = data.data;
                 $("#firstNameS").val(sibling.firstName);
                 $("#idSA").val(sibling.id);
@@ -3292,7 +3183,7 @@ companion = ["1", "2", "3", "4"];
             var SiblingData = getSibling(id);
             $("input").prop("disabled", true);
             $("select").prop("disabled", true);
-            SiblingData.done(function (data) {
+            SiblingData.then(function (data) {
                 console.log(data.data);
                 $("#viewSibling").hide();
                 sibling = data.data;
@@ -3338,10 +3229,10 @@ companion = ["1", "2", "3", "4"];
                         url: "/deleteSibling/" + id,
                         // dataType: "json",
                         data: { _method: "DELETE" },
-                        // async: false,
+
                         // processData: false,
                         // contentType: false,
-                    }).done(function (data) {
+                    }).then(function (data) {
                         swal({
                             title: data.title,
                             text: data.msg,
@@ -3394,12 +3285,10 @@ companion = ["1", "2", "3", "4"];
             rules: {
                 firstName: {
                     required: true,
-                    
-                  },
+                },
                 lastName: {
                     required: true,
-                    
-                  },
+                },
                 DOB: "required",
                 gender: {
                     required: false,
@@ -3417,7 +3306,7 @@ companion = ["1", "2", "3", "4"];
                 },
                 city: "required",
                 state: "required",
-                 idNo: {
+                idNo: {
                     required: true,
                     digits: true,
                     rangelength: [12, 12],
@@ -3429,9 +3318,7 @@ companion = ["1", "2", "3", "4"];
                 },
                 okuFile: {
                     required: true,
-
                 },
-              
             },
 
             messages: {
@@ -3456,52 +3343,51 @@ companion = ["1", "2", "3", "4"];
                 },
                 city: "Please Insert City",
                 state: "Please Choose State",
-                 idNo: {
+                idNo: {
                     required: "Please Insert New Identification Number",
                     digits: "Please Insert Correct Identification Number Without ' - ' or Space",
                     rangelength: "Please Insert Valid Identification Number",
                 },
-                okuCardNum:{
+                okuCardNum: {
                     required: "Please Insert OKU Card Number",
-                    rangelength: "Please Inset Valid Home Number"
-
+                    rangelength: "Please Inset Valid Home Number",
                 },
                 okuFile: {
                     required: "Please Insert OKU Attachment",
-
                 },
             },
-            submitHandler: function(form) {
-                var data = new FormData(document.getElementById("addParentForm"));
+            submitHandler: function (form) {
+                var data = new FormData(
+                    document.getElementById("addParentForm")
+                );
 
                 $.ajax({
                     type: "POST",
                     url: "/addEmployeeParent",
                     data: data,
                     dataType: "json",
-                    async: false,
+
                     processData: false,
                     contentType: false,
-                }).done(function(data) {
+                }).then(function (data) {
                     console.log(data);
                     Swal.fire({
                         title: data.title,
-                        icon: 'success',
+                        icon: "success",
                         text: data.msg,
                         type: data.type,
-                            confirmButtonColor: '#3085d6',
-                        confirmButtonText: 'OK',
+                        confirmButtonColor: "#3085d6",
+                        confirmButtonText: "OK",
                         allowOutsideClick: false,
                         allowEscapeKey: false,
-                    }).then(function() {
-                        if (data.type == 'error') {
-    
+                    }).then(function () {
+                        if (data.type == "error") {
                         } else {
                             location.reload();
                         }
                     });
                 });
-            }
+            },
         });
     });
 
@@ -3513,23 +3399,22 @@ companion = ["1", "2", "3", "4"];
             url: "/updateEmployeeParent",
             data: data,
             dataType: "json",
-            async: false,
+
             processData: false,
             contentType: false,
-        }).done(function(data) {
+        }).then(function (data) {
             console.log(data);
             Swal.fire({
                 title: data.title,
-                icon: 'success',
+                icon: "success",
                 text: data.msg,
                 type: data.type,
-                    confirmButtonColor: '#3085d6',
-                confirmButtonText: 'OK',
+                confirmButtonColor: "#3085d6",
+                confirmButtonText: "OK",
                 allowOutsideClick: false,
                 allowEscapeKey: false,
-            }).then(function() {
-                if (data.type == 'error') {
-
+            }).then(function () {
+                if (data.type == "error") {
                 } else {
                     location.reload();
                 }
@@ -3549,7 +3434,7 @@ companion = ["1", "2", "3", "4"];
             id = $(this).data("id");
             var ParentData = getParent(id);
 
-            ParentData.done(function (data) {
+            ParentData.then(function (data) {
                 console.log(data.data);
                 parent = data.data;
                 $("#DOBP1").val(parent.DOB);
@@ -3586,7 +3471,7 @@ companion = ["1", "2", "3", "4"];
             $("input").prop("disabled", true);
             $("select").prop("disabled", true);
 
-            ParentData.done(function (data) {
+            ParentData.then(function (data) {
                 $("#viewParent").hide();
                 parent = data.data;
                 $("#DOBP").val(parent.DOB);
@@ -3623,7 +3508,7 @@ companion = ["1", "2", "3", "4"];
                         type: "POST",
                         url: "/deleteParent/" + id,
                         data: { _method: "DELETE" },
-                    }).done(function (data) {
+                    }).then(function (data) {
                         swal({
                             title: data.title,
                             text: data.msg,
@@ -3663,7 +3548,7 @@ companion = ["1", "2", "3", "4"];
         $("select").prop("disabled", false);
         // $('#vehicleType').val('');
 
-        vehicleData.done(function (data) {
+        vehicleData.then(function (data) {
             $("input").val("");
 
             vdata = data.data;
@@ -3686,7 +3571,7 @@ companion = ["1", "2", "3", "4"];
         $("input").prop("disabled", true);
         $("select").prop("disabled", true);
 
-        vehicleData.done(function (data) {
+        vehicleData.then(function (data) {
             $("input").val("");
             vdata = data.data;
             $("#vehicleType1").prop("selectedIndex", vdata.vehicle_type);
@@ -3712,10 +3597,10 @@ companion = ["1", "2", "3", "4"];
                     url: "/deleteVehicle/" + id,
                     // dataType: "json",
                     data: { _method: "DELETE" },
-                    // async: false,
+
                     // processData: false,
                     // contentType: false,
-                }).done(function (data) {
+                }).then(function (data) {
                     swal({
                         title: data.title,
                         text: data.msg,
@@ -3741,16 +3626,13 @@ companion = ["1", "2", "3", "4"];
         });
     }
 
-
-    
     $("#saveVehicle").click(function (e) {
         $("#addVehicleForm").validate({
-              // Specify validation rules
-              rules: {
+            // Specify validation rules
+            rules: {
                 //eclaimrecommender: "required",
                 vehicle_type: "required",
                 plate_no: "required",
-                
             },
 
             messages: {
@@ -3759,7 +3641,7 @@ companion = ["1", "2", "3", "4"];
                 plate_no: "Please Insert Plate Number",
             },
 
-            submitHandler: function (form) { 
+            submitHandler: function (form) {
                 requirejs(["sweetAlert2"], function (swal) {
                     var data = new FormData(
                         document.getElementById("addVehicleForm")
@@ -3770,10 +3652,10 @@ companion = ["1", "2", "3", "4"];
                         url: "/addEmployeeVehicle",
                         data: data,
                         dataType: "json",
-                        async: false,
+
                         processData: false,
                         contentType: false,
-                    }).done(function (data) {
+                    }).then(function (data) {
                         swal({
                             title: data.title,
                             text: data.msg,
@@ -3789,21 +3671,17 @@ companion = ["1", "2", "3", "4"];
                             }
                         });
                     });
-                });  
-             }
+                });
+            },
         });
-        
     });
-
-    
 
     $("#updateVehicle").click(function (e) {
         $("#updateVehicleForm").validate({
-              // Specify validation rules
-              rules: {
+            // Specify validation rules
+            rules: {
                 vehicle_type: "required",
                 plate_no: "required",
-                
             },
 
             messages: {
@@ -3811,7 +3689,7 @@ companion = ["1", "2", "3", "4"];
                 plate_no: "Please Insert Plate Number",
             },
 
-            submitHandler: function (form) { 
+            submitHandler: function (form) {
                 requirejs(["sweetAlert2"], function (swal) {
                     var data = new FormData(
                         document.getElementById("updateVehicleForm")
@@ -3822,10 +3700,10 @@ companion = ["1", "2", "3", "4"];
                         url: "/updateEmployeeVehicle",
                         data: data,
                         dataType: "json",
-                        async: false,
+
                         processData: false,
                         contentType: false,
-                    }).done(function (data) {
+                    }).then(function (data) {
                         swal({
                             title: data.title,
                             text: data.msg,
@@ -3841,24 +3719,20 @@ companion = ["1", "2", "3", "4"];
                             }
                         });
                     });
-                });  
-             }
+                });
+            },
         });
-        
     });
     ///////
-    
+
     $("#buttonhierarchy").click(function (e) {
         var id = $("#hierarchyid").val();
-        
+
         $("#updatehierarchy").validate({
-            
             // Specify validation rules
             rules: {
                 //eclaimrecommender: "required",
                 eclaimapprover: "required",
-                
-                
             },
 
             messages: {
@@ -3880,10 +3754,10 @@ companion = ["1", "2", "3", "4"];
                         url: "/updateclaimhierarchy/" + id,
                         data: data,
                         dataType: "json",
-                        async: false,
+
                         processData: false,
                         contentType: false,
-                    }).done(function (data) {
+                    }).then(function (data) {
                         swal({
                             title: data.title,
                             text: data.msg,
@@ -3903,22 +3777,17 @@ companion = ["1", "2", "3", "4"];
             },
         });
     });
-    
+
     $("#cahierarchybutton").click(function (e) {
         var id = $("#hierarchyid").val();
         //console.log(id);
         $("#updatecashhierarchy").validate({
-            
             // Specify validation rules
             rules: {
-                
                 caapprover: "required",
-                
-                
             },
 
             messages: {
-                
                 caapprover: "Pleace Choose Approver",
             },
 
@@ -3936,10 +3805,10 @@ companion = ["1", "2", "3", "4"];
                         url: "/updatecashhierarchy/" + id,
                         data: data,
                         dataType: "json",
-                        async: false,
+
                         processData: false,
                         contentType: false,
-                    }).done(function (data) {
+                    }).then(function (data) {
                         swal({
                             title: data.title,
                             text: data.msg,
@@ -3964,18 +3833,13 @@ companion = ["1", "2", "3", "4"];
         var id = $("#hierarchyid").val();
         //console.log(id);
         $("#updateeleavehierarchy").validate({
-            
             // Specify validation rules
             rules: {
-                
                 //eleaverecommender: "required",
                 eleaveapprover: "required",
-                
-                
             },
 
             messages: {
-                
                 //eleaverecommender: "Please Choose Recommender",
                 eleaveapprover: "Please Choose Approver",
             },
@@ -3994,10 +3858,10 @@ companion = ["1", "2", "3", "4"];
                         url: "/updateeleavehierarchy/" + id,
                         data: data,
                         dataType: "json",
-                        async: false,
+
                         processData: false,
                         contentType: false,
-                    }).done(function (data) {
+                    }).then(function (data) {
                         swal({
                             title: data.title,
                             text: data.msg,
@@ -4075,10 +3939,10 @@ companion = ["1", "2", "3", "4"];
                             url: "/updateEmployee",
                             data: data,
                             dataType: "json",
-                            async: false,
+
                             processData: false,
                             contentType: false,
-                        }).done(function (data) {
+                        }).then(function (data) {
                             console.log(data);
                             swal({
                                 title: data.title,
@@ -4158,10 +4022,10 @@ companion = ["1", "2", "3", "4"];
                             url: "/updateEmployee",
                             data: data,
                             dataType: "json",
-                            async: false,
+
                             processData: false,
                             contentType: false,
-                        }).done(function (data) {
+                        }).then(function (data) {
                             console.log(data);
                             swal({
                                 title: data.title,
@@ -4185,7 +4049,7 @@ companion = ["1", "2", "3", "4"];
     });
 
     //   oku checkbox myprofile
-    $(".okuCheck").click(function(){
+    $(".okuCheck").click(function () {
         if ($(this).prop("checked")) {
             $("#okucard").prop("readonly", false);
 
@@ -4193,9 +4057,7 @@ companion = ["1", "2", "3", "4"];
 
             $("#okuattach").css("pointer-events", "auto");
             // $("#okuattach").css("pointer-events", "none");
-            
         } else {
-            
             $("#okucard").prop("readonly", true);
             $("#okucard").val("");
 
@@ -4203,15 +4065,13 @@ companion = ["1", "2", "3", "4"];
             // $("#okuattach").css("pointer-events", "auto");
 
             $("#okuattach").prop("readonly", true);
-            $("#okuattach").val("")
-            
+            $("#okuattach").val("");
         }
-      });
+    });
 
-       //oku check companion
-       $(".okuCheck1").click(function(){
+    //oku check companion
+    $(".okuCheck1").click(function () {
         if ($(this).prop("checked")) {
-            
             $("#okucard1").prop("readonly", false);
 
             $("#okuattach1").prop("readonly", false);
@@ -4223,31 +4083,24 @@ companion = ["1", "2", "3", "4"];
             $("#okucard1").prop("readonly", true);
             $("#okucard1").val("");
 
-
-            
             // $("#okuattach").css("readonly", false);
             // $("#okuattach").css("pointer-events", "auto");
 
             $("#okuattach1").prop("readonly", true);
-            $("#okuattach1").val("")
-            
+            $("#okuattach1").val("");
         }
-      });
+    });
 
-
-      //oku check save companion
-      $(".okuCheck1s").click(function(){
+    //oku check save companion
+    $(".okuCheck1s").click(function () {
         if ($(this).prop("checked")) {
             $("#okucard1s").prop("readonly", false);
 
             $("#okuattach1s").prop("readonly", false);
 
-
             //  $("#okuattach").css("readonly", true);
             $("#okuattach1s").css("pointer-events", "auto");
-            
         } else {
-            
             $("#okucard1s").prop("readonly", true);
             $("#okucard1s").val("");
 
@@ -4255,82 +4108,74 @@ companion = ["1", "2", "3", "4"];
             // $("#okuattach").css("pointer-events", "auto");
 
             $("#okuattach1s").prop("readonly", true);
-            $("#okuattach1s").val("")
+            $("#okuattach1s").val("");
         }
-      });
+    });
 
-      //oku check add children
-      $(".okuCheck3").click(function () {
+    //oku check add children
+    $(".okuCheck3").click(function () {
         if ($(this).prop("checked")) {
             $("#okucard3").prop("readonly", false);
 
             $("#okuattach3").css("pointer-events", "auto");
             $("#okuattach3").prop("readonly", false);
-
         } else {
             $("#okucard3").prop("readonly", true);
             $("#okucard3").val("");
 
             $("#okuattach3").prop("readonly", true);
-            $("#okuattach3").val("")
-           
+            $("#okuattach3").val("");
         }
     });
 
-    
-      
-      //oku check update children
-      $(".okuCheck4").click(function(){
+    //oku check update children
+    $(".okuCheck4").click(function () {
         if ($(this).prop("checked")) {
-              
-            $('#okucard4').prop('readonly', false);
-            $('#okuattach4').css('pointer-events', 'auto');
+            $("#okucard4").prop("readonly", false);
+            $("#okuattach4").css("pointer-events", "auto");
             $("#okuattach4").prop("readonly", false);
         } else {
             $("#okucard4").prop("readonly", true);
             $("#okucard4").val("");
 
             $("#okuattach4").prop("readonly", true);
-            $("#okuattach4").val("")
+            $("#okuattach4").val("");
         }
-      });
+    });
 
-        //oku check add family
-      $(".okuCheck5").click(function(){
+    //oku check add family
+    $(".okuCheck5").click(function () {
         if ($(this).prop("checked")) {
-              
-             $("#okucard5").prop("readonly", false);
+            $("#okucard5").prop("readonly", false);
 
             $("#okuattach5").css("pointer-events", "auto");
             $("#okuattach5").prop("readonly", false);
         } else {
-             $("#okucard5").prop("readonly", true);
-            
+            $("#okucard5").prop("readonly", true);
 
             $("#okuattach5").prop("readonly", true);
             $("#okuattach5").val("");
-            $('#okucard5').val('').prop('disabled', true);
+            $("#okucard5").val("").prop("disabled", true);
         }
-      });
+    });
 
-        //oku check update family
+    //oku check update family
 
-      $(".okuCheck6").click(function(){
+    $(".okuCheck6").click(function () {
         if ($(this).prop("checked")) {
-              
-            $('#okucard6').prop('readonly', false);
-            $('#okuattach6').css('pointer-events', 'auto');
+            $("#okucard6").prop("readonly", false);
+            $("#okuattach6").css("pointer-events", "auto");
         } else {
-            $('#okucard6').prop('readonly', true);
-            $('#okuattach6').css('pointer-events', 'none');
+            $("#okucard6").prop("readonly", true);
+            $("#okuattach6").css("pointer-events", "none");
         }
-      });
+    });
 
-      //add child
+    //add child
     $(".partCheck6").click(function () {
         if ($(this).prop("checked")) {
             $("#idno6").prop("readonly", true);
-            
+
             $("#DOBaddparent").prop("readonly", false);
             $("#DOBaddparent").css("pointer-events", "auto");
             $("#idno6").val("");
@@ -4343,7 +4188,6 @@ companion = ["1", "2", "3", "4"];
 
             $("#passport6").prop("readonly", false);
             $("#passport6").css("pointer-events", "auto");
-
         } else {
             $("#idno6").prop("readonly", false);
             $("#DOBaddparent").prop("readonly", true);
@@ -4353,7 +4197,7 @@ companion = ["1", "2", "3", "4"];
             $("#passport6").val("");
             $("#passport6").prop("readonly", false);
             $("#passport6").css("pointer-events", "auto");
-            
+
             $("#expirydate6").val("");
             $("#expirydate6").prop("readonly", true);
             $("#expirydate6").css("pointer-events", "none");
@@ -4383,7 +4227,7 @@ companion = ["1", "2", "3", "4"];
             $("#issuingCountry6").val("");
         }
     });
-    
+
     $("#idno6").change(function () {
         if ($(this).val().length == 12) {
             var idn = $(this).val();
@@ -4414,7 +4258,7 @@ companion = ["1", "2", "3", "4"];
             var year = idn.substring(0, 2);
 
             var cutoff = new Date().getFullYear() - 2000; //2022-2000=22cutoff
-           
+
             var ww = (year > cutoff ? "19" : "20") + year;
             var currentAge = new Date().getFullYear() - ww;
             $("#age6").val(currentAge);
@@ -4438,7 +4282,6 @@ companion = ["1", "2", "3", "4"];
                 background: "#ffffff",
             });
             $("#issuingCountry7").css("pointer-events", "none");
-
         } else {
             $("#idno7").prop("readonly", false);
             $("#DOBP1").prop("readonly", true);
@@ -4454,7 +4297,6 @@ companion = ["1", "2", "3", "4"];
             });
             $("#age7").prop("readonly", true);
             $("#issuingCountry7").css("pointer-events", "none");
-
         }
     });
 
@@ -4475,9 +4317,6 @@ companion = ["1", "2", "3", "4"];
             $("#issuingCountry7").val("");
         }
     });
-
-
-    
 
     $("#idno7").change(function () {
         if ($(this).val().length == 12) {
@@ -4509,7 +4348,7 @@ companion = ["1", "2", "3", "4"];
             var year = idn.substring(0, 2);
 
             var cutoff = new Date().getFullYear() - 2000; //2022-2000=22cutoff
-           
+
             var ww = (year > cutoff ? "19" : "20") + year;
             var currentAge = new Date().getFullYear() - ww;
             $("#age7").val(currentAge);
@@ -4517,26 +4356,28 @@ companion = ["1", "2", "3", "4"];
     });
 });
 function dataURLtoFile(dataurl, filename) {
-    var arr = dataurl.split(','),
+    var arr = dataurl.split(","),
         mime = arr[0].match(/:(.*?);/)[1],
-        bstr = atob(arr[1]), 
-        n = bstr.length, 
+        bstr = atob(arr[1]),
+        n = bstr.length,
         u8arr = new Uint8Array(n);
-        
-    while(n--){
+
+    while (n--) {
         u8arr[n] = bstr.charCodeAt(n);
     }
-    
-    return new File([u8arr], filename, {type:mime});
+
+    return new File([u8arr], filename, { type: mime });
 }
 //console.log(file);
 
-$(document).on("click", "#uploadpicture", function() {
+$(document).on("click", "#uploadpicture", function () {
     var user_id = $("#user_id").val();
     var fileExtension = ".jpg";
     var filename = user_id + fileExtension;
-    var fileUpload = dataURLtoFile($("#result_image img").attr('src'), filename);
-
+    var fileUpload = dataURLtoFile(
+        $("#result_image img").attr("src"),
+        filename
+    );
 
     $("#profilepicform").validate({
         // Specify validation rules
@@ -4552,12 +4393,14 @@ $(document).on("click", "#uploadpicture", function() {
             // Add custom error messages for each form field
         },
 
-        submitHandler: function(form) {
-            requirejs(['sweetAlert2'], function(swal) {
-                var data = new FormData(document.getElementById("profilepicform"));
-                data.append('uploadFile', fileUpload)
-                console.log($("#result_image img").attr('src'))
-                var id = $('#user_id').val();
+        submitHandler: function (form) {
+            requirejs(["sweetAlert2"], function (swal) {
+                var data = new FormData(
+                    document.getElementById("profilepicform")
+                );
+                data.append("uploadFile", fileUpload);
+                console.log($("#result_image img").attr("src"));
+                var id = $("#user_id").val();
                 console.log(id);
                 $.ajax({
                     type: "POST",
@@ -4567,17 +4410,17 @@ $(document).on("click", "#uploadpicture", function() {
                     async: true,
                     processData: false,
                     contentType: false,
-                }).done(function(data) {
+                }).then(function (data) {
                     swal({
                         title: data.title,
                         text: data.msg,
                         type: data.type,
-                        confirmButtonColor: '#3085d6',
-                        confirmButtonText: 'OK',
+                        confirmButtonColor: "#3085d6",
+                        confirmButtonText: "OK",
                         allowOutsideClick: false,
                         allowEscapeKey: false,
-                    }).then(function() {
-                        if (data.type == 'error') {
+                    }).then(function () {
+                        if (data.type == "error") {
                             // Handle error condition
                         } else {
                             location.reload();
@@ -4585,22 +4428,20 @@ $(document).on("click", "#uploadpicture", function() {
                     });
                 });
             });
-        }
+        },
     });
 });
 
+// search bar in select box (eleave)
+$("#eleaverecommender").picker({ search: true });
+$("#eleaveapprover").picker({ search: true });
 
 // search bar in select box (eleave)
-$('#eleaverecommender').picker({ search: true });
-$('#eleaveapprover').picker({ search: true });
-
-// search bar in select box (eleave)
-$('#eclaimrecommender').picker({ search: true });
-$('#eclaimapprover').picker({ search: true });
+$("#eclaimrecommender").picker({ search: true });
+$("#eclaimapprover").picker({ search: true });
 
 // search bar in select box (Cash Advance)
-$('#caapprover').picker({ search: true });
-
+$("#caapprover").picker({ search: true });
 
 // search bar in select box (Employment Information)
 // $('#role').picker({ search: true });
@@ -4611,5 +4452,3 @@ $('#caapprover').picker({ search: true });
 // $('#jobGrade').picker({ search: true });
 // $('#designation').picker({ search: true });
 // $('#employmentType').picker({ search: true });
-
-

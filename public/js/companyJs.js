@@ -32,7 +32,7 @@ $(document).ready(function () {
         var id = $(this).data("id");
         var vehicleData = getCompany(id);
 
-        vehicleData.done(function (data) {
+        vehicleData.then(function (data) {
             $("#companyName").val(data.companyName);
             $("#companyCode").val(data.companyCode);
             $("#idC").val(data.id);
@@ -57,10 +57,10 @@ $(document).ready(function () {
                     url: "/deleteCompany/" + id,
                     // dataType: "json",
                     data: { _method: "DELETE" },
-                    // async: false,
+
                     // processData: false,
                     // contentType: false,
-                }).done(function (data) {
+                }).then(function (data) {
                     swal({
                         title: data.title,
                         text: data.msg,
@@ -109,10 +109,10 @@ $(document).ready(function () {
                         url: "/createCompany",
                         data: data,
                         dataType: "json",
-                        async: false,
+
                         processData: false,
                         contentType: false,
-                    }).done(function (data) {
+                    }).then(function (data) {
                         swal({
                             title: data.title,
                             text: data.msg,
@@ -157,10 +157,10 @@ $(document).ready(function () {
                         url: "/updateCompany/" + id,
                         data: data,
                         dataType: "json",
-                        async: false,
+
                         processData: false,
                         contentType: false,
-                    }).done(function (data) {
+                    }).then(function (data) {
                         swal({
                             title: data.title,
                             text: data.msg,

@@ -1,24 +1,23 @@
 $(document).ready(function () {
+    const checkbox = document.querySelector("#set-main1");
+    const input = document.querySelector("#disable_user");
 
-    const checkbox = document.querySelector('#set-main1');
-    const input = document.querySelector('#disable_user');
-
-    checkbox.addEventListener('change', function() {
+    checkbox.addEventListener("change", function () {
         if (this.checked) {
-            input.value = '1';
+            input.value = "1";
         } else {
-            input.value = '0';
+            input.value = "0";
         }
     });
 
-    const checkbox1 = document.querySelector('#set-main');
-    const input1 = document.querySelector('#notify_user');
+    const checkbox1 = document.querySelector("#set-main");
+    const input1 = document.querySelector("#notify_user");
 
-    checkbox1.addEventListener('change', function() {
+    checkbox1.addEventListener("change", function () {
         if (this.checked) {
-            input1.value = '1';
+            input1.value = "1";
         } else {
-            input1.value = '0';
+            input1.value = "0";
         }
     });
 
@@ -36,11 +35,11 @@ $(document).ready(function () {
         var id = $(this).data("id");
         var vehicleData = getEclaimGeneralById(id);
 
-        vehicleData.done(function (data) {
+        vehicleData.then(function (data) {
             $("#area_name").val(data.area_name);
             $("#idE").val(data.id);
         });
-        
+
         $("#editSubsistence").modal("show");
     });
 
@@ -65,51 +64,10 @@ $(document).ready(function () {
                         url: "/createSubsistance",
                         data: data,
                         dataType: "json",
-                        async: false,
-                        processData: false,
-                        contentType: false,
-                    }).done(function (data) {
-                        swal({
-                            title: data.title,
-                            text: data.msg,
-                            type: data.type,
-                            confirmButtonColor: "#3085d6",
-                            confirmButtonText: "OK",
-                            allowOutsideClick: false,
-                            allowEscapeKey: false,
-                        }).then(function () {
-                            if (data.type == "error") {
-                            } else {
-                                location.reload();
-                            }
-                        }); 
-                    });
-                });
-            },
-        });
-    });
- 
-    $("#editButton").click(function (e) {
-        $("#editAreaForm").validate({
-            rules: {},
-            messages: {},
-            submitHandler: function (form) {
-                console.log("asddsa");
-                requirejs(["sweetAlert2"], function (swal) {
-                    var data = new FormData(
-                        document.getElementById("editAreaForm")
-                    );
-                    var id = $("#idE").val();
 
-                    $.ajax({
-                        type: "POST",
-                        url: "/updateSubsistance/" + id,
-                        data: data,
-                        dataType: "json",
-                        async: false,
                         processData: false,
                         contentType: false,
-                    }).done(function (data) {
+                    }).then(function (data) {
                         swal({
                             title: data.title,
                             text: data.msg,
@@ -129,7 +87,48 @@ $(document).ready(function () {
             },
         });
     });
-    
+
+    $("#editButton").click(function (e) {
+        $("#editAreaForm").validate({
+            rules: {},
+            messages: {},
+            submitHandler: function (form) {
+                console.log("asddsa");
+                requirejs(["sweetAlert2"], function (swal) {
+                    var data = new FormData(
+                        document.getElementById("editAreaForm")
+                    );
+                    var id = $("#idE").val();
+
+                    $.ajax({
+                        type: "POST",
+                        url: "/updateSubsistance/" + id,
+                        data: data,
+                        dataType: "json",
+
+                        processData: false,
+                        contentType: false,
+                    }).then(function (data) {
+                        swal({
+                            title: data.title,
+                            text: data.msg,
+                            type: data.type,
+                            confirmButtonColor: "#3085d6",
+                            confirmButtonText: "OK",
+                            allowOutsideClick: false,
+                            allowEscapeKey: false,
+                        }).then(function () {
+                            if (data.type == "error") {
+                            } else {
+                                location.reload();
+                            }
+                        });
+                    });
+                });
+            },
+        });
+    });
+
     $("#generalButton").click(function (e) {
         $("#generalForm").validate({
             rules: {},
@@ -145,10 +144,10 @@ $(document).ready(function () {
                         url: "/updateEclaimSettingGeneral",
                         data: data,
                         dataType: "json",
-                        async: false,
+
                         processData: false,
                         contentType: false,
-                    }).done(function (data) {
+                    }).then(function (data) {
                         swal({
                             title: data.title,
                             text: data.msg,
@@ -186,10 +185,10 @@ $(document).ready(function () {
                     url: "/deleteSubsistance/" + id,
                     // dataType: "json",
                     data: { _method: "DELETE" },
-                    // async: false,
+
                     // processData: false,
                     // contentType: false,
-                }).done(function (data) {
+                }).then(function (data) {
                     swal({
                         title: data.title,
                         text: data.msg,

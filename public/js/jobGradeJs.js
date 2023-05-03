@@ -1,9 +1,7 @@
-$(document).ready(function() {
-
-    $("input[type=text]").keyup(function () {  
-        $(this).val($(this).val().toUpperCase());  
+$(document).ready(function () {
+    $("input[type=text]").keyup(function () {
+        $(this).val($(this).val().toUpperCase());
     });
-
 
     $("#datepicker-joindate").datepicker({
         todayHighlight: true,
@@ -18,28 +16,26 @@ $(document).ready(function() {
         ],
     });
 
-    $(document).on("click", "#addButton", function() {
-        $('#addModal').modal('show');
-
+    $(document).on("click", "#addButton", function () {
+        $("#addModal").modal("show");
     });
 
-    $(document).on("click", "#editButton", function() {
-        var id = $(this).data('id');
+    $(document).on("click", "#editButton", function () {
+        var id = $(this).data("id");
         var vehicleData = getJobGrade(id);
 
-        vehicleData.done(function(data) {
+        vehicleData.then(function (data) {
             console.log(data);
-            $('#jobGradeCode').val(data.jobGradeCode);
-            $('#jobGradeName').val(data.jobGradeName);
-            $('#idJ').val(data.id);
-        })
-        $('#editModal').modal('show');
-
+            $("#jobGradeCode").val(data.jobGradeCode);
+            $("#jobGradeName").val(data.jobGradeName);
+            $("#idJ").val(data.id);
+        });
+        $("#editModal").modal("show");
     });
 
-    $(document).on("click", "#deleteButton", function() {
-        id = $(this).data('id');
-        requirejs(['sweetAlert2'], function(swal) {
+    $(document).on("click", "#deleteButton", function () {
+        id = $(this).data("id");
+        requirejs(["sweetAlert2"], function (swal) {
             swal({
                 title: "Are you sure to delete Job Grade?",
                 type: "error",
@@ -47,28 +43,27 @@ $(document).ready(function() {
                 confirmButtonText: "Yes!",
                 showCancelButton: true,
                 allowOutsideClick: false,
-                allowEscapeKey: false
-            }).then(function() {
+                allowEscapeKey: false,
+            }).then(function () {
                 $.ajax({
                     type: "POST",
                     url: "/deleteJobGrade/" + id,
                     // dataType: "json",
                     data: { _method: "DELETE" },
-                    // async: false,
+
                     // processData: false,
                     // contentType: false,
-                }).done(function(data) {
+                }).then(function (data) {
                     swal({
                         title: data.title,
                         text: data.msg,
                         type: data.type,
-                        confirmButtonColor: '#3085d6',
-                        confirmButtonText: 'OK',
+                        confirmButtonColor: "#3085d6",
+                        confirmButtonText: "OK",
                         allowOutsideClick: false,
-                        allowEscapeKey: false
-                    }).then(function() {
-                        if (data.type == 'error') {
-
+                        allowEscapeKey: false,
+                    }).then(function () {
+                        if (data.type == "error") {
                         } else {
                             location.reload();
                         }
@@ -80,127 +75,101 @@ $(document).ready(function() {
 
     function getJobGrade(id) {
         return $.ajax({
-            url: "/getJobGradeById/" + id
+            url: "/getJobGradeById/" + id,
         });
     }
 
-
-    $('#saveButton').click(function(e) {
-
+    $("#saveButton").click(function (e) {
         $("#addForm").validate({
             // Specify validation rules
             rules: {
-                
-
                 jobGradeCode: "required",
-                jobGradeName:"required",
-                
-                
+                jobGradeName: "required",
             },
 
             messages: {
-               
                 jobGradeCode: "Please Insert Job Grade Code",
                 jobGradeName: "Please Insert Job Grade Name",
-               
             },
-            submitHandler: function(form) {
+            submitHandler: function (form) {
+                requirejs(["sweetAlert2"], function (swal) {
+                    var data = new FormData(document.getElementById("addForm"));
+                    // var data = $('#tree').jstree("get_selected");
 
-        requirejs(['sweetAlert2'], function(swal) {
+                    $.ajax({
+                        type: "POST",
+                        url: "/createJobGrade",
+                        data: data,
+                        dataType: "json",
 
-            var data = new FormData(document.getElementById("addForm"));
-            // var data = $('#tree').jstree("get_selected");
-
-            $.ajax({
-                type: "POST",
-                url: "/createJobGrade",
-                data: data,
-                dataType: "json",
-                async: false,
-                processData: false,
-                contentType: false,
-            }).done(function(data) {
-                swal({
-                    title: data.title,
-                    text: data.msg,
-                    type: data.type,
-                     confirmButtonColor: '#3085d6',
-                    confirmButtonText: 'OK',
-                    allowOutsideClick: false,
-                    allowEscapeKey: false,
-                }).then(function() {
-                    if (data.type == 'error') {
-
-                    } else {
-                        location.reload();
-                    }
-
+                        processData: false,
+                        contentType: false,
+                    }).then(function (data) {
+                        swal({
+                            title: data.title,
+                            text: data.msg,
+                            type: data.type,
+                            confirmButtonColor: "#3085d6",
+                            confirmButtonText: "OK",
+                            allowOutsideClick: false,
+                            allowEscapeKey: false,
+                        }).then(function () {
+                            if (data.type == "error") {
+                            } else {
+                                location.reload();
+                            }
+                        });
+                    });
                 });
-            });
-
-                });
-            }
+            },
         });
     });
 
-    $('#updateButton').click(function(e) {
-
+    $("#updateButton").click(function (e) {
         $("#editForm").validate({
             // Specify validation rules
             rules: {
-                
-
                 jobGradeCode: "required",
-                jobGradeName:"required",
-                
-                
+                jobGradeName: "required",
             },
 
             messages: {
-               
                 jobGradeCode: "Please Insert Job Grade Code",
                 jobGradeName: "Please Insert Job Grade Name",
-               
             },
-            submitHandler: function(form) {
+            submitHandler: function (form) {
+                requirejs(["sweetAlert2"], function (swal) {
+                    var data = new FormData(
+                        document.getElementById("editForm")
+                    );
+                    var id = $("#idJ").val();
 
-        requirejs(['sweetAlert2'], function(swal) {
+                    $.ajax({
+                        type: "POST",
+                        url: "/updateJobGrade/" + id,
+                        data: data,
+                        dataType: "json",
 
-            var data = new FormData(document.getElementById("editForm"));
-            var id = $('#idJ').val();
-
-            $.ajax({
-                type: "POST",
-                url: "/updateJobGrade/" + id,
-                data: data,
-                dataType: "json",
-                async: false,
-                processData: false,
-                contentType: false,
-            }).done(function(data) {
-                swal({
-                    title: data.title,
-                    text: data.msg,
-                    type: data.type,
-                     confirmButtonColor: '#3085d6',
-                    confirmButtonText: 'OK',
-                    allowOutsideClick: false,
-                    allowEscapeKey: false,
-                }).then(function() {
-                    if (data.type == 'error') {
-
-                    } else {
-                        location.reload();
-                    }
-
-
-
+                        processData: false,
+                        contentType: false,
+                    }).then(function (data) {
+                        swal({
+                            title: data.title,
+                            text: data.msg,
+                            type: data.type,
+                            confirmButtonColor: "#3085d6",
+                            confirmButtonText: "OK",
+                            allowOutsideClick: false,
+                            allowEscapeKey: false,
+                        }).then(function () {
+                            if (data.type == "error") {
+                            } else {
+                                location.reload();
+                            }
+                        });
+                    });
                 });
-            });
-
-                });
-            }
+            },
         });
     });
-
-    });
+});
