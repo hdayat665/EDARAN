@@ -849,11 +849,26 @@ if ($existingLogs->isNotEmpty()) {
         return '';
     }
 
+    // public function getLeavesByLotId($id)
+    // {
+    //     $ids = explode(',', $id);
+
+    //     $data = MyLeaveModel::whereIn('id', $ids)->get();
+
+    //     return $data;
+    // }
+
     public function getLeavesByLotId($id)
     {
         $ids = explode(',', $id);
 
-        $data = MyLeaveModel::whereIn('id', $ids)->get();
+      
+
+        $data = DB::table('myleave as a')
+        ->leftjoin('leave_types as b', 'a.lt_type_id', '=', 'b.id')
+        ->select('a.*', 'b.leave_types')
+        ->whereIn('a.id', $ids)
+        ->get();
 
         return $data;
     }

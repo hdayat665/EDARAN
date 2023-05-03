@@ -24,195 +24,187 @@ var handleCalendarDemo = function() {
     timesheetData.done(function(data) {
         // console.log(data);
         var event = [];
-        for (let i = 0; i < data['events'].length; i++) {
-            var events = data['events'][i];
+for (let i = 0; i < data['events'].length; i++) {
+    var events = data['events'][i];
 
-            var startDate = new Date(events['start_date']);
-            var startMonth = startDate.getMonth() + 1;
-            startMonth = startMonth < 10 ? "0" + startMonth : startMonth;
-            var startYear = startDate.getFullYear();
-            var startDay = startDate.getDate();
-            startDay = startDay < 10 ? "0" + startDay : startDay;
+    var startDate = new Date(events['start_date']);
+    var startMonth = startDate.getMonth() + 1;
+    startMonth = startMonth < 10 ? "0" + startMonth : startMonth;
+    var startYear = startDate.getFullYear();
+    var startDay = startDate.getDate();
+    startDay = startDay < 10 ? "0" + startDay : startDay;
+    
+    var endDate = new Date(events['end_date']);
+    endDate.setDate(endDate.getDate() + 1); // add one day to end date
+    var endMonth = endDate.getMonth() + 1;
+    endMonth = endMonth < 10 ? "0" + endMonth : endMonth;
+    var endYear = endDate.getFullYear();
+    var endDay = endDate.getDate();
+    endDay = endDay < 10 ? "0" + endDay : endDay;
+    
+    event.push({
+        title: "Event: " + events['event_name'] + "\n" + "from " + events['start_time'] + " to " + events['end_time'],
+        start: startYear + '-' + startMonth + '-' + startDay,
+        end: endYear + '-' + endMonth + '-' + endDay,
+        color: '#2AAA8A',
+        extendedProps: {
+            type: 'event',
+            eventId: events['id']
+        }
+    });
+    
+}
 
-            var endDate = new Date(events['end_date']);
-            var endMonth = endDate.getMonth() + 1;
-            endMonth = endMonth < 10 ? "0" + endMonth : endMonth;
-            var endYear = endDate.getFullYear();
-            var endDay = endDate.getDate();
-            endDay = endDay < 10 ? "0" + endDay : endDay;
+var log = [];
+var loghour = [];
+for (let i = 0; i < data['logs'].length; i++) {
+    var logs = data['logs'][i];
 
-            event.push({
-                // title: events['event_name'],
-                title: "Event: " + events['event_name'] + "\n" + "from " + events['start_time'] + " to " + events['end_time'],
-                start: startYear + '-' + startMonth + '-' + startDay,
-                end: endYear + '-' + endMonth + '-' + endDay,
-                color: app.color.red,
-                extendedProps: {
-                    type: 'event',
-                    eventId: events['id']
-                }
+    var startDate = new Date(logs['date']);
+    var startMonth = startDate.getMonth() + 1;
+    startMonth = startMonth < 10 ? "0" + startMonth : startMonth;
+    var startYear = startDate.getFullYear();
+    var startDay = startDate.getDate();
+    startDay = startDay < 10 ? "0" + startDay : startDay;
+    var startTime = logs['start_time'];
+    var time = startTime.split(":");
+    startTime = time[0] < 10 ? "0" + startTime : startTime;
 
-            });
+    var endDate = new Date(logs['end_date']);
+    var endMonth = endDate.getMonth();
+    endMonth = endMonth < 10 ? "0" + endMonth : endMonth;
+    var endYear = endDate.getFullYear();
+    var endDay = endDate.getDate();
+    endDay = endDay < 10 ? "0" + endDay : endDay;
+    // console.log(logs['total_hour']);
+   
+
+    function type_of_log(id) {
+        const data = {
+            '1': 'Home',
+            '2': 'Office',
+            '3': 'My Project',
+            '4': 'Others',
         }
 
-        var log = [];
-        for (let i = 0; i < data['logs'].length; i++) {
-            var logs = data['logs'][i];
+        return data[id];
+    }
 
-            var startDate = new Date(logs['date']);
-            var startMonth = startDate.getMonth() + 1;
-            startMonth = startMonth < 10 ? "0" + startMonth : startMonth;
-            var startYear = startDate.getFullYear();
-            var startDay = startDate.getDate();
-            startDay = startDay < 10 ? "0" + startDay : startDay;
-            var startTime = logs['start_time'];
-            var time = startTime.split(":");
-            startTime = time[0] < 10 ? "0" + startTime : startTime;
+    log.push({
+        title: (logs['type_of_log'] ? type_of_log(logs['type_of_log']) + ' ' : '') + "\n" +  (logs['project_name'] ? logs['project_name'] + ' ' : '') + "\n" + (logs['activitynameas'] ? logs['activitynameas'] + ' ' : '') + "\n" +' from ' + logs['start_time'] + ' to ' + logs['end_time'],
+        // start: startYear + '-' + startMonth + '-' + startDay + 'T' + startTime + ':00',
+        start: startYear + '-' + startMonth + '-' + startDay,
+        color: app.color.primary,
+        extendedProps: {
+            type: 'log',
+            logId: logs['id']
+        }
+    });
 
-            var endDate = new Date(logs['end_time']);
-            var endMonth = endDate.getMonth();
-            endMonth = endMonth < 10 ? "0" + endMonth : endMonth;
-            var endYear = endDate.getFullYear();
-            var endDay = endDate.getDate();
-            endDay = endDay < 10 ? "0" + endDay : endDay;
+    loghour.push({
+        start: new Date(startYear, startMonth - 1, startDay),
+        end: new Date(endYear, endMonth - 1, endDay),
+        totalHour: logs['total_hour']
+      });
 
-            function type_of_log(id) {
-                const data = {
-                    '1': 'Home',
-                    '2': 'Office',
-                    '3': 'My Project',
-                    '4': 'Others',
-                }
+    
+}
 
-                return data[id];
-            }
-            
-            log.push({
-                // title: type_of_log(logs['type_of_log']),
-                // title: type_of_log(logs['type_of_log']) + ' ' + logs['start_time'],
-                title: (logs['type_of_log'] ? type_of_log(logs['type_of_log']) + ' ' : '') + "\n" +  (logs['project_name'] ? logs['project_name'] + ' ' : '') + "\n" + (logs['activitynameas'] ? logs['activitynameas'] + ' ' : '') + ' from ' + logs['start_time'] + ' to ' + logs['end_time'],
-                // start: startYear + '-' + startMonth + '-' + startDay + 'T' + startTime + ':00',
-                start: startYear + '-' + startMonth + '-' + startDay,
-                color: app.color.primary,
-                extendedProps: {
-                    type: 'log',
-                    logId: logs['id']
-                }
-            });
+var leave = [];
+var leavesdate = [];
+for (let i = 0; i < data['leaves'].length; i++) {
+    var leaves = data['leaves'][i];
 
-            var event = [];
-        for (let i = 0; i < data['events'].length; i++) {
-            var events = data['events'][i];
+    var startDate = new Date(leaves['start_date']);
+    var startMonth = startDate.getMonth() + 1;
+    startMonth = startMonth < 10 ? "0" + startMonth : startMonth;
+    var startYear = startDate.getFullYear();
+    var startDay = startDate.getDate();
+    startDay = startDay < 10 ? "0" + startDay : startDay;
 
-            var startDate = new Date(events['start_date']);
-            var startMonth = startDate.getMonth() + 1;
-            startMonth = startMonth < 10 ? "0" + startMonth : startMonth;
-            var startYear = startDate.getFullYear();
-            var startDay = startDate.getDate();
-            startDay = startDay < 10 ? "0" + startDay : startDay;
+    var endDate = new Date(leaves['end_date']);
+    var endMonth = endDate.getMonth() + 1;
+    endMonth = endMonth < 10 ? "0" + endMonth : endMonth;
+    var endYear = endDate.getFullYear();
+    var endDay = endDate.getDate();
+    endDay = endDay < 10 ? "0" + endDay : endDay;
 
-            var endDate = new Date(events['end_date']);
-            var endMonth = endDate.getMonth() + 1;
-            endMonth = endMonth < 10 ? "0" + endMonth : endMonth;
-            var endYear = endDate.getFullYear();
-            var endDay = endDate.getDate();
-            endDay = endDay < 10 ? "0" + endDay : endDay;
-
-            event.push({
-                // title: events['event_name'],
-                title: "Event: " + events['event_name'] + "\n" + "from " + events['start_time'] + " to " + events['end_time'],
-                start: startYear + '-' + startMonth + '-' + startDay,
-                end: endYear + '-' + endMonth + '-' + endDay,
-                color: app.color.red,
-                extendedProps: {
-                    type: 'event',
-                    eventId: events['id']
-                }
-
-            });
+    // console.log(leaves['reason'])
+    leave.push({
+        title:  leaves['leave_types'] + " : " + "\n" + leaves['reason'],
+        // title: "Event: " + events['event_name'] + "\n" + "from " + events['start_time'] + " to " + events['end_time'],
+        start: startYear + '-' + startMonth + '-' + startDay,
+        end: endYear + '-' + endMonth + '-' + endDay,
+        // color: app.color.green,
+        color: "#E0E0E0",
+        textColor: "black",
+        fontWeight: "bold",
+        extendedProps: {
+            type: 'leave',
+            leaveId: leaves['id']
         }
 
-        var leave = [];
-            for (let i = 0; i < data['leaves'].length; i++) {
-                var leaves = data['leaves'][i];
+    });
 
-                var startDate = new Date(leaves['start_date']);
-                var startMonth = startDate.getMonth() + 1;
-                startMonth = startMonth < 10 ? "0" + startMonth : startMonth;
-                var startYear = startDate.getFullYear();
-                var startDay = startDate.getDate();
-                startDay = startDay < 10 ? "0" + startDay : startDay;
+    leavesdate.push({
+        start: new Date(startYear, startMonth - 1, startDay),
+        end: new Date(endYear, endMonth - 1, endDay)
+    });
+    
+}
+var holiday = [];
+var holidayDates = [];
+for (let i = 0; i < data['holidays'].length; i++) {
+    var holidays = data['holidays'][i];
 
-                var endDate = new Date(leaves['end_date']);
-                var endMonth = endDate.getMonth() + 1;
-                endMonth = endMonth < 10 ? "0" + endMonth : endMonth;
-                var endYear = endDate.getFullYear();
-                var endDay = endDate.getDate();
-                endDay = endDay < 10 ? "0" + endDay : endDay;
+    var startDate = new Date(holidays['start_date']);
+    var startMonth = startDate.getMonth() + 1;
+    startMonth = startMonth < 10 ? "0" + startMonth : startMonth;
+    var startYear = startDate.getFullYear();
+    var startDay = startDate.getDate();
+    startDay = startDay < 10 ? "0" + startDay : startDay;
 
-                // console.log(leaves['reason'])
-                leave.push({
-                    title:  "test leaves",
-                    // title:  leaves['leave_types'] + " : " + "\n" + leaves['reason'],
-                    // title: "Event: " + events['event_name'] + "\n" + "from " + events['start_time'] + " to " + events['end_time'],
-                    start: startYear + '-' + startMonth + '-' + startDay,
-                    end: endYear + '-' + endMonth + '-' + endDay,
-                    // color: app.color.green,
-                    color: "#E0E0E0",
-                    textColor: "black",
-                    fontWeight: "bold",
-                    extendedProps: {
-                        type: 'leave',
-                        leaveId: leaves['id']
-                    }
+    var endDate = new Date(holidays['end_date']);
+    var endMonth = endDate.getMonth() + 1;
+    endMonth = endMonth < 10 ? "0" + endMonth : endMonth;
+    var endYear = endDate.getFullYear();
+    var endDay = endDate.getDate();
+    endDay = endDay < 10 ? "0" + endDay : endDay;
 
-                });
-                
-            }
-
-            // var holiday = [];
-            // for (let i = 0; i < data['holidays'].length; i++) {
-            //     var holidays = data['holidays'][i];
-            //     // console.log(data['holidays']);
-
-            //     var startDate = new Date(holidays['start_date']);
-            //     var startMonth = startDate.getMonth() + 1;
-            //     startMonth = startMonth < 10 ? "0" + startMonth : startMonth;
-            //     var startYear = startDate.getFullYear();
-            //     var startDay = startDate.getDate();
-            //     startDay = startDay < 10 ? "0" + startDay : startDay;
-
-            //     var endDate = new Date(holidays['end_date']);
-            //     var endMonth = endDate.getMonth() + 1;
-            //     endMonth = endMonth < 10 ? "0" + endMonth : endMonth;
-            //     var endYear = endDate.getFullYear();
-            //     var endDay = endDate.getDate();
-            //     endDay = endDay < 10 ? "0" + endDay : endDay;
-
-            //     // console.log(holidays['holiday_title'])
-            //     holiday.push({
-            //         title:  "test holiday",
-            //         start: startYear + '-' + startMonth + '-' + startDay,
-            //         end: endYear + '-' + endMonth + '-' + endDay,
-            //         color: app.color.yellow,
-            //         // color: "#E0E0E0",
-            //         textColor: "black",
-            //         fontWeight: "bold",
-            //         extendedProps: {
-            //             type: 'leave',
-            //             holidayId: leaves['id']
-            //         }
-
-            //     });
-                
-            // }
-
-
+    holiday.push({
+        title:  holidays['holiday_title'],
+        start: startYear + '-' + startMonth + '-' + startDay,
+        end: endYear + '-' + endMonth + '-' + endDay,
+        // color: app.color.yellow,
+        color: "#FFD580",
+        textColor: "black",
+        fontWeight: "bold",
+        extendedProps: {
+            type: 'holiday',
+            holidayId: holidays['id']
         }
-        dataEvent = event.concat(log);
+
+    });
+
+    holidayDates.push({
+        title:  holidays['holiday_title'],
+        start: new Date(startYear, startMonth - 1, startDay),
+        end: new Date(endYear, endMonth - 1, endDay)
+
+    });
+
+    
+    
+}
+
+        
+
+
+        
+             dataEvent = event.concat(log);
             dataleave = dataEvent.concat(leave);
-            // dataHoliday = dataleave.concat(holiday);
-        // console.log(dataholiday);
+            dataHoliday = dataleave.concat(holiday);
+            console.log(dataHoliday);
         var calendar = new FullCalendar.Calendar(calendarElm, { 
 
             datesSet: function(info) {
@@ -254,6 +246,34 @@ var handleCalendarDemo = function() {
                 }
 
             },
+
+            dayCellDidMount: function(info) {
+                var current = new Date(info.date);
+                var hasLog = false;
+                    
+                
+                for (let i = 0; i < holidayDates.length; i++) {
+                  if (current >= holidayDates[i].start && current <= holidayDates[i].end) { 
+                    $(info.el).css('background-color', '#FFD580');
+                    return;
+                  }
+                }
+                
+                for (let i = 0; i < leavesdate.length; i++) {
+                  if (current >= leavesdate[i].start && current <= leavesdate[i].end) { 
+                    $(info.el).css('background-color', '#E0E0E0');
+                    return;
+                  }
+                }
+                
+                if (info.date.getDay() === 0) { // Sunday
+                  $(info.el).css('background-color', '#87CEEB'); 
+                } else if (info.date.getDay() === 6) { // Saturday
+                  $(info.el).css('background-color', '#87CEEB'); 
+                } else {
+                  $(info.el).css('background-color', 'white');
+                }
+              },
 
 
             eventClick: function(info) {
@@ -424,7 +444,7 @@ var handleCalendarDemo = function() {
                     eventLimit: 6 // adjust to 6 only for timeGridWeek/timeGridDay
                 }
             },
-            events: dataleave,
+            events: dataHoliday,
             // [{
             //     title: 'EXAMPLE Log',
             //     start: year + '-' + month + '-02T06:00:00',
