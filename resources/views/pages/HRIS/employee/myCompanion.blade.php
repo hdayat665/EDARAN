@@ -71,7 +71,7 @@
                                     </div>
                                     <div class="col-sm-6">
                                         <label for="expirydate" class="form-label">Expiry Date*</label>
-                                        <input type="text" id="expirydatemc" name="expiryDate" value="{{ $companion->expiryDate ?? '' }}" placeholder="YYYY/MM/DD" class="form-control" aria-describedby="expirydate" style= "pointer-events: none;" disabled readonly>
+                                        <input type="text" id="expirydatemc" name="expiryDate" value="{{ $companion->expiryDate ?? '' }}" placeholder="YYYY/MM/DD" class="form-control" aria-describedby="expirydate" style= "pointer-events: none;"  readonly>
                                     </div>
                                 </div>
                             </div>
