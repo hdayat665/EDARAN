@@ -31,7 +31,9 @@ $(document).ready(function () {
                             );
                         });
                 });
-                $("#activeTable").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");
+            $("#activeTable").wrap(
+                "<div style='overflow:auto; width:100%;position:relative;'></div>"
+            );
         },
 
         dom: '<"dataTables_wrapper dt-bootstrap"<"row"<"col-xl-7 d-block d-sm-flex d-xl-block justify-content-center"<"d-block d-lg-inline-flex me-0 me-md-3"l><"d-block d-lg-inline-flex"B>><"col-xl-5 d-flex d-xl-block justify-content-center"fr>>t<"row"<"col-md-5"i><"col-md-7"p>>>',
@@ -85,7 +87,9 @@ $(document).ready(function () {
                             );
                         });
                 });
-                $("#recommendedtable").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");       
+            $("#recommendedtable").wrap(
+                "<div style='overflow:auto; width:100%;position:relative;'></div>"
+            );
         },
 
         dom: '<"dataTables_wrapper dt-bootstrap"<"row"<"col-xl-7 d-block d-sm-flex d-xl-block justify-content-center"<"d-block d-lg-inline-flex me-0 me-md-3"l><"d-block d-lg-inline-flex"B>><"col-xl-5 d-flex d-xl-block justify-content-center"fr>>t<"row"<"col-md-5"i><"col-md-7"p>>>',
@@ -136,7 +140,9 @@ $(document).ready(function () {
                             );
                         });
                 });
-                $("#amendtable").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");
+            $("#amendtable").wrap(
+                "<div style='overflow:auto; width:100%;position:relative;'></div>"
+            );
         },
 
         dom: '<"dataTables_wrapper dt-bootstrap"<"row"<"col-xl-7 d-block d-sm-flex d-xl-block justify-content-center"<"d-block d-lg-inline-flex me-0 me-md-3"l><"d-block d-lg-inline-flex"B>><"col-xl-5 d-flex d-xl-block justify-content-center"fr>>t<"row"<"col-md-5"i><"col-md-7"p>>>',
@@ -187,7 +193,9 @@ $(document).ready(function () {
                             );
                         });
                 });
-                $("#rejecttable").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");
+            $("#rejecttable").wrap(
+                "<div style='overflow:auto; width:100%;position:relative;'></div>"
+            );
         },
 
         dom: '<"dataTables_wrapper dt-bootstrap"<"row"<"col-xl-7 d-block d-sm-flex d-xl-block justify-content-center"<"d-block d-lg-inline-flex me-0 me-md-3"l><"d-block d-lg-inline-flex"B>><"col-xl-5 d-flex d-xl-block justify-content-center"fr>>t<"row"<"col-md-5"i><"col-md-7"p>>>',
@@ -224,8 +232,8 @@ $(document).ready(function () {
         $("#modalamend").modal("show");
     });
 
-    $("#filter").click(function(){ 
-    $("#filteronoff").toggle();
+    $("#filter").click(function () {
+        $("#filteronoff").toggle();
     });
 
     $("tfoot").each(function () {
@@ -245,10 +253,10 @@ $(document).ready(function () {
                     type: "POST",
                     url:
                         "/updateStatusClaim/" + id + "/" + status + "/" + stage,
-                    async: false,
+
                     processData: false,
                     contentType: false,
-                }).done(function (data) {
+                }).then(function (data) {
                     swal({
                         title: data.title,
                         text: data.msg,
@@ -298,10 +306,10 @@ $(document).ready(function () {
                             stage,
                         data: data,
                         dataType: "json",
-                        async: false,
+
                         processData: false,
                         contentType: false,
-                    }).done(function (data) {
+                    }).then(function (data) {
                         console.log(data);
                         swal({
                             title: data.title,
@@ -323,9 +331,8 @@ $(document).ready(function () {
         });
     });
 
-    $('#approveAllButton').click(function(e) {
-        requirejs(['sweetAlert2'], function(swal) {
-
+    $("#approveAllButton").click(function (e) {
+        requirejs(["sweetAlert2"], function (swal) {
             var data = new FormData(document.getElementById("approveAllForm"));
 
             $.ajax({
@@ -333,27 +340,23 @@ $(document).ready(function () {
                 url: "/approveAllClaim",
                 data: data,
                 dataType: "json",
-                async: false,
+
                 processData: false,
                 contentType: false,
-            }).done(function(data) {
+            }).then(function (data) {
                 swal({
                     title: data.title,
                     text: data.msg,
                     type: data.type,
-                    confirmButtonColor: '#3085d6',
-                    confirmButtonText: 'OK'
-                }).then(function() {
-                    if (data.type == 'error') {
-
+                    confirmButtonColor: "#3085d6",
+                    confirmButtonText: "OK",
+                }).then(function () {
+                    if (data.type == "error") {
                     } else {
                         location.reload();
                     }
-
-
                 });
             });
-
         });
     });
     $("#amendButton").click(function (e) {
@@ -383,10 +386,10 @@ $(document).ready(function () {
                             stage,
                         data: data,
                         dataType: "json",
-                        async: false,
+
                         processData: false,
                         contentType: false,
-                    }).done(function (data) {
+                    }).then(function (data) {
                         console.log(data);
                         swal({
                             title: data.title,

@@ -1,6 +1,6 @@
-$(document).ready(function() {
-    $("#tenantNameSubmit").click(function(e) {
-        requirejs(["sweetAlert2"], function(swal) {
+$(document).ready(function () {
+    $("#tenantNameSubmit").click(function (e) {
+        requirejs(["sweetAlert2"], function (swal) {
             var data = new FormData(document.getElementById("submitForm"));
 
             $.ajax({
@@ -8,10 +8,10 @@ $(document).ready(function() {
                 url: "/checkTenant",
                 data: data,
                 dataType: "json",
-                async: false,
+
                 processData: false,
                 contentType: false,
-            }).done(function(data) {
+            }).then(function (data) {
                 console.log(data);
                 swal({
                     title: data.title,
@@ -21,8 +21,9 @@ $(document).ready(function() {
                     confirmButtonText: "OK",
                     allowOutsideClick: false,
                     allowEscapeKey: false,
-                }).then(function() {
-                    if (data.type == "error") {} else {
+                }).then(function () {
+                    if (data.type == "error") {
+                    } else {
                         $("#exampleModal").modal("hide");
                         document.getElementById("tenant").textContent =
                             data.data;
@@ -33,7 +34,7 @@ $(document).ready(function() {
         });
     });
 
-    $("#login").click(function(e) {
+    $("#login").click(function (e) {
         $("#loginForm").validate({
             // Specify validation rules
             rules: {
@@ -47,7 +48,6 @@ $(document).ready(function() {
                     // by the built-in "email" rule
                     // email: true
                 },
-                
             },
 
             // Specify validation error messages
@@ -57,8 +57,8 @@ $(document).ready(function() {
             },
             // Make sure the form is submitted to the destination defined
             // in the "action" attribute of the form when valid
-            submitHandler: function(form) {
-                requirejs(["sweetAlert2"], function(swal) {
+            submitHandler: function (form) {
+                requirejs(["sweetAlert2"], function (swal) {
                     var data = new FormData(
                         document.getElementById("loginForm")
                     );
@@ -68,10 +68,10 @@ $(document).ready(function() {
                         url: "/login/tenant",
                         data: data,
                         dataType: "json",
-                        async: false,
+
                         processData: false,
                         contentType: false,
-                    }).done(function(data) {
+                    }).then(function (data) {
                         // console.log(data);
                         swal({
                             title: data.title,
@@ -81,9 +81,9 @@ $(document).ready(function() {
                             confirmButtonText: "OK",
                             allowOutsideClick: false,
                             allowEscapeKey: false,
-                            
-                        }).then(function() {
-                            if (data.type == "error") {} else {
+                        }).then(function () {
+                            if (data.type == "error") {
+                            } else {
                                 window.location.href = "/dashboardTenant";
                             }
                         });
@@ -106,10 +106,10 @@ $(document).ready(function() {
     //             url: "/login/tenant",
     //             data: data,
     //             dataType: "json",
-    //             async: false,
+    //
     //             processData: false,
     //             contentType: false,
-    //         }).done(function(data) {
+    //         }).then(function(data) {
     //             // console.log(data);
     //             swal({
     //                 title: data.title,
@@ -131,7 +131,7 @@ $(document).ready(function() {
     //     });
     // });
 
-    $("#loginHost").click(function(e) {
+    $("#loginHost").click(function (e) {
         $("#loginHostForm").validate({
             // Specify validation rules
             rules: {
@@ -161,8 +161,8 @@ $(document).ready(function() {
             },
             // Make sure the form is submitted to the destination defined
             // in the "action" attribute of the form when valid
-            submitHandler: function(form) {
-                requirejs(["sweetAlert2"], function(swal) {
+            submitHandler: function (form) {
+                requirejs(["sweetAlert2"], function (swal) {
                     var data = new FormData(
                         document.getElementById("loginHostForm")
                     );
@@ -172,10 +172,10 @@ $(document).ready(function() {
                         url: "/login/host",
                         data: data,
                         dataType: "json",
-                        async: false,
+
                         processData: false,
                         contentType: false,
-                    }).done(function(data) {
+                    }).then(function (data) {
                         // console.log(data);
                         swal({
                             title: data.title,
@@ -185,8 +185,9 @@ $(document).ready(function() {
                             confirmButtonText: "OK",
                             allowOutsideClick: false,
                             allowEscapeKey: false,
-                        }).then(function() {
-                            if (data.type == "error") {} else {
+                        }).then(function () {
+                            if (data.type == "error") {
+                            } else {
                                 window.location.href = "/dashboardHost";
                             }
                         });
@@ -196,10 +197,11 @@ $(document).ready(function() {
         });
     });
 
-    $('#forgotPassEmail').click(function(e) {
-        requirejs(['sweetAlert2'], function(swal) {
-
-            var data = new FormData(document.getElementById("forgotPassEmailForm"));
+    $("#forgotPassEmail").click(function (e) {
+        requirejs(["sweetAlert2"], function (swal) {
+            var data = new FormData(
+                document.getElementById("forgotPassEmailForm")
+            );
             // var data = $('#tree').jstree("get_selected");
 
             $.ajax({
@@ -207,34 +209,30 @@ $(document).ready(function() {
                 url: "/forgotPassEmail",
                 data: data,
                 dataType: "json",
-                async: false,
+
                 processData: false,
                 contentType: false,
-            }).done(function(data) {
+            }).then(function (data) {
                 console.log(data);
                 swal({
                     title: data.title,
                     text: data.msg,
                     type: data.type,
-                     confirmButtonColor: '#3085d6',
-                    confirmButtonText: 'OK',
+                    confirmButtonColor: "#3085d6",
+                    confirmButtonText: "OK",
                     allowOutsideClick: false,
                     allowEscapeKey: false,
-                }).then(function() {
-                    if (data.type == 'error') {
-
+                }).then(function () {
+                    if (data.type == "error") {
                     } else {
                         location.reload();
                     }
-
-
                 });
             });
-
         });
     });
 
-    $("#activationButton").click(function(e) {
+    $("#activationButton").click(function (e) {
         $("#activationForm").validate({
             // Specify validation rules
             rules: {
@@ -259,8 +257,8 @@ $(document).ready(function() {
             },
             // Make sure the form is submitted to the destination defined
             // in the "action" attribute of the form when valid
-            submitHandler: function(form) {
-                requirejs(["sweetAlert2"], function(swal) {
+            submitHandler: function (form) {
+                requirejs(["sweetAlert2"], function (swal) {
                     var data = new FormData(
                         document.getElementById("activationForm")
                     );
@@ -270,10 +268,10 @@ $(document).ready(function() {
                         url: "/activationEmail",
                         data: data,
                         dataType: "json",
-                        async: false,
+
                         processData: false,
                         contentType: false,
-                    }).done(function(data) {
+                    }).then(function (data) {
                         // console.log(data);
                         swal({
                             title: data.title,
@@ -283,8 +281,9 @@ $(document).ready(function() {
                             confirmButtonText: "OK",
                             allowOutsideClick: false,
                             allowEscapeKey: false,
-                        }).then(function() {
-                            if (data.type == "error") {} else {
+                        }).then(function () {
+                            if (data.type == "error") {
+                            } else {
                                 window.location.href = "/";
                             }
                         });

@@ -1,68 +1,81 @@
-$(document).ready(function () { 
+$(document).ready(function () {
     $("#datepicker-joindate").datepicker({
         todayHighlight: true,
         autoclose: true,
     });
 
-    
-  $("#customerTable").DataTable({
-          responsive: false,
-          lengthMenu: [
+    $("#customerTable").DataTable({
+        responsive: false,
+        lengthMenu: [
             [5, 10, 25, 50, -1],
             [5, 10, 25, 50, "All"],
-          ],
+        ],
         // scrollX:true,
-        });
-        
-        $(document).ready(function () {
+    });
+
+    $(document).ready(function () {
         table.on("draw.dt", function () {
-          $(".statusCheck").off("change").on("change", function () {
-            var id = $(this).data("id");
-            var status;
-      
-            if ($(this).is(":checked")) {
-              status = 1;
-            } else {
-              status = 2;
-            }
-      
-            requirejs(["sweetAlert2"], function (swal) {
-                $.ajax({
-                    type: "POST",
-                    url: "/updateStatusCustomer/" + id + "/" + status,
-                    async: false,
-                    processData: false,
-                    contentType: false,
-                }).done(function (data) {
-                    swal({
-                        title: data.title,
-                        text: data.msg,
-                        type: data.type,
-                        confirmButtonColor: "#3085d6",
-                        confirmButtonText: "OK",
-                        allowOutsideClick: false,
-                        allowEscapeKey: false,
-                    }).then(function () {
-                        if (data.type == "error") {
-                        } else {
-                            location.reload();
-                        }
+            $(".statusCheck")
+                .off("change")
+                .on("change", function () {
+                    var id = $(this).data("id");
+                    var status;
+
+                    if ($(this).is(":checked")) {
+                        status = 1;
+                    } else {
+                        status = 2;
+                    }
+
+                    requirejs(["sweetAlert2"], function (swal) {
+                        $.ajax({
+                            type: "POST",
+                            url: "/updateStatusCustomer/" + id + "/" + status,
+
+                            processData: false,
+                            contentType: false,
+                        }).then(function (data) {
+                            swal({
+                                title: data.title,
+                                text: data.msg,
+                                type: data.type,
+                                confirmButtonColor: "#3085d6",
+                                confirmButtonText: "OK",
+                                allowOutsideClick: false,
+                                allowEscapeKey: false,
+                            }).then(function () {
+                                if (data.type == "error") {
+                                } else {
+                                    location.reload();
+                                }
+                            });
+                        });
                     });
                 });
-            });
-          });
         });
-      
-        $("#customerTable").on("responsive-display", function (e, datatable, row, showHide, update) {
-          if (showHide) {
-            $(row.child()[0]).find("input.statusCheck").prop("checked", $(row.node()).find("input.statusCheck").prop("checked"));
-            $(row.child()[0]).find("input.statusCheck").off("change").on("change", function () {
-              $(".statusCheck").trigger("change");
-            });
-          }
-        });
-      });
-      
+
+        $("#customerTable").on(
+            "responsive-display",
+            function (e, datatable, row, showHide, update) {
+                if (showHide) {
+                    $(row.child()[0])
+                        .find("input.statusCheck")
+                        .prop(
+                            "checked",
+                            $(row.node())
+                                .find("input.statusCheck")
+                                .prop("checked")
+                        );
+                    $(row.child()[0])
+                        .find("input.statusCheck")
+                        .off("change")
+                        .on("change", function () {
+                            $(".statusCheck").trigger("change");
+                        });
+                }
+            }
+        );
+    });
 
     $(document).on("click", "#addButton", function () {
         $("#addModal").modal("show");
@@ -72,7 +85,7 @@ $(document).ready(function () {
         var id = $(this).data("id");
         var vehicleData = getData(id);
 
-        vehicleData.done(function (data) {
+        vehicleData.then(function (data) {
             console.log(data);
             $("#customer_name").val(data.customer_name);
             $("#address").val(data.address);
@@ -92,7 +105,7 @@ $(document).ready(function () {
         $("input").prop("disabled", true);
         $("select").prop("disabled", true);
 
-        vehicleData.done(function (data) {
+        vehicleData.then(function (data) {
             $("input").val("");
             vdata = data.data;
             $("#vehicleType1").prop("selectedIndex", vdata.vehicle_type);
@@ -122,10 +135,10 @@ $(document).ready(function () {
                     url: "/deleteCustomer/" + id,
                     // dataType: "json",
                     data: { _method: "DELETE" },
-                    // async: false,
+
                     // processData: false,
                     // contentType: false,
-                }).done(function (data) {
+                }).then(function (data) {
                     swal({
                         title: data.title,
                         text: data.msg,
@@ -151,15 +164,30 @@ $(document).ready(function () {
         });
     }
 
-    $.validator.addMethod("noSpecialChars", function(value, element) {
-        return this.optional(element) || /^[^A-Za-z!@#$%^&*()\-_+={}[\]\\|<>"'\/~`,.;: ]*$/.test(value);
-      }, "Special Characters, Spaces, and Alphabet Characters Are Not Allowed.");      
-      
-    $.validator.addMethod("email", function(value, element) {
-        // Email validation regex pattern
-        return this.optional(element) || /^[^\s@]+@[^\s@]+\.(?:com|net|org|edu|gov|mil|biz|info|name|museum|coop|aero|[a-z]{2})$/.test(value);
-      }, "Please Insert Valid Email Address");
+    $.validator.addMethod(
+        "noSpecialChars",
+        function (value, element) {
+            return (
+                this.optional(element) ||
+                /^[^A-Za-z!@#$%^&*()\-_+={}[\]\\|<>"'\/~`,.;: ]*$/.test(value)
+            );
+        },
+        "Special Characters, Spaces, and Alphabet Characters Are Not Allowed."
+    );
 
+    $.validator.addMethod(
+        "email",
+        function (value, element) {
+            // Email validation regex pattern
+            return (
+                this.optional(element) ||
+                /^[^\s@]+@[^\s@]+\.(?:com|net|org|edu|gov|mil|biz|info|name|museum|coop|aero|[a-z]{2})$/.test(
+                    value
+                )
+            );
+        },
+        "Please Insert Valid Email Address"
+    );
 
     $("#saveButton").click(function (e) {
         $("#addForm").validate({
@@ -169,23 +197,21 @@ $(document).ready(function () {
                 postcode: {
                     required: true,
                     digits: true,
-                    rangelength: [5, 5]
+                    rangelength: [5, 5],
                 },
                 city: "required",
                 state: "required",
                 country: "required",
-                phoneNo:  {
+                phoneNo: {
                     required: true,
                     digits: true,
-                    rangelength: [10, 11]
-                    
+                    rangelength: [10, 11],
                 },
 
-                email:{
+                email: {
                     required: true,
-                    email: true
+                    email: true,
                 },
-
             },
 
             messages: {
@@ -194,13 +220,12 @@ $(document).ready(function () {
                 phoneNo: {
                     required: "Please Insert Phone Number",
                     digits: "Please Insert Correct Phone Number Without ' - ' or Space",
-                    rangelength: "Please Insert Valid Phone Number"
-                    
+                    rangelength: "Please Insert Valid Phone Number",
                 },
-                postcode:  {
+                postcode: {
                     required: "Please Insert Postcode",
                     digits: "Please Insert Valid Postcode",
-                    rangelength: "Please Insert Valid Postcode"
+                    rangelength: "Please Insert Valid Postcode",
                 },
                 city: "Please Insert City",
                 state: "Please Insert State",
@@ -208,9 +233,7 @@ $(document).ready(function () {
                 email: {
                     required: "Please Insert Email Customer",
                     email: "Please Insert Valid Email Address",
-                    
                 },
-
             },
             submitHandler: function (form) {
                 requirejs(["sweetAlert2"], function (swal) {
@@ -222,10 +245,10 @@ $(document).ready(function () {
                         url: "/createCustomer",
                         data: data,
                         dataType: "json",
-                        async: false,
+
                         processData: false,
                         contentType: false,
-                    }).done(function (data) {
+                    }).then(function (data) {
                         swal({
                             title: data.title,
                             text: data.msg,
@@ -245,7 +268,7 @@ $(document).ready(function () {
             },
         });
     });
-    
+
     $("#updateButton").click(function (e) {
         $("#editForm").validate({
             rules: {
@@ -254,23 +277,21 @@ $(document).ready(function () {
                 postcode: {
                     required: true,
                     digits: true,
-                    rangelength: [5, 5]
+                    rangelength: [5, 5],
                 },
                 city: "required",
                 state: "required",
                 country: "required",
-                phoneNo:  {
+                phoneNo: {
                     required: true,
                     digits: true,
-                    rangelength: [10, 11]
-                    
+                    rangelength: [10, 11],
                 },
 
-                email:{
+                email: {
                     required: true,
-                    email: true
+                    email: true,
                 },
-
             },
 
             messages: {
@@ -279,13 +300,12 @@ $(document).ready(function () {
                 phoneNo: {
                     required: "Please Insert Phone Number",
                     digits: "Please Insert Correct Phone Number Without ' - ' or Space",
-                    rangelength: "Please Insert Valid Phone Number"
-                    
+                    rangelength: "Please Insert Valid Phone Number",
                 },
-                postcode:  {
+                postcode: {
                     required: "Please Insert Postcode",
                     digits: "Please Insert Valid Postcode",
-                    rangelength: "Please Insert Valid Postcode"
+                    rangelength: "Please Insert Valid Postcode",
                 },
                 city: "Please Insert City",
                 state: "Please Insert State",
@@ -293,9 +313,7 @@ $(document).ready(function () {
                 email: {
                     required: "Please Insert Email Customer",
                     email: "Please Insert Valid Email Address",
-                    
                 },
-
             },
 
             submitHandler: function (form) {
@@ -311,10 +329,10 @@ $(document).ready(function () {
                         url: "/updateCustomer/" + id,
                         data: data,
                         dataType: "json",
-                        async: false,
+
                         processData: false,
                         contentType: false,
-                    }).done(function (data) {
+                    }).then(function (data) {
                         swal({
                             title: data.title,
                             text: data.msg,
@@ -336,8 +354,6 @@ $(document).ready(function () {
     });
 
     $(".statusCheck").on("change", function () {
-        
-
         var id = $(this).data("id");
         var status;
 
@@ -350,10 +366,10 @@ $(document).ready(function () {
             $.ajax({
                 type: "POST",
                 url: "/updateStatusCustomer/" + id + "/" + status,
-                async: false,
+
                 processData: false,
                 contentType: false,
-            }).done(function (data) {
+            }).then(function (data) {
                 swal({
                     title: data.title,
                     text: data.msg,

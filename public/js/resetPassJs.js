@@ -1,6 +1,5 @@
-$(document).ready(function() {
-
-    $("#resetPass").click(function(e) {
+$(document).ready(function () {
+    $("#resetPass").click(function (e) {
         $("#resetPassForm").validate({
             // Specify validation rules
             rules: {
@@ -11,8 +10,8 @@ $(document).ready(function() {
                 confirm_password: "required",
                 password: {
                     required: true,
-                    minlength: 5
-                }
+                    minlength: 5,
+                },
             },
 
             // Specify validation error messages
@@ -25,8 +24,8 @@ $(document).ready(function() {
             },
             // Make sure the form is submitted to the destination defined
             // in the "action" attribute of the form when valid
-            submitHandler: function(form) {
-                requirejs(["sweetAlert2"], function(swal) {
+            submitHandler: function (form) {
+                requirejs(["sweetAlert2"], function (swal) {
                     var data = new FormData(
                         document.getElementById("resetPassForm")
                     );
@@ -35,10 +34,10 @@ $(document).ready(function() {
                         url: "/ajaxResetPass",
                         data: data,
                         dataType: "json",
-                        async: false,
+
                         processData: false,
                         contentType: false,
-                    }).done(function(data) {
+                    }).then(function (data) {
                         // console.log(data);
                         swal({
                             title: data.title,
@@ -48,8 +47,9 @@ $(document).ready(function() {
                             confirmButtonText: "OK",
                             allowOutsideClick: false,
                             allowEscapeKey: false,
-                        }).then(function() {
-                            if (data.type == "error") {} else {
+                        }).then(function () {
+                            if (data.type == "error") {
+                            } else {
                                 window.location.href = "/loginTenant";
                             }
                         });

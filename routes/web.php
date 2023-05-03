@@ -191,6 +191,7 @@ Route::group(['middleware' => ['web']], function () {
             Route::delete('/deleteCompanion/{id}', 'deleteCompanion');
             Route::post('/resetPassword', 'resetPassword');
             Route::get('/getCompanionById/{id}', 'getCompanionById');
+            Route::get('/getUserWithSelectedUser/{id}', 'getUserWithSelectedUser');
         });
 
         Route::controller(EmployeeController::class)->group(function () {
@@ -227,7 +228,7 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('/updateclaimhierarchy/{id}', 'updateclaimhierarchy');
             Route::post('/updatecashhierarchy/{id}', 'updatecashhierarchy');
             Route::post('/updateeleavehierarchy/{id}', 'updateeleavehierarchy');
-            
+
             Route::get('/getEmployeeAddressforCompanion/{id}', 'getEmployeeAddressforCompanion');
 
             Route::post('/addEmployeeEducation', 'addEmployeeEducation');

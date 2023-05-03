@@ -1,33 +1,30 @@
-
-$(document).ready(function() {
-
+$(document).ready(function () {
     // google map
-    
-    $(".partCheck").click(function(){
-        if ($(this).prop("checked")) {
-            $('#exitdatediv').show();
-            $('#exitdatediv1').show();
-        } else {
-            $('#exitdatediv').hide(); 
-            $('#exitdatediv1').hide();
-        }
-      });
 
-    $("input[type=text]").keyup(function() {
+    $(".partCheck").click(function () {
+        if ($(this).prop("checked")) {
+            $("#exitdatediv").show();
+            $("#exitdatediv1").show();
+        } else {
+            $("#exitdatediv").hide();
+            $("#exitdatediv1").hide();
+        }
+    });
+
+    $("input[type=text]").keyup(function () {
         $(this).val($(this).val().toUpperCase());
     });
 
-    $('#location-search').picker({
-        search:true,
+    $("#location-search").picker({
+        search: true,
     });
 
-    $('#location-search-edit').picker({
-        search:true,
-        
+    $("#location-search-edit").picker({
+        search: true,
     });
-    
-    $('#projectmember').picker({
-        search:true,
+
+    $("#projectmember").picker({
+        search: true,
     });
     // $('#employee_id').picker({
     //     search:true,
@@ -36,99 +33,111 @@ $(document).ready(function() {
     //     search:true,
     // });
 
-    $('#project_manager2').picker({
-        search:true,
+    // $("#project_manager2").picker({
+    //     search: true,
+    // });
+
+    $("#projectlocation").picker({
+        search: true,
     });
 
-    $('#projectlocation').picker({
-        search:true,
-    }); 
- 
     $("#joined_date").datepicker({
         todayHighlight: true,
         autoclose: true,
-        format: 'yyyy/mm/dd',
+        format: "yyyy/mm/dd",
     });
 
     $("#datepicker-joineddate").datepicker({
         todayHighlight: true,
         autoclose: true,
-        format: 'yyyy/mm/dd',
+        format: "yyyy/mm/dd",
     });
 
     $("#datepicker_exitdate").datepicker({
         todayHighlight: true,
         autoclose: true,
-        format: 'yyyy/mm/dd',
+        format: "yyyy/mm/dd",
     });
 
-    $('#data-table-prevproject').DataTable({
-        // scrollX: true, 
+    $("#data-table-prevproject").DataTable({
+        // scrollX: true,
         responsive: false,
         lengthMenu: [
-            [5, 10, 25, 50, -1],
-            [5, 10, 25, 50, "All"]
-        ], 
-        initComplete: function (settings, json) {  
-            $("#data-table-prevproject").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");            
-        },
-    });      
-
-    $('#projectLocationTable').DataTable({
-        responsive: false,
-        lengthMenu: [
-            [5, 10, 25, 50, -1],
-            [5, 10, 25, 50, "All"]
-        ], 
-        initComplete: function (settings, json) {  
-            $("#projectLocationTable").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");            
-        },
-    });   
-
-    $('#projectMemberTable').DataTable({
-        responsive: false,
-        lengthMenu: [
-            [5, 10, 25, 50, -1],
-            [5, 10, 25, 50, "All"]
-        ], 
-        initComplete: function (settings, json) {  
-            $("#projectMemberTable").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");            
-        },
-    }); 
-    
-    $('#projectMemberPrevTable').DataTable({
-        responsive: false,
-        lengthMenu: [
-            [5, 10, 25, 50, -1],
-            [5, 10, 25, 50, "All"]
-        ], 
-        initComplete: function (settings, json) {  
-            $("#projectMemberPrevTable").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");            
-        },
-    }); 
-    
-    $("#data-table-default2").DataTable({
-          responsive: false,
-          lengthMenu: [
             [5, 10, 25, 50, -1],
             [5, 10, 25, 50, "All"],
-          ],
-          scrollX:true,
-      });
+        ],
+        initComplete: function (settings, json) {
+            $("#data-table-prevproject").wrap(
+                "<div style='overflow:auto; width:100%;position:relative;'></div>"
+            );
+        },
+    });
 
-    var hash = location.hash.replace(/^#/, '');  // ^ means starting, meaning only match the first hash
+    $("#projectLocationTable").DataTable({
+        responsive: false,
+        lengthMenu: [
+            [5, 10, 25, 50, -1],
+            [5, 10, 25, 50, "All"],
+        ],
+        initComplete: function (settings, json) {
+            $("#projectLocationTable").wrap(
+                "<div style='overflow:auto; width:100%;position:relative;'></div>"
+            );
+        },
+    });
+
+    $("#projectMemberTable").DataTable({
+        responsive: false,
+        lengthMenu: [
+            [5, 10, 25, 50, -1],
+            [5, 10, 25, 50, "All"],
+        ],
+        initComplete: function (settings, json) {
+            $("#projectMemberTable").wrap(
+                "<div style='overflow:auto; width:100%;position:relative;'></div>"
+            );
+        },
+    });
+
+    $("#projectMemberPrevTable").DataTable({
+        responsive: false,
+        lengthMenu: [
+            [5, 10, 25, 50, -1],
+            [5, 10, 25, 50, "All"],
+        ],
+        initComplete: function (settings, json) {
+            $("#projectMemberPrevTable").wrap(
+                "<div style='overflow:auto; width:100%;position:relative;'></div>"
+            );
+        },
+    });
+
+    $("#data-table-default2").DataTable({
+        responsive: false,
+        lengthMenu: [
+            [5, 10, 25, 50, -1],
+            [5, 10, 25, 50, "All"],
+        ],
+        scrollX: true,
+    });
+
+    var hash = location.hash.replace(/^#/, ""); // ^ means starting, meaning only match the first hash
     if (hash) {
-        $('.nav-tabs a[href="#' + hash + '"]').tab('show');
-    } 
-    $('.nav-tabs a').on('shown.bs.tab', function (e) {
+        $('.nav-tabs a[href="#' + hash + '"]').tab("show");
+    }
+    $(".nav-tabs a").on("shown.bs.tab", function (e) {
         window.location.hash = e.target.hash;
-    })
+    });
     /////////////////////// START PROJECT /////////////////////
-    $.validator.addMethod("twoDecimalPlaces", function(value, element) {
-        return this.optional(element) || /^-?\d+(\.\d{1,2})?$/.test(value);
-    }, "Please Insert Value Up To 2 Decimal Places.");
+    $.validator.addMethod(
+        "twoDecimalPlaces",
+        function (value, element) {
+            return this.optional(element) || /^-?\d+(\.\d{1,2})?$/.test(value);
+        },
+        "Please Insert Value Up To 2 Decimal Places."
+    );
 
-    $('#updateProjectInfoButton').click(function(e) {
+    $("#updateProjectInfoButton").click(function (e) {
         $("#editProjectInfoForm").validate({
             rules: {
                 customer_id: "required",
@@ -136,7 +145,7 @@ $(document).ready(function() {
                 project_name: "required",
                 contract_value: {
                     required: true,
-                    twoDecimalPlaces: true
+                    twoDecimalPlaces: true,
                 },
                 financial_year: "required",
                 LOA_date: "required",
@@ -151,7 +160,7 @@ $(document).ready(function() {
                 project_code: "Please Insert Project Code",
                 project_name: "Please Insert Project Name",
                 contract_value: {
-                    required: "Please insert Contract Value"
+                    required: "Please insert Contract Value",
                 },
                 financial_year: "Please Choose Financial Year",
                 LOA_date: "Please Choose LOA Date",
@@ -160,50 +169,47 @@ $(document).ready(function() {
                 acc_manager: "Please Choose Account Manager",
                 status: "Please Choose Status",
             },
-            submitHandler: function(form) {
-                requirejs(['sweetAlert2'], function(swal) {
-
-                    var data = new FormData(document.getElementById("editProjectInfoForm"));
+            submitHandler: function (form) {
+                requirejs(["sweetAlert2"], function (swal) {
+                    var data = new FormData(
+                        document.getElementById("editProjectInfoForm")
+                    );
                     // var data = $('#tree').jstree("get_selected");
-                    var id = $('#idP').val();
+                    var id = $("#idP").val();
 
                     $.ajax({
                         type: "POST",
                         url: "/updateProject/" + id,
                         data: data,
                         dataType: "json",
-                        async: false,
+
                         processData: false,
                         contentType: false,
-                    }).done(function(data) {
+                    }).then(function (data) {
                         swal({
                             title: data.title,
                             text: data.msg,
                             type: data.type,
-                            confirmButtonColor: '#3085d6',
-                            confirmButtonText: 'OK',
+                            confirmButtonColor: "#3085d6",
+                            confirmButtonText: "OK",
                             allowOutsideClick: false,
                             allowEscapeKey: false,
-                        }).then(function() {
-                            if (data.type == 'error') {
-
+                        }).then(function () {
+                            if (data.type == "error") {
                             } else {
                                 location.reload();
-                                
-        
                             }
                         });
                     });
                 });
-            }
-                });      
-            });
-            
-            
+            },
+        });
+    });
+
     /////////////////////// END PROJECT /////////////////////
 
     /////////////////////// START PROJECT LOCATION /////////////////////
-    $('#saveProjectLocation').click(function(e) {
+    $("#saveProjectLocation").click(function (e) {
         $("#addProjectLocationForm").validate({
             rules: {
                 location_name: "required",
@@ -211,7 +217,7 @@ $(document).ready(function() {
                 postcode: {
                     required: true,
                     digits: true,
-                    rangelength: [5,5],
+                    rangelength: [5, 5],
                 },
                 city: "required",
                 state: "required",
@@ -230,10 +236,11 @@ $(document).ready(function() {
                 state: "Please Choose State",
                 location_google: "Please Choose Location",
             },
-            submitHandler: function(form) {
-                requirejs(['sweetAlert2'], function(swal) {
-
-                    var data = new FormData(document.getElementById("addProjectLocationForm"));
+            submitHandler: function (form) {
+                requirejs(["sweetAlert2"], function (swal) {
+                    var data = new FormData(
+                        document.getElementById("addProjectLocationForm")
+                    );
                     // var data = $('#tree').jstree("get_selected");
                     // var id = $('#idPC').val();
 
@@ -242,29 +249,25 @@ $(document).ready(function() {
                         url: "/createProjectLocation",
                         data: data,
                         dataType: "json",
-                        async: false,
+
                         processData: false,
                         contentType: false,
-                    }).done(function(data) {
+                    }).then(function (data) {
                         swal({
                             title: data.title,
                             text: data.msg,
                             type: data.type,
-                            confirmButtonColor: '#3085d6',
-                            confirmButtonText: 'OK',
+                            confirmButtonColor: "#3085d6",
+                            confirmButtonText: "OK",
                             allowOutsideClick: false,
                             allowEscapeKey: false,
-                        }).then(function() {
-                            if (data.type == 'error') {
-
+                        }).then(function () {
+                            if (data.type == "error") {
                             } else {
                                 location.reload();
                             }
-
-
                         });
                     });
-
                 });
             },
         });
@@ -273,51 +276,49 @@ $(document).ready(function() {
     const nextBtn = document.querySelectorAll(".btnNext");
     const prevBtn = document.querySelectorAll(".btnPrevious");
 
-    nextBtn.forEach(function(item, index){
-        item.addEventListener('click', function(){
-        let id = index + 1;
-        let tabElement = document.querySelectorAll("#myTab li a")[id];
-        var lastTab = new bootstrap.Tab(tabElement);
-        lastTab.show();   
+    nextBtn.forEach(function (item, index) {
+        item.addEventListener("click", function () {
+            let id = index + 1;
+            let tabElement = document.querySelectorAll("#myTab li a")[id];
+            var lastTab = new bootstrap.Tab(tabElement);
+            lastTab.show();
         });
     });
 
-    prevBtn.forEach(function(item, index){
-        item.addEventListener('click', function(){
-        let id = index;
-        let tabElement = document.querySelectorAll("#myTab li a")[id];
-        var lastTab = new bootstrap.Tab(tabElement);
-        lastTab.show();
+    prevBtn.forEach(function (item, index) {
+        item.addEventListener("click", function () {
+            let id = index;
+            let tabElement = document.querySelectorAll("#myTab li a")[id];
+            var lastTab = new bootstrap.Tab(tabElement);
+            lastTab.show();
         });
     });
-    
-    $(document).on("click", "#addProjectLocationButton", function() {
-        $('#addProjectLocationModal').modal('show');
 
+    $(document).on("click", "#addProjectLocationButton", function () {
+        $("#addProjectLocationModal").modal("show");
     });
 
-    $(document).on("click", "#editProjectLocationButton", function() {
-        var id = $(this).data('id');
+    $(document).on("click", "#editProjectLocationButton", function () {
+        var id = $(this).data("id");
         var locationData = getProjectLocations(id);
 
-        locationData.done(function(data) {
+        locationData.then(function (data) {
             console.log(data);
-            $('#location_name').val(data.location_name);
-            $('#address').val(data.address);
-            $('#address1').val(data.address2);
-            $('#postcode').val(data.postcode);
-            $('#idPL').val(data.id);
-            $('#city').val(data.city);
-            $('#state').val(data.state);
-            $('#location_google_2').val(data.location_google);
-            $('#latitude_2').val(data.latitude);
-            $('#longitude_2').val(data.longitude);
-        })
-        $('#editProjectLocationModal').modal('show');
-
+            $("#location_name").val(data.location_name);
+            $("#address").val(data.address);
+            $("#address1").val(data.address2);
+            $("#postcode").val(data.postcode);
+            $("#idPL").val(data.id);
+            $("#city").val(data.city);
+            $("#state").val(data.state);
+            $("#location_google_2").val(data.location_google);
+            $("#latitude_2").val(data.latitude);
+            $("#longitude_2").val(data.longitude);
+        });
+        $("#editProjectLocationModal").modal("show");
     });
 
-    $('#updateProjectLocation').click(function(e) {
+    $("#updateProjectLocation").click(function (e) {
         $("#editProjectLocationForm").validate({
             rules: {
                 location_name: "required",
@@ -325,7 +326,7 @@ $(document).ready(function() {
                 postcode: {
                     required: true,
                     digits: true,
-                    rangelength: [5,5],
+                    rangelength: [5, 5],
                 },
                 city: "required",
                 state: "required",
@@ -344,49 +345,46 @@ $(document).ready(function() {
                 state: "Please Choose State",
                 location_google: "Please Choose Location",
             },
-            submitHandler: function(form) {
-                requirejs(['sweetAlert2'], function(swal) {
-
-                    var data = new FormData(document.getElementById("editProjectLocationForm"));
+            submitHandler: function (form) {
+                requirejs(["sweetAlert2"], function (swal) {
+                    var data = new FormData(
+                        document.getElementById("editProjectLocationForm")
+                    );
                     // var data = $('#tree').jstree("get_selected");
-                    var id = $('#idPL').val();
+                    var id = $("#idPL").val();
 
                     $.ajax({
                         type: "POST",
                         url: "/updateProjectLocation/" + id,
                         data: data,
                         dataType: "json",
-                        async: false,
+
                         processData: false,
                         contentType: false,
-                    }).done(function(data) {
+                    }).then(function (data) {
                         swal({
                             title: data.title,
                             text: data.msg,
                             type: data.type,
-                            confirmButtonColor: '#3085d6',
-                            confirmButtonText: 'OK',
+                            confirmButtonColor: "#3085d6",
+                            confirmButtonText: "OK",
                             allowOutsideClick: false,
                             allowEscapeKey: false,
-                        }).then(function() {
-                            if (data.type == 'error') {
-
+                        }).then(function () {
+                            if (data.type == "error") {
                             } else {
                                 location.reload();
                             }
-
-
                         });
                     });
-
                 });
             },
         });
     });
 
-    $(document).on("click", "#deleteProjectLocationButton", function() {
-        id = $(this).data('id');
-        requirejs(['sweetAlert2'], function(swal) {
+    $(document).on("click", "#deleteProjectLocationButton", function () {
+        id = $(this).data("id");
+        requirejs(["sweetAlert2"], function (swal) {
             swal({
                 title: "Are you sure to delete Project Location?",
                 type: "error",
@@ -394,28 +392,27 @@ $(document).ready(function() {
                 confirmButtonText: "Yes!",
                 showCancelButton: true,
                 allowOutsideClick: false,
-                allowEscapeKey: false
-            }).then(function() {
-                $.ajax({ 
+                allowEscapeKey: false,
+            }).then(function () {
+                $.ajax({
                     type: "POST",
                     url: "/deleteProjectLocation/" + id,
                     // dataType: "json",
                     data: { _method: "DELETE" },
-                    // async: false,
+
                     // processData: false,
                     // contentType: false,
-                }).done(function(data) {
+                }).then(function (data) {
                     swal({
                         title: data.title,
                         text: data.msg,
                         type: data.type,
-                        confirmButtonColor: '#3085d6',
-                        confirmButtonText: 'OK',
+                        confirmButtonColor: "#3085d6",
+                        confirmButtonText: "OK",
                         allowOutsideClick: false,
-                        allowEscapeKey: false
-                    }).then(function() {
-                        if (data.type == 'error') {
-
+                        allowEscapeKey: false,
+                    }).then(function () {
+                        if (data.type == "error") {
                         } else {
                             location.reload();
                         }
@@ -427,13 +424,13 @@ $(document).ready(function() {
 
     function getProjectLocations(id) {
         return $.ajax({
-            url: "/getProjectLocationById/" + id
+            url: "/getProjectLocationById/" + id,
         });
     }
     /////////////////////// END PROJECT LOCATION /////////////////////
 
     /////////////////////// START PROJECT MEMBER /////////////////////
-    $('#saveProjectMember').click(function(e) {
+    $("#saveProjectMember").click(function (e) {
         $("#addProjectMemberForm").validate({
             rules: {
                 joined_date: "required",
@@ -454,10 +451,11 @@ $(document).ready(function() {
                 // unit:"Please Choose Unit",
                 // location_name:"Please Select Location",
             },
-            submitHandler: function(form) {
-                requirejs(['sweetAlert2'], function(swal) {
-
-                    var data = new FormData(document.getElementById("addProjectMemberForm"));
+            submitHandler: function (form) {
+                requirejs(["sweetAlert2"], function (swal) {
+                    var data = new FormData(
+                        document.getElementById("addProjectMemberForm")
+                    );
                     // var data = $('#tree').jstree("get_selected");
                     // var id = $('#idPC').val();
 
@@ -466,39 +464,35 @@ $(document).ready(function() {
                         url: "/createProjectMember",
                         data: data,
                         dataType: "json",
-                        async: false,
+
                         processData: false,
                         contentType: false,
-                    }).done(function(data) {
+                    }).then(function (data) {
                         swal({
                             title: data.title,
                             text: data.msg,
                             type: data.type,
-                            confirmButtonColor: '#3085d6',
-                            confirmButtonText: 'OK',
+                            confirmButtonColor: "#3085d6",
+                            confirmButtonText: "OK",
                             allowOutsideClick: false,
                             allowEscapeKey: false,
-                        }).then(function() {
-                            if (data.type == 'error') {
-
+                        }).then(function () {
+                            if (data.type == "error") {
                             } else {
                                 location.reload();
                             }
-
-
                         });
                     });
-
                 });
             },
         });
     });
 
-    $(document).on("change", "#employee_id", function() {
-        var employee_id = $(this).val()
-        var employee = getEmployeeById(employee_id)
+    $(document).on("change", "#employee_id", function () {
+        var employee_id = $(this).val();
+        var employee = getEmployeeById(employee_id);
 
-        employee.done(function(data) {
+        employee.then(function (data) {
             console.log(data);
             // $("#unit").prop("selectedIndex", data.unit);
             // $("#designation").prop("selectedIndex", data.designation);
@@ -508,30 +502,29 @@ $(document).ready(function() {
             $("#designation").val(data.designation);
             $("#department").val(data.department);
             $("#branchs").val(data.branch);
-        })
-    })
+        });
+    });
 
     function getEmployeeById(id) {
         return $.ajax({
-            url: "/getEmployeeById/" + id
+            url: "/getEmployeeById/" + id,
         });
     }
 
-    $(document).on("click", "#addProjectMemberButton", function() {
+    $(document).on("click", "#addProjectMemberButton", function () {
         // Get the data-id value from the button
-        var id = $(this).data('id');
+        var id = $(this).data("id");
         // Add the id value to the modal as a data attribute
         console.log(id);
-        
-        $('#addProjectMemberModal').data('id', id).modal('show');
 
+        $("#addProjectMemberModal").data("id", id).modal("show");
     });
 
-    $(document).on("click", "#editProjectMemberButton", function() {
-        var id = $(this).data('id');
+    $(document).on("click", "#editProjectMemberButton", function () {
+        var id = $(this).data("id");
         var vehicleData = getProjectMember(id);
 
-        vehicleData.done(function(data) {
+        vehicleData.then(function (data) {
             console.log(data);
             $("#joined_date").val(data.joined_date);
             $("#employee_idE").val(data.employee_id);
@@ -539,28 +532,27 @@ $(document).ready(function() {
             $("#designationE").val(data.designation);
             $("#departmentE").val(data.department);
             $("#branchE").val(data.branch);
-            $("#exit_project").prop('checked', data.exit_project);
+            $("#exit_project").prop("checked", data.exit_project);
             $("#exit_project_date").val(data.exit_project_date);
             $("#idPM").val(data.id);
-        })
-        $('#editProjectMemberModal').modal('show');
-
+        });
+        $("#editProjectMemberModal").modal("show");
     });
 
     function getProjectMember(id) {
         return $.ajax({
-            url: "/getProjectMemberById/" + id
+            url: "/getProjectMemberById/" + id,
         });
     }
 
-    $('#updateProjectMember').click(function(e) {
+    $("#updateProjectMember").click(function (e) {
         $("#editProjectMemberForm").validate({
             rules: {
                 joined_date: "required",
                 employee_id: "required",
                 //project_id: "required",
                 branch: "required",
-                unit:"required",
+                unit: "required",
                 location_name: "required",
                 exit_project_date: "required",
             },
@@ -570,45 +562,42 @@ $(document).ready(function() {
                 employee_id: "Please Choose Name",
                 //project_id: "Please Choos Name",
                 branch: "Please Choose Branch",
-                unit:"Please Choose Unit",
-                location_name:"Please Select Location",
+                unit: "Please Choose Unit",
+                location_name: "Please Select Location",
                 exit_project_date: "Please Choose Date",
             },
-            submitHandler: function(form) {
-                requirejs(['sweetAlert2'], function(swal) {
-
-                    var data = new FormData(document.getElementById("editProjectMemberForm"));
+            submitHandler: function (form) {
+                requirejs(["sweetAlert2"], function (swal) {
+                    var data = new FormData(
+                        document.getElementById("editProjectMemberForm")
+                    );
                     // var data = $('#tree').jstree("get_selected");
-                    var id = $('#idPM').val();
+                    var id = $("#idPM").val();
 
                     $.ajax({
                         type: "POST",
                         url: "/updateProjectMember/" + id,
                         data: data,
                         dataType: "json",
-                        async: false,
+
                         processData: false,
                         contentType: false,
-                    }).done(function(data) {
+                    }).then(function (data) {
                         swal({
                             title: data.title,
                             text: data.msg,
                             type: data.type,
-                            confirmButtonColor: '#3085d6',
-                            confirmButtonText: 'OK',
+                            confirmButtonColor: "#3085d6",
+                            confirmButtonText: "OK",
                             allowOutsideClick: false,
                             allowEscapeKey: false,
-                        }).then(function() {
-                            if (data.type == 'error') {
-
+                        }).then(function () {
+                            if (data.type == "error") {
                             } else {
                                 location.reload();
                             }
-
-
                         });
                     });
-
                 });
             },
         });
@@ -620,12 +609,11 @@ $(document).ready(function() {
     //     });
     // }
 
-    $(document).on("click", "#assignProjectMemberButton", function() {
-        $('#assignProjectMemberModal').modal('show');
+    $(document).on("click", "#assignProjectMemberButton", function () {
+        $("#assignProjectMemberModal").modal("show");
     });
 
-    $('#assignProjectMember').click(function(e) {
-
+    $("#assignProjectMember").click(function (e) {
         $("#assignProjectMemberForm").validate({
             rules: {
                 location_name: "required",
@@ -635,10 +623,11 @@ $(document).ready(function() {
                 location_name: "Please Select Location",
             },
 
-            submitHandler: function(form) {
-                requirejs(['sweetAlert2'], function(swal) {
-
-                    var data = new FormData(document.getElementById("assignProjectMemberForm"));
+            submitHandler: function (form) {
+                requirejs(["sweetAlert2"], function (swal) {
+                    var data = new FormData(
+                        document.getElementById("assignProjectMemberForm")
+                    );
                     // var data = $('#tree').jstree("get_selected");
                     // var id = $('#idPM').val();
 
@@ -647,39 +636,35 @@ $(document).ready(function() {
                         url: "/assignProjectMember",
                         data: data,
                         dataType: "json",
-                        async: false,
+
                         processData: false,
                         contentType: false,
-                    }).done(function(data) {
+                    }).then(function (data) {
                         swal({
                             title: data.title,
                             text: data.msg,
                             type: data.type,
-                            confirmButtonColor: '#3085d6',
-                            confirmButtonText: 'OK',
+                            confirmButtonColor: "#3085d6",
+                            confirmButtonText: "OK",
                             allowOutsideClick: false,
                             allowEscapeKey: false,
-                        }).then(function() {
-                            if (data.type == 'error') {
-
+                        }).then(function () {
+                            if (data.type == "error") {
                             } else {
                                 location.reload();
                             }
-
-
                         });
                     });
-
                 });
             },
         });
     });
 
-    $(document).on("click", "#viewAssignMemberPrevLoc", function() {
-        var id = $(this).data('id');
+    $(document).on("click", "#viewAssignMemberPrevLoc", function () {
+        var id = $(this).data("id");
         var vehicleData = getProjectMember(id);
 
-        vehicleData.done(function(data) {
+        vehicleData.then(function (data) {
             console.log(data);
             $("#memberName").val(data.mem);
             $("#employee_idE").prop("selectedIndex", data.employee_id);
@@ -687,19 +672,18 @@ $(document).ready(function() {
             $("#designationE").val(data.designation);
             $("#departmentE").val(data.department);
             $("#branchE").val(data.branch);
-            $("#exit_project").prop('checked', data.exit_project);
+            $("#exit_project").prop("checked", data.exit_project);
             $("#exit_project_date").val(data.exit_project_date);
             $("#idPM").val(data.id);
-        })
-        $('#viewAssignMemberPrevLocModal').modal('show');
-
+        });
+        $("#viewAssignMemberPrevLocModal").modal("show");
     });
 
-    $(document).on("click", "#editPreviousProjectMemberButton", function() {
-        var id = $(this).data('id');
+    $(document).on("click", "#editPreviousProjectMemberButton", function () {
+        var id = $(this).data("id");
         var vehicleData = getProjectMember(id);
 
-        vehicleData.done(function(data) {
+        vehicleData.then(function (data) {
             console.log(data);
             $("#joined_date").val(data.joined_date);
             $("#employee_idE").prop("selectedIndex", data.employee_id);
@@ -707,35 +691,33 @@ $(document).ready(function() {
             $("#designationE").val(data.designation);
             $("#departmentE").val(data.department);
             $("#branchE").val(data.branch);
-            $("#exit_project").prop('checked', data.exit_project);
+            $("#exit_project").prop("checked", data.exit_project);
             $("#exit_project_date").val(data.exit_project_date);
             $("#idPM").val(data.id);
-        })
-        $('#editProjectMemberModal').modal('show');
-
+        });
+        $("#editProjectMemberModal").modal("show");
     });
 
     /////////////////////// END PROJECT MEMBER /////////////////////
 
-    $(document).on("click", "#viewButton", function() {
-        var id = $(this).data('id');
+    $(document).on("click", "#viewButton", function () {
+        var id = $(this).data("id");
         var vehicleData = getData(id);
-        $('input').prop('disabled', true);
-        $('select').prop('disabled', true);
+        $("input").prop("disabled", true);
+        $("select").prop("disabled", true);
 
-        vehicleData.done(function(data) {
-            $('input').val('');
+        vehicleData.then(function (data) {
+            $("input").val("");
             vdata = data.data;
-            $('#vehicleType1').prop('selectedIndex', vdata.vehicle_type);
-            $('#plateNo1').val(vdata.plate_no);
-        })
-        $('#viewModal').modal('show');
-
+            $("#vehicleType1").prop("selectedIndex", vdata.vehicle_type);
+            $("#plateNo1").val(vdata.plate_no);
+        });
+        $("#viewModal").modal("show");
     });
 
-    $(document).on("click", "#deleteButton", function() {
-        id = $(this).data('id');
-        requirejs(['sweetAlert2'], function(swal) {
+    $(document).on("click", "#deleteButton", function () {
+        id = $(this).data("id");
+        requirejs(["sweetAlert2"], function (swal) {
             swal({
                 title: "Are you sure to delete Customer?",
                 type: "error",
@@ -743,27 +725,26 @@ $(document).ready(function() {
                 confirmButtonText: "Yes!",
                 showCancelButton: true,
                 allowOutsideClick: false,
-                allowEscapeKey: false
-            }).then(function() {
+                allowEscapeKey: false,
+            }).then(function () {
                 $.ajax({
                     type: "DELETE",
                     url: "/deleteCustomer/" + id,
                     dataType: "json",
-                    async: false,
+
                     processData: false,
                     contentType: false,
-                }).done(function(data) {
+                }).then(function (data) {
                     swal({
                         title: data.title,
                         text: data.msg,
                         type: data.type,
-                        confirmButtonColor: '#3085d6',
-                        confirmButtonText: 'OK',
+                        confirmButtonColor: "#3085d6",
+                        confirmButtonText: "OK",
                         allowOutsideClick: false,
-                        allowEscapeKey: false
-                    }).then(function() {
-                        if (data.type == 'error') {
-
+                        allowEscapeKey: false,
+                    }).then(function () {
+                        if (data.type == "error") {
                         } else {
                             location.reload();
                         }
@@ -773,7 +754,7 @@ $(document).ready(function() {
         });
     });
 
-    $('#saveButton').click(function(e) {
+    $("#saveButton").click(function (e) {
         $("#addForm").validate({
             rules: {
                 customer_id: "required",
@@ -800,9 +781,8 @@ $(document).ready(function() {
                 acc_manager: "Please Choose Account Manager",
                 bank_guarantee_amount: "Pleaser Enter Amount",
             },
-            submitHandler: function(form) {
-                requirejs(['sweetAlert2'], function(swal) {
-
+            submitHandler: function (form) {
+                requirejs(["sweetAlert2"], function (swal) {
                     var data = new FormData(document.getElementById("addForm"));
                     // var data = $('#tree').jstree("get_selected");
 
@@ -811,45 +791,56 @@ $(document).ready(function() {
                         url: "/createProject",
                         data: data,
                         dataType: "json",
-                        async: false,
+
                         processData: false,
                         contentType: false,
-                    }).done(function(data) {
+                    }).then(function (data) {
                         swal({
                             title: data.title,
                             text: data.msg,
                             type: data.type,
-                            confirmButtonColor: '#3085d6',
-                            confirmButtonText: 'OK',
+                            confirmButtonColor: "#3085d6",
+                            confirmButtonText: "OK",
                             allowOutsideClick: false,
                             allowEscapeKey: false,
-                        }).then(function() {
-                            if (data.type == 'error') {
-
+                        }).then(function () {
+                            if (data.type == "error") {
                             } else {
                                 location.reload();
                             }
-
-
                         });
                     });
-
                 });
             },
         });
-    }); 
+    });
 
-    $.validator.addMethod("noSpecialChars", function(value, element) {
-        return this.optional(element) || /^[^A-Za-z!@#$%^&*()\-_+={}[\]\\|<>"'\/~`,.;: ]*$/.test(value);
-      }, "Special Characters, Spaces, and Alphabet Characters Are Not Allowed.");      
-      
-    $.validator.addMethod("email", function(value, element) {
-        // Email validation regex pattern
-        return this.optional(element) || /^[^\s@]+@[^\s@]+\.(?:com|net|org|edu|gov|mil|biz|info|name|museum|coop|aero|[a-z]{2})$/.test(value);
-      }, "Please Insert Valid Email Address");
+    $.validator.addMethod(
+        "noSpecialChars",
+        function (value, element) {
+            return (
+                this.optional(element) ||
+                /^[^A-Za-z!@#$%^&*()\-_+={}[\]\\|<>"'\/~`,.;: ]*$/.test(value)
+            );
+        },
+        "Special Characters, Spaces, and Alphabet Characters Are Not Allowed."
+    );
 
+    $.validator.addMethod(
+        "email",
+        function (value, element) {
+            // Email validation regex pattern
+            return (
+                this.optional(element) ||
+                /^[^\s@]+@[^\s@]+\.(?:com|net|org|edu|gov|mil|biz|info|name|museum|coop|aero|[a-z]{2})$/.test(
+                    value
+                )
+            );
+        },
+        "Please Insert Valid Email Address"
+    );
 
-    $('#updateButton').click(function(e) {
+    $("#updateButton").click(function (e) {
         $("#editForm").validate({
             rules: {
                 customer_name: "required",
@@ -857,12 +848,12 @@ $(document).ready(function() {
                 phoneNo: {
                     required: true,
                     digits: true,
-                    rangelength: [10, 11]
+                    rangelength: [10, 11],
                 },
                 email: {
                     required: true,
-                    email: true // Use the email validation method
-                  },
+                    email: true, // Use the email validation method
+                },
             },
 
             messages: {
@@ -875,83 +866,76 @@ $(document).ready(function() {
                 },
                 email: {
                     required: "Please Insert Email Address",
-                    email: "Please Insert Valid Email Address"
-                  },
+                    email: "Please Insert Valid Email Address",
+                },
             },
-            submitHandler: function(form) {
-                requirejs(['sweetAlert2'], function(swal) {
-
-                    var data = new FormData(document.getElementById("editForm"));
+            submitHandler: function (form) {
+                requirejs(["sweetAlert2"], function (swal) {
+                    var data = new FormData(
+                        document.getElementById("editForm")
+                    );
                     // console.log(data);
-                    var id = $('#idC').val();
+                    var id = $("#idC").val();
 
                     $.ajax({
                         type: "POST",
                         url: "/updateCustomer/" + id,
                         data: data,
                         dataType: "json",
-                        async: false,
+
                         processData: false,
                         contentType: false,
-                    }).done(function(data) {
+                    }).then(function (data) {
                         swal({
                             title: data.title,
                             text: data.msg,
                             type: data.type,
-                            confirmButtonColor: '#3085d6',
-                            confirmButtonText: 'OK',
+                            confirmButtonColor: "#3085d6",
+                            confirmButtonText: "OK",
                             allowOutsideClick: false,
                             allowEscapeKey: false,
-                        }).then(function() {
-                            if (data.type == 'error') {
-
+                        }).then(function () {
+                            if (data.type == "error") {
                             } else {
                                 location.reload();
                             }
-
                         });
                     });
-
                 });
             },
         });
     });
 
-
-    $(".statusCheck").on("change", function() {
-        var checkedValue = $('.statusCheck:checked').val();
-        var id = $(this).data('id');
+    $(".statusCheck").on("change", function () {
+        var checkedValue = $(".statusCheck:checked").val();
+        var id = $(this).data("id");
 
         if (checkedValue) {
-            var status = 1
-
+            var status = 1;
         } else {
-            var status = 2
+            var status = 2;
         }
-        requirejs(['sweetAlert2'], function(swal) {
-
+        requirejs(["sweetAlert2"], function (swal) {
             $.ajax({
                 type: "POST",
                 url: "/updateStatus/" + id + "/" + status,
-                async: false,
+
                 processData: false,
                 contentType: false,
-            }).done(function(data) {
+            }).then(function (data) {
                 swal({
                     title: data.title,
                     text: data.msg,
                     type: data.type,
-                    confirmButtonColor: '#3085d6',
-                    confirmButtonText: 'OK',
+                    confirmButtonColor: "#3085d6",
+                    confirmButtonText: "OK",
                     allowOutsideClick: false,
                     allowEscapeKey: false,
-                }).then(function() {
-                    if (data.type == 'error') {
-
+                }).then(function () {
+                    if (data.type == "error") {
                     } else {
                         location.reload();
                     }
-
                 });
             });
         });
@@ -960,38 +944,77 @@ $(document).ready(function() {
         // updating the value of textarea
     });
 
-
     $("#datepicker-loa").datepicker({
         todayHighlight: true,
         autoclose: true,
-        format: 'yyyy/mm/dd',
-        
+        format: "yyyy/mm/dd",
     });
     $("#datepicker-start").datepicker({
         todayHighlight: true,
         autoclose: true,
-        format: 'yyyy/mm/dd',
+        format: "yyyy/mm/dd",
     });
     $("#datepicker-end").datepicker({
         todayHighlight: true,
         autoclose: true,
-        format: 'yyyy/mm/dd',
+        format: "yyyy/mm/dd",
     });
     $("#datepicker-warstart").datepicker({
         todayHighlight: true,
         autoclose: true,
-        format: 'yyyy/mm/dd',
+        format: "yyyy/mm/dd",
     });
     $("#datepicker-warend").datepicker({
         todayHighlight: true,
         autoclose: true,
-        format: 'yyyy/mm/dd',
+        format: "yyyy/mm/dd",
     });
     $("#datepicker-bankexpiry").datepicker({
         todayHighlight: true,
         autoclose: true,
-        format: 'yyyy/mm/dd',
+        format: "yyyy/mm/dd",
     });
 
+    $("#project_manager2_show").hide();
+    $("#project_manager2_show").prop("disabled", true);
 
+    $(document).on("change", "#acc_manager2", function () {
+        var userId = $(this).val();
+        $("#project_manager2_show")
+            .find("option")
+            .remove()
+            .end()
+            .append(
+                '<option label="PLEASE CHOOSE" selected="selected"> </option>'
+            )
+            .val("");
+
+        function getUserWithSelectedUser(userId) {
+            return $.ajax({
+                url: "/getUserWithSelectedUser/" + userId,
+            });
+        }
+
+        $("#project_manager2").prop("disabled", true);
+        $("#project_manager2").hide();
+        $("#project_manager2_show").find("option").end();
+        $("#project_manager2_show").show();
+        $("#project_manager2_show").prop("disabled", false);
+
+        var user = getUserWithSelectedUser(userId);
+
+        user.then(function (data) {
+            for (let i = 0; i < data.length; i++) {
+                const user = data[i];
+                console.log(user["id"]);
+                var opt = document.createElement("option");
+                document.getElementById("project_manager2_show").innerHTML +=
+                    '<option value="' +
+                    user["id"] +
+                    '">' +
+                    user["employeeName"] +
+                    "</option>";
+            }
+        });
+    });
 });
