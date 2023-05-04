@@ -53,10 +53,10 @@ $(document).ready(function () {
                         url: "/createLeaveEntitlement",
                         data: data,
                         dataType: "json",
-                        async: false,
+
                         processData: false,
                         contentType: false,
-                    }).done(function (data) {
+                    }).then(function (data) {
                         swal({
                             title: data.title,
                             text: data.msg,
@@ -82,7 +82,7 @@ $(document).ready(function () {
 
         var vehicleData = geteleaveEntitlement(id);
 
-        vehicleData.done(function (data) {
+        vehicleData.then(function (data) {
             $("#nameEmployer").val(data.fullname);
             $("#department").val(data.departmentName);
             $("#CurrentEntitlement").val(data.current_entitlement);
@@ -133,10 +133,10 @@ $(document).ready(function () {
                         url: "/updateleaveEntitlement/" + id,
                         data: data,
                         dataType: "json",
-                        async: false,
+
                         processData: false,
                         contentType: false,
-                    }).done(function (data) {
+                    }).then(function (data) {
                         swal({
                             title: data.title,
                             text: data.msg,

@@ -684,7 +684,7 @@ if (!function_exists('getBranch')) {
         }
 
         if (!$data) {
-            $data = [];
+            $data = '';
         }
 
         return $data;
@@ -2266,6 +2266,21 @@ if (!function_exists('getApprovalConfigClaim')) {
     {
 
         $data = ApprovalConfig::where('role', $role)->first();
+
+        if (!$data) {
+            $data = [];
+        }
+
+        return $data;
+    }
+}
+
+if (!function_exists('getUserWithSelectedUser')) {
+    function getUserWithSelectedUser($employeeId = '')
+    {
+
+        // $data = Users::with('userProfile')->where([['tenant_id', Auth::user()->tenant_id], ['id', '!=', $userId]])->get();
+        $data = Employee::where([['tenant_id', Auth::user()->tenant_id], ['id', '!=', $employeeId]])->get();
 
         if (!$data) {
             $data = [];

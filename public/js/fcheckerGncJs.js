@@ -5,8 +5,10 @@ $(document).ready(function () {
             [5, 10, 15, 20, -1],
             [5, 10, 15, 20, "All"],
         ],
-        initComplete: function (settings, json) {  
-            $("#appealTable").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");            
+        initComplete: function (settings, json) {
+            $("#appealTable").wrap(
+                "<div style='overflow:auto; width:100%;position:relative;'></div>"
+            );
         },
         scrollX: true,
     });
@@ -14,10 +16,12 @@ $(document).ready(function () {
         responsive: false,
         lengthMenu: [
             [5, 10, 15, 20, -1],
-            [5, 10, 15, 20, "All"], 
+            [5, 10, 15, 20, "All"],
         ],
-        initComplete: function (settings, json) {  
-            $("#appealTable").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");            
+        initComplete: function (settings, json) {
+            $("#appealTable").wrap(
+                "<div style='overflow:auto; width:100%;position:relative;'></div>"
+            );
         },
         scrollX: true,
     });
@@ -61,10 +65,10 @@ $(document).ready(function () {
             $.ajax({
                 type: "POST",
                 url: "/updateStatusClaim/" + id + "/" + status + "/" + stage,
-                async: false,
+
                 processData: false,
                 contentType: false,
-            }).done(function (data) {
+            }).then(function (data) {
                 swal({
                     title: data.title,
                     text: data.msg,
@@ -114,10 +118,10 @@ $(document).ready(function () {
                             stage,
                         data: data,
                         dataType: "json",
-                        async: false,
+
                         processData: false,
                         contentType: false,
-                    }).done(function (data) {
+                    }).then(function (data) {
                         console.log(data);
                         swal({
                             title: data.title,
@@ -167,10 +171,10 @@ $(document).ready(function () {
                             stage,
                         data: data,
                         dataType: "json",
-                        async: false,
+
                         processData: false,
                         contentType: false,
-                    }).done(function (data) {
+                    }).then(function (data) {
                         console.log(data);
                         swal({
                             title: data.title,
@@ -202,10 +206,10 @@ $(document).ready(function () {
                 type: "POST",
                 url: "/updateStatusGncClaim/" + id + "/" + status + "/" + stage,
                 dataType: "json",
-                async: false,
+
                 processData: false,
                 contentType: false,
-            }).done(function (data) {
+            }).then(function (data) {
                 console.log(data);
                 swal({
                     title: data.title,
@@ -231,19 +235,26 @@ $(document).ready(function () {
 
         var vehicleData = getGncById(id);
 
-        vehicleData.done(function (data) {
+        vehicleData.then(function (data) {
             console.log(data);
-            $("#applied_date").val(moment(data.applied_date).format('YYYY-MM-DD'));
+            $("#applied_date").val(
+                moment(data.applied_date).format("YYYY-MM-DD")
+            );
             $("#claim_category").val(data.claim_category_name);
             $("#label").text(data.claim_category_content.label);
             $("#contents").val(data.claim_category_content.content);
             $("#amount").val(data.amount);
             $("#checkId").val(data.id);
             $("#desc").val(data.desc);
-            var fileNames = data.file_upload.split(',');
-            var html = '';
-            for(var i=0; i<fileNames.length; i++){
-                html += "<a href='/storage/" + fileNames[i] + "' target='_blank'>" + fileNames[i] + "</a><br>";
+            var fileNames = data.file_upload.split(",");
+            var html = "";
+            for (var i = 0; i < fileNames.length; i++) {
+                html +=
+                    "<a href='/storage/" +
+                    fileNames[i] +
+                    "' target='_blank'>" +
+                    fileNames[i] +
+                    "</a><br>";
             }
             $("#file_upload").html(html);
         });

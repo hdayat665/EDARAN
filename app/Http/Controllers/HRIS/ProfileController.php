@@ -22,7 +22,7 @@ class ProfileController extends Controller
     {
         $data = [];
 
-        return view('pages.HRIS.profile',$data);
+        return view('pages.HRIS.profile', $data);
     }
 
     public function profileData($user_id = '')
@@ -39,7 +39,7 @@ class ProfileController extends Controller
     public function updateProfile_Picture(Request $r)
     {
         $input = $r->input();
-        
+
 
         $ps = new ProfileService;
 
@@ -318,7 +318,6 @@ class ProfileController extends Controller
         $result = $ls->resetPassword($input);
 
         return response()->json($result);
-
     }
 
     public function getVehicleById($id = '')
@@ -462,7 +461,7 @@ class ProfileController extends Controller
         return response()->json($result);
     }
 
-    
+
 
     public function deleteCompanion($id = '')
     {
@@ -473,5 +472,10 @@ class ProfileController extends Controller
         return response()->json($result);
     }
 
+    public function getUserWithSelectedUser($userId = '')
+    {
+        $data = getUserWithSelectedUser($userId);
 
+        return response()->json($data);
+    }
 }

@@ -24,7 +24,7 @@ $(document).ready(function () {
                 data: data,
                 dataType: "json",
                 encode: true,
-            }).done(function (data) {
+            }).then(function (data) {
                 swal({
                     title: data.title,
                     text: data.msg,
@@ -67,7 +67,7 @@ $(document).ready(function () {
                 data: data,
                 dataType: "json",
                 encode: true,
-            }).done(function (data) {
+            }).then(function (data) {
                 swal({
                     title: data.title,
                     text: data.msg,
@@ -110,7 +110,7 @@ $(document).ready(function () {
                 data: data,
                 dataType: "json",
                 encode: true,
-            }).done(function (data) {
+            }).then(function (data) {
                 swal({
                     title: data.title,
                     text: data.msg,
@@ -153,7 +153,7 @@ $(document).ready(function () {
                 data: data,
                 dataType: "json",
                 encode: true,
-            }).done(function (data) {
+            }).then(function (data) {
                 swal({
                     title: data.title,
                     text: data.msg,
@@ -196,7 +196,7 @@ $(document).ready(function () {
                 data: data,
                 dataType: "json",
                 encode: true,
-            }).done(function (data) {
+            }).then(function (data) {
                 swal({
                     title: data.title,
                     text: data.msg,
