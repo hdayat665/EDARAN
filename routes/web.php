@@ -368,8 +368,9 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('/getClaimCategoryContent/{id}', 'getClaimCategoryContent');
             Route::get('/getClaimCategoryById/{id}', 'getClaimCategoryById');
             Route::post('/updateClaimDate', 'updateClaimDate');
-
-
+            Route::get('/getEntitlementContent/{id}', 'getEntitlementContent');
+            Route::get('/getAccomodation', 'getAccomodation');
+            
             // eleave Leave Entitlement
             Route::get('/leaveEntitlement', 'eleaveEntitlementView');
             Route::post('/createLeaveEntitlement', 'createLeaveEntitlement');

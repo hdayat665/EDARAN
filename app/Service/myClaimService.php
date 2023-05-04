@@ -15,6 +15,7 @@ use App\Models\EntitleGroup;
 use App\Models\TransportMillage;
 use App\Models\Employee;
 use App\Models\AppealMtc;
+use App\Models\EntitleSubsBenefit;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
@@ -927,9 +928,25 @@ class myClaimService
         $jobGrade = Employee::where('user_id', $id)->value('jobGrade');
         $entitle = EntitleGroup::where('job_grade', $jobGrade)->get();
 
-        //pr($entitle);
-
+       
         return $entitle;
+    }
+
+    public function getEntitlementArea($id = '')
+    {
+        $jobGrade = Employee::where('user_id', $id)->value('jobGrade');
+        $entitle = EntitleGroup::where('job_grade', $jobGrade)->first();
+        
+        $identitle = $entitle['id'];
+
+        $area = EntitleSubsBenefit::where('entitle_id', $identitle)
+        ->where('type', 'subs')
+        ->whereNotNull('value')
+        ->get();
+
+        // pr($area);
+
+        return $area;
     }
 
     public function getEntitlementByJobGradeMotor($id = '')

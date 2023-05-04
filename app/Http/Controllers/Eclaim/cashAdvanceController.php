@@ -11,7 +11,7 @@ class cashAdvanceController extends Controller
     public function createCashAdvance(Request $r)
     {
         $mcs = new myClaimService;
-
+ 
         $data = $mcs->createCashAdvance($r, 'draft');
 
         return response()->json($data);

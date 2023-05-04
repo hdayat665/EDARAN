@@ -36,19 +36,16 @@
                         <label class="form-label">X</label>
                     </div>
                     <div class="col-md-3">
-                        {{-- <input readonly value="Malaysia" type="text" class="form-control"> --}}
-                        <select class="form-select" id="" name="project_id">
-                            <option class="form-label" value="" selected>
-                                Please Select</option>
-                            <?php $getAreas = getArea(); ?>
-                            @foreach ($getAreas as $area)
-                                <option class="form-label" value="MYR {{ $area->area_name }}">{{ $area->area_name }}</option>
-                            @endforeach
-
+                        <select class="form-select" id="areacategory" name="project_id">
+                            <option class="form-label" value="" selected>PLEASE CHOOSE</option>
+                            
+                                @foreach ($areas as $area)
+                            <option value="{{ $area->id }}">{{ $area->area }}</option>
+                                @endforeach
                         </select>
-                    </div>
+                        </div>
                     <div class="col-md-3">
-                        <input type="text" class="form-control" id="subs" value="60" >
+                        <input type="text" class="form-control" id="subs" readonly value="" >
                     </div>
                 </div>
                 <div class="row p-2">
@@ -86,15 +83,15 @@
                         <label class="form-label">X</label>
                     </div>
                     <div class="col-md-3">
-                        {{-- <input readonly value="Hotel" type="text" class="form-control"> --}}
-                        <select class="form-select">
-                            <option class="form-label" value="" selected>Hotel
-                            </option>
-                            <option class="form-label" value="">Lodging</option>
+                        <select class="form-select" id="accom">
+                            <option class="form-label" value="" selected>Please Choose</option>
+                            <option class="form-label" value="hotel" >Hotel</option>
+                            <option class="form-label" value="lodging">Lodging</option>
                         </select>
                     </div>
                     <div class="col-md-3">
-                        <input type="text" class="form-control" id="acco" value="350" >
+                        <input type="text" class="form-control" id="acco" readonly>
+                        
                     </div>
                 </div>
                 <div class="row p-2">

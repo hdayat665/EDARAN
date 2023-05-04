@@ -341,7 +341,7 @@ $("document").ready(function () {
         for (let i = 0; i < inputs.length; i++) {
             $("#" + inputs[i] + "")
                 .find("option")
-                .remove()
+                .remove() 
                 .end()
                 .append(
                     '<option label="PLEASE CHOOSE" selected="selected"> </option>'

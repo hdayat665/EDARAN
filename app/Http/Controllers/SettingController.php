@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Service\myClaimService;
 use App\Service\SettingService;
 use Illuminate\Routing\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class SettingController extends Controller
 {
@@ -953,6 +955,23 @@ class SettingController extends Controller
     public function getClaimCategoryContent($id = '')
     {
         $data = getClaimCategoryContentByClaimId($id);
+
+        return response()->json($data);
+    }
+
+    public function getEntitlementContent($id = '')
+    {
+        $data = getareaContentById($id);
+
+        return response()->json($data);
+    }
+
+    public function getAccomodation()
+    {   
+        $mcs = new myClaimService;
+        
+        $data['user_id'] = Auth::user()->id;
+        $data['area'] = $mcs->getEntitlementAreaByJobGrade($data['user_id']);
 
         return response()->json($data);
     }
