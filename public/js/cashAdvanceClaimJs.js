@@ -265,6 +265,68 @@ $(document).ready(function () {
             );
         });
         
+        $(document).on("change", "#areacategory", function () {
+            var id = $(this).val();
+            
+            function getEntitlementContent(id) {
+                return $.ajax({
+                    url: "/getEntitlementContent/" + id,
+                });
+            }
+        
+            var user = getEntitlementContent(id);
+            console.log(user);
+            
+            user.done(function (data) {
+                var value = parseInt(data[0].value);
+                $("#subs").val(value);
+        
+                var a = parseInt($("#day").val());
+                var b = parseFloat($("#subs").val());
+                var c = parseFloat(a * b).toFixed(2);
+                $("#totalsubs").val(c);
+            });
+        });
+        
+        
+
+        $(document).on("change", "#accom", function () {
+            var id = $(this).val();
+            //console.log(id);
+        
+            function getAccomodation() {
+                return $.ajax({
+                    url: "/getAccomodation/",
+                    method: "GET",
+                    dataType: "json" // Set the data type to JSON
+                });
+            }
+        
+            getAccomodation().done(function (data) {
+                var A1 = data.area[0].local_hotel_value;
+                var B1 = data.area[0].lodging_allowance_value;
+
+                var price = "";
+
+                if (id == "hotel") {
+                    price = A1;
+                } else if (id == "lodging") {
+                    price = B1;
+                } else {
+                    price = "";
+                }
+
+                $("#acco").val(price);
+
+                var a = parseInt($("#night").val());
+                var b = parseFloat($("#acco").val());
+                var c = parseFloat(a * b).toFixed(2);
+                $("#totalacco").val(c);
+                
+            });
+
+
+        });
         
 
         $("#datefilter1").on("cancel.daterangepicker", function (ev, picker) {
@@ -432,7 +494,7 @@ $(document).ready(function () {
             },
         });
     });
-
+ 
     $("#submitButton").click(function (e) {
         $("#saveForm").validate({
             // Specify validation rules

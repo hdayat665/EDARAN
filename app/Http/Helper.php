@@ -31,6 +31,7 @@ use App\Models\UserRole;
 use App\Models\TransportMillage;
 use App\Models\EclaimGeneral;
 use App\Models\PermissionRole;
+use App\Models\EntitleSubsBenefit;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -1788,6 +1789,18 @@ if (!function_exists('getClaimCategoryContentByClaimId')) {
     }
 }
 
+if (!function_exists('getareaContentById')) {
+    function getareaContentById($id = '')
+    {
+        $data = EntitleSubsBenefit::where([['id', $id]])->get();
+        //pr($data);
+        if (!$data) {
+            $data = [];
+        }
+
+        return $data;
+    }
+}
 if (!function_exists('getClaimCategoryById')) {
     function getClaimCategoryById($id = '')
     {
