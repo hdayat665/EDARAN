@@ -864,7 +864,7 @@ $(document).ready(function() {
             var loghour = [];
             for (let i = 0; i < data['logs'].length; i++) {
                 var logs = data['logs'][i];
-                console.log(logs);
+                
                 var startDate = new Date(logs['date']);
                 var startMonth = startDate.getMonth() + 1;
                 startMonth = startMonth < 10 ? "0" + startMonth : startMonth;
@@ -902,7 +902,8 @@ $(document).ready(function() {
                     title: (logs['type_of_log'] ? type_of_log(logs['type_of_log']) + ' ' : '') + "\n" +  (logs['project_name'] ? logs['project_name'] + ' ' : '') + "\n" + (logs['activitynameas'] ? logs['activitynameas'] + ' ' : '') + "\n" +' from ' + logs['start_time'] + ' to ' + logs['end_time'],
                     // start: startYear + '-' + startMonth + '-' + startDay + 'T' + startTime + ':00',
                     start: startYear + '-' + startMonth + '-' + startDay,
-                    color: app.color.primary,
+                    // color: app.color.primary,
+                    color: "#348FE2",
                     extendedProps: {
                         type: 'log',
                         logId: logs['id']
@@ -945,7 +946,7 @@ $(document).ready(function() {
                     start: startYear + '-' + startMonth + '-' + startDay,
                     end: endYear + '-' + endMonth + '-' + endDay,
                     // color: app.color.green,
-                    color: "#E0E0E0",
+                    color: "#D9EDF7",
                     textColor: "black",
                     fontWeight: "bold",
                     extendedProps: {
@@ -986,7 +987,7 @@ $(document).ready(function() {
                     start: startYear + '-' + startMonth + '-' + startDay,
                     end: endYear + '-' + endMonth + '-' + endDay,
                     // color: app.color.yellow,
-                    color: "#FFD580",
+                    color: "#FFD480",
                     textColor: "black",
                     fontWeight: "bold",
                     extendedProps: {
@@ -1029,7 +1030,7 @@ $(document).ready(function() {
             dataHoliday = dataleave.concat(holiday);
 
             
-            console.log(dataHoliday);
+            // console.log(dataHoliday);
             var calendar = new FullCalendar.Calendar(calendarElm, {
                 headerToolbar: {
                     left: 'logButton EventButton SumButton',
@@ -1071,16 +1072,21 @@ $(document).ready(function() {
 
                     var datedefaultformat = dayjs(current).format('YYYY-MM-DD');
                 
+                    if (dayjs(info.date).isSame(dayjs(), 'date')) {
+                        $(info.el).css('background-color', '#FFFADF');
+                        console.log("test")
+                      }
+
                     for (let i = 0; i < holidayDates.length; i++) {
                         if (current >= holidayDates[i].start && current <= holidayDates[i].end) { 
-                            $(info.el).css('background-color', '#FFD580');
+                            $(info.el).css('background-color', '#FFD480');
                             return;
                         }
                     }
                 
                     for (let i = 0; i < leavesdate.length; i++) {
                         if (current >= leavesdate[i].start && current <= leavesdate[i].end) { 
-                            $(info.el).css('background-color', '#E0E0E0');
+                            $(info.el).css('background-color', '#D9EDF7');
                             return;
                         }
                     }
@@ -1126,18 +1132,19 @@ $(document).ready(function() {
                     // console.log(reasons);
                 
                     if (hasLog && totalHours >= 9) {
-                        $(info.el).css('background-color', 'green');
+                        $(info.el).css('background-color', '#80FF80');
                     } else if (hasLog && totalHours <= 9) {
                         if (current.getDate() === currentDate.getDate() || current.getDate() === oneDayBefore.getDate() || current.getDate() === twoDayBefore.getDate()) {
-                            $(info.el).css('background-color', 'red');
+                            $(info.el).css('background-color', '#FF8080');
                         } else if (appliedDates.includes(datedefaultformat)) {
                             // var clickedDate = dayjs(info.date).format('YYYY-MM-DD');
                             // alert("Clicked date: " + clickedDate);
-                            $(info.el).css('background-color', 'red');
+                            $(info.el).css('background-color', '#FF8080');
                             var button = $('<button/>', {
                               text: 'View Appeal',
                               class: 'appeal-view-button',
-                              click: function () {
+                              click: function (event) {
+                                event.stopPropagation(); 
                                 // Get the logid for the corresponding appliedDate
                                 var index = appliedDates.indexOf(datedefaultformat);
                                 if (index !== -1) {
@@ -1169,7 +1176,7 @@ $(document).ready(function() {
                             });
                         } else {
                             // console.log(datedefaultformat)
-                            $(info.el).css('background-color', 'red');
+                            $(info.el).css('background-color', '#FF8080');
                             // console.log(appliedDates);
                             var button1 = $('<button/>', {
                                 text: 'Add Appeal',
@@ -1211,12 +1218,12 @@ $(document).ready(function() {
                             
                         }
                     } else if (info.date.getDay() === 0) { // Sunday
-                        $(info.el).css('background-color', '#87CEEB'); 
+                        $(info.el).css('background-color', '#B3CCFF'); 
                     } else if (info.date.getDay() === 6) { // Saturday
-                        $(info.el).css('background-color', '#87CEEB'); 
+                        $(info.el).css('background-color', '#B3CCFF'); 
                     }
                  else {
-                        $(info.el).css('background-color', 'white');
+                        // $(info.el).css('background-color', 'white');
                       }                     
                     },
                     
@@ -1227,29 +1234,56 @@ $(document).ready(function() {
                     dateClick: function(info) {
                         const today = dayjs();
                         const clickedDate = dayjs(info.date);
-                    
+                      
+                        // check if the clicked date's status is "approve"
+                        var appliedDates = [];
+                        var statuses = [];
+                        for (let i = 0; i < data['appeals'].length; i++) {
+                          var appeals = data['appeals'][i];
+                          var appliedDate = appeals['applied_date'];
+                          var status = appeals['status'];
+                          appliedDates.push(appliedDate);
+                          statuses.push(status);
+                        }
+                        const formattedDate = clickedDate.format('YYYY-MM-DD');
+                        if (appliedDates.includes(formattedDate) && statuses[appliedDates.indexOf(formattedDate)] === 'approve') {
+                          // show the view appeal modal
+                          $('#addLogModal').modal('show');
+                        //   var index = appliedDates.indexOf(formattedDate);
+                        //   $('#log_idv').val(logsid[index]);
+                        //   $('#reasonappealv').val(reasons[index]);
+                        //   $('#Statusv').val(statuses[index]);
+                        //   $('#yearappealv').val(years[index]);
+                        //   $('#monthappealv').val(months[index]);
+                        //   $('#dayappealv').val(days[index]);
+                          return;
+                        }
+                      
                         // check if the clicked date is within the last 2 days before the current date
                         // and if the cell already has an appeal button
                         if ((clickedDate.diff(today, 'day') < -2 || clickedDate.isAfter(today, 'day')) &&
-                            ($(info.dayEl).find('.appeal-add-button, .appeal-view-button').length !== 0)) {
-                            return;
-                        }
-
-                        else if ((clickedDate.diff(today, 'day') < -2 || clickedDate.isAfter(today, 'day')) &&
-                        ($(info.dayEl).find('.appeal-add-button, .appeal-view-button').length == 0)){
+                        ($(info.dayEl).find('.appeal-add-button, .appeal-view-button').length == 0)) {
                             Swal.fire({
-                            icon: 'error',
-                            title: 'Error',
-                            text: 'You can only select the current date and 2 days before.'
+                                icon: 'error',
+                                title: 'Oops...',
+                                text: 'You can only add logs for the current and past 2 days!',
                             });
-                            return;
+                        return;
                         }
-                    
-                        // show the modal and set the date
+                        if ((clickedDate.diff(today, 'day') < -2 || clickedDate.isAfter(today, 'day')) &&
+                            ($(info.dayEl).find('.appeal-add-button, .appeal-view-button').length !== 0)) {
+                            
+                          return;
+                        }
+                      
+                        // show the add log modal
                         $('#addLogModal').modal('show');
-                        const formattedDate = clickedDate.format('DD-MM-YYYY');
                         $("#dateaddlog").val(formattedDate);
-                    },
+                      },
+                      
+                      
+                    
+                      
                     
                     
                   
