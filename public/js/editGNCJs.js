@@ -8,10 +8,12 @@ $(document).ready(function () {
         ],
         responsive: false,
         info: false,
-        initComplete: function (settings, json) {  
-            $("#applyclaimtable").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");            
-        },
-    });
+        initComplete: function (settings, json) {
+            $("#applyclaimtable").wrap(
+                "<div style='overflow:auto; width:100%;position:relative;'></div>"
+            );
+        },
+    });
 
     $(document).on("change", "#claimcategory", function () {
         id = $(this).val();
@@ -40,7 +42,7 @@ $(document).ready(function () {
 
         var user = getClaimCategoryContent(id);
 
-        user.done(function (data) {
+        user.then(function (data) {
             $("#label").text(data[0].label);
             // console.log(data[0].label);
             for (let i = 0; i < data.length; i++) {
@@ -78,9 +80,8 @@ $(document).ready(function () {
                 claim_category: "required",
                 claim_category_detail: "required",
                 amount: "required",
-                'file_upload[]': "required",
-                
-            }, 
+                "file_upload[]": "required",
+            },
 
             messages: {
                 year: "Please Select Year",
@@ -88,8 +89,7 @@ $(document).ready(function () {
                 claim_category: "Please Select Claim Category",
                 claim_category_detail: "Please Select Category Detail",
                 amount: "Please Fill Out Amount",
-                'file_upload[]': "Please Upload Attachment",
-                
+                "file_upload[]": "Please Upload Attachment",
             },
             submitHandler: function (form) {
                 requirejs(["sweetAlert2"], function (swal) {
@@ -103,12 +103,12 @@ $(document).ready(function () {
                         url: "/updateGeneralClaim/" + id,
                         data: data,
                         dataType: "json",
-                        async: false,
+
                         processData: false,
                         contentType: false,
-                    }).done(function (data) {
+                    }).then(function (data) {
                         swal({
-                            title: data.title, 
+                            title: data.title,
                             text: data.msg,
                             type: data.type,
                             confirmButtonColor: "#3085d6",
@@ -126,9 +126,11 @@ $(document).ready(function () {
             },
         });
     });
-    document.getElementById("resetupdateButton").addEventListener("click", function() {
-        document.getElementById("updateForm").reset();
-      });
+    document
+        .getElementById("resetupdateButton")
+        .addEventListener("click", function () {
+            document.getElementById("updateForm").reset();
+        });
 
     $("#submitButton").click(function (e) {
         requirejs(["sweetAlert2"], function (swal) {
@@ -138,10 +140,10 @@ $(document).ready(function () {
                 type: "POST",
                 url: "/updateStatusGeneralClaims/" + id,
                 dataType: "json",
-                async: false,
+
                 processData: false,
                 contentType: false,
-            }).done(function (data) {
+            }).then(function (data) {
                 swal({
                     title: data.title,
                     text: data.msg,
@@ -178,11 +180,11 @@ $(document).ready(function () {
                     url: "/deleteGNCDetail/" + id,
                     // dataType: "json",
                     data: { _method: "DELETE" },
-                    // async: false,
+
                     // processData: false,
                     // contentType: false,
-                }).done(function (data) {
-                    swal({ 
+                }).then(function (data) {
+                    swal({
                         title: data.title,
                         text: data.msg,
                         type: data.type,

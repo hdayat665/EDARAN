@@ -5,10 +5,12 @@ $(document).ready(function () {
             [5, 10, 25, 50, -1],
             [5, 10, 25, 50, "All"],
         ],
-        initComplete: function (settings, json) {  
-            $("#activetable").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");            
-        },
-        scrollX:true
+        initComplete: function (settings, json) {
+            $("#activetable").wrap(
+                "<div style='overflow:auto; width:100%;position:relative;'></div>"
+            );
+        },
+        scrollX: true,
     });
 
     $("#traveltable").DataTable({
@@ -17,10 +19,12 @@ $(document).ready(function () {
             [5, 10, 25, 50, -1],
             [5, 10, 25, 50, "All"],
         ],
-        initComplete: function (settings, json) {  
-            $("#activetable").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");            
-        },
-        scrollX:true,
+        initComplete: function (settings, json) {
+            $("#activetable").wrap(
+                "<div style='overflow:auto; width:100%;position:relative;'></div>"
+            );
+        },
+        scrollX: true,
     });
     // travel
     $(document).on("click", "#btn-view-claim", function () {
@@ -28,7 +32,7 @@ $(document).ready(function () {
 
         var vehicleData = getTravelById(id);
 
-        vehicleData.done(function (data) {
+        vehicleData.then(function (data) {
             //console.log(data);
             $("#travel_date").val(data.travel_date);
             $("#start_time").val(data.start_time);
@@ -47,10 +51,15 @@ $(document).ready(function () {
             $("#toll").val("RM " + data.toll);
             $("#petrol").val("RM " + data.petrol);
             $("#parking").val("RM " + data.parking);
-            var fileNames = data.file_upload.split(',');
-            var html = '';
-            for(var i=0; i<fileNames.length; i++){
-                html += "<a href='/storage/TravelFile/" + fileNames[i] + "' target='_blank'>" + fileNames[i] + "</a><br>";
+            var fileNames = data.file_upload.split(",");
+            var html = "";
+            for (var i = 0; i < fileNames.length; i++) {
+                html +=
+                    "<a href='/storage/TravelFile/" +
+                    fileNames[i] +
+                    "' target='_blank'>" +
+                    fileNames[i] +
+                    "</a><br>";
             }
             $("#file_upload").html(html);
         });
@@ -63,9 +72,13 @@ $(document).ready(function () {
 
         var vehicleData = getTravelById(id);
 
-        vehicleData.done(function (data) {
+        vehicleData.then(function (data) {
             //console.log(data);
-            $("#claim_for").val(data.claim_for == 2 ? "Without Cash Advance" : "With Cash Advance");
+            $("#claim_for").val(
+                data.claim_for == 2
+                    ? "Without Cash Advance"
+                    : "With Cash Advance"
+            );
             $("#file_upload_Subs").val(data.file_upload);
             $("#date1").val(data.start_date);
             $("#time1").val(data.start_time);
@@ -81,10 +94,15 @@ $(document).ready(function () {
             $("#lodging").val(data.lodging ? data.lodging + " days" : "0 days");
             $("#total_acc").val("RM " + data.total_acc);
             $("#total").val("RM " + data.total);
-            var fileNames = data.file_upload.split(',');
-            var html = '';
-            for(var i=0; i<fileNames.length; i++){
-                html += "<a href='/storage/SubFile/" + fileNames[i] + "' target='_blank'>" + fileNames[i] + "</a><br>";
+            var fileNames = data.file_upload.split(",");
+            var html = "";
+            for (var i = 0; i < fileNames.length; i++) {
+                html +=
+                    "<a href='/storage/SubFile/" +
+                    fileNames[i] +
+                    "' target='_blank'>" +
+                    fileNames[i] +
+                    "</a><br>";
             }
             $("#file_upload1").html(html);
         });
@@ -97,18 +115,25 @@ $(document).ready(function () {
 
         var vehicleData = getPersonalById(id);
 
-        vehicleData.done(function (data) {
+        vehicleData.then(function (data) {
             //console.log(data);
-            $("#created_At").val(moment(data.applied_date).format('YYYY-MM-DD'));
+            $("#created_At").val(
+                moment(data.applied_date).format("YYYY-MM-DD")
+            );
             $("#claim_category").val(data.claim_category_name);
             $("#label").text(data.claim_category_content.label);
             $("#contents").val(data.claim_category_content.content);
             $("#amount").val("RM " + data.amount);
             $("#claim_desc").val(data.claim_desc);
-            var fileNames = data.file_upload.split(',');
-            var html = '';
-            for(var i=0; i<fileNames.length; i++){
-                html += "<a href='/storage/PersonalFile/" + fileNames[i] + "' target='_blank'>" + fileNames[i] + "</a><br>";
+            var fileNames = data.file_upload.split(",");
+            var html = "";
+            for (var i = 0; i < fileNames.length; i++) {
+                html +=
+                    "<a href='/storage/PersonalFile/" +
+                    fileNames[i] +
+                    "' target='_blank'>" +
+                    fileNames[i] +
+                    "</a><br>";
             }
             $("#file_upload2").html(html);
         });
@@ -136,10 +161,10 @@ $(document).ready(function () {
             $.ajax({
                 type: "POST",
                 url: "/updateStatusClaim/" + id + "/" + status + "/" + stage,
-                async: false,
+
                 processData: false,
                 contentType: false,
-            }).done(function (data) {
+            }).then(function (data) {
                 swal({
                     title: data.title,
                     text: data.msg,
@@ -181,10 +206,10 @@ $(document).ready(function () {
                         url: "/updateStatusClaim/" + id + "/" + status,
                         data: data,
                         dataType: "json",
-                        async: false,
+
                         processData: false,
                         contentType: false,
-                    }).done(function (data) {
+                    }).then(function (data) {
                         console.log(data);
                         swal({
                             title: data.title,
@@ -226,10 +251,10 @@ $(document).ready(function () {
                         url: "/updateStatusClaim/" + id + "/" + status,
                         data: data,
                         dataType: "json",
-                        async: false,
+
                         processData: false,
                         contentType: false,
-                    }).done(function (data) {
+                    }).then(function (data) {
                         console.log(data);
                         swal({
                             title: data.title,

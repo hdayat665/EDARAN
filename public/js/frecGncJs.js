@@ -20,21 +20,28 @@ $(document).ready(function () {
 
         var vehicleData = getGncById(id);
 
-        vehicleData.done(function (data) {
+        vehicleData.then(function (data) {
             console.log(data);
-            $("#applied_date").val(moment(data.applied_date).format('YYYY-MM-DD'));
+            $("#applied_date").val(
+                moment(data.applied_date).format("YYYY-MM-DD")
+            );
             $("#claim_category").val(data.claim_category_name);
             $("#label").text(data.claim_category_content.label);
             $("#contents").val(data.claim_category_content.content);
             $("#amount").val(data.amount);
             $("#desc").val(data.desc);
-            var fileNames = data.file_upload.split(',');
-            var html = '';
-            for(var i=0; i<fileNames.length; i++){
-                html += "<a href='/storage/" + fileNames[i] + "' target='_blank'>" + fileNames[i] + "</a><br>";
+            var fileNames = data.file_upload.split(",");
+            var html = "";
+            for (var i = 0; i < fileNames.length; i++) {
+                html +=
+                    "<a href='/storage/" +
+                    fileNames[i] +
+                    "' target='_blank'>" +
+                    fileNames[i] +
+                    "</a><br>";
             }
             $("#file_upload").html(html);
-        }); 
+        });
         $("#modal-gnc-view").modal("show");
     });
 
@@ -54,10 +61,10 @@ $(document).ready(function () {
             $.ajax({
                 type: "POST",
                 url: "/updateStatusClaim/" + id + "/" + status + "/" + stage,
-                async: false,
+
                 processData: false,
                 contentType: false,
-            }).done(function (data) {
+            }).then(function (data) {
                 swal({
                     title: data.title,
                     text: data.msg,
@@ -106,10 +113,10 @@ $(document).ready(function () {
                             stage,
                         data: data,
                         dataType: "json",
-                        async: false,
+
                         processData: false,
                         contentType: false,
-                    }).done(function (data) {
+                    }).then(function (data) {
                         console.log(data);
                         swal({
                             title: data.title,
@@ -158,10 +165,10 @@ $(document).ready(function () {
                             stage,
                         data: data,
                         dataType: "json",
-                        async: false,
+
                         processData: false,
                         contentType: false,
-                    }).done(function (data) {
+                    }).then(function (data) {
                         console.log(data);
                         swal({
                             title: data.title,

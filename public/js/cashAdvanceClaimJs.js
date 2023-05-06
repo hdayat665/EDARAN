@@ -9,13 +9,13 @@ $(document).ready(function () {
             $(".PNO").hide();
             $(".OTHERSNO").hide();
             $(".OTHERSO").hide();
-            $(".subacco").show(); 
+            $(".subacco").show();
             $("#btnPO").show();
             $("#btnPNO").hide();
             $("#btnOO").hide();
             $("#btnONO").hide();
         } else if ($(this).val() == "2") {
-            $(".PO").hide(); 
+            $(".PO").hide();
             $(".PNO").show();
             $(".MOT").show();
             $(".OTHERSNO").hide();
@@ -181,75 +181,84 @@ $(document).ready(function () {
 
     // end total transport
     $(function () {
-        $("#datefilter1").daterangepicker({
-            autoUpdateInput: false,
-            locale: {
-              cancelLabel: "Clear"
+        $("#datefilter1").daterangepicker(
+            {
+                autoUpdateInput: false,
+                locale: {
+                    cancelLabel: "Clear",
+                },
+                isInvalidDate: function (date) {
+                    // Disable dates in the past
+                    return date.isBefore(moment(), "day");
+                },
             },
-            isInvalidDate: function(date) {
-              // Disable dates in the past
-              return date.isBefore(moment(), 'day');
+            function (start, end, label) {
+                // Calculate the difference in milliseconds between the start and end dates
+                var diffInMs = end - start;
+
+                // Convert the difference to days
+                var diffInDays = Math.ceil(diffInMs / (1000 * 60 * 60 * 24));
+
+                // Update the value of the input with the total number of days
+                $("#day").val(diffInDays);
+                $("#night").val(diffInDays - 1);
             }
-          }, function(start, end, label) {
-            // Calculate the difference in milliseconds between the start and end dates
-            var diffInMs = end - start;
-          
-            // Convert the difference to days
-            var diffInDays = Math.ceil(diffInMs / (1000 * 60 * 60 * 24));
-          
-            // Update the value of the input with the total number of days
-            $('#day').val(diffInDays);
-            $('#night').val(diffInDays - 1);
-          });
-          
-          $("#datefilter2").daterangepicker({
-            autoUpdateInput: false,
-            locale: {
-              cancelLabel: "Clear"
+        );
+
+        $("#datefilter2").daterangepicker(
+            {
+                autoUpdateInput: false,
+                locale: {
+                    cancelLabel: "Clear",
+                },
+                isInvalidDate: function (date) {
+                    // Disable dates in the past
+                    return date.isBefore(moment(), "day");
+                },
             },
-            isInvalidDate: function(date) {
-              // Disable dates in the past
-              return date.isBefore(moment(), 'day');
+            function (start, end, label) {
+                // Calculate the difference in milliseconds between the start and end dates
+                var diffInMs = end - start;
+
+                // Convert the difference to days
+                var diffInDays = Math.ceil(diffInMs / (1000 * 60 * 60 * 24));
+
+                // Update the value of the input with the total number of days
+                $("#day").val(diffInDays);
+                $("#night").val(diffInDays - 1);
             }
-          }, function(start, end, label) {
-            // Calculate the difference in milliseconds between the start and end dates
-            var diffInMs = end - start;
-          
-            // Convert the difference to days
-            var diffInDays = Math.ceil(diffInMs / (1000 * 60 * 60 * 24));
-          
-            // Update the value of the input with the total number of days
-            $('#day').val(diffInDays);
-            $('#night').val(diffInDays - 1);
-          });
-          
-          $("#datefilter3").daterangepicker({
-            autoUpdateInput: false,
-            locale: {
-              cancelLabel: "Clear"
+        );
+
+        $("#datefilter3").daterangepicker(
+            {
+                autoUpdateInput: false,
+                locale: {
+                    cancelLabel: "Clear",
+                },
+                isInvalidDate: function (date) {
+                    // Disable dates in the past
+                    return date.isBefore(moment(), "day");
+                },
             },
-            isInvalidDate: function(date) {
-              // Disable dates in the past
-              return date.isBefore(moment(), 'day');
+            function (start, end, label) {
+                // Calculate the difference in milliseconds between the start and end dates
+                var diffInMs = end - start;
+
+                // Convert the difference to days
+                var diffInDays = Math.ceil(diffInMs / (1000 * 60 * 60 * 24));
+
+                // Update the value of the input with the total number of days
+                $("#day").val(diffInDays);
+                $("#night").val(diffInDays - 1);
             }
-          }, function(start, end, label) {
-            // Calculate the difference in milliseconds between the start and end dates
-            var diffInMs = end - start;
-          
-            // Convert the difference to days
-            var diffInDays = Math.ceil(diffInMs / (1000 * 60 * 60 * 24));
-          
-            // Update the value of the input with the total number of days
-            $('#day').val(diffInDays);
-            $('#night').val(diffInDays - 1);
-          });
+        );
         //   $("#datefilter1").daterangepicker({
         //     isInvalidDate: function(date) {
         //         // Disable dates in the past
         //         return date.isBefore(moment(), 'day');
         //     }
         // });
-        
+
         $("#datefilter1").on("apply.daterangepicker", function (ev, picker) {
             var currentDate = moment();
             if (picker.startDate < currentDate) {
@@ -265,12 +274,73 @@ $(document).ready(function () {
             );
         });
         
+        $(document).on("change", "#areacategory", function () {
+            var id = $(this).val();
+            
+            function getEntitlementContent(id) {
+                return $.ajax({
+                    url: "/getEntitlementContent/" + id,
+                });
+            }
+        
+            var user = getEntitlementContent(id);
+            console.log(user);
+            
+            user.done(function (data) {
+                var value = parseInt(data[0].value);
+                $("#subs").val(value);
+        
+                var a = parseInt($("#day").val());
+                var b = parseFloat($("#subs").val());
+                var c = parseFloat(a * b).toFixed(2);
+                $("#totalsubs").val(c);
+            });
+        });
+        
+        
+
+        $(document).on("change", "#accom", function () {
+            var id = $(this).val();
+            //console.log(id);
+        
+            function getAccomodation() {
+                return $.ajax({
+                    url: "/getAccomodation/",
+                    method: "GET",
+                    dataType: "json" // Set the data type to JSON
+                });
+            }
+        
+            getAccomodation().done(function (data) {
+                var A1 = data.area[0].local_hotel_value;
+                var B1 = data.area[0].lodging_allowance_value;
+
+                var price = "";
+
+                if (id == "hotel") {
+                    price = A1;
+                } else if (id == "lodging") {
+                    price = B1;
+                } else {
+                    price = "";
+                }
+
+                $("#acco").val(price);
+
+                var a = parseInt($("#night").val());
+                var b = parseFloat($("#acco").val());
+                var c = parseFloat(a * b).toFixed(2);
+                $("#totalacco").val(c);
+                
+            });
+
+
+        });
         
 
         $("#datefilter1").on("cancel.daterangepicker", function (ev, picker) {
             $(this).val("");
         });
-
 
         // $("#datefilter2").daterangepicker({
         //     isInvalidDate: function(date) {
@@ -278,7 +348,7 @@ $(document).ready(function () {
         //         return date.isBefore(moment(), 'day');
         //     }
         // });
-        
+
         $("#datefilter2").on("apply.daterangepicker", function (ev, picker) {
             var currentDate = moment();
             if (picker.startDate < currentDate) {
@@ -300,7 +370,7 @@ $(document).ready(function () {
         //         return date.isBefore(moment(), 'day');
         //     }
         // });
-        
+
         $("#datefilter3").on("apply.daterangepicker", function (ev, picker) {
             var currentDate = moment();
             if (picker.startDate < currentDate) {
@@ -322,13 +392,14 @@ $(document).ready(function () {
             format: "dd/mm/yyyy",
             orientation: "bottom",
             startDate: new Date(), // Set the start date to the current date
-            beforeShowDay: function(date) {
+            beforeShowDay: function (date) {
                 // Disable past dates
                 var currentDate = new Date();
-                return date < currentDate.setHours(0,0,0,0) ? 'disabled' : '';
-            }
+                return date < currentDate.setHours(0, 0, 0, 0)
+                    ? "disabled"
+                    : "";
+            },
         });
-        
     });
 
     $(document).on("change", "#project", function () {
@@ -347,7 +418,7 @@ $(document).ready(function () {
 
         var location = getLocationByProjectId(projectId);
 
-        location.done(function (data) {
+        location.then(function (data) {
             for (let i = 0; i < data.length; i++) {
                 const location = data[i];
                 var opt = document.createElement("option");
@@ -377,7 +448,7 @@ $(document).ready(function () {
 
         var location = getLocationByProjectId(projectId);
 
-        location.done(function (data) {
+        location.then(function (data) {
             for (let i = 0; i < data.length; i++) {
                 const location = data[i];
                 var opt = document.createElement("option");
@@ -411,7 +482,7 @@ $(document).ready(function () {
                         async: true,
                         processData: false,
                         contentType: false,
-                    }).done(function (data) {
+                    }).then(function (data) {
                         swal({
                             title: data.title,
                             text: data.msg,
@@ -432,7 +503,7 @@ $(document).ready(function () {
             },
         });
     });
-
+ 
     $("#submitButton").click(function (e) {
         $("#saveForm").validate({
             // Specify validation rules
@@ -450,10 +521,10 @@ $(document).ready(function () {
                         url: "/submitCashAdvance",
                         data: data,
                         dataType: "json",
-                        async: false,
+
                         processData: false,
                         contentType: false,
-                    }).done(function (data) {
+                    }).then(function (data) {
                         swal({
                             title: data.title,
                             text: data.msg,

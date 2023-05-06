@@ -1,66 +1,95 @@
-$(document).ready(function() {
-   
+$(document).ready(function () {
     $("#appealTable").DataTable({
-        "searching": true,
-        "lengthChange": true,
-        "paging": true,
-        "lengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
-        "dom": '<"row"<"col-sm-4"l><"col-sm-4 text-center"B><"col-sm-4"f>>t<"row"<"col-sm-12"ip>>',
-        "buttons": [
-            { extend: 'excel', className: 'btn-blue', exportOptions: {
-                columns: [2,3,4,5,6,7]
-            }},
-            { extend: 'pdf', className: 'btn-blue',  exportOptions: {
-                columns: [2,3,4,5,6,7]
-            }},
-            { extend: 'print', className: 'btn-blue',  exportOptions: {
-                columns: [2,3,4,5,6,7]
-            }},
+        searching: true,
+        lengthChange: true,
+        paging: true,
+        lengthMenu: [
+            [5, 10, 25, 50, -1],
+            [5, 10, 25, 50, "All"],
         ],
-        initComplete: function (settings, json) {  
-            $("#activetable").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");            
-        },
-        columnDefs: [
-                  { orderable: false, targets: [0] }
-               ]
+        dom: '<"row"<"col-sm-4"l><"col-sm-4 text-center"B><"col-sm-4"f>>t<"row"<"col-sm-12"ip>>',
+        buttons: [
+            {
+                extend: "excel",
+                className: "btn-blue",
+                exportOptions: {
+                    columns: [2, 3, 4, 5, 6, 7],
+                },
+            },
+            {
+                extend: "pdf",
+                className: "btn-blue",
+                exportOptions: {
+                    columns: [2, 3, 4, 5, 6, 7],
+                },
+            },
+            {
+                extend: "print",
+                className: "btn-blue",
+                exportOptions: {
+                    columns: [2, 3, 4, 5, 6, 7],
+                },
+            },
+        ],
+        initComplete: function (settings, json) {
+            $("#activetable").wrap(
+                "<div style='overflow:auto; width:100%;position:relative;'></div>"
+            );
+        },
+        columnDefs: [{ orderable: false, targets: [0] }],
     });
 
     $("#historyTable").DataTable({
-        "searching": true,
-        "lengthChange": true,
-        "paging": true,
-        "lengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
-        "dom": '<"row"<"col-sm-4"l><"col-sm-4 text-center"B><"col-sm-4"f>>t<"row"<"col-sm-12"ip>>',
-        "buttons": [
-            { extend: 'excel', className: 'btn-blue', exportOptions: {
-                columns: [2,3,4,5,6,7]
-            }},
-            { extend: 'pdf', className: 'btn-blue',  exportOptions: {
-                columns: [2,3,4,5,6,7]
-            }},
-            { extend: 'print', className: 'btn-blue',  exportOptions: {
-                columns: [2,3,4,5,6,7]
-            }},
+        searching: true,
+        lengthChange: true,
+        paging: true,
+        lengthMenu: [
+            [5, 10, 25, 50, -1],
+            [5, 10, 25, 50, "All"],
         ],
-        initComplete: function (settings, json) {  
-            $("#activetable").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");            
-        },
-        columnDefs: [
-                  { orderable: false, targets: [0] }
-               ]
+        dom: '<"row"<"col-sm-4"l><"col-sm-4 text-center"B><"col-sm-4"f>>t<"row"<"col-sm-12"ip>>',
+        buttons: [
+            {
+                extend: "excel",
+                className: "btn-blue",
+                exportOptions: {
+                    columns: [2, 3, 4, 5, 6, 7],
+                },
+            },
+            {
+                extend: "pdf",
+                className: "btn-blue",
+                exportOptions: {
+                    columns: [2, 3, 4, 5, 6, 7],
+                },
+            },
+            {
+                extend: "print",
+                className: "btn-blue",
+                exportOptions: {
+                    columns: [2, 3, 4, 5, 6, 7],
+                },
+            },
+        ],
+        initComplete: function (settings, json) {
+            $("#activetable").wrap(
+                "<div style='overflow:auto; width:100%;position:relative;'></div>"
+            );
+        },
+        columnDefs: [{ orderable: false, targets: [0] }],
     });
 
-    $('.approveButton').click(function(e) {
+    $(".approveButton").click(function (e) {
         var id = $(this).data("id");
         //console.log(id);
-        requirejs(['sweetAlert2'], function(swal) {
+        requirejs(["sweetAlert2"], function (swal) {
             $.ajax({
                 type: "POST",
-                url: "/approveAppealMtc/"+ id,
-                async: false,
+                url: "/approveAppealMtc/" + id,
+
                 processData: false,
                 contentType: false,
-            }).done(function(data) {
+            }).then(function (data) {
                 swal({
                     title: data.title,
                     text: data.msg,
@@ -69,30 +98,26 @@ $(document).ready(function() {
                     confirmButtonText: "OK",
                     allowOutsideClick: false,
                     allowEscapeKey: false,
-                }).then(function() {
-                    if (data.type == 'error') {
-
+                }).then(function () {
+                    if (data.type == "error") {
                     } else {
                         location.reload();
                     }
-
-
                 });
             });
-
         });
     });
-    $('.rejectButton').click(function(e) {
+    $(".rejectButton").click(function (e) {
         var id = $(this).data("id");
         //console.log(id);
-        requirejs(['sweetAlert2'], function(swal) {
+        requirejs(["sweetAlert2"], function (swal) {
             $.ajax({
                 type: "POST",
-                url: "/rejectAppealMtc/"+ id,
-                async: false,
+                url: "/rejectAppealMtc/" + id,
+
                 processData: false,
                 contentType: false,
-            }).done(function(data) {
+            }).then(function (data) {
                 swal({
                     title: data.title,
                     text: data.msg,
@@ -101,17 +126,13 @@ $(document).ready(function() {
                     confirmButtonText: "OK",
                     allowOutsideClick: false,
                     allowEscapeKey: false,
-                }).then(function() {
-                    if (data.type == 'error') {
-
+                }).then(function () {
+                    if (data.type == "error") {
                     } else {
                         location.reload();
                     }
-
-
                 });
             });
-
         });
     });
 });

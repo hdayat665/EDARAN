@@ -18,10 +18,10 @@ $(document).ready(function () {
                         url: "/createGeneralApprover",
                         data: data,
                         dataType: "json",
-                        async: false,
+
                         processData: false,
                         contentType: false,
-                    }).done(function (data) {
+                    }).then(function (data) {
                         swal({
                             title: data.title,
                             text: data.msg,
@@ -41,7 +41,7 @@ $(document).ready(function () {
                 });
             },
         });
-    }); 
+    });
 
     $(document).on("change", "#recommenderGeneral", function () {
         roleId = $(this).val();
@@ -57,14 +57,16 @@ $(document).ready(function () {
         function getUserByJobGrade(roleId) {
             return $.ajax({
                 url: "/getUserByJobGrade/" + roleId,
-            });
+            })
+                .then(function (response) {})
+                .fail(function (xhr, status, error) {});
         }
 
         $("#approverGeneralShow").find("option").end();
 
         var user = getUserByJobGrade(roleId);
-
-        user.done(function (datas) {
+        console.log(user);
+        user.then(function (datas) {
             // console.log(datas);
             for (let i = 0; i < datas.length; i++) {
                 const userApprover = datas[i];
@@ -81,7 +83,7 @@ $(document).ready(function () {
 
     $(document).on("change", "#roleId", function () {
         roleId = $(this).val();
-        $("#checker1") 
+        $("#checker1")
             .find("option")
             .remove()
             .end()
@@ -100,8 +102,7 @@ $(document).ready(function () {
 
         var user = getUserByUserRole(roleId);
 
-        console.log(user);
-        user.done(function (data) {
+        user.then(function (data) {
             for (let i = 0; i < data.length; i++) {
                 const user = data[i];
                 console.log(data[i]);
@@ -172,7 +173,7 @@ $(document).ready(function () {
 
         var user = getUserByUserRole(roleId);
 
-        user.done(function (data) {
+        user.then(function (data) {
             // console.log(data.user_profile.id);
             for (let i = 0; i < data.length; i++) {
                 const user = data[i];
@@ -244,7 +245,7 @@ $(document).ready(function () {
 
         var user = getUserByUserRole(roleId);
 
-        user.done(function (data) {
+        user.then(function (data) {
             // console.log(data.user_profile.id);
             for (let i = 0; i < data.length; i++) {
                 const user = data[i];
@@ -301,10 +302,10 @@ $(document).ready(function () {
                         url: "/createDomainList",
                         data: data,
                         dataType: "json",
-                        async: false,
+
                         processData: false,
                         contentType: false,
-                    }).done(function (data) {
+                    }).then(function (data) {
                         swal({
                             title: data.title,
                             text: data.msg,
@@ -342,10 +343,10 @@ $(document).ready(function () {
                         url: "/createDomainList",
                         data: data,
                         dataType: "json",
-                        async: false,
+
                         processData: false,
                         contentType: false,
-                    }).done(function (data) {
+                    }).then(function (data) {
                         swal({
                             title: data.title,
                             text: data.msg,
@@ -383,10 +384,10 @@ $(document).ready(function () {
                         url: "/createDomainList",
                         data: data,
                         dataType: "json",
-                        async: false,
+
                         processData: false,
                         contentType: false,
-                    }).done(function (data) {
+                    }).then(function (data) {
                         swal({
                             title: data.title,
                             text: data.msg,
@@ -425,10 +426,10 @@ $(document).ready(function () {
                         url: "/updateClaimCategory/" + id,
                         data: data,
                         dataType: "json",
-                        async: false,
+
                         processData: false,
                         contentType: false,
-                    }).done(function (data) {
+                    }).then(function (data) {
                         swal({
                             title: data.title,
                             text: data.msg,
@@ -467,10 +468,10 @@ $(document).ready(function () {
                     url: "/deleteClaimCategory/" + id,
                     // dataType: "json",
                     data: { _method: "DELETE" },
-                    // async: false,
+
                     // processData: false,
                     // contentType: false,
-                }).done(function (data) {
+                }).then(function (data) {
                     swal({
                         title: data.title,
                         text: data.msg,

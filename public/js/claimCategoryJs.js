@@ -18,10 +18,10 @@ $(document).ready(function () {
                         url: "/createClaimCategory",
                         data: data,
                         dataType: "json",
-                        async: false,
+
                         processData: false,
                         contentType: false,
-                    }).done(function (data) {
+                    }).then(function (data) {
                         swal({
                             title: data.title,
                             text: data.msg,
@@ -62,10 +62,10 @@ $(document).ready(function () {
                         url: "/updateClaimCategory/" + id,
                         data: data,
                         dataType: "json",
-                        async: false,
+
                         processData: false,
                         contentType: false,
-                    }).done(function (data) {
+                    }).then(function (data) {
                         swal({
                             title: data.title,
                             text: data.msg,
@@ -104,10 +104,10 @@ $(document).ready(function () {
                     url: "/deleteClaimCategoryContent/" + id,
                     // dataType: "json",
                     data: { _method: "DELETE" },
-                    // async: false,
+
                     // processData: false,
                     // contentType: false,
-                }).done(function (data) {
+                }).then(function (data) {
                     swal({
                         title: data.title,
                         text: data.msg,
@@ -144,10 +144,10 @@ $(document).ready(function () {
                     url: "/deleteClaimCategory/" + id,
                     // dataType: "json",
                     data: { _method: "DELETE" },
-                    // async: false,
+
                     // processData: false,
                     // contentType: false,
-                }).done(function (data) {
+                }).then(function (data) {
                     swal({
                         title: data.title,
                         text: data.msg,
@@ -223,10 +223,10 @@ $(document).ready(function () {
             $.ajax({
                 type: "POST",
                 url: "/updateStatusClaimCategory/" + id + "/" + status,
-                async: false,
+
                 processData: false,
                 contentType: false,
-            }).done(function (data) {
+            }).then(function (data) {
                 swal({
                     title: data.title,
                     text: data.msg,

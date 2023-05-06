@@ -1,129 +1,204 @@
 $(document).ready(function () {
     $("#tableactive").dataTable({
-        "searching": true,
-        "lengthChange": true,
-        "paging": true,
-        "lengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
-        "dom": '<"row"<"col-sm-4"l><"col-sm-4 text-center"B><"col-sm-4"f>>t<"row"<"col-sm-12"ip>>',
-        "buttons": [
-            { extend: 'excel', className: 'btn-blue', exportOptions: {
-                columns: [2,3,4,5,6,7]
-            }},
-            { extend: 'pdf', className: 'btn-blue',  exportOptions: {
-                columns: [2,3,4,5,6,7]
-            }},
-            { extend: 'print', className: 'btn-blue',  exportOptions: {
-                columns: [2,3,4,5,6,7]
-            }},
+        searching: true,
+        lengthChange: true,
+        paging: true,
+        lengthMenu: [
+            [5, 10, 25, 50, -1],
+            [5, 10, 25, 50, "All"],
         ],
-        initComplete: function (settings, json) {  
-            $("#activetable").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");            
-        },
-        columnDefs: [
-                  { orderable: false, targets: [0] }
-               ]
+        dom: '<"row"<"col-sm-4"l><"col-sm-4 text-center"B><"col-sm-4"f>>t<"row"<"col-sm-12"ip>>',
+        buttons: [
+            {
+                extend: "excel",
+                className: "btn-blue",
+                exportOptions: {
+                    columns: [2, 3, 4, 5, 6, 7],
+                },
+            },
+            {
+                extend: "pdf",
+                className: "btn-blue",
+                exportOptions: {
+                    columns: [2, 3, 4, 5, 6, 7],
+                },
+            },
+            {
+                extend: "print",
+                className: "btn-blue",
+                exportOptions: {
+                    columns: [2, 3, 4, 5, 6, 7],
+                },
+            },
+        ],
+        initComplete: function (settings, json) {
+            $("#activetable").wrap(
+                "<div style='overflow:auto; width:100%;position:relative;'></div>"
+            );
+        },
+        columnDefs: [{ orderable: false, targets: [0] }],
     });
 
     $("#tableprocess").dataTable({
-        "searching": true,
-        "lengthChange": true,
-        "paging": true,
-        "lengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
-        "dom": '<"row"<"col-sm-4"l><"col-sm-4 text-center"B><"col-sm-4"f>>t<"row"<"col-sm-12"ip>>',
-        "buttons": [
-            { extend: 'excel', className: 'btn-blue', exportOptions: {
-                columns: [2,3,4,5,6,7]
-            }},
-            { extend: 'pdf', className: 'btn-blue',  exportOptions: {
-                columns: [2,3,4,5,6,7]
-            }},
-            { extend: 'print', className: 'btn-blue',  exportOptions: {
-                columns: [2,3,4,5,6,7]
-            }},
+        searching: true,
+        lengthChange: true,
+        paging: true,
+        lengthMenu: [
+            [5, 10, 25, 50, -1],
+            [5, 10, 25, 50, "All"],
         ],
-        initComplete: function (settings, json) {  
-            $("#activetable").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");            
-        },
-        columnDefs: [
-                  { orderable: false, targets: [0] }
-               ]
+        dom: '<"row"<"col-sm-4"l><"col-sm-4 text-center"B><"col-sm-4"f>>t<"row"<"col-sm-12"ip>>',
+        buttons: [
+            {
+                extend: "excel",
+                className: "btn-blue",
+                exportOptions: {
+                    columns: [2, 3, 4, 5, 6, 7],
+                },
+            },
+            {
+                extend: "pdf",
+                className: "btn-blue",
+                exportOptions: {
+                    columns: [2, 3, 4, 5, 6, 7],
+                },
+            },
+            {
+                extend: "print",
+                className: "btn-blue",
+                exportOptions: {
+                    columns: [2, 3, 4, 5, 6, 7],
+                },
+            },
+        ],
+        initComplete: function (settings, json) {
+            $("#activetable").wrap(
+                "<div style='overflow:auto; width:100%;position:relative;'></div>"
+            );
+        },
+        columnDefs: [{ orderable: false, targets: [0] }],
     });
 
     $("#tablepaid").dataTable({
-        "searching": true,
-        "lengthChange": true,
-        "paging": true,
-        "lengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
-        "dom": '<"row"<"col-sm-4"l><"col-sm-4 text-center"B><"col-sm-4"f>>t<"row"<"col-sm-12"ip>>',
-        "buttons": [
-            { extend: 'excel', className: 'btn-blue', exportOptions: {
-                columns: [2,3,4,5,6,7]
-            }},
-            { extend: 'pdf', className: 'btn-blue',  exportOptions: {
-                columns: [2,3,4,5,6,7]
-            }},
-            { extend: 'print', className: 'btn-blue',  exportOptions: {
-                columns: [2,3,4,5,6,7]
-            }},
+        searching: true,
+        lengthChange: true,
+        paging: true,
+        lengthMenu: [
+            [5, 10, 25, 50, -1],
+            [5, 10, 25, 50, "All"],
         ],
-        initComplete: function (settings, json) {  
-            $("#activetable").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");            
-        },
-        columnDefs: [
-                  { orderable: false, targets: [0] }
-               ]
+        dom: '<"row"<"col-sm-4"l><"col-sm-4 text-center"B><"col-sm-4"f>>t<"row"<"col-sm-12"ip>>',
+        buttons: [
+            {
+                extend: "excel",
+                className: "btn-blue",
+                exportOptions: {
+                    columns: [2, 3, 4, 5, 6, 7],
+                },
+            },
+            {
+                extend: "pdf",
+                className: "btn-blue",
+                exportOptions: {
+                    columns: [2, 3, 4, 5, 6, 7],
+                },
+            },
+            {
+                extend: "print",
+                className: "btn-blue",
+                exportOptions: {
+                    columns: [2, 3, 4, 5, 6, 7],
+                },
+            },
+        ],
+        initComplete: function (settings, json) {
+            $("#activetable").wrap(
+                "<div style='overflow:auto; width:100%;position:relative;'></div>"
+            );
+        },
+        columnDefs: [{ orderable: false, targets: [0] }],
     });
 
     $("#tablerejected").dataTable({
-        "searching": true,
-        "lengthChange": true,
-        "paging": true,
-        "lengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
-        "dom": '<"row"<"col-sm-4"l><"col-sm-4 text-center"B><"col-sm-4"f>>t<"row"<"col-sm-12"ip>>',
-        "buttons": [
-            { extend: 'excel', className: 'btn-blue', exportOptions: {
-                columns: [2,3,4,5,6,7]
-            }},
-            { extend: 'pdf', className: 'btn-blue',  exportOptions: {
-                columns: [2,3,4,5,6,7]
-            }},
-            { extend: 'print', className: 'btn-blue',  exportOptions: {
-                columns: [2,3,4,5,6,7]
-            }},
+        searching: true,
+        lengthChange: true,
+        paging: true,
+        lengthMenu: [
+            [5, 10, 25, 50, -1],
+            [5, 10, 25, 50, "All"],
         ],
-        initComplete: function (settings, json) {  
-            $("#activetable").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");            
-        },
-        columnDefs: [
-                  { orderable: false, targets: [0] }
-               ]
+        dom: '<"row"<"col-sm-4"l><"col-sm-4 text-center"B><"col-sm-4"f>>t<"row"<"col-sm-12"ip>>',
+        buttons: [
+            {
+                extend: "excel",
+                className: "btn-blue",
+                exportOptions: {
+                    columns: [2, 3, 4, 5, 6, 7],
+                },
+            },
+            {
+                extend: "pdf",
+                className: "btn-blue",
+                exportOptions: {
+                    columns: [2, 3, 4, 5, 6, 7],
+                },
+            },
+            {
+                extend: "print",
+                className: "btn-blue",
+                exportOptions: {
+                    columns: [2, 3, 4, 5, 6, 7],
+                },
+            },
+        ],
+        initComplete: function (settings, json) {
+            $("#activetable").wrap(
+                "<div style='overflow:auto; width:100%;position:relative;'></div>"
+            );
+        },
+        columnDefs: [{ orderable: false, targets: [0] }],
     });
 
     $("#tableclosed").dataTable({
-        "searching": true,
-        "lengthChange": true,
-        "paging": true,
-        "lengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
-        "dom": '<"row"<"col-sm-4"l><"col-sm-4 text-center"B><"col-sm-4"f>>t<"row"<"col-sm-12"ip>>',
-        "buttons": [
-            { extend: 'excel', className: 'btn-blue', exportOptions: {
-                columns: [2,3,4,5,6,7]
-            }},
-            { extend: 'pdf', className: 'btn-blue',  exportOptions: {
-                columns: [2,3,4,5,6,7]
-            }},
-            { extend: 'print', className: 'btn-blue',  exportOptions: {
-                columns: [2,3,4,5,6,7]
-            }},
+        searching: true,
+        lengthChange: true,
+        paging: true,
+        lengthMenu: [
+            [5, 10, 25, 50, -1],
+            [5, 10, 25, 50, "All"],
         ],
-        initComplete: function (settings, json) {  
-            $("#activetable").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");            
-        },
-        columnDefs: [
-                  { orderable: false, targets: [0] }
-               ]
+        dom: '<"row"<"col-sm-4"l><"col-sm-4 text-center"B><"col-sm-4"f>>t<"row"<"col-sm-12"ip>>',
+        buttons: [
+            {
+                extend: "excel",
+                className: "btn-blue",
+                exportOptions: {
+                    columns: [2, 3, 4, 5, 6, 7],
+                },
+            },
+            {
+                extend: "pdf",
+                className: "btn-blue",
+                exportOptions: {
+                    columns: [2, 3, 4, 5, 6, 7],
+                },
+            },
+            {
+                extend: "print",
+                className: "btn-blue",
+                exportOptions: {
+                    columns: [2, 3, 4, 5, 6, 7],
+                },
+            },
+        ],
+        initComplete: function (settings, json) {
+            $("#activetable").wrap(
+                "<div style='overflow:auto; width:100%;position:relative;'></div>"
+            );
+        },
+        columnDefs: [{ orderable: false, targets: [0] }],
     });
-    
+
     $("#filter").click(function () {
         $("#filteronoff").toggle();
     });
@@ -155,10 +230,10 @@ $(document).ready(function () {
                     status +
                     "/" +
                     stage,
-                async: false,
+
                 processData: false,
                 contentType: false,
-            }).done(function (data) {
+            }).then(function (data) {
                 swal({
                     title: data.title,
                     text: data.msg,
@@ -205,10 +280,10 @@ $(document).ready(function () {
                             "/" +
                             stage,
                         data: data,
-                        async: false,
+
                         processData: false,
                         contentType: false,
-                    }).done(function (data) {
+                    }).then(function (data) {
                         swal({
                             title: data.title,
                             text: data.msg,
@@ -238,7 +313,7 @@ $(document).ready(function () {
 
         var vehicleData = getPersonalById(id);
 
-        vehicleData.done(function (data) {
+        vehicleData.then(function (data) {
             console.log(data);
             $("#created_At").val(data.applied_date);
             $("#claim_category").val(data.claim_category);

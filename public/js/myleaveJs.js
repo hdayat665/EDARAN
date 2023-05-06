@@ -41,7 +41,7 @@ $(document).ready(function () {
         });
     }
 
-    mypie1.done(function (datapie) {
+    mypie1.then(function (datapie) {
         Chart.defaults.color = "rgba(" + app.color.componentColorRgb + ", .65)";
         Chart.defaults.font.family = app.font.family;
         Chart.defaults.font.weight = 500;
@@ -94,7 +94,7 @@ $(document).ready(function () {
         });
     }
 
-    mypie2.done(function (datapie2) {
+    mypie2.then(function (datapie2) {
         Chart.defaults.color = "rgba(" + app.color.componentColorRgb + ", .65)";
         Chart.defaults.font.family = app.font.family;
         Chart.defaults.font.weight = 500;
@@ -250,25 +250,27 @@ $(document).ready(function () {
         var startDate = $("#datepicker-start").val();
         var endDate = $("#datepicker-end").val();
         var totalDays = "";
-    
+
         if (startDate && endDate) {
             var date1 = new Date(startDate);
             var date2 = new Date(endDate);
             var timeDiff = date2.getTime() - date1.getTime();
             var dayDiff = Math.ceil(timeDiff / (1000 * 3600 * 24));
-    
+
             // Menghitung jumlah akhir pekan (Sabtu dan Minggu) antara dua tanggal
             var weekends = 0;
             for (var i = 0; i <= dayDiff; i++) {
-                var currentDate = new Date(date1.getTime() + (i * 24 * 60 * 60 * 1000));
+                var currentDate = new Date(
+                    date1.getTime() + i * 24 * 60 * 60 * 1000
+                );
                 if (currentDate.getDay() === 0 || currentDate.getDay() === 6) {
                     weekends++;
                 }
             }
-    
+
             totalDays = dayDiff + 1 - weekends;
         }
-    
+
         if (totalDays <= 0) {
             $("#datepicker-end").val("");
             $("#select4").val("");
@@ -276,7 +278,6 @@ $(document).ready(function () {
             $("#select4").val(totalDays);
         }
     });
-    
 
     $(document).ready(function () {
         if (
@@ -341,10 +342,10 @@ $(document).ready(function () {
                         url: "/createtmyleave",
                         data: data,
                         dataType: "json",
-                        async: false,
+
                         processData: false,
                         contentType: false,
-                    }).done(function (data) {
+                    }).then(function (data) {
                         swal({
                             title: data.title,
                             text: data.msg,
@@ -370,7 +371,7 @@ $(document).ready(function () {
         var myleaveData = myleave(id);
         // console.log(myleaveData);
 
-        myleaveData.done(function (data) {
+        myleaveData.then(function (data) {
             $("#datepicker-applied1").val(data[0].applied_date);
             $("#typeofleave1").val(data[0].lt_type_id);
             // $("#dayApplied1").val(data[0].day_applied);
@@ -481,7 +482,7 @@ $(document).ready(function () {
         var myleaveData = myleave(id);
         // console.log(myleaveData);
 
-        myleaveData.done(function (data) {
+        myleaveData.then(function (data) {
             $("#datafullname2").val(data[0].username);
             $("#datepicker-applied2").val(data[0].applied_date);
             $("#typeofleave2").val(data[0].lt_type_id);
@@ -608,10 +609,10 @@ $(document).ready(function () {
                     url: "/deletemyleave/" + id,
                     // dataType: "json",
                     data: { _method: "DELETE" },
-                    // async: false,
+
                     // processData: false,
                     // contentType: false,
-                }).done(function (data) {
+                }).then(function (data) {
                     swal({
                         title: data.title,
                         text: data.msg,
@@ -637,7 +638,7 @@ $(document).ready(function () {
         var myleavethree = myleavesv(id);
         // console.log(myleaveData2);
 
-        myleavethree.done(function (data) {
+        myleavethree.then(function (data) {
             $("#datafullname").val(data[0].fullName);
             console.log(data[0]);
             $("#applieddate").val(data[0].applied_date);

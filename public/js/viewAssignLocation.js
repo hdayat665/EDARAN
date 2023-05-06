@@ -1,5 +1,4 @@
-$(document).ready(function() {
-
+$(document).ready(function () {
     $("#data-table-viewassigned").DataTable({
         responsive: false,
         lengthMenu: [
@@ -7,10 +6,10 @@ $(document).ready(function() {
             [5, 10, 25, 50, "All"],
         ],
     });
-    $(document).on("click", "#deleteButton", function() {
-        id = $(this).data('id');
-        member_id = $(this).data('member-id');
-        requirejs(['sweetAlert2'], function(swal) {
+    $(document).on("click", "#deleteButton", function () {
+        id = $(this).data("id");
+        member_id = $(this).data("member-id");
+        requirejs(["sweetAlert2"], function (swal) {
             swal({
                 title: "Are you sure to delete Assign Location?",
                 type: "error",
@@ -18,27 +17,26 @@ $(document).ready(function() {
                 confirmButtonText: "Yes!",
                 showCancelButton: true,
                 allowOutsideClick: false,
-                allowEscapeKey: false
-            }).then(function() {
+                allowEscapeKey: false,
+            }).then(function () {
                 $.ajax({
                     type: "POST",
                     url: "/deleteAssignLocation/" + id + "/" + member_id,
                     dataType: "json",
-                    async: false,
+
                     processData: false,
                     contentType: false,
-                }).done(function(data) {
+                }).then(function (data) {
                     swal({
                         title: data.title,
                         text: data.msg,
                         type: data.type,
-                        confirmButtonColor: '#3085d6',
-                        confirmButtonText: 'OK',
+                        confirmButtonColor: "#3085d6",
+                        confirmButtonText: "OK",
                         allowOutsideClick: false,
-                        allowEscapeKey: false
-                    }).then(function() {
-                        if (data.type == 'error') {
-
+                        allowEscapeKey: false,
+                    }).then(function () {
+                        if (data.type == "error") {
                         } else {
                             location.reload();
                         }
@@ -47,5 +45,4 @@ $(document).ready(function() {
             });
         });
     });
-
 });

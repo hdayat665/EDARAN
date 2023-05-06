@@ -9,16 +9,16 @@ $(document).ready(function () {
                 month: "required",
                 claim_category: "required",
                 amount: "required",
-                'file_upload[]': "required",
+                "file_upload[]": "required",
                 claim_category_detail: "required",
-            }, 
+            },
 
             messages: {
                 year: "Please Select Year",
                 month: "Please Select Month",
                 claim_category: "Please Select Claim Category",
                 amount: "Please Fill Out Amount",
-                'file_upload[]': "Please Upload Attachment",
+                "file_upload[]": "Please Upload Attachment",
                 claim_category_detail: "Please Insert Category Detail",
             },
             submitHandler: function (form) {
@@ -32,12 +32,12 @@ $(document).ready(function () {
                         url: "/createGeneralClaim",
                         data: data,
                         dataType: "json",
-                        async: false,
+
                         processData: false,
                         contentType: false,
-                    }).done(function (data) {
+                    }).then(function (data) {
                         swal({
-                            title: data.title, 
+                            title: data.title,
                             text: data.msg,
                             type: data.type,
                             confirmButtonColor: "#3085d6",
@@ -47,7 +47,8 @@ $(document).ready(function () {
                         }).then(function () {
                             if (data.type == "error") {
                             } else {
-                                window.location.href = "/editGeneralClaimView/" + data.id;
+                                window.location.href =
+                                    "/editGeneralClaimView/" + data.id;
                             }
                         });
                     });
@@ -55,26 +56,25 @@ $(document).ready(function () {
             },
         });
     });
-        
-    $(document).ready(function() {
-        $('#amount').on('input', function() {
+
+    $(document).ready(function () {
+        $("#amount").on("input", function () {
             var value = $(this).val();
-            var decimalCount = (value.split('.')[1] || []).length;
+            var decimalCount = (value.split(".")[1] || []).length;
             if (decimalCount > 2) {
-            $(this).val(parseFloat(value).toFixed(2));
-            } 
+                $(this).val(parseFloat(value).toFixed(2));
+            }
         });
 
-        $('#amount').blur(function() {
+        $("#amount").blur(function () {
             var value = $(this).val();
-            var decimalCount = (value.split('.')[1] || []).length;
+            var decimalCount = (value.split(".")[1] || []).length;
             if (decimalCount == 0) {
-            $(this).val(value + '.00');
+                $(this).val(value + ".00");
             }
         });
     });
- 
-    
+
     // $("#createGnc").click(function (e) {
     //     $("#createForm").validate({
     //         // Specify validation rules
@@ -86,16 +86,16 @@ $(document).ready(function () {
     //                 var data = new FormData(
     //                     document.getElementById("createForm")
     //                 );
-                    
+
     //                 $.ajax({
     //                     type: "POST",
     //                     url: "/createGeneralClaim",
     //                     data: data,
     //                     dataType: "json",
-    //                     async: false,
+    //
     //                     processData: false,
     //                     contentType: false,
-    //                 }).done(function (data) {
+    //                 }).then(function (data) {
     //                     swal({
     //                         title: data.title,
     //                         text: data.msg,
@@ -131,10 +131,10 @@ $(document).ready(function () {
                         url: "/createGeneralClaim",
                         data: data,
                         dataType: "json",
-                        async: false, 
+
                         processData: false,
                         contentType: false,
-                    }).done(function (data) {
+                    }).then(function (data) {
                         swal({
                             title: data.title,
                             text: data.msg,
@@ -167,14 +167,14 @@ $(document).ready(function () {
                     var data = new FormData(document.getElementById("addForm"));
 
                     $.ajax({
-                        type: "POST", 
+                        type: "POST",
                         url: "/submitGeneralClaim",
                         data: data,
                         dataType: "json",
-                        async: false,
+
                         processData: false,
                         contentType: false,
-                    }).done(function (data) {
+                    }).then(function (data) {
                         swal({
                             title: data.title,
                             text: data.msg,
@@ -213,10 +213,10 @@ $(document).ready(function () {
                     url: "/deleteJobGrade/" + id,
                     // dataType: "json",
                     data: { _method: "DELETE" },
-                    // async: false,
+
                     // processData: false,
                     // contentType: false,
-                }).done(function (data) {
+                }).then(function (data) {
                     swal({
                         title: data.title,
                         text: data.msg,
@@ -276,7 +276,7 @@ $(document).ready(function () {
 
         var user = getClaimCategoryContent(id);
 
-        user.done(function (data) {
+        user.then(function (data) {
             $("#label").text(data[0].label);
             // console.log(data[0].label);
             for (let i = 0; i < data.length; i++) {
@@ -301,4 +301,3 @@ $(document).ready(function () {
         })
         .datepicker("setDate", "now");
 });
- 

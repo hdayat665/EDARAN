@@ -1,6 +1,5 @@
 $("document").ready(function () {
-    
-    $("#type_transport").change(function() {
+    $("#type_transport").change(function () {
         var selectedOption = $("#type_transport").val();
         if (selectedOption == "Personal Car") {
             $("#first_km").val($("#first_km").data("firstkmcar"));
@@ -25,10 +24,7 @@ $("document").ready(function () {
             $("#third_price").val("");
         }
     });
-    
 
-
-    
     $("#claimtable1").DataTable({
         searching: false,
         lengthChange: true,
@@ -86,9 +82,6 @@ $("document").ready(function () {
             $("#project").hide();
         }
     });
-    
-    
-    
 
     //
     $(document).on("change", "#dest", function () {
@@ -101,7 +94,7 @@ $("document").ready(function () {
         } else if ($(this).val() == "Office") {
             var officeValue = $("#office").val() || "-";
             $("#autocomplete2").val(officeValue);
-        }else {
+        } else {
             $("#projectdest").hide();
             $("#logname").hide();
         }
@@ -159,19 +152,18 @@ $("document").ready(function () {
                 days + " nights : " + hours + " hours : " + mins + " minutes "
             );
             $("#DBF").val(days);
-            $("#DLH").val(days); 
+            $("#DLH").val(days);
             $("#DDN").val(days);
             $("#hn").val(days);
             $("#ln").val(days);
 
-             var a = parseFloat($("#BF").val()); //float
+            var a = parseFloat($("#BF").val()); //float
             var b = parseInt($("#DBF").val());
             var c = parseFloat($("#LH").val()); //float
             var d = parseInt($("#DLH").val());
             var e = parseFloat($("#DN").val()); //float
             var f = parseInt($("#DDN").val());
             $("#TS").val(a * b + c * d + e * f);
-
         });
     });
 
@@ -198,11 +190,9 @@ $("document").ready(function () {
             diff -= mins * (1000 * 60);
 
             $("#totalduration").val(hours + " hours : " + mins + " minutes ");
-            
         }
     );
 
-    
     function calculate(total) {
         var result = 0;
         var firstKm = document.getElementById("first_km").value;
@@ -210,43 +200,36 @@ $("document").ready(function () {
         var secondKm = document.getElementById("second_km").value;
         var secondPrice = document.getElementById("second_price").value;
         var thirdPrice = document.getElementById("third_price").value;
-      
-        if (total > firstKm) {
-          result += firstKm * firstPrice;
-          total -= firstKm;
-      
-          if (total > secondKm) {
-            result += secondKm * secondPrice;
-            total -= secondKm;
-      
-            result += total * thirdPrice;
-          } else {
-            result += total * secondPrice;
-          }
-        } else {
-          result = total * firstPrice;
-        }
-      
-        return result;
-      }
-      
 
-      var resultInput = document.getElementById("result");
-      $("#result,#toll,#parking,#petrol").focus(function () {
+        if (total > firstKm) {
+            result += firstKm * firstPrice;
+            total -= firstKm;
+
+            if (total > secondKm) {
+                result += secondKm * secondPrice;
+                total -= secondKm;
+
+                result += total * thirdPrice;
+            } else {
+                result += total * secondPrice;
+            }
+        } else {
+            result = total * firstPrice;
+        }
+
+        return result;
+    }
+
+    var resultInput = document.getElementById("result");
+    $("#result,#toll,#parking,#petrol").focus(function () {
         var total = parseInt(resultInput.value);
 
         // call the calculate function with the input value
         var result = calculate(total);
 
         // display the result in a <div> element
-        $("#millage").val(
-            result
-        );
-        
-      });
-
-    
-    
+        $("#millage").val(result);
+    });
 
     $("#hotelc").change(function () {
         var s = $("#hotelc input:checked")
@@ -259,24 +242,21 @@ $("document").ready(function () {
             var ss = "100"; // this is the value to check against
 
             if ($("#htv").val() == ss) {
-                $('#hotelcv').prop('readonly', true);
+                $("#hotelcv").prop("readonly", true);
             } else {
-                $('#hotelcv').prop('readonly', true);
+                $("#hotelcv").prop("readonly", true);
             }
 
             $("#hotelcv").val(s);
             $("#hotelcv1").val(s);
-            $('#hn').prop('readonly', false);
-
-            
+            $("#hn").prop("readonly", false);
         } else {
             $("#hotelcv").val("");
-            $('#hotelcv').prop('readonly', true);
+            $("#hotelcv").prop("readonly", true);
             $("#hotelcv1").val("0");
-            $('#hn').prop('readonly', true);
+            $("#hn").prop("readonly", true);
         }
     });
-    
 
     $("#lodgingc").change(function () {
         var s = $("#lodgingc input:checked")
@@ -289,23 +269,21 @@ $("document").ready(function () {
             var ss = "100"; // this is the value to check against
 
             if ($("#ldgv").val() == ss) {
-                $('#lodgingcv').prop('readonly', true);
+                $("#lodgingcv").prop("readonly", true);
             } else {
-                $('#lodgingcv').prop('readonly', true);
+                $("#lodgingcv").prop("readonly", true);
             }
 
             $("#lodgingcv").val(s);
             $("#lodgingcv1").val(s);
-            $('#ln').prop('readonly', false);
+            $("#ln").prop("readonly", false);
         } else {
             $("#lodgingcv").val("");
-            $('#lodgingcv').prop('readonly', true);
+            $("#lodgingcv").prop("readonly", true);
             $("#lodgingcv1").val("0");
-            $('#ln').prop('readonly', true);
-
+            $("#ln").prop("readonly", true);
         }
     });
-    
 
     // calculate total subsistence & accomadation
     $("#BF,#DBF,#LH,#DLH,#DN,#DDN,#TS").focus(function () {
@@ -326,7 +304,7 @@ $("document").ready(function () {
         var d = parseInt($("#ln").val());
         var e = parseFloat(a * b + c * d).toFixed(2);
         $("#TAV").val(e);
-    }); 
+    });
 
     $(
         "#hotelcv,#hotelcv1,#hn,#lodgingcv,#hotelcv1,#ln,#htv,#ldgv,#TS,#TAV,#DBF,#DLH,#DDN"
@@ -363,7 +341,7 @@ $("document").ready(function () {
         for (let i = 0; i < inputs.length; i++) {
             $("#" + inputs[i] + "")
                 .find("option")
-                .remove()
+                .remove() 
                 .end()
                 .append(
                     '<option label="PLEASE CHOOSE" selected="selected"> </option>'
@@ -382,7 +360,7 @@ $("document").ready(function () {
 
         var user = getClaimCategoryContent(id);
 
-        user.done(function (data) {
+        user.then(function (data) {
             // console.log(data);
             $("#label").text(data[0].label);
             for (let i = 0; i < data.length; i++) {
@@ -405,14 +383,14 @@ $("document").ready(function () {
                 claim_category: "required",
                 claim_category_detail: "required",
                 amount: "required",
-                'file_upload[]': "required",
+                "file_upload[]": "required",
             },
 
             messages: {
                 claim_category: "Please Select Claim Category",
                 claim_category_detail: "Please Select Claim Category",
                 amount: "Please Fill Out Amount",
-                'file_upload[]': "Please Upload Attachment",
+                "file_upload[]": "Please Upload Attachment",
             },
             submitHandler: function (form) {
                 requirejs(["sweetAlert2"], function (swal) {
@@ -425,10 +403,10 @@ $("document").ready(function () {
                         url: "/submitPersonalClaim",
                         data: data,
                         dataType: "json",
-                        async: false,
+
                         processData: false,
                         contentType: false,
-                    }).done(function (data) {
+                    }).then(function (data) {
                         swal({
                             title: data.title,
                             text: data.msg,
@@ -450,20 +428,20 @@ $("document").ready(function () {
             },
         });
     });
-    $(document).ready(function() {
-        $('#amount').on('input', function() {
+    $(document).ready(function () {
+        $("#amount").on("input", function () {
             var value = $(this).val();
-            var decimalCount = (value.split('.')[1] || []).length;
+            var decimalCount = (value.split(".")[1] || []).length;
             if (decimalCount > 2) {
-            $(this).val(parseFloat(value).toFixed(2));
-            } 
+                $(this).val(parseFloat(value).toFixed(2));
+            }
         });
 
-        $('#amount').blur(function() {
+        $("#amount").blur(function () {
             var value = $(this).val();
-            var decimalCount = (value.split('.')[1] || []).length;
+            var decimalCount = (value.split(".")[1] || []).length;
             if (decimalCount == 0) {
-            $(this).val(value + '.00');
+                $(this).val(value + ".00");
             }
         });
     });
@@ -483,7 +461,7 @@ $("document").ready(function () {
                 address_start: "required",
                 location_end: "required",
                 location_address: "required",
-                'file_upload[]': "required",
+                "file_upload[]": "required",
             },
 
             messages: {
@@ -498,7 +476,7 @@ $("document").ready(function () {
                 address_start: "Please Select Start Address",
                 location_end: "Please Select Destination",
                 location_address: "Please Select Destination Address",
-                'file_upload[]': "Please Upload Attachment",
+                "file_upload[]": "Please Upload Attachment",
             },
             submitHandler: function (form) {
                 requirejs(["sweetAlert2"], function (swal) {
@@ -511,10 +489,10 @@ $("document").ready(function () {
                         url: "/submitTravelClaim",
                         data: data,
                         dataType: "json",
-                        async: false,
+
                         processData: false,
                         contentType: false,
-                    }).done(function (data) {
+                    }).then(function (data) {
                         swal({
                             title: data.title,
                             text: data.msg,
@@ -541,11 +519,11 @@ $("document").ready(function () {
         $("#subsForm").validate({
             // Specify validation rules
             rules: {
-                'file_upload[]': "required",
+                "file_upload[]": "required",
             },
 
             messages: {
-                'file_upload[]': "Please Upload Attachment",
+                "file_upload[]": "Please Upload Attachment",
             },
             submitHandler: function (form) {
                 requirejs(["sweetAlert2"], function (swal) {
@@ -558,10 +536,10 @@ $("document").ready(function () {
                         url: "/submitCaClaim",
                         data: data,
                         dataType: "json",
-                        async: false,
+
                         processData: false,
                         contentType: false,
-                    }).done(function (data) {
+                    }).then(function (data) {
                         swal({
                             title: data.title,
                             text: data.msg,
@@ -588,7 +566,7 @@ $("document").ready(function () {
         $("#subsForm").validate({
             // Specify validation rules
             rules: {
-                'file_upload[]': "required",
+                "file_upload[]": "required",
                 start_date: "required",
                 end_date: "required",
                 start_time: "required",
@@ -598,7 +576,7 @@ $("document").ready(function () {
             },
 
             messages: {
-                'file_upload[]': "Please Upload Attachment",
+                "file_upload[]": "Please Upload Attachment",
                 start_date: "Please Select Start Date",
                 end_date: "Please Select End Date",
                 start_time: "Please Select Start Time",
@@ -617,10 +595,10 @@ $("document").ready(function () {
                         url: "/submitSubsClaim",
                         data: data,
                         dataType: "json",
-                        async: false,
+
                         processData: false,
                         contentType: false,
-                    }).done(function (data) {
+                    }).then(function (data) {
                         swal({
                             title: data.title,
                             text: data.msg,
@@ -653,10 +631,10 @@ $("document").ready(function () {
                 url: "/submitMonthlyClaim/" + id,
                 // data: data,
                 dataType: "json",
-                async: false,
+
                 processData: false,
                 contentType: false,
-            }).done(function (data) {
+            }).then(function (data) {
                 swal({
                     title: data.title,
                     text: data.msg,
@@ -676,7 +654,7 @@ $("document").ready(function () {
         });
     });
 });
- 
+
 $(document).on("click", "#deleteButtonPersonal", function () {
     id = $(this).data("id");
     //console.log(id);
@@ -695,10 +673,10 @@ $(document).on("click", "#deleteButtonPersonal", function () {
                 url: "/deletePersonalDetail/" + id,
                 // dataType: "json",
                 data: { _method: "DELETE" },
-                // async: false,
+
                 // processData: false,
                 // contentType: false,
-            }).done(function (data) {
+            }).then(function (data) {
                 swal({
                     title: data.title,
                     text: data.msg,
@@ -735,10 +713,10 @@ $(document).on("click", "#deleteButtonTravel", function () {
                 url: "/deleteTravelDetail/" + id,
                 // dataType: "json",
                 data: { _method: "DELETE" },
-                // async: false,
+
                 // processData: false,
                 // contentType: false,
-            }).done(function (data) {
+            }).then(function (data) {
                 swal({
                     title: data.title,
                     text: data.msg,
