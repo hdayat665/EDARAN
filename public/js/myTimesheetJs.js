@@ -1043,6 +1043,8 @@ $(document).ready(function () {
                     twoDayBefore.setDate(currentDate.getDate() - 2);
 
                     var datedefaultformat = dayjs(current).format('YYYY-MM-DD');
+                    
+                   
                 
                     if (dayjs(info.date).isSame(dayjs(), 'date')) {
                         $(info.el).css('background-color', '#FFFADF');
@@ -1109,14 +1111,14 @@ $(document).ready(function () {
                         if (current.getDate() === currentDate.getDate() || current.getDate() === oneDayBefore.getDate() || current.getDate() === twoDayBefore.getDate()) {
                             $(info.el).css('background-color', '#FF8080');
                         } else if (appliedDates.includes(datedefaultformat)) {
-                            // var clickedDate = dayjs(info.date).format('YYYY-MM-DD');
-                            // alert("Clicked date: " + clickedDate);
+
                             $(info.el).css('background-color', '#FF8080');
-                            var button = $('<button/>', {
+                            var viewappealb = $('<button/>', {
                               text: 'View Appeal',
-                              class: 'appeal-view-button',
-                              click: function (event) {
-                                event.stopPropagation(); 
+                              class: 'btn btn-primary appeal-view-button',
+                              click: function () {
+                                
+                               
                                 // Get the logid for the corresponding appliedDate
                                 var index = appliedDates.indexOf(datedefaultformat);
                                 if (index !== -1) {
@@ -1136,23 +1138,36 @@ $(document).ready(function () {
                                     $('#dayappealv').val(day);
                                     
                                     $('#appealmodalview').modal('show');
+                                    
+                                    
                                   }
+                                  return false;
                               }
                             });
+
+                          
 
                         
                           
                 
-                            $(info.el).append(button);
-                            $(button).css({
-                            });
+                            $(info.el).append(viewappealb);
+                            $(viewappealb).css({
+                                position: 'absolute',
+                                left: 'auto',
+                                right: 'auto',
+                                top: '0',
+                                'z-index': '999',
+                                'background-color': 'white',
+                                'color': 'red'
+                                });
+                                
                         } else {
                             // console.log(datedefaultformat)
                             $(info.el).css('background-color', '#FF8080');
                             // console.log(appliedDates);
-                            var button1 = $('<button/>', {
+                            var appealaddb = $('<button/>', {
                                 text: 'Add Appeal',
-                                class: 'appeal-add-button',
+                                class: 'btn btn-primary appeal-add-button',
                                 click: function () {
                                     var year = info.date.getFullYear();
                                     var month = info.date.getMonth();
@@ -1171,23 +1186,19 @@ $(document).ready(function () {
                                     $('#appealmodal').modal('show');
                                 }
                             });
-                            $(info.el).append(button1);
-                            // $(button1).css({
-                            //     position: 'absolute',
-                            //     top: '0',
-                            //     left: '50%',
-                            //     transform: 'translateX(-50%)'
-                            //   });
-                            
-                            //   // Set the date cell position to relative
-                            //   $(info.el).css({
-                            //     position: 'relative'
-                            //   });
 
-                            $(info.el).append(button1);
-                            $(button1).css({
-                            });
+                            $(info.el).append(appealaddb);
+                            $(appealaddb).css({
+                                position: 'absolute',
+                                left: 'auto',
+                                right: 'auto',
+                                top: '0',
+                                'z-index': '999',
+                                'background-color': 'white',
+                                'color': 'red'
+                                });
                             
+                            $(appealaddb).addClass('d-flex justify-content-center align-items-center');
                         }
                     } else if (info.date.getDay() === 0) { // Sunday
                         $(info.el).css('background-color', '#B3CCFF'); 
@@ -1204,12 +1215,16 @@ $(document).ready(function () {
                     
                   
                     dateClick: function(info) {
+                        
                         const today = dayjs();
                         const clickedDate = dayjs(info.date);
                       
                         // check if the clicked date's status is "approve"
                         var appliedDates = [];
                         var statuses = [];
+
+                       
+                          
                         for (let i = 0; i < data['appeals'].length; i++) {
                           var appeals = data['appeals'][i];
                           var appliedDate = appeals['applied_date'];
@@ -1219,17 +1234,14 @@ $(document).ready(function () {
                         }
                         const formattedDate = clickedDate.format('YYYY-MM-DD');
                         if (appliedDates.includes(formattedDate) && statuses[appliedDates.indexOf(formattedDate)] === 'approve') {
-                          // show the view appeal modal
-                          $('#addLogModal').modal('show');
-                        //   var index = appliedDates.indexOf(formattedDate);
-                        //   $('#log_idv').val(logsid[index]);
-                        //   $('#reasonappealv').val(reasons[index]);
-                        //   $('#Statusv').val(statuses[index]);
-                        //   $('#yearappealv').val(years[index]);
-                        //   $('#monthappealv').val(months[index]);
-                        //   $('#dayappealv').val(days[index]);
-                          return;
+                            // show the view appeal modal
+                            $('#addLogModal').modal('show');
+                            const formattedDate = clickedDate.format('DD-MM-YYYY');
+                            $("#dateaddlog").val(formattedDate);
+                           
+                            return;
                         }
+                        
                       
                         // check if the clicked date is within the last 2 days before the current date
                         // and if the cell already has an appeal button
@@ -1269,18 +1281,18 @@ $(document).ready(function () {
                 //     const today = dayjs();
                 //     const clickedDate = dayjs(info.date);
                   
-                //     // check if the clicked date is within the last 2 days before the current date
-                //     if (clickedDate.diff(today, 'day') < -2 || clickedDate.isAfter(today, 'day')) {
-                //       Swal.fire({
-                //         icon: 'error',
-                //         title: 'Error',
-                //         text: 'You can only select the current date and 2 days before.'
-                //       });
-                //       return;
-                //     }
+                    // check if the clicked date is within the last 2 days before the current date
+                    // if (clickedDate.diff(today, 'day') < -2 || clickedDate.isAfter(today, 'day')) {
+                    //   Swal.fire({
+                    //     icon: 'error',
+                    //     title: 'Error',
+                    //     text: 'You can only select the current date and 2 days before.'
+                    //   });
+                    //   return;
+                    // }
                   
-                //     // show the modal and set the date
-                //     // $('#addLogModal').modal('show');
+                    // show the modal and set the date
+                //     $('#addLogModal').modal('show');
                 //     const formattedDate = clickedDate.format('DD-MM-YYYY');
                 //     $("#dateaddlog").val(formattedDate);
                 //   },

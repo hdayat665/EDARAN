@@ -264,6 +264,14 @@
                                         </a>
                                     </div>
                                 @endif
+                                <div class="menu-item">
+                                        <a href="/appealtimesheet" class="menu-link">
+                                            <div class="menu-icon">
+                                                <i class="fa fa-receipt text-gray"></i>
+                                            </div>
+                                            <div class="menu-text text-gray">Appeal Approval </div>
+                                        </a>
+                                    </div>
                             </div>
                         </div> 
                     @endif
