@@ -38,7 +38,6 @@ $(document).on('change', "#companyForEmployment", function() {
         // .remove()
         .end();
 
-    console.log(companyId);
 
     var department = departmentByCompanyId(companyId);
 
