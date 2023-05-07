@@ -42,7 +42,7 @@ $(document).ready(function () {
         var myleavesecond = myleave2view(id);
         // console.log(myleaveData2);
 
-        myleavesecond.done(function (data) {
+        myleavesecond.then(function (data) {
             $("#viewdatafullname").val(data[0].fullName);
             $("#viewapplieddate").val(data[0].applied_date);
             $("#viewtype1").val(data[0].leave_types);
@@ -138,7 +138,7 @@ $(document).ready(function () {
         var myleavesecond = myleave2(id);
         // console.log(myleaveData2);
 
-        myleavesecond.done(function (data) {
+        myleavesecond.then(function (data) {
             $("#datafullname").val(data[0].fullName);
             $("#applieddate").val(data[0].applied_date);
             $("#type1").val(data[0].leave_types);
@@ -228,7 +228,7 @@ $(document).ready(function () {
         var myleaveget = myleave(id);
         // console.log(myleaveData2);
 
-        myleaveget.done(function (data) {
+        myleaveget.then(function (data) {
             $("#datafullname2").val(data[0].username);
             $("#applieddate2").val(data[0].applied_date);
             $("#type2").val(data[0].leave_types);
@@ -322,10 +322,10 @@ $(document).ready(function () {
                         url: "/updatehod/" + id,
                         data: data,
                         dataType: "json",
-                        async: false,
+
                         processData: false,
                         contentType: false,
-                    }).done(function (data) {
+                    }).then(function (data) {
                         swal({
                             title: data.title,
                             text: data.msg,
@@ -370,10 +370,10 @@ $(document).ready(function () {
                         url: "/updatehodreject/" + id,
                         data: data,
                         dataType: "json",
-                        async: false,
+
                         processData: false,
                         contentType: false,
-                    }).done(function (data) {
+                    }).then(function (data) {
                         swal({
                             title: data.title,
                             text: data.msg,

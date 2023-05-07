@@ -1,171 +1,268 @@
 $(document).ready(function () {
-    
-    $('#activetable').DataTable({
-        "searching": true,
-        "lengthChange": true,
-        "paging": true,
-        "lengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
-        "dom": '<"row"<"col-sm-4"l><"col-sm-4 text-center"B><"col-sm-4"f>>t<"row"<"col-sm-12"ip>>',
-        "buttons": [
-            { extend: 'excel', className: 'btn-blue', exportOptions: {
-                columns: [2,3,4,5,6,7]
-            }},
-            { extend: 'pdf', className: 'btn-blue',  exportOptions: {
-                columns: [2,3,4,5,6,7]
-            }},
-            { extend: 'print', className: 'btn-blue',  exportOptions: {
-                columns: [2,3,4,5,6,7]
-            }},
+    $("#activetable").DataTable({
+        searching: true,
+        lengthChange: true,
+        paging: true,
+        lengthMenu: [
+            [5, 10, 25, 50, -1],
+            [5, 10, 25, 50, "All"],
         ],
-        initComplete: function (settings, json) {  
-            $("#activetable").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");            
-        },
-        columnDefs: [
-                  { orderable: false, targets: [0] }
-               ]
+        dom: '<"row"<"col-sm-4"l><"col-sm-4 text-center"B><"col-sm-4"f>>t<"row"<"col-sm-12"ip>>',
+        buttons: [
+            {
+                extend: "excel",
+                className: "btn-blue",
+                exportOptions: {
+                    columns: [2, 3, 4, 5, 6, 7],
+                },
+            },
+            {
+                extend: "pdf",
+                className: "btn-blue",
+                exportOptions: {
+                    columns: [2, 3, 4, 5, 6, 7],
+                },
+            },
+            {
+                extend: "print",
+                className: "btn-blue",
+                exportOptions: {
+                    columns: [2, 3, 4, 5, 6, 7],
+                },
+            },
+        ],
+        initComplete: function (settings, json) {
+            $("#activetable").wrap(
+                "<div style='overflow:auto; width:100%;position:relative;'></div>"
+            );
+        },
+        columnDefs: [{ orderable: false, targets: [0] }],
     });
-    $('#checkedtable').DataTable({
-        "searching": true,
-        "lengthChange": true,
-        "paging": true,
-        "lengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
-        "dom": '<"row"<"col-sm-4"l><"col-sm-4 text-center"B><"col-sm-4"f>>t<"row"<"col-sm-12"ip>>',
-        "buttons": [
-            { extend: 'excel', className: 'btn-blue', exportOptions: {
-                columns: [2,3,4,5,6,7]
-            }},
-            { extend: 'pdf', className: 'btn-blue',  exportOptions: {
-                columns: [2,3,4,5,6,7]
-            }},
-            { extend: 'print', className: 'btn-blue',  exportOptions: {
-                columns: [2,3,4,5,6,7]
-            }},
+    $("#checkedtable").DataTable({
+        searching: true,
+        lengthChange: true,
+        paging: true,
+        lengthMenu: [
+            [5, 10, 25, 50, -1],
+            [5, 10, 25, 50, "All"],
         ],
-        
-        initComplete: function (settings, json) {  
-            $("#checkedtable").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");            
-        },
-        columnDefs: [
-                  { orderable: false, targets: [0] }
-               ]
+        dom: '<"row"<"col-sm-4"l><"col-sm-4 text-center"B><"col-sm-4"f>>t<"row"<"col-sm-12"ip>>',
+        buttons: [
+            {
+                extend: "excel",
+                className: "btn-blue",
+                exportOptions: {
+                    columns: [2, 3, 4, 5, 6, 7],
+                },
+            },
+            {
+                extend: "pdf",
+                className: "btn-blue",
+                exportOptions: {
+                    columns: [2, 3, 4, 5, 6, 7],
+                },
+            },
+            {
+                extend: "print",
+                className: "btn-blue",
+                exportOptions: {
+                    columns: [2, 3, 4, 5, 6, 7],
+                },
+            },
+        ],
+
+        initComplete: function (settings, json) {
+            $("#checkedtable").wrap(
+                "<div style='overflow:auto; width:100%;position:relative;'></div>"
+            );
+        },
+        columnDefs: [{ orderable: false, targets: [0] }],
     });
 
-    $('#pvtable').DataTable({
-        "searching": true,
-        "lengthChange": true,
-        "paging": true,
-        "lengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
-        "dom": '<"row"<"col-sm-4"l><"col-sm-4 text-center"B><"col-sm-4"f>>t<"row"<"col-sm-12"ip>>',
-        "buttons": [
-            { extend: 'excel', className: 'btn-blue', exportOptions: {
-                columns: [2,3,4,5,6,7]
-            }},
-            { extend: 'pdf', className: 'btn-blue',  exportOptions: {
-                columns: [2,3,4,5,6,7]
-            }},
-            { extend: 'print', className: 'btn-blue',  exportOptions: {
-                columns: [2,3,4,5,6,7]
-            }},
+    $("#pvtable").DataTable({
+        searching: true,
+        lengthChange: true,
+        paging: true,
+        lengthMenu: [
+            [5, 10, 25, 50, -1],
+            [5, 10, 25, 50, "All"],
         ],
-        columnDefs: [
-                  { orderable: false, targets: [0] }
-               ]
-    });
-    $('#paidtable').DataTable({
-        "searching": true,
-        "lengthChange": true,
-        "paging": true,
-        "lengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
-        "dom": '<"row"<"col-sm-4"l><"col-sm-4 text-center"B><"col-sm-4"f>>t<"row"<"col-sm-12"ip>>',
-        "buttons": [
-            { extend: 'excel', className: 'btn-blue', exportOptions: {
-                columns: [2,3,4,5,6,7]
-            }},
-            { extend: 'pdf', className: 'btn-blue',  exportOptions: {
-                columns: [2,3,4,5,6,7]
-            }},
-            { extend: 'print', className: 'btn-blue',  exportOptions: {
-                columns: [2,3,4,5,6,7]
-            }},
+        dom: '<"row"<"col-sm-4"l><"col-sm-4 text-center"B><"col-sm-4"f>>t<"row"<"col-sm-12"ip>>',
+        buttons: [
+            {
+                extend: "excel",
+                className: "btn-blue",
+                exportOptions: {
+                    columns: [2, 3, 4, 5, 6, 7],
+                },
+            },
+            {
+                extend: "pdf",
+                className: "btn-blue",
+                exportOptions: {
+                    columns: [2, 3, 4, 5, 6, 7],
+                },
+            },
+            {
+                extend: "print",
+                className: "btn-blue",
+                exportOptions: {
+                    columns: [2, 3, 4, 5, 6, 7],
+                },
+            },
         ],
-        columnDefs: [
-                  { orderable: false, targets: [0] }
-               ]
+        columnDefs: [{ orderable: false, targets: [0] }],
     });
-
-    $('#amendtable').DataTable({
-        "searching": true,
-        "lengthChange": true,
-        "paging": true,
-        "lengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
-        "dom": '<"row"<"col-sm-4"l><"col-sm-4 text-center"B><"col-sm-4"f>>t<"row"<"col-sm-12"ip>>',
-        "buttons": [
-            { extend: 'excel', className: 'btn-blue', exportOptions: {
-                columns: [2,3,4,5,6,7]
-            }},
-            { extend: 'pdf', className: 'btn-blue',  exportOptions: {
-                columns: [2,3,4,5,6,7]
-            }},
-            { extend: 'print', className: 'btn-blue',  exportOptions: {
-                columns: [2,3,4,5,6,7]
-            }},
-        ],        
-        initComplete: function (settings, json) {  
-            $("#amendtable").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");            
-        },
-        columnDefs: [
-                  { orderable: false, targets: [0] }
-               ]
-    });
-
-    $('#rejectedtable').DataTable({
-        "searching": true,
-        "lengthChange": true,
-        "paging": true,
-        "lengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
-        "dom": '<"row"<"col-sm-4"l><"col-sm-4 text-center"B><"col-sm-4"f>>t<"row"<"col-sm-12"ip>>',
-        "buttons": [
-            { extend: 'excel', className: 'btn-blue', exportOptions: {
-                columns: [2,3,4,5,6,7]
-            }},
-            { extend: 'pdf', className: 'btn-blue',  exportOptions: {
-                columns: [2,3,4,5,6,7]
-            }},
-            { extend: 'print', className: 'btn-blue',  exportOptions: {
-                columns: [2,3,4,5,6,7]
-            }},
-        ],     
-        initComplete: function (settings, json) {  
-            $("#rejectedtable").wrap("<div style='overflow:auto; width:100%;position:relative;'></div>");            
-        },
-        columnDefs: [
-                  { orderable: false, targets: [0] }
-               ]
-    });
-
-    $('#paymenttable').DataTable({
-        "searching": true,
-        "lengthChange": true,
-        "paging": true,
-        "lengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
-        "dom": '<"row"<"col-sm-4"l><"col-sm-4 text-center"B><"col-sm-4"f>>t<"row"<"col-sm-12"ip>>',
-        "buttons": [
-            { extend: 'excel', className: 'btn-blue', exportOptions: {
-                columns: [2,3,4,5,6,7]
-            }},
-            { extend: 'pdf', className: 'btn-blue',  exportOptions: {
-                columns: [2,3,4,5,6,7]
-            }},
-            { extend: 'print', className: 'btn-blue',  exportOptions: {
-                columns: [2,3,4,5,6,7]
-            }},
+    $("#paidtable").DataTable({
+        searching: true,
+        lengthChange: true,
+        paging: true,
+        lengthMenu: [
+            [5, 10, 25, 50, -1],
+            [5, 10, 25, 50, "All"],
         ],
-        columnDefs: [
-                  { orderable: false, targets: [0] }
-               ]
+        dom: '<"row"<"col-sm-4"l><"col-sm-4 text-center"B><"col-sm-4"f>>t<"row"<"col-sm-12"ip>>',
+        buttons: [
+            {
+                extend: "excel",
+                className: "btn-blue",
+                exportOptions: {
+                    columns: [2, 3, 4, 5, 6, 7],
+                },
+            },
+            {
+                extend: "pdf",
+                className: "btn-blue",
+                exportOptions: {
+                    columns: [2, 3, 4, 5, 6, 7],
+                },
+            },
+            {
+                extend: "print",
+                className: "btn-blue",
+                exportOptions: {
+                    columns: [2, 3, 4, 5, 6, 7],
+                },
+            },
+        ],
+        columnDefs: [{ orderable: false, targets: [0] }],
     });
 
-    
+    $("#amendtable").DataTable({
+        searching: true,
+        lengthChange: true,
+        paging: true,
+        lengthMenu: [
+            [5, 10, 25, 50, -1],
+            [5, 10, 25, 50, "All"],
+        ],
+        dom: '<"row"<"col-sm-4"l><"col-sm-4 text-center"B><"col-sm-4"f>>t<"row"<"col-sm-12"ip>>',
+        buttons: [
+            {
+                extend: "excel",
+                className: "btn-blue",
+                exportOptions: {
+                    columns: [2, 3, 4, 5, 6, 7],
+                },
+            },
+            {
+                extend: "pdf",
+                className: "btn-blue",
+                exportOptions: {
+                    columns: [2, 3, 4, 5, 6, 7],
+                },
+            },
+            {
+                extend: "print",
+                className: "btn-blue",
+                exportOptions: {
+                    columns: [2, 3, 4, 5, 6, 7],
+                },
+            },
+        ],
+        initComplete: function (settings, json) {
+            $("#amendtable").wrap(
+                "<div style='overflow:auto; width:100%;position:relative;'></div>"
+            );
+        },
+        columnDefs: [{ orderable: false, targets: [0] }],
+    });
+
+    $("#rejectedtable").DataTable({
+        searching: true,
+        lengthChange: true,
+        paging: true,
+        lengthMenu: [
+            [5, 10, 25, 50, -1],
+            [5, 10, 25, 50, "All"],
+        ],
+        dom: '<"row"<"col-sm-4"l><"col-sm-4 text-center"B><"col-sm-4"f>>t<"row"<"col-sm-12"ip>>',
+        buttons: [
+            {
+                extend: "excel",
+                className: "btn-blue",
+                exportOptions: {
+                    columns: [2, 3, 4, 5, 6, 7],
+                },
+            },
+            {
+                extend: "pdf",
+                className: "btn-blue",
+                exportOptions: {
+                    columns: [2, 3, 4, 5, 6, 7],
+                },
+            },
+            {
+                extend: "print",
+                className: "btn-blue",
+                exportOptions: {
+                    columns: [2, 3, 4, 5, 6, 7],
+                },
+            },
+        ],
+        initComplete: function (settings, json) {
+            $("#rejectedtable").wrap(
+                "<div style='overflow:auto; width:100%;position:relative;'></div>"
+            );
+        },
+        columnDefs: [{ orderable: false, targets: [0] }],
+    });
+
+    $("#paymenttable").DataTable({
+        searching: true,
+        lengthChange: true,
+        paging: true,
+        lengthMenu: [
+            [5, 10, 25, 50, -1],
+            [5, 10, 25, 50, "All"],
+        ],
+        dom: '<"row"<"col-sm-4"l><"col-sm-4 text-center"B><"col-sm-4"f>>t<"row"<"col-sm-12"ip>>',
+        buttons: [
+            {
+                extend: "excel",
+                className: "btn-blue",
+                exportOptions: {
+                    columns: [2, 3, 4, 5, 6, 7],
+                },
+            },
+            {
+                extend: "pdf",
+                className: "btn-blue",
+                exportOptions: {
+                    columns: [2, 3, 4, 5, 6, 7],
+                },
+            },
+            {
+                extend: "print",
+                className: "btn-blue",
+                exportOptions: {
+                    columns: [2, 3, 4, 5, 6, 7],
+                },
+            },
+        ],
+        columnDefs: [{ orderable: false, targets: [0] }],
+    });
+
     $("#filter").click(function () {
         $("#filteronoff").toggle();
     });
@@ -201,10 +298,10 @@ $(document).ready(function () {
             $.ajax({
                 type: "POST",
                 url: "/updateStatusClaim/" + id + "/" + status + "/" + stage,
-                async: false,
+
                 processData: false,
                 contentType: false,
-            }).done(function (data) {
+            }).then(function (data) {
                 swal({
                     title: data.title,
                     text: data.msg,
@@ -250,10 +347,10 @@ $(document).ready(function () {
                             stage,
                         data: data,
                         dataType: "json",
-                        async: false,
+
                         processData: false,
                         contentType: false,
-                    }).done(function (data) {
+                    }).then(function (data) {
                         console.log(data);
                         swal({
                             title: data.title,
@@ -302,10 +399,10 @@ $(document).ready(function () {
                             stage,
                         data: data,
                         dataType: "json",
-                        async: false,
+
                         processData: false,
                         contentType: false,
-                    }).done(function (data) {
+                    }).then(function (data) {
                         console.log(data);
                         swal({
                             title: data.title,
@@ -346,10 +443,10 @@ $(document).ready(function () {
                 $.ajax({
                     type: "POST",
                     url: "/createPvNumber/" + id,
-                    async: false,
+
                     processData: false,
                     contentType: false,
-                }).done(function (data) {
+                }).then(function (data) {
                     swal({
                         title: data.title,
                         text: data.msg,
@@ -401,11 +498,11 @@ $(document).ready(function () {
                         $.ajax({
                             type: "POST",
                             url: "/createChequeNumber/" + id,
-                            async: false,
+
                             data: data,
                             processData: false,
                             contentType: false,
-                        }).done(function (data) {
+                        }).then(function (data) {
                             swal({
                                 title: data.title,
                                 text: data.msg,

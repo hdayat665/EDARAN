@@ -28,7 +28,7 @@ $(document).ready(function () {
             [5, 10, 25, 50, "All"],
         ],
     });
-    
+
     $("#datepicker-date").datepicker({
         todayHighlight: true,
         autoclose: true,
@@ -53,10 +53,10 @@ $(document).ready(function () {
                 $.ajax({
                     type: "get",
                     url: "/approvemyleave/" + id,
-                    async: false,
+
                     processData: false,
                     contentType: false,
-                }).done(function (data) {
+                }).then(function (data) {
                     swal({
                         title: data.title,
                         text: data.msg,
@@ -80,7 +80,7 @@ $(document).ready(function () {
         var myleaveget = myleave(id);
         // console.log(myleaveData2);
 
-        myleaveget.done(function (data) {
+        myleaveget.then(function (data) {
             $("#datafullname").val(data[0].fullName);
             $("#applieddate").val(data[0].applied_date);
             $("#type1").val(data[0].leave_types);
@@ -152,7 +152,7 @@ $(document).ready(function () {
         var myleaveget = myleaveview(id);
         // console.log(myleaveData2);
 
-        myleaveget.done(function (data) {
+        myleaveget.then(function (data) {
             $("#viewdatafullname").val(data[0].fullName);
             $("#viewapplieddate").val(data[0].applied_date);
             $("#viewtype1").val(data[0].leave_types);
@@ -256,10 +256,10 @@ $(document).ready(function () {
                 $.ajax({
                     type: "get",
                     url: "/approvemyleave/" + id,
-                    async: false,
+
                     processData: false,
                     contentType: false,
-                }).done(function (data) {
+                }).then(function (data) {
                     swal({
                         title: data.title,
                         text: data.msg,
@@ -294,10 +294,10 @@ $(document).ready(function () {
                 $.ajax({
                     type: "get",
                     url: "/approvemyleaveby/" + id,
-                    async: false,
+
                     processData: false,
                     contentType: false,
-                }).done(function (data) {
+                }).then(function (data) {
                     swal({
                         title: data.title,
                         text: data.msg,
@@ -335,10 +335,10 @@ $(document).ready(function () {
                         url: "/updatesupervisor/" + id,
                         data: data,
                         dataType: "json",
-                        async: false,
+
                         processData: false,
                         contentType: false,
-                    }).done(function (data) {
+                    }).then(function (data) {
                         swal({
                             title: data.title,
                             text: data.msg,
@@ -365,7 +365,7 @@ $(document).ready(function () {
         var myleavesecond = myleave2(id);
         // console.log(myleaveData2);
 
-        myleavesecond.done(function (data) {
+        myleavesecond.then(function (data) {
             $("#datafullname2").val(data[0].username);
             $("#applieddate2").val(data[0].applied_date);
             $("#type2").val(data[0].leave_types);
@@ -462,10 +462,10 @@ $(document).ready(function () {
                         url: "/updatesupervisorreject/" + id,
                         data: data,
                         dataType: "json",
-                        async: false,
+
                         processData: false,
                         contentType: false,
-                    }).done(function (data) {
+                    }).then(function (data) {
                         swal({
                             title: data.title,
                             text: data.msg,

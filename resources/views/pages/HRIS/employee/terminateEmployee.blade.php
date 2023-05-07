@@ -25,96 +25,25 @@
                         <label for="recipient-name" class="col-form-label">Exit Type*</label>
                         <select class="form-select" name="employmentDetail">
                             <option value="" label="PLEASE CHOOSE" selected="selected">PLEASE CHOOSE </option>
-                            <option value="1" label="Deceased">Deceased</option>
-                            <option value="2" label="Dismissed">Dismissed</option>
-                            <option value="3" label="Laid-Off">Laid-Off</option>
-                            <option value="4" label="Contract not renewed">Contract not renewed</option>
-                            <option value="2" label="Resign-company requested">Resign-company requested</option>
-                            <option value="2" label="resign">resign</option>
-                            <option value="2" label="Retirement">Retirement</option>
-                            <option value="2" label="Others">Others</option>
+                            <option value="1" label="DECEASED"></option>
+                            <option value="2" label="DISMISSED"></option>
+                            <option value="3" label="LAID-OFF"></option>
+                            <option value="4" label="CONTRACT NOT RENEWED"></option>
+                            <option value="5" label="RESIGN-COMPANY REQUESTED"></option>
+                            <option value="6" label="RESIGN"></option>
+                            <option value="7" label="RETIREMENT"></option>
+                            <option value="8" label="OTHERS"></option>
                         </select>
                         <label for="recipient-name" class="col-form-label">Remarks*</label>
                         <textarea class="form-control" name="remarks" placeholder="Remarks" rows="3"></textarea>
 
                         <label for="recipient-name" class="col-form-label">Attachments*</label><br>
-                        <input type="file" name="file" multiple>
-                        {{-- <form id="fileupload" action="https://jquery-file-upload.appspot.com/" method="POST" enctype="multipart/form-data">
-                            <!-- BEGIN panel -->
-                            <div class="panel panel-inverse">
-                                <!-- BEGIN panel-heading -->
-
-                                <!-- END panel-heading -->
-
-                                <!-- BEGIN panel-body -->
-                                <div class="panel-body">
-                                    <div class="row fileupload-buttonbar">
-                                        <div class="col-xl-15">
-                                            <span class="btn btn-primary fileinput-button me-1">
-                                                <i class="fa fa-fw fa-plus"></i>
-                                                <span>Add files</span>
-                                                <input type="file" name="files[]" multiple>
-                                            </span>
-                                            <button type="submit" class="btn btn-primary">
-                                                <i class="fa fa-fw fa-upload"></i>
-                                                <span>upload</span>
-                                            </button>
-                                            <button type="reset" class="btn btn-default">
-                                                <i class="fa fa-fw fa-ban"></i>
-                                                <span>Cancel upload</span>
-                                            </button>
-                                            <button type="button" class="btn btn-default">
-                                                <i class="fa fa-fw fa-trash"></i>
-                                                <span>Delete</span>
-                                            </button>
-                                            <!-- The global file processing state -->
-                                            <span class="fileupload-process"></span>
-                                        </div>
-                                        <!-- The global progress state -->
-                                        <div class="col-xl-5 fileupload-progress fade d-none d-xl-block">
-                                            <!-- The global progress bar -->
-                                            <div class="progress progress-striped active">
-                                                <div class="progress-bar progress-bar-success" style="width:0%;"></div>
-                                            </div>
-                                            <!-- The extended global progress state -->
-                                            <div class="progress-extended">&nbsp;</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- END panel-body -->
-                                <!-- BEGIN table -->
-                                <div class="table-responsive">
-                                    <table class="table table-panel text-nowrap mb-0">
-                                        <thead>
-                                            <tr>
-                                                <th width="10%">PREVIEW</th>
-                                                <th>FILE INFO</th>
-                                                <th>UPLOAD PROGRESS</th>
-                                                <th width="1%"></th>
-                                            </tr>
-                                        </thead>
-                                        <tbody class="files">
-                                            <tr data-id="empty">
-                                                <td colspan="4" class="text-center text-gray-500 py-30px">
-                                                    <div class="mb-10px"><i class="fa fa-file fa-3x"></i></div>
-                                                    <div class="fw-bold">No file selected</div>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-
-                            </div>
-                            <!-- END table -->
-                            <!-- BEGIN hljs-wrapper -->
-
-                            <!-- END panel -->
-                        </form> --}}
+                        <input type="file" class="form-control" name="file">
                     </div>
                 
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <button type="button" id="submit" class="btn btn-primary">Submit</button>
+                    <button id="submit" class="btn btn-primary">Submit</button>
                 </div>
             </form>
             </div>
@@ -147,7 +76,7 @@
 </div>
 
 <!-- The template to display files available for upload -->
-<script id="template-upload" type="text/x-tmpl">
+{{-- <script id="template-upload" type="text/x-tmpl">
     {% for (var i=0, file; file=o.files[i]; i++) { %}
     <tr class="template-upload fade show">
         <td>
@@ -189,10 +118,10 @@
         </td>
     </tr>
     {% } %}
-</script>
+</script> --}}
 
 <!-- The template to display files available for download -->
-<script id="template-download" type="text/x-tmpl">
+{{-- <script id="template-download" type="text/x-tmpl">
     {% for (var i=0, file; file=o.files[i]; i++) { %}
         <tr class="template-download fade show">
             <td width="1%">
@@ -244,4 +173,4 @@
             </td>
         </tr>
     {% } %}
-</script>
+</script> --}}

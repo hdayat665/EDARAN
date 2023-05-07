@@ -31,6 +31,7 @@ use App\Models\UserRole;
 use App\Models\TransportMillage;
 use App\Models\EclaimGeneral;
 use App\Models\PermissionRole;
+use App\Models\EntitleSubsBenefit;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -683,7 +684,7 @@ if (!function_exists('getBranch')) {
         }
 
         if (!$data) {
-            $data = [];
+            $data = '';
         }
 
         return $data;
@@ -1788,6 +1789,18 @@ if (!function_exists('getClaimCategoryContentByClaimId')) {
     }
 }
 
+if (!function_exists('getareaContentById')) {
+    function getareaContentById($id = '')
+    {
+        $data = EntitleSubsBenefit::where([['id', $id]])->get();
+        //pr($data);
+        if (!$data) {
+            $data = [];
+        }
+
+        return $data;
+    }
+}
 if (!function_exists('getClaimCategoryById')) {
     function getClaimCategoryById($id = '')
     {
@@ -2253,6 +2266,21 @@ if (!function_exists('getApprovalConfigClaim')) {
     {
 
         $data = ApprovalConfig::where('role', $role)->first();
+
+        if (!$data) {
+            $data = [];
+        }
+
+        return $data;
+    }
+}
+
+if (!function_exists('getUserWithSelectedUser')) {
+    function getUserWithSelectedUser($employeeId = '')
+    {
+
+        // $data = Users::with('userProfile')->where([['tenant_id', Auth::user()->tenant_id], ['id', '!=', $userId]])->get();
+        $data = Employee::where([['tenant_id', Auth::user()->tenant_id], ['id', '!=', $employeeId]])->get();
 
         if (!$data) {
             $data = [];

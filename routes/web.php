@@ -191,6 +191,7 @@ Route::group(['middleware' => ['web']], function () {
             Route::delete('/deleteCompanion/{id}', 'deleteCompanion');
             Route::post('/resetPassword', 'resetPassword');
             Route::get('/getCompanionById/{id}', 'getCompanionById');
+            Route::get('/getUserWithSelectedUser/{id}', 'getUserWithSelectedUser');
         });
 
         Route::controller(EmployeeController::class)->group(function () {
@@ -213,6 +214,7 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('/addEmployeeSibling', 'addEmployeeSibling');
             Route::post('/updateEmployeeSibling', 'updateEmployeeSibling');
             Route::post('/addEmployeeParent', 'addEmployeeParent');
+            Route::get('/getEmployeeAddressforParent/{id}', 'getEmployeeAddressforParent');
             Route::post('/updateEmployeeParent', 'updateEmployeeParent');
             Route::post('/updateEmployeeVehicle', 'updateVehicle');
             Route::post('/addEmployeeVehicle', 'addVehicle');
@@ -226,7 +228,7 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('/updateclaimhierarchy/{id}', 'updateclaimhierarchy');
             Route::post('/updatecashhierarchy/{id}', 'updatecashhierarchy');
             Route::post('/updateeleavehierarchy/{id}', 'updateeleavehierarchy');
-            
+
             Route::get('/getEmployeeAddressforCompanion/{id}', 'getEmployeeAddressforCompanion');
 
             Route::post('/addEmployeeEducation', 'addEmployeeEducation');
@@ -366,8 +368,9 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('/getClaimCategoryContent/{id}', 'getClaimCategoryContent');
             Route::get('/getClaimCategoryById/{id}', 'getClaimCategoryById');
             Route::post('/updateClaimDate', 'updateClaimDate');
-
-
+            Route::get('/getEntitlementContent/{id}', 'getEntitlementContent');
+            Route::get('/getAccomodation', 'getAccomodation');
+            
             // eleave Leave Entitlement
             Route::get('/leaveEntitlement', 'eleaveEntitlementView');
             Route::post('/createLeaveEntitlement', 'createLeaveEntitlement');

@@ -1,5 +1,4 @@
 $(document).ready(function () {
-    
     $("#datepicker-joindate").datepicker({
         todayHighlight: true,
         autoclose: true,
@@ -29,13 +28,13 @@ $(document).ready(function () {
         $("input").prop("disabled", false);
         $("select").prop("disabled", false);
 
-        updateRoleForm.done(function (data1) {
+        updateRoleForm.then(function (data1) {
             $("#roleName").val(data1.roleName);
             $("#idR").val(data1.id);
             // console.log(data1);
         });
 
-        permissionData.done(function (data) {
+        permissionData.then(function (data) {
             // console.log(data);
             var tableBody = $("#permissionTable"); // Assuming the table has an ID of "tableBody"
             tableBody.find("tbody").empty(); // Clear the table body before populating it
@@ -62,7 +61,7 @@ $(document).ready(function () {
             }
         });
 
-        roleData.done(function (data) {
+        roleData.then(function (data) {
             // console.log(data);
             var tableBody = $("#tableBody"); // Assuming the table has an ID of "tableBody"
             tableBody.find("tbody").empty(); // Clear the table body before populating it
@@ -101,7 +100,7 @@ $(document).ready(function () {
             }
         });
 
-        userRoleData.done(function (data) {
+        userRoleData.then(function (data) {
             console.log(data);
             var tableBody = $("#tableBody"); // Assuming the table has an ID of "tableBody"
             tableBody.find("tbody").empty(); // Clear the table body before populating it
@@ -173,7 +172,7 @@ $(document).ready(function () {
         $("input").prop("disabled", true);
         $("select").prop("disabled", true);
 
-        vehicleData.done(function (data) {
+        vehicleData.then(function (data) {
             $("input").val("");
             vdata = data.data;
             $("#vehicleType1").prop("selectedIndex", vdata.vehicle_type);
@@ -199,10 +198,10 @@ $(document).ready(function () {
                     url: "/deleteRole/" + id,
                     // dataType: "json",
                     data: { _method: "DELETE" },
-                    // async: false,
+
                     // processData: false,
                     // contentType: false,
-                }).done(function (data) {
+                }).then(function (data) {
                     swal({
                         title: data.title,
                         text: data.msg,
@@ -238,10 +237,10 @@ $(document).ready(function () {
                 url: "/createRole",
                 data: data,
                 dataType: "json",
-                async: false,
+
                 processData: false,
                 contentType: false,
-            }).done(function (data) {
+            }).then(function (data) {
                 swal({
                     title: data.title,
                     text: data.msg,
@@ -260,7 +259,7 @@ $(document).ready(function () {
         });
     });
 
-    $("#updateRole").click(function (e) { 
+    $("#updateRole").click(function (e) {
         requirejs(["sweetAlert2"], function (swal) {
             var selectedElms = $("#kt_docs_jstree_checkable3").jstree(
                 "get_checked",
@@ -282,10 +281,10 @@ $(document).ready(function () {
                 url: "/updateRole/" + id,
                 data: data,
                 dataType: "json",
-                async: false,
+
                 processData: false,
                 contentType: false,
-            }).done(function (data) {
+            }).then(function (data) {
                 swal({
                     title: data.title,
                     text: data.msg,
@@ -641,7 +640,7 @@ $(document).ready(function () {
                         {
                             text: "Real Time Activities",
                             id: "real_time_activities",
-                        }
+                        },
                     ],
                 },
                 {
@@ -884,7 +883,7 @@ $(document).ready(function () {
                                         {
                                             text: "Approver",
                                             id: "cash_deparment_approver",
-                                        }
+                                        },
                                     ],
                                 },
 
@@ -914,89 +913,92 @@ $(document).ready(function () {
                         {
                             text: "Appeal Claim",
                             id: "appeal_approval",
-                        }
+                        },
                     ],
                 },
-                
+
                 {
                     text: "Reporting",
                     id: "reporting",
                     children: [
-                        { 
-                            text: "Reporting Tab", 
-                            id: "report_tab" 
+                        {
+                            text: "Reporting Tab",
+                            id: "report_tab",
                         },
                         {
                             text: "Timesheet",
                             id: "timesheet",
                             children: [
-                                { 
-                                    text: "Timesheet Menu", 
-                                    id: "timesheet_menu" },
+                                {
+                                    text: "Timesheet Menu",
+                                    id: "timesheet_menu",
+                                },
                                 {
                                     text: "Status Report",
                                     id: "status_report",
                                 },
-                                { 
-                                    text: "Employee Report", 
-                                    id: "employee_report" },
-                                { 
-                                    text: "Overtime Report", 
-                                    id: "overtime_report" },
+                                {
+                                    text: "Employee Report",
+                                    id: "employee_report",
+                                },
+                                {
+                                    text: "Overtime Report",
+                                    id: "overtime_report",
+                                },
                             ],
                         },
                         {
                             text: "E-Attendance",
                             id: "eattendance",
                             children: [
-                                { 
-                                    text: "E-Attendance Menu", 
-                                    id: "eattendance_menu" 
+                                {
+                                    text: "E-Attendance Menu",
+                                    id: "eattendance_menu",
                                 },
                                 {
                                     text: "Daily Report",
                                     id: "daily_report",
                                 },
-                                { 
-                                    text: "Status Report", 
-                                    id: "status_report" 
+                                {
+                                    text: "Status Report",
+                                    id: "status_report",
                                 },
                             ],
                         },
                         { text: "Leave", id: "report_leave" },
                         {
                             text: "Project",
-                            
+
                             children: [
-                                { 
-                                    text: "Project Menu", 
-                                    id: "project_report_menu" 
+                                {
+                                    text: "Project Menu",
+                                    id: "project_report_menu",
                                 },
                                 {
                                     text: "Project Listing",
                                     id: "project_listing",
                                 },
-                                { 
-                                    text: "Project Report", 
-                                    id: "project_report" 
+                                {
+                                    text: "Project Report",
+                                    id: "project_report",
                                 },
                             ],
                         },
                         {
                             text: "Claim",
-                            
+
                             children: [
-                                { 
-                                    text: "Claim Menu", 
-                                    id: "claim_report_menu" 
+                                {
+                                    text: "Claim Menu",
+                                    id: "claim_report_menu",
                                 },
                                 {
                                     text: "Claim Report",
                                     id: "claim_report",
                                 },
-                                { 
-                                    text: "Cash Report", 
-                                    id: "cash_report" 
+                                {
+                                    text: "Cash Report",
+                                    id: "cash_report",
                                 },
                             ],
                         },

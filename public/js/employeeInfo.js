@@ -1,10 +1,4 @@
-$(document).ready(function() {
-    
-
-
-
-
-
+$(document).ready(function () {
     $("#tableemployeeinfo").DataTable({
         responsive: false,
         dom:
@@ -12,34 +6,35 @@ $(document).ready(function() {
             "<'row'<'col-sm-12'tr>>" +
             "<'row'<'col-sm-4 col-auto'i><'col-sm-4 text-center'><'col-sm-4'p>>", // add col-auto class to the search column
         buttons: [
-            { 
-                extend: 'pdf', 
-                className: 'btn-sm', 
-                orientation: 'landscape',
-                pageSize: 'LEGAL',
-                exportOptions: {columns:[2,3,4,5,6,7,8,9]}
+            {
+                extend: "pdf",
+                className: "btn-sm",
+                orientation: "landscape",
+                pageSize: "LEGAL",
+                exportOptions: { columns: [2, 3, 4, 5, 6, 7, 8, 9] },
             },
-            { 
-                extend: 'csv', 
-                className: 'btn-sm' ,
-                exportOptions: {columns:[2,3,4,5,6,7,8,9]}
+            {
+                extend: "csv",
+                className: "btn-sm",
+                exportOptions: { columns: [2, 3, 4, 5, 6, 7, 8, 9] },
             },
         ],
         autoWidth: true,
-        lengthMenu: [ [5, 10, 25, -1], [5, 10, 25, "All"] ],
-        scrollX: true // enable horizontal scrolling if necessary
+        lengthMenu: [
+            [5, 10, 25, -1],
+            [5, 10, 25, "All"],
+        ],
+        scrollX: true, // enable horizontal scrolling if necessary
     });
-    
-    
 
     $("#datepicker-terminatedate").datepicker({
         todayHighlight: true,
         autoclose: true,
     });
-     
-    $(document).on("click", "#cancelButton", function() {
-        id = $(this).data('id');
-        requirejs(['sweetAlert2'], function(swal) {
+
+    $(document).on("click", "#cancelButton", function () {
+        id = $(this).data("id");
+        requirejs(["sweetAlert2"], function (swal) {
             swal({
                 title: "Are you sure to Cancel Termination ?",
                 type: "error",
@@ -49,28 +44,27 @@ $(document).ready(function() {
                 allowOutsideClick: false,
                 allowEscapeKey: false,
                 allowOutsideClick: false,
-                allowEscapeKey: false
-            }).then(function() {
+                allowEscapeKey: false,
+            }).then(function () {
                 $.ajax({
                     type: "POST",
                     url: "/cancelTerminateEmployment/" + id,
                     dataType: "json",
                     data: { _method: "POST" },
-                    async: false,
+
                     processData: false,
                     contentType: false,
-                }).done(function(data) {
+                }).then(function (data) {
                     swal({
                         title: data.title,
                         text: data.msg,
                         type: data.type,
-                        confirmButtonColor: '#3085d6',
-                        confirmButtonText: 'OK',
+                        confirmButtonColor: "#3085d6",
+                        confirmButtonText: "OK",
                         allowOutsideClick: false,
-                        allowEscapeKey: false
-                    }).then(function() {
-                        if (data.type == 'error') {
-
+                        allowEscapeKey: false,
+                    }).then(function () {
+                        if (data.type == "error") {
                         } else {
                             location.reload();
                         }
@@ -80,7 +74,7 @@ $(document).ready(function() {
         });
     });
 
-    $('#submit').click(function(e) {
+    $("#submit").click(function (e) {
         $("#submitForm").validate({
             // Specify validation rules
             rules: {
@@ -89,7 +83,7 @@ $(document).ready(function() {
                 remarks: "required",
                 file: "required",
             },
-  
+
             messages: {
                 effectiveFrom: "Please Insert Terminate Date",
                 employmentDetail: "Please Insert Terminate Type",
@@ -97,78 +91,66 @@ $(document).ready(function() {
                 file: "Please Upload Attachment",
             },
             submitHandler: function (form) {
-                requirejs(['sweetAlert2'], function(swal) {
+                requirejs(["sweetAlert2"], function (swal) {
+                    var data = new FormData(
+                        document.getElementById("submitForm")
+                    );
 
-                    var data = new FormData(document.getElementById
-                    ("submitForm"));
-        
                     $.ajax({
                         type: "POST",
                         url: "/terminateEmployment",
                         data: data,
                         dataType: "json",
-                        async: false,
+
                         processData: false,
                         contentType: false,
-                    }).done(function(data) {
+                    }).then(function (data) {
                         console.log(data);
                         swal({
                             title: data.title,
                             text: data.msg,
                             type: data.type,
-                             confirmButtonColor: '#3085d6',
-                            confirmButtonText: 'OK',
+                            confirmButtonColor: "#3085d6",
+                            confirmButtonText: "OK",
                             allowOutsideClick: false,
                             allowEscapeKey: false,
-                        }).then(function() {
-                            if (data.type == 'error') {
-        
+                        }).then(function () {
+                            if (data.type == "error") {
                             } else {
                                 window.location.href = "/employeeInfoView";
-        
                             }
-        
-        
                         });
                     });
-        
                 });
             },
         });
-        
     });
 
-   
-
-
-    $(document).on("click", "#terminate", function() {
-        $('#exampleModal').modal('show');
-        var userId = $(this).data('id');
-        var employeeId = $(this).data('employee');
+    $(document).on("click", "#terminate", function () {
+        $("#exampleModal").modal("show");
+        var userId = $(this).data("id");
+        var employeeId = $(this).data("employee");
         $("#userId").val(userId);
 
         var ParentData = getEmployee(employeeId);
 
-        ParentData.done(function(data) {
+        ParentData.then(function (data) {
             parent = data;
-            $('#employeeId').val(parent.employeeId);
-            $('#employeeName').val(parent.employeeName);
-            $('#employeeEmail').val(parent.employeeEmail);
+            $("#employeeId").val(parent.employeeId);
+            $("#employeeName").val(parent.employeeName);
+            $("#employeeEmail").val(parent.employeeEmail);
             supervisor = getEmployee(parent.supervisor);
 
-            supervisor.done(function(superdata) {
+            supervisor.then(function (superdata) {
                 console.log(superdata);
                 $("#reportTo").val(superdata.employeeName);
-
-            })
+            });
         });
-
     });
 
     function getEmployee(id) {
         return $.ajax({
-            url: "/getEmployeeById/" + id
+            url: "/getEmployeeById/" + id,
         });
-
     }
 });

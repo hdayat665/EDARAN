@@ -49,10 +49,10 @@ $(document).ready(function () {
                         url: "/addRequestProject/" + id,
                         data: data,
                         dataType: "json",
-                        async: false,
+
                         processData: false,
                         contentType: false,
-                    }).done(function (data) {
+                    }).then(function (data) {
                         swal({
                             title: data.title,
                             text: data.msg,
@@ -77,7 +77,7 @@ $(document).ready(function () {
         var id = $(this).data("id");
         var vehicleData = getRequestProject(id);
 
-        vehicleData.done(function (data) {
+        vehicleData.then(function (data) {
             console.log(data);
             $("#customer_name").val(data.customer_name);
             $("#project_code").val(data.project_code);
@@ -92,7 +92,7 @@ $(document).ready(function () {
         var id = $(this).data("id");
         var vehicleData = getRequestProject(id);
 
-        vehicleData.done(function (data) {
+        vehicleData.then(function (data) {
             console.log(data);
             $("#location_name").val(data.location_name);
             $("#address").val(data.address);
@@ -124,10 +124,10 @@ $(document).ready(function () {
                     type: "POST",
                     url: "/cancelProjectMember/" + id,
                     dataType: "json",
-                    async: false,
+
                     processData: false,
                     contentType: false,
-                }).done(function (data) {
+                }).then(function (data) {
                     swal({
                         title: data.title,
                         text: data.msg,
@@ -151,11 +151,11 @@ $(document).ready(function () {
         var id = $(this).data("id");
         var vehicleData = getRejectProject(id);
 
-        vehicleData.done(function (data) {
-             console.log(data.reason);
+        vehicleData.then(function (data) {
+            console.log(data.reason);
             $("#reason").val(data.reason);
         });
-        $("#reasonProjectRejected").modal("show"); 
+        $("#reasonProjectRejected").modal("show");
     });
 
     $(document).on("click", "#deleteRequestProjectButton", function () {
@@ -174,10 +174,10 @@ $(document).ready(function () {
                     type: "DELETE",
                     url: "/deleteRequestProject/" + id,
                     dataType: "json",
-                    async: false,
+
                     processData: false,
                     contentType: false,
-                }).done(function (data) {
+                }).then(function (data) {
                     swal({
                         title: data.title,
                         text: data.msg,

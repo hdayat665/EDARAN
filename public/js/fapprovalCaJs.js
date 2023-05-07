@@ -15,7 +15,7 @@ $(document).ready(function () {
         id = $(this).data("id");
 
         $("#rejectId").val(id);
-        $("#modalreject").modal("show"); 
+        $("#modalreject").modal("show");
     });
 
     $("#amendButton").on("click", function () {
@@ -43,10 +43,10 @@ $(document).ready(function () {
                     status +
                     "/" +
                     stage,
-                async: false,
+
                 processData: false,
                 contentType: false,
-            }).done(function (data) {
+            }).then(function (data) {
                 swal({
                     title: data.title,
                     text: data.msg,
@@ -67,10 +67,8 @@ $(document).ready(function () {
         // $(".wrapper").val($(".container").html());
         // updating the value of textarea
     });
-    
-    $(
-        "#f_approver_button3"
-    ).on("click", function () {
+
+    $("#f_approver_button3").on("click", function () {
         // alert("ss");
         var id = $(this).data("id");
         var stage = "f_approver";
@@ -86,10 +84,10 @@ $(document).ready(function () {
                     status +
                     "/" +
                     stage,
-                async: false,
+
                 processData: false,
                 contentType: false,
-            }).done(function (data) {
+            }).then(function (data) {
                 swal({
                     title: data.title,
                     text: data.msg,
@@ -136,10 +134,10 @@ $(document).ready(function () {
                             "/" +
                             stage,
                         data: data,
-                        async: false,
+
                         processData: false,
                         contentType: false,
-                    }).done(function (data) {
+                    }).then(function (data) {
                         swal({
                             title: data.title,
                             text: data.msg,
@@ -192,10 +190,10 @@ $(document).ready(function () {
                             stage,
                         data: data,
                         dataType: "json",
-                        async: false,
+
                         processData: false,
                         contentType: false,
-                    }).done(function (data) {
+                    }).then(function (data) {
                         console.log(data);
                         swal({
                             title: data.title,
@@ -223,7 +221,7 @@ $(document).ready(function () {
 
         var vehicleData = getPersonalById(id);
 
-        vehicleData.done(function (data) {
+        vehicleData.then(function (data) {
             console.log(data);
             $("#created_At").val(data.applied_date);
             $("#claim_category").val(data.claim_category);

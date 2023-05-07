@@ -28,16 +28,21 @@ class myClaimController extends Controller
         return view('pages.eclaim.generalClaim', $data);
     }
 
-    public function cashAdvanceView()
-    {   
+        public function cashAdvanceView()
+    {
         $mcs = new myClaimService;
 
         $data['user_id'] = Auth::user()->id;
         $data['food'] = $mcs->getFoodByJobGrade($data['user_id']);
         $data['area'] = $mcs->getEntitlementAreaByJobGrade($data['user_id']);
-        //pr($data['area']);
-        return view('pages.eclaim.cashAdvance');
+        $data['areas'] = $mcs->getEntitlementArea($data['user_id']);
+
+        $area_data = array('area' => $data['area']);
+        $json_area_data = json_encode($area_data);
+        
+        return view('pages.eclaim.cashAdvance',$data, compact('data', 'json_area_data'));
     }
+
 
     public function viewMtcClaim($id = '')
     {

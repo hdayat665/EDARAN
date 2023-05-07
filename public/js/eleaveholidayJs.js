@@ -59,10 +59,10 @@ $(document).ready(function () {
                         url: "/createholidaylist",
                         data: data,
                         dataType: "json",
-                        async: false,
+
                         processData: false,
                         contentType: false,
-                    }).done(function (data) {
+                    }).then(function (data) {
                         swal({
                             title: data.title,
                             text: data.msg,
@@ -90,7 +90,7 @@ $(document).ready(function () {
 
         console.log(holidayData);
 
-        holidayData.done(function (data) {
+        holidayData.then(function (data) {
             $("#holidaytitle").val(data.holiday_title);
             $("#udatepickerstart").val(data.start_date);
             $("#udatepickerend").val(data.end_date);
@@ -138,10 +138,10 @@ $(document).ready(function () {
                         url: "/updateLeaveholiday/" + id,
                         data: data,
                         dataType: "json",
-                        async: false,
+
                         processData: false,
                         contentType: false,
-                    }).done(function (data) {
+                    }).then(function (data) {
                         swal({
                             title: data.title,
                             text: data.msg,
@@ -179,10 +179,10 @@ $(document).ready(function () {
                     url: "/deleteLeaveholiday/" + id,
                     // dataType: "json",
                     data: { _method: "DELETE" },
-                    // async: false,
+
                     // processData: false,
                     // contentType: false,
-                }).done(function (data) {
+                }).then(function (data) {
                     swal({
                         title: data.title,
                         text: data.msg,
@@ -217,10 +217,10 @@ $(document).ready(function () {
             $.ajax({
                 type: "get",
                 url: "/updateStatusleaveholiday/" + id + "/" + status,
-                async: false,
+
                 processData: false,
                 contentType: false,
-            }).done(function (data) {
+            }).then(function (data) {
                 swal({
                     title: data.title,
                     text: data.msg,

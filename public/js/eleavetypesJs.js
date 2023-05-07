@@ -60,10 +60,10 @@ $(document).ready(function () {
                         url: "/createtypes",
                         data: data,
                         dataType: "json",
-                        async: false,
+
                         processData: false,
                         contentType: false,
-                    }).done(function (data) {
+                    }).then(function (data) {
                         swal({
                             title: data.title,
                             text: data.msg,
@@ -89,7 +89,7 @@ $(document).ready(function () {
 
         var typesData = geteleavetypes(id);
 
-        typesData.done(function (data) {
+        typesData.then(function (data) {
             $("#leavetypescode").val(data.leave_types_code);
             $("#leavetypes").val(data.leave_types);
             $("#idtypes").val(data.id);
@@ -130,10 +130,10 @@ $(document).ready(function () {
                         url: "/updateLeaveleavetypes/" + id,
                         data: data,
                         dataType: "json",
-                        async: false,
+
                         processData: false,
                         contentType: false,
-                    }).done(function (data) {
+                    }).then(function (data) {
                         swal({
                             title: data.title,
                             text: data.msg,
@@ -171,10 +171,10 @@ $(document).ready(function () {
                     url: "/deleteLeavetypes/" + id,
                     // dataType: "json",
                     data: { _method: "DELETE" },
-                    // async: false,
+
                     // processData: false,
                     // contentType: false,
-                }).done(function (data) {
+                }).then(function (data) {
                     swal({
                         title: data.title,
                         text: data.msg,
@@ -209,10 +209,10 @@ $(document).ready(function () {
             $.ajax({
                 type: "get",
                 url: "/updateStatusleavetypes/" + id + "/" + status,
-                async: false,
+
                 processData: false,
                 contentType: false,
-            }).done(function (data) {
+            }).then(function (data) {
                 swal({
                     title: data.title,
                     text: data.msg,

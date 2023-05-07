@@ -10,7 +10,7 @@ $(document).ready(function () {
         }
         var vehicleData = getClaimEntitleById(id);
 
-        vehicleData.done(function (data) {
+        vehicleData.then(function (data) {
             var html = '<tbody class="btgccolor">';
             for (let index = 0; index < data.length; index++) {
                 const element = data[index];
@@ -46,7 +46,7 @@ $(document).ready(function () {
         }
         var vehicleData = getClaimEntitleById(id);
 
-        vehicleData.done(function (data) {
+        vehicleData.then(function (data) {
             var html = '<tbody class="btgccolor">';
             for (let index = 0; index < data.length; index++) {
                 const element = data[index];
@@ -85,8 +85,8 @@ $(document).ready(function () {
         $("#addUpdateSubs").show();
         var vehicleData = getEclaimGeneralById(id);
 
-        vehicleData.done(function (data) {
-            $("#area_name").val(data.area_name); 
+        vehicleData.then(function (data) {
+            $("#area_name").val(data.area_name);
             $("#idAddSubs").val(data.id);
             $("#valuesubsistence").val(data.value);
         });
@@ -99,7 +99,7 @@ $(document).ready(function () {
         var id = $(this).data("id");
         var vehicleData = getClaimCategoryById(id);
 
-        vehicleData.done(function (data) {
+        vehicleData.then(function (data) {
             console.log(data);
             $("#claim_catagory").val(data.claim_catagory);
             $("#idAddClaim").val(data.id);
@@ -124,7 +124,7 @@ $(document).ready(function () {
         var id = $(this).data("id");
         var vehicleData = getEclaimGeneralById(id);
 
-        vehicleData.done(function (data) {
+        vehicleData.then(function (data) {
             console.log(data);
             $("#area_name").val(data.area_name);
             $("#idE").val(data.id);
@@ -149,10 +149,10 @@ $(document).ready(function () {
                         url: "/createEntitleGroup",
                         data: data,
                         dataType: "json",
-                        async: false,
+
                         processData: false,
                         contentType: false,
-                    }).done(function (data) {
+                    }).then(function (data) {
                         swal({
                             title: data.title,
                             text: data.msg,
@@ -191,10 +191,10 @@ $(document).ready(function () {
                         url: "/updateEntitleGroup/" + id,
                         data: data,
                         dataType: "json",
-                        async: false,
+
                         processData: false,
                         contentType: false,
-                    }).done(function (data) {
+                    }).then(function (data) {
                         swal({
                             title: data.title,
                             text: data.msg,
@@ -232,10 +232,10 @@ $(document).ready(function () {
                     url: "/deleteEntitleGroup/" + id,
                     // dataType: "json",
                     data: { _method: "DELETE" },
-                    // async: false,
+
                     // processData: false,
                     // contentType: false,
-                }).done(function (data) {
+                }).then(function (data) {
                     swal({
                         title: data.title,
                         text: data.msg,
@@ -406,7 +406,6 @@ $(document).ready(function () {
         }
     });
 
-    
     $(document).on("change", "#updateStatus", function () {
         var id = $(this).data("id");
         var status;
@@ -415,16 +414,16 @@ $(document).ready(function () {
             status = 1;
         } else {
             status = 2;
-        } 
+        }
         console.log(status);
         requirejs(["sweetAlert2"], function (swal) {
             $.ajax({
                 type: "get",
                 url: "/updateStatusEntitleGroup/" + id + "/" + status,
-                async: false,
+
                 processData: false,
                 contentType: false,
-            }).done(function (data) {
+            }).then(function (data) {
                 swal({
                     title: data.title,
                     text: data.msg,
@@ -462,10 +461,10 @@ $(document).ready(function () {
                         url: "/updateSubsistance/" + id,
                         data: data,
                         dataType: "json",
-                        async: false,
+
                         processData: false,
                         contentType: false,
-                    }).done(function (data) {
+                    }).then(function (data) {
                         swal({
                             title: data.title,
                             text: data.msg,
@@ -504,10 +503,10 @@ $(document).ready(function () {
                         url: "/updateClaimCategory/" + id,
                         data: data,
                         dataType: "json",
-                        async: false,
+
                         processData: false,
                         contentType: false,
-                    }).done(function (data) {
+                    }).then(function (data) {
                         swal({
                             title: data.title,
                             text: data.msg,
@@ -540,7 +539,7 @@ $(document).ready(function () {
         var id = $(this).data("id");
         var vehicleData = getEntitleClaimDetailById(id);
 
-        vehicleData.done(function (data) {
+        vehicleData.then(function (data) {
             $("#area_name").val(data.area);
             $("#idAddSubs").val(data.id);
             $("#valuesubsistence").val(data.value);
@@ -554,7 +553,7 @@ $(document).ready(function () {
         var id = $(this).data("id");
         var vehicleData = getEntitleClaimDetailById(id);
 
-        vehicleData.done(function (data) {
+        vehicleData.then(function (data) {
             // console.log(data);
             $("#claim_catagory").val(data.area);
             $("#idAddClaim").val(data.id);
@@ -581,10 +580,10 @@ $(document).ready(function () {
                         url: "/updateEntitleDetail/" + id,
                         data: data,
                         dataType: "json",
-                        async: false,
+
                         processData: false,
                         contentType: false,
-                    }).done(function (data) {
+                    }).then(function (data) {
                         swal({
                             title: data.title,
                             text: data.msg,
@@ -623,10 +622,10 @@ $(document).ready(function () {
                         url: "/updateEntitleDetail/" + id,
                         data: data,
                         dataType: "json",
-                        async: false,
+
                         processData: false,
                         contentType: false,
-                    }).done(function (data) {
+                    }).then(function (data) {
                         swal({
                             title: data.title,
                             text: data.msg,

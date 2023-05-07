@@ -271,12 +271,13 @@ class EmployeeService
             $data['msg'] = 'Profile not found';
 
         } else {
+ 
 
-            if ($input['fullName']) {
-                $employee['employeeName'] = $input['fullName'];
+             if ($input['fullName']) {
+                 $employee['employeeName'] = $input['fullName'];
             
-                Employee::where('user_id', $user_id)->update($employee);
-            }   
+                 Employee::where('user_id', $user_id)->update($employee);
+             } 
             
             if (!$input['religion']) {
                 unset($input['religion']);
@@ -513,6 +514,38 @@ class EmployeeService
                 unset($input['address2E']);
             }
 
+           
+
+            // if ($input['mainCompanion']['name']) {
+            //     $mainCom = ($r()->input('mainCompanion'));
+            //     $mainCom->mainCompanion = 6;
+            //     $mainCom->save();
+            // } else {
+            //     $input['mainCompanion'] = null;
+            // }
+
+            // usik sini
+            if($input['mainCompanion']) {
+                $companion->mainCompanion = 6;
+                $companion->save();
+                }else {
+                    $companion->mainCompanion = 4;
+                $companion->save();
+                }
+            
+
+
+            // if ($r->input('mainCompanion')) {
+                // Set the mainCompanion attribute of the new companion to 1
+                // $companion->mainCompanion = 6;
+                // $companion->save();
+    
+                // Set the mainCompanion attribute of all other companions to 0
+                // UserCompanion::where('user_id', $id)
+                //     ->where('id', '<>', $companion->id)
+                //     ->update(['mainCompanion' => 0]);
+            // }
+
             // $input['dateJoined'] = "'".dateFormatInput($input['dateJoined'])."'";
             // $input['expiryDate'] = "'".dateFormatInput($input['expiryDate'])."'";
             // $input['DOM'] = "'".dateFormatInput($input['DOM'])."'";
@@ -573,11 +606,35 @@ class EmployeeService
             }
 
             $input['dateJoined'] = dateFormat($input['dateJoined']);
-            $input['expiryDate'] = dateFormat($input['expiryDate']);
+
+            
+
+            if (isset($_FILES['expiryDate']['name'])) {
+                $input['expiryDate'] = dateFormat($input['expiryDate']);
+
+            } else {
+                $input['expiryDate'] = null;
+            }
+
             $input['DOM'] = dateFormat($input['DOM']);
             $input['DOB'] = dateFormat($input['DOB']);
             UserCompanion::create($input);
 
+            $input['mainCompanion'] = isset($input['mainCompanion']) ? 1 : 0;
+            $companion = UserCompanion::create($input);
+    
+            // Set the main companion if the checkbox is checked
+            if ($r->input('mainCompanion')) {
+                // Set the mainCompanion attribute of the new companion to 1
+                $companion->mainCompanion = 1;
+                $companion->save();
+    
+                // Set the mainCompanion attribute of all other companions to 0
+                UserCompanion::where('user_id', $id)
+                    ->where('id', '<>', $companion->id)
+                    ->update(['mainCompanion' => 0]);
+            }
+            
             $data['status'] = config('app.response.success.status');
             $data['type'] = config('app.response.success.type');
             $data['title'] = config('app.response.success.title');
@@ -721,6 +778,26 @@ class EmployeeService
     public function addEmployeeParent($r)
     {
         $input = $r->input();
+
+
+        if ($_FILES['idFile']['name']) {
+            $iDFile = upload($r->file('idFile'));
+            $input['idFile'] = $iDFile['filename'];
+
+            if (!$input['idFile']) {
+                unset($input['idFile']);
+            }
+        }
+
+        
+        if (isset($_FILES['okuFile']['name'])) {
+            $okuAttach = upload(request()->file('okuFile'));
+            $input['okuFile'] = $okuAttach['filename'];
+        } else {
+            $input['okuFile'] = null;
+        }
+
+
         $sameAddress = $input['sameAddress'] ?? null;
         $user_id = $input['user_id'];
         if ($sameAddress) {
@@ -742,6 +819,32 @@ class EmployeeService
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
         $data['msg'] = 'New family is Created';
+
+        return $data;
+    }
+
+    public function getEmployeeAddressforParent($id)
+    {
+        
+        
+        $addressDetails = UserAddress::where('user_id', $id)
+            ->select('address1', 'address2', 'postcode', 'city', 'state', 'country')
+            ->first();
+            
+
+        if(!$addressDetails)
+        {
+            $data['status'] = config('app.response.error.status');
+            $data['type'] = config('app.response.error.type');
+            $data['title'] = config('app.response.error.title');
+            $data['msg'] = 'Address not found';
+        }else{
+            $data['data'] = $addressDetails;
+            $data['status'] = config('app.response.success.status');
+            $data['type'] = config('app.response.success.type');
+            $data['title'] = config('app.response.success.title');
+            $data['msg'] = 'Success Get Address Data';
+        }
 
         return $data;
     }

@@ -1,7 +1,4 @@
-
-
-$(document).ready(function() {
-
+$(document).ready(function () {
     // $("#addeventalldayedit").change(function() {
     //     if ($(this).is(":checked")) {
     //       $(this).val("allday");
@@ -10,12 +7,24 @@ $(document).ready(function() {
     //     }
     //   });
 
+    document.getElementById("yearsub").value = new Date().getFullYear();
 
- document.getElementById("yearsub").value = new Date().getFullYear();
-
-  var monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-  var d = new Date();
-  document.getElementById("monthsub").value = monthNames[d.getMonth()];
+    var monthNames = [
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December",
+    ];
+    var d = new Date();
+    document.getElementById("monthsub").value = monthNames[d.getMonth()];
 
     $("#datepicker-joindate").datepicker({
         todayHighlight: true,
@@ -26,34 +35,34 @@ $(document).ready(function() {
         responsive: true,
     });
 
-    $(document).on("click", "#addButton", function() {
-        $('#addModal').modal('show');
-
+    $(document).on("click", "#addButton", function () {
+        $("#addModal").modal("show");
     });
 
-    $(document).on("click", "#editButton", function() {
-        var id = $(this).data('id');
+    $(document).on("click", "#editButton", function () {
+        var id = $(this).data("id");
         var vehicleData = getData(id);
 
-        vehicleData.done(function(data) {
+        vehicleData.then(function (data) {
             // console.log(data);
-            $('#department').val(data.department);
-            $('#project').val(data.project_id);
+            $("#department").val(data.department);
+            $("#project").val(data.project_id);
             if (data.project_id) {
-                document.getElementById('addtypeoflogprojectedit').style.display = 'block';
+                document.getElementById(
+                    "addtypeoflogprojectedit"
+                ).style.display = "block";
             }
             // $("#addtypeoflogedit").prop("selectedIndex", data.type_of_log);
             $("#addtypeoflogedit").val(data.type_of_log);
 
-            $('#idT').val(data.id);
-        })
-        $('#editModal').modal('show');
-
+            $("#idT").val(data.id);
+        });
+        $("#editModal").modal("show");
     });
 
-    $(document).on("click", "#deleteEventButton", function() {
-        id = $(this).data('id');
-        requirejs(['sweetAlert2'], function(swal) {
+    $(document).on("click", "#deleteEventButton", function () {
+        id = $(this).data("id");
+        requirejs(["sweetAlert2"], function (swal) {
             swal({
                 title: "Are you sure to delete Event?",
                 type: "error",
@@ -61,27 +70,26 @@ $(document).ready(function() {
                 confirmButtonText: "Yes!",
                 showCancelButton: true,
                 allowOutsideClick: false,
-                allowEscapeKey: false
-            }).then(function() {
+                allowEscapeKey: false,
+            }).then(function () {
                 $.ajax({
                     type: "DELETE",
                     url: "/deleteTypeOfLogs/" + id,
                     dataType: "json",
-                    async: false,
+
                     processData: false,
                     contentType: false,
-                }).done(function(data) {
+                }).then(function (data) {
                     swal({
                         title: data.title,
                         text: data.msg,
                         type: data.type,
-                        confirmButtonColor: '#3085d6',
-                        confirmButtonText: 'OK',
+                        confirmButtonColor: "#3085d6",
+                        confirmButtonText: "OK",
                         allowOutsideClick: false,
-                        allowEscapeKey: false
-                    }).then(function() {
-                        if (data.type == 'error') {
-
+                        allowEscapeKey: false,
+                    }).then(function () {
+                        if (data.type == "error") {
                         } else {
                             location.reload();
                         }
@@ -93,84 +101,74 @@ $(document).ready(function() {
 
     function getData(id) {
         return $.ajax({
-            url: "/getLogsById/" + id
+            url: "/getLogsById/" + id,
         });
     }
 
     function getLocationByProjectId(id) {
         return $.ajax({
-            url: "/getLocationByProjectId/" + id
+            url: "/getLocationByProjectId/" + id,
         });
     }
 
     function getActivityByProjectId(id) {
         return $.ajax({
-            url: "/getActivityByProjectId/" + id
+            url: "/getActivityByProjectId/" + id,
         });
     }
 
     function getActivityNamebyLogsId(id) {
         return $.ajax({
-            url: "/getActivityNamebyLogsId/" + id
+            url: "/getActivityNamebyLogsId/" + id,
         });
     }
 
-    var $elem = $('#addneweventselectprojectedit');
+    var $elem = $("#addneweventselectprojectedit");
     $elem.picker({ search: true });
-    $elem.on('sp-change', function() {
+    $elem.on("sp-change", function () {
         projectId = $(this).val();
-        getDataEventByProject(projectId, 'editEvent')
+        getDataEventByProject(projectId, "editEvent");
     });
 
-    $(document).on("change", "#officeLogProject", function() {
+    $(document).on("change", "#officeLogProject", function () {
         projectId = $(this).val();
-        getDataByProject(projectId, 'addLog')
+        getDataByProject(projectId, "addLog");
     });
 
-    $(document).on("change", "#myProject", function() {
+    $(document).on("change", "#myProject", function () {
         projectId = $(this).val();
-        getDataByProject(projectId, 'addLog')
+        getDataByProject(projectId, "addLog");
     });
 
-    $(document).on("change", "#officeLogProjectEdit", function() {
+    $(document).on("change", "#officeLogProjectEdit", function () {
         projectId = $(this).val();
-        getDataByProject(projectId, 'editLog')
+        getDataByProject(projectId, "editLog");
     });
 
-    $(document).on("change", "#project_id_edit", function() {
+    $(document).on("change", "#project_id_edit", function () {
         projectId = $(this).val();
-        getDataByProject(projectId, 'editLog')
+        getDataByProject(projectId, "editLog");
     });
 
-
-    $('#locationByProjectShow').hide();
-    $('#activityByProjectShow').hide();
+    $("#locationByProjectShow").hide();
+    $("#activityByProjectShow").hide();
 
     function getDataByProject(projectId, type) {
-        if (type = 'addLog') {
-            $('#locationByProjectHide').hide();
-            $('#locationByProjectShow').show();
-            $('#activityByProjectShow').show();
-            $('#activityByProjectHide').hide();
+        if ((type = "addLog")) {
+            $("#locationByProjectHide").hide();
+            $("#locationByProjectShow").show();
+            $("#activityByProjectShow").show();
+            $("#activityByProjectHide").hide();
 
-            $('#projectLocationOffice')
-                .find('option')
-                .remove()
-                .end();
+            $("#projectLocationOffice").find("option").remove().end();
 
-            $('#activityOffice')
-                .find('option')
-                .remove()
-                .end();
+            $("#activityOffice").find("option").remove().end();
 
-            $('#activityLogs')
-            .find('option')
-            .remove()
-            .end();
+            $("#activityLogs").find("option").remove().end();
 
             // var locationOffice = getLocationByProjectId(projectId);
 
-            // locationOffice.done(function(data) {
+            // locationOffice.then(function(data) {
             //     // console.log(data);
             //     for (let i = 0; i < data.length; i++) {
             //         const locations = data[i];
@@ -182,23 +180,27 @@ $(document).ready(function() {
 
             var locationOffice = getLocationByProjectId(projectId);
 
-            locationOffice.done(function(data) {
+            locationOffice.then(function (data) {
                 var select = document.getElementById("projectLocationOffice");
-                select.innerHTML = '<option value="">Please Choose</option>';
+                select.innerHTML = '<option value="">PLEASE CHOOSE</option>';
+                var officeOption = document.createElement("option");
+                officeOption.value = "OFFICE";
+                officeOption.text = "OFFICE";
+                select.appendChild(officeOption);
+                // add other options
                 for (let i = 0; i < data.length; i++) {
                     const location = data[i];
                     var opt = document.createElement("option");
-                    opt.value = location['id'];
-                    opt.text = location['location_name'];
+                    opt.value = location["id"];
+                    opt.text = location["location_name"];
                     select.appendChild(opt);
                 }
                 // $('#projectLocationOffice').picker({ search: true });
             });
 
-
             // var activityOffice = getActivityByProjectId(projectId);
 
-            // activityOffice.done(function(data) {
+            // activityOffice.then(function(data) {
             //     // console.log(data);
             //     for (let i = 0; i < data.length; i++) {
             //         const locations = data[i];
@@ -210,57 +212,48 @@ $(document).ready(function() {
 
             var activityOffice = getActivityByProjectId(projectId);
 
-            activityOffice.done(function(data) {
+            activityOffice.then(function (data) {
                 var select = document.getElementById("activityOffice");
                 select.innerHTML = '<option value="">Please Choose</option>';
                 for (let i = 0; i < data.length; i++) {
                     const activity = data[i];
                     var opt = document.createElement("option");
-                    opt.value = activity['id'];
-                    opt.text = activity['activity_name'];
+                    opt.value = activity["id"];
+                    opt.text = activity["activity_name"];
                     select.appendChild(opt);
                 }
                 // $('#activityOffice').picker({ search: true });
-                
             });
 
             var activityLogs = getActivityNamebyLogsId(projectId);
 
-            activityLogs.done(function(data) {
+            activityLogs.then(function (data) {
                 var select = document.getElementById("activityLogs");
                 select.innerHTML = '<option value="">Please Choose</option>';
                 for (let i = 0; i < data.length; i++) {
                     const activity = data[i];
                     var opt = document.createElement("option");
-                    opt.value = activity['id'];
-                    opt.text = activity['activity_name'];
+                    opt.value = activity["id"];
+                    opt.text = activity["activity_name"];
                     select.appendChild(opt);
                 }
                 // $('#activityLogs').picker({ search: true });
             });
-
-
         }
 
-        if (type = 'editLog') {
-            $('#activityByProjectEditHide').hide();
-            $('#activityByProjectEditShow').show();
-            $('#locationByProjectEditShow').show();
-            $('#locationByProjectEditHide').hide();
+        if ((type = "editLog")) {
+            $("#activityByProjectEditHide").hide();
+            $("#activityByProjectEditShow").show();
+            $("#locationByProjectEditShow").show();
+            $("#locationByProjectEditHide").hide();
 
-            $('#projectLocationOfficeEdit')
-                .find('option')
-                .remove()
-                .end();
+            $("#projectLocationOfficeEdit").find("option").remove().end();
 
-            $('#activityOfficeEdit')
-                .find('option')
-                .remove()
-                .end();
+            $("#activityOfficeEdit").find("option").remove().end();
 
             // var locationOffice = getLocationByProjectId(projectId);
 
-            // locationOffice.done(function(data) {
+            // locationOffice.then(function(data) {
             //     // console.log(data);
             //     for (let i = 0; i < data.length; i++) {
             //         const locations = data[i];
@@ -272,30 +265,31 @@ $(document).ready(function() {
 
             var locationOffice = getLocationByProjectId(projectId);
 
-            locationOffice.done(function(data) {
-                var select = document.getElementById("projectLocationOfficeEdit");
+            locationOffice.then(function (data) {
+                var select = document.getElementById(
+                    "projectLocationOfficeEdit"
+                );
                 select.innerHTML = '<option value="">Please Choose</option>';
                 for (let i = 0; i < data.length; i++) {
                     const location = data[i];
                     var opt = document.createElement("option");
-                    opt.value = location['id'];
-                    opt.text = location['location_name'];
+                    opt.value = location["id"];
+                    opt.text = location["location_name"];
                     select.appendChild(opt);
                 }
                 // $('#projectLocationOfficeEdit').picker({ search: true });
             });
 
-
             var locationOffice = getLocationByProjectId(projectId);
 
-            locationOffice.done(function(data) {
+            locationOffice.then(function (data) {
                 var select = document.getElementById("projectlocsearchedit");
                 select.innerHTML = '<option value="">Please Choose</option>';
                 for (let i = 0; i < data.length; i++) {
                     const location = data[i];
                     var opt = document.createElement("option");
-                    opt.value = location['id'];
-                    opt.text = location['location_name'];
+                    opt.value = location["id"];
+                    opt.text = location["location_name"];
                     select.appendChild(opt);
                 }
                 // $('#projectlocsearchedit').picker({ search: true });
@@ -303,7 +297,7 @@ $(document).ready(function() {
 
             // var activityOffice = getActivityByProjectId(projectId);
 
-            // activityOffice.done(function(data) {
+            // activityOffice.then(function(data) {
             //     // console.log(data);
             //     for (let i = 0; i < data.length; i++) {
             //         const locations = data[i];
@@ -315,14 +309,14 @@ $(document).ready(function() {
 
             var activityOffice = getActivityByProjectId(projectId);
 
-            activityOffice.done(function(data) {
+            activityOffice.then(function (data) {
                 var select = document.getElementById("activityOfficeEdit");
                 select.innerHTML = '<option value="">Please Choose</option>';
                 for (let i = 0; i < data.length; i++) {
                     const activity = data[i];
                     var opt = document.createElement("option");
-                    opt.value = activity['id'];
-                    opt.text = activity['activity_name'];
+                    opt.value = activity["id"];
+                    opt.text = activity["activity_name"];
                     select.appendChild(opt);
                 }
                 // $('#activityOfficeEdit').picker({ search: true });
@@ -330,65 +324,67 @@ $(document).ready(function() {
         }
     }
 
-    var $elem = $('#addneweventselectproject');
+    var $elem = $("#addneweventselectproject");
     $elem.picker({ search: true });
-    $elem.on('sp-change', function() {
+    $elem.on("sp-change", function () {
         projectId = $(this).val();
-        getDataEventByProject(projectId, 'addEvent')
+        getDataEventByProject(projectId, "addEvent");
     });
 
-    $('#locationByProjectEditEventShow').hide();
-    $('#locationByProjectAddEventShow').hide();
+    $("#locationByProjectEditEventShow").hide();
+    $("#locationByProjectAddEventShow").hide();
 
     function getDataEventByProject(projectId, type) {
+        if (type == "addEvent") {
+            $("#locationByProjectAddEventHide").hide();
+            $("#locationByProjectAddEventShow").show();
 
-        if (type == 'addEvent') {
-            $('#locationByProjectAddEventHide').hide();
-            $('#locationByProjectAddEventShow').show();
-
-            $('#location_by_project_add')
-                .find('option')
-                .remove()
-                .end();
+            $("#location_by_project_add").find("option").remove().end();
 
             var locationOffice = getLocationByProjectId(projectId);
 
-            locationOffice.done(function(data) {
+            locationOffice.then(function (data) {
                 // alert('ss');
                 for (let i = 0; i < data.length; i++) {
                     const locations = data[i];
                     var opt = document.createElement("option");
-                    document.getElementById("location_by_project_add").innerHTML +=
-                        '<option value="' + locations['id'] + '">' + locations['location_name'] + "</option>";
+                    document.getElementById(
+                        "location_by_project_add"
+                    ).innerHTML +=
+                        '<option value="' +
+                        locations["id"] +
+                        '">' +
+                        locations["location_name"] +
+                        "</option>";
                 }
-            })
+            });
         }
 
-        if (type == 'editEvent') {
-            $('#locationByProjectEditEventHide').hide();
-            $('#locationByProjectEditEventShow').show();
+        if (type == "editEvent") {
+            $("#locationByProjectEditEventHide").hide();
+            $("#locationByProjectEditEventShow").show();
 
-            $('#location_by_project')
-                .find('option')
-                .remove()
-                .end();
+            $("#location_by_project").find("option").remove().end();
 
             var locationOffice = getLocationByProjectId(projectId);
 
-            locationOffice.done(function(data) {
+            locationOffice.then(function (data) {
                 // alert(data);
                 for (let i = 0; i < data.length; i++) {
                     const locations = data[i];
                     var opt = document.createElement("option");
                     document.getElementById("location_by_project").innerHTML +=
-                        '<option value="' + locations['id'] + '">' + locations['location_name'] + "</option>";
+                        '<option value="' +
+                        locations["id"] +
+                        '">' +
+                        locations["location_name"] +
+                        "</option>";
                 }
-            })
+            });
         }
-
     }
 
-    $('#saveLogButton').click(function(e) {
+    $("#saveLogButton").click(function (e) {
         $("#addLogForm").validate({
             rules: {
                 type_of_log: "required",
@@ -417,10 +413,11 @@ $(document).ready(function() {
                 project_location_office: "Please Choose Project Location",
                 end_time: "Please Choose End Time",
             },
-            submitHandler: function(form) {
-                requirejs(['sweetAlert2'], function(swal) {
-
-                    var data = new FormData(document.getElementById("addLogForm"));
+            submitHandler: function (form) {
+                requirejs(["sweetAlert2"], function (swal) {
+                    var data = new FormData(
+                        document.getElementById("addLogForm")
+                    );
                     // var data = $('#tree').jstree("get_selected");
 
                     $.ajax({
@@ -428,36 +425,31 @@ $(document).ready(function() {
                         url: "/createLog",
                         data: data,
                         dataType: "json",
-                        async: false,
+
                         processData: false,
                         contentType: false,
-                    }).done(function(data) {
+                    }).then(function (data) {
                         swal({
                             title: data.title,
                             text: data.msg,
                             type: data.type,
-                            confirmButtonColor: '#3085d6',
-                            confirmButtonText: 'OK',
+                            confirmButtonColor: "#3085d6",
+                            confirmButtonText: "OK",
                             allowOutsideClick: false,
                             allowEscapeKey: false,
-                        }).then(function() {
-                            if (data.type == 'error') {
-
+                        }).then(function () {
+                            if (data.type == "error") {
                             } else {
                                 location.reload();
                             }
-
-
                         });
                     });
-
                 });
             },
         });
     });
 
-
-    $('#updateLogButton').click(function(e) {
+    $("#updateLogButton").click(function (e) {
         $("#editLogForm").validate({
             rules: {
                 type_of_log: "required",
@@ -486,48 +478,46 @@ $(document).ready(function() {
                 project_location_office: "Please Choose Project Location",
                 end_time: "Please Choose End Time",
             },
-            submitHandler: function(form) {
-                requirejs(['sweetAlert2'], function(swal) {
-
-                    var data = new FormData(document.getElementById("editLogForm"));
+            submitHandler: function (form) {
+                requirejs(["sweetAlert2"], function (swal) {
+                    var data = new FormData(
+                        document.getElementById("editLogForm")
+                    );
                     // console.log(data);
-                    var id = $('#id').val();
+                    var id = $("#id").val();
 
                     $.ajax({
                         type: "POST",
                         url: "/updateTimesheetLog/" + id,
                         data: data,
                         dataType: "json",
-                        async: false,
+
                         processData: false,
                         contentType: false,
-                    }).done(function(data) {
+                    }).then(function (data) {
                         swal({
                             title: data.title,
                             text: data.msg,
                             type: data.type,
-                            confirmButtonColor: '#3085d6',
-                            confirmButtonText: 'OK',
+                            confirmButtonColor: "#3085d6",
+                            confirmButtonText: "OK",
                             allowOutsideClick: false,
                             allowEscapeKey: false,
-                        }).then(function() {
-                            if (data.type == 'error') {
-
+                        }).then(function () {
+                            if (data.type == "error") {
                             } else {
                                 location.reload();
                             }
-
                         });
                     });
-
                 });
             },
         });
     });
 
-    $(document).on("click", "#deleteLogButton", function() {
-        var id = $('#id').val();
-        requirejs(['sweetAlert2'], function(swal) {
+    $(document).on("click", "#deleteLogButton", function () {
+        var id = $("#id").val();
+        requirejs(["sweetAlert2"], function (swal) {
             swal({
                 title: "Are you sure to delete Log?",
                 type: "error",
@@ -535,27 +525,26 @@ $(document).ready(function() {
                 confirmButtonText: "Yes!",
                 showCancelButton: true,
                 allowOutsideClick: false,
-                allowEscapeKey: false
-            }).then(function() {
+                allowEscapeKey: false,
+            }).then(function () {
                 $.ajax({
                     type: "POST",
                     url: "/deleteLog/" + id,
                     dataType: "json",
-                    async: false,
+
                     processData: false,
                     contentType: false,
-                }).done(function(data) {
+                }).then(function (data) {
                     swal({
                         title: data.title,
                         text: data.msg,
                         type: data.type,
-                        confirmButtonColor: '#3085d6',
-                        confirmButtonText: 'OK',
+                        confirmButtonColor: "#3085d6",
+                        confirmButtonText: "OK",
                         allowOutsideClick: false,
-                        allowEscapeKey: false
-                    }).then(function() {
-                        if (data.type == 'error') {
-
+                        allowEscapeKey: false,
+                    }).then(function () {
+                        if (data.type == "error") {
                         } else {
                             location.reload();
                         }
@@ -565,19 +554,16 @@ $(document).ready(function() {
         });
     });
 
-    $('#addappealb').click(function(e) {
+    $("#addappealb").click(function (e) {
         $("#addappeal").validate({
-            rules: {
-                
-            },
+            rules: {},
 
-            messages: {
-              
-            },
-            submitHandler: function(form) {
-                requirejs(['sweetAlert2'], function(swal) {
-
-                    var data = new FormData(document.getElementById("addappeal"));
+            messages: {},
+            submitHandler: function (form) {
+                requirejs(["sweetAlert2"], function (swal) {
+                    var data = new FormData(
+                        document.getElementById("addappeal")
+                    );
                     // var data = $('#tree').jstree("get_selected");
 
                     $.ajax({
@@ -585,37 +571,32 @@ $(document).ready(function() {
                         url: "/createAppeal",
                         data: data,
                         dataType: "json",
-                        async: false,
+
                         processData: false,
                         contentType: false,
-                    }).done(function(data) {
+                    }).then(function (data) {
                         swal({
                             title: data.title,
                             text: data.msg,
                             type: data.type,
-                            confirmButtonColor: '#3085d6',
-                            confirmButtonText: 'OK',
+                            confirmButtonColor: "#3085d6",
+                            confirmButtonText: "OK",
                             allowOutsideClick: false,
                             allowEscapeKey: false,
-                        }).then(function() {
-                            if (data.type == 'error') {
-
+                        }).then(function () {
+                            if (data.type == "error") {
                             } else {
                                 location.reload();
                             }
-
-
                         });
                     });
-
                 });
             },
         });
     });
 
-
     /////////////////////////////////////// EVENT ////////////////////////////////
-    $('#saveEventButton').click(function(e) {
+    $("#saveEventButton").click(function (e) {
         $("#addEventForm").validate({
             rules: {
                 event_name: "required",
@@ -628,7 +609,6 @@ $(document).ready(function() {
                 location: "required",
                 location_by_project: "required",
                 participant: "required",
-                
             },
 
             messages: {
@@ -641,12 +621,13 @@ $(document).ready(function() {
                 recurring: "Please Select",
                 location: "Please Insert Location",
                 location_by_project: "Please Enter Specific Location",
-                participant: 'required',
+                participant: "required",
             },
-            submitHandler: function(form) {
-                requirejs(['sweetAlert2'], function(swal) {
-
-                    var data = new FormData(document.getElementById("addEventForm"));
+            submitHandler: function (form) {
+                requirejs(["sweetAlert2"], function (swal) {
+                    var data = new FormData(
+                        document.getElementById("addEventForm")
+                    );
                     // var data = $('#tree').jstree("get_selected");
 
                     $.ajax({
@@ -654,35 +635,31 @@ $(document).ready(function() {
                         url: "/createEvent",
                         data: data,
                         dataType: "json",
-                        async: false,
+
                         processData: false,
                         contentType: false,
-                    }).done(function(data) {
+                    }).then(function (data) {
                         swal({
                             title: data.title,
                             text: data.msg,
                             type: data.type,
-                            confirmButtonColor: '#3085d6',
-                            confirmButtonText: 'OK',
+                            confirmButtonColor: "#3085d6",
+                            confirmButtonText: "OK",
                             allowOutsideClick: false,
                             allowEscapeKey: false,
-                        }).then(function() {
-                            if (data.type == 'error') {
-
+                        }).then(function () {
+                            if (data.type == "error") {
                             } else {
                                 location.reload();
                             }
-
-
                         });
                     });
-
                 });
             },
         });
     });
 
-    $('#updateEventButton').click(function(e) {
+    $("#updateEventButton").click(function (e) {
         $("#editEventForm").validate({
             rules: {
                 event_name: "required",
@@ -707,48 +684,46 @@ $(document).ready(function() {
                 location: "Please Enter  Location",
                 location_by_project: "Please Enter  Location",
             },
-            submitHandler: function(form) {
-                requirejs(['sweetAlert2'], function(swal) {
-
-                    var data = new FormData(document.getElementById("editEventForm"));
+            submitHandler: function (form) {
+                requirejs(["sweetAlert2"], function (swal) {
+                    var data = new FormData(
+                        document.getElementById("editEventForm")
+                    );
                     // console.log(data);
-                    var id = $('#idEvent').val();
+                    var id = $("#idEvent").val();
 
                     $.ajax({
                         type: "POST",
                         url: "/updateTimesheetEvent/" + id,
                         data: data,
                         dataType: "json",
-                        async: false,
+
                         processData: false,
                         contentType: false,
-                    }).done(function(data) {
+                    }).then(function (data) {
                         swal({
                             title: data.title,
                             text: data.msg,
                             type: data.type,
-                            confirmButtonColor: '#3085d6',
-                            confirmButtonText: 'OK',
+                            confirmButtonColor: "#3085d6",
+                            confirmButtonText: "OK",
                             allowOutsideClick: false,
                             allowEscapeKey: false,
-                        }).then(function() {
-                            if (data.type == 'error') {
-
+                        }).then(function () {
+                            if (data.type == "error") {
                             } else {
                                 location.reload();
                             }
-
                         });
                     });
-
                 });
             },
         });
     });
 
-    $(document).on("click", "#deleteEventButton", function() {
-        var id = $('#idEvent').val();
-        requirejs(['sweetAlert2'], function(swal) {
+    $(document).on("click", "#deleteEventButton", function () {
+        var id = $("#idEvent").val();
+        requirejs(["sweetAlert2"], function (swal) {
             swal({
                 title: "Are you sure to delete Event?",
                 type: "error",
@@ -756,27 +731,26 @@ $(document).ready(function() {
                 confirmButtonText: "Yes!",
                 showCancelButton: true,
                 allowOutsideClick: false,
-                allowEscapeKey: false
-            }).then(function() {
+                allowEscapeKey: false,
+            }).then(function () {
                 $.ajax({
                     type: "POST",
                     url: "/deleteEvent/" + id,
                     dataType: "json",
-                    async: false,
+
                     processData: false,
                     contentType: false,
-                }).done(function(data) {
+                }).then(function (data) {
                     swal({
                         title: data.title,
                         text: data.msg,
                         type: data.type,
-                        confirmButtonColor: '#3085d6',
-                        confirmButtonText: 'OK',
+                        confirmButtonColor: "#3085d6",
+                        confirmButtonText: "OK",
                         allowOutsideClick: false,
-                        allowEscapeKey: false
-                    }).then(function() {
-                        if (data.type == 'error') {
-
+                        allowEscapeKey: false,
+                    }).then(function () {
+                        if (data.type == "error") {
                         } else {
                             location.reload();
                         }
@@ -788,135 +762,149 @@ $(document).ready(function() {
     ////////////////////////////  END EVENT //////////////////////////////////////
 
     ////////////////////////////CALENDAR JS///////////////////////////////////////
-    var handleCalendarDemo = function() {
+    var handleCalendarDemo = function () {
         // external events
-
 
         // fullcalendar
 
-
         var d = new Date();
         var month = d.getMonth() + 1;
-        month = (month < 10) ? '0' + month : month;
+        month = month < 10 ? "0" + month : month;
         var year = d.getFullYear();
         var day = d.getDate();
-        var today = moment().startOf('day');
-        var calendarElm = document.getElementById('calendar');
-
+        var today = moment().startOf("day");
+        var calendarElm = document.getElementById("calendar");
 
         function getTimesheet() {
             return $.ajax({
-                url: "/getTimesheet"
+                url: "/getTimesheet",
             });
         }
 
-
         var timesheetData = getTimesheet();
 
-        timesheetData.done(function(data) {
+        timesheetData.then(function (data) {
             // $('#userIdForApproval').val(data['events'][0]['user_id']);
             // console.log(data['events']);
             var event = [];
-for (let i = 0; i < data['events'].length; i++) {
-    var events = data['events'][i];
+            for (let i = 0; i < data["events"].length; i++) {
+                var events = data["events"][i];
 
-    var startDate = new Date(events['start_date']);
-    var startMonth = startDate.getMonth() + 1;
-    startMonth = startMonth < 10 ? "0" + startMonth : startMonth;
-    var startYear = startDate.getFullYear();
-    var startDay = startDate.getDate();
-    startDay = startDay < 10 ? "0" + startDay : startDay;
-    
-    var endDate = new Date(events['end_date']);
-    endDate.setDate(endDate.getDate() + 1); // add one day to end date
-    var endMonth = endDate.getMonth() + 1;
-    endMonth = endMonth < 10 ? "0" + endMonth : endMonth;
-    var endYear = endDate.getFullYear();
-    var endDay = endDate.getDate();
-    endDay = endDay < 10 ? "0" + endDay : endDay;
-    
-    event.push({
-        title: "Event: " + events['event_name'] + "\n" + "from " + events['start_time'] + " to " + events['end_time'],
-        start: startYear + '-' + startMonth + '-' + startDay,
-        end: endYear + '-' + endMonth + '-' + endDay,
-        color: '#2AAA8A',
-        extendedProps: {
-            type: 'event',
-            eventId: events['id']
-        }
-    });
-    
-}
-
-
-            var log = [];
-            var loghour = [];
-            for (let i = 0; i < data['logs'].length; i++) {
-                var logs = data['logs'][i];
-
-                var startDate = new Date(logs['date']);
+                var startDate = new Date(events["start_date"]);
                 var startMonth = startDate.getMonth() + 1;
                 startMonth = startMonth < 10 ? "0" + startMonth : startMonth;
                 var startYear = startDate.getFullYear();
                 var startDay = startDate.getDate();
                 startDay = startDay < 10 ? "0" + startDay : startDay;
-                var startTime = logs['start_time'];
+
+                var endDate = new Date(events["end_date"]);
+                endDate.setDate(endDate.getDate() + 1); // add one day to end date
+                var endMonth = endDate.getMonth() + 1;
+                endMonth = endMonth < 10 ? "0" + endMonth : endMonth;
+                var endYear = endDate.getFullYear();
+                var endDay = endDate.getDate();
+                endDay = endDay < 10 ? "0" + endDay : endDay;
+
+                event.push({
+                    title:
+                        "Event: " +
+                        events["event_name"] +
+                        "\n" +
+                        "from " +
+                        events["start_time"] +
+                        " to " +
+                        events["end_time"],
+                    start: startYear + "-" + startMonth + "-" + startDay,
+                    end: endYear + "-" + endMonth + "-" + endDay,
+                    color: "#2AAA8A",
+                    extendedProps: {
+                        type: "event",
+                        eventId: events["id"],
+                    },
+                });
+            }
+
+            var log = [];
+            var loghour = [];
+            for (let i = 0; i < data["logs"].length; i++) {
+                var logs = data["logs"][i];
+
+                var startDate = new Date(logs["date"]);
+                var startMonth = startDate.getMonth() + 1;
+                startMonth = startMonth < 10 ? "0" + startMonth : startMonth;
+                var startYear = startDate.getFullYear();
+                var startDay = startDate.getDate();
+                startDay = startDay < 10 ? "0" + startDay : startDay;
+                var startTime = logs["start_time"];
                 var time = startTime.split(":");
                 startTime = time[0] < 10 ? "0" + startTime : startTime;
 
-                var endDate = new Date(logs['end_date']);
+                var endDate = new Date(logs["end_date"]);
                 var endMonth = endDate.getMonth();
                 endMonth = endMonth < 10 ? "0" + endMonth : endMonth;
                 var endYear = endDate.getFullYear();
                 var endDay = endDate.getDate();
                 endDay = endDay < 10 ? "0" + endDay : endDay;
                 // console.log(logs['total_hour']);
-               
 
                 function type_of_log(id) {
                     const data = {
-                        '1': 'Home',
-                        '2': 'Office',
-                        '3': 'My Project',
-                        '4': 'Others',
-                    }
+                        1: "Home",
+                        2: "Office",
+                        3: "My Project",
+                        4: "Others",
+                    };
 
                     return data[id];
                 }
 
                 log.push({
-                    title: (logs['type_of_log'] ? type_of_log(logs['type_of_log']) + ' ' : '') + "\n" +  (logs['project_name'] ? logs['project_name'] + ' ' : '') + "\n" + (logs['activitynameas'] ? logs['activitynameas'] + ' ' : '') + "\n" +' from ' + logs['start_time'] + ' to ' + logs['end_time'],
+                    title:
+                        (logs["type_of_log"]
+                            ? type_of_log(logs["type_of_log"]) + " "
+                            : "") +
+                        "\n" +
+                        (logs["project_name"]
+                            ? logs["project_name"] + " "
+                            : "") +
+                        "\n" +
+                        (logs["activitynameas"]
+                            ? logs["activitynameas"] + " "
+                            : "") +
+                        "\n" +
+                        " from " +
+                        logs["start_time"] +
+                        " to " +
+                        logs["end_time"],
                     // start: startYear + '-' + startMonth + '-' + startDay + 'T' + startTime + ':00',
-                    start: startYear + '-' + startMonth + '-' + startDay,
+                    start: startYear + "-" + startMonth + "-" + startDay,
                     color: app.color.primary,
                     extendedProps: {
-                        type: 'log',
-                        logId: logs['id']
-                    }
+                        type: "log",
+                        logId: logs["id"],
+                    },
                 });
 
                 loghour.push({
                     start: new Date(startYear, startMonth - 1, startDay),
                     end: new Date(endYear, endMonth - 1, endDay),
-                    totalHour: logs['total_hour']
-                  });
-
-                
+                    totalHour: logs["total_hour"],
+                });
             }
 
             var leave = [];
             var leavesdate = [];
-            for (let i = 0; i < data['leaves'].length; i++) {
-                var leaves = data['leaves'][i];
+            for (let i = 0; i < data["leaves"].length; i++) {
+                var leaves = data["leaves"][i];
 
-                var startDate = new Date(leaves['start_date']);
+                var startDate = new Date(leaves["start_date"]);
                 var startMonth = startDate.getMonth() + 1;
                 startMonth = startMonth < 10 ? "0" + startMonth : startMonth;
                 var startYear = startDate.getFullYear();
                 var startDay = startDate.getDate();
                 startDay = startDay < 10 ? "0" + startDay : startDay;
 
-                var endDate = new Date(leaves['end_date']);
+                var endDate = new Date(leaves["end_date"]);
                 var endMonth = endDate.getMonth() + 1;
                 endMonth = endMonth < 10 ? "0" + endMonth : endMonth;
                 var endYear = endDate.getFullYear();
@@ -925,41 +913,40 @@ for (let i = 0; i < data['events'].length; i++) {
 
                 // console.log(leaves['reason'])
                 leave.push({
-                    title:  leaves['leave_types'] + " : " + "\n" + leaves['reason'],
+                    title:
+                        leaves["leave_types"] + " : " + "\n" + leaves["reason"],
                     // title: "Event: " + events['event_name'] + "\n" + "from " + events['start_time'] + " to " + events['end_time'],
-                    start: startYear + '-' + startMonth + '-' + startDay,
-                    end: endYear + '-' + endMonth + '-' + endDay,
+                    start: startYear + "-" + startMonth + "-" + startDay,
+                    end: endYear + "-" + endMonth + "-" + endDay,
                     // color: app.color.green,
                     color: "#E0E0E0",
                     textColor: "black",
                     fontWeight: "bold",
                     extendedProps: {
-                        type: 'leave',
-                        leaveId: leaves['id']
-                    }
-
+                        type: "leave",
+                        leaveId: leaves["id"],
+                    },
                 });
 
                 leavesdate.push({
                     start: new Date(startYear, startMonth - 1, startDay),
-                    end: new Date(endYear, endMonth - 1, endDay)
+                    end: new Date(endYear, endMonth - 1, endDay),
                 });
-                
             }
 
             var holiday = [];
             var holidayDates = [];
-            for (let i = 0; i < data['holidays'].length; i++) {
-                var holidays = data['holidays'][i];
+            for (let i = 0; i < data["holidays"].length; i++) {
+                var holidays = data["holidays"][i];
 
-                var startDate = new Date(holidays['start_date']);
+                var startDate = new Date(holidays["start_date"]);
                 var startMonth = startDate.getMonth() + 1;
                 startMonth = startMonth < 10 ? "0" + startMonth : startMonth;
                 var startYear = startDate.getFullYear();
                 var startDay = startDate.getDate();
                 startDay = startDay < 10 ? "0" + startDay : startDay;
 
-                var endDate = new Date(holidays['end_date']);
+                var endDate = new Date(holidays["end_date"]);
                 var endMonth = endDate.getMonth() + 1;
                 endMonth = endMonth < 10 ? "0" + endMonth : endMonth;
                 var endYear = endDate.getFullYear();
@@ -967,69 +954,62 @@ for (let i = 0; i < data['events'].length; i++) {
                 endDay = endDay < 10 ? "0" + endDay : endDay;
 
                 holiday.push({
-                    title:  holidays['holiday_title'],
-                    start: startYear + '-' + startMonth + '-' + startDay,
-                    end: endYear + '-' + endMonth + '-' + endDay,
+                    title: holidays["holiday_title"],
+                    start: startYear + "-" + startMonth + "-" + startDay,
+                    end: endYear + "-" + endMonth + "-" + endDay,
                     // color: app.color.yellow,
                     color: "#FFD580",
                     textColor: "black",
                     fontWeight: "bold",
                     extendedProps: {
-                        type: 'holiday',
-                        holidayId: holidays['id']
-                    }
-
+                        type: "holiday",
+                        holidayId: holidays["id"],
+                    },
                 });
 
                 holidayDates.push({
-                    title:  holidays['holiday_title'],
+                    title: holidays["holiday_title"],
                     start: new Date(startYear, startMonth - 1, startDay),
-                    end: new Date(endYear, endMonth - 1, endDay)
-
+                    end: new Date(endYear, endMonth - 1, endDay),
                 });
-
-                
-                
             }
 
-            
             dataEvent = event.concat(log);
             dataleave = dataEvent.concat(leave);
             dataHoliday = dataleave.concat(holiday);
-            
+
             // console.log(holiday);
             var calendar = new FullCalendar.Calendar(calendarElm, {
                 headerToolbar: {
-                    left: 'logButton EventButton SumButton',
-                    center: 'title',
-                    right: 'prev,today,next dayGridMonth,timeGridWeek,timeGridDay,listWeek'
+                    left: "logButton EventButton SumButton",
+                    center: "title",
+                    right: "prev,today,next dayGridMonth,timeGridWeek,timeGridDay,listWeek",
                 },
                 customButtons: {
                     logButton: {
-                        text: 'New Log',
-                        click: function(event, jsEvent, view) {
-                            $('#addLogModal').modal('show');
-                        }
+                        text: "New Log",
+                        click: function (event, jsEvent, view) {
+                            $("#addLogModal").modal("show");
+                        },
                     },
                     EventButton: {
-                        text: 'New Event',
-                        click: function(event, jsEvent, view) {
-                            $('#neweventmodal').modal('show');
-                        }
+                        text: "New Event",
+                        click: function (event, jsEvent, view) {
+                            $("#neweventmodal").modal("show");
+                        },
                     },
                     SumButton: {
-                        text: 'Summary',
-                        click: function() {
-                            window.location.href = 'summarytimesheet';
-                        }
-                    }  
+                        text: "Summary",
+                        click: function () {
+                            window.location.href = "summarytimesheet";
+                        },
+                    },
                 },
-               
-               
+
                 // dayCellDidMount: function(info) {
                 //     var current = new Date(info.date);
                 //     var hasLog = false;
-                      
+
                 //     // Check if there is a log for the current date
                 //      // Check if there is a log for the current date
                 //     for (let i = 0; i < log.length; i++) {
@@ -1041,8 +1021,7 @@ for (let i = 0; i < data['events'].length; i++) {
                 //             break;
                 //         }
                 //     }
-                    
-                    
+
                 //     // If there is a log for the current date, check the log hour
                 //     if (hasLog) {
                 //       for (let i = 0; i < loghour.length; i++) {
@@ -1050,41 +1029,41 @@ for (let i = 0; i < data['events'].length; i++) {
                 //         var hourArray = hourString.split(':');
                 //         var hour = hourArray[0];
                 //         // console.log(hour);
-                //         if (hour < 8) { 
+                //         if (hour < 8) {
                 //           $(info.el).css('background-color', 'red');
                 //           return;
                 //         }
                 //       }
                 //     }
-                    
+
                 //     for (let i = 0; i < holidayDates.length; i++) {
-                //       if (current >= holidayDates[i].start && current <= holidayDates[i].end) { 
+                //       if (current >= holidayDates[i].start && current <= holidayDates[i].end) {
                 //         $(info.el).css('background-color', '#FFD580');
                 //         return;
                 //       }
                 //     }
-                    
+
                 //     for (let i = 0; i < leavesdate.length; i++) {
-                //       if (current >= leavesdate[i].start && current <= leavesdate[i].end) { 
+                //       if (current >= leavesdate[i].start && current <= leavesdate[i].end) {
                 //         $(info.el).css('background-color', '#E0E0E0');
                 //         return;
                 //       }
                 //     }
-                    
+
                 //     if (info.date.getDay() === 0) { // Sunday
-                //       $(info.el).css('background-color', '#87CEEB'); 
+                //       $(info.el).css('background-color', '#87CEEB');
                 //     } else if (info.date.getDay() === 6) { // Saturday
-                //       $(info.el).css('background-color', '#87CEEB'); 
+                //       $(info.el).css('background-color', '#87CEEB');
                 //     } else {
                 //       $(info.el).css('background-color', 'white');
                 //     }
                 //   },
 
-                dayCellDidMount: function(info) {
+                dayCellDidMount: function (info) {
                     var current = new Date(info.date);
                     var hasLog = false;
-                      
-                     // Check if there is a log for the current date
+
+                    // Check if there is a log for the current date
                     // for (let i = 0; i < log.length; i++) {
                     //     var logDate = new Date(log[i].start);
                     //     if (current.getFullYear() === logDate.getFullYear() &&
@@ -1094,7 +1073,6 @@ for (let i = 0; i < data['events'].length; i++) {
                     //         break;
                     //     }
                     // }
-
 
                     // if (hasLog) {
                     //     var isViolation = false;
@@ -1116,7 +1094,6 @@ for (let i = 0; i < data['events'].length; i++) {
                     //     }
                     //   }
 
-                      
                     //almost working
                     //  if(hasLog) {
                     //     for (let i = 0; i < loghour.length; i++) {
@@ -1141,7 +1118,7 @@ for (let i = 0; i < data['events'].length; i++) {
                     //       }
                     //     }
                     //     console.log("hasLowHours: " + hasLowHours);
-                    //     if (hasLowHours) {  
+                    //     if (hasLowHours) {
                     //       $(info.el).css('background-color', 'red');
                     //       console.log('color to red');
                     //     } else {
@@ -1152,28 +1129,16 @@ for (let i = 0; i < data['events'].length; i++) {
                     //     console.log("info.el: " + info.el);
                     //     return;
                     //   }
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                      
-                            
-                            
+
                     //    }else {
                     //     $(info.el).css('background-color', 'green');
                     //    }
                     //    return;
-                       
+
                     //  }
-                    
+
                     // }
-                    
+
                     // If there is a log for the current date, check the log hour
                     // if (hasLog) {
                     //     for (let i = 0; i < loghour.length; i++) {
@@ -1191,11 +1156,10 @@ for (let i = 0; i < data['events'].length; i++) {
                     //         else {
                     //             $(info.el).css('background-color', 'white');
                     //         }
-                    //         return; 
+                    //         return;
                     //       }
                     //     }
-                      
-                      
+
                     // if (hasLog) {
                     //     for (let i = 0; i < loghour.length; i++) {
                     //         var hourString = loghour[i].totalHour;
@@ -1203,7 +1167,7 @@ for (let i = 0; i < data['events'].length; i++) {
                     //         var hourArray = hourString.split(':');
                     //         var hour = parseInt(hourArray[0]); // convert hour string to integer
                     //         // console.log("hour" + hour);
-                    //         if (hour < 8) { 
+                    //         if (hour < 8) {
                     //             $(info.el).css('background-color', 'red');
                     //          }else {
                     //             $(info.el).css('background-color', 'green');
@@ -1211,34 +1175,38 @@ for (let i = 0; i < data['events'].length; i++) {
                     //             return;
                     //         }
                     //     }
-                    
-                    
-                    
+
                     for (let i = 0; i < holidayDates.length; i++) {
-                      if (current >= holidayDates[i].start && current <= holidayDates[i].end) { 
-                        $(info.el).css('background-color', '#FFD580');
-                        return;
-                      }
+                        if (
+                            current >= holidayDates[i].start &&
+                            current <= holidayDates[i].end
+                        ) {
+                            $(info.el).css("background-color", "#FFD580");
+                            return;
+                        }
                     }
-                    
+
                     for (let i = 0; i < leavesdate.length; i++) {
-                      if (current >= leavesdate[i].start && current <= leavesdate[i].end) { 
-                        $(info.el).css('background-color', '#E0E0E0');
-                        return;
-                      }
+                        if (
+                            current >= leavesdate[i].start &&
+                            current <= leavesdate[i].end
+                        ) {
+                            $(info.el).css("background-color", "#E0E0E0");
+                            return;
+                        }
                     }
-                    
-                    if (info.date.getDay() === 0) { // Sunday
-                      $(info.el).css('background-color', '#87CEEB'); 
-                    } else if (info.date.getDay() === 6) { // Saturday
-                      $(info.el).css('background-color', '#87CEEB'); 
+
+                    if (info.date.getDay() === 0) {
+                        // Sunday
+                        $(info.el).css("background-color", "#87CEEB");
+                    } else if (info.date.getDay() === 6) {
+                        // Saturday
+                        $(info.el).css("background-color", "#87CEEB");
                     } else {
-                      $(info.el).css('background-color', 'white');
+                        $(info.el).css("background-color", "white");
                     }
-                  },
-                  
-                  
-                  
+                },
+
                 // original code
                 // dateClick: function(info) {
 
@@ -1251,34 +1219,36 @@ for (let i = 0; i < data['events'].length; i++) {
                 //     $("#dateaddlog").val(formatedDate);
                 // },
 
-                dateClick: function(info) {
+                dateClick: function (info) {
                     const today = dayjs();
                     const clickedDate = dayjs(info.date);
-                  
+
                     // check if the clicked date is within the last 2 days before the current date
-                    if (clickedDate.diff(today, 'day') < -2 || clickedDate.isAfter(today, 'day')) {
-                      Swal.fire({
-                        icon: 'error',
-                        title: 'Error',
-                        text: 'You can only select the current date and 2 days before.'
-                      });
-                      return;
+                    if (
+                        clickedDate.diff(today, "day") < -2 ||
+                        clickedDate.isAfter(today, "day")
+                    ) {
+                        Swal.fire({
+                            icon: "error",
+                            title: "Error",
+                            text: "You can only select the current date and 2 days before.",
+                        });
+                        return;
                     }
-                  
+
                     // show the modal and set the date
-                    $('#addLogModal').modal('show');
-                    const formattedDate = clickedDate.format('DD-MM-YYYY');
+                    $("#addLogModal").modal("show");
+                    const formattedDate = clickedDate.format("DD-MM-YYYY");
                     $("#dateaddlog").val(formattedDate);
-                  },
+                },
                 // retrieve the value of the hidden input field containing the user id
-               
 
                 // dateClick: function(info) {
                 //     const userId = $('#idtesting123').val();
                 //     const appealDate = $('#appeal_Date').val();
                 //     const today = dayjs();
                 //     const clickedDate = dayjs(info.date);
-                
+
                 //     if (userId === 'approve') {
                 //         // Only allow the clicked date that matches appealDate or is within the last two days before today
                 //         const allowedStartDate = today.subtract(2, 'day');
@@ -1330,7 +1300,7 @@ for (let i = 0; i < data['events'].length; i++) {
                 //     const appealDate = $('#appeal_Date').val();
                 //     const today = dayjs();
                 //     const clickedDate = dayjs(info.date);
-                
+
                 //     if (userId === 'approve') {
                 //         // Only allow the clicked date that matches appealDate or is within the last two days before today
                 //         const allowedStartDate = today.subtract(2, 'day');
@@ -1376,290 +1346,346 @@ for (let i = 0; i < data['events'].length; i++) {
                 //         }
                 //     }
                 // },
-                
+
                 //     dateClick: function(info) {
                 //     const today = dayjs();
                 //     const minDate = today.subtract(2, 'day'); // Set the minimum date to 2 days ago
-                  
+
                 //     // check if the clicked date is earlier than the minimum date
                 //     if (dayjs(info.date).isBefore(minDate, 'day')) {
                 //         alert("You can only select dates up to 48 hours from now.");
                 //         return;
                 //     }
-                    
-                  
+
                 //     // show the modal and set the date
                 //     $('#addLogModal').modal('show');
                 //     const formattedDate = dayjs(info.dateStr).format('DD-MM-YYYY');
                 //     $("#dateaddlog").val(formattedDate);
                 //   },
 
-
                 // dateClick: function(info) {
                 //     const selectedDate = dayjs(info.date);
                 //     const currentDate = dayjs();
-                
+
                 //     // Check if the selected date is not more than 2 days from the current date
                 //     if (selectedDate.diff(currentDate, 'day') > 2) {
                 //         alert("You can only select dates up to 2 days from today.");
                 //         return;
                 //     }
-                
+
                 //     // Check if the selected date is not in the past
                 //     if (selectedDate.diff(currentDate, 'hour') < -48) {
                 //         alert("You cannot select a date that is 48 hours in the past.");
                 //         return;
                 //     }
-                
+
                 //     $('#addLogModal').modal('show');
-                
+
                 //     const formattedDate = selectedDate.format("DD-MM-YYYY");
                 //     $("#dateaddlog").val(formattedDate);
                 // },
-                
+
                 // dayRender: function(info) {
                 //     const currentDate = dayjs();
                 //     const selectedDate = dayjs(info.date);
                 //     const daysDiff = selectedDate.diff(currentDate, 'day');
-                
+
                 //     // Disable dates more than 2 days in the future or more than 48 hours in the past
                 //     if (daysDiff > 2 || daysDiff < -3 || daysDiff === -3 && selectedDate.hour() < currentDate.hour()) {
                 //         info.el.classList.add('fc-disabled-day');
                 //     }
                 // },
-                
-          
-                eventClick: function(info) {
 
+                eventClick: function (info) {
                     info.jsEvent.preventDefault();
-
 
                     function getEvents(id) {
                         return $.ajax({
-                            url: "/getEventById/" + id
+                            url: "/getEventById/" + id,
                         });
                     }
 
                     function getLogs(id) {
                         return $.ajax({
-                            url: "/getLogsById/" + id
+                            url: "/getLogsById/" + id,
                         });
                     }
 
                     function getAttendance(eventId, userId) {
                         return $.ajax({
-                            url: "/getAttendanceById/" + eventId + '/' + userId
+                            url: "/getAttendanceById/" + eventId + "/" + userId,
                         });
                     }
 
                     function getEmployee(id) {
                         return $.ajax({
-                            url: "/getEmployee"
+                            url: "/getEmployee",
                         });
                     }
 
-                    
                     function getAttendance1(eventId) {
                         return $.ajax({
-                            url: "/getAttendanceByEventId/" + eventId
+                            url: "/getAttendanceByEventId/" + eventId,
                         });
                     }
 
                     function getEvents1(id) {
                         return $.ajax({
-                            url: "/getEventById/" + id
+                            url: "/getEventById/" + id,
                         });
                     }
 
                     employeeData = getEmployee();
-                    employeeData.done(function(data) {
+                    employeeData.then(function (data) {
                         // console.log(data.data);
                         const employees = data.data;
                         for (let i = 0; i < employees.length; i++) {
                             const employee = employees[i];
-                            $("#addneweventparticipantedit").picker('remove', employee['user_id']);
+                            $("#addneweventparticipantedit").picker(
+                                "remove",
+                                employee["user_id"]
+                            );
                             // console.log(employee['user_id']);
                         }
-                    })
+                    });
 
-                    if(info.event.extendedProps.type == "leave" || info.event.extendedProps.type == "holiday") {
-                    
-                   
-                    } 
-                    else  if (info.event.extendedProps.type == "log") {
+                    if (
+                        info.event.extendedProps.type == "leave" ||
+                        info.event.extendedProps.type == "holiday"
+                    ) {
+                    } else if (info.event.extendedProps.type == "log") {
                         logId = info.event.extendedProps.logId;
                         var logData = getLogs(logId);
-                        logData.done(function(data) {
+                        logData.then(function (data) {
                             // console.log(data);
 
-                            
-                            
-                            if (data.type_of_log == '3') {
-                                $('#officelogedit').css("display", 'none');
-                                $('#myprojectedit').css("display", 'block');
-                                $('#activityByProjectEditHide1').css("display", 'block');
-                                $('#activityByProjectEditHide').css("display", 'none');
-                                $('#projectLocationOfficeEdit').css("display", 'block');
-                                $('#locationByProjectEditShow').css("display", 'block');
-                                $('#locationByProjectEditHide').css("display", 'block');
-                                $('#locationByProjectEditShow').css("display", 'block');
-                                
-                                
-                                
-                              } else if (data.type_of_log == '1' || data.type_of_log == '4') {
-                                $('#officelogedit').css("display", 'none');
-                                $('#activityByProjectEditHide').css("display", 'block');
-                                $('#activityByProjectEditHide1').css("display", 'none');
-                                $('#myprojectedit').css("display", 'none');
-                                
-                              } else if (data.type_of_log == '2') {
-                                $('#officelogedit').css("display", 'block');
+                            if (data.type_of_log == "3") {
+                                $("#officelogedit").css("display", "none");
+                                $("#myprojectedit").css("display", "block");
+                                $("#activityByProjectEditHide1").css(
+                                    "display",
+                                    "block"
+                                );
+                                $("#activityByProjectEditHide").css(
+                                    "display",
+                                    "none"
+                                );
+                                $("#projectLocationOfficeEdit").css(
+                                    "display",
+                                    "block"
+                                );
+                                $("#locationByProjectEditShow").css(
+                                    "display",
+                                    "block"
+                                );
+                                $("#locationByProjectEditHide").css(
+                                    "display",
+                                    "block"
+                                );
+                                $("#locationByProjectEditShow").css(
+                                    "display",
+                                    "block"
+                                );
+                            } else if (
+                                data.type_of_log == "1" ||
+                                data.type_of_log == "4"
+                            ) {
+                                $("#officelogedit").css("display", "none");
+                                $("#activityByProjectEditHide").css(
+                                    "display",
+                                    "block"
+                                );
+                                $("#activityByProjectEditHide1").css(
+                                    "display",
+                                    "none"
+                                );
+                                $("#myprojectedit").css("display", "none");
+                            } else if (data.type_of_log == "2") {
+                                $("#officelogedit").css("display", "block");
                                 // var display11 = $("#activityByProjectEditHide").css("display");
-                                $('#activityByProjectEditHide1').css("display", 'block');
-                                $('#projectLocationOfficeEdit').css("display", 'block');
-                              
+                                $("#activityByProjectEditHide1").css(
+                                    "display",
+                                    "block"
+                                );
+                                $("#projectLocationOfficeEdit").css(
+                                    "display",
+                                    "block"
+                                );
+
                                 // Add another condition
-                                if (data.office_log == '1') {
-                                    
-                                  $('#myprojectedit').css("display", 'block');
-                                  $('#activityByProjectEditHide1').css("display", 'block');
-                                  $("#locationByProjectEditHide").css("display",'block');
-                                  $('#officelogedit').css("display", 'block');
-                                  $('#activityByProjectEditHide').css("display", 'none');
+                                if (data.office_log == "1") {
+                                    $("#myprojectedit").css("display", "block");
+                                    $("#activityByProjectEditHide1").css(
+                                        "display",
+                                        "block"
+                                    );
+                                    $("#locationByProjectEditHide").css(
+                                        "display",
+                                        "block"
+                                    );
+                                    $("#officelogedit").css("display", "block");
+                                    $("#activityByProjectEditHide").css(
+                                        "display",
+                                        "none"
+                                    );
                                 }
 
-                                if (data.office_log == '2') {
-                                    $('#activityByProjectEditHide').css("display", 'block');
-                                    $('#officelogedit').css("display", 'block');
-                                    $('#myprojectedit').css("display", 'none');
-                                    $('#activityByProjectEditHide1').css("display", 'none');
-                                    
-                                  }
-                              } else {
-                                $('#myprojectedit').css("display", 'none');
-                                $('#activityByProjectEditHide').css("display", 'none');
-                                $('#locationByProjectEditHide').css("display", 'none');
+                                if (data.office_log == "2") {
+                                    $("#activityByProjectEditHide").css(
+                                        "display",
+                                        "block"
+                                    );
+                                    $("#officelogedit").css("display", "block");
+                                    $("#myprojectedit").css("display", "none");
+                                    $("#activityByProjectEditHide1").css(
+                                        "display",
+                                        "none"
+                                    );
+                                }
+                            } else {
+                                $("#myprojectedit").css("display", "none");
+                                $("#activityByProjectEditHide").css(
+                                    "display",
+                                    "none"
+                                );
+                                $("#locationByProjectEditHide").css(
+                                    "display",
+                                    "none"
+                                );
                                 // $('#officelogedit').css("display", 'none');
-                                $('#locationByProjectEditHide1').css("display", 'none');
-                              }
-                              
-
+                                $("#locationByProjectEditHide1").css(
+                                    "display",
+                                    "none"
+                                );
+                            }
 
                             // if (data.type_of_log == 2 && data.office_log == 1) {
 
                             // }
 
-                            $('#locationByProjectEditShow').hide();
-                            $('#activityByProjectEditShow').hide();
+                            $("#locationByProjectEditShow").hide();
+                            $("#activityByProjectEditShow").hide();
                             $("#typeoflogedit").val(data.type_of_log);
                             $("#officelog2edit").val(data.office_log);
                             $("#dateaddlogedit").val(data.date);
                             $("#project_id_edit").val(data.project_id);
                             $("#officeLogProjectEdit").val(data.project_id);
-                            
-                            $('#projectlocsearchedit').val(data.project_location);
+
+                            $("#projectlocsearchedit").val(
+                                data.project_location
+                            );
                             // projectlocsearchedit
                             $("#activity_name_edit2").val(data.activity_name);
                             $("#activity_name_edit1").val(data.activity_name);
                             $("#starttimeedit").val(data.start_time);
-                            
-                            $('#projectLocationOfficeEdit').picker('set', data.project_location);
+
+                            $("#projectLocationOfficeEdit").picker(
+                                "set",
+                                data.project_location
+                            );
                             // $('#projectlocsearchedit').picker('set', data.project_location);
                             // $('#projectlocsearchedit').picker('set', data.project_location);
                             // $("#projectlocsearchedit").val(data.project_location);
-                            $("#exit_project").prop('checked', data.exit_project);
+                            $("#exit_project").prop(
+                                "checked",
+                                data.exit_project
+                            );
                             $("#endtimeedit").val(data.end_time);
                             $("#desc").val(data.desc);
                             $("#total_hour").val(data.total_hour);
                             $("#id").val(data.id);
-
                         });
 
-                        $('#editlogmodal').modal('show');
-                    
+                        $("#editlogmodal").modal("show");
                     } else {
                         eventId = info.event.extendedProps.eventId;
 
-                        $(document).on("click", "#attendEvent", function() {
-                            var status = $(this).data('status');
-                            requirejs(['sweetAlert2'], function(swal) {
-
+                        $(document).on("click", "#attendEvent", function () {
+                            var status = $(this).data("status");
+                            requirejs(["sweetAlert2"], function (swal) {
                                 $.ajax({
                                     type: "GET",
-                                    url: "/updateAttendStatus/" + eventId + '/' + status,
+                                    url:
+                                        "/updateAttendStatus/" +
+                                        eventId +
+                                        "/" +
+                                        status,
                                     dataType: "json",
-                                    async: false,
+
                                     processData: false,
                                     contentType: false,
-                                }).done(function(data) {
+                                }).then(function (data) {
                                     swal({
                                         title: data.title,
                                         text: data.msg,
                                         type: data.type,
-                                        confirmButtonColor: '#3085d6',
-                                        confirmButtonText: 'OK'
-                                    }).then(function() {
-                                        if (data.type == 'error') {
-
+                                        confirmButtonColor: "#3085d6",
+                                        confirmButtonText: "OK",
+                                    }).then(function () {
+                                        if (data.type == "error") {
                                         } else {
                                             location.reload();
                                         }
                                     });
                                 });
                             });
-                        })
+                        });
                         var eventData = getEvents(eventId);
-                        eventData.done(function(data) {
+                        eventData.then(function (data) {
                             // console.log(data);
-                            var userId = $('#userIdForApproval').val();
-                            $('#attendShow').hide();
-                            $('#attendNoResponse').show();
-                            $('#attendHide').show();
-                            $('#attendNotAttend').hide();
+                            var userId = $("#userIdForApproval").val();
+                            $("#attendShow").hide();
+                            $("#attendNoResponse").show();
+                            $("#attendHide").show();
+                            $("#attendNotAttend").hide();
 
-                            var attendanceEvent = getAttendance(data.id, userId);
-                            attendanceEvent.done(function(dataAttendance) {
+                            var attendanceEvent = getAttendance(
+                                data.id,
+                                userId
+                            );
+                            attendanceEvent.then(function (dataAttendance) {
                                 // console.log(data);
                                 if (dataAttendance) {
-                                    if (dataAttendance.status == 'attend') {
-                                        $('#attendHide').hide();
-                                        $('#attendShow').show();
-                                        $('#attendNoResponse').hide();
-                                        $('#attendNotAttend').hide();
-
+                                    if (dataAttendance.status == "attend") {
+                                        $("#attendHide").hide();
+                                        $("#attendShow").show();
+                                        $("#attendNoResponse").hide();
+                                        $("#attendNotAttend").hide();
                                     }
 
-                                    if (dataAttendance.status == 'not attend') {
-                                        $('#attendNotAttend').show();
-                                        $('#attendHide').hide();
-                                        $('#attendShow').hide();
-                                        $('#attendNoResponse').hide();
-
+                                    if (dataAttendance.status == "not attend") {
+                                        $("#attendNotAttend").show();
+                                        $("#attendHide").hide();
+                                        $("#attendShow").hide();
+                                        $("#attendNoResponse").hide();
                                     }
                                 }
                             });
 
                             var eventData = getEvents(eventId);
-                                eventData.done(function(data) {
-                                    var participants = data.participant.split(",");
-                                    var participantNames = data.participantNames.split(",");
+                            eventData.then(function (data) {
+                                var participants = data.participant.split(",");
+                                var participantNames =
+                                    data.participantNames.split(",");
 
-                                    var tableBody = $("#tableRowParticipant");
-                                    tableBody.empty(); // clear any existing rows in the table
+                                var tableBody = $("#tableRowParticipant");
+                                tableBody.empty(); // clear any existing rows in the table
 
-                                    for (var i = 0; i < participants.length; i++) {
-                                        var participantId = participants[i];
-                                        var participantName = participantNames[i];
+                                for (var i = 0; i < participants.length; i++) {
+                                    var participantId = participants[i];
+                                    var participantName = participantNames[i];
 
-                                        var row = $("<tr></tr>");
-                                        row.append($("<td></td>").text(i + 1));
-                                        row.append($("<td></td>").text(participantName));
+                                    var row = $("<tr></tr>");
+                                    row.append($("<td></td>").text(i + 1));
+                                    row.append(
+                                        $("<td></td>").text(participantName)
+                                    );
 
-                                        tableBody.append(row);
-                                    }
-                                });
-                            
-                            $("#participantlist").val(data.participantNames );
+                                    tableBody.append(row);
+                                }
+                            });
+
+                            $("#participantlist").val(data.participantNames);
                             $("#event_name").val(data.event_name);
                             $("#editvenue").val(data.venue);
                             $("#starteventdateedit").val(data.start_date);
@@ -1667,323 +1693,550 @@ for (let i = 0; i < data['events'].length; i++) {
                             $("#starteventtimeedit").val(data.start_time);
                             $("#endeventtimeedit").val(data.end_time);
                             $("#duration").val(data.duration);
-                            $('#addneweventprojectlocsearchedit').picker('set', data.location);
-                            $('#hideshowstarttimee').show();
-                            $('#hideshowendtimee').show();
-                            $("#addeventalldayedit").prop('checked', false);
+                            $("#addneweventprojectlocsearchedit").picker(
+                                "set",
+                                data.location
+                            );
+                            $("#hideshowstarttimee").show();
+                            $("#hideshowendtimee").show();
+                            $("#addeventalldayedit").prop("checked", false);
                             if (data.type_recurring) {
-
-                                if (data.type_recurring == 'allday') {
-                                    $("#addeventalldayedit").prop('checked', true);
-                                    $('#hideshowstarttimee').css("display", 'none');
-                                    $('#hideshowendtimee').css("display", 'none');
+                                if (data.type_recurring == "allday") {
+                                    $("#addeventalldayedit").prop(
+                                        "checked",
+                                        true
+                                    );
+                                    $("#hideshowstarttimee").css(
+                                        "display",
+                                        "none"
+                                    );
+                                    $("#hideshowendtimee").css(
+                                        "display",
+                                        "none"
+                                    );
                                     $("#addeventalldayedit").val("allday");
-
-                                }else if (data.type_recurring == '') {
-                                    $("#addeventalldayedit").prop('checked', false);
-                                    $('#hideshowstarttimee').css("display", 'block');
-                                    $('#hideshowendtimee').css("display", 'block');
+                                } else if (data.type_recurring == "") {
+                                    $("#addeventalldayedit").prop(
+                                        "checked",
+                                        false
+                                    );
+                                    $("#hideshowstarttimee").css(
+                                        "display",
+                                        "block"
+                                    );
+                                    $("#hideshowendtimee").css(
+                                        "display",
+                                        "block"
+                                    );
                                     $("#addeventalldayedit").val("");
-                                    
-                                    
-                                
-                                    
-                                } else if (data.type_recurring == 'recurring') {
-                                    $("#addeventalldayedit").prop('checked', false);
+                                } else if (data.type_recurring == "recurring") {
+                                    $("#addeventalldayedit").prop(
+                                        "checked",
+                                        false
+                                    );
                                     // $("#addeventalldayedit").prop('checked', true);
-                                    $("#addeventrecurringedit").prop('checked', true);
-                                    $('#hideshowstarttimee').css("display");
-                                    $('#hideshowendtimee').css("display");
-                                   
+                                    $("#addeventrecurringedit").prop(
+                                        "checked",
+                                        true
+                                    );
+                                    $("#hideshowstarttimee").css("display");
+                                    $("#hideshowendtimee").css("display");
 
-                                    var recurringDisplay = $("#addneweventrecurringedit").css("display");
+                                    var recurringDisplay = $(
+                                        "#addneweventrecurringedit"
+                                    ).css("display");
 
-                                    if (recurringDisplay == 'none') {
-                                        $('#addneweventrecurringedit').css("display", 'block');
+                                    if (recurringDisplay == "none") {
+                                        $("#addneweventrecurringedit").css(
+                                            "display",
+                                            "block"
+                                        );
                                     } else {
-                                        $('#addneweventrecurringedit').css("display", 'none');
-
+                                        $("#addneweventrecurringedit").css(
+                                            "display",
+                                            "none"
+                                        );
                                     }
 
                                     if (data.recurring) {
+                                        if (
+                                            data.recurring == 1 ||
+                                            data.recurring == 2 ||
+                                            data.recurring == 3
+                                        ) {
+                                            var setRecurringDisplay = $(
+                                                "#addneweventsetreccurringedit"
+                                            ).css("display");
 
-                                        if (data.recurring == 1 || data.recurring == 2 || data.recurring == 3) {
-                                            var setRecurringDisplay = $("#addneweventsetreccurringedit").css("display");
-
-                                            if (setRecurringDisplay == 'none') {
-                                                $('#addneweventsetreccurringedit').css("display", 'block');
+                                            if (setRecurringDisplay == "none") {
+                                                $(
+                                                    "#addneweventsetreccurringedit"
+                                                ).css("display", "block");
                                             } else {
-                                                $('#addneweventsetreccurringedit').css("display", 'none');
-
+                                                $(
+                                                    "#addneweventsetreccurringedit"
+                                                ).css("display", "none");
                                             }
                                         } else if (data.recurring == 4) {
-                                            var setRecurringDisplay = $("#setrecurringmontlyedit").css("display");
+                                            var setRecurringDisplay = $(
+                                                "#setrecurringmontlyedit"
+                                            ).css("display");
                                             // alert(setRecurringDisplay);
-                                            if (setRecurringDisplay == 'none') {
-                                                if (data.set_reccuring_date_month) {
-
-                                                    $("#ondaycheckedit").prop('checked', true);
+                                            if (setRecurringDisplay == "none") {
+                                                if (
+                                                    data.set_reccuring_date_month
+                                                ) {
+                                                    $("#ondaycheckedit").prop(
+                                                        "checked",
+                                                        true
+                                                    );
                                                 } else {
-                                                    $("#ondaycheckedit").prop('checked', false);
+                                                    $("#ondaycheckedit").prop(
+                                                        "checked",
+                                                        false
+                                                    );
                                                 }
 
-                                                if (data.set_reccuring_week_month || data.set_reccuring_day_month) {
-                                                    $("#onthecheckedit").prop('checked', true);
-                                                    $('#recurringselectontheedit').show();
-                                                    $('#recurringselectwhatdayedit').show();
-
+                                                if (
+                                                    data.set_reccuring_week_month ||
+                                                    data.set_reccuring_day_month
+                                                ) {
+                                                    $("#onthecheckedit").prop(
+                                                        "checked",
+                                                        true
+                                                    );
+                                                    $(
+                                                        "#recurringselectontheedit"
+                                                    ).show();
+                                                    $(
+                                                        "#recurringselectwhatdayedit"
+                                                    ).show();
                                                 } else {
-                                                    $("#onthecheckedit").prop('checked', false);
-                                                    $('#recurringselectontheedit').hide();
-                                                    $('#recurringselectwhatdayedit').hide();
-
+                                                    $("#onthecheckedit").prop(
+                                                        "checked",
+                                                        false
+                                                    );
+                                                    $(
+                                                        "#recurringselectontheedit"
+                                                    ).hide();
+                                                    $(
+                                                        "#recurringselectwhatdayedit"
+                                                    ).hide();
                                                 }
 
-                                                $('#setrecurringmontlyedit').css("display", 'block');
+                                                $(
+                                                    "#setrecurringmontlyedit"
+                                                ).css("display", "block");
 
-                                                $('#ondayselectedit').show();
-                                                $('#setrecurringonmontlyedit').css("display", 'block');
-
+                                                $("#ondayselectedit").show();
+                                                $(
+                                                    "#setrecurringonmontlyedit"
+                                                ).css("display", "block");
                                             } else {
-                                                $('#setrecurringmontlyedit').hide();
-                                                $('#ondayselectedit').hide();
-                                                $('#setrecurringonmontlyedit').hide();
-
+                                                $(
+                                                    "#setrecurringmontlyedit"
+                                                ).hide();
+                                                $("#ondayselectedit").hide();
+                                                $(
+                                                    "#setrecurringonmontlyedit"
+                                                ).hide();
                                             }
                                         } else if (data.recurring == 5) {
-                                            $('#setrecurringyearlyedit').show();
-                                            $('#setrecurringontheyearlyedit').show();
+                                            $("#setrecurringyearlyedit").show();
+                                            $(
+                                                "#setrecurringontheyearlyedit"
+                                            ).show();
 
-                                            if (data.set_reccuring_month_yearly || data.set_reccuring_date_yearly) {
-                                                $('#ondayyearlycheckedit').prop('checked', true);
-                                                $("#recurringmonthyearlyedit").show();
-                                                $("#recurringdayyearlyedit").show();
-
+                                            if (
+                                                data.set_reccuring_month_yearly ||
+                                                data.set_reccuring_date_yearly
+                                            ) {
+                                                $("#ondayyearlycheckedit").prop(
+                                                    "checked",
+                                                    true
+                                                );
+                                                $(
+                                                    "#recurringmonthyearlyedit"
+                                                ).show();
+                                                $(
+                                                    "#recurringdayyearlyedit"
+                                                ).show();
                                             } else {
-                                                $('#ondayyearlycheckedit').prop('checked', false);
-                                                $("#recurringmonthyearlyedit").hide();
-                                                $("#recurringdayyearlyedit").hide();
-
+                                                $("#ondayyearlycheckedit").prop(
+                                                    "checked",
+                                                    false
+                                                );
+                                                $(
+                                                    "#recurringmonthyearlyedit"
+                                                ).hide();
+                                                $(
+                                                    "#recurringdayyearlyedit"
+                                                ).hide();
                                             }
 
-                                            if (data.set_reccuring_week_yearly || data.set_reccuring_day_yearly || data.set_reccuring_month_yearly2) {
-                                                $('#ontheyearlycheckedit').prop('checked', true);
-                                                $("#recurringselectyearlyedit").show();
-                                                $("#recurringonthedayyearlyedit").show();
-                                                $("#recurringontheofedit").show();
-                                                $("#recurringonthemonthyearlyedit").show();
+                                            if (
+                                                data.set_reccuring_week_yearly ||
+                                                data.set_reccuring_day_yearly ||
+                                                data.set_reccuring_month_yearly2
+                                            ) {
+                                                $("#ontheyearlycheckedit").prop(
+                                                    "checked",
+                                                    true
+                                                );
+                                                $(
+                                                    "#recurringselectyearlyedit"
+                                                ).show();
+                                                $(
+                                                    "#recurringonthedayyearlyedit"
+                                                ).show();
+                                                $(
+                                                    "#recurringontheofedit"
+                                                ).show();
+                                                $(
+                                                    "#recurringonthemonthyearlyedit"
+                                                ).show();
                                             } else {
-                                                $('#ontheyearlycheckedit').prop('checked', false);
-                                                $("#recurringselectyearlyedit").hide();
-                                                $("#recurringonthedayyearlyedit").hide();
-                                                $("#recurringontheofedit").hide();
-                                                $("#recurringonthemonthyearlyedit").hide();
+                                                $("#ontheyearlycheckedit").prop(
+                                                    "checked",
+                                                    false
+                                                );
+                                                $(
+                                                    "#recurringselectyearlyedit"
+                                                ).hide();
+                                                $(
+                                                    "#recurringonthedayyearlyedit"
+                                                ).hide();
+                                                $(
+                                                    "#recurringontheofedit"
+                                                ).hide();
+                                                $(
+                                                    "#recurringonthemonthyearlyedit"
+                                                ).hide();
                                             }
                                         }
                                     } else {
-                                        $('#setrecurringmontlyedit').hide();
-                                        $('#ondayselectedit').hide();
-                                        $('#setrecurringonmontlyedit').hide();
-                                        $('#setrecurringyearlyedit').hide();
-                                        $('#setrecurringontheyearlyedit').hide();
+                                        $("#setrecurringmontlyedit").hide();
+                                        $("#ondayselectedit").hide();
+                                        $("#setrecurringonmontlyedit").hide();
+                                        $("#setrecurringyearlyedit").hide();
+                                        $(
+                                            "#setrecurringontheyearlyedit"
+                                        ).hide();
                                     }
-
-
-
                                 } else {
-                                    $("#addeventalldayedit").prop('checked', true);
-                                    $("#addeventrecurringedit").prop('checked', true);
-                                    
-                                    
-                                   
+                                    $("#addeventalldayedit").prop(
+                                        "checked",
+                                        true
+                                    );
+                                    $("#addeventrecurringedit").prop(
+                                        "checked",
+                                        true
+                                    );
 
-                                    var recurringDisplay = $("#addneweventrecurringedit").css("display");
+                                    var recurringDisplay = $(
+                                        "#addneweventrecurringedit"
+                                    ).css("display");
 
-                                    if (recurringDisplay == 'none') {
-                                        $('#addneweventrecurringedit').css("display", 'block');
+                                    if (recurringDisplay == "none") {
+                                        $("#addneweventrecurringedit").css(
+                                            "display",
+                                            "block"
+                                        );
                                     } else {
-                                        $('#addneweventrecurringedit').css("display", 'none');
-
+                                        $("#addneweventrecurringedit").css(
+                                            "display",
+                                            "none"
+                                        );
                                     }
 
                                     if (data.recurring) {
+                                        if (
+                                            data.recurring == 1 ||
+                                            data.recurring == 2 ||
+                                            data.recurring == 3
+                                        ) {
+                                            var setRecurringDisplay = $(
+                                                "#addneweventsetreccurringedit"
+                                            ).css("display");
 
-                                        if (data.recurring == 1 || data.recurring == 2 || data.recurring == 3) {
-                                            var setRecurringDisplay = $("#addneweventsetreccurringedit").css("display");
-
-                                            if (setRecurringDisplay == 'none') {
-                                                $('#addneweventsetreccurringedit').css("display", 'block');
+                                            if (setRecurringDisplay == "none") {
+                                                $(
+                                                    "#addneweventsetreccurringedit"
+                                                ).css("display", "block");
                                             } else {
-                                                $('#addneweventsetreccurringedit').css("display", 'none');
-
+                                                $(
+                                                    "#addneweventsetreccurringedit"
+                                                ).css("display", "none");
                                             }
                                         } else if (data.recurring == 4) {
-                                            var setRecurringDisplay = $("#setrecurringmontlyedit").css("display");
+                                            var setRecurringDisplay = $(
+                                                "#setrecurringmontlyedit"
+                                            ).css("display");
                                             // alert(setRecurringDisplay);
-                                            if (setRecurringDisplay == 'none') {
-                                                if (data.set_reccuring_date_month) {
-
-                                                    $("#ondaycheckedit").prop('checked', true);
+                                            if (setRecurringDisplay == "none") {
+                                                if (
+                                                    data.set_reccuring_date_month
+                                                ) {
+                                                    $("#ondaycheckedit").prop(
+                                                        "checked",
+                                                        true
+                                                    );
                                                 } else {
-                                                    $("#ondaycheckedit").prop('checked', false);
+                                                    $("#ondaycheckedit").prop(
+                                                        "checked",
+                                                        false
+                                                    );
                                                 }
 
-                                                if (data.set_reccuring_week_month || data.set_reccuring_day_month) {
-                                                    $("#onthecheckedit").prop('checked', true);
-                                                    $('#recurringselectontheedit').show();
-                                                    $('#recurringselectwhatdayedit').show();
-
+                                                if (
+                                                    data.set_reccuring_week_month ||
+                                                    data.set_reccuring_day_month
+                                                ) {
+                                                    $("#onthecheckedit").prop(
+                                                        "checked",
+                                                        true
+                                                    );
+                                                    $(
+                                                        "#recurringselectontheedit"
+                                                    ).show();
+                                                    $(
+                                                        "#recurringselectwhatdayedit"
+                                                    ).show();
                                                 } else {
-                                                    $("#onthecheckedit").prop('checked', false);
-                                                    $('#recurringselectontheedit').hide();
-                                                    $('#recurringselectwhatdayedit').hide();
-
+                                                    $("#onthecheckedit").prop(
+                                                        "checked",
+                                                        false
+                                                    );
+                                                    $(
+                                                        "#recurringselectontheedit"
+                                                    ).hide();
+                                                    $(
+                                                        "#recurringselectwhatdayedit"
+                                                    ).hide();
                                                 }
 
-                                                $('#setrecurringmontlyedit').css("display", 'block');
+                                                $(
+                                                    "#setrecurringmontlyedit"
+                                                ).css("display", "block");
 
-                                                $('#ondayselectedit').show();
-                                                $('#setrecurringonmontlyedit').css("display", 'block');
-
+                                                $("#ondayselectedit").show();
+                                                $(
+                                                    "#setrecurringonmontlyedit"
+                                                ).css("display", "block");
                                             } else {
-                                                $('#setrecurringmontlyedit').hide();
-                                                $('#ondayselectedit').hide();
-                                                $('#setrecurringonmontlyedit').hide();
-
+                                                $(
+                                                    "#setrecurringmontlyedit"
+                                                ).hide();
+                                                $("#ondayselectedit").hide();
+                                                $(
+                                                    "#setrecurringonmontlyedit"
+                                                ).hide();
                                             }
                                         } else if (data.recurring == 5) {
-                                            $('#setrecurringyearlyedit').show();
-                                            $('#setrecurringontheyearlyedit').show();
+                                            $("#setrecurringyearlyedit").show();
+                                            $(
+                                                "#setrecurringontheyearlyedit"
+                                            ).show();
 
-                                            if (data.set_reccuring_month_yearly || data.set_reccuring_date_yearly) {
-                                                $('#ondayyearlycheckedit').prop('checked', true);
-                                                $("#recurringmonthyearlyedit").show();
-                                                $("#recurringdayyearlyedit").show();
-
+                                            if (
+                                                data.set_reccuring_month_yearly ||
+                                                data.set_reccuring_date_yearly
+                                            ) {
+                                                $("#ondayyearlycheckedit").prop(
+                                                    "checked",
+                                                    true
+                                                );
+                                                $(
+                                                    "#recurringmonthyearlyedit"
+                                                ).show();
+                                                $(
+                                                    "#recurringdayyearlyedit"
+                                                ).show();
                                             } else {
-                                                $('#ondayyearlycheckedit').prop('checked', false);
-                                                $("#recurringmonthyearlyedit").hide();
-                                                $("#recurringdayyearlyedit").hide();
-
+                                                $("#ondayyearlycheckedit").prop(
+                                                    "checked",
+                                                    false
+                                                );
+                                                $(
+                                                    "#recurringmonthyearlyedit"
+                                                ).hide();
+                                                $(
+                                                    "#recurringdayyearlyedit"
+                                                ).hide();
                                             }
 
-                                            if (data.set_reccuring_week_yearly || data.set_reccuring_day_yearly || data.set_reccuring_month_yearly2) {
-                                                $('#ontheyearlycheckedit').prop('checked', true);
-                                                $("#recurringselectyearlyedit").show();
-                                                $("#recurringonthedayyearlyedit").show();
-                                                $("#recurringontheofedit").show();
-                                                $("#recurringonthemonthyearlyedit").show();
+                                            if (
+                                                data.set_reccuring_week_yearly ||
+                                                data.set_reccuring_day_yearly ||
+                                                data.set_reccuring_month_yearly2
+                                            ) {
+                                                $("#ontheyearlycheckedit").prop(
+                                                    "checked",
+                                                    true
+                                                );
+                                                $(
+                                                    "#recurringselectyearlyedit"
+                                                ).show();
+                                                $(
+                                                    "#recurringonthedayyearlyedit"
+                                                ).show();
+                                                $(
+                                                    "#recurringontheofedit"
+                                                ).show();
+                                                $(
+                                                    "#recurringonthemonthyearlyedit"
+                                                ).show();
                                             } else {
-                                                $('#ontheyearlycheckedit').prop('checked', false);
-                                                $("#recurringselectyearlyedit").hide();
-                                                $("#recurringonthedayyearlyedit").hide();
-                                                $("#recurringontheofedit").hide();
-                                                $("#recurringonthemonthyearlyedit").hide();
+                                                $("#ontheyearlycheckedit").prop(
+                                                    "checked",
+                                                    false
+                                                );
+                                                $(
+                                                    "#recurringselectyearlyedit"
+                                                ).hide();
+                                                $(
+                                                    "#recurringonthedayyearlyedit"
+                                                ).hide();
+                                                $(
+                                                    "#recurringontheofedit"
+                                                ).hide();
+                                                $(
+                                                    "#recurringonthemonthyearlyedit"
+                                                ).hide();
                                             }
                                         }
                                     } else {
-                                        $('#setrecurringmontlyedit').hide();
-                                        $('#ondayselectedit').hide();
-                                        $('#setrecurringonmontlyedit').hide();
-                                        $('#setrecurringyearlyedit').hide();
-                                        $('#setrecurringontheyearlyedit').hide();
+                                        $("#setrecurringmontlyedit").hide();
+                                        $("#ondayselectedit").hide();
+                                        $("#setrecurringonmontlyedit").hide();
+                                        $("#setrecurringyearlyedit").hide();
+                                        $(
+                                            "#setrecurringontheyearlyedit"
+                                        ).hide();
                                     }
-
-
                                 }
                             }
-                            console.log(120 != parseInt($("#user_id_event").val()));
-                            if (data.user_id != parseInt($("#user_id_event").val())) {
-                                document.getElementById("deleteEventButton").disabled = true;
-                                document.getElementById("updateEventButton").disabled = true;
+                            console.log(
+                                120 != parseInt($("#user_id_event").val())
+                            );
+                            if (
+                                data.user_id !=
+                                parseInt($("#user_id_event").val())
+                            ) {
+                                document.getElementById(
+                                    "deleteEventButton"
+                                ).disabled = true;
+                                document.getElementById(
+                                    "updateEventButton"
+                                ).disabled = true;
                             } else {
-                                document.getElementById("deleteEventButton").disabled = false;
-                                document.getElementById("updateEventButton").disabled = false;
+                                document.getElementById(
+                                    "deleteEventButton"
+                                ).disabled = false;
+                                document.getElementById(
+                                    "updateEventButton"
+                                ).disabled = false;
                             }
 
-                            if (data.priority == 'low') {
-                                $("#inlineRadio11").prop('checked', true);
-                            } else if (data.priority == 'medium') {
-                                $("#inlineRadio22").prop('checked', true);
-                            } else if (data.priority == 'high') {
-                                $("#inlineRadio33").prop('checked', true);
+                            if (data.priority == "low") {
+                                $("#inlineRadio11").prop("checked", true);
+                            } else if (data.priority == "medium") {
+                                $("#inlineRadio22").prop("checked", true);
+                            } else if (data.priority == "high") {
+                                $("#inlineRadio33").prop("checked", true);
                             }
 
-                            $("#addneweventselectrecurringedit").prop('checked', data.priority);
+                            $("#addneweventselectrecurringedit").prop(
+                                "checked",
+                                data.priority
+                            );
 
-                            $("#addneweventselectrecurringedit").val(data.recurring);
+                            $("#addneweventselectrecurringedit").val(
+                                data.recurring
+                            );
 
                             if (data.set_reccuring) {
-                                var set_recurring = data.set_reccuring.split(',');
+                                var set_recurring =
+                                    data.set_reccuring.split(",");
                                 // console.log(set_recurring);
 
                                 for (let i = 0; i < set_recurring.length; i++) {
                                     const dataSetRecurring = set_recurring[i];
-                                    if (dataSetRecurring == 'sunday') {
-                                        $("#sunedit").prop('checked', true);
-
+                                    if (dataSetRecurring == "sunday") {
+                                        $("#sunedit").prop("checked", true);
                                     }
 
-                                    if (dataSetRecurring == 'monday') {
-                                        $("#monedit").prop('checked', true);
-
+                                    if (dataSetRecurring == "monday") {
+                                        $("#monedit").prop("checked", true);
                                     }
 
-                                    if (dataSetRecurring == 'sunday') {
-                                        $("#sunedit").prop('checked', true);
-
+                                    if (dataSetRecurring == "sunday") {
+                                        $("#sunedit").prop("checked", true);
                                     }
 
-                                    if (dataSetRecurring == 'tuesday') {
-                                        $("#tueedit").prop('checked', true);
-
+                                    if (dataSetRecurring == "tuesday") {
+                                        $("#tueedit").prop("checked", true);
                                     }
 
-                                    if (dataSetRecurring == 'wednesda') {
-                                        $("#wededit").prop('checked', true);
-
+                                    if (dataSetRecurring == "wednesda") {
+                                        $("#wededit").prop("checked", true);
                                     }
 
-                                    if (dataSetRecurring == 'thursday') {
-                                        $("#thuedit").prop('checked', true);
-
+                                    if (dataSetRecurring == "thursday") {
+                                        $("#thuedit").prop("checked", true);
                                     }
 
-                                    if (dataSetRecurring == 'friday') {
-                                        $("#friedit").prop('checked', true);
-
+                                    if (dataSetRecurring == "friday") {
+                                        $("#friedit").prop("checked", true);
                                     }
 
-                                    if (dataSetRecurring == 'saturday') {
-                                        $("#satedit").prop('checked', true);
-
+                                    if (dataSetRecurring == "saturday") {
+                                        $("#satedit").prop("checked", true);
                                     }
-
                                 }
                             }
 
                             if (data.reminder) {
-                                $('#addeventreminderedit').show();
+                                $("#addeventreminderedit").show();
                             } else {
-                                $('#addeventreminderedit').hide();
+                                $("#addeventreminderedit").hide();
                             }
 
-                            $("#set_reccuring_date_month").val(data.set_reccuring_date_month);
-                            $("#set_reccuring_day_month").val(data.set_reccuring_day_month);
+                            $("#set_reccuring_date_month").val(
+                                data.set_reccuring_date_month
+                            );
+                            $("#set_reccuring_day_month").val(
+                                data.set_reccuring_day_month
+                            );
 
-                            $("#set_reccuring_month_yearly").val(data.set_reccuring_month_yearly);
+                            $("#set_reccuring_month_yearly").val(
+                                data.set_reccuring_month_yearly
+                            );
 
-                            $("#set_reccuring_date_yearly").val(data.set_reccuring_date_yearly);
-                            $("#set_reccuring_week_yearly").val(data.set_reccuring_week_yearly);
-                            $("#set_reccuring_day_yearly").val(data.set_reccuring_day_yearly);
-                            $("#set_reccuring_month_yearly2").val(data.set_reccuring_month_yearly2);
-                            $("#set_reccuring_week_month").val(data.set_reccuring_week_month);
-                            $("#addneweventprojectlocsearchedit").val(data.location);
-                            $("#addneweventselectprojectedit").picker('set', data.project_id);
-
+                            $("#set_reccuring_date_yearly").val(
+                                data.set_reccuring_date_yearly
+                            );
+                            $("#set_reccuring_week_yearly").val(
+                                data.set_reccuring_week_yearly
+                            );
+                            $("#set_reccuring_day_yearly").val(
+                                data.set_reccuring_day_yearly
+                            );
+                            $("#set_reccuring_month_yearly2").val(
+                                data.set_reccuring_month_yearly2
+                            );
+                            $("#set_reccuring_week_month").val(
+                                data.set_reccuring_week_month
+                            );
+                            $("#addneweventprojectlocsearchedit").val(
+                                data.location
+                            );
+                            $("#addneweventselectprojectedit").picker(
+                                "set",
+                                data.project_id
+                            );
 
                             $("#durationeditevent").val(data.duration);
-                            
 
                             // $("#addneweventparticipantedit").picker('remove', 114);
                             // $("#addneweventparticipantedit").picker('remove', 113);
@@ -1998,61 +2251,57 @@ for (let i = 0; i < data['events'].length; i++) {
 
                             // }
 
-                            
-
                             $("#descE").val(data.desc);
                             $("#addeventreminderedit").val(data.reminder);
                             if (data.file_upload) {
-                                $("#fileView").html('<a href="/storage/' + data.file_upload + '" target="_blank"> click here to view file.</a>');
+                                $("#fileView").html(
+                                    '<a href="/storage/' +
+                                        data.file_upload +
+                                        '" target="_blank"> click here to view file.</a>'
+                                );
                             }
                             $("#idEvent").val(data.id);
-
-
                         });
 
-                        $('#editeventmodal').modal('show');
+                        $("#editeventmodal").modal("show");
                     }
-
                 },
                 buttonText: {
-                    today: 'Today',
-                    month: 'Month',
-                    week: 'Week',
-                    day: 'Day',
-                    list: 'List'
+                    today: "Today",
+                    month: "Month",
+                    week: "Week",
+                    day: "Day",
+                    list: "List",
                 },
-                initialView: 'dayGridMonth',
+                initialView: "dayGridMonth",
                 editable: false,
                 droppable: false,
                 selectable: true,
-                themeSystem: 'bootstrap',
+                themeSystem: "bootstrap",
                 views: {
                     timeGrid: {
-                        eventLimit: 6 // adjust to 6 only for timeGridWeek/timeGridDay
-                    }
+                        eventLimit: 6, // adjust to 6 only for timeGridWeek/timeGridDay
+                    },
                 },
-                
+
                 events: dataHoliday,
             });
-            
+
             calendar.render();
-
         });
-
-
     };
 
-    var Calendar = function() {
+    var Calendar = (function () {
         "use strict";
         return {
             //main function
-            init: function() {
+            init: function () {
                 handleCalendarDemo();
-            }
+            },
         };
-    }();
+    })();
 
-    $(document).ready(function() {
+    $(document).ready(function () {
         Calendar.init();
     });
 
@@ -2063,104 +2312,106 @@ for (let i = 0; i < data['events'].length; i++) {
     //     format: 'yyyy-mm-dd'
     // });
 
-    $(function() {
+    $(function () {
         // Initialize Datepicker
         $("#dateaddlog").datepicker({
-          todayHighlight: true,
-          autoclose: true,
-          format: 'yyyy-mm-dd',
-          startDate: new Date(new Date().getTime() - (2 * 24 * 60 * 60 * 1000)), // two days ago
-          endDate: new Date() // Disable future dates
+            todayHighlight: true,
+            autoclose: true,
+            format: "yyyy-mm-dd",
+            startDate: new Date(new Date().getTime() - 2 * 24 * 60 * 60 * 1000), // two days ago
+            endDate: new Date(), // Disable future dates
         });
-      
+
         // Set the minimum and maximum dates to restrict the date range that can be selected
-        $("#dateaddlog").datepicker('setStartDate', new Date(new Date().getTime() - (2 * 24 * 60 * 60 * 1000)));
-        $("#dateaddlog").datepicker('setEndDate', new Date());
-      });
-      
-      
-    $('#starteventdate').datepicker({
-        format: 'yyyy/mm/dd',
-        todayHighlight: true,
-        autoclose: true,
-    }).datepicker('setDate', new Date());
-    
-    $('#endeventdate').datepicker({
-        format: 'yyyy/mm/dd',
-        todayHighlight: true,
-        autoclose: true,
-    }).datepicker('setDate', new Date());
-     
+        $("#dateaddlog").datepicker(
+            "setStartDate",
+            new Date(new Date().getTime() - 2 * 24 * 60 * 60 * 1000)
+        );
+        $("#dateaddlog").datepicker("setEndDate", new Date());
+    });
+
+    $("#starteventdate")
+        .datepicker({
+            format: "yyyy/mm/dd",
+            todayHighlight: true,
+            autoclose: true,
+        })
+        .datepicker("setDate", new Date());
+
+    $("#endeventdate")
+        .datepicker({
+            format: "yyyy/mm/dd",
+            todayHighlight: true,
+            autoclose: true,
+        })
+        .datepicker("setDate", new Date());
+
     // $('#projectLocationOffice').picker({ search: true });
     // $('#activityOffice').picker({ search: true });
     // $('#activity_name_edit').picker({ search: true });
     // $('#projectlocsearch').picker({ search: true });
     // $('#activity_names').picker({ search: true });
-    $('#addneweventprojectlocsearch').picker({ search: true });
-    $('#addneweventparticipant').picker({ search: true });
+    $("#addneweventprojectlocsearch").picker({ search: true });
+    $("#addneweventparticipant").picker({ search: true });
     // $('#addneweventparticipant').selectpicker();
     // $('#addneweventparticipant').chosen({
     //     placeholder_text_multiple: 'Select participants'
     // });
-    $('#addneweventselectproject').picker({ search: true });
-    $(function() {
+    $("#addneweventselectproject").picker({ search: true });
+    $(function () {
         $("#starttime").mdtimepicker({
             showMeridian: true,
         });
-        
+
         var now = new Date();
         var hours = now.getHours();
         var meridian = hours >= 12 ? "PM" : "AM";
         hours = hours % 12;
         hours = hours ? hours : 12; // convert 0 to 12
         var minutes = now.getMinutes();
-        
-       
+
         if (minutes < 10) {
             minutes = "0" + minutes;
         }
-        
+
         $("#starttime").val(hours + ":" + minutes + " " + meridian);
-        
-          
-          
-          $("#endtime").mdtimepicker({
+
+        $("#endtime").mdtimepicker({
             showMeridian: true,
-          });
-          
-          var now = new Date();
-          now.setHours(now.getHours() + 1);
-          var hours = now.getHours();
-          var meridian = hours >= 12 ? "PM" : "AM";
-          hours = hours % 12;
-          hours = hours ? hours : 12; // convert 0 to 12
-          var minutes = now.getMinutes();
-          if (minutes < 10) {
+        });
+
+        var now = new Date();
+        now.setHours(now.getHours() + 1);
+        var hours = now.getHours();
+        var meridian = hours >= 12 ? "PM" : "AM";
+        hours = hours % 12;
+        hours = hours ? hours : 12; // convert 0 to 12
+        var minutes = now.getMinutes();
+        if (minutes < 10) {
             minutes = "0" + minutes;
         }
-          $("#endtime").val(hours + ":" + minutes + " " + meridian);
-          
+        $("#endtime").val(hours + ":" + minutes + " " + meridian);
 
-        $('#daystart,#dayend').datepicker({
-            format:'yyyy/mm/dd',
-        }).datepicker("setDate",'now');
+        $("#daystart,#dayend")
+            .datepicker({
+                format: "yyyy/mm/dd",
+            })
+            .datepicker("setDate", "now");
 
-        $('#daystartedit,#dayendedit').datepicker({
-            format:'yyyy/mm/dd',
-        }).datepicker("setDate",'now');
+        $("#daystartedit,#dayendedit")
+            .datepicker({
+                format: "yyyy/mm/dd",
+            })
+            .datepicker("setDate", "now");
 
-        
-        $('#starteventtime,#endeventtime').mdtimepicker({
-       
-        });
+        $("#starteventtime,#endeventtime").mdtimepicker({});
         // $("#starteventtime").timepicker({
         //     showMeridian: false,
         // });
         // $("#endeventtime").timepicker({
         //     showMeridian: false,
         // });
-    })
-
+    });
 
     // $(document).on('change', "#typeoflog", function() {
     //     if ($(this).val() == "1") {
@@ -2168,8 +2419,7 @@ for (let i = 0; i < data['events'].length; i++) {
     //         $("#officelog").hide();
     //         $("#myproject").hide();
     //         $("#locationByProjectHide").hide();
-            
-        
+
     //     } else if ($(this).val() == "2") {
     //         $("#officelog").show();
     //         $("#activityByProjectHide").hide();
@@ -2179,8 +2429,7 @@ for (let i = 0; i < data['events'].length; i++) {
     //         $("#myproject").show();
     //         $("#activityByProjectHide").show();
     //         $("#locationByProjectHide").show();
-            
-            
+
     //     } else if ($(this).val() == "4") {
     //         $("#activityByProjectHide").show();
     //         $("#officelog").hide();
@@ -2193,14 +2442,13 @@ for (let i = 0; i < data['events'].length; i++) {
     //     }
     // });
 
-    $(document).on('change', "#typeoflog", function() {
+    $(document).on("change", "#typeoflog", function () {
         if ($(this).val() == "2") {
             $("#officelog").show();
             $("#activity_names").val("");
             $("#activityOffice").val("");
             $("#projectlocsearch").val("");
             $("#projectLocationOffice").val("");
-            
         } else {
             $("#officelog").hide();
             $("#listproject").hide();
@@ -2210,7 +2458,7 @@ for (let i = 0; i < data['events'].length; i++) {
             $("#projectLocationOffice").val("");
         }
     });
-    $(document).on('change', "#typeoflog", function() {
+    $(document).on("change", "#typeoflog", function () {
         if ($(this).val() == "3") {
             $("#myproject").show();
             $("#activityByProjectHide").show();
@@ -2220,9 +2468,8 @@ for (let i = 0; i < data['events'].length; i++) {
             $("#activityOffice").val("");
             $("#projectlocsearch").val("");
             $("#projectLocationOffice").val("");
-            
+
             // $("#activity_locationadd").show();
-            
         } else {
             $("#activityByProjectEditHide1").show();
             $("#myproject").hide();
@@ -2242,16 +2489,15 @@ for (let i = 0; i < data['events'].length; i++) {
 
     // $(document).on('change', "#typeoflog", function() {
     //     if ($(this).val() == "1" || $(this).val() == "4") {
-            
+
     //         $("#activity_locationadd").show();
     //     } else {
     //         $("#activity_locationadd").show();
-            
-            
+
     //     }
     // });
 
-    $(document).on('change', "#officelog2", function() {
+    $(document).on("change", "#officelog2", function () {
         if ($(this).val() == "1") {
             $("#listproject").show();
             $("#activityByProjectHide").hide();
@@ -2261,8 +2507,6 @@ for (let i = 0; i < data['events'].length; i++) {
             $("#activityOffice").val("");
             $("#projectlocsearch").val("");
             $("#projectLocationOffice").val("");
-            
-            
         } else if ($(this).val() == "2") {
             $("#activityByProjectHide").show();
             $("#listproject").hide();
@@ -2272,76 +2516,68 @@ for (let i = 0; i < data['events'].length; i++) {
             $("#activityOffice").val("");
             $("#projectlocsearch").val("");
             $("#projectLocationOffice").val("");
-            
-            
         }
         // else {
         //     $("#listproject").hide();
         //     $("#activityByProjectHide").show();
         //     $("#locationByProjectHide").hide();
-            
+
         // }
     });
-    
-    $(document).on('change', "#addneweventselectrecurring", function() {
+
+    $(document).on("change", "#addneweventselectrecurring", function () {
         if ($(this).val() == "1") {
             $("#addneweventsetreccurring").show();
-            $('#mon').not(this).prop('checked', true);
-            $('#tue').not(this).prop('checked', true);
-            $('#wed').not(this).prop('checked', true);
-            $('#thu').not(this).prop('checked', true);
-            $('#fri').not(this).prop('checked', true);
+            $("#mon").not(this).prop("checked", true);
+            $("#tue").not(this).prop("checked", true);
+            $("#wed").not(this).prop("checked", true);
+            $("#thu").not(this).prop("checked", true);
+            $("#fri").not(this).prop("checked", true);
         } else {
             $("#addneweventsetreccurring").hide();
-            $('#mon').not(this).prop('checked', false);
-            $('#tue').not(this).prop('checked', false);
-            $('#wed').not(this).prop('checked', false);
-            $('#thu').not(this).prop('checked', false);
-            $('#fri').not(this).prop('checked', false);
-
+            $("#mon").not(this).prop("checked", false);
+            $("#tue").not(this).prop("checked", false);
+            $("#wed").not(this).prop("checked", false);
+            $("#thu").not(this).prop("checked", false);
+            $("#fri").not(this).prop("checked", false);
         }
     });
-    $(document).on('change', "#addneweventselectrecurring", function() {
-        if ($(this).val() == "1" || $(this).val() == '2' || $(this).val() == '3') {
+    $(document).on("change", "#addneweventselectrecurring", function () {
+        if (
+            $(this).val() == "1" ||
+            $(this).val() == "2" ||
+            $(this).val() == "3"
+        ) {
             $("#addneweventsetreccurring").show();
-
         } else {
             $("#addneweventsetreccurring").hide();
-
-
         }
     });
-    $(document).on('change', "#addneweventselectrecurring", function() {
+    $(document).on("change", "#addneweventselectrecurring", function () {
         if ($(this).val() == "4") {
             $("#setrecurringmontly").show();
             $("#setrecurringonmontly").show();
         } else {
             $("#setrecurringmontly").hide();
             $("#setrecurringonmontly").hide();
-
         }
     });
-    $(document).on('change', "#addneweventselectrecurring", function() {
+    $(document).on("change", "#addneweventselectrecurring", function () {
         if ($(this).val() == "5") {
             $("#setrecurringyearly").show();
             $("#setrecurringontheyearly").show();
-
         } else {
             $("#setrecurringyearly").hide();
             $("#setrecurringontheyearly").hide();
-
         }
     });
-    $().ready = function() {
-
-
-        $("#addreminder").click(function() {
-            $('#addeventreminder').toggle();
+    $().ready = (function () {
+        $("#addreminder").click(function () {
+            $("#addeventreminder").toggle();
         });
+    })();
 
-    }();
-
-    $("#addeventrecurring").click(function() {
+    $("#addeventrecurring").click(function () {
         if ($(this).is(":checked")) {
             $("#addneweventrecurring").show();
         } else {
@@ -2354,35 +2590,32 @@ for (let i = 0; i < data['events'].length; i++) {
         }
     });
 
-    $("#ondaycheck").click(function() {
+    $("#ondaycheck").click(function () {
         if ($(this).is(":checked")) {
             $("#ondayselect").show();
-            $('#onthecheck').not(this).prop('checked', false);
+            $("#onthecheck").not(this).prop("checked", false);
             $("#recurringselectwhatday").hide();
             $("#recurringselectonthe").hide();
         } else {
             $("#ondayselect").hide();
-
-
         }
     });
-    $("#onthecheck").click(function() {
+    $("#onthecheck").click(function () {
         if ($(this).is(":checked")) {
             $("#recurringselectwhatday").show();
             $("#recurringselectonthe").show();
-            $('#ondaycheck').not(this).prop('checked', false);
+            $("#ondaycheck").not(this).prop("checked", false);
             $("#ondayselect").hide();
         } else {
             $("#recurringselectwhatday").hide();
             $("#recurringselectonthe").hide();
-
         }
     });
-    $("#ondayyearlycheck").click(function() {
+    $("#ondayyearlycheck").click(function () {
         if ($(this).is(":checked")) {
             $("#recurringmonthyearly").show();
             $("#recurringdayyearly").show();
-            $('#ontheyearlycheck').not(this).prop('checked', false);
+            $("#ontheyearlycheck").not(this).prop("checked", false);
             $("#recurringselectyearly").hide();
             $("#recurringonthedayyearly").hide();
             $("#recurringonthemonthyearly").hide();
@@ -2392,19 +2625,17 @@ for (let i = 0; i < data['events'].length; i++) {
         } else {
             $("#recurringmonthyearly").hide();
             $("#recurringdayyearly").hide();
-
         }
     });
-    $("#ontheyearlycheck").click(function() {
+    $("#ontheyearlycheck").click(function () {
         if ($(this).is(":checked")) {
             $("#recurringselectyearly").show();
             $("#recurringonthedayyearly").show();
             $("#recurringonthemonthyearly").show();
             $("#recurringontheof").show();
-            $('#ondayyearlycheck').not(this).prop('checked', false);
+            $("#ondayyearlycheck").not(this).prop("checked", false);
             $("#recurringmonthyearly").hide();
             $("#recurringdayyearly").hide();
-
         } else {
             $("#recurringselectyearly").hide();
             $("#recurringonthedayyearly").hide();
@@ -2418,9 +2649,9 @@ for (let i = 0; i < data['events'].length; i++) {
     $("#dateaddlogedit").datepicker({
         todayHighlight: true,
         autoclose: true,
-        format: 'yyyy-mm-dd',
-        startDate: new Date(new Date().getTime() - (2 * 24 * 60 * 60 * 1000)), // one days ago
-        endDate: null // No end date
+        format: "yyyy-mm-dd",
+        startDate: new Date(new Date().getTime() - 2 * 24 * 60 * 60 * 1000), // one days ago
+        endDate: null, // No end date
     });
     $("#starteventdateedit").datepicker({
         todayHighlight: true,
@@ -2428,12 +2659,12 @@ for (let i = 0; i < data['events'].length; i++) {
     });
     $("#endeventdateedit").datepicker({
         todayHighlight: true,
-        autoclose: true
+        autoclose: true,
     });
     // $('#projectlocsearchedit').picker({ search: true });
-    $('#addneweventprojectlocsearchedit').picker({ search: true });
-    $('#addneweventparticipantedit').picker({ search: true });
-    $('#addneweventselectprojectedit').picker({ search: true });
+    $("#addneweventprojectlocsearchedit").picker({ search: true });
+    $("#addneweventparticipantedit").picker({ search: true });
+    $("#addneweventselectprojectedit").picker({ search: true });
 
     $("#starttimeedit").mdtimepicker({
         showMeridian: false,
@@ -2441,7 +2672,7 @@ for (let i = 0; i < data['events'].length; i++) {
     $("#endtimeedit").mdtimepicker({
         showMeridian: false,
     });
-    
+
     $("#starteventtimeedit").mdtimepicker({
         showMeridian: false,
     });
@@ -2449,20 +2680,18 @@ for (let i = 0; i < data['events'].length; i++) {
         showMeridian: false,
     });
 
-    $(document).on('change', "#typeoflogedit", function() {
+    $(document).on("change", "#typeoflogedit", function () {
         if ($(this).val() == "2") {
             $("#officelogedit").show();
             // $("#project_id_edit").hide();
             // $("#locationByProjectEditHide").show();
-            
         } else {
             $("#officelogedit").hide();
             $("#listprojectedit").hide();
             // $("#locationByProjectEditHide").hide();
-
         }
     });
-    $(document).on('change', "#typeoflogedit", function() {
+    $(document).on("change", "#typeoflogedit", function () {
         if ($(this).val() == "3") {
             $("#myprojectedit").show();
             // $("#typeoflogedit").show();
@@ -2472,13 +2701,6 @@ for (let i = 0; i < data['events'].length; i++) {
             $("#locationByProjectEditHide").show();
             $("#activityByProjectEditHide1").show();
             $("#locationByProjectEditShow").show();
-            
-            
-            
-            
-            
-            
-            
         } else {
             $("#myprojectedit").hide();
             $("#listprojectedit").hide();
@@ -2486,92 +2708,82 @@ for (let i = 0; i < data['events'].length; i++) {
             // $("#activity_location_edit").hide();
             $("#activityByProjectEditHide").show();
             $("#locationByProjectEditHide").hide();
-      
-            
         }
     });
-    $(document).on('change', "#officelog2edit", function() {
+    $(document).on("change", "#officelog2edit", function () {
         if ($(this).val() == "1") {
             $("#myprojectedit").show();
             $("#activityByProjectEditHide").hide();
-            
+
             // $("#activityByProjectEditShow").show();
             // $("#locationByProjectEditHide").show();
-            
         } else if ($(this).val() == "2") {
             $("#activityByProjectEditHide").show();
             $("#myprojectedit").hide();
             // $("#myprojectedit").hide();
             // $("#locationByProjectEditHide").hide();
-            
         }
         // } else {
         //     $("#myprojectedit").hide();
         //     $("#activityByProjectEditHide").hide();
         //     $("#locationByProjectEditHide").hide();
-            
+
         // }
     });
 
-    $(document).on('change', "#addneweventselectrecurringedit", function() {
+    $(document).on("change", "#addneweventselectrecurringedit", function () {
         if ($(this).val() == "1") {
             $("#addneweventsetreccurringedit").show();
-            $('#monedit').not(this).prop('checked', true);
-            $('#tueedit').not(this).prop('checked', true);
-            $('#wededit').not(this).prop('checked', true);
-            $('#thuedit').not(this).prop('checked', true);
-            $('#friedit').not(this).prop('checked', true);
+            $("#monedit").not(this).prop("checked", true);
+            $("#tueedit").not(this).prop("checked", true);
+            $("#wededit").not(this).prop("checked", true);
+            $("#thuedit").not(this).prop("checked", true);
+            $("#friedit").not(this).prop("checked", true);
         } else {
             $("#addneweventsetreccurringedit").hide();
-            $('#monedit').not(this).prop('checked', false);
-            $('#tueedit').not(this).prop('checked', false);
-            $('#wededit').not(this).prop('checked', false);
-            $('#thuedit').not(this).prop('checked', false);
-            $('#friedit').not(this).prop('checked', false);
-
+            $("#monedit").not(this).prop("checked", false);
+            $("#tueedit").not(this).prop("checked", false);
+            $("#wededit").not(this).prop("checked", false);
+            $("#thuedit").not(this).prop("checked", false);
+            $("#friedit").not(this).prop("checked", false);
         }
     });
-    $(document).on('change', "#addneweventselectrecurringedit", function() {
-        if ($(this).val() == "1" || $(this).val() == '2' || $(this).val() == '3') {
+    $(document).on("change", "#addneweventselectrecurringedit", function () {
+        if (
+            $(this).val() == "1" ||
+            $(this).val() == "2" ||
+            $(this).val() == "3"
+        ) {
             $("#addneweventsetreccurringedit").show();
-
         } else {
             $("#addneweventsetreccurringedit").hide();
-
-
         }
     });
-    $(document).on('change', "#addneweventselectrecurringedit", function() {
+    $(document).on("change", "#addneweventselectrecurringedit", function () {
         if ($(this).val() == "4") {
             $("#setrecurringmontlyedit").show();
             $("#setrecurringonmontlyedit").show();
         } else {
             $("#setrecurringmontlyedit").hide();
             $("#setrecurringonmontlyedit").hide();
-
         }
     });
-    $(document).on('change', "#addneweventselectrecurringedit", function() {
+    $(document).on("change", "#addneweventselectrecurringedit", function () {
         if ($(this).val() == "5") {
             $("#setrecurringyearlyedit").show();
             $("#setrecurringontheyearlyedit").show();
-
         } else {
             $("#setrecurringyearlyedit").hide();
             $("#setrecurringontheyearlyedit").hide();
-
         }
     });
-    $().ready = function() {
-
-
-        $("#addreminderedit").click(function() {
-            $('#addeventreminderedit').toggle();
+    $().ready = (function () {
+        $("#addreminderedit").click(function () {
+            $("#addeventreminderedit").toggle();
         });
+    })();
 
-    }();
-
-    $("#addeventrecurringedit").click(function() {
+    $("#addeventrecurringedit").click(function () {
         if ($(this).is(":checked")) {
             $("#addneweventrecurringedit").show();
         } else {
@@ -2584,35 +2796,32 @@ for (let i = 0; i < data['events'].length; i++) {
         }
     });
 
-    $("#ondaycheckedit").click(function() {
+    $("#ondaycheckedit").click(function () {
         if ($(this).is(":checked")) {
             $("#ondayselectedit").show();
-            $('#onthecheckedit').not(this).prop('checked', false);
+            $("#onthecheckedit").not(this).prop("checked", false);
             $("#recurringselectwhatdayedit").hide();
             $("#recurringselectontheedit").hide();
         } else {
             $("#ondayselectedit").hide();
-
-
         }
     });
-    $("#onthecheckedit").click(function() {
+    $("#onthecheckedit").click(function () {
         if ($(this).is(":checked")) {
             $("#recurringselectwhatdayedit").show();
             $("#recurringselectontheedit").show();
-            $('#ondaycheckedit').not(this).prop('checked', false);
+            $("#ondaycheckedit").not(this).prop("checked", false);
             $("#ondayselectedit").hide();
         } else {
             $("#recurringselectwhatdayedit").hide();
             $("#recurringselectontheedit").hide();
-
         }
     });
-    $("#ondayyearlycheckedit").click(function() {
+    $("#ondayyearlycheckedit").click(function () {
         if ($(this).is(":checked")) {
             $("#recurringmonthyearlyedit").show();
             $("#recurringdayyearlyedit").show();
-            $("#ontheyearlycheckedit").not(this).prop('checked', false);
+            $("#ontheyearlycheckedit").not(this).prop("checked", false);
             $("#recurringselectyearlyedit").hide();
             $("#recurringonthedayyearlyedit").hide();
             $("#recurringonthemonthyearlyedit").hide();
@@ -2622,19 +2831,17 @@ for (let i = 0; i < data['events'].length; i++) {
         } else {
             $("#recurringmonthyearlyedit").hide();
             $("#recurringdayyearlyedit").hide();
-
         }
     });
-    $("#ontheyearlycheckedit").click(function() {
+    $("#ontheyearlycheckedit").click(function () {
         if ($(this).is(":checked")) {
             $("#recurringselectyearlyedit").show();
             $("#recurringonthedayyearlyedit").show();
             $("#recurringonthemonthyearlyedit").show();
             $("#recurringontheofedit").show();
-            $('#ondayyearlycheckedit').not(this).prop('checked', false);
+            $("#ondayyearlycheckedit").not(this).prop("checked", false);
             $("#recurringmonthyearlyedit").hide();
             $("#recurringdayyearlyedit").hide();
-
         } else {
             $("#recurringselectyearlyedit").hide();
             $("#recurringonthedayyearlyedit").hide();
@@ -2643,37 +2850,34 @@ for (let i = 0; i < data['events'].length; i++) {
         }
     });
 
-
     ///////////////////////////////////submit for approval////////////////////////////////////
     // function getTimesheetApproval(userId) {
     //     return $.ajax({
     //         url: "/getTimesheetApproval"
     //     });
     // }
-    $(document).on("click", "#submitTimesheetApproval", function() {
-
-        userId = $('#userIdForApproval').val();
+    $(document).on("click", "#submitTimesheetApproval", function () {
+        userId = $("#userIdForApproval").val();
         // alert(userId);
-        requirejs(['sweetAlert2'], function(swal) {
+        requirejs(["sweetAlert2"], function (swal) {
             $.ajax({
                 type: "POST",
                 url: "/submitForApproval/" + userId,
                 dataType: "json",
-                async: false,
+
                 processData: false,
                 contentType: false,
-            }).done(function(data) {
+            }).then(function (data) {
                 swal({
                     title: data.title,
                     text: data.msg,
                     type: data.type,
-                    confirmButtonColor: '#3085d6',
-                    confirmButtonText: 'OK',
+                    confirmButtonColor: "#3085d6",
+                    confirmButtonText: "OK",
                     allowOutsideClick: false,
                     allowEscapeKey: false,
-                }).then(function() {
-                    if (data.type == 'error') {
-
+                }).then(function () {
+                    if (data.type == "error") {
                     } else {
                         location.reload();
                     }
@@ -2682,8 +2886,10 @@ for (let i = 0; i < data['events'].length; i++) {
         });
     });
 
-    $("#logduration,#daystart,#dayend,#starttime,#endtime").change(function() {
-        var startdt = new Date($("#daystart").val() + " " + $("#starttime").val());
+    $("#logduration,#daystart,#dayend,#starttime,#endtime").change(function () {
+        var startdt = new Date(
+            $("#daystart").val() + " " + $("#starttime").val()
+        );
         var enddt = new Date($("#dayend").val() + " " + $("#endtime").val());
         var diff = enddt - startdt;
         var days = Math.floor(diff / (1000 * 60 * 60 * 24));
@@ -2692,18 +2898,18 @@ for (let i = 0; i < data['events'].length; i++) {
         diff -= hours * (1000 * 60 * 60);
         var mins = Math.floor(diff / (1000 * 60));
         diff -= mins * (1000 * 60);
-        $("#logduration").val(days + " days : " + hours + " hours : " + mins + " minutes ");
-      });
-      
-      // Trigger the change event on page load to update the duration initially
-      $(document).ready(function() {
+        $("#logduration").val(
+            days + " days : " + hours + " hours : " + mins + " minutes "
+        );
+    });
+
+    // Trigger the change event on page load to update the duration initially
+    $(document).ready(function () {
         $("#logduration").trigger("change");
-      });
-      
-      calculateDuration();
+    });
 
+    calculateDuration();
 
-      
     // $('#hidestart, #hideend').hide();
 
     // $('#alldayc').change(function() {
@@ -2717,85 +2923,92 @@ for (let i = 0; i < data['events'].length; i++) {
     //         $('#endeventtime').val("11:59 PM");
     //     }
     // });
-    
-    $('#addeventalldayedit').change(function() {
+
+    $("#addeventalldayedit").change(function () {
         if (this.checked) {
-            $('#hideshowstarttimee, #hideshowendtimee').hide();
-            $('#starteventtimeedit').val("00:00 AM");
-            $('#endeventtimeedit').val("11:59 PM");
+            $("#hideshowstarttimee, #hideshowendtimee").hide();
+            $("#starteventtimeedit").val("00:00 AM");
+            $("#endeventtimeedit").val("11:59 PM");
         } else {
-            $('#hideshowstarttimee, #hideshowendtimee').show();
+            $("#hideshowstarttimee, #hideshowendtimee").show();
             // $('#starteventtimeedit').val("00:00 AM");
             // $('#endeventtimeedit').val("11:59 PM");
         }
     });
-    
-    
-
 });
-    
 
-    
-
-$("#duration,#starteventdate,#starteventtime,#endeventdate,#endeventtime").focus(function () {
+$(
+    "#duration,#starteventdate,#starteventtime,#endeventdate,#endeventtime"
+).focus(function () {
     calculateDuration();
 });
 
-         //update total duration
-         function calculateDuration() {
-            var startdt = new Date($("#starteventdate").val() + " " + $("#starteventtime").val());
-            
-            var enddt = new Date($("#endeventdate").val() + " " + $("#endeventtime").val());
-        
-            var diff = enddt - startdt;
-            
-            var days = Math.floor(diff / (1000 * 60 * 60 * 24));
-            diff -=  days * (1000 * 60 * 60 * 24);
-            
-            var hours = Math.floor(diff / (1000 * 60 * 60));
-            diff -= hours * (1000 * 60 * 60);
-            
-            var mins = Math.floor(diff / (1000 * 60));
-            diff -= mins * (1000 * 60);
-            
-            $("#duration").val(days + " days : " + hours + " hours : " + mins + " minutes ");
-        }
+//update total duration
+function calculateDuration() {
+    var startdt = new Date(
+        $("#starteventdate").val() + " " + $("#starteventtime").val()
+    );
 
-            //edit event modal mytimesheet
-         $("#durationeditevent,#starteventdateedit,#endeventdateedit,#starteventtimeedit,#endeventtimeedit").change(function () {
+    var enddt = new Date(
+        $("#endeventdate").val() + " " + $("#endeventtime").val()
+    );
 
-            var startdt = new Date($("#starteventdateedit").val() + " " + $("#starteventtimeedit").val());
-            
-            var enddt = new Date($("#endeventdateedit").val() + " " + $("#endeventtimeedit").val());
-        
-            var diff = enddt - startdt;
-            
-            var days = Math.floor(diff / (1000 * 60 * 60 * 24));
-            diff -=  days * (1000 * 60 * 60 * 24);
-            
-            var hours = Math.floor(diff / (1000 * 60 * 60));
-            diff -= hours * (1000 * 60 * 60);
-            
-            var mins = Math.floor(diff / (1000 * 60));
-            diff -= mins * (1000 * 60);
-            
-            console.log(days + ':' + hours)
-            $("#durationeditevent").val( days + " days : " + hours + " hours : " + mins + " minutes ");
-            
-        
-             });
+    var diff = enddt - startdt;
+
+    var days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    diff -= days * (1000 * 60 * 60 * 24);
+
+    var hours = Math.floor(diff / (1000 * 60 * 60));
+    diff -= hours * (1000 * 60 * 60);
+
+    var mins = Math.floor(diff / (1000 * 60));
+    diff -= mins * (1000 * 60);
+
+    $("#duration").val(
+        days + " days : " + hours + " hours : " + mins + " minutes "
+    );
+}
+
+//edit event modal mytimesheet
+$(
+    "#durationeditevent,#starteventdateedit,#endeventdateedit,#starteventtimeedit,#endeventtimeedit"
+).change(function () {
+    var startdt = new Date(
+        $("#starteventdateedit").val() + " " + $("#starteventtimeedit").val()
+    );
+
+    var enddt = new Date(
+        $("#endeventdateedit").val() + " " + $("#endeventtimeedit").val()
+    );
+
+    var diff = enddt - startdt;
+
+    var days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    diff -= days * (1000 * 60 * 60 * 24);
+
+    var hours = Math.floor(diff / (1000 * 60 * 60));
+    diff -= hours * (1000 * 60 * 60);
+
+    var mins = Math.floor(diff / (1000 * 60));
+    diff -= mins * (1000 * 60);
+
+    console.log(days + ":" + hours);
+    $("#durationeditevent").val(
+        days + " days : " + hours + " hours : " + mins + " minutes "
+    );
+});
 // });// });
 
 $(document).on("click", "#confirmsubmitb", function () {
     var id = $(this).data("id");
     var vehicleData = getConfirmSubmit(id);
 
-    vehicleData.done(function (data) {
+    vehicleData.then(function (data) {
         // console.log(data.id);
         // console.log(data.fullName);
         // console.log('')
         var year = data.date.substr(0, 4);
-        var month = data.date.substr(5, 2); 
+        var month = data.date.substr(5, 2);
         // $("#fullname").val(data.fullName);
         // $("#year").val(year);
         // $("#month").val(month);
@@ -2810,26 +3023,20 @@ function getConfirmSubmit(id) {
     });
 }
 
-
-
-    function toggleVenueLocation() {
-        var venue = document.getElementById("venueaddpehal");
-        var location = document.getElementById("locationaddevent1");
-        if (venue.style.display === "block") {
-            location.style.display = "none";
-        } else {
-            location.style.display = "block";
-        }
-    }
-
-    // call toggleVenueLocation on page load to initialize the visibility of the elements
-    toggleVenueLocation();
-
-    // call toggleVenueLocation whenever #venueaddpehal's display property changes
+function toggleVenueLocation() {
     var venue = document.getElementById("venueaddpehal");
-    var observer = new MutationObserver(toggleVenueLocation);
-    observer.observe(venue, {attributes: true, attributeFilter: ['style']});
+    var location = document.getElementById("locationaddevent1");
+    if (venue.style.display === "block") {
+        location.style.display = "none";
+    } else {
+        location.style.display = "block";
+    }
+}
 
+// call toggleVenueLocation on page load to initialize the visibility of the elements
+toggleVenueLocation();
 
-
-    
+// call toggleVenueLocation whenever #venueaddpehal's display property changes
+var venue = document.getElementById("venueaddpehal");
+var observer = new MutationObserver(toggleVenueLocation);
+observer.observe(venue, { attributes: true, attributeFilter: ["style"] });

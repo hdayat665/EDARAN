@@ -42,14 +42,14 @@
                             <select class="form-select" id="officelog2" name="office_log" aria-label="Default select example">
                                 <option class="form-label" value="" selected>PLEASE CHOOSE</option>
                                 <option class="form-label" value="1">MY PROJECT</option>
-                                <option class="form-label" value="2">ACTIVITYy</option>
+                                <option class="form-label" value="2">ACTIVITY</option>
                             </select>
                         </div>
                         
                             <div class="col-sm-6" id="listproject" style="display:none">
                                 <label for="Office-Log" class="form-label">My Project*</label>
                                 <select class="form-select" id="officeLogProject" name="office_log_project" aria-label="Default select example">
-                                    <option class="form-label" value="">PLEASE CHOOSE</option>
+                                    <option class="" value="">PLEASE CHOOSE</option>
                                     <?php $projects = project_memberaddl($user_id) ?>
                                     @foreach ($projects as $project)
                                     <option value="{{$project->id}}">{{$project->project_name}} - {{$project->project_code}}</option>
@@ -108,6 +108,7 @@
                             <label for="issuing-country" class="form-label">Project Location*</label>
                             <select class="selectpicker form-select" id="projectlocsearch" name="project_location" aria-label="Default select example">
                                 <option value="" selected>PLEASE CHOOSE</option>
+                                <option value="OFFICE" >OFFICE</option>
                                 <?php $projectLocations = projectLocation() ?>
                                 @foreach ($projectLocations as $projectLocation)
                                 <option value="{{$projectLocation->id}}">{{$projectLocation->location_name}}</option>
@@ -117,7 +118,7 @@
                         <div class="col-sm-6" id="locationByProjectShow" style="display: none">
                             <label for="issuing-country" class="form-label">Project Location*</label>
                             <select class="selectpicker form-select" id="projectLocationOffice" name="project_location_office" aria-label="Default select example">
-                                
+                        
                             </select>
                         </div>
                     </div>

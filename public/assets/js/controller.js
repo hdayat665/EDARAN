@@ -493,6 +493,16 @@ if ($("#eleavereportjs").length > 0) {
     requirejs(["eleavereportjs"]);
 }
 
+$(document).ajaxStart(function () {
+    $("#overlay").show();
+    $("#loading-message").show();
+});
+
+$(document).ajaxStop(function () {
+    $("#overlay").hide();
+    $("#loading-message").hide();
+});
+
 // Global function
 function ajax(ajaxFunction, params, async = true) {
     var path = "/ajaxController/" + ajaxFunction;
