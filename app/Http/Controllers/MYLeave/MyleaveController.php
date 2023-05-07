@@ -31,8 +31,8 @@ class MyleaveController extends Controller
             // dd($data);
             // die;
         }
-        
-        
+
+
         return view('pages.myleave.myleave',$data);
     }
 
@@ -57,7 +57,7 @@ class MyleaveController extends Controller
 
      public function createtmyleave(Request $r)
     {
-        
+
         $ms = new MyleaveService;
 
         $result = $ms->createtmyleave($r);
@@ -249,8 +249,8 @@ class MyleaveController extends Controller
     //     // $ms = new MyleaveService;
 
     //     // $data['myleave'] = $ms->leaveApprView();
-       
-        
+
+
     //     return view('pages.myleave.leaveApprhod');
     // }
 
@@ -273,6 +273,20 @@ class MyleaveController extends Controller
     }
 
 
-      
+
+    //get checking holiday
+
+    public function myholiday($date = '')
+    {
+        $gclh = new MyleaveService;
+
+        $result = $gclh-> myholiday($date);
+
+
+        return response()->json($result);
+    }
+
+
+
 
 }
