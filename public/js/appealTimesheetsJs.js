@@ -58,4 +58,36 @@ $(document).ready(function () {
             });
         });
     });
+
+
+    $(document).on("click", "#viewappealb", function () {
+
+        var id = $(this).data("id");
+        var vehicleData = getSOP(id);
+        // console.log(vehicleData);
+    
+        vehicleData.then(function (data) {
+            console.log(data.logid);
+            // console.log()
+            $("#log_idv").val(data.logid);
+            $("#Statusv").val(data.status);
+            $("#yearappealv").val(data.year);
+            $("#monthappealv").val(data.month);
+            $("#dayappealv").val(data.day);
+            $("#reasonappealv").val(data.reason);
+            if (data.file) {
+                $("#filedownloadappeal").html(
+                    '<a href="/storage/' + data.file + '">Download File</a>'
+                );
+            }
+        });
+        $("#appealmodalview").modal("show");
+    });
+
+
+    function getSOP(id) {
+        return $.ajax({
+            url: "/getAppealById/" + id,
+        });
+    }
 });

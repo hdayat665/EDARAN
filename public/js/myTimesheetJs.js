@@ -1082,6 +1082,7 @@ $(document).ready(function () {
                     var years = [];
                     var months = [];
                     var days = [];
+                    var files = [];
                     for (let i = 0; i < data['appeals'].length; i++) {
                         var appeals = data['appeals'][i];
 
@@ -1092,6 +1093,7 @@ $(document).ready(function () {
                         var year = appeals['year'];
                         var month = appeals['month'];
                         var day = appeals['day'];
+                        var file = appeals['file'];
 
 
 
@@ -1102,8 +1104,9 @@ $(document).ready(function () {
                         years.push(year);
                         months.push(month);
                         days.push(day);
+                        files.push(file);
                     }
-                    // console.log(reasons);
+                    // console.log(files);
                 
                     if (hasLog && totalHours >= 9) {
                         $(info.el).css('background-color', '#80FF80');
@@ -1128,6 +1131,7 @@ $(document).ready(function () {
                                     var year = years[index];
                                     var month = months[index];
                                     var day = days[index];
+                                    var file = files[index];
                                     // console.log('Log ID:', logId);
                                     // console.log('Reason:', reason);
                                     $('#log_idv').val(logId);
@@ -1136,7 +1140,14 @@ $(document).ready(function () {
                                     $('#yearappealv').val(year);
                                     $('#monthappealv').val(month);
                                     $('#dayappealv').val(day);
-                                    
+
+                                    if (file) {
+                                        $("#filedownloadappeal").html(
+                                            '<a href="/storage/' + file + '">Download File</a>'
+                                        );
+                                    }
+
+                                    // console.log(file)
                                     $('#appealmodalview').modal('show');
                                     
                                     

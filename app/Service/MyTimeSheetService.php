@@ -1117,6 +1117,15 @@ if ($existingLogs->isNotEmpty()) {
     public function createAppealTimesheet($r)
     {
         $input = $r->input();
+        
+        if ($_FILES['file']['name']) {
+            $payslip = upload($r->file('file'));
+            $input['file'] = $payslip['filename'];
+
+            if (!$input['file']) {
+                unset($input['file']);
+            }
+        }
         $user = Auth::user();
     
         $input['user_id'] = $user->id;
@@ -1171,6 +1180,13 @@ if ($existingLogs->isNotEmpty()) {
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
         $data['msg'] = 'Success ' . $status . ' Timesheet';
+
+        return $data;
+    }
+
+    public function getAppealById($id)
+    {
+        $data = TimesheetAppeals::find($id);
 
         return $data;
     }

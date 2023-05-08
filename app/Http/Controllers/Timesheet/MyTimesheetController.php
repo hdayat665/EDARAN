@@ -465,6 +465,15 @@ class MyTimesheetController extends Controller
         return response()->json($result);
     }
 
+    public function getAppealById($id = '')
+    {
+        $ss = new MyTimeSheetService;
+
+        $result = $ss->getAppealById($id);
+
+        return $result;
+    }
+
 
 
     // public function getParticipantNameById($participant = '')

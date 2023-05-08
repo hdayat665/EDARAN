@@ -540,6 +540,7 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('/getAppealidList', 'getAppealidList');
             Route::get('/appealtimesheet', 'appealtimesheetview');
             Route::get('/updateStatusappeal/{id}/{status}', 'updateStatusappeal');
+            Route::get('/getAppealById/{id}', 'getAppealById');
             
             
         });

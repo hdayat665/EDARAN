@@ -11,10 +11,12 @@
                     <div class="col-md-2"></div>
                         <div class="col-md-4">
                             <label class="form-label col-md-6">Log ID</label>
+
                         </div>
                         <div class="col-md-4">
                             <input type="text"  class="form-control" id="log_idv" name="logid" readonly/>
                             <input type="hidden" id="applieddatev" name="applied_date">
+                            <input type="hidden" class="form-control" id="idP" name="id" >
                         </div>
                         <div class="col-md-2"></div>
                     </div>
@@ -72,7 +74,8 @@
                             <label class="form-label">Supporting Document</label>
                         </div>
                         <div class="col-md-7">
-                            <input type="file"  class="form-control" id="" name="" />
+                            <input type="file"  class="form-control" id="file" name="file" />
+                            <span id="filedownloadappeal"></span>
                         </div>
                     </div>
                     <div class="modal-footer">

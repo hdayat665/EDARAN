@@ -72,7 +72,7 @@
                             <label class="form-label">Supporting Document</label>
                         </div>
                         <div class="col-md-7">
-                            <input type="file"  class="form-control" id="" name="" />
+                            <input type="file"  class="form-control" id="file" name="file" />
                         </div>
                     </div>
                     <div class="modal-footer">

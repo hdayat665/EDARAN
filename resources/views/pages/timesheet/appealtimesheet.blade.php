@@ -29,7 +29,8 @@
                                             @if ($app->status == 'locked')
                                             <div class="viewtimesheet">
                                                 {{-- <a href="/viewTimesheet/{{$timesheet->id}}/{{$timesheet->user_id}}" class="dropdown-item" data-id="{{$timesheet->id}}" id="viewtimesheet">View Timesheet</a> --}}
-                                                <a href="" class="dropdown-item" data-id="" id="">View Appeal</a>
+                                                {{-- <a href="" class="dropdown-item" data-id="" id="">View Appeal</a> --}}
+                                                <a href="javascript:;" id="viewappealb" data-id="{{$app->id}}" class="dropdown-item"> View Timesheet</a> 
                                             </div>
                                             <div class="approvetimesheet">
                                                 <a  class="dropdown-item" data-id="{{$app->id}}" data-status="approve" id="statusButton">Approve Timesheet</a>
@@ -40,7 +41,8 @@
                                             @else
                                             <div class="viewtimesheet">
                                                 {{-- <a href="/viewTimesheet/{{$timesheet->id}}/{{$timesheet->user_id}}" class="dropdown-item" data-id="{{$timesheet->id}}" id="viewtimesheet">View Timesheet</a> --}}
-                                                <a href="" class="dropdown-item" data-id="" id="">View Timesheet</a>
+                                                {{-- <a href="" class="dropdown-item" data-id="" id="">View Timesheet</a> --}}
+                                                {{-- <a href="javascript:;" id="viewappealb" data-id="{{$app->id}}" class="dropdown-item"> View Timesheet</a> --}}
                                             </div>
                                             {{-- <div class="approvereject">
                                                 <div class="dropdown-divider "></div>
@@ -72,8 +74,6 @@
                 </table>
             </div>
         </div>
-    </div>
-            @include('modal.timesheet.addEventRealtimeModal')
-            @include('modal.timesheet.viewEventRealtimeModal')
-            @include('modal.timesheet.viewParticipantRealtimeModal')    
+    </div>    
+            @include('modal.timesheet.appealmodalview')
         @endsection
