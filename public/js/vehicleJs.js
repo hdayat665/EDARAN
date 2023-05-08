@@ -165,8 +165,8 @@ $(document).ready(function () {
 
             messages: {
                 // vehicle_type: "required",
-                plate_no: "Please insert plate No",
-                vehicle_type: "Please insert vehicle type",
+                plate_no: "Please Insert Plate Number",
+                vehicle_type: "Please Choose Vehicle Type"
             },
 
             submitHandler: function (form) {
