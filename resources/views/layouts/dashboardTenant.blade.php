@@ -188,7 +188,7 @@
                                 <div class="menu-icon">
                                     <i class="fa fa-commenting text-gray"></i>
                                 </div>
-                                <div class="menu-text text-gray">HRIS</div>
+                                <div class="menu-text text-gray">HRMIS</div>
                                 <div class="menu-caret text-gray"></div>
                             </a>
                             <div class="menu-submenu">
@@ -226,7 +226,7 @@
                                 <div class="menu-icon">
                                     <i class="fa fa-business-time text-gray"></i>
                                 </div>
-                                <div class="menu-text text-gray">Timesheets</div>
+                                <div class="menu-text text-gray">Timesheet</div>
                                 <div class="menu-caret text-gray"></div>
                             </a>
 
@@ -238,7 +238,7 @@
                                             <div class="menu-icon">
                                                 <i class="fa fa-calendar-check text-gray"></i>
                                             </div>
-                                            <div class="menu-text text-gray">My Timesheets</div>
+                                            <div class="menu-text text-gray">My Timesheet</div>
                                         </a>
                                     </div>
                                 @endif
@@ -284,7 +284,7 @@
                                 <div class="menu-icon">
                                     <i class="fa fa-user-edit text-gray"></i>
                                 </div>
-                                <div class="menu-text text-gray">E-Attendance</div>
+                                <div class="menu-text text-gray">eAttendance</div>
                                 <div class="menu-caret text-gray"></div>
                             </a>
                             <div class="menu-submenu">
@@ -322,7 +322,7 @@
                                 <div class="menu-icon">
                                     <i class="fa fa-user-cog text-gray"></i>
                                 </div>
-                                <div class="menu-text text-gray">E-Leave</div>
+                                <div class="menu-text text-gray">eLeave</div>
                                 <div class="menu-caret text-gray"></div>
                             </a>
                             <div class="menu-submenu">
@@ -387,7 +387,7 @@
                                 <div class="menu-icon">
                                     <i class="fa fa-diagram-project text-gray"></i>
                                 </div>
-                                <div class="menu-text text-gray">Project Registration</div>
+                                <div class="menu-text text-gray">Project Management</div>
                                 <div class="menu-caret text-gray"></div>
                             </a>
                             <div class="menu-submenu">
@@ -448,7 +448,7 @@
                                 <div class="menu-icon">
                                     <i class="fa fa-file-lines text-gray"></i>
                                 </div>
-                                <div class="menu-text text-gray">E-Claim</div>
+                                <div class="menu-text text-gray">eClaim</div>
                                 <div class="menu-caret text-gray"></div>
                             </a>
 
@@ -754,7 +754,7 @@
                             <div class="menu-icon">
                                 <i class="fa fa-user-group text-gray"></i>
                             </div>
-                            <div class="menu-text text-gray">Organization</div>
+                            <div class="menu-text text-gray">General Information</div>
                             <div class="menu-caret text-gray"></div>
                         </a>
                         <div class="menu-submenu">

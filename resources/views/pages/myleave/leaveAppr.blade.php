@@ -2,7 +2,7 @@
 
 @section('content')
     <div id="content" class="app-content">
-        <h1 class="page-header" id="leaveApprJs" >E-Leave <small>| Leave Approval | Supervisor</small></h1>
+        <h1 class="page-header" id="leaveApprJs" >eLeave <small>| Leave Approval | Supervisor</small></h1>
         <div class="panel panel">
             <div class="panel-body">
                 <div class="form-control">

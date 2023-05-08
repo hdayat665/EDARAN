@@ -7,7 +7,7 @@
     }
     </style>
     <div id="content" class="app-content">
-        <h1 class="page-header" id="customerJs">Project Registration <small>| Customers</small></h1>
+        <h1 class="page-header" id="customerJs">Project Management <small>| Customers</small></h1>
         <div class="panel panel">
             <div class="panel-heading">
                 <div class="col-md-6">
