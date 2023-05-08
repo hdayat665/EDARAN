@@ -13,12 +13,14 @@
                         <div class="row p-2">
                             <div class="row">
                                 <div class="col d-flex justify-content-end">
-                                    <button class="btn btn-primary" type="button" id="filter"><i class="fa fa-filter" aria-hidden="true"></i></button>&nbsp;
-                                </div>  
+                                        <a id="filter" class="btn btn-default btn-icon btn-lg">
+                                            <i class="fa fa-filter"></i>
+                                        </a>
+                                </div>
                             </div>
                         </div>
                     </div>
-                        
+
                         <div class="row">
                             <form action="/leaveAppr" method="POST">
                                 <div id="filterleave" style="display: none">
@@ -64,7 +66,7 @@
                                 </div>
                             </form>
                         </div>
-                    
+
                     <br>
                     <table id="leaveApprovalSv" class="table table-striped table-bordered align-middle">
                         <thead>
@@ -80,70 +82,72 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr> 
+
                                 <?php $id = 0 ?>
                                     @if ($leaveApprView)
                                     @foreach ($leaveApprView as $l)
                                 <?php $id++ ?>
-                                <td >
-                                    <div class="btn-group">
-                                        <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle"><i class="fa fa-cogs"></i> Action <i class="fa fa-caret-down"></i></a>
-                                        <ul class="dropdown-menu">
-                                            <a class="dropdown-item" href="/myTimesheet">View Calendar</a>
+                                <tr class="odd gradeX">
+                                    <td >
+                                        <div class="btn-group">
+                                            <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle"><i class="fa fa-cogs"></i> Action <i class="fa fa-caret-down"></i></a>
+                                            <ul class="dropdown-menu">
+                                                <a class="dropdown-item" href="/viewTimesheet/{{$l->id}}/{{$l->up_user_id}}" >View Calendar</a>
 
-                                            <div class="dropdown-divider" style=""></div>
-                                            <a href="javascript:;" id="viewbutton" data-id="{{ $l->id }}" data-bs-toggle="modal" data-bs-target="#viewmodal" class="btn">View Leave</a>
-                                                
-                                            @if ($l->up_rec_status == '4')
-                                            @else
+
                                                 <div class="dropdown-divider" style=""></div>
-                                                <a href="javascript:;" id="editButton2" data-id="{{ $l->id }}" data-bs-toggle="modal" data-bs-target="#approveModal-tab-1" class="btn">Approve Leave</a>
+                                                <a href="javascript:;" id="viewbutton" data-id="{{ $l->id }}" data-bs-toggle="modal" data-bs-target="#viewmodal" class="btn">View Leave</a>
+
+                                                @if ($l->up_rec_status == '4')
+                                                @else
+                                                    <div class="dropdown-divider" style=""></div>
+                                                    <a href="javascript:;" id="editButton2" data-id="{{ $l->id }}" data-bs-toggle="modal" data-bs-target="#approveModal-tab-1" class="btn">Approve Leave</a>
+                                                @endif
+                                                @if ($l->up_rec_status == '3')
+                                                @else
+                                                    <div class="dropdown-divider"></div>
+                                                    <a href="javascript:;" id="editButton3" data-id="{{ $l->id }}"  data-bs-toggle="modal" data-bs-target="#rejectModal-tab-1" class="btn">Reject Leave</a>
+                                                @endif
+                                            </ul>
+                                        </div>
+                                    </td>
+                                    <td>{{$l->applied_date}}</td>
+                                    <td>{{$l->fullName}}</td>
+                                    <td>{{$l->type}}</td>
+                                    <td>{{$l->start_date}}</td>
+                                    <td>{{$l->end_date}}</td>
+                                    <td>{{$l->total_day_applied}}</td>
+                                    <td>@for ($i = 1; $i <= 4; $i++)
+                                            <?php
+                                                switch ($i) {
+                                                    case 1:
+                                                        $status = 'Pending';
+                                                        break;
+                                                    case 2:
+                                                        $status = 'Pending';
+                                                        break;
+                                                    case 3:
+                                                        $status = 'Rejected';
+                                                        break;
+                                                    case 4:
+                                                        $status = 'Approved';
+                                                        break;
+                                                    default:
+                                                        $status = 'Unknown';
+                                                }
+                                            ?>
+                                            @if ($l->up_rec_status == $i)
+                                                @php
+                                                    echo $status;
+                                                    break;
+                                                @endphp
                                             @endif
-                                            @if ($l->up_rec_status == '3')
-                                            @else
-                                                <div class="dropdown-divider"></div>
-                                                <a href="javascript:;" id="editButton3" data-id="{{ $l->id }}"  data-bs-toggle="modal" data-bs-target="#rejectModal-tab-1" class="btn">Reject Leave</a>
-                                            @endif
-                                        </ul>
-                                    </div>
-                                </td>
-                                <td>{{$l->applied_date}}</td>
-                                <td>{{$l->fullName}}</td>
-                                <td>{{$l->type}}</td>
-                                <td>{{$l->start_date}}</td>
-                                <td>{{$l->end_date}}</td>
-                                <td>{{$l->total_day_applied}}</td>
-                                <td>@for ($i = 1; $i <= 4; $i++)
-                                        <?php
-                                            switch ($i) {
-                                                case 1:
-                                                    $status = 'Pending';
-                                                    break;
-                                                case 2:
-                                                    $status = 'Pending';
-                                                    break;
-                                                case 3:
-                                                    $status = 'Rejected';
-                                                    break;
-                                                case 4:
-                                                    $status = 'Approved';
-                                                    break;
-                                                default:
-                                                    $status = 'Unknown';
-                                            }
-                                        ?>
-                                        @if ($l->up_rec_status == $i)
-                                            @php
-                                                echo $status;
-                                                break;
-                                            @endphp
-                                        @endif
-                                    @endfor
-                                </td>
-                            </tr> 
+                                        @endfor
+                                    </td>
+                                </tr>
                             @endforeach
                             @endif
-                        </tbody>        
+                        </tbody>
                     </table>
                     <!-- View Model -->
                     <div class="modal fade" id="viewmodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -163,7 +167,7 @@
                                             <div class="col-12" style="width:50%">
                                                 <label>Type of Leave*</label><br>
                                                 <input type="text" style="pointer-events: none;" readonly class="form-control-plaintext" id="viewtype1">
-                                            </div> 
+                                            </div>
                                             <div class="col-12" style="width:50%">
                                                 <label>Number of Day(s) Applied</label><br>
                                                 <input type="text" style="pointer-events: none;" readonly class="form-control-plaintext" id="viewdayapplied">
@@ -231,7 +235,7 @@
                                             <div class="col-12" style="width:50%">
                                                 <label>Type of Leave*</label><br>
                                                 <input type="text" style="pointer-events: none;" readonly class="form-control-plaintext" id="type1">
-                                            </div> 
+                                            </div>
                                             <div class="col-12" style="width:50%">
                                                 <label>Number of Day(s) Applied</label><br>
                                                 <input type="text" style="pointer-events: none;" readonly class="form-control-plaintext" id="dayapplied">
@@ -297,16 +301,16 @@
                                             <div class="col-md-4">
                                                 <label class="form-label row-md-6">Employee Name:</label>
                                                 <input type="text" style="pointer-events: none;" class="form-control-plaintext" id="datafullname2" value="" readonly>
-                                                <input type="hidden" readonly class="form-control-plaintext" id="iddata2" >		
+                                                <input type="hidden" readonly class="form-control-plaintext" id="iddata2" >
                                             </div>
-                                            
+
                                         </div>
                                         <div class="row">
                                             <div class="col-md-4">
                                                 <label class="form-label row-md-6">Submitted Date:</label>
                                                 <input type="text" style="pointer-events: none;" readonly class="form-control-plaintext" id="applieddate2" value="">
                                             </div>
-                                          
+
                                         </div>
                                         <div class="row">
                                             <div class="col-md-4">
@@ -319,14 +323,14 @@
                                                 <label class="form-label row-md-6">No of Day(s) Applied:</label>
                                                 <input type="text" style="pointer-events: none;" readonly class="form-control-plaintext" id="dayapplied2" value="">
                                             </div>
-                                           
+
                                         </div>
                                         {{-- <div class="row">
                                             <div class="col-md-4">
                                                 <label class="form-label row-md-6">Duration:</label>
                                             </div>
                                             <div class="col-md-8">
-                                                <label class="form-label row-md-6"> </label>			
+                                                <label class="form-label row-md-6"> </label>
                                             </div>
                                         </div> --}}
                                         <div class="row">
@@ -334,7 +338,7 @@
                                                 <label class="form-label row-md-6">Start Date:</label>
                                                 <input type="text" style="pointer-events: none;" readonly class="form-control-plaintext" id="startdate2" value="">
                                             </div>
-                                            
+
                                         </div>
                                         <div class="row">
                                             <div class="col-md-4">
@@ -357,7 +361,7 @@
                                                 <textarea class="form-control" id="reasonreject" name="reasonreject"></textarea>
                                             </div>
                                         </div>
-                            
+
                                         <br>
                                         <div class="modal-footer">
                                             <button class="btn btn-primary" id="updateButtonreject">Reject</button>

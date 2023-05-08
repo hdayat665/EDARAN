@@ -596,6 +596,10 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('/getpieleave', 'getpieleave');
             Route::get('/getpieleave2', 'getpieleave2');
 
+            //checking holiday
+
+            Route::get('/myholiday/{date}', 'myholiday');
+
             //seaching myleave
             Route::post('/searchmyleavehistory', 'searchmyleavehistory');
 

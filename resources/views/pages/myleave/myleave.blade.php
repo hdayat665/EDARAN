@@ -35,10 +35,10 @@
                         <div class="panel-heading-btn">
                             <a href="javascript:;" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-primary">+ Apply Leave</a>
                         </div>
-                        
+
                         <div class="panel-body">
                             <!-- <div class="form-control"> -->
-                            
+
 
                                 <div class="row">
                                         <!-- <div class="row"> -->
@@ -56,7 +56,7 @@
                                                 </div>
                                             </div>
                                             <!-- <div class="col-sm-2"></div> -->
-                                
+
                                             <div class="col-sm-6">
                                                 <div class="panel-heading mt-15px">
                                                     <h5 class="panel-title">Leave Carried Foward 2021</h5>
@@ -98,7 +98,7 @@
                                             <?php $id = 0 ?>
                                             @if ($myleave)
                                             @foreach ($myleave as $m)
-                                            <?php 
+                                            <?php
                                                 $id++;
                                                 $applied_date = new DateTime($m->applied_date);
                                                 $start_date = new DateTime($m->start_date);
@@ -115,7 +115,7 @@
                                                             <a href="javascript:;" id="editButton" data-id="{{ $m->id }}" data-bs-toggle="modal" data-bs-target="#exampleModal1" class="dropdown-item">View Leave</a>
                                                         </div>
                                                         <div class="dropdown-divider "></div>
-                                                        <div class="cancelleave">    
+                                                        <div class="cancelleave">
                                                             <a href="javascript:;" id="deleteButton" data-id="{{ $m->id }}" class="dropdown-item" ><i class="fa fa-trash" aria-hidden="true"></i> Cancel Leave</a>
                                                         </div>
                                                     </div>
@@ -166,33 +166,33 @@
                     <!-- BEGIN tab-pane -->
                     <div class="tab-pane fade" id="default-tab-2">
                         <h3 class="mt-10px"></i></h3>
-                        
+
                         <div class="panel-body">
                             <div class="form-control">
                                 <h3>Leave History</h3>
 
-                                
+
                                     <div class="row p-2">
                                         <div class="row">
                                             <div class="col d-flex justify-content-end">
                                                 <button class="btn btn-primary" type="button" id="filter"><i class="fa fa-filter" aria-hidden="true"></i></button>&nbsp;
-                                            </div>  
+                                            </div>
                                         </div>
                                     </div>
 
                                     <div class="row">
                                         <form action="/myleave#default-tab-2" method="POST">
                                             <div id="filterleave" style="display: none">
-                                                <div class="form-control">						
+                                                <div class="form-control">
                                                     <div class="row p-2">
                                                         <div class="col-md-2">
                                                             <label class="form-label">Apply Date</label>
                                                             <div class="input-group">
                                                                 <input type="text" class="form-control" name="applydate" value="<?php echo $applydate; ?>" id="datepicker-filter" placeholder="YYYY/MM/DD"/>
-                                                                    
+
                                                             </div>
                                                         </div>
-                                                        <div class="col-md-2">	
+                                                        <div class="col-md-2">
                                                             <label class="form-label">Type of Leave</label>
                                                             <select class="form-select" name="typelist" id = "typelist">
                                                                 <option value="">PLEASE CHOOSE</option>
@@ -254,11 +254,11 @@
                                                 <?php $id = 0 ?>
                                                     @if ($myleaveHistory)
                                                     @foreach ($myleaveHistory as $mh)
-                                                <?php 
+                                                <?php
                                                     $id++;
                                                     $applied_date = new DateTime($mh->applied_date);
                                                     $start_date = new DateTime($mh->start_date);
-                                                    $end_date = new DateTime($mh->end_date); 
+                                                    $end_date = new DateTime($mh->end_date);
                                                 ?>
                                                 <tr class="odd gradeX">
                                                     <td>
@@ -270,11 +270,11 @@
                                                                 <a href="javascript:;" id="editButton2" data-id="{{ $mh->id }}" data-bs-toggle="modal" data-bs-target="#exampleModal2" class="dropdown-item">View Leave</a>
                                                             </div>
                                                             {{-- <div class="dropdown-divider "></div> --}}
-                                                            {{-- <div class="cancelleave">	
+                                                            {{-- <div class="cancelleave">
                                                                 <a href="javascript:;" id="deleteButton" data-id="{{ $m->id }}" class="dropdown-item">Cancel Leave</a>
                                                             </div> --}}
                                                             {{-- <div class="dropdown-divider "></div>
-                                                            <div class="rejectedleave">	
+                                                            <div class="rejectedleave">
                                                                 <a class="dropdown-item">Rejected Leave</a>
                                                             </div> --}}
                                                         </div>
@@ -320,8 +320,8 @@
                                             </tbody>
                                         </table>
                                     </div>
-                                
-                            </div>		
+
+                            </div>
                             <!--   END col-4 -->
                         </div>
                         <!-- END row -->
@@ -337,7 +337,7 @@
                         <div class="modal-body">
                             <form id="addForm">
                                 <div class="row p-2">
-                                    
+
                                     <div class="col-sm-6">
                                         <div class="mb-3">
                                             <label for="exampleInputEmail1" class="form-label">Applied Date </label>
@@ -376,7 +376,7 @@
                                             </div>
                                     </div>
                                 </div>
-                                    
+
                                 <div class="row p-2" id="menu5">
                                     <div class="col-sm-6">
                                         <label class="form-label" for="Menu5">Leave Date*</label>
@@ -409,20 +409,20 @@
                                             </div>
                                     </div>
                                 </div>
-                                
+
                                 <div class="row p-2">
                                     <div class="col-sm-6" id="menu7">
                                         <label class="form-label" for="Menu5">Start Date*</label>
                                             <div class="">
                                                 <input type="text" class="form-control" name="start_date" id="datepicker-start" placeholder="YYYY/MM/DD"/>
-                                                   
+
                                             </div>
                                     </div>
                                     <div class="col-sm-6" id="menu8">
                                         <label class="form-label" for="Menu6">End Date*</label>
                                             <div class="">
                                                 <input type="text" class="form-control" name="end_date" id="datepicker-end" placeholder="YYYY/MM/DD"/>
-                                                    
+
                                             </div>
                                     </div>
                                 </div>
@@ -442,7 +442,7 @@
                                             </div>
                                     </div>
                                 </div>
-                           
+
                         </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
@@ -452,7 +452,7 @@
                     </div>
                 </div>
             </div>
-            <!-- 
+            <!--
 
             -->
             <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -475,7 +475,7 @@
                                     <div class="col-sm-6">
                                         <label class="form-label">Type of Leave</label>
                                         <div class="input-group">
-                                            <select class="form-select" name="typeofleave" id="typeofleave1" disabled> 
+                                            <select class="form-select" name="typeofleave" id="typeofleave1" disabled>
                                                 <option value="" label="PLEASE CHOOSE"></option>
                                                 @foreach($types as $dt)
                                                     <option value="{{ $dt->id }}" {{ old('typeofleave') == $dt->id ? 'selected' : '' }}>{{ $dt->leave_types }}</option>
@@ -500,7 +500,7 @@
                                             </div>
                                     </div>
                                 </div>
-                                        
+
                                 <div class="row p-2">
                                     <div class="col-sm-6" id="menu01">
                                         <label class="form-label">Leave Date</label>
@@ -517,7 +517,7 @@
                                                 <div class="form-check">
                                                     <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefaulta">
                                                     <label class="form-check-label" for="flexRadioDefaulta">
-                                                        Morning 
+                                                        Morning
                                                         <br>
                                                         8AM - 1AM
 
@@ -534,7 +534,7 @@
                                             </div>
                                     </div>
                                 </div>
-                                        
+
                                 <div class="row p-2" id="menu03">
                                     <div class="col-sm-6">
                                         <label class="form-label">Start Date</label>
@@ -570,7 +570,7 @@
                                     <div class="col-sm-12">
                                         <div class="form-control">
                                             <div class="row">
-                                                <div class="col-sm-6">Recommended By: 
+                                                <div class="col-sm-6">Recommended By:
                                                     <div id="recommended_by"></div>
                                                 </div>
                                                 <div class="col-sm-6">Approved By:
@@ -581,7 +581,7 @@
                                             <br>
 
                                             <div class="row">
-                                                <div class="col-sm-6">Status: 
+                                                <div class="col-sm-6">Status:
                                                     <div id="status_1">Pending</div>
                                                 </div>
                                                 <div class="col-sm-6">Status:
@@ -613,14 +613,14 @@
                                     <div class="col-sm-6">
                                         <label class="form-label">Applied Date</label>
                                         <div class="input-group">
-                                            <input type="text" class="form-control" id="datepicker-applied2" placeholder="yyyy-mm-dd" readonly/>              
+                                            <input type="text" class="form-control" id="datepicker-applied2" placeholder="yyyy-mm-dd" readonly/>
                                         </div>
                                     </div>
 
                                     <div class="col-sm-6">
                                         <label class="form-label">Type of Leave</label>
                                         <div class="input-group">
-                                            <select class="form-select" name="typeofleave" id="typeofleave2" disabled> 
+                                            <select class="form-select" name="typeofleave" id="typeofleave2" disabled>
                                                 <option value="" label="PLEASE CHOOSE"></option>
                                                 @foreach($types as $dt)
                                                     <option value="{{ $dt->id }}" {{ old('typeofleave') == $dt->id ? 'selected' : '' }}>{{ $dt->leave_types }}</option>
@@ -630,7 +630,7 @@
                                     </div>
                                 </div>
 
-                                
+
 
                                 <div class="row p-2">
                                     <div class="col-sm-6">
@@ -647,7 +647,7 @@
                                             </div>
                                     </div>
                                 </div>
-                                        
+
                                 <div class="row p-2">
                                     <div class="col-sm-6" id="menu10">
                                         <label class="form-label">Leave Date</label>
@@ -680,7 +680,7 @@
                                             </div>
                                     </div>
                                 </div>
-                                        
+
                                 <div class="row p-2" id="menu30">
                                     <div class="col-sm-6">
                                         <label class="form-label">Start Date</label>
@@ -716,7 +716,7 @@
                                     <div class="col-sm-12">
                                         <div class="form-control">
                                             <div class="row">
-                                                <div class="col-sm-6">Recommended By: 
+                                                <div class="col-sm-6">Recommended By:
                                                     <div id="recommended_by2"></div>
                                                 </div>
                                                 <div class="col-sm-6">Approved By:
@@ -727,7 +727,7 @@
                                             <br>
 
                                             <div class="row">
-                                                <div class="col-sm-6">Status: 
+                                                <div class="col-sm-6">Status:
                                                     <div id="status_10">Pending</div>
                                                 </div>
                                                 <div class="col-sm-6">Status:
@@ -746,7 +746,7 @@
                 </div>
             </div>
 
-    
+
 
             <!-- BEGIN scroll-top-btn -->
             <a href="javascript:;" class="btn btn-icon btn-circle btn-success btn-scroll-to-top" data-toggle="scroll-to-top">
