@@ -62,10 +62,10 @@
                                             @endif
                                         </div>
                                     </td>
-                                    <td>{{ $app->user_id }}</td>
+                                    <td>{{ $app->employeeName }}</td>
                                     <td>{{ $app->applied_date }}</td>
                                     <td>{{ $app->reason }}</td>
-                                    <td>attachment</td>
+                                    <td>{{ $app->file }}</td>
                                     <td>{{ $app->status }}</td>
                                 </tr>
                             @endforeach

@@ -1038,9 +1038,14 @@ $(document).ready(function () {
                 
                     var oneDayBefore = new Date();
                     oneDayBefore.setDate(currentDate.getDate() - 1);
+
+                    var satuhari = oneDayBefore.setDate(currentDate.getDate() - 1);
                 
                     var twoDayBefore = new Date();
                     twoDayBefore.setDate(currentDate.getDate() - 2);
+                    
+                    var duahari = twoDayBefore.setDate(currentDate.getDate() - 2);
+                    
 
                     var datedefaultformat = dayjs(current).format('YYYY-MM-DD');
                     
@@ -1108,7 +1113,44 @@ $(document).ready(function () {
                     }
                     // console.log(files);
                 
-                    if (hasLog && totalHours >= 9) {
+                      if ((current.getDate() === currentDate.getDate() || current.getDate() === oneDayBefore.getDate() || current.getDate() === twoDayBefore.getDate()) && !(current.getDay() === 6 || current.getDay() === 0)
+                      ) {
+                        $(info.el).css('background-color', '#FF8080');
+                      }else if((current < duahari) && !hasLog && !(current.getDay() === 6 || current.getDay() === 0)) {
+                        $(info.el).css('background-color', '#FF8080');
+                        var appealaddb = $('<button/>', {
+                            text: 'Add Appeal',
+                            class: 'btn btn-primary appeal-add-button',
+                            click: function () {
+                                var year = info.date.getFullYear();
+                                var month = info.date.getMonth();
+                                var day = info.date.getDate();
+                                $('#yearappeal').val(year);
+                                $('#monthappeal').val(new Date(info.date).toLocaleString('en-US', { month: 'long' }));
+                                $('#dayappeal').val(day);
+                                $('#log_id').val(nextLogId);
+            
+                                const clickedDate = dayjs(info.date);
+                                const formattedDate = clickedDate.format('YYYY-MM-DD');
+                                $("#applieddate").val(formattedDate);
+
+                               
+            
+                                $('#appealmodal').modal('show');
+                            }
+                        });
+
+                        $(info.el).append(appealaddb);
+                        $(appealaddb).css({
+                            position: 'absolute',
+                            left: 'auto',
+                            right: 'auto',
+                            top: '0',
+                            'z-index': '999',
+                            'background-color': 'white',
+                            'color': 'red'
+                            });
+                    }else if (hasLog && totalHours >= 9) {
                         $(info.el).css('background-color', '#80FF80');
                     } else if (hasLog && totalHours <= 9) {
                         if (current.getDate() === currentDate.getDate() || current.getDate() === oneDayBefore.getDate() || current.getDate() === twoDayBefore.getDate()) {
@@ -2230,10 +2272,7 @@ $(document).ready(function () {
     //     format: 'yyyy-mm-dd'
     // });
 
-    $(document).on('click', '.add-appeal-btn', function () {
-        // Code to add hours here
-        alert("testing123");
-      });
+    
 
     $(function() {
         // Initialize Datepicker
