@@ -33,7 +33,7 @@
                     <tr class="odd gradeX">
                         <td width="1%" class="fw-bold text-dark">{{$no++}}</td>
                         <td>
-                            @if ($employeeInfo->status == 'active')
+                            @if (strtolower($employeeInfo->status) == 'active')
                                 <a href="#" data-bs-toggle="dropdown" class="btn btn-primary btn-sm dropdown-toggle">
                                     Actions <i class="fa fa-caret-down"></i>
                                 </a>
@@ -61,7 +61,8 @@
                         <td>{{$employeeInfo->phoneNo}}</td>
                         <td>{{$employeeInfo->department}}</td>
                         <td>{{ ($employeeInfo->report_to) ? getSupervisor($employeeInfo->report_to)->employeeName : '-' }}</td>
-                        <td><span class="badge <?= ($employeeInfo->status == 'active') ? 'bg-green' : 'bg-red'  ?>">{{$employeeInfo->status}}</span></td>
+                        {{-- <td><span class="badge <?= ($employeeInfo->status == 'active') ? 'bg-green' : 'bg-red'  ?>">{{$employeeInfo->status}}</span></td> --}}
+                        <td><span class="badge <?= ($employeeInfo->status == 'active') ? 'bg-green' : ($employeeInfo->status == 'Active' ? 'bg-green' : 'bg-red')  ?>">{{$employeeInfo->status}}</span></td>
                     </tr>
                     @endforeach
                     @endif
