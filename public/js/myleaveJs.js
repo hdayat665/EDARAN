@@ -250,32 +250,49 @@ $(document).ready(function () {
         var startDate = $("#datepicker-start").val();
         var endDate = $("#datepicker-end").val();
         var totalDays = "";
+        var date = startDate + "," + endDate;
+        // console.log(date);
+        // return false;
 
-        if (startDate && endDate) {
-            var date1 = new Date(startDate);
-            var date2 = new Date(endDate);
-            var timeDiff = date2.getTime() - date1.getTime();
-            var dayDiff = Math.ceil(timeDiff / (1000 * 3600 * 24));
-
-            // Menghitung jumlah akhir pekan (Sabtu dan Minggu) antara dua tanggal
-            var weekends = 0;
-            for (var i = 0; i <= dayDiff; i++) {
-                var currentDate = new Date(
-                    date1.getTime() + i * 24 * 60 * 60 * 1000
-                );
-                if (currentDate.getDay() === 0 || currentDate.getDay() === 6) {
-                    weekends++;
-                }
-            }
-
-            totalDays = dayDiff + 1 - weekends;
+        if(startDate.trim() === ""){
+            $("#datepicker-end").val("");
         }
 
-        if (totalDays <= 0) {
-            $("#datepicker-end").val("");
-            $("#select4").val("");
-        } else {
-            $("#select4").val(totalDays);
+        if (startDate && endDate) {
+
+            var holidayPromise = holidayPromisex(date);
+
+            function holidayPromisex(date) {
+                return $.ajax({
+                    url: "/myholiday/" + date,
+                });
+            }
+
+            holidayPromise.done(function (totalDaysx) {
+
+                var total_holiday = totalDaysx;
+                var date1 = new Date(startDate);
+                var date2 = new Date(endDate);
+                var timeDiff = date2.getTime() - date1.getTime();
+                var dayDiff = Math.ceil(timeDiff / (1000 * 3600 * 24));
+
+                var weekends = 0;
+                for (var i = 0; i <= dayDiff; i++) {
+                    var currentDate = new Date(date1.getTime() + (i * 24 * 60 * 60 * 1000));
+                    if (currentDate.getDay() === 0 || currentDate.getDay() === 6) {
+                        weekends++;
+                    }
+                }
+
+                totalDays = dayDiff + 1 - weekends - total_holiday;
+
+                if (totalDays <= 0) {
+                    $("#datepicker-end").val("");
+                    $("#select4").val("");
+                } else {
+                    $("#select4").val(totalDays);
+                }
+            });
         }
     });
 
@@ -332,8 +349,9 @@ $(document).ready(function () {
             submitHandler: function (form) {
                 requirejs(["sweetAlert2"], function (swal) {
                     var data = new FormData(document.getElementById("addForm"));
-                    // console.log(document.getElementById("addForm"));
-                    // return false;
+                    // data.forEach(function(value, key) {
+                    //     console.log(key + ": " + value);
+                    //   });
 
                     // var data = $('#tree').jstree("get_selected");
 

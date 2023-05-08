@@ -535,7 +535,14 @@ Route::group(['middleware' => ['web']], function () {
             //SUMMARY TIMESHEET
             Route::get('/summarytimesheet', 'summarytimesheetView');
             Route::get('/summarytimesheet', 'timesheetSummaryView');
+            //appeal
             Route::post('/createAppeal', 'createAppeal');
+            Route::get('/getAppealidList', 'getAppealidList');
+            Route::get('/appealtimesheet', 'appealtimesheetview');
+            Route::get('/updateStatusappeal/{id}/{status}', 'updateStatusappeal');
+            Route::get('/getAppealById/{id}', 'getAppealById');
+            
+            
         });
 
 
@@ -595,6 +602,10 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('/getusermyleave/{id}', 'getusermyleave');
             Route::get('/getpieleave', 'getpieleave');
             Route::get('/getpieleave2', 'getpieleave2');
+
+            //checking holiday
+
+            Route::get('/myholiday/{date}', 'myholiday');
 
             //seaching myleave
             Route::post('/searchmyleavehistory', 'searchmyleavehistory');

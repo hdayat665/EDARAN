@@ -40,6 +40,7 @@ $(document).ready(function () {
             $("#desc").val(data.desc);
             $("#code").val(data.code);
             $("#idP").val(data.id);
+            console.log(data.file);
             if (data.file) {
                 $("#fileDownloadPolicy").html(
                     '<a href="/storage/' + data.file + '">Download File</a>'

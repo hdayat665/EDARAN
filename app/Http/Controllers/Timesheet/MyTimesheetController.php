@@ -172,7 +172,8 @@ class MyTimesheetController extends Controller
         $result['logs'] = $ss->getLogs();
         $result['leaves'] = $ss->getLeaves();
         $result['holidays'] = $ss->getHolidays();
-        // dd($result['holidays']);
+        $result['appeals'] = $ss->getAppeals();
+        // dd($result['appeals']);
         
         return response()->json($result);
     }
@@ -429,6 +430,48 @@ class MyTimesheetController extends Controller
         $data = $ss->getConfirmSubmitById($id);
 
         return response()->json($data);
+    }
+
+
+    public function getAppealidList()
+    {
+        $ss = new MyTimeSheetService;
+
+        $result = $ss->getAppealidList();
+
+        return $result;
+    }
+
+    public function appealtimesheetview()
+    {
+        // $data = [];
+        // $input = [];
+        $ss = new MyTimeSheetService;
+        $data['appealapprovers'] = $ss->timesheetApprovalappealView();
+        // $data['events'] = $ss->getRealtimeEvents($input);
+        // pr($data['appealapprovers']);
+        // $data['employeeId'] = '';
+        // $data['eventId'] = '';
+        return view('pages.timesheet.appealtimesheet',$data);
+
+    }
+
+    public function updateStatusappeal($id = '', $status = '')
+    {
+        $ss = new MyTimeSheetService;
+
+        $result = $ss->updateStatusappeal($id, $status);
+
+        return response()->json($result);
+    }
+
+    public function getAppealById($id = '')
+    {
+        $ss = new MyTimeSheetService;
+
+        $result = $ss->getAppealById($id);
+
+        return $result;
     }
 
 

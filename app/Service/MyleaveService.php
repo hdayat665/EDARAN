@@ -2,16 +2,17 @@
 
 namespace App\Service;
 
-use App\Models\MyLeaveModel;
-use App\Models\leavetypesModel;
-use App\Models\holidayModel;
+use Carbon\Carbon;
 use App\Models\Employee;
 use App\Models\ActivityLogs;
-use App\Models\leaveEntitlementModel;
-use Illuminate\Support\Facades\Auth;
+use App\Models\holidayModel;
+use App\Models\MyLeaveModel;
+use App\Models\leavetypesModel;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+use App\Models\leaveEntitlementModel;
 use Symfony\Component\Console\Input\Input;
-use Carbon\Carbon;
+use App\Mail\Mail as MailMail;
 
 
 class MyleaveService
@@ -156,23 +157,26 @@ class MyleaveService
             return $data;
         }
 
-        $leaveDate = Carbon::createFromFormat('Y-m-d', $input['leave_date']);
-        $dayOfWeek = $leaveDate->dayOfWeek;
+        if($r->input('leave_date')){
 
-        if ($dayOfWeek === Carbon::SATURDAY) {
-            $dayOfWeekName = 'SATURDAY';
-        } elseif ($dayOfWeek === Carbon::SUNDAY) {
-            $dayOfWeekName = 'SUNDAY';
-        }
+            $leaveDate = Carbon::createFromFormat('Y-m-d', $input['leave_date']);
+            $dayOfWeek = $leaveDate->dayOfWeek;
 
-        if (isset($dayOfWeekName)) {
-            $formattedDate = $leaveDate->format('d M Y');
-            $data['msg'] = 'The selected date ('.$formattedDate . ' - ' . $dayOfWeekName.') cannot be chosen as it is a weekend.';
-            $data['status'] = config('app.response.error.status');
-            $data['type'] = config('app.response.error.type');
-            $data['title'] = config('app.response.error.title');
+            if ($dayOfWeek === Carbon::SATURDAY) {
+                $dayOfWeekName = 'SATURDAY';
+            } elseif ($dayOfWeek === Carbon::SUNDAY) {
+                $dayOfWeekName = 'SUNDAY';
+            }
 
-            return $data;
+            if (isset($dayOfWeekName)) {
+                $formattedDate = $leaveDate->format('d M Y');
+                $data['msg'] = 'The selected date ('.$formattedDate . ' - ' . $dayOfWeekName.') cannot be chosen as it is a weekend.';
+                $data['status'] = config('app.response.error.status');
+                $data['type'] = config('app.response.error.type');
+                $data['title'] = config('app.response.error.title');
+
+                return $data;
+            }
         }
 
         if (isset($_FILES['file']) && $_FILES['file']['error'] === UPLOAD_ERR_OK && $_FILES['file']['size'] > 0) {
@@ -216,7 +220,7 @@ class MyleaveService
             $data10 = null;
         }
 
-        if (!$getdata->eleaverecommender) {
+        if (!$getdata->eleaverecommender && $getdata->eleaveapprover) {
 
             $input = [
                 'applied_date' => $data1,
@@ -238,19 +242,32 @@ class MyleaveService
                 'up_user_id' => Auth::user()->id
             ];
 
-        MyLeaveModel::create($input);
+            MyLeaveModel::create($input);
+
+            $settingEmail = MyLeaveModel::select('myleave.*','leave_types.leave_types as type')
+            ->join('leave_types', 'myleave.lt_type_id', '=', 'leave_types.id')
+            ->where('myleave.tenant_id', Auth::user()->tenant_id)
+            ->orderBy('myleave.created_at', 'DESC')
+            ->first();
+
+            if ($settingEmail) {
+
+                $ms = new MailService;
+                $ms->emailToApproverLeave($settingEmail);
+            }
 
 
-        $data['status'] = config('app.response.success.status');
-        $data['type'] = config('app.response.success.type');
-        $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Leave Application is Applied';
 
-        return $data;
+            $data['status'] = config('app.response.success.status');
+            $data['type'] = config('app.response.success.type');
+            $data['title'] = config('app.response.success.title');
+            $data['msg'] = 'Leave Application is Applied';
 
-        }
+            return $data;
 
-        $input = [
+        }else{
+
+            $input = [
                 'applied_date' => $data1,
                 'lt_type_id' => $data2,
                 'day_applied' => $data3,
@@ -271,15 +288,33 @@ class MyleaveService
                 'up_user_id' => Auth::user()->id
             ];
 
-        MyLeaveModel::create($input);
+            MyLeaveModel::create($input);
+
+            $settingEmail = MyLeaveModel::select('myleave.*','leave_types.leave_types as type')
+            ->join('leave_types', 'myleave.lt_type_id', '=', 'leave_types.id')
+            ->where('myleave.tenant_id', Auth::user()->tenant_id)
+            ->orderBy('myleave.created_at', 'DESC')
+            ->first();
+
+            if ($settingEmail) {
+
+                $ms = new MailService;
+                $ms->emailToRecommenderLeave($settingEmail);
+            }
 
 
-        $data['status'] = config('app.response.success.status');
-        $data['type'] = config('app.response.success.type');
-        $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Leave Application is Applied';
+            $data['status'] = config('app.response.success.status');
+            $data['type'] = config('app.response.success.type');
+            $data['title'] = config('app.response.success.title');
+            $data['msg'] = 'Leave Application is Applied';
 
-        return $data;
+
+
+            return $data;
+
+        }
+
+
 
     }
 
@@ -441,6 +476,20 @@ class MyleaveService
 
         MyLeaveModel::where('id', $id)->update($input);
 
+        $settingEmail = MyLeaveModel::select('myleave.*','leave_types.leave_types as type')
+        ->join('leave_types', 'myleave.lt_type_id', '=', 'leave_types.id')
+        ->where('myleave.tenant_id', Auth::user()->tenant_id)
+        ->where('myleave.id', $id)
+        ->where('myleave.up_rec_status', '4')
+        ->orderBy('myleave.created_at', 'DESC')
+        ->first();
+
+        if ($settingEmail) {
+
+            $ms = new MailService;
+            $ms->emailToApproverLeave($settingEmail);
+        }
+
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
@@ -461,6 +510,20 @@ class MyleaveService
             ];
 
         MyLeaveModel::where('id', $id)->update($input);
+
+        $settingEmail = MyLeaveModel::select('myleave.*','leave_types.leave_types as type')
+        ->join('leave_types', 'myleave.lt_type_id', '=', 'leave_types.id')
+        ->where('myleave.tenant_id', Auth::user()->tenant_id)
+        ->where('myleave.id', $id)
+        ->where('myleave.up_rec_status', '3')
+        ->orderBy('myleave.created_at', 'DESC')
+        ->first();
+
+        if ($settingEmail) {
+
+            $ms = new MailService;
+            $ms->emailToRejectedLeave($settingEmail);
+        }
 
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
@@ -498,6 +561,20 @@ class MyleaveService
 
         MyLeaveModel::where('id', $id)->update($input);
 
+        $settingEmail = MyLeaveModel::select('myleave.*','leave_types.leave_types as type')
+        ->join('leave_types', 'myleave.lt_type_id', '=', 'leave_types.id')
+        ->where('myleave.tenant_id', Auth::user()->tenant_id)
+        ->where('myleave.id', $id)
+        ->where('myleave.up_app_status', '4')
+        ->orderBy('myleave.created_at', 'DESC')
+        ->first();
+
+        if ($settingEmail) {
+
+            $ms = new MailService;
+            $ms->emailToApprovedLeave($settingEmail);
+        }
+
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
@@ -519,6 +596,20 @@ class MyleaveService
             ];
 
         MyLeaveModel::where('id', $id)->update($input);
+
+        $settingEmail = MyLeaveModel::select('myleave.*','leave_types.leave_types as type')
+        ->join('leave_types', 'myleave.lt_type_id', '=', 'leave_types.id')
+        ->where('myleave.tenant_id', Auth::user()->tenant_id)
+        ->where('myleave.id', $id)
+        ->where('myleave.up_app_status', '3')
+        ->orderBy('myleave.created_at', 'DESC')
+        ->first();
+
+        if ($settingEmail) {
+
+            $ms = new MailService;
+            $ms->emailToRejectedLeaveHod($settingEmail);
+        }
 
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
@@ -711,6 +802,64 @@ class MyleaveService
         return $data;
 
     }
+
+
+    // checking holiday
+
+    public function myholiday($date)
+    {
+        $explode = explode(',', $date);
+        $startDate = $explode[0];
+        $endDate = $explode[1];
+
+        $data = holidayModel::select('*')
+            ->where('leave_holiday.tenant_id', Auth::user()->tenant_id)
+            ->whereBetween('leave_holiday.start_date', [$startDate, $endDate])
+            ->orWhereBetween('leave_holiday.end_date', [$startDate, $endDate])
+            ->orderBy('leave_holiday.start_date', 'asc')
+
+            ->get();
+
+
+        $totalDaysx = 0;
+
+        foreach ($data as $row) {
+
+            $holidayStartDate = Carbon::createFromFormat('Y-m-d', $row->start_date);
+
+            $holidayEndDate = Carbon::createFromFormat('Y-m-d', $row->end_date);
+
+
+
+            $daysDiff = $holidayEndDate->diffInDays($holidayStartDate) + 1;
+
+
+
+            for ($i = 0; $i <= $daysDiff; $i++) {
+                $currentDate = $holidayStartDate->copy()->addDays($i);
+                $dayOfWeek = $currentDate->dayOfWeek;
+
+
+                // Jika hari adalah Sabtu atau Minggu, lewati iterasi
+                if ($dayOfWeek === Carbon::SATURDAY || $dayOfWeek === Carbon::SUNDAY) {
+                    continue;
+                }
+
+                if ($currentDate >= $holidayStartDate && $currentDate <= $holidayEndDate) {
+                    $totalDaysx++;
+                }
+
+            }
+        }
+
+
+        return $totalDaysx;
+    }
+
+
+
+
+
 
 
 

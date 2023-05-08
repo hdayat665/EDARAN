@@ -123,7 +123,13 @@ $(document).ready(function () {
         });
     }
 
-    var $elem = $("#addneweventselectprojectedit");
+    function getAppealidList() {
+        return $.ajax({
+            url: "/getAppealidList/"
+        });
+    }
+
+    var $elem = $('#addneweventselectprojectedit');
     $elem.picker({ search: true });
     $elem.on("sp-change", function () {
         projectId = $(this).val();
@@ -787,49 +793,43 @@ $(document).ready(function () {
             // $('#userIdForApproval').val(data['events'][0]['user_id']);
             // console.log(data['events']);
             var event = [];
-            for (let i = 0; i < data["events"].length; i++) {
-                var events = data["events"][i];
-
-                var startDate = new Date(events["start_date"]);
-                var startMonth = startDate.getMonth() + 1;
-                startMonth = startMonth < 10 ? "0" + startMonth : startMonth;
-                var startYear = startDate.getFullYear();
-                var startDay = startDate.getDate();
-                startDay = startDay < 10 ? "0" + startDay : startDay;
-
-                var endDate = new Date(events["end_date"]);
-                endDate.setDate(endDate.getDate() + 1); // add one day to end date
-                var endMonth = endDate.getMonth() + 1;
-                endMonth = endMonth < 10 ? "0" + endMonth : endMonth;
-                var endYear = endDate.getFullYear();
-                var endDay = endDate.getDate();
-                endDay = endDay < 10 ? "0" + endDay : endDay;
-
-                event.push({
-                    title:
-                        "Event: " +
-                        events["event_name"] +
-                        "\n" +
-                        "from " +
-                        events["start_time"] +
-                        " to " +
-                        events["end_time"],
-                    start: startYear + "-" + startMonth + "-" + startDay,
-                    end: endYear + "-" + endMonth + "-" + endDay,
-                    color: "#2AAA8A",
-                    extendedProps: {
-                        type: "event",
-                        eventId: events["id"],
-                    },
-                });
-            }
+        for (let i = 0; i < data['events'].length; i++) {
+            var events = data['events'][i];
+            // console.log(events);
+            var startDate = new Date(events['start_date']);
+            var startMonth = startDate.getMonth() + 1;
+            startMonth = startMonth < 10 ? "0" + startMonth : startMonth;
+            var startYear = startDate.getFullYear();
+            var startDay = startDate.getDate();
+            startDay = startDay < 10 ? "0" + startDay : startDay;
+            
+            var endDate = new Date(events['end_date']);
+            endDate.setDate(endDate.getDate() + 1); // add one day to end date
+            var endMonth = endDate.getMonth() + 1;
+            endMonth = endMonth < 10 ? "0" + endMonth : endMonth;
+            var endYear = endDate.getFullYear();
+            var endDay = endDate.getDate();
+            endDay = endDay < 10 ? "0" + endDay : endDay;
+            
+            event.push({
+                title: "Event: " + events['event_name'] + "\n" + "from " + events['start_time'] + " to " + events['end_time'],
+                start: startYear + '-' + startMonth + '-' + startDay,
+                end: endYear + '-' + endMonth + '-' + endDay,
+                color: '#2AAA8A',
+                extendedProps: {
+                    type: 'event',
+                    eventId: events['id']
+                }
+            });
+            
+        }
 
             var log = [];
             var loghour = [];
-            for (let i = 0; i < data["logs"].length; i++) {
-                var logs = data["logs"][i];
+            for (let i = 0; i < data['logs'].length; i++) {
+                var logs = data['logs'][i];
 
-                var startDate = new Date(logs["date"]);
+                var startDate = new Date(logs['date']);
                 var startMonth = startDate.getMonth() + 1;
                 startMonth = startMonth < 10 ? "0" + startMonth : startMonth;
                 var startYear = startDate.getFullYear();
@@ -839,12 +839,15 @@ $(document).ready(function () {
                 var time = startTime.split(":");
                 startTime = time[0] < 10 ? "0" + startTime : startTime;
 
-                var endDate = new Date(logs["end_date"]);
-                var endMonth = endDate.getMonth();
+                var endDate = new Date(logs['date']);
+                var endMonth = endDate.getMonth() + 1;
                 endMonth = endMonth < 10 ? "0" + endMonth : endMonth;
                 var endYear = endDate.getFullYear();
                 var endDay = endDate.getDate();
                 endDay = endDay < 10 ? "0" + endDay : endDay;
+                var endTime = logs['end_time'];
+                time = endTime.split(":");
+                endTime = time[0] < 10 ? "0" + endTime : endTime;
                 // console.log(logs['total_hour']);
 
                 function type_of_log(id) {
@@ -877,8 +880,9 @@ $(document).ready(function () {
                         " to " +
                         logs["end_time"],
                     // start: startYear + '-' + startMonth + '-' + startDay + 'T' + startTime + ':00',
-                    start: startYear + "-" + startMonth + "-" + startDay,
-                    color: app.color.primary,
+                    start: startYear + '-' + startMonth + '-' + startDay,
+                    // color: app.color.primary,
+                    color: "#348FE2",
                     extendedProps: {
                         type: "log",
                         logId: logs["id"],
@@ -888,8 +892,11 @@ $(document).ready(function () {
                 loghour.push({
                     start: new Date(startYear, startMonth - 1, startDay),
                     end: new Date(endYear, endMonth - 1, endDay),
-                    totalHour: logs["total_hour"],
+                    totalHour: logs['total_hour'],
+                    logid: logs['id'],
                 });
+
+                
             }
 
             var leave = [];
@@ -919,7 +926,7 @@ $(document).ready(function () {
                     start: startYear + "-" + startMonth + "-" + startDay,
                     end: endYear + "-" + endMonth + "-" + endDay,
                     // color: app.color.green,
-                    color: "#E0E0E0",
+                    color: "#D9EDF7",
                     textColor: "black",
                     fontWeight: "bold",
                     extendedProps: {
@@ -936,10 +943,10 @@ $(document).ready(function () {
 
             var holiday = [];
             var holidayDates = [];
-            for (let i = 0; i < data["holidays"].length; i++) {
-                var holidays = data["holidays"][i];
-
-                var startDate = new Date(holidays["start_date"]);
+            for (let i = 0; i < data['holidays'].length; i++) {
+                var holidays = data['holidays'][i];
+                // console.log(holidays);
+                var startDate = new Date(holidays['start_date']);
                 var startMonth = startDate.getMonth() + 1;
                 startMonth = startMonth < 10 ? "0" + startMonth : startMonth;
                 var startYear = startDate.getFullYear();
@@ -958,7 +965,7 @@ $(document).ready(function () {
                     start: startYear + "-" + startMonth + "-" + startDay,
                     end: endYear + "-" + endMonth + "-" + endDay,
                     // color: app.color.yellow,
-                    color: "#FFD580",
+                    color: "#FFD480",
                     textColor: "black",
                     fontWeight: "bold",
                     extendedProps: {
@@ -974,10 +981,27 @@ $(document).ready(function () {
                 });
             }
 
+            var highestNumber = 0;
+            for (let i = 0; i < data['appeals'].length; i++) {
+                var appeals = data['appeals'][i];
+                // console.log(appeals['applied_date']);
+                var match = appeals['logid'].match(/LA-(\d+)/);
+                if (match) {
+                    var number = parseInt(match[1]);
+                    if (number > highestNumber) {
+                        highestNumber = number;
+                    }
+                }
+            }
+            var nextNumber = highestNumber + 1;
+            var nextLogId = 'LA-' + nextNumber.toString().padStart(4, '0');
+            // console.log(nextLogId);
+            
+            
             dataEvent = event.concat(log);
             dataleave = dataEvent.concat(leave);
             dataHoliday = dataleave.concat(holiday);
-
+            
             // console.log(holiday);
             var calendar = new FullCalendar.Calendar(calendarElm, {
                 headerToolbar: {
@@ -999,404 +1023,298 @@ $(document).ready(function () {
                         },
                     },
                     SumButton: {
-                        text: "Summary",
-                        click: function () {
-                            window.location.href = "summarytimesheet";
-                        },
-                    },
+                        text: 'Summary',
+                        click: function() {
+                            window.location.href = 'summarytimesheet';
+                        }
+                    }  
                 },
+               
 
-                // dayCellDidMount: function(info) {
-                //     var current = new Date(info.date);
-                //     var hasLog = false;
-
-                //     // Check if there is a log for the current date
-                //      // Check if there is a log for the current date
-                //     for (let i = 0; i < log.length; i++) {
-                //         var logDate = new Date(log[i].start);
-                //         if (current.getFullYear() === logDate.getFullYear() &&
-                //             current.getMonth() === logDate.getMonth() &&
-                //             current.getDate() === logDate.getDate()) {
-                //             hasLog = true;
-                //             break;
-                //         }
-                //     }
-
-                //     // If there is a log for the current date, check the log hour
-                //     if (hasLog) {
-                //       for (let i = 0; i < loghour.length; i++) {
-                //         var hourString = loghour[i].title;
-                //         var hourArray = hourString.split(':');
-                //         var hour = hourArray[0];
-                //         // console.log(hour);
-                //         if (hour < 8) {
-                //           $(info.el).css('background-color', 'red');
-                //           return;
-                //         }
-                //       }
-                //     }
-
-                //     for (let i = 0; i < holidayDates.length; i++) {
-                //       if (current >= holidayDates[i].start && current <= holidayDates[i].end) {
-                //         $(info.el).css('background-color', '#FFD580');
-                //         return;
-                //       }
-                //     }
-
-                //     for (let i = 0; i < leavesdate.length; i++) {
-                //       if (current >= leavesdate[i].start && current <= leavesdate[i].end) {
-                //         $(info.el).css('background-color', '#E0E0E0');
-                //         return;
-                //       }
-                //     }
-
-                //     if (info.date.getDay() === 0) { // Sunday
-                //       $(info.el).css('background-color', '#87CEEB');
-                //     } else if (info.date.getDay() === 6) { // Saturday
-                //       $(info.el).css('background-color', '#87CEEB');
-                //     } else {
-                //       $(info.el).css('background-color', 'white');
-                //     }
-                //   },
-
-                dayCellDidMount: function (info) {
+                
+                dayCellDidMount: function(info) {
                     var current = new Date(info.date);
-                    var hasLog = false;
+                    var currentDate = new Date();
+                
+                    var oneDayBefore = new Date();
+                    oneDayBefore.setDate(currentDate.getDate() - 1);
+                
+                    var twoDayBefore = new Date();
+                    twoDayBefore.setDate(currentDate.getDate() - 2);
 
-                    // Check if there is a log for the current date
-                    // for (let i = 0; i < log.length; i++) {
-                    //     var logDate = new Date(log[i].start);
-                    //     if (current.getFullYear() === logDate.getFullYear() &&
-                    //         current.getMonth() === logDate.getMonth() &&
-                    //         current.getDate() === logDate.getDate()) {
-                    //         hasLog = true;
-                    //         break;
-                    //     }
-                    // }
-
-                    // if (hasLog) {
-                    //     var isViolation = false;
-                    //     for (let i = 0; i < loghour.length; i++) {
-                    //       var totalHour = loghour[i].totalHour;
-                    //       var hours = totalHour.split(':');
-                    //       var hours1 = parseInt(hours[0]);
-                    //       if (hours1 < 8) {
-                    //         isViolation = true;
-                    //         break;
-                    //       }
-                    //     }
-                    //     if (isViolation) {
-                    //         console.log('Changing color to red');
-                    //       $(info.el).css('background-color', 'red');
-                    //     } else {
-                    //         console.log('Changing color to green');
-                    //       $(info.el).css('background-color', 'green');
-                    //     }
-                    //   }
-
-                    //almost working
-                    //  if(hasLog) {
-                    //     for (let i = 0; i < loghour.length; i++) {
-                    //         var totalHour = loghour[i].totalHour;
-                    //         var hours = totalHour.split(':');
-                    //         var hours1 = parseInt(hours[0]);
-                    //         console.log(hours1)
-                    //         if (hours1 < 8) {
-                    //         // console.log(hours1);
-                    //         $(info.el).css('background-color', 'red');
-
-                    // if (hasLog) {
-                    //     var hasLowHours = false;
-                    //     for (let i = 0; i < loghour.length; i++) {
-                    //       var totalHour = loghour[i].totalHour;
-                    //       var hours = totalHour.split(':');
-                    //       var hours1 = parseInt(hours[0]);
-                    //       console.log("hours1: " + hours1);
-                    //       if (hours1 < 8) {
-                    //         // console.log('color to red');
-                    //         hasLowHours = true;
-                    //       }
-                    //     }
-                    //     console.log("hasLowHours: " + hasLowHours);
-                    //     if (hasLowHours) {
-                    //       $(info.el).css('background-color', 'red');
-                    //       console.log('color to red');
-                    //     } else {
-                    //       console.log('setting color to green');
-                    //       $(info.el).css('background-color', 'green');
-                    //       console.log('color to green');
-                    //     }
-                    //     console.log("info.el: " + info.el);
-                    //     return;
-                    //   }
-
-                    //    }else {
-                    //     $(info.el).css('background-color', 'green');
-                    //    }
-                    //    return;
-
-                    //  }
-
-                    // }
-
-                    // If there is a log for the current date, check the log hour
-                    // if (hasLog) {
-                    //     for (let i = 0; i < loghour.length; i++) {
-                    //       var totalHour = loghour[i].totalHour;
-                    //       console.log(totalHour)
-                    //       var hours = totalHour.split(':'); // extract the number of hours from the totalHour string
-                    //       var hours1 = parseInt(hours[0]);
-                    //     //  console.log(hours)
-                    //       if (hours1 < 8) {
-                    //         // console.log(hours1);
-                    //         $(info.el).css('background-color', 'red');
-                    //       }else if (hours1 >= 8) {
-                    //             $(info.el).css('background-color', 'green');
-                    //         }
-                    //         else {
-                    //             $(info.el).css('background-color', 'white');
-                    //         }
-                    //         return;
-                    //       }
-                    //     }
-
-                    // if (hasLog) {
-                    //     for (let i = 0; i < loghour.length; i++) {
-                    //         var hourString = loghour[i].totalHour;
-                    //         console.log(hourString);
-                    //         var hourArray = hourString.split(':');
-                    //         var hour = parseInt(hourArray[0]); // convert hour string to integer
-                    //         // console.log("hour" + hour);
-                    //         if (hour < 8) {
-                    //             $(info.el).css('background-color', 'red');
-                    //          }else {
-                    //             $(info.el).css('background-color', 'green');
-                    //         }
-                    //             return;
-                    //         }
-                    //     }
+                    var datedefaultformat = dayjs(current).format('YYYY-MM-DD');
+                    
+                   
+                
+                    if (dayjs(info.date).isSame(dayjs(), 'date')) {
+                        $(info.el).css('background-color', '#FFFADF');
+                        console.log("test")
+                      }
 
                     for (let i = 0; i < holidayDates.length; i++) {
-                        if (
-                            current >= holidayDates[i].start &&
-                            current <= holidayDates[i].end
-                        ) {
-                            $(info.el).css("background-color", "#FFD580");
+                        if (current >= holidayDates[i].start && current <= holidayDates[i].end) { 
+                            $(info.el).css('background-color', '#FFD480');
                             return;
                         }
                     }
-
+                
                     for (let i = 0; i < leavesdate.length; i++) {
-                        if (
-                            current >= leavesdate[i].start &&
-                            current <= leavesdate[i].end
-                        ) {
-                            $(info.el).css("background-color", "#E0E0E0");
+                        if (current >= leavesdate[i].start && current <= leavesdate[i].end) { 
+                            $(info.el).css('background-color', '#D9EDF7');
                             return;
                         }
                     }
-
-                    if (info.date.getDay() === 0) {
-                        // Sunday
-                        $(info.el).css("background-color", "#87CEEB");
-                    } else if (info.date.getDay() === 6) {
-                        // Saturday
-                        $(info.el).css("background-color", "#87CEEB");
-                    } else {
-                        $(info.el).css("background-color", "white");
+                
+                    var totalHours = 0;
+                    var hasLog = false;
+                    for (var i = 0; i < loghour.length; i++) {
+                        if (current >= loghour[i].start && current <= loghour[i].end) { 
+                            hasLog = true;
+                            totalHours += parseInt(loghour[i].totalHour.split(":")[0]);
+                            var logid = loghour[i].logid;
+                        }
                     }
-                },
+                
+                    var appliedDates = [];
+                    var reasons = [];
+                    var logsid = [];
+                    var statuss = [];
+                    var years = [];
+                    var months = [];
+                    var days = [];
+                    var files = [];
+                    for (let i = 0; i < data['appeals'].length; i++) {
+                        var appeals = data['appeals'][i];
 
+                        var appliedDate = appeals['applied_date'];
+                        var reason = appeals['reason'];
+                        var logid = appeals['logid'];
+                        var status = appeals['status'];
+                        var year = appeals['year'];
+                        var month = appeals['month'];
+                        var day = appeals['day'];
+                        var file = appeals['file'];
+
+
+
+                        appliedDates.push(appliedDate);
+                        reasons.push(reason);
+                        logsid.push(logid);
+                        statuss.push(status);
+                        years.push(year);
+                        months.push(month);
+                        days.push(day);
+                        files.push(file);
+                    }
+                    // console.log(files);
+                
+                    if (hasLog && totalHours >= 9) {
+                        $(info.el).css('background-color', '#80FF80');
+                    } else if (hasLog && totalHours <= 9) {
+                        if (current.getDate() === currentDate.getDate() || current.getDate() === oneDayBefore.getDate() || current.getDate() === twoDayBefore.getDate()) {
+                            $(info.el).css('background-color', '#FF8080');
+                        } else if (appliedDates.includes(datedefaultformat)) {
+
+                            $(info.el).css('background-color', '#FF8080');
+                            var viewappealb = $('<button/>', {
+                              text: 'View Appeal',
+                              class: 'btn btn-primary appeal-view-button',
+                              click: function () {
+                                
+                               
+                                // Get the logid for the corresponding appliedDate
+                                var index = appliedDates.indexOf(datedefaultformat);
+                                if (index !== -1) {
+                                    var logId = logsid[index];
+                                    var reason = reasons[index];
+                                    var status = statuss[index];
+                                    var year = years[index];
+                                    var month = months[index];
+                                    var day = days[index];
+                                    var file = files[index];
+                                    // console.log('Log ID:', logId);
+                                    // console.log('Reason:', reason);
+                                    $('#log_idv').val(logId);
+                                    $('#reasonappealv').val(reason);
+                                    $('#Statusv').val(status);
+                                    $('#yearappealv').val(year);
+                                    $('#monthappealv').val(month);
+                                    $('#dayappealv').val(day);
+
+                                    if (file) {
+                                        $("#filedownloadappeal").html(
+                                            '<a href="/storage/' + file + '">Download File</a>'
+                                        );
+                                    }
+
+                                    // console.log(file)
+                                    $('#appealmodalview').modal('show');
+                                    
+                                    
+                                  }
+                                  return false;
+                              }
+                            });
+
+                          
+
+                        
+                          
+                
+                            $(info.el).append(viewappealb);
+                            $(viewappealb).css({
+                                position: 'absolute',
+                                left: 'auto',
+                                right: 'auto',
+                                top: '0',
+                                'z-index': '999',
+                                'background-color': 'white',
+                                'color': 'red'
+                                });
+                                
+                        } else {
+                            // console.log(datedefaultformat)
+                            $(info.el).css('background-color', '#FF8080');
+                            // console.log(appliedDates);
+                            var appealaddb = $('<button/>', {
+                                text: 'Add Appeal',
+                                class: 'btn btn-primary appeal-add-button',
+                                click: function () {
+                                    var year = info.date.getFullYear();
+                                    var month = info.date.getMonth();
+                                    var day = info.date.getDate();
+                                    $('#yearappeal').val(year);
+                                    $('#monthappeal').val(new Date(info.date).toLocaleString('en-US', { month: 'long' }));
+                                    $('#dayappeal').val(day);
+                                    $('#log_id').val(nextLogId);
+                
+                                    const clickedDate = dayjs(info.date);
+                                    const formattedDate = clickedDate.format('YYYY-MM-DD');
+                                    $("#applieddate").val(formattedDate);
+
+                                   
+                
+                                    $('#appealmodal').modal('show');
+                                }
+                            });
+
+                            $(info.el).append(appealaddb);
+                            $(appealaddb).css({
+                                position: 'absolute',
+                                left: 'auto',
+                                right: 'auto',
+                                top: '0',
+                                'z-index': '999',
+                                'background-color': 'white',
+                                'color': 'red'
+                                });
+                            
+                            $(appealaddb).addClass('d-flex justify-content-center align-items-center');
+                        }
+                    } else if (info.date.getDay() === 0) { // Sunday
+                        $(info.el).css('background-color', '#B3CCFF'); 
+                    } else if (info.date.getDay() === 6) { // Saturday
+                        $(info.el).css('background-color', '#B3CCFF'); 
+                    }
+                 else {
+                        // $(info.el).css('background-color', 'white');
+                      }                     
+                    },
+                    
+
+                   
+                    
+                  
+                    dateClick: function(info) {
+                        
+                        const today = dayjs();
+                        const clickedDate = dayjs(info.date);
+                      
+                        // check if the clicked date's status is "approve"
+                        var appliedDates = [];
+                        var statuses = [];
+
+                       
+                          
+                        for (let i = 0; i < data['appeals'].length; i++) {
+                          var appeals = data['appeals'][i];
+                          var appliedDate = appeals['applied_date'];
+                          var status = appeals['status'];
+                          appliedDates.push(appliedDate);
+                          statuses.push(status);
+                        }
+                        const formattedDate = clickedDate.format('YYYY-MM-DD');
+                        if (appliedDates.includes(formattedDate) && statuses[appliedDates.indexOf(formattedDate)] === 'approve') {
+                            // show the view appeal modal
+                            $('#addLogModal').modal('show');
+                            const formattedDate = clickedDate.format('DD-MM-YYYY');
+                            $("#dateaddlog").val(formattedDate);
+                           
+                            return;
+                        }
+                        
+                      
+                        // check if the clicked date is within the last 2 days before the current date
+                        // and if the cell already has an appeal button
+                        if ((clickedDate.diff(today, 'day') < -2 || clickedDate.isAfter(today, 'day')) &&
+                        ($(info.dayEl).find('.appeal-add-button, .appeal-view-button').length == 0)) {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Oops...',
+                                text: 'You can only add logs for the current and past 2 days!',
+                            });
+                        return;
+                        }
+                        if ((clickedDate.diff(today, 'day') < -2 || clickedDate.isAfter(today, 'day')) &&
+                            ($(info.dayEl).find('.appeal-add-button, .appeal-view-button').length !== 0)) {
+                            
+                          return;
+                        }
+                      
+                        // show the add log modal
+                        $('#addLogModal').modal('show');
+                        $("#dateaddlog").val(formattedDate);
+                      },
+                      
+                      
+                    
+                      
+                    
+                    
+                  
                 // original code
                 // dateClick: function(info) {
 
                 //     $('#addLogModal').modal('show');
 
-                //     const formatedDate = dayjs(info.dateStr).format("DD-MM-YYYY")
-                //         // console.log(formatedDate);
-                //         // console.log(info.dateStr);
 
-                //     $("#dateaddlog").val(formatedDate);
-                // },
-
-                dateClick: function (info) {
-                    const today = dayjs();
-                    const clickedDate = dayjs(info.date);
-
+                // dateClick: function(info) {
+                //     const today = dayjs();
+                //     const clickedDate = dayjs(info.date);
+                  
                     // check if the clicked date is within the last 2 days before the current date
-                    if (
-                        clickedDate.diff(today, "day") < -2 ||
-                        clickedDate.isAfter(today, "day")
-                    ) {
-                        Swal.fire({
-                            icon: "error",
-                            title: "Error",
-                            text: "You can only select the current date and 2 days before.",
-                        });
-                        return;
-                    }
-
+                    // if (clickedDate.diff(today, 'day') < -2 || clickedDate.isAfter(today, 'day')) {
+                    //   Swal.fire({
+                    //     icon: 'error',
+                    //     title: 'Error',
+                    //     text: 'You can only select the current date and 2 days before.'
+                    //   });
+                    //   return;
+                    // }
+                  
                     // show the modal and set the date
-                    $("#addLogModal").modal("show");
-                    const formattedDate = clickedDate.format("DD-MM-YYYY");
-                    $("#dateaddlog").val(formattedDate);
-                },
-                // retrieve the value of the hidden input field containing the user id
-
-                // dateClick: function(info) {
-                //     const userId = $('#idtesting123').val();
-                //     const appealDate = $('#appeal_Date').val();
-                //     const today = dayjs();
-                //     const clickedDate = dayjs(info.date);
-
-                //     if (userId === 'approve') {
-                //         // Only allow the clicked date that matches appealDate or is within the last two days before today
-                //         const allowedStartDate = today.subtract(2, 'day');
-                //         if (clickedDate.isBefore(allowedStartDate) || clickedDate.isAfter(today)) {
-                //             if (clickedDate.format('YYYY-MM-DD') !== appealDate) {
-                //                 $('#appealmodal').modal('show');
-                //                 return;
-                //             }
-                //         }
-                //         if (clickedDate.format('YYYY-MM-DD') === appealDate) {
-                //             $('#addLogModal').modal('show');
-                //             const formattedDate = clickedDate.format('DD-MM-YYYY');
-                //             $("#dateaddlog").val(formattedDate);
-                //         } else {
-                //             $('#addLogModal').modal('show');
-                //             const formattedDate = clickedDate.format('DD-MM-YYYY');
-                //             $("#dateaddlog").val(formattedDate);
-                //         }
-                //     } else {
-                //         // Check if the clicked date is within the allowed range
-                //         const allowedStartDate = today.subtract(2, 'day');
-                //         if (clickedDate.isBefore(allowedStartDate) || clickedDate.isAfter(today)) {
-                //             // Display an error message if the clicked date is outside the allowed range
-                //             Swal.fire({
-                //                 icon: 'error',
-                //                 title: 'Error',
-                //                 text: 'You can only select the current date and 2 days before.'
-                //             });
-                //             return;
-                //         } else if (clickedDate.isAfter(today)) {
-                //             // Display an error message if the clicked date is after the current date
-                //             Swal.fire({
-                //                 icon: 'error',
-                //                 title: 'Error',
-                //                 text: 'You can only select the current date and 2 days before.'
-                //             });
-                //             return;
-                //         } else {
-                //             // Show the modal and set the date if the clicked date is within the allowed range
-                //             $('#addLogModal').modal('show');
-                //             const formattedDate = clickedDate.format('DD-MM-YYYY');
-                //             $("#dateaddlog").val(formattedDate);
-                //         }
-                //     }
-                // },
-
-                // dateClick: function(info) {
-                //     const userId = $('#idtesting123').val();
-                //     const appealDate = $('#appeal_Date').val();
-                //     const today = dayjs();
-                //     const clickedDate = dayjs(info.date);
-
-                //     if (userId === 'approve') {
-                //         // Only allow the clicked date that matches appealDate or is within the last two days before today
-                //         const allowedStartDate = today.subtract(2, 'day');
-                //         if (clickedDate.isBefore(allowedStartDate) || clickedDate.isAfter(today)) {
-                //             if (clickedDate.format('YYYY-MM-DD') !== appealDate) {
-                //                 $('#appealmodal').modal('show');
-                //                 return;
-                //             }
-                //         }
-                //         if (clickedDate.format('YYYY-MM-DD') === appealDate) {
-                //             $('#addLogModal').modal('show');
-                //             const formattedDate = clickedDate.format('DD-MM-YYYY');
-                //             $("#dateaddlog").val(formattedDate);
-                //         } else {
-                //             $('#addLogModal').modal('show');
-                //             const formattedDate = clickedDate.format('DD-MM-YYYY');
-                //             $("#dateaddlog").val(formattedDate);
-                //         }
-                //     } else {
-                //         // Check if the clicked date is within the allowed range
-                //         const allowedStartDate = today.subtract(2, 'day');
-                //         if (clickedDate.isBefore(allowedStartDate) || clickedDate.isAfter(today)) {
-                //             // Display an error message if the clicked date is outside the allowed range
-                //             Swal.fire({
-                //                 icon: 'error',
-                //                 title: 'Error',
-                //                 text: 'You can only select the current date and 2 days before.'
-                //             });
-                //             return;
-                //         } else if (clickedDate.isAfter(today)) {
-                //             // Display an error message if the clicked date is after the current date
-                //             Swal.fire({
-                //                 icon: 'error',
-                //                 title: 'Error',
-                //                 text: 'You can only select the current date and 2 days before.'
-                //             });
-                //             return;
-                //         } else {
-                //             // Show the modal and set the date if the clicked date is within the allowed range
-                //             $('#addLogModal').modal('show');
-                //             const formattedDate = clickedDate.format('DD-MM-YYYY');
-                //             $("#dateaddlog").val(formattedDate);
-                //         }
-                //     }
-                // },
-
-                //     dateClick: function(info) {
-                //     const today = dayjs();
-                //     const minDate = today.subtract(2, 'day'); // Set the minimum date to 2 days ago
-
-                //     // check if the clicked date is earlier than the minimum date
-                //     if (dayjs(info.date).isBefore(minDate, 'day')) {
-                //         alert("You can only select dates up to 48 hours from now.");
-                //         return;
-                //     }
-
-                //     // show the modal and set the date
                 //     $('#addLogModal').modal('show');
-                //     const formattedDate = dayjs(info.dateStr).format('DD-MM-YYYY');
+                //     const formattedDate = clickedDate.format('DD-MM-YYYY');
                 //     $("#dateaddlog").val(formattedDate);
                 //   },
+                // retrieve the value of the hidden input field containing the user id
+               
 
-                // dateClick: function(info) {
-                //     const selectedDate = dayjs(info.date);
-                //     const currentDate = dayjs();
 
-                //     // Check if the selected date is not more than 2 days from the current date
-                //     if (selectedDate.diff(currentDate, 'day') > 2) {
-                //         alert("You can only select dates up to 2 days from today.");
-                //         return;
-                //     }
+                
+          
+                eventClick: function(info) {
 
-                //     // Check if the selected date is not in the past
-                //     if (selectedDate.diff(currentDate, 'hour') < -48) {
-                //         alert("You cannot select a date that is 48 hours in the past.");
-                //         return;
-                //     }
-
-                //     $('#addLogModal').modal('show');
-
-                //     const formattedDate = selectedDate.format("DD-MM-YYYY");
-                //     $("#dateaddlog").val(formattedDate);
-                // },
-
-                // dayRender: function(info) {
-                //     const currentDate = dayjs();
-                //     const selectedDate = dayjs(info.date);
-                //     const daysDiff = selectedDate.diff(currentDate, 'day');
-
-                //     // Disable dates more than 2 days in the future or more than 48 hours in the past
-                //     if (daysDiff > 2 || daysDiff < -3 || daysDiff === -3 && selectedDate.hour() < currentDate.hour()) {
-                //         info.el.classList.add('fc-disabled-day');
-                //     }
-                // },
-
-                eventClick: function (info) {
                     info.jsEvent.preventDefault();
 
                     function getEvents(id) {
@@ -2312,7 +2230,12 @@ $(document).ready(function () {
     //     format: 'yyyy-mm-dd'
     // });
 
-    $(function () {
+    $(document).on('click', '.add-appeal-btn', function () {
+        // Code to add hours here
+        alert("testing123");
+      });
+
+    $(function() {
         // Initialize Datepicker
         $("#dateaddlog").datepicker({
             todayHighlight: true,
@@ -3016,6 +2939,7 @@ $(document).on("click", "#confirmsubmitb", function () {
     });
     $("#confirmsubmit").modal("show");
 });
+
 
 function getConfirmSubmit(id) {
     return $.ajax({
