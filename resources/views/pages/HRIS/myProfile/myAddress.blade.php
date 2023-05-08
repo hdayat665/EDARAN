@@ -1,9 +1,13 @@
+<head>
+  <link rel="stylesheet" type="text/css" href="assets/css/customaddresstableeditemployee.css">
+</head>
+
 <div class="tab-pane fade" id="default-tab-3">
     <div class="row p-2">
         <button data-bs-toggle="modal" data-bs-target="#modaladdaddress"data-type="add" class="btn btn-primary col-sm-2"><i class="fa fa-plus"></i> New Address</button>
     </div>
     <div class="row p-2">
-        <table id="profileAddress" style="width: 100%" class="table table-striped align-middle">
+        <table id="profileAddress" class="table table-striped align-middle">
             <thead>
                 <tr>
                     <th class="text-nowrap">No</th>
@@ -57,7 +61,7 @@
                 @endif
                 <span style="display: none"><input type="text" id="addressId" value="{{$addressId}}"></span>
             </tbody>
-        </table>
+        </table>  
     </div>
     <div class="row p-2">
         <div class="modal-footer">
