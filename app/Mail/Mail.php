@@ -72,6 +72,16 @@ class Mail extends Mailable
             $view = 'emails.claim.CAApproval';
         } else if ($data['typeEmail'] == 'approvalCAFinanceApproval') {
             $view = 'emails.claim.approvalCAFinanceApproval';
+        }else if ($data['typeEmail'] == 'emailToRecommenderLeave') {
+            $view = 'emails.leave.viewRecommenderLeave';
+        }else if ($data['typeEmail'] == 'emailToApproverLeave') {
+            $view = 'emails.leave.viewApproverLeave';
+        }else if ($data['typeEmail'] == 'emailToRejectedLeave') {
+            $view = 'emails.leave.viewRejectedLeave';
+        }else if ($data['typeEmail'] == 'emailToRejectedLeaveHod') {
+            $view = 'emails.leave.viewRejectedLeaveHod';
+        }else if ($data['typeEmail'] == 'emailToApprovedLeave') {
+            $view = 'emails.leave.viewApprovedLeave';
         }
 
         // $address = 'janeexampexample@example.com';
