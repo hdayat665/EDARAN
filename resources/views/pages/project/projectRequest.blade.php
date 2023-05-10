@@ -1,7 +1,7 @@
 @extends('layouts.dashboardTenant')
 @section('content')
     <div id="content" class="app-content">
-        <h1 class="page-header">Project Registration <small>| Project Request </small></h1>
+        <h1 class="page-header">Project Management <small>| Project Request </small></h1>
         <div class="panel panel" id="requestProjectJs">
             <div class="panel-body">
                 <table id="data-table-projectrequest" class="table table-striped table-bordered align-middle">
