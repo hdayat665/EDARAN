@@ -84,7 +84,7 @@
                     </div>
                     <div class="col-md-3">
                         <select class="form-select" id="accom">
-                            <option class="form-label" value="" selected>Please Choose</option>
+                            <option class="form-label" value="" selected>PLEASE CHOOSE</option>
                             <option class="form-label" value="hotel" >Hotel</option>
                             <option class="form-label" value="lodging">Lodging</option>
                         </select>

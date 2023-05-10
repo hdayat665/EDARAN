@@ -1,0 +1,12 @@
+#profileAddress th:first-child,
+#profileAddress td:first-child {
+    width: 0%;
+}
+#profileAddress th:nth-child(2),
+#profileAddress td:nth-child(2) {
+    width: 10%;
+}
+#profileAddress th:nth-child(3),
+#profileAddress td:nth-child(3) {
+    width: 50%;
+}

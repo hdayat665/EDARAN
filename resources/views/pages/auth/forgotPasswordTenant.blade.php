@@ -15,12 +15,13 @@
                         <label for="recipient-name" class="col-form-label">Working Email</label>
                         <input type="text" class="form-control" name="username">
                     </div>
-                </form>
+                
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 <button id="forgotPassEmail" class="btn btn-primary">Submit</button>
             </div>
+            </form>
         </div>
     </div>
 </div>

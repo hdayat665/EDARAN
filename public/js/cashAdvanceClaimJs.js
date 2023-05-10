@@ -2,7 +2,7 @@ $(document).ready(function () {
     $("#projectTable").DataTable({});
     $(document).on("change", "#toca", function () {
         $("input").val("");
-
+ 
         if ($(this).val() == "1") {
             $(".PO").show();
             $(".MOT").show();
@@ -400,6 +400,25 @@ $(document).ready(function () {
                     : "";
             },
         });
+    });
+    $(document).on("change", "#locationShow", function () {
+  
+        if ($(this).val() === 'other') {
+            $("#otherlocation").show();
+        } else {
+            $("#otherlocation").hide();
+        }
+    
+    });
+
+    $(document).on("change", "#locationShow2", function () {
+  
+        if ($(this).val() === 'other') {
+            $("#otherlocation2").show();
+        } else {
+            $("#otherlocation2").hide();
+        }
+    
     });
 
     $(document).on("change", "#project", function () {

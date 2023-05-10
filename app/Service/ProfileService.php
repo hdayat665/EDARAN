@@ -514,90 +514,90 @@ class ProfileService
     }
 
     public function addCompanion($r)
-{
-    $input = $r->input();
+    {
+        $input = $r->input();
 
-    $id = Auth::user()->id;
+        $id = Auth::user()->id;
 
-    $companion = UserCompanion::where('user_id', $id)->count();
+        $companion = UserCompanion::where('user_id', $id)->count();
 
-    if ($companion >= 4) {
-        $data['status'] = config('app.response.error.status');
-        $data['type'] = config('app.response.error.type');
-        $data['title'] = config('app.response.error.title');
-        $data['msg'] = 'Max Companion can add only 4';
-    } else {
-        if ($_FILES['idFile']['name']) {
-            $idAttachment = upload($r->file('idFile'));
-            $input['idFile'] = $idAttachment['filename'];
-
-            if (!$input['idFile']) {
-                unset($input['idFile']);
-            }
-        }
-
-        if ($_FILES['marrigeCert']['name']) {
-            $marrigeCert = upload($r->file('marrigeCert'));
-            $input['marrigeCert'] = $marrigeCert['filename'];
-
-            if (!$input['marrigeCert']) {
-                unset($input['marrigeCert']);
-            }
-        }
-
-
-        if (isset($_FILES['okuID']['name'])) {
-            $idOKU = upload($r->file('okuID'));
-            $input['okuID'] = $idOKU['filename'];
+        if ($companion >= 4) {
+            $data['status'] = config('app.response.error.status');
+            $data['type'] = config('app.response.error.type');
+            $data['title'] = config('app.response.error.title');
+            $data['msg'] = 'Max Companion can add only 4';
         } else {
-            $input['okuID'] = null;
-        }
+            if ($_FILES['idFile']['name']) {
+                $idAttachment = upload($r->file('idFile'));
+                $input['idFile'] = $idAttachment['filename'];
+
+                if (!$input['idFile']) {
+                    unset($input['idFile']);
+                }
+            }
+
+            if ($_FILES['marrigeCert']['name']) {
+                $marrigeCert = upload($r->file('marrigeCert'));
+                $input['marrigeCert'] = $marrigeCert['filename'];
+
+                if (!$input['marrigeCert']) {
+                    unset($input['marrigeCert']);
+                }
+            }
+
+
+            if (isset($_FILES['okuID']['name'])) {
+                $idOKU = upload($r->file('okuID'));
+                $input['okuID'] = $idOKU['filename'];
+            } else {
+                $input['okuID'] = null;
+            }
+            
+            
+            if(!isset($input['dateJoined']))
+            {
+                $input['dateJoined'] = NULL;
+            }
+
+            $input['user_id'] = $id;
+            $input['dateJoined'] = dateFormat($input['dateJoined']);
+
+
+            if(!isset($input['expiryDate']))
+            {
+                $input['expiryDate'] = NULL;
+            }else {
+                $input['expiryDate'] = dateFormat($input['expiryDate']);
+            }
+
+
         
-          
-        if(!isset($input['dateJoined']))
-        {
-            $input['dateJoined'] = NULL;
+
+            $input['DOM'] = dateFormat($input['DOM']);
+            $input['DOB'] = dateFormat($input['DOB']);
+            $input['mainCompanion'] = isset($input['mainCompanion']) ? 1 : 0;
+            $companion = UserCompanion::create($input);
+
+            // Set the main companion if the checkbox is checked
+            if ($r->input('mainCompanion')) {
+                // Set the mainCompanion attribute of the new companion to 1
+                $companion->mainCompanion = 1;
+                $companion->save();
+
+                // Set the mainCompanion attribute of all other companions to 0
+                UserCompanion::where('user_id', $id)
+                    ->where('id', '<>', $companion->id)
+                    ->update(['mainCompanion' => 0]);
+            }
+
+            $data['status'] = config('app.response.success.status');
+            $data['type'] = config('app.response.success.type');
+            $data['title'] = config('app.response.success.title');
+            $data['msg'] = 'New Companion is created.';
         }
 
-        $input['user_id'] = $id;
-        $input['dateJoined'] = dateFormat($input['dateJoined']);
-
-
-        if(!isset($input['expiryDate']))
-        {
-            $input['expiryDate'] = NULL;
-        }else {
-            $input['expiryDate'] = dateFormat($input['expiryDate']);
-        }
-
-
-       
-
-        $input['DOM'] = dateFormat($input['DOM']);
-        $input['DOB'] = dateFormat($input['DOB']);
-        $input['mainCompanion'] = isset($input['mainCompanion']) ? 1 : 0;
-        $companion = UserCompanion::create($input);
-
-        // Set the main companion if the checkbox is checked
-        if ($r->input('mainCompanion')) {
-            // Set the mainCompanion attribute of the new companion to 1
-            $companion->mainCompanion = 1;
-            $companion->save();
-
-            // Set the mainCompanion attribute of all other companions to 0
-            UserCompanion::where('user_id', $id)
-                ->where('id', '<>', $companion->id)
-                ->update(['mainCompanion' => 0]);
-        }
-
-        $data['status'] = config('app.response.success.status');
-        $data['type'] = config('app.response.success.type');
-        $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'New Companion is created.';
+        return $data;
     }
-
-    return $data;
-}
 
 
     public function deleteCompanion($id = '')
@@ -779,8 +779,6 @@ class ProfileService
                 unset($input['idFile']);
             }
         }
-
-       
 
         if (isset($_FILES['okuFile']['name'])) {
             $idOKU = upload(request()->file('okuFile'));
@@ -1269,7 +1267,7 @@ class ProfileService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'New address is created';
+        $data['msg'] = 'New Address is created.';
 
         return $data;
     }
@@ -1297,7 +1295,7 @@ class ProfileService
             $data['status'] = config('app.response.success.status');
             $data['type'] = config('app.response.success.type');
             $data['title'] = config('app.response.success.title');
-            $data['msg'] = 'Address Is Updated';
+            $data['msg'] = 'Address is updated.';
         }
 
         return $data;
@@ -1451,7 +1449,7 @@ class ProfileService
             $data['status'] = config('app.response.success.status');
             $data['type'] = config('app.response.success.type');
             $data['title'] = config('app.response.success.title');
-            $data['msg'] = 'Address Is Deleted';
+            $data['msg'] = 'Address is deleted.';
         }
 
         return $data;

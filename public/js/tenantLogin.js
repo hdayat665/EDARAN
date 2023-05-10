@@ -196,20 +196,29 @@ $(document).ready(function () {
             },
         });
     });
-
-    $("#forgotPassEmail").click(function (e) {
-        requirejs(["sweetAlert2"], function (swal) {
-            var data = new FormData(
-                document.getElementById("forgotPassEmailForm")
-            );
-            // var data = $('#tree').jstree("get_selected");
-
+    
+    $("#forgotPassEmailForm").validate({
+        rules: {
+            username: {
+                required: true,
+                email: true
+            },
+        },
+        messages: {
+            username: {
+                required: "Please Insert Working Email",
+                email: "Working Email Does Not Exist"
+            },
+        },
+        submitHandler: function (form) {
+            var data = new FormData(form);
+    
             $.ajax({
                 type: "POST",
                 url: "/forgotPassEmail",
                 data: data,
                 dataType: "json",
-
+    
                 processData: false,
                 contentType: false,
             }).then(function (data) {
@@ -229,8 +238,9 @@ $(document).ready(function () {
                     }
                 });
             });
-        });
+        }
     });
+    
 
     $("#activationButton").click(function (e) {
         $("#activationForm").validate({
