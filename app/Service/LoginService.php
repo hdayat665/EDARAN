@@ -318,7 +318,7 @@ class LoginService
             $response['content2'] = 'Please click the button below to reset your password:';
             $response['resetPassLink'] = env('APP_URL') . '/resetPassView/' . $user->id;
             $response['from'] = env('MAIL_FROM_ADDRESS');
-            $response['nameFrom'] = 'Claim';
+            $response['nameFrom'] = 'Orbit';
             $response['subject'] = 'Orbit Reset Password';
             // $response['typeAttachment'] = "application/pdf";
             //  $response['file'] = \public_path()."/assets/frontend/docs/gambar.jpg";

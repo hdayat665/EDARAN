@@ -241,7 +241,7 @@
             <label class="form-label col-form-label col-md-1">Gender*</label>
             <div class="col-md-2">
                 <select class="form-select" name="gender" required>
-                    <option label="Please Choose " selected="selected"></option>
+                    <option label="PLEASE CHOOSE " selected="selected"></option>
                     <option value="Male" label="Male">Male</option>
                     <option value="Female" label="Female">Female</option>
                     <option value="Prefer" label="Prefer not to say">Prefer not to say</option>

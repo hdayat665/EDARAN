@@ -37,7 +37,7 @@
                            <option class="form-label" value="" >Nurul Ikhlas</option>
                        </select> --}}
                        <select class="form-select" id="employeeid" name="user_id">
-                        <option class="form-label" value="" >Please Choose</option>
+                        <option class="form-label" value="" >PLEASE CHOOSE</option>
                         <?php $employees = getEmployee() ?>
                         @foreach ($employees as $employee)
                         <option value="{{$employee->user_id}}">{{$employee->employeeName}}</option>
