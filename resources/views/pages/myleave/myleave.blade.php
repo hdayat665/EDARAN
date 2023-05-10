@@ -8,7 +8,7 @@
 
             <!-- END breadcrumb -->
             <!-- BEGIN page-header -->
-            <h1 class="page-header" id="myleaveJs"> E-Leave | My Leave</h1>
+            <h1 class="page-header" id="myleaveJs"> eLeave | My Leave</h1>
 
         <div class="row p-2">
             <div class="col-xl-15">

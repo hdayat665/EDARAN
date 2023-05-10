@@ -2,7 +2,7 @@
 
 @section('content')
 <div id="content" class="app-content">
-    <h1 class="page-header">HRIS | Employee Information</h1>
+    <h1 class="page-header">HRMIS | Employee Information</h1>
     <div class="panel panel">
         <div class="panel-heading">
             <a href="/registerEmployee" class="btn btn-primary">+ Register New Employee</a>

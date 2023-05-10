@@ -3,7 +3,7 @@
 @section('content')
 
 <div id="content" class="app-content">
-    <h1 class="page-header">Project Registration | Project Information</h1>
+    <h1 class="page-header">Project Management | Project Information</h1>
     <div class="row" id="projectJs">
         <div class="col-xl-15">
             <ul class="nav nav-tabs">
