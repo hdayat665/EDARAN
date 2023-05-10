@@ -3778,6 +3778,111 @@ $(document).ready(function () {
         });
     });
 
+    
+    $("#timehierarchybutton").click(function (e) {
+        var id = $("#updatetimehierarchy").val();
+        //console.log(id);
+        $("#updatetimehierarchy").validate({
+            // Specify validation rules
+            rules: {
+                tsapprover: "required",
+            },
+
+            messages: {
+                tsapprover: "Pleace Choose Approver",
+            },
+
+            submitHandler: function (form) {
+                requirejs(["sweetAlert2"], function (swal) {
+                    var data = new FormData(
+                        document.getElementById("updatetimehierarchy")
+                    );
+                    var id = $("#hierarchyid").val();
+                    //console.log(id);
+                    // return false;
+
+                    $.ajax({
+                        type: "POST",
+                        url: "/updatetimehierarchy/" + id,
+                        data: data,
+                        dataType: "json",
+
+                        processData: false,
+                        contentType: false,
+                    }).then(function (data) {
+                        swal({
+                            title: data.title,
+                            text: data.msg,
+                            type: data.type,
+                            confirmButtonColor: "#3085d6",
+                            confirmButtonText: "OK",
+                            allowOutsideClick: false,
+                            allowEscapeKey: false,
+                        }).then(function () {
+                            if (data.type == "error") {
+                            } else {
+                                location.reload();
+                            }
+                        });
+                    });
+                });
+            },
+        });
+    });
+
+    $("#timehierarchybutton2").click(function (e) {
+        var id = $("#updatetimehierarchy2").val();
+        //console.log(id);
+        $("#updatetimehierarchy2").validate({
+            // Specify validation rules
+            rules: {
+                tsapprover2: "required",
+            },
+
+            messages: {
+                tsapprover2: "Pleace Choose Approver",
+            },
+
+            submitHandler: function (form) {
+                requirejs(["sweetAlert2"], function (swal) {
+                    var data = new FormData(
+                        document.getElementById("updatetimehierarchy2")
+                    );
+                    var id = $("#hierarchyid").val();
+                    //console.log(id);
+                    // return false;
+
+                    $.ajax({
+                        type: "POST",
+                        url: "/updatetimehierarchy2/" + id,
+                        data: data,
+                        dataType: "json",
+
+                        processData: false,
+                        contentType: false,
+                    }).then(function (data) {
+                        swal({
+                            title: data.title,
+                            text: data.msg,
+                            type: data.type,
+                            confirmButtonColor: "#3085d6",
+                            confirmButtonText: "OK",
+                            allowOutsideClick: false,
+                            allowEscapeKey: false,
+                        }).then(function () {
+                            if (data.type == "error") {
+                            } else {
+                                location.reload();
+                            }
+                        });
+                    });
+                });
+            },
+        });
+    });
+
+
+
     $("#cahierarchybutton").click(function (e) {
         var id = $("#hierarchyid").val();
         //console.log(id);
@@ -4083,6 +4188,7 @@ $(document).ready(function () {
             $("#okucard1").prop("readonly", true);
             $("#okucard1").val("");
 
+
             // $("#okuattach").css("readonly", false);
             // $("#okuattach").css("pointer-events", "auto");
 
@@ -4354,6 +4460,7 @@ $(document).ready(function () {
             $("#age7").val(currentAge);
         }
     });
+
 });
 function dataURLtoFile(dataurl, filename) {
     var arr = dataurl.split(","),
@@ -4442,6 +4549,10 @@ $("#eclaimapprover").picker({ search: true });
 
 // search bar in select box (Cash Advance)
 $("#caapprover").picker({ search: true });
+
+// search bar in select box (Timesheet)
+$("#tsapprover").picker({ search: true });
+$("#tsapprover2").picker({ search: true });
 
 // search bar in select box (Employment Information)
 // $('#role').picker({ search: true });
