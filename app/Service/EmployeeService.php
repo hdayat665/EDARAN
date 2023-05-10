@@ -31,7 +31,7 @@ class EmployeeService
     {
         $input = $r->input();
 
-        $user = Users::where([['tenant_id', Auth::user()->tenant_id], ['username', $r['username']], ['status', 'active']])->first();
+        $user = Users::where([['tenant_id', Auth::user()->tenant_id], ['username', $r['username']], ['status', 'Active']])->first();
 
         if ($user) {
             $data['status'] = false;
@@ -104,7 +104,7 @@ class EmployeeService
     { 
         $input = $r->input();
 
-        $status['status'] = 'terminate';
+        $status['status'] = 'Deactivate';
 
         // check attachment
         if ($r->hasfile('file')) {
@@ -526,11 +526,11 @@ class EmployeeService
 
             // usik sini
             if($input['mainCompanion']) {
-                $companion->mainCompanion = 6;
-                $companion->save();
+                $companion -> mainCompanion = 6;
+                $companion -> save();
                 }else {
-                    $companion->mainCompanion = 4;
-                $companion->save();
+                    $companion -> mainCompanion = 4;
+                $companion -> save();
                 }
             
 
@@ -966,8 +966,8 @@ class EmployeeService
             }
 
             $input['tenant_id'] = Auth::user()->tenant_id;
-            // $input['status'] = 'inactive';
-            $input['status'] = 'active';
+            // $input['status'] = 'inActive';
+            $input['status'] = 'Active';
             $input['joinedDate'] = date_format(date_create($input['joinedDate']), 'y-m-d');
             Employee::create($input);
 
@@ -979,7 +979,7 @@ class EmployeeService
             $jh['effectiveDate'] = $input['joinedDate'];
             JobHistory::create($jh);
 
-            $user['status'] = 'active';
+            $user['status'] = 'Active';
             User::where('id', $input['user_id'])->update($user);
 
             $ls = new LoginService;
@@ -1000,7 +1000,7 @@ class EmployeeService
     public function cancelTerminateEmployment($id)
     {
         $update = [
-            'status' => 'active'
+            'status' => 'Active'
         ];
 
         $user = Employee::where('user_id',$id)->get();
@@ -1210,7 +1210,7 @@ class EmployeeService
         $data['status'] = true;
         $data['title'] = 'Success';
         $data['type'] = 'success';
-        $data['msg'] = 'Success Create Address';
+        $data['msg'] = 'Success Upload Profile Picture';
         $data['data'] = UserProfile::where('user_id', $input['user_id'])->first();
 
         return $data;
@@ -1234,7 +1234,7 @@ class EmployeeService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'New Address Is Created';
+        $data['msg'] = 'New Address is created.';
 
         return $data;
     }
@@ -1263,7 +1263,7 @@ class EmployeeService
             $data['status'] = config('app.response.success.status');
             $data['type'] = config('app.response.success.type');
             $data['title'] = config('app.response.success.title');
-            $data['msg'] = 'Address type is updated!';
+            $data['msg'] = 'Address is updated.';
         }
 
         return $data;
@@ -1284,7 +1284,7 @@ class EmployeeService
             $data['status'] = config('app.response.success.status');
             $data['type'] = config('app.response.success.type');
             $data['title'] = config('app.response.success.title');
-            $data['msg'] = 'Address Is Deleted';
+            $data['msg'] = 'Address is deleted.';
         }
 
         return $data;
