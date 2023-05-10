@@ -5,7 +5,7 @@
             <label class="form-label col-form-label col-md-1">Company*</label>
             <div class="col-md-5">
                 <select class="form-select" name="company" required>
-                    <option label="Please Choose" selected="selected"> </option>
+                    <option label="PLEASE CHOOSE" selected="selected"> </option>
                     <option value="1" label="MIDC Technology Sdn Bhd">MIDC Technology Sdn Bhd</option>
                     <option value="2" label="Edaran Trade Network Sdn Bhd">Edaran Trade Network Sdn Bhd</option>
                     <option value="3" label="Edaran Communications Sdn Bhd">Edaran Communications Sdn Bhd</option>
@@ -24,7 +24,7 @@
             <label class="form-label col-form-label col-md-1">Department*</label>
             <div class="col-md-5">
                 <select class="form-select" name="department" required>
-                    <option label="Please Choose" selected="selected"> </option>
+                    <option label="PLEASE CHOOSE" selected="selected"> </option>
                     <option value="1" label="MIDC Technology Sdn Bhd">Business Development</option>
                     <option value="2" label="System Integration">System Integration</option>
                     <option value="3" label="Group Corporate Planning">Group Corporate Planning </option>
@@ -43,7 +43,7 @@
             <label class="form-label col-form-label col-md-1">Unit*</label>
             <div class="col-md-5">
                 <select class="form-select" name="unit" required>
-                    <option label="Please Choose" selected="selected"> </option>
+                    <option label="PLEASE CHOOSE" selected="selected"> </option>
                     <option value="1" label="Application Unit">Application Unit</option>
                     <option value="2" label="Group Internal Audit">Group Internal Audit</option>
                     <option value="2" label="Infrastructure Unit">Infrastructure Unit</option>
@@ -54,7 +54,7 @@
             <label class="form-label col-form-label col-md-1">Branch*</label>
             <div class="col-md-5">
                 <select class="form-select" name="branch" required>
-                    <option label="Please Choose" selected="selected"> </option>
+                    <option label="PLEASE CHOOSE" selected="selected"> </option>
                     <option value="1" label="Office">Office</option>
                     <option value="2" label="Putrajaya">Putrajaya</option>
                     <option value="2" label="Kuala Lumpur">Kuala Lumpur</option>
@@ -68,7 +68,7 @@
             <label class="form-label col-form-label col-md-1">Job Grade*</label>
             <div class="col-md-5">
                 <select class="form-select" name="jobGrade" required>
-                    <option label="Please Choose" selected="selected"> </option>
+                    <option label="PLEASE CHOOSE" selected="selected"> </option>
                     <option value="1" label="Director">Director</option>
                     <option value="2" label="Senior">Senior</option>
                     <option value="2" label="Manager Unit">Manager</option>
@@ -79,7 +79,7 @@
             <label class="form-label col-form-label col-md-1">Designation*</label>
             <div class="col-md-5">
                 <select class="form-select" name="designation" required>
-                    <option label="Please Choose" selected="selected"> </option>
+                    <option label="PLEASE CHOOSE" selected="selected"> </option>
                     <option value="1" label="Customer Care">Customer Care</option>
                     <option value="2" label="PutraAdministratorjaya">Administrator</option>
                     <option value="2" label="Account manager">Account manager</option>
@@ -93,7 +93,7 @@
             <label class="form-label col-form-label col-md-1">Employment Type*</label>
             <div class="col-md-5">
                 <select class="form-select" name="employmentType" required>
-                    <option label="Please Choose" selected="selected"> </option>
+                    <option label="PLEASE CHOOSE" selected="selected"> </option>
                     <option value="1" label="Director">Director</option>
                     <option value="2" label="Senior">Senior</option>
                     <option value="2" label="Manager Unit">Manager</option>
@@ -104,7 +104,7 @@
             <label class="form-label col-form-label col-md-1">Report To*</label>
             <div class="col-md-5">
                 <select class="form-select" name="supervisor" required>
-                    <option label="Please Choose" selected="selected"> </option>
+                    <option label="PLEASE CHOOSE" selected="selected"> </option>
                     <option value="1" label="Customer Care">Customer Care</option>
                     <option value="2" label="Administrator">Administrator</option>
                     <option value="2" label="Account manager">Account manager</option>
