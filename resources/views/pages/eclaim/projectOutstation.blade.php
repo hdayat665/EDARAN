@@ -35,7 +35,18 @@
             <label class="form-label">Destination</label>
         </div>
         <div class="col-md-8">
-            <select class="form-select" id="locationShow" name="project_location_id" readonly></select>
+            <select class="form-select" id="locationShow" name="project_location_id" readonly>
+                <option class="form-label" value="">Please Choose</option>
+                <option class="form-label" value="other">Others</option>
+            </select>
+        </div>
+    </div>
+    <div class="row p-2" id="otherlocation" style="display:none">
+        <div class="col-md-4">
+            <label class="form-label">Other Location</label>
+        </div>
+        <div class="col-md-8">
+            <input type="text" name="otherlocation2" class="form-control">
         </div>
     </div>
     <div class="row p-2">

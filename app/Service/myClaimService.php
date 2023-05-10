@@ -453,6 +453,7 @@ class myClaimService
         $cashAdvance['date_require_cash'] = $input['date_require_cash'] ?? '';
         $cashAdvance['status'] = $status ?? '';
         $cashAdvance['amount'] = $input['amount'] ?? '';
+        $cashAdvance['otherlocation'] = $input['otherlocation'] ?? $input['otherlocation2'] ?? '';
 
         if ($_FILES['file_upload']['name']) {
             $filename = upload($r->file('file_upload'));
