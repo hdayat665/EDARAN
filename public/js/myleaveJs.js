@@ -180,10 +180,6 @@ $(document).ready(function () {
         todayHighlight: true,
         autoclose: true,
         format: "yyyy-mm-dd",
-        beforeShowDay: function (date) {
-            var day = date.getDay();
-            return [day != 0 && day != 6];
-        },
     });
 
     $("#datepicker-filter").datepicker({

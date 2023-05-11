@@ -29,7 +29,7 @@
 					<div class="row p-2">
 						<table  id="tabletypes"  class="table table-striped table-bordered align-middle">
 							<thead>
-							<tr>	
+							<tr>
 								<th class="text-nowrap" data-orderable="false" >Action</th>
 								<th class="text-nowrap" data-orderable="false" >Status</th>
 								<th class="text-nowrap">Leave Types Code</th>
@@ -50,7 +50,7 @@
 											<a href="javascript:;" id="deleteButton" data-id="{{ $t->id }}" class="dropdown-item" ><i class="fa fa-trash" aria-hidden="true"></i> Delete</a>
 										</div>
 									</td>
-									<td> 
+									<td>
 										<div class="form-check form-switch">
                                                 <input class="form-check-input statusCheck" name="mainCompanion" type="checkbox" data-id="{{ $t->id }}" id="updateStatus"
                                                 {{ $t->status == '1' ? 'checked' : '' }}>
@@ -90,12 +90,17 @@
 							<input type="text" class="form-control" id="leave_types" name="leave_types" placeholder="LEAVE TYPE" style="text-transform:uppercase">
 							</div>
 
+                            <div class="mb-3">
+                                <label for="duration" class="form-label">Duration*</label>
+                                <input type="text" class="form-control" id="duration" name="duration" value = "0">
+                            </div>
+
 							<div class="mb-3">
 								<div class="row g-3 align-items-center">
 									<div class="col-auto">
-										<input class="form-check-input" type="checkbox" value="" id="checkallowrequest" checked> 
+										<input class="form-check-input" type="checkbox" value="" id="checkallowrequest" checked>
 									</div>
-									
+
 										<div class="col-auto">
 											<p class="col-form-label">To be Applied</p>
 										</div>
@@ -130,7 +135,7 @@
 						</button>
 					</div>
 					<div class="modal-body">
-						<form id="updateForm"> 
+						<form id="updateForm">
 							<div class="mb-3">
 							<label for="leavetype" class="form-label">Leave Type Code*</label>
 							<input type="text" class="form-control" id="leavetypescode"  name="leavetypescode" placeholder="LEAVE CODE" style="text-transform:uppercase">
@@ -144,9 +149,9 @@
 							<div class="mb-3">
 								<div class="row g-3 align-items-center">
 									<div class="col-auto">
-										<input class="form-check-input" type="checkbox" value="" id="ucheckallowrequest" checked> 
+										<input class="form-check-input" type="checkbox" value="" id="ucheckallowrequest" checked>
 									</div>
-									
+
 										<div class="col-auto">
 											<p class="col-form-label">To be Applied</p>
 										</div>

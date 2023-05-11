@@ -281,6 +281,42 @@ class MailService
 
     }
 
+    public function emailToApproveLeaveNoCommender($data)
+    {
+        $user = Employee::select('employment.*', 'department.departmentName', 'designation.designationName')
+                ->join('designation', 'employment.designation', '=', 'designation.id')
+                ->join('department', 'employment.department', '=', 'department.id')
+                ->where('employment.user_id', $data->up_user_id)
+                ->where('employment.tenant_id', Auth::user()->tenant_id)
+                ->first();
+
+        $approvedbyLeave =
+        Employee::where([
+            ['user_id', '=', $data->up_approvedby_id],
+            ['tenant_id', '=', Auth::user()->tenant_id],
+
+        ])->first();
+
+        if($user && $approvedbyLeave){
+
+            $receiver = $approvedbyLeave->workingEmail;
+            $response['typeEmail'] = 'emailToApproveLeaveNoCommender';
+
+            $response['from'] = env('MAIL_FROM_ADDRESS');
+            $response['nameFrom'] = $user->employeeName;
+            $response['subject'] = 'Leave Application';
+            $response['title'] = 'Leave Application';
+            $response['approvedby'] = $approvedbyLeave->employeeName;
+            $response['employeeName'] = $user->employeeName;
+            $response['departmentName'] = $user->departmentName;
+            $response['designationName'] = $user->designationName;
+            $response['data'] = $data;
+
+            Mail::to($receiver)->send(new MailMail($response));
+        }
+
+    }
+
     public function emailToApproverLeave($data)
     {
         $user = Employee::select('employment.*', 'department.departmentName', 'designation.designationName')
@@ -290,26 +326,34 @@ class MailService
                 ->where('employment.tenant_id', Auth::user()->tenant_id)
                 ->first();
 
-        $recommenderLeave =
+        $recommendedby = Employee::select('employment.*', 'department.departmentName', 'designation.designationName')
+                ->join('designation', 'employment.designation', '=', 'designation.id')
+                ->join('department', 'employment.department', '=', 'department.id')
+                ->where('employment.user_id', $data->up_recommendedby_id)
+                ->where('employment.tenant_id', Auth::user()->tenant_id)
+                ->first();
+
+        $approvedbyLeave =
         Employee::where([
             ['user_id', '=', $data->up_approvedby_id],
             ['tenant_id', '=', Auth::user()->tenant_id],
 
         ])->first();
 
-        if($user && $recommenderLeave){
+        if($user && $approvedbyLeave){
 
-            $receiver = $user->workingEmail;
+            $receiver = $approvedbyLeave->workingEmail;
             $response['typeEmail'] = 'emailToApproverLeave';
 
             $response['from'] = env('MAIL_FROM_ADDRESS');
-            $response['nameFrom'] = $user->employeeName;
+            $response['nameFrom'] = $recommendedby->employeeName;
             $response['subject'] = 'Leave Application';
             $response['title'] = 'Leave Application';
-            $response['eleaveapprover'] = $recommenderLeave->employeeName;
-            $response['employeeName'] = $user->employeeName;
-            $response['departmentName'] = $user->departmentName;
-            $response['designationName'] = $user->designationName;
+            $response['eleaveapprover'] = $approvedbyLeave->employeeName;
+            $response['employeeNamex'] = $user->employeeName;
+            $response['employeeName'] = $recommendedby->employeeName;
+            $response['departmentName'] = $recommendedby->departmentName;
+            $response['designationName'] = $recommendedby->designationName;
             $response['data'] = $data;
 
             Mail::to($receiver)->send(new MailMail($response));
@@ -327,25 +371,27 @@ class MailService
                 ->where('employment.tenant_id', Auth::user()->tenant_id)
                 ->first();
 
-        // $approvedLeave =
-        // Employee::where([
-        //     ['user_id', '=', $data->up_approvedby_id],
-        //     ['tenant_id', '=', Auth::user()->tenant_id],
+        $userRecommender = Employee::select('employment.*', 'department.departmentName', 'designation.designationName')
+                ->join('designation', 'employment.designation', '=', 'designation.id')
+                ->join('department', 'employment.department', '=', 'department.id')
+                ->where('employment.user_id', $data->up_recommendedby_id)
+                ->where('employment.tenant_id', Auth::user()->tenant_id)
+                ->first();
 
-        // ])->first();
-
-        if($user){
+        if($user && $userRecommender){
 
             $receiver = $user->workingEmail;
             $response['typeEmail'] = 'emailToRejectedLeave';
 
             $response['from'] = env('MAIL_FROM_ADDRESS');
-            $response['nameFrom'] = $user->employeeName;
+            $response['nameFrom'] = $userRecommender->employeeName;
             $response['subject'] = 'Leave Application';
             $response['title'] = 'Leave Application';
-            $response['employeeName'] = $user->employeeName;
-            $response['departmentName'] = $user->departmentName;
-            $response['designationName'] = $user->designationName;
+            $response['employeeNamex'] = $user->employeeName;
+            $response['usertoreject'] = $user->employeeName;
+            $response['employeeName'] = $userRecommender->employeeName;
+            $response['departmentName'] = $userRecommender->departmentName;
+            $response['designationName'] = $userRecommender->designationName;
             $response['data'] = $data;
 
             Mail::to($receiver)->send(new MailMail($response));
@@ -362,25 +408,26 @@ class MailService
                 ->where('employment.tenant_id', Auth::user()->tenant_id)
                 ->first();
 
-        // $approvedLeave =
-        // Employee::where([
-        //     ['user_id', '=', $data->up_approvedby_id],
-        //     ['tenant_id', '=', Auth::user()->tenant_id],
+        $approvedby = Employee::select('employment.*', 'department.departmentName', 'designation.designationName')
+                ->join('designation', 'employment.designation', '=', 'designation.id')
+                ->join('department', 'employment.department', '=', 'department.id')
+                ->where('employment.user_id', $data->up_approvedby_id)
+                ->where('employment.tenant_id', Auth::user()->tenant_id)
+                ->first();
 
-        // ])->first();
-
-        if($user){
+        if($user && $approvedby){
 
             $receiver = $user->workingEmail;
             $response['typeEmail'] = 'emailToRejectedLeaveHod';
 
             $response['from'] = env('MAIL_FROM_ADDRESS');
-            $response['nameFrom'] = $user->employeeName;
+            $response['nameFrom'] = $approvedby->employeeName;
             $response['subject'] = 'Leave Application';
             $response['title'] = 'Leave Application';
-            $response['employeeName'] = $user->employeeName;
-            $response['departmentName'] = $user->departmentName;
-            $response['designationName'] = $user->designationName;
+            $response['employeeNamex'] = $user->employeeName;
+            $response['employeeName'] = $approvedby->employeeName;
+            $response['departmentName'] = $approvedby->departmentName;
+            $response['designationName'] = $approvedby->designationName;
             $response['data'] = $data;
 
             Mail::to($receiver)->send(new MailMail($response));
@@ -398,18 +445,26 @@ class MailService
                 ->where('employment.tenant_id', Auth::user()->tenant_id)
                 ->first();
 
-        if($user){
+        $approvedby = Employee::select('employment.*', 'department.departmentName', 'designation.designationName')
+                ->join('designation', 'employment.designation', '=', 'designation.id')
+                ->join('department', 'employment.department', '=', 'department.id')
+                ->where('employment.user_id', $data->up_approvedby_id)
+                ->where('employment.tenant_id', Auth::user()->tenant_id)
+                ->first();
+
+        if($user && $approvedby){
 
             $receiver = $user->workingEmail;
             $response['typeEmail'] = 'emailToApprovedLeave';
 
             $response['from'] = env('MAIL_FROM_ADDRESS');
-            $response['nameFrom'] = $user->employeeName;
+            $response['nameFrom'] = $approvedby->employeeName;
             $response['subject'] = 'Leave Application';
             $response['title'] = 'Leave Application';
-            $response['employeeName'] = $user->employeeName;
-            $response['departmentName'] = $user->departmentName;
-            $response['designationName'] = $user->designationName;
+            $response['employeeNamex'] = $user->employeeName;
+            $response['employeeName'] = $approvedby->employeeName;
+            $response['departmentName'] = $approvedby->departmentName;
+            $response['designationName'] = $approvedby->designationName;
             $response['data'] = $data;
 
             Mail::to($receiver)->send(new MailMail($response));

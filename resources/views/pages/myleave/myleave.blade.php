@@ -1,6 +1,13 @@
 @extends('layouts.dashboardTenant')
 
+
 @section('content')
+    <style>
+        .ui-datepicker-week-end{
+            background-color: red !important;
+        }
+    </style>
+
     <!-- BEGIN #content -->
     <div id="content" class="app-content">
         <!-- BEGIN breadcrumb -->
@@ -85,7 +92,7 @@
                                         <thead>
                                             <tr>
                                                 <th width="1%">No.</th>
-                                                <th width="1%">Action</th>
+                                                <th width="1%" data-orderable="false">Action</th>
                                                 <th width="1%">Applied Date</th>
                                                 <th>Type of Leave</th>
                                                 <th>Start Date</th>
@@ -241,7 +248,8 @@
                                         <table id="table-leave2" class="table table-striped table-bordered align-middle">
                                             <thead>
                                                 <tr>
-                                                    <th width="1%">Action</th>
+                                                    <th width="1%">No.</th>
+                                                    <th width="1%" data-orderable="false">Action</th>
                                                     <th width="1%">Applied Date</th>
                                                     <th>Type of Leave</th>
                                                     <th>Start Date</th>
@@ -261,6 +269,7 @@
                                                     $end_date = new DateTime($mh->end_date);
                                                 ?>
                                                 <tr class="odd gradeX">
+                                                    <td>{{ $id }}</td>
                                                     <td>
                                                         <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle">
                                                             <i class="fa fa-cogs"></i> Actions <i class="fa fa-caret-down"></i>
