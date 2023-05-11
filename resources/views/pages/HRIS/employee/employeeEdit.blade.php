@@ -47,7 +47,7 @@
                                 <button class="nav-link text-start border border-1 mt-1 mb-1" id="v-pills-eleave-tab" data-bs-toggle="pill" data-bs-target="#v-pills-eleave" type="button" role="tab" aria-controls="v-pills-eleave" aria-selected="false"><i class="fas fa-calendar-days fa-fw"></i> eLeave</button>
                                 <button class="nav-link text-start border border-1 mt-1 mb-1" id="v-pills-eclaim-tab" data-bs-toggle="pill" data-bs-target="#v-pills-eclaim" type="button" role="tab" aria-controls="v-pills-eclaim" aria-selected="false"><i class="fas fa-calendar-days fa-fw"></i> eClaim</button>
                                 <button class="nav-link text-start border border-1 mt-1 mb-1" id="v-pills-cashadvance-tab" data-bs-toggle="pill" data-bs-target="#v-pills-cashadvance" type="button" role="tab" aria-controls="v-pills-cashadvance" aria-selected="false"><i class="fas fa-calendar-days fa-fw"></i> Cash Advance</button>
-                                <button class="nav-link text-start border border-1 mt-1 mb-1" id="v-pills-entitlement-tab" data-bs-toggle="pill" data-bs-target="#v-pills-entitlement" type="button" role="tab" aria-controls="v-pills-entitlement" aria-selected="false"><i class="fas fa-calendar-days fa-fw"></i> Entitlement</button>
+                                <button class="nav-link text-start border border-1 mt-1 mb-1" id="v-pills-entitlement-tab" data-bs-toggle="pill" data-bs-target="#v-pills-entitlement" type="button" role="tab" aria-controls="v-pills-entitlement" aria-selected="false"><i class="fas fa-calendar-days fa-fw"></i> Timesheet</button>
                             </div>
                         </div>
                         <!-- Tabs navs -->

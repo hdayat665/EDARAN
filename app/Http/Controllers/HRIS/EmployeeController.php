@@ -321,6 +321,25 @@ class EmployeeController extends Controller
         return response()->json($result);
     }
 
+    public function updatetimehierarchy(Request $r, $id)
+    {
+        $ss = new EmployeeService;
+        
+        $result = $ss->updatetimehierarchy($r, $id);
+
+        return response()->json($result);
+    }
+
+    public function updatetimehierarchy2(Request $r, $id)
+    {
+        $ss = new EmployeeService;
+        
+        $result = $ss->updatetimehierarchy2($r, $id);
+
+        return response()->json($result);
+    }
+
+    
   
     public function addEmployeeEducation(Request $r)
     {

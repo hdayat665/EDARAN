@@ -1169,6 +1169,7 @@ class EmployeeService
 
         return $data;
     }
+    
     public function updateeleavehierarchy($r, $id)
     {
         $input = $r->input();
@@ -1191,6 +1192,53 @@ class EmployeeService
 
         return $data;
     }
+
+    public function updatetimehierarchy($r, $id)
+    {
+        $input = $r->input();
+
+       
+        $data2 = $input['tsapprover'];
+
+
+        $input = [
+            
+            'tsapprover' => $data2
+        ];
+
+        Employee::where('user_id', $id)->update($input);
+
+        $data['status'] = config('app.response.success.status');
+        $data['type'] = config('app.response.success.type');
+        $data['title'] = config('app.response.success.title');
+        $data['msg'] = 'Success Update Timesheet Hierarchy';
+
+        return $data;
+    }
+
+    public function updatetimehierarchy2($r, $id)
+    {
+        $input = $r->input();
+
+       
+        $data2 = $input['tsapprover2'];
+
+
+        $input = [
+            
+            'tsapprover2' => $data2
+        ];
+
+        Employee::where('user_id', $id)->update($input);
+
+        $data['status'] = config('app.response.success.status');
+        $data['type'] = config('app.response.success.type');
+        $data['title'] = config('app.response.success.title');
+        $data['msg'] = 'Success Update Timesheet Hierarchy';
+
+        return $data;
+    }
+
     public function updateProfile_Picture($r, $id)
     {
         $input = $r->input();
