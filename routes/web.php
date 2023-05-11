@@ -226,8 +226,10 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('/updateProfile_Picture/{id}', 'updateProfile_Picture');
             // hierarchy
             Route::post('/updateclaimhierarchy/{id}', 'updateclaimhierarchy');
-            Route::post('/updatecashhierarchy/{id}', 'updatecashhierarchy');
             Route::post('/updateeleavehierarchy/{id}', 'updateeleavehierarchy');
+            Route::post('/updatecashhierarchy/{id}', 'updatecashhierarchy');
+            Route::post('/updatetimehierarchy/{id}', 'updatetimehierarchy');
+            Route::post('/updatetimehierarchy2/{id}', 'updatetimehierarchy2');
 
             Route::get('/getEmployeeAddressforCompanion/{id}', 'getEmployeeAddressforCompanion');
 

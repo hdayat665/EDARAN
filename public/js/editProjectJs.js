@@ -949,26 +949,46 @@ $(document).ready(function () {
         autoclose: true,
         format: "yyyy/mm/dd",
     });
-    $("#datepicker-start").datepicker({
-        todayHighlight: true,
-        autoclose: true,
-        format: "yyyy/mm/dd",
-    });
+
+    $("#datepicker-start")
+        .datepicker({
+            todayHighlight: true,
+            autoclose: true,
+            format: "yyyy/mm/dd",
+        })
+        .on("changeDate", function (e) {
+            // Set the end datepicker's date to the selected start date
+            $("#datepicker-end").datepicker("update", e.date);
+
+            // Set the minimum date for the end datepicker to the selected start date
+            $("#datepicker-end").datepicker("setStartDate", e.date);
+        });
+
     $("#datepicker-end").datepicker({
-        todayHighlight: true,
-        autoclose: true,
-        format: "yyyy/mm/dd",
+        format: "yyyy/mm/dd", // Sets the date format to 'day/month/year'
+        autoclose: true, // Closes the datepicker on selection
     });
-    $("#datepicker-warstart").datepicker({
-        todayHighlight: true,
-        autoclose: true,
-        format: "yyyy/mm/dd",
-    });
+
+    $("#datepicker-warstart")
+        .datepicker({
+            todayHighlight: true,
+            autoclose: true,
+            format: "yyyy/mm/dd",
+        })
+        .on("changeDate", function (e) {
+            // Set the end datepicker's date to the selected start date
+            $("#datepicker-warend").datepicker("update", e.date);
+
+            // Set the minimum date for the end datepicker to the selected start date
+            $("#datepicker-warend").datepicker("setStartDate", e.date);
+        });
+
     $("#datepicker-warend").datepicker({
         todayHighlight: true,
         autoclose: true,
         format: "yyyy/mm/dd",
     });
+
     $("#datepicker-bankexpiry").datepicker({
         todayHighlight: true,
         autoclose: true,

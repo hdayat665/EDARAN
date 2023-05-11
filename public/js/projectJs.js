@@ -416,6 +416,45 @@ $(document).ready(function () {
         });
     });
 
+    $("#contract_start_date")
+        .datepicker({
+            todayHighlight: true,
+            autoclose: true,
+            format: "yyyy/mm/dd",
+        })
+        .on("changeDate", function (e) {
+            // Set the end datepicker's date to the selected start date
+            $("#contract_end_date").datepicker("update", e.date);
+
+            // Set the minimum date for the end datepicker to the selected start date
+            $("#contract_end_date").datepicker("setStartDate", e.date);
+        });
+
+    $("#contract_end_date").datepicker({
+        format: "yyyy/mm/dd", // Sets the date format to 'day/month/year'
+        autoclose: true, // Closes the datepicker on selection
+    });
+
+    $("#datepicker-warstart")
+        .datepicker({
+            todayHighlight: true,
+            autoclose: true,
+            format: "yyyy/mm/dd",
+        })
+        .on("changeDate", function (e) {
+            // Set the end datepicker's date to the selected start date
+            $("#datepicker-warend").datepicker("update", e.date);
+
+            // Set the minimum date for the end datepicker to the selected start date
+            $("#datepicker-warend").datepicker("setStartDate", e.date);
+        });
+
+    $("#datepicker-warend").datepicker({
+        todayHighlight: true,
+        autoclose: true,
+        format: "yyyy/mm/dd",
+    });
+
     $("#datepicker-loa").datepicker({
         todayHighlight: true,
         autoclose: true,
@@ -431,16 +470,7 @@ $(document).ready(function () {
         autoclose: true,
         format: "yyyy/mm/dd",
     });
-    $("#datepicker-warstart").datepicker({
-        todayHighlight: true,
-        autoclose: true,
-        format: "yyyy/mm/dd",
-    });
-    $("#datepicker-warend").datepicker({
-        todayHighlight: true,
-        autoclose: true,
-        format: "yyyy/mm/dd",
-    });
+
     $("#datepicker-bankexpiry").datepicker({
         todayHighlight: true,
         autoclose: true,
