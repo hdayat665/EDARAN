@@ -2,7 +2,7 @@
 
 @section('content')
 <div id="content" class="app-content">
-    <h1 class="page-header">Project Registration <small>| My Project</small></h1>
+    <h1 class="page-header">Project Management <small>| My Project</small></h1>
     <div class="panel panel" id="myProjectJs">
         <div class="panel-heading">
             <div class="panel-body">

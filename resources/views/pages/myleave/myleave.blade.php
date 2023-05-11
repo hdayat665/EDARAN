@@ -8,7 +8,7 @@
 
             <!-- END breadcrumb -->
             <!-- BEGIN page-header -->
-            <h1 class="page-header" id="myleaveJs"> E-Leave | My Leave</h1>
+            <h1 class="page-header" id="myleaveJs"> eLeave | My Leave</h1>
 
         <div class="row p-2">
             <div class="col-xl-15">
@@ -74,7 +74,7 @@
 
                                 <div class="row p-2">
                                     <div class="form-control">
-                                    <h4> My Leave </h4><br>
+                                    <h4> Active Leave </h4><br>
                                         {{-- <div class="input-group rounded">
                                             <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
                                                 <span type="button" class="input-group-text border-0" id="search-addon">
@@ -112,7 +112,7 @@
                                                     </a>
                                                     <div class="dropdown-menu">
                                                         <div class="viewleave">
-                                                            <a href="javascript:;" id="editButton" data-id="{{ $m->id }}" data-bs-toggle="modal" data-bs-target="#exampleModal1" class="dropdown-item">View Leave</a>
+                                                            <a href="javascript:;" id="editButton" data-id="{{ $m->id }}" data-bs-toggle="modal" data-bs-target="#exampleModal1" class="dropdown-item"><i class="fa fa-eye" aria-hidden="true"></i>View Leave</a>
                                                         </div>
                                                         <div class="dropdown-divider "></div>
                                                         <div class="cancelleave">
@@ -446,7 +446,7 @@
                         </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                                    <button class="btn btn-primary" id="saveButton">Save</button>
+                                    <button class="btn btn-primary" id="saveButton">Submit</button>
                                 </div>
                          </form>
                     </div>

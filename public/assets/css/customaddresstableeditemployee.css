@@ -1,0 +1,12 @@
+#employeeAddress th:first-child,
+#employeeAddress td:first-child {
+    width: 0%;
+}
+#employeeAddress th:nth-child(2),
+#employeeAddress td:nth-child(2) {
+    width: 10%;
+}
+#employeeAddress th:nth-child(3),
+#employeeAddress td:nth-child(3) {
+    width: 50%;
+}

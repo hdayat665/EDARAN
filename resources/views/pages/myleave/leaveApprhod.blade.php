@@ -3,7 +3,7 @@
 @section('content')
     <div id="content" class="app-content">
     <br>
-    <h1 class="page-header" id="leaveHodJs">E-Leave <small>| Leave Approval | Head Of Department</small></h1>
+    <h1 class="page-header" id="leaveHodJs">eLeave <small>| Leave Approval | Head Of Department</small></h1>
     <!-- END page-header -->
     <!-- BEGIN panel -->
     <div class="panel panel">

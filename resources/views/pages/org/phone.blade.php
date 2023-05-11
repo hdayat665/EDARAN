@@ -2,7 +2,7 @@
 
 @section('content')
 <div id="content" class="app-content">
-    <h1 class="page-header" id="organization">Organization</h1>
+    <h1 class="page-header" id="organization">General Information</h1>
     <div class="panel panel-with-tabs">
         <div class="panel-heading p-0">
             <div class="tab-overflow">

@@ -24,7 +24,7 @@
                         <input type="text" name="effectiveFrom" class="form-control" id="datepicker-terminatedate" placeholder="dd/mm/yyyy" />
                         <label for="recipient-name" class="col-form-label">Terminate Type*</label>
                         <select class="form-select" name="employmentDetail">
-                            <option value="0" label="Please Choose" selected="selected">Please Choose </option>
+                            <option value="0" label="PLEASE CHOOSE" selected="selected">PLEASE CHOOSE </option>
                             <option value="1" label="Deceased">Deceased</option>
                             <option value="2" label="Dismissed">Dismissed</option>
                             <option value="3" label="Laid-Off">Laid-Off</option>

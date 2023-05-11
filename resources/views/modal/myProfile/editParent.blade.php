@@ -78,7 +78,7 @@
                         <div class="col-sm-3">
                             <label for="issuing-country" class="form-label">Issuing Country*</label>
                             <select class="form-select" name="issuingCountry" id="" style="text-transform:uppercase">
-                            <option value="" label="Please Choose" selected ></option>
+                            <option value="" label="PLEASE CHOOSE" selected ></option>
                                 <optgroup id="country-optgroup-Americas" label="Americas">
                                     @foreach ($americass as $key => $america)
                                     <option value="{{$key}}">{{$america}}</option>

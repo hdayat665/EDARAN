@@ -71,6 +71,60 @@ $(document).ready(function () {
         }
     });
 
+    var checkboxes = $('input[name="address_type[]"]');
+    var permanentChecked = false;
+    var correspondentChecked = false;
+    var addressId = null;
+    var addressType = "0";
+
+    checkboxes.each(function () {
+        if ($(this).is(":checked")) {
+            if ($(this).val() === "permanent") {
+                permanentChecked = true;
+            } else if ($(this).val() === "correspondent") {
+                correspondentChecked = true;
+            }
+            if (addressId == null) {
+                addressId = $(this).data("address-id");
+                addressType = $(this).data("address-type");
+            }
+        }
+    });
+
+    if (permanentChecked && correspondentChecked) {
+        checkboxes.not(":checked").prop("disabled", true);
+        // if both checkboxes are checked and have the same address ID, set addressType to 3
+        if (
+            checkboxes.filter(
+                '[data-address-id="' + addressId + '"]:checked'
+            ).length === 2
+        ) {
+            addressType = "3";
+        }
+    } else if (permanentChecked) {
+        // if only permanent checkbox is checked, set addressType to 1
+        addressType = "1";
+        // disable all other permanent checkboxes
+        checkboxes
+            .filter('[value="permanent"]:not(:checked)')
+            .prop("disabled", true);
+        // enable all correspondent checkboxes
+        checkboxes
+            .filter('[value="correspondent"]')
+            .prop("disabled", false);
+    } else if (correspondentChecked) {
+        // if only correspondent checkbox is checked, set addressType to 2
+        addressType = "2";
+        // disable all other correspondent checkboxes
+        checkboxes
+            .filter('[value="correspondent"]:not(:checked)')
+            .prop("disabled", true);
+        // enable all permanent checkboxes
+        checkboxes.filter('[value="permanent"]').prop("disabled", false);
+    } else {
+        checkboxes.prop("disabled", false);
+    }
+
     $("#firstname,#lastname").change(function () {
         var a = $("#firstname").val();
         var b = $("#lastname").val();
@@ -1996,7 +2050,8 @@ $(document).ready(function () {
                 // Update the UI to reflect the new address type
                 Swal.fire({
                     icon: "success",
-                    title: "Addesss Type Is Updated",
+                    text: "Address Type is updated!",
+                    title: "Success!",
                     confirmButtonColor: "#3085d6",
                     confirmButtonText: "OK",
                     allowOutsideClick: false,
@@ -2962,16 +3017,12 @@ $(document).ready(function () {
         ],
     });
     $("#employeeAddress")
-        .removeAttr("width")
         .DataTable({
             responsive: false,
             lengthMenu: [
                 [5, 10, 15, 20, -1],
                 [5, 10, 15, 20, "All"],
             ],
-            columnDefs: [{ width: 4, targets: 1 }],
-
-            fixedColumn: true,
         });
 
     $("#siblingModalAdd").click(function (e) {
