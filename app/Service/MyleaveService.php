@@ -78,6 +78,37 @@ class MyleaveService
         return $data;
     }
 
+    public function searchmyleaveView($r)
+    {
+       $input = $r->input();
+        $query = MyLeaveModel::where('myleave.tenant_id', Auth::user()->tenant_id)
+                ->leftJoin('leave_types', 'myleave.lt_type_id', '=', 'leave_types.id')
+                ->where('myleave.up_user_id', '=', Auth::user()->id)
+                ->where('myleave.leave_date', '>=', Carbon::now()->format('Y-m-d'))
+                ->select('myleave.*', 'leave_types.leave_types as type')
+                ->orderBy('myleave.applied_date', 'desc')
+                ->orderBy('myleave.created_at', 'desc') ;
+
+
+        if ($input['applydatemy']) {
+            $applydate = $input['applydatemy'];
+            $query->where('myleave.applied_date', '=', $applydate);
+        }
+
+        if ($input['typelistmy']) {
+            $typelist = $input['typelistmy'];
+            $query->where('leave_types.id', '=', $typelist);
+        }
+
+        if ($input['statusmy']) {
+            $status = $input['statusmy'];
+            $query->where('myleave.status_final', '=', $status);
+        }
+
+        $data = $query->get();
+        return $data;
+    }
+
     public function datatype(){
 
         $data =
@@ -281,17 +312,17 @@ class MyleaveService
 
             MyLeaveModel::create($input);
 
-            // $settingEmail = MyLeaveModel::select('myleave.*','leave_types.leave_types as type')
-            // ->join('leave_types', 'myleave.lt_type_id', '=', 'leave_types.id')
-            // ->where('myleave.tenant_id', Auth::user()->tenant_id)
-            // ->orderBy('myleave.created_at', 'DESC')
-            // ->first();
+            $settingEmail = MyLeaveModel::select('myleave.*','leave_types.leave_types as type')
+            ->join('leave_types', 'myleave.lt_type_id', '=', 'leave_types.id')
+            ->where('myleave.tenant_id', Auth::user()->tenant_id)
+            ->orderBy('myleave.created_at', 'DESC')
+            ->first();
 
-            // if ($settingEmail) {
+            if ($settingEmail) {
 
-            //     $ms = new MailService;
-            //     $ms->emailToApproveLeaveNoCommender($settingEmail);
-            // }
+                $ms = new MailService;
+                $ms->emailToApproveLeaveNoCommender($settingEmail);
+            }
 
 
 
@@ -327,17 +358,17 @@ class MyleaveService
 
             MyLeaveModel::create($input);
 
-            // $settingEmail = MyLeaveModel::select('myleave.*','leave_types.leave_types as type')
-            // ->join('leave_types', 'myleave.lt_type_id', '=', 'leave_types.id')
-            // ->where('myleave.tenant_id', Auth::user()->tenant_id)
-            // ->orderBy('myleave.created_at', 'DESC')
-            // ->first();
+            $settingEmail = MyLeaveModel::select('myleave.*','leave_types.leave_types as type')
+            ->join('leave_types', 'myleave.lt_type_id', '=', 'leave_types.id')
+            ->where('myleave.tenant_id', Auth::user()->tenant_id)
+            ->orderBy('myleave.created_at', 'DESC')
+            ->first();
 
-            // if ($settingEmail) {
+            if ($settingEmail) {
 
-            //     $ms = new MailService;
-            //     $ms->emailToRecommenderLeave($settingEmail);
-            // }
+                $ms = new MailService;
+                $ms->emailToRecommenderLeave($settingEmail);
+            }
 
 
             $data['status'] = config('app.response.success.status');
