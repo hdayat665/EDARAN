@@ -17662,11 +17662,11 @@ a:focus {
     color: rgba(var(--app-sidebar-component-color-rgb), 1);
     background-color: rgba(var(--app-sidebar-active-color-rgb), 0.1);
   }
-  
+
 .menu-submenu.show {
 display: block;
 }
-  
+
 
 .app-sidebar .menu .menu-item .menu-link {
     padding: 7px 20px;

@@ -74,6 +74,8 @@ class Mail extends Mailable
             $view = 'emails.claim.approvalCAFinanceApproval';
         }else if ($data['typeEmail'] == 'emailToRecommenderLeave') {
             $view = 'emails.leave.viewRecommenderLeave';
+        }else if ($data['typeEmail'] == 'emailToApproveLeaveNoCommender') {
+            $view = 'emails.leave.emailToApproveLeaveNoCommender';
         }else if ($data['typeEmail'] == 'emailToApproverLeave') {
             $view = 'emails.leave.viewApproverLeave';
         }else if ($data['typeEmail'] == 'emailToRejectedLeave') {

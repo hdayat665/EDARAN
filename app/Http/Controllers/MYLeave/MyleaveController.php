@@ -15,22 +15,34 @@ class MyleaveController extends Controller
 
         $data['myleave'] = $ms->myleaveView();
         $data['myleaveHistory'] = $ms->myleaveHistoryView();
+
         $data['applydate'] = '';
         $data['typelist'] = '';
         $data['status_searching'] = '';
+
+        $data['applydatemy'] = '';
+        $data['typelistmy'] = '';
+        $data['status_searchingmy'] = '';
         $data['types'] = $ms->datatype();
         // $data['mypie'] = $ms->datapie();
 
         $input = $r->input();
-        if($input){
-            $data['myleaveHistory'] = $ms->searcmyleavehistory($r);
-            $data['applydate'] = $input['applydate'];
-            $data['typelist'] = $input['typelist'];
-            $data['status_searching'] = $input['status'];
-
-            // dd($data);
-            // die;
+        // dd($input);
+        // die;
+        if(isset($input['applydatemy']) || isset($input['typelistmy']) || isset($input['statusmy'])){
+            $data['myleave'] = $ms->searchmyleaveView($r);
+            $data['applydatemy'] = isset($input['applydatemy']) ? $input['applydatemy'] : '';
+            $data['typelistmy'] = isset($input['typelistmy']) ? $input['typelistmy'] : '';
+            $data['status_searchingmy'] = isset($input['statusmy']) ? $input['statusmy'] : '';
         }
+
+        if(isset($input['applydate']) || isset($input['typelist']) || isset($input['status'])){
+            $data['myleaveHistory'] = $ms->searcmyleavehistory($r);
+            $data['applydate'] = isset($input['applydate']) ? $input['applydate'] : '';
+            $data['typelist'] = isset($input['typelist']) ? $input['typelist'] : '';
+            $data['status_searching'] = isset($input['status']) ? $input['status'] : '';
+        }
+
 
 
         return view('pages.myleave.myleave',$data);

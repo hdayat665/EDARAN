@@ -8,6 +8,20 @@ $(document).ready(function () {
     });
 
     // Membuat variabel untuk input pertama
+    const input3 = document.getElementById("duration");
+
+    // Membuat fungsi untuk memvalidasi input pertama
+    function validateInput3(event) {
+        const regex = /[^0-9]/gi; // Regular expression untuk mencocokkan karakter selain angka
+        input3.value = input3.value.replace(regex, ""); // Menghapus karakter selain angka
+    }
+
+    // Menambahkan event listener ke input pertama
+    input3.addEventListener("input", validateInput3);
+
+
+
+    // Membuat variabel untuk input pertama
     const input1 = document.getElementById("allowrequest");
 
     // Membuat fungsi untuk memvalidasi input pertama
@@ -46,11 +60,13 @@ $(document).ready(function () {
             rules: {
                 leave_types_code: "required",
                 leave_types: "required",
+                duration: "required",
             },
 
             messages: {
                 leave_type_codes: "Please Select Leave Type Code",
                 leave_types: "Please Insert Leave Type",
+                duration: "Please Insert Duration",
             },
             submitHandler: function (form) {
                 requirejs(["sweetAlert2"], function (swal) {
