@@ -168,15 +168,27 @@ $(document).ready(function () {
         var e = parseFloat($("#ent").val());
         var f = parseFloat(a + b + c + d + e).toFixed(2);
         $("#totalexp").val(f);
+
+        var a1 = parseFloat($("#totalexp").val());
+        var f1 = parseFloat((75 / 100) * a1).toFixed(2);
+        $("#maxpaid").val(f1);
     });
 
     //cal maximum paid out
     $(
         "#day,#subs,#night,#acco,#totalsubs,#totalacco,#fuelfare,#tollparking,#ent,#totalexp"
     ).change(function () {
-        var a = parseFloat($("#totalexp").val());
-        var f = parseFloat((75 / 100) * a).toFixed(2);
-        $("#maxpaid").val(f);
+        var a = parseFloat($("#totalsubs").val());
+        var b = parseFloat($("#totalacco").val());
+        var c = parseFloat($("#fuelfare").val());
+        var d = parseFloat($("#tollparking").val());
+        var e = parseFloat($("#ent").val());
+        var f = parseFloat(a + b + c + d + e).toFixed(2);
+        $("#totalexp").val(f);
+
+        var a1 = parseFloat($("#totalexp").val());
+        var f1 = parseFloat((75 / 100) * a1).toFixed(2);
+        $("#maxpaid").val(f1);
     });
 
     // end total transport
@@ -294,6 +306,19 @@ $(document).ready(function () {
                 var b = parseFloat($("#subs").val());
                 var c = parseFloat(a * b).toFixed(2);
                 $("#totalsubs").val(c);
+                
+                var a = parseFloat($("#totalsubs").val());
+                var b = parseFloat($("#totalacco").val());
+                var c = parseFloat($("#fuelfare").val());
+                var d = parseFloat($("#tollparking").val());
+                var e = parseFloat($("#ent").val());
+                var f = parseFloat(a + b + c + d + e).toFixed(2);
+                $("#totalexp").val(f);
+
+                var a1 = parseFloat($("#totalexp").val());
+                var f1 = parseFloat((75 / 100) * a1).toFixed(2);
+                $("#maxpaid").val(f1);
+                
             });
         });
         
@@ -332,6 +357,17 @@ $(document).ready(function () {
                 var c = parseFloat(a * b).toFixed(2);
                 $("#totalacco").val(c);
                 
+                var a = parseFloat($("#totalsubs").val());
+                var b = parseFloat($("#totalacco").val());
+                var c = parseFloat($("#fuelfare").val());
+                var d = parseFloat($("#tollparking").val());
+                var e = parseFloat($("#ent").val());
+                var f = parseFloat(a + b + c + d + e).toFixed(2);
+                $("#totalexp").val(f);
+
+                var a1 = parseFloat($("#totalexp").val());
+                var f1 = parseFloat((75 / 100) * a1).toFixed(2);
+                $("#maxpaid").val(f1);
             });
 
 
@@ -405,7 +441,7 @@ $(document).ready(function () {
   
         if ($(this).val() === 'other') {
             $("#otherlocation").show();
-        } else {
+        } else { 
             $("#otherlocation").hide();
         }
     
