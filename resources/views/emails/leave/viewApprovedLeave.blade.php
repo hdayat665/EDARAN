@@ -10,11 +10,11 @@
     {{-- {{ dd($data['data']) }} --}}
     <br>
     <br>
-    <p>To : {{ $employeeName ?? '-' }}</p>
+    <p>To : {{ $employeeNamex ?? '-' }}</p>
     <p>Your leave is approved as follows:-</p>
     <br>
     <br>
-    <p><strong>Employer Name </strong> : {{ $employeeName ?? '-' }}</p>
+    <p><strong>Employer Name </strong> : {{ $employeeNamex ?? '-' }}</p>
     <p><strong>Start Date </strong> : {{ $data['data']->start_date ?? '-' }} </p>
     <p><strong>End Date </strong> : {{ $data['data']->end_date ?? '-' }} </p>
     <p><strong>Type of Leave</strong> : {{ $data['data']->type ?? '-' }} </p>
@@ -31,6 +31,7 @@
     @else
         <p style="display: none;"><strong>Leave Session</strong>: {{ $data['data']->leave_session }}</p>
     @endif
+    <p><strong>Reason</strong> : {{ $data['data']->reason ?? '-' }} </p>
 
 
     <p>Please click the link button for further action </p>

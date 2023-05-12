@@ -102,6 +102,7 @@
                                     @foreach ($projectLocations as $projectLocation)
                                     <option value="{{$projectLocation->id}}">{{$projectLocation->location_name}}</option>
                                     @endforeach
+                                    <option value="OTHERS" >OTHERS</option>
                                 </select>
                             </div>
                             <div class="col-sm-6" id="locationByProjectEditShow" style="display: none">

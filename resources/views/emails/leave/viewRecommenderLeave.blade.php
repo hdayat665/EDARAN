@@ -11,7 +11,7 @@
     <br>
     <br>
     <p>To : {{ $recommender ?? '-' }}</p>
-    <p>I hereby apply leave for your kind review</p>
+    <p>I hereby apply leave for your kind review.</p>
     <p>The details are :-</p>
     <br>
     <br>
@@ -32,6 +32,7 @@
     @else
         <p style="display: none;"><strong>Leave Session</strong>: {{ $data['data']->leave_session }}</p>
     @endif
+    <p><strong>Reason</strong> : {{ $data['data']->reason ?? '-' }} </p>
 
     <p>Please click the link button for further action </p>
     <a href="{{ env('APP_URL') }}"><button>Click Here</button></a>

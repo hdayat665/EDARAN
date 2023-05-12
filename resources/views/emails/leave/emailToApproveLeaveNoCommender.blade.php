@@ -10,11 +10,12 @@
     {{-- {{ dd($data['data']) }} --}}
     <br>
     <br>
-    <p>To : {{ $usertoreject ?? '-' }}</p>
-    <p>Please be advised that your leave is rejected as follows:-</p>
+    <p>To : {{ $approvedby ?? '-' }}</p>
+    <p>I hereby apply leave for your kind review.</p>
+    <p>The details are :-</p>
     <br>
     <br>
-    <p><strong>Employer Name </strong> : {{ $employeeNamex ?? '-' }}</p>
+    <p><strong>Employer Name </strong> : {{ $employeeName ?? '-' }}</p>
     <p><strong>Start Date </strong> : {{ $data['data']->start_date ?? '-' }} </p>
     <p><strong>End Date </strong> : {{ $data['data']->end_date ?? '-' }} </p>
     <p><strong>Type of Leave</strong> : {{ $data['data']->type ?? '-' }} </p>
@@ -32,8 +33,6 @@
         <p style="display: none;"><strong>Leave Session</strong>: {{ $data['data']->leave_session }}</p>
     @endif
     <p><strong>Reason</strong> : {{ $data['data']->reason ?? '-' }} </p>
-    <p><strong>Rejection Reason</strong> : {{ $data['data']->up_rec_reason ?? '-' }} </p>
-
 
     <p>Please click the link button for further action </p>
     <a href="{{ env('APP_URL') }}"><button>Click Here</button></a>
