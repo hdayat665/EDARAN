@@ -1011,7 +1011,7 @@ if (!function_exists('projectLocation')) {
             $query->where('project_id', $projectid);
         }
 
-        $data = $query->get();
+        $data = $query->orderBy('location_name', 'asc')->get();
 
         if (!$data) {
             $data = [];

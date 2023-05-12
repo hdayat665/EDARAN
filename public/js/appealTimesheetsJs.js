@@ -67,10 +67,15 @@ $(document).ready(function () {
         // console.log(vehicleData);
     
         vehicleData.then(function (data) {
-            console.log(data.logid);
-            // console.log()
+            
+           
             $("#log_idv").val(data.logid);
-            $("#Statusv").val(data.status);
+            
+            if (data.status === "locked") {
+                $("#Statusv").val("pending");
+            } else {
+                $("#Statusv").val(data.status);
+            }
             $("#yearappealv").val(data.year);
             $("#monthappealv").val(data.month);
             $("#dayappealv").val(data.day);
