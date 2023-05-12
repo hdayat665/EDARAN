@@ -68,6 +68,7 @@ $(document).ready(function () {
             console.log(data);
             if (data.length !== 0) {
                 var html = [];
+                html.push("<option value='' selected>PLEASE CHOOSE</option>");
                 for (let i = 0; i < data.length; i++) {
                     const option = data[i];
                     console.log(option["id"]);

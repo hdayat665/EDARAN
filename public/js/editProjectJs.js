@@ -152,6 +152,7 @@ $(document).ready(function () {
                 contract_start_date: "required",
                 contract_end_date: "required",
                 acc_manager: "required",
+                project_manager: "required",
                 status: "required",
             },
 
@@ -167,6 +168,7 @@ $(document).ready(function () {
                 contract_start_date: "Please Choose Contract Start Date",
                 contract_end_date: "Please Choose Contract End Date",
                 acc_manager: "Please Choose Account Manager",
+                project_manager: "Please Choose Project Manager",
                 status: "Please Choose Status",
             },
             submitHandler: function (form) {
