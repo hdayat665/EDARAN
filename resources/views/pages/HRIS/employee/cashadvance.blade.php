@@ -38,8 +38,8 @@
                                                                 <?php $employees = getEmployeeapprover(); ?>
                                                                 <option value="" label="PLEASE CHOOSE"></option>
                                                                 @foreach ($employees as $employee)
-                                                                    <option value="{{ $employee->id }}" label="{{ $employee->employeeName }}"
-                                                                    {{ $employment->caapprover == $employee->id ? "selected='selected'" : '' }}>
+                                                                    <option value="{{ $employee->user_id }}" label="{{ $employee->employeeName }}"
+                                                                    {{ $employment->caapprover == $employee->user_id ? "selected='selected'" : '' }}>
                                                                     {{ $employee->employeeName }}
                                                                     </option>
                                                                 @endforeach
