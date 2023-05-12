@@ -2,32 +2,32 @@ $(document).ready(function () {
     $("#myProjectTable").DataTable({
         responsive: false,
         lengthMenu: [
-            [5, 10, 15, 20, -1],
-            [5, 10, 15, 20, "All"],
+            [5, 10, 25, 50, -1],
+            [5, 10, 25, 50, "All"],
         ],
     });
 
     $("#myProjectPendingTable").DataTable({
         responsive: false,
         lengthMenu: [
-            [5, 10, 15, 20, -1],
-            [5, 10, 15, 20, "All"],
+            [5, 10, 25, 50, -1],
+            [5, 10, 25, 50, "All"],
         ],
     });
 
     $("#data-table-default1").DataTable({
         responsive: false,
         lengthMenu: [
-            [5, 10, 15, 20, -1],
-            [5, 10, 15, 20, "All"],
+            [5, 10, 25, 50, -1],
+            [5, 10, 25, 50, "All"],
         ],
     });
 
     $("#myProjectRejectTable").DataTable({
         responsive: false,
         lengthMenu: [
-            [5, 10, 15, 20, -1],
-            [5, 10, 15, 20, "All"],
+            [5, 10, 25, 50, -1],
+            [5, 10, 25, 50, "All"],
         ],
     });
 

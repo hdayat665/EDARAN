@@ -1,7 +1,7 @@
 @extends('layouts.dashboardTenant')
 @section('content')
     <div id="content" class="app-content">
-        <h1 class="page-header">Timesheet <small>| Realtime Activity | Event Realtime Activity </small></h1>
+        <h1 class="page-header">Timesheet <small>| Appeal Approval </small></h1>
         <div class="panel panel" id="appealTimesheetsJs">
             <div class="panel-body">
                 <table id="appealtable" class="table table-striped table-bordered align-middle">
