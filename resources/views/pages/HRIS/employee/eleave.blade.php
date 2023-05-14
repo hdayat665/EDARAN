@@ -33,10 +33,12 @@
                                         <div class="row ">
                                             <div class="col md-6">
                                                 <div class="mb-3">
-                                                    <label for="" class="form-label">Recommender* </label>
-                                                    <select class="form-select" name="eleaverecommender"  id="eleaverecommender">
+                                                    <label for="" class="form-label">Recommender </label>
+                                                    <select class="form-select" name="eleaverecommender" id="eleaverecommender">
+                                                        @if (!empty($employment->eleaverecommender))
+                                                            <option value="" label="PLEASE CHOOSE">PLEASE CHOOSE</option>
+                                                        @endif
                                                         <?php $employees = getEmployee(); ?>
-                                                        <option value="" label="PLEASE CHOOSE"></option>
                                                         @foreach ($employees as $employee)
                                                             <option value="{{ $employee->user_id }}" label="{{ $employee->employeeName }}"
                                                             {{ $employment->eleaverecommender == $employee->user_id ? "selected='selected'" : '' }}>
@@ -50,10 +52,10 @@
                                         <div class="row ">
                                             <div class="col md-6">
                                                 <div class="mb-3">
-                                                    <label for="holiday_title" class="form-label">Approver </label>
+                                                    <label for="holiday_title" class="form-label">Approver* </label>
                                                     <select class="form-select" name="eleaveapprover" id="eleaveapprover">
+                                                        {{-- <option value="" label="PLEASE CHOOSE"></option> --}}
                                                         <?php $employees = getEmployee(); ?>
-                                                        <option value="" label="PLEASE CHOOSE"></option>
                                                         @foreach ($employees as $employee)
                                                             <option value="{{ $employee->user_id }}" label="{{ $employee->employeeName }}"
                                                             {{ $employment->eleaveapprover == $employee->user_id ? "selected='selected'" : '' }}>

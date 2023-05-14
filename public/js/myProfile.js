@@ -26,6 +26,28 @@ $(document).ready(function () {
         $("#gendermyprofile").prop("disabled", true);
     }
 
+    // if ($(".partCheck6").is(":checked")) {
+    //     $("#idnumber3").prop("readonly", true);
+    //     $("#idnumber3").prop("disabled", true);
+    //     $("#dobuc").prop("readonly", false);
+    //     $("#dobuc").css("pointer-events", "auto");
+    //     $("#idnumber3").val("");
+    // } else {
+    //     $("#idnumber3").prop("readonly", false);
+
+    //     $("#dobuc").prop("readonly", true);
+    //     $("#dobuc").css("pointer-events", "none");
+    //     $("#passport3").val("");
+    //     $("#expirydate3").val("");
+    //     $("#expirydate3").prop("readonly", true);
+    //     $("#expirydate3").css("pointer-events", "none");
+
+    //     $("#issuingCountryUpdateCompanion").val("");
+
+    //     $("#expirydate3").prop("disabled", true);
+    //     $("#issuingCountryUpdateCompanion").prop("disabled", true);
+    // }
+
     if ($(".partCheck5").is(":checked")) {
         $("#idNo1").prop("readonly", true);
         $("#DOB1").prop("readonly", false);
@@ -59,6 +81,24 @@ $(document).ready(function () {
         $("#passportcountrymyprofile").val("");
     }
 
+    if ($("#passportUpdateCompanion").val() !== "") {
+        // Enable expiration date and passport country fields
+        $("#expiryDateUpdateCompanion").prop("disabled", false);
+        $("#expiryDateUpdateCompanion").css("pointer-events", "auto");
+
+        $("#issuingCountryUpdateCompanion").prop("disabled", false);
+        $("#issuingCountryUpdateCompanion").css("pointer-events", "auto");
+    } else {
+        // Disable expiration date and passport country fields
+        $("#expiryDateUpdateCompanion").prop("disabled", true);
+        $("#expiryDateUpdateCompanion").css("pointer-events", "none");
+        $("#expiryDateUpdateCompanion").val("");
+
+        $("#issuingCountryUpdateCompanion").prop("disabled", true);
+        $("#issuingCountryUpdateCompanion").css("pointer-events", "none");
+        $("#issuingCountryUpdateCompanion").val("");
+    }
+
     if ($(".okuCheck").is(":checked")) {
         $("#okucard").prop("disabled", false);
         $("#okuattach").prop("disabled", false);
@@ -67,6 +107,16 @@ $(document).ready(function () {
         $("#okucard").val("").prop("disabled", true);
         $("#okuattach").prop("disabled", true);
         $("#okuattach").css("pointer-events", "none");
+    }
+
+    if ($(".okuCheck2").is(":checked")) {
+        $("#okucard2").prop("disabled", false);
+        $("#okuattach2").prop("disabled", false);
+        $("#okuattach2").css("pointer-events", "auto");
+    } else {
+        $("#okucard2").val("").prop("disabled", true);
+        $("#okuattach2").prop("disabled", true);
+        $("#okuattach2").css("pointer-events", "none");
     }
 
     var checkboxes = $('input[name="address_type[]"]');
@@ -2494,7 +2544,7 @@ $(document).ready(function () {
         format: "yyyy/mm/dd",
         autoclose: true,
     });
-    $("#expirydate3").datepicker({
+    $("#expiryDateUpdateCompanion").datepicker({
         todayHighlight: true,
         format: "yyyy/mm/dd",
         autoclose: true,
@@ -3429,27 +3479,26 @@ $(document).ready(function () {
                     rangelength: [7, 7],
                 },
                 contactNo: {
-                    required: true,
                     digits: true,
                     rangelength: [10, 11],
                 },
-                expiryDate: {
-                    required: true,
-                },
+                // expiryDate: {
+                //     required: true,
+                // },
 
-                issuingCountry: {
-                    required: true,
-                },
+                // issuingCountry: {
+                //     required: true,
+                // },
 
-                okuNo: {
-                    required: true,
-                    digits: true,
-                    rangelength: [10, 11],
-                },
+                // okuNo: {
+                //     required: true,
+                //     digits: true,
+                //     rangelength: [10, 11],
+                // },
 
-                okuFile: {
-                    required: true,
-                },
+                // okuFile: {
+                //     required: true,
+                // },
             },
 
             messages: {
@@ -3971,12 +4020,12 @@ $("#same-address").change(function () {
                 console.log("Error fetching permanent address: " + error);
             });
     } else {
-        $("#address-1c").prop("readonly", false);
-        $("#address-2c").prop("readonly", false);
-        $("#postcodec").prop("readonly", false);
-        $("#cityc").prop("readonly", false);
-        $("#statec").prop("disabled", false);
-        $("#countryc").prop("disabled", false);
+        $("#address-1c").prop("readonly", false).val("");
+        $("#address-2c").prop("readonly", false).val("");
+        $("#postcodec").prop("readonly", false).val("");
+        $("#cityc").prop("readonly", false).val("");
+        $("#statec").prop("disabled", false).val("");
+        $("#countryc").prop("disabled", false).val("");
     }
 });
 
@@ -4030,7 +4079,7 @@ $("#same-address2").change(function () {
         $("#postcodeparent").val($("").val()).prop("readonly", false);
         $("#cityparent").val($("").val()).prop("readonly", false);
         $("#stateparent").val($("").val()).prop("disabled", false);
-        $("#countryparent").val($("my").val()).prop("disabled", false);
+        $("#countryparent").val($("").val()).prop("disabled", false);
     }
 });
 
@@ -4071,6 +4120,60 @@ $("#same-address4").change(function () {
         $("#countrysibling").val($("my").val()).prop("disabled", false);
     }
 });
+
+$("#same-addressUC").change(function () {
+    if (this.checked) {
+        $("#address1UC").val($("#address-1").val()).prop("readonly", true);
+        $("#address2UC").val($("#address-2").val()).prop("readonly", true);
+        $("#postcodeUC").val($("#postcode").val()).prop("readonly", true);
+        $("#cityUC").val($("#city").val()).prop("readonly", true);
+        $("#stateUC").val($("#state").val()).prop("disabled", true);
+        $("#countryUC").val($("#country").val()).prop("disabled", true);
+
+        // Fetch permanent address from userAddress table if available
+        var id = "{{ $user->id }}";
+
+        getAddressforCompanion(id)
+            .then(function (data) {
+                if (data) {
+                    var permanentAddress1 = data.data.address1;
+                    var permanentAddress2 = data.data.address2;
+                    var permanentPostcode = data.data.postcode;
+                    var permanentCity = data.data.city;
+                    var permanentState = data.data.state;
+                    var permanentCountry = data.data.country;
+                    console.log(data);
+
+                    if (
+                        permanentAddress1 &&
+                        permanentAddress2 &&
+                        permanentPostcode &&
+                        permanentCity &&
+                        permanentState &&
+                        permanentCountry
+                    ) {
+                        $("#address1UC").val(permanentAddress1);
+                        $("#address2UC").val(permanentAddress2);
+                        $("#postcodeUC").val(permanentPostcode);
+                        $("#cityUC").val(permanentCity);
+                        $("#stateUC").val(permanentState);
+                        $("#countryUC").val(permanentCountry);
+                    }
+                }
+            })
+            .fail(function (xhr, status, error) {
+                console.log("Error fetching permanent address: " + error);
+            });
+        } else {
+            $("#address1UC").prop("readonly", false).val("");
+            $("#address2UC").prop("readonly", false).val("");
+            $("#postcodeUC").prop("readonly", false).val("");
+            $("#cityUC").prop("readonly", false).val("");
+            $("#stateUC").prop("disabled", false).val("");
+            $("#countryUC").prop("disabled", false).val("");
+        }        
+});
+
 
 $(".partCheck3").click(function () {
     if ($(this).prop("checked")) {
@@ -4575,48 +4678,49 @@ $("#idnumber7").change(function () {
 });
 
 //UPDATE COMPANION DETAILS
-$(".partCheck6").click(function () {
-    if ($(this).prop("checked")) {
-        $("#idnumber3").prop("readonly", true);
-        $("#idnumber3").prop("disabled", true);
+// $(".partCheck6").click(function () {
+//     if ($(this).prop("checked")) {
+//         $("#idnumber3").prop("readonly", true);
+//         $("#idnumber3").prop("disabled", true);
 
-        $("#dobuc").prop("readonly", false);
-        $("#dobuc").css("pointer-events", "auto");
-        $("#idnumber3").val("");
-    } else {
-        $("#idnumber3").prop("readonly", false);
-        $("#idnumber3").prop("disabled", false);
+//         $("#dobuc").prop("readonly", false);
+//         $("#dobuc").css("pointer-events", "auto");
+//         $("#idnumber3").val("");
+//     } else {
+//         $("#idnumber3").prop("readonly", false);
+//         $("#idnumber3").prop("disabled", false);
 
-        $("#dobuc").prop("readonly", true);
-        $("#dobuc").css("pointer-events", "none");
-        $("#passport3").val("");
-        $("#expirydate3").val("");
-        $("#expirydate3").prop("readonly", true);
-        $("#expirydate3").css("pointer-events", "none");
+//         $("#dobuc").prop("readonly", true);
+//         $("#dobuc").css("pointer-events", "none");
+//         $("#passport3").val("");
+//         $("#expirydate3").val("");
+//         $("#expirydate3").prop("readonly", true);
+//         $("#expirydate3").css("pointer-events", "none");
 
-        $("#issuingCountryUpdateCompanion").val("");
+//         $("#issuingCountryUpdateCompanion").val("");
 
-        $("#expirydate3").prop("disabled", true);
-        $("#issuingCountryUpdateCompanion").prop("disabled", true);
-    }
-});
+//         $("#expirydate3").prop("disabled", true);
+//         $("#issuingCountryUpdateCompanion").prop("disabled", true);
+//     }
+// });
 
 // ENABLE EXPIRY AND ISSUING COUNTRY
-$("#passport3").change(function () {
-    if ($("#expirydate3").prop("readonly")) {
-        $("#expirydate3").prop("readonly", false);
-        $("#expirydate3").css("pointer-events", "auto");
-        $("#expirydate3").prop("disabled", false);
-        $("#issuingCountryUpdateCompanion").prop("disabled", false);
-        $("#issuingCountryUpdateCompanion").css("pointer-events", "auto");
-    } else {
-        $("#expirydate3").prop("readonly", true);
-        $("#expirydate3").css("pointer-events", "none");
-        $("#expirydate3").val("");
-        $("#expirydate3").prop("disabled", false);
+$("#passportUpdateCompanion").change(function () {
+    if ($("#passportUpdateCompanion").val() !== "") {
+        // Enable expiration date and passport country fields
+        $("#expiryDateUpdateCompanion").prop("disabled", false);
+        $("#expiryDateUpdateCompanion").css("pointer-events", "auto");
 
         $("#issuingCountryUpdateCompanion").prop("disabled", false);
         $("#issuingCountryUpdateCompanion").css("pointer-events", "auto");
+    } else {
+        // Disable expiration date and passport country fields
+        $("#expiryDateUpdateCompanion").prop("disabled", true);
+        $("#expiryDateUpdateCompanion").css("pointer-events", "none");
+        $("#expiryDateUpdateCompanion").val("");
+
+        $("#issuingCountryUpdateCompanion").prop("disabled", true);
+        $("#issuingCountryUpdateCompanion").css("pointer-events", "none");
         $("#issuingCountryUpdateCompanion").val("");
     }
 });

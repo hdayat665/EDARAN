@@ -462,7 +462,9 @@ if (!function_exists('relationship')) {
             '14' => 'STEP-FATHER',
             '15' => 'STEP-MOTHER',
             '16' => 'SPOUSE',
-            '17' => 'GUARDIAN',
+            '17' => 'SON',
+            '18' => 'DAUGHTER',
+            '19' => 'GUARDIAN',
 
         ];
 
