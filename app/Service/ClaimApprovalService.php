@@ -431,13 +431,22 @@ class ClaimApprovalService
 
     public function cashAdvanceApprovalView()
     {
+        
+        //$cond = ['caapprover', Auth::user()->id];
 
-        $ca[0] = ['tenant_id', Auth::user()->tenant_id];
-        $ca[1] = ['status', '!=', 'draft'];
+        $employees = Employee::where('caapprover', Auth::user()->id)->get();
 
-        $data = CashAdvanceDetail::where($ca)->get();
+        $userId = [];
+        foreach ($employees as $key => $employee) {
+            $userId[] = $employee->user_id;
+        }
+
+        $claim[0] = ['tenant_id', Auth::user()->tenant_id];
+
+        $data = CashAdvanceDetail::where($claim)->whereIn('user_id', $userId)->get();
 
         return $data;
+
     }
 
     public function cashAdvanceApproverDetail($id = '')

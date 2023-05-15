@@ -1,7 +1,7 @@
 @extends('layouts.dashboardTenant')
 @section('content')
     <div id="content" class="app-content">
-        <h1 class="page-header">Timesheet <small>| Realtime Activity | Event Realtime Activity </small></h1>
+        <h1 class="page-header">Timesheet <small>| Appeal Approval </small></h1>
         <div class="panel panel" id="appealTimesheetsJs">
             <div class="panel-body">
                 <table id="appealtable" class="table table-striped table-bordered align-middle">
@@ -28,8 +28,6 @@
                                         <div class="dropdown-menu">
                                             @if ($app->status == 'locked')
                                             <div class="viewtimesheet">
-                                                {{-- <a href="/viewTimesheet/{{$timesheet->id}}/{{$timesheet->user_id}}" class="dropdown-item" data-id="{{$timesheet->id}}" id="viewtimesheet">View Timesheet</a> --}}
-                                                {{-- <a href="" class="dropdown-item" data-id="" id="">View Appeal</a> --}}
                                                 <a href="javascript:;" id="viewappealb" data-id="{{$app->id}}" class="dropdown-item"> View Timesheet</a> 
                                             </div>
                                             <div class="approvetimesheet">
@@ -40,32 +38,24 @@
                                             </div>
                                             @else
                                             <div class="viewtimesheet">
-                                                {{-- <a href="/viewTimesheet/{{$timesheet->id}}/{{$timesheet->user_id}}" class="dropdown-item" data-id="{{$timesheet->id}}" id="viewtimesheet">View Timesheet</a> --}}
-                                                {{-- <a href="" class="dropdown-item" data-id="" id="">View Timesheet</a> --}}
-                                                {{-- <a href="javascript:;" id="viewappealb" data-id="{{$app->id}}" class="dropdown-item"> View Timesheet</a> --}}
+                                                <a href="javascript:;" id="viewappealb" data-id="{{$app->id}}" class="dropdown-item"> View Timesheet</a> 
                                             </div>
-                                            {{-- <div class="approvereject">
-                                                <div class="dropdown-divider "></div>
-                                                <div class="approvetimesheet">
-                                                    <a  class="dropdown-item" data-id="{{$timesheet->id}}" data-status="approve" id="statusButton">Approve Timesheet</a>
-                                                </div>
-                                                {{-- <div class="rejecttimesheet">
-                                                    <a  class="dropdown-item" data-id="{{$timesheet->id}}" data-status="reject" id="statusButton">Reject Timesheet</a>
-                                                </div> 
-                                            </div> --}}
-                                            {{-- <div class="amendtimesheet">
-                                                <div class="dropdown-divider "></div>
-                                                <div class="amendtimesheet">
-                                                    <a  class="dropdown-item" data-id="{{$timesheet->id}}" data-status="amend" id="amendreasonmodal" data-bs-toggle="modal"
-                                                        id="amendreasonmodal">Amend Timesheet</a>
-                                                </div> --}}
+                                           
                                             @endif
                                         </div>
                                     </td>
-                                    <td>{{ $app->user_id }}</td>
+                                    <td>{{ $app->employeeName }}</td>
                                     <td>{{ $app->applied_date }}</td>
                                     <td>{{ $app->reason }}</td>
-                                    <td>attachment</td>
+                                    <td>{{ $app->file ?? '-' }}</td>
+                                    {{-- <td><a href="{{ route('download', ['filename' => $app->file]) }}">{{$app->file}}</a></td>   --}}
+
+                                    <?php
+                                    if ($app->status === "locked") {
+                                        $app->status = "pending";
+                                    }
+                                    ?>
+                                    
                                     <td>{{ $app->status }}</td>
                                 </tr>
                             @endforeach

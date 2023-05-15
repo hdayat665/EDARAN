@@ -78,7 +78,7 @@ class SettingService
         $modifiedTime = date('Y-m-d h:m:s');
 
         $input = $r->input();
-        
+
 
         $updateData['roleName'] = $r['roleName'];
         $updateData['modifiedBy'] = $modifiedBy;
@@ -1130,7 +1130,7 @@ class SettingService
         return $data;
     }
     // public function listuserrole()
-    // {   
+    // {
     //     $data = UserRole::where('role_user.tenant_id', Auth::user()->tenant_id)
     //         ->leftJoin('userprofile', 'role_user.up_user_id', '=', 'userprofile.user_id')
     //         ->leftJoin('users as au', 'role_user.added_by', '=', 'au.id')
@@ -2282,13 +2282,14 @@ public function updateTypeOfLogs($r, $id)
         $data1 = strtoupper($input['leave_types_code']);
         $data2 = strtoupper($input['leave_types']);
         $data3 = $input['day'];
-
+        $data4 = $input['duration'];
         $data5 = Auth::user()->tenant_id;
 
         $input = [
             'leave_types_code' => $data1,
             'leave_types' => $data2,
             'day' => $data3,
+            'duration' => $data4,
             'tenant_id' => $data5,
             'status' => 1
         ];

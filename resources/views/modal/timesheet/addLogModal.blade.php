@@ -84,7 +84,7 @@
                         <div class="col-sm-6" id="activityByProjectHide" style="display: none">
                             <label for="issuing-country" class="form-label">Activity Name*</label>
                             <select class="form-select" id="activity_names" name="activity_name">
-                                <option class="form-label" value="PLEASE CHOOSE"></option>
+                                <option class="form-label" value="">PLEASE CHOOSE</option>
                                 <?php $activitys = activityName($department_id) ?>
                                 @foreach ($activitys as $activity)
                                 <option value="{{$activity->id}}">{{$activity->activity_name}}</option>
@@ -113,6 +113,7 @@
                                 @foreach ($projectLocations as $projectLocation)
                                 <option value="{{$projectLocation->id}}">{{$projectLocation->location_name}}</option>
                                 @endforeach
+                                <option value="OTHERS" >OTHERS</option>
                             </select> 
                         </div>
                         <div class="col-sm-6" id="locationByProjectShow" style="display: none">

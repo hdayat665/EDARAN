@@ -26,17 +26,29 @@
             <div id="calendar" class="calendar"></div>
         </div>
     </div>
-   <div style="height: 80px; display: flex; align-items: center; justify-content: center;">
-        <div class="d-grid gap-2 col-6 mx-auto">
+    <br>
+   <div class="col d-flex justify-content-end">
+        <div class="">
             <input type="hidden" id="userIdForApproval" value="{{$user_id}}">
             <input type="hidden" id="idtesting" value="{{$eleaveapprover}}">
             <input type="hidden" id="idtesting123" value="{{ isset($status_appeal) ? $status_appeal : '' }}">
             <input type="hidden" id="appeal_Date" value="{{ isset($appeal_Date) ? $appeal_Date : '' }}">
             
              {{-- <button class="btn btn-primary" type="button" id="submitTimesheetApproval">Submit</button> --}}
+             {{-- <button class="btn btn-primary" type="button" id="confirmsubmitb" data-bs-toggle="modal">Submit</button> --}}
+
+             <button class="btn btn-primary" type="button" onclick="window.history.back()">Back</button>&nbsp&nbsp
+
              <button class="btn btn-primary" type="button" id="confirmsubmitb" data-bs-toggle="modal">Submit</button>
         </div>
     </div>
+    {{-- <div class="row p-2">
+        <div class=" col d-flex justify-content-end ">
+            <button class="btn btn-primary" type="button" onclick="window.history.back()">Back</button>&nbsp&nbsp
+
+            <button class="btn btn-primary" type="button" id="confirmsubmitb" data-bs-toggle="modal">Submit</button>
+        </div>
+    </div> --}}
     <div style="height: 80px; display: flex; align-items: center; justify-content: center; visibility: hidden;">
         <div class="d-grid gap-2 col-6 mx-auto">
             <button class="btn btn-primary"  type="button" id="cancelTimesheetApproval">Cancel</button>

@@ -1,5 +1,8 @@
 $(document).ready(function () {
+
+
     const fileInput = document.getElementById("fileupload");
+
     fileInput.addEventListener("change", validateFile);
 
     function validateFile() {
@@ -180,13 +183,15 @@ $(document).ready(function () {
         todayHighlight: true,
         autoclose: true,
         format: "yyyy-mm-dd",
-        beforeShowDay: function (date) {
-            var day = date.getDay();
-            return [day != 0 && day != 6];
-        },
     });
 
     $("#datepicker-filter").datepicker({
+        todayHighlight: true,
+        autoclose: true,
+        format: "yyyy-mm-dd",
+    });
+
+    $("#datepicker-filtermy").datepicker({
         todayHighlight: true,
         autoclose: true,
         format: "yyyy-mm-dd",
@@ -312,6 +317,22 @@ $(document).ready(function () {
         });
     });
 
+    $(document).ready(function () {
+        if (
+            $("#datepicker-filtermy").val() ||
+            $("#typelistmy").val() ||
+            $("#status_searchingmy").val()
+        ) {
+            $("#filterleavemy").show();
+        } else {
+            $("#filterleavemy").hide();
+        }
+
+        $("#filtermy").click(function () {
+            $("#filterleavemy").toggle();
+        });
+    });
+
     $("#reset").on("click", function () {
         $("#datepicker-filter").val(
             $("#datepicker-filter").data("default-value")
@@ -319,6 +340,16 @@ $(document).ready(function () {
         $("#typelist").val($("#typelist").data("default-value"));
         $("#status_searching").val(
             $("#status_searching").data("default-value")
+        );
+    });
+
+    $("#resetmy").on("click", function () {
+        $("#datepicker-filtermy").val(
+            $("#datepicker-filtermy").data("default-value")
+        );
+        $("#typelistmy").val($("#typelistmy").data("default-value"));
+        $("#status_searchingmy").val(
+            $("#status_searchingmy").data("default-value")
         );
     });
 

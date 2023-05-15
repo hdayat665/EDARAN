@@ -1,5 +1,4 @@
 @extends('layouts.dashboardTenant')
-
 @section('content')
 
     <div id="content" class="app-content">
@@ -117,9 +116,7 @@
                         <div class="form-group mt-3" id="menu8">
                             <label for="Menu3">Select Project Name : </label>
                             <select class="form-select" name="projectName" id="select8">
-
                                 <option label="PLEASE CHOOSE" selected="selected"> </option>
-
                             </select>
                             
                         </div>

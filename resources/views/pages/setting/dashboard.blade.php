@@ -87,7 +87,7 @@
             <div class="row text-center">
                 <div class="col-lg-2">
                     <a class="mb-10px" href="/leaveEntitlement"><i class="fas fa-calendar-day fa-4x text-blue"></i></a><br><br>
-                    <h5 class="mb-5px">Leave Entitlement</h5>
+                    <h5 class="mb-5px">Staff Leave Entitlement</h5>
                 </div>
                 <div class="col-lg-2">
                     <a class="mb-10px" href="/holidaylist"><i class="fas fa-rocket fa-4x text-blue"></i></a><br><br>
@@ -99,7 +99,7 @@
                 </div>
                 </div>
 
-			
+
             <br>
             <h3 class="mt-10px"></i> eClaim Settings</h3> <br>
             <div class="row text-center">
