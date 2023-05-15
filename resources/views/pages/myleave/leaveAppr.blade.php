@@ -92,7 +92,7 @@
                                         <div class="btn-group">
                                             <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle"><i class="fa fa-cogs"></i> Action <i class="fa fa-caret-down"></i></a>
                                             <ul class="dropdown-menu">
-                                                <a class="dropdown-item" href="/viewTimesheet/{{$l->id}}/{{$l->up_user_id}}" >View Calendar</a>
+                                                <a class="dropdown-item" href="/viewTimesheetLeave/{{$l->up_user_id}}" >View Calendar</a>
 
 
                                                 <div class="dropdown-divider" style=""></div>
