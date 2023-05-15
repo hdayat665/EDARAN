@@ -374,6 +374,11 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('/getAccomodation', 'getAccomodation');
 
             // eleave Leave Entitlement
+            Route::get('/leaveAnnual', 'leaveAnnualView'); //LEAVE ENTITLEMENT ICON
+            Route::get('/leaveSick', 'leaveSickView');
+            Route::get('/leaveCarrForward', 'leaveCarrForwardView');
+            Route::get('/leaveUnpaid', 'leaveUnpaidView');
+
             Route::get('/leaveEntitlement', 'eleaveEntitlementView');
             Route::post('/createLeaveEntitlement', 'createLeaveEntitlement');
             Route::get('/getcreateLeaveEntitlement/{id}', 'getcreateLeaveEntitlement');
