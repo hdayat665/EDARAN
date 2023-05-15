@@ -20,10 +20,13 @@ class DashboardController extends Controller
     public function dashboardTenant()
     {
         $ss = new DashboardService;
-        $result = $ss->newsView();
-        $result2 = $ss->eventView();
-
-        return view('pages.dashboard.tenant', $result, $result2);
+        $result['news'] = $ss->newsView();
+        $result['events'] = $ss->eventView();
+        $result['numberOfObjects'] = $ss->myProject();
+        $result['allproject'] = $ss->allproject();
+        $result['allEmployee'] = $ss->allEmployee();
+        //pr($result);
+        return view('pages.dashboard.tenant', $result);
     }
 
     public function dashboardHost()
