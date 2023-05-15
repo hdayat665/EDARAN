@@ -370,7 +370,7 @@ if ($existingLogs->isNotEmpty()) {
 
         
        
-
+        
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
@@ -1145,8 +1145,22 @@ if ($existingLogs->isNotEmpty()) {
         }
         $user = Auth::user();
         // dd($user);
+
+        $logids = TimesheetAppeals::pluck('logid')->toArray();
+        if (empty($logids)) {
+            $nextLogid = 'LA-0001';
+        } else {
+            $highestLogid = max($logids);
+            $numericPart = intval(substr($highestLogid, 3));
+            $nextNumericPart = $numericPart + 1;
+            $nextLogid = substr($highestLogid, 0, 3) . sprintf('%04d', $nextNumericPart);
+        }
+                
+        // dd($nextLogid);
+
         $input['user_id'] = $user->id;
         $input['tenant_id'] = $user->tenant_id;
+        $input['logid'] = $nextLogid;
     
         $existingAppealdate = TimesheetAppeals::where('tenant_id', $user->tenant_id)
             ->where('applied_date', $input['applied_date'])
@@ -1156,13 +1170,10 @@ if ($existingLogs->isNotEmpty()) {
         ->where('logid', $input['logid'])
         ->first();
     
-        if ($existingAppealdate) {
-            $data['status'] = config('app.response.error.status');
-            $data['type'] = config('app.response.error.type');
-            $data['title'] = config('app.response.error.title');
-            $data['msg'] = 'Timesheet appeal with the same applied date already exists';
-            return $data;
-        }
+        $existingAppealdate = TimesheetAppeals::where('tenant_id', $user->tenant_id)
+        ->where('user_id', $user->id)
+        ->where('applied_date', $input['applied_date'])
+        ->first();
 
         if ($existingAppeallogid) {
             $data['status'] = config('app.response.error.status');
@@ -1171,6 +1182,8 @@ if ($existingLogs->isNotEmpty()) {
             $data['msg'] = 'Timesheet appeal with the same logid already exists';
             return $data;
         }
+
+       
     
         TimesheetAppeals::create($input);
     

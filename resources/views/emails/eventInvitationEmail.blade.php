@@ -9,8 +9,7 @@
     <br>
     <br>
     <p>Dear teams ,    </p>
-    <p>Please be informed that you are invited :</p>
-    <p>to participate in the following events on:</p>
+    <p>Please be informed that you are invited to participate in the following events on:</p>
     <br>
     <p>Start Date   : {{$start_date}}</p>
     <br>
