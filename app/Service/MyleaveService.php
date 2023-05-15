@@ -154,33 +154,42 @@ class MyleaveService
         ])->first();
 
 
-       if ($checkleavetype) {
-            if ($checkleavetype->day == 0) {
+        if ($checkleavetype && $checkleavetype->day != 0) {
+            $startDate = Carbon::now()->addDays($checkleavetype->day - 1);
+            $currentDate = Carbon::now();
+            $currentDateTime = $currentDate->format('Y-m-d');
 
-            } else {
-                $currentDate = Carbon::now();
-                $allowedDate = $currentDate->copy()->addDays($checkleavetype->day - 1);
+            if ($r->input('leave_date')) {
+                $leaveDate = Carbon::parse($input['leave_date']);
 
-                if (Carbon::parse($input['leave_date'])->lt($allowedDate)) {
-
-                    $data['msg'] = 'The selected date cannot be chosen as it '.$checkleavetype->leave_types.' must be applied after '.$checkleavetype->day.' days';
-                    $data['status'] = config('app.response.error.status');
-                    $data['type'] = config('app.response.error.type');
-                    $data['title'] = config('app.response.error.title');
+                if ($leaveDate->between($currentDate, $startDate) || $leaveDate->lt($currentDate)) {
+                    $data = [
+                        'msg' => 'The application for '.$checkleavetype->leave_types.' cannot be processed. You must apply for '.$checkleavetype->leave_types.' at after '.$checkleavetype->day.' days from today ('.$currentDateTime.')',
+                        'status' => config('app.response.error.status'),
+                        'type' => config('app.response.error.type'),
+                        'title' => config('app.response.error.title')
+                    ];
 
                     return $data;
                 }
-                if (Carbon::parse($input['start_date'])->lt($allowedDate)) {
+            }
 
-                    $data['msg'] = 'The selected date cannot be chosen as it '.$checkleavetype->leave_types.' must be applied after '.$checkleavetype->day.' days';
-                    $data['status'] = config('app.response.error.status');
-                    $data['type'] = config('app.response.error.type');
-                    $data['title'] = config('app.response.error.title');
+            if ($r->input('start_date')) {
+                $leaveDateOther = Carbon::parse($input['start_date']);
+
+                if ($leaveDateOther->between($currentDate, $startDate) || $leaveDateOther->lt($currentDate)) {
+                    $data = [
+                        'msg' => 'The application for '.$checkleavetype->leave_types.' cannot be processed. You must apply for '.$checkleavetype->leave_types.' at after '.$checkleavetype->day.' days from today ('.$currentDateTime.')',
+                        'status' => config('app.response.error.status'),
+                        'type' => config('app.response.error.type'),
+                        'title' => config('app.response.error.title')
+                    ];
 
                     return $data;
                 }
             }
         }
+
 
 
        $getdata = Employee::where('tenant_id', Auth::user()->tenant_id)
@@ -312,17 +321,17 @@ class MyleaveService
 
             MyLeaveModel::create($input);
 
-            $settingEmail = MyLeaveModel::select('myleave.*','leave_types.leave_types as type')
-            ->join('leave_types', 'myleave.lt_type_id', '=', 'leave_types.id')
-            ->where('myleave.tenant_id', Auth::user()->tenant_id)
-            ->orderBy('myleave.created_at', 'DESC')
-            ->first();
+            // $settingEmail = MyLeaveModel::select('myleave.*','leave_types.leave_types as type')
+            // ->join('leave_types', 'myleave.lt_type_id', '=', 'leave_types.id')
+            // ->where('myleave.tenant_id', Auth::user()->tenant_id)
+            // ->orderBy('myleave.created_at', 'DESC')
+            // ->first();
 
-            if ($settingEmail) {
+            // if ($settingEmail) {
 
-                $ms = new MailService;
-                $ms->emailToApproveLeaveNoCommender($settingEmail);
-            }
+            //     $ms = new MailService;
+            //     $ms->emailToApproveLeaveNoCommender($settingEmail);
+            // }
 
 
 

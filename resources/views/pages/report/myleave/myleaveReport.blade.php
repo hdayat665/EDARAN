@@ -41,8 +41,8 @@
                                     <label for="emergency-firstname" class="form-label">Select By :</label>
                                     <select class="form-select" id="reportby" name="">
                                         <option value="" selected>ALL</option>
-                                        <option value="1">Department</option>
-                                        <option value="2">Employee Name</option>
+                                        <option value="1">DEPARTMENT</option>
+                                        <option value="2">EMPLOYEE NAME</option>
                                     </select>
                                 </div>
                             </div>
@@ -73,16 +73,16 @@
                                     <label for="emergency-firstname" class="form-label">Select Status: </label>
                                     <select class="form-select" name="status">
                                         <option value="">ALL</option>
-                                        <option value="1">Pending</option>
-                                        <option value="2">Pending To Approved</option>
-                                        <option value="3">Reject</option>
-                                        <option value="4">Approved</option>
-                                        
+                                        <option value="1">PENDING</option>
+                                        <option value="2">PENDING TO APPROVED</option>
+                                        <option value="3">REJECT</option>
+                                        <option value="4">APPROVED</option>
+
                                     </select>
                                 </div>
                             </div>
 
-                            
+
                             <div class="row p-2">
                                 <div class="col-sm-12" style="display: flex; justify-content: flex-end" >
                                     <button type="submit" class="btn btn-primary mt-3">
@@ -96,7 +96,7 @@
             </div>
         </div>
     </div>
-    
+
 
 </div>
 </div>

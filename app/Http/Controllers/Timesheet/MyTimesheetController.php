@@ -13,7 +13,7 @@ class MyTimesheetController extends Controller
     // public function myTimesheetView()
     // {
     //     $mts = new MyTimeSheetService;
-    
+
     //     $data = $mts->myTimesheetView();
     //     $data['user_id'] = Auth::user()->id;
     //     $data['employee_id'] = $data['employee']->id;
@@ -22,14 +22,14 @@ class MyTimesheetController extends Controller
     //     $data['status_appeal'] = $data['employee']->status_appeal;
 
     //     // $data['employees'] = $mts->getTimesheetEvents();
-        
+
     //     return view('pages.timesheet.myTimesheet', $data);
     // }
 
     public function myTimesheetView()
     {
         $mts = new MyTimeSheetService;
-    
+
         $data = $mts->myTimesheetView();
         $data['user_id'] = Auth::user()->id;
         // $data['employee_id'] = $data['employee']->id;
@@ -51,10 +51,10 @@ class MyTimesheetController extends Controller
             $data['eleaveapprover'] = null;
             $data['appeal_Date'] = null;
         }
-        
+
         return view('pages.timesheet.myTimesheet', $data);
     }
-    
+
 
     public function createLog(Request $r)
     {
@@ -174,7 +174,7 @@ class MyTimesheetController extends Controller
         $result['holidays'] = $ss->getHolidays();
         $result['appeals'] = $ss->getAppeals();
         // dd($result['appeals']);
-        
+
         return response()->json($result);
     }
 
@@ -221,10 +221,10 @@ class MyTimesheetController extends Controller
 
     //TIMESHEET SUMMARY
     public function timesheetSummaryView()
-    {   
-        
+    {
+
         $ss = new MyTimeSheetService;
-        
+
         $data['timesheets'] = $ss->timesheetSummaryView();
 
         return view('pages.timesheet.summarytimesheet', $data);
@@ -280,7 +280,7 @@ class MyTimesheetController extends Controller
 
     //     $data['id'] = $id;
     //     $data['userId'] = $userId;
-        
+
     //     return view('pages.timesheet.viewTimesheet', $data);
     // }
 
@@ -295,10 +295,21 @@ class MyTimesheetController extends Controller
 
     return view('pages.timesheet.viewTimesheet', $data);
 }
+    public function viewTimesheetLeave($userId = ''){
+
+        $ss = new MyTimeSheetService;
+
+
+        $data['userId'] = $userId;
+        $data['employee_name'] = $ss->getemployeeLeave($userId);
+
+
+        return view('pages.timesheet.viewTimesheetLeave', $data);
+    }
 
 
     //SUMMARRY TIMESHEET
-   
+
 
     public function getTimesheetById($id = '', $userId = '')
     {
@@ -319,6 +330,23 @@ class MyTimesheetController extends Controller
             $result['leaves'] = $ss->getLeavesByLotId($getIds->leave_id);
             $result['holidays'] = $ss->getHolidaysByLotId($getIds->holiday_id);
             // dd($result['holidays']);
+        }
+
+        return response()->json($result);
+    }
+    public function getTimesheetByIdLeave($userId = '')
+    {
+        $ss = new MyTimeSheetService;
+        $id =  $ss->getTimesheetByIdLeave($userId);
+        $result['leaves'] = [];
+        $result['holidays'] = [];
+
+        if ($id) {
+            $result['leaves'] = $ss->getLeavesByLotIdLeave($id->user_id);
+            $result['holidays'] = $ss->getHolidaysByLotIdLeave();
+
+            // dd($result['leaves'],$result['holidays']);
+            // die;
         }
 
         return response()->json($result);
@@ -390,7 +418,7 @@ class MyTimesheetController extends Controller
         $data['events'] = $ss->getRealtimeEvents($input);
         $data['employeeId'] = $input['employee_name'];
         $data['eventId'] = $input['event_name'];
-        
+
         return view('pages.timesheet.realtimeTimesheet',$data);
 
     }

@@ -249,4 +249,31 @@ $(document).ready(function () {
         ],
         responsive: false,
     });
+
+    $(document).on("change", "#datepickerstart, #datepickerend", function () {
+        var startDate = $("#datepickerstart").val();
+        var endDate = $("#datepickerend").val();
+        var totalDays = "";
+
+        if(startDate.trim() === ""){
+            $("#datepickerend").val("");
+        }
+
+        if (startDate && endDate) {
+
+            var date1 = new Date(startDate);
+            var date2 = new Date(endDate);
+            var timeDiff = date2.getTime() - date1.getTime();
+            var dayDiff = Math.ceil(timeDiff / (1000 * 3600 * 24));
+
+            totalDays = dayDiff + 1;
+
+            if (totalDays <= 0) {
+                $("#datepickerend").val("");
+            } else {
+
+            }
+
+        }
+    });
 });
