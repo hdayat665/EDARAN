@@ -6,7 +6,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form id="addParentForm"">
+                <form id="addParentForm">
                     <div class="row p-2">
                         <div class="col-sm-6">
                             <label for="firstname" class="form-label">First Name*</label>
