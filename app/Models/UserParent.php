@@ -44,6 +44,7 @@ class UserParent extends Authenticatable
         'idFile',
         'okuFile',
         'oldIDNo',
+        'okuCardNum',
     ];
 }
 

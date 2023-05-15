@@ -213,6 +213,7 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('/addEmployeeSibling', 'addEmployeeSibling');
             Route::post('/updateEmployeeSibling', 'updateEmployeeSibling');
             Route::post('/addEmployeeParent', 'addEmployeeParent');
+            Route::get('/getEmployeeAddressforParent/{id}', 'getEmployeeAddressforParent');
             Route::post('/updateEmployeeParent', 'updateEmployeeParent');
             Route::post('/updateEmployeeVehicle', 'updateVehicle');
             Route::post('/addEmployeeVehicle', 'addVehicle');

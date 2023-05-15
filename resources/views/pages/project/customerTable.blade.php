@@ -40,7 +40,7 @@
                                 <tr>
                                     <td width="1%" class="fw-bold text-dark">{{$id}}</td>
                                     <td>
-                                        <a href="javascript:;" data-id="{{ $customer->id }}" id="editButton" class="btn btn-primary"><i class="fa fa-cogs"></i> Edit</a>
+                                        <a href="javascript:;" data-id="{{ $customer->id }}" id="editButton" class="btn btn-primary">Edit</a>
                                         
                                         <!-- <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle"><i class="fa fa-cogs"></i> Actions <i class="fa fa-caret-down"></i></a>
                                         <div class="dropdown-menu">

@@ -56,7 +56,7 @@
                                 <tr class="odd gradeX">
                                     <td width="1%">{{$id++}}</td>
                                     <td>
-                                        <a href="/projectInfoEdit/{{$projectInfo->id}}" class="btn btn-primary"><i class="fa fa-cogs"></i> Edit</a>
+                                        <a href="/projectInfoEdit/{{$projectInfo->id}}" class="btn btn-primary">Edit</a>
                                     </td>
                                     <td>{{$projectInfo->LOA_date}}</td>
                                     <td>{{$projectInfo->customer_name}}</td>

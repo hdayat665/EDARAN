@@ -117,7 +117,7 @@
                             <label for="expirydate" class="form-label">Relationship</label>
                             <select class="form-select" name="relationship" id="relationshipP1">
                                 <?php $relationship = relationship() ?>
-                                <option value="0" label="PLEASE CHOOSE"  ></option>
+                                <option value="" label="PLEASE CHOOSE"  ></option>
                                 @foreach ($relationship as $key => $status)
                                 <option value="{{$key}}"> {{$status}}</option>
                                 @endforeach

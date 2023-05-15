@@ -190,7 +190,12 @@ $(document).ready(function() {
 
             locationOffice.done(function(data) {
                 var select = document.getElementById("projectLocationOffice");
-                select.innerHTML = '<option value="">Please Choose</option>';
+                select.innerHTML = '<option value="">PLEASE CHOOSE</option>';
+                var officeOption = document.createElement("option");
+                officeOption.value = "OFFICE";
+                officeOption.text = "OFFICE";
+                select.appendChild(officeOption);
+                // add other options
                 for (let i = 0; i < data.length; i++) {
                     const location = data[i];
                     var opt = document.createElement("option");
@@ -200,7 +205,7 @@ $(document).ready(function() {
                 }
                 // $('#projectLocationOffice').picker({ search: true });
             });
-
+            
 
             // var activityOffice = getActivityByProjectId(projectId);
 
