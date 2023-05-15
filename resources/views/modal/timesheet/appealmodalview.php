@@ -76,7 +76,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">CANCEL</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">CLOSE</button>
                         <!-- <button href="javascript:;" id="addappealb" class="btn btn-primary">SUBMIT</button> -->
                     </div>
                 </form>

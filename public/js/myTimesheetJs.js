@@ -859,7 +859,7 @@ $(document).ready(function() {
             var loghour = [];
             for (let i = 0; i < data['logs'].length; i++) {
                 var logs = data['logs'][i];
-
+                console.log(logs);
                 var startDate = new Date(logs['date']);
                 var startMonth = startDate.getMonth() + 1;
                 startMonth = startMonth < 10 ? "0" + startMonth : startMonth;
@@ -961,7 +961,7 @@ $(document).ready(function() {
             var holidayDates = [];
             for (let i = 0; i < data['holidays'].length; i++) {
                 var holidays = data['holidays'][i];
-
+                // console.log(holidays);
                 var startDate = new Date(holidays['start_date']);
                 var startMonth = startDate.getMonth() + 1;
                 startMonth = startMonth < 10 ? "0" + startMonth : startMonth;
@@ -1024,7 +1024,7 @@ $(document).ready(function() {
             dataHoliday = dataleave.concat(holiday);
 
             
-            // console.log(holiday);
+            console.log(dataHoliday);
             var calendar = new FullCalendar.Calendar(calendarElm, {
                 headerToolbar: {
                     left: 'logButton EventButton SumButton',
@@ -1131,6 +1131,7 @@ $(document).ready(function() {
                             $(info.el).css('background-color', 'red');
                             var button = $('<button/>', {
                               text: 'View Appeal',
+                              class: 'appeal-view-button',
                               click: function () {
                                 // Get the logid for the corresponding appliedDate
                                 var index = appliedDates.indexOf(datedefaultformat);
@@ -1167,7 +1168,7 @@ $(document).ready(function() {
                             // console.log(appliedDates);
                             var button1 = $('<button/>', {
                                 text: 'Add Appeal',
-                                class: 'appeal-button',
+                                class: 'appeal-add-button',
                                 click: function () {
                                     var year = info.date.getFullYear();
                                     var month = info.date.getMonth();
@@ -1187,17 +1188,21 @@ $(document).ready(function() {
                                 }
                             });
                             $(info.el).append(button1);
-                            $(button1).css({
-                                position: 'absolute',
-                                top: '0',
-                                left: '50%',
-                                transform: 'translateX(-50%) translateY(-100%)'
-                              });
+                            // $(button1).css({
+                            //     position: 'absolute',
+                            //     top: '0',
+                            //     left: '50%',
+                            //     transform: 'translateX(-50%)'
+                            //   });
                             
-                              // Set the date cell position to relative
-                              $(info.el).css({
-                                position: 'relative'
-                              });
+                            //   // Set the date cell position to relative
+                            //   $(info.el).css({
+                            //     position: 'relative'
+                            //   });
+
+                            $(info.el).append(button1);
+                            $(button1).css({
+                            });
                             
                         }
                     } else if (info.date.getDay() === 0) { // Sunday
@@ -1214,7 +1219,34 @@ $(document).ready(function() {
                    
                     
                   
-                  
+                    dateClick: function(info) {
+                        const today = dayjs();
+                        const clickedDate = dayjs(info.date);
+                    
+                        // check if the clicked date is within the last 2 days before the current date
+                        // and if the cell already has an appeal button
+                        if ((clickedDate.diff(today, 'day') < -2 || clickedDate.isAfter(today, 'day')) &&
+                            ($(info.dayEl).find('.appeal-add-button, .appeal-view-button').length !== 0)) {
+                            return;
+                        }
+
+                        else if ((clickedDate.diff(today, 'day') < -2 || clickedDate.isAfter(today, 'day')) &&
+                        ($(info.dayEl).find('.appeal-add-button, .appeal-view-button').length == 0)){
+                            Swal.fire({
+                            icon: 'error',
+                            title: 'Error',
+                            text: 'You can only select the current date and 2 days before.'
+                            });
+                            return;
+                        }
+                    
+                        // show the modal and set the date
+                        $('#addLogModal').modal('show');
+                        const formattedDate = clickedDate.format('DD-MM-YYYY');
+                        $("#dateaddlog").val(formattedDate);
+                    },
+                    
+                    
                   
                 // original code
                 // dateClick: function(info) {
