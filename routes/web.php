@@ -518,7 +518,9 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('/searchTimesheet', 'searchTimesheet');
             Route::post('/approveAllTimesheet', 'approveAllTimesheet');
             Route::get('/viewTimesheet/{id}/{userId}', 'viewTimesheet');
+            Route::get('/viewTimesheetLeave/{userId}', 'viewTimesheetLeave');
             Route::get('/getTimesheetById/{id}/{userId}', 'getTimesheetById');
+            Route::get('/getTimesheetByIdLeave/{userId}', 'getTimesheetByIdLeave');
             Route::get('/getProjectByidTimesheet/{id}', 'getProjectByidTimesheet');
             Route::get('/getActivityNameById/{id}', 'getActivityNameById');
             Route::get('/updateAttendStatus/{id}/{status}', 'updateAttendStatus');
@@ -543,8 +545,8 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('/appealtimesheet', 'appealtimesheetview');
             Route::get('/updateStatusappeal/{id}/{status}', 'updateStatusappeal');
             Route::get('/getAppealById/{id}', 'getAppealById');
-            
-            
+
+
         });
 
 
