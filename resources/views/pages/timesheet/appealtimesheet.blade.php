@@ -28,17 +28,17 @@
                                         <div class="dropdown-menu">
                                             @if ($app->status == 'Locked')
                                             <div class="viewtimesheet">
-                                                <a href="javascript:;" id="viewappealb" data-id="{{$app->id}}" class="dropdown-item"> View Timesheet</a> 
+                                                <a href="javascript:;" id="viewappealb" data-id="{{$app->id}}" class="dropdown-item"> View Log Appeal</a> 
                                             </div>
                                             <div class="approvetimesheet">
-                                                <a  class="dropdown-item" data-id="{{$app->id}}" data-status="Approve" id="statusButton">Approve Timesheet</a>
+                                                <a  class="dropdown-item" data-id="{{$app->id}}" data-status="Approved" id="statusButton"> Approve Log Appeal</a>
                                             </div>
                                             <div class="approvetimesheet">
-                                                <a  class="dropdown-item" data-id="{{$app->id}}" data-status="Reject" id="statusButton">Reject Timesheet</a>
+                                                <a  class="dropdown-item" data-id="{{$app->id}}" data-status="Rejected" id="statusButton">Reject Log Appeal</a>
                                             </div>
                                             @else
                                             <div class="viewtimesheet">
-                                                <a href="javascript:;" id="viewappealb" data-id="{{$app->id}}" class="dropdown-item"> View Timesheet</a> 
+                                                <a href="javascript:;" id="viewappealb" data-id="{{$app->id}}" class="dropdown-item"> View Log Timesheet</a> 
                                             </div>
                                            
                                             @endif

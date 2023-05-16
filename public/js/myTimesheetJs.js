@@ -1353,7 +1353,7 @@ $(document).ready(function () {
                           statuses.push(status);
                         }
                         const formattedDate = clickedDate.format('YYYY-MM-DD');
-                        if (appliedDates.includes(formattedDate) && statuses[appliedDates.indexOf(formattedDate)] === 'Approve') {
+                        if (appliedDates.includes(formattedDate) && statuses[appliedDates.indexOf(formattedDate)] === 'Approved') {
                             // show the view appeal modal
                             $('#addLogModal').modal('show');
                             const formattedDate = clickedDate.format('DD-MM-YYYY');
