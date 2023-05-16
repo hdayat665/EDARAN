@@ -2091,31 +2091,15 @@ public function updateTypeOfLogs($r, $id)
 
         date_default_timezone_set("Asia/Kuala_Lumpur");
 
-        $data1 = $input['CurrentEntitlement'];
-        $data2 = $input['CurrentEntitlementBalance'];
-        $data3 = $input['SickLeaveEntitlement'];
-        $data4 = $input['SickLeaveEntitlementBalance'];
-        $data5 = $input['CarryForward'];
-        $data6 = $input['CurrentForwardBalance'];
-
-        if ($r->input('LapsedDate')) {
-            $data7 = date('Y-m-d', strtotime($input['LapsedDate']));
-        } else {
-            $data7 = null;
-        }
-
-        $data8 = date('Y-m-d', strtotime($input['Lapsed']));
-
+        $data1 = $input['CurrentEntitlementBalance'];
+        $data2 = $input['SickLeaveEntitlementBalance'];
+        $data3 = $input['CurrentForwardBalance'];
 
         $input = [
-            'current_entitlement' => $data1,
-            'current_entitlement_balance' => $data2,
-            'sick_leave_entitlement' => $data3,
-            'sick_leave_entitlement_balance' => $data4,
-            'carry_forward' => $data5,
-            'carry_forward_balance' => $data6,
-            'lapsed_date' => $data7,
-            'lapse' => $data8
+
+            'current_entitlement_balance' => $data1,
+            'sick_leave_entitlement_balance' => $data2,
+            'carry_forward_balance' => $data3,
         ];
 
         leaveEntitlementModel::where('id', $id)->update($input);

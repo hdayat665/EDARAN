@@ -996,6 +996,43 @@ class SettingController extends Controller
         return view('pages.setting.eleave.eleaveentitlement', $data);
     }
 
+    public function leaveAnnualView()
+    {
+        $ss = new SettingService;
+
+        $data['leave'] = $ss->leaveEntitlementView();
+        $data['nameStaff'] = $ss->leaveNameStaff();
+
+        return view('pages.setting.eleave.leaveAnnual', $data);
+    }
+    public function leaveSickView()
+    {
+        $ss = new SettingService;
+
+        $data['leave'] = $ss->leaveEntitlementView();
+        $data['nameStaff'] = $ss->leaveNameStaff();
+
+        return view('pages.setting.eleave.leaveSick', $data);
+    }
+    public function leaveCarrForwardView()
+    {
+        $ss = new SettingService;
+
+        $data['leave'] = $ss->leaveEntitlementView();
+        $data['nameStaff'] = $ss->leaveNameStaff();
+
+        return view('pages.setting.eleave.leaveCarrForward', $data);
+    }
+    public function leaveUnpaidView()
+    {
+        $ss = new SettingService;
+
+        $data['leave'] = $ss->leaveEntitlementView();
+        $data['nameStaff'] = $ss->leaveNameStaff();
+
+        return view('pages.setting.eleave.leaveUnpaid', $data);
+    }
+
     public function createLeaveEntitlement(Request $r)
     {
 
