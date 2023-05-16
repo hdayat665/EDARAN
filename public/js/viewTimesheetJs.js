@@ -247,6 +247,34 @@ for (let i = 0; i < data['holidays'].length; i++) {
 
             },
 
+            dayCellDidMount: function(info) {
+                var current = new Date(info.date);
+                var hasLog = false;
+                    
+                
+                for (let i = 0; i < holidayDates.length; i++) {
+                  if (current >= holidayDates[i].start && current <= holidayDates[i].end) { 
+                    $(info.el).css('background-color', '#FFD580');
+                    return;
+                  }
+                }
+                
+                for (let i = 0; i < leavesdate.length; i++) {
+                  if (current >= leavesdate[i].start && current <= leavesdate[i].end) { 
+                    $(info.el).css('background-color', '#E0E0E0');
+                    return;
+                  }
+                }
+                
+                if (info.date.getDay() === 0) { // Sunday
+                  $(info.el).css('background-color', '#87CEEB'); 
+                } else if (info.date.getDay() === 6) { // Saturday
+                  $(info.el).css('background-color', '#87CEEB'); 
+                } else {
+                  $(info.el).css('background-color', 'white');
+                }
+              },
+
 
             eventClick: function(info) {
                 info.jsEvent.preventDefault();
