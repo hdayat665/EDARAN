@@ -458,10 +458,10 @@ if (!function_exists('relationship')) {
             '10' => 'SISTER',
             '11' => 'BROTHER-IN-LAW',
             '12' => 'SISTER-IN-LAW',
-            '13' => 'GUARDIAN',
-            '14' => 'STEP-FATHER',
-            '15' => 'STEP-MOTHER',
-            '16' => 'SPOUSE',
+            '13' => 'STEP-FATHER',
+            '14' => 'STEP-MOTHER',
+            '15' => 'STEP-BROTHER',
+            '16' => 'STEP-SISTER',
             '17' => 'GUARDIAN',
 
         ];

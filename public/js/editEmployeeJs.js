@@ -4594,7 +4594,7 @@ $(document).on("click", "#uploadpicture", function () {
 $("#eleaverecommender").picker({ search: true });
 $("#eleaveapprover").picker({ search: true });
 
-// search bar in select box (eleave)
+// // search bar in select box (eleave)
 $("#eclaimrecommender").picker({ search: true });
 $("#eclaimapprover").picker({ search: true });
 

@@ -354,7 +354,7 @@ $(document).ready(function () {
             },
 
             messages: {
-                reasonreject: "you must insert reason why you reject",
+                reasonreject: "Please Insert Reason",
             },
             submitHandler: function (form) {
                 requirejs(["sweetAlert2"], function (swal) {
