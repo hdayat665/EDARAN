@@ -71,8 +71,8 @@ $(document).ready(function () {
            
             $("#log_idv").val(data.logid);
             
-            if (data.status === "locked") {
-                $("#Statusv").val("pending");
+            if (data.status === "Locked") {
+                $("#Statusv").val("Pending");
             } else {
                 $("#Statusv").val(data.status);
             }

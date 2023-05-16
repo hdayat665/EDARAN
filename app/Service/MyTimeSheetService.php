@@ -368,9 +368,9 @@ if ($existingLogs->isNotEmpty()) {
             AttendanceEvent::create($input);
         }
 
-
-
-
+        
+       
+        
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
@@ -1184,9 +1184,10 @@ if ($existingLogs->isNotEmpty()) {
             }
         }
         $user = Auth::user();
+        // dd($user);
         $input['user_id'] = $user->id;
         $input['tenant_id'] = $user->tenant_id;
-
+    
         $existingAppealdate = TimesheetAppeals::where('tenant_id', $user->tenant_id)
             ->where('applied_date', $input['applied_date'])
             ->first();
@@ -1194,7 +1195,7 @@ if ($existingLogs->isNotEmpty()) {
         $existingAppeallogid = TimesheetAppeals::where('tenant_id', $user->tenant_id)
         ->where('logid', $input['logid'])
         ->first();
-
+    
         if ($existingAppealdate) {
             $data['status'] = config('app.response.error.status');
             $data['type'] = config('app.response.error.type');
@@ -1210,7 +1211,7 @@ if ($existingLogs->isNotEmpty()) {
             $data['msg'] = 'Timesheet appeal with the same logid already exists';
             return $data;
         }
-
+    
         TimesheetAppeals::create($input);
 
         // Return success response

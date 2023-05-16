@@ -12,17 +12,28 @@
     <p>Please be adviced that the event has been cancelled :</p>
     <p>as follows   :</p>
     <br>
-    <p>Start Date   : {{$start_date ?? '-'}}</p>
-    <br>
-    <p>Start Time   : {{$start_time ?? '-'}} </p>
-    <br>
-    <p>Duration     : {{$duration ?? '-'}}</p>
-    <br>
-    <p>Venue        : {{$venue ?? '-'}}</p>
-    <br>
-    <p>Description  : {{$desc ?? '-'}}</p>
-    <br>
-    <br>
+    <table border="1">
+      <tr>
+        <td>Start Date</td>
+        <td>{{$start_date}}</td>
+      </tr>
+      <tr>
+        <td>Start Time</td>
+        <td>{{$start_time}}</td>
+      </tr>
+      <tr>
+        <td>Duration</td>
+        <td>{{$duration}}</td>
+      </tr>
+      <tr>
+        <td>Venue</td>
+        <td>{{$venue}}</td>
+      </tr>
+      <tr>
+        <td>Description</td>
+        <td>{{$desc}}</td>
+      </tr>
+    </table>
     <br>
     <p> Thank you.</p>
     <br>
