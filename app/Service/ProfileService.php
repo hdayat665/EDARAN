@@ -496,6 +496,13 @@ class ProfileService
                 $input['okuID'] = null;
             }
 
+            if(!isset($input['passport']))
+            {
+                $input['passport'] = null;
+                $input['expiryDate'] = null;
+                $input['issuingCountry'] = null;
+            }
+
             // $input['dateJoined'] = "'".dateFormatInput($input['dateJoined'])."'";
             // $input['expiryDate'] = "'".dateFormatInput($input['expiryDate'])."'";
             // $input['DOM'] = "'".dateFormatInput($input['DOM'])."'";
@@ -526,7 +533,11 @@ class ProfileService
             $data['type'] = config('app.response.error.type');
             $data['title'] = config('app.response.error.title');
             $data['msg'] = 'Max Companion can add only 4';
+
         } else {
+
+            $input['user_id'] = $id;
+
             if ($_FILES['idFile']['name']) {
                 $idAttachment = upload($r->file('idFile'));
                 $input['idFile'] = $idAttachment['filename'];
@@ -545,7 +556,6 @@ class ProfileService
                 }
             }
 
-
             if (isset($_FILES['okuID']['name'])) {
                 $idOKU = upload($r->file('okuID'));
                 $input['okuID'] = $idOKU['filename'];
@@ -553,28 +563,16 @@ class ProfileService
                 $input['okuID'] = null;
             }
             
-            
             if(!isset($input['dateJoined']))
             {
-                $input['dateJoined'] = NULL;
+                $input['dateJoined'] = null;
             }
-
-            $input['user_id'] = $id;
-            $input['dateJoined'] = dateFormat($input['dateJoined']);
-
 
             if(!isset($input['expiryDate']))
             {
-                $input['expiryDate'] = NULL;
-            }else {
-                $input['expiryDate'] = dateFormat($input['expiryDate']);
-            }
+                $input['expiryDate'] = null;
+            }       
 
-
-        
-
-            $input['DOM'] = dateFormat($input['DOM']);
-            $input['DOB'] = dateFormat($input['DOB']);
             $input['mainCompanion'] = isset($input['mainCompanion']) ? 1 : 0;
             $companion = UserCompanion::create($input);
 

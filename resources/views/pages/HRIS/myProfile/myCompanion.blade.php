@@ -51,7 +51,7 @@
                                 <div class="col-sm-6">
                                         <div class="form-check form-switch">
                                             <label for="citizen" class="form-label">Non-Citizen ?</label>
-                                            <input class="form-check-input partCheck2" {{ ($companion->nonCitizen ?? '') ? 'checked' : '' }} name="nonCitizen" value="{{ $companion->nonCitizen ?? '' }}" type="checkbox" role="switch" id="citizen2">
+                                            <input class="form-check-input partCheck2" {{ ($companion->nonCitizen ?? '') ? 'checked' : '' }} name="nonCitizen" value="on" type="checkbox" role="switch" id="citizen2">
                                         </div>
                                     </div> 
                                 <div class="col-sm-6">
@@ -373,7 +373,7 @@
                                 <div class="col-sm-6">
                                     <div class="form-check form-switch">
                                         <label for="citizen" class="form-label">Non-Citizen ?</label>
-                                        <input class="form-check-input partCheck6" {{ ($companion->mainCompanion ?? '') ? 'checked' : '' }} name="nonCitizen" value="{{ $companion->nonCitizen ?? '' }}" type="checkbox" role="switch" id="citizen2">
+                                        <input class="form-check-input partCheck6" {{ ($companion->nonCitizen ?? '') ? 'checked' : '' }} name="nonCitizen" value="{{ $companion->nonCitizen ?? '' }}" type="checkbox" role="switch" id="citizen2">
                                     </div>
                                 </div> 
                                 <div class="col-sm-6">
@@ -396,11 +396,11 @@
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <label for="passport" class="form-label">Passport Number</label>
-                                        <input type="text" id="passport3" name="passport" value="{{ $companion->passport ?? '' }}" class="form-control" placeholder="PASSPORT NUMBER" aria-describedby="passport">
+                                        <input type="text" id="passportUpdateCompanion" name="passport" value="{{ $companion->passport ?? '' }}" class="form-control" placeholder="PASSPORT NUMBER" aria-describedby="passport">
                                     </div>
                                     <div class="col-sm-6">
                                         <label for="expirydate" class="form-label">Expiry Date*</label>
-                                        <input type="text" id="expirydate3" name="expiryDate" value="{{ date_format(date_create($companion->expiryDate), 'Y-m-d') }}" placeholder="YYYY/MM/DD" class="form-control" aria-describedby="expirydate">
+                                        <input type="text" id="expiryDateUpdateCompanion" name="expiryDate" value="{{ ($companion->expiryDate !== null) ? date_format(date_create($companion->expiryDate), 'Y-m-d') : '' }}" placeholder="YYYY/MM/DD" class="form-control" aria-describedby="expirydate">
                                     </div>
                                 </div>
                             </div>
@@ -423,7 +423,7 @@
                             </div>
                             <div class="col-sm-3">
                                 <label for="dob" class="form-label">Date Of Birth</label>
-                                <input type="text" id="dobuc" name="DOB" value="{{ date_format(date_create($companion->DOB), 'Y-m-d') }}" class="form-control" aria-describedby="dob" placeholder="YYYY/MM/DD">
+                                <input type="text" id="dobuc" name="DOB" value="{{ ($companion->DOB !== null) ? date_format(date_create($companion->DOB), 'Y-m-d') : '' }}" class="form-control" aria-describedby="dob" placeholder="YYYY/MM/DD">
                             </div>
                         </div>
                         <div class="row p-2">
@@ -435,7 +435,7 @@
                                     </div>
                                     <div class="col-sm-6">
                                         <label for="dom" class="form-label">Date Marriage</label>
-                                        <input type="text" id="dom" name="DOM" value="{{ date_format(date_create($companion->DOM), 'Y-m-d') }}" class="form-control" aria-describedby="dom" placeholder="YYYY/MM/DD">
+                                        <input type="text" id="dom" name="DOM" value="{{ ($companion->DOM !== null) ? date_format(date_create($companion->DOM), 'Y-m-d') : '' }}" class="form-control" aria-describedby="dom" placeholder="YYYY/MM/DD">
                                     </div>
                                 </div>
                             </div>  
@@ -489,31 +489,43 @@
                             </div>
                         </div>
                         
+
+                        <div class="row p-2">
+                            <div class="col-sm-6">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="same-addressUC" name="sameAsPermanent" {{ ($companion->sameAsPermanent ?? '') ? 'checked' : '' }}>
+                                    <label class="form-check-label" for="same-addressUC">
+                                        Same as Employee Permanent Address
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="row p-2">
                             <div class="col-sm-6">
                                 <label for="address1" class="form-label">Address 1*</label>
-                                <input type="text" id="address1" name="address1" value="{{ $companion->address1 ?? '' }}" class="form-control" placeholder="ADDRESS 1" aria-describedby="address1">
+                                <input type="text" id="address1UC" name="address1" value="{{ $companion->address1 ?? '' }}" class="form-control" placeholder="ADDRESS 1" aria-describedby="address1">
                             </div>
                             <div class="col-sm-6">
                                 <label for="address2" class="form-label">Address 2</label>
-                                <input type="text" id="address2" name="address2" value="{{ $companion->address2 ?? '' }}" class="form-control" placeholder="ADDRESS 2" aria-describedby="address2">
+                                <input type="text" id="address2UC" name="address2" value="{{ $companion->address2 ?? '' }}" class="form-control" placeholder="ADDRESS 2" aria-describedby="address2">
                             </div>
                         </div>
                         <div class="row p-2">
                             <div class="col-sm-6">
                                 <label for="lastname" class="form-label">Postcode*</label>
-                                <input type="text" id="lastname" name="postcode" value="{{ $companion->postcode ?? '' }}" class="form-control" placeholder="00000" aria-describedby="lastname">
+                                <input type="text" id="postcodeUC" name="postcode" value="{{ $companion->postcode ?? '' }}" class="form-control" placeholder="00000" aria-describedby="lastname">
                             </div>
                             <div class="col-sm-6">
                                 <label for="firstname" class="form-label">City*</label>
-                                <input type="text" id="firstname" name="city" value="{{ $companion->city ?? '' }}" class="form-control" placeholder="CITY" aria-describedby="firstname">
+                                <input type="text" id="cityUC" name="city" value="{{ $companion->city ?? '' }}" class="form-control" placeholder="CITY" aria-describedby="firstname">
                             </div>
                             
                         </div>
                         <div class="row p-2">
                             <div class="col-sm-6">
                                 <label for="state" class="form-label">State*</label>
-                                <select class="form-select" name="state" value="{{ $companion->state ?? '' }}" style="text-transform:uppercase">
+                                <select class="form-select" id="stateUC" name="state" value="{{ $companion->state ?? '' }}" style="text-transform:uppercase">
                                     <?php $state = state() ?>
                                     <option value="" label="PLEASE CHOOSE" ></option>
                                     @foreach ($state as $key => $status)
@@ -523,7 +535,7 @@
                             </div>
                             <div class="col-sm-6">
                                 <label for="country" class="form-label">Country*</label>
-                                <select class="form-select" name="country" value="{{ $companion->country ?? '' }}">
+                                <select class="form-select" id="countryUC" name="country" value="{{ $companion->country ?? '' }}">
                                     <option value="" label="PLEASE CHOOSE" selected ></option>
                                     <optgroup id="country-optgroup-Americas" label="Americas">
                                         @foreach ($americass as $key => $america)

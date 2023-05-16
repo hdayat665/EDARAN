@@ -103,9 +103,7 @@
                                 <?php $relationship = relationship() ?>
                                 <option value="" label="PLEASE CHOOSE"  ></option>
                                 @foreach ($relationship as $key => $status)
-                                    @if ($key >= 1 && $key <= 15)
-                                        <option value="{{$key}}"> {{$status}}</option>
-                                    @endif
+                                    <option value="{{$key}}"> {{$status}}</option>
                                 @endforeach
                             </select>
                         </div>
