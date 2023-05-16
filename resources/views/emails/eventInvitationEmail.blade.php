@@ -11,16 +11,29 @@
     <p>Dear teams ,    </p>
     <p>Please be informed that you are invited to participate in the following events on:</p>
     <br>
-    <p>Start Date   : {{$start_date}}</p>
-    <br>
-    <p>Start Time   : {{$start_time}} </p>
-    <br>
-    <p>Duration     : {{$duration}}</p>
-    <br>
-    <p>Venue        : {{$venue}}</p>
-    <br>
-    <p>Description  : {{$desc}}</p>
-    <br>
+    <table border="1">
+      <tr>
+        <td>Start Date</td>
+        <td>{{$start_date}}</td>
+      </tr>
+      <tr>
+        <td>Start Time</td>
+        <td>{{$start_time}}</td>
+      </tr>
+      <tr>
+        <td>Duration</td>
+        <td>{{$duration}}</td>
+      </tr>
+      <tr>
+        <td>Venue</td>
+        <td>{{$venue}}</td>
+      </tr>
+      <tr>
+        <td>Description</td>
+        <td>{{$desc}}</td>
+      </tr>
+    </table>
+    
     <br>
     <br>
     <p> Thank you.</p>
