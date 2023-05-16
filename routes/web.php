@@ -374,6 +374,11 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('/getAccomodation', 'getAccomodation');
 
             // eleave Leave Entitlement
+            Route::get('/leaveAnnual', 'leaveAnnualView'); //LEAVE ENTITLEMENT ICON
+            Route::get('/leaveSick', 'leaveSickView');
+            Route::get('/leaveCarrForward', 'leaveCarrForwardView');
+            Route::get('/leaveUnpaid', 'leaveUnpaidView');
+
             Route::get('/leaveEntitlement', 'eleaveEntitlementView');
             Route::post('/createLeaveEntitlement', 'createLeaveEntitlement');
             Route::get('/getcreateLeaveEntitlement/{id}', 'getcreateLeaveEntitlement');
@@ -518,7 +523,9 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('/searchTimesheet', 'searchTimesheet');
             Route::post('/approveAllTimesheet', 'approveAllTimesheet');
             Route::get('/viewTimesheet/{id}/{userId}', 'viewTimesheet');
+            Route::get('/viewTimesheetLeave/{userId}', 'viewTimesheetLeave');
             Route::get('/getTimesheetById/{id}/{userId}', 'getTimesheetById');
+            Route::get('/getTimesheetByIdLeave/{userId}', 'getTimesheetByIdLeave');
             Route::get('/getProjectByidTimesheet/{id}', 'getProjectByidTimesheet');
             Route::get('/getActivityNameById/{id}', 'getActivityNameById');
             Route::get('/updateAttendStatus/{id}/{status}', 'updateAttendStatus');
@@ -543,8 +550,8 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('/appealtimesheet', 'appealtimesheetview');
             Route::get('/updateStatusappeal/{id}/{status}', 'updateStatusappeal');
             Route::get('/getAppealById/{id}', 'getAppealById');
-            
-            
+
+
         });
 
 

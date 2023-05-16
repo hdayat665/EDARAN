@@ -40,6 +40,7 @@ requirejs.config({
         myTimesheetJs: assets + "/js/myTimesheetJs",
         timesheetApprovalJs: assets + "/js/timesheetApprovalJs",
         viewTimesheetJs: assets + "/js/viewTimesheetJs",
+        viewTimesheetLeaveJs: assets + "/js/viewTimesheetLeaveJs",
         eventRealtimeJs: assets + "/js/eventRealtimeJs",
         statusReportJs: assets + "/js/statusReportJs",
         employeeReportJs: assets + "/js/employeeReportJs",
@@ -262,6 +263,9 @@ if ($("#timesheetSummaryJs").length > 0) {
 }
 if ($("#viewTimesheetJs").length > 0) {
     requirejs(["viewTimesheetJs"]);
+}
+if ($("#viewTimesheetLeaveJs").length > 0) {
+    requirejs(["viewTimesheetLeaveJs"]);
 }
 
 if ($("#eventRealtimeJs").length > 0) {

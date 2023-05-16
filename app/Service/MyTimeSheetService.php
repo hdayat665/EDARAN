@@ -40,7 +40,7 @@ class MyTimeSheetService
         //     ['employment.user_id', Auth::user()->id]
         // ])
         // ->first();
-        
+
         return $data;
     }
 
@@ -78,7 +78,7 @@ class MyTimeSheetService
     $input['tenant_id'] = $user->tenant_id;
     $input['date'] = date_format(date_create($input['date']), 'Y/m/d');
 
-    
+
 
     $startTime = date('Y-m-d H:i:s', strtotime($input['start_time']));
     $endTime = date('Y-m-d H:i:s', strtotime($input['end_time']));
@@ -125,7 +125,7 @@ class MyTimeSheetService
     }
 
     // $dayOfWeek = date('N', strtotime($input['date']));
- 
+
     // if ($dayOfWeek == 6 || $dayOfWeek == 7) { // Saturday = 6, Sunday = 7
     //     $data['status'] = config('app.response.error.status');
     //     $data['type'] = config('app.response.error.type');
@@ -155,7 +155,7 @@ class MyTimeSheetService
         // $end_time = strtotime($input['end_time']);
         // $totaltime = $end_time - $start_time;
 
-   
+
 
 
 
@@ -178,13 +178,13 @@ class MyTimeSheetService
             unset($input['project_location_office']);
         }
 
-       
+
 
         // $totaltime = $totaltime - ($h * 3600);
         $totaltime = strtotime($input['end_time']) - strtotime($input['start_time']);
         $h = intval($totaltime / 3600);
         $totaltime = $totaltime - ($h * 3600);
-        
+
         // Minutes is obtained by dividing
         // remaining total time with 60
         $m = intval($totaltime / 60);
@@ -263,7 +263,7 @@ if ($existingLogs->isNotEmpty()) {
         $employee = DB::table('employment')
                         ->where('user_id', $userId)
                         ->first();
-    
+
         return $employee ? $employee->name : '';
     }
 
@@ -368,8 +368,8 @@ if ($existingLogs->isNotEmpty()) {
             AttendanceEvent::create($input);
         }
 
-        
-       
+
+
 
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
@@ -484,9 +484,9 @@ if ($existingLogs->isNotEmpty()) {
             $data['msg'] = 'timesheet event not found';
         } else {
             $eventDetails = TimesheetEvent::where('id', $id)->orderBy('created_at', 'DESC')->first();
-            
+
             $departmentName = getDepartmentName($user->id);
-            
+
             $employeeName = getEmployeeName($user->id);
             $venue = projectLocationById($eventDetails->location);
 
@@ -542,21 +542,21 @@ if ($existingLogs->isNotEmpty()) {
     public function getEventById($id)
     {
         $event = TimesheetEvent::find($id);
-    
+
         $participantIds = explode(',', $event->participant);
-    
+
         $employees = DB::table('employment')
                         ->whereIn('user_id', $participantIds)
                         ->get();
-    
+
         $employeeNames = $employees->pluck('employeeName')->toArray();
-    
+
         $event->participantNames = implode(',', $employeeNames);
-    
+
         return $event;
     }
-    
-    
+
+
 
 
     // public function getLogs()
@@ -707,7 +707,7 @@ if ($existingLogs->isNotEmpty()) {
     $input['employee_name'] = $employee->employeeName;
     $input['department'] = $employee->departmentName;
     $input['designation'] = $employee->designationName;
-    
+
     // Add a check for existing data in TimesheetApproval with the same month
     $existing_approval = TimesheetApproval::where('user_id', $userId)->where('month', date('M'))->first();
     if ($existing_approval) {
@@ -717,7 +717,7 @@ if ($existingLogs->isNotEmpty()) {
         $data['msg'] = 'You already submit log for this month';
         return $data;
     }
-    
+
     // If there is no existing data, create a new one
     $input['status'] = 'pending';
     TimesheetApproval::create($input);
@@ -739,10 +739,10 @@ if ($existingLogs->isNotEmpty()) {
     }
     //TIMESHEET SUMMARY
     public function timesheetSummaryView()
-    {   
+    {
         $user = Auth::user();
         $data = TimesheetApproval::where('tenant_id', $user->tenant_id)
-                ->where('user_id', $user->id) 
+                ->where('user_id', $user->id)
                 ->orderBy('created_at', 'DESC')
                 ->get();
 
@@ -853,6 +853,17 @@ if ($existingLogs->isNotEmpty()) {
         return $data;
     }
 
+    public function getTimesheetByIdLeave($userId = ''){
+
+        if ($userId) {
+            $data = Employee::where([['user_id', $userId]])->first();
+        } else {
+            $data = Employee::find($userId);
+        }
+
+        return $data;
+    }
+
     // public function getemployeeNamelog($id)
     // {
 
@@ -865,6 +876,15 @@ if ($existingLogs->isNotEmpty()) {
         $timesheetApproval = TimesheetApproval::find($id);
         if ($timesheetApproval) {
             return $timesheetApproval->employee_name;
+        }
+        return '';
+    }
+
+    public function getemployeeLeave($id)
+    {
+        $timesheetLeave = Employee::find($id);
+        if ($timesheetLeave) {
+            return $timesheetLeave->employeeName;
         }
         return '';
     }
@@ -882,7 +902,7 @@ if ($existingLogs->isNotEmpty()) {
     {
         $ids = explode(',', $id);
 
-      
+
 
         $data = DB::table('myleave as a')
         ->leftjoin('leave_types as b', 'a.lt_type_id', '=', 'b.id')
@@ -893,11 +913,31 @@ if ($existingLogs->isNotEmpty()) {
         return $data;
     }
 
+    public function getLeavesByLotIdLeave($id)
+    {
+
+        $data = MyLeaveModel::select('myleave.*','leave_types.leave_types', 'employment.employeeName')
+        ->join('leave_types', 'myleave.lt_type_id', '=', 'leave_types.id')
+        ->join('employment', 'myleave.up_user_id', '=', 'employment.user_id')
+        ->where('myleave.up_recommendedby_id', '=', Auth::user()->id)
+        ->where('myleave.up_user_id', '=', $id)
+        ->where('myleave.tenant_id', Auth::user()->tenant_id)
+        ->get();
+        return $data;
+    }
+
     public function getHolidaysByLotId($id)
     {
         $ids = explode(',', $id);
 
         $data = holidayModel::whereIn('id', $ids)->get();
+
+        return $data;
+    }
+
+    public function getHolidaysByLotIdLeave(){
+
+        $data = holidayModel::all();
 
         return $data;
     }
@@ -1030,7 +1070,7 @@ if ($existingLogs->isNotEmpty()) {
 
 
         return $data;
-        
+
     }
 
 
@@ -1045,11 +1085,11 @@ if ($existingLogs->isNotEmpty()) {
             'status' => 'amend',
             'amendreason' => $new_reason
         ];
-        
+
 
         $user = TimesheetApproval::where('id', $id)->first();
 
-        
+
         if (!$user) {
             $data['status'] = config('app.response.error.status');
             $data['type'] = config('app.response.error.type');
@@ -1075,7 +1115,7 @@ if ($existingLogs->isNotEmpty()) {
         $data = DB::table('timesheet_log as a')
             ->leftJoin('userprofile as b', 'a.user_id', '=', 'b.user_id')
             ->select('a.*', 'b.*')
-            ->where([['a.tenant_id', $tenant_id]]) 
+            ->where([['a.tenant_id', $tenant_id]])
             ->first();
 
         if (!$data) {
@@ -1084,7 +1124,7 @@ if ($existingLogs->isNotEmpty()) {
 
 
         return $data;
-        
+
     }
 
 
@@ -1112,12 +1152,12 @@ if ($existingLogs->isNotEmpty()) {
 
 
         return $data;
-        
+
     }
 
     public function getAppeals()
     {
-    
+
 
     $data = DB::table('timesheet_appeal as a')
     ->select('a.*')
@@ -1134,7 +1174,7 @@ if ($existingLogs->isNotEmpty()) {
     public function createAppealTimesheet($r)
     {
         $input = $r->input();
-        
+
         if ($_FILES['file']['name']) {
             $payslip = upload($r->file('file'));
             $input['file'] = $payslip['filename'];
@@ -1144,10 +1184,9 @@ if ($existingLogs->isNotEmpty()) {
             }
         }
         $user = Auth::user();
-        // dd($user);
         $input['user_id'] = $user->id;
         $input['tenant_id'] = $user->tenant_id;
-    
+
         $existingAppealdate = TimesheetAppeals::where('tenant_id', $user->tenant_id)
             ->where('applied_date', $input['applied_date'])
             ->first();
@@ -1155,7 +1194,7 @@ if ($existingLogs->isNotEmpty()) {
         $existingAppeallogid = TimesheetAppeals::where('tenant_id', $user->tenant_id)
         ->where('logid', $input['logid'])
         ->first();
-    
+
         if ($existingAppealdate) {
             $data['status'] = config('app.response.error.status');
             $data['type'] = config('app.response.error.type');
@@ -1171,9 +1210,9 @@ if ($existingLogs->isNotEmpty()) {
             $data['msg'] = 'Timesheet appeal with the same logid already exists';
             return $data;
         }
-    
+
         TimesheetAppeals::create($input);
-    
+
         // Return success response
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
@@ -1181,17 +1220,17 @@ if ($existingLogs->isNotEmpty()) {
         $data['msg'] = 'Success Create Timesheet Logs';
         return $data;
     }
-    
+
     public function timesheetApprovalappealView()
     {
-       
+
         $employees = Employee::where('tsapprover', Auth::user()->id)->get();
-        
+
         $userId = [];
         foreach ($employees as $key => $employee) {
             $userId[] = $employee->user_id;
         }
-        
+
         $claim[0] = ['tenant_id', Auth::user()->tenant_id];
 
         $data = DB::table('timesheet_appeal as a')
@@ -1202,7 +1241,7 @@ if ($existingLogs->isNotEmpty()) {
         ->get();
 
         return $data;
-        
+
     }
     public function updateStatusappeal($id = '', $status = '')
     {
@@ -1231,9 +1270,9 @@ if ($existingLogs->isNotEmpty()) {
     //     return $data;
     // }
 
-    
 
-    
+
+
 
 
 }
