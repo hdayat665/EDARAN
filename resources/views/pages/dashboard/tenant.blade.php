@@ -36,7 +36,7 @@
 				<div class="stats-icon"><i class="fa fa-bag-shopping"></i></div>
 				<div class="stats-info">
 					<h4>MY PROJECTS</h4>
-					<p>0</p>	
+					<p>{{ $numberOfObjects['numberOfObjects'] }}</p>
 				</div>
 				<div class="stats-link">
 				<a ><i class="fa fa-bag-shopping"></i></a>
@@ -50,7 +50,7 @@
 				<div class="stats-icon"><i class="fa fa-money-check"></i></div>
 				<div class="stats-info">
 					<h4>COMPANY PROJECTS</h4>
-					<p>0</p>	
+					<p>{{ $allproject['allproject'] }}</p>
 				</div>
 				<div class="stats-link">
 				<a ><i class="fa fa-money-check"></i></a>
@@ -64,7 +64,7 @@
 				<div class="stats-icon"><i class="fa fa-users"></i></div>
 				<div class="stats-info">
 					<h4>REGISTERED EMPLOYEE</h4>
-					<p>304</p>	
+					<p>{{ $allEmployee['allEmployee'] }}</p>
 				</div>
 				<div class="stats-link">
 				<a ><i class="fa fa-users"></i></a>
@@ -84,30 +84,32 @@
 				</div>
 				<div class="panel-body">
 				<table id="tablenews-dashboard" style="width: 100%;" class="table table-striped table-bordered align-middle">
-                <thead>
-				<tr>
-					<th class="text-nowrap">No.</th>
-					<th class="text-nowrap">Title</th>
-					<th class="text-nowrap">Content</th>
-					<th class="text-nowrap">Link</th>
-					<th class="text-nowrap">Attachment</th>
-				</tr>
-                </thead>
-                <tbody>
-					@if ($news)
-						@foreach ($news as $index => $new)
+					<thead>
+						<tr>
+							<th class="text-nowrap">No.</th>
+							<th class="text-nowrap">Title</th>
+							<th class="text-nowrap">Content</th>
+							<th class="text-nowrap">Link</th>
+							<th class="text-nowrap">Attachment</th>
+						</tr>
+					</thead>
+					<tbody>
+						<?php $id = 0 ?>
+						@if ($news['news'])
+						@foreach ($news['news'] as $new)
+							<?php $id++ ?>
 							<tr>
-								<td>{{$index+1}}</td>
-								<td>{{$new->title}}</td>
-								<td>{{$new->content}}</td>
-								<td><a href="{{$new->sourceURL}}" target="_blank">{{$new->sourceURL}}</a></td>|
-								<td><a href="{{ route('download', ['filename' => $new->file]) }}">{{$new->file}}</a></td>  
+								<td width="1%" class="fw-bold text-dark">{{ $id }}</td>
+								<td>{{ $new['title'] }}</td>
+								<td>{{ $new['content'] }}</td>
+								<td><a href="{{ $new['sourceURL'] }}" target="_blank">{{ $new['sourceURL'] }}</a></td>
+								<td><a href="{{ route('download', ['filename' => $new['file']]) }}">{{ $new['file'] }}</a></td>  
 							</tr>
 						@endforeach
-					@endif
-				</tbody>
+						@endif
+					</tbody>
+				</table>
 
-            </table>
 
 						
 				</div>
@@ -135,10 +137,12 @@
 					</tr>
 					</thead>
 					<tbody>
-						@if ($events)
-							@foreach ($events as $index => $event)
+					<?php $id = 0 ?>
+						@if ($events['events'])
+							@foreach ($events['events'] as $event)
+							<?php $id++ ?>
 								<tr class="odd gradeX">
-									<td>{{$index+1}}</td>
+									<td>{{$id }}</td>
 									<td>{{ $event->event_name }}</td>
 									<td>{{ $event->start_date }} - {{ $event->end_date }}</td>
 									<td>{{ $event->start_time }} - {{ $event->end_time }}</td>

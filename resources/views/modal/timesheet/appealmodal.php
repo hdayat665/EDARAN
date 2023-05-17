@@ -2,18 +2,18 @@
     <div class="modal-dialog"  >
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">View Log Appeal</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Log Appeal</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <form id="addappeal">
-                    <div class="row p-2" >
+                    <div class="row p-2" style="display:none;" >
                     <div class="col-md-2"></div>
                         <div class="col-md-4">
                             <label class="form-label col-md-6">Log ID</label>
                         </div>
                         <div class="col-md-4">
-                            <input type="text"  class="form-control" id="log_id" name="logid" readonly/>
+                            <input type="text"  class="form-control" id="" name="" readonly/>
                             <input type="hidden" id="applieddate" name="applied_date">
                         </div>
                         <div class="col-md-2"></div>
@@ -24,7 +24,7 @@
                             <label class="form-label col-md-6">Status</label>
                         </div>
                         <div class="col-md-4">
-                            <input type="text"  class="form-control" id="Status" name="status" value="locked" readonly/>
+                            <input type="text"  class="form-control" id="Status" name="status" value="Locked" readonly/>
                         </div>
                         <div class="col-md-2"></div>
                     </div>

@@ -26,19 +26,19 @@
                                     <td>
                                         <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle"><i class="fa fa-cogs"></i> Actions <i class="fa fa-caret-down"></i></a>
                                         <div class="dropdown-menu">
-                                            @if ($app->status == 'locked')
+                                            @if ($app->status == 'Locked')
                                             <div class="viewtimesheet">
-                                                <a href="javascript:;" id="viewappealb" data-id="{{$app->id}}" class="dropdown-item"> View Timesheet</a> 
+                                                <a href="javascript:;" id="viewappealb" data-id="{{$app->id}}" class="dropdown-item"> View Log Appeal</a> 
                                             </div>
                                             <div class="approvetimesheet">
-                                                <a  class="dropdown-item" data-id="{{$app->id}}" data-status="approve" id="statusButton">Approve Timesheet</a>
+                                                <a  class="dropdown-item" data-id="{{$app->id}}" data-status="Approved" id="statusButton"> Approve Log Appeal</a>
                                             </div>
                                             <div class="approvetimesheet">
-                                                <a  class="dropdown-item" data-id="{{$app->id}}" data-status="reject" id="statusButton">Reject Timesheet</a>
+                                                <a  class="dropdown-item" data-id="{{$app->id}}" data-status="Rejected" id="statusButton">Reject Log Appeal</a>
                                             </div>
                                             @else
                                             <div class="viewtimesheet">
-                                                <a href="javascript:;" id="viewappealb" data-id="{{$app->id}}" class="dropdown-item"> View Timesheet</a> 
+                                                <a href="javascript:;" id="viewappealb" data-id="{{$app->id}}" class="dropdown-item"> View Log Timesheet</a> 
                                             </div>
                                            
                                             @endif
@@ -51,8 +51,8 @@
                                     {{-- <td><a href="{{ route('download', ['filename' => $app->file]) }}">{{$app->file}}</a></td>   --}}
 
                                     <?php
-                                    if ($app->status === "locked") {
-                                        $app->status = "pending";
+                                    if ($app->status === "Locked") {
+                                        $app->status = "Pending";
                                     }
                                     ?>
                                     

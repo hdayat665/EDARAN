@@ -1056,6 +1056,72 @@ $(document).ready(function () {
 
                     var datedefaultformat = dayjs(current).format('YYYY-MM-DD');
 
+                    var appealaddb = $('<button/>', {
+                                text: 'Appeal',
+                                class: 'btn btn-primary btn-xs appeal-add-button',
+                                click: function () {
+                                    var year = info.date.getFullYear();
+                                    var month = info.date.getMonth();
+                                    var day = info.date.getDate();
+                                    console.log(year);
+                                    $('#yearappeal').val(year);
+                                    $('#monthappeal').val(new Date(info.date).toLocaleString('en-US', { month: 'long' }));
+                                    $('#dayappeal').val(day);
+                                    $('#log_id').val(nextLogId);
+                    
+                                    const clickedDate = dayjs(info.date);
+                                    const formattedDate = clickedDate.format('YYYY-MM-DD');
+                                    $("#applieddate").val(formattedDate);
+                    
+                                    $('#appealmodal').modal('show');
+                                }
+                            });
+
+
+                            var viewappealb = $('<button/>', {
+                                text: 'View Appeal',
+                                class: 'btn btn-primary btn-xs appeal-view-button',
+                                click: function () {
+                                    
+                                
+                                    // Get the logid for the corresponding appliedDate
+                                    var index = appliedDates.indexOf(datedefaultformat);
+                                    if (index !== -1) {
+                                        var logId = logsid[index];
+                                        var reason = reasons[index];
+                                        var status = statuss[index];
+                                        var year = years[index];
+                                        var month = months[index];
+                                        var day = days[index];
+                                        var file = files[index];
+                                        console.log(year);
+                                        $('#log_idv').val(logId);
+                                        $('#reasonappealv').val(reason);
+                                        if (status === "Locked") {
+                                            status = "Pending";
+                                            $('#Statusv').val(status);
+                                        } else {
+                                            $('#Statusv').val(status);
+                                        }
+                                        $('#yearappealv').val(year);
+                                        $('#monthappealv').val(month);
+                                        $('#dayappealv').val(day);
+    
+                                        if (file) {
+                                            $("#filedownloadappeal").html(
+                                                '<a href="/storage/' + file + '">Download File</a>'
+                                            );
+                                        }
+    
+                                        // console.log(file)
+                                        $('#appealmodalview').modal('show');
+                                        
+                                        
+                                    }
+                                    return false;
+                                }
+                                });
+
                    
                     
                     
@@ -1126,38 +1192,15 @@ $(document).ready(function () {
                     }
     
                 
-                      if ((current.getDate() === oneDayBefore.getDate() || current.getDate() === twoDayBefore.getDate()) && !(current.getDay() === 6 || current.getDay() === 0)
+                    if (
+                        (current.getMonth() === currentDate.getMonth()) &&
+                        (current.getDate() === oneDayBefore.getDate() || current.getDate() === twoDayBefore.getDate()) &&
+                        !(current.getDay() === 6 || current.getDay() === 0)
                       ) {
                         $(info.el).css('background-color', '#FF8080');
-                      } else if((current < duahari) &&  !appliedDates.includes(datedefaultformat) && !hasLog && !(current.getDay() === 6 || current.getDay() === 0)) {
+                      }else if((current < duahari) &&  !appliedDates.includes(datedefaultformat) && !hasLog && !(current.getDay() === 6 || current.getDay() === 0)) {
                         $(info.el).css('background-color', '#FF8080');
-                      
-
-                      
-                            var appealaddb = $('<button/>', {
-                                text: 'Add Appeal',
-                                class: 'btn btn-primary btn-xs appeal-add-button',
-                                click: function () {
-                                    var year = info.date.getFullYear();
-                                    var month = info.date.getMonth();
-                                    var day = info.date.getDate();
-                                    console.log(year);
-                                    $('#yearappeal').val(year);
-                                    $('#monthappeal').val(new Date(info.date).toLocaleString('en-US', { month: 'long' }));
-                                    $('#dayappeal').val(day);
-                                    $('#log_id').val(nextLogId);
-                    
-                                    const clickedDate = dayjs(info.date);
-                                    const formattedDate = clickedDate.format('YYYY-MM-DD');
-                                    $("#applieddate").val(formattedDate);
-                    
-                                    $('#appealmodal').modal('show');
-                                }
-                            });
                             
-
-                           
-                                                
                             $(info.el).append(appealaddb);
                             $(appealaddb).css({
                                 position: 'relative',
@@ -1165,59 +1208,8 @@ $(document).ready(function () {
                                 'z-index': '999',
                               });
 
-                            
-
-                            
-
                     } else if ((current < duahari) &&  appliedDates.includes(datedefaultformat) && !hasLog && !(current.getDay() === 6 || current.getDay() === 0)) {
                         $(info.el).css('background-color', '#FF8080');
-                        var viewappealb = $('<button/>', {
-                            text: 'View Appeal',
-                            class: 'btn btn-primary btn-xs appeal-view-button',
-                            click: function () {
-                                
-                            
-                                // Get the logid for the corresponding appliedDate
-                                var index = appliedDates.indexOf(datedefaultformat);
-                                if (index !== -1) {
-                                    var logId = logsid[index];
-                                    var reason = reasons[index];
-                                    var status = statuss[index];
-                                    var year = years[index];
-                                    var month = months[index];
-                                    var day = days[index];
-                                    var file = files[index];
-                                    console.log(year);
-                                    $('#log_idv').val(logId);
-                                    $('#reasonappealv').val(reason);
-                                    if (status === "locked") {
-                                        status = "pending";
-                                        $('#Statusv').val(status);
-                                    } else {
-                                        $('#Statusv').val(status);
-                                    }
-                                    $('#yearappealv').val(year);
-                                    $('#monthappealv').val(month);
-                                    $('#dayappealv').val(day);
-
-                                    if (file) {
-                                        $("#filedownloadappeal").html(
-                                            '<a href="/storage/' + file + '">Download File</a>'
-                                        );
-                                    }
-
-                                    // console.log(file)
-                                    $('#appealmodalview').modal('show');
-                                    
-                                    
-                                }
-                                return false;
-                            }
-                            });
-
-                        
-
-                        
                         
                 
                             $(info.el).append(viewappealb);
@@ -1290,40 +1282,41 @@ $(document).ready(function () {
                                     'z-index': '999',
                                   });
                             
-                            }else {
-                            // console.log(datedefaultformat)
-                            $(info.el).css('background-color', 'red');
-                            console.log(appliedDates);
-                            var appealaddb = $('<button/>', {
-                                text: 'Add Appeal',
-                                class: 'btn btn-primary btn-xs appeal-add-button',
-                                click: function () {
-                                    var year = info.date.getFullYear();
-                                    var month = info.date.getMonth();
-                                    var day = info.date.getDate();
-                                    $('#yearappeal').val(year);
-                                    $('#monthappeal').val(new Date(info.date).toLocaleString('en-US', { month: 'long' }));
-                                    $('#dayappeal').val(day);
-                                    $('#log_id').val(nextLogId);
+                            }
+                        //     else {
+                        //     // console.log(datedefaultformat)
+                        //     $(info.el).css('background-color', 'red');
+                        //     console.log(appliedDates);
+                        //     var appealaddb = $('<button/>', {
+                        //         text: 'Add Appeal',
+                        //         class: 'btn btn-primary btn-xs appeal-add-button',
+                        //         click: function () {
+                        //             var year = info.date.getFullYear();
+                        //             var month = info.date.getMonth();
+                        //             var day = info.date.getDate();
+                        //             $('#yearappeal').val(year);
+                        //             $('#monthappeal').val(new Date(info.date).toLocaleString('en-US', { month: 'long' }));
+                        //             $('#dayappeal').val(day);
+                        //             $('#log_id').val(nextLogId);
                 
-                                    const clickedDate = dayjs(info.date);
-                                    const formattedDate = clickedDate.format('YYYY-MM-DD');
-                                    $("#applieddate").val(formattedDate);
+                        //             const clickedDate = dayjs(info.date);
+                        //             const formattedDate = clickedDate.format('YYYY-MM-DD');
+                        //             $("#applieddate").val(formattedDate);
 
                                    
                 
-                                    $('#appealmodal').modal('show');
-                                }
-                            });
+                        //             $('#appealmodal').modal('show');
+                        //         }
+                        //     });
 
-                            $(info.el).append(appealaddb);
-                            $(appealaddb).css({
-                                position: 'relative',
-                                top: '-35px',
-                                'z-index': '999',
-                              });
+                        //     $(info.el).append(appealaddb);
+                        //     $(appealaddb).css({
+                        //         position: 'relative',
+                        //         top: '-35px',
+                        //         'z-index': '999',
+                        //       });
                             
-                        }
+                        // }
                     } else if (info.date.getDay() === 0 &&  !isSameDate) { 
                         $(info.el).css('background-color', '#B3CCFF'); 
                     } else if (info.date.getDay() === 6 && !isSameDate) { 
@@ -1360,7 +1353,7 @@ $(document).ready(function () {
                           statuses.push(status);
                         }
                         const formattedDate = clickedDate.format('YYYY-MM-DD');
-                        if (appliedDates.includes(formattedDate) && statuses[appliedDates.indexOf(formattedDate)] === 'approve') {
+                        if (appliedDates.includes(formattedDate) && statuses[appliedDates.indexOf(formattedDate)] === 'Approved') {
                             // show the view appeal modal
                             $('#addLogModal').modal('show');
                             const formattedDate = clickedDate.format('DD-MM-YYYY');
