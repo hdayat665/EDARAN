@@ -68,11 +68,12 @@
                         </div>
                           <div class="col-sm-3">
                                     <label for="expirydate" class="form-label">Expiry Date*</label>
-                                    <input type="text" id="expiryDateParent" name="expiryDate" placeholder="YYYY-MM-DD" class="form-control" aria-describedby="expirydate" disabled style="pointer-events: none;" readonly>
+                                    <input type="text" id="expiryDateParent" name="expiryDate"  placeholder="YYYY-MM-DD" class="form-control" aria-describedby="expirydate"  style="pointer-events: none;"  >
+
                                 </div>
                         <div class="col-sm-3">
                             <label for="issuing-country" class="form-label">Issuing Country*</label>
-                            <select class="form-select" disabled name="issuingCountry" id="passportcountryparent"  style="pointer-events: none; text-transform:uppercase" readonly >
+                            <select class="form-select"  name="issuingCountry" id="passportcountryparent"  style="pointer-events: none; text-transform:uppercase"  >
                                                                 
                                 <option value="" label="PLEASE CHOOSE" selected="selected"></option>
                                 <optgroup id="country-optgroup-Americas" label="Americas">
@@ -137,7 +138,7 @@
                                 </div>
                                 <div class="col-sm-6">
                                     <label for="lastname" class="form-label">OKU Card Number*</label>
-                                    <input type="number" id="okucard5" name="okuNo" value="" class="form-control" readonly disabled placeholder="OKU CARD NUMBER">
+                                    <input type="number" id="okucard5" name="okuNo" value="" class="form-control" readonly  placeholder="OKU CARD NUMBER">
                                     
                                 </div>
                             </div>
@@ -146,7 +147,7 @@
                             <div class="row">
                                 <div class="col-sm-6">
                                     <label for="dob" class="form-label">OKU Attachment*</label>
-                                    <input type="file" id="okuattach5" name="okuFile" class="form-control" readonly disabled style="pointer-events: none" aria-describedby="" >
+                                    <input type="file" id="okuattach5" name="okuFile" class="form-control" readonly  style="pointer-events: none" aria-describedby="" >
                                 </div>
                             </div>
                         </div>

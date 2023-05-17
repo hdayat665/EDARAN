@@ -13,6 +13,68 @@ $(document).ready(function () {
         ],
     });
 
+     //   add validation on expiry date and issuing country
+    //add parent
+    $("#parentModalAdd").click(function () {
+        if ($(this).prop("checked")) {
+            $("#expiryDateParent").prop("disabled", true);
+            $("#expiryDateParent").prop("readonly", true);
+
+            $("#passportcountryparent").prop("disabled", true);
+            $("#passportcountryparent").prop("readonly", true);
+            
+            $("#okucard5").prop("disabled", true);
+            $("#okucard5").prop("readonly", true);
+
+            $("#okuattach5").prop("disabled", true);
+            $("#okuattach5").prop("readonly", true);
+        } else {
+            $("#expiryDateParent").prop("disabled", true);
+            $("#expiryDateParent").prop("readonly", true);
+
+            $("#passportcountryparent").prop("disabled", true);
+            $("#passportcountryparent").prop("readonly", true);
+
+            $("#okucard5").prop("disabled", true);
+            $("#okucard5").prop("readonly", true);
+
+            $("#okuattach5").prop("disabled", true);
+            $("#okuattach5").prop("readonly", true);
+        }
+    });
+
+
+    //add children
+    $("#childModalAdd").click(function () {
+        if ($(this).prop("checked")) {
+            $("#expiryDateChild").prop("disabled", true);
+            $("#expiryDateChild").prop("readonly", true);
+
+            $("#issuingCountry").prop("disabled", true);
+            $("#issuingCountry").prop("readonly", true);
+
+            $("#okucard3").prop("disabled", true);
+            $("#okucard3").prop("readonly", true);
+
+            $("#okuattach3").prop("disabled", true);
+            $("#okuattach3").prop("readonly", true);
+            
+        } else {
+            $("#expiryDateChild").prop("disabled", true);
+            $("#expiryDateChild").prop("readonly", true);
+
+            $("#issuingCountry").prop("disabled", true);
+            $("#issuingCountry").prop("readonly", true);
+
+
+            $("#okucard3").prop("disabled", true);
+            $("#okucard3").prop("readonly", true);
+
+            $("#okuattach3").prop("disabled", true);
+            $("#okuattach3").prop("readonly", true);
+        }
+    });
+
     if ($(".partCheck").is(":checked")) {
         $("#idnumber").prop("disabled", true);
         $("#dob").prop("readonly", false);
@@ -26,27 +88,6 @@ $(document).ready(function () {
         $("#gendermyprofile").prop("disabled", true);
     }
 
-    // if ($(".partCheck6").is(":checked")) {
-    //     $("#idnumber3").prop("readonly", true);
-    //     $("#idnumber3").prop("disabled", true);
-    //     $("#dobuc").prop("readonly", false);
-    //     $("#dobuc").css("pointer-events", "auto");
-    //     $("#idnumber3").val("");
-    // } else {
-    //     $("#idnumber3").prop("readonly", false);
-
-    //     $("#dobuc").prop("readonly", true);
-    //     $("#dobuc").css("pointer-events", "none");
-    //     $("#passport3").val("");
-    //     $("#expirydate3").val("");
-    //     $("#expirydate3").prop("readonly", true);
-    //     $("#expirydate3").css("pointer-events", "none");
-
-    //     $("#issuingCountryUpdateCompanion").val("");
-
-    //     $("#expirydate3").prop("disabled", true);
-    //     $("#issuingCountryUpdateCompanion").prop("disabled", true);
-    // }
 
     if ($(".partCheck5").is(":checked")) {
         $("#idNo1").prop("readonly", true);
@@ -372,7 +413,6 @@ $(document).ready(function () {
             $("#dob4").val("");
             $("#passportcountrychildren").prop("disabled", false);
 
-            $("#expiryDateChild").prop("disabled", false);
         } else {
             $("#idNoaddChild").prop("disabled", false);
             $("#age4").val("").prop("readonly", true);
@@ -380,7 +420,6 @@ $(document).ready(function () {
 
             $("#passportcountrychildren").prop("disabled", true);
 
-            $("#expiryDateChild").prop("disabled", true);
         }
     });
 
@@ -417,12 +456,16 @@ $(document).ready(function () {
         if ($("#expiryDateChild").prop("readonly")) {
             $("#expiryDateChild").prop("readonly", false);
             $("#expiryDateChild").css("pointer-events", "auto");
+            $("#expiryDateChild").prop("disabled", false);
+
             $("#passportcountrychildren").prop("disabled", false);
             $("#passportcountrychildren").css("pointer-events", "auto");
         } else {
             $("#expiryDateChild").prop("readonly", true);
             $("#expiryDateChild").css("pointer-events", "none");
             $("#expiryDateChild").val("");
+            $("#expiryDateChild").prop("disabled", true);
+
             $("#passportcountrychildren").prop("disabled", true);
             $("#passportcountrychildren").css("pointer-events", "none");
             $("#passportcountrychildren").val("");
@@ -3384,6 +3427,18 @@ $(document).ready(function () {
         $("input").prop("disabled", false);
         $("select").prop("disabled", false);
         $("#add-parent").modal("show");
+
+        $("#expiryDateParent").prop("disabled", true);
+        $("#expiryDateParent").prop("readonly", true);
+
+        $("#passportcountryparent").prop("disabled", true);
+        $("#passportcountryparent").prop("readonly", true);
+
+        $("#okucard5").prop("disabled", true);
+        $("#okucard5").prop("readonly", true);
+
+        $("#okuattach5").prop("disabled", true);
+        $("#okuattach5").prop("readonly", true);
     });
 
     $("#idNoaddFamily").change(function () {
@@ -3400,33 +3455,33 @@ $(document).ready(function () {
         }
     });
 
+    
     $("#passportParent").change(function () {
         if ($("#expiryDateParent").prop("readonly")) {
             $("#expiryDateParent").prop("readonly", false);
             $("#expiryDateParent").css("pointer-events", "auto");
+            $("#expiryDateParent").prop("disabled", false);
             $("#passportcountryparent").prop("disabled", false);
+
+
+            $("#passportcountryparent").prop("readonly", false);
             $("#passportcountryparent").css("pointer-events", "auto");
         } else {
             $("#expiryDateParent").prop("readonly", true);
             $("#expiryDateParent").css("pointer-events", "none");
             $("#expiryDateParent").val("");
+            $("#expiryDateParent").prop("disabled", true);
             $("#passportcountryparent").prop("disabled", true);
+
+            $("#passportcountryparent").prop("readonly", true);
             $("#passportcountryparent").css("pointer-events", "none");
             $("#passportcountryparent").val("");
         }
     });
+        
+        
 
-    $('input[name="nonCitizen"]').click(function () {
-        if ($(this).is(":checked")) {
-            $("#idNoaddFamily").val("").prop("disabled", true);
-            $("#age6").val("").prop("readonly", false);
-            $("#dob6").val("");
-        } else {
-            $("#idNoaddFamily").prop("disabled", false);
-            $("#age6").val("").prop("readonly", true);
-            $("#dob6").val("");
-        }
-    });
+  
 
     // Update children details
     $('input[name="nonCitizen"]').click(function () {
@@ -3482,23 +3537,26 @@ $(document).ready(function () {
                     digits: true,
                     rangelength: [10, 11],
                 },
-                // expiryDate: {
-                //     required: true,
-                // },
+                expiryDate: {
+                    required: true,
+                },
+                okuFile: {
+                    required: true,
 
-                // issuingCountry: {
-                //     required: true,
-                // },
+                },
+                issuingCountry: {
+                   required: true,
+                },
 
-                // okuNo: {
-                //     required: true,
-                //     digits: true,
-                //     rangelength: [10, 11],
-                // },
+                okuNo: {
+                    required: true,
+                     digits: true,
+                     rangelength: [10, 11],
+                 },
 
-                // okuFile: {
-                //     required: true,
-                // },
+                okuFile: {
+                     required: true,
+                },
             },
 
             messages: {
@@ -4481,11 +4539,14 @@ $(".okuCheck3").click(function () {
 
         $("#okuattach3").prop("readonly", false);
         $("#okuattach3").css("pointer-events", "auto");
+        okuStatus = 1;
     } else {
         $("#okucard3").prop("readonly", true);
 
         $("#okuattach3").prop("readonly", true);
         $("#okuattach3").css("pointer-events", "none");
+        okuStatus = 0;
+
     }
 });
 
@@ -4755,8 +4816,6 @@ $(".partCheck8").click(function () {
         $("#dob6").css("pointer-events", "auto");
         $("#idNoaddFamily").val("");
 
-        $("#expiryDateParent").prop("disabled", false);
-        $("#expiryDateParent").prop("readonly", false);
 
         $("#passportcountryparent").prop("disabled", false);
         $("#passportcountryparent").prop("readonly", false);
@@ -4767,10 +4826,7 @@ $(".partCheck8").click(function () {
 
         $("#passportParent").val("");
 
-        $("#expiryDateParent").prop("disabled", true);
-        $("#expiryDateParent").val("");
-        $("#expiryDateParent").prop("readonly", true);
-        $("#expiryDateParent").css("pointer-events", "none");
+
 
         $("#passportcountryparent").prop("disabled", true);
         $("#passportcountryparent").val("");
@@ -4789,7 +4845,6 @@ $(".partCheck9").click(function () {
 
         $("#idnumber7").val("");
 
-        $("#expiryDateParent").prop("disabled", false);
         $("#expiryDateParent").prop("readonly", false);
     } else {
         $("#idnumber7").prop("readonly", false);

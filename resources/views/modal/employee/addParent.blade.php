@@ -1,4 +1,4 @@
-<div class="modal fade" id="add-parent" tabindex="-1" aria-labelledby="add-parent" ariaissuing-hidden="true">
+<div class="modal fade" id="add-parent" tabindex="-1" aria-labelledby="add-parent" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
@@ -55,17 +55,18 @@
                                 <div class="col-sm-12">
                                     <label for="passport" class="form-label" >Passport Number</label>
                                   
+                                   
                                     <input type="text" id="passport6" name="passport"  class="form-control" aria-describedby="passport" placeholder="PASSPORT NUMBER">
                                 </div>
                             </div>
                         </div>
                           <div class="col-sm-3">
-                                    <label for="expirydate" class="form-label" >Expiry Date</label>
-                                    <input type="date" id="expirydate6" name="expiryDate"  placeholder="YYYY-MM-DD" class="form-control" aria-describedby="expirydate" style="pointer-events: none;" readonly>
-                                  
+                                    <label for="expirydate" class="form-label" >Expiry Date*</label>
+                                    <input type="text" id="expirydate6" name="expiryDate" placeholder="YYYY-MM-DD" class="form-control" aria-describedby="expirydate"  style="pointer-events: none;" readonly>
+
                                 </div>
                         <div class="col-sm-3">
-                            <label for="issuing-country" class="form-label" >Issuing Country</label>
+                            <label for="issuing-country" class="form-label" >Issuing Country*</label>
                             <select class="form-select" name="issuingCountry" id="issuingCountry6" style="pointer-events: none; text-transform:uppercase" readonly disabled>
                                 <option value="" label="PLEASE CHOOSE" selected="selected"></option>
                                 <optgroup id="country-optgroup-Americas" label="Americas">
