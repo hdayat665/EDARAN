@@ -104,38 +104,38 @@
                                 <th class="text-nowrap">Designation</th>
                                 <th class="text-nowrap">Department</th>
                                 <th class="text-nowrap">Date</th>
-                                {{-- <th class="text-nowrap">Total Overtime Hours</th> --}}
                                 <th class="text-nowrap">Total Overtime Hours</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php $no = 1 ?>
-                            @if ($overtimes)
-                                @foreach ($overtimes as $item)
-                                <?php 
-                                $total_hour = explode(':', $item->total_hour);
-                                $remaining_hour = 0;
-                                $remaining_time = '00:00:00';
-                                if (count($total_hour) >= 3) {
-                                    $remaining_hour = ($total_hour[0] > 9) ? $total_hour[0] - 9 : 0;
-                                    $remaining_time = $remaining_hour . ':' . $total_hour[1] . ':' . $total_hour[2];
-                                }
-                            ?> 
-                            
-                                    @if ($remaining_hour > 0)
-                                        <tr>
-                                            <td>{{ $no++ }}</td>
-                                            <td>{{ $item->employeeName }}</td>
-                                            <td>{{ $item->designationName }}</td>
-                                            <td>{{ $item->departmentName }}</td>
-                                            <td>{{ $item->date }}</td>
-                                            <td>{{ date_format(date_create($remaining_time), 'H:i:s') }}</td>
-                                        </tr>
+                            @if ($overtimes->count() > 0)
+                                @foreach ($overtimes as $a)
+                                    @php
+                                        $totalHourInSeconds = strtotime($a->total_hour) - strtotime('00:00:00');
+                                        $totalHourInHours = floor($totalHourInSeconds / 3600);
+                                        $remainingSeconds = $totalHourInSeconds - (9 * 3600);
+                                        $remainingTime = gmdate('H:i:s', $remainingSeconds);
+                                        $showRemainingTime = ($remainingTime !== '00:00:00');
+                                    @endphp
+
+                                    @if ($totalHourInHours >= 9 && $remainingTime !== '00:00:00')
+                                    <tr class="odd gradeX">
+                                        <td>{{ $no++ }}</td>
+                                        <td>{{ $a->employeeName }}</td>
+                                        <td>{{ $a->designationName }}</td>
+                                        <td>{{ $a->departmentName }}</td>
+                                        <td>{{ $a->date }}</td>
+                                        <td>{{ $remainingTime }}</td>
+                                    </tr>
                                     @endif
                                 @endforeach
-                            @endif
-                        </tbody>
-                    </table>
+                            @else
+                    {{-- <tr>
+                        <td colspan="6" class="text-center">No data available.</td>
+                    </tr> --}}
+                @endif
+                    
                 </div>
             </div>
         </div>

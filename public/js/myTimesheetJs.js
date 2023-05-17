@@ -1195,7 +1195,13 @@ $(document).ready(function () {
                     if (
                         (current.getMonth() === currentDate.getMonth()) &&
                         (current.getDate() === oneDayBefore.getDate() || current.getDate() === twoDayBefore.getDate()) &&
-                        !(current.getDay() === 6 || current.getDay() === 0)
+                        !(current.getDay() === 6 || current.getDay() === 0) && hasLog && totalHours >= 9
+                      ) {
+                        $(info.el).css('background-color', '#80FF80');
+                      } else if(
+                        (current.getMonth() === currentDate.getMonth()) &&
+                        (current.getDate() === oneDayBefore.getDate() || current.getDate() === twoDayBefore.getDate()) &&
+                        !(current.getDay() === 6 || current.getDay() === 0)  && (hasLog || !hasLog || totalHours < 9)
                       ) {
                         $(info.el).css('background-color', '#FF8080');
                       }else if((current < duahari) &&  !appliedDates.includes(datedefaultformat) && !hasLog && !(current.getDay() === 6 || current.getDay() === 0)) {
