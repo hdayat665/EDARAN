@@ -321,17 +321,17 @@ class MyleaveService
 
             MyLeaveModel::create($input);
 
-            // $settingEmail = MyLeaveModel::select('myleave.*','leave_types.leave_types as type')
-            // ->join('leave_types', 'myleave.lt_type_id', '=', 'leave_types.id')
-            // ->where('myleave.tenant_id', Auth::user()->tenant_id)
-            // ->orderBy('myleave.created_at', 'DESC')
-            // ->first();
+            $settingEmail = MyLeaveModel::select('myleave.*','leave_types.leave_types as type')
+            ->join('leave_types', 'myleave.lt_type_id', '=', 'leave_types.id')
+            ->where('myleave.tenant_id', Auth::user()->tenant_id)
+            ->orderBy('myleave.created_at', 'DESC')
+            ->first();
 
-            // if ($settingEmail) {
+            if ($settingEmail) {
 
-            //     $ms = new MailService;
-            //     $ms->emailToApproveLeaveNoCommender($settingEmail);
-            // }
+                $ms = new MailService;
+                $ms->emailToApproveLeaveNoCommender($settingEmail);
+            }
 
 
 
@@ -731,6 +731,7 @@ class MyleaveService
         ->rightJoin('myleave', 'leave_entitlement.id_userprofile', '=', 'myleave.up_user_id')
         ->where('myleave.up_rec_status', '!=', '3')
         ->where('myleave.up_app_status', '!=', '3')
+        ->where('myleave.lt_type_id', '=', '1')
         ->where('myleave.up_user_id', Auth::user()->id)
         ->whereYear('leave_entitlement.le_year', '=', $currentYear)
         ->whereYear('myleave.applied_date', '=', $currentYear)
@@ -759,6 +760,7 @@ class MyleaveService
         ->rightJoin('myleave', 'leave_entitlement.id_userprofile', '=', 'myleave.up_user_id')
         ->where('myleave.up_rec_status', '!=', '3')
         ->where('myleave.up_app_status', '!=', '3')
+        ->where('myleave.lt_type_id', '=', '1')
         ->where('myleave.up_user_id', Auth::user()->id)
         ->whereYear('leave_entitlement.le_year', '=', $endYear)
         ->whereYear('myleave.applied_date', '=', $endYear)
@@ -781,6 +783,23 @@ class MyleaveService
             return $datapie2;
 
         }
+
+
+    }
+    public function getEarnedLeave()
+    {
+        $today = Carbon::now();
+        $year = $today->format('Y');
+        $month = $today->format('m');
+
+        $LeaveEntitlement = leaveEntitlementModel::select('current_entitlement')
+            ->where('leave_entitlement.tenant_id', '=', Auth::user()->tenant_id)
+            ->where('leave_entitlement.id_userprofile', '=', Auth::user()->id)
+            ->first();
+
+        $data = round(($month / 12) * $LeaveEntitlement->current_entitlement, 0);
+
+        return $data;
 
 
     }

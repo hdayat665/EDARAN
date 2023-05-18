@@ -29,7 +29,7 @@ class EleaveReportController extends Controller
         if($input){
             $data['myleavereport'] = $ms->searchEleaveReport($r);
         }
-        
+
         return view('pages.report.myleave.resultEleaveReport',$data);
     }
 

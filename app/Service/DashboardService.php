@@ -33,7 +33,7 @@ class DashboardService
 
     public function eventView()
     {
-        $data['events'] = TimesheetEvent::where('tenant_id', Auth::user()->tenant_id)->orderBy('id', 'desc')->get();
+        $data['events'] = TimesheetEvent::where('tenant_id', Auth::user()->tenant_id)->orderBy('start_date', 'asc')->get();
         
         if (!$data) {
             $data = [];
