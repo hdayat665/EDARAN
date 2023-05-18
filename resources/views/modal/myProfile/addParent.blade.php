@@ -101,7 +101,7 @@
                         <div class="col-sm-6">
                             <label for="" class="form-label">Relationship*</label>
                             <select class="form-select" name="relationship" id="relationshipparent" style="text-transform:uppercase">
-                                <?php $relationship = relationship() ?>
+                                <?php $relationship = relationshipFamily() ?>
                                 <option value="" label="PLEASE CHOOSE"  ></option>
                                 @foreach ($relationship as $key => $status)
                                     <option value="{{$key}}"> {{$status}}</option>

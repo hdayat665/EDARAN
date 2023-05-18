@@ -28,7 +28,7 @@
                         <div class="col-sm-6">
                             <label for="emergency-relationship" class="form-label">Relationship*</label>
                             <select class="form-select" name="relationship" id="emergency-relationship" style="text-transform:uppercase">
-                                            <?php $relationship = relationship() ?>
+                                            <?php $relationship = relationshipEmergencyContact() ?>
                                             <option value="" label="PLEASE CHOOSE" ></option>
                                             @foreach ($relationship as $key => $status)
                                             <option value="{{$key}}"<?php echo ($key == $emergency->relationship) ? 'selected="selected"' : '' ?>> {{$status}}</option>
@@ -121,7 +121,7 @@
                             <div class="col-sm-6">
                                 <label for="emergency-relationship" class="form-label">Relationship*</label>
                                 <select class="form-select" name="relationship_2" value="" id="" style="text-transform:uppercase">
-                                    <?php $relationship = relationship() ?>
+                                    <?php $relationship = relationshipEmergencyContact() ?>
                                     <option value="" label="PLEASE CHOOSE"  ></option>
                                     @foreach ($relationship as $key => $status)
                                     <option value="{{$key}}" <?php echo ($key == $emergency->relationship_2) ? 'selected="selected"' : '' ?>>{{$status}}</option>

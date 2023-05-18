@@ -175,14 +175,13 @@ class EmployeeService
         $data['addressDetails'] = UserAddress::where('user_id', $data['user_id'])->get();
         $data['emergency'] = UserEmergency::where('user_id', $data['user_id'])->first();
         $data['companions'] = UserCompanion::where('user_id', $data['user_id'])->get();
-        
         $data['childrens'] = UserChildren::where('user_id', $data['user_id'])->get();
         $data['parents'] = UserParent::where('user_id', $data['user_id'])->get();
         $data['siblings'] = UserSibling::where('user_id', $data['user_id'])->get();
         $data['employment'] = Employee::where('user_id', $data['user_id'])->first();
         $data['jobHistorys'] = JobHistory::where('user_id', $data['user_id'])->get();
         $data['vehicles'] = Vehicle::where('user_id', $data['user_id'])->get();
-        // dd($data['jobHistorys']);
+
         $childId[] = '';
         if ($data['childrens']) {
             foreach ($data['childrens'] as $child) {
@@ -248,7 +247,8 @@ class EmployeeService
         $data['educationLevel'] = educationLevel();
         $data['educationType'] = educationType();
         $data['states'] = state();
-        $data['relationships'] = relationship();
+        $data['relationshipEmergencyContact'] = relationshipEmergencyContact();
+        $data['relationshipFamily'] = relationshipFamily();
         $data['citys'] = city();
         $data['americass'] = americas();
         $data['asias'] = asias();
@@ -525,13 +525,13 @@ class EmployeeService
             // }
 
             // usik sini
-            if($input['mainCompanion']) {
-                $companion -> mainCompanion = 6;
-                $companion -> save();
-                }else {
-                    $companion -> mainCompanion = 4;
-                $companion -> save();
-                }
+            // if($input['mainCompanion']) {
+            //     $companion -> mainCompanion = 6;
+            //     $companion -> save();
+            //     }else {
+            //         $companion -> mainCompanion = 4;
+            //     $companion -> save();
+            //     }
             
 
 
@@ -878,9 +878,8 @@ class EmployeeService
     public function updateEmployee($r)
     {
         $input = $r->input();
-        // pr($input);
+
         $id = $input['id'];
-        // $id = $input['empId'];
 
         $user = Employee::where('id', $id)->first();
 
@@ -889,13 +888,15 @@ class EmployeeService
             $data['type'] = config('app.response.error.type');
             $data['title'] = config('app.response.error.title');
             $data['msg'] = 'user not found';
+
         } else {
 
-            // update role user
-            if ($input['role']) {
+            //update role user
+            if ($input['role'] !== $user->role_id) {
                 $userRole['role_id'] = $input['role'];
                 Users::where('id', $input['user_id'])->update($userRole);
                 unset($input['role']);
+                $jobHistory['roleHistory'] = $userRole['role_id'];
             }
 
             if ($input['branchId']) {
@@ -914,19 +915,118 @@ class EmployeeService
             }
 
             Employee::where('id', $id)->update($input);
-            $user = Auth::user();
-            // add job history
-            $jobz = [];
+            //$user = Auth::user();
 
-            $jobz['user_id'] = $input['user_id'];
-            // $jobz['employmentDetail'] = $input['user_id'];
-            // $jobz['event'] = $input['user_id'];
-            $jobz['effectiveDate'] = $input['EffectiveFrom'];
-            $jobz['tenant_id'] = $user->id;
-            $jobz['updatedBy'] = $user->username;
-            // pr($input);
-            // pr($input_job);
-            JobHistory::create($jobz);
+            // add job history if any amendment has been made
+            $jobHistory = [];
+            $changes = [];
+
+            // if ($input['role'] !== $user->role) {
+            //     $jobHistory['roleHistory'] = $input['role'];
+            //     $changes[] = 'Company has changed to ' . $input['role'];
+            //     //$changes[] = 'Role has changed to ' . $input['role'];
+
+            // } else if ($input['role'] === $user->role_id) {
+            //     $jobHistory['roleHistory'] = null;
+            //     //$changes[] = 'Company has been set to null';
+            // }
+
+            if ($input['company'] !== $user->company) {
+                $jobHistory['companyHistory'] = $input['company'];
+                $changes[] = 'Company has changed to ' . $input['company'];
+
+            } else if ($input['company'] === $user->company) {
+                $jobHistory['companyHistory'] = null;
+                $changes[] = 'Company has been set to null';
+            }
+
+            if ($input['department'] !== $user->department) {
+                $jobHistory['departmentHistory'] = $input['department'];
+                $changes[] = 'department has changed to ' . $input['department'];
+
+            } else if ($input['department'] === $user->department) {
+                $jobHistory['departmentHistory'] = null;
+                $changes[] = 'Company has been set to null';
+            }
+
+            if ($input['unit'] !== $user->unit) {
+                $jobHistory['unitHistory'] = $input['unit'];
+                $changes[] = 'Unit has changed to ' . $input['unit'];
+
+            } else if ($input['unit'] === $user->unit) {
+                $jobHistory['unitHistory'] = null;
+                $changes[] = 'Unit has been set to null';
+            }
+
+            if ($input['branch'] !== $user->branch) {
+                $jobHistory['branchHistory'] = $input['branch'];
+                $changes[] = 'Branch has changed to ' . $input['branch'];
+
+            } else if ($input['branch'] === $user->branch) {
+                $jobHistory['branchHistory'] = null;
+                $changes[] = 'Branch has been set to null';
+            }
+
+            if ($input['jobGrade'] !== $user->jobGrade) {
+                $jobHistory['jobGradeHistory'] = $input['jobGrade'];
+                $changes[] = 'Job Grade has changed to ' . $input['jobGrade'];
+
+            } else if ($input['jobGrade'] === $user->jobGrade) {
+                $jobHistory['jobGradeHistory'] = null;
+                $changes[] = 'jobGrade has been set to null';
+            }
+
+            if ($input['designation'] !== $user->designation) {
+                $jobHistory['designationHistory'] = $input['designation'];
+                $changes[] = 'Designation has changed to ' . $input['designation'];
+
+            } else if ($input['designation'] === $user->designation) {
+                $jobHistory['designationHistory'] = null;
+                $changes[] = 'Designation has been set to null';
+            }
+
+            if ($input['employmentType'] !== $user->employmentType) {
+                $jobHistory['employmentTypeHistory'] = $input['employmentType'];
+                $changes[] = 'Designation has changed to ' . $input['designation'];
+
+            } else if ($input['employmentType'] === $user->employmentType) {
+                $jobHistory['employmentTypeHistory'] = null;
+                $changes[] = 'Designation has been set to null';
+            }
+
+            if ($input['COR'] !== $user->COR) {
+                $jobHistory['CORHistory'] = $input['COR'];
+                $changes[] = 'COR has changed to ' . $input['COR'];
+
+            } else if ($input['COR'] === $user->COR) {
+                $jobHistory['CORHistory'] = null;
+                $changes[] = 'COR has been set to null';
+            }
+
+            if ($input['event'] !== $user->event) {
+                $jobHistory['event'] = $input['event'];
+                $changes[] = 'Event has changed to ' . $input['event'];
+
+            } else if ($input['event'] === $user->event) {
+                $jobHistory['event'] = null;
+                $changes[] = 'Event has been set to null';
+            }
+
+            $jobHistory['effectiveDate'] = $input['EffectiveFrom'];
+            $jobHistory['tenant_id'] = $user->tenant_id;
+            $jobHistory['updatedBy'] = $user->username;
+            $jobHistory['event'] = $input['event'];
+            //$jobHistory['remarks'] = implode('. ', $changes);
+            $jobHistory['user_id'] = $input['user_id'];
+            $updateBy = Auth::user()->username;
+            $jobHistory['updatedBy'] = $updateBy;
+            JobHistory::create($jobHistory);
+
+            // $jobz['user_id'] = $input['user_id'];
+            // $jobz['effectiveDate'] = $input['EffectiveFrom'];
+            // $jobz['tenant_id'] = $user->tenant_id;
+            // $jobz['updatedBy'] = $user->username;
+            // JobHistory::create($jobz);
 
             $data['status'] = config('app.response.success.status');
             $data['type'] = config('app.response.success.type');
@@ -947,7 +1047,8 @@ class EmployeeService
             $data['status'] = false;
             $data['title'] = 'Error';
             $data['type'] = 'error';
-            $data['msg'] = 'email already exist';
+            $data['msg'] = 'Email already exist.';
+            
         } else {
 
             if ($input['branchId']) {
@@ -973,11 +1074,6 @@ class EmployeeService
 
             $ec['user_id'] = $input['user_id'];
             UserEmergency::create($ec);
-            $jh['user_id'] = $input['user_id'];
-            $jh['tenant_id'] = Auth::user()->tenant_id;
-            $jh['updatedBy'] = Auth::user()->username;
-            $jh['effectiveDate'] = $input['joinedDate'];
-            JobHistory::create($jh);
 
             $user['status'] = 'Active';
             User::where('id', $input['user_id'])->update($user);

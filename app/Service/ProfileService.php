@@ -1057,7 +1057,8 @@ class ProfileService
         $data['educationLevel'] = educationLevel();
         $data['educationType'] = educationType();
         $data['states'] = state();
-        $data['relationships'] = relationship();
+        $data['relationshipEmergencyContact'] = relationshipEmergencyContact();
+        $data['relationshipFamily'] = relationshipFamily();
         $data['citys'] = city();
         $data['americass'] = americas();
         $data['asias'] = asias();

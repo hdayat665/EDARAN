@@ -40,12 +40,12 @@
                         </div>
                         <div class="col-sm-6">
                             <label for="lastname" class="form-label">Relationship</label>
-                            <select class="form-select" name="relationship">
+                            {{-- <select class="form-select" name="relationship">
                                 <option value="" label="PLEASE CHOOSE"></option>
                                 @foreach ($relationships as $key => $relationship)
                                 <option value="{{$key}}" >{{$relationship}}</option>
                                 @endforeach
-                            </select>
+                            </select> --}}
                         </div>
                     </div>
                     <div class="row">
