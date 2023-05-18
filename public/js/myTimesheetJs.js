@@ -1190,9 +1190,18 @@ $(document).ready(function () {
                         days.push(day);
                         files.push(file);
                     }
-
-
-                      if ((current.getDate() === oneDayBefore.getDate() || current.getDate() === twoDayBefore.getDate()) && !(current.getDay() === 6 || current.getDay() === 0)
+    
+                
+                    if (
+                        (current.getMonth() === currentDate.getMonth()) &&
+                        (current.getDate() === oneDayBefore.getDate() || current.getDate() === twoDayBefore.getDate()) &&
+                        !(current.getDay() === 6 || current.getDay() === 0) && hasLog && totalHours >= 9
+                      ) {
+                        $(info.el).css('background-color', '#80FF80');
+                      } else if(
+                        (current.getMonth() === currentDate.getMonth()) &&
+                        (current.getDate() === oneDayBefore.getDate() || current.getDate() === twoDayBefore.getDate()) &&
+                        !(current.getDay() === 6 || current.getDay() === 0)  && (hasLog || !hasLog || totalHours < 9)
                       ) {
                         $(info.el).css('background-color', '#FF8080');
                       }else if((current < duahari) &&  !appliedDates.includes(datedefaultformat) && !hasLog && !(current.getDay() === 6 || current.getDay() === 0)) {
@@ -3126,15 +3135,8 @@ $(document).on("click", "#confirmsubmitb", function () {
     var vehicleData = getConfirmSubmit(id);
 
     vehicleData.then(function (data) {
-        // console.log(data.id);
-        // console.log(data.fullName);
-        // console.log('')
         var year = data.date.substr(0, 4);
         var month = data.date.substr(5, 2);
-        // $("#fullname").val(data.fullName);
-        // $("#year").val(year);
-        // $("#month").val(month);
-        // $("#idtv").val(data.id);
     });
     $("#confirmsubmit").modal("show");
 });

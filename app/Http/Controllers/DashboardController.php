@@ -25,7 +25,9 @@ class DashboardController extends Controller
         $result['numberOfObjects'] = $ss->myProject();
         $result['allproject'] = $ss->allproject();
         $result['allEmployee'] = $ss->allEmployee();
-        //pr($result);
+        $result['holidays'] = $ss->countHolidays();
+        $result = array_merge($result, $ss->countHolidays());
+        // dd($result['allEmployee']);
         return view('pages.dashboard.tenant', $result);
     }
 

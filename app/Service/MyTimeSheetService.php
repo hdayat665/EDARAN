@@ -7,7 +7,6 @@ use App\Models\ActivityLogs;
 use App\Models\AttendanceEvent;
 use App\Models\Employee;
 use App\Models\Project;
-// use App\Models\AppealTimesheets;
 use App\Models\TimesheetAppeals;
 use App\Models\ProjectLocation;
 use App\Models\TimesheetApproval;
@@ -1070,11 +1069,16 @@ if ($existingLogs->isNotEmpty()) {
             $cond[5] = ['end_date', '<=', date_format(date_create($date_range[1]), 'Y-m-d')];
         }
 
-        $data = TimesheetEvent::where($cond)
+        // $data = TimesheetEvent::where($cond)
+        //     ->get();
+
+        $data = DB::table('timesheet_event as a')
+            ->leftJoin('employment as b', 'a.user_id', '=', 'b.user_id')
+            ->select('a.*','b.employeeName')
             ->get();
         // dd($data);
         return $data;
-    }
+    }   
 
 
     public function gettimesheetid($id)
@@ -1250,8 +1254,23 @@ if ($existingLogs->isNotEmpty()) {
             return $data;
         }
 
+       
+    
         TimesheetAppeals::create($input);
 
+
+        $settingEmail = TimesheetAppeals::select('timesheet_appeal.*')
+        // ->join('leave_types', 'myleave.lt_type_id', '=', 'leave_types.id')
+        // ->where('myleave.tenant_id', Auth::user()->tenant_id)
+        ->orderBy('timesheet_appeal.created_at', 'DESC')
+        ->first();
+
+        if ($settingEmail) {
+
+            $ms = new MailService;
+            $ms->emailToApproverAppeal($settingEmail);
+        }
+    
         // Return success response
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
@@ -1285,7 +1304,18 @@ if ($existingLogs->isNotEmpty()) {
     public function updateStatusappeal($id = '', $status = '')
     {
         $input['status'] = $status;
+
         TimesheetAppeals::where('id', $id)->update($input);
+
+        $settingEmail = TimesheetAppeals::select('timesheet_appeal.*')
+        ->orderBy('timesheet_appeal.created_at', 'DESC')
+        ->first();
+
+        if ($settingEmail) {
+
+            $ms = new MailService;
+            $ms->emailToEmployeeAppeal($settingEmail);
+        }
 
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
