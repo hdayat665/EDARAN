@@ -1,7 +1,7 @@
 @extends('layouts.dashboardTenant')@section('content')
 <style>
 .fc-prev-button, .fc-next-button {
-    display: none;
+    /* display: none; */
 }
 </style>
 
@@ -13,7 +13,15 @@
             <input type="hidden" id="timesheetApprovalUserId" value="{{$userId}}">
         </div>
     </div>
+    <br>
+    <div class="col d-flex justify-content-end">
+        <div class="">
+             <button class="btn btn-primary" type="button" onclick="window.history.back()">Back</button>
+        </div>
+    </div>
 </div>
+
+
 @include('modal.timesheet.editLogModalView')
 @include('modal.timesheet.editEventModalView')
 @endsection

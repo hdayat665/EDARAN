@@ -112,20 +112,13 @@ var handleCalendarDemo = function () {
 
         console.log(dataHoliday);
         var calendar = new FullCalendar.Calendar(calendarElm, {
-            datesSet: function (info) {
-                // Disable previous and next buttons
-                var prevButton = calendar.getPrevButton();
-                var nextButton = calendar.getNextButton();
-                prevButton.disabled = true;
-                nextButton.disabled = true;
-            },
+
 
             headerToolbar: {
-                left: "prev,next",
+                left: "",
                 center: "title",
-                right: "dayGridMonth,timeGridWeek,timeGridDay,listWeek",
+                right: "prev,today,next,dayGridMonth,timeGridWeek,timeGridDay,listWeek",
             },
-            navLinks: false,
             customButtons: {
                 logButton: {
                     text: "New Log",
@@ -378,7 +371,7 @@ var handleCalendarDemo = function () {
             initialView: "dayGridMonth",
             editable: false,
             droppable: false,
-            selectable: false,
+            selectable: true,
             themeSystem: "bootstrap",
             views: {
                 timeGrid: {

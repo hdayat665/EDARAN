@@ -54,7 +54,7 @@
                                             <canvas id="myChart"  style="width:100%;max-width:500px" > </canvas>
                                         </div>
                                         <br>
-                                        <div class="form-control "> Earned Leave to Date: 3 Days </div>
+                                        <div id="EarnedLeave" class="form-control">Earned Leave to Date:  Days</div>
                                     </div>
                                 </div>
                                     <div class="col-sm-6">
