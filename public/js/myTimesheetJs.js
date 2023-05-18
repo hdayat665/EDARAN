@@ -1210,7 +1210,7 @@ $(document).ready(function () {
 
 
                             var appealaddb = $('<button/>', {
-                                text: 'Add Appeal',
+                                text: 'Appeal',
                                 class: 'btn btn-primary btn-xs appeal-add-button',
                                 click: function () {
                                     var year = info.date.getFullYear();
@@ -1370,7 +1370,7 @@ $(document).ready(function () {
                             $(info.el).css('background-color', 'red');
                             console.log(appliedDates);
                             var appealaddb = $('<button/>', {
-                                text: 'Add Appeal',
+                                text: 'Appeal',
                                 class: 'btn btn-primary btn-xs appeal-add-button',
                                 click: function () {
                                     var year = info.date.getFullYear();
@@ -2413,7 +2413,7 @@ $(document).ready(function () {
 
     // create the button
     var appealaddb = $('<button/>', {
-        text: 'Add Appeal',
+        text: 'Appeal',
         class: 'btn btn-primary appeal-add-button',
         click: function () {
             // some code
