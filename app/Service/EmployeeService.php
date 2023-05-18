@@ -1513,19 +1513,6 @@ class EmployeeService
             // $data['title'] = config('app.response.error.title');
             // $data['msg'] = 'user not found';
 
-        }else{
-
-             if ($_FILES['supportDoc']['name'])
-             {
-                 $payslip = upload($r->file('supportDoc'));
-                 $input['supportDoc'] = $payslip['filename'];
-
-                if (!$input['supportDoc']) {
-                    unset($input['supportDoc']);
-                 }
-             }
-
-            
         }
 
         return $data;

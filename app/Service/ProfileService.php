@@ -290,21 +290,20 @@ class ProfileService
 
         $user = UserQualificationOthers::where('id', $id)->first();
 
-        if(!$user)
+        if($user)
         {
-            $data['status'] = config('app.response.error.status');
-            $data['type'] = config('app.response.error.type');
-            $data['title'] = config('app.response.error.title');
-            $data['msg'] = 'user not found';
-
-        } else {
-
             UserQualificationOthers::where('id', $id)->update($input);
 
             $data['status'] = config('app.response.success.status');
             $data['type'] = config('app.response.success.type');
             $data['title'] = config('app.response.success.title');
-            $data['msg'] = 'Others Qualification is updated';
+            $data['msg'] = 'Success Update Others Qualification';
+
+            // $data['status'] = config('app.response.error.status');
+            // $data['type'] = config('app.response.error.type');
+            // $data['title'] = config('app.response.error.title');
+            // $data['msg'] = 'user not found';
+
         }
 
         return $data;

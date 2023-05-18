@@ -21,6 +21,7 @@
                                     </div>
                                     <div class="card-body">
                                             <form id="updatetimehierarchy">
+                                                
                                                 <div class="row ">
                                                     <div class="col md-6">
                                                         <div class="mb-3">
@@ -34,12 +35,14 @@
                                                     <div class="col md-6">
                                                         <div class="mb-3">
                                                             <label for="" class="form-label">Approver* </label>
+                                                            
                                                             <select class="form-select" name="tsapprover"  id="tsapprover" >
-                                                                <?php $employees = getEmployeeapprover(); ?>
+                                                                <?php $employees = getEmployeeapprover($user_id); ?>
                                                                 {{-- <option value="" label="PLEASE CHOOSE"></option> --}}
                                                                 @foreach ($employees as $employee)
                                                                     <option value="{{ $employee->user_id }}" label="{{ $employee->employeeName }}"
                                                                     {{ $employment->tsapprover == $employee->user_id ? "selected='selected'" : '' }}>
+
                                                                     {{ $employee->employeeName }}
                                                                     </option>
                                                                 @endforeach
