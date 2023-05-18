@@ -152,6 +152,7 @@ $(document).ready(function () {
         $("#fullnamemc").val(a + " " + b);
     });
 
+
     $("#firstNameChild,#lastNameChild").change(function () {
         var a = $("#firstNameChild").val();
         var b = $("#lastNameChild").val();
@@ -257,7 +258,6 @@ $(document).ready(function () {
             $("#ageChild").prop("readonly", false);
 
             $("#passportChild").prop("readonly", false);
-            $("#passportChild").css("pointer-events", "auto");
 
             $("#childgender").css({
                 "pointer-events": "auto",
@@ -275,7 +275,6 @@ $(document).ready(function () {
 
             $("#passportChild").val("");
             $("#passportChild").prop("readonly", false);
-            $("#passportChild").css("pointer-events", "none");
 
             $("#expiryDateChild").val("");
             $("#expiryDateChild").prop("readonly", true);
@@ -373,6 +372,7 @@ $(document).ready(function () {
         }
     });
 
+
     $(".partChecks").click(function () {
         if ($(this).prop("checked")) {
             $("#companyNamemc").prop("readonly", false);
@@ -445,11 +445,23 @@ $(document).ready(function () {
     $("#passportChild").change(function () {
         if ($("#expiryDateChild").prop("readonly")) {
             $("#expiryDateChild").prop("readonly", false);
+            $("#expiryDateChild").prop("disabled", false);
             $("#expiryDateChild").css("pointer-events", "auto");
+
+            $("#issuingCountryChild").prop("readonly", false);
+            $("#issuingCountryChild").prop("disabled", false);
+            $("#issuingCountryChild").css("pointer-events", "auto");
+            
         } else {
             $("#expiryDateChild").prop("readonly", true);
+            $("#expiryDateChild").prop("disabled", true);
             $("#expiryDateChild").css("pointer-events", "none");
             $("#expiryDateChild").val("");
+
+            $("#issuingCountryChild").prop("readonly", true);
+            $("#issuingCountryChild").prop("disabled", true);
+            $("#issuingCountryChild").css("pointer-events", "none");
+            $("#issuingCountryChild").val("");
         }
     });
     $("#idnumber2").change(function () {
@@ -628,6 +640,7 @@ $(document).ready(function () {
             $("#expirydatemcs").prop("readonly", false);
             $("#expirydatemcs").css("pointer-events", "auto");
 
+
             $("#issuingCountry2s").prop("readonly", false);
             $("#issuingCountry2s").css("pointer-events", "auto");
 
@@ -646,6 +659,7 @@ $(document).ready(function () {
             $("#expirydatemcs").prop("readonly", true);
             $("#expirydatemcs").css("pointer-events", "none");
             $("#expirydatemcs").val("");
+
 
             $("#issuingCountry2s").val("");
             $("#issuingCountry2s").prop("readonly", true);
@@ -686,6 +700,7 @@ $(document).ready(function () {
                 $(this).datepicker("setDate", fromDate);
             }
         });
+
 
     $("#datepicker-others").datepicker({
         todayHighlight: true,
@@ -1061,6 +1076,7 @@ $(document).ready(function () {
         }
     });
 
+
     $(".partCheck2").click(function () {
         if ($(this).prop("checked")) {
             $("#reportto").show();
@@ -1206,7 +1222,7 @@ $(document).ready(function () {
             $("#idNoaddChild").val("").prop("disabled", true);
 
             $("#issuingCountryChild").prop("disabled", false);
-            $("#expiryDateChild").prop("disabled", false);
+            $("#expiryDateChild").prop("disabled", true);
         } else {
             $("#idNoaddChild").prop("disabled", false);
 
@@ -1272,10 +1288,16 @@ $(document).ready(function () {
     $('input[name="nonNetizen3"]').click(function () {
         if ($(this).is(":checked")) {
             $("#idno6").val("").prop("disabled", true);
+            $("#expirydate6").prop("disabled", true);
+            $("#issuingCountry6").prop("disabled", true);
+
         } else {
             $("#idno6").prop("disabled", false);
+            $("#expirydate6").prop("disabled", true);
+            $("#issuingCountry6").prop("disabled", true);
         }
     });
+
 
     $('input[name="okuStatus3"]').click(function () {
         if ($(this).is(":checked")) {
@@ -2661,7 +2683,7 @@ $(document).ready(function () {
                     digits: true,
                     rangelength: [10, 11],
                 },
-                okuattach: {
+                okuFile: {
                     required: true,
                 },
 
@@ -2700,7 +2722,7 @@ $(document).ready(function () {
                     required: "Please Insert OKU Card Number",
                     rangelength: "Please Inset Valid Home Number",
                 },
-                okuattach: {
+                okuFile: {
                     required: "Please Insert OKU Attachment",
                 },
 
@@ -2868,6 +2890,7 @@ $(document).ready(function () {
             },
         });
     });
+
 
     childId = $("#childId").val();
 
@@ -3345,7 +3368,7 @@ $(document).ready(function () {
                     required: false,
                 },
                 contactNo: {
-                    required: true,
+                    required: false,
                     digits: true,
                 },
                 relationship1: "required",
@@ -3368,6 +3391,11 @@ $(document).ready(function () {
                     rangelength: [10, 11],
                 },
                 okuFile: {
+                    required: true,
+                },
+                
+                expiryDate: "required",
+                issuingCountry: {
                     required: true,
                 },
             },
@@ -3405,6 +3433,11 @@ $(document).ready(function () {
                 },
                 okuFile: {
                     required: "Please Insert OKU Attachment",
+                },
+
+                expiryDate: "Please Insert Expiry Date",
+                issuingCountry: {
+                    required: "Please Insert Issuing Country",
                 },
             },
             submitHandler: function (form) {
@@ -3676,6 +3709,7 @@ $(document).ready(function () {
             url: "/getVehicleById/" + id,
         });
     }
+
 
     $("#saveVehicle").click(function (e) {
         $("#addVehicleForm").validate({
@@ -4204,6 +4238,68 @@ $(document).ready(function () {
         });
     });
 
+    //   add validation on expiry date and issuing country
+    //add parent
+    $("#parentModalAdd").click(function () {
+        if ($(this).prop("checked")) {
+            $("#expirydate6").prop("disabled", true);
+            $("#expirydate6").prop("readonly", true);
+
+            $("#issuingCountry6").prop("disabled", true);
+            $("#issuingCountry6").prop("readonly", true);
+            
+            $("#okucard5").prop("disabled", true);
+            $("#okucard5").prop("readonly", true);
+
+            $("#okuattach5").prop("disabled", true);
+            $("#okuattach5").prop("readonly", true);
+        } else {
+            $("#expirydate6").prop("disabled", true);
+            $("#expirydate6").prop("readonly", true);
+
+            $("#issuingCountry6").prop("disabled", true);
+            $("#issuingCountry6").prop("readonly", true);
+
+            $("#okucard5").prop("disabled", true);
+            $("#okucard5").prop("readonly", true);
+
+            $("#okuattach5").prop("disabled", true);
+            $("#okuattach5").prop("readonly", true);
+        }
+    });
+
+    //add children
+    $("#childModalAdd").click(function () {
+        if ($(this).prop("checked")) {
+            $("#expiryDateChild").prop("disabled", true);
+            $("#expiryDateChild").prop("readonly", true);
+
+            $("#issuingCountryChild").prop("disabled", true);
+            $("#issuingCountryChild").prop("readonly", true);
+
+            $("#okucard3").prop("disabled", true);
+            $("#okucard3").prop("readonly", true);
+
+            $("#okuattach3").prop("disabled", true);
+            $("#okuattach3").prop("readonly", true);
+            
+        } else {
+            $("#expiryDateChild").prop("disabled", true);
+            $("#expiryDateChild").prop("readonly", true);
+
+            $("#issuingCountryChild").prop("disabled", true);
+            $("#issuingCountryChild").prop("readonly", true);
+
+
+            $("#okucard3").prop("disabled", true);
+            $("#okucard3").prop("readonly", true);
+
+            $("#okuattach3").prop("disabled", true);
+            $("#okuattach3").prop("readonly", true);
+        }
+    });
+    ///////////////////////////////////////
+    
     //   oku checkbox myprofile
     $(".okuCheck").click(function () {
         if ($(this).prop("checked")) {
@@ -4247,6 +4343,8 @@ $(document).ready(function () {
             $("#okuattach1").val("");
         }
     });
+
+
 
     //oku check save companion
     $(".okuCheck1s").click(function () {
@@ -4371,6 +4469,9 @@ $(document).ready(function () {
         if ($("#expirydate6").prop("readonly")) {
             $("#expirydate6").prop("readonly", false);
             $("#expirydate6").css("pointer-events", "auto");
+            $("#expirydate6").prop("disabled", false);
+            $("#issuingCountry6").prop("disabled", false);
+
 
             $("#issuingCountry6").prop("readonly", false);
             $("#issuingCountry6").css("pointer-events", "auto");
@@ -4378,6 +4479,8 @@ $(document).ready(function () {
             $("#expirydate6").prop("readonly", true);
             $("#expirydate6").css("pointer-events", "none");
             $("#expirydate6").val("");
+            $("#expirydate6").prop("disabled", true);
+            $("#issuingCountry6").prop("disabled", true);
 
             $("#issuingCountry6").prop("readonly", true);
             $("#issuingCountry6").css("pointer-events", "none");
@@ -4511,6 +4614,7 @@ $(document).ready(function () {
             $("#age7").val(currentAge);
         }
     });
+
 
 });
 function dataURLtoFile(dataurl, filename) {

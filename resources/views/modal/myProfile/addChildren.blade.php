@@ -75,11 +75,11 @@
                                 </div> --}}
                             </div>
                         </div>
-                          <div class="col-sm-3">
+                            <div class="col-sm-3">
                                     <label for="expirydate" class="form-label">Expiry Date*</label>
-                                    <input type="text" disabled id="expiryDateChild" name="expiryDate"  placeholder="YYYY-MM-DD" class="form-control" aria-describedby="expirydate" style="pointer-events: none;" readonly>
+                                    <input type="text" id="expiryDateChild" name="expiryDate"  placeholder="YYYY-MM-DD" class="form-control" aria-describedby="expirydate" style="pointer-events: none;" readonly>
                                   
-                                </div>
+                            </div>
                         <div class="col-sm-3">
                             <label for="issuing-country" class="form-label">Issuing Country*</label>
                             <select class="form-select" name="issuingCountry" id="passportcountrychildren" style="text-transform:uppercase" disabled>
@@ -134,7 +134,7 @@
                             <div class="row">
                                 <div class="col-sm-6 ">
                                     <div class="form-check form-switch align-right">
-                                        <input class="form-check-input okuCheck3" type="checkbox" value="on" id="nonCitizen1" name="okuStatus">
+                                        <input class="form-check-input okuCheck3" type="checkbox" value="on" id="" name="okuStatus">
                                         <label class="form-check-label" for="OKU" >
                                             OKU?
                                         </label>

@@ -59,7 +59,7 @@
                             <div class="row">
                                 <div class="col-sm-12">
                                     <label for="passport" class="form-label">Passport Number</label>
-                                    <input type="text"  style="pointer-events: none;" id="passportChild" name="passport" class="form-control" aria-describedby="passport" placeholder="PASSPORT NUMBER">
+                                    <input type="text"   id="passportChild" name="passport" class="form-control" aria-describedby="passport" placeholder="PASSPORT NUMBER">
                                 </div>
                             </div>
                         </div>
