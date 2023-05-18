@@ -30,8 +30,11 @@
                 <div class="form-group row">
                     <label for="staticEmail" class="col-sm-4 col-form-label">Attachments</label>
                     <div class="col-sm-8">
-                        <input type="file" class="form-control-file" id="file" name="file">
+                      <input id="" type="file" name="file" multiple="multiple">
+                      Click <a id="othersDoc1"></a> to see attachment.
                     </div>
+
+                    
                 </div>
             </div>
         </div>

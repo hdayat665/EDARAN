@@ -1165,9 +1165,14 @@ if (!function_exists('getEmployeerecommender')) {
         return $data;
     }
 }
+
+
+
 if (!function_exists('getEmployeeapprover')) {
-    function getEmployeeapprover()
-    {
+    function getEmployeeapprover($user_id = '')
+
+    {    
+
 
         $data = DB::table('employment as e')
             ->join('jobGrade as j', 'e.jobGrade', '=', 'j.id')
@@ -1177,9 +1182,15 @@ if (!function_exists('getEmployeeapprover')) {
                     ->orderBy('id', 'desc')
                     ->limit(1);
             })
+            ->where('e.status', '=', 'Active')
+            ->where('e.user_id', '<>', $user_id)
+           
+
             ->select('e.*', 'j.jobgradename as job_grade_name')
             ->get();
 
+
+            
         if (!$data) {
             $data = [];
         }

@@ -1060,9 +1060,9 @@ $(document).ready(function () {
                     education.highestLevelAttained
                 );
                 $("#educationResult1").val(education.result);
-                if (data.file) {
+                if (education.file) {
                     $("#fileDownloadOthers").html(
-                        '<a href="/storage/' + data.file + '">Download File</a>'
+                        '<a href="/storage/' + education.file + '">Download File</a>'
                     );
                 }
             });
@@ -1350,7 +1350,14 @@ $(document).ready(function () {
                 $("#idOthers").val(othersQualification.id);
                 $("#othersDate1").val(othersQualification.otherDate);
                 $("#othersPQDetails1").val(othersQualification.otherPQDetails);
-                $("#othersDoc1").val(othersQualification.supportOtherDoc);
+                // $("#othersDoc1").val(othersQualification.file);
+                if (othersQualification.file) {
+                    $("#othersDoc1").html(
+
+                        '<a href="/storage/' + othersQualification.file + '" download="'+ othersQualification.file +'">here</a>'
+
+                    );
+                }
             });
             $("#editmodalothers").modal("show");
         });
@@ -4040,8 +4047,8 @@ $("#same-address").change(function () {
         $("#address-2c").val($("#address-2").val()).prop("readonly", true);
         $("#postcodec").val($("#postcode").val()).prop("readonly", true);
         $("#cityc").val($("#city").val()).prop("readonly", true);
-        $("#statec").val($("#state").val()).prop("disabled", true);
-        $("#countryc").val($("#country").val()).prop("disabled", true);
+        $("#statec").val($("#state").val()).css({ "pointer-events": "none", background: "#e9ecef" });
+        $("#countryc").val($("#country").val()).css({ "pointer-events": "none", background: "#e9ecef" });
 
         // Fetch permanent address from userAddress table if available
         var id = "{{ $user->id }}";
@@ -4058,11 +4065,11 @@ $("#same-address").change(function () {
                     console.log(data);
 
                     if (
-                        permanentAddress1 &&
-                        permanentAddress2 &&
-                        permanentPostcode &&
-                        permanentCity &&
-                        permanentState &&
+                        permanentAddress1 ||
+                        permanentAddress2 ||
+                        permanentPostcode ||
+                        permanentCity ||
+                        permanentState ||
                         permanentCountry
                     ) {
                         $("#address-1c").val(permanentAddress1);
@@ -4082,8 +4089,8 @@ $("#same-address").change(function () {
         $("#address-2c").prop("readonly", false).val("");
         $("#postcodec").prop("readonly", false).val("");
         $("#cityc").prop("readonly", false).val("");
-        $("#statec").prop("disabled", false).val("");
-        $("#countryc").prop("disabled", false).val("");
+        $("#statec").css({ "pointer-events": "auto", background: "none" }).val("");
+        $("#countryc").css({ "pointer-events": "auto", background: "none" }).val("");
     }
 });
 
@@ -4093,8 +4100,8 @@ $("#same-address2").change(function () {
         $("#address2parent").val($("#address-2").val()).prop("readonly", true);
         $("#postcodeparent").val($("#postcode").val()).prop("readonly", true);
         $("#cityparent").val($("#city").val()).prop("readonly", true);
-        $("#stateparent").val($("#state").val()).prop("disabled", true);
-        $("#countryparent").val($("#country").val()).prop("disabled", true);
+        $("#stateparent").val($("#state").val()).css({ "pointer-events": "none", background: "#e9ecef" });
+        $("#countryparent").val($("#country").val()).css({ "pointer-events": "none", background: "#e9ecef" });
 
         // Fetch permanent address from userAddress table if available
         var id = "{{ $user->id }}";
@@ -4110,11 +4117,11 @@ $("#same-address2").change(function () {
                     console.log(data);
 
                     if (
-                        permanentAddress1 &&
-                        permanentAddress2 &&
-                        permanentPostcode &&
-                        permanentCity &&
-                        permanentState &&
+                        permanentAddress1 ||
+                        permanentAddress2 ||
+                        permanentPostcode ||
+                        permanentCity ||
+                        permanentState ||
                         permanentCountry
                     ) {
                         $("#address1parent").val(permanentAddress1);
@@ -4136,8 +4143,8 @@ $("#same-address2").change(function () {
         $("#address2parent").val($("").val()).prop("readonly", false);
         $("#postcodeparent").val($("").val()).prop("readonly", false);
         $("#cityparent").val($("").val()).prop("readonly", false);
-        $("#stateparent").val($("").val()).prop("disabled", false);
-        $("#countryparent").val($("").val()).prop("disabled", false);
+        $("#stateparent").css({ "pointer-events": "auto", background: "none" }).val("");
+        $("#countryparent").css({ "pointer-events": "auto", background: "none" }).val("");
     }
 });
 

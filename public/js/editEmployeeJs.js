@@ -820,11 +820,11 @@ $(document).ready(function () {
                         console.log(data);
 
                         if (
-                            permanentAddress1 &&
-                            permanentAddress2 &&
-                            permanentPostcode &&
-                            permanentCity &&
-                            permanentState &&
+                            permanentAddress1 ||
+                            permanentAddress2 ||
+                            permanentPostcode ||
+                            permanentCity ||
+                            permanentState ||
                             permanentCountry
                         ) {
                             $("#address1parent").val(permanentAddress1);
@@ -947,17 +947,9 @@ $(document).ready(function () {
             $("#address-1c").val($("#address-1").val()).prop("readonly", true);
             $("#address-2c").val($("#address-2").val()).prop("readonly", true);
             $("#postcodec").val($("#postcode").val()).prop("readonly", true);
-            $("#cityc").val($("#city").val()).prop("readonly", true).css({
-                "pointer-events": "none",
-                "touch-action": "none",
-                background: "#e9ecef",
-            });
+            $("#cityc").val($("#city").val()).prop("readonly", true);
 
-            $("#statec").val($("#state").val()).prop("readonly", true).css({
-                "pointer-events": "none",
-                "touch-action": "none",
-                background: "#e9ecef",
-            });
+            $("#statec").val($("#state").val()).css({ "pointer-events": "none", background: "#e9ecef" });
 
             $("#countryc").val($("#country").val()).prop("readonly", true).css({
                 "pointer-events": "none",
@@ -985,41 +977,22 @@ $(document).ready(function () {
                         console.log(data);
 
                         if (
-                            permanentAddress1 &&
-                            permanentAddress2 &&
-                            permanentPostcode &&
-                            permanentCity &&
-                            permanentState &&
+                            permanentAddress1 ||
+                            permanentAddress2 ||
+                            permanentPostcode ||
+                            permanentCity ||
+                            permanentState ||
                             permanentCountry
                         ) {
                             $("#address-1c").val(permanentAddress1);
                             $("#address-2c").val(permanentAddress2);
                             $("#postcodec").val(permanentPostcode);
-                            $("#cityc")
-                                .val($("").val())
-                                .prop("readonly", false)
-                                .css({
-                                    "pointer-events": "auto",
-                                    "touch-action": "auto",
-                                    background: "none",
-                                });
+                            $("#cityc").val(permanentPostcode);
+                            $("#statec").val(permanentState);
+                            $("#countryc").val(permanentCountry);
 
-                            $("#statec")
-                                .val($("").val())
-                                .prop("readonly", false)
-                                .css({
-                                    "pointer-events": "auto",
-                                    "touch-action": "auto",
-                                    background: "none",
-                                });
-                            $("#countryc")
-                                .val($("1").val())
-                                .prop("readonly", false)
-                                .css({
-                                    "pointer-events": "auto",
-                                    "touch-action": "auto",
-                                    background: "none",
-                                });
+
+                           
                         }
                     }
                 })
@@ -1797,7 +1770,13 @@ $(document).ready(function () {
 
                 $("#othersDate1").val(othersQualification.otherDate);
                 $("#othersPQDetails1").val(othersQualification.otherPQDetails);
-                $("#othersDoc1").val(othersQualification.supportOtherDoc);
+                if (othersQualification.file) {
+                    $("#othersDoc1").html(
+
+                        '<a href="/storage/' + othersQualification.file + '" download="'+ othersQualification.file +'">here</a>'
+
+                    );
+                }
             });
             $("#editmodalothers").modal("show");
         });
@@ -4616,6 +4595,7 @@ $(document).ready(function () {
     });
 
 
+    
 });
 function dataURLtoFile(dataurl, filename) {
     var arr = dataurl.split(","),
