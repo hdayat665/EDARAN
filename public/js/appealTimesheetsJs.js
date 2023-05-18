@@ -40,7 +40,7 @@ $(document).ready(function () {
                     async: false,
                     processData: false,
                     contentType: false,
-                }).done(function(data) {
+                }).then(function(data) {
                     swal({
                         title: data.title,
                         text: data.msg,

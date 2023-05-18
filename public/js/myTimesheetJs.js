@@ -3059,15 +3059,8 @@ $(document).on("click", "#confirmsubmitb", function () {
     var vehicleData = getConfirmSubmit(id);
 
     vehicleData.then(function (data) {
-        // console.log(data.id);
-        // console.log(data.fullName);
-        // console.log('')
         var year = data.date.substr(0, 4);
         var month = data.date.substr(5, 2);
-        // $("#fullname").val(data.fullName);
-        // $("#year").val(year);
-        // $("#month").val(month);
-        // $("#idtv").val(data.id);
     });
     $("#confirmsubmit").modal("show");
 });

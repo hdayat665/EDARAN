@@ -365,7 +365,7 @@
                             <label for="issuing-country" class="form-label">Project</label>
                             <select class="selectpicker form-select" id="addneweventselectprojectedit" aria-label="Default select example" name="project_id">
                                 <option class="form-label" value="">PLEASE CHOOSE</option>
-                                <?php $projects = project() ?>
+                                <?php $projects = projectactive() ?>
                                 @foreach ($projects as $project)
                                 <option class="form-label" value="{{$project->id}}">{{$project->project_name}}</option>
                                 @endforeach

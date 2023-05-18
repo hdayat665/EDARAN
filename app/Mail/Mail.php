@@ -84,7 +84,12 @@ class Mail extends Mailable
             $view = 'emails.leave.viewRejectedLeaveHod';
         }else if ($data['typeEmail'] == 'emailToApprovedLeave') {
             $view = 'emails.leave.viewApprovedLeave';
+        }else if ($data['typeEmail'] == 'emailToApprovedAppeal') {
+            $view = 'emails.timesheet.viewtimesheetappeal';
+        }else if ($data['typeEmail'] == 'emailToEmployeeAppeal') {
+            $view = 'emails.timesheet.emailToEmployeeAppeal';
         }
+        
 
         // $address = 'janeexampexample@example.com';
         // $subject = 'This is a demo!';

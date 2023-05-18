@@ -80,6 +80,7 @@
                                     <th class="text-nowrap">Venue</th>
                                     <th class="text-nowrap">Description</th>
                                     <th class="text-nowrap">Participant</th>
+                                    <th class="text-nowrap">Created By</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -105,7 +106,7 @@
                                             <td style="text-align: center" width="7%"><a class="btn btn-primary" href="javascript:;" data-bs-toggle="modal"
                                                     data-id="{{ $event->id }}" id="buttonnViewParticipant"></i>  {{ count($names) }}</a></td>
                                                     {{-- data-id="{{ $event->id }}" id="buttonnViewParticipant"></i> view</a></td> --}}
-                        
+                                            <td>{{ $event->employeeName ?? '-' }}</td>
                                         </tr>
                                     @endforeach
                                 @endif
