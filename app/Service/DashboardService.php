@@ -8,8 +8,10 @@ use App\Models\Employee;
 use App\Models\Project;
 use App\Models\ProjectLocation;
 use App\Models\ProjectMember;
+use App\Models\holidayModel;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use App\Service\Carbon;
 
 class DashboardService
 {
@@ -31,7 +33,7 @@ class DashboardService
 
     public function eventView()
     {
-        $data['events'] = TimesheetEvent::where('tenant_id', Auth::user()->tenant_id)->orderBy('id', 'desc')->get();
+        $data['events'] = TimesheetEvent::where('tenant_id', Auth::user()->tenant_id)->orderBy('start_date', 'asc')->get();
         
         if (!$data) {
             $data = [];
@@ -103,5 +105,67 @@ class DashboardService
         }
     
         return $data;
+    }
+
+    //function listing date for all date before current date,exclude weekday,holiday
+//     public function holidays()
+// {
+//     $currentMonth = date('m');
+//     $currentYear = date('Y');
+//     $currentDay = date('d');
+
+//     $startDate = \Carbon\Carbon::create($currentYear, $currentMonth, 1);
+//     $endDate = \Carbon\Carbon::create($currentYear, $currentMonth, $currentDay);
+
+//     $holidays = holidayModel::where('tenant_id', Auth::user()->tenant_id)
+//         ->whereBetween('start_date', [$startDate, $endDate])
+//         ->get(['start_date'])
+//         ->pluck('start_date')
+//         ->map(function ($date) {
+//             return \Carbon\Carbon::parse($date)->toDateString();
+//         });
+
+//     $dates = [];
+
+//     while ($startDate->lte($endDate)) {
+//         if (!$startDate->isWeekend() && !$holidays->contains($startDate->toDateString())) {
+//             $dates[] = $startDate->toDateString();
+//         }
+//         $startDate->addDay();
+//     }
+
+//     return $dates;
+// }
+
+public function countHolidays()
+    {
+        $currentMonth = date('m');
+        $currentYear = date('Y');
+        $currentDay = date('d');
+
+        $startDate = \Carbon\Carbon::create($currentYear, $currentMonth, 1);
+        $endDate = \Carbon\Carbon::create($currentYear, $currentMonth, $currentDay);
+
+        $holidays = holidayModel::where('tenant_id', Auth::user()->tenant_id)
+            ->whereBetween('start_date', [$startDate, $endDate])
+            ->get(['start_date'])
+            ->pluck('start_date')
+            ->map(function ($date) {
+                return \Carbon\Carbon::parse($date)->toDateString();
+            });
+
+        $count = 0;
+
+        while ($startDate->lte($endDate)) {
+            if (!$startDate->isWeekend() && (!$holidays->isEmpty() && !$holidays->contains($startDate->toDateString()))) {
+                $count++;
+            } elseif ($startDate->isWeekend()) {
+                $startDate->addDay(); // Skip weekend days
+                continue;
+            }
+            $startDate->addDay();
+        }
+
+        return ['holidays' => $count];
     }
 }

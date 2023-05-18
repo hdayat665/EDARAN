@@ -22,7 +22,7 @@
 				<div class="stats-icon"><i class="fa fa-calendar-days"></i></div>
 				<div class="stats-info">
 					<h4>MY TIMESHEET</h4>
-					<p>0</p>	
+					<p>{{ $holidays }}</p>
 				</div>
 				<div class="stats-link">
 					<a href="/myTimesheet"><i class="fa fa-calendar-days"></i></a>

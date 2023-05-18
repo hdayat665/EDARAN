@@ -470,4 +470,78 @@ class MailService
             Mail::to($receiver)->send(new MailMail($response));
         }
     }
+
+    public function emailToApproverAppeal($data)
+    {
+
+        $user = Employee::select('employment.*', 'department.departmentName', 'designation.designationName')
+                ->join('designation', 'employment.designation', '=', 'designation.id')
+                ->join('department', 'employment.department', '=', 'department.id')
+                ->where('employment.user_id', $data->user_id)
+                ->where('employment.tenant_id', Auth::user()->tenant_id)
+                ->first();
+
+        $approvedby = Employee::select('employment.*', 'department.departmentName', 'designation.designationName')
+                ->join('designation', 'employment.designation', '=', 'designation.id')
+                ->join('department', 'employment.department', '=', 'department.id')
+                ->where('employment.user_id', $user->tsapprover)
+                ->where('employment.tenant_id', Auth::user()->tenant_id)
+                ->first();
+
+        if($user && $approvedby){
+
+            $receiver = $approvedby->workingEmail;
+            $response['typeEmail'] = 'emailToApprovedAppeal';
+
+            $response['from'] = env('MAIL_FROM_ADDRESS');
+            $response['nameFrom'] = $user->employeeName;
+            $response['subject'] = 'Timesheet Appeal Application';
+            $response['title'] = 'Timesheet Appeal Application';
+            $response['link'] = env('APP_URL') . '/appealtimesheet';
+            $response['employeeNamex'] = $approvedby->employeeName;
+            $response['employeeName'] = $user->employeeName;
+            $response['departmentName'] = $user->departmentName;
+            $response['designationName'] = $user->designationName;
+            $response['data'] = $data;
+
+            Mail::to($receiver)->send(new MailMail($response));
+        }
+    }
+
+
+    public function emailToEmployeeAppeal($data)
+    {
+
+        $user = Employee::select('employment.*', 'department.departmentName', 'designation.designationName')
+                ->join('designation', 'employment.designation', '=', 'designation.id')
+                ->join('department', 'employment.department', '=', 'department.id')
+                ->where('employment.user_id', $data->user_id)
+                ->where('employment.tenant_id', Auth::user()->tenant_id)
+                ->first();
+
+        $approvedby = Employee::select('employment.*', 'department.departmentName', 'designation.designationName')
+                ->join('designation', 'employment.designation', '=', 'designation.id')
+                ->join('department', 'employment.department', '=', 'department.id')
+                ->where('employment.user_id', $user->tsapprover)
+                ->where('employment.tenant_id', Auth::user()->tenant_id)
+                ->first();
+
+        if($user && $approvedby){
+
+            $receiver = $user->workingEmail;
+            $response['typeEmail'] = 'emailToEmployeeAppeal';
+
+            $response['from'] = env('MAIL_FROM_ADDRESS');
+            $response['nameFrom'] = $approvedby->employeeName;
+            $response['subject'] = 'Timesheet Appeal Application Status';
+            $response['title'] = 'Timesheet Appeal Application Status';
+            $response['employeeNamex'] = $user->employeeName;
+            $response['employeeName'] = $approvedby->employeeName;
+            $response['departmentName'] = $approvedby->departmentName;
+            $response['designationName'] = $approvedby->designationName;
+            $response['data'] = $data;
+
+            Mail::to($receiver)->send(new MailMail($response));
+        }
+    }
 }
