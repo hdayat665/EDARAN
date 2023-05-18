@@ -37,7 +37,7 @@ $(document).ready(function () {
                     type: "GET",
                     url: "/updateStatusappeal/" + id + '/' + status,
                     dataType: "json",
-                    async: false,
+                    
                     processData: false,
                     contentType: false,
                 }).then(function(data) {
