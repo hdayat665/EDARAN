@@ -611,6 +611,7 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('/getusermyleave/{id}', 'getusermyleave');
             Route::get('/getpieleave', 'getpieleave');
             Route::get('/getpieleave2', 'getpieleave2');
+            Route::get('/getEarnedLeave', 'getEarnedLeave');
 
             //checking holiday
 

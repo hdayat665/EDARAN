@@ -368,9 +368,9 @@ if ($existingLogs->isNotEmpty()) {
             AttendanceEvent::create($input);
         }
 
-        
-       
-        
+
+
+
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
@@ -915,15 +915,39 @@ if ($existingLogs->isNotEmpty()) {
 
     public function getLeavesByLotIdLeave($id)
     {
+        $Check = Employee::select('employment.*')
+            ->where('employment.user_id', $id)
+            ->where('employment.tenant_id', Auth::user()->tenant_id)
+            ->first();
 
-        $data = MyLeaveModel::select('myleave.*','leave_types.leave_types', 'employment.employeeName')
-        ->join('leave_types', 'myleave.lt_type_id', '=', 'leave_types.id')
-        ->join('employment', 'myleave.up_user_id', '=', 'employment.user_id')
-        ->where('myleave.up_recommendedby_id', '=', Auth::user()->id)
-        ->where('myleave.up_user_id', '=', $id)
-        ->where('myleave.tenant_id', Auth::user()->tenant_id)
-        ->get();
-        return $data;
+        if($Check->eleaverecommender == Auth::user()->id){
+
+            $data = MyLeaveModel::select('myleave.*','leave_types.leave_types', 'employment.employeeName')
+            ->join('leave_types', 'myleave.lt_type_id', '=', 'leave_types.id')
+            ->join('employment', 'myleave.up_user_id', '=', 'employment.user_id')
+            ->where('myleave.up_recommendedby_id', '=', $Check->eleaverecommender )
+            ->where('myleave.up_user_id', '=', $id )
+            ->where('myleave.tenant_id', Auth::user()->tenant_id)
+            ->get();
+
+            return $data;
+
+        }
+
+        if($Check->eleaveapprover == Auth::user()->id){
+
+            $data = MyLeaveModel::select('myleave.*','leave_types.leave_types', 'employment.employeeName')
+            ->join('leave_types', 'myleave.lt_type_id', '=', 'leave_types.id')
+            ->join('employment', 'myleave.up_user_id', '=', 'employment.user_id')
+            ->where('myleave.up_approvedby_id', '=', $Check->eleaveapprover)
+            ->where('myleave.up_user_id', '=', $id )
+            ->where('myleave.tenant_id', Auth::user()->tenant_id)
+            ->get();
+
+            return $data;
+
+        }
+
     }
 
     public function getHolidaysByLotId($id)
@@ -1174,7 +1198,7 @@ if ($existingLogs->isNotEmpty()) {
     public function createAppealTimesheet($r)
     {
         $input = $r->input();
-        
+
         if ($_FILES['file']['name']) {
             $payslip = upload($r->file('file'));
             $input['file'] = $payslip['filename'];
@@ -1195,13 +1219,13 @@ if ($existingLogs->isNotEmpty()) {
             $nextNumericPart = $numericPart + 1;
             $nextLogid = substr($highestLogid, 0, 3) . sprintf('%04d', $nextNumericPart);
         }
-                
+
         // dd($nextLogid);
 
         $input['user_id'] = $user->id;
         $input['tenant_id'] = $user->tenant_id;
         $input['logid'] = $nextLogid;
-    
+
         $existingAppealdate = TimesheetAppeals::where('tenant_id', $user->tenant_id)
             ->where('applied_date', $input['applied_date'])
             ->first();
@@ -1209,11 +1233,14 @@ if ($existingLogs->isNotEmpty()) {
         $existingAppeallogid = TimesheetAppeals::where('tenant_id', $user->tenant_id)
         ->where('logid', $input['logid'])
         ->first();
-    
-        $existingAppealdate = TimesheetAppeals::where('tenant_id', $user->tenant_id)
-        ->where('user_id', $user->id)
-        ->where('applied_date', $input['applied_date'])
-        ->first();
+
+        if ($existingAppealdate) {
+            $data['status'] = config('app.response.error.status');
+            $data['type'] = config('app.response.error.type');
+            $data['title'] = config('app.response.error.title');
+            $data['msg'] = 'Timesheet appeal with the same applied date already exists';
+            return $data;
+        }
 
         if ($existingAppeallogid) {
             $data['status'] = config('app.response.error.status');
@@ -1223,10 +1250,8 @@ if ($existingLogs->isNotEmpty()) {
             return $data;
         }
 
-       
-    
         TimesheetAppeals::create($input);
-    
+
         // Return success response
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');

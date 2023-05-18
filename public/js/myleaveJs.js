@@ -36,6 +36,20 @@ $(document).ready(function () {
         ],
     });
 
+    var getEarnedLeave = getEarnedLeave();
+
+    function getEarnedLeave() {
+        return $.ajax({
+            url: "/getEarnedLeave/",
+        });
+    }
+
+    getEarnedLeave.then(function (data) {
+        $("#EarnedLeave").text("Earned Leave to Date: " + data + " Days");
+
+    });
+
+
     var mypie1 = mypie1();
 
     function mypie1() {

@@ -123,6 +123,14 @@ class MyleaveController extends Controller
 
         return $result;
     }
+
+    public function getEarnedLeave()
+    {
+        $ms = new MyleaveService;
+        $result = $ms->getEarnedLeave();
+        return $result;
+    }
+
     public function getuserleaveAppr($id = '')
     {
         $ms = new MyleaveService;

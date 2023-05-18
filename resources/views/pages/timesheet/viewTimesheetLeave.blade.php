@@ -1,7 +1,7 @@
 @extends('layouts.dashboardTenant')@section('content')
 <style>
 .fc-prev-button, .fc-next-button {
-    display: none;
+    /* display: none; */
 }
 </style>
 
