@@ -40,7 +40,7 @@
                         {!! $parent->state ? $parent->state . ', ' : '' !!}
                         {!! $parent->country ? $parent->country : '' !!}
                     </td>
-                    <td style="text-transform: uppercase;">{{ ($parent->relationship) ? relationship($parent->relationship) : ''}}</td>
+                    <td style="text-transform: uppercase;">{{ ($parent->relationship) ? relationshipFamily($parent->relationship) : ''}}</td>
                     <td>{{$parent->DOB}}</td>
                     <td>{{$parent->contactNo}}</td>
                 </tr>

@@ -441,8 +441,8 @@ if (!function_exists('educationType')) {
     }
 }
 
-if (!function_exists('relationship')) {
-    function relationship($id = '')
+if (!function_exists('relationshipFamily')) {
+    function relationshipFamily($id = '')
     {
         $data = [
 
@@ -463,6 +463,42 @@ if (!function_exists('relationship')) {
             '15' => 'STEP-BROTHER',
             '16' => 'STEP-SISTER',
             '17' => 'GUARDIAN',
+
+        ];
+
+        if ($id) {
+            $data = $data[$id];
+        }
+
+        return $data;
+    }
+}
+
+if (!function_exists('relationshipEmergencyContact')) {
+    function relationshipEmergencyContact($id = '')
+    {
+        $data = [
+
+            '1' => 'GRANDFATHER',
+            '2' => 'GRANDMOTHER',
+            '3' => 'GRANDFATHER-IN-LAW',
+            '4' => 'GRANDMOTHER-IN-LAW',
+            '5' => 'FATHER',
+            '6' => 'MOTHER',
+            '7' => 'FATHER-IN-LAW',
+            '8' => 'MOTHER-IN-LAW',
+            '9' => 'BROTHER',
+            '10' => 'SISTER',
+            '11' => 'BROTHER-IN-LAW',
+            '12' => 'SISTER-IN-LAW',
+            '13' => 'STEP-FATHER',
+            '14' => 'STEP-MOTHER',
+            '15' => 'STEP-BROTHER',
+            '16' => 'STEP-SISTER',
+            '17' => 'GUARDIAN',
+            '18' => 'SPOUSE',
+            '19' => 'SON',
+            '20' => 'DAUGHTER',
 
         ];
 
@@ -638,6 +674,20 @@ if (!function_exists('getCompany')) {
     }
 }
 
+if (!function_exists('getCompanyforJobHistory')) {
+    function getCompanyforJobHistory()
+    {
+        $user = Auth::user();
+        $companies = [];
+
+        if ($user) {
+            $companies = Company::where('tenant_id', $user->tenant_id)->get();
+        }
+
+        return $companies->pluck('companyName', 'id')->toArray();
+    }
+}
+
 
 if (!function_exists('getDepartment')) {
     function getDepartment($id = '')
@@ -656,13 +706,27 @@ if (!function_exists('getDepartment')) {
     }
 }
 
+if (!function_exists('getDepartmentforJobHistory')) {
+    function getDepartmentforJobHistory()
+    {
+        $user = Auth::user();
+        $deparments = [];
+
+        if ($user) {
+            $deparments = Department::where('tenant_id', $user->tenant_id)->get();
+        }
+
+        return $deparments->pluck('departmentName', 'id')->toArray();
+    }
+}
+
 if (!function_exists('getUnit')) {
-    function getUnit($id = '')
+    function getUnit($id = '', $departmentId = '')
     {
         if ($id) {
             $data = Unit::find($id);
         } else {
-            $data = Unit::where('tenant_id', Auth::user()->tenant_id)->get();
+            $data = Unit::where(['tenant_id' => Auth::user()->tenant_id, 'departmentId' => $departmentId])->get();
         }
 
         if (!$data) {
@@ -670,6 +734,20 @@ if (!function_exists('getUnit')) {
         }
 
         return $data;
+    }
+}
+
+if (!function_exists('getUnitforJobHistory')) {
+    function getUnitforJobHistory()
+    {
+        $user = Auth::user();
+        $units = [];
+
+        if ($user) {
+            $units = Unit::where('tenant_id', $user->tenant_id)->get();
+        }
+
+        return $units->pluck('unitName', 'id')->toArray();
     }
 }
 
@@ -688,6 +766,20 @@ if (!function_exists('getBranch')) {
         }
 
         return $data;
+    }
+}
+
+if (!function_exists('getBranchforJobHistory')) {
+    function getBranchforJobHistory()
+    {
+        $user = Auth::user();
+        $branchs = [];
+
+        if ($user) {
+            $branchs = Branch::where('tenant_id', $user->tenant_id)->get();
+        }
+
+        return $branchs->pluck('branchName', 'id')->toArray();
     }
 }
 
@@ -717,6 +809,20 @@ if (!function_exists('getJobGradeById')) {
     }
 }
 
+if (!function_exists('getJobGradeforJobHistory')) {
+    function getJobGradeforJobHistory()
+    {
+        $user = Auth::user();
+        $jobGrades = [];
+
+        if ($user) {
+            $jobGrades = JobGrade::where('tenant_id', $user->tenant_id)->get();
+        }
+
+        return $jobGrades->pluck('jobGradeName', 'id')->toArray();
+    }
+}
+
 if (!function_exists('getDesignation')) {
     function getDesignation($id = '')
     {
@@ -733,6 +839,20 @@ if (!function_exists('getDesignation')) {
     }
 }
 
+if (!function_exists('getDesignationforJobHistory')) {
+    function getDesignationforJobHistory()
+    {
+        $user = Auth::user();
+        $designations = [];
+
+        if ($user) {
+            $designations = Designation::where('tenant_id', $user->tenant_id)->get();
+        }
+
+        return $designations->pluck('designationName', 'id')->toArray();
+    }
+}
+
 if (!function_exists('getEmploymentType')) {
     function getEmploymentType()
     {
@@ -743,6 +863,20 @@ if (!function_exists('getEmploymentType')) {
         }
 
         return $data;
+    }
+}
+
+if (!function_exists('getEmploymentTypeforJobHistory')) {
+    function getEmploymentTypeforJobHistory()
+    {
+        $user = Auth::user();
+        $employementTypes = [];
+
+        if ($user) {
+            $employementTypes = EmploymentType::where('tenant_id', $user->tenant_id)->get();
+        }
+
+        return $employementTypes->pluck('type', 'id')->toArray();
     }
 }
 
@@ -1640,6 +1774,20 @@ if (!function_exists('getAllRole')) {
         }
 
         return $data;
+    }
+}
+
+if (!function_exists('getAllRoleTEST')) {
+    function getAllRoleTEST()
+    {
+        $user = Auth::user();
+        $companies = [];
+
+        if ($user) {
+            $companies = Role::where('tenant_id', $user->tenant_id)->get();
+        }
+
+        return $companies->pluck('roleName', 'id')->toArray();
     }
 }
 
