@@ -333,8 +333,8 @@ $("document").ready(function () {
         }
     });
 
-    $(document).on("change", "#claimcategory", function () {
-        $("#labelCategory").show();
+    $(document).on("change", "#claimcategory", function () { 
+        $("#labelCategory").hide();
         id = $(this).val();
         const inputs = ["contentLabel"];
 
@@ -361,17 +361,22 @@ $("document").ready(function () {
         var user = getClaimCategoryContent(id);
 
         user.then(function (data) {
-            // console.log(data);
             $("#label").text(data[0].label);
-            for (let i = 0; i < data.length; i++) {
-                const user = data[i];
-                var opt = document.createElement("option");
-                document.getElementById("contentLabel").innerHTML +=
-                    '<option value="' +
-                    user["id"] +
-                    '">' +
-                    user["content"] +
-                    "</option>";
+    
+            // Check if data is available
+            if (data.length > 0) {
+                // Show the labelcategory div if data is available
+                $("#labelCategory").show();
+                for (let i = 0; i < data.length; i++) {
+                    const user = data[i];
+                    var opt = document.createElement("option");
+                    document.getElementById("contentLabel").innerHTML +=
+                        '<option value="' +
+                        user["id"] +
+                        '">' +
+                        user["content"] +
+                        "</option>";
+                }
             }
         });
     });
@@ -381,7 +386,12 @@ $("document").ready(function () {
             // Specify validation rules
             rules: {
                 claim_category: "required",
-                claim_category_detail: "required",
+                claim_category_detail: {
+                    required: function () {
+                        // Check if labelcategory div is visible
+                        return $("#labelCategory").is(":visible");
+                    }
+                },
                 amount: "required",
                 "file_upload[]": "required",
             },

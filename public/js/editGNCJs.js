@@ -17,7 +17,7 @@ $(document).ready(function () {
 
     $(document).on("change", "#claimcategory", function () {
         id = $(this).val();
-        $("#labelcategory").show();
+        $("#labelcategory").hide();
         const inputs = ["contentLabel"];
 
         for (let i = 0; i < inputs.length; i++) {
@@ -44,16 +44,21 @@ $(document).ready(function () {
 
         user.then(function (data) {
             $("#label").text(data[0].label);
-            // console.log(data[0].label);
-            for (let i = 0; i < data.length; i++) {
-                const user = data[i];
-                var opt = document.createElement("option");
-                document.getElementById("contentLabel").innerHTML +=
-                    '<option value="' +
-                    user["id"] +
-                    '">' +
-                    user["content"] +
-                    "</option>";
+    
+            // Check if data is available
+            if (data.length > 0) {
+                // Show the labelcategory div if data is available
+                $("#labelcategory").show();
+                for (let i = 0; i < data.length; i++) {
+                    const user = data[i];
+                    var opt = document.createElement("option");
+                    document.getElementById("contentLabel").innerHTML +=
+                        '<option value="' +
+                        user["id"] +
+                        '">' +
+                        user["content"] +
+                        "</option>";
+                }
             }
         });
     });
@@ -78,7 +83,12 @@ $(document).ready(function () {
                 year: "required",
                 month: "required",
                 claim_category: "required",
-                claim_category_detail: "required",
+                claim_category_detail: {
+                    required: function () {
+                        // Check if labelcategory div is visible
+                        return $("#labelcategory").is(":visible");
+                    }
+                },
                 amount: "required",
                 "file_upload[]": "required",
             },

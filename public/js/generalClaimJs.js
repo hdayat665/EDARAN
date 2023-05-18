@@ -10,9 +10,14 @@ $(document).ready(function () {
                 claim_category: "required",
                 amount: "required",
                 "file_upload[]": "required",
-                claim_category_detail: "required",
+                claim_category_detail: {
+                    required: function () {
+                        // Check if labelcategory div is visible
+                        return $("#labelcategory").is(":visible");
+                    }
+                }
             },
-
+    
             messages: {
                 year: "Please Select Year",
                 month: "Please Select Month",
@@ -242,7 +247,7 @@ $(document).ready(function () {
         // scrollY: 150,
         lengthChange: true,
         lengthMenu: [
-            [5, 10, 25, 50, -1],
+            [5, 10, 25, 50, -1], 
             [5, 10, 25, 50, "All"],
         ],
         responsive: false,
@@ -250,7 +255,7 @@ $(document).ready(function () {
     });
 
     $(document).on("change", "#claimcategory", function () {
-        $("#labelcategory").show();
+        $("#labelcategory").hide();
         id = $(this).val();
         const inputs = ["contentLabel"];
 
@@ -278,16 +283,21 @@ $(document).ready(function () {
 
         user.then(function (data) {
             $("#label").text(data[0].label);
-            // console.log(data[0].label);
-            for (let i = 0; i < data.length; i++) {
-                const user = data[i];
-                var opt = document.createElement("option");
-                document.getElementById("contentLabel").innerHTML +=
-                    '<option value="' +
-                    user["id"] +
-                    '">' +
-                    user["content"] +
-                    "</option>";
+    
+            // Check if data is available
+            if (data.length > 0) {
+                // Show the labelcategory div if data is available
+                $("#labelcategory").show();
+                for (let i = 0; i < data.length; i++) {
+                    const user = data[i];
+                    var opt = document.createElement("option");
+                    document.getElementById("contentLabel").innerHTML +=
+                        '<option value="' +
+                        user["id"] +
+                        '">' +
+                        user["content"] +
+                        "</option>";
+                }
             }
         });
     });
