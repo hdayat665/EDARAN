@@ -31,21 +31,21 @@
     <div class="note note-light">
         <div class="note-icon"></div>
             <div class="note-content" >
-                <a href="#" class="btn btn-default btn-icon disabled" style="pointer-events: none; background-color: #348FE2;">   </a> &nbsp;Log&nbsp;
+                <a href="#" class="btn btn-default btn-icon " style="pointer-events: none; background-color: #348FE2;"> </a> &nbsp;Log&nbsp;
 
-                <a href="#" class="btn btn-default btn-icon disabled" style="pointer-events: none; background-color: #2AAA8A;"> </a>&nbsp;Event&nbsp;
+                <a href="#" class="btn btn-default btn-icon " style="pointer-events: none; background-color: #2AAA8A;"> </a>&nbsp;Event&nbsp;
 
-                <a href="#" class="btn btn-default btn-icon disabled" style="pointer-events: none; background-color: #FFFADF;"> </a>&nbsp;Today&nbsp;
+                <a href="#" class="btn btn-default btn-icon " style="pointer-events: none; background-color: #FFFADF;"> </a>&nbsp;Today&nbsp;
 
-                <a href="#" class="btn btn-default btn-icon disabled" style="pointer-events: none; background-color: #B3CCFF;"> </a>&nbsp;Weekend&nbsp;
+                <a href="#" class="btn btn-default btn-icon " style="pointer-events: none; background-color: #B3CCFF;"> </a>&nbsp;Weekend&nbsp;
                 
-                <a href="#" class="btn btn-default btn-icon disabled" style="pointer-events: none; background-color: #D9EDF7;"> </a>&nbsp;Leave&nbsp;
+                <a href="#" class="btn btn-default btn-icon " style="pointer-events: none; background-color: #D9EDF7;"> </a>&nbsp;Leave&nbsp;
 
-                <a href="#" class="btn btn-default btn-icon disabled" style="pointer-events: none; background-color: #FFD480;"> </a>&nbsp;Holiday&nbsp;
+                <a href="#" class="btn btn-default btn-icon " style="pointer-events: none; background-color: #FFD480;"> </a>&nbsp;Holiday&nbsp;
 
-                <a href="#" class="btn btn-default btn-icon disabled" style="pointer-events: none; background-color: #80FF80;"> </a>&nbsp;Complete log for the day&nbsp;
+                <a href="#" class="btn btn-default btn-icon " style="pointer-events: none; background-color: #80FF80;"> </a>&nbsp;Complete log for the day&nbsp;
 
-                <a href="#" class="btn btn-default btn-icon disabled" style="pointer-events: none; background-color: #FF8080;">  </a>&nbsp;Incomplete log for the day&nbsp;
+                <a href="#" class="btn btn-default btn-icon " style="pointer-events: none; background-color: #FF8080;">  </a>&nbsp;Incomplete log for the day&nbsp;
             </div>
         </div>
     </div>

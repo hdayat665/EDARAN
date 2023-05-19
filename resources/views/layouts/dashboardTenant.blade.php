@@ -639,7 +639,7 @@
                                             <div class="menu-icon">
                                                 <i class="fa fa-envelope-open-text text-gray"></i>
                                             </div>
-                                            <div class="menu-text text-gray">Cash Advance</div>
+                                            <div class="menu-text text-gray">CA Approval</div>
                                             <div class="menu-caret text-gray">
                                             </div>
                                         </a>
