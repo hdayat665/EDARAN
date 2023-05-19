@@ -1043,6 +1043,9 @@ $(document).ready(function () {
                     var current = new Date(info.date);
                     var currentDate = new Date();
 
+                    var currentdate = new Date();
+                    currentdate.setDate(currentdate.getDate());
+
                     var oneDayBefore = new Date();
                     oneDayBefore.setDate(currentDate.getDate() - 1);
 
@@ -1120,10 +1123,6 @@ $(document).ready(function () {
                                     return false;
                                 }
                                 });
-
-
-
-
 
 
                     if (dayjs(info.date).isSame(dayjs(), 'date')) {
@@ -1277,10 +1276,30 @@ $(document).ready(function () {
                     } else if(hasLog && (current.getDay() === 6 || current.getDay() === 0)) {
                         $(info.el).css('background-color', '#B3CCFF');
                     }else if (hasLog && totalHours <= 9) {
-                        if (current.getDate() === oneDayBefore.getDate() || current.getDate() === twoDayBefore.getDate()) {
+                        if  ((current.getDate() === oneDayBefore.getDate() || current.getDate() === twoDayBefore.getDate()) && hasLog && !appliedDates.includes(datedefaultformat)) { //kat sini
                             $(info.el).css('background-color', '#FF8080');
-                            console.log("lalu sini")
-                            } else if (appliedDates.includes(datedefaultformat) && current.getFullYear() === info.date.getFullYear() && current.getMonth() === info.date.getMonth()) {
+                            $(info.el).append('&nbsp;').append(appealaddb);
+                            $(appealaddb).css({
+                                position: 'relative',
+                                top: '-35px',
+                                'z-index': '999',
+                                });
+                            // $(info.el).append('&nbsp;').append(viewappealb);
+                            //     $(viewappealb).css({
+                            //         position: 'relative',
+                            //         top: '-35px',
+                            //         'z-index': '999',
+                            //       });
+
+                            } else if ((current.getDate() === oneDayBefore.getDate() || current.getDate() === twoDayBefore.getDate()) && hasLog && appliedDates.includes(datedefaultformat) ){
+                                $(info.el).css('background-color', '#FF8080');
+                                $(info.el).append('&nbsp;').append(viewappealb);
+                                    $(viewappealb).css({
+                                        position: 'relative',
+                                        top: '-35px',
+                                        'z-index': '999',
+                                      });
+                            }else if (appliedDates.includes(datedefaultformat) && current.getFullYear() === info.date.getFullYear() && current.getMonth() === info.date.getMonth()) {
 
 
                                 $(info.el).css('background-color', '#FF8080');
@@ -1293,17 +1312,19 @@ $(document).ready(function () {
                                   });
 
                             }else {
-                            // console.log(datedefaultformat)
+                                if (current.getDate() === currentdate.getDate()) {
+                                    $(info.el).css('background-color', '#FF8080');
+                                }
+                                else {
                             $(info.el).css('background-color', '#FF8080');
-                            // $(info.el).append('&nbsp;').append(appealaddb);
-                            // $(appealaddb).css({
-                            //     position: 'relative',
-                            //     top: '-35px',
-                            //     'z-index': '999',
-                            //   });
-                            // console.log(appliedDates);
-
-                            
+                            $(info.el).append('&nbsp;').append(appealaddb);
+                            $(appealaddb).css({
+                                position: 'relative',
+                                top: '-35px',
+                                'z-index': '999',
+                              });
+                                }
+    
 
                         }
                     } else if (info.date.getDay() === 0 &&  !isSameDate) {
@@ -1315,11 +1336,6 @@ $(document).ready(function () {
                         // $(info.el).css('background-color', 'white');
                       }
                     },
-
-
-
-
-
 
 
 
