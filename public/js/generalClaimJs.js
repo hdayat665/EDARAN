@@ -9,7 +9,7 @@ $(document).ready(function () {
                 month: "required",
                 claim_category: "required",
                 amount: "required",
-                "file_upload[]": "required",
+                // "file_upload[]": "required",
                 claim_category_detail: {
                     required: function () {
                         // Check if labelcategory div is visible
@@ -23,7 +23,7 @@ $(document).ready(function () {
                 month: "Please Select Month",
                 claim_category: "Please Select Claim Category",
                 amount: "Please Fill Out Amount",
-                "file_upload[]": "Please Upload Attachment",
+                // "file_upload[]": "Please Upload Attachment",
                 claim_category_detail: "Please Insert Category Detail",
             },
             submitHandler: function (form) {

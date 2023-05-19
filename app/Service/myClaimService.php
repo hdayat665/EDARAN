@@ -37,13 +37,19 @@ class myClaimService
     {
         $input = $r->input();
 
-        if ($_FILES['file_upload']['name']) {
+        if (!empty($_FILES['file_upload']['name']) && is_array($_FILES['file_upload']['name'])) {
             $filenames = array();
-            foreach ($_FILES['file_upload']['tmp_name'] as $key => $tmp_name) {
-                $filename = manyFile($_FILES['file_upload']['name'][$key], $tmp_name);
-                $filenames[] = $filename['filename'];
+            foreach ($_FILES['file_upload']['name'] as $key => $filename) {
+                $tmp_name = $_FILES['file_upload']['tmp_name'][$key];
+                if (!empty($filename) && !empty($tmp_name)) {
+                    $fileInfo = manyFile($filename, $tmp_name);
+                    if ($fileInfo !== null) {
+                        $filenames[] = $fileInfo['filename'];
+                    }
+                }
             }
         }
+        
         $fileString = implode(',', $filenames);
         
 
@@ -228,13 +234,21 @@ class myClaimService
     {
         $input = $r->input();
         // pr($input);
-        if ($_FILES['file_upload']['name']) { 
+        if (!empty($_FILES['file_upload']['name']) && is_array($_FILES['file_upload']['name'])) {
             $filenames = array();
-            foreach ($_FILES['file_upload']['tmp_name'] as $key => $tmp_name) {
-                $filename = manyFile($_FILES['file_upload']['name'][$key], $tmp_name);
-                $filenames[] = $filename['filename'];
+            foreach ($_FILES['file_upload']['name'] as $key => $filename) {
+                $tmp_name = $_FILES['file_upload']['tmp_name'][$key];
+                if (!empty($filename) && !empty($tmp_name)) {
+                    $fileInfo = manyFile($filename, $tmp_name);
+                    if ($fileInfo !== null) {
+                        $filenames[] = $fileInfo['filename'];
+                    }
+                }
             }
         }
+        
+        
+        
         $fileString = implode(',', $filenames);
  
         $generalClaimData = GeneralClaim::where([['tenant_id', Auth::user()->tenant_id], ['id', $id]])->first();
@@ -584,14 +598,20 @@ class myClaimService
         }
         unset($input['month'], $input['year']);
 
-        if ($_FILES['file_upload']['name']) { 
+       
+        if (!empty($_FILES['file_upload']['name']) && is_array($_FILES['file_upload']['name'])) {
             $filenames = array();
-            foreach ($_FILES['file_upload']['tmp_name'] as $key => $tmp_name) {
-                $filename = uploadFile($_FILES['file_upload']['name'][$key], $tmp_name, 'personal', 'PersonalFile');
-                $filenames[] = $filename['filename'];
+            foreach ($_FILES['file_upload']['name'] as $key => $filename) {
+                $tmp_name = $_FILES['file_upload']['tmp_name'][$key];
+                if (!empty($filename) && !empty($tmp_name)) {
+                    $fileInfo = manyFile($filename, $tmp_name);
+                    if ($fileInfo !== null) {
+                        $filenames[] = $fileInfo['filename'];
+                    }
+                }
             }
-            $fileString = implode(',', $filenames);
         }
+        $fileString = implode(',', $filenames);
 
         $input['user_id'] = Auth::user()->id;
         $input['tenant_id'] = Auth::user()->tenant_id;
@@ -660,16 +680,22 @@ class myClaimService
         }
         unset($input['month'], $input['year']);
 
-
-        if ($_FILES['file_upload']['name']) { 
+        
+        
+        
+        if (!empty($_FILES['file_upload']['name']) && is_array($_FILES['file_upload']['name'])) {
             $filenames = array();
-            foreach ($_FILES['file_upload']['tmp_name'] as $key => $tmp_name) {
-                $filename = uploadFile($_FILES['file_upload']['name'][$key], $tmp_name, 'travel', 'TravelFile');
-                $filenames[] = $filename['filename'];
+            foreach ($_FILES['file_upload']['name'] as $key => $filename) {
+                $tmp_name = $_FILES['file_upload']['tmp_name'][$key];
+                if (!empty($filename) && !empty($tmp_name)) {
+                    $fileInfo = manyFile($filename, $tmp_name);
+                    if ($fileInfo !== null) {
+                        $filenames[] = $fileInfo['filename'];
+                    }
+                }
             }
             $fileString = implode(',', $filenames);
         }
-        
         
 
         $input1['user_id'] = Auth::user()->id;
@@ -759,11 +785,16 @@ class myClaimService
         unset($input['month'], $input['year']);
 
 
-        if (isset($_FILES['file_upload']['name']) && $_FILES['file_upload']['name']) { 
+        if (!empty($_FILES['file_upload']['name']) && is_array($_FILES['file_upload']['name'])) {
             $filenames = array();
-            foreach ($_FILES['file_upload']['tmp_name'] as $key => $tmp_name) {
-                $filename = uploadFile($_FILES['file_upload']['name'][$key], $tmp_name, 'sub', 'SubFile');
-                $filenames[] = $filename['filename'];
+            foreach ($_FILES['file_upload']['name'] as $key => $filename) {
+                $tmp_name = $_FILES['file_upload']['tmp_name'][$key];
+                if (!empty($filename) && !empty($tmp_name)) {
+                    $fileInfo = manyFile($filename, $tmp_name);
+                    if ($fileInfo !== null) {
+                        $filenames[] = $fileInfo['filename'];
+                    }
+                }
             }
             $fileString = implode(',', $filenames);
         }
