@@ -47,7 +47,15 @@
                                     <td>{{ $app->employeeName }}</td>
                                     <td>{{ $app->applied_date }}</td>
                                     <td>{{ $app->reason }}</td>
-                                    <td>{{ $app->file ?? '-' }}</td>
+                                    {{-- <td>{{ $app->file ?? '-' }}</td> --}}
+                                    <td><a href="{{ route('download', ['filename' => $app->file ?? '-']) }}">{{$app->file ?? '' }}</a></td>
+                                    {{-- <td>
+                                        @php
+                                          $file = $app->file ?? '-';
+                                          $route = $file !== '-' ? route('download', ['filename' => $file]) : null;
+                                        @endphp
+                                        <a href="{{ $route }}">{{ $file }}</a>
+                                      </td> --}}
                                     {{-- <td><a href="{{ route('download', ['filename' => $app->file]) }}">{{$app->file}}</a></td>   --}}
 
                                     <?php
