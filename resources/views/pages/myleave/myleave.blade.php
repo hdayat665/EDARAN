@@ -59,7 +59,7 @@
                                 </div>
                                     <div class="col-sm-6">
                                         <div class="panel-heading mt-15px">
-                                            <h5 class="panel-title">Leave Carried Foward 2021</h5>
+                                            <h5 class="panel-title">Leave Carried Foward 2022</h5>
                                         </div>
                                         <div class="panel-body">
                                             <div id="chart-wrapper" style="display: flex; justify-content: center;">
