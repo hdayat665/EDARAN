@@ -74,7 +74,7 @@
                             <label class="form-label">Supporting Document</label>
                         </div>
                         <div class="col-md-7">
-                            <input type="file"  class="form-control" id="file" name="file" />
+                            
                             <span id="filedownloadappeal"></span>
                         </div>
                     </div>
