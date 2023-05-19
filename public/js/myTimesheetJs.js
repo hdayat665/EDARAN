@@ -1043,6 +1043,9 @@ $(document).ready(function () {
                     var current = new Date(info.date);
                     var currentDate = new Date();
 
+                    var currentdate = new Date();
+                    currentdate.setDate(currentdate.getDate());
+
                     var oneDayBefore = new Date();
                     oneDayBefore.setDate(currentDate.getDate() - 1);
 
@@ -1279,7 +1282,12 @@ $(document).ready(function () {
                     }else if (hasLog && totalHours <= 9) {
                         if (current.getDate() === oneDayBefore.getDate() || current.getDate() === twoDayBefore.getDate()) {
                             $(info.el).css('background-color', '#FF8080');
-                            console.log("lalu sini")
+                            $(info.el).append('&nbsp;').append(appealaddb);
+                            $(appealaddb).css({
+                                position: 'relative',
+                                top: '-35px',
+                                'z-index': '999',
+                                });
                             } else if (appliedDates.includes(datedefaultformat) && current.getFullYear() === info.date.getFullYear() && current.getMonth() === info.date.getMonth()) {
 
 
@@ -1293,17 +1301,19 @@ $(document).ready(function () {
                                   });
 
                             }else {
-                            // console.log(datedefaultformat)
+                                if (current.getDate() === currentdate.getDate()) {
+                                    $(info.el).css('background-color', '#FF8080');
+                                }
+                                else {
                             $(info.el).css('background-color', '#FF8080');
-                            // $(info.el).append('&nbsp;').append(appealaddb);
-                            // $(appealaddb).css({
-                            //     position: 'relative',
-                            //     top: '-35px',
-                            //     'z-index': '999',
-                            //   });
-                            // console.log(appliedDates);
-
-                            
+                            $(info.el).append('&nbsp;').append(appealaddb);
+                            $(appealaddb).css({
+                                position: 'relative',
+                                top: '-35px',
+                                'z-index': '999',
+                              });
+                                }
+    
 
                         }
                     } else if (info.date.getDay() === 0 &&  !isSameDate) {
