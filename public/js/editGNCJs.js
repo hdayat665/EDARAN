@@ -90,7 +90,7 @@ $(document).ready(function () {
                     }
                 },
                 amount: "required",
-                "file_upload[]": "required",
+                // "file_upload[]": "required",
             },
 
             messages: {
@@ -99,7 +99,7 @@ $(document).ready(function () {
                 claim_category: "Please Select Claim Category",
                 claim_category_detail: "Please Select Category Detail",
                 amount: "Please Fill Out Amount",
-                "file_upload[]": "Please Upload Attachment",
+                // "file_upload[]": "Please Upload Attachment",
             },
             submitHandler: function (form) {
                 requirejs(["sweetAlert2"], function (swal) {

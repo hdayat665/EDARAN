@@ -95,13 +95,23 @@ if (!function_exists('getCountryRegisterDomain')) {
 // }
 function manyFile($filename, $uploadedFile)
 {
+    if ($filename === null || $uploadedFile === null) {
+        // Bypass the function if either $filename or $uploadedFile is null
+        return null;
+    }
+
     $allowedTypes = ['pdf', 'jpeg', 'jpg', 'png'];
     $maxSize = 5120; // 5MB
 
     $extension = pathinfo($filename, PATHINFO_EXTENSION);
 
     if (!in_array($extension, $allowedTypes)) {
-        throw new Exception("Invalid file type. Only PDF, JPEG, PNG, and JPG files are allowed.");
+        // Bypass the function if the file type is not allowed
+        return null;
+    }
+
+    if (!file_exists($uploadedFile)) {
+        throw new Exception("Uploaded file does not exist.");
     }
 
     if (filesize($uploadedFile) > $maxSize * 1024) {
@@ -118,6 +128,8 @@ function manyFile($filename, $uploadedFile)
 
     return $data;
 }
+
+
 // function PersonalFile($filename, $uploadedFile)
 // {
 //     $allowedTypes = ['pdf', 'jpeg', 'jpg', 'png'];

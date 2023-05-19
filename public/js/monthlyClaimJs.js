@@ -393,14 +393,14 @@ $("document").ready(function () {
                     }
                 },
                 amount: "required",
-                "file_upload[]": "required",
+                // "file_upload[]": "required",
             },
 
             messages: {
                 claim_category: "Please Select Claim Category",
                 claim_category_detail: "Please Select Claim Category",
                 amount: "Please Fill Out Amount",
-                "file_upload[]": "Please Upload Attachment",
+                // "file_upload[]": "Please Upload Attachment",
             },
             submitHandler: function (form) {
                 requirejs(["sweetAlert2"], function (swal) {
@@ -471,7 +471,7 @@ $("document").ready(function () {
                 address_start: "required",
                 location_end: "required",
                 location_address: "required",
-                "file_upload[]": "required",
+                // "file_upload[]": "required",
             },
 
             messages: {
@@ -486,7 +486,7 @@ $("document").ready(function () {
                 address_start: "Please Select Start Address",
                 location_end: "Please Select Destination",
                 location_address: "Please Select Destination Address",
-                "file_upload[]": "Please Upload Attachment",
+                // "file_upload[]": "Please Upload Attachment",
             },
             submitHandler: function (form) {
                 requirejs(["sweetAlert2"], function (swal) {
@@ -529,11 +529,11 @@ $("document").ready(function () {
         $("#subsForm").validate({
             // Specify validation rules
             rules: {
-                "file_upload[]": "required",
+                // "file_upload[]": "required",
             },
 
             messages: {
-                "file_upload[]": "Please Upload Attachment",
+                // "file_upload[]": "Please Upload Attachment",
             },
             submitHandler: function (form) {
                 requirejs(["sweetAlert2"], function (swal) {
@@ -576,7 +576,7 @@ $("document").ready(function () {
         $("#subsForm").validate({
             // Specify validation rules
             rules: {
-                "file_upload[]": "required",
+                // "file_upload[]": "required",
                 start_date: "required",
                 end_date: "required",
                 start_time: "required",
@@ -586,7 +586,7 @@ $("document").ready(function () {
             },
 
             messages: {
-                "file_upload[]": "Please Upload Attachment",
+                // "file_upload[]": "Please Upload Attachment",
                 start_date: "Please Select Start Date",
                 end_date: "Please Select End Date",
                 start_time: "Please Select Start Time",
