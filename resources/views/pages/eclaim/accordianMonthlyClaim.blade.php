@@ -112,7 +112,7 @@
                             </div>
                             <div class="col-md-8">
                                 <input type="hidden" name="general_id" value="{{ Request::segment(4) }}">
-                                <input type="hidden" value="{{ isset($month_id) ? month($month_id) : $month }}" name="month">
+                                <input type="hidden" value="{{ isset($month_id) ? monthMTC($month_id) : $month }}" name="month">
                                 <input type="hidden" value="{{ $year }}" name="year">
                                 <input type="hidden " class="form-control" id="datepickertc"  name="travel_date">
                             </div>
@@ -429,8 +429,7 @@
                             <div class="col-md-6">
                                 <input type="file" class="form-control-file" name="file_upload[]" id="supportdocument" multiple>
                                 <input type="hidden" name="general_id" value="{{ Request::segment(4) }}">
-                                <input type="hidden" value="{{ isset($month_id) ? month($month_id) : $month }}" name="month">
-
+                                <input type="hidden" value="{{ isset($month_id) ? monthMTC($month_id) : $month }}" name="month">                                
                             </div>
                         </div>
                         <div class="WC" style="display:none">
