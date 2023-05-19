@@ -25,9 +25,18 @@ $(document).ready(function () {
     $(document).on("click", "#statusButton", function() {
         var id = $(this).data('id');
         var status = $(this).data('status');
+
+        if (status === 'Approved') {
+            status1 = 'approve';
+        }
+        else {
+            status1 = 'reject';
+        }
+        
         requirejs(['sweetAlert2'], function(swal) {
             swal({
-                title: "Are you sure!",
+                title: "Are you sure to " + status1 + '?',
+                // title: "Are you sure to",
                 type: "error",
                 confirmButtonClass: "btn-danger",
                 confirmButtonText: "Yes!",
@@ -80,11 +89,11 @@ $(document).ready(function () {
             $("#monthappealv").val(data.month);
             $("#dayappealv").val(data.day);
             $("#reasonappealv").val(data.reason);
+           
             if (data.file) {
-                $("#filedownloadappeal").html(
-                    '<a href="/storage/' + data.file + '">Download File</a>'
-                );
-            }
+                var fileName = data.file.split('/').pop(); // Extract the file name from the file path
+                $("#filedownloadappeal").html('<a href="/storage/' + data.file + '">Download ' + fileName + '</a>');
+              }
         });
         $("#appealmodalview").modal("show");
     });

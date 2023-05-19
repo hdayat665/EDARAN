@@ -38,7 +38,7 @@
                                             </div>
                                             @else
                                             <div class="viewtimesheet">
-                                                <a href="javascript:;" id="viewappealb" data-id="{{$app->id}}" class="dropdown-item"> View Log Timesheet</a> 
+                                                <a href="javascript:;" id="viewappealb" data-id="{{$app->id}}" class="dropdown-item"> View Log Appeal</a> 
                                             </div>
                                            
                                             @endif

@@ -1108,10 +1108,9 @@ $(document).ready(function () {
                                         $('#dayappealv').val(day);
 
                                         if (file) {
-                                            $("#filedownloadappeal").html(
-                                                '<a href="/storage/' + file + '">Download File</a>'
-                                            );
-                                        }
+                                            var fileName = file.split('/').pop(); // Extract the file name from the file path
+                                            $("#filedownloadappeal").html('<a href="/storage/' + file + '">Download ' + fileName + '</a>');
+                                          }
 
                                         // console.log(file)
                                         $('#appealmodalview').modal('show');
@@ -1154,10 +1153,40 @@ $(document).ready(function () {
                     for (var i = 0; i < loghour.length; i++) {
                         if (current >= loghour[i].start && current <= loghour[i].end) {
                             hasLog = true;
+                            console.log(totalHours);
                             totalHours += parseInt(loghour[i].totalHour.split(":")[0]);
                             var logid = loghour[i].logid;
                         }
                     }
+
+                    var totalHours1 = '00:00';
+                    var hasLog = false;
+                    for (var i = 0; i < loghour.length; i++) {
+                        if (current.getTime() === loghour[i].start.getTime()) {
+                            hasLog = true;
+                            var logid = loghour[i].logid;
+
+                            // Calculate the total hours by accumulating all the 'total_hour' values for the current date
+                            // Calculate the total hours by accumulating all the 'total_hour' values for the current date
+                            var totalHour = loghour.filter(log => current.getTime() === log.start.getTime())
+                            .reduce((total, log) => {
+                                var [hours, minutes, seconds] = log.totalHour.split(':').map(Number);
+                                total += hours * 3600 + minutes * 60 + seconds;
+                                return total;
+                            }, 0);
+
+                            // Convert the total hours back to the 'hh:mm' format
+                            var hours = Math.floor(totalHour / 3600);
+                            var minutes = Math.floor((totalHour % 3600) / 60);
+                            totalHours1 = hours.toString().padStart(2, '0') + ':' + minutes.toString().padStart(2, '0');
+
+
+                            // Exit the loop once the total hours for the current date are calculated
+                            break;
+                        }
+                    }
+
+
 
                     var appliedDates = [];
                     var reasons = [];
@@ -1190,9 +1219,27 @@ $(document).ready(function () {
                         days.push(day);
                         files.push(file);
                     }
-    
-                
-                    if (
+                    
+                    var dailycounter = $('<button/>', {
+                        text: totalHours1,
+                        class: 'btn btn-danger btn-xs',
+                        click: function () {
+                        }
+                    });
+                    
+                   
+                      if (
+                        current.getTime() === currentDate.getTime() ||
+                        (current.getTime() < currentDate.getTime() && current.getDay() !== 6 && current.getDay() !== 0)
+                        
+                    ) {
+                        $(info.el).append('&nbsp;').append(dailycounter);
+                        $(dailycounter).css({
+                            position: 'relative',
+                            top: '-35px',
+                            'z-index': '999',
+                        });
+                    }if (
                         (current.getMonth() === currentDate.getMonth()) &&
                         (current.getDate() === oneDayBefore.getDate() || current.getDate() === twoDayBefore.getDate()) &&
                         !(current.getDay() === 6 || current.getDay() === 0) && hasLog && totalHours >= 9
@@ -1204,98 +1251,21 @@ $(document).ready(function () {
                         !(current.getDay() === 6 || current.getDay() === 0)  && (hasLog || !hasLog || totalHours < 9)
                       ) {
                         $(info.el).css('background-color', '#FF8080');
-                      }else if((current < duahari) &&  !appliedDates.includes(datedefaultformat) && !hasLog && !(current.getDay() === 6 || current.getDay() === 0)) {
+                      }
+                      else if((current < duahari) &&  !appliedDates.includes(datedefaultformat) && !hasLog && !(current.getDay() === 6 || current.getDay() === 0)) {
                         $(info.el).css('background-color', '#FF8080');
 
-
-
-                            var appealaddb = $('<button/>', {
-                                text: 'Appeal',
-                                class: 'btn btn-primary btn-xs appeal-add-button',
-                                click: function () {
-                                    var year = info.date.getFullYear();
-                                    var month = info.date.getMonth();
-                                    var day = info.date.getDate();
-                                    console.log(year);
-                                    $('#yearappeal').val(year);
-                                    $('#monthappeal').val(new Date(info.date).toLocaleString('en-US', { month: 'long' }));
-                                    $('#dayappeal').val(day);
-                                    $('#log_id').val(nextLogId);
-
-                                    const clickedDate = dayjs(info.date);
-                                    const formattedDate = clickedDate.format('YYYY-MM-DD');
-                                    $("#applieddate").val(formattedDate);
-
-                                    $('#appealmodal').modal('show');
-                                }
+                        $(info.el).append('&nbsp;').append(appealaddb);
+                        $(appealaddb).css({
+                            position: 'relative',
+                            top: '-35px',
+                            'z-index': '999',
                             });
-
-
-
-
-                            $(info.el).append(appealaddb);
-                            $(appealaddb).css({
-                                position: 'relative',
-                                top: '-35px',
-                                'z-index': '999',
-                              });
-
-
-
-
-
                     } else if ((current < duahari) &&  appliedDates.includes(datedefaultformat) && !hasLog && !(current.getDay() === 6 || current.getDay() === 0)) {
                         $(info.el).css('background-color', '#FF8080');
-                        var viewappealb = $('<button/>', {
-                            text: 'View Appeal',
-                            class: 'btn btn-primary btn-xs appeal-view-button',
-                            click: function () {
+                        
 
-
-                                // Get the logid for the corresponding appliedDate
-                                var index = appliedDates.indexOf(datedefaultformat);
-                                if (index !== -1) {
-                                    var logId = logsid[index];
-                                    var reason = reasons[index];
-                                    var status = statuss[index];
-                                    var year = years[index];
-                                    var month = months[index];
-                                    var day = days[index];
-                                    var file = files[index];
-                                    console.log(year);
-                                    $('#log_idv').val(logId);
-                                    $('#reasonappealv').val(reason);
-                                    if (status === "locked") {
-                                        status = "pending";
-                                        $('#Statusv').val(status);
-                                    } else {
-                                        $('#Statusv').val(status);
-                                    }
-                                    $('#yearappealv').val(year);
-                                    $('#monthappealv').val(month);
-                                    $('#dayappealv').val(day);
-
-                                    if (file) {
-                                        $("#filedownloadappeal").html(
-                                            '<a href="/storage/' + file + '">Download File</a>'
-                                        );
-                                    }
-
-                                    // console.log(file)
-                                    $('#appealmodalview').modal('show');
-
-
-                                }
-                                return false;
-                            }
-                            });
-
-
-
-
-
-
-                            $(info.el).append(viewappealb);
+                            $(info.el).append('&nbsp;').append(viewappealb);
                             $(viewappealb).css({
                                 position: 'relative',
                                 top: '-35px',
@@ -1314,51 +1284,8 @@ $(document).ready(function () {
 
 
                                 $(info.el).css('background-color', '#FF8080');
-                                var viewappealb = $('<button/>', {
-                                text: 'View Appeal',
-                                class: 'btn btn-primary btn-xs appeal-view-button',
-                                click: function () {
 
-
-                                    // Get the logid for the corresponding appliedDate
-                                    var index = appliedDates.indexOf(datedefaultformat);
-                                    if (index !== -1) {
-                                        var logId = logsid[index];
-                                        var reason = reasons[index];
-                                        var status = statuss[index];
-                                        var year = years[index];
-                                        var month = months[index];
-                                        var day = days[index];
-                                        var file = files[index];
-                                        console.log(year);
-                                        $('#log_idv').val(logId);
-                                        $('#reasonappealv').val(reason);
-                                        $('#Statusv').val(status);
-                                        $('#yearappealv').val(year);
-                                        $('#monthappealv').val(month);
-                                        $('#dayappealv').val(day);
-
-                                        if (file) {
-                                            $("#filedownloadappeal").html(
-                                                '<a href="/storage/' + file + '">Download File</a>'
-                                            );
-                                        }
-
-                                        // console.log(file)
-                                        $('#appealmodalview').modal('show');
-
-
-                                    }
-                                    return false;
-                                }
-                                });
-
-
-
-
-
-
-                                $(info.el).append(viewappealb);
+                                $(info.el).append('&nbsp;').append(viewappealb);
                                 $(viewappealb).css({
                                     position: 'relative',
                                     top: '-35px',
@@ -1367,36 +1294,16 @@ $(document).ready(function () {
 
                             }else {
                             // console.log(datedefaultformat)
-                            $(info.el).css('background-color', 'red');
-                            console.log(appliedDates);
-                            var appealaddb = $('<button/>', {
-                                text: 'Appeal',
-                                class: 'btn btn-primary btn-xs appeal-add-button',
-                                click: function () {
-                                    var year = info.date.getFullYear();
-                                    var month = info.date.getMonth();
-                                    var day = info.date.getDate();
-                                    $('#yearappeal').val(year);
-                                    $('#monthappeal').val(new Date(info.date).toLocaleString('en-US', { month: 'long' }));
-                                    $('#dayappeal').val(day);
-                                    $('#log_id').val(nextLogId);
+                            $(info.el).css('background-color', '#FF8080');
+                            // $(info.el).append('&nbsp;').append(appealaddb);
+                            // $(appealaddb).css({
+                            //     position: 'relative',
+                            //     top: '-35px',
+                            //     'z-index': '999',
+                            //   });
+                            // console.log(appliedDates);
 
-                                    const clickedDate = dayjs(info.date);
-                                    const formattedDate = clickedDate.format('YYYY-MM-DD');
-                                    $("#applieddate").val(formattedDate);
-
-
-
-                                    $('#appealmodal').modal('show');
-                                }
-                            });
-
-                            $(info.el).append(appealaddb);
-                            $(appealaddb).css({
-                                position: 'relative',
-                                top: '-35px',
-                                'z-index': '999',
-                              });
+                            
 
                         }
                     } else if (info.date.getDay() === 0 &&  !isSameDate) {
