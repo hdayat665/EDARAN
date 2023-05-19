@@ -1280,7 +1280,7 @@ $(document).ready(function () {
                     } else if(hasLog && (current.getDay() === 6 || current.getDay() === 0)) {
                         $(info.el).css('background-color', '#B3CCFF');
                     }else if (hasLog && totalHours <= 9) {
-                        if (current.getDate() === oneDayBefore.getDate() || current.getDate() === twoDayBefore.getDate()) {
+                        if  ((current.getDate() === oneDayBefore.getDate() || current.getDate() === twoDayBefore.getDate()) && hasLog && !appliedDates.includes(datedefaultformat)) { //kat sini
                             $(info.el).css('background-color', '#FF8080');
                             $(info.el).append('&nbsp;').append(appealaddb);
                             $(appealaddb).css({
@@ -1288,7 +1288,23 @@ $(document).ready(function () {
                                 top: '-35px',
                                 'z-index': '999',
                                 });
-                            } else if (appliedDates.includes(datedefaultformat) && current.getFullYear() === info.date.getFullYear() && current.getMonth() === info.date.getMonth()) {
+                            // $(info.el).append('&nbsp;').append(viewappealb);
+                            //     $(viewappealb).css({
+                            //         position: 'relative',
+                            //         top: '-35px',
+                            //         'z-index': '999',
+                            //       });
+
+                            } else if ((current.getDate() === oneDayBefore.getDate() || current.getDate() === twoDayBefore.getDate()) && hasLog && appliedDates.includes(datedefaultformat) ){
+                                $(info.el).css('background-color', '#FF8080');
+                               
+                                $(info.el).append('&nbsp;').append(viewappealb);
+                                    $(viewappealb).css({
+                                        position: 'relative',
+                                        top: '-35px',
+                                        'z-index': '999',
+                                      });
+                            }else if (appliedDates.includes(datedefaultformat) && current.getFullYear() === info.date.getFullYear() && current.getMonth() === info.date.getMonth()) {
 
 
                                 $(info.el).css('background-color', '#FF8080');
