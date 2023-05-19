@@ -14,6 +14,11 @@
             <input type="hidden" id="timesheetApprovalUserId" value="{{$userId}}">
         </div>
     </div>
+    <div class="row p-2">
+        <div class=" col d-flex justify-content-end">
+            <button class="btn btn-primary" onclick="window.history.back()">Back</button>
+        </div>
+    </div>
 </div>
 @include('modal.timesheet.editLogModalView')
 @include('modal.timesheet.editEventModalView')

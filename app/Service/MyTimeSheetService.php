@@ -124,15 +124,15 @@ class MyTimeSheetService
         return $data;
     }
 
-    $dayOfWeek = date('N', strtotime($input['date']));
+    // $dayOfWeek = date('N', strtotime($input['date']));
  
-    if ($dayOfWeek == 6 || $dayOfWeek == 7) { // Saturday = 6, Sunday = 7
-        $data['status'] = config('app.response.error.status');
-        $data['type'] = config('app.response.error.type');
-        $data['title'] = config('app.response.error.title');
-        $data['msg'] = 'Cannot Apply Log On Weekend';
-        return $data;
-    }
+    // if ($dayOfWeek == 6 || $dayOfWeek == 7) { // Saturday = 6, Sunday = 7
+    //     $data['status'] = config('app.response.error.status');
+    //     $data['type'] = config('app.response.error.type');
+    //     $data['title'] = config('app.response.error.title');
+    //     $data['msg'] = 'Cannot Apply Log On Weekend';
+    //     return $data;
+    // }
 
     TimesheetLog::create($input);
     $data['status'] = config('app.response.success.status');
@@ -340,7 +340,7 @@ if ($existingLogs->isNotEmpty()) {
             $response['start_date'] = $eventDetails->start_date;
             $response['start_time'] = $eventDetails->start_time;
             $response['duration'] = $eventDetails->duration;
-            $response['venue'] = $venue;
+            $response['venue'] = $eventDetails->venue;
             $response['desc'] = $eventDetails->desc;
             $response['employeeName'] = $employeeName;
             $response['departmentName'] = $departmentName;
@@ -447,7 +447,7 @@ if ($existingLogs->isNotEmpty()) {
                 $response['start_date'] = $eventDetails->start_date;
                 $response['start_time'] = $eventDetails->start_time;
                 $response['duration'] = $eventDetails->duration;
-                $response['venue'] = $venue;
+                $response['venue'] = $eventDetails->venue;
                 $response['desc'] = $eventDetails->desc;
                 $response['employeeName'] = $employeeName;
                 $response['departmentName'] = $departmentName;
@@ -504,7 +504,8 @@ if ($existingLogs->isNotEmpty()) {
                     $response['start_date'] = $eventDetails->start_date;
                     $response['start_time'] = $eventDetails->start_time;
                     $response['duration'] = $eventDetails->duration;
-                    $response['venue'] = $venue ?? '-';
+                    // $response['venue'] = $venue ?? '-';
+                    $response['venue'] =  $eventDetails->venue;
                     $response['desc'] = $eventDetails->desc;
                     $response['employeeName'] = $employeeName;
                     $response['departmentName'] = $departmentName;
@@ -1143,7 +1144,7 @@ if ($existingLogs->isNotEmpty()) {
             }
         }
         $user = Auth::user();
-    
+        // dd($user);
         $input['user_id'] = $user->id;
         $input['tenant_id'] = $user->tenant_id;
     
@@ -1183,19 +1184,23 @@ if ($existingLogs->isNotEmpty()) {
     
     public function timesheetApprovalappealView()
     {
-        // $data = TimesheetAppeals::where('tenant_id', Auth::user()->tenant_id)->orderBy('created_at', 'DESC')->get();
-
-        // return $data;
-
+       
+        $employees = Employee::where('tsapprover', Auth::user()->id)->get();
+        
+        $userId = [];
+        foreach ($employees as $key => $employee) {
+            $userId[] = $employee->user_id;
+        }
+        
+        $claim[0] = ['tenant_id', Auth::user()->tenant_id];
 
         $data = DB::table('timesheet_appeal as a')
         ->leftJoin('employment as b', 'a.user_id', '=', 'b.user_id')
-        ->select('a.*','b.employeeName' )
-           -> where([['a.tenant_id', Auth::user()->tenant_id], ['a.user_id', Auth::user()->id]])
-            ->get();
-    
-        
-    
+        ->select('a.*', 'b.employeeName')
+        ->where('a.tenant_id', Auth::user()->tenant_id)
+        ->whereIn('a.user_id', $userId)
+        ->get();
+
         return $data;
         
     }

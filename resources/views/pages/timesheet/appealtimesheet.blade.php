@@ -28,8 +28,6 @@
                                         <div class="dropdown-menu">
                                             @if ($app->status == 'locked')
                                             <div class="viewtimesheet">
-                                                {{-- <a href="/viewTimesheet/{{$timesheet->id}}/{{$timesheet->user_id}}" class="dropdown-item" data-id="{{$timesheet->id}}" id="viewtimesheet">View Timesheet</a> --}}
-                                                {{-- <a href="" class="dropdown-item" data-id="" id="">View Appeal</a> --}}
                                                 <a href="javascript:;" id="viewappealb" data-id="{{$app->id}}" class="dropdown-item"> View Timesheet</a> 
                                             </div>
                                             <div class="approvetimesheet">
@@ -40,25 +38,9 @@
                                             </div>
                                             @else
                                             <div class="viewtimesheet">
-                                                {{-- <a href="/viewTimesheet/{{$timesheet->id}}/{{$timesheet->user_id}}" class="dropdown-item" data-id="{{$timesheet->id}}" id="viewtimesheet">View Timesheet</a> --}}
-                                                {{-- <a href="" class="dropdown-item" data-id="" id="">View Timesheet</a> --}}
-                                                {{-- <a href="javascript:;" id="viewappealb" data-id="{{$app->id}}" class="dropdown-item"> View Timesheet</a> --}}
+                                                <a href="javascript:;" id="viewappealb" data-id="{{$app->id}}" class="dropdown-item"> View Timesheet</a> 
                                             </div>
-                                            {{-- <div class="approvereject">
-                                                <div class="dropdown-divider "></div>
-                                                <div class="approvetimesheet">
-                                                    <a  class="dropdown-item" data-id="{{$timesheet->id}}" data-status="approve" id="statusButton">Approve Timesheet</a>
-                                                </div>
-                                                {{-- <div class="rejecttimesheet">
-                                                    <a  class="dropdown-item" data-id="{{$timesheet->id}}" data-status="reject" id="statusButton">Reject Timesheet</a>
-                                                </div> 
-                                            </div> --}}
-                                            {{-- <div class="amendtimesheet">
-                                                <div class="dropdown-divider "></div>
-                                                <div class="amendtimesheet">
-                                                    <a  class="dropdown-item" data-id="{{$timesheet->id}}" data-status="amend" id="amendreasonmodal" data-bs-toggle="modal"
-                                                        id="amendreasonmodal">Amend Timesheet</a>
-                                                </div> --}}
+                                           
                                             @endif
                                         </div>
                                     </td>

@@ -38,8 +38,8 @@
                                                                 <?php $employees = getEmployeeapprover(); ?>
                                                                 {{-- <option value="" label="PLEASE CHOOSE"></option> --}}
                                                                 @foreach ($employees as $employee)
-                                                                    <option value="{{ $employee->id }}" label="{{ $employee->employeeName }}"
-                                                                    {{ $employment->tsapprover == $employee->id ? "selected='selected'" : '' }}>
+                                                                    <option value="{{ $employee->user_id }}" label="{{ $employee->employeeName }}"
+                                                                    {{ $employment->tsapprover == $employee->user_id ? "selected='selected'" : '' }}>
                                                                     {{ $employee->employeeName }}
                                                                     </option>
                                                                 @endforeach
