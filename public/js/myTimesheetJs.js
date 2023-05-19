@@ -1125,10 +1125,6 @@ $(document).ready(function () {
                                 });
 
 
-
-
-
-
                     if (dayjs(info.date).isSame(dayjs(), 'date')) {
                         $(info.el).css('background-color', '#FFFADF');
 
@@ -1297,7 +1293,6 @@ $(document).ready(function () {
 
                             } else if ((current.getDate() === oneDayBefore.getDate() || current.getDate() === twoDayBefore.getDate()) && hasLog && appliedDates.includes(datedefaultformat) ){
                                 $(info.el).css('background-color', '#FF8080');
-                               
                                 $(info.el).append('&nbsp;').append(viewappealb);
                                     $(viewappealb).css({
                                         position: 'relative',
@@ -1341,11 +1336,6 @@ $(document).ready(function () {
                         // $(info.el).css('background-color', 'white');
                       }
                     },
-
-
-
-
-
 
 
 
