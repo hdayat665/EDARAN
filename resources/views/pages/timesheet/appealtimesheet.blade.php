@@ -47,7 +47,15 @@
                                     <td>{{ $app->employeeName }}</td>
                                     <td>{{ $app->applied_date }}</td>
                                     <td>{{ $app->reason }}</td>
-                                    <td>{{ $app->file }}</td>
+                                    <td>{{ $app->file ?? '-' }}</td>
+                                    {{-- <td><a href="{{ route('download', ['filename' => $app->file]) }}">{{$app->file}}</a></td>   --}}
+
+                                    <?php
+                                    if ($app->status === "locked") {
+                                        $app->status = "pending";
+                                    }
+                                    ?>
+                                    
                                     <td>{{ $app->status }}</td>
                                 </tr>
                             @endforeach

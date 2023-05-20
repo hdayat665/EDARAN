@@ -1124,7 +1124,7 @@ $(document).ready(function () {
                         days.push(day);
                         files.push(file);
                     }
-                    // console.log(files);
+    
                 
                       if ((current.getDate() === oneDayBefore.getDate() || current.getDate() === twoDayBefore.getDate()) && !(current.getDay() === 6 || current.getDay() === 0)
                       ) {
@@ -1190,7 +1190,12 @@ $(document).ready(function () {
                                     console.log(year);
                                     $('#log_idv').val(logId);
                                     $('#reasonappealv').val(reason);
-                                    $('#Statusv').val(status);
+                                    if (status === "locked") {
+                                        status = "pending";
+                                        $('#Statusv').val(status);
+                                    } else {
+                                        $('#Statusv').val(status);
+                                    }
                                     $('#yearappealv').val(year);
                                     $('#monthappealv').val(month);
                                     $('#dayappealv').val(day);
@@ -1280,15 +1285,10 @@ $(document).ready(function () {
                     
                                 $(info.el).append(viewappealb);
                                 $(viewappealb).css({
-                                    position: 'absolute',
-                                    left: 'auto',
-                                    right: 'auto',
-                                    top: '0',
+                                    position: 'relative',
+                                    top: '-35px',
                                     'z-index': '999',
-                                    'background-color': 'white',
-                                    'color': 'red'
-                                    });
-                                    
+                                  });
                             
                             }else {
                             // console.log(datedefaultformat)
@@ -1318,20 +1318,15 @@ $(document).ready(function () {
 
                             $(info.el).append(appealaddb);
                             $(appealaddb).css({
-                                // position: 'absolute',
-                                // left: 'auto',
-                                // right: 'auto',
-                                // top: '0',
-                                // 'z-index': '999',
-                                // 'background-color': 'white',
-                                // 'color': 'red'
-                                });
+                                position: 'relative',
+                                top: '-35px',
+                                'z-index': '999',
+                              });
                             
-                            // $(appealaddb).addClass('d-flex justify-content-center align-items-center');
                         }
-                    } else if (info.date.getDay() === 0 &&  !isSameDate) { // Sunday
+                    } else if (info.date.getDay() === 0 &&  !isSameDate) { 
                         $(info.el).css('background-color', '#B3CCFF'); 
-                    } else if (info.date.getDay() === 6 && !isSameDate) { // Saturday
+                    } else if (info.date.getDay() === 6 && !isSameDate) { 
                         $(info.el).css('background-color', '#B3CCFF'); 
                     }
                  else {
