@@ -176,23 +176,23 @@ $(document).ready(function () {
         ],
         responsive: false,
     });
-    // $("#tablesick").DataTable({
-    //     searching: true,
-    //     lengthChange: true,
-    //     lengthMenu: [
-    //         [5, 10, 25, 50, -1],
-    //         [5, 10, 25, 50, "All"],
-    //     ],
-    //     responsive: false,
-    // });
-    // $("#tablecarrforward").DataTable({
-    //     searching: true,
-    //     lengthChange: true,
-    //     lengthMenu: [
-    //         [5, 10, 25, 50, -1],
-    //         [5, 10, 25, 50, "All"],
-    //     ],
-    //     responsive: false,
-    // });
+    $("#tablesick").DataTable({
+        searching: true,
+        lengthChange: true,
+        lengthMenu: [
+            [5, 10, 25, 50, -1],
+            [5, 10, 25, 50, "All"],
+        ],
+        responsive: false,
+    });
+    $("#tablecarrforward").DataTable({
+        searching: true,
+        lengthChange: true,
+        lengthMenu: [
+            [5, 10, 25, 50, -1],
+            [5, 10, 25, 50, "All"],
+        ],
+        responsive: false,
+    });
 
 });
