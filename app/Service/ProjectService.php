@@ -489,10 +489,18 @@ class ProjectService
 
         foreach ($input['employee_id'] as $employee_id) {
             $id = $employee_id;
-            $update['location'] = implode(',', $input['location']);
-            // pr($update);
+        
+            // Retrieve the existing locations for the project member
+            $projectMember = ProjectMember::find($id);
+            $currentLocations = explode(',', $projectMember->location);
+        
+            // Merge the existing locations with the new locations
+            $updatedLocations = array_merge($currentLocations, $input['location']);
+            $update['location'] = implode(',', $updatedLocations);
+        
+            // Update the project member with the updated locations
             ProjectMember::where('id', $id)->update($update);
-        }
+        }        
 
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
@@ -820,6 +828,27 @@ class ProjectService
         return $data;
     }
 
+    public function projectViewAssignLocationView($id)
+    {
+
+        $data['projectMember'] = DB::table('project_member as a')
+            ->leftJoin('employment as b', 'a.employee_id', '=', 'b.id')
+            ->select('a.id', 'a.location','a.project_id', 'b.employeeName')
+            ->where([['a.id', '=', $id]])
+            ->first();
+
+        $data['locations'] = ProjectLocation::select('id', 'location_name')
+            ->whereIn('id', explode(',', $data['projectMember']
+            ->location))
+            ->get();
+        
+        if (!$data) {
+            $data = [];
+        }
+
+        return $data;
+    }
+
     public function projectAssignView($id)
     {
         $data['projectMember'] = DB::table('project_member as a')
@@ -828,7 +857,10 @@ class ProjectService
             ->where([['a.id', '=', $id]])
             ->first();
 
-        $data['locations'] = ProjectLocation::select('id', 'location_name')->whereIn('id', explode(',', $data['projectMember']->location))->get();
+        $data['locations'] = ProjectLocation::select('id', 'location_name')
+            ->whereIn('id', explode(',', $data['projectMember']
+            ->location))
+            ->get();
 
         // foreach ($locations as $location) {
         //     $data['location'][] = locationAssign($location);
