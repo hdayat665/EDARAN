@@ -42,7 +42,7 @@ $("document").ready(function () {
         info: false,
         scrollX: true,
     });
-
+ 
     $("#traveltable").DataTable({
         searching: false,
         lengthChange: true,
@@ -221,7 +221,7 @@ $("document").ready(function () {
     }
 
     var resultInput = document.getElementById("result");
-    $("#result,#toll,#parking,#petrol").focus(function () {
+    $("#result,#toll,#parking,#petrol,#autocomplete2,#calculateButton").focus(function () {
         var total = parseInt(resultInput.value);
 
         // call the calculate function with the input value

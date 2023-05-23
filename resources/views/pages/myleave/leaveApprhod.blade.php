@@ -121,10 +121,10 @@
                                             <?php
                                                 switch ($i) {
                                                     case 1:
-                                                        $status = 'Pending for approve';
+                                                        $status = 'pending approval';
                                                         break;
                                                     case 2:
-                                                        $status = 'Pending for approve';
+                                                        $status = 'pending approval';
                                                         break;
                                                     case 3:
                                                         $status = 'Rejected';

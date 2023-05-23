@@ -108,7 +108,7 @@
                                                                 <option value="4" {{ old('statusmy') == '4' || $status_searchingmy == '4' ? 'selected' : '' }}>Approved</option>
                                                                 <option value="3" {{ old('statusmy') == '3' || $status_searchingmy == '3' ? 'selected' : '' }}>Rejected</option>
                                                                 <option value="2" {{ old('statusmy') == '2' || $status_searchingmy == '2' ? 'selected' : '' }}>Pending</option>
-                                                                <option value="1" {{ old('statusmy') == '1' || $status_searchingmy == '1' ? 'selected' : '' }}>Pending for approve</option>
+                                                                <option value="1" {{ old('statusmy') == '1' || $status_searchingmy == '1' ? 'selected' : '' }}>pending approval</option>
                                                             </select>
                                                         </div>
 
@@ -191,7 +191,7 @@
                                                                         $status = 'Pending';
                                                                         break;
                                                                     case 2:
-                                                                        $status = 'Pending for approve';
+                                                                        $status = 'pending approval';
                                                                         break;
                                                                     case 3:
                                                                         $status = 'Rejected';
@@ -352,7 +352,7 @@
                                                                         $status = 'Pending';
                                                                         break;
                                                                     case 2:
-                                                                        $status = 'Pending for approve';
+                                                                        $status = 'pending approval';
                                                                         break;
                                                                     case 3:
                                                                         $status = 'Rejected';
