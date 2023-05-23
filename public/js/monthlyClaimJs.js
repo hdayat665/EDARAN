@@ -90,7 +90,7 @@ $("document").ready(function () {
             $("#logname").hide();
         } else if ($(this).val() == "Others") {
             $("#projectdest").hide();
-            $("#logname").show();
+            $("#logname").hide();
         } else if ($(this).val() == "Office") {
             var officeValue = $("#office").val() || "-";
             $("#autocomplete2").val(officeValue);
@@ -222,14 +222,18 @@ $("document").ready(function () {
 
     var resultInput = document.getElementById("result");
     $("#result,#toll,#parking,#petrol,#autocomplete2,#calculateButton").focus(function () {
-        var total = parseInt(resultInput.value);
+    var total = parseInt(resultInput.value);
 
-        // call the calculate function with the input value
-        var result = calculate(total);
+    // call the calculate function with the input value
+    var result = calculate(total);
 
-        // display the result in a <div> element
-        $("#millage").val(result);
+    // round up the result and remove decimal places
+    var roundedResult = Math.ceil(result);
+
+    // display the rounded result in the millage input field
+    $("#millage").val(roundedResult);
     });
+
 
     $("#hotelc").change(function () {
         var s = $("#hotelc input:checked")

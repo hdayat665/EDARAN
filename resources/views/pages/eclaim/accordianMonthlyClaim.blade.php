@@ -731,7 +731,7 @@
             } else {
                 var distance = response.rows[0].elements[0].distance.value;
                 var distanceInKm = distance / 1000;
-                document.getElementById('result').value = distanceInKm;
+                document.getElementById('result').value = Math.ceil(distanceInKm);
 
                 
             }
