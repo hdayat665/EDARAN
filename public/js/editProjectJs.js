@@ -972,30 +972,41 @@ $(document).ready(function () {
     });
 
     $("#datepicker-warstart")
-        .datepicker({
-            todayHighlight: true,
-            autoclose: true,
-            format: "yyyy/mm/dd",
-        })
-        .on("changeDate", function (e) {
+    .datepicker({
+        todayHighlight: true,
+        autoclose: true,
+        format: "yyyy/mm/dd",
+    })
+    .on("changeDate", function (e) {
+        if (e.date) {
             // Set the end datepicker's date to the selected start date
             $("#datepicker-warend").datepicker("update", e.date);
 
             // Set the minimum date for the end datepicker to the selected start date
             $("#datepicker-warend").datepicker("setStartDate", e.date);
-        });
+        }
+    });
 
     $("#datepicker-warend").datepicker({
         todayHighlight: true,
         autoclose: true,
         format: "yyyy/mm/dd",
+    }).on("changeDate", function (e) {
+        if (e.date) {
+            // Do something with the selected end date
+        }
     });
-
+    
     $("#datepicker-bankexpiry").datepicker({
         todayHighlight: true,
         autoclose: true,
         format: "yyyy/mm/dd",
+    }).on("changeDate", function (e) {
+        if (e.date) {
+            // Do something with the selected bank expiry date
+        }
     });
+    
 
     $("#project_manager2_show").hide();
     $("#project_manager2_show").prop("disabled", true);

@@ -239,6 +239,21 @@ class ProjectController extends Controller
         return view('pages.project.myProject', $data);
     }
 
+    public function projectViewAssignLocationView($id)
+    {
+        $data = [];
+        // pr($id);
+        $ps = new ProjectService;
+        // dd($id);
+        // die;
+
+        $data = $ps->projectViewAssignLocationView($id);
+       
+        
+        return view('pages.project.projectViewAssignLocation', $data);
+    }
+
+
     public function projectAssignView($id)
     {
         $data = [];

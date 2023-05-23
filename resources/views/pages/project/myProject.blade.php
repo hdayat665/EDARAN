@@ -34,7 +34,7 @@
                             <td>{{$myProject->contract_end_date}}</td>
                             {{-- <td>{{$myProject->request_status}}</td> --}}
                             <!-- <td><a href="javascript:;" data-bs-toggle="modal" data-id=",{{$myProject->location}}" id="getLocation" data-bs-target="#exampleModal">{{count(explode(',',$myProject->location))}}</a></td> -->
-                                <td><a href="javascript:;" data-bs-toggle="modal" data-id=",{{$myProject->location}}" id="getLocation" data-bs-target="#exampleModal" class="btn btn-primary"> View </a></td>
+                                <td><a href="/projectViewAssignLocation/{{$myProject->member_id}}" data-id="{{$myProject->member_id}}"  class="btn btn-primary"> View </a></td>
                         </tr>
                         @endforeach
                         @endif
@@ -112,33 +112,6 @@
                 </table>
             </div>
         </div> --}}
-
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">View Assigned Project Location</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <table id="data-table-default1" class="table table-striped table-bordered align-middle" style="width:100%">
-                            <thead>
-                                <tr>
-                                    <th width="1%" class="text-nowrap">No.</th>
-                                    <th class="text-nowrap">Location Name</th>
-                                </tr>
-                            </thead>
-                            <tbody id="locationTable">
-
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cancel</button>
-                    </div>
-                </div>
-            </div>
-        </div>
 
         <div class="row">
             <div class="col-xl-4 col-lg-6">
