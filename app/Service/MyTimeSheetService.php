@@ -1073,10 +1073,10 @@ if ($existingLogs->isNotEmpty()) {
         //     ->get();
 
         $data = DB::table('timesheet_event as a')
-            ->leftJoin('employment as b', 'a.user_id', '=', 'b.user_id')
-            ->select('a.*','b.employeeName')
-            ->get();
-        // dd($data);
+        ->leftJoin('employment as b', 'a.user_id', '=', 'b.user_id')
+        ->select('a.*', 'b.employeeName')
+        ->orderBy('a.start_date', 'asc')
+        ->get();
         return $data;
     }   
 
@@ -1231,9 +1231,8 @@ if ($existingLogs->isNotEmpty()) {
         $input['logid'] = $nextLogid;
 
         $existingAppealdate = TimesheetAppeals::where('tenant_id', $user->tenant_id)
-        ->where('user_id', $user->id)
-        ->where('applied_date', $input['applied_date'])
-        ->first();
+            ->where('applied_date', $input['applied_date'])
+            ->first();
 
         $existingAppeallogid = TimesheetAppeals::where('tenant_id', $user->tenant_id)
         ->where('logid', $input['logid'])
@@ -1263,7 +1262,7 @@ if ($existingLogs->isNotEmpty()) {
         $settingEmail = TimesheetAppeals::select('timesheet_appeal.*')
         // ->join('leave_types', 'myleave.lt_type_id', '=', 'leave_types.id')
         // ->where('myleave.tenant_id', Auth::user()->tenant_id)
-        ->orderBy('timesheet_appeal.created_at', 'DESC')
+        ->orderBy('timesheet_appeal.id', 'DESC')
         ->first();
 
         if ($settingEmail) {
@@ -1309,7 +1308,8 @@ if ($existingLogs->isNotEmpty()) {
         TimesheetAppeals::where('id', $id)->update($input);
 
         $settingEmail = TimesheetAppeals::select('timesheet_appeal.*')
-        ->orderBy('timesheet_appeal.created_at', 'DESC')
+        // ->orderBy('timesheet_appeal.id', 'DESC')
+        ->where('timesheet_appeal.id', $id)
         ->first();
 
         if ($settingEmail) {

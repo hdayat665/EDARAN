@@ -2384,21 +2384,40 @@ $(document).ready(function () {
         $("#dateaddlog").datepicker("setEndDate", new Date());
     });
 
-    $("#starteventdate")
-        .datepicker({
-            format: "yyyy/mm/dd",
-            todayHighlight: true,
-            autoclose: true,
-        })
-        .datepicker("setDate", new Date());
+    // $("#starteventdate")
+    //     .datepicker({
+    //         format: "yyyy/mm/dd",
+    //         todayHighlight: true,
+    //         autoclose: true,
+    //     })
+    //     .datepicker("setDate", new Date());
 
-    $("#endeventdate")
-        .datepicker({
-            format: "yyyy/mm/dd",
-            todayHighlight: true,
-            autoclose: true,
-        })
-        .datepicker("setDate", new Date());
+    // $("#endeventdate")
+    //     .datepicker({
+    //         format: "yyyy/mm/dd",
+    //         todayHighlight: true,
+    //         autoclose: true,
+    //     })
+    //     .datepicker("setDate", new Date());
+
+    $("#starteventdate")
+    .datepicker({
+        todayHighlight: true,
+        autoclose: true,
+        format: "yyyy/mm/dd",
+    })
+    .on("changeDate", function (e) {
+        // Set the end datepicker's date to the selected start date
+        $("#endeventdate").datepicker("update", e.date);
+
+        // Set the minimum date for the end datepicker to the selected start date
+        $("#endeventdate").datepicker("setStartDate", e.date);
+    });
+
+$("#endeventdate").datepicker({
+    format: "yyyy/mm/dd", // Sets the date format to 'day/month/year'
+    autoclose: true, // Closes the datepicker on selection
+});
 
     // $('#projectLocationOffice').picker({ search: true });
     // $('#activityOffice').picker({ search: true });
