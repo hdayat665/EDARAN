@@ -302,12 +302,15 @@
                             </div>
                             
                         </div>
-                        <div class="row p-2" style="display: none">
+                        <div class="row p-2" >
                             <div class="col-md-4">
-                                <label class="form-label">TOTAL DISTANCE</label>
+                                <label class="form-label">Total Distance</label>
                             </div>
                             <div class="col-md-3">
                                 <input id="result" type="text" class="form-control" name="">
+                            </div>
+                            <div class="col-md-4">
+                                <input type="button" id="calculateButton" class="btn btn-primary" value="Calculate">
                             </div>
                             
                         </div> 
@@ -354,12 +357,12 @@
                         </div>
                         <div class="row p-2" >
                             <div class="col-md-4">
-                                <label class="form-label">Mileage</label>
+                                <label class="form-label">Mileage (RM)</label>
                             </div>
                             <div class="col-md-3">
                                 <input type="text" class="form-control" readonly id="millage" name="millage">
                             </div>
-                            <div class="col-md-2">
+                            <div class="col-md-2"> 
                                 <label class="form-label">Petrol/Fares</label>
                             </div>
                             <div class="col-md-3">
@@ -692,57 +695,46 @@
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDhySfXJwwoMVqbaiioEs38eOi8UkN7_ow&libraries=places"></script>
 
 <script>
-  function initAutocomplete() {
-    // Create a new instance of the Autocomplete object, and set the input field as its search box.
-    var input = document.getElementById('autocomplete');
-    var autocomplete = new google.maps.places.Autocomplete(input);
+    var startAddressInput = document.getElementById('autocomplete');
+    var destinationAddressInput = document.getElementById('autocomplete2');
+    var calculateButton = document.getElementById('calculateButton');
 
-    // Set the types of results to display (in this case, addresses).
-    autocomplete.setTypes(['address']);
-    initAutocomplete2()
-  }
+    function initAutocomplete() {
+        var autocomplete = new google.maps.places.Autocomplete(startAddressInput);
+        autocomplete.setFields(['address_components', 'geometry', 'formatted_address']);
+        initAutocomplete2();
+    }
 
-  function initAutocomplete2() {
-    // Create a new instance of the Autocomplete object, and set the input field as its search box.
-    var input2 = document.getElementById('autocomplete2');
-    var autocomplete2 = new google.maps.places.Autocomplete(input2);
+    function initAutocomplete2() {
+        var autocomplete2 = new google.maps.places.Autocomplete(destinationAddressInput);
+        autocomplete2.setFields(['address_components', 'geometry', 'formatted_address']);
+    }
 
-    // Set the types of results to display (in this case, addresses).
-    autocomplete2.setTypes(['address']);
+    document.addEventListener("DOMContentLoaded", function() {
+        initAutocomplete();
+        calculateButton.addEventListener("click", calculateDistance);
+    });
 
-    autocomplete2.addListener('place_changed', function() {
-          calculateDistance();
-        });
+    function calculateDistance() {
+        var startAddress = startAddressInput.value;
+        var destinationAddress = destinationAddressInput.value;
 
-  }
-
-  // Call the initAutocomplete() function on page load
-  document.addEventListener("DOMContentLoaded", function() {
-    initAutocomplete();
-  });
-
-//   $("#autocomplete,#autocomplete2").focus(function () {
-//         calculateDistance()
-//     });
-  function calculateDistance() {
-        var startAddress = document.getElementById('autocomplete').value;
-        var endAddress = document.getElementById('autocomplete2').value;
-        
         var service = new google.maps.DistanceMatrixService();
-
         service.getDistanceMatrix({
-          origins: [startAddress],
-          destinations: [endAddress],
-          travelMode: 'DRIVING',
-          unitSystem: google.maps.UnitSystem.METRIC,
+            origins: [startAddress],
+            destinations: [destinationAddress],
+            travelMode: 'DRIVING',
+            unitSystem: google.maps.UnitSystem.METRIC,
         }, function(response, status) {
-          if (status !== 'OK') {
-            alert('Error: ' + status);
-          } else {
-            var distance = response.rows[0].elements[0].distance.value;
-            var distanceInKm = (distance / 1000);
-            document.getElementById('result').value =  distanceInKm;
-          }
+            if (status !== 'OK') {
+                alert('Error: ' + status);
+            } else {
+                var distance = response.rows[0].elements[0].distance.value;
+                var distanceInKm = distance / 1000;
+                document.getElementById('result').value = distanceInKm;
+
+                
+            }
         });
-      }
+    }
 </script>
