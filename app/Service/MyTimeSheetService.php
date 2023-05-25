@@ -1231,8 +1231,9 @@ if ($existingLogs->isNotEmpty()) {
         $input['logid'] = $nextLogid;
 
         $existingAppealdate = TimesheetAppeals::where('tenant_id', $user->tenant_id)
-            ->where('applied_date', $input['applied_date'])
-            ->first();
+        ->where('user_id', $user->id)
+        ->where('applied_date', $input['applied_date'])
+        ->first();
 
         $existingAppeallogid = TimesheetAppeals::where('tenant_id', $user->tenant_id)
         ->where('logid', $input['logid'])
