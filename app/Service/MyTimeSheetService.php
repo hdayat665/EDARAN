@@ -1243,7 +1243,7 @@ if ($existingLogs->isNotEmpty()) {
             $data['status'] = config('app.response.error.status');
             $data['type'] = config('app.response.error.type');
             $data['title'] = config('app.response.error.title');
-            $data['msg'] = 'Timesheet appeal with the same applied date already exists';
+            $data['msg'] = 'Log Appeal has Already Submitted';
             return $data;
         }
 
@@ -1289,7 +1289,7 @@ if ($existingLogs->isNotEmpty()) {
             $userId[] = $employee->user_id;
             
         }
-        pr($userId);
+        // pr($userId);
         $claim[0] = ['tenant_id', Auth::user()->tenant_id];
 
         $data = DB::table('timesheet_appeal as a')
