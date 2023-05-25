@@ -1289,7 +1289,7 @@ if ($existingLogs->isNotEmpty()) {
             $userId[] = $employee->user_id;
             
         }
-        pr($userId);
+        // pr($userId);
         $claim[0] = ['tenant_id', Auth::user()->tenant_id];
 
         $data = DB::table('timesheet_appeal as a')

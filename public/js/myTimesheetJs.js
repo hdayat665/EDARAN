@@ -1249,6 +1249,23 @@ $(document).ready(function () {
                         $(info.el).css('background-color', '#FF8080');
                       }
 
+                      else if(
+                         
+                        (current.getDate() === currentdate.getDate()) &&
+                        !(current.getDay() === 6 || current.getDay() === 0)  && (hasLog && hours1 < 9)
+                      ) {
+                        $(info.el).css('background-color', '#FF8080');
+                      }
+
+
+                      else if(
+                         
+                        (current.getDate() === currentdate.getDate()) &&
+                        !(current.getDay() === 6 || current.getDay() === 0)  && ( hasLog && hours1 >= 9)
+                      ) {
+                        $(info.el).css('background-color', '#80ff80');
+                      }
+
                      else if(
                          
                         (current.getDate() === oneDayBefore.getDate() || current.getDate() === twoDayBefore.getDate()) &&
