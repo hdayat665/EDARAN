@@ -1244,7 +1244,22 @@ $(document).ready(function () {
                       if(
                          
                         (current.getDate() === oneDayBefore.getDate() || current.getDate() === twoDayBefore.getDate()) &&
-                        !(current.getDay() === 6 || current.getDay() === 0)  && (hasLog || !hasLog || hours1 < 9)
+                        !(current.getDay() === 6 || current.getDay() === 0) && !hasLog )
+                       {
+                        $(info.el).css('background-color', '#FF8080');
+                      }
+
+                     else if(
+                         
+                        (current.getDate() === oneDayBefore.getDate() || current.getDate() === twoDayBefore.getDate()) &&
+                        !(current.getDay() === 6 || current.getDay() === 0)  && ( hasLog && hours1 >= 9)
+                      ) {
+                        $(info.el).css('background-color', '#80ff80');
+                      }
+                      else if(
+                         
+                        (current.getDate() === oneDayBefore.getDate() || current.getDate() === twoDayBefore.getDate()) &&
+                        !(current.getDay() === 6 || current.getDay() === 0)  && ( hasLog && hours1 < 9)
                       ) {
                         $(info.el).css('background-color', '#FF8080');
                       }
@@ -1271,7 +1286,7 @@ $(document).ready(function () {
                         
                          } else if((current < duahari) && hasLog && hours1 >= 9) {
                             $(info.el).css('background-color', '#80ff80');
-                         } else if((current < duahari) && appliedDates.includes(datedefaultformat) && hours1 > 9) {
+                         } else if((current < duahari) && appliedDates.includes(datedefaultformat) && hours1 >= 9) {
                             $(info.el).css('background-color', '#80ff80');
                             $(info.el).append('&nbsp;').append(viewappealb);
                             $(viewappealb).css({
