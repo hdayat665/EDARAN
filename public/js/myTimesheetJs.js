@@ -2429,56 +2429,85 @@ $("#endeventdate").datepicker({
         $("#starttime").mdtimepicker({
             showMeridian: true,
         });
-
+    
         var now = new Date();
         var hours = now.getHours();
         var meridian = hours >= 12 ? "PM" : "AM";
         hours = hours % 12;
         hours = hours ? hours : 12; // convert 0 to 12
         var minutes = now.getMinutes();
-
+    
         if (minutes < 10) {
             minutes = "0" + minutes;
         }
-
+    
         $("#starttime").val(hours + ":" + minutes + " " + meridian);
-
+    
         $("#endtime").mdtimepicker({
             showMeridian: true,
         });
-
-        var now = new Date();
-        now.setHours(now.getHours() + 1);
-        var hours = now.getHours();
+    
+        var startMoment = moment($("#starttime").val(), "hh:mm A");
+        var endMoment = startMoment.clone().add(1, 'hour');
+    
+        var hours = endMoment.hours();
         var meridian = hours >= 12 ? "PM" : "AM";
         hours = hours % 12;
         hours = hours ? hours : 12; // convert 0 to 12
-        var minutes = now.getMinutes();
+        var minutes = endMoment.minutes();
         if (minutes < 10) {
             minutes = "0" + minutes;
         }
         $("#endtime").val(hours + ":" + minutes + " " + meridian);
-
+    
         $("#daystart,#dayend")
             .datepicker({
                 format: "yyyy/mm/dd",
             })
             .datepicker("setDate", "now");
-
+    
         $("#daystartedit,#dayendedit")
             .datepicker({
                 format: "yyyy/mm/dd",
             })
             .datepicker("setDate", "now");
-
+    
         $("#starteventtime,#endeventtime").mdtimepicker({});
-        // $("#starteventtime").timepicker({
-        //     showMeridian: false,
-        // });
-        // $("#endeventtime").timepicker({
-        //     showMeridian: false,
-        // });
+    
+        $("#starttime").change(function () {
+            var startMoment = moment($("#starttime").val(), "hh:mm A");
+            var endMoment = startMoment.clone().add(1, 'hour');
+    
+            var hours = endMoment.hours();
+            var meridian = hours >= 12 ? "PM" : "AM";
+            hours = hours % 12;
+            hours = hours ? hours : 12; // convert 0 to 12
+            var minutes = endMoment.minutes();
+            if (minutes < 10) {
+                minutes = "0" + minutes;
+            }
+            $("#endtime").val(hours + ":" + minutes + " " + meridian);
+        });
+    
+        $("#endtime").change(function () {
+            var startTime = moment($("#starttime").val(), "hh:mm A");
+            var endTime = moment($("#endtime").val(), "hh:mm A");
+        
+            if (endTime.isBefore(startTime)) {
+                Swal.fire({
+                    icon: "error",
+                    title: "Invalid Time Range",
+                    text: "End time cannot be before the start time.",
+                }).then(() => {
+                    $("#endtime").val("");
+                    $("#endtime").attr("placeholder", "please choose new end time"); // Set the placeholder for the end time field
+                    $("#endtime").mdtimepicker("toggle"); // Close the time picker
+                });
+            }
+        });
+        
     });
+    
 
     // $(document).on('change', "#typeoflog", function() {
     //     if ($(this).val() == "1") {

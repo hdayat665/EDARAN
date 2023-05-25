@@ -23,9 +23,9 @@
                         <div class="tab-content panel m-0 rounded-0 p-3">
                             <!-- BEGIN tab-pane -->
                             <div class="tab-pane fade active show" id="default-tab-1">
-                                {{-- <div class="row p-2 col-md-2" >
+                                <div class="row p-2 col-md-2" >
                                    <a href="javascript:;" id="approveAllButton" class="btn btn-primary"><i class="fa fa-check" aria-hidden="true"></i> Approve All</a>	&nbsp;&nbsp;&nbsp;
-                               </div> --}}
+                               </div>
                                 <form id="approveAllForm">
                                     <table id="appealtable" class="table table-striped table-bordered align-middle">
                                         <thead>
