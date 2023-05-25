@@ -2500,8 +2500,10 @@ $("#endeventdate").datepicker({
                     text: "End time cannot be before the start time.",
                 }).then(() => {
                     $("#endtime").val("");
-                    $("#endtime").attr("placeholder", "please choose new end time"); // Set the placeholder for the end time field
-                    $("#endtime").mdtimepicker("toggle"); // Close the time picker
+                    $("#logduration").val("");
+                    $("#endtime").attr("placeholder", "End Time"); // Set the placeholder for the end time field
+                    $("#endtime").mdtimepicker("toggle");
+                     // Close the time picker
                 });
             }
         });
