@@ -1283,6 +1283,33 @@ if ($existingLogs->isNotEmpty()) {
     {
 
         $employees = Employee::where('tsapprover', Auth::user()->id)->get();
+        
+        $userId = [];
+        foreach ($employees as $key => $employee) {
+            $userId[] = $employee->user_id;
+            
+        }
+        pr($userId);
+        $claim[0] = ['tenant_id', Auth::user()->tenant_id];
+
+        $data = DB::table('timesheet_appeal as a')
+        ->leftJoin('employment as b', 'a.user_id', '=', 'b.user_id')
+        ->select('a.*', 'b.employeeName')
+        ->where('a.tenant_id', Auth::user()->tenant_id)
+        ->whereIn('a.user_id', $userId)
+        ->where('a.status', '=', 'Locked')
+        ->orderby('a.created_at' ,'desc')
+        ->get();
+
+        return $data;
+
+    }
+
+
+    public function timesheetApprovalappealViewhistory()
+    {
+
+        $employees = Employee::where('tsapprover', Auth::user()->id)->get();
 
         $userId = [];
         foreach ($employees as $key => $employee) {
@@ -1296,11 +1323,15 @@ if ($existingLogs->isNotEmpty()) {
         ->select('a.*', 'b.employeeName')
         ->where('a.tenant_id', Auth::user()->tenant_id)
         ->whereIn('a.user_id', $userId)
+        ->where('a.status', '!=', 'Locked')
+        ->orderby('a.created_at' ,'desc')
         ->get();
 
         return $data;
 
     }
+
+
     public function updateStatusappeal($id = '', $status = '')
     {
         $input['status'] = $status;
@@ -1329,6 +1360,34 @@ if ($existingLogs->isNotEmpty()) {
     public function getAppealById($id)
     {
         $data = TimesheetAppeals::find($id);
+
+        return $data;
+    }
+
+    public function approveAllTimesheetAppeal($r)
+    {
+        $input = $r->input();
+
+        if (!isset($input['id'])) {
+            $data['status'] = config('app.response.error.status');
+            $data['type'] = config('app.response.error.type');
+            $data['title'] = config('app.response.error.title');
+            $data['msg'] = 'Please select the timesheet submission first!';
+
+            return $data;
+        }
+
+        $ids = $input['id'];
+        $status['status'] = 'Approved';
+
+        $cond[1] = ['tenant_id', Auth::user()->tenant_id];
+
+        TimesheetAppeals::where($cond)->whereIn('id', $ids)->update($status);
+
+        $data['status'] = config('app.response.success.status');
+        $data['type'] = config('app.response.success.type');
+        $data['title'] = config('app.response.success.title');
+        $data['msg'] = 'Log Appeal is Approved';
 
         return $data;
     }
