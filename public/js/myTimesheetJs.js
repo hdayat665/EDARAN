@@ -1241,9 +1241,15 @@ $(document).ready(function () {
                         });
 
                       } 
-
+                      if(
+                         
+                        (current.getDate() === oneDayBefore.getDate() || current.getDate() === twoDayBefore.getDate()) &&
+                        !(current.getDay() === 6 || current.getDay() === 0)  && (hasLog || !hasLog || hours1 < 9)
+                      ) {
+                        $(info.el).css('background-color', '#FF8080');
+                      }
                       //xde log appeal, log kecik dari 9,exclude weekend
-                       if((current < duahari) && !appliedDates.includes(datedefaultformat) && (hasLog && hours1 < 9 || !hasLog)   && !(current.getDay() === 6 || current.getDay() === 0)) {
+                       else if((current < duahari) && !appliedDates.includes(datedefaultformat) && (hasLog && hours1 < 9 || !hasLog)   && !(current.getDay() === 6 || current.getDay() === 0)) {
                         $(info.el).css('background-color', '#FF8080');
                         $(info.el).append('&nbsp;').append(appealaddb);
                         $(appealaddb).css({

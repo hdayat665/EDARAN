@@ -1261,9 +1261,8 @@ if ($existingLogs->isNotEmpty()) {
 
 
         $settingEmail = TimesheetAppeals::select('timesheet_appeal.*')
-        // ->join('leave_types', 'myleave.lt_type_id', '=', 'leave_types.id')
-        // ->where('myleave.tenant_id', Auth::user()->tenant_id)
-        ->orderBy('timesheet_appeal.created_at', 'DESC')
+        ->where('timesheet_appeal.tenant_id', Auth::user()->tenant_id)
+        ->orderBy('timesheet_appeal.id', 'DESC')
         ->first();
 
         if ($settingEmail) {
@@ -1309,7 +1308,8 @@ if ($existingLogs->isNotEmpty()) {
         TimesheetAppeals::where('id', $id)->update($input);
 
         $settingEmail = TimesheetAppeals::select('timesheet_appeal.*')
-        ->orderBy('timesheet_appeal.created_at', 'DESC')
+        ->where('timesheet_appeal.tenant_id', Auth::user()->tenant_id)
+        ->where('timesheet_appeal.id', $id)
         ->first();
 
         if ($settingEmail) {
