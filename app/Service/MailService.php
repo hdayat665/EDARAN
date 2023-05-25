@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail as FacadesMail;
 
-class MailService
+class MailService 
 {
     public function emailToSupervisorClaimGNC($data)
     {
@@ -38,6 +38,7 @@ class MailService
         }
     }
 
+    
     public function emailToSupervisorClaimMTC($data)
     {
         // get supervisor detail
@@ -62,6 +63,30 @@ class MailService
             Mail::to($receiver)->send(new MailMail($response));
         }
     }
+    public function emailToHodClaimMTC($data)
+    {
+        // get supervisor detail
+        $user = Employee::where('user_id', $data->user_id)->first();
+        $supervisor = Employee::where('user_id', $user->eclaimapprover)->first();
+
+        // $receivers = array_merge_recursive($user, $supervisor);
+        //  $user->merge($supervisor);
+
+        // foreach ($user as $email) {
+        $receiver = $supervisor->workingEmail;
+        $response['typeEmail'] = 'hodApproval';
+
+        $response['from'] = env('MAIL_FROM_ADDRESS');
+        $response['nameFrom'] = Auth::user()->username;
+        $response['subject'] = 'Monthly Claim | Month';
+        $response['title'] = 'Monthly Claim | Month';
+        $response['supervisor'] = $supervisor->employeeName;
+        $response['employeeName'] = $user->employeeName;
+        $response['data'] = $data;
+
+        Mail::to($receiver)->send(new MailMail($response));
+        // }
+    }
 
     public function approvalEmailMTC($data)
     {
@@ -78,8 +103,8 @@ class MailService
 
         $response['from'] = env('MAIL_FROM_ADDRESS');
         $response['nameFrom'] = Auth::user()->username;
-        $response['subject'] = 'General Claim | Month';
-        $response['title'] = 'General Claim | Month';
+        $response['subject'] = 'Monthly Claim | Month';
+        $response['title'] = 'Monthly Claim | Month';
         $response['supervisor'] = $supervisor->employeeName;
         $response['employeeName'] = $user->employeeName;
         $response['data'] = $data;
@@ -87,7 +112,7 @@ class MailService
         Mail::to($receiver)->send(new MailMail($response));
         // }
     }
-
+    
     public function approvalEmailMTCForAdmin($data)
     {
         // get supervisor detail

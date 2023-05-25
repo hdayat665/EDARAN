@@ -112,9 +112,9 @@
                             </div>
                             <div class="col-md-8">
                                 <input type="hidden" name="general_id" value="{{ Request::segment(4) }}">
-                                <input type="hidden" value="{{ isset($month_id) ? monthMTC($month_id) : $month }}" name="month">
+                                <input type="hidden" value="{{ isset($month_id) ? monthMTC($month_id) : $month }}" name="month" id="monthInput">
                                 <input type="hidden" value="{{ $year }}" name="year">
-                                <input type="hidden " class="form-control" id="datepickertc"  name="travel_date">
+                                <input class="form-control" id="datepickertc"  name="travel_date">
                             </div>
                         </div>
                         <div class="row p-2">
@@ -163,14 +163,14 @@
                                 <textarea class="form-control" id="" name="desc" rows="3"></textarea>
                             </div>
                         </div>
-                        <div class="row p-2">
+                        <!-- <div class="row p-2">
                             <div class="col-md-4">
                                 <label class="form-label">Reason using Web</label>
                             </div>
                             <div class="col-md-8">
                                 <input type="text" class="form-control" name="reason">
                             </div>
-                        </div>
+                        </div> -->
                         <div class="row p-2">
                             <div class="col-md-4">
                                 <label class="form-label">Type of Transport</label>
@@ -432,7 +432,7 @@
                             <div class="col-md-6">
                                 <input type="file" class="form-control-file" name="file_upload[]" id="supportdocument" multiple>
                                 <input type="hidden" name="general_id" value="{{ Request::segment(4) }}">
-                                <input type="hidden" value="{{ isset($month_id) ? monthMTC($month_id) : $month }}" name="month">                                
+                                <input type="hidden" value="{{ isset($month_id) ? monthMTC($month_id) : $month }}" name="month" id="monthInputSub">                                
                             </div>
                         </div>
                         <div class="WC" style="display:none">

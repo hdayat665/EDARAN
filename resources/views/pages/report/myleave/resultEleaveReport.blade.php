@@ -54,7 +54,7 @@
                                             $status = 'Pending';
                                             break;
                                         case 2:
-                                            $status = 'pending approval';
+                                            $status = 'Pending Approval';
                                             break;
                                         case 3:
                                             $status = 'Rejected';

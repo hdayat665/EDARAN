@@ -108,18 +108,41 @@ $("document").ready(function () {
         })
         .datepicker("setDate", "now");
 
-    $("#datepickertc")
-        .datepicker({
+    var selectedMonth = $("#monthInput").val();
+
+    // Convert the selected month to the first and last day of that monthsadasd
+    var firstDay = new Date(selectedMonth + " 1, 2023");
+    var lastDay = new Date(firstDay.getFullYear(), firstDay.getMonth() + 1, 0);
+      
+        // Initialize the datepicker with the selected month range
+        $("#datepickertc")
+          .datepicker({
             todayHighlight: true,
             autoclose: true,
             format: "yyyy-mm-dd",
-        })
-        .datepicker("setDate", "now");
+            startDate: firstDay,
+            endDate: lastDay
+          })
+          .datepicker("setDate", firstDay);
 
     $(function () {
-        $("#date1, #date2").datepicker({
-            format: "yyyy-mm-dd",
-        });
+        var selectedMonth = $("#monthInputSub").val();
+
+        // Convert the selected month to the first and last day of that monthsadasd
+        var firstDay = new Date(selectedMonth + " 1, 2023");
+        var lastDay = new Date(firstDay.getFullYear(), firstDay.getMonth() + 1, 0);
+        
+            // Initialize the datepicker with the selected month range
+            $("#date1, #date2")
+            .datepicker({
+                todayHighlight: true,
+                autoclose: true,
+                format: "yyyy-mm-dd",
+                startDate: firstDay,
+                endDate: lastDay
+            })
+            .datepicker("setDate", firstDay);
+        
         $("#time1,#time2").mdtimepicker({});
 
         $("#timestart,#timeend").mdtimepicker({});
@@ -468,7 +491,7 @@ $("document").ready(function () {
                 start_time: "required",
                 end_time: "required",
                 desc: "required",
-                reason: "required",
+                
                 type_transport: "required",
                 location_start: "required",
                 project_id: "required",
@@ -483,7 +506,6 @@ $("document").ready(function () {
                 start_time: "Please Select Start Time",
                 end_time: "Please Select End Time",
                 desc: "Please Insert Description",
-                reason: "Please Insert Reason",
                 type_transport: "Please Select Type of Transport",
                 location_start: "Please Select Start Location",
                 project_id: "Please Select Project",
