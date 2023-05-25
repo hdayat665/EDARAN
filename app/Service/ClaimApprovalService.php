@@ -145,9 +145,9 @@ class ClaimApprovalService
             $ms = new MailService;
             if ($stage == 'supervisor' && $status == 'recommend') {
                 $ms->approvalEmailMTC($generalClaimData);
-                $ms->approvalEmailMTCForAdmin($generalClaimData);
+                $ms->emailToHodClaimMTC($generalClaimData);
             }
-
+            
             if ($stage == 'a_approval' && $status == 'recommend') {
                 $ms->approvalEmailMTC($generalClaimData);
                 $ms->approvalEmailMTCForAdmin($generalClaimData);

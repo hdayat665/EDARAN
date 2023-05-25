@@ -604,7 +604,7 @@ class myClaimService
             foreach ($_FILES['file_upload']['name'] as $key => $filename) {
                 $tmp_name = $_FILES['file_upload']['tmp_name'][$key];
                 if (!empty($filename) && !empty($tmp_name)) {
-                    $fileInfo = manyFile($filename, $tmp_name);
+                    $fileInfo = PersonalFile($filename, $tmp_name);
                     if ($fileInfo !== null) {
                         $filenames[] = $fileInfo['filename'];
                     }
@@ -688,7 +688,7 @@ class myClaimService
             foreach ($_FILES['file_upload']['name'] as $key => $filename) {
                 $tmp_name = $_FILES['file_upload']['tmp_name'][$key];
                 if (!empty($filename) && !empty($tmp_name)) {
-                    $fileInfo = manyFile($filename, $tmp_name);
+                    $fileInfo = TravelFile($filename, $tmp_name);
                     if ($fileInfo !== null) {
                         $filenames[] = $fileInfo['filename'];
                     }
@@ -748,7 +748,7 @@ class myClaimService
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
         $data['id'] = $generalClaimData->id;
-        $data['msg'] = 'Success';
+        $data['msg'] = 'Travel Log Created';
 
         return $data;
     }
@@ -1040,7 +1040,7 @@ class myClaimService
 
             // get supervisor detail to send email
             $ms = new MailService;
-            $ms->emailToSupervisorClaimGNC($generalClaimData);
+            $ms->emailToSupervisorClaimMTC($generalClaimData);
 
             $data['status'] = config('app.response.success.status');
             $data['type'] = config('app.response.success.type');
@@ -1057,7 +1057,7 @@ class myClaimService
 
         // get supervisor detail to send email
         $ms = new MailService;
-        $ms->emailToSupervisorClaimGNC($generalClaimData);
+        $ms->emailToSupervisorClaimMTC($generalClaimData);
 
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
