@@ -1585,7 +1585,7 @@ public function updateTypeOfLogs($r, $id)
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success Update Area Name';
+        $data['msg'] = 'Subsistence Allowance Area Updated';
 
         return $data;
     }

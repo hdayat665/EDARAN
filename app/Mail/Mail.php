@@ -58,6 +58,8 @@ class Mail extends Mailable
             $view = 'emails.claim.MTCSubmitEmail';
         } else if ($data['typeEmail'] == 'MTCApproval') {
             $view = 'emails.claim.MTCApprovalEmail';
+        }else if ($data['typeEmail'] == 'hodApproval') {
+            $view = 'emails.claim.hodApprovalEmail';
         } else if ($data['typeEmail'] == 'AdminMonthlyClaim') {
             $view = 'emails.claim.AdminMTC';
         } else if ($data['typeEmail'] == 'rejectMtcEmail') {
