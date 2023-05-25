@@ -53,8 +53,8 @@ class MailService
 
             $response['from'] = env('MAIL_FROM_ADDRESS');
             $response['nameFrom'] = Auth::user()->username;
-            $response['subject'] = 'General Claim | Month';
-            $response['title'] = 'General Claim | Month';
+            $response['subject'] = 'Monthly Claim | Month';
+            $response['title'] = 'Monthly Claim | Month';
             $response['supervisor'] = $supervisor['employeeName'];
             $response['employeeName'] = $user['employeeName'];
             $response['data'] = $data;
@@ -104,8 +104,8 @@ class MailService
 
         $response['from'] = env('MAIL_FROM_ADDRESS');
         $response['nameFrom'] = Auth::user()->username;
-        $response['subject'] = 'General Claim | Month';
-        $response['title'] = 'General Claim | Month';
+        $response['subject'] = 'Monthly Claim | Month';
+        $response['title'] = 'Monthly Claim | Month';
         // $response['supervisor'] = $supervisor->employeeName;
         $response['employeeName'] = $user->employeeName;
         $response['data'] = $data;
@@ -124,8 +124,8 @@ class MailService
 
         $response['from'] = env('MAIL_FROM_ADDRESS');
         $response['nameFrom'] = Auth::user()->username;
-        $response['subject'] = 'General Claim | Month';
-        $response['title'] = 'General Claim | Month';
+        $response['subject'] = 'Monthly Claim | Month';
+        $response['title'] = 'Monthly Claim | Month';
         $response['employeeName'] = $user->employeeName;
         $response['data'] = $data;
 
@@ -142,8 +142,8 @@ class MailService
 
         $response['from'] = env('MAIL_FROM_ADDRESS');
         $response['nameFrom'] = Auth::user()->username;
-        $response['subject'] = 'General Claim | Month';
-        $response['title'] = 'General Claim | Month';
+        $response['subject'] = 'Monthly Claim | Month';
+        $response['title'] = 'Monthly Claim | Month';
         $response['employeeName'] = $user->employeeName;
         $response['data'] = $data;
 
@@ -160,8 +160,8 @@ class MailService
 
         $response['from'] = env('MAIL_FROM_ADDRESS');
         $response['nameFrom'] = Auth::user()->username;
-        $response['subject'] = 'General Claim | Month';
-        $response['title'] = 'General Claim | Month';
+        $response['subject'] = 'Monthly Claim | Month';
+        $response['title'] = 'Monthly Claim | Month';
         $response['employeeName'] = $user->employeeName;
         $response['data'] = $data;
 

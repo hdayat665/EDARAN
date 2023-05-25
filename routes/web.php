@@ -463,6 +463,7 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('/getLocationsProjectMemberById/{id}', 'getLocationsProjectMemberById');
             Route::get('/projectNameByCustomerId/{id}', 'projectNameByCustomerId');
             Route::get('/getRejectProject/{id}', 'getRejectProject');
+            Route::get('/projectViewAssignLocation/{id}', 'projectViewAssignLocationView');
         });
 
         Route::controller(ProjectReportController::class)->group(function () {
@@ -487,6 +488,7 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('/searchOvertimeReport', 'searchOvertimeReport');
             // Route::get('/getReportAllEmployee', 'getReportAllEmployee');
             Route::get('/getEmployeeNamebyDepartment/{id}', 'getEmployeeNamebyDepartment');
+            
         });
 
         Route::controller(EleaveReportController::class)->group(function () {
@@ -671,3 +673,4 @@ Route::get('org/childfinancialaccounting', function () {
 Route::get('org/childinternalaudit', function () {
     return view('pages.org.childInternalAudit');
 });
+
