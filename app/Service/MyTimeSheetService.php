@@ -1243,7 +1243,7 @@ if ($existingLogs->isNotEmpty()) {
             $data['status'] = config('app.response.error.status');
             $data['type'] = config('app.response.error.type');
             $data['title'] = config('app.response.error.title');
-            $data['msg'] = 'Log Appeal has Already Submitted';
+            $data['msg'] = 'Timesheet appeal with the same applied date already exists';
             return $data;
         }
 
