@@ -476,8 +476,9 @@ class MyTimesheetController extends Controller
         // $input = [];
         $ss = new MyTimeSheetService;
         $data['appealapprovers'] = $ss->timesheetApprovalappealView();
+        $data['appealapprovershistory'] = $ss->timesheetApprovalappealViewhistory();
         // $data['events'] = $ss->getRealtimeEvents($input);
-        // pr($data['appealapprovers']);
+        // pr($data['appealapprovershistory']);
         // $data['employeeId'] = '';
         // $data['eventId'] = '';
         return view('pages.timesheet.appealtimesheet',$data);
@@ -500,6 +501,15 @@ class MyTimesheetController extends Controller
         $result = $ss->getAppealById($id);
 
         return $result;
+    }
+
+    public function approveAllTimesheetAppeal(Request $r)
+    {
+        $ss = new MyTimeSheetService;
+
+        $result = $ss->approveAllTimesheetAppeal($r);
+
+        return response()->json($result);
     }
 
 
