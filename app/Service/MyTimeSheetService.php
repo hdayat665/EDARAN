@@ -1073,10 +1073,10 @@ if ($existingLogs->isNotEmpty()) {
         //     ->get();
 
         $data = DB::table('timesheet_event as a')
-            ->leftJoin('employment as b', 'a.user_id', '=', 'b.user_id')
-            ->select('a.*','b.employeeName')
-            ->get();
-        // dd($data);
+        ->leftJoin('employment as b', 'a.user_id', '=', 'b.user_id')
+        ->select('a.*', 'b.employeeName')
+        ->orderBy('a.start_date', 'asc')
+        ->get();
         return $data;
     }   
 
@@ -1231,9 +1231,8 @@ if ($existingLogs->isNotEmpty()) {
         $input['logid'] = $nextLogid;
 
         $existingAppealdate = TimesheetAppeals::where('tenant_id', $user->tenant_id)
-        ->where('user_id', $user->id)
-        ->where('applied_date', $input['applied_date'])
-        ->first();
+            ->where('applied_date', $input['applied_date'])
+            ->first();
 
         $existingAppeallogid = TimesheetAppeals::where('tenant_id', $user->tenant_id)
         ->where('logid', $input['logid'])
