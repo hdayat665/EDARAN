@@ -408,7 +408,10 @@ $(document).ready(function () {
                 start_time: "required",
                 project_location: "required",
                 project_location_office: "required",
-                end_time: "required",
+                end_time: {
+                    required: true,
+                    time: true, // Add time validation rule
+                },
             },
 
             messages: {
@@ -422,7 +425,10 @@ $(document).ready(function () {
                 start_time: "Please Choose Start Time",
                 project_location: "Please Choose Project Location",
                 project_location_office: "Please Choose Project Location",
-                end_time: "Please Choose End Time",
+                end_time: {
+                    required: "Please Choose End Time",
+                    time: "Please enter a valid time format", // Error message for time validation
+                },
             },
             submitHandler: function (form) {
                 requirejs(["sweetAlert2"], function (swal) {
@@ -567,9 +573,13 @@ $(document).ready(function () {
 
     $("#addappealb").click(function (e) {
         $("#addappeal").validate({
-            rules: {},
+            rules: {
+                reason:  "required",
+            },
 
-            messages: {},
+            messages: {
+                reason: "Please Insert Reason",
+            },
             submitHandler: function (form) {
                 requirejs(["sweetAlert2"], function (swal) {
                     var data = new FormData(
@@ -1178,9 +1188,8 @@ $(document).ready(function () {
                             var hours = Math.floor(totalHour / 3600);
                             var minutes = Math.floor((totalHour % 3600) / 60);
                             totalHours1 = hours.toString().padStart(2, '0') + ':' + minutes.toString().padStart(2, '0');
-                            var [hours1, minutes] = totalHours1.split(":").map(Number);
 
-                            // console.log(hours1)
+
                             // Exit the loop once the total hours for the current date are calculated
                             break;
                         }
@@ -1239,57 +1248,96 @@ $(document).ready(function () {
                             top: '-35px',
                             'z-index': '999',
                         });
-
-                      } 
-                      if(
-                         
+                    }if (
+                        (current.getMonth() === currentDate.getMonth()) &&
                         (current.getDate() === oneDayBefore.getDate() || current.getDate() === twoDayBefore.getDate()) &&
-                        !(current.getDay() === 6 || current.getDay() === 0)  && (hasLog || !hasLog || hours1 < 9)
+                        !(current.getDay() === 6 || current.getDay() === 0) && hasLog && totalHours >= 9
+                      ) {
+                        $(info.el).css('background-color', '#80FF80');
+                      } else if(
+                        (current.getMonth() === currentDate.getMonth()) &&
+                        (current.getDate() === oneDayBefore.getDate() || current.getDate() === twoDayBefore.getDate()) &&
+                        !(current.getDay() === 6 || current.getDay() === 0)  && (hasLog || !hasLog || totalHours < 9)
                       ) {
                         $(info.el).css('background-color', '#FF8080');
                       }
-                      //xde log appeal, log kecik dari 9,exclude weekend
-                       else if((current < duahari) && !appliedDates.includes(datedefaultformat) && (hasLog && hours1 < 9 || !hasLog)   && !(current.getDay() === 6 || current.getDay() === 0)) {
+                      else if((current < duahari) &&  !appliedDates.includes(datedefaultformat) && !hasLog && !(current.getDay() === 6 || current.getDay() === 0)) {
                         $(info.el).css('background-color', '#FF8080');
+
                         $(info.el).append('&nbsp;').append(appealaddb);
                         $(appealaddb).css({
                             position: 'relative',
                             top: '-35px',
-                            'z-index': '999',   
+                            'z-index': '999',
                             });
-
-                        }else if((current < duahari) && appliedDates.includes(datedefaultformat) && (hasLog && hours1 < 9 || !hasLog)   && !(current.getDay() === 6 || current.getDay() === 0)) {
-
-                            $(info.el).css('background-color', '#FF8080');
-                            $(info.el).append('&nbsp;').append(viewappealb);
-                            $(viewappealb).css({
-                                position: 'relative',
-                                top: '-35px',
-                                'z-index': '999',   
-                                });
+                    } else if ((current < duahari) &&  appliedDates.includes(datedefaultformat) && !hasLog && !(current.getDay() === 6 || current.getDay() === 0)) {
+                        $(info.el).css('background-color', '#FF8080');
                         
-                        
-                         } else if((current < duahari) && hasLog && hours1 >= 9) {
-                            $(info.el).css('background-color', '#80ff80');
-                         } else if((current < duahari) && appliedDates.includes(datedefaultformat) && hours1 > 9) {
-                            $(info.el).css('background-color', '#80ff80');
+
                             $(info.el).append('&nbsp;').append(viewappealb);
                             $(viewappealb).css({
                                 position: 'relative',
                                 top: '-35px',
-                                'z-index': '999',   
-                                });
-                         }
-                         else if((current < duahari) && appliedDates.includes(datedefaultformat) && hours1 < 9) {
+                                'z-index': '999',
+                              });
+
+                }else if (hasLog && totalHours >= 9) {
+                        $(info.el).css('background-color', '#80FF80');
+                    } else if(hasLog && (current.getDay() === 6 || current.getDay() === 0)) {
+                        $(info.el).css('background-color', '#B3CCFF');
+                    }else if (hasLog && totalHours <= 9) {
+                        if  ((current.getDate() === oneDayBefore.getDate() || current.getDate() === twoDayBefore.getDate()) && hasLog && !appliedDates.includes(datedefaultformat)) { //kat sini
                             $(info.el).css('background-color', '#FF8080');
-                            $(info.el).append('&nbsp;').append(viewappealb);
-                            $(viewappealb).css({
+                            $(info.el).append('&nbsp;').append(appealaddb);
+                            $(appealaddb).css({
                                 position: 'relative',
                                 top: '-35px',
-                                'z-index': '999',   
+                                'z-index': '999',
                                 });
-                         }
-                         else if (info.date.getDay() === 0 &&  !isSameDate) {
+                            // $(info.el).append('&nbsp;').append(viewappealb);
+                            //     $(viewappealb).css({
+                            //         position: 'relative',
+                            //         top: '-35px',
+                            //         'z-index': '999',
+                            //       });
+
+                            } else if ((current.getDate() === oneDayBefore.getDate() || current.getDate() === twoDayBefore.getDate()) && hasLog && appliedDates.includes(datedefaultformat) ){
+                                $(info.el).css('background-color', '#FF8080');
+                                $(info.el).append('&nbsp;').append(viewappealb);
+                                    $(viewappealb).css({
+                                        position: 'relative',
+                                        top: '-35px',
+                                        'z-index': '999',
+                                      });
+                            }else if (appliedDates.includes(datedefaultformat) && current.getFullYear() === info.date.getFullYear() && current.getMonth() === info.date.getMonth()) {
+
+
+                                $(info.el).css('background-color', '#FF8080');
+
+                                $(info.el).append('&nbsp;').append(viewappealb);
+                                $(viewappealb).css({
+                                    position: 'relative',
+                                    top: '-35px',
+                                    'z-index': '999',
+                                  });
+
+                            }else {
+                                if (current.getDate() === currentdate.getDate()) {
+                                    $(info.el).css('background-color', '#FF8080');
+                                }
+                                else {
+                            $(info.el).css('background-color', '#FF8080');
+                            $(info.el).append('&nbsp;').append(appealaddb);
+                            $(appealaddb).css({
+                                position: 'relative',
+                                top: '-35px',
+                                'z-index': '999',
+                              });
+                                }
+    
+
+                        }
+                    } else if (info.date.getDay() === 0 &&  !isSameDate) {
                         $(info.el).css('background-color', '#B3CCFF');
                     } else if (info.date.getDay() === 6 && !isSameDate) {
                         $(info.el).css('background-color', '#B3CCFF');
@@ -2397,24 +2445,24 @@ $("#endeventdate").datepicker({
         $("#starttime").mdtimepicker({
             showMeridian: true,
         });
-
+    
         var now = new Date();
         var hours = now.getHours();
         var meridian = hours >= 12 ? "PM" : "AM";
         hours = hours % 12;
         hours = hours ? hours : 12; // convert 0 to 12
         var minutes = now.getMinutes();
-
+    
         if (minutes < 10) {
             minutes = "0" + minutes;
         }
-
+    
         $("#starttime").val(hours + ":" + minutes + " " + meridian);
-
+    
         $("#endtime").mdtimepicker({
             showMeridian: true,
         });
-
+    
         var now = new Date();
         now.setHours(now.getHours() + 1);
         var hours = now.getHours();
@@ -2426,27 +2474,44 @@ $("#endeventdate").datepicker({
             minutes = "0" + minutes;
         }
         $("#endtime").val(hours + ":" + minutes + " " + meridian);
-
+    
         $("#daystart,#dayend")
             .datepicker({
                 format: "yyyy/mm/dd",
             })
             .datepicker("setDate", "now");
-
+    
         $("#daystartedit,#dayendedit")
             .datepicker({
                 format: "yyyy/mm/dd",
             })
             .datepicker("setDate", "now");
-
+    
         $("#starteventtime,#endeventtime").mdtimepicker({});
-        // $("#starteventtime").timepicker({
-        //     showMeridian: false,
-        // });
-        // $("#endeventtime").timepicker({
-        //     showMeridian: false,
-        // });
+    
+        $("#logduration,#daystart,#dayend,#starttime,#endtime").change(function () {
+            var startTime = moment($("#starttime").val(), "hh:mm A");
+            var endTime = moment($("#endtime").val(), "hh:mm A");
+        
+            if (endTime.isBefore(startTime)) {
+                Swal.fire({
+                    icon: "error",
+                    title: "Invalid Time Range",
+                    text: "End time cannot be before the start time.",
+                }).then(() => {
+                    // Calculate 1 hour after the start time
+                    // var newEndTime = moment(startTime).add(1, 'hour');
+                    // $("#endtime").val(newEndTime.format("hh:mm A")); // Set end time to 1 hour after start time
+                    $("#endtime").val("");
+                    $("#endtime").attr("placeholder", "Please put new end time");
+                    // Close the time picker
+                    $("#endtime").mdtimepicker("toggle");
+                });
+            }
+        });
+        
     });
+    
 
     // $(document).on('change', "#typeoflog", function() {
     //     if ($(this).val() == "1") {
