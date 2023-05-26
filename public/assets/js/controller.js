@@ -105,6 +105,9 @@ requirejs.config({
         eleaveholidayJs: assets + "/js/eleaveholidayJs",
         eleavetypesJs: assets + "/js/eleavetypesJs",
 
+        // Anual leave
+        anualLeaveJs: assets + "/js/anualLeaveJs",
+
         // myleave
         myleaveJs: assets + "/js/myleaveJs",
         leaveApprJs: assets + "/js/leaveApprJs",
@@ -350,6 +353,10 @@ if ($("#monthlyClaimJs").length > 0) {
 
 if ($("#eleaveentitlementJs").length > 0) {
     requirejs(["eleaveentitlementJs"]);
+}
+
+if ($("#anualLeaveJs").length > 0) {
+    requirejs(["anualLeaveJs"]);
 }
 
 if ($("#eleaveholidayJs").length > 0) {
