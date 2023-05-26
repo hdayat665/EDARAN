@@ -134,12 +134,13 @@
 						<th class="text-nowrap">Location</th>
 						<th class="text-nowrap">Description</th>
 						<th class="text-nowrap">Participant</th>
+						<th class="text-nowrap">Created By</th>
 					</tr>
 					</thead>
 					<tbody>
 					<?php $id = 0 ?>
-						@if ($events['events'])
-							@foreach ($events['events'] as $event)
+					@if ($events)
+                                    @foreach ($events as $event)
 							<?php $id++ ?>
 								<tr class="odd gradeX">
 									<td>{{$id }}</td>
@@ -155,6 +156,7 @@
 									<td style="text-align: center" width="7%"><a class="btn btn-primary" href="javascript:;" data-bs-toggle="modal"
 											{{-- data-id="{{ $event->id }}" id="buttonnViewParticipant"></i> ({{ count($names) }}) view</a></td> --}}
 											data-id="{{ $event->id }}" id="buttonnViewParticipant"></i> view</a></td>
+									<td> {{ $event->employeeName ?? '-' }}</td>
 								</tr>
 							@endforeach
 						@endif

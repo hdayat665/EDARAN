@@ -33,13 +33,23 @@ class DashboardService
 
     public function eventView()
     {
-        $data['events'] = TimesheetEvent::where('tenant_id', Auth::user()->tenant_id)->orderBy('start_date', 'asc')->get();
-        
-        if (!$data) {
-            $data = [];
-        }
+        // $data['events'] = TimesheetEvent::where('tenant_id', Auth::user()->tenant_id)
+        //             ->leftJoin('employment as b', 'a.user_id', '=', 'b.user_id')
+        //             ->select('a.*', 'b.employeeName')
+        //             ->orderBy('start_date', 'asc')->get();
 
-        return $data;
+                    
+
+                    $data = DB::table('timesheet_event as a')
+                    ->leftJoin('employment as b', 'a.user_id', '=', 'b.user_id')
+                    ->select('a.*', 'b.employeeName')
+                    ->orderBy('a.start_date', 'asc')
+                    ->get();
+
+                    // pr($data);
+                    return $data;
+        
+       
     }
 
     public function myProject()
