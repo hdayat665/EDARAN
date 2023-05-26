@@ -1,7 +1,22 @@
 <head>
-    <link rel="stylesheet" type="text/css" href="assets/css/customaddresstableeditemployee.css">
 </head>
+<style>
+    #employeeAddress th:first-child,
+#employeeAddress td:first-child {
+    width: 0% !important;
 
+}
+#employeeAddress th:nth-child(2),
+#employeeAddress td:nth-child(2) {
+    width: 14%  !important;
+}
+#employeeAddress th:nth-child(3),
+#employeeAddress td:nth-child(3) {
+    width: 53% !important;
+}
+
+    
+    </style>
 <div class="tab-pane fade" id="default-tab-3">
     <div class="row p-2">
         <button data-bs-toggle="modal" data-bs-target="#modaladdaddress" class="btn btn-primary col-sm-2"><i class="fa fa-plus"></i> New Address</button>
