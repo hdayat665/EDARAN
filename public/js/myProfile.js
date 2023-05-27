@@ -122,6 +122,22 @@ $(document).ready(function () {
         $("#passportcountrymyprofile").val("");
     }
 
+    // if ($("#passportparentedit").val() !== "") {
+    //     // Enable expiration date and passport country fields
+    //     $("#expiryDateParentEdit").prop("disabled", false);
+    //     $("#expiryDateParentEdit").css("pointer-events", "auto");
+    //     $("#issuingCountryParentEdit").prop("disabled", false);
+    //     $("#issuingCountryParentEdit").css("pointer-events", "auto");
+
+    // } else {
+
+    //     $("#expiryDateParentEdit").prop("disabled", true);
+    //     $("#expiryDateParentEdit").css("pointer-events", "none");
+    //     $("#issuingCountryParentEdit").prop("disabled", true);
+    //     $("#issuingCountryParentEdit").css("pointer-events", "none");
+    // }
+
+
     if ($("#passportUpdateCompanion").val() !== "") {
         // Enable expiration date and passport country fields
         $("#expiryDateUpdateCompanion").prop("disabled", false);
@@ -229,6 +245,24 @@ $(document).ready(function () {
             $("#passportcountrymyprofile").prop("disabled", true);
             $("#passportcountrymyprofile").css("pointer-events", "none");
             $("#passportcountrymyprofile").val("");
+        }
+    });
+
+    $("#passportparentedit").change(function () {
+        if ($("#passportparentedit").val() !== "") {
+            // Enable expiration date and passport country fields
+            $("#expiryDateParentEdit").prop("disabled", false);
+            $("#expiryDateParentEdit").css("pointer-events", "auto");
+            $("#issuingCountryParentEdit").prop("disabled", false);
+            $("#issuingCountryParentEdit").css("pointer-events", "auto");
+        } else {
+            // Disable expiration date and passport country fields
+            $("#expiryDateParentEdit").prop("disabled", true);
+            $("#expiryDateParentEdit").css("pointer-events", "none");
+            $("#expiryDateParentEdit").val("");
+            $("#issuingCountryParentEdit").prop("disabled", true);
+            $("#issuingCountryParentEdit").css("pointer-events", "none");
+            $("#issuingCountryParentEdit").val("");
         }
     });
 
@@ -660,7 +694,7 @@ $(document).ready(function () {
                     rangelength: [10, 11],
                 },
                 oldIDNo: {
-                    digits: true,
+                    //digits: true,
                     rangelength: [7, 7],
                 },
                 homeNo: {
@@ -701,7 +735,7 @@ $(document).ready(function () {
                     rangelength: "Please Insert Valid Identification Number",
                 },
                 oldIDNo: {
-                    digits: "Please Insert Correct Identification Number Without ' - ' or Space",
+                    //digits: "Please Insert Correct Identification Number Without ' - ' or Space",
                     rangelength: "Please Insert Valid Identification Number",
                 },
                 phoneNo: {
@@ -1957,7 +1991,7 @@ $(document).ready(function () {
                     rangelength: [12, 12],
                 },
                 oldIDNo: {
-                    digits: true,
+                    //digits: true,
                     rangelength: [7, 7],
                 },
                 contactNo: {
@@ -2010,7 +2044,7 @@ $(document).ready(function () {
                     rangelength: "Please insert Valid Identification Number",
                 },
                 oldIDNo: {
-                    digits: "Please Insert Correct Identification Number Without ' - ' or Space",
+                    //digits: "Please Insert Correct Identification Number Without ' - ' or Space",
                     rangelength: "Please Insert Valid Identification Number",
                 },
                 contactNo: {
@@ -2138,7 +2172,7 @@ $(document).ready(function () {
                         rangelength: [12, 12],
                     },
                     oldIDNo: {
-                        digits: true,
+                        //digits: true,
                         rangelength: [7, 7],
                     },
                     contactNo: {
@@ -2192,7 +2226,7 @@ $(document).ready(function () {
                             "Please insert Valid Identification Number",
                     },
                     oldIDNo: {
-                        digits: "Please Insert Correct Identification Number Without ' - ' or Space",
+                        //digits: "Please Insert Correct Identification Number Without ' - ' or Space",
                         rangelength:
                             "Please Insert Valid Identification Number",
                     },
@@ -2649,6 +2683,11 @@ $(document).ready(function () {
         format: "yyyy/mm/dd",
         autoclose: true,
     });
+    $("#expiryDateParentEdit").datepicker({
+        todayHighlight: true,
+        format: "yyyy/mm/dd",
+        autoclose: true,
+    });
 
     // add children
     $("#addChildren").click(function (e) {
@@ -2667,7 +2706,7 @@ $(document).ready(function () {
                     rangelength: [12, 12],
                 },
                 oldIDNo: {
-                    digits: true,
+                    //digits: true,
                     rangelength: [7, 7],
                 },
 
@@ -2705,7 +2744,7 @@ $(document).ready(function () {
                     rangelength: "Please Insert Valid Identification Number",
                 },
                 oldIDNo: {
-                    digits: "Please Insert Correct Identification Number Without ' - ' or Space",
+                    //digits: "Please Insert Correct Identification Number Without ' - ' or Space",
                     rangelength: "Please Insert Valid Identification Number",
                 },
 
@@ -2818,7 +2857,7 @@ $(document).ready(function () {
                     rangelength: [12, 12],
                 },
                 oldIDNo: {
-                    digits: true,
+                    //digits: true,
                     rangelength: [7, 7],
                 },
 
@@ -2856,7 +2895,7 @@ $(document).ready(function () {
                     rangelength: "Please Insert Valid Identification Number",
                 },
                 oldIDNo: {
-                    digits: "Please Insert Correct Identification Number Without ' - ' or Space",
+                    //digits: "Please Insert Correct Identification Number Without ' - ' or Space",
                     rangelength: "Please Insert Valid Identification Number",
                 },
 
@@ -3537,7 +3576,7 @@ $(document).ready(function () {
                     rangelength: [12, 12],
                 },
                 oldIDNo: {
-                    digits: true,
+                    //digits: true,
                     rangelength: [7, 7],
                 },
                 contactNo: {
@@ -3591,7 +3630,7 @@ $(document).ready(function () {
                     rangelength: "Please Insert Valid Identification Number",
                 },
                 oldIDNo: {
-                    digits: "Please Insert Correct Identification Number Without ' - ' or Space",
+                    //digits: "Please Insert Correct Identification Number Without ' - ' or Space",
                     rangelength: "Please Insert Valid Identification Number",
                 },
                 contactNo: {
@@ -3692,74 +3731,181 @@ $(document).ready(function () {
     });
 
     $("#editParent").click(function (e) {
-        // requirejs(['sweetAlert2'], function(swal) {
-        Swal.fire({
-            allowOutsideClick: false,
-            showCancelButton: true,
-            cancelButtonColor: "#d33",
-            confirmButtonColor: "#3085d6",
-            title: "Declaration.",
-            icon: "info",
-            html:
-                '<h5> <input type="checkbox" class="form-check-input" name="t11" id="t1"  />  I hereby certify the above information as provided by me is true and correct. I also undertake to keep the Company informed of any changes covering such information of my personal details as and when it occurs. If any information given above is subsequently found to be incorrect or incomplete or untrue, the Company may terminate my employment without notice or compensation.</h5><br>' +
-                '<h5> <input type="checkbox" class="form-check-input" name="t22" id="t2"  />  I hereby state that I may be liable to summary dismissal if any of the particulars has been misrepresented or omitted. I acknowledge that the Company has the right to recover any salaries and monetary benefits paid out to me during the course of my employment in the event of any misrepresentation or omission on my personal data.</h5><br>' +
-                '<h5> <input type="checkbox" class="form-check-input" name="t33" id="t3"  />  I hereby give consent for Company to process and keep my personal data for employment purposes.</h5>',
-            confirmButtonText: "Yes",
+        $("#editParentForm").validate({
+            // Specify validation rules
+            rules: {
+                firstName: {
+                    required: true,
+                },
+                lastName: {
+                    required: true,
+                },
+                DOB: "required",
+                age: "required",
+                relationship: "required",
+                address1: "required",
+                postcode: {
+                    required: true,
+                    digits: true,
+                    rangelength: [5, 5],
+                },
+                city: "required",
+                state: "required",
+                country: "required",
+                idNo: {
+                    required: true,
+                    digits: true,
+                    rangelength: [12, 12],
+                },
+                oldIDNo: {
+                    //digits: true,
+                    rangelength: [7, 7],
+                },
+                contactNo: {
+                    digits: true,
+                    rangelength: [10, 11],
+                },
+                expiryDate: {
+                    required: true,
+                },
+                issuingCountry: {
+                   required: true,
+                },
 
-            preConfirm: () => {
-                if (
-                    !$("#t1").prop("checked") ||
-                    !$("#t2").prop("checked") ||
-                    !$("#t3").prop("checked")
-                ) {
-                    Swal.showValidationMessage(
-                        '<i class="fa fa-info-circle"></i> Please check all term to proceed'
-                    );
-                } else if (
-                    $("#t1").prop("checked") ||
-                    $("#t2").prop("checked") ||
-                    $("#t3").prop("checked")
-                ) {
-                    var data = new FormData(
-                        document.getElementById("editParentForm")
-                    );
+                okuNo: {
+                    required: true,
+                     digits: true,
+                     rangelength: [10, 11],
+                 },
 
-                    $.ajax({
-                        type: "POST",
-                        url: "/updateParent",
-                        data: data,
-                        dataType: "json",
-
-                        processData: false,
-                        contentType: false,
-                    }).then(function (data) {
-                        console.log(data);
-                        Swal.fire({
-                            title: data.title,
-                            icon: "success",
-                            text: data.msg,
-                            type: data.type,
-                            confirmButtonColor: "#3085d6",
-                            confirmButtonText: "OK",
-                            allowOutsideClick: false,
-                            allowEscapeKey: false,
-                        }).then(function () {
-                            if (data.type == "error") {
-                            } else {
-                                location.reload();
-                                // window.location.href = "/myProfile";
-                            }
-                        });
-                    });
-                } else {
-                    Swal.showValidationMessage(
-                        '<i class="fa fa-info-circle"></i> error'
-                    );
-                }
+                okuFile: {
+                     required: false,
+                },
             },
-        }).then((result) => {});
 
-        // });
+            messages: {
+                firstName: {
+                    required: "Please Insert First Name",
+                },
+                lastName: {
+                    required: "Please Insert Last Name",
+                },
+                DOB: "Please Insert Date Of Birth",
+                age: "Please Insert Age",
+                relationship: "Please Choose Relationship",
+                address1: "Please Insert Address 1",
+                postcode: {
+                    required: "Please Insert Postcode",
+                    digits: "Please Insert Valid Postcode",
+                    rangelength: "Please Insert Valid Postcode",
+                },
+                city: "Please Insert City",
+                state: "Please Choose State",
+                country: "Please Choose Country",
+                idNo: {
+                    required: "Please Insert New Identification Number",
+                    digits: "Please Insert Correct Identification Number Without ' - ' or Space",
+                    rangelength: "Please Insert Valid Identification Number",
+                },
+                oldIDNo: {
+                    //digits: "Please Insert Correct Identification Number Without ' - ' or Space",
+                    rangelength: "Please Insert Valid Identification Number",
+                },
+                contactNo: {
+                    required: "Please Insert Contact Number",
+                    digits: "Please Insert Valid Contact Number",
+
+                    rangelength: [10, 11],
+                },
+                expiryDate: {
+                    required: "Please Insert Expiry Date",
+                },
+                issuingCountry: {
+                    required: "Please Insert Issuing Country",
+                },
+
+                okuNo: {
+                    required: "Please Insert OKU Card Number",
+                    rangelength: "Please Inset OKU Card Number",
+                },
+
+                okuFile: {
+                    required: "Please Insert OKU Attachment",
+                },
+            },
+
+            submitHandler: function (form) {
+                // requirejs(['sweetAlert2'], function(swal,swal1) {
+
+                Swal.fire({
+                    allowOutsideClick: false,
+                    showCancelButton: true,
+                    cancelButtonColor: "#d33",
+                    confirmButtonColor: "#3085d6",
+                    title: "Declaration.",
+                    icon: "info",
+                    html:
+                        '<h5> <input type="checkbox" class="form-check-input" name="t11" id="t1"  />  I hereby certify the above information as provided by me is true and correct. I also undertake to keep the Company informed of any changes covering such information of my personal details as and when it occurs. If any information given above is subsequently found to be incorrect or incomplete or untrue, the Company may terminate my employment without notice or compensation.</h5><br>' +
+                        '<h5> <input type="checkbox" class="form-check-input" name="t22" id="t2"  />  I hereby state that I may be liable to summary dismissal if any of the particulars has been misrepresented or omitted. I acknowledge that the Company has the right to recover any salaries and monetary benefits paid out to me during the course of my employment in the event of any misrepresentation or omission on my personal data.</h5><br>' +
+                        '<h5> <input type="checkbox" class="form-check-input" name="t33" id="t3"  />  I hereby give consent for Company to process and keep my personal data for employment purposes.</h5>',
+                    confirmButtonText: "Yes",
+
+                    preConfirm: () => {
+                        if (
+                            !$("#t1").prop("checked") ||
+                            !$("#t2").prop("checked") ||
+                            !$("#t3").prop("checked")
+                        ) {
+                            Swal.showValidationMessage(
+                                '<i class="fa fa-info-circle"></i> Please check all term to proceed'
+                            );
+                        } else if (
+                            $("#t1").prop("checked") ||
+                            $("#t2").prop("checked") ||
+                            $("#t3").prop("checked")
+                        ) {
+                            var data = new FormData(
+                                document.getElementById("editParentForm")
+                            );
+
+                            $.ajax({
+                                type: "POST",
+                                url: "/updateParent",
+                                data: data,
+                                dataType: "json",
+
+                                processData: false,
+                                contentType: false,
+                            }).then(function (data) {
+                                console.log(data);
+                                Swal.fire({
+                                    title: data.title,
+                                    icon: "success",
+                                    text: data.msg,
+                                    type: data.type,
+                                    confirmButtonColor: "#3085d6",
+                                    confirmButtonText: "OK",
+                                    allowOutsideClick: false,
+                                    allowEscapeKey: false,
+                                }).then(function () {
+                                    if (data.type == "error") {
+                                    } else {
+                                        location.reload();
+                                        // window.location.href = "/myProfile";
+                                    }
+                                });
+                            });
+                        } else {
+                            Swal.showValidationMessage(
+                                '<i class="fa fa-info-circle"></i> error'
+                            );
+                        }
+                    },
+                }).then((result) => {});
+
+                // });
+            },
+        });
     });
 
     parentId = $("#parentId").val();
@@ -3769,14 +3915,30 @@ $(document).ready(function () {
     for (let i = 0; i < parentIds.length; i++) {
         const type = parentIds[i];
         $("#parentModalEdit" + type).click(function (e) {
-            $("input").prop("disabled", false);
-            $("select").prop("disabled", false);
+            // $("input").prop("disabled", false);
+            // $("select").prop("disabled", false);
+
+            if ($("#passportparentedit").val() == "") {
+                // Enable expiration date and passport country fields
+                $("#expiryDateParentEdit").prop("disabled", false);
+                $("#expiryDateParentEdit").css("pointer-events", "auto");
+                $("#issuingCountryParentEdit").prop("disabled", false);
+                $("#issuingCountryParentEdit").css("pointer-events", "auto");
+        
+            } else {
+        
+                $("#expiryDateParentEdit").prop("disabled", true);
+                $("#expiryDateParentEdit").css("pointer-events", "none");
+                $("#issuingCountryParentEdit").prop("disabled", true);
+                $("#issuingCountryParentEdit").css("pointer-events", "none");
+            }
+
             id = $(this).data("id");
             var ParentData = getParent(id);
 
             ParentData.then(function (data) {
-                console.log(data.data);
                 parent = data.data;
+                console.log(parent);
                 $("#DOBP1").val(parent.DOB);
                 $("#idP").val(parent.id);
                 $("#address2P1").val(parent.address2);
@@ -3786,13 +3948,15 @@ $(document).ready(function () {
                 $("#countryP1").val(parent.country);
                 $("#contactNoP1").val(parent.contactNo);
                 $("#passportparentedit").val(parent.passport);
-
+                $("#expiryDateParentEdit").val(parent.expiryDate);
+                $("#issuingCountryParentEdit").val(parent.issuingCountry);
                 $("#genderP1").val(parent.gender);
                 $("#firstNamesP1").val(parent.firstName);
                 $("#postcodeP1").val(parent.postcode);
                 $("#lastNamesP1").val(parent.lastName);
                 $("#fullNameP1").val(parent.fullName);
                 $("#idNoP1").val(parent.idNo);
+                $("#oldIDNoP1").val(parent.oldIDNo);
                 $("#relationshipP1").val(parent.relationship);
                 if (parent.nonCitizen == "on") {
                     $("#nonCitizenP1").prop("checked", true);
@@ -4818,27 +4982,23 @@ $("#passportUpdateCompanion").change(function () {
 //ADD FAMILY DETAILS
 $(".partCheck8").click(function () {
     if ($(this).prop("checked")) {
-        $("#idNoaddFamily").prop("readonly", true);
-        $("#dob6").prop("readonly", false);
+        $("#idNoaddFamily").prop("disabled", true);
+        $("#dob6").val("").prop("readonly", false);
         $("#dob6").css("pointer-events", "auto");
         $("#idNoaddFamily").val("");
-
-
-        $("#passportcountryparent").prop("disabled", false);
-        $("#passportcountryparent").prop("readonly", false);
+        // $("#passportcountryparent").prop("disabled", false);
+        // $("#passportcountryparent").prop("readonly", false);
+        $("#age6").val("").prop("readonly", false);
     } else {
-        $("#idNoaddFamily").prop("readonly", false);
-        $("#dob6").prop("readonly", true);
+        $("#idNoaddFamily").prop("disabled", false);
+        $("#dob6").val("").prop("readonly", true);
         $("#dob6").css("pointer-events", "none");
-
         $("#passportParent").val("");
-
-
-
         $("#passportcountryparent").prop("disabled", true);
-        $("#passportcountryparent").val("");
-        $("#passportcountryparent").prop("readonly", true);
-        $("#passportcountryparent").css("pointer-events", "none");
+        // $("#passportcountryparent").val("");
+        // $("#passportcountryparent").prop("readonly", true);
+        // $("#passportcountryparent").css("pointer-events", "none");
+        $("#age6").prop("readonly", true);
     }
 });
 
