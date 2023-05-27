@@ -2347,8 +2347,28 @@ public function updateTypeOfLogs($r, $id)
 
     public function leavetypesView()
     {
+        $tenant = Auth::user()->tenant_id;
+        $input = [
+            [$tenant, '1', 'AL', 'ANNUAL LEAVE'],
+            [$tenant, '1', 'SL', 'SICK LEAVE'],
+            [$tenant, '1', 'HL', 'HOSPITALIZATION']
+        ];
 
-        $data['types'] = leavetypesModel::where('tenant_id', Auth::user()->tenant_id)->orderBy('id', 'desc')->get();
+        foreach ($input as $data) {
+            $record = leavetypesModel::updateOrCreate(
+                [
+                    'leave_types_code' => $data[2],
+                    'leave_types' => $data[3],
+                    'tenant_id' => $data[0]
+                ],
+                [
+                    'status' => $data[1]
+                ]
+            );
+        }
+
+
+        $data['types'] = leavetypesModel::where('tenant_id', Auth::user()->tenant_id)->orderBy('id', 'ASC')->get();
 
         return $data;
     }
@@ -2362,6 +2382,16 @@ public function updateTypeOfLogs($r, $id)
         $etData = leavetypesModel::where([['leave_types_code', $input['leave_types_code']], ['tenant_id', Auth::user()->tenant_id]])->first();
         if ($etData) {
             $data['msg'] = 'Leave type code already exists';
+            $data['status'] = config('app.response.error.status');
+            $data['type'] = config('app.response.error.type');
+            $data['title'] = config('app.response.error.title');
+
+            return $data;
+        }
+
+        $etData = leavetypesModel::where([['leave_types', $input['leave_types']], ['tenant_id', Auth::user()->tenant_id]])->first();
+        if ($etData) {
+            $data['msg'] = 'Leave type already exists';
             $data['status'] = config('app.response.error.status');
             $data['type'] = config('app.response.error.type');
             $data['title'] = config('app.response.error.title');
@@ -2406,39 +2436,82 @@ public function updateTypeOfLogs($r, $id)
     public function updateLeaveleavetypes($r, $id)
     {
         $input = $r->input();
+        $existingLeaveType = leavetypesModel::where('id', $id)
+        ->where('tenant_id', '=', Auth::user()->tenant_id)
+        ->first();
 
-        date_default_timezone_set("Asia/Kuala_Lumpur");
         $data1 = strtoupper($input['leavetypescode']);
         $data2 = strtoupper($input['leavetypes']);
         $data3 = $input['day'];
 
-        $input = [
-            'leave_types_code' => $data1,
-            'leave_types' => $data2,
-            'day' => $data3,
-        ];
+        if ($existingLeaveType->leave_types_code === $data1 && $existingLeaveType->leave_types === $data2) {
+            $existingLeaveType->day = $data3;
+            $existingLeaveType->save();
 
-        leavetypesModel::where('id', $id)->update($input);
+            $data['status'] = config('app.response.success.status');
+            $data['type'] = config('app.response.success.type');
+            $data['title'] = config('app.response.success.title');
+            $data['msg'] = 'Leave type day updated successfully.';
+            return $data;
+        } else {
 
-        $data['status'] = config('app.response.success.status');
-        $data['type'] = config('app.response.success.type');
-        $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Successfully update leave type';
+            $check = [
+                ['AL', 'ANNUAL LEAVE'],
+                ['SL', 'SICK LEAVE'],
+                ['HL', 'HOSPITALIZATION']
+            ];
 
-        return $data;
+            foreach ($check as $row) {
+                if ($existingLeaveType->leave_types_code === $row[0] && $existingLeaveType->leave_types === $row[1]) {
+                    $data['status'] = config('app.response.error.status');
+                    $data['type'] = config('app.response.error.type');
+                    $data['title'] = config('app.response.error.title');
+                    $data['msg'] = 'Cannot update leave type code and leave type.';
+                    return $data;
+                }
+            }
+
+            $existingLeaveType->leave_types_code = $data1;
+            $existingLeaveType->leave_types = $data2;
+            $existingLeaveType->day = $data3;
+            $existingLeaveType->save();
+
+            $data['status'] = config('app.response.success.status');
+            $data['type'] = config('app.response.success.type');
+            $data['title'] = config('app.response.success.title');
+            $data['msg'] = 'Leave type updated successfully.';
+            return $data;
+        }
     }
 
     public function deleteLeavetypes($id)
     {
-        $logs = leavetypesModel::find($id);
+        $existingLeaveType = leavetypesModel::where('id', $id)
+        ->where('tenant_id', '=', Auth::user()->tenant_id)
+        ->first();
 
-        if (!$logs) {
+        $check = [
+            ['AL', 'ANNUAL LEAVE'],
+            ['SL', 'SICK LEAVE'],
+            ['HL', 'HOSPITALIZATION']
+        ];
+
+        $matchFound = false;
+
+        foreach ($check as $row) {
+            if ($existingLeaveType->leave_types_code === $row[0] && $existingLeaveType->leave_types === $row[1]) {
+                $matchFound = true;
+                break;
+            }
+        }
+
+        if ($matchFound) {
             $data['status'] = config('app.response.error.status');
             $data['type'] = config('app.response.error.type');
             $data['title'] = config('app.response.error.title');
-            $data['msg'] = 'Leave type not found';
+            $data['msg'] = 'Cannot Delete leave type code and leave type.';
         } else {
-            $logs->delete();
+            $existingLeaveType->delete();
 
             $data['status'] = config('app.response.success.status');
             $data['type'] = config('app.response.success.type');
@@ -2447,6 +2520,8 @@ public function updateTypeOfLogs($r, $id)
         }
 
         return $data;
+
+
     }
 
     public function updateStatusleavetypes($id, $status)
@@ -2726,6 +2801,26 @@ public function updateTypeOfLogs($r, $id)
 
     public function leaveAnnualView()
     {
+
+        $tenant = Auth::user()->tenant_id;
+
+        $getJobgrade = JobGrade::select('jobgrade.*')
+        ->where('jobgrade.tenant_id', Auth::user()->tenant_id)
+        ->orderBy('id', 'asc')->get();
+
+        foreach ($getJobgrade as $data) {
+
+            $record = leaveAnualLeaveModel::updateOrCreate(
+                [
+                    'tenant_id' => $tenant,
+                    'jobgrade_id' => $data->id,
+                ],
+                [
+
+                ]
+            );
+        }
+
         $data =
         leaveAnualLeaveModel::select('leave_anualleave.*','jobgrade.jobGradeName')
             ->where('leave_anualleave.tenant_id', Auth::user()->tenant_id)
@@ -2735,6 +2830,29 @@ public function updateTypeOfLogs($r, $id)
     }
     public function sickLeaveView()
     {
+        $tenant = Auth::user()->tenant_id;
+
+        $getTypeSick = leavetypesModel::select('leave_types.*')
+            ->where('leave_types.tenant_id', '=',Auth::user()->tenant_id)
+            ->where(function ($query) {
+                $query->where('leave_types.leave_types_code', '=','SL')
+                    ->orWhere('leave_types.leave_types_code', '=','HL');
+            })
+            ->orderBy('id', 'asc')->get();
+
+        foreach ($getTypeSick as $data) {
+
+            $record = leaveSicKleaveModel::updateOrCreate(
+                [
+                    'tenant_id' => $tenant,
+                    'type_sickleave' => $data->id,
+                ],
+                [
+
+                ]
+            );
+        }
+
         $data =
         leaveSicKleaveModel::select('leave_sickleave.*','leave_types.leave_types')
             ->leftJoin('leave_types', 'leave_sickleave.type_sickleave', '=', 'leave_types.id')
@@ -2744,6 +2862,22 @@ public function updateTypeOfLogs($r, $id)
     }
     public function carryForwardView()
     {
+        $tenant = Auth::user()->tenant_id;
+        $input = [
+            [$tenant, 'CARRY FORWARD'],
+        ];
+
+        foreach ($input as $data) {
+            $record = leaveCarryForwordModel::updateOrCreate(
+                [
+                    'tenant_id' => $data[0],
+                    'type_carryforward' => $data[1],
+                ],
+                [
+                ]
+            );
+        }
+
         $data =
         leaveCarryForwordModel::select('leave_carryforward.*')
             ->where('leave_carryforward.tenant_id', Auth::user()->tenant_id)
