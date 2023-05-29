@@ -17,6 +17,8 @@ use App\Models\holidayModel;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail as FacadesMail;
+// use App\Service\Carbon;
+use Carbon\Carbon;
 
 class MyTimeSheetService
 {
@@ -102,6 +104,11 @@ class MyTimeSheetService
     $s = $totaltime - ($m * 60);
     $input['total_hour'] = "$h:$m:$s";
 
+    if ($input['lunch_break'] == 1) {
+        $h -= 1;
+        $input['total_hour'] = "$h:$m:$s";
+    }
+
     $existingLogs = TimesheetLog::where('user_id', $user->id)
         ->where('date', $input['date'])
         ->where(function ($query) use ($startTime, $endTime) {
@@ -184,6 +191,8 @@ class MyTimeSheetService
         $h = intval($totaltime / 3600);
         $totaltime = $totaltime - ($h * 3600);
 
+       
+
         // Minutes is obtained by dividing
         // remaining total time with 60
         $m = intval($totaltime / 60);
@@ -193,6 +202,11 @@ class MyTimeSheetService
 
         // Printing the result
         $input['total_hour'] = "$h:$m:$s";
+        
+        if ($input['lunch_break'] == 1) {
+            $h -= 1;
+            $input['total_hour'] = "$h:$m:$s";
+        }
 
         $existingLogs = TimesheetLog::where('user_id', $user->id)
     ->where('date', $input['date'])
@@ -747,6 +761,56 @@ if ($existingLogs->isNotEmpty()) {
 
         return $data;
     }
+
+    public function timesheetSummaryViewday()
+    {
+        $user = Auth::user();
+        $currentMonth = Carbon::now()->month;
+        $currentYear = Carbon::now()->year;
+        $totalDays = Carbon::createFromDate($currentYear, $currentMonth)->daysInMonth;
+        $weekdays = 0;
+        $weekends = 0;
+        $holidays = 0;
+        $workedDays = 0;
+    
+        $startOfMonth = Carbon::createFromDate($currentYear, $currentMonth, 1)->startOfDay();
+        $endOfMonth = Carbon::createFromDate($currentYear, $currentMonth, $totalDays)->endOfDay();
+    
+        $holidays = holidayModel::where('start_date', '>=', $startOfMonth)
+                                ->where('end_date', '<=', $endOfMonth)
+                                ->count();
+    
+        for ($day = 1; $day <= $totalDays; $day++) {
+            $date = Carbon::create($currentYear, $currentMonth, $day);
+            if ($date->isWeekend()) {
+                $weekends++;
+            } else {
+                $weekdays++;
+            }
+        }
+    
+        $workedDays = TimesheetLog::where('user_id', $user->id)
+                                ->where('date', '>=', $startOfMonth)
+                                ->where('date', '<=', $endOfMonth)
+                                ->distinct('date')
+                                ->pluck('date')
+                                ->count();
+    
+        $workingDays = $weekdays - $holidays;
+
+        $remaininingtsr = $workingDays - $workedDays;
+    
+        return [
+            'totalDays' => $totalDays,
+            'weekdays' => $weekdays,
+            'weekends' => $weekends,
+            'holidays' => $holidays,
+            'workedDays' => $workedDays,
+            'workingDays' => $workingDays,
+            'remaininingtsr' => $remaininingtsr,
+        ];
+    }
+    
     public function deleteTimesheet($id)
     {
         $timesheetApproval = TimesheetApproval::find($id);

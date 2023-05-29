@@ -369,7 +369,7 @@
                             <label for="firstname" class="form-label">Participant*</label>
                             <select class="selectpicker form-select" name="participant[]" id="addneweventparticipant" aria-label="Default select example"   multiple>
                                 {{-- <option class="form-label" value="">PLEASE CHOOSE</option> --}}
-                                <?php $employees = getEmployee() ?>
+                                <?php $employees = getEmployeeactive() ?>
                                 @foreach ($employees as $employee)
                                 <option class="form-label" value="{{$employee->user_id}}">{{$employee->employeeName}}</option>
                                 @endforeach

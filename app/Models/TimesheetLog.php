@@ -32,6 +32,7 @@ class TimesheetLog extends Authenticatable
         'start_time',
         'end_time',
         'desc',
-        'total_hour'
+        'total_hour',
+        'lunch_break'
     ];
 }

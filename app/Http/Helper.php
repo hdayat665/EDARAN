@@ -1179,6 +1179,28 @@ if (!function_exists('getEmployee')) {
     }
 }
 
+if (!function_exists('getEmployeeactive')) {
+    function getEmployeeactive()
+    {
+        $data = Employee::where([
+            ['tenant_id', Auth::user()->tenant_id],
+            ['employeeid', '!=', null],
+            ['status', 'active'], // Add this line to check for "active" status
+        ])->orWhere([
+            ['tenant_id', Auth::user()->tenant_id],
+            ['employeeid', '!=', null],
+            ['status', 'Active'], // Add this line to check for "Active" status
+        ])->get();
+
+        if (!$data) {
+            $data = [];
+        }
+
+        return $data;
+    }
+}
+
+
 // if (!function_exists('getEmployee')) {
 //     function getEmployee()
 //     {
