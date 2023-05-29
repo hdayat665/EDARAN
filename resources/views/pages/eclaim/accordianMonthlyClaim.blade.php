@@ -263,6 +263,14 @@
                                 <input id="office" type="text" value="{{ getBranchFullAddress($user_id) ?? '-' }}"  class="form-control" name="">
                             </div>
                         </div>
+                        <div class="row p-2" style="display: none">
+                            <div class="col-md-4">
+                                <label class="form-label">home</label>
+                            </div>
+                            <div class="col-md-3">
+                                <input id="permanentAddress" type="text" value="{{ $address }}"  class="form-control" name="">
+                            </div>
+                        </div>
                         <div class="row p-2" id="projectdest" style="display: none">
                             <div class="col-md-4">
                                 <label class="form-label">Project</label>

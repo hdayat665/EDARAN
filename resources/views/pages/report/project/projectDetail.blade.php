@@ -5,7 +5,7 @@
     <div class="panel panel">
         <br>
         <div style="display: flex; justify-content: flex-end">
-            <button type="button" class="btn btn-inverse me-5 " onClick="window.print()">PRINT</button>
+            <button type="button" class="btn btn-inverse me-5 hide-on-print " onClick="window.print()">PRINT</button>
         </div>
         <div class="panel-body print-body">
             <h4 class="panel-title"> Project Information</h4>
@@ -100,6 +100,23 @@
                 .print-container{
                     page-break-before: always;
                 }
+                .hide-on-print {
+                    visibility: hidden;
+                }
+                #header {
+                    height: 50px;
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    right: 0; /* Adjust the value as needed */
+                }
+                /* Hide the navbar-nav when printing */
+                .navbar-nav {
+                    visibility: hidden;
+                }
+                .print-body{
+                    margin: 0.5cm;
+                }
             }
         </style>
 
@@ -146,7 +163,6 @@
                 </div>
             </div>
         </div>
-       
     </div>
 </div>
 @endsection

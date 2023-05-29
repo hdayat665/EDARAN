@@ -32,13 +32,11 @@ $(document).ready(function () {
         $("#addForm").validate({
             // Specify validation rules
             rules: {
-                employerName: "required",
-                lapsed: "required",
+                generatedate: "required",
             },
 
             messages: {
-                employerName: "Please select employer Name",
-                lapsed: "Please Insert lapsed date",
+                generatedate: "Please Insert Generate date",
             },
             submitHandler: function (form) {
                 requirejs(["sweetAlert2"], function (swal) {

@@ -240,18 +240,21 @@ class ProjectController extends Controller
     }
 
     public function projectViewAssignLocationView($id)
-    {
-        $data = [];
-        // pr($id);
-        $ps = new ProjectService;
-        // dd($id);
-        // die;
+{
+    $ps = new ProjectService;
+    
+    $data = $ps->projectViewAssignLocationView($id);
+    
+    // Get the project data using the ProjectService
+    $projectService = new ProjectService;
+    $project = $projectService->getProjectById($data['projectMember']->project_id);
+    
+    // Pass the project data to the $data array
+    $data['project'] = $project;
+    
+    return view('pages.project.projectViewAssignLocation', $data);
+}
 
-        $data = $ps->projectViewAssignLocationView($id);
-       
-        
-        return view('pages.project.projectViewAssignLocation', $data);
-    }
 
 
     public function projectAssignView($id)

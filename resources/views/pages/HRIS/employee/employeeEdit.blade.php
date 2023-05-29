@@ -281,7 +281,7 @@
                                                             <div class="row">
                         
                                                             <div class="col-sm-12">
-                                                                <label for="" class="form-label" >OKU Card Numbereditt*</label>
+                                                                <label for="" class="form-label" >OKU Card Number*</label>
                                                                 <input type="text" disabled value="{{$profile->okuCardNum ?? ''}}" name="okuCardNum" id="okucard" readonly class="form-control" placeholder="OKU CARD NUMBER">
                                                             </div>
                                                         </div>

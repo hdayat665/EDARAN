@@ -373,12 +373,17 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('/getEntitlementContent/{id}', 'getEntitlementContent');
             Route::get('/getAccomodation', 'getAccomodation');
 
-            // eleave Leave Entitlement
-            Route::get('/leaveAnnual', 'leaveAnnualView'); //LEAVE ENTITLEMENT ICON
-            Route::get('/leaveSick', 'leaveSickView');
-            Route::get('/leaveCarrForward', 'leaveCarrForwardView');
-            Route::get('/leaveUnpaid', 'leaveUnpaidView');
+            // eleave Anual leave
+            Route::get('/leaveAnnual', 'leaveAnnualView');
+            Route::post('/updateAnualLeave', 'updateAnualLeave');
+            Route::post('/updateSickLeave', 'updateSickLeave');
+            Route::post('/updateCarryForward', 'updateCarryForward');
 
+            // Route::get('/leaveSick', 'leaveSickView');
+            // Route::get('/leaveCarrForward', 'leaveCarrForwardView');
+            // Route::get('/leaveUnpaid', 'leaveUnpaidView');
+
+            // eleave Leave Entitlement
             Route::get('/leaveEntitlement', 'eleaveEntitlementView');
             Route::post('/createLeaveEntitlement', 'createLeaveEntitlement');
             Route::get('/getcreateLeaveEntitlement/{id}', 'getcreateLeaveEntitlement');
@@ -488,7 +493,7 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('/searchOvertimeReport', 'searchOvertimeReport');
             // Route::get('/getReportAllEmployee', 'getReportAllEmployee');
             Route::get('/getEmployeeNamebyDepartment/{id}', 'getEmployeeNamebyDepartment');
-            
+
         });
 
         Route::controller(EleaveReportController::class)->group(function () {
