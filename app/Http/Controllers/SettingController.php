@@ -967,9 +967,9 @@ class SettingController extends Controller
     }
 
     public function getAccomodation()
-    {   
+    {
         $mcs = new myClaimService;
-        
+
         $data['user_id'] = Auth::user()->id;
         $data['area'] = $mcs->getEntitlementAreaByJobGrade($data['user_id']);
 
@@ -1000,8 +1000,9 @@ class SettingController extends Controller
     {
         $ss = new SettingService;
 
-        $data['leave'] = $ss->leaveEntitlementView();
-        $data['nameStaff'] = $ss->leaveNameStaff();
+        $data['anualLeave'] = $ss->leaveAnnualView();
+        $data['sickleave'] = $ss->sickLeaveView();
+        $data['carryforward'] = $ss->carryForwardView();
 
         return view('pages.setting.eleave.leaveAnnual', $data);
     }
@@ -1040,6 +1041,9 @@ class SettingController extends Controller
 
         $result = $ss->createLeaveEntitlement($r);
 
+        // dd($result);
+        // die;
+
         return response()->json($result);
     }
 
@@ -1048,6 +1052,9 @@ class SettingController extends Controller
         $ss = new SettingService;
 
         $result = $ss->getcreateLeaveEntitlement($id);
+
+        // dd($result);
+        // die;
 
         return $result;
     }
@@ -1290,6 +1297,48 @@ class SettingController extends Controller
         $dlh = new SettingService;
 
         $result = $dlh->getPermissionByRoleId($id);
+
+        return response()->json($result);
+    }
+
+    public function updateAnualLeave(Request $r)
+    {
+        $input = $r->input();
+
+        // dd($input);
+        // die;
+
+        $ss = new SettingService;
+
+        $result = $ss->updateAnualLeave($r);
+
+        return response()->json($result);
+    }
+
+    public function updateSickLeave(Request $r)
+    {
+        $input = $r->input();
+
+        // dd($input);
+        // die;
+
+        $ss = new SettingService;
+
+        $result = $ss->updateSickLeave($r);
+
+        return response()->json($result);
+    }
+
+    public function updateCarryForward(Request $r)
+    {
+        $input = $r->input();
+
+        // dd($input);
+        // die;
+
+        $ss = new SettingService;
+
+        $result = $ss->updateCarryForward($r);
 
         return response()->json($result);
     }
