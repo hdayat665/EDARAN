@@ -59,23 +59,36 @@
                         
                     </div>
                     <div class="row p-2">
-                        <div class="col-sm-4">
+                        <div class="col-sm-6">
                             <label for="issuing-country" class="form-label">Start Time*</label>
                             {{-- <div class="input-group"> --}}
                                 <input id="starttime" type="text" name="start_time" class="form-control" placeholder="START TIME" style=" background: #ffffff;" />
                                 <!-- <div class="input-group-text"><i class="fa fa-clock"></i></div> -->
                             {{-- </div> --}}
                         </div>
-                        <div class="col-sm-4 ">
+                        <div class="col-sm-6 ">
                             <label for="issuing-country" class="form-label">End Time*</label>
                             {{-- <div class="input-group"> --}}
                                 <input id="endtime" type="text" name="end_time" class="form-control" placeholder="END TIME"  style=" background: #ffffff;"/>
                                 <!-- <div class="input-group-text"><i class="fa fa-clock"></i></div> -->
                             {{-- </div> --}}
                         </div>
-                        <div class="col-sm-4">
+                        {{-- <div class="col-sm-4">
+                           
+                        </div> --}}
+                    </div>
+                    <div class="row p-2">
+                        <div class="col-sm-6">
+                            <label for="Office-Log" class="form-label">Lunch Break</label>
+                                <select class="form-select" id="lunchBreak" name="lunch_break" aria-label="Default select example">
+                                    <option class="" value="">PLEASE CHOOSE</option>
+                                    <option class="" value="1">YES</option>
+                                    <option class="" value="2">NO</option>
+                                </select>
+                        </div>
+                        <div class="col-sm-6">
                             <label for="issuing-country" class="form-label">Total Hours</label>
-                            <input type="text" readonly id="logduration" name="total_hours" value="" name="" class="form-control" aria-describedby="dob">
+                            <input type="text" readonly id="logduration" name="total_hour" value="" name="" class="form-control" aria-describedby="dob">
                         </div>
                     </div>
                     

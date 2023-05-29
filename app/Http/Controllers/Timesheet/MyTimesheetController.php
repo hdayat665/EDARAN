@@ -226,6 +226,8 @@ class MyTimesheetController extends Controller
         $ss = new MyTimeSheetService;
 
         $data['timesheets'] = $ss->timesheetSummaryView();
+        $data['timesheetsday'] = $ss->timesheetSummaryViewday();
+        // dd($data);
 
         return view('pages.timesheet.summarytimesheet', $data);
     }
