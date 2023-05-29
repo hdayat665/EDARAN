@@ -1,9 +1,21 @@
+<style>
+ .job-history {
+            max-height: 1180px;
+            overflow-y: auto;
+        }
+</style>
+
 <div class="tab-pane fade" id="v-pills-employment" role="tabpanel" aria-labelledby="v-pills-employment-tab">
     <div class="accordion" id="accordionExample">
         <div class="accordion-item">
             <h2 class="accordion-header" id="headingOne">
                 <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                    Employee Information 1
+                    <?php $companys = getCompany(); ?>
+                    @foreach ($companys as $company)
+                        @if ($employment->company == $company->id)
+                            <span>{{ $company->companyName ?? 'Employee Information 1' }}</span>
+                        @endif
+                    @endforeach
                 </button>
             </h2>
             <div id="collapseOne" class="accordion-collapse collapse show bg-white" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
@@ -29,29 +41,25 @@
                                     </p>
                                 </div>
                                 <form id="addEmpForm">
-
                                     <div class="card-body">
                                         <div class="row p-2">
                                             <label for="firstname" class="form-label">Role*</label>
-                                            <select class="form-select" name="role" id="role" style="width: 100%">
-                                                {{-- <option selected hidden value="">PLEASE CHOOSE</option> --}}
-                                                <option></option>
+                                            <select class="form-select" name="role" id="role">
+                                                <option value="" label="PLEASE CHOOSE"></option>
                                                 <?php $roles = getAllRole(); ?>
                                                 @foreach ($roles as $role)
                                                     <option value="{{ $role->id }}"
                                                         {{ $user->role_id == $role->id ? 'selected="selected"' : '' }}
                                                         label="{{ $role->roleName }}">{{ $role->roleName }}</option>
-                                                        
+
                                                 @endforeach
-                                             
                                             </select>
                                             <input type="hidden" name="id" value="{{ $employment->id }}">
                                         </div>
                                         <div class="row p-2">
                                             <label for="firstname" class="form-label">Company*</label>
-                                            <select class="form-select" name="company" id="companyForEmployment" style="width: 100%">
-                                                {{-- <option selected hidden value="">PLEASE CHOOSE</option> --}}
-                                                <option></option>
+                                            <select class="form-select" name="company" id="companyForEmployment">
+                                                <option value="" label="PLEASE CHOOSE"></option>
                                                 <?php $companys = getCompany(); ?>
                                                 @foreach ($companys as $company)
                                                     <option value="{{ $company->id }}" <?php echo $employment->company == $company->id ? 'selected="selected"' : ''; ?>
@@ -62,56 +70,48 @@
                                         </div>
                                         <div class="row p-2">
                                             <label for="firstname" class="form-label">Department*</label>
-                                            <select class="form-select" name="departmentId" id="departmentShow" style="width: 100%">
-                                                {{-- <option selected hidden value="">PLEASE CHOOSE</option> --}}
-                                                <option></option>
-
+                                            <select class="form-select" name="departmentId" id="departmentShow">
                                                 <?php $Departments = getDepartment(); ?>
+                                                <option value="" label="PLEASE CHOOSE"></option>
                                                 @foreach ($Departments as $Department)
                                                     <option value="{{ $Department->id ?? null }}" <?php echo $employment->department == $Department->id ? 'selected="selected"' : ''; ?>
-                                                        label="{{ $Department->departmentName }}">{{ $Department->departmentName }}</option>
+                                                        label="{{ $Department->departmentName }}"></option>
                                                 @endforeach
                                             </select>
                                         </div>
                                         <div class="row p-2">
                                             <label for="firstname" class="form-label">Unit</label>
-                                            <select class="form-select" name="unitId" id="unitShow"  style="width: 100%"> 
-                                                <?php $Units = getUnit(', $employment->department'); ?>
-                                                {{-- <option selected hidden value="">PLEASE CHOOSE</option> --}}
-                                                <option></option>
-
+                                            <select class="form-select" name="unitId" id="unitShow">
+                                                <?php $Units = getUnit('', $employment->department); ?>
+                                                <option value="" label="PLEASE CHOOSE"></option>
                                                 @foreach ($Units as $Unit)
                                                     <option value="{{ $Unit->id }}" <?php echo $employment->unit == $Unit->id ? 'selected="selected"' : ''; ?>
-                                                        label="{{ $Unit->unitName }}">{{ $Unit->unitName }}</option>
+                                                        label="{{ $Unit->unitName }}"></option>
                                                 @endforeach
                                             </select>
                                         </div>
                                         <div class="row p-2">
                                             <label for="firstname" class="form-label">Branch*</label>
-                                            <select class="form-select" name="branchId" id="branchShow" style="width: 100%">
+                                            <select class="form-select" name="branchId" id="branchShow">
                                                 <?php $Branchs = getBranch('', $employment->company); ?>
-                                                {{-- <option selected hidden value="">PLEASE CHOOSE</option> --}}
-                                                <option></option>
-
+                                                <option value="" label="PLEASE CHOOSE" ></option>
                                                 @foreach ($Branchs as $Branch)
                                                     <option value="{{ $Branch->id }}" <?php echo $employment->branch == $Branch->id ? 'selected="selected"' : ''; ?>
-                                                        label="{{ $Branch->branchName }}">{{ $Branch->branchName }}</option>
+                                                        label="{{ $Branch->branchName }}"></option>
                                                 @endforeach
                                             </select>
                                         </div>
                                         <div class="row p-2">
-                                            <div class="col md-6"> 
                                             <label for="firstname" class="form-label">Joined Date*</label>
                                             <input type="text" name="joinedDate" value="{{ $employment->joinedDate ?? '' }}"
                                                 id="datepicker-joindate" class="form-control" placeholder="YYYY-MM-DD"
-                                                aria-describedby="address-2" style="width: 100%">
-                                            </div>
+                                                aria-describedby="address-2">
                                         </div>
                                         <div class="row p-2">
                                             <label for="firstname" class="form-label">Job Grade*</label>
-                                            <select class="form-control" name="jobGrade"  id="jobGrade" style="width: 100%">
+                                            <select class="form-select" name="jobGrade"  id="jobGrade">
                                                 <?php $JobGrades = getJobGrade(); ?>
-                                                <option></option>
+                                                <option value="" label="PLEASE CHOOSE"></option>
                                                 @foreach ($JobGrades as $JobGrade)
                                                     <option value="{{ $JobGrade->id }}" <?php echo $employment->jobGrade == $JobGrade->id ? 'selected="selected"' : ''; ?>
                                                         label="{{ $JobGrade->jobGradeName }}">{{ $JobGrade->jobGradeName }}</option>
@@ -119,12 +119,10 @@
                                             </select>
                                         </div>
                                         <div class="row p-2">
-                                            
-
                                             <label for="firstname" class="form-label">Designation*</label>
-                                            <select class="form-select" name="designation" id="designation" style="width: 100%">
+                                            <select class="form-select" name="designation" id="designation">
                                                 <?php $Designations = getDesignation(); ?>
-                                                <option></option>
+                                                <option value="" label="PLEASE CHOOSE"></option>
                                                 @foreach ($Designations as $Designation)
                                                     <option value="{{ $Designation->id }}" <?php echo $employment->designation == $Designation->id ? 'selected="selected"' : ''; ?>
                                                         label="{{ $Designation->designationName }}">{{ $Designation->designationName }}</option>
@@ -133,9 +131,9 @@
                                         </div>
                                         <div class="row p-2">
                                             <label for="firstname" class="form-label">Employment Type*</label>
-                                            <select class="form-select" name="employmentType" id="employmentType" style="width: 100%">
+                                            <select class="form-select" name="employmentType" id="employmentType">
                                                 <?php $EmploymentTypes = getEmploymentType(); ?>
-                                                <option></option>
+                                                <option value="" label="PLEASE CHOOSE"></option>
                                                 @foreach ($EmploymentTypes as $EmploymentType)
                                                     <option value="{{ $EmploymentType->id }}" label="{{ $EmploymentType->type }}"
                                                         {{ $employment->employmentType == $EmploymentType->id ? "selected='selected'" : '' }}>
@@ -174,12 +172,12 @@
                                                     <option value="{{ $employee->id }}" label="{{ $employee->employeeName }}"
                                                         {{ $employment->report_to == $employee->id ? "selected='selected'" : '' }}>
                                                     </option>
-    
-    
+
+
                                                     <!-- <input type="text" id="passportmyprofile" name="passport" value="{{ $profile->passport ?? '' }}" class="form-control" aria-describedby="passport" > -->
                                                 @endforeach
                                             </select>
-    
+
                                         </div>
                                     </div>
                                     <hr>
@@ -246,7 +244,8 @@
                             </form>
                         </div>
                         </div>
-                        <div class="col-sm-6">
+                        </div>
+                        <div class="col-sm-6" id="jobHistroyJs">
                             <div class="card">
                                 <div class="card-header bg-gray-100">
                                     <div class="row">
@@ -278,114 +277,111 @@
                                     </div>
                                 </div>
                                 <div class="card-body">
-                                    <div class="container">
-                                        <ul class="timeline-with-icons">
-                                            <?php $latestJobHistory = $jobHistorys->last(); ?>
-                                            <?php $firstJobHistory = $jobHistorys->first(); ?>
-                                            <?php $secondLastJobHistory = $jobHistorys->skip($jobHistorys->count() - 2)->first(); ?>
+                                    <div class="job-history">
+                                        <div class="container">
+                                            <ul class="timeline-with-icons">
+                                                <?php $latestJobHistory = $jobHistorys->last(); ?>
+                                                <?php $firstJobHistory = $jobHistorys->first(); ?>
+                                                <?php $secondLastJobHistory = $jobHistorys->skip($jobHistorys->count() - 2)->first(); ?>
 
-                                            <?php $showRole = getAllRoleTEST();?>
-                                            <?php $showCompany = getCompanyforJobHistory();?>
-                                            <?php $showDepartment = getDepartmentforJobHistory();?>
-                                            <?php $showUnit = getUnitforJobHistory();?>
-                                            <?php $showBranch = getBranchforJobHistory();?>
-                                            <?php $showJobGrade = getJobGradeforJobHistory();?>
-                                            <?php $showDesignation = getDesignationforJobHistory();?>
-                                            <?php $showEmploymentType = getEmploymentTypeforJobHistory();?>
+                                                <?php $showRole = getAllRoleTEST();?>
+                                                <?php $showCompany = getCompanyforJobHistory();?>
+                                                <?php $showDepartment = getDepartmentforJobHistory();?>
+                                                <?php $showUnit = getUnitforJobHistory();?>
+                                                <?php $showBranch = getBranchforJobHistory();?>
+                                                <?php $showJobGrade = getJobGradeforJobHistory();?>
+                                                <?php $showDesignation = getDesignationforJobHistory();?>
+                                                <?php $showEmploymentType = getEmploymentTypeforJobHistory();?>
 
-                                            {{-- <?php echo implode(', ', $showRole);?>
-                                            <br><br>
-                                            <?php echo $user;?> --}}
+                                                @if ($jobHistorys)
+                                                    @foreach ($jobHistorys->reverse() as $jobHistory)
+                                                        <li class="timeline-item mb-5 ">
+                                                            <span class="timeline-icon">
+                                                                <i class="fas fa-rocket text-primary fa-sm fa-fw"></i>
+                                                            </span>
 
+                                                            <div class="card p-3 bg-white">
 
-                                            
+                                                                @if ($jobHistory->roleHistory)
+                                                                <p class="fw-bold">
+                                                                    Role has changed to {{ $showRole[$jobHistory->roleHistory] }}.
+                                                                </p>
+                                                                @endif
 
-                                            @if ($jobHistorys)
-                                                @foreach ($jobHistorys->reverse() as $jobHistory)
-                                                    <li class="timeline-item mb-5 ">
-                                                        <span class="timeline-icon">
-                                                            <i class="fas fa-rocket text-primary fa-sm fa-fw"></i>
-                                                        </span>
-    
-                                                        <div class="card p-3 bg-white">
-    
-                                                            @if ($jobHistory->roleHistory)
-                                                            <p class="fw-bold">
-                                                                Role has changed to {{ $showRole[$jobHistory->roleHistory] }}.
-                                                            </p>
-                                                            @endif                                                        
-    
-                                                            @if ($jobHistory->companyHistory)
-                                                            <p class="fw-bold">
-                                                                Company has changed to {{ $showCompany[$jobHistory->companyHistory] }}.
-                                                            </p>
-                                                            @endif
-    
-                                                            @if ($jobHistory->departmentHistory)
-                                                            <p class="fw-bold">
-                                                                Department has changed to {{ $showDepartment[$jobHistory->departmentHistory] }}.
-                                                            </p>
-                                                            @endif
-    
-                                                            @if ($jobHistory->unitHistory)
-                                                            <p class="fw-bold">
-                                                                Unit has changed to {{ $showUnit[$jobHistory->unitHistory] }}.
-                                                            </p>
-                                                            @endif
-    
-                                                            @if ($jobHistory->branchHistory)
-                                                            <p class="fw-bold">
-                                                                Branch has changed to {{ $showBranch[$jobHistory->branchHistory] }}.
-                                                            </p>
-                                                            @endif
-    
-                                                            @if ($jobHistory->jobGradeHistory)
-                                                            <p class="fw-bold">
-                                                                Job Grade has changed to {{ $showJobGrade[$jobHistory->jobGradeHistory] }}.
-                                                            </p>
-                                                            @endif
-    
-                                                            @if ($jobHistory->designationHistory)
-                                                            <p class="fw-bold">
-                                                                Designation has changed to {{ $showDesignation[$jobHistory->designationHistory] }}.
-                                                            </p>
-                                                            @endif
-    
-                                                            @if ($jobHistory->employmentTypeHistory)
-                                                            <p class="fw-bold">
-                                                                Employment Type has changed to {{ $showEmploymentType[$jobHistory->employmentTypeHistory] }}.
-                                                            </p>
-                                                            @endif
-    
-                                                            @if ($jobHistory->CORHistory)
-                                                            <p class="fw-bold">
-                                                                Charge Out Rate has changed to {{ $jobHistory->CORHistory }}.
-                                                            </p>
-                                                            @endif
-    
-                                                            @if ($jobHistory->event)
-                                                            <p class="fw-bold">
-                                                                Event has set to {{ getEvent()[$jobHistory->event] }}.
-                                                            </p>
-                                                            @endif
-    
-                                                            <p class="text">
-                                                                Effective Date: {{ $jobHistory->effectiveDate ?? '' }}
-                                                            </p>
-    
-                                                            <p class="text-muted">
-                                                                Updated By: {{ $jobHistory->updatedBy ?? '' }}
-                                                            </p>
-    
-                                                            <p class="text-muted">
-                                                                Last Modified: {{ $jobHistory->updated_at ?? '' }}
-                                                            </p>
-                                                            
-                                                        </div>
-                                                    </li>
-                                                @endforeach
-                                            @endif
-                                        </ul>
+                                                                @if ($jobHistory->companyHistory)
+                                                                <p class="fw-bold">
+                                                                    Company has changed to {{ $showCompany[$jobHistory->companyHistory] }}.
+                                                                </p>
+                                                                @endif
+
+                                                                @if ($jobHistory->departmentHistory)
+                                                                <p class="fw-bold">
+                                                                    Department has changed to {{ $showDepartment[$jobHistory->departmentHistory] }}.
+                                                                </p>
+                                                                @endif
+
+                                                                @if ($jobHistory->unitHistory)
+                                                                <p class="fw-bold">
+                                                                    Unit has changed to {{ $showUnit[$jobHistory->unitHistory] }}.
+                                                                </p>
+                                                                @endif
+
+                                                                @if ($jobHistory->branchHistory)
+                                                                <p class="fw-bold">
+                                                                    Branch has changed to {{ $showBranch[$jobHistory->branchHistory] }}.
+                                                                </p>
+                                                                @endif
+
+                                                                @if ($jobHistory->jobGradeHistory)
+                                                                <p class="fw-bold">
+                                                                    Job Grade has changed to {{ $showJobGrade[$jobHistory->jobGradeHistory] }}.
+                                                                </p>
+                                                                @endif
+
+                                                                @if ($jobHistory->designationHistory)
+                                                                <p class="fw-bold">
+                                                                    Designation has changed to {{ $showDesignation[$jobHistory->designationHistory] }}.
+                                                                </p>
+                                                                @endif
+
+                                                                @if ($jobHistory->employmentTypeHistory)
+                                                                <p class="fw-bold">
+                                                                    Employment Type has changed to {{ $showEmploymentType[$jobHistory->employmentTypeHistory] }}.
+                                                                </p>
+                                                                @endif
+
+                                                                @if ($jobHistory->CORHistory)
+                                                                <p class="fw-bold">
+                                                                    Charge Out Rate has changed to {{ $jobHistory->CORHistory }}.
+                                                                </p>
+                                                                @endif
+
+                                                                @if ($jobHistory->event)
+                                                                <p class="fw-bold">
+                                                                    Event has set to {{ getEvent()[$jobHistory->event] }}.
+                                                                </p>
+                                                                @endif
+
+                                                                @if ($jobHistory->effectiveDate && $jobHistory->effectiveDate !== '0000-00-00')
+                                                                <p class="text">
+                                                                    Effective Date: {{ $jobHistory->effectiveDate ?? '' }}
+                                                                </p>
+                                                                @endif
+
+                                                                <p class="text">
+                                                                    Updated By: {{ $jobHistory->updatedBy ?? '' }}
+                                                                </p>
+
+                                                                <p class="text">
+                                                                    Last Modified: {{ $jobHistory->updated_at ?? '' }}
+                                                                </p>
+
+                                                            </div>
+                                                        </li>
+                                                    @endforeach
+                                                @endif
+                                            </ul>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -404,11 +400,11 @@
                 <div class="accordion-body bg-white">
                     <div class="row p-2">
                         <div class="col-sm-3">
-                            
+
                         </div>
                         <div class="col-sm-3">
                             <div class="form-check form-switch">
-                                <input class="form-check-input"  name="" value="" type="checkbox" role="switch" id="" checked>
+                                <input class="form-check-input"  name="" value="" type="checkbox" role="switch" id="">
                                 <label class="form-check-label" for="set-main">Set as Main Company</label>
                             </div>
                         </div>
@@ -431,7 +427,7 @@
                                             <label for="firstname" class="form-label">Role*</label>
                                             <select class="form-select" name="role">
                                                 <option value="" label="PLEASE CHOOSE"></option>
-                                                
+
                                             </select>
                                             <input type="hidden" name="id" value="">
                                         </div>
@@ -439,34 +435,34 @@
                                             <label for="firstname" class="form-label">Company*</label>
                                             <select class="form-select" name="company" id="companyForEmployment">
                                                 <option value="" label="PLEASE CHOOSE"></option>
-                                                
+
                                             </select>
                                             <input type="hidden" name="id" value="">
                                         </div>
                                         <div class="row p-2">
                                             <label for="firstname" class="form-label">Department*</label>
                                             <select class="form-select" name="departmentId" id="departmentShow">
-                                                
+
                                                 <option value="" label="PLEASE CHOOSE"></option>
-                                                
+
                                             </select>
                                         </div>
                                         <div class="row p-2">
                                             <label for="firstname" class="form-label">Unit*</label>
                                             <select class="form-select" name="" id="">
-                                               
+
                                                 <option value="" label="PLEASE CHOOSE"></option>
-                                                
+
                                             </select>
                                         </div>
                                         <div class="row p-2">
                                             <label for="firstname" class="form-label">Branch*</label>
-                                            <select class="form-select" name="branchId" id="branchShow">         
+                                            <select class="form-select" name="branchId" id="branchShow">
                                                 <option value="" label="PLEASE CHOOSE"></option>
                                             </select>
                                         </div>
                                         <div class="row p-2">
-                                            
+
                                             <label for="firstname" class="form-label">Joined Date*</label>
                                             <input type="text" name="" value=""
                                                 id="datepicker-joindate" class="form-control" placeholder="YYYY-MM-DD"
@@ -487,9 +483,9 @@
                                         <div class="row p-2">
                                             <label for="firstname" class="form-label">Employment Type*</label>
                                             <select class="form-select" name="employmentType">
-                                                
+
                                                 <option value="" label="PLEASE CHOOSE"></option>
-                                                
+
                                             </select>
                                         </div>
                                         <div class="row p-2">
@@ -516,9 +512,9 @@
                                             @endif
                                             <label for="employee-id" class="form-label">Report To</label>
                                             <select class="form-select" name="report_to" id="reporttoo">
-                                                
+
                                                 <option value="" label="PLEASE CHOOSE"></option>
-                                               
+
                                             </select>
 
                                         </div>
@@ -569,8 +565,8 @@
                                             <label for="firstname" class="form-label">Event*</label>
                                             <select class="form-select" name="Event">
                                                 <option value="" label="PLEASE CHOOSE"></option>
-                                                
-                                                
+
+
                                         </select>
                                     </div>
                                 </div>
@@ -587,14 +583,14 @@
                             <div class="card">
                                 <div class="card-header bg-gray-100">
                                     <div class="row">
-                                        <div class="col">
+                                        {{-- <div class="col"> --}}
                                             <h4 class="fw-bold">
                                                 Job History
                                             </h4>
                                             <p class="fw-light">
                                                 Update your history information
                                             </p>
-                                        </div>
+                                        {{-- </div> --}}
                                         <div class="col">
                                             {{-- <button class="btn btn-white float-end" data-bs-toggle="dropdown">
                                                 Filter content
@@ -615,26 +611,28 @@
                                     </div>
                                 </div>
                                 <div class="card-body">
-                                    <div class="container">
-                                        <ul class="timeline-with-icons">
-                                            @if ($jobHistorys)
-                                                @foreach ($jobHistorys as $jobHistory)
-                                                    <li class="timeline-item mb-5 ">
-                                                        <span class="timeline-icon">
-                                                            <i class="fas fa-rocket text-primary fa-sm fa-fw"></i>
-                                                        </span>
+                                    <div class="job-history">
+                                        <div class="container">
+                                            <ul class="timeline-with-icons">
+                                                {{-- @if ($jobHistorys)
+                                                    @foreach ($jobHistorys as $jobHistory)
+                                                        <li class="timeline-item mb-5 ">
+                                                            <span class="timeline-icon">
+                                                                <i class="fas fa-rocket text-primary fa-sm fa-fw"></i>
+                                                            </span>
 
-                                                        <div class="card p-3 bg-white">
-                                                            <p class="fw-bold">{{ $jobHistory->employmentDetail ?? '' }}</p>
-                                                            <p class="text-muted mb-2 fw-bold">{{ $jobHistory->effectiveDate ?? '' }}</p>
-                                                            <p class="text-muted">
-                                                                Effective Date: {{ $jobHistory->effectiveDate ?? '' }}
-                                                            </p>
-                                                        </div>
-                                                    </li>
-                                                @endforeach
-                                            @endif
-                                        </ul>
+                                                            <div class="card p-3 bg-white">
+                                                                <p class="fw-bold">{{ $jobHistory->employmentDetail ?? '' }}</p>
+                                                                <p class="text-muted mb-2 fw-bold">{{ $jobHistory->effectiveDate ?? '' }}</p>
+                                                                <p class="text-muted">
+                                                                    Effective Date: {{ $jobHistory->effectiveDate ?? '' }}
+                                                                </p>
+                                                            </div>
+                                                        </li>
+                                                    @endforeach
+                                                @endif --}}
+                                            </ul>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

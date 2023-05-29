@@ -107,7 +107,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        {{-- <div class="col-md-6">
                             <div class="card">
                                 <div class="card-header bg-gray-100">
                                     <div class="row">
@@ -160,7 +160,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                         <!-- <button type="button" class="btn btn-primary float-end mt-3 col-md-2">
                             Save
                         </button> -->

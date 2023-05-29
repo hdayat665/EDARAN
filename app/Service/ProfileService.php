@@ -824,6 +824,13 @@ class ProfileService
             }
         }
 
+        if(!isset($input['passport']))
+        {
+            $input['passport'] = null;
+            $input['expiryDate'] = null;
+            $input['issuingCountry'] = null;
+        }
+
         $user = UserParent::where('id', $id)->first();
 
         if(!$user)
@@ -832,8 +839,10 @@ class ProfileService
             $data['type'] = config('app.response.error.type');
             $data['title'] = config('app.response.error.title');
             $data['msg'] = 'user not found';
-        }else{
+
+        } else {
             unset($input['sameAddress']);
+
             // $input['address1'] = $input['address1'] . ' ' . $input['address2'] . '' . $input['city'] . ' ' . $input['postcode'] . ' ' . $input['state'] . ' ' . $input['country'];
             UserParent::where('id', $id)->update($input);
 

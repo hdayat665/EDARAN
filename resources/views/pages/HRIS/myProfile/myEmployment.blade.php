@@ -182,10 +182,10 @@
                             </p> --}}
                         </div>
                         <div class="col">
-                            <button class="btn btn-white float-end" data-bs-toggle="dropdown">
+                            {{-- <button class="btn btn-white float-end" data-bs-toggle="dropdown">
                                 Filter content
                                 <i class="fa fa-filter text-dark"></i>
-                            </button>
+                            </button> --}}
                             <div class="dropdown-menu dropdown-menu-end">
                                 <a href="#" class="dropdown-item">Company</a>
                                 <a href="#" class="dropdown-item">Department</a>
@@ -203,26 +203,108 @@
                 <div class="card-body">
                     <div class="container">
                         <ul class="timeline-with-icons">
+                            <?php $latestJobHistory = $jobHistorys->last(); ?>
+                            <?php $firstJobHistory = $jobHistorys->first(); ?>
+                            <?php $secondLastJobHistory = $jobHistorys->skip($jobHistorys->count() - 2)->first(); ?>
+
+                            <?php $showRole = getAllRoleTEST();?>
+                            <?php $showCompany = getCompanyforJobHistory();?>
+                            <?php $showDepartment = getDepartmentforJobHistory();?>
+                            <?php $showUnit = getUnitforJobHistory();?>
+                            <?php $showBranch = getBranchforJobHistory();?>
+                            <?php $showJobGrade = getJobGradeforJobHistory();?>
+                            <?php $showDesignation = getDesignationforJobHistory();?>
+                            <?php $showEmploymentType = getEmploymentTypeforJobHistory();?>
+
                             @if ($jobHistorys)
-                                @foreach ($jobHistorys as $jobHistory)
+                                @foreach ($jobHistorys->reverse() as $jobHistory)
                                     <li class="timeline-item mb-5 ">
                                         <span class="timeline-icon">
                                             <i class="fas fa-rocket text-primary fa-sm fa-fw"></i>
                                         </span>
 
                                         <div class="card p-3 bg-white">
-                                            <p class="fw-bold">{{ $jobHistory->employmentDetail ?? '' }}</p>
-                                            <p class="text-muted mb-2 fw-bold">{{ $jobHistory->effectiveDate ?? '' }}</p>
-                                            <p class="text-muted">
+
+                                            @if ($jobHistory->roleHistory)
+                                            <p class="fw-bold">
+                                                Role has changed to {{ $showRole[$jobHistory->roleHistory] }}.
+                                            </p>
+                                            @endif                                                        
+
+                                            @if ($jobHistory->companyHistory)
+                                            <p class="fw-bold">
+                                                Company has changed to {{ $showCompany[$jobHistory->companyHistory] }}.
+                                            </p>
+                                            @endif
+
+                                            @if ($jobHistory->departmentHistory)
+                                            <p class="fw-bold">
+                                                Department has changed to {{ $showDepartment[$jobHistory->departmentHistory] }}.
+                                            </p>
+                                            @endif
+
+                                            @if ($jobHistory->unitHistory)
+                                            <p class="fw-bold">
+                                                Unit has changed to {{ $showUnit[$jobHistory->unitHistory] }}.
+                                            </p>
+                                            @endif
+
+                                            @if ($jobHistory->branchHistory)
+                                            <p class="fw-bold">
+                                                Branch has changed to {{ $showBranch[$jobHistory->branchHistory] }}.
+                                            </p>
+                                            @endif
+
+                                            @if ($jobHistory->jobGradeHistory)
+                                            <p class="fw-bold">
+                                                Job Grade has changed to {{ $showJobGrade[$jobHistory->jobGradeHistory] }}.
+                                            </p>
+                                            @endif
+
+                                            @if ($jobHistory->designationHistory)
+                                            <p class="fw-bold">
+                                                Designation has changed to {{ $showDesignation[$jobHistory->designationHistory] }}.
+                                            </p>
+                                            @endif
+
+                                            @if ($jobHistory->employmentTypeHistory)
+                                            <p class="fw-bold">
+                                                Employment Type has changed to {{ $showEmploymentType[$jobHistory->employmentTypeHistory] }}.
+                                            </p>
+                                            @endif
+
+                                            @if ($jobHistory->CORHistory)
+                                            <p class="fw-bold">
+                                                Charge Out Rate has changed to {{ $jobHistory->CORHistory }}.
+                                            </p>
+                                            @endif
+
+                                            @if ($jobHistory->event)
+                                            <p class="fw-bold">
+                                                Event has set to {{ getEvent()[$jobHistory->event] }}.
+                                            </p>
+                                            @endif
+
+                                            @if ($jobHistory->effectiveDate && $jobHistory->effectiveDate !== '0000-00-00')
+                                            <p class="text">
                                                 Effective Date: {{ $jobHistory->effectiveDate ?? '' }}
                                             </p>
+                                            @endif
+
+                                            <p class="text-muted">
+                                                Updated By: {{ $jobHistory->updatedBy ?? '' }}
+                                            </p>
+
+                                            <p class="text-muted">
+                                                Last Modified: {{ $jobHistory->updated_at ?? '' }}
+                                            </p>
+                                            
                                         </div>
                                     </li>
                                 @endforeach
                             @endif
                         </ul>
                     </div>
-
                 </div>
             </div>
         </div>
