@@ -829,25 +829,26 @@ class ProjectService
     }
 
     public function projectViewAssignLocationView($id)
-    {
-
-        $data['projectMember'] = DB::table('project_member as a')
-            ->leftJoin('employment as b', 'a.employee_id', '=', 'b.id')
-            ->select('a.id', 'a.location','a.project_id', 'b.employeeName')
-            ->where([['a.id', '=', $id]])
-            ->first();
-
-        $data['locations'] = ProjectLocation::select('id', 'location_name')
-            ->whereIn('id', explode(',', $data['projectMember']
-            ->location))
-            ->get();
-        
-        if (!$data) {
-            $data = [];
-        }
-
-        return $data;
+{
+    $data = [];
+    
+    $data['projectMember'] = DB::table('project_member as a')
+        ->leftJoin('employment as b', 'a.employee_id', '=', 'b.id')
+        ->select('a.id', 'a.location', 'a.project_id', 'b.employeeName')
+        ->where([['a.id', '=', $id]])
+        ->first();
+    
+    $data['locations'] = ProjectLocation::select('id', 'location_name')
+        ->whereIn('id', explode(',', $data['projectMember']->location))
+        ->get();
+    
+    if (!$data) {
+        $data = [];
     }
+    
+    return $data;
+}
+
 
     public function projectAssignView($id)
     {
