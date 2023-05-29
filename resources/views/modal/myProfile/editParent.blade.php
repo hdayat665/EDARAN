@@ -26,7 +26,7 @@
                         {{-- new --}}
                         <div class="col-sm-6">
                             <label for="lastname" class="form-label">Old Identification Number</label>
-                            <input type="text" id="" name="" class="form-control" aria-describedby="" placeholder="0000000">
+                            <input type="text" id="oldIDNoP1" name="oldIDNo" class="form-control" aria-describedby="" placeholder="0000000">
                         </div>
                     </div>
                     <div class="row p-2">
@@ -72,12 +72,12 @@
                         </div>
                           <div class="col-sm-3">
                                     <label for="expirydate" class="form-label">Expiry Date*</label>
-                                    <input type="text" id="expiryDateChild" name="expiryDate"  placeholder="YYYY-MM-DD" class="form-control" aria-describedby="expirydate" readonly>
+                                    <input type="text" id="expiryDateParentEdit" name="expiryDate"  placeholder="YYYY-MM-DD" class="form-control" aria-describedby="expirydate" disabled required>
                                   
                                 </div>
                         <div class="col-sm-3">
                             <label for="issuing-country" class="form-label">Issuing Country*</label>
-                            <select class="form-select" name="issuingCountry" id="" style="text-transform:uppercase">
+                            <select class="form-select" name="issuingCountry" id="issuingCountryParentEdit" style="text-transform:uppercase" disabled required>
                             <option value="" label="PLEASE CHOOSE" selected ></option>
                                 <optgroup id="country-optgroup-Americas" label="Americas">
                                     @foreach ($americass as $key => $america)
@@ -219,12 +219,12 @@
                             </select>
                         </div>
                     </div>
-                </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-primary" id="editParent">Update</button>
+                <button class="btn btn-primary" id="editParent">Update</button>
             </div>
+        </form>
         </div>
     </div>
 </div>

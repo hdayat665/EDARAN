@@ -125,6 +125,12 @@ $(document).ready(function () {
         checkboxes.prop("disabled", false);
     }
 
+    // var employmentInfoHeight = $("#editHRISJs").height();
+
+    // // Set the same height for the Job History card
+    // $("#jobHistoryJs").css("max-height", employmentInfoHeight + "px");
+    // console.log(employmentInfoHeight);
+
     $("#firstname,#lastname").change(function () {
         var a = $("#firstname").val();
         var b = $("#lastname").val();
@@ -437,6 +443,11 @@ $(document).ready(function () {
         autoclose: true,
     });
     $("#DOBS").datepicker({
+        todayHighlight: true,
+        format: "yyyy/mm/dd",
+        autoclose: true,
+    });
+    $("#expirydate6").datepicker({
         todayHighlight: true,
         format: "yyyy/mm/dd",
         autoclose: true,
@@ -1304,9 +1315,9 @@ $(document).ready(function () {
                     required: true,
                 },
                 oldIDNo: {
-                    required: false,
-                    digits: true,
-                    rangelength: [1, 7],
+                    //required: false,
+                    //digits: true,
+                    rangelength: [7, 7],
                 },
                 gender: "required",
                 maritialStatus: "required",
@@ -1323,11 +1334,11 @@ $(document).ready(function () {
                     digits: true,
                     rangelength: [10, 12],
                 },
-                phoneNo2: {
-                    required: true,
-                    digits: true,
-                    rangelength: [10, 12],
-                },
+                // phoneNo2: {
+                //     required: true,
+                //     digits: true,
+                //     rangelength: [10, 12],
+                // },
                 homeNo: {
                     digits: true,
                     rangelength: [9, 9],
@@ -1361,8 +1372,8 @@ $(document).ready(function () {
                     required: "Please Insert Full Name",
                 },
                 oldIDNo: {
-                    required: "Please Insert Old Identification Number",
-                    digits: "Please Insert Correct Identification Number Without ' - ' or Space",
+                    //required: "Please Insert Old Identification Number",
+                    //digits: "Please Insert Correct Identification Number Without ' - ' or Space",
                     rangelength: "Please Insert Valid Identification Number",
                 },
                 gender: "Please Choose Gender",
@@ -1380,11 +1391,11 @@ $(document).ready(function () {
                     digits: "Please Insert Correct Phone Number Without ' - ' or Space",
                     rangelength: "Please Insert Valid Phone Number",
                 },
-                phoneNo2: {
-                    required: "Please Insert Phone Number",
-                    digits: "Please Insert Correct Phone Number Without ' - ' or Space",
-                    rangelength: "Please Insert Valid Phone Number",
-                },
+                // phoneNo2: {
+                //     required: "Please Insert Phone Number",
+                //     digits: "Please Insert Correct Phone Number Without ' - ' or Space",
+                //     rangelength: "Please Insert Valid Phone Number",
+                // },
                 homeNo: {
                     digits: "Please Insert Correct Home Number Without ' - ' or Space",
                     rangelength: "Please Inset Valid Home Number",
@@ -2264,8 +2275,8 @@ $(document).ready(function () {
                     required: true,
                 },
                 oldIdNo: {
-                    required: true,
-                    digits: true,
+                    //required: true,
+                    //digits: true,
                     rangelength: [7, 7],
                 },
                 idNo: {
@@ -2332,8 +2343,8 @@ $(document).ready(function () {
                     required: "Please Insert Last Name",
                 },
                 oldIdNo: {
-                    required: "Please Insert Old Identification Number",
-                    digits: "Please Insert Correct Old Identification Number",
+                    //required: "Please Insert Old Identification Number",
+                    //digits: "Please Insert Correct Old Identification Number",
                     rangelength:
                         "Please Insert Valid Old Identification Number",
                 },
@@ -2440,8 +2451,8 @@ $(document).ready(function () {
                         required: true,
                     },
                     oldIdNo: {
-                        required: true,
-                        digits: true,
+                        //required: true,
+                        //digits: true,
                         rangelength: [7, 7],
                     },
                     idNo: {
@@ -2505,8 +2516,8 @@ $(document).ready(function () {
                         required: "Please Insert Last Name",
                     },
                     oldIdNo: {
-                        required: "Please Insert Old Identification Number",
-                        digits: "Please Insert Correct Old Identification Number",
+                        //required: "Please Insert Old Identification Number",
+                        //digits: "Please Insert Correct Old Identification Number",
                         rangelength:
                             "Please Insert Valid Old Identification Number",
                     },
@@ -2667,8 +2678,8 @@ $(document).ready(function () {
                 },
 
                 oldIDNo: {
-                    required: false,
-                    digits: true,
+                    //required: false,
+                    //digits: true,
                     rangelength: [7, 7],
                 },
                 expiryDate: {
@@ -2706,8 +2717,8 @@ $(document).ready(function () {
                 },
 
                 oldIDNo: {
-                    required: "Please Insert Old Identification Number",
-                    digits: "Please Insert Correct Identification Number Without ' - ' or Space",
+                    //required: "Please Insert Old Identification Number",
+                    //digits: "Please Insert Correct Identification Number Without ' - ' or Space",
                     rangelength: "Please Insert Valid Identification Number",
                 },
                 expiryDate: {
@@ -2770,7 +2781,7 @@ $(document).ready(function () {
                     rangelength: [12, 12],
                 },
                 oldIDNo: {
-                    digits: true,
+                    //digits: true,
                     rangelength: [7, 7],
                 },
 
@@ -2812,7 +2823,7 @@ $(document).ready(function () {
                     rangelength: "Please Insert Valid Identification Number",
                 },
                 oldIDNo: {
-                    digits: "Please Insert Correct Identification Number Without ' - ' or Space",
+                    //digits: "Please Insert Correct Identification Number Without ' - ' or Space",
                     rangelength: "Please Insert Valid Identification Number",
                 },
 
@@ -3364,6 +3375,10 @@ $(document).ready(function () {
                     digits: true,
                     rangelength: [12, 12],
                 },
+                oldIDNo: {
+                    //digits: true,
+                    rangelength: [7, 7],
+                },
                 okuCardNum: {
                     required: true,
                     digits: true,
@@ -3404,6 +3419,10 @@ $(document).ready(function () {
                 idNo: {
                     required: "Please Insert New Identification Number",
                     digits: "Please Insert Correct Identification Number Without ' - ' or Space",
+                    rangelength: "Please Insert Valid Identification Number",
+                },
+                oldIDNo: {
+                    //digits: "Please Insert Correct Identification Number Without ' - ' or Space",
                     rangelength: "Please Insert Valid Identification Number",
                 },
                 okuCardNum: {
@@ -4594,8 +4613,14 @@ $(document).ready(function () {
         }
     });
 
+});
 
-    
+$(window).on('load', function() {
+    // Get the height of the Employment Information card
+    var employmentInfoHeight = $("#editHRISJs").height();
+
+    // Set the same height for the Job History card
+    $("#jobHistoryJs").css("max-height", employmentInfoHeight + "px");
 });
 function dataURLtoFile(dataurl, filename) {
     var arr = dataurl.split(","),

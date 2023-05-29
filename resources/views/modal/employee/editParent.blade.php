@@ -63,7 +63,7 @@
                                 <div class="col-sm-12">
                                     <label for="passport" class="form-label">Passport Number</label>
                                   
-                                    <input type="text" id="passport7" name="passport"  class="form-control" aria-describedby="passport" placeholder="PASSPORT NUMBER">
+                                    <input type="text" id="passportparentedit" name="passport"  class="form-control" aria-describedby="passport" placeholder="PASSPORT NUMBER">
                                 </div>
                             </div>
                         </div>
