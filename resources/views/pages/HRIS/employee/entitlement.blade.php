@@ -21,7 +21,7 @@
                                     </div>
                                     <div class="card-body">
                                             <form id="updatetimehierarchy">
-                                                
+
                                                 <div class="row ">
                                                     <div class="col md-6">
                                                         <div class="mb-3">
@@ -35,9 +35,10 @@
                                                     <div class="col md-6">
                                                         <div class="mb-3">
                                                             <label for="" class="form-label">Approver* </label>
-                                                            
+
                                                             <select class="form-select" name="tsapprover"  id="tsapprover" >
                                                                 <?php $employees = getEmployeeapprover($user_id); ?>
+
                                                                 <option></option>
                                                                 @foreach ($employees as $employee)
                                                                     <option value="{{ $employee->user_id }}" label="{{ $employee->employeeName }}"
@@ -65,7 +66,7 @@
                                             <h4 class="fw-bold">
                                                  History
                                             </h4>
-                                            
+
                                         </div>
                                         <div class="col">
                                             <button class="btn btn-white float-end" data-bs-toggle="dropdown">
@@ -152,7 +153,7 @@
                                                         <label for="" class="form-label">Approver* </label>
                                                         <select class="form-select" name="tsapprover2"  id="tsapprover2" >
                                                             <?php $employees = getEmployeeapprover(); ?>
-                                                            {{-- <option value="" label="PLEASE CHOOSE"></option> --}}
+                                                            <option></option>
                                                             @foreach ($employees as $employee)
                                                                 <option value="{{ $employee->id }}" label="{{ $employee->employeeName }}"
                                                                 {{ $employment->tsapprover2 == $employee->id ? "selected='selected'" : '' }}>
@@ -178,7 +179,7 @@
                                         <h4 class="fw-bold">
                                              History
                                         </h4>
-                                        
+
                                     </div>
                                     <div class="col">
                                         <button class="btn btn-white float-end" data-bs-toggle="dropdown">

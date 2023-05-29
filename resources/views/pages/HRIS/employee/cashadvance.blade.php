@@ -35,9 +35,8 @@
                                                         <div class="mb-3">
                                                             <label for="" class="form-label">Approver* </label>
                                                             <select class="form-select" name="caapprover"  id="caapprover" >
-                                                                <option></option>
                                                                 <?php $employees = getEmployeeapprover(); ?>
-                                                               
+                                                                <option></option>
                                                                 @foreach ($employees as $employee)
                                                                     <option value="{{ $employee->user_id }}" label="{{ $employee->employeeName }}"
                                                                     {{ $employment->caapprover == $employee->user_id ? "selected='selected'" : '' }}>
@@ -49,7 +48,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="modal-footer">
-                                                    <button  type="submit" class="btn btn-primary" id="cahierarchybutton">Update</button>
+                                                    <button class="btn btn-primary" id="cahierarchybutton">Update</button>
                                                     </form>
                                                 </div>
                                         </div>
@@ -63,7 +62,7 @@
                                             <h4 class="fw-bold">
                                                  History
                                             </h4>
-                                            
+
                                         </div>
                                         <div class="col">
                                             <button class="btn btn-white float-end" data-bs-toggle="dropdown">
@@ -114,6 +113,6 @@
             </div>
         </div>
     </div>
-    
+
 </div>
 

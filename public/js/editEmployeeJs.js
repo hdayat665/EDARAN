@@ -427,7 +427,6 @@ $(document).ready(function () {
         }
     });
 
-
     $("#expiryDateChild").datepicker({
         todayHighlight: true,
         format: "yyyy/mm/dd",
@@ -2504,7 +2503,6 @@ $(document).ready(function () {
         });
     });
 
-
     companion = ["1", "2", "3", "4"];
 
     for (let i = 0; i < companion.length; i++) {
@@ -3395,7 +3393,6 @@ $(document).ready(function () {
                     required: true,
                 },
                 DOB: "required",
-                age: "required",
                 gender: {
                     required: false,
                 },
@@ -3403,14 +3400,13 @@ $(document).ready(function () {
                     required: false,
                     digits: true,
                 },
-                relationship: "required",
+                relationship1: "required",
                 address1: "required",
                 postcode: {
                     required: true,
                     digits: true,
                     rangelength: [5, 5],
                 },
-                country: "required",
                 city: "required",
                 state: "required",
                 idNo: {
@@ -3445,13 +3441,12 @@ $(document).ready(function () {
                     required: "Please Insert Last Name",
                 },
                 DOB: "Please Insert Date Of Birth",
-                age: "Please Insert Age",
                 gender: "Please Choose Gender",
                 contactNo: {
                     required: "Please Insert Phone Number",
                     digits: "Please Insert Valid Phone Number Without ' - ' And Space",
                 },
-                relationship: "Please Choose Relationship",
+                relationship1: "Please Choose Relationship",
                 address1: "Please Insert Address 1",
                 postcode: {
                     required: "Please Insert Postcode",
@@ -3459,7 +3454,6 @@ $(document).ready(function () {
                     rangelength: "Please Insert Valid Postcode",
                 },
                 city: "Please Insert City",
-                country: "Please Choose Country",
                 state: "Please Choose State",
                 idNo: {
                     required: "Please Insert New Identification Number",
@@ -3860,12 +3854,12 @@ $(document).ready(function () {
             // Specify validation rules
             rules: {
                 //eclaimrecommender: "required",
-                // eclaimapprover: "required",
+                eclaimapprover: "required",
             },
 
             messages: {
                 //eclaimrecommender: "Please Choose Recommender",
-                // eclaimapprover: "Please Choose Approver",
+                eclaimapprover: "Please Choose Approver",
             },
 
             submitHandler: function (form) {
@@ -4140,7 +4134,7 @@ $(document).ready(function () {
 
                 EffectiveFrom: "required",
 
-                Event: "required",
+                event: "required",
             },
 
             messages: {
@@ -4227,7 +4221,6 @@ $(document).ready(function () {
             },
 
             messages: {
-                role: "Please Insert Employee Role",
                 company: "Please Insert Employee Company",
                 departmentId: "Please Insert Employee Department",
                 //unitId: "Please Insert Employee Unit",
@@ -4666,7 +4659,33 @@ $(document).ready(function () {
 });
 
 
-});
+    $("#role").select2({ placeholder: "Please Choose",  width: 'resolve'} );
+    $("#companyForEmployment").select2({ placeholder: "Please Choose", });
+    $("#departmentShow").select2({ placeholder: "Please Choose", });
+    $("#unitShow").select2({ placeholder: "Please Choose",});
+    $("#branchShow").select2({ placeholder: "Please Choose", });
+    $("#jobGrade").select2({ placeholder: "Please Choose", });
+    $("#designation").select2({ placeholder: "Please Choose", });
+    $("#employmentType").select2({ placeholder: "Please Choose", });
+    $("#event").select2({ placeholder: "Please Choose", });
+
+
+    // search bar in select box (eleave)
+    $("#eleaverecommender").select2({ placeholder: "Please Choose", });
+    $("#eleaveapprover").select2({ placeholder: "Please Choose", });
+
+    // // search bar in select box (eleave)
+    $("#eclaimrecommender").select2({ placeholder: "Please Choose", });
+    $("#eclaimapprover").select2({ placeholder: "Please Choose", });
+
+    // search bar in select box (Cash Advance)
+    $("#caapprover").select2({ placeholder: "Please Choose", });
+
+    // search bar in select box (Timesheet)
+    $("#tsapprover").select2({ placeholder: "Please Choose", });
+    $("#tsapprover2").select2({ placeholder: "Please Choose", });
+
+
 
 function dataURLtoFile(dataurl, filename) {
     var arr = dataurl.split(","),
@@ -4761,11 +4780,10 @@ $(document).on("click", "#uploadpicture", function () {
 // $("#tsapprover2").picker({ search: true });
 
 // search bar in select box (Employment Information)
-
 // $('#role').picker({ search: true });
 // $('#companyForEmployment').picker({ search: true });
-//  $('#departmentShow').select2({data:sportslist});
-//  $('#unitShow').picker({ search: true });
+// $('#departmentShow').picker({ search: true });
+// $('#unitShow').picker({ search: true });
 // $('#branchShow').picker({ search: true });
 // $('#jobGrade').picker({ search: true });
 // $('#designation').picker({ search: true });
