@@ -421,6 +421,7 @@ $(document).ready(function () {
         }
     });
 
+
     $("#expiryDateChild").datepicker({
         todayHighlight: true,
         format: "yyyy/mm/dd",
@@ -805,7 +806,7 @@ $(document).ready(function () {
             var id = document.getElementById("user_id").value;
             // console.log(id);
             // return false;
-            var getEmployeeAddressforParentx = getEmployeeAddressforParent(44);
+            var getEmployeeAddressforParentx = getEmployeeAddressforParent(id);
             //console.log(id);
 
             getEmployeeAddressforParentx
@@ -1006,6 +1007,73 @@ $(document).ready(function () {
             $("#cityc").val($("").val()).prop("readonly", false);
             $("#statec").val($("").val()).prop("disabled", false);
             $("#countryc").val($("1").val()).prop("disabled", false);
+        }
+    });
+
+    $("#same-address3").change(function () {
+        if (this.checked) {
+            $("#address1P1").val($("#address-1").val()).prop("readonly", true);
+            $("#address2P1").val($("#address-2").val()).prop("readonly", true);
+            $("#postcodeP1").val($("#postcode").val()).prop("readonly", true);
+            $("#cityP1").val($("#city").val()).css({ "pointer-events": "none", background: "#e9ecef" });
+
+            $("#stateP1").val($("#state").val()).css({ "pointer-events": "none", background: "#e9ecef" });
+
+            $("#countryP1").val($("#country").val()).prop("readonly", true).css({
+                "pointer-events": "none",
+                "touch-action": "none",
+                background: "#e9ecef",
+            });
+
+            // Fetch permanent address from userAddress table if available
+            var id = document.getElementById("user_id").value;
+            // console.log(id);
+            // return false;
+            var getEmployeeAddressforCompanionx =
+                getEmployeeAddressforCompanion(id);
+            //console.log(id);
+
+            getEmployeeAddressforCompanionx
+                .then(function (data) {
+                    if (data) {
+                        var permanentAddress1 = data.data.address1;
+                        var permanentAddress2 = data.data.address2;
+                        var permanentPostcode = data.data.postcode;
+                        var permanentCity = data.data.city;
+                        var permanentState = data.data.state;
+                        var permanentCountry = data.data.country;
+                        console.log(data);
+
+                        if (
+                            permanentAddress1 ||
+                            permanentAddress2 ||
+                            permanentPostcode ||
+                            permanentCity ||
+                            permanentState ||
+                            permanentCountry
+                        ) {
+                            $("#address1P1").val(permanentAddress1);
+                            $("#address2P1").val(permanentAddress2);
+                            $("#postcodeP1").val(permanentPostcode);
+                            $("#cityP1").val(permanentCity);
+                            $("#stateP1").val(permanentState);
+                            $("#countryP1").val(permanentCountry);
+
+
+                           
+                        }
+                    }
+                })
+                .fail(function (xhr, status, error) {
+                    console.log("Error fetching permanent address: " + error);
+                });
+        } else {
+            $("#address1P1").val($("").val()).prop("readonly", false);
+            $("#address2P1").val($("").val()).prop("readonly", false);
+            $("#postcodeP1").val($("").val()).prop("readonly", false);
+            $("#cityP1").val($("").val()).prop("readonly", false);
+            $("#stateP1").val($("").val()).prop("disabled", false);
+            $("#countryP1").val($("1").val()).prop("disabled", false);
         }
     });
 
@@ -2425,12 +2493,14 @@ $(document).ready(function () {
         });
     });
 
+
     companion = ["1", "2", "3", "4"];
 
     for (let i = 0; i < companion.length; i++) {
         const no = companion[i];
 
         $("#updateCompanion" + no).click(function (e) {
+            
             $("#updateCompanionForm" + no).validate({
                 rules: {
                     firstName: {
@@ -2597,36 +2667,7 @@ $(document).ready(function () {
         });
     }
 
-    // $("#updateCompanion" + no).click(function (e) {
-    //     var data = new FormData(document.getElementById("updateCompanionForm" + no));
-
-    //     $.ajax({
-    //         type: "POST",
-    //         url: "/updateEmployeeCompanion",
-    //         data: data,
-    //         dataType: "json",
-    //
-    //         processData: false,
-    //         contentType: false,
-    //     }).then(function (data) {
-    //         console.log(data);
-    //         Swal.fire({
-    //             title: data.title,
-    //             icon: "success",
-    //             text: data.msg,
-    //             type: data.type,
-    //             confirmButtonColor: "#3085d6",
-    //             confirmButtonText: "OK",
-    //             allowOutsideClick: false,
-    //             allowEscapeKey: false,
-    //         }).then(function () {
-    //             if (data.type == "error") {
-    //             } else {
-    //                 location.reload();
-    //             }
-    //         });
-    //     });
-    // });
+    
 
     $("#tableChildren").DataTable({
         responsive: false,
@@ -3343,6 +3384,7 @@ $(document).ready(function () {
                     required: true,
                 },
                 DOB: "required",
+                age: "required",
                 gender: {
                     required: false,
                 },
@@ -3350,13 +3392,14 @@ $(document).ready(function () {
                     required: false,
                     digits: true,
                 },
-                relationship1: "required",
+                relationship: "required",
                 address1: "required",
                 postcode: {
                     required: true,
                     digits: true,
                     rangelength: [5, 5],
                 },
+                country: "required",
                 city: "required",
                 state: "required",
                 idNo: {
@@ -3387,12 +3430,13 @@ $(document).ready(function () {
                     required: "Please Insert Last Name",
                 },
                 DOB: "Please Insert Date Of Birth",
+                age: "Please Insert Age",
                 gender: "Please Choose Gender",
                 contactNo: {
                     required: "Please Insert Phone Number",
                     digits: "Please Insert Valid Phone Number Without ' - ' And Space",
                 },
-                relationship1: "Please Choose Relationship",
+                relationship: "Please Choose Relationship",
                 address1: "Please Insert Address 1",
                 postcode: {
                     required: "Please Insert Postcode",
@@ -3400,6 +3444,7 @@ $(document).ready(function () {
                     rangelength: "Please Insert Valid Postcode",
                 },
                 city: "Please Insert City",
+                country: "Please Choose Country",
                 state: "Please Choose State",
                 idNo: {
                     required: "Please Insert New Identification Number",
@@ -3796,12 +3841,12 @@ $(document).ready(function () {
             // Specify validation rules
             rules: {
                 //eclaimrecommender: "required",
-                eclaimapprover: "required",
+                // eclaimapprover: "required",
             },
 
             messages: {
                 //eclaimrecommender: "Please Choose Recommender",
-                eclaimapprover: "Please Choose Approver",
+                // eclaimapprover: "Please Choose Approver",
             },
 
             submitHandler: function (form) {
@@ -4059,7 +4104,11 @@ $(document).ready(function () {
         $("#addEmpForm").validate({
             // Specify validation rules
             rules: {
-                company: "required",
+                role: "required",
+                company: {
+                    required: true,
+                
+                  },
                 departmentId: "required",
                 //unitId: "required",
                 branchId: "required",
@@ -4159,6 +4208,7 @@ $(document).ready(function () {
             },
 
             messages: {
+                role: "Please Insert Employee Role",
                 company: "Please Insert Employee Company",
                 departmentId: "Please Insert Employee Department",
                 //unitId: "Please Insert Employee Unit",
@@ -4596,7 +4646,34 @@ $(document).ready(function () {
 
 
     
+    $("#role").select2({ placeholder: "Please Choose",  width: 'resolve'} );
+    $("#companyForEmployment").select2({ placeholder: "Please Choose", });
+    $("#departmentShow").select2({ placeholder: "Please Choose", });
+    $("#unitShow").select2({ placeholder: "Please Choose",});
+    $("#branchShow").select2({ placeholder: "Please Choose", });
+    $("#jobGrade").select2({ placeholder: "Please Choose", });
+    $("#designation").select2({ placeholder: "Please Choose", });
+    $("#employmentType").select2({ placeholder: "Please Choose", });
+
+
+    // search bar in select box (eleave)
+    $("#eleaverecommender").select2({ placeholder: "Please Choose", });
+    $("#eleaveapprover").select2({ placeholder: "Please Choose", });
+
+    // // search bar in select box (eleave)
+    $("#eclaimrecommender").select2({ placeholder: "Please Choose", });
+    $("#eclaimapprover").select2({ placeholder: "Please Choose", });
+
+    // search bar in select box (Cash Advance)
+    $("#caapprover").select2({ placeholder: "Please Choose", });
+
+    // search bar in select box (Timesheet)
+    $("#tsapprover").select2({ placeholder: "Please Choose", });
+    $("#tsapprover2").select2({ placeholder: "Please Choose", });
+
+    
 });
+
 function dataURLtoFile(dataurl, filename) {
     var arr = dataurl.split(","),
         mime = arr[0].match(/:(.*?);/)[1],
@@ -4675,25 +4752,26 @@ $(document).on("click", "#uploadpicture", function () {
 });
 
 // search bar in select box (eleave)
-$("#eleaverecommender").picker({ search: true });
-$("#eleaveapprover").picker({ search: true });
+// $("#eleaverecommender").picker({ search: true });
+// $("#eleaveapprover").picker({ search: true });
 
-// // search bar in select box (eleave)
-$("#eclaimrecommender").picker({ search: true });
-$("#eclaimapprover").picker({ search: true });
+// // // search bar in select box (eleave)
+// $("#eclaimrecommender").picker({ search: true });
+// $("#eclaimapprover").picker({ search: true });
 
-// search bar in select box (Cash Advance)
-$("#caapprover").picker({ search: true });
+// // search bar in select box (Cash Advance)
+// $("#caapprover").picker({ search: true });
 
-// search bar in select box (Timesheet)
-$("#tsapprover").picker({ search: true });
-$("#tsapprover2").picker({ search: true });
+// // search bar in select box (Timesheet)
+// $("#tsapprover").picker({ search: true });
+// $("#tsapprover2").picker({ search: true });
 
 // search bar in select box (Employment Information)
+
 // $('#role').picker({ search: true });
 // $('#companyForEmployment').picker({ search: true });
-// $('#departmentShow').picker({ search: true });
-// $('#unitShow').picker({ search: true });
+//  $('#departmentShow').select2({data:sportslist});
+//  $('#unitShow').picker({ search: true });
 // $('#branchShow').picker({ search: true });
 // $('#jobGrade').picker({ search: true });
 // $('#designation').picker({ search: true });

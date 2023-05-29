@@ -155,7 +155,7 @@
                     <div class="row p-2">
                         <div class="col-sm-6">
                             <div class="form-check form-switch align-right">
-                                <input class="form-check-input" type="checkbox" name="sameAddress" id="same-address">
+                                <input class="form-check-input" type="checkbox" name="sameAddress" id="same-address3">
                                 <label class="form-check-label" for="same-address">
                                     Same as permenant address
                                 </label>

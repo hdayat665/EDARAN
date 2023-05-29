@@ -10,9 +10,6 @@
                 <div class="accordion-body bg-white">
                     <div class="row p-2">
                         <div class="col-sm-3">
-                            
-                        </div>
-                        <div class="col-sm-3">
                             <div class="form-check form-switch">
                                 <input class="form-check-input"  name="" value="" type="checkbox" role="switch" id="" checked>
                                 <label class="form-check-label" for="set-main">Set as Main Company</label>
@@ -32,11 +29,13 @@
                                     </p>
                                 </div>
                                 <form id="addEmpForm">
+
                                     <div class="card-body">
                                         <div class="row p-2">
                                             <label for="firstname" class="form-label">Role*</label>
-                                            <select class="form-select" name="role" id="role">
-                                                <option value="" label="PLEASE CHOOSE"></option>
+                                            <select class="form-select" name="role" id="role" style="width: 100%">
+                                                {{-- <option selected hidden value="">PLEASE CHOOSE</option> --}}
+                                                <option></option>
                                                 <?php $roles = getAllRole(); ?>
                                                 @foreach ($roles as $role)
                                                     <option value="{{ $role->id }}"
@@ -44,13 +43,15 @@
                                                         label="{{ $role->roleName }}">{{ $role->roleName }}</option>
                                                         
                                                 @endforeach
+                                             
                                             </select>
                                             <input type="hidden" name="id" value="{{ $employment->id }}">
                                         </div>
                                         <div class="row p-2">
                                             <label for="firstname" class="form-label">Company*</label>
-                                            <select class="form-select" name="company" id="companyForEmployment">
-                                                <option value="" label="PLEASE CHOOSE"></option>
+                                            <select class="form-select" name="company" id="companyForEmployment" style="width: 100%">
+                                                {{-- <option selected hidden value="">PLEASE CHOOSE</option> --}}
+                                                <option></option>
                                                 <?php $companys = getCompany(); ?>
                                                 @foreach ($companys as $company)
                                                     <option value="{{ $company->id }}" <?php echo $employment->company == $company->id ? 'selected="selected"' : ''; ?>
@@ -61,48 +62,56 @@
                                         </div>
                                         <div class="row p-2">
                                             <label for="firstname" class="form-label">Department*</label>
-                                            <select class="form-select" name="departmentId" id="departmentShow">
+                                            <select class="form-select" name="departmentId" id="departmentShow" style="width: 100%">
+                                                {{-- <option selected hidden value="">PLEASE CHOOSE</option> --}}
+                                                <option></option>
+
                                                 <?php $Departments = getDepartment(); ?>
-                                                <option value="" label="PLEASE CHOOSE"></option>
                                                 @foreach ($Departments as $Department)
                                                     <option value="{{ $Department->id ?? null }}" <?php echo $employment->department == $Department->id ? 'selected="selected"' : ''; ?>
-                                                        label="{{ $Department->departmentName }}"></option>
+                                                        label="{{ $Department->departmentName }}">{{ $Department->departmentName }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
                                         <div class="row p-2">
                                             <label for="firstname" class="form-label">Unit</label>
-                                            <select class="form-select" name="unitId" id="unitShow">
-                                                <?php $Units = getUnit('', $employment->department); ?>
-                                                <option value="" label="PLEASE CHOOSE"></option>
+                                            <select class="form-select" name="unitId" id="unitShow"  style="width: 100%"> 
+                                                <?php $Units = getUnit(', $employment->department'); ?>
+                                                {{-- <option selected hidden value="">PLEASE CHOOSE</option> --}}
+                                                <option></option>
+
                                                 @foreach ($Units as $Unit)
                                                     <option value="{{ $Unit->id }}" <?php echo $employment->unit == $Unit->id ? 'selected="selected"' : ''; ?>
-                                                        label="{{ $Unit->unitName }}"></option>
+                                                        label="{{ $Unit->unitName }}">{{ $Unit->unitName }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
                                         <div class="row p-2">
                                             <label for="firstname" class="form-label">Branch*</label>
-                                            <select class="form-select" name="branchId" id="branchShow">
+                                            <select class="form-select" name="branchId" id="branchShow" style="width: 100%">
                                                 <?php $Branchs = getBranch('', $employment->company); ?>
-                                                <option value="" label="PLEASE CHOOSE" ></option>
+                                                {{-- <option selected hidden value="">PLEASE CHOOSE</option> --}}
+                                                <option></option>
+
                                                 @foreach ($Branchs as $Branch)
                                                     <option value="{{ $Branch->id }}" <?php echo $employment->branch == $Branch->id ? 'selected="selected"' : ''; ?>
-                                                        label="{{ $Branch->branchName }}"></option>
+                                                        label="{{ $Branch->branchName }}">{{ $Branch->branchName }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
                                         <div class="row p-2">
+                                            <div class="col md-6"> 
                                             <label for="firstname" class="form-label">Joined Date*</label>
                                             <input type="text" name="joinedDate" value="{{ $employment->joinedDate ?? '' }}"
                                                 id="datepicker-joindate" class="form-control" placeholder="YYYY-MM-DD"
-                                                aria-describedby="address-2">
+                                                aria-describedby="address-2" style="width: 100%">
+                                            </div>
                                         </div>
                                         <div class="row p-2">
                                             <label for="firstname" class="form-label">Job Grade*</label>
-                                            <select class="form-select" name="jobGrade"  id="jobGrade">
+                                            <select class="form-control" name="jobGrade"  id="jobGrade" style="width: 100%">
                                                 <?php $JobGrades = getJobGrade(); ?>
-                                                <option value="" label="PLEASE CHOOSE"></option>
+                                                <option></option>
                                                 @foreach ($JobGrades as $JobGrade)
                                                     <option value="{{ $JobGrade->id }}" <?php echo $employment->jobGrade == $JobGrade->id ? 'selected="selected"' : ''; ?>
                                                         label="{{ $JobGrade->jobGradeName }}">{{ $JobGrade->jobGradeName }}</option>
@@ -110,10 +119,12 @@
                                             </select>
                                         </div>
                                         <div class="row p-2">
+                                            
+
                                             <label for="firstname" class="form-label">Designation*</label>
-                                            <select class="form-select" name="designation" id="designation">
+                                            <select class="form-select" name="designation" id="designation" style="width: 100%">
                                                 <?php $Designations = getDesignation(); ?>
-                                                <option value="" label="PLEASE CHOOSE"></option>
+                                                <option></option>
                                                 @foreach ($Designations as $Designation)
                                                     <option value="{{ $Designation->id }}" <?php echo $employment->designation == $Designation->id ? 'selected="selected"' : ''; ?>
                                                         label="{{ $Designation->designationName }}">{{ $Designation->designationName }}</option>
@@ -122,9 +133,9 @@
                                         </div>
                                         <div class="row p-2">
                                             <label for="firstname" class="form-label">Employment Type*</label>
-                                            <select class="form-select" name="employmentType" id="employmentType">
+                                            <select class="form-select" name="employmentType" id="employmentType" style="width: 100%">
                                                 <?php $EmploymentTypes = getEmploymentType(); ?>
-                                                <option value="" label="PLEASE CHOOSE"></option>
+                                                <option></option>
                                                 @foreach ($EmploymentTypes as $EmploymentType)
                                                     <option value="{{ $EmploymentType->id }}" label="{{ $EmploymentType->type }}"
                                                         {{ $employment->employmentType == $EmploymentType->id ? "selected='selected'" : '' }}>
@@ -455,6 +466,7 @@
                                             </select>
                                         </div>
                                         <div class="row p-2">
+                                            
                                             <label for="firstname" class="form-label">Joined Date*</label>
                                             <input type="text" name="" value=""
                                                 id="datepicker-joindate" class="form-control" placeholder="YYYY-MM-DD"

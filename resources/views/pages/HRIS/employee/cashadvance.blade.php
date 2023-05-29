@@ -35,8 +35,9 @@
                                                         <div class="mb-3">
                                                             <label for="" class="form-label">Approver* </label>
                                                             <select class="form-select" name="caapprover"  id="caapprover" >
+                                                                <option></option>
                                                                 <?php $employees = getEmployeeapprover(); ?>
-                                                                <option value="" label="PLEASE CHOOSE"></option>
+                                                               
                                                                 @foreach ($employees as $employee)
                                                                     <option value="{{ $employee->user_id }}" label="{{ $employee->employeeName }}"
                                                                     {{ $employment->caapprover == $employee->user_id ? "selected='selected'" : '' }}>
@@ -48,7 +49,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="modal-footer">
-                                                    <button class="btn btn-primary" id="cahierarchybutton">Update</button>
+                                                    <button  type="submit" class="btn btn-primary" id="cahierarchybutton">Update</button>
                                                     </form>
                                                 </div>
                                         </div>

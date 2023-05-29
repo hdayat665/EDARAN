@@ -38,7 +38,7 @@
                                                             
                                                             <select class="form-select" name="tsapprover"  id="tsapprover" >
                                                                 <?php $employees = getEmployeeapprover($user_id); ?>
-                                                                {{-- <option value="" label="PLEASE CHOOSE"></option> --}}
+                                                                <option></option>
                                                                 @foreach ($employees as $employee)
                                                                     <option value="{{ $employee->user_id }}" label="{{ $employee->employeeName }}"
                                                                     {{ $employment->tsapprover == $employee->user_id ? "selected='selected'" : '' }}>

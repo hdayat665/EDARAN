@@ -54,8 +54,8 @@
                             <div class="row">
                                 <div class="col-sm-12">
                                     <label for="passport" class="form-label" >Passport Number</label>
-                                  
                                    
+
                                     <input type="text" id="passport6" name="passport"  class="form-control" aria-describedby="passport" placeholder="PASSPORT NUMBER">
                                 </div>
                             </div>
@@ -103,7 +103,7 @@
                     </div>
                     <div class="row p-2">
                         <div class="col-sm-6">
-                            <label for="passport" class="form-label">Contact Number</label>
+                            <label for="passport" class="form-label">Phone Number</label>
                             <input type="text" id="" name="contactNo" class="form-control" aria-describedby="passport" placeholder="00000000000">
                         </div>
                         <div class="col-sm-6">
@@ -188,7 +188,7 @@
                             </select>
                         </div>
                         <div class="col-sm-6">
-                            <label for="country" class="form-label">Country</label>
+                            <label for="country" class="form-label">Country*</label>
                             <select class="form-select" name="country" id="countryparent">
                                 <option value="" label="PLEASE CHOOSE"  ></option>
 
