@@ -1,6 +1,33 @@
 $(document).ready(function () {
     let croppie;
 
+
+    // search bar in select box (eleave)
+$("#eleaverecommender").select2({ placeholder:"Please Choose" });
+$("#eleaveapprover").select2({ placeholder:"Please Choose" });
+
+// search bar in select box (eleave)
+$("#eclaimrecommender").select2({ placeholder:"Please Choose" });
+$("#eclaimapprover").select2({ placeholder:"Please Choose" });
+
+// search bar in select box (Cash Advance)
+$("#caapprover").select2({ placeholder:"Please Choose" });
+
+// search bar in select box (Timesheet)
+$("#tsapprover").select2({ placeholder:"Please Choose" });
+$("#tsapprover2").select2({ placeholder:"Please Choose" });
+
+// search bar in select box (Employment Information)
+$('#role').select2({ placeholder:"Please Choose" });
+$('#companyForEmployment').select2({ placeholder:"Please Choose" });
+$('#departmentShow').select2({ placeholder:"Please Choose" });
+$('#unitShow').select2({ placeholder:"Please Choose" });
+$('#branchShow').select2({ placeholder:"Please Choose" });
+$('#jobGrade').select2({ placeholder:"Please Choose" });
+$('#designation').select2({ placeholder:"Please Choose" });
+$('#employmentType').select2({ placeholder:"Please Choose" });
+$('#event').select2({ placeholder:"Please Choose" });
+
     $("#data-table-default").dataTable({
         responsive: true,
         bLengthChange: false,
@@ -1020,6 +1047,7 @@ $(document).ready(function () {
         }
     });
 
+
     $("#same-address3").change(function () {
         if (this.checked) {
             $("#address1P1").val($("#address-1").val()).prop("readonly", true);
@@ -1086,7 +1114,6 @@ $(document).ready(function () {
             $("#countryP1").val($("1").val()).prop("disabled", false);
         }
     });
-
     function getEmployeeAddressforCompanion(id) {
         return $.ajax({
             url: "/getEmployeeAddressforCompanion/" + id,
@@ -2509,7 +2536,6 @@ $(document).ready(function () {
         const no = companion[i];
 
         $("#updateCompanion" + no).click(function (e) {
-
             $("#updateCompanionForm" + no).validate({
                 rules: {
                     firstName: {
@@ -2676,7 +2702,36 @@ $(document).ready(function () {
         });
     }
 
+    // $("#updateCompanion" + no).click(function (e) {
+    //     var data = new FormData(document.getElementById("updateCompanionForm" + no));
 
+    //     $.ajax({
+    //         type: "POST",
+    //         url: "/updateEmployeeCompanion",
+    //         data: data,
+    //         dataType: "json",
+    //
+    //         processData: false,
+    //         contentType: false,
+    //     }).then(function (data) {
+    //         console.log(data);
+    //         Swal.fire({
+    //             title: data.title,
+    //             icon: "success",
+    //             text: data.msg,
+    //             type: data.type,
+    //             confirmButtonColor: "#3085d6",
+    //             confirmButtonText: "OK",
+    //             allowOutsideClick: false,
+    //             allowEscapeKey: false,
+    //         }).then(function () {
+    //             if (data.type == "error") {
+    //             } else {
+    //                 location.reload();
+    //             }
+    //         });
+    //     });
+    // });
 
     $("#tableChildren").DataTable({
         responsive: false,
@@ -4118,10 +4173,7 @@ $(document).ready(function () {
             // Specify validation rules
             rules: {
                 role: "required",
-                company: {
-                    required: true,
-
-                  },
+                company: "required",
                 departmentId: "required",
                 //unitId: "required",
                 branchId: "required",
@@ -4138,6 +4190,8 @@ $(document).ready(function () {
             },
 
             messages: {
+                role: "Please Insert Employee Role",
+
                 company: "Please Insert Employee Company",
                 departmentId: "Please Insert Employee Department",
                 //unitId: "Please Insert Employee Unit",
@@ -4151,7 +4205,7 @@ $(document).ready(function () {
 
                 EffectiveFrom: "Please Choose Effective Form",
 
-                Event: "Please Choose Event",
+                event: "Please Choose Event",
             },
             submitHandler: function (form) {
                 requirejs(["sweetAlert2"], function (swal) {
@@ -4658,35 +4712,13 @@ $(document).ready(function () {
 
 });
 
+$(window).on('load', function() {
+    // Get the height of the Employment Information card
+    var employmentInfoHeight = $("#editHRISJs").height();
 
-    $("#role").select2({ placeholder: "Please Choose",  width: 'resolve'} );
-    $("#companyForEmployment").select2({ placeholder: "Please Choose", });
-    $("#departmentShow").select2({ placeholder: "Please Choose", });
-    $("#unitShow").select2({ placeholder: "Please Choose",});
-    $("#branchShow").select2({ placeholder: "Please Choose", });
-    $("#jobGrade").select2({ placeholder: "Please Choose", });
-    $("#designation").select2({ placeholder: "Please Choose", });
-    $("#employmentType").select2({ placeholder: "Please Choose", });
-    $("#event").select2({ placeholder: "Please Choose", });
-
-
-    // search bar in select box (eleave)
-    $("#eleaverecommender").select2({ placeholder: "Please Choose", });
-    $("#eleaveapprover").select2({ placeholder: "Please Choose", });
-
-    // // search bar in select box (eleave)
-    $("#eclaimrecommender").select2({ placeholder: "Please Choose", });
-    $("#eclaimapprover").select2({ placeholder: "Please Choose", });
-
-    // search bar in select box (Cash Advance)
-    $("#caapprover").select2({ placeholder: "Please Choose", });
-
-    // search bar in select box (Timesheet)
-    $("#tsapprover").select2({ placeholder: "Please Choose", });
-    $("#tsapprover2").select2({ placeholder: "Please Choose", });
-
-
-
+    // Set the same height for the Job History card
+    $("#jobHistoryJs").css("max-height", employmentInfoHeight + "px");
+});
 function dataURLtoFile(dataurl, filename) {
     var arr = dataurl.split(","),
         mime = arr[0].match(/:(.*?);/)[1],
@@ -4764,27 +4796,4 @@ $(document).on("click", "#uploadpicture", function () {
     });
 });
 
-// search bar in select box (eleave)
-// $("#eleaverecommender").picker({ search: true });
-// $("#eleaveapprover").picker({ search: true });
 
-// // // search bar in select box (eleave)
-// $("#eclaimrecommender").picker({ search: true });
-// $("#eclaimapprover").picker({ search: true });
-
-// // search bar in select box (Cash Advance)
-// $("#caapprover").picker({ search: true });
-
-// // search bar in select box (Timesheet)
-// $("#tsapprover").picker({ search: true });
-// $("#tsapprover2").picker({ search: true });
-
-// search bar in select box (Employment Information)
-// $('#role').picker({ search: true });
-// $('#companyForEmployment').picker({ search: true });
-// $('#departmentShow').picker({ search: true });
-// $('#unitShow').picker({ search: true });
-// $('#branchShow').picker({ search: true });
-// $('#jobGrade').picker({ search: true });
-// $('#designation').picker({ search: true });
-// $('#employmentType').picker({ search: true });
