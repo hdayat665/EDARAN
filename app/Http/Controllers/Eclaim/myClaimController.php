@@ -165,7 +165,25 @@ class myClaimController extends Controller
         $data['month'] = $generalClaim->month ?? '';
         $data['year'] = $generalClaim->year ?? '';
         $data['user_id'] = Auth::user()->id ?? '';
+        $data['address'] = $mcs->getUserAddress($data['user_id']);
 
+        if ($data['address']) {
+            $address = $data['address']['address1'];
+            
+            if ($data['address']['address2']) {
+                $address .= ', ' . $data['address']['address2'];
+            }
+            
+            $address .= ', ' . $data['address']['postcode'];
+            $address .= ' ' . $data['address']['city'];
+            $address .= ', ' . $data['address']['state'];
+            $address .= ', ' . $data['address']['country'];
+
+            $data['address'] = $address;
+        } else {
+            $data['address'] = 'Address not available';
+        }
+        
         $data['food'] = $mcs->getFoodByJobGrade($data['user_id']);
         //pr($data['food']);
         $data['car'] = $mcs->getEntitlementByJobGradeCar($data['user_id']);

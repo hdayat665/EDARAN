@@ -78,6 +78,9 @@ $("document").ready(function () {
         } else if ($(this).val() == "Office") {
             var officeValue = $("#office").val() || "-";
             $("#autocomplete").val(officeValue);
+        } else if ($(this).val() == "Home") {
+            var permanentValue = $("#permanentAddress").val() || "-";
+            $("#autocomplete").val(permanentValue);
         } else {
             $("#project").hide();
         }
@@ -94,6 +97,9 @@ $("document").ready(function () {
         } else if ($(this).val() == "Office") {
             var officeValue = $("#office").val() || "-";
             $("#autocomplete2").val(officeValue);
+        } else if ($(this).val() == "Home") {
+            var permanentValue = $("#permanentAddress").val() || "-";
+            $("#autocomplete2").val(permanentValue);
         } else {
             $("#projectdest").hide();
             $("#logname").hide();
