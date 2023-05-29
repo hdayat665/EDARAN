@@ -20,28 +20,30 @@
                 <div class="panel-body">
                     <table id="data-table-default" class="table table-striped table-bordered">
                         <tr>
-                            <th>Total Days of This Month</th>
-                            <td><label id="totalDayMonth"></label></td>
+                            <th>Total Days of This Month 123</th>
+                            <td><label id=""> {{ $timesheetsday['totalDays'] }} days</label></td>
+
                             <th>Weekdays</th>
-                            <td><label id="weekdays"></label></td>
+                            <td><label id=""> {{ $timesheetsday['weekdays'] }} days</label></td>
                         </tr>
                         <tr>
                             <th >Weekend</th>
-                            <td><label id="weekend"></label></td>
+                            <td><label id="">{{ $timesheetsday['weekends'] }} days</label></td>
                             <th>Working Days</th>
-                            <td>19 Days</td>
+                            <td>{{ $timesheetsday['workingDays'] }} days</td>
                         </tr>
                         <tr>
                             <th>Public Holidays</th>
-                            <td>5 Days</td>
+                            <td>{{ $timesheetsday['holidays'] }} days</td>
                             <th>Worked Days</th>
                             <td>19 Days</td>
                         </tr>
                         <tr>
                             <th>Eligible Public Holidays</th>
-                            <td>3 Days</td>
+                            <td>{{ $timesheetsday['holidays'] }} days</td>
                             <th>Remaining TSR</th>
-                            <td>0 Days</td>
+                            <td>{{ $timesheetsday['remaininingtsr'] }} days</td>
+                            
                         </tr>
                     </table>
                 </div>

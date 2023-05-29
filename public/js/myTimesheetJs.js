@@ -854,6 +854,7 @@ $(document).ready(function () {
                 time = endTime.split(":");
                 endTime = time[0] < 10 ? "0" + endTime : endTime;
                 // console.log(logs['total_hour']);
+                // console.log(startDate,startTime,endTime);  
 
                 function type_of_log(id) {
                     const data = {
@@ -893,6 +894,7 @@ $(document).ready(function () {
                         logId: logs["id"],
                     },
                 });
+                // console.log(log);
 
                 loghour.push({
                     start: new Date(startYear, startMonth - 1, startDay),
@@ -1006,7 +1008,7 @@ $(document).ready(function () {
             dataEvent = event.concat(log);
             dataleave = dataEvent.concat(leave);
             dataHoliday = dataleave.concat(holiday);
-
+            // console.log(dataEvent);
             // console.log(holiday);
             var calendar = new FullCalendar.Calendar(calendarElm, {
                 headerToolbar: {
@@ -1066,7 +1068,7 @@ $(document).ready(function () {
                                     var year = info.date.getFullYear();
                                     var month = info.date.getMonth();
                                     var day = info.date.getDate();
-                                    console.log(year);
+                                    // console.log(year);
                                     $('#yearappeal').val(year);
                                     $('#monthappeal').val(new Date(info.date).toLocaleString('en-US', { month: 'long' }));
                                     $('#dayappeal').val(day);
@@ -1097,7 +1099,7 @@ $(document).ready(function () {
                                         var month = months[index];
                                         var day = days[index];
                                         var file = files[index];
-                                        console.log(year);
+                                        // console.log(year);
                                         $('#log_idv').val(logId);
                                         $('#reasonappealv').val(reason);
                                         if (status === "Locked") {
@@ -1152,7 +1154,7 @@ $(document).ready(function () {
                     for (var i = 0; i < loghour.length; i++) {
                         if (current >= loghour[i].start && current <= loghour[i].end) {
                             hasLog = true;
-                            console.log(totalHours);
+                            // console.log(totalHours);
                             totalHours += parseInt(loghour[i].totalHour.split(":")[0]);
                             var logid = loghour[i].logid;
                         }
@@ -1618,8 +1620,10 @@ $(document).ready(function () {
                             );
                             $("#endtimeedit").val(data.end_time);
                             $("#desc").val(data.desc);
-                            $("#total_hour").val(data.total_hour);
+                            $("#total_hour_edit").val(data.total_hour);
                             $("#id").val(data.id);
+                            $("#lunchBreakedit").val(data.lunch_break);
+                            
                         });
 
                         $("#editlogmodal").modal("show");
@@ -2155,6 +2159,15 @@ $(document).ready(function () {
                                 document.getElementById(
                                     "updateEventButton"
                                 ).disabled = true;
+                                var form = document.getElementById("editEventForm");
+                                form.addEventListener("click", function (event) {
+                                event.stopPropagation();
+                                event.preventDefault();
+                                });
+                                form.style.pointerEvents = "none"; // Disable pointer events
+
+                                // Gray out the form
+                                // form.style.opacity = "0.5";
                             } else {
                                 document.getElementById(
                                     "deleteEventButton"
@@ -2311,6 +2324,8 @@ $(document).ready(function () {
                 },
 
                 events: dataHoliday,
+                eventOrder: 'start',
+               
             });
 
             calendar.render();
@@ -2984,27 +2999,81 @@ $("#endeventdate").datepicker({
         });
     });
 
-    $("#logduration,#daystart,#dayend,#starttime,#endtime").change(function () {
-        var startdt = new Date(
-            $("#daystart").val() + " " + $("#starttime").val()
-        );
-        var enddt = new Date($("#dayend").val() + " " + $("#endtime").val());
-        var diff = enddt - startdt;
-        var days = Math.floor(diff / (1000 * 60 * 60 * 24));
-        diff -= days * (1000 * 60 * 60 * 24);
-        var hours = Math.floor(diff / (1000 * 60 * 60));
-        diff -= hours * (1000 * 60 * 60);
-        var mins = Math.floor(diff / (1000 * 60));
-        diff -= mins * (1000 * 60);
-        $("#logduration").val(
-            days + " days : " + hours + " hours : " + mins + " minutes "
-        );
-    });
+   $("#logduration,#daystart,#dayend,#starttime,#endtime,#lunchBreak").change(function () {
+    var startdt = new Date($("#daystart").val() + " " + $("#starttime").val());
+    var enddt = new Date($("#dayend").val() + " " + $("#endtime").val());
+    var diff = enddt - startdt;
+    var days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    diff -= days * (1000 * 60 * 60 * 24);
+    var hours = Math.floor(diff / (1000 * 60 * 60));
+    diff -= hours * (1000 * 60 * 60);
+    var mins = Math.floor(diff / (1000 * 60));
+    diff -= mins * (1000 * 60);
+
+    // $("#logduration").val(
+    //     days + " days : " + hours + " hours : " + mins + " minutes "
+    // );
+
+
+    if ($("#lunchBreak").val() === "1") {
+        hours -= 1;
+        // hours = hours - 1
+    }
+
+    $("#logduration").val(
+        days + " days : " + hours + " hours : " + mins + " minutes "
+    );
+
+    // Disable lunch break if total hours are less than 1
+    if (hours < 1) {
+        $("#lunchBreak").prop("disabled", true);
+    } else {
+        $("#lunchBreak").prop("disabled", false);
+    }
+});
+
+$(document).ready(function () {
+    // Trigger change event on page load to calculate and populate the total hours
+    $("#total_hour_edit,#daystartedit,#dayendedit,#starttimeedit,#endtimeedit,#lunchBreakedit").change();
+});
+
+$("#total_hour_edit,#daystartedit,#dayendedit,#starttimeedit,#endtimeedit,#lunchBreakedit").change(function () {
+    var startdt = new Date($("#daystartedit").val() + " " + $("#starttimeedit").val());
+    var enddt = new Date($("#dayendedit").val() + " " + $("#endtimeedit").val());
+    var diff = enddt - startdt;
+    var days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    diff -= days * (1000 * 60 * 60 * 24);
+    var hours = Math.floor(diff / (1000 * 60 * 60));
+    diff -= hours * (1000 * 60 * 60);
+    var mins = Math.floor(diff / (1000 * 60));
+    diff -= mins * (1000 * 60);
+
+    // Subtract 1 hour if lunch break is selected (value is "1" and not null) and total hours are greater than 1
+    if ($("#lunchBreakedit").val() === "1" && $("#lunchBreakedit").val() !== null && hours > 1) {
+        hours -= 1;
+    }
+
+    $("#total_hour_edit").val(
+        days + " days : " + hours + " hours : " + mins + " minutes "
+    );
+
+    // Disable lunch break if total hours are less than 1
+    // if (hours < 1) {
+    //     $("#lunchBreakedit").prop("disabled", true);
+    // } else {
+    //     $("#lunchBreakedit").prop("disabled", false);
+    // }
+});
+
+
+    
+    
+    
 
     // Trigger the change event on page load to update the duration initially
-    $(document).ready(function () {
-        $("#logduration").trigger("change");
-    });
+    // $(document).ready(function () {
+    //     $("#logduration").trigger("change");
+    // });
 
     calculateDuration();
 

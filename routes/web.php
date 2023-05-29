@@ -549,7 +549,7 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('/getParticipantNameById/{id}', 'getParticipantNameById');
             Route::get('/getConfirmSubmitById/{id}', 'getConfirmSubmitById');
             //SUMMARY TIMESHEET
-            Route::get('/summarytimesheet', 'summarytimesheetView');
+            // Route::get('/summarytimesheet', 'summarytimesheetView');
             Route::get('/summarytimesheet', 'timesheetSummaryView');
             //appeal
             Route::post('/createAppeal', 'createAppeal');
