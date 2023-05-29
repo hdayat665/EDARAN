@@ -16,6 +16,7 @@ use App\Models\TransportMillage;
 use App\Models\Employee;
 use App\Models\AppealMtc;
 use App\Models\EntitleSubsBenefit;
+use App\Models\UserAddress;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
@@ -927,6 +928,15 @@ class myClaimService
 
         return $data;
     }
+    public function getUserAddress($id = '')
+    {
+        $data = UserAddress::where('user_id', $id)
+                ->where('addressType', 1)
+                ->first();
+
+        return $data;
+    }
+    
     public function getFoodByJobGrade($id = '')
     {
         
