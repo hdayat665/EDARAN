@@ -957,6 +957,7 @@ $(document).ready(function () {
             todayHighlight: true,
             autoclose: true,
             format: "yyyy/mm/dd",
+            startDate: "today", // Set the start date to today
         })
         .on("changeDate", function (e) {
             // Set the end datepicker's date to the selected start date
@@ -969,6 +970,8 @@ $(document).ready(function () {
     $("#datepicker-end").datepicker({
         format: "yyyy/mm/dd", // Sets the date format to 'day/month/year'
         autoclose: true, // Closes the datepicker on selection
+        startDate: "today", // Set the start date to today
+        todayHighlight: true,
     });
 
     $("#datepicker-warstart")
@@ -976,6 +979,7 @@ $(document).ready(function () {
         todayHighlight: true,
         autoclose: true,
         format: "yyyy/mm/dd",
+        startDate: "today", // Set the start date to today
     })
     .on("changeDate", function (e) {
         if (e.date) {
@@ -991,20 +995,13 @@ $(document).ready(function () {
         todayHighlight: true,
         autoclose: true,
         format: "yyyy/mm/dd",
-    }).on("changeDate", function (e) {
-        if (e.date) {
-            // Do something with the selected end date
-        }
+        startDate: "today", // Set the start date to today
     });
     
     $("#datepicker-bankexpiry").datepicker({
         todayHighlight: true,
         autoclose: true,
         format: "yyyy/mm/dd",
-    }).on("changeDate", function (e) {
-        if (e.date) {
-            // Do something with the selected bank expiry date
-        }
     });
     
 

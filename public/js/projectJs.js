@@ -147,7 +147,7 @@ $(document).ready(function () {
                 project_code: "Please Insert Project Code",
                 project_name: "Please Insert Project Name",
                 contract_value: {
-                    required: "Please insert Contract Value",
+                    required: "Please Insert Contract Value",
                 },
                 financial_year: "Please Choose Financial Year",
                 LOA_date: "Please Choose LOA Date",
@@ -421,6 +421,7 @@ $(document).ready(function () {
             todayHighlight: true,
             autoclose: true,
             format: "yyyy/mm/dd",
+            startDate: "today", // Set the start date to today
         })
         .on("changeDate", function (e) {
             // Set the end datepicker's date to the selected start date
@@ -430,9 +431,12 @@ $(document).ready(function () {
             $("#contract_end_date").datepicker("setStartDate", e.date);
         });
 
+
     $("#contract_end_date").datepicker({
         format: "yyyy/mm/dd", // Sets the date format to 'day/month/year'
         autoclose: true, // Closes the datepicker on selection
+        startDate: "today", // Set the start date to today
+        todayHighlight: true,
     });
 
     $("#datepicker-warstart")
@@ -440,6 +444,7 @@ $(document).ready(function () {
             todayHighlight: true,
             autoclose: true,
             format: "yyyy/mm/dd",
+            startDate: "today", // Set the start date to today
         })
         .on("changeDate", function (e) {
             // Set the end datepicker's date to the selected start date
@@ -453,6 +458,7 @@ $(document).ready(function () {
         todayHighlight: true,
         autoclose: true,
         format: "yyyy/mm/dd",
+        startDate: "today", // Set the start date to today
     });
 
     $("#datepicker-loa").datepicker({
