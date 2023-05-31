@@ -3,12 +3,11 @@
 <div id="content" class="app-content">
     <h1 class="page-header" id="projectReportListingJs">Reporting <small>| Project | View Listing Report </small></h1>
     <div class="panel panel">
-        <br>
-        <div style="display: flex; justify-content: flex-end">
-            <button type="button" class="btn btn-inverse me-5 hide-on-print " onClick="window.print()">PRINT</button>
-        </div>
-        <div class="panel-body print-body">
+        <div class="panel-body">
             <h4 class="panel-title"> Project Information</h4>
+            <div style="display: flex; justify-content: flex-end">
+                <button type="button" class="btn btn-inverse me-5 hide-on-print" id="printButton">PRINT</button>
+            </div>
             <form>
                 <div class="row mb-15px">
                     <div class="col-md-4">
@@ -97,25 +96,33 @@
         <!-- BEGIN panel-body -->
         <style>
             @media print{
-                .print-container{
-                    page-break-before: always;
-                }
                 .hide-on-print {
-                    visibility: hidden;
+                    display: none;
                 }
                 #header {
-                    height: 50px;
-                    position: fixed;
-                    top: 0;
-                    left: 0;
-                    right: 0; /* Adjust the value as needed */
+                    display: none; /* Adjust the value as needed */
                 }
-                /* Hide the navbar-nav when printing */
+                .page-header{
+                    display: none;
+                }
                 .navbar-nav {
-                    visibility: hidden;
+                    display: none;
                 }
-                .print-body{
-                    margin: 0.5cm;
+                #content {
+                    position: absolute;
+                    top: 0;
+                    padding-top: 1cm;
+                }
+                @page {
+                    margin-bottom: 2cm; /* Adjust this value as needed */
+                }
+                #projectMemberTable_wrapper .dataTables_paginate {
+                    display: none;
+                }
+                #projectMemberTable_wrapper .dataTables_info,
+                #projectMemberTable_wrapper .dataTables_length,
+                #projectMemberTable_wrapper .dataTables_filter {
+                    display: none;
                 }
             }
         </style>
@@ -157,7 +164,7 @@
                     </table>
                     <div class="row p-2">
                         <div class="col align-self-start">
-                            <a href="/projectListing" class="btn btn-light" style="color: black;" type="submit"><i class="fa fa-arrow-left"></i> Back</a>
+                            <a href="/projectListing" class="btn btn-light hide-on-print" style="color: black;" type="submit"><i class="fa fa-arrow-left"></i> Back</a>
                         </div>
                     </div>
                 </div>
@@ -166,3 +173,13 @@
     </div>
 </div>
 @endsection
+<!-- <script>
+        function printAndShowAllRows() {
+        // Show all rows in the table
+        $('#projectMemberTable').DataTable().page.len(-1).draw();
+
+        // Print the page
+        window.print();
+    }
+</script> -->
+

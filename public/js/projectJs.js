@@ -445,6 +445,7 @@ $(document).ready(function () {
             autoclose: true,
             format: "yyyy/mm/dd",
             startDate: "today", // Set the start date to today
+            clearBtn: true, // Add this line to enable the clear button
         })
         .on("changeDate", function (e) {
             // Set the end datepicker's date to the selected start date
@@ -459,6 +460,7 @@ $(document).ready(function () {
         autoclose: true,
         format: "yyyy/mm/dd",
         startDate: "today", // Set the start date to today
+        clearBtn: true, // Add this line to enable the clear button
     });
 
     $("#datepicker-loa").datepicker({
@@ -481,5 +483,6 @@ $(document).ready(function () {
         todayHighlight: true,
         autoclose: true,
         format: "yyyy/mm/dd",
+        clearBtn: true, // Add this line to enable the clear button
     });
 });
