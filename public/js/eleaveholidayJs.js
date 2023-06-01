@@ -255,12 +255,11 @@ $(document).ready(function () {
         var endDate = $("#datepickerend").val();
         var totalDays = "";
 
-        if(startDate.trim() === ""){
+        if (startDate.trim() === "") {
             $("#datepickerend").val("");
         }
 
         if (startDate && endDate) {
-
             var date1 = new Date(startDate);
             var date2 = new Date(endDate);
             var timeDiff = date2.getTime() - date1.getTime();
@@ -271,9 +270,42 @@ $(document).ready(function () {
             if (totalDays <= 0) {
                 $("#datepickerend").val("");
             } else {
-
             }
-
         }
+    });
+
+    $("#bulkUploadHoliday").click(function (e) {
+        requirejs(["sweetAlert2"], function (swal) {
+            var data = new FormData(document.getElementById("uploadBulkForm"));
+            // return false;
+
+            // var data = $('#tree').jstree("get_selected");
+
+            $.ajax({
+                type: "POST",
+                url: "/bulkUploadHoliday",
+                data: data,
+                dataType: "json",
+                processData: false,
+                contentType: false,
+            }).then(function (data) {
+                swal({
+                    title: data.title,
+                    text: data.msg,
+                    type: data.type,
+                    confirmButtonColor: "#3085d6",
+                    confirmButtonText: "OK",
+                    allowOutsideClick: false,
+                    allowEscapeKey: false,
+                }).then(function () {
+                    if (data.type == "error") {
+                    } else {
+                        location.reload();
+                    }
+                });
+            });
+        });
+        //     },
+        // });
     });
 });

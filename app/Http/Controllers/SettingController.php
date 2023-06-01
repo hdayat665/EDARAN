@@ -1160,7 +1160,7 @@ class SettingController extends Controller
 
         $result = $hlv->holidaylistView();
 
-        return view('pages.setting.eleave.holidaylist', $result);
+        return view('pages.setting.eLeave.holidaylist', $result);
     }
 
     public function createholidaylist(Request $r)
