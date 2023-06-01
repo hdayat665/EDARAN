@@ -201,7 +201,7 @@ $(document).ready(function () {
                 },
                 isInvalidDate: function (date) {
                     // Disable dates in the past
-                    return date.isBefore(moment(), "day");
+                    //return date.isBefore(moment(), "day");
                 },
             },
             function (start, end, label) {
@@ -225,7 +225,7 @@ $(document).ready(function () {
                 },
                 isInvalidDate: function (date) {
                     // Disable dates in the past
-                    return date.isBefore(moment(), "day");
+                    //return date.isBefore(moment(), "day");
                 },
             },
             function (start, end, label) {
@@ -249,7 +249,7 @@ $(document).ready(function () {
                 },
                 isInvalidDate: function (date) {
                     // Disable dates in the past
-                    return date.isBefore(moment(), "day");
+                    //return date.isBefore(moment(), "day");
                 },
             },
             function (start, end, label) {
@@ -342,7 +342,7 @@ $(document).ready(function () {
 
                 var price = "";
 
-                if (id == "hotel") {
+                if (id == "hotel") { 
                     price = A1;
                 } else if (id == "lodging") {
                     price = B1;

@@ -1,6 +1,33 @@
 $(document).ready(function () {
     let croppie;
 
+
+    // search bar in select box (eleave)
+$("#eleaverecommender").select2({ placeholder:"Please Choose" });
+$("#eleaveapprover").select2({ placeholder:"Please Choose" });
+
+// search bar in select box (eleave)
+$("#eclaimrecommender").select2({ placeholder:"Please Choose" });
+$("#eclaimapprover").select2({ placeholder:"Please Choose" });
+
+// search bar in select box (Cash Advance)
+$("#caapprover").select2({ placeholder:"Please Choose" });
+
+// search bar in select box (Timesheet)
+$("#tsapprover").select2({ placeholder:"Please Choose" });
+$("#tsapprover2").select2({ placeholder:"Please Choose" });
+
+// search bar in select box (Employment Information)
+$('#role').select2({ placeholder:"Please Choose" });
+$('#companyForEmployment').select2({ placeholder:"Please Choose" });
+$('#departmentShow').select2({ placeholder:"Please Choose" });
+$('#unitShow').select2({ placeholder:"Please Choose" });
+$('#branchShow').select2({ placeholder:"Please Choose" });
+$('#jobGrade').select2({ placeholder:"Please Choose" });
+$('#designation').select2({ placeholder:"Please Choose" });
+$('#employmentType').select2({ placeholder:"Please Choose" });
+$('#event').select2({ placeholder:"Please Choose" });
+
     $("#data-table-default").dataTable({
         responsive: true,
         bLengthChange: false,
@@ -462,7 +489,7 @@ $(document).ready(function () {
             $("#issuingCountryChild").prop("readonly", false);
             $("#issuingCountryChild").prop("disabled", false);
             $("#issuingCountryChild").css("pointer-events", "auto");
-            
+
         } else {
             $("#expiryDateChild").prop("readonly", true);
             $("#expiryDateChild").prop("disabled", true);
@@ -816,7 +843,7 @@ $(document).ready(function () {
             var id = document.getElementById("user_id").value;
             // console.log(id);
             // return false;
-            var getEmployeeAddressforParentx = getEmployeeAddressforParent(44);
+            var getEmployeeAddressforParentx = getEmployeeAddressforParent(id);
             //console.log(id);
 
             getEmployeeAddressforParentx
@@ -1003,7 +1030,7 @@ $(document).ready(function () {
                             $("#countryc").val(permanentCountry);
 
 
-                           
+
                         }
                     }
                 })
@@ -1020,6 +1047,73 @@ $(document).ready(function () {
         }
     });
 
+
+    $("#same-address3").change(function () {
+        if (this.checked) {
+            $("#address1P1").val($("#address-1").val()).prop("readonly", true);
+            $("#address2P1").val($("#address-2").val()).prop("readonly", true);
+            $("#postcodeP1").val($("#postcode").val()).prop("readonly", true);
+            $("#cityP1").val($("#city").val()).css({ "pointer-events": "none", background: "#e9ecef" });
+
+            $("#stateP1").val($("#state").val()).css({ "pointer-events": "none", background: "#e9ecef" });
+
+            $("#countryP1").val($("#country").val()).prop("readonly", true).css({
+                "pointer-events": "none",
+                "touch-action": "none",
+                background: "#e9ecef",
+            });
+
+            // Fetch permanent address from userAddress table if available
+            var id = document.getElementById("user_id").value;
+            // console.log(id);
+            // return false;
+            var getEmployeeAddressforCompanionx =
+                getEmployeeAddressforCompanion(id);
+            //console.log(id);
+
+            getEmployeeAddressforCompanionx
+                .then(function (data) {
+                    if (data) {
+                        var permanentAddress1 = data.data.address1;
+                        var permanentAddress2 = data.data.address2;
+                        var permanentPostcode = data.data.postcode;
+                        var permanentCity = data.data.city;
+                        var permanentState = data.data.state;
+                        var permanentCountry = data.data.country;
+                        console.log(data);
+
+                        if (
+                            permanentAddress1 ||
+                            permanentAddress2 ||
+                            permanentPostcode ||
+                            permanentCity ||
+                            permanentState ||
+                            permanentCountry
+                        ) {
+                            $("#address1P1").val(permanentAddress1);
+                            $("#address2P1").val(permanentAddress2);
+                            $("#postcodeP1").val(permanentPostcode);
+                            $("#cityP1").val(permanentCity);
+                            $("#stateP1").val(permanentState);
+                            $("#countryP1").val(permanentCountry);
+
+
+
+                        }
+                    }
+                })
+                .fail(function (xhr, status, error) {
+                    console.log("Error fetching permanent address: " + error);
+                });
+        } else {
+            $("#address1P1").val($("").val()).prop("readonly", false);
+            $("#address2P1").val($("").val()).prop("readonly", false);
+            $("#postcodeP1").val($("").val()).prop("readonly", false);
+            $("#cityP1").val($("").val()).prop("readonly", false);
+            $("#stateP1").val($("").val()).prop("disabled", false);
+            $("#countryP1").val($("1").val()).prop("disabled", false);
+        }
+    });
     function getEmployeeAddressforCompanion(id) {
         return $.ajax({
             url: "/getEmployeeAddressforCompanion/" + id,
@@ -3387,7 +3481,7 @@ $(document).ready(function () {
                 okuFile: {
                     required: true,
                 },
-                
+
                 expiryDate: "required",
                 issuingCountry: {
                     required: true,
@@ -3861,7 +3955,7 @@ $(document).ready(function () {
         });
     });
 
-    
+
     $("#timehierarchybutton").click(function (e) {
         var id = $("#updatetimehierarchy").val();
         //console.log(id);
@@ -4078,6 +4172,7 @@ $(document).ready(function () {
         $("#addEmpForm").validate({
             // Specify validation rules
             rules: {
+                role: "required",
                 company: "required",
                 departmentId: "required",
                 //unitId: "required",
@@ -4091,10 +4186,12 @@ $(document).ready(function () {
 
                 EffectiveFrom: "required",
 
-                Event: "required",
+                event: "required",
             },
 
             messages: {
+                role: "Please Insert Employee Role",
+
                 company: "Please Insert Employee Company",
                 departmentId: "Please Insert Employee Department",
                 //unitId: "Please Insert Employee Unit",
@@ -4108,7 +4205,7 @@ $(document).ready(function () {
 
                 EffectiveFrom: "Please Choose Effective Form",
 
-                Event: "Please Choose Event",
+                event: "Please Choose Event",
             },
             submitHandler: function (form) {
                 requirejs(["sweetAlert2"], function (swal) {
@@ -4245,7 +4342,7 @@ $(document).ready(function () {
 
             $("#issuingCountry6").prop("disabled", true);
             $("#issuingCountry6").prop("readonly", true);
-            
+
             $("#okucard5").prop("disabled", true);
             $("#okucard5").prop("readonly", true);
 
@@ -4280,7 +4377,7 @@ $(document).ready(function () {
 
             $("#okuattach3").prop("disabled", true);
             $("#okuattach3").prop("readonly", true);
-            
+
         } else {
             $("#expiryDateChild").prop("disabled", true);
             $("#expiryDateChild").prop("readonly", true);
@@ -4297,7 +4394,7 @@ $(document).ready(function () {
         }
     });
     ///////////////////////////////////////
-    
+
     //   oku checkbox myprofile
     $(".okuCheck").click(function () {
         if ($(this).prop("checked")) {
@@ -4699,27 +4796,4 @@ $(document).on("click", "#uploadpicture", function () {
     });
 });
 
-// search bar in select box (eleave)
-$("#eleaverecommender").picker({ search: true });
-$("#eleaveapprover").picker({ search: true });
 
-// // search bar in select box (eleave)
-$("#eclaimrecommender").picker({ search: true });
-$("#eclaimapprover").picker({ search: true });
-
-// search bar in select box (Cash Advance)
-$("#caapprover").picker({ search: true });
-
-// search bar in select box (Timesheet)
-$("#tsapprover").picker({ search: true });
-$("#tsapprover2").picker({ search: true });
-
-// search bar in select box (Employment Information)
-// $('#role').picker({ search: true });
-// $('#companyForEmployment').picker({ search: true });
-// $('#departmentShow').picker({ search: true });
-// $('#unitShow').picker({ search: true });
-// $('#branchShow').picker({ search: true });
-// $('#jobGrade').picker({ search: true });
-// $('#designation').picker({ search: true });
-// $('#employmentType').picker({ search: true });

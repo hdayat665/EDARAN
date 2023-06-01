@@ -36,7 +36,7 @@
                                                     <label for="" class="form-label">Recommender </label>
                                                     <select class="form-select" name="eleaverecommender" id="eleaverecommender">
                                                         @if (!empty($employment->eleaverecommender))
-                                                            <option value="" label="PLEASE CHOOSE">PLEASE CHOOSE</option>
+                                                        <option></option>
                                                         @endif
                                                         <?php $employees = getEmployee(); ?>
                                                         @foreach ($employees as $employee)
@@ -54,7 +54,7 @@
                                                 <div class="mb-3">
                                                     <label for="holiday_title" class="form-label">Approver* </label>
                                                     <select class="form-select" name="eleaveapprover" id="eleaveapprover">
-                                                        {{-- <option value="" label="PLEASE CHOOSE"></option> --}}
+                                                        <option></option>
                                                         <?php $employees = getEmployee(); ?>
                                                         @foreach ($employees as $employee)
                                                             <option value="{{ $employee->user_id }}" label="{{ $employee->employeeName }}"
@@ -115,7 +115,7 @@
                                             <h4 class="fw-bold">
                                                  History
                                             </h4>
-                                            
+
                                         </div>
                                         <div class="col">
                                             <button class="btn btn-white float-end" data-bs-toggle="dropdown">
@@ -255,7 +255,7 @@
                                         <h4 class="fw-bold">
                                              History
                                         </h4>
-                                        
+
                                     </div>
                                     <div class="col">
                                         <button class="btn btn-white float-end" data-bs-toggle="dropdown">
@@ -310,7 +310,7 @@
     </div>
 </div>
 
-{{-- 
+{{--
     <div class="card">
         <div class="card-header bg-white bg-gray-100">
             <h4 class="fw-bold">
