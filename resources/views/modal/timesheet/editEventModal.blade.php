@@ -453,7 +453,7 @@
 
                     <div class="modal-footer">
                         <button type="button" id="deleteEventButton" class="btn btn-danger" >Delete</button>
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" id="closebuttonmodal" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                         <button type="submit" class="btn btn-primary" id="updateEventButton">Update</button>
                     </div>
                 </form>
