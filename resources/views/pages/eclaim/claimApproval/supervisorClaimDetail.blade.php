@@ -99,7 +99,7 @@
                                                 @foreach ($travels as $travel)
                                                     <tr>
                                                         <td>
-                                                            @if ($travel->parking)
+                                                            @if ($travel->type_claim === 'travel')
                                                                 <a data-bs-toggle="modal" data-id="{{ $travel->id }}" id="btn-view-claim" class="btn btn-primary btn-sm travel">View</a>
                                                             @else
                                                                 <a data-bs-toggle="modal" data-id="{{ $travel->id }}" id="btn-view-subsistence" class="btn btn-primary btn-sm travel">View

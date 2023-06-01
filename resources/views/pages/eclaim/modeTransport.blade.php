@@ -140,7 +140,7 @@
                     <label class="form-label"></label>
                 </div>
                 <div class="col-md-5">
-                    <label class="form-label">Toll/Parkisng</label>
+                    <label class="form-label">Toll/Parking</label>
                 </div>
                 <div class="col-md-3">
                     <input type="number" class="form-control" name="toll" id="tollparking" step="0.01" min="0" pattern="^[0-9]+([.][0-9]{1,2})?$" oninput="this.value = this.value.replace(/e/gi, '')">

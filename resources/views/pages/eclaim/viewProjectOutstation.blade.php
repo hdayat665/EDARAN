@@ -9,7 +9,7 @@
                     <label class="form-label col-form-label">Type of Cash Advance :</label>
                 </div>
                 <div class="col-md-9">
-                    <input readonly type="text" class="form-control" name="cash['type']" value="MYR {{ getCashAdvanceType($cashClaim->type) }}">
+                    <input readonly type="text" class="form-control" name="cash['type']" value="{{ getCashAdvanceType($cashClaim->type) }}">
                 </div>
             </div>
             <div class="row p-2">
@@ -33,7 +33,7 @@
                     <label class="form-label col-form-label">Mode of Transport :</label>
                 </div>
                 <div class="col-md-9">
-                    <input readonly type="text" class="form-control" name="mot['transport_type']" value="MYR {{ getModeOfTransport($cashClaim->mode_of_transport->tranport_type) }}">
+                    <input readonly type="text" class="form-control" name="mot['transport_type']" value="{{ getModeOfTransport($cashClaim->mode_of_transport->tranport_type) }}">
                 </div>
             </div>
             <div class="row p-2">
@@ -41,7 +41,7 @@
                     <label class="form-label col-form-label">Travel Date :</label>
                 </div>
                 <div class="col-md-9">
-                    <input readonly type="text" class="form-control" name="cash['travel_date']" value="MYR {{ $cashClaim->travel_date }}">
+                    <input readonly type="text" class="form-control" name="cash['travel_date']" value="{{ $cashClaim->travel_date }}">
                 </div>
             </div>
             <div class="row p-2">
@@ -49,7 +49,7 @@
                     <label class="form-label col-form-label">Project :</label>
                 </div>
                 <div class="col-md-9">
-                    <input readonly type="text" class="form-control" name="cash['project_id']" value="MYR {{ getProjectById($cashClaim->project_id)->project_name }}">
+                    <input readonly type="text" class="form-control" name="cash['project_id']" value="{{ getProjectById($cashClaim->project_id)->project_name }}">
                 </div>
             </div>
             <div class="row p-2">
@@ -57,7 +57,7 @@
                     <label class="form-label col-form-label">Destination :</label>
                 </div>
                 <div class="col-md-9">
-                    <input readonly type="text" class="form-control" name="cash['destination']" value="MYR {{ getProjectLocation($cashClaim->project_location_id)->location_name ?? '-' }}">
+                    <input readonly type="text" class="form-control" name="cash['destination']" value="{{ getProjectLocation($cashClaim->project_location_id)->location_name ?? '-' }}">
                 </div>
             </div>
             <div class="row p-2">

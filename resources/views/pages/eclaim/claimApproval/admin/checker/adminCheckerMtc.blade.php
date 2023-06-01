@@ -106,7 +106,7 @@
                                         @foreach ($travels as $travel)
                                             <tr>
                                                 <td>
-                                                    @if ($travel->parking)
+                                                    @if ($travel->type_claim === 'travel')
                                                         <a data-bs-toggle="modal" data-id="{{ $travel->id }}" id="btn-view-claim" class="btn btn-primary btn-sm travel">View </a>
                                                     @else
                                                         <a data-bs-toggle="modal" data-id="{{ $travel->id }}" id="btn-view-subsistence" class="btn btn-primary btn-sm travel">View
@@ -191,13 +191,16 @@
                     <a href="/adminCheckerView" class="btn btn-light" style="color: black;" type="submit"><i class="fa fa-arrow-left"></i> Back</a>
                 </div>
                 <div class="col d-flex justify-content-end">
-                    @if ( $general->a1 != 'recommend')
+                    @if ($general->a1 != 'recommend')
                         @if ($general->pv_number != '')
                             <!-- The pv_number is not null, so hide all buttons -->
                         @else
                             <!-- The pv_number is null, so show the buttons as before -->
-                            @if ((($personal->a1 == 'check' && $personal->a2 == 'check') || ($personal->a1 == 'check' && $personal->a3 == 'check') || ($personal->a2 == 'check' && $personal->a3 == 'check'))
-                                && (($travel->a1 == 'check' && $travel->a2 == 'check') || ($travel->a1 == 'check' && $travel->a3 == 'check') || ($travel->a2 == 'check' && $travel->a3 == 'check')))
+                            @php
+                                $personal = isset($result['personal']) ? $result['personal'] : null;
+                            @endphp
+                            @if ($personal && ((($personal->a1 == 'check' && $personal->a2 == 'check') || ($personal->a1 == 'check' && $personal->a3 == 'check') || ($personal->a2 == 'check' && $personal->a3 == 'check'))
+                                && (($travel->a1 == 'check' && $travel->a2 == 'check') || ($travel->a1 == 'check' && $travel->a3 == 'check') || ($travel->a2 == 'check' && $travel->a3 == 'check'))))
                                 <!-- All checkboxes are checked, so hide the Amend and Reject buttons -->
                             @else
                                 <!-- At least one checkbox is not checked, so show the Amend and Reject buttons -->
@@ -205,19 +208,28 @@
                                 <a href="javascript:;" class="btn btn-warning" style="color: black" data-bs-toggle="modal" data-bs-target="#modalamend">Amend</a> &nbsp;
                                 <a href="javascript:;" class="btn btn-danger" style="color: black" data-bs-toggle="modal" data-bs-target="#modalreject">Reject</a> &nbsp;
                             @endif
-
-                            @if ((($personal->a1 == 'check' && $personal->a2 == 'check') || ($personal->a1 == 'check' && $personal->a3 == 'check') || ($personal->a2 == 'check' && $personal->a3 == 'check'))
-                                && (($travel->a1 == 'check' && $travel->a2 == 'check') || ($travel->a1 == 'check' && $travel->a3 == 'check') || ($travel->a2 == 'check' && $travel->a3 == 'check')))
+                            
+                            @if ($personal && ((($personal->a1 == 'check' && $personal->a2 == 'check') || ($personal->a1 == 'check' && $personal->a3 == 'check') || ($personal->a2 == 'check' && $personal->a3 == 'check'))
+                                    && (($travel->a1 == 'check' && $travel->a2 == 'check') || ($travel->a1 == 'check' && $travel->a3 == 'check') || ($travel->a2 == 'check' && $travel->a3 == 'check'))))
+                                @if ($checkers == 'a1')
+                                    <a class="btn btn-lime" id="approveButton" data-id="{{ $general->id }}" style="color: black" type="submit">Approve</a>
+                                @endif
+                            @elseif ((($travel->a1 == 'check' && $travel->a2 == 'check') || ($travel->a1 == 'check' && $travel->a3 == 'check') || ($travel->a2 == 'check' && $travel->a3 == 'check')))
+                                @if ($checkers == 'a1')
+                                    <a class="btn btn-lime" id="approveButton" data-id="{{ $general->id }}" style="color: black" type="submit">Approve</a>
+                                @endif
+                            @elseif ($personal && ((($personal->a1 == 'check' && $personal->a2 == 'check') || ($personal->a1 == 'check' && $personal->a3 == 'check') || ($personal->a2 == 'check' && $personal->a3 == 'check'))))
                                 @if ($checkers == 'a1')
                                     <a class="btn btn-lime" id="approveButton" data-id="{{ $general->id }}" style="color: black" type="submit">Approve</a>
                                 @endif
                             @endif
 
+
+
                         @endif
                     @endif
-
-                
                 </div>
+
             </div>
         </div>
     </div>
