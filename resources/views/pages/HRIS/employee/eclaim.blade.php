@@ -35,8 +35,8 @@
                                                         <div class="mb-3">
                                                             <label for="holiday_title" class="form-label">Recommender </label>
                                                             <select class="form-select" name="eclaimrecommender" id="eclaimrecommender">
-                                                                <?php $employees = getEmployeerecommender(); ?>  
-                                                                <option value="" label="PLEASE CHOOSE"></option>
+                                                                <?php $employees = getEmployeerecommender(); ?>
+                                                                <option></option>
                                                                 @foreach ($employees as $employee)
                                                                     <option value="{{ $employee->user_id }}" label="{{ $employee->employeeName }}"
                                                                     {{ $employment->eclaimrecommender == $employee->user_id ? "selected='selected'" : '' }}>
@@ -50,10 +50,10 @@
                                                 <div class="row ">
                                                     <div class="col md-6">
                                                         <div class="mb-3">
-                                                            <label for="holiday_title" class="form-label">Approver </label>
+                                                            <label for="holiday_title" class="form-label">Approver* </label>
                                                             <select class="form-select" name="eclaimapprover" id="eclaimapprover">
                                                                 <?php $employees = getEmployeeapprover(); ?>
-                                                                <option value="" label="PLEASE CHOOSE"></option>
+                                                                <option></option>
                                                                 @foreach ($employees as $employee)
                                                                     <option value="{{ $employee->user_id }}" label="{{ $employee->employeeName }}"
                                                                     {{ $employment->eclaimapprover == $employee->user_id ? "selected='selected'" : '' }}>
@@ -79,7 +79,7 @@
                                         <h4 class="fw-bold">
                                              History
                                         </h4>
-                                        
+
                                     </div>
                                     <div class="col">
                                         <button class="btn btn-white float-end" data-bs-toggle="dropdown">
@@ -131,6 +131,6 @@
             </div>
                 </div>
             </div>
-    
+
 
 

@@ -20,12 +20,21 @@ $(document).ready(function() {
         ],
     });
 
+    $('#printButton').on('click', printAndShowAllRows);
+
     $('#projectMemberTable').DataTable({
-        responsive: false,
+        // responsive: false,
         lengthMenu: [
-            [5,10, 15, 20, -1],
-            [5,10, 15, 20, 'All'],
+            [5, 10, 15, 20, -1],
+            [5, 10, 15, 20, 'All'],
         ],
     });
-
+    function printAndShowAllRows() {
+        // Show all rows in the table
+        $('#projectMemberTable').DataTable().page.len(-1).draw();
+    
+        // Print the page
+        window.print();
+    }
+    
 });

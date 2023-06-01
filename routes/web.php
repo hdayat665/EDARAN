@@ -558,7 +558,7 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('/updateStatusappeal/{id}/{status}', 'updateStatusappeal');
             Route::get('/getAppealById/{id}', 'getAppealById');
             Route::post('/approveAllTimesheetAppeal', 'approveAllTimesheetAppeal');
-            
+
 
 
         });
@@ -621,6 +621,7 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('/getpieleave', 'getpieleave');
             Route::get('/getpieleave2', 'getpieleave2');
             Route::get('/getEarnedLeave', 'getEarnedLeave');
+            Route::get('/getLapseLeave', 'getLapseLeave');
 
             //checking holiday
 
