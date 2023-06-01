@@ -38,9 +38,6 @@
                                 $employees = getEmployeeNotInProject($id);
                                 ?>
 
-
-                                
-
                                 <option value="" label="PLEASE CHOOSE" selected="selected"> </option>
                                 @if ($employees)
 
@@ -70,6 +67,7 @@
                     <div class="row mb-15px">
 
                         <div class="col-md-6">
+                            
                             <select class="form-select" name="designation" id="designation"  style="pointer-events: none; touch-action: none; background: #e9ecef;">
                                 <option value="" label=""></option>
                                 <?php $Designations = getDesignation() ?>
@@ -110,10 +108,9 @@
 
                         <div class="col-md-6">
                             <select class="form-select" name="branch" id="branchs" style="pointer-events: none; touch-action: none; background: #e9ecef;">
-                                <option value="" label=""></option>
-                                <?php $Branchs = getBranch() ?>
-                                @foreach ($Branchs as $Branch)
-                                <option value="{{$Branch->id}}" >{{$Branch->branchName}}</option>
+                                <?php $branch = getBranchProject() ?>
+                                @foreach ($branch as $branchs)
+                                <option value="{{$branchs->id}}" >{{$branchs->branchName}}</option>
                                 @endforeach
                             </select>
 
@@ -122,7 +119,7 @@
                         <div class="col-md-6">
                             <select class="form-select" name="unit" id="unit" style="pointer-events: none; touch-action: none; background: #e9ecef;">
                                 <option value="" label=""></option>
-                                <?php $Units = getUnit() ?>
+                                <?php $Units = getUnitProject() ?>
                                 @foreach ($Units as $Unit)
                                 <option value="{{$Unit->id}}" >{{$Unit->unitName}}</option>
                                 @endforeach
