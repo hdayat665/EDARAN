@@ -1120,6 +1120,7 @@ $(document).ready(function () {
                     var currentdate = new Date();
                     currentdate.setDate(currentdate.getDate());
 
+
                     var oneDayBefore = new Date();
                     oneDayBefore.setDate(currentDate.getDate() - 1);
 
@@ -1138,6 +1139,18 @@ $(document).ready(function () {
 
 
                     var datedefaultformat = dayjs(current).format('YYYY-MM-DD');
+
+                    var weekend1 = current.getDay() === 6;
+                    var weekend2 =current.getDay() === 0;
+
+
+                    var dateonedaybefore = current.getDate() === oneDaysBefore .getDate();
+
+                    var datetwodayebefore = current.getDate() === twoDayBefore.getDate();
+
+                    
+
+                   
 
                    
 
@@ -1294,24 +1307,24 @@ $(document).ready(function () {
                     }
                     
 
-// Convert totalHoursforlog and totalHoursEvent to total seconds
-var [hourslog, minuteslog] = totalHoursforlog.split(":").map(Number);
-var totalSecondslog = hourslog * 3600 + minuteslog * 60;
+                    // Convert totalHoursforlog and totalHoursEvent to total seconds
+                    var [hourslog, minuteslog] = totalHoursforlog.split(":").map(Number);
+                    var totalSecondslog = hourslog * 3600 + minuteslog * 60;
 
-var [hoursevent, minutesevent] = totalHoursEvent.split(":").map(Number);
-var totalSecondsevent = hoursevent * 3600 + minutesevent * 60;
+                    var [hoursevent, minutesevent] = totalHoursEvent.split(":").map(Number);
+                    var totalSecondsevent = hoursevent * 3600 + minutesevent * 60;
 
-// Add totalHoursforlog and totalHoursEvent in seconds
-var totalSeconds = totalSecondslog + totalSecondsevent;
+                    // Add totalHoursforlog and totalHoursEvent in seconds
+                    var totalSeconds = totalSecondslog + totalSecondsevent;
 
-// Convert the total seconds back to the 'hh:mm' format
-var hours = Math.floor(totalSeconds / 3600);
-var minutes = Math.floor((totalSeconds % 3600) / 60);
-var totalHoursCombined = hours.toString().padStart(2, '0') + ':' + minutes.toString().padStart(2, '0');
+                    // Convert the total seconds back to the 'hh:mm' format
+                    var hours = Math.floor(totalSeconds / 3600);
+                    var minutes = Math.floor((totalSeconds % 3600) / 60);
+                    var totalHoursCombined = hours.toString().padStart(2, '0') + ':' + minutes.toString().padStart(2, '0');
 
-var totalHoursCombineds = parseInt(hours, 10).toString();
+                    var totalHoursCombineds = parseInt(hours, 10).toString();
 
-// console.log(totalHoursCombineds);
+                    // console.log(totalHoursCombineds);
 
                     var appliedDates = [];
                     var reasons = [];
@@ -1362,10 +1375,13 @@ var totalHoursCombineds = parseInt(hours, 10).toString();
                         }
                     });
                     // console.log(hours1 + "test")
+
+                    var hasAppeal = appliedDates.includes(datedefaultformat);
+                    var noappeal = !appliedDates.includes(datedefaultformat);
                    
                       if (
                         current.getTime() === currentDate.getTime() ||
-                        (current.getTime() < currentDate.getTime() && current.getDay() !== 6 && current.getDay() !== 0)
+                        (current.getTime() < currentDate.getTime() && !weekend1 && !weekend2)
                         
                     ) {
                         // $(info.el).append('&nbsp;').append(dailycounter);
@@ -1408,8 +1424,8 @@ var totalHoursCombineds = parseInt(hours, 10).toString();
                       
 
                      if (
-                        (current.getDate() === oneDaysBefore .getDate() || current.getDate() === twoDaysBefore .getDate()) &&
-                        !(current.getDay() === 6 || current.getDay() === 0) &&
+                        (dateonedaybefore || datetwodayebefore) &&
+                        !(weekend1 || weekend2) &&
                         !hasLog &&
                         !hasEvent &&
                         current.getMonth() === currentMonth &&
@@ -1420,21 +1436,21 @@ var totalHoursCombineds = parseInt(hours, 10).toString();
 
                      else if(
                          
-                        (current.getDate() === oneDayBefore.getDate() || current.getDate() === twoDayBefore.getDate()) &&
-                        !(current.getDay() === 6 || current.getDay() === 0)  && ( (hasLog || hasEvent) && totalHoursCombineds >= 8)
+                        (dateonedaybefore || datetwodayebefore) &&
+                        !(weekend1 || weekend2)  && ( (hasLog || hasEvent) && totalHoursCombineds >= 8)
                       ) {
                         $(info.el).css('background-color', '#80ff80');
                       }
                       else if(
                          
-                        (current.getDate() === oneDayBefore.getDate() || current.getDate() === twoDayBefore.getDate()) &&
-                        !(current.getDay() === 6 || current.getDay() === 0)  && ( (hasLog || hasEvent) && totalHoursCombineds < 8)
+                        (dateonedaybefore || datetwodayebefore) &&
+                        !(weekend1 || weekend2)  && ( (hasLog || hasEvent) && totalHoursCombineds < 8)
                       ) {
                         $(info.el).css('background-color', '#FF8080');
                       }
 
                       //xde log appeal, log kecik dari 9,exclude weekend
-                       else if((current < duahari) && !appliedDates.includes(datedefaultformat) && totalHoursCombineds < 8 && !(current.getDay() === 6 || current.getDay() === 0)) {
+                       else if((current < duahari) && noappeal && totalHoursCombineds < 8 && !(weekend1 || weekend2)) {
                         // console.log(hourslog);
                         $(info.el).css('background-color', '#FF8080');
                         $(info.el).append('&nbsp;').append(appealaddb);
@@ -1446,10 +1462,10 @@ var totalHoursCombineds = parseInt(hours, 10).toString();
 
                         }else if (
                             (current < duahari) &&
-                            appliedDates.includes(datedefaultformat) &&
+                            hasAppeal &&
                             (
                               ((hasLog || hasEvent) && totalHoursCombineds < 8) ||
-                              (!hasLog && !hasEvent && !(current.getDay() === 6 || current.getDay() === 0))
+                              (!hasLog && !hasEvent && !(weekend1 || weekend2))
                             )
                           ) {
 
@@ -1464,7 +1480,7 @@ var totalHoursCombineds = parseInt(hours, 10).toString();
                         
                          } else if((current < duahari) && (hasLog || hasEvent) && totalHoursCombineds >= 8) {
                             $(info.el).css('background-color', '#80ff80');
-                         } else if((current < duahari) && appliedDates.includes(datedefaultformat) && totalHoursCombineds >= 8) {
+                         } else if((current < duahari) && hasAppeal && totalHoursCombineds >= 8) {
                             $(info.el).css('background-color', '#80ff80');
                             $(info.el).append('&nbsp;').append(viewappealb);
                             $(viewappealb).css({
@@ -1473,7 +1489,7 @@ var totalHoursCombineds = parseInt(hours, 10).toString();
                                 'z-index': '999',   
                                 });
                          }
-                         else if((current < duahari) && appliedDates.includes(datedefaultformat) && totalHoursCombineds < 8) {
+                         else if((current < duahari) && hasAppeal && totalHoursCombineds < 8) {
                             $(info.el).css('background-color', '#FF8080');
                             $(info.el).append('&nbsp;').append(viewappealb);
                             $(viewappealb).css({
