@@ -1341,11 +1341,13 @@ function getDateRange(startDate, endDate) {
                         });
 
                       } 
-                      if(
-                         
-                        (current.getDate() === oneDayBefore.getDate() || current.getDate() === twoDayBefore.getDate()) &&
-                        !(current.getDay() === 6 || current.getDay() === 0) && !hasLog )
-                       {
+                      if (
+                        (current.getMonth() === currentMonth && current.getFullYear() === currentYear) &&
+                        ((current.getDate() === oneDayBefore.getDate() && current.getMonth() === oneDayBeforeMonth && current.getFullYear() === oneDayBeforeYear) ||
+                        (current.getDate() === twoDaysBefore.getDate() && current.getMonth() === twoDaysBeforeMonth && current.getFullYear() === twoDaysBeforeYear)) &&
+                        !(current.getDay() === 6 || current.getDay() === 0) &&
+                        !hasLog
+                      ) {
                         $(info.el).css('background-color', '#FF8080');
                       }
 
