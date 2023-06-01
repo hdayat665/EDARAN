@@ -123,6 +123,8 @@
             <!-- BEGIN header-nav -->
             <div class="navbar-nav">
                 <div class="navbar-item navbar-user dropdown">
+                    <?php $notifications = getNotification(); ?>
+
                     <?php if(Auth::check()): ?>
                     <a href="#" class="navbar-link dropdown-toggle d-flex align-items-center" data-bs-toggle="dropdown">
                         @php
@@ -140,7 +142,8 @@
                             <b class="caret"></b>
                         </span>
                     </a>
-                    <?php endif; ?> <div class="dropdown-menu dropdown-menu-end me-1">
+                    <?php endif; ?>
+                    <div class="dropdown-menu dropdown-menu-end me-1">
                         <a href="myProfile" class="dropdown-item">Edit Profile</a>
                         {{-- <a href="javascript:;" class="dropdown-item d-flex align-items-center">
                             Inbox
@@ -152,6 +155,58 @@
                         <a href="/logout/tenant" class="dropdown-item">Log Out</a>
                     </div>
                 </div>
+                <li class="nav-item dropdown">
+                    <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
+                        <i class="fa fa-bell"></i>
+                        <span class="badge bg-primary badge-number" id="numberNotify">{{ count($notifications) }}</span>
+                    </a><!-- End Notification Icon -->
+                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications .scrollable-menu dropdown-menu2 ">
+                        @if (count($notifications) != 0)
+                            <li class="dropdown-header">
+                                You have new notifications
+                                <a href="#" id="markAllAsRead"><span class="badge rounded-pill bg-primary p-2 ms-2">Mark as read all</span></a>
+                            </li>
+                        @else
+                            <li class="dropdown-header">
+                                You have no new notifications
+                            </li>
+                        @endif
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        @foreach ($notifications as $notification)
+                            <?php
+                            $datetime1 = strtotime($notification->created_at);
+                            $datetime2 = strtotime(date('Y/m/d H:i:s'));
+                            
+                            $diff = abs($datetime1 - $datetime2);
+                            
+                            $dateNotify = getDateFormat($diff)['minutes'];
+                            
+                            ?>
+                            @if (!$notification->read_at)
+                                <?php $notify = json_decode($notification->data); ?>
+                                <li class="notification-item">
+                                    <i class="bi bi-exclamation-circle text-warning"></i>
+
+                                    <div>
+                                        <h4>Msg : {{ $notify->msg }}</h4>
+                                        <p>From : {{ $notify->user }}</p>
+                                        <p>
+                                            {{ $dateNotify }} min ago
+                                        </p>
+                                    </div>
+                                </li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                            @endif
+                        @endforeach
+                        {{-- <li class="dropdown-footer">
+                        <a href="#">Show all notifications</a>
+                    </li> --}}
+                    </ul><!-- End Notification Dropdown Items -->
+                </li><!-- End Notification Nav -->
             </div>
             <!-- END header-nav -->
         </div>
@@ -265,13 +320,13 @@
                                     </div>
                                 @endif
                                 <div class="menu-item">
-                                        <a href="/appealtimesheet" class="menu-link">
-                                            <div class="menu-icon">
-                                                <i class="fa fa-receipt text-gray"></i>
-                                            </div>
-                                            <div class="menu-text text-gray">Appeal Approval </div>
-                                        </a>
-                                    </div>
+                                    <a href="/appealtimesheet" class="menu-link">
+                                        <div class="menu-icon">
+                                            <i class="fa fa-receipt text-gray"></i>
+                                        </div>
+                                        <div class="menu-text text-gray">Appeal Approval </div>
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     @endif
@@ -1124,6 +1179,20 @@
         scrollY: 150,
         responsive: false,
         paging: false
+    });
+
+    $(document).on("click", "#markAllAsRead", function() {
+        var id = $(this).data('id');
+        return $.ajax({
+            type: "POST",
+            url: "/markNotification",
+            data: {
+                id
+            }
+        }).done(function(data) {
+            $('li.notification-item').remove();
+            $('#numberNotify').text(0);
+        });
     });
 </script>
 <script>
