@@ -74,7 +74,7 @@
                     @endforeach
                 @endif
             </tbody>
-            <tfoot style="display:table-row-group" id="filteractive">
+            <!-- <tfoot style="display:table-row-group" id="filteractive">
                 <tr>
                     <th data-orderable="false"></th>
                     <th></th>
@@ -87,7 +87,7 @@
                     <th class="text-nowrap">Status</th>
                     <th class="text-nowrap">Status Date</th>
                 </tr>
-            </tfoot>
+            </tfoot> -->
         </table>
     </form>
 </div>

@@ -2064,14 +2064,14 @@ if (!function_exists('getModeOfTransport')) {
     function getModeOfTransport($id = '')
     {
         $data = [
-            '0' => '',
-            '1' => 'Personal Car',
-            '2' => 'Personal Motorcycle',
-            '3' => 'Public Transport',
-            '4' => 'Company Car',
-            '5' => 'Carpool',
-        ];
-
+            '' => '',
+            '2' => 'Personal Car',
+            '3' => 'Personal Motorcycle',
+            '4' => 'Public Transport',
+            '5' => 'Company Car',
+            '6' => 'Carpool',
+        ]; 
+        
         if ($id) {
             return $data[$id];
         }

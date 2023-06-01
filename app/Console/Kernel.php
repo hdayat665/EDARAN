@@ -4,6 +4,7 @@ namespace App\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+use App\Models\ClaimDateSetting;
 
 class Kernel extends ConsoleKernel
 {
@@ -14,8 +15,12 @@ class Kernel extends ConsoleKernel
      * @return void
      */
     protected function schedule(Schedule $schedule)
-    {
-        // $schedule->command('inspire')->hourly();
+    {   
+        $date = ClaimDateSetting::first();
+        $submitAdmin = $date->submit_claim_day_admin;
+        
+        $schedule->command('change:data:status')->monthlyOn($submitAdmin, '08:00');
+
     }
 
     /**

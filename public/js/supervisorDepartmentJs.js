@@ -1,218 +1,322 @@
 $(document).ready(function () {
-    $("#filteractive").hide();
-    $("#activeTable").DataTable({
-        bPaginate: false,
-        // scrollX:true,
-        initComplete: function (settings, json) {
-            this.api()
-                .columns([2, 3, 4, 5, 6, 7, 8, 9])
-                .every(function () {
-                    var column = this;
-                    var select = $(
-                        '<select><option value=""></option></select>'
-                    )
-                        .appendTo($(column.footer()).empty())
-                        .on("change", function () {
-                            var val = $.fn.dataTable.util.escapeRegex(
-                                $(this).val()
-                            );
-                            column
-                                .search(val ? "^" + val + "$" : "", true, false)
-                                .draw();
-                        });
 
-                    column
-                        .data()
-                        .unique()
-                        .sort()
-                        .each(function (d, j) {
-                            select.append(
-                                '<option value="' + d + '">' + d + "</option>"
-                            );
-                        });
-                });
-            $("#activeTable").wrap(
-                "<div style='overflow:auto; width:100%;position:relative;'></div>"
-            );
-        },
+    // Get the bucket tab element
+    // Get the necessary elements
+    const bucketTab = document.getElementById('bucketTab');
+    const skipButton = document.getElementById('skipButton');
 
-        dom: '<"dataTables_wrapper dt-bootstrap"<"row"<"col-xl-7 d-block d-sm-flex d-xl-block justify-content-center"<"d-block d-lg-inline-flex me-0 me-md-3"l><"d-block d-lg-inline-flex"B>><"col-xl-5 d-flex d-xl-block justify-content-center"fr>>t<"row"<"col-md-5"i><"col-md-7"p>>>',
+    // Event listener for Bucket tab
+    bucketTab.addEventListener('click', function() {
+    // Show the skipButton
+    skipButton.style.display = 'block';
+    });
+
+    // Event listeners for other tabs
+    const activeTab = document.getElementById('activeTab');
+    const amendTab = document.getElementById('ammendTab');
+    const rejectedTab = document.getElementById('rejectedTab');
+
+    // Function to hide the skipButton
+    function hideSkipButton() {
+    skipButton.style.display = 'none';
+    }
+
+    // Event listeners for Active, Amend, and Rejected tabs
+    activeTab.addEventListener('click', hideSkipButton);
+    amendTab.addEventListener('click', hideSkipButton);
+    rejectedTab.addEventListener('click', hideSkipButton);
+
+
+    // Get the necessary elements
+    const approveAllButton = document.getElementById('approveAllButton');
+
+    // Event listener for Active tab
+    activeTab.addEventListener('click', function() {
+    // Show the approveAllButton
+    approveAllButton.style.display = 'block';
+    });
+
+    // Function to hide the approveAllButton
+    function hideApproveAllButton() {
+    approveAllButton.style.display = 'none';
+    }
+
+    // Event listeners for Amend and Rejected tabs
+    bucketTab.addEventListener('click', hideApproveAllButton);
+    amendTab.addEventListener('click', hideApproveAllButton);
+    rejectedTab.addEventListener('click', hideApproveAllButton);
+
+    // $("#filteractive").hide();
+    // $("#activeTable").DataTable({
+    //     bPaginate: false,
+    //     // scrollX:true,
+    //     initComplete: function (settings, json) {
+    //         this.api()
+    //             .columns([2, 3, 4, 5, 6, 7, 8, 9])
+    //             .every(function () {
+    //                 var column = this;
+    //                 var select = $(
+    //                     '<select><option value=""></option></select>'
+    //                 )
+    //                     .appendTo($(column.footer()).empty())
+    //                     .on("change", function () {
+    //                         var val = $.fn.dataTable.util.escapeRegex(
+    //                             $(this).val()
+    //                         );
+    //                         column
+    //                             .search(val ? "^" + val + "$" : "", true, false)
+    //                             .draw();
+    //                     });
+
+    //                 column
+    //                     .data()
+    //                     .unique()
+    //                     .sort()
+    //                     .each(function (d, j) {
+    //                         select.append(
+    //                             '<option value="' + d + '">' + d + "</option>"
+    //                         );
+    //                     });
+    //             });
+    //         $("#activeTable").wrap(
+    //             "<div style='overflow:auto; width:100%;position:relative;'></div>"
+    //         );
+    //     },
+
+    //     dom: '<"dataTables_wrapper dt-bootstrap"<"row"<"col-xl-7 d-block d-sm-flex d-xl-block justify-content-center"<"d-block d-lg-inline-flex me-0 me-md-3"l><"d-block d-lg-inline-flex"B>><"col-xl-5 d-flex d-xl-block justify-content-center"fr>>t<"row"<"col-md-5"i><"col-md-7"p>>>',
+    //     buttons: [
+    //         {
+    //             extend: "pdf",
+    //             className: "btn-sm",
+    //             orientation: "landscape",
+    //             exportOptions: {
+    //                 columns: [2, 3, 4, 5, 6, 7, 8, 9],
+    //             },
+    //         },
+    //         {
+    //             text: '<i class="fa fa-filter" aria-hidden="true"></i>',
+    //             action: function (e, dt, node, config) {
+    //                 $("#filteractive").toggle();
+    //             },
+    //         },
+    //     ],
+    // });
+
+    $("#activeTable").dataTable({
+        searching: true,
+        lengthChange: true,
+        paging: true,
+        lengthMenu: [
+            [5, 10, 25, 50, -1],
+            [5, 10, 25, 50, "All"],
+        ],
+        dom: '<"row"<"col-sm-4"l><"col-sm-4 text-center"B><"col-sm-4"f>>t<"row"<"col-sm-12"ip>>',
         buttons: [
             {
-                extend: "pdf",
-                className: "btn-sm",
-                orientation: "landscape",
+                extend: "excel",
+                className: "btn-blue",
                 exportOptions: {
-                    columns: [2, 3, 4, 5, 6, 7, 8, 9],
+                    columns: [2, 3, 4, 5, 6, 7],
                 },
             },
             {
-                text: '<i class="fa fa-filter" aria-hidden="true"></i>',
-                action: function (e, dt, node, config) {
-                    $("#filteractive").toggle();
+                extend: "pdf",
+                className: "btn-blue",
+                exportOptions: {
+                    columns: [2, 3, 4, 5, 6, 7],
+                },
+            },
+            {
+                extend: "print",
+                className: "btn-blue",
+                exportOptions: {
+                    columns: [2, 3, 4, 5, 6, 7],
                 },
             },
         ],
-    });
-
-    $("#filterrecommend").hide();
-    $("#recommendedtable").DataTable({
-        bPaginate: false,
-        // scrollX:true,
         initComplete: function (settings, json) {
-            this.api()
-                .columns([2, 3, 4, 5, 6, 7, 8, 9])
-                .every(function () {
-                    var column = this;
-                    var select = $(
-                        '<select><option value=""></option></select>'
-                    )
-                        .appendTo($(column.footer()).empty())
-                        .on("change", function () {
-                            var val = $.fn.dataTable.util.escapeRegex(
-                                $(this).val()
-                            );
-                            column
-                                .search(val ? "^" + val + "$" : "", true, false)
-                                .draw();
-                        });
-
-                    column
-                        .data()
-                        .unique()
-                        .sort()
-                        .each(function (d, j) {
-                            select.append(
-                                '<option value="' + d + '">' + d + "</option>"
-                            );
-                        });
-                });
-            $("#recommendedtable").wrap(
+            $("#activetable").wrap(
                 "<div style='overflow:auto; width:100%;position:relative;'></div>"
             );
         },
+        columnDefs: [{ orderable: false, targets: [0] }],
+    });
 
-        dom: '<"dataTables_wrapper dt-bootstrap"<"row"<"col-xl-7 d-block d-sm-flex d-xl-block justify-content-center"<"d-block d-lg-inline-flex me-0 me-md-3"l><"d-block d-lg-inline-flex"B>><"col-xl-5 d-flex d-xl-block justify-content-center"fr>>t<"row"<"col-md-5"i><"col-md-7"p>>>',
+    // $("#filterrecommend").hide();
+    // $("#recommendedtable").DataTable({
+    //     bPaginate: false,
+    //     // scrollX:true,
+    //     initComplete: function (settings, json) {
+    //         this.api()
+    //             .columns([2, 3, 4, 5, 6, 7, 8, 9])
+    //             .every(function () {
+    //                 var column = this;
+    //                 var select = $(
+    //                     '<select><option value=""></option></select>'
+    //                 )
+    //                     .appendTo($(column.footer()).empty())
+    //                     .on("change", function () {
+    //                         var val = $.fn.dataTable.util.escapeRegex(
+    //                             $(this).val()
+    //                         );
+    //                         column
+    //                             .search(val ? "^" + val + "$" : "", true, false)
+    //                             .draw();
+    //                     });
+
+    //                 column
+    //                     .data()
+    //                     .unique()
+    //                     .sort()
+    //                     .each(function (d, j) {
+    //                         select.append(
+    //                             '<option value="' + d + '">' + d + "</option>"
+    //                         );
+    //                     });
+    //             });
+    //         $("#recommendedtable").wrap(
+    //             "<div style='overflow:auto; width:100%;position:relative;'></div>"
+    //         );
+    //     },
+
+    //     dom: '<"dataTables_wrapper dt-bootstrap"<"row"<"col-xl-7 d-block d-sm-flex d-xl-block justify-content-center"<"d-block d-lg-inline-flex me-0 me-md-3"l><"d-block d-lg-inline-flex"B>><"col-xl-5 d-flex d-xl-block justify-content-center"fr>>t<"row"<"col-md-5"i><"col-md-7"p>>>',
+    //     buttons: [
+    //         {
+    //             extend: "pdf",
+    //             className: "btn-sm",
+    //             orientation: "landscape",
+    //         },
+    //         {
+    //             text: '<i class="fa fa-filter" aria-hidden="true"></i>',
+    //             action: function (e, dt, node, config) {
+    //                 $("#filterrecommend").toggle();
+    //             },
+    //         },
+    //     ],
+    // });
+
+    $("#buckettable").dataTable({
+        searching: true,
+        lengthChange: true,
+        paging: true,
+        lengthMenu: [
+            [5, 10, 25, 50, -1],
+            [5, 10, 25, 50, "All"],
+        ],
+        dom: '<"row"<"col-sm-4"l><"col-sm-4 text-center"B><"col-sm-4"f>>t<"row"<"col-sm-12"ip>>',
         buttons: [
             {
-                extend: "pdf",
-                className: "btn-sm",
-                orientation: "landscape",
+                extend: "excel",
+                className: "btn-blue",
+                exportOptions: {
+                    columns: [2, 3, 4, 5, 6, 7],
+                },
             },
             {
-                text: '<i class="fa fa-filter" aria-hidden="true"></i>',
-                action: function (e, dt, node, config) {
-                    $("#filterrecommend").toggle();
+                extend: "pdf",
+                className: "btn-blue",
+                exportOptions: {
+                    columns: [2, 3, 4, 5, 6, 7],
+                },
+            },
+            {
+                extend: "print",
+                className: "btn-blue",
+                exportOptions: {
+                    columns: [2, 3, 4, 5, 6, 7],
                 },
             },
         ],
-    });
-
-    $("#filteramends").hide();
-    $("#amendtable").DataTable({
-        bPaginate: false,
-        // scrollX:true,
         initComplete: function (settings, json) {
-            this.api()
-                .columns([2, 3, 4, 5, 6, 7, 8, 9, 10])
-                .every(function () {
-                    var column = this;
-                    var select = $(
-                        '<select><option value=""></option></select>'
-                    )
-                        .appendTo($(column.footer()).empty())
-                        .on("change", function () {
-                            var val = $.fn.dataTable.util.escapeRegex(
-                                $(this).val()
-                            );
-                            column
-                                .search(val ? "^" + val + "$" : "", true, false)
-                                .draw();
-                        });
-
-                    column
-                        .data()
-                        .unique()
-                        .sort()
-                        .each(function (d, j) {
-                            select.append(
-                                '<option value="' + d + '">' + d + "</option>"
-                            );
-                        });
-                });
-            $("#amendtable").wrap(
+            $("#activetable").wrap(
                 "<div style='overflow:auto; width:100%;position:relative;'></div>"
             );
         },
+        columnDefs: [{ orderable: false, targets: [0] }],
+    });
 
-        dom: '<"dataTables_wrapper dt-bootstrap"<"row"<"col-xl-7 d-block d-sm-flex d-xl-block justify-content-center"<"d-block d-lg-inline-flex me-0 me-md-3"l><"d-block d-lg-inline-flex"B>><"col-xl-5 d-flex d-xl-block justify-content-center"fr>>t<"row"<"col-md-5"i><"col-md-7"p>>>',
+    //$("#filteramends").hide();
+    $("#amendtable").dataTable({
+        searching: true,
+        lengthChange: true,
+        paging: true,
+        lengthMenu: [
+            [5, 10, 25, 50, -1],
+            [5, 10, 25, 50, "All"],
+        ],
+        dom: '<"row"<"col-sm-4"l><"col-sm-4 text-center"B><"col-sm-4"f>>t<"row"<"col-sm-12"ip>>',
         buttons: [
             {
-                extend: "pdf",
-                className: "btn-sm",
-                orientation: "landscape",
+                extend: "excel",
+                className: "btn-blue",
+                exportOptions: {
+                    columns: [2, 3, 4, 5, 6, 7],
+                },
             },
             {
-                text: '<i class="fa fa-filter" aria-hidden="true"></i>',
-                action: function (e, dt, node, config) {
-                    $("#filteramends").toggle();
+                extend: "pdf",
+                className: "btn-blue",
+                exportOptions: {
+                    columns: [2, 3, 4, 5, 6, 7],
+                },
+            },
+            {
+                extend: "print",
+                className: "btn-blue",
+                exportOptions: {
+                    columns: [2, 3, 4, 5, 6, 7],
                 },
             },
         ],
-    });
-
-    $("#filterreject").hide();
-    $("#rejecttable").DataTable({
-        bPaginate: false,
-        // scrollX:true,
         initComplete: function (settings, json) {
-            this.api()
-                .columns([2, 3, 4, 5, 6, 7, 8, 9, 10])
-                .every(function () {
-                    var column = this;
-                    var select = $(
-                        '<select><option value=""></option></select>'
-                    )
-                        .appendTo($(column.footer()).empty())
-                        .on("change", function () {
-                            var val = $.fn.dataTable.util.escapeRegex(
-                                $(this).val()
-                            );
-                            column
-                                .search(val ? "^" + val + "$" : "", true, false)
-                                .draw();
-                        });
-
-                    column
-                        .data()
-                        .unique()
-                        .sort()
-                        .each(function (d, j) {
-                            select.append(
-                                '<option value="' + d + '">' + d + "</option>"
-                            );
-                        });
-                });
-            $("#rejecttable").wrap(
+            $("#activetable").wrap(
                 "<div style='overflow:auto; width:100%;position:relative;'></div>"
             );
         },
+        columnDefs: [{ orderable: false, targets: [0] }],
+    });
 
-        dom: '<"dataTables_wrapper dt-bootstrap"<"row"<"col-xl-7 d-block d-sm-flex d-xl-block justify-content-center"<"d-block d-lg-inline-flex me-0 me-md-3"l><"d-block d-lg-inline-flex"B>><"col-xl-5 d-flex d-xl-block justify-content-center"fr>>t<"row"<"col-md-5"i><"col-md-7"p>>>',
+    $("#rejecttable").dataTable({
+        searching: true,
+        lengthChange: true,
+        paging: true,
+        lengthMenu: [
+            [5, 10, 25, 50, -1],
+            [5, 10, 25, 50, "All"],
+        ],
+        dom: '<"row"<"col-sm-4"l><"col-sm-4 text-center"B><"col-sm-4"f>>t<"row"<"col-sm-12"ip>>',
         buttons: [
             {
-                extend: "pdf",
-                className: "btn-sm",
-                orientation: "landscape",
+                extend: "excel",
+                className: "btn-blue",
+                exportOptions: {
+                    columns: [2, 3, 4, 5, 6, 7],
+                },
             },
             {
-                text: '<i class="fa fa-filter" aria-hidden="true"></i>',
-                action: function (e, dt, node, config) {
-                    $("#filterreject").toggle();
+                extend: "pdf",
+                className: "btn-blue",
+                exportOptions: {
+                    columns: [2, 3, 4, 5, 6, 7],
+                },
+            },
+            {
+                extend: "print",
+                className: "btn-blue",
+                exportOptions: {
+                    columns: [2, 3, 4, 5, 6, 7],
                 },
             },
         ],
+        initComplete: function (settings, json) {
+            $("#activetable").wrap(
+                "<div style='overflow:auto; width:100%;position:relative;'></div>"
+            );
+        },
+        columnDefs: [{ orderable: false, targets: [0] }],
     });
+
+    
 
     $(
         "#rejectModalButton, #rejectModalButton1, #rejectModalButton2, #rejectModalButton3"
@@ -246,7 +350,7 @@ $(document).ready(function () {
             // alert("ss");
             var id = $(this).data("id");
             var stage = "hod";
-            var status = "recommend";
+            var status = "bucket";
 
             requirejs(["sweetAlert2"], function (swal) {
                 $.ajax({
@@ -359,6 +463,7 @@ $(document).ready(function () {
             });
         });
     });
+
     $("#amendButton").click(function (e) {
         var id = $("#amendId").val();
         var stage = "supervisor";

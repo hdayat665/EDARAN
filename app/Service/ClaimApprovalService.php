@@ -14,6 +14,7 @@ use App\Models\GeneralClaimDetail;
 use App\Models\PersonalClaim;
 use App\Models\TravelClaim;
 use App\Models\ModeOfTransport;
+use App\Models\ClaimDateSetting;
 use Illuminate\Support\Facades\Auth;
 
 class ClaimApprovalService
@@ -702,5 +703,16 @@ class ClaimApprovalService
         $data = ApprovalConfig::where([['type_claim', $type_claim], ['tenant_id', Auth::user()->tenant_id], ['role', $role]])->first();
 
         return $data;
+    }
+    public function getBucketDate()
+    {
+        $data = ClaimDateSetting::where('tenant_id', Auth::user()->tenant_id)->first();
+        
+        if (!$data) {
+            $data = [];
+        }
+
+        return $data;
+        
     }
 }
