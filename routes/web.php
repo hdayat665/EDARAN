@@ -623,6 +623,7 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('/getpieleave', 'getpieleave');
             Route::get('/getpieleave2', 'getpieleave2');
             Route::get('/getEarnedLeave', 'getEarnedLeave');
+            Route::get('/getLapseLeave', 'getLapseLeave');
 
             //checking holiday
 

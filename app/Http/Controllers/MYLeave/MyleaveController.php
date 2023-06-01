@@ -131,6 +131,13 @@ class MyleaveController extends Controller
         return $result;
     }
 
+    public function getLapseLeave()
+    {
+        $ms = new MyleaveService;
+        $result = $ms->getLapseLeave();
+        return $result;
+    }
+
     public function getuserleaveAppr($id = '')
     {
         $ms = new MyleaveService;

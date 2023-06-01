@@ -73,7 +73,24 @@ class myClaimController extends Controller
         $data['food'] = $mcs->getFoodByJobGrade($data['user_id']);
         
         $entitlementArr = json_decode($data['car'], true);
+        $data['address'] = $mcs->getUserAddress($data['user_id']);
 
+        if ($data['address']) {
+            $address = $data['address']['address1'];
+            
+            if ($data['address']['address2']) {
+                $address .= ', ' . $data['address']['address2'];
+            }
+            
+            $address .= ', ' . $data['address']['postcode'];
+            $address .= ' ' . $data['address']['city'];
+            $address .= ', ' . $data['address']['state'];
+            $address .= ', ' . $data['address']['country'];
+
+            $data['address'] = $address;
+        } else {
+            $data['address'] = 'Address not available';
+        }
         $firstkmcar = null;
         $firstpricecar = null;
         $secondkmcar = null;

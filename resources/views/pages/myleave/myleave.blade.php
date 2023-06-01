@@ -59,14 +59,14 @@
                                 </div>
                                     <div class="col-sm-6">
                                         <div class="panel-heading mt-15px">
-                                            <h5 class="panel-title">Leave Carried Foward 2022</h5>
+                                            <h5 id = "yearLeave" class="panel-title">Leave Carried Foward 2022</h5>
                                         </div>
                                         <div class="panel-body">
                                             <div id="chart-wrapper" style="display: flex; justify-content: center;">
                                                 <canvas id="myChart2"style="width:100%;max-width:500px"></canvas>
                                             </div>
                                             <br>
-                                            <div class="form-control "> Lapsed: 0 Days </div>
+                                            <div id = "LapseLeave" class="form-control "> Lapsed: 0 Days </div>
                                         </div>
                                     </div>
                             </div><br>

@@ -693,7 +693,22 @@ if (!function_exists('getDepartmentforJobHistory')) {
         return $deparments->pluck('departmentName', 'id')->toArray();
     }
 }
+if (!function_exists('getUnitProject')) {
+    function getUnitProject($id = '')
+    {
+        if ($id) {
+            $data = Unit::find($id);
+        } else {
+            $data = Unit::where('tenant_id', Auth::user()->tenant_id)->get();
+        }
 
+        if (!$data) {
+            $data = [];
+        }
+
+        return $data;
+    }
+}
 if (!function_exists('getUnit')) {
     function getUnit($id = '', $departmentId = '')
     {
@@ -724,7 +739,22 @@ if (!function_exists('getUnitforJobHistory')) {
         return $units->pluck('unitName', 'id')->toArray();
     }
 }
+if (!function_exists('getBranchProject')) {
+    function getBranchProject($id = '')
+    {
+        if ($id) {
+            $data = Branch::find($id);
+        } else {
+            $data = Branch::where('tenant_id', Auth::user()->tenant_id)->get();
+        }
 
+        if (!$data) {
+            $data = [];
+        }
+
+        return $data;
+    }
+}
 if (!function_exists('getBranch')) {
     function getBranch($id = '', $companyId = '')
     {
@@ -2066,14 +2096,14 @@ if (!function_exists('getModeOfTransport')) {
     function getModeOfTransport($id = '')
     {
         $data = [
-            '0' => '',
-            '1' => 'Personal Car',
-            '2' => 'Personal Motorcycle',
-            '3' => 'Public Transport',
-            '4' => 'Company Car',
-            '5' => 'Carpool',
-        ];
-
+            '' => '',
+            '2' => 'Personal Car',
+            '3' => 'Personal Motorcycle',
+            '4' => 'Public Transport',
+            '5' => 'Company Car',
+            '6' => 'Carpool',
+        ]; 
+        
         if ($id) {
             return $data[$id];
         }

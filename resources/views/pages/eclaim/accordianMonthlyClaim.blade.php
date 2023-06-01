@@ -317,10 +317,12 @@
                             <div class="col-md-3">
                                 <input id="result" type="text" class="form-control" name="">
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-2">
                                 <input type="button" id="calculateButton" class="btn btn-primary" value="Calculate">
                             </div>
-                            
+                            <div class="col-md-2" id="confirmBtnDiv" style="display: none">
+                                <input type="button" id="confirmBtn" class="btn btn-primary" value="Confirm?">
+                            </div>
                         </div> 
                         <div class="row p-2" style="display: none">
                             <div class="col-md-4">
@@ -723,6 +725,7 @@
         calculateButton.addEventListener("click", calculateDistance);
     });
 
+    
     function calculateDistance() {
         var startAddress = startAddressInput.value;
         var destinationAddress = destinationAddressInput.value;

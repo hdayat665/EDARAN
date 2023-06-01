@@ -9,7 +9,7 @@
                     <label class="form-label col-form-label">Type of Cash Advance :</label>
                 </div>
                 <div class="col-md-9">
-                    <input readonly type="text" class="form-control" value="MYR {{ getCashAdvanceType($cashClaim->type) }}">
+                    <input readonly type="text" class="form-control" value="{{ getCashAdvanceType($cashClaim->type) }}">
                 </div>
             </div>
             <div class="row p-2">
@@ -33,7 +33,7 @@
                     <label class="form-label col-form-label">Mode of Transport :</label>
                 </div>
                 <div class="col-md-9">
-                    <input readonly type="text" class="form-control" value="MYR {{ getModeOfTransport($cashClaim->mode_of_transport->tranport_type) }}">
+                    <input readonly type="text" class="form-control" value="{{ getModeOfTransport($cashClaim->mode_of_transport->tranport_type) }}">
                 </div>
             </div>
             <div class="row p-2">
@@ -41,7 +41,7 @@
                     <label class="form-label col-form-label">Travel Date :</label>
                 </div>
                 <div class="col-md-9">
-                    <input readonly type="text" class="form-control" value="MYR {{ $cashClaim->travel_date }}">
+                    <input readonly type="text" class="form-control" value="{{ $cashClaim->travel_date }}">
                 </div>
             </div>
             <!-- <div class="row p-2">
@@ -56,7 +56,7 @@
                     <label class="form-label col-form-label">Destination :</label>
                 </div>
                 <div class="col-md-9">
-                    <input readonly type="text" class="form-control" value="MYR {{ $cashClaim->destination ?? '' }}">
+                    <input readonly type="text" class="form-control" value="{{ $cashClaim->destination ?? '' }}">
                 </div>
             </div>
             <div class="row p-2">

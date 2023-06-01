@@ -185,7 +185,7 @@
                                         <label class="form-label">Start Date</label>
                                     </div>
                                     <div class="col">
-                                        <input type="text" class="form-control" placeholder="Date" id="" value="{{ date('Y-m-d', strtotime($travel->start_date)) ?? '-' }}" readonly>
+                                        <input type="text" class="form-control" placeholder="Date" id="" value="{{ isset($travel) ? date('Y-m-d', strtotime($travel->start_date)) : '-' }}" readonly>
                                     </div>
                                 </div>
                                 <div class="row p-2">
@@ -207,7 +207,7 @@
                                         <label class="form-label">End Date</label>
                                     </div>
                                     <div class="col">
-                                        <input type="text" class="form-control" placeholder="Date" id="" value="{{ date('Y-m-d', strtotime($travel->end_date)) ?? '-' }}" readonly>
+                                        <input type="text" class="form-control" placeholder="Date" id="" value="{{ isset($travel) ? date('Y-m-d', strtotime($travel->end_date)) : '-' }}" readonly>
                                     </div>
                                 </div>
                                 <div class="row p-2">

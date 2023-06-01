@@ -71,6 +71,27 @@ $("document").ready(function () {
         }
     });
 
+    $(document).ready(function() {
+        $("#calculateButton").click(function() {
+            $("#confirmBtnDiv").show();
+        });
+
+        $("#confirmBtn").click(function() {
+            var total = parseInt(resultInput.value);
+
+            // call the calculate function with the input value
+            var result = calculate(total);
+        
+            // round up the result and remove decimal places
+            var roundedResult = Math.ceil(result);
+        
+            // display the rounded result in the millage input field
+            $("#millage").val(roundedResult);
+            
+            $("#confirmBtnDiv").hide();
+        });
+    });
+    
     //
     $(document).on("change", "#ls", function () {
         if ($(this).val() == "My Project") {
@@ -86,7 +107,7 @@ $("document").ready(function () {
         }
     });
 
-    //
+    
     $(document).on("change", "#dest", function () {
         if ($(this).val() == "My Project") {
             $("#projectdest").show();

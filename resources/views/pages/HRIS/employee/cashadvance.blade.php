@@ -36,7 +36,7 @@
                                                             <label for="" class="form-label">Approver* </label>
                                                             <select class="form-select" name="caapprover"  id="caapprover" >
                                                                 <?php $employees = getEmployeeapprover(); ?>
-                                                                <option value="" label="PLEASE CHOOSE"></option>
+                                                                <option></option>
                                                                 @foreach ($employees as $employee)
                                                                     <option value="{{ $employee->user_id }}" label="{{ $employee->employeeName }}"
                                                                     {{ $employment->caapprover == $employee->user_id ? "selected='selected'" : '' }}>
@@ -62,7 +62,7 @@
                                             <h4 class="fw-bold">
                                                  History
                                             </h4>
-                                            
+
                                         </div>
                                         <div class="col">
                                             <button class="btn btn-white float-end" data-bs-toggle="dropdown">
@@ -113,6 +113,6 @@
             </div>
         </div>
     </div>
-    
+
 </div>
 

@@ -15,6 +15,7 @@ class ClaimApprovalController extends Controller
 
         $data['claims'] = $mcs->getGeneralClaim($type);
         $data['config'] = $mcs->getApprovalConfig($type, 'monthly');
+        $data['date'] = $mcs->getBucketDate();
 
         $view = getViewForClaimApproval($type);
 
