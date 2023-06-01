@@ -73,7 +73,8 @@
                 <table id="leaveApprovalhod" class="table table-striped table-bordered align-middle">
                     <thead>
                         <tr>
-                            <th>Action</th>
+                            <th width="1%">No.</th>
+                            <th width="1%" data-orderable="false">Action</th>
                             <th>Applied Date</th>
                             <th>Employee Name</th>
                             <th>Type of Leave</th>
@@ -89,7 +90,9 @@
                                     @if ($leaveApprhodView)
                                     @foreach ($leaveApprhodView as $l)
                             <?php $id++ ?>
+
                             <tr class="odd gradeX">
+                                <td>{{ $id }}</td>
                                 <td >
                                     <div class="btn-group">
                                         <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle"><i class="fa fa-cogs"></i> Action <i class="fa fa-caret-down"></i></a>
@@ -154,7 +157,7 @@
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Apply Leave</h5>
+                                <h5 class="modal-title" id="exampleModalLabel">View Leave</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
@@ -195,15 +198,15 @@
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <div class="form-control">
+                                            <div class="form-control" id = "hiderec1">
                                                 <div class="row p-2">
                                                     <div class = col-md-4>
                                                         <label for="text" >Recommended By:</label><br>
                                                         <div id="viewrecommended_by" style="font-weight: lighter;"></div>
                                                     </div>
-                                                    <div class = col-md-2>
+                                                    <div class = "col-md-2">
                                                     </div>
-                                                    <div class = col-md-4>
+                                                    <div class = "col-md-4">
                                                         <label for="text" >Approved By:</label><br>
                                                         <div id="viewapproved_by" style="font-weight: lighter;"></div>
                                                     </div>
@@ -215,28 +218,42 @@
                                                     </div>
                                                     <div class = col-md-2>
                                                     </div>
-                                                    <div class = col-md-4>
+                                                    <div class = "col-md-4">
                                                         <label for="text">Status:</label><br>
                                                     <div id="viewstatus_2" style="font-weight: lighter;"></div>
                                                     </div>
                                                 </div>
                                                 <div class="row p-2" id="viewmenu02">
-                                                    <div class = col-md-4>
+                                                    <div class = "col-md-4">
                                                         {{-- <label for="text">Reason:</label><br>
                                                     <div id="reasonhod1" style="font-weight: lighter;"></div> --}}
                                                     </div>
-                                                    <div class = col-md-2>
+                                                    <div class = "col-md-2">
                                                     </div>
                                                     <div class = col-md-4>
                                                         <label for="text">Reason:</label><br>
                                                     <div id="reasonhod2" style="font-weight: lighter;"></div>
                                                     </div>
                                                 </div>
-
+                                            </div>
+                                            <div class="form-control" id = "hiderec2">
                                                 <div class="row p-2">
+                                                    <div class = "col-md-12">
+                                                        <label for="text" >Approved By:</label><br>
+                                                        <div id="viewapproved_by1" style="font-weight: lighter;"></div>
+                                                    </div>
                                                 </div>
                                                 <div class="row p-2">
-
+                                                    <div class = "col-md-12">
+                                                        <label for="text">Status:</label><br>
+                                                    <div id="viewstatus_21" style="font-weight: lighter;"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="row p-2" id="viewmenu021">
+                                                    <div class = col-md-12>
+                                                        <label for="text">Reason:</label><br>
+                                                        <div id="reasonhod21" style="font-weight: lighter;"></div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -254,7 +271,7 @@
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Apply Leave</h5>
+                                <h5 class="modal-title" id="exampleModalLabel">Leave Approval</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
@@ -296,7 +313,7 @@
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <div class="form-control">
+                                            <div class="form-control" id ="hidesecond1">
                                                 <div class="row p-2">
                                                     <div class = col-md-4>
                                                         <label for="text" >Recommended By:</label><br>
@@ -321,11 +338,19 @@
                                                     <div id="status_2" style="font-weight: lighter;"></div>
                                                     </div>
                                                 </div>
-
+                                            </div>
+                                            <div class="form-control"  id ="hidesecond2">
                                                 <div class="row p-2">
+                                                    <div class = "col-md-12">
+                                                        <label for="text" >Approved By:</label><br>
+                                                        <div id="approved_bya" style="font-weight: lighter;"></div>
+                                                    </div>
                                                 </div>
                                                 <div class="row p-2">
-
+                                                    <div class = "col-md-4">
+                                                        <label for="text">Status:</label><br>
+                                                    <div id="status_2a" style="font-weight: lighter;"></div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -345,13 +370,13 @@
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Reason for Rejection</h5>
+                                <h5 class="modal-title" id="exampleModalLabel">Leave Approval</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
                                 <form id="updatereject">
                                         <div class="row">
-                                            <div class="col-md-4">
+                                            <div class="col-md-12">
                                                 <label class="form-label row-md-6">Employee Name:</label>
                                                 <input type="text" style="pointer-events: none;" class="form-control-plaintext" id="datafullname2" value="" readonly>
                                                 <input type="hidden" readonly class="form-control-plaintext" id="iddata2" >

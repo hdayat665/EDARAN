@@ -49,6 +49,20 @@ $(document).ready(function () {
 
     });
 
+    var getLapseLeave = getLapseLeave();
+
+    function getLapseLeave() {
+        return $.ajax({
+            url: "/getLapseLeave/",
+        });
+    }
+
+    getLapseLeave.then(function (data) {
+        console.log(data);
+        $("#LapseLeave").text("Lapsed: " + (data[0] ? data[0] + " Days" : "0 Days"));
+        $("#yearLeave").text("Leave Carried Foward " + data[1] + "");
+    });
+
 
     var mypie1 = mypie1();
 
@@ -69,10 +83,8 @@ $(document).ready(function () {
 
         var ctx5 = document.getElementById("myChart").getContext("2d");
 
-        var total_balance =
-            datapie.current_entitlement - datapie.total_day_applied;
-        var total_token = datapie.total_day_applied;
-        console.log(datapie);
+        var total_token = datapie.current_entitlement - datapie.current_entitlement_balance;
+        var total_balance = datapie.current_entitlement_balance;
 
         window.myPie = new Chart(ctx5, {
             type: "pie",
@@ -80,7 +92,7 @@ $(document).ready(function () {
                 labels: ["Total Balance", "Total Token"],
                 datasets: [
                     {
-                        data: [total_balance, total_token],
+                        data: [total_balance, total_token, ],
                         backgroundColor: [
                             "rgba(52, 143, 226)",
                             "rgb(73, 182, 214)",
@@ -122,10 +134,8 @@ $(document).ready(function () {
 
         var ctx5 = document.getElementById("myChart2").getContext("2d");
 
-        var total_balance =
-            datapie2.current_entitlement - datapie2.total_day_applied;
-        var total_token = datapie2.total_day_applied;
-        console.log(datapie2);
+        var total_token = datapie2.carry_forward - datapie2.carry_forward_balance;
+        var total_balance = datapie2.carry_forward_balance;
 
         window.myPie = new Chart(ctx5, {
             type: "pie",

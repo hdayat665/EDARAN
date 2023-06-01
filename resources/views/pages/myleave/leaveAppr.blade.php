@@ -71,7 +71,8 @@
                     <table id="leaveApprovalSv" class="table table-striped table-bordered align-middle">
                         <thead>
                             <tr>
-                                <th>Action</th>
+                                <th width="1%">No.</th>
+                                <th width="1%" data-orderable="false">Action</th>
                                 <th>Applied Date</th>
                                 <th>Employee Name</th>
                                 <th>Type of Leave</th>
@@ -88,6 +89,7 @@
                                     @foreach ($leaveApprView as $l)
                                 <?php $id++ ?>
                                 <tr class="odd gradeX">
+                                    <td>{{ $id }}</td>
                                     <td >
                                         <div class="btn-group">
                                             <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle"><i class="fa fa-cogs"></i> Action <i class="fa fa-caret-down"></i></a>
@@ -298,7 +300,7 @@
                                 <div class="modal-body">
                                     <form id="updatereject">
                                         <div class="row">
-                                            <div class="col-md-4">
+                                            <div class="col-md-12">
                                                 <label class="form-label row-md-6">Employee Name:</label>
                                                 <input type="text" style="pointer-events: none;" class="form-control-plaintext" id="datafullname2" value="" readonly>
                                                 <input type="hidden" readonly class="form-control-plaintext" id="iddata2" >
