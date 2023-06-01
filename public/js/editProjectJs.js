@@ -18,7 +18,7 @@ $(document).ready(function () {
     $("#location-search").picker({
         search: true,
     });
-
+ 
     $("#location-search-edit").picker({
         search: true,
     });
