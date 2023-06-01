@@ -567,9 +567,12 @@ $(document).ready(function () {
 
     $("#addappealb").click(function (e) {
         $("#addappeal").validate({
-            rules: {},
+            rules: {
+                reason: "required" },
 
-            messages: {},
+            messages: {
+                reason: "Please Put Reason"
+            },
             submitHandler: function (form) {
                 requirejs(["sweetAlert2"], function (swal) {
                     var data = new FormData(
@@ -950,6 +953,7 @@ $(document).ready(function () {
 
             var holiday = [];
             var holidayDates = [];
+            var rangeholiday = [];
             for (let i = 0; i < data['holidays'].length; i++) {
                 var holidays = data['holidays'][i];
                 // console.log(holidays);
@@ -986,6 +990,16 @@ $(document).ready(function () {
                     start: new Date(startYear, startMonth - 1, startDay),
                     end: new Date(endYear, endMonth - 1, endDay),
                 });
+
+                rangeholiday.push({
+                    start: new Date(startYear, startMonth - 1, startDay),
+                    end: new Date(endYear, endMonth - 1, endDay),
+                    startdateholidays: holidays['start_date'],
+                    endateholidays: holidays['end_date'],
+                    
+                    
+                });
+                // console.log(holidays['start_date'] + holidays['end_date']);
             }
 
             var highestNumber = 0;
@@ -1038,10 +1052,8 @@ $(document).ready(function () {
                 },
 
 
-
-
-
                 dayCellDidMount: function(info) {
+
                     var current = new Date(info.date);
                     var currentDate = new Date();
 
@@ -1058,6 +1070,92 @@ $(document).ready(function () {
 
                     var duahari = twoDayBefore.setDate(currentDate.getDate() - 2);
 
+                    // var duahari1;
+
+                    duahari1 = new Date();
+                    duahari1.setDate(currentDate.getDate() - 1);
+
+                    // Check if duahari falls on a Sunday (day 0) or Saturday (day 6)
+                    if (duahari1.getDay() === 0) {
+                        duahari1.setDate(duahari1.getDate() - 3);
+                    } else if (duahari1.getDay() === 6) {
+                        duahari1.setDate(duahari1.getDate() - 3);
+                    }
+
+
+                    var currentMonth = info.date.getMonth() + 1; // Months are zero-based, so add 1
+                    var currentYear = info.date.getFullYear();
+
+                    // Iterate over the rangeholiday array and filter for dates in the current month
+                    rangeholiday.forEach(function(holiday) {
+                        var startDate = new Date(holiday.startdateholidays);
+                        var endDate = new Date(holiday.endateholidays);
+
+                        // Check if the holiday falls within the current month
+                        if (startDate.getMonth() + 1 === currentMonth && startDate.getFullYear() === currentYear) {
+                            var dateRange = getDateRange(startDate, endDate);
+                            dateRange.forEach(function(date) {
+                                var timestamp = date.getTime();
+                                // console.log(timestamp);
+
+                                // duahari1 = new Date();
+                                // duahari1.setDate(currentDate.getDate() - 1);
+
+                                // Check if duahari falls on a Sunday (day 0) or Saturday (day 6)
+                                // if (duahari1.getDay() === 0) {
+                                //     duahari1.setDate(duahari1.getDate() - 3);
+                                // } else if (duahari1.getDay() === 6) {
+                                //     duahari1.setDate(duahari1.getDate() - 3);
+                                // }
+
+                                // Format the timestamp as a readable date string
+                                var formattedDate = new Date(timestamp).toDateString() + ' ' + new Date(timestamp).toTimeString();
+                                // console.log(formattedDate);
+                                
+                                // console.log(formattedDate);
+                                // if (duahari1 === formattedDate) {
+                                //     // Your logic here for the matching timestamp
+                                //     // duahari1.setDate(duahari1.getDate() - 3);
+                                //     console.log("lalu sini naim")
+                                    
+                                // }
+
+                                
+
+                            }); 
+                        }
+                    });
+
+// console.log(duahari1);
+
+
+function getDateRange(startDate, endDate) {
+    var dateArray = [];
+    var currentDate = new Date(startDate);
+
+    while (currentDate <= endDate) {
+        dateArray.push(new Date(currentDate));
+        currentDate.setDate(currentDate.getDate() + 1);
+    }
+
+    return dateArray;
+}
+
+
+                    
+                    // console.log(duahari1);
+                    
+                    function getDateRange(startDate, endDate) {
+                        var dateArray = [];
+                        var currentDate = new Date(startDate);
+                    
+                        while (currentDate <= endDate) {
+                            dateArray.push(new Date(currentDate));
+                            currentDate.setDate(currentDate.getDate() + 1);
+                        }
+                    
+                        return dateArray;
+                    }
 
                     var datedefaultformat = dayjs(current).format('YYYY-MM-DD');
 
@@ -1149,16 +1247,16 @@ $(document).ready(function () {
                         }
                     }
 
-                    var totalHours = 0;
-                    var hasLog = false;
-                    for (var i = 0; i < loghour.length; i++) {
-                        if (current >= loghour[i].start && current <= loghour[i].end) {
-                            hasLog = true;
-                            // console.log(totalHours);
-                            totalHours += parseInt(loghour[i].totalHour.split(":")[0]);
-                            var logid = loghour[i].logid;
-                        }
-                    }
+                    // var totalHours = 0;
+                    // var hasLog = false;
+                    // for (var i = 0; i < loghour.length; i++) {
+                    //     if (current >= loghour[i].start && current <= loghour[i].end) {
+                    //         hasLog = true;
+                    //         // console.log(totalHours);
+                    //         totalHours += parseInt(loghour[i].totalHour.split(":")[0]);
+                    //         var logid = loghour[i].logid;
+                    //     }
+                    // }
 
                     var totalHours1 = '00:00';
                     var hasLog = false;
@@ -1167,7 +1265,6 @@ $(document).ready(function () {
                             hasLog = true;
                             var logid = loghour[i].logid;
 
-                            // Calculate the total hours by accumulating all the 'total_hour' values for the current date
                             // Calculate the total hours by accumulating all the 'total_hour' values for the current date
                             var totalHour = loghour.filter(log => current.getTime() === log.start.getTime())
                             .reduce((total, log) => {
@@ -1182,7 +1279,7 @@ $(document).ready(function () {
                             totalHours1 = hours.toString().padStart(2, '0') + ':' + minutes.toString().padStart(2, '0');
                             var [hours1, minutes] = totalHours1.split(":").map(Number);
 
-                            // console.log(hours1)
+                            // console.log(totalHours1)
                             // Exit the loop once the total hours for the current date are calculated
                             break;
                         }
@@ -1229,6 +1326,7 @@ $(document).ready(function () {
                         }
                     });
                     
+                    // console.log(duahari1);
                    
                       if (
                         current.getTime() === currentDate.getTime() ||
@@ -1282,15 +1380,23 @@ $(document).ready(function () {
                       ) {
                         $(info.el).css('background-color', '#FF8080');
                       }
+                      
                       //xde log appeal, log kecik dari 9,exclude weekend
-                       else if((current < duahari) && !appliedDates.includes(datedefaultformat) && (hasLog && hours1 < 9 || !hasLog)   && !(current.getDay() === 6 || current.getDay() === 0)) {
-                        $(info.el).css('background-color', '#FF8080');
-                        $(info.el).append('&nbsp;').append(appealaddb);
-                        $(appealaddb).css({
-                            position: 'relative',
-                            top: '-35px',
-                            'z-index': '999',   
-                            });
+                        if((current < duahari) && !appliedDates.includes(datedefaultformat) && (hasLog && hours1 < 9 || !hasLog)   && !(current.getDay() === 6 || current.getDay() === 0)) {
+                        if(current < duahari1) { 
+                            // console.log(current);
+                            $(info.el).css('background-color', '#FF8080');
+                            $(info.el).append('&nbsp;').append(appealaddb);
+                            $(appealaddb).css({
+                                position: 'relative',
+                                top: '-35px',
+                                'z-index': '999',   
+                                });
+                        }
+                        else {
+                            $(info.el).css('background-color', '#FF8080');
+                        }
+                       
 
                         }else if((current < duahari) && appliedDates.includes(datedefaultformat) && (hasLog && hours1 < 9 || !hasLog)   && !(current.getDay() === 6 || current.getDay() === 0)) {
 
@@ -2161,11 +2267,16 @@ $(document).ready(function () {
                                 ).disabled = true;
                                 var form = document.getElementById("editEventForm");
                                 form.addEventListener("click", function (event) {
-                                event.stopPropagation();
-                                event.preventDefault();
+                                // event.stopPropagation();
+                                // event.preventDefault();
                                 });
                                 form.style.pointerEvents = "none"; // Disable pointer events
 
+                                var allowedElements = document.querySelectorAll("#closebuttonmodal,#attendHide,#attendEvent");
+
+                                for (var i = 0; i < allowedElements.length; i++) {
+                                    allowedElements[i].style.pointerEvents = "auto";
+                                }
                                 // Gray out the form
                                 // form.style.opacity = "0.5";
                             } else {
@@ -2511,8 +2622,8 @@ $("#endeventdate").datepicker({
             if (endTime.isBefore(startTime)) {
                 Swal.fire({
                     icon: "error",
-                    title: "Invalid Time Range",
-                    text: "End time cannot be before the start time.",
+                    title: "Error!",
+                    text: "The End Time Could Not Be Before The Start Time.",
                 }).then(() => {
                     $("#endtime").val("");
                     $("#logduration").val("");
@@ -3021,7 +3132,9 @@ $("#endeventdate").datepicker({
     }
 
     $("#logduration").val(
-        days + " days : " + hours + " hours : " + mins + " minutes "
+        // days + " days : " + hours + " hours : " + mins + " minutes "
+        // days +  hours + mins 
+        hours + ":" + mins + ":" + "0"
     );
 
     // Disable lunch break if total hours are less than 1
@@ -3054,7 +3167,9 @@ $("#total_hour_edit,#daystartedit,#dayendedit,#starttimeedit,#endtimeedit,#lunch
     }
 
     $("#total_hour_edit").val(
-        days + " days : " + hours + " hours : " + mins + " minutes "
+        // days + " days : " + hours + " hours : " + mins + " minutes "
+        // days + hours + mins
+        hours + ":" + mins + ":" + "0"
     );
 
     // Disable lunch break if total hours are less than 1
@@ -3159,7 +3274,7 @@ $(
     var mins = Math.floor(diff / (1000 * 60));
     diff -= mins * (1000 * 60);
 
-    console.log(days + ":" + hours);
+    // console.log(days + ":" + hours);
     $("#durationeditevent").val(
         days + " days : " + hours + " hours : " + mins + " minutes "
     );
