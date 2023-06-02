@@ -6,8 +6,7 @@ use App\Models\Users;
 use App\Service\LoginService;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Str;
-// use Illuminate\Support\Facades\Auth;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
@@ -27,6 +26,9 @@ class DashboardController extends Controller
         $result['allEmployee'] = $ss->allEmployee();
         $result['holidays'] = $ss->countHolidays();
         $result = array_merge($result, $ss->countHolidays());
+
+        // sendGeneralNotification(Auth::user()->id, 'testing send to self');
+
         // dd($result['allEmployee']);
         return view('pages.dashboard.tenant', $result);
     }

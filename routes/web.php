@@ -24,6 +24,7 @@ use App\Http\Controllers\Report\EclaimReportController;
 use App\Http\Controllers\COR\CORReportController;
 use App\Http\Controllers\MYLeave\MyleaveController;
 use App\Http\Controllers\Eleave\EleaveController;
+use App\Http\Controllers\NotificationController;
 use Illuminate\Support\Facades\Storage;
 
 /*
@@ -70,6 +71,11 @@ Route::group(['middleware' => ['web']], function () {
         Route::post('/activationEmail', 'activationEmail');
         Route::get('/activateView/{id}', 'activationView');
     });
+
+    Route::controller(EleaveController::class)->group(function () {
+        Route::post('/bulkUploadHoliday', 'bulkUploadHoliday');
+    });
+
 
     Route::controller(AjaxController::class)->group(function () {
         // Route::post('/ajaxRegisterSave', 'ajaxRegisterSave');
@@ -493,7 +499,6 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('/searchOvertimeReport', 'searchOvertimeReport');
             // Route::get('/getReportAllEmployee', 'getReportAllEmployee');
             Route::get('/getEmployeeNamebyDepartment/{id}', 'getEmployeeNamebyDepartment');
-
         });
 
         Route::controller(EleaveReportController::class)->group(function () {
@@ -558,9 +563,6 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('/updateStatusappeal/{id}/{status}', 'updateStatusappeal');
             Route::get('/getAppealById/{id}', 'getAppealById');
             Route::post('/approveAllTimesheetAppeal', 'approveAllTimesheetAppeal');
-
-
-
         });
 
 
@@ -651,6 +653,12 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('/corlisting', 'corlisting');
             Route::post('/searchcor', 'searchcor');
         });
+
+        Route::controller(NotificationController::class)->group(function () {
+            Route::get('/send-notification', 'sendGeneralNotification');
+            Route::post('/markNotification', 'markNotification');
+            // Route::post('/searchcor', 'searchcor');
+        });
     });
 });
 // Route::group(['middleware' => ['auth']], function () {
@@ -681,4 +689,3 @@ Route::get('org/childfinancialaccounting', function () {
 Route::get('org/childinternalaudit', function () {
     return view('pages.org.childInternalAudit');
 });
-
