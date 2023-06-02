@@ -99,7 +99,7 @@
                         <div class="col-md-6">
                             <select class="form-select" name="branch" id="branchE" style="pointer-events: none; touch-action: none; background: #e9ecef;">
                                 <option Value="" label=""></option>
-                                <?php $Branchs = getBranch() ?>
+                                <?php $Branchs = getBranchProject() ?>
                                 @foreach ($Branchs as $Branch)
                                 <option value="{{$Branch->id}}" >{{$Branch->branchName}}</option>
                                 @endforeach
@@ -110,7 +110,7 @@
                         <div class="col-md-6">
                             <select class="form-select" name="unit" id="unitE" style="pointer-events: none; touch-action: none; background: #e9ecef;">
                                 <option Value="" label=""></option>
-                                <?php $Units = getUnit() ?>
+                                <?php $Units = getUnitProject() ?>
                                 @foreach ($Units as $Unit)
                                 <option value="{{$Unit->id}}" >{{$Unit->unitName}}</option>
                                 @endforeach

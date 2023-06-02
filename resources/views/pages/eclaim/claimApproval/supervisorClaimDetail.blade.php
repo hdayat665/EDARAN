@@ -180,7 +180,7 @@
                             <a href="/claimApprovalView/1" class="btn btn-light" style="color: black;" type="submit"><i class="fa fa-arrow-left"></i> Back</a>
                         </div>
                         <div class="col d-flex justify-content-end">
-                        @if ($general->hod == 'recommend')
+                        @if ($general->hod == 'bucket')
                         @else
                             <a class="btn btn-secondary" data-id="{{ $general->id }}" style="color: black" type="submit"> Cancel</a> &nbsp;
                             <a href="javascript:;" class="btn btn-warning" style="color: black" data-bs-toggle="modal" data-bs-target="#modalamend">Amend</a> &nbsp;
