@@ -33,14 +33,14 @@
                         <div class="col-sm-6" id="hidestart">
                             <label for="issuing-country" class="form-label">Start Time*</label>
                             <div class="">
-                                <input id="starteventtime" type="text" name="start_time" class="form-control" value="00:00 AM" style=" background: #ffffff;"/>
+                                <input id="starteventtime" type="text" name="start_time" class="form-control" value="00:00" style=" background: #ffffff;"/>
                                 <!-- <div class="input-group-text"><i class="fa fa-clock"></i></div> -->
                             </div>
                         </div>
                         <div class="col-sm-6" id="hideend">
                             <label for="issuing-country" class="form-label">End Time*</label>
                             <div class="">
-                                <input id="endeventtime" type="text" name="end_time" class="form-control" value="11:59 PM" style=" background: #ffffff;"/>
+                                <input id="endeventtime" type="text" name="end_time" class="form-control" value="23:59" style=" background: #ffffff;"/>
                                 <!-- <div class="input-group-text"><i class="fa fa-clock"></i></div> -->
                             </div>
                         </div>

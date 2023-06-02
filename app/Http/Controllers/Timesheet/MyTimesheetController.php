@@ -169,6 +169,7 @@ class MyTimesheetController extends Controller
         $ss = new MyTimeSheetService;
 
         $result['events'] = $ss->getEvents();
+        $result['eventsattends'] = $ss->getEventattend();
         $result['logs'] = $ss->getLogs();
         $result['leaves'] = $ss->getLeaves();
         $result['holidays'] = $ss->getHolidays();

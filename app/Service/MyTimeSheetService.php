@@ -288,49 +288,40 @@ if ($existingLogs->isNotEmpty()) {
     {
         $input = $r->input();
         $user = Auth::user();
-
+    
         $input['user_id'] = $user->id;
         $input['tenant_id'] = $user->tenant_id;
-        if (isset($input['type_recurring'])) {
-            $input['type_recurring'] = implode(',', $input['type_recurring']);
-        }
-        if (isset($input['set_reccuring'])) {
-            $input['set_reccuring'] = implode(',', $input['set_reccuring']);
-        }
-        if (isset($input['participant'])) {
-            $input['participant'] = implode(',', $input['participant']);
-        }
-        // if (isset($input['location_by_project'])) {
-        //     $input['location'] = $input['location_by_project'];
-        //     unset($input['location_by_project']);
-        // }
-
+    
+        $participants = isset($input['participant']) ? $input['participant'] : [];
+        $participants[] = $user->id; // Add the logged-in user to the participants array
+    
+        $input['participant'] = implode(',', $participants);
+    
         $input['start_date'] = date_format(date_create($input['start_date']), 'Y/m/d');
         $input['end_date'] = date_format(date_create($input['end_date']), 'Y/m/d');
-
-
+    
         $start_time = strtotime($input['start_time']);
         $end_time = strtotime($input['end_time']);
         $totaltime = $end_time - $start_time;
-
+    
         $h = intval($totaltime / 3600);
-
+    
         $totaltime = $totaltime - ($h * 3600);
-
+    
         // Minutes is obtained by dividing
         // remaining total time with 60
         $m = intval($totaltime / 60);
-
+    
         // Remaining value is seconds
         $s = $totaltime - ($m * 60);
-
+    
         // Printing the result
         // $input['total_hour'] = "$h:$m:$s";
-
+    
         if ($_FILES['file_upload']['name']) {
             $file_upload = upload($r->file('file_upload'));
             $input['file_upload'] = $file_upload['filename'];
-
+    
             if (!$input['file_upload']) {
                 unset($input['file_upload']);
             }
@@ -338,14 +329,14 @@ if ($existingLogs->isNotEmpty()) {
         // $input['total_hour'] = $input['start_time'] - $input['end_time'];
         // pr($input);
         TimesheetEvent::create($input);
-
+    
         $eventDetails = TimesheetEvent::where('tenant_id', $user->tenant_id)->orderBy('created_at', 'DESC')->first();
         $departmentName = getDepartmentName($user->id);
         $employeeName = getEmployeeName($user->id);
         $venue = projectLocationById($eventDetails->location);
-
+    
         $participants = explode(',', $eventDetails->participant);
-
+    
         $participantDetail = Employee::whereIn('user_id', $participants)->get();
 
         // foreach ($participantDetail as $participant) {
@@ -633,16 +624,71 @@ if ($existingLogs->isNotEmpty()) {
         return $data;
     }
 
+    // public function getEvents()
+    // {
+    //     $cond[1] = ['tenant_id', Auth::user()->tenant_id];
+    //     $cond[2] = ['user_id', Auth::user()->id];
+    //     // $data = TimesheetEvent::where($cond)
+    //         ->orWhere([['participant', 'like', '%' . Auth::user()->id . '%']])
+    //         ->get();
+
+    //     return $data;
+    // }
+
     public function getEvents()
     {
-        $cond[1] = ['tenant_id', Auth::user()->tenant_id];
-        $cond[2] = ['user_id', Auth::user()->id];
-        $data = TimesheetEvent::where($cond)
-            ->orWhere([['participant', 'like', '%' . Auth::user()->id . '%']])
+        $userId = Auth::user()->id;
+        $data = DB::table('timesheet_event')
+            ->join('attendance_event', 'timesheet_event.id', '=', 'attendance_event.event_id')
+            ->select('timesheet_event.*')
+            ->whereRaw("FIND_IN_SET(timesheet_event.id, attendance_event.event_id)") // Check if the event_id is present in the attendance_event table
+            ->where('attendance_event.user_id', '=', $userId) // Check if the user has attended
+            // ->where('attendance_event.status', '=', 'attend') // Check the status of the attendance event
+            ->where('attendance_event.status', '!=', 'attend')
             ->get();
-
+    
         return $data;
     }
+
+    public function getEventattend()
+    {
+        $userId = Auth::user()->id;
+        $data = DB::table('timesheet_event')
+            ->join('attendance_event', 'timesheet_event.id', '=', 'attendance_event.event_id')
+            ->select('timesheet_event.*')
+            ->whereRaw("FIND_IN_SET(timesheet_event.id, attendance_event.event_id)") // Check if the event_id is present in the attendance_event table
+            ->where('attendance_event.user_id', '=', $userId) // Check if the user has attended
+            ->where('attendance_event.status', '=', 'attend') // Check the status of the attendance event
+            // ->where('attendance_event.status', '!=', 'attend')
+            ->get();
+    
+        return $data;
+    }
+    
+    
+    
+    
+
+    
+
+    // public function getEventattend()
+    // {
+    //     $cond[1] = ['a.tenant_id', Auth::user()->tenant_id];
+    //     $cond[2] = ['a.user_id', Auth::user()->id];
+    //     $data = DB::table('timesheet_event as a')
+    //         ->leftJoin('attendance_event as b', 'a.id', '=', 'b.event_id')
+    //         ->select('a.*')
+    //         ->where(function ($query) use ($cond) {
+    //             $query->where($cond)
+    //                 ->orWhere('a.participant', 'like', '%' . Auth::user()->id . '%')
+    //                 ->where('b.status', 'attend');
+    //         })
+    //         ->distinct()
+    //         ->get();
+    
+    //     return $data;
+    // }
+    
 
     public function getLocationByProjectId($project_id = '')
     {

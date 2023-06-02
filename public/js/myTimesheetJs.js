@@ -832,6 +832,48 @@ $(document).ready(function () {
 
         }
 
+        var eventattend = [];
+        attendhour = [];
+        for (let i = 0; i < data['eventsattends'].length; i++) {
+            var events = data['eventsattends'][i];
+            // console.log(events);
+            var startDate = new Date(events['start_date']);
+            var startMonth = startDate.getMonth() + 1;
+            startMonth = startMonth < 10 ? "0" + startMonth : startMonth;
+            var startYear = startDate.getFullYear();
+            var startDay = startDate.getDate();
+            startDay = startDay < 10 ? "0" + startDay : startDay;
+
+            var endDate = new Date(events['end_date']);
+            endDate.setDate(endDate.getDate() + 1); // add one day to end date
+            var endMonth = endDate.getMonth() + 1;
+            endMonth = endMonth < 10 ? "0" + endMonth : endMonth;
+            var endYear = endDate.getFullYear();
+            var endDay = endDate.getDate();
+            endDay = endDay < 10 ? "0" + endDay : endDay;
+
+            eventattend.push({
+                title: "Event: " + events['event_name'] + "\n" + "from " + events['start_time'] + " to " + events['end_time'] + " attend", 
+                start: startYear + '-' + startMonth + '-' + startDay,
+                end: endYear + '-' + endMonth + '-' + endDay,
+                color: '#2AAA8A',
+                extendedProps: {
+                    type: 'eventattend',
+                    eventId: events['id']
+                }
+            });
+
+            attendhour.push({
+                start: new Date(startYear, startMonth - 1, startDay),
+                end: new Date(endYear, endMonth - 1, endDay),
+                totalHourAttend: events['duration'],
+                eventid: events['id'],
+            });
+
+            // console.log(events['duration'])
+
+        }
+
             var log = [];
             var loghour = [];
             for (let i = 0; i < data['logs'].length; i++) {
@@ -871,23 +913,8 @@ $(document).ready(function () {
                 }
 
                 log.push({
-                    title:
-                        (logs["type_of_log"]
-                            ? type_of_log(logs["type_of_log"]) + " "
-                            : "") +
-                        "\n" +
-                        (logs["project_name"]
-                            ? logs["project_name"] + " "
-                            : "") +
-                        "\n" +
-                        (logs["activitynameas"]
-                            ? logs["activitynameas"] + " "
-                            : "") +
-                        "\n" +
-                        " from " +
-                        logs["start_time"] +
-                        " to " +
-                        logs["end_time"],
+                    title:(logs["type_of_log"] ? type_of_log(logs["type_of_log"]) + " " : "") +"\n" + (logs["project_name"] ? logs["project_name"] + " ": "") +
+                    "\n" + (logs["activitynameas"] ? logs["activitynameas"] + " ": "") + "\n" + " from " + logs["start_time"] + " to " + logs["end_time"],
                     // start: startYear + '-' + startMonth + '-' + startDay + 'T' + startTime + ':00',
                     start: startYear + '-' + startMonth + '-' + startDay,
                     // color: app.color.primary,
@@ -1019,9 +1046,15 @@ $(document).ready(function () {
             // console.log(nextLogId);
 
 
-            dataEvent = event.concat(log);
-            dataleave = dataEvent.concat(leave);
+            // dataEvent = event.concat(log);
+            // dataleave = dataEvent.concat(leave);
+            // dataHoliday = dataleave.concat(holiday);
+
+            dataEvent = event.concat(eventattend);
+            datalog = dataEvent.concat(log);
+            dataleave = datalog.concat(leave);
             dataHoliday = dataleave.concat(holiday);
+            
             // console.log(dataEvent);
             // console.log(holiday);
             var calendar = new FullCalendar.Calendar(calendarElm, {
@@ -1053,7 +1086,6 @@ $(document).ready(function () {
 
 
                 dayCellDidMount: function(info) {
-
                     var current = new Date(info.date);
                     var currentDate = new Date();
 
@@ -1070,92 +1102,6 @@ $(document).ready(function () {
 
                     var duahari = twoDayBefore.setDate(currentDate.getDate() - 2);
 
-                    // var duahari1;
-
-                    duahari1 = new Date();
-                    duahari1.setDate(currentDate.getDate() - 1);
-
-                    // Check if duahari falls on a Sunday (day 0) or Saturday (day 6)
-                    if (duahari1.getDay() === 0) {
-                        duahari1.setDate(duahari1.getDate() - 3);
-                    } else if (duahari1.getDay() === 6) {
-                        duahari1.setDate(duahari1.getDate() - 3);
-                    }
-
-
-                    var currentMonth = info.date.getMonth() + 1; // Months are zero-based, so add 1
-                    var currentYear = info.date.getFullYear();
-
-                    // Iterate over the rangeholiday array and filter for dates in the current month
-                    rangeholiday.forEach(function(holiday) {
-                        var startDate = new Date(holiday.startdateholidays);
-                        var endDate = new Date(holiday.endateholidays);
-
-                        // Check if the holiday falls within the current month
-                        if (startDate.getMonth() + 1 === currentMonth && startDate.getFullYear() === currentYear) {
-                            var dateRange = getDateRange(startDate, endDate);
-                            dateRange.forEach(function(date) {
-                                var timestamp = date.getTime();
-                                // console.log(timestamp);
-
-                                // duahari1 = new Date();
-                                // duahari1.setDate(currentDate.getDate() - 1);
-
-                                // Check if duahari falls on a Sunday (day 0) or Saturday (day 6)
-                                // if (duahari1.getDay() === 0) {
-                                //     duahari1.setDate(duahari1.getDate() - 3);
-                                // } else if (duahari1.getDay() === 6) {
-                                //     duahari1.setDate(duahari1.getDate() - 3);
-                                // }
-
-                                // Format the timestamp as a readable date string
-                                var formattedDate = new Date(timestamp).toDateString() + ' ' + new Date(timestamp).toTimeString();
-                                // console.log(formattedDate);
-                                
-                                // console.log(formattedDate);
-                                // if (duahari1 === formattedDate) {
-                                //     // Your logic here for the matching timestamp
-                                //     // duahari1.setDate(duahari1.getDate() - 3);
-                                //     console.log("lalu sini naim")
-                                    
-                                // }
-
-                                
-
-                            }); 
-                        }
-                    });
-
-// console.log(duahari1);
-
-
-function getDateRange(startDate, endDate) {
-    var dateArray = [];
-    var currentDate = new Date(startDate);
-
-    while (currentDate <= endDate) {
-        dateArray.push(new Date(currentDate));
-        currentDate.setDate(currentDate.getDate() + 1);
-    }
-
-    return dateArray;
-}
-
-
-                    
-                    // console.log(duahari1);
-                    
-                    function getDateRange(startDate, endDate) {
-                        var dateArray = [];
-                        var currentDate = new Date(startDate);
-                    
-                        while (currentDate <= endDate) {
-                            dateArray.push(new Date(currentDate));
-                            currentDate.setDate(currentDate.getDate() + 1);
-                        }
-                    
-                        return dateArray;
-                    }
 
                     var datedefaultformat = dayjs(current).format('YYYY-MM-DD');
 
@@ -1166,7 +1112,7 @@ function getDateRange(startDate, endDate) {
                                     var year = info.date.getFullYear();
                                     var month = info.date.getMonth();
                                     var day = info.date.getDate();
-                                    // console.log(year);
+                                    console.log(year);
                                     $('#yearappeal').val(year);
                                     $('#monthappeal').val(new Date(info.date).toLocaleString('en-US', { month: 'long' }));
                                     $('#dayappeal').val(day);
@@ -1197,7 +1143,7 @@ function getDateRange(startDate, endDate) {
                                         var month = months[index];
                                         var day = days[index];
                                         var file = files[index];
-                                        // console.log(year);
+                                        console.log(year);
                                         $('#log_idv').val(logId);
                                         $('#reasonappealv').val(reason);
                                         if (status === "Locked") {
@@ -1252,19 +1198,20 @@ function getDateRange(startDate, endDate) {
                     // for (var i = 0; i < loghour.length; i++) {
                     //     if (current >= loghour[i].start && current <= loghour[i].end) {
                     //         hasLog = true;
-                    //         // console.log(totalHours);
+                    //         console.log(totalHours);
                     //         totalHours += parseInt(loghour[i].totalHour.split(":")[0]);
                     //         var logid = loghour[i].logid;
                     //     }
                     // }
 
                     var totalHours1 = '00:00';
-                    var hasLog = false;
+                    // var hasLog = false;
                     for (var i = 0; i < loghour.length; i++) {
                         if (current.getTime() === loghour[i].start.getTime()) {
-                            hasLog = true;
+                            // hasLog = true;
                             var logid = loghour[i].logid;
 
+                            // Calculate the total hours by accumulating all the 'total_hour' values for the current date
                             // Calculate the total hours by accumulating all the 'total_hour' values for the current date
                             var totalHour = loghour.filter(log => current.getTime() === log.start.getTime())
                             .reduce((total, log) => {
@@ -1279,11 +1226,41 @@ function getDateRange(startDate, endDate) {
                             totalHours1 = hours.toString().padStart(2, '0') + ':' + minutes.toString().padStart(2, '0');
                             var [hours1, minutes] = totalHours1.split(":").map(Number);
 
-                            // console.log(totalHours1)
+                            // console.log(hours1+"test567")
                             // Exit the loop once the total hours for the current date are calculated
                             break;
                         }
                     }
+
+                    var totalHours2 = '00:00';
+                    var hasLog = false;
+                    for (var i = 0; i < attendhour.length; i++) {
+                      if (current.getTime() === attendhour[i].start.getTime()) {
+                        hasLog = true;
+                        var eventId = attendhour[i].eventId;
+                    
+                        var totalHour123 = attendhour.filter(event => current.getTime() === event.start.getTime())
+                          .reduce((total, event) => {
+                            var [hours, minutes, seconds] = event.totalHourAttend.split(':').map(Number);
+                            total += hours * 3600 + minutes * 60 + seconds;
+                            return total;
+                          }, 0);
+                    
+                        var hours = Math.floor(totalHour123 / 3600);
+                        var minutes = Math.floor((totalHour123 % 3600) / 60);
+                        totalHours2 = hours.toString().padStart(2, '0') + ':' + minutes.toString().padStart(2, '0');
+                        var [hours1, minutes] = totalHours2.split(":").map(Number);
+                    
+                       
+                        break;
+                      }
+                    }
+
+                    var [hours1, minutes1] = totalHours1.split(":").map(Number);
+                    var [hours2, minutes2] = totalHours2.split(":").map(Number);
+                    var totalHoursattendlog = (hours1 + hours2).toString().padStart(2, '0') + ':' + (minutes1 + minutes2).toString().padStart(2, '0');
+
+                    console.log(totalHoursattendlog+"gabung");
 
 
 
@@ -1319,53 +1296,47 @@ function getDateRange(startDate, endDate) {
                         files.push(file);
                     }
                     
-                    var dailycounter = $('<button/>', {
-                        text: totalHours1,
+                    // var dailycounter = $('<button/>', {
+                    //     text: totalHours1,
+                    //     class: 'btn btn-danger btn-xs',
+                    //     click: function () {
+                    //     }
+                    // });
+
+                    var dailycounter1 = $('<button/>', {
+                        text: totalHoursattendlog,
                         class: 'btn btn-danger btn-xs',
                         click: function () {
                         }
                     });
                     
-                    // console.log(duahari1);
                    
                       if (
                         current.getTime() === currentDate.getTime() ||
                         (current.getTime() < currentDate.getTime() && current.getDay() !== 6 && current.getDay() !== 0)
                         
                     ) {
-                        $(info.el).append('&nbsp;').append(dailycounter);
-                        $(dailycounter).css({
+                        // $(info.el).append('&nbsp;').append(dailycounter);
+                        // $(dailycounter).css({
+                        //     position: 'relative',
+                        //     top: '-35px',
+                        //     'z-index': '999',
+                        // });
+
+                        $(info.el).append('&nbsp;').append(dailycounter1);
+                        $(dailycounter1).css({
                             position: 'relative',
                             top: '-35px',
                             'z-index': '999',
                         });
 
                       } 
-                      if (
-                        (current.getMonth() === currentMonth && current.getFullYear() === currentYear) &&
-                        ((current.getDate() === oneDayBefore.getDate() && current.getMonth() === oneDayBeforeMonth && current.getFullYear() === oneDayBeforeYear) ||
-                        (current.getDate() === twoDaysBefore.getDate() && current.getMonth() === twoDaysBeforeMonth && current.getFullYear() === twoDaysBeforeYear)) &&
-                        !(current.getDay() === 6 || current.getDay() === 0) &&
-                        !hasLog
-                      ) {
-                        $(info.el).css('background-color', '#FF8080');
-                      }
-
-                      else if(
+                      if(
                          
-                        (current.getDate() === currentdate.getDate()) &&
-                        !(current.getDay() === 6 || current.getDay() === 0)  && (hasLog && hours1 < 9)
-                      ) {
+                        (current.getDate() === oneDayBefore.getDate() || current.getDate() === twoDayBefore.getDate()) &&
+                        !(current.getDay() === 6 || current.getDay() === 0) && !hasLog )
+                       {
                         $(info.el).css('background-color', '#FF8080');
-                      }
-
-
-                      else if(
-                         
-                        (current.getDate() === currentdate.getDate()) &&
-                        !(current.getDay() === 6 || current.getDay() === 0)  && ( hasLog && hours1 >= 9)
-                      ) {
-                        $(info.el).css('background-color', '#80ff80');
                       }
 
                      else if(
@@ -1382,23 +1353,15 @@ function getDateRange(startDate, endDate) {
                       ) {
                         $(info.el).css('background-color', '#FF8080');
                       }
-                      
                       //xde log appeal, log kecik dari 9,exclude weekend
-                        if((current < duahari) && !appliedDates.includes(datedefaultformat) && (hasLog && hours1 < 9 || !hasLog)   && !(current.getDay() === 6 || current.getDay() === 0)) {
-                        if(current < duahari1) { 
-                            // console.log(current);
-                            $(info.el).css('background-color', '#FF8080');
-                            $(info.el).append('&nbsp;').append(appealaddb);
-                            $(appealaddb).css({
-                                position: 'relative',
-                                top: '-35px',
-                                'z-index': '999',   
-                                });
-                        }
-                        else {
-                            $(info.el).css('background-color', '#FF8080');
-                        }
-                       
+                       else if((current < duahari) && !appliedDates.includes(datedefaultformat) && (hasLog && hours1 < 9 || !hasLog)   && !(current.getDay() === 6 || current.getDay() === 0)) {
+                        $(info.el).css('background-color', '#FF8080');
+                        $(info.el).append('&nbsp;').append(appealaddb);
+                        $(appealaddb).css({
+                            position: 'relative',
+                            top: '-35px',
+                            'z-index': '999',   
+                            });
 
                         }else if((current < duahari) && appliedDates.includes(datedefaultformat) && (hasLog && hours1 < 9 || !hasLog)   && !(current.getDay() === 6 || current.getDay() === 0)) {
 
@@ -1440,7 +1403,6 @@ function getDateRange(startDate, endDate) {
                         // $(info.el).css('background-color', 'white');
                       }
                     },
-
 
 
                     dateClick: function(info) {
@@ -1713,8 +1675,8 @@ function getDateRange(startDate, endDate) {
                             // projectlocsearchedit
                             $("#activity_name_edit2").val(data.activity_name);
                             $("#activity_name_edit1").val(data.activity_name);
-                            $("#starttimeedit").val(data.start_time);
-                            $("#endtimeedit").val(data.end_time);
+                           
+
                             $("#projectLocationOfficeEdit").picker(
                                 "set",
                                 data.project_location
@@ -1731,37 +1693,27 @@ function getDateRange(startDate, endDate) {
                             $("#total_hour_edit").val(data.total_hour);
                             $("#id").val(data.id);
                             $("#lunchBreakedit").val(data.lunch_break);
-                            
-                            
-                            var startTimeInput = $("#starttimeedit");
 
-                            // Get the current value of the input field
-                                var startTime = startTimeInput.val();
-                                console.log(startTime + "start")
-                            
-                                // Initialize the mdtimepicker with the initial time value
-                                startTimeInput.mdtimepicker({
+                            $("#starttimeedit").val(data.start_time);
+
+                            $("#starttimeedit").mdtimepicker({
+                                showMeridian: true,
                                 timeFormat: 'hh:mm:ss.000',
-                                showMeridian: false,
                                 is24hour: true,
-                                defaultTime: startTime // Set the initial time value
+                                defaultTime: data.start_time
+                                });
+
+                            $("#endtimeedit").val(data.end_time);
+
+                                $("#endtimeedit").mdtimepicker({
+                                    showMeridian: false,
+                                    showMeridian: true,
+                                    timeFormat: 'hh:mm:ss.000',
+                                    is24hour: true,
+                                    defaultTime: data.end_time
                                 });
 
                             
-                                var endTimeInput = $("#endtimeedit");
-
-                                // Get the current value of the input field
-                                var endTime = endTimeInput.val();
-                                console.log(endTime+"end")
-
-                                // Initialize the mdtimepicker with the initial time value
-                                endTimeInput.mdtimepicker({
-                                timeFormat: 'hh:mm:ss.000',
-                                showMeridian: false,
-                                is24hour: true,
-                                defaultTime: endTime // Set the initial time value
-                                });
-
                         });
 
                         $("#editlogmodal").modal("show");
@@ -1859,7 +1811,26 @@ function getDateRange(startDate, endDate) {
                             $("#starteventdateedit").val(data.start_date);
                             $("#endeventdateedit").val(data.end_date);
                             $("#starteventtimeedit").val(data.start_time);
+
+                            //sini
+
+                            $("#starteventtimeedit").mdtimepicker({
+                                showMeridian: true,
+                                timeFormat: 'hh:mm:ss.000',
+                                is24hour: true,
+                                defaultTime: data.start_time
+                            });
+
                             $("#endeventtimeedit").val(data.end_time);
+
+                            //sini1
+                            $("#endeventtimeedit").mdtimepicker({
+                                showMeridian: true,
+                                timeFormat: 'hh:mm:ss.000',
+                                is24hour: true,
+                                defaultTime: data.end_time
+                            });
+
                             $("#duration").val(data.duration);
                             $("#addneweventprojectlocsearchedit").picker(
                                 "set",
@@ -2432,7 +2403,8 @@ function getDateRange(startDate, endDate) {
                             //     $("#addneweventparticipantedit").picker('set', participant);
 
                             // }
-
+                            $("#eventcreator").val(data.employeeName);
+                            
                             $("#descE").val(data.desc);
                             $("#addeventreminderedit").val(data.reminder);
                             if (data.file_upload) {
@@ -2443,7 +2415,7 @@ function getDateRange(startDate, endDate) {
                                 );
                             }
                             $("#idEvent").val(data.id);
-                            $("#eventcreator").val(data.employeeName);
+
                         });
 
                         $("#editeventmodal").modal("show");
@@ -2537,21 +2509,21 @@ function getDateRange(startDate, endDate) {
         $("#dateaddlog").datepicker("setEndDate", new Date());
     });
 
-    // $("#starteventdate")
-    //     .datepicker({
-    //         format: "yyyy/mm/dd",
-    //         todayHighlight: true,
-    //         autoclose: true,
-    //     })
-    //     .datepicker("setDate", new Date());
+    $("#starteventdate")
+        .datepicker({
+            format: "yyyy/mm/dd",
+            todayHighlight: true,
+            autoclose: true,
+        })
+        .datepicker("setDate", new Date());
 
-    // $("#endeventdate")
-    //     .datepicker({
-    //         format: "yyyy/mm/dd",
-    //         todayHighlight: true,
-    //         autoclose: true,
-    //     })
-    //     .datepicker("setDate", new Date());
+    $("#endeventdate")
+        .datepicker({
+            format: "yyyy/mm/dd",
+            todayHighlight: true,
+            autoclose: true,
+        })
+        .datepicker("setDate", new Date());
 
     $("#starteventdate")
     .datepicker({
@@ -2584,41 +2556,44 @@ $("#endeventdate").datepicker({
     //     placeholder_text_multiple: 'Select participants'
     // });
     $("#addneweventselectproject").picker({ search: true });
+
     $(function () {
-        $("#starttime").mdtimepicker({
-            timeFormat: 'hh:mm:ss.000',
-            showMeridian: false, // Use 24-hour format
-            is24hour: true,
-        });
-        
         var now = new Date();
-        var hours = now.getHours();
-        var minutes = now.getMinutes();
-        
-        // Convert hours and minutes to 2-digit format
-        hours = ("0" + hours).slice(-2);
-        minutes = ("0" + minutes).slice(-2);
-        
-        $("#starttime").val(hours + ":" + minutes);
-    
-        $("#endtime").mdtimepicker({
-            timeFormat: 'hh:mm:ss.000',
-            showMeridian: false, // Use 24-hour format
-            is24hour: true,
+        var hours = now.getHours().toString().padStart(2, '0');
+        var minutes = now.getMinutes().toString().padStart(2, '0');
+      
+        var currentTime = hours + ":" + minutes;
+      
+        $("#starttime").val(currentTime); // Set the value of the input field directly
+      
+        $("#starttime").mdtimepicker({
+          showMeridian: true,
+          timeFormat: 'hh:mm:ss.000',
+          is24hour: true
         });
-        
-        var startMoment = moment($("#starttime").val(), "hh:mm A");
-        var endMoment = startMoment.clone().add(1, 'hour');
-        
-        var hours = endMoment.hours();
-        var minutes = endMoment.minutes();
-        
-        // Convert hours and minutes to 2-digit format
-        hours = ("0" + hours).slice(-2);
-        minutes = ("0" + minutes).slice(-2);
-        
-        $("#endtime").val(hours + ":" + minutes);
-        
+     
+      
+
+          
+    
+    
+        // Calculate end time
+        var start = new Date();
+        start.setHours(parseInt(hours));
+        start.setMinutes(parseInt(minutes));
+        start.setMinutes(start.getMinutes() + 60); // Add 60 minutes (1 hour)
+        var endHours = start.getHours().toString().padStart(2, '0');
+        var endMinutes = start.getMinutes().toString().padStart(2, '0');
+        var endTime = endHours + ":" + endMinutes;
+
+        $("#endtime").val(endTime); // Set the value of the end time input field directly
+
+        $("#endtime").mdtimepicker({
+            showMeridian: true,
+            timeFormat: 'hh:mm:ss.000',
+            is24hour: true
+        });
+    
     
         $("#daystart,#dayend")
             .datepicker({
@@ -2632,40 +2607,42 @@ $("#endeventdate").datepicker({
             })
             .datepicker("setDate", "now");
     
-        $("#starteventtime,#endeventtime").mdtimepicker({});
+        $("#starteventtime,#endeventtime").mdtimepicker({
+            showMeridian: true,
+            timeFormat: 'hh:mm:ss.000',
+            is24hour: true
+        });
     
-        $("#starttime").change(function () {
-            var startMoment = moment($("#starttime").val(), "HH:mm");
+       $("#starttime").change(function () {
+            var startMoment = moment($("#starttime").val(), "hh:mm A");
             var endMoment = startMoment.clone().add(1, 'hour');
-        
+
             var hours = endMoment.hours();
             var minutes = endMoment.minutes();
-            var formattedTime = hours.toString().padStart(2, '0') + ":" + minutes.toString().padStart(2, '0');
-            
-            $("#endtime").val(formattedTime);
+            var endTime = hours.toString().padStart(2, '0') + ":" + minutes.toString().padStart(2, '0');
+            $("#endtime").val(endTime);
         });
-        
-    
-        $("#endtime").change(function () {
-            var startTime = moment($("#starttime").val(), "HH:mm");
-            var endTime = moment($("#endtime").val(), "HH:mm");
-            
-            if (endTime.isBefore(startTime)) {
-                Swal.fire({
-                    icon: "error",
-                    title: "Error!",
-                    text: "The End Time Could Not Be Before The Start Time.",
-                }).then(() => {
-                    $("#endtime").val("");
-                    $("#logduration").val("");
-                    $("#endtime").attr("placeholder", "End Time"); // Set the placeholder for the end time field
-                    $("#endtime").mdtimepicker("toggle"); // Close the time picker
-                });
-            }
-        });
-        
-        
+
+    $("#endtime").change(function () {
+        var startTime = moment($("#starttime").val(), "hh:mm A");
+        var endTime = moment($("#endtime").val(), "hh:mm A");
+
+        if (endTime.isBefore(startTime)) {
+            Swal.fire({
+                icon: "error",
+                title: "Error!",
+                text: "The End Time Could Not Be Before The Start Time.",
+            }).then(() => {
+                $("#endtime").val("");
+                $("#logduration").val("");
+                $("#endtime").attr("placeholder", "End Time"); // Set the placeholder for the end time field
+                $("#endtime").mdtimepicker("toggle"); // Close the time picker
+            });
+        }
     });
+
+        
+});
     
 
     // $(document).on('change', "#typeoflog", function() {
@@ -2921,13 +2898,10 @@ $("#endeventdate").datepicker({
     $("#addneweventparticipantedit").picker({ search: true });
     $("#addneweventselectprojectedit").picker({ search: true });
 
+    
 
-    $("#starteventtimeedit").mdtimepicker({
-        showMeridian: false,
-    });
-    $("#endeventtimeedit").mdtimepicker({
-        showMeridian: false,
-    });
+   
+    
 
     $(document).on("change", "#typeoflogedit", function () {
         if ($(this).val() == "2") {
@@ -3272,7 +3246,8 @@ function calculateDuration() {
     diff -= mins * (1000 * 60);
 
     $("#duration").val(
-        days + " days : " + hours + " hours : " + mins + " minutes "
+        // days + " days : " + hours + " hours : " + mins + " minutes "
+        hours + ":" + mins + ":0"
     );
 }
 
