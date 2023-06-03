@@ -1332,7 +1332,7 @@ if (!function_exists('getEmployeerecommender')) {
 if (!function_exists('getEmployeeapprover')) {
     function getEmployeeapprover($user_id = '')
 
-    {
+    
     {
 
 
@@ -2537,10 +2537,11 @@ if (!function_exists('getDateFormat')) {
 
         return $data;
     }
+    
 }
 
 if (!function_exists('sendGeneralNotification')) {
-    function sendGeneralNotification($id = '', $msg)
+    function sendGeneralNotification($msg,$id = '')
     {
         $userToNotify = Users::where('id', $id)->get();
 
