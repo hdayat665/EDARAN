@@ -339,29 +339,29 @@ if ($existingLogs->isNotEmpty()) {
     
         $participantDetail = Employee::whereIn('user_id', $participants)->get();
 
-        // foreach ($participantDetail as $participant) {
-        //     $receiverEmail = $participant->workingEmail;
+        foreach ($participantDetail as $participant) {
+            $receiverEmail = $participant->workingEmail;
 
-        //     $receiver = $receiverEmail;
-        //     $response['typeEmail'] = 'eventInviation';
-        //     $response['title'] = $eventDetails->event_name;
-        //     $response['start_date'] = $eventDetails->start_date;
-        //     $response['start_time'] = $eventDetails->start_time;
-        //     $response['duration'] = $eventDetails->duration;
-        //     $response['venue'] = $eventDetails->venue;
-        //     $response['desc'] = $eventDetails->desc;
-        //     $response['employeeName'] = $employeeName;
-        //     $response['departmentName'] = $departmentName;
-        //     $response['desc'] = $eventDetails->desc;
-        //     $response['link'] = env('APP_URL') . '/myTimesheet';
-        //     $response['from'] = env('MAIL_FROM_ADDRESS');
-        //     $response['nameFrom'] = 'Event Invitation';
-        //     $response['subject'] = 'Orbit Teams Meeting';
-        //     // $response['typeAttachment'] = "application/pdf";
-        //     // $response['file'] = \public_path()."/assets/frontend/docs/gambar.jpg";
+            $receiver = $receiverEmail;
+            $response['typeEmail'] = 'eventInviation';
+            $response['title'] = $eventDetails->event_name;
+            $response['start_date'] = $eventDetails->start_date;
+            $response['start_time'] = $eventDetails->start_time;
+            $response['duration'] = $eventDetails->duration;
+            $response['venue'] = $eventDetails->venue;
+            $response['desc'] = $eventDetails->desc;
+            $response['employeeName'] = $employeeName;
+            $response['departmentName'] = $departmentName;
+            $response['desc'] = $eventDetails->desc;
+            $response['link'] = env('APP_URL') . '/myTimesheet';
+            $response['from'] = env('MAIL_FROM_ADDRESS');
+            $response['nameFrom'] = 'Event Invitation';
+            $response['subject'] = 'Orbit Teams Meeting';
+            // $response['typeAttachment'] = "application/pdf";
+            // $response['file'] = \public_path()."/assets/frontend/docs/gambar.jpg";
 
-        //     FacadesMail::to($receiver)->send(new Mail($response));
-        // }
+            FacadesMail::to($receiver)->send(new Mail($response));
+        }
 
         $eventid = $eventDetails->id;
         $eventpaerr= $eventDetails->participant;
