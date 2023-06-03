@@ -46,32 +46,25 @@ $('#timesheetapproval').DataTable({
   if ($('#employeesearch').val() || $('#yearsearch').val() || $('#monthsearch').val() || $('#designationsearch').val() || $('#departmentsearch').val() || $('#statussearch').val()) {
     $('#filterform').show();
 }
-
-  $("#reset").on("click", function () {
-
-    $("#employeesearch").val($("#employeesearch").data("default-value"));
-    $("#employeesearch").picker('destroy');
-
-    $("#yearsearch").val($("#yearsearch").data("default-value"));
-
-    $("#monthsearch").val($("#monthsearch").data("default-value"));
-
-    $("#designationsearch").val($("#designationsearch").data("default-value"));
-    $("#designationsearch").picker('destroy');
-
-    $("#departmentsearch").val($("#departmentsearch").data("default-value"));
-    $("#departmentsearch").picker('destroy');
-
-    $("#statussearch").val($("#statussearch").data("default-value"));
-    
+$("#reset").on("click", function () {
+    $("#employeesearch").attr("placeholder", "Please Choose").trigger("change");
+    $("#yearsearch").attr("placeholder", "Please Choose").trigger("change");
+    $("#monthsearch").attr("placeholder", "Please Choose").trigger("change");
+    $("#designationsearch").attr("placeholder", "Please Choose").trigger("change");
+    $("#departmentsearch").attr("placeholder", "Please Choose").trigger("change");
+    $("#statussearch").attr("placeholder", "Please Choose").trigger("change");
 });
 
 
 
-$('#employeesearch').picker({ search: true });
-$('#designationsearch').picker({ search: true });
-$('#departmentsearch').picker({ search: true });
 
+
+$('#designationsearch').select2({ placeholder:"Please Choose" });
+$('#departmentsearch').select2({ placeholder:"Please Choose" });
+$("#employeesearch").select2({ placeholder:"Please Choose" });
+$("#yearsearch").select2({ placeholder:"Please Choose" });
+$("#monthsearch").select2({ placeholder:"Please Choose" });
+$("#statussearch").select2({ placeholder:"Please Choose" });
 
 
 

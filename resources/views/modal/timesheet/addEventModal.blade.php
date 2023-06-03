@@ -24,7 +24,7 @@
                         <div class="col-sm-6">
                             <label for="lastname" class="form-label">End Date*</label>
                             <div class="">
-                                <input type="text" class="form-control" name="end_date" id="endeventdate" placeholder="End Date"/>
+                                <input type="text" class="form-control" name="end_date" id="endeventdate" placeholder="End Date" readonly style="pointer-events:none"/>
                                 <!-- <div class="input-group-text"><i class="fa fa-calendar"></i></div> -->
                             </div>
                         </div>

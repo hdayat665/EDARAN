@@ -253,7 +253,9 @@ $(document).ready(function () {
         }
 
         if ((type = "editLog")) {
-            $("#activityByProjectEditHide").hide();
+            
+            $("#activityByProjectEditHide1").hide();
+            // $("#activityByProjectEditHide").hide();
             $("#activityByProjectEditShow").show();
             $("#locationByProjectEditShow").show();
             $("#locationByProjectEditHide").hide();
@@ -1580,9 +1582,9 @@ $(document).ready(function () {
                                     "display",
                                     "block"
                                 );
-                                $("#locationByProjectEditShow").css(
+                                $("#activityByProjectEditShow").css(
                                     "display",
-                                    "block"
+                                    "block" 
                                 );
                             } else if (
                                 data.type_of_log == "1" ||
@@ -1593,18 +1595,18 @@ $(document).ready(function () {
                                     "display",
                                     "block"
                                 );
-                                $("#activityByProjectEditHide1").css(
-                                    "display",
-                                    "none"
-                                );
+                                // $("#activityByProjectEditHide1").css(
+                                //     "display",
+                                //     "none"
+                                // );
                                 $("#myprojectedit").css("display", "none");
                             } else if (data.type_of_log == "2") {
                                 $("#officelogedit").css("display", "block");
                                 // var display11 = $("#activityByProjectEditHide").css("display");
-                                $("#activityByProjectEditHide1").css(
-                                    "display",
-                                    "block"
-                                );
+                                // $("#activityByProjectEditHide1").css(
+                                //     "display",
+                                //     "block"
+                                // );
                                 $("#projectLocationOfficeEdit").css(
                                     "display",
                                     "block"
@@ -1635,14 +1637,18 @@ $(document).ready(function () {
                                     );
                                     $("#officelogedit").css("display", "block");
                                     $("#myprojectedit").css("display", "none");
-                                    $("#activityByProjectEditHide1").css(
-                                        "display",
-                                        "none"
-                                    );
+                                    // $("#activityByProjectEditHide1").css(
+                                    //     "display",
+                                    //     "none"
+                                    // );
                                 }
                             } else {
                                 $("#myprojectedit").css("display", "none");
                                 $("#activityByProjectEditHide").css(
+                                    "display",
+                                    "none"
+                                );
+                                $("#activityByProjectEditHide1").css(
                                     "display",
                                     "none"
                                 );
@@ -1660,9 +1666,10 @@ $(document).ready(function () {
                             // if (data.type_of_log == 2 && data.office_log == 1) {
 
                             // }
-
-                            $("#locationByProjectEditShow").hide();
+                            
                             $("#activityByProjectEditShow").hide();
+                            $("#locationByProjectEditShow").hide();
+                            // $("#activityByProjectEditShow").hide();
                             $("#typeoflogedit").val(data.type_of_log);
                             $("#officelog2edit").val(data.office_log);
                             $("#dateaddlogedit").val(data.date);
@@ -1677,10 +1684,10 @@ $(document).ready(function () {
                             $("#activity_name_edit1").val(data.activity_name);
                            
 
-                            $("#projectLocationOfficeEdit").picker(
-                                "set",
-                                data.project_location
-                            );
+                            // $("#projectLocationOfficeEdit").picker(
+                            //     "set",
+                            //     data.project_location
+                            // );
                             // $('#projectlocsearchedit').picker('set', data.project_location);
                             // $('#projectlocsearchedit').picker('set', data.project_location);
                             // $("#projectlocsearchedit").val(data.project_location);
@@ -2561,21 +2568,16 @@ $("#endeventdate").datepicker({
         var now = new Date();
         var hours = now.getHours().toString().padStart(2, '0');
         var minutes = now.getMinutes().toString().padStart(2, '0');
-      
-        var currentTime = hours + ":" + minutes;
-      
-        $("#starttime").val(currentTime); // Set the value of the input field directly
-      
-        $("#starttime").mdtimepicker({
-          showMeridian: true,
-          timeFormat: 'hh:mm:ss.000',
-          is24hour: true
-        });
-     
-      
-
-          
     
+        var currentTime = hours + ":" + minutes;
+    
+        $("#starttime").val(currentTime); // Set the value of the input field directly
+    
+        $("#starttime").mdtimepicker({
+            showMeridian: true,
+            timeFormat: 'hh:mm:ss.000',
+            is24hour: true
+        });
     
         // Calculate end time
         var start = new Date();
@@ -2585,9 +2587,9 @@ $("#endeventdate").datepicker({
         var endHours = start.getHours().toString().padStart(2, '0');
         var endMinutes = start.getMinutes().toString().padStart(2, '0');
         var endTime = endHours + ":" + endMinutes;
-
+    
         $("#endtime").val(endTime); // Set the value of the end time input field directly
-
+    
         $("#endtime").mdtimepicker({
             showMeridian: true,
             timeFormat: 'hh:mm:ss.000',
@@ -2613,36 +2615,30 @@ $("#endeventdate").datepicker({
             is24hour: true
         });
     
-       $("#starttime").change(function () {
-            var startMoment = moment($("#starttime").val(), "hh:mm A");
-            var endMoment = startMoment.clone().add(1, 'hour');
-
-            var hours = endMoment.hours();
-            var minutes = endMoment.minutes();
-            var endTime = hours.toString().padStart(2, '0') + ":" + minutes.toString().padStart(2, '0');
-            $("#endtime").val(endTime);
+        $("#starttime").change(function () {
+            // Reset the end time value to an empty string
+            $("#endtime").val("");
         });
-
-    $("#endtime").change(function () {
-        var startTime = moment($("#starttime").val(), "hh:mm A");
-        var endTime = moment($("#endtime").val(), "hh:mm A");
-
-        if (endTime.isBefore(startTime)) {
-            Swal.fire({
-                icon: "error",
-                title: "Error!",
-                text: "The End Time Could Not Be Before The Start Time.",
-            }).then(() => {
-                $("#endtime").val("");
-                $("#logduration").val("");
-                $("#endtime").attr("placeholder", "End Time"); // Set the placeholder for the end time field
-                $("#endtime").mdtimepicker("toggle"); // Close the time picker
-            });
-        }
+    
+        $("#endtime").change(function () {
+            var startTime = moment($("#starttime").val(), "hh:mm A");
+            var endTime = moment($("#endtime").val(), "hh:mm A");
+    
+            if (endTime.isBefore(startTime)) {
+                Swal.fire({
+                    icon: "error",
+                    title: "Error!",
+                    text: "The End Time Could Not Be Before The Start Time.",
+                }).then(() => {
+                    $("#endtime").val("");
+                    $("#logduration").val("");
+                    $("#endtime").attr("placeholder", "End Time"); // Set the placeholder for the end time field
+                    $("#endtime").mdtimepicker("toggle"); // Close the time picker
+                });
+            }
+        });
     });
-
-        
-});
+    
     
 
     // $(document).on('change', "#typeoflog", function() {
@@ -2703,7 +2699,7 @@ $("#endeventdate").datepicker({
 
             // $("#activity_locationadd").show();
         } else {
-            $("#activityByProjectEditHide1").show();
+            // $("#activityByProjectEditHide1").show();
             $("#myproject").hide();
             $("#listproject").hide();
             // $("#activity_locationadd").hide();
@@ -2888,10 +2884,18 @@ $("#endeventdate").datepicker({
     $("#starteventdateedit").datepicker({
         todayHighlight: true,
         autoclose: true,
+        format: "yyyy-mm-dd",
+    }).on("changeDate", function (e) {
+        // Set the end datepicker's date to the selected start date
+        $("#endeventdateedit").datepicker("update", e.date);
+
+        // Set the minimum date for the end datepicker to the selected start date
+        $("#endeventdateedit").datepicker("setStartDate", e.date);
     });
     $("#endeventdateedit").datepicker({
         todayHighlight: true,
         autoclose: true,
+        format: "yyyy-mm-dd",
     });
     // $('#projectlocsearchedit').picker({ search: true });
     $("#addneweventprojectlocsearchedit").picker({ search: true });
@@ -2920,16 +2924,16 @@ $("#endeventdate").datepicker({
             // $("#typeoflogedit").show();
             // $("#activity_location_edit").show();
             // $("#activityByProjectEditHide").hide();
-            $("#activityByProjectEditHide").show();
-            $("#locationByProjectEditHide").show();
             $("#activityByProjectEditHide1").show();
+            $("#locationByProjectEditHide").show();
             $("#locationByProjectEditShow").show();
+            $("#activityByProjectEditShow").show();
         } else {
             $("#myprojectedit").hide();
             $("#listprojectedit").hide();
             // $("#typeoflogedit").hide();
             // $("#activity_location_edit").hide();
-            $("#activityByProjectEditHide").show();
+            $("#activityByProjectEditHide1").hide();
             $("#locationByProjectEditHide").hide();
         }
     });
@@ -3109,40 +3113,40 @@ $("#endeventdate").datepicker({
         });
     });
 
-   $("#logduration,#daystart,#dayend,#starttime,#endtime,#lunchBreak").change(function () {
-    var startdt = new Date($("#daystart").val() + " " + $("#starttime").val());
-    var enddt = new Date($("#dayend").val() + " " + $("#endtime").val());
-    var diff = enddt - startdt;
-    var days = Math.floor(diff / (1000 * 60 * 60 * 24));
-    diff -= days * (1000 * 60 * 60 * 24);
-    var hours = Math.floor(diff / (1000 * 60 * 60));
-    diff -= hours * (1000 * 60 * 60);
-    var mins = Math.floor(diff / (1000 * 60));
-    diff -= mins * (1000 * 60);
-
-    // $("#logduration").val(
-    //     days + " days : " + hours + " hours : " + mins + " minutes "
-    // );
-
-
-    if ($("#lunchBreak").val() === "1") {
-        hours -= 1;
-        // hours = hours - 1
-    }
-
-    $("#logduration").val(
-        // days + " days : " + hours + " hours : " + mins + " minutes "
-        // days +  hours + mins 
-        hours + ":" + mins + ":" + "0"
-    );
-
-    // Disable lunch break if total hours are less than 1
-    if (hours < 1) {
-        $("#lunchBreak").prop("disabled", true);
-    } else {
-        $("#lunchBreak").prop("disabled", false);
-    }
-});
+    $("#logduration,#daystart,#dayend,#starttime,#endtime,#lunchBreak").change(function () {
+        var startdt = new Date($("#daystart").val() + " " + $("#starttime").val());
+        var enddt = new Date($("#dayend").val() + " " + $("#endtime").val());
+        var diff = enddt - startdt;
+        var days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        diff -= days * (1000 * 60 * 60 * 24);
+        var hours = Math.floor(diff / (1000 * 60 * 60));
+        diff -= hours * (1000 * 60 * 60);
+        var mins = Math.floor(diff / (1000 * 60));
+        diff -= mins * (1000 * 60);
+    
+        // $("#logduration").val(
+        //     days + " days : " + hours + " hours : " + mins + " minutes "
+        // );
+    
+    
+        if ($("#lunchBreak").val() === "1") {
+            hours -= 1;
+            // hours = hours - 1
+        }
+    
+        $("#logduration").val(
+            // days + " days : " + hours + " hours : " + mins + " minutes "
+            // days +  hours + mins 
+            hours + ":" + mins + ":" + "0"
+        );
+    
+        // Disable lunch break if total hours are less than 1
+        if (hours < 1) {
+            $("#lunchBreak").prop("disabled", true);
+        } else {
+            $("#lunchBreak").prop("disabled", false);
+        }
+    });
 
 $(document).ready(function () {
     // Trigger change event on page load to calculate and populate the total hours
@@ -3216,7 +3220,7 @@ $("#total_hour_edit,#daystartedit,#dayendedit,#starttimeedit,#endtimeedit,#lunch
             // $('#endeventtimeedit').val("11:59 PM");
         }
     });
-});
+});  //end sini
 
 $(
     "#duration,#starteventdate,#starteventtime,#endeventdate,#endeventtime"
