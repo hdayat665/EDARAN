@@ -1199,9 +1199,10 @@ if (!function_exists('getBranchFullAddress')) {
     }
 }
 if (!function_exists('getEmployee')) {
-    function getEmployee()
+    function getEmployee($user_id = '')
     {
-        $data = Employee::where([['tenant_id', Auth::user()->tenant_id], ['employeeid', '!=', null]])->get();
+        $data = Employee::where([['tenant_id', Auth::user()->tenant_id], ['employeeid', '!=', null]])->get()
+        ->where('e.status', '=', 'Active')->where('e.user_id', '<>', $user_id);
 
         if (!$data) {
             $data = [];
@@ -1332,6 +1333,7 @@ if (!function_exists('getEmployeeapprover')) {
     function getEmployeeapprover($user_id = '')
 
     {
+    {
 
 
         $data = DB::table('employment as e')
@@ -1345,9 +1347,12 @@ if (!function_exists('getEmployeeapprover')) {
             ->where('e.status', '=', 'Active')
             ->where('e.user_id', '<>', $user_id)
 
+            ->where('e.status', '=', 'Active')->where('e.user_id', '<>', $user_id)
+
 
             ->select('e.*', 'j.jobgradename as job_grade_name')
             ->get();
+
 
 
 
