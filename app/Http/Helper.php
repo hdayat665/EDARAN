@@ -1199,10 +1199,10 @@ if (!function_exists('getBranchFullAddress')) {
     }
 }
 if (!function_exists('getEmployee')) {
-    function getEmployee($user_id = '')
+    function getEmployee()
     {
-        $data = Employee::where([['tenant_id', Auth::user()->tenant_id], ['employeeid', '!=', null]])->get()
-        ->where('e.status', '=', 'Active')->where('e.user_id', '<>', $user_id);
+        $data = Employee::where([['tenant_id', Auth::user()->tenant_id], ['employeeid', '!=', null]],
+        ['status', 'active'],)->get();
 
         if (!$data) {
             $data = [];

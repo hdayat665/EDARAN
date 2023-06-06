@@ -36,7 +36,7 @@
                                                             <label for="" class="form-label">Approver* </label>
                                                             <select class="form-select" name="caapprover"  id="caapprover" >
                                                                 <?php $employees = getEmployeeapprover(); ?>
-                                                                <option></option>
+                                                                <option value="">Please Choose</option>
                                                                 @foreach ($employees as $employee)
                                                                     <option value="{{ $employee->user_id }}" label="{{ $employee->employeeName }}"
                                                                     {{ $employment->caapprover == $employee->user_id ? "selected='selected'" : '' }}>
