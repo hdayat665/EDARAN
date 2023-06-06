@@ -675,11 +675,11 @@ class MyleaveService
         ->first();
 
 
-        // if ($settingEmail) {
+        if ($settingEmail) {
 
-        //     $ms = new MailService;
-        //     $ms->emailToApprovedLeave($settingEmail);
-        // }
+            $ms = new MailService;
+            $ms->emailToApprovedLeave($settingEmail);
+        }
 
         if($settingEmail->up_app_status == '4' &&  $checkType->leave_types_code == 'AL' ){
 
@@ -694,18 +694,23 @@ class MyleaveService
 
             if($today <= $check->lapsed_date){
 
-                $totalDay = $check->carry_forward_balance + $check->current_entitlement_balance;
-
-                $balance = $totalDay - $settingEmail->total_day_applied;
-
-                if(0 > $check->carry_forward_balance && 0 < $check->carry_forward_balance){
-
-
+                // Update carry_forward_balance
+                if ($check->carry_forward_balance >= $settingEmail->total_day_applied) {
+                    $balance1 = $check->carry_forward_balance - $settingEmail->total_day_applied;
+                } else {
+                    $balance1 = 0;
+                    $remainingFromEntitlement = $settingEmail->total_day_applied - $check->carry_forward_balance;
                 }
 
-                if(0 > $check->current_entitlement_balance && 0 < $check->current_entitlement_balance){
-
-
+                // Update current_entitlement_balance
+                if (isset($remainingFromEntitlement)) {
+                    if ($check->current_entitlement_balance >= $remainingFromEntitlement) {
+                        $leave = $check->current_entitlement_balance - $remainingFromEntitlement;
+                    } else {
+                        $leave = 0;
+                    }
+                } else {
+                    $leave = $check->current_entitlement_balance;
                 }
 
                 $input = [
@@ -713,12 +718,29 @@ class MyleaveService
                     'current_entitlement_balance' => $leave,
                 ];
 
+                $inputCalculate = [
+                    'calculate' => 1,
+                ];
+
                 leaveEntitlementModel::where('id', $check->id)->update($input);
+                MyLeaveModel::where('id', $id)->update($inputCalculate);
+
+            }else{
+
+                $leave = $check->current_entitlement_balance - $settingEmail->total_day_applied;
+
+                $input = [
+                    'current_entitlement_balance' => $leave,
+                ];
+
+                $inputCalculate = [
+                    'calculate' => 1,
+                ];
+
+                leaveEntitlementModel::where('id', $check->id)->update($input);
+                MyLeaveModel::where('id', $id)->update($inputCalculate);
 
             }
-
-
-
         }
 
         $data['status'] = config('app.response.success.status');
@@ -759,13 +781,13 @@ class MyleaveService
         ->first();
 
 
-        // if ($settingEmail) {
+        if ($settingEmail) {
 
-        //     $ms = new MailService;
-        //     $ms->emailToApprovedLeave($settingEmail);
-        // }
+            $ms = new MailService;
+            $ms->emailToApprovedLeave($settingEmail);
+        }
 
-        if($settingEmail->up_app_status == '3' &&  $checkType->leave_types_code == 'AL' ){
+        if($settingEmail->up_app_status == '3' &&  $checkType->leave_types_code == 'AL' && $settingEmail->calculate == '1' ){
 
             $today = Carbon::now();
 
@@ -774,31 +796,36 @@ class MyleaveService
             ->where('leave_entitlement.id_employment','=' ,$settingEmail->up_user_id)
             ->first();
 
-
-
-
             if($today <= $check->lapsed_date){
 
-                $balance = $check->current_entitlement_balance - $check->current_entitlement;
+                $total = $check->current_entitlement_balance + $settingEmail->total_day_applied;
 
-                // dd($balance);
-                // die;
-
-                if ($balance < 0) {
-                    $leave = $check->current_entitlement_balance - $balance;
-                    $balance1 = $settingEmail->total_day_applied + $balance;
+                if ($total <= $check->current_entitlement) {
+                    $balance1 = 0;
+                    $current_entitlement_balance = $total;
+                } else {
+                    $balance1 = $total - $check->current_entitlement + $check->carry_forward_balance;
+                    $current_entitlement_balance = $check->current_entitlement;
                 }
 
                 $input = [
                     'carry_forward_balance' => $balance1,
+                    'current_entitlement_balance' => $current_entitlement_balance,
+                ];
+
+                leaveEntitlementModel::where('id', $check->id)->update($input);
+
+            }else{
+
+                $leave = $check->current_entitlement_balance + $settingEmail->total_day_applied;
+
+                $input = [
                     'current_entitlement_balance' => $leave,
                 ];
 
                 leaveEntitlementModel::where('id', $check->id)->update($input);
 
             }
-
-
 
         }
 
