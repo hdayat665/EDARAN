@@ -99,7 +99,7 @@
                                                 @foreach ($travels as $travel)
                                                     <tr>
                                                         <td>
-                                                            @if ($travel->parking)
+                                                            @if ($travel->type_claim === 'travel')
                                                                 <a data-bs-toggle="modal" data-id="{{ $travel->id }}" id="btn-view-claim" class="btn btn-primary btn-sm travel">View</a>
                                                             @else
                                                                 <a data-bs-toggle="modal" data-id="{{ $travel->id }}" id="btn-view-subsistence" class="btn btn-primary btn-sm travel">View
@@ -180,7 +180,7 @@
                             <a href="/claimApprovalView/1" class="btn btn-light" style="color: black;" type="submit"><i class="fa fa-arrow-left"></i> Back</a>
                         </div>
                         <div class="col d-flex justify-content-end">
-                        @if ($general->hod == 'recommend')
+                        @if ($general->hod == 'bucket')
                         @else
                             <a class="btn btn-secondary" data-id="{{ $general->id }}" style="color: black" type="submit"> Cancel</a> &nbsp;
                             <a href="javascript:;" class="btn btn-warning" style="color: black" data-bs-toggle="modal" data-bs-target="#modalamend">Amend</a> &nbsp;

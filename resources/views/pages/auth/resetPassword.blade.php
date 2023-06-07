@@ -19,8 +19,11 @@
             </div>
             <h5 class="text-primary text-center">
                 Streamline and automate HR processes with OrbitHRM
-            </h5>
+            </h5><br>
+
             <div class="card-body bg-white">
+                <h3>Reset Password</h3>
+                <br>
                 <form id="resetPassForm" class="fs-13px">
                     <div class="form-floating mb-15px">
                         <input type="password" name="password" class="form-control h-45px fs-13px"  id="password" />

@@ -257,11 +257,14 @@
                                 <a href="javascript:;" class="btn btn-danger" style="color: black" data-bs-toggle="modal" data-bs-target="#modalreject"> Reject</a> &nbsp;
                             @endif
 
-                            @if (($ca->f1 == 'check' && $ca->f2 == 'check') || ($ca->f1 == 'check' && $ca->f3 == 'check') || ($ca->f2 == 'check' && $ca->f3 == 'check'))
+                            @if ($checkers == 'f1')
+                                <a class="btn btn-lime" id="approveButton1" data-id="{{ $ca->id }}" style="color: black" type="submit"> Approve</a>
+                            @endif
+                            <!-- @if (($ca->f1 == 'check' && $ca->f2 == 'check') || ($ca->f1 == 'check' && $ca->f3 == 'check') || ($ca->f2 == 'check' && $ca->f3 == 'check'))
                                 @if ($checkers == 'f1')
                                     <a class="btn btn-lime" id="approveButton1" data-id="{{ $ca->id }}" style="color: black" type="submit"> Approve</a>
                                 @endif
-                            @endif
+                            @endif -->
                         @endif
                     @endif
                 </div>

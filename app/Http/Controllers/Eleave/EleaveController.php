@@ -9,10 +9,11 @@ use Illuminate\Support\Facades\Auth;
 
 class EleaveController extends Controller
 {
-    public function leaveentitlement(){
+    public function leaveentitlement()
+    {
 
         return view('pages.eleave.setting.eleaveentitlement');
-        
+
         // $LE = new EleaveService;
 
         // $data = $LE->LeaveEntitlementView();
@@ -23,5 +24,15 @@ class EleaveController extends Controller
         // dd($data);
 
         // return view('pages.eleave.setting.eleaveentitlement', $data);
+    }
+
+
+    public function bulkUploadHoliday(Request $r)
+    {
+        $es = new EleaveService();
+
+        $result = $es->bulkUploadHoliday($r);
+
+        return response()->json($result);
     }
 }

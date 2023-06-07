@@ -3,7 +3,9 @@
     <div id="content" class="app-content">
         <h1 class="page-header">eClaim | Claim Approval | Approver</h1>
         <div class="panel panel" id="supervisorDepartmentJs">
+        
             <div class="panel-body">
+            
                 <!-- <div class="form-control">
                     <h3>Claim Overview</h3>
                     <div class="row p-2">
@@ -33,25 +35,28 @@
                                 <div class="col d-flex justify-content-start">
                                     <ul class="nav nav-pills">
                                         <li class="nav-item">
-                                            <a href="#default-tab-1" data-bs-toggle="tab" class="nav-link active">Active</a>
+                                            <a href="#default-tab-1" data-bs-toggle="tab" id="activeTab" class="nav-link active">Active</a>
                                         </li>
-                                        <li class="nav-item">
+                                        <!-- <li class="nav-item">
                                             <a href="#default-tab-2" data-bs-toggle="tab" class="nav-link ">Approved</a>
+                                        </li> -->
+                                        <li class="nav-item">
+                                            <a href="#default-tab-5" data-bs-toggle="tab" class="nav-link" id="bucketTab">Bucket</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a href="#default-tab-3" data-bs-toggle="tab" class="nav-link ">Amend</a>
+                                            <a href="#default-tab-3" data-bs-toggle="tab" id="ammendTab" class="nav-link ">Amend</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a href="#default-tab-4" data-bs-toggle="tab" class="nav-link ">Rejected</a>
+                                            <a href="#default-tab-4" data-bs-toggle="tab" id="rejectedTab" class="nav-link ">Rejected</a>
                                         </li>
                                     </ul>
                                 </div>
                                 <div class="col d-flex justify-content-end">
-                                    <!-- <button class="btn btn-primary" type="button">Skip the Queue</button>&nbsp; -->
+                                    <a class="btn btn-primary" id="skipButton" style="display: none;" type="button">Skip the Queue</a>&nbsp;
                                     <a class="btn btn-primary" id="approveAllButton" type="button">Approve All</a>&nbsp;
                                     <button class="btn btn-primary" type="button" id="filter"> <i class="fa fa-filter" aria-hidden="true"></i></button>&nbsp;
                                     <!-- <button class="btn btn-primary" type="button"> <i class='far fa-file-pdf'></i></button>&nbsp; -->
-                                </div>
+                                </div> 
                             </div>
                         </div>
                     </div>
@@ -131,6 +136,7 @@
                         @include('pages.eclaim.claimApproval.supervisorTab2')
                         @include('pages.eclaim.claimApproval.supervisorTab3')
                         @include('pages.eclaim.claimApproval.supervisorTab4')
+                        @include('pages.eclaim.claimApproval.supervisorTab5')
                     </div>
                 </div>
             </div>

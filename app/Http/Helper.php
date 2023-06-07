@@ -32,6 +32,8 @@ use App\Models\TransportMillage;
 use App\Models\EclaimGeneral;
 use App\Models\PermissionRole;
 use App\Models\EntitleSubsBenefit;
+use App\Models\Notification;
+use App\Notifications\GeneralNotification;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -691,7 +693,22 @@ if (!function_exists('getDepartmentforJobHistory')) {
         return $deparments->pluck('departmentName', 'id')->toArray();
     }
 }
+if (!function_exists('getUnitProject')) {
+    function getUnitProject($id = '')
+    {
+        if ($id) {
+            $data = Unit::find($id);
+        } else {
+            $data = Unit::where('tenant_id', Auth::user()->tenant_id)->get();
+        }
 
+        if (!$data) {
+            $data = [];
+        }
+
+        return $data;
+    }
+}
 if (!function_exists('getUnit')) {
     function getUnit($id = '', $departmentId = '')
     {
@@ -722,7 +739,22 @@ if (!function_exists('getUnitforJobHistory')) {
         return $units->pluck('unitName', 'id')->toArray();
     }
 }
+if (!function_exists('getBranchProject')) {
+    function getBranchProject($id = '')
+    {
+        if ($id) {
+            $data = Branch::find($id);
+        } else {
+            $data = Branch::where('tenant_id', Auth::user()->tenant_id)->get();
+        }
 
+        if (!$data) {
+            $data = [];
+        }
+
+        return $data;
+    }
+}
 if (!function_exists('getBranch')) {
     function getBranch($id = '', $companyId = '')
     {
@@ -1167,9 +1199,10 @@ if (!function_exists('getBranchFullAddress')) {
     }
 }
 if (!function_exists('getEmployee')) {
-    function getEmployee()
+    function getEmployee($user_id = '')
     {
-        $data = Employee::where([['tenant_id', Auth::user()->tenant_id], ['employeeid', '!=', null]])->get();
+        $data = Employee::where([['tenant_id', Auth::user()->tenant_id], ['employeeid', '!=', null]])->get()
+        ->where('e.status', '=', 'Active')->where('e.user_id', '<>', $user_id);
 
         if (!$data) {
             $data = [];
@@ -1299,7 +1332,8 @@ if (!function_exists('getEmployeerecommender')) {
 if (!function_exists('getEmployeeapprover')) {
     function getEmployeeapprover($user_id = '')
 
-    {    
+    {
+    {
 
 
         $data = DB::table('employment as e')
@@ -1312,13 +1346,16 @@ if (!function_exists('getEmployeeapprover')) {
             })
             ->where('e.status', '=', 'Active')
             ->where('e.user_id', '<>', $user_id)
-           
+
+            ->where('e.status', '=', 'Active')->where('e.user_id', '<>', $user_id)
+
 
             ->select('e.*', 'j.jobgradename as job_grade_name')
             ->get();
 
 
-            
+
+
         if (!$data) {
             $data = [];
         }
@@ -2064,14 +2101,14 @@ if (!function_exists('getModeOfTransport')) {
     function getModeOfTransport($id = '')
     {
         $data = [
-            '0' => '',
-            '1' => 'Personal Car',
-            '2' => 'Personal Motorcycle',
-            '3' => 'Public Transport',
-            '4' => 'Company Car',
-            '5' => 'Carpool',
-        ];
-
+            '' => '',
+            '2' => 'Personal Car',
+            '3' => 'Personal Motorcycle',
+            '4' => 'Public Transport',
+            '5' => 'Company Car',
+            '6' => 'Carpool',
+        ]; 
+        
         if ($id) {
             return $data[$id];
         }
@@ -2440,5 +2477,81 @@ if (!function_exists('getUserWithSelectedUser')) {
         }
 
         return $data;
+    }
+}
+
+if (!function_exists('getNotification')) {
+    function getNotification()
+    {
+        $data = Notification::where([['notifiable_id', Auth::user()->id], ['read_at', NULL]])->orderBy('created_at', 'DESC')->get();
+
+        return $data;
+    }
+}
+
+if (!function_exists('getDateFormat')) {
+    function getDateFormat($diff = '')
+    {
+
+        // To get the year divide the resultant date into
+        // total seconds in a year (365*60*60*24)
+        $years = floor($diff / (365 * 60 * 60 * 24));
+
+        // To get the month, subtract it with years and
+        // divide the resultant date into
+        // total seconds in a month (30*60*60*24)
+        $months = floor(($diff - $years * 365 * 60 * 60 * 24)
+            / (30 * 60 * 60 * 24));
+
+        // To get the day, subtract it with years and
+        // months and divide the resultant date into
+        // total seconds in a days (60*60*24)
+        $days = floor(($diff - $years * 365 * 60 * 60 * 24 -
+            $months * 30 * 60 * 60 * 24) / (60 * 60 * 24));
+
+        // To get the hour, subtract it with years,
+        // months & seconds and divide the resultant
+        // date into total seconds in a hours (60*60)
+        $hours = floor(($diff - $years * 365 * 60 * 60 * 24
+            - $months * 30 * 60 * 60 * 24 - $days * 60 * 60 * 24)
+            / (60 * 60));
+
+        // To get the minutes, subtract it with years,
+        // months, seconds and hours and divide the
+        // resultant date into total seconds i.e. 60
+        $minutes = floor(($diff - $years * 365 * 60 * 60 * 24
+            - $months * 30 * 60 * 60 * 24 - $days * 60 * 60 * 24
+            - $hours * 60 * 60) / 60);
+
+        // To get the minutes, subtract it with years,
+        // months, seconds, hours and minutes
+        $seconds = floor(($diff - $years * 365 * 60 * 60 * 24
+            - $months * 30 * 60 * 60 * 24 - $days * 60 * 60 * 24
+            - $hours * 60 * 60 - $minutes * 60));
+
+        $data = [
+            'hours' => $hours,
+            'minutes' => $minutes,
+            'seconds' => $seconds,
+        ];
+
+        return $data;
+    }
+}
+
+if (!function_exists('sendGeneralNotification')) {
+    function sendGeneralNotification($id = '', $msg)
+    {
+        $userToNotify = Users::where('id', $id)->get();
+
+        foreach ($userToNotify as $user) {
+            $dataNotify = [
+                'msg' => $msg,
+                'user' => Auth::user()->employement->employeeName ?? '-',
+                'status' => 'succed',
+            ];
+
+            $user->notify(new GeneralNotification($dataNotify));
+        }
     }
 }

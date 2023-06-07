@@ -38,7 +38,7 @@
                                                         @if (!empty($employment->eleaverecommender))
                                                         <option></option>
                                                         @endif
-                                                        <?php $employees = getEmployee(); ?>
+                                                        <?php $employees = getEmployee($user_id); ?>
                                                         @foreach ($employees as $employee)
                                                             <option value="{{ $employee->user_id }}" label="{{ $employee->employeeName }}"
                                                             {{ $employment->eleaverecommender == $employee->user_id ? "selected='selected'" : '' }}>
