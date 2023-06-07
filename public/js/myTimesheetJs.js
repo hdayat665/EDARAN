@@ -1714,7 +1714,7 @@ function getDateRange(startDate, endDate) {
                             $("#activity_name_edit2").val(data.activity_name);
                             $("#activity_name_edit1").val(data.activity_name);
                             $("#starttimeedit").val(data.start_time);
-
+                            $("#endtimeedit").val(data.end_time);
                             $("#projectLocationOfficeEdit").picker(
                                 "set",
                                 data.project_location
@@ -1726,12 +1726,42 @@ function getDateRange(startDate, endDate) {
                                 "checked",
                                 data.exit_project
                             );
-                            $("#endtimeedit").val(data.end_time);
+                            
                             $("#desc").val(data.desc);
                             $("#total_hour_edit").val(data.total_hour);
                             $("#id").val(data.id);
                             $("#lunchBreakedit").val(data.lunch_break);
                             
+                            
+                            var startTimeInput = $("#starttimeedit");
+
+                            // Get the current value of the input field
+                                var startTime = startTimeInput.val();
+                                console.log(startTime + "start")
+                            
+                                // Initialize the mdtimepicker with the initial time value
+                                startTimeInput.mdtimepicker({
+                                timeFormat: 'hh:mm:ss.000',
+                                showMeridian: false,
+                                is24hour: true,
+                                defaultTime: startTime // Set the initial time value
+                                });
+
+                            
+                                var endTimeInput = $("#endtimeedit");
+
+                                // Get the current value of the input field
+                                var endTime = endTimeInput.val();
+                                console.log(endTime+"end")
+
+                                // Initialize the mdtimepicker with the initial time value
+                                endTimeInput.mdtimepicker({
+                                timeFormat: 'hh:mm:ss.000',
+                                showMeridian: false,
+                                is24hour: true,
+                                defaultTime: endTime // Set the initial time value
+                                });
+
                         });
 
                         $("#editlogmodal").modal("show");
@@ -2413,6 +2443,7 @@ function getDateRange(startDate, endDate) {
                                 );
                             }
                             $("#idEvent").val(data.id);
+                            $("#eventcreator").val(data.employeeName);
                         });
 
                         $("#editeventmodal").modal("show");
@@ -2555,38 +2586,39 @@ $("#endeventdate").datepicker({
     $("#addneweventselectproject").picker({ search: true });
     $(function () {
         $("#starttime").mdtimepicker({
-            showMeridian: true,
+            timeFormat: 'hh:mm:ss.000',
+            showMeridian: false, // Use 24-hour format
+            is24hour: true,
         });
-    
+        
         var now = new Date();
         var hours = now.getHours();
-        var meridian = hours >= 12 ? "PM" : "AM";
-        hours = hours % 12;
-        hours = hours ? hours : 12; // convert 0 to 12
         var minutes = now.getMinutes();
-    
-        if (minutes < 10) {
-            minutes = "0" + minutes;
-        }
-    
-        $("#starttime").val(hours + ":" + minutes + " " + meridian);
+        
+        // Convert hours and minutes to 2-digit format
+        hours = ("0" + hours).slice(-2);
+        minutes = ("0" + minutes).slice(-2);
+        
+        $("#starttime").val(hours + ":" + minutes);
     
         $("#endtime").mdtimepicker({
-            showMeridian: true,
+            timeFormat: 'hh:mm:ss.000',
+            showMeridian: false, // Use 24-hour format
+            is24hour: true,
         });
-    
+        
         var startMoment = moment($("#starttime").val(), "hh:mm A");
         var endMoment = startMoment.clone().add(1, 'hour');
-    
+        
         var hours = endMoment.hours();
-        var meridian = hours >= 12 ? "PM" : "AM";
-        hours = hours % 12;
-        hours = hours ? hours : 12; // convert 0 to 12
         var minutes = endMoment.minutes();
-        if (minutes < 10) {
-            minutes = "0" + minutes;
-        }
-        $("#endtime").val(hours + ":" + minutes + " " + meridian);
+        
+        // Convert hours and minutes to 2-digit format
+        hours = ("0" + hours).slice(-2);
+        minutes = ("0" + minutes).slice(-2);
+        
+        $("#endtime").val(hours + ":" + minutes);
+        
     
         $("#daystart,#dayend")
             .datepicker({
@@ -2603,24 +2635,21 @@ $("#endeventdate").datepicker({
         $("#starteventtime,#endeventtime").mdtimepicker({});
     
         $("#starttime").change(function () {
-            var startMoment = moment($("#starttime").val(), "hh:mm A");
+            var startMoment = moment($("#starttime").val(), "HH:mm");
             var endMoment = startMoment.clone().add(1, 'hour');
-    
+        
             var hours = endMoment.hours();
-            var meridian = hours >= 12 ? "PM" : "AM";
-            hours = hours % 12;
-            hours = hours ? hours : 12; // convert 0 to 12
             var minutes = endMoment.minutes();
-            if (minutes < 10) {
-                minutes = "0" + minutes;
-            }
-            $("#endtime").val(hours + ":" + minutes + " " + meridian);
+            var formattedTime = hours.toString().padStart(2, '0') + ":" + minutes.toString().padStart(2, '0');
+            
+            $("#endtime").val(formattedTime);
         });
+        
     
         $("#endtime").change(function () {
-            var startTime = moment($("#starttime").val(), "hh:mm A");
-            var endTime = moment($("#endtime").val(), "hh:mm A");
-        
+            var startTime = moment($("#starttime").val(), "HH:mm");
+            var endTime = moment($("#endtime").val(), "HH:mm");
+            
             if (endTime.isBefore(startTime)) {
                 Swal.fire({
                     icon: "error",
@@ -2630,11 +2659,11 @@ $("#endeventdate").datepicker({
                     $("#endtime").val("");
                     $("#logduration").val("");
                     $("#endtime").attr("placeholder", "End Time"); // Set the placeholder for the end time field
-                    $("#endtime").mdtimepicker("toggle");
-                     // Close the time picker
+                    $("#endtime").mdtimepicker("toggle"); // Close the time picker
                 });
             }
         });
+        
         
     });
     
@@ -2892,12 +2921,6 @@ $("#endeventdate").datepicker({
     $("#addneweventparticipantedit").picker({ search: true });
     $("#addneweventselectprojectedit").picker({ search: true });
 
-    $("#starttimeedit").mdtimepicker({
-        showMeridian: false,
-    });
-    $("#endtimeedit").mdtimepicker({
-        showMeridian: false,
-    });
 
     $("#starteventtimeedit").mdtimepicker({
         showMeridian: false,

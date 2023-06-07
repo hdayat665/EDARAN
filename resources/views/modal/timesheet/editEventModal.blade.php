@@ -450,6 +450,14 @@
                         <input type="hidden" id="user_id_event" value="{{$user_id}}">
 
                     </div>
+                    <div class="row p-2">
+                        <div class="col-sm-2">
+                            <label for="" class="form-label">Event Creator</label>
+                        </div>
+                        <div class="col-sm-5">
+                            <input type="text" class="form-control" id="eventcreator" name="" readonly>
+                        </div>
+                    </div>
 
                     <div class="modal-footer">
                         <button type="button" id="deleteEventButton" class="btn btn-danger" >Delete</button>

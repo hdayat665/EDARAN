@@ -124,7 +124,7 @@ class MyTimesheetController extends Controller
         $ss = new MyTimeSheetService;
 
         $result = $ss->getEventById($id);
-
+        
         return $result;
     }
 
