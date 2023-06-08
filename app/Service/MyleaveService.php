@@ -20,11 +20,14 @@ class MyleaveService
 {
    public function myleaveView(){
 
-         $data = MyLeaveModel::where('myleave.tenant_id', Auth::user()->tenant_id)
+         $data = MyLeaveModel::select('myleave.*', 'leave_types.leave_types as type')
             ->leftJoin('leave_types', 'myleave.lt_type_id', '=', 'leave_types.id')
+            ->where('myleave.tenant_id', Auth::user()->tenant_id)
             ->where('myleave.up_user_id', '=', Auth::user()->id)
-            ->where('myleave.leave_date', '>=', Carbon::now()->format('Y-m-d'))
-            ->select('myleave.*', 'leave_types.leave_types as type')
+            ->where(function ($query) {
+                $query->where('myleave.status_final', '=', 1)
+                    ->orWhere('myleave.status_final', '=', 2);
+            })
             ->orderBy('myleave.applied_date', 'desc')
             ->orderBy('myleave.created_at', 'desc')
             ->get();
@@ -34,11 +37,14 @@ class MyleaveService
 
     public function myleaveHistoryView(){
 
-        $data = MyLeaveModel::where('myleave.tenant_id', Auth::user()->tenant_id)
+        $data = MyLeaveModel::select('myleave.*', 'leave_types.leave_types as type')
             ->leftJoin('leave_types', 'myleave.lt_type_id', '=', 'leave_types.id')
             ->where('myleave.up_user_id', '=', Auth::user()->id)
-            ->where('myleave.leave_date', '<', Carbon::now()->format('Y-m-d'))
-            ->select('myleave.*', 'leave_types.leave_types as type')
+            ->where(function ($query) {
+                $query->where('myleave.status_final', '=', 3)
+                    ->orWhere('myleave.status_final', '=', 4);
+            })
+            ->where('myleave.tenant_id', Auth::user()->tenant_id)
             ->orderBy('myleave.applied_date', 'desc')
             ->orderBy('myleave.created_at', 'desc')
             ->get();
@@ -909,25 +915,30 @@ class MyleaveService
     public function getLapseLeave()
     {
         $today = Carbon::now();
+        $checktoday = Carbon::now();
         $year = $today->format('Y');
 
         $previousYear = $today->subYear()->format('Y');
 
-        $LeaveEntitlement = leaveEntitlementModel::select('lapse')
+        $LeaveEntitlement = leaveEntitlementModel::select('leave_entitlement.*')
             ->where('leave_entitlement.tenant_id', '=', Auth::user()->tenant_id)
             ->where('leave_entitlement.id_userprofile', '=', Auth::user()->id)
             ->whereYear('leave_entitlement.le_year', '=', $year)
             ->first();
-        $lapse = $LeaveEntitlement->lapse;
+
+        if($checktoday <= $LeaveEntitlement->lapsed_date){
+
+            $lapse = $LeaveEntitlement->lapse;
+
+        }else{
+
+            $lapse = $LeaveEntitlement->lapse + $LeaveEntitlement->carry_forward_balance;
+
+        }
 
         $data = [$lapse, $previousYear];
 
-        // dd($data);
-        // die;
-
         return $data;
-
-
     }
 
     public function getuserleaveAppr($id)
