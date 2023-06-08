@@ -629,7 +629,7 @@
 
                                 <div class="row p-2">
                                     <div class="col-sm-12">
-                                        <div class="form-control">
+                                        <div class="form-control" id = "hiderec1">
                                             <div class="row">
                                                 <div class="col-sm-6">Recommended By:
                                                     <div id="recommended_by"></div>
@@ -647,6 +647,20 @@
                                                 </div>
                                                 <div class="col-sm-6">Status:
                                                     <div id="status_2">Pending</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-control" id = "hiderec2">
+                                            <div class="row">
+                                                <div class="col-sm-6">Approved By:
+                                                    <div id="approved_by1"></div>
+                                                </div>
+                                            </div>
+                                            <br>
+                                            <br>
+                                            <div class="row">
+                                                <div class="col-sm-6">Status:
+                                                    <div id="status_22">Pending</div>
                                                 </div>
                                             </div>
                                         </div>
@@ -775,7 +789,7 @@
 
                                 <div class="row p-2">
                                     <div class="col-sm-12">
-                                        <div class="form-control">
+                                        <div class="form-control" id= "hiderec12">
                                             <div class="row">
                                                 <div class="col-sm-6">Recommended By:
                                                     <div id="recommended_by2"></div>
@@ -793,6 +807,20 @@
                                                 </div>
                                                 <div class="col-sm-6">Status:
                                                     <div id="status_20">Pending</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-control" id= "hiderec22">
+                                            <div class="row">
+                                                <div class="col-sm-6">Approved By:
+                                                    <div id="approved_by22"></div>
+                                                </div>
+                                            </div>
+                                            <br>
+                                            <br>
+                                            <div class="row">
+                                                <div class="col-sm-6">Status:
+                                                    <div id="status_202">Pending</div>
                                                 </div>
                                             </div>
                                         </div>
