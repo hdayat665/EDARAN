@@ -3637,7 +3637,7 @@ $(document).ready(function () {
                     required: "Please Insert Contact Number",
                     digits: "Please Insert Valid Contact Number",
 
-                    rangelength: [10, 11],
+                    rangelength: "Please Insert Valid Contact Number",
                 },
                 expiryDate: {
                     required: "Please Insert Expiry Date",

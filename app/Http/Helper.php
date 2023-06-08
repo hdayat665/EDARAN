@@ -1199,10 +1199,10 @@ if (!function_exists('getBranchFullAddress')) {
     }
 }
 if (!function_exists('getEmployee')) {
-    function getEmployee($user_id = '')
+    function getEmployee()
     {
-        $data = Employee::where([['tenant_id', Auth::user()->tenant_id], ['employeeid', '!=', null]])->get()
-        ->where('e.status', '=', 'Active')->where('e.user_id', '<>', $user_id);
+        $data = Employee::where([['tenant_id', Auth::user()->tenant_id], ['employeeid', '!=', null]],
+        ['status', 'active'],)->get();
 
         if (!$data) {
             $data = [];
@@ -1332,7 +1332,7 @@ if (!function_exists('getEmployeerecommender')) {
 if (!function_exists('getEmployeeapprover')) {
     function getEmployeeapprover($user_id = '')
 
-    {
+    
     {
 
 
@@ -2537,10 +2537,11 @@ if (!function_exists('getDateFormat')) {
 
         return $data;
     }
+    
 }
 
 if (!function_exists('sendGeneralNotification')) {
-    function sendGeneralNotification($id = '', $msg)
+    function sendGeneralNotification($msg,$id = '')
     {
         $userToNotify = Users::where('id', $id)->get();
 
