@@ -6,7 +6,7 @@ $(document).ready(function () {
     //       $(this).val("test");
     //     }
     //   });
-
+    var naim = "naim";
     document.getElementById("yearsub").value = new Date().getFullYear();
 
     var monthNames = [
@@ -802,12 +802,23 @@ $(document).ready(function () {
                 url: "/getApproverAppeal",
             });
         }
-
-        approverappeal = getApproverAppeal();
-        approverappeal.then(function (data) {
-        console.log("data user here", data);
-        });
         
+        var approverData;
+        
+        var approverUserId;
+
+        function getApproverAppeal(id) {
+            return $.ajax({
+                url: "/getApproverAppeal",
+            });
+        }
+        
+        var approverUserId;
+        
+        getApproverAppeal().done(function (data) {
+            approverUserId = data;
+            console.log("Approver User ID:", approverUserId);
+        });
         
 
         var timesheetData = getTimesheet();
@@ -1101,6 +1112,8 @@ $(document).ready(function () {
 
 
                 dayCellDidMount: function(info) {
+                    
+                    // console.log(approverUserId+"from deaycell");
                     var current = new Date(info.date);
                     var currentDate = new Date();
 
@@ -1140,7 +1153,7 @@ $(document).ready(function () {
                                     $('#monthappeal').val(new Date(info.date).toLocaleString('en-US', { month: 'long' }));
                                     $('#dayappeal').val(day);
                                     $('#log_id').val(nextLogId);
-
+                                    $('#appealapproverc').val(approverUserId);
                                     const clickedDate = dayjs(info.date);
                                     const formattedDate = clickedDate.format('YYYY-MM-DD');
                                     $("#applieddate").val(formattedDate);
@@ -1179,7 +1192,7 @@ $(document).ready(function () {
                                         $('#yearappealv').val(year);
                                         $('#monthappealv').val(month);
                                         $('#dayappealv').val(day);
-                                        $('#approverview').val(approver);
+                                        $('#approverview').val(approverUserId);
 
                                         if (file) {
                                             var fileName = file.split('/').pop(); // Extract the file name from the file path
@@ -2693,34 +2706,35 @@ $("#endeventdate").datepicker({
     
     
 
-    // $(document).on('change', "#typeoflog", function() {
-    //     if ($(this).val() == "1") {
-    //         $("#activityByProjectHide").show();
-    //         $("#officelog").hide();
-    //         $("#myproject").hide();
-    //         $("#locationByProjectHide").hide();
+    $(document).on('change', "#typeoflog", function() {
+        if ($(this).val() == "1") {
+            $("#activityByProjectHide").show();
+            $("#officelog").hide();
+            $("#myproject").hide();
+            $("#locationByProjectHide").hide();
+            
 
-    //     } else if ($(this).val() == "2") {
-    //         $("#officelog").show();
-    //         $("#activityByProjectHide").hide();
-    //         $("#myproject").hide();
+        } else if ($(this).val() == "2") {
+            $("#officelog").show();
+            $("#activityByProjectHide").hide();
+            $("#myproject").hide();
 
-    //     } else if ($(this).val() == "3") {
-    //         $("#myproject").show();
-    //         $("#activityByProjectHide").show();
-    //         $("#locationByProjectHide").show();
+        } else if ($(this).val() == "3") {
+            $("#myproject").show();
+            $("#activityByProjectHide").show();
+            $("#locationByProjectHide").show();
 
-    //     } else if ($(this).val() == "4") {
-    //         $("#activityByProjectHide").show();
-    //         $("#officelog").hide();
-    //         $("#myproject").hide();
-    //         $("#locationByProjectHide").hide();
-    //     // } else {
-    //     //     $("#activityByProjectHide").hide();
-    //     //     $("#officelog").hide();
+        } else if ($(this).val() == "4") {
+            $("#activityByProjectHide").show();
+            $("#officelog").hide();
+            $("#myproject").hide();
+            $("#locationByProjectHide").hide();
+        } else {
+            $("#activityByProjectHide").hide();
+            $("#officelog").hide();
 
-    //     }
-    // });
+        }
+    });
 
     $(document).on("change", "#typeoflog", function () {
         if ($(this).val() == "2") {

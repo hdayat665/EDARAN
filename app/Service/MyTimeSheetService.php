@@ -1545,18 +1545,23 @@ if ($existingLogs->isNotEmpty()) {
         $user_id = $user->id;
     
         $employment = DB::table('employment')
-            ->select('tsapprover')
+            ->select('tsapprover', 'employeeName')
             ->where('user_id', $user_id)
-            ->get();
+            ->first(); // Retrieve only the first matching record
     
-        foreach ($employment as $emp) {
-            if (!empty($emp->tsapprover)) {
-                return $emp->tsapprover; // Return the first non-empty tsapprover value and stop the loop
-            }
+        $approverName = null;
+        if (!empty($employment->tsapprover)) {
+            $approverName = DB::table('employment')
+                ->where('user_id', $employment->tsapprover)
+                ->value('employeeName');
         }
     
-        return null; // Return null if no result is found
+        return $approverName;
     }
+    
+    
+
+
     
     
 

@@ -9,8 +9,12 @@
                 
                 <!-- BEGIN panel-heading -->              
                 <div class="panel-heading">
-                    <div class="col-md-6">
+                    {{-- <div class="col-md-6">
                         <a href="/myTimesheet" class="btn btn-primary">+ Add Logs</a>
+                    </div> --}}
+                    <div class="row p-2">
+                        <h4>Current Month: {{ date('F') }}</h4>
+                        <h4>Current Year: {{ date('Y') }}</h4>
                     </div>
                     <h4 class="panel-title"></h4>
                     
@@ -36,7 +40,7 @@
                             <th>Public Holidays</th>
                             <td>{{ $timesheetsday['holidays'] }} days</td>
                             <th>Worked Days</th>
-                            <td>19 Days</td>
+                            <td>{{ $timesheetsday['workedDays'] }} days</td>
                         </tr>
                         <tr>
                             <th>Eligible Public Holidays</th>
@@ -58,6 +62,7 @@
                                 <th class="text-nowrap">Year</th>
                                 <th class="text-nowrap">Month</th>
                                 <th width="9%" data-orderable="false" class="align-middle">Status</th>
+                                <th width="9%" data-orderable="false" class="align-middle">Tsr Status</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -102,8 +107,9 @@
                                     <div id="amended"> <span class="badge bg-danger rounded-pill" data-toggle="tooltipamend"  data-placement="bottom" title="{{$timesheet->amendreason}}">Amended</span> </div>
                                     @endif
                                 </td>
+                                <td>{{ $timesheetsday['workedDays'] }} / {{ $timesheetsday['workingDays'] }} days</td>
                             </tr>
-                            @endforeach
+                            @endforeach 
                             @endif
                         </tbody>
                     </table>
@@ -116,6 +122,5 @@
                 </div>
             </div>
         </div>
-
-
 @endsection
+
