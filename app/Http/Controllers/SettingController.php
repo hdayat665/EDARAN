@@ -1028,10 +1028,10 @@ class SettingController extends Controller
     {
         $ss = new SettingService;
 
-        $data['leave'] = $ss->leaveEntitlementView();
-        $data['nameStaff'] = $ss->leaveNameStaff();
+        // $data['leave'] = $ss->weekendEntitlementView();
+        // $data['nameStaff'] = $ss->leaveNameStaff();
 
-        return view('pages.setting.eleave.weekendEntitlement', $data);
+        return view('pages.setting.eleave.weekendEntitlement');
     }
 //module add weekend-Weekend entitlement
     public function createWeekendEntitlement(Request $r)

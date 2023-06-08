@@ -9,7 +9,7 @@
         <!-- BEGIN page-header -->
         <h1 class="page-header">Setting | Weekend Entitlements</h1>
         <div class="row">
-            <div class="col-xl-15" id="annualLeaveJs">
+            <div class="col-xl-15" id="weekendEntitlementJs">
                 <!-- BEGIN nav-tabs -->
 
                 <div class="tab-content panel m-0 rounded-0 p-3">
