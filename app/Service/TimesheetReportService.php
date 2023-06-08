@@ -88,14 +88,14 @@ class TimesheetReportService
         }
 
 
-        if ($input['month']) {
+        if (isset($input['month'])) {
             $cond[6] = ['month', $input['month']];
         }
-
-
-        if ($input['status']) {
+        
+        if (isset($input['status'])) {
             $cond[7] = ['status', $input['status']];
         }
+        
 
 
         
