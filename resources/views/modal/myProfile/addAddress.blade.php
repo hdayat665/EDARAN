@@ -45,13 +45,13 @@
                             $americass = americas();
                             $asias = asias();
                             ?>
+                            <option value="" label="PLEASE CHOOSE" selected ></option>
                             <optgroup id="country-optgroup-Americas" label="Americas">
                                 @foreach ($americass as $key => $america)
                                 <option value="{{$key}}" >{{$america}}</option>
                                 @endforeach
                             </optgroup>
                             <optgroup id="country-optgroup-Asia" label="Asia">
-                                <option value="MY" label="Malaysia" Selected></option>
                                 @foreach ($asias as $key => $asia)
                                 <option value="{{$key}}">{{$asia}}</option>
                                 @endforeach

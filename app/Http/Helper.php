@@ -600,7 +600,7 @@ if (!function_exists('asias')) {
             'LA' => "LAOS",
             'LB' => "LEBANON",
             'MO' => "MACAU SAR CHINA",
-            'MY' => "MALAYSIA",
+            'MALAYSIA' => "MALAYSIA",
             'MV' => "MALDIVES",
             'MN' => "MONGOLIA",
             'MM' => "MYANMAR [BURMA]",
