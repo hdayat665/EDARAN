@@ -479,12 +479,17 @@ $(document).ready(function () {
 
             if (data[0].username1) {
                 $("#recommended_by").text(data[0].username1);
+                $("#hiderec2").hide();
+                $("#hiderec1").show();
             } else {
                 $("#recommended_by").text("");
+                $("#hiderec1").hide();
+                $("#hiderec2").show();
             }
 
             if (data[0].username2) {
                 $("#approved_by").text(data[0].username2);
+                $("#approved_by1").text(data[0].username2);
             } else {
                 $("#approved_by").text("");
             }
@@ -510,12 +515,16 @@ $(document).ready(function () {
 
             if (data[0].up_app_status === "1") {
                 $("#status_2").text("Pending");
+                $("#status_22").text("Pending");
             } else if (data[0].up_app_status === "2") {
                 $("#status_2").text("Pending");
+                $("#status_22").text("Pending");
             } else if (data[0].up_app_status === "3") {
                 $("#status_2").text("Reject");
+                $("#status_22").text("Reject");
             } else if (data[0].up_app_status === "4") {
                 $("#status_2").text("Approved");
+                $("#status_22").text("Approved");
             }
 
             if (data[0].up_app_status === "1") {
@@ -591,12 +600,17 @@ $(document).ready(function () {
 
             if (data[0].username1) {
                 $("#recommended_by2").text(data[0].username1);
+                $("#hiderec22").hide();
+                $("#hiderec12").show();
             } else {
                 $("#recommended_by2").text("");
+                $("#hiderec12").hide();
+                $("#hiderec22").show();
             }
 
             if (data[0].username2) {
                 $("#approved_by2").text(data[0].username2);
+                $("#approved_by22").text(data[0].username2);
             } else {
                 $("#approved_by2").text("");
             }
@@ -622,12 +636,16 @@ $(document).ready(function () {
 
             if (data[0].up_app_status === "1") {
                 $("#status_20").text("Pending");
+                $("#status_202").text("Pending");
             } else if (data[0].up_app_status === "2") {
                 $("#status_20").text("Pending");
+                $("#status_202").text("Pending");
             } else if (data[0].up_app_status === "3") {
                 $("#status_20").text("Reject");
+                $("#status_202").text("Reject");
             } else if (data[0].up_app_status === "4") {
                 $("#status_20").text("Approved");
+                $("#status_202").text("Approved");
             }
 
             if (data[0].up_app_status === "1") {
