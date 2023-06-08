@@ -2572,9 +2572,19 @@ if (!function_exists('getClaimData')) {
         }
 
         if ($roleApprover == 'DepartApprover') {
-            // $cond[1] = ['supervisor', NULL];
-            $cond[4] = ['status', 'active'];
-            $cond[5] = ['supervisor', 'recommend'];
+
+            $configData = getApprovalConfigClaim('SUPERVISOR - RECOMMENDER');
+            $condByPass = ['status', "active"];
+            // $condByPass[1] = ['status', "active"];
+            if ($configData->status) {
+                $condByPass = ['supervisor', "recommend"];
+            }
+
+            $cond[98]  =  $condByPass;
+            // $cond[97]  =  $condByPass1;
+            // $cond[3] = ['claim_type', '!=', ''];
+            $cond[4] = ['hod', ''];
+            // dd($condByPass);
         }
 
         if ($roleApprover == 'FinanceRec') {
@@ -2602,7 +2612,7 @@ if (!function_exists('getClaimData')) {
             }
             // $cond[1] = ['supervisor', NULL];
             $cond[6] = ['status', 'active'];
-            $cond[7] = ['claim_type', 'MTC'];
+            $cond[3] = ['claim_type', 'MTC'];
             $cond[8] = ['a_approval', 'recommend'];
             $cond[9] = ['f1', ''];
             $cond[10]  =  $condByPass;
@@ -2661,7 +2671,7 @@ if (!function_exists('getClaimData')) {
                 }
             }
             // $cond[1] = ['supervisor', NULL];
-            $cond[14] = ['claim_type', 'MTC'];
+            $cond[3] = ['claim_type', 'MTC'];
             $cond[15] = ['a_approval', 'recommend'];
             $cond[16] = ['f1', ''];
             $cond[17]  =  $condByPass;
@@ -2685,7 +2695,7 @@ if (!function_exists('getClaimData')) {
                 }
             }
             $cond[18] = ['a_recommender', ''];
-            $cond[19] = ['claim_type', 'MTC'];
+            $cond[3] = ['claim_type', 'MTC'];
             // $cond[16] = ['f1', ''];
             $cond[20]  =  $condByPass;
         }
@@ -2713,7 +2723,7 @@ if (!function_exists('getClaimData')) {
 
             $cond[21] = ['a_recommender', 'recommend'];
             $cond[22] = ['a_approval', ''];
-            $cond[23] = ['claim_type', 'MTC'];
+            $cond[3] = ['claim_type', 'MTC'];
             $cond[24]  =  $condByPass;
         }
 
@@ -2734,9 +2744,11 @@ if (!function_exists('getClaimData')) {
 
             $cond[25] = ['a1', ''];
             // $cond[19] = ['a_approval', ''];
-            $cond[26] = ['claim_type', 'MTC'];
+            $cond[3] = ['claim_type', 'MTC'];
             $cond[27]  =  $condByPass;
         }
+
+        $cond[99] = ['status', '!=', 'draft'];
 
         $data = GeneralClaim::where($cond)->get();
 
