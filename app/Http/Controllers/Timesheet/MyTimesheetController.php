@@ -516,6 +516,16 @@ class MyTimesheetController extends Controller
     }
 
 
+    public function getApproverAppeal()
+    {
+        $ss = new MyTimeSheetService;
+
+        $result = $ss->getApproverAppeal();
+
+        return response()->json($result);
+    }
+
+
 
     // public function getParticipantNameById($participant = '')
     // {

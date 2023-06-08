@@ -294,6 +294,8 @@ if ($existingLogs->isNotEmpty()) {
     
         $participants = isset($input['participant']) ? $input['participant'] : [];
         $participants[] = $user->id; // Add the logged-in user to the participants array
+
+        $participants = array_unique($participants);
     
         $input['participant'] = implode(',', $participants);
     
@@ -1334,6 +1336,15 @@ if ($existingLogs->isNotEmpty()) {
         $user = Auth::user();
         // dd($user);
 
+        $employment = Employee::where('user_id', $user->id)->first();
+
+        if ($employment) {
+            $tsapprover = $employment->tsapprover;
+            $input['approver'] = $tsapprover;
+        } else {
+            // Handle the case when employment data for the user is not found
+        }
+
         $logids = TimesheetAppeals::pluck('logid')->toArray();
         if (empty($logids)) {
             $nextLogid = 'LA-0001';
@@ -1527,6 +1538,27 @@ if ($existingLogs->isNotEmpty()) {
         }
         return '';
     }
+
+    public function getApproverAppeal()
+    {
+        $user = Auth::user();
+        $user_id = $user->id;
+    
+        $employment = DB::table('employment')
+            ->select('tsapprover')
+            ->where('user_id', $user_id)
+            ->get();
+    
+        foreach ($employment as $emp) {
+            if (!empty($emp->tsapprover)) {
+                return $emp->tsapprover; // Return the first non-empty tsapprover value and stop the loop
+            }
+        }
+    
+        return null; // Return null if no result is found
+    }
+    
+    
 
 
 

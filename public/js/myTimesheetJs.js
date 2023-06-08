@@ -797,6 +797,19 @@ $(document).ready(function () {
             });
         }
 
+        function getApproverAppeal(id) {
+            return $.ajax({
+                url: "/getApproverAppeal",
+            });
+        }
+
+        approverappeal = getApproverAppeal();
+        approverappeal.then(function (data) {
+        console.log("data user here", data);
+        });
+        
+        
+
         var timesheetData = getTimesheet();
 
         timesheetData.then(function (data) {
@@ -1104,8 +1117,16 @@ $(document).ready(function () {
 
                     var duahari = twoDayBefore.setDate(currentDate.getDate() - 2);
 
+                    var currentMonth = currentDate.getMonth();
+                    var currentYear = currentDate.getFullYear();
+
+                    var oneDaysBefore = new Date(currentYear, currentMonth, currentDate.getDate() - 1);
+                    var twoDaysBefore = new Date(currentYear, currentMonth, currentDate.getDate() - 2);
+
 
                     var datedefaultformat = dayjs(current).format('YYYY-MM-DD');
+
+                   
 
                     var appealaddb = $('<button/>', {
                                 text: 'Appeal',
@@ -1114,7 +1135,7 @@ $(document).ready(function () {
                                     var year = info.date.getFullYear();
                                     var month = info.date.getMonth();
                                     var day = info.date.getDate();
-                                    console.log(year);
+                                    // console.log(year);
                                     $('#yearappeal').val(year);
                                     $('#monthappeal').val(new Date(info.date).toLocaleString('en-US', { month: 'long' }));
                                     $('#dayappeal').val(day);
@@ -1144,8 +1165,9 @@ $(document).ready(function () {
                                         var year = years[index];
                                         var month = months[index];
                                         var day = days[index];
+                                        var approver = approvers[index];
                                         var file = files[index];
-                                        console.log(year);
+                                        // console.log(year);
                                         $('#log_idv').val(logId);
                                         $('#reasonappealv').val(reason);
                                         if (status === "Locked") {
@@ -1157,6 +1179,7 @@ $(document).ready(function () {
                                         $('#yearappealv').val(year);
                                         $('#monthappealv').val(month);
                                         $('#dayappealv').val(day);
+                                        $('#approverview').val(approver);
 
                                         if (file) {
                                             var fileName = file.split('/').pop(); // Extract the file name from the file path
@@ -1206,27 +1229,26 @@ $(document).ready(function () {
                     //     }
                     // }
 
-                    var totalHours1 = '00:00';
-                    // var hasLog = false;
+                    var totalHoursforlog = '00:00';
+                    var hasLog = false;
                     for (var i = 0; i < loghour.length; i++) {
                         if (current.getTime() === loghour[i].start.getTime()) {
-                            // hasLog = true;
+                            hasLog = true;
                             var logid = loghour[i].logid;
 
                             // Calculate the total hours by accumulating all the 'total_hour' values for the current date
-                            // Calculate the total hours by accumulating all the 'total_hour' values for the current date
-                            var totalHour = loghour.filter(log => current.getTime() === log.start.getTime())
-                            .reduce((total, log) => {
-                                var [hours, minutes, seconds] = log.totalHour.split(':').map(Number);
-                                total += hours * 3600 + minutes * 60 + seconds;
-                                return total;
+                            var totalHourlog = loghour.filter(log => current.getTime() === log.start.getTime())
+                            .reduce((totallog, log) => {
+                                var [hourslog, minuteslog, secondslog] = log.totalHour.split(':').map(Number);
+                                totallog += hourslog * 3600 + minuteslog * 60 + secondslog;
+                                return totallog;
                             }, 0);
 
                             // Convert the total hours back to the 'hh:mm' format
-                            var hours = Math.floor(totalHour / 3600);
-                            var minutes = Math.floor((totalHour % 3600) / 60);
-                            totalHours1 = hours.toString().padStart(2, '0') + ':' + minutes.toString().padStart(2, '0');
-                            var [hours1, minutes] = totalHours1.split(":").map(Number);
+                            var hourslog = Math.floor(totalHourlog / 3600);
+                            var minuteslog = Math.floor((totalHourlog % 3600) / 60);
+                            totalHoursforlog = hourslog.toString().padStart(2, '0') + ':' + minuteslog.toString().padStart(2, '0');
+                            var [hourslog, minuteslog] = totalHoursforlog.split(":").map(Number);
 
                             // console.log(hours1+"test567")
                             // Exit the loop once the total hours for the current date are calculated
@@ -1234,37 +1256,49 @@ $(document).ready(function () {
                         }
                     }
 
-                    var totalHours2 = '00:00';
-                    var hasLog = false;
+                    
+                    var totalHoursEvent = '00:00';
+                    var hasEvent = false;
                     for (var i = 0; i < attendhour.length; i++) {
                       if (current.getTime() === attendhour[i].start.getTime()) {
-                        hasLog = true;
-                        var eventId = attendhour[i].eventId;
+                        hasEvent = true;
+                        var eventid = attendhour[i].eventid;
                     
-                        var totalHour123 = attendhour.filter(event => current.getTime() === event.start.getTime())
-                          .reduce((total, event) => {
-                            var [hours, minutes, seconds] = event.totalHourAttend.split(':').map(Number);
-                            total += hours * 3600 + minutes * 60 + seconds;
-                            return total;
+                        var totalHourEvent = attendhour.filter(event => current.getTime() === event.start.getTime())
+                          .reduce((totalevent, event) => {
+                            var [hoursevent, minutesevent, secondsevent] = event.totalHourAttend.split(':').map(Number);
+                            totalevent += hoursevent * 3600 + minutesevent * 60 + secondsevent;
+                            return totalevent;
                           }, 0);
                     
-                        var hours = Math.floor(totalHour123 / 3600);
-                        var minutes = Math.floor((totalHour123 % 3600) / 60);
-                        totalHours2 = hours.toString().padStart(2, '0') + ':' + minutes.toString().padStart(2, '0');
-                        var [hours1, minutes] = totalHours2.split(":").map(Number);
-                    
-                       
+                        var hoursevent = Math.floor(totalHourEvent / 3600);
+                        var minutesevent = Math.floor((totalHourEvent % 3600) / 60);
+                        totalHoursEvent = hoursevent.toString().padStart(2, '0') + ':' + minutesevent.toString().padStart(2, '0');
+                        var [hoursevent, minutesevent] = totalHoursEvent.split(":").map(Number);
+                
                         break;
                       }
                     }
+                    
 
-                    var [hours1, minutes1] = totalHours1.split(":").map(Number);
-                    var [hours2, minutes2] = totalHours2.split(":").map(Number);
-                    var totalHoursattendlog = (hours1 + hours2).toString().padStart(2, '0') + ':' + (minutes1 + minutes2).toString().padStart(2, '0');
+// Convert totalHoursforlog and totalHoursEvent to total seconds
+var [hourslog, minuteslog] = totalHoursforlog.split(":").map(Number);
+var totalSecondslog = hourslog * 3600 + minuteslog * 60;
 
-                    console.log(totalHoursattendlog+"gabung");
+var [hoursevent, minutesevent] = totalHoursEvent.split(":").map(Number);
+var totalSecondsevent = hoursevent * 3600 + minutesevent * 60;
 
+// Add totalHoursforlog and totalHoursEvent in seconds
+var totalSeconds = totalSecondslog + totalSecondsevent;
 
+// Convert the total seconds back to the 'hh:mm' format
+var hours = Math.floor(totalSeconds / 3600);
+var minutes = Math.floor((totalSeconds % 3600) / 60);
+var totalHoursCombined = hours.toString().padStart(2, '0') + ':' + minutes.toString().padStart(2, '0');
+
+var totalHoursCombineds = parseInt(hours, 10).toString();
+
+// console.log(totalHoursCombineds);
 
                     var appliedDates = [];
                     var reasons = [];
@@ -1274,6 +1308,7 @@ $(document).ready(function () {
                     var months = [];
                     var days = [];
                     var files = [];
+                    var approvers = [];
                     for (let i = 0; i < data['appeals'].length; i++) {
                         var appeals = data['appeals'][i];
 
@@ -1284,6 +1319,7 @@ $(document).ready(function () {
                         var year = appeals['year'];
                         var month = appeals['month'];
                         var day = appeals['day'];
+                        var approver = appeals['approver'];
                         var file = appeals['file'];
 
 
@@ -1295,23 +1331,24 @@ $(document).ready(function () {
                         years.push(year);
                         months.push(month);
                         days.push(day);
+                        approvers.push(approver);
                         files.push(file);
                     }
                     
                     // var dailycounter = $('<button/>', {
-                    //     text: totalHours1,
+                    //     text: totalHoursforlog,
                     //     class: 'btn btn-danger btn-xs',
                     //     click: function () {
                     //     }
                     // });
 
                     var dailycounter1 = $('<button/>', {
-                        text: totalHoursattendlog,
+                        text: totalHoursCombined,
                         class: 'btn btn-danger btn-xs',
                         click: function () {
                         }
                     });
-                    
+                    // console.log(hours1 + "test")
                    
                       if (
                         current.getTime() === currentDate.getTime() ||
@@ -1333,30 +1370,43 @@ $(document).ready(function () {
                         });
 
                       } 
-                      if(
+                    //   if(
                          
-                        (current.getDate() === oneDayBefore.getDate() || current.getDate() === twoDayBefore.getDate()) &&
-                        !(current.getDay() === 6 || current.getDay() === 0) && !hasLog )
-                       {
+                    //     (current.getDate() === oneDayBefore.getDate() || current.getDate() === twoDayBefore.getDate()) &&
+                    //     !(current.getDay() === 6 || current.getDay() === 0) && !hasLog  && !hasEvent)
+                    //    {
+                    //     $(info.el).css('background-color', 'red');
+                    //   }
+
+                    if (
+                        (current.getDate() === oneDaysBefore .getDate() || current.getDate() === twoDaysBefore .getDate()) &&
+                        !(current.getDay() === 6 || current.getDay() === 0) &&
+                        !hasLog &&
+                        !hasEvent &&
+                        current.getMonth() === currentMonth &&
+                        current.getFullYear() === currentYear
+                      ) {
                         $(info.el).css('background-color', '#FF8080');
                       }
 
                      else if(
                          
                         (current.getDate() === oneDayBefore.getDate() || current.getDate() === twoDayBefore.getDate()) &&
-                        !(current.getDay() === 6 || current.getDay() === 0)  && ( hasLog && hours1 >= 9)
+                        !(current.getDay() === 6 || current.getDay() === 0)  && ( (hasLog || hasEvent) && totalHoursCombineds >= 8)
                       ) {
                         $(info.el).css('background-color', '#80ff80');
                       }
                       else if(
                          
                         (current.getDate() === oneDayBefore.getDate() || current.getDate() === twoDayBefore.getDate()) &&
-                        !(current.getDay() === 6 || current.getDay() === 0)  && ( hasLog && hours1 < 9)
+                        !(current.getDay() === 6 || current.getDay() === 0)  && ( (hasLog || hasEvent) && totalHoursCombineds < 8)
                       ) {
                         $(info.el).css('background-color', '#FF8080');
                       }
+
                       //xde log appeal, log kecik dari 9,exclude weekend
-                       else if((current < duahari) && !appliedDates.includes(datedefaultformat) && (hasLog && hours1 < 9 || !hasLog)   && !(current.getDay() === 6 || current.getDay() === 0)) {
+                       else if((current < duahari) && !appliedDates.includes(datedefaultformat) && totalHoursCombineds < 8 && !(current.getDay() === 6 || current.getDay() === 0)) {
+                        // console.log(hourslog);
                         $(info.el).css('background-color', '#FF8080');
                         $(info.el).append('&nbsp;').append(appealaddb);
                         $(appealaddb).css({
@@ -1365,7 +1415,7 @@ $(document).ready(function () {
                             'z-index': '999',   
                             });
 
-                        }else if((current < duahari) && appliedDates.includes(datedefaultformat) && (hasLog && hours1 < 9 || !hasLog)   && !(current.getDay() === 6 || current.getDay() === 0)) {
+                        }else if((current < duahari) && appliedDates.includes(datedefaultformat) && ((hasLog || hasEvent) && totalHoursCombineds < 8 || (!hasLog || !hasEvent))   && !(current.getDay() === 6 || current.getDay() === 0)) {
 
                             $(info.el).css('background-color', '#FF8080');
                             $(info.el).append('&nbsp;').append(viewappealb);
@@ -1376,9 +1426,9 @@ $(document).ready(function () {
                                 });
                         
                         
-                         } else if((current < duahari) && hasLog && hours1 >= 9) {
+                         } else if((current < duahari) && (hasLog || hasEvent) && totalHoursCombineds >= 8) {
                             $(info.el).css('background-color', '#80ff80');
-                         } else if((current < duahari) && appliedDates.includes(datedefaultformat) && hours1 >= 9) {
+                         } else if((current < duahari) && appliedDates.includes(datedefaultformat) && totalHoursCombineds >= 8) {
                             $(info.el).css('background-color', '#80ff80');
                             $(info.el).append('&nbsp;').append(viewappealb);
                             $(viewappealb).css({
@@ -1387,7 +1437,7 @@ $(document).ready(function () {
                                 'z-index': '999',   
                                 });
                          }
-                         else if((current < duahari) && appliedDates.includes(datedefaultformat) && hours1 < 9) {
+                         else if((current < duahari) && appliedDates.includes(datedefaultformat) && totalHoursCombineds < 8) {
                             $(info.el).css('background-color', '#FF8080');
                             $(info.el).append('&nbsp;').append(viewappealb);
                             $(viewappealb).css({
@@ -1522,6 +1572,8 @@ $(document).ready(function () {
                             url: "/getEmployee",
                         });
                     }
+
+                    
 
                     function getAttendance1(eventId) {
                         return $.ajax({
