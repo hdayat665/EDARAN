@@ -2563,7 +2563,7 @@ if (!function_exists('sendGeneralNotification')) {
 if (!function_exists('getClaimData')) {
     function getClaimData($roleApprover = '')
     {
-        $cond[0] = ['id', '!=', NULL];
+        $cond[0] = ['id', '!=', ''];
 
         if ($roleApprover == 'DepartRecommender') {
             // $cond[1] = ['supervisor', NULL];
@@ -2583,7 +2583,7 @@ if (!function_exists('getClaimData')) {
             $cond[98]  =  $condByPass;
             // $cond[97]  =  $condByPass1;
             // $cond[3] = ['claim_type', '!=', ''];
-            $cond[4] = ['hod', ''];
+            $cond[4] = ['hod', NULL];
             // dd($condByPass);
         }
 
