@@ -2041,6 +2041,25 @@ public function updateTypeOfLogs($r, $id)
         $currentDateObj = Carbon::parse($currentDate);
         $checkdate = $currentDateObj->format('Y');
 
+        $currentYear = date('Y');
+
+        if ($checkdate < $currentYear) {
+            $data['msg'] = 'Unable to Generate Previous Year';
+            $data['status'] = config('app.response.error.status');
+            $data['type'] = config('app.response.error.type');
+            $data['title'] = config('app.response.error.title');
+
+            return $data;
+        }
+
+        if ($checkdate > $currentYear + 1) {
+            $data['msg'] = 'The Year '.$checkdate.' is more than two years in the future';
+            $data['status'] = config('app.response.error.status');
+            $data['type'] = config('app.response.error.type');
+            $data['title'] = config('app.response.error.title');
+            return $data;
+        }
+
         $check = leaveEntitlementModel::select('leave_entitlement.*')
             ->where('leave_entitlement.tenant_id','=', Auth::user()->tenant_id)
             ->whereYear('leave_entitlement.le_year','=', $checkdate)
@@ -2161,7 +2180,7 @@ public function updateTypeOfLogs($r, $id)
 
         }else{
 
-            $data['msg'] = 'This Year have ready Generate';
+            $data['msg'] = 'The Year '.$checkdate.' Has Already Generated';
             $data['status'] = config('app.response.error.status');
             $data['type'] = config('app.response.error.type');
             $data['title'] = config('app.response.error.title');

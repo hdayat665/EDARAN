@@ -1024,14 +1024,23 @@ class SettingController extends Controller
 
         return view('pages.setting.eleave.leaveCarrForward', $data);
     }
-    public function leaveUnpaidView()
+    public function weekendEntitlementView()
     {
         $ss = new SettingService;
 
-        $data['leave'] = $ss->leaveEntitlementView();
-        $data['nameStaff'] = $ss->leaveNameStaff();
+        // $data['leave'] = $ss->weekendEntitlementView();
+        // $data['nameStaff'] = $ss->leaveNameStaff();
 
-        return view('pages.setting.eleave.leaveUnpaid', $data);
+        return view('pages.setting.eleave.weekendEntitlement');
+    }
+//module add weekend-Weekend entitlement
+    public function createWeekendEntitlement(Request $r)
+    {
+        $ss = new SettingService;
+
+        $result = $ss->createWeekendEntitlement($r);
+
+        return response()->json($result);
     }
 
     public function createLeaveEntitlement(Request $r)

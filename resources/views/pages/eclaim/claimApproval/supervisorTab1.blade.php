@@ -25,6 +25,7 @@
                         if ($configData->status) {
                             $condByPass = ' $claim->supervisor == "recommend"';
                         }
+                        // dd($config);
                     @endphp
 
                     @foreach ($claims as $claim)

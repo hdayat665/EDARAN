@@ -124,7 +124,7 @@ class MyTimesheetController extends Controller
         $ss = new MyTimeSheetService;
 
         $result = $ss->getEventById($id);
-
+        
         return $result;
     }
 
@@ -169,6 +169,7 @@ class MyTimesheetController extends Controller
         $ss = new MyTimeSheetService;
 
         $result['events'] = $ss->getEvents();
+        $result['eventsattends'] = $ss->getEventattend();
         $result['logs'] = $ss->getLogs();
         $result['leaves'] = $ss->getLeaves();
         $result['holidays'] = $ss->getHolidays();
@@ -510,6 +511,16 @@ class MyTimesheetController extends Controller
         $ss = new MyTimeSheetService;
 
         $result = $ss->approveAllTimesheetAppeal($r);
+
+        return response()->json($result);
+    }
+
+
+    public function getApproverAppeal()
+    {
+        $ss = new MyTimeSheetService;
+
+        $result = $ss->getApproverAppeal();
 
         return response()->json($result);
     }

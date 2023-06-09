@@ -94,7 +94,7 @@
                     <h5 class="mb-5px">Staff Leave Entitlement</h5>
                 </div>
                 <div class="col-lg-2">
-                    <a class="mb-10px" href=" "><i class="fas fa-rocket fa-4x text-blue"></i></a><br><br>
+                    <a class="mb-10px" href="/weekendEntitlement"><i class="fas fa-rocket fa-4x text-blue"></i></a><br><br>
                     <h5 class="mb-5px">Weekend Entitlement</h5>
                 </div>
                 <div class="col-lg-2">

@@ -7,21 +7,21 @@ $(document).ready(function () {
             rules: {
                 year: "required",
                 month: "required",
-                claim_category: "required",
+                // claim_category: "required",
                 amount: "required",
                 // "file_upload[]": "required",
                 claim_category_detail: {
                     required: function () {
                         // Check if labelcategory div is visible
                         return $("#labelcategory").is(":visible");
-                    }
-                }
+                    },
+                },
             },
-    
+
             messages: {
                 year: "Please Select Year",
                 month: "Please Select Month",
-                claim_category: "Please Select Claim Category",
+                // claim_category: "Please Select Claim Category",
                 amount: "Please Fill Out Amount",
                 // "file_upload[]": "Please Upload Attachment",
                 claim_category_detail: "Please Insert Category Detail",
@@ -247,7 +247,7 @@ $(document).ready(function () {
         // scrollY: 150,
         lengthChange: true,
         lengthMenu: [
-            [5, 10, 25, 50, -1], 
+            [5, 10, 25, 50, -1],
             [5, 10, 25, 50, "All"],
         ],
         responsive: false,
@@ -283,7 +283,7 @@ $(document).ready(function () {
 
         user.then(function (data) {
             $("#label").text(data[0].label);
-    
+
             // Check if data is available
             if (data.length > 0) {
                 // Show the labelcategory div if data is available
