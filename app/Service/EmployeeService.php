@@ -909,8 +909,11 @@ class EmployeeService
                 unset($input['departmentId']);
             }
 
-            if ($input['unitId']) {
+            if (isset($input['unitId'])) {
                 $input['unit'] = $input['unitId'];
+                unset($input['unitId']);
+            } else {
+                $input['unit'] = null;
                 unset($input['unitId']);
             }
 

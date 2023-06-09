@@ -2144,6 +2144,10 @@ $('#event').select2();
             checkboxes.prop("disabled", false);
         }
 
+        if ($(this).is(":not(:checked)")) {
+            addressType = "0";
+        }
+
         // send an AJAX request to update the address type status
         $.ajax({
             url: "/updateAddressDetails",

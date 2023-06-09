@@ -33,7 +33,7 @@
                         <label for="state" class="form-label">State*</label>
                         <select class="form-select" name="state" id="state" value="" style="text-transform:uppercase">
                             <?php $state = state() ?>
-                            <option value="" label="PLEASE CHOOSE"  ></option>
+                            <option value="" label="PLEASE CHOOSE" selected></option>
                             @foreach ($state as $key => $status)
                             <option value="{{$key}}"  >{{$status}}</option>
                             @endforeach
@@ -51,12 +51,12 @@
                                 <option value="{{$key}}" >{{$america}}</option>
                                 @endforeach
                             </optgroup>
-                            <optgroup id="country-optgroup-Asia" label="Asia">
+                            {{-- <optgroup id="country-optgroup-Asia" label="Asia">
                                 <option value="MY" label="Malaysia" Selected></option>
                                 @foreach ($asias as $key => $asia)
                                 <option value="{{$key}}">{{$asia}}</option>
                                 @endforeach
-                            </optgroup>
+                            </optgroup> --}}
                         </select>
                     </div>
                 </div>

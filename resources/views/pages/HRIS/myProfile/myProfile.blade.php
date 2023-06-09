@@ -156,7 +156,7 @@
                             </div>
                             <div class="col-sm-3 part">
                                 <label for="expirydate" class="form-label">Expiry Date*</label>
-                                <input type="text" id="expirydatemyprofile" name="expiryDate" value="{{ ($profile->expiryDate !== null) ? date_format(date_create($profile->expiryDate), 'Y-m-d') : '' }}" placeholder="YYYY-MM-DD" class="form-control" aria-describedby="expirydate" style="pointer-events: none;" disabled required>
+                                <input type="text" id="expirydatemyprofile" name="expiryDate" value="{{ $profile->expiryDate ?? '' }}" placeholder="YYYY-MM-DD" class="form-control" aria-describedby="expirydate" style="pointer-events: none;" disabled required>
                             </div>
                             <div class="col-sm-3">
                                 <label for="issuing-country" class="form-label">Issuing Country*</label>
