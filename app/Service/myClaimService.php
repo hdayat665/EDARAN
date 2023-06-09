@@ -1039,26 +1039,27 @@ class myClaimService
 
         $employees = Employee::where('user_id', Auth::user()->id)->value('eclaimrecommender');
 
-        if (is_null($employees)) {
+        if (is_null($employees) || empty($employees)) {
             
-            $claim['status'] = 'active'; 
-            $claim['supervisor'] = 'recommend'; 
-
+            $claim['status'] = 'active';
+            $claim['supervisor'] = 'recommend';
+        
             GeneralClaim::where([['tenant_id', Auth::user()->tenant_id], ['id', $id]])->update($claim);
-
+        
             $generalClaimData = GeneralClaim::find($id);
-
+        
             // get supervisor detail to send email
             $ms = new MailService;
-            $ms->emailToSupervisorClaimMTC($generalClaimData);
-
+            $ms->emailToHodClaimMTC($generalClaimData);
+        
             $data['status'] = config('app.response.success.status');
             $data['type'] = config('app.response.success.type');
             $data['title'] = config('app.response.success.title');
             $data['msg'] = 'Success';
-
+        
             return $data;
         }
+        
         
 
         GeneralClaim::where([['tenant_id', Auth::user()->tenant_id], ['id', $id]])->update($claim);
@@ -1066,7 +1067,7 @@ class myClaimService
         $generalClaimData = GeneralClaim::find($id);
 
         // get supervisor detail to send email
-        $ms = new MailService;
+        $ms = new MailService; 
         $ms->emailToSupervisorClaimMTC($generalClaimData);
 
         $data['status'] = config('app.response.success.status');
