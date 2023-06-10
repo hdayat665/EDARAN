@@ -2741,7 +2741,8 @@ if (!function_exists('getGeneralClaimMenuNotifyForDepartment')) {
     {
 
         $cond[0] = ['id', '!=', ''];
-
+        $userRecId = [];
+        
         if ($roleApprover == 'DepartRecommender') {
             // $cond[1] = ['supervisor', NULL];
             $cond[2] = ['status', 'active'];
@@ -2755,7 +2756,7 @@ if (!function_exists('getGeneralClaimMenuNotifyForDepartment')) {
         }
 
         if ($roleApprover == 'DepartApprover') {
-
+                
             $configData = getApprovalConfigClaim('SUPERVISOR - RECOMMENDER');
             $condByPass = ['status', "active"];
             // $condByPass[1] = ['status', "active"];
