@@ -348,7 +348,8 @@
                                                                 $config = getApprovalConfig(2, 'monthly');
                                                             @endphp
                                                             @if (isset($config->status))
-                                                                <span class="badge bg-danger badge-number" id="numberNotify">{{ getClaimData('DepartRecommender')->count() }}</span>
+                                                                <span class="badge bg-danger badge-number"
+                                                                    id="numberNotify">{{ getGeneralClaimMenuNotifyForDepartment('DepartRecommender')->count() }}</span>
                                                             @endif
                                                         </a>
                                                     </div>
@@ -366,7 +367,8 @@
                                                                 $config = getApprovalConfig(1, 'monthly');
                                                             @endphp
                                                             @if (isset($config->status))
-                                                                <span class="badge bg-danger badge-number" id="numberNotify">{{ getClaimData('DepartApprover')->count() }}</span>
+                                                                <span class="badge bg-danger badge-number"
+                                                                    id="numberNotify">{{ getGeneralClaimMenuNotifyForDepartment('DepartApprover')->count() }}</span>
                                                             @endif
                                                         </a>
                                                     </div>
