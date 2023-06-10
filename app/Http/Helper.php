@@ -2563,30 +2563,6 @@ if (!function_exists('sendGeneralNotification')) {
 if (!function_exists('getClaimData')) {
     function getClaimData($roleApprover = '')
     {
-        $cond[0] = ['id', '!=', NULL];
-
-        if ($roleApprover == 'DepartRecommender') {
-            // $cond[1] = ['supervisor', NULL];
-            $cond[2] = ['status', 'active'];
-            $cond[3] = ['claim_type', 'MTC'];
-        }
-
-        if ($roleApprover == 'DepartApprover') {
-
-            $configData = getApprovalConfigClaim('SUPERVISOR - RECOMMENDER');
-            $condByPass = ['status', "active"];
-            // $condByPass[1] = ['status', "active"];
-            if ($configData->status) {
-                $condByPass = ['supervisor', "recommend"];
-            }
-
-            $cond[98]  =  $condByPass;
-            // $cond[97]  =  $condByPass1;
-            // $cond[3] = ['claim_type', '!=', ''];
-            $cond[4] = ['hod', ''];
-            // dd($condByPass);
-        }
-
         if ($roleApprover == 'FinanceRec') {
             $roles = ['SUPERVISOR - RECOMMENDER', 'HOD / CEO - APPROVER', 'ADMIN - CHECKER', 'ADMIN - RECOMMENDER', 'ADMIN - APPROVER', 'FINANCE - CHECKER'];
             $condByPass = ['id', '!=', ""];
@@ -2759,6 +2735,59 @@ if (!function_exists('getClaimData')) {
         return $data;
     }
 }
+
+if (!function_exists('getGeneralClaimMenuNotifyForDepartment')) {
+    function getGeneralClaimMenuNotifyForDepartment($roleApprover = '')
+    {
+
+        $cond[0] = ['id', '!=', ''];
+        $userRecId = [];
+        
+        if ($roleApprover == 'DepartRecommender') {
+            // $cond[1] = ['supervisor', NULL];
+            $cond[2] = ['status', 'active'];
+            $cond[3] = ['claim_type', 'MTC'];
+
+            // find user that assign to recommender
+            $userRecommenders = Employee::where('eclaimrecommender', Auth::user()->id)->get();
+            foreach ($userRecommenders as $userRec) {
+                $userRecId[] = $userRec->user_id;
+            }
+        }
+
+        if ($roleApprover == 'DepartApprover') {
+                
+            $configData = getApprovalConfigClaim('SUPERVISOR - RECOMMENDER');
+            $condByPass = ['status', "active"];
+            // $condByPass[1] = ['status', "active"];
+            if ($configData->status) {
+                $condByPass = ['supervisor', "recommend"];
+            }
+
+            $cond[98]  =  $condByPass;
+            // $cond[97]  =  $condByPass1;
+            // $cond[3] = ['claim_type', '!=', ''];
+            $cond[4] = ['hod', NULL];
+            // dd($condByPass);
+
+            // find user that assign to recommender
+            $userRecommenders = Employee::where('eclaimapprover', Auth::user()->id)->get();
+            foreach ($userRecommenders as $userRec) {
+                $userRecId[] = $userRec->user_id;
+            }
+        }
+
+        $cond[99] = ['status', '!=', 'draft'];
+        // dd($cond);
+        $data = GeneralClaim::where($cond)->whereIn('user_id', $userRecId)->get();
+
+        if (!$data) {
+            $data = [];
+        }
+        return $data;
+    }
+}
+
 
 if (!function_exists('getApprovalConfig')) {
     function getApprovalConfig($type = '', $claimType = '')
