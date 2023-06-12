@@ -24,7 +24,7 @@
                         <div class="col-sm-6">
                             <label for="lastname" class="form-label">End Date*</label>
                             <div class="">
-                                <input type="text" name="end_date" class="form-control" id="endeventdateedit" />
+                                <input type="text" name="end_date" class="form-control" id="endeventdateedit" readonly style="pointer-events:none"/>
                                 <!-- <div class="input-group-text"><i class="fa fa-calendar"></i></div> -->
                             </div>
                         </div>
@@ -449,6 +449,14 @@
                         </div>
                         <input type="hidden" id="user_id_event" value="{{$user_id}}">
 
+                    </div>
+                    <div class="row p-2">
+                        <div class="col-sm-2">
+                            <label for="" class="form-label">Event Creator</label>
+                        </div>
+                        <div class="col-sm-5">
+                            <input type="text" class="form-control" id="eventcreator" name="" readonly>
+                        </div>
                     </div>
 
                     <div class="modal-footer">
