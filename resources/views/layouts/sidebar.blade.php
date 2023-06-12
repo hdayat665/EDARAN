@@ -348,7 +348,8 @@
                                                                 $config = getApprovalConfig(2, 'monthly');
                                                             @endphp
                                                             @if (isset($config->status))
-                                                                <span class="badge bg-danger badge-number" id="numberNotify">{{ getClaimData('DepartRecommender')->count() }}</span>
+                                                                <span class="badge bg-danger badge-number"
+                                                                    id="numberNotify">{{ getGeneralClaimMenuNotifyForDepartment('DepartRecommender')->count() }}</span>
                                                             @endif
                                                         </a>
                                                     </div>
@@ -366,7 +367,8 @@
                                                                 $config = getApprovalConfig(1, 'monthly');
                                                             @endphp
                                                             @if (isset($config->status))
-                                                                <span class="badge bg-danger badge-number" id="numberNotify">{{ getClaimData('DepartApprover')->count() }}</span>
+                                                                <span class="badge bg-danger badge-number"
+                                                                    id="numberNotify">{{ getGeneralClaimMenuNotifyForDepartment('DepartApprover')->count() }}</span>
                                                             @endif
                                                         </a>
                                                     </div>
@@ -435,7 +437,7 @@
                                                             <div class="menu-text text-gray">Checker
                                                             </div>
                                                             @php
-                                                                $config = getApprovalConfig(9, 'monthly');
+                                                                $config = getApprovalConfig(6, 'monthly');
                                                             @endphp
                                                             @if (isset($config->status))
                                                                 <span class="badge bg-danger badge-number" id="numberNotify">{{ getClaimData('FinanceChecker')->count() }}</span>
@@ -447,6 +449,7 @@
                                         </div>
                                     @endif
                                     <?php $target = ['eclaim_admin_menu']; ?>
+
                                     @if (array_intersect($role_permission, $target))
                                         <div class="menu-item has-sub">
 

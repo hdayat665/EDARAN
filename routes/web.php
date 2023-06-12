@@ -58,11 +58,12 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('/loginTenant', 'loginView')->name('loginView');
         Route::get('/loginHost', 'loginHostView');
         Route::get('/domainView', 'domainView');
+        Route::get('/domainName', 'domainNameView'); //domain name
         Route::get('/loginAdmin', 'loginAdminView');
         Route::get('/registerView', 'registerView');
         Route::get('/verifiedView/{id}', 'verifiedView');
         Route::get('/forgotPassView', 'forgotPassView');
-        Route::get('/forgotDomainView', 'forgotDomainView');
+        Route::get('/forgotDomain', 'forgotDomainView'); //forgot domain
         Route::get('/resetPassView/{id}', 'resetPassView');
         Route::get('/resetDomainView', 'resetDomainView');
         Route::get('/logout/{type}', 'logoutTenant');
