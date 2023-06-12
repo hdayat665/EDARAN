@@ -52,6 +52,12 @@ $(document).ready(function () {
         autoclose: true,
         format: "yyyy/mm/dd",
     });
+    
+    $("#datepicker-joineddate2").datepicker({
+        todayHighlight: true,
+        autoclose: true,
+        format: "yyyy/mm/dd",
+    });
 
     $("#datepicker_exitdate").datepicker({
         todayHighlight: true,
@@ -60,7 +66,6 @@ $(document).ready(function () {
     });
 
     $("#data-table-prevproject").DataTable({
-        // scrollX: true,
         responsive: false,
         lengthMenu: [
             [5, 10, 25, 50, -1],
@@ -500,6 +505,7 @@ $(document).ready(function () {
             // $("#designation").prop("selectedIndex", data.designation);
             // $("#department").prop("selectedIndex", data.department);
             // $("#branchs").prop("selectedIndex", data.branch);
+            $("#datepicker-joineddate").val(data.joinedDate);
             $("#unit").val(data.unit);
             $("#designation").val(data.designation);
             $("#department").val(data.department);
@@ -957,7 +963,7 @@ $(document).ready(function () {
             todayHighlight: true,
             autoclose: true,
             format: "yyyy/mm/dd",
-            startDate: "today", // Set the start date to today
+            // startDate: "today", // Set the start date to today
         })
         .on("changeDate", function (e) {
             // Set the end datepicker's date to the selected start date
@@ -979,7 +985,7 @@ $(document).ready(function () {
         todayHighlight: true,
         autoclose: true,
         format: "yyyy/mm/dd",
-        startDate: "today", // Set the start date to today
+        // startDate: "today", // Set the start date to today
     })
     .on("changeDate", function (e) {
         if (e.date) {
@@ -1002,6 +1008,11 @@ $(document).ready(function () {
         todayHighlight: true,
         autoclose: true,
         format: "yyyy/mm/dd",
+        onClose: function(dateText, inst) {
+            if (dateText === "") {
+                $(this).val(null); // Set the input value to null
+            }
+        }
     });
     
 

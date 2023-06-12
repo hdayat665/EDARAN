@@ -315,11 +315,16 @@
 
 <script>
     $('#tablenews-dashboard').DataTable({
-        scrollX: true,
-        dom: '<"top"i>rt<"bottom"p><"clear">',
-        scrollY: 150,
         responsive: false,
-        paging: false
+        lengthMenu: [
+            [5, 10, 25, 50, -1],
+            [5, 10, 25, 50, "All"],
+        ],
+        initComplete: function (settings, json) {
+            $("#tablenews-dashboard").wrap(
+                "<div style='overflow:auto; width:100%;position:relative;'></div>"
+            );
+        },
     });
 
     $(document).on("click", "#markAllAsRead", function() {
@@ -338,20 +343,30 @@
 </script>
 <script>
     $('#timesheetapproval-dashboard').DataTable({
-        scrollX: true,
-        dom: '<"top"i>rt<"bottom"p><"clear">',
-        scrollY: 150,
         responsive: false,
-        paging: false
+        lengthMenu: [
+            [5, 10, 25, 50, -1],
+            [5, 10, 25, 50, "All"],
+        ],
+        initComplete: function (settings, json) {
+            $("#timesheetapproval-dashboard").wrap(
+                "<div style='overflow:auto; width:100%;position:relative;'></div>"
+            );
+        },
     });
 </script>
 <script>
     $('#data-table-default-clocks').DataTable({
-        scrollX: true,
-        dom: '<"top"i>rt<"bottom"p><"clear">',
-        scrollY: 150,
         responsive: false,
-        paging: false
+        lengthMenu: [
+            [5, 10, 25, 50, -1],
+            [5, 10, 25, 50, "All"],
+        ],
+        initComplete: function (settings, json) {
+            $("#data-table-default-clocks").wrap(
+                "<div style='overflow:auto; width:100%;position:relative;'></div>"
+            );
+        },
     });
 </script>
 <script type="text/javascript">
