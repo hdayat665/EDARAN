@@ -592,21 +592,21 @@ if ($existingLogs->isNotEmpty()) {
 
     public function getLeaves()
     {
-    // $data = MyLeaveModel::where([['tenant_id', Auth::user()->tenant_id], ['up_user_id', Auth::user()->id]])->get();
-
-    $data = DB::table('myleave as a')
-    ->leftjoin('leave_types as b', 'a.lt_type_id', '=', 'b.id')
-    ->select('a.*', 'b.leave_types')
-        // ->whereNotIn('a.id', $projectId)
-       -> where([['a.tenant_id', Auth::user()->tenant_id], ['a.up_user_id', Auth::user()->id]])
-        ->get();
-
-    if (!$data) {
-        $data = [];
+           // $data = MyLeaveModel::where([['tenant_id', Auth::user()->tenant_id], ['up_user_id', Auth::user()->id]])->get();
+        $data = DB::table('myleave as a')
+            ->leftjoin('leave_types as b', 'a.lt_type_id', '=', 'b.id')
+            ->select('a.*', 'b.leave_types')
+            ->where([['a.tenant_id', Auth::user()->tenant_id], ['a.up_user_id', Auth::user()->id]])
+            ->where('a.status_final', 4)
+            ->get();
+    
+        if (!$data) {
+            $data = [];
+        }
+    
+        return $data;
     }
-
-    return $data;
-    }
+    
 
 
     public function getLogs()
