@@ -1390,8 +1390,24 @@ var totalHoursCombineds = parseInt(hours, 10).toString();
                     //    {
                     //     $(info.el).css('background-color', 'red');
                     //   }
-
                     if (
+                        (current.getDate() === currentDate.getDate()) &&
+                        (hasEvent || hasLog) &&
+                        (totalHoursCombineds < 8)
+                      ) {
+                        $(info.el).css('background-color', '#FF8080');
+                      }
+                     else if (
+                        (current.getDate() === currentDate.getDate()) &&
+                        (hasEvent || hasLog) &&
+                        (totalHoursCombineds >= 8)
+                      ) {
+                        $(info.el).css('background-color', '#80ff80');
+                      }
+                      
+                      
+
+                     if (
                         (current.getDate() === oneDaysBefore .getDate() || current.getDate() === twoDaysBefore .getDate()) &&
                         !(current.getDay() === 6 || current.getDay() === 0) &&
                         !hasLog &&
@@ -1428,7 +1444,14 @@ var totalHoursCombineds = parseInt(hours, 10).toString();
                             'z-index': '999',   
                             });
 
-                        }else if((current < duahari) && appliedDates.includes(datedefaultformat) && ((hasLog || hasEvent) && totalHoursCombineds < 8 || (!hasLog || !hasEvent))   && !(current.getDay() === 6 || current.getDay() === 0)) {
+                        }else if (
+                            (current < duahari) &&
+                            appliedDates.includes(datedefaultformat) &&
+                            (
+                              ((hasLog || hasEvent) && totalHoursCombineds < 8) ||
+                              (!hasLog && !hasEvent && !(current.getDay() === 6 || current.getDay() === 0))
+                            )
+                          ) {
 
                             $(info.el).css('background-color', '#FF8080');
                             $(info.el).append('&nbsp;').append(viewappealb);
@@ -3346,7 +3369,7 @@ $(
 
     // console.log(days + ":" + hours);
     $("#durationeditevent").val(
-        days + " days : " + hours + " hours : " + mins + " minutes "
+        hours + ":" + mins + ":0"
     );
 });
 // });// });
