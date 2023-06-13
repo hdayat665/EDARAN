@@ -3,30 +3,30 @@ $(document).ready(function () {
 
 
     // search bar in select box (eleave)
-$("#eleaverecommender").select2({ placeholder:"Please Choose" });
-$("#eleaveapprover").select2({ placeholder:"Please Choose" });
+$("#eleaverecommender").select2();
+$("#eleaveapprover").select2();
 
 // search bar in select box (eleave)
-$("#eclaimrecommender").select2({ placeholder:"Please Choose" });
-$("#eclaimapprover").select2({ placeholder:"Please Choose" });
+$("#eclaimrecommender").select2();
+$("#eclaimapprover").select2();
 
 // search bar in select box (Cash Advance)
-$("#caapprover").select2({ placeholder:"Please Choose" });
+$("#caapprover").select2();
 
 // search bar in select box (Timesheet)
-$("#tsapprover").select2({ placeholder:"Please Choose" });
-$("#tsapprover2").select2({ placeholder:"Please Choose" });
+$("#tsapprover").select2();
+$("#tsapprover2").select2();
 
 // search bar in select box (Employment Information)
-$('#role').select2({ placeholder:"Please Choose" });
-$('#companyForEmployment').select2({ placeholder:"Please Choose" });
-$('#departmentShow').select2({ placeholder:"Please Choose" });
-$('#unitShow').select2({ placeholder:"Please Choose" });
-$('#branchShow').select2({ placeholder:"Please Choose" });
-$('#jobGrade').select2({ placeholder:"Please Choose" });
-$('#designation').select2({ placeholder:"Please Choose" });
-$('#employmentType').select2({ placeholder:"Please Choose" });
-$('#event').select2({ placeholder:"Please Choose" });
+$('#role').select2();
+$('#companyForEmployment').select2();
+$('#departmentShow').select2({placeholder: "please choose"});
+$('#unitShow').select2({placeholder: "please choose"});
+$('#branchShow').select2({placeholder: "please choose"});
+$('#jobGrade').select2();
+$('#designation').select2();
+$('#employmentType').select2();
+$('#event').select2();
 
     $("#data-table-default").dataTable({
         responsive: true,
@@ -939,7 +939,7 @@ $('#event').select2({ placeholder:"Please Choose" });
                 "touch-action": "auto",
                 background: "#ffffff",
             });
-            $("#countryparent").val($("my").val()).css({
+            $("#countryparent").val($("").val()).css({
                 "pointer-events": "auto",
                 "touch-action": "auto",
                 background: "#ffffff",
@@ -2142,6 +2142,10 @@ $('#event').select2({ placeholder:"Please Choose" });
             checkboxes.filter('[value="permanent"]').prop("disabled", false);
         } else {
             checkboxes.prop("disabled", false);
+        }
+
+        if ($(this).is(":not(:checked)")) {
+            addressType = "0";
         }
 
         // send an AJAX request to update the address type status
@@ -3454,8 +3458,10 @@ $('#event').select2({ placeholder:"Please Choose" });
                 contactNo: {
                     required: false,
                     digits: true,
+                    rangelength: [9, 12],
+
                 },
-                relationship1: "required",
+                relationship: "required",
                 address1: "required",
                 postcode: {
                     required: true,
@@ -3500,8 +3506,10 @@ $('#event').select2({ placeholder:"Please Choose" });
                 contactNo: {
                     required: "Please Insert Phone Number",
                     digits: "Please Insert Valid Phone Number Without ' - ' And Space",
+                    rangelength: "Please Insert Valid Phone Number Without ' - ' And Space",
+
                 },
-                relationship1: "Please Choose Relationship",
+                relationship: "Please Choose Relationship",
                 address1: "Please Insert Address 1",
                 postcode: {
                     required: "Please Insert Postcode",
@@ -3632,6 +3640,7 @@ $('#event').select2({ placeholder:"Please Choose" });
                 $("#relationshipP1").val(parent.relationship);
                 $("#idno7").val(parent.idNo);
                 $("#okucard6").val(parent.okuCardNum);
+                $("#age7").val(parent.age);
 
                 if (parent.nonCitizen == "on") {
                     $("#nonCitizenP1").prop("checked", true);

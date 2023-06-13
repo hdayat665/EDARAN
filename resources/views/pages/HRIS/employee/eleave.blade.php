@@ -35,16 +35,18 @@
                                                 <div class="mb-3">
                                                     <label for="" class="form-label">Recommender </label>
                                                     <select class="form-select" name="eleaverecommender" id="eleaverecommender">
-                                                        @if (!empty($employment->eleaverecommender))
-                                                        <option></option>
-                                                        @endif
-                                                        <?php $employees = getEmployee($user_id); ?>
+
+                                                        <?php $employees = getEmployeerecommender(); ?>
+                                                        <option value="">Please Choose</option>
                                                         @foreach ($employees as $employee)
                                                             <option value="{{ $employee->user_id }}" label="{{ $employee->employeeName }}"
                                                             {{ $employment->eleaverecommender == $employee->user_id ? "selected='selected'" : '' }}>
+
                                                             {{ $employee->employeeName }}
                                                             </option>
                                                         @endforeach
+
+
                                                     </select>
                                                 </div>
                                             </div>
@@ -54,8 +56,8 @@
                                                 <div class="mb-3">
                                                     <label for="holiday_title" class="form-label">Approver* </label>
                                                     <select class="form-select" name="eleaveapprover" id="eleaveapprover">
-                                                        <option></option>
-                                                        <?php $employees = getEmployee(); ?>
+                                                        <option value="">Please Choose</option>
+                                                        <?php $employees = getEmployeeapprover(); ?>
                                                         @foreach ($employees as $employee)
                                                             <option value="{{ $employee->user_id }}" label="{{ $employee->employeeName }}"
                                                             {{ $employment->eleaveapprover == $employee->user_id ? "selected='selected'" : '' }}>

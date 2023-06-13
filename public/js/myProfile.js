@@ -3637,7 +3637,7 @@ $(document).ready(function () {
                     required: "Please Insert Contact Number",
                     digits: "Please Insert Valid Contact Number",
 
-                    rangelength: [10, 11],
+                    rangelength: "Please Insert Valid Contact Number",
                 },
                 expiryDate: {
                     required: "Please Insert Expiry Date",
@@ -4143,7 +4143,6 @@ $(document).ready(function () {
 
         if (permanentChecked && correspondentChecked) {
             checkboxes.not(":checked").prop("disabled", true);
-            // if both checkboxes are checked and have the same address ID, set addressType to 3
             if (
                 checkboxes.filter(
                     '[data-address-id="' + addressId + '"]:checked'
@@ -4152,30 +4151,27 @@ $(document).ready(function () {
                 addressType = "3";
             }
         } else if (permanentChecked) {
-            // if only permanent checkbox is checked, set addressType to 1
             addressType = "1";
-            // disable all other permanent checkboxes
             checkboxes
                 .filter('[value="permanent"]:not(:checked)')
                 .prop("disabled", true);
-            // enable all correspondent checkboxes
             checkboxes
                 .filter('[value="correspondent"]')
                 .prop("disabled", false);
         } else if (correspondentChecked) {
-            // if only correspondent checkbox is checked, set addressType to 2
             addressType = "2";
-            // disable all other correspondent checkboxes
             checkboxes
                 .filter('[value="correspondent"]:not(:checked)')
                 .prop("disabled", true);
-            // enable all permanent checkboxes
             checkboxes.filter('[value="permanent"]').prop("disabled", false);
         } else {
             checkboxes.prop("disabled", false);
         }
 
-        // send an AJAX request to update the address type status
+        if ($(this).is(":not(:checked)")) {
+            addressType = "0";
+        }
+
         $.ajax({
             url: "/updateAddressDetails",
             type: "POST",
@@ -4184,7 +4180,6 @@ $(document).ready(function () {
                 addressType: addressType,
             },
             success: function (data) {
-                // Update the UI to reflect the new address type
                 Swal.fire({
                     icon: "success",
                     text: "Address Type is updated!",

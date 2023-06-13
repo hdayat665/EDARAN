@@ -58,11 +58,12 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('/loginTenant', 'loginView')->name('loginView');
         Route::get('/loginHost', 'loginHostView');
         Route::get('/domainView', 'domainView');
+        Route::get('/domainName', 'domainNameView'); //domain name
         Route::get('/loginAdmin', 'loginAdminView');
         Route::get('/registerView', 'registerView');
         Route::get('/verifiedView/{id}', 'verifiedView');
         Route::get('/forgotPassView', 'forgotPassView');
-        Route::get('/forgotDomainView', 'forgotDomainView');
+        Route::get('/forgotDomain', 'forgotDomainView'); //forgot domain
         Route::get('/resetPassView/{id}', 'resetPassView');
         Route::get('/resetDomainView', 'resetDomainView');
         Route::get('/logout/{type}', 'logoutTenant');
@@ -385,9 +386,8 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('/updateSickLeave', 'updateSickLeave');
             Route::post('/updateCarryForward', 'updateCarryForward');
 
-            // Route::get('/leaveSick', 'leaveSickView');
-            // Route::get('/leaveCarrForward', 'leaveCarrForwardView');
-            // Route::get('/leaveUnpaid', 'leaveUnpaidView');
+            // eleave Weekend Entitlement
+            Route::get('/weekendEntitlement', 'weekendEntitlementView');
 
             // eleave Leave Entitlement
             Route::get('/leaveEntitlement', 'eleaveEntitlementView');
