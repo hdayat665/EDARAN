@@ -24,7 +24,7 @@
                 <div class="panel-body">
                     <table id="data-table-default" class="table table-striped table-bordered">
                         <tr>
-                            <th>Total Days of This Month 123</th>
+                            <th>Total Days of This Month</th>
                             <td><label id=""> {{ $timesheetsday['totalDays'] }} days</label></td>
 
                             <th>Weekdays</th>

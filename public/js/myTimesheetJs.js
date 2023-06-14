@@ -817,7 +817,7 @@ $(document).ready(function () {
         
         getApproverAppeal().done(function (data) {
             approverUserId = data;
-            console.log("Approver User ID:", approverUserId);
+            // console.log("Approver User ID:", approverUserId);
         });
         
 
@@ -830,25 +830,48 @@ $(document).ready(function () {
         for (let i = 0; i < data['events'].length; i++) {
             var events = data['events'][i];
             // console.log(events);
-            var startDate = new Date(events['start_date']);
-            var startMonth = startDate.getMonth() + 1;
-            startMonth = startMonth < 10 ? "0" + startMonth : startMonth;
-            var startYear = startDate.getFullYear();
-            var startDay = startDate.getDate();
-            startDay = startDay < 10 ? "0" + startDay : startDay;
+            // var startDate = new Date(events['start_date']);
+            // var startMonth = startDate.getMonth() + 1;
+            // startMonth = startMonth < 10 ? "0" + startMonth : startMonth;
+            // var startYear = startDate.getFullYear();
+            // var startDay = startDate.getDate();
+            // startDay = startDay < 10 ? "0" + startDay : startDay;
 
-            var endDate = new Date(events['end_date']);
-            endDate.setDate(endDate.getDate() + 1); // add one day to end date
-            var endMonth = endDate.getMonth() + 1;
-            endMonth = endMonth < 10 ? "0" + endMonth : endMonth;
-            var endYear = endDate.getFullYear();
-            var endDay = endDate.getDate();
-            endDay = endDay < 10 ? "0" + endDay : endDay;
+            // var endDate = new Date(events['end_date']);
+            // endDate.setDate(endDate.getDate() + 1); // add one day to end date
+            // var endMonth = endDate.getMonth() + 1;
+            // endMonth = endMonth < 10 ? "0" + endMonth : endMonth;
+            // var endYear = endDate.getFullYear();
+            // var endDay = endDate.getDate();
+            // endDay = endDay < 10 ? "0" + endDay : endDay;
+
+                var startDate = new Date(events['start_date']);
+                var startMonth = startDate.getMonth() + 1;
+                startMonth = startMonth < 10 ? "0" + startMonth : startMonth;
+                var startYear = startDate.getFullYear();
+                var startDay = startDate.getDate();
+                startDay = startDay < 10 ? "0" + startDay : startDay;
+                var startTime = events["start_time"];
+                var time = startTime.split(":");
+                startTime = time[0] < 10 ? "0" + startTime : startTime;
+
+                var endDate = new Date(events['end_date']);
+                var endMonth = endDate.getMonth() + 1;
+                endMonth = endMonth < 10 ? "0" + endMonth : endMonth;
+                var endYear = endDate.getFullYear();
+                var endDay = endDate.getDate();
+                endDay = endDay < 10 ? "0" + endDay : endDay;
+                var endTime = events['end_time'];
+                time = endTime.split(":");
+                endTime = time[0] < 10 ? "0" + endTime : endTime;
+
+            
 
             event.push({
                 title: "Event: " + events['event_name'] + "\n" + "from " + events['start_time'] + " to " + events['end_time'],
                 start: startYear + '-' + startMonth + '-' + startDay,
                 end: endYear + '-' + endMonth + '-' + endDay,
+                start_time: events['start_time'],
                 color: '#2AAA8A',
                 extendedProps: {
                     type: 'event',
@@ -858,25 +881,47 @@ $(document).ready(function () {
 
         }
 
+      
+
         var eventattend = [];
         attendhour = [];
         for (let i = 0; i < data['eventsattends'].length; i++) {
             var events = data['eventsattends'][i];
             // console.log(events);
+            // var startDate = new Date(events['start_date']);
+            // var startMonth = startDate.getMonth() + 1;
+            // startMonth = startMonth < 10 ? "0" + startMonth : startMonth;
+            // var startYear = startDate.getFullYear();
+            // var startDay = startDate.getDate();
+            // startDay = startDay < 10 ? "0" + startDay : startDay;
+
+            // var endDate = new Date(events['end_date']);
+            // endDate.setDate(endDate.getDate() + 1); // add one day to end date
+            // var endMonth = endDate.getMonth() + 1;
+            // endMonth = endMonth < 10 ? "0" + endMonth : endMonth;
+            // var endYear = endDate.getFullYear();
+            // var endDay = endDate.getDate();
+            // endDay = endDay < 10 ? "0" + endDay : endDay;
+
             var startDate = new Date(events['start_date']);
             var startMonth = startDate.getMonth() + 1;
             startMonth = startMonth < 10 ? "0" + startMonth : startMonth;
             var startYear = startDate.getFullYear();
             var startDay = startDate.getDate();
             startDay = startDay < 10 ? "0" + startDay : startDay;
+            var startTime = events["start_time"];
+            var time = startTime.split(":");
+            startTime = time[0] < 10 ? "0" + startTime : startTime;
 
             var endDate = new Date(events['end_date']);
-            endDate.setDate(endDate.getDate() + 1); // add one day to end date
             var endMonth = endDate.getMonth() + 1;
             endMonth = endMonth < 10 ? "0" + endMonth : endMonth;
             var endYear = endDate.getFullYear();
             var endDay = endDate.getDate();
             endDay = endDay < 10 ? "0" + endDay : endDay;
+            var endTime = events['end_time'];
+            time = endTime.split(":");
+            endTime = time[0] < 10 ? "0" + endTime : endTime;
 
             eventattend.push({
                 title: "Event: " + events['event_name'] + "\n" + "from " + events['start_time'] + " to " + events['end_time'] + " attend", 
@@ -1076,10 +1121,60 @@ $(document).ready(function () {
             // dataleave = dataEvent.concat(leave);
             // dataHoliday = dataleave.concat(holiday);
 
+            
+              
             dataEvent = event.concat(eventattend);
             datalog = dataEvent.concat(log);
             dataleave = datalog.concat(leave);
             dataHoliday = dataleave.concat(holiday);
+
+            // datatest = event;
+
+
+            // datatest.sort(function(a, b) {
+            //     var dateA = a.start;
+            //     var dateB = b.start;
+            //     var timeA = a.start_time;
+            //     var timeB = b.start_time;
+              
+            //     // Compare the dates
+            //     if (dateA < dateB) {
+            //       return -1;
+            //     }
+            //     if (dateA > dateB) {
+            //       return 1;
+            //     }
+              
+            //     // If the dates are equal, compare the start_time
+            //     if (timeA < timeB) {
+            //       return -1;
+            //     }
+            //     if (timeA > timeB) {
+            //       return 1;
+            //     }
+              
+            //     return 0; // If both date and start_time are equal
+            //   });
+              
+
+            // console.log(datatest);
+            
+           
+           
+              
+              
+              
+              
+
+            //   console.log(datalog)
+
+
+              
+
+            //   dataHoliday.sort(function(a, b) {
+            //     return new Date(a.start) - new Date(b.start);
+            //   });
+              
             
             // console.log(dataEvent);
             // console.log(holiday);
@@ -1116,42 +1211,50 @@ $(document).ready(function () {
                     // console.log(approverUserId+"from deaycell");
                     var current = new Date(info.date);
                     var currentDate = new Date();
-
+                    
                     var currentdate = new Date();
                     currentdate.setDate(currentdate.getDate());
-
-
-                    var oneDayBefore = new Date();
-                    oneDayBefore.setDate(currentDate.getDate() - 1);
-
-                    var satuhari = oneDayBefore.setDate(currentDate.getDate() - 1);
-
-                    var twoDayBefore = new Date();
-                    twoDayBefore.setDate(currentDate.getDate() - 2);
-
-                    var duahari = twoDayBefore.setDate(currentDate.getDate() - 2);
-
+                    
+                    // var oneDayBefore = new Date();
+                    // oneDayBefore.setDate(currentDate.getDate() - 1);
+                    // var satuhari = new Date(oneDayBefore.setDate(currentDate.getDate() - 1));
+                    
+                    // var twoDayBefore = new Date();
+                    // twoDayBefore.setDate(currentDate.getDate() - 2);
+                    // var duahari = new Date(twoDayBefore.setDate(currentDate.getDate() - 2));
+                    
                     var currentMonth = currentDate.getMonth();
                     var currentYear = currentDate.getFullYear();
-
+                    
                     var oneDaysBefore = new Date(currentYear, currentMonth, currentDate.getDate() - 1);
                     var twoDaysBefore = new Date(currentYear, currentMonth, currentDate.getDate() - 2);
-
-
-                    var datedefaultformat = dayjs(current).format('YYYY-MM-DD');
-
-                    var weekend1 = current.getDay() === 6;
-                    var weekend2 =current.getDay() === 0;
-
-
-                    var dateonedaybefore = current.getDate() === oneDaysBefore .getDate();
-
-                    var datetwodayebefore = current.getDate() === twoDayBefore.getDate();
-
                     
+                    var datedefaultformat = dayjs(current).format('YYYY-MM-DD');
+                    
+                    var weekend1 = current.getDay() === 6;
+                    var weekend2 = current.getDay() === 0;
 
+                    var onedayafterweekend2 = weekend2 + 1;
+                    var twodayafterweekend2 = weekend2 + 2;
+                    
+                    var dateonedaybefore = current.getDate() === oneDaysBefore.getDate();
+                    var datetwodayebefore = current.getDate() === twoDaysBefore.getDate();
+
+                    // console.log(dateonedaybefore+"dateonedaybefore");
                    
 
+                    var comparecurrentonedaybefore = currentDate.getDay() === Number(onedayafterweekend2);
+                    var comparecurrenttwodaybefore = currentDate.getDay() === Number(twodayafterweekend2);
+                    // console.log(comparecurrentonedaybefore+"comparecurrentonedaybefore");
+                    // var twoDaysBefore = new Date(currentYear, currentMonth, currentDate.getDate() - 2);
+
+                    var twoDaysBefore = new Date(currentYear, currentMonth, currentDate.getDate() - 2);
+                    
+                    if (comparecurrentonedaybefore || comparecurrenttwodaybefore) {
+                        twoDaysBefore = new Date(currentYear, currentMonth, currentDate.getDate() - 4);
+                        // console.log("return here");
+                    }
+                 
                    
 
                     var appealaddb = $('<button/>', {
@@ -1420,8 +1523,19 @@ $(document).ready(function () {
                       ) {
                         $(info.el).css('background-color', '#80ff80');
                       }
-                      
-                      
+                    //for date after weekend, not exclude in 48hour
+                      if(comparecurrentonedaybefore || comparecurrenttwodaybefore) {
+                        if ((current < currentDate) && current.getDate() !== currentDate.getDate()
+                            && ((hasLog || hasEvent || !hasEvent || !hasLog) && totalHoursCombineds < 8 )) {
+                            $(info.el).css('background-color', '#FF8080');
+                        }
+
+                        else if ((current < currentDate) && current.getDate() !== currentDate.getDate()
+                        && ((hasLog || hasEvent || !hasEvent || !hasLog) && totalHoursCombineds >= 8 )) {
+                            $(info.el).css('background-color', '#80ff80');
+                        }
+                       
+                      }
 
                      if (
                         (dateonedaybefore || datetwodayebefore) &&
@@ -1449,8 +1563,12 @@ $(document).ready(function () {
                         $(info.el).css('background-color', '#FF8080');
                       }
 
+                     
+                    //  if ((current < twoDaysBefore)) {
+                    //     $(info.el).css('background-color', 'red');
+                    //  }
                       //xde log appeal, log kecik dari 9,exclude weekend
-                       else if((current < duahari) && noappeal && totalHoursCombineds < 8 && !(weekend1 || weekend2)) {
+                       else if((current < twoDaysBefore) && noappeal && totalHoursCombineds < 8 && !(weekend1 || weekend2)) {
                         // console.log(hourslog);
                         $(info.el).css('background-color', '#FF8080');
                         $(info.el).append('&nbsp;').append(appealaddb);
@@ -1461,7 +1579,7 @@ $(document).ready(function () {
                             });
 
                         }else if (
-                            (current < duahari) &&
+                            (current < twoDaysBefore) &&
                             hasAppeal &&
                             (
                               ((hasLog || hasEvent) && totalHoursCombineds < 8) ||
@@ -1478,9 +1596,9 @@ $(document).ready(function () {
                                 });
                         
                         
-                         } else if((current < duahari) && (hasLog || hasEvent) && totalHoursCombineds >= 8) {
+                         } else if((current < twoDaysBefore) && (hasLog || hasEvent) && totalHoursCombineds >= 8) {
                             $(info.el).css('background-color', '#80ff80');
-                         } else if((current < duahari) && hasAppeal && totalHoursCombineds >= 8) {
+                         } else if((current < twoDaysBefore) && hasAppeal && totalHoursCombineds >= 8) {
                             $(info.el).css('background-color', '#80ff80');
                             $(info.el).append('&nbsp;').append(viewappealb);
                             $(viewappealb).css({
@@ -1489,7 +1607,7 @@ $(document).ready(function () {
                                 'z-index': '999',   
                                 });
                          }
-                         else if((current < duahari) && hasAppeal && totalHoursCombineds < 8) {
+                         else if((current < twoDaysBefore) && hasAppeal && totalHoursCombineds < 8) {
                             $(info.el).css('background-color', '#FF8080');
                             $(info.el).append('&nbsp;').append(viewappealb);
                             $(viewappealb).css({
@@ -1540,7 +1658,19 @@ $(document).ready(function () {
 
                         // check if the clicked date is within the last 2 days before the current date
                         // and if the cell already has an appeal button
-                        if ((clickedDate.diff(today, 'day') < -2 || clickedDate.isAfter(today, 'day')) &&
+                        var daystominus = -2;
+
+                        var currentDayOfWeek = today.day();
+
+                        var monday = 1; 
+                        var tuesday = 2;
+
+                        // Check if the current day is Saturday (6) or Sunday (0)
+                        if (currentDayOfWeek === monday || currentDayOfWeek === tuesday) {
+                            daystominus = -4;
+                        }
+
+                        if ((clickedDate.diff(today, 'day') < daystominus || clickedDate.isAfter(today, 'day')) &&
                         ($(info.dayEl).find('.appeal-add-button, .appeal-view-button').length == 0)) {
                             Swal.fire({
                                 icon: 'error',
@@ -1549,7 +1679,7 @@ $(document).ready(function () {
                             });
                         return;
                         }
-                        if ((clickedDate.diff(today, 'day') < -2 || clickedDate.isAfter(today, 'day')) &&
+                        if ((clickedDate.diff(today, 'day') < daystominus || clickedDate.isAfter(today, 'day')) &&
                             ($(info.dayEl).find('.appeal-add-button, .appeal-view-button').length !== 0)) {
 
                           return;
