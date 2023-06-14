@@ -411,6 +411,8 @@ $(document).ready(function () {
                 project_location: "required",
                 project_location_office: "required",
                 end_time: "required",
+                lunch_break: "required",
+                
             },
 
             messages: {
@@ -425,6 +427,7 @@ $(document).ready(function () {
                 project_location: "Please Choose Project Location",
                 project_location_office: "Please Choose Project Location",
                 end_time: "Please Choose End Time",
+                lunch_break: "Please Choose Lunch Break",
             },
             submitHandler: function (form) {
                 requirejs(["sweetAlert2"], function (swal) {
@@ -476,6 +479,8 @@ $(document).ready(function () {
                 project_location: "required",
                 project_location_office: "required",
                 end_time: "required",
+                lunch_break: "required",
+                
             },
 
             messages: {
@@ -490,6 +495,7 @@ $(document).ready(function () {
                 project_location: "Please Choose Project Location",
                 project_location_office: "Please Choose Project Location",
                 end_time: "Please Choose End Time",
+                lunch_break: "Please Choose Lunch Break",
             },
             submitHandler: function (form) {
                 requirejs(["sweetAlert2"], function (swal) {
@@ -928,6 +934,7 @@ $(document).ready(function () {
                 start: startYear + '-' + startMonth + '-' + startDay,
                 end: endYear + '-' + endMonth + '-' + endDay,
                 color: '#2AAA8A',
+                start_time: events['start_time'],
                 extendedProps: {
                     type: 'eventattend',
                     eventId: events['id']
@@ -988,6 +995,7 @@ $(document).ready(function () {
                     "\n" + (logs["activitynameas"] ? logs["activitynameas"] + " ": "") + "\n" + " from " + logs["start_time"] + " to " + logs["end_time"],
                     // start: startYear + '-' + startMonth + '-' + startDay + 'T' + startTime + ':00',
                     start: startYear + '-' + startMonth + '-' + startDay,
+                    start_time: logs['start_time'],
                     // color: app.color.primary,
                     color: "#348FE2",
                     extendedProps: {
@@ -1128,36 +1136,36 @@ $(document).ready(function () {
             dataleave = datalog.concat(leave);
             dataHoliday = dataleave.concat(holiday);
 
-            // datatest = event;
+           
 
 
-            // datatest.sort(function(a, b) {
-            //     var dateA = a.start;
-            //     var dateB = b.start;
-            //     var timeA = a.start_time;
-            //     var timeB = b.start_time;
+            dataHoliday.sort(function(a, b) {
+                var dateA = a.start;
+                var dateB = b.start;
+                var timeA = a.start_time;
+                var timeB = b.start_time;
               
-            //     // Compare the dates
-            //     if (dateA < dateB) {
-            //       return -1;
-            //     }
-            //     if (dateA > dateB) {
-            //       return 1;
-            //     }
+                // Compare the dates
+                if (dateA < dateB) {
+                  return -1;
+                }
+                if (dateA > dateB) {
+                  return 1;
+                }
               
-            //     // If the dates are equal, compare the start_time
-            //     if (timeA < timeB) {
-            //       return -1;
-            //     }
-            //     if (timeA > timeB) {
-            //       return 1;
-            //     }
+                // If the dates are equal, compare the start_time
+                if (timeA < timeB) {
+                  return -1;
+                }
+                if (timeA > timeB) {
+                  return 1;
+                }
               
-            //     return 0; // If both date and start_time are equal
-            //   });
+                return 0; // If both date and start_time are equal
+              });
               
 
-            // console.log(datatest);
+            console.log(dataHoliday);
             
            
            
