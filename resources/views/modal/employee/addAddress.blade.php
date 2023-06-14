@@ -51,12 +51,12 @@
                                 <option value="{{$key}}" >{{$america}}</option>
                                 @endforeach
                             </optgroup>
-                            {{-- <optgroup id="country-optgroup-Asia" label="Asia">
+                            <optgroup id="country-optgroup-Asia" label="Asia">
                                 <option value="MY" label="Malaysia" Selected></option>
                                 @foreach ($asias as $key => $asia)
                                 <option value="{{$key}}">{{$asia}}</option>
                                 @endforeach
-                            </optgroup> --}}
+                            </optgroup>
                         </select>
                     </div>
                 </div>
