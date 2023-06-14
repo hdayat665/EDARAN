@@ -563,10 +563,13 @@ if ($existingLogs->isNotEmpty()) {
         $employees = DB::table('employment')
                         ->whereIn('user_id', $participantIds)
                         ->get();
+       
 
         $employeeNames = $employees->pluck('employeeName')->toArray();
+        
 
         $event->participantNames = implode(',', $employeeNames);
+        //  dd($event);
 
         return $event;
 

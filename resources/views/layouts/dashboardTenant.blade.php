@@ -468,3 +468,62 @@
         }
     });
 </script>
+
+<script>
+$(document).ready(function () {
+
+    function getAttendance(eventId) {
+    return $.ajax({
+        url: "/getAttendanceByEventId/" + eventId,
+    });
+}
+function getEvents(id) {
+    return $.ajax({
+        url: "/getEventById/" + id,
+    });
+}
+
+$(document).on("click", "#buttonnViewParticipant", function () {
+    var id = $(this).data("id");
+    var eventData = getEvents(id);
+    eventData.then(function (data) {
+        var attendanceEvent = getAttendance(data.id);
+        attendanceEvent.then(function (dataAttendance) {
+            // Check if the DataTable is already initialized
+            var table = $("#tableviewparticipants").DataTable();
+            if (table) {
+                // The DataTable is already initialized, so we can just update the data
+                table.clear();
+                for (let i = 0; i < dataAttendance.length; i++) {
+                    const attendance = dataAttendance[i];
+                    table.row.add([i + 1, attendance.employeeName]);
+                }
+                table.draw();
+            } else {
+                // The DataTable is not yet initialized, so we need to initialize it
+                $("#tableviewparticipants").DataTable({
+                    paging: true,
+                    columns: [{ title: "No" }, { title: "Participants" }],
+                });
+                for (let i = 0; i < dataAttendance.length; i++) {
+                    const attendance = dataAttendance[i];
+                    table.row.add([i + 1, attendance.employeeName]);
+                }
+            }
+        });
+    });
+
+    $("#modalparticipant").modal("show");
+});
+
+
+    $('#tableviewparticipants').DataTable({
+        responsive: false,
+        lengthMenu: [
+            [5, 10, 25, 50, -1],
+            [5, 10, 25, 50, "All"],
+        ],
+    });
+
+    });
+</script>
