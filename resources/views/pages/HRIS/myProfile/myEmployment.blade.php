@@ -51,24 +51,24 @@
                     <div class="row p-2">
                         <label for="firstname" class="form-label">Unit</label>
                         <select class="form-select" name="unit" aria-label="Disabled select example" disabled>>
-                            <?php $Units = getUnit(); ?>
+                            <?php $Units = getUnit('', $employment->department); ?>
                             <option value="0" label="PLEASE CHOOSE"></option>
                             @foreach ($Units as $Unit)
                                 <option value="{{ $Unit->id }}"
                                     {{ $employment->unit == $Unit->id ? 'selected="selected"' : '' }}
-                                    label="{{ $Unit->unitName }}"></option>
+                                    label="{{ $Unit->unitName }}">{{ $Unit->unitName }}</option>
                             @endforeach
                         </select>
                     </div>
                     <div class="row p-2">
                         <label for="firstname" class="form-label">Branch*</label>
                         <select class="form-select" name="branch" aria-label="Disabled select example" disabled>>
-                            <?php $Branchs = getBranch(); ?>
+                            <?php $Branchs = getBranch('', $employment->company); ?>
                             <option value="0" label="PLEASE CHOOSE"></option>
                             @foreach ($Branchs as $Branch)
                                 <option value="{{ $Branch->id }}"
                                     {{ $employment->branch == $Branch->id ? 'selected="selected"' : '' }}
-                                    label="{{ $Branch->branchName }}"></option>
+                                    label="{{ $Branch->branchName }}">{{ $Branch->branchName }}</option>
                             @endforeach
                         </select>
                     </div>
