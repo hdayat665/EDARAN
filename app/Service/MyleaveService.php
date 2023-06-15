@@ -873,22 +873,146 @@ class MyleaveService
     public function getpieleave()
     {
         $currentYear = Carbon::now()->format('Y');
-        $datapie = leaveEntitlementModel::select('leave_entitlement.current_entitlement','leave_entitlement.current_entitlement_balance')
+        $checktoday = Carbon::now();
+
+        $data = leaveEntitlementModel::select('leave_entitlement.current_entitlement','leave_entitlement.current_entitlement_balance', 'leave_entitlement.lapsed_date','leave_entitlement.carry_forward','leave_entitlement.carry_forward_balance', 'leave_entitlement.lapsed_date')
         ->where('leave_entitlement.tenant_id', Auth::user()->tenant_id)
         ->where('leave_entitlement.id_employment', Auth::user()->id)
         ->whereYear('leave_entitlement.le_year', '=', $currentYear)
         ->first();
+
+        $checkType = leavetypesModel::select('leave_types.id')
+            ->where('leave_types.tenant_id', Auth::user()->tenant_id)
+            ->where('leave_types.leave_types_code', '=', 'AL')
+            ->first();
+
+        $datapiePending1 = MyLeaveModel::select(DB::raw('SUM(myleave.total_day_applied) as total_pending'))
+        ->where('myleave.tenant_id', Auth::user()->tenant_id)
+        ->where(function ($query) {
+            $query->where('myleave.status_final', '=', 1)
+                ->orWhere('myleave.status_final', '=', 2);
+        })
+        ->where(function ($query) {
+            $query->where('myleave.calculate', '=', null)
+                ->orWhere('myleave.calculate', '=', '');
+        })
+        ->where('myleave.lt_type_id', '=', $checkType->id)
+        ->where('myleave.up_user_id', Auth::user()->id)
+        ->whereYear('myleave.applied_date', '=', $currentYear)
+        ->first();
+
+
+        if($checktoday <= $data->lapsed_date){
+
+            if (0 <= $data->carry_forward_balance){
+
+
+                $datapiePendingx =  $data->carry_forward_balance - $datapiePending1->total_pending;
+
+                if ($datapiePendingx < 0) {
+
+                    $datatolak = - $datapiePendingx;
+
+                    // dd($data);
+                    // die;
+
+                    $datapiePending = (object) ['total_pending' => $datatolak ];
+
+                } else {
+
+                    $datapiePending = (object) ['total_pending' => 0 ];
+
+                }
+
+            }else{
+
+                $datapiePending = (object) ['total_pending' => 0 ];
+
+            }
+
+        }else{
+
+            // dd($datapiePending1);
+            // die;
+
+            // $datapiePending = (object) ['total_pending' => $datapiePending1 ];
+            $datapiePending = $datapiePending1;
+
+        }
+
+
+        $datapie = [$data,$datapiePending];
+
+        // dd($datapie);
+        // die;
 
         return $datapie;
     }
     public function getpieleave2()
     {
         $currentYear = Carbon::now()->format('Y');
-        $datapie2 = leaveEntitlementModel::select('leave_entitlement.carry_forward','leave_entitlement.carry_forward_balance')
+        $checktoday = Carbon::now();
+
+        $data = leaveEntitlementModel::select('leave_entitlement.carry_forward','leave_entitlement.carry_forward_balance', 'leave_entitlement.lapsed_date')
         ->where('leave_entitlement.tenant_id', Auth::user()->tenant_id)
         ->where('leave_entitlement.id_employment', Auth::user()->id)
         ->whereYear('leave_entitlement.le_year', '=', $currentYear)
         ->first();
+
+        $checkType = leavetypesModel::select('leave_types.id')
+            ->where('leave_types.tenant_id', Auth::user()->tenant_id)
+            ->where('leave_types.leave_types_code', '=', 'AL')
+            ->first();
+
+        $datapiePending1 = MyLeaveModel::select(DB::raw('SUM(myleave.total_day_applied) as total_pending'))
+        ->where('myleave.tenant_id', Auth::user()->tenant_id)
+        ->where(function ($query) {
+            $query->where('myleave.status_final', '=', 1)
+                ->orWhere('myleave.status_final', '=', 2);
+        })
+        ->where(function ($query) {
+            $query->where('myleave.calculate', '=', null)
+                ->orWhere('myleave.calculate', '=', '');
+        })
+        ->where('myleave.lt_type_id', '=', $checkType->id)
+        ->where('myleave.up_user_id', Auth::user()->id)
+        ->whereYear('myleave.applied_date', '=', $currentYear)
+        ->first();
+
+
+        if($checktoday <= $data->lapsed_date){
+
+            if (0 <= $data->carry_forward_balance){
+
+
+                $datapiePendingx =  $data->carry_forward_balance - $datapiePending1->total_pending;
+
+                if ($datapiePendingx < 0) {
+
+                    $datapiePending = (object) ['total_pending' => $data->carry_forward_balance ];
+
+                } else {
+
+                    $datapiePending = (object) ['total_pending' => $datapiePending1->total_pending ];
+
+                }
+
+            }else{
+
+                $datapiePending = (object) ['total_pending' => 0 ];
+
+            }
+
+        }else{
+
+            $datapiePending = (object) ['total_pending' => 0 ];
+
+        }
+
+        $datapie2 = [$data,$datapiePending];
+
+        // dd($datapie2);
+        // die;
 
         return $datapie2;
 

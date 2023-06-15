@@ -34,7 +34,7 @@ class EleaveService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success Approve Timesheet';
+        $data['msg'] = 'File is successfully uploaded';
 
         return $data;
     }

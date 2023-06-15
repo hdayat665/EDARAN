@@ -83,20 +83,21 @@ $(document).ready(function () {
 
         var ctx5 = document.getElementById("myChart").getContext("2d");
 
-        var total_token = datapie.current_entitlement - datapie.current_entitlement_balance;
-        var total_balance = datapie.current_entitlement_balance;
+        var total_token = datapie[0].current_entitlement - datapie[0].current_entitlement_balance;
+        var total_balance = datapie[0].current_entitlement_balance - datapie[1].total_pending;
+        var pending = datapie[1].total_pending === null ? 0 : datapie[1].total_pending;
 
         window.myPie = new Chart(ctx5, {
             type: "pie",
             data: {
-                labels: ["Total Balance", "Total Token"],
+                labels: ["Total Balance: " + total_balance, "Pending / Pending Approved: " + pending, "Total Token: " + total_token],
                 datasets: [
                     {
-                        data: [total_balance, total_token, ],
+                        data: [total_balance, pending, total_token],
                         backgroundColor: [
                             "rgba(52, 143, 226)",
-                            "rgb(73, 182, 214)",
-                            "rgba(255, 99, 71, 0.5)",
+                            "rgb(255, 128, 128)",
+                            "rgba(73, 182, 214)",
                         ],
                         borderColor: [
                             app.color.red,
@@ -111,8 +112,19 @@ $(document).ready(function () {
             },
             options: {
                 responsive: true,
+                plugins: {
+                    tooltip: {
+                        callbacks: {
+                            label: function (context) {
+                                var label = context.label || "";
+                                return label;
+                            },
+                        },
+                    },
+                },
             },
         });
+
     });
 
     var mypie2 = mypie2();
@@ -134,20 +146,21 @@ $(document).ready(function () {
 
         var ctx5 = document.getElementById("myChart2").getContext("2d");
 
-        var total_token = datapie2.carry_forward - datapie2.carry_forward_balance;
-        var total_balance = datapie2.carry_forward_balance;
+        var total_token = datapie2[0].carry_forward - datapie2[0].carry_forward_balance;
+        var total_balance = datapie2[0].carry_forward_balance - datapie2[1].total_pending;
+        var pending = datapie2[1].total_pending === null ? 0 : datapie2[1].total_pending;
 
         window.myPie = new Chart(ctx5, {
             type: "pie",
             data: {
-                labels: ["Total Balance", "Total Token"],
+                labels: ["Total Balance: " + total_balance, "Pending / Pending Approved: " + pending, "Total Token: " + total_token],
                 datasets: [
                     {
-                        data: [total_balance, total_token],
+                        data: [total_balance, pending,total_token],
                         backgroundColor: [
                             "rgba(52, 143, 226)",
-                            "rgb(73, 182, 214)",
-                            "rgba(255, 99, 71, 0.5)",
+                            "rgb(255, 128, 128)",
+                            "rgba(73, 182, 214)",
                         ],
                         borderColor: [
                             app.color.red,
@@ -162,6 +175,16 @@ $(document).ready(function () {
             },
             options: {
                 responsive: true,
+                plugins: {
+                    tooltip: {
+                        callbacks: {
+                            label: function (context) {
+                                var label = context.label || "";
+                                return label;
+                            },
+                        },
+                    },
+                },
             },
         });
     });

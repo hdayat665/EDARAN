@@ -114,6 +114,9 @@ requirejs.config({
         leaveApprJs: assets + "/js/leaveApprJs",
         leaveHodJs: assets + "/js/leaveHodJs",
 
+        //weekend
+        weekendEntitlementJs: assets + "/js/weekendEntitlementJs",
+
         // myleave Report
         eleavereportjs: assets + "/js/eleavereportjs",
     },
@@ -362,6 +365,10 @@ if ($("#eleaveentitlementJs").length > 0) {
 
 if ($("#anualLeaveJs").length > 0) {
     requirejs(["anualLeaveJs"]);
+}
+
+if ($("#weekendEntitlementJs").length > 0) {
+    requirejs(["weekendEntitlementJs"]);
 }
 
 if ($("#eleaveholidayJs").length > 0) {
