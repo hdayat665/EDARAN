@@ -1,4 +1,4 @@
-<div class="modal fade" id="appealmodalview" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="viewapprover" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog"  >
         <div class="modal-content">
             <div class="modal-header">
@@ -59,16 +59,6 @@
                             <input type="text"  class="form-control" id="dayappealv" name="day" readonly/>
                         </div>
                         <div class="col-md-2"></div>
-                    </div>
-                    <div class="row p-2"> 
-                        <div class="col-md-2"></div>
-                        <div class="col-md-4">
-                            <label class="form-label">Log Appeal Approver</label>
-                        </div>
-                        <div class="col-md-6">
-                            <input type="text"  class="form-control" id="approverview" name="" readonly/>
-                        </div>
-                        
                     </div>
                     <div class="row p-2"> 
                         <div class="col-md-2"></div>

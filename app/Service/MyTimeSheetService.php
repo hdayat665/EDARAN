@@ -595,21 +595,21 @@ if ($existingLogs->isNotEmpty()) {
 
     public function getLeaves()
     {
-    // $data = MyLeaveModel::where([['tenant_id', Auth::user()->tenant_id], ['up_user_id', Auth::user()->id]])->get();
-
-    $data = DB::table('myleave as a')
-    ->leftjoin('leave_types as b', 'a.lt_type_id', '=', 'b.id')
-    ->select('a.*', 'b.leave_types')
-        // ->whereNotIn('a.id', $projectId)
-       -> where([['a.tenant_id', Auth::user()->tenant_id], ['a.up_user_id', Auth::user()->id]])
-        ->get();
-
-    if (!$data) {
-        $data = [];
+           // $data = MyLeaveModel::where([['tenant_id', Auth::user()->tenant_id], ['up_user_id', Auth::user()->id]])->get();
+        $data = DB::table('myleave as a')
+            ->leftjoin('leave_types as b', 'a.lt_type_id', '=', 'b.id')
+            ->select('a.*', 'b.leave_types')
+            ->where([['a.tenant_id', Auth::user()->tenant_id], ['a.up_user_id', Auth::user()->id]])
+            ->where('a.status_final', 4)
+            ->get();
+    
+        if (!$data) {
+            $data = [];
+        }
+    
+        return $data;
     }
-
-    return $data;
-    }
+    
 
 
     public function getLogs()
@@ -1548,18 +1548,23 @@ if ($existingLogs->isNotEmpty()) {
         $user_id = $user->id;
     
         $employment = DB::table('employment')
-            ->select('tsapprover')
+            ->select('tsapprover', 'employeeName')
             ->where('user_id', $user_id)
-            ->get();
+            ->first(); // Retrieve only the first matching record
     
-        foreach ($employment as $emp) {
-            if (!empty($emp->tsapprover)) {
-                return $emp->tsapprover; // Return the first non-empty tsapprover value and stop the loop
-            }
+        $approverName = null;
+        if (!empty($employment->tsapprover)) {
+            $approverName = DB::table('employment')
+                ->where('user_id', $employment->tsapprover)
+                ->value('employeeName');
         }
     
-        return null; // Return null if no result is found
+        return $approverName;
     }
+    
+    
+
+
     
     
 
