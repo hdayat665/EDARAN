@@ -1,4 +1,10 @@
 $("document").ready(function () {
+    $(document).on("click", "#travelBtn", function () {
+        $("#travelModal").modal("show");
+    });
+    $(document).on("click", "#subsBtn", function () {
+        $("#subsModal").modal("show");
+    });
     $("#type_transport").change(function () {
         var selectedOption = $("#type_transport").val();
         if (selectedOption == "Personal Car") {
@@ -152,61 +158,105 @@ $("document").ready(function () {
           })
           .datepicker("setDate", firstDay);
 
-    $(function () {
-        var selectedMonth = $("#monthInputSub").val();
+    // $(function () {
+    //     var selectedMonth = $("#monthInputSub").val();
 
-        // Convert the selected month to the first and last day of that monthsadasd
-        var firstDay = new Date(selectedMonth + " 1, 2023");
-        var lastDay = new Date(firstDay.getFullYear(), firstDay.getMonth() + 1, 0);
+    //     // Convert the selected month to the first and last day of that monthsadasd
+    //     var firstDay = new Date(selectedMonth + " 1, 2023");
+    //     var lastDay = new Date(firstDay.getFullYear(), firstDay.getMonth() + 1, 0);
         
-            // Initialize the datepicker with the selected month range
-            $("#date1, #date2")
-            .datepicker({
-                todayHighlight: true,
-                autoclose: true,
-                format: "yyyy-mm-dd",
-                startDate: firstDay,
-                endDate: lastDay
-            })
-            .datepicker("setDate", firstDay);
+    //         // Initialize the datepicker with the selected month range
+    //         $("#date1, #date2")
+    //         .datepicker({
+    //             todayHighlight: true,
+    //             autoclose: true,
+    //             format: "yyyy-mm-dd",
+    //             startDate: firstDay,
+    //             endDate: lastDay
+    //         })
+    //         .datepicker("setDate", firstDay);
         
-        $("#time1,#time2").mdtimepicker({});
+    //     $("#time1,#time2").mdtimepicker({});
 
+    //     $("#timestart,#timeend").mdtimepicker({});
+    //     $("#daystart,#dayend")
+    //         .datepicker({
+    //             format: "yyyy-mm-dd",
+    //         })
+    //         .datepicker("setDate", "now");
+    // });
+
+    // $(document).ready(function () {
+    //     $("#time1,#time2").mdtimepicker({});
+    //     //calculate date range in subsistence allowance
+    //     $("#result1, #date1, #time1, #date2, #time2").focus(function () {
+    //         // Retrieve selected values from start and end date select elements
+    //         var startDate = document.getElementById('date1').value;
+    //         var endDate = document.getElementById('date2').value;
+
+    //         // Retrieve input values from start and end time pickers
+    //         var startTime = document.getElementById('time1').value;
+    //         var endTime = document.getElementById('time2').value;
+
+    //         // Calculate travel duration
+    //         var startDateTime = new Date(startDate + ' ' + startTime);
+    //         var endDateTime = new Date(endDate + ' ' + endTime);
+    //         var durationInMs = endDateTime - startDateTime;
+    //         var days = Math.floor(durationInMs / (1000 * 60 * 60 * 24));
+    //         var hours = Math.floor((durationInMs % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    //         var minutes = Math.floor((durationInMs % (1000 * 60 * 60)) / (1000 * 60));
+
+    //         // Display travel duration in the specified element
+    //         $("#result1").val(days + " nights : " + hours + " hours : " + minutes + " minutes");
+
+
+    //         $("#DBF").val(days);
+    //         $("#DLH").val(days);
+    //         $("#DDN").val(days);
+    //         $("#hn").val(days);
+    //         $("#ln").val(days);
+    
+    //         var a = parseFloat($("#BF").val()); //float
+    //         var b = parseInt($("#DBF").val());
+    //         var c = parseFloat($("#LH").val()); //float
+    //         var d = parseInt($("#DLH").val());
+    //         var e = parseFloat($("#DN").val()); //float
+    //         var f = parseInt($("#DDN").val());
+    //         $("#TS").val(a * b + c * d + e * f);
+    //     });
+    // });
+    
+    $(document).ready(function () {
         $("#timestart,#timeend").mdtimepicker({});
         $("#daystart,#dayend")
             .datepicker({
                 format: "yyyy-mm-dd",
             })
             .datepicker("setDate", "now");
-    });
+        $("#time1,#time2").mdtimepicker({});
+    
+        // Calculate and display travel duration
+        $("#result1, #date1, #time1, #date2, #time2").focus(function () {
+            var startDate = document.getElementById('date1').value;
+            var endDate = document.getElementById('date2').value;
+            var startTime = document.getElementById('time1').value;
+            var endTime = document.getElementById('time2').value;
+    
+            var startDateTime = new Date(startDate + ' ' + startTime);
+            var endDateTime = new Date(endDate + ' ' + endTime);
+            var durationInMs = endDateTime - startDateTime;
+            var days = Math.floor(durationInMs / (1000 * 60 * 60 * 24));
+            var hours = Math.floor((durationInMs % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            var minutes = Math.floor((durationInMs % (1000 * 60 * 60)) / (1000 * 60));
+            
+            $("#result1").val(days + " nights : " + hours + " hours : " + minutes + " minutes");
 
-    $(document).ready(function () {
-        //calculate date range in subsistence allowance
-        $("#result1,#date1,#time1,#date2,#time2").focus(function () {
-            var startdt = new Date($("#date1").val() + " " + $("#time1").val());
-
-            var enddt = new Date($("#date2").val() + " " + $("#time2").val());
-
-            var diff = enddt - startdt;
-
-            var days = Math.floor(diff / (1000 * 60 * 60 * 24));
-            diff -= days * (1000 * 60 * 60 * 24);
-
-            var hours = Math.floor(diff / (1000 * 60 * 60));
-            diff -= hours * (1000 * 60 * 60);
-
-            var mins = Math.floor(diff / (1000 * 60));
-            diff -= mins * (1000 * 60);
-
-            $("#result1").val(
-                days + " nights : " + hours + " hours : " + mins + " minutes "
-            );
             $("#DBF").val(days);
             $("#DLH").val(days);
             $("#DDN").val(days);
             $("#hn").val(days);
             $("#ln").val(days);
-
+    
             var a = parseFloat($("#BF").val()); //float
             var b = parseInt($("#DBF").val());
             var c = parseFloat($("#LH").val()); //float
@@ -216,7 +266,6 @@ $("document").ready(function () {
             $("#TS").val(a * b + c * d + e * f);
         });
     });
-
     //  calculate time duration un travelling
     $("#totalduration,#daystart,#timestart,#dayend,#timeend").focus(
         function () {
@@ -347,7 +396,12 @@ $("document").ready(function () {
         var d = parseInt($("#DLH").val());
         var e = parseFloat($("#DN").val()); //float
         var f = parseInt($("#DDN").val());
-        $("#TS").val(a * b + c * d + e * f); //float
+        
+        $("#totalbf").val((a * b).toFixed(2));
+        $("#totallh").val((c * d).toFixed(2));
+        $("#totaldn").val((e * f).toFixed(2));
+        $("#TS").val((a * b + c * d + e * f).toFixed(2));
+        
     });
 
     $("#htv,#hotelcv1,#hn,#lodgingcv1,#ln,#ldgv").focus(function () {
