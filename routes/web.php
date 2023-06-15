@@ -386,8 +386,10 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('/updateSickLeave', 'updateSickLeave');
             Route::post('/updateCarryForward', 'updateCarryForward');
 
+
             // eleave Weekend Entitlement
             Route::get('/weekendEntitlement', 'weekendEntitlementView');
+            Route::post('/updateweekend', 'updateweekend');
 
             // eleave Leave Entitlement
             Route::get('/leaveEntitlement', 'eleaveEntitlementView');

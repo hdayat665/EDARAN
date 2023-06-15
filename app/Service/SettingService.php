@@ -37,6 +37,7 @@ use App\Models\Users;
 use App\Models\leaveAnualLeaveModel;
 use App\Models\leaveSicKleaveModel;
 use App\Models\leaveCarryForwordModel;
+use App\Models\leaveWeekendModel;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Symfony\Component\Console\Input\Input;
@@ -2368,20 +2369,20 @@ public function updateTypeOfLogs($r, $id)
     {
         $tenant = Auth::user()->tenant_id;
         $input = [
-            [$tenant, '1', 'AL', 'ANNUAL LEAVE'],
-            [$tenant, '1', 'SL', 'SICK LEAVE'],
-            [$tenant, '1', 'HL', 'HOSPITALIZATION']
+            [$tenant, 'AL', 'ANNUAL LEAVE'],
+            [$tenant, 'SL', 'SICK LEAVE'],
+            [$tenant, 'HL', 'HOSPITALIZATION']
         ];
 
         foreach ($input as $data) {
             $record = leavetypesModel::updateOrCreate(
                 [
-                    'leave_types_code' => $data[2],
-                    'leave_types' => $data[3],
-                    'tenant_id' => $data[0]
+                    'tenant_id' => $data[0],
+                    'leave_types_code' => $data[1],
+                    'leave_types' => $data[2],
+
                 ],
                 [
-                    'status' => $data[1]
                 ]
             );
         }
@@ -2930,6 +2931,35 @@ public function updateTypeOfLogs($r, $id)
         return $data;
     }
 
+    public function updateweekend($r)
+    {
+        $input = $r->input('checkbox');
+
+        foreach ($input as $id => $data) {
+            $record = leaveWeekendModel::find($id);
+
+            if ($record) {
+                $record->monday = isset($data['monday']) ? $data['monday'] : null;
+                $record->tuesday = isset($data['tuesday']) ? $data['tuesday'] : null;
+                $record->wednesday = isset($data['wednesday']) ? $data['wednesday'] : null;
+                $record->thursday = isset($data['thursday']) ? $data['thursday'] : null;
+                $record->friday = isset($data['friday']) ? $data['friday'] : null;
+                $record->saturday = isset($data['saturday']) ? $data['saturday'] : null;
+                $record->sunday = isset($data['sunday']) ? $data['sunday'] : null;
+
+                $record->save();
+            }
+        }
+
+
+        $data['status'] = config('app.response.success.status');
+        $data['type'] = config('app.response.success.type');
+        $data['title'] = config('app.response.success.title');
+        $data['msg'] = 'Successfully update Weekend';
+
+        return $data;
+    }
+
     public function updateSickLeave($r)
     {
         $input = $r->input('sickpermenant');
@@ -2979,6 +3009,47 @@ public function updateTypeOfLogs($r, $id)
         $data['title'] = config('app.response.success.title');
         $data['msg'] = 'Successfully update Carry Forward';
 
+        return $data;
+    }
+
+    public function weekendview()
+    {
+        $tenant = Auth::user()->tenant_id;
+        $input = [
+            [$tenant, 'JHR', 'JOHOR'],
+            [$tenant, 'KDH', 'KEDAH'],
+            [$tenant, 'KEL', 'KELANTAN'],
+            [$tenant, 'MLK', 'MELAKA'],
+            [$tenant, 'PHG', 'PAHANG'],
+            [$tenant, 'PNG', 'PULAU PINANG'],
+            [$tenant, 'PRK', 'PERAK'],
+            [$tenant, 'SBH', 'SABAH'],
+            [$tenant, 'SRW', 'SERAWAK'],
+            [$tenant, 'SGR', 'SELANGOR'],
+            [$tenant, 'TRG', 'TERANGGANU'],
+            [$tenant, 'WP', 'WILAYAH PERSEKUTUAN'],
+            [$tenant, 'NS', 'NEGERI SEMBILAN'],
+            [$tenant, 'PLS', 'PERLIS'],
+
+        ];
+
+        foreach ($input as $data) {
+            $record = leaveWeekendModel::updateOrCreate(
+                [
+                    'tenant_id' => $data[0],
+                    'state_code' => $data[1],
+                    'state' => $data[2],
+
+                ],
+                [
+                ]
+            );
+        }
+
+        $data =
+        leaveWeekendModel::select('leave_weekend.*')
+            ->where('leave_weekend.tenant_id', Auth::user()->tenant_id)
+            ->orderBy('id', 'asc')->get();
         return $data;
     }
 }

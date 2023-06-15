@@ -1,46 +1,51 @@
-$("#saveButton").click(function (e) {
-    $("#addForm").validate({
-        // Specify validation rules
-        rules: {
-            addcountry: "required",
-        },
+$(document).ready(function () {
 
-        messages: {
-            addcountry: "Please add Country",
-        },
-        submitHandler: function (form) {
-            requirejs(["sweetAlert2"], function (swal) {
-                var data = new FormData(document.getElementById("addForm"));
-                console.log(document.getElementById("addForm"));
-                // return false;
+    $("#saveWeekend").click(function (e) {
+        $("#updateWeekend").validate({
+            submitHandler: function (form) {
+                requirejs(["sweetAlert2"], function (swal) {
+                    var data = new FormData(
+                        document.getElementById("updateWeekend")
+                    );
 
-                // var data = $('#tree').jstree("get_selected");
+                    $.ajax({
+                        type: "POST",
+                        url: "/updateweekend",
+                        data: data,
+                        dataType: "json",
 
-                $.ajax({
-                    type: "POST",
-                    url: "/createWeekendEntitlement",
-                    data: data,
-                    dataType: "json",
-
-                    processData: false,
-                    contentType: false,
-                }).then(function (data) {
-                    swal({
-                        title: data.title,
-                        text: data.msg,
-                        type: data.type,
-                        confirmButtonColor: "#3085d6",
-                        confirmButtonText: "OK",
-                        allowOutsideClick: false,
-                        allowEscapeKey: false,
-                    }).then(function () {
-                        if (data.type == "error") {
-                        } else {
-                            location.reload();
-                        }
+                        processData: false,
+                        contentType: false,
+                    }).then(function (data) {
+                        swal({
+                            title: data.title,
+                            text: data.msg,
+                            type: data.type,
+                            confirmButtonColor: "#3085d6",
+                            confirmButtonText: "OK",
+                            allowOutsideClick: false,
+                            allowEscapeKey: false,
+                        }).then(function () {
+                            if (data.type == "error") {
+                            } else {
+                                location.hash = "default-tab-1";
+                                location.reload();
+                            }
+                        });
                     });
                 });
-            });
-        },
+            },
+        });
     });
+
+    $("#tableweekend").DataTable({
+        searching: true,
+        lengthChange: true,
+        lengthMenu: [
+            [5, 10, 25, 50, -1],
+            [5, 10, 25, 50, "All"],
+        ],
+        responsive: false,
+    });
+
 });
