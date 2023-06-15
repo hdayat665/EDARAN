@@ -305,6 +305,10 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('/updateBranch/{id}', 'updateBranch');
             Route::post('/createBranch', 'createBranch');
             Route::delete('/deleteBranch/{id}', 'deleteBranch');
+            Route::post('/createLocation', 'createLocation');
+            Route::delete('/deleteLocation/{id}', 'deleteLocation');
+            Route::post('/createStateCountry', 'createStateCountry');
+            Route::delete('/deleteStateCountry/{id}', 'deleteStateCountry');
             Route::get('/getPhoneDirectory', 'getPhoneDirectory');
             Route::get('/setting', 'settingView');
             Route::get('/branch', 'branchView');
@@ -316,12 +320,15 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('/role', 'roleView');
             Route::get('/sop', 'sopView');
             Route::get('/unit', 'unitView');
+            Route::get('/location', 'locationView');
             Route::get('/getRoleById/{id}', 'getRoleById');
             Route::get('/getRoleBy/{id}', 'getRoleBy');
             Route::get('/getCompanyById/{id}', 'getCompanyById');
             Route::get('/getDepartmentById/{id}', 'getDepartmentById');
             Route::get('/getUnitById/{id}', 'getUnitById');
             Route::get('/getBranchById/{id}', 'getBranchById');
+            Route::get('/getLocationById/{id}', 'getLocationById');
+            Route::get('/getStateCountryById/{id}', 'getStateCountryById');
             Route::get('/getJobGradeById/{id}', 'getJobGradeById');
             Route::get('/getDesignationById/{id}', 'getDesignationById');
             Route::get('/getPolicyById/{id}', 'getPolicyById');

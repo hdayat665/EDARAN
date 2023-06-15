@@ -191,6 +191,78 @@ class SettingController extends Controller
         return response()->json($result);
     }
 
+    public function getStateCountry()
+    {
+        $ss = new SettingService;
+
+        $result = $ss->getStateCountry();
+
+        return response()->json($result);
+    }
+
+    public function createStateCountry(Request $r)
+    {
+        $ss = new SettingService;
+
+        $result = $ss->createStateCountry($r);
+
+        return response()->json($result);
+    }
+
+    public function updateStateCountry(Request $r, $id)
+    {
+        $ss = new SettingService;
+
+        $result = $ss->updateStateCountry($r, $id);
+
+        return response()->json($result);
+    }
+
+    public function deleteStateCountry($id)
+    {
+        $ss = new SettingService;
+
+        $result = $ss->deleteStateCountry($id);
+
+        return response()->json($result);
+    }
+
+    public function getLocation()
+    {
+        $ss = new SettingService;
+
+        $result = $ss->getLocation();
+
+        return response()->json($result);
+    }
+
+    public function createLocation(Request $r)
+    {
+        $ss = new SettingService;
+
+        $result = $ss->createLocation($r);
+
+        return response()->json($result);
+    }
+
+    public function updateLocation(Request $r, $id)
+    {
+        $ss = new SettingService;
+
+        $result = $ss->updateLocation($r, $id);
+
+        return response()->json($result);
+    }
+
+    public function deleteLocation($id)
+    {
+        $ss = new SettingService;
+
+        $result = $ss->deleteLocation($id);
+
+        return response()->json($result);
+    }
+
     public function getJobGrade()
     {
         $ss = new SettingService;
@@ -421,6 +493,15 @@ class SettingController extends Controller
         return view('pages.setting.branch', $result);
     }
 
+    public function locationView()
+    {
+        $ss = new SettingService;
+
+        $result = $ss->locationView();
+
+        return view('pages.setting.location', $result);
+    }
+
     public function employmentTypeView()
     {
         $ss = new SettingService;
@@ -560,6 +641,15 @@ class SettingController extends Controller
         return $result;
     }
 
+    public function getLocationById($id = '')
+    {
+        $ss = new SettingService;
+
+        $result = $ss->getLocationById($id);
+
+        return $result;
+    }
+    
     public function getJobGradeById($id = '')
     {
         $ss = new SettingService;
