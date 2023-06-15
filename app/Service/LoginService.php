@@ -334,6 +334,42 @@ class LoginService
         return $data;
     }
 
+    public function forgotDomainEmail($input)
+    {
+        $employee = Employee::where('workingEmail', $input['username'])->first();
+        $user = Users::where('id', $employee['user_id'])->first();
+
+        if (!$user) {
+            $data['status'] = config('app.response.error.status');
+            $data['type'] = config('app.response.error.type');
+            $data['title'] = config('app.response.error.title');
+            $data['msg'] = 'User not found';
+        } else {
+            $receiver = $input['username'];
+            $response['typeEmail'] = 'forgotDomain';
+            $response['title'] = 'Orbit Forgot Domain';
+            // $response['content1'] = 'This email is sent to reset your Domain.';
+            $response['domain'] = $user->tenant;
+            $response['username'] = $input['username'];
+            // $response['content2'] = 'Please click the button below to reset your Domain:';
+            $response['resetPassLink'] = env('APP_URL') . '/resetDomainView/' . $user->id;
+            $response['from'] = env('MAIL_FROM_ADDRESS');
+            $response['nameFrom'] = 'Orbit';
+            $response['subject'] = 'Orbit Forgot Domain';
+            // $response['typeAttachment'] = "application/pdf";
+            //  $response['file'] = \public_path()."/assets/frontend/docs/gambar.jpg";
+
+            Mail::to($receiver)->send(new MailMail($response));
+
+            $data['status'] = config('app.response.success.status');
+            $data['type'] = config('app.response.success.type');
+            $data['title'] = config('app.response.success.title');
+            $data['msg'] = 'Email have been send to your email';
+        }
+
+        return $data;
+    }
+
     public function activationEmail($input)
     {
         $user = Users::where('tenant', $input['tenant'])->first();
@@ -415,4 +451,8 @@ class LoginService
         $data['msg'] = 'Your account have been activate';
         return $data;
     }
+
+    
+
+
 }

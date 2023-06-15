@@ -715,6 +715,7 @@ class myClaimService
         $input1['address_start'] = $input['address_start'] ?? '';
         $input1['log_id'] = $input['log_id'] ?? '';
         $input1['millage'] = $input['millage'] ?? '';
+        $input1['total_km'] = $input['total_km'] ?? '';
         $input1['petrol'] = $input['petrol'] ?? '';
         $input1['toll'] = $input['toll'] ?? '';
         $input1['parking'] = $input['parking'] ?? '';
@@ -922,12 +923,95 @@ class myClaimService
         return $data;
     }
 
+    public function getTravellingClaimByGeneralId($id = '')
+    {
+        $data = TravelClaim::select(
+            'travel_date',
+            DB::raw('SUM(millage) AS total_millage'),
+            DB::raw('SUM(total_km) AS total_km'),
+            DB::raw('SUM(petrol) AS total_petrol'),
+            DB::raw('SUM(toll) AS total_toll'),
+            DB::raw('SUM(parking) AS total_parking')
+        )
+        ->where('general_id', $id)
+        ->where('type_claim', 'travel')
+        ->groupBy('travel_date')
+        ->get();
+
+        return $data;
+    }
+    public function getSummarySubsClaimByGeneralId($id = '')
+    {
+        $data = TravelClaim::select(
+            DB::raw('SUM(total_subs) AS total_subs'),
+            DB::raw('SUM(total_acc) AS total_acc'),
+            DB::raw('SUM(total_subs) + SUM(total_acc)  AS total_all')
+        )
+        
+        ->where('general_id', $id)
+        ->where('type_claim', 'subs')
+        ->groupBy('general_id')
+        ->get();
+
+        return $data;
+    }
+    public function getSummaryOthersByGeneralId($id = '')
+    {
+        $data = PersonalClaim::select(
+            DB::raw('SUM(amount) AS total_amount'),
+            
+        )
+
+        ->where('general_id', $id)
+        ->groupBy('general_id')
+        ->get();
+
+        return $data;
+    }
+    public function getSummaryTravellingClaimByGeneralId($id = '')
+    {
+        $data = TravelClaim::select(
+            DB::raw('SUM(millage) AS total_millage'),
+            DB::raw('SUM(total_km) AS total_km'),
+            DB::raw('SUM(petrol) AS total_petrol'),
+            DB::raw('SUM(toll) AS total_toll'),
+            DB::raw('SUM(parking) AS total_parking'),
+            DB::raw('SUM(millage) + SUM(petrol) + SUM(toll) + SUM(parking) AS total_travelling')
+        )
+        
+        ->where('general_id', $id)
+        ->where('type_claim', 'travel')
+        ->groupBy('general_id')
+        ->get();
+
+        return $data;
+    }
+    public function getSubsClaimByGeneralId($id = '')
+    {
+        $data = TravelClaim::where('general_id', $id)
+        ->where('type_claim', 'subs')
+        ->get();
+
+        return $data;
+    }
+    public function getTravelDateClaimByGeneralId($id = '')
+    {
+        $data = TravelClaim::where('general_id', $id)
+            ->where('type_claim', 'travel')
+            ->groupBy('travel_date') // Group by the 'travel_date' column
+            ->pluck('travel_date'); // Select only the 'travel_date' column
+
+        return $data;
+    }
+
+
     public function getTravelClaimByGeneralId($id = '')
     {
         $data = TravelClaim::where('general_id', $id)->get();
 
         return $data;
     }
+
     public function getUserAddress($id = '')
     {
         $data = UserAddress::where('user_id', $id)

@@ -38,9 +38,12 @@ use App\Models\leaveAnualLeaveModel;
 use App\Models\leaveSicKleaveModel;
 use App\Models\leaveCarryForwordModel;
 use App\Models\leaveWeekendModel;
+use App\Models\Location;
+use App\Models\State;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Symfony\Component\Console\Input\Input;
+use Illuminate\Support\Facades\Validator;
 use Carbon\Carbon;
 
 class SettingService
@@ -542,6 +545,157 @@ class SettingService
             $data['type'] = config('app.response.success.type');
             $data['title'] = config('app.response.success.title');
             $data['msg'] = 'Success Delete Branch';
+        }
+
+        return $data;
+    }
+
+    public function getLocation()
+    {
+        $data = [];
+        $data['data'] = Location::with('location')->get();
+        $data['status'] = true;
+        $data['msg'] = 'Success Get Location';
+
+        return $data;
+    }
+
+    public function createLocation($r)
+    {
+        $input = $r->input();
+
+        $checkData = Location::where([['districtName', $input['districtName']], ['tenant_id', Auth::user()->tenant_id]])->first();
+        if ($checkData) {
+            $data['msg'] = 'District name already exists.';
+            $data['status'] = config('app.response.error.status');
+            $data['type'] = config('app.response.error.type');
+            $data['title'] = config('app.response.error.title');
+
+            return $data;
+        }
+
+        $user = Auth::user();
+        $input['tenant_id'] = Auth::user()->tenant_id;
+
+        Location::create($input);
+
+        $data['status'] = config('app.response.success.status');
+        $data['type'] = config('app.response.success.type');
+        $data['title'] = config('app.response.success.title');
+        $data['msg'] = 'Success Create Location';
+
+        return $data;
+    }
+
+    public function deleteLocation($id)
+    {
+        $Location = Location::find($id);
+
+        if (!$Location) {
+            $data['status'] = config('app.response.error.status');
+            $data['type'] = config('app.response.error.type');
+            $data['title'] = config('app.response.error.title');
+            $data['msg'] = 'Location not found';
+        } else {
+            $Location->delete();
+
+            $data['status'] = config('app.response.success.status');
+            $data['type'] = config('app.response.success.type');
+            $data['title'] = config('app.response.success.title');
+            $data['msg'] = 'Success Delete Location';
+        }
+
+        return $data;
+    }
+
+    public function getStateCountry($id)
+    {
+        $data = [];
+        $data['data'] = State::where('id', $id)->first();
+        $data['status'] = true;
+        $data['msg'] = 'Success Get State Country';
+
+        return $data;
+    }
+
+    public function createStateCountry($r)
+    {
+        // $rules = [
+        //     'stateCode' => 'required|unique:states',
+        //     'stateName' => 'required|unique:states',
+        // ];
+
+        // $messages = [
+        //     'stateCode.required' => 'State code is required',
+        //     'stateCode.unique' => 'State code already exists',
+        //     'stateName.required' => 'State name is required',
+        //     'stateName.unique' => 'State name already exists',
+        // ];
+
+        // $validator = Validator::make($r->all(), $rules, $messages);
+
+        // if ($validator->fails()) {
+        //     $data['msg'] = $validator->messages()->first();
+        //     $data['status'] = config('app.response.error.status');
+        //     $data['type'] = config('app.response.error.type');
+        //     $data['title'] = config('app.response.error.title');
+
+        //     return $data;
+        // }
+
+        // $input = $r->input();
+
+        // State::create($input);
+
+        // $data['status'] = config('app.response.success.status');
+        // $data['type'] = config('app.response.success.type');
+        // $data['title'] = config('app.response.success.title');
+        // $data['msg'] = 'Success Create State Country';
+
+        // return $data;
+
+        $input = $r->input();
+
+        $checkData = State::where([['stateName', $input['stateName']], ['tenant_id', Auth::user()->tenant_id]])->first();
+        if ($checkData) {
+            $data['msg'] = 'State name already exists.';
+            $data['status'] = config('app.response.error.status');
+            $data['type'] = config('app.response.error.type');
+            $data['title'] = config('app.response.error.title');
+
+            return $data;
+        }
+
+        $user = Auth::user();
+        $input['tenant_id'] = Auth::user()->tenant_id;
+
+        State::create($input);
+
+        $data['status'] = config('app.response.success.status');
+        $data['type'] = config('app.response.success.type');
+        $data['title'] = config('app.response.success.title');
+        $data['msg'] = 'Success Create State Country';
+
+        return $data;
+    }
+
+
+    public function deleteStateCountry($id)
+    {
+        $State = State::where('stateCode', $id)->first();
+
+        if (!$State) {
+            $data['status'] = config('app.response.error.status');
+            $data['type'] = config('app.response.error.type');
+            $data['title'] = config('app.response.error.title');
+            $data['msg'] = 'State not found';
+        } else {
+            $State->delete();
+
+            $data['status'] = config('app.response.success.status');
+            $data['type'] = config('app.response.success.type');
+            $data['title'] = config('app.response.success.title');
+            $data['msg'] = 'Success Delete State Country';
         }
 
         return $data;
@@ -1161,6 +1315,13 @@ class SettingService
             ->where('a.tenant_id', Auth::user()->tenant_id)
             ->orderBy('id', 'desc')
             ->get();
+
+        return $data;
+    }
+
+    public function locationView()
+    {
+        $data['locations'] = Location::where('tenant_id', Auth::user()->tenant_id)->orderBy('id', 'desc')->get();
 
         return $data;
     }

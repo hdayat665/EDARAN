@@ -17,6 +17,7 @@ requirejs.config({
         departmentJs: assets + "/js/departmentJs",
         unitJs: assets + "/js/unitJs",
         branchJs: assets + "/js/branchJs",
+        locationJs: assets + "/js/locationJs",
         jobGradeJs: assets + "/js/jobGradeJs",
         designationJs: assets + "/js/designationJs",
         SOPJs: assets + "/js/SOPJs",
@@ -186,6 +187,10 @@ if ($("#unitJs").length > 0) {
 
 if ($("#branchJs").length > 0) {
     requirejs(["branchJs"]);
+}
+
+if ($("#locationJs").length > 0) {
+    requirejs(["locationJs"]);
 }
 
 if ($("#jobGradeJs").length > 0) {

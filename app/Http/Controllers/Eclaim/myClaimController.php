@@ -63,15 +63,17 @@ class myClaimController extends Controller
         $mcs = new myClaimService;
 
         $data['cashAdvances'] = $mcs->getCashAdvance();
-
+ 
         $data['travelClaims'] = [];
         $data['personalClaims'] = [];
+        $data['subsClaims'] = [];
+        $data['summaryOthers'] = [];
         $data['month_id'] = $month;
         $data['year'] = $year;
         $data['user_id'] = Auth::user()->id;
         $data['car'] = $mcs->getEntitlementByJobGradeCar($data['user_id']);
         $data['food'] = $mcs->getFoodByJobGrade($data['user_id']);
-        
+        $data['travelDate'] = $mcs->getTravelDateClaimByGeneralId();
         $entitlementArr = json_decode($data['car'], true);
         $data['address'] = $mcs->getUserAddress($data['user_id']);
 
@@ -176,8 +178,33 @@ class myClaimController extends Controller
         $data['details'] = getGNCDetailByGeneralId($id);
         
         $data['cashAdvances'] = $mcs->getCashAdvance();
-        $data['travelClaims'] = $mcs->getTravelClaimByGeneralId($id);
+        $data['travelClaims'] = $mcs->getTravellingClaimByGeneralId($id);
+        $data['subsClaims'] = $mcs->getSubsClaimByGeneralId($id);
+        $data['summaryTravelling'] = $mcs->getSummaryTravellingClaimByGeneralId($id) ?? 0;
+        $total_millage = isset($data['summaryTravelling'][0]) ? $data['summaryTravelling'][0]->total_millage : 0;
+        //pr($data['summaryTravelling']);
+        $data['summarySubs'] = $mcs->getSummarySubsClaimByGeneralId($id);
+        $data['travelDate'] = $mcs->getTravelDateClaimByGeneralId($id);
+        //pr($data['travelDate']);
         $data['personalClaims'] = $mcs->getPersonalClaimByGeneralId($id);
+        $data['summaryOthers'] = $mcs->getSummaryOthersByGeneralId($id);
+        //pr($data['summaryOthers']);
+
+        // Calculate the sum of the values
+        $totalAmount = $data['summaryOthers'][0]->total_amount ?? 0;
+        $totalSubs = $data['summarySubs'][0]->total_subs ?? 0;
+        $totalAcc = $data['summarySubs'][0]->total_acc ?? 0;
+        $totalMillage = $data['summaryTravelling'][0]->total_millage ?? 0;
+        $totalPetrol = $data['summaryTravelling'][0]->total_petrol ?? 0;
+        $totalToll = $data['summaryTravelling'][0]->total_toll ?? 0;
+        $totalParking = $data['summaryTravelling'][0]->total_parking ?? 0;
+        $totalTravelling = $data['summaryTravelling'][0]->total_travelling ?? 0;
+
+        $sum = $totalAmount + $totalSubs + $totalAcc + $totalMillage + $totalPetrol + $totalToll + $totalParking + $totalTravelling;
+
+        // Add the sum to the $data array
+        $data['sum'] = $sum;
+        //
         $generalClaim = $mcs->getGeneralClaimById($id);
         $data['month'] = $generalClaim->month ?? '';
         $data['year'] = $generalClaim->year ?? '';

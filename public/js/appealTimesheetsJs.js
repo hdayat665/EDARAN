@@ -120,7 +120,7 @@ $(document).ready(function () {
                 $("#filedownloadappeal").html('<a href="/storage/' + data.file + '">Download ' + fileName + '</a>');
               }
         });
-        $("#appealmodalview").modal("show");
+        $("#viewapprover").modal("show");
     });
 
 
