@@ -84,7 +84,7 @@ $(document).ready(function () {
         var ctx5 = document.getElementById("myChart").getContext("2d");
 
         var total_token = datapie[0].current_entitlement - datapie[0].current_entitlement_balance;
-        var total_balance = datapie[0].current_entitlement_balance;
+        var total_balance = datapie[0].current_entitlement_balance - datapie[1].total_pending;
         var pending = datapie[1].total_pending === null ? 0 : datapie[1].total_pending;
 
         window.myPie = new Chart(ctx5, {
@@ -147,7 +147,7 @@ $(document).ready(function () {
         var ctx5 = document.getElementById("myChart2").getContext("2d");
 
         var total_token = datapie2[0].carry_forward - datapie2[0].carry_forward_balance;
-        var total_balance = datapie2[0].carry_forward_balance;
+        var total_balance = datapie2[0].carry_forward_balance - datapie2[1].total_pending;
         var pending = datapie2[1].total_pending === null ? 0 : datapie2[1].total_pending;
 
         window.myPie = new Chart(ctx5, {
