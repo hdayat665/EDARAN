@@ -9,7 +9,7 @@
             <div class="col-md-6">
                 <a data-bs-toggle="modal" id="addCountryState" class="btn btn-primary">+ New Country & State</a>
                 <a data-bs-toggle="modal" id="addLocation" class="btn btn-primary">+ New Location</a>
-                <a data-bs-toggle="modal" id="deleteStateModal" class="btn btn-danger">Delete State</a>
+                {{-- <a data-bs-toggle="modal" id="deleteStateModal" class="btn btn-danger">Delete State</a> --}}
             </div>
             <h4 class="panel-title"></h4>
         </div>
