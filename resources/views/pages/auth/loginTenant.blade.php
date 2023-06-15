@@ -23,10 +23,10 @@
             <div class="card-body bg-white">
                 <div class="login-header mb-30px">
                     <div class="brand">
-                        <p>Current Domain <span id="tenant">not selected</span> .
-                            <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal" class="text-primary"> Change here.</a>
+                        <p>Current Domain <span id="tenant" style="font-weight: bold">not selected</span> .
+                            {{-- <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal" class="text-primary"> Change here.</a> --}}
+                            <a href="/domainName" class="text-primary"> Change here.</a>
                         </p>
-
                     </div>
                     <div class="brand">
                         <h1>Login</h1>
@@ -37,7 +37,7 @@
                     <div class="form mb-15px">
 
                         <input type="text" name="username" class="form-control h-45px fs-13px" id="emailAddress" placeholder="Username" required/>
-                        <input type="hidden" name="tenant" id="tenantInput" />
+                        <input type="hidden" name="tenant" id="tenantInput"/>
                         </div>
                     <div class="form mb-15px">
 
@@ -70,7 +70,7 @@
     </div>
 </div>
 
-@include('pages.auth.tenantName');
+{{-- @include('pages.auth.tenantName'); --}}
 @include('pages.auth.forgotPasswordTenant');
 @include('pages.auth.emailActivationTenant');
 

@@ -28,7 +28,7 @@ class LoginController extends Controller
     public function loginView()
     {
         $data = [];
-        return view('pages.auth.loginTenant', $data);
+    return view('pages.auth.loginTenant', $data);
     }
 
     public function loginHostView()
@@ -41,6 +41,12 @@ class LoginController extends Controller
     {
         $data['domain'] = 'active';
         return view('pages.auth.loginDomain', $data);
+    }
+
+    public function domainNameView()
+    {
+        $data['domain'] = 'active';
+        return view('pages.auth.domainName', $data);
     }
 
     public function about()
@@ -200,6 +206,17 @@ class LoginController extends Controller
         $ls = new LoginService;
 
         $data = $ls->forgotPassEmail($input);
+
+        return response()->json($data);
+    }
+
+    public function forgotDomainEmail(Request $r)
+    {
+        $input = $r->input();
+
+        $ls = new LoginService;
+
+        $data = $ls->forgotDomainEmail($input);
 
         return response()->json($data);
     }
