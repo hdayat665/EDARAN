@@ -33,6 +33,8 @@ use App\Models\EclaimGeneral;
 use App\Models\PermissionRole;
 use App\Models\EntitleSubsBenefit;
 use App\Models\Notification;
+use App\Models\Country;
+use App\Models\State;
 use App\Notifications\GeneralNotification;
 use App\Service\ClaimApprovalService;
 use Illuminate\Support\Facades\Auth;
@@ -634,7 +636,57 @@ if (!function_exists('asias')) {
     }
 }
 
+if (!function_exists('getCountryName')) {
+    function getCountryName($countryId)
+    {
+        $countries = getCountries();
 
+        if (isset($countries[$countryId])) {
+            return $countries[$countryId];
+        }
+
+        return '';
+    }
+}
+
+if (!function_exists('getCountries')) {
+    function getCountries()
+    {
+        $data = Country::all();
+
+        if (blank($data)) {
+            $data = [];
+        }
+
+        return $data->pluck('CountryName', 'countryID')->toArray();
+    }
+}
+
+if (!function_exists('getStateName')) {
+    function getStateName($stateCode)
+    {
+        $states = getStates();
+
+        if (isset($states[$stateCode])) {
+            return $states[$stateCode];
+        }
+
+        return '';
+    }
+}
+
+if (!function_exists('getStates')) {
+    function getStates()
+    {
+        $data = State::all();
+
+        if (blank($data)) {
+            return null;
+        }
+
+        return $data->pluck('stateName', 'stateCode')->toArray();
+    }
+}
 
 if (!function_exists('getCompany')) {
     function getCompany()
