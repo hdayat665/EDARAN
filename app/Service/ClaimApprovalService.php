@@ -148,7 +148,7 @@ class ClaimApprovalService
                 $ms->approvalEmailMTC($generalClaimData);
                 $ms->emailToHodClaimMTC($generalClaimData);
             }
-            
+
             if ($stage == 'a_approval' && $status == 'recommend') {
                 $ms->approvalEmailMTC($generalClaimData);
                 $ms->approvalEmailMTCForAdmin($generalClaimData);
@@ -432,7 +432,7 @@ class ClaimApprovalService
 
     public function cashAdvanceApprovalView()
     {
-        
+
         //$cond = ['caapprover', Auth::user()->id];
 
         $employees = Employee::where('caapprover', Auth::user()->id)->get();
@@ -447,7 +447,6 @@ class ClaimApprovalService
         $data = CashAdvanceDetail::where($claim)->whereIn('user_id', $userId)->get();
 
         return $data;
-
     }
 
     public function cashAdvanceApproverDetail($id = '')
@@ -690,13 +689,13 @@ class ClaimApprovalService
             $role = 'ADMIN - CHECKER';
         } elseif ($type == '4') {
             $role = 'ADMIN - RECOMMENDER';
-        }elseif ($type == '5') {
+        } elseif ($type == '5') {
             $role = 'ADMIN - APPROVER';
-        }elseif ($type == '6') {
+        } elseif ($type == '6') {
             $role = 'FINANCE - CHECKER';
-        }elseif ($type == '7') {
+        } elseif ($type == '7') {
             $role = 'FINANCE - RECOMMENDER';
-        }elseif ($type == '8') {
+        } elseif ($type == '8') {
             $role = 'FINANCE - APPROVER';
         }
 
@@ -707,12 +706,11 @@ class ClaimApprovalService
     public function getBucketDate()
     {
         $data = ClaimDateSetting::where('tenant_id', Auth::user()->tenant_id)->first();
-        
+
         if (!$data) {
             $data = [];
         }
 
         return $data;
-        
     }
 }

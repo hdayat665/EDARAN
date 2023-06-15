@@ -34,6 +34,7 @@ use App\Models\PermissionRole;
 use App\Models\EntitleSubsBenefit;
 use App\Models\Notification;
 use App\Notifications\GeneralNotification;
+use App\Service\ClaimApprovalService;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -599,7 +600,7 @@ if (!function_exists('asias')) {
             'LA' => "LAOS",
             'LB' => "LEBANON",
             'MO' => "MACAU SAR CHINA",
-            'MY' => "MALAYSIA",
+            'MALAYSIA' => "MALAYSIA",
             'MV' => "MALDIVES",
             'MN' => "MONGOLIA",
             'MM' => "MYANMAR [BURMA]",
@@ -1201,8 +1202,10 @@ if (!function_exists('getBranchFullAddress')) {
 if (!function_exists('getEmployee')) {
     function getEmployee()
     {
-        $data = Employee::where([['tenant_id', Auth::user()->tenant_id], ['employeeid', '!=', null]],
-        ['status', 'active'],)->get();
+        $data = Employee::where(
+            [['tenant_id', Auth::user()->tenant_id], ['employeeid', '!=', null]],
+            ['status', 'active'],
+        )->get();
 
         if (!$data) {
             $data = [];
@@ -1332,7 +1335,7 @@ if (!function_exists('getEmployeerecommender')) {
 if (!function_exists('getEmployeeapprover')) {
     function getEmployeeapprover($user_id = '')
 
-    
+
     {
 
 
@@ -2107,8 +2110,8 @@ if (!function_exists('getModeOfTransport')) {
             '4' => 'Public Transport',
             '5' => 'Company Car',
             '6' => 'Carpool',
-        ]; 
-        
+        ];
+
         if ($id) {
             return $data[$id];
         }
@@ -2537,11 +2540,10 @@ if (!function_exists('getDateFormat')) {
 
         return $data;
     }
-    
 }
 
 if (!function_exists('sendGeneralNotification')) {
-    function sendGeneralNotification($msg,$id = '')
+    function sendGeneralNotification($msg, $id = '')
     {
         $userToNotify = Users::where('id', $id)->get();
 
@@ -2554,5 +2556,250 @@ if (!function_exists('sendGeneralNotification')) {
 
             $user->notify(new GeneralNotification($dataNotify));
         }
+    }
+}
+
+
+if (!function_exists('getClaimData')) {
+    function getClaimData($roleApprover = '')
+    {
+        if ($roleApprover == 'FinanceRec') {
+            $roles = ['SUPERVISOR - RECOMMENDER', 'HOD / CEO - APPROVER', 'ADMIN - CHECKER', 'ADMIN - RECOMMENDER', 'ADMIN - APPROVER', 'FINANCE - CHECKER'];
+            $condByPass = ['id', '!=', ""];
+            $configData = null;
+            foreach ($roles as $role) {
+                $configData = getApprovalConfigClaim($role);
+                if ($configData->status) {
+                    if ($role == 'SUPERVISOR - RECOMMENDER') {
+                        $condByPass = ['supervisor', "recommend"];
+                    } elseif ($role == 'HOD / CEO - APPROVER') {
+                        $condByPass = ['hod', "recommend"];
+                    } elseif ($role == 'ADMIN - CHECKER') {
+                        $condByPass = ['a1', "recommend"];
+                    } elseif ($role == 'ADMIN - RECOMMENDER') {
+                        $condByPass = ['a_recommender', "recommend"];
+                    } elseif ($role == 'ADMIN - APPROVER') {
+                        $condByPass = ['a_approval', "recommend"];
+                    } elseif ($role == 'FINANCE - CHECKER') {
+                        $condByPass = ['f1', "recommend"];
+                    }
+                    break;
+                }
+            }
+            // $cond[1] = ['supervisor', NULL];
+            $cond[6] = ['status', 'active'];
+            $cond[3] = ['claim_type', 'MTC'];
+            $cond[8] = ['a_approval', 'recommend'];
+            $cond[9] = ['f1', ''];
+            $cond[10]  =  $condByPass;
+        }
+
+        if ($roleApprover == 'FinanceApprover') {
+            $roles = ['SUPERVISOR - RECOMMENDER', 'HOD / CEO - APPROVER', 'ADMIN - CHECKER', 'ADMIN - RECOMMENDER', 'ADMIN - APPROVER', 'FINANCE - CHECKER', 'FINANCE - RECOMMENDER'];
+            $condByPass = ['id', '!=', ""];
+            $configData = null;
+            foreach ($roles as $role) {
+                $configData = getApprovalConfigClaim($role);
+                if ($configData->status) {
+                    if ($role == 'SUPERVISOR - RECOMMENDER') {
+                        $condByPass = ['supervisor', "recommend"];
+                    } elseif ($role == 'HOD / CEO - APPROVER') {
+                        $condByPass = ['hod', "recommend"];
+                    } elseif ($role == 'ADMIN - CHECKER') {
+                        $condByPass = ['a1', "recommend"];
+                    } elseif ($role == 'ADMIN - RECOMMENDER') {
+                        $condByPass = ['a_recommender', "recommend"];
+                    } elseif ($role == 'ADMIN - APPROVER') {
+                        $condByPass = ['a_approval', "recommend"];
+                    } elseif ($role == 'FINANCE - CHECKER') {
+                        $condByPass = ['f1', "recommend"];
+                    } elseif ($role == 'FINANCE - RECOMMENDER') {
+                        $condByPass = ['f_recommender', "recommend"];
+                    }
+                    break;
+                }
+            }
+            // $cond[1] = ['supervisor', NULL];
+            $cond[11] = ['f_recommender', 'recommend'];
+            $cond[12] = ['f_approval', ''];
+            $cond[13]  =  $condByPass;
+        }
+
+        if ($roleApprover == 'FinanceChecker') {
+            $roles = ['SUPERVISOR - RECOMMENDER', 'HOD / CEO - APPROVER', 'ADMIN - CHECKER', 'ADMIN - RECOMMENDER', 'ADMIN - APPROVER'];
+            $condByPass = ['id', '!=', ""];
+            $configData = null;
+            foreach ($roles as $role) {
+                $configData = getApprovalConfigClaim($role);
+                if ($configData->status) {
+                    if ($role == 'SUPERVISOR - RECOMMENDER') {
+                        $condByPass = ['supervisor', "recommend"];
+                    } elseif ($role == 'HOD / CEO - APPROVER') {
+                        $condByPass = ['hod', "recommend"];
+                    } elseif ($role == 'ADMIN - CHECKER') {
+                        $condByPass = ['a1', "recommend"];
+                    } elseif ($role == 'ADMIN - RECOMMENDER') {
+                        $condByPass = ['a_recommender', "recommend"];
+                    } elseif ($role == 'ADMIN - APPROVER') {
+                        $condByPass = ['a_approval', "recommend"];
+                    }
+                    break;
+                }
+            }
+            // $cond[1] = ['supervisor', NULL];
+            $cond[3] = ['claim_type', 'MTC'];
+            $cond[15] = ['a_approval', 'recommend'];
+            $cond[16] = ['f1', ''];
+            $cond[17]  =  $condByPass;
+        }
+
+        if ($roleApprover == 'AdminRec') {
+            $roles = ['SUPERVISOR - RECOMMENDER', 'HOD / CEO - APPROVER', 'ADMIN - CHECKER'];
+            $condByPass = ['id', '!=', ""];
+            foreach ($roles as $role) {
+                $configData = getApprovalConfigClaim($role);
+                if ($configData->status) {
+                    if ($role == 'SUPERVISOR - RECOMMENDER') {
+                        $condByPass = ['supervisor', "recommend"];
+                    }
+                    if ($role == 'HOD / CEO - APPROVER') {
+                        $condByPass = ['hod', "recommend"];
+                    }
+                    if ($role == 'ADMIN - CHECKER') {
+                        $condByPass = ['a1', "recommend"];
+                    }
+                }
+            }
+            $cond[18] = ['a_recommender', ''];
+            $cond[3] = ['claim_type', 'MTC'];
+            // $cond[16] = ['f1', ''];
+            $cond[20]  =  $condByPass;
+        }
+
+        if ($roleApprover == 'AdminApprover') {
+            $roles = ['SUPERVISOR - RECOMMENDER', 'HOD / CEO - APPROVER', 'ADMIN - CHECKER', 'ADMIN - RECOMMENDER'];
+            $condByPass = ['id', '!=', ""];
+            foreach ($roles as $role) {
+                $configData = getApprovalConfigClaim($role);
+                if ($configData->status) {
+                    if ($role == 'SUPERVISOR - RECOMMENDER') {
+                        $condByPass = ['supervisor', "recommend"];
+                    }
+                    if ($role == 'HOD / CEO - APPROVER') {
+                        $condByPass = ['hod', "recommend"];
+                    }
+                    if ($role == 'ADMIN - CHECKER') {
+                        $condByPass = ['a1', "recommend"];
+                    }
+                    if ($role == 'ADMIN - RECOMMENDER') {
+                        $condByPass = ['a_recommender', "recommend"];
+                    }
+                }
+            }
+
+            $cond[21] = ['a_recommender', 'recommend'];
+            $cond[22] = ['a_approval', ''];
+            $cond[3] = ['claim_type', 'MTC'];
+            $cond[24]  =  $condByPass;
+        }
+
+        if ($roleApprover == 'AdminChecker') {
+            $roles = ['SUPERVISOR - RECOMMENDER', 'HOD / CEO - APPROVER'];
+            $condByPass = ['id', '!=', ""];
+            foreach ($roles as $role) {
+                $configData = getApprovalConfigClaim($role);
+                if ($configData->status) {
+                    if ($role == 'SUPERVISOR - RECOMMENDER') {
+                        $condByPass = ['supervisor', "recommend"];
+                    }
+                    if ($role == 'HOD / CEO - APPROVER') {
+                        $condByPass = ['hod', "recommend"];
+                    }
+                }
+            }
+
+            $cond[25] = ['a1', ''];
+            // $cond[19] = ['a_approval', ''];
+            $cond[3] = ['claim_type', 'MTC'];
+            $cond[27]  =  $condByPass;
+        }
+
+        $cond[99] = ['status', '!=', 'draft'];
+
+        $data = GeneralClaim::where($cond)->get();
+
+        if (!$data) {
+            $data = [];
+        }
+
+        return $data;
+    }
+}
+
+if (!function_exists('getGeneralClaimMenuNotifyForDepartment')) {
+    function getGeneralClaimMenuNotifyForDepartment($roleApprover = '')
+    {
+
+        $cond[0] = ['id', '!=', ''];
+        $userRecId = [];
+        
+        if ($roleApprover == 'DepartRecommender') {
+            // $cond[1] = ['supervisor', NULL];
+            $cond[2] = ['status', 'active'];
+            $cond[3] = ['claim_type', 'MTC'];
+
+            // find user that assign to recommender
+            $userRecommenders = Employee::where('eclaimrecommender', Auth::user()->id)->get();
+            foreach ($userRecommenders as $userRec) {
+                $userRecId[] = $userRec->user_id;
+            }
+        }
+
+        if ($roleApprover == 'DepartApprover') {
+                
+            $configData = getApprovalConfigClaim('SUPERVISOR - RECOMMENDER');
+            $condByPass = ['status', "active"];
+            // $condByPass[1] = ['status', "active"];
+            if ($configData->status) {
+                $condByPass = ['supervisor', "recommend"];
+            }
+
+            $cond[98]  =  $condByPass;
+            // $cond[97]  =  $condByPass1;
+            // $cond[3] = ['claim_type', '!=', ''];
+            $cond[4] = ['hod', NULL];
+            // dd($condByPass);
+
+            // find user that assign to recommender
+            $userRecommenders = Employee::where('eclaimapprover', Auth::user()->id)->get();
+            foreach ($userRecommenders as $userRec) {
+                $userRecId[] = $userRec->user_id;
+            }
+        }
+
+        $cond[99] = ['status', '!=', 'draft'];
+        // dd($cond);
+        $data = GeneralClaim::where($cond)->whereIn('user_id', $userRecId)->get();
+
+        if (!$data) {
+            $data = [];
+        }
+        return $data;
+    }
+}
+
+
+if (!function_exists('getApprovalConfig')) {
+    function getApprovalConfig($type = '', $claimType = '')
+    {
+        $cas = new ClaimApprovalService;
+
+        $data = $cas->getApprovalConfig($type, $claimType);
+
+        if (!$data) {
+            $data = [];
+        }
+
+        return $data;
     }
 }

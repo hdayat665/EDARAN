@@ -253,7 +253,9 @@ $(document).ready(function () {
         }
 
         if ((type = "editLog")) {
-            $("#activityByProjectEditHide").hide();
+            
+            $("#activityByProjectEditHide1").hide();
+            // $("#activityByProjectEditHide").hide();
             $("#activityByProjectEditShow").show();
             $("#locationByProjectEditShow").show();
             $("#locationByProjectEditHide").hide();
@@ -795,6 +797,19 @@ $(document).ready(function () {
             });
         }
 
+        function getApproverAppeal(id) {
+            return $.ajax({
+                url: "/getApproverAppeal",
+            });
+        }
+
+        approverappeal = getApproverAppeal();
+        approverappeal.then(function (data) {
+        console.log("data user here", data);
+        });
+        
+        
+
         var timesheetData = getTimesheet();
 
         timesheetData.then(function (data) {
@@ -829,6 +844,48 @@ $(document).ready(function () {
                     eventId: events['id']
                 }
             });
+
+        }
+
+        var eventattend = [];
+        attendhour = [];
+        for (let i = 0; i < data['eventsattends'].length; i++) {
+            var events = data['eventsattends'][i];
+            // console.log(events);
+            var startDate = new Date(events['start_date']);
+            var startMonth = startDate.getMonth() + 1;
+            startMonth = startMonth < 10 ? "0" + startMonth : startMonth;
+            var startYear = startDate.getFullYear();
+            var startDay = startDate.getDate();
+            startDay = startDay < 10 ? "0" + startDay : startDay;
+
+            var endDate = new Date(events['end_date']);
+            endDate.setDate(endDate.getDate() + 1); // add one day to end date
+            var endMonth = endDate.getMonth() + 1;
+            endMonth = endMonth < 10 ? "0" + endMonth : endMonth;
+            var endYear = endDate.getFullYear();
+            var endDay = endDate.getDate();
+            endDay = endDay < 10 ? "0" + endDay : endDay;
+
+            eventattend.push({
+                title: "Event: " + events['event_name'] + "\n" + "from " + events['start_time'] + " to " + events['end_time'] + " attend", 
+                start: startYear + '-' + startMonth + '-' + startDay,
+                end: endYear + '-' + endMonth + '-' + endDay,
+                color: '#2AAA8A',
+                extendedProps: {
+                    type: 'eventattend',
+                    eventId: events['id']
+                }
+            });
+
+            attendhour.push({
+                start: new Date(startYear, startMonth - 1, startDay),
+                end: new Date(endYear, endMonth - 1, endDay),
+                totalHourAttend: events['duration'],
+                eventid: events['id'],
+            });
+
+            // console.log(events['duration'])
 
         }
 
@@ -871,23 +928,8 @@ $(document).ready(function () {
                 }
 
                 log.push({
-                    title:
-                        (logs["type_of_log"]
-                            ? type_of_log(logs["type_of_log"]) + " "
-                            : "") +
-                        "\n" +
-                        (logs["project_name"]
-                            ? logs["project_name"] + " "
-                            : "") +
-                        "\n" +
-                        (logs["activitynameas"]
-                            ? logs["activitynameas"] + " "
-                            : "") +
-                        "\n" +
-                        " from " +
-                        logs["start_time"] +
-                        " to " +
-                        logs["end_time"],
+                    title:(logs["type_of_log"] ? type_of_log(logs["type_of_log"]) + " " : "") +"\n" + (logs["project_name"] ? logs["project_name"] + " ": "") +
+                    "\n" + (logs["activitynameas"] ? logs["activitynameas"] + " ": "") + "\n" + " from " + logs["start_time"] + " to " + logs["end_time"],
                     // start: startYear + '-' + startMonth + '-' + startDay + 'T' + startTime + ':00',
                     start: startYear + '-' + startMonth + '-' + startDay,
                     // color: app.color.primary,
@@ -1019,9 +1061,15 @@ $(document).ready(function () {
             // console.log(nextLogId);
 
 
-            dataEvent = event.concat(log);
-            dataleave = dataEvent.concat(leave);
+            // dataEvent = event.concat(log);
+            // dataleave = dataEvent.concat(leave);
+            // dataHoliday = dataleave.concat(holiday);
+
+            dataEvent = event.concat(eventattend);
+            datalog = dataEvent.concat(log);
+            dataleave = datalog.concat(leave);
             dataHoliday = dataleave.concat(holiday);
+            
             // console.log(dataEvent);
             // console.log(holiday);
             var calendar = new FullCalendar.Calendar(calendarElm, {
@@ -1053,7 +1101,6 @@ $(document).ready(function () {
 
 
                 dayCellDidMount: function(info) {
-
                     var current = new Date(info.date);
                     var currentDate = new Date();
 
@@ -1070,94 +1117,16 @@ $(document).ready(function () {
 
                     var duahari = twoDayBefore.setDate(currentDate.getDate() - 2);
 
-                    // var duahari1;
+                    var currentMonth = currentDate.getMonth();
+                    var currentYear = currentDate.getFullYear();
 
-                    duahari1 = new Date();
-                    duahari1.setDate(currentDate.getDate() - 1);
+                    var oneDaysBefore = new Date(currentYear, currentMonth, currentDate.getDate() - 1);
+                    var twoDaysBefore = new Date(currentYear, currentMonth, currentDate.getDate() - 2);
 
-                    // Check if duahari falls on a Sunday (day 0) or Saturday (day 6)
-                    if (duahari1.getDay() === 0) {
-                        duahari1.setDate(duahari1.getDate() - 3);
-                    } else if (duahari1.getDay() === 6) {
-                        duahari1.setDate(duahari1.getDate() - 3);
-                    }
-
-
-                    var currentMonth = info.date.getMonth() + 1; // Months are zero-based, so add 1
-                    var currentYear = info.date.getFullYear();
-
-                    // Iterate over the rangeholiday array and filter for dates in the current month
-                    rangeholiday.forEach(function(holiday) {
-                        var startDate = new Date(holiday.startdateholidays);
-                        var endDate = new Date(holiday.endateholidays);
-
-                        // Check if the holiday falls within the current month
-                        if (startDate.getMonth() + 1 === currentMonth && startDate.getFullYear() === currentYear) {
-                            var dateRange = getDateRange(startDate, endDate);
-                            dateRange.forEach(function(date) {
-                                var timestamp = date.getTime();
-                                // console.log(timestamp);
-
-                                // duahari1 = new Date();
-                                // duahari1.setDate(currentDate.getDate() - 1);
-
-                                // Check if duahari falls on a Sunday (day 0) or Saturday (day 6)
-                                // if (duahari1.getDay() === 0) {
-                                //     duahari1.setDate(duahari1.getDate() - 3);
-                                // } else if (duahari1.getDay() === 6) {
-                                //     duahari1.setDate(duahari1.getDate() - 3);
-                                // }
-
-                                // Format the timestamp as a readable date string
-                                var formattedDate = new Date(timestamp).toDateString() + ' ' + new Date(timestamp).toTimeString();
-                                // console.log(formattedDate);
-                                
-                                // console.log(formattedDate);
-                                // if (duahari1 === formattedDate) {
-                                //     // Your logic here for the matching timestamp
-                                //     // duahari1.setDate(duahari1.getDate() - 3);
-                                //     console.log("lalu sini naim")
-                                    
-                                // }
-
-                                
-
-                            }); 
-                        }
-                    });
-
-// console.log(duahari1);
-
-
-function getDateRange(startDate, endDate) {
-    var dateArray = [];
-    var currentDate = new Date(startDate);
-
-    while (currentDate <= endDate) {
-        dateArray.push(new Date(currentDate));
-        currentDate.setDate(currentDate.getDate() + 1);
-    }
-
-    return dateArray;
-}
-
-
-                    
-                    // console.log(duahari1);
-                    
-                    function getDateRange(startDate, endDate) {
-                        var dateArray = [];
-                        var currentDate = new Date(startDate);
-                    
-                        while (currentDate <= endDate) {
-                            dateArray.push(new Date(currentDate));
-                            currentDate.setDate(currentDate.getDate() + 1);
-                        }
-                    
-                        return dateArray;
-                    }
 
                     var datedefaultformat = dayjs(current).format('YYYY-MM-DD');
+
+                   
 
                     var appealaddb = $('<button/>', {
                                 text: 'Appeal',
@@ -1196,6 +1165,7 @@ function getDateRange(startDate, endDate) {
                                         var year = years[index];
                                         var month = months[index];
                                         var day = days[index];
+                                        var approver = approvers[index];
                                         var file = files[index];
                                         // console.log(year);
                                         $('#log_idv').val(logId);
@@ -1209,6 +1179,7 @@ function getDateRange(startDate, endDate) {
                                         $('#yearappealv').val(year);
                                         $('#monthappealv').val(month);
                                         $('#dayappealv').val(day);
+                                        $('#approverview').val(approver);
 
                                         if (file) {
                                             var fileName = file.split('/').pop(); // Extract the file name from the file path
@@ -1252,13 +1223,13 @@ function getDateRange(startDate, endDate) {
                     // for (var i = 0; i < loghour.length; i++) {
                     //     if (current >= loghour[i].start && current <= loghour[i].end) {
                     //         hasLog = true;
-                    //         // console.log(totalHours);
+                    //         console.log(totalHours);
                     //         totalHours += parseInt(loghour[i].totalHour.split(":")[0]);
                     //         var logid = loghour[i].logid;
                     //     }
                     // }
 
-                    var totalHours1 = '00:00';
+                    var totalHoursforlog = '00:00';
                     var hasLog = false;
                     for (var i = 0; i < loghour.length; i++) {
                         if (current.getTime() === loghour[i].start.getTime()) {
@@ -1266,26 +1237,68 @@ function getDateRange(startDate, endDate) {
                             var logid = loghour[i].logid;
 
                             // Calculate the total hours by accumulating all the 'total_hour' values for the current date
-                            var totalHour = loghour.filter(log => current.getTime() === log.start.getTime())
-                            .reduce((total, log) => {
-                                var [hours, minutes, seconds] = log.totalHour.split(':').map(Number);
-                                total += hours * 3600 + minutes * 60 + seconds;
-                                return total;
+                            var totalHourlog = loghour.filter(log => current.getTime() === log.start.getTime())
+                            .reduce((totallog, log) => {
+                                var [hourslog, minuteslog, secondslog] = log.totalHour.split(':').map(Number);
+                                totallog += hourslog * 3600 + minuteslog * 60 + secondslog;
+                                return totallog;
                             }, 0);
 
                             // Convert the total hours back to the 'hh:mm' format
-                            var hours = Math.floor(totalHour / 3600);
-                            var minutes = Math.floor((totalHour % 3600) / 60);
-                            totalHours1 = hours.toString().padStart(2, '0') + ':' + minutes.toString().padStart(2, '0');
-                            var [hours1, minutes] = totalHours1.split(":").map(Number);
+                            var hourslog = Math.floor(totalHourlog / 3600);
+                            var minuteslog = Math.floor((totalHourlog % 3600) / 60);
+                            totalHoursforlog = hourslog.toString().padStart(2, '0') + ':' + minuteslog.toString().padStart(2, '0');
+                            var [hourslog, minuteslog] = totalHoursforlog.split(":").map(Number);
 
-                            // console.log(totalHours1)
+                            // console.log(hours1+"test567")
                             // Exit the loop once the total hours for the current date are calculated
                             break;
                         }
                     }
 
+                    
+                    var totalHoursEvent = '00:00';
+                    var hasEvent = false;
+                    for (var i = 0; i < attendhour.length; i++) {
+                      if (current.getTime() === attendhour[i].start.getTime()) {
+                        hasEvent = true;
+                        var eventid = attendhour[i].eventid;
+                    
+                        var totalHourEvent = attendhour.filter(event => current.getTime() === event.start.getTime())
+                          .reduce((totalevent, event) => {
+                            var [hoursevent, minutesevent, secondsevent] = event.totalHourAttend.split(':').map(Number);
+                            totalevent += hoursevent * 3600 + minutesevent * 60 + secondsevent;
+                            return totalevent;
+                          }, 0);
+                    
+                        var hoursevent = Math.floor(totalHourEvent / 3600);
+                        var minutesevent = Math.floor((totalHourEvent % 3600) / 60);
+                        totalHoursEvent = hoursevent.toString().padStart(2, '0') + ':' + minutesevent.toString().padStart(2, '0');
+                        var [hoursevent, minutesevent] = totalHoursEvent.split(":").map(Number);
+                
+                        break;
+                      }
+                    }
+                    
 
+// Convert totalHoursforlog and totalHoursEvent to total seconds
+var [hourslog, minuteslog] = totalHoursforlog.split(":").map(Number);
+var totalSecondslog = hourslog * 3600 + minuteslog * 60;
+
+var [hoursevent, minutesevent] = totalHoursEvent.split(":").map(Number);
+var totalSecondsevent = hoursevent * 3600 + minutesevent * 60;
+
+// Add totalHoursforlog and totalHoursEvent in seconds
+var totalSeconds = totalSecondslog + totalSecondsevent;
+
+// Convert the total seconds back to the 'hh:mm' format
+var hours = Math.floor(totalSeconds / 3600);
+var minutes = Math.floor((totalSeconds % 3600) / 60);
+var totalHoursCombined = hours.toString().padStart(2, '0') + ':' + minutes.toString().padStart(2, '0');
+
+var totalHoursCombineds = parseInt(hours, 10).toString();
+
+// console.log(totalHoursCombineds);
 
                     var appliedDates = [];
                     var reasons = [];
@@ -1295,6 +1308,7 @@ function getDateRange(startDate, endDate) {
                     var months = [];
                     var days = [];
                     var files = [];
+                    var approvers = [];
                     for (let i = 0; i < data['appeals'].length; i++) {
                         var appeals = data['appeals'][i];
 
@@ -1305,6 +1319,7 @@ function getDateRange(startDate, endDate) {
                         var year = appeals['year'];
                         var month = appeals['month'];
                         var day = appeals['day'];
+                        var approver = appeals['approver'];
                         var file = appeals['file'];
 
 
@@ -1316,91 +1331,91 @@ function getDateRange(startDate, endDate) {
                         years.push(year);
                         months.push(month);
                         days.push(day);
+                        approvers.push(approver);
                         files.push(file);
                     }
                     
-                    var dailycounter = $('<button/>', {
-                        text: totalHours1,
+                    // var dailycounter = $('<button/>', {
+                    //     text: totalHoursforlog,
+                    //     class: 'btn btn-danger btn-xs',
+                    //     click: function () {
+                    //     }
+                    // });
+
+                    var dailycounter1 = $('<button/>', {
+                        text: totalHoursCombined,
                         class: 'btn btn-danger btn-xs',
                         click: function () {
                         }
                     });
-                    
-                    // console.log(duahari1);
+                    // console.log(hours1 + "test")
                    
                       if (
                         current.getTime() === currentDate.getTime() ||
                         (current.getTime() < currentDate.getTime() && current.getDay() !== 6 && current.getDay() !== 0)
                         
                     ) {
-                        $(info.el).append('&nbsp;').append(dailycounter);
-                        $(dailycounter).css({
+                        // $(info.el).append('&nbsp;').append(dailycounter);
+                        // $(dailycounter).css({
+                        //     position: 'relative',
+                        //     top: '-35px',
+                        //     'z-index': '999',
+                        // });
+
+                        $(info.el).append('&nbsp;').append(dailycounter1);
+                        $(dailycounter1).css({
                             position: 'relative',
                             top: '-35px',
                             'z-index': '999',
                         });
 
                       } 
-                      if (
-                        (current.getMonth() === currentMonth && current.getFullYear() === currentYear) &&
-                        ((current.getDate() === oneDayBefore.getDate() && current.getMonth() === oneDayBeforeMonth && current.getFullYear() === oneDayBeforeYear) ||
-                        (current.getDate() === twoDaysBefore.getDate() && current.getMonth() === twoDaysBeforeMonth && current.getFullYear() === twoDaysBeforeYear)) &&
+                    //   if(
+                         
+                    //     (current.getDate() === oneDayBefore.getDate() || current.getDate() === twoDayBefore.getDate()) &&
+                    //     !(current.getDay() === 6 || current.getDay() === 0) && !hasLog  && !hasEvent)
+                    //    {
+                    //     $(info.el).css('background-color', 'red');
+                    //   }
+
+                    if (
+                        (current.getDate() === oneDaysBefore .getDate() || current.getDate() === twoDaysBefore .getDate()) &&
                         !(current.getDay() === 6 || current.getDay() === 0) &&
-                        !hasLog
+                        !hasLog &&
+                        !hasEvent &&
+                        current.getMonth() === currentMonth &&
+                        current.getFullYear() === currentYear
                       ) {
                         $(info.el).css('background-color', '#FF8080');
-                      }
-
-                      else if(
-                         
-                        (current.getDate() === currentdate.getDate()) &&
-                        !(current.getDay() === 6 || current.getDay() === 0)  && (hasLog && hours1 < 9)
-                      ) {
-                        $(info.el).css('background-color', '#FF8080');
-                      }
-
-
-                      else if(
-                         
-                        (current.getDate() === currentdate.getDate()) &&
-                        !(current.getDay() === 6 || current.getDay() === 0)  && ( hasLog && hours1 >= 9)
-                      ) {
-                        $(info.el).css('background-color', '#80ff80');
                       }
 
                      else if(
                          
                         (current.getDate() === oneDayBefore.getDate() || current.getDate() === twoDayBefore.getDate()) &&
-                        !(current.getDay() === 6 || current.getDay() === 0)  && ( hasLog && hours1 >= 9)
+                        !(current.getDay() === 6 || current.getDay() === 0)  && ( (hasLog || hasEvent) && totalHoursCombineds >= 8)
                       ) {
                         $(info.el).css('background-color', '#80ff80');
                       }
                       else if(
                          
                         (current.getDate() === oneDayBefore.getDate() || current.getDate() === twoDayBefore.getDate()) &&
-                        !(current.getDay() === 6 || current.getDay() === 0)  && ( hasLog && hours1 < 9)
+                        !(current.getDay() === 6 || current.getDay() === 0)  && ( (hasLog || hasEvent) && totalHoursCombineds < 8)
                       ) {
                         $(info.el).css('background-color', '#FF8080');
                       }
-                      
-                      //xde log appeal, log kecik dari 9,exclude weekend
-                        if((current < duahari) && !appliedDates.includes(datedefaultformat) && (hasLog && hours1 < 9 || !hasLog)   && !(current.getDay() === 6 || current.getDay() === 0)) {
-                        if(current < duahari1) { 
-                            // console.log(current);
-                            $(info.el).css('background-color', '#FF8080');
-                            $(info.el).append('&nbsp;').append(appealaddb);
-                            $(appealaddb).css({
-                                position: 'relative',
-                                top: '-35px',
-                                'z-index': '999',   
-                                });
-                        }
-                        else {
-                            $(info.el).css('background-color', '#FF8080');
-                        }
-                       
 
-                        }else if((current < duahari) && appliedDates.includes(datedefaultformat) && (hasLog && hours1 < 9 || !hasLog)   && !(current.getDay() === 6 || current.getDay() === 0)) {
+                      //xde log appeal, log kecik dari 9,exclude weekend
+                       else if((current < duahari) && !appliedDates.includes(datedefaultformat) && totalHoursCombineds < 8 && !(current.getDay() === 6 || current.getDay() === 0)) {
+                        // console.log(hourslog);
+                        $(info.el).css('background-color', '#FF8080');
+                        $(info.el).append('&nbsp;').append(appealaddb);
+                        $(appealaddb).css({
+                            position: 'relative',
+                            top: '-35px',
+                            'z-index': '999',   
+                            });
+
+                        }else if((current < duahari) && appliedDates.includes(datedefaultformat) && ((hasLog || hasEvent) && totalHoursCombineds < 8 || (!hasLog || !hasEvent))   && !(current.getDay() === 6 || current.getDay() === 0)) {
 
                             $(info.el).css('background-color', '#FF8080');
                             $(info.el).append('&nbsp;').append(viewappealb);
@@ -1411,9 +1426,9 @@ function getDateRange(startDate, endDate) {
                                 });
                         
                         
-                         } else if((current < duahari) && hasLog && hours1 >= 9) {
+                         } else if((current < duahari) && (hasLog || hasEvent) && totalHoursCombineds >= 8) {
                             $(info.el).css('background-color', '#80ff80');
-                         } else if((current < duahari) && appliedDates.includes(datedefaultformat) && hours1 >= 9) {
+                         } else if((current < duahari) && appliedDates.includes(datedefaultformat) && totalHoursCombineds >= 8) {
                             $(info.el).css('background-color', '#80ff80');
                             $(info.el).append('&nbsp;').append(viewappealb);
                             $(viewappealb).css({
@@ -1422,7 +1437,7 @@ function getDateRange(startDate, endDate) {
                                 'z-index': '999',   
                                 });
                          }
-                         else if((current < duahari) && appliedDates.includes(datedefaultformat) && hours1 < 9) {
+                         else if((current < duahari) && appliedDates.includes(datedefaultformat) && totalHoursCombineds < 8) {
                             $(info.el).css('background-color', '#FF8080');
                             $(info.el).append('&nbsp;').append(viewappealb);
                             $(viewappealb).css({
@@ -1440,7 +1455,6 @@ function getDateRange(startDate, endDate) {
                         // $(info.el).css('background-color', 'white');
                       }
                     },
-
 
 
                     dateClick: function(info) {
@@ -1559,6 +1573,8 @@ function getDateRange(startDate, endDate) {
                         });
                     }
 
+                    
+
                     function getAttendance1(eventId) {
                         return $.ajax({
                             url: "/getAttendanceByEventId/" + eventId,
@@ -1618,9 +1634,9 @@ function getDateRange(startDate, endDate) {
                                     "display",
                                     "block"
                                 );
-                                $("#locationByProjectEditShow").css(
+                                $("#activityByProjectEditShow").css(
                                     "display",
-                                    "block"
+                                    "block" 
                                 );
                             } else if (
                                 data.type_of_log == "1" ||
@@ -1631,18 +1647,18 @@ function getDateRange(startDate, endDate) {
                                     "display",
                                     "block"
                                 );
-                                $("#activityByProjectEditHide1").css(
-                                    "display",
-                                    "none"
-                                );
+                                // $("#activityByProjectEditHide1").css(
+                                //     "display",
+                                //     "none"
+                                // );
                                 $("#myprojectedit").css("display", "none");
                             } else if (data.type_of_log == "2") {
                                 $("#officelogedit").css("display", "block");
                                 // var display11 = $("#activityByProjectEditHide").css("display");
-                                $("#activityByProjectEditHide1").css(
-                                    "display",
-                                    "block"
-                                );
+                                // $("#activityByProjectEditHide1").css(
+                                //     "display",
+                                //     "block"
+                                // );
                                 $("#projectLocationOfficeEdit").css(
                                     "display",
                                     "block"
@@ -1673,14 +1689,18 @@ function getDateRange(startDate, endDate) {
                                     );
                                     $("#officelogedit").css("display", "block");
                                     $("#myprojectedit").css("display", "none");
-                                    $("#activityByProjectEditHide1").css(
-                                        "display",
-                                        "none"
-                                    );
+                                    // $("#activityByProjectEditHide1").css(
+                                    //     "display",
+                                    //     "none"
+                                    // );
                                 }
                             } else {
                                 $("#myprojectedit").css("display", "none");
                                 $("#activityByProjectEditHide").css(
+                                    "display",
+                                    "none"
+                                );
+                                $("#activityByProjectEditHide1").css(
                                     "display",
                                     "none"
                                 );
@@ -1698,9 +1718,10 @@ function getDateRange(startDate, endDate) {
                             // if (data.type_of_log == 2 && data.office_log == 1) {
 
                             // }
-
-                            $("#locationByProjectEditShow").hide();
+                            
                             $("#activityByProjectEditShow").hide();
+                            $("#locationByProjectEditShow").hide();
+                            // $("#activityByProjectEditShow").hide();
                             $("#typeoflogedit").val(data.type_of_log);
                             $("#officelog2edit").val(data.office_log);
                             $("#dateaddlogedit").val(data.date);
@@ -1713,12 +1734,12 @@ function getDateRange(startDate, endDate) {
                             // projectlocsearchedit
                             $("#activity_name_edit2").val(data.activity_name);
                             $("#activity_name_edit1").val(data.activity_name);
-                            $("#starttimeedit").val(data.start_time);
+                           
 
-                            $("#projectLocationOfficeEdit").picker(
-                                "set",
-                                data.project_location
-                            );
+                            // $("#projectLocationOfficeEdit").picker(
+                            //     "set",
+                            //     data.project_location
+                            // );
                             // $('#projectlocsearchedit').picker('set', data.project_location);
                             // $('#projectlocsearchedit').picker('set', data.project_location);
                             // $("#projectlocsearchedit").val(data.project_location);
@@ -1726,11 +1747,31 @@ function getDateRange(startDate, endDate) {
                                 "checked",
                                 data.exit_project
                             );
-                            $("#endtimeedit").val(data.end_time);
+                            
                             $("#desc").val(data.desc);
                             $("#total_hour_edit").val(data.total_hour);
                             $("#id").val(data.id);
                             $("#lunchBreakedit").val(data.lunch_break);
+
+                            $("#starttimeedit").val(data.start_time);
+
+                            $("#starttimeedit").mdtimepicker({
+                                showMeridian: true,
+                                timeFormat: 'hh:mm:ss.000',
+                                is24hour: true,
+                                defaultTime: data.start_time
+                                });
+
+                            $("#endtimeedit").val(data.end_time);
+
+                                $("#endtimeedit").mdtimepicker({
+                                    showMeridian: false,
+                                    showMeridian: true,
+                                    timeFormat: 'hh:mm:ss.000',
+                                    is24hour: true,
+                                    defaultTime: data.end_time
+                                });
+
                             
                         });
 
@@ -1829,7 +1870,26 @@ function getDateRange(startDate, endDate) {
                             $("#starteventdateedit").val(data.start_date);
                             $("#endeventdateedit").val(data.end_date);
                             $("#starteventtimeedit").val(data.start_time);
+
+                            //sini
+
+                            $("#starteventtimeedit").mdtimepicker({
+                                showMeridian: true,
+                                timeFormat: 'hh:mm:ss.000',
+                                is24hour: true,
+                                defaultTime: data.start_time
+                            });
+
                             $("#endeventtimeedit").val(data.end_time);
+
+                            //sini1
+                            $("#endeventtimeedit").mdtimepicker({
+                                showMeridian: true,
+                                timeFormat: 'hh:mm:ss.000',
+                                is24hour: true,
+                                defaultTime: data.end_time
+                            });
+
                             $("#duration").val(data.duration);
                             $("#addneweventprojectlocsearchedit").picker(
                                 "set",
@@ -2402,7 +2462,8 @@ function getDateRange(startDate, endDate) {
                             //     $("#addneweventparticipantedit").picker('set', participant);
 
                             // }
-
+                            $("#eventcreator").val(data.employeeName);
+                            
                             $("#descE").val(data.desc);
                             $("#addeventreminderedit").val(data.reminder);
                             if (data.file_upload) {
@@ -2413,6 +2474,7 @@ function getDateRange(startDate, endDate) {
                                 );
                             }
                             $("#idEvent").val(data.id);
+
                         });
 
                         $("#editeventmodal").modal("show");
@@ -2506,21 +2568,21 @@ function getDateRange(startDate, endDate) {
         $("#dateaddlog").datepicker("setEndDate", new Date());
     });
 
-    // $("#starteventdate")
-    //     .datepicker({
-    //         format: "yyyy/mm/dd",
-    //         todayHighlight: true,
-    //         autoclose: true,
-    //     })
-    //     .datepicker("setDate", new Date());
+    $("#starteventdate")
+        .datepicker({
+            format: "yyyy/mm/dd",
+            todayHighlight: true,
+            autoclose: true,
+        })
+        .datepicker("setDate", new Date());
 
-    // $("#endeventdate")
-    //     .datepicker({
-    //         format: "yyyy/mm/dd",
-    //         todayHighlight: true,
-    //         autoclose: true,
-    //     })
-    //     .datepicker("setDate", new Date());
+    $("#endeventdate")
+        .datepicker({
+            format: "yyyy/mm/dd",
+            todayHighlight: true,
+            autoclose: true,
+        })
+        .datepicker("setDate", new Date());
 
     $("#starteventdate")
     .datepicker({
@@ -2553,40 +2615,39 @@ $("#endeventdate").datepicker({
     //     placeholder_text_multiple: 'Select participants'
     // });
     $("#addneweventselectproject").picker({ search: true });
+
     $(function () {
+        var now = new Date();
+        var hours = now.getHours().toString().padStart(2, '0');
+        var minutes = now.getMinutes().toString().padStart(2, '0');
+    
+        var currentTime = hours + ":" + minutes;
+    
+        $("#starttime").val(currentTime); // Set the value of the input field directly
+    
         $("#starttime").mdtimepicker({
             showMeridian: true,
+            timeFormat: 'hh:mm:ss.000',
+            is24hour: true
         });
     
-        var now = new Date();
-        var hours = now.getHours();
-        var meridian = hours >= 12 ? "PM" : "AM";
-        hours = hours % 12;
-        hours = hours ? hours : 12; // convert 0 to 12
-        var minutes = now.getMinutes();
+        // Calculate end time
+        var start = new Date();
+        start.setHours(parseInt(hours));
+        start.setMinutes(parseInt(minutes));
+        start.setMinutes(start.getMinutes() + 60); // Add 60 minutes (1 hour)
+        var endHours = start.getHours().toString().padStart(2, '0');
+        var endMinutes = start.getMinutes().toString().padStart(2, '0');
+        var endTime = endHours + ":" + endMinutes;
     
-        if (minutes < 10) {
-            minutes = "0" + minutes;
-        }
-    
-        $("#starttime").val(hours + ":" + minutes + " " + meridian);
+        $("#endtime").val(endTime); // Set the value of the end time input field directly
     
         $("#endtime").mdtimepicker({
             showMeridian: true,
+            timeFormat: 'hh:mm:ss.000',
+            is24hour: true
         });
     
-        var startMoment = moment($("#starttime").val(), "hh:mm A");
-        var endMoment = startMoment.clone().add(1, 'hour');
-    
-        var hours = endMoment.hours();
-        var meridian = hours >= 12 ? "PM" : "AM";
-        hours = hours % 12;
-        hours = hours ? hours : 12; // convert 0 to 12
-        var minutes = endMoment.minutes();
-        if (minutes < 10) {
-            minutes = "0" + minutes;
-        }
-        $("#endtime").val(hours + ":" + minutes + " " + meridian);
     
         $("#daystart,#dayend")
             .datepicker({
@@ -2600,27 +2661,21 @@ $("#endeventdate").datepicker({
             })
             .datepicker("setDate", "now");
     
-        $("#starteventtime,#endeventtime").mdtimepicker({});
+        $("#starteventtime,#endeventtime").mdtimepicker({
+            showMeridian: true,
+            timeFormat: 'hh:mm:ss.000',
+            is24hour: true
+        });
     
         $("#starttime").change(function () {
-            var startMoment = moment($("#starttime").val(), "hh:mm A");
-            var endMoment = startMoment.clone().add(1, 'hour');
-    
-            var hours = endMoment.hours();
-            var meridian = hours >= 12 ? "PM" : "AM";
-            hours = hours % 12;
-            hours = hours ? hours : 12; // convert 0 to 12
-            var minutes = endMoment.minutes();
-            if (minutes < 10) {
-                minutes = "0" + minutes;
-            }
-            $("#endtime").val(hours + ":" + minutes + " " + meridian);
+            // Reset the end time value to an empty string
+            $("#endtime").val("");
         });
     
         $("#endtime").change(function () {
             var startTime = moment($("#starttime").val(), "hh:mm A");
             var endTime = moment($("#endtime").val(), "hh:mm A");
-        
+    
             if (endTime.isBefore(startTime)) {
                 Swal.fire({
                     icon: "error",
@@ -2630,13 +2685,12 @@ $("#endeventdate").datepicker({
                     $("#endtime").val("");
                     $("#logduration").val("");
                     $("#endtime").attr("placeholder", "End Time"); // Set the placeholder for the end time field
-                    $("#endtime").mdtimepicker("toggle");
-                     // Close the time picker
+                    $("#endtime").mdtimepicker("toggle"); // Close the time picker
                 });
             }
         });
-        
     });
+    
     
 
     // $(document).on('change', "#typeoflog", function() {
@@ -2697,7 +2751,7 @@ $("#endeventdate").datepicker({
 
             // $("#activity_locationadd").show();
         } else {
-            $("#activityByProjectEditHide1").show();
+            // $("#activityByProjectEditHide1").show();
             $("#myproject").hide();
             $("#listproject").hide();
             // $("#activity_locationadd").hide();
@@ -2882,29 +2936,28 @@ $("#endeventdate").datepicker({
     $("#starteventdateedit").datepicker({
         todayHighlight: true,
         autoclose: true,
+        format: "yyyy-mm-dd",
+    }).on("changeDate", function (e) {
+        // Set the end datepicker's date to the selected start date
+        $("#endeventdateedit").datepicker("update", e.date);
+
+        // Set the minimum date for the end datepicker to the selected start date
+        $("#endeventdateedit").datepicker("setStartDate", e.date);
     });
     $("#endeventdateedit").datepicker({
         todayHighlight: true,
         autoclose: true,
+        format: "yyyy-mm-dd",
     });
     // $('#projectlocsearchedit').picker({ search: true });
     $("#addneweventprojectlocsearchedit").picker({ search: true });
     $("#addneweventparticipantedit").picker({ search: true });
     $("#addneweventselectprojectedit").picker({ search: true });
 
-    $("#starttimeedit").mdtimepicker({
-        showMeridian: false,
-    });
-    $("#endtimeedit").mdtimepicker({
-        showMeridian: false,
-    });
+    
 
-    $("#starteventtimeedit").mdtimepicker({
-        showMeridian: false,
-    });
-    $("#endeventtimeedit").mdtimepicker({
-        showMeridian: false,
-    });
+   
+    
 
     $(document).on("change", "#typeoflogedit", function () {
         if ($(this).val() == "2") {
@@ -2923,16 +2976,16 @@ $("#endeventdate").datepicker({
             // $("#typeoflogedit").show();
             // $("#activity_location_edit").show();
             // $("#activityByProjectEditHide").hide();
-            $("#activityByProjectEditHide").show();
-            $("#locationByProjectEditHide").show();
             $("#activityByProjectEditHide1").show();
+            $("#locationByProjectEditHide").show();
             $("#locationByProjectEditShow").show();
+            $("#activityByProjectEditShow").show();
         } else {
             $("#myprojectedit").hide();
             $("#listprojectedit").hide();
             // $("#typeoflogedit").hide();
             // $("#activity_location_edit").hide();
-            $("#activityByProjectEditHide").show();
+            $("#activityByProjectEditHide1").hide();
             $("#locationByProjectEditHide").hide();
         }
     });
@@ -3112,40 +3165,40 @@ $("#endeventdate").datepicker({
         });
     });
 
-   $("#logduration,#daystart,#dayend,#starttime,#endtime,#lunchBreak").change(function () {
-    var startdt = new Date($("#daystart").val() + " " + $("#starttime").val());
-    var enddt = new Date($("#dayend").val() + " " + $("#endtime").val());
-    var diff = enddt - startdt;
-    var days = Math.floor(diff / (1000 * 60 * 60 * 24));
-    diff -= days * (1000 * 60 * 60 * 24);
-    var hours = Math.floor(diff / (1000 * 60 * 60));
-    diff -= hours * (1000 * 60 * 60);
-    var mins = Math.floor(diff / (1000 * 60));
-    diff -= mins * (1000 * 60);
-
-    // $("#logduration").val(
-    //     days + " days : " + hours + " hours : " + mins + " minutes "
-    // );
-
-
-    if ($("#lunchBreak").val() === "1") {
-        hours -= 1;
-        // hours = hours - 1
-    }
-
-    $("#logduration").val(
-        // days + " days : " + hours + " hours : " + mins + " minutes "
-        // days +  hours + mins 
-        hours + ":" + mins + ":" + "0"
-    );
-
-    // Disable lunch break if total hours are less than 1
-    if (hours < 1) {
-        $("#lunchBreak").prop("disabled", true);
-    } else {
-        $("#lunchBreak").prop("disabled", false);
-    }
-});
+    $("#logduration,#daystart,#dayend,#starttime,#endtime,#lunchBreak").change(function () {
+        var startdt = new Date($("#daystart").val() + " " + $("#starttime").val());
+        var enddt = new Date($("#dayend").val() + " " + $("#endtime").val());
+        var diff = enddt - startdt;
+        var days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        diff -= days * (1000 * 60 * 60 * 24);
+        var hours = Math.floor(diff / (1000 * 60 * 60));
+        diff -= hours * (1000 * 60 * 60);
+        var mins = Math.floor(diff / (1000 * 60));
+        diff -= mins * (1000 * 60);
+    
+        // $("#logduration").val(
+        //     days + " days : " + hours + " hours : " + mins + " minutes "
+        // );
+    
+    
+        if ($("#lunchBreak").val() === "1") {
+            hours -= 1;
+            // hours = hours - 1
+        }
+    
+        $("#logduration").val(
+            // days + " days : " + hours + " hours : " + mins + " minutes "
+            // days +  hours + mins 
+            hours + ":" + mins + ":" + "0"
+        );
+    
+        // Disable lunch break if total hours are less than 1
+        if (hours < 1) {
+            $("#lunchBreak").prop("disabled", true);
+        } else {
+            $("#lunchBreak").prop("disabled", false);
+        }
+    });
 
 $(document).ready(function () {
     // Trigger change event on page load to calculate and populate the total hours
@@ -3219,7 +3272,7 @@ $("#total_hour_edit,#daystartedit,#dayendedit,#starttimeedit,#endtimeedit,#lunch
             // $('#endeventtimeedit').val("11:59 PM");
         }
     });
-});
+});  //end sini
 
 $(
     "#duration,#starteventdate,#starteventtime,#endeventdate,#endeventtime"
@@ -3249,7 +3302,8 @@ function calculateDuration() {
     diff -= mins * (1000 * 60);
 
     $("#duration").val(
-        days + " days : " + hours + " hours : " + mins + " minutes "
+        // days + " days : " + hours + " hours : " + mins + " minutes "
+        hours + ":" + mins + ":0"
     );
 }
 

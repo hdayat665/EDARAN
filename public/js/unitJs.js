@@ -19,6 +19,7 @@ $(document).ready(function () {
     $(document).on("click", "#addButton", function () {
         $("#addModal").modal("show");
     });
+    
 
     $(document).on("click", "#editButton", function () {
         var id = $(this).data("id");

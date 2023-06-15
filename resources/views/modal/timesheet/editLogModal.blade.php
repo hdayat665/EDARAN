@@ -37,7 +37,7 @@
                         </div>
                         <div class="col-sm-6" id="myprojectedit" style="display:none">
                             <label for="Office-Log" class="form-label">My Project*</label>
-                            <select class="form-select" id="project_id_edit" name="project_id" aria-label="Default select example" style="pointer-events:none;background:#e9ecef;">
+                            <select class="form-select" id="project_id_edit" name="project_id" aria-label="Default select example" style="">
                                 <option class="form-label" value="">PLEASE CHOOSE</option>
                                 <?php $projects = project_memberaddl($user_id) ?>
                                 @foreach ($projects as $project)
@@ -75,7 +75,7 @@
                         </div>
                         <div class="col-sm-6" id="activityByProjectEditHide1" style="display: none">
                             <label for="issuing-country" class="form-label">Activity Name*</label>
-                            <select class="form-select" id="activity_name_edit2" name="activity_name">
+                            <select class="form-select" id="activity_name_edit2" name="activity_name" style="pointer-events:none;background:#e9ecef;">
                                 <option class="form-label" value="">PLEASE CHOOSE </option>
                                 <?php $activitys = activityName1($department_id) ?> 
                                 @foreach ($activitys as $activity)
@@ -84,16 +84,16 @@
                             </select>
                             
                         </div>
-                        {{-- <div class="col-sm-6" id="activityByProjectEditShow">
+                        <div class="col-sm-6" id="activityByProjectEditShow" style="display: none">
                             <label for="issuing-country" class="form-label">Activity Name*</label>
-                            <select class="form-select" id="activityOfficeEdit" name="activity_office" >
+                            <select class="form-select" id="activityOfficeEdit" name="activity_name" >
 
                             </select>
-                        </div> --}}
+                        </div>
 
                         <div class="col-sm-6" id="locationByProjectEditHide" style="display: none">
                             <label for="issuing-country" class="form-label">Project Location*</label>
-                            <select class="form-select" id="projectlocsearchedit" name="project_location" aria-label="Default select example">
+                            <select class="form-select" id="projectlocsearchedit" name="project_location" aria-label="Default select example" style="pointer-events:none;background:#e9ecef;">
                                 <option class="form-label" value="">PLEASE CHOOSE</option>
                                 <option class="" value="OFFICE">OFFICE</option>
                                 <?php $projectLocations = projectLocation() ?>
@@ -105,7 +105,7 @@
                         </div>
                         <div class="col-sm-6" id="locationByProjectEditShow" style="display: none">
                             <label for="issuing-country" class="form-label">Project Location*</label>
-                            <select class="selectpicker form-select" id="projectLocationOfficeEdit" name="project_location_office" aria-label="Default select example">
+                            <select class="selectpicker form-select" id="projectLocationOfficeEdit" name="project_location" aria-label="Default select example">
 
                             </select>
                         </div>

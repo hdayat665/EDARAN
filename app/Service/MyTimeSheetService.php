@@ -110,25 +110,28 @@ class MyTimeSheetService
     }
 
     $existingLogs = TimesheetLog::where('user_id', $user->id)
-        ->where('date', $input['date'])
-        ->where(function ($query) use ($startTime, $endTime) {
-            $query->where(function ($query) use ($startTime, $endTime) {
-                $query->whereRaw("STR_TO_DATE(start_time, '%h:%i %p') >= ? AND STR_TO_DATE(start_time, '%h:%i %p') < ?", [$startTime, $endTime]);
-            })->orWhere(function ($query) use ($startTime, $endTime) {
-                $query->whereRaw("STR_TO_DATE(end_time, '%h:%i %p') > ? AND STR_TO_DATE(end_time, '%h:%i %p') <= ?", [$startTime, $endTime]);
-            })->orWhere(function ($query) use ($startTime, $endTime) {
-                $query->whereRaw("STR_TO_DATE(start_time, '%h:%i %p') < ? AND STR_TO_DATE(end_time, '%h:%i %p') > ?", [$startTime, $endTime]);
-            });
-        })
-        ->get();
+    ->where('date', $input['date'])
+    ->where(function ($query) use ($startTime, $endTime) {
+        $query->where(function ($query) use ($startTime, $endTime) {
+            $query->whereRaw("STR_TO_DATE(start_time, '%H:%i') <= ? AND STR_TO_DATE(end_time, '%H:%i') > ?", [$endTime, $startTime]);
+        })->orWhere(function ($query) use ($startTime, $endTime) {
+            $query->whereRaw("STR_TO_DATE(start_time, '%H:%i') >= ? AND STR_TO_DATE(start_time, '%H:%i') < ?", [$startTime, $endTime]);
+        })->orWhere(function ($query) use ($startTime, $endTime) {
+            $query->whereRaw("STR_TO_DATE(end_time, '%H:%i') > ? AND STR_TO_DATE(end_time, '%H:%i') <= ?", [$startTime, $endTime]);
+        });
+    })
+    ->get();
 
-    if ($existingLogs->isNotEmpty()) {
-        $data['status'] = config('app.response.error.status');
-        $data['type'] = config('app.response.error.type');
-        $data['title'] = config('app.response.error.title');
-        $data['msg'] = 'Unable to add log due to overlapped time';
-        return $data;
-    }
+
+
+if ($existingLogs->isNotEmpty()) {
+    $data['status'] = config('app.response.error.status');
+    $data['type'] = config('app.response.error.type');
+    $data['title'] = config('app.response.error.title');
+    $data['msg'] = 'Unable to add log due to overlapped time';
+    return $data;
+}
+
 
     // $dayOfWeek = date('N', strtotime($input['date']));
 
@@ -202,7 +205,7 @@ class MyTimeSheetService
 
         // Printing the result
         $input['total_hour'] = "$h:$m:$s";
-        
+
         if ($input['lunch_break'] == 1) {
             $h -= 1;
             $input['total_hour'] = "$h:$m:$s";
@@ -212,15 +215,16 @@ class MyTimeSheetService
     ->where('date', $input['date'])
     ->where(function ($query) use ($startTime, $endTime, $id) {
         $query->where(function ($query) use ($startTime, $endTime) {
-            $query->whereRaw("STR_TO_DATE(start_time, '%h:%i %p') >= ? AND STR_TO_DATE(start_time, '%h:%i %p') < ?", [$startTime, $endTime]);
+            $query->whereRaw("STR_TO_DATE(start_time, '%H:%i') <= ? AND STR_TO_DATE(end_time, '%H:%i') > ?", [$endTime, $startTime]);
         })->orWhere(function ($query) use ($startTime, $endTime) {
-            $query->whereRaw("STR_TO_DATE(end_time, '%h:%i %p') > ? AND STR_TO_DATE(end_time, '%h:%i %p') <= ?", [$startTime, $endTime]);
+            $query->whereRaw("STR_TO_DATE(start_time, '%H:%i') >= ? AND STR_TO_DATE(start_time, '%H:%i') < ?", [$startTime, $endTime]);
         })->orWhere(function ($query) use ($startTime, $endTime) {
-            $query->whereRaw("STR_TO_DATE(start_time, '%h:%i %p') < ? AND STR_TO_DATE(end_time, '%h:%i %p') > ?", [$startTime, $endTime]);
+            $query->whereRaw("STR_TO_DATE(end_time, '%H:%i') > ? AND STR_TO_DATE(end_time, '%H:%i') <= ?", [$startTime, $endTime]);
         });
     })
     ->where('id', '<>', $id)
     ->get();
+
 
 
 if ($existingLogs->isNotEmpty()) {
@@ -284,49 +288,42 @@ if ($existingLogs->isNotEmpty()) {
     {
         $input = $r->input();
         $user = Auth::user();
-
+    
         $input['user_id'] = $user->id;
         $input['tenant_id'] = $user->tenant_id;
-        if (isset($input['type_recurring'])) {
-            $input['type_recurring'] = implode(',', $input['type_recurring']);
-        }
-        if (isset($input['set_reccuring'])) {
-            $input['set_reccuring'] = implode(',', $input['set_reccuring']);
-        }
-        if (isset($input['participant'])) {
-            $input['participant'] = implode(',', $input['participant']);
-        }
-        // if (isset($input['location_by_project'])) {
-        //     $input['location'] = $input['location_by_project'];
-        //     unset($input['location_by_project']);
-        // }
+    
+        $participants = isset($input['participant']) ? $input['participant'] : [];
+        $participants[] = $user->id; // Add the logged-in user to the participants array
 
+        $participants = array_unique($participants);
+    
+        $input['participant'] = implode(',', $participants);
+    
         $input['start_date'] = date_format(date_create($input['start_date']), 'Y/m/d');
         $input['end_date'] = date_format(date_create($input['end_date']), 'Y/m/d');
-
-
+    
         $start_time = strtotime($input['start_time']);
         $end_time = strtotime($input['end_time']);
         $totaltime = $end_time - $start_time;
-
+    
         $h = intval($totaltime / 3600);
-
+    
         $totaltime = $totaltime - ($h * 3600);
-
+    
         // Minutes is obtained by dividing
         // remaining total time with 60
         $m = intval($totaltime / 60);
-
+    
         // Remaining value is seconds
         $s = $totaltime - ($m * 60);
-
+    
         // Printing the result
         // $input['total_hour'] = "$h:$m:$s";
-
+    
         if ($_FILES['file_upload']['name']) {
             $file_upload = upload($r->file('file_upload'));
             $input['file_upload'] = $file_upload['filename'];
-
+    
             if (!$input['file_upload']) {
                 unset($input['file_upload']);
             }
@@ -334,14 +331,14 @@ if ($existingLogs->isNotEmpty()) {
         // $input['total_hour'] = $input['start_time'] - $input['end_time'];
         // pr($input);
         TimesheetEvent::create($input);
-
+    
         $eventDetails = TimesheetEvent::where('tenant_id', $user->tenant_id)->orderBy('created_at', 'DESC')->first();
         $departmentName = getDepartmentName($user->id);
         $employeeName = getEmployeeName($user->id);
         $venue = projectLocationById($eventDetails->location);
-
+    
         $participants = explode(',', $eventDetails->participant);
-
+    
         $participantDetail = Employee::whereIn('user_id', $participants)->get();
 
         foreach ($participantDetail as $participant) {
@@ -556,17 +553,26 @@ if ($existingLogs->isNotEmpty()) {
     {
         $event = TimesheetEvent::find($id);
 
+        $event = $event->leftJoin('employment as b', 'timesheet_event.user_id', '=', 'b.user_id')
+                    ->select('timesheet_event.*', 'b.employeeName')
+                    ->find($id);
+        // dd($event);
+
         $participantIds = explode(',', $event->participant);
 
         $employees = DB::table('employment')
                         ->whereIn('user_id', $participantIds)
                         ->get();
+       
 
         $employeeNames = $employees->pluck('employeeName')->toArray();
+        
 
         $event->participantNames = implode(',', $employeeNames);
+        //  dd($event);
 
         return $event;
+
     }
 
 
@@ -623,16 +629,71 @@ if ($existingLogs->isNotEmpty()) {
         return $data;
     }
 
+    // public function getEvents()
+    // {
+    //     $cond[1] = ['tenant_id', Auth::user()->tenant_id];
+    //     $cond[2] = ['user_id', Auth::user()->id];
+    //     // $data = TimesheetEvent::where($cond)
+    //         ->orWhere([['participant', 'like', '%' . Auth::user()->id . '%']])
+    //         ->get();
+
+    //     return $data;
+    // }
+
     public function getEvents()
     {
-        $cond[1] = ['tenant_id', Auth::user()->tenant_id];
-        $cond[2] = ['user_id', Auth::user()->id];
-        $data = TimesheetEvent::where($cond)
-            ->orWhere([['participant', 'like', '%' . Auth::user()->id . '%']])
+        $userId = Auth::user()->id;
+        $data = DB::table('timesheet_event')
+            ->join('attendance_event', 'timesheet_event.id', '=', 'attendance_event.event_id')
+            ->select('timesheet_event.*')
+            ->whereRaw("FIND_IN_SET(timesheet_event.id, attendance_event.event_id)") // Check if the event_id is present in the attendance_event table
+            ->where('attendance_event.user_id', '=', $userId) // Check if the user has attended
+            // ->where('attendance_event.status', '=', 'attend') // Check the status of the attendance event
+            ->where('attendance_event.status', '!=', 'attend')
             ->get();
-
+    
         return $data;
     }
+
+    public function getEventattend()
+    {
+        $userId = Auth::user()->id;
+        $data = DB::table('timesheet_event')
+            ->join('attendance_event', 'timesheet_event.id', '=', 'attendance_event.event_id')
+            ->select('timesheet_event.*')
+            ->whereRaw("FIND_IN_SET(timesheet_event.id, attendance_event.event_id)") // Check if the event_id is present in the attendance_event table
+            ->where('attendance_event.user_id', '=', $userId) // Check if the user has attended
+            ->where('attendance_event.status', '=', 'attend') // Check the status of the attendance event
+            // ->where('attendance_event.status', '!=', 'attend')
+            ->get();
+    
+        return $data;
+    }
+    
+    
+    
+    
+
+    
+
+    // public function getEventattend()
+    // {
+    //     $cond[1] = ['a.tenant_id', Auth::user()->tenant_id];
+    //     $cond[2] = ['a.user_id', Auth::user()->id];
+    //     $data = DB::table('timesheet_event as a')
+    //         ->leftJoin('attendance_event as b', 'a.id', '=', 'b.event_id')
+    //         ->select('a.*')
+    //         ->where(function ($query) use ($cond) {
+    //             $query->where($cond)
+    //                 ->orWhere('a.participant', 'like', '%' . Auth::user()->id . '%')
+    //                 ->where('b.status', 'attend');
+    //         })
+    //         ->distinct()
+    //         ->get();
+    
+    //     return $data;
+    // }
+    
 
     public function getLocationByProjectId($project_id = '')
     {
@@ -1278,6 +1339,15 @@ if ($existingLogs->isNotEmpty()) {
         $user = Auth::user();
         // dd($user);
 
+        $employment = Employee::where('user_id', $user->id)->first();
+
+        if ($employment) {
+            $tsapprover = $employment->tsapprover;
+            $input['approver'] = $tsapprover;
+        } else {
+            // Handle the case when employment data for the user is not found
+        }
+
         $logids = TimesheetAppeals::pluck('logid')->toArray();
         if (empty($logids)) {
             $nextLogid = 'LA-0001';
@@ -1462,6 +1532,36 @@ if ($existingLogs->isNotEmpty()) {
 
     //     return $data;
     // }
+
+    public function getemployeeNamecreator($id)
+    {
+        $timesheetApproval = TimesheetApproval::find($id);
+        if ($timesheetApproval) {
+            return $timesheetApproval->employee_name;
+        }
+        return '';
+    }
+
+    public function getApproverAppeal()
+    {
+        $user = Auth::user();
+        $user_id = $user->id;
+    
+        $employment = DB::table('employment')
+            ->select('tsapprover')
+            ->where('user_id', $user_id)
+            ->get();
+    
+        foreach ($employment as $emp) {
+            if (!empty($emp->tsapprover)) {
+                return $emp->tsapprover; // Return the first non-empty tsapprover value and stop the loop
+            }
+        }
+    
+        return null; // Return null if no result is found
+    }
+    
+    
 
 
 

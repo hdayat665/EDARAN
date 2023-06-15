@@ -60,6 +60,16 @@
                         </div>
                         <div class="col-md-2"></div>
                     </div>
+                    <div class="row p-2" style="display:none;"> 
+                        <div class="col-md-2"></div>
+                        <div class="col-md-4">
+                            <label class="form-label col-md-6">Log Appeal Approver</label>
+                        </div>
+                        <div class="col-md-4">
+                            <input type="text"  class="form-control" id="approverview" name="" readonly/>
+                        </div>
+                        <div class="col-md-2"></div>
+                    </div>
                     <div class="row p-2"> 
                         <div class="col-md-2"></div>
                         <div class="col-md-4">
