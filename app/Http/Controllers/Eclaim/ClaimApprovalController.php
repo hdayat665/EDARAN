@@ -196,7 +196,7 @@ class ClaimApprovalController extends Controller
         $data['config'] = $mcs->getApprovalConfig(3, 'monthly');
         $data['check'] = $result['check'];
         $data['claims'] = $result['general'];
-        
+
         $view = 'adminChecker';
 
         return view('pages.eclaim.claimApproval.admin.checker.' . $view, $data);
@@ -220,7 +220,7 @@ class ClaimApprovalController extends Controller
         $mcs = new ClaimApprovalService;
         $data['config'] = $mcs->getApprovalConfig(4, 'monthly');
         $data['claims'] = $mcs->adminRecView();
-        
+
         $view = 'adminRec';
 
         return view('pages.eclaim.claimApproval.admin.recommender.' . $view, $data);
