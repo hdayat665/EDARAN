@@ -30,26 +30,25 @@ class DashboardService
         return $data;
     }
 
-
-
     public function eventView()
-    {
-        // $data['events'] = TimesheetEvent::where('tenant_id', Auth::user()->tenant_id)
-        //             ->leftJoin('employment as b', 'a.user_id', '=', 'b.user_id')
-        //             ->select('a.*', 'b.employeeName')
-        //             ->orderBy('start_date', 'asc')->get();
-
-
-
-        $data = DB::table('timesheet_event as a')
-            ->leftJoin('employment as b', 'a.user_id', '=', 'b.user_id')
-            ->select('a.*', 'b.employeeName')
-            ->orderBy('a.start_date', 'asc')
-            ->get();
-
-        // pr($data);
-        return $data;
+{
+    if (!Auth::check()) {
+        // Participant is not logged in, return empty array or redirect to login page
+        return [];
     }
+
+    $participantId = Auth::user()->id;
+
+    $data = DB::table('timesheet_event as a')
+        ->leftJoin('employment as b', 'a.user_id', '=', 'b.user_id')
+        ->select('a.*', 'b.employeeName')
+        ->whereRaw("FIND_IN_SET($participantId, a.participant)")
+        ->orderBy('a.start_date', 'asc')
+        ->get();
+
+    return $data;
+}
+
 
     public function myProject()
     {

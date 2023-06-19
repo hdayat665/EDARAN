@@ -17,7 +17,7 @@
         </thead>
         <tbody>
             @foreach ($cas as $ca)
-                @if ($ca->approver == 'recommend' && ($ca->f1 == '' || $ca->f1 == 'check' || $ca->f2 == 'check' || $ca->f3 == 'check') && $ca->f_status != 'recommend')
+                @if ($ca->approver == 'recommend' && ($ca->f1 == '' || $ca->f1 == 'check' || $ca->f2 == 'check' || $ca->f3 == 'check') && $ca->f_status == null)
                     <tr>
                         <td>
                             <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle"><i class="fa fa-cogs"></i> Action <i class="fa fa-caret-down"></i></a>
@@ -38,7 +38,7 @@
                         <td>{{ getCashAdvanceType($ca->type) ?? 'N/A' }}</td>
                         <td>{{ date('Y-m-d', strtotime($ca->created_at)) ?? 'N/A' }}</td>
                         <td>{{ $ca->travel_date ?? '-' }}</td>
-                        <td>MYR {{  $ca->mode_of_transport->max_total ?? $ca->amount }}</td>
+                        <td>MYR {{ $ca->mode_of_transport->max_total ?? $ca->amount }}</td>
                         <td>{{ $ca->status ?? '-' }}</td>
                         <td>{{ date('Y-m-d', strtotime($ca->updated_at)) ?? 'N/A' }}</td>
                         <!-- <td>{{ '-' }}</td> -->

@@ -47,12 +47,12 @@ $('#timesheetapproval').DataTable({
     $('#filterform').show();
 }
 $("#reset").on("click", function () {
-    $("#employeesearch").attr("placeholder", "Please Choose").trigger("change");
-    $("#yearsearch").attr("placeholder", "Please Choose").trigger("change");
-    $("#monthsearch").attr("placeholder", "Please Choose").trigger("change");
-    $("#designationsearch").attr("placeholder", "Please Choose").trigger("change");
-    $("#departmentsearch").attr("placeholder", "Please Choose").trigger("change");
-    $("#statussearch").attr("placeholder", "Please Choose").trigger("change");
+    $("#employeesearch").val("").trigger("change");
+    $("#yearsearch").val("").trigger("change");
+    $("#monthsearch").val("").trigger("change");
+    $("#designationsearch").val("").trigger("change");
+    $("#departmentsearch").val("").trigger("change");
+    $("#statussearch").val("").trigger("change");
 });
 
 

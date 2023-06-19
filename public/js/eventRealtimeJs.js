@@ -390,7 +390,7 @@ $("#tableviewparticipant").DataTable({
         [5, 10, 25, 50, -1],
         [5, 10, 25, 50, "All"],
     ],
-    lengthChange: false,
+    // lengthChange: false,
 });
 
 $("#statusparticipant").DataTable({

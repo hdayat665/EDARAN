@@ -18,9 +18,10 @@ use Symfony\Component\Console\Input\Input;
 
 class MyleaveService
 {
-   public function myleaveView(){
+    public function myleaveView()
+    {
 
-         $data = MyLeaveModel::select('myleave.*', 'leave_types.leave_types as type')
+        $data = MyLeaveModel::select('myleave.*', 'leave_types.leave_types as type')
             ->leftJoin('leave_types', 'myleave.lt_type_id', '=', 'leave_types.id')
             ->where('myleave.tenant_id', Auth::user()->tenant_id)
             ->where('myleave.up_user_id', '=', Auth::user()->id)
@@ -35,7 +36,8 @@ class MyleaveService
         return $data;
     }
 
-    public function myleaveHistoryView(){
+    public function myleaveHistoryView()
+    {
 
         $data = MyLeaveModel::select('myleave.*', 'leave_types.leave_types as type')
             ->leftJoin('leave_types', 'myleave.lt_type_id', '=', 'leave_types.id')
@@ -50,20 +52,18 @@ class MyleaveService
             ->get();
 
         return $data;
-
     }
 
     public function searcmyleavehistory($r)
     {
-       $input = $r->input();
+        $input = $r->input();
         $query = MyLeaveModel::where('myleave.tenant_id', Auth::user()->tenant_id)
-                    ->leftJoin('leave_types', 'myleave.lt_type_id', '=', 'leave_types.id')
-                    ->where('myleave.up_user_id', '=', Auth::user()->id)
-                    ->where('myleave.leave_date', '<', Carbon::now()->format('Y-m-d'))
-                    ->select('myleave.*', 'leave_types.leave_types as type')
-                    ->orderBy('myleave.applied_date', 'desc')
-                    ->orderBy('myleave.created_at', 'desc')
-                    ;
+            ->leftJoin('leave_types', 'myleave.lt_type_id', '=', 'leave_types.id')
+            ->where('myleave.up_user_id', '=', Auth::user()->id)
+            ->where('myleave.leave_date', '<', Carbon::now()->format('Y-m-d'))
+            ->select('myleave.*', 'leave_types.leave_types as type')
+            ->orderBy('myleave.applied_date', 'desc')
+            ->orderBy('myleave.created_at', 'desc');
 
 
         if ($input['applydate']) {
@@ -87,14 +87,14 @@ class MyleaveService
 
     public function searchmyleaveView($r)
     {
-       $input = $r->input();
+        $input = $r->input();
         $query = MyLeaveModel::where('myleave.tenant_id', Auth::user()->tenant_id)
-                ->leftJoin('leave_types', 'myleave.lt_type_id', '=', 'leave_types.id')
-                ->where('myleave.up_user_id', '=', Auth::user()->id)
-                ->where('myleave.leave_date', '>=', Carbon::now()->format('Y-m-d'))
-                ->select('myleave.*', 'leave_types.leave_types as type')
-                ->orderBy('myleave.applied_date', 'desc')
-                ->orderBy('myleave.created_at', 'desc') ;
+            ->leftJoin('leave_types', 'myleave.lt_type_id', '=', 'leave_types.id')
+            ->where('myleave.up_user_id', '=', Auth::user()->id)
+            ->where('myleave.leave_date', '>=', Carbon::now()->format('Y-m-d'))
+            ->select('myleave.*', 'leave_types.leave_types as type')
+            ->orderBy('myleave.applied_date', 'desc')
+            ->orderBy('myleave.created_at', 'desc');
 
 
         if ($input['applydatemy']) {
@@ -116,17 +116,18 @@ class MyleaveService
         return $data;
     }
 
-    public function datatype(){
+    public function datatype()
+    {
 
         $data =
-        leavetypesModel::where('tenant_id', Auth::user()->tenant_id)
-                        ->where('status', '=', 1)
-                        ->get();
+            leavetypesModel::where('tenant_id', Auth::user()->tenant_id)
+            ->where('status', '=', 1)
+            ->get();
         return $data;
-
     }
 
-    public function datapie(){
+    public function datapie()
+    {
 
         // $data =
         // leavetypesModel::where('tenant_id', Auth::user()->tenant_id)
@@ -143,15 +144,14 @@ class MyleaveService
             ->first();
 
         return $data;
-
     }
 
 
-      public function createtmyleave($r)
+    public function createtmyleave($r)
     {
-       $input = $r->input();
+        $input = $r->input();
 
-       $checkleavetype = leavetypesModel::where([
+        $checkleavetype = leavetypesModel::where([
             ['id', '=', $input['typeofleave']],
             ['tenant_id', '=', Auth::user()->tenant_id]
         ])->first();
@@ -167,7 +167,7 @@ class MyleaveService
 
                 if ($leaveDate->between($currentDate, $startDate) || $leaveDate->lt($currentDate)) {
                     $data = [
-                        'msg' => 'The application cannot be submitted. You must apply '.$checkleavetype->leave_types.' - '.$checkleavetype->day.' days from today ',
+                        'msg' => 'The application cannot be submitted. You must apply ' . $checkleavetype->leave_types . ' - ' . $checkleavetype->day . ' days from today ',
                         'status' => config('app.response.error.status'),
                         'type' => config('app.response.error.type'),
                         'title' => config('app.response.error.title')
@@ -182,7 +182,7 @@ class MyleaveService
 
                 if ($leaveDateOther->between($currentDate, $startDate) || $leaveDateOther->lt($currentDate)) {
                     $data = [
-                        'msg' => 'The application cannot be submitted. You must apply '.$checkleavetype->leave_types.' - '.$checkleavetype->day.' days from today ',
+                        'msg' => 'The application cannot be submitted. You must apply ' . $checkleavetype->leave_types . ' - ' . $checkleavetype->day . ' days from today ',
                         'status' => config('app.response.error.status'),
                         'type' => config('app.response.error.type'),
                         'title' => config('app.response.error.title')
@@ -193,11 +193,11 @@ class MyleaveService
             }
         }
 
-       $getdata = Employee::where('tenant_id', Auth::user()->tenant_id)
-                        ->where('user_id', '=', Auth::user()->id)
-                        ->first();
+        $getdata = Employee::where('tenant_id', Auth::user()->tenant_id)
+            ->where('user_id', '=', Auth::user()->id)
+            ->first();
 
-        if (empty($getdata->eleaveapprover) && empty($getdata->eleaverecommender)){
+        if (empty($getdata->eleaveapprover) && empty($getdata->eleaverecommender)) {
             $data['msg'] = 'The E-Leave approver or recommender is empty. Please contact the admin for assistance';
             $data['status'] = config('app.response.error.status');
             $data['type'] = config('app.response.error.type');
@@ -215,7 +215,7 @@ class MyleaveService
                 ['up_user_id', '=', Auth::user()->id]
             ])->first();
 
-            if($getDateSame){
+            if ($getDateSame) {
                 $data['msg'] = 'There is an existing application for the date selected';
                 $data['status'] = config('app.response.error.status');
                 $data['type'] = config('app.response.error.type');
@@ -234,7 +234,7 @@ class MyleaveService
                 ['up_user_id', '=', Auth::user()->id]
             ])->first();
 
-            if($getDateSameOther){
+            if ($getDateSameOther) {
                 $data['msg'] = 'There is an existing application for the date selected';
                 $data['status'] = config('app.response.error.status');
                 $data['type'] = config('app.response.error.type');
@@ -242,7 +242,6 @@ class MyleaveService
 
                 return $data;
             }
-
         }
 
 
@@ -252,8 +251,8 @@ class MyleaveService
             ['tenant_id', '=', Auth::user()->tenant_id]
         ])->first();
 
-        if($getDateHoliday){
-            $data['msg'] = 'The selected date cannot be chosen as it is a public holiday for '.$getDateHoliday->holiday_title.'.';
+        if ($getDateHoliday) {
+            $data['msg'] = 'The selected date cannot be chosen as it is a public holiday for ' . $getDateHoliday->holiday_title . '.';
             $data['status'] = config('app.response.error.status');
             $data['type'] = config('app.response.error.type');
             $data['title'] = config('app.response.error.title');
@@ -261,7 +260,7 @@ class MyleaveService
             return $data;
         }
 
-        if($r->input('leave_date')){
+        if ($r->input('leave_date')) {
 
             $leaveDate = Carbon::createFromFormat('Y-m-d', $input['leave_date']);
             $dayOfWeek = $leaveDate->dayOfWeek;
@@ -274,7 +273,7 @@ class MyleaveService
 
             if (isset($dayOfWeekName)) {
                 $formattedDate = $leaveDate->format('d M Y');
-                $data['msg'] = 'The selected date ('.$formattedDate . ' - ' . $dayOfWeekName.') cannot be chosen as it is a weekend.';
+                $data['msg'] = 'The selected date (' . $formattedDate . ' - ' . $dayOfWeekName . ') cannot be chosen as it is a weekend.';
                 $data['status'] = config('app.response.error.status');
                 $data['type'] = config('app.response.error.type');
                 $data['title'] = config('app.response.error.title');
@@ -298,19 +297,19 @@ class MyleaveService
         $data8 = $input['file'];
         $data9 = $input['reason'];
 
-        if($r->input('noofday') == 1){
+        if ($r->input('noofday') == 1) {
             $data3 = $input['noofday'];
             $data4 = $input['total_day_appied'];
             $data5 = date('Y-m-d', strtotime($input['leave_date']));
             $data6 = date('Y-m-d', strtotime($input['leave_date']));
             $data7 = date('Y-m-d', strtotime($input['leave_date']));
-        }else if ($r->input('noofday') == 0.5){
+        } else if ($r->input('noofday') == 0.5) {
             $data3 = $input['noofday'];
             $data4 = $input['total_day_appied'];
             $data5 = date('Y-m-d', strtotime($input['leave_date']));
             $data6 = date('Y-m-d', strtotime($input['leave_date']));
             $data7 = date('Y-m-d', strtotime($input['leave_date']));
-        }else{
+        } else {
             $data3 = $input['total_day_appied'];
             $data4 = $input['total_day_appied'];
             $data5 = date('Y-m-d', strtotime($input['start_date']));
@@ -318,9 +317,9 @@ class MyleaveService
             $data7 = date('Y-m-d', strtotime($input['end_date']));
         }
 
-        if($r->input('flexRadioDefault')){
+        if ($r->input('flexRadioDefault')) {
             $data10 = $input['flexRadioDefault'];
-        }else{
+        } else {
             $data10 = null;
         }
 
@@ -348,11 +347,11 @@ class MyleaveService
 
             MyLeaveModel::create($input);
 
-            $settingEmail = MyLeaveModel::select('myleave.*','leave_types.leave_types as type')
-            ->join('leave_types', 'myleave.lt_type_id', '=', 'leave_types.id')
-            ->where('myleave.tenant_id', Auth::user()->tenant_id)
-            ->orderBy('myleave.created_at', 'DESC')
-            ->first();
+            $settingEmail = MyLeaveModel::select('myleave.*', 'leave_types.leave_types as type')
+                ->join('leave_types', 'myleave.lt_type_id', '=', 'leave_types.id')
+                ->where('myleave.tenant_id', Auth::user()->tenant_id)
+                ->orderBy('myleave.created_at', 'DESC')
+                ->first();
 
             if ($settingEmail) {
 
@@ -368,8 +367,7 @@ class MyleaveService
             $data['msg'] = 'Leave Application is Applied';
 
             return $data;
-
-        }else{
+        } else {
 
             $input = [
                 'applied_date' => $data1,
@@ -394,11 +392,11 @@ class MyleaveService
 
             MyLeaveModel::create($input);
 
-            $settingEmail = MyLeaveModel::select('myleave.*','leave_types.leave_types as type')
-            ->join('leave_types', 'myleave.lt_type_id', '=', 'leave_types.id')
-            ->where('myleave.tenant_id', Auth::user()->tenant_id)
-            ->orderBy('myleave.created_at', 'DESC')
-            ->first();
+            $settingEmail = MyLeaveModel::select('myleave.*', 'leave_types.leave_types as type')
+                ->join('leave_types', 'myleave.lt_type_id', '=', 'leave_types.id')
+                ->where('myleave.tenant_id', Auth::user()->tenant_id)
+                ->orderBy('myleave.created_at', 'DESC')
+                ->first();
 
             if ($settingEmail) {
 
@@ -415,11 +413,7 @@ class MyleaveService
 
 
             return $data;
-
         }
-
-
-
     }
 
 
@@ -433,8 +427,6 @@ class MyleaveService
             ->get();
 
         return $data;
-
-
     }
 
     public function deletemyleave($id)
@@ -461,84 +453,88 @@ class MyleaveService
 
     //sepervisor
 
-    public function leaveApprView(){
+    public function leaveApprView()
+    {
 
         $data =
-        MyLeaveModel::where('myleave.tenant_id', Auth::user()->tenant_id)
-                        ->leftJoin('leave_types', 'myleave.lt_type_id', '=', 'leave_types.id')
-                        ->leftJoin('userprofile', 'myleave.up_user_id', '=', 'userprofile.user_id')
-                        ->where('myleave.up_recommendedby_id', '=', Auth::user()->id)
-                        ->select('myleave.*','leave_types.leave_types as type', 'userprofile.fullName')
-                        ->orderBy('myleave.applied_date', 'desc')
-                        ->orderBy('myleave.created_at', 'desc')
-                        ->get();
+            MyLeaveModel::where('myleave.tenant_id', Auth::user()->tenant_id)
+            ->leftJoin('leave_types', 'myleave.lt_type_id', '=', 'leave_types.id')
+            ->leftJoin('userprofile', 'myleave.up_user_id', '=', 'userprofile.user_id')
+            ->where('myleave.up_recommendedby_id', '=', Auth::user()->id)
+            ->select('myleave.*', 'leave_types.leave_types as type', 'userprofile.fullName')
+            ->orderBy('myleave.applied_date', 'desc')
+            ->orderBy('myleave.created_at', 'desc')
+            ->get();
         return $data;
     }
 
-    public function idemployer(){
-         $data =
-        MyLeaveModel::where('myleave.tenant_id', Auth::user()->tenant_id)
-                        ->leftJoin('leave_types', 'myleave.lt_type_id', '=', 'leave_types.id')
-                        ->leftJoin('userprofile', 'myleave.up_user_id', '=', 'userprofile.user_id')
-                        ->where('myleave.up_recommendedby_id', '=', Auth::user()->id)
-                        ->select('userprofile.user_id', 'userprofile.fullName')
-                        ->groupBy('userprofile.user_id')
-                        ->get();
+    public function idemployer()
+    {
+        $data =
+            MyLeaveModel::where('myleave.tenant_id', Auth::user()->tenant_id)
+            ->leftJoin('leave_types', 'myleave.lt_type_id', '=', 'leave_types.id')
+            ->leftJoin('userprofile', 'myleave.up_user_id', '=', 'userprofile.user_id')
+            ->where('myleave.up_recommendedby_id', '=', Auth::user()->id)
+            ->select('userprofile.user_id', 'userprofile.fullName')
+            ->groupBy('userprofile.user_id')
+            ->get();
         return $data;
     }
-    public function idemployerhod(){
-         $data =
-        MyLeaveModel::where('myleave.tenant_id', Auth::user()->tenant_id)
-                        ->leftJoin('leave_types', 'myleave.lt_type_id', '=', 'leave_types.id')
-                        ->leftJoin('userprofile', 'myleave.up_user_id', '=', 'userprofile.user_id')
-                        ->where('myleave.up_approvedby_id', '=', Auth::user()->id)
-                        ->where('myleave.up_rec_status', '=', 4)
-                        ->select('userprofile.user_id', 'userprofile.fullName')
-                        ->groupBy('userprofile.user_id')
-                        ->get();
+    public function idemployerhod()
+    {
+        $data =
+            MyLeaveModel::where('myleave.tenant_id', Auth::user()->tenant_id)
+            ->leftJoin('leave_types', 'myleave.lt_type_id', '=', 'leave_types.id')
+            ->leftJoin('userprofile', 'myleave.up_user_id', '=', 'userprofile.user_id')
+            ->where('myleave.up_approvedby_id', '=', Auth::user()->id)
+            ->where('myleave.up_rec_status', '=', 4)
+            ->select('userprofile.user_id', 'userprofile.fullName')
+            ->groupBy('userprofile.user_id')
+            ->get();
         return $data;
     }
 
-    public function searleavaappr($r){
+    public function searleavaappr($r)
+    {
 
         $input = $r->input();
 
         $query =
-        MyLeaveModel::select('myleave.*','leave_types.leave_types as type', 'userprofile.fullName')
-        ->join('leave_types', 'myleave.lt_type_id', '=', 'leave_types.id')
-        ->join('userprofile', 'myleave.up_user_id', '=', 'userprofile.user_id')
-        ->where('myleave.up_recommendedby_id', '=', Auth::user()->id)
-        ->where('myleave.tenant_id', Auth::user()->tenant_id)
-        ->orderBy('myleave.applied_date', 'desc')
-        ->orderBy('myleave.created_at', 'desc');
+            MyLeaveModel::select('myleave.*', 'leave_types.leave_types as type', 'userprofile.fullName')
+            ->join('leave_types', 'myleave.lt_type_id', '=', 'leave_types.id')
+            ->join('userprofile', 'myleave.up_user_id', '=', 'userprofile.user_id')
+            ->where('myleave.up_recommendedby_id', '=', Auth::user()->id)
+            ->where('myleave.tenant_id', Auth::user()->tenant_id)
+            ->orderBy('myleave.applied_date', 'desc')
+            ->orderBy('myleave.created_at', 'desc');
 
-            if ($input['applydate']) {
-                $applydate = $input['applydate'];
-                $query->where('myleave.applied_date', '=', $applydate);
-            }
+        if ($input['applydate']) {
+            $applydate = $input['applydate'];
+            $query->where('myleave.applied_date', '=', $applydate);
+        }
 
-            if ($input['idemployer']) {
-                $idemployer = $input['idemployer'];
-                $query->where('myleave.up_user_id', '=', $idemployer);
-            }
+        if ($input['idemployer']) {
+            $idemployer = $input['idemployer'];
+            $query->where('myleave.up_user_id', '=', $idemployer);
+        }
 
-            if ($input['type']) {
-                $type = $input['type'];
-                $query->where('myleave.lt_type_id', '=', $type);
-            }
+        if ($input['type']) {
+            $type = $input['type'];
+            $query->where('myleave.lt_type_id', '=', $type);
+        }
 
         $data = $query->get();
         return $data;
     }
 
-    public function searApprhod($r){
+    public function searApprhod($r)
+    {
 
         $input = $r->input();
 
         $query =
 
-        MyLeaveModel::
-            select('myleave.*','leave_types.leave_types as type', 'userprofile.fullName')
+            MyLeaveModel::select('myleave.*', 'leave_types.leave_types as type', 'userprofile.fullName')
             ->Join('leave_types', 'myleave.lt_type_id', '=', 'leave_types.id')
             ->Join('userprofile', 'myleave.up_user_id', '=', 'userprofile.user_id')
             ->where('myleave.up_approvedby_id', '=', Auth::user()->id)
@@ -547,20 +543,20 @@ class MyleaveService
             ->orderBy('myleave.applied_date', 'desc')
             ->orderBy('myleave.created_at', 'desc');
 
-            if ($input['applydate']) {
-                $applydate = $input['applydate'];
-                $query->where('myleave.applied_date', '=', $applydate);
-            }
+        if ($input['applydate']) {
+            $applydate = $input['applydate'];
+            $query->where('myleave.applied_date', '=', $applydate);
+        }
 
-            if ($input['idemployer']) {
-                $idemployer = $input['idemployer'];
-                $query->where('myleave.up_user_id', '=', $idemployer);
-            }
+        if ($input['idemployer']) {
+            $idemployer = $input['idemployer'];
+            $query->where('myleave.up_user_id', '=', $idemployer);
+        }
 
-            if ($input['type']) {
-                $type = $input['type'];
-                $query->where('myleave.lt_type_id', '=', $type);
-            }
+        if ($input['type']) {
+            $type = $input['type'];
+            $query->where('myleave.lt_type_id', '=', $type);
+        }
 
         $data = $query->get();
         return $data;
@@ -571,22 +567,22 @@ class MyleaveService
     {
         $input = $r->input();
 
-         $input = [
+        $input = [
 
-                'up_rec_status' => 4,
-                'up_rec_reason' => '',
-                'status_final' => 2,
-            ];
+            'up_rec_status' => 4,
+            'up_rec_reason' => '',
+            'status_final' => 2,
+        ];
 
         MyLeaveModel::where('id', $id)->update($input);
 
-        $settingEmail = MyLeaveModel::select('myleave.*','leave_types.leave_types as type')
-        ->join('leave_types', 'myleave.lt_type_id', '=', 'leave_types.id')
-        ->where('myleave.tenant_id', Auth::user()->tenant_id)
-        ->where('myleave.id', $id)
-        ->where('myleave.up_rec_status', '4')
-        ->orderBy('myleave.created_at', 'DESC')
-        ->first();
+        $settingEmail = MyLeaveModel::select('myleave.*', 'leave_types.leave_types as type')
+            ->join('leave_types', 'myleave.lt_type_id', '=', 'leave_types.id')
+            ->where('myleave.tenant_id', Auth::user()->tenant_id)
+            ->where('myleave.id', $id)
+            ->where('myleave.up_rec_status', '4')
+            ->orderBy('myleave.created_at', 'DESC')
+            ->first();
 
         if ($settingEmail) {
 
@@ -602,26 +598,26 @@ class MyleaveService
         return $data;
     }
 
-     public function updatesupervisorreject($r, $id)
+    public function updatesupervisorreject($r, $id)
     {
         $input = $r->input();
         $data1 = $input['reasonreject'];
 
-         $input = [
-                'up_rec_status' => 3,
-                'up_rec_reason' => $data1,
-                'status_final' => 3,
-            ];
+        $input = [
+            'up_rec_status' => 3,
+            'up_rec_reason' => $data1,
+            'status_final' => 3,
+        ];
 
         MyLeaveModel::where('id', $id)->update($input);
 
-        $settingEmail = MyLeaveModel::select('myleave.*','leave_types.leave_types as type')
-        ->join('leave_types', 'myleave.lt_type_id', '=', 'leave_types.id')
-        ->where('myleave.tenant_id', Auth::user()->tenant_id)
-        ->where('myleave.id', $id)
-        ->where('myleave.up_rec_status', '3')
-        ->orderBy('myleave.created_at', 'DESC')
-        ->first();
+        $settingEmail = MyLeaveModel::select('myleave.*', 'leave_types.leave_types as type')
+            ->join('leave_types', 'myleave.lt_type_id', '=', 'leave_types.id')
+            ->where('myleave.tenant_id', Auth::user()->tenant_id)
+            ->where('myleave.id', $id)
+            ->where('myleave.up_rec_status', '3')
+            ->orderBy('myleave.created_at', 'DESC')
+            ->first();
 
         if ($settingEmail) {
 
@@ -638,18 +634,19 @@ class MyleaveService
     }
 
     //hod
-     public function leaveApprhodView(){
+    public function leaveApprhodView()
+    {
 
         $data =
-        MyLeaveModel::where('myleave.tenant_id', Auth::user()->tenant_id)
-                        ->leftJoin('leave_types', 'myleave.lt_type_id', '=', 'leave_types.id')
-                        ->leftJoin('userprofile', 'myleave.up_user_id', '=', 'userprofile.user_id')
-                        ->where('myleave.up_approvedby_id', '=', Auth::user()->id)
-                        ->where('myleave.up_rec_status', '=', 4)
-                        ->select('myleave.*','leave_types.leave_types as type', 'userprofile.fullName')
-                        ->orderBy('myleave.applied_date', 'desc')
-                        ->orderBy('myleave.created_at', 'desc')
-                        ->get();
+            MyLeaveModel::where('myleave.tenant_id', Auth::user()->tenant_id)
+            ->leftJoin('leave_types', 'myleave.lt_type_id', '=', 'leave_types.id')
+            ->leftJoin('userprofile', 'myleave.up_user_id', '=', 'userprofile.user_id')
+            ->where('myleave.up_approvedby_id', '=', Auth::user()->id)
+            ->where('myleave.up_rec_status', '=', 4)
+            ->select('myleave.*', 'leave_types.leave_types as type', 'userprofile.fullName')
+            ->orderBy('myleave.applied_date', 'desc')
+            ->orderBy('myleave.created_at', 'desc')
+            ->get();
         return $data;
     }
 
@@ -657,28 +654,28 @@ class MyleaveService
     {
         $input = $r->input();
 
-         $input = [
-                'up_app_status' => 4,
-                'up_app_reason' => '',
-                'status_final' => 4,
-            ];
+        $input = [
+            'up_app_status' => 4,
+            'up_app_reason' => '',
+            'status_final' => 4,
+        ];
 
         MyLeaveModel::where('id', $id)->update($input);
 
-        $settingEmail = MyLeaveModel::select('myleave.*','leave_types.leave_types as type')
-        ->join('leave_types', 'myleave.lt_type_id', '=', 'leave_types.id')
-        ->where('myleave.tenant_id', Auth::user()->tenant_id)
-        ->where('myleave.id', $id)
-        ->where('myleave.up_app_status', '4')
-        ->orderBy('myleave.created_at', 'DESC')
-        ->first();
+        $settingEmail = MyLeaveModel::select('myleave.*', 'leave_types.leave_types as type')
+            ->join('leave_types', 'myleave.lt_type_id', '=', 'leave_types.id')
+            ->where('myleave.tenant_id', Auth::user()->tenant_id)
+            ->where('myleave.id', $id)
+            ->where('myleave.up_app_status', '4')
+            ->orderBy('myleave.created_at', 'DESC')
+            ->first();
 
 
         $checkType = leavetypesModel::select('leave_types.*')
-        ->where('leave_types.tenant_id', '=',Auth::user()->tenant_id)
-        ->where('leave_types.id', '=',$settingEmail->lt_type_id )
-        ->where('leave_types.leave_types_code', '=', 'AL')
-        ->first();
+            ->where('leave_types.tenant_id', '=', Auth::user()->tenant_id)
+            ->where('leave_types.id', '=', $settingEmail->lt_type_id)
+            ->where('leave_types.leave_types_code', '=', 'AL')
+            ->first();
 
 
         if ($settingEmail) {
@@ -687,18 +684,18 @@ class MyleaveService
             $ms->emailToApprovedLeave($settingEmail);
         }
 
-        if($settingEmail->up_app_status == '4' &&  $checkType->leave_types_code == 'AL' ){
+        if ($settingEmail->up_app_status == '4' &&  $checkType->leave_types_code == 'AL') {
 
             $today = Carbon::now();
 
             $check = leaveEntitlementModel::select('leave_entitlement.*')
-            ->where('leave_entitlement.tenant_id','=', Auth::user()->tenant_id)
-            ->where('leave_entitlement.id_employment','=' ,$settingEmail->up_user_id)
-            ->first();
+                ->where('leave_entitlement.tenant_id', '=', Auth::user()->tenant_id)
+                ->where('leave_entitlement.id_employment', '=', $settingEmail->up_user_id)
+                ->first();
 
 
 
-            if($today <= $check->lapsed_date){
+            if ($today <= $check->lapsed_date) {
 
                 // Update carry_forward_balance
                 if ($check->carry_forward_balance >= $settingEmail->total_day_applied) {
@@ -730,8 +727,7 @@ class MyleaveService
 
                 leaveEntitlementModel::where('id', $check->id)->update($input);
                 MyLeaveModel::where('id', $id)->update($inputCalculate);
-
-            }else{
+            } else {
 
                 $leave = $check->current_entitlement_balance - $settingEmail->total_day_applied;
 
@@ -745,7 +741,6 @@ class MyleaveService
 
                 leaveEntitlementModel::where('id', $check->id)->update($input);
                 MyLeaveModel::where('id', $id)->update($inputCalculate);
-
             }
         }
 
@@ -757,34 +752,34 @@ class MyleaveService
         return $data;
     }
 
-     public function updatehodreject($r, $id)
+    public function updatehodreject($r, $id)
     {
         $input = $r->input();
         $data1 = $input['reasonreject'];
 
-         $input = [
+        $input = [
 
-                'up_app_status' => 3,
-                'up_app_reason' => $data1,
-                'status_final' => 3,
-            ];
+            'up_app_status' => 3,
+            'up_app_reason' => $data1,
+            'status_final' => 3,
+        ];
 
         MyLeaveModel::where('id', $id)->update($input);
 
-        $settingEmail = MyLeaveModel::select('myleave.*','leave_types.leave_types as type')
-        ->join('leave_types', 'myleave.lt_type_id', '=', 'leave_types.id')
-        ->where('myleave.tenant_id', Auth::user()->tenant_id)
-        ->where('myleave.id', $id)
-        ->where('myleave.up_app_status', '3')
-        ->orderBy('myleave.created_at', 'DESC')
-        ->first();
+        $settingEmail = MyLeaveModel::select('myleave.*', 'leave_types.leave_types as type')
+            ->join('leave_types', 'myleave.lt_type_id', '=', 'leave_types.id')
+            ->where('myleave.tenant_id', Auth::user()->tenant_id)
+            ->where('myleave.id', $id)
+            ->where('myleave.up_app_status', '3')
+            ->orderBy('myleave.created_at', 'DESC')
+            ->first();
 
 
         $checkType = leavetypesModel::select('leave_types.*')
-        ->where('leave_types.tenant_id', '=',Auth::user()->tenant_id)
-        ->where('leave_types.id', '=',$settingEmail->lt_type_id )
-        ->where('leave_types.leave_types_code', '=', 'AL')
-        ->first();
+            ->where('leave_types.tenant_id', '=', Auth::user()->tenant_id)
+            ->where('leave_types.id', '=', $settingEmail->lt_type_id)
+            ->where('leave_types.leave_types_code', '=', 'AL')
+            ->first();
 
 
         if ($settingEmail) {
@@ -793,16 +788,16 @@ class MyleaveService
             $ms->emailToApprovedLeave($settingEmail);
         }
 
-        if($settingEmail->up_app_status == '3' &&  $checkType->leave_types_code == 'AL' && $settingEmail->calculate == '1' ){
+        if ($settingEmail->up_app_status == '3' &&  $checkType->leave_types_code == 'AL' && $settingEmail->calculate == '1') {
 
             $today = Carbon::now();
 
             $check = leaveEntitlementModel::select('leave_entitlement.*')
-            ->where('leave_entitlement.tenant_id','=', Auth::user()->tenant_id)
-            ->where('leave_entitlement.id_employment','=' ,$settingEmail->up_user_id)
-            ->first();
+                ->where('leave_entitlement.tenant_id', '=', Auth::user()->tenant_id)
+                ->where('leave_entitlement.id_employment', '=', $settingEmail->up_user_id)
+                ->first();
 
-            if($today <= $check->lapsed_date){
+            if ($today <= $check->lapsed_date) {
 
                 $total = $check->current_entitlement_balance + $settingEmail->total_day_applied;
 
@@ -820,8 +815,7 @@ class MyleaveService
                 ];
 
                 leaveEntitlementModel::where('id', $check->id)->update($input);
-
-            }else{
+            } else {
 
                 $leave = $check->current_entitlement_balance + $settingEmail->total_day_applied;
 
@@ -830,9 +824,7 @@ class MyleaveService
                 ];
 
                 leaveEntitlementModel::where('id', $check->id)->update($input);
-
             }
-
         }
 
         $data['status'] = config('app.response.success.status');
@@ -865,7 +857,7 @@ class MyleaveService
             ->leftJoin('userprofile as ap', 'myleave.up_user_id', '=', 'ap.user_id')
             ->leftJoin('userprofile as au', 'myleave.up_recommendedby_id', '=', 'au.user_id')
             ->leftJoin('userprofile as mu', 'myleave.up_approvedby_id', '=', 'mu.user_id')
-            ->select('myleave.*','ap.fullName as username', 'au.fullName as username1', 'mu.fullName as username2')
+            ->select('myleave.*', 'ap.fullName as username', 'au.fullName as username1', 'mu.fullName as username2')
             ->get();
 
         return $data;
@@ -873,25 +865,136 @@ class MyleaveService
     public function getpieleave()
     {
         $currentYear = Carbon::now()->format('Y');
-        $datapie = leaveEntitlementModel::select('leave_entitlement.current_entitlement','leave_entitlement.current_entitlement_balance')
-        ->where('leave_entitlement.tenant_id', Auth::user()->tenant_id)
-        ->where('leave_entitlement.id_employment', Auth::user()->id)
-        ->whereYear('leave_entitlement.le_year', '=', $currentYear)
-        ->first();
+        $checktoday = Carbon::now();
+
+        $data = leaveEntitlementModel::select('leave_entitlement.current_entitlement', 'leave_entitlement.current_entitlement_balance', 'leave_entitlement.lapsed_date', 'leave_entitlement.carry_forward', 'leave_entitlement.carry_forward_balance', 'leave_entitlement.lapsed_date')
+            ->where('leave_entitlement.tenant_id', Auth::user()->tenant_id)
+            ->where('leave_entitlement.id_employment', Auth::user()->id)
+            ->whereYear('leave_entitlement.le_year', '=', $currentYear)
+            ->first();
+
+        $checkType = leavetypesModel::select('leave_types.id')
+            ->where('leave_types.tenant_id', Auth::user()->tenant_id)
+            ->where('leave_types.leave_types_code', '=', 'AL')
+            ->first();
+
+        $datapiePending1 = MyLeaveModel::select(DB::raw('SUM(myleave.total_day_applied) as total_pending'))
+            ->where('myleave.tenant_id', Auth::user()->tenant_id)
+            ->where(function ($query) {
+                $query->where('myleave.status_final', '=', 1)
+                    ->orWhere('myleave.status_final', '=', 2);
+            })
+            ->where(function ($query) {
+                $query->where('myleave.calculate', '=', null)
+                    ->orWhere('myleave.calculate', '=', '');
+            })
+            ->where('myleave.lt_type_id', '=', $checkType->id)
+            ->where('myleave.up_user_id', Auth::user()->id)
+            ->whereYear('myleave.applied_date', '=', $currentYear)
+            ->first();
+
+
+        if ($checktoday <= $data->lapsed_date) {
+
+            if (0 <= $data->carry_forward_balance) {
+
+
+                $datapiePendingx =  $data->carry_forward_balance - $datapiePending1->total_pending;
+
+                if ($datapiePendingx < 0) {
+
+                    $datatolak = -$datapiePendingx;
+
+                    // dd($data);
+                    // die;
+
+                    $datapiePending = (object) ['total_pending' => $datatolak];
+                } else {
+
+                    $datapiePending = (object) ['total_pending' => 0];
+                }
+            } else {
+
+                $datapiePending = (object) ['total_pending' => 0];
+            }
+        } else {
+
+            // dd($datapiePending1);
+            // die;
+
+            // $datapiePending = (object) ['total_pending' => $datapiePending1 ];
+            $datapiePending = $datapiePending1;
+        }
+
+
+        $datapie = [$data, $datapiePending];
+
+        // dd($datapie);
+        // die;
 
         return $datapie;
     }
     public function getpieleave2()
     {
         $currentYear = Carbon::now()->format('Y');
-        $datapie2 = leaveEntitlementModel::select('leave_entitlement.carry_forward','leave_entitlement.carry_forward_balance')
-        ->where('leave_entitlement.tenant_id', Auth::user()->tenant_id)
-        ->where('leave_entitlement.id_employment', Auth::user()->id)
-        ->whereYear('leave_entitlement.le_year', '=', $currentYear)
-        ->first();
+        $checktoday = Carbon::now();
+
+        $data = leaveEntitlementModel::select('leave_entitlement.carry_forward', 'leave_entitlement.carry_forward_balance', 'leave_entitlement.lapsed_date')
+            ->where('leave_entitlement.tenant_id', Auth::user()->tenant_id)
+            ->where('leave_entitlement.id_employment', Auth::user()->id)
+            ->whereYear('leave_entitlement.le_year', '=', $currentYear)
+            ->first();
+
+        $checkType = leavetypesModel::select('leave_types.id')
+            ->where('leave_types.tenant_id', Auth::user()->tenant_id)
+            ->where('leave_types.leave_types_code', '=', 'AL')
+            ->first();
+
+        $datapiePending1 = MyLeaveModel::select(DB::raw('SUM(myleave.total_day_applied) as total_pending'))
+            ->where('myleave.tenant_id', Auth::user()->tenant_id)
+            ->where(function ($query) {
+                $query->where('myleave.status_final', '=', 1)
+                    ->orWhere('myleave.status_final', '=', 2);
+            })
+            ->where(function ($query) {
+                $query->where('myleave.calculate', '=', null)
+                    ->orWhere('myleave.calculate', '=', '');
+            })
+            ->where('myleave.lt_type_id', '=', $checkType->id)
+            ->where('myleave.up_user_id', Auth::user()->id)
+            ->whereYear('myleave.applied_date', '=', $currentYear)
+            ->first();
+
+
+        if ($checktoday <= $data->lapsed_date) {
+
+            if (0 <= $data->carry_forward_balance) {
+
+
+                $datapiePendingx =  $data->carry_forward_balance - $datapiePending1->total_pending;
+
+                if ($datapiePendingx < 0) {
+
+                    $datapiePending = (object) ['total_pending' => $data->carry_forward_balance];
+                } else {
+
+                    $datapiePending = (object) ['total_pending' => $datapiePending1->total_pending];
+                }
+            } else {
+
+                $datapiePending = (object) ['total_pending' => 0];
+            }
+        } else {
+
+            $datapiePending = (object) ['total_pending' => 0];
+        }
+
+        $datapie2 = [$data, $datapiePending];
+
+        // dd($datapie2);
+        // die;
 
         return $datapie2;
-
     }
     public function getEarnedLeave()
     {
@@ -908,8 +1011,6 @@ class MyleaveService
         $data = round(($month / 12) * $LeaveEntitlement->current_entitlement, 0);
 
         return $data;
-
-
     }
 
     public function getLapseLeave()
@@ -926,14 +1027,12 @@ class MyleaveService
             ->whereYear('leave_entitlement.le_year', '=', $year)
             ->first();
 
-        if($checktoday <= $LeaveEntitlement->lapsed_date){
+        if ($checktoday <= $LeaveEntitlement->lapsed_date) {
 
             $lapse = $LeaveEntitlement->lapse;
-
-        }else{
+        } else {
 
             $lapse = $LeaveEntitlement->lapse + $LeaveEntitlement->carry_forward_balance;
-
         }
 
         $data = [$lapse, $previousYear];
@@ -949,7 +1048,7 @@ class MyleaveService
             ->leftJoin('userprofile as au', 'myleave.up_recommendedby_id', '=', 'au.user_id')
             ->leftJoin('userprofile as mu', 'myleave.up_approvedby_id', '=', 'mu.user_id')
             ->leftJoin('leave_types as lt', 'myleave.lt_type_id', '=', 'lt.id')
-            ->select('myleave.*','ap.fullName as username', 'au.fullName as username1', 'mu.fullName as username2', 'lt.leave_types as leave_types')
+            ->select('myleave.*', 'ap.fullName as username', 'au.fullName as username1', 'mu.fullName as username2', 'lt.leave_types as leave_types')
             ->get();
 
         return $data;
@@ -962,7 +1061,7 @@ class MyleaveService
             ->leftJoin('userprofile as au', 'myleave.up_recommendedby_id', '=', 'au.user_id')
             ->leftJoin('userprofile as mu', 'myleave.up_approvedby_id', '=', 'mu.user_id')
             ->leftJoin('leave_types as lt', 'myleave.lt_type_id', '=', 'lt.id')
-            ->select('myleave.*','ap.fullName as username', 'au.fullName as username1', 'mu.fullName as username2', 'lt.leave_types as leave_types')
+            ->select('myleave.*', 'ap.fullName as username', 'au.fullName as username1', 'mu.fullName as username2', 'lt.leave_types as leave_types')
             ->get();
 
         return $data;
@@ -975,7 +1074,7 @@ class MyleaveService
             ->leftJoin('userprofile as au', 'myleave.up_recommendedby_id', '=', 'au.user_id')
             ->leftJoin('userprofile as mu', 'myleave.up_approvedby_id', '=', 'mu.user_id')
             ->leftJoin('leave_types as lt', 'myleave.lt_type_id', '=', 'lt.id')
-            ->select('myleave.*','ap.fullName as username', 'au.fullName as username1', 'mu.fullName as username2', 'lt.leave_types as leave_types')
+            ->select('myleave.*', 'ap.fullName as username', 'au.fullName as username1', 'mu.fullName as username2', 'lt.leave_types as leave_types')
             ->get();
 
         return $data;
@@ -988,7 +1087,7 @@ class MyleaveService
             ->leftJoin('userprofile as au', 'myleave.up_recommendedby_id', '=', 'au.user_id')
             ->leftJoin('userprofile as mu', 'myleave.up_approvedby_id', '=', 'mu.user_id')
             ->leftJoin('leave_types as lt', 'myleave.lt_type_id', '=', 'lt.id')
-            ->select('myleave.*','ap.fullName as username', 'au.fullName as username1', 'mu.fullName as username2', 'lt.leave_types as leave_types')
+            ->select('myleave.*', 'ap.fullName as username', 'au.fullName as username1', 'mu.fullName as username2', 'lt.leave_types as leave_types')
             ->get();
 
         return $data;
@@ -1000,8 +1099,8 @@ class MyleaveService
         $data1 = "";
 
         $input = [
-                'up_recommendedby_id' => $data1,
-            ];
+            'up_recommendedby_id' => $data1,
+        ];
 
 
         MyLeaveModel::where('id', $id)->update($input);
@@ -1012,7 +1111,6 @@ class MyleaveService
         $data['msg'] = 'Success update Status';
 
         return $data;
-
     }
 
     public function approvemyleaveby($id)
@@ -1020,9 +1118,9 @@ class MyleaveService
         $data1 = 4;
 
         $input = [
-                'up_recommendedby_id' => Auth::user()->id,
-                'status' => $data1,
-            ];
+            'up_recommendedby_id' => Auth::user()->id,
+            'status' => $data1,
+        ];
 
 
         MyLeaveModel::where('id', $id)->update($input);
@@ -1033,7 +1131,6 @@ class MyleaveService
         $data['msg'] = 'Success update Status';
 
         return $data;
-
     }
 
 
@@ -1081,19 +1178,10 @@ class MyleaveService
                 if ($currentDate >= $holidayStartDate && $currentDate <= $holidayEndDate) {
                     $totalDaysx++;
                 }
-
             }
         }
 
 
         return $totalDaysx;
     }
-
-
-
-
-
-
-
-
 }

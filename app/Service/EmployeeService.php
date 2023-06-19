@@ -68,18 +68,70 @@ class EmployeeService
         return $data;
     }
 
+    // public function addAddress($r)
+    // {
+    //     $input = $r->input();
+
+    //     // Check if the "permanent same as correspondent address" checkbox is checked
+    //     if(isset($input['sameAsPermenant']) && $input['sameAsPermenant'] == 'on') {
+    //         $input['addressType'] = 3; //BOTH
+    //     } else {
+    //         $input['addressType'] = 1; //PERMANENT
+    //     }
+
+    //     UserAddress::create($input);
+
+    //     $data['status'] = true;
+    //     $data['title'] = 'Success';
+    //     $data['type'] = 'success';
+    //     $data['msg'] = 'Success Create Address';
+    //     $data['data'] = UserAddress::where('user_id', $input['user_id'])->first();
+
+    //     return $data;
+    // }
+
     public function addAddress($r)
     {
         $input = $r->input();
 
-        // Check if the "permanent same as correspondent address" checkbox is checked
-        if(isset($input['sameAsPermenant']) && $input['sameAsPermenant'] == 'on') {
-            $input['addressType'] = 3; //BOTH
-        } else {
-            $input['addressType'] = 1; //PERMANENT
-        }
+        // Check if the "permanent same as correspondent address" checkbox is not checked
+        if (!isset($input['sameAsPermenant']) || $input['sameAsPermenant'] != 'on') {
+            // Save the address as permanent
+            UserAddress::create([
+                'user_id' => $input['user_id'],
+                'addressType' => 1,
+                'address1' => $input['address1'],
+                'address2' => $input['address2'],
+                'postcode' => $input['postcode'],
+                'city' => $input['city'],
+                'state' => $input['state'],
+                'country' => $input['country'],
+            ]);
 
-        UserAddress::create($input);
+            // Save the address as correspondent
+            UserAddress::create([
+                'user_id' => $input['user_id'],
+                'addressType' => 2,
+                'address1' => $input['address1c'],
+                'address2' => $input['address2c'],
+                'postcode' => $input['postcodec'],
+                'city' => $input['cityc'],
+                'state' => $input['statec'],
+                'country' => $input['countryc'],
+            ]);
+        } else {
+            // Save the address as both permanent and correspondent
+            UserAddress::create([
+                'user_id' => $input['user_id'],
+                'addressType' => 3,
+                'address1' => $input['address1'],
+                'address2' => $input['address2'],
+                'postcode' => $input['postcode'],
+                'city' => $input['city'],
+                'state' => $input['state'],
+                'country' => $input['country'],
+            ]);
+        }
 
         $data['status'] = true;
         $data['title'] = 'Success';
@@ -89,6 +141,7 @@ class EmployeeService
 
         return $data;
     }
+
 
     public function getEmployee()
     {
@@ -936,90 +989,71 @@ class EmployeeService
 
             if ($input['company'] !== $user->company) {
                 $jobHistory['companyHistory'] = $input['company'];
-                $changes[] = 'Company has changed to ' . $input['company'];
 
             } else if ($input['company'] === $user->company) {
                 $jobHistory['companyHistory'] = null;
-                $changes[] = 'Company has been set to null';
             }
 
             if ($input['department'] !== $user->department) {
                 $jobHistory['departmentHistory'] = $input['department'];
-                $changes[] = 'department has changed to ' . $input['department'];
 
             } else if ($input['department'] === $user->department) {
                 $jobHistory['departmentHistory'] = null;
-                $changes[] = 'Company has been set to null';
             }
 
             if ($input['unit'] !== $user->unit) {
                 $jobHistory['unitHistory'] = $input['unit'];
-                $changes[] = 'Unit has changed to ' . $input['unit'];
 
             } else if ($input['unit'] === $user->unit) {
                 $jobHistory['unitHistory'] = null;
-                $changes[] = 'Unit has been set to null';
             }
 
             if ($input['branch'] !== $user->branch) {
                 $jobHistory['branchHistory'] = $input['branch'];
-                $changes[] = 'Branch has changed to ' . $input['branch'];
 
             } else if ($input['branch'] === $user->branch) {
                 $jobHistory['branchHistory'] = null;
-                $changes[] = 'Branch has been set to null';
             }
 
             if ($input['jobGrade'] !== $user->jobGrade) {
                 $jobHistory['jobGradeHistory'] = $input['jobGrade'];
-                $changes[] = 'Job Grade has changed to ' . $input['jobGrade'];
 
             } else if ($input['jobGrade'] === $user->jobGrade) {
                 $jobHistory['jobGradeHistory'] = null;
-                $changes[] = 'jobGrade has been set to null';
             }
 
             if ($input['designation'] !== $user->designation) {
                 $jobHistory['designationHistory'] = $input['designation'];
-                $changes[] = 'Designation has changed to ' . $input['designation'];
 
             } else if ($input['designation'] === $user->designation) {
                 $jobHistory['designationHistory'] = null;
-                $changes[] = 'Designation has been set to null';
             }
 
             if ($input['employmentType'] !== $user->employmentType) {
                 $jobHistory['employmentTypeHistory'] = $input['employmentType'];
-                $changes[] = 'Designation has changed to ' . $input['designation'];
 
             } else if ($input['employmentType'] === $user->employmentType) {
                 $jobHistory['employmentTypeHistory'] = null;
-                $changes[] = 'Designation has been set to null';
             }
 
             if ($input['COR'] !== $user->COR) {
                 $jobHistory['CORHistory'] = $input['COR'];
-                $changes[] = 'COR has changed to ' . $input['COR'];
 
             } else if ($input['COR'] === $user->COR) {
                 $jobHistory['CORHistory'] = null;
-                $changes[] = 'COR has been set to null';
             }
 
             if ($input['event'] !== $user->event) {
                 $jobHistory['event'] = $input['event'];
-                $changes[] = 'Event has changed to ' . $input['event'];
 
             } else if ($input['event'] === $user->event) {
                 $jobHistory['event'] = null;
-                $changes[] = 'Event has been set to null';
             }
 
             $jobHistory['effectiveDate'] = $input['EffectiveFrom'];
             $jobHistory['tenant_id'] = $user->tenant_id;
             $jobHistory['updatedBy'] = $user->username;
             $jobHistory['event'] = $input['event'];
-            //$jobHistory['remarks'] = implode('. ', $changes);
             $jobHistory['user_id'] = $input['user_id'];
             $updateBy = Auth::user()->username;
             $jobHistory['updatedBy'] = $updateBy;
@@ -1064,13 +1098,15 @@ class EmployeeService
                 unset($input['departmentId']);
             }
 
-            if ($input['unitId']) {
+            if (isset($input['unitId'])) {
                 $input['unit'] = $input['unitId'];
+                unset($input['unitId']);
+            } else {
+                $input['unit'] = null;
                 unset($input['unitId']);
             }
 
             $input['tenant_id'] = Auth::user()->tenant_id;
-            // $input['status'] = 'inActive';
             $input['status'] = 'Active';
             $input['joinedDate'] = date_format(date_create($input['joinedDate']), 'y-m-d');
             Employee::create($input);

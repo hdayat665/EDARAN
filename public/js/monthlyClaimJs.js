@@ -1,4 +1,41 @@
 $("document").ready(function () {
+    
+    $(document).on("click", "#travelBtn", function () {
+        // var id = $(this).data("id");
+        // var eventData = getEvents(id);
+        // eventData.then(function (data) {
+        //     var attendanceEvent = getAttendance(data.id);
+        //     attendanceEvent.then(function (dataAttendance) {
+        //         // Check if the DataTable is already initialized
+        //         var table = $("#tableviewparticipants").DataTable();
+        //         if (table) {
+        //             // The DataTable is already initialized, so we can just update the data
+        //             table.clear();
+        //             for (let i = 0; i < dataAttendance.length; i++) {
+        //                 const attendance = dataAttendance[i];
+        //                 table.row.add([i + 1, attendance.employeeName]);
+        //             }
+        //             table.draw();
+        //         } else {
+        //             // The DataTable is not yet initialized, so we need to initialize it
+        //             $("#tableviewparticipants").DataTable({
+        //                 paging: true,
+        //                 columns: [{ title: "No" }, { title: "Participants" }],
+        //             });
+        //             for (let i = 0; i < dataAttendance.length; i++) {
+        //                 const attendance = dataAttendance[i];
+        //                 table.row.add([i + 1, attendance.employeeName]);
+        //             }
+        //         }
+        //     });
+        // });
+    
+        $("#travelModal").modal("show");
+    });
+
+    $(document).on("click", "#subsBtn", function () {
+        $("#subsModal").modal("show");
+    });
     $("#type_transport").change(function () {
         var selectedOption = $("#type_transport").val();
         if (selectedOption == "Personal Car") {
@@ -152,61 +189,165 @@ $("document").ready(function () {
           })
           .datepicker("setDate", firstDay);
 
-    $(function () {
-        var selectedMonth = $("#monthInputSub").val();
+    // $(function () {
+    //     var selectedMonth = $("#monthInputSub").val();
 
-        // Convert the selected month to the first and last day of that monthsadasd
-        var firstDay = new Date(selectedMonth + " 1, 2023");
-        var lastDay = new Date(firstDay.getFullYear(), firstDay.getMonth() + 1, 0);
+    //     // Convert the selected month to the first and last day of that monthsadasd
+    //     var firstDay = new Date(selectedMonth + " 1, 2023");
+    //     var lastDay = new Date(firstDay.getFullYear(), firstDay.getMonth() + 1, 0);
         
-            // Initialize the datepicker with the selected month range
-            $("#date1, #date2")
-            .datepicker({
-                todayHighlight: true,
-                autoclose: true,
-                format: "yyyy-mm-dd",
-                startDate: firstDay,
-                endDate: lastDay
-            })
-            .datepicker("setDate", firstDay);
+    //         // Initialize the datepicker with the selected month range
+    //         $("#date1, #date2")
+    //         .datepicker({
+    //             todayHighlight: true,
+    //             autoclose: true,
+    //             format: "yyyy-mm-dd",
+    //             startDate: firstDay,
+    //             endDate: lastDay
+    //         })
+    //         .datepicker("setDate", firstDay);
         
-        $("#time1,#time2").mdtimepicker({});
+    //     $("#time1,#time2").mdtimepicker({});
 
+    //     $("#timestart,#timeend").mdtimepicker({});
+    //     $("#daystart,#dayend")
+    //         .datepicker({
+    //             format: "yyyy-mm-dd",
+    //         })
+    //         .datepicker("setDate", "now");
+    // });
+
+    // $(document).ready(function () {
+    //     $("#time1,#time2").mdtimepicker({});
+    //     //calculate date range in subsistence allowance
+    //     $("#result1, #date1, #time1, #date2, #time2").focus(function () {
+    //         // Retrieve selected values from start and end date select elements
+    //         var startDate = document.getElementById('date1').value;
+    //         var endDate = document.getElementById('date2').value;
+
+    //         // Retrieve input values from start and end time pickers
+    //         var startTime = document.getElementById('time1').value;
+    //         var endTime = document.getElementById('time2').value;
+
+    //         // Calculate travel duration
+    //         var startDateTime = new Date(startDate + ' ' + startTime);
+    //         var endDateTime = new Date(endDate + ' ' + endTime);
+    //         var durationInMs = endDateTime - startDateTime;
+    //         var days = Math.floor(durationInMs / (1000 * 60 * 60 * 24));
+    //         var hours = Math.floor((durationInMs % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    //         var minutes = Math.floor((durationInMs % (1000 * 60 * 60)) / (1000 * 60));
+
+    //         // Display travel duration in the specified element
+    //         $("#result1").val(days + " nights : " + hours + " hours : " + minutes + " minutes");
+
+
+    //         $("#DBF").val(days);
+    //         $("#DLH").val(days);
+    //         $("#DDN").val(days);
+    //         $("#hn").val(days);
+    //         $("#ln").val(days);
+    
+    //         var a = parseFloat($("#BF").val()); //float
+    //         var b = parseInt($("#DBF").val());
+    //         var c = parseFloat($("#LH").val()); //float
+    //         var d = parseInt($("#DLH").val());
+    //         var e = parseFloat($("#DN").val()); //float
+    //         var f = parseInt($("#DDN").val());
+    //         $("#TS").val(a * b + c * d + e * f);
+    //     });
+    // });
+    
+    $(document).ready(function () {
         $("#timestart,#timeend").mdtimepicker({});
         $("#daystart,#dayend")
             .datepicker({
                 format: "yyyy-mm-dd",
             })
             .datepicker("setDate", "now");
-    });
-
-    $(document).ready(function () {
-        //calculate date range in subsistence allowance
-        $("#result1,#date1,#time1,#date2,#time2").focus(function () {
-            var startdt = new Date($("#date1").val() + " " + $("#time1").val());
-
-            var enddt = new Date($("#date2").val() + " " + $("#time2").val());
-
-            var diff = enddt - startdt;
-
-            var days = Math.floor(diff / (1000 * 60 * 60 * 24));
-            diff -= days * (1000 * 60 * 60 * 24);
-
-            var hours = Math.floor(diff / (1000 * 60 * 60));
-            diff -= hours * (1000 * 60 * 60);
-
-            var mins = Math.floor(diff / (1000 * 60));
-            diff -= mins * (1000 * 60);
-
-            $("#result1").val(
-                days + " nights : " + hours + " hours : " + mins + " minutes "
-            );
-            $("#DBF").val(days);
-            $("#DLH").val(days);
-            $("#DDN").val(days);
+        $("#time1,#time2").mdtimepicker({});
+    
+        // Calculate and display travel duration
+        $("#result1, #date1, #time1, #date2, #time2").focus(function () {
+            var startDate = document.getElementById('date1').value;
+            var endDate = document.getElementById('date2').value;
+            var startTime = document.getElementById('time1').value;
+            var endTime = document.getElementById('time2').value;
+            
+            var startDateTime = new Date(startDate + ' ' + startTime);
+            var endDateTime = new Date(endDate + ' ' + endTime);
+            var durationInMs = endDateTime - startDateTime;
+            var days = Math.floor(durationInMs / (1000 * 60 * 60 * 24));
+            var hours = Math.floor((durationInMs % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            var minutes = Math.floor((durationInMs % (1000 * 60 * 60)) / (1000 * 60));
+            
+            // Calculate the number of breakfast, lunch, and dinner days
+            var breakfastDays = 0;
+            var lunchDays = 0;
+            var dinnerDays = 0;
+        
+            // Check if the startDateTime and endDateTime are on the same day
+            if (startDateTime.toDateString() === endDateTime.toDateString()) {
+                // Check if the startDateTime has breakfast
+                if (startDateTime.getHours() < 8 || (startDateTime.getHours() === 8 && startDateTime.getMinutes() < 30)) {
+                    breakfastDays++;
+                }
+                
+                // Check if the startDateTime has lunch
+                if (startDateTime.getHours() < 13 && endDateTime.getHours() >= 12) {
+                    lunchDays++;
+                }
+                
+                // Check if the startDateTime has dinner
+                if (startDateTime.getHours() >= 19) {
+                    dinnerDays++;
+                }
+            } else {
+                // Start and end dates are different days
+                // Check if the startDateTime has breakfast
+                if (startDateTime.getHours() === 8 && startDateTime.getMinutes() < 30) {
+                    breakfastDays++;
+                }
+                
+                // Check if the startDateTime has lunch
+                if (startDateTime.getHours() < 13) {
+                    lunchDays++;
+                }
+                
+                // Check if the startDateTime has dinner
+                if (startDateTime.getHours() < 20) {
+                    dinnerDays++;
+                }
+        
+                // Check for the intermediate days
+                for (var i = 1; i < days; i++) {
+                    breakfastDays++;
+                    lunchDays++;
+                    dinnerDays++;
+                }
+                
+                // Check if the endDateTime has breakfast
+                if (endDateTime.getHours() >= 7) {
+                    breakfastDays++;
+                }
+                
+                // Check if the endDateTime has lunch
+                if (endDateTime.getHours() >= 12) {
+                    lunchDays++;
+                }
+                
+                // Check if the endDateTime has dinner
+                if (endDateTime.getHours() >= 19) {
+                    dinnerDays++;
+                }
+            }
+        
+            $("#result1").val(days + " nights : " + hours + " hours : " + minutes + " minutes");
+            $("#DBF").val(breakfastDays);
+            $("#DLH").val(lunchDays);
+            $("#DDN").val(dinnerDays);
             $("#hn").val(days);
             $("#ln").val(days);
-
+        
             var a = parseFloat($("#BF").val()); //float
             var b = parseInt($("#DBF").val());
             var c = parseFloat($("#LH").val()); //float
@@ -214,9 +355,18 @@ $("document").ready(function () {
             var e = parseFloat($("#DN").val()); //float
             var f = parseInt($("#DDN").val());
             $("#TS").val(a * b + c * d + e * f);
+            
+        
+            $("#totalbf").val((a * b).toFixed(2));
+            $("#totallh").val((c * d).toFixed(2));
+            $("#totaldn").val((e * f).toFixed(2));
         });
+        
+        
+        
+        
+        
     });
-
     //  calculate time duration un travelling
     $("#totalduration,#daystart,#timestart,#dayend,#timeend").focus(
         function () {
@@ -347,7 +497,12 @@ $("document").ready(function () {
         var d = parseInt($("#DLH").val());
         var e = parseFloat($("#DN").val()); //float
         var f = parseInt($("#DDN").val());
-        $("#TS").val(a * b + c * d + e * f); //float
+        
+        $("#totalbf").val((a * b).toFixed(2));
+        $("#totallh").val((c * d).toFixed(2));
+        $("#totaldn").val((e * f).toFixed(2));
+        $("#TS").val((a * b + c * d + e * f).toFixed(2));
+        
     });
 
     $("#htv,#hotelcv1,#hn,#lodgingcv1,#ln,#ldgv").focus(function () {
@@ -434,6 +589,7 @@ $("document").ready(function () {
             }
         });
     });
+
 
     $("#personalSaveButton").click(function (e) {
         $("#personalForm").validate({

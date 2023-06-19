@@ -11,7 +11,11 @@ $(document).ready(function () {
             [5, 10, 25, 50, -1],
             [5, 10, 25, 50, "All"],
         ],
-        scrollX: true,
+        initComplete: function (settings, json) {
+            $("#projectTable").wrap(
+                "<div style='overflow:auto; width:100%;position:relative;'></div>"
+            );
+        },
     });
 
     $("#acc_manager2").picker({
@@ -24,6 +28,11 @@ $(document).ready(function () {
             [5, 10, 25, 50, -1],
             [5, 10, 25, 50, "All"],
         ],
+        initComplete: function (settings, json) {
+            $("#data-table-default2").wrap(
+                "<div style='overflow:auto; width:100%;position:relative;'></div>"
+            );
+        },
     });
 
     $(document).on("click", "#addButton", function () {
@@ -147,7 +156,7 @@ $(document).ready(function () {
                 project_code: "Please Insert Project Code",
                 project_name: "Please Insert Project Name",
                 contract_value: {
-                    required: "Please Insert Contract Value",
+                    required: "Please insert Contract Value",
                 },
                 financial_year: "Please Choose Financial Year",
                 LOA_date: "Please Choose LOA Date",
@@ -417,63 +426,53 @@ $(document).ready(function () {
     });
 
     $("#contract_start_date")
-        .datepicker({
-            todayHighlight: true,
-            autoclose: true,
-            format: "yyyy/mm/dd",
-            startDate: "today", // Set the start date to today
-        })
-        .on("changeDate", function (e) {
-            // Set the end datepicker's date to the selected start date
-            $("#contract_end_date").datepicker("update", e.date);
-
-            // Set the minimum date for the end datepicker to the selected start date
-            $("#contract_end_date").datepicker("setStartDate", e.date);
-        });
-
-
-    $("#contract_end_date").datepicker({
-        format: "yyyy/mm/dd", // Sets the date format to 'day/month/year'
-        autoclose: true, // Closes the datepicker on selection
-        startDate: "today", // Set the start date to today
-        todayHighlight: true,
-    });
-
-    $("#datepicker-warstart")
-        .datepicker({
-            todayHighlight: true,
-            autoclose: true,
-            format: "yyyy/mm/dd",
-            startDate: "today", // Set the start date to today
-            clearBtn: true, // Add this line to enable the clear button
-        })
-        .on("changeDate", function (e) {
-            // Set the end datepicker's date to the selected start date
-            $("#datepicker-warend").datepicker("update", e.date);
-
-            // Set the minimum date for the end datepicker to the selected start date
-            $("#datepicker-warend").datepicker("setStartDate", e.date);
-        });
-
-    $("#datepicker-warend").datepicker({
+    .datepicker({
         todayHighlight: true,
         autoclose: true,
         format: "yyyy/mm/dd",
-        startDate: "today", // Set the start date to today
-        clearBtn: true, // Add this line to enable the clear button
+    })
+    .on("changeDate", function (e) {
+        // Enable the end datepicker and remove the readonly attribute
+        $("#contract_end_date").prop("readonly", false);
+
+        // Set the end datepicker's date to the selected start date
+        $("#contract_end_date").datepicker("update", e.date);
+
+        // Set the minimum date for the end datepicker to the selected start date
+        $("#contract_end_date").datepicker("setStartDate", e.date);
     });
+
+$("#contract_end_date").datepicker({
+    format: "yyyy/mm/dd", // Sets the date format to 'day/month/year'
+    autoclose: true, // Closes the datepicker on selection
+}).prop("readonly", true); // Set the end date input field as readonly initially
+
+
+$("#datepicker-warstart").datepicker({
+    todayHighlight: true,
+    autoclose: true,
+    format: "yyyy/mm/dd",
+}).on("changeDate", function (e) {
+    // Remove the readonly attribute from warranty_end_date input
+    $("#datepicker-warend").removeAttr("readonly");
+
+    // Set the end datepicker's date to the selected start date
+    $("#datepicker-warend").datepicker("update", e.date);
+
+    // Set the minimum date for the end datepicker to the selected start date
+    $("#datepicker-warend").datepicker("setStartDate", e.date);
+});
+
+$("#datepicker-warend").datepicker({
+    todayHighlight: true,
+    autoclose: true,
+    format: "yyyy/mm/dd",
+    clearBtn: true,
+    endDate: '0d' // Add this line to restrict dates to today or earlier
+});
+
 
     $("#datepicker-loa").datepicker({
-        todayHighlight: true,
-        autoclose: true,
-        format: "yyyy/mm/dd",
-    });
-    $("#datepicker-start").datepicker({
-        todayHighlight: true,
-        autoclose: true,
-        format: "yyyy/mm/dd",
-    });
-    $("#datepicker-end").datepicker({
         todayHighlight: true,
         autoclose: true,
         format: "yyyy/mm/dd",
@@ -483,6 +482,5 @@ $(document).ready(function () {
         todayHighlight: true,
         autoclose: true,
         format: "yyyy/mm/dd",
-        clearBtn: true, // Add this line to enable the clear button
     });
 });

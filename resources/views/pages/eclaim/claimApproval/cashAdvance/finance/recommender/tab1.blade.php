@@ -38,7 +38,7 @@
                         <td>{{ getCashAdvanceType($ca->type) ?? '-' }}</td>
                         <td>{{ date('Y-m-d', strtotime($ca->created_at)) ?? 'N/A' }}</td>
                         <td>{{ $ca->travel_date ?? '-' }}</td>
-                        <td>MYR {{  $ca->mode_of_transport->max_total ?? $ca->amount }}</td>
+                        <td>MYR {{ $ca->mode_of_transport->max_total ?? $ca->amount }}</td>
                         <td>{{ $ca->status ?? '-' }}</td>
                         <td>{{ date('Y-m-d', strtotime($ca->updated_at)) ?? 'N/A' }}</td>
                     </tr>

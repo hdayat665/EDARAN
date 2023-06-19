@@ -52,6 +52,12 @@ $(document).ready(function () {
         autoclose: true,
         format: "yyyy/mm/dd",
     });
+    
+    $("#datepicker-joineddate2").datepicker({
+        todayHighlight: true,
+        autoclose: true,
+        format: "yyyy/mm/dd",
+    });
 
     $("#datepicker_exitdate").datepicker({
         todayHighlight: true,
@@ -60,7 +66,6 @@ $(document).ready(function () {
     });
 
     $("#data-table-prevproject").DataTable({
-        // scrollX: true,
         responsive: false,
         lengthMenu: [
             [5, 10, 25, 50, -1],
@@ -500,6 +505,7 @@ $(document).ready(function () {
             // $("#designation").prop("selectedIndex", data.designation);
             // $("#department").prop("selectedIndex", data.department);
             // $("#branchs").prop("selectedIndex", data.branch);
+            $("#datepicker-joineddate").val(data.joinedDate);
             $("#unit").val(data.unit);
             $("#designation").val(data.designation);
             $("#department").val(data.department);
@@ -952,99 +958,128 @@ $(document).ready(function () {
         format: "yyyy/mm/dd",
     });
 
-    $("#datepicker-start")
-        .datepicker({
+        // Initialize the datepicker for contract_start_date
+        $("#datepicker-start").datepicker({
             todayHighlight: true,
             autoclose: true,
             format: "yyyy/mm/dd",
-            startDate: "today", // Set the start date to today
         })
-        .on("changeDate", function (e) {
-            // Set the end datepicker's date to the selected start date
-            $("#datepicker-end").datepicker("update", e.date);
-
+        .on("changeDate", function(e) {
+            var startDate = e.date;
+    
+            // Update the end datepicker's date to the selected start date
+            $("#datepicker-end").datepicker("update", startDate);
+    
             // Set the minimum date for the end datepicker to the selected start date
-            $("#datepicker-end").datepicker("setStartDate", e.date);
+            $("#datepicker-end").datepicker("setStartDate", startDate);
+    
+            // Enable or disable the end datepicker based on whether a start date is selected
+            if (startDate !== null) {
+                $("#datepicker-end").prop("readonly", false);
+            } else {
+                $("#datepicker-end").prop("readonly", true);
+            }
         });
-
-    $("#datepicker-end").datepicker({
-        format: "yyyy/mm/dd", // Sets the date format to 'day/month/year'
-        autoclose: true, // Closes the datepicker on selection
-        startDate: "today", // Set the start date to today
-        todayHighlight: true,
-    });
-
-    $("#datepicker-warstart")
-    .datepicker({
-        todayHighlight: true,
-        autoclose: true,
-        format: "yyyy/mm/dd",
-        startDate: "today", // Set the start date to today
-    })
-    .on("changeDate", function (e) {
-        if (e.date) {
-            // Set the end datepicker's date to the selected start date
-            $("#datepicker-warend").datepicker("update", e.date);
-
-            // Set the minimum date for the end datepicker to the selected start date
-            $("#datepicker-warend").datepicker("setStartDate", e.date);
-        }
-    });
-
-    $("#datepicker-warend").datepicker({
-        todayHighlight: true,
-        autoclose: true,
-        format: "yyyy/mm/dd",
-        startDate: "today", // Set the start date to today
-    });
+    
+        // Initialize the datepicker for contract_end_date
+        $("#datepicker-end").datepicker({
+            format: "yyyy/mm/dd",
+            autoclose: true,
+            todayHighlight: true,
+        });
+    
+        // Disable the end datepicker initially
+        $("#datepicker-end").prop("readonly", true);
+    
+        // Initialize the datepicker for warranty_start_date
+        $(document).ready(function () {
+            // Initialize the start datepicker
+            $("#datepicker-warstart").datepicker({
+                todayHighlight: true,
+                autoclose: true,
+                format: "yyyy/mm/dd",
+            }).on("changeDate", function (e) {
+                var startDate = e.date;
+        
+                // Set the end datepicker's date to the selected start date
+                $("#datepicker-warend").datepicker("update", startDate);
+        
+                // Set the minimum date for the end datepicker to the selected start date
+                $("#datepicker-warend").datepicker("setStartDate", startDate);
+        
+                // Enable or disable the end datepicker based on whether a start date is selected
+                if (startDate !== null) {
+                    $("#datepicker-warend").prop("readonly", false);
+                } else {
+                    $("#datepicker-warend").prop("readonly", true);
+                }
+            });
+        
+            // Initialize the end datepicker
+            $("#datepicker-warend").datepicker({
+                format: "yyyy/mm/dd",
+                autoclose: true,
+                todayHighlight: true,
+            });
+        
+            // Disable the end datepicker initially
+            $("#datepicker-warend").prop("readonly", true);
+        });
+        
+    
     
     $("#datepicker-bankexpiry").datepicker({
         todayHighlight: true,
         autoclose: true,
         format: "yyyy/mm/dd",
+        onClose: function(dateText, inst) {
+            if (dateText === "") {
+                $(this).val(null); // Set the input value to null
+            }
+        }
     });
     
 
-    $("#project_manager2_show").hide();
-    $("#project_manager2_show").prop("disabled", true);
-
-    $(document).on("change", "#acc_manager2", function () {
-        var userId = $(this).val();
-        $("#project_manager2_show")
-            .find("option")
-            .remove()
-            .end()
-            .append(
-                '<option label="PLEASE CHOOSE" selected="selected"> </option>'
-            )
-            .val("");
-
-        function getUserWithSelectedUser(userId) {
-            return $.ajax({
-                url: "/getUserWithSelectedUser/" + userId,
-            });
-        }
-
-        $("#project_manager2").prop("disabled", true);
-        $("#project_manager2").hide();
-        $("#project_manager2_show").find("option").end();
-        $("#project_manager2_show").show();
-        $("#project_manager2_show").prop("disabled", false);
-
-        var user = getUserWithSelectedUser(userId);
-
-        user.then(function (data) {
-            for (let i = 0; i < data.length; i++) {
-                const user = data[i];
-                console.log(user["id"]);
-                var opt = document.createElement("option");
-                document.getElementById("project_manager2_show").innerHTML +=
-                    '<option value="' +
-                    user["id"] +
-                    '">' +
-                    user["employeeName"] +
-                    "</option>";
+        $("#project_manager2_show").hide();
+        $("#project_manager2").prop("readonly", true);
+    
+        $(document).on("change", "#acc_manager2", function () {
+            var selectedValue = $(this).val();
+            if (selectedValue !== "") {
+                $("#project_manager2_show")
+                    .find("option")
+                    .remove()
+                    .end()
+                    .append('<option label="PLEASE CHOOSE" selected="selected"></option>')
+                    .val("");
+    
+                $.ajax({
+                    url: "/getUserWithSelectedUser/" + selectedValue,
+                    success: function (data) {
+                        for (let i = 0; i < data.length; i++) {
+                            const user = data[i];
+                            console.log(user["id"]);
+                            var opt = document.createElement("option");
+                            document.getElementById("project_manager2_show").innerHTML +=
+                                '<option value="' +
+                                user["id"] +
+                                '">' +
+                                user["employeeName"] +
+                                "</option>";
+                        }
+                    },
+                });
+    
+                $("#project_manager2_show").prop("disabled", false);
+                $("#project_manager2_show").show();
+                $("#project_manager2").prop("disabled", true);
+                $("#project_manager2").hide();
+            } else {
+                $("#project_manager2_show").hide();
+                $("#project_manager2_show").prop("disabled", true);
+                $("#project_manager2").prop("disabled", false);
+                $("#project_manager2").show();
             }
         });
-    });
 });
+    
