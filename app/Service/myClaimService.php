@@ -758,7 +758,7 @@ class myClaimService
     public function createSubsClaim($r)
     {
         $input = $r->input();
-
+        //pr($input);
         $id = $input['general_id'];
         unset($input['claimtable_length']);
 
@@ -772,12 +772,11 @@ class myClaimService
             // add to general claim
             $generalClaim['user_id'] = Auth::user()->id;
             $generalClaim['tenant_id'] = Auth::user()->tenant_id;
-            $generalClaim['claim_id'] = 'MTC' . $monthlyClaimCount + 1;
+            $generalClaim['claim_id'] = 'MTC' . ($monthlyClaimCount + 1);
             $generalClaim['claim_type'] = $input['claim_type'] ?? 'MTC';
             $generalClaim['status'] = 'draft';
             $generalClaim['month'] = $input['month'] ?? '-';
             $generalClaim['year'] = $input['year'] ?? '-';
-            // $generalClaim['total_amount'] = array_sum($input['amount']) ?? '';
 
             GeneralClaim::create($generalClaim);
             $generalClaimData = GeneralClaim::where('tenant_id', Auth::user()->tenant_id)->orderBy('created_at', 'DESC')->first();
@@ -785,7 +784,6 @@ class myClaimService
             $generalClaimData = GeneralClaim::where([['tenant_id', Auth::user()->tenant_id], ['id', $id]])->orderBy('created_at', 'DESC')->first();
         }
         unset($input['month'], $input['year']);
-
 
         if (!empty($_FILES['file_upload']['name']) && is_array($_FILES['file_upload']['name'])) {
             $filenames = array();
@@ -800,7 +798,6 @@ class myClaimService
             }
             $fileString = implode(',', $filenames);
         }
-        
 
         $input['user_id'] = Auth::user()->id;
         $input['tenant_id'] = Auth::user()->tenant_id;
@@ -809,6 +806,38 @@ class myClaimService
         $input['type_claim'] = 'subs';
         $input['file_upload'] = $fileString ?? '';
 
+        // Check if there are overlapping claims with the same general_id
+        $overlappingClaims = TravelClaim::where('general_id', $input['general_id'])
+        ->where(function ($query) use ($input) {
+            $query->where('start_date', '<', $input['end_date']) // Changed to '<'
+                ->orWhere(function ($query) use ($input) {
+                    $query->where('start_date', '=', $input['end_date'])
+                        ->where('start_time', '<=', $input['end_time']);
+                });
+        })
+        ->where(function ($query) use ($input) {
+            $query->where('end_date', '>', $input['start_date']) // Changed to '>'
+                ->orWhere(function ($query) use ($input) {
+                    $query->where('end_date', '=', $input['start_date'])
+                        ->where('end_time', '>=', $input['start_time']);
+                });
+        })
+        ->exists();
+
+
+
+
+        if ($overlappingClaims) {
+            // Return overlapping claim data
+            $data['status'] = config('app.response.error.status');
+            $data['type'] = config('app.response.error.type');
+            $data['title'] = config('app.response.error.title');
+            $data['id'] = $generalClaimData->id;
+            $data['msg'] = 'Claim with overlapping date and time already exists for the same general ID.';
+            return $data;
+        }
+
+        // If no overlapping claim, proceed with creating a new TravelClaim
         TravelClaim::create($input);
 
         $personalClaims = PersonalClaim::where([['tenant_id', Auth::user()->tenant_id], ['general_id', $generalClaimData->id]])->get();
@@ -838,6 +867,8 @@ class myClaimService
 
         return $data;
     }
+
+
 
     public function createCaClaim($r)
     {
@@ -926,7 +957,7 @@ class myClaimService
     public function getTravellingClaimByGeneralId($id = '')
     {
         $data = TravelClaim::select(
-            'travel_date',
+            'travel_date','general_id',
             DB::raw('SUM(millage) AS total_millage'),
             DB::raw('SUM(total_km) AS total_km'),
             DB::raw('SUM(petrol) AS total_petrol'),

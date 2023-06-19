@@ -179,6 +179,7 @@ class myClaimController extends Controller
         
         $data['cashAdvances'] = $mcs->getCashAdvance();
         $data['travelClaims'] = $mcs->getTravellingClaimByGeneralId($id);
+        //pr($data['travelClaims']);
         $data['subsClaims'] = $mcs->getSubsClaimByGeneralId($id);
         $data['summaryTravelling'] = $mcs->getSummaryTravellingClaimByGeneralId($id) ?? 0;
         $total_millage = isset($data['summaryTravelling'][0]) ? $data['summaryTravelling'][0]->total_millage : 0;

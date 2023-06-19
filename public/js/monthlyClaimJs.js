@@ -1,7 +1,38 @@
 $("document").ready(function () {
+    
     $(document).on("click", "#travelBtn", function () {
+        // var id = $(this).data("id");
+        // var eventData = getEvents(id);
+        // eventData.then(function (data) {
+        //     var attendanceEvent = getAttendance(data.id);
+        //     attendanceEvent.then(function (dataAttendance) {
+        //         // Check if the DataTable is already initialized
+        //         var table = $("#tableviewparticipants").DataTable();
+        //         if (table) {
+        //             // The DataTable is already initialized, so we can just update the data
+        //             table.clear();
+        //             for (let i = 0; i < dataAttendance.length; i++) {
+        //                 const attendance = dataAttendance[i];
+        //                 table.row.add([i + 1, attendance.employeeName]);
+        //             }
+        //             table.draw();
+        //         } else {
+        //             // The DataTable is not yet initialized, so we need to initialize it
+        //             $("#tableviewparticipants").DataTable({
+        //                 paging: true,
+        //                 columns: [{ title: "No" }, { title: "Participants" }],
+        //             });
+        //             for (let i = 0; i < dataAttendance.length; i++) {
+        //                 const attendance = dataAttendance[i];
+        //                 table.row.add([i + 1, attendance.employeeName]);
+        //             }
+        //         }
+        //     });
+        // });
+    
         $("#travelModal").modal("show");
     });
+
     $(document).on("click", "#subsBtn", function () {
         $("#subsModal").modal("show");
     });
@@ -241,7 +272,7 @@ $("document").ready(function () {
             var endDate = document.getElementById('date2').value;
             var startTime = document.getElementById('time1').value;
             var endTime = document.getElementById('time2').value;
-    
+            
             var startDateTime = new Date(startDate + ' ' + startTime);
             var endDateTime = new Date(endDate + ' ' + endTime);
             var durationInMs = endDateTime - startDateTime;
@@ -249,14 +280,74 @@ $("document").ready(function () {
             var hours = Math.floor((durationInMs % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
             var minutes = Math.floor((durationInMs % (1000 * 60 * 60)) / (1000 * 60));
             
+            // Calculate the number of breakfast, lunch, and dinner days
+            var breakfastDays = 0;
+            var lunchDays = 0;
+            var dinnerDays = 0;
+        
+            // Check if the startDateTime and endDateTime are on the same day
+            if (startDateTime.toDateString() === endDateTime.toDateString()) {
+                // Check if the startDateTime has breakfast
+                if (startDateTime.getHours() < 8 && endDateTime.getHours() >= 7) {
+                    breakfastDays++;
+                }
+                
+                // Check if the startDateTime has lunch
+                if (startDateTime.getHours() < 13 && endDateTime.getHours() >= 12) {
+                    lunchDays++;
+                }
+                
+                // Check if the startDateTime has dinner
+                if (startDateTime.getHours() < 20 && endDateTime.getHours() >= 19) {
+                    dinnerDays++;
+                }
+            } else {
+                // Start and end dates are different days
+                // Check if the startDateTime has breakfast
+                if (startDateTime.getHours() < 8) {
+                    breakfastDays++;
+                }
+                
+                // Check if the startDateTime has lunch
+                if (startDateTime.getHours() < 13) {
+                    lunchDays++;
+                }
+                
+                // Check if the startDateTime has dinner
+                if (startDateTime.getHours() < 20) {
+                    dinnerDays++;
+                }
+        
+                // Check for the intermediate days
+                for (var i = 1; i < days; i++) {
+                    breakfastDays++;
+                    lunchDays++;
+                    dinnerDays++;
+                }
+                
+                // Check if the endDateTime has breakfast
+                if (endDateTime.getHours() >= 7) {
+                    breakfastDays++;
+                }
+                
+                // Check if the endDateTime has lunch
+                if (endDateTime.getHours() >= 12) {
+                    lunchDays++;
+                }
+                
+                // Check if the endDateTime has dinner
+                if (endDateTime.getHours() >= 19) {
+                    dinnerDays++;
+                }
+            }
+        
             $("#result1").val(days + " nights : " + hours + " hours : " + minutes + " minutes");
-
-            $("#DBF").val(days);
-            $("#DLH").val(days);
-            $("#DDN").val(days);
+            $("#DBF").val(breakfastDays);
+            $("#DLH").val(lunchDays);
+            $("#DDN").val(dinnerDays);
             $("#hn").val(days);
             $("#ln").val(days);
-    
+        
             var a = parseFloat($("#BF").val()); //float
             var b = parseInt($("#DBF").val());
             var c = parseFloat($("#LH").val()); //float
@@ -264,7 +355,16 @@ $("document").ready(function () {
             var e = parseFloat($("#DN").val()); //float
             var f = parseInt($("#DDN").val());
             $("#TS").val(a * b + c * d + e * f);
+        
+            $("#totalbf").val((a * b).toFixed(2));
+            $("#totallh").val((c * d).toFixed(2));
+            $("#totaldn").val((e * f).toFixed(2));
         });
+        
+        
+        
+        
+        
     });
     //  calculate time duration un travelling
     $("#totalduration,#daystart,#timestart,#dayend,#timeend").focus(
@@ -488,6 +588,7 @@ $("document").ready(function () {
             }
         });
     });
+
 
     $("#personalSaveButton").click(function (e) {
         $("#personalForm").validate({
