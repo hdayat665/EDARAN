@@ -426,45 +426,51 @@ $(document).ready(function () {
     });
 
     $("#contract_start_date")
-        .datepicker({
-            todayHighlight: true,
-            autoclose: true,
-            format: "yyyy/mm/dd",
-        })
-        .on("changeDate", function (e) {
-            // Set the end datepicker's date to the selected start date
-            $("#contract_end_date").datepicker("update", e.date);
-
-            // Set the minimum date for the end datepicker to the selected start date
-            $("#contract_end_date").datepicker("setStartDate", e.date);
-        });
-
-    $("#contract_end_date").datepicker({
-        format: "yyyy/mm/dd", // Sets the date format to 'day/month/year'
-        autoclose: true, // Closes the datepicker on selection
-    });
-
-    $("#datepicker-warstart")
-        .datepicker({
-            todayHighlight: true,
-            autoclose: true,
-            format: "yyyy/mm/dd",
-        })
-        .on("changeDate", function (e) {
-            // Set the end datepicker's date to the selected start date
-            $("#datepicker-warend").datepicker("update", e.date);
-
-            // Set the minimum date for the end datepicker to the selected start date
-            $("#datepicker-warend").datepicker("setStartDate", e.date);
-        });
-
-    $("#datepicker-warend").datepicker({
+    .datepicker({
         todayHighlight: true,
         autoclose: true,
         format: "yyyy/mm/dd",
-        clearBtn: true, // Add this line to enable a clear button
-        endDate: '0d' // Add this line to restrict dates to today or earlier
+    })
+    .on("changeDate", function (e) {
+        // Enable the end datepicker and remove the readonly attribute
+        $("#contract_end_date").prop("readonly", false);
+
+        // Set the end datepicker's date to the selected start date
+        $("#contract_end_date").datepicker("update", e.date);
+
+        // Set the minimum date for the end datepicker to the selected start date
+        $("#contract_end_date").datepicker("setStartDate", e.date);
     });
+
+$("#contract_end_date").datepicker({
+    format: "yyyy/mm/dd", // Sets the date format to 'day/month/year'
+    autoclose: true, // Closes the datepicker on selection
+}).prop("readonly", true); // Set the end date input field as readonly initially
+
+
+$("#datepicker-warstart").datepicker({
+    todayHighlight: true,
+    autoclose: true,
+    format: "yyyy/mm/dd",
+}).on("changeDate", function (e) {
+    // Remove the readonly attribute from warranty_end_date input
+    $("#datepicker-warend").removeAttr("readonly");
+
+    // Set the end datepicker's date to the selected start date
+    $("#datepicker-warend").datepicker("update", e.date);
+
+    // Set the minimum date for the end datepicker to the selected start date
+    $("#datepicker-warend").datepicker("setStartDate", e.date);
+});
+
+$("#datepicker-warend").datepicker({
+    todayHighlight: true,
+    autoclose: true,
+    format: "yyyy/mm/dd",
+    clearBtn: true,
+    endDate: '0d' // Add this line to restrict dates to today or earlier
+});
+
 
     $("#datepicker-loa").datepicker({
         todayHighlight: true,
