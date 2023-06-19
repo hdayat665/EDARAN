@@ -127,7 +127,7 @@
                                                 <label class="form-label">Others</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <input type="text" class="form-control" readonly value='RM {{ $summaryOthers[0]->total_amount }}'>
+                                                <input type="text" class="form-control" readonly value='RM {{ $summaryOthers[0]->total_amount ?? 0}}'>
                                             </div>
                                         </div>
                                     </div>

@@ -539,7 +539,7 @@
                                                         <label class="form-label">End Date</label>
                                                     </div>
                                                     <div class="col">
-                                                        <select class="form-control" name="start_date" id="date2">
+                                                        <select class="form-control" name="end_date" id="date2">
                                                             <option value="">Select Date</option>
                                                             @foreach($travelDate as $date)
                                                                 <option value="{{ $date }}">{{ $date }}</option>
@@ -619,7 +619,7 @@
                                                     <label class="form-label">X</label>
                                                 </div>
                                                 <div class="col-md-2">
-                                                    <input type="text" class="form-control" name="breakfast" value="0" id="DBF">
+                                                    <input type="text" class="form-control" readonly name="breakfast" value="0" id="DBF">
                                                 </div>
                                                 <div class="col-md-1">
                                                     <label class="form-label">=</label>
@@ -639,7 +639,7 @@
                                                     <label class="form-label">X</label>
                                                 </div>
                                                 <div class="col-md-2">
-                                                    <input type="text" name="lunch" class="form-control" value="0" id="DLH">
+                                                    <input type="text" name="lunch" readonly class="form-control" value="0" id="DLH">
                                                 </div>
                                                 <div class="col-md-1">
                                                     <label class="form-label">=</label>
@@ -659,7 +659,7 @@
                                                     <label class="form-label">X</label>
                                                 </div>
                                                 <div class="col-md-2">
-                                                    <input type="text" name="dinner" class="form-control" value="0" id="DDN">
+                                                    <input type="text" name="dinner" readonly class="form-control" value="0" id="DDN">
                                                 </div>
                                                 <div class="col-md-1">
                                                     <label class="form-label">=</label>
