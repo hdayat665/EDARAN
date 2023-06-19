@@ -288,7 +288,7 @@ $("document").ready(function () {
             // Check if the startDateTime and endDateTime are on the same day
             if (startDateTime.toDateString() === endDateTime.toDateString()) {
                 // Check if the startDateTime has breakfast
-                if (startDateTime.getHours() < 8 && endDateTime.getHours() >= 7) {
+                if (startDateTime.getHours() < 8 || (startDateTime.getHours() === 8 && startDateTime.getMinutes() < 30)) {
                     breakfastDays++;
                 }
                 
@@ -298,13 +298,13 @@ $("document").ready(function () {
                 }
                 
                 // Check if the startDateTime has dinner
-                if (startDateTime.getHours() < 20 && endDateTime.getHours() >= 19) {
+                if (startDateTime.getHours() >= 19) {
                     dinnerDays++;
                 }
             } else {
                 // Start and end dates are different days
                 // Check if the startDateTime has breakfast
-                if (startDateTime.getHours() < 8) {
+                if (startDateTime.getHours() === 8 && startDateTime.getMinutes() < 30) {
                     breakfastDays++;
                 }
                 
@@ -355,6 +355,7 @@ $("document").ready(function () {
             var e = parseFloat($("#DN").val()); //float
             var f = parseInt($("#DDN").val());
             $("#TS").val(a * b + c * d + e * f);
+            
         
             $("#totalbf").val((a * b).toFixed(2));
             $("#totallh").val((c * d).toFixed(2));
