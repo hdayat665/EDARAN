@@ -12,4 +12,15 @@ class Location extends Model
     protected $table = 'location';
 
     protected $guarded = [];
+
+    public function postcodebranches()
+    {
+        $this->hasMany(Branch::class, 'id', 'postcode');
+
+    }
+
+    public function countrybranches()
+    {
+        $this->hasMany(Branch::class, 'id', 'country');
+    }
 }

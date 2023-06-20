@@ -20,12 +20,12 @@
                         <th width="1%">NO</th>
                         <th class="text-nowrap">Country Name</th>
                         <th class="text-nowrap">State</th>
-                        <th class="text-nowrap">District</th>
+                        <th class="text-nowrap">Postcode</th>
                         <th width="9%" data-orderable="false" class="align-middle">Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <?php $id = 0 ?> 
+                    <?php $id = 0 ?>
                     @if ($locations)
                         @foreach ($locations as $location)
                         <?php $id++ ?>
@@ -37,6 +37,7 @@
                                 $countryName = getCountryName($countryId);
                                 echo $countryName;
                             @endphp
+                            {{-- {{$location->countryID}} --}}
                             </td>
                             <td style="text-transform: uppercase;">
                             @php
@@ -45,7 +46,7 @@
                                 echo $stateName;
                             @endphp
                             </td>
-                            <td style="text-transform: uppercase;">{{$location->districtName}}</td>
+                            <td style="text-transform: uppercase;">{{$location->postcode}}</td>
                             <td>
                                 <a data-bs-toggle="modal" id="deleteLocation" data-id="{{$location->id}}" class="btn btn-danger">Delete</a>
                             </td>
@@ -63,7 +64,7 @@
     </div>
 </div>
 
-@php 
+@php
     $countries = getCountries();
     $states = getStates();
 @endphp
@@ -81,7 +82,7 @@
                             <label class="form-label">Country*</label>
                             <select class="form-select" id="addCountry1" name="countryID" style="text-transform:uppercase" required>
                                 <option value="" label="PLEASE CHOOSE"></option>
-                                @if ($countries)    
+                                @if ($countries)
                                     @foreach ($countries as $country => $status)
                                         <option value="{{$country}}" <?php echo ($country == 'MY') ? 'selected' : ''; ?>>{{$status}}</option>
                                     @endforeach
@@ -126,10 +127,10 @@
                                     @endforeach
                                 @endif
                             </select>
-                        </div>                        
+                        </div>
                         <div class="mb-2">
                             <label class="form-label">State*</label>
-                            <select class="form-select" id="addState2" name="stateID" style="text-transform:uppercase" required>
+                            <select class="form-select" id="addState2" name="stateID" style="text-transform:uppercase" >
                                 <option value="" label="PLEASE CHOOSE"></option>
                                 @if ($states)
                                     @foreach ($states as $state => $status)
@@ -139,8 +140,8 @@
                             </select>
                         </div>
                         <div class="mb-3">
-                            <label class="form-label">District Name*</label>
-                            <input type="text" id="addDistrictName2" class="form-control" name="districtName" maxlength="100" placeholder="" required>
+                            <label class="form-label">Postcode*</label>
+                            <input type="text" id="addPostcodeName2" class="form-control" name="postcode" maxlength="100" placeholder="" >
                         </div>
                 </div>
 
@@ -166,7 +167,7 @@
                             <label class="form-label">Country</label>
                             <select class="form-select" name="countryID" id="addCountry3" required>
                                 <option value="" label="Please Select Country"></option>
-                                @if ($countries)    
+                                @if ($countries)
                                     @foreach ($countries as $country => $status)
                                         <option value="{{$country}}" <?php echo $country; ?>>{{$status}}</option>
                                     @endforeach
