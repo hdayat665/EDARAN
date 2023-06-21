@@ -123,7 +123,12 @@ $(document).ready(function () {
             [5, 10, 25, 50, -1],
             [5, 10, 25, 50, "All"],
         ],
-        scrollX: true,
+        // scrollX: true,
+        initComplete: function (settings, json) {
+            $("#data-table-default2").wrap(
+                "<div style='overflow:auto; width:100%;position:relative;'></div>"
+            );
+        },
     });
 
     var hash = location.hash.replace(/^#/, ""); // ^ means starting, meaning only match the first hash
@@ -505,7 +510,7 @@ $(document).ready(function () {
             // $("#designation").prop("selectedIndex", data.designation);
             // $("#department").prop("selectedIndex", data.department);
             // $("#branchs").prop("selectedIndex", data.branch);
-            $("#datepicker-joineddate").val(data.joinedDate);
+            // $("#datepicker-joineddate").val(data.joinedDate);
             $("#unit").val(data.unit);
             $("#designation").val(data.designation);
             $("#department").val(data.department);

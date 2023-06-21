@@ -1354,6 +1354,7 @@ class SettingService
     {
         $data['SOPs'] = SOP::where('tenant_id', Auth::user()->tenant_id)->orderBy('id', 'desc')->get();
         $data['policys'] = Policy::where('tenant_id', Auth::user()->tenant_id)->orderBy('id', 'desc')->get();
+        // dd($data);
 
         return $data;
     }
