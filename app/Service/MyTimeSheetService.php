@@ -552,28 +552,34 @@ if ($existingLogs->isNotEmpty()) {
     public function getEventById($id)
     {
         $event = TimesheetEvent::find($id);
-
+    
         $event = $event->leftJoin('employment as b', 'timesheet_event.user_id', '=', 'b.user_id')
                     ->select('timesheet_event.*', 'b.employeeName')
                     ->find($id);
-        // dd($event);
-
+    
         $participantIds = explode(',', $event->participant);
-
+    
         $employees = DB::table('employment')
                         ->whereIn('user_id', $participantIds)
                         ->get();
-       
-
+    
         $employeeNames = $employees->pluck('employeeName')->toArray();
-        
-
+    
         $event->participantNames = implode(',', $employeeNames);
-        //  dd($event);
+    
+        $nonParticipants = DB::table('employment')
+                            ->whereNotIn('user_id', $participantIds)
+                            ->get()
+                            ->pluck('employeeName')
+                            ->toArray();
+    
+        $event->nonParticipantNames = implode(',', $nonParticipants);
 
+        // dd($event);
+    
         return $event;
-
     }
+    
 
 
 
@@ -1561,6 +1567,26 @@ if ($existingLogs->isNotEmpty()) {
     
         return $approverName;
     }
+
+    public function participants()
+    {
+        $data = Employee::where([
+            ['tenant_id', Auth::user()->tenant_id],
+            ['employeeid', '!=', null],
+            ['status', 'active'],
+        ])->get();
+    
+        return $data;
+    }
+    
+
+    
+
+
+
+
+
+    
     
     
 
