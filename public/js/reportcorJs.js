@@ -34,7 +34,7 @@ $("document").ready(function () {
             [5, 10, 25, 50, "All"],
         ],
         responsive: false,
-        scrollX: true,
+        // scrollX: true,
     
         dom: "<'row'<'col-sm-3'l><'col-sm-6 text-center'B><'col-sm-3'f>>tp",
         buttons: [
@@ -42,6 +42,11 @@ $("document").ready(function () {
             { extend: 'pdf', className: 'btn-blue',},
             { extend: 'print', className: 'btn-blue', },
         ],
+        initComplete: function (settings, json) {
+            $("#tableviewcor").wrap(
+                "<div style='overflow:auto; width:100%;position:relative;'></div>"
+            );
+        },
     });
     
 });

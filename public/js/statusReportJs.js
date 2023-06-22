@@ -15,7 +15,11 @@ $('#timesheetapproval').DataTable({
             columns: [2,3,4,5,6,7,8]
         }},
     ],
-
+    initComplete: function (settings, json) {
+        $("#timesheetapproval").wrap(
+            "<div style='overflow:auto; width:100%;position:relative;'></div>"
+        );
+    },
 });
   $(document).ready(function() {
       var x = document.getElementById('awaitingapproval');

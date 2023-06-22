@@ -4,7 +4,12 @@ $(document).ready(function () {
             responsive: false,
             bLengthChange: false,
             bFilter: true,
-            scrollX: true,
+            // scrollX: true,
+            initComplete: function (settings, json) {
+                $("#tableeleave").wrap(
+                    "<div style='overflow:auto; width:100%;position:relative;'></div>"
+                );
+            },
         });
     });
 
@@ -163,6 +168,11 @@ $(document).ready(function () {
             [5, 10, 25, 50, "All"],
         ],
         responsive: false,
+        initComplete: function (settings, json) {
+            $("#tableentitlement").wrap(
+                "<div style='overflow:auto; width:100%;position:relative;'></div>"
+            );
+        },
     });
 
     $("#tableannual").DataTable({
@@ -173,6 +183,11 @@ $(document).ready(function () {
             [5, 10, 25, 50, "All"],
         ],
         responsive: false,
+        initComplete: function (settings, json) {
+            $("#tableannual").wrap(
+                "<div style='overflow:auto; width:100%;position:relative;'></div>"
+            );
+        },
     });
     $("#tablesick").DataTable({
         searching: true,
@@ -182,6 +197,11 @@ $(document).ready(function () {
             [5, 10, 25, 50, "All"],
         ],
         responsive: false,
+        initComplete: function (settings, json) {
+            $("#tablesick").wrap(
+                "<div style='overflow:auto; width:100%;position:relative;'></div>"
+            );
+        },
     });
     $("#tablecarrforward").DataTable({
         searching: true,
@@ -191,6 +211,11 @@ $(document).ready(function () {
             [5, 10, 25, 50, "All"],
         ],
         responsive: false,
+        initComplete: function (settings, json) {
+            $("#tablecarrforward").wrap(
+                "<div style='overflow:auto; width:100%;position:relative;'></div>"
+            );
+        },
     });
 
 });

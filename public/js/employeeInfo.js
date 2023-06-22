@@ -24,7 +24,12 @@ $(document).ready(function () {
             [5, 10, 25, -1],
             [5, 10, 25, "All"],
         ],
-        scrollX: true, // enable horizontal scrolling if necessary
+        initComplete: function (settings, json) {
+            $("#tableemployeeinfo").wrap(
+                "<div style='overflow:auto; width:100%;position:relative;'></div>"
+            );
+        },
+        // scrollX: true, // enable horizontal scrolling if necessary
     });
 
     $("#datepicker-terminatedate").datepicker({

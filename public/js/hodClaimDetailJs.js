@@ -5,7 +5,12 @@ $(document).ready(function () {
             [5, 10, 25, 50, -1],
             [5, 10, 25, 50, "All"],
         ],
-        scrollX: true,
+        initComplete: function (settings, json) {
+            $("#claimtable").wrap(
+                "<div style='overflow:auto; width:100%;position:relative;'></div>"
+            );
+        },
+        // scrollX: true,
     });
     $("#traveltable").DataTable({
         responsive: false,
@@ -13,7 +18,12 @@ $(document).ready(function () {
             [5, 10, 25, 50, -1],
             [5, 10, 25, 50, "All"],
         ],
-        scrollX: true,
+        // scrollX: true,
+        initComplete: function (settings, json) {
+            $("#traveltable").wrap(
+                "<div style='overflow:auto; width:100%;position:relative;'></div>"
+            );
+        },
     });
     // travel
     $(document).on("click", "#btn-view-claim", function () {

@@ -574,6 +574,7 @@ class SettingController extends Controller
         $ss = new SettingService;
 
         $result = $ss->sopView();
+        // pr($result);
 
         return view('pages.setting.sop', $result);
     }

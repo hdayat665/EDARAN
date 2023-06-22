@@ -17,6 +17,11 @@ $(document).ready(function () {
             [5, 10, 25, 50, -1],
             [5, 10, 25, 50, "All"],
         ],
+        initComplete: function (settings, json) {
+            $("#tablelocation").wrap(
+                "<div style='overflow:auto; width:100%;position:relative;'></div>"
+            );
+        },
     });
 
     $(document).on("click", "#addCountryState", function () {
