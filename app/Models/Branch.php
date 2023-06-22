@@ -25,6 +25,18 @@ class Branch extends Authenticatable
     public function company()
     {
         $this->belongsTo(Company::class, 'id', 'companyId');
+
+    }
+
+    public function location()
+    {
+        $this->belongsTo(Location::class, 'id', 'postcode');
+
+    }
+
+    public function country()
+    {
+        $this->belongsTo(Location::class, 'countryID', 'country');
     }
 }
 
