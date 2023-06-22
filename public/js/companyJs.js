@@ -14,6 +14,11 @@ $(document).ready(function () {
             [5, 10, 25, 50, -1],
             [5, 10, 25, 50, "All"],
         ],
+        initComplete: function (settings, json) {
+            $("#data-table-default").wrap(
+                "<div style='overflow:auto; width:100%;position:relative;'></div>"
+            );
+        },
     });
 
     $("#tableRoles").DataTable({
@@ -22,6 +27,11 @@ $(document).ready(function () {
             [5, 10, 25, 50, -1],
             [5, 10, 25, 50, "All"],
         ],
+        initComplete: function (settings, json) {
+            $("#tableRoles").wrap(
+                "<div style='overflow:auto; width:100%;position:relative;'></div>"
+            );
+        },
     });
 
     $(document).on("click", "#addButton", function () {

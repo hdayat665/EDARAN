@@ -11,11 +11,21 @@ $(document).ready(function () {
             [5, 10, 25, 50, -1],
             [5, 10, 25, 50, "All"],
         ],
+        initComplete: function (settings, json) {
+            $("#tablenews").wrap(
+                "<div style='overflow:auto; width:100%;position:relative;'></div>"
+            );
+        },
     });
     $("#tablenews-dashboard").DataTable({
         responsive: false,
-        scrollX: true,
+        // scrollX: true,
         lengthMenu: [[5], [5]],
+        initComplete: function (settings, json) {
+            $("#tablenews-dashboard").wrap(
+                "<div style='overflow:auto; width:100%;position:relative;'></div>"
+            );
+        },
     });
 
     $(document).on("click", "#addButton", function () {

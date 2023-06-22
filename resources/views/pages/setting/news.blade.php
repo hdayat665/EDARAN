@@ -15,6 +15,7 @@
             <table id="tablenews" class="table table-striped table-bordered align-middle">
                 <thead>
                     <tr>
+                        <th>No.</th>     
                         <th class="text-nowrap">Title</th>
                         <th class="text-nowrap">Content</th>
                         <th class="text-nowrap">Attachment</th>
@@ -26,9 +27,12 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <?php $id = 0 ?>
                     @if ($news)
-                        @foreach ($news as $new)
-                    <tr>
+                    @foreach ($news as $new)
+                    <?php $id++ ?>
+                    <tr class="odd gradeX">
+                        <td width="1%" class="fw-bold text-dark">{{$id}}</td>
                         <td>{{$new->title}}</td>
                         <td>{{$new->content}}</td>
                         <td><a href="{{ route('download', ['filename' => $new->file]) }}">{{$new->file}}</a></td>  

@@ -49,6 +49,7 @@ requirejs.config({
         employeeReportByJs: assets + "/js/employeeReportByJs",
         employeeReportAllJs: assets + "/js/employeeReportAllJs",
         editHRISJs: assets + "/js/editHRISJs",
+        jobHistroyJs: assets + "/js/jobHistroyJs",
         eclaimGenearalJs: assets + "/js/eclaimGenearalJs",
         claimCategoryJs: assets + "/js/claimCategoryJs",
         entitleJs: assets + "/js/entitleJs",
@@ -305,6 +306,9 @@ if ($("#employeeReportAllJs").length > 0) {
 
 if ($("#editHRISJs").length > 0) {
     requirejs(["editHRISJs"]);
+}
+if ($("#jobHistroyJs").length > 0) {
+    requirejs(["jobHistroyJs"]);
 }
 
 if ($("#eclaimGenearalJs").length > 0) {

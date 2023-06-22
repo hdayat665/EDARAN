@@ -838,7 +838,8 @@ class ProjectService
         ->first();
     
     $data['locations'] = ProjectLocation::select('id', 'location_name')
-        ->whereIn('id', explode(',', $data['projectMember']->location))
+        ->whereIn('id', explode(',', $data['projectMember']
+        ->location))
         ->get();
     
     if (!$data) {
@@ -851,6 +852,8 @@ class ProjectService
 
     public function projectAssignView($id)
     {
+        $data = [];
+        
         $data['projectMember'] = DB::table('project_member as a')
             ->leftJoin('employment as b', 'a.employee_id', '=', 'b.id')
             ->select('a.id', 'a.location','a.project_id', 'b.employeeName')

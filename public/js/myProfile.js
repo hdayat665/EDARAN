@@ -11,6 +11,11 @@ $(document).ready(function () {
             [5, 10, 15, 20, -1],
             [5, 10, 15, 20, "All"],
         ],
+        initComplete: function (settings, json) {
+            $("#tableSibling").wrap(
+                "<div style='overflow:auto; width:100%;position:relative;'></div>"
+            );
+        },
     });
 
      //   add validation on expiry date and issuing country
@@ -2438,6 +2443,11 @@ $(document).ready(function () {
             [5, 10, 15, 20, -1],
             [5, 10, 15, 20, "All"],
         ],
+        initComplete: function (settings, json) {
+            $("#tableChildren").wrap(
+                "<div style='overflow:auto; width:100%;position:relative;'></div>"
+            );
+        },
     });
     // $("#education").DataTable({
     //     responsive: false,
@@ -2455,6 +2465,11 @@ $(document).ready(function () {
             [5, 10, 25, -1],
             [5, 10, 25, "All"],
         ],
+        initComplete: function (settings, json) {
+            $("#education").wrap(
+                "<div style='overflow:auto; width:100%;position:relative;'></div>"
+            );
+        },
         // scrollX: true // enable horizontal scrolling if necessary
     });
 
@@ -2465,6 +2480,11 @@ $(document).ready(function () {
             [5, 10, 15, 20, -1],
             [5, 10, 15, 20, "All"],
         ],
+        initComplete: function (settings, json) {
+            $("#qualificationOthers").wrap(
+                "<div style='overflow:auto; width:100%;position:relative;'></div>"
+            );
+        },
     });
     $("#profileAddress").DataTable({
         responsive: false,
@@ -2472,6 +2492,11 @@ $(document).ready(function () {
             [5, 10, 15, 20, -1],
             [5, 10, 15, 20, "All"],
         ],
+        initComplete: function (settings, json) {
+            $("#profileAddress").wrap(
+                "<div style='overflow:auto; width:100%;position:relative;'></div>"
+            );
+        },
     });
     $("#xName1,#lastName1").change(function () {
         var a = $("#firstName1").val();
@@ -3467,6 +3492,11 @@ $(document).ready(function () {
             [5, 10, 15, 20, -1],
             [5, 10, 15, 20, "All"],
         ],
+        initComplete: function (settings, json) {
+            $("#tableParent").wrap(
+                "<div style='overflow:auto; width:100%;position:relative;'></div>"
+            );
+        },
     });
 
     $("#parentModalAdd").click(function (e) {

@@ -14,4 +14,9 @@ $("#summarytable").DataTable({
         { extend: "pdf", className: "btn-blue" },
         { extend: "print", className: "btn-blue" },
     ],
+    initComplete: function (settings, json) {
+        $("#summarytable").wrap(
+            "<div style='overflow:auto; width:100%;position:relative;'></div>"
+        );
+    },
 });

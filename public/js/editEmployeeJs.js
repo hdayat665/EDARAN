@@ -32,6 +32,11 @@ $('#event').select2();
         responsive: true,
         bLengthChange: false,
         bFilter: true,
+        initComplete: function (settings, json) {
+            $("#data-table-default").wrap(
+                "<div style='overflow:auto; width:100%;position:relative;'></div>"
+            );
+        },
     });
 
     $("#edit-profile-picture").on("change", function () {
@@ -2743,6 +2748,11 @@ $('#event').select2();
             [5, 10, 15, 20, -1],
             [5, 10, 15, 20, "All"],
         ],
+        initComplete: function (settings, json) {
+            $("#tableChildren").wrap(
+                "<div style='overflow:auto; width:100%;position:relative;'></div>"
+            );
+        },
     });
 
     $("#childModalAdd").click(function (e) {
@@ -3112,6 +3122,11 @@ $('#event').select2();
             [5, 10, 15, 20, -1],
             [5, 10, 15, 20, "All"],
         ],
+        initComplete: function (settings, json) {
+            $("#tableSibling").wrap(
+                "<div style='overflow:auto; width:100%;position:relative;'></div>"
+            );
+        },
     });
     $("#employeeEducation").DataTable({
         responsive: false,
@@ -3119,6 +3134,11 @@ $('#event').select2();
             [5, 10, 15, 20, -1],
             [5, 10, 15, 20, "All"],
         ],
+        initComplete: function (settings, json) {
+            $("#employeeEducation").wrap(
+                "<div style='overflow:auto; width:100%;position:relative;'></div>"
+            );
+        },
     });
     $("#employeeOthers").DataTable({
         responsive: false,
@@ -3126,14 +3146,23 @@ $('#event').select2();
             [5, 10, 15, 20, -1],
             [5, 10, 15, 20, "All"],
         ],
+        initComplete: function (settings, json) {
+            $("#employeeOthers").wrap(
+                "<div style='overflow:auto; width:100%;position:relative;'></div>"
+            );
+        },
     });
-    $("#employeeAddress")
-        .DataTable({
+    $("#employeeAddress").DataTable({
             responsive: false,
             lengthMenu: [
                 [5, 10, 15, 20, -1],
                 [5, 10, 15, 20, "All"],
             ],
+            initComplete: function (settings, json) {
+                $("#employeeAddress").wrap(
+                    "<div style='overflow:auto; width:100%;position:relative;'></div>"
+                );
+            },
         });
 
     $("#siblingModalAdd").click(function (e) {
@@ -3427,6 +3456,11 @@ $('#event').select2();
             [5, 10, 15, 20, -1],
             [5, 10, 15, 20, "All"],
         ],
+        initComplete: function (settings, json) {
+            $("#tableParent").wrap(
+                "<div style='overflow:auto; width:100%;position:relative;'></div>"
+            );
+        },
     });
 
     $("#firstNameP,#lastNameP").change(function () {

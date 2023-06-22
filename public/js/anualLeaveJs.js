@@ -74,6 +74,11 @@ $(document).ready(function () {
             [5,10, 25, 50, "All"],
         ],
         responsive: false,
+        initComplete: function (settings, json) {
+            $("#tableannual").wrap(
+                "<div style='overflow:auto; width:100%;position:relative;'></div>"
+            );
+        },
     });
 
     $("#tablesick").DataTable({
@@ -84,6 +89,11 @@ $(document).ready(function () {
             [5, 10, 25, 50, "All"],
         ],
         responsive: false,
+        initComplete: function (settings, json) {
+            $("#tablesick").wrap(
+                "<div style='overflow:auto; width:100%;position:relative;'></div>"
+            );
+        },
     });
 
     $("#tablecarryforward").DataTable({
@@ -94,6 +104,11 @@ $(document).ready(function () {
             [5, 10, 25, 50, "All"],
         ],
         responsive: false,
+        initComplete: function (settings, json) {
+            $("#tablecarryforward").wrap(
+                "<div style='overflow:auto; width:100%;position:relative;'></div>"
+            );
+        },
     });
 
     $("#saveAnualLeave").click(function (e) {

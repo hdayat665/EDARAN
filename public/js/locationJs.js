@@ -17,6 +17,11 @@ $(document).ready(function () {
             [5, 10, 25, 50, -1],
             [5, 10, 25, 50, "All"],
         ],
+        initComplete: function (settings, json) {
+            $("#tablelocation").wrap(
+                "<div style='overflow:auto; width:100%;position:relative;'></div>"
+            );
+        },
     });
 
     $(document).on("click", "#addCountryState", function () {
@@ -130,14 +135,14 @@ $(document).ready(function () {
     $("#saveButtonLocation").click(function (e) {
         $("#addFormLocation").validate({
             rules: {
-                addCountry2: "required",
-                addState2: "required",
-                addDistrictName2: "required",
+                countryID: "required",
+                stateID: "required",
+                postcode: "required",
             },
             messages: {
-                addCountry2: "Please Insert Country Name ",
-                addState2: "Please Choose State Name",
-                addDistrictName2: "Please Insert District Name",
+                countryID: "Please Insert Country Name ",
+                stateID: "Please Choose State Name",
+                postcode: "Please Insert Postcode",
             },
             submitHandler: function (form) {
                 requirejs(["sweetAlert2"], function (swal) {
@@ -179,7 +184,7 @@ $(document).ready(function () {
 
     $("#deleteState").click(function (e) {
         id = $(this).data("id");
-    
+
         $("#deleteForm").validate({
             rules: {
                 addCountry3: "required",
@@ -192,7 +197,7 @@ $(document).ready(function () {
             submitHandler: function (form) {
                 requirejs(["sweetAlert2"], function (swal) {
                     var data = new FormData(document.getElementById("deleteForm"));
-    
+
                     swal({
                         title: "Are you sure to delete state?",
                         type: "error",
@@ -226,5 +231,5 @@ $(document).ready(function () {
                 });
             },
         });
-    });    
+    });
 });
