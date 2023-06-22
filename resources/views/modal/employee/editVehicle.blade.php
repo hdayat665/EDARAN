@@ -22,7 +22,7 @@
                         <input type="text" id="plateNo" name="plate_no" class="form-control" aria-describedby="lastname" placeholder="Plate Number">
                         <input type="hidden" id="idV" name="id" class="form-control" aria-describedby="lastname">
                     </div>
-                
+
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>

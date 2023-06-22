@@ -19,6 +19,11 @@ $(document).ready(function () {
             [5, 10, 15, 20, -1],
             [5, 10, 15, 20, "All"],
         ],
+        initComplete: function (settings, json) {
+            $("#data-table-projectrequest").wrap(
+                "<div style='overflow:auto; width:100%;position:relative;'></div>"
+            );
+        },
     });
 
     $("#data-table-default2").DataTable({
@@ -27,6 +32,11 @@ $(document).ready(function () {
             [5, 10, 15, 20, -1],
             [5, 10, 15, 20, "All"],
         ],
+        initComplete: function (settings, json) {
+            $("#data-table-default2").wrap(
+                "<div style='overflow:auto; width:100%;position:relative;'></div>"
+            );
+        },
     });
 
     $("#updateRequestProject").click(function (e) {

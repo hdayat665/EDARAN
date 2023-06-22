@@ -37,7 +37,7 @@ $(document).ready(function() {
       $('#ex-search').picker({ search: true });
 
       $('#tableproject').DataTable({
-            scrollX:true,
+            // scrollX:true,
             
             
         });
@@ -53,6 +53,11 @@ $(document).ready(function() {
               { extend: 'pdf', className: 'btn-sm' },
               { extend: 'print', className: 'btn-sm' }
             ],
+            initComplete: function (settings, json) {
+                $("#data-table-default").wrap(
+                    "<div style='overflow:auto; width:100%;position:relative;'></div>"
+                );
+            },
           });
 
 

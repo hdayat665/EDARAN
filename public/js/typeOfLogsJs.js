@@ -11,18 +11,33 @@ $(document).ready(function () {
         responsive: false,
         searching: true,
         bLengthChange: true,
+        initComplete: function (settings, json) {
+            $("#typeOfLogsTable").wrap(
+                "<div style='overflow:auto; width:100%;position:relative;'></div>"
+            );
+        },
     });
     $("#activityname").DataTable({
         lengthMenu: [5],
         responsive: false,
         searching: false,
         bLengthChange: false,
+        initComplete: function (settings, json) {
+            $("#activityname").wrap(
+                "<div style='overflow:auto; width:100%;position:relative;'></div>"
+            );
+        },
     });
     $("#activitynameedit").DataTable({
         lengthMenu: [5],
         responsive: false,
         searching: false,
         bLengthChange: false,
+        initComplete: function (settings, json) {
+            $("#activitynameedit").wrap(
+                "<div style='overflow:auto; width:100%;position:relative;'></div>"
+            );
+        },
     });
 
     $(document).on("click", "#addButton", function () {

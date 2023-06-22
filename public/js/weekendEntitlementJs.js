@@ -46,6 +46,11 @@ $(document).ready(function () {
             [5, 10, 25, 50, "All"],
         ],
         responsive: false,
+        initComplete: function (settings, json) {
+            $("#tableweekend").wrap(
+                "<div style='overflow:auto; width:100%;position:relative;'></div>"
+            );
+        },
     });
-
+    
 });

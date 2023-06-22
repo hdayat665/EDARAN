@@ -68,7 +68,12 @@ $("document").ready(function () {
         lengthMenu: [5, 10],
         responsive: false,
         info: false,
-        scrollX: true,
+        // scrollX: true,
+        initComplete: function (settings, json) {
+            $("#claimtable1").wrap(
+                "<div style='overflow:auto; width:100%;position:relative;'></div>"
+            );
+        },
     });
 
     $("#claimtable").DataTable({
@@ -77,7 +82,12 @@ $("document").ready(function () {
         lengthMenu: [5, 10],
         responsive: false,
         info: false,
-        scrollX: true,
+        initComplete: function (settings, json) {
+            $("#claimtable").wrap(
+                "<div style='overflow:auto; width:100%;position:relative;'></div>"
+            );
+        },
+        // scrollX: true,
     });
  
     $("#traveltable").DataTable({
@@ -86,7 +96,12 @@ $("document").ready(function () {
         lengthMenu: [5, 10],
         responsive: false,
         info: false,
-        scrollX: true,
+        initComplete: function (settings, json) {
+            $("#traveltable").wrap(
+                "<div style='overflow:auto; width:100%;position:relative;'></div>"
+            );
+        },
+        // scrollX: true,
     });
 
     $("#datepicker-autoClose").datepicker({

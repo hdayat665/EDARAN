@@ -225,18 +225,17 @@
                                             <div class="col-sm-6">
                                                 <label for="effective-from" class="form-label">Effective From*</label>
                                                 <input type="text" id="effective-from" name="EffectiveFrom" class="form-control"
-                                                    value="{{ $employment->effectiveFrom ?? '' }}" placeholder="YYYY-MM-DD"
+                                                    value="" placeholder="YYYY-MM-DD"
                                                     aria-describedby="effective-from">
                                             </div>
                                             <div class="col-sm-6">
                                                 <label for="firstname" class="form-label">Event*</label>
                                                 <select class="form-select" name="event" id="event">
-                                                    <option value="">Please Choose</option>
+                                                    <option value="" label="PLEASE CHOOSE" selected="selected">PLEASE CHOOSE</option>
                                                     <?php $events = getEvent(); ?>
                                                     @foreach ($events as $key => $event)
                                                         <option value="{{ $key }}"
-                                                        <?= $employment->event == $key ? 'selected="selected"' : '' ?>>
-                                                        {{ $event }}</option>
+                                                        <?= $employment->event == $key ? : '' ?>>{{ $event }}</option>
                                                 @endforeach
                                             </select>
                                         </div>

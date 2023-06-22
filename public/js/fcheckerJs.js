@@ -38,6 +38,7 @@ $(document).ready(function () {
         },
         columnDefs: [{ orderable: false, targets: [0] }],
     });
+
     $("#checkedtable").DataTable({
         searching: true,
         lengthChange: true,
@@ -70,7 +71,6 @@ $(document).ready(function () {
                 },
             },
         ],
-
         initComplete: function (settings, json) {
             $("#checkedtable").wrap(
                 "<div style='overflow:auto; width:100%;position:relative;'></div>"
@@ -111,6 +111,11 @@ $(document).ready(function () {
                 },
             },
         ],
+        initComplete: function (settings, json) {
+            $("#pvtable").wrap(
+                "<div style='overflow:auto; width:100%;position:relative;'></div>"
+            );
+        },
         columnDefs: [{ orderable: false, targets: [0] }],
     });
     $("#paidtable").DataTable({
@@ -145,6 +150,11 @@ $(document).ready(function () {
                 },
             },
         ],
+        initComplete: function (settings, json) {
+            $("#paidtable").wrap(
+                "<div style='overflow:auto; width:100%;position:relative;'></div>"
+            );
+        },
         columnDefs: [{ orderable: false, targets: [0] }],
     });
 
@@ -260,6 +270,11 @@ $(document).ready(function () {
                 },
             },
         ],
+        initComplete: function (settings, json) {
+            $("#paymenttable").wrap(
+                "<div style='overflow:auto; width:100%;position:relative;'></div>"
+            );
+        },
         columnDefs: [{ orderable: false, targets: [0] }],
     });
 
