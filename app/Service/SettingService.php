@@ -37,9 +37,13 @@ use App\Models\Users;
 use App\Models\leaveAnualLeaveModel;
 use App\Models\leaveSicKleaveModel;
 use App\Models\leaveCarryForwordModel;
+use App\Models\leaveWeekendModel;
+use App\Models\Location;
+use App\Models\State;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Symfony\Component\Console\Input\Input;
+use Illuminate\Support\Facades\Validator;
 use Carbon\Carbon;
 
 class SettingService
@@ -541,6 +545,157 @@ class SettingService
             $data['type'] = config('app.response.success.type');
             $data['title'] = config('app.response.success.title');
             $data['msg'] = 'Success Delete Branch';
+        }
+
+        return $data;
+    }
+
+    public function getLocation()
+    {
+        $data = [];
+        $data['data'] = Location::with('location')->get();
+        $data['status'] = true;
+        $data['msg'] = 'Success Get Location';
+
+        return $data;
+    }
+
+    public function createLocation($r)
+    {
+        $input = $r->input();
+
+        $checkData = Location::where([['districtName', $input['districtName']], ['tenant_id', Auth::user()->tenant_id]])->first();
+        if ($checkData) {
+            $data['msg'] = 'District name already exists.';
+            $data['status'] = config('app.response.error.status');
+            $data['type'] = config('app.response.error.type');
+            $data['title'] = config('app.response.error.title');
+
+            return $data;
+        }
+
+        $user = Auth::user();
+        $input['tenant_id'] = Auth::user()->tenant_id;
+
+        Location::create($input);
+
+        $data['status'] = config('app.response.success.status');
+        $data['type'] = config('app.response.success.type');
+        $data['title'] = config('app.response.success.title');
+        $data['msg'] = 'Success Create Location';
+
+        return $data;
+    }
+
+    public function deleteLocation($id)
+    {
+        $Location = Location::find($id);
+
+        if (!$Location) {
+            $data['status'] = config('app.response.error.status');
+            $data['type'] = config('app.response.error.type');
+            $data['title'] = config('app.response.error.title');
+            $data['msg'] = 'Location not found';
+        } else {
+            $Location->delete();
+
+            $data['status'] = config('app.response.success.status');
+            $data['type'] = config('app.response.success.type');
+            $data['title'] = config('app.response.success.title');
+            $data['msg'] = 'Success Delete Location';
+        }
+
+        return $data;
+    }
+
+    public function getStateCountry($id)
+    {
+        $data = [];
+        $data['data'] = State::where('id', $id)->first();
+        $data['status'] = true;
+        $data['msg'] = 'Success Get State Country';
+
+        return $data;
+    }
+
+    public function createStateCountry($r)
+    {
+        // $rules = [
+        //     'stateCode' => 'required|unique:states',
+        //     'stateName' => 'required|unique:states',
+        // ];
+
+        // $messages = [
+        //     'stateCode.required' => 'State code is required',
+        //     'stateCode.unique' => 'State code already exists',
+        //     'stateName.required' => 'State name is required',
+        //     'stateName.unique' => 'State name already exists',
+        // ];
+
+        // $validator = Validator::make($r->all(), $rules, $messages);
+
+        // if ($validator->fails()) {
+        //     $data['msg'] = $validator->messages()->first();
+        //     $data['status'] = config('app.response.error.status');
+        //     $data['type'] = config('app.response.error.type');
+        //     $data['title'] = config('app.response.error.title');
+
+        //     return $data;
+        // }
+
+        // $input = $r->input();
+
+        // State::create($input);
+
+        // $data['status'] = config('app.response.success.status');
+        // $data['type'] = config('app.response.success.type');
+        // $data['title'] = config('app.response.success.title');
+        // $data['msg'] = 'Success Create State Country';
+
+        // return $data;
+
+        $input = $r->input();
+
+        $checkData = State::where([['stateName', $input['stateName']], ['tenant_id', Auth::user()->tenant_id]])->first();
+        if ($checkData) {
+            $data['msg'] = 'State name already exists.';
+            $data['status'] = config('app.response.error.status');
+            $data['type'] = config('app.response.error.type');
+            $data['title'] = config('app.response.error.title');
+
+            return $data;
+        }
+
+        $user = Auth::user();
+        $input['tenant_id'] = Auth::user()->tenant_id;
+
+        State::create($input);
+
+        $data['status'] = config('app.response.success.status');
+        $data['type'] = config('app.response.success.type');
+        $data['title'] = config('app.response.success.title');
+        $data['msg'] = 'Success Create State Country';
+
+        return $data;
+    }
+
+
+    public function deleteStateCountry($id)
+    {
+        $State = State::where('stateCode', $id)->first();
+
+        if (!$State) {
+            $data['status'] = config('app.response.error.status');
+            $data['type'] = config('app.response.error.type');
+            $data['title'] = config('app.response.error.title');
+            $data['msg'] = 'State not found';
+        } else {
+            $State->delete();
+
+            $data['status'] = config('app.response.success.status');
+            $data['type'] = config('app.response.success.type');
+            $data['title'] = config('app.response.success.title');
+            $data['msg'] = 'Success Delete State Country';
         }
 
         return $data;
@@ -1160,6 +1315,13 @@ class SettingService
             ->where('a.tenant_id', Auth::user()->tenant_id)
             ->orderBy('id', 'desc')
             ->get();
+
+        return $data;
+    }
+
+    public function locationView()
+    {
+        $data['locations'] = Location::where('tenant_id', Auth::user()->tenant_id)->orderBy('id', 'desc')->get();
 
         return $data;
     }
@@ -2368,20 +2530,20 @@ public function updateTypeOfLogs($r, $id)
     {
         $tenant = Auth::user()->tenant_id;
         $input = [
-            [$tenant, '1', 'AL', 'ANNUAL LEAVE'],
-            [$tenant, '1', 'SL', 'SICK LEAVE'],
-            [$tenant, '1', 'HL', 'HOSPITALIZATION']
+            [$tenant, 'AL', 'ANNUAL LEAVE'],
+            [$tenant, 'SL', 'SICK LEAVE'],
+            [$tenant, 'HL', 'HOSPITALIZATION']
         ];
 
         foreach ($input as $data) {
             $record = leavetypesModel::updateOrCreate(
                 [
-                    'leave_types_code' => $data[2],
-                    'leave_types' => $data[3],
-                    'tenant_id' => $data[0]
+                    'tenant_id' => $data[0],
+                    'leave_types_code' => $data[1],
+                    'leave_types' => $data[2],
+
                 ],
                 [
-                    'status' => $data[1]
                 ]
             );
         }
@@ -2930,6 +3092,35 @@ public function updateTypeOfLogs($r, $id)
         return $data;
     }
 
+    public function updateweekend($r)
+    {
+        $input = $r->input('checkbox');
+
+        foreach ($input as $id => $data) {
+            $record = leaveWeekendModel::find($id);
+
+            if ($record) {
+                $record->monday = isset($data['monday']) ? $data['monday'] : null;
+                $record->tuesday = isset($data['tuesday']) ? $data['tuesday'] : null;
+                $record->wednesday = isset($data['wednesday']) ? $data['wednesday'] : null;
+                $record->thursday = isset($data['thursday']) ? $data['thursday'] : null;
+                $record->friday = isset($data['friday']) ? $data['friday'] : null;
+                $record->saturday = isset($data['saturday']) ? $data['saturday'] : null;
+                $record->sunday = isset($data['sunday']) ? $data['sunday'] : null;
+
+                $record->save();
+            }
+        }
+
+
+        $data['status'] = config('app.response.success.status');
+        $data['type'] = config('app.response.success.type');
+        $data['title'] = config('app.response.success.title');
+        $data['msg'] = 'Successfully update Weekend';
+
+        return $data;
+    }
+
     public function updateSickLeave($r)
     {
         $input = $r->input('sickpermenant');
@@ -2979,6 +3170,47 @@ public function updateTypeOfLogs($r, $id)
         $data['title'] = config('app.response.success.title');
         $data['msg'] = 'Successfully update Carry Forward';
 
+        return $data;
+    }
+
+    public function weekendview()
+    {
+        $tenant = Auth::user()->tenant_id;
+        $input = [
+            [$tenant, 'JHR', 'JOHOR'],
+            [$tenant, 'KDH', 'KEDAH'],
+            [$tenant, 'KEL', 'KELANTAN'],
+            [$tenant, 'MLK', 'MELAKA'],
+            [$tenant, 'PHG', 'PAHANG'],
+            [$tenant, 'PNG', 'PULAU PINANG'],
+            [$tenant, 'PRK', 'PERAK'],
+            [$tenant, 'SBH', 'SABAH'],
+            [$tenant, 'SRW', 'SERAWAK'],
+            [$tenant, 'SGR', 'SELANGOR'],
+            [$tenant, 'TRG', 'TERANGGANU'],
+            [$tenant, 'WP', 'WILAYAH PERSEKUTUAN'],
+            [$tenant, 'NS', 'NEGERI SEMBILAN'],
+            [$tenant, 'PLS', 'PERLIS'],
+
+        ];
+
+        foreach ($input as $data) {
+            $record = leaveWeekendModel::updateOrCreate(
+                [
+                    'tenant_id' => $data[0],
+                    'state_code' => $data[1],
+                    'state' => $data[2],
+
+                ],
+                [
+                ]
+            );
+        }
+
+        $data =
+        leaveWeekendModel::select('leave_weekend.*')
+            ->where('leave_weekend.tenant_id', Auth::user()->tenant_id)
+            ->orderBy('id', 'asc')->get();
         return $data;
     }
 }

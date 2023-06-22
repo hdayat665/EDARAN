@@ -15,87 +15,7 @@
 
 <div class="">
     <div class="accordion" id="accordionExample">
-        <div class="accordion-item">
-            <h2 class="accordion-header" id="headingOne">
-                <button class="accordion-button bg-white-500 text-black px-3 py-10px pointer-cursor " type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true"
-                    aria-controls="collapseOne">
-                    <label class="form-label">Others Claim</label>
-                </button>
-            </h2>
-            <form id="personalForm">
-                <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                    <div class="accordion-body bg-gray-100 text-black">
-                        <div class="row p-2">
-                            <div class="col-md-4">
-                                <label class="form-label">Applied Date</label>
-                            </div>
-                            <div class="col-md-8">
-                                <input type="hidden" name="general_id" value="{{ Request::segment(4) }}">
-                                <input type="hidden" value="{{ isset($month_id) ? monthMTC($month_id) : $month }}" name="month">
-
-                                <input type="text" style="pointer-events: none;" class="form-control" name="applied_date" readonly id="datepickerpc">
-                                <input type="hidden" value="{{ $year }}" name="year">
-                            </div>
-                        </div>
-                        <div class="row p-2">
-                            <div class="col-md-4">
-                                <label class="form-label">Claim Category</label>
-                            </div>
-                            <div class="col-md-8">
-                                <select class="form-select" id="claimcategory" name="claim_category">
-                                    <option class="form-label" value="" selected>PLEASE CHOOSE</option>
-                                    {{ $categorys = getClaimCategoryMtc() }}
-                                    @foreach ($categorys as $category)
-                                        <option value="{{ $category->id }}">{{ $category->claim_catagory }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-                        {{-- akan tarik data dari  labelling name dlam setting add claim --}}
-                        <div class="row p-2" id="labelCategory" style="display: none">
-                            <div class="col-md-4">
-                                <label class="form-label" id="label"></label>
-                            </div>
-                            <div class="col-md-8">
-                                <select class="form-select" id="contentLabel" name="claim_category_detail">
-                                    <option class="form-label" value="" selected>Please
-                                        Select</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="row p-2">
-                            <div class="col-md-4">
-                                <label class="form-label">Amount</label>
-                            </div>
-                            <div class="col-md-8">
-                                <input type="number" name="amount" id="amount"class="form-control" placeholder="0.00">
-                            </div>
-                        </div> 
-                        <div class="row p-2">
-                            <div class="col-md-4">
-                                <label class="form-label">Description</label>
-                            </div>
-                            <div class="col-md-8">
-                                <textarea class="form-control" name="claim_desc" id="" rows="3"></textarea>
-                            </div>
-                        </div>
-                        <div class="row p-2">
-                            <div class="col-md-4">
-                                <label class="form-label">Supporting Document</label>
-                            </div>
-                            <div class="col-md-6">
-                                <input type="file" class="form-control-file" name="file_upload[]" id="supportdocument" multiple>
-                            </div> 
-                        </div>
-                        <div class="row p-2">
-                            <div class="modal-footer"> <button type="button" class="btn btn-secondary">Reset</button>
-                                <button type="submit" class="btn btn-primary" id="personalSaveButton">Save</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </form>
-        </div>
+        
         <div class="accordion-item">
             <h2 class="accordion-header" id="headingTwo">
                 <button class="accordion-button bg-white-500 text-black px-3 py-10px pointer-cursor collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo"
@@ -104,9 +24,73 @@
                 </button>
             </h2>
             <form id="travelForm">
-                <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                <div id="collapseTwo" class="accordion-collapse collapse show" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
                     <div class="accordion-body bg-gray-100 text-black">
                         <div class="row p-2">
+                            <div class="col-md-6">
+                                <div class="row p-2">
+                                    <div class="col-md-3">
+                                        <label class="form-label">Travel Date*</label>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <input type="hidden" name="general_id" value="{{ Request::segment(4) }}">
+                                        <input type="hidden" value="{{ isset($month_id) ? monthMTC($month_id) : $month }}" name="month" id="monthInput">
+                                        <input type="hidden" value="{{ $year }}" name="year">
+                                        <input class="form-control" id="datepickertc"  name="travel_date">
+                                    </div>
+                                    
+                                </div>
+                                <div class="row p-2">
+                                    <div class="col-md-3">
+                                        <label class="form-label">Start Time*</label>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <input type="text" id="timestart" name="start_time" style=" background: #ffffff;" class=" form-control" value="" placeholder="choose time">
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label class="form-label">End Time*</label>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <input type="text" id="timeend" name="end_time" class=" form-control" style=" background: #ffffff;" placeholder="choose time">
+                                    </div>
+                                </div>
+                                <div class="row p-2">
+                                    <div class="col-md-3">
+                                        <label class="form-label">Total Hours</label>
+                                    </div>
+                                    <div class="col-md-3">
+                                    <input readonly type="text" name="total_hour" id="totalduration" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="row p-2">
+                                    <div class="col-md-3">
+                                        <label class="form-label">Description</label>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <textarea class="form-control" id="" name="desc" rows="6"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="" style="display: none">
+                            <div class="row p-2">
+                                <div class="col-md-4">
+                                    <label class="form-label">Start date</label>
+                                </div>
+                                <div class="col-md-3">
+                                    <input type="text" id="daystart" class=" form-control" value="">
+                                </div>
+                                <div class="col-md-2" style="display: none">
+                                    <label class="form-label">End date</label>
+                                </div>
+                                <div class="col-md-3">
+                                    <input type="text" id="dayend" class=" form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <!-- <div class="row p-2">
                             <div class="col-md-4">
                                 <label class="form-label">Travel Date</label>
                             </div>
@@ -131,22 +115,7 @@
                                 <input type="text" id="timeend" name="end_time" class=" form-control" style=" background: #ffffff;" placeholder="choose time">
                             </div>
                         </div>
-                        <div id="" style="display: none">
-                            <div class="row p-2">
-                                <div class="col-md-4">
-                                    <label class="form-label">Start date</label>
-                                </div>
-                                <div class="col-md-3">
-                                    <input type="text" id="daystart" class=" form-control" value="">
-                                </div>
-                                <div class="col-md-2" style="display: none">
-                                    <label class="form-label">End date</label>
-                                </div>
-                                <div class="col-md-3">
-                                    <input type="text" id="dayend" class=" form-control">
-                                </div>
-                            </div>
-                        </div>
+                        
                         <div class="row p-2">
                             <div class="col-md-4">
                                 <label class="form-label">Total Hours</label>
@@ -162,7 +131,7 @@
                             <div class="col-md-8">
                                 <textarea class="form-control" id="" name="desc" rows="3"></textarea>
                             </div>
-                        </div>
+                        </div> -->
                         <!-- <div class="row p-2">
                             <div class="col-md-4">
                                 <label class="form-label">Reason using Web</label>
@@ -171,90 +140,152 @@
                                 <input type="text" class="form-control" name="reason">
                             </div>
                         </div> -->
-                        <div class="row p-2">
-                            <div class="col-md-4">
-                                <label class="form-label">Type of Transport</label>
-                            </div>
-                            <div class="col-md-8">
-                                <select class="form-select" id="type_transport" name="type_transport">
-                                    <option class="form-label" value="" selected>
-                                        PLEASE CHOOSE</option>
-                                    <option class="form-label" value="Personal Car"> Personal
-                                        Car</option>
-                                    <option class="form-label" value="Personal Motocycle">Personal
-                                        Motocycle</option>
-                                    <option class="form-label" value="Public Transport"> Public
-                                        Transport</option>
-                                    <option class="form-label" value="Company Car">Company Car
-                                    </option>
-                                    <option class="form-label" value="Carpool"> Carpool
-                                    </option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="row p-2">
-                            <div class="col-md-4">
-                                <label class="form-label">Start Location</label>
-                            </div>
-                            <div class="col-md-8">
-                                <select class="form-select" id="ls" name="location_start">
-                                    <option class="form-label" value="" selected>
-                                    PLEASE CHOOSE</option>
-                                    <option class="form-label">Home
-                                    </option>
-                                    <option class="form-label">Office
-                                    </option>
-                                    <option class="form-label">My Project
-                                    </option>
-                                    <option class="form-label">Others
-                                    </option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="row p-2" id="project" style="display: none">
-                            <div class="col-md-4">
-                                <label class="form-label">Project</label>
-                            </div>
-                            <div class="col-md-8">
-                                <select class="form-select" id="" name="project_id">
-                                   
-                                    <?php $projects = myProjectOnly(); ?>
-                                    <option class="form-label" value="">
-                                        Please Select</option>
-                                    @foreach ($projects as $project)
-                                        <option class="form-label" value="{{ $project->id }}">{{ $project->project_name }}</option>
-                                    @endforeach
-
-                                </select>
+                        <div class="col-md-6">
+                            <div class="row p-2">
+                                <div class="col-md-3">
+                                    <label class="form-label">Type of Transport</label>
+                                </div>
+                                <div class="col-md-9">
+                                    <select class="form-select" id="type_transport" name="type_transport">
+                                        <option class="form-label" value="" selected>
+                                            PLEASE CHOOSE</option>
+                                        <option class="form-label" value="Personal Car"> Personal
+                                            Car</option>
+                                        <option class="form-label" value="Personal Motocycle">Personal
+                                            Motocycle</option>
+                                        <option class="form-label" value="Public Transport"> Public
+                                            Transport</option>
+                                        <option class="form-label" value="Company Car">Company Car
+                                        </option>
+                                        <option class="form-label" value="Carpool"> Carpool
+                                        </option>
+                                    </select>
+                                </div>
                             </div>
                         </div>
                         <div class="row p-2">
-                            <div class="col-md-4">
-                                <label class="form-label">Start Address</label>
+                            <div class="col-md-6">
+                                <div class="row p-0">
+                                    <div class="col-md-3">
+                                        <label class="form-label">Start Location</label>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <select class="form-select" id="ls" name="location_start">
+                                            <option class="form-label" value="" selected>
+                                            PLEASE CHOOSE</option>
+                                            <option class="form-label">Home
+                                            </option>
+                                            <option class="form-label">Office
+                                            </option>
+                                            <option class="form-label">My Project
+                                            </option>
+                                            <option class="form-label">Others
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="col-md-8"> 
-                                <input type="text" class="form-control" name="address_start" id="autocomplete" placeholder="Enter a Location">
+                            <div class="col-md-6">
+                                <div class="row p-0">
+                                    <div class="col-md-3">
+                                        <label class="form-label">Destination</label>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <select class="form-select" id="dest" name="location_end">
+                                            <option class="form-label" value="">PLEASE CHOOSE</option>
+                                            <option class="form-label">Home
+                                            </option>
+                                            <option class="form-label">Office
+                                            </option>
+                                            <option class="form-label">My Project
+                                            </option>
+                                            <option class="form-label">Others
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="row p-2">
-                            <div class="col-md-4">
-                                <label class="form-label">Destination</label>
+                            <div class="col-md-6">
+                                <div class="row p-0" id="project" style="display: none">
+                                    <div class="col-md-3">
+                                        <label class="form-label">Project</label>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <select class="form-select" id="" name="project_id">
+                                            
+                                            <?php $projects = myProjectOnly(); ?>
+                                            <option class="form-label" value="">
+                                                Please Select</option>
+                                            @foreach ($projects as $project)
+                                                <option class="form-label" value="{{ $project->id }}">{{ $project->project_name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="col-md-8">
-                                
-                                <select class="form-select" id="dest" name="location_end">
-                                    <option class="form-label" value="">PLEASE CHOOSE</option>
-                                    <option class="form-label">Home
-                                    </option>
-                                    <option class="form-label">Office
-                                    </option>
-                                    <option class="form-label">My Project
-                                    </option>
-                                    <option class="form-label">Others
-                                    </option>
-                                </select>
+                            <div class="col-md-6">
+                                <div class="row p-0" id="projectdest" style="display: none">
+                                    <div class="col-md-3">
+                                        <label class="form-label">Project</label>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <select class="form-select" id="" name="project_id2">
+                                            <?php $projects = myProjectOnly(); ?>
+                                            <option class="form-label" value="">Select Project</option>
+                                            @foreach ($projects as $project)
+                                                <option class="form-label" value="{{ $project->id }}">{{ $project->project_name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
                             </div>
                         </div>
+                        
+                        <div class="row p-2">
+                            <div class="col-md-6">
+                                <div class="row p-0">
+                                    <div class="col-md-3">
+                                        <label class="form-label">Start Address</label>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <input type="text" class="form-control" name="address_start" id="autocomplete" placeholder="Enter a Location">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="row p-0">
+                                    <div class="col-md-3">
+                                        <label class="form-label">Destination Address</label>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <input type="text" class="form-control" name="location_address" id="autocomplete2" placeholder="Enter a Location">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row p-2" id="logname" style="display: none">
+                            <div class="col-md-6">
+                                <div class="row p-0">
+                                    <div class="col-md-3">
+                                        <label class="form-label">Log Name</label>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <select class="form-select" id="" name="log_id">
+                                            <?php $typeOfLogs = typeOfLog(); ?>
+                                            <option class="form-label" value="" selected>
+                                                Please Select</option>
+                                            @foreach ($typeOfLogs as $item)
+                                                <option class="form-label" value="{{ $item->id }}">{{ $item->type_of_log }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                        
                         <div class="row p-2" style="display: none">
                             <div class="col-md-4">
                                 <label class="form-label">Office</label>
@@ -271,59 +302,83 @@
                                 <input id="permanentAddress" type="text" value="{{ $address }}"  class="form-control" name="">
                             </div>
                         </div>
-                        <div class="row p-2" id="projectdest" style="display: none">
-                            <div class="col-md-4">
-                                <label class="form-label">Project</label>
+
+                        <div class="row p-2">
+                            <div class="col-md-6">
+                                <div class="row p-0">
+                                    <div class="col-md-3">
+                                        <label class="form-label">Total Distance</label>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <input id="result" type="text" class="form-control" name="total_km">
+                                    </div>
+                                    <div class="col-md-2">
+                                        <input type="button" id="calculateButton" class="btn btn-primary" value="Calculate">
+                                    </div>
+                                    <div class="col-md-2" id="confirmBtnDiv" style="display: none">
+                                        <input type="button" id="confirmBtn" class="btn btn-primary" value="Confirm?">
+                                    </div>
+                                </div>
                             </div>
-                            <div class="col-md-8">
-                                <select class="form-select" id="" name="project_id2">
-                                    <?php $projects = myProjectOnly(); ?>
-                                    <option class="form-label" value="">Select Project</option>
-                                    @foreach ($projects as $project)
-                                        <option class="form-label" value="{{ $project->id }}">{{ $project->project_name }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-                        <div class="row p-2" id="logname" style="display: none">
-                            <div class="col-md-4">
-                                <label class="form-label">Log Name</label>
-                            </div>
-                            <div class="col-md-8">
-                                <select class="form-select" id="" name="log_id">
-                                    <?php $typeOfLogs = typeOfLog(); ?>
-                                    <option class="form-label" value="" selected>
-                                        Please Select</option>
-                                    @foreach ($typeOfLogs as $item)
-                                        <option class="form-label" value="{{ $item->id }}">{{ $item->type_of_log }}</option>
-                                    @endforeach
-                                </select>
+                            <div class="col-md-6">
+                                <div class="row p-0">
+                                    <div class="col-md-3">
+                                        <label class="form-label">Mileage (RM)</label>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <input type="text" class="form-control" readonly id="millage" name="millage">
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="row p-2">
-                            <div class="col-md-4">
-                                <label class="form-label">Destination Address</label>
+                            <div class="col-md-6">
+                                <div class="row p-0">
+                                    <div class="col-md-3">
+                                        <label class="form-label">Petrol/Fares</label>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <input type="number" class="form-control" id="petrol" name="petrol" step="0.01">
+                                    </div>
+                                </div>
                             </div>
-                            <div class="col-md-8">
-                                <input type="text" class="form-control" name="location_address" id="autocomplete2" placeholder="Enter a Location">
-
-                            </div>
-                            
                         </div>
-                        <div class="row p-2" >
-                            <div class="col-md-4">
-                                <label class="form-label">Total Distance</label>
+                        <div class="row p-2">
+                            <div class="col-md-6">
+                                <div class="row p-0">
+                                    <div class="col-md-3">
+                                        <label class="form-label">Toll</label>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <input type="number" class="form-control" id="toll" name="toll">
+                                    </div>
+                                </div>
                             </div>
-                            <div class="col-md-3">
-                                <input id="result" type="text" class="form-control" name="">
+                        </div>
+                        <div class="row p-2">
+                            <div class="col-md-6">
+                                <div class="row p-0">
+                                    <div class="col-md-3">
+                                        <label class="form-label">Parking</label>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <input type="number" class="form-control" id="parking" name="parking">
+                                    </div>
+                                </div>
                             </div>
-                            <div class="col-md-2">
-                                <input type="button" id="calculateButton" class="btn btn-primary" value="Calculate">
+                        </div>
+                        <div class="row p-2">
+                            <div class="col-md-6">
+                                <div class="row p-0">
+                                    <div class="col-md-3">
+                                        <label class="form-label">Supporting Document</label>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <input type="file" class="form-control-file" name="file_upload[]" id="supportdocument" multiple>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="col-md-2" id="confirmBtnDiv" style="display: none">
-                                <input type="button" id="confirmBtn" class="btn btn-primary" value="Confirm?">
-                            </div>
-                        </div> 
+                        </div>
                         <div class="row p-2" style="display: none">
                             <div class="col-md-4">
                                 <label class="form-label">Distance</label>
@@ -365,42 +420,7 @@
                                 <input type="number" class="form-control" value="" name="" id="third_price" data-thirdpricecar="{{ $thirdpricecar }}" data-thirdpricemotor="{{ $thirdpricemotor }}">
                             </div>
                         </div>
-                        <div class="row p-2" >
-                            <div class="col-md-4">
-                                <label class="form-label">Mileage (RM)</label>
-                            </div>
-                            <div class="col-md-3">
-                                <input type="text" class="form-control" readonly id="millage" name="millage">
-                            </div>
-                            <div class="col-md-2"> 
-                                <label class="form-label">Petrol/Fares</label>
-                            </div>
-                            <div class="col-md-3">
-                                <input type="number" class="form-control" id="petrol" name="petrol" step="0.01">
-                            </div>
-                        </div>
-                        <div class="row p-2">
-                            <div class="col-md-4">
-                                <label class="form-label">Toll</label>
-                            </div>
-                            <div class="col-md-3">
-                                <input type="number" class="form-control" id="toll" name="toll">
-                            </div>
-                            <div class="col-md-2">
-                                <label class="form-label">Parking</label>
-                            </div>
-                            <div class="col-md-3">
-                                <input type="number" class="form-control" id="parking" name="parking">
-                            </div>
-                        </div>
-                        <div class="row p-2">
-                            <div class="col-md-4">
-                                <label class="form-label">Supporting Document</label>
-                            </div>
-                            <div class="col-md-6">
-                                <input type="file" class="form-control-file" name="file_upload[]" id="supportdocument" multiple>
-                            </div>
-                        </div>
+                        
                         <div class="row p-2">
                             <div class="modal-footer"> <button type="button" class="btn btn-secondary">Reset</button>
                                 <button type="submit" id="travelSaveButton" class="btn btn-primary">Save</button>
@@ -492,7 +512,12 @@
                                                         <label class="form-label">Start Date</label>
                                                     </div>
                                                     <div class="col">
-                                                        <input type="text" class="form-control" name="start_date" placeholder="Date" id="date1">
+                                                        <select class="form-control" name="start_date" id="date1">
+                                                            <option value="">Select Date</option>
+                                                            @foreach($travelDate as $date)
+                                                                <option value="{{ $date }}">{{ $date }}</option>
+                                                            @endforeach
+                                                        </select>
                                                     </div>
                                                 </div>
                                                 <div class="row p-2">
@@ -514,7 +539,12 @@
                                                         <label class="form-label">End Date</label>
                                                     </div>
                                                     <div class="col">
-                                                        <input type="text" class="form-control" name="end_date" placeholder="Date" id="date2">
+                                                        <select class="form-control" name="end_date" id="date2">
+                                                            <option value="">Select Date</option>
+                                                            @foreach($travelDate as $date)
+                                                                <option value="{{ $date }}">{{ $date }}</option>
+                                                            @endforeach
+                                                        </select>
                                                     </div>
                                                 </div>
                                                 <div class="row p-2">
@@ -530,38 +560,229 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="row p-2">
-                                <div class="col-md-4">
-                                    <label class="form-label">Travel Duration</label>
-                                </div>
-                                <div class="col-md-8">
-                                    <input type="text" class="form-control" id="result1" name="travel_duration" readonly>
+                            <div class="p-2">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="row p-2">
+                                            <div class="col-md-4">
+                                                <label class="form-label">Travel Duration</label>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <input type="text" class="form-control" id="result1" name="travel_duration" readonly>
+                                            </div>
+                                        </div>
+                                        <div class="row p-2">
+                                            <div class="col-md-4">
+                                                <label class="form-label">Project</label>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <select class="form-select" name="project_id">
+                                                    <option class="form-label" value="" selected>
+                                                        PLEASE CHOOSE</option>
+                                                    <?php $projects = myProjectOnly(); ?>
+                                                    @foreach ($projects as $project)
+                                                        <option class="form-label" value="{{ $project->id }}">{{ $project->project_name }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-md-6">
+                                        <div class="row p-2">
+                                            <div class="col-md-4">
+                                                <label class="form-label">Description</label>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <textarea class="form-control" name="desc" id="" rows="4"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="row p-2">
-                                <div class="col-md-4">
-                                    <label class="form-label">Project</label>
+                            
+                            <div class="p-2">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-control">
+                                            <div class="row p-2">
+                                                <label class="form-label">Subsistence Allowance</label>
+                                            </div>
+                                            <div class="row p-2">
+                                                <div class="col-md-2">
+                                                    <label class="form-label">Breakfast</label>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <input  type="text" class="form-control" readonly value="{{ $food[0]['breakfast'] }}" id="BF">
+                                                </div>
+                                                <div class="col-md-1">
+                                                    <label class="form-label">X</label>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <input type="text" class="form-control" readonly name="breakfast" value="0" id="DBF">
+                                                </div>
+                                                <div class="col-md-1">
+                                                    <label class="form-label">=</label>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <input type="text" class="form-control" readonly id="totalbf">
+                                                </div>
+                                            </div>
+                                            <div class="row p-2">
+                                                <div class="col-md-2">
+                                                    <label class="form-label">Lunch</label>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <input  type="text" class="form-control" readonly value="{{ $food[0]['lunch'] }}" id="LH">
+                                                </div>
+                                                <div class="col-md-1">
+                                                    <label class="form-label">X</label>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <input type="text" name="lunch" readonly class="form-control" value="0" id="DLH">
+                                                </div>
+                                                <div class="col-md-1">
+                                                    <label class="form-label">=</label>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <input type="text" class="form-control" readonly id="totallh">
+                                                </div>
+                                            </div>
+                                            <div class="row p-2">
+                                                <div class="col-md-2">
+                                                    <label class="form-label">Dinner</label>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <input  type="text" class="form-control" readonly value="{{ $food[0]['dinner'] }}" id="DN">
+                                                </div>
+                                                <div class="col-md-1">
+                                                    <label class="form-label">X</label>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <input type="text" name="dinner" readonly class="form-control" value="0" id="DDN">
+                                                </div>
+                                                <div class="col-md-1">
+                                                    <label class="form-label">=</label>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <input type="text" class="form-control" readonly id="totaldn">
+                                                </div>
+                                            </div>
+                                            <div class="row p-2">
+                                                <div class="col-md-2">
+                                                    
+                                                </div>
+                                                <div class="col-md-2">
+                                                    
+                                                </div>
+                                                <div class="col-md-1">
+                                                    
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <label class="form-label">Total (A)</label>
+                                                </div>
+                                                <div class="col-md-1">
+                                                    <label class="form-label">=</label>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <input readonly type="text" name="total_subs" class="form-control" value="0" id="TS">
+                                                </div>
+                                            </div>
+                                           
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-md-6">
+                                        <div class="form-control">
+                                                <div class="row p-2">
+                                                    <label class="form-label">Accommodation</label>
+                                                </div>
+                                                <div class="row p-2">
+                                                    <div class="col-md-3" id="hotelc">
+                                                        <input class="form-check-input" type="checkbox" value="{{ $food[0]['local_hotel_value'] }}" id="htv" />
+                                                        <label class="form-label">Hotel</label>
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <input  type="text" readonly class="form-control" id="hotelcv">
+                                                    </div>
+                                                    <div class="col-md-2" style="display: none">
+                                                        <input  type="text" class="form-control"  id="hotelcv1" value="0">
+                                                    </div>
+                                                    <div class="col-md-1">
+                                                        <label class="form-label">X</label>
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <input type="text" name="hotel" class="form-control" id="hn" disabled value="0">
+                                                    </div>
+                                                    <div class="col-md-1">
+                                                        <label class="form-label">=</label>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <input type="text" name="hotel" class="form-control" id="hn" disabled value="0">
+                                                    </div>
+                                                </div>
+                                                <div class="row p-2">
+                                                    <div class="col-md-3" id="lodgingc">
+                                                        <input class="form-check-input" type="checkbox" value="{{ $food[0]['lodging_allowance_value'] }}" id="ldgv" />
+                                                        <label class="form-label">Lodging</label>
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <input  type="text" readonly class="form-control" id="lodgingcv">
+                                                    </div>
+                                                    <div class="col-md-2" style="display: none">
+                                                        <input readonly type="text" class="form-control" id="lodgingcv1" value="0">
+                                                    </div>
+                                                    <div class="col-md-1">
+                                                        <label class="form-label">X</label>
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <input type="text" name="lodging" class="form-control" value="0" id="ln" disabled>
+                                                    </div>
+                                                    <div class="col-md-1">
+                                                        <label class="form-label">=</label>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <input type="text" name="hotel" class="form-control" id="hn" disabled value="0">
+                                                    </div>
+                                                </div>
+                                                
+                                                <div class="row p-2">
+                                                    <div class="col-md-3">
+                                                        <input type="file" class="form-control-file" name="file_upload[]" id="supportdocument" multiple>
+                                                    </div>
+                                                    <div class="col-md-1">
+                                                        
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <label class="form-label">Total (B)</label>
+                                                    </div>
+                                                    <div class="col-md-1">
+                                                        <label class="form-label">=</label>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <input readonly type="text" name="total_acc" class="form-control" value="0" id="TAV">
+                                                    </div>
+                                                </div>
+                                                <div class="row p-2">
+                                                    
+                                                    <div class="col-md-8">
+                                                        <label class="form-label">Total Subsistence Allowance & Accommodation (A+B)</label>
+                                                    </div>
+                                                    <div class="col-md-1">
+                                                        <label class="form-label">=</label>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <input readonly type="text" name="total" class="form-control" value="" id="total2">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="col-md-8">
-                                    <select class="form-select" name="project_id">
-                                        <option class="form-label" value="" selected>
-                                            PLEASE CHOOSE</option>
-                                        <?php $projects = myProjectOnly(); ?>
-                                        @foreach ($projects as $project)
-                                            <option class="form-label" value="{{ $project->id }}">{{ $project->project_name }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="row p-2">
-                                <div class="col-md-4">
-                                    <label class="form-label">Description</label>
-                                </div>
-                                <div class="col-md-8">
-                                    <textarea class="form-control" name="desc" id="" rows="3"></textarea>
-                                </div>
-                            </div>
-                            <div class="row p-2">
+                            <!-- <div class="row p-2">
                                 <div class="col-md-4">
                                     <label class="form-label">Subsistence
                                         Allowance:</label>
@@ -621,8 +842,8 @@
                                 <div class="col-md-2">
                                     <input readonly type="text" name="total_subs" class="form-control" value="0" id="TS">
                                 </div>
-                            </div>
-                            <div class="row p-2">
+                            </div> -->
+                            <!-- <div class="row p-2">
                                 <div class="col-md-4">
                                     <label class="form-label">Accommodation:</label>
                                 </div>
@@ -691,9 +912,90 @@
                                 <div class="col-md-2">
                                     <input readonly type="text" name="total" class="form-control" value="" id="total2">
                                 </div>
-                            </div>
+                            </div> -->
                             <div class="modal-footer"> <button type="button" class="btn btn-secondary">Reset</button>
                                 <button type="submit" id="subsSaveButton" class="btn btn-primary">Save</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingOne">
+                <button class="accordion-button bg-white-500 text-black px-3 py-10px pointer-cursor " type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true"
+                    aria-controls="collapseOne">
+                    <label class="form-label">Others Claim</label>
+                </button>
+            </h2>
+            <form id="personalForm">
+                <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                    <div class="accordion-body bg-gray-100 text-black">
+                        <div class="row p-2">
+                            <div class="col-md-4">
+                                <label class="form-label">Applied Date</label>
+                            </div>
+                            <div class="col-md-8">
+                                <input type="hidden" name="general_id" value="{{ Request::segment(4) }}">
+                                <input type="hidden" value="{{ isset($month_id) ? monthMTC($month_id) : $month }}" name="month">
+
+                                <input type="text" style="pointer-events: none;" class="form-control" name="applied_date" readonly id="datepickerpc">
+                                <input type="hidden" value="{{ $year }}" name="year">
+                            </div>
+                        </div>
+                        <div class="row p-2">
+                            <div class="col-md-4">
+                                <label class="form-label">Claim Category</label>
+                            </div>
+                            <div class="col-md-8">
+                                <select class="form-select" id="claimcategory" name="claim_category">
+                                    <option class="form-label" value="" selected>PLEASE CHOOSE</option>
+                                    {{ $categorys = getClaimCategoryMtc() }}
+                                    @foreach ($categorys as $category)
+                                        <option value="{{ $category->id }}">{{ $category->claim_catagory }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        {{-- akan tarik data dari  labelling name dlam setting add claim --}}
+                        <div class="row p-2" id="labelCategory" style="display: none">
+                            <div class="col-md-4">
+                                <label class="form-label" id="label"></label>
+                            </div>
+                            <div class="col-md-8">
+                                <select class="form-select" id="contentLabel" name="claim_category_detail">
+                                    <option class="form-label" value="" selected>Please
+                                        Select</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row p-2">
+                            <div class="col-md-4">
+                                <label class="form-label">Amount</label>
+                            </div>
+                            <div class="col-md-8">
+                                <input type="number" name="amount" id="amount"class="form-control" placeholder="0.00">
+                            </div>
+                        </div> 
+                        <div class="row p-2">
+                            <div class="col-md-4">
+                                <label class="form-label">Description</label>
+                            </div>
+                            <div class="col-md-8">
+                                <textarea class="form-control" name="claim_desc" id="" rows="3"></textarea>
+                            </div>
+                        </div>
+                        <div class="row p-2">
+                            <div class="col-md-4">
+                                <label class="form-label">Supporting Document</label>
+                            </div>
+                            <div class="col-md-6">
+                                <input type="file" class="form-control-file" name="file_upload[]" id="supportdocument" multiple>
+                            </div> 
+                        </div>
+                        <div class="row p-2">
+                            <div class="modal-footer"> <button type="button" class="btn btn-secondary">Reset</button>
+                                <button type="submit" class="btn btn-primary" id="personalSaveButton">Save</button>
                             </div>
                         </div>
                     </div>

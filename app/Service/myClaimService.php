@@ -715,6 +715,7 @@ class myClaimService
         $input1['address_start'] = $input['address_start'] ?? '';
         $input1['log_id'] = $input['log_id'] ?? '';
         $input1['millage'] = $input['millage'] ?? '';
+        $input1['total_km'] = $input['total_km'] ?? '';
         $input1['petrol'] = $input['petrol'] ?? '';
         $input1['toll'] = $input['toll'] ?? '';
         $input1['parking'] = $input['parking'] ?? '';
@@ -757,7 +758,7 @@ class myClaimService
     public function createSubsClaim($r)
     {
         $input = $r->input();
-
+        //pr($input);
         $id = $input['general_id'];
         unset($input['claimtable_length']);
 
@@ -771,12 +772,11 @@ class myClaimService
             // add to general claim
             $generalClaim['user_id'] = Auth::user()->id;
             $generalClaim['tenant_id'] = Auth::user()->tenant_id;
-            $generalClaim['claim_id'] = 'MTC' . $monthlyClaimCount + 1;
+            $generalClaim['claim_id'] = 'MTC' . ($monthlyClaimCount + 1);
             $generalClaim['claim_type'] = $input['claim_type'] ?? 'MTC';
             $generalClaim['status'] = 'draft';
             $generalClaim['month'] = $input['month'] ?? '-';
             $generalClaim['year'] = $input['year'] ?? '-';
-            // $generalClaim['total_amount'] = array_sum($input['amount']) ?? '';
 
             GeneralClaim::create($generalClaim);
             $generalClaimData = GeneralClaim::where('tenant_id', Auth::user()->tenant_id)->orderBy('created_at', 'DESC')->first();
@@ -784,7 +784,6 @@ class myClaimService
             $generalClaimData = GeneralClaim::where([['tenant_id', Auth::user()->tenant_id], ['id', $id]])->orderBy('created_at', 'DESC')->first();
         }
         unset($input['month'], $input['year']);
-
 
         if (!empty($_FILES['file_upload']['name']) && is_array($_FILES['file_upload']['name'])) {
             $filenames = array();
@@ -799,7 +798,6 @@ class myClaimService
             }
             $fileString = implode(',', $filenames);
         }
-        
 
         $input['user_id'] = Auth::user()->id;
         $input['tenant_id'] = Auth::user()->tenant_id;
@@ -808,6 +806,38 @@ class myClaimService
         $input['type_claim'] = 'subs';
         $input['file_upload'] = $fileString ?? '';
 
+        // Check if there are overlapping claims with the same general_id
+        $overlappingClaims = TravelClaim::where('general_id', $input['general_id'])
+        ->where(function ($query) use ($input) {
+            $query->where('start_date', '<', $input['end_date']) // Changed to '<'
+                ->orWhere(function ($query) use ($input) {
+                    $query->where('start_date', '=', $input['end_date'])
+                        ->where('start_time', '<=', $input['end_time']);
+                });
+        })
+        ->where(function ($query) use ($input) {
+            $query->where('end_date', '>', $input['start_date']) // Changed to '>'
+                ->orWhere(function ($query) use ($input) {
+                    $query->where('end_date', '=', $input['start_date'])
+                        ->where('end_time', '>=', $input['start_time']);
+                });
+        })
+        ->exists();
+
+
+
+
+        if ($overlappingClaims) {
+            // Return overlapping claim data
+            $data['status'] = config('app.response.error.status');
+            $data['type'] = config('app.response.error.type');
+            $data['title'] = config('app.response.error.title');
+            $data['id'] = $generalClaimData->id;
+            $data['msg'] = 'Claim with overlapping date and time already exists for the same general ID.';
+            return $data;
+        }
+
+        // If no overlapping claim, proceed with creating a new TravelClaim
         TravelClaim::create($input);
 
         $personalClaims = PersonalClaim::where([['tenant_id', Auth::user()->tenant_id], ['general_id', $generalClaimData->id]])->get();
@@ -837,6 +867,8 @@ class myClaimService
 
         return $data;
     }
+
+
 
     public function createCaClaim($r)
     {
@@ -922,12 +954,95 @@ class myClaimService
         return $data;
     }
 
+    public function getTravellingClaimByGeneralId($id = '')
+    {
+        $data = TravelClaim::select(
+            'travel_date','general_id',
+            DB::raw('SUM(millage) AS total_millage'),
+            DB::raw('SUM(total_km) AS total_km'),
+            DB::raw('SUM(petrol) AS total_petrol'),
+            DB::raw('SUM(toll) AS total_toll'),
+            DB::raw('SUM(parking) AS total_parking')
+        )
+        ->where('general_id', $id)
+        ->where('type_claim', 'travel')
+        ->groupBy('travel_date')
+        ->get();
+
+        return $data;
+    }
+    public function getSummarySubsClaimByGeneralId($id = '')
+    {
+        $data = TravelClaim::select(
+            DB::raw('SUM(total_subs) AS total_subs'),
+            DB::raw('SUM(total_acc) AS total_acc'),
+            DB::raw('SUM(total_subs) + SUM(total_acc)  AS total_all')
+        )
+        
+        ->where('general_id', $id)
+        ->where('type_claim', 'subs')
+        ->groupBy('general_id')
+        ->get();
+
+        return $data;
+    }
+    public function getSummaryOthersByGeneralId($id = '')
+    {
+        $data = PersonalClaim::select(
+            DB::raw('SUM(amount) AS total_amount'),
+            
+        )
+
+        ->where('general_id', $id)
+        ->groupBy('general_id')
+        ->get();
+
+        return $data;
+    }
+    public function getSummaryTravellingClaimByGeneralId($id = '')
+    {
+        $data = TravelClaim::select(
+            DB::raw('SUM(millage) AS total_millage'),
+            DB::raw('SUM(total_km) AS total_km'),
+            DB::raw('SUM(petrol) AS total_petrol'),
+            DB::raw('SUM(toll) AS total_toll'),
+            DB::raw('SUM(parking) AS total_parking'),
+            DB::raw('SUM(millage) + SUM(petrol) + SUM(toll) + SUM(parking) AS total_travelling')
+        )
+        
+        ->where('general_id', $id)
+        ->where('type_claim', 'travel')
+        ->groupBy('general_id')
+        ->get();
+
+        return $data;
+    }
+    public function getSubsClaimByGeneralId($id = '')
+    {
+        $data = TravelClaim::where('general_id', $id)
+        ->where('type_claim', 'subs')
+        ->get();
+
+        return $data;
+    }
+    public function getTravelDateClaimByGeneralId($id = '')
+    {
+        $data = TravelClaim::where('general_id', $id)
+            ->where('type_claim', 'travel')
+            ->groupBy('travel_date') // Group by the 'travel_date' column
+            ->pluck('travel_date'); // Select only the 'travel_date' column
+
+        return $data;
+    }
+
+
     public function getTravelClaimByGeneralId($id = '')
     {
         $data = TravelClaim::where('general_id', $id)->get();
 
         return $data;
     }
+
     public function getUserAddress($id = '')
     {
         $data = UserAddress::where('user_id', $id)

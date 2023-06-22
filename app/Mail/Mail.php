@@ -90,8 +90,10 @@ class Mail extends Mailable
             $view = 'emails.timesheet.viewtimesheetappeal';
         }else if ($data['typeEmail'] == 'emailToEmployeeAppeal') {
             $view = 'emails.timesheet.emailToEmployeeAppeal';
+        }else if ($data['typeEmail'] == 'forgotDomain') {
+            $view = 'emails.forgotDomain';
         }
-        
+
 
         // $address = 'janeexampexample@example.com';
         // $subject = 'This is a demo!';

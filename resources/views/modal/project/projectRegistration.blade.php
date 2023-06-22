@@ -114,7 +114,7 @@
                             <input type="text" class="form-control" name="warranty_start_date" id="datepicker-warstart" placeholder="YYYY/MM/DD" />
                         </div>
                         <div class="col-md-4">
-                            <input type="text" class="form-control" id="datepicker-warend" name="warranty_end_date" placeholder="YYYY/MM/DD" />
+                            <input type="text" class="form-control" id="datepicker-warend" name="warranty_end_date" readonly placeholder="YYYY/MM/DD" />
                         </div>
                     </div>
                     <div class="row">
@@ -124,10 +124,10 @@
                     </div>
                     <div class="row mb-15px">
                         <div class="col-md-4">
-                            <input type="number" class="form-control mb-5px" name="bank_guarantee_amount" placeholder="BANK GUARANTEE AMOUNT" />
+                            <input type="number" class="form-control mb-5px" name="bank_guarantee_amount" onchange="this.value=parseFloat(this.value).toFixed(2);" placeholder="BANK GUARANTEE AMOUNT" />
                         </div>
                         <div class="col-md-4">
-                            <input type="text" class="form-control" id="datepicker-bankexpiry" name="bank_guarantee_expiry_date" placeholder="YYYY/MM/DD" />
+                            <input type="text" class="form-control" id="datepicker-bankexpiry" name="bank_guarantee_expiry_date" onchange="this.value=parseFloat(this.value).toFixed(2);" placeholder="YYYY/MM/DD" />
                         </div>
                         <div class="col-md-4">
                             <select class="form-select" name="status">
