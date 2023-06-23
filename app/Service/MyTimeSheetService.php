@@ -79,6 +79,28 @@ class MyTimeSheetService
     $input['tenant_id'] = $user->tenant_id;
     $input['date'] = date_format(date_create($input['date']), 'Y/m/d');
 
+    $currentDate = date('Y/m/d');
+    $twoDaysBefore = date('Y/m/d', strtotime('-2 days'));
+
+    $dayOfWeek = date('N', strtotime($twoDaysBefore)); 
+
+    $monday = 1;
+    $tuesday = 2;
+    
+    if ($dayOfWeek == $monday || $dayOfWeek == $tuesday) {
+        $twoDaysBefore = date('Y/m/d', strtotime('-4 days'));
+    }
+    
+    if ($input['date'] < $twoDaysBefore) {
+        $input['appealstatus'] = "1";
+    } else {
+        $input['appealstatus'] = "2";
+    }
+    
+
+
+    
+
 
 
     $startTime = date('Y-m-d H:i:s', strtotime($input['start_time']));
@@ -552,28 +574,40 @@ if ($existingLogs->isNotEmpty()) {
     public function getEventById($id)
     {
         $event = TimesheetEvent::find($id);
-
+    
         $event = $event->leftJoin('employment as b', 'timesheet_event.user_id', '=', 'b.user_id')
                     ->select('timesheet_event.*', 'b.employeeName')
                     ->find($id);
-        // dd($event);
-
+    
         $participantIds = explode(',', $event->participant);
-
+    
         $employees = DB::table('employment')
                         ->whereIn('user_id', $participantIds)
                         ->get();
-       
-
+                        // dd($employees);
+    
         $employeeNames = $employees->pluck('employeeName')->toArray();
-        
-
+    
         $event->participantNames = implode(',', $employeeNames);
-        //  dd($event);
+    
+        $nonParticipants = DB::table('employment')
+                            ->whereNotIn('user_id', $participantIds)
+                            ->get()
+                            ->pluck('employeeName')
+                            ->toArray();
+    
+        $event->nonParticipantNames = implode(',', $nonParticipants);
 
+        $attendanceStatus = DB::table('attendance_event')
+        ->where('event_id', $id)
+        ->get();
+
+        $event->attendanceStatus = $attendanceStatus;
+        // dd($event);
+    
         return $event;
-
     }
+    
 
 
 
@@ -1561,6 +1595,26 @@ if ($existingLogs->isNotEmpty()) {
     
         return $approverName;
     }
+
+    public function participants()
+    {
+        $data = Employee::where([
+            ['tenant_id', Auth::user()->tenant_id],
+            ['employeeid', '!=', null],
+            ['status', 'active'],
+        ])->get();
+    
+        return $data;
+    }
+    
+
+    
+
+
+
+
+
+    
     
     
 

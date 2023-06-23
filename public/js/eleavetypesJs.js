@@ -4,6 +4,11 @@ $(document).ready(function () {
             responsive: false,
             bLengthChange: false,
             bFilter: true,
+            initComplete: function (settings, json) {
+                $("#tabletype").wrap(
+                    "<div style='overflow:auto; width:100%;position:relative;'></div>"
+                );
+            },
         });
     });
 
@@ -256,5 +261,10 @@ $(document).ready(function () {
             [5, 10, 25, 50, "All"],
         ],
         responsive: false,
+        initComplete: function (settings, json) {
+            $("#tabletypes").wrap(
+                "<div style='overflow:auto; width:100%;position:relative;'></div>"
+            );
+        },
     });
 });

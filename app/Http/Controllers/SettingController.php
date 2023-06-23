@@ -574,6 +574,7 @@ class SettingController extends Controller
         $ss = new SettingService;
 
         $result = $ss->sopView();
+        // pr($result);
 
         return view('pages.setting.sop', $result);
     }
@@ -649,7 +650,7 @@ class SettingController extends Controller
 
         return $result;
     }
-    
+
     public function getJobGradeById($id = '')
     {
         $ss = new SettingService;
@@ -773,6 +774,15 @@ class SettingController extends Controller
 
         $result = $ss->branchByUnitId($id);
 
+        return $result;
+    }
+
+
+    public function branchByCountry($id = '')
+    {
+        $ss = new SettingService;
+
+        $result = $ss->branchByCountry($id);
         return $result;
     }
 

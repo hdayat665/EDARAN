@@ -6,7 +6,7 @@ $(document).ready(function () {
     //       $(this).val("test");
     //     }
     //   });
-    var naim = "naim";
+    
     document.getElementById("yearsub").value = new Date().getFullYear();
 
     var monthNames = [
@@ -1165,7 +1165,7 @@ $(document).ready(function () {
               });
               
 
-            console.log(dataHoliday);
+            // console.log(dataHoliday);
             
            
            
@@ -1492,7 +1492,7 @@ $(document).ready(function () {
                    
                       if (
                         current.getTime() === currentDate.getTime() ||
-                        (current.getTime() < currentDate.getTime() && !weekend1 && !weekend2)
+                        (current.getTime() < currentDate.getTime())
                         
                     ) {
                         // $(info.el).append('&nbsp;').append(dailycounter);
@@ -1777,19 +1777,19 @@ $(document).ready(function () {
                         });
                     }
 
-                    employeeData = getEmployee();
-                    employeeData.then(function (data) {
-                        // console.log(data.data);
-                        const employees = data.data;
-                        for (let i = 0; i < employees.length; i++) {
-                            const employee = employees[i];
-                            $("#addneweventparticipantedit").picker(
-                                "remove",
-                                employee["user_id"]
-                            );
-                            // console.log(employee['user_id']);
-                        }
-                    });
+                    // employeeData = getEmployee();
+                    // employeeData.then(function (data) {
+                    //     // console.log(data.data);
+                    //     const employees = data.data;
+                    //     for (let i = 0; i < employees.length; i++) {
+                    //         const employee = employees[i];
+                    //         $("#addneweventparticipantedit").picker(
+                    //             "remove",
+                    //             employee["user_id"]
+                    //         );
+                    //         // console.log(employee['user_id']);
+                    //     }
+                    // });
 
                     if (
                         info.event.extendedProps.type == "leave" ||
@@ -1914,7 +1914,7 @@ $(document).ready(function () {
                             // $("#activityByProjectEditShow").hide();
                             $("#typeoflogedit").val(data.type_of_log);
                             $("#officelog2edit").val(data.office_log);
-                            $("#dateaddlogedit").val(data.date);
+                           
                             $("#project_id_edit").val(data.project_id);
                             $("#officeLogProjectEdit").val(data.project_id);
 
@@ -1962,8 +1962,37 @@ $(document).ready(function () {
                                     defaultTime: data.end_time
                                 });
 
-                            
+                                $("#dateaddlogedit").val(data.date);
+
+                                $("#statusappeal").val(data.appealstatus);
+
+                                var currentDate = new Date();
+                                var twoDaysBefore = new Date();
+                                twoDaysBefore.setDate(currentDate.getDate() - 3);
+                                
+                                
+                                var selectedDate = new Date($("#dateaddlogedit").val());
+                              
+                                
+                                if ($("#statusappeal").val() === "1" || selectedDate < twoDaysBefore) {
+                                    $("#dateaddlogedit").prop("readonly", true);
+                                    $("#dateaddlogedit").css("pointer-events", "none");
+                                } else {
+                                    $("#dateaddlogedit").prop("readonly", false);
+                                    $("#dateaddlogedit").css("pointer-events", "auto");
+                                }
+
+                                // if ( selectedDate < twoDaysBefore) {
+                                //     $("#dateaddlogedit").prop("readonly", true);
+                                //     $("#dateaddlogedit").css("pointer-events", "none");
+                                // } else {
+                                //     $("#dateaddlogedit").prop("readonly", false);
+                                //     $("#dateaddlogedit").css("pointer-events", "auto");
+                                // }
+
+                                
                         });
+
 
                         $("#editlogmodal").modal("show");
                     } else {
@@ -2034,25 +2063,54 @@ $(document).ready(function () {
                             var eventData = getEvents(eventId);
                             eventData.then(function (data) {
                                 var participants = data.participant.split(",");
-                                var participantNames =
-                                    data.participantNames.split(",");
-
+                                var participantNames = data.participantNames.split(",");
+                                var attendanceStatus = data.attendanceStatus;
+                            
                                 var tableBody = $("#tableRowParticipant");
                                 tableBody.empty(); // clear any existing rows in the table
-
+                            
                                 for (var i = 0; i < participants.length; i++) {
                                     var participantId = participants[i];
                                     var participantName = participantNames[i];
-
+                                    var status = attendanceStatus[i].status; // assuming the attendance status field is named 'status'
+                            
                                     var row = $("<tr></tr>");
                                     row.append($("<td></td>").text(i + 1));
-                                    row.append(
-                                        $("<td></td>").text(participantName)
-                                    );
-
+                                    row.append($("<td></td>").text(participantName));
+                                    row.append($("<td></td>").text(status));
+                            
                                     tableBody.append(row);
                                 }
                             });
+                            
+                            
+                            var eventData1 = getEvents(eventId);
+                            eventData1.then(function(data) {
+                                var nonParticipants = data.nonParticipantNames.split(",");
+
+                                var selectElement = $("#addneweventparticipantedit");
+
+                                // Clear any existing options
+                                selectElement.empty();
+
+                                // Add the "Please Choose" option as the first option
+                                var pleaseChooseOption = $("<option></option>")
+                                    .val("")
+                                    .text("PLEASE CHOOSE");
+
+                                selectElement.append(pleaseChooseOption);
+
+                                // Add the non-participant options
+                                for (var i = 0; i < nonParticipants.length; i++) {
+                                    var option = $("<option></option>")
+                                        .val(nonParticipants[i])
+                                        .text(nonParticipants[i]);
+
+                                    selectElement.append(option);
+                                }
+                            });
+
+                            
 
                             $("#participantlist").val(data.participantNames);
                             $("#event_name").val(data.event_name);
@@ -2061,7 +2119,7 @@ $(document).ready(function () {
                             $("#endeventdateedit").val(data.end_date);
                             $("#starteventtimeedit").val(data.start_time);
 
-                            //sini
+                            
 
                             $("#starteventtimeedit").mdtimepicker({
                                 showMeridian: true,
@@ -2524,11 +2582,22 @@ $(document).ready(function () {
                                 });
                                 form.style.pointerEvents = "none"; // Disable pointer events
 
-                                var allowedElements = document.querySelectorAll("#closebuttonmodal,#attendHide,#attendEvent");
+                                var allowedElements = document.querySelectorAll("#closebuttonmodal,#attendHide,#attendEvent,#descE");
 
                                 for (var i = 0; i < allowedElements.length; i++) {
                                     allowedElements[i].style.pointerEvents = "auto";
                                 }
+
+                                // Disable editing but enable scrolling
+                                var descE = document.getElementById("descE");
+                                descE.setAttribute("readonly", "readonly")
+                                descE.style.overflowY = "auto";
+                                descE.style.resize = "vertical";;
+                                descE.style.backgroundColor = "white";
+
+                               
+
+
                                 // Gray out the form
                                 // form.style.opacity = "0.5";
                             } else {
@@ -2740,23 +2809,34 @@ $(document).ready(function () {
 
 
 
-    $(function() {
-        // Initialize Datepicker
-        $("#dateaddlog").datepicker({
-            todayHighlight: true,
-            autoclose: true,
-            format: "yyyy-mm-dd",
-            startDate: new Date(new Date().getTime() - 2 * 24 * 60 * 60 * 1000), // two days ago
-            endDate: new Date(), // Disable future dates
-        });
-
-        // Set the minimum and maximum dates to restrict the date range that can be selected
-        $("#dateaddlog").datepicker(
-            "setStartDate",
-            new Date(new Date().getTime() - 2 * 24 * 60 * 60 * 1000)
-        );
-        $("#dateaddlog").datepicker("setEndDate", new Date());
+    $("#dateaddlog").datepicker({
+        todayHighlight: true,
+        autoclose: true,
+        format: "yyyy-mm-dd",
+        startDate: getStartDate(), // Set the start date dynamically
+        endDate: new Date() // Disable future dates
     });
+    
+    function getStartDate() {
+        var currentDate = new Date();
+        var dayOfWeek = currentDate.getDay(); // Sunday = 0, Monday = 1, ..., Saturday = 6
+        var daysToSubtract = 2;
+
+        monday = 1;
+        tuesday = 2;
+    
+        if (dayOfWeek === monday|| dayOfWeek === tuesday) {
+            // If today is Monday or Tuesday, subtract 4 days instead of 2
+            daysToSubtract = 4;
+        }
+    
+        var startDate = new Date(currentDate.getTime() - daysToSubtract * 24 * 60 * 60 * 1000);
+        return startDate;
+    }
+    
+    // Set the minimum and maximum dates to restrict the date range that can be selected
+    $("#dateaddlog").datepicker("setStartDate", getStartDate());
+    $("#dateaddlog").datepicker("setEndDate", new Date());
 
     $("#starteventdate")
         .datepicker({
@@ -2806,6 +2886,8 @@ $("#endeventdate").datepicker({
     // });
     $("#addneweventselectproject").picker({ search: true });
 
+    //for addlogmodal
+    //starttime,endtime function,validation for endtime cannot be lower than starttime
     $(function () {
         var now = new Date();
         var hours = now.getHours().toString().padStart(2, '0');
@@ -2851,20 +2933,127 @@ $("#endeventdate").datepicker({
             })
             .datepicker("setDate", "now");
     
-        $("#starteventtime,#endeventtime").mdtimepicker({
-            showMeridian: true,
-            timeFormat: 'hh:mm:ss.000',
-            is24hour: true
-        });
-    
+
         $("#starttime").change(function () {
             // Reset the end time value to an empty string
             $("#endtime").val("");
         });
     
         $("#endtime").change(function () {
-            var startTime = moment($("#starttime").val(), "hh:mm A");
-            var endTime = moment($("#endtime").val(), "hh:mm A");
+            var startTime = moment($("#starttime").val(), "hh:mm A").format("HH:mm");
+            var endTime = moment($("#endtime").val(), "hh:mm A").format("HH:mm");
+        
+            if (endTime < startTime) {
+                Swal.fire({
+                    icon: "error",
+                    title: "Error!",
+                    text: "The End Time cannot be before the Start Time.",
+                }).then(() => {
+                    $("#endtime").val("");
+                    $("#logduration").val("");
+                    $("#endtime").attr("placeholder", "End Time");
+                    $("#endtime").mdtimepicker("toggle");
+                });
+            }
+        });
+    });
+
+    //addlog total hour cal
+    //lunch break func
+    $("#logduration,#daystart,#dayend,#starttime,#endtime,#lunchBreak").change(function () {
+        var startdt = new Date($("#daystart").val() + " " + $("#starttime").val());
+        var enddt = new Date($("#dayend").val() + " " + $("#endtime").val());
+        var diff = enddt - startdt;
+        var days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        diff -= days * (1000 * 60 * 60 * 24);
+        var hours = Math.floor(diff / (1000 * 60 * 60));
+        diff -= hours * (1000 * 60 * 60);
+        var mins = Math.floor(diff / (1000 * 60));
+        diff -= mins * (1000 * 60);
+    
+        // $("#logduration").val(
+        //     days + " days : " + hours + " hours : " + mins + " minutes "
+        // );
+    
+    
+        if ($("#lunchBreak").val() === "1") {
+            hours -= 1;
+            // hours = hours - 1
+        }
+    
+        $("#logduration").val(
+            // days + " days : " + hours + " hours : " + mins + " minutes "
+            // days +  hours + mins 
+            hours + ":" + mins + ":" + "0"
+        );
+    
+        // Disable lunch break if total hours are less than 1
+        if (hours < 1 && mins < 1) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Input Time Error',
+                text: 'Between Start Time and End Time must be more than 1 hour if Lunch Break is selected',
+            });
+            
+            $("#starttime").val("");
+            $("#endtime").val("");
+            
+
+        } else {
+            // $("#lunchBreak").prop("disabled", false);
+        }
+        
+    });
+
+    //addeventmodal
+    $(function () {
+        var now = new Date();
+        var hours = now.getHours().toString().padStart(2, '0');
+        var minutes = now.getMinutes().toString().padStart(2, '0');
+    
+        var currentTime = hours + ":" + minutes;
+    
+        $("#starteventtime").val(currentTime); // Set the value of the input field directly
+    
+        $("#starteventtime").mdtimepicker({
+            showMeridian: true,
+            timeFormat: 'hh:mm:ss.000',
+            is24hour: true
+        });
+    
+        // Calculate end time
+        var start = new Date();
+        start.setHours(parseInt(hours));
+        start.setMinutes(parseInt(minutes));
+        start.setMinutes(start.getMinutes() + 60); // Add 60 minutes (1 hour)
+        var endHours = start.getHours().toString().padStart(2, '0');
+        var endMinutes = start.getMinutes().toString().padStart(2, '0');
+        var endTime = endHours + ":" + endMinutes;
+    
+        $("#endeventtime").val(endTime); // Set the value of the end time input field directly
+    
+        $("#endeventtime").mdtimepicker({
+            showMeridian: true,
+            timeFormat: 'hh:mm:ss.000',
+            is24hour: true
+        });
+    
+    
+        $("#starteventdate,#endeventdate")
+            .datepicker({
+                format: "yyyy/mm/dd",
+            })
+            .datepicker("setDate", "now");
+    
+       
+        $("#starteventtime").change(function () {
+            // Reset the end time value to an empty string
+            $("#endeventtime").val("");
+        });
+    
+        $("#endeventtime").change(function () {
+            var startTime = moment($("#starteventtime").val(), "hh:mm A");
+            var endTime = moment($("#endeventtime").val(), "hh:mm A");
     
             if (endTime.isBefore(startTime)) {
                 Swal.fire({
@@ -2872,14 +3061,78 @@ $("#endeventdate").datepicker({
                     title: "Error!",
                     text: "The End Time Could Not Be Before The Start Time.",
                 }).then(() => {
-                    $("#endtime").val("");
-                    $("#logduration").val("");
-                    $("#endtime").attr("placeholder", "End Time"); // Set the placeholder for the end time field
-                    $("#endtime").mdtimepicker("toggle"); // Close the time picker
+                    $("#endeventtime").val("");
+                    $("#duration").val("");
+                    $("#endeventtime").attr("placeholder", "End Time"); // Set the placeholder for the end time field
+                    $("#endeventtime").mdtimepicker("toggle"); // Close the time picker
                 });
             }
         });
     });
+
+    //addeventmodal
+    $(
+        "#duration,#starteventdate,#starteventtime,#endeventdate,#endeventtime"
+    ).change(function () {
+        calculateDuration();
+    });
+    
+    //update total duration
+    function calculateDuration() {
+        var startdt = new Date(
+            $("#starteventdate").val() + " " + $("#starteventtime").val()
+        );
+    
+        var enddt = new Date(
+            $("#endeventdate").val() + " " + $("#endeventtime").val()
+        );
+    
+        var diff = enddt - startdt;
+    
+        var days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        diff -= days * (1000 * 60 * 60 * 24);
+    
+        var hours = Math.floor(diff / (1000 * 60 * 60));
+        diff -= hours * (1000 * 60 * 60);
+    
+        var mins = Math.floor(diff / (1000 * 60));
+        diff -= mins * (1000 * 60);
+    
+        $("#duration").val(
+            // days + " days : " + hours + " hours : " + mins + " minutes "
+            hours + ":" + mins + ":0"
+        );
+    }
+    
+    //edit event modal mytimesheet
+    $(
+        "#durationeditevent,#starteventdateedit,#endeventdateedit,#starteventtimeedit,#endeventtimeedit"
+    ).change(function () {
+        var startdt = new Date(
+            $("#starteventdateedit").val() + " " + $("#starteventtimeedit").val()
+        );
+    
+        var enddt = new Date(
+            $("#endeventdateedit").val() + " " + $("#endeventtimeedit").val()
+        );
+    
+        var diff = enddt - startdt;
+    
+        var days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        diff -= days * (1000 * 60 * 60 * 24);
+    
+        var hours = Math.floor(diff / (1000 * 60 * 60));
+        diff -= hours * (1000 * 60 * 60);
+    
+        var mins = Math.floor(diff / (1000 * 60));
+        diff -= mins * (1000 * 60);
+    
+        // console.log(days + ":" + hours);
+        $("#durationeditevent").val(
+            hours + ":" + mins + ":0"
+        );
+    });
+    
     
     
 
@@ -3122,7 +3375,7 @@ $("#endeventdate").datepicker({
         autoclose: true,
         format: "yyyy-mm-dd",
         startDate: new Date(new Date().getTime() - 2 * 24 * 60 * 60 * 1000), // one days ago
-        endDate: null, // No end date
+        endDate: new Date(),
     });
     $("#starteventdateedit").datepicker({
         todayHighlight: true,
@@ -3356,9 +3609,12 @@ $("#endeventdate").datepicker({
         });
     });
 
-    $("#logduration,#daystart,#dayend,#starttime,#endtime,#lunchBreak").change(function () {
-        var startdt = new Date($("#daystart").val() + " " + $("#starttime").val());
-        var enddt = new Date($("#dayend").val() + " " + $("#endtime").val());
+    
+
+
+    $("#lunchBreakedit, #daystartedit, #dayendedit, #starttimeedit, #endtimeedit").focus(function() {
+        var startdt = new Date($("#daystartedit").val() + " " + $("#starttimeedit").val());
+        var enddt = new Date($("#dayendedit").val() + " " + $("#endtimeedit").val());
         var diff = enddt - startdt;
         var days = Math.floor(diff / (1000 * 60 * 60 * 24));
         diff -= days * (1000 * 60 * 60 * 24);
@@ -3367,64 +3623,33 @@ $("#endeventdate").datepicker({
         var mins = Math.floor(diff / (1000 * 60));
         diff -= mins * (1000 * 60);
     
-        // $("#logduration").val(
-        //     days + " days : " + hours + " hours : " + mins + " minutes "
-        // );
-    
-    
-        if ($("#lunchBreak").val() === "1") {
+        // Subtract 1 hour if lunch break is selected (value is "1" and not null) and total hours are greater than 1
+        if ($("#lunchBreakedit").val() === "1") {
             hours -= 1;
-            // hours = hours - 1
         }
     
-        $("#logduration").val(
-            // days + " days : " + hours + " hours : " + mins + " minutes "
-            // days +  hours + mins 
-            hours + ":" + mins + ":" + "0"
-        );
+        $("#total_hour_edit").val(hours + ":" + mins + ":" + "0");
     
         // Disable lunch break if total hours are less than 1
-        if (hours < 1) {
-            $("#lunchBreak").prop("disabled", true);
+        if (hours < 1 && mins < 1) {
+            $("#starttimeedit").val("");
+            $("#endtimeedit").val("");
+            $("#total_hour_edit").val("");
+    
+            // Show the error only if it hasn't been shown before
+            if (!errorShown) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Input Time Error',
+                    text: 'Between Start Time and End Time must be more than 1 hour if Lunch Break is selected',
+                });
+                errorShown = true; // Set the flag to indicate that the error has been shown
+            }
         } else {
-            $("#lunchBreak").prop("disabled", false);
+            errorShown = false; // Reset the flag if the condition is no longer true
         }
     });
-
-$(document).ready(function () {
-    // Trigger change event on page load to calculate and populate the total hours
-    $("#total_hour_edit,#daystartedit,#dayendedit,#starttimeedit,#endtimeedit,#lunchBreakedit").change();
-});
-
-$("#total_hour_edit,#daystartedit,#dayendedit,#starttimeedit,#endtimeedit,#lunchBreakedit").change(function () {
-    var startdt = new Date($("#daystartedit").val() + " " + $("#starttimeedit").val());
-    var enddt = new Date($("#dayendedit").val() + " " + $("#endtimeedit").val());
-    var diff = enddt - startdt;
-    var days = Math.floor(diff / (1000 * 60 * 60 * 24));
-    diff -= days * (1000 * 60 * 60 * 24);
-    var hours = Math.floor(diff / (1000 * 60 * 60));
-    diff -= hours * (1000 * 60 * 60);
-    var mins = Math.floor(diff / (1000 * 60));
-    diff -= mins * (1000 * 60);
-
-    // Subtract 1 hour if lunch break is selected (value is "1" and not null) and total hours are greater than 1
-    if ($("#lunchBreakedit").val() === "1" && $("#lunchBreakedit").val() !== null && hours > 1) {
-        hours -= 1;
-    }
-
-    $("#total_hour_edit").val(
-        // days + " days : " + hours + " hours : " + mins + " minutes "
-        // days + hours + mins
-        hours + ":" + mins + ":" + "0"
-    );
-
-    // Disable lunch break if total hours are less than 1
-    // if (hours < 1) {
-    //     $("#lunchBreakedit").prop("disabled", true);
-    // } else {
-    //     $("#lunchBreakedit").prop("disabled", false);
-    // }
-});
+    
 
 
     
@@ -3436,7 +3661,7 @@ $("#total_hour_edit,#daystartedit,#dayendedit,#starttimeedit,#endtimeedit,#lunch
     //     $("#logduration").trigger("change");
     // });
 
-    calculateDuration();
+    // calculateDuration();
 
     // $('#hidestart, #hideend').hide();
 
@@ -3463,70 +3688,23 @@ $("#total_hour_edit,#daystartedit,#dayendedit,#starttimeedit,#endtimeedit,#lunch
             // $('#endeventtimeedit').val("11:59 PM");
         }
     });
+
+    // $('#addneweventparticipantedit').select2();
+    // $('#addneweventparticipantedit').select2({ placeholder:"Please Choose" });
+    // $('#addneweventparticipantedit').picker({ search: true });
+    // $('#editeventmodal').on('shown.bs.modal', function () {
+    //     $('#addneweventparticipantedit').select2({ placeholder: "Please Choose" });
+    // });
+    // $("#testchosen").chosen();
+    $('#my-select').multiselect({
+        includeSelectAllOption: true, // Add an "Select All" option
+        enableFiltering: true, // Enable search/filtering
+        maxHeight: 200 // Set a maximum height for the dropdown
+      });
 });  //end sini
 
-$(
-    "#duration,#starteventdate,#starteventtime,#endeventdate,#endeventtime"
-).focus(function () {
-    calculateDuration();
-});
 
-//update total duration
-function calculateDuration() {
-    var startdt = new Date(
-        $("#starteventdate").val() + " " + $("#starteventtime").val()
-    );
 
-    var enddt = new Date(
-        $("#endeventdate").val() + " " + $("#endeventtime").val()
-    );
-
-    var diff = enddt - startdt;
-
-    var days = Math.floor(diff / (1000 * 60 * 60 * 24));
-    diff -= days * (1000 * 60 * 60 * 24);
-
-    var hours = Math.floor(diff / (1000 * 60 * 60));
-    diff -= hours * (1000 * 60 * 60);
-
-    var mins = Math.floor(diff / (1000 * 60));
-    diff -= mins * (1000 * 60);
-
-    $("#duration").val(
-        // days + " days : " + hours + " hours : " + mins + " minutes "
-        hours + ":" + mins + ":0"
-    );
-}
-
-//edit event modal mytimesheet
-$(
-    "#durationeditevent,#starteventdateedit,#endeventdateedit,#starteventtimeedit,#endeventtimeedit"
-).change(function () {
-    var startdt = new Date(
-        $("#starteventdateedit").val() + " " + $("#starteventtimeedit").val()
-    );
-
-    var enddt = new Date(
-        $("#endeventdateedit").val() + " " + $("#endeventtimeedit").val()
-    );
-
-    var diff = enddt - startdt;
-
-    var days = Math.floor(diff / (1000 * 60 * 60 * 24));
-    diff -= days * (1000 * 60 * 60 * 24);
-
-    var hours = Math.floor(diff / (1000 * 60 * 60));
-    diff -= hours * (1000 * 60 * 60);
-
-    var mins = Math.floor(diff / (1000 * 60));
-    diff -= mins * (1000 * 60);
-
-    // console.log(days + ":" + hours);
-    $("#durationeditevent").val(
-        hours + ":" + mins + ":0"
-    );
-});
-// });// });
 
 $(document).on("click", "#confirmsubmitb", function () {
     var id = $(this).data("id");

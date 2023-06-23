@@ -48,7 +48,7 @@ $(document).ready(function () {
 
 
                         // Store the value in session storage
-                        sessionStorage.setItem("dataValue", data.data);
+                        localStorage.setItem("dataValue", data.data);
 
                         window.location.href = "/loginTenant";
 
@@ -61,7 +61,7 @@ $(document).ready(function () {
     });
 
 // Retrieve the value from session storage
-var dataValue = sessionStorage.getItem("dataValue");
+var dataValue = localStorage.getItem("dataValue");
 
 
 // Update the value of the <span> element
@@ -295,14 +295,17 @@ tenantInput.value = dataValue || "";
             },
             messages: {
                 username: {
-                    required: "Please Insert Working Email",
-                    email: "Working Email Does Not Exist"
+                    required: "Please Insert Email Address",
+                    email: "Email Address Does Not Exist"
                 },
             },
             // Make sure the form is submitted to the destination defined
             // in the "action" attribute of the form when valid
             submitHandler: function (form) {
                 requirejs(["sweetAlert2"], function (swal) {
+
+                    $("#forgotDomainEmail").prop("disabled", true);
+
                     var data = new FormData(document.getElementById("forgotDomainForm"));
 
                     $.ajax({
@@ -310,7 +313,6 @@ tenantInput.value = dataValue || "";
                         url: "/forgotDomainEmail",
                         data: data,
                         dataType: "json",
-
                         processData: false,
                         contentType: false,
                     }).then(function (data) {

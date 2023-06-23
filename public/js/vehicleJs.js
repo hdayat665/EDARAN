@@ -3,6 +3,11 @@ $(document).ready(function () {
         responsive: true,
         bLengthChange: false,
         bFilter: true,
+        initComplete: function (settings, json) {
+            $("#data-table-default").wrap(
+                "<div style='overflow:auto; width:100%;position:relative;'></div>"
+            );
+        },
     });
 
     function Previous() {

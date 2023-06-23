@@ -377,27 +377,63 @@
                         </div>
                     </div>
                     <div class="row p-2">
-                        <div class="col-sm-6">
+                        {{-- <div class="col-sm-6">
+                            <label for="firstname" class="form-label">Participant*</label>
+                            <select class="form-control" id="addneweventparticipantedit" name="participant[]">
+                                <option value="">PLEASE CHOOSE</option>
+                            </select>
+                        </div> --}}
+                         <div class="col-sm-6">
                             <label for="firstname" class="form-label">Participant*</label>
                             <select class="selectpicker form-select" id="addneweventparticipantedit" aria-label="Default select example" multiple name="participant[]">
-                                <option class="form-label" value="">PLEASE CHOOSE</option>
+                                    <option class="form-label" value="">PLEASE CHOOSE</option>
+                                    <?php $employees = getEmployeeactive() ?>
+                                    @foreach ($employees as $employee)
+                                    <option class="form-label" value="{{$employee->user_id}}">{{$employee->employeeName}}</option>
+                                    @endforeach
+                            </select> 
+                         </div>
+                         {{-- <div class="col-sm-6">
+                            <label for="firstname" class="form-label">Participant*</label>
+                            <select class="selectpicker form-select" name="participant[]" id="addneweventparticipantedit" aria-label="Default select example" multiple>
+                                <option value="" selected>PLEASE CHOOSE</option>
                                 <?php $employees = getEmployeeactive() ?>
                                 @foreach ($employees as $employee)
-                                <option class="form-label" value="{{$employee->user_id}}">{{$employee->employeeName}}</option>
+                                <option  value="{{$employee->user_id}}">{{$employee->employeeName}}</option>
                                 @endforeach
                             </select>
-                        </div>
+                        </div> --}}
+
+                        {{-- <select class="form-select" id="departmentsearch" name="department" data-default-value="">
+                            <option value="" selected >PLEASE CHOOSE</option>
+                            <?php $departments = getDepartment() ?>
+                            @foreach ($departments as $department)
+                            <option value="{{$department->departmentName}}"  {{($departmentId == $department->departmentName) ? 'selected="selected"' : ''}}>{{$department->departmentName}}</option>
+                            @endforeach
+                        </select>
+                         --}}
                         <div class="col-sm-6">
                             <label for="issuing-country" class="form-label">Description</label>
-                            <textarea class="form-control" id="descE" name="desc" rows="3"></textarea>
+                            <textarea class="form-control" id="descE" name="desc" rows="3" maxlength="255"></textarea>
                         </div>
                     </div>
+                    {{-- <div class="row p-2">
+                        <label for="firstname" class="form-label">test chosen</label>
+                        <select id="my-select" multiple="multiple">
+                            <option value="option1">Option 1</option>
+                            <option value="option2">Option 2</option>
+                            <option value="option3">Option 3</option>
+                            <option value="option4">Option 4</option>
+                            <option value="option5">Option 5</option>
+                          </select>
+                    </div> --}}
                     <div class="row p-2">
                         <table id="tableviewparticipant" class="table table-striped table-bordered align-middle">
                             <thead>
                                 <tr>
                                     <th class="text-nowrap">No</th>
                                     <th class="text-nowrap">Participants</th>
+                                    <th class="text-nowrap">Status</th>
                                 </tr>
                             </thead>
                             <tbody id="tableRowParticipant">

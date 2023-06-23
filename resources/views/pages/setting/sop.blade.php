@@ -46,6 +46,7 @@
                         <table id="tablepolicy" class="table table-striped table-bordered align-middle">
                             <thead>
                                 <tr>
+                                    <th>No.</th> 
                                     <th class="text-nowrap">Policy</th>
                                     <th class="text-nowrap">Document Title</th>
                                     <th class="text-nowrap">Description</th>
@@ -54,14 +55,17 @@
                                     <th class="text-nowrap">Added Time</th>
                                     <th class="text-nowrap">Modified By</th>
                                     <th class="text-nowrap">Modified Time</th>
-                                    <th width="9%" data-orderable="false" class="align-middle">Action</th>
+                                    <th width="9%" class="align-middle">Action</th>
 
                                 </tr>
                             </thead>
                             <tbody>
+                            <?php $id = 0 ?>
                                 @if ($policys)
                                     @foreach ($policys as $policy)
-                                    <tr>
+                                    <?php $id++ ?>
+                                    <tr class="odd gradeX">
+                                        <td width="1%" class="fw-bold text-dark">{{$id}}</td>
                                         <td>{{$policy->code}}</td>
                                         <td>{{$policy->policy}}</td>
                                         <td>{{$policy->desc}}</td>
@@ -99,7 +103,8 @@
                 <div class="panel-body">
                     <table id="tablesop" class="table table-striped table-bordered align-middle">
                         <thead>
-                            <tr>                                
+                            <tr>                
+                                <th>No.</th>                 
                                 <th class="text-nowrap">SOP Code</th>
                                 <th class="text-nowrap">SOP Name</th>
                                 <th class="text-nowrap">Description</th>
@@ -108,18 +113,24 @@
                                 <th class="text-nowrap">Added Time</th>
                                 <th class="text-nowrap">Modified By</th>
                                 <th class="text-nowrap">Modified Time</th>
-                                <th width="9%" data-orderable="false" class="align-middle">Action</th>
+                                <th width="9%" class="align-middle">Action</th>
 
                             </tr>
                         </thead>
                         <tbody>
-                            @if ($SOPs)
+                            <?php $id = 0 ?>
+                                @if ($SOPs)
                                 @foreach ($SOPs as $SOP)
-                                <tr>
+                            <?php $id++ ?>
+                                <tr class="odd gradeX">
+                                    <td width="1%" class="fw-bold text-dark">{{$id}}</td>
                                     <td>{{$SOP->SOPCode}}</td>
                                     <td>{{$SOP->SOPName}}</td>
                                     <td>{{$SOP->desc}}</td>
-                                    <td><a href="{{ route('download', ['filename' => $SOP->file]) }}">{{$SOP->file}}</a></td>                                    <td>{{$SOP->addedBy}}</td>
+                                    <td>
+                                        <a href="{{ route('download', ['filename' => $SOP->file]) }}">{{$SOP->file}}</a>
+                                    </td>                                    
+                                    <td>{{$SOP->addedBy}}</td>
                                     <td>{{$SOP->created_at}}</td>
                                     <td>{{$SOP->modifiedBy}}</td>
                                     <td>{{$SOP->modified_at}}</td>
