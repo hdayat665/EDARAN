@@ -1914,7 +1914,7 @@ $(document).ready(function () {
                             // $("#activityByProjectEditShow").hide();
                             $("#typeoflogedit").val(data.type_of_log);
                             $("#officelog2edit").val(data.office_log);
-                            $("#dateaddlogedit").val(data.date);
+                           
                             $("#project_id_edit").val(data.project_id);
                             $("#officeLogProjectEdit").val(data.project_id);
 
@@ -1962,8 +1962,37 @@ $(document).ready(function () {
                                     defaultTime: data.end_time
                                 });
 
-                            
+                                $("#dateaddlogedit").val(data.date);
+
+                                $("#statusappeal").val(data.appealstatus);
+
+                                var currentDate = new Date();
+                                var twoDaysBefore = new Date();
+                                twoDaysBefore.setDate(currentDate.getDate() - 3);
+                                
+                                
+                                var selectedDate = new Date($("#dateaddlogedit").val());
+                              
+                                
+                                if ($("#statusappeal").val() === "1" || selectedDate < twoDaysBefore) {
+                                    $("#dateaddlogedit").prop("readonly", true);
+                                    $("#dateaddlogedit").css("pointer-events", "none");
+                                } else {
+                                    $("#dateaddlogedit").prop("readonly", false);
+                                    $("#dateaddlogedit").css("pointer-events", "auto");
+                                }
+
+                                // if ( selectedDate < twoDaysBefore) {
+                                //     $("#dateaddlogedit").prop("readonly", true);
+                                //     $("#dateaddlogedit").css("pointer-events", "none");
+                                // } else {
+                                //     $("#dateaddlogedit").prop("readonly", false);
+                                //     $("#dateaddlogedit").css("pointer-events", "auto");
+                                // }
+
+                                
                         });
+
 
                         $("#editlogmodal").modal("show");
                     } else {
@@ -2034,25 +2063,26 @@ $(document).ready(function () {
                             var eventData = getEvents(eventId);
                             eventData.then(function (data) {
                                 var participants = data.participant.split(",");
-                                var participantNames =
-                                    data.participantNames.split(",");
-
+                                var participantNames = data.participantNames.split(",");
+                                var attendanceStatus = data.attendanceStatus;
+                            
                                 var tableBody = $("#tableRowParticipant");
                                 tableBody.empty(); // clear any existing rows in the table
-
+                            
                                 for (var i = 0; i < participants.length; i++) {
                                     var participantId = participants[i];
                                     var participantName = participantNames[i];
-
+                                    var status = attendanceStatus[i].status; // assuming the attendance status field is named 'status'
+                            
                                     var row = $("<tr></tr>");
                                     row.append($("<td></td>").text(i + 1));
-                                    row.append(
-                                        $("<td></td>").text(participantName)
-                                    );
-
+                                    row.append($("<td></td>").text(participantName));
+                                    row.append($("<td></td>").text(status));
+                            
                                     tableBody.append(row);
                                 }
                             });
+                            
                             
                             var eventData1 = getEvents(eventId);
                             eventData1.then(function(data) {
@@ -3345,7 +3375,7 @@ $("#endeventdate").datepicker({
         autoclose: true,
         format: "yyyy-mm-dd",
         startDate: new Date(new Date().getTime() - 2 * 24 * 60 * 60 * 1000), // one days ago
-        endDate: null, // No end date
+        endDate: new Date(),
     });
     $("#starteventdateedit").datepicker({
         todayHighlight: true,
