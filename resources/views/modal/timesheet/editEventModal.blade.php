@@ -433,6 +433,7 @@
                                 <tr>
                                     <th class="text-nowrap">No</th>
                                     <th class="text-nowrap">Participants</th>
+                                    <th class="text-nowrap">Status</th>
                                 </tr>
                             </thead>
                             <tbody id="tableRowParticipant">
