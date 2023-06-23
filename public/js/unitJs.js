@@ -96,8 +96,8 @@ $(document).ready(function () {
 
             messages: {
                 departmentId: "Please Choose Department Name",
-                unitName: "Please Insert Unit Code",
-                unitCode: "Please Insert Unit Name",
+                unitName: "Please Insert Unit Name",
+                unitCode: "Please Insert Unit Code",
             },
             submitHandler: function (form) {
                 requirejs(["sweetAlert2"], function (swal) {
@@ -144,8 +144,8 @@ $(document).ready(function () {
 
             messages: {
                 departmentId: "Please Choose Department Name",
-                unitName: "Please Insert Unit Code",
-                unitCode: "Please Insert Unit Name",
+                unitName: "Please Insert Unit Name",
+                unitCode: "Please Insert Unit Code",
             },
             submitHandler: function (form) {
                 requirejs(["sweetAlert2"], function (swal) {

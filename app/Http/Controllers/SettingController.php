@@ -778,12 +778,11 @@ class SettingController extends Controller
     }
 
 
-    public function locationByStateID($id = '')
+    public function branchByCountry($id = '')
     {
         $ss = new SettingService;
 
-        $result = $ss->locationByStateID($id);
-
+        $result = $ss->branchByCountry($id);
         return $result;
     }
 
