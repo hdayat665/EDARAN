@@ -2,7 +2,7 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="">SELECTED DATE, Eg= 13/2/2022</h5>
+                <h5 class="modal-title" id="dateevent"></h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -38,7 +38,7 @@
                                     <th class="text-nowrap">Location</th>
                                     <th class="text-nowrap">Project</th>
                                     <th class="text-nowrap">Priority</th>
-                                    <th class="text-nowrap">Recurring</th>
+                                    {{-- <th class="text-nowrap">Recurring</th> --}}
                                 </tr>
                             </thead>
                             <tbody>
@@ -46,7 +46,7 @@
                                     <td id="location_event"></td>
                                     <td id="project_event"></td>
                                     <td id="priority"></td>
-                                    <td id="recurring"></td>
+                                    {{-- <td id="recurring"></td> --}}
                                 </tr>
                             </tbody>
                         </table>

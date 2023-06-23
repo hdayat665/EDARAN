@@ -307,13 +307,25 @@ if ($existingLogs->isNotEmpty()) {
         return $data;
     }
 
-    public function getLogsById($id)
-    {
-        $data = TimesheetLog::find($id);
+    // public function getLogsById($id)
+    // {
+    //     $data = TimesheetLog::find($id);
 
-        return
-         $data;
-    }
+    //     return
+    //      $data;
+    // }
+
+    public function getLogsById($id)
+{
+    $logs = TimesheetLog::find($id);
+    
+    $logs = $logs->leftJoin('project_location as b', 'timesheet_log.project_location', '=', 'b.id')
+    ->select('timesheet_log.*','b.location_name')
+    ->find($id);
+    // dd($logs);
+    return $logs;
+}
+
 
     public function employeeNamebyId($userId)
     {
