@@ -3116,6 +3116,8 @@ $('#event').select2();
         }
     }
 
+
+
     $("#tableSibling").DataTable({
         responsive: false,
         lengthMenu: [
@@ -3641,7 +3643,6 @@ $('#event').select2();
     });
 
     parentId = $("#parentId").val();
-
     parentIds = parentId.split(",");
 
     for (let i = 0; i < parentIds.length; i++) {
@@ -3651,6 +3652,7 @@ $('#event').select2();
             $("select").prop("disabled", false);
             id = $(this).data("id");
             var ParentData = getParent(id);
+            console.log(id);
 
             ParentData.then(function (data) {
                 console.log(data.data);

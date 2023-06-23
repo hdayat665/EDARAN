@@ -1,4 +1,22 @@
 $(document).ready(function () {
+
+
+    $("#country").select2({placeholder: "PLEASE CHOOSE",
+                        dropdownParent: "#addModal"});
+    $("#state").select2({placeholder: "PLEASE CHOOSE",
+                        dropdownParent: "#addModal"
+                            });
+    $("#postcode").select2({placeholder: "PLEASE CHOOSE",
+                        dropdownParent: "#addModal"});
+
+
+    $("#countryE").select2({placeholder: "PLEASE CHOOSE",
+                            dropdownParent: "#editModal"});
+    $("#stateE").select2({placeholder: "PLEASE CHOOSE",
+                            dropdownParent: "#editModal"});
+    $("#postcodeE").select2({placeholder: "PLEASE CHOOSE",
+                            dropdownParent: "#editModal"});
+
     $("#address,#address2,#postcode,#city,#state,#country").focus(function () {
         getLatLng();
     });
@@ -121,6 +139,7 @@ $(document).ready(function () {
             " " +
             city +
             ", " +
+            state;
             state +
             ", " +
             country;
@@ -138,13 +157,15 @@ $(document).ready(function () {
                 $("#longitude").val(longitude);
                 $("#fulladdress").val(address);
             } else {
-                alert(
-                    "Geocode was not successful for the following reason: " +
-                        json.status
-                );
+                // alert(
+                //     "Geocode was not successful for the following reason: " +
+                //         json.status
+                // );
             }
         });
     }
+
+
 
     $("#saveButton").click(function (e) {
         $("#addForm").validate({
@@ -157,7 +178,6 @@ $(document).ready(function () {
                 address: "required",
                 postcode: "required",
                 city: "required",
-                district: "required",
                 state: "required",
             },
             messages: {
@@ -168,7 +188,6 @@ $(document).ready(function () {
                 address: "Please Insert Address 1",
                 postcode: "Please Insert Postcode",
                 city: "Please Insert City",
-                district: "Please Choose District",
                 state: "Please Choose State",
             },
             submitHandler: function (form) {
@@ -268,7 +287,6 @@ $(document).ready(function () {
         });
     });
 
-    console.log($('#editForm').val())
 });
 
 
@@ -283,9 +301,13 @@ $(document).ready(function () {
 
 
 
-$(document).on("change", "#state", function () {
-    state = $(this).val();
-    $("#postcode")
+$(document).on("change", "#country", function () {
+
+    country = $(this).val();
+
+    const inputs = ["#state"];
+
+    $("#state")
         .find("option")
         .remove()
         .end()
@@ -294,18 +316,17 @@ $(document).on("change", "#state", function () {
         )
         .val("");
 
-    // console.log(state)
-    // function locationByStateID(state) {
-    //     return $.ajax({
-    //         type: 'GET',
-    //         url: "/locationByStateID/" + state,
-    //     });
-    // }
+    console.log(country)
+    function branchByCountry(country) {
+        return $.ajax({
+            url: "/branchByCountry/" + country,
+        });
+    }
 
 
 
 
-    var branch = locationByStateID(state);
+    var branch = branchByCountry(country);
 
 
 
@@ -314,11 +335,11 @@ $(document).on("change", "#state", function () {
         for (let i = 0; i < dataBranch.length; i++) {
             const branch = dataBranch[i];
             var opt = document.createElement("option");
-            document.getElementById("postcode").innerHTML +=
+            document.getElementById("country").innerHTML +=
                 '<option value="' +
                 branch["id"] +
                 '">' +
-                branch["postcode"] +
+                branch["country"] +
                 "</option>";
         }
     });

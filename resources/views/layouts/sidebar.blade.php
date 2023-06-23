@@ -91,10 +91,10 @@
                                         <i class="fa fa-receipt text-gray"></i>
                                     </div>
                                     {{-- check if this is approver ts  --}}
-                                    @php
+                                    {{-- @php
                                         $employmentData = getEmplomentByUserId();
                                         $timesheets = getTimesheetDataToApprove();
-                                    @endphp
+                                    @endphp --}}
                                     <div class="menu-text text-gray">Timesheets Approval</div>
                                     @if (isset($timesheets) && $employmentData->tsapprover == Auth::user()->id)
                                         <span class="badge bg-danger badge-number" id="numberNotify">{{ $timesheets->count() }}</span>
@@ -118,10 +118,10 @@
                                 <div class="menu-icon">
                                     <i class="fa fa-receipt text-gray"></i>
                                 </div>
-                                @php
+                                {{-- @php
                                     $employmentData = getEmplomentByUserId();
                                     $appealTs = getTimesheetAppealData();
-                                @endphp
+                                @endphp --}}
                                 <div class="menu-text text-gray">Appeal Approval </div>
                                 @if (isset($appealTs) && $employmentData->tsapprover == Auth::user()->id)
                                     <span class="badge bg-danger badge-number" id="numberNotify">{{ $appealTs->count() }}</span>
@@ -213,9 +213,9 @@
                                                 <div class="menu-icon">
                                                     <i class="fa fa-user-pen text-gray"></i>
                                                 </div>
-                                                @php
+                                                {{-- @php
                                                     $eleaveRecommender = getEleaveData('recommender');
-                                                @endphp
+                                                @endphp --}}
                                                 <div class="menu-text text-gray">Recommender</div>
                                                 @if (isset($eleaveRecommender))
                                                     <span class="badge bg-danger badge-number" id="numberNotify">{{ $eleaveRecommender->count() }}</span>
@@ -230,9 +230,9 @@
                                                 <div class="menu-icon">
                                                     <i class="fa fa-users-gear text-gray"></i>
                                                 </div>
-                                                @php
+                                                {{-- @php
                                                     $eleaveRecommender = getEleaveData('approver');
-                                                @endphp
+                                                @endphp --}}
                                                 <div class="menu-text text-gray">Approver</div>
                                                 @if (isset($eleaveRecommender))
                                                     <span class="badge bg-danger badge-number" id="numberNotify">{{ $eleaveRecommender->count() }}</span>
@@ -277,9 +277,9 @@
                                     <div class="menu-icon">
                                         <i class="fa fa-book text-gray"></i>
                                     </div>
-                                    @php
+                                    {{-- @php
                                         $projectApproverData = getProjectApproverData();
-                                    @endphp
+                                    @endphp --}}
                                     <div class="menu-text text-gray">Project Information</div>
                                     @if (isset($projectApproverData))
                                         <span class="badge bg-danger badge-number" id="numberNotify">{{ $projectApproverData->count() }}</span>
@@ -597,9 +597,9 @@
                                                                     $caClaim = getCaClaimData('departApprover');
                                                                 @endphp
                                                                 <div class="menu-text text-gray">Approver</div>
-                                                                @if (isset($caClaim) && $employmentData->caapprover == Auth::user()->id)
+                                                                {{-- @if (isset($caClaim) && $employmentData->caapprover == Auth::user()->id)
                                                                     <span class="badge bg-danger badge-number" id="numberNotify">{{ $caClaim->count() }}</span>
-                                                                @endif
+                                                                @endif --}}
                                                             </a>
                                                         </div>
                                                     </div>

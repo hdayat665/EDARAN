@@ -12,4 +12,7 @@ class Country extends Model
     protected $table = 'settingcountry';
 
     protected $guarded = [];
+
+    
+
 }

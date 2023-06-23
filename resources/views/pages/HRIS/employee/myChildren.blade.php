@@ -14,37 +14,40 @@
             <th class="text-nowrap">Marital Status</th>
         </thead>
         <tbody>
-        <?php $id = 0 ?> 
-            
+        <?php $id = 0 ?>
+        @if ($childrens)
             @foreach ($childrens as $children)
             <?php $id++ ?>
                 <tr>
                     <td width="1%" class="fw-bold text-dark">{{$id}}</td>
+                   
+
                     <td>
-                        <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle"><i class="fa fa-cogs"></i> Actions <i class="fa fa-caret-down"></i></a>
-                        <div class="dropdown-menu">
-                            <a href="javascript:;" data-bs-toggle="modal" id="childModalEdit{{$children->id}}" data-id="{{$children->id}}" data-type="edit" class="dropdown-item">Edit</a>
+
+                        <a href="javascript:;" data-bs-toggle="dropdown" class="btn btn-primary btn-sm dropdown-toggle"><i class="fa fa-cogs"></i> Actions <i class="fa fa-caret-down"></i></a>
+                            <div class="dropdown-menu">
+                        <a href="javascript:;" id="childModalEdit{{$children->id}}" data-id="{{$children->id}}" data-type="edit"class="dropdown-item" >Edit</a>
                             <div class="dropdown-divider"></div>
-                            
-                            <a href="javascript:;" data-bs-toggle="modal" id="deleteChildren{{$children->id}}" data-id="{{$children->id}}" class="dropdown-item">Delete</a>
-                        </div>
+                        <a href="javascript:;" id="deleteChildren{{$children->id}}" data-id="{{$children->id}}" class="dropdown-item">Delete</a>
+
                     </td>
 
                    <td style="text-transform: uppercase;">{{ $children->fullName }}</td>
-                <td>{{ $children->idNo }}</td>
-                <td>{{ $children->age }}</td>
-                <td style="text-transform: uppercase;">{{ ($children->educationLevel == "0") ? '-' : educationLevel($children->educationLevel) }}</td>
-                <td style="text-transform: uppercase;">{{  $children->instituition ?? '-'}}</td>
-                <td style="text-transform: uppercase;">{{ ($children->maritalStatus == "0") ? '-' : getMaritalStatus($children->maritalStatus) }}</td>
+                    <td>{{ $children->idNo }}</td>
+                    <td>{{ $children->age }}</td>
+                    <td style="text-transform: uppercase;">{{ ($children->educationLevel == "0") ? '-' : educationLevel($children->educationLevel) }}</td>
+                    <td style="text-transform: uppercase;">{{  $children->instituition ?? '-'}}</td>
+                    <td style="text-transform: uppercase;">{{ ($children->maritalStatus == "0") ? '-' : getMaritalStatus($children->maritalStatus) }}</td>
                 </tr>
             @endforeach
+            @endif
             <span style="display: none"><input type="text" id="childId" value="{{$childId}}"></span>
         </tbody>
     </table>
     <div class="row p-2">
             <div class="modal-footer">
                 <a class="btn btn-white me-5px btnPrevious">Previous</a>
-                
+
                 <a class="btn btn-white me-5px btnNext">Next</a>
             </div>
     </div>

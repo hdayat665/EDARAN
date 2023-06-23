@@ -69,6 +69,7 @@
                                                         <option value="{{ $company->id }}" <?php echo $employment->company == $company->id ? 'selected="selected"' : ''; ?>
                                                             label="{{ $company->companyName }}">{{ $company->companyName }}</option>
                                                     @endforeach
+
                                                 </select>
                                                 <input type="hidden" name="id" value="{{ $employment->id }}">
                                             </div>

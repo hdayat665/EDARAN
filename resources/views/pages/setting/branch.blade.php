@@ -92,7 +92,7 @@
 
     <!-- END row -->
     <!-- BEGIN row -->
-    <div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="addModal"  aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -159,24 +159,34 @@
                         <div class="row mb-2">
                             <div class="col-sm-4">
                                 <label class="form-label">Country*</label>
-                                <select class="form-select" name="country" id="country" style="text-transform: uppercase;">
-                                    <option type="text" value="MALAYSIA" label="MALAYSIA" selected="selected">MALAYSIA</option>
+
+                                <?php /*$countries = getCountryBranch() */ ?>
 
 
-                                    {{-- <?php $countries = getCountryBranch()?>
 
-                                    @foreach ($countries as $country)
-                                        <option value="{{ $country->countryID }}"
-                                            label="{{ $country->CountryName }}">{{ $country->CountryName }}</option>
-                                    @endforeach --}}
+                                    <select class="form-select" name="country" id="country" style="text-transform: uppercase;">
 
+                                        <option type="text" value="MALAYSIA" label="MALAYSIA" selected="selected">MALAYSIA</option>
+
+                                        <?php $countries = getCountries()?>
+
+
+
+                                        {{-- <option value="" label="PLEASE CHOOSE"></option>
+                                        @if ($countries)
+                                            @foreach ($countries as $country => $status)
+                                                <option value="{{$country}}" <?php echo ($country == 'MY') ? 'selected' : ''; ?>>{{$status}}</option>
+                                            @endforeach
+                                        @endif --}}
+                                    </select>
 
                                 </select>
                             </div>
                             <div class="col-sm-4">
                                 <label class="form-label">State*</label>
                                 <select class="form-select" name="state" id="state" style="text-transform: uppercase;">
-                                    <option type="text" value="" selected="selected">PLEASE CHOOSE</option>
+
+                                    <option value="">PLEASE CHOOSE</option>
 
                                     <?php $states = getStateBranch()?>
 
@@ -184,6 +194,8 @@
                                         <option value="{{ $state->stateName }}"
                                             label="{{ $state->stateName }}">{{ $state->stateName }}</option>
                                     @endforeach
+
+
 
                                 </select>
 
@@ -279,17 +291,18 @@
                             <div class="col-sm-4">
                                 <label class="form-label">Country*</label>
                                 <select class="form-select" name="country" id="countryE" style="text-transform: uppercase;">
-                                    <option type="text"value="" label="malaysia" selected="selected">Please Choose</option>
+                                    <option value="" label="malaysia" >Please Choose</option>
                                 </select>
                             </div>
                             <div class="col-sm-4">
                                 <label class="form-label">State*</label>
                                 <select class="form-select" name="state" id="stateE" style="text-transform: uppercase;">
-                                    <option  label="" selected="selected">Please Choose</option>
+                                    <option value="">Please Choose</option>
+
                                 <?php $states = getStateBranch()?>
 
                                 @foreach ($states as $state)
-                                <option value="{{ $state->stateName }}"
+                                <option value="{{ $state->stateName }}" <?php echo $state->stateName == $company->id ? 'selected="selected"' : ''; ?>
                                     label="{{ $state->stateName }}">{{ $state->stateName }}</option>
                                  @endforeach
 

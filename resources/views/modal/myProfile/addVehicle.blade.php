@@ -26,7 +26,7 @@
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                 {{-- <button type="button" class="btn btn-primary" id="saveVehicle">Save</button> --}}
                 <button href="javascript:;" id="saveVehicle" class="btn btn-primary">Save</button>
-                
+
             </form>
             </div>
         </div>

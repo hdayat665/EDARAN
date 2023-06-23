@@ -66,11 +66,7 @@ $(document).on("change", "#companyForEmployment", function () {
             const branch = dataBranch[i];
             var opt = document.createElement("option");
             document.getElementById("branchShow").innerHTML +=
-                '<option value="' +
-                branch["id"] +
-                '">' +
-                branch["branchName"] +
-                "</option>";
+                '<option value="' + branch["id"] + '">' + branch["branchName"] + "</option>";
         }
     });
 });

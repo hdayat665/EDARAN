@@ -68,9 +68,9 @@
                     @endif
                 </tbody>
             </table>
-        @include('pages.HRIS.employee.terminateEmployee')    
+        @include('pages.HRIS.employee.terminateEmployee')
         </div>
-        
+
     </div>
 @endsection
 

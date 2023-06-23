@@ -1,50 +1,47 @@
 <?php
 
-use App\Models\ActivityLogs;
-use App\Models\ApprovelRoleGeneral;
+use App\Models\Role;
+use App\Models\Unit;
+use App\Models\State;
+use App\Models\Users;
 use App\Models\Branch;
-use App\Models\ClaimCategory;
-use App\Models\ClaimCategoryContent;
-use App\Models\ClaimDateSetting;
-use App\Models\AppealMtc;
-use App\Models\ApprovalConfig;
 use App\Models\CashAdvanceDetail;
 use App\Models\Company;
-use App\Models\Customer;
-use App\Models\Department;
-use App\Models\Designation;
-use App\Models\DomainList;
-use App\Models\Employee;
-use App\Models\EmploymentType;
-use App\Models\GeneralClaim;
-use App\Models\GeneralClaimDetail;
-use App\Models\JobGrade;
-use App\Models\Project;
-use App\Models\ProjectLocation;
-use App\Models\ProjectMember;
-use App\Models\Role;
-use App\Models\TimesheetEvent;
-use App\Models\TypeOfLogs;
-use App\Models\Unit;
-use App\Models\UserProfile;
-use App\Models\Users;
-use App\Models\UserRole;
-use App\Models\TransportMillage;
-use App\Models\EclaimGeneral;
-use App\Models\PermissionRole;
-use App\Models\EntitleSubsBenefit;
-use App\Models\Notification;
 use App\Models\Country;
-use App\Models\State;
+use App\Models\Project;
+use App\Models\Customer;
+use App\Models\Employee;
+use App\Models\JobGrade;
+use App\Models\Location;
+use App\Models\UserRole;
+use App\Models\AppealMtc;
+use App\Models\Department;
+use App\Models\DomainList;
+use App\Models\TypeOfLogs;
+use App\Models\Designation;
+use App\Models\UserProfile;
+use App\Models\ActivityLogs;
+use App\Models\GeneralClaim;
+use App\Models\Notification;
+use App\Models\ClaimCategory;
+use App\Models\EclaimGeneral;
+use App\Models\ProjectMember;
+use App\Models\ApprovalConfig;
+use App\Models\EmploymentType;
+use App\Models\PermissionRole;
+use App\Models\TimesheetEvent;
+use App\Models\ProjectLocation;
+use App\Models\ClaimDateSetting;
+use App\Models\TransportMillage;
+use App\Models\EntitleSubsBenefit;
 use App\Notifications\GeneralNotification;
 use App\Service\ClaimApprovalService;
-use App\Service\MyleaveService;
-use App\Service\MyTimeSheetService;
-use App\Service\ProjectService;
 use Illuminate\Support\Facades\Auth;
+use App\Models\GeneralClaimDetail;
 use Illuminate\Support\Facades\DB;
+use App\Models\ApprovelRoleGeneral;
+use App\Models\ClaimCategoryContent;
 use Illuminate\Support\Facades\Storage;
-
 if (!function_exists('pr')) {
     function pr($data)
     {
@@ -678,6 +675,7 @@ if (!function_exists('getStateName')) {
         return '';
     }
 }
+
 
 if (!function_exists('getStates')) {
     function getStates()
@@ -1332,6 +1330,7 @@ if (!function_exists('getEmployeeactive')) {
         if (!$data) {
             $data = [];
         }
+
 
         return $data;
     }
@@ -2453,7 +2452,7 @@ if (!function_exists('getFinanceChecker')) {
     function getFinanceChecker()
     {
 
-        // find checker 
+        // find checker
         $domainList = DomainList::where([['tenant_id', Auth::user()->tenant_id], ['category_role', 'finance']])->orderBy('created_at', 'DESC')->first();
         $userId = Auth::user()->id;
 
@@ -2476,7 +2475,7 @@ if (!function_exists('getFinanceChecker')) {
 if (!function_exists('getAdminChecker')) {
     function getAdminChecker()
     {
-        // find checker 
+        // find checker
         $domainList = DomainList::where([['tenant_id', Auth::user()->tenant_id], ['category_role', 'admin']])->orderBy('created_at', 'DESC')->first();
         $userId = Auth::user()->id;
 
@@ -2905,6 +2904,7 @@ if (!function_exists('getApprovalConfig')) {
     }
 }
 
+
 if (!function_exists('getEmplomentByUserId')) {
     function getEmplomentByUserId()
     {
@@ -2917,75 +2917,75 @@ if (!function_exists('getEmplomentByUserId')) {
     }
 }
 
-if (!function_exists('getTimesheetDataToApprove')) {
-    function getTimesheetDataToApprove()
-    {
-        $ss = new MyTimeSheetService;
+// if (!function_exists('getTimesheetDataToApprove')) {
+//     function getTimesheetDataToApprove()
+//     {
+//         $ss = new MyTimeSheetService;
 
-        $data = $ss->timesheetApprovalView();
+//         $data = $ss->timesheetApprovalView();
 
-        if (!$data) {
-            $data = [];
-        }
+//         if (!$data) {
+//             $data = [];
+//         }
 
-        return $data;
-    }
-}
+//         return $data;
+//     }
+// }
 
-if (!function_exists('getTimesheetAppealData')) {
-    function getTimesheetAppealData()
-    {
-        $ss = new MyTimeSheetService;
+// if (!function_exists('getTimesheetAppealData')) {
+//     function getTimesheetAppealData()
+//     {
+//         $ss = new MyTimeSheetService;
 
-        $data = $ss->timesheetApprovalappealView();
+//         $data = $ss->timesheetApprovalappealView();
 
-        if (!$data) {
-            $data = [];
-        }
+//         if (!$data) {
+//             $data = [];
+//         }
 
-        return $data;
-    }
-}
+//         return $data;
+//     }
+// }
 
-if (!function_exists('getEleaveData')) {
-    function getEleaveData($role = '')
-    {
-        $ss = new MyleaveService;
+// if (!function_exists('getEleaveData')) {
+//     function getEleaveData($role = '')
+//     {
+//         $ss = new MyleaveService;
 
-        if ($role == 'recommender') {
-            $data = $ss->leaveApprview();
-        } else {
-            $data = $ss->leaveApprhodView();
-        }
-
-
-        if (!$data) {
-            $data = [];
-        }
-
-        return $data;
-    }
-}
-
-if (!function_exists('getProjectApproverData')) {
-    function getProjectApproverData()
-    {
-        $ss = new ProjectService;
-
-        $data = $ss->projectApprovalData();
-        // if ($role == 'recommender') {
-        // } else {
-        //     $data = $ss->leaveApprhodView();
-        // }
+//         if ($role == 'recommender') {
+//             $data = $ss->leaveApprview();
+//         } else {
+//             $data = $ss->leaveApprhodView();
+//         }
 
 
-        if (!$data) {
-            $data = [];
-        }
+//         if (!$data) {
+//             $data = [];
+//         }
 
-        return $data;
-    }
-}
+//         return $data;
+//     }
+// }
+
+// if (!function_exists('getProjectApproverData')) {
+//     function getProjectApproverData()
+//     {
+//         $ss = new ProjectService;
+
+//         $data = $ss->projectApprovalData();
+//         // if ($role == 'recommender') {
+//         // } else {
+//         //     $data = $ss->leaveApprhodView();
+//         // }
+
+
+//         if (!$data) {
+//             $data = [];
+//         }
+
+//         return $data;
+//     }
+// }
 
 if (!function_exists('getCaClaimData')) {
     function getCaClaimData($role = '')
