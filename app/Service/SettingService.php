@@ -1652,9 +1652,9 @@ public function updateTypeOfLogs($r, $id)
         return $data;
     }
 
-    public function locationByStateID($id = '')
+    public function branchByCountry($id = '')
     {
-        $data = Location::where([['tenant_id', Auth::user()->tenant_id], ['StateID', $id]])->get();
+        $data = Branch::where([['tenant_id', Auth::user()->tenant_id], ['country', $id]])->get();
         return $data;
     }
 
