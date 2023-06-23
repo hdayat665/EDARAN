@@ -234,28 +234,46 @@ if ($existingLogs->isNotEmpty()) {
         }
 
         $existingLogs = TimesheetLog::where('user_id', $user->id)
-    ->where('date', $input['date'])
-    ->where(function ($query) use ($startTime, $endTime, $id) {
-        $query->where(function ($query) use ($startTime, $endTime) {
-            $query->whereRaw("STR_TO_DATE(start_time, '%H:%i') <= ? AND STR_TO_DATE(end_time, '%H:%i') > ?", [$endTime, $startTime]);
-        })->orWhere(function ($query) use ($startTime, $endTime) {
-            $query->whereRaw("STR_TO_DATE(start_time, '%H:%i') >= ? AND STR_TO_DATE(start_time, '%H:%i') < ?", [$startTime, $endTime]);
-        })->orWhere(function ($query) use ($startTime, $endTime) {
-            $query->whereRaw("STR_TO_DATE(end_time, '%H:%i') > ? AND STR_TO_DATE(end_time, '%H:%i') <= ?", [$startTime, $endTime]);
-        });
-    })
-    ->where('id', '<>', $id)
-    ->get();
+        ->where('date', $input['date'])
+        ->where(function ($query) use ($startTime, $endTime, $id) {
+            $query->where(function ($query) use ($startTime, $endTime) {
+                $query->whereRaw("STR_TO_DATE(start_time, '%H:%i') <= ? AND STR_TO_DATE(end_time, '%H:%i') > ?", [$endTime, $startTime]);
+            })->orWhere(function ($query) use ($startTime, $endTime) {
+                $query->whereRaw("STR_TO_DATE(start_time, '%H:%i') >= ? AND STR_TO_DATE(start_time, '%H:%i') < ?", [$startTime, $endTime]);
+            })->orWhere(function ($query) use ($startTime, $endTime) {
+                $query->whereRaw("STR_TO_DATE(end_time, '%H:%i') > ? AND STR_TO_DATE(end_time, '%H:%i') <= ?", [$startTime, $endTime]);
+            });
+        })
+        ->where(function ($query) use ($id, $input) {
+            // Exclude the current log being updated if start_time or end_time changes
+            if ($input['start_time'] !== $input['end_time']) {
+                $query->where('id', '<>', $id);
+            }
+        })
+        ->get();
+    
+    if ($existingLogs->isNotEmpty()) {
+        $updatedStartTime = strtotime($input['start_time']);
+        $updatedEndTime = strtotime($input['end_time']);
+    
+        foreach ($existingLogs as $log) {
+            $existingStartTime = strtotime($log->start_time);
+            $existingEndTime = strtotime($log->end_time);
+    
+            // Check if the updated start_time and end_time overlap with any existing logs
+            if (($updatedStartTime >= $existingStartTime && $updatedStartTime < $existingEndTime) ||
+                ($updatedEndTime > $existingStartTime && $updatedEndTime <= $existingEndTime)) {
+                $data['status'] = config('app.response.error.status');
+                $data['type'] = config('app.response.error.type');
+                $data['title'] = config('app.response.error.title');
+                $data['msg'] = 'Unable to update log due to overlapped time';
+                return $data;
+            }
+        }
+    }
+    
+    
 
-
-
-if ($existingLogs->isNotEmpty()) {
-    $data['status'] = config('app.response.error.status');
-    $data['type'] = config('app.response.error.type');
-    $data['title'] = config('app.response.error.title');
-    $data['msg'] = 'Unable to update log due to overlapped time';
-    return $data;
-}
 
 
         TimesheetLog::where('id', $id)->update($input);
@@ -289,13 +307,25 @@ if ($existingLogs->isNotEmpty()) {
         return $data;
     }
 
-    public function getLogsById($id)
-    {
-        $data = TimesheetLog::find($id);
+    // public function getLogsById($id)
+    // {
+    //     $data = TimesheetLog::find($id);
 
-        return
-         $data;
-    }
+    //     return
+    //      $data;
+    // }
+
+    public function getLogsById($id)
+{
+    $logs = TimesheetLog::find($id);
+    
+    $logs = $logs->leftJoin('project_location as b', 'timesheet_log.project_location', '=', 'b.id')
+    ->select('timesheet_log.*','b.location_name')
+    ->find($id);
+    // dd($logs);
+    return $logs;
+}
+
 
     public function employeeNamebyId($userId)
     {
