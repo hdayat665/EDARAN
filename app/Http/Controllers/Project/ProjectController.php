@@ -264,6 +264,11 @@ class ProjectController extends Controller
         $ps = new ProjectService;
 
         $data = $ps->projectAssignView($id);
+        $projectService = new ProjectService;
+        $project = $projectService->getProjectById($data['projectMember']->project_id);
+    
+        // Pass the project data to the $data array
+        $data['project'] = $project;
         // pr($data);
         return view('pages.project.viewAssignLocation', $data);
     }

@@ -12,7 +12,11 @@ $(document).ready(function() {
             { extend: 'pdf', className: 'btn-sm' },
             { extend: 'print', className: 'btn-sm' }
         ],
-       
+        initComplete: function (settings, json) {
+            $("#summarytable").wrap(
+                "<div style='overflow:auto; width:100%;position:relative;'></div>"
+            );
+        },
     });
     
     $('#projecttable').DataTable({
@@ -27,7 +31,11 @@ $(document).ready(function() {
             { extend: 'pdf', className: 'btn-sm' },
             { extend: 'print', className: 'btn-sm' }
         ],
-        
+        initComplete: function (settings, json) {
+            $("#projecttable").wrap(
+                "<div style='overflow:auto; width:100%;position:relative;'></div>"
+            );
+        },
     });
     
  $('#departmenttable').DataTable({
@@ -42,7 +50,11 @@ $(document).ready(function() {
         { extend: 'pdf', className: 'btn-sm' },
         { extend: 'print', className: 'btn-sm' }
     ],
-    
+    initComplete: function (settings, json) {
+        $("#departmenttable").wrap(
+            "<div style='overflow:auto; width:100%;position:relative;'></div>"
+        );
+    },
 });
 
     
@@ -60,6 +72,11 @@ $('#tablereportemployee').DataTable({
         { extend: 'pdf', className: 'btn-sm' },
         { extend: 'print', className: 'btn-sm' }
     ],
+    initComplete: function (settings, json) {
+        $("#tablereportemployee").wrap(
+            "<div style='overflow:auto; width:100%;position:relative;'></div>"
+        );
+    },
 });
 
 
@@ -77,6 +94,11 @@ $('#tablebydepartment').DataTable({
         { extend: 'pdf', className: 'btn-sm' },
         { extend: 'print', className: 'btn-sm' }
     ],
+    initComplete: function (settings, json) {
+        $("#tablebydepartment").wrap(
+            "<div style='overflow:auto; width:100%;position:relative;'></div>"
+        );
+    },
 });
 
 $('#projectid').picker({ search: true });

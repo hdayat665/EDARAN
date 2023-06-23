@@ -349,6 +349,7 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('/unitByDepartmentId/{departmentId}', 'unitByDepartmentId');
             Route::get('/branchByUnitId/{companyId}', 'branchByUnitId');
             Route::get('/getActivityNamesById/{id}', 'getActivityNamesById');
+            Route::get('/locationByStateID/{id}', 'locationByStateID');
 
             // eclaim
             Route::get('/setting/eclaimGeneralView', 'eclaimGeneralView');

@@ -3,6 +3,11 @@ $(document).ready(function () {
         responsive: true,
         bLengthChange: true,
         bFilter: true,
+        initComplete: function (settings, json) {
+            $("#timesheetapproval").wrap(
+                "<div style='overflow:auto; width:100%;position:relative;'></div>"
+            );
+        },
     });
 
     $(document).on("click", "#cancelTimesheet", function () {
