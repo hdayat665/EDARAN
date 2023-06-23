@@ -57,7 +57,7 @@
                 <div class="mb-40px pb-40px text-dark">
                     Not a member yet?
                     <br>
-                    <a href="/selectPackage" class="text-primary">New Domain</a> |
+                    {{-- <a href="/selectPackage" class="text-primary">New Domain</a> | --}}
                     <a href="register_v3.html" data-bs-toggle="modal" data-bs-target="#exampleModal2" class="text-primary"> Email Activation</a> |
                     <a href="register_v3.html" data-bs-toggle="modal" data-bs-target="#exampleModal1" class="text-primary"> Forgot Password</a>
                 </div>
