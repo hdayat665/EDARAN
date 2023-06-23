@@ -39,7 +39,7 @@
                             <td>
                                 <a href="#" data-bs-toggle="dropdown" class="btn btn-primary btn-sm dropdown-toggle"></i> Actions <i class="fa fa-caret-down"></i></a>
                                 <div class="dropdown-menu">
-                                <a href="javascript:;" id="travelBtn" data-id="" class="dropdown-item"> Update</a>
+                                <a href="javascript:;" id="travelBtn" data-date="{{ $travel->travel_date }}" data-id="{{ $travel->general_id }}" class="dropdown-item"> Update</a>
                             </td>
                             <td>{{ $travel->travel_date ?? '' }}</td>
                             <td>{{ $travel->total_km ?? '0' }} KM</td>
@@ -63,7 +63,9 @@
                             <label class="form-label">Travelling</label>
                         </div>
                         <div class="col-md-6">
-                            <input type="text" class="form-control" readonly value='{{ $summaryTravelling[0]->total_km ?? 0 }} KM'>
+                            <input type="hidden" class="form-control" id="totalCar" readonly value='{{ $ansCar ?? 0 }} '>
+                            <input type="hidden" class="form-control" id="totalMotor" readonly value='{{ $ansMotor?? 0 }} '>
+                            <input type="text" class="form-control" readonly value='{{ number_format($summaryTravelling[0]->total_km ?? 0, 2) }} KM'>
                         </div>
                     </div>
                     <div class="row p-2">
@@ -71,7 +73,7 @@
                             
                         </div>
                         <div class="col-md-6">
-                            <input type="text" class="form-control" readonly value='RM {{ $summaryTravelling[0]->total_millage ?? 0 }}'>
+                            <input type="text" class="form-control" id="TotalMileageCarMotor" readonly value=''>
                         </div>
                     </div>
                 </div>
@@ -177,7 +179,7 @@
                             <td>
                                 <a href="#" data-bs-toggle="dropdown" class="btn btn-primary btn-sm dropdown-toggle"></i> Actions <i class="fa fa-caret-down"></i></a>
                                 <div class="dropdown-menu">
-                                <a href="javascript:;" id="subsBtn" data-id="" class="dropdown-item"> Update</a>
+                                <a href="javascript:;" id="subsBtn" data-id="{{ $subs->id }}" class="dropdown-item"> Update</a>
                                 <div class="dropdown-divider"></div>
                                 <a data-bs-toggle="modal" id="deleteButtonTravel" data-id="{{ $subs->id }}" class="dropdown-item">Delete</a>
                             </td>
@@ -261,7 +263,7 @@
                             <td>
                                 <a href="#" data-bs-toggle="dropdown" class="btn btn-primary btn-sm dropdown-toggle"></i> Actions <i class="fa fa-caret-down"></i></a>
                                 <div class="dropdown-menu">
-                                <a href="javascript:;" id="ads" data-id="" class="dropdown-item"> Edit</a>
+                                <a href="javascript:;" id="othersBtn" data-id="{{ $personal->id }}" class="dropdown-item"> Edit</a>
                                 <div class="dropdown-divider"></div>
                                 <a id="deleteButtonPersonal" data-id="{{ $personal->id }}" class="dropdown-item"> Delete</a>
                             </td>

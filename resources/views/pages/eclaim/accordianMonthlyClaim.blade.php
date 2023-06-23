@@ -310,7 +310,7 @@
                                         <label class="form-label">Total Distance</label>
                                     </div>
                                     <div class="col-md-3">
-                                        <input id="result" type="text" class="form-control" name="total_km">
+                                        <input id="result" type="text" class="form-control" readonly name="total_km">
                                     </div>
                                     <div class="col-md-2">
                                         <input type="button" id="calculateButton" class="btn btn-primary" value="Calculate">
@@ -320,16 +320,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-6">
-                                <div class="row p-0">
-                                    <div class="col-md-3">
-                                        <label class="form-label">Mileage (RM)</label>
-                                    </div>
-                                    <div class="col-md-9">
-                                        <input type="text" class="form-control" readonly id="millage" name="millage">
-                                    </div>
-                                </div>
-                            </div>
+                            
                         </div>
                         <div class="row p-2">
                             <div class="col-md-6">
@@ -703,7 +694,7 @@
                                                         <label class="form-label">Hotel</label>
                                                     </div>
                                                     <div class="col-md-2">
-                                                        <input  type="text" readonly class="form-control" id="hotelcv">
+                                                        <input  type="text" readonly name="hotel_value"class="form-control" id="hotelcv">
                                                     </div>
                                                     <div class="col-md-2" style="display: none">
                                                         <input  type="text" class="form-control"  id="hotelcv1" value="0">
@@ -1044,7 +1035,9 @@
             } else {
                 var distance = response.rows[0].elements[0].distance.value;
                 var distanceInKm = distance / 1000;
-                document.getElementById('result').value = Math.ceil(distanceInKm);
+                var distanceFormatted = distanceInKm.toFixed(2);
+                document.getElementById('result').value = distanceFormatted;
+
 
                 
             }
