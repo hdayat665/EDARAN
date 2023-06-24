@@ -1,21 +1,32 @@
 $(document).ready(function () {
+    $("#country").select2({
+        placeholder: "PLEASE CHOOSE",
+        dropdownParent: "#addModal"});
+    $("#state").select2({
+        placeholder: "PLEASE CHOOSE",
+        dropdownParent: "#addModal"});
+    $("#postcode").select2({
+        placeholder: "PLEASE CHOOSE",
+        dropdownParent: "#addModal"});
 
 
-    $("#country").select2({placeholder: "PLEASE CHOOSE",
-                        dropdownParent: "#addModal"});
-    $("#state").select2({placeholder: "PLEASE CHOOSE",
-                        dropdownParent: "#addModal"
-                            });
-    $("#postcode").select2({placeholder: "PLEASE CHOOSE",
-                        dropdownParent: "#addModal"});
+
+    // $("#countryE").select2({
+    //     placeholder: "PLEASE CHOOSE",
+    //     dropdownParent: "#editModal"});
+    // $('#countryE').find(':selected');
 
 
-    $("#countryE").select2({placeholder: "PLEASE CHOOSE",
-                            dropdownParent: "#editModal"});
-    $("#stateE").select2({placeholder: "PLEASE CHOOSE",
-                            dropdownParent: "#editModal"});
-    $("#postcodeE").select2({placeholder: "PLEASE CHOOSE",
-                            dropdownParent: "#editModal"});
+    // $("#stateE").select2({
+    //     placeholder: "PLEASE CHOOSE",
+    //     dropdownParent: "#editModal"});
+
+    //     $('#stateE').select2('data');
+
+    // $("#postcodeE").select2({
+    //     placeholder: "PLEASE CHOOSE",
+    //     dropdownParent: "#editModal"})
+    //     .find(':selected');
 
     $("#address,#address2,#postcode,#city,#state,#country").focus(function () {
         getLatLng();
@@ -58,6 +69,7 @@ $(document).ready(function () {
         vehicleData.then(function (data) {
             console.log(data);
 
+
             $("#companyIdE").val(data.companyId);
             $("#branchNameE").val(data.branchName);
             $("#branchCodeE").val(data.branchCode);
@@ -68,7 +80,7 @@ $(document).ready(function () {
             $("#address2E").val(data.address2);
             $("#cityE").val(data.city);
             $("#stateE").val(data.state);
-            $("#countryE").prop("selectedIndex", data.branchType);
+            $("#countryE").val(data.country);
             //$('#countryE').val(data.country);
             $("#idB").val(data.id);
         });
@@ -139,7 +151,6 @@ $(document).ready(function () {
             " " +
             city +
             ", " +
-            state;
             state +
             ", " +
             country;
@@ -164,7 +175,6 @@ $(document).ready(function () {
             }
         });
     }
-
 
 
     $("#saveButton").click(function (e) {
@@ -287,6 +297,7 @@ $(document).ready(function () {
         });
     });
 
+    console.log($('#editForm').val())
 });
 
 
@@ -301,46 +312,43 @@ $(document).ready(function () {
 
 
 
-$(document).on("change", "#country", function () {
+// $(document).on("change", "#state", function () {
+//     state = $(this).val();
+//     $("#postcode")
+//         .find("option")
+//         .remove()
+//         .end()
+//         .append(
+//             '<option label="PLEASE CHOOSE" value="" selected="selected"> </option>'
+//         )
+//         .val("");
 
-    country = $(this).val();
-
-    const inputs = ["#state"];
-
-    $("#state")
-        .find("option")
-        .remove()
-        .end()
-        .append(
-            '<option label="PLEASE CHOOSE" value="" selected="selected"> </option>'
-        )
-        .val("");
-
-    console.log(country)
-    function branchByCountry(country) {
-        return $.ajax({
-            url: "/branchByCountry/" + country,
-        });
-    }
+    // console.log(state)
+    // function locationByStateID(state) {
+    //     return $.ajax({
+    //         type: 'GET',
+    //         url: "/locationByStateID/" + state,
+    //     });
+    // }
 
 
 
 
-    var branch = branchByCountry(country);
+//     var branch = locationByStateID(state);
 
 
 
 
-    branch.then(function (dataBranch) {
-        for (let i = 0; i < dataBranch.length; i++) {
-            const branch = dataBranch[i];
-            var opt = document.createElement("option");
-            document.getElementById("country").innerHTML +=
-                '<option value="' +
-                branch["id"] +
-                '">' +
-                branch["country"] +
-                "</option>";
-        }
-    });
-});
+//     branch.then(function (dataBranch) {
+//         for (let i = 0; i < dataBranch.length; i++) {
+//             const branch = dataBranch[i];
+//             var opt = document.createElement("option");
+//             document.getElementById("postcode").innerHTML +=
+//                 '<option value="' +
+//                 branch["id"] +
+//                 '">' +
+//                 branch["postcode"] +
+//                 "</option>";
+//         }
+//     });
+// });

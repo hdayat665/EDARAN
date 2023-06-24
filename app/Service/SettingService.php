@@ -566,7 +566,7 @@ class SettingService
 
         $checkData = Location::where([['postcode', $input['postcode']], ['tenant_id', Auth::user()->tenant_id]])->first();
         if ($checkData) {
-            $data['msg'] = 'District name already exists.';
+            $data['msg'] = 'Postcode name already exists.';
             $data['status'] = config('app.response.error.status');
             $data['type'] = config('app.response.error.type');
             $data['title'] = config('app.response.error.title');
