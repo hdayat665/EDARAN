@@ -160,15 +160,15 @@
                             <div class="col-sm-4">
                                 <label class="form-label">Country*</label>
                                 <select class="form-select" name="country" id="country" style="text-transform: uppercase;">
-                                    <option type="text" value="MALAYSIA" label="MALAYSIA" selected="selected">MALAYSIA</option>
+                                    <option type="text" value="MY" label="MALAYSIA" selected="selected">MALAYSIA</option>
 
 
-                                    {{-- <?php $countries = getCountryBranch()?>
+                                    <?php $countries = getCountryBranch()?>
 
                                     @foreach ($countries as $country)
                                         <option value="{{ $country->countryID }}"
                                             label="{{ $country->CountryName }}">{{ $country->CountryName }}</option>
-                                    @endforeach --}}
+                                    @endforeach
 
 
                                 </select>
@@ -279,7 +279,13 @@
                             <div class="col-sm-4">
                                 <label class="form-label">Country*</label>
                                 <select class="form-select" name="country" id="countryE" style="text-transform: uppercase;">
-                                    <option type="text"value="" label="malaysia" selected="selected">Please Choose</option>
+                                    <option >PLEASE CHOOSE</option>
+                                    <?php $countries = getCountryBranch()?>
+
+                                    @foreach ($countries as $country)
+                                        <option value="{{ $country->countryID }}"
+                                            label="{{ $country->CountryName }}">{{ $country->CountryName }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                             <div class="col-sm-4">

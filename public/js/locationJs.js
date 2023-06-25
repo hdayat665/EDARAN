@@ -88,14 +88,14 @@ $(document).ready(function () {
         $("#addFormState").validate({
             // Specify validation rules
             rules: {
-                addCountry1: "required",
-                addState1: "required",
-                addStateCode1: "required",
+                countryID: "required",
+                stateName: "required",
+                stateCode: "required",
             },
             messages: {
-                addCountry1: "Please Insert Country Name ",
-                addState1: "Please Insert State Name",
-                addStateCode1: "Please Insert State Code",
+                countryID: "Please Insert Country Name ",
+                stateName: "Please Insert State Name",
+                stateCode: "Please Insert State Code",
             },
             submitHandler: function (form) {
                 requirejs(["sweetAlert2"], function (swal) {

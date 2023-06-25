@@ -50,8 +50,7 @@ $(document).ready(function () {
             $("#address2E").val(data.address2);
             $("#cityE").val(data.city);
             $("#stateE").val(data.state);
-            $("#countryE").prop("selectedIndex", data.branchType);
-            //$('#countryE').val(data.country);
+            $("#countryE").val(data.country);
             $("#idB").val(data.id);
         });
         $("#editModal").modal("show");
@@ -138,10 +137,10 @@ $(document).ready(function () {
                 $("#longitude").val(longitude);
                 $("#fulladdress").val(address);
             } else {
-                alert(
-                    "Geocode was not successful for the following reason: " +
-                        json.status
-                );
+                // alert(
+                //     "Geocode was not successful for the following reason: " +
+                //         json.status
+                // );
             }
         });
     }
@@ -157,7 +156,6 @@ $(document).ready(function () {
                 address: "required",
                 postcode: "required",
                 city: "required",
-                district: "required",
                 state: "required",
             },
             messages: {
@@ -166,9 +164,8 @@ $(document).ready(function () {
                 branchType: "Please Choose Branch Type",
                 unitId: "Please Choose Unit Name",
                 address: "Please Insert Address 1",
-                postcode: "Please Insert Postcode",
+                postcode: "Please Choose Postcode",
                 city: "Please Insert City",
-                district: "Please Choose District",
                 state: "Please Choose State",
             },
             submitHandler: function (form) {
@@ -283,16 +280,16 @@ $(document).ready(function () {
 
 
 
-$(document).on("change", "#state", function () {
-    state = $(this).val();
-    $("#postcode")
-        .find("option")
-        .remove()
-        .end()
-        .append(
-            '<option label="PLEASE CHOOSE" value="" selected="selected"> </option>'
-        )
-        .val("");
+// $(document).on("change", "#state", function () {
+//     state = $(this).val();
+//     $("#postcode")
+//         .find("option")
+//         .remove()
+//         .end()
+//         .append(
+//             '<option label="PLEASE CHOOSE" value="" selected="selected"> </option>'
+//         )
+//         .val("");
 
     // console.log(state)
     // function locationByStateID(state) {
@@ -305,21 +302,21 @@ $(document).on("change", "#state", function () {
 
 
 
-    var branch = locationByStateID(state);
+//     var branch = locationByStateID(state);
 
 
 
 
-    branch.then(function (dataBranch) {
-        for (let i = 0; i < dataBranch.length; i++) {
-            const branch = dataBranch[i];
-            var opt = document.createElement("option");
-            document.getElementById("postcode").innerHTML +=
-                '<option value="' +
-                branch["id"] +
-                '">' +
-                branch["postcode"] +
-                "</option>";
-        }
-    });
-});
+//     branch.then(function (dataBranch) {
+//         for (let i = 0; i < dataBranch.length; i++) {
+//             const branch = dataBranch[i];
+//             var opt = document.createElement("option");
+//             document.getElementById("postcode").innerHTML +=
+//                 '<option value="' +
+//                 branch["id"] +
+//                 '">' +
+//                 branch["postcode"] +
+//                 "</option>";
+//         }
+//     });
+// });
