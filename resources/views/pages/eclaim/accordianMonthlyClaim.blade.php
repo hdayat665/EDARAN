@@ -358,7 +358,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row p-2">
+                        <!-- <div class="row p-2">
                             <div class="col-md-6">
                                 <div class="row p-0">
                                     <div class="col-md-3">
@@ -369,7 +369,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                         <div class="row p-2" style="display: none">
                             <div class="col-md-4">
                                 <label class="form-label">Distance</label>
@@ -448,10 +448,10 @@
                         </div>
                         <div class="row p-2">
                             <div class="col-md-4">
-                                <label class="form-label">Supporting Document</label>
+                                <!-- <label class="form-label">Supporting Document</label> -->
                             </div>
                             <div class="col-md-6">
-                                <input type="file" class="form-control-file" name="file_upload[]" id="supportdocument" multiple>
+                                <!-- <input type="file" class="form-control-file" name="file_upload[]" id="supportdocument" multiple> -->
                                 <input type="hidden" name="general_id" value="{{ Request::segment(4) }}">
                                 <input type="hidden" value="{{ isset($month_id) ? monthMTC($month_id) : $month }}" name="month" id="monthInputSub">                                
                             </div>
@@ -773,137 +773,6 @@
                                         </div>
                                     </div>
                                 </div>
-                            <!-- <div class="row p-2">
-                                <div class="col-md-4">
-                                    <label class="form-label">Subsistence
-                                        Allowance:</label>
-                                </div>
-                                <div class="col-md-2">
-                                    <label class="form-label">Breakfast</label>
-                                </div>
-                                <div class="col-md-2">
-                                    <input  type="text" class="form-control" readonly value="{{ $food[0]['breakfast'] }}" id="BF">
-                                </div>
-                                <div class="col-md-2">
-                                    <label class="form-label">X day</label>
-                                </div>
-                                <div class="col-md-2"> 
-                                    <input type="text" class="form-control" name="breakfast" value="0" id="DBF">
-                                </div>
-                            </div>
-                            <div class="row p-2">
-                                <div class="col-md-4"> </div>
-                                <div class="col-md-2">
-                                    <label class="form-label">Lunch</label>
-                                </div>
-                                <div class="col-md-2">
-                                    <input  type="text" class="form-control" readonly value="{{ $food[0]['lunch'] }}" id="LH">
-                                </div>
-                                <div class="col-md-2">
-                                    <label class="form-label">X day</label>
-                                </div>
-                                <div class="col-md-2">
-                                    <input type="text" name="lunch" class="form-control" value="0" id="DLH">
-                                </div>
-                            </div>
-                            <div class="row p-2">
-                                <div class="col-md-4">
-                                </div>
-                                <div class="col-md-2">
-                                    <label class="form-label">Dinner</label>
-                                </div>
-                                <div class="col-md-2">
-                                    <input  type="text" class="form-control" readonly value="{{ $food[0]['dinner'] }}" id="DN">
-                                </div>
-                                <div class="col-md-2">
-                                    <label class="form-label">X day</label>
-                                </div>
-                                <div class="col-md-2">
-                                    <input type="text" name="dinner" class="form-control" value="0" id="DDN">
-                                </div>
-                            </div>
-                            <div class="row p-2">
-                                <div class="col-md-4">
-                                </div>
-                                <div class="col-md-2"> </div>
-                                <div class="col-md-2"> </div>
-                                <div class="col-md-2">
-                                    (A) Total Subsistence
-                                </div>
-                                <div class="col-md-2">
-                                    <input readonly type="text" name="total_subs" class="form-control" value="0" id="TS">
-                                </div>
-                            </div> -->
-                            <!-- <div class="row p-2">
-                                <div class="col-md-4">
-                                    <label class="form-label">Accommodation:</label>
-                                </div>
-                                <div class="col-md-2" id="hotelc">
-                                    <input class="form-check-input" type="checkbox" value="{{ $food[0]['local_hotel_value'] }}" id="htv" />
-                                    <label class="form-label">Hotel</label>
-                                </div>
-                                <div class="col-md-2">
-                                    <input  type="text" readonly class="form-control" id="hotelcv">
-                                </div>
-                                <div class="col-md-2" style="display: none">
-                                    <input  type="text" class="form-control"  id="hotelcv1" value="0">
-                                </div>
-                                <div class="col-md-2">
-                                    <label class="form-label">X Night</label>
-                                </div>
-                                <div class="col-md-2">
-                                    <input type="text" name="hotel" class="form-control" id="hn" disabled value="0">
-                                </div>
-                            </div>
-                            <div class="row p-2">
-                                <div class="col-md-4">
-                                    <label class="form-label"></label>
-                                </div>
-                                <div class="col-md-2" id="lodgingc">
-                                    <input class="form-check-input" type="checkbox" value="{{ $food[0]['lodging_allowance_value'] }}" id="ldgv" />
-                                    <label class="form-label">Lodging</label>
-                                </div>
-                                <div class="col-md-2">
-                                    <input  type="text" readonly class="form-control" id="lodgingcv">
-                                </div>
-                                <div class="col-md-2" style="display: none">
-                                    <input readonly type="text" class="form-control" id="lodgingcv1" value="0">
-                                </div>
-                                <div class="col-md-2">
-                                    <label class="form-label">X Night</label>
-                                </div>
-                                <div class="col-md-2">
-                                    <input type="text" name="lodging" class="form-control" value="0" id="ln" disabled>
-                                </div>
-                            </div>
-                            <div class="row p-2">
-                                <div class="col-md-4">
-                                    <label class="form-label"></label>
-                                </div>
-                                <div class="col-md-2"> <label class="form-label"></label>
-                                </div>
-                                <div class="col-md-2"> </div>
-                                <div class="col-md-2">
-                                    <label class="form-label">(B) Total Accomodation</label>
-                                </div>
-                                <div class="col-md-2">
-                                    <input readonly type="text" name="total_acc" class="form-control" value="0" id="TAV">
-                                </div>
-                            </div>
-                            <div class="row p-2">
-                                <div class="col-md-4">
-                                    <label class="form-label"></label>
-                                </div>
-                                <div class="col-md-2"> <label class="form-label"></label>
-                                </div>
-                                <div class="col-md-2"> </div>
-                                <div class="col-md-2">
-                                    <label class="form-label">(A+B) TOTAL</label>
-                                </div>
-                                <div class="col-md-2">
-                                    <input readonly type="text" name="total" class="form-control" value="" id="total2">
-                                </div>
-                            </div> -->
                             <div class="modal-footer"> <button type="button" class="btn btn-secondary">Reset</button>
                                 <button type="submit" id="subsSaveButton" class="btn btn-primary">Save</button>
                             </div>

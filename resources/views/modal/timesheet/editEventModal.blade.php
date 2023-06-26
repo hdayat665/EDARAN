@@ -1,4 +1,4 @@
-<div class="modal fade" id="editeventmodal" tabindex="-1" aria-labelledby="add-children" aria-hidden="true">
+<div class="modal fade" id="editeventmodal"  aria-labelledby="add-children" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
@@ -377,13 +377,13 @@
                         </div>
                     </div>
                     <div class="row p-2">
-                        {{-- <div class="col-sm-6">
+                        <div class="col-sm-6">
                             <label for="firstname" class="form-label">Participant*</label>
-                            <select class="form-control" id="addneweventparticipantedit" name="participant[]">
+                            <select class="form-control" id="addneweventparticipantedit" name="participant[]"  multiple>
                                 <option value="">PLEASE CHOOSE</option>
                             </select>
-                        </div> --}}
-                         <div class="col-sm-6">
+                        </div>
+                         {{-- <div class="col-sm-6">
                             <label for="firstname" class="form-label">Participant*</label>
                             <select class="selectpicker form-select" id="addneweventparticipantedit" aria-label="Default select example" multiple name="participant[]">
                                     <option class="form-label" value="">PLEASE CHOOSE</option>
@@ -392,7 +392,7 @@
                                     <option class="form-label" value="{{$employee->user_id}}">{{$employee->employeeName}}</option>
                                     @endforeach
                             </select> 
-                         </div>
+                         </div> --}}
                          {{-- <div class="col-sm-6">
                             <label for="firstname" class="form-label">Participant*</label>
                             <select class="selectpicker form-select" name="participant[]" id="addneweventparticipantedit" aria-label="Default select example" multiple>

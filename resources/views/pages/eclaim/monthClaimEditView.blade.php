@@ -203,7 +203,7 @@
                     </div>
                 </div>
             </div>
-            <div class="row p-2">
+            <!-- <div class="row p-2">
                 <div class="col align-self-start">
                     <a href="/myClaimView" class="btn btn-light" style="color: black;" type="submit"><i class="fa fa-arrow-left"></i> Back</a>
                 </div>
@@ -212,7 +212,7 @@
                     <button class="btn btn-light" id="editSubmitButton" style="color: black" type="submit"><i class="fa fa-save"></i>
                         Submit</button>
                 </div>
-            </div>
+            </div> -->
         </div>
     </div>
 @endsection
