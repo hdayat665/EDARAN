@@ -442,53 +442,53 @@ if ($existingLogs->isNotEmpty()) {
     }
 
     public function updateEvent($r, $id)
-    {
-        $input = $r->input();
-        $user = Auth::user();
+{
+    $input = $r->input();
+    $user = Auth::user();
 
-        // $input['user_id'] = $user->id;
-        $input['tenant_id'] = $user->tenant_id;
-        if (isset($input['type_recurring'])) {
-            $input['type_recurring'] = implode(',', $input['type_recurring']);
+    $input['tenant_id'] = $user->tenant_id;
+    if (isset($input['type_recurring'])) {
+        $input['type_recurring'] = implode(',', $input['type_recurring']);
+    }
+    if (isset($input['set_reccuring'])) {
+        $input['set_reccuring'] = implode(',', $input['set_reccuring']);
+    }
+
+    $currentEvent = TimesheetEvent::find($id);
+    $currentParticipants = explode(',', $currentEvent->participant);
+
+    if (isset($input['participant'])) {
+        $newParticipants = $input['participant'];
+        $input['participant'] = implode(',', array_unique(array_merge($currentParticipants, $newParticipants)));
+
+        // Add new participants to attendance_event table
+        $addedParticipants = array_diff($newParticipants, $currentParticipants);
+        foreach ($addedParticipants as $participant) {
+            $attendanceInput = [
+                'event_id' => $id,
+                'user_id' => $participant,
+                'status' => 'no response',
+            ];
+            AttendanceEvent::create($attendanceInput);
         }
-        if (isset($input['set_reccuring'])) {
-            $input['set_reccuring'] = implode(',', $input['set_reccuring']);
+    } else {
+        $input['participant'] = implode(',', $currentParticipants);
+    }
+
+    $input['start_date'] = date_format(date_create($input['start_date']), 'Y/m/d');
+    $input['end_date'] = date_format(date_create($input['end_date']), 'Y/m/d');
+    unset($input['inlineRadioOptions']);
+
+    if ($_FILES['file_upload']['name']) {
+        $file_upload = upload($r->file('file_upload'));
+        $input['file_upload'] = $file_upload['filename'];
+
+        if (!$input['file_upload']) {
+            unset($input['file_upload']);
         }
+    }
 
-        // if (isset($input['participant'])) {
-        //     $input['participant'] = implode(',', $input['participant']);
-        // }
-
-        $currentEvent = TimesheetEvent::find($id);
-        $currentParticipants = explode(',', $currentEvent->participant);
-
-        if (isset($input['participant'])) {
-            $newParticipants = $input['participant'];
-            $input['participant'] = implode(',', array_unique(array_merge($currentParticipants, $newParticipants)));
-        } else {
-            $input['participant'] = implode(',', $currentParticipants);
-        }
-
-        $input['start_date'] = date_format(date_create($input['start_date']), 'Y/m/d');
-        $input['end_date'] = date_format(date_create($input['end_date']), 'Y/m/d');
-        unset($input['inlineRadioOptions']);
-
-        // if ($input['location_by_project']) {
-        //     $input['location'] = $input['location_by_project'];
-        //     unset($input['location_by_project']);
-        // }
-
-        if ($_FILES['file_upload']['name']) {
-            $file_upload = upload($r->file('file_upload'));
-            $input['file_upload'] = $file_upload['filename'];
-
-            if (!$input['file_upload']) {
-                unset($input['file_upload']);
-            }
-        }
-        // $input['total_hour'] = $input['start_time'] - $input['end_time'];
-        // pr($input);
-        TimesheetEvent::where('id', $id)->update($input);
+    TimesheetEvent::where('id', $id)->update($input);
 
         $eventDetails = TimesheetEvent::where('id', $id)->orderBy('created_at', 'DESC')->first();
         $departmentName = getDepartmentName($user->id);
@@ -611,32 +611,47 @@ if ($existingLogs->isNotEmpty()) {
     
         $participantIds = explode(',', $event->participant);
     
-        $employees = DB::table('employment')
+        $participants = DB::table('employment')
                         ->whereIn('user_id', $participantIds)
                         ->get();
-                        // dd($employees);
     
-        $employeeNames = $employees->pluck('employeeName')->toArray();
+        $participantData = [];
+        foreach ($participants as $participant) {
+            $participantData[] = [
+                'user_id' => $participant->user_id,
+                'name' => $participant->employeeName,
+            ];
+        }
     
-        $event->participantNames = implode(',', $employeeNames);
+        $event->participants = $participantData;
     
         $nonParticipants = DB::table('employment')
                             ->whereNotIn('user_id', $participantIds)
-                            ->get()
-                            ->pluck('employeeName')
-                            ->toArray();
+                            ->get();
     
-        $event->nonParticipantNames = implode(',', $nonParticipants);
+        $nonParticipantData = [];
+        foreach ($nonParticipants as $nonParticipant) {
+            $nonParticipantData[] = [
+                'user_id' => $nonParticipant->user_id,
+                'name' => $nonParticipant->employeeName,
+            ];
+        }
 
+        // dd($nonParticipantData);
+    
+        $event->nonParticipants = $nonParticipantData;
+
+    
         $attendanceStatus = DB::table('attendance_event')
-        ->where('event_id', $id)
-        ->get();
-
+            ->where('event_id', $id)
+            ->get();
+    
         $event->attendanceStatus = $attendanceStatus;
-        // dd($event);
     
         return $event;
     }
+    
+
     
 
 
