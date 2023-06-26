@@ -379,7 +379,7 @@
                     <div class="row p-2">
                         <div class="col-sm-6">
                             <label for="firstname" class="form-label">Participant*</label>
-                            <select class="form-control" id="addneweventparticipantedit" name="participant[]">
+                            <select class="form-control" id="addneweventparticipantedit" name="participant[]"  multiple>
                                 <option value="">PLEASE CHOOSE</option>
                             </select>
                         </div>
