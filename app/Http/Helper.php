@@ -24,6 +24,7 @@ use App\Models\ProjectLocation;
 use App\Models\ProjectMember;
 use App\Models\Role;
 use App\Models\TimesheetEvent;
+use App\Models\Location;
 use App\Models\TypeOfLogs;
 use App\Models\Unit;
 use App\Models\UserProfile;
