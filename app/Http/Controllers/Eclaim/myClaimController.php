@@ -332,7 +332,7 @@ class myClaimController extends Controller
         $data['thirdkmcar'] = $thirdkmcar;
         $data['thirdpricecar'] = $thirdpricecar;
        
-        $carValue = $data['totalCar'][0]->total_km;
+        $carValue = $data['totalCar'][0]->total_km ??0;
         
         $ansCar = 0;
 
@@ -352,7 +352,7 @@ class myClaimController extends Controller
             $ansCar = $carValue * $firstpricecar;
         }
         
-        $data['ansCar']= $ansCar;
+        $data['ansCar']= $ansCar ;
         
 
         $data['motor'] = $mcs->getEntitlementByJobGradeMotor($data['user_id']);
@@ -389,7 +389,7 @@ class myClaimController extends Controller
         $data['thirdkmmotor'] = $thirdkmmotor;
         $data['thirdpricemotor'] = $thirdpricemotor;
 
-        $MotorValue = $data['totalMotor'][0]->total_km;
+        $MotorValue = $data['totalMotor'][0]->total_km ?? 0;
         
         $ansMotor = 0;
 
