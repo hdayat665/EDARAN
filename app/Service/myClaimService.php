@@ -810,7 +810,7 @@ class myClaimService
             foreach ($_FILES['file_upload']['name'] as $key => $filename) {
                 $tmp_name = $_FILES['file_upload']['tmp_name'][$key];
                 if (!empty($filename) && !empty($tmp_name)) {
-                    $fileInfo = manyFile($filename, $tmp_name);
+                    $fileInfo = TravelFile($filename, $tmp_name);
                     if ($fileInfo !== null) {
                         $filenames[] = $fileInfo['filename'];
                     }
@@ -890,7 +890,7 @@ class myClaimService
 
 
 
-    public function createCaClaim($r)
+    public function createCaClaim($r) 
     {
         $input = $r->input();
 
@@ -922,9 +922,18 @@ class myClaimService
         unset($input['month'], $input['year']);
 
 
-        if ($_FILES['file_upload']['name']) {
-            $filename = upload($r->file('file_upload'));
-            $input['file_upload'] = $filename['filename'];
+        if (!empty($_FILES['file_upload']['name']) && is_array($_FILES['file_upload']['name'])) {
+            $filenames = array();
+            foreach ($_FILES['file_upload']['name'] as $key => $filename) {
+                $tmp_name = $_FILES['file_upload']['tmp_name'][$key];
+                if (!empty($filename) && !empty($tmp_name)) {
+                    $fileInfo = manyFile($filename, $tmp_name);
+                    if ($fileInfo !== null) {
+                        $filenames[] = $fileInfo['filename'];
+                    }
+                }
+            }
+            $fileString = implode(',', $filenames);
         }
 
         $cashAdvances = CashAdvanceDetail::whereIn('id', $input['cashAdvanceId'])->where([['tenant_id', Auth::user()->tenant_id], ['user_id', Auth::user()->id]])->get();
@@ -939,7 +948,7 @@ class myClaimService
             $input['amount'] = $cashAdvance['amount'] ?? '0';
             $input['travel_date'] = $cashAdvance['travel_date'] ?? '-';
             $input['project_id'] = $cashAdvance['project_id'] ?? '-';
-            $input['file_upload'] = $cashAdvance['file_upload'] ?? '-';
+            $input['file_upload'] = $fileString ?? '';
 
             TravelClaim::create($input);
         }
@@ -1101,6 +1110,7 @@ class myClaimService
 
         return $data;
     }
+
     public function getOthersDataByGeneralId($id = '')
     {
         $data = PersonalClaim::where('id', $id)
@@ -1402,5 +1412,139 @@ class myClaimService
 
         return $data;
     }
+    public function updateTravelMtc($r,$id = '')
+    {
+        $input = $r->input();
+        
+        $id = $input['id'];
+        
+        $user = TravelClaim::where('id', $id)->first();
 
+        if (!$user) {
+            $data['status'] = config('app.response.error.status');
+            $data['type'] = config('app.response.error.type');
+            $data['title'] = config('app.response.error.title');
+            $data['msg'] = 'user not found';
+        } else {
+
+            TravelClaim::where('id', $id)->update($input);
+            $updatedTravelClaim = TravelClaim::select('general_id')->where('id', $id)->first();
+            $general_id = $updatedTravelClaim->general_id;
+
+            $personalClaims = PersonalClaim::where([['tenant_id', Auth::user()->tenant_id], ['general_id', $general_id]])->get();
+            $travelClaims = TravelClaim::where([['tenant_id', Auth::user()->tenant_id], ['general_id', $general_id]])->get();
+
+            foreach ($personalClaims as $claim) {
+                $total[] = $claim->amount;
+            }
+
+            foreach ($travelClaims as $claims) {
+                $totals[] = $claims->amount;
+            }
+
+            $allClaims = array_merge($personalClaims->toArray(), $travelClaims->toArray());
+
+            $totalAmount = [
+                'total_amount' => array_sum(array_column($allClaims, 'amount')),
+            ];
+
+            GeneralClaim::where('id', $general_id)->update($totalAmount);
+
+            $data['status'] = config('app.response.success.status');
+            $data['type'] = config('app.response.success.type');
+            $data['title'] = config('app.response.success.title');
+            $data['msg'] = 'Data is updated';
+        }
+
+        return $data;
+    }
+    public function updateSubsMtc($r)
+    {
+        $input = $r->input();
+        //pr($input);
+        $id = $input['id'];
+        $general_id = $input['general_id'];
+
+        $user = TravelClaim::where('id', $id)->first();
+
+        if (!$user) {
+            $data['status'] = config('app.response.error.status');
+            $data['type'] = config('app.response.error.type');
+            $data['title'] = config('app.response.error.title');
+            $data['msg'] = 'user not found';
+        } else {
+
+            TravelClaim::where('id', $id)->update($input);
+
+            $personalClaims = PersonalClaim::where([['tenant_id', Auth::user()->tenant_id], ['general_id', $general_id]])->get();
+            $travelClaims = TravelClaim::where([['tenant_id', Auth::user()->tenant_id], ['general_id', $general_id]])->get();
+
+            foreach ($personalClaims as $claim) {
+                $total[] = $claim->amount;
+            }
+
+            foreach ($travelClaims as $claims) {
+                $totals[] = $claims->amount;
+            }
+
+            $allClaims = array_merge($personalClaims->toArray(), $travelClaims->toArray());
+
+            $totalAmount = [
+                'total_amount' => array_sum(array_column($allClaims, 'amount')),
+            ];
+
+            GeneralClaim::where('id', $general_id)->update($totalAmount);
+
+            $data['status'] = config('app.response.success.status');
+            $data['type'] = config('app.response.success.type');
+            $data['title'] = config('app.response.success.title');
+            $data['msg'] = 'Data is updated';
+        }
+
+        return $data;
+    }
+    public function updateOtherMtc($r)
+    {
+        $input = $r->input();
+        //pr($input);
+        $id = $input['id'];
+        $general_id = $input['general_id'];
+        $user = PersonalClaim::where('id', $id)->first();
+
+        if (!$user) {
+            $data['status'] = config('app.response.error.status');
+            $data['type'] = config('app.response.error.type');
+            $data['title'] = config('app.response.error.title');
+            $data['msg'] = 'user not found';
+        } else {
+
+            PersonalClaim::where('id', $id)->update($input);
+
+            $personalClaims = PersonalClaim::where([['tenant_id', Auth::user()->tenant_id], ['general_id', $general_id]])->get();
+            $travelClaims = TravelClaim::where([['tenant_id', Auth::user()->tenant_id], ['general_id', $general_id]])->get();
+
+            foreach ($personalClaims as $claim) {
+                $total[] = $claim->amount;
+            }
+
+            foreach ($travelClaims as $claims) {
+                $totals[] = $claims->amount;
+            }
+
+            $allClaims = array_merge($personalClaims->toArray(), $travelClaims->toArray());
+
+            $totalAmount = [
+                'total_amount' => array_sum(array_column($allClaims, 'amount')),
+            ];
+
+            GeneralClaim::where('id', $general_id)->update($totalAmount);
+
+            $data['status'] = config('app.response.success.status');
+            $data['type'] = config('app.response.success.type');
+            $data['title'] = config('app.response.success.title');
+            $data['msg'] = 'Vehicle is updated';
+        }
+
+        return $data;
+    }
 }
