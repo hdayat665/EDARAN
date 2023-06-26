@@ -1,5 +1,5 @@
 <div class="modal fade" id="travelModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" style="max-width: 1000px">
+    <div class="modal-dialog" style="max-width: 1200px">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Update Daily Travelling Log</h5>
@@ -37,8 +37,8 @@
                     <th class="text-nowrap">Type Of Transport </th>
                     <th class="text-nowrap">Mileage( KM )</th>
                     <th class="text-nowrap">Petrol/fares</th>
-                    <th class="text-nowrap">Tolls</th>
-                    <th class="text-nowrap">Parking</th>
+                    <th class="text-nowrap">Tolls&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                    <th class="text-nowrap">Parking&nbsp;&nbsp;</th>
                 </tr>
             </thead>
             <tbody id="tableRowTravelling">
@@ -65,6 +65,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
+                <form id="updateSubsMtc">
                     <div class="">
                         <div class="row p-2">
                             <div class="row p-2">
@@ -79,7 +80,9 @@
                                                     <label class="form-label">Start Date</label>
                                                 </div>
                                                 <div class="col">
+                                                    <input type="hidden" name="id" id="claim_id" class="form-control" readonly value=''>
                                                     <input type="text" id="start_date_update" class="form-control" readonly value=''>
+                                                    <input type="hidden" name="general_id" class="form-control" value="" id="general_id_subs">
                                                 </div>
                                             </div>
                                             <div class="row p-2">
@@ -169,7 +172,7 @@
                                                 <label class="form-label">X</label>
                                             </div>
                                             <div class="col-md-2">
-                                                <input type="text" class="form-control" name="" readonly value="0" id="DBFUpdate">
+                                                <input type="text" class="form-control" readonly value="0" id="DBFUpdate">
                                             </div>
                                             <div class="col-md-1">
                                                 <label class="form-label">=</label>
@@ -189,7 +192,7 @@
                                                 <label class="form-label">X</label>
                                             </div>
                                             <div class="col-md-2">
-                                                <input type="text" name="lunch" class="form-control" readonly value="0" id="DLHUpdate">
+                                                <input type="text" class="form-control" readonly value="0" id="DLHUpdate">
                                             </div>
                                             <div class="col-md-1">
                                                 <label class="form-label">=</label>
@@ -209,7 +212,7 @@
                                                 <label class="form-label">X</label>
                                             </div>
                                             <div class="col-md-2">
-                                                <input type="text" name="dinner" class="form-control" readonly value="0" id="DDNUpdate">
+                                                <input type="text" class="form-control" readonly value="0" id="DDNUpdate">
                                             </div>
                                             <div class="col-md-1">
                                                 <label class="form-label">=</label>
@@ -235,7 +238,7 @@
                                                 <label class="form-label">=</label>
                                             </div>
                                             <div class="col-md-4">
-                                                <input readonly type="text" name="total_subs" class="form-control" value="0" id="TSUpdate">
+                                                <input readonly type="text" class="form-control" value="0" id="TSUpdate">
                                             </div>
                                         </div>
                                         
@@ -253,7 +256,7 @@
                                                 </div>
                                                 <div class="col-md-3">
                                                     <input  type="hidden" class="form-control" value="{{ $food[0]['local_hotel_value'] }}" id="hotelcvUpdateHide">
-                                                    <input type="number" class="form-control" value="" id="hotelcvUpdate" />
+                                                    <input type="number" name="hotel_value" class="form-control" value="" id="hotelcvUpdate" />
                                                 </div>
                                                 
                                                 <div class="col-md-1">
@@ -266,7 +269,7 @@
                                                     <label class="form-label">=</label>
                                                 </div>
                                                 <div class="col-md-3">
-                                                    <input type="text" name="hotel" class="form-control" id="hnTotal" value="0">
+                                                    <input type="text" class="form-control" readonly id="hnTotal" value="0">
                                                 </div>
                                             </div>
                                             <div class="row p-2">
@@ -289,7 +292,7 @@
                                                     <label class="form-label">=</label>
                                                 </div>
                                                 <div class="col-md-3">
-                                                    <input type="text" name="hotel" class="form-control" id="lnTotal" value="0">
+                                                    <input type="text" readonly class="form-control" id="lnTotal" value="0">
                                                 </div>
                                             </div>
                                             
@@ -329,139 +332,11 @@
                                     </div>
                                 </div>
                             </div>
-                        <!-- <div class="row p-2">
-                            <div class="col-md-4">
-                                <label class="form-label">Subsistence
-                                    Allowance:</label>
-                            </div>
-                            <div class="col-md-2">
-                                <label class="form-label">Breakfast</label>
-                            </div>
-                            <div class="col-md-2">
-                                <input  type="text" class="form-control" readonly value="{{ $food[0]['breakfast'] }}" id="BF">
-                            </div>
-                            <div class="col-md-2">
-                                <label class="form-label">X day</label>
-                            </div>
-                            <div class="col-md-2"> 
-                                <input type="text" class="form-control" name="breakfast" value="0" id="DBF">
-                            </div>
-                        </div>
-                        <div class="row p-2">
-                            <div class="col-md-4"> </div>
-                            <div class="col-md-2">
-                                <label class="form-label">Lunch</label>
-                            </div>
-                            <div class="col-md-2">
-                                <input  type="text" class="form-control" readonly value="{{ $food[0]['lunch'] }}" id="LH">
-                            </div>
-                            <div class="col-md-2">
-                                <label class="form-label">X day</label>
-                            </div>
-                            <div class="col-md-2">
-                                <input type="text" name="lunch" class="form-control" value="0" id="DLH">
-                            </div>
-                        </div>
-                        <div class="row p-2">
-                            <div class="col-md-4">
-                            </div>
-                            <div class="col-md-2">
-                                <label class="form-label">Dinner</label>
-                            </div>
-                            <div class="col-md-2">
-                                <input  type="text" class="form-control" readonly value="{{ $food[0]['dinner'] }}" id="DN">
-                            </div>
-                            <div class="col-md-2">
-                                <label class="form-label">X day</label>
-                            </div>
-                            <div class="col-md-2">
-                                <input type="text" name="dinner" class="form-control" value="0" id="DDN">
-                            </div>
-                        </div>
-                        <div class="row p-2">
-                            <div class="col-md-4">
-                            </div>
-                            <div class="col-md-2"> </div>
-                            <div class="col-md-2"> </div>
-                            <div class="col-md-2">
-                                (A) Total Subsistence
-                            </div>
-                            <div class="col-md-2">
-                                <input readonly type="text" name="total_subs" class="form-control" value="0" id="TS">
-                            </div>
-                        </div> -->
-                        <!-- <div class="row p-2">
-                            <div class="col-md-4">
-                                <label class="form-label">Accommodation:</label>
-                            </div>
-                            <div class="col-md-2" id="hotelc">
-                                <input class="form-check-input" type="checkbox" value="{{ $food[0]['local_hotel_value'] }}" id="htv" />
-                                <label class="form-label">Hotel</label>
-                            </div>
-                            <div class="col-md-2">
-                                <input  type="text" readonly class="form-control" id="hotelcv">
-                            </div>
-                            <div class="col-md-2" style="display: none">
-                                <input  type="text" class="form-control"  id="hotelcv1" value="0">
-                            </div>
-                            <div class="col-md-2">
-                                <label class="form-label">X Night</label>
-                            </div>
-                            <div class="col-md-2">
-                                <input type="text" name="hotel" class="form-control" id="hn" disabled value="0">
-                            </div>
-                        </div>
-                        <div class="row p-2">
-                            <div class="col-md-4">
-                                <label class="form-label"></label>
-                            </div>
-                            <div class="col-md-2" id="lodgingc">
-                                <input class="form-check-input" type="checkbox" value="{{ $food[0]['lodging_allowance_value'] }}" id="ldgv" />
-                                <label class="form-label">Lodging</label>
-                            </div>
-                            <div class="col-md-2">
-                                <input  type="text" readonly class="form-control" id="lodgingcv">
-                            </div>
-                            <div class="col-md-2" style="display: none">
-                                <input readonly type="text" class="form-control" id="lodgingcv1" value="0">
-                            </div>
-                            <div class="col-md-2">
-                                <label class="form-label">X Night</label>
-                            </div>
-                            <div class="col-md-2">
-                                <input type="text" name="lodging" class="form-control" value="0" id="ln" disabled>
-                            </div>
-                        </div>
-                        <div class="row p-2">
-                            <div class="col-md-4">
-                                <label class="form-label"></label>
-                            </div>
-                            <div class="col-md-2"> <label class="form-label"></label>
-                            </div>
-                            <div class="col-md-2"> </div>
-                            <div class="col-md-2">
-                                <label class="form-label">(B) Total Accomodation</label>
-                            </div>
-                            <div class="col-md-2">
-                                <input readonly type="text" name="total_acc" class="form-control" value="0" id="TAV">
-                            </div>
-                        </div>
-                        <div class="row p-2">
-                            <div class="col-md-4">
-                                <label class="form-label"></label>
-                            </div>
-                            <div class="col-md-2"> <label class="form-label"></label>
-                            </div>
-                            <div class="col-md-2"> </div>
-                            <div class="col-md-2">
-                                <label class="form-label">(A+B) TOTAL</label>
-                            </div>
-                            <div class="col-md-2">
-                                <input readonly type="text" name="total" class="form-control" value="" id="total2">
-                            </div>
-                        </div> -->
-                        <div class="modal-footer"> <button type="button" class="btn btn-secondary">Reset</button>
-                            <button type="submit" id="subsSaveButton" class="btn btn-primary">Save</button>
+                        <div class="modal-footer"> 
+                            <!-- <button type="button" class="btn btn-secondary">Reset</button> -->
+                            <button type="submit" id="updateSubsMtcBtn" class="btn btn-primary">Update</button>
+                            
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -477,13 +352,16 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
+                <form id="updateOtherMtc">
                     <div class="">
                         <div class="row p-2">
                             <div class="col-md-4">
                                 <label class="form-label">Claim Category</label>
                             </div>
                             <div class="col-md-8">
-                                <input readonly type="text" name="total" class="form-control" value="" id="claim_category_update">
+                                <input type="hidden" name="id" class="form-control" value="" id="claim_id_other">
+                                <input type="hidden" name="general_id" class="form-control" value="" id="general_id_other">
+                                <input readonly type="text"  class="form-control" value="" id="claim_category_update">
                             </div>
                         </div>
                         <div class="row p-2">
@@ -491,7 +369,7 @@
                                 <label class="form-label">Amount</label>
                             </div>
                             <div class="col-md-8">
-                                <input type="text" name="total" class="form-control" value="" id="amount_other_update">
+                                <input type="text" name="amount" class="form-control" value="" id="amount_other_update">
                             </div>
                         </div>
                         <div class="row p-2">
@@ -499,7 +377,7 @@
                                 <label class="form-label">Description</label>
                             </div>
                             <div class="col-md-8">
-                                <textarea class="form-control" id="desc_other_update" rows="4"></textarea>
+                                <textarea class="form-control" name="claim_desc" id="desc_other_update" rows="4"></textarea>
                             </div>
                         </div>
                         <div class="row p-2">
@@ -511,8 +389,10 @@
                             </div>
                         </div>
 
-                        <div class="modal-footer"> <button type="button" class="btn btn-secondary">Reset</button>
-                            <button type="submit" id="subsSaveButton" class="btn btn-primary">Save</button>
+                        <div class="modal-footer"> 
+                            <!-- <button type="button" class="btn btn-secondary">Reset</button> -->
+                            <button type="submit" id="updateOtherMtcBtn" class="btn btn-primary">Update</button>
+                        </form>
                         </div>
                     </div>
                 </div>

@@ -21,7 +21,7 @@
     <div class="row p-2">
 
         <div class="">
-            <table id="" class="table table-striped table-bordered align-middle">
+            <table id="travelingUpdate" class="table table-striped table-bordered align-middle">
                 <thead>
                     <tr>
                         <th>Action</th>
@@ -162,7 +162,7 @@
     </div>
     <div class="row p-2">
         <div class="">
-            <table id="" class="table table-striped table-bordered align-middle">
+            <table id="subsTableUpdate" class="table table-striped table-bordered align-middle">
                 <thead>
                     <tr>
                         <th>Action</th>
@@ -244,7 +244,7 @@
     </div>
     <div class="row p-2">
         <div class="">
-            <table id="" class="table table-striped table-bordered align-middle">
+            <table id="otherTableUpdate" class="table table-striped table-bordered align-middle">
                 <thead>
                     <tr>
                         <th>Action</th>
