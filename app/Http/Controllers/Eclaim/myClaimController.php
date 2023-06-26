@@ -185,6 +185,30 @@ class myClaimController extends Controller
         //pr($result);
         return $result;
     }
+    public function updateOtherMtc(Request $r)
+    {
+        $ps = new myClaimService;
+
+        $result = $ps->updateOtherMtc($r);
+
+        return response()->json($result);
+    }
+    public function updateSubsMtc(Request $r)
+    {
+        $ps = new myClaimService;
+
+        $result = $ps->updateSubsMtc($r);
+
+        return response()->json($result);
+    }
+    public function updateTravelMtc(Request $r,$id = '')
+    {
+        $ps = new myClaimService;
+
+        $result = $ps->updateTravelMtc($r,$id = '');
+
+        return response()->json($result);
+    }
     public function getOthersDataByGeneralId($id = '')
     {
         // Your code to handle the $id and $date parameters

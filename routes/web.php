@@ -602,6 +602,9 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('/getProjectNameById/{id}', 'getProjectNameById');
             Route::get('/getOthersDataByGeneralId/{id}', 'getOthersDataByGeneralId');
             Route::get('/getClaimCategoryNameById/{id}', 'getClaimCategoryNameById');
+            Route::post('/updateOtherMtc', 'updateOtherMtc');
+            Route::post('/updateSubsMtc', 'updateSubsMtc');
+            Route::post('/updateTravelMtc/{id}', 'updateTravelMtc');
         });
 
         Route::controller(generalClaimController::class)->group(function () {
