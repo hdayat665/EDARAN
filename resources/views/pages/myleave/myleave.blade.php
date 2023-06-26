@@ -456,7 +456,7 @@
                                                     <label class="form-check-label" for="flexRadioDefault1">
                                                         Morning
                                                         <br>
-                                                        8AM - 1AM
+                                                        8AM - 1PM
                                                     </label>
                                                 </div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                                 <div class="form-check">
@@ -580,7 +580,7 @@
                                                     <label class="form-check-label" for="flexRadioDefaulta">
                                                         Morning
                                                         <br>
-                                                        8AM - 1AM
+                                                        8AM - 1PM
 
                                                     </label>
                                                 </div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

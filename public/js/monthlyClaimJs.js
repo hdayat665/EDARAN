@@ -1,41 +1,322 @@
 $("document").ready(function () {
+
+      function getTravelDataByGeneralId(id, date) {
+        return $.ajax({
+          url: "/getTravelDataByGeneralId/" + id + "/" + date
+        });
+      }
+      function getSubsDataByGeneralId(id) {
+        return $.ajax({
+          url: "/getSubsDataByGeneralId/" + id
+        });
+      }
+      function getProjectNameById(id) {
+        return $.ajax({
+          url: "/getProjectNameById/" + id
+        });
+      }
+      function getOthersDataByGeneralId(id) {
+        return $.ajax({
+          url: "/getOthersDataByGeneralId/" + id 
+        });
+      }
+      function getClaimCategoryNameById(id) {
+        return $.ajax({
+          url: "/getClaimCategoryNameById/" + id
+        });
+      }
+      
+      document.getElementById('hotelcvUpdate').addEventListener('input', function() {
+        const hiddenInput = document.getElementById('hotelcvUpdateHide');
+        const maxValue = parseInt(hiddenInput.value);  // Change this value to your desired maximum
+        if (this.value > maxValue) {
+          this.value = maxValue;
+        }
+      });
+      
+      document.getElementById('hotelcv').addEventListener('input', function() {
+        const hiddenInput = document.getElementById('htv');
+        const maxValue = parseInt(hiddenInput.value);  // Change this value to your desired maximum
+        if (this.value > maxValue) {
+          this.value = maxValue;
+        }
+      });
+
+      $(document).on("click", "#travelBtn", function () {
+        var date = $(this).data("date");
+        var id = $(this).data("id");
+        var travellingData = getTravelDataByGeneralId(id, date);
+        console.log(id);
+        console.log(date);
+        $("#date").val(date);
+        travellingData.then(function (response) {
+            var data = response.original;
     
-    $(document).on("click", "#travelBtn", function () {
-        // var id = $(this).data("id");
-        // var eventData = getEvents(id);
-        // eventData.then(function (data) {
-        //     var attendanceEvent = getAttendance(data.id);
-        //     attendanceEvent.then(function (dataAttendance) {
-        //         // Check if the DataTable is already initialized
-        //         var table = $("#tableviewparticipants").DataTable();
-        //         if (table) {
-        //             // The DataTable is already initialized, so we can just update the data
-        //             table.clear();
-        //             for (let i = 0; i < dataAttendance.length; i++) {
-        //                 const attendance = dataAttendance[i];
-        //                 table.row.add([i + 1, attendance.employeeName]);
-        //             }
-        //             table.draw();
-        //         } else {
-        //             // The DataTable is not yet initialized, so we need to initialize it
-        //             $("#tableviewparticipants").DataTable({
-        //                 paging: true,
-        //                 columns: [{ title: "No" }, { title: "Participants" }],
-        //             });
-        //             for (let i = 0; i < dataAttendance.length; i++) {
-        //                 const attendance = dataAttendance[i];
-        //                 table.row.add([i + 1, attendance.employeeName]);
-        //             }
-        //         }
-        //     });
-        // });
+            // Check if the DataTable is already initialized
+            var table = $("#tableTravelling").DataTable();
+            if (table) {
+                // The DataTable is already initialized, so we can just update the data
+                table.clear();
+                for (var i = 0; i < data.length; i++) {
+                    var rowData = data[i];
+                    table.row.add([
+                        "<a href='#' data-bs-toggle='dropdown' class='btn btn-primary btn-sm dropdown-toggle'></i> Actions <i class='fa fa-caret-down'></i></a>" +
+                        "<div class='dropdown-menu'>" +
+                        "<a href='javascript:;' class='dropdown-item'>Update</a>" +
+                        "<div class='dropdown-divider'></div>" +
+                        "<a data-bs-toggle='modal' id='deleteButtonTravel' data-id='" + rowData.id + "' class='dropdown-item'>Delete</a>" +
+                        "</div>", // Action
+                        rowData.start_time,
+                        rowData.end_time,
+                        rowData.location_start,
+                        rowData.location_end,
+                        rowData.desc,
+                        rowData.type_transport,
+                        rowData.total_km,
+                        rowData.petrol,
+                        rowData.toll,
+                        rowData.parking
+                    ]);
+                }
+                table.draw();
+            } else {
+                // The DataTable is not yet initialized, so we need to initialize it
+                $("#tableTravelling").DataTable({
+                    paging: true,
+                    scrollX: true,
+                    columns: [
+                        { title: "Action" },
+                        { title: "Start Time" },
+                        { title: "End Time" },
+                        { title: "Start Location" },
+                        { title: "Destination" },
+                        { title: "Description" },
+                        { title: "Type Of Transport" },
+                        { title: "Mileage (KM)" },
+                        { title: "Petrol/fares" },
+                        { title: "Tolls" },
+                        { title: "Parking" }
+                    ]
+                });
+                table = $("#tableTravelling").DataTable();
+                for (var i = 0; i < data.length; i++) {
+                    var rowData = data[i];
+                    table.row.add([
+                        "<a href='#' data-bs-toggle='dropdown' class='btn btn-primary btn-sm dropdown-toggle'></i> Actions <i class='fa fa-caret-down'></i></a>" +
+                        "<div class='dropdown-menu'>" +
+                        "<a href='javascript:;' class='dropdown-item'>Update</a>" +
+                        "<div class='dropdown-divider'></div>" +
+                        "<a data-bs-toggle='modal' id='deleteButtonTravel' data-id='" + rowData.id + "' class='dropdown-item'>Delete</a>" +
+                        "</div>", // Action
+                        rowData.start_time,
+                        rowData.end_time,
+                        rowData.location_start,
+                        rowData.location_end,
+                        rowData.desc,
+                        rowData.type_transport,
+                        rowData.total_km,
+                        rowData.petrol,
+                        rowData.toll,
+                        rowData.parking
+                    ]);
+                }
+                table.draw();
+            }
     
-        $("#travelModal").modal("show");
+            $("#travelModal").modal("show");
+        });
     });
+    
+    
+    $("#tableTravelling").DataTable({
+        paging: true,
+        scrollX: true,
+        lengthMenu: [
+            [5, 10, 25, 50, -1],
+            [5, 10, 25, 50, "All"],
+        ],
+        // lengthChange: false,
+    });
+    
+    $(document).on("click", "#othersBtn", function () {
+        var id = $(this).data("id");
+        var othersData = getOthersDataByGeneralId(id);
+    
+        othersData.done(function(response) {
+            if (Array.isArray(response) && response.length > 0) {
+                var firstResponse = response[0];
+                var claim_category = firstResponse.claim_category;
+                var amount = firstResponse.amount;
+                var desc = firstResponse.claim_desc;
+                var file = firstResponse.file_upload;
+    
+                getClaimCategoryNameById(claim_category).done(function(claimData) {
+                    
+    
+                    $("#claim_category_update").val(claimData);
+                    $("#amount_other_update").val(amount);
+                    $("#desc_other_update").val(desc);
+                    $("#end_time_update").val(desc);
+                }).fail(function() {
+                    console.log('Failed to fetch project name.');
+                });
+            } else {
+                console.log('Invalid response format or empty response.');
+            }
+        });
+    
+        $("#othersModal").modal("show");
+    });
+    
 
     $(document).on("click", "#subsBtn", function () {
+        var id = $(this).data("id");
+        var subsData = getSubsDataByGeneralId(id);
+        
+        subsData.done(function(response) {
+            if (Array.isArray(response) && response.length > 0) {
+                var firstResponse = response[0];
+                var startDate = firstResponse.start_date;
+                var startTime = firstResponse.start_time;
+                var endDate = firstResponse.end_date;
+                var endTime = firstResponse.end_time;
+                var formattedStartDate = startDate.substr(0, 10);
+                var formattedEndDate = endDate.substr(0, 10);
+                var travelDuration = firstResponse.travel_duration;
+                var desc = firstResponse.desc;
+                var project = firstResponse.project_id;
+                var hotel = parseFloat(firstResponse.hotel_value);
+                var startDateFood = formattedStartDate;
+                var endDateFood = formattedEndDate;
+                var startTimeFood = startTime;
+                var endTimeFood = endTime;
+                var dayHotel = firstResponse.hotel;
+                var dayLodging = firstResponse.lodging;
+                var startDateTime = new Date(startDateFood + ' ' + startTimeFood);
+                var endDateTime = new Date(endDateFood + ' ' + endTimeFood);
+                var durationInMs = endDateTime - startDateTime;
+                var days = Math.floor(durationInMs / (1000 * 60 * 60 * 24));
+                var hours = Math.floor((durationInMs % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                var minutes = Math.floor((durationInMs % (1000 * 60 * 60)) / (1000 * 60));
+                
+                // Calculate the number of breakfast, lunch, and dinner days
+                var breakfastDaysUpdate = 0;
+                var lunchDaysUpdate = 0;
+                var dinnerDaysUpdate = 0;
+            
+                // Check if the startDateTime and endDateTime are on the same day
+                if (startDateTime.toDateString() === endDateTime.toDateString()) {
+                    // Check if the startDateTime has breakfast
+                    if (startDateTime.getHours() < 8 || (startDateTime.getHours() === 8 && startDateTime.getMinutes() < 30)) {
+                        breakfastDaysUpdate++;
+                    }
+                    
+                    // Check if the startDateTime has lunch
+                    if (startDateTime.getHours() < 13 && endDateTime.getHours() >= 12) {
+                        lunchDaysUpdate++;
+                    }
+                    
+                    // Check if the startDateTime has dinner
+                    if (startDateTime.getHours() >= 19 || endDateTime.getHours() >= 19) {
+                        dinnerDays++;
+                    }
+                } else {
+                    // Start and end dates are different days
+                    // Check if the startDateTime has breakfast
+                    if (startDateTime.getHours() === 8 && startDateTime.getMinutes() < 30) {
+                        breakfastDaysUpdate++;
+                    }
+                    
+                    // Check if the startDateTime has lunch
+                    if (startDateTime.getHours() < 13) {
+                        lunchDaysUpdate++;
+                    }
+                    
+                    // Check if the startDateTime has dinner
+                    if (startDateTime.getHours() < 20) {
+                        dinnerDaysUpdate++;
+                    }
+            
+                    // Check for the intermediate days
+                    for (var i = 1; i < days; i++) {
+                        breakfastDaysUpdate++;
+                        lunchDaysUpdate++;
+                        dinnerDaysUpdate++;
+                    }
+                    
+                    // Check if the endDateTime has breakfast
+                    if (endDateTime.getHours() >= 7) {
+                        breakfastDaysUpdate++;
+                    }
+                    
+                    // Check if the endDateTime has lunch
+                    if (endDateTime.getHours() >= 12) {
+                        lunchDaysUpdate++;
+                    }
+                    
+                    // Check if the endDateTime has dinner
+                    if (endDateTime.getHours() >= 19) {
+                        dinnerDaysUpdate++;
+                    }
+                }
+                console.log(breakfastDaysUpdate);
+                console.log(lunchDaysUpdate);
+                console.log(dinnerDaysUpdate);
+
+                $("#DBFUpdate").val(breakfastDaysUpdate);
+                $("#DLHUpdate").val(lunchDaysUpdate);
+                $("#DDNUpdate").val(dinnerDaysUpdate);
+
+                var a = parseFloat($("#BFUpdate").val()); //float
+                var b = breakfastDaysUpdate;
+                var c = parseFloat($("#LHUpdate").val()); //float
+                var d = lunchDaysUpdate;
+                var e = parseFloat($("#DNUpdate").val()); //float
+                var f = dinnerDaysUpdate;
+                $("#TSUpdate").val((a * b + c * d + e * f).toFixed(2));
+                
+            
+                $("#totalbfUpdate").val((a * b).toFixed(2));
+                $("#totallhUpdate").val((c * d).toFixed(2));
+                $("#totaldnUpdate").val((e * f).toFixed(2));
+                
+                $("#hnUpdate").val(dayHotel);
+                $("#lnUpdate").val(dayLodging);
+                var lodgingValue = parseFloat($("#lodgingcvUpdate").val());
+                var totalHotel = dayHotel*hotel;
+                var totalLodging = dayLodging*lodgingValue;
+                $("#hnTotal").val(totalHotel);
+                
+                $("#lnTotal").val(totalLodging);
+                $("#TAVUpdate").val(totalHotel+totalLodging);
+                
+                $("#total2Update").val(totalHotel+totalLodging+(a * b + c * d + e * f));
+                // Fetch the project name asynchronously
+                getProjectNameById(project).done(function(projectData) {
+                    var projectName = projectData && projectData.project_name ? projectData.project_name : 'N/A';
+                    console.log(projectName);
+                    $("#start_date_update").val(formattedStartDate);
+                    $("#start_time_update").val(startTime);
+                    $("#end_date_update").val(formattedEndDate);
+                    $("#end_time_update").val(endTime);
+                    $("#travel_duration_update").val(travelDuration);
+                    $("#desc_update").val(desc);
+                    $("#project_update").val(projectName);
+                    $("#hotelcvUpdate").val(hotel);
+                }).fail(function() {
+                    console.log('Failed to fetch project name.');
+                });
+            } else {
+                console.log('Invalid response format or empty response.');
+            }
+        });
+        
         $("#subsModal").modal("show");
     });
+    
+    
+    
+    
     $("#type_transport").change(function () {
         var selectedOption = $("#type_transport").val();
         if (selectedOption == "Personal Car") {
@@ -129,16 +410,16 @@ $("document").ready(function () {
         });
 
         $("#confirmBtn").click(function() {
-            var total = parseInt(resultInput.value);
+            // var total = parseInt(resultInput.value);
 
-            // call the calculate function with the input value
-            var result = calculate(total);
+            // // call the calculate function with the input value
+            // var result = calculate(total);
         
-            // round up the result and remove decimal places
-            var roundedResult = Math.ceil(result);
+            // // round up the result and remove decimal places
+            // var roundedResult = Math.ceil(result);
         
-            // display the rounded result in the millage input field
-            $("#millage").val(roundedResult);
+            // // display the rounded result in the millage input field
+            // $("#millage").val(roundedResult);
             
             $("#confirmBtnDiv").hide();
         });
@@ -313,9 +594,10 @@ $("document").ready(function () {
                 }
                 
                 // Check if the startDateTime has dinner
-                if (startDateTime.getHours() >= 19) {
+                if (startDateTime.getHours() >= 19 || endDateTime.getHours() >= 19) {
                     dinnerDays++;
                 }
+
             } else {
                 // Start and end dates are different days
                 // Check if the startDateTime has breakfast
@@ -407,6 +689,13 @@ $("document").ready(function () {
             $("#totalduration").val(hours + " hours : " + mins + " minutes ");
         }
     );
+    
+    var TCar = parseInt(document.getElementById("totalCar").value);
+    var TMotor = parseInt(document.getElementById("totalMotor").value);
+    TotalTcarTmotor = TCar + TMotor;
+    $("#TotalMileageCarMotor").val("RM " + TotalTcarTmotor.toFixed(2));
+
+
 
     function calculate(total) {
         var result = 0;
@@ -461,9 +750,9 @@ $("document").ready(function () {
             var ss = "100"; // this is the value to check against
 
             if ($("#htv").val() == ss) {
-                $("#hotelcv").prop("readonly", true);
+                $("#hotelcv").prop("readonly", false);
             } else {
-                $("#hotelcv").prop("readonly", true);
+                $("#hotelcv").prop("readonly", false);
             }
 
             $("#hotelcv").val(s);

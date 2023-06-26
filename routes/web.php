@@ -597,6 +597,11 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('/rejectAppealMtc/{id}', 'rejectAppealMtc');
             Route::post('/cancelGNC/{id}', 'cancelGNC');
             Route::post('/cancelMTC/{id}', 'cancelMTC');
+            Route::get('/getTravelDataByGeneralId/{id}/{date}', 'getTravelDataByGeneralId');
+            Route::get('/getSubsDataByGeneralId/{id}', 'getSubsDataByGeneralId');
+            Route::get('/getProjectNameById/{id}', 'getProjectNameById');
+            Route::get('/getOthersDataByGeneralId/{id}', 'getOthersDataByGeneralId');
+            Route::get('/getClaimCategoryNameById/{id}', 'getClaimCategoryNameById');
         });
 
         Route::controller(generalClaimController::class)->group(function () {
