@@ -34,13 +34,14 @@
         <!-- END panel-heading -->
         <!-- BEGIN panel-body -->
         <div class="panel-body">
-            <table id="tablebranch" class="table table-striped table-bordered align-middle">
+            <table id="tablebranch" style="width: 100%;" class="table table-striped table-bordered align-middle">
                 <thead>
                     <tr>
                         <th width="1%">NO</th>
                         <th class="text-nowrap">Company Name</th>
                         <th class="text-nowrap">Branch Type</th>
                         <th class="text-nowrap">Branch Name</th>
+                        <th class="text-nowrap">Postcode</th>
                         <th class="text-nowrap">State</th>
                         <th class="text-nowrap">Added By</th>
                         <th class="text-nowrap">Added Time</th>
@@ -53,7 +54,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <?php $id = 0 ?> 
+                    <?php $id = 0 ?>
                     @if ($branchs)
                     @foreach ($branchs as $branch)
                     <?php $id++ ?>
@@ -62,6 +63,7 @@
                         <td style="text-transform: uppercase;">{{$branch->companyName}}</td>
                         <td>{{$branch->branchType}}</td>
                         <td>{{$branch->branchName}}</td>
+                        <td>{{$branch->postcode}}</td>
                         <td style="text-transform: uppercase;">{{$branch->state}}</td>
                         <td>{{$branch->addedBy}}</td>
                         <td>{{$branch->created_at}}</td>
@@ -99,21 +101,27 @@
                 </div>
                 <div class="modal-body">
                     <form id="addForm">
-
-                        <div class="mb-3">
-                            <label class="form-label">Branch Code*</label>
-                            <input type="text" class="form-control" name="branchCode" maxlength="100" placeholder="BRANCH CODE" >
+                        <div class="mb-2">
+                            <label class="form-label">Company Name*</label>
+                            <select class="form-select" name="companyId" style="text-transform: uppercase;">
+                                <option type="text" value="" selected="selected">PLEASE CHOOSE</option>
+                                <?php $companys = getCompany() ?>
+                                @foreach ($companys as $company)
+                                <option type="text"value="{{$company->id}}" >{{$company->companyName}}</option>
+                                @endforeach
+                            </select>
                         </div>
+
                         <div class="mb-3">
                             <label class="form-label">Branch Name*</label>
                             <input type="text" class="form-control" name="branchName" maxlength="100" placeholder="BRANCH NAME" >
-                           
+
                         </div>
                         <div class="mb-2">
                             <label class="form-label">Branch Type</label>
                             {{-- <input type="text" class="form-control" name="branchType" maxlength="100" placeholder="" style="text-transform:uppercase"> --}}
                             <select class="form-select" name="branchType" id="">
-                                <option value="">SELECT BRANCH TYPE</option>
+                                <option value="">PLEASE CHOOSE</option>
                                 <option value="HEADQUARTERS ">HEADQUARTERS </option>
                                 <option value="STATE ">STATE </option>
                             </select>
@@ -128,28 +136,19 @@
                                 @endforeach
                             </select>
                         </div> --}}
-                        <div class="mb-2">
-                            <label class="form-label">Company Name*</label>
-                            <select class="form-select" name="companyId" style="text-transform: uppercase;">
-                                <option type="text"value="" label="Select Company" selected="selected">Select Company </option>
-                                <?php $companys = getCompany() ?>
-                                @foreach ($companys as $company)
-                                <option type="text"value="{{$company->id}}" >{{$company->companyName}}</option>
-                                @endforeach
-                            </select>
-                        </div>
+
                         <div class="mb-2">
                             <label class="form-label">Address 1*</label>
                             <input type="text" class="form-control" name="address" id="address" maxlength="100" placeholder="ADDRESS 1" >
                         </div>
                         <div class="mb-2">
-                            <label class="form-label">Address 2</label>  
+                            <label class="form-label">Address 2</label>
                             <input type="text" class="form-control" name="address2" id="address2" placeholder="ADDRESS 2" >
                         </div>
-                        <div class="mb-2">
+                        {{-- <div class="mb-2">
                             <label class="form-label">Postcode*</label>
                             <input type="number" class="form-control" name="postcode" id="postcode" placeholder="POSTCODE" aria-describedby="postcode">
-                        </div>
+                        </div> --}}
                         <div class="mb-2">
                             <label class="form-label">City*</label>
                             <input type="text" class="form-control" name="city" id="city" placeholder="CITY" >
@@ -157,32 +156,52 @@
                             <input type="hidden" class="form-control" name="longitude" id="longitude" />
 
                         </div>
-                        <div class="mb-2">
-                            <label class="form-label">State*</label>
-                            <select class="form-select" name="state" id="state" style="text-transform: uppercase;">
-                                <option type="text"type="text" value="" label="Select State " selected="selected">SELECT STATE</option>
-                                <option type="text"value="Johor" label="Johor">JOHOR</option>
-                                <option type="text"value="Kedah" label="Kedah">KEDAH</option>
-                                <option type="text"value="Kelantan" label="Kelantan">KELANTAN</option>
-                                <option type="text"value="Negeri Sembilan" label="Negeri Sembilan">NEGERI SEMBILAN</option>
-                                <option type="text"value="Pahang" label="Pahang">PAHANG</option>
-                                <option type="text"value="Penang" label="Penang">PENANG</option>
-                                <option type="text"value="Perak" label="Perak">PERAK</option>
-                                <option type="text"value="Perlis" label="Perlis">PERLIS</option>
-                                <option type="text"value="Sabah" label="Sabah">SABAH</option>
-                                <option type="text"value="Sarawak" label="Sarawak">SARAWAK</option>
-                                <option type="text"value="Selangor" label="Selangor">SELANGOR</option>
-                                <option type="text"value="Terengganu" label="Terengganu">TERENGGANU</option>
-                                <option type="text"value="Kuala Lumpur" label="Kuala Lumpur">KUALA LUMPUR</option>
-                                <option type="text"value="Labuan" label="Labuan">LABUAN</option>
-                                <option type="text"value="Putrajaya" label="Putrajaya">PUTRAJAYA</option>
-                            </select>
-                        </div>
-                        <div class="mb-2">
-                            <label class="form-label">Country*</label>
-                            <select class="form-select" name="country" id="country" style="text-transform: uppercase;">
-                                <option type="text" value="MALAYSIA" label="MALAYSIA" selected="selected">MALAYSIA</option>
-                            </select>
+                        <div class="row mb-2">
+                            <div class="col-sm-4">
+                                <label class="form-label">Country*</label>
+                                <select class="form-select" name="country" id="country" style="text-transform: uppercase;">
+                                    <option type="text" value="MY" label="MALAYSIA" selected="selected">MALAYSIA</option>
+
+
+                                    <?php $countries = getCountryBranch()?>
+
+                                    @foreach ($countries as $country)
+                                        <option value="{{ $country->countryID }}"
+                                            label="{{ $country->CountryName }}">{{ $country->CountryName }}</option>
+                                    @endforeach
+
+
+                                </select>
+                            </div>
+                            <div class="col-sm-4">
+                                <label class="form-label">State*</label>
+                                <select class="form-select" name="state" id="state" style="text-transform: uppercase;">
+                                    <option type="text" value="" selected="selected">PLEASE CHOOSE</option>
+
+                                    <?php $states = getStateBranch()?>
+
+                                    @foreach ($states as $state)
+                                        <option value="{{ $state->stateName }}"
+                                            label="{{ $state->stateName }}">{{ $state->stateName }}</option>
+                                    @endforeach
+
+                                </select>
+
+                            </div>
+                            <div class="col-sm-4">
+                                <label class="form-label">Postcode*</label>
+
+                                <select class="form-select" name="postcode" id="postcode"style="text-transform: uppercase;">
+                                    <option type="text" value="" selected="selected">PLEASE CHOOSE</option>
+
+                                    <?php $postcodes = getPostcodeBranch()?>
+
+                                    @foreach ($postcodes as $postcode)
+                                        <option value="{{ $postcode->postcode }}"
+                                            label="{{ $postcode->postcode }}">{{ $postcode->postcode }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
                         </div>
                 </div>
 
@@ -204,11 +223,18 @@
                 </div>
                 <div class="modal-body">
                     <form id="editForm">
+                        <input type="hidden" class="form-control" name="id" id="idB" placeholder="">
 
-                        <div class="mb-3">
-                            <label class="form-label">Branch Code*</label>
-                            <input type="text" class="form-control" name="branchCode" id="branchCodeE" maxlength="100" placeholder="BRANCH CODE" >
-                            <input type="hidden" class="form-control" name="id" id="idB" placeholder="">
+
+                        <div class="mb-2">
+                            <label class="form-label">Company Name*</label>
+                            <select class="form-select" name="companyId" id="companyIdE" style="text-transform: uppercase;">
+                                <option type="text"value="" label="Select Company" selected="selected">Select Company </option>
+                                <?php $companys = getCompany() ?>
+                                @foreach ($companys as $company)
+                                <option type="text"value="{{$company->id}}" >{{$company->companyName}}</option>
+                                @endforeach
+                            </select>
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Branch Name*</label>
@@ -216,7 +242,7 @@
                         </div>
                         <div class="mb-2">
                             <label class="form-label">Branch Type</label>
-                            <select class="form-select" name="branchType" id="branchType">
+                            <select class="form-select" name="branchType" id="branchTypeE">
                                 <option value="">SELECT BRANCH TYPE</option>
                                 <option value="HEADQUARTERS">HEADQUARTERS </option>
                                 <option value="STATE">STATE </option>
@@ -234,16 +260,7 @@
                             </select>
                         </div> --}}
 
-                        <div class="mb-2">
-                            <label class="form-label">Company Name*</label>
-                            <select class="form-select" name="companyId" id="companyIdE" style="text-transform: uppercase;">
-                                <option type="text"value="" label="Select Company" selected="selected">Select Company </option>
-                                <?php $companys = getCompany() ?>
-                                @foreach ($companys as $company)
-                                <option type="text"value="{{$company->id}}" >{{$company->companyName}}</option>
-                                @endforeach
-                            </select>
-                        </div>
+
                         <div class="mb-2">
                             <label class="form-label">Address 1*</label>
                             <input type="text" class="form-control" name="address" id="addressE"  maxlength="100" placeholder="ADDRESS 1" >
@@ -252,48 +269,60 @@
                             <label class="form-label">Address 2</label>
                             <input type="text" class="form-control" name="address2" id="address2E" maxlength="100" placeholder="ADDRESS 2" >
                         </div>
-                        <div class="mb-2">
-                            <label class="form-label">Postcode</label>
-                            <input type="text" class="form-control" name="postcode" id="postcodeE" placeholder="POSTCODE" aria-describedby="postcode">
-                        </div>
+
+
                         <div class="mb-2">
                             <label class="form-label">City*</label>
                             <input type="text" class="form-control" name="city" id="cityE" placeholder="CITY" >
                         </div>
-                        <div class="mb-2">
-                            <label class="form-label">State*</label>
-                            <select type="text" class="form-select" name="state" id="stateE" style="text-transform: uppercase;">
-                                <option type="text"value="" label="Select State " selected="selected">Select State </option>
-                                <option type="text"value="Johor" label="Johor">JOHOR</option>
-                                <option type="text"value="Kedah" label="Kedah">KEDAH</option>
-                                <option type="text"value="Kelantan" label="Kelantan">KELANTAN</option>
-                                <option type="text"value="Negeri Sembilan" label="Negeri Sembilan">NEGERI SEMBILAN</option>
-                                <option type="text"value="Pahang" label="Pahang">PAHANG</option>
-                                <option type="text"value="Penang" label="Penang">PENANG</option>
-                                <option type="text"value="Perak" label="Perak">PERAK</option>
-                                <option type="text"value="Perlis" label="Perlis">PERLIS</option>
-                                <option type="text"value="Sabah" label="Sabah">SABAH</option>
-                                <option type="text"value="Sarawak" label="Sarawak">SARAWAK</option>
-                                <option type="text"value="Selangor" label="Selangor">SELANGOR</option>
-                                <option type="text"value="Terengganu" label="Terengganu">TERENGGANU</option>
-                                <option type="text"value="Kuala Lumpur" label="Kuala Lumpur">KUALA LUMPUR</option>
-                                <option type="text"value="Labuan" label="Labuan">LABUAN</option>
-                                <option type="text"value="Putrajaya" label="Putrajaya">PUTRAJAYA</option>
-                            </select>
-                        </div>
-                        <div class="mb-2">
-                            <label class="form-label">Country*</label>
-                            <select class="form-select" name="country" id="countryE" style="text-transform: uppercase;">
-                                <option type="text"value="" label="malaysia" selected="selected">Select Country</option>
-                            </select>
-                        </div>
-                </div>
+                        <div class="row mb-2">
+                            <div class="col-sm-4">
+                                <label class="form-label">Country*</label>
+                                <select class="form-select" name="country" id="countryE" style="text-transform: uppercase;">
+                                    <option >PLEASE CHOOSE</option>
+                                    <?php $countries = getCountryBranch()?>
 
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button href="javascript:;" class="btn btn-primary" id="updateButton">Update</button>
-                </div>
-                </form>
+                                    @foreach ($countries as $country)
+                                        <option value="{{ $country->countryID }}"
+                                            label="{{ $country->CountryName }}">{{ $country->CountryName }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="col-sm-4">
+                                <label class="form-label">State*</label>
+                                <select class="form-select" name="state" id="stateE" style="text-transform: uppercase;">
+                                    <option  label="" selected="selected">Please Choose</option>
+                                <?php $states = getStateBranch()?>
+
+                                @foreach ($states as $state)
+                                <option value="{{ $state->stateName }}"
+                                    label="{{ $state->stateName }}">{{ $state->stateName }}</option>
+                                 @endforeach
+
+
+
+                                </select>
+                            </div>
+                            <div class="col-sm-4">
+                                <label class="form-label">Postcode*</label>
+                                <select class="form-select" name="postcode" id="postcodeE" style="text-transform: uppercase;">
+                                    <option type="text"value="" label="" selected="selected">Please Choose</option>
+                                <?php $postcodes = getPostcodeBranch()?>
+
+                                @foreach ($postcodes as $postcode)
+                                    <option value="{{ $postcode->postcode }}"
+                                        label="{{ $postcode->postcode }}">{{ $postcode->postcode }}</option>
+                                @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button href="javascript:;" class="btn btn-primary" id="updateButton">Update</button>
+                        </div>
+                    </form>
             </div>
         </div>
     </div>

@@ -88,14 +88,14 @@ $(document).ready(function () {
         $("#addFormState").validate({
             // Specify validation rules
             rules: {
-                addCountry1: "required",
-                addState1: "required",
-                addStateCode1: "required",
+                countryID: "required",
+                stateName: "required",
+                stateCode: "required",
             },
             messages: {
-                addCountry1: "Please Insert Country Name ",
-                addState1: "Please Insert State Name",
-                addStateCode1: "Please Insert State Code",
+                countryID: "Please Insert Country Name ",
+                stateName: "Please Insert State Name",
+                stateCode: "Please Insert State Code",
             },
             submitHandler: function (form) {
                 requirejs(["sweetAlert2"], function (swal) {
@@ -135,14 +135,14 @@ $(document).ready(function () {
     $("#saveButtonLocation").click(function (e) {
         $("#addFormLocation").validate({
             rules: {
-                addCountry2: "required",
-                addState2: "required",
-                addDistrictName2: "required",
+                countryID: "required",
+                stateID: "required",
+                postcode: "required",
             },
             messages: {
-                addCountry2: "Please Insert Country Name ",
-                addState2: "Please Choose State Name",
-                addDistrictName2: "Please Insert District Name",
+                countryID: "Please Insert Country Name ",
+                stateID: "Please Choose State Name",
+                postcode: "Please Insert Postcode",
             },
             submitHandler: function (form) {
                 requirejs(["sweetAlert2"], function (swal) {
@@ -184,7 +184,7 @@ $(document).ready(function () {
 
     $("#deleteState").click(function (e) {
         id = $(this).data("id");
-    
+
         $("#deleteForm").validate({
             rules: {
                 addCountry3: "required",
@@ -197,7 +197,7 @@ $(document).ready(function () {
             submitHandler: function (form) {
                 requirejs(["sweetAlert2"], function (swal) {
                     var data = new FormData(document.getElementById("deleteForm"));
-    
+
                     swal({
                         title: "Are you sure to delete state?",
                         type: "error",
@@ -231,5 +231,5 @@ $(document).ready(function () {
                 });
             },
         });
-    });    
+    });
 });

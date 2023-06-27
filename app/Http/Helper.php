@@ -24,6 +24,7 @@ use App\Models\ProjectLocation;
 use App\Models\ProjectMember;
 use App\Models\Role;
 use App\Models\TimesheetEvent;
+use App\Models\Location;
 use App\Models\TypeOfLogs;
 use App\Models\Unit;
 use App\Models\UserProfile;
@@ -667,12 +668,12 @@ if (!function_exists('getCountries')) {
 }
 
 if (!function_exists('getStateName')) {
-    function getStateName($stateCode)
+    function getStateName($stateId)
     {
         $states = getStates();
 
-        if (isset($states[$stateCode])) {
-            return $states[$stateCode];
+        if (isset($states[$stateId])) {
+            return $states[$stateId];
         }
 
         return '';
@@ -688,7 +689,52 @@ if (!function_exists('getStates')) {
             return null;
         }
 
-        return $data->pluck('stateName', 'stateCode')->toArray();
+        return $data->pluck('stateName', 'id')->toArray();
+    }
+}
+
+if (!function_exists('getCountryBranch')) {
+    function getCountryBranch()
+    {
+        $data = Country::all();
+        // $tableName  = 'Location';
+
+        // $data = DB::select("SELECT * FROM $tableName");
+
+        if (blank($data)) {
+            $data = [];
+
+        }
+
+        return $data;
+    }
+}
+
+if (!function_exists('getStateBranch')) {
+    function getStateBranch()
+    {
+        $data = State::all();
+
+        if (blank($data)) {
+            $data = [];
+        }
+
+
+        return $data;
+    }
+}
+
+if (!function_exists('getPostcodeBranch')) {
+    function getPostcodeBranch()
+    {
+        $data = Location::all();
+
+        if (blank($data)) {
+            $data = [];
+        }
+
+
+        return $data;
     }
 }
 
