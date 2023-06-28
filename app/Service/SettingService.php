@@ -1087,6 +1087,7 @@ class SettingService
     public function createNews($r)
     {
         $input = $r->input();
+        
         if ($_FILES['file']['name']) {
             $payslip = upload($r->file('file'));
             $input['file'] = $payslip['filename'];

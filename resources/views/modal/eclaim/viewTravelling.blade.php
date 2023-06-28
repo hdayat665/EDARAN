@@ -269,7 +269,7 @@
                                                     <label class="form-label">=</label>
                                                 </div>
                                                 <div class="col-md-3">
-                                                    <input type="text" class="form-control" readonly id="hnTotal" value="0">
+                                                    <input type="text" class="form-control" readonly id="hnTotalUpdate" value="0">
                                                 </div>
                                             </div>
                                             <div class="row p-2">
@@ -292,7 +292,7 @@
                                                     <label class="form-label">=</label>
                                                 </div>
                                                 <div class="col-md-3">
-                                                    <input type="text" readonly class="form-control" id="lnTotal" value="0">
+                                                    <input type="text" readonly class="form-control" id="lnTotalUpdate" value="0">
                                                 </div>
                                             </div>
                                             
@@ -317,9 +317,12 @@
                                                 </div>
                                             </div>
                                             <div class="row p-2">
-                                                
-                                                <div class="col-md-8">
-                                                    <label class="form-label">Total Subsistence Allowance & Accommodation (A+B)</label>
+                                            
+                                                <div class="col-md-6">
+                                                    <a id="file_upload" href="#"></a>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <label class="form-label">Total (A+B)</label>
                                                 </div>
                                                 <div class="col-md-1">
                                                     <label class="form-label">=</label>
