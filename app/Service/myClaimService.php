@@ -1461,11 +1461,28 @@ class myClaimService
     public function updateSubsMtc($r)
     {
         $input = $r->input();
-        //pr($input);
+        
         $id = $input['id'];
         $general_id = $input['general_id'];
 
         $user = TravelClaim::where('id', $id)->first();
+
+        if (!empty($_FILES['file_upload']['name']) && is_array($_FILES['file_upload']['name'])) {
+            $filenames = array();
+            foreach ($_FILES['file_upload']['name'] as $key => $filename) {
+                $tmp_name = $_FILES['file_upload']['tmp_name'][$key];
+                if (!empty($filename) && !empty($tmp_name)) {
+                    $fileInfo = TravelFile($filename, $tmp_name);
+                    if ($fileInfo !== null) {
+                        $filenames[] = $fileInfo['filename'];
+                    }
+                }
+            }
+            $fileString = implode(',', $filenames);
+        }
+        $input['file_upload'] = $fileString ?? '';
+
+        //pr($input['file_upload']);
 
         if (!$user) {
             $data['status'] = config('app.response.error.status');
@@ -1473,7 +1490,7 @@ class myClaimService
             $data['title'] = config('app.response.error.title');
             $data['msg'] = 'user not found';
         } else {
-
+            
             TravelClaim::where('id', $id)->update($input);
 
             $personalClaims = PersonalClaim::where([['tenant_id', Auth::user()->tenant_id], ['general_id', $general_id]])->get();
@@ -1511,6 +1528,22 @@ class myClaimService
         $general_id = $input['general_id'];
         $user = PersonalClaim::where('id', $id)->first();
 
+        if (!empty($_FILES['file_upload']['name']) && is_array($_FILES['file_upload']['name'])) {
+            $filenames = array();
+            foreach ($_FILES['file_upload']['name'] as $key => $filename) {
+                $tmp_name = $_FILES['file_upload']['tmp_name'][$key];
+                if (!empty($filename) && !empty($tmp_name)) {
+                    $fileInfo = PersonalFile($filename, $tmp_name);
+                    if ($fileInfo !== null) {
+                        $filenames[] = $fileInfo['filename'];
+                    }
+                }
+            }
+        }
+        $fileString = implode(',', $filenames);
+
+        $input['file_upload'] = $fileString ?? '';
+
         if (!$user) {
             $data['status'] = config('app.response.error.status');
             $data['type'] = config('app.response.error.type');
@@ -1542,7 +1575,7 @@ class myClaimService
             $data['status'] = config('app.response.success.status');
             $data['type'] = config('app.response.success.type');
             $data['title'] = config('app.response.success.title');
-            $data['msg'] = 'Vehicle is updated';
+            $data['msg'] = 'Data is updated';
         }
 
         return $data;
