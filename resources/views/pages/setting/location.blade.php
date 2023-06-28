@@ -26,32 +26,22 @@
                 </thead>
                 <tbody>
                     <?php $id = 0 ?>
-                    @if ($locations)
-                        @foreach ($locations as $location)
-                        <?php $id++ ?>
-                        <tr class="odd gradeX">
-                            <td width="1%" class="fw-bold text-dark">{{$id}}</td>
-                            <td style="text-transform: uppercase;">
-                            @php
-                                $countryId = $location->countryID;
-                                $countryName = getCountryName($countryId);
-                                echo $countryName;
-                            @endphp
-                            {{-- {{$location->countryID}} --}}
-                            </td>
-                            <td style="text-transform: uppercase;">
-                            @php
-                                $stateId = $location->stateID;
-                                $stateName = getStateName($stateId);
-                                echo $stateName;
-                            @endphp
-                            </td>
-                            <td style="text-transform: uppercase;">{{$location->postcode}}</td>
-                            <td>
-                                <a data-bs-toggle="modal" id="deleteLocation" data-id="{{$location->id}}" class="btn btn-danger">Delete</a>
-                            </td>
-                        </tr>
-                        @endforeach
+                        @if ($locations)
+                        @foreach ($locations as $l)
+                            <?php $id++ ?>
+
+                            <tr class="odd gradeX">
+                                <td>{{ $id }}</td>
+                                <td>{{$l->CountryName}}</td>
+                                <td>{{$l->stateName}}</td>
+                                <td>{{$l->postcode}}</td>
+                                <td>
+                                    <a data-bs-toggle="modal" id="deleteLocation" data-id="{{$l->id}}" class="btn btn-danger">Delete</a>
+                                </td>
+
+                            </tr>
+
+                    @endforeach
                     @endif
                 </tbody>
             </table>

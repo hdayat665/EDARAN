@@ -1319,9 +1319,21 @@ class SettingService
         return $data;
     }
 
+    // public function locationView()
+    // {
+    //     $data = Location::where('tenant_id', Auth::user()->tenant_id)->orderBy('id', 'desc')->get();
+
+    //     return $data;
+    // }
+
+
     public function locationView()
     {
-        $data['locations'] = Location::where('tenant_id', Auth::user()->tenant_id)->orderBy('id', 'desc')->get();
+        $data = Location::select('location.id', 'settingcountry.CountryName', 'states.stateName', 'location.postcode')
+            ->join('settingcountry', 'location.countryID', '=', 'settingcountry.countryID')
+            ->join('states', 'location.stateID', '=', 'states.id')
+            ->get();
+
 
         return $data;
     }
