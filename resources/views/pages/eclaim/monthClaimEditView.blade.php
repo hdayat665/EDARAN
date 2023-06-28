@@ -77,7 +77,7 @@
                                                 <label class="form-label">Travelling</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <input type="text" class="form-control" readonly value='RM {{ $summaryTravelling[0]->total_millage ?? 0 }}'>
+                                                <input type="text" class="form-control" readonly value='RM {{ $totalcarmotor ?? 0 }}'>
                                             </div>
                                         </div>
                                         <div class="row p-2">

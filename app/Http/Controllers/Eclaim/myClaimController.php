@@ -246,6 +246,7 @@ class myClaimController extends Controller
         //pr($data['travelClaims']);
         $data['subsClaims'] = $mcs->getSubsClaimByGeneralId($id);
         $data['summaryTravelling'] = $mcs->getSummaryTravellingClaimByGeneralId($id) ?? 0;
+        //pr($data['summaryTravelling']);
         $data['totalCar'] = $mcs->getTotalCarClaimByGeneralId($id) ?? 0;
         $data['totalMotor'] = $mcs->getTotalMotorClaimByGeneralId($id) ?? 0;
         $total_millage = isset($data['summaryTravelling'][0]) ? $data['summaryTravelling'][0]->total_millage : 0;
@@ -256,21 +257,10 @@ class myClaimController extends Controller
         $data['personalClaims'] = $mcs->getPersonalClaimByGeneralId($id);
         $data['summaryOthers'] = $mcs->getSummaryOthersByGeneralId($id);
         //pr($data['summaryOthers']);
+        
 
-        // Calculate the sum of the values
-        $totalAmount = $data['summaryOthers'][0]->total_amount ?? 0;
-        $totalSubs = $data['summarySubs'][0]->total_subs ?? 0;
-        $totalAcc = $data['summarySubs'][0]->total_acc ?? 0;
-        $totalMillage = $data['summaryTravelling'][0]->total_millage ?? 0;
-        $totalPetrol = $data['summaryTravelling'][0]->total_petrol ?? 0;
-        $totalToll = $data['summaryTravelling'][0]->total_toll ?? 0;
-        $totalParking = $data['summaryTravelling'][0]->total_parking ?? 0;
-        $totalTravelling = $data['summaryTravelling'][0]->total_travelling ?? 0;
 
-        $sum = $totalAmount + $totalSubs + $totalAcc + $totalMillage + $totalPetrol + $totalToll + $totalParking;
-
-        // Add the sum to the $data array
-        $data['sum'] = $sum;
+        
         //
         $generalClaim = $mcs->getGeneralClaimById($id);
         $data['month'] = $generalClaim->month ?? '';
@@ -410,8 +400,25 @@ class myClaimController extends Controller
         }
         
         $data['ansMotor']= $ansMotor;
+
+        $totalcarmotor = $ansMotor +$ansCar;
         //pr($data['ansMotor']);
-        
+        // Calculate the sum of the values
+        $totalAmount = $data['summaryOthers'][0]->total_amount ?? 0;
+        $totalSubs = $data['summarySubs'][0]->total_subs ?? 0;
+        $totalAcc = $data['summarySubs'][0]->total_acc ?? 0;
+        $totalMillage = $data['summaryTravelling'][0]->total_millage ?? 0;
+        $totalPetrol = $data['summaryTravelling'][0]->total_petrol ?? 0;
+        $totalToll = $data['summaryTravelling'][0]->total_toll ?? 0;
+        $totalParking = $data['summaryTravelling'][0]->total_parking ?? 0;
+        $totalTravelling = $data['summaryTravelling'][0]->total_travelling ?? 0;
+
+        $sum = $totalAmount + $totalSubs + $totalAcc + $totalcarmotor + $totalPetrol + $totalToll + $totalParking;
+        $totalTravellings = $totalPetrol+$totalParking+$totalToll+$totalcarmotor;
+        // Add the sum to the $data array
+        $data['sum'] = $sum;
+        $data['totalcarmotor'] = $totalcarmotor;
+        $data['totalTravellings'] = $totalTravellings;
         //pr($data['food']);
         return view('pages.eclaim.monthClaimEditView', $data);
     }

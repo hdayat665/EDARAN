@@ -27,19 +27,37 @@ $("document").ready(function () {
       }
       $("#hotelcvUpdate,#hnUpdate,#lnUpdate").change(
         function () {
-            var a = parseInt($("#hotelcvUpdate").val());
-            var b = parseInt($("#hnUpdate").val());
-            var c = parseInt($("#lnUpdate").val());
-            var d = parseInt($("#lodgingcvUpdate").val());
-            var e = parseInt($("#TSUpdate").val());
-            
-            $("#hnTotal").val(a*b);
-            $("#lnTotal").val(c*d);
-            $("#TAVUpdate").val((a*b)+(c*d));
-            $("#total2Update").val((a*b)+(c*d)+e);
+            var a = parseInt($("#hotelcvUpdate").val())|| 0;
+            var b = parseInt($("#hnUpdate").val())|| 0;
+            var c = parseInt($("#lnUpdate").val())|| 0;
+            var d = parseInt($("#lodgingcvUpdate").val())|| 0;
+            var e = parseInt($("#TSUpdate").val())|| 0;
+            var f = parseFloat((a*b)+(c*d)).toFixed(2);
+            var g = parseFloat((a*b)+(c*d)+e).toFixed(2);
+
+            $("#hnTotalUpdate").val(a*b);
+            $("#lnTotalUpdate").val(c*d);
+            $("#TAVUpdate").val(f);
+            $("#total2Update").val(g);
         }
     );
-
+    
+    $("#hotelcv,#hn,#ln").change(
+        function () {
+            var a = parseInt($("#hotelcv").val())|| 0;
+            var b = parseInt($("#hn").val())|| 0;
+            var c = parseInt($("#ln").val())|| 0;
+            var d = parseInt($("#lodgingcv").val())|| 0;
+            var e = parseInt($("#TS").val())|| 0;
+            var f = parseFloat((a*b)+(c*d)).toFixed(2);
+            var g = parseFloat((a*b)+(c*d)+e).toFixed(2);
+            $("#hnTotal").val(a*b);
+            $("#lnTotal").val(c*d);
+            
+            $("#TAV").val(f);
+            $("#total2").val(g);
+        }
+    );
       document.getElementById('hotelcvUpdate').addEventListener('input', function() {
         const hiddenInput = document.getElementById('hotelcvUpdateHide');
         const maxValue = parseInt(hiddenInput.value);  // Change this value to your desired maximum
@@ -381,6 +399,7 @@ $("#travelingUpdate").DataTable({
                 var formattedEndDate = endDate.substr(0, 10);
                 var travelDuration = firstResponse.travel_duration;
                 var desc = firstResponse.desc;
+                var file_upload = firstResponse.file_upload;
                 var project = firstResponse.project_id;
                 var hotel = parseFloat(firstResponse.hotel_value);
                 var startDateFood = formattedStartDate;
@@ -395,6 +414,19 @@ $("#travelingUpdate").DataTable({
                 var days = Math.floor(durationInMs / (1000 * 60 * 60 * 24));
                 var hours = Math.floor((durationInMs % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
                 var minutes = Math.floor((durationInMs % (1000 * 60 * 60)) / (1000 * 60));
+                if (!file_upload) {
+                    file_upload = "No Attachment";
+                } else {
+                    var fileLinks = file_upload.split(",");
+                    file_upload = "";
+                    for (var i = 0; i < fileLinks.length; i++) {
+                        var fileLink = fileLinks[i].trim();
+                        file_upload += `<a href="/storage/TravelFile/${fileLink}" target="_blank">${fileLink}</a>`;
+                        if (i < fileLinks.length - 1) {
+                            file_upload += "<br>";
+                        }
+                    }
+                }
                 
                 // Calculate the number of breakfast, lunch, and dinner days
                 var breakfastDaysUpdate = 0;
@@ -482,9 +514,9 @@ $("#travelingUpdate").DataTable({
                 var lodgingValue = parseFloat($("#lodgingcvUpdate").val());
                 var totalHotel = dayHotel*hotel;
                 var totalLodging = dayLodging*lodgingValue;
-                $("#hnTotal").val(totalHotel);
+                $("#hnTotalUpdate").val(totalHotel);
                 
-                $("#lnTotal").val(totalLodging);
+                $("#lnTotalUpdate").val(totalLodging);
                 $("#TAVUpdate").val(totalHotel+totalLodging);
                 
                 $("#total2Update").val(totalHotel+totalLodging+(a * b + c * d + e * f));
@@ -502,6 +534,9 @@ $("#travelingUpdate").DataTable({
                     $("#desc_update").val(desc);
                     $("#project_update").val(projectName);
                     $("#hotelcvUpdate").val(hotel);
+                    $("#file_upload").html(file_upload);
+                    
+
                 }).fail(function() {
                     console.log('Failed to fetch project name.');
                 });
@@ -1480,7 +1515,7 @@ $("#updateSubsMtcBtn").click(function (e) {
                 var data = new FormData(
                     document.getElementById("updateSubsMtc")
                 );
-
+                console.log(data);   
                 $.ajax({
                     type: "POST",
                     url: "/updateSubsMtc",
