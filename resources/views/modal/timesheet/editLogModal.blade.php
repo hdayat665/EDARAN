@@ -123,6 +123,7 @@
                             <label for="issuing-country" class="form-label">Total Hours</label>
                             <input type="text" readonly id="total_hour_edit" name="total_hour" class="form-control" aria-describedby="dob">
                             <input type="hidden" readonly id="id" class="form-control" aria-describedby="dob">
+                            <input type="hidden" readonly id="statusappeal" class="form-control" aria-describedby="dob">
                         </div>
                     </div>
                     

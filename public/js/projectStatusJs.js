@@ -139,7 +139,7 @@ $(document).ready(function () {
 
     $("#statusAll").DataTable({
         // scrollY: false,
-        scrollX: true,
+        // scrollX: true,
         paging: true,
         lengthMenu: [
             [5, 10, 15, 20, -1],
@@ -152,11 +152,16 @@ $(document).ready(function () {
             "<'row'<'col-sm-12'tr>>" +
             "<'row'<'col-sm-4'i><'col-sm-4 text-center'><'col-sm-4'p>>",
         autoWidth: true,
+        initComplete: function (settings, json) {
+            $("#statusAll").wrap(
+                "<div style='overflow:auto; width:100%;position:relative;'></div>"
+            );
+        },
     });
 
     $("#customerTable").DataTable({
         // scrollY: false,
-        scrollX: true,
+        // scrollX: true,
         paging: true,
         lengthMenu: [
             [5, 10, 15, 20, -1],
@@ -169,11 +174,16 @@ $(document).ready(function () {
             "<'row'<'col-sm-12'tr>>" +
             "<'row'<'col-sm-4'i><'col-sm-4 text-center'><'col-sm-4'p>>",
         autoWidth: true,
+        initComplete: function (settings, json) {
+            $("#customerTable").wrap(
+                "<div style='overflow:auto; width:100%;position:relative;'></div>"
+            );
+        },
     });
 
     $("#employeeTable").DataTable({
         // scrollY: false,
-        scrollX: true,
+        // scrollX: true,
         paging: true,
         lengthMenu: [
             [5, 10, 15, 20, -1],
@@ -186,11 +196,16 @@ $(document).ready(function () {
             "<'row'<'col-sm-12'tr>>" +
             "<'row'<'col-sm-4'i><'col-sm-4 text-center'><'col-sm-4'p>>",
         autoWidth: true,
+        initComplete: function (settings, json) {
+            $("#employeeTable").wrap(
+                "<div style='overflow:auto; width:100%;position:relative;'></div>"
+            );
+        },
     });
 
     $("#projectMemberTable").DataTable({
         // scrollY: 50,
-        scrollX: true,
+        // scrollX: true,
         paging: true,
         lengthMenu: [
             [5, 10, 15, 20, -1],
@@ -203,11 +218,16 @@ $(document).ready(function () {
             "<'row'<'col-sm-12'tr>>" +
             "<'row'<'col-sm-4'i><'col-sm-4 text-center'><'col-sm-4'p>>",
         autoWidth: true,
+        initComplete: function (settings, json) {
+            $("#projectMemberTable").wrap(
+                "<div style='overflow:auto; width:100%;position:relative;'></div>"
+            );
+        },
     });
 
     $("#finYearTable").DataTable({
         // scrollY: 50,
-        scrollX: true,
+        // scrollX: true,
         paging: true,
         lengthMenu: [
             [5, 10, 15, 20, -1],
@@ -221,11 +241,16 @@ $(document).ready(function () {
             "<'row'<'col-sm-12'tr>>" +
             "<'row'<'col-sm-4'i><'col-sm-4 text-center'><'col-sm-4'p>>",
         autoWidth: true,
+        initComplete: function (settings, json) {
+            $("#finYearTable").wrap(
+                "<div style='overflow:auto; width:100%;position:relative;'></div>"
+            );
+        },
     });
 
     $("#accManagerTable").DataTable({
         // scrollY: 50,
-        scrollX: true,
+        // scrollX: true,
         paging: true,
         lengthMenu: [
             [5, 10, 15, 20, -1],
@@ -238,11 +263,16 @@ $(document).ready(function () {
             "<'row'<'col-sm-12'tr>>" +
             "<'row'<'col-sm-4'i><'col-sm-4 text-center'><'col-sm-4'p>>",
         autoWidth: true,
+        initComplete: function (settings, json) {
+            $("#accManagerTable").wrap(
+                "<div style='overflow:auto; width:100%;position:relative;'></div>"
+            );
+        },
     });
 
     $("#projManagerTable").DataTable({
         // scrollY: 50,
-        scrollX: true,
+        // scrollX: true,
         paging: true,
         lengthMenu: [
             [5, 10, 15, 20, -1],
@@ -255,11 +285,16 @@ $(document).ready(function () {
             "<'row'<'col-sm-12'tr>>" +
             "<'row'<'col-sm-4'i><'col-sm-4 text-center'><'col-sm-4'p>>",
         autoWidth: true,
+        initComplete: function (settings, json) {
+            $("#projManagerTable").wrap(
+                "<div style='overflow:auto; width:100%;position:relative;'></div>"
+            );
+        },
     });
 
     $("#statusTable").DataTable({
         // scrollY: 50,
-        scrollX: true,
+        // scrollX: true,
         paging: true,
         lengthMenu: [
             [5, 10, 15, 20, -1],
@@ -272,6 +307,11 @@ $(document).ready(function () {
             "<'row'<'col-sm-12'tr>>" +
             "<'row'<'col-sm-4'i><'col-sm-4 text-center'><'col-sm-4'p>>",
         autoWidth: true,
+        initComplete: function (settings, json) {
+            $("#statusTable").wrap(
+                "<div style='overflow:auto; width:100%;position:relative;'></div>"
+            );
+        },
     });
 
     // $(document).on('change', "#select7", function() {

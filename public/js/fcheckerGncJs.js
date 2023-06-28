@@ -10,7 +10,7 @@ $(document).ready(function () {
                 "<div style='overflow:auto; width:100%;position:relative;'></div>"
             );
         },
-        scrollX: true,
+        // scrollX: true,
     });
     $("#traveltable").DataTable({
         responsive: false,
@@ -23,7 +23,7 @@ $(document).ready(function () {
                 "<div style='overflow:auto; width:100%;position:relative;'></div>"
             );
         },
-        scrollX: true,
+        // scrollX: true,
     });
     // $(document).on("click", "#btn-view-claim", function () {
     //     $("#modal-view-claim").modal("show");

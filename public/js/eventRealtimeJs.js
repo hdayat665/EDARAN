@@ -355,8 +355,12 @@ $("#timesheetapproval").DataTable({
         [5, 10, 25, 50, "All"],
     ],
     responsive: true,
-    scrollX: true,
-
+    // scrollX: true,
+    initComplete: function (settings, json) {
+        $("#timesheetapproval").wrap(
+            "<div style='overflow:auto; width:100%;position:relative;'></div>"
+        );
+    },
     dom: '<"row"<"col-sm-4"l><"col-sm-4 text-center"B><"col-sm-4"f>>t<"row"<"col-sm-12"ip>>',
     buttons: [
         {
@@ -390,7 +394,12 @@ $("#tableviewparticipant").DataTable({
         [5, 10, 25, 50, -1],
         [5, 10, 25, 50, "All"],
     ],
-    lengthChange: false,
+    initComplete: function (settings, json) {
+        $("#tableviewparticipant").wrap(
+            "<div style='overflow:auto; width:100%;position:relative;'></div>"
+        );
+    },
+    // lengthChange: false,
 });
 
 $("#statusparticipant").DataTable({
@@ -400,6 +409,11 @@ $("#statusparticipant").DataTable({
         [5, 10, 25, 50, -1],
         [5, 10, 25, 50, "All"],
     ],
+    initComplete: function (settings, json) {
+        $("#statusparticipant").wrap(
+            "<div style='overflow:auto; width:100%;position:relative;'></div>"
+        );
+    },
 });
 
 $().ready = (function () {

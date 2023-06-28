@@ -10,7 +10,11 @@ $(document).ready(function () {
             [5, 10, 25, 50, -1],
             [5, 10, 25, 50, "All"],
         ],
-        // scrollX:true,
+        initComplete: function (settings, json) {
+            $("#customerTable").wrap(
+                "<div style='overflow:auto; width:100%;position:relative;'></div>"
+            );
+        },
     });
 
     $(document).ready(function () {

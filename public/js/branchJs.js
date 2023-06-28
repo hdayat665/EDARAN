@@ -17,10 +17,16 @@ $(document).ready(function () {
 
     $("#tablebranch").DataTable({
         responsive: false,
+        scrollX: true,
         lengthMenu: [
             [5, 10, 25, 50, -1],
             [5, 10, 25, 50, "All"],
         ],
+        initComplete: function (settings, json) {
+            $("#tablebranch").wrap(
+                "<div style='overflow:auto; width:100%;position:relative;'></div>"
+            );
+        },
     });
 
     $(document).on("click", "#addButton", function () {
@@ -33,18 +39,18 @@ $(document).ready(function () {
 
         vehicleData.then(function (data) {
             console.log(data);
+
             $("#companyIdE").val(data.companyId);
             $("#branchNameE").val(data.branchName);
             $("#branchCodeE").val(data.branchCode);
             //$('#branchTypeE').val(data.branchType);
-            $("#branchTypeE").prop("selectedIndex", data.branchType);
+            $("#branchTypeE").val(data.branchType);
             $("#postcodeE").val(data.postcode);
             $("#addressE").val(data.address);
             $("#address2E").val(data.address2);
             $("#cityE").val(data.city);
             $("#stateE").val(data.state);
-            $("#countryE").prop("selectedIndex", data.branchType);
-            //$('#countryE').val(data.country);
+            $("#countryE").val(data.country);
             $("#idB").val(data.id);
         });
         $("#editModal").modal("show");
@@ -131,10 +137,10 @@ $(document).ready(function () {
                 $("#longitude").val(longitude);
                 $("#fulladdress").val(address);
             } else {
-                alert(
-                    "Geocode was not successful for the following reason: " +
-                        json.status
-                );
+                // alert(
+                //     "Geocode was not successful for the following reason: " +
+                //         json.status
+                // );
             }
         });
     }
@@ -143,30 +149,22 @@ $(document).ready(function () {
         $("#addForm").validate({
             // Specify validation rules
             rules: {
-                branchCode: "required",
+                companyId: "required",
                 branchName: "required",
                 branchType: "required",
                 unitId: "required",
                 address: "required",
-                postcode: {
-                    required: true,
-                    digits: true,
-                    rangelength: [5, 5],
-                },
+                postcode: "required",
                 city: "required",
                 state: "required",
             },
             messages: {
-                branchCode: "Please Insert Branch Code ",
+                companyId: "Please Choose Company Name ",
                 branchName: "Please Insert Branch Name",
                 branchType: "Please Choose Branch Type",
                 unitId: "Please Choose Unit Name",
                 address: "Please Insert Address 1",
-                postcode: {
-                    required: "Please Insert Postcode",
-                    digits: "Please Insert Valid Postcode",
-                    rangelength: "Please Insert Valid Postcode",
-                },
+                postcode: "Please Choose Postcode",
                 city: "Please Insert City",
                 state: "Please Choose State",
             },
@@ -211,33 +209,26 @@ $(document).ready(function () {
         $("#editForm").validate({
             // Specify validation rules
             rules: {
-                branchCode: "required",
+                companyId: "required",
                 branchName: "required",
                 branchType: "required",
                 unitId: "required",
                 address: "required",
-                postcode: {
-                    required: true,
-                    digits: true,
-                    rangelength: [5, 5],
-                },
+                postcode: "required",
                 city: "required",
                 state: "required",
             },
 
             messages: {
-                branchCode: "Please Insert Branch Code ",
+                companyId: "Please Choose Company Name ",
                 branchName: "Please Insert Branch Name",
                 branchType: "Please Choose Branch Type",
                 unitId: "Please Choose Unit Name",
                 address: "Please Insert Address 1",
-                postcode: {
-                    required: "Please Insert Postcode",
-                    digits: "Please Insert Valid Postcode",
-                    rangelength: "Please Insert Valid Postcode",
-                },
+                postcode: "Please Choose Postcode",
                 city: "Please Insert City",
                 state: "Please Choose State",
+
             },
             submitHandler: function (form) {
                 requirejs(["sweetAlert2"], function (swal) {
@@ -245,7 +236,6 @@ $(document).ready(function () {
                         document.getElementById("editForm")
                     );
                     var id = $("#idB").val();
-
                     $.ajax({
                         type: "POST",
                         url: "/updateBranch/" + id,
@@ -274,4 +264,59 @@ $(document).ready(function () {
             },
         });
     });
+
+    console.log($('#editForm').val())
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+// $(document).on("change", "#state", function () {
+//     state = $(this).val();
+//     $("#postcode")
+//         .find("option")
+//         .remove()
+//         .end()
+//         .append(
+//             '<option label="PLEASE CHOOSE" value="" selected="selected"> </option>'
+//         )
+//         .val("");
+
+    // console.log(state)
+    // function locationByStateID(state) {
+    //     return $.ajax({
+    //         type: 'GET',
+    //         url: "/locationByStateID/" + state,
+    //     });
+    // }
+
+
+
+
+//     var branch = locationByStateID(state);
+
+
+
+
+//     branch.then(function (dataBranch) {
+//         for (let i = 0; i < dataBranch.length; i++) {
+//             const branch = dataBranch[i];
+//             var opt = document.createElement("option");
+//             document.getElementById("postcode").innerHTML +=
+//                 '<option value="' +
+//                 branch["id"] +
+//                 '">' +
+//                 branch["postcode"] +
+//                 "</option>";
+//         }
+//     });
+// });

@@ -24,15 +24,58 @@ $(document).ready(function () {
                 }).then(function () {
                     if (data.type == "error") {
                     } else {
-                        $("#exampleModal").modal("hide");
-                        document.getElementById("tenant").textContent =
-                            data.data;
+
+                        // window.location.href = "/loginTenant";
+                        // $("#exampleModal").modal("hide");
+                        // document.getElementById("tenant").textContent = data.data;
+                        // $("#tenantInput").val(data.data);
+
+
+                        // var tenantElement = document.getElementById("tenant");
+                        // if (tenantElement) {
+                        //     tenantElement.innerHTML = "<strong>" + data.data + "</strong>";
+                        // }
+                        // $("#tenantInput").val(data.data);
+                        // window.location.href = "/loginTenant";
+
+
+
+                        var tenantElement = document.getElementById("tenant");
+                        if (tenantElement) {
+                            tenantElement.innerHTML = data.data;
+                        }
                         $("#tenantInput").val(data.data);
+
+
+                        // Store the value in session storage
+                        localStorage.setItem("dataValue", data.data);
+
+                        window.location.href = "/loginTenant";
+
+
                     }
+
                 });
             });
         });
     });
+
+// Retrieve the value from session storage
+var dataValue = localStorage.getItem("dataValue");
+
+
+// Update the value of the <span> element
+var tenantElement = document.getElementById("tenant");
+if (tenantElement) {
+tenantElement.innerText = dataValue || "not selected";
+}
+
+var tenantInput = document.getElementById("tenantInput");
+if (tenantInput) {
+tenantInput.value = dataValue || "";
+}
+
+
 
     $("#login").click(function (e) {
         $("#loginForm").validate({
@@ -196,7 +239,7 @@ $(document).ready(function () {
             },
         });
     });
-    
+
     $("#forgotPassEmailForm").validate({
         rules: {
             username: {
@@ -212,13 +255,13 @@ $(document).ready(function () {
         },
         submitHandler: function (form) {
             var data = new FormData(form);
-    
+
             $.ajax({
                 type: "POST",
                 url: "/forgotPassEmail",
                 data: data,
                 dataType: "json",
-    
+
                 processData: false,
                 contentType: false,
             }).then(function (data) {
@@ -240,7 +283,60 @@ $(document).ready(function () {
             });
         }
     });
-    
+
+    $("#forgotDomainEmail").click(function (e) {
+        $("#forgotDomainForm").validate({
+            // Specify validation rules
+            rules: {
+                username: {
+                    required: true,
+                    email: true
+                },
+            },
+            messages: {
+                username: {
+                    required: "Please Insert Email Address",
+                    email: "Email Address Does Not Exist"
+                },
+            },
+            // Make sure the form is submitted to the destination defined
+            // in the "action" attribute of the form when valid
+            submitHandler: function (form) {
+                requirejs(["sweetAlert2"], function (swal) {
+
+                    $("#forgotDomainEmail").prop("disabled", true);
+
+                    var data = new FormData(document.getElementById("forgotDomainForm"));
+
+                    $.ajax({
+                        type: "POST",
+                        url: "/forgotDomainEmail",
+                        data: data,
+                        dataType: "json",
+                        processData: false,
+                        contentType: false,
+                    }).then(function (data) {
+                        // console.log(data);
+                        swal({
+                            title: data.title,
+                            text: data.msg,
+                            type: data.type,
+                            confirmButtonColor: "#3085d6",
+                            confirmButtonText: "OK",
+                            allowOutsideClick: false,
+                            allowEscapeKey: false,
+                        }).then(function () {
+                            if (data.type == "error") {
+                            } else {
+                                window.location.href = "/domainName";
+                            }
+                        });
+                    });
+                });
+            },
+        });
+    });
+
 
     $("#activationButton").click(function (e) {
         $("#activationForm").validate({

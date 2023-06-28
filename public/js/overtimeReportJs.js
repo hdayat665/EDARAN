@@ -20,6 +20,11 @@ $('#timesheetapproval').DataTable({
                 columns:  [1,2,3,4,5]
             }},
     ],
+    initComplete: function (settings, json) {
+        $("#timesheetapproval").wrap(
+            "<div style='overflow:auto; width:100%;position:relative;'></div>"
+        );
+    },
 });
 
 

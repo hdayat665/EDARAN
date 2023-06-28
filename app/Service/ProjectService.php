@@ -47,9 +47,9 @@ class ProjectService
         $input['LOA_date'] = date_format(date_create($input['LOA_date']), 'Y-m-d');
         $input['contract_start_date'] = date_format(date_create($input['contract_start_date']), 'Y-m-d');
         $input['contract_end_date'] = date_format(date_create($input['contract_end_date']), 'Y-m-d');
-        $input['warranty_end_date'] = date_format(date_create($input['warranty_end_date']), 'Y-m-d');
-        $input['warranty_start_date'] = date_format(date_create($input['warranty_start_date']), 'Y-m-d');
-        $input['bank_guarantee_expiry_date'] = date_format(date_create($input['bank_guarantee_expiry_date']), 'Y-m-d');
+        // $input['warranty_end_date'] = date_format(date_create($input['warranty_end_date']), 'Y-m-d');
+        // $input['warranty_start_date'] = date_format(date_create($input['warranty_start_date']), 'Y-m-d');
+        // $input['bank_guarantee_expiry_date'] = date_format(date_create($input['bank_guarantee_expiry_date']), 'Y-m-d');
         $input['status_request'] = 'new';
         Project::create($input);
 
@@ -77,7 +77,6 @@ class ProjectService
         if (!$data) {
             $data = [];
         }
-
 
         return $data;
     }
@@ -839,7 +838,8 @@ class ProjectService
         ->first();
     
     $data['locations'] = ProjectLocation::select('id', 'location_name')
-        ->whereIn('id', explode(',', $data['projectMember']->location))
+        ->whereIn('id', explode(',', $data['projectMember']
+        ->location))
         ->get();
     
     if (!$data) {
@@ -852,6 +852,8 @@ class ProjectService
 
     public function projectAssignView($id)
     {
+        $data = [];
+        
         $data['projectMember'] = DB::table('project_member as a')
             ->leftJoin('employment as b', 'a.employee_id', '=', 'b.id')
             ->select('a.id', 'a.location','a.project_id', 'b.employeeName')

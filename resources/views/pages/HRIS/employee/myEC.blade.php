@@ -31,7 +31,7 @@
                                             <?php $relationship = relationshipEmergencyContact() ?>
                                             <option value="" label="PLEASE CHOOSE" ></option>
                                             @foreach ($relationship as $key => $status)
-                                            <option value="{{$key}}"<?php echo ($key == $emergency->relationship) ? 'selected="selected"' : '' ?>> {{$status}}</option>
+                                                <option value="{{$key}}" <?php echo ($key == $emergency->relationship) ? 'selected="selected"' : '' ?>> {{$status}}</option>
                                             @endforeach
                             </select>
                         </div>

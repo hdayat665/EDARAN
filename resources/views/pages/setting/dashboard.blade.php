@@ -25,6 +25,10 @@
                     <a class="mb-10px" href="/branch"><i class="fa fa-location-dot fa-4x text-blue"></i></a><br><br>
                     <h5 class="mb-5px">Branch</h5>
                 </div>
+                <div class="col-lg-2">
+                    <a class="mb-10px" href="/location"><i class="fa fa-location-dot fa-4x text-blue"></i></a><br><br>
+                    <h5 class="mb-5px">Location</h5>
+                </div>
             </div><br><br><br>
             <div class="row text-center">
                 <div class="col-lg-2">

@@ -37,9 +37,13 @@ use App\Models\Users;
 use App\Models\leaveAnualLeaveModel;
 use App\Models\leaveSicKleaveModel;
 use App\Models\leaveCarryForwordModel;
+use App\Models\leaveWeekendModel;
+use App\Models\Location;
+use App\Models\State;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Symfony\Component\Console\Input\Input;
+use Illuminate\Support\Facades\Validator;
 use Carbon\Carbon;
 
 class SettingService
@@ -70,7 +74,7 @@ class SettingService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success Create Role';
+        $data['msg'] = 'Role is Created';
 
         return $data;
     }
@@ -140,7 +144,7 @@ class SettingService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success Update Role';
+        $data['msg'] = 'Role is Updated';
 
         return $data;
     }
@@ -160,7 +164,7 @@ class SettingService
             $data['status'] = config('app.response.success.status');
             $data['type'] = config('app.response.success.type');
             $data['title'] = config('app.response.success.title');
-            $data['msg'] = 'Success Delete Role';
+            $data['msg'] = 'Role is Deleted';
         }
 
         return $data;
@@ -173,7 +177,7 @@ class SettingService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success Get Roles';
+        $data['msg'] = 'Success Get Company';
 
         return $data;
     }
@@ -202,7 +206,7 @@ class SettingService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success Create Company';
+        $data['msg'] = 'Company is Created';
 
         return $data;
     }
@@ -237,7 +241,7 @@ class SettingService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success Update Company';
+        $data['msg'] = 'Company is Updated';
 
         return $data;
     }
@@ -258,7 +262,7 @@ class SettingService
             $data['status'] = config('app.response.success.status');
             $data['type'] = config('app.response.success.type');
             $data['title'] = config('app.response.success.title');
-            $data['msg'] = 'Success Delete Company';
+            $data['msg'] = 'Company is Deleted';
         }
 
         return $data;
@@ -299,7 +303,7 @@ class SettingService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success Create Department';
+        $data['msg'] = 'Department is Created';
 
         return $data;
     }
@@ -333,7 +337,7 @@ class SettingService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success Update Department';
+        $data['msg'] = 'Department is Updated';
 
         return $data;
     }
@@ -353,7 +357,7 @@ class SettingService
             $data['status'] = config('app.response.success.status');
             $data['type'] = config('app.response.success.type');
             $data['title'] = config('app.response.success.title');
-            $data['msg'] = 'Success Delete Department';
+            $data['msg'] = 'Department is Deleted';
         }
 
         return $data;
@@ -393,7 +397,7 @@ class SettingService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success Create Unit';
+        $data['msg'] = 'Unit is Created';
 
         return $data;
     }
@@ -427,7 +431,7 @@ class SettingService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success Update Unit';
+        $data['msg'] = 'Unit is Updated';
 
         return $data;
     }
@@ -447,7 +451,7 @@ class SettingService
             $data['status'] = config('app.response.success.status');
             $data['type'] = config('app.response.success.type');
             $data['title'] = config('app.response.success.title');
-            $data['msg'] = 'Success Delete Unit';
+            $data['msg'] = 'Unit is Deleted';
         }
 
         return $data;
@@ -487,7 +491,7 @@ class SettingService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success Create Branch';
+        $data['msg'] = 'Branch is Created';
 
         return $data;
     }
@@ -497,7 +501,7 @@ class SettingService
         $branchName = $input['branchName'];
 
         $existingBranch = Branch::where('branchName', $branchName)
-            ->where('id', '!=', $id)
+            ->where('id', '=', $id)
             ->where('tenant_id', Auth::user()->tenant_id)
             ->first();
 
@@ -521,7 +525,7 @@ class SettingService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success Update Branch';
+        $data['msg'] = 'Branch is Updated';
 
         return $data;
     }
@@ -540,7 +544,158 @@ class SettingService
             $data['status'] = config('app.response.success.status');
             $data['type'] = config('app.response.success.type');
             $data['title'] = config('app.response.success.title');
-            $data['msg'] = 'Success Delete Branch';
+            $data['msg'] = 'Branch is Deleted';
+        }
+
+        return $data;
+    }
+
+    public function getLocation()
+    {
+        $data = [];
+        $data['data'] = Location::with('location')->get();
+        $data['status'] = true;
+        $data['msg'] = 'Success Get Location';
+
+        return $data;
+    }
+
+    public function createLocation($r)
+    {
+        $input = $r->input();
+
+        $checkData = Location::where([['postcode', $input['postcode']], ['tenant_id', Auth::user()->tenant_id]])->first();
+        if ($checkData) {
+            $data['msg'] = 'Postcode name already exists.';
+            $data['status'] = config('app.response.error.status');
+            $data['type'] = config('app.response.error.type');
+            $data['title'] = config('app.response.error.title');
+
+            return $data;
+        }
+
+        $user = Auth::user();
+        $input['tenant_id'] = Auth::user()->tenant_id;
+
+        Location::create($input);
+
+        $data['status'] = config('app.response.success.status');
+        $data['type'] = config('app.response.success.type');
+        $data['title'] = config('app.response.success.title');
+        $data['msg'] = 'Success Create Location';
+
+        return $data;
+    }
+
+    public function deleteLocation($id)
+    {
+        $Location = Location::find($id);
+
+        if (!$Location) {
+            $data['status'] = config('app.response.error.status');
+            $data['type'] = config('app.response.error.type');
+            $data['title'] = config('app.response.error.title');
+            $data['msg'] = 'Location not found';
+        } else {
+            $Location->delete();
+
+            $data['status'] = config('app.response.success.status');
+            $data['type'] = config('app.response.success.type');
+            $data['title'] = config('app.response.success.title');
+            $data['msg'] = 'Success Delete Location';
+        }
+
+        return $data;
+    }
+
+    public function getStateCountry($id)
+    {
+        $data = [];
+        $data['data'] = State::where('id', $id)->first();
+        $data['status'] = true;
+        $data['msg'] = 'Success Get State Country';
+
+        return $data;
+    }
+
+    public function createStateCountry($r)
+    {
+        // $rules = [
+        //     'stateCode' => 'required|unique:states',
+        //     'stateName' => 'required|unique:states',
+        // ];
+
+        // $messages = [
+        //     'stateCode.required' => 'State code is required',
+        //     'stateCode.unique' => 'State code already exists',
+        //     'stateName.required' => 'State name is required',
+        //     'stateName.unique' => 'State name already exists',
+        // ];
+
+        // $validator = Validator::make($r->all(), $rules, $messages);
+
+        // if ($validator->fails()) {
+        //     $data['msg'] = $validator->messages()->first();
+        //     $data['status'] = config('app.response.error.status');
+        //     $data['type'] = config('app.response.error.type');
+        //     $data['title'] = config('app.response.error.title');
+
+        //     return $data;
+        // }
+
+        // $input = $r->input();
+
+        // State::create($input);
+
+        // $data['status'] = config('app.response.success.status');
+        // $data['type'] = config('app.response.success.type');
+        // $data['title'] = config('app.response.success.title');
+        // $data['msg'] = 'Success Create State Country';
+
+        // return $data;
+
+        $input = $r->input();
+
+        $checkData = State::where([['stateName', $input['stateName']], ['tenant_id', Auth::user()->tenant_id]])->first();
+        if ($checkData) {
+            $data['msg'] = 'State name already exists.';
+            $data['status'] = config('app.response.error.status');
+            $data['type'] = config('app.response.error.type');
+            $data['title'] = config('app.response.error.title');
+
+            return $data;
+        }
+
+        $user = Auth::user();
+        $input['tenant_id'] = Auth::user()->tenant_id;
+
+        State::create($input);
+
+        $data['status'] = config('app.response.success.status');
+        $data['type'] = config('app.response.success.type');
+        $data['title'] = config('app.response.success.title');
+        $data['msg'] = 'Success Create State Country';
+
+        return $data;
+    }
+
+
+    public function deleteStateCountry($id)
+    {
+        $State = State::where('stateCode', $id)->first();
+
+        if (!$State) {
+            $data['status'] = config('app.response.error.status');
+            $data['type'] = config('app.response.error.type');
+            $data['title'] = config('app.response.error.title');
+            $data['msg'] = 'State not found';
+        } else {
+            $State->delete();
+
+            $data['status'] = config('app.response.success.status');
+            $data['type'] = config('app.response.success.type');
+            $data['title'] = config('app.response.success.title');
+            $data['msg'] = 'Success Delete State Country';
         }
 
         return $data;
@@ -580,7 +735,7 @@ class SettingService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success Create Job Grade';
+        $data['msg'] = 'Job Grade is Created';
 
         return $data;
     }
@@ -615,7 +770,7 @@ class SettingService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success Update JobGrade';
+        $data['msg'] = 'Job Grade is Updated';
 
         return $data;
     }
@@ -636,7 +791,7 @@ class SettingService
             $data['status'] = config('app.response.success.status');
             $data['type'] = config('app.response.success.type');
             $data['title'] = config('app.response.success.title');
-            $data['msg'] = 'Success Delete Job Grade';
+            $data['msg'] = 'Job Grade is Deleted';
         }
 
         return $data;
@@ -675,7 +830,7 @@ class SettingService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success Create Designation';
+        $data['msg'] = 'Designation is Created';
 
         return $data;
     }
@@ -709,7 +864,7 @@ class SettingService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success Update Designation';
+        $data['msg'] = 'Designation is Updated';
 
         return $data;
     }
@@ -730,7 +885,7 @@ class SettingService
             $data['status'] = config('app.response.success.status');
             $data['type'] = config('app.response.success.type');
             $data['title'] = config('app.response.success.title');
-            $data['msg'] = 'Success Delete Designation';
+            $data['msg'] = 'Designation is Deleted';
         }
 
         return $data;
@@ -779,7 +934,7 @@ class SettingService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success Create SOP';
+        $data['msg'] = 'SOP is Created';
 
         return $data;
     }
@@ -806,7 +961,7 @@ class SettingService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success Update SOP';
+        $data['msg'] = 'SOP is Updated';
 
         return $data;
     }
@@ -826,7 +981,7 @@ class SettingService
             $data['status'] = config('app.response.success.status');
             $data['type'] = config('app.response.success.type');
             $data['title'] = config('app.response.success.title');
-            $data['msg'] = 'Success Delete SOP';
+            $data['msg'] = 'SOP is Deleted';
         }
 
         return $data;
@@ -865,7 +1020,7 @@ class SettingService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success Create Policy';
+        $data['msg'] = 'Policy is Created';
 
         return $data;
     }
@@ -891,7 +1046,7 @@ class SettingService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success Update Policy';
+        $data['msg'] = 'Policy is Updated';
 
         return $data;
     }
@@ -911,7 +1066,7 @@ class SettingService
             $data['status'] = config('app.response.success.status');
             $data['type'] = config('app.response.success.type');
             $data['title'] = config('app.response.success.title');
-            $data['msg'] = 'Success Delete Policy';
+            $data['msg'] = 'Policy is Deleted';
         }
 
         return $data;
@@ -932,6 +1087,7 @@ class SettingService
     public function createNews($r)
     {
         $input = $r->input();
+        
         if ($_FILES['file']['name']) {
             $payslip = upload($r->file('file'));
             $input['file'] = $payslip['filename'];
@@ -961,7 +1117,7 @@ class SettingService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success Create News';
+        $data['msg'] = 'News is Created';
 
         return $data;
     }
@@ -990,7 +1146,7 @@ class SettingService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success Update News';
+        $data['msg'] = 'News is Updated';
 
         return $data;
     }
@@ -1010,7 +1166,7 @@ class SettingService
             $data['status'] = config('app.response.success.status');
             $data['type'] = config('app.response.success.type');
             $data['title'] = config('app.response.success.title');
-            $data['msg'] = 'Success Delete News';
+            $data['msg'] = 'News is Deleted';
         }
 
         return $data;
@@ -1164,6 +1320,25 @@ class SettingService
         return $data;
     }
 
+    // public function locationView()
+    // {
+    //     $data = Location::where('tenant_id', Auth::user()->tenant_id)->orderBy('id', 'desc')->get();
+
+    //     return $data;
+    // }
+
+
+    public function locationView()
+    {
+        $data = Location::select('location.id', 'settingcountry.CountryName', 'states.stateName', 'location.postcode')
+            ->join('settingcountry', 'location.countryID', '=', 'settingcountry.countryID')
+            ->join('states', 'location.stateID', '=', 'states.id')
+            ->get();
+
+
+        return $data;
+    }
+
     public function unitView()
     {
         $data['units'] = DB::table('unit as a')
@@ -1192,6 +1367,7 @@ class SettingService
     {
         $data['SOPs'] = SOP::where('tenant_id', Auth::user()->tenant_id)->orderBy('id', 'desc')->get();
         $data['policys'] = Policy::where('tenant_id', Auth::user()->tenant_id)->orderBy('id', 'desc')->get();
+        // dd($data);
 
         return $data;
     }
@@ -1486,6 +1662,12 @@ public function updateTypeOfLogs($r, $id)
     {
         $data = Branch::where([['tenant_id', Auth::user()->tenant_id], ['companyId', $id]])->get();
 
+        return $data;
+    }
+
+    public function branchByCountry($id = '')
+    {
+        $data = Branch::where([['tenant_id', Auth::user()->tenant_id], ['country', $id]])->get();
         return $data;
     }
 
@@ -2368,20 +2550,20 @@ public function updateTypeOfLogs($r, $id)
     {
         $tenant = Auth::user()->tenant_id;
         $input = [
-            [$tenant, '1', 'AL', 'ANNUAL LEAVE'],
-            [$tenant, '1', 'SL', 'SICK LEAVE'],
-            [$tenant, '1', 'HL', 'HOSPITALIZATION']
+            [$tenant, 'AL', 'ANNUAL LEAVE'],
+            [$tenant, 'SL', 'SICK LEAVE'],
+            [$tenant, 'HL', 'HOSPITALIZATION']
         ];
 
         foreach ($input as $data) {
             $record = leavetypesModel::updateOrCreate(
                 [
-                    'leave_types_code' => $data[2],
-                    'leave_types' => $data[3],
-                    'tenant_id' => $data[0]
+                    'tenant_id' => $data[0],
+                    'leave_types_code' => $data[1],
+                    'leave_types' => $data[2],
+
                 ],
                 [
-                    'status' => $data[1]
                 ]
             );
         }
@@ -2930,6 +3112,35 @@ public function updateTypeOfLogs($r, $id)
         return $data;
     }
 
+    public function updateweekend($r)
+    {
+        $input = $r->input('checkbox');
+
+        foreach ($input as $id => $data) {
+            $record = leaveWeekendModel::find($id);
+
+            if ($record) {
+                $record->monday = isset($data['monday']) ? $data['monday'] : null;
+                $record->tuesday = isset($data['tuesday']) ? $data['tuesday'] : null;
+                $record->wednesday = isset($data['wednesday']) ? $data['wednesday'] : null;
+                $record->thursday = isset($data['thursday']) ? $data['thursday'] : null;
+                $record->friday = isset($data['friday']) ? $data['friday'] : null;
+                $record->saturday = isset($data['saturday']) ? $data['saturday'] : null;
+                $record->sunday = isset($data['sunday']) ? $data['sunday'] : null;
+
+                $record->save();
+            }
+        }
+
+
+        $data['status'] = config('app.response.success.status');
+        $data['type'] = config('app.response.success.type');
+        $data['title'] = config('app.response.success.title');
+        $data['msg'] = 'Successfully update Weekend';
+
+        return $data;
+    }
+
     public function updateSickLeave($r)
     {
         $input = $r->input('sickpermenant');
@@ -2979,6 +3190,47 @@ public function updateTypeOfLogs($r, $id)
         $data['title'] = config('app.response.success.title');
         $data['msg'] = 'Successfully update Carry Forward';
 
+        return $data;
+    }
+
+    public function weekendview()
+    {
+        $tenant = Auth::user()->tenant_id;
+        $input = [
+            [$tenant, 'JHR', 'JOHOR'],
+            [$tenant, 'KDH', 'KEDAH'],
+            [$tenant, 'KEL', 'KELANTAN'],
+            [$tenant, 'MLK', 'MELAKA'],
+            [$tenant, 'PHG', 'PAHANG'],
+            [$tenant, 'PNG', 'PULAU PINANG'],
+            [$tenant, 'PRK', 'PERAK'],
+            [$tenant, 'SBH', 'SABAH'],
+            [$tenant, 'SRW', 'SERAWAK'],
+            [$tenant, 'SGR', 'SELANGOR'],
+            [$tenant, 'TRG', 'TERANGGANU'],
+            [$tenant, 'WP', 'WILAYAH PERSEKUTUAN'],
+            [$tenant, 'NS', 'NEGERI SEMBILAN'],
+            [$tenant, 'PLS', 'PERLIS'],
+
+        ];
+
+        foreach ($input as $data) {
+            $record = leaveWeekendModel::updateOrCreate(
+                [
+                    'tenant_id' => $data[0],
+                    'state_code' => $data[1],
+                    'state' => $data[2],
+
+                ],
+                [
+                ]
+            );
+        }
+
+        $data =
+        leaveWeekendModel::select('leave_weekend.*')
+            ->where('leave_weekend.tenant_id', Auth::user()->tenant_id)
+            ->orderBy('id', 'asc')->get();
         return $data;
     }
 }

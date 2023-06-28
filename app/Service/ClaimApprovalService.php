@@ -430,7 +430,7 @@ class ClaimApprovalService
     }
 
 
-    public function cashAdvanceApprovalView()
+    public function cashAdvanceApprovalView($role = '')
     {
 
         //$cond = ['caapprover', Auth::user()->id];
@@ -443,6 +443,11 @@ class ClaimApprovalService
         }
 
         $claim[0] = ['tenant_id', Auth::user()->tenant_id];
+
+        if ($role == 'departApprover') {
+            $claim[1] = ['approver', ''];
+            $claim[2] = ['status', 'active'];
+        }
 
         $data = CashAdvanceDetail::where($claim)->whereIn('user_id', $userId)->get();
 
@@ -557,11 +562,21 @@ class ClaimApprovalService
         return $data;
     }
 
-    public function cashAdvanceFapproverView()
+    public function cashAdvanceFapproverView($role = '')
     {
 
         $ca[0] = ['tenant_id', Auth::user()->tenant_id];
         $ca[1] = ['status', '!=', 'draft'];
+
+        if ($role == 'financeRec') {
+            $ca[2] = ['f_status', 'recommend'];
+            $ca[3] = ['f_recommender', '!=', 'recommend'];
+        }
+
+        if ($role == 'financeApprover') {
+            $ca[4] = ['f_approver', ''];
+            $ca[5] = ['f_recommender', 'recommend'];
+        }
 
         $data = CashAdvanceDetail::where($ca)->get();
 

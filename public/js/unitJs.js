@@ -14,11 +14,17 @@ $(document).ready(function () {
             [5, 10, 25, 50, -1],
             [5, 10, 25, 50, "All"],
         ],
+        initComplete: function (settings, json) {
+            $("#tableunit").wrap(
+                "<div style='overflow:auto; width:100%;position:relative;'></div>"
+            );
+        },
     });
 
     $(document).on("click", "#addButton", function () {
         $("#addModal").modal("show");
     });
+    
 
     $(document).on("click", "#editButton", function () {
         var id = $(this).data("id");
@@ -90,8 +96,8 @@ $(document).ready(function () {
 
             messages: {
                 departmentId: "Please Choose Department Name",
-                unitName: "Please Insert Unit Code",
-                unitCode: "Please Insert Unit Name",
+                unitName: "Please Insert Unit Name",
+                unitCode: "Please Insert Unit Code",
             },
             submitHandler: function (form) {
                 requirejs(["sweetAlert2"], function (swal) {
@@ -138,8 +144,8 @@ $(document).ready(function () {
 
             messages: {
                 departmentId: "Please Choose Department Name",
-                unitName: "Please Insert Unit Code",
-                unitCode: "Please Insert Unit Name",
+                unitName: "Please Insert Unit Name",
+                unitCode: "Please Insert Unit Code",
             },
             submitHandler: function (form) {
                 requirejs(["sweetAlert2"], function (swal) {

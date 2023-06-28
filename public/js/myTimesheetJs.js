@@ -6,7 +6,7 @@ $(document).ready(function () {
     //       $(this).val("test");
     //     }
     //   });
-
+    
     document.getElementById("yearsub").value = new Date().getFullYear();
 
     var monthNames = [
@@ -411,6 +411,8 @@ $(document).ready(function () {
                 project_location: "required",
                 project_location_office: "required",
                 end_time: "required",
+                lunch_break: "required",
+                
             },
 
             messages: {
@@ -425,6 +427,7 @@ $(document).ready(function () {
                 project_location: "Please Choose Project Location",
                 project_location_office: "Please Choose Project Location",
                 end_time: "Please Choose End Time",
+                lunch_break: "Please Choose Lunch Break",
             },
             submitHandler: function (form) {
                 requirejs(["sweetAlert2"], function (swal) {
@@ -476,6 +479,8 @@ $(document).ready(function () {
                 project_location: "required",
                 project_location_office: "required",
                 end_time: "required",
+                lunch_break: "required",
+                
             },
 
             messages: {
@@ -490,6 +495,7 @@ $(document).ready(function () {
                 project_location: "Please Choose Project Location",
                 project_location_office: "Please Choose Project Location",
                 end_time: "Please Choose End Time",
+                lunch_break: "Please Choose Lunch Break",
             },
             submitHandler: function (form) {
                 requirejs(["sweetAlert2"], function (swal) {
@@ -802,12 +808,23 @@ $(document).ready(function () {
                 url: "/getApproverAppeal",
             });
         }
-
-        approverappeal = getApproverAppeal();
-        approverappeal.then(function (data) {
-        console.log("data user here", data);
-        });
         
+        var approverData;
+        
+        var approverUserId;
+
+        function getApproverAppeal(id) {
+            return $.ajax({
+                url: "/getApproverAppeal",
+            });
+        }
+        
+        var approverUserId;
+        
+        getApproverAppeal().done(function (data) {
+            approverUserId = data;
+            // console.log("Approver User ID:", approverUserId);
+        });
         
 
         var timesheetData = getTimesheet();
@@ -819,25 +836,48 @@ $(document).ready(function () {
         for (let i = 0; i < data['events'].length; i++) {
             var events = data['events'][i];
             // console.log(events);
-            var startDate = new Date(events['start_date']);
-            var startMonth = startDate.getMonth() + 1;
-            startMonth = startMonth < 10 ? "0" + startMonth : startMonth;
-            var startYear = startDate.getFullYear();
-            var startDay = startDate.getDate();
-            startDay = startDay < 10 ? "0" + startDay : startDay;
+            // var startDate = new Date(events['start_date']);
+            // var startMonth = startDate.getMonth() + 1;
+            // startMonth = startMonth < 10 ? "0" + startMonth : startMonth;
+            // var startYear = startDate.getFullYear();
+            // var startDay = startDate.getDate();
+            // startDay = startDay < 10 ? "0" + startDay : startDay;
 
-            var endDate = new Date(events['end_date']);
-            endDate.setDate(endDate.getDate() + 1); // add one day to end date
-            var endMonth = endDate.getMonth() + 1;
-            endMonth = endMonth < 10 ? "0" + endMonth : endMonth;
-            var endYear = endDate.getFullYear();
-            var endDay = endDate.getDate();
-            endDay = endDay < 10 ? "0" + endDay : endDay;
+            // var endDate = new Date(events['end_date']);
+            // endDate.setDate(endDate.getDate() + 1); // add one day to end date
+            // var endMonth = endDate.getMonth() + 1;
+            // endMonth = endMonth < 10 ? "0" + endMonth : endMonth;
+            // var endYear = endDate.getFullYear();
+            // var endDay = endDate.getDate();
+            // endDay = endDay < 10 ? "0" + endDay : endDay;
+
+                var startDate = new Date(events['start_date']);
+                var startMonth = startDate.getMonth() + 1;
+                startMonth = startMonth < 10 ? "0" + startMonth : startMonth;
+                var startYear = startDate.getFullYear();
+                var startDay = startDate.getDate();
+                startDay = startDay < 10 ? "0" + startDay : startDay;
+                var startTime = events["start_time"];
+                var time = startTime.split(":");
+                startTime = time[0] < 10 ? "0" + startTime : startTime;
+
+                var endDate = new Date(events['end_date']);
+                var endMonth = endDate.getMonth() + 1;
+                endMonth = endMonth < 10 ? "0" + endMonth : endMonth;
+                var endYear = endDate.getFullYear();
+                var endDay = endDate.getDate();
+                endDay = endDay < 10 ? "0" + endDay : endDay;
+                var endTime = events['end_time'];
+                time = endTime.split(":");
+                endTime = time[0] < 10 ? "0" + endTime : endTime;
+
+            
 
             event.push({
                 title: "Event: " + events['event_name'] + "\n" + "from " + events['start_time'] + " to " + events['end_time'],
                 start: startYear + '-' + startMonth + '-' + startDay,
                 end: endYear + '-' + endMonth + '-' + endDay,
+                start_time: events['start_time'],
                 color: '#2AAA8A',
                 extendedProps: {
                     type: 'event',
@@ -847,31 +887,54 @@ $(document).ready(function () {
 
         }
 
+      
+
         var eventattend = [];
         attendhour = [];
         for (let i = 0; i < data['eventsattends'].length; i++) {
             var events = data['eventsattends'][i];
             // console.log(events);
+            // var startDate = new Date(events['start_date']);
+            // var startMonth = startDate.getMonth() + 1;
+            // startMonth = startMonth < 10 ? "0" + startMonth : startMonth;
+            // var startYear = startDate.getFullYear();
+            // var startDay = startDate.getDate();
+            // startDay = startDay < 10 ? "0" + startDay : startDay;
+
+            // var endDate = new Date(events['end_date']);
+            // endDate.setDate(endDate.getDate() + 1); // add one day to end date
+            // var endMonth = endDate.getMonth() + 1;
+            // endMonth = endMonth < 10 ? "0" + endMonth : endMonth;
+            // var endYear = endDate.getFullYear();
+            // var endDay = endDate.getDate();
+            // endDay = endDay < 10 ? "0" + endDay : endDay;
+
             var startDate = new Date(events['start_date']);
             var startMonth = startDate.getMonth() + 1;
             startMonth = startMonth < 10 ? "0" + startMonth : startMonth;
             var startYear = startDate.getFullYear();
             var startDay = startDate.getDate();
             startDay = startDay < 10 ? "0" + startDay : startDay;
+            var startTime = events["start_time"];
+            var time = startTime.split(":");
+            startTime = time[0] < 10 ? "0" + startTime : startTime;
 
             var endDate = new Date(events['end_date']);
-            endDate.setDate(endDate.getDate() + 1); // add one day to end date
             var endMonth = endDate.getMonth() + 1;
             endMonth = endMonth < 10 ? "0" + endMonth : endMonth;
             var endYear = endDate.getFullYear();
             var endDay = endDate.getDate();
             endDay = endDay < 10 ? "0" + endDay : endDay;
+            var endTime = events['end_time'];
+            time = endTime.split(":");
+            endTime = time[0] < 10 ? "0" + endTime : endTime;
 
             eventattend.push({
                 title: "Event: " + events['event_name'] + "\n" + "from " + events['start_time'] + " to " + events['end_time'] + " attend", 
                 start: startYear + '-' + startMonth + '-' + startDay,
                 end: endYear + '-' + endMonth + '-' + endDay,
                 color: '#2AAA8A',
+                start_time: events['start_time'],
                 extendedProps: {
                     type: 'eventattend',
                     eventId: events['id']
@@ -932,6 +995,7 @@ $(document).ready(function () {
                     "\n" + (logs["activitynameas"] ? logs["activitynameas"] + " ": "") + "\n" + " from " + logs["start_time"] + " to " + logs["end_time"],
                     // start: startYear + '-' + startMonth + '-' + startDay + 'T' + startTime + ':00',
                     start: startYear + '-' + startMonth + '-' + startDay,
+                    start_time: logs['start_time'],
                     // color: app.color.primary,
                     color: "#348FE2",
                     extendedProps: {
@@ -1065,10 +1129,51 @@ $(document).ready(function () {
             // dataleave = dataEvent.concat(leave);
             // dataHoliday = dataleave.concat(holiday);
 
+            
+              
             dataEvent = event.concat(eventattend);
             datalog = dataEvent.concat(log);
             dataleave = datalog.concat(leave);
             dataHoliday = dataleave.concat(holiday);
+
+           
+
+
+            dataHoliday.sort(function(a, b) {
+                var dateA = a.start;
+                var dateB = b.start;
+                var timeA = a.start_time;
+                var timeB = b.start_time;
+              
+                // Compare the dates
+                if (dateA < dateB) {
+                  return -1;
+                }
+                if (dateA > dateB) {
+                  return 1;
+                }
+              
+                // If the dates are equal, compare the start_time
+                if (timeA < timeB) {
+                  return -1;
+                }
+                if (timeA > timeB) {
+                  return 1;
+                }
+              
+                return 0; // If both date and start_time are equal
+              });
+              
+
+            // console.log(dataHoliday);
+             
+
+            //   console.log(datalog)
+
+            //   dataHoliday.sort(function(a, b) {
+            //     return new Date(a.start) - new Date(b.start);
+            //   });
+              
             
             // console.log(dataEvent);
             // console.log(holiday);
@@ -1101,31 +1206,61 @@ $(document).ready(function () {
 
 
                 dayCellDidMount: function(info) {
+                    
+                    // console.log(approverUserId+"from deaycell");
                     var current = new Date(info.date);
                     var currentDate = new Date();
-
+                    
                     var currentdate = new Date();
                     currentdate.setDate(currentdate.getDate());
-
-                    var oneDayBefore = new Date();
-                    oneDayBefore.setDate(currentDate.getDate() - 1);
-
-                    var satuhari = oneDayBefore.setDate(currentDate.getDate() - 1);
-
-                    var twoDayBefore = new Date();
-                    twoDayBefore.setDate(currentDate.getDate() - 2);
-
-                    var duahari = twoDayBefore.setDate(currentDate.getDate() - 2);
-
+                    
+                    // var oneDayBefore = new Date();
+                    // oneDayBefore.setDate(currentDate.getDate() - 1);
+                    // var satuhari = new Date(oneDayBefore.setDate(currentDate.getDate() - 1));
+                    
+                    // var twoDayBefore = new Date();
+                    // twoDayBefore.setDate(currentDate.getDate() - 2);
+                    // var duahari = new Date(twoDayBefore.setDate(currentDate.getDate() - 2));
+                    
                     var currentMonth = currentDate.getMonth();
                     var currentYear = currentDate.getFullYear();
-
+                    
                     var oneDaysBefore = new Date(currentYear, currentMonth, currentDate.getDate() - 1);
                     var twoDaysBefore = new Date(currentYear, currentMonth, currentDate.getDate() - 2);
-
-
+                    
                     var datedefaultformat = dayjs(current).format('YYYY-MM-DD');
+                    
+                    var weekend1 = current.getDay() === 6;
+                    var weekend2 = current.getDay() === 0;
 
+                    var onedayafterweekend2 = weekend2 + 1;
+                    var twodayafterweekend2 = weekend2 + 2;
+                    
+                    var dateonedaybefore = current.getDate() === oneDaysBefore.getDate();
+                    var datetwodayebefore = current.getDate() === twoDaysBefore.getDate();
+
+                    // console.log(dateonedaybefore+"dateonedaybefore");
+                   
+
+                    var comparecurrentonedaybefore = currentDate.getDay() === Number(onedayafterweekend2);
+                    var comparecurrenttwodaybefore = currentDate.getDay() === Number(twodayafterweekend2);
+                    // console.log(comparecurrentonedaybefore+"comparecurrentonedaybefore");
+                    // var twoDaysBefore = new Date(currentYear, currentMonth, currentDate.getDate() - 2);
+
+                    var twoDaysBefore = new Date(currentYear, currentMonth, currentDate.getDate() - 2);
+                    
+                    if (comparecurrentonedaybefore || comparecurrenttwodaybefore) {
+                        twoDaysBefore = new Date(currentYear, currentMonth, currentDate.getDate() - 4);
+                        // console.log("return here");
+                    }
+
+                    var workingDayHour = '08:00';
+
+                    if (current.getDay() === 5) { // Check if it's Friday (Friday is represented by 5 in JavaScript, where Sunday is 0)
+                        workingDayHour = '07:30';
+                      }
+
+                 
                    
 
                     var appealaddb = $('<button/>', {
@@ -1140,7 +1275,7 @@ $(document).ready(function () {
                                     $('#monthappeal').val(new Date(info.date).toLocaleString('en-US', { month: 'long' }));
                                     $('#dayappeal').val(day);
                                     $('#log_id').val(nextLogId);
-
+                                    $('#appealapproverc').val(approverUserId);
                                     const clickedDate = dayjs(info.date);
                                     const formattedDate = clickedDate.format('YYYY-MM-DD');
                                     $("#applieddate").val(formattedDate);
@@ -1179,7 +1314,7 @@ $(document).ready(function () {
                                         $('#yearappealv').val(year);
                                         $('#monthappealv').val(month);
                                         $('#dayappealv').val(day);
-                                        $('#approverview').val(approver);
+                                        $('#approverview').val(approverUserId);
 
                                         if (file) {
                                             var fileName = file.split('/').pop(); // Extract the file name from the file path
@@ -1281,24 +1416,25 @@ $(document).ready(function () {
                     }
                     
 
-// Convert totalHoursforlog and totalHoursEvent to total seconds
-var [hourslog, minuteslog] = totalHoursforlog.split(":").map(Number);
-var totalSecondslog = hourslog * 3600 + minuteslog * 60;
+                    // Convert totalHoursforlog and totalHoursEvent to total seconds
+                    var [hourslog, minuteslog] = totalHoursforlog.split(":").map(Number);
+                    var totalSecondslog = hourslog * 3600 + minuteslog * 60;
 
-var [hoursevent, minutesevent] = totalHoursEvent.split(":").map(Number);
-var totalSecondsevent = hoursevent * 3600 + minutesevent * 60;
+                    var [hoursevent, minutesevent] = totalHoursEvent.split(":").map(Number);
+                    var totalSecondsevent = hoursevent * 3600 + minutesevent * 60;
 
-// Add totalHoursforlog and totalHoursEvent in seconds
-var totalSeconds = totalSecondslog + totalSecondsevent;
+                    // Add totalHoursforlog and totalHoursEvent in seconds
+                    var totalSeconds = totalSecondslog + totalSecondsevent;
 
-// Convert the total seconds back to the 'hh:mm' format
-var hours = Math.floor(totalSeconds / 3600);
-var minutes = Math.floor((totalSeconds % 3600) / 60);
-var totalHoursCombined = hours.toString().padStart(2, '0') + ':' + minutes.toString().padStart(2, '0');
+                    // Convert the total seconds back to the 'hh:mm' format
+                    var hours = Math.floor(totalSeconds / 3600);
+                    var minutes = Math.floor((totalSeconds % 3600) / 60);
+                    var totalHoursCombined = hours.toString().padStart(2, '0') + ':' + minutes.toString().padStart(2, '0');
+                   
+                    var totalHoursCombineds = parseInt(hours, 10).toString();
 
-var totalHoursCombineds = parseInt(hours, 10).toString();
-
-// console.log(totalHoursCombineds);
+                    console.log(totalHoursCombined);
+                    // console.log(totalHoursCombineds);
 
                     var appliedDates = [];
                     var reasons = [];
@@ -1349,10 +1485,13 @@ var totalHoursCombineds = parseInt(hours, 10).toString();
                         }
                     });
                     // console.log(hours1 + "test")
+
+                    var hasAppeal = appliedDates.includes(datedefaultformat);
+                    var noappeal = !appliedDates.includes(datedefaultformat);
                    
                       if (
                         current.getTime() === currentDate.getTime() ||
-                        (current.getTime() < currentDate.getTime() && current.getDay() !== 6 && current.getDay() !== 0)
+                        (current.getTime() < currentDate.getTime())
                         
                     ) {
                         // $(info.el).append('&nbsp;').append(dailycounter);
@@ -1377,10 +1516,37 @@ var totalHoursCombineds = parseInt(hours, 10).toString();
                     //    {
                     //     $(info.el).css('background-color', 'red');
                     //   }
-
                     if (
-                        (current.getDate() === oneDaysBefore .getDate() || current.getDate() === twoDaysBefore .getDate()) &&
-                        !(current.getDay() === 6 || current.getDay() === 0) &&
+                        (current.getDate() === currentDate.getDate()) &&
+                        (hasEvent || hasLog) &&
+                        (totalHoursCombined < workingDayHour)
+                      ) {
+                        $(info.el).css('background-color', '#FF8080');
+                      }
+                     else if (
+                        (current.getDate() === currentDate.getDate()) &&
+                        (hasEvent || hasLog) &&
+                        (totalHoursCombined >= workingDayHour)
+                      ) {
+                        $(info.el).css('background-color', '#80ff80');
+                      }
+                    //for date after weekend, not exclude in 48hour
+                      if(comparecurrentonedaybefore || comparecurrenttwodaybefore) {
+                        if ((current < currentDate) && current.getDate() !== currentDate.getDate()
+                            && ((hasLog || hasEvent || !hasEvent || !hasLog) && totalHoursCombined < workingDayHour )) {
+                            $(info.el).css('background-color', '#FF8080');
+                        }
+
+                        else if ((current < currentDate) && current.getDate() !== currentDate.getDate()
+                        && ((hasLog || hasEvent || !hasEvent || !hasLog) && totalHoursCombined >= workingDayHour )) {
+                            $(info.el).css('background-color', '#80ff80');
+                        }
+                       
+                      }
+
+                     if (
+                        (dateonedaybefore || datetwodayebefore) &&
+                        !(weekend1 || weekend2) &&
                         !hasLog &&
                         !hasEvent &&
                         current.getMonth() === currentMonth &&
@@ -1391,22 +1557,25 @@ var totalHoursCombineds = parseInt(hours, 10).toString();
 
                      else if(
                          
-                        (current.getDate() === oneDayBefore.getDate() || current.getDate() === twoDayBefore.getDate()) &&
-                        !(current.getDay() === 6 || current.getDay() === 0)  && ( (hasLog || hasEvent) && totalHoursCombineds >= 8)
+                        (dateonedaybefore || datetwodayebefore) &&
+                        !(weekend1 || weekend2)  && ( (hasLog || hasEvent) && totalHoursCombined < workingDayHour)
                       ) {
                         $(info.el).css('background-color', '#80ff80');
                       }
                       else if(
                          
-                        (current.getDate() === oneDayBefore.getDate() || current.getDate() === twoDayBefore.getDate()) &&
-                        !(current.getDay() === 6 || current.getDay() === 0)  && ( (hasLog || hasEvent) && totalHoursCombineds < 8)
+                        (dateonedaybefore || datetwodayebefore) &&
+                        !(weekend1 || weekend2)  && ( (hasLog || hasEvent) && totalHoursCombined < workingDayHour)
                       ) {
                         $(info.el).css('background-color', '#FF8080');
                       }
 
+                     
+                    //  if ((current < twoDaysBefore)) {
+                    //     $(info.el).css('background-color', 'red');
+                    //  }
                       //xde log appeal, log kecik dari 9,exclude weekend
-                       else if((current < duahari) && !appliedDates.includes(datedefaultformat) && totalHoursCombineds < 8 && !(current.getDay() === 6 || current.getDay() === 0)) {
-                        // console.log(hourslog);
+                       else if((current < twoDaysBefore) && noappeal && totalHoursCombined < workingDayHour && !(weekend1 || weekend2)) {
                         $(info.el).css('background-color', '#FF8080');
                         $(info.el).append('&nbsp;').append(appealaddb);
                         $(appealaddb).css({
@@ -1415,7 +1584,14 @@ var totalHoursCombineds = parseInt(hours, 10).toString();
                             'z-index': '999',   
                             });
 
-                        }else if((current < duahari) && appliedDates.includes(datedefaultformat) && ((hasLog || hasEvent) && totalHoursCombineds < 8 || (!hasLog || !hasEvent))   && !(current.getDay() === 6 || current.getDay() === 0)) {
+                        }else if (
+                            (current < twoDaysBefore) &&
+                            hasAppeal &&
+                            (
+                              ((hasLog || hasEvent) && totalHoursCombined < workingDayHour) ||
+                              (!hasLog && !hasEvent && !(weekend1 || weekend2))
+                            )
+                          ) {
 
                             $(info.el).css('background-color', '#FF8080');
                             $(info.el).append('&nbsp;').append(viewappealb);
@@ -1426,9 +1602,9 @@ var totalHoursCombineds = parseInt(hours, 10).toString();
                                 });
                         
                         
-                         } else if((current < duahari) && (hasLog || hasEvent) && totalHoursCombineds >= 8) {
+                         } else if((current < twoDaysBefore) && (hasLog || hasEvent) && totalHoursCombined >= workingDayHour) {
                             $(info.el).css('background-color', '#80ff80');
-                         } else if((current < duahari) && appliedDates.includes(datedefaultformat) && totalHoursCombineds >= 8) {
+                         } else if((current < twoDaysBefore) && hasAppeal && totalHoursCombined >= workingDayHour) {
                             $(info.el).css('background-color', '#80ff80');
                             $(info.el).append('&nbsp;').append(viewappealb);
                             $(viewappealb).css({
@@ -1437,7 +1613,7 @@ var totalHoursCombineds = parseInt(hours, 10).toString();
                                 'z-index': '999',   
                                 });
                          }
-                         else if((current < duahari) && appliedDates.includes(datedefaultformat) && totalHoursCombineds < 8) {
+                         else if((current < twoDaysBefore) && hasAppeal && totalHoursCombined < workingDayHour) {
                             $(info.el).css('background-color', '#FF8080');
                             $(info.el).append('&nbsp;').append(viewappealb);
                             $(viewappealb).css({
@@ -1488,7 +1664,19 @@ var totalHoursCombineds = parseInt(hours, 10).toString();
 
                         // check if the clicked date is within the last 2 days before the current date
                         // and if the cell already has an appeal button
-                        if ((clickedDate.diff(today, 'day') < -2 || clickedDate.isAfter(today, 'day')) &&
+                        var daystominus = -2;
+
+                        var currentDayOfWeek = today.day();
+
+                        var monday = 1; 
+                        var tuesday = 2;
+
+                        // Check if the current day is Saturday (6) or Sunday (0)
+                        if (currentDayOfWeek === monday || currentDayOfWeek === tuesday) {
+                            daystominus = -4;
+                        }
+
+                        if ((clickedDate.diff(today, 'day') < daystominus || clickedDate.isAfter(today, 'day')) &&
                         ($(info.dayEl).find('.appeal-add-button, .appeal-view-button').length == 0)) {
                             Swal.fire({
                                 icon: 'error',
@@ -1497,7 +1685,7 @@ var totalHoursCombineds = parseInt(hours, 10).toString();
                             });
                         return;
                         }
-                        if ((clickedDate.diff(today, 'day') < -2 || clickedDate.isAfter(today, 'day')) &&
+                        if ((clickedDate.diff(today, 'day') < daystominus || clickedDate.isAfter(today, 'day')) &&
                             ($(info.dayEl).find('.appeal-add-button, .appeal-view-button').length !== 0)) {
 
                           return;
@@ -1587,19 +1775,19 @@ var totalHoursCombineds = parseInt(hours, 10).toString();
                         });
                     }
 
-                    employeeData = getEmployee();
-                    employeeData.then(function (data) {
-                        // console.log(data.data);
-                        const employees = data.data;
-                        for (let i = 0; i < employees.length; i++) {
-                            const employee = employees[i];
-                            $("#addneweventparticipantedit").picker(
-                                "remove",
-                                employee["user_id"]
-                            );
-                            // console.log(employee['user_id']);
-                        }
-                    });
+                    // employeeData = getEmployee();
+                    // employeeData.then(function (data) {
+                    //     // console.log(data.data);
+                    //     const employees = data.data;
+                    //     for (let i = 0; i < employees.length; i++) {
+                    //         const employee = employees[i];
+                    //         $("#addneweventparticipantedit").picker(
+                    //             "remove",
+                    //             employee["user_id"]
+                    //         );
+                    //         // console.log(employee['user_id']);
+                    //     }
+                    // });
 
                     if (
                         info.event.extendedProps.type == "leave" ||
@@ -1724,7 +1912,7 @@ var totalHoursCombineds = parseInt(hours, 10).toString();
                             // $("#activityByProjectEditShow").hide();
                             $("#typeoflogedit").val(data.type_of_log);
                             $("#officelog2edit").val(data.office_log);
-                            $("#dateaddlogedit").val(data.date);
+                           
                             $("#project_id_edit").val(data.project_id);
                             $("#officeLogProjectEdit").val(data.project_id);
 
@@ -1772,8 +1960,37 @@ var totalHoursCombineds = parseInt(hours, 10).toString();
                                     defaultTime: data.end_time
                                 });
 
-                            
+                                $("#dateaddlogedit").val(data.date);
+
+                                $("#statusappeal").val(data.appealstatus);
+
+                                var currentDate = new Date();
+                                var twoDaysBefore = new Date();
+                                twoDaysBefore.setDate(currentDate.getDate() - 3);
+                                
+                                
+                                var selectedDate = new Date($("#dateaddlogedit").val());
+                              
+                                
+                                if ($("#statusappeal").val() === "1" || selectedDate < twoDaysBefore) {
+                                    $("#dateaddlogedit").prop("readonly", true);
+                                    $("#dateaddlogedit").css("pointer-events", "none");
+                                } else {
+                                    $("#dateaddlogedit").prop("readonly", false);
+                                    $("#dateaddlogedit").css("pointer-events", "auto");
+                                }
+
+                                // if ( selectedDate < twoDaysBefore) {
+                                //     $("#dateaddlogedit").prop("readonly", true);
+                                //     $("#dateaddlogedit").css("pointer-events", "none");
+                                // } else {
+                                //     $("#dateaddlogedit").prop("readonly", false);
+                                //     $("#dateaddlogedit").css("pointer-events", "auto");
+                                // }
+
+                                
                         });
+
 
                         $("#editlogmodal").modal("show");
                     } else {
@@ -1842,27 +2059,71 @@ var totalHoursCombineds = parseInt(hours, 10).toString();
                             });
 
                             var eventData = getEvents(eventId);
-                            eventData.then(function (data) {
-                                var participants = data.participant.split(",");
-                                var participantNames =
-                                    data.participantNames.split(",");
-
+                            eventData.then(function(data) {
+                                var participants = data.participants; // Assuming data.participants is an array of objects with user_id and name properties
+                                var attendanceStatus = data.attendanceStatus; // Assuming data.attendanceStatus is an array of objects with status property
+                            
                                 var tableBody = $("#tableRowParticipant");
-                                tableBody.empty(); // clear any existing rows in the table
-
+                                tableBody.empty(); // Clear any existing rows in the table
+                            
                                 for (var i = 0; i < participants.length; i++) {
-                                    var participantId = participants[i];
-                                    var participantName = participantNames[i];
-
+                                    var participant = participants[i];
+                                    var status = attendanceStatus[i].status; // Assuming the attendance status field is named 'status'
+                            
                                     var row = $("<tr></tr>");
                                     row.append($("<td></td>").text(i + 1));
-                                    row.append(
-                                        $("<td></td>").text(participantName)
-                                    );
-
+                                    row.append($("<td></td>").text(participant.name));
+                                    row.append($("<td></td>").text(status));
+                            
                                     tableBody.append(row);
                                 }
                             });
+                            
+                            
+                            
+                            var eventData1 = getEvents(eventId);
+                            eventData1.then(function(data) {
+                                var nonParticipants = data.nonParticipants; // Assuming data.nonParticipants is an array of objects with user_id and name properties
+                                var selectElement = $("#addneweventparticipantedit");
+                            
+                                // Clear any existing options
+                                selectElement.empty();
+                            
+                                // Add the "Please Choose" option as the first option
+                                var pleaseChooseOption = $("<option></option>")
+                                    .val("")
+                                    .text("PLEASE CHOOSE");
+                            
+                                selectElement.append(pleaseChooseOption);
+                            
+                                // Add the non-participant options
+                                for (var i = 0; i < nonParticipants.length; i++) {
+                                    var option = $("<option></option>")
+                                        .val(nonParticipants[i].user_id)
+                                        .text(nonParticipants[i].name);
+                            
+                                    selectElement.append(option);
+                                }
+                            
+                                // Initialize the Select2 plugin with multiple selection and search
+                                selectElement.select2({
+                                    dropdownParent: $('#editeventmodal'),
+                                    multiple: true,
+                                    dropdownCss: {
+                                        top: '100%',
+                                        bottom: 'auto'
+                                    }
+                                });
+                            });
+                            
+
+
+                            
+
+
+                            
+
+                            
 
                             $("#participantlist").val(data.participantNames);
                             $("#event_name").val(data.event_name);
@@ -1871,7 +2132,7 @@ var totalHoursCombineds = parseInt(hours, 10).toString();
                             $("#endeventdateedit").val(data.end_date);
                             $("#starteventtimeedit").val(data.start_time);
 
-                            //sini
+                            
 
                             $("#starteventtimeedit").mdtimepicker({
                                 showMeridian: true,
@@ -2334,11 +2595,22 @@ var totalHoursCombineds = parseInt(hours, 10).toString();
                                 });
                                 form.style.pointerEvents = "none"; // Disable pointer events
 
-                                var allowedElements = document.querySelectorAll("#closebuttonmodal,#attendHide,#attendEvent");
+                                var allowedElements = document.querySelectorAll("#closebuttonmodal,#attendHide,#attendEvent,#descE");
 
                                 for (var i = 0; i < allowedElements.length; i++) {
                                     allowedElements[i].style.pointerEvents = "auto";
                                 }
+
+                                // Disable editing but enable scrolling
+                                var descE = document.getElementById("descE");
+                                descE.setAttribute("readonly", "readonly")
+                                descE.style.overflowY = "auto";
+                                descE.style.resize = "vertical";;
+                                descE.style.backgroundColor = "white";
+
+                               
+
+
                                 // Gray out the form
                                 // form.style.opacity = "0.5";
                             } else {
@@ -2550,23 +2822,34 @@ var totalHoursCombineds = parseInt(hours, 10).toString();
 
 
 
-    $(function() {
-        // Initialize Datepicker
-        $("#dateaddlog").datepicker({
-            todayHighlight: true,
-            autoclose: true,
-            format: "yyyy-mm-dd",
-            startDate: new Date(new Date().getTime() - 2 * 24 * 60 * 60 * 1000), // two days ago
-            endDate: new Date(), // Disable future dates
-        });
-
-        // Set the minimum and maximum dates to restrict the date range that can be selected
-        $("#dateaddlog").datepicker(
-            "setStartDate",
-            new Date(new Date().getTime() - 2 * 24 * 60 * 60 * 1000)
-        );
-        $("#dateaddlog").datepicker("setEndDate", new Date());
+    $("#dateaddlog").datepicker({
+        todayHighlight: true,
+        autoclose: true,
+        format: "yyyy-mm-dd",
+        startDate: getStartDate(), // Set the start date dynamically
+        endDate: new Date() // Disable future dates
     });
+    
+    function getStartDate() {
+        var currentDate = new Date();
+        var dayOfWeek = currentDate.getDay(); // Sunday = 0, Monday = 1, ..., Saturday = 6
+        var daysToSubtract = 2;
+
+        monday = 1;
+        tuesday = 2;
+    
+        if (dayOfWeek === monday|| dayOfWeek === tuesday) {
+            // If today is Monday or Tuesday, subtract 4 days instead of 2
+            daysToSubtract = 4;
+        }
+    
+        var startDate = new Date(currentDate.getTime() - daysToSubtract * 24 * 60 * 60 * 1000);
+        return startDate;
+    }
+    
+    // Set the minimum and maximum dates to restrict the date range that can be selected
+    $("#dateaddlog").datepicker("setStartDate", getStartDate());
+    $("#dateaddlog").datepicker("setEndDate", new Date());
 
     $("#starteventdate")
         .datepicker({
@@ -2616,6 +2899,8 @@ $("#endeventdate").datepicker({
     // });
     $("#addneweventselectproject").picker({ search: true });
 
+    //for addlogmodal
+    //starttime,endtime function,validation for endtime cannot be lower than starttime
     $(function () {
         var now = new Date();
         var hours = now.getHours().toString().padStart(2, '0');
@@ -2661,20 +2946,127 @@ $("#endeventdate").datepicker({
             })
             .datepicker("setDate", "now");
     
-        $("#starteventtime,#endeventtime").mdtimepicker({
-            showMeridian: true,
-            timeFormat: 'hh:mm:ss.000',
-            is24hour: true
-        });
-    
+
         $("#starttime").change(function () {
             // Reset the end time value to an empty string
             $("#endtime").val("");
         });
     
         $("#endtime").change(function () {
-            var startTime = moment($("#starttime").val(), "hh:mm A");
-            var endTime = moment($("#endtime").val(), "hh:mm A");
+            var startTime = moment($("#starttime").val(), "hh:mm A").format("HH:mm");
+            var endTime = moment($("#endtime").val(), "hh:mm A").format("HH:mm");
+        
+            if (endTime < startTime) {
+                Swal.fire({
+                    icon: "error",
+                    title: "Error!",
+                    text: "The End Time cannot be before the Start Time.",
+                }).then(() => {
+                    $("#endtime").val("");
+                    $("#logduration").val("");
+                    $("#endtime").attr("placeholder", "End Time");
+                    $("#endtime").mdtimepicker("toggle");
+                });
+            }
+        });
+    });
+
+    //addlog total hour cal
+    //lunch break func
+    $("#logduration,#daystart,#dayend,#starttime,#endtime,#lunchBreak").change(function () {
+        var startdt = new Date($("#daystart").val() + " " + $("#starttime").val());
+        var enddt = new Date($("#dayend").val() + " " + $("#endtime").val());
+        var diff = enddt - startdt;
+        var days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        diff -= days * (1000 * 60 * 60 * 24);
+        var hours = Math.floor(diff / (1000 * 60 * 60));
+        diff -= hours * (1000 * 60 * 60);
+        var mins = Math.floor(diff / (1000 * 60));
+        diff -= mins * (1000 * 60);
+    
+        // $("#logduration").val(
+        //     days + " days : " + hours + " hours : " + mins + " minutes "
+        // );
+    
+    
+        if ($("#lunchBreak").val() === "1") {
+            hours -= 1;
+            // hours = hours - 1
+        }
+    
+        $("#logduration").val(
+            // days + " days : " + hours + " hours : " + mins + " minutes "
+            // days +  hours + mins 
+            hours + ":" + mins + ":" + "0"
+        );
+    
+        // Disable lunch break if total hours are less than 1
+        if (hours < 1 && mins < 1) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Input Time Error',
+                text: 'Between Start Time and End Time must be more than 1 hour if Lunch Break is selected',
+            });
+            
+            $("#starttime").val("");
+            $("#endtime").val("");
+            
+
+        } else {
+            // $("#lunchBreak").prop("disabled", false);
+        }
+        
+    });
+
+    //addeventmodal
+    $(function () {
+        var now = new Date();
+        var hours = now.getHours().toString().padStart(2, '0');
+        var minutes = now.getMinutes().toString().padStart(2, '0');
+    
+        var currentTime = hours + ":" + minutes;
+    
+        $("#starteventtime").val(currentTime); // Set the value of the input field directly
+    
+        $("#starteventtime").mdtimepicker({
+            showMeridian: true,
+            timeFormat: 'hh:mm:ss.000',
+            is24hour: true
+        });
+    
+        // Calculate end time
+        var start = new Date();
+        start.setHours(parseInt(hours));
+        start.setMinutes(parseInt(minutes));
+        start.setMinutes(start.getMinutes() + 60); // Add 60 minutes (1 hour)
+        var endHours = start.getHours().toString().padStart(2, '0');
+        var endMinutes = start.getMinutes().toString().padStart(2, '0');
+        var endTime = endHours + ":" + endMinutes;
+    
+        $("#endeventtime").val(endTime); // Set the value of the end time input field directly
+    
+        $("#endeventtime").mdtimepicker({
+            showMeridian: true,
+            timeFormat: 'hh:mm:ss.000',
+            is24hour: true
+        });
+    
+    
+        $("#starteventdate,#endeventdate")
+            .datepicker({
+                format: "yyyy/mm/dd",
+            })
+            .datepicker("setDate", "now");
+    
+       
+        $("#starteventtime").change(function () {
+            // Reset the end time value to an empty string
+            $("#endeventtime").val("");
+        });
+    
+        $("#endeventtime").change(function () {
+            var startTime = moment($("#starteventtime").val(), "hh:mm A");
+            var endTime = moment($("#endeventtime").val(), "hh:mm A");
     
             if (endTime.isBefore(startTime)) {
                 Swal.fire({
@@ -2682,45 +3074,110 @@ $("#endeventdate").datepicker({
                     title: "Error!",
                     text: "The End Time Could Not Be Before The Start Time.",
                 }).then(() => {
-                    $("#endtime").val("");
-                    $("#logduration").val("");
-                    $("#endtime").attr("placeholder", "End Time"); // Set the placeholder for the end time field
-                    $("#endtime").mdtimepicker("toggle"); // Close the time picker
+                    $("#endeventtime").val("");
+                    $("#duration").val("");
+                    $("#endeventtime").attr("placeholder", "End Time"); // Set the placeholder for the end time field
+                    $("#endeventtime").mdtimepicker("toggle"); // Close the time picker
                 });
             }
         });
     });
+
+    //addeventmodal
+    $(
+        "#duration,#starteventdate,#starteventtime,#endeventdate,#endeventtime"
+    ).change(function () {
+        calculateDuration();
+    });
+    
+    //update total duration
+    function calculateDuration() {
+        var startdt = new Date(
+            $("#starteventdate").val() + " " + $("#starteventtime").val()
+        );
+    
+        var enddt = new Date(
+            $("#endeventdate").val() + " " + $("#endeventtime").val()
+        );
+    
+        var diff = enddt - startdt;
+    
+        var days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        diff -= days * (1000 * 60 * 60 * 24);
+    
+        var hours = Math.floor(diff / (1000 * 60 * 60));
+        diff -= hours * (1000 * 60 * 60);
+    
+        var mins = Math.floor(diff / (1000 * 60));
+        diff -= mins * (1000 * 60);
+    
+        $("#duration").val(
+            // days + " days : " + hours + " hours : " + mins + " minutes "
+            hours + ":" + mins + ":0"
+        );
+    }
+    
+    //edit event modal mytimesheet
+    $(
+        "#durationeditevent,#starteventdateedit,#endeventdateedit,#starteventtimeedit,#endeventtimeedit"
+    ).change(function () {
+        var startdt = new Date(
+            $("#starteventdateedit").val() + " " + $("#starteventtimeedit").val()
+        );
+    
+        var enddt = new Date(
+            $("#endeventdateedit").val() + " " + $("#endeventtimeedit").val()
+        );
+    
+        var diff = enddt - startdt;
+    
+        var days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        diff -= days * (1000 * 60 * 60 * 24);
+    
+        var hours = Math.floor(diff / (1000 * 60 * 60));
+        diff -= hours * (1000 * 60 * 60);
+    
+        var mins = Math.floor(diff / (1000 * 60));
+        diff -= mins * (1000 * 60);
+    
+        // console.log(days + ":" + hours);
+        $("#durationeditevent").val(
+            hours + ":" + mins + ":0"
+        );
+    });
     
     
+    
 
-    // $(document).on('change', "#typeoflog", function() {
-    //     if ($(this).val() == "1") {
-    //         $("#activityByProjectHide").show();
-    //         $("#officelog").hide();
-    //         $("#myproject").hide();
-    //         $("#locationByProjectHide").hide();
+    $(document).on('change', "#typeoflog", function() {
+        if ($(this).val() == "1") {
+            $("#activityByProjectHide").show();
+            $("#officelog").hide();
+            $("#myproject").hide();
+            $("#locationByProjectHide").hide();
+            
 
-    //     } else if ($(this).val() == "2") {
-    //         $("#officelog").show();
-    //         $("#activityByProjectHide").hide();
-    //         $("#myproject").hide();
+        } else if ($(this).val() == "2") {
+            $("#officelog").show();
+            $("#activityByProjectHide").hide();
+            $("#myproject").hide();
 
-    //     } else if ($(this).val() == "3") {
-    //         $("#myproject").show();
-    //         $("#activityByProjectHide").show();
-    //         $("#locationByProjectHide").show();
+        } else if ($(this).val() == "3") {
+            $("#myproject").show();
+            $("#activityByProjectHide").show();
+            $("#locationByProjectHide").show();
 
-    //     } else if ($(this).val() == "4") {
-    //         $("#activityByProjectHide").show();
-    //         $("#officelog").hide();
-    //         $("#myproject").hide();
-    //         $("#locationByProjectHide").hide();
-    //     // } else {
-    //     //     $("#activityByProjectHide").hide();
-    //     //     $("#officelog").hide();
+        } else if ($(this).val() == "4") {
+            $("#activityByProjectHide").show();
+            $("#officelog").hide();
+            $("#myproject").hide();
+            $("#locationByProjectHide").hide();
+        } else {
+            $("#activityByProjectHide").hide();
+            $("#officelog").hide();
 
-    //     }
-    // });
+        }
+    });
 
     $(document).on("change", "#typeoflog", function () {
         if ($(this).val() == "2") {
@@ -2931,7 +3388,7 @@ $("#endeventdate").datepicker({
         autoclose: true,
         format: "yyyy-mm-dd",
         startDate: new Date(new Date().getTime() - 2 * 24 * 60 * 60 * 1000), // one days ago
-        endDate: null, // No end date
+        endDate: new Date(),
     });
     $("#starteventdateedit").datepicker({
         todayHighlight: true,
@@ -2949,10 +3406,16 @@ $("#endeventdate").datepicker({
         autoclose: true,
         format: "yyyy-mm-dd",
     });
+
     // $('#projectlocsearchedit').picker({ search: true });
     $("#addneweventprojectlocsearchedit").picker({ search: true });
-    $("#addneweventparticipantedit").picker({ search: true });
+    // $("#addneweventparticipantedit").picker({ search: true });
     $("#addneweventselectprojectedit").picker({ search: true });
+    // $('#addneweventparticipantedit').select2({
+    //     dropdownParent: $('#editeventmodal'),
+    //     multiple: true
+    // });
+    
 
     
 
@@ -3165,9 +3628,12 @@ $("#endeventdate").datepicker({
         });
     });
 
-    $("#logduration,#daystart,#dayend,#starttime,#endtime,#lunchBreak").change(function () {
-        var startdt = new Date($("#daystart").val() + " " + $("#starttime").val());
-        var enddt = new Date($("#dayend").val() + " " + $("#endtime").val());
+    
+
+
+    $("#lunchBreakedit, #daystartedit, #dayendedit, #starttimeedit, #endtimeedit").focus(function() {
+        var startdt = new Date($("#daystartedit").val() + " " + $("#starttimeedit").val());
+        var enddt = new Date($("#dayendedit").val() + " " + $("#endtimeedit").val());
         var diff = enddt - startdt;
         var days = Math.floor(diff / (1000 * 60 * 60 * 24));
         diff -= days * (1000 * 60 * 60 * 24);
@@ -3176,64 +3642,33 @@ $("#endeventdate").datepicker({
         var mins = Math.floor(diff / (1000 * 60));
         diff -= mins * (1000 * 60);
     
-        // $("#logduration").val(
-        //     days + " days : " + hours + " hours : " + mins + " minutes "
-        // );
-    
-    
-        if ($("#lunchBreak").val() === "1") {
+        // Subtract 1 hour if lunch break is selected (value is "1" and not null) and total hours are greater than 1
+        if ($("#lunchBreakedit").val() === "1") {
             hours -= 1;
-            // hours = hours - 1
         }
     
-        $("#logduration").val(
-            // days + " days : " + hours + " hours : " + mins + " minutes "
-            // days +  hours + mins 
-            hours + ":" + mins + ":" + "0"
-        );
+        $("#total_hour_edit").val(hours + ":" + mins + ":" + "0");
     
         // Disable lunch break if total hours are less than 1
-        if (hours < 1) {
-            $("#lunchBreak").prop("disabled", true);
+        if (hours < 1 && mins < 1) {
+            $("#starttimeedit").val("");
+            $("#endtimeedit").val("");
+            $("#total_hour_edit").val("");
+    
+            // Show the error only if it hasn't been shown before
+            if (!errorShown) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Input Time Error',
+                    text: 'Between Start Time and End Time must be more than 1 hour if Lunch Break is selected',
+                });
+                errorShown = true; // Set the flag to indicate that the error has been shown
+            }
         } else {
-            $("#lunchBreak").prop("disabled", false);
+            errorShown = false; // Reset the flag if the condition is no longer true
         }
     });
-
-$(document).ready(function () {
-    // Trigger change event on page load to calculate and populate the total hours
-    $("#total_hour_edit,#daystartedit,#dayendedit,#starttimeedit,#endtimeedit,#lunchBreakedit").change();
-});
-
-$("#total_hour_edit,#daystartedit,#dayendedit,#starttimeedit,#endtimeedit,#lunchBreakedit").change(function () {
-    var startdt = new Date($("#daystartedit").val() + " " + $("#starttimeedit").val());
-    var enddt = new Date($("#dayendedit").val() + " " + $("#endtimeedit").val());
-    var diff = enddt - startdt;
-    var days = Math.floor(diff / (1000 * 60 * 60 * 24));
-    diff -= days * (1000 * 60 * 60 * 24);
-    var hours = Math.floor(diff / (1000 * 60 * 60));
-    diff -= hours * (1000 * 60 * 60);
-    var mins = Math.floor(diff / (1000 * 60));
-    diff -= mins * (1000 * 60);
-
-    // Subtract 1 hour if lunch break is selected (value is "1" and not null) and total hours are greater than 1
-    if ($("#lunchBreakedit").val() === "1" && $("#lunchBreakedit").val() !== null && hours > 1) {
-        hours -= 1;
-    }
-
-    $("#total_hour_edit").val(
-        // days + " days : " + hours + " hours : " + mins + " minutes "
-        // days + hours + mins
-        hours + ":" + mins + ":" + "0"
-    );
-
-    // Disable lunch break if total hours are less than 1
-    // if (hours < 1) {
-    //     $("#lunchBreakedit").prop("disabled", true);
-    // } else {
-    //     $("#lunchBreakedit").prop("disabled", false);
-    // }
-});
+    
 
 
     
@@ -3245,7 +3680,7 @@ $("#total_hour_edit,#daystartedit,#dayendedit,#starttimeedit,#endtimeedit,#lunch
     //     $("#logduration").trigger("change");
     // });
 
-    calculateDuration();
+    // calculateDuration();
 
     // $('#hidestart, #hideend').hide();
 
@@ -3272,70 +3707,23 @@ $("#total_hour_edit,#daystartedit,#dayendedit,#starttimeedit,#endtimeedit,#lunch
             // $('#endeventtimeedit').val("11:59 PM");
         }
     });
+
+    // $('#addneweventparticipantedit').select2();
+    // $('#addneweventparticipantedit').select2({ placeholder:"Please Choose" });
+    // $('#addneweventparticipantedit').picker({ search: true });
+    // $('#editeventmodal').on('shown.bs.modal', function () {
+    //     $('#addneweventparticipantedit').select2({ placeholder: "Please Choose" });
+    // });
+    // $("#testchosen").chosen();
+    $('#my-select').multiselect({
+        includeSelectAllOption: true, // Add an "Select All" option
+        enableFiltering: true, // Enable search/filtering
+        maxHeight: 200 // Set a maximum height for the dropdown
+      });
 });  //end sini
 
-$(
-    "#duration,#starteventdate,#starteventtime,#endeventdate,#endeventtime"
-).focus(function () {
-    calculateDuration();
-});
 
-//update total duration
-function calculateDuration() {
-    var startdt = new Date(
-        $("#starteventdate").val() + " " + $("#starteventtime").val()
-    );
 
-    var enddt = new Date(
-        $("#endeventdate").val() + " " + $("#endeventtime").val()
-    );
-
-    var diff = enddt - startdt;
-
-    var days = Math.floor(diff / (1000 * 60 * 60 * 24));
-    diff -= days * (1000 * 60 * 60 * 24);
-
-    var hours = Math.floor(diff / (1000 * 60 * 60));
-    diff -= hours * (1000 * 60 * 60);
-
-    var mins = Math.floor(diff / (1000 * 60));
-    diff -= mins * (1000 * 60);
-
-    $("#duration").val(
-        // days + " days : " + hours + " hours : " + mins + " minutes "
-        hours + ":" + mins + ":0"
-    );
-}
-
-//edit event modal mytimesheet
-$(
-    "#durationeditevent,#starteventdateedit,#endeventdateedit,#starteventtimeedit,#endeventtimeedit"
-).change(function () {
-    var startdt = new Date(
-        $("#starteventdateedit").val() + " " + $("#starteventtimeedit").val()
-    );
-
-    var enddt = new Date(
-        $("#endeventdateedit").val() + " " + $("#endeventtimeedit").val()
-    );
-
-    var diff = enddt - startdt;
-
-    var days = Math.floor(diff / (1000 * 60 * 60 * 24));
-    diff -= days * (1000 * 60 * 60 * 24);
-
-    var hours = Math.floor(diff / (1000 * 60 * 60));
-    diff -= hours * (1000 * 60 * 60);
-
-    var mins = Math.floor(diff / (1000 * 60));
-    diff -= mins * (1000 * 60);
-
-    // console.log(days + ":" + hours);
-    $("#durationeditevent").val(
-        days + " days : " + hours + " hours : " + mins + " minutes "
-    );
-});
-// });// });
 
 $(document).on("click", "#confirmsubmitb", function () {
     var id = $(this).data("id");

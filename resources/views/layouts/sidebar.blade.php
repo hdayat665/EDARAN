@@ -90,7 +90,15 @@
                                     <div class="menu-icon">
                                         <i class="fa fa-receipt text-gray"></i>
                                     </div>
+                                    {{-- check if this is approver ts  --}}
+                                    @php
+                                        $employmentData = getEmplomentByUserId();
+                                        $timesheets = getTimesheetDataToApprove();
+                                    @endphp
                                     <div class="menu-text text-gray">Timesheets Approval</div>
+                                    @if (isset($timesheets) && $employmentData->tsapprover == Auth::user()->id)
+                                        <span class="badge bg-danger badge-number" id="numberNotify">{{ $timesheets->count() }}</span>
+                                    @endif
                                 </a>
                             </div>
                         @endif
@@ -110,7 +118,14 @@
                                 <div class="menu-icon">
                                     <i class="fa fa-receipt text-gray"></i>
                                 </div>
+                                @php
+                                    $employmentData = getEmplomentByUserId();
+                                    $appealTs = getTimesheetAppealData();
+                                @endphp
                                 <div class="menu-text text-gray">Appeal Approval </div>
+                                @if (isset($appealTs) && $employmentData->tsapprover == Auth::user()->id)
+                                    <span class="badge bg-danger badge-number" id="numberNotify">{{ $appealTs->count() }}</span>
+                                @endif
                             </a>
                         </div>
                     </div>
@@ -198,7 +213,13 @@
                                                 <div class="menu-icon">
                                                     <i class="fa fa-user-pen text-gray"></i>
                                                 </div>
+                                                @php
+                                                    $eleaveRecommender = getEleaveData('recommender');
+                                                @endphp
                                                 <div class="menu-text text-gray">Recommender</div>
+                                                @if (isset($eleaveRecommender))
+                                                    <span class="badge bg-danger badge-number" id="numberNotify">{{ $eleaveRecommender->count() }}</span>
+                                                @endif
                                             </a>
                                         </div>
                                     @endif
@@ -209,7 +230,13 @@
                                                 <div class="menu-icon">
                                                     <i class="fa fa-users-gear text-gray"></i>
                                                 </div>
+                                                @php
+                                                    $eleaveRecommender = getEleaveData('approver');
+                                                @endphp
                                                 <div class="menu-text text-gray">Approver</div>
+                                                @if (isset($eleaveRecommender))
+                                                    <span class="badge bg-danger badge-number" id="numberNotify">{{ $eleaveRecommender->count() }}</span>
+                                                @endif
                                             </a>
                                         </div>
                                     @endif
@@ -250,7 +277,13 @@
                                     <div class="menu-icon">
                                         <i class="fa fa-book text-gray"></i>
                                     </div>
+                                    @php
+                                        $projectApproverData = getProjectApproverData();
+                                    @endphp
                                     <div class="menu-text text-gray">Project Information</div>
+                                    @if (isset($projectApproverData))
+                                        <span class="badge bg-danger badge-number" id="numberNotify">{{ $projectApproverData->count() }}</span>
+                                    @endif
                                 </a>
                             </div>
                         @endif
@@ -348,7 +381,8 @@
                                                                 $config = getApprovalConfig(2, 'monthly');
                                                             @endphp
                                                             @if (isset($config->status))
-                                                                <span class="badge bg-danger badge-number" id="numberNotify">{{ getClaimData('DepartRecommender')->count() }}</span>
+                                                                <span class="badge bg-danger badge-number"
+                                                                    id="numberNotify">{{ getGeneralClaimMenuNotifyForDepartment('DepartRecommender')->count() }}</span>
                                                             @endif
                                                         </a>
                                                     </div>
@@ -366,7 +400,8 @@
                                                                 $config = getApprovalConfig(1, 'monthly');
                                                             @endphp
                                                             @if (isset($config->status))
-                                                                <span class="badge bg-danger badge-number" id="numberNotify">{{ getClaimData('DepartApprover')->count() }}</span>
+                                                                <span class="badge bg-danger badge-number"
+                                                                    id="numberNotify">{{ getGeneralClaimMenuNotifyForDepartment('DepartApprover')->count() }}</span>
                                                             @endif
                                                         </a>
                                                     </div>
@@ -557,8 +592,14 @@
                                                                 <div class="menu-icon">
                                                                     <i class="fa fa-list-check text-gray"></i>
                                                                 </div>
-                                                                <div class="menu-text text-gray">Approver
-                                                                </div>
+
+                                                                @php
+                                                                    $caClaim = getCaClaimData('departApprover');
+                                                                @endphp
+                                                                <div class="menu-text text-gray">Approver</div>
+                                                                @if (isset($caClaim) && $employmentData->caapprover == Auth::user()->id)
+                                                                    <span class="badge bg-danger badge-number" id="numberNotify">{{ $caClaim->count() }}</span>
+                                                                @endif
                                                             </a>
                                                         </div>
                                                     </div>
@@ -588,8 +629,13 @@
                                                             <div class="menu-icon">
                                                                 <i class="fa fa-list-check text-gray"></i>
                                                             </div>
-                                                            <div class="menu-text text-gray">Recommender
-                                                            </div>
+                                                            @php
+                                                                $caClaim = getCaClaimData('financeRec');
+                                                            @endphp
+                                                            <div class="menu-text text-gray">Recommender</div>
+                                                            @if (isset($caClaim))
+                                                                <span class="badge bg-danger badge-number" id="numberNotify">{{ $caClaim->count() }}</span>
+                                                            @endif
                                                         </a>
                                                     </div>
                                                 @endif
@@ -600,8 +646,13 @@
                                                             <div class="menu-icon">
                                                                 <i class="fa fa-list-check text-gray"></i>
                                                             </div>
-                                                            <div class="menu-text text-gray">Approver
-                                                            </div>
+                                                            @php
+                                                                $caClaim = getCaClaimData('financeApprover');
+                                                            @endphp
+                                                            <div class="menu-text text-gray">Approver </div>
+                                                            @if (isset($caClaim))
+                                                                <span class="badge bg-danger badge-number" id="numberNotify">{{ $caClaim->count() }}</span>
+                                                            @endif
                                                         </a>
                                                     </div>
                                                 @endif
@@ -612,8 +663,18 @@
                                                             <div class="menu-icon">
                                                                 <i class="fa fa-list-check text-gray"></i>
                                                             </div>
-                                                            <div class="menu-text text-gray">Checker
-                                                            </div>
+                                                            @php
+                                                                $caClaim = getCaClaimData('financeChecker');
+                                                                foreach ($caClaim as $ca) {
+                                                                    if ($ca->approver == 'recommend' && ($ca->f1 == '' || $ca->f1 == 'check' || $ca->f2 == 'check' || $ca->f3 == 'check') && $ca->f_status == null) {
+                                                                        $caData[] = $ca;
+                                                                    }
+                                                                }
+                                                            @endphp
+                                                            <div class="menu-text text-gray">Checker</div>
+                                                            @if (isset($caData))
+                                                                <span class="badge bg-danger badge-number" id="numberNotify">{{ count($caData) }}</span>
+                                                            @endif
                                                         </a>
                                                     </div>
                                                 @endif

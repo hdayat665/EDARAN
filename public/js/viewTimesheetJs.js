@@ -376,26 +376,52 @@ var handleCalendarDemo = function () {
                         $("#start_time").text(data.start_time);
                         $("#end_time").text(data.end_time);
                         $("#total_hour").text(data.total_hour);
-                        $("#office_log").text(officeLog(data.office_log));
+                        
                         var project = getProjectByidTimesheet(data.project_id);
                         project.then(function (project) {
                             $("#my_project").text(project.project_name);
                         });
 
-                        var location = getProjectLocationById(
-                            data.project_location
-                        );
-                        location.then(function (location) {
-                            $("#location").text(location.location_name);
-                        });
+                        // var location = getProjectLocationById(
+                        //     data.project_location
+                        // );
+                        // location.then(function (location) {
+                        //     $("#location").text(location.location_name);
+                        // });
+
+
+                        // $("#location").text(data.project_location);
+
+                       
+                        if (data.project_location === "OFFICE") {
+                            $("#location").text("OFFICE");
+                        } else if (data.project_location === "OTHERS") {
+                            $("#location").text("OTHERS");
+                        } else if (!data.project_location) {
+                            $("#location").text("-");
+                        } else {
+                            $("#location").text(data.location_name);
+                        }
+                        
+                        
+                        
+                        $("#office_log").text(data.office_log ? officeLog(data.office_log) : "-");
+
 
                         var activity = getActivityNameById(data.activity_name);
                         activity.then(function (activity) {
                             $("#activity_name").text(activity.activity_name);
                         });
 
-                        $("#desc").val(data.desc);
+                        $("#desc").text(data.desc);
+                       
+                        
+                        
+
+                        $("#datelog").text(data.date);
                     });
+
+                    
 
                     $("#editlogmodal").modal("show");
                 } else {
@@ -426,14 +452,15 @@ var handleCalendarDemo = function () {
                         // duration = +data.end_time - +data.start_time;
                         // alert(duration);
                         $("#duration").text(data.duration);
-                        var location = getProjectLocationById(data.location);
-                        location.then(function (location) {
-                            $("#location_event").text(
-                                location.location_name
-                                    ? location.location_name
-                                    : "-"
-                            );
-                        });
+                        $("#location_event").text(data.venue);
+                        // var location = getProjectLocationById(data.location);
+                        // location.then(function (location) {
+                        //     $("#location_event").text(
+                        //         location.location_name
+                        //             ? location.location_name
+                        //             : "-"
+                        //     );
+                        // });
 
                         var project = getProjectByidTimesheet(data.project_id);
                         project.then(function (project) {
@@ -452,7 +479,31 @@ var handleCalendarDemo = function () {
                         );
 
                         $("#desc_event").text(data.desc);
-                        $("#reminder").text("None");
+                        
+                        $("#reminder").text(data.reminder);
+
+                        if ($("#reminder").text() === "1") {
+                            $("#reminder").text("5 Minute Before");
+                        }
+                        else if($("#reminder").text() === "2") {
+                            $("#reminder").text("10 Minute Before");
+                        }
+                        else if($("#reminder").text() === "3") {
+                            $("#reminder").text("15 Minute Before");
+                        }
+                        else if($("#reminder").text() === "4") {
+                            $("#reminder").text("20 Minute Before");
+                        }
+                        else if($("#reminder").text() === "5") {
+                            $("#reminder").text("30 Minute Before");
+                        }
+                        else if($("#reminder").text() === "6") {
+                            $("#reminder").text("1 Hour Before");
+                        }
+
+                        $('#dateevent').text(data.start_date +' To ' + data.end_date);
+                      
+
                         $("#file_upload").html(
                             '<a class="form-label" target="_blank" href="/storage/' +
                                 data.file_upload +

@@ -17,6 +17,7 @@ requirejs.config({
         departmentJs: assets + "/js/departmentJs",
         unitJs: assets + "/js/unitJs",
         branchJs: assets + "/js/branchJs",
+        locationJs: assets + "/js/locationJs",
         jobGradeJs: assets + "/js/jobGradeJs",
         designationJs: assets + "/js/designationJs",
         SOPJs: assets + "/js/SOPJs",
@@ -48,6 +49,7 @@ requirejs.config({
         employeeReportByJs: assets + "/js/employeeReportByJs",
         employeeReportAllJs: assets + "/js/employeeReportAllJs",
         editHRISJs: assets + "/js/editHRISJs",
+        jobHistroyJs: assets + "/js/jobHistroyJs",
         eclaimGenearalJs: assets + "/js/eclaimGenearalJs",
         claimCategoryJs: assets + "/js/claimCategoryJs",
         entitleJs: assets + "/js/entitleJs",
@@ -112,6 +114,9 @@ requirejs.config({
         myleaveJs: assets + "/js/myleaveJs",
         leaveApprJs: assets + "/js/leaveApprJs",
         leaveHodJs: assets + "/js/leaveHodJs",
+
+        //weekend
+        weekendEntitlementJs: assets + "/js/weekendEntitlementJs",
 
         // myleave Report
         eleavereportjs: assets + "/js/eleavereportjs",
@@ -183,6 +188,10 @@ if ($("#unitJs").length > 0) {
 
 if ($("#branchJs").length > 0) {
     requirejs(["branchJs"]);
+}
+
+if ($("#locationJs").length > 0) {
+    requirejs(["locationJs"]);
 }
 
 if ($("#jobGradeJs").length > 0) {
@@ -298,6 +307,9 @@ if ($("#employeeReportAllJs").length > 0) {
 if ($("#editHRISJs").length > 0) {
     requirejs(["editHRISJs"]);
 }
+if ($("#jobHistroyJs").length > 0) {
+    requirejs(["jobHistroyJs"]);
+}
 
 if ($("#eclaimGenearalJs").length > 0) {
     requirejs(["eclaimGenearalJs"]);
@@ -357,6 +369,10 @@ if ($("#eleaveentitlementJs").length > 0) {
 
 if ($("#anualLeaveJs").length > 0) {
     requirejs(["anualLeaveJs"]);
+}
+
+if ($("#weekendEntitlementJs").length > 0) {
+    requirejs(["weekendEntitlementJs"]);
 }
 
 if ($("#eleaveholidayJs").length > 0) {

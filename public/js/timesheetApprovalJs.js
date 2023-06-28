@@ -45,6 +45,11 @@ $(document).ready(function () {
                 },
             },
         ],
+        initComplete: function (settings, json) {
+            $("#timesheetapproval").wrap(
+                "<div style='overflow:auto; width:100%;position:relative;'></div>"
+            );
+        },
         columnDefs: [{ orderable: false, targets: [0] }],
     });
 

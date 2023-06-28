@@ -8,6 +8,7 @@ use App\Models\ClaimCategoryContent;
 use App\Models\ClaimDateSetting;
 use App\Models\AppealMtc;
 use App\Models\ApprovalConfig;
+use App\Models\CashAdvanceDetail;
 use App\Models\Company;
 use App\Models\Customer;
 use App\Models\Department;
@@ -23,6 +24,7 @@ use App\Models\ProjectLocation;
 use App\Models\ProjectMember;
 use App\Models\Role;
 use App\Models\TimesheetEvent;
+use App\Models\Location;
 use App\Models\TypeOfLogs;
 use App\Models\Unit;
 use App\Models\UserProfile;
@@ -33,8 +35,13 @@ use App\Models\EclaimGeneral;
 use App\Models\PermissionRole;
 use App\Models\EntitleSubsBenefit;
 use App\Models\Notification;
+use App\Models\Country;
+use App\Models\State;
 use App\Notifications\GeneralNotification;
 use App\Service\ClaimApprovalService;
+use App\Service\MyleaveService;
+use App\Service\MyTimeSheetService;
+use App\Service\ProjectService;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -634,7 +641,114 @@ if (!function_exists('asias')) {
     }
 }
 
+if (!function_exists('getCountryName')) {
+    function getCountryName($countryId)
+    {
+        $countries = getCountries();
 
+        if (isset($countries[$countryId])) {
+            return $countries[$countryId];
+        }
+
+        return '';
+    }
+}
+
+if (!function_exists('getCountries')) {
+    function getCountries()
+    {
+        $data = Country::all();
+
+        if (blank($data)) {
+            $data = [];
+        }
+
+        return $data->pluck('CountryName', 'countryID')->toArray();
+    }
+}
+
+if (!function_exists('getStateName')) {
+    function getStateName($stateId)
+    {
+        $states = getStates();
+
+        if (isset($states[$stateId])) {
+            return $states[$stateId];
+        }
+
+        return '';
+    }
+}
+
+if (!function_exists('getStates')) {
+    function getStates()
+    {
+        $data = State::all();
+
+        if (blank($data)) {
+            return null;
+        }
+
+        return $data->pluck('stateName', 'id')->toArray();
+    }
+}
+
+if (!function_exists('getCountryBranch')) {
+    function getCountryBranch()
+    {
+        $data = Country::all();
+
+        if (blank($data)) {
+            $data = [];
+
+        }
+
+        return $data;
+    }
+}
+
+if (!function_exists('getStateBranch')) {
+    function getStateBranch()
+    {
+        $data = State::all();
+
+        if (blank($data)) {
+            $data = [];
+        }
+
+
+        return $data;
+    }
+}
+
+if (!function_exists('getPostcodeBranch')) {
+    function getPostcodeBranch()
+    {
+        $data = Location::all();
+
+        if (blank($data)) {
+            $data = [];
+        }
+
+
+        return $data;
+    }
+}
+
+if (!function_exists('getLocation')) {
+    function getLocation()
+    {
+        $data = DB::select("SELECT settingcountry.CountryName, states.stateName, location.postcode from location, settingcountry, states
+        WHERE location.countryID = settingcountry.countryID AND location.stateID = states.id;");
+
+ if (blank($data)) {
+    $data = [];
+}
+        return $data;
+
+
+    }
+}
 
 if (!function_exists('getCompany')) {
     function getCompany()
@@ -2563,30 +2677,6 @@ if (!function_exists('sendGeneralNotification')) {
 if (!function_exists('getClaimData')) {
     function getClaimData($roleApprover = '')
     {
-        $cond[0] = ['id', '!=', NULL];
-
-        if ($roleApprover == 'DepartRecommender') {
-            // $cond[1] = ['supervisor', NULL];
-            $cond[2] = ['status', 'active'];
-            $cond[3] = ['claim_type', 'MTC'];
-        }
-
-        if ($roleApprover == 'DepartApprover') {
-
-            $configData = getApprovalConfigClaim('SUPERVISOR - RECOMMENDER');
-            $condByPass = ['status', "active"];
-            // $condByPass[1] = ['status', "active"];
-            if ($configData->status) {
-                $condByPass = ['supervisor', "recommend"];
-            }
-
-            $cond[98]  =  $condByPass;
-            // $cond[97]  =  $condByPass1;
-            // $cond[3] = ['claim_type', '!=', ''];
-            $cond[4] = ['hod', ''];
-            // dd($condByPass);
-        }
-
         if ($roleApprover == 'FinanceRec') {
             $roles = ['SUPERVISOR - RECOMMENDER', 'HOD / CEO - APPROVER', 'ADMIN - CHECKER', 'ADMIN - RECOMMENDER', 'ADMIN - APPROVER', 'FINANCE - CHECKER'];
             $condByPass = ['id', '!=', ""];
@@ -2760,12 +2850,176 @@ if (!function_exists('getClaimData')) {
     }
 }
 
+if (!function_exists('getGeneralClaimMenuNotifyForDepartment')) {
+    function getGeneralClaimMenuNotifyForDepartment($roleApprover = '')
+    {
+
+        $cond[0] = ['id', '!=', ''];
+        $userRecId = [];
+
+        if ($roleApprover == 'DepartRecommender') {
+            // $cond[1] = ['supervisor', NULL];
+            $cond[2] = ['status', 'active'];
+            $cond[3] = ['claim_type', 'MTC'];
+
+            // find user that assign to recommender
+            $userRecommenders = Employee::where('eclaimrecommender', Auth::user()->id)->get();
+            foreach ($userRecommenders as $userRec) {
+                $userRecId[] = $userRec->user_id;
+            }
+        }
+
+        if ($roleApprover == 'DepartApprover') {
+
+            $configData = getApprovalConfigClaim('SUPERVISOR - RECOMMENDER');
+            $condByPass = ['status', "active"];
+            // $condByPass[1] = ['status', "active"];
+            if ($configData->status) {
+                $condByPass = ['supervisor', "recommend"];
+            }
+
+            $cond[98]  =  $condByPass;
+            // $cond[97]  =  $condByPass1;
+            // $cond[3] = ['claim_type', '!=', ''];
+            $cond[4] = ['hod', NULL];
+            // dd($condByPass);
+
+            // find user that assign to recommender
+            $userRecommenders = Employee::where('eclaimapprover', Auth::user()->id)->get();
+            foreach ($userRecommenders as $userRec) {
+                $userRecId[] = $userRec->user_id;
+            }
+        }
+
+        $cond[99] = ['status', '!=', 'draft'];
+        // dd($cond);
+        $data = GeneralClaim::where($cond)->whereIn('user_id', $userRecId)->get();
+
+        if (!$data) {
+            $data = [];
+        }
+        return $data;
+    }
+}
+
+
 if (!function_exists('getApprovalConfig')) {
     function getApprovalConfig($type = '', $claimType = '')
     {
         $cas = new ClaimApprovalService;
 
         $data = $cas->getApprovalConfig($type, $claimType);
+
+        if (!$data) {
+            $data = [];
+        }
+
+        return $data;
+    }
+}
+
+if (!function_exists('getEmplomentByUserId')) {
+    function getEmplomentByUserId()
+    {
+        $data = Employee::where('user_id', Auth::user()->id)->first();
+        if (!$data) {
+            $data = [];
+        }
+
+        return $data;
+    }
+}
+
+if (!function_exists('getTimesheetDataToApprove')) {
+    function getTimesheetDataToApprove()
+    {
+        $ss = new MyTimeSheetService;
+
+        $data = $ss->timesheetApprovalView();
+
+        if (!$data) {
+            $data = [];
+        }
+
+        return $data;
+    }
+}
+
+if (!function_exists('getTimesheetAppealData')) {
+    function getTimesheetAppealData()
+    {
+        $ss = new MyTimeSheetService;
+
+        $data = $ss->timesheetApprovalappealView();
+
+        if (!$data) {
+            $data = [];
+        }
+
+        return $data;
+    }
+}
+
+if (!function_exists('getEleaveData')) {
+    function getEleaveData($role = '')
+    {
+        $ss = new MyleaveService;
+
+        if ($role == 'recommender') {
+            $data = $ss->leaveApprview();
+        } else {
+            $data = $ss->leaveApprhodView();
+        }
+
+
+        if (!$data) {
+            $data = [];
+        }
+
+        return $data;
+    }
+}
+
+if (!function_exists('getProjectApproverData')) {
+    function getProjectApproverData()
+    {
+        $ss = new ProjectService;
+
+        $data = $ss->projectApprovalData();
+        // if ($role == 'recommender') {
+        // } else {
+        //     $data = $ss->leaveApprhodView();
+        // }
+
+
+        if (!$data) {
+            $data = [];
+        }
+
+        return $data;
+    }
+}
+
+if (!function_exists('getCaClaimData')) {
+    function getCaClaimData($role = '')
+    {
+        $ss = new ClaimApprovalService;
+
+        if ($role == 'departApprover') {
+            $data = $ss->cashAdvanceApprovalView($role);
+        }
+
+        if (in_array($role, ['financeRec', 'financeApprover'])) {
+            $data = $ss->cashAdvanceFapproverView($role);
+        }
+
+        if ($role == 'financeChecker') {
+            $data = $ss->cashAdvanceFcheckerView()['general'];
+            // $ca[0] = ['tenant_id', Auth::user()->tenant_id];
+            // $ca[1] = ['status', '!=', 'draft'];
+
+            // $data = CashAdvanceDetail::where($ca)->get();
+        }
 
         if (!$data) {
             $data = [];

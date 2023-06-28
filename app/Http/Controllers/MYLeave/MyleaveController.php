@@ -29,14 +29,14 @@ class MyleaveController extends Controller
         $input = $r->input();
         // dd($input);
         // die;
-        if(isset($input['applydatemy']) || isset($input['typelistmy']) || isset($input['statusmy'])){
+        if (isset($input['applydatemy']) || isset($input['typelistmy']) || isset($input['statusmy'])) {
             $data['myleave'] = $ms->searchmyleaveView($r);
             $data['applydatemy'] = isset($input['applydatemy']) ? $input['applydatemy'] : '';
             $data['typelistmy'] = isset($input['typelistmy']) ? $input['typelistmy'] : '';
             $data['status_searchingmy'] = isset($input['statusmy']) ? $input['statusmy'] : '';
         }
 
-        if(isset($input['applydate']) || isset($input['typelist']) || isset($input['status'])){
+        if (isset($input['applydate']) || isset($input['typelist']) || isset($input['status'])) {
             $data['myleaveHistory'] = $ms->searcmyleavehistory($r);
             $data['applydate'] = isset($input['applydate']) ? $input['applydate'] : '';
             $data['typelist'] = isset($input['typelist']) ? $input['typelist'] : '';
@@ -45,10 +45,10 @@ class MyleaveController extends Controller
 
 
 
-        return view('pages.myleave.myleave',$data);
+        return view('pages.myleave.myleave', $data);
     }
 
-     public function searchmyleavehistory(Request $r)
+    public function searchmyleavehistory(Request $r)
     {
         // $ms = new MyleaveService;
         // $input = $r->input();
@@ -67,7 +67,7 @@ class MyleaveController extends Controller
         // return view('pages.myleave.myleave', $data);
     }
 
-     public function createtmyleave(Request $r)
+    public function createtmyleave(Request $r)
     {
 
         $ms = new MyleaveService;
@@ -180,7 +180,7 @@ class MyleaveController extends Controller
     //supervisor
 
 
-     public function leaveApprView(Request $r)
+    public function leaveApprView(Request $r)
     {
         $ms = new MyleaveService;
         $data['leaveApprView'] = $ms->leaveApprview();
@@ -192,14 +192,14 @@ class MyleaveController extends Controller
 
         $input = $r->input();
 
-        if($input){
+        if ($input) {
             $data['leaveApprView'] = $ms->searleavaappr($r);
             $data['applydate'] = $input['applydate'];
             $data['idemployer'] = $input['idemployer'];
             $data['type'] = $input['type'];
         }
 
-        return view('pages.myleave.leaveAppr',$data);
+        return view('pages.myleave.leaveAppr', $data);
     }
 
     public function updatesupervisor(Request $r, $id)
@@ -224,7 +224,7 @@ class MyleaveController extends Controller
 
 
     //hod
-      public function leaveApprhodView(Request $r)
+    public function leaveApprhodView(Request $r)
     {
         $ms = new MyleaveService;
         $data['leaveApprhodView'] = $ms->leaveApprhodView();
@@ -236,17 +236,17 @@ class MyleaveController extends Controller
 
         $input = $r->input();
 
-        if($input){
+        if ($input) {
             $data['leaveApprhodView'] = $ms->searApprhod($r);
             $data['applydate'] = $input['applydate'];
             $data['idemployer'] = $input['idemployer'];
             $data['type'] = $input['type'];
         }
 
-        return view('pages.myleave.leaveApprhod',$data);
+        return view('pages.myleave.leaveApprhod', $data);
     }
 
-     public function updatehod(Request $r, $id)
+    public function updatehod(Request $r, $id)
     {
         $ms = new MyleaveService;
 
@@ -282,7 +282,7 @@ class MyleaveController extends Controller
     // }
 
 
-     public function approvemyleave($id = '')
+    public function approvemyleave($id = '')
     {
         $ms = new MyleaveService;
 
@@ -290,7 +290,7 @@ class MyleaveController extends Controller
 
         return $result;
     }
-     public function approvemyleaveby($id = '')
+    public function approvemyleaveby($id = '')
     {
         $ms = new MyleaveService;
 
@@ -307,13 +307,9 @@ class MyleaveController extends Controller
     {
         $gclh = new MyleaveService;
 
-        $result = $gclh-> myholiday($date);
+        $result = $gclh->myholiday($date);
 
 
         return response()->json($result);
     }
-
-
-
-
 }

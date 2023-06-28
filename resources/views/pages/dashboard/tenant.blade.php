@@ -103,7 +103,7 @@
 								<td>{{ $new['title'] }}</td>
 								<td>{{ $new['content'] }}</td>
 								<td><a href="{{ $new['sourceURL'] }}" target="_blank">{{ $new['sourceURL'] }}</a></td>
-								<td><a href="{{ route('download', ['filename' => $new['file']]) }}">{{ $new['file'] }}</a></td>  
+								<td><a href="{{ route('download', ['filename' => $new['file']]) }}">{{ $new['file'] }}</a></td>
 							</tr>
 						@endforeach
 						@endif
@@ -139,8 +139,8 @@
 					</thead>
 					<tbody>
 					<?php $id = 0 ?>
-					@if ($events)
-                                    @foreach ($events as $event)
+						@if ($events)
+								@foreach ($events as $event)
 							<?php $id++ ?>
 								<tr class="odd gradeX">
 									<td>{{$id }}</td>
@@ -150,12 +150,13 @@
 									<td>{{ $event->location ? getProjectLocation($event->location)->location_name : '-' }}
 									</td>
 									<td>{{ $event->desc ? $event->desc : '-' }}</td>
-									{{-- @php
-										$names = explode(',', $event->participant);
-									@endphp --}}
-									<td style="text-align: center" width="7%"><a class="btn btn-primary" href="javascript:;" data-bs-toggle="modal"
+									@php
+                                                $names = explode(',', $event->participant);
+                                            @endphp
+									<td style="text-align: center" width="7%">
+										<a class="btn btn-primary" href="javascript:;" data-bs-toggle="modal" data-id="{{ $event->id }}" id="buttonnViewParticipant"></i> {{ count($names) }}</a></td>
 											{{-- data-id="{{ $event->id }}" id="buttonnViewParticipant"></i> ({{ count($names) }}) view</a></td> --}}
-											data-id="{{ $event->id }}" id="buttonnViewParticipant"></i> view</a></td>
+											<!-- data-id="{{ $event->id }}" id="buttonnViewParticipant"></i> view</a></td> -->
 									<td> {{ $event->employeeName ?? '-' }}</td>
 								</tr>
 							@endforeach
@@ -167,6 +168,8 @@
 					
 			</div>
 		</div>
+
+
 	<!--  -->
 	<!-- <div class="row">
 		<div class="col-lg-12 panel panel-inverse" data-sortable-id="index-1">
@@ -389,7 +392,7 @@
 </div>
 
 
-
+@include('modal.eventParticipant')
 @endsection
 
 

@@ -16,7 +16,11 @@ $(document).ready(function () {
                 columns: [2,3,4,5,6,7]
             }},
         ],
-      
+        initComplete: function (settings, json) {
+            $("#appealtable").wrap(
+                "<div style='overflow:auto; width:100%;position:relative;'></div>"
+            );
+        },
         columnDefs: [
                   { orderable: false, targets: [0] }
                ]
@@ -39,7 +43,11 @@ $(document).ready(function () {
                 columns: [2,3,4,5,6,7]
             }},
         ],
-      
+        initComplete: function (settings, json) {
+            $("#appealtablehistory").wrap(
+                "<div style='overflow:auto; width:100%;position:relative;'></div>"
+            );
+        },
         columnDefs: [
                   { orderable: false, targets: [0] }
                ]
@@ -120,7 +128,7 @@ $(document).ready(function () {
                 $("#filedownloadappeal").html('<a href="/storage/' + data.file + '">Download ' + fileName + '</a>');
               }
         });
-        $("#appealmodalview").modal("show");
+        $("#viewapprover").modal("show");
     });
 
 
