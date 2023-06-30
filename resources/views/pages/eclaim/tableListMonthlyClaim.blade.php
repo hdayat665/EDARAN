@@ -12,7 +12,7 @@
                 </div>
                 <div class="col-md-6">
                     <div class="col d-flex justify-content-end">
-                        <input type="text" class="form-control" readonly value='RM {{ $summaryTravelling[0]->total_travelling ?? 0 }}'>
+                        <input type="text" class="form-control" readonly value='RM {{ number_format($totalTravellings ?? 0, 2) }}'>
                     </div>
                 </div>
             </div>
@@ -185,8 +185,8 @@
                             </td>
                             <td>{{ date('Y-m-d', strtotime($subs->start_date)) ?? '' }}</td>
                             <td>{{ date('Y-m-d', strtotime($subs->end_date)) ?? '' }}</td>
-                            <td>{{ $subs->total_subs ?? '0' }}</td>
-                            <td>{{ $subs->total_acc ?? '0' }}</td>
+                            <td>RM{{ $subs->total_subs ?? '0' }}</td>
+                            <td>RM{{ $subs->total_acc ?? '0' }}</td>
                         </tr> 
                         @endforeach
                     @endif

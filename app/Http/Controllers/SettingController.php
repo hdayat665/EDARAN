@@ -497,9 +497,14 @@ class SettingController extends Controller
     {
         $ss = new SettingService;
 
-        $result = $ss->locationView();
+        $data['locations'] = $ss->locationView();
 
-        return view('pages.setting.location', $result);
+        //pr($data['locations']);
+
+
+
+
+        return view('pages.setting.location', $data);
     }
 
     public function employmentTypeView()

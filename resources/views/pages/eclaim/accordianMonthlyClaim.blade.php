@@ -485,9 +485,295 @@
                                     </tbody>
                                 </table>
                             </div>
+                            <div class="WOCca" >
+                            <div class="row p-2">
+                                <div class="row p-2">
+                                    <label class="form-label">Travel date and time</label>
+                                </div>
+                                <div class="row p-2">
+                                    <div class="col-md-6">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <div class="row p-2">
+                                                    <div class="col-md-3">
+                                                        <label class="form-label">Start Date</label>
+                                                    </div>
+                                                    <div class="col">
+                                                        <select class="form-control" name="start_date" id="date1ca">
+                                                            <option value="">Select Date</option>
+                                                            @foreach($travelDate as $date)
+                                                                <option value="{{ $date }}">{{ $date }}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="row p-2">
+                                                    <div class="col-md-3">
+                                                        <label class="form-label">Start Time</label>
+                                                    </div>
+                                                    <div class="col">
+                                                        <input type="text" class="form-control" name="start_time" style=" background: #ffffff;" placeholder="Time" id="time1ca">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <div class="row p-2">
+                                                    <div class="col-md-3">
+                                                        <label class="form-label">End Date</label>
+                                                    </div>
+                                                    <div class="col">
+                                                        <select class="form-control" name="end_date" id="date2ca">
+                                                            <option value="">Select Date</option>
+                                                            @foreach($travelDate as $date)
+                                                                <option value="{{ $date }}">{{ $date }}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="row p-2">
+                                                    <div class="col-md-3">
+                                                        <label class="form-label">End Time</label>
+                                                    </div>
+                                                    <div class="col">
+                                                        <input type="text" class="form-control" name="end_time" style=" background: #ffffff;" placeholder="Time" id="time2ca">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="p-2">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="row p-2">
+                                            <div class="col-md-4">
+                                                <label class="form-label">Travel Duration</label>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <input type="text" class="form-control" id="result1ca" name="travel_duration" readonly>
+                                            </div>
+                                        </div>
+                                        <div class="row p-2">
+                                            <div class="col-md-4">
+                                                <label class="form-label">Project</label>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <select class="form-select" name="project_id">
+                                                    <option class="form-label" value="" selected>
+                                                        PLEASE CHOOSE</option>
+                                                    <?php $projects = myProjectOnly(); ?>
+                                                    @foreach ($projects as $project)
+                                                        <option class="form-label" value="{{ $project->id }}">{{ $project->project_name }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-md-6">
+                                        <div class="row p-2">
+                                            <div class="col-md-4">
+                                                <label class="form-label">Description</label>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <textarea class="form-control" name="desc" id="" rows="4"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- <div class="p-2">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-control">
+                                            <div class="row p-2">
+                                                <label class="form-label">Subsistence Allowance</label>
+                                            </div>
+                                            <div class="row p-2">
+                                                <div class="col-md-2">
+                                                    <label class="form-label">Breakfast</label>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <input  type="text" class="form-control" readonly value="{{ $food[0]['breakfast'] }}" id="BFca">
+                                                </div>
+                                                <div class="col-md-1">
+                                                    <label class="form-label">X</label>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <input type="text" class="form-control" readonly name="breakfast" value="0" id="DBFca">
+                                                </div>
+                                                <div class="col-md-1">
+                                                    <label class="form-label">=</label>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <input type="text" class="form-control" readonly id="totalbfca">
+                                                </div>
+                                            </div>
+                                            <div class="row p-2">
+                                                <div class="col-md-2">
+                                                    <label class="form-label">Lunch</label>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <input  type="text" class="form-control" readonly value="{{ $food[0]['lunch'] }}" id="LHca">
+                                                </div>
+                                                <div class="col-md-1">
+                                                    <label class="form-label">X</label>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <input type="text" name="lunch" readonly class="form-control" value="0" id="DLHca">
+                                                </div>
+                                                <div class="col-md-1">
+                                                    <label class="form-label">=</label>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <input type="text" class="form-control" readonly id="totallhca">
+                                                </div>
+                                            </div>
+                                            <div class="row p-2">
+                                                <div class="col-md-2">
+                                                    <label class="form-label">Dinner</label>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <input  type="text" class="form-control" readonly value="{{ $food[0]['dinner'] }}" id="DNca">
+                                                </div>
+                                                <div class="col-md-1">
+                                                    <label class="form-label">X</label>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <input type="text" name="dinner" readonly class="form-control" value="0" id="DDNca">
+                                                </div>
+                                                <div class="col-md-1">
+                                                    <label class="form-label">=</label>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <input type="text" class="form-control" readonly id="totaldnca">
+                                                </div>
+                                            </div>
+                                            <div class="row p-2">
+                                                <div class="col-md-2">
+                                                    
+                                                </div>
+                                                <div class="col-md-2">
+                                                    
+                                                </div>
+                                                <div class="col-md-1">
+                                                    
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <label class="form-label">Total (A)</label>
+                                                </div>
+                                                <div class="col-md-1">
+                                                    <label class="form-label">=</label>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <input readonly type="text" name="total_subs" class="form-control" value="0" id="TSca">
+                                                </div>
+                                            </div>
+                                           
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-md-6">
+                                        <div class="form-control">
+                                                <div class="row p-2">
+                                                    <label class="form-label">Accommodation</label>
+                                                </div>
+                                                <div class="row p-2">
+                                                    <div class="col-md-3" id="hotelc">
+                                                        <input class="form-check-input" type="checkbox" value="{{ $food[0]['local_hotel_value'] }}" id="htvca" />
+                                                        <label class="form-label">Hotel</label>
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <input  type="text" readonly name="hotel_value"class="form-control" id="hotelcvca">
+                                                    </div>
+                                                    <div class="col-md-2" style="display: none">
+                                                        <input  type="text" class="form-control"  id="hotelcv1ca" value="0">
+                                                    </div>
+                                                    <div class="col-md-1">
+                                                        <label class="form-label">X</label>
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <input type="text" name="hotel" class="form-control" id="hnca" disabled value="0">
+                                                    </div>
+                                                    <div class="col-md-1">
+                                                        <label class="form-label">=</label>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <input type="text" name="hotel" class="form-control" id="hnca" disabled value="0">
+                                                    </div>
+                                                </div>
+                                                <div class="row p-2">
+                                                    <div class="col-md-3" id="lodgingc">
+                                                        <input class="form-check-input" type="checkbox" value="{{ $food[0]['lodging_allowance_value'] }}" id="ldgvca" />
+                                                        <label class="form-label">Lodging</label>
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <input  type="text" readonly class="form-control" id="lodgingcvca">
+                                                    </div>
+                                                    <div class="col-md-2" style="display: none">
+                                                        <input readonly type="text" class="form-control" id="lodgingcv1ca" value="0">
+                                                    </div>
+                                                    <div class="col-md-1">
+                                                        <label class="form-label">X</label>
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <input type="text" name="lodging" class="form-control" value="0" id="lnca" disabled>
+                                                    </div>
+                                                    <div class="col-md-1">
+                                                        <label class="form-label">=</label>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <input type="text" name="hotel" class="form-control" id="hnca" disabled value="0">
+                                                    </div>
+                                                </div>
+                                                
+                                                <div class="row p-2">
+                                                    <div class="col-md-3">
+                                                        <input type="file" class="form-control-file" name="file_upload[]" id="supportdocumentca" multiple>
+                                                    </div>
+                                                    <div class="col-md-1">
+                                                        
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <label class="form-label">Total (B)</label>
+                                                    </div>
+                                                    <div class="col-md-1">
+                                                        <label class="form-label">=</label>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <input readonly type="text" name="total_acc" class="form-control" value="0" id="TAVca">
+                                                    </div>
+                                                </div>
+                                                <div class="row p-2">
+                                                    
+                                                    <div class="col-md-8">
+                                                        <label class="form-label">Total Subsistence Allowance & Accommodation (A+B)</label>
+                                                    </div>
+                                                    <div class="col-md-1">
+                                                        <label class="form-label">=</label>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <input readonly type="text" name="total" class="form-control" value="" id="total2ca">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div> -->
                             <div class="modal-footer">
                                 <button type="submit" id="caButton" class="btn btn-primary">Save</button>
                             </div>
+                        </div>
+                            
                         </div>
                         <div class="WOC" style="display:none">
                             <div class="row p-2">
@@ -694,22 +980,22 @@
                                                         <label class="form-label">Hotel</label>
                                                     </div>
                                                     <div class="col-md-2">
-                                                        <input  type="text" readonly name="hotel_value"class="form-control" id="hotelcv">
+                                                        <input  type="number" readonly name="hotel_value"class="form-control" id="hotelcv">
                                                     </div>
                                                     <div class="col-md-2" style="display: none">
-                                                        <input  type="text" class="form-control"  id="hotelcv1" value="0">
+                                                        <input  type="number" class="form-control"  id="hotelcv1" value="0">
                                                     </div>
                                                     <div class="col-md-1">
                                                         <label class="form-label">X</label>
                                                     </div>
                                                     <div class="col-md-2">
-                                                        <input type="text" name="hotel" class="form-control" id="hn" disabled value="0">
+                                                        <input type="text" name="hotel" class="form-control" id="hn" readonly value="0">
                                                     </div>
                                                     <div class="col-md-1">
                                                         <label class="form-label">=</label>
                                                     </div>
                                                     <div class="col-md-3">
-                                                        <input type="text" name="hotel" class="form-control" id="hn" disabled value="0">
+                                                        <input type="text" name="hotel" class="form-control" id="hnTotal" readonly value="0">
                                                     </div>
                                                 </div>
                                                 <div class="row p-2">
@@ -718,22 +1004,22 @@
                                                         <label class="form-label">Lodging</label>
                                                     </div>
                                                     <div class="col-md-2">
-                                                        <input  type="text" readonly class="form-control" id="lodgingcv">
+                                                        <input  type="number" readonly class="form-control" id="lodgingcv">
                                                     </div>
                                                     <div class="col-md-2" style="display: none">
-                                                        <input readonly type="text" class="form-control" id="lodgingcv1" value="0">
+                                                        <input readonly type="number" class="form-control" id="lodgingcv1" value="0">
                                                     </div>
                                                     <div class="col-md-1">
                                                         <label class="form-label">X</label>
                                                     </div>
                                                     <div class="col-md-2">
-                                                        <input type="text" name="lodging" class="form-control" value="0" id="ln" disabled>
+                                                        <input type="text" name="lodging" class="form-control" value="0" id="ln" readonly>
                                                     </div>
                                                     <div class="col-md-1">
                                                         <label class="form-label">=</label>
                                                     </div>
                                                     <div class="col-md-3">
-                                                        <input type="text" name="hotel" class="form-control" id="hn" disabled value="0">
+                                                        <input type="text" name="hotel" class="form-control" id="lnTotal" readonly value="0">
                                                     </div>
                                                 </div>
                                                 
