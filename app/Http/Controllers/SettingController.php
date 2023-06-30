@@ -1472,4 +1472,29 @@ class SettingController extends Controller
 
         return response()->json($result);
     }
+
+    public function newRole()
+    {
+        // $ss = new SettingService;
+
+        // $result = $ss->newCreateRole();
+
+        return view('pages.setting.newRole'); ;
+    }
+    public function newCreateRole()
+    {
+        // $ss = new SettingService;
+
+        // $result = $ss->newCreateRole();
+
+        return view('pages.setting.newCreateRole'); ;
+    }
+    public function newUpdateRole()
+    {
+        // $ss = new SettingService;
+
+        // $result = $ss->newCreateRole();
+
+        return view('pages.setting.newUpdateRole'); ;
+    }
 }

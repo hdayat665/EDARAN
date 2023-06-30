@@ -3233,4 +3233,11 @@ public function updateTypeOfLogs($r, $id)
             ->orderBy('id', 'asc')->get();
         return $data;
     }
+
+    // public function newRole()
+    // {
+    //     $data = [];
+        
+    //     return $data;
+    // }
 }

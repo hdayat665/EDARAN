@@ -284,6 +284,11 @@ Route::group(['middleware' => ['web']], function () {
             Route::delete('/deleteDesignation/{id}', 'deleteDesignation');
             Route::get('/getSOP', 'getSOP');
 
+            Route::get('/newRole', 'newRole');
+            Route::get('/newCreateRole', 'newCreateRole');
+            Route::get('/newUpdateRole', 'newUpdateRole');
+            // Route::get('/setting', 'settingView');
+
             Route::get('/download/{filename}', function ($filename) {
                 $path = 'public/' . $filename;
                 if (!Storage::disk('local')->exists($path)) {
