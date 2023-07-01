@@ -118,11 +118,20 @@ class MyleaveService
 
     public function datatype()
     {
-
         $data =
             leavetypesModel::where('tenant_id', Auth::user()->tenant_id)
             ->where('status', '=', 1)
             ->get();
+        return $data;
+    }
+
+    public function datatypesick()
+    {
+        $data =
+            leavetypesModel::where('tenant_id', Auth::user()->tenant_id)
+            ->where('status', '=', 1)
+            ->where('leave_types_code', '=', 'SL')
+            ->first();
         return $data;
     }
 
@@ -208,40 +217,101 @@ class MyleaveService
 
         if ($r->input('leave_date')) {
 
-            $getDateSame = MyLeaveModel::where([
-                ['start_date', '<=', $input['leave_date']],
-                ['end_date', '>=', $input['leave_date']],
-                ['tenant_id', '=', Auth::user()->tenant_id],
-                ['up_user_id', '=', Auth::user()->id]
-            ])->first();
 
-            if ($getDateSame) {
-                $data['msg'] = 'There is an existing application for the date selected';
-                $data['status'] = config('app.response.error.status');
-                $data['type'] = config('app.response.error.type');
-                $data['title'] = config('app.response.error.title');
+            if($input['availability'] == 2){
 
-                return $data;
+                $checkAL = leavetypesModel::select('leave_types.*')
+                ->where('leave_types.tenant_id', '=',Auth::user()->tenant_id)
+                ->where('leave_types.leave_types_code', '=', 'AL')
+                ->first();
+
+                $getDateSameOther = MyLeaveModel::where([
+                    ['start_date', '<=', $input['leave_date']],
+                    ['end_date', '>=',  $input['leave_date']],
+                    ['tenant_id', '=', Auth::user()->tenant_id],
+                    ['up_user_id', '=', Auth::user()->id],
+                    ['lt_type_id', '=', $checkAL->id],
+                    ['status_final', '=', 4],
+                    ['calculate', '=', 1],
+                ])->first();
+
+                if (empty($getDateSameOther)) {
+                    $data['msg'] = 'This application only you use when you have apply ANUAL LEAVE and approved';
+                    $data['status'] = config('app.response.error.status');
+                    $data['type'] = config('app.response.error.type');
+                    $data['title'] = config('app.response.error.title');
+                    return $data;
+                }
+
+            }else{
+                $getDateSame = MyLeaveModel::where([
+
+                    ['start_date', '<=', $input['leave_date']],
+                    ['end_date', '>=', $input['leave_date']],
+                    ['tenant_id', '=', Auth::user()->tenant_id],
+                    ['up_user_id', '=', Auth::user()->id]
+
+                ])->first();
+
+                if ($getDateSame) {
+
+                    $data['msg'] = 'There is an existing application for the date selected';
+                    $data['status'] = config('app.response.error.status');
+                    $data['type'] = config('app.response.error.type');
+                    $data['title'] = config('app.response.error.title');
+
+                    return $data;
+                }
             }
         }
 
+
+
         if ($r->input('start_date')) {
 
-            $getDateSameOther = MyLeaveModel::where([
-                ['start_date', '<=', $input['start_date']],
-                ['end_date', '>=',  $input['start_date']],
-                ['tenant_id', '=', Auth::user()->tenant_id],
-                ['up_user_id', '=', Auth::user()->id]
-            ])->first();
+            if($input['availability'] == 2){
 
-            if ($getDateSameOther) {
-                $data['msg'] = 'There is an existing application for the date selected';
-                $data['status'] = config('app.response.error.status');
-                $data['type'] = config('app.response.error.type');
-                $data['title'] = config('app.response.error.title');
+                $checkAL = leavetypesModel::select('leave_types.*')
+                ->where('leave_types.tenant_id', '=',Auth::user()->tenant_id)
+                ->where('leave_types.leave_types_code', '=', 'AL')
+                ->first();
 
-                return $data;
+                $getDateSameOther = MyLeaveModel::where([
+                    ['start_date', '<=', $input['start_date']],
+                    ['end_date', '>=',  $input['start_date']],
+                    ['tenant_id', '=', Auth::user()->tenant_id],
+                    ['up_user_id', '=', Auth::user()->id],
+                    ['lt_type_id', '=', $checkAL->id],
+                    ['status_final', '=', 4],
+                    ['calculate', '=', 1],
+                ])->first();
+
+                if (empty($getDateSameOther)) {
+                    $data['msg'] = 'You cant use this Application because dont have Al approved for deduct you leave';
+                    $data['status'] = config('app.response.error.status');
+                    $data['type'] = config('app.response.error.type');
+                    $data['title'] = config('app.response.error.title');
+                    return $data;
+                }
+
+            }else{
+                $getDateSameOther = MyLeaveModel::where([
+                    ['start_date', '<=', $input['start_date']],
+                    ['end_date', '>=',  $input['start_date']],
+                    ['tenant_id', '=', Auth::user()->tenant_id],
+                    ['up_user_id', '=', Auth::user()->id]
+                ])->first();
+
+                if ($getDateSameOther) {
+                    $data['msg'] = 'There is an existing application for the date selected';
+                    $data['status'] = config('app.response.error.status');
+                    $data['type'] = config('app.response.error.type');
+                    $data['title'] = config('app.response.error.title');
+
+                    return $data;
+                }
             }
+
         }
 
 
@@ -290,12 +360,31 @@ class MyleaveService
             $input['file'] = null;
         }
 
+        if (isset($_FILES['fileuploadsick']) && $_FILES['fileuploadsick']['error'] === UPLOAD_ERR_OK && $_FILES['fileuploadsick']['size'] > 0) {
+            $myleave = upload($r->file('fileuploadsick'));
+            $input['fileuploadsick'] = $myleave['filename'];
+        } else {
+
+            $input['fileuploadsick'] = null;
+        }
+
 
         $data1 = date('Y-m-d', strtotime($input['applied_date']));
         $data2 = $input['typeofleave'];
         $data3 = $input['noofday'];
         $data8 = $input['file'];
+        $data8a = $input['fileuploadsick'];
+
+        if (!empty($data8)) {
+            $fileDocument = $data8;
+        } elseif (!empty($data8a)) {
+            $fileDocument = $data8a;
+        } else {
+            $fileDocument = null;
+        }
+
         $data9 = $input['reason'];
+        $dataavailability = $input['availability'];
 
         if ($r->input('noofday') == 1) {
             $data3 = $input['noofday'];
@@ -333,7 +422,7 @@ class MyleaveService
                 'leave_date' => $data5,
                 'start_date' => $data6,
                 'end_date' => $data7,
-                'file_document' => $data8,
+                'file_document' => $fileDocument,
                 'reason' => $data9,
                 'leave_session' => $data10,
                 'up_approvedby_id' => $getdata->eleaveapprover,
@@ -342,7 +431,9 @@ class MyleaveService
                 'up_app_status' => '2',
                 'status_final' => '1',
                 'tenant_id' => Auth::user()->tenant_id,
-                'up_user_id' => Auth::user()->id
+                'up_user_id' => Auth::user()->id,
+                'availability' => $dataavailability
+
             ];
 
             MyLeaveModel::create($input);
@@ -387,7 +478,8 @@ class MyleaveService
                 'up_app_status' => '2',
                 'status_final' => '1',
                 'tenant_id' => Auth::user()->tenant_id,
-                'up_user_id' => Auth::user()->id
+                'up_user_id' => Auth::user()->id,
+                'availability' => $dataavailability
             ];
 
             MyLeaveModel::create($input);
