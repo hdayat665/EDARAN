@@ -860,6 +860,15 @@ class MyleaveService
                 'calculate' => 1,
             ];
 
+            if($settingEmail->availability == 2){
+
+                $leave1 = $check->current_entitlement_balance + $settingEmail->total_day_applied;
+                $input1 = [
+                    'current_entitlement_balance' => $leave1,
+                ];
+                leaveEntitlementModel::where('id', $check->id)->update($input1);
+            }
+
             leaveEntitlementModel::where('id', $check->id)->update($input);
             MyLeaveModel::where('id', $id)->update($inputCalculate);
 
@@ -992,6 +1001,15 @@ class MyleaveService
             $input = [
                 'sick_leave_entitlement_balance' => $leave,
             ];
+
+            if($settingEmail->availability == 2){
+
+                $leave1 = $check->current_entitlement_balance - $settingEmail->total_day_applied;
+                $input1 = [
+                    'current_entitlement_balance' => $leave1,
+                ];
+                leaveEntitlementModel::where('id', $check->id)->update($input1);
+            }
 
             leaveEntitlementModel::where('id', $check->id)->update($input);
 
