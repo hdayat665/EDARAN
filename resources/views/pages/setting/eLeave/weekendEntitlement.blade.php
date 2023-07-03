@@ -2,6 +2,14 @@
 
 @section('content')
 
+    <style>
+     .mdtimepicker {
+        top: 50% !important;
+        transform: translateY(-50%);
+        background-color: transparent !important;
+        }
+    </style>
+
     {{-- content-start --}}
 
     <div id="content" class="app-content">
@@ -16,10 +24,13 @@
                     <div class="tab-pane fade active show" id="default-tab-1">
                         <h3 class="mt-10px"></i> Weekend Entitlement List </h3>
                         <!-- BEGIN panel-heading -->
+                        <hr>
+                        <br>
+                        <div class="panel-heading-btn">
+                            <a href="javascript:;" data-bs-toggle="modal" data-bs-target="#addcountry" class="btn btn-primary">+ Add State</a>
+                        </div>
 
-                        {{-- <div class="panel-heading-btn">
-                            <a href="javascript:;" data-bs-toggle="modal" data-bs-target="#addcountry" class="btn btn-primary">+ Add Country</a>
-                        </div> --}}
+                        <br>
 
                         <form id="updateWeekend">
                             <div class="panel-body">
@@ -27,6 +38,7 @@
                                     <thead>
                                         <tr>
                                         <th width="1%" class="text-nowrap">No.</th>
+                                        <th width="1%" class="text-nowrap" data-orderable="false">Action</th>
                                         <th class="text-nowrap">State</th>
                                         <th class="text-nowrap">Monday</th>
                                         <th class="text-nowrap">Tuesday</th>
@@ -44,34 +56,64 @@
                                         <?php $id++ ?>
                                         <tr class="odd gradeX">
                                             <td>{{ $id }}</td>
-                                            <td>{{$wk->state}}</td>
-                                            <td style="text-align: center;">
-                                                <input type="hidden" name="checkbox[{{$id}}][monday]" value="">
-                                                <input type="checkbox" id="monday_{{$id}}" name="checkbox[{{$id}}][monday]" value="1" @if($wk->monday === 1) checked @endif>
+                                            <td>
+                                                <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle"><i class="fa fa-cogs"></i> Action <i class="fa fa-caret-down"></i></a>
+                                                <div class="dropdown-menu">
+                                                    <a href="javascript:;" id="editButton" data-state_id="{{ $wk->state_id }}" class="dropdown-item" data-bs-toggle="modal" id="myModal1"
+                                                        data-bs-target="#addleave"><i class="fa fa-edit" aria-hidden="true"></i> Edit</a>
+                                                    {{-- <div class="dropdown-divider"></div>
+                                                    <a href="javascript:;" id="deleteButton" data-id="{{ $wk->id }}" class="dropdown-item"><i class="fa fa-trash" aria-hidden="true"></i> Delete</a> --}}
+                                                </div>
                                             </td>
-                                            <td style="text-align: center;">
-                                                <input type="hidden" name="checkbox[{{$id}}][tuesday]" value="">
-                                                <input type="checkbox" id="tuesday_{{$id}}" name="checkbox[{{$id}}][tuesday]" value="2" @if($wk->tuesday === 2) checked @endif>
+                                            <td style="text-align:center">{{ strtoupper($wk->stateName) }}</td>
+                                            <td style="text-align:center">
+                                                @if ($wk->monday_start && $wk->monday_end)
+                                                    {{$wk->monday_start}} - {{$wk->monday_end}}
+                                                @else
+                                                    Weekend
+                                                @endif
                                             </td>
-                                            <td style="text-align: center;">
-                                                <input type="hidden" name="checkbox[{{$id}}][wednesday]" value="">
-                                                <input type="checkbox" id="wednesday_{{$id}}" name="checkbox[{{$id}}][wednesday]" value="3" @if($wk->wednesday === 3) checked @endif>
+                                            <td style="text-align:center">
+                                                @if ($wk->tuesday_start && $wk->tuesday_end)
+                                                    {{$wk->tuesday_start}} - {{$wk->tuesday_end}}
+                                                @else
+                                                    Weekend
+                                                @endif
                                             </td>
-                                            <td style="text-align: center;">
-                                                <input type="hidden" name="checkbox[{{$id}}][thursday]" value="">
-                                                <input type="checkbox" id="thursday_{{$id}}" name="checkbox[{{$id}}][thursday]" value="4" @if($wk->thursday === 4) checked @endif>
+                                            <td style="text-align:center">
+                                                @if ($wk->webnesday_start && $wk->webnesday_end)
+                                                    {{$wk->webnesday_start}} - {{$wk->webnesday_end}}
+                                                @else
+                                                    Weekend
+                                                @endif
                                             </td>
-                                            <td style="text-align: center;">
-                                                <input type="hidden" name="checkbox[{{$id}}][friday]" value="">
-                                                <input type="checkbox" id="friday_{{$id}}" name="checkbox[{{$id}}][friday]" value="5" @if($wk->friday === 5) checked @endif>
+                                            <td style="text-align:center">
+                                                @if ($wk->thursday_start && $wk->thursday_end)
+                                                    {{$wk->thursday_start}} - {{$wk->thursday_end}}
+                                                @else
+                                                    Weekend
+                                                @endif
                                             </td>
-                                            <td style="text-align: center;">
-                                                <input type="hidden" name="checkbox[{{$id}}][saturday]" value="">
-                                                <input type="checkbox" id="saturday_{{$id}}" name="checkbox[{{$id}}][saturday]" value="6" @if($wk->saturday === 6) checked @endif>
+                                            <td style="text-align:center">
+                                                @if ($wk->friday_start && $wk->friday_end)
+                                                    {{$wk->friday_start}} - {{$wk->friday_end}}
+                                                @else
+                                                    Weekend
+                                                @endif
                                             </td>
-                                            <td style="text-align: center;">
-                                                <input type="hidden" name="checkbox[{{$id}}][sunday]" value="">
-                                                <input type="checkbox" id="sunday_{{$id}}" name="checkbox[{{$id}}][sunday]" value="0" @if($wk->sunday === 0) checked @endif>
+                                            <td style="text-align:center">
+                                                @if ($wk->saturday_start && $wk->saturday_end)
+                                                    {{$wk->saturday_start}} - {{$wk->saturday_end}}
+                                                @else
+                                                    Weekend
+                                                @endif
+                                            </td>
+                                            <td style="text-align:center">
+                                                @if ($wk->sunday_start && $wk->sunday_end)
+                                                    {{$wk->sunday_start}} - {{$wk->sunday_end}}
+                                                @else
+                                                    Weekend
+                                                @endif
                                             </td>
                                         </tr>
                                         @endforeach
@@ -80,12 +122,12 @@
                                 </table>
                             </div> <!-- end panel-body -->
 
-                            <div class="row p-2">
+                            {{-- <div class="row p-2">
                                 <div class="modal-footer">
                                     <a class="btn btn-white" >Reset</a>
                                     <button type="submit" id="saveWeekend" class="btn btn-primary">Save</button>
                                 </div>
-                            </div>
+                            </div> --}}
                         </form>
                     </div> <!-- end tab-pane fade active show-->
                 </div> <!--end tab-content panel m-0 rounded-0 p-3-->

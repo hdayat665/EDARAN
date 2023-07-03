@@ -398,7 +398,9 @@ Route::group(['middleware' => ['web']], function () {
 
             // eleave Weekend Entitlement
             Route::get('/weekendEntitlement', 'weekendEntitlementView');
+            Route::get('/getweekend/{id}', 'getweekend');
             Route::post('/updateweekend', 'updateweekend');
+            Route::post('/createleaveweekend', 'createleaveweekend');
 
             // eleave Leave Entitlement
             Route::get('/leaveEntitlement', 'eleaveEntitlementView');
