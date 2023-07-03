@@ -100,7 +100,7 @@ if (!function_exists('getCountryRegisterDomain')) {
 
 //         $data['filename'] = $filename;
 
-//         return $data;
+//         return $data; 
 //     }
 // }
 function PersonalFile($filename, $uploadedFile)
@@ -138,7 +138,76 @@ function PersonalFile($filename, $uploadedFile)
 
     return $data;
 }
+function GeneralFile($filename, $uploadedFile)
+{
+    if ($filename === null || $uploadedFile === null) {
+        // Bypass the function if either $filename or $uploadedFile is null
+        return null;
+    }
 
+    $allowedTypes = ['pdf', 'jpeg', 'jpg', 'png'];
+    $maxSize = 5120; // 5MB
+
+    $extension = pathinfo($filename, PATHINFO_EXTENSION);
+
+    if (!in_array($extension, $allowedTypes)) {
+        // Bypass the function if the file type is not allowed
+        return null;
+    }
+
+    if (!file_exists($uploadedFile)) {
+        throw new Exception("Uploaded file does not exist.");
+    }
+
+    if (filesize($uploadedFile) > $maxSize * 1024) {
+        throw new Exception("File size exceeds the maximum allowed limit of 5 MB.");
+    }
+
+    $newFilename = uniqid() . '.' . $extension;
+    Storage::disk('local')->put(
+        'public/GeneralFile/' . $newFilename,
+        file_get_contents($uploadedFile)
+    );
+
+    $data['filename'] = $newFilename;
+
+    return $data;
+}
+function MtcAttachment($filename, $uploadedFile)
+{
+    if ($filename === null || $uploadedFile === null) {
+        // Bypass the function if either $filename or $uploadedFile is null
+        return null;
+    }
+
+    $allowedTypes = ['pdf', 'jpeg', 'jpg', 'png'];
+    $maxSize = 5120; // 5MB
+
+    $extension = pathinfo($filename, PATHINFO_EXTENSION);
+
+    if (!in_array($extension, $allowedTypes)) {
+        // Bypass the function if the file type is not allowed
+        return null;
+    }
+
+    if (!file_exists($uploadedFile)) {
+        throw new Exception("Uploaded file does not exist.");
+    }
+
+    if (filesize($uploadedFile) > $maxSize * 1024) {
+        throw new Exception("File size exceeds the maximum allowed limit of 5 MB.");
+    }
+
+    $newFilename = uniqid() . '.' . $extension;
+    Storage::disk('local')->put(
+        'public/MtcAttachment/' . $newFilename,
+        file_get_contents($uploadedFile)
+    );
+
+    $data['filename'] = $newFilename;
+
+    return $data;
+}
 function TravelFile($filename, $uploadedFile)
 {
     if ($filename === null || $uploadedFile === null) {
