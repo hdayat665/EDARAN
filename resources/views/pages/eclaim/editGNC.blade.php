@@ -161,7 +161,7 @@
                                                     $filenames = explode(',', $detail->file_upload);
                                                     @endphp
                                                     @foreach($filenames as $filename)
-                                                    <a href="/storage/{{ $filename }}" target="_blank">{{ $filename }}</a><br>
+                                                    <a href="/storage/GeneralFile/{{ $filename }}" target="_blank">{{ $filename }}</a><br>
                                                     @endforeach
                                                 @endif
                                                 </td>

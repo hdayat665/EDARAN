@@ -605,6 +605,8 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('/updateOtherMtc', 'updateOtherMtc');
             Route::post('/updateSubsMtc', 'updateSubsMtc');
             Route::post('/updateTravelMtc/{id}', 'updateTravelMtc');
+            Route::post('/saveTravellingAttachment', 'saveTravellingAttachment');
+            Route::post('/saveSubsAttachment', 'saveSubsAttachment');
         });
 
         Route::controller(generalClaimController::class)->group(function () {
@@ -614,6 +616,8 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('/updateGeneralClaim/{id}', 'updateGeneralClaim');
             Route::delete('/deleteGNCDetail/{id}', 'deleteGNCDetail');
             Route::delete('/deletePersonalDetail/{id}', 'deletePersonalDetail');
+            Route::delete('/deleteTravelAttachment/{id}', 'deleteTravelAttachment');
+            Route::delete('/deleteSubsAttachment/{id}', 'deleteSubsAttachment');
             Route::delete('/deleteTravelDetail/{id}', 'deleteTravelDetail');
             Route::post('/updateStatusGeneralClaims/{id}', 'updateStatusGeneralClaims');
             Route::get('/viewGeneralClaim/{id}', 'viewGeneralClaim');
