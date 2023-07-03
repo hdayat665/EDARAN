@@ -19,7 +19,6 @@
         </div>
     </div>
     <div class="row p-2">
-
         <div class="">
             <table id="" class="table table-striped table-bordered align-middle">
                 <thead>
@@ -37,7 +36,8 @@
                         <td>
                             <a href="#" data-bs-toggle="dropdown" class="btn btn-primary btn-sm dropdown-toggle"></i> Actions <i class="fa fa-caret-down"></i></a>
                             <div class="dropdown-menu">
-                            <a href="javascript:;" id="travelBtn" data-id="" class="dropdown-item"> View</a>
+                            <a id="mcvTravelling" class="dropdown-item"> View</a>
+                            {{-- <a href="/mcvTravelling" id="travelBtn" data-id="" class="dropdown-item"> View</a> --}}
                         </td>
                         <td></td>
                         <td>KM</td>
@@ -46,58 +46,6 @@
                         <td>RM </td>
                     </tr>
                 </tbody>
-                <table id="tablenews" class="table table-striped table-bordered align-middle">
-                    <thead>
-                        <tr>
-                            <th>No.</th>
-                            <th class="text-nowrap">Title</th>
-                            <th class="text-nowrap">Content</th>
-                            <th class="text-nowrap">Attachment</th>
-                            <th class="text-nowrap">Added By</th>
-                            <th class="text-nowrap">Added Time</th>
-                            <th class="text-nowrap">Modified By</th>
-                            <th class="text-nowrap">Modified Time</th>
-                            <th width="9%" data-orderable="false" class="align-middle">Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr class="odd gradeX">
-                            <td width="1%" class="fw-bold text-dark"></td>
-                            <td></td>
-                            <td></td>
-                            <td><a href=""></a></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td>
-                            <a href="#" data-bs-toggle="dropdown" class="btn btn-primary btn-sm dropdown-toggle"></i> Actions <i class="fa fa-caret-down"></i></a>
-                                <div class="dropdown-menu">
-                                <a href="javascript:;" id="editButton" data-id="" class="dropdown-item"> Edit</a>
-                                <div class="dropdown-divider"></div>
-                                <a id="deleteButton" data-id="" class="dropdown-item"> Delete</a>
-                            </td>
-                        </tr>
-                    </tbody>
-                    <tbody>
-                        <tr class="odd gradeX">
-                            <td class="fw-bold text-dark"></td>
-                            <td></td>
-                            <td></td>
-                            <td><a href=""></a></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td>
-                            <a href="#" data-bs-toggle="dropdown" class="btn btn-primary btn-sm dropdown-toggle"></i> Actions <i class="fa fa-caret-down"></i></a>
-                                <div class="dropdown-menu">
-                                <a href="javascript:;" id="editButton" data-id="" class="dropdown-item"> Edit</a>
-                                <div class="dropdown-divider"></div>
-                                <a id="deleteButton" data-id="" class="dropdown-item"> Delete</a>
-                            </td>
-                        </tr>
-                    </tbody>
             </table>
         </div>
     </div>
@@ -215,9 +163,9 @@
                             <td>
                                 <a href="#" data-bs-toggle="dropdown" class="btn btn-primary btn-sm dropdown-toggle"></i> Actions <i class="fa fa-caret-down"></i></a>
                                 <div class="dropdown-menu">
-                                <a href="javascript:;" id="subsBtn" data-id="" class="dropdown-item"> Update</a>
-                                <div class="dropdown-divider"></div>
-                                <a data-bs-toggle="modal" id="deleteButtonTravel" data-id="" class="dropdown-item">Delete</a>
+                                <a id="mcvSubsistence" class="dropdown-item"> View</a>
+                                {{-- <a href="javascript:;" id="subsBtn" data-id="" class="dropdown-item"> Update</a> --}}
+
                             </td>
                             <td></td>
                             <td></td>
@@ -287,7 +235,6 @@
             </table>
         </div>
     </div>
-
+@include('modal.eclaim.mcvTravelling')
+@include('modal.eclaim.mcvSubsistence')
 </div>
-
-
