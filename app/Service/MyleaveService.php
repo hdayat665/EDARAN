@@ -287,7 +287,7 @@ class MyleaveService
                 ])->first();
 
                 if (empty($getDateSameOther)) {
-                    $data['msg'] = 'You cant use this Application because dont have Al approved for deduct you leave';
+                    $data['msg'] = 'You Have Pending Leave to be Approved for the Selected Date';
                     $data['status'] = config('app.response.error.status');
                     $data['type'] = config('app.response.error.type');
                     $data['title'] = config('app.response.error.title');
