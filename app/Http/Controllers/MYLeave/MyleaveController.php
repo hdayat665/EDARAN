@@ -24,6 +24,10 @@ class MyleaveController extends Controller
         $data['typelistmy'] = '';
         $data['status_searchingmy'] = '';
         $data['types'] = $ms->datatype();
+        $data['typessick'] = $ms->datatypesick();
+
+        // dd($data['typessick']);
+        // die;
         // $data['mypie'] = $ms->datapie();
 
         $input = $r->input();
@@ -69,6 +73,9 @@ class MyleaveController extends Controller
 
     public function createtmyleave(Request $r)
     {
+        // $input = $r->input();
+        // dd($input);
+        // die;
 
         $ms = new MyleaveService;
 
