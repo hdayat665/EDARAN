@@ -393,6 +393,19 @@ if ($existingLogs->isNotEmpty()) {
     
         $participantDetail = Employee::whereIn('user_id', $participants)->get();
 
+        $eventid = $eventDetails->id;
+        $eventpaerr= $eventDetails->participant;
+        $explode = explode(',', $eventpaerr);
+
+        foreach ($explode as $key => $participant) {
+            $input = [
+                'event_id' => $eventid,
+                'user_id' => $participant,
+                'status' => 'no response',
+            ];
+            AttendanceEvent::create($input);
+        }
+
         foreach ($participantDetail as $participant) {
             $receiverEmail = $participant->workingEmail;
 
@@ -416,22 +429,6 @@ if ($existingLogs->isNotEmpty()) {
 
             FacadesMail::to($receiver)->send(new Mail($response));
         }
-
-        $eventid = $eventDetails->id;
-        $eventpaerr= $eventDetails->participant;
-        $explode = explode(',', $eventpaerr);
-
-        foreach ($explode as $key => $participant) {
-            $input = [
-                'event_id' => $eventid,
-                'user_id' => $participant,
-                'status' => 'no response',
-            ];
-            AttendanceEvent::create($input);
-        }
-
-
-
 
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
