@@ -271,6 +271,9 @@ $(document).ready(function () {
         $("#menu6").hide();
         $("#menu7").hide();
         $("#menu8").hide();
+        $("#hideavaible").hide();
+        $("#menusick").hide();
+
     });
 
     $(document).on("change", "#select3", function () {
@@ -422,6 +425,7 @@ $(document).ready(function () {
                 end_date: "required",
                 reason: "required",
                 flexRadioDefault: "required",
+                fileuploadsick: "required",
             },
 
             messages: {
@@ -433,6 +437,7 @@ $(document).ready(function () {
                 start_date: "Please Insert Start Date",
                 end_date: "Please Insert End Date",
                 flexRadioDefault: "Please select morning or evening",
+                fileuploadsick: "Please insert document or medical certificate (MC)",
             },
             submitHandler: function (form) {
                 requirejs(["sweetAlert2"], function (swal) {
@@ -808,4 +813,28 @@ $(document).ready(function () {
             url: "/getusermyleave/" + id,
         });
     }
+
+    $(document).on("change", "#typeofleavehidden", function () {
+        var checktype = $("#typeofleavehidden").val();
+        var checktype1 = $("#type_sick").val();
+
+        // console.log(checktype,checktype1);
+
+        if(checktype == 2  &&  checktype1 == 2){
+
+            $("#hideavaible").show();
+            $("#menusick").show();
+            $("#menu9").hide();
+
+        }else{
+
+            $("#hideavaible").hide();
+            $("#menu9").show();
+            $("#menusick").hide();
+            $("#radio1").val("");
+            $("#radio2").val("");
+
+        }
+
+    });
 });

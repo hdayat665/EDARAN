@@ -398,25 +398,47 @@
                         <div class="modal-body">
                             <form id="addForm">
                                 <div class="row p-2">
-
                                     <div class="col-sm-6">
                                         <div class="mb-3">
                                             <label for="exampleInputEmail1" class="form-label">Applied Date </label>
                                             <input type="text" class="form-control" name= "applied_date" id="datepicker-applied" placeholder="yyyy-mm-dd" readonly>
                                         </div>
 								    </div>
-
                                     <div class="col-sm-6" id="menu2">
                                         <label class="form-label" for="Menu2">Type of Leave*</label>
-                                           <select class="form-select" name="typeofleave">
-                                                <option value="" label="PLEASE CHOOSE "></option>
-                                                    @foreach($types as $dt)
-                                                        <option value="{{ $dt->id }}" {{ old('typeofleave') == $dt->id ? 'selected' : '' }}>{{ $dt->leave_types }}</option>
-                                                    @endforeach
-                                            </select>
+                                        <select class="form-select" id="typeofleavehidden" name="typeofleave">
+                                            <option value="" label="PLEASE CHOOSE "></option>
+                                            @foreach($types as $dt)
+                                            <option value="{{ $dt->id }}" {{ old('typeofleave') == $dt->id ? 'selected' : '' }}>{{ $dt->leave_types }}</option>
+                                            @endforeach
+                                        </select>
                                     </div>
                                 </div>
-
+                                <div class="row p-2" id="hideavaible">
+                                    <div class="col-sm-12">
+                                        <div>
+                                            <label for="exampleInputEmail1" class="form-label">Date Availability</label>
+                                        </div>
+                                        <div class="mb-12">
+                                            <input type="hidden" class="form-control" id="type_sick" value="<?php echo $typessick->id; ?>">
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" value="1" type="radio" name="availability" id="radio1" checked>
+                                                <label class="form-check-label" for="radio1">
+                                                    Available
+                                                </label>
+                                            </div>
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" value="2" type="radio" name="availability" id="radio2">
+                                                <label class="form-check-label" for="radio2">
+                                                    Existing Application
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <br>
+                                    </div>
+                                </div>
                                 <div class="row p-2">
                                     <div class="col-sm-6" id="menu3">
                                         <label class="form-label" for="Menu3">No of Day(s) Applied*</label>
@@ -493,6 +515,13 @@
                                         <label class="form-label" for="Menu7">Supporting Document</label>
                                         <div class="input-group">
                                             <input id="fileupload" type="file" accept=".pdf,.png,.jpeg,.jpg" name="file" max-size="5MB">
+                                            <span id="fileDownloadPolicy"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6" id="menusick">
+                                        <label class="form-label" for="Menu7">Supporting Document</label>
+                                        <div class="input-group">
+                                            <input name="fileuploadsick" type="file" accept=".pdf,.png,.jpeg,.jpg" name="file" max-size="5MB">
                                             <span id="fileDownloadPolicy"></span>
                                         </div>
                                     </div>
