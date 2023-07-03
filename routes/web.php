@@ -607,6 +607,7 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('/updateOtherMtc', 'updateOtherMtc');
             Route::post('/updateSubsMtc', 'updateSubsMtc');
             Route::post('/updateTravelMtc/{id}', 'updateTravelMtc');
+            Route::get('/monthlyClaimView', 'monthlyClaimView');
         });
 
         Route::controller(generalClaimController::class)->group(function () {
