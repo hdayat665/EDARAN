@@ -1140,7 +1140,8 @@
                             </div> 
                         </div>
                         <div class="row p-2">
-                            <div class="modal-footer"> <button type="button" class="btn btn-secondary">Reset</button>
+                            <div class="modal-footer"> 
+                                <button type="button" class="btn btn-secondary" id="resetButtonOthers">Reset</button>
                                 <button type="submit" class="btn btn-primary" id="personalSaveButton">Save</button>
                             </div>
                         </div>

@@ -145,7 +145,8 @@
                                     </div>
                                 </div>
                                 <div class="row p-2">
-                                    <div class="modal-footer"> <button type="button" class="btn btn-secondary">Reset</button>
+                                    <div class="modal-footer"> 
+                                        <button type="button" class="btn btn-secondary">Reset</button>
                                         <button type="submit" id="createGnc" class="btn btn-primary">Save</button>
                                         </form>
                                     </div>

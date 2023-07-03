@@ -23,7 +23,6 @@
                                             </div>
                                             <div class="col-md-3">
                                                 <input readonly type="text" value="{{ $GNC->claim_id }}" name="claim-id" class="form-control">
-                                                
                                             </div>
                                         </div>
                                         <div class="row p-2">
