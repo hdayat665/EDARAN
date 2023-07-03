@@ -566,7 +566,7 @@ class SettingService
 
         $checkData = Location::where([['postcode', $input['postcode']], ['tenant_id', Auth::user()->tenant_id]])->first();
         if ($checkData) {
-            $data['msg'] = 'District name already exists.';
+            $data['msg'] = 'Postcode name already exists.';
             $data['status'] = config('app.response.error.status');
             $data['type'] = config('app.response.error.type');
             $data['title'] = config('app.response.error.title');
@@ -1087,6 +1087,7 @@ class SettingService
     public function createNews($r)
     {
         $input = $r->input();
+        
         if ($_FILES['file']['name']) {
             $payslip = upload($r->file('file'));
             $input['file'] = $payslip['filename'];
@@ -1319,9 +1320,21 @@ class SettingService
         return $data;
     }
 
+    // public function locationView()
+    // {
+    //     $data = Location::where('tenant_id', Auth::user()->tenant_id)->orderBy('id', 'desc')->get();
+
+    //     return $data;
+    // }
+
+
     public function locationView()
     {
-        $data['locations'] = Location::where('tenant_id', Auth::user()->tenant_id)->orderBy('id', 'desc')->get();
+        $data = Location::select('location.id', 'settingcountry.CountryName', 'states.stateName', 'location.postcode')
+            ->join('settingcountry', 'location.countryID', '=', 'settingcountry.countryID')
+            ->join('states', 'location.stateID', '=', 'states.id')
+            ->get();
+
 
         return $data;
     }

@@ -169,7 +169,71 @@ class myClaimController extends Controller
 
         return response()->json($data);
     }
+    public function getTravelDataByGeneralId($id = '', $date = '')
+    {
+        // Your code to handle the $id and $date parameters
+        $ss = new myClaimService;
+        $result = $ss->getTravelDataByGeneralId($id, $date);
+        //pr($result);
+        return response()->json($result);
+    }
+    public function getSubsDataByGeneralId($id = '')
+    {
+        // Your code to handle the $id and $date parameters
+        $ss = new myClaimService;
+        $result = $ss->getSubsDataByGeneralId($id);
+        //pr($result);
+        return $result;
+    }
+    public function updateOtherMtc(Request $r)
+    {
+        $ps = new myClaimService;
 
+        $result = $ps->updateOtherMtc($r);
+
+        return response()->json($result);
+    }
+    public function updateSubsMtc(Request $r)
+    {
+        $ps = new myClaimService;
+
+        $result = $ps->updateSubsMtc($r);
+
+        return response()->json($result);
+    }
+    public function updateTravelMtc(Request $r,$id = '')
+    {
+        $ps = new myClaimService;
+
+        $result = $ps->updateTravelMtc($r,$id = '');
+
+        return response()->json($result);
+    }
+    public function getOthersDataByGeneralId($id = '')
+    {
+        // Your code to handle the $id and $date parameters
+        $ss = new myClaimService;
+        $result = $ss->getOthersDataByGeneralId($id);
+        //pr($result);
+        return $result;
+    }
+    public function getProjectNameById($id = '')
+    {
+        // Your code to handle the $id and $date parameters
+        $ss = new myClaimService;
+        $result = $ss->getProjectNameById($id);
+        //pr($result);
+        return $result;
+    }
+    public function getClaimCategoryNameById($id = '')
+    {
+        // Your code to handle the $id and $date parameters
+        $ss = new myClaimService;
+        $result = $ss->getClaimCategoryNameById($id);
+        //pr($result);
+        return $result;
+    }
+    
     public function monthClaimEditView($id = '')
     {
         $mcs = new myClaimService;
@@ -182,29 +246,21 @@ class myClaimController extends Controller
         //pr($data['travelClaims']);
         $data['subsClaims'] = $mcs->getSubsClaimByGeneralId($id);
         $data['summaryTravelling'] = $mcs->getSummaryTravellingClaimByGeneralId($id) ?? 0;
-        $total_millage = isset($data['summaryTravelling'][0]) ? $data['summaryTravelling'][0]->total_millage : 0;
         //pr($data['summaryTravelling']);
+        $data['totalCar'] = $mcs->getTotalCarClaimByGeneralId($id) ?? 0;
+        $data['totalMotor'] = $mcs->getTotalMotorClaimByGeneralId($id) ?? 0;
+        $total_millage = isset($data['summaryTravelling'][0]) ? $data['summaryTravelling'][0]->total_millage : 0;
+        //pr($data['totalCar']);
         $data['summarySubs'] = $mcs->getSummarySubsClaimByGeneralId($id);
         $data['travelDate'] = $mcs->getTravelDateClaimByGeneralId($id);
         //pr($data['travelDate']);
         $data['personalClaims'] = $mcs->getPersonalClaimByGeneralId($id);
         $data['summaryOthers'] = $mcs->getSummaryOthersByGeneralId($id);
         //pr($data['summaryOthers']);
+        
 
-        // Calculate the sum of the values
-        $totalAmount = $data['summaryOthers'][0]->total_amount ?? 0;
-        $totalSubs = $data['summarySubs'][0]->total_subs ?? 0;
-        $totalAcc = $data['summarySubs'][0]->total_acc ?? 0;
-        $totalMillage = $data['summaryTravelling'][0]->total_millage ?? 0;
-        $totalPetrol = $data['summaryTravelling'][0]->total_petrol ?? 0;
-        $totalToll = $data['summaryTravelling'][0]->total_toll ?? 0;
-        $totalParking = $data['summaryTravelling'][0]->total_parking ?? 0;
-        $totalTravelling = $data['summaryTravelling'][0]->total_travelling ?? 0;
 
-        $sum = $totalAmount + $totalSubs + $totalAcc + $totalMillage + $totalPetrol + $totalToll + $totalParking + $totalTravelling;
-
-        // Add the sum to the $data array
-        $data['sum'] = $sum;
+        
         //
         $generalClaim = $mcs->getGeneralClaimById($id);
         $data['month'] = $generalClaim->month ?? '';
@@ -265,6 +321,29 @@ class myClaimController extends Controller
         $data['secondpricecar'] = $secondpricecar;
         $data['thirdkmcar'] = $thirdkmcar;
         $data['thirdpricecar'] = $thirdpricecar;
+       
+        $carValue = $data['totalCar'][0]->total_km ??0;
+        
+        $ansCar = 0;
+
+        if ($carValue > $firstkmcar) {
+            $ansCar += $firstkmcar * $firstpricecar;
+            $carValue -= $firstkmcar;
+            
+            if ($carValue > $secondkmcar) {
+                $ansCar += $secondkmcar * $secondpricecar;
+                $carValue -= $secondkmcar;
+
+                $ansCar += $carValue * $thirdpricecar;
+            } else {
+                $ansCar += $carValue * $secondpricecar;
+            }
+        } else {
+            $ansCar = $carValue * $firstpricecar;
+        }
+        
+        $data['ansCar']= $ansCar ;
+        
 
         $data['motor'] = $mcs->getEntitlementByJobGradeMotor($data['user_id']);
         $entitlementArr = json_decode($data['motor'], true);
@@ -300,8 +379,46 @@ class myClaimController extends Controller
         $data['thirdkmmotor'] = $thirdkmmotor;
         $data['thirdpricemotor'] = $thirdpricemotor;
 
-
+        $MotorValue = $data['totalMotor'][0]->total_km ?? 0;
         
+        $ansMotor = 0;
+
+        if ($MotorValue > $firstkmmotor) {
+            $ansMotor += $firstkmmotor * $firstpricemotor;
+            $MotorValue -= $firstkmmotor;
+            
+            if ($MotorValue > $secondkmmotor) {
+                $ansMotor += $secondkmmotor * $secondpricemotor;
+                $MotorValue -= $secondkmmotor;
+
+                $ansMotor += $MotorValue * $thirdpricemotor;
+            } else {
+                $ansMotor += $MotorValue * $secondpricemotor;
+            }
+        } else {
+            $ansMotor = $MotorValue * $firstpricemotor;
+        }
+        
+        $data['ansMotor']= $ansMotor;
+
+        $totalcarmotor = $ansMotor +$ansCar;
+        //pr($data['ansMotor']);
+        // Calculate the sum of the values
+        $totalAmount = $data['summaryOthers'][0]->total_amount ?? 0;
+        $totalSubs = $data['summarySubs'][0]->total_subs ?? 0;
+        $totalAcc = $data['summarySubs'][0]->total_acc ?? 0;
+        $totalMillage = $data['summaryTravelling'][0]->total_millage ?? 0;
+        $totalPetrol = $data['summaryTravelling'][0]->total_petrol ?? 0;
+        $totalToll = $data['summaryTravelling'][0]->total_toll ?? 0;
+        $totalParking = $data['summaryTravelling'][0]->total_parking ?? 0;
+        $totalTravelling = $data['summaryTravelling'][0]->total_travelling ?? 0;
+
+        $sum = $totalAmount + $totalSubs + $totalAcc + $totalcarmotor + $totalPetrol + $totalToll + $totalParking;
+        $totalTravellings = $totalPetrol+$totalParking+$totalToll+$totalcarmotor;
+        // Add the sum to the $data array
+        $data['sum'] = $sum;
+        $data['totalcarmotor'] = $totalcarmotor;
+        $data['totalTravellings'] = $totalTravellings;
         //pr($data['food']);
         return view('pages.eclaim.monthClaimEditView', $data);
     }

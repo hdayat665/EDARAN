@@ -24,6 +24,7 @@ use App\Models\ProjectLocation;
 use App\Models\ProjectMember;
 use App\Models\Role;
 use App\Models\TimesheetEvent;
+use App\Models\Location;
 use App\Models\TypeOfLogs;
 use App\Models\Unit;
 use App\Models\UserProfile;
@@ -696,9 +697,6 @@ if (!function_exists('getCountryBranch')) {
     function getCountryBranch()
     {
         $data = Country::all();
-        // $tableName  = 'Location';
-
-        // $data = DB::select("SELECT * FROM $tableName");
 
         if (blank($data)) {
             $data = [];
@@ -734,6 +732,21 @@ if (!function_exists('getPostcodeBranch')) {
 
 
         return $data;
+    }
+}
+
+if (!function_exists('getLocation')) {
+    function getLocation()
+    {
+        $data = DB::select("SELECT settingcountry.CountryName, states.stateName, location.postcode from location, settingcountry, states
+        WHERE location.countryID = settingcountry.countryID AND location.stateID = states.id;");
+
+ if (blank($data)) {
+    $data = [];
+}
+        return $data;
+
+
     }
 }
 

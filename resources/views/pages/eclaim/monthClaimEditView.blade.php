@@ -77,7 +77,7 @@
                                                 <label class="form-label">Travelling</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <input type="text" class="form-control" readonly value='RM {{ $summaryTravelling[0]->total_millage ?? 0 }}'>
+                                                <input type="text" class="form-control" readonly value='RM {{ $totalcarmotor ?? 0 }}'>
                                             </div>
                                         </div>
                                         <div class="row p-2">
@@ -203,7 +203,7 @@
                     </div>
                 </div>
             </div>
-            <div class="row p-2">
+            <!-- <div class="row p-2">
                 <div class="col align-self-start">
                     <a href="/myClaimView" class="btn btn-light" style="color: black;" type="submit"><i class="fa fa-arrow-left"></i> Back</a>
                 </div>
@@ -212,7 +212,7 @@
                     <button class="btn btn-light" id="editSubmitButton" style="color: black" type="submit"><i class="fa fa-save"></i>
                         Submit</button>
                 </div>
-            </div>
+            </div> -->
         </div>
     </div>
 @endsection

@@ -1166,18 +1166,9 @@ $(document).ready(function () {
               
 
             // console.log(dataHoliday);
-            
-           
-           
-              
-              
-              
-              
+             
 
             //   console.log(datalog)
-
-
-              
 
             //   dataHoliday.sort(function(a, b) {
             //     return new Date(a.start) - new Date(b.start);
@@ -1262,6 +1253,13 @@ $(document).ready(function () {
                         twoDaysBefore = new Date(currentYear, currentMonth, currentDate.getDate() - 4);
                         // console.log("return here");
                     }
+
+                    var workingDayHour = '08:00';
+
+                    if (current.getDay() === 5) { // Check if it's Friday (Friday is represented by 5 in JavaScript, where Sunday is 0)
+                        workingDayHour = '07:30';
+                      }
+
                  
                    
 
@@ -1432,9 +1430,10 @@ $(document).ready(function () {
                     var hours = Math.floor(totalSeconds / 3600);
                     var minutes = Math.floor((totalSeconds % 3600) / 60);
                     var totalHoursCombined = hours.toString().padStart(2, '0') + ':' + minutes.toString().padStart(2, '0');
-
+                   
                     var totalHoursCombineds = parseInt(hours, 10).toString();
 
+                    console.log(totalHoursCombined);
                     // console.log(totalHoursCombineds);
 
                     var appliedDates = [];
@@ -1520,26 +1519,26 @@ $(document).ready(function () {
                     if (
                         (current.getDate() === currentDate.getDate()) &&
                         (hasEvent || hasLog) &&
-                        (totalHoursCombineds < 8)
+                        (totalHoursCombined < workingDayHour)
                       ) {
                         $(info.el).css('background-color', '#FF8080');
                       }
                      else if (
                         (current.getDate() === currentDate.getDate()) &&
                         (hasEvent || hasLog) &&
-                        (totalHoursCombineds >= 8)
+                        (totalHoursCombined >= workingDayHour)
                       ) {
                         $(info.el).css('background-color', '#80ff80');
                       }
                     //for date after weekend, not exclude in 48hour
                       if(comparecurrentonedaybefore || comparecurrenttwodaybefore) {
                         if ((current < currentDate) && current.getDate() !== currentDate.getDate()
-                            && ((hasLog || hasEvent || !hasEvent || !hasLog) && totalHoursCombineds < 8 )) {
+                            && ((hasLog || hasEvent || !hasEvent || !hasLog) && totalHoursCombined < workingDayHour )) {
                             $(info.el).css('background-color', '#FF8080');
                         }
 
                         else if ((current < currentDate) && current.getDate() !== currentDate.getDate()
-                        && ((hasLog || hasEvent || !hasEvent || !hasLog) && totalHoursCombineds >= 8 )) {
+                        && ((hasLog || hasEvent || !hasEvent || !hasLog) && totalHoursCombined >= workingDayHour )) {
                             $(info.el).css('background-color', '#80ff80');
                         }
                        
@@ -1559,14 +1558,14 @@ $(document).ready(function () {
                      else if(
                          
                         (dateonedaybefore || datetwodayebefore) &&
-                        !(weekend1 || weekend2)  && ( (hasLog || hasEvent) && totalHoursCombineds >= 8)
+                        !(weekend1 || weekend2)  && ( (hasLog || hasEvent) && totalHoursCombined < workingDayHour)
                       ) {
                         $(info.el).css('background-color', '#80ff80');
                       }
                       else if(
                          
                         (dateonedaybefore || datetwodayebefore) &&
-                        !(weekend1 || weekend2)  && ( (hasLog || hasEvent) && totalHoursCombineds < 8)
+                        !(weekend1 || weekend2)  && ( (hasLog || hasEvent) && totalHoursCombined < workingDayHour)
                       ) {
                         $(info.el).css('background-color', '#FF8080');
                       }
@@ -1576,8 +1575,7 @@ $(document).ready(function () {
                     //     $(info.el).css('background-color', 'red');
                     //  }
                       //xde log appeal, log kecik dari 9,exclude weekend
-                       else if((current < twoDaysBefore) && noappeal && totalHoursCombineds < 8 && !(weekend1 || weekend2)) {
-                        // console.log(hourslog);
+                       else if((current < twoDaysBefore) && noappeal && totalHoursCombined < workingDayHour && !(weekend1 || weekend2)) {
                         $(info.el).css('background-color', '#FF8080');
                         $(info.el).append('&nbsp;').append(appealaddb);
                         $(appealaddb).css({
@@ -1590,7 +1588,7 @@ $(document).ready(function () {
                             (current < twoDaysBefore) &&
                             hasAppeal &&
                             (
-                              ((hasLog || hasEvent) && totalHoursCombineds < 8) ||
+                              ((hasLog || hasEvent) && totalHoursCombined < workingDayHour) ||
                               (!hasLog && !hasEvent && !(weekend1 || weekend2))
                             )
                           ) {
@@ -1604,9 +1602,9 @@ $(document).ready(function () {
                                 });
                         
                         
-                         } else if((current < twoDaysBefore) && (hasLog || hasEvent) && totalHoursCombineds >= 8) {
+                         } else if((current < twoDaysBefore) && (hasLog || hasEvent) && totalHoursCombined >= workingDayHour) {
                             $(info.el).css('background-color', '#80ff80');
-                         } else if((current < twoDaysBefore) && hasAppeal && totalHoursCombineds >= 8) {
+                         } else if((current < twoDaysBefore) && hasAppeal && totalHoursCombined >= workingDayHour) {
                             $(info.el).css('background-color', '#80ff80');
                             $(info.el).append('&nbsp;').append(viewappealb);
                             $(viewappealb).css({
@@ -1615,7 +1613,7 @@ $(document).ready(function () {
                                 'z-index': '999',   
                                 });
                          }
-                         else if((current < twoDaysBefore) && hasAppeal && totalHoursCombineds < 8) {
+                         else if((current < twoDaysBefore) && hasAppeal && totalHoursCombined < workingDayHour) {
                             $(info.el).css('background-color', '#FF8080');
                             $(info.el).append('&nbsp;').append(viewappealb);
                             $(viewappealb).css({
@@ -2061,22 +2059,20 @@ $(document).ready(function () {
                             });
 
                             var eventData = getEvents(eventId);
-                            eventData.then(function (data) {
-                                var participants = data.participant.split(",");
-                                var participantNames = data.participantNames.split(",");
-                                var attendanceStatus = data.attendanceStatus;
+                            eventData.then(function(data) {
+                                var participants = data.participants; // Assuming data.participants is an array of objects with user_id and name properties
+                                var attendanceStatus = data.attendanceStatus; // Assuming data.attendanceStatus is an array of objects with status property
                             
                                 var tableBody = $("#tableRowParticipant");
-                                tableBody.empty(); // clear any existing rows in the table
+                                tableBody.empty(); // Clear any existing rows in the table
                             
                                 for (var i = 0; i < participants.length; i++) {
-                                    var participantId = participants[i];
-                                    var participantName = participantNames[i];
-                                    var status = attendanceStatus[i].status; // assuming the attendance status field is named 'status'
+                                    var participant = participants[i];
+                                    var status = attendanceStatus[i].status; // Assuming the attendance status field is named 'status'
                             
                                     var row = $("<tr></tr>");
                                     row.append($("<td></td>").text(i + 1));
-                                    row.append($("<td></td>").text(participantName));
+                                    row.append($("<td></td>").text(participant.name));
                                     row.append($("<td></td>").text(status));
                             
                                     tableBody.append(row);
@@ -2084,31 +2080,48 @@ $(document).ready(function () {
                             });
                             
                             
+                            
                             var eventData1 = getEvents(eventId);
                             eventData1.then(function(data) {
-                                var nonParticipants = data.nonParticipantNames.split(",");
-
+                                var nonParticipants = data.nonParticipants; // Assuming data.nonParticipants is an array of objects with user_id and name properties
                                 var selectElement = $("#addneweventparticipantedit");
-
+                            
                                 // Clear any existing options
                                 selectElement.empty();
-
+                            
                                 // Add the "Please Choose" option as the first option
                                 var pleaseChooseOption = $("<option></option>")
                                     .val("")
                                     .text("PLEASE CHOOSE");
-
+                            
                                 selectElement.append(pleaseChooseOption);
-
+                            
                                 // Add the non-participant options
                                 for (var i = 0; i < nonParticipants.length; i++) {
                                     var option = $("<option></option>")
-                                        .val(nonParticipants[i])
-                                        .text(nonParticipants[i]);
-
+                                        .val(nonParticipants[i].user_id)
+                                        .text(nonParticipants[i].name);
+                            
                                     selectElement.append(option);
                                 }
+                            
+                                // Initialize the Select2 plugin with multiple selection and search
+                                selectElement.select2({
+                                    dropdownParent: $('#editeventmodal'),
+                                    multiple: true,
+                                    dropdownCss: {
+                                        top: '100%',
+                                        bottom: 'auto'
+                                    }
+                                });
                             });
+                            
+
+
+                            
+
+
+                            
 
                             
 
@@ -3393,10 +3406,16 @@ $("#endeventdate").datepicker({
         autoclose: true,
         format: "yyyy-mm-dd",
     });
+
     // $('#projectlocsearchedit').picker({ search: true });
     $("#addneweventprojectlocsearchedit").picker({ search: true });
-    $("#addneweventparticipantedit").picker({ search: true });
+    // $("#addneweventparticipantedit").picker({ search: true });
     $("#addneweventselectprojectedit").picker({ search: true });
+    // $('#addneweventparticipantedit').select2({
+    //     dropdownParent: $('#editeventmodal'),
+    //     multiple: true
+    // });
+    
 
     
 
