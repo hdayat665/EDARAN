@@ -3112,31 +3112,87 @@ public function updateTypeOfLogs($r, $id)
         return $data;
     }
 
-    public function updateweekend($r)
-    {
-        $input = $r->input('checkbox');
+    public function updateweekend($r){
+        $input = $r->input();
 
-        foreach ($input as $id => $data) {
-            $record = leaveWeekendModel::find($id);
+        foreach ($input as $key => $value) {
+            if (strpos($key, 'id_') === 0) {
+                $day = substr($key, 3); // Mengambil nama hari berdasarkan kunci
+                $id = $value;
+                $start_time = $input['start_time_' . $day];
+                $end_time = $input['end_time_' . $day];
+                $duration = $input['duration_' . $day];
 
-            if ($record) {
-                $record->monday = isset($data['monday']) ? $data['monday'] : null;
-                $record->tuesday = isset($data['tuesday']) ? $data['tuesday'] : null;
-                $record->wednesday = isset($data['wednesday']) ? $data['wednesday'] : null;
-                $record->thursday = isset($data['thursday']) ? $data['thursday'] : null;
-                $record->friday = isset($data['friday']) ? $data['friday'] : null;
-                $record->saturday = isset($data['saturday']) ? $data['saturday'] : null;
-                $record->sunday = isset($data['sunday']) ? $data['sunday'] : null;
+                $record = leaveWeekendModel::find($id);
 
-                $record->save();
+                if ($record) {
+                    $record->start_time = $start_time;
+                    $record->end_time = $end_time;
+                    $record->total_time = $duration;
+
+                    $record->save();
+                }
             }
         }
-
 
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
         $data['msg'] = 'Successfully update Weekend';
+
+        return $data;
+    }
+
+    public function createleaveweekend($r){
+
+        $input = $r->input();
+        $tenant = Auth::user()->tenant_id;
+        $input = [
+
+            [$tenant, $input['state_id'], 1, '07:00', '19:00'],
+            [$tenant, $input['state_id'], 2, '07:00', '19:00'],
+            [$tenant, $input['state_id'], 3, '07:00', '19:00'],
+            [$tenant, $input['state_id'], 4, '07:00', '19:00'],
+            [$tenant, $input['state_id'], 5, '07:00', '19:00' ],
+            [$tenant, $input['state_id'], 6, null, null],
+            [$tenant, $input['state_id'], 0, null, null]
+        ];
+
+        foreach ($input as $data) {
+            $record = leaveWeekendModel::updateOrCreate(
+                [
+                    'tenant_id' => $data[0],
+                    'state_id' => $data[1],
+                    'day_of_week' => $data[2],
+
+                ],
+                [
+                    'start_time' => $data[3],
+                    'end_time' => $data[4],
+
+                ]
+            );
+        }
+
+        $data['status'] = config('app.response.success.status');
+        $data['type'] = config('app.response.success.type');
+        $data['title'] = config('app.response.success.title');
+        $data['msg'] = 'Successfully Create State';
+
+        return $data;
+    }
+
+    public function getweekend($id){
+
+        $data = leaveWeekendModel::select(
+            'leave_weekend.*',
+            'states.stateName',
+        )
+        ->where('leave_weekend.tenant_id', Auth::user()->tenant_id)
+        ->where('leave_weekend.state_id',  '=', $id)
+        ->join('states', 'leave_weekend.state_id', '=', 'states.id')
+        ->orderBy('leave_weekend.id', 'asc')
+        ->get();
 
         return $data;
     }
@@ -3195,42 +3251,74 @@ public function updateTypeOfLogs($r, $id)
 
     public function weekendview()
     {
-        $tenant = Auth::user()->tenant_id;
-        $input = [
-            [$tenant, 'JHR', 'JOHOR'],
-            [$tenant, 'KDH', 'KEDAH'],
-            [$tenant, 'KEL', 'KELANTAN'],
-            [$tenant, 'MLK', 'MELAKA'],
-            [$tenant, 'PHG', 'PAHANG'],
-            [$tenant, 'PNG', 'PULAU PINANG'],
-            [$tenant, 'PRK', 'PERAK'],
-            [$tenant, 'SBH', 'SABAH'],
-            [$tenant, 'SRW', 'SERAWAK'],
-            [$tenant, 'SGR', 'SELANGOR'],
-            [$tenant, 'TRG', 'TERANGGANU'],
-            [$tenant, 'WP', 'WILAYAH PERSEKUTUAN'],
-            [$tenant, 'NS', 'NEGERI SEMBILAN'],
-            [$tenant, 'PLS', 'PERLIS'],
+        $data = leaveWeekendModel::select(
+            'leave_weekend.state_id',
+            'states.stateName',
+            DB::raw("CONCAT(
+                MAX(CASE WHEN leave_weekend.day_of_week = '1' THEN leave_weekend.start_time END)
+            ) AS monday_start"),
+            DB::raw("CONCAT(
+                MAX(CASE WHEN leave_weekend.day_of_week = '1' THEN leave_weekend.end_time END)
+            ) AS monday_end"),
+            DB::raw("CONCAT(
+                MAX(CASE WHEN leave_weekend.day_of_week = '2' THEN leave_weekend.start_time END)
+            ) AS tuesday_start"),
+            DB::raw("CONCAT(
+                MAX(CASE WHEN leave_weekend.day_of_week = '2' THEN leave_weekend.end_time END)
+            ) AS tuesday_end"),
+            DB::raw("CONCAT(
+                MAX(CASE WHEN leave_weekend.day_of_week = '3' THEN leave_weekend.start_time END)
+            ) AS webnesday_start"),
+            DB::raw("CONCAT(
+                MAX(CASE WHEN leave_weekend.day_of_week = '3' THEN leave_weekend.end_time END)
+            ) AS webnesday_end"),
+            DB::raw("CONCAT(
+                MAX(CASE WHEN leave_weekend.day_of_week = '4' THEN leave_weekend.start_time END)
+            ) AS thursday_start"),
+            DB::raw("CONCAT(
+                MAX(CASE WHEN leave_weekend.day_of_week = '4' THEN leave_weekend.end_time END)
+            ) AS thursday_end"),
+            DB::raw("CONCAT(
+                MAX(CASE WHEN leave_weekend.day_of_week = '5' THEN leave_weekend.start_time END)
+            ) AS friday_start"),
+            DB::raw("CONCAT(
+                MAX(CASE WHEN leave_weekend.day_of_week = '5' THEN leave_weekend.end_time END)
+            ) AS friday_end"),
+            DB::raw("CONCAT(
+                MAX(CASE WHEN leave_weekend.day_of_week = '6' THEN leave_weekend.start_time END)
+            ) AS saturday_start"),
+            DB::raw("CONCAT(
+                MAX(CASE WHEN leave_weekend.day_of_week = '6' THEN leave_weekend.end_time END)
+            ) AS saturday_end"),
+            DB::raw("CONCAT(
+                MAX(CASE WHEN leave_weekend.day_of_week = '0' THEN leave_weekend.start_time END)
+            ) AS sunday_start"),
+            DB::raw("CONCAT(
+                MAX(CASE WHEN leave_weekend.day_of_week = '0' THEN leave_weekend.end_time END)
+            ) AS sunday_end"),
+        )
+        ->where('leave_weekend.tenant_id', Auth::user()->tenant_id)
+        ->Join('states', 'leave_weekend.state_id', '=', 'states.id')
+        ->groupBy('state_id')
+        ->get();
 
-        ];
-
-        foreach ($input as $data) {
-            $record = leaveWeekendModel::updateOrCreate(
-                [
-                    'tenant_id' => $data[0],
-                    'state_code' => $data[1],
-                    'state' => $data[2],
-
-                ],
-                [
-                ]
-            );
-        }
-
-        $data =
-        leaveWeekendModel::select('leave_weekend.*')
-            ->where('leave_weekend.tenant_id', Auth::user()->tenant_id)
-            ->orderBy('id', 'asc')->get();
         return $data;
+
+    }
+
+    public function getstate(){
+
+        $data = State::select('states.id', 'states.stateName')
+        ->where('states.tenant_id', Auth::user()->tenant_id)
+        ->whereNull('leave_weekend.state_id')
+        ->leftJoin('leave_weekend', 'states.id', '=', 'leave_weekend.state_id')
+        ->orderBy('states.id', 'asc')
+        ->get();
+
+
+        return $data;
+
     }
 }
+
+
