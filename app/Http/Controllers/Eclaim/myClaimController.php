@@ -67,12 +67,14 @@ class myClaimController extends Controller
     {
         $mcs = new myClaimService;
 
-        $data['cashAdvances'] = $mcs->getCashAdvance();
-
+        $data['cashAdvances'] = $mcs->getCashAdvancePaid();
+        $data['GNC'] = [];
         $data['travelClaims'] = [];
         $data['personalClaims'] = [];
         $data['subsClaims'] = [];
         $data['summaryOthers'] = [];
+        $data['travelAttachments'] = [];
+        $data['subsAttachments'] = [];
         $data['month_id'] = $month;
         $data['year'] = $year;
         $data['user_id'] = Auth::user()->id;
@@ -246,9 +248,11 @@ class myClaimController extends Controller
         $data['GNC'] = $mcs->getGeneralClaimDataById($id);
         $data['details'] = getGNCDetailByGeneralId($id);
 
-        $data['cashAdvances'] = $mcs->getCashAdvance();
+        $data['cashAdvances'] = $mcs->getCashAdvancePaid();
         $data['travelClaims'] = $mcs->getTravellingClaimByGeneralId($id);
-        //pr($data['travelClaims']);
+        $data['travelAttachments'] = $mcs->getTravelAttachmentsByGeneralId($id);
+        $data['subsAttachments'] = $mcs->getSubsAttachmentsByGeneralId($id);
+        //pr($data['travelAttachments']);
         $data['subsClaims'] = $mcs->getSubsClaimByGeneralId($id);
         $data['summaryTravelling'] = $mcs->getSummaryTravellingClaimByGeneralId($id) ?? 0;
         //pr($data['summaryTravelling']);
@@ -445,7 +449,22 @@ class myClaimController extends Controller
 
         return response()->json($data);
     }
+    public function saveTravellingAttachment(request $r)
+    {
+        $mcs = new myClaimService;
 
+        $data = $mcs->saveTravellingAttachment($r);
+
+        return response()->json($data);
+    }
+    public function saveSubsAttachment(request $r)
+    {
+        $mcs = new myClaimService;
+
+        $data = $mcs->saveSubsAttachment($r);
+
+        return response()->json($data);
+    }
     public function submitCaClaim(request $r)
     {
         $mcs = new myClaimService;

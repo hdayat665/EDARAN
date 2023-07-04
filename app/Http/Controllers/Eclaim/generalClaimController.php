@@ -61,6 +61,22 @@ class generalClaimController extends Controller
 
         return response()->json($data);
     }
+    public function deleteTravelAttachment($id = '')
+    {
+        $mcs = new myClaimService;
+
+        $data = $mcs->deleteTravelAttachment($id);
+
+        return response()->json($data);
+    }
+    public function deleteSubsAttachment($id = '')
+    {
+        $mcs = new myClaimService;
+
+        $data = $mcs->deleteSubsAttachment($id);
+
+        return response()->json($data);
+    }
     public function deleteTravelDetail($id = '')
     {
         $mcs = new myClaimService;

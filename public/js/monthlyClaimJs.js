@@ -74,7 +74,7 @@ $("document").ready(function () {
         }
       });
 
-      $(document).on("click", "#travelBtn", function() {
+    $(document).on("click", "#travelBtn", function() {
     var date = $(this).data("date");
     var id = $(this).data("id");
     var travellingData = getTravelDataByGeneralId(id, date);
@@ -348,7 +348,17 @@ $("#travelingUpdate").DataTable({
         [5, 10, 25, 50, "All"],
     ],
 });
-    
+    $(document).on("click", "#btnAttachment", function () {
+
+
+        $("#travellingAttachment").modal("show");
+    });
+    $(document).on("click", "#btnAttachmentSubs", function () {
+
+
+        $("#subsAttachment").modal("show");
+    });
+
     $(document).on("click", "#othersBtn", function () {
         var id = $(this).data("id");
         var othersData = getOthersDataByGeneralId(id);
@@ -1319,6 +1329,102 @@ $("#travelingUpdate").DataTable({
         });
     });
 
+    $("#btnuploadAttachment").click(function (e) {
+        $("#updateTravellingAttachment").validate({
+            // Specify validation rules
+            rules: {
+                 "file_upload[]": "required",
+                 desc: "required",
+            },
+
+            messages: {
+                 "file_upload[]": "Please Upload Attachment",
+                 desc: "Please Insert Description",
+            },
+            submitHandler: function (form) {
+                requirejs(["sweetAlert2"], function (swal) {
+                    var data = new FormData(
+                        document.getElementById("updateTravellingAttachment")
+                    );
+
+                    $.ajax({
+                        type: "POST",
+                        url: "/saveTravellingAttachment",
+                        data: data,
+                        dataType: "json",
+
+                        processData: false,
+                        contentType: false,
+                    }).then(function (data) {
+                        swal({
+                            title: data.title,
+                            text: data.msg,
+                            type: data.type,
+                            confirmButtonColor: "#3085d6",
+                            confirmButtonText: "OK",
+                            allowOutsideClick: false,
+                            allowEscapeKey: false,
+                        }).then(function () {
+                            if (data.type == "error") {
+                            } else {
+                                window.location.href =
+                                    "/monthClaimEditView/edit/month/" + data.id;
+                                // location.reload();
+                            }
+                        });
+                    });
+                });
+            },
+        });
+    });
+    $("#btnuploadAttachmentSubs").click(function (e) {
+        $("#updateSubsAttachment").validate({
+            // Specify validation rules
+            rules: {
+                 "file_upload[]": "required",
+                 desc: "required",
+            },
+
+            messages: {
+                 "file_upload[]": "Please Upload Attachment",
+                 desc: "Please Insert Description",
+            },
+            submitHandler: function (form) {
+                requirejs(["sweetAlert2"], function (swal) {
+                    var data = new FormData(
+                        document.getElementById("updateSubsAttachment")
+                    );
+
+                    $.ajax({
+                        type: "POST",
+                        url: "/saveSubsAttachment",
+                        data: data,
+                        dataType: "json",
+
+                        processData: false,
+                        contentType: false,
+                    }).then(function (data) {
+                        swal({
+                            title: data.title,
+                            text: data.msg,
+                            type: data.type,
+                            confirmButtonColor: "#3085d6",
+                            confirmButtonText: "OK",
+                            allowOutsideClick: false,
+                            allowEscapeKey: false,
+                        }).then(function () {
+                            if (data.type == "error") {
+                            } else {
+                                window.location.href =
+                                    "/monthClaimEditView/edit/month/" + data.id;
+                                // location.reload();
+                            }
+                        });
+                    });
+                });
+            },
+        });
+    });
     $("#subsSaveButton").click(function (e) {
         $("#subsForm").validate({
             // Specify validation rules
@@ -1452,6 +1558,86 @@ $(document).on("click", "#deleteButtonPersonal", function () {
         });
     });
 });
+$(document).on("click", "#deleteButtonTravelAttachment", function () {
+    id = $(this).data("id");
+    //console.log(id);
+    requirejs(["sweetAlert2"], function (swal) {
+        swal({
+            title: "Are you sure!",
+            type: "error",
+            confirmButtonClass: "btn-danger",
+            confirmButtonText: "Yes!",
+            showCancelButton: true,
+            allowOutsideClick: false,
+            allowEscapeKey: false,
+        }).then(function () {
+            $.ajax({
+                type: "POST",
+                url: "/deleteTravelAttachment/" + id,
+                // dataType: "json",
+                data: { _method: "DELETE" },
+
+                // processData: false,
+                // contentType: false,
+            }).then(function (data) {
+                swal({
+                    title: data.title,
+                    text: data.msg,
+                    type: data.type,
+                    confirmButtonColor: "#3085d6",
+                    confirmButtonText: "OK",
+                    allowOutsideClick: false,
+                    allowEscapeKey: false,
+                }).then(function () {
+                    if (data.type == "error") {
+                    } else {
+                        location.reload();
+                    }
+                });
+            });
+        });
+    });
+});
+$(document).on("click", "#deleteButtonSubsAttachment", function () {
+    id = $(this).data("id");
+    //console.log(id);
+    requirejs(["sweetAlert2"], function (swal) {
+        swal({
+            title: "Are you sure!",
+            type: "error",
+            confirmButtonClass: "btn-danger",
+            confirmButtonText: "Yes!",
+            showCancelButton: true,
+            allowOutsideClick: false,
+            allowEscapeKey: false,
+        }).then(function () {
+            $.ajax({
+                type: "POST",
+                url: "/deleteSubsAttachment/" + id,
+                // dataType: "json",
+                data: { _method: "DELETE" },
+
+                // processData: false,
+                // contentType: false,
+            }).then(function (data) {
+                swal({
+                    title: data.title,
+                    text: data.msg,
+                    type: data.type,
+                    confirmButtonColor: "#3085d6",
+                    confirmButtonText: "OK",
+                    allowOutsideClick: false,
+                    allowEscapeKey: false,
+                }).then(function () {
+                    if (data.type == "error") {
+                    } else {
+                        location.reload();
+                    }
+                });
+            });
+        });
+    });
+});
 $("#updateOtherMtcBtn").click(function (e) {
     
     $("#updateOtherMtc").validate({
@@ -1498,6 +1684,27 @@ $("#updateOtherMtcBtn").click(function (e) {
         },
     });
 });
+document.getElementById("resetButtonOthers").addEventListener("click", function() {
+    // Reset the select element to the first option
+    document.getElementById("claimcategory").selectedIndex = 0;
+
+    document.getElementById("labelCategory").style.display = "none";
+    // Reset the number input to an empty value
+    document.getElementById("amount").value = "";
+
+    // Reset the textarea to an empty value
+    document.getElementById("claim_desc").value = "";
+
+    // Clear the file input by creating a new one and replacing the old input element
+    const fileInput = document.createElement("input");
+    fileInput.type = "file";
+    fileInput.className = "form-control-file";
+    fileInput.name = "file_upload[]";
+    fileInput.id = "supportdocument";
+    fileInput.multiple = true;
+    document.getElementById("supportdocument").parentNode.replaceChild(fileInput, document.getElementById("supportdocument"));
+});
+
 $("#updateSubsMtcBtn").click(function (e) {
     
     $("#updateSubsMtc").validate({

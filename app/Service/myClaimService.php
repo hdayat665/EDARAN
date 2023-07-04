@@ -19,6 +19,7 @@ use App\Models\EntitleSubsBenefit;
 use App\Models\UserAddress;
 use App\Models\Project;
 use App\Models\ClaimCategory;
+use App\Models\MtcAttachment;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
@@ -45,7 +46,7 @@ class myClaimService
             foreach ($_FILES['file_upload']['name'] as $key => $filename) {
                 $tmp_name = $_FILES['file_upload']['tmp_name'][$key];
                 if (!empty($filename) && !empty($tmp_name)) {
-                    $fileInfo = manyFile($filename, $tmp_name);
+                    $fileInfo = GeneralFile($filename, $tmp_name);
                     if ($fileInfo !== null) {
                         $filenames[] = $fileInfo['filename'];
                     }
@@ -135,6 +136,84 @@ class myClaimService
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
         $data['msg'] = 'Success';
+
+        return $data;
+    }
+    public function saveTravellingAttachment($r, $status = '')
+    {
+        $input = $r->input();
+        
+
+        if (!empty($_FILES['file_upload']['name']) && is_array($_FILES['file_upload']['name'])) {
+            $filenames = array();
+            foreach ($_FILES['file_upload']['name'] as $key => $filename) {
+                $tmp_name = $_FILES['file_upload']['tmp_name'][$key];
+                if (!empty($filename) && !empty($tmp_name)) {
+                    $fileInfo = MtcAttachment($filename, $tmp_name);
+                    if ($fileInfo !== null) {
+                        $filenames[] = $fileInfo['filename'];
+                    }
+                }
+            }
+        }
+        
+        $fileString = implode(',', $filenames);
+        
+        // add to general claim
+        $generalClaim['tenant_id'] = Auth::user()->tenant_id;
+        $generalClaim['user_id'] = Auth::user()->id;
+        $generalClaim['general_id'] = $input['id'];
+        $generalClaim['claim_id'] = $input['claim_id'];
+        $generalClaim['desc'] = $input['desc'];
+        $generalClaim['type'] = 'travelling';
+        $generalClaim['file_upload'] = $fileString ?? '';
+        //pr($generalClaim);
+        MtcAttachment::create($generalClaim);
+
+        $data['id'] = $generalClaim['general_id'];
+        $data['status'] = config('app.response.success.status');
+        $data['type'] = config('app.response.success.type');
+        $data['title'] = config('app.response.success.title');
+        $data['msg'] = 'Upload Success';
+
+        return $data;
+    }
+    public function saveSubsAttachment($r, $status = '')
+    {
+        $input = $r->input();
+        
+
+        if (!empty($_FILES['file_upload']['name']) && is_array($_FILES['file_upload']['name'])) {
+            $filenames = array();
+            foreach ($_FILES['file_upload']['name'] as $key => $filename) {
+                $tmp_name = $_FILES['file_upload']['tmp_name'][$key];
+                if (!empty($filename) && !empty($tmp_name)) {
+                    $fileInfo = MtcAttachment($filename, $tmp_name);
+                    if ($fileInfo !== null) {
+                        $filenames[] = $fileInfo['filename'];
+                    }
+                }
+            }
+        }
+        
+        $fileString = implode(',', $filenames);
+        
+        // add to general claim
+        $generalClaim['tenant_id'] = Auth::user()->tenant_id;
+        $generalClaim['user_id'] = Auth::user()->id;
+        $generalClaim['general_id'] = $input['id'];
+        $generalClaim['claim_id'] = $input['claim_id'];
+        $generalClaim['desc'] = $input['desc'];
+        $generalClaim['type'] = 'subs';
+        $generalClaim['file_upload'] = $fileString ?? '';
+        //pr($generalClaim);
+        MtcAttachment::create($generalClaim);
+
+        $data['id'] = $generalClaim['general_id'];
+        $data['status'] = config('app.response.success.status');
+        $data['type'] = config('app.response.success.type');
+        $data['title'] = config('app.response.success.title');
+        $data['msg'] = 'Upload Success';
 
         return $data;
     }
@@ -242,7 +321,7 @@ class myClaimService
             foreach ($_FILES['file_upload']['name'] as $key => $filename) {
                 $tmp_name = $_FILES['file_upload']['tmp_name'][$key];
                 if (!empty($filename) && !empty($tmp_name)) {
-                    $fileInfo = manyFile($filename, $tmp_name);
+                    $fileInfo = GeneralFile($filename, $tmp_name);
                     if ($fileInfo !== null) {
                         $filenames[] = $fileInfo['filename'];
                     }
@@ -308,11 +387,14 @@ class myClaimService
 
             $generalDetailData = GeneralClaimDetail::where([['tenant_id', Auth::user()->tenant_id], ['general_id', $GNCId]])->get();
 
+            $total = []; // Initialize the $total variable as an empty array
+
             foreach ($generalDetailData as $generalClaimDetail) {
                 $total[] = $generalClaimDetail['amount'];
             }
-            
+
             $totalAmount = array_sum($total);
+
 
             $generalClaim = [];
             $generalClaim['total_amount'] = $totalAmount;
@@ -361,6 +443,52 @@ class myClaimService
 
 
             GeneralClaim::where('id', $GNCId)->update($totalAmount);
+
+            $data['status'] = config('app.response.success.status');
+            $data['type'] = config('app.response.success.type');
+            $data['title'] = config('app.response.success.title');
+            $data['msg'] = 'Success Delete';
+        }
+
+        return $data;
+    }
+    public function deleteTravelAttachment($id)
+    {
+        $AttachmentDetail = MtcAttachment::find($id);
+        
+
+        if (!$AttachmentDetail) {
+            $data['status'] = config('app.response.error.status');
+            $data['type'] = config('app.response.error.type');
+            $data['title'] = config('app.response.error.title');
+            $data['msg'] = 'Detail not found';
+        } else {
+            // DB::query("DELETE FROM general_claim_detail WHERE id = $id");
+            $AttachmentDetail->delete($id);
+            
+
+            $data['status'] = config('app.response.success.status');
+            $data['type'] = config('app.response.success.type');
+            $data['title'] = config('app.response.success.title');
+            $data['msg'] = 'Success Delete';
+        }
+
+        return $data;
+    }
+    public function deleteSubsAttachment($id)
+    {
+        $AttachmentDetail = MtcAttachment::find($id);
+        
+
+        if (!$AttachmentDetail) {
+            $data['status'] = config('app.response.error.status');
+            $data['type'] = config('app.response.error.type');
+            $data['title'] = config('app.response.error.title');
+            $data['msg'] = 'Detail not found';
+        } else {
+            // DB::query("DELETE FROM general_claim_detail WHERE id = $id");
+            $AttachmentDetail->delete($id);
+            
 
             $data['status'] = config('app.response.success.status');
             $data['type'] = config('app.response.success.type');
@@ -982,7 +1110,19 @@ class myClaimService
 
         return $data;
     }
-
+    public function getCashAdvancePaid()
+    {
+        $data = CashAdvanceDetail::where([
+            ['tenant_id', Auth::user()->tenant_id],
+            ['user_id', Auth::user()->id],
+            ['status', 'paid'],
+            ['status', 3]
+        ])->get();
+        
+        return $data;
+        
+        
+    }
     public function getTravellingClaimByGeneralId($id = '')
     {
         $data = TravelClaim::select(
@@ -1079,6 +1219,22 @@ class myClaimService
     {
         $data = TravelClaim::where('general_id', $id)
         ->where('type_claim', 'subs')
+        ->get();
+
+        return $data;
+    }
+    public function getTravelAttachmentsByGeneralId($id = '')
+    {
+        $data = MtcAttachment::where('general_id', $id)
+        ->where('type', 'travelling')
+        ->get();
+
+        return $data;
+    }
+    public function getSubsAttachmentsByGeneralId($id = '')
+    {
+        $data = MtcAttachment::where('general_id', $id)
+        ->where('type', 'subs')
         ->get();
 
         return $data;
