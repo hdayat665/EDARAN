@@ -9,6 +9,11 @@ $(document).on("click", "#mcvSubsistence", function () {
     $("#subsModal").modal("show");
 });
 
+$(document).on("click", "#mcvOthers", function () {
+
+    $("#othersModal").modal("show");
+});
+
 // $("#testtable").DataTable({
 //     responsive: false,
 //     lengthMenu: [
