@@ -1,4 +1,56 @@
 $(document).ready(function () {
+
+   
+    
+    // function displayObjects(objArray) {
+    //     objArray.forEach(function(obj, index) {
+    //       console.log(index + " => ", obj);
+    //     });
+    //   }
+      
+    //   var a;
+    //   var b;
+      
+    //   function getWorkingHourWeekendbyState(stateid) {
+    //     return $.ajax({
+    //       url: "/getWorkingHourWeekendbyState/" + stateid,
+    //     });
+    //   }
+      
+    //   function getStateById(id) {
+    //     return $.ajax({
+    //       url: "/getStateById/" + id,
+    //     });
+    //   }
+      
+    //   // var id = 1;
+    //   id = $("#userIdForApproval").val();
+    //   var vehicleData = getStateById(id);
+      
+    //   vehicleData.then(function(data) {
+    //     a = data.state_id;
+    //     console.log(a + "dlm1");
+      
+    //     // Assign the value of a to stateid
+    //     stateid = a;
+      
+    //     var vehicleData1 = getWorkingHourWeekendbyState(stateid);
+      
+    //     vehicleData1.then(function(data) {
+    //       b = data;
+    //       displayObjects(b);
+    //     });
+    //   });
+      
+
+
+
+
+    
+
+
+
+
     // $("#addeventalldayedit").change(function() {
     //     if ($(this).is(":checked")) {
     //       $(this).val("allday");
@@ -128,6 +180,8 @@ $(document).ready(function () {
             url: "/getAppealidList/"
         });
     }
+
+   
 
     var $elem = $('#addneweventselectprojectedit');
     $elem.picker({ search: true });
@@ -1205,8 +1259,11 @@ $(document).ready(function () {
                 },
 
 
+               
+
                 dayCellDidMount: function(info) {
-                    
+
+                    // console.log(a+"dlam daycell");
                     // console.log(approverUserId+"from deaycell");
                     var current = new Date(info.date);
                     var currentDate = new Date();
@@ -1543,7 +1600,7 @@ $(document).ready(function () {
                         }
                        
                       }
-
+                   
                      if (
                         (dateonedaybefore || datetwodayebefore) &&
                         !(weekend1 || weekend2) &&
@@ -1560,14 +1617,14 @@ $(document).ready(function () {
                         (dateonedaybefore || datetwodayebefore) &&
                         !(weekend1 || weekend2)  && ( (hasLog || hasEvent) && totalHoursCombined < workingDayHour)
                       ) {
-                        $(info.el).css('background-color', '#80ff80');
+                        $(info.el).css('background-color', '#FF8080');
                       }
                       else if(
                          
                         (dateonedaybefore || datetwodayebefore) &&
-                        !(weekend1 || weekend2)  && ( (hasLog || hasEvent) && totalHoursCombined < workingDayHour)
+                        !(weekend1 || weekend2)  && ( (hasLog || hasEvent) && totalHoursCombined >= workingDayHour)
                       ) {
-                        $(info.el).css('background-color', '#FF8080');
+                        $(info.el).css('background-color', '#80ff80');
                       }
 
                      
@@ -1761,6 +1818,7 @@ $(document).ready(function () {
                         });
                     }
 
+                    
                     
 
                     function getAttendance1(eventId) {
@@ -2081,39 +2139,27 @@ $(document).ready(function () {
                             
                             
                             
-                            var eventData1 = getEvents(eventId);
-                            eventData1.then(function(data) {
-                                var nonParticipants = data.nonParticipants; // Assuming data.nonParticipants is an array of objects with user_id and name properties
-                                var selectElement = $("#addneweventparticipantedit");
+                           
+
+                            var eventData = getEvents(eventId);
+                            eventData.then(function(data) {
+                                var participants = data.participants; // Assuming data.participants is an array of objects with user_id and name properties
+                                var attendanceStatus = data.attendanceStatus; // Assuming data.attendanceStatus is an array of objects with status property
                             
-                                // Clear any existing options
-                                selectElement.empty();
+                                var tableBody = $("#tableRowParticipant");
+                                tableBody.empty(); // Clear any existing rows in the table
                             
-                                // Add the "Please Choose" option as the first option
-                                var pleaseChooseOption = $("<option></option>")
-                                    .val("")
-                                    .text("PLEASE CHOOSE");
+                                for (var i = 0; i < participants.length; i++) {
+                                    var participant = participants[i];
+                                    var status = attendanceStatus[i].status; // Assuming the attendance status field is named 'status'
                             
-                                selectElement.append(pleaseChooseOption);
+                                    var row = $("<tr></tr>");
+                                    row.append($("<td></td>").text(i + 1));
+                                    row.append($("<td></td>").text(participant.name));
+                                    row.append($("<td></td>").text(status));
                             
-                                // Add the non-participant options
-                                for (var i = 0; i < nonParticipants.length; i++) {
-                                    var option = $("<option></option>")
-                                        .val(nonParticipants[i].user_id)
-                                        .text(nonParticipants[i].name);
-                            
-                                    selectElement.append(option);
+                                    tableBody.append(row);
                                 }
-                            
-                                // Initialize the Select2 plugin with multiple selection and search
-                                selectElement.select2({
-                                    dropdownParent: $('#editeventmodal'),
-                                    multiple: true,
-                                    dropdownCss: {
-                                        top: '100%',
-                                        bottom: 'auto'
-                                    }
-                                });
                             });
                             
 
