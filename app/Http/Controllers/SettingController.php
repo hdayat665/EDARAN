@@ -1134,9 +1134,10 @@ class SettingController extends Controller
         $ss = new SettingService;
 
         $data['weekend'] = $ss->weekendview();
+        $data['state'] = $ss->getstate();
 
-        // dd($data['weekend']);
-        // die;
+        // dd($data['state']);
+        // // die;
 
         return view('pages.setting.eleave.weekendEntitlement', $data);
     }
@@ -1431,6 +1432,21 @@ class SettingController extends Controller
         return response()->json($result);
     }
 
+    public function createleaveweekend(Request $r)
+    {
+        $input = $r->input();
+
+        // dd($input);
+        // die;
+
+        $ss = new SettingService;
+
+        $result = $ss->createleaveweekend($r);
+
+
+
+        return response()->json($result);
+    }
     public function updateweekend(Request $r)
     {
         $input = $r->input();
@@ -1441,6 +1457,19 @@ class SettingController extends Controller
         $ss = new SettingService;
 
         $result = $ss->updateweekend($r);
+
+
+
+        return response()->json($result);
+    }
+
+    public function getweekend($id = '')
+    {
+
+
+        $ss = new SettingService;
+
+        $result = $ss->getweekend($id);
 
         return response()->json($result);
     }

@@ -43,7 +43,7 @@
                                         <th class="text-nowrap">No.</th>
                                         <th class="text-nowrap">Job Grade</th>
                                         <th class="text-nowrap">Permanent (0-2 years)</th>
-                                        <th class="text-nowrap">Permanent (2-3 years)</th>
+                                        <th class="text-nowrap">Permanent (2-5 years)</th>
                                         <th class="text-nowrap">Permanent (More than 5 years)</th>
                                         <th class="text-nowrap">Contract</th>
                                         </tr>

@@ -110,7 +110,7 @@
                         @elseif ($claim->status == 'active')
                             <td><span class="badge bg-lime" data-toggle="activec" title="Active">Active</span></td>
                         @endif
-                        <td>20/09/2022</td>
+                        <td>{{ date('Y-m-d', strtotime($claim->updated_at)) }}</td>
                     </tr>
                 @endforeach
             @endif
