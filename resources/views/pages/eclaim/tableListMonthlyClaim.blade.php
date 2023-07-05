@@ -84,7 +84,7 @@
                 
             </div>
             <div class="col-md-6">
-                <input type="file" class="form-control-file" name="" id="" multiple>
+                <input type="button" id="btnAttachment" class="btn btn-primary" value="Travelling Attachment">
             </div>
         </div>
     </div>
@@ -215,7 +215,7 @@
                 
             </div>
             <div class="col-md-6">
-                <input type="file" class="form-control-file" name="" id="" multiple>
+                <input type="button" id="btnAttachmentSubs" class="btn btn-primary" value="Subsistence Attachment">
             </div>
         </div>
     </div>

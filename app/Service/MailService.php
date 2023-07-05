@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail as FacadesMail;
 
-class MailService 
+class MailService
 {
     public function emailToSupervisorClaimGNC($data)
     {
@@ -38,7 +38,7 @@ class MailService
         }
     }
 
-    
+
     public function emailToSupervisorClaimMTC($data)
     {
         // get supervisor detail
@@ -112,7 +112,7 @@ class MailService
         Mail::to($receiver)->send(new MailMail($response));
         // }
     }
-    
+
     public function approvalEmailMTCForAdmin($data)
     {
         // get supervisor detail
@@ -289,6 +289,7 @@ class MailService
         if($user && $recommenderLeave){
 
             $receiver = $recommenderLeave->workingEmail;
+            $response['cc'] = $user->workingEmail;
             $response['typeEmail'] = 'emailToRecommenderLeave';
 
             $response['from'] = env('MAIL_FROM_ADDRESS');
@@ -330,6 +331,7 @@ class MailService
             $response['from'] = env('MAIL_FROM_ADDRESS');
             $response['nameFrom'] = $user->employeeName;
             $response['subject'] = 'Leave Application';
+            $response['cc'] = $user->workingEmail;
             $response['title'] = 'Leave Application';
             $response['approvedby'] = $approvedbyLeave->employeeName;
             $response['employeeName'] = $user->employeeName;
@@ -368,6 +370,7 @@ class MailService
         if($user && $approvedbyLeave){
 
             $receiver = $approvedbyLeave->workingEmail;
+            $response['cc'] = $recommendedby->workingEmail;
             $response['typeEmail'] = 'emailToApproverLeave';
 
             $response['from'] = env('MAIL_FROM_ADDRESS');
@@ -406,6 +409,7 @@ class MailService
         if($user && $userRecommender){
 
             $receiver = $user->workingEmail;
+            $response['cc'] = $userRecommender->workingEmail;
             $response['typeEmail'] = 'emailToRejectedLeave';
 
             $response['from'] = env('MAIL_FROM_ADDRESS');
@@ -443,6 +447,8 @@ class MailService
         if($user && $approvedby){
 
             $receiver = $user->workingEmail;
+            $response['cc'] = $approvedby->workingEmail;
+
             $response['typeEmail'] = 'emailToRejectedLeaveHod';
 
             $response['from'] = env('MAIL_FROM_ADDRESS');
@@ -480,6 +486,7 @@ class MailService
         if($user && $approvedby){
 
             $receiver = $user->workingEmail;
+            $response['cc'] = $approvedby->workingEmail;
             $response['typeEmail'] = 'emailToApprovedLeave';
 
             $response['from'] = env('MAIL_FROM_ADDRESS');
@@ -516,6 +523,7 @@ class MailService
         if($user && $approvedby){
 
             $receiver = $approvedby->workingEmail;
+            $response['cc'] = $user->workingEmail;
             $response['typeEmail'] = 'emailToApprovedAppeal';
 
             $response['from'] = env('MAIL_FROM_ADDRESS');
@@ -554,6 +562,7 @@ class MailService
         if($user && $approvedby){
 
             $receiver = $user->workingEmail;
+            $response['cc'] = $approvedby->workingEmail;
             $response['typeEmail'] = 'emailToEmployeeAppeal';
 
             $response['from'] = env('MAIL_FROM_ADDRESS');
