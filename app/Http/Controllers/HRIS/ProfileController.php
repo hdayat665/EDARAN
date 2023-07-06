@@ -177,7 +177,7 @@ class ProfileController extends Controller
 
         $ls = new LoginService;
 
-        $result = $ls->resetPassword($input);
+        $result = $ls->updatePass($input);
 
         return response()->json($result);
     }

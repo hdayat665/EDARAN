@@ -15,7 +15,7 @@
                                     <label class="form-label">Employee Name</label>
                                 </div>
                                 <div class="col-md-8">
-                                    <input readonly type="text" name="claim-id" class="form-control">
+                                    <input readonly type="text" name="claim-id" class="form-control" value="Kamil">
                                 </div>
                             </div>
                             <div class="row p-2">
@@ -23,15 +23,15 @@
                                     <label class="form-label">Designation</label>
                                 </div>
                                 <div class="col-md-8">
-                                    <input readonly type="text" value="MTC" name="claim_type" class="form-control">
+                                    <input readonly type="text" value="MTC" name="claim_type" class="form-control" value="Scrum Master">
                                 </div>
                             </div>
                             <div class="row p-2">
                                 <div class="col-md-4">
-                                    <label class="form-label">Department/ Project</label>
+                                    <label class="form-label">Department</label>
                                 </div>
                                 <div class="col-md-8">
-                                    <input readonly type="text" value="MTC" name="claim_type" class="form-control">
+                                    <input readonly type="text" value="MTC" name="claim_type" class="form-control" value="Service Delivery Department">
                                 </div>
                             </div>
                             <div class="row p-2">
@@ -39,9 +39,7 @@
                                     <label class="form-label">Office Base</label>
                                 </div>
                                 <div class="col-md-8">
-                                    <input readonly type="text" value="MTC"
-                                    name="claim_type" class="form-control" height="30px";
-                                    overflow= "hidden";>
+                                    <input readonly type="text" value="Headquarters" name="claim_type" class="form-control" height="30px"; overflow= "hidden";>
                                 </div>
                             </div>
                         </div>
@@ -53,13 +51,13 @@
                                     <label class="form-label">Year</label>
                                 </div>
                                 <div class="col-md-3">
-                                    <input readonly type="text" name="claim-id" class="form-control">
+                                    <input readonly type="text" value="2023" name="claim-id" class="form-control">
                                 </div>
                                 <div class="col-md-3">
                                     <label class="form-label">Claim ID</label>
                                 </div>
                                 <div class="col-md-3">
-                                    <input readonly type="text" value="MTC" name="claim_type" class="form-control">
+                                    <input readonly type="text" value="MTC001" name="claim_type" class="form-control">
                                 </div>
                             </div>
                             <div class="row p-2">
@@ -67,13 +65,13 @@
                                     <label class="form-label">Month</label>
                                 </div>
                                 <div class="col-md-3">
-                                    <input readonly type="text" name="claim-id" class="form-control">
+                                    <input readonly type="text" value="January" name="claim-id" class="form-control">
                                 </div>
                                 <div class="col-md-3">
                                     <label class="form-label">Claim Type</label>
                                 </div>
                                 <div class="col-md-3">
-                                    <input readonly type="text" name="claim-id" class="form-control">
+                                    <input readonly type="text" value="MTC" name="claim-id" class="form-control">
                                 </div>
                             </div>
                             <div class="row p-2">
@@ -81,28 +79,32 @@
                                     <label class="form-label">Status</label>
                                 </div>
                                 <div class="col-md-3">
-                                    <input readonly type="text" value="Draft" name="claim-id" class="form-control">
+                                    <input readonly type="text" value="PENDING" name="claim-id" class="form-control btn btn-primary">
                                 </div>
                                 <div class="col-md-3">
                                     <label class="form-label">Applied Date</label>
                                 </div>
                                 <div class="col-md-3">
-                                    <input readonly type="text" name="claim-id" class="form-control">
+                                    <input readonly type="text" value="2023-01-28" name="claim-id" class="form-control">
                                 </div>
                             </div>
                             <div class="row p-2">
                                 <div class="col-md-3">
-                                    <label class="form-label">Status</label>
+                                    <label class="form-label"></label>
                                 </div>
                                 <div class="col-md-3">
-                                    <input readonly type="text" value="Draft" name="claim-id" class="form-control">
+                                    <label class="form-label"></label>
                                 </div>
                                 <div class="col-md-3">
-                                    <label class="form-label">Applied Date</label>
+                                    <label class="form-label"></label>
                                 </div>
                                 <div class="col-md-3">
-                                    <input readonly type="text" name="claim-id" class="form-control">
+                                    <label class="form-label"></label>
+                                    <br>
                                 </div>
+                            </div>
+                            <div class="row p-2">
+
                             </div>
                         </div>
                     </div>
@@ -114,12 +116,12 @@
                         </div>
                         <div class="row p-2">
                             <div class="col d-flex justify-content-end">
-                                <button class="btn btn-primary" id="" type="submit">Print &nbsp;</button>
+                                <button class="btn btn-primary" id="" type="submit" style="width: 100%">Print</button>
                             </div>
                         </div>
                         <div class="row p-2">
                             <div class="col d-flex justify-content-end">
-                                <button class="btn btn-primary" id="" type="submit"> Back</button>
+                                <button class="btn btn-primary" id="" type="submit" style="width: 100%"> Back</button>
                             </div>
                         </div>
                     </div>
@@ -134,18 +136,18 @@
                                     <h5>Department</h5>
                                     <div class="row p-2">
                                         <div class="col-md-4">
-                                            <label class="form-label">Employee Name</label>
+                                            <label class="form-label">Recommender</label>
                                         </div>
                                         <div class="col-md-8">
-                                            <input readonly type="text" name="claim-id" class="form-control">
+                                            <input readonly type="text" value="Dept. Recommender" name="claim-id" class="form-control">
                                         </div>
                                     </div>
                                     <div class="row p-2">
                                         <div class="col-md-4">
-                                            <label class="form-label">Designation</label>
+                                            <label class="form-label">Approver</label>
                                         </div>
                                         <div class="col-md-8">
-                                            <input readonly type="text" value="MTC" name="claim_type" class="form-control">
+                                            <input readonly type="text" value="Dept. Approver" name="claim_type" class="form-control">
                                         </div>
                                     </div>
                                 </div>
@@ -153,18 +155,18 @@
                                     <h5>Admin</h5>
                                     <div class="row p-2">
                                         <div class="col-md-4">
-                                            <label class="form-label">Employee Name</label>
+                                            <label class="form-label">Recommender</label>
                                         </div>
                                         <div class="col-md-8">
-                                            <input readonly type="text" name="claim-id" class="form-control">
+                                            <input readonly type="text" value="Admin Recommender" name="claim-id" class="form-control">
                                         </div>
                                     </div>
                                     <div class="row p-2">
                                         <div class="col-md-4">
-                                            <label class="form-label">Designation</label>
+                                            <label class="form-label">Approver</label>
                                         </div>
                                         <div class="col-md-8">
-                                            <input readonly type="text" value="MTC" name="claim_type" class="form-control">
+                                            <input readonly type="text" value="Admin Approver" name="claim_type" class="form-control">
                                         </div>
                                     </div>
                                 </div>
@@ -175,7 +177,7 @@
                                             <label class="form-label">Checker 1</label>
                                         </div>
                                         <div class="col-md-8">
-                                            <input readonly type="text" name="claim-id" class="form-control">
+                                            <input readonly type="text" value="Finance Checker 1" name="claim-id" class="form-control">
                                         </div>
                                     </div>
                                     <div class="row p-2">
@@ -183,7 +185,7 @@
                                             <label class="form-label">Checker 2</label>
                                         </div>
                                         <div class="col-md-8">
-                                            <input readonly type="text" name="claim-id" class="form-control">
+                                            <input readonly type="text"  value="Finance Checker 2" name="claim-id" class="form-control">
                                         </div>
                                     </div>
                                     <div class="row p-2">
@@ -191,7 +193,7 @@
                                             <label class="form-label">Checker 3</label>
                                         </div>
                                         <div class="col-md-8">
-                                            <input readonly type="text" value="Draft" name="claim-id" class="form-control">
+                                            <input readonly type="text" value="Finance Checker 3" name="claim-id" class="form-control">
                                         </div>
                                     </div>
                                     <div class="row p-2">
@@ -199,7 +201,7 @@
                                             <label class="form-label">Recommender</label>
                                         </div>
                                         <div class="col-md-8">
-                                            <input readonly type="text" value="Draft" name="claim-id" class="form-control">
+                                            <input readonly type="text" value="Finance Recommender" name="claim-id" class="form-control">
                                         </div>
                                     </div>
                                     <div class="row p-2">
@@ -207,7 +209,7 @@
                                             <label class="form-label">Approver</label>
                                         </div>
                                         <div class="col-md-8">
-                                            <input readonly type="text" value="Draft" name="claim-id" class="form-control">
+                                            <input readonly type="text" value="Finance Approver" name="claim-id" class="form-control">
                                         </div>
                                     </div>
                                 </div>
@@ -227,7 +229,7 @@
                                             <label class="form-label">Travelling</label>
                                         </div>
                                         <div class="col-md-6">
-                                            <input type="text" class="form-control" readonly value='RM '>
+                                            <input type="text" class="form-control" readonly value='RM 0.00'>
                                         </div>
                                     </div>
                                     <div class="row p-2">
@@ -235,7 +237,7 @@
                                             <label class="form-label">Petrol/Fare</label>
                                         </div>
                                         <div class="col-md-6">
-                                            <input type="text" class="form-control" readonly value='RM '>
+                                            <input type="text" class="form-control" readonly value='RM 0.00'>
                                         </div>
                                     </div>
                                     <div class="row p-2">
@@ -243,7 +245,7 @@
                                             <label class="form-label">Toll</label>
                                         </div>
                                         <div class="col-md-6">
-                                            <input type="text" class="form-control" readonly value='RM '>
+                                            <input type="text" class="form-control" readonly value='RM 0.00'>
                                         </div>
                                     </div>
                                     <div class="row p-2">
@@ -251,7 +253,7 @@
                                             <label class="form-label">Parking</label>
                                         </div>
                                         <div class="col-md-6">
-                                            <input type="text" class="form-control" readonly value='RM '>
+                                            <input type="text" class="form-control" readonly value='RM 0.00'>
                                         </div>
                                     </div>
                                     <div class="row p-2">
@@ -259,7 +261,7 @@
                                             <label class="form-label">Subsistence Allowance</label>
                                         </div>
                                         <div class="col-md-6">
-                                            <input type="text" class="form-control" readonly value='RM '>
+                                            <input type="text" class="form-control" readonly value='RM 0.00'>
                                         </div>
                                     </div>
                                     <div class="row p-2">
@@ -267,11 +269,35 @@
                                             <label class="form-label">Accommodation & Lodging</label>
                                         </div>
                                         <div class="col-md-6">
-                                            <input type="text" class="form-control" readonly value='RM '>
+                                            <input type="text" class="form-control" readonly value='RM 0.00'>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
+                                    <div class="row p-2">
+                                        <div class="col-md-6">
+                                            <label class="form-label">Phone Bill</label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <input type="text" class="form-control" readonly value='RM '>
+                                        </div>
+                                    </div>
+                                    <div class="row p-2">
+                                        <div class="col-md-6">
+                                            <label class="form-label">Entertainment</label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <input type="text" class="form-control" readonly value='RM '>
+                                        </div>
+                                    </div>
+                                    <div class="row p-2">
+                                        <div class="col-md-6">
+                                            <label class="form-label">Laundry</label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <input type="text" class="form-control" readonly value='RM '>
+                                        </div>
+                                    </div>
                                     <div class="row p-2">
                                         <div class="col-md-6">
                                             <label class="form-label">Others</label>
@@ -283,27 +309,27 @@
                                 </div>
                                 <div class="col-md-4">
                                     <div class="row p-2">
-                                        <div class="col-md-6">
+                                        <div class="col-md-8">
                                             <label class="form-label">Total</label>
                                         </div>
-                                        <div class="col-md-6">
-                                            <input type="text" class="form-control" readonly value='RM'>
+                                        <div class="col-md-4">
+                                            <input type="text" class="form-control" readonly value='RM0.00'>
                                         </div>
                                     </div>
                                     <div class="row p-2">
-                                        <div class="col-md-6">
-                                            <label class="form-label">Cash Advance (Less)</label>
+                                        <div class="col-md-8">
+                                            <label class="form-label">Cash Advance (Less)<a href="#" class="btn btn-link">View</a></label>
                                         </div>
-                                        <div class="col-md-6">
-                                            <input readonly type="text" value="" name="" class="form-control">
+                                        <div class="col-md-4">
+                                            <input readonly type="text" value="RM0.00" name="" class="form-control">
                                         </div>
                                     </div>
                                     <div class="row p-2">
-                                        <div class="col-md-6">
+                                        <div class="col-md-8">
                                             <label class="form-label">Balance Due to/(From) Employee</label>
                                         </div>
-                                        <div class="col-md-6">
-                                            <input readonly type="text" value="" name="" class="form-control">
+                                        <div class="col-md-4">
+                                            <input readonly type="text" value="RM0.00" name="" class="form-control">
                                         </div>
                                     </div>
                                 </div>
@@ -325,17 +351,25 @@
                                     <li class="timeline-item mb-5 ">
                                         <div class="row p-2">
                                             <div class="col md-6">
-                                                <span class="timeline-icon">
+                                                <span class="">
                                                     <i class="fas fa-rocket fa-1x text-primary "></i>
-
                                                 </span>
                                             </div>
-                                            <div class="">
+                                            <div class="row p-2">
                                                 <div class="card p-3 bg-light">
                                                     <h5>Claim has been submitted</h5>
                                                     <br>
-                                                    <p>Applied Date: 27/6/2023</p>
+                                                    <p>Applied Date: 2023-02-01</p>
                                                     <p>Applied By: Hana</p>
+                                                </div>
+                                            </div>
+                                            <div class="row p-2">
+                                                <div class="card p-3 bg-green">
+                                                    <h5>Claim has been recommended</h5>
+                                                    <br>
+                                                    <p>Dept. Processing</p>
+                                                    <p>Recommended Date: 2023-02-15</p>
+                                                    <p>Recommended By: Dept. Recommender</p>
                                                 </div>
                                             </div>
                                         </div>

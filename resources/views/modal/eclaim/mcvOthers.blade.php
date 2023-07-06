@@ -13,8 +13,6 @@
                             <label class="form-label">Claim Category</label>
                         </div>
                         <div class="col-md-8">
-                            <input type="hidden" name="id" class="form-control" value="" id="claim_id_other">
-                            <input type="hidden" name="general_id" class="form-control" value="" id="general_id_other">
                             <input readonly type="text"  class="form-control" value="" id="claim_category_update">
                         </div>
                     </div>
@@ -23,7 +21,7 @@
                             <label class="form-label">Amount</label>
                         </div>
                         <div class="col-md-8">
-                            <input type="text" name="amount" class="form-control" value="" id="amount_other_update">
+                            <input type="text" readonly name="amount" class="form-control" value="RM0.00" id="amount_other_update">
                         </div>
                     </div>
                     <div class="row p-2">
@@ -31,7 +29,7 @@
                             <label class="form-label">Description</label>
                         </div>
                         <div class="col-md-8">
-                            <textarea class="form-control" name="claim_desc" id="desc_other_update" rows="4"></textarea>
+                            <textarea readonly class="form-control" name="claim_desc" id="desc_other_update" rows="4"></textarea>
                         </div>
                     </div>
                     <div class="row p-2">
@@ -39,7 +37,7 @@
                             <label class="form-label">File Upload</label>
                         </div>
                         <div class="col-md-8">
-                            <input type="file" class="form-control-file" name="file_upload[]" id="" multiple>
+                            <a href="#" class="btn btn-link">File</a>
                         </div>
                     </div>
 

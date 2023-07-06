@@ -277,12 +277,81 @@
                                     </div>
                                 </div>
                             </div>
+
+                            <div class="row p-2">
+                                <div class="col-md-6">
+                                    <div class="form-control">
+                                            <div class="row p-2">
+                                                <label class="form-label">Laundry</label>
+                                            </div>
+                                            <div class="row p-2">
+                                                <div class="col-md-4">
+                                                    <label class="form-label">Amount</label>
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <input type="text" class="form-control" value="RM0.00" readonly>
+                                                </div>
+                                            </div>
+                                            <div class="row p-2">
+                                                <div class="col-md-4">
+                                                    <label class="form-label">Description</label>
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <textarea class="form-control" readonly name="desc" id="desc_other_update" rows="4"></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                         </div>
                     <div class="modal-footer">
                         <!-- <button type="button" class="btn btn-secondary">Reset</button> -->
                         {{-- <button type="submit" id="updateSubsMtcBtn" class="btn btn-primary">Update</button> --}}
 
                         </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{-- FILE ATTACHMENT MODAL --}}
+
+<div class="modal fade" id="subsistenceAttachment" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="max-width: 600px">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Subsistence Allowance & Accommodation Attachment</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+            <form id="">
+                <div class="">
+                    <div class="row p-2">
+                        <div class="">
+                            <table id="" class="table table-striped table-bordered align-middle">
+                                <thead>
+                                    <tr>
+                                        <th class="text-nowrap">File Name</th>
+                                        <th class="text-nowrap">Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <a href="" target="_blank"></a><br>
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                </tbody>
+
+                            </table>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+
                     </div>
                 </div>
             </div>
