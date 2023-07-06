@@ -425,8 +425,7 @@ $(document).ready(function () {
         });
     });
 
-    $("#contract_start_date")
-    .datepicker({
+    $("#contract_start_date").datepicker({
         todayHighlight: true,
         autoclose: true,
         format: "yyyy/mm/dd",

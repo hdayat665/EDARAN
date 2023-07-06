@@ -52,12 +52,6 @@ $(document).ready(function () {
         autoclose: true,
         format: "yyyy/mm/dd",
     });
-    
-    $("#datepicker-joineddate2").datepicker({
-        todayHighlight: true,
-        autoclose: true,
-        format: "yyyy/mm/dd",
-    });
 
     $("#datepicker_exitdate").datepicker({
         todayHighlight: true,

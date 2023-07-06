@@ -2,12 +2,12 @@
 @section('content')
 
 <div id="content" class="app-content">
-    <h1 class="page-header" id="newRoleJs">System Role <small>| Create New System Role</small></h1>
+    <h1 class="page-header" id="newRoleJs">System User <small>| Update System User</small></h1>
     
     <div class="row">
         <!-- <div class="col-md-12 panel panel"> -->
                 <div class="panel-heading mt-15px">
-                <h1 class="panel-title" style="font-size: 15px;">1. Role Details</h1>
+                <h1 class="panel-title" style="font-size: 15px;">1. User Role Details</h1>
             </div> 
         <!-- </div> -->
     </div>
@@ -17,29 +17,50 @@
             <div class="panel-body">
                 <form id="">
                     <div class="row p-2">
-                        <div class="col-sm-2">
-                            <label class="form-label col-form-label col-md-5">Role Name*</label>
+                        <div class="col-sm-3">
+                            <label class="form-label col-form-label col-md-5">User ID</label>
                         </div>
-                        <div class="col-sm-6">
-                            <input type="text" class="form-control mb-5px" name="" placeholder="ROLE NAME" value=""/>
+                        <div class="col-sm-5">
+                            <input type="text" class="form-control mb-5px" name="" placeholder="USER ID" value=""/>
                         </div>
                     </div>
                     <div class="row p-2">
-                        <div class="col-sm-2">
-                            <label class="form-label col-form-label col-md-5">Description*</label>
+                        <div class="col-sm-3">
+                            <label class="form-label col-form-label col-md-5">Employee Name</label>
                         </div>
-                        <div class="col-sm-6">
-                            <textarea type="text" class="form-control mb-5px" rows="4" name="" maxlength="255" placeholder="DESCRIPTION"></textarea>
+                        <div class="col-sm-5">
+                            <input type="text" class="form-control mb-5px" name="" placeholder="EMPLOYEE NAME" value=""/>
                         </div>
                     </div>
+                    <div class="row p-2">
+                        <div class="col-sm-3">
+                            <label class="form-label col-form-label col-md-5">Email</label>
+                        </div>
+                        <div class="col-sm-5">
+                            <input type="text" class="form-control mb-5px" name="" placeholder="EMAIL" value=""/>
+                        </div>
+                    </div><br>
 
-                    <div class="mb-6">
-                        <div class="row g-3 align-items-center">
-                            <div class="col-auto">
-                                <input class="form-check-input" type="checkbox" value="" id="">
-                            </div>
-                            <div class="col-auto">
-                                <p class="col-form-label">Default - Assign to new users by default</p>
+                    <div class="row p-2">
+                        <div class="col-sm-2">
+                            <label class="form-label col-form-label col-md-5">Role: </label>
+                        </div>
+                        <div class="col-sm-3">
+                            <select class="form-control mb-5px" name="">
+                                <option value="">PLEASE CHOOSE</option>
+                                <option value="option1">Option 1</option>
+                                <option value="option2">Option 2</option>
+                            </select>
+                        </div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                        <div class="col-sm-6">
+                            <div class="row g-3 align-items-center">
+                                <div class="col-auto">
+                                    <input class="form-check-input" type="checkbox" value="" id="">
+                                </div>
+                                <div class="col-auto">
+                                    <p class="col-form-label">Role Customize</p>
+                                </div>
                             </div>
                         </div>
                     </div>

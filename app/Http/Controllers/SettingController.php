@@ -1508,7 +1508,7 @@ class SettingController extends Controller
 
         // $result = $ss->newCreateRole();
 
-        return view('pages.setting.newRole'); ;
+        return view('pages.setting.newRole');
     }
     public function newCreateRole()
     {
@@ -1516,7 +1516,7 @@ class SettingController extends Controller
 
         // $result = $ss->newCreateRole();
 
-        return view('pages.setting.newCreateRole'); ;
+        return view('pages.setting.newCreateRole');
     }
     public function newUpdateRole()
     {
@@ -1524,6 +1524,31 @@ class SettingController extends Controller
 
         // $result = $ss->newCreateRole();
 
-        return view('pages.setting.newUpdateRole'); ;
+        return view('pages.setting.newUpdateRole');
+    }
+
+    public function systemUser()
+    {
+        // $ss = new SettingService;
+
+        // $result = $ss->systemUser();
+
+        return view('pages.setting.systemUser');
+    }
+    public function systemUserCreate()
+    {
+        // $ss = new SettingService;
+
+        // $result = $ss->systemUser();
+
+        return view('pages.setting.systemUserCreate');
+    }
+    public function systemUserUpdate()
+    {
+        // $ss = new SettingService;
+
+        // $result = $ss->systemUser();
+
+        return view('pages.setting.systemUserUpdate');
     }
 }

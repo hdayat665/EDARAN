@@ -393,7 +393,6 @@ class ProjectService
             $input['location'] = implode(',', $input['location']);
         }
 
-
         $input['assign_as'] = 'project member';
 
         if ($exit == 'on') {
@@ -469,7 +468,12 @@ class ProjectService
         }
 
         if (isset($input['location'])) {
-            $input['location'] = implode(',', $input['location']);
+            $projectMember = ProjectMember::find($id);
+            $currentLocations = explode(',', $projectMember->location);
+    
+            // Merge the existing locations with the new locations
+            $updatedLocations = array_merge($currentLocations, $input['location']);
+            $input['location'] = implode(',', $updatedLocations);
         }
 
         ProjectMember::where('id', $id)->update($input);
@@ -486,20 +490,20 @@ class ProjectService
     {
         $input = $r->input();
 
-        foreach ($input['employee_id'] as $employee_id) {
-            $id = $employee_id;
-        
-            // Retrieve the existing locations for the project member
-            $projectMember = ProjectMember::find($id);
-            $currentLocations = explode(',', $projectMember->location);
-        
-            // Merge the existing locations with the new locations
-            $updatedLocations = array_merge($currentLocations, $input['location']);
-            $update['location'] = implode(',', $updatedLocations);
-        
-            // Update the project member with the updated locations
-            ProjectMember::where('id', $id)->update($update);
-        }        
+    foreach ($input['employee_id'] as $employee_id) {
+        $id = $employee_id;
+    
+        // Retrieve the existing locations for the project member
+        $projectMember = ProjectMember::find($id);
+        $currentLocations = explode(',', $projectMember->location);
+    
+        // Merge the existing locations with the new locations
+        $updatedLocations = array_merge($currentLocations, $input['location']);
+        $update['location'] = implode(',', $updatedLocations);
+    
+        // Update the project member with the updated locations
+        ProjectMember::where('id', $id)->update($update);
+    }        
 
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');

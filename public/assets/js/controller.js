@@ -120,6 +120,12 @@ requirejs.config({
 
         // myleave Report
         eleavereportjs: assets + "/js/eleavereportjs",
+
+        // newRole Js
+        newRoleJs: assets + "/js/newRoleJs",
+
+        // systemUser Js
+        systemUserJs: assets + "/js/systemUserJs",
     },
 });
 
@@ -523,6 +529,14 @@ if ($("#eleavereportjs").length > 0) {
 
 if ($("#appealTimesheetsJs").length > 0) {
     requirejs(["appealTimesheetsJs"]);
+}
+
+if ($("#newRoleJs").length > 0) {
+    requirejs(["newRoleJs"]);
+}
+
+if ($("#systemUserJs").length > 0) {
+    requirejs(["systemUserJs"]);
 }
 
 $(document).ajaxStart(function () {

@@ -287,6 +287,9 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('/newRole', 'newRole');
             Route::get('/newCreateRole', 'newCreateRole');
             Route::get('/newUpdateRole', 'newUpdateRole');
+            Route::get('/systemUser', 'systemUser');
+            Route::get('/systemUserCreate', 'systemUserCreate');
+            Route::get('/systemUserUpdate', 'systemUserUpdate');
             // Route::get('/setting', 'settingView');
 
             Route::get('/download/{filename}', function ($filename) {
