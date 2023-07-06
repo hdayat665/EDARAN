@@ -3319,6 +3319,13 @@ public function updateTypeOfLogs($r, $id)
         return $data;
 
     }
+
+    // public function newRole()
+    // {
+    //     $data = [];
+        
+    //     return $data;
+    // }
 }
 
 

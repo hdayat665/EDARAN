@@ -16,6 +16,7 @@ $(document).ready(function () {
             );
         },
     });
+    
 
     $(document).on("click", "#addRoleButton", function () {
         $("input").prop("disabled", false);
