@@ -9,18 +9,9 @@ class Location extends Model
 {
     use HasFactory;
 
-    protected $table = 'location';
+    protected $table = 'location_cities';
 
     protected $guarded = [];
 
-    public function postcodebranches()
-    {
-        $this->hasMany(Branch::class, 'id', 'postcode');
 
-    }
-
-    public function countrybranches()
-    {
-        $this->hasMany(Branch::class, 'id', 'country');
-    }
 }

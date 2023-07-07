@@ -1,4 +1,171 @@
 $(document).ready(function () {
+
+    $(document).on("change", "#country_id", function () {
+        var getCountry = $("#country_id").val();
+        console.log(getCountry);
+
+        var getState = getStatebyCountry(getCountry);
+
+        getState.then(function (data) {
+
+            $("#state_id").empty();
+            $("#state_id").append('<option value="">PLEASE CHOOSE</option>');
+
+
+            $("#city_id").empty();
+            $("#city_id").append('<option value="">PLEASE CHOOSE</option>');
+
+            $("#postcode_id").empty();
+            $("#postcode_id").append('<option value="">PLEASE CHOOSE</option>');
+
+            $.each(data, function (index, state) {
+                $("#state_id").append('<option value="' + state.id + '">' + state.state_name + '</option>');
+            });
+        });
+    });
+
+
+    function getStatebyCountry(id) {
+        return $.ajax({
+            url: "/getStatebyCountry/" + id,
+        });
+    }
+
+
+
+    $(document).on("change", "#state_id", function () {
+        var getCity = $("#state_id").val();
+
+        var getCity = getCitybyState(getCity);
+
+        getCity.then(function (data) {
+            $("#city_id").empty();
+            $("#city_id").append('<option value="">PLEASE CHOOSE</option>');
+
+            $("#postcode_id").empty();
+            $("#postcode_id").append('<option value="">PLEASE CHOOSE</option>');
+
+            $.each(data, function (index, city) {
+                $("#city_id").append('<option value="' + city.name + '">' + city.name + '</option>');
+            });
+        });
+    });
+
+
+    function getCitybyState(id) {
+        return $.ajax({
+            url: "/getCitybyState/" + id,
+        });
+    }
+
+
+
+    $(document).on("change", "#city_id", function () {
+        var getPostcode = $("#city_id").val();
+
+        var getPostcode = getPostcodeByCity(getPostcode);
+
+        getPostcode.then(function (data) {
+            $("#postcode_id").empty();
+            $("#postcode_id").append('<option value="">PLEASE CHOOSE</option>');
+
+            $.each(data, function (index, postcode) {
+                $("#postcode_id").append('<option value="' + postcode.postcode + '">' + postcode.postcode + '</option>');
+            });
+        });
+    });
+
+    function getPostcodeByCity(id) {
+        return $.ajax({
+            url: "/getPostcodeByCity/" + id,
+        });
+    }
+
+
+    $(document).on("change", "#countryE", function () {
+        var getCountry = $("#countryE").val();
+        console.log(getCountry);
+
+        var getState = getStatebyCountry(getCountry);
+
+        getState.then(function (data) {
+
+            $("#stateE").empty();
+            $("#stateE").append('<option value="">PLEASE CHOOSE</option>');
+
+
+            $("#cityE").empty();
+            $("#cityE").append('<option value="">PLEASE CHOOSE</option>');
+
+            $("#postcodeE").empty();
+            $("#postcodeE").append('<option value="">PLEASE CHOOSE</option>');
+
+            $.each(data, function (index, state) {
+                $("#stateE").append('<option value="' + state.id + '">' + state.state_name + '</option>');
+            });
+        });
+    });
+
+
+    function getStatebyCountry(id) {
+        return $.ajax({
+            url: "/getStatebyCountry/" + id,
+        });
+    }
+
+
+
+    $(document).on("change", "#stateE", function () {
+        var getCity = $("#stateE").val();
+
+        var getCity = getCitybyState(getCity);
+
+        getCity.then(function (data) {
+            $("#cityE").empty();
+            $("#cityE").append('<option value="">PLEASE CHOOSE</option>');
+
+            $("#postcodeE").empty();
+            $("#postcodeE").append('<option value="">PLEASE CHOOSE</option>');
+
+            $.each(data, function (index, city) {
+                $("#cityE").append('<option value="' + city.name + '">' + city.name + '</option>');
+            });
+        });
+    });
+
+
+    function getCitybyState(id) {
+        return $.ajax({
+            url: "/getCitybyState/" + id,
+        });
+    }
+
+
+
+    $(document).on("change", "#cityE", function () {
+        var getPostcode = $("#cityE").val();
+
+        var getPostcode = getPostcodeByCity(getPostcode);
+
+        getPostcode.then(function (data) {
+            $("#postcodeE").empty();
+            $("#postcodeE").append('<option value="">PLEASE CHOOSE</option>');
+
+            $.each(data, function (index, postcode) {
+                $("#postcodeE").append('<option value="' + postcode.postcode + '">' + postcode.postcode + '</option>');
+            });
+        });
+    });
+
+    function getPostcodeByCity(id) {
+        return $.ajax({
+            url: "/getPostcodeByCity/" + id,
+        });
+    }
+
+
+
+
     $("#address,#address2,#postcode,#city,#state,#country").focus(function () {
         getLatLng();
     });
@@ -34,11 +201,9 @@ $(document).ready(function () {
     });
 
     $(document).on("click", "#editButton", function () {
-        var id = $(this).data("id");
-        var vehicleData = getBranch(id);
-
+        var edit_id = $(this).data("id");
+        var vehicleData = getBranch(edit_id);
         vehicleData.then(function (data) {
-            console.log(data);
 
             $("#companyIdE").val(data.companyId);
             $("#branchNameE").val(data.branchName);
@@ -48,14 +213,20 @@ $(document).ready(function () {
             $("#postcodeE").val(data.postcode);
             $("#addressE").val(data.address);
             $("#address2E").val(data.address2);
-            $("#cityE").val(data.city);
-            $("#stateE").val(data.state);
-            $("#countryE").val(data.country);
-            $("#idB").val(data.id);
+            $("#cityE").val(data.name);
+            $("#stateE").val(data.state_id);
+            $("#countryE").val(data.country_id);
+            $("#idB").val(edit_id);
         });
         $("#editModal").modal("show");
     });
 
+    function getBranch(id) {
+            return $.ajax({
+                url: "/getBranchById/" + id,
+            });
+        }
+        
     $(document).on("click", "#deleteButton", function () {
         id = $(this).data("id");
         requirejs(["sweetAlert2"], function (swal) {
@@ -98,11 +269,7 @@ $(document).ready(function () {
         });
     });
 
-    function getBranch(id) {
-        return $.ajax({
-            url: "/getBranchById/" + id,
-        });
-    }
+
 
     function getLatLng() {
         var address1 = $("#address").val();
@@ -152,21 +319,21 @@ $(document).ready(function () {
                 companyId: "required",
                 branchName: "required",
                 branchType: "required",
-                unitId: "required",
                 address: "required",
-                postcode: "required",
-                city: "required",
-                state: "required",
+                ref_country: "required",
+                ref_state: "required",
+                ref_city: "required",
+                ref_postcode: "required",
             },
             messages: {
                 companyId: "Please Choose Company Name ",
                 branchName: "Please Insert Branch Name",
                 branchType: "Please Choose Branch Type",
-                unitId: "Please Choose Unit Name",
                 address: "Please Insert Address 1",
-                postcode: "Please Choose Postcode",
-                city: "Please Insert City",
-                state: "Please Choose State",
+                ref_country: "Please Choose Country",
+                ref_state: "Please Choose State",
+                ref_city: "Please Choose City",
+                ref_postcode: "Please Choose Postcode",
             },
             submitHandler: function (form) {
                 var latitude = $("#latitude").val();
@@ -212,23 +379,22 @@ $(document).ready(function () {
                 companyId: "required",
                 branchName: "required",
                 branchType: "required",
-                unitId: "required",
                 address: "required",
-                postcode: "required",
-                city: "required",
-                state: "required",
+                ref_postcode: "required",
+                ref_city: "required",
+                ref_state: "required",
+                ref_country: "required",
             },
 
             messages: {
                 companyId: "Please Choose Company Name ",
                 branchName: "Please Insert Branch Name",
                 branchType: "Please Choose Branch Type",
-                unitId: "Please Choose Unit Name",
                 address: "Please Insert Address 1",
-                postcode: "Please Choose Postcode",
-                city: "Please Insert City",
-                state: "Please Choose State",
-
+                ref_postcode: "Please Choose Postcode",
+                ref_city: "Please Choose City",
+                ref_state: "Please Choose State",
+                ref_country: "Please Choose Country",
             },
             submitHandler: function (form) {
                 requirejs(["sweetAlert2"], function (swal) {
@@ -280,43 +446,3 @@ $(document).ready(function () {
 
 
 
-// $(document).on("change", "#state", function () {
-//     state = $(this).val();
-//     $("#postcode")
-//         .find("option")
-//         .remove()
-//         .end()
-//         .append(
-//             '<option label="PLEASE CHOOSE" value="" selected="selected"> </option>'
-//         )
-//         .val("");
-
-    // console.log(state)
-    // function locationByStateID(state) {
-    //     return $.ajax({
-    //         type: 'GET',
-    //         url: "/locationByStateID/" + state,
-    //     });
-    // }
-
-
-
-
-//     var branch = locationByStateID(state);
-
-
-
-
-//     branch.then(function (dataBranch) {
-//         for (let i = 0; i < dataBranch.length; i++) {
-//             const branch = dataBranch[i];
-//             var opt = document.createElement("option");
-//             document.getElementById("postcode").innerHTML +=
-//                 '<option value="' +
-//                 branch["id"] +
-//                 '">' +
-//                 branch["postcode"] +
-//                 "</option>";
-//         }
-//     });
-// });
