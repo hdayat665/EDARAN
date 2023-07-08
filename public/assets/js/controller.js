@@ -64,6 +64,7 @@ requirejs.config({
         viewGNSJs: assets + "/js/viewGNSJs",
         editCashAdvanceJs: assets + "/js/editCashAdvanceJs",
         monthlyClaimJs: assets + "/js/monthlyClaimJs",
+        monthlyClaimViewJs: assets + "/js/monthlyClaimViewJs",
         eclaimDateJs: assets + "/js/eclaimDateJs",
         supervisorDepartmentJs: assets + "/js/supervisorDepartmentJs",
         supervisorDetailClaimJs: assets + "/js/supervisorDetailClaimJs",
@@ -368,6 +369,11 @@ if ($("#editCashAdvanceJs").length > 0) {
 if ($("#monthlyClaimJs").length > 0) {
     requirejs(["monthlyClaimJs"]);
 }
+
+if ($("#monthlyClaimViewJs").length > 0) {
+    requirejs(["monthlyClaimViewJs"]);
+}
+
 
 if ($("#eleaveentitlementJs").length > 0) {
     requirejs(["eleaveentitlementJs"]);

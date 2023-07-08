@@ -18,6 +18,11 @@ class myClaimController extends Controller
 
         return view('pages.eclaim.myClaim', $data);
     }
+    public function monthlyClaimView()
+    {
+
+        return view('pages.eclaim.monthlyClaimView');
+    }
 
     public function generalClaimView()
     {
@@ -39,7 +44,7 @@ class myClaimController extends Controller
 
         $area_data = array('area' => $data['area']);
         $json_area_data = json_encode($area_data);
-        
+
         return view('pages.eclaim.cashAdvance',$data, compact('data', 'json_area_data'));
     }
 
@@ -81,11 +86,11 @@ class myClaimController extends Controller
 
         if ($data['address']) {
             $address = $data['address']['address1'];
-            
+
             if ($data['address']['address2']) {
                 $address .= ', ' . $data['address']['address2'];
             }
-            
+
             $address .= ', ' . $data['address']['postcode'];
             $address .= ' ' . $data['address']['city'];
             $address .= ', ' . $data['address']['state'];
@@ -159,7 +164,7 @@ class myClaimController extends Controller
         $data['secondpricemotor'] = $secondpricemotor;
         $data['thirdkmmotor'] = $thirdkmmotor;
         $data['thirdpricemotor'] = $thirdpricemotor;
-        
+
         return view('pages.eclaim.monthlyClaim', $data);
     }
 
@@ -235,14 +240,14 @@ class myClaimController extends Controller
         //pr($result);
         return $result;
     }
-    
+
     public function monthClaimEditView($id = '')
     {
         $mcs = new myClaimService;
 
         $data['GNC'] = $mcs->getGeneralClaimDataById($id);
         $data['details'] = getGNCDetailByGeneralId($id);
-        
+
         $data['cashAdvances'] = $mcs->getCashAdvancePaid();
         $data['travelClaims'] = $mcs->getTravellingClaimByGeneralId($id);
         $data['travelAttachments'] = $mcs->getTravelAttachmentsByGeneralId($id);
@@ -261,10 +266,10 @@ class myClaimController extends Controller
         $data['personalClaims'] = $mcs->getPersonalClaimByGeneralId($id);
         $data['summaryOthers'] = $mcs->getSummaryOthersByGeneralId($id);
         //pr($data['summaryOthers']);
-        
 
 
-        
+
+
         //
         $generalClaim = $mcs->getGeneralClaimById($id);
         $data['month'] = $generalClaim->month ?? '';
@@ -274,11 +279,11 @@ class myClaimController extends Controller
 
         if ($data['address']) {
             $address = $data['address']['address1'];
-            
+
             if ($data['address']['address2']) {
                 $address .= ', ' . $data['address']['address2'];
             }
-            
+
             $address .= ', ' . $data['address']['postcode'];
             $address .= ' ' . $data['address']['city'];
             $address .= ', ' . $data['address']['state'];
@@ -288,7 +293,7 @@ class myClaimController extends Controller
         } else {
             $data['address'] = 'Address not available';
         }
-        
+
         $data['food'] = $mcs->getFoodByJobGrade($data['user_id']);
         //pr($data['food']);
         $data['car'] = $mcs->getEntitlementByJobGradeCar($data['user_id']);
@@ -325,15 +330,15 @@ class myClaimController extends Controller
         $data['secondpricecar'] = $secondpricecar;
         $data['thirdkmcar'] = $thirdkmcar;
         $data['thirdpricecar'] = $thirdpricecar;
-       
+
         $carValue = $data['totalCar'][0]->total_km ??0;
-        
+
         $ansCar = 0;
 
         if ($carValue > $firstkmcar) {
             $ansCar += $firstkmcar * $firstpricecar;
             $carValue -= $firstkmcar;
-            
+
             if ($carValue > $secondkmcar) {
                 $ansCar += $secondkmcar * $secondpricecar;
                 $carValue -= $secondkmcar;
@@ -345,9 +350,9 @@ class myClaimController extends Controller
         } else {
             $ansCar = $carValue * $firstpricecar;
         }
-        
+
         $data['ansCar']= $ansCar ;
-        
+
 
         $data['motor'] = $mcs->getEntitlementByJobGradeMotor($data['user_id']);
         $entitlementArr = json_decode($data['motor'], true);
@@ -384,13 +389,13 @@ class myClaimController extends Controller
         $data['thirdpricemotor'] = $thirdpricemotor;
 
         $MotorValue = $data['totalMotor'][0]->total_km ?? 0;
-        
+
         $ansMotor = 0;
 
         if ($MotorValue > $firstkmmotor) {
             $ansMotor += $firstkmmotor * $firstpricemotor;
             $MotorValue -= $firstkmmotor;
-            
+
             if ($MotorValue > $secondkmmotor) {
                 $ansMotor += $secondkmmotor * $secondpricemotor;
                 $MotorValue -= $secondkmmotor;
@@ -402,7 +407,7 @@ class myClaimController extends Controller
         } else {
             $ansMotor = $MotorValue * $firstpricemotor;
         }
-        
+
         $data['ansMotor']= $ansMotor;
 
         $totalcarmotor = $ansMotor +$ansCar;
@@ -528,5 +533,5 @@ class myClaimController extends Controller
 
         return response()->json($result);
     }
-    
+
 }

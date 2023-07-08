@@ -27,7 +27,7 @@ $(document).ready(function () {
 
             $("#passportcountryparent").prop("disabled", true);
             $("#passportcountryparent").prop("readonly", true);
-            
+
             $("#okucard5").prop("disabled", true);
             $("#okucard5").prop("readonly", true);
 
@@ -63,7 +63,7 @@ $(document).ready(function () {
 
             $("#okuattach3").prop("disabled", true);
             $("#okuattach3").prop("readonly", true);
-            
+
         } else {
             $("#expiryDateChild").prop("disabled", true);
             $("#expiryDateChild").prop("readonly", true);
@@ -3531,7 +3531,7 @@ $(document).ready(function () {
         }
     });
 
-    
+
     $("#passportParent").change(function () {
         if ($("#expiryDateParent").prop("readonly")) {
             $("#expiryDateParent").prop("readonly", false);
@@ -3554,10 +3554,10 @@ $(document).ready(function () {
             $("#passportcountryparent").val("");
         }
     });
-        
-        
 
-  
+
+
+
 
     // Update children details
     $('input[name="nonCitizen"]').click(function () {
@@ -3954,9 +3954,9 @@ $(document).ready(function () {
                 $("#expiryDateParentEdit").css("pointer-events", "auto");
                 $("#issuingCountryParentEdit").prop("disabled", false);
                 $("#issuingCountryParentEdit").css("pointer-events", "auto");
-        
+
             } else {
-        
+
                 $("#expiryDateParentEdit").prop("disabled", true);
                 $("#expiryDateParentEdit").css("pointer-events", "none");
                 $("#issuingCountryParentEdit").prop("disabled", true);
@@ -4125,7 +4125,7 @@ $(document).ready(function () {
                 requirejs(["sweetAlert2"], function (swal) {
                     $.ajax({
                         type: "POST",
-                        url: "/resetPassword",
+                        url: "/updatePass",
                         data: data,
                         dataType: "json",
 
@@ -4425,7 +4425,7 @@ $("#same-addressUC").change(function () {
             $("#cityUC").prop("readonly", false).val("");
             $("#stateUC").prop("disabled", false).val("");
             $("#countryUC").prop("disabled", false).val("");
-        }        
+        }
 });
 
 
