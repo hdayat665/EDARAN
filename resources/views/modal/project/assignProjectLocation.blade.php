@@ -7,12 +7,14 @@
             </div>
             <div class="modal-body">
                 <form id="assignProjectMemberForm">
-
                     <div class="mb-3">
-                        <label class="form-label">Project Member Name : </label><br><br>
+                        <label class="form-label">Project Member Name:</label><br><br>
                         <select class="selectpicker form-control" name="employee_id[]" id="projectmember" multiple>
-                            @foreach ($projectMembers as $employee)
-                              <option value="{{$employee->id}}">{{$employee->employeeName}}</option>
+                            @php
+                                $sortedProjectMembers = $projectMembers->sortBy('employeeName');
+                            @endphp
+                            @foreach ($sortedProjectMembers as $employee)
+                                <option value="{{$employee->id}}">{{$employee->employeeName}}</option>
                             @endforeach
                         </select>
                     </div>
