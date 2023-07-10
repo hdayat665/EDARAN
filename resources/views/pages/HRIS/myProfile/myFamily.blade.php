@@ -25,7 +25,7 @@
                             <!-- <a href="javascript:;" class="dropdown-item" id="parentModalView{{$parent->id}}" data-id="{{$parent->id}}">View</a>
                             <div class="dropdown-divider"></div> -->
                             <a href="javascript:;" class="dropdown-item" id="parentModalEdit{{$parent->id}}" data-id="{{$parent->id}}">Edit</a>
-                            <div class="dropdown-divider"></div>    
+                            <div class="dropdown-divider"></div>
                             <a href="javascript:;" class="dropdown-item" id="deleteParent{{$parent->id}}" data-id="{{$parent->id}}">Delete</a>
                         </div>
                     </td>
@@ -68,7 +68,7 @@
                 <?php $id2 = 0 ?>
                 @foreach ($siblings as $sibling)
                 <?php $id2++ ?>
-                
+
                 <tr>
                     <td width="1%" class="fw-bold text-dark">{{$id2}}</td>
                     <td>
