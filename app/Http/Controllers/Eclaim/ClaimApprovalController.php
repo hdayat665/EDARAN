@@ -517,6 +517,14 @@ class ClaimApprovalController extends Controller
 
         return response()->json($result);
     }
+    public function skipAllClaim(Request $r)
+    {
+        $ss = new ClaimApprovalService;
+
+        $result = $ss->skipAllClaim($r);
+
+        return response()->json($result);
+    }
     public function approveAllCa(Request $r)
     {
         $ss = new ClaimApprovalService;

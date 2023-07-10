@@ -34,6 +34,7 @@ $(document).ready(function () {
     activeTab.addEventListener('click', function() {
     // Show the approveAllButton
     approveAllButton.style.display = 'block';
+    skipButton.style.display = 'block';
     });
 
     // Function to hide the approveAllButton
@@ -434,7 +435,34 @@ $(document).ready(function () {
             },
         });
     });
+    $("#skipButton").click(function (e) {
+        requirejs(["sweetAlert2"], function (swal) {
+            var data = new FormData(document.getElementById("approveAllForm"));
 
+            $.ajax({
+                type: "POST",
+                url: "/skipAllClaim",
+                data: data,
+                dataType: "json",
+
+                processData: false,
+                contentType: false,
+            }).then(function (data) {
+                swal({
+                    title: data.title,
+                    text: data.msg,
+                    type: data.type,
+                    confirmButtonColor: "#3085d6",
+                    confirmButtonText: "OK",
+                }).then(function () {
+                    if (data.type == "error") {
+                    } else {
+                        location.reload();
+                    }
+                });
+            });
+        });
+    });
     $("#approveAllButton").click(function (e) {
         requirejs(["sweetAlert2"], function (swal) {
             var data = new FormData(document.getElementById("approveAllForm"));

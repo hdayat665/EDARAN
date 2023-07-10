@@ -298,7 +298,7 @@
                                             
                                             <div class="row p-2">
                                                 <div class="col-md-3">
-                                                    <input type="file" class="form-control-file" name="file_upload[]" id="supportdocument" multiple>
+                                                    <!-- <input type="file" class="form-control-file" name="file_upload[]" id="supportdocument" multiple> -->
                                                 </div>
                                                 <div class="col-md-1">
                                                     
@@ -319,7 +319,7 @@
                                             <div class="row p-2">
                                             
                                                 <div class="col-md-6">
-                                                    <a id="file_upload" href="#"></a>
+                                                    <!-- <a id="file_upload" href="#"></a> -->
                                                 </div>
                                                 <div class="col-md-2">
                                                     <label class="form-label">Total (A+B)</label>
@@ -335,6 +335,43 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="p-2"  id="laundrydivUpdate">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-control">
+                                                <div class="row p-2">
+                                                    <label class="form-label">Laundry Allowance</label>
+                                                </div>
+                                                <div class="row p-2">
+                                                    <div class="col-md-4">
+                                                        <label class="form-label">Amount</label>
+                                                    </div>
+                                                    <div class="col-md-8">
+                                                        <input type="number" name="" id="laundry_amount_update"class="form-control" placeholder="0.00">
+                                                    </div>
+                                                    </div>
+                                                    <div class="row p-2">
+                                                        <div class="col-md-4">
+                                                            <label class="form-label">Description</label>
+                                                        </div>
+                                                        <div class="col-md-8">
+                                                            <textarea class="form-control" name="" id="laundry_desc_update" rows="3"></textarea>
+                                                        </div>
+                                                    </div>
+                                                    <!-- <div class="row p-2">
+                                                        <div class="col-md-4">
+                                                            <label class="form-label">Supporting Document</label>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <input type="file" class="form-control-file" name="file_laundry[]" id="" multiple>
+                                                            <a id="file_laundry_update" href="#"></a>
+                                                        </div> 
+                                                    </div> -->
+                                                </div> 
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                         <div class="modal-footer"> 
                             <!-- <button type="button" class="btn btn-secondary">Reset</button> -->
                             <button type="submit" id="updateSubsMtcBtn" class="btn btn-primary">Update</button>

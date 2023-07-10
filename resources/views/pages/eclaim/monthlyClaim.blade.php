@@ -50,7 +50,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
+                                <!-- <div class="col-md-6">
                                     <div class="row p-2">
                                         <div class="col d-flex justify-content-end">
                                             <input type="hidden" value="{{ Request::segment(4) }}" id="generalId">
@@ -63,7 +63,7 @@
                                             <a href="/myClaimView" class="btn btn-light" style="color: black;" type="submit"><i class="fa fa-arrow-left"></i> Back</a>
                                         </div>
                                     </div>
-                                </div>
+                                </div> -->
                             </div>
                             
                             <div class="p-2">
@@ -74,7 +74,7 @@
                                                 <label class="form-label">Travelling</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <input type="text" class="form-control" readonly value='RM {{ $summaryTravelling[0]->total_millage ?? 0 }}'>
+                                                <input type="text" class="form-control" readonly value='RM 0.00'>
                                             </div>
                                         </div>
                                         <div class="row p-2">
@@ -82,7 +82,7 @@
                                                 <label class="form-label">Petrol/Fare</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <input type="text" class="form-control" readonly value='RM {{ $summaryTravelling[0]->total_petrol ?? 0 }}'>
+                                                <input type="text" class="form-control" readonly value='RM 0.00'>
                                             </div>
                                         </div>
                                         <div class="row p-2">
@@ -90,7 +90,7 @@
                                                 <label class="form-label">Toll</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <input type="text" class="form-control" readonly value='RM {{ $summaryTravelling[0]->total_toll ?? 0 }}'>
+                                                <input type="text" class="form-control" readonly value='RM 0.00'>
                                             </div>
                                         </div>
                                         <div class="row p-2">
@@ -98,7 +98,7 @@
                                                 <label class="form-label">Parking</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <input type="text" class="form-control" readonly value='RM {{ $summaryTravelling[0]->total_parking ?? 0}}'>
+                                                <input type="text" class="form-control" readonly value='RM 0.00'>
                                             </div>
                                         </div>
                                         <div class="row p-2">
@@ -106,7 +106,7 @@
                                                 <label class="form-label">Subsistence Allowance</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <input type="text" class="form-control" readonly value='RM {{ $summarySubs[0]->total_subs ?? 0}}'>
+                                                <input type="text" class="form-control" readonly value='RM 0.00'>
                                             </div>
                                         </div>
                                         <div class="row p-2">
@@ -114,7 +114,15 @@
                                                 <label class="form-label">Accommodation & Lodging</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <input type="text" class="form-control" readonly value='RM {{ $summarySubs[0]->total_acc ?? 0}}'>
+                                                <input type="text" class="form-control" readonly value='RM 0.00'>
+                                            </div>
+                                        </div>
+                                        <div class="row p-2">
+                                            <div class="col-md-6">
+                                                <label class="form-label">Laundry</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <input type="text" class="form-control" readonly value='RM 0.00'>
                                             </div>
                                         </div>
                                     </div>
@@ -124,7 +132,7 @@
                                                 <label class="form-label">Others</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <input type="text" class="form-control" readonly value='RM {{ $summaryOthers[0]->total_amount ?? 0}}'>
+                                                <input type="text" class="form-control" readonly value='RM 0.00'>
                                             </div>
                                         </div>
                                     </div>
@@ -134,7 +142,7 @@
                                                 <label class="form-label">Total</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <input type="text" class="form-control" readonly value='RM {{ $sum ?? 0 }}'>
+                                                <input type="text" class="form-control" readonly value='RM 0.00'>
                                             </div>
                                         </div>
                                         <div class="row p-2">
@@ -142,7 +150,7 @@
                                                 <label class="form-label">Cash Advance (Less)</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <input readonly type="text" value="" name="" class="form-control">
+                                                <input type="text" class="form-control" readonly value='RM 0.00'>
                                             </div>
                                         </div>
                                         <div class="row p-2">
@@ -172,7 +180,7 @@
                     </div>
                 </div>
             </div>
-            <div class="row p-2">
+            <!-- <div class="row p-2">
                 <div class="col align-self-start">
                     <a href="/myClaimView" class="btn btn-light" style="color: black;" type="submit"><i class="fa fa-arrow-left"></i> Back</a>
                 </div>
@@ -180,7 +188,7 @@
                     <a class="btn btn-light" style="color: black" type="submit"><i class="fa fa-save"></i>
                         Submit</a>
                 </div>
-            </div>
+            </div> -->
         </div>
     </div>
 @endsection
