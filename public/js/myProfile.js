@@ -1757,7 +1757,7 @@ $(document).ready(function () {
                 relationship: "Please Choose Relationship",
                 contactNo: {
                     required: "Please Insert Contact Number",
-                    digits: "Please Insert Valid Contact Number",
+                    digits: "Please Insert Valid Phone Number",
                 },
                 relationship: "Please Insert Relationship",
                 address1: "Please Insert Address 1",
@@ -1887,7 +1887,7 @@ $(document).ready(function () {
                 relationship_2: "Please Choose Relationship",
                 contactNo_2: {
                     required: "Please Insert Contact Number",
-                    digits: "Please Insert Valid Contact Number",
+                    digits: "Please Insert Valid Phone Number",
                 },
                 relationship_2: "Please Insert Relationship",
                 address1_2: "Please Insert Address 1",
@@ -2055,7 +2055,7 @@ $(document).ready(function () {
                 contactNo: {
                     required: "Please Insert Contact Number",
                     digits: "Please Insert Correct Contact Number Without ' - ' or Space",
-                    rangelength: "Please Insert Valid Contact Number ",
+                    rangelength: "Please Insert Valid Phone Number ",
                 },
                 homeNo: {
                     digits: "Please Insert Correct Home Number Without ' - ' or Space",
@@ -2238,7 +2238,7 @@ $(document).ready(function () {
                     contactNo: {
                         required: "Please Insert Contact Number",
                         digits: "Please Insert Correct Contact Number Without ' - ' or Space",
-                        rangelength: "Please Insert Valid Contact Number ",
+                        rangelength: "Please Insert Valid Phone Number ",
                     },
                     homeNo: {
                         digits: "Please Insert Correct Home Number Without ' - ' or Space",
@@ -3283,7 +3283,7 @@ $(document).ready(function () {
                 contactNo: {
                     digits: "Please Insert Correct Contact Number Without ' - ' or Space",
                     required: "Please Insert Contact Number",
-                    rangelength: "Please Insert Valid Contact Number",
+                    rangelength: "Please Insert Valid Phone Number",
                 },
                 relationship: "Please Choose Relationship",
                 address1: "Please Insert Address 1",
@@ -3665,9 +3665,9 @@ $(document).ready(function () {
                 },
                 contactNo: {
                     required: "Please Insert Contact Number",
-                    digits: "Please Insert Valid Contact Number",
+                    digits: "Please Insert Valid Phone Number",
 
-                    rangelength: "Please Insert Valid Contact Number",
+                    rangelength: "Please Insert Valid Phone Number",
                 },
                 expiryDate: {
                     required: "Please Insert Expiry Date",
@@ -3843,7 +3843,7 @@ $(document).ready(function () {
                 },
                 contactNo: {
                     required: "Please Insert Contact Number",
-                    digits: "Please Insert Valid Contact Number",
+                    digits: "Please Insert Valid Phone Number",
 
                     rangelength: [10, 11],
                 },
@@ -3939,12 +3939,10 @@ $(document).ready(function () {
     });
 
     parentId = $("#parentId").val();
-
     parentIds = parentId.split(",");
-
     for (let i = 0; i < parentIds.length; i++) {
         const type = parentIds[i];
-        $("#parentModalEdit" + type).click(function (e) {
+        $(document).on("click","#parentModalEdit" + type, function (e) {
             // $("input").prop("disabled", false);
             // $("select").prop("disabled", false);
 
@@ -4026,7 +4024,7 @@ $(document).ready(function () {
             $("#view-parent").modal("show");
         });
 
-        $("#deleteParent" + type).click(function (e) {
+        $(document).on("click","#deleteParent" + type, function (e) {
             id = $(this).data("id");
             requirejs(["sweetAlert2"], function (swal) {
                 swal({
