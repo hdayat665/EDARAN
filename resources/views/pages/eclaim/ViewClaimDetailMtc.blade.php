@@ -52,10 +52,10 @@
                                             <th class="text-nowrap">Description</th>
                                             <th class="text-nowrap">Attachment</th>
 
-                                        </tr> 
+                                        </tr>
                                     </thead>
                                     <tbody>
-                                        @if ($personals) 
+                                        @if ($personals)
                                             @foreach ($personals as $personal)
                                                 <tr>
                                                     <td><a data-bs-toggle="modal" data-id="{{ $personal->id }}" id="btn-view" class="btn btn-primary btn-sm">View</a></td>
@@ -179,10 +179,10 @@
                     <div class="col align-self-start">
                         <a href="#" onclick="window.history.back();" class="btn btn-light" style="color: black;" type="submit"><i class="fa fa-arrow-left"></i> Back</a>
                     </div>
-                        
+
                 </div>
             </div>
-        </div> 
+        </div>
     </div>
     @include('modal.eclaimApproval.hodDetailMtcModal')
 @endsection
