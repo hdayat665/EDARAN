@@ -30,7 +30,7 @@ class ChangeDataStatusCommand extends Command
     {   
         
         // Fetch the records based on your criteria
-        $data = GeneralClaim::all();
+        $data = GeneralClaim::where('hod', 'bucket')->get();
 
         // Update the status for each record
         foreach ($data as $record) {

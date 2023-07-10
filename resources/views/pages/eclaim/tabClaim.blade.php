@@ -78,6 +78,8 @@
                                         <div class="dropdown-menu dropdown-menu-end">
                                             <!-- <a href="/eclaim/viewmyclaim" class="dropdown-item">View Claim</a> -->
                                             <!-- <a href="javascript:;" class="dropdown-item">Update Claim</a> -->
+                                            <a href="/monthlyClaimView/{{ $claim->id }}" id="" data-id="" class="dropdown-item"><i class="fa fa-eye" aria-hidden="true"></i> View
+                                                MTC</a>
                                             <div class="dropdown-divider"></div>
                                             <a data-id="{{ $claim->id }}" class="dropdown-item buttonCancel">Cancel Claim</a>
                                         </div>
