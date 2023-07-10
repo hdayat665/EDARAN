@@ -321,6 +321,11 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('/getPhoneDirectory', 'getPhoneDirectory');
             Route::get('/setting', 'settingView');
             Route::get('/branch', 'branchView');
+
+            Route::get('/getStatebyCountry/{id}', 'getStatebyCountry');
+            Route::get('/getCitybyState/{id}', 'getCitybyState');
+            Route::get('/getPostcodeByCity/{id}', 'getPostcodeByCity');
+
             Route::get('/company', 'companyView');
             Route::get('/department', 'departmentView');
             Route::get('/designation', 'designationView');
@@ -368,6 +373,7 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('/setting/approvalConfigView', 'approvalConfigView');
             Route::get('/setting/approvalRoleView', 'approvalRoleView');
             Route::get('/setting/addClaimView', 'addClaimView');
+
             // Route::get('/setting/editClaimView', 'editClaimView');
             Route::get('/setting/addClaimView', 'addClaimView');
             Route::get('/setting/editClaimView/{id}', 'editClaimView');
