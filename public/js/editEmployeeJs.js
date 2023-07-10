@@ -2218,7 +2218,7 @@ $('#event').select2();
                 relationship: "Please Choose Relationship",
                 contactNo: {
                     required: "Please Insert Contact Number",
-                    digits: "Please Insert Valid Contact Number",
+                    digits: "Please Insert Valid Phone Number",
                 },
                 relationship: "Please Insert Relationship",
                 address1: "Please Insert Address 1",
@@ -2310,7 +2310,7 @@ $('#event').select2();
                 relationship_2: "Please Choose Relationship",
                 contactNo_2: {
                     required: "Please Insert Contact Number",
-                    digits: "Please Insert Valid Contact Number",
+                    digits: "Please Insert Valid Phone Number",
                 },
                 relationship_2: "Please Insert Relationship",
                 address1_2: "Please Insert Address 1",
@@ -2996,7 +2996,7 @@ $('#event').select2();
 
     for (let i = 0; i < childIds.length; i++) {
         const type = childIds[i];
-        $("#childModalEdit" + type).click(function (e) {
+        $(document).on("click","#childModalEdit" + type, function (e) {
             id = $(this).data("id");
             var childrenData = getChildren(id);
 
@@ -3646,14 +3646,14 @@ $('#event').select2();
 
     for (let i = 0; i < parentIds.length; i++) {
         const type = parentIds[i];
-        $("#parentModalEdit" + type).click(function (e) {
+        $(document).on("click","#parentModalEdit" + type, function (e) {
             $("input").prop("disabled", false);
             $("select").prop("disabled", false);
             id = $(this).data("id");
             var ParentData = getParent(id);
 
             ParentData.then(function (data) {
-                console.log(data.data);
+                // console.log(data.data);
                 parent = data.data;
                 $("#DOBP1").val(parent.DOB);
                 $("#idP").val(parent.id);
@@ -3665,7 +3665,7 @@ $('#event').select2();
                 $("#contactNoP1").val(parent.contactNo);
                 $("#genderP1").val(parent.gender);
                 $("#firstNames1").val(parent.firstName);
-                $("#passport7").val(parent.passport);
+                $("#passportparentedit").val(parent.passport);
                 $("#expirydate7").val(parent.expiryDate);
                 $("#issuingCountry7").val(parent.issuingCountry);
                 $("#oldIDNoP1").val(parent.oldIDNo);
@@ -3713,7 +3713,7 @@ $('#event').select2();
             $("#view-parent").modal("show");
         });
 
-        $("#deleteParent" + type).click(function (e) {
+        $(document).on("click","#deleteParent" + type, function (e) {
             id = $(this).data("id");
             requirejs(["sweetAlert2"], function (swal) {
                 swal({

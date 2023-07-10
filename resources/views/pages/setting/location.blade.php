@@ -32,15 +32,13 @@
 
                             <tr class="odd gradeX">
                                 <td>{{ $id }}</td>
-                                <td>{{$l->CountryName}}</td>
-                                <td>{{$l->stateName}}</td>
+                                <td>{{$l->country_name}}</td>
+                                <td>{{$l->state_name}}</td>
                                 <td>{{$l->postcode}}</td>
                                 <td>
                                     <a data-bs-toggle="modal" id="deleteLocation" data-id="{{$l->id}}" class="btn btn-danger">Delete</a>
                                 </td>
-
                             </tr>
-
                     @endforeach
                     @endif
                 </tbody>
@@ -54,10 +52,6 @@
     </div>
 </div>
 
-@php
-    $countries = getCountries();
-    $states = getStates();
-@endphp
 
     <div class="modal fade" id="addModalCountryState" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -70,22 +64,20 @@
                     <form id="addFormState">
                         <div class="mb-2">
                             <label class="form-label">Country*</label>
-                            <select class="form-select" id="addCountry1" name="countryID" style="text-transform:uppercase" required>
+                            <select class="form-select" id="addCountry1" name="country_id" style="text-transform:uppercase" required>
                                 <option value="" label="PLEASE CHOOSE"></option>
-                                @if ($countries)
-                                    @foreach ($countries as $country => $status)
-                                        <option value="{{$country}}" <?php echo ($country == 'MY') ? 'selected' : ''; ?>>{{$status}}</option>
-                                    @endforeach
-                                @endif
+                                @foreach($country as $ct)
+                                    <option value="{{ $ct->country_id }}" {{ old('country_id') == $ct->country_id ? 'selected' : '' }}>{{ $ct->country_name }}</option>
+                                @endforeach
                             </select>
                         </div>
                         <div class="mb-3">
                             <label class="form-label">State*</label>
-                            <input type="text" id="addState1" class="form-control" name="stateName" maxlength="100" placeholder="" required>
+                            <input type="text" id="addState1" class="form-control" name="state_name" maxlength="100" placeholder="" required>
                         </div>
                         <div class="mb-3">
                             <label class="form-label">State Code*</label>
-                            <input type="text" id="addStateCode1" class="form-control" name="stateCode" maxlength="100" placeholder="" required>
+                            <input type="text" id="addStateCode1" class="form-control" name="state_code" maxlength="100" placeholder="" required>
                         </div>
                 </div>
 
@@ -109,25 +101,23 @@
                     <form id="addFormLocation">
                         <div class="mb-2">
                             <label class="form-label">Country*</label>
-                            <select class="form-select" id="addCountry2" name="countryID" style="text-transform:uppercase" required>
+                            <select class="form-select" id="addCountry2" name="country_id" style="text-transform:uppercase" required>
                                 <option value="" label="PLEASE CHOOSE"></option>
-                                @if ($countries)
-                                    @foreach ($countries as $country => $status)
-                                        <option value="{{$country}}" <?php echo ($country == 'MY') ? 'selected' : ''; ?>>{{$status}}</option>
-                                    @endforeach
-                                @endif
+                                @foreach($country as $ct)
+                                    <option value="{{ $ct->country_id }}" {{ old('country_id') == $ct->country_id ? 'selected' : '' }}>{{ $ct->country_name }}</option>
+                                @endforeach
                             </select>
                         </div>
                         <div class="mb-2">
                             <label class="form-label">State*</label>
-                            <select class="form-select" id="addState2" name="stateID" style="text-transform:uppercase" >
+                            <select class="form-select" id="addState2" name="state_name" style="text-transform:uppercase" >
                                 <option value="" label="PLEASE CHOOSE"></option>
-                                @if ($states)
-                                    @foreach ($states as $state => $status)
-                                        <option value="{{ $state }}" <?php echo $state; ?>>{{ $status }}</option>
-                                    @endforeach
-                                @endif
+
                             </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">City*</label>
+                            <input type="text" id="addCity2" class="form-control" name="city_name" maxlength="100" placeholder="" >
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Postcode*</label>
@@ -157,27 +147,22 @@
                             <label class="form-label">Country</label>
                             <select class="form-select" name="countryID" id="addCountry3" required>
                                 <option value="" label="Please Select Country"></option>
-                                @if ($countries)
-                                    @foreach ($countries as $country => $status)
-                                        <option value="{{$country}}" <?php echo $country; ?>>{{$status}}</option>
-                                    @endforeach
-                                @endif
+                                @foreach($country as $ct)
+                                    <option value="{{ $ct->country_id }}" {{ old('country_id') == $ct->country_id ? 'selected' : '' }}>{{ $ct->country_name }}</option>
+                                @endforeach
                             </select>
                         </div>
                         <div class="mb-2">
                             <label class="form-label">State</label>
                             <select class="form-select" name="stateID" id="addState3" required>
                                 <option value="" label="Please Select State"></option>
-                                @if ($states)
-                                    @foreach ($states as $state => $status)
-                                        <option value="{{ $state }}" <?php echo $state; ?>>{{ $status }}</option>
-                                    @endforeach
-                                @endif
+                                @foreach($state as $st)
+                                    <option value="{{ $st->id }}" {{ old('id') == $st->id ? 'selected' : '' }}>{{ $st->state_name }}</option>
+                                @endforeach
                             </select>
                         </div>
                 </div>
 
-                <?php $todeletestate = $status ?>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                     <button href="javascript:;" class="btn btn-danger" data-id="" id="deleteState">Delete</button>

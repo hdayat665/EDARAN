@@ -617,7 +617,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="mb-6 child-element">
+                            <div class="mb-6 child-element2">
                                 <div class="row g-3 align-items-center">
                                     <div class="col-auto">
                                         <input class="form-check-input" type="checkbox" value="" id="">
@@ -631,7 +631,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="mb-6 child-element">
+                            <div class="mb-6 child-element2">
                                 <div class="row g-3 align-items-center">
                                     <div class="col-auto">
                                         <input class="form-check-input" type="checkbox" value="" id="">
@@ -641,7 +641,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="mb-6 child-element">
+                            <div class="mb-6 child-element2">
                                 <div class="row g-3 align-items-center">
                                     <div class="col-auto">
                                         <input class="form-check-input" type="checkbox" value="" id="">
@@ -657,7 +657,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="mb-6 child-element">
+                            <div class="mb-6 child-element2">
                                 <div class="row g-3 align-items-center">
                                     <div class="col-auto">
                                         <input class="form-check-input" type="checkbox" value="" id="">
@@ -668,7 +668,7 @@
                                 </div>
                             </div>
 
-                            <div class="mb-6 child-element2">
+                            <div class="mb-6 child-element3">
                                 <div class="row g-3 align-items-center">
                                     <div class="col-auto">
                                         <input class="form-check-input" type="checkbox" value="" id="">
@@ -685,7 +685,7 @@
                                 </div>
                             </div>
 
-                            <div class="mb-6 child-element3">
+                            <div class="mb-6 child-element4">
                                 <div class="row g-3 align-items-center">
                                     <div class="col-auto">
                                         <input class="form-check-input" type="checkbox" value="" id="">
@@ -696,7 +696,7 @@
                                 </div>
                             </div>
 
-                            <div class="mb-3 child-element2">
+                            <div class="mb-3 child-element3">
                                 <div class="row g-3 align-items-center">
                                     <div class="col-auto">
                                         <input class="form-check-input" type="checkbox" value="" id="">
@@ -1282,16 +1282,6 @@
                                         <input class="form-check-input" type="checkbox" value="" id="">
                                     </div>
                                     <div class="col-auto">
-                                        <p class="col-form-label">Report</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="mb-6 child-element2">
-                                <div class="row g-3 align-items-center">
-                                    <div class="col-auto">
-                                        <input class="form-check-input" type="checkbox" value="" id="">
-                                    </div>
-                                    <div class="col-auto">
                                         <p class="col-form-label">General
                                             &nbsp;
                                             <input class="form-check-input rounded-circle fa fa-plus" type="checkbox">
@@ -1825,6 +1815,9 @@
         }
         .child-element3 {
             margin-left: 50px; /* Adjust the indentation or spacing as desired */
+        }
+        .child-element4 {
+            margin-left: 65px; /* Adjust the indentation or spacing as desired */
         }
         .rounded-circle {
             width: 16px;

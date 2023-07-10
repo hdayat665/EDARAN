@@ -208,19 +208,70 @@ class LoginService
 
         return $data;
     }
-
-    public function resetPassword($input = [])
+    public function updatePass($input = [])
     {
+        //pr($input);
         // check pass n confirm pass same
         if ($input['password'] != $input['confirm_password']) {
             $data['title'] = 'Error!';
             $data['type'] = 'error';
-            $data['msg'] = 'password and confirm password not match';
+            $data['msg'] = 'new password and confirm password not match';
 
             return $data;
         }
 
         $usersData = Users::where('id', $input['user_id'])->first();
+        $current_password = $input['current_password'];
+
+        if (!Hash::check($current_password, $usersData->password)) {
+            $data['title'] = 'Error!';
+            $data['type'] = 'error';
+            $data['msg'] = 'The current password does not match the old password.';
+            return $data;
+        }
+
+
+        $password = Hash::make($input['password']);
+
+        $update = Users::where('id', $input['user_id'])
+            ->update(['password' =>  $password]);
+
+        if (!$update) {
+            $data['title'] = 'Error!';
+            $data['type'] = 'error';
+            $data['msg'] = 'Something Wrong!';
+
+            return $data;
+        }
+
+        $data['title'] = 'Success!';
+        $data['type'] = 'success';
+        $data['msg'] = 'Change password Success';
+
+        return $data;
+    }
+    public function resetPassword($input = [])
+    {
+        //pr($input);
+        // check pass n confirm pass same
+        if ($input['password'] != $input['confirm_password']) {
+            $data['title'] = 'Error!';
+            $data['type'] = 'error';
+            $data['msg'] = 'new password and confirm password not match';
+
+            return $data;
+        }
+
+        $usersData = Users::where('id', $input['user_id'])->first();
+
+
+        if (Hash::check($input['current_password'] =! $usersData->password)) {
+            $data['title'] = 'Error!';
+            $data['type'] = 'error';
+            $data['msg'] = 'the current password does not match with old password';
+
+            return $data;
+        }
 
         if (Hash::check($input['password'], $usersData->password)) {
             $data['title'] = 'Error!';
@@ -338,6 +389,24 @@ class LoginService
     {
         $employee = Employee::where('workingEmail', $input['username'])->first();
         $user = Users::where('id', $employee['user_id'])->first();
+
+        $employees = Employee::where('workingEmail', $input['username'])->get();
+        //pr($employees );
+        $tenant = [];
+
+        foreach ($employees as $employee) {
+            $tenantId = $employee->tenant_id;
+            $tenant[] = $tenantId;
+        }
+
+        $allTenants = Tenant::all();
+        $tenant_names = [];
+
+        foreach ($allTenants as $singleTenant) {
+            if (in_array($singleTenant->id, $tenant)) {
+                $tenant_names[] = $singleTenant->tenant_name;
+            }
+        }
 
         if (!$user) {
             $data['status'] = config('app.response.error.status');

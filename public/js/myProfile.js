@@ -27,7 +27,7 @@ $(document).ready(function () {
 
             $("#passportcountryparent").prop("disabled", true);
             $("#passportcountryparent").prop("readonly", true);
-            
+
             $("#okucard5").prop("disabled", true);
             $("#okucard5").prop("readonly", true);
 
@@ -63,7 +63,7 @@ $(document).ready(function () {
 
             $("#okuattach3").prop("disabled", true);
             $("#okuattach3").prop("readonly", true);
-            
+
         } else {
             $("#expiryDateChild").prop("disabled", true);
             $("#expiryDateChild").prop("readonly", true);
@@ -1757,7 +1757,7 @@ $(document).ready(function () {
                 relationship: "Please Choose Relationship",
                 contactNo: {
                     required: "Please Insert Contact Number",
-                    digits: "Please Insert Valid Contact Number",
+                    digits: "Please Insert Valid Phone Number",
                 },
                 relationship: "Please Insert Relationship",
                 address1: "Please Insert Address 1",
@@ -1887,7 +1887,7 @@ $(document).ready(function () {
                 relationship_2: "Please Choose Relationship",
                 contactNo_2: {
                     required: "Please Insert Contact Number",
-                    digits: "Please Insert Valid Contact Number",
+                    digits: "Please Insert Valid Phone Number",
                 },
                 relationship_2: "Please Insert Relationship",
                 address1_2: "Please Insert Address 1",
@@ -2055,7 +2055,7 @@ $(document).ready(function () {
                 contactNo: {
                     required: "Please Insert Contact Number",
                     digits: "Please Insert Correct Contact Number Without ' - ' or Space",
-                    rangelength: "Please Insert Valid Contact Number ",
+                    rangelength: "Please Insert Valid Phone Number ",
                 },
                 homeNo: {
                     digits: "Please Insert Correct Home Number Without ' - ' or Space",
@@ -2238,7 +2238,7 @@ $(document).ready(function () {
                     contactNo: {
                         required: "Please Insert Contact Number",
                         digits: "Please Insert Correct Contact Number Without ' - ' or Space",
-                        rangelength: "Please Insert Valid Contact Number ",
+                        rangelength: "Please Insert Valid Phone Number ",
                     },
                     homeNo: {
                         digits: "Please Insert Correct Home Number Without ' - ' or Space",
@@ -3283,7 +3283,7 @@ $(document).ready(function () {
                 contactNo: {
                     digits: "Please Insert Correct Contact Number Without ' - ' or Space",
                     required: "Please Insert Contact Number",
-                    rangelength: "Please Insert Valid Contact Number",
+                    rangelength: "Please Insert Valid Phone Number",
                 },
                 relationship: "Please Choose Relationship",
                 address1: "Please Insert Address 1",
@@ -3531,7 +3531,7 @@ $(document).ready(function () {
         }
     });
 
-    
+
     $("#passportParent").change(function () {
         if ($("#expiryDateParent").prop("readonly")) {
             $("#expiryDateParent").prop("readonly", false);
@@ -3554,10 +3554,10 @@ $(document).ready(function () {
             $("#passportcountryparent").val("");
         }
     });
-        
-        
 
-  
+
+
+
 
     // Update children details
     $('input[name="nonCitizen"]').click(function () {
@@ -3665,9 +3665,9 @@ $(document).ready(function () {
                 },
                 contactNo: {
                     required: "Please Insert Contact Number",
-                    digits: "Please Insert Valid Contact Number",
+                    digits: "Please Insert Valid Phone Number",
 
-                    rangelength: "Please Insert Valid Contact Number",
+                    rangelength: "Please Insert Valid Phone Number",
                 },
                 expiryDate: {
                     required: "Please Insert Expiry Date",
@@ -3843,7 +3843,7 @@ $(document).ready(function () {
                 },
                 contactNo: {
                     required: "Please Insert Contact Number",
-                    digits: "Please Insert Valid Contact Number",
+                    digits: "Please Insert Valid Phone Number",
 
                     rangelength: [10, 11],
                 },
@@ -3939,12 +3939,10 @@ $(document).ready(function () {
     });
 
     parentId = $("#parentId").val();
-
     parentIds = parentId.split(",");
-
     for (let i = 0; i < parentIds.length; i++) {
         const type = parentIds[i];
-        $("#parentModalEdit" + type).click(function (e) {
+        $(document).on("click","#parentModalEdit" + type, function (e) {
             // $("input").prop("disabled", false);
             // $("select").prop("disabled", false);
 
@@ -3954,9 +3952,9 @@ $(document).ready(function () {
                 $("#expiryDateParentEdit").css("pointer-events", "auto");
                 $("#issuingCountryParentEdit").prop("disabled", false);
                 $("#issuingCountryParentEdit").css("pointer-events", "auto");
-        
+
             } else {
-        
+
                 $("#expiryDateParentEdit").prop("disabled", true);
                 $("#expiryDateParentEdit").css("pointer-events", "none");
                 $("#issuingCountryParentEdit").prop("disabled", true);
@@ -4026,7 +4024,7 @@ $(document).ready(function () {
             $("#view-parent").modal("show");
         });
 
-        $("#deleteParent" + type).click(function (e) {
+        $(document).on("click","#deleteParent" + type, function (e) {
             id = $(this).data("id");
             requirejs(["sweetAlert2"], function (swal) {
                 swal({
@@ -4125,7 +4123,7 @@ $(document).ready(function () {
                 requirejs(["sweetAlert2"], function (swal) {
                     $.ajax({
                         type: "POST",
-                        url: "/resetPassword",
+                        url: "/updatePass",
                         data: data,
                         dataType: "json",
 
@@ -4425,7 +4423,7 @@ $("#same-addressUC").change(function () {
             $("#cityUC").prop("readonly", false).val("");
             $("#stateUC").prop("disabled", false).val("");
             $("#countryUC").prop("disabled", false).val("");
-        }        
+        }
 });
 
 

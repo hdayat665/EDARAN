@@ -58,6 +58,23 @@ $("document").ready(function () {
             $("#total2").val(g);
         }
     );
+
+    $("#hotelcvca,#hnca,#lnca").change(
+        function () {
+            var a = parseInt($("#hotelcvca").val())|| 0;
+            var b = parseInt($("#hnca").val())|| 0;
+            var c = parseInt($("#lnca").val())|| 0;
+            var d = parseInt($("#lodgingcvca").val())|| 0;
+            var e = parseInt($("#TSca").val())|| 0;
+            var f = parseFloat((a*b)+(c*d)).toFixed(2);
+            var g = parseFloat((a*b)+(c*d)+e).toFixed(2);
+            $("#hnTotalca").val(a*b);
+            $("#lnTotalca").val(c*d);
+            
+            $("#TAVca").val(f);
+            $("#total2ca").val(g);
+        }
+    );
       document.getElementById('hotelcvUpdate').addEventListener('input', function() {
         const hiddenInput = document.getElementById('hotelcvUpdateHide');
         const maxValue = parseInt(hiddenInput.value);  // Change this value to your desired maximum
@@ -68,6 +85,13 @@ $("document").ready(function () {
       
       document.getElementById('hotelcv').addEventListener('input', function() {
         const hiddenInput = document.getElementById('htv');
+        const maxValue = parseInt(hiddenInput.value);  // Change this value to your desired maximum
+        if (this.value > maxValue) {
+          this.value = maxValue;
+        }
+      });
+      document.getElementById('hotelcvca').addEventListener('input', function() {
+        const hiddenInput = document.getElementById('htvca');
         const maxValue = parseInt(hiddenInput.value);  // Change this value to your desired maximum
         if (this.value > maxValue) {
           this.value = maxValue;
@@ -331,16 +355,57 @@ $("#travelingUpdate").DataTable({
         [5, 10, 25, 50, -1],
         [5, 10, 25, 50, "All"],
     ],
-});$("#subsTableUpdate").DataTable({
-    paging: true,
+    dom: "<'row'<'col-sm-6'l><'col-sm-6 d-flex justify-content-end'fB>>" +
+        "<'row'<'col-sm-12'tr>>" +
+        "<'row'<'col-sm-12'p>>",
+    buttons: [
+        {
+            text: 'Supporting Documents',
+            attr: {
+                id: 'btnAttachment',
+                class: 'btn btn-primary',
+                type: 'button'
+            },
+            action: function () {
+                // Custom button action
+                // Add your logic here
+            }
+        }
+    ]
+});
+
+
+
+
+
+$("#subsTableUpdate").DataTable({
+    paging: false,
     filter: false,
     scrollX: false,
     lengthMenu: [
         [5, 10, 25, 50, -1],
         [5, 10, 25, 50, "All"],
     ],
+    dom: "<'row'<'col-sm-6'l><'col-sm-6 d-flex justify-content-end'fB>>" +
+        "<'row'<'col-sm-12'tr>>" +
+        "<'row'<'col-sm-12'p>>",
+    buttons: [
+        {
+            text: 'Supporting Documents',
+            attr: {
+                id: 'btnAttachmentSubs',
+                class: 'btn btn-primary',
+                type: 'button'
+            },
+            action: function () {
+                // Custom button action
+                // Add your logic here
+            }
+        }
+    ],
+
 });$("#otherTableUpdate").DataTable({
-    paging: true,
+    paging: false,
     filter: false,
     scrollX: false,
     lengthMenu: [
@@ -405,6 +470,9 @@ $("#travelingUpdate").DataTable({
                 var startTime = firstResponse.start_time;
                 var endDate = firstResponse.end_date;
                 var endTime = firstResponse.end_time;
+                var laundry_amount = firstResponse.laundry_amount;
+                var laundry_desc = firstResponse.laundry_desc;
+                var file_laundry = firstResponse.file_laundry;
                 var formattedStartDate = startDate.substr(0, 10);
                 var formattedEndDate = endDate.substr(0, 10);
                 var travelDuration = firstResponse.travel_duration;
@@ -424,6 +492,18 @@ $("#travelingUpdate").DataTable({
                 var days = Math.floor(durationInMs / (1000 * 60 * 60 * 24));
                 var hours = Math.floor((durationInMs % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
                 var minutes = Math.floor((durationInMs % (1000 * 60 * 60)) / (1000 * 60));
+
+                if (!laundry_amount) {
+                    laundry_amount = null;
+                    document.getElementById('laundrydivUpdate').style.display = 'none';
+                  } else {
+                    document.getElementById('laundrydivUpdate').style.display = 'block'; // or any other appropriate display value
+                  }
+                    
+                if (!laundry_desc) {
+                    laundry_desc = null;
+                }
+                
                 if (!file_upload) {
                     file_upload = "No Attachment";
                 } else {
@@ -437,7 +517,19 @@ $("#travelingUpdate").DataTable({
                         }
                     }
                 }
-                
+                if (!file_laundry) {
+                    file_laundry = "No Attachment";
+                } else {
+                    var fileLinks = file_laundry.split(",");
+                    file_laundry = "";
+                    for (var i = 0; i < fileLinks.length; i++) {
+                        var fileLink = fileLinks[i].trim();
+                        file_laundry += `<a href="/storage/TravelFile/${fileLink}" target="_blank">${fileLink}</a>`;
+                        if (i < fileLinks.length - 1) {
+                            file_laundry += "<br>";
+                        }
+                    }
+                }
                 // Calculate the number of breakfast, lunch, and dinner days
                 var breakfastDaysUpdate = 0;
                 var lunchDaysUpdate = 0;
@@ -457,7 +549,7 @@ $("#travelingUpdate").DataTable({
                     
                     // Check if the startDateTime has dinner
                     if (startDateTime.getHours() >= 19 || endDateTime.getHours() >= 19) {
-                        dinnerDays++;
+                        dinnerDaysUpdate++;
                     }
                 } else {
                     // Start and end dates are different days
@@ -545,7 +637,9 @@ $("#travelingUpdate").DataTable({
                     $("#project_update").val(projectName);
                     $("#hotelcvUpdate").val(hotel);
                     $("#file_upload").html(file_upload);
-                    
+                    $("#laundry_amount_update").val(laundry_amount);
+                    $("#laundry_desc_update").val(laundry_desc);
+                    $("#file_laundry_update").html(file_laundry);
 
                 }).fail(function() {
                     console.log('Failed to fetch project name.');
@@ -804,15 +898,15 @@ $("#travelingUpdate").DataTable({
                 format: "yyyy-mm-dd",
             })
             .datepicker("setDate", "now");
-        $("#time1,#time2").mdtimepicker({});
+        //$("#time2").mdtimepicker({});
     
         // Calculate and display travel duration
-        $("#result1, #date1, #time1, #date2, #time2").focus(function () {
+        $("#result1, #date1, #time1, #date2, #time2").change(function () {
             var startDate = document.getElementById('date1').value;
             var endDate = document.getElementById('date2').value;
             var startTime = document.getElementById('time1').value;
             var endTime = document.getElementById('time2').value;
-            
+            var laundryDays = document.getElementById('laundryDay').value;
             var startDateTime = new Date(startDate + ' ' + startTime);
             var endDateTime = new Date(endDate + ' ' + endTime);
             var durationInMs = endDateTime - startDateTime;
@@ -888,7 +982,7 @@ $("#travelingUpdate").DataTable({
             $("#DDN").val(dinnerDays);
             $("#hn").val(days);
             $("#ln").val(days);
-        
+            
             var a = parseFloat($("#BF").val()); //float
             var b = parseInt($("#DBF").val());
             var c = parseFloat($("#LH").val()); //float
@@ -897,12 +991,149 @@ $("#travelingUpdate").DataTable({
             var f = parseInt($("#DDN").val());
             $("#TS").val(a * b + c * d + e * f);
             
+
         
             $("#totalbf").val((a * b).toFixed(2));
             $("#totallh").val((c * d).toFixed(2));
             $("#totaldn").val((e * f).toFixed(2));
+
+            var a = parseInt($("#hotelcv").val())|| 0;
+            var b = parseInt($("#hn").val())|| 0;
+            var c = parseInt($("#ln").val())|| 0;
+            var d = parseInt($("#lodgingcv").val())|| 0;
+            var e = parseInt($("#TS").val())|| 0;
+            var f = parseFloat((a*b)+(c*d)).toFixed(2);
+            var g = parseFloat((a*b)+(c*d)+e).toFixed(2);
+            $("#hnTotal").val(a*b);
+            $("#lnTotal").val(c*d);
+            
+            $("#TAV").val(f);
+            $("#total2").val(g);
+
+            if (days > laundryDays ) {
+
+                $("#laundrydiv").show();
+            } else {
+                $("#laundrydiv").hide();
+            }
         });
         
+        $("#result1ca, #date1ca, #time1ca, #date2ca, #time2ca").change(function () {
+            var startDate = document.getElementById('date1ca').value;
+            var endDate = document.getElementById('date2ca').value;
+            var startTime = document.getElementById('time1ca').value;
+            var endTime = document.getElementById('time2ca').value;
+            var laundryDays = document.getElementById('laundryDayca').value;
+            var startDateTime = new Date(startDate + ' ' + startTime);
+            var endDateTime = new Date(endDate + ' ' + endTime);
+            var durationInMs = endDateTime - startDateTime;
+            var days = Math.floor(durationInMs / (1000 * 60 * 60 * 24));
+            var hours = Math.floor((durationInMs % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            var minutes = Math.floor((durationInMs % (1000 * 60 * 60)) / (1000 * 60));
+            
+            // Calculate the number of breakfast, lunch, and dinner days
+            var breakfastDays = 0;
+            var lunchDays = 0;
+            var dinnerDays = 0;
+        
+            // Check if the startDateTime and endDateTime are on the same day
+            if (startDateTime.toDateString() === endDateTime.toDateString()) {
+                // Check if the startDateTime has breakfast
+                if (startDateTime.getHours() < 8 || (startDateTime.getHours() === 8 && startDateTime.getMinutes() < 30)) {
+                    breakfastDays++;
+                }
+                
+                // Check if the startDateTime has lunch
+                if (startDateTime.getHours() < 13 && endDateTime.getHours() >= 12) {
+                    lunchDays++;
+                }
+                
+                // Check if the startDateTime has dinner
+                if (startDateTime.getHours() >= 19 || endDateTime.getHours() >= 19) {
+                    dinnerDays++;
+                }
+
+            } else {
+                // Start and end dates are different days
+                // Check if the startDateTime has breakfast
+                if (startDateTime.getHours() === 8 && startDateTime.getMinutes() < 30) {
+                    breakfastDays++;
+                }
+                
+                // Check if the startDateTime has lunch
+                if (startDateTime.getHours() < 13) {
+                    lunchDays++;
+                }
+                
+                // Check if the startDateTime has dinner
+                if (startDateTime.getHours() < 20) {
+                    dinnerDays++;
+                }
+        
+                // Check for the intermediate days
+                for (var i = 1; i < days; i++) {
+                    breakfastDays++;
+                    lunchDays++;
+                    dinnerDays++;
+                }
+                
+                // Check if the endDateTime has breakfast
+                if (endDateTime.getHours() >= 7) {
+                    breakfastDays++;
+                }
+                
+                // Check if the endDateTime has lunch
+                if (endDateTime.getHours() >= 12) {
+                    lunchDays++;
+                }
+                
+                // Check if the endDateTime has dinner
+                if (endDateTime.getHours() >= 19) {
+                    dinnerDays++;
+                }
+            }
+        
+            $("#result1ca").val(days + " nights : " + hours + " hours : " + minutes + " minutes");
+            $("#DBFca").val(breakfastDays);
+            $("#DLHca").val(lunchDays);
+            $("#DDNca").val(dinnerDays);
+            $("#hnca").val(days);
+            $("#lnca").val(days);
+            
+            var a = parseFloat($("#BFca").val()); //float
+            var b = parseInt($("#DBFca").val());
+            var c = parseFloat($("#LHca").val()); //float
+            var d = parseInt($("#DLHca").val());
+            var e = parseFloat($("#DNca").val()); //float
+            var f = parseInt($("#DDNca").val());
+            $("#TSca").val(a * b + c * d + e * f);
+            
+
+        
+            $("#totalbfca").val((a * b).toFixed(2));
+            $("#totallhca").val((c * d).toFixed(2));
+            $("#totaldnca").val((e * f).toFixed(2));
+
+            var a = parseInt($("#hotelcvca").val())|| 0;
+            var b = parseInt($("#hnca").val())|| 0;
+            var c = parseInt($("#lnca").val())|| 0;
+            var d = parseInt($("#lodgingcvca").val())|| 0;
+            var e = parseInt($("#TSca").val())|| 0;
+            var f = parseFloat((a*b)+(c*d)).toFixed(2);
+            var g = parseFloat((a*b)+(c*d)+e).toFixed(2);
+            $("#hnTotalca").val(a*b);
+            $("#lnTotalca").val(c*d);
+            
+            $("#TAVca").val(f);
+            $("#total2ca").val(g);
+
+            if (days > laundryDays ) {
+
+                $("#laundrydivca").show();
+            } else {
+                $("#laundrydivca").hide();
+            }
+        });
         
         
         
@@ -934,10 +1165,11 @@ $("#travelingUpdate").DataTable({
         }
     );
     
-    var TCar = parseInt(document.getElementById("totalCar").value);
+    var TCar = parseInt(document.getElementById("totalCar").value); 
     var TMotor = parseInt(document.getElementById("totalMotor").value);
     TotalTcarTmotor = TCar + TMotor;
     $("#TotalMileageCarMotor").val("RM " + TotalTcarTmotor.toFixed(2));
+    document.getElementById("totalMileage").textContent = "RM " + TotalTcarTmotor.toFixed(2);
 
 
 
@@ -1009,7 +1241,32 @@ $("#travelingUpdate").DataTable({
             $("#hn").prop("readonly", true);
         }
     });
+    $("#hotelcca").change(function () {
+        var s = $("#hotelcca input:checked")
+            .map(function () {
+                return this.value;
+            })
+            .get()
+            .join(",");
+        if (s.length > 0) {
+            var ss = "100"; // this is the value to check against
 
+            if ($("#htvca").val() == ss) {
+                $("#hotelcvca").prop("readonly", false);
+            } else {
+                $("#hotelcvca").prop("readonly", false);
+            }
+
+            $("#hotelcvca").val(s);
+            $("#hotelcv1ca").val(s);
+            $("#hnca").prop("readonly", false);
+        } else {
+            $("#hotelcvca").val("");
+            $("#hotelcvca").prop("readonly", true);
+            $("#hotelcv1ca").val("0");
+            $("#hnca").prop("readonly", true);
+        }
+    });
     $("#lodgingc").change(function () {
         var s = $("#lodgingc input:checked")
             .map(function () {
@@ -1036,7 +1293,32 @@ $("#travelingUpdate").DataTable({
             $("#ln").prop("readonly", true);
         }
     });
+    $("#lodgingcca").change(function () {
+        var s = $("#lodgingcca input:checked")
+            .map(function () {
+                return this.value;
+            })
+            .get()
+            .join(",");
+        if (s.length > 0) {
+            var ss = "100"; // this is the value to check against
 
+            if ($("#ldgvca").val() == ss) {
+                $("#lodgingcvca").prop("readonly", true);
+            } else {
+                $("#lodgingcvca").prop("readonly", true);
+            }
+
+            $("#lodgingcvca").val(s);
+            $("#lodgingcv1ca").val(s);
+            $("#lnca").prop("readonly", false);
+        } else {
+            $("#lodgingcvca").val("");
+            $("#lodgingcvca").prop("readonly", true);
+            $("#lodgingcv1ca").val("0");
+            $("#lnca").prop("readonly", true);
+        }
+    });
     // calculate total subsistence & accomadation
     $("#BF,#DBF,#LH,#DLH,#DN,#DDN,#TS").focus(function () {
         var a = parseFloat($("#BF").val()); //float
@@ -1052,6 +1334,20 @@ $("#travelingUpdate").DataTable({
         $("#TS").val((a * b + c * d + e * f).toFixed(2));
         
     });
+    $("#BFca,#DBFca,#LHca,#DLHca,#DNca,#DDNca,#TSca").focus(function () {
+        var a = parseFloat($("#BFca").val()); //float
+        var b = parseInt($("#DBFca").val());
+        var c = parseFloat($("#LHca").val()); //float
+        var d = parseInt($("#DLHca").val());
+        var e = parseFloat($("#DNca").val()); //float
+        var f = parseInt($("#DDNca").val());
+        
+        $("#totalbfca").val((a * b).toFixed(2));
+        $("#totallhca").val((c * d).toFixed(2));
+        $("#totaldnca").val((e * f).toFixed(2));
+        $("#TSca").val((a * b + c * d + e * f).toFixed(2));
+        
+    });
 
     $("#htv,#hotelcv1,#hn,#lodgingcv1,#ln,#ldgv").focus(function () {
         var a = parseFloat($("#hotelcv1").val()); //float
@@ -1062,7 +1358,15 @@ $("#travelingUpdate").DataTable({
         var e = parseFloat(a * b + c * d).toFixed(2);
         $("#TAV").val(e);
     });
+    $("#htvca,#hotelcv1ca,#hnca,#lodgingcv1ca,#lnca,#ldgvca").focus(function () {
+        var a = parseFloat($("#hotelcv1ca").val()); //float
+        var b = parseInt($("#hnca").val());
 
+        var c = parseFloat($("#lodgingcv1ca").val()); //float
+        var d = parseInt($("#lnca").val());
+        var e = parseFloat(a * b + c * d).toFixed(2);
+        $("#TAVca").val(e);
+    });
     $(
         "#hotelcv,#hotelcv1,#hn,#lodgingcv,#hotelcv1,#ln,#htv,#ldgv,#TS,#TAV,#DBF,#DLH,#DDN"
     ).focus(function () {
@@ -1071,7 +1375,14 @@ $("#travelingUpdate").DataTable({
         var c = parseFloat(a + b).toFixed(2);
         $("#total2").val(c);
     });
-
+    $(
+        "#hotelcvca,#hotelcv1ca,#hnca,#lodgingcvca,#hotelcv1ca,#lnca,#htvca,#ldgvca,#TSca,#TAVca,#DBFca,#DLHca,#DDNca"
+    ).focus(function () {
+        var a = parseFloat($("#TSca").val());
+        var b = parseFloat($("#TAVca").val());
+        var c = parseFloat(a + b).toFixed(2);
+        $("#total2ca").val(c);
+    });
     $("#htv").click(function () {
         if (this.checked) {
             $("#hn").prop("disabled", false); // If checked enable item
@@ -1080,7 +1391,14 @@ $("#travelingUpdate").DataTable({
             $("#hn").val(0);
         }
     });
-
+    $("#htvca").click(function () {
+        if (this.checked) {
+            $("#hnca").prop("disabled", false); // If checked enable item
+        } else {
+            $("#hnca").prop("disabled", true); // If checked disable item
+            $("#hnca").val(0);
+        }
+    });
     $("#ldgv").click(function () {
         if (this.checked) {
             $("#ln").prop("disabled", false); // If checked enable item
@@ -1089,7 +1407,14 @@ $("#travelingUpdate").DataTable({
             $("#ln").val(0);
         }
     });
-
+    $("#ldgvca").click(function () {
+        if (this.checked) {
+            $("#lnca").prop("disabled", false); // If checked enable item
+        } else {
+            $("#lnca").prop("disabled", true); // If checked disable item
+            $("#lnca").val(0);
+        }
+    });
     $(document).on("change", "#claimcategory", function () { 
         $("#labelCategory").hide();
         id = $(this).val();
@@ -1138,7 +1463,194 @@ $("#travelingUpdate").DataTable({
         });
     });
 
+    $(document).on("change", "#date1", function () { 
+        
+        id = $(this).val();
+        const inputs = ["time1"];
 
+        for (let i = 0; i < inputs.length; i++) {
+            $("#" + inputs[i] + "")
+                .find("option")
+                .remove() 
+                .end()
+                .append(
+                    '<option label="PLEASE CHOOSE" selected="selected"> </option>'
+                )
+                .val("");
+
+            function getStartTimeDrop(id) {
+                return $.ajax({
+                    url: "/getStartTimeDrop/" + id,
+                });
+            }
+            $("#" + inputs[i] + "")
+                .find("option")
+                .end();
+        }
+
+        var user = getStartTimeDrop(id);
+
+        user.then(function (data) {
+            
+            // Check if data is available
+            if (data.length > 0) {
+                // Show the labelcategory div if data is available
+                
+                for (let i = 0; i < data.length; i++) {
+                    const user = data[i];
+                    var opt = document.createElement("option");
+                    document.getElementById("time1").innerHTML +=
+                        '<option value="' +
+                        user["start_time"] +
+                        '">' +
+                        user["start_time"] +
+                        "</option>";
+                }
+            }
+        });
+
+    });
+    $(document).on("change", "#date1ca", function () { 
+        
+        id = $(this).val();
+        const inputs = ["time1ca"];
+
+        for (let i = 0; i < inputs.length; i++) {
+            $("#" + inputs[i] + "")
+                .find("option")
+                .remove() 
+                .end()
+                .append(
+                    '<option label="PLEASE CHOOSE" selected="selected"> </option>'
+                )
+                .val("");
+
+            function getStartTimeDrop(id) {
+                return $.ajax({
+                    url: "/getStartTimeDrop/" + id,
+                });
+            }
+            $("#" + inputs[i] + "")
+                .find("option")
+                .end();
+        }
+
+        var user = getStartTimeDrop(id);
+
+        user.then(function (data) {
+            
+            // Check if data is available
+            if (data.length > 0) {
+                // Show the labelcategory div if data is available
+                
+                for (let i = 0; i < data.length; i++) {
+                    const user = data[i];
+                    var opt = document.createElement("option");
+                    document.getElementById("time1ca").innerHTML +=
+                        '<option value="' +
+                        user["start_time"] +
+                        '">' +
+                        user["start_time"] +
+                        "</option>";
+                }
+            }
+        });
+
+    });
+    $(document).on("change", "#date2", function () { 
+        
+        id = $(this).val();
+        const inputs = ["time2"];
+
+        for (let i = 0; i < inputs.length; i++) {
+            $("#" + inputs[i] + "")
+                .find("option")
+                .remove() 
+                .end()
+                .append(
+                    '<option label="PLEASE CHOOSE" selected="selected"> </option>'
+                )
+                .val("");
+
+            function getEndTimeDrop(id) {
+                return $.ajax({
+                    url: "/getEndTimeDrop/" + id,
+                });
+            }
+            $("#" + inputs[i] + "")
+                .find("option")
+                .end();
+        }
+
+        var user = getEndTimeDrop(id);
+
+        user.then(function (data) {
+            
+            // Check if data is available
+            if (data.length > 0) {
+                // Show the labelcategory div if data is available
+                
+                for (let i = 0; i < data.length; i++) {
+                    const user = data[i];
+                    var opt = document.createElement("option");
+                    document.getElementById("time2").innerHTML +=
+                        '<option value="' +
+                        user["end_time"] +
+                        '">' +
+                        user["end_time"] +
+                        "</option>";
+                }
+            }
+        });
+
+    });
+    $(document).on("change", "#date2ca", function () { 
+        
+        id = $(this).val();
+        const inputs = ["time2ca"];
+
+        for (let i = 0; i < inputs.length; i++) {
+            $("#" + inputs[i] + "")
+                .find("option")
+                .remove() 
+                .end()
+                .append(
+                    '<option label="PLEASE CHOOSE" selected="selected"> </option>'
+                )
+                .val("");
+
+            function getEndTimeDrop(id) {
+                return $.ajax({
+                    url: "/getEndTimeDrop/" + id,
+                });
+            }
+            $("#" + inputs[i] + "")
+                .find("option")
+                .end();
+        }
+
+        var user = getEndTimeDrop(id);
+
+        user.then(function (data) {
+            
+            // Check if data is available
+            if (data.length > 0) {
+                // Show the labelcategory div if data is available
+                
+                for (let i = 0; i < data.length; i++) {
+                    const user = data[i];
+                    var opt = document.createElement("option");
+                    document.getElementById("time2ca").innerHTML +=
+                        '<option value="' +
+                        user["end_time"] +
+                        '">' +
+                        user["end_time"] +
+                        "</option>";
+                }
+            }
+        });
+
+    });
     $("#personalSaveButton").click(function (e) {
         $("#personalForm").validate({
             // Specify validation rules
@@ -1283,19 +1795,33 @@ $("#travelingUpdate").DataTable({
     });
  
     $("#caButton").click(function (e) {
-        $("#subsForm").validate({
+        $("#subsFormca").validate({
             // Specify validation rules
             rules: {
                 // "file_upload[]": "required",
+                cashAdvanceId :"required",
+                start_date: "required",
+                end_date: "required",
+                start_time: "required",
+                end_time: "required",
+                project_id: "required",
+                desc: "required",
             },
 
             messages: {
                 // "file_upload[]": "Please Upload Attachment",
+                cashAdvanceId : "Please Select Cash Advance",
+                start_date: "Please Select Start Date",
+                end_date: "Please Select End Date",
+                start_time: "Please Select Start Time",
+                end_time: "Please Select End Time",
+                project_id: "Please Select Project",
+                desc: "Please Insert Description",
             },
             submitHandler: function (form) {
                 requirejs(["sweetAlert2"], function (swal) {
                     var data = new FormData(
-                        document.getElementById("subsForm")
+                        document.getElementById("subsFormca")
                     );
 
                     $.ajax({

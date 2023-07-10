@@ -9,12 +9,12 @@ class State extends Model
 {
     use HasFactory;
 
-    protected $table = 'states';
+    protected $table = 'location_states';
 
     protected $guarded = [];
 
-    public function locations()
-    {
-        return $this->hasMany(Location::class);
-    }
+    // public function locations()
+    // {
+    //     return $this->hasMany(Location::class);
+    // }
 }

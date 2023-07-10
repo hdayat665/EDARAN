@@ -10,46 +10,38 @@
 
                     <div class="row">
                         <div class="col-md-6">
-                            <label class="form-label col-form-label col-md-4">Joined Date</label>
-                        </div>
-
-
-                        <div class="col-md-6">
                             <label class="form-label col-form-label col-md-6">Project Member Name*</label>
                         </div>
-
-
+                        <div class="col-md-6">
+                            <label class="form-label col-form-label col-md-4">Joined Date</label>
+                        </div>
                     </div>
 
                     <div class="row mb-15px">
-
                         <div class="col-md-6"> 
+                        <select class="selectpicker form-control" id="employee_id" name="employee_id" style="text-transform: uppercase;">
+                                <option value="" label="PLEASE CHOOSE" selected="selected"></option>
+
+                                <?php
+                                    $id = $project->id;
+                                    $employees = getEmployeeNotInProject($id);
+
+                                    if ($employees) {
+                                        // Sort employees by name alphabetically
+                                        $sortedEmployees = $employees->sortBy('employeeName');
+
+                                        foreach ($sortedEmployees as $employee) {
+                                            echo '<option value="' . $employee->id . '">' . $employee->employeeName . '</option>';
+                                        }
+                                    }
+                                ?>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
                             <input type="hidden" value="{{$project->id}}" name="project_id" style="text-transform: upppercase;">
                             <input type="hidden" value="{{$project->tenant_id}}" name="tenant_id">
                             <input type="text" class="form-control" name="joined_date" id="datepicker-joineddate" placeholder="YYYY/MM/DD" />
-
                         </div>
-                        
-                        <div class="col-md-6">
-                            <select class="selectpicker form-control" id="employee_id" name="employee_id" style="text-transform: upppercase;">
-                            
-                            <?php
-                                $id = $project->id;
-                                $employees = getEmployeeNotInProject($id);
-                                ?>
-
-                                <option value="" label="PLEASE CHOOSE" selected="selected"> </option>
-                                @if ($employees)
-
-                                @foreach ($employees as $employee)
-                                    <option value="{{$employee->id }}">{{$employee->employeeName}}</option>
-                                @endforeach
-                                @endif
-
-                            </select>
-                        </div>
- 
-
                     </div>
 
                     <div class="row">
@@ -57,17 +49,13 @@
                             <label class="form-label col-form-label col-md-4">Designation</label>
                         </div>
 
-
                         <div class="col-md-6">
                             <label class="form-label col-form-label col-md-4">Department</label>
                         </div>
-
-
                     </div>
-                    <div class="row mb-15px">
 
+                    <div class="row mb-15px">
                         <div class="col-md-6">
-                            
                             <select class="form-select" name="designation" id="designation"  style="pointer-events: none; touch-action: none; background: #e9ecef;">
                                 <option value="" label=""></option>
                                 <?php $Designations = getDesignation() ?>
@@ -86,22 +74,15 @@
                                 @endforeach
                             </select>
                         </div>
-
-
                     </div>
-
 
                     <div class="row">
                         <div class="col-md-6">
                             <label class="form-label col-form-label col-md-4">Branch</label>
                         </div>
-
-
                         <div class="col-md-6">
                             <label class="form-label col-form-label col-md-4">Unit</label>
                         </div>
-
-
                     </div>
 
                     <div class="row mb-15px">
@@ -113,7 +94,6 @@
                                 <option value="{{$branchs->id}}" >{{$branchs->branchName}}</option>
                                 @endforeach
                             </select>
-
                         </div>
 
                         <div class="col-md-6">
@@ -125,8 +105,6 @@
                                 @endforeach
                             </select>
                         </div>
-
-
                     </div>
 
                     <div class="row">

@@ -100,7 +100,7 @@ if (!function_exists('getCountryRegisterDomain')) {
 
 //         $data['filename'] = $filename;
 
-//         return $data; 
+//         return $data;
 //     }
 // }
 function PersonalFile($filename, $uploadedFile)
@@ -676,7 +676,7 @@ if (!function_exists('asias')) {
             'LA' => "LAOS",
             'LB' => "LEBANON",
             'MO' => "MACAU SAR CHINA",
-            'MALAYSIA' => "MALAYSIA",
+            'MY' => "MALAYSIA",
             'MV' => "MALDIVES",
             'MN' => "MONGOLIA",
             'MM' => "MYANMAR [BURMA]",
@@ -749,32 +749,20 @@ if (!function_exists('getStateName')) {
     }
 }
 
-if (!function_exists('getStates')) {
-    function getStates()
-    {
-        $data = State::all();
+// if (!function_exists('getStates')) {
+//     function getStates()
+//     {
+//         $data = State::all();
 
-        if (blank($data)) {
-            return null;
-        }
+//         if (blank($data)) {
+//             return null;
+//         }
 
-        return $data->pluck('stateName', 'id')->toArray();
-    }
-}
+//         return $data->pluck('stateName', 'id')->toArray();
+//     }
+// }
 
-if (!function_exists('getCountryBranch')) {
-    function getCountryBranch()
-    {
-        $data = Country::all();
 
-        if (blank($data)) {
-            $data = [];
-
-        }
-
-        return $data;
-    }
-}
 
 if (!function_exists('getStateBranch')) {
     function getStateBranch()
@@ -804,20 +792,20 @@ if (!function_exists('getPostcodeBranch')) {
     }
 }
 
-if (!function_exists('getLocation')) {
-    function getLocation()
-    {
-        $data = DB::select("SELECT settingcountry.CountryName, states.stateName, location.postcode from location, settingcountry, states
-        WHERE location.countryID = settingcountry.countryID AND location.stateID = states.id;");
+// if (!function_exists('getLocation')) {
+//     function getLocation()
+//     {
+//         $data = DB::select("SELECT settingcountry.CountryName, states.stateName, location.postcode from location, settingcountry, states
+//         WHERE location.countryID = settingcountry.countryID AND location.stateID = states.id;");
 
- if (blank($data)) {
-    $data = [];
-}
-        return $data;
+//  if (blank($data)) {
+//     $data = [];
+// }
+//         return $data;
 
 
-    }
-}
+//     }
+// }
 
 if (!function_exists('getCompany')) {
     function getCompany()
@@ -2535,7 +2523,7 @@ if (!function_exists('getFinanceChecker')) {
     function getFinanceChecker()
     {
 
-        // find checker 
+        // find checker
         $domainList = DomainList::where([['tenant_id', Auth::user()->tenant_id], ['category_role', 'finance']])->orderBy('created_at', 'DESC')->first();
         $userId = Auth::user()->id;
 
@@ -2558,7 +2546,7 @@ if (!function_exists('getFinanceChecker')) {
 if (!function_exists('getAdminChecker')) {
     function getAdminChecker()
     {
-        // find checker 
+        // find checker
         $domainList = DomainList::where([['tenant_id', Auth::user()->tenant_id], ['category_role', 'admin']])->orderBy('created_at', 'DESC')->first();
         $userId = Auth::user()->id;
 

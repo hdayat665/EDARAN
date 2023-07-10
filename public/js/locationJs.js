@@ -1,4 +1,28 @@
 $(document).ready(function () {
+
+    $(document).on("change", "#addCountry2", function () {
+        var getCountry = $("#addCountry2").val();
+
+        var getState = getStatebyCountry(getCountry);
+
+        getState.then(function (data) {
+
+            $("#addState2").empty();
+            $("#addState2").append('<option value="">PLEASE CHOOSE</option>');
+
+            $.each(data, function (index, state) {
+                $("#addState2").append('<option value="' + state.id + '">' + state.state_name + '</option>');
+            });
+        });
+    });
+
+
+    function getStatebyCountry(id) {
+        return $.ajax({
+            url: "/getStatebyCountry/" + id,
+        });
+    }
+
     $("input[type=text]").keyup(function () {
         $(this).val($(this).val().toUpperCase());
     });
@@ -38,6 +62,7 @@ $(document).ready(function () {
 
     $(document).on("click", "#deleteLocation", function () {
         id = $(this).data("id");
+
         requirejs(["sweetAlert2"], function (swal) {
             swal({
                 title: "Are you sure to delete location?",
@@ -88,14 +113,14 @@ $(document).ready(function () {
         $("#addFormState").validate({
             // Specify validation rules
             rules: {
-                countryID: "required",
-                stateName: "required",
-                stateCode: "required",
+                country_id: "required",
+                state_name: "required",
+                state_code: "required",
             },
             messages: {
-                countryID: "Please Insert Country Name ",
-                stateName: "Please Insert State Name",
-                stateCode: "Please Insert State Code",
+                country_id: "Please Choose Country Name ",
+                state_name: "Please Choose State Name",
+                state_code: "Please Insert State Code",
             },
             submitHandler: function (form) {
                 requirejs(["sweetAlert2"], function (swal) {
@@ -135,13 +160,13 @@ $(document).ready(function () {
     $("#saveButtonLocation").click(function (e) {
         $("#addFormLocation").validate({
             rules: {
-                countryID: "required",
-                stateID: "required",
+                country_id: "required",
+                state_name: "required",
                 postcode: "required",
             },
             messages: {
-                countryID: "Please Insert Country Name ",
-                stateID: "Please Choose State Name",
+                country_id: "Please Insert Country Name ",
+                state_name: "Please Choose State Name",
                 postcode: "Please Insert Postcode",
             },
             submitHandler: function (form) {

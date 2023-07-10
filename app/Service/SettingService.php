@@ -2,49 +2,50 @@
 
 namespace App\Service;
 
-use App\Models\ActivityLogs;
-use App\Models\ApprovalConfig;
-use App\Models\ApprovelRoleGeneral;
-use App\Models\Branch;
-use App\Models\ClaimCategory;
-use App\Models\ClaimCategoryContent;
-use App\Models\ClaimDateSetting;
-use App\Models\Company;
-use App\Models\Department;
-use App\Models\Designation;
-use App\Models\DomainList;
-use App\Models\EclaimGeneral;
-use App\Models\EclaimGeneralSetting;
-use App\Models\Employee;
-use App\Models\EmploymentType;
-use App\Models\EntitleGroup;
-use App\Models\EntitleSubsBenefit;
-use App\Models\JobGrade;
-use App\Models\News;
-use App\Models\Policy;
-use App\Models\Role;
-use App\Models\SOP;
-use App\Models\TransportMillage;
-use App\Models\TypeOfLogs;
-use App\Models\Unit;
-use App\Models\leaveEntitlementModel;
-use App\Models\UserProfile;
-use App\Models\UserRole;
-use App\Models\holidayModel;
-use App\Models\leavetypesModel;
-use App\Models\PermissionRole;
-use App\Models\Users;
-use App\Models\leaveAnualLeaveModel;
-use App\Models\leaveSicKleaveModel;
-use App\Models\leaveCarryForwordModel;
-use App\Models\leaveWeekendModel;
-use App\Models\Location;
-use App\Models\State;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
-use Symfony\Component\Console\Input\Input;
-use Illuminate\Support\Facades\Validator;
 use Carbon\Carbon;
+use App\Models\SOP;
+use App\Models\News;
+use App\Models\Role;
+use App\Models\Unit;
+use App\Models\State;
+use App\Models\Users;
+use App\Models\Branch;
+use App\Models\Policy;
+use App\Models\Company;
+use App\Models\Country;
+use App\Models\Employee;
+use App\Models\JobGrade;
+use App\Models\Location;
+use App\Models\UserRole;
+use App\Models\Department;
+use App\Models\DomainList;
+use App\Models\TypeOfLogs;
+use App\Models\Designation;
+use App\Models\UserProfile;
+use App\Models\ActivityLogs;
+use App\Models\EntitleGroup;
+use App\Models\holidayModel;
+use App\Models\ClaimCategory;
+use App\Models\EclaimGeneral;
+use App\Models\ApprovalConfig;
+use App\Models\EmploymentType;
+use App\Models\PermissionRole;
+use App\Models\leavetypesModel;
+use App\Models\ClaimDateSetting;
+use App\Models\TransportMillage;
+use App\Models\leaveWeekendModel;
+use App\Models\EntitleSubsBenefit;
+use Illuminate\Support\Facades\DB;
+use App\Models\ApprovelRoleGeneral;
+use App\Models\leaveSicKleaveModel;
+use App\Models\ClaimCategoryContent;
+use App\Models\EclaimGeneralSetting;
+use App\Models\leaveAnualLeaveModel;
+use Illuminate\Support\Facades\Auth;
+use App\Models\leaveEntitlementModel;
+use App\Models\leaveCarryForwordModel;
+use Illuminate\Support\Facades\Validator;
+use Symfony\Component\Console\Input\Input;
 
 class SettingService
 {
@@ -470,9 +471,9 @@ class SettingService
     public function createBranch($r)
     {
         $input = $r->input();
-        //pr($input);
         date_default_timezone_set("Asia/Kuala_Lumpur");
         $etData = Branch::where([['branchName', $input['branchName']], ['tenant_id', Auth::user()->tenant_id]])->first();
+
         if ($etData) {
             $data['msg'] = 'Branch name already exists.';
             $data['status'] = config('app.response.error.status');
@@ -482,9 +483,34 @@ class SettingService
             return $data;
         }
 
+        date_default_timezone_set("Asia/Kuala_Lumpur");
+
         $user = Auth::user();
-        $input['tenant_id'] = Auth::user()->tenant_id;
-        $input['addedBy'] = $user->username;
+
+        $getid = Location::select('id')
+        ->where('country_id','=', $input['ref_country'])
+        ->where('state_id','=', $input['ref_state'])
+        ->where('name','=', $input['ref_city'])
+        ->where('postcode','=', $input['ref_postcode'])
+        ->first();
+
+
+
+        $user = Auth::user();
+
+        $input = [
+            'companyId' => $input['companyId'],
+            'branchName' => $input['branchName'],
+            'branchType' => $input['branchType'],
+            'address' => $input['address'],
+            'address2' => $input['address2'],
+
+            'ref_city' => $getid->id,
+            'tenant_id' => Auth::user()->tenant_id,
+            'addedBy' => $user->username,
+            'addedBy' => date('Y-m-d H:i:s'),
+
+        ];
 
         Branch::create($input);
 
@@ -494,10 +520,12 @@ class SettingService
         $data['msg'] = 'Branch is Created';
 
         return $data;
+
     }
     public function updateBranch($r, $id)
     {
         $input = $r->input();
+        date_default_timezone_set("Asia/Kuala_Lumpur");
         $branchName = $input['branchName'];
 
         $existingBranch = Branch::where('branchName', $branchName)
@@ -516,11 +544,30 @@ class SettingService
 
         date_default_timezone_set("Asia/Kuala_Lumpur");
 
-        $input['modified_at'] = date('Y-m-d H:i:s');
         $user = Auth::user();
-        $input['modifiedBy'] = $user->username;
+
+        $getid = Location::select('id')
+        ->where('country_id','=', $input['ref_country'])
+        ->where('state_id','=', $input['ref_state'])
+        ->where('name','=', $input['ref_city'])
+        ->where('postcode','=', $input['ref_postcode'])
+        ->first();
+
+        $input = [
+            'companyId' => $input['companyId'],
+            'branchName' => $input['branchName'],
+            'branchType' => $input['branchType'],
+            'address' => $input['address'],
+            'address2' => $input['address2'],
+
+            'ref_city' => $getid->id,
+            'tenant_id' => Auth::user()->tenant_id,
+            'modifiedBy' => $user->username,
+            'modified_at' => date('Y-m-d H:i:s'),
+        ];
 
         Branch::where('id', $id)->update($input);
+
 
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
@@ -564,25 +611,23 @@ class SettingService
     {
         $input = $r->input();
 
-        $checkData = Location::where([['postcode', $input['postcode']], ['tenant_id', Auth::user()->tenant_id]])->first();
-        if ($checkData) {
-            $data['msg'] = 'Postcode name already exists.';
-            $data['status'] = config('app.response.error.status');
-            $data['type'] = config('app.response.error.type');
-            $data['title'] = config('app.response.error.title');
 
-            return $data;
-        }
+        $input = [
+            'country_id' => $input['country_id'],
+            'state_id' => $input['state_name'],
+            'name' => $input['city_name'],
+            'postcode' => $input['postcode'],
 
-        $user = Auth::user();
-        $input['tenant_id'] = Auth::user()->tenant_id;
+
+        ];
 
         Location::create($input);
+
 
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success Create Location';
+        $data['msg'] = 'Success Create State Postcode';
 
         return $data;
     }
@@ -597,6 +642,7 @@ class SettingService
             $data['title'] = config('app.response.error.title');
             $data['msg'] = 'Location not found';
         } else {
+
             $Location->delete();
 
             $data['status'] = config('app.response.success.status');
@@ -606,6 +652,8 @@ class SettingService
         }
 
         return $data;
+
+
     }
 
     public function getStateCountry($id)
@@ -620,44 +668,10 @@ class SettingService
 
     public function createStateCountry($r)
     {
-        // $rules = [
-        //     'stateCode' => 'required|unique:states',
-        //     'stateName' => 'required|unique:states',
-        // ];
-
-        // $messages = [
-        //     'stateCode.required' => 'State code is required',
-        //     'stateCode.unique' => 'State code already exists',
-        //     'stateName.required' => 'State name is required',
-        //     'stateName.unique' => 'State name already exists',
-        // ];
-
-        // $validator = Validator::make($r->all(), $rules, $messages);
-
-        // if ($validator->fails()) {
-        //     $data['msg'] = $validator->messages()->first();
-        //     $data['status'] = config('app.response.error.status');
-        //     $data['type'] = config('app.response.error.type');
-        //     $data['title'] = config('app.response.error.title');
-
-        //     return $data;
-        // }
-
-        // $input = $r->input();
-
-        // State::create($input);
-
-        // $data['status'] = config('app.response.success.status');
-        // $data['type'] = config('app.response.success.type');
-        // $data['title'] = config('app.response.success.title');
-        // $data['msg'] = 'Success Create State Country';
-
-        // return $data;
-
         $input = $r->input();
 
-        $checkData = State::where([['stateName', $input['stateName']], ['tenant_id', Auth::user()->tenant_id]])->first();
-        if ($checkData) {
+        $etData = State::where([['state_name', $input['state_name']]])->first();
+        if ($etData) {
             $data['msg'] = 'State name already exists.';
             $data['status'] = config('app.response.error.status');
             $data['type'] = config('app.response.error.type');
@@ -666,15 +680,21 @@ class SettingService
             return $data;
         }
 
-        $user = Auth::user();
-        $input['tenant_id'] = Auth::user()->tenant_id;
+        $input = [
+            'country_id' => $input['country_id'],
+            'state_name' => $input['state_name'],
+            'state_code' => $input['state_code'],
+
+
+        ];
 
         State::create($input);
+
 
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success Create State Country';
+        $data['msg'] = 'Success Create State Postcode';
 
         return $data;
     }
@@ -1087,7 +1107,7 @@ class SettingService
     public function createNews($r)
     {
         $input = $r->input();
-        
+
         if ($_FILES['file']['name']) {
             $payslip = upload($r->file('file'));
             $input['file'] = $payslip['filename'];
@@ -1310,7 +1330,7 @@ class SettingService
 
     public function branchView()
     {
-        $data['branchs'] = DB::table('branch as a')
+        $data = DB::table('branch as a')
             ->leftJoin('company as b', 'a.companyId', '=', 'b.id')
             ->select('a.*', 'b.companyName')
             ->where('a.tenant_id', Auth::user()->tenant_id)
@@ -1320,23 +1340,77 @@ class SettingService
         return $data;
     }
 
-    // public function locationView()
-    // {
-    //     $data = Location::where('tenant_id', Auth::user()->tenant_id)->orderBy('id', 'desc')->get();
+    public function branchCountry()
+    {
+        $data = Country::all();
 
-    //     return $data;
-    // }
+        return $data;
+    }
+
+    public function branchState()
+    {
+        $data = State::all();
+
+        return $data;
+    }
+
+    public function branchCity()
+    {
+        $data = Location::all();
+
+        return $data;
+    }
+
+    public function branchPostcode()
+    {
+        $data = Location::all();
+
+        return $data;
+    }
+
+    public function getStatebyCountry($id = '')
+    {
+        $data = Country::join('location_states', 'location_states.country_id', '=', 'location_country.country_id')
+        ->where('location_states.country_id', $id)
+        ->get();
+
+
+        return $data;
+    }
+
+    public function getCitybyState($id = '')
+    {
+
+        $data = State::join('location_cities', 'location_states.id', '=', 'location_cities.state_id')
+        ->where('location_cities.state_id', $id)
+        ->groupBy('location_cities.name')
+        ->get();
+
+
+        return $data;
+    }
+
+    public function getPostcodeByCity($id = '')
+    {
+
+        $data = Location::select('*')
+                ->where('name', $id)
+                ->get();
+
+
+        return $data;
+    }
 
 
     public function locationView()
     {
-        $data = Location::select('location.id', 'settingcountry.CountryName', 'states.stateName', 'location.postcode')
-            ->join('settingcountry', 'location.countryID', '=', 'settingcountry.countryID')
-            ->join('states', 'location.stateID', '=', 'states.id')
+        $data = Location::select('location_cities.id','location_country.country_name','location_states.state_name','location_cities.postcode')
+            ->join('location_country', 'location_cities.country_id', '=', 'location_country.country_id')
+            ->join('location_states', 'location_cities.state_id', '=', 'location_states.id')
+            ->orderBy('location_cities.id', 'desc')
             ->get();
 
-
-        return $data;
+            return $data;
     }
 
     public function unitView()
@@ -1444,9 +1518,16 @@ class SettingService
 
     public function getBranchById($id)
     {
-        $data = Branch::find($id);
+
+        $data = Branch::join('location_cities as lc', 'branch.ref_city', '=', 'lc.id')
+        ->where('branch.id', $id)
+        ->first();
+
+
 
         return $data;
+
+
     }
 
     public function getJobGradeById($id)

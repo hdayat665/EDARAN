@@ -169,7 +169,6 @@ class SettingController extends Controller
         $ss = new SettingService;
 
         $result = $ss->createBranch($r);
-
         return response()->json($result);
     }
 
@@ -178,7 +177,6 @@ class SettingController extends Controller
         $ss = new SettingService;
 
         $result = $ss->updateBranch($r, $id);
-
         return response()->json($result);
     }
 
@@ -488,9 +486,47 @@ class SettingController extends Controller
     {
         $ss = new SettingService;
 
-        $result = $ss->branchView();
+        $data['branchs']  = $ss->branchView();
+        $data['country'] = $ss->branchCountry();
+        $data['state'] = $ss->branchState();
+        $data['city'] = $ss->branchCity();
+        $data['postcode'] = $ss->branchPostcode();
 
-        return view('pages.setting.branch', $result);
+
+        return view('pages.setting.branch', $data);
+    }
+
+
+    public function getStatebyCountry($id = '')
+    {
+        $ss = new SettingService;
+
+        $result = $ss->getStatebyCountry($id);
+
+
+        return $result;
+    }
+
+    public function getCitybyState($id = '')
+    {
+        $ss = new SettingService;
+
+        $result = $ss->getCitybyState($id);
+
+
+        return $result;
+    }
+
+
+
+    public function getPostcodeByCity($id = '')
+    {
+        $ss = new SettingService;
+
+        $result = $ss->getPostcodeByCity($id);
+
+
+        return $result;
     }
 
     public function locationView()
@@ -498,11 +534,8 @@ class SettingController extends Controller
         $ss = new SettingService;
 
         $data['locations'] = $ss->locationView();
-
-        //pr($data['locations']);
-
-
-
+        $data['country'] = $ss->branchCountry();
+        $data['state'] = $ss->branchState();
 
         return view('pages.setting.location', $data);
     }
@@ -1508,7 +1541,7 @@ class SettingController extends Controller
 
         // $result = $ss->newCreateRole();
 
-        return view('pages.setting.newRole'); ;
+        return view('pages.setting.newRole');
     }
     public function newCreateRole()
     {
@@ -1516,7 +1549,7 @@ class SettingController extends Controller
 
         // $result = $ss->newCreateRole();
 
-        return view('pages.setting.newCreateRole'); ;
+        return view('pages.setting.newCreateRole');
     }
     public function newUpdateRole()
     {
@@ -1524,6 +1557,31 @@ class SettingController extends Controller
 
         // $result = $ss->newCreateRole();
 
-        return view('pages.setting.newUpdateRole'); ;
+        return view('pages.setting.newUpdateRole');
+    }
+
+    public function systemUser()
+    {
+        // $ss = new SettingService;
+
+        // $result = $ss->systemUser();
+
+        return view('pages.setting.systemUser');
+    }
+    public function systemUserCreate()
+    {
+        // $ss = new SettingService;
+
+        // $result = $ss->systemUser();
+
+        return view('pages.setting.systemUserCreate');
+    }
+    public function systemUserUpdate()
+    {
+        // $ss = new SettingService;
+
+        // $result = $ss->systemUser();
+
+        return view('pages.setting.systemUserUpdate');
     }
 }

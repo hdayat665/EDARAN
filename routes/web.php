@@ -137,7 +137,7 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('/createClearCa/{id}', 'createClearCa');
             Route::post('/approveAllClaim', 'approveAllClaim');
             Route::post('/approveAllCa', 'approveAllCa');
-
+            Route::post('/skipAllClaim', 'skipAllClaim');
 
 
 
@@ -287,6 +287,9 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('/newRole', 'newRole');
             Route::get('/newCreateRole', 'newCreateRole');
             Route::get('/newUpdateRole', 'newUpdateRole');
+            Route::get('/systemUser', 'systemUser');
+            Route::get('/systemUserCreate', 'systemUserCreate');
+            Route::get('/systemUserUpdate', 'systemUserUpdate');
             // Route::get('/setting', 'settingView');
 
             Route::get('/download/{filename}', function ($filename) {
@@ -318,6 +321,11 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('/getPhoneDirectory', 'getPhoneDirectory');
             Route::get('/setting', 'settingView');
             Route::get('/branch', 'branchView');
+
+            Route::get('/getStatebyCountry/{id}', 'getStatebyCountry');
+            Route::get('/getCitybyState/{id}', 'getCitybyState');
+            Route::get('/getPostcodeByCity/{id}', 'getPostcodeByCity');
+
             Route::get('/company', 'companyView');
             Route::get('/department', 'departmentView');
             Route::get('/designation', 'designationView');
@@ -365,6 +373,7 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('/setting/approvalConfigView', 'approvalConfigView');
             Route::get('/setting/approvalRoleView', 'approvalRoleView');
             Route::get('/setting/addClaimView', 'addClaimView');
+
             // Route::get('/setting/editClaimView', 'editClaimView');
             Route::get('/setting/addClaimView', 'addClaimView');
             Route::get('/setting/editClaimView/{id}', 'editClaimView');
@@ -393,6 +402,7 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('/updateClaimDate', 'updateClaimDate');
             Route::get('/getEntitlementContent/{id}', 'getEntitlementContent');
             Route::get('/getAccomodation', 'getAccomodation');
+            
 
             // eleave Anual leave
             Route::get('/leaveAnnual', 'leaveAnnualView');
@@ -614,6 +624,9 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('/updateTravelMtc/{id}', 'updateTravelMtc');
             Route::post('/saveTravellingAttachment', 'saveTravellingAttachment');
             Route::post('/saveSubsAttachment', 'saveSubsAttachment');
+            Route::get('/getStartTimeDrop/{id}', 'getStartTimeDrop');
+            Route::get('/getEndTimeDrop/{id}', 'getEndTimeDrop');
+            Route::get('/monthlyClaimView/{id}', 'monthlyClaimView');
         });
 
         Route::controller(generalClaimController::class)->group(function () {
