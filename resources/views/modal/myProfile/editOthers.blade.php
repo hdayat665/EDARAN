@@ -25,16 +25,16 @@
                             </div>
                         </div>
                     </div>
-                
+
                     <div class="row p-2">
                         <div class="form-group row">
                             <label for="staticEmail" class="col-sm-4 col-form-label">Attachments</label>
                             <div class="col-sm-8">
                               <input id="" type="file" name="file" multiple="multiple">
-                              Click <a id="othersDoc1"></a> to see attachment.
+                              Click <a id="othersDoc1"></a> to see attachmentt.
                             </div>
 
-                        
+
                         </div>
                     </div>
                 </div>
@@ -46,5 +46,5 @@
       </div>
     </div>
   </div>
-  
+
 {{-- end modal edit others --}}
