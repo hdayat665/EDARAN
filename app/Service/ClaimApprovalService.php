@@ -651,6 +651,34 @@ class ClaimApprovalService
         }
 
         $ids = $input['id'];
+        $status['hod'] = 'bucket';
+        $status['status'] = 'pending';
+
+        $cond[1] = ['tenant_id', Auth::user()->tenant_id];
+
+        GeneralClaim::where($cond)->whereIn('id', $ids)->update($status);
+
+        $data['status'] = config('app.response.success.status');
+        $data['type'] = config('app.response.success.type');
+        $data['title'] = config('app.response.success.title');
+        $data['msg'] = 'Success Approve Timesheet';
+
+        return $data;
+    }
+    public function skipAllClaim($r)
+    {
+        $input = $r->input();
+
+        if (!isset($input['id'])) {
+            $data['status'] = config('app.response.error.status');
+            $data['type'] = config('app.response.error.type');
+            $data['title'] = config('app.response.error.title');
+            $data['msg'] = 'Please select the claim submission first!';
+
+            return $data;
+        }
+
+        $ids = $input['id'];
         $status['hod'] = 'recommend';
         $status['status'] = 'pending';
 

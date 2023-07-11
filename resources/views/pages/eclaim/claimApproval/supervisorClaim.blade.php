@@ -52,7 +52,7 @@
                                     </ul>
                                 </div>
                                 <div class="col d-flex justify-content-end">
-                                    <a class="btn btn-primary" id="skipButton" style="display: none;" type="button">Skip the Queue</a>&nbsp;
+                                    <a class="btn btn-primary" id="skipButton" type="button">Skip the Queue</a>&nbsp;
                                     <a class="btn btn-primary" id="approveAllButton" type="button">Approve All</a>&nbsp;
                                     <button class="btn btn-primary" type="button" id="filter"> <i class="fa fa-filter" aria-hidden="true"></i></button>&nbsp;
                                     <!-- <button class="btn btn-primary" type="button"> <i class='far fa-file-pdf'></i></button>&nbsp; -->

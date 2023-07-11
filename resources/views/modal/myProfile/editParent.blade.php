@@ -43,7 +43,7 @@
                                 <div class="col-sm-6">
                                     <label for="lastname" class="form-label">New Identification Number*</label>
                                     <input type="text" id="idnumber7" name="idNo" value="{{ $parent->idNo ?? '' }}" class="form-control" placeholder="000000000000">
-                                    
+
                                 </div>
                             </div>
                         </div>
@@ -65,7 +65,7 @@
                             <div class="row">
                                 <div class="col-sm-12">
                                     <label for="passport" class="form-label">Passport Number</label>
-                                  
+
                                     <input type="text" id="passportparentedit" name="passport"  class="form-control" aria-describedby="passport" placeholder="PASSPORT NUMBER">
                                 </div>
                             </div>
@@ -73,7 +73,7 @@
                           <div class="col-sm-3">
                                     <label for="expirydate" class="form-label">Expiry Date*</label>
                                     <input type="text" id="expiryDateParentEdit" name="expiryDate"  placeholder="YYYY-MM-DD" class="form-control" aria-describedby="expirydate" disabled required>
-                                  
+
                                 </div>
                         <div class="col-sm-3">
                             <label for="issuing-country" class="form-label">Issuing Country*</label>
@@ -107,7 +107,7 @@
                                 <?php $relationship = relationshipFamily() ?>
                                 <option value="0" label="PLEASE CHOOSE"  ></option>
                                 @foreach ($relationship as $key => $status)
-                                    @if ($key >= 1 && $key <= 15)
+                                    @if ($key >= 1 && $key <= 17)
                                         <option value="{{$key}}"> {{$status}}</option>
                                     @endif
                                 @endforeach
@@ -144,7 +144,7 @@
                                 <div class="col-sm-6">
                                     <label for="lastname" class="form-label" >OKU Card Number*</label>
                                     <input type="number" id="okucard6" name="" value="" class="form-control" readonly placeholder="OKU CARD NUMBER">
-                                    
+
                                 </div>
                             </div>
                         </div>
