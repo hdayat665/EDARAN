@@ -490,7 +490,7 @@ class SettingService
         $getid = Location::select('id')
         ->where('country_id','=', $input['ref_country'])
         ->where('state_id','=', $input['ref_state'])
-        ->where('name','=', $input['ref_city'])
+        ->where('name','=', $input['ref_cityid'])
         ->where('postcode','=', $input['ref_postcode'])
         ->first();
 
@@ -505,7 +505,7 @@ class SettingService
             'address' => $input['address'],
             'address2' => $input['address2'],
 
-            'ref_city' => $getid->id,
+            'ref_cityid' => $getid->id,
             'tenant_id' => Auth::user()->tenant_id,
             'addedBy' => $user->username,
             'addedBy' => date('Y-m-d H:i:s'),
@@ -549,7 +549,7 @@ class SettingService
         $getid = Location::select('id')
         ->where('country_id','=', $input['ref_country'])
         ->where('state_id','=', $input['ref_state'])
-        ->where('name','=', $input['ref_city'])
+        ->where('name','=', $input['ref_cityid'])
         ->where('postcode','=', $input['ref_postcode'])
         ->first();
 
@@ -560,7 +560,7 @@ class SettingService
             'address' => $input['address'],
             'address2' => $input['address2'],
 
-            'ref_city' => $getid->id,
+            'ref_cityid' => $getid->id,
             'tenant_id' => Auth::user()->tenant_id,
             'modifiedBy' => $user->username,
             'modified_at' => date('Y-m-d H:i:s'),
@@ -1519,7 +1519,7 @@ class SettingService
     public function getBranchById($id)
     {
 
-        $data = Branch::join('location_cities as lc', 'branch.ref_city', '=', 'lc.id')
+        $data = Branch::join('location_cities as lc', 'branch.ref_cityid', '=', 'lc.id')
         ->where('branch.id', $id)
         ->first();
 

@@ -157,7 +157,7 @@
                         </div>
                         <div class="mb-2">
                             <label class="form-label">City*</label>
-                            <select class="form-select" name="ref_city" id="city_id" style="text-transform: uppercase;">
+                            <select class="form-select" name="ref_cityid" id="city_id" style="text-transform: uppercase;">
                                 <option type="text" value="" selected="selected">PLEASE CHOOSE</option>
 
 
@@ -254,7 +254,7 @@
                         </div>
                         <div class="mb-2">
                             <label class="form-label">City*</label>
-                            <select class="form-select" name="ref_city" id="cityE" style="text-transform: uppercase;">
+                            <select class="form-select" name="ref_cityid" id="cityE" style="text-transform: uppercase;">
                                 <option type="text"value="" label="" selected="selected">Please Choose</option>
                                 @foreach($city as $cty)
                                     <option value="{{ $cty->name }}" {{ old('name') == $cty->name ? 'selected' : '' }}>{{ $cty->name }}</option>

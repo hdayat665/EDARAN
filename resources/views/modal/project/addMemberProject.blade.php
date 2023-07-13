@@ -89,6 +89,7 @@
 
                         <div class="col-md-6">
                             <select class="form-select" name="branch" id="branchs" style="pointer-events: none; touch-action: none; background: #e9ecef;">
+                                <option value="" label=""></option>    
                                 <?php $branch = getBranchProject() ?>
                                 @foreach ($branch as $branchs)
                                 <option value="{{$branchs->id}}" >{{$branchs->branchName}}</option>
