@@ -32,6 +32,7 @@
                             <th class="text-nowrap">Petrol/Fares</th>
                             <th class="text-nowrap">Tolls</th>
                             <th class="text-nowrap">Parking</th>
+                            <th class="text-nowrap">Status</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -42,6 +43,25 @@
                         <td>RM0.00</td>
                         <td>RM0.00</td>
                         <td>
+                            <span class="btn-lg badge bg-red">unchecked</span>
+                        </td>
+                        <td>
+                            <a href="#" data-bs-toggle="dropdown" class="btn btn-primary btn-sm dropdown-toggle"></i> Actions <i class="fa fa-caret-down"></i></a>
+                            <div class="dropdown-menu">
+                            <a id="button-travel" class="dropdown-item"> Check</a>
+                            <a id="" class="dropdown-item"> Delete</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>YYYY-MM-DD</td>
+                        <td>16.5KM</td>
+                        <td>RM0.00</td>
+                        <td>RM0.00</td>
+                        <td>RM0.00</td>
+                        <td>
+                            <span class="btn-sm badge bg-green">checked</span>
+                        </td>
+                        <td>
                             <a href="#" data-bs-toggle="dropdown" class="btn btn-primary btn-sm dropdown-toggle"></i> Actions <i class="fa fa-caret-down"></i></a>
                             <div class="dropdown-menu">
                             <a id="button-travel" class="dropdown-item"> Check</a>
@@ -51,7 +71,7 @@
                     <tfoot>
                         <tr>
                             <td style="text-align:right">Total</td>
-                            <td>167.5KM</td>
+                            <td>RM20.00</td>
                             <td>RM60.00</td>
                             <td>RM30.00</td>
                             <td>RM14.00</td>
@@ -63,7 +83,6 @@
         </div>
     </div>
     <br>
-    <div class="">
         <div class="form-control tab-pane fade" id="default-tab-2">
             <div class="row p-2">
                 <div class="col-md-6">
@@ -128,6 +147,7 @@
                     </table>
                 </div>
             </div>
+            
             <div class="row p-2">
                 <div class="col-md-6">
 
@@ -148,10 +168,11 @@
                 </div>
             </div>
         </div>
-    </div>
+    
     <br>
-    <div class="row p-2">
+    
         <div class="form-control tab-pane fade" id="default-tab-3">
+        <div class="row p-2">
             <div class="row p-2">
                 <div class="col-md-6">
                     <h4>Others Table List</h4>
