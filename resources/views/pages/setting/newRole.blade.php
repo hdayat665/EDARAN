@@ -6,7 +6,7 @@
     <div class="panel panel">
         <div class="panel-heading">
             <div class="col-md-12 d-flex justify-content-end">
-                <a href="/newCreateRole" data-bs-toggle="modal" id="" class="btn btn-primary"><i class="fa fa-plus"></i> Create New System Role</a>
+                <a href="/newCreateRole" id="" class="btn btn-primary"><i class="fa fa-plus"></i> Create New System Role</a>
             </div>
             <h4 class="panel-title"></h4>
         </div>
