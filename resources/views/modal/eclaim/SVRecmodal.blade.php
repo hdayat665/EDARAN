@@ -1,4 +1,4 @@
-<div class="modal fade" id="travelModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="travelone" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" style="max-width: 1200px">
         <div class="modal-content">
             <div class="modal-header">
@@ -37,17 +37,57 @@
                             <th class="text-nowrap">Petrol/fares</th>
                             <th class="text-nowrap">Tolls&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
                             <th class="text-nowrap">Parking&nbsp;&nbsp;</th>
+                            <th class="text-nowrap">Status</th>
+                            <th class="text-nowrap">Action</th>
                         </tr>
                     </thead>
-                    <tbody id="tableRowTravelling">
+                    <!-- <tbody id="tableRowTravelling">
 
+                    </tbody> -->
+                    <tbody>
+                        <tr>
+                            <td>YYYY-MM-DD</td>
+                            <td>YYYY-MM-DD</td>
+                            <td>Edaran Office</td>
+                            <td>KLIA 2</td>
+                            <td>meeting with client</td>
+                            <td>Personal Car</td>
+                            <td>167.5KM</td>
+                            <td>RM50.00</td>
+                            <td>RM50.00</td>
+                            <td>RM50.00</td>
+                            <td>
+                                <input type="checkbox">
+                            </td>
+                            <td>
+                                <button type="submit" class="btn btn-primary btn-sm" id=""> Check</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>YYYY-MM-DD</td>
+                            <td>YYYY-MM-DD</td>
+                            <td>Edaran Office</td>
+                            <td>KLIA 2</td>
+                            <td>meeting with client</td>
+                            <td>Personal Car</td>
+                            <td>167.5KM</td>
+                            <td>RM50.00</td>
+                            <td>RM50.00</td>
+                            <td>RM50.00</td>
+                            <td>
+                                <input type="checkbox">
+                            </td>
+                            <td>
+                                <button type="submit" class="btn btn-primary btn-sm" id=""> Check</button>
+                            </td>
+                        </tr>
                     </tbody>
 
                 </table>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Back</button>
+                <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Check</button>
             </div>
         </div>
     </div>
@@ -377,50 +417,50 @@
                                                     <input readonly type="text" name="total" class="form-control" value="" id="total2Update">
                                                 </div>
                                             </div>
-                                            <br>
+                                            
                                             <div class="row p-2">
                                                 <div class="col md-3">
                                                     <label for="file">Supporting Document</label>
                                                 </div><div class="col md-3">
                                                     <label for="file"></label>
+                                                    <br>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="p-2"  id="laundrydivUpdate">
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-control">
-                                                <div class="row p-2">
-                                                    <label class="form-label">Laundry Allowance</label>
+                            <div class="row p-2"  id="laundrydivUpdate">
+                                <div class="col-md-6">
+                                    <div class="form-control">
+                                        <div class="row p-2">
+                                            <label class="form-label">Laundry Allowance</label>
+                                        </div>
+                                        <div class="row p-2">
+                                            <div class="col-md-4">
+                                                <label class="form-label">Amount</label>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <input type="number" name="" id="laundry_amount_update"class="form-control" placeholder="0.00">
+                                            </div>
+                                            </div>
+                                            <div class="row p-2">
+                                                <div class="col-md-4">
+                                                    <label class="form-label">Description</label>
                                                 </div>
-                                                <div class="row p-2">
-                                                    <div class="col-md-4">
-                                                        <label class="form-label">Amount</label>
-                                                    </div>
-                                                    <div class="col-md-8">
-                                                        <input type="number" name="" id="laundry_amount_update"class="form-control" placeholder="0.00">
-                                                    </div>
-                                                    </div>
-                                                    <div class="row p-2">
-                                                        <div class="col-md-4">
-                                                            <label class="form-label">Description</label>
-                                                        </div>
-                                                        <div class="col-md-8">
-                                                            <textarea class="form-control" name="" id="laundry_desc_update" rows="3"></textarea>
-                                                        </div>
-                                                    </div>
+                                                <div class="col-md-8">
+                                                    <textarea class="form-control" name="" id="laundry_desc_update" rows="3"></textarea>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+                            </div>
+                                
                     <div class="modal-footer">
                         <button type="button" class="btn btn-light" style="color: black" data-bs-dismiss="modal">Back</button>
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Edit</button>
-                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Check</button>
+                        <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Edit</button> -->
+                        <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Check</button>
                         </form>
                     </div>
                 </div>
@@ -484,7 +524,7 @@
                             <label class="form-label">Claim Category</label>
                         </div>
                         <div class="col-md-8">
-                            <input readonly type="text"  class="form-control" value="" id="claim_category_update">
+                            <input readonly type="text" class="form-control" value="" id="claim_category_update">
                         </div>
                     </div>
                     <div class="row p-2">
@@ -492,7 +532,7 @@
                             <label class="form-label">Amount</label>
                         </div>
                         <div class="col-md-8">
-                            <input type="text" readonly name="amount" class="form-control" value="RM0.00" id="amount_other_update">
+                            <input type="text" name="amount" class="form-control" value="RM0.00" id="amount_other_update">
                         </div>
                     </div>
                     <div class="row p-2">
@@ -500,7 +540,7 @@
                             <label class="form-label">Description</label>
                         </div>
                         <div class="col-md-8">
-                            <textarea readonly class="form-control" name="claim_desc" id="desc_other_update" rows="4"></textarea>
+                            <textarea class="form-control" name="claim_desc" id="desc_other_update" rows="4"></textarea>
                         </div>
                     </div>
                     <div class="row p-2">
@@ -512,6 +552,10 @@
                         </div>
                     </div>
                     <div class="modal-footer">
+                        <button type="button" class="btn btn-light" style="color: black" data-bs-dismiss="modal">Back</button>
+                        <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Check</button>
+                        </form>
+                    </div>
                     </form>
                     </div>
                 </div>
