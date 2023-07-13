@@ -7,7 +7,7 @@
 
                 {{-- ROW 1 --}}
                 <div class="row p-2">
-                    <div class="col-md-6">
+                    <div class="col-md-5">
                         <div class="form-control">
                             <div class="row p-2">
                                 <div class="col-md-4">
@@ -107,20 +107,35 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-1">
+                    <div class="col-md-2">
                         <div class="row p-2">
                             <div class="col d-flex justify-content-end">
-                                <button class="btn btn-primary" id="" type="submit">Cancel</button>
+                                <a class="btn btn-secondary" data-id="{{ $general->id }}" style="color: black; width:60%" type="submit"> Cancel</a>
+                                <!-- {{-- <button class="btn btn-primary" id="" type="submit">Cancel</button> --}} -->
                             </div>
                         </div>
                         <div class="row p-2">
                             <div class="col d-flex justify-content-end">
-                                <button class="btn btn-primary" id="" type="submit" style="width: 100%">Print</button>
+                                <a href="javascript:;" class="btn btn-warning" style="color: black; width:60%" data-bs-toggle="modal" data-bs-target="#modalamend">Amend</a>
+                                <!-- {{-- <button class="btn btn-primary" id="" type="submit" style="width: 100%">Print</button> --}} -->
                             </div>
                         </div>
                         <div class="row p-2">
                             <div class="col d-flex justify-content-end">
-                                <button class="btn btn-primary" id="" type="submit" style="width: 100%"> Back</button>
+                                <a href="javascript:;" class="btn btn-danger" style="color: black; width:60%" data-bs-toggle="modal" data-bs-target="#modalreject"> Reject</a>
+                                <!-- {{-- <button class="btn btn-primary" id="" type="submit" style="width: 100%"> Back</button> --}} -->
+                            </div>
+                        </div>
+                        <div class="row p-2">
+                            <div class="col d-flex justify-content-end">
+                                <a class="btn btn-lime" id="approveButton" data-id="{{ $general->id }}" style="color: black" type="submit">Recommend</a>
+                                <!-- {{-- <button class="btn btn-primary" id="" type="submit" style="width: 100%"> Back</button> --}} -->
+                            </div>
+                        </div>
+                        <div class="row p-2">
+                            <div class="col d-flex justify-content-end">
+                                <a class="btn btn-secondary" data-id="{{ $general->id }}" style="color: black; width:60%" type="submit"> Print</a>
+                                <!-- {{-- <button class="btn btn-primary" id="" type="submit">Cancel</button> --}} -->
                             </div>
                         </div>
                     </div>
@@ -340,7 +355,24 @@
                 {{-- ROW 4 --}}
                 <div class="row p-2">
                     <div class="col-md-8">
-                        @include('pages.eclaim.tableSVRec')
+                        <div class="form-control">
+                            <div class="row p-2">
+                                    <div class="col d-flex justify-content-start">
+                                        <ul class="nav nav-pills">
+                                            <li class="nav-item">
+                                                <a href="#default-tab-1" data-bs-toggle="tab" class="nav-link active">Travelling</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a href="#default-tab-2" data-bs-toggle="tab" class="nav-link ">Subsistence</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a href="#default-tab-3" data-bs-toggle="tab" class="nav-link ">Others</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                            </div>
+                            @include('pages.eclaim.tableSVRec')
+                        </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-control">
@@ -378,7 +410,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="row p-2">
+                {{-- <div class="row p-2">
                     <div class="col align-self-start">
                         <a href="/claimApprovalView/2" class="btn btn-light" style="color: black;" type="submit"><i class="fa fa-arrow-left"></i> Back</a>
                     </div>
@@ -391,9 +423,11 @@
                             <a class="btn btn-lime" id="approveButton" data-id="{{ $general->id }}" style="color: black" type="submit"> Approve</a>
                         @endif
                         </div>
-                </div>
+                </div> --}}
             </div>
         </div>
     </div>
     @include('modal.eclaimApproval.hodDetailMtcModal')
 @endsection
+
+

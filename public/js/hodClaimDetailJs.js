@@ -1,8 +1,8 @@
 //TRAVEL MODAL
-$(document).on("click", "#mcvTravelling", function () {
+// $(document).on("click", "#mcvTravelling", function () {
 
-    $("#travelModal").modal("show");
-});
+//     $("#travelModal").modal("show");
+// });
 
 //SUBSISTENCE MODAL
 $(document).on("click", "#mcvSubsistence", function () {
