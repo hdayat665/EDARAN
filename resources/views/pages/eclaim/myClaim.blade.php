@@ -47,10 +47,11 @@
                     </div>
                 </div> -->
                 <br>
-                <div class="form-control">
+                
                     <div class="panel-body">
                         <div class="row p-2">
-                            <div class="col-sm-4">
+                            <div class="form-control">
+                            <div class="col-sm-12">
                                 <div class="card text-center border-0">
                                     <div class="card-header">
                                         <ul class="nav nav-pills card-header-pills">
@@ -114,12 +115,11 @@
                                                                 @if ($checkMonth['status'] == 'active' || $checkMonth['status'] == 'paid')
                                                                     <td>{{ $data['year'] }}</td>
                                                                     <td>{{ $data['month'] }}</td>
-                                                                    <td><span class="badge bg-lime">Open</span></td>
-                                                                    <td></td>
-                                                                @else
+                                                                    <td><span class="badge bg-info">Pending</span></td>
+                                                                    <td><a href="/monthlyClaimView/{{ $checkMonth['id'] }}" type="button" class="btn btn-primary btn-sm">View</a></td>                                                                @else
                                                                     <td>{{ $data['year'] }}</td>
                                                                     <td>{{ $data['month'] }}</td>
-                                                                    <td><span class="badge bg-lime">Open</span></td>
+                                                                    <td><span class="badge bg-warning">Draft</span></td>
                                                                     <td><a href="/monthClaimEditView/edit/month/{{ $checkMonth['id'] }}" type="button" class="btn btn-primary btn-sm">Update</a></td>
                                                                 @endif
                                                             @else
@@ -141,26 +141,32 @@
                                 </div>
                                 <!-- END card -->
                             </div>
-                            <div class=" col-sm-8">
-                                <!-- BEGIN card -->
-                                <div class="card text-center border-0">
-                                    <div class="card-header">
-                                        <ul class="nav nav-pills card-header-pills">
-                                            <li class="nav-item"><a class="nav-link active " data-bs-toggle="tab" href="#card-pill-1" id="claimnav">Claim</a></li>
-                                            <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#card-pill-2" id="cashnav">Cash Advance</a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="card-body">
-                                        <div class="tab-content p-0 m-0">
-                                            @include('pages.eclaim.tabClaim')
-                                            @include('pages.eclaim.tabCashAdvance')
+                            </div>
+                        </div>
+                        <div class="row p-2">
+                            <div class="form-control">
+                                <div class=" col-sm-12">
+                                    <!-- BEGIN card -->
+                                    <div class="card text-center border-0">
+                                        <div class="card-header">
+                                            <ul class="nav nav-pills card-header-pills">
+                                                <li class="nav-item"><a class="nav-link active " data-bs-toggle="tab" href="#card-pill-1" id="claimnav">Claim</a></li>
+                                                <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#card-pill-2" id="cashnav">Cash Advance</a></li>
+                                            </ul>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="tab-content p-0 m-0">
+                                                @include('pages.eclaim.tabClaim')
+                                                @include('pages.eclaim.tabCashAdvance')
+                                            </div>
                                         </div>
                                     </div>
+                                </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                
             </div>
         </div>
     </div>
