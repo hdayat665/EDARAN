@@ -591,6 +591,8 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('/getAppealById/{id}', 'getAppealById');
             Route::post('/approveAllTimesheetAppeal', 'approveAllTimesheetAppeal');
             Route::get('/getApproverAppeal', 'getApproverAppeal');
+            Route::get('/getStateById/{id}', 'getStateById');
+            Route::get('/getWorkingHourWeekendbyState/{stateid}', 'getWorkingHourWeekendbyState');
 
         });
 
