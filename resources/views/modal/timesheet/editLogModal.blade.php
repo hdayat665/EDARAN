@@ -39,7 +39,7 @@
                             <label for="Office-Log" class="form-label">My Project*</label>
                             <select class="form-select" id="project_id_edit" name="project_id" aria-label="Default select example" style="">
                                 <option class="form-label" value="">PLEASE CHOOSE</option>
-                                <?php $projects = project_memberaddl($user_id) ?>
+                                <?php $projects = project_memberaddl($data['user_id']); ?>
                                 @foreach ($projects as $project)
                                 <option value="{{$project->id}}">{{$project->project_name}} - {{$project->project_code}}</option>
                                 @endforeach
@@ -66,7 +66,7 @@
                             <label for="issuing-country" class="form-label">Activity Name*</label>
                             <select class="form-select" id="activity_name_edit1" name="activity_name">
                                 <option class="form-label" value="">PLEASE CHOOSE </option>
-                                <?php $activitys = activityName($department_id) ?> 
+                                <?php $activitys = activityName($data['department_id']); ?>
                                 @foreach ($activitys as $activity)
                                 <option value="{{$activity->id}}">{{$activity->activity_name}}</option>
                                 @endforeach
@@ -77,7 +77,7 @@
                             <label for="issuing-country" class="form-label">Activity Name*</label>
                             <select class="form-select" id="activity_name_edit2" name="activity_name" style="pointer-events:none;background:#e9ecef;">
                                 <option class="form-label" value="">PLEASE CHOOSE </option>
-                                <?php $activitys = activityName1($department_id) ?> 
+                                <?php $activitys = activityName1($data['department_id']); ?>
                                 @foreach ($activitys as $activity)
                                 <option value="{{$activity->id}}">{{$activity->activity_name}}</option>
                                 @endforeach
@@ -132,7 +132,7 @@
                             <label for="Office-Log" class="form-label">My Project*</label>
                             <select class="form-select" id="officeLogProjectEdit" name="office_log_project" aria-label="Default select example">
                                 <option class="form-label" value="">PLEASE CHOOSE</option>
-                                <?php $projects = project_memberaddl($user_id) ?>
+                                <?php $projects = project_memberaddl($data['user_id']); ?>
                                 @foreach ($projects as $project)
                                 <option value="{{$project->id}}">{{$project->project_name}} - {{$project->project_code}}</option>
                                 @endforeach

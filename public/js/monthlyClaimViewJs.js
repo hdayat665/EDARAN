@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 
 $("document").ready(function () {
 
@@ -293,16 +294,27 @@ $("document").ready(function () {
         $("#subsModal").modal("show");
     });
 
+=======
+//TRAVEL MODAL
+$(document).on("click", "#mcvTravelling", function () {
+>>>>>>> Stashed changes
 
 });
 
+<<<<<<< Updated upstream
+=======
+//SUBSISTENCE MODAL
+$(document).on("click", "#mcvSubsistence", function () {
+>>>>>>> Stashed changes
 
 
+//OTHERS MODAL
 $(document).on("click", "#mcvOthers", function () {
 
     $("#othersModal").modal("show");
 });
 
+//ATTACHMENT FILE
 $(document).on("click", "#btnTAttachment", function () {
 
     $("#travellingAttachment").modal("show");
@@ -365,4 +377,7 @@ $("#subsTableUpdate").DataTable({
         }
     ]
 });
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes

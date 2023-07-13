@@ -226,7 +226,7 @@ $(document).ready(function () {
                 url: "/getBranchById/" + id,
             });
         }
-        
+
     $(document).on("click", "#deleteButton", function () {
         id = $(this).data("id");
         requirejs(["sweetAlert2"], function (swal) {
@@ -322,7 +322,7 @@ $(document).ready(function () {
                 address: "required",
                 ref_country: "required",
                 ref_state: "required",
-                ref_city: "required",
+                location_cityid: "required",
                 ref_postcode: "required",
             },
             messages: {
@@ -332,7 +332,7 @@ $(document).ready(function () {
                 address: "Please Insert Address 1",
                 ref_country: "Please Choose Country",
                 ref_state: "Please Choose State",
-                ref_city: "Please Choose City",
+                location_cityid: "Please Choose City",
                 ref_postcode: "Please Choose Postcode",
             },
             submitHandler: function (form) {
@@ -381,7 +381,7 @@ $(document).ready(function () {
                 branchType: "required",
                 address: "required",
                 ref_postcode: "required",
-                ref_city: "required",
+                location_cityid: "required",
                 ref_state: "required",
                 ref_country: "required",
             },
@@ -392,7 +392,7 @@ $(document).ready(function () {
                 branchType: "Please Choose Branch Type",
                 address: "Please Insert Address 1",
                 ref_postcode: "Please Choose Postcode",
-                ref_city: "Please Choose City",
+                location_cityid: "Please Choose City",
                 ref_state: "Please Choose State",
                 ref_country: "Please Choose Country",
             },
