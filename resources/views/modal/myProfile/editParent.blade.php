@@ -34,8 +34,8 @@
                             <div class="row">
                                 <div class="col-sm-6 ">
                                     <div class="form-check form-switch align-right">
-                                        <input class="form-check-input partCheck9" value="" type="checkbox" name=""  id="">
-                                        <label class="form-check-label" for="citizen">
+                                        <input class="form-check-input partCheck9" value="on" type="checkbox" name="non_citizen" {{( $parent->non_citizen ?? '' ) ? 'checked' : ''}} id="non_citizen">
+                                        <label class="form-label" for="citizen">
                                             Non-Citizen
                                         </label>
                                     </div>
@@ -135,7 +135,7 @@
                             <div class="row">
                                 <div class="col-sm-6 ">
                                     <div class="form-check form-switch align-right">
-                                        <input class="form-check-input okuCheck6 " value="" type="checkbox" name=""  id="">
+                                        <input class="form-check-input okuCheck6" value="on" {{($parent->oku_status ?? '') ? 'checked' : ''}} type="checkbox" name="oku_status" id="oku_status">
                                         <label class="form-check-label" for="citizen" >
                                             OKU?
                                         </label>
@@ -143,7 +143,7 @@
                                 </div>
                                 <div class="col-sm-6">
                                     <label for="lastname" class="form-label" >OKU Card Number*</label>
-                                    <input type="number" id="okucard6" name="" value="" class="form-control" readonly placeholder="OKU CARD NUMBER">
+                                    <input type="number" id="okucard6" name="okuCardNum" value="" class="form-control" readonly placeholder="OKU CARD NUMBER">
 
                                 </div>
                             </div>

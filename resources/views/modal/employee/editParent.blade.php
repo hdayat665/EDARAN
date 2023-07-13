@@ -21,8 +21,8 @@
                     <div class="row p-2">
                         <div class="col-sm-6">
                             <label for="firstname" class="form-label">Full Name*</label>
-                            <input type="text" id="fullNameP1" name="" class="form-control" aria-describedby="" readonly placeholder="FULL NAME">
-                            
+                            <input type="text" id="fullNameP1" name="fullName" class="form-control" aria-describedby="" readonly placeholder="FULL NAME">
+
                         </div>
                         <div class="col-sm-6">
                             <label for="lastname" class="form-label">Old Identification Number</label>
@@ -34,7 +34,7 @@
                             <div class="row">
                                 <div class="col-sm-6 ">
                                     <div class="form-check form-switch align-right">
-                                        <input class="form-check-input partCheck7 " value="" type="checkbox" name=""  id="">
+                                        <input class="form-check-input partCheck7 " value="on" type="checkbox" name="non_citizen" {{( $parent->non_citizen ?? '' ) ? 'checked' : ''}} id="non_citizen">
                                         <label class="form-check-label " for="citizen">
                                             Non-Citizen
                                         </label>
@@ -42,8 +42,8 @@
                                 </div>
                                 <div class="col-sm-6">
                                     <label for="lastname" class="form-label" >New Identification Number*</label>
-                                    <input type="number" id="idno7" name="" value="" class="form-control" placeholder="000000000000">
-                                    
+                                    <input type="number" id="idno7" name="idNo" value="" class="form-control" placeholder="000000000000">
+
                                 </div>
                             </div>
                         </div>
@@ -52,7 +52,7 @@
                             <div class="row">
                                 <div class="col-sm-6">
                                     <label for="dob" class="form-label" >ID Attachment</label>
-                                    <input type="file" id="" name="" class="form-control" aria-describedby="">
+                                    <input type="file" id="idFile" name="idFile" class="form-control" aria-describedby="">
                                     @if ($parent->idFile ?? '')
                                         Click <a href="{{ route('download', ['filename' => $parent->idFile]) }}">here</a> to see ID Attachment.
                                     @endif
@@ -65,7 +65,7 @@
                             <div class="row">
                                 <div class="col-sm-12">
                                     <label for="passport" class="form-label">Passport Number</label>
-                                  
+
                                     <input type="text" id="passportparentedit" name="passport"  class="form-control" aria-describedby="passport" placeholder="PASSPORT NUMBER">
                                 </div>
                             </div>
@@ -73,7 +73,7 @@
                           <div class="col-sm-3">
                                     <label for="expirydate" class="form-label" >Expiry Date</label>
                                     <input type="text" id="expirydate7" value="{{ date_format(date_create($user->expiryDate), 'Y-m-d') }}" name="expiryDate"  placeholder="YYYY-MM-DD" class="form-control" aria-describedby="expirydate" >
-                                  
+
                             </div>
                         <div class="col-sm-3">
                             <label for="issuing-country" class="form-label" >Issuing Country</label>
@@ -132,7 +132,7 @@
                             <div class="row">
                                 <div class="col-sm-6 ">
                                     <div class="form-check form-switch align-right">
-                                        <input class="form-check-input okuCheck6 " value="" type="checkbox" name=""  id="">
+                                        <input class="form-check-input okuCheck6 " value="on" {{($parent->oku_status ?? '') ? 'checked' : ''}} type="checkbox" name="oku_status" id="oku_status">
                                         <label class="form-check-label" for="citizen" >
                                             OKU?
                                         </label>
@@ -140,8 +140,8 @@
                                 </div>
                                 <div class="col-sm-6">
                                     <label for="lastname" class="form-label" >OKU Card Number*</label>
-                                    <input type="number" id="okucard6" name="" value="" class="form-control" readonly placeholder="OKU CARD NUMBER">
-                                    
+                                    <input type="number" id="okucard6" name="okuCardNum" value="" class="form-control"  placeholder="OKU CARD NUMBER">
+
                                 </div>
                             </div>
                         </div>
@@ -149,7 +149,7 @@
                             <div class="row">
                                 <div class="col-sm-6">
                                     <label for="dob" class="form-label">OKU Attachment*</label>
-                                    <input type="file" id="okuattach6" name="" class="form-control" style="pointer-events: none" aria-describedby="">
+                                    <input type="file" id="okuattach6" name="okuFile" class="form-control"  aria-describedby="">
                                     @if ($parent->okuFile ?? '')
                                     Click <a href="{{ route('download', ['filename' => $parent->okuFile]) }}">here</a> to see OKU ID.
                                     @endif
@@ -161,8 +161,8 @@
                     <div class="row p-2">
                         <div class="col-sm-6">
                             <div class="form-check form-switch align-right">
-                                <input class="form-check-input" type="checkbox" name="sameAddress" id="same-address">
-                                <label class="form-check-label" for="same-address">
+                                <input class="form-check-input" type="checkbox" name="sameAddress" id="same-addressEditParent">
+                                <label class="form-check-label" for="same-addressEditParent">
                                     Same as permenant address
                                 </label>
                             </div>
@@ -216,12 +216,13 @@
                         </div>
                     </div>
 
-                </form>
+
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-primary" id="editParent">Save</button>
+                <button class="btn btn-primary" id="editParent">Update</button>
             </div>
+        </form>
         </div>
     </div>
 </div>
