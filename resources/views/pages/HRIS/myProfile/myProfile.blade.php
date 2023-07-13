@@ -105,7 +105,7 @@
                                 <div class="row">
                                     <div class="col-sm-6 ">
                                         <div class="form-check form-switch align-right">
-                                            <input class="form-check-input partCheck" value="on" type="checkbox" name="nonNetizen" {{($profile->nonNetizen ?? '') ? 'checked' : ''}} id="citizen">
+                                            <input class="form-check-input partCheck" value="on" type="checkbox" name="nonNetizen" {{($profile->nonNetizen ?? '') ? 'checked' : ''}}>
                                             <label class="form-label" for="citizen">
                                                 Non-Citizen
                                             </label>
@@ -131,7 +131,7 @@
                                 @endif
                             </div>
 
-                            
+
                             {{-- </div>
                             <div class="col-sm-3 ">
                                 <div class="row p-2"></div>
@@ -142,7 +142,7 @@
                                 </span>
                             @endif
                                </div>
-                            </div> --}}                      
+                            </div> --}}
                         </div>
 
                         <div class="row p-2">
@@ -178,7 +178,7 @@
                                     </optgroup>
                                 </select>
                                 {{-- <input type="hidden" name="issuingCountry" id=""> --}}
-                            </div> 
+                            </div>
                         </div>
                         <div class="row p-2">
                             <div class="col-sm-6">
@@ -263,7 +263,7 @@
                                 @if ($profile->okuFile)
                                     Click <a href="{{ route('download', ['filename' => $profile->okuFile]) }}">here</a> to see ID Attachment.
                                 @endif
-                            </div> 
+                            </div>
                         </div>
                         <hr class="mt-5">
                         <h4 class="p-2">Contact Details</h4>
@@ -299,7 +299,7 @@
                         <div class="row p-2">
                             <div class="modal-footer">
                                 <button type="submit" id="saveProfile" class="btn btn-primary">Update</button>
-                                
+
                                 <a class="btn btn-white btnNext" >Next</a>
                             </div>
                         </div>
