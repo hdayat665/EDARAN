@@ -1,8 +1,8 @@
 //TRAVEL MODAL
-// $(document).on("click", "#mcvTravelling", function () {
+$(document).on("click", "#button-travel", function () {
 
-//     $("#travelModal").modal("show");
-// });
+    $("#travelone").modal("show");
+});
 
 //SUBSISTENCE MODAL
 $(document).on("click", "#mcvSubsistence", function () {
@@ -45,6 +45,36 @@ $("#subsistence").DataTable({
         [5, 10, 25, 50, -1],
         [5, 10, 25, 50, "All"],
     ],
+});
+
+// Get all tab links
+var tabLinks = document.querySelectorAll('.nav-link');
+
+// Get all tab content elements
+var tabContents = document.querySelectorAll('.tab-pane');
+
+// Add click event listener to each tab link
+tabLinks.forEach(function(link) {
+    link.addEventListener('click', function() {
+        // Hide all tab content elements
+        tabContents.forEach(function(content) {
+            content.style.display = 'none';
+        });
+
+        // Show the corresponding tab content element
+        var targetId = this.getAttribute('href');
+        var targetContent = document.querySelector(targetId);
+        targetContent.style.display = 'block';
+
+        // Hide other tabs
+        tabLinks.forEach(function(otherLink) {
+            if (otherLink !== link) {
+                var otherTargetId = otherLink.getAttribute('href');
+                var otherTargetContent = document.querySelector(otherTargetId);
+                otherTargetContent.style.display = 'none';
+            }
+        });
+    });
 });
 
 ///////////////////////////////////////////////////////////////

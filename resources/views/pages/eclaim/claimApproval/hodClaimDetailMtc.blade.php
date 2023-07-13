@@ -108,12 +108,11 @@
                         </div>
                     </div>
                     <div class="col-md-2">
-                        <div class="row p-2">
+                        <!-- <div class="row p-2">
                             <div class="col d-flex justify-content-end">
                                 <a class="btn btn-secondary" data-id="{{ $general->id }}" style="color: black; width:60%" type="submit"> Cancel</a>
-                                <!-- {{-- <button class="btn btn-primary" id="" type="submit">Cancel</button> --}} -->
                             </div>
-                        </div>
+                        </div> -->
                         <div class="row p-2">
                             <div class="col d-flex justify-content-end">
                                 <a href="javascript:;" class="btn btn-warning" style="color: black; width:60%" data-bs-toggle="modal" data-bs-target="#modalamend">Amend</a>
@@ -354,7 +353,7 @@
 
                 {{-- ROW 4 --}}
                 <div class="row p-2">
-                    <div class="col-md-8">
+                    <div class="col-md-12">
                         <div class="form-control">
                             <div class="row p-2">
                                     <div class="col d-flex justify-content-start">
@@ -374,7 +373,7 @@
                             @include('pages.eclaim.tableSVRec')
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <!-- <div class="col-md-4">
                         <div class="form-control">
                             <h3>Claim History</h3>
                             <div class="card">
@@ -408,7 +407,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
                 {{-- <div class="row p-2">
                     <div class="col align-self-start">
@@ -431,3 +430,4 @@
 @endsection
 
 
+                
