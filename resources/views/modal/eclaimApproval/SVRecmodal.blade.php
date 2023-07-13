@@ -37,10 +37,50 @@
                             <th class="text-nowrap">Petrol/fares</th>
                             <th class="text-nowrap">Tolls&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
                             <th class="text-nowrap">Parking&nbsp;&nbsp;</th>
+                            <th class="text-nowrap">Status</th>
+                            <th class="text-nowrap">Action</th>
                         </tr>
                     </thead>
-                    <tbody id="tableRowTravelling">
+                    <!-- <tbody id="tableRowTravelling">
 
+                    </tbody> -->
+                    <tbody>
+                        <tr>
+                            <td>YYYY-MM-DD</td>
+                            <td>YYYY-MM-DD</td>
+                            <td>Edaran Office</td>
+                            <td>KLIA 2</td>
+                            <td>meeting with client</td>
+                            <td>Personal Car</td>
+                            <td>167.5KM</td>
+                            <td>RM50.00</td>
+                            <td>RM50.00</td>
+                            <td>RM50.00</td>
+                            <td>
+                                <input class="form-check-input" type="checkbox" id="checkbox1" checked />   
+                            </td>
+                            <td>
+                                <button type="submit" class="btn btn-primary btn-sm" id=""> Check</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>YYYY-MM-DD</td>
+                            <td>YYYY-MM-DD</td>
+                            <td>Edaran Office</td>
+                            <td>KLIA 2</td>
+                            <td>meeting with client</td>
+                            <td>Personal Car</td>
+                            <td>167.5KM</td>
+                            <td>RM50.00</td>
+                            <td>RM50.00</td>
+                            <td>RM50.00</td>
+                            <td>
+                                <input type="checkbox">
+                            </td>
+                            <td>
+                                <button type="submit" class="btn btn-primary btn-sm" id=""> Check</button>
+                            </td>
+                        </tr>
                     </tbody>
 
                 </table>
@@ -103,14 +143,21 @@
             <div class="row p-2">
                 <div class="col md-3">
                     <label class="form-label">Claim for</label>
+                    <td>
+                        <label href="#" data-bs-toggle="dropdown" class="btn btn-primary btn-sm dropdown-toggle" readonly></label>
+                        <div class="dropdown-menu">
+                        <a type="submit" id="" class="dropdown-item"> with Cash Advance</a>
+                        <a type="submit" id="" class="dropdown-item"> without Cash Advance</a>
+                    </td>
                 </div>
-                <div class="col md-4">
-                    <input data-bs-toggle="dropdown" class="btn btn-light btn-sm dropdown-toggle" style="color:black" value="Cash Advance"></i></input>
-                    <div class="dropdown-menu">
-                        <a id="" class="dropdown-item"> Cash Advance</a>
-                        <a id="" class="dropdown-item"> Without Cash Advance</a>
-                    {{-- <input type="text" class="form-control" readonly value='RM'> --}}
-                </div>
+                <!-- <div class="col md-4">
+                    <td>
+                        <label href="#" data-bs-toggle="dropdown" class="btn btn-primary btn-sm dropdown-toggle" readonly></label>
+                        <div class="dropdown-menu">
+                        <a type="submit" id="" class="dropdown-item"> with Cash Advance</a>
+                        <a type="submit" id="" class="dropdown-item"> without Cash Advance</a>
+                    </td>
+                </div> -->
             </div>
             <div class="modal-body">
                 <form id="updateSubsMtc">

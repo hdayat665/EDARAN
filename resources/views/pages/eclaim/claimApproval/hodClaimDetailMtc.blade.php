@@ -113,6 +113,8 @@
                                 <a class="btn btn-secondary" data-id="{{ $general->id }}" style="color: black; width:60%" type="submit"> Cancel</a>
                             </div>
                         </div> -->
+                        @if ($general->supervisor == 'recommend')
+                        @else
                         <div class="row p-2">
                             <div class="col d-flex justify-content-end">
                                 <a href="javascript:;" class="btn btn-warning" style="color: black; width:60%" data-bs-toggle="modal" data-bs-target="#modalamend">Amend</a>
@@ -131,6 +133,7 @@
                                 <!-- {{-- <button class="btn btn-primary" id="" type="submit" style="width: 100%"> Back</button> --}} -->
                             </div>
                         </div>
+                        @endif
                         <div class="row p-2">
                             <div class="col d-flex justify-content-end">
                                 <a class="btn btn-secondary" data-id="{{ $general->id }}" style="color: black; width:60%" type="submit"> Print</a>
@@ -426,7 +429,7 @@
             </div>
         </div>
     </div>
-    @include('modal.eclaimApproval.hodDetailMtcModal')
+    <!-- @include('modal.eclaimApproval.hodDetailMtcModal') -->
 @endsection
 
 
