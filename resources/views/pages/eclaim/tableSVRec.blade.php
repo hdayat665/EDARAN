@@ -48,7 +48,7 @@
                         <td>
                             <a href="#" data-bs-toggle="dropdown" class="btn btn-primary btn-sm dropdown-toggle"></i> Actions <i class="fa fa-caret-down"></i></a>
                             <div class="dropdown-menu">
-                            <a id="button-travel" class="dropdown-item"> Check</a>
+                            <a id="buttontravel" class="dropdown-item"> Check</a>
                             <a id="" class="dropdown-item"> Delete</a>
                         </td>
                     </tr>
@@ -64,7 +64,7 @@
                         <td>
                             <a href="#" data-bs-toggle="dropdown" class="btn btn-primary btn-sm dropdown-toggle"></i> Actions <i class="fa fa-caret-down"></i></a>
                             <div class="dropdown-menu">
-                            <a id="button-travel" class="dropdown-item"> Check</a>
+                            <a  class="dropdown-item"> Check</a>
                             <a id="" class="dropdown-item"> Delete</a>
                         </td>
                     </tr>
@@ -169,7 +169,6 @@
             </div>
         </div>
     
-    <br>
     
         <div class="form-control tab-pane fade" id="default-tab-3">
         <div class="row p-2">
@@ -186,7 +185,7 @@
             </div>
             <div class="row p-2">
                 <div class="col md-6">
-                    <table id="" class="table table-striped table-bordered align-middle">
+                    <table id="others" class="table table-striped table-bordered align-middle">
                         <thead>
                             <tr>
                                 <th class="text-nowrap">Claim Category</th>
