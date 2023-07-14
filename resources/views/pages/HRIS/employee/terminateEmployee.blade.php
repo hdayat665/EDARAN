@@ -25,22 +25,21 @@
                         <label for="recipient-name" class="col-form-label">Exit Type*</label>
                         <select class="form-select" name="employmentDetail">
                             <option value="" label="PLEASE CHOOSE" selected="selected">PLEASE CHOOSE </option>
-                            <option value="1" label="DECEASED"></option>
-                            <option value="2" label="DISMISSED"></option>
-                            <option value="3" label="LAID-OFF"></option>
-                            <option value="4" label="CONTRACT NOT RENEWED"></option>
-                            <option value="5" label="RESIGN-COMPANY REQUESTED"></option>
-                            <option value="6" label="RESIGN"></option>
-                            <option value="7" label="RETIREMENT"></option>
-                            <option value="8" label="OTHERS"></option>
+                            <option value="1" label="1.DECEASED"></option>
+                            <option value="2" label="2.DISMISSED"></option>
+                            <option value="3" label="3.RETRENCHED"></option>
+                            <option value="4" label="4.END OF CONTRACT"></option>
+                            <option value="5" label="5.RESIGNED"></option>
+                            <option value="6" label="6.RETIREMENT"></option>
+                            <option value="7" label="7.OTHERS"></option>
                         </select>
-                        <label for="recipient-name" class="col-form-label">Remarks*</label>
+                        <label for="recipient-name" class="col-form-label">Remarks</label>
                         <textarea class="form-control" name="remarks" placeholder="Remarks" rows="3"></textarea>
 
                         <label for="recipient-name" class="col-form-label">Attachments*</label><br>
                         <input type="file" class="form-control" name="file">
                     </div>
-                
+
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                     <button id="submit" class="btn btn-primary">Submit</button>

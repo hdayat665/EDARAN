@@ -448,15 +448,13 @@ class ProfileService
                 }
             }
 
-            if ($_FILES['okuID']['name'])
-            {
-                $idOKU = upload($r->file('okuID'));
-                $input['okuID'] = $idOKU['filename'];
-
-                if (!$input['okuID']) {
-                    unset($input['okuID']);
-                }
+            if (isset($_FILES['okuID']['name'])) {
+                $payslip = upload(request()->file('okuID'));
+                $input['okuID'] = $payslip['filename'];
+            } else {
+                $input['okuID'] = null;
             }
+
 
             if(!$input['DOM'])
             {
@@ -522,7 +520,6 @@ class ProfileService
     public function addCompanion($r)
     {
         $input = $r->input();
-
         $id = Auth::user()->id;
 
         $companion = UserCompanion::where('user_id', $id)->count();
@@ -1301,31 +1298,66 @@ class ProfileService
 
     public function updateAddressDetails($r)
     {
+
         $input = $r->input();
-
+        //   dd($input);
         $user_id = Auth::user()->id;
-        $id = $input['id'] ?? 1;
+        $id = $input['id'];
+        $data1 = $input['addressType'];
 
-        $user = UserAddress::where('id', $id)->first();
+        $user = UserAddress::find($id);
 
-        if(!$user)
-        {
-            $data['status'] = config('app.response.error.status');
-            $data['type'] = config('app.response.error.type');
-            $data['title'] = config('app.response.error.title');
-            $data['msg'] = 'Address not found';
 
-        } else {
+            if(!$user)
+            {
+                $data['status'] = config('app.response.error.status');
+                $data['type'] = config('app.response.error.type');
+                $data['title'] = config('app.response.error.title');
+                $data['msg'] = 'Address not found';
 
-            $user->update($input);
+            } else {
 
-            $data['status'] = config('app.response.success.status');
-            $data['type'] = config('app.response.success.type');
-            $data['title'] = config('app.response.success.title');
-            $data['msg'] = 'Address is updated.';
-        }
+                $input = [
+                    'addressType' => $data1
+                ];
+
+                UserAddress::where('id', $id)->update($input);
+
+
+                $data['status'] = config('app.response.success.status');
+                $data['type'] = config('app.response.success.type');
+                $data['title'] = config('app.response.success.title');
+                $data['msg'] = 'Address is updated.';
+            }
+
 
         return $data;
+
+        // $input = $r->input();
+
+        // $user_id = Auth::user()->id;
+        // $id = $input['id'] ?? 1;
+
+        // $user = UserAddress::where('id', $id)->first();
+
+        // if(!$user)
+        // {
+        //     $data['status'] = config('app.response.error.status');
+        //     $data['type'] = config('app.response.error.type');
+        //     $data['title'] = config('app.response.error.title');
+        //     $data['msg'] = 'Address not found';
+
+        // } else {
+
+        //     $user->update($input);
+
+        //     $data['status'] = config('app.response.success.status');
+        //     $data['type'] = config('app.response.success.type');
+        //     $data['title'] = config('app.response.success.title');
+        //     $data['msg'] = 'Address is updated.';
+        // }
+
+
     }
 
     // public function updateAddressType($r)

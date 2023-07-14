@@ -46,7 +46,7 @@
                         <table id="tablepolicy" class="table table-striped table-bordered align-middle">
                             <thead>
                                 <tr>
-                                    <th>No.</th> 
+                                    <th>No.</th>
                                     <th class="text-nowrap">Policy</th>
                                     <th class="text-nowrap">Document Title</th>
                                     <th class="text-nowrap">Description</th>
@@ -103,8 +103,8 @@
                 <div class="panel-body">
                     <table id="tablesop" class="table table-striped table-bordered align-middle">
                         <thead>
-                            <tr>                
-                                <th>No.</th>                 
+                            <tr>
+                                <th>No.</th>
                                 <th class="text-nowrap">SOP Code</th>
                                 <th class="text-nowrap">SOP Name</th>
                                 <th class="text-nowrap">Description</th>
@@ -129,7 +129,7 @@
                                     <td>{{$SOP->desc}}</td>
                                     <td>
                                         <a href="{{ route('download', ['filename' => $SOP->file]) }}">{{$SOP->file}}</a>
-                                    </td>                                    
+                                    </td>
                                     <td>{{$SOP->addedBy}}</td>
                                     <td>{{$SOP->created_at}}</td>
                                     <td>{{$SOP->modifiedBy}}</td>
@@ -183,7 +183,7 @@
                         <textarea type="text" class="form-control" rows="3" placeholder="DESCRIPTION" name="desc" maxlength="255" ></textarea>
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">Attachment </label>
+                        <label class="form-label">Attachment*</label>
                         <input id="fileupload" type="file" name="file" multiple="multiple" ></input>
                     </div>
             </div>
