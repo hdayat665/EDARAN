@@ -710,103 +710,6 @@ if (!function_exists('asias')) {
     }
 }
 
-if (!function_exists('getCountryName')) {
-    function getCountryName($countryId)
-    {
-        $countries = getCountries();
-
-        if (isset($countries[$countryId])) {
-            return $countries[$countryId];
-        }
-
-        return '';
-    }
-}
-
-if (!function_exists('getCountries')) {
-    function getCountries()
-    {
-        $data = Country::all();
-
-        if (blank($data)) {
-            $data = [];
-        }
-
-        return $data->pluck('CountryName', 'countryID')->toArray();
-    }
-}
-
-if (!function_exists('getStateName')) {
-    function getStateName($stateId)
-    {
-        $states = getStates();
-
-        if (isset($states[$stateId])) {
-            return $states[$stateId];
-        }
-
-        return '';
-    }
-}
-
-// if (!function_exists('getStates')) {
-//     function getStates()
-//     {
-//         $data = State::all();
-
-//         if (blank($data)) {
-//             return null;
-//         }
-
-//         return $data->pluck('stateName', 'id')->toArray();
-//     }
-// }
-
-
-
-if (!function_exists('getStateBranch')) {
-    function getStateBranch()
-    {
-        $data = State::all();
-
-        if (blank($data)) {
-            $data = [];
-        }
-
-
-        return $data;
-    }
-}
-
-if (!function_exists('getPostcodeBranch')) {
-    function getPostcodeBranch()
-    {
-        $data = Location::all();
-
-        if (blank($data)) {
-            $data = [];
-        }
-
-
-        return $data;
-    }
-}
-
-// if (!function_exists('getLocation')) {
-//     function getLocation()
-//     {
-//         $data = DB::select("SELECT settingcountry.CountryName, states.stateName, location.postcode from location, settingcountry, states
-//         WHERE location.countryID = settingcountry.countryID AND location.stateID = states.id;");
-
-//  if (blank($data)) {
-//     $data = [];
-// }
-//         return $data;
-
-
-//     }
-// }
-
 if (!function_exists('getCompany')) {
     function getCompany()
     {
@@ -819,6 +722,7 @@ if (!function_exists('getCompany')) {
         return $data;
     }
 }
+
 
 if (!function_exists('getCompanyforJobHistory')) {
     function getCompanyforJobHistory()

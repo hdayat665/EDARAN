@@ -29,16 +29,13 @@ class MyTimesheetController extends Controller
     public function myTimesheetView()
     {
         $mts = new MyTimeSheetService;
-
-        $data = $mts->myTimesheetView();
+    
+        $data = $mts->myTimesheetView(); // Assign the result to $data1
+        $stateData = $mts->myTimesheetState(); // Assign the result to $stateData
+    
         $data['user_id'] = Auth::user()->id;
-        // $data['employee_id'] = $data['employee']->id;
-        // $data['department_id'] = $data['employee']->department;
-        // $data['eleaveapprover'] = $data['employee']->eleaveapprover;
-        // $data['status_appeal'] = $data['employee']->status_appeal;
-
-        // $data['employees'] = $mts->getTimesheetEvents();
-
+    
+        // Process $data using $data1
         if ($data['employee'] !== null) {
             $data['employee_id'] = $data['employee']->id;
             $data['department_id'] = $data['employee']->department;
@@ -51,8 +48,9 @@ class MyTimesheetController extends Controller
             $data['eleaveapprover'] = null;
             $data['appeal_Date'] = null;
         }
-
-        return view('pages.timesheet.myTimesheet', $data);
+    
+    
+        return view('pages.timesheet.myTimesheet', ['data' => $data, 'stateData' => $stateData]);
     }
 
 
@@ -521,6 +519,34 @@ class MyTimesheetController extends Controller
         $ss = new MyTimeSheetService;
 
         $result = $ss->getApproverAppeal();
+
+        return response()->json($result);
+    }
+
+
+    // public function getStateById()
+    // {
+    //     $ss = new MyTimeSheetService;
+
+    //     $result = $ss->getStateById();
+        
+    //     return $result;
+    // }
+
+    public function getStateById($id)
+    {
+        $ss = new MyTimeSheetService;
+
+        $result = $ss->getStateById($id);
+
+        return response()->json($result);
+    }
+
+    public function getWorkingHourWeekendbyState($stateid)
+    {
+        $ss = new MyTimeSheetService;
+
+        $result = $ss->getWorkingHourWeekendbyState($stateid);
 
         return response()->json($result);
     }

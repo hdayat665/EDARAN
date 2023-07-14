@@ -490,7 +490,7 @@ class SettingService
         $getid = Location::select('id')
         ->where('country_id','=', $input['ref_country'])
         ->where('state_id','=', $input['ref_state'])
-        ->where('name','=', $input['ref_cityid'])
+        ->where('name','=', $input['location_cityid'])
         ->where('postcode','=', $input['ref_postcode'])
         ->first();
 
@@ -505,7 +505,7 @@ class SettingService
             'address' => $input['address'],
             'address2' => $input['address2'],
 
-            'ref_cityid' => $getid->id,
+            'location_cityid' => $getid->id,
             'tenant_id' => Auth::user()->tenant_id,
             'addedBy' => $user->username,
             'addedBy' => date('Y-m-d H:i:s'),
@@ -549,7 +549,7 @@ class SettingService
         $getid = Location::select('id')
         ->where('country_id','=', $input['ref_country'])
         ->where('state_id','=', $input['ref_state'])
-        ->where('name','=', $input['ref_cityid'])
+        ->where('name','=', $input['location_cityid'])
         ->where('postcode','=', $input['ref_postcode'])
         ->first();
 
@@ -560,7 +560,7 @@ class SettingService
             'address' => $input['address'],
             'address2' => $input['address2'],
 
-            'ref_cityid' => $getid->id,
+            'location_cityid' => $getid->id,
             'tenant_id' => Auth::user()->tenant_id,
             'modifiedBy' => $user->username,
             'modified_at' => date('Y-m-d H:i:s'),
@@ -694,7 +694,7 @@ class SettingService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Success Create State Postcode';
+        $data['msg'] = 'Success Create State and Countries';
 
         return $data;
     }
@@ -1519,7 +1519,7 @@ class SettingService
     public function getBranchById($id)
     {
 
-        $data = Branch::join('location_cities as lc', 'branch.ref_cityid', '=', 'lc.id')
+        $data = Branch::join('location_cities as lc', 'branch.location_cityid', '=', 'lc.id')
         ->where('branch.id', $id)
         ->first();
 
@@ -3404,7 +3404,7 @@ public function updateTypeOfLogs($r, $id)
     // public function newRole()
     // {
     //     $data = [];
-        
+
     //     return $data;
     // }
 }
