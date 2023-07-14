@@ -14,7 +14,7 @@
                             <select class="form-select" name="state_id">
                                 <option value="" label="PLEASE CHOOSE"></option>
                                 @foreach($state as $st)
-                                    <option value="{{ $st->id }}" {{ old('state_id') == $st->id ? 'selected' : '' }}>{{ $st->stateName }}</option>
+                                    <option value="{{ $st->id }}" {{ old('state_id') == $st->id ? 'selected' : '' }}>{{ $st->state_name }}</option>
                                 @endforeach
                             </select>
                             @error('state_id')

@@ -2499,11 +2499,54 @@ public function updateTypeOfLogs($r, $id)
         return $data;
     }
 
-    public function holidaylistView()
-    {
-        $data['holiday'] = holidayModel::where('tenant_id', Auth::user()->tenant_id)->orderBy('id', 'desc')->get();
+    public function holidaylistView() {
+
+        $dataallstate = holidayModel::select('*')
+            ->where('tenant_id', '=', Auth::user()->tenant_id)
+            ->orderBy('id', 'desc')
+            ->get();
+
+        $data = [];
+
+        foreach ($dataallstate as $state) {
+            $stateIds = explode(',', $state->state_id); // Separate the string into an array based on commas
+            $totalStateIds = count(array_filter($stateIds)); // Filter out empty values before counting
+
+            $state->total = $totalStateIds; // Add new 'total' property to the object
+
+            $data[] = $state;
+        }
+
+        $dataallstate = state::select('*')
+            ->where('country_id', '=', $dataallstate[0]->country_id)
+            ->orderBy('id', 'desc')
+            ->get();
+
+        $totalAll = count($dataallstate);
+
+        foreach ($data as $state) {
+            if ($state->total === $totalAll) {
+                $state->total = "ALL";
+            }
+        }
 
         return $data;
+
+
+
+
+
+
+    }
+
+
+
+
+    public function country() {
+
+        $data = Country::all();
+        return $data;
+
     }
 
     public function createholidaylist($r)
@@ -2526,6 +2569,11 @@ public function updateTypeOfLogs($r, $id)
         $data4 = $input['annual_date'];
         $data5 = Auth::user()->tenant_id;
         $data6 = 1;
+        $data7 = strtoupper($input['country_id']);
+        $data8 = implode(',', array_filter($input['selected_state_ids'], function ($value) {
+            return $value !== null;
+        }));
+
 
         $input = [
             'holiday_title' => $data1,
@@ -2533,10 +2581,39 @@ public function updateTypeOfLogs($r, $id)
             'end_date' => $data3,
             'annual_date' => $data4,
             'tenant_id' => $data5,
-            'status' => $data6
+            'status' => $data6,
+            'country_id' => $data7,
+            'state_id' => $data8,
+
         ];
 
         holidayModel::create($input);
+
+
+        $data['status'] = config('app.response.success.status');
+        $data['type'] = config('app.response.success.type');
+        $data['title'] = config('app.response.success.title');
+        $data['msg'] = 'Holiday is created';
+
+        return $data;
+    }
+
+    public function updateholidaystate($r)
+    {
+        $input = $r->input();
+
+
+        $id = $input['idstate'];
+        $datastate = implode(',', array_filter($input['selected_state_ids'], function ($value) {
+            return $value !== null;
+        }));
+
+
+        $input = [
+            'state_id' => $datastate,
+        ];
+
+        holidayModel::where('id', $id)->update($input);
 
 
         $data['status'] = config('app.response.success.status');
@@ -3334,7 +3411,7 @@ public function updateTypeOfLogs($r, $id)
     {
         $data = leaveWeekendModel::select(
             'leave_weekend.state_id',
-            'states.stateName',
+            'location_states.state_name',
             DB::raw("CONCAT(
                 MAX(CASE WHEN leave_weekend.day_of_week = '1' THEN leave_weekend.start_time END)
             ) AS monday_start"),
@@ -3379,8 +3456,8 @@ public function updateTypeOfLogs($r, $id)
             ) AS sunday_end"),
         )
         ->where('leave_weekend.tenant_id', Auth::user()->tenant_id)
-        ->Join('states', 'leave_weekend.state_id', '=', 'states.id')
-        ->groupBy('state_id')
+        ->Join('location_states', 'leave_weekend.state_id', '=', 'location_states.id')
+        ->groupBy('leave_weekend.state_id')
         ->get();
 
         return $data;
@@ -3389,12 +3466,15 @@ public function updateTypeOfLogs($r, $id)
 
     public function getstate(){
 
-        $data = State::select('states.id', 'states.stateName')
-        ->where('states.tenant_id', Auth::user()->tenant_id)
+        $data = State::select('location_states.id', 'location_states.state_name')
+        // ->where('leave_weekend.tenant_id', Auth::user()->tenant_id)
         ->whereNull('leave_weekend.state_id')
-        ->leftJoin('leave_weekend', 'states.id', '=', 'leave_weekend.state_id')
-        ->orderBy('states.id', 'asc')
+        ->leftJoin('leave_weekend', 'location_states.id', '=', 'leave_weekend.state_id')
+        ->orderBy('location_states.id', 'asc')
         ->get();
+
+        // dd($data);
+        // die;
 
 
         return $data;
@@ -3407,6 +3487,55 @@ public function updateTypeOfLogs($r, $id)
 
     //     return $data;
     // }
+
+    public function getstateholiday($id)
+    {
+        $data = State::select('*')
+        ->where('country_id', '=', $id)
+        ->orderBy('id', 'asc')
+        ->get();
+
+        return $data;
+    }
+
+    public function getstateholidaydetail($id)
+    {
+
+        $getHoliday = holidayModel::select('*')
+            ->where('id', '=', $id)
+            ->first();
+
+        $stateIds = explode(',', $getHoliday->state_id); // Memisahkan string menjadi array berdasarkan koma
+
+        $statesFromIds = []; // Array untuk menyimpan data state dari state_id
+
+        foreach ($stateIds as $id) {
+            $record = State::find($id); // Mengambil data state berdasarkan ID
+
+            if ($record) {
+                $statesFromIds[$record->id] = $record; // Menyimpan data state ke dalam array $statesFromIds dengan kunci ID
+            }
+        }
+
+        $statesFromQuery = State::select('*')
+            ->where('country_id', '=', $getHoliday->country_id)
+            ->get(); // Mengambil data state dari query berdasarkan country_id
+
+        $data = []; // Array untuk menyimpan data state
+
+        foreach ($statesFromQuery as $state) {
+            if (isset($statesFromIds[$state->id])) {
+                $state->checked = true; // Menandai state yang memiliki ID yang sama sebagai tercentang
+            }
+            $data[] = $state; // Menambahkan state ke dalam array $data
+        }
+
+        // dd($data);
+        // die;
+
+        return $data;
+    }
+
 }
 
 
