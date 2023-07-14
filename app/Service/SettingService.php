@@ -3344,11 +3344,11 @@ public function updateTypeOfLogs($r, $id)
 
         $data = leaveWeekendModel::select(
             'leave_weekend.*',
-            'states.stateName',
+            'location_states.state_name',
         )
         ->where('leave_weekend.tenant_id', Auth::user()->tenant_id)
         ->where('leave_weekend.state_id',  '=', $id)
-        ->join('states', 'leave_weekend.state_id', '=', 'states.id')
+        ->join('location_states', 'leave_weekend.state_id', '=', 'location_states.id')
         ->orderBy('leave_weekend.id', 'asc')
         ->get();
 

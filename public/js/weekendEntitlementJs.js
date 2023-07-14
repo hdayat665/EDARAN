@@ -185,7 +185,7 @@ $(document).ready(function () {
 
         getData.then(function (data) {
 
-            $("#state").text(`STATE -  ${data[0].stateName.toUpperCase()}`);
+            $("#state").text(`STATE -  ${data[0].state_name.toUpperCase()}`);
 
             console.log(data);
 
