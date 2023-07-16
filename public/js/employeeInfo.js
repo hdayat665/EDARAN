@@ -85,14 +85,12 @@ $(document).ready(function () {
             rules: {
                 effectiveFrom: "required",
                 employmentDetail: "required",
-                remarks: "required",
                 file: "required",
             },
 
             messages: {
-                effectiveFrom: "Please Insert Terminate Date",
-                employmentDetail: "Please Insert Terminate Type",
-                remarks: "Please Insert Remarks",
+                effectiveFrom: "Please Choose Exit Date",
+                employmentDetail: "Please Choose Exit Type",
                 file: "Please Upload Attachment",
             },
             submitHandler: function (form) {

@@ -159,14 +159,12 @@ $("#updateButton").click(function (e) {
         // Specify validation rules
         rules: {
             title: "required",
-            sourceURL: "required",
             content: "required",
             file: "required",
         },
 
         messages: {
             title: "Please Insert Title",
-            sourceURL: "Please Insert URL",
             content: "Please Insert Content",
             file: "Please Upload Attachment",
         },
