@@ -133,7 +133,7 @@
 
             </div>
             <div class="col-md-6">
-                <label for="file" class=""> Supporting Document</label>
+                <label for="file" class=""> Supporting Document</label> --}}
                 {{-- <input type="file" class="form-control-file" name="" id="" multiple> --}}
             {{-- </div>
         </div>
