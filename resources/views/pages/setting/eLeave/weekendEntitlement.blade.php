@@ -65,7 +65,7 @@
                                                     <a href="javascript:;" id="deleteButton" data-id="{{ $wk->id }}" class="dropdown-item"><i class="fa fa-trash" aria-hidden="true"></i> Delete</a> --}}
                                                 </div>
                                             </td>
-                                            <td style="text-align:center">{{ strtoupper($wk->stateName) }}</td>
+                                            <td style="text-align:center">{{ strtoupper($wk->state_name) }}</td>
                                             <td style="text-align:center">
                                                 @if ($wk->monday_start && $wk->monday_end)
                                                     {{$wk->monday_start}} - {{$wk->monday_end}}

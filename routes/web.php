@@ -431,6 +431,13 @@ Route::group(['middleware' => ['web']], function () {
             Route::delete('/deleteLeaveholiday/{id}', 'deleteLeaveholiday');
             Route::get('/updateStatusleaveholiday/{id}/{status}', 'updateStatusleaveholiday');
 
+
+            //get State Holiday
+            Route::get('/getstateholiday/{id}', 'getstateholiday');
+            Route::get('/getstateholidaydetail/{id}', 'getstateholidaydetail');
+            Route::post('/updateholidaystate', 'updateholidaystate');
+
+
             // eleave Leave Types
             Route::get('/leavetypes', 'leavetypesView');
             Route::post('/createtypes', 'createtypes');
