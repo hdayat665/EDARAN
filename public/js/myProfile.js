@@ -2547,7 +2547,6 @@ $(document).ready(function () {
             $("#expirydatemc").val("");
             $("#expirydatemc").prop("readonly", true);
             $("#expirydatemc").css("pointer-events", "none");
-            $("#expirydatemc").prop("disabled", true);
             $("#issuingCountryAddCompanion").prop("disabled", true);
         }
     });

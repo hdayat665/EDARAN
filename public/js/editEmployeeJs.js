@@ -640,13 +640,8 @@ $('#event').select2();
             $("#idnumber2s").prop("readonly", true);
             $("#idnumber2s").val("");
 
-            $("#passportmcs").prop("readonly", false);
-
             $("#dobs").prop("readonly", false);
             $("#dobs").css("pointer-events", "auto");
-
-            $("#passportmcs").prop("readonly", false);
-            $("#passportmcs").css("pointer-events", "auto");
 
             $("#expirydatemcs").prop("readonly", false);
             $("#expirydatemcs").css("pointer-events", "auto");
@@ -664,8 +659,6 @@ $('#event').select2();
             $("#dobs").css("pointer-events", "none");
 
             $("#passportmcs").val("");
-            $("#passportmcs").prop("readonly", true);
-            $("#passportmcs").css("pointer-events", "none");
 
             $("#expirydatemcs").prop("readonly", true);
             $("#expirydatemcs").css("pointer-events", "none");
@@ -677,6 +670,26 @@ $('#event').select2();
             $("#issuingCountry2s").css("pointer-events", "none");
 
             $("#age2s").prop("readonly", false);
+        }
+    });
+
+    $("#passportmcs").change(function () {
+        if ($("#expirydatemcs").prop("readonly")) {
+            $("#expirydatemcs").prop("readonly", false);
+            $("#expirydatemcs").css("pointer-events", "auto");
+            $("#expirydatemcs").prop("disabled", false);
+
+            $("#issuingCountry2").prop("disabled", false);
+            $("#issuingCountry2").css("pointer-events", "auto");
+        } else {
+            $("#expirydatemcs").prop("readonly", true);
+            $("#expirydatemcs").css("pointer-events", "none");
+            $("#expirydatemcs").val("");
+            $("#expirydatemcs").prop("disabled", false);
+
+            $("#issuingCountry2s").prop("disabled", false);
+            $("#issuingCountry2s").css("pointer-events", "auto");
+            $("#issuingCountry2s").val("");
         }
     });
 

@@ -11,13 +11,13 @@
                     <form id="addCompanionForm">
                         <div class="row p-2">
                             <div class="col-sm-6">
-                                <h4>Companion Information</h4> 
+                                <h4>Companion Information</h4>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-check form-switch">
                                     <input class="form-check-input" type="checkbox" name="mainCompanion" id="set-main" value="on" {{ ($companion->mainCompanion ?? 0) ? 'checked' : '' }}>
                                     <label class="form-check-label" for="set-main">Set as Main Companion</label>
-                                </div>                                
+                                </div>
                             </div>
                         </div>
                         <div class="row p-2">
@@ -53,12 +53,12 @@
                                             <label for="citizen" class="form-label">Non-Citizen ?</label>
                                             <input class="form-check-input partCheck2" {{ ($companion->nonCitizen ?? '') ? 'checked' : '' }} name="nonCitizen" value="on" type="checkbox" role="switch" id="citizen2">
                                         </div>
-                                    </div> 
+                                    </div>
                                 <div class="col-sm-6">
                                         <label for="passport-number" class="form-label">New Identification Number*</label>
                                         <input type="text" name="idNo" value="{{ $companion->idNo ?? '' }}" id="idnumber2" class="form-control" placeholder="000000000000" aria-describedby="passport-number">
                                     </div>
-                                   
+
                                 </div>
                             </div>
                             <div class="col-sm-6">
@@ -136,7 +136,7 @@
                                     <div class="col-sm-6">
                                         <label for="" class="form-label" > OKU Card Number*</label>
                                         <input type="number" id="okucard1" disabled name="okuNumber" value="" class="form-control" readonly  placeholder="OKU CARD NUMBER">
-                                        
+
                                     </div>
                                 </div>
                             </div>
@@ -145,7 +145,7 @@
                                         <input type="file" id="okuattach1" disabled name="okuID" class="form-control" aria-describedby="" style="pointer-events: none">
                             </div>
                         </div>
-                        
+
                         <br>
                         <div class="row p-2">
                             <div class="col-sm-6">
@@ -176,7 +176,7 @@
                                 <label for="firstname" class="form-label">City*</label>
                                 <input type="text" id="cityc" name="city" value="{{ $companion->city ?? '' }}" class="form-control" placeholder="CITY" style="text-transform:uppercase">
                             </div>
-                            
+
                         </div>
                         <div class="row p-2">
                             <div class="col-sm-6">
@@ -237,7 +237,7 @@
                                 <label for="company-name" class="form-label">Company Name</label>
                                 <input type="text" id="companyNamemc" readonly name="companyName" placeholder="COMPANY NAME" value="{{ $companion->companyName ?? '' }}" class="form-control" aria-describedby="company-name" style="text-transform:uppercase">
                             </div>
-                            
+
                         </div>
                         <div class="row p-2">
                             <div class="col-sm-6">
@@ -248,7 +248,7 @@
                                 <label for="income-tax-number" class="form-label">Income Tax Number</label>
                                 <input type="text" readonly id="income-tax-number" name="incomeTax" value="{{ $companion->incomeTax ?? '' }}" placeholder="000000000000" class="form-control" aria-describedby="income-tax-number">
                             </div>
-                            
+
                         </div>
                         <div class="row p-2">
                             <div class="col-sm-6">
@@ -281,7 +281,7 @@
                                 <label for="firstname" class="form-label">City</label>
                                 <input type="text" readonly id="cityEmc" name="cityE" value="{{ $companion->cityE ?? '' }}" class="form-control" aria-describedby="firstname" placeholder="CITY" style="text-transform:uppercase">
                             </div>
-                            
+
                         </div>
                         <div class="row p-2">
                             <div class="col-sm-6">
@@ -311,9 +311,9 @@
                                 </select>
                             </div>
                         </div>
-                    
+
                     <p class="text-end mb-0 mt-3">
-                        
+
                         <button href="javascript:;" id="addCompanion" class="btn btn-primary">Save</button>
                     </p>
                     </form>
@@ -375,12 +375,12 @@
                                         <label for="citizen" class="form-label">Non-Citizen ?</label>
                                         <input class="form-check-input partCheck6" {{ ($companion->nonCitizen ?? '') ? 'checked' : '' }} name="nonCitizen" value="{{ $companion->nonCitizen ?? '' }}" type="checkbox" role="switch" id="citizen2">
                                     </div>
-                                </div> 
+                                </div>
                                 <div class="col-sm-6">
                                     <label for="passport-number" class="form-label">New Identification Number*</label>
                                     <input type="text" name="idNo" value="{{ $companion->idNo ?? '' }}" id="idnumber3" class="form-control" placeholder="000000000000" aria-describedby="passport-number">
                                 </div>
-                                   
+
                                 </div>
                             </div>
                             <div class="col-sm-6">
@@ -404,7 +404,7 @@
                                     </div>
                                 </div>
                             </div>
-                            
+
                             <div class="col-sm-3">
                                 <label for="issuing-country" class="form-label">Issuing Country*</label>
                                 <select class="form-select" name="issuingCountry" id="issuingCountryUpdateCompanion"  value="{{ $companion->issuingCountry ?? '' }}">
@@ -438,14 +438,14 @@
                                         <input type="text" id="dom" name="DOM" value="{{ ($companion->DOM !== null) ? date_format(date_create($companion->DOM), 'Y-m-d') : '' }}" class="form-control" aria-describedby="dom" placeholder="YYYY/MM/DD">
                                     </div>
                                 </div>
-                            </div>  
+                            </div>
                             <div class="col-sm-6">
                                 <label for="marriage-cert" class="form-label">Marriage Certificate</label>
                                 <input type="file" name="marrigeCert" id="marriage-cert" class="form-control" aria-describedby="dob">
                                 @if ($companion->marrigeCert)
                                 Click <a href="{{ route('download', ['filename' => $companion->marrigeCert]) }}">here</a> to see marriage cert.
                                 @endif
-                            </div>  
+                            </div>
                         </div>
                         {{-- new --}}
                         <div class="row p-2">
@@ -488,7 +488,7 @@
                                 </div>
                             </div>
                         </div>
-                        
+
 
                         <div class="row p-2">
                             <div class="col-sm-6">
@@ -520,7 +520,7 @@
                                 <label for="firstname" class="form-label">City*</label>
                                 <input type="text" id="cityUC" name="city" value="{{ $companion->city ?? '' }}" class="form-control" placeholder="CITY" aria-describedby="firstname">
                             </div>
-                            
+
                         </div>
                         <div class="row p-2">
                             <div class="col-sm-6">
@@ -611,7 +611,7 @@
                                 <label for="firstname" class="form-label">City</label>
                                 <input type="text" readonly id="cityCEdit" name="cityE" value="{{ $companion->cityE ?? '' }}" class="form-control" placeholder="CITY" aria-describedby="firstname">
                             </div>
-                            
+
                         </div>
                         <div class="row p-2">
                             <div class="col-sm-6">
@@ -641,10 +641,10 @@
                                 </select>
                             </div>
                         </div>
-                    
+
                     <p class="text-end mb-0 mt-3">
                         <a href="javascript:;" id="deleteCompanion" data-id="{{ $companion->id }}" class="btn btn-danger">Delete</a>
-                        
+
                         <button id="updateCompanion{{$no}}" class="btn btn-primary">Save</button>
                     </p>
                     </form>
@@ -653,11 +653,11 @@
         </div>
         @endforeach
         @endif
-    </div> 
+    </div>
         <div class="row p-2">
             <div class="modal-footer">
                 <a class="btn btn-white me-5px btnPrevious">Previous</a>
-                
+
                 <a class="btn btn-white me-5px btnNext">Next</a>
             </div>
         </div>
