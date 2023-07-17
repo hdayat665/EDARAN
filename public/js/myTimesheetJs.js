@@ -2,52 +2,39 @@
 $(document).ready(function () {
 
 
+    var weekend1ifany;
+    var weekend2ifany;
+    var weekend3ifany;
+    var weekend4ifany;
+    var weekend5ifany;
+    var weekend6ifany;
+    var weekend7ifany;
 
-    // function displayObjects(objArray) {
-    //     objArray.forEach(function(obj, index) {
-    //       console.log(index + " => ", obj);
-    //     });
-    //   }
+    var dayone;
+    var daytwo;
+    var daythree;
+    var dayfour;
+    var dayfive;
+    var daysix;
+    var dayseven;
 
-    //   var a;
-    //   var b;
 
-    //   function getWorkingHourWeekendbyState(stateid) {
-    //     return $.ajax({
-    //       url: "/getWorkingHourWeekendbyState/" + stateid,
-    //     });
-    //   }
-
-    //   function getStateById(id) {
-    //     return $.ajax({
-    //       url: "/getStateById/" + id,
-    //     });
-    //   }
-
-    //   // var id = 1;
-    //   id = $("#userIdForApproval").val();
-    //   var vehicleData = getStateById(id);
-
-    //   vehicleData.then(function(data) {
-    //     a = data.state_id;
-    //     console.log(a + "dlm1");
-
-    //     // Assign the value of a to stateid
-    //     stateid = a;
-
-    //     var vehicleData1 = getWorkingHourWeekendbyState(stateid);
-
-    //     vehicleData1.then(function(data) {
-    //       b = data;
-    //       displayObjects(b);
-    //     });
-    //   });
+    var totalhourday1;
+    var totalhourday2;
+    var totalhourday3;
+    var totalhourday4;
+    var totalhourday5;
+    var totalhourday6;
+    var totalhourday7;
 
 
 
 
-
-
+function getWorkingHourWeekendbyState(stateid) {
+  return $.ajax({
+    url: "/getWorkingHourWeekendbyState/" + stateid,
+  });
+}
 
 var idwork = $("#state_id").val();
 
@@ -72,7 +59,7 @@ getwork.then(function(data) {
    weekend5ifany = days.hasOwnProperty('day5') ? days.day5 : null;
    weekend6ifany = days.hasOwnProperty('day6') ? days.day6 : null;
    weekend7ifany = days.hasOwnProperty('day7') ? days.day7 : null;
-
+  
    var startDate = getStartDate();
     $("#dateaddlog").datepicker({
         todayHighlight: true,
@@ -147,13 +134,13 @@ getwork.then(function(data) {
       var workdata = data[i];
       var dayNumber = i + 1;
       var dayKey = 'day' + dayNumber;
-
+  
       days[dayKey] = {
         day_of_week: workdata.day_of_week,
         total_hour: workdata.total_time
       };
     }
-
+  
     // Extract day_of_week and total_hour into separate variables
      dayone = days.hasOwnProperty('day1') ? days.day1.day_of_week : null;
      daytwo = days.hasOwnProperty('day2') ? days.day2.day_of_week : null;
@@ -162,7 +149,7 @@ getwork.then(function(data) {
      dayfive = days.hasOwnProperty('day5') ? days.day5.day_of_week : null;
      daysix = days.hasOwnProperty('day6') ? days.day6.day_of_week : null;
      dayseven = days.hasOwnProperty('day7') ? days.day7.day_of_week : null;
-
+  
      totalhourday1 = days.hasOwnProperty('day1') ? days.day1.total_hour : null;
      totalhourday2 = days.hasOwnProperty('day2') ? days.day2.total_hour : null;
      totalhourday3 = days.hasOwnProperty('day3') ? days.day3.total_hour : null;
@@ -172,10 +159,10 @@ getwork.then(function(data) {
      totalhourday7 = days.hasOwnProperty('day7') ? days.day7.total_hour : null;
 
     //  console.log(daytwo);
-
+  
     // ...
   });
-
+  
 
     // $("#addeventalldayedit").change(function() {
     //     if ($(this).is(":checked")) {
@@ -184,7 +171,7 @@ getwork.then(function(data) {
     //       $(this).val("test");
     //     }
     //   });
-
+    
     document.getElementById("yearsub").value = new Date().getFullYear();
 
     var monthNames = [
@@ -306,7 +293,7 @@ getwork.then(function(data) {
         });
     }
 
-
+   
 
     var $elem = $('#addneweventselectprojectedit');
     $elem.picker({ search: true });
@@ -432,7 +419,7 @@ getwork.then(function(data) {
         }
 
         if ((type = "editLog")) {
-
+            
             $("#activityByProjectEditHide1").hide();
             // $("#activityByProjectEditHide").hide();
             $("#activityByProjectEditShow").show();
@@ -591,7 +578,7 @@ getwork.then(function(data) {
                 project_location_office: "required",
                 end_time: "required",
                 lunch_break: "required",
-
+                
             },
 
             messages: {
@@ -659,7 +646,7 @@ getwork.then(function(data) {
                 project_location_office: "required",
                 end_time: "required",
                 lunch_break: "required",
-
+                
             },
 
             messages: {
@@ -985,9 +972,9 @@ getwork.then(function(data) {
                 url: "/getApproverAppeal",
             });
         }
-
+        
         var approverData;
-
+        
         var approverUserId;
 
         function getApproverAppeal(id) {
@@ -995,13 +982,13 @@ getwork.then(function(data) {
                 url: "/getApproverAppeal",
             });
         }
-
+        
         var approverUserId;
-
+        
         getApproverAppeal().done(function (data) {
             approverUserId = data;
         });
-
+        
 
         var timesheetData = getTimesheet();
 
@@ -1045,7 +1032,7 @@ getwork.then(function(data) {
                 time = endTime.split(":");
                 endTime = time[0] < 10 ? "0" + endTime : endTime;
 
-
+            
 
             event.push({
                 title: "Event: " + events['event_name'] + "\n" + "from " + events['start_time'] + " to " + events['end_time'],
@@ -1061,7 +1048,7 @@ getwork.then(function(data) {
 
         }
 
-
+      
 
         var eventattend = [];
         attendhour = [];
@@ -1103,7 +1090,7 @@ getwork.then(function(data) {
             endTime = time[0] < 10 ? "0" + endTime : endTime;
 
             eventattend.push({
-                title: "Event: " + events['event_name'] + "\n" + "from " + events['start_time'] + " to " + events['end_time'] + " attend",
+                title: "Event: " + events['event_name'] + "\n" + "from " + events['start_time'] + " to " + events['end_time'] + " attend", 
                 start: startYear + '-' + startMonth + '-' + startDay,
                 end: endYear + '-' + endMonth + '-' + endDay,
                 color: '#2AAA8A',
@@ -1147,8 +1134,6 @@ getwork.then(function(data) {
                 var endTime = logs['end_time'];
                 time = endTime.split(":");
                 endTime = time[0] < 10 ? "0" + endTime : endTime;
-                // console.log(logs['total_hour']);
-                // console.log(startDate,startTime,endTime);
 
                 function type_of_log(id) {
                     const data = {
@@ -1271,8 +1256,8 @@ getwork.then(function(data) {
                     end: new Date(endYear, endMonth - 1, endDay),
                     startdateholidays: holidays['start_date'],
                     endateholidays: holidays['end_date'],
-
-
+                    
+                    
                 });
             }
 
@@ -1289,29 +1274,18 @@ getwork.then(function(data) {
             }
             var nextNumber = highestNumber + 1;
             var nextLogId = 'LA-' + nextNumber.toString().padStart(4, '0');
-            // console.log(nextLogId);
-
-
-            // dataEvent = event.concat(log);
-            // dataleave = dataEvent.concat(leave);
-            // dataHoliday = dataleave.concat(holiday);
-
-
-
+              
             dataEvent = event.concat(eventattend);
             datalog = dataEvent.concat(log);
             dataleave = datalog.concat(leave);
             dataHoliday = dataleave.concat(holiday);
-
-
-
 
             dataHoliday.sort(function(a, b) {
                 var dateA = a.start;
                 var dateB = b.start;
                 var timeA = a.start_time;
                 var timeB = b.start_time;
-
+              
                 // Compare the dates
                 if (dateA < dateB) {
                   return -1;
@@ -1319,7 +1293,7 @@ getwork.then(function(data) {
                 if (dateA > dateB) {
                   return 1;
                 }
-
+              
                 // If the dates are equal, compare the start_time
                 if (timeA < timeB) {
                   return -1;
@@ -1327,23 +1301,11 @@ getwork.then(function(data) {
                 if (timeA > timeB) {
                   return 1;
                 }
-
+              
                 return 0; // If both date and start_time are equal
               });
+              
 
-
-            // console.log(dataHoliday);
-
-
-            //   console.log(datalog)
-
-            //   dataHoliday.sort(function(a, b) {
-            //     return new Date(a.start) - new Date(b.start);
-            //   });
-
-
-            // console.log(dataEvent);
-            // console.log(holiday);
             var calendar = new FullCalendar.Calendar(calendarElm, {
                 headerToolbar: {
                     left: "logButton EventButton SumButton",
@@ -1372,43 +1334,37 @@ getwork.then(function(data) {
                 },
 
 
+               
 
-
-                dayCellDidMount: function(info) {
-
+                dayCellDidMount: function(info) {                       
+                    
                     var current = new Date(info.date);
                     var currentDate = new Date();
-
+                    
                     var currentdate = new Date();
                     currentdate.setDate(currentdate.getDate());
-
-                    // var oneDayBefore = new Date();
-                    // oneDayBefore.setDate(currentDate.getDate() - 1);
-                    // var satuhari = new Date(oneDayBefore.setDate(currentDate.getDate() - 1));
-
-                    // var twoDayBefore = new Date();
-                    // twoDayBefore.setDate(currentDate.getDate() - 2);
-                    // var duahari = new Date(twoDayBefore.setDate(currentDate.getDate() - 2));
-
+                    
                     var currentMonth = currentDate.getMonth();
                     var currentYear = currentDate.getFullYear();
-
+                    
                     var oneDaysBefore = new Date(currentYear, currentMonth, currentDate.getDate() - 1);
                     var twoDaysBefore = new Date(currentYear, currentMonth, currentDate.getDate() - 2);
-
+                    
                     var datedefaultformat = dayjs(current).format('YYYY-MM-DD');
-
-                    var weekend1 = current.getDay() === 6;
-                    var weekend2 = current.getDay() === 0;
-
-                    var onedayafterweekend2 = weekend2 + 1;
-                    var twodayafterweekend2 = weekend2 + 2;
-
+                    
+                    var weekend1 = current.getDay() == weekend1ifany;
+                    var weekend2 = current.getDay() == weekend2ifany;
+                    var weekend3 = current.getDay() == weekend3ifany;
+                    var weekend4 = current.getDay() == weekend4ifany;
+                    var weekend5 = current.getDay() == weekend5ifany;
+                    var weekend6 = current.getDay() == weekend6ifany;
+                    var weekend7 = current.getDay() == weekend7ifany;
+                    
                     var dateonedaybefore = current.getDate() === oneDaysBefore.getDate();
                     var datetwodayebefore = current.getDate() === twoDaysBefore.getDate();
 
-                    // console.log(dateonedaybefore+"dateonedaybefore");
-
+                    //to compare next day after weekend
+                    const today = dayjs();
 
                     var currentDayOfWeek = today.day();
 
@@ -1445,12 +1401,14 @@ getwork.then(function(data) {
                         secondLowestValue = 3;
                     }
 
+                    
 
-
-
+                    
                     var twoDaysBefore = new Date(currentYear, currentMonth, currentDate.getDate() - 2);
+                    
 
-                    if (comparecurrentonedaybefore || comparecurrenttwodaybefore) {
+                    // Check if the current day is Saturday (6) or Sunday (0)
+                    if (currentDayOfWeek === lowestValue || currentDayOfWeek === secondLowestValue) {
                         twoDaysBefore = new Date(currentYear, currentMonth, currentDate.getDate() - 4);
 
                     }
@@ -1479,8 +1437,7 @@ getwork.then(function(data) {
                         workingDayHour = totalhourday7;
                       }
 
-
-
+                      
 
                     var appealaddb = $('<button/>', {
                                 text: 'Appeal',
@@ -1596,30 +1553,30 @@ getwork.then(function(data) {
                         }
                     }
 
-
+                    
                     var totalHoursEvent = '00:00';
                     var hasEvent = false;
                     for (var i = 0; i < attendhour.length; i++) {
                       if (current.getTime() === attendhour[i].start.getTime()) {
                         hasEvent = true;
                         var eventid = attendhour[i].eventid;
-
+                    
                         var totalHourEvent = attendhour.filter(event => current.getTime() === event.start.getTime())
                           .reduce((totalevent, event) => {
                             var [hoursevent, minutesevent, secondsevent] = event.totalHourAttend.split(':').map(Number);
                             totalevent += hoursevent * 3600 + minutesevent * 60 + secondsevent;
                             return totalevent;
                           }, 0);
-
+                    
                         var hoursevent = Math.floor(totalHourEvent / 3600);
                         var minutesevent = Math.floor((totalHourEvent % 3600) / 60);
                         totalHoursEvent = hoursevent.toString().padStart(2, '0') + ':' + minutesevent.toString().padStart(2, '0');
                         var [hoursevent, minutesevent] = totalHoursEvent.split(":").map(Number);
-
+                
                         break;
                       }
                     }
-
+                    
 
                     // Convert totalHoursforlog and totalHoursEvent to total seconds
                     var [hourslog, minuteslog] = totalHoursforlog.split(":").map(Number);
@@ -1635,7 +1592,7 @@ getwork.then(function(data) {
                     var hours = Math.floor(totalSeconds / 3600);
                     var minutes = Math.floor((totalSeconds % 3600) / 60);
                     var totalHoursCombined = hours.toString().padStart(2, '0') + ':' + minutes.toString().padStart(2, '0');
-
+                   
                     var totalHoursCombineds = parseInt(hours, 10).toString();
 
                     var appliedDates = [];
@@ -1672,7 +1629,7 @@ getwork.then(function(data) {
                         approvers.push(approver);
                         files.push(file);
                     }
-
+                    
                     // var dailycounter = $('<button/>', {
                     //     text: totalHoursforlog,
                     //     class: 'btn btn-danger btn-xs',
@@ -1689,11 +1646,11 @@ getwork.then(function(data) {
 
                     var hasAppeal = appliedDates.includes(datedefaultformat);
                     var noappeal = !appliedDates.includes(datedefaultformat);
-
+                   
                       if (
                         current.getTime() === currentDate.getTime() ||
                         (current.getTime() < currentDate.getTime())
-
+                        
                     ) {
                         // $(info.el).append('&nbsp;').append(dailycounter);
                         // $(dailycounter).css({
@@ -1709,9 +1666,9 @@ getwork.then(function(data) {
                             'z-index': '999',
                         });
 
-                      }
+                      } 
                     //   if(
-
+                         
                     //     (current.getDate() === oneDayBefore.getDate() || current.getDate() === twoDayBefore.getDate()) &&
                     //     !(current.getDay() === 6 || current.getDay() === 0) && !hasLog  && !hasEvent)
                     //    {
@@ -1742,9 +1699,9 @@ getwork.then(function(data) {
                         && ((hasLog || hasEvent || !hasEvent || !hasLog) && totalHoursCombined >= workingDayHour )) {
                             $(info.el).css('background-color', '#80ff80');
                         }
-
+                       
                       }
-
+                   
                      if (
                         (dateonedaybefore || datetwodayebefore) &&
                         !(weekend1 || weekend2 || weekend3 || weekend4|| weekend5 || weekend6 || weekend7) &&
@@ -1757,7 +1714,7 @@ getwork.then(function(data) {
                       }
 
                      else if(
-
+                         
                         (dateonedaybefore || datetwodayebefore) &&
                         !(weekend1 || weekend2 || weekend3 || weekend4 || weekend5 || weekend6 || weekend7)  &&
                          ( (hasLog || hasEvent) && totalHoursCombined < workingDayHour)
@@ -1765,27 +1722,27 @@ getwork.then(function(data) {
                         $(info.el).css('background-color', '#FF8080');
                       }
                       else if(
-
+                         
                         (dateonedaybefore || datetwodayebefore) &&
-                        !(weekend1 || weekend2 || weekend3 || weekend4 || weekend5 || weekend6 || weekend7)
+                        !(weekend1 || weekend2 || weekend3 || weekend4 || weekend5 || weekend6 || weekend7)  
                         && ( (hasLog || hasEvent) && totalHoursCombined >= workingDayHour)
                       ) {
                         $(info.el).css('background-color', '#80ff80');
                       }
 
-
+                     
                     //  if ((current < twoDaysBefore)) {
                     //     $(info.el).css('background-color', 'red');
                     //  }
                       //xde log appeal, log kecik dari 9,exclude weekend
-                       else if((current < twoDaysBefore) && noappeal && totalHoursCombined < workingDayHour &&
+                       else if((current < twoDaysBefore) && noappeal && totalHoursCombined < workingDayHour && 
                        !(weekend1 || weekend2 || weekend3 || weekend4 || weekend5 || weekend6 || weekend7)) {
                         $(info.el).css('background-color', '#FF8080');
                         $(info.el).append('&nbsp;').append(appealaddb);
                         $(appealaddb).css({
                             position: 'relative',
                             top: '-35px',
-                            'z-index': '999',
+                            'z-index': '999',   
                             });
 
                         }else if (
@@ -1793,7 +1750,7 @@ getwork.then(function(data) {
                             hasAppeal &&
                             (
                               ((hasLog || hasEvent) && totalHoursCombined < workingDayHour) ||
-                              (!hasLog && !hasEvent &&
+                              (!hasLog && !hasEvent && 
                                 !(weekend1 || weekend2 || weekend3 || weekend4 || weekend5 || weekend6 || weekend7))
                             )
                           ) {
@@ -1803,10 +1760,10 @@ getwork.then(function(data) {
                             $(viewappealb).css({
                                 position: 'relative',
                                 top: '-35px',
-                                'z-index': '999',
+                                'z-index': '999',   
                                 });
-
-
+                        
+                        
                          } else if((current < twoDaysBefore) && (hasLog || hasEvent) && totalHoursCombined >= workingDayHour) {
                             $(info.el).css('background-color', '#80ff80');
                          } else if((current < twoDaysBefore) && hasAppeal && totalHoursCombined >= workingDayHour) {
@@ -1815,7 +1772,7 @@ getwork.then(function(data) {
                             $(viewappealb).css({
                                 position: 'relative',
                                 top: '-35px',
-                                'z-index': '999',
+                                'z-index': '999',   
                                 });
                          }
                          else if((current < twoDaysBefore) && hasAppeal && totalHoursCombined < workingDayHour) {
@@ -1824,17 +1781,17 @@ getwork.then(function(data) {
                             $(viewappealb).css({
                                 position: 'relative',
                                 top: '-35px',
-                                'z-index': '999',
+                                'z-index': '999',   
                                 });
                          }
-                         else if ((info.date.getDay() == weekend1ifany || info.date.getDay() == weekend2ifany ||
-                                    info.date.getDay() == weekend3ifany || info.date.getDay() == weekend4ifany ||
-                                    info.date.getDay() == weekend5ifany || info.date.getDay() == weekend6ifany ||info.date.getDay() == weekend7ifany  )
+                         else if ((info.date.getDay() == weekend1ifany || info.date.getDay() == weekend2ifany || 
+                                    info.date.getDay() == weekend3ifany || info.date.getDay() == weekend4ifany || 
+                                    info.date.getDay() == weekend5ifany || info.date.getDay() == weekend6ifany ||info.date.getDay() == weekend7ifany  ) 
                          && !isSameDate) {
                             $(info.el).css('background-color', '#B3CCFF');
                           }
-
-
+                          
+                    
                  else {
                         // $(info.el).css('background-color', 'white');
                       }
@@ -1848,23 +1805,23 @@ getwork.then(function(data) {
                         const today = dayjs();
 
                         var daystominus = -2;
-
+                
                         var currentDayOfWeek = today.day();
-
+                
                         var checkweekendv = [weekend1ifany, weekend2ifany, weekend3ifany, weekend4ifany, weekend5ifany, weekend6ifany, weekend7ifany];
-
+                
                         // Filter out null values
                         var resultchw = checkweekendv.filter(function(value) {
                         return value !== null;
                         });
-
+                
                         // Sort the filtered values in ascending order
                         resultchw.sort(function(a, b) {
                         return a - b;
                         });
-
+                
                          var lowestValue = parseInt(resultchw[0]);
-
+                
                          var secondLowestValue = parseInt(resultchw[1]);
 
                          var weekn1 = parseInt(resultchw[0]);;
@@ -1877,7 +1834,7 @@ getwork.then(function(data) {
                         }
                         else
                         lowestValue = 0;
-
+                
                         if (secondLowestValue >= 0 && secondLowestValue <= 5) {
                         secondLowestValue = secondLowestValue + 2;
                         }
@@ -1887,11 +1844,11 @@ getwork.then(function(data) {
                         else if(secondLowestValue == 7) {
                             secondLowestValue = 3;
                         }
-
+                
                         console.log(lowestValue + "," + secondLowestValue);
-
-
-
+                        
+                
+                
                         // Check if the current day is Saturday (6) or Sunday (0)
                         if (currentDayOfWeek === lowestValue || currentDayOfWeek === secondLowestValue) {
                             daystominus = -4;
@@ -1930,9 +1887,7 @@ getwork.then(function(data) {
 
                         // check if the clicked date is within the last 2 days before the current date
                         // and if the cell already has an appeal button
-                        var daystominus = -2;
-
-                        var currentDayOfWeek = today.day();
+                       
 
                         if (
                             ((clickedDate.diff(today, 'day') < daystominus || clickedDate.isAfter(today, 'day')) &&
@@ -2023,8 +1978,8 @@ getwork.then(function(data) {
                         });
                     }
 
-
-
+                    
+                    
 
                     function getAttendance1(eventId) {
                         return $.ajax({
@@ -2060,7 +2015,6 @@ getwork.then(function(data) {
                         logId = info.event.extendedProps.logId;
                         var logData = getLogs(logId);
                         logData.then(function (data) {
-                            console.log(data);
 
                             if (data.type_of_log == "3") {
                                 $("#officelogedit").css("display", "none");
@@ -2087,7 +2041,7 @@ getwork.then(function(data) {
                                 );
                                 $("#activityByProjectEditShow").css(
                                     "display",
-                                    "block"
+                                    "block" 
                                 );
                             } else if (
                                 data.type_of_log == "1" ||
@@ -2169,13 +2123,13 @@ getwork.then(function(data) {
                             // if (data.type_of_log == 2 && data.office_log == 1) {
 
                             // }
-
+                            
                             $("#activityByProjectEditShow").hide();
                             $("#locationByProjectEditShow").hide();
                             // $("#activityByProjectEditShow").hide();
                             $("#typeoflogedit").val(data.type_of_log);
                             $("#officelog2edit").val(data.office_log);
-
+                           
                             $("#project_id_edit").val(data.project_id);
                             $("#officeLogProjectEdit").val(data.project_id);
 
@@ -2185,7 +2139,7 @@ getwork.then(function(data) {
                             // projectlocsearchedit
                             $("#activity_name_edit2").val(data.activity_name);
                             $("#activity_name_edit1").val(data.activity_name);
-
+                           
 
                             // $("#projectLocationOfficeEdit").picker(
                             //     "set",
@@ -2198,7 +2152,7 @@ getwork.then(function(data) {
                                 "checked",
                                 data.exit_project
                             );
-
+                            
                             $("#desc").val(data.desc);
                             $("#total_hour_edit").val(data.total_hour);
                             $("#id").val(data.id);
@@ -2276,8 +2230,7 @@ getwork.then(function(data) {
                                 //     $("#dateaddlogedit").css("pointer-events", "auto");
                                 // }
 
-
-
+                                
                         });
 
 
@@ -2349,14 +2302,14 @@ getwork.then(function(data) {
                             eventData.then(function(data) {
                                 var participants = data.participants; // Assuming data.participants is an array of objects with user_id and name properties
                                 var attendanceStatus = data.attendanceStatus; // Assuming data.attendanceStatus is an array of objects with status property
-
+                            
                                 var tableBody = $("#tableRowParticipant");
                                 tableBody.empty(); // Clear any existing rows in the table
-
+                            
                                 for (var i = 0; i < participants.length; i++) {
                                     var participant = participants[i];
                                     var status = attendanceStatus[i].status; // Assuming the attendance status field is named 'status'
-
+                            
                                     var row = $("<tr></tr>");
                                     row.append($("<td></td>").text(i + 1));
                                     row.append($("<td></td>").text(participant.name));
@@ -2394,13 +2347,40 @@ getwork.then(function(data) {
                            
 
 
+                            var eventData = getEvents(eventId);
+                            eventData.then(function(data) {
+                                var nonParticipants = data.nonParticipants; // Assuming data.nonParticipants is an array of objects with user_id and name properties
+
+                                var dropdown = $("#addneweventparticipantedit");
+                                dropdown.empty(); // Clear any existing options in the dropdown
+
+                                for (var i = 0; i < nonParticipants.length; i++) {
+                                    var nonParticipant = nonParticipants[i];
+
+                                    // Create an option element for each non-participant
+                                    var option = $("<option></option>")
+                                        .val(nonParticipant.user_id)
+                                        .text(nonParticipant.name);
+
+                                    dropdown.append(option);
+                                }
+
+                                // Initialize Select2 after populating the dropdown
+                                // dropdown.select2({
+                                //     placeholder: "Please Choose"
+                                // });
+                            });
 
 
+                            
 
 
+                            
 
 
+                            
 
+                            
 
                             $("#participantlist").val(data.participantNames);
                             $("#event_name").val(data.event_name);
@@ -2409,7 +2389,7 @@ getwork.then(function(data) {
                             $("#endeventdateedit").val(data.end_date);
                             $("#starteventtimeedit").val(data.start_time);
 
-
+                            
 
                             $("#starteventtimeedit").mdtimepicker({
                                 showMeridian: true,
@@ -2885,7 +2865,7 @@ getwork.then(function(data) {
                                 descE.style.resize = "vertical";;
                                 descE.style.backgroundColor = "white";
 
-
+                               
 
 
                                 // Gray out the form
@@ -3012,7 +2992,7 @@ getwork.then(function(data) {
 
                             // }
                             $("#eventcreator").val(data.employeeName);
-
+                            
                             $("#descE").val(data.desc);
                             $("#addeventreminderedit").val(data.reminder);
                             if (data.file_upload) {
@@ -3049,7 +3029,7 @@ getwork.then(function(data) {
 
                 events: dataHoliday,
                 eventOrder: 'start',
-
+               
             });
 
             calendar.render();
@@ -3145,17 +3125,17 @@ $("#endeventdate").datepicker({
         var now = new Date();
         var hours = now.getHours().toString().padStart(2, '0');
         var minutes = now.getMinutes().toString().padStart(2, '0');
-
+    
         var currentTime = hours + ":" + minutes;
-
+    
         $("#starttime").val(currentTime); // Set the value of the input field directly
-
+    
         $("#starttime").mdtimepicker({
             showMeridian: true,
             timeFormat: 'hh:mm:ss.000',
             is24hour: true
         });
-
+    
         // Calculate end time
         var start = new Date();
         start.setHours(parseInt(hours));
@@ -3164,38 +3144,38 @@ $("#endeventdate").datepicker({
         var endHours = start.getHours().toString().padStart(2, '0');
         var endMinutes = start.getMinutes().toString().padStart(2, '0');
         var endTime = endHours + ":" + endMinutes;
-
+    
         $("#endtime").val(endTime); // Set the value of the end time input field directly
-
+    
         $("#endtime").mdtimepicker({
             showMeridian: true,
             timeFormat: 'hh:mm:ss.000',
             is24hour: true
         });
-
-
+    
+    
         $("#daystart,#dayend")
             .datepicker({
                 format: "yyyy/mm/dd",
             })
             .datepicker("setDate", "now");
-
+    
         $("#daystartedit,#dayendedit")
             .datepicker({
                 format: "yyyy/mm/dd",
             })
             .datepicker("setDate", "now");
-
+    
 
         $("#starttime").change(function () {
             // Reset the end time value to an empty string
             $("#endtime").val("");
         });
-
+    
         $("#endtime").change(function () {
             var startTime = moment($("#starttime").val(), "hh:mm A").format("HH:mm");
             var endTime = moment($("#endtime").val(), "hh:mm A").format("HH:mm");
-
+        
             if (endTime < startTime) {
                 Swal.fire({
                     icon: "error",
@@ -3223,23 +3203,23 @@ $("#endeventdate").datepicker({
         diff -= hours * (1000 * 60 * 60);
         var mins = Math.floor(diff / (1000 * 60));
         diff -= mins * (1000 * 60);
-
+    
         // $("#logduration").val(
         //     days + " days : " + hours + " hours : " + mins + " minutes "
         // );
-
-
+    
+    
         if ($("#lunchBreak").val() === "1") {
             hours -= 1;
             // hours = hours - 1
         }
-
+    
         $("#logduration").val(
             // days + " days : " + hours + " hours : " + mins + " minutes "
-            // days +  hours + mins
+            // days +  hours + mins 
             hours + ":" + mins + ":" + "0"
         );
-
+    
         // Disable lunch break if total hours are less than 1
         if (hours < 1 && mins < 1) {
             Swal.fire({
@@ -3247,15 +3227,15 @@ $("#endeventdate").datepicker({
                 title: 'Input Time Error',
                 text: 'Between Start Time and End Time must be more than 1 hour if Lunch Break is selected',
             });
-
+            
             $("#starttime").val("");
             $("#endtime").val("");
-
+            
 
         } else {
             // $("#lunchBreak").prop("disabled", false);
         }
-
+        
     });
 
     //addeventmodal
@@ -3263,17 +3243,17 @@ $("#endeventdate").datepicker({
         var now = new Date();
         var hours = now.getHours().toString().padStart(2, '0');
         var minutes = now.getMinutes().toString().padStart(2, '0');
-
+    
         var currentTime = hours + ":" + minutes;
-
+    
         $("#starteventtime").val(currentTime); // Set the value of the input field directly
-
+    
         $("#starteventtime").mdtimepicker({
             showMeridian: true,
             timeFormat: 'hh:mm:ss.000',
             is24hour: true
         });
-
+    
         // Calculate end time
         var start = new Date();
         start.setHours(parseInt(hours));
@@ -3282,32 +3262,32 @@ $("#endeventdate").datepicker({
         var endHours = start.getHours().toString().padStart(2, '0');
         var endMinutes = start.getMinutes().toString().padStart(2, '0');
         var endTime = endHours + ":" + endMinutes;
-
+    
         $("#endeventtime").val(endTime); // Set the value of the end time input field directly
-
+    
         $("#endeventtime").mdtimepicker({
             showMeridian: true,
             timeFormat: 'hh:mm:ss.000',
             is24hour: true
         });
-
-
+    
+    
         $("#starteventdate,#endeventdate")
             .datepicker({
                 format: "yyyy/mm/dd",
             })
             .datepicker("setDate", "now");
-
-
+    
+       
         $("#starteventtime").change(function () {
             // Reset the end time value to an empty string
             $("#endeventtime").val("");
         });
-
+    
         $("#endeventtime").change(function () {
             var startTime = moment($("#starteventtime").val(), "hh:mm A");
             var endTime = moment($("#endeventtime").val(), "hh:mm A");
-
+    
             if (endTime.isBefore(startTime)) {
                 Swal.fire({
                     icon: "error",
@@ -3329,34 +3309,34 @@ $("#endeventdate").datepicker({
     ).change(function () {
         calculateDuration();
     });
-
+    
     //update total duration
     function calculateDuration() {
         var startdt = new Date(
             $("#starteventdate").val() + " " + $("#starteventtime").val()
         );
-
+    
         var enddt = new Date(
             $("#endeventdate").val() + " " + $("#endeventtime").val()
         );
-
+    
         var diff = enddt - startdt;
-
+    
         var days = Math.floor(diff / (1000 * 60 * 60 * 24));
         diff -= days * (1000 * 60 * 60 * 24);
-
+    
         var hours = Math.floor(diff / (1000 * 60 * 60));
         diff -= hours * (1000 * 60 * 60);
-
+    
         var mins = Math.floor(diff / (1000 * 60));
         diff -= mins * (1000 * 60);
-
+    
         $("#duration").val(
             // days + " days : " + hours + " hours : " + mins + " minutes "
             hours + ":" + mins + ":0"
         );
     }
-
+    
     //edit event modal mytimesheet
     $(
         "#durationeditevent,#starteventdateedit,#endeventdateedit,#starteventtimeedit,#endeventtimeedit"
@@ -3364,30 +3344,29 @@ $("#endeventdate").datepicker({
         var startdt = new Date(
             $("#starteventdateedit").val() + " " + $("#starteventtimeedit").val()
         );
-
+    
         var enddt = new Date(
             $("#endeventdateedit").val() + " " + $("#endeventtimeedit").val()
         );
-
+    
         var diff = enddt - startdt;
-
+    
         var days = Math.floor(diff / (1000 * 60 * 60 * 24));
         diff -= days * (1000 * 60 * 60 * 24);
-
+    
         var hours = Math.floor(diff / (1000 * 60 * 60));
         diff -= hours * (1000 * 60 * 60);
-
+    
         var mins = Math.floor(diff / (1000 * 60));
         diff -= mins * (1000 * 60);
 
-        // console.log(days + ":" + hours);
         $("#durationeditevent").val(
             hours + ":" + mins + ":0"
         );
     });
-
-
-
+    
+    
+    
 
     $(document).on('change', "#typeoflog", function() {
         if ($(this).val() == "1") {
@@ -3395,7 +3374,7 @@ $("#endeventdate").datepicker({
             $("#officelog").hide();
             $("#myproject").hide();
             $("#locationByProjectHide").hide();
-
+            
 
         } else if ($(this).val() == "2") {
             $("#officelog").show();
@@ -3651,16 +3630,13 @@ $("#endeventdate").datepicker({
     $("#addneweventprojectlocsearchedit").picker({ search: true });
     // $("#addneweventparticipantedit").picker({ search: true });
     $("#addneweventselectprojectedit").picker({ search: true });
-    // $('#addneweventparticipantedit').select2({
-    //     dropdownParent: $('#editeventmodal'),
-    //     multiple: true
-    // });
 
-
-
-
-
-
+    $('#addneweventparticipantedit').select2({
+        dropdownParent: $('#editeventmodal'),
+        multiple: true
+    });
+    
+    
 
     $(document).on("change", "#typeoflogedit", function () {
         if ($(this).val() == "2") {
@@ -3868,7 +3844,7 @@ $("#endeventdate").datepicker({
         });
     });
 
-
+    
 
 
     $("#lunchBreakedit, #daystartedit, #dayendedit, #starttimeedit, #endtimeedit").focus(function() {
@@ -3881,20 +3857,20 @@ $("#endeventdate").datepicker({
         diff -= hours * (1000 * 60 * 60);
         var mins = Math.floor(diff / (1000 * 60));
         diff -= mins * (1000 * 60);
-
+    
         // Subtract 1 hour if lunch break is selected (value is "1" and not null) and total hours are greater than 1
         if ($("#lunchBreakedit").val() === "1") {
             hours -= 1;
         }
-
+    
         $("#total_hour_edit").val(hours + ":" + mins + ":" + "0");
-
+    
         // Disable lunch break if total hours are less than 1
         if (hours < 1 && mins < 1) {
             $("#starttimeedit").val("");
             $("#endtimeedit").val("");
             $("#total_hour_edit").val("");
-
+    
             // Show the error only if it hasn't been shown before
             if (!errorShown) {
                 Swal.fire({
@@ -3908,12 +3884,12 @@ $("#endeventdate").datepicker({
             errorShown = false; // Reset the flag if the condition is no longer true
         }
     });
+    
 
 
-
-
-
-
+    
+    
+    
 
     // Trigger the change event on page load to update the duration initially
     // $(document).ready(function () {
@@ -4005,3 +3981,4 @@ toggleVenueLocation();
 var venue = document.getElementById("venueaddpehal");
 var observer = new MutationObserver(toggleVenueLocation);
 observer.observe(venue, { attributes: true, attributeFilter: ["style"] });
+
