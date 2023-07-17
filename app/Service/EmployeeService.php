@@ -661,16 +661,12 @@ class EmployeeService
 
 
 
-            if (isset($_FILES['expiryDate']['name'])) {
-                $input['expiryDate'] = dateFormat($input['expiryDate']);
-
-            } else {
+            if(!isset($input['expiryDate']))
+            {
                 $input['expiryDate'] = null;
             }
 
-            $input['DOM'] = dateFormat($input['DOM']);
             $input['DOB'] = dateFormat($input['DOB']);
-            UserCompanion::create($input);
 
             $input['mainCompanion'] = isset($input['mainCompanion']) ? 1 : 0;
             $companion = UserCompanion::create($input);
