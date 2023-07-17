@@ -1,7 +1,7 @@
 @extends('layouts.dashboardTenant')
 @section('content')
     <div id="content" class="app-content">
-        <h1 class="page-header">eClaim <small>| Claim Approval | Supervisor | View Monthly Claim </small></h1>
+        <h1 class="page-header">eClaim <small>| Claim Approval | Monthly Claim </small></h1>
         <div class="panel panel">
             <div class="panel-body" id="hodClaimDetailJs">
 
@@ -38,7 +38,7 @@
                                     <label class="form-label">Office Base</label>
                                 </div>
                                 <div class="col-md-8">
-                                    <input readonly type="text" value="Headquarters" class="form-control" height="30px"; overflow= "hidden";>
+                                    <input readonly type="text" value="Headquarters" class="form-control">
                                 </div>
                             </div>
                         </div>
@@ -50,13 +50,13 @@
                                     <label class="form-label">Year</label>
                                 </div>
                                 <div class="col-md-3">
-                                    <input readonly type="text" value="2023" class="form-control">
+                                    <input readonly type="text" value="2023" class="form-control" style="text-align:center">
                                 </div>
                                 <div class="col-md-3">
                                     <label class="form-label">Claim ID</label>
                                 </div>
                                 <div class="col-md-3">
-                                    <input readonly type="text" value="MTC {{ $general->id ?? '-' }}" class="form-control">
+                                    <input readonly type="text" value="MTC {{ $general->id ?? '-' }}" class="form-control" style="text-align:center">
                                 </div>
                             </div>
                             <div class="row p-2">
@@ -64,13 +64,13 @@
                                     <label class="form-label">Month</label>
                                 </div>
                                 <div class="col-md-3">
-                                    <input readonly type="text" value="January" class="form-control">
+                                    <input readonly type="text" value="January" class="form-control" style="text-align:center">
                                 </div>
                                 <div class="col-md-3">
                                     <label class="form-label">Claim Type</label>
                                 </div>
                                 <div class="col-md-3">
-                                    <input readonly type="text" value="{{ $general->claim_type ?? '-' }}" class="form-control">
+                                    <input readonly type="text" value="{{ $general->claim_type ?? '-' }}" class="form-control" style="text-align:center">
                                 </div>
                             </div>
                             <div class="row p-2">
@@ -78,13 +78,13 @@
                                     <label class="form-label">Status</label>
                                 </div>
                                 <div class="col-md-3">
-                                    <input readonly type="text" value="{{ $general->status ?? '-' }}" class="form-control btn btn-primary">
+                                    <input readonly type="text" value="{{ $general->status ?? '-' }}" class="form-control btn btn-primary" style="text-align:center">
                                 </div>
                                 <div class="col-md-3">
                                     <label class="form-label">Applied Date</label>
                                 </div>
                                 <div class="col-md-3">
-                                    <input readonly type="text" value="" class="form-control">
+                                    <input readonly type="text" value="" class="form-control" style="text-align:center">
                                 </div>
                             </div>
                             <div class="row p-2">
@@ -365,7 +365,7 @@
                                                 <a href="#default-tab-1" data-bs-toggle="tab" class="nav-link active">Travelling</a>
                                             </li>
                                             <li class="nav-item">
-                                                <a href="#default-tab-2" data-bs-toggle="tab" class="nav-link ">Subsistence</a>
+                                                <a href="#default-tab-2" data-bs-toggle="tab" class="nav-link ">Subsistence Allowance & Accomodation</a>
                                             </li>
                                             <li class="nav-item">
                                                 <a href="#default-tab-3" data-bs-toggle="tab" class="nav-link ">Others</a>

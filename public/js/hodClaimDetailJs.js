@@ -1,17 +1,17 @@
 //TRAVEL MODAL
-$(document).on("click", "#buttontravel", function () {
+$(document).on("click", "#SVRtravel", function () {
 console.log("hana");
-    $("#travelone").modal("show");
+    $("#travelModal").modal("show");
 });
 
 //SUBSISTENCE MODAL
-$(document).on("click", "#mcvSubsistence", function () {
+$(document).on("click", "#SVRsubs", function () {
 
     $("#subsModal").modal("show");
 });
 
 //OTHERS MODAL
-$(document).on("click", "#mcvOthers", function () {
+$(document).on("click", "#SVRothers", function () {
 
     $("#othersModal").modal("show");
 });

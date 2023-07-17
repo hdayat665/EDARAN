@@ -40,28 +40,44 @@
                             {!! $address->state ? $address->state . ', ' : '' !!}
                             {!! $address->country ? $address->country : '' !!}
                         </td>
-                        
+
                         <td>
+
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" name="address_type[]" 
-                                value="permanent" {{ $address->addressType == '1' || $address->addressType == '3' ? 'checked' : '' }} 
+                                <input class="form-check-input" type="checkbox" name="address_type[]"
+                                value="permanent" {{ $address->addressType == '1' || $address->addressType == '3' ? 'checked' : '' }}
                                 data-address-id="{{ $address->id }}" data-address-type="1"/>
                                 <label class="form-check-label" for="permanent">Permanent</label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" name="address_type[]" 
-                                value="correspondent" {{ $address->addressType == '2' || $address->addressType == '3' ? 'checked' : '' }} 
+                                <input class="form-check-input" type="checkbox" name="address_type[]"
+                                value="correspondent" {{ $address->addressType == '2' || $address->addressType == '3' ? 'checked' : '' }}
                                 data-address-id="{{ $address->id }}" data-address-type="2"/>
                                 <label class="form-check-label" for="correspondent">Correspondent</label>
                             </div>
+
+                                {{-- <td>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="checkbox" name="address_type[]"
+                                            value="permanent" {{ ($address->addressType == '1' || $address->addressType == '3') ? 'checked' : '' }}
+                                            data-address-id="{{ $address->id }}" data-address-type="1"/>
+                                        <label class="form-check-label" for="permanent">Permanent</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="checkbox" name="address_type[]"
+                                            value="correspondent" {{ ($address->addressType == '2' || $address->addressType == '3') ? 'checked' : '' }}
+                                            data-address-id="{{ $address->id }}" data-address-type="2"/>
+                                        <label class="form-check-label" for="correspondent">Correspondent</label>
+                                    </div>
+                                </td> --}}
+
                         </td>
-                        {{-- <td style="text-transform: uppercase;"> {{ addressType($address->addressType) ?? '' }} </td> --}}
                     </tr>
                     @endforeach
                 @endif
                 <span style="display: none"><input type="text" id="addressId" value="{{$addressId}}"></span>
             </tbody>
-        </table>  
+        </table>
     </div>
     <div class="row p-2">
         <div class="modal-footer">

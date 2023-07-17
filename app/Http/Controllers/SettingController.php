@@ -1300,25 +1300,42 @@ class SettingController extends Controller
         return response()->json($result);
     }
 
-    // public function holidaylistView(){
-    //      return view('pages.setting.eleave.holidaylist');
-    // }
-
     public function holidaylistView()
     {
         $hlv = new SettingService;
 
-        $result = $hlv->holidaylistView();
+        $data['holiday'] = $hlv->holidaylistView();
+        // dd($data['holiday'] );
+        // die;
+        $data['country'] = $hlv->country();
 
-        return view('pages.setting.eLeave.holidaylist', $result);
+        return view('pages.setting.eLeave.holidaylist', $data);
     }
 
     public function createholidaylist(Request $r)
     {
+        // $input = $r->input();
+
+        // dd($input);
+        // die;
 
         $chl = new SettingService;
 
         $result = $chl->createholidaylist($r);
+
+        return response()->json($result);
+    }
+
+    public function updateholidaystate(Request $r)
+    {
+        // $input = $r->input();
+
+        // dd($input);
+        // die;
+
+        $chl = new SettingService;
+
+        $result = $chl->updateholidaystate($r);
 
         return response()->json($result);
     }
@@ -1583,5 +1600,25 @@ class SettingController extends Controller
         // $result = $ss->systemUser();
 
         return view('pages.setting.systemUserUpdate');
+    }
+
+
+    //
+    public function getstateholiday($id = '')
+    {
+        $gclh = new SettingService;
+
+        $result = $gclh->getstateholiday($id);
+
+        return $result;
+    }
+
+    public function getstateholidaydetail($id = '')
+    {
+        $gclh = new SettingService;
+
+        $result = $gclh->getstateholidaydetail($id);
+
+        return $result;
     }
 }
