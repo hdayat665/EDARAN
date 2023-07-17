@@ -10,18 +10,32 @@ use Illuminate\Queue\SerializesModels;
 class Mail extends Mailable
 {
     use Queueable, SerializesModels;
-
+    
     /**
      * Create a new message instance.
      *
      * @return void
      */
     public $data;
+    // public $response;
 
     public function __construct($data)
     {
         $this->data = $data;
     }
+
+    // public function __construct($data, $response)
+    // {
+    //     $this->data = $data;
+    //     $this->response = $response;
+    // }
+
+    // public function setResponse(array $response)
+    // {
+    //     $this->response = $response;
+    //     return $this;
+    // }
+   
 
     /**
      * Build the message.
@@ -31,6 +45,7 @@ class Mail extends Mailable
     public function build()
     {
         $data = $this->data;
+        // $response = $this->response;
 
         if ($data['typeEmail'] == 'register') {
             $view = 'emails.register';
@@ -93,8 +108,14 @@ class Mail extends Mailable
         }else if ($data['typeEmail'] == 'forgotDomain') {
             $view = 'emails.forgotDomain';
         }
-
-
+        else if ($data['typeEmail'] == 'emailmissedtimesheet') {
+            $view = 'emails.timesheet.emailmissedtimesheet';
+        }
+        // if ($data['typeEmail'] == 'emailmissedtimesheet' || (isset($response['typeEmail']) && $response['typeEmail'] == 'emailmissedtimesheet')) {
+        //     $view = 'emails.timesheet.emailmissedtimesheet';
+        // }
+        
+         
         // $address = 'janeexampexample@example.com';
         // $subject = 'This is a demo!';
         // $name = 'Jane Doe';
