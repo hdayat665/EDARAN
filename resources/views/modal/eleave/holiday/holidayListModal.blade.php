@@ -1,3 +1,4 @@
+
 {{-- modal add holiday --}}
 <div class="modal fade" id="addleave" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -53,16 +54,44 @@
                             </div>
                         </div>
                     </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                <button class="btn btn-primary" id="saveButton">Save</button>
+
+                    <div class="row p-2">
+                        <div class="col md-3">
+                            <label class="form-label">Country*</label>
+                            <select class="form-select select3" id="select3" name="country_id" style="text-transform:uppercase" required>
+                                <option value="" label="PLEASE CHOOSE"></option>
+                                @foreach($country as $ct)
+                                    <option value="{{ $ct->country_id }}" {{ old('country_id') == $ct->country_id ? 'selected' : '' }}>{{ $ct->country_name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row p-2">
+
+                    </div>
+                    <div class="row p-2">
+                        <label class="form-label">State*</label>
+                        <div class="col">
+                            <div class="row p-2">
+                                <div class="row p-2">
+
+                                <div class="col-md-6"></div>
+                                </div>
+                                <div class="border border-light"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <button class="btn btn-primary" id="saveButton">Save</button>
+
+                    </div>
                 </form>
             </div>
         </div>
     </div>
 </div>
-
 {{-- modal updateleave type --}}
 <div class="modal fade" id="updateleave" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -170,3 +199,5 @@
         </div>
     </div>
 </div>
+
+

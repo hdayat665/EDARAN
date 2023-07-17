@@ -1,4 +1,3 @@
-<!-- NEW DESIGN -->
 <div class="modal fade" id="travelModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" style="max-width: 1200px">
         <div class="modal-content">
@@ -50,16 +49,16 @@
                             <td>
                                 <input class="form-check-input" type="checkbox" id="checkbox1" checked />   
                             </td>
-                            <td id="start_time">00:00:00</td>
-                            <td id="end_time">00:00:00</td>
-                            <td id="location_start">Edaran Office</td>
-                            <td id="location_address">KLIA 2</td>
-                            <td id="desc">meeting with client</td>
-                            <td id="type_transport">Personal Car</td>
-                            <td id="millage">167.5KM</td>
-                            <td id="petrol">RM50.00</td>
-                            <td id="toll">RM50.00</td>
-                            <td id="parking">RM50.00</td>
+                            <td>YYYY-MM-DD</td>
+                            <td>YYYY-MM-DD</td>
+                            <td>Edaran Office</td>
+                            <td>KLIA 2</td>
+                            <td>meeting with client</td>
+                            <td>Personal Car</td>
+                            <td>167.5KM</td>
+                            <td>RM50.00</td>
+                            <td>RM50.00</td>
+                            <td>RM50.00</td>
                             <td>
                                 <a href="#" data-bs-toggle="dropdown" class="btn btn-primary btn-sm dropdown-toggle"></i> Actions <i class="fa fa-caret-down"></i></a>
                                 <div class="dropdown-menu">
@@ -72,16 +71,16 @@
                             <td>
                                 <input class="form-check-input" type="checkbox" id="checkbox1" checked />   
                             </td>
-                            <td id="start_time">00:00:00</td>
-                            <td id="end_time">00:00:00</td>
-                            <td id="location_start">Edaran Office</td>
-                            <td id="location_address">KLIA 2</td>
-                            <td id="desc">meeting with client</td>
-                            <td id="type_transport">Personal Car</td>
-                            <td id="millage">167.5KM</td>
-                            <td id="petrol">RM50.00</td>
-                            <td id="toll">RM50.00</td>
-                            <td id="parking">RM50.00</td>
+                            <td>YYYY-MM-DD</td>
+                            <td>YYYY-MM-DD</td>
+                            <td>Edaran Office</td>
+                            <td>KLIA 2</td>
+                            <td>meeting with client</td>
+                            <td>Personal Car</td>
+                            <td>167.5KM</td>
+                            <td>RM50.00</td>
+                            <td>RM50.00</td>
+                            <td>RM50.00</td>
                             <td>
                                 <a href="#" data-bs-toggle="dropdown" class="btn btn-primary btn-sm dropdown-toggle"></i> Actions <i class="fa fa-caret-down"></i></a>
                                 <div class="dropdown-menu">
@@ -179,7 +178,7 @@
                                                 </div>
                                                 <div class="col">
                                                     <input type="hidden" name="id" id="claim_id" class="form-control" readonly value=''>
-                                                    <input type="text" id="start_date_update" class="form-control" readonly value="">
+                                                    <input type="text" id="start_date_update" class="form-control" readonly value=''>
                                                     <input type="hidden" name="general_id" class="form-control" value="" id="general_id_subs">
                                                 </div>
                                             </div>
@@ -188,7 +187,7 @@
                                                     <label class="form-label">Start Time</label>
                                                 </div>
                                                 <div class="col">
-                                                    <input type="text" id="start_time_update" class="form-control" readonly value="">
+                                                    <input type="text" id="start_time_update" class="form-control" readonly value=''>
                                                 </div>
                                             </div>
                                         </div>
@@ -202,7 +201,7 @@
                                                     <label class="form-label">End Date</label>
                                                 </div>
                                                 <div class="col">
-                                                    <input type="text" id="end_date_update" class="form-control" readonly value="">
+                                                    <input type="text" id="end_date_update" class="form-control" readonly value=''>
                                                 </div>
                                             </div>
                                             <div class="row p-2">
@@ -210,7 +209,7 @@
                                                     <label class="form-label">End Time</label>
                                                 </div>
                                                 <div class="col">
-                                                    <input type="text" id="time2" class="form-control" readonly value=''>
+                                                    <input type="text" id="end_time_update" class="form-control" readonly value=''>
                                                 </div>
                                             </div>
                                         </div>
@@ -234,7 +233,7 @@
                                             <label class="form-label">Project</label>
                                         </div>
                                         <div class="col-md-8">
-                                            <input type="text" id="project1" class="form-control" readonly value=''>
+                                            <input type="text" id="project_update" class="form-control" readonly value=''>
                                         </div>
                                     </div>
                                 </div>
@@ -264,7 +263,7 @@
                                                 <label class="form-label">Breakfast</label>
                                             </div>
                                             <div class="col-md-2">
-                                                <input  type="text" class="form-control" readonly value="" id="breakfast">
+                                                <input  type="text" class="form-control" readonly value="" id="BFUpdate">
                                             </div>
                                             <div class="col-md-1">
                                                 <label class="form-label">X</label>
@@ -284,7 +283,7 @@
                                                 <label class="form-label">Lunch</label>
                                             </div>
                                             <div class="col-md-2">
-                                                <input  type="text" class="form-control" readonly value="" id="lunch">
+                                                <input  type="text" class="form-control" readonly value="" id="LHUpdate">
                                             </div>
                                             <div class="col-md-1">
                                                 <label class="form-label">X</label>
@@ -304,7 +303,7 @@
                                                 <label class="form-label">Dinner</label>
                                             </div>
                                             <div class="col-md-2">
-                                                <input  type="text" class="form-control" readonly value="" id="dinner">
+                                                <input  type="text" class="form-control" readonly value="" id="DNUpdate">
                                             </div>
                                             <div class="col-md-1">
                                                 <label class="form-label">X</label>
@@ -354,7 +353,7 @@
                                                 </div>
                                                 <div class="col-md-3">
                                                     <input  type="hidden" class="form-control" value="" id="hotelcvUpdateHide">
-                                                    <input type="number" name="hotel_value" class="form-control" value="" id="hotel" />
+                                                    <input type="number" name="hotel_value" class="form-control" value="" id="hotelcvUpdate" />
                                                 </div>
 
                                                 <div class="col-md-1">
@@ -375,7 +374,7 @@
                                                     <label class="form-label">Lodging</label>
                                                 </div>
                                                 <div class="col-md-3">
-                                                    <input type="number" class="form-control" readonly value="" id="lodging" />
+                                                    <input type="number" class="form-control" readonly value="" id="lodgingcvUpdate" />
                                                 </div>
                                                 <div class="col-md-2" style="display: none">
                                                     <input readonly type="text" class="form-control" id="lodgingcv1" value="0">
@@ -573,4 +572,3 @@
         </div>
     </div>
 </div>
-

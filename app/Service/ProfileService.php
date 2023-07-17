@@ -78,11 +78,11 @@ class ProfileService
 
             if ($input['fullName']) {
                 $employee['employeeName'] = $input['fullName'];
-            
+
                 Employee::where('user_id', $user_id)->update($employee);
             }
-            
-            
+
+
             if(!isset($input['nonNetizen']))
             {
                 $input['nonNetizen'] = null;
@@ -111,7 +111,7 @@ class ProfileService
             if ($_FILES['fileID']['name']) {
                 $payslip = upload(request()->file('fileID'));
                 $input['fileID'] = $payslip['filename'];
-            
+
                 if (!$input['fileID']) {
                     unset($input['fileID']);
                 }
@@ -123,7 +123,7 @@ class ProfileService
             } else {
                 $input['okuFile'] = null;
             }
-            
+
 
             if(isset($input['nonNetizen']) && $input['nonNetizen'] == 'on') {
                 $input['idNo'] = null;
@@ -167,7 +167,7 @@ class ProfileService
         return $data;
     }
 
-  
+
 
     public function getEducation($id = '')
     {
@@ -448,15 +448,13 @@ class ProfileService
                 }
             }
 
-            if ($_FILES['okuID']['name'])
-            {
-                $idOKU = upload($r->file('okuID'));
-                $input['okuID'] = $idOKU['filename'];
-
-                if (!$input['okuID']) {
-                    unset($input['okuID']);
-                }
+            if (isset($_FILES['okuID']['name'])) {
+                $payslip = upload(request()->file('okuID'));
+                $input['okuID'] = $payslip['filename'];
+            } else {
+                $input['okuID'] = null;
             }
+
 
             if(!$input['DOM'])
             {
@@ -522,7 +520,6 @@ class ProfileService
     public function addCompanion($r)
     {
         $input = $r->input();
-
         $id = Auth::user()->id;
 
         $companion = UserCompanion::where('user_id', $id)->count();
@@ -561,7 +558,7 @@ class ProfileService
             } else {
                 $input['okuID'] = null;
             }
-            
+
             if(!isset($input['dateJoined']))
             {
                 $input['dateJoined'] = null;
@@ -570,7 +567,7 @@ class ProfileService
             if(!isset($input['expiryDate']))
             {
                 $input['expiryDate'] = null;
-            }       
+            }
 
             $input['mainCompanion'] = isset($input['mainCompanion']) ? 1 : 0;
             $companion = UserCompanion::create($input);
@@ -635,26 +632,26 @@ class ProfileService
             $data['title'] = config('app.response.error.title');
             $data['msg'] = 'user not found';
         } else {
-            
+
             if ($_FILES['birthID']['name']) {
                 $payslip = upload($r->file('birthID'));
                 $input['birthID'] = $payslip['filename'];
-    
+
                 if (!$input['birthID']) {
                     unset($input['birthID']);
                 }
             }
-    
+
             if ($_FILES['idFile']['name']) {
                 $payslip = upload($r->file('idFile'));
                 $input['idFile'] = $payslip['filename'];
-    
+
                 if (!$input['idFile']) {
                     unset($input['idFile']);
                 }
             }
-    
-      
+
+
 
             if (isset($_FILES['okuFile']['name'])) {
                 $payslip = upload($r()->file('okuFile'));
@@ -662,12 +659,12 @@ class ProfileService
             } else {
                 $input['okuFile'] = null;
             }
-    
-    
+
+
             if ($_FILES['supportDoc']['name']) {
                 $payslip = upload($r->file('supportDoc'));
                 $input['supportDoc'] = $payslip['filename'];
-    
+
                 if (!$input['supportDoc']) {
                     unset($input['supportDoc']);
                 }
@@ -690,11 +687,11 @@ class ProfileService
             if(!isset($input['idNo']))
             {
                 $input['idNo'] = null;
-             
+
             }
 
-           
-            
+
+
 
 
 
@@ -777,15 +774,15 @@ class ProfileService
             }
         }
 
-       
-        
+
+
         if (isset($_FILES['okuFile']['name'])) {
             $payslip = upload(request()->file('okuFile'));
             $input['okuFile'] = $payslip['filename'];
         } else {
             $input['okuFile'] = null;
         }
-    
+
 
         $input['user_id'] = Auth::user()->id;
         UserParent::create($input);
@@ -814,14 +811,31 @@ class ProfileService
             }
         }
 
-        if ($_FILES['okuFile']['name'])
+        if(!isset($input['non_citizen']))
         {
-            $idOKU = upload($r->file('okuFile'));
-            $input['okuFile'] = $idOKU['filename'];
+            $input['non_citizen'] = null;
+        }
 
-            if (!$input['okuFile']) {
-                unset($input['okuFile']);
-            }
+        if(isset($input['non_citizen']) && $input['non_citizen'] == 'on') {
+            $input['idNo'] = null;
+        }
+
+
+        if(!isset($input['oku_status']))
+        {
+            $input['oku_status'] = null;
+        }
+
+        if(!isset($input['oku_status']) && $input['oku_status'] == 'on') {
+            $input['okuFile'] = null;
+            $input['okuCardNum'] = null;
+        }
+
+        if (isset($_FILES['okuFile']['name'])) {
+            $idOKU = upload(request()->file('okuFile'));
+            $input['okuFile'] = $idOKU['filename'];
+        } else {
+            $input['okuFile'] = null;
         }
 
         if(!isset($input['passport']))
@@ -1284,31 +1298,66 @@ class ProfileService
 
     public function updateAddressDetails($r)
     {
+
         $input = $r->input();
-
+        //   dd($input);
         $user_id = Auth::user()->id;
-        $id = $input['id'] ?? 1;
+        $id = $input['id'];
+        $data1 = $input['addressType'];
 
-        $user = UserAddress::where('id', $id)->first();
+        $user = UserAddress::find($id);
 
-        if(!$user)
-        {
-            $data['status'] = config('app.response.error.status');
-            $data['type'] = config('app.response.error.type');
-            $data['title'] = config('app.response.error.title');
-            $data['msg'] = 'Address not found';
 
-        } else {
+            if(!$user)
+            {
+                $data['status'] = config('app.response.error.status');
+                $data['type'] = config('app.response.error.type');
+                $data['title'] = config('app.response.error.title');
+                $data['msg'] = 'Address not found';
 
-            $user->update($input);
+            } else {
 
-            $data['status'] = config('app.response.success.status');
-            $data['type'] = config('app.response.success.type');
-            $data['title'] = config('app.response.success.title');
-            $data['msg'] = 'Address is updated.';
-        }
+                $input = [
+                    'addressType' => $data1
+                ];
+
+                UserAddress::where('id', $id)->update($input);
+
+
+                $data['status'] = config('app.response.success.status');
+                $data['type'] = config('app.response.success.type');
+                $data['title'] = config('app.response.success.title');
+                $data['msg'] = 'Address is updated.';
+            }
+
 
         return $data;
+
+        // $input = $r->input();
+
+        // $user_id = Auth::user()->id;
+        // $id = $input['id'] ?? 1;
+
+        // $user = UserAddress::where('id', $id)->first();
+
+        // if(!$user)
+        // {
+        //     $data['status'] = config('app.response.error.status');
+        //     $data['type'] = config('app.response.error.type');
+        //     $data['title'] = config('app.response.error.title');
+        //     $data['msg'] = 'Address not found';
+
+        // } else {
+
+        //     $user->update($input);
+
+        //     $data['status'] = config('app.response.success.status');
+        //     $data['type'] = config('app.response.success.type');
+        //     $data['title'] = config('app.response.success.title');
+        //     $data['msg'] = 'Address is updated.';
+        // }
+
+
     }
 
     // public function updateAddressType($r)
@@ -1489,7 +1538,7 @@ class ProfileService
         return $data;
     }
 
-    
+
 
 
 

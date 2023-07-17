@@ -40,7 +40,7 @@
                                 <div class="dropdown-menu">
                                     <a href="/editEmployee/{{$employeeInfo->user_id}}" class="dropdown-item">Edit Employee </a>
                                     <div class="dropdown-divider"></div>
-                                    <a href="register_v3.html" data-bs-toggle="modal" id="terminate" data-employee="{{$employeeInfo->id}}" data-id="{{$employeeInfo->user_id}}" class="dropdown-item">Terminate Employee</a>
+                                    <a href="register_v3.html" data-bs-toggle="modal" id="terminate" data-employee="{{$employeeInfo->id}}" data-id="{{$employeeInfo->user_id}}" class="dropdown-item">Exit Employee</a>
                                 </div>
                             @else
                                 <a href="#" data-bs-toggle="dropdown" class="btn btn-primary btn-sm dropdown-toggle">
@@ -68,9 +68,9 @@
                     @endif
                 </tbody>
             </table>
-        @include('pages.HRIS.employee.terminateEmployee')    
+        @include('pages.HRIS.employee.terminateEmployee')
         </div>
-        
+
     </div>
 @endsection
 

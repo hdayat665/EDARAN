@@ -154,7 +154,7 @@ class EmployeeService
     }
 
     public function terminateEmployment($r)
-    { 
+    {
         $input = $r->input();
 
         $status['status'] = 'Deactivate';
@@ -324,14 +324,14 @@ class EmployeeService
             $data['msg'] = 'Profile not found';
 
         } else {
- 
+
 
              if ($input['fullName']) {
                  $employee['employeeName'] = $input['fullName'];
-            
+
                  Employee::where('user_id', $user_id)->update($employee);
-             } 
-            
+             }
+
             if (!$input['religion']) {
                 unset($input['religion']);
             }
@@ -398,7 +398,7 @@ class EmployeeService
             if ($_FILES['fileID']['name']) {
                 $payslip = upload(request()->file('fileID'));
                 $input['fileID'] = $payslip['filename'];
-            
+
                 if (!$input['fileID']) {
                     unset($input['fileID']);
                 }
@@ -407,7 +407,7 @@ class EmployeeService
             if ($_FILES['okuFile']['name']) {
                 $payslip = upload(request()->file('okuFile'));
                 $input['okuFile'] = $payslip['filename'];
-    
+
                 if (!$input['okuFile']) {
                     unset($input['okuFile']);
                 }
@@ -567,7 +567,7 @@ class EmployeeService
                 unset($input['address2E']);
             }
 
-           
+
 
             // if ($input['mainCompanion']['name']) {
             //     $mainCom = ($r()->input('mainCompanion'));
@@ -585,14 +585,14 @@ class EmployeeService
             //         $companion -> mainCompanion = 4;
             //     $companion -> save();
             //     }
-            
+
 
 
             // if ($r->input('mainCompanion')) {
                 // Set the mainCompanion attribute of the new companion to 1
                 // $companion->mainCompanion = 6;
                 // $companion->save();
-    
+
                 // Set the mainCompanion attribute of all other companions to 0
                 // UserCompanion::where('user_id', $id)
                 //     ->where('id', '<>', $companion->id)
@@ -618,7 +618,6 @@ class EmployeeService
     public function addEmployeeCompanion($r)
     {
         $input = $r->input();
-
         $id = $input['user_id'];
 
         $companion = UserCompanion::where('user_id', $id)->count();
@@ -633,22 +632,22 @@ class EmployeeService
             if ($_FILES['idFile']['name']) {
                 $idAttachment = upload($r->file('idFile'));
                 $input['idFile'] = $idAttachment['filename'];
-    
+
                 if (!$input['idFile']) {
                     unset($input['idFile']);
                 }
             }
-    
+
             if ($_FILES['marrigeCert']['name']) {
                 $marrigeCert = upload($r->file('marrigeCert'));
                 $input['marrigeCert'] = $marrigeCert['filename'];
-    
+
                 if (!$input['marrigeCert']) {
                     unset($input['marrigeCert']);
                 }
             }
-    
-         
+
+
 
 
             if (isset($_FILES['okuattach']['name'])) {
@@ -660,7 +659,7 @@ class EmployeeService
 
             $input['dateJoined'] = dateFormat($input['dateJoined']);
 
-            
+
 
             if (isset($_FILES['expiryDate']['name'])) {
                 $input['expiryDate'] = dateFormat($input['expiryDate']);
@@ -675,23 +674,23 @@ class EmployeeService
 
             $input['mainCompanion'] = isset($input['mainCompanion']) ? 1 : 0;
             $companion = UserCompanion::create($input);
-    
+
             // Set the main companion if the checkbox is checked
             if ($r->input('mainCompanion')) {
                 // Set the mainCompanion attribute of the new companion to 1
                 $companion->mainCompanion = 1;
                 $companion->save();
-    
+
                 // Set the mainCompanion attribute of all other companions to 0
                 UserCompanion::where('user_id', $id)
                     ->where('id', '<>', $companion->id)
                     ->update(['mainCompanion' => 0]);
             }
-            
+
             $data['status'] = config('app.response.success.status');
             $data['type'] = config('app.response.success.type');
             $data['title'] = config('app.response.success.title');
-            $data['msg'] = 'Success add Companion';
+            $data['msg'] = 'New Companion is created.';
         }
 
         return $data;
@@ -842,7 +841,7 @@ class EmployeeService
             }
         }
 
-        
+
         if (isset($_FILES['okuFile']['name'])) {
             $okuAttach = upload(request()->file('okuFile'));
             $input['okuFile'] = $okuAttach['filename'];
@@ -878,12 +877,13 @@ class EmployeeService
 
     public function getEmployeeAddressforParent($id)
     {
-        
-        
+
         $addressDetails = UserAddress::where('user_id', $id)
-            ->select('address1', 'address2', 'postcode', 'city', 'state', 'country')
-            ->first();
-            
+        ->whereIn('addressType', [1, 3])
+        ->select('address1', 'address2', 'postcode', 'city', 'state', 'country')
+        ->first();
+
+
 
         if(!$addressDetails)
         {
@@ -907,6 +907,50 @@ class EmployeeService
         $input = $r->input();
 
         $id = $input['id'] ?? 1;
+        if ($_FILES['idFile']['name'])
+        {
+            $idAttachment = upload($r->file('idFile'));
+            $input['idFile'] = $idAttachment['filename'];
+
+            if (!$input['idFile']) {
+                unset($input['idFile']);
+            }
+        }
+
+
+        if(!isset($input['non_citizen']))
+        {
+            $input['non_citizen'] = null;
+        }
+
+        if(isset($input['non_citizen']) && $input['non_citizen'] == 'on') {
+            $input['idNo'] = null;
+        }
+
+
+        if(!isset($input['oku_status']))
+        {
+            $input['oku_status'] = null;
+        }
+
+        if(!isset($input['oku_status']) && $input['oku_status'] == 'on') {
+            $input['okuFile'] = null;
+            $input['okuCardNum'] = null;
+        }
+
+        if (isset($_FILES['okuFile']['name'])) {
+            $idOKU = upload(request()->file('okuFile'));
+            $input['okuFile'] = $idOKU['filename'];
+        } else {
+            $input['okuFile'] = null;
+        }
+
+        if(!isset($input['passport']))
+        {
+            $input['passport'] = null;
+            $input['expiryDate'] = null;
+            $input['issuingCountry'] = null;
+        }
 
         $user = UserParent::where('id', $id)->first();
 
@@ -1085,7 +1129,7 @@ class EmployeeService
             $data['title'] = 'Error';
             $data['type'] = 'error';
             $data['msg'] = 'Email already exist.';
-            
+
         } else {
 
             if ($input['branchId']) {
@@ -1140,7 +1184,7 @@ class EmployeeService
 
         $user = Employee::where('user_id',$id)->get();
 
-        
+
         if (!$user) {
             $data['status'] = config('app.response.error.status');
             $data['type'] = config('app.response.error.type');
@@ -1286,12 +1330,12 @@ class EmployeeService
     {
         $input = $r->input();
 
-       
+
         $data2 = $input['caapprover'];
 
 
         $input = [
-            
+
             'caapprover' => $data2
         ];
 
@@ -1304,7 +1348,7 @@ class EmployeeService
 
         return $data;
     }
-    
+
     public function updateeleavehierarchy($r, $id)
     {
         $input = $r->input();
@@ -1332,12 +1376,12 @@ class EmployeeService
     {
         $input = $r->input();
 
-       
+
         $data2 = $input['tsapprover'];
 
 
         $input = [
-            
+
             'tsapprover' => $data2
         ];
 
@@ -1355,12 +1399,12 @@ class EmployeeService
     {
         $input = $r->input();
 
-       
+
         $data2 = $input['tsapprover2'];
 
 
         $input = [
-            
+
             'tsapprover2' => $data2
         ];
 
@@ -1387,7 +1431,7 @@ class EmployeeService
             }
         }
         //dd($input);
-        
+
         UserProfile::where('user_id', $id)->update($input);
 
         $data['status'] = true;
@@ -1397,7 +1441,7 @@ class EmployeeService
         $data['data'] = UserProfile::where('user_id', $input['user_id'])->first();
 
         return $data;
-    } 
+    }
 
     public function getEmployeeAddressDetails($id = '')
     {
@@ -1422,7 +1466,7 @@ class EmployeeService
         return $data;
     }
 
-    
+
 
     public function updateEmployeeAddressDetails($r)
     {
@@ -1490,7 +1534,7 @@ class EmployeeService
     public function addEmployeeEducation($r)
     {
         $input = $r->input();
-        
+
         if ($_FILES['file']['name']) {
             $payslip = upload($r->file('file'));
             $input['file'] = $payslip['filename'];
@@ -1499,7 +1543,7 @@ class EmployeeService
                 unset($input['file']);
             }
         }
-        
+
         $input['user_id'] = $input['user_id'];
         UserQualificationEducation::create($input);
 
@@ -1511,7 +1555,7 @@ class EmployeeService
         return $data;
     }
 
-   
+
 
     public function getEmployeeEducation($id = '')
     {
@@ -1677,12 +1721,10 @@ class EmployeeService
 
     public function getEmployeeAddressforCompanion($id)
     {
-        
-        
         $addressDetails = UserAddress::where('user_id', $id)
-            ->select('address1', 'address2', 'postcode', 'city', 'state', 'country')
-            ->first();
-            
+        ->whereIn('addressType', [1, 3])
+        ->select('address1', 'address2', 'postcode', 'city', 'state', 'country')
+        ->first();
 
         if(!$addressDetails)
         {
@@ -1700,4 +1742,5 @@ class EmployeeService
 
         return $data;
     }
+
 }

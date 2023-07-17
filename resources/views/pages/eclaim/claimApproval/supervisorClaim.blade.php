@@ -1,7 +1,7 @@
 @extends('layouts.dashboardTenant')
 @section('content')
     <div id="content" class="app-content">
-        <h1 class="page-header">eClaim | Claim Approval | Approver</h1>
+        <h1 class="page-header">eClaim | Claim Approval | Department Approver</h1>
         <div class="panel panel" id="supervisorDepartmentJs">
         
             <div class="panel-body">

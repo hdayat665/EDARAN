@@ -18,7 +18,7 @@ $(document).ready(function () {
     $("#location-search").picker({
         search: true,
     });
- 
+
     $("#location-search-edit").picker({
         search: true,
     });
@@ -965,13 +965,13 @@ $(document).ready(function () {
         })
         .on("changeDate", function(e) {
             var startDate = e.date;
-    
+
             // Update the end datepicker's date to the selected start date
             $("#datepicker-end").datepicker("update", startDate);
-    
+
             // Set the minimum date for the end datepicker to the selected start date
             $("#datepicker-end").datepicker("setStartDate", startDate);
-    
+
             // Enable or disable the end datepicker based on whether a start date is selected
             if (startDate !== null) {
                 $("#datepicker-end").prop("readonly", false);
@@ -979,17 +979,17 @@ $(document).ready(function () {
                 $("#datepicker-end").prop("readonly", true);
             }
         });
-    
+
         // Initialize the datepicker for contract_end_date
         $("#datepicker-end").datepicker({
             format: "yyyy/mm/dd",
             autoclose: true,
             todayHighlight: true,
         });
-    
+
         // Disable the end datepicker initially
         $("#datepicker-end").prop("readonly", true);
-    
+
         // Initialize the datepicker for warranty_start_date
         $(document).ready(function () {
             // Initialize the start datepicker
@@ -999,13 +999,13 @@ $(document).ready(function () {
                 format: "yyyy/mm/dd",
             }).on("changeDate", function (e) {
                 var startDate = e.date;
-        
+
                 // Set the end datepicker's date to the selected start date
                 $("#datepicker-warend").datepicker("update", startDate);
-        
+
                 // Set the minimum date for the end datepicker to the selected start date
                 $("#datepicker-warend").datepicker("setStartDate", startDate);
-        
+
                 // Enable or disable the end datepicker based on whether a start date is selected
                 if (startDate !== null) {
                     $("#datepicker-warend").prop("readonly", false);
@@ -1013,20 +1013,20 @@ $(document).ready(function () {
                     $("#datepicker-warend").prop("readonly", true);
                 }
             });
-        
+
             // Initialize the end datepicker
             $("#datepicker-warend").datepicker({
                 format: "yyyy/mm/dd",
                 autoclose: true,
                 todayHighlight: true,
             });
-        
+
             // Disable the end datepicker initially
             $("#datepicker-warend").prop("readonly", true);
         });
-        
-    
-    
+
+
+
     $("#datepicker-bankexpiry").datepicker({
         todayHighlight: true,
         autoclose: true,
@@ -1037,11 +1037,11 @@ $(document).ready(function () {
             }
         }
     });
-    
+
 
         $("#project_manager2_show").hide();
         $("#project_manager2").prop("readonly", true);
-    
+
         $(document).on("change", "#acc_manager2", function () {
             var selectedValue = $(this).val();
             if (selectedValue !== "") {
@@ -1051,7 +1051,7 @@ $(document).ready(function () {
                     .end()
                     .append('<option label="PLEASE CHOOSE" selected="selected"></option>')
                     .val("");
-    
+
                 $.ajax({
                     url: "/getUserWithSelectedUser/" + selectedValue,
                     success: function (data) {
@@ -1068,7 +1068,7 @@ $(document).ready(function () {
                         }
                     },
                 });
-    
+
                 $("#project_manager2_show").prop("disabled", false);
                 $("#project_manager2_show").show();
                 $("#project_manager2").prop("disabled", true);
@@ -1081,4 +1081,3 @@ $(document).ready(function () {
             }
         });
 });
-    

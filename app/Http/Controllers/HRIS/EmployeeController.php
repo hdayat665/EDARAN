@@ -8,13 +8,13 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 
 class EmployeeController extends Controller
-{   
+{
     public function updateProfile_Picture(Request $r, $id)
     {
         $ps = new EmployeeService;
 
         $result = $ps->updateProfile_Picture($r, $id);
-        
+
         return response()->json($result);
     }
     public function addProfile(Request $r)
@@ -69,7 +69,7 @@ class EmployeeController extends Controller
 
         return response()->json($result);
     }
-    
+
     public function employeeInfoView()
     {
         $ps = new EmployeeService;
@@ -214,8 +214,6 @@ class EmployeeController extends Controller
     {
         $ps = new EmployeeService;
 
-    
-
         $result = $ps->getEmployeeAddressforParent($id);
 
         return response()->json($result);
@@ -307,7 +305,7 @@ class EmployeeController extends Controller
     public function updatecashhierarchy(Request $r, $id)
     {
         $ss = new EmployeeService;
-        
+
         $result = $ss->updatecashhierarchy($r, $id);
 
         return response()->json($result);
@@ -315,7 +313,7 @@ class EmployeeController extends Controller
     public function updateeleavehierarchy(Request $r, $id)
     {
         $ss = new EmployeeService;
-        
+
         $result = $ss->updateeleavehierarchy($r, $id);
 
         return response()->json($result);
@@ -324,7 +322,7 @@ class EmployeeController extends Controller
     public function updatetimehierarchy(Request $r, $id)
     {
         $ss = new EmployeeService;
-        
+
         $result = $ss->updatetimehierarchy($r, $id);
 
         return response()->json($result);
@@ -333,14 +331,14 @@ class EmployeeController extends Controller
     public function updatetimehierarchy2(Request $r, $id)
     {
         $ss = new EmployeeService;
-        
+
         $result = $ss->updatetimehierarchy2($r, $id);
 
         return response()->json($result);
     }
 
-    
-  
+
+
     public function addEmployeeEducation(Request $r)
     {
         $ps = new EmployeeService;
@@ -368,7 +366,7 @@ class EmployeeController extends Controller
 
         return response()->json($result);
     }
-       
+
 
     public function updateEmployeeEducation(Request $r)
     {
@@ -465,8 +463,6 @@ class EmployeeController extends Controller
     public function getEmployeeAddressforCompanion($id = '')
     {
         $ps = new EmployeeService;
-
-    
 
         $result = $ps->getEmployeeAddressforCompanion($id);
 

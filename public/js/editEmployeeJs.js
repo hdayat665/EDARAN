@@ -103,60 +103,6 @@ $('#event').select2();
         }
     });
 
-    var checkboxes = $('input[name="address_type[]"]');
-    var permanentChecked = false;
-    var correspondentChecked = false;
-    var addressId = null;
-    var addressType = "0";
-
-    checkboxes.each(function () {
-        if ($(this).is(":checked")) {
-            if ($(this).val() === "permanent") {
-                permanentChecked = true;
-            } else if ($(this).val() === "correspondent") {
-                correspondentChecked = true;
-            }
-            if (addressId == null) {
-                addressId = $(this).data("address-id");
-                addressType = $(this).data("address-type");
-            }
-        }
-    });
-
-    if (permanentChecked && correspondentChecked) {
-        checkboxes.not(":checked").prop("disabled", true);
-        // if both checkboxes are checked and have the same address ID, set addressType to 3
-        if (
-            checkboxes.filter(
-                '[data-address-id="' + addressId + '"]:checked'
-            ).length === 2
-        ) {
-            addressType = "3";
-        }
-    } else if (permanentChecked) {
-        // if only permanent checkbox is checked, set addressType to 1
-        addressType = "1";
-        // disable all other permanent checkboxes
-        checkboxes
-            .filter('[value="permanent"]:not(:checked)')
-            .prop("disabled", true);
-        // enable all correspondent checkboxes
-        checkboxes
-            .filter('[value="correspondent"]')
-            .prop("disabled", false);
-    } else if (correspondentChecked) {
-        // if only correspondent checkbox is checked, set addressType to 2
-        addressType = "2";
-        // disable all other correspondent checkboxes
-        checkboxes
-            .filter('[value="correspondent"]:not(:checked)')
-            .prop("disabled", true);
-        // enable all permanent checkboxes
-        checkboxes.filter('[value="permanent"]').prop("disabled", false);
-    } else {
-        checkboxes.prop("disabled", false);
-    }
-
     // var employmentInfoHeight = $("#editHRISJs").height();
 
     // // Set the same height for the Job History card
@@ -340,6 +286,27 @@ $('#event').select2();
             $("#expiryDate1").prop("readonly", true);
             $("#expiryDate1").css("pointer-events", "none");
             $("#expiryDate1").val("");
+        }
+    });
+
+    $("#passportparentedit").change(function () {
+        if ($("#passportparentedit").val() !== "") {
+            // Enable expiration date and passport country fields
+            $("#expirydate7").prop("disabled", false);
+            $("#expirydate7").css("pointer-events", "auto");
+
+            $("#issuingCountry7").prop("disabled", false);
+            $("#issuingCountry7").css("pointer-events", "auto");
+        } else {
+            // Disable expiration date and passport country fields
+            $("#expirydate7").prop("disabled", true);
+            $("#expirydate7").css("pointer-events", "none");
+            $("#expirydate7").val("");
+
+            $("#issuingCountry7").prop("disabled", true);
+            $("#issuingCountry7").css("pointer-events", "none");
+            $("#issuingCountry7").val("");
+
         }
     });
 
@@ -653,6 +620,7 @@ $('#event').select2();
             $("#expirydatemc").prop("readonly", false);
             $("#expirydatemc").css("pointer-events", "auto");
             $("#expirydatemc").prop("disabled", false);
+
             $("#issuingCountry2").prop("disabled", false);
             $("#issuingCountry2").css("pointer-events", "auto");
         } else {
@@ -952,6 +920,147 @@ $('#event').select2();
         }
     });
 
+    $("#same-addressEditParent").change(function () {
+        if (this.checked) {
+            $("#address1P1")
+                .val($("#address-1").val())
+                .prop("readonly", true);
+            $("#address2P1")
+                .val($("#address-2").val())
+                .prop("readonly", true);
+            $("#postcodeP1")
+                .val($("#postcode").val())
+                .prop("readonly", true);
+            $("#cityP1").val($("#city").val()).prop("readonly", true).css({
+                "pointer-events": "none",
+                "touch-action": "none",
+                background: "#e9ecef",
+            });
+            $("#stateP1")
+                .val($("#state").val())
+                .prop("readonly", true)
+                .css({
+                    "pointer-events": "none",
+                    "touch-action": "none",
+                    background: "#e9ecef",
+                });
+            $("#countryP1")
+                .val($("#country").val())
+                .prop("readonly", true)
+                .css({
+                    "pointer-events": "none",
+                    "touch-action": "none",
+                    background: "#e9ecef",
+                });
+
+            // Fetch permanent address from userAddress table if available
+            var id = document.getElementById("user_id").value;
+            // console.log(id);
+            // return false;
+            var getEmployeeAddressforParentx = getEmployeeAddressforParent(id);
+            //console.log(id);
+
+            getEmployeeAddressforParentx
+                .then(function (data) {
+                    if (data) {
+                        var permanentAddress1 = data.data.address1;
+                        var permanentAddress2 = data.data.address2;
+                        var permanentPostcode = data.data.postcode;
+                        var permanentCity = data.data.city;
+                        var permanentState = data.data.state;
+                        var permanentCountry = data.data.country;
+                        console.log(data);
+
+                        if (
+                            permanentAddress1 ||
+                            permanentAddress2 ||
+                            permanentPostcode ||
+                            permanentCity ||
+                            permanentState ||
+                            permanentCountry
+                        ) {
+                            $("#address1P1").val(permanentAddress1);
+                            $("#address2P1").val(permanentAddress2);
+                            $("#postcodeP1").val(permanentPostcode);
+                            $("#cityP1").val(permanentCity);
+                            $("#stateP1").val(permanentState);
+                            $("#countryP1").val(permanentCountry);
+                        }
+                    }
+                })
+                .fail(function (xhr, status, error) {
+                    console.log("Error fetching permanent address: " + error);
+                });
+            $("#address1P1")
+                .val($("#address-1").val())
+                .prop("readonly", true);
+            $("#address2P1")
+                .val($("#address-2").val())
+                .prop("readonly", true);
+            $("#postcodeP1")
+                .val($("#postcode").val())
+                .prop("readonly", true);
+            $("#cityP1").val($("#city").val()).css({
+                "pointer-events": "none",
+                "touch-action": "none",
+                background: "#e9ecef",
+            });
+            $("#stateP1").val($("#state").val()).css({
+                "pointer-events": "none",
+                "touch-action": "none",
+                background: "#e9ecef",
+            });
+            $("#countryP1").val($("#country").val()).css({
+                "pointer-events": "none",
+                "touch-action": "none",
+                background: "#e9ecef",
+            });
+        } else {
+            $("#address1P1").prop("readonly", false);
+            $("#address2P1").prop("readonly", false);
+            $("#postcodeP1").prop("readonly", false);
+            $("#cityP1").prop("readonly", false).css({
+                "pointer-events": "auto",
+                "touch-action": "auto",
+                background: "none",
+            });
+            $("#stateP1").prop("readonly", false).css({
+                "pointer-events": "auto",
+                "touch-action": "auto",
+                background: "none",
+            });
+            $("#countryP1").prop("readonly", false).css({
+                "pointer-events": "auto",
+                "touch-action": "auto",
+                background: "none",
+            });
+            // $("#address1parent").val($("").val()).prop("readonly", false);
+            // $("#address2parent").val($("").val()).prop("readonly", false);
+            // $("#postcodeparent").val($("").val()).prop("readonly", false);
+            // $("#cityparent").val($("").val()).prop("readonly", false);
+            // $("#statec").val($("").val()).prop("disabled", false);
+            // $("#countryc").val($("1").val()).prop("disabled", false);
+            $("#address1P1").val($("").val()).prop("readonly", false);
+            $("#address2P1").val($("").val()).prop("readonly", false);
+            $("#postcodeP1").val($("").val()).prop("readonly", false);
+            $("#cityP1").val($("").val()).css({
+                "pointer-events": "auto",
+                "touch-action": "auto",
+                background: "#ffffff",
+            });
+            $("#stateP1").val($("").val()).css({
+                "pointer-events": "auto",
+                "touch-action": "auto",
+                background: "#ffffff",
+            });
+            $("#countryP1").val($("").val()).css({
+                "pointer-events": "auto",
+                "touch-action": "auto",
+                background: "#ffffff",
+            });
+        }
+    });
+
     function getEmployeeAddressforParent(id) {
         return $.ajax({
             url: "/getEmployeeAddressforParent/" + id,
@@ -999,14 +1108,15 @@ $('#event').select2();
                 "touch-action": "none",
                 background: "#e9ecef",
             });
+            var id = document.getElementById("user_id").value;
 
             // Fetch permanent address from userAddress table if available
-            var id = document.getElementById("user_id").value;
+
             // console.log(id);
             // return false;
             var getEmployeeAddressforCompanionx =
                 getEmployeeAddressforCompanion(id);
-            //console.log(id);
+            console.log(id);
 
             getEmployeeAddressforCompanionx
                 .then(function (data) {
@@ -1497,14 +1607,14 @@ $('#event').select2();
                 // },
                 homeNo: {
                     digits: "Please Insert Correct Home Number Without ' - ' or Space",
-                    rangelength: "Please Inset Valid Home Number",
+                    rangelength: "Please Insert Valid Home Number",
                 },
                 extensionNo: {
                     digits: "Please Insert Correct Extension Number Without ' - ' or Space",
                 },
                 okuCardNum: {
-                    required: "Please Insert OKU Card Number",
-                    rangelength: "Please Inset OKU Card Number",
+                    required: "Please Insert Valid OKU Card Number",
+                    rangelength: "Please Insert Valid OKU Card Number",
                 },
                 okuattach: {
                     required: "Please Insert OKU Attachment",
@@ -2097,7 +2207,7 @@ $('#event').select2();
     }
 
     $('input[name="address_type[]"]').on("change", function () {
-        var checkboxes = $('input[name="address_type[]"]');
+
         var permanentChecked = false;
         var correspondentChecked = false;
         var addressId = $(this).data("address-id");
@@ -2105,55 +2215,58 @@ $('#event').select2();
             ? $(this).data("address-type")
             : "0";
 
-        checkboxes.each(function () {
-            if ($(this).is(":checked")) {
-                if ($(this).val() === "permanent") {
-                    permanentChecked = true;
-                } else if ($(this).val() === "correspondent") {
-                    correspondentChecked = true;
-                }
-            }
-        });
+        var checkboxes = $('input[name="address_type[]"][data-address-id='+addressId+']');
 
-        if (permanentChecked && correspondentChecked) {
-            checkboxes.not(":checked").prop("disabled", true);
-            // if both checkboxes are checked and have the same address ID, set addressType to 3
-            if (
-                checkboxes.filter(
-                    '[data-address-id="' + addressId + '"]:checked'
-                ).length === 2
-            ) {
-                addressType = "3";
-            }
-        } else if (permanentChecked) {
-            // if only permanent checkbox is checked, set addressType to 1
+            checkboxes.each(function () {
+                if ($(this).is(":checked")) {
+                    if ($(this).val() === "permanent") {
+                        permanentChecked = true;
+                    } else if ($(this).val() === "correspondent") {
+                        correspondentChecked = true;
+                    }
+                }
+            });
+
+        if (permanentChecked == true && correspondentChecked == false) {
             addressType = "1";
-            // disable all other permanent checkboxes
             checkboxes
-                .filter('[value="permanent"]:not(:checked)')
-                .prop("disabled", true);
-            // enable all correspondent checkboxes
-            checkboxes
-                .filter('[value="correspondent"]')
-                .prop("disabled", false);
-        } else if (correspondentChecked) {
-            // if only correspondent checkbox is checked, set addressType to 2
-            addressType = "2";
-            // disable all other correspondent checkboxes
+                .filter('[value="permanent"]:checked')
+                // .prop("disabled", true);
+
             checkboxes
                 .filter('[value="correspondent"]:not(:checked)')
-                .prop("disabled", true);
-            // enable all permanent checkboxes
-            checkboxes.filter('[value="permanent"]').prop("disabled", false);
-        } else {
-            checkboxes.prop("disabled", false);
-        }
+                // .prop("disabled", false);
 
-        if ($(this).is(":not(:checked)")) {
+        } else if (permanentChecked == false && correspondentChecked == true) {
+            addressType = "2";
+            checkboxes
+                .filter('[value="correspondent"]:checked')
+                // .prop("disabled", true);
+
+            checkboxes
+                .filter('[value="permanent"]:not(:checked)')
+
+
+        } else if (permanentChecked == true && correspondentChecked == true) {
+            addressType = "3";
+            checkboxes
+                .filter('[value="permanent"]:checked')
+                // .prop("disabled", false);
+            checkboxes
+                .filter('[value="correspondent"]:checked')
+                // .prop("disabled", false);
+
+        } else if (permanentChecked == false && correspondentChecked == false){
             addressType = "0";
+            checkboxes
+            .filter('[value="correspondent"]:not(:checked)')
+            // .prop("disabled", true);
+
+        checkboxes
+            .filter('[value="permanent"]:not(:checked)')
+
         }
 
-        // send an AJAX request to update the address type status
         $.ajax({
             url: "/updateAddressDetails",
             type: "POST",
@@ -2162,7 +2275,6 @@ $('#event').select2();
                 addressType: addressType,
             },
             success: function (data) {
-                // Update the UI to reflect the new address type
                 Swal.fire({
                     icon: "success",
                     text: "Address Type is updated!",
@@ -2171,13 +2283,18 @@ $('#event').select2();
                     confirmButtonText: "OK",
                     allowOutsideClick: false,
                     allowEscapeKey: false,
+                }).then(function () {
+                    location.reload();
                 });
+
+
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 console.error(errorThrown);
             },
         });
     });
+
 
     /////////////////////////////////////////////
 
@@ -2477,15 +2594,15 @@ $('#event').select2();
                     rangelength: "Please Insert Valid Postcode",
                 },
                 okuCardNum: {
-                    required: "Please Insert OKU Card Number",
-                    rangelength: "Please Inset Valid Home Number",
+                    required: "Please Insert Valid OKU Card Number",
+                    rangelength: "Please Insert Valid Home Number",
                 },
                 okuattach: {
                     required: "Please Insert OKU Attachment",
                 },
                 homeNo: {
                     digits: "Please Insert Correct Home Number Without ' - ' or Space",
-                    rangelength: "Please Inset Valid Home Number",
+                    rangelength: "Please Insert Valid Home Number",
                 },
                 designation: {
                     required: "Please Insert Designation",
@@ -2518,7 +2635,6 @@ $('#event').select2();
                     processData: false,
                     contentType: false,
                 }).then(function (data) {
-                    console.log(data);
                     Swal.fire({
                         title: data.title,
                         icon: "success",
@@ -2651,15 +2767,15 @@ $('#event').select2();
                         rangelength: "Please Insert Valid Postcode",
                     },
                     okuNumber: {
-                        required: "Please Insert OKU Card Number",
-                        rangelength: "Please Inset Valid Home Number",
+                        required: "Please Insert Valid OKU Card Number",
+                        rangelength: "Please Insert Valid Home Number",
                     },
                     okuID: {
                         required: "Please Insert OKU Attachment",
                     },
                     homeNo: {
                         digits: "Please Insert Correct Home Number Without ' - ' or Space",
-                        rangelength: "Please Inset Valid Home Number",
+                        rangelength: "Please Insert Valid Home Number",
                     },
                     designation: {
                         required: "Please Insert Designation",
@@ -2817,8 +2933,8 @@ $('#event').select2();
                 maritalStatus: "Please Choose Marital Status",
                 DOBChild: "Please Enter Date Of Birth",
                 okuCardNum: {
-                    required: "Please Insert OKU Card Number",
-                    rangelength: "Please Inset Valid Home Number",
+                    required: "Please Insert Valid OKU Card Number",
+                    rangelength: "Please Insert Valid Home Number",
                 },
                 okuFile: {
                     required: "Please Insert OKU Attachment",
@@ -2836,7 +2952,7 @@ $('#event').select2();
                     required: "Please Insert Issuing Country",
                 },
                 postcode: {
-                    rangelength: "Please Inset a valid postcode",
+                    rangelength: "Please Insert a valid postcode",
                 },
             },
             submitHandler: function (form) {
@@ -2936,8 +3052,8 @@ $('#event').select2();
                 },
 
                 okuNo: {
-                    required: "Please Insert OKU Card Number",
-                    rangelength: "Please Inset OKU Card Number",
+                    required: "Please Insert Valid OKU Card Number",
+                    rangelength: "Please Insert Valid OKU Card Number",
                 },
 
                 okuFile: {
@@ -2951,7 +3067,7 @@ $('#event').select2();
                     required: "Please Insert Issuing Country",
                 },
                 postcode: {
-                    rangelength: "Please Inset a valid postcode",
+                    rangelength: "Please Insert a valid postcode",
                 },
             },
 
@@ -3469,6 +3585,12 @@ $('#event').select2();
         $("#fullNameP").val(a + " " + b);
     });
 
+    $("#firstNames1,#lastNameP1").change(function () {
+        var a = $("#firstNames1").val();
+        var b = $("#lastNameP1").val();
+        $("#fullNameP1").val(a + " " + b);
+    });
+
     $("#parentModalAdd").click(function (e) {
         $("input").prop("disabled", false);
         $("select").prop("disabled", false);
@@ -3562,8 +3684,8 @@ $('#event').select2();
                     rangelength: "Please Insert Valid Identification Number",
                 },
                 okuCardNum: {
-                    required: "Please Insert OKU Card Number",
-                    rangelength: "Please Inset Valid Home Number",
+                    required: "Please Insert Valid OKU Card Number",
+                    rangelength: "Please Insert Valid Home Number",
                 },
                 okuFile: {
                     required: "Please Insert OKU Attachment",
@@ -3610,33 +3732,136 @@ $('#event').select2();
     });
 
     $("#editParent").click(function (e) {
-        var data = new FormData(document.getElementById("editParentForm"));
+        $("#editParentForm").validate({
+            // Specify validation rules
+            rules: {
+                firstName: {
+                    required: true,
+                },
+                lastName: {
+                    required: true,
+                },
+                DOB: "required",
+                gender: {
+                    required: false,
+                },
+                contactNo: {
+                    required: false,
+                    digits: true,
+                    rangelength: [9, 12],
 
-        $.ajax({
-            type: "POST",
-            url: "/updateEmployeeParent",
-            data: data,
-            dataType: "json",
+                },
+                relationship: "required",
+                address1: "required",
+                postcode: {
+                    required: true,
+                    digits: true,
+                    rangelength: [5, 5],
+                },
+                city: "required",
+                state: "required",
+                idNo: {
+                    required: true,
+                    digits: true,
+                    rangelength: [12, 12],
+                },
+                oldIDNo: {
+                    //digits: true,
+                    rangelength: [7, 7],
+                },
+                okuCardNum: {
+                    required: true,
+                    digits: true,
+                    rangelength: [10, 11],
+                },
+                okuFile: {
+                    required: true,
+                },
 
-            processData: false,
-            contentType: false,
-        }).then(function (data) {
-            console.log(data);
-            Swal.fire({
-                title: data.title,
-                icon: "success",
-                text: data.msg,
-                type: data.type,
-                confirmButtonColor: "#3085d6",
-                confirmButtonText: "OK",
-                allowOutsideClick: false,
-                allowEscapeKey: false,
-            }).then(function () {
-                if (data.type == "error") {
-                } else {
-                    location.reload();
-                }
-            });
+                expiryDate: "required",
+                issuingCountry: {
+                    required: true,
+                },
+            },
+
+            messages: {
+                firstName: {
+                    required: "Please Insert First Name",
+                },
+                lastName: {
+                    required: "Please Insert Last Name",
+                },
+                DOB: "Please Insert Date Of Birth",
+                gender: "Please Choose Gender",
+                contactNo: {
+                    required: "Please Insert Phone Number",
+                    digits: "Please Insert Valid Phone Number Without ' - ' And Space",
+                    rangelength: "Please Insert Valid Phone Number Without ' - ' And Space",
+
+                },
+                relationship: "Please Choose Relationship",
+                address1: "Please Insert Address 1",
+                postcode: {
+                    required: "Please Insert Postcode",
+                    digits: "Please Insert Valid Postcode",
+                    rangelength: "Please Insert Valid Postcode",
+                },
+                city: "Please Insert City",
+                state: "Please Choose State",
+                idNo: {
+                    required: "Please Insert New Identification Number",
+                    digits: "Please Insert Correct Identification Number Without ' - ' or Space",
+                    rangelength: "Please Insert Valid Identification Number",
+                },
+                oldIDNo: {
+                    //digits: "Please Insert Correct Identification Number Without ' - ' or Space",
+                    rangelength: "Please Insert Valid Identification Number",
+                },
+                okuCardNum: {
+                    required: "Please Insert Valid OKU Card Number",
+                    rangelength: "Please Insert Valid Home Number",
+                },
+                okuFile: {
+                    required: "Please Insert OKU Attachment",
+                },
+
+                expiryDate: "Please Insert Expiry Date",
+                issuingCountry: {
+                    required: "Please Insert Issuing Country",
+                },
+            },
+            submitHandler: function (form) {
+                var data = new FormData(
+                    document.getElementById("editParentForm")
+                );
+
+                $.ajax({
+                    type: "POST",
+                    url: "/updateEmployeeParent",
+                    data: data,
+                    dataType: "json",
+
+                    processData: false,
+                    contentType: false,
+                }).then(function (data) {
+                    console.log(data);
+                    Swal.fire({
+                        title: data.title,
+                        icon: "success",
+                        text: data.msg,
+                        type: data.type,
+                        confirmButtonColor: "#3085d6",
+                        confirmButtonText: "OK",
+                        allowOutsideClick: false,
+                        allowEscapeKey: false,
+                    }).then(function () {
+                        if (data.type == "error") {
+                        } else {
+                            location.reload();
+                        }
+                    });
+                });
+            },
         });
     });
 
@@ -3649,6 +3874,8 @@ $('#event').select2();
         $(document).on("click","#parentModalEdit" + type, function (e) {
             $("input").prop("disabled", false);
             $("select").prop("disabled", false);
+            $("#okuattach6").prop("disabled", true);
+
             id = $(this).data("id");
             var ParentData = getParent(id);
 
@@ -3664,20 +3891,51 @@ $('#event').select2();
                 $("#countryP1").val(parent.country);
                 $("#contactNoP1").val(parent.contactNo);
                 $("#genderP1").val(parent.gender);
+                $("#fullNameP1").val(parent.fullName);
                 $("#firstNames1").val(parent.firstName);
+                $("#lastNameP1").val(parent.lastName);
                 $("#passportparentedit").val(parent.passport);
                 $("#expirydate7").val(parent.expiryDate);
                 $("#issuingCountry7").val(parent.issuingCountry);
                 $("#oldIDNoP1").val(parent.oldIDNo);
                 $("#postcodeP1").val(parent.postcode);
-                $("#lastNameP1").val(parent.lastName);
                 $("#relationshipP1").val(parent.relationship);
                 $("#idno7").val(parent.idNo);
                 $("#okucard6").val(parent.okuCardNum);
-                $("#age7").val(parent.age);
+                $("#okuattach6").val(parent.okuFile);
 
-                if (parent.nonCitizen == "on") {
-                    $("#nonCitizenP1").prop("checked", true);
+                $("#age7").val(parent.age);
+                if (parent.non_citizen == "on") {
+                    $("#non_citizen").prop("checked", true);
+                    $("#idno7").prop("disabled", true);
+                    $("#idno7").prop("readonly", true);
+
+                    $("#DOBP1").prop("readonly", false);
+                    $("#DOBP1").css("pointer-events", "auto");
+                } else {
+                    $("#non_citizen").prop("checked", false);
+                    $("#idno7").prop("disabled", false);
+                    $("#idno7").prop("readonly", false);
+
+                    $("#DOBP1").prop("readonly", true);
+                    $("#DOBP1").css("pointer-events", "auto");
+                }
+                if (parent.oku_status == "on") {
+                    $("#oku_status").prop("checked", true);
+                    $("#okucard6").prop("readonly", false);
+                    $("#okucard6").prop("disabled", false);
+                    $("#okucard6").val(parent.okuCardNum);
+
+                    $("#okuattach6").prop("disabled", true);
+                    $("#okuattach6").css("pointer-events", "auto");
+                } else {
+                    $("#oku_status").prop("checked", false);
+                    $("#okucard6").prop("disabled", true);
+                    $("#okucard6").prop("readonly", true);
+                    $("#okucard6").val("");
+
+                    $("#okuattach6").prop("disabled", true);
+                    $("#okuattach6").css("pointer-events", "auto");
                 }
             });
             $("#edit-parent").modal("show");
@@ -4552,14 +4810,20 @@ $('#event').select2();
         }
     });
 
-    //oku check update family
-
+    //oku check edit family
     $(".okuCheck6").click(function () {
         if ($(this).prop("checked")) {
             $("#okucard6").prop("readonly", false);
+            $("#okucard6").prop("disabled", false);
+
+            $("#okuattach6").prop("disabled", false);
             $("#okuattach6").css("pointer-events", "auto");
         } else {
             $("#okucard6").prop("readonly", true);
+            $("#okucard6").prop("disabled", true);
+            $("#okucard6").val("");
+
+            $("#okuattach6").prop("disabled", true);
             $("#okuattach6").css("pointer-events", "none");
         }
     });
@@ -4663,40 +4927,31 @@ $('#event').select2();
         }
     });
 
-    //update child
-    $(".partCheck7").click(function () {
+     //UPDATE FAMILY DETAILS
+
+     $(".partCheck7").click(function () {
         if ($(this).prop("checked")) {
+            $("#idno7").prop("disabled", true);
             $("#idno7").prop("readonly", true);
-            $("#DOBP1").prop("readonly", false);
+            $("#idno7").val("");
+
+            $("#DOBP1").val("").prop("readonly", false);
             $("#DOBP1").css("pointer-events", "auto");
 
             $("#expirydate7").prop("readonly", false);
-            $("#expirydate7").css("pointer-events", "auto");
-            $("#idno7").val("");
-            $("#age7").prop("readonly", false);
-            $("#genderP1").css({
-                "pointer-events": "auto",
-                "touch-action": "auto",
-                background: "#ffffff",
-            });
-            $("#issuingCountry7").css("pointer-events", "none");
         } else {
+            $("#idno7").prop("disabled", false);
             $("#idno7").prop("readonly", false);
-            $("#DOBP1").prop("readonly", true);
+
+            $("#DOBP1").val("").prop("readonly", true);
             $("#DOBP1").css("pointer-events", "none");
-            $("#passport7").val("");
+
             $("#expirydate7").val("");
             $("#expirydate7").prop("readonly", true);
             $("#expirydate7").css("pointer-events", "none");
-            $("#genderP1").css({
-                "pointer-events": "none",
-                "touch-action": "none",
-                background: "#e9ecef",
-            });
-            $("#age7").prop("readonly", true);
-            $("#issuingCountry7").css("pointer-events", "none");
         }
     });
+
 
     $("#passport7").change(function () {
         if ($("#expirydate7").prop("readonly")) {
