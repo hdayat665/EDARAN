@@ -744,7 +744,7 @@ getwork.then(function(data) {
                 reason: "required" },
 
             messages: {
-                reason: "Please Put Reason"
+                reason: "Please Enter Reason"
             },
             submitHandler: function (form) {
                 requirejs(["sweetAlert2"], function (swal) {
@@ -1495,7 +1495,9 @@ getwork.then(function(data) {
                                             $("#filedownloadappeal").html('<a href="/storage/' + file + '">Download ' + fileName + '</a>');
                                           }
 
+                                    
                                         $('#appealmodalview').modal('show');
+                                        
 
 
                                     }
@@ -1798,6 +1800,7 @@ getwork.then(function(data) {
 
                     dateClick: function(info) {
                         
+                        
                         const clickedDate = dayjs(info.date);
                         const today = dayjs();
 
@@ -1820,6 +1823,10 @@ getwork.then(function(data) {
                          var lowestValue = parseInt(resultchw[0]);
                 
                          var secondLowestValue = parseInt(resultchw[1]);
+
+                         var weekn1 = parseInt(resultchw[0]);;
+                         var weekn2 = parseInt(resultchw[1]);
+
                 
                         // Modify lowestValue and secondLowestValue based on conditions
                         if (lowestValue >= 0 && lowestValue <= 7) {
@@ -1863,9 +1870,16 @@ getwork.then(function(data) {
                         const formattedDate = clickedDate.format('YYYY-MM-DD');
                         if (appliedDates.includes(formattedDate) && statuses[appliedDates.indexOf(formattedDate)] === 'Approved') {
                             // show the view appeal modal
+
+                            // if ($(info.origEvent.target).hasClass('appeal-view-button')) {
+                            //     return; // Exit the function if the "View Appeal" button was clicked
+                            //   }
+
                             $('#addLogModal').modal('show');
                             const formattedDate = clickedDate.format('DD-MM-YYYY');
                             $("#dateaddlog").val(formattedDate);
+
+                           
 
                             return;
                         }
@@ -1875,31 +1889,35 @@ getwork.then(function(data) {
                         // and if the cell already has an appeal button
                        
 
-                        if ((clickedDate.diff(today, 'day') < daystominus || clickedDate.isAfter(today, 'day')) &&
-                        ($(info.dayEl).find('.appeal-add-button, .appeal-view-button').length == 0)) {
+                        if (
+                            ((clickedDate.diff(today, 'day') < daystominus || clickedDate.isAfter(today, 'day')) &&
+                            ($(info.dayEl).find('.appeal-add-button, .appeal-view-button').length == 0)) &&
+                            !(clickedDate.day() == weekn1 && clickedDate.isBefore(today, 'day')) &&
+                             !(clickedDate.day() == weekn2 && clickedDate.isBefore(today, 'day'))
+                          ) {
                             Swal.fire({
-                                icon: 'error',
-                                title: 'Oops...',
-                                text: 'You can only add logs for the current and past 2 days!',
+                              icon: 'error',
+                              title: 'Oops...',
+                              text: 'You can only add logs for the current and past 2 days!',
                             });
-                        return;
-                        }
+                            return;
+                          }
+                          
                         if ((clickedDate.diff(today, 'day') < daystominus || clickedDate.isAfter(today, 'day')) &&
                             ($(info.dayEl).find('.appeal-add-button, .appeal-view-button').length !== 0)) {
 
                           return;
                         }
 
+                        // Check if the clicked date is Saturday or Sunday
+                        // if (clickedDate.day() === 0 || clickedDate.day() === 6) {
+                        //     return;
+                        // }
+
                         // show the add log modal
                         $('#addLogModal').modal('show');
                         $("#dateaddlog").val(formattedDate);
                       },
-
-
-
-
-
-
 
                 // original code
                 // dateClick: function(info) {
@@ -2168,16 +2186,41 @@ getwork.then(function(data) {
                                 twoDaysBefore.setDate(currentDate.getDate() - 3);
                                 
                                 
-                                var selectedDate = new Date($("#dateaddlogedit").val());
+                                var initialDate = $("#dateaddlogedit").val();
+
+                                // Flag to track if datepicker was closed due to outside click
+                                var outsideClick = false;
                               
-                                
-                                if ($("#statusappeal").val() === "1" || selectedDate < twoDaysBefore) {
-                                    $("#dateaddlogedit").prop("readonly", true);
-                                    $("#dateaddlogedit").css("pointer-events", "none");
-                                } else {
-                                    $("#dateaddlogedit").prop("readonly", false);
-                                    $("#dateaddlogedit").css("pointer-events", "auto");
-                                }
+                                // Attach a change event listener to the date input
+                                $("#dateaddlogedit").on("change", function() {
+                                  var selectedDate = new Date($(this).val());
+                              
+                                  if ($("#statusappeal").val() === "1" || selectedDate < twoDaysBefore) {
+                                    $(this).prop("readonly", true);
+                                    $(this).css("pointer-events", "none");
+                                  } else {
+                                    $(this).prop("readonly", false);
+                                    $(this).css("pointer-events", "auto");
+                                  }
+                                });
+                              
+                                // When the datepicker is closed without selecting a new date,
+                                // restore the initial value of the date input
+                                $("#dateaddlogedit").on("focusout", function() {
+                                  if (outsideClick && $(this).val() === "") {
+                                    $(this).val(initialDate);
+                                  }
+                                  // Reset the flag
+                                  outsideClick = false;
+                                });
+                              
+                                // Set the flag when clicking outside the datepicker
+                                $(document).on("mousedown", function(event) {
+                                  var target = $(event.target);
+                                  if (!target.closest(".datepicker").length && !target.is("#dateaddlogedit")) {
+                                    outsideClick = true;
+                                  }
+                                });
 
                                 // if ( selectedDate < twoDaysBefore) {
                                 //     $("#dateaddlogedit").prop("readonly", true);
@@ -2270,36 +2313,38 @@ getwork.then(function(data) {
                                     var row = $("<tr></tr>");
                                     row.append($("<td></td>").text(i + 1));
                                     row.append($("<td></td>").text(participant.name));
-                                    row.append($("<td></td>").text(status));
+
+                                    if (status === "no response") {
+                                        var statusBadge = $("<div></div>").attr("id", "awaitingapproval");
+                                        var badgeSpan = $("<span></span>").addClass("badge bg-warning rounded-pill").text("no response");
+                                        statusBadge.append(badgeSpan);
+                                        row.append($("<td></td>").append(statusBadge));
+                                      } else if (status === "not attend") {
+                                        var statusBadge = $("<div></div>").attr("id", "awaitingapproval");
+                                        var badgeSpan = $("<span></span>").addClass("badge bg-danger rounded-pill").text("not attend");
+                                        statusBadge.append(badgeSpan);
+                                        row.append($("<td></td>").append(statusBadge));
+                                      } else {
+                                        var statusBadge = $("<div></div>").attr("id", "awaitingapproval");
+                                        var badgeSpan = $("<span></span>").addClass("badge bg-success rounded-pill").text("Attend");
+                                        statusBadge.append(badgeSpan);
+                                        row.append($("<td></td>").append(statusBadge));
+                                      }
                             
+                                    
                                     tableBody.append(row);
-                                }
+                                } //badge bg-lime rounded-pill
+
+                                $('#tableviewparticipant').DataTable({
+                                "lengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
+                                });
                             });
-                            
+                                                            
                             
                             
                            
 
-                            var eventData = getEvents(eventId);
-                            eventData.then(function(data) {
-                                var participants = data.participants; // Assuming data.participants is an array of objects with user_id and name properties
-                                var attendanceStatus = data.attendanceStatus; // Assuming data.attendanceStatus is an array of objects with status property
-                            
-                                var tableBody = $("#tableRowParticipant");
-                                tableBody.empty(); // Clear any existing rows in the table
-                            
-                                for (var i = 0; i < participants.length; i++) {
-                                    var participant = participants[i];
-                                    var status = attendanceStatus[i].status; // Assuming the attendance status field is named 'status'
-                            
-                                    var row = $("<tr></tr>");
-                                    row.append($("<td></td>").text(i + 1));
-                                    row.append($("<td></td>").text(participant.name));
-                                    row.append($("<td></td>").text(status));
-                            
-                                    tableBody.append(row);
-                                }
-                            });
+                           
 
 
                             var eventData = getEvents(eventId);
@@ -3025,74 +3070,6 @@ getwork.then(function(data) {
         Calendar.init();
     });
 
-    //  FOR MODAL LOG AND EVENT
-    // $("#dateaddlog").datepicker({
-    //     todayHighlight: true,
-    //     autoclose: true,
-    //     format: 'yyyy-mm-dd'
-    // });
-
-    
-//     function getStartDate() {
-//     var currentDate = new Date();
-//     var dayOfWeek = currentDate.getDay(); // Sunday = 0, Monday = 1, ..., Saturday = 6
-  
-//     ///
-//     const today = dayjs();
-//     var currentDayOfWeek = today.day();
-//     var checkweekendv = [weekend1ifany, weekend2ifany, weekend3ifany, weekend4ifany, weekend5ifany, weekend6ifany, weekend7ifany];
-
-//     // Filter out null values
-//     var resultchw = checkweekendv.filter(function(value) {
-//         return value !== null;
-//     });
-
-//     // Sort the filtered values in ascending order
-//     resultchw.sort(function(a, b) {
-//         return a - b;
-//     });
-
-//     var lowestValue = parseInt(resultchw[0]);
-//     var secondLowestValue = parseInt(resultchw[1]);
-
-//     // Modify lowestValue and secondLowestValue based on conditions
-//     if (lowestValue >= 0 && lowestValue <= 7) {
-//         lowestValue = lowestValue + 1;
-//     } else {
-//         lowestValue = 0;
-//     }
-
-//     if (secondLowestValue >= 0 && secondLowestValue <= 5) {
-//         secondLowestValue = secondLowestValue + 2;
-//     } else if (secondLowestValue === 6) {
-//         secondLowestValue = 2;
-//     } else if (secondLowestValue === 7) {
-//         secondLowestValue = 3;
-//     }
-
-     
-
-//     // Check if the current day is Saturday (lowestValue) or Sunday (secondLowestValue)
-//     if (currentDayOfWeek === lowestValue || currentDayOfWeek === secondLowestValue) {
-//         var daysToSubtract = 4;
-//     }
-//     console.log('Days to subtract before calculation: ', daysToSubtract);
-//     var startDate = new Date(currentDate.getTime() - daysToSubtract * 24 * 60 * 60 * 1000);
-
-//     console.log(daysToSubtract + " last"); 
-
-//     return startDate;
-// }
-
-
-
-
-
-
-
-    
-
-    
 
     $("#starteventdate")
         .datepicker({
@@ -3959,7 +3936,12 @@ $("#endeventdate").datepicker({
         enableFiltering: true, // Enable search/filtering
         maxHeight: 200 // Set a maximum height for the dropdown
       });
+
+      $('#tableviewparticipant').DataTable({
+        
+    });
 });  //end sini
+
 
 
 
@@ -3999,3 +3981,4 @@ toggleVenueLocation();
 var venue = document.getElementById("venueaddpehal");
 var observer = new MutationObserver(toggleVenueLocation);
 observer.observe(venue, { attributes: true, attributeFilter: ["style"] });
+

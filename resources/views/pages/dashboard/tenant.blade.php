@@ -39,7 +39,7 @@
 					<p>{{ $numberOfObjects['numberOfObjects'] }}</p>
 				</div>
 				<div class="stats-link">
-				<a ><i class="fa fa-bag-shopping"></i></a>
+				<a href="/myProject" ><i class="fa fa-bag-shopping"></i></a>
 				</div>
 			</div>
 		</div>

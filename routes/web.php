@@ -288,7 +288,7 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('/newCreateRole', 'newCreateRole');
             Route::get('/newUpdateRole', 'newUpdateRole');
             Route::get('/systemUser', 'systemUser');
-            Route::get('/systemUserCreate', 'systemUserCreate');
+            // Route::get('/systemUserCreate', 'systemUserCreate');
             Route::get('/systemUserUpdate', 'systemUserUpdate');
             // Route::get('/setting', 'settingView');
 
@@ -430,6 +430,13 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('/updateLeaveholiday/{id}', 'updateLeaveholiday');
             Route::delete('/deleteLeaveholiday/{id}', 'deleteLeaveholiday');
             Route::get('/updateStatusleaveholiday/{id}/{status}', 'updateStatusleaveholiday');
+
+
+            //get State Holiday
+            Route::get('/getstateholiday/{id}', 'getstateholiday');
+            Route::get('/getstateholidaydetail/{id}', 'getstateholidaydetail');
+            Route::post('/updateholidaystate', 'updateholidaystate');
+
 
             // eleave Leave Types
             Route::get('/leavetypes', 'leavetypesView');

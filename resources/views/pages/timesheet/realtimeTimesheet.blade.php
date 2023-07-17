@@ -78,7 +78,7 @@
                                     <th width="10%">Date</th>
                                     <th class="text-nowrap">Time</th>
                                     <th class="text-nowrap">Venue</th>
-                                    <th class="text-nowrap">Description</th>
+                                    <th class="1%">Description</th>
                                     <th class="text-nowrap">Participant</th>
                                     <th class="text-nowrap">Created By</th>
                                 </tr>

@@ -166,59 +166,59 @@ $(document).ready(function () {
         $("#okuattach2").css("pointer-events", "none");
     }
 
-    var checkboxes = $('input[name="address_type[]"]');
-    var permanentChecked = false;
-    var correspondentChecked = false;
-    var addressId = null;
-    var addressType = "0";
+    // var checkboxes = $('input[name="address_type[]"]');
+    // var permanentChecked = false;
+    // var correspondentChecked = false;
+    // var addressId = null;
+    // var addressType = "0";
 
-    checkboxes.each(function () {
-        if ($(this).is(":checked")) {
-            if ($(this).val() === "permanent") {
-                permanentChecked = true;
-            } else if ($(this).val() === "correspondent") {
-                correspondentChecked = true;
-            }
-            if (addressId == null) {
-                addressId = $(this).data("address-id");
-                addressType = $(this).data("address-type");
-            }
-        }
-    });
+    // checkboxes.each(function () {
+    //     if ($(this).is(":checked")) {
+    //         if ($(this).val() === "permanent") {
+    //             permanentChecked = true;
+    //         } else if ($(this).val() === "correspondent") {
+    //             correspondentChecked = true;
+    //         }
+    //         if (addressId == null) {
+    //             addressId = $(this).data("address-id");
+    //             addressType = $(this).data("address-type");
+    //         }
+    //     }
+    // });
 
-    if (permanentChecked && correspondentChecked) {
-        checkboxes.not(":checked").prop("disabled", true);
-        // if both checkboxes are checked and have the same address ID, set addressType to 3
-        if (
-            checkboxes.filter(
-                '[data-address-id="' + addressId + '"]:checked'
-            ).length === 2
-        ) {
-            addressType = "3";
-        }
-    } else if (permanentChecked) {
-        // if only permanent checkbox is checked, set addressType to 1
-        addressType = "1";
-        // disable all other permanent checkboxes
-        checkboxes
-            .filter('[value="permanent"]:not(:checked)')
-            .prop("disabled", true);
-        // enable all correspondent checkboxes
-        checkboxes
-            .filter('[value="correspondent"]')
-            .prop("disabled", false);
-    } else if (correspondentChecked) {
-        // if only correspondent checkbox is checked, set addressType to 2
-        addressType = "2";
-        // disable all other correspondent checkboxes
-        checkboxes
-            .filter('[value="correspondent"]:not(:checked)')
-            .prop("disabled", true);
-        // enable all permanent checkboxes
-        checkboxes.filter('[value="permanent"]').prop("disabled", false);
-    } else {
-        checkboxes.prop("disabled", false);
-    }
+    // if (permanentChecked && correspondentChecked) {
+    //     checkboxes.not(":checked").prop("disabled", true);
+    //     // if both checkboxes are checked and have the same address ID, set addressType to 3
+    //     if (
+    //         checkboxes.filter(
+    //             '[data-address-id="' + addressId + '"]:checked'
+    //         ).length === 2
+    //     ) {
+    //         addressType = "3";
+    //     }
+    // } else if (permanentChecked) {
+    //     // if only permanent checkbox is checked, set addressType to 1
+    //     addressType = "1";
+    //     // disable all other permanent checkboxes
+    //     checkboxes
+    //         .filter('[value="permanent"]:not(:checked)')
+    //         .prop("disabled", true);
+    //     // enable all correspondent checkboxes
+    //     checkboxes
+    //         .filter('[value="correspondent"]')
+    //         .prop("disabled", false);
+    // } else if (correspondentChecked) {
+    //     // if only correspondent checkbox is checked, set addressType to 2
+    //     addressType = "2";
+    //     // disable all other correspondent checkboxes
+    //     checkboxes
+    //         .filter('[value="correspondent"]:not(:checked)')
+    //         .prop("disabled", true);
+    //     // enable all permanent checkboxes
+    //     checkboxes.filter('[value="permanent"]').prop("disabled", false);
+    // } else {
+    //     checkboxes.prop("disabled", false);
+    // }
 
     $("#passportmyprofile").change(function () {
         if ($("#passportmyprofile").val() !== "") {
@@ -2547,7 +2547,6 @@ $(document).ready(function () {
             $("#expirydatemc").val("");
             $("#expirydatemc").prop("readonly", true);
             $("#expirydatemc").css("pointer-events", "none");
-            $("#expirydatemc").prop("disabled", true);
             $("#issuingCountryAddCompanion").prop("disabled", true);
         }
     });
@@ -3984,7 +3983,7 @@ $(document).ready(function () {
                     $("#okuattach6").css("pointer-events", "auto");
                 } else {
                     $("#oku_status").prop("checked", false);
-                    
+
                     $("#okucard6").prop("disabled", true);
                     $("#okucard6").prop("readonly", true);
                     $("#okucard6").val();
@@ -4154,7 +4153,7 @@ $(document).ready(function () {
     });
 
     $('input[name="address_type[]"]').on("change", function () {
-        var checkboxes = $('input[name="address_type[]"]');
+
         var permanentChecked = false;
         var correspondentChecked = false;
         var addressId = $(this).data("address-id");
@@ -4162,45 +4161,56 @@ $(document).ready(function () {
             ? $(this).data("address-type")
             : "0";
 
-        checkboxes.each(function () {
-            if ($(this).is(":checked")) {
-                if ($(this).val() === "permanent") {
-                    permanentChecked = true;
-                } else if ($(this).val() === "correspondent") {
-                    correspondentChecked = true;
-                }
-            }
-        });
+        var checkboxes = $('input[name="address_type[]"][data-address-id='+addressId+']');
 
-        if (permanentChecked && correspondentChecked) {
-            checkboxes.not(":checked").prop("disabled", true);
-            if (
-                checkboxes.filter(
-                    '[data-address-id="' + addressId + '"]:checked'
-                ).length === 2
-            ) {
-                addressType = "3";
-            }
-        } else if (permanentChecked) {
+            checkboxes.each(function () {
+                if ($(this).is(":checked")) {
+                    if ($(this).val() === "permanent") {
+                        permanentChecked = true;
+                    } else if ($(this).val() === "correspondent") {
+                        correspondentChecked = true;
+                    }
+                }
+            });
+
+        if (permanentChecked == true && correspondentChecked == false) {
             addressType = "1";
             checkboxes
-                .filter('[value="permanent"]:not(:checked)')
-                .prop("disabled", true);
-            checkboxes
-                .filter('[value="correspondent"]')
-                .prop("disabled", false);
-        } else if (correspondentChecked) {
-            addressType = "2";
+                .filter('[value="permanent"]:checked')
+                // .prop("disabled", true);
+
             checkboxes
                 .filter('[value="correspondent"]:not(:checked)')
-                .prop("disabled", true);
-            checkboxes.filter('[value="permanent"]').prop("disabled", false);
-        } else {
-            checkboxes.prop("disabled", false);
-        }
+                // .prop("disabled", false);
 
-        if ($(this).is(":not(:checked)")) {
+        } else if (permanentChecked == false && correspondentChecked == true) {
+            addressType = "2";
+            checkboxes
+                .filter('[value="correspondent"]:checked')
+                // .prop("disabled", true);
+
+            checkboxes
+                .filter('[value="permanent"]:not(:checked)')
+
+
+        } else if (permanentChecked == true && correspondentChecked == true) {
+            addressType = "3";
+            checkboxes
+                .filter('[value="permanent"]:checked')
+                // .prop("disabled", false);
+            checkboxes
+                .filter('[value="correspondent"]:checked')
+                // .prop("disabled", false);
+
+        } else if (permanentChecked == false && correspondentChecked == false){
             addressType = "0";
+            checkboxes
+            .filter('[value="correspondent"]:not(:checked)')
+            // .prop("disabled", true);
+
+        checkboxes
+            .filter('[value="permanent"]:not(:checked)')
+
         }
 
         $.ajax({
@@ -4219,7 +4229,11 @@ $(document).ready(function () {
                     confirmButtonText: "OK",
                     allowOutsideClick: false,
                     allowEscapeKey: false,
+                }).then(function () {
+                    location.reload();
                 });
+
+
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 console.error(errorThrown);
@@ -4252,7 +4266,6 @@ $("#same-address").change(function () {
                     var permanentCity = data.data.city;
                     var permanentState = data.data.state;
                     var permanentCountry = data.data.country;
-                    console.log(data);
 
                     if (
                         permanentAddress1 ||
@@ -4400,11 +4413,11 @@ $("#same-addressUC").change(function () {
                     console.log(data);
 
                     if (
-                        permanentAddress1 &&
-                        permanentAddress2 &&
-                        permanentPostcode &&
-                        permanentCity &&
-                        permanentState &&
+                        permanentAddress1 ||
+                        permanentAddress2 ||
+                        permanentPostcode ||
+                        permanentCity ||
+                        permanentState ||
                         permanentCountry
                     ) {
                         $("#address1UC").val(permanentAddress1);

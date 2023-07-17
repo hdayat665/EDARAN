@@ -157,7 +157,7 @@ class MyTimeSheetService
             $higherNumber = 3;
         }
         // dd($higherNumber, $lowerNumber);
-    if ($dayOfWeek == $higherNumber || $lowerNumber == $b) {
+    if ($dayOfWeek == $higherNumber || $dayOfWeek ==  $lowerNumber) {
         $twoDaysBefore = date('Y/m/d', strtotime('-4 days'));
     }
     

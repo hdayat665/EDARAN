@@ -10,6 +10,8 @@ use App\Models\leavetypesModel;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail as FacadesMail;
+use Illuminate\Support\Facades\Log;
+use DateTime;
 
 class MailService
 {
@@ -578,4 +580,161 @@ class MailService
             Mail::to($receiver)->send(new MailMail($response));
         }
     }
+
+    public function getEmailData($data)
+    {
+        {
+
+            $user = Employee::select('employment.*', 'department.departmentName', 'designation.designationName')
+                    ->join('designation', 'employment.designation', '=', 'designation.id')
+                    ->join('department', 'employment.department', '=', 'department.id')
+                    ->where('employment.user_id', $data->user_id)
+                    ->where('employment.tenant_id', Auth::user()->tenant_id)
+                    ->first();
+    
+            $approvedby = Employee::select('employment.*', 'department.departmentName', 'designation.designationName')
+                    ->join('designation', 'employment.designation', '=', 'designation.id')
+                    ->join('department', 'employment.department', '=', 'department.id')
+                    ->where('employment.user_id', $user->tsapprover)
+                    ->where('employment.tenant_id', Auth::user()->tenant_id)
+                    ->first();
+    
+            if($user && $approvedby){
+    
+                $receiver = $user->workingEmail;
+                $response['typeEmail'] = 'emailToEmployeeAppeal';
+    
+                $response['from'] = env('MAIL_FROM_ADDRESS');
+                $response['nameFrom'] = $approvedby->employeeName;
+                $response['subject'] = 'Timesheet Appeal Application Status';
+                $response['title'] = 'Timesheet Appeal Application Status';
+                $response['employeeNamex'] = $user->employeeName;
+                $response['employeeName'] = $approvedby->employeeName;
+                $response['departmentName'] = $approvedby->departmentName;
+                $response['designationName'] = $approvedby->designationName;
+                $response['data'] = $data;
+    
+                Mail::to($receiver)->send(new MailMail($response));
+            }
+        }
+    }
+
+        public function emailToApproverAppeal123()
+    {
+        $now = now();
+        $monday = 1;
+        $tuesday = 2;
+        
+        // Adjust the date based on the target day of the week
+        // if ($now->dayOfWeek === $monday || $now->dayOfWeek === $tuesday) {
+        //     $twoDaysAgo = $now->subDays(4)->format('Y-m-d');
+        // } else {
+        //     $twoDaysAgo = $now->subDays(2)->format('Y-m-d');
+        // }
+
+         $twoDaysAgo = $now->subDays(3)->format('Y-m-d');
+
+        $users = Employee::leftJoinSub(function($query) use ($twoDaysAgo) {
+                $query->from('timesheet_event')
+                    ->join('attendance_event', function ($join) {
+                        $join->on('timesheet_event.id', '=', 'attendance_event.event_id')
+                            ->where('attendance_event.status', '=', 'attend');
+                    })
+                    ->select('timesheet_event.user_id', DB::raw("SEC_TO_TIME(SUM(TIME_TO_SEC(timesheet_event.duration))) AS total_event_hours"))
+                    ->whereDate('timesheet_event.start_date', '=', $twoDaysAgo)
+                    ->groupBy('timesheet_event.user_id');
+            }, 'timesheet_event', function ($join) {
+                $join->on('employment.user_id', '=', 'timesheet_event.user_id');
+            })
+            ->leftJoinSub(function($query) use ($twoDaysAgo) {
+                $query->from('timesheet_log')
+                    ->select('user_id', DB::raw("SEC_TO_TIME(SUM(TIME_TO_SEC(total_hour))) AS total_log_hours"))
+                    ->whereDate('date', '=', $twoDaysAgo)
+                    ->groupBy('user_id');
+            }, 'timesheet_log', function ($join) {
+                $join->on('employment.user_id', '=', 'timesheet_log.user_id');
+            })
+            ->groupBy('employment.user_id', 'employment.employeeName', 'employment.workingEmail')
+            ->select(
+                'employment.user_id',
+                'employment.employeeName',
+                'employment.workingEmail',
+                'timesheet_event.total_event_hours',
+                'timesheet_log.total_log_hours'
+            )
+            ->get();
+
+        
+    foreach ($users as $user) {
+
+            // $receiver = $user->workingEmail;
+            // $response['typeEmail'] = 'emailToEmployeeAppeal';
+            // $response['from'] = env('MAIL_FROM_ADDRESS');
+            // $response['nameFrom'] = $approvedby->employeeName;
+            // $response['subject'] = 'Timesheet Appeal Application Status';
+            // $response['title'] = 'Timesheet Appeal Application Status';
+            // $response['employeeNamex'] = $user->employeeName;
+            // $response['employeeName'] = $approvedby->employeeName;
+            // $response['departmentName'] = $approvedby->departmentName;
+            // $response['designationName'] = $approvedby->designationName;
+            // $response['data'] = $data;
+
+            // Mail::to($receiver)->send(new MailMail($response));
+       
+    
+        
+        $receiver = $user->workingEmail;
+
+
+        $response['subject'] = 'Timesheet Appeal Application Status';
+        $response['typeEmail'] = 'emailmissedtimesheet';
+        $response['from'] = env('MAIL_FROM_ADDRESS');
+        $response['nameFrom'] = $user->employeeName;
+
+        $subject = 'Timesheet Appeal Application';
+        $content = 'Dear ' . $user->employeeName . ',<br><br>';
+        $content .= 'You have received a timesheet appeal application from ' . $user->employeeName . '.';
+        
+        if (!empty($user->total_event_hours)) {
+            $content .= '<br><br>Total hours for two days ago (timesheet event): ' . $user->total_event_hours;
+        } else {
+            $content .= '<br><br>No timesheet event found for two days ago.';
+        }
+        
+        if (!empty($user->total_log_hours)) {
+            $content .= '<br><br>Total hours for two days ago (timesheet log): ' . $user->total_log_hours;
+        } else {
+            $content .= '<br><br>No timesheet log found for two days ago.';
+        }
+        
+        // Calculate the sum of total_event_hours and total_log_hours
+        $eventHours = new DateTime($user->total_event_hours ?? '00:00:00');
+        $logHours = new DateTime($user->total_log_hours ?? '00:00:00');
+        $combinedHours = $eventHours->sub($logHours->diff(new DateTime('00:00:00')))->format('H:i:s');
+        
+        $content .= '<br><br>Total hours for two days ago (combined): ' . $combinedHours;
+        
+        // Check conditions and send email
+        if ($eventHours->format('H:i:s') === '00:00:00' && $logHours->format('H:i:s') === '00:00:00') {
+            // Mail::html($content, function ($message) use ($receiver, $subject) {
+            //     $message->to($receiver)
+            //         ->subject($subject);
+            // });
+            Mail::to($receiver)->send(new MailMail($response));
+
+            $working_hour = '08:00:00';
+
+        } elseif ($combinedHours < $working_hour) {
+            // Mail::html($content, function ($message) use ($receiver, $subject) {
+            //     $message->to($receiver)
+            //         ->subject($subject);
+            // });
+            Mail::to($receiver)->send(new MailMail($response));
+        }
+    }   
+            
+}
+
+
+    
 }

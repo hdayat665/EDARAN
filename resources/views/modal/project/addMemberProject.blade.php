@@ -18,7 +18,7 @@
                     </div>
 
                     <div class="row mb-15px">
-                        <div class="col-md-6"> 
+                        <div class="col-md-6">
                         <select class="selectpicker form-control" id="employee_id" name="employee_id" style="text-transform: uppercase;">
                                 <option value="" label="PLEASE CHOOSE" selected="selected"></option>
 
@@ -89,6 +89,7 @@
 
                         <div class="col-md-6">
                             <select class="form-select" name="branch" id="branchs" style="pointer-events: none; touch-action: none; background: #e9ecef;">
+                                <option value="" label=""></option>    
                                 <?php $branch = getBranchProject() ?>
                                 @foreach ($branch as $branchs)
                                 <option value="{{$branchs->id}}" >{{$branchs->branchName}}</option>

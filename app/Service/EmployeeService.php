@@ -618,7 +618,6 @@ class EmployeeService
     public function addEmployeeCompanion($r)
     {
         $input = $r->input();
-
         $id = $input['user_id'];
 
         $companion = UserCompanion::where('user_id', $id)->count();
@@ -662,16 +661,12 @@ class EmployeeService
 
 
 
-            if (isset($_FILES['expiryDate']['name'])) {
-                $input['expiryDate'] = dateFormat($input['expiryDate']);
-
-            } else {
+            if(!isset($input['expiryDate']))
+            {
                 $input['expiryDate'] = null;
             }
 
-            $input['DOM'] = dateFormat($input['DOM']);
             $input['DOB'] = dateFormat($input['DOB']);
-            UserCompanion::create($input);
 
             $input['mainCompanion'] = isset($input['mainCompanion']) ? 1 : 0;
             $companion = UserCompanion::create($input);
@@ -691,7 +686,7 @@ class EmployeeService
             $data['status'] = config('app.response.success.status');
             $data['type'] = config('app.response.success.type');
             $data['title'] = config('app.response.success.title');
-            $data['msg'] = 'Success add Companion';
+            $data['msg'] = 'New Companion is created.';
         }
 
         return $data;
@@ -879,10 +874,11 @@ class EmployeeService
     public function getEmployeeAddressforParent($id)
     {
 
-
         $addressDetails = UserAddress::where('user_id', $id)
-            ->select('address1', 'address2', 'postcode', 'city', 'state', 'country')
-            ->first();
+        ->whereIn('addressType', [1, 3])
+        ->select('address1', 'address2', 'postcode', 'city', 'state', 'country')
+        ->first();
+
 
 
         if(!$addressDetails)
@@ -951,7 +947,7 @@ class EmployeeService
             $input['expiryDate'] = null;
             $input['issuingCountry'] = null;
         }
-        
+
         $user = UserParent::where('id', $id)->first();
 
         if (!$user) {
@@ -1721,12 +1717,10 @@ class EmployeeService
 
     public function getEmployeeAddressforCompanion($id)
     {
-
-
         $addressDetails = UserAddress::where('user_id', $id)
-            ->select('address1', 'address2', 'postcode', 'city', 'state', 'country')
-            ->first();
-
+        ->whereIn('addressType', [1, 3])
+        ->select('address1', 'address2', 'postcode', 'city', 'state', 'country')
+        ->first();
 
         if(!$addressDetails)
         {
@@ -1744,4 +1738,5 @@ class EmployeeService
 
         return $data;
     }
+
 }
