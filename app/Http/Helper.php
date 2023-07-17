@@ -815,9 +815,26 @@ if (!function_exists('getUnitforJobHistory')) {
         return $units->pluck('unitName', 'id')->toArray();
     }
 }
+if (!function_exists('getUnitProject')) {
+    function getUnitProject($id = '')
+    {
+        if ($id) {
+            $data = Unit::find($id);
+        } else {
+            $data = Unit::where('tenant_id', Auth::user()->tenant_id)->get();
+        }
+
+        if (!$data) {
+            $data = [];
+        }
+
+        return $data;
+    }
+}
 if (!function_exists('getBranchProject')) {
     function getBranchProject($id = '')
     {
+        
         if ($id) {
             $data = Branch::find($id);
         } else {

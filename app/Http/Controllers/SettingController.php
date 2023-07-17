@@ -1585,14 +1585,14 @@ class SettingController extends Controller
 
         return view('pages.setting.systemUser');
     }
-    public function systemUserCreate()
-    {
-        // $ss = new SettingService;
+    // public function systemUserCreate()
+    // {
+    //     // $ss = new SettingService;
 
-        // $result = $ss->systemUser();
+    //     // $result = $ss->systemUser();
 
-        return view('pages.setting.systemUserCreate');
-    }
+    //     return view('pages.setting.systemUserCreate');
+    // }
     public function systemUserUpdate()
     {
         // $ss = new SettingService;
