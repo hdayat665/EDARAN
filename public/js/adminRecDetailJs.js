@@ -1,3 +1,68 @@
+//TRAVEL MODAL
+$(document).on("click", "#AdminRectravel", function () {
+    $("#travelModal").modal("show");
+});
+    
+//SUBSISTENCE MODAL
+$(document).on("click", "#AdminRecsubs", function () {
+    $("#subsModal").modal("show");
+});
+
+// $(document).ready(function() {
+//     $("#withbutton").on("click", function() {
+//       $("#withCashAdvance").show();
+//     });
+  
+//     $("#withoutbutton").on("click", function() {
+//       $("#withCashAdvance").hide();
+//     });
+// });
+
+//OTHERS MODAL
+$(document).on("click", "#AdminRecothers", function () {
+    $("#othersModal").modal("show");
+});
+
+//ATTACHMENT FILE
+$(document).on("click", "#btnTAttachment", function () {
+    $("#travellingAttachment").modal("show");
+});
+
+$(document).on("click", "#btnSAttachment", function () {
+    $("#subsistenceAttachment").modal("show");
+});
+
+$("#travelling").DataTable({
+    paging: true,
+    filter: false,
+    scrollX: false,
+    lengthMenu: [
+        [5, 10, 25, 50, -1],
+        [5, 10, 25, 50, "All"],
+    ],
+});
+    
+$("#subsistence").DataTable({
+    paging: true,
+    filter: false,
+    scrollX: false,
+    lengthMenu: [
+        [5, 10, 25, 50, -1],
+        [5, 10, 25, 50, "All"],
+    ],
+});
+
+$("#others").DataTable({
+    paging: true,
+    filter: false,
+    scrollX: false,
+    lengthMenu: [
+        [5, 10, 25, 50, -1],
+        [5, 10, 25, 50, "All"],
+    ],
+});
+
+///////////////////////////////////////////////////////////////////////
 $(document).ready(function () {
     $("#claimtable").DataTable({
         responsive: false,

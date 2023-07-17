@@ -375,6 +375,6 @@
                 </div>
             </div>
         </div>
-        @include('modal.eclaimApproval.supervisorDetailModal')
+        <!-- @include('modal.eclaimApproval.supervisorDetailModal') -->
     </div>
 @endsection

@@ -10,6 +10,16 @@ $(document).on("click", "#SVAtravel", function () {
         $("#subsModal").modal("show");
     });
     
+// $(document).ready(function() {
+//     $("#withbutton").on("click", function() {
+//       $("#withCashAdvance").show();
+//     });
+  
+//     $("#withoutbutton").on("click", function() {
+//       $("#withCashAdvance").hide();
+//     });
+// });
+
     //OTHERS MODAL
     $(document).on("click", "#SVAothers", function () {
     
