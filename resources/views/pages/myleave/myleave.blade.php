@@ -55,6 +55,8 @@
                                         </div>
                                         <br>
                                         <div id="EarnedLeave" class="form-control">Earned Leave to Date:  Days</div>
+                                        <br>
+                                        <div id="totalNoPaidLeave" class="form-control">Total Days for No Paid Leave: 0</div>
                                     </div>
                                 </div>
                                     <div class="col-sm-6">

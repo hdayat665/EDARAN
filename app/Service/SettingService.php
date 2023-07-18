@@ -2517,25 +2517,22 @@ public function updateTypeOfLogs($r, $id)
             $data[] = $state;
         }
 
-        $dataallstate = state::select('*')
-            ->where('country_id', '=', $dataallstate[0]->country_id)
-            ->orderBy('id', 'desc')
-            ->get();
+        if (count($dataallstate) > 0) {
+            $dataallstate = state::select('*')
+                ->where('country_id', '=', $dataallstate[0]->country_id)
+                ->orderBy('id', 'desc')
+                ->get();
 
-        $totalAll = count($dataallstate);
+            $totalAll = count($dataallstate);
 
-        foreach ($data as $state) {
-            if ($state->total === $totalAll) {
-                $state->total = "ALL";
+            foreach ($data as $state) {
+                if ($state->total === $totalAll) {
+                    $state->total = "ALL";
+                }
             }
         }
 
         return $data;
-
-
-
-
-
 
     }
 

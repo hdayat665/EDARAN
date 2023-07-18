@@ -1,6 +1,18 @@
 @extends('layouts.dashboardTenant')
 
 @section('content')
+
+
+    <style>
+        
+        .custom-dropdown-menu {
+        position: static ;
+        height: auto ;
+        max-height: none ;
+        overflow: visible ;
+    }
+
+    </style>
     <div id="content" class="app-content">
     <br>
     <h1 class="page-header" id="leaveHodJs">eLeave <small>| Leave Approval | Head Of Department</small></h1>
@@ -93,27 +105,28 @@
 
                             <tr class="odd gradeX">
                                 <td>{{ $id }}</td>
-                                <td >
+                                <td>
                                     <div class="btn-group">
-                                        <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle"><i class="fa fa-cogs"></i> Action <i class="fa fa-caret-down"></i></a>
-                                        <ul class="dropdown-menu">
-                                            <a class="dropdown-item" href="/viewTimesheetLeave/{{$l->up_user_id}}" >View Calendar</a>
+                                        <div>
+                                            <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle"><i class="fa fa-cogs"></i> Action <i class="fa fa-caret-down"></i></a>
+                                        </div>
 
-                                            <div class="dropdown-divider" style=""></div>
-                                                <a href="javascript:;" id="viewbutton" data-id="{{ $l->id }}" data-bs-toggle="modal" data-bs-target="#viewmodal" class="btn">View Leave</a>
-                                            @if ($l->up_app_status == '4')
-                                            @else
-                                                <div class="dropdown-divider" style=""></div>
-                                                <a href="javascript:;" id="editButton2" data-id="{{ $l->id }}" data-bs-toggle="modal" data-bs-target="#approveModal-tab-1" class="btn">Approve Leave</a>
-                                            @endif
-                                            @if ($l->up_app_status == '3')
-                                            @else
+                                        <ul class="dropdown-menu custom-dropdown-menu test" >
+                                            <li><a class="dropdown-item" href="/viewTimesheetLeave/{{$l->up_user_id}}">View Calendar</a></li>
+                                            <div class="dropdown-divider"></div>
+                                            <li><a href="javascript:;" id="viewbutton" data-id="{{ $l->id }}" data-bs-toggle="modal" data-bs-target="#viewmodal" class="btn">View Leave</a></li>
+                                            @if ($l->up_app_status != '4')
                                                 <div class="dropdown-divider"></div>
-                                                <a href="javascript:;" id="editButton3" data-id="{{ $l->id }}"  data-bs-toggle="modal" data-bs-target="#rejectModal-tab-1" class="btn">Reject Leave</a>
+                                                <li><a href="javascript:;" id="editButton2" data-id="{{ $l->id }}" data-bs-toggle="modal" data-bs-target="#approveModal-tab-1" class="btn">Approve Leave</a></li>
+                                            @endif
+                                            @if ($l->up_app_status != '3')
+                                                <div class="dropdown-divider"></div>
+                                                <li><a href="javascript:;" id="editButton3" data-id="{{ $l->id }}" data-bs-toggle="modal" data-bs-target="#rejectModal-tab-1" class="btn">Reject Leave</a></li>
                                             @endif
                                         </ul>
                                     </div>
                                 </td>
+
                                 <td>{{$l->applied_date}}</td>
                                 <td>{{$l->fullName}}</td>
                                 <td>{{$l->type}}</td>
