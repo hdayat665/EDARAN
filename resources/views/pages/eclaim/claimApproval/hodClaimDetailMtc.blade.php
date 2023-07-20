@@ -137,7 +137,7 @@
                         </div>
                         <div class="row p-2">
                             <div class="col d-flex justify-content-end">
-                                <a class="btn btn-secondary" data-id="" style="color: black; width:60%" type="submit"> Back</a>
+                                <a href="" class="btn btn-light" style="color: black; width:60%" type="submit"><i class="fa fa-arrow-left"></i> Back</a>
                             </div>
                         </div>
                     </div>

@@ -38,7 +38,11 @@
                     </thead>
                     <tr style="text-align:center">
                         <td>
-                            <input class="form-check-input" type="checkbox" id="checkbox1" checked/>  
+                            <input class="form-check-input" type="checkbox" id="checkbox1" checked/>&nbsp;
+                            <input class="form-check-input" type="checkbox" id="checkbox1" checked/>&nbsp;
+                            <input class="form-check-input" type="checkbox" id="checkbox1" checked/>&nbsp;
+                            <input class="form-check-input" type="checkbox" id="checkbox1" checked/>&nbsp; 
+                            <input class="form-check-input" type="checkbox" id="checkbox1" checked/>   
                         </td>
                         <td>YYYY-MM-DD</td>
                         <td>167.5KM</td>
@@ -51,12 +55,16 @@
                         <td>
                             <a href="#" data-bs-toggle="dropdown" class="btn btn-primary btn-sm dropdown-toggle"></i> Actions <i class="fa fa-caret-down"></i></a>
                             <div class="dropdown-menu">
-                            <a id="SVRtravel" class="dropdown-item"> Check</a>
+                            <a id="FinChecktravel" class="dropdown-item"> Check</a>
                             <a id="" class="dropdown-item"> Delete</a>
                         </td>
                     </tr>
                     <tr style="text-align:center">
                         <td>
+                            <input class="form-check-input" type="checkbox" id="checkbox1" checked/>&nbsp;
+                            <input class="form-check-input" type="checkbox" id="checkbox1" checked/>&nbsp;
+                            <input class="form-check-input" type="checkbox" id="checkbox1" checked/>&nbsp;
+                            <input class="form-check-input" type="checkbox" id="checkbox1" checked/>&nbsp; 
                             <input class="form-check-input" type="checkbox" id="checkbox1" checked/>   
                         </td>
                         <td>YYYY-MM-DD</td>
@@ -70,7 +78,7 @@
                         <td>
                             <a href="#" data-bs-toggle="dropdown" class="btn btn-primary btn-sm dropdown-toggle"></i> Actions <i class="fa fa-caret-down"></i></a>
                             <div class="dropdown-menu">
-                            <a id="SVRtravel" class="dropdown-item"> Check</a>
+                            <a id="FinChecktravel" class="dropdown-item"> Check</a>
                             <a id="" class="dropdown-item"> Delete</a>
                         </td>
                     </tr>
@@ -137,7 +145,7 @@
                                 <td>
                                     <a href="#" data-bs-toggle="dropdown" class="btn btn-primary btn-sm dropdown-toggle"></i> Actions <i class="fa fa-caret-down"></i></a>
                                     <div class="dropdown-menu">
-                                    <a id="SVRsubs" class="dropdown-item"> Check</a>
+                                    <a id="FinChecksubs" class="dropdown-item"> Check</a>
                                     <a id="" class="dropdown-item"> Delete</a>
                                 </td>
                             </tr>
@@ -214,7 +222,7 @@
                             <td>
                                 <a href="#" data-bs-toggle="dropdown" class="btn btn-primary btn-sm dropdown-toggle"></i> Actions <i class="fa fa-caret-down"></i></a>
                                 <div class="dropdown-menu">
-                                <a id="SVRothers" class="dropdown-item"> Check</a>
+                                <a id="FinCheckothers" class="dropdown-item"> Check</a>
                                 <a id="" class="dropdown-item"> Delete</a>
                             </td>
                         </tr>
@@ -233,4 +241,4 @@
     </div>
 </div>
 
-@include('modal.eclaimApproval.SVRecmodal')
+@include('modal.eclaimApproval.fcheckerMtcModal')

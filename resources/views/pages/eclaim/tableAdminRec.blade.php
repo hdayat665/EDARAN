@@ -75,7 +75,7 @@
                             <td>RM60.00</td>
                             <td>RM30.00</td>
                             <td>RM14.00</td>
-                            <td></td>
+                            <td>RM0.00</td>
                             <td></td>
                         </tr>
                     </tfoot>

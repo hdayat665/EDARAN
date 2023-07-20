@@ -1,7 +1,7 @@
 @extends('layouts.dashboardTenant')
 @section('content')
 <div id="content" class="app-content">
-    <h1 class="page-header">eClaim <small>| Claim Approval | Admin Recommender | View Monthly Claim </small></h1>
+    <h1 class="page-header">eClaim <small>| Claim Approval | Monthly Claim </small></h1>
     <div class="panel panel" id="adminRecDetailJs">
 
         <!-- NEW DESIGN -->
@@ -111,34 +111,39 @@
                 <div class="col md-2">
                     @if ($general->a_recommender == 'recommend')
                     @else
+                    <div class="row p-2">
+                        <div class="col d-flex justify-content-end">
+                            <a href="javascript:;" class="btn btn-warning" style="color: black; width:60%" data-bs-toggle="modal" data-bs-target="#modalamend">Amend</a>
+                        </div>
+                    </div>
+                    <div class="row p-2">
+                        <div class="col d-flex justify-content-end">
+                            <a href="javascript:;" class="btn btn-danger" style="color: black; width:60%" data-bs-toggle="modal" data-bs-target="#modalreject"> Reject</a>
+                        </div>
+                    </div>
                     <!-- button APPROVE changed to RECOMMEND -->
                     <div class="row p-2">
                         <div class="col d-flex justify-content-end">
-                        <a class="btn btn-lime" id="approveButton" data-id="{{ $general->id }}" style="color: black; width:60%" type="submit"> Recommend</a>
+                            <a class="btn btn-lime" id="approveButton" data-id="{{ $general->id }}" style="color: black; width:60%" type="submit"> Recommend</a>
                         </div>
                     </div>
-                    <div class="row p-2">
-                        <div class="col d-flex justify-content-end">
-                        <a href="javascript:;" class="btn btn-warning" style="color: black; width:60%" data-bs-toggle="modal" data-bs-target="#modalamend">Amend</a>
-                        </div>
-                    </div>
-                    <div class="row p-2">
-                        <div class="col d-flex justify-content-end">
-                        <a href="javascript:;" class="btn btn-danger" style="color: black; width:60%" data-bs-toggle="modal" data-bs-target="#modalreject"> Reject</a>
-                        </div>
-                    </div>
+                    @endif
                     <!-- button CANCEL changed to PRINT -->
                     <div class="row p-2">
                         <div class="col d-flex justify-content-end">
-                            <a class="btn btn-secondary" style="color: black; width:60%" type="submit"> Cancel</a> &nbsp;
+                            <a class="btn btn-secondary" style="color: black; width:60%" type="submit"> Print</a> &nbsp;
                         </div>
                     </div>
+                    <div class="row p-2">
+                        <div class="col d-flex justify-content-end">
+                            <a href="/adminRecView" class="btn btn-light" style="color: black; width:60%" type="submit"><i class="fa fa-arrow-left"></i> Back</a>
+                        </div>
+                    </div>
+                    
                     <!-- <a class="btn btn-secondary" style="color: black" type="submit"> Cancel</a> &nbsp;
                     <a href="javascript:;" class="btn btn-warning" style="color: black" data-bs-toggle="modal" data-bs-target="#modalamend">Amend</a> &nbsp;
                     <a href="javascript:;" class="btn btn-danger" style="color: black" data-bs-toggle="modal" data-bs-target="#modalreject"> Reject</a> &nbsp;
                     <a class="btn btn-lime" id="approveButton" data-id="{{ $general->id }}" style="color: black" type="submit"> Approve</a> -->
-                    @endif
-                    </div>
                 </div>
             </div>
             {{-- ROW 2 --}}

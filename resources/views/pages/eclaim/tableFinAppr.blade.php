@@ -51,7 +51,7 @@
                         <td>
                             <a href="#" data-bs-toggle="dropdown" class="btn btn-primary btn-sm dropdown-toggle"></i> Actions <i class="fa fa-caret-down"></i></a>
                             <div class="dropdown-menu">
-                            <a id="SVRtravel" class="dropdown-item"> Check</a>
+                            <a id="FinApprtravel" class="dropdown-item"> Check</a>
                             <a id="" class="dropdown-item"> Delete</a>
                         </td>
                     </tr>
@@ -70,7 +70,7 @@
                         <td>
                             <a href="#" data-bs-toggle="dropdown" class="btn btn-primary btn-sm dropdown-toggle"></i> Actions <i class="fa fa-caret-down"></i></a>
                             <div class="dropdown-menu">
-                            <a id="SVRtravel" class="dropdown-item"> Check</a>
+                            <a id="FinApprtravel" class="dropdown-item"> Check</a>
                             <a id="" class="dropdown-item"> Delete</a>
                         </td>
                     </tr>
@@ -137,7 +137,7 @@
                                 <td>
                                     <a href="#" data-bs-toggle="dropdown" class="btn btn-primary btn-sm dropdown-toggle"></i> Actions <i class="fa fa-caret-down"></i></a>
                                     <div class="dropdown-menu">
-                                    <a id="SVRsubs" class="dropdown-item"> Check</a>
+                                    <a id="FinApprsubs" class="dropdown-item"> Check</a>
                                     <a id="" class="dropdown-item"> Delete</a>
                                 </td>
                             </tr>
@@ -214,7 +214,7 @@
                             <td>
                                 <a href="#" data-bs-toggle="dropdown" class="btn btn-primary btn-sm dropdown-toggle"></i> Actions <i class="fa fa-caret-down"></i></a>
                                 <div class="dropdown-menu">
-                                <a id="SVRothers" class="dropdown-item"> Check</a>
+                                <a id="FinApprothers" class="dropdown-item"> Check</a>
                                 <a id="" class="dropdown-item"> Delete</a>
                             </td>
                         </tr>
@@ -233,4 +233,4 @@
     </div>
 </div>
 
-@include('modal.eclaimApproval.SVRecmodal')
+@include('modal.eclaimApproval.fapprovalMtcModal')

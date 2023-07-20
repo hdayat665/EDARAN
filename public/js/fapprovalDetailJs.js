@@ -1,3 +1,76 @@
+//TRAVEL MODAL
+$(document).on("click", "#FinApprtravel", function () {
+    console.log("hana");
+        $("#travelModal").modal("show");
+});
+
+//SUBSISTENCE MODAL
+$(document).on("click", "#FinApprsubs", function () {
+
+    $("#subsModal").modal("show");
+});
+
+$(document).ready(function() {
+    $(document).on("change", "#listofCA", function() {
+        $("input").val("");
+
+        if ($(this).val() == "1") {
+            $(".lists").show();
+
+        } else if ($(this).val() == "2") {
+            $(".lists").hide();
+        }
+    });
+});
+
+//OTHERS MODAL
+$(document).on("click", "#FinApprothers", function () {
+
+    $("#othersModal").modal("show");
+});
+
+//ATTACHMENT FILE
+$(document).on("click", "#btnTAttachment", function () {
+
+    $("#travellingAttachment").modal("show");
+});
+
+$(document).on("click", "#btnSAttachment", function () {
+
+    $("#subsistenceAttachment").modal("show");
+});
+
+$("#travelling").DataTable({
+    paging: true,
+    filter: false,
+    scrollX: false,
+    lengthMenu: [
+        [5, 10, 25, 50, -1],
+        [5, 10, 25, 50, "All"],
+    ],
+});
+
+$("#subsistence").DataTable({
+    paging: true,
+    filter: false,
+    scrollX: false,
+    lengthMenu: [
+        [5, 10, 25, 50, -1],
+        [5, 10, 25, 50, "All"],
+    ],
+});
+
+$("#others").DataTable({
+    paging: true,
+    filter: false,
+    scrollX: false,
+    lengthMenu: [
+        [5, 10, 25, 50, -1],
+        [5, 10, 25, 50, "All"],
+    ],
+});
+
+///////////////////////////////////////////////////////////////////////
 $(document).ready(function () {
     $("#claimtable").DataTable({
         responsive: false,

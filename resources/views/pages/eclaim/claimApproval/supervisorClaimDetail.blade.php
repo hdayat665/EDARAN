@@ -125,7 +125,7 @@
                         </div>
                         <div class="row p-2">
                             <div class="col d-flex justify-content-end">
-                                <a class="btn btn-lime" id="approveButton" data-id="{{ $general->id }}" style="color: black" type="submit">Recommend</a>
+                                <a class="btn btn-lime" id="approveButton" data-id="{{ $general->id }}" style="color: black" type="submit">Approve</a>
                                 <!-- {{-- <button class="btn btn-primary" id="" type="submit" style="width: 100%"> Back</button> --}} -->
                             </div>
                         </div>
@@ -134,6 +134,11 @@
                             <div class="col d-flex justify-content-end">
                                 <a class="btn btn-secondary" data-id="{{ $general->id }}" style="color: black; width:60%" type="submit"> Print</a>
                                 <!-- {{-- <button class="btn btn-primary" id="" type="submit">Cancel</button> --}} -->
+                            </div>
+                        </div>
+                        <div class="row p-2">
+                            <div class="col d-flex justify-content-end">
+                                <a href="" class="btn btn-light" style="color: black; width:60%" type="submit"><i class="fa fa-arrow-left"></i> Back</a>
                             </div>
                         </div>
                     </div>

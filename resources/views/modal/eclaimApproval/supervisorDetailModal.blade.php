@@ -52,8 +52,8 @@
                             </td>
                             <td id="start_time">00:00:00</td>
                             <td id="end_time">00:00:00</td>
-                            <td id="location_start">Edaran Office</td>
-                            <td id="location_address">KLIA 2</td>
+                            <td style="cursor:pointer;" title="Start Address data" id="location_start">Edaran Office</td>
+                            <td style="cursor:pointer;" title="Destination Address data" id="location_address">KLIA 2</td>
                             <td id="desc">meeting with client</td>
                             <td id="type_transport">Personal Car</td>
                             <td id="millage">167.5KM</td>
@@ -158,43 +158,45 @@
                         <label class="form-label">Claim for</label>
                     </div>
                     <div class="col-md-3">
-                        <select class="form-select" id="satu" name="">
+                        <select class="form-select" id="listofCA" name="">
                             <option class="form-label" value="" selected>PLEASE CHOOSE</option>
-                                <option value="" id="withbutton">With Cash Advance</option>
-                                <option value="" id="withoutbutton">Without Cash Advance</option>
+                            <option value="1">With Cash Advance</option>
+                            <option value="2">Without Cash Advance</option>
                         </select>
                     </div>
                 </div>
                 <br>
-                <div class="form-control" id="withCashAdvance">
-                    <div class="row p-2">
-                        <div class="col">
-                            <label class="form-label">List of Cash Advance</label>
+                <div class="lists" style="display:none">
+                    <div class="form-control">
+                        <div class="row p-2">
+                            <div class="col">
+                                <label class="form-label">List of Cash Advance</label>
+                            </div>
                         </div>
-                    </div>
-                    <div class="row p-2">
-                        <table class="table table-striped table-bordered align-middle">
-                            <thead>
-                                <tr>
-                                    <th>Checked</th>
-                                    <th>Form ID</th>
-                                    <th>Type of Cash Advance</th>
-                                    <th>Travel Date</th>
-                                    <th>Amount</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        <input class="form-check-input" type="checkbox" id="checkbox1" checked />   
-                                    </td>
-                                    <td>CA 13</td>
-                                    <td>Project (Outstation)</td>
-                                    <td>2023-01-07 - 2023-01-09</td>
-                                    <td>RM 400.00</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                        <div class="row p-2">
+                            <table class="table table-striped table-bordered align-middle">
+                                <thead>
+                                    <tr style="text-align:center">
+                                        <th>Checked</th>
+                                        <th>Form ID</th>
+                                        <th>Type of Cash Advance</th>
+                                        <th>Travel Date</th>
+                                        <th>Amount</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr style="text-align:center">
+                                        <td>
+                                            <input class="form-check-input" type="checkbox" id="checkbox1" checked />   
+                                        </td>
+                                        <td>CA 13</td>
+                                        <td>Project (Outstation)</td>
+                                        <td>2023-01-07 - 2023-01-09</td>
+                                        <td>RM 400.00</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
                 <br>
