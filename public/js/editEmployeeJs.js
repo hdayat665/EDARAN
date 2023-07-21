@@ -3207,7 +3207,7 @@ $('#event').select2();
             $("#view-children").modal("show");
         });
 
-        $("#deleteChildren" + type).click(function (e) {
+        $(document).on("click","#deleteChildren" + type, function (e) {
             id = $(this).data("id");
             requirejs(["sweetAlert2"], function (swal) {
                 swal({

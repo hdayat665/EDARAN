@@ -705,7 +705,7 @@ class ProfileService
             $data['status'] = config('app.response.success.status');
             $data['type'] = config('app.response.success.type');
             $data['title'] = config('app.response.success.title');
-            $data['msg'] = 'Children is updated.';
+            $data['msg'] = 'New Children is Updated..';
         }
 
         return $data;
@@ -1158,7 +1158,7 @@ class ProfileService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Children is created.';
+        $data['msg'] = 'New Children is Created..';
 
         return $data;
     }
@@ -1303,7 +1303,6 @@ class ProfileService
         //   dd($input);
         $user_id = Auth::user()->id;
         $id = $input['id'];
-        $data1 = $input['addressType'];
 
         $user = UserAddress::find($id);
 
@@ -1317,9 +1316,7 @@ class ProfileService
 
             } else {
 
-                $input = [
-                    'addressType' => $data1
-                ];
+
 
                 UserAddress::where('id', $id)->update($input);
 

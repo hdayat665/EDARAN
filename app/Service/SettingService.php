@@ -505,7 +505,7 @@ class SettingService
             'address' => $input['address'],
             'address2' => $input['address2'],
 
-            'location_cityid' => $getid->id,
+            'ref_cityid' => $getid->id,
             'tenant_id' => Auth::user()->tenant_id,
             'addedBy' => $user->username,
             'addedBy' => date('Y-m-d H:i:s'),
@@ -560,7 +560,7 @@ class SettingService
             'address' => $input['address'],
             'address2' => $input['address2'],
 
-            'location_cityid' => $getid->id,
+            'ref_cityid' => $getid->id,
             'tenant_id' => Auth::user()->tenant_id,
             'modifiedBy' => $user->username,
             'modified_at' => date('Y-m-d H:i:s'),
@@ -1519,7 +1519,7 @@ class SettingService
     public function getBranchById($id)
     {
 
-        $data = Branch::join('location_cities as lc', 'branch.location_cityid', '=', 'lc.id')
+        $data = Branch::join('location_cities as lc', 'branch.ref_cityid', '=', 'lc.id')
         ->where('branch.id', $id)
         ->first();
 

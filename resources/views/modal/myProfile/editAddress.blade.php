@@ -60,18 +60,6 @@
                         </select>
                     </div>
                 </div>
-                {{-- <div class="row p-2">
-                    <div class="col-sm-6">
-                        <label for="Addresstype" class="form-label">Address Type*</label>
-                        <select class="form-select" name="addressType" id="addressTypeEdit" value="">
-                            <?php $type = addressType() ?>
-                                <option value="" label="PLEASE CHOOSE"></option>
-                                @foreach ($type as $key => $status)
-                                <option value="{{$key}}" >{{$status}}</option>
-                                @endforeach
-                        </select>
-                    </div>
-                </div> --}}
             </form>
         </div>
         <div class="modal-footer">

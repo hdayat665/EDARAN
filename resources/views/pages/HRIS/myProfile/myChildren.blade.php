@@ -14,7 +14,7 @@
             <th class="text-nowrap">Marital Status</th>
         </thead>
 
-        
+
 
         <tbody>
             <?php $id = 0 ?>
@@ -28,14 +28,12 @@
                     <div class="dropdown-menu">
                         <a href="javascript:;" data-bs-toggle="modal" id="childModalEdit{{$children->id}}" data-id="{{$children->id}}" class="dropdown-item" >Edit</a>
                         <div class="dropdown-divider"></div>
-                        {{-- <a href="javascript:;" data-bs-toggle="modal" id="childModalView{{$children->id}}" data-type="view" data-id="{{$children->id}}" class="dropdown-item">View</a> --}}
-                        {{-- <div class="dropdown-divider"></div> --}}
                         <a href="javascript:;" data-bs-toggle="modal" id="deleteChildren{{$children->id}}" data-id="{{$children->id}}" class="dropdown-item">Delete</a>
                     </div>
                 </td>
 
                 <td style="text-transform: uppercase;">{{ $children->fullName }}</td>
-                
+
                 @if($children->nonCitizen == 'on')
                     <td>{{ $children->passport }}</td>
                 @else
@@ -46,7 +44,7 @@
                 <td style="text-transform: uppercase;">{{ ($children->educationLevel == "0") ? '-' : educationLevel($children->educationLevel) }}</td>
                 <td style="text-transform: uppercase;">{{ $children->instituition ?? '-' }}</td>
                 <td style="text-transform: uppercase;">{{ ($children->maritalStatus == "0") ? '-' : getMaritalStatus($children->maritalStatus) }}</td>
-                
+
             </tr>
             @endforeach
             @endif
@@ -56,7 +54,7 @@
     <div class="row p-2">
             <div class="modal-footer">
                 <a class="btn btn-white me-5px btnPrevious">Previous</a>
-                
+
                 <a class="btn btn-white me-5px btnNext">Next</a>
             </div>
     </div>
