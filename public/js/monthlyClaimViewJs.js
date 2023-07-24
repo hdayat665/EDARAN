@@ -1,4 +1,3 @@
-<<<<<<< Updated upstream
 
 $("document").ready(function () {
 
@@ -22,7 +21,6 @@ $("document").ready(function () {
     var TotalTcarTmotor = TCar + TMotor;
     $("#TotalMileageCarMotor").val("RM " + TotalTcarTmotor.toFixed(2));
     document.getElementById("totalMileage").textContent = "RM " + TotalTcarTmotor.toFixed(2);
-
 
     $(document).on("click", "#travelBtn", function() {
         var date = $(this).data("date");
@@ -294,19 +292,37 @@ $("document").ready(function () {
         $("#subsModal").modal("show");
     });
 
-=======
-//TRAVEL MODAL
-$(document).on("click", "#mcvTravelling", function () {
->>>>>>> Stashed changes
 
 });
 
-<<<<<<< Updated upstream
-=======
-//SUBSISTENCE MODAL
-$(document).on("click", "#mcvSubsistence", function () {
->>>>>>> Stashed changes
+$("#cancelButton").click(function (e) {
+    var id = $(this).data("id");
+    //console.log(id);
+    requirejs(["sweetAlert2"], function (swal) {
+        $.ajax({
+            type: "POST",
+            url: "/cancelGNC/" + id,
 
+            processData: false,
+            contentType: false,
+        }).then(function (data) {
+            swal({
+                title: data.title,
+                text: data.msg,
+                type: data.type,
+                confirmButtonColor: "#3085d6",
+                confirmButtonText: "OK",
+                allowOutsideClick: false,
+                allowEscapeKey: false,
+            }).then(function () {
+                if (data.type == "error") {
+                } else {
+                    window.location.href = "/myClaimView";
+                }
+            });
+        });
+    });
+});
 
 //OTHERS MODAL
 $(document).on("click", "#mcvOthers", function () {
@@ -377,7 +393,3 @@ $("#subsTableUpdate").DataTable({
         }
     ]
 });
-<<<<<<< Updated upstream
-
-=======
->>>>>>> Stashed changes

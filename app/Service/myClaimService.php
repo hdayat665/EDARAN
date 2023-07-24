@@ -28,7 +28,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 
-class myClaimService
+class myClaimService 
 {
     public function getClaimsData($user_id = '')
     {
@@ -447,30 +447,17 @@ class myClaimService
             foreach ($travelClaims as $claims) {
                 $totals[] = $claims->amount;
             }
-            $totalLessCash = [];
-            foreach ($travelClaims as $less_cash) {
-                $totalLessCash[] = $less_cash->lesscash;
-            }
-            $totalLaundry = [];
-            foreach ($travelClaims as $laundry) {
-                $totalLaundry[] = $laundry->laundry_amount;
-            }
+            
+            
 
             $allClaims = array_merge($personalClaims->toArray(), $travelClaims->toArray());
             
             $totalAmount = [
                 'total_amount' => ($generalClaimData->amount ?? 0) + array_sum(array_column($allClaims, 'amount')),
             ];
-
-            $claim_laundry['laundry_total'] = $totalLaundry;
-            $totalLaundrysum ['laundry_amount']= array_sum($claim_laundry['laundry_total']);
-            $totalLaundryAmount = (float) array_sum($claim_laundry['laundry_total']);
-
-            $claim_lesscash['less_Cash'] = $totalLessCash;
-            $totalLessCashSum ['lessCash']= array_sum($claim_lesscash['less_Cash']);
+            
 
             GeneralClaim::where('id', $GNCId)->update($totalAmount);
-            GeneralClaim::where('id', $GNCId)->update($totalLessCashSum);
 
             function getTotalCarClaimByGeneralId($generalId)
             {
@@ -670,8 +657,10 @@ class myClaimService
             $IdGeneral=GeneralClaim::where('id', $GNCId)->first();
             $realAmount = $IdGeneral->total_amount;
 
-            $totalRealAmount['total_amount'] =  $realAmount +$totalcarmotor + $totalLaundryAmount;
-            //pr($totalLaundryAmount);
+    
+            // Calculate the total amount and assign it to the key 'total_amount' in the $totalRealAmount array
+            $totalRealAmount['total_amount'] = $realAmount + $totalcarmotor;
+            
             GeneralClaim::where('id', $GNCId)->update($totalRealAmount);
 
             $data['status'] = config('app.response.success.status');
@@ -746,7 +735,7 @@ class myClaimService
             ->where([['tenant_id', Auth::user()->tenant_id], ['user_id', Auth::user()->id]])
             ->get();
 
-            $newAmountCA=($cashAdvances[0]->amount ?? 0)+ $lessCash ;
+            $newAmountCA=($cashAdvances[0]->amount ?? 0);
             
             $claim['final_amount'] = $newAmountCA;
 
@@ -755,7 +744,7 @@ class myClaimService
             $TravelDetail->delete($id);
             
             $personalClaims = PersonalClaim::where([['tenant_id', Auth::user()->tenant_id], ['general_id', $TravelDetail->general_id]])->get();
-        $travelClaims = TravelClaim::where([['tenant_id', Auth::user()->tenant_id], ['general_id', $TravelDetail->general_id]])->get();
+            $travelClaims = TravelClaim::where([['tenant_id', Auth::user()->tenant_id], ['general_id', $TravelDetail->general_id]])->get();
 
         foreach ($personalClaims as $claim) {
             $total[] = $claim->amount;
@@ -764,14 +753,8 @@ class myClaimService
         foreach ($travelClaims as $claims) {
             $totals[] = $claims->amount;
         }
-        $totalLessCash = [];
-        foreach ($travelClaims as $less_cash) {
-            $totalLessCash[] = $less_cash->lesscash;
-        }
-        $totalLaundry = [];
-        foreach ($travelClaims as $laundry) {
-            $totalLaundry[] = $laundry->laundry_amount;
-        }
+        
+        
 
         $allClaims = array_merge($personalClaims->toArray(), $travelClaims->toArray());
         
@@ -779,15 +762,11 @@ class myClaimService
             'total_amount' => ($generalClaimData->amount ?? 0) + array_sum(array_column($allClaims, 'amount')),
         ];
 
-        $claim_laundry['laundry_total'] = $totalLaundry;
-        $totalLaundrysum ['laundry_amount']= array_sum($claim_laundry['laundry_total']);
-        $totalLaundryAmount = (float) array_sum($claim_laundry['laundry_total']);
+        
 
-        $claim_lesscash['less_Cash'] = $totalLessCash;
-        $totalLessCashSum ['lessCash']= array_sum($claim_lesscash['less_Cash']);
+        
 
         GeneralClaim::where('id', $TravelDetail->general_id)->update($totalAmount);
-        GeneralClaim::where('id', $TravelDetail->general_id)->update($totalLessCashSum);
 
         function getTotalCarClaimByGeneralId($generalId)
         {
@@ -987,8 +966,10 @@ class myClaimService
         $IdGeneral=GeneralClaim::where('id', $TravelDetail->general_id)->first();
         $realAmount = $IdGeneral->total_amount;
 
-        $totalRealAmount['total_amount'] =  $realAmount +$totalcarmotor + $totalLaundryAmount;
-        //pr($totalLaundryAmount);
+
+        // Calculate the total amount and assign it to the key 'total_amount' in the $totalRealAmount array
+        $totalRealAmount['total_amount'] = $realAmount + $totalcarmotor;
+        
         GeneralClaim::where('id', $TravelDetail->general_id)->update($totalRealAmount);
 
             $data['status'] = config('app.response.success.status');
@@ -1220,14 +1201,8 @@ class myClaimService
         foreach ($travelClaims as $claims) {
             $totals[] = $claims->amount;
         }
-        $totalLessCash = [];
-        foreach ($travelClaims as $less_cash) {
-            $totalLessCash[] = $less_cash->lesscash;
-        }
-        $totalLaundry = [];
-        foreach ($travelClaims as $laundry) {
-            $totalLaundry[] = $laundry->laundry_amount;
-        }
+        
+        
 
         $allClaims = array_merge($personalClaims->toArray(), $travelClaims->toArray());
         
@@ -1235,15 +1210,9 @@ class myClaimService
             'total_amount' => ($generalClaimData->amount ?? 0) + array_sum(array_column($allClaims, 'amount')),
         ];
 
-        $claim_laundry['laundry_total'] = $totalLaundry;
-        $totalLaundrysum ['laundry_amount']= array_sum($claim_laundry['laundry_total']);
-        $totalLaundryAmount = (float) array_sum($claim_laundry['laundry_total']);
-
-        $claim_lesscash['less_Cash'] = $totalLessCash;
-        $totalLessCashSum ['lessCash']= array_sum($claim_lesscash['less_Cash']);
+        
 
         GeneralClaim::where('id', $generalClaimData->id)->update($totalAmount);
-        GeneralClaim::where('id', $generalClaimData->id)->update($totalLessCashSum);
 
         function getTotalCarClaimByGeneralId($generalId)
         {
@@ -1443,8 +1412,10 @@ class myClaimService
         $IdGeneral=GeneralClaim::where('id', $generalClaimData->id)->first();
         $realAmount = $IdGeneral->total_amount;
 
-        $totalRealAmount['total_amount'] =  $realAmount +$totalcarmotor + $totalLaundryAmount;
-        //pr($totalLaundryAmount);
+       
+        // Calculate the total amount and assign it to the key 'total_amount' in the $totalRealAmount array
+        $totalRealAmount['total_amount'] = $realAmount + $totalcarmotor;
+        
         GeneralClaim::where('id', $generalClaimData->id)->update($totalRealAmount);
 
         $data['status'] = config('app.response.success.status');
@@ -1561,14 +1532,8 @@ class myClaimService
         foreach ($travelClaims as $claims) {
             $totals[] = $claims->amount;
         }
-        $totalLessCash = [];
-        foreach ($travelClaims as $less_cash) {
-            $totalLessCash[] = $less_cash->lesscash;
-        }
-        $totalLaundry = [];
-        foreach ($travelClaims as $laundry) {
-            $totalLaundry[] = $laundry->laundry_amount;
-        }
+        
+        
 
         $allClaims = array_merge($personalClaims->toArray(), $travelClaims->toArray());
         
@@ -1576,15 +1541,10 @@ class myClaimService
             'total_amount' => ($generalClaimData->amount ?? 0) + array_sum(array_column($allClaims, 'amount')),
         ];
 
-        $claim_laundry['laundry_total'] = $totalLaundry;
-        $totalLaundrysum ['laundry_amount']= array_sum($claim_laundry['laundry_total']);
-        $totalLaundryAmount = (float) array_sum($claim_laundry['laundry_total']);
+        
 
-        $claim_lesscash['less_Cash'] = $totalLessCash;
-        $totalLessCashSum ['lessCash']= array_sum($claim_lesscash['less_Cash']);
 
         GeneralClaim::where('id', $generalClaimData->id)->update($totalAmount);
-        GeneralClaim::where('id', $generalClaimData->id)->update($totalLessCashSum);
 
         function getTotalCarClaimByGeneralId($generalId)
         {
@@ -1784,8 +1744,11 @@ class myClaimService
         $IdGeneral=GeneralClaim::where('id', $generalClaimData->id)->first();
         $realAmount = $IdGeneral->total_amount;
 
-        $totalRealAmount['total_amount'] =  $realAmount +$totalcarmotor + $totalLaundryAmount;
-        //pr($totalLaundryAmount);
+       
+
+        // Calculate the total amount and assign it to the key 'total_amount' in the $totalRealAmount array
+        $totalRealAmount['total_amount'] = $realAmount + $totalcarmotor ;
+        
         GeneralClaim::where('id', $generalClaimData->id)->update($totalRealAmount);
 
         $data['status'] = config('app.response.success.status');
@@ -1877,14 +1840,7 @@ class myClaimService
         foreach ($travelClaims as $claims) {
             $totals[] = $claims->amount;
         }
-        $totalLessCash = [];
-        foreach ($travelClaims as $less_cash) {
-            $totalLessCash[] = $less_cash->lesscash;
-        }
-        $totalLaundry = [];
-        foreach ($travelClaims as $laundry) {
-            $totalLaundry[] = $laundry->laundry_amount;
-        }
+        
 
         $allClaims = array_merge($personalClaims->toArray(), $travelClaims->toArray());
         
@@ -1892,15 +1848,10 @@ class myClaimService
             'total_amount' => ($generalClaimData->amount ?? 0) + array_sum(array_column($allClaims, 'amount')),
         ];
 
-        $claim_laundry['laundry_total'] = $totalLaundry;
-        $totalLaundrysum ['laundry_amount']= array_sum($claim_laundry['laundry_total']);
-        $totalLaundryAmount = (float) array_sum($claim_laundry['laundry_total']);
+        
 
-        $claim_lesscash['less_Cash'] = $totalLessCash;
-        $totalLessCashSum ['lessCash']= array_sum($claim_lesscash['less_Cash']);
 
         GeneralClaim::where('id', $generalClaimData->id)->update($totalAmount);
-        GeneralClaim::where('id', $generalClaimData->id)->update($totalLessCashSum);
 
         function getTotalCarClaimByGeneralId($generalId)
         {
@@ -2100,8 +2051,10 @@ class myClaimService
         $IdGeneral=GeneralClaim::where('id', $generalClaimData->id)->first();
         $realAmount = $IdGeneral->total_amount;
 
-        $totalRealAmount['total_amount'] =  $realAmount +$totalcarmotor + $totalLaundryAmount;
-        //pr($totalLaundryAmount);
+       
+        // Calculate the total amount and assign it to the key 'total_amount' in the $totalRealAmount array
+        $totalRealAmount['total_amount'] = $realAmount + $totalcarmotor;
+        
         GeneralClaim::where('id', $generalClaimData->id)->update($totalRealAmount);
         
         $data['status'] = config('app.response.success.status');
@@ -2220,32 +2173,27 @@ class myClaimService
         }
         
         if ($newAmountCA <= 0) {
+
             $claim['final_amount'] = 0;
             $input1['lesscash'] = $totalCA;
-            $input1['total'] = ($input['total'] + $input['laundry_amount']) - $totalCA;
+            $input1['total'] = $input['total'] - $totalCA;
         
             CashAdvanceDetail::where('id', $input['cashAdvanceId'])->update($claim);
         
             TravelClaim::create($input1);
             
             $personalClaims = PersonalClaim::where([['tenant_id', Auth::user()->tenant_id], ['general_id', $generalClaimData->id]])->get();
-        $travelClaims = TravelClaim::where([['tenant_id', Auth::user()->tenant_id], ['general_id', $generalClaimData->id]])->get();
+            $travelClaims = TravelClaim::where([['tenant_id', Auth::user()->tenant_id], ['general_id', $generalClaimData->id]])->get();
 
-        foreach ($personalClaims as $claim) {
-            $total[] = $claim->amount;
-        }
+            foreach ($personalClaims as $claim) {
+                $total[] = $claim->amount;
+            }
 
-        foreach ($travelClaims as $claims) {
-            $totals[] = $claims->amount;
-        }
-        $totalLessCash = [];
-        foreach ($travelClaims as $less_cash) {
-            $totalLessCash[] = $less_cash->lesscash;
-        }
-        $totalLaundry = [];
-        foreach ($travelClaims as $laundry) {
-            $totalLaundry[] = $laundry->laundry_amount;
-        }
+            foreach ($travelClaims as $claims) {
+                $totals[] = $claims->amount;
+            }
+            
+            
 
         $allClaims = array_merge($personalClaims->toArray(), $travelClaims->toArray());
         
@@ -2253,15 +2201,8 @@ class myClaimService
             'total_amount' => ($generalClaimData->amount ?? 0) + array_sum(array_column($allClaims, 'amount')),
         ];
 
-        $claim_laundry['laundry_total'] = $totalLaundry;
-        $totalLaundrysum ['laundry_amount']= array_sum($claim_laundry['laundry_total']);
-        $totalLaundryAmount = (float) array_sum($claim_laundry['laundry_total']);
-
-        $claim_lesscash['less_Cash'] = $totalLessCash;
-        $totalLessCashSum ['lessCash']= array_sum($claim_lesscash['less_Cash']);
-
+        
         GeneralClaim::where('id', $generalClaimData->id)->update($totalAmount);
-        GeneralClaim::where('id', $generalClaimData->id)->update($totalLessCashSum);
 
         function getTotalCarClaimByGeneralId($generalId)
         {
@@ -2461,8 +2402,10 @@ class myClaimService
         $IdGeneral=GeneralClaim::where('id', $generalClaimData->id)->first();
         $realAmount = $IdGeneral->total_amount;
 
-        $totalRealAmount['total_amount'] =  $realAmount +$totalcarmotor + $totalLaundryAmount;
-        //pr($totalLaundryAmount);
+       
+        // Calculate the total amount and assign it to the key 'total_amount' in the $totalRealAmount array
+        $totalRealAmount['total_amount'] = $realAmount + $totalcarmotor;
+        
         GeneralClaim::where('id', $generalClaimData->id)->update($totalRealAmount);
             
             $data['status'] = config('app.response.success.status');
@@ -2490,14 +2433,7 @@ class myClaimService
         foreach ($travelClaims as $claims) {
             $totals[] = $claims->amount;
         }
-        $totalLessCash = [];
-        foreach ($travelClaims as $less_cash) {
-            $totalLessCash[] = $less_cash->lesscash;
-        }
-        $totalLaundry = [];
-        foreach ($travelClaims as $laundry) {
-            $totalLaundry[] = $laundry->laundry_amount;
-        }
+        
 
         $allClaims = array_merge($personalClaims->toArray(), $travelClaims->toArray());
         
@@ -2505,15 +2441,10 @@ class myClaimService
             'total_amount' => ($generalClaimData->amount ?? 0) + array_sum(array_column($allClaims, 'amount')),
         ];
 
-        $claim_laundry['laundry_total'] = $totalLaundry;
-        $totalLaundrysum ['laundry_amount']= array_sum($claim_laundry['laundry_total']);
-        $totalLaundryAmount = (float) array_sum($claim_laundry['laundry_total']);
+        
 
-        $claim_lesscash['less_Cash'] = $totalLessCash;
-        $totalLessCashSum ['lessCash']= array_sum($claim_lesscash['less_Cash']);
-
+       
         GeneralClaim::where('id', $generalClaimData->id)->update($totalAmount);
-        GeneralClaim::where('id', $generalClaimData->id)->update($totalLessCashSum);
 
         function getTotalCarClaimByGeneralId($generalId)
         {
@@ -2713,8 +2644,8 @@ class myClaimService
         $IdGeneral=GeneralClaim::where('id', $generalClaimData->id)->first();
         $realAmount = $IdGeneral->total_amount;
 
-        $totalRealAmount['total_amount'] =  $realAmount +$totalcarmotor + $totalLaundryAmount;
-        //pr($totalLaundryAmount);
+        $totalRealAmount['total_amount'] =  $realAmount +$totalcarmotor;
+        
         GeneralClaim::where('id', $generalClaimData->id)->update($totalRealAmount);
         
         
@@ -2759,6 +2690,7 @@ class myClaimService
         ->where('general_id', $id)
         ->where('type_claim', 'travel')
         ->groupBy('travel_date')
+        ->orderBy('travel_date', 'asc')
         ->get();
 
         return $data;
@@ -2826,6 +2758,24 @@ class myClaimService
 
         return $data;
     }
+    public function getCashAdvanceClaimByGeneralId($id = '')
+    {
+        $data = GeneralClaim::where('id', $id)->first();
+        //pr($data);
+        $lessCash = $data->lessCash;
+        
+        //pr($lessCash); // Assuming this outputs something like "12,13"
+
+        // Convert comma-separated IDs to an array
+        $lessCashArray = explode(',', $lessCash);
+       
+        // Use 'whereIn' to find records matching any of the IDs in the array
+        $data2 = CashAdvanceDetail::whereIn('id', $lessCashArray)->get();
+        $totalAmount = $data2->sum('amount');
+        //pr($totalAmount);
+        return $totalAmount;
+    }
+    
     public function getTotalCarClaimByGeneralId($id = '')
     {
         $data = TravelClaim::select(
@@ -2883,6 +2833,7 @@ class myClaimService
         $data = TravelClaim::where('general_id', $id)
             ->where('type_claim', 'travel')
             ->groupBy('travel_date') // Group by the 'travel_date' column
+            ->orderBy('travel_date', 'asc')
             ->pluck('travel_date'); // Select only the 'travel_date' column
 
         return $data;
@@ -2892,7 +2843,9 @@ class myClaimService
         $data = TravelClaim::where('general_id', $id)
             ->where('type_claim', 'travel')
             ->where('travel_date', $date) // Replace 'your_date_column' with the actual column name in your table
+            ->orderBy('travel_date', 'asc')
             ->get();
+
 
         return response()->json($data);
     }
@@ -2930,11 +2883,12 @@ class myClaimService
     public function getUserAddress($id = '')
     {
         $data = UserAddress::where('user_id', $id)
-                ->where('addressType', 1)
-                ->first();
+            ->whereIn('addressType', [2, 3])
+            ->first();
 
         return $data;
     }
+
     
     public function getFoodByJobGrade($id = '')
     {
@@ -3238,14 +3192,7 @@ class myClaimService
             $totals[] = $claims->amount;
         }
 
-        $totalLessCash = [];
-        foreach ($travelClaims as $less_cash) {
-            $totalLessCash[] = $less_cash->lesscash;
-        }
-        $totalLaundry = [];
-        foreach ($travelClaims as $laundry) {
-            $totalLaundry[] = $laundry->laundry_amount;
-        }
+       
 
         $allClaims = array_merge($personalClaims->toArray(), $travelClaims->toArray());
         
@@ -3253,15 +3200,8 @@ class myClaimService
             'total_amount' => ($generalClaimData->amount ?? 0) + array_sum(array_column($allClaims, 'amount')),
         ];
 
-        $claim_laundry['laundry_total'] = $totalLaundry;
-        $totalLaundrysum ['laundry_amount']= array_sum($claim_laundry['laundry_total']);
-        $totalLaundryAmount = (float) array_sum($claim_laundry['laundry_total']);
-
-        $claim_lesscash['less_Cash'] = $totalLessCash;
-        $totalLessCashSum ['lessCash']= array_sum($claim_lesscash['less_Cash']);
-
+        
         GeneralClaim::where('id', $updatedTravelClaim->general_id)->update($totalAmount);
-        GeneralClaim::where('id', $updatedTravelClaim->general_id)->update($totalLessCashSum);
 
         function getTotalCarClaimByGeneralId($generalId)
         {
@@ -3461,8 +3401,10 @@ class myClaimService
         $IdGeneral=GeneralClaim::where('id', $updatedTravelClaim->general_id)->first();
         $realAmount = $IdGeneral->total_amount;
 
-        $totalRealAmount['total_amount'] =  $realAmount +$totalcarmotor + $totalLaundryAmount;
-        //pr($totalLaundryAmount);
+       
+        // Calculate the total amount and assign it to the key 'total_amount' in the $totalRealAmount array
+        $totalRealAmount['total_amount'] = $realAmount + $totalcarmotor;
+        
         GeneralClaim::where('id', $updatedTravelClaim->general_id)->update($totalRealAmount);
 
             $data['status'] = config('app.response.success.status');
@@ -3508,8 +3450,8 @@ class myClaimService
             
             TravelClaim::where('id', $id)->update($input);
 
-            $personalClaims = PersonalClaim::where([['tenant_id', Auth::user()->tenant_id], ['general_id', $generalClaimData->id]])->get();
-        $travelClaims = TravelClaim::where([['tenant_id', Auth::user()->tenant_id], ['general_id', $generalClaimData->id]])->get();
+            $personalClaims = PersonalClaim::where([['tenant_id', Auth::user()->tenant_id], ['general_id', $general_id]])->get();
+        $travelClaims = TravelClaim::where([['tenant_id', Auth::user()->tenant_id], ['general_id', $general_id]])->get();
 
         foreach ($personalClaims as $claim) {
             $total[] = $claim->amount;
@@ -3518,14 +3460,7 @@ class myClaimService
         foreach ($travelClaims as $claims) {
             $totals[] = $claims->amount;
         }
-        $totalLessCash = [];
-        foreach ($travelClaims as $less_cash) {
-            $totalLessCash[] = $less_cash->lesscash;
-        }
-        $totalLaundry = [];
-        foreach ($travelClaims as $laundry) {
-            $totalLaundry[] = $laundry->laundry_amount;
-        }
+       
 
         $allClaims = array_merge($personalClaims->toArray(), $travelClaims->toArray());
         
@@ -3533,15 +3468,8 @@ class myClaimService
             'total_amount' => ($generalClaimData->amount ?? 0) + array_sum(array_column($allClaims, 'amount')),
         ];
 
-        $claim_laundry['laundry_total'] = $totalLaundry;
-        $totalLaundrysum ['laundry_amount']= array_sum($claim_laundry['laundry_total']);
-        $totalLaundryAmount = (float) array_sum($claim_laundry['laundry_total']);
-
-        $claim_lesscash['less_Cash'] = $totalLessCash;
-        $totalLessCashSum ['lessCash']= array_sum($claim_lesscash['less_Cash']);
-
-        GeneralClaim::where('id', $generalClaimData->id)->update($totalAmount);
-        GeneralClaim::where('id', $generalClaimData->id)->update($totalLessCashSum);
+    
+        GeneralClaim::where('id', $general_id)->update($totalAmount);
 
         function getTotalCarClaimByGeneralId($generalId)
         {
@@ -3575,9 +3503,9 @@ class myClaimService
             return $data[0]->total_km;
         }
 
-        $data['totalCar'] = getTotalCarClaimByGeneralId($generalClaimData->id) ?? 0;
+        $data['totalCar'] = getTotalCarClaimByGeneralId($general_id) ?? 0;
         
-        $data['totalMotor'] = getTotalMotorClaimByGeneralId($generalClaimData->id) ?? 0;
+        $data['totalMotor'] = getTotalMotorClaimByGeneralId($general_id) ?? 0;
        
         function getEntitlementByJobGradeCar($id = '')
         {
@@ -3738,12 +3666,14 @@ class myClaimService
         }
 
         
-        $IdGeneral=GeneralClaim::where('id', $generalClaimData->id)->first();
+        $IdGeneral=GeneralClaim::where('id', $general_id)->first();
         $realAmount = $IdGeneral->total_amount;
+        
+        // Calculate the total amount and assign it to the key 'total_amount' in the $totalRealAmount array
+        $totalRealAmount['total_amount'] = $realAmount + $totalcarmotor;
 
-        $totalRealAmount['total_amount'] =  $realAmount +$totalcarmotor + $totalLaundryAmount;
-        //pr($totalLaundryAmount);
-        GeneralClaim::where('id', $generalClaimData->id)->update($totalRealAmount);
+        
+        GeneralClaim::where('id', $general_id)->update($totalRealAmount);
 
             $data['status'] = config('app.response.success.status');
             $data['type'] = config('app.response.success.type');
@@ -3786,8 +3716,8 @@ class myClaimService
 
             PersonalClaim::where('id', $id)->update($input);
 
-            $personalClaims = PersonalClaim::where([['tenant_id', Auth::user()->tenant_id], ['general_id', $generalClaimData->id]])->get();
-        $travelClaims = TravelClaim::where([['tenant_id', Auth::user()->tenant_id], ['general_id', $generalClaimData->id]])->get();
+            $personalClaims = PersonalClaim::where([['tenant_id', Auth::user()->tenant_id], ['general_id', $general_id]])->get();
+        $travelClaims = TravelClaim::where([['tenant_id', Auth::user()->tenant_id], ['general_id', $general_id]])->get();
 
         foreach ($personalClaims as $claim) {
             $total[] = $claim->amount;
@@ -3796,14 +3726,7 @@ class myClaimService
         foreach ($travelClaims as $claims) {
             $totals[] = $claims->amount;
         }
-        $totalLessCash = [];
-        foreach ($travelClaims as $less_cash) {
-            $totalLessCash[] = $less_cash->lesscash;
-        }
-        $totalLaundry = [];
-        foreach ($travelClaims as $laundry) {
-            $totalLaundry[] = $laundry->laundry_amount;
-        }
+        
 
         $allClaims = array_merge($personalClaims->toArray(), $travelClaims->toArray());
         
@@ -3811,15 +3734,11 @@ class myClaimService
             'total_amount' => ($generalClaimData->amount ?? 0) + array_sum(array_column($allClaims, 'amount')),
         ];
 
-        $claim_laundry['laundry_total'] = $totalLaundry;
-        $totalLaundrysum ['laundry_amount']= array_sum($claim_laundry['laundry_total']);
-        $totalLaundryAmount = (float) array_sum($claim_laundry['laundry_total']);
+        
 
-        $claim_lesscash['less_Cash'] = $totalLessCash;
-        $totalLessCashSum ['lessCash']= array_sum($claim_lesscash['less_Cash']);
+       
 
-        GeneralClaim::where('id', $generalClaimData->id)->update($totalAmount);
-        GeneralClaim::where('id', $generalClaimData->id)->update($totalLessCashSum);
+        GeneralClaim::where('id', $general_id)->update($totalAmount);
 
         function getTotalCarClaimByGeneralId($generalId)
         {
@@ -3853,9 +3772,9 @@ class myClaimService
             return $data[0]->total_km;
         }
 
-        $data['totalCar'] = getTotalCarClaimByGeneralId($generalClaimData->id) ?? 0;
+        $data['totalCar'] = getTotalCarClaimByGeneralId($general_id) ?? 0;
         
-        $data['totalMotor'] = getTotalMotorClaimByGeneralId($generalClaimData->id) ?? 0;
+        $data['totalMotor'] = getTotalMotorClaimByGeneralId($general_id) ?? 0;
        
         function getEntitlementByJobGradeCar($id = '')
         {
@@ -4016,12 +3935,14 @@ class myClaimService
         }
 
         
-        $IdGeneral=GeneralClaim::where('id', $generalClaimData->id)->first();
+        $IdGeneral=GeneralClaim::where('id', $general_id)->first();
         $realAmount = $IdGeneral->total_amount;
 
-        $totalRealAmount['total_amount'] =  $realAmount +$totalcarmotor + $totalLaundryAmount;
-        //pr($totalLaundryAmount);
-        GeneralClaim::where('id', $generalClaimData->id)->update($totalRealAmount);
+       
+        // Calculate the total amount and assign it to the key 'total_amount' in the $totalRealAmount array
+        $totalRealAmount['total_amount'] = $realAmount + $totalcarmotor;
+        
+        GeneralClaim::where('id', $general_id)->update($totalRealAmount);
 
             $data['status'] = config('app.response.success.status');
             $data['type'] = config('app.response.success.type');
@@ -4087,4 +4008,30 @@ class myClaimService
         return $data;
 
     }
+    public function updateCashMtc($r)
+    {
+        $input = $r->input();
+        $id = $input['id'];
+
+        // Check if 'cashAdvanceId' key exists and is not null
+        if (isset($input['cashAdvanceId']) && $input['cashAdvanceId'] !== null) {
+            $cashAdvanceIds = implode(',', $input['cashAdvanceId']); // Convert the array to a comma-separated string
+        } else {
+            $cashAdvanceIds = null;
+        }
+
+        $Ca['lessCash'] = $cashAdvanceIds;
+
+        GeneralClaim::where([['tenant_id', Auth::user()->tenant_id], ['id', $id]])
+            ->update($Ca);
+
+        $data['id'] = $id;
+        $data['status'] = config('app.response.success.status');
+        $data['type'] = config('app.response.success.type');
+        $data['title'] = config('app.response.success.title');
+        $data['msg'] = 'Success';
+
+        return $data;
+    }
+
 }

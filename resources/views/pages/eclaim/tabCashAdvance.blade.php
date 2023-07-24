@@ -12,7 +12,7 @@
     <table id="cashadvancetable" class="table table-striped table-bordered align-middle">
         <thead>
             <tr>
-                <th class="text-nowrap">Action</th>
+                
                 <th class="text-nowrap">Cash Advance ID</th>
                 <th class="text-nowrap">Type of Cash Advance</th>
                 <th class="text-nowrap">Request Date</th>
@@ -20,12 +20,35 @@
                 <th class="text-nowrap">Amount</th>
                 <th class="text-nowrap">Status</th>
                 <th class="text-nowrap">Status Date</th>
+                <th class="text-nowrap">Action</th>
             </tr>
         </thead>
         <tbody>
             @if ($cashClaims)
                 @foreach ($cashClaims as $cashClaim)
                     <tr class="odd gradeX">
+                        
+                        <td>CA-{{ $cashClaim->id }}</td>
+                        <td>{{ getCashAdvanceType($cashClaim->type) }}</td>
+                        <td>{{ date_format(date_create($cashClaim->created_at), 'd/m/Y') }}</td>
+                        <td>{{ $cashClaim->travel_date ? $cashClaim->travel_date : 'N/A' }}</td>
+                        <td> RM {{ number_format($cashClaim->mode_of_transport->max_total ?? $cashClaim->amount ?? 0, 2) }}</td>
+                        @if ($cashClaim->status == 'draft')
+                            <td><span class="badge bg-warning" data-toggle="drafca" title="Draft">Draft</span></td>
+                        @elseif ($cashClaim->status == 'active')
+                            <td><span class="badge bg-lime" data-toggle="activeca" title="Active">Active</span></td>
+                        @elseif ($cashClaim->status == 'reject')
+                            <td><span class="badge bg-danger" data-toggle="rejectedca" title="Rejected">Rejected</span></td>
+                        @elseif ($cashClaim->status == 'amend')
+                            <td><span class="badge bg-success" data-toggle="amendca" title="Amend">Amend</span></td>
+                        @elseif ($cashClaim->status == 'close')
+                            <td><span class="badge bg-secondary" data-toggle="paidca" title="Paid">Paid</span></td>
+                        @elseif ($cashClaim->status == 'recommend')
+                            <td><span class="badge bg-info" data-toggle="paidca" title="Pending">Pending</span></td>
+                        @elseif ($cashClaim->status == 'cancelled')
+                            <td><span class="badge bg-danger" data-toggle="paidca" title="Pending">cancelled</span></td>
+                        @endif
+                        <td>{{ date_format(date_create($cashClaim->updated_at), 'd/m/Y') }}</td>
                         <td>
                             <div class="btn-group me-1 mb-1">
                                 <a href="javascript:;" class="btn btn-primary btn-sm">Action</a>
@@ -59,27 +82,6 @@
                                 @endif
                             </div>
                         </td>
-                        <td>CA-{{ $cashClaim->id }}</td>
-                        <td>{{ getCashAdvanceType($cashClaim->type) }}</td>
-                        <td>{{ date_format(date_create($cashClaim->created_at), 'd/m/Y') }}</td>
-                        <td>{{ $cashClaim->travel_date ? $cashClaim->travel_date : 'N/A' }}</td>
-                        <td>MYR {{  $cashClaim->mode_of_transport->max_total ?? $cashClaim->amount }}</td>
-                        @if ($cashClaim->status == 'draft')
-                            <td><span class="badge bg-warning" data-toggle="drafca" title="Draft">Draft</span></td>
-                        @elseif ($cashClaim->status == 'active')
-                            <td><span class="badge bg-lime" data-toggle="activeca" title="Active">Active</span></td>
-                        @elseif ($cashClaim->status == 'reject')
-                            <td><span class="badge bg-danger" data-toggle="rejectedca" title="Rejected">Rejected</span></td>
-                        @elseif ($cashClaim->status == 'amend')
-                            <td><span class="badge bg-success" data-toggle="amendca" title="Amend">Amend</span></td>
-                        @elseif ($cashClaim->status == 'close')
-                            <td><span class="badge bg-secondary" data-toggle="paidca" title="Paid">Paid</span></td>
-                        @elseif ($cashClaim->status == 'recommend')
-                            <td><span class="badge bg-info" data-toggle="paidca" title="Pending">Pending</span></td>
-                        @elseif ($cashClaim->status == 'cancelled')
-                            <td><span class="badge bg-danger" data-toggle="paidca" title="Pending">cancelled</span></td>
-                        @endif
-                        <td>{{ date_format(date_create($cashClaim->updated_at), 'd/m/Y') }}</td>
                     </tr>
                 @endforeach
             @endif

@@ -763,9 +763,12 @@ class MyleaveService
             ->first();
 
         $checkAL = leavetypesModel::select('leave_types.*')
-        ->where('leave_types.tenant_id', '=',Auth::user()->tenant_id)
-        ->where('leave_types.id', '=',$settingEmail->lt_type_id )
-        ->where('leave_types.leave_types_code', '=', 'AL')
+        ->where('leave_types.tenant_id', '=', Auth::user()->tenant_id)
+        ->where('leave_types.id', '=', $settingEmail->lt_type_id)
+        ->where(function ($query) {
+            $query->where('leave_types.leave_types_code', '=', 'AL')
+                ->orWhere('leave_types.leave_types_code', '=', 'EL');
+        })
         ->first();
 
         $checkSL = leavetypesModel::select('leave_types.*')
@@ -786,7 +789,7 @@ class MyleaveService
             $ms->emailToApprovedLeave($settingEmail);
         }
 
-        if ($settingEmail->up_app_status == '4' && $checkAL &&  $checkAL->leave_types_code == 'AL' ) {
+        if ($settingEmail->up_app_status == '4' && (($checkAL && $checkAL->leave_types_code == 'AL') || ($checkAL && $checkAL->leave_types_code == 'EL'))) {
 
             $today = Carbon::now();
 
@@ -927,9 +930,12 @@ class MyleaveService
             ->first();
 
         $checkAL = leavetypesModel::select('leave_types.*')
-        ->where('leave_types.tenant_id', '=',Auth::user()->tenant_id)
-        ->where('leave_types.id', '=',$settingEmail->lt_type_id )
-        ->where('leave_types.leave_types_code', '=', 'AL')
+        ->where('leave_types.tenant_id', '=', Auth::user()->tenant_id)
+        ->where('leave_types.id', '=', $settingEmail->lt_type_id)
+        ->where(function ($query) {
+            $query->where('leave_types.leave_types_code', '=', 'AL')
+                ->orWhere('leave_types.leave_types_code', '=', 'EL');
+        })
         ->first();
 
         $checkSL = leavetypesModel::select('leave_types.*')
@@ -950,7 +956,7 @@ class MyleaveService
             $ms->emailToApprovedLeave($settingEmail);
         }
 
-        if($settingEmail->up_app_status == '3' &&  $checkAL && $checkAL->leave_types_code == 'AL' && $settingEmail->calculate == '1' ){
+        if ($settingEmail->up_app_status == '3' && $settingEmail->calculate == '1' && (($checkAL && $checkAL->leave_types_code == 'AL') || ($checkAL && $checkAL->leave_types_code == 'EL'))){
 
             $today = Carbon::now();
 
@@ -1064,9 +1070,11 @@ class MyleaveService
             ->first();
 
         $checkType = leavetypesModel::select('leave_types.id')
-            ->where('leave_types.tenant_id', Auth::user()->tenant_id)
-            ->where('leave_types.leave_types_code', '=', 'AL')
-            ->first();
+        ->where('leave_types.tenant_id', Auth::user()->tenant_id)
+        ->whereIn('leave_types.leave_types_code', ['AL', 'EL'])
+        ->get();
+
+        $checkTypeIds = $checkType->pluck('id')->toArray();
 
         $datapiePending1 = MyLeaveModel::select(DB::raw('SUM(myleave.total_day_applied) as total_pending'))
         ->where('myleave.tenant_id', Auth::user()->tenant_id)
@@ -1079,7 +1087,7 @@ class MyleaveService
             $query->where('myleave.calculate', '=', null)
                 ->orWhere('myleave.calculate', '=', '');
         })
-        ->where('myleave.lt_type_id', '=', $checkType->id)
+        ->whereIn('myleave.lt_type_id', $checkTypeIds)
         ->where('myleave.up_user_id', Auth::user()->id)
         ->whereYear('myleave.applied_date', '=', $currentYear)
         ->first();
@@ -1137,9 +1145,11 @@ class MyleaveService
             ->first();
 
         $checkType = leavetypesModel::select('leave_types.id')
-            ->where('leave_types.tenant_id', Auth::user()->tenant_id)
-            ->where('leave_types.leave_types_code', '=', 'AL')
-            ->first();
+        ->where('leave_types.tenant_id', Auth::user()->tenant_id)
+        ->whereIn('leave_types.leave_types_code', ['AL', 'EL'])
+        ->get();
+
+        $checkTypeIds = $checkType->pluck('id')->toArray();
 
         $datapiePending1 = MyLeaveModel::select(DB::raw('SUM(myleave.total_day_applied) as total_pending'))
         ->where('myleave.tenant_id', Auth::user()->tenant_id)
@@ -1152,10 +1162,11 @@ class MyleaveService
             $query->where('myleave.calculate', '=', null)
                 ->orWhere('myleave.calculate', '=', '');
         })
-        ->where('myleave.lt_type_id', '=', $checkType->id)
+        ->whereIn('myleave.lt_type_id', $checkTypeIds)
         ->where('myleave.up_user_id', Auth::user()->id)
         ->whereYear('myleave.applied_date', '=', $currentYear)
         ->first();
+
 
 
         if ($checktoday <= $data->lapsed_date) {
@@ -1228,6 +1239,35 @@ class MyleaveService
         }
 
         $data = [$lapse, $previousYear];
+
+        return $data;
+    }
+
+    public function totalNoPaidLeave()
+    {
+        $today = Carbon::now();
+        $checktoday = Carbon::now();
+        $year = $today->format('Y');
+
+
+        $getIdType = leavetypesModel::select('leave_types.*')
+        ->where('leave_types.tenant_id', '=', Auth::user()->tenant_id)
+        ->where('leave_types.leave_types_code', '=', 'NP')
+        ->first();
+
+
+        $data = MyLeaveModel::select(DB::raw('SUM(myleave.total_day_applied) as totalNoPay'))
+            ->where('myleave.tenant_id', '=', Auth::user()->tenant_id)
+            ->where('myleave.up_user_id', '=', Auth::user()->id)
+            ->where('myleave.lt_type_id', '=', $getIdType->id)
+            ->where('myleave.status_final', '=', '4')
+            ->whereYear('myleave.applied_date', '=', $year)
+            ->first();
+
+
+        // dd($data);
+        // die;
+
 
         return $data;
     }

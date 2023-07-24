@@ -3080,7 +3080,7 @@ $(document).ready(function () {
 
     for (let i = 0; i < childIds.length; i++) {
         const type = childIds[i];
-        $("#childModalEdit" + type).click(function (e) {
+        $(document).on("click","#childModalEdit" + type, function (e) {
             id = $(this).data("id");
             var childrenData = getChildren(id);
 
@@ -3175,8 +3175,8 @@ $(document).ready(function () {
             $("#view-children").modal("show");
         });
 
-        $("#deleteChildren" + type).click(function (e) {
-            id = $(this).data("id");
+        $(document).on("click","#deleteChildren" + type, function (e) {
+           id = $(this).data("id");
             requirejs(["sweetAlert2"], function (swal) {
                 swal({
                     title: "Are you sure to delete Children?",
@@ -3211,7 +3211,7 @@ $(document).ready(function () {
                     });
                 });
             });
-        });
+         });
 
         function getChildren(id) {
             return $.ajax({

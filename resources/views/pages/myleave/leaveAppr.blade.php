@@ -1,6 +1,18 @@
 @extends('layouts.dashboardTenant')
 
 @section('content')
+
+    <style>
+
+        .custom-dropdown-menu {
+            position: static ;
+            height: auto ;
+            max-height: none ;
+            overflow: visible ;
+        }
+
+    </style>
+
     <div id="content" class="app-content">
         <h1 class="page-header" id="leaveApprJs">eLeave <small>| Leave Approval | Supervisor</small></h1>
         <div class="panel panel">
@@ -93,8 +105,11 @@
                                         <td>{{ $id }}</td>
                                         <td>
                                             <div class="btn-group">
-                                                <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle"><i class="fa fa-cogs"></i> Action <i class="fa fa-caret-down"></i></a>
-                                                <ul class="dropdown-menu">
+                                                <div>
+                                                    <a href="#" data-bs-toggle="dropdown" class="btn btn-primary dropdown-toggle"><i class="fa fa-cogs"></i> Action <i class="fa fa-caret-down"></i></a>
+                                                </div>
+
+                                                <ul class="dropdown-menu custom-dropdown-menu test">
                                                     <a class="dropdown-item" href="/viewTimesheetLeave/{{ $l->up_user_id }}">View Calendar</a>
 
 

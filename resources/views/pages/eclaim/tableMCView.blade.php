@@ -237,7 +237,7 @@
                             <label class="form-label">Less Cash Advance </label>
                         </div>
                         <div class="col-md-6">
-                            <input type="text" class="form-control" readonly value='RM {{ number_format($lessCash[0]->totalCash ?? 0, 2) }}'>
+                            <input type="text" class="form-control" readonly value='RM {{ number_format($cashAdvance ?? 0, 2) }}'>
                         </div>
                     </div>
                 </div>
