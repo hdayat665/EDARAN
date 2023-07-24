@@ -5,10 +5,12 @@
         <div class="panel-body">
             <h3 class="mt-10px"></i> General Settings</h3><br>
             <div class="row text-center">
-                <!-- <div class="col-lg-2">
+                <div class="col-lg-2">
                     <a class="mb-10px" href="/role"><i class="fas fa-circle-user fa-4x text-blue"></i></a><br><br>
                     <h5 class="mb-5px">Roles</h5>
-                </div> -->
+                </div>
+            </div><br><br><br>
+            <div class="row text-center">
                 <div class="col-lg-2">
                     <a class="mb-10px" href="/newRole"><i class="fas fa-user fa-4x text-blue"></i></a><br><br>
                     <h5 class="mb-5px">System Role</h5>

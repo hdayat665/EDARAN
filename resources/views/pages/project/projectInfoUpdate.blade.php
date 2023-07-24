@@ -113,7 +113,7 @@
                     </select>
                 </div>
                                 <div class="col-md-4">
-                    <select class="form-select" name="project_manager" id="project_manager2" disabled>
+                    <select class="form-select" name="project_manager" id="project_manager2" style="pointer-events: none; background: #e9ecef">
                         <option value="" label="PLEASE CHOOSE"></option>
                         <?php $Employees = getEmployee(); ?>
                         @foreach ($Employees as $Employee)
