@@ -139,7 +139,7 @@
                                             <label class="form-label">Recommender</label>
                                         </div>
                                         <div class="col-md-8">
-                                            <input readonly type="text" value="{{ getEmployeeNameById($user->eclaimrecommender ?? '-')->employeeName }}" class="form-control">
+                                            <input readonly type="text" value="{{ $user->eclaimrecommender ? getEmployeeNameById($user->eclaimrecommender)->employeeName : 'N/A' }}" class="form-control">
                                         </div>
                                     </div>
                                     <div class="row p-2">
@@ -147,7 +147,7 @@
                                             <label class="form-label">Approver</label>
                                         </div>
                                         <div class="col-md-8">
-                                            <input readonly type="text" value="{{ getEmployeeNameById($user->eclaimapprover ?? '-')->employeeName }}" class="form-control">
+                                            <input readonly type="text" value="{{ $user->eclaimapprover ? getEmployeeNameById($user->eclaimapprover)->employeeName : 'N/A' }}" class="form-control">
                                         </div>
                                     </div>
                                 </div>
@@ -158,7 +158,7 @@
                                             <label class="form-label">Recommender</label>
                                         </div>
                                         <div class="col-md-8">
-                                        <input readonly type="text" value="{{ getEmployeeNameById($getadmin->recommender ?? '-')->employeeName }}" class="form-control">
+                                            <input readonly type="text" value="{{ $getadmin->recommender ? getEmployeeNameById($getadmin->recommender)->employeeName : 'N/A' }}" class="form-control">
                                         </div>
                                     </div>
                                     <div class="row p-2">
@@ -166,7 +166,7 @@
                                             <label class="form-label">Approver</label>
                                         </div>
                                         <div class="col-md-8">
-                                            <input readonly type="text" value="{{ getEmployeeNameById($getadmin->approver ?? '-')->employeeName }}" class="form-control">
+                                            <input readonly type="text" value="{{ $getadmin->approver ? getEmployeeNameById($getadmin->approver)->employeeName : 'N/A' }}" class="form-control">
                                         </div>
                                     </div>
                                 </div>
@@ -177,7 +177,7 @@
                                             <label class="form-label">Checker 1</label>
                                         </div>
                                         <div class="col-md-8">
-                                            <input readonly type="text" value="{{ getEmployeeNameById($getfinance->checker1 ?? '-')->employeeName }}" class="form-control">
+                                            <input readonly type="text" value="{{ $getfinance->checker1 ? getEmployeeNameById($getfinance->checker1)->employeeName : 'N/A' }}" class="form-control">
                                         </div>
                                     </div>
                                     <div class="row p-2">
@@ -185,7 +185,7 @@
                                             <label class="form-label">Checker 2</label>
                                         </div>
                                         <div class="col-md-8">
-                                            <input readonly type="text" value="{{ getEmployeeNameById($getfinance->checker2 ?? '-')->employeeName }}" class="form-control">
+                                            <input readonly type="text" value="{{ $getfinance->checker2 ? getEmployeeNameById($getfinance->checker2)->employeeName : 'N/A' }}" class="form-control">
                                         </div>
                                     </div>
                                     <div class="row p-2">
@@ -193,7 +193,7 @@
                                             <label class="form-label">Checker 3</label>
                                         </div>
                                         <div class="col-md-8">
-                                            <input readonly type="text" value="{{ getEmployeeNameById($getfinance->checker3 ?? '-')->employeeName }}" class="form-control">
+                                            <input readonly type="text" value="{{ $getfinance->checker3 ? getEmployeeNameById($getfinance->checker3)->employeeName : 'N/A' }}" class="form-control">
                                         </div>
                                     </div>
                                     <div class="row p-2">
@@ -201,7 +201,7 @@
                                             <label class="form-label">Recommender</label>
                                         </div>
                                         <div class="col-md-8">
-                                            <input readonly type="text" value="{{ getEmployeeNameById($getfinance->recommender ?? '-')->employeeName }}" class="form-control">
+                                            <input readonly type="text" value="{{ $getfinance->recommender ? getEmployeeNameById($getfinance->recommender)->employeeName : 'N/A' }}" class="form-control">
                                         </div>
                                     </div>
                                     <div class="row p-2">
@@ -209,7 +209,7 @@
                                             <label class="form-label">Approver</label>
                                         </div>
                                         <div class="col-md-8">
-                                            <input readonly type="text" value="{{ getEmployeeNameById($getfinance->approver ?? '-')->employeeName }}" class="form-control">
+                                            <input readonly type="text" value="{{ $getfinance->approver ? getEmployeeNameById($getfinance->approver)->employeeName : 'N/A' }}" class="form-control">
                                         </div>
                                     </div>
                                 </div>
