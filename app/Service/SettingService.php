@@ -505,7 +505,7 @@ class SettingService
             'address' => $input['address'],
             'address2' => $input['address2'],
 
-            'location_cityid' => $getid->id,
+            'ref_cityid' => $getid->id,
             'tenant_id' => Auth::user()->tenant_id,
             'addedBy' => $user->username,
             'addedBy' => date('Y-m-d H:i:s'),
@@ -560,7 +560,7 @@ class SettingService
             'address' => $input['address'],
             'address2' => $input['address2'],
 
-            'location_cityid' => $getid->id,
+            'ref_cityid' => $getid->id,
             'tenant_id' => Auth::user()->tenant_id,
             'modifiedBy' => $user->username,
             'modified_at' => date('Y-m-d H:i:s'),
@@ -1519,7 +1519,7 @@ class SettingService
     public function getBranchById($id)
     {
 
-        $data = Branch::join('location_cities as lc', 'branch.location_cityid', '=', 'lc.id')
+        $data = Branch::join('location_cities as lc', 'branch.ref_cityid', '=', 'lc.id')
         ->where('branch.id', $id)
         ->first();
 
@@ -2517,25 +2517,22 @@ public function updateTypeOfLogs($r, $id)
             $data[] = $state;
         }
 
-        $dataallstate = state::select('*')
-            ->where('country_id', '=', $dataallstate[0]->country_id)
-            ->orderBy('id', 'desc')
-            ->get();
+        if (count($dataallstate) > 0) {
+            $dataallstate = state::select('*')
+                ->where('country_id', '=', $dataallstate[0]->country_id)
+                ->orderBy('id', 'desc')
+                ->get();
 
-        $totalAll = count($dataallstate);
+            $totalAll = count($dataallstate);
 
-        foreach ($data as $state) {
-            if ($state->total === $totalAll) {
-                $state->total = "ALL";
+            foreach ($data as $state) {
+                if ($state->total === $totalAll) {
+                    $state->total = "ALL";
+                }
             }
         }
 
         return $data;
-
-
-
-
-
 
     }
 
@@ -2710,7 +2707,9 @@ public function updateTypeOfLogs($r, $id)
         $input = [
             [$tenant, 'AL', 'ANNUAL LEAVE'],
             [$tenant, 'SL', 'SICK LEAVE'],
-            [$tenant, 'HL', 'HOSPITALIZATION']
+            [$tenant, 'HL', 'HOSPITALIZATION'],
+            [$tenant, 'EL', 'EMERGENCY LEAVE'],
+            [$tenant, 'NP', 'NO PAY LEAVE'],
         ];
 
         foreach ($input as $data) {
@@ -2817,7 +2816,9 @@ public function updateTypeOfLogs($r, $id)
             $check = [
                 ['AL', 'ANNUAL LEAVE'],
                 ['SL', 'SICK LEAVE'],
-                ['HL', 'HOSPITALIZATION']
+                ['HL', 'HOSPITALIZATION'],
+                ['EL', 'EMERGENCY LEAVE'],
+                ['NP', 'NO PAY LEAVE'],
             ];
 
             foreach ($check as $row) {
@@ -2852,7 +2853,9 @@ public function updateTypeOfLogs($r, $id)
         $check = [
             ['AL', 'ANNUAL LEAVE'],
             ['SL', 'SICK LEAVE'],
-            ['HL', 'HOSPITALIZATION']
+            ['HL', 'HOSPITALIZATION'],
+            ['EL', 'EMERGENCY LEAVE'],
+            ['NP', 'NO PAY LEAVE'],
         ];
 
         $matchFound = false;

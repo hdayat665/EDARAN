@@ -20,9 +20,9 @@ $("#tsapprover2").select2();
 // search bar in select box (Employment Information)
 $('#role').select2();
 $('#companyForEmployment').select2();
-$('#departmentShow').select2({placeholder: "please choose"});
-$('#unitShow').select2({placeholder: "please choose"});
-$('#branchShow').select2({placeholder: "please choose"});
+$('#departmentShow').select2({placeholder: "PLEASE CHOOSE"});
+$('#unitShow').select2({placeholder: "PLEASE CHOOSE"});
+$('#branchShow').select2({placeholder: "PLEASE CHOOSE"});
 $('#jobGrade').select2();
 $('#designation').select2();
 $('#employmentType').select2();
@@ -1170,8 +1170,15 @@ $('#event').select2();
             $("#address-2c").val($("").val()).prop("readonly", false);
             $("#postcodec").val($("").val()).prop("readonly", false);
             $("#cityc").val($("").val()).prop("readonly", false);
-            $("#statec").val($("").val()).prop("disabled", false);
-            $("#countryc").val($("1").val()).prop("disabled", false);
+            $("#statec").val($("").val()).prop("disabled", false).css({ "pointer-events": "auto", background: "none" });
+            $("#countryc").val($("")
+            .val("MY"))
+            .prop("disabled", false)
+            .prop("readonly", false).css({
+                "pointer-events": "auto",
+                "touch-action": "auto",
+                background: "none",
+            })
         }
     });
 
@@ -3200,7 +3207,7 @@ $('#event').select2();
             $("#view-children").modal("show");
         });
 
-        $("#deleteChildren" + type).click(function (e) {
+        $(document).on("click","#deleteChildren" + type, function (e) {
             id = $(this).data("id");
             requirejs(["sweetAlert2"], function (swal) {
                 swal({

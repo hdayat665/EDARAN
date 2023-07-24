@@ -2,7 +2,6 @@ $(document).ready(function () {
 
     $(document).on("change", "#country_id", function () {
         var getCountry = $("#country_id").val();
-        console.log(getCountry);
 
         var getState = getStatebyCountry(getCountry);
 
@@ -208,7 +207,6 @@ $(document).ready(function () {
             $("#companyIdE").val(data.companyId);
             $("#branchNameE").val(data.branchName);
             $("#branchCodeE").val(data.branchCode);
-            //$('#branchTypeE').val(data.branchType);
             $("#branchTypeE").val(data.branchType);
             $("#postcodeE").val(data.postcode);
             $("#addressE").val(data.address);

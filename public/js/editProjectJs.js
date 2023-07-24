@@ -1071,12 +1071,18 @@ $(document).ready(function () {
 
                 $("#project_manager2_show").prop("disabled", false);
                 $("#project_manager2_show").show();
-                $("#project_manager2").prop("disabled", true);
+                $("#project_manager2").css({
+                    "pointer-events": "auto",
+                    background: "#e9ecef",
+                });
                 $("#project_manager2").hide();
             } else {
                 $("#project_manager2_show").hide();
-                $("#project_manager2_show").prop("disabled", true);
-                $("#project_manager2").prop("disabled", false);
+                $("#project_manager2_show").prop("disabled", false);
+                $("#project_manager2").css({
+                    "pointer-events": "none",
+                    background: "#e9ecef",
+                });
                 $("#project_manager2").show();
             }
         });

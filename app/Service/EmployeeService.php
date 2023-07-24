@@ -722,7 +722,7 @@ class EmployeeService
             $data['status'] = config('app.response.success.status');
             $data['type'] = config('app.response.success.type');
             $data['title'] = config('app.response.success.title');
-            $data['msg'] = 'Children is updated';
+            $data['msg'] = 'New Children is Updated.';
         }
 
         return $data;
@@ -747,7 +747,7 @@ class EmployeeService
         $data['status'] = config('app.response.success.status');
         $data['type'] = config('app.response.success.type');
         $data['title'] = config('app.response.success.title');
-        $data['msg'] = 'Children is created';
+        $data['msg'] = 'New Children is Created.';
 
         return $data;
     }
@@ -962,7 +962,7 @@ class EmployeeService
             $data['status'] = config('app.response.success.status');
             $data['type'] = config('app.response.success.type');
             $data['title'] = config('app.response.success.title');
-            $data['msg'] = 'Success Update Parent';
+            $data['msg'] = 'Parent details is Updated';
         }
 
         return $data;
